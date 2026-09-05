@@ -1,0 +1,55 @@
+name: Sync verified NEET content
+
+on:
+  push:
+    branches: [release/v1.0-neet-prep]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[production-sync]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production release
+        uses: actions/checkout@v4
+        with:
+          ref: release/v1.0-neet-prep
+
+      - name: Pull verified student-facing content from development
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://raw.githubusercontent.com/kpphysicsacademy-design/kp-physics-academy/main'
+          files=(
+            full-physics-path.html
+            chemistry-skillup-path.html
+            botany-full-path.html
+            zoology-full-path.html
+            skillup-home.html
+            learn.html
+            profile.html
+            common.css
+            skillup-mastery.css
+            pages.js
+            link-audit.js
+          )
+          for f in "${files[@]}"; do
+            curl -fsSL "$base/$f" -o "$f"
+          done
+
+      - name: Commit synchronized content
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'SkillUp Release Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add full-physics-path.html chemistry-skillup-path.html botany-full-path.html zoology-full-path.html skillup-home.html learn.html profile.html common.css skillup-mastery.css pages.js link-audit.js
+          if git diff --cached --quiet; then
+            echo 'No content changes to synchronize.'
+            exit 0
+          fi
+          git commit -m 'Sync verified NEET student content [production-sync]'
+          git push origin HEAD:release/v1.0-neet-prep

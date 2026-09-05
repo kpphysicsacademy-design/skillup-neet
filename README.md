@@ -24,3 +24,7 @@ Generic filler explanations are not acceptable.
 **SkillUp v1.0.0 — Official NEET Release**
 
 Release preparation is performed only after end-to-end verification of content, quiz behavior, navigation, responsiveness, and production safety.
+
+## Production synchronization
+
+Student-facing NEET content is synchronized from the verified development source through the production release workflow.

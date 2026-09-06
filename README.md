@@ -16,9 +16,15 @@ This repository is the production publication repository for **SkillUp v1.0**, f
 - **Repository:** connected and writable
 - **Branch:** `main`
 - **Release:** `SkillUp v1.0.0 — Official NEET Release`
-- **Publication source status:** repository structure created; live-site source files are still pending import into this publication repository
-- **Physics path:** `https://skillupedu.in/full-physics-path.html`
-- **Next publication action:** import and verify the live SkillUp source files before treating this repository as the deployable production source
+- **Physics path source:** `full-physics-path.html` created
+- **Physics test engine:** `physics-chapter-test.html` created
+- **Physics chapter structure:** Class 11 and Class 12 chapter links created
+- **Live-site synchronization:** not yet verified because the live SkillUpEdu source is not exposed through the available connector
+
+## Physics publication files
+
+- `full-physics-path.html` — complete Physics chapter navigation
+- `physics-chapter-test.html` — chapter test/MCQ engine using the `?chapter=` parameter
 
 ## Release principle
 

@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>SkillUp NEET Physics Question Bank</title>
 <style>
-:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#172033;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:900px;margin:auto;padding:20px}.hero{background:#fff;border:1px solid #e2e7ef;border-radius:18px;padding:22px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:clamp(24px,5vw,34px)}.muted{color:#667085}.card{background:#fff;border:1px solid #e2e7ef;border-radius:16px;padding:18px;margin:12px 0}.q{font-weight:700;line-height:1.5}.options{display:grid;gap:9px;margin-top:14px}.option{border:1px solid #d8dee8;border-radius:10px;padding:11px}.answer{margin-top:12px;font-weight:700}.explanation{margin-top:8px;color:#475467;line-height:1.55}.tag{display:inline-block;border-radius:999px;padding:5px 9px;background:#eef2f7;font-size:12px;margin:3px 4px 0 0}.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.nav a{text-decoration:none}.btn{display:inline-block;border:1px solid #d8dee8;border-radius:10px;padding:9px 12px;color:inherit;background:#fff}.count{font-size:14px;margin-top:12px;color:#667085}
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#172033;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:900px;margin:auto;padding:20px}.hero{background:#fff;border:1px solid #e2e7ef;border-radius:18px;padding:22px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:clamp(24px,5vw,34px)}.muted{color:#667085}.card{background:#fff;border:1px solid #e2e7ef;border-radius:16px;padding:18px;margin:12px 0}.q{font-weight:700;line-height:1.5}.options{display:grid;gap:9px;margin-top:14px}.option{border:1px solid #d8dee8;border-radius:10px;padding:11px}.answer{margin-top:12px;font-weight:700}.explanation{margin-top:8px;color:#475467;line-height:1.55}.tag{display:inline-block;border-radius:999px;padding:5px 9px;background:#eef2f7;font-size:12px;margin:3px 4px 0 0}.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.nav a{text-decoration:none}.btn{display:inline-block;border:1px solid #d8dee8;border-radius:10px;padding:9px 12px;color:inherit;background:#fff}.count{font-size:14px;margin-top:12px;color:#667085}.error{border-color:#efb8b8;background:#fff8f8;color:#7d2929}
 </style></head>
 <body><main class="wrap">
-<section class="hero"><h1>Physics Question Bank</h1><p class="muted">NEET Physics • Chapter-wise practice</p><span class="tag">Physics</span><span class="tag" id="topicTag">Systems of Units</span><div class="nav"><a class="btn" href="full-physics-path.html">Physics Path</a><a class="btn" href="question-bank.html?subject=physics&amp;topic=Systems%20of%20Units">Systems of Units</a></div><div class="count" id="count"></div></section>
+<section class="hero"><h1>Physics Question Bank</h1><p class="muted">NEET Physics • Chapter-wise practice</p><span class="tag">Physics</span><span class="tag" id="topicTag">Systems of Units</span><div class="nav"><a class="btn" href="full-physics-path.html">Physics Path</a><a class="btn" href="question-bank.html?subject=physics&amp;topic=Systems%20of%20Units&amp;v=20260906">Systems of Units</a></div><div class="count" id="count"></div></section>
 <section id="questions"></section>
 </main>
 <script>
@@ -33,5 +36,14 @@ const bank={'systems-of-units':{title:'Systems of Units',questions:[
 {q:'The unit kg m s⁻² represents:',o:['Energy','Power','Force','Momentum'],a:2,e:'Force = mass × acceleration, giving kg × m s⁻² = kg m s⁻², which is one newton.'},
 {q:'A physical quantity has unit m s⁻¹. This unit can represent:',o:['Acceleration','Velocity','Force','Power'],a:1,e:'Metre per second (m s⁻¹) is the SI unit of speed or velocity.'}
 ]}};
-const params=new URLSearchParams(location.search);const rawTopic=params.get('topic')||'systems-of-units';const topicKey=rawTopic.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');const data=bank[topicKey]||bank['systems-of-units'];document.getElementById('topicTag').textContent=data.title;document.getElementById('count').textContent=`${data.questions.length} MCQs`;const root=document.getElementById('questions');data.questions.forEach((x,i)=>{const c=document.createElement('article');c.className='card';c.innerHTML=`<div class="q">${i+1}. ${x.q}</div><div class="options">${x.o.map((v,j)=>`<div class="option"><strong>${String.fromCharCode(65+j)}.</strong> ${v}</div>`).join('')}</div><div class="answer">Correct Answer: ${String.fromCharCode(65+x.a)}. ${x.o[x.a]}</div><div class="explanation"><strong>Explanation:</strong> ${x.e}</div>`;root.appendChild(c)});
+const params=new URLSearchParams(location.search);
+const rawTopic=(params.get('topic')||params.get('chapter')||'Systems of Units').trim();
+const topicKey=rawTopic.toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[_\s]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+const aliases={'system-of-units':'systems-of-units','systems-units':'systems-of-units','units-of-measurement':'systems-of-units','units-measurement':'systems-of-units','physics-and-measurement':'systems-of-units'};
+const key=bank[topicKey]?topicKey:(aliases[topicKey]||'systems-of-units');
+const data=bank[key];
+document.getElementById('topicTag').textContent=data.title;
+document.getElementById('count').textContent=`${data.questions.length} MCQs • Verified concept set`;
+const root=document.getElementById('questions');
+data.questions.forEach((x,i)=>{const c=document.createElement('article');c.className='card';c.innerHTML=`<div class="q">${i+1}. ${x.q}</div><div class="options">${x.o.map((v,j)=>`<div class="option"><strong>${String.fromCharCode(65+j)}.</strong> ${v}</div>`).join('')}</div><div class="answer">Correct Answer: ${String.fromCharCode(65+x.a)}. ${x.o[x.a]}</div><div class="explanation"><strong>Explanation:</strong> ${x.e}</div>`;root.appendChild(c)});
 </script></body></html>

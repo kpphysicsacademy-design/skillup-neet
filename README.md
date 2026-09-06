@@ -18,6 +18,7 @@ This repository is the production publication repository for **SkillUp v1.0**, f
 - **Release:** `SkillUp v1.0.0 — Official NEET Release`
 - **Publication source status:** repository structure created; live-site source files are still pending import into this publication repository
 - **Physics path:** `https://skillupedu.in/full-physics-path.html`
+- **Next publication action:** import and verify the live SkillUp source files before treating this repository as the deployable production source
 
 ## Release principle
 

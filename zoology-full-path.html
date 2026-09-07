@@ -10,9 +10,11 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
 header{padding:32px 18px;text-align:center;background:linear-gradient(135deg,#eef3ff,#fff)}h1{margin:0 0 8px;font-size:clamp(28px,6vw,46px)}header p{margin:0;color:var(--muted)}
 main{max-width:1050px;margin:auto;padding:22px 16px 48px}.section{margin:24px 0}.section h2{font-size:24px;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.chapter{display:block;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-decoration:none;color:inherit;transition:.15s}.chapter:hover{transform:translateY(-2px);border-color:var(--brand);box-shadow:0 6px 20px #0000000d}.num{font-size:12px;color:var(--brand);font-weight:700;text-transform:uppercase}.title{font-weight:750;margin-top:4px}.test{display:inline-block;margin-top:10px;color:var(--brand);font-size:14px;font-weight:650}.note{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:#fff;color:var(--muted)}
+/* Prevent any legacy completion modal from obscuring the Zoology path. */
+body.skillup-no-completion-popup .modal,body.skillup-no-completion-popup .overlay,body.skillup-no-completion-popup .popup,body.skillup-no-completion-popup [role="dialog"]{display:none!important}
 </style>
 </head>
-<body>
+<body class="skillup-no-completion-popup">
 <header><h1>NEET Zoology</h1><p>Complete Zoology chapter path • Chapter-wise tests</p></header>
 <main>
 <div class="note">Choose a chapter to open its dedicated test page. Tests use the SkillUp Question → Options → Correct Answer → Specific Explanation format.</div>
@@ -28,6 +30,25 @@ const class12=[
 ];
 function render(id,items){document.getElementById(id).innerHTML=items.map(([n,t])=>`<a class="chapter" href="zoology-chapter-test.html?chapter=${encodeURIComponent(t)}"><div class="num">Chapter ${n}</div><div class="title">${t}</div><span class="test">Open chapter test →</span></a>`).join('')}
 render('class11',class11);render('class12',class12);
+
+// Remove legacy completion popups if an older cached/injected script adds one.
+function removeLegacyCompletionPopup(){
+ document.querySelectorAll('body *').forEach(el=>{
+   if(el===document.body||el===document.documentElement) return;
+   const text=(el.textContent||'').replace(/\s+/g,' ').trim();
+   if(/MARK COMPLETE/i.test(text) && /CLOSE/i.test(text) && /REWARD:\s*20\s*XP/i.test(text)){
+     let target=el;
+     for(let i=0;i<5 && target.parentElement;i++){
+       const r=target.getBoundingClientRect();
+       if(r.width>250 && r.height>120) break;
+       target=target.parentElement;
+     }
+     target.remove();
+   }
+ }
+}
+removeLegacyCompletionPopup();
+new MutationObserver(removeLegacyCompletionPopup).observe(document.body,{childList:true,subtree:true});
 </script>
 </body>
 </html>

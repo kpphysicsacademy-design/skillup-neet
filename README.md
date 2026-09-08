@@ -19,7 +19,8 @@ This repository is the production publication repository for **SkillUp v1.0**, f
 - **Physics path source:** `full-physics-path.html` created
 - **Physics test engine:** `physics-chapter-test.html` created
 - **Physics chapter structure:** Class 11 and Class 12 chapter links created
-- **Live-site synchronization:** not yet verified because the live SkillUpEdu source is not exposed through the available connector
+- **GitHub Pages deployment workflow:** `.github/workflows/deploy.yml` added; deploys the `main` branch on push
+- **Live-site synchronization:** requires GitHub Pages to be enabled for this repository and the `skillupedu.in` custom domain to be configured/verified in repository Pages settings
 
 ## Physics publication files
 

@@ -4,7 +4,7 @@
     {q:'Two equal vectors each of magnitude A have a resultant of magnitude A. The angle between them is:',o:['0°','60°','90°','120°'],a:3,e:'A² = A² + A² + 2A²cosθ gives cosθ = −1/2, hence θ = 120°.'},
     {q:'If |A + B| = |A − B| for two non-zero vectors, the angle between A and B is:',o:['0°','45°','90°','180°'],a:2,e:'Squaring both sides gives 4ABcosθ = 0, so cosθ = 0 and θ = 90°.'},
     {q:'A vector of magnitude 10 is resolved into two perpendicular components. If one component is 6, the other component is:',o:['4','8','10','16'],a:1,e:'For perpendicular components, 10² = 6² + C², so C = 8.'},
-    {q:'If A = 3i + 4j and B = 4i − 3j, the magnitude of A + B is:',o:['0','5','7','10'],a:1,e:'A + B = 7i + j, whose magnitude is √50, not 5. Thus this option set is inconsistent; the correct magnitude is 5√2. This question is intentionally flagged for repair.'},
+    {q:'If A = 3i + 4j and B = 4i − 3j, the magnitude of A + B is:',o:['√2','5','5√2','10'],a:2,e:'A + B = 7i + j, so its magnitude is √(7² + 1²) = √50 = 5√2.'},
     {q:'The magnitude of the vector 6i − 8j is:',o:['2','10','14','48'],a:1,e:'Magnitude = √(6² + 8²) = 10.'},
     {q:'If two vectors of magnitudes 8 and 6 have a resultant of 2, the angle between them must be:',o:['0°','60°','90°','180°'],a:3,e:'The minimum resultant |8−6| = 2 occurs only when the vectors are opposite.'},
     {q:'For two vectors A and B, if their resultant has magnitude √(A²+B²), the vectors are:',o:['Parallel','Antiparallel','Perpendicular','Equal'],a:2,e:'The cross term 2ABcosθ must vanish, so θ = 90° for non-zero A and B.'},

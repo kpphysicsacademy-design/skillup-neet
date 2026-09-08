@@ -1,58 +1,23 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp NEET Physics Question Bank</title><style>body{font-family:system-ui;margin:0;background:#f6f8fb;color:#172033}.wrap{max-width:900px;margin:auto;padding:20px}.hero,.card{background:#fff;border:1px solid #e2e7ef;border-radius:16px;padding:18px;margin:12px 0}.q{font-weight:700;line-height:1.5}.options{display:grid;gap:9px;margin-top:14px}.option{border:1px solid #d8dee8;border-radius:10px;padding:11px;cursor:pointer;background:#fff;text-align:left;width:100%}.option:disabled{cursor:default}.answer{margin-top:12px;font-weight:700}.explanation{margin-top:8px;color:#475467;line-height:1.55}.tag{display:inline-block;padding:5px 9px;background:#eef2f7;border-radius:999px;font-size:12px;margin-right:5px}.count{color:#667085;margin-top:12px}.error{background:#fff1f1;border:1px solid #f3b3b3;border-radius:16px;padding:18px;margin:12px 0}</style></head><body><main class="wrap"><section class="hero"><h1>Physics Question Bank</h1><p>NEET Physics • Chapter-wise practice</p><span class="tag">Physics</span><span class="tag" id="topicTag"></span><div class="count" id="count"></div></section><section id="questions"></section></main><script>
-const vector=[
-['Two vectors of magnitudes 3 and 4 act in the same direction. Their resultant magnitude is:',['1','4','7','12'],2,'For vectors in the same direction, the resultant is 3 + 4 = 7.'],
-['Two vectors of magnitudes 5 and 3 act in opposite directions. The magnitude of their resultant is:',['2','8','15','1'],0,'For opposite directions, the magnitude is |5 − 3| = 2.'],
-['Two perpendicular vectors have magnitudes 3 and 4. Their resultant magnitude is:',['1','5','7','12'],1,'R = √(3² + 4²) = 5.'],
-['The resultant of two vectors is maximum when the angle between them is:',['0°','90°','120°','180°'],0,'R² = A² + B² + 2AB cosθ is maximum at θ = 0°.'],
-['The resultant of two vectors is minimum when the angle between them is:',['0°','60°','90°','180°'],3,'The minimum occurs for opposite vectors, θ = 180°.'],
-['Two vectors of magnitudes 6 and 8 are perpendicular. Their resultant is:',['2','10','14','48'],1,'R = √(6² + 8²) = 10.'],
-['Two vectors each have magnitude 5 and act in the same direction. Their resultant is:',['0','5','10','25'],2,'For same-direction parallel vectors, R = 5 + 5 = 10.'],
-['Two equal vectors each have magnitude 10 and act at 120°. Their resultant magnitude is:',['10','20','10√3','5'],0,'R = √(100 + 100 + 200 cos120°) = 10.'],
-['For vectors A and B with angle θ between them, the magnitude of their resultant is:',['A + B always','|A − B| always','√(A² + B²) always','√(A² + B² + 2AB cosθ)'],3,'The parallelogram law gives R = √(A² + B² + 2AB cosθ).'],
-['Two vectors have magnitudes 7 and 3. The possible magnitude of their resultant lies between:',['0 and 10','3 and 7','4 and 10','7 and 21'],2,'The resultant ranges from |7 − 3| = 4 to 7 + 3 = 10.'],
-['If A = 5 and B = 12 are perpendicular, the resultant magnitude is:',['7','13','17','60'],1,'R = √(5² + 12²) = 13.'],
-['If two vectors are equal in magnitude and opposite in direction, their resultant is:',['A','2A','0','A²'],2,'Equal opposite vectors cancel, giving zero.'],
-['Two vectors 8 and 6 act at 60°. Their resultant magnitude is:',['2','10','√148','14'],2,'R² = 8² + 6² + 2(8)(6)cos60° = 148, so R = √148.'],
-['If the resultant of two vectors is zero, the vectors must be:',['Equal and perpendicular','Equal and opposite','Unequal and parallel','Equal and parallel'],1,'A zero resultant requires equal magnitudes in opposite directions.'],
-['For two vectors A and B, the resultant magnitude can never exceed:',['|A − B|','A + B','AB','A/B'],1,'By the triangle inequality, R ≤ A + B.'],
-['For two vectors A and B, the resultant magnitude can never be less than:',['A + B','AB','|A − B|','A/B'],2,'The minimum resultant is |A − B|.'],
-['Two vectors of magnitudes 4 and 4 act at 60°. Their resultant is:',['4','4√2','4√3','8'],2,'R = √(16 + 16 + 32 cos60°) = 4√3.'],
-['If two vectors of magnitudes 10 and 6 have a resultant of magnitude 8, the angle between them is:',['0°','60°','90°','180°'],2,'64 = 100 + 36 + 120 cosθ gives cosθ = 0, so θ = 90°.'],
-['The vector obtained by adding −A to A is:',['A','−A','2A','0'],3,'A + (−A) = 0.'],
-['If A and B are parallel and in the same direction, the resultant direction is:',['Opposite to A','Along A and B','Perpendicular to both','Undefined'],1,'The resultant lies along their common direction.'],
-['If A and B are parallel but opposite in direction and A > B, the resultant direction is:',['Along A','Along B','Perpendicular to A','Zero'],0,'The larger vector A determines the resultant direction.'],
-['Two perpendicular vectors have magnitudes 5 and 12. The angle made by the resultant with the 12-unit vector is approximately:',['22.6°','45°','67.4°','90°'],0,'tanθ = 5/12, so θ ≈ 22.6°.'],
-['The head-to-tail method of vector addition requires the vectors to be placed:',['Tail to tail','Head to head only','Tail of one at the head of the other','Perpendicular always'],2,'The tail of the next vector is placed at the head of the previous vector.'],
-['The resultant vector in the triangle law is drawn from:',['Head of first to head of second','Tail of first to head of last','Head of last to tail of first','Tail to tail'],1,'The resultant joins the starting tail to the final head.'],
-['According to the parallelogram law, the resultant is represented by the:',['Side of the parallelogram','Diagonal through the common tail','Perpendicular bisector','Opposite side'],1,'The diagonal from the common origin represents the resultant.'],
-['If two vectors have equal magnitude A and are perpendicular, their resultant magnitude is:',['A','2A','A√2','A/√2'],2,'R = √(A² + A²) = A√2.'],
-['Two vectors of magnitudes 10 and 10 act at 60°. Their resultant magnitude is:',['10','10√2','10√3','20'],2,'R = √(100 + 100 + 100) = 10√3.'],
-['If the angle between two vectors changes from 0° to 180°, their resultant magnitude changes from:',['A − B to A + B','A + B to |A − B|','0 to A + B','A to B'],1,'At 0°, R = A + B; at 180°, R = |A − B|.'],
-['Two vectors have magnitudes 9 and 12. If they are perpendicular, the resultant is:',['3','15','21','108'],1,'R = √(9² + 12²) = 15.'],
-['If the resultant of two vectors A and B is perpendicular to A, then:',['A = B','A² + B² = 0','A² + AB cosθ = 0','B = 0'],2,'R·A = (A + B)·A = A² + AB cosθ = 0.'],
-['Which operation gives the vector difference A − B?',['A + B','A + (−B)','B + (−A)','|A| − |B| only'],1,'Vector subtraction is A − B = A + (−B).'],
-['Two vectors of magnitudes 5 and 12 have a resultant of 13. The angle between them is:',['0°','60°','90°','180°'],2,'13² = 5² + 12², so the cross term is zero and θ = 90°.'],
-['Two equal vectors each of magnitude A have a resultant of magnitude A. The angle between them is:',['0°','60°','90°','120°'],3,'A² = 2A² + 2A²cosθ gives cosθ = −1/2, hence θ = 120°.'],
-['If |A + B| = |A − B| for two non-zero vectors, the angle between A and B is:',['0°','45°','90°','180°'],2,'Squaring both sides gives 4ABcosθ = 0, so θ = 90°.'],
-['A vector of magnitude 10 is resolved into two perpendicular components. If one component is 6, the other component is:',['4','8','10','16'],1,'10² = 6² + C², so C = 8.'],
-['If A = 3i + 4j and B = 4i − 3j, the magnitude of A + B is:',['√2','5','5√2','10'],2,'A + B = 7i + j, whose magnitude is √50 = 5√2.'],
-['The magnitude of the vector 6i − 8j is:',['2','10','14','48'],1,'Magnitude = √(6² + 8²) = 10.'],
-['If two vectors of magnitudes 8 and 6 have a resultant of 2, the angle between them must be:',['0°','60°','90°','180°'],3,'The minimum resultant |8 − 6| = 2 occurs when the vectors are opposite.'],
-['For two vectors A and B, if their resultant has magnitude √(A²+B²), the vectors are:',['Parallel','Antiparallel','Perpendicular','Equal'],2,'The cross term vanishes only when cosθ = 0, so θ = 90°.'],
-['A vector makes an angle 60° with the positive x-axis and has magnitude 20. Its x-component is:',['10','10√3','20','5'],0,'Ax = A cos60° = 20 × 1/2 = 10.'],
-['A vector has components 12 and 5 along perpendicular axes. Its direction angle with the 12-component axis is approximately:',['22.6°','45°','67.4°','90°'],0,'tanθ = 5/12, giving θ ≈ 22.6°.']
-];
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp NEET Question Bank</title><style>body{font-family:system-ui;margin:0;background:#f6f8fb;color:#172033}.wrap{max-width:900px;margin:auto;padding:20px}.hero,.card{background:#fff;border:1px solid #e2e7ef;border-radius:16px;padding:18px;margin:12px 0}.q{font-weight:700;line-height:1.5}.options{display:grid;gap:9px;margin-top:14px}.option{border:1px solid #d8dee8;border-radius:10px;padding:11px;cursor:pointer;background:#fff;text-align:left;width:100%}.option:disabled{cursor:default}.answer{margin-top:12px;font-weight:700}.explanation{margin-top:8px;color:#475467;line-height:1.55}.tag{display:inline-block;padding:5px 9px;background:#eef2f7;border-radius:999px;font-size:12px;margin-right:5px}.count{color:#667085;margin-top:12px}.error{background:#fff1f1;border:1px solid #f3b3b3;border-radius:16px;padding:18px;margin:12px 0}</style><script src="matter-and-its-nature-question-bank.js"></script></head><body><main class="wrap"><section class="hero"><h1 id="title">SkillUp NEET Question Bank</h1><p id="subtitle">Chapter-wise NEET practice</p><span class="tag" id="subjectTag"></span><span class="tag" id="topicTag"></span><div class="count" id="count"></div></section><section id="questions"></section></main><script>
 const p=new URLSearchParams(location.search);const raw=(p.get('topic')||p.get('chapter')||'').trim();const norm=raw.toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
-const aliases={'vector-addition-and-subtraction':'vector','vector-addition-subtraction':'vector','vector-addition-and-subtraction-neet':'vector'};
-if(aliases[norm]==='vector'||norm==='vector'){
- document.getElementById('topicTag').textContent='Vector Addition and Subtraction';
- document.getElementById('count').textContent=vector.length+' MCQs • NEET-oriented concept set';
- const root=document.getElementById('questions');
- vector.forEach((x,i)=>{const card=document.createElement('article');card.className='card';const q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+x[0];card.appendChild(q);const opts=document.createElement('div');opts.className='options';x[1].forEach((o,j)=>{const b=document.createElement('button');b.className='option';b.type='button';b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>{opts.querySelectorAll('button').forEach(v=>v.disabled=true);const a=document.createElement('div');a.className='answer';a.textContent='Correct Answer: '+String.fromCharCode(65+x[2])+'. '+x[1][x[2]];const e=document.createElement('div');e.className='explanation';e.innerHTML='<b>Explanation:</b> '+x[3];card.appendChild(a);card.appendChild(e)};opts.appendChild(b)});card.appendChild(opts);root.appendChild(card)});
+const chemistryMatterAliases=['matter-and-its-nature','matter-its-nature','nature-of-matter','matter'];
+const vectorAliases=['vector-addition-and-subtraction','vector-addition-subtraction','vector-addition-and-subtraction-neet','vector'];
+if(vectorAliases.includes(norm)){
+  location.replace('vector-addition-and-subtraction-question-bank.html');
+}else if(chemistryMatterAliases.includes(norm)){
+  const questions=window.skillUpMatterNatureQuestions||[];
+  document.title='Matter and Its Nature — Chemistry Question Bank';
+  document.getElementById('title').textContent='Matter and Its Nature — Chemistry Question Bank';
+  document.getElementById('subtitle').textContent='NEET Chemistry • Chapter-wise practice';
+  document.getElementById('subjectTag').textContent='Chemistry';
+  document.getElementById('topicTag').textContent='Matter and Its Nature';
+  document.getElementById('count').textContent=questions.length+' MCQs • NEET-oriented concept set';
+  const root=document.getElementById('questions');
+  questions.forEach((x,i)=>{const card=document.createElement('article');card.className='card';const q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+x.q;card.appendChild(q);const opts=document.createElement('div');opts.className='options';x.o.forEach((o,j)=>{const b=document.createElement('button');b.className='option';b.type='button';b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>{opts.querySelectorAll('button').forEach(v=>v.disabled=true);const a=document.createElement('div');a.className='answer';a.textContent='Correct Answer: '+String.fromCharCode(65+x.a)+'. '+x.o[x.a];const e=document.createElement('div');e.className='explanation';e.innerHTML='<b>Explanation:</b> '+x.e;card.appendChild(a);card.appendChild(e)};opts.appendChild(b)});card.appendChild(opts);root.appendChild(card)});
 }else{
- document.getElementById('topicTag').textContent=raw||'Physics';
- document.getElementById('count').textContent='';
- document.getElementById('questions').innerHTML='<div class="error"><h3>Question set not assigned</h3><p>This page currently has the repaired Vector Addition and Subtraction concept mapping. Open the vector topic URL to practice its MCQs.</p></div>';
+  document.getElementById('subjectTag').textContent=p.get('subject')||'NEET';
+  document.getElementById('topicTag').textContent=raw||'Topic';
+  document.getElementById('questions').innerHTML='<div class="error"><h3>Question set not assigned</h3><p>This concept is not yet mapped in the local practice bank.</p></div>';
 }
 </script></body></html>

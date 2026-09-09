@@ -1,14 +1,17 @@
-/* SkillUp central auth helper. Uses Supabase when configured; otherwise keeps the current local release working. */
+/* SkillUp central authentication helper. Uses Firebase Authentication when configured. */
 (function(){
-  const cfg=window.SKILLUP_SUPABASE_CONFIG||{};
-  const configured=Boolean(cfg.url&&cfg.anonKey&&window.supabase);
-  let client=null;
-  if(configured) client=window.supabase.createClient(cfg.url,cfg.anonKey);
-
+  const cfg=window.SKILLUP_FIREBASE_CONFIG||{};
+  const configured=Boolean(cfg.apiKey&&cfg.authDomain&&cfg.projectId&&window.firebase);
+  let app=null,auth=null,db=null;
+  if(configured){
+    app=window.firebase.apps.length?window.firebase.app():window.firebase.initializeApp(cfg);
+    auth=window.firebase.auth();
+    db=window.firebase.firestore();
+  }
   async function getSession(){
-    if(client){const {data,error}=await client.auth.getSession();if(error) throw error;return data.session;}
-    const id=sessionStorage.getItem('skillup.central.session');
-    return id?{user:{id}}:null;
+    if(!auth) return null;
+    const user=auth.currentUser;
+    return user?{user}:null;
   }
   async function requireAuth(next){
     const session=await getSession();
@@ -16,20 +19,28 @@
     return session;
   }
   async function signOut(){
-    if(client) await client.auth.signOut();
+    if(auth) await auth.signOut();
     sessionStorage.removeItem('skillup.central.session');
   }
   async function getProfile(userId){
-    if(client){const {data,error}=await client.from('skillup_profiles').select('*').eq('id',userId).maybeSingle();if(error) throw error;return data;}
-    return JSON.parse(localStorage.getItem('skillup.central.profile.v1')||'null');
+    if(!db||!userId) return null;
+    const snap=await db.collection('skillup_profiles').doc(userId).get();
+    return snap.exists?snap.data():null;
+  }
+  async function saveProfile(profile){
+    if(!db||!auth.currentUser) throw new Error('Authentication required');
+    const row=Object.assign({},profile,{id:auth.currentUser.uid,user_id:auth.currentUser.uid,updated_at:new Date().toISOString()});
+    await db.collection('skillup_profiles').doc(auth.currentUser.uid).set(row,{merge:true});
+    return row;
   }
   async function saveProgress(progress){
-    if(!client) return {local:true};
-    const {data:session}=await client.auth.getSession();
-    if(!session.session) throw new Error('Authentication required');
-    const row=Object.assign({},progress,{user_id:session.session.user.id,updated_at:new Date().toISOString()});
-    const {data,error}=await client.from('skillup_progress').upsert(row,{onConflict:'user_id,subject,topic'}).select().single();
-    if(error) throw error;return data;
+    if(!db||!auth.currentUser) throw new Error('Authentication required');
+    const subject=String(progress.subject||'').replace(/[^a-zA-Z0-9_-]/g,'_');
+    const topic=String(progress.topic||'').replace(/[^a-zA-Z0-9_-]/g,'_');
+    const id=auth.currentUser.uid+'_'+subject+'_'+topic;
+    const row=Object.assign({},progress,{user_id:auth.currentUser.uid,updated_at:new Date().toISOString()});
+    await db.collection('skillup_progress').doc(id).set(row,{merge:true});
+    return row;
   }
-  window.SkillUpAuth={configured,getSession,requireAuth,signOut,getProfile,saveProgress,client};
+  window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress};
 })();

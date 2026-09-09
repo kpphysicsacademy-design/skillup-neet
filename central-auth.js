@@ -8,31 +8,55 @@
     auth=window.firebase.auth();
     db=window.firebase.firestore();
   }
+
+  // Firebase restores a persisted session asynchronously. Do not treat
+  // auth.currentUser === null as "signed out" until that first auth-state
+  // notification has arrived; otherwise protected pages can redirect a
+  // successfully signed-in user back to registration during page load.
+  let authStateReady=null;
+  if(auth){
+    authStateReady=new Promise(resolve=>{
+      let unsubscribe=null;
+      unsubscribe=auth.onAuthStateChanged(user=>{
+        if(unsubscribe) unsubscribe();
+        resolve(user||null);
+      });
+    });
+  }
+
   async function getSession(){
     if(!auth) return null;
-    const user=auth.currentUser;
+    const user=auth.currentUser||await authStateReady;
     return user?{user}:null;
   }
+
   async function requireAuth(next){
     const session=await getSession();
-    if(!session){location.href='central-registration.html?next='+encodeURIComponent(next||location.href);return null;}
+    if(!session){
+      location.href='central-registration.html?next='+encodeURIComponent(next||location.href);
+      return null;
+    }
     return session;
   }
+
   async function signOut(){
     if(auth) await auth.signOut();
     sessionStorage.removeItem('skillup.central.session');
   }
+
   async function getProfile(userId){
     if(!db||!userId) return null;
     const snap=await db.collection('skillup_profiles').doc(userId).get();
     return snap.exists?snap.data():null;
   }
+
   async function saveProfile(profile){
     if(!db||!auth.currentUser) throw new Error('Authentication required');
     const row=Object.assign({},profile,{id:auth.currentUser.uid,user_id:auth.currentUser.uid,updated_at:new Date().toISOString()});
     await db.collection('skillup_profiles').doc(auth.currentUser.uid).set(row,{merge:true});
     return row;
   }
+
   async function saveProgress(progress){
     if(!db||!auth.currentUser) throw new Error('Authentication required');
     const subject=String(progress.subject||'').replace(/[^a-zA-Z0-9_-]/g,'_');
@@ -42,5 +66,6 @@
     await db.collection('skillup_progress').doc(id).set(row,{merge:true});
     return row;
   }
+
   window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress};
 })();

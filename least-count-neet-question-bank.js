@@ -1,0 +1,36 @@
+(function(){
+const questions=[
+{q:'The least count of a measuring instrument is its:',o:['Maximum range','Smallest value that can be measured reliably','Zero error','Average reading'],a:1,e:'Least count is the smallest measurement that the instrument can resolve.'},
+{q:'A metre scale has millimetre divisions. Its least count is:',o:['1 cm','1 mm','0.1 mm','10 mm'],a:1,e:'The smallest division is 1 mm.'},
+{q:'A vernier calipers has 10 vernier divisions equal to 9 main-scale divisions, with 1 MSD = 1 mm. Its least count is:',o:['1 mm','0.9 mm','0.1 mm','0.01 mm'],a:2,e:'Least count = 1 MSD − 1 VSD = 1 − 0.9 = 0.1 mm.'},
+{q:'A vernier has 20 divisions equal to 19 mm on the main scale. If 1 MSD = 1 mm, its least count is:',o:['0.05 mm','0.1 mm','0.5 mm','1 mm'],a:0,e:'1 VSD=19/20 mm, so LC=1−19/20=0.05 mm.'},
+{q:'A screw gauge has pitch 1 mm and 100 circular-scale divisions. Its least count is:',o:['0.1 mm','0.01 mm','0.001 mm','1 mm'],a:1,e:'Least count = pitch/number of circular divisions = 1/100 = 0.01 mm.'},
+{q:'If the pitch of a screw gauge is 0.5 mm and its circular scale has 50 divisions, the least count is:',o:['0.1 mm','0.01 mm','0.001 mm','0.5 mm'],a:1,e:'LC=0.5/50=0.01 mm.'},
+{q:'Which instrument generally gives the smallest least count for measuring the diameter of a thin wire?',o:['Metre scale','Measuring tape','Vernier calipers','Screw gauge'],a:3,e:'A screw gauge is designed for precise measurement of small dimensions.'},
+{q:'If 1 MSD = 1 mm and 10 VSD = 9 MSD, the vernier least count in cm is:',o:['0.1 cm','0.01 cm','0.001 cm','1 cm'],a:1,e:'LC=0.1 mm=0.01 cm.'},
+{q:'A digital balance displays readings to 0.001 g. Its resolution/least displayed increment is:',o:['1 g','0.1 g','0.01 g','0.001 g'],a:3,e:'The smallest displayed increment is 0.001 g.'},
+{q:'If an instrument has a least count of 0.1 cm, two consecutive readings can differ by:',o:['0.001 cm only','0.01 cm only','0.1 cm','1 cm only'],a:2,e:'The least count is the smallest scale increment.'},
+{q:'A vernier calipers has 20 VSD equal to 19 MSD. If 1 MSD=1 mm, its least count is:',o:['0.5 mm','0.05 mm','0.01 mm','0.1 mm'],a:1,e:'1 VSD=19/20 mm; LC=1/20 mm=0.05 mm.'},
+{q:'A screw gauge has pitch 0.5 mm and 100 divisions on its circular scale. Its least count is:',o:['0.05 mm','0.005 mm','0.5 mm','0.001 mm'],a:1,e:'LC=pitch/divisions=0.5/100=0.005 mm.'},
+{q:'If 50 divisions of a vernier scale coincide with 49 main-scale divisions and 1 MSD=1 mm, the least count is:',o:['0.02 mm','0.2 mm','0.01 mm','0.1 mm'],a:0,e:'1 VSD=49/50 mm, hence LC=1/50=0.02 mm.'},
+{q:'The least count of a screw gauge is 0.01 mm. If its pitch is 0.5 mm, the number of circular divisions is:',o:['5','10','50','100'],a:2,e:'Number of divisions=pitch/LC=0.5/0.01=50.'},
+{q:'A vernier calipers has 1 MSD=0.1 cm and 10 VSD=9 MSD. Its least count is:',o:['0.01 cm','0.001 cm','0.1 cm','0.09 cm'],a:0,e:'LC=0.1−0.09=0.01 cm, which is 0.1 mm.'},
+{q:'Which change decreases the least count of a screw gauge?',o:['Decrease pitch','Decrease circular divisions','Increase pitch','Increase the number of circular divisions'],a:3,e:'LC=pitch/N, so increasing N decreases the least count.'},
+{q:'For a vernier calipers, least count equals:',o:['1 MSD + 1 VSD','1 MSD − 1 VSD','1 VSD − 1 MSD always','Main scale reading × vernier reading'],a:1,e:'For the standard direct vernier, LC is the difference between one MSD and one VSD.'},
+{q:'A ruler has smallest divisions of 1 mm. A length measured with it should normally be recorded with a resolution of:',o:['1 m','1 cm','1 mm','0.001 mm'],a:2,e:'The smallest marked division sets the basic scale resolution.'},
+{q:'If a screw gauge has 100 circular divisions and LC=0.001 cm, its pitch is:',o:['0.01 cm','0.1 cm','1 cm','0.001 cm'],a:1,e:'Pitch=LC×N=0.001×100=0.1 cm.'},
+{q:'A vernier calipers is more precise than a metre scale mainly because it has:',o:['A larger range only','A smaller least count','A heavier body','A longer main scale'],a:1,e:'Smaller least count allows finer measurements.'},
+{q:'The least count is also commonly called the:',o:['Range','Resolution of the scale','Zero correction','Backlash'],a:1,e:'In scale-based instruments, least count represents the smallest resolvable increment.'},
+{q:'If 25 circular-scale divisions of a screw gauge correspond to 5 mm linear distance, the least count is:',o:['0.2 mm','5 mm','0.02 mm','0.5 mm'],a:0,e:'Pitch=5/25=0.2 mm. For one circular division, LC is 0.2 mm.'},
+{q:'A screw gauge with pitch 1 mm has 200 circular divisions. Its least count is:',o:['0.5 mm','0.05 mm','0.005 mm','0.002 mm'],a:2,e:'LC=1/200=0.005 mm.'},
+{q:'If a vernier scale has 10 VSD=9 MSD and 1 MSD=0.1 cm, then 1 VSD is:',o:['0.01 cm','0.09 cm','0.9 cm','0.009 cm'],a:1,e:'1 VSD=9/10×0.1=0.09 cm.'},
+{q:'A measurement is 2.35 cm using an instrument of LC 0.01 cm. The number 0.01 cm represents the:',o:['Range','Least count','Zero error','Measured length'],a:1,e:'0.01 cm is the smallest scale increment of the instrument.'},
+{q:'If two instruments have least counts 0.1 mm and 0.01 mm, which is more precise?',o:['The 0.1 mm instrument','The 0.01 mm instrument','Both equally','Cannot compare'],a:1,e:'The smaller least count provides finer resolution.'},
+{q:'A vernier calipers has 50 VSD equal to 49 MSD, with 1 MSD=1 mm. The least count is:',o:['0.02 mm','0.2 mm','0.01 mm','0.1 mm'],a:0,e:'LC=1−49/50=0.02 mm.'},
+{q:'A screw gauge has pitch 0.25 mm and 50 circular divisions. Its least count is:',o:['0.05 mm','0.005 mm','0.5 mm','0.025 mm'],a:1,e:'LC=0.25/50=0.005 mm.'},
+{q:'Which statement about least count is correct?',o:['It is always equal to zero error','It is independent of scale divisions','It sets the smallest scale increment that can be resolved','It equals the maximum measurable value'],a:2,e:'Least count describes the smallest increment/resolution of the instrument.'},
+{q:'A vernier has 10 divisions equal to 9 main-scale divisions. If one MSD is 0.1 cm, the least count is:',o:['0.1 cm','0.09 cm','0.01 cm','0.001 cm'],a:2,e:'LC=0.1−0.09=0.01 cm.'},
+{q:'A screw gauge has pitch 1 mm and least count 0.01 mm. How many circular divisions does it have?',o:['10','50','100','1000'],a:2,e:'N=pitch/LC=1/0.01=100.'}
+];
+window.SkillUpMCQBanks=window.SkillUpMCQBanks||{};window.SkillUpMCQBanks['least count']=questions;
+})();

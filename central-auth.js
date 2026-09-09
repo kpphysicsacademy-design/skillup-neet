@@ -10,9 +10,8 @@
   }
 
   // Firebase restores a persisted session asynchronously. Do not treat
-  // auth.currentUser === null as "signed out" until that first auth-state
-  // notification has arrived; otherwise protected pages can redirect a
-  // successfully signed-in user back to registration during page load.
+  // auth.currentUser === null as signed out until the first auth-state
+  // notification has arrived.
   let authStateReady=null;
   if(auth){
     authStateReady=new Promise(resolve=>{
@@ -33,7 +32,8 @@
   async function requireAuth(next){
     const session=await getSession();
     if(!session){
-      location.href='central-registration.html?next='+encodeURIComponent(next||location.href);
+      // Protected pages should send signed-out users to Login, not Registration.
+      location.href='central-login.html?next='+encodeURIComponent(next||location.href);
       return null;
     }
     return session;

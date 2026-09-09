@@ -1,7 +1,12 @@
-// SkillUp central authentication configuration.
-// Fill these values from your Supabase project before enabling server-backed auth.
-// Never place a Supabase service-role/secret key here.
-window.SKILLUP_SUPABASE_CONFIG = {
-  url: '',
-  anonKey: ''
+// SkillUp Firebase web configuration.
+// These values identify the Firebase web app and are safe for browser use.
+// Never place a Firebase Admin/service-account private key here.
+window.SKILLUP_FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyByht3fBhAz9tC4i0N3lao15NG5ve-FQlk',
+  authDomain: 'kp-physics-academy.firebaseapp.com',
+  projectId: 'kp-physics-academy',
+  storageBucket: 'kp-physics-academy.firebasestorage.app',
+  messagingSenderId: '445260149248',
+  appId: '1:445260149248:web:c21427845e417de4ba1ee5',
+  measurementId: 'G-BBQYTZY1FV'
 };

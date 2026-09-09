@@ -20,7 +20,9 @@ import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.5/firebase
 import {getFirestore,collection,getDocs,query,where} from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 import {firebaseConfig} from './firebase-web-config.js';
 const p=new URLSearchParams(location.search),subject=(p.get('subject')||'').trim().toLowerCase(),chapter=(p.get('chapter')||'').trim(),topic=(p.get('topic')||'').trim();
-const context=document.getElementById('context'),qEl=document.getElementById('question'),fb=document.getElementById('feedback'),next=document.getElementById('next'),bar=document.getElementById('progress');let engine;
+const context=document.getElementById('context'),qEl=document.getElementById('question'),fb=document.getElementById('feedback'),next=document.getElementById('next'),bar=document.getElementById('progress');
+if(subject==='physics'&&['least count','leastcount','least-count','least-count-of-measuring-instruments'].includes(topic.toLowerCase())){location.replace('least-count-neet.html?v=20260909lc');throw new Error('Least Count routed to replacement bank');}
+let engine;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(q,s){const opts=Array.isArray(q.options)?q.options:[];context.textContent=(chapter||topic||subject||'NEET')+' • Question '+(s.index+1)+' of '+s.queueLength;bar.style.width=Math.round(s.progress*100)+'%';qEl.innerHTML='<h2>'+esc(q.question)+'</h2><div id="opts"></div>';const box=document.getElementById('opts');opts.forEach((o,i)=>{const b=document.createElement('button');b.className='su-option';b.textContent=o;b.onclick=()=>answer(i);box.appendChild(b)});fb.innerHTML='';next.hidden=true;}
 function answer(i){const q=engine.current(),correct=engine.answer(i);document.querySelectorAll('.su-option').forEach((b,j)=>{b.disabled=true;if(j===q.correctIndex)b.classList.add('correct');if(j===i&&!correct)b.classList.add('wrong')});fb.innerHTML='<div class="su-weak"><b>'+(correct?'✅ Correct':'❌ Incorrect')+'</b>'+(q.explanation?'<br><br>'+esc(q.explanation):'')+'</div>';next.hidden=false;}

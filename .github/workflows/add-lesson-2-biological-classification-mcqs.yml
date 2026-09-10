@@ -1,0 +1,65 @@
+name: Add Lesson 2 Biological Classification MCQs
+
+on:
+  push:
+    paths:
+      - .github/workflows/add-lesson-2-biological-classification-mcqs.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-mcqs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add unique Lesson 2 MCQs
+        shell: python
+        run: |
+          from pathlib import Path
+          import json
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.index("'Biological Classification':[")
+          end = s.index("],\n'Animal Kingdom'", start)
+          block = s[start:end]
+          new = [
+            {"q":"In Whittaker's five-kingdom classification, which criterion is primarily used to distinguish Monera from Protista?","o":["Cell type","Mode of locomotion","Body colour","Habitat only"],"a":"Cell type","e":"Monera consists of prokaryotic organisms, whereas Protista consists mainly of unicellular eukaryotes."},
+            {"q":"Which organism is correctly matched with its kingdom?","o":["Nostoc — Monera","Amoeba — Fungi","Yeast — Monera","Paramecium — Plantae"],"a":"Nostoc — Monera","e":"Nostoc is a cyanobacterium and therefore a prokaryote placed in Monera in the five-kingdom system."},
+            {"q":"Which group of organisms lacks a membrane-bound nucleus?","o":["Monerans","Protists","Fungi","Plants"],"a":"Monerans","e":"Monerans are prokaryotic and lack a true membrane-bound nucleus."},
+            {"q":"Halophiles, thermoacidophiles and methanogens are examples of:","o":["Archaebacteria","Cyanobacteria","Protozoans","Fungi"],"a":"Archaebacteria","e":"These groups of archaebacteria possess specialised adaptations that allow survival in extreme environments."},
+            {"q":"Methanogens in the rumen of cattle mainly help in the formation of:","o":["Biogas rich in methane","Oxygen","Protein crystals","Silica"],"a":"Biogas rich in methane","e":"Methanogens produce methane under anaerobic conditions and are important in biogas production."},
+            {"q":"Which structure in many cyanobacteria is associated with nitrogen fixation?","o":["Heterocyst","Capsule only","Contractile vacuole","Basidium"],"a":"Heterocyst","e":"Specialised heterocysts provide a suitable environment for nitrogen fixation in cyanobacteria such as Nostoc and Anabaena."},
+            {"q":"Which statement about Protista is correct?","o":["It contains predominantly unicellular eukaryotes","All members are prokaryotic","All members are multicellular animals","It contains only fungi"],"a":"It contains predominantly unicellular eukaryotes","e":"Protista includes unicellular eukaryotes such as Amoeba, Paramecium, Euglena and many algae-like forms."},
+            {"q":"Which protist is known for both photosynthetic and heterotrophic nutrition?","o":["Euglena","Amoeba","Plasmodium","Paramecium"],"a":"Euglena","e":"Euglena can photosynthesise in light and can obtain organic nutrients heterotrophically when required."},
+            {"q":"Diatoms are important primary producers mainly found in:","o":["Aquatic environments","Deserts only","Dry rocks only","Animal tissues"],"a":"Aquatic environments","e":"Diatoms are photosynthetic organisms and form an important component of aquatic phytoplankton."},
+            {"q":"Diatomaceous earth is formed largely from the accumulated remains of:","o":["Diatoms","Mosses","Mammals","Viruses"],"a":"Diatoms","e":"The silica-rich walls of dead diatoms accumulate over long periods to form diatomaceous earth."},
+            {"q":"Which protist group is associated with red tides?","o":["Dinoflagellates","Diatoms","Slime moulds","Protozoan ciliates"],"a":"Dinoflagellates","e":"Blooms of certain red-pigmented dinoflagellates can produce red tides in marine waters."},
+            {"q":"Which characteristic is typical of slime moulds?","o":["They feed on decaying organic matter","They possess chloroplasts in every stage","They are prokaryotic","They are viruses"],"a":"They feed on decaying organic matter","e":"Slime moulds are saprophytic protists that obtain nutrients from decaying organic material."},
+            {"q":"Which combination is correctly associated with fungi?","o":["Chitinous cell wall and absorptive nutrition","Cellulose wall and photosynthesis","Peptidoglycan wall and chemosynthesis","Silica wall and ingestion"],"a":"Chitinous cell wall and absorptive nutrition","e":"Fungal walls contain chitin and fungi generally digest food extracellularly before absorbing soluble nutrients."},
+            {"q":"Which fungal structure primarily increases the surface area for nutrient absorption?","o":["Hyphae","Flagella","Cilia","Capsid"],"a":"Hyphae","e":"The network of fungal hyphae forms mycelium, providing extensive surface area for absorption from the substrate."},
+            {"q":"Budding is a common method of asexual reproduction in:","o":["Yeast","Diatoms","Viruses","Methanogens"],"a":"Yeast","e":"Yeast such as Saccharomyces commonly reproduces asexually by budding."},
+            {"q":"Which fungal group traditionally includes mushrooms such as Agaricus?","o":["Basidiomycetes","Phycomycetes","Ascomycetes","Monera"],"a":"Basidiomycetes","e":"Mushrooms such as Agaricus are traditionally classified under Basidiomycetes, which produce basidiospores on basidia."},
+            {"q":"A virus is considered acellular because it lacks:","o":["Cellular organisation","Genetic material","A protein coat","Specific host interactions"],"a":"Cellular organisation","e":"Viruses consist of genetic material surrounded by a protein coat, with some having an envelope, but they do not have cellular organisation."},
+            {"q":"Which statement correctly compares viruses and bacteria?","o":["Viruses require host cells for replication, whereas bacteria are cellular organisms","Both are always acellular","Both possess membrane-bound nuclei","Viruses independently carry out cellular respiration"],"a":"Viruses require host cells for replication, whereas bacteria are cellular organisms","e":"Viruses depend on host machinery for replication, while bacteria are living cellular organisms capable of independent metabolism."},
+            {"q":"In lichens, the photosynthetic partner mainly provides:","o":["Organic food","Only mechanical support","A viral capsid","Chitin"],"a":"Organic food","e":"The algal or cyanobacterial partner performs photosynthesis and provides organic nutrients to the association."},
+            {"q":"Which sequence correctly represents increasing cellular complexity?","o":["Monera → Protista → multicellular eukaryotes","Protista → Monera → viruses","Fungi → Monera → viruses","Viruses → Monera → non-living crystals"],"a":"Monera → Protista → multicellular eukaryotes","e":"Monera are prokaryotic; Protista are mainly unicellular eukaryotes; Plantae, Fungi and Animalia contain multicellular eukaryotic forms."}
+          ]
+          # Avoid duplicates if this workflow is ever rerun.
+          additions = [x for x in new if json.dumps(x["q"], ensure_ascii=False) not in block]
+          if additions:
+              addition = ',' + ','.join(json.dumps(x, ensure_ascii=False, separators=(',', ':')) for x in additions)
+              s = s[:end] + addition + s[end:]
+              p.write_text(s, encoding='utf-8')
+              print('Added', len(additions), 'unique Lesson 2 MCQs')
+          else:
+              print('Lesson 2 MCQs already present; no changes needed')
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add unique MCQs for Zoology lesson 2'
+          git push

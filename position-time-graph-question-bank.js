@@ -28,5 +28,6 @@ window.SkillUpMCQBanks['position time graph']=[
 {q:'Two particles have x–t graphs that intersect at t = 5 s. This means:',o:['They have equal velocities','They have the same position at t = 5 s','They have zero acceleration','They stop at t = 5 s'],a:1,e:'Intersection means both particles have the same position at that instant.'},
 {q:'At the intersection of two x–t graphs, the particles necessarily have:',o:['Same position','Same velocity','Same acceleration','Same displacement from origin'],a:0,e:'An intersection represents the same position at the same time.'},
 {q:'If an x–t graph is parabolic, the motion can represent:',o:['Constant velocity','Constant acceleration','Zero acceleration','Zero velocity throughout'],a:1,e:'A quadratic position–time relation corresponds to constant acceleration.'},
-{q:'Which statement is correct for an x–t graph?',o:['Slope gives acceleration','Area gives velocity','Slope gives instantaneous velocity','Area gives acceleration'],a:2,e:'The instantaneous slope dx/dt is velocity.'}
+{q:'Which statement is correct for an x–t graph?',o:['Slope gives acceleration','Area gives velocity','Slope gives instantaneous velocity','Area gives acceleration'],a:2,e:'The instantaneous slope dx/dt is velocity.'},
+{q:'For an x–t graph, the slope at a particular point gives:',o:['Average position','Instantaneous velocity','Average acceleration','Distance travelled'],a:1,e:'The derivative dx/dt at a point is the instantaneous velocity.'}
 ];

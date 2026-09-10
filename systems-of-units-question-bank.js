@@ -1,4 +1,4 @@
-/* SkillUp NEET Physics — System of Units — Standard NEET MCQs */
+/* SkillUp NEET Physics — System of Units — Standard NEET MCQs — Deployment Sync */
 (function(){
 const questions=[
 {q:'Which of the following is a system of units?',o:['Newton','CGS','Joule','Pascal'],a:1,e:'CGS is a system of units. Newton, joule and pascal are units of derived quantities.'},

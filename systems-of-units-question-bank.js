@@ -30,8 +30,7 @@ const questions=[
 {q:'The SI prefix micro (μ) represents:',o:['10⁻⁶','10⁻³','10⁻⁹','10⁶'],a:0,e:'Micro denotes 10⁻⁶.'},
 {q:'The SI prefix nano (n) represents:',o:['10⁻⁹','10⁻⁶','10⁻³','10⁹'],a:0,e:'Nano denotes 10⁻⁹.'},
 {q:'The SI prefix mega (M) represents:',o:['10⁶','10³','10⁹','10⁻⁶'],a:0,e:'Mega denotes 10⁶.'},
-{q:'If 1 km = 10³ m, then 2.5 km equals:',o:['2.5 × 10³ m','2.5 × 10² m','2.5 × 10⁶ m','2.5 × 10⁻³ m'],a:0,e:'Multiplying 2.5 by 10³ gives 2.5 × 10³ m.'},
-{q:'Which statement about a good system of units is correct?',o:['It provides a standard and reproducible basis for measurement','It eliminates the need for dimensions','It makes every physical quantity fundamental','It makes numerical values independent of units'],a:0,e:'A system of units standardizes measurement so that physical quantities can be compared consistently.'}
+{q:'If 1 km = 10³ m, then 2.5 km equals:',o:['2.5 × 10³ m','2.5 × 10² m','2.5 × 10⁶ m','2.5 × 10⁻³ m'],a:0,e:'Multiplying 2.5 by 10³ gives 2.5 × 10³ m.'}
 ];
 window.SkillUpMCQBanks=window.SkillUpMCQBanks||{};
 window.SkillUpMCQBanks['systems of units']=questions;

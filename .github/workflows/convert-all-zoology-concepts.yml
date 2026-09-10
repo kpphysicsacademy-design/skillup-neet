@@ -1,0 +1,126 @@
+name: Convert All Zoology Concepts to Chapters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/convert-all-zoology-concepts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Convert concept lists into chapter cards
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('zoology-full-path.html')
+          html = path.read_text(encoding='utf-8')
+
+          # Repair the hero paragraph if an earlier automated edit left it truncated.
+          html = html.replace(
+              'Learn → Practice → Master. Study every chapter, revise the most relevant con<section class="section">',
+              'Learn → Practice → Master. Study every chapter, revise the most relevant concepts and chapter-wise tests for NEET 2026.</p></section><section class="section">'
+          )
+
+          def balanced_div_end(s, start):
+              depth = 0
+              pos = start
+              token = re.compile(r'<div\b|</div\s*>', re.I)
+              for m in token.finditer(s, start):
+                  if m.group(0).lower().startswith('</'):
+                      depth -= 1
+                      if depth == 0:
+                          return m.end()
+                  else:
+                      depth += 1
+              return None
+
+          def strip_tags(s):
+              s = re.sub(r'<[^>]+>', '', s)
+              return re.sub(r'\s+', ' ', s).strip()
+
+          def esc_attr(s):
+              return (s.replace('&', '&amp;').replace('"', '&quot;')
+                       .replace('<', '&lt;').replace('>', '&gt;'))
+
+          icons = ['🔬','🧬','🫀','🧠','🦠','🌱','⚡','🧪','🧫','🧬']
+
+          # Process every top-level unit section independently.
+          section_re = re.compile(r'<section class="section">', re.I)
+          positions = [m.start() for m in section_re.finditer(html)]
+          replacements = []
+          for i, start in enumerate(positions):
+              end = positions[i+1] if i+1 < len(positions) else html.find('</main>', start)
+              if end == -1:
+                  end = len(html)
+              section = html[start:end]
+              cstart = section.find('<div class="concepts">')
+              if cstart == -1:
+                  continue
+              cend = balanced_div_end(section, cstart)
+              if cend is None:
+                  continue
+              block = section[cstart:cend]
+
+              lis = re.findall(r'<li\b[^>]*>(.*?)</li>', block, flags=re.I|re.S)
+              concepts = [strip_tags(x) for x in lis]
+              concepts = [x for x in concepts if x]
+              if not concepts:
+                  continue
+
+              # Use the first chapter-test destination already defined in this unit.
+              hrefs = re.findall(r'<a class="chapter" href="([^"]+)"', section, flags=re.I)
+              href = hrefs[0] if hrefs else 'zoology-chapter-test.html'
+
+              unit_m = re.search(r'<div class="unit">\s*([^<]+)', section, flags=re.I)
+              unit_label = strip_tags(unit_m.group(1)) if unit_m else 'UNIT'
+              count = len(concepts)
+
+              cards = []
+              for n, concept in enumerate(concepts, 1):
+                  icon = icons[(n-1) % len(icons)]
+                  cards.append(
+                      f'<a class="chapter" href="{href}">'
+                      f'<div class="chapter-head"><div><div class="title">{esc_attr(concept)}</div>'
+                      f'<div class="scope">NEET-focused concept • Learn, revise and practice</div></div>'
+                      f'<div class="icon">{icon}</div></div>'
+                      f'<div class="test"><span>Start lesson test</span><span>→</span></div></a>'
+                  )
+
+              new_block = (
+                  f'<div class="chapters-head"><b>📚 Chapters under {unit_label.title()}</b>'
+                  f'<span>{count} chapters</span></div>'
+                  f'<div class="grid">{"".join(cards)}</div>'
+              )
+              replacements.append((start+cstart, start+cend, new_block))
+
+          for a,b,new in reversed(replacements):
+              html = html[:a] + new + html[b:]
+
+          # Keep the page compact and consistent after converting every unit.
+          html = html.replace('key concepts aligned to the NEET Biology syllabus.',
+                              'chapter-wise NEET 2026 Zoology learning path with focused practice tests.')
+          path.write_text(html, encoding='utf-8')
+          print(f'Converted {len(replacements)} unit concept sections.')
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-full-path.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git commit -m 'Convert all Zoology concepts into chapter cards'
+          git push

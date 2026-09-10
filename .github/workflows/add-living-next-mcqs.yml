@@ -1,0 +1,55 @@
+name: Add More What is Living MCQs
+on:
+  push:
+    paths:
+      - .github/workflows/add-living-next-mcqs.yml
+permissions:
+  contents: write
+jobs:
+  add-mcqs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add 20 unique NEET MCQs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text()
+          marker="Which process is an example of cellular metabolism in a living organism?"
+          if marker in s:
+              print('MCQs already present; nothing to do')
+              raise SystemExit(0)
+          start=s.index("'What is Living?':[")
+          end=s.index("],\n'Biological Classification'", start)
+          qs=[
+          {"q":"Which statement correctly describes living organisms as open systems?","o":["They never exchange matter with the environment","They exchange matter and energy with the environment","They cannot release waste","They remain chemically isolated"],"a":"They exchange matter and energy with the environment","e":"Living organisms continuously exchange matter and energy with their surroundings to maintain metabolism and life processes."},
+          {"q":"Which process directly requires enzymes in living cells?","o":["A biochemical metabolic reaction","Crystal formation","Simple evaporation","Mechanical movement of a stone"],"a":"A biochemical metabolic reaction","e":"Enzymes catalyse and regulate biochemical reactions that form the basis of cellular metabolism."},
+          {"q":"Which pair is correctly matched?","o":["Anabolism — breakdown of complex molecules","Catabolism — synthesis of proteins","Metabolism — sum of biochemical reactions","Growth — only external deposition"],"a":"Metabolism — sum of biochemical reactions","e":"Metabolism includes the complete set of biochemical reactions occurring in an organism, including anabolism and catabolism."},
+          {"q":"Which feature shows that living organisms are highly organised systems?","o":["Random chemical reactions only","Coordinated cellular and biochemical activities","Absence of regulation","Permanent chemical inactivity"],"a":"Coordinated cellular and biochemical activities","e":"Life depends on highly coordinated structural, biochemical and regulatory processes operating together."},
+          {"q":"A living cell maintains its internal conditions mainly through:","o":["Regulation and homeostasis","Crystal deposition","Complete isolation","Stopping metabolism"],"a":"Regulation and homeostasis","e":"Regulatory mechanisms help living cells maintain suitable internal conditions despite changes in the environment."},
+          {"q":"Which statement about metabolism is correct?","o":["It occurs only in animals","It is present in living cells and includes anabolic and catabolic reactions","It is limited to digestion","It occurs only during reproduction"],"a":"It is present in living cells and includes anabolic and catabolic reactions","e":"Metabolism is a universal feature of living cells and includes both synthesis and breakdown reactions."},
+          {"q":"Which example best demonstrates response to an external stimulus?","o":["A stone remaining stationary","A shoot bending toward light","A crystal growing by deposition","Water freezing"],"a":"A shoot bending toward light","e":"Directional growth of a shoot toward light is a response to an environmental stimulus."},
+          {"q":"Why can a non-living crystal increase in size without being considered alive?","o":["It performs metabolism","It accumulates material on its surface without cellular metabolism","It reproduces","It maintains homeostasis"],"a":"It accumulates material on its surface without cellular metabolism","e":"Crystal growth occurs by external deposition and does not involve cellular organisation or metabolism."},
+          {"q":"Which property is most closely associated with cellular organisation?","o":["Presence of membrane-bound or organised cellular structures","Ability of a rock to fracture","Increase in crystal size","Evaporation"],"a":"Presence of membrane-bound or organised cellular structures","e":"Living organisms possess cellular organisation, with cells providing the basic structural and functional unit of life."},
+          {"q":"Which statement about unicellular organisms is correct?","o":["They cannot reproduce","Their single cell performs all essential life processes","They always have tissues","They always have organ systems"],"a":"Their single cell performs all essential life processes","e":"In unicellular organisms, one cell carries out nutrition, respiration, excretion, growth and reproduction."},
+          {"q":"Which life process provides energy for many cellular activities?","o":["Catabolic metabolism","Crystal growth","External deposition","Passive shape change"],"a":"Catabolic metabolism","e":"Catabolic reactions break down molecules and release energy that can be captured for cellular work."},
+          {"q":"Which statement about anabolic reactions is correct?","o":["They generally build complex molecules from simpler ones","They always destroy cellular structures","They are unrelated to metabolism","They occur only outside cells"],"a":"They generally build complex molecules from simpler ones","e":"Anabolic pathways synthesise complex cellular molecules and generally require an input of energy."},
+          {"q":"Which observation supports the presence of metabolism in a living organism?","o":["A coordinated series of enzyme-catalysed chemical reactions","A crystal becoming larger","A rock changing position after being pushed","Water changing state"],"a":"A coordinated series of enzyme-catalysed chemical reactions","e":"Metabolism consists of enzyme-regulated biochemical reactions that sustain cellular activities."},
+          {"q":"Which statement best explains why consciousness is considered a characteristic of living organisms?","o":["Living organisms can sense and respond to stimuli","All organisms are always aware like humans","Only animals respond to stimuli","Consciousness means reproduction"],"a":"Living organisms can sense and respond to stimuli","e":"In NCERT biology, consciousness refers broadly to the ability to sense the environment and respond to stimuli."},
+          {"q":"Which of the following is an example of a catabolic pathway?","o":["Synthesis of a protein","Formation of glycogen","Breakdown of glucose during respiration","DNA replication"],"a":"Breakdown of glucose during respiration","e":"Cellular respiration involves breakdown of glucose and other substrates with release of usable energy."},
+          {"q":"Which of the following is an example of an anabolic pathway?","o":["Protein synthesis from amino acids","Glucose oxidation","Fatty acid breakdown","Digestion of starch"],"a":"Protein synthesis from amino acids","e":"Protein synthesis builds a complex macromolecule from simpler amino acid units."},
+          {"q":"Which statement best distinguishes biological growth from crystal growth?","o":["Biological growth involves cellular activity and metabolism","Both require cells","Crystal growth requires reproduction","Biological growth occurs only by surface deposition"],"a":"Biological growth involves cellular activity and metabolism","e":"Biological growth is associated with cellular processes, whereas crystals increase in size by deposition of material."},
+          {"q":"Which property allows living organisms to maintain organised functioning despite continuous internal reactions?","o":["Regulation","Randomness","Inactivity","Crystallisation"],"a":"Regulation","e":"Regulatory mechanisms coordinate metabolic and physiological activities and help maintain stable internal conditions."},
+          {"q":"Which statement is most accurate about reproduction in biology?","o":["Every individual must reproduce to remain alive","Reproduction is important for continuity of species but is not obligatory for every individual","Only sexually reproducing organisms are living","Reproduction is identical to metabolism"],"a":"Reproduction is important for continuity of species but is not obligatory for every individual","e":"NCERT uses sterile individuals such as mules to show that reproduction is not an obligatory property of every living individual."},
+          {"q":"Which combination contains fundamental characteristics used to recognise life?","o":["Cellular organisation, metabolism and responsiveness","Mass, colour and shape","Crystal growth, evaporation and movement","Size, weight and temperature"],"a":"Cellular organisation, metabolism and responsiveness","e":"Living systems show cellular organisation, metabolic activity and the ability to sense and respond to their surroundings."}
+          ]
+          import json
+          addition=','+','.join(json.dumps(q,separators=(',',':')) for q in qs)
+          s=s[:end]+addition+s[end:]
+          p.write_text(s)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          git diff --cached --quiet || (git commit -m 'Add 20 more NEET MCQs to What is Living' && git push)

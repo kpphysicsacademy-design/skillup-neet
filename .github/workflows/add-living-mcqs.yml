@@ -1,3 +1,4 @@
+# Trigger MCQ update
 name: Add What is Living MCQs
 
 on:
@@ -14,53 +15,43 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Add MCQs
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re, json
-
+          import json
           p = Path('zoology-chapter-test.html')
           s = p.read_text(encoding='utf-8')
-
           new = [
             {"q":"Which statement best describes metabolism?","o":["Only digestion of food","The sum total of all chemical reactions in an organism","Only energy production","Only breakdown reactions"],"a":"The sum total of all chemical reactions in an organism","e":"Metabolism includes both constructive (anabolic) and degradative (catabolic) biochemical reactions occurring in living organisms."},
             {"q":"Which of the following is an anabolic process?","o":["Cellular respiration","Digestion of proteins","Synthesis of glycogen from glucose","Breakdown of fatty acids"],"a":"Synthesis of glycogen from glucose","e":"Anabolism involves synthesis of complex molecules from simpler ones, usually requiring energy."},
             {"q":"Which process is primarily catabolic?","o":["Protein synthesis","DNA replication","Cellular respiration","Photosynthetic synthesis of glucose"],"a":"Cellular respiration","e":"Cellular respiration breaks down organic substrates and releases energy that can be captured as ATP."},
-            {"q":"Growth in living organisms generally occurs due to:","o":["Only accumulation of external material","Increase in cell number and/or cell mass","Crystallisation","Only water absorption"],"a":"Increase in cell number and/or cell mass","e":"Biological growth occurs through cell division and enlargement. It is internal and is therefore different from growth by external accretion seen in crystals."},
+            {"q":"Growth in living organisms generally occurs due to:","o":["Only accumulation of external material","Increase in cell number and/or cell mass","Crystallisation","Only water absorption"],"a":"Increase in cell number and/or cell mass","e":"Biological growth occurs through cell division and enlargement and differs from growth by external accretion seen in crystals."},
             {"q":"Why is growth not considered an exclusive defining property of living organisms?","o":["Living organisms never grow","Non-living objects such as crystals can also increase in size","Growth occurs only in plants","Growth requires reproduction"],"a":"Non-living objects such as crystals can also increase in size","e":"Crystals may grow by deposition of material on their surfaces, so increase in size alone cannot define life."},
-            {"q":"Which property enables organisms to maintain their internal chemical activities despite environmental changes?","o":["Metabolism","Homeostasis","Reproduction","Locomotion"],"a":"Homeostasis","e":"Homeostasis refers to maintaining relatively stable internal conditions through regulatory mechanisms."},
-            {"q":"Which characteristic is especially useful for distinguishing living organisms from machines?","o":["Ability to move","Self-regulation and metabolism","Ability to occupy space","Presence of mass"],"a":"Self-regulation and metabolism","e":"Living systems have organised metabolic pathways and regulatory mechanisms that maintain life processes."},
-            {"q":"A mule is an example used to show that reproduction:","o":["Is absent in all animals","Is not an obligatory property of every individual organism","Never occurs in living organisms","Is the same as growth"],"a":"Is not an obligatory property of every individual organism","e":"Mules are generally sterile. Thus reproduction is important for continuity of species but is not essential for survival of every individual."},
-            {"q":"Which response is an example of consciousness in a plant?","o":["A stone falling","A plant bending toward light","A crystal increasing in size","Water evaporating"],"a":"A plant bending toward light","e":"Plants perceive environmental stimuli and respond to them. Response to stimuli is a characteristic feature of living organisms."},
-            {"q":"The term 'consciousness' in biology most directly refers to the ability to:","o":["Produce oxygen","Sense and respond to environmental stimuli","Make food only","Reproduce sexually"],"a":"Sense and respond to environmental stimuli","e":"NCERT describes consciousness as the ability of living organisms to sense their surroundings and respond to stimuli."},
-            {"q":"Which of the following is NOT a universal characteristic of individual living organisms?","o":["Metabolism","Cellular organisation","Consciousness","Reproduction"],"a":"Reproduction","e":"Reproduction is not an obligatory property of every individual because some organisms or individuals are sterile."},
-            {"q":"Which statement about viruses supports their placement at the borderline of living and non-living?","o":["They have cellular organisation outside a host","They show metabolic activity independently outside a host","They reproduce only inside living host cells","They contain tissues"],"a":"They reproduce only inside living host cells","e":"Viruses are acellular and inactive outside host cells but multiply using the machinery of living cells."},
-            {"q":"Which feature is shared by both unicellular and multicellular organisms?","o":["Presence of organs","Cellular organisation","Presence of tissues","Organ-system organisation"],"a":"Cellular organisation","e":"All living organisms are made of cells. Unicellular organisms perform all essential functions within one cell."},
-            {"q":"Which statement about reproduction is correct?","o":["It is necessary for survival of every individual","It ensures continuity of the species","It occurs only in multicellular organisms","It is identical to growth"],"a":"It ensures continuity of the species","e":"Reproduction generates new individuals and maintains the continuity of a species across generations."},
-            {"q":"Which of the following represents biological organisation at the cellular level?","o":["Amoeba carrying out all life processes in one cell","A crystal increasing in size","A machine using electricity","A cloud changing shape"],"a":"Amoeba carrying out all life processes in one cell","e":"Amoeba is unicellular and its single cell performs nutrition, respiration, excretion, growth and reproduction."},
-            {"q":"Which pair correctly represents the two broad types of metabolic reactions?","o":["Growth and reproduction","Anabolism and catabolism","Digestion and absorption","Movement and response"],"a":"Anabolism and catabolism","e":"Metabolism consists broadly of anabolic reactions that build molecules and catabolic reactions that break molecules down."},
-            {"q":"Which statement correctly compares anabolism and catabolism?","o":["Both always break down molecules","Anabolism builds complex molecules whereas catabolism breaks them down","Anabolism is unrelated to metabolism","Catabolism always consumes more energy than anabolism"],"a":"Anabolism builds complex molecules whereas catabolism breaks them down","e":"Anabolic pathways generally require energy to synthesise complex molecules, while catabolic pathways release energy during breakdown."},
-            {"q":"A seed germinating into a plant demonstrates that living growth is associated with:","o":["Only accumulation of dust","Increase in cell number and cellular activity","Crystal formation","Loss of metabolism"],"a":"Increase in cell number and cellular activity","e":"Germination involves active metabolism, cell division and cell enlargement, demonstrating biological growth."},
-            {"q":"Which observation most strongly indicates that an organism is alive?","o":["It has a fixed shape","It undergoes coordinated metabolism and responds to stimuli","It has a large mass","It occupies space"],"a":"It undergoes coordinated metabolism and responds to stimuli","e":"Metabolism and responsiveness are fundamental properties of living systems and together provide strong evidence of life."},
+            {"q":"Which property enables organisms to maintain relatively stable internal conditions?","o":["Homeostasis","Reproduction","Locomotion","Crystallisation"],"a":"Homeostasis","e":"Homeostasis is the maintenance of relatively stable internal conditions through regulatory mechanisms."},
+            {"q":"Which characteristic is especially useful for distinguishing living organisms from non-living machines?","o":["Ability to move","Self-regulation and metabolism","Ability to occupy space","Presence of mass"],"a":"Self-regulation and metabolism","e":"Living systems have organised metabolic pathways and regulatory mechanisms that maintain life processes."},
+            {"q":"A mule is an example used to show that reproduction:","o":["Is absent in all animals","Is not an obligatory property of every individual organism","Never occurs in living organisms","Is the same as growth"],"a":"Is not an obligatory property of every individual organism","e":"Mules are generally sterile, showing that reproduction is important for species continuity but is not essential for every individual."},
+            {"q":"Which response is an example of consciousness in a plant?","o":["A stone falling","A plant bending toward light","A crystal increasing in size","Water evaporating"],"a":"A plant bending toward light","e":"Plants perceive environmental stimuli and respond to them, demonstrating a characteristic feature of living organisms."},
+            {"q":"The term 'consciousness' in biology most directly refers to the ability to:","o":["Produce oxygen","Sense and respond to environmental stimuli","Make food only","Reproduce sexually"],"a":"Sense and respond to environmental stimuli","e":"Living organisms sense their surroundings and respond to internal and external stimuli."},
+            {"q":"Which of the following is NOT a universal characteristic of individual living organisms?","o":["Metabolism","Cellular organisation","Consciousness","Reproduction"],"a":"Reproduction","e":"Reproduction is not obligatory for every individual because some organisms or individuals are sterile."},
+            {"q":"Which statement about viruses supports their position at the borderline of living and non-living?","o":["They have cellular organisation outside a host","They show independent metabolism outside a host","They reproduce only inside living host cells","They contain tissues"],"a":"They reproduce only inside living host cells","e":"Viruses are acellular and inactive outside host cells but multiply using the machinery of living cells."},
+            {"q":"Which feature is shared by both unicellular and multicellular organisms?","o":["Presence of organs","Cellular organisation","Presence of tissues","Organ-system organisation"],"a":"Cellular organisation","e":"All living organisms are made of cells; unicellular organisms perform essential life functions within one cell."},
+            {"q":"Which statement about reproduction is correct?","o":["It is necessary for survival of every individual","It ensures continuity of the species","It occurs only in multicellular organisms","It is identical to growth"],"a":"It ensures continuity of the species","e":"Reproduction generates new individuals and maintains species continuity across generations."},
+            {"q":"Which example represents biological organisation at the cellular level?","o":["Amoeba carrying out all life processes in one cell","A crystal increasing in size","A machine using electricity","A cloud changing shape"],"a":"Amoeba carrying out all life processes in one cell","e":"Amoeba is unicellular and its single cell performs nutrition, respiration, excretion, growth and reproduction."},
+            {"q":"Which pair correctly represents the two broad types of metabolic reactions?","o":["Growth and reproduction","Anabolism and catabolism","Digestion and absorption","Movement and response"],"a":"Anabolism and catabolism","e":"Metabolism includes anabolic reactions that build molecules and catabolic reactions that break molecules down."},
+            {"q":"Which statement correctly compares anabolism and catabolism?","o":["Both always break down molecules","Anabolism builds complex molecules whereas catabolism breaks them down","Anabolism is unrelated to metabolism","Catabolism always consumes more energy"],"a":"Anabolism builds complex molecules whereas catabolism breaks them down","e":"Anabolic pathways generally synthesise complex molecules, while catabolic pathways break molecules down and release usable energy."},
+            {"q":"A seed germinating into a plant demonstrates that living growth is associated with:","o":["Only accumulation of dust","Increase in cell number and cellular activity","Crystal formation","Loss of metabolism"],"a":"Increase in cell number and cellular activity","e":"Germination involves active metabolism, cell division and cell enlargement."},
+            {"q":"Which observation most strongly indicates that an organism is alive?","o":["It has a fixed shape","It undergoes coordinated metabolism and responds to stimuli","It has a large mass","It occupies space"],"a":"It undergoes coordinated metabolism and responds to stimuli","e":"Metabolism and responsiveness are fundamental properties of living systems."},
             {"q":"Which statement is most appropriate for NEET questions about defining properties of life?","o":["Growth alone defines life","Reproduction alone defines life","Metabolism and cellular organisation are fundamental features, while reproduction is not obligatory for every individual","Movement alone defines life"],"a":"Metabolism and cellular organisation are fundamental features, while reproduction is not obligatory for every individual","e":"NCERT emphasises cellular organisation, metabolism and consciousness as key properties; reproduction is important for species continuity but is not universal to every individual."}
           ]
-
           marker = "'What is Living?':[{"
           start = s.index(marker)
           end = s.index("],\n'Biological Classification'", start)
           addition = ',' + ','.join(json.dumps(x, ensure_ascii=False, separators=(',', ':')) for x in new)
           s = s[:end] + addition + s[end:]
           p.write_text(s, encoding='utf-8')
-          print(f'Added {len(new)} MCQs; What is Living? now contains the original 10 + {len(new)} new questions.')
+          print('Added', len(new), 'MCQs')
           PY
-
-      - name: Commit changes
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html
-          git diff --cached --quiet && exit 0
-          git commit -m "Add 20 NEET MCQs to What is Living"
-          git push
+          git diff --cached --quiet || (git commit -m "Add 20 NEET MCQs to What is Living" && git push)

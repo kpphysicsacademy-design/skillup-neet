@@ -32,4 +32,6 @@ const questions=[
 {q:'The dimensions of resistance are:',o:['[M L² T⁻³ I⁻²]','[M L² T⁻² I⁻¹]','[M L T⁻³ I⁻²]','[M L² T⁻³ I⁻¹]'],a:0,e:'Resistance = potential difference/current = [M L² T⁻³ I⁻¹]/[I] = [M L² T⁻³ I⁻²].'}
 ];
 window.SkillUpMCQBanks=window.SkillUpMCQBanks||{};window.SkillUpMCQBanks['dimensions of physical quantities']=questions;
+/* The main router initializes SkillUpPhysicsBanks after this file loads. Patch the resolver after all scripts finish so this dedicated 30-MCQ bank is selected instead of the generic Physics and Measurement bank. */
+setTimeout(()=>{if(window.SkillUpPhysicsBanks){window.SkillUpPhysicsBanks['Dimensions of Physical Quantities']=questions;const old=window.SkillUpPhysicsBanks.resolve;window.SkillUpPhysicsBanks.resolve=function(topic){const n=String(topic||'').toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');if(n==='dimensions-of-physical-quantities')return 'Dimensions of Physical Quantities';return old?old.call(this,topic):null;};}},0);
 })();

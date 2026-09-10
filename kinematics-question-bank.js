@@ -33,6 +33,8 @@ const questions=[
 {q:'Which equation connects final velocity, initial velocity, acceleration and displacement?',o:['v² = u² + 2as','v = u + at','s = ut + ½at²','s = vt'],a:0,e:'The third equation of motion is v² = u² + 2as and does not contain time.'},
 {q:'A car slows from 20 m/s to 5 m/s in 3 s. Its acceleration is:',o:['−5 m/s²','5 m/s²','15 m/s²','25 m/s²'],a:0,e:'a = (v − u)/t = (5 − 20)/3 = −5 m/s². The negative sign indicates retardation.'}
 ];
+/* Mix the correct option position across A, B, C and D. */
+questions.forEach((x,i)=>{const shift=i%4;const original=x.o.slice();x.o=original.slice(shift).concat(original.slice(0,shift));x.a=(0-shift+4)%4;});
 window.SkillUpMCQBanks=window.SkillUpMCQBanks||{};
 window.SkillUpMCQBanks['kinematics']=questions;
 })();

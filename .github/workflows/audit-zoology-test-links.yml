@@ -29,38 +29,28 @@ jobs:
           test_path = Path('zoology-chapter-test.html')
           html = path.read_text(encoding='utf-8')
           test_html = test_path.read_text(encoding='utf-8')
-
-          # Existing real test datasets. Keys are top-level entries in const tests={...}.
           test_keys = set(re.findall(r"(?m)^'([^']+)':\[", test_html))
 
-          # Every chapter card is audited. Existing chapter keys keep their current
-          # destination; converted concept cards receive a unique URL and an alias
-          # to the appropriate parent chapter's existing MCQ set.
           card_re = re.compile(
               r'(<a class="chapter" href=")([^"]+)("[^>]*>\s*<div class="chapter-head">.*?'
               r'<div class="title">([^<]+)</div>)', re.I | re.S
           )
 
           aliases = {}
-          changed = 0
-          checked = 0
+          changed = [0]
+          checked = [0]
           unresolved = []
 
           def replace_card(match):
-              nonlocal changed, checked
               prefix, href, suffix, title = match.groups()
               title = re.sub(r'\s+', ' ', title).strip()
-              checked += 1
-
+              checked[0] += 1
               parsed = urlparse(href)
               qs = parse_qs(parsed.query)
               parent = unquote(qs.get('chapter', [''])[0])
 
-              # A real test already exists for this card.
               if title in test_keys:
                   return match.group(0)
-
-              # Converted concept cards inherit the first/parent chapter's MCQs.
               if parent not in test_keys:
                   unresolved.append((title, parent))
                   return match.group(0)
@@ -68,21 +58,16 @@ jobs:
               aliases[title] = parent
               new_href = 'zoology-chapter-test.html?chapter=' + quote(title, safe='')
               if new_href != href:
-                  changed += 1
+                  changed[0] += 1
                   return prefix + new_href + suffix
               return match.group(0)
 
           html = card_re.sub(replace_card, html)
 
-          # Add/refresh concept aliases immediately after const tests={...};.
-          # Remove a previous generated alias block first so the workflow is idempotent.
-          html_marker = None
-          alias_block_re = re.compile(r'\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);', re.S)
-          test_marker_re = re.compile(r'\nconst conceptAliases=\{')
-
-          # The alias code belongs in the test page, not the path page.
-          alias_block_re_test = re.compile(r'\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);', re.S)
-          test_html = alias_block_re_test.sub('', test_html)
+          alias_block_re = re.compile(
+              r'\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);', re.S
+          )
+          test_html = alias_block_re.sub('', test_html)
 
           lines = ['\nconst conceptAliases={};']
           for concept, parent in sorted(aliases.items()):
@@ -92,35 +77,31 @@ jobs:
           lines.append('Object.assign(tests,conceptAliases);')
           alias_block = '\n'.join(lines)
 
-          # Insert before the runtime code after the tests object closes.
           marker = '\n};\n'
           if marker not in test_html:
               raise SystemExit('Could not locate tests object terminator.')
           test_html = test_html.replace(marker, marker + alias_block + '\n', 1)
 
-          path.write_text(html, encoding='utf-8')
-          test_path.write_text(test_html, encoding='utf-8')
-
-          print(f'Checked chapter cards: {checked}')
-          print(f'Unique concept aliases: {len(aliases)}')
-          print(f'Rewritten card links: {changed}')
           if unresolved:
               print('Unresolved parent mappings:')
               for title, parent in unresolved:
                   print(f'  - {title} -> {parent}')
               raise SystemExit('Some Zoology cards do not map to an existing test dataset.')
 
-          # Final validation: every chapter URL must resolve to a test key after aliases.
+          path.write_text(html, encoding='utf-8')
+          test_path.write_text(test_html, encoding='utf-8')
+
+          print(f'Checked chapter cards: {checked[0]}')
+          print(f'Unique concept aliases: {len(aliases)}')
+          print(f'Rewritten card links: {changed[0]}')
+
           all_keys = set(test_keys) | set(aliases)
-          final_links = re.findall(r'<a class="chapter" href="zoology-chapter-test\.html\?chapter=([^"]+)"', html, re.I)
-          broken = []
-          for encoded in final_links:
-              key = unquote(encoded)
-              if key not in all_keys:
-                  broken.append(key)
+          final_links = re.findall(
+              r'<a class="chapter" href="zoology-chapter-test\.html\?chapter=([^"]+)"', html, re.I
+          )
+          broken = [unquote(encoded) for encoded in final_links if unquote(encoded) not in all_keys]
           if broken:
               raise SystemExit('Broken test links remain: ' + ', '.join(sorted(set(broken))))
-
           print(f'Final valid chapter-test links: {len(final_links)}')
 
       - name: Commit changes

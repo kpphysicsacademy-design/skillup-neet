@@ -33,5 +33,7 @@ const questions=[
 {q:'If v=√(P/ρ), where P is pressure and ρ is density, the dimensions of v are:',o:['[LT⁻¹]','[L²T⁻¹]','[LT⁻²]','[MLT⁻¹]'],a:0,e:'P/ρ=[ML⁻¹T⁻²]/[ML⁻³]=[L²T⁻²], whose square root is [LT⁻¹].'}
 ];
 window.SkillUpMCQBanks=window.SkillUpMCQBanks||{};window.SkillUpMCQBanks['dimensional analysis and applications']=questions;
+const dedicated=window.SkillUpMCQBanks['dimensions of physical quantities'];
+if(dedicated){const original=Object.getOwnPropertyDescriptor(window,'SkillUpPhysicsBanks');if(!original){Object.defineProperty(window,'SkillUpPhysicsBanks',{configurable:true,set(v){v['Dimensions of Physical Quantities']=dedicated;Object.defineProperty(window,'SkillUpPhysicsBanks',{value:v,writable:true,configurable:true,enumerable:true});},get(){return undefined;}});}}
 if(window.SKILLUP_UNIFIED_MCQ)return;
 })();

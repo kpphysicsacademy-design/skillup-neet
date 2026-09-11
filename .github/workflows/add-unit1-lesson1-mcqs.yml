@@ -1,0 +1,103 @@
+name: Add Unit 1 Lesson 1 MCQs
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/add-unit1-lesson1-mcqs.yml']
+  workflow_dispatch:
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add 30 dedicated MCQs
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('zoology-chapter-test.html')
+          html = path.read_text(encoding='utf-8')
+
+          qs = [
+            ("Which property is most fundamental for recognising an organism as living?", ["Metabolism", "Colour", "Shape", "Size"], "Metabolism", "Metabolism is a defining characteristic of living organisms and occurs in all living cells."),
+            ("The sum total of all chemical reactions occurring in a living organism is called:", ["Metabolism", "Growth", "Reproduction", "Excretion"], "Metabolism", "Metabolism includes all anabolic and catabolic reactions taking place in a living system."),
+            ("Which process builds complex molecules from simpler molecules and generally requires energy?", ["Anabolism", "Catabolism", "Diffusion", "Excretion"], "Anabolism", "Anabolism is constructive metabolism in which simpler substances are converted into more complex molecules."),
+            ("Which process breaks complex molecules into simpler molecules and generally releases energy?", ["Catabolism", "Anabolism", "Growth", "Reproduction"], "Catabolism", "Catabolic reactions degrade complex molecules and commonly release usable energy."),
+            ("Which characteristic allows an organism to detect and respond to changes in its surroundings?", ["Consciousness", "Metabolism", "Growth", "Nutrition"], "Consciousness", "Consciousness in biology includes the ability to sense and respond to environmental stimuli."),
+            ("Which of the following is a defining feature of living organisms according to NCERT?", ["Cellular organisation", "Ability to move from place to place", "Large body size", "Green colour"], "Cellular organisation", "All living organisms show cellular organisation, although movement from place to place is not universal."),
+            ("Which statement about growth in living organisms is correct?", ["It can occur through increase in cell number or cell size", "It always occurs only by external addition", "It occurs only in animals", "It is absent in plants"], "It can occur through increase in cell number or cell size", "Living organisms commonly grow by internal increase in cell number and/or cell size."),
+            ("Growth in non-living objects such as crystals generally occurs by:", ["External accumulation of material", "Cell division", "Metabolism", "Reproduction"], "External accumulation of material", "Non-living objects can increase in size by accumulation of material on their surface, unlike biological growth."),
+            ("Why is reproduction not considered an all-inclusive defining property of living organisms?", ["Some living organisms are sterile", "Only plants reproduce", "Reproduction occurs in crystals", "Reproduction is never cellular"], "Some living organisms are sterile", "Individual organisms such as mules and some sterile worker bees do not reproduce, although they are living."),
+            ("Which statement best describes reproduction in living organisms?", ["It produces new individuals and may be sexual or asexual", "It is always sexual", "It occurs only in multicellular organisms", "It is a form of respiration"], "It produces new individuals and may be sexual or asexual", "Living organisms reproduce by sexual or asexual methods, depending on the organism."),
+            ("Which pair represents two major types of reproduction?", ["Asexual and sexual", "Anabolic and catabolic", "Aerobic and anaerobic", "Autotrophic and absorptive"], "Asexual and sexual", "Reproduction is broadly classified as asexual and sexual reproduction."),
+            ("Which statement about metabolism is correct?", ["It is a defining feature of living systems", "It occurs only during reproduction", "It occurs only in plants", "It is absent in microorganisms"], "It is a defining feature of living systems", "All living organisms carry out metabolic reactions, making metabolism a key defining feature of life."),
+            ("A set of isolated metabolic reactions outside a living cell is best described as:", ["Not by itself a living system", "A complete organism", "A new species", "A tissue"], "Not by itself a living system", "Metabolic reactions alone do not establish complete living organisation; living systems show integrated cellular processes."),
+            ("Which feature enables organisms to maintain internal coordination while interacting with their environment?", ["Response to stimuli", "Crystal formation", "External accumulation", "Rusting"], "Response to stimuli", "Living organisms detect stimuli and coordinate appropriate responses through their cellular systems."),
+            ("Which example best demonstrates response to a stimulus?", ["A plant bending toward light", "A crystal becoming larger", "Iron rusting", "Salt dissolving"], "A plant bending toward light", "Phototropic movement demonstrates a living organism responding to an environmental stimulus."),
+            ("Which statement about movement as a characteristic of life is correct?", ["Movement may occur internally even when an organism does not locomote", "All living organisms must locomote", "Only animals move", "Movement is unrelated to life"], "Movement may occur internally even when an organism does not locomote", "Plants show movements such as growth movements even though they are generally non-locomotory."),
+            ("Which of the following is an example of cellular organisation?", ["Cells forming tissues and organs", "A crystal growing layer by layer", "A stone increasing in mass", "A machine gaining fuel"], "Cells forming tissues and organs", "Living organisms are organised from cells, with higher organisms showing tissues, organs and organ systems."),
+            ("The basic structural and functional unit of life is the:", ["Cell", "Tissue", "Organ", "Organ system"], "Cell", "The cell is the basic structural and functional unit of living organisms."),
+            ("Which statement correctly distinguishes living growth from non-living growth?", ["Living growth is generally internal and cellular", "Living growth always occurs by surface deposition", "Non-living growth requires mitosis", "Non-living objects have metabolism"], "Living growth is generally internal and cellular", "Biological growth is associated with cellular processes, whereas non-living growth commonly results from external deposition."),
+            ("Which is an example of an organism that is living but normally sterile?", ["Mule", "Bacterium", "Amoeba", "Yeast"], "Mule", "A mule is a living organism but is generally sterile, illustrating why reproduction is not an essential property for every individual."),
+            ("Which characteristic is shared by bacteria and multicellular animals?", ["Metabolism", "Organ systems", "Locomotion", "Tissue organisation"], "Metabolism", "Both bacteria and animals are living organisms and perform metabolism, despite major differences in organisation."),
+            ("Which statement about consciousness in living organisms is most accurate?", ["It includes the ability to sense and respond to environmental stimuli", "It means only human self-awareness", "It occurs only in animals", "It is identical to reproduction"], "It includes the ability to sense and respond to environmental stimuli", "Biological consciousness includes awareness of and response to environmental changes and stimuli."),
+            ("Which of the following is not a universal characteristic of individual living organisms?", ["Reproduction", "Metabolism", "Cellular organisation", "Response to stimuli"], "Reproduction", "Some individual living organisms are sterile, so reproduction is not universal at the individual level."),
+            ("Which process is directly associated with obtaining and using energy in living cells?", ["Metabolism", "Taxonomy", "Nomenclature", "Classification"], "Metabolism", "Metabolic reactions transform matter and energy and support cellular activities."),
+            ("An organism maintaining coordinated internal activities in response to environmental changes demonstrates:", ["Sensitivity and response", "Crystal growth", "External deposition", "Non-cellular growth"], "Sensitivity and response", "Living organisms sense environmental changes and produce coordinated responses."),
+            ("Which example represents asexual reproduction?", ["Binary fission in Amoeba", "Fusion of gametes", "Fertilisation", "Meiosis followed by fertilisation"], "Binary fission in Amoeba", "Amoeba commonly reproduces asexually by binary fission, producing daughter individuals without gamete fusion."),
+            ("Which example represents sexual reproduction?", ["Fusion of male and female gametes", "Binary fission", "Budding only", "Fragmentation only"], "Fusion of male and female gametes", "Sexual reproduction involves formation and fusion of gametes, producing genetic variation."),
+            ("Which statement about living organisms is correct?", ["They show organised, coordinated chemical reactions", "They never exchange matter with surroundings", "They are always capable of locomotion", "They must all be multicellular"], "They show organised, coordinated chemical reactions", "Living systems maintain organisation through coordinated biochemical reactions and exchange matter and energy with their surroundings."),
+            ("Why is metabolism considered a defining feature of life?", ["Living cells continuously perform integrated biochemical reactions", "It occurs only outside cells", "It is found only in crystals", "It requires reproduction in every case"], "Living cells continuously perform integrated biochemical reactions", "Metabolism is a coordinated network of biochemical reactions essential for maintenance and functioning of living cells."),
+            ("Which observation most strongly supports that a seed is living even when it appears inactive?", ["It resumes metabolic activity and germinates under suitable conditions", "It increases by surface deposition", "It has no cellular organisation", "It cannot respond to any condition"], "It resumes metabolic activity and germinates under suitable conditions", "A dormant seed remains living and can resume metabolism, growth and development when suitable conditions are provided."),
+            ("Which combination contains only characteristics used to identify living systems?", ["Metabolism, cellular organisation, response to stimuli", "Rusting, crystallisation, sedimentation", "Corrosion, melting, freezing", "Condensation, evaporation, crystallisation"], "Metabolism, cellular organisation, response to stimuli", "Metabolism, cellular organisation and response to stimuli are key biological characteristics of living systems.")
+          ]
+
+          def js(s):
+              return s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', ' ')
+
+          dataset = "'What is Living?':[" + ','.join(
+              "{q:'%s',o:[%s],a:'%s',e:'%s'}" % (
+                  js(q), ','.join("'%s'" % js(x) for x in opts), js(ans), js(exp)
+              ) for q, opts, ans, exp in qs
+          ) + "],\n"
+
+          html2, removed = re.subn(r"'What is Living\?':\[.*?\],(?='[^']+':\[)", '', html, count=1, flags=re.S)
+          if removed > 1:
+              raise SystemExit('Unexpected duplicate What is Living datasets')
+
+          marker = 'const tests={\n'
+          if marker not in html2:
+              raise SystemExit('const tests marker not found')
+          html2 = html2.replace(marker, marker + dataset, 1)
+          path.write_text(html2, encoding='utf-8')
+          print('Added exactly', len(qs), 'MCQs for Unit 1 Lesson 1')
+
+      - name: Verify
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          m = re.search(r"'What is Living\?':\[(.*?)\],\n'", html, re.S)
+          if not m:
+              raise SystemExit('What is Living dataset missing')
+          count = len(re.findall(r"\{q:'", m.group(1)))
+          print('Verified What is Living MCQs:', count)
+          if count != 30:
+              raise SystemExit(f'Expected 30, found {count}')
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Add 30 MCQs for Unit 1 Lesson 1'
+            git push
+          fi

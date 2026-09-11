@@ -5,7 +5,7 @@ on:
     branches:
       - main
   workflow_run:
-    workflows: ["Add Unit 1 Lesson 1 MCQs"]
+    workflows: ["Add Unit 1 Lesson 1 MCQs", "Add Unit 1 Lesson 2 Characteristics MCQs"]
     types: [completed]
   workflow_dispatch:
 
@@ -87,6 +87,32 @@ jobs:
           Path('/tmp/zoology-test.js').write_text(re.search(r'<script>(.*?)</script>',s,re.S).group(1),encoding='utf-8')
           PY
           node --check /tmp/zoology-test.js
+
+      - name: Verify Lesson 2 MCQs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          key="'Characteristics of living organisms':"
+          if key not in s: raise SystemExit('Characteristics dataset missing')
+          start=s.index(key); arr=s.index('[',start); depth=0; quote=None; esc=False; end=None
+          for i in range(arr,len(s)):
+              c=s[i]
+              if quote:
+                  if esc: esc=False
+                  elif c=='\\': esc=True
+                  elif c==quote: quote=None
+                  continue
+              if c in "'\"`": quote=c
+              elif c=='[': depth+=1
+              elif c==']':
+                  depth-=1
+                  if depth==0: end=i+1; break
+          if end is None: raise SystemExit('Characteristics dataset not closed')
+          count=s[arr:end].count('"q":"')
+          print('Characteristics of living organisms MCQs:',count)
+          if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
+          PY
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

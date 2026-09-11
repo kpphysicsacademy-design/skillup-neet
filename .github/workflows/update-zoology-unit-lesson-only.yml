@@ -1,0 +1,75 @@
+name: Update Zoology Path - Unit to Lessons
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'zoology-full-path.html'
+      - '.github/workflows/update-zoology-unit-lesson-only.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Convert path to Unit → Lessons
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('zoology-full-path.html')
+          s = p.read_text(encoding='utf-8')
+          original = s
+
+          # Remove the intermediate chapter-summary row from every unit.
+          s = re.sub(r'<div class="chapters-head">.*?</div>', '', s, flags=re.S)
+
+          # Make the cards semantically lesson cards rather than chapter cards.
+          s = s.replace('class="chapter"', 'class="lesson"')
+          s = s.replace('.chapter{', '.lesson{')
+          s = s.replace('.chapter:hover{', '.lesson:hover{')
+          s = s.replace('.chapter:before{', '.lesson:before{')
+          s = s.replace('class="chapter-head"', 'class="lesson-head"')
+          s = s.replace('.chapter-head{', '.lesson-head{')
+
+          # Every item shown directly under a Unit is now a lesson.
+          s = re.sub(r'&type=chapter', '&type=lesson', s)
+          s = s.replace('type=chapter', 'type=lesson')
+
+          # Remove chapter terminology from the page-level description/title copy.
+          s = s.replace('chapter-wise NEET 2026 Zoology learning path', 'lesson-wise NEET 2026 Zoology learning path')
+          s = s.replace('chapter-wise tests', 'lesson-wise tests')
+          s = s.replace('Study every chapter, revise the most relevant concepts', 'Study every lesson, revise the most relevant concepts')
+
+          # The test page is still the existing shared test engine; keep the chapter query
+          # parameter for backward compatibility, but the semantic type is now lesson.
+
+          if s != original:
+              p.write_text(s, encoding='utf-8')
+
+          # Validation: no chapter-summary UI and no chapter-type links remain.
+          final = p.read_text(encoding='utf-8')
+          assert 'class="chapters-head"' not in final
+          assert 'type=chapter' not in final
+          assert 'chapters under Unit' not in final
+          assert 'chapter-wise tests' not in final
+          assert 'class="chapter"' not in final
+          print('Validated: Zoology path is Unit → Lessons.')
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-full-path.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed.'
+          else
+            git commit -m 'Restructure Zoology path as Unit to Lessons'
+            git push
+          fi

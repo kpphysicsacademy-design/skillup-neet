@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate and repair Zoology test routing
+      - name: Remove obsolete What is Living test and repair routing
         shell: python
         run: |
           from pathlib import Path
@@ -34,11 +34,35 @@ jobs:
           html = path.read_text(encoding='utf-8')
           test_html = test_path.read_text(encoding='utf-8')
 
-          # Remove obsolete shared lesson aliases and the What is Living dataset.
-          test_html = re.sub(r"\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);", '', test_html, flags=re.S)
-          test_html = re.sub(r"'What is Living\?':\[.*?\],(?='[^']+':\[)", '', test_html, count=1, flags=re.S)
+          # Remove the entire obsolete What is Living dataset, whether followed by
+          # another dataset or by the closing tests object.
+          test_html, removed = re.subn(
+              r"\n?'What is Living\?':\[.*?\](?:,)?(?=\s*(?:'[^']+':\[|\};))",
+              '', test_html, count=1, flags=re.S
+          )
+          if not removed:
+              # Also remove a possible final entry immediately before };.
+              test_html, removed = re.subn(
+                  r"\n?'What is Living\?':\[.*?\](?:,)?\s*(?=\};)",
+                  '', test_html, count=1, flags=re.S
+              )
 
-          # Use actual remaining datasets as chapter datasets.
+          # Remove obsolete concept aliases that reused chapter MCQs.
+          test_html = re.sub(
+              r"\nconst conceptAliases=\{.*?\};\s*Object\.assign\(tests,conceptAliases\);",
+              '', test_html, flags=re.S
+          )
+
+          if re.search(r"['\"]What is Living\?['\"]\s*:", test_html):
+              raise SystemExit('What is Living dataset still exists after removal.')
+
+          # No fallback to What is Living; missing tests must be explicit.
+          test_html = re.sub(
+              r"const params=new URLSearchParams\(location\.search\);.*?document\.getElementById\('content'\)",
+              "const params=new URLSearchParams(location.search);\nconst raw=params.get('chapter')||'';\nconst type=params.get('type')||'chapter';\nconst chapter=raw;\nconst data=tests[chapter];\ndocument.getElementById('title').textContent=chapter ? chapter+' — '+(type==='lesson'?'Lesson Test':'Chapter Test') : 'Zoology Test';\ndocument.getElementById('content')",
+              test_html, count=1, flags=re.S
+          )
+
           test_keys = set(re.findall(r"(?m)^'([^']+)':\[", test_html))
           if not test_keys:
               raise SystemExit('No Zoology test datasets remain.')
@@ -61,20 +85,36 @@ jobs:
 
           html = card_re.sub(fix, html)
 
-          links = re.findall(r'zoology-chapter-test\.html\?chapter=([^&"]+)&type=(chapter|lesson)', html, re.I)
+          # Remove the What is Living card itself from the learning path.
+          html, card_removed = re.subn(
+              r'<a class="chapter" href="[^"]*What(?:%20|\s)iv?e?[^\"]*"[^>]*>.*?</a>',
+              '', html, count=0, flags=re.I | re.S
+          )
+          # Exact title-based removal is safer for the current generated card format.
+          html = re.sub(
+              r'<a class="chapter" href="[^"]*"[^>]*>\s*<div class="chapter-head">\s*<div>\s*<div class="title">What is Living\?</div>.*?</a>',
+              '', html, count=1, flags=re.I | re.S
+          )
+
+          links = re.findall(
+              r'zoology-chapter-test\.html\?chapter=([^&"]+)&type=(chapter|lesson)',
+              html, re.I
+          )
           if not links:
               raise SystemExit('No typed Zoology test links found.')
 
-          # Every chapter link must have a real dataset; lesson links intentionally
-          # remain available for later lesson-specific datasets.
           bad = [unquote(k) for k, kind in links if kind.lower() == 'chapter' and unquote(k) not in test_keys]
           if bad:
               raise SystemExit('Invalid chapter datasets: ' + ', '.join(sorted(set(bad))))
+
+          if re.search(r'chapter=What(?:%20|\s)??is(?:%20|\s)Living', html, re.I):
+              raise SystemExit('What is Living link still exists in Zoology path.')
 
           path.write_text(html, encoding='utf-8')
           test_path.write_text(test_html, encoding='utf-8')
           print(f"Checked cards: {state['checked']}")
           print(f"Rewritten links: {state['changed']}")
+          print(f"What is Living dataset removed: {'yes' if removed else 'already absent'}")
           print(f'Chapter datasets: {len(test_keys)}')
           print(f'Typed links: {len(links)}')
 
@@ -87,6 +127,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes needed.'
           else
-            git commit -m 'Repair Zoology audit execution and test routing'
+            git commit -m 'Remove What is Living Zoology test and repair links'
             git push
           fi

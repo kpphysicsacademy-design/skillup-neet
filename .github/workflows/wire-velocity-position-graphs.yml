@@ -1,0 +1,67 @@
+name: Wire Velocity-Time and Position-Time Graphs quiz
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wire combined graph question bank
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('question-bank.html')
+          s = p.read_text(encoding='utf-8')
+          script = '<script src="velocity-time-and-position-time-graphs-question-bank.js"></script>'
+          anchor = '<script src="position-time-graph-question-bank.js"></script>'
+          if script not in s:
+              if anchor not in s:
+                  raise SystemExit('position-time graph script anchor not found')
+              s = s.replace(anchor, anchor + script, 1)
+          route = "if(subject==='physics'&&n==='velocity-time-and-position-time-graphs'&&directBank('velocity time and position time graphs','Velocity-Time and Position-Time Graphs — Physics','Velocity-Time and Position-Time Graphs'))return;"
+          route_anchor = "if(subject==='physics'&&n==='position-time-graph'&&directBank('position time graph','Position-Time Graph — Physics','Position-Time Graph'))return;"
+          if route not in s:
+              if route_anchor not in s:
+                  raise SystemExit('position-time graph route anchor not found')
+              s = s.replace(route_anchor, route_anchor + route, 1)
+          s = s.replace('20260911-uam-route-fix', '20260911-velocity-position-graphs-fix', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Verify wiring and 30 MCQs
+        shell: bash
+        run: |
+          test -f velocity-time-and-position-time-graphs-question-bank.js
+          grep -q 'velocity-time-and-position-time-graphs-question-bank.js' question-bank.html
+          grep -q "velocity-time-and-position-time-graphs" question-bank.html
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          text = Path('velocity-time-and-position-time-graphs-question-bank.js').read_text(encoding='utf-8')
+          count = len(re.findall(r"\{q:'", text))
+          print('Graph MCQ count:', count)
+          assert count == 30, count
+          PY
+
+      - name: Commit wiring change
+        shell: bash
+        run: |
+          if git diff --quiet -- question-bank.html; then
+            echo 'question-bank.html already wired'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add question-bank.html
+          git commit -m 'Wire Velocity-Time and Position-Time Graphs quiz'
+          git push

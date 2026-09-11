@@ -1,0 +1,52 @@
+name: Deploy Scalars and Vectors quiz
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Wire Scalars and Vectors into quiz
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('question-bank.html')
+          s=p.read_text(encoding='utf-8')
+          script='<script src="scalars-and-vectors-question-bank.js"></script>'
+          anchor='<script src="physics-neet-question-banks.js"></script>'
+          if script not in s:
+              s=s.replace(anchor, script+anchor)
+          route="if(subject==='physics'&&n==='scalars-and-vectors'&&directBank('scalars and vectors','Scalars and Vectors — Physics','Scalars and Vectors'))return;"
+          marker="if(subject==='physics'&&n==='uniformly-accelerated-motion'"
+          if route not in s:
+              s=s.replace(marker, route+marker)
+          s=s.replace('20260911-uam-route-fix','20260911-scalars-vectors-fix')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify Scalars and Vectors
+        run: |
+          test -f scalars-and-vectors-question-bank.js
+          grep -q "scalars and vectors" scalars-and-vectors-question-bank.js
+          grep -q "scalars-and-vectors" question-bank.html
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('scalars-and-vectors-question-bank.js').read_text(encoding='utf-8')
+          n=s.count("{q:'")
+          print('Scalars and Vectors MCQs:',n)
+          if n != 30: raise SystemExit(f'Expected 30 MCQs, found {n}')
+          PY
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,96 @@
+name: Fix Zoology Hierarchy Step 1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'zoology-full-path.html'
+      - '.github/workflows/fix-zoology-hierarchy-step1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Normalize unit hierarchy labels
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('zoology-full-path.html')
+          s = p.read_text(encoding='utf-8')
+
+          # The current page mixes true chapter cards and lesson/concept cards.
+          # Do not present the combined card count as a chapter count.
+          # Step 1 makes that distinction explicit without deleting content.
+          units = [
+              ('UNIT 1', 3, 24),
+              ('UNIT 2', 2, 24),
+              ('UNIT 3', 3, 25),
+              ('UNIT 4', 3, 27),
+              ('UNIT 5', 6, 60),
+              ('UNIT 6', 2, 14),
+              ('UNIT 7', 3, 17),
+              ('UNIT 8', 2, 15),
+              ('UNIT 9', 3, 14),
+              ('UNIT 10', 3, 14),
+          ]
+
+          for unit, chapters, lessons in units:
+              pattern = rf'(<div class="unit">{re.escape(unit)}</div>.*?<div class="chapters-head">\s*<b>📚 Chapters under [^<]+</b>)<span>[^<]+</span>'
+              replacement = rf'\1<span>{chapters} chapters • {lessons} lessons</span>'
+              s, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
+              if n != 1:
+                  print(f'Warning: could not normalize count for {unit}')
+
+          # The first card group in Units 2–10 contains the canonical chapter cards;
+          # label their action consistently as chapter test rather than lesson test.
+          # This is presentation-only in Step 1; routing changes are deferred to the
+          # dedicated routing-validation step.
+          s = s.replace('<span>Start lesson test</span>', '<span>Open test</span>')
+
+          p.write_text(s, encoding='utf-8')
+          print('Zoology hierarchy Step 1 applied.')
+
+      - name: Verify
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          s = Path('zoology-full-path.html').read_text(encoding='utf-8')
+          expected = [
+              '3 chapters • 24 lessons', '2 chapters • 24 lessons',
+              '3 chapters • 25 lessons', '3 chapters • 27 lessons',
+              '6 chapters • 60 lessons', '2 chapters • 14 lessons',
+              '3 chapters • 17 lessons', '2 chapters • 15 lessons',
+              '3 chapters • 14 lessons', '3 chapters • 14 lessons'
+          ]
+          missing = [x for x in expected if x not in s]
+          if missing:
+              raise SystemExit('Hierarchy labels missing: ' + ', '.join(missing))
+          if '27 chapters</span>' in s or '24 chapters</span>' in s or '60 chapters</span>' in s:
+              raise SystemExit('Legacy aggregate chapter-count labels remain.')
+          print('Hierarchy label verification passed.')
+
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-full-path.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed.'
+          else
+            git commit -m 'Fix Zoology unit chapter and lesson hierarchy labels'
+            git push
+          fi

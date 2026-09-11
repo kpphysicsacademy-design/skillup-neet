@@ -1,0 +1,108 @@
+name: Set What is Living to 70 MCQs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/set-living-70-mcqs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build 70 unique What is Living MCQs
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          start_marker = "'What is Living?':["
+          boundary = "],'Biological Classification'"
+          start = s.find(start_marker)
+          end = s.find(boundary, start + len(start_marker))
+          if start < 0 or end < 0:
+              raise SystemExit('What is Living dataset not found')
+          body_start = start + len(start_marker)
+          body = s[body_start:end]
+          objects = re.findall(r'\{(?:(?:[^{}"\\]|\\.)|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\')*\}', body, re.S)
+          unique=[]; seen=set()
+          for obj in objects:
+              m=re.search(r"(?:['\"]q['\"]|q)\s*:\s*(['\"])(.*?)\1", obj, re.S)
+              if not m: continue
+              q=re.sub(r'\s+',' ',m.group(2)).strip().lower()
+              if q not in seen:
+                  seen.add(q); unique.append(obj)
+
+          extra = [
+          {"q":"Which property of living organisms is described as a network of all biochemical reactions?","o":["Growth","Metabolism","Reproduction","Locomotion"],"a":"Metabolism","e":"Metabolism is the sum total of biochemical reactions in an organism."},
+          {"q":"Which reaction is an example of catabolism?","o":["Amino acid polymerisation","Glucose breakdown during respiration","DNA synthesis","Fat synthesis"],"a":"Glucose breakdown during respiration","e":"Catabolic reactions break complex molecules into simpler products and commonly release energy."},
+          {"q":"Which reaction is an example of anabolism?","o":["Glycolysis","Digestion of starch","Formation of a protein from amino acids","Breakdown of triglycerides"],"a":"Formation of a protein from amino acids","e":"Anabolism synthesises complex molecules from simpler molecules."},
+          {"q":"A living organism differs from a crystal in growth mainly because biological growth is usually: ","o":["Due to external deposition only","Internal and associated with cell multiplication or enlargement","Independent of metabolism","Restricted to non-living matter"],"a":"Internal and associated with cell multiplication or enlargement","e":"Biological growth occurs from within through cell division and enlargement, unlike crystal growth by external deposition."},
+          {"q":"Which statement about metabolism is correct?","o":["It occurs only in animals","It includes both anabolism and catabolism","It means only digestion","It occurs only during growth"],"a":"It includes both anabolism and catabolism","e":"Metabolism includes constructive anabolic and degradative catabolic pathways."},
+          {"q":"Which feature is present in every known cellular living organism?","o":["Organ systems","Cellular organisation","Sexual reproduction","Locomotion"],"a":"Cellular organisation","e":"All cellular organisms have cellular organisation, whether unicellular or multicellular."},
+          {"q":"A unicellular organism can survive independently because its single cell: ","o":["Contains tissues","Performs essential life processes","Contains organs","Cannot metabolise"],"a":"Performs essential life processes","e":"In unicellular organisms, one cell carries out nutrition, respiration, excretion, growth and reproduction."},
+          {"q":"Which statement about consciousness is most appropriate in NCERT biology?","o":["Only humans show it","Living organisms sense and respond to stimuli","It means only thinking","It is identical to reproduction"],"a":"Living organisms sense and respond to stimuli","e":"Consciousness includes sensing environmental changes and responding to stimuli."},
+          {"q":"Which is a stimulus-response example in plants?","o":["Phototropic bending of a shoot","Crystal formation","Water freezing","Stone erosion"],"a":"Phototropic bending of a shoot","e":"A shoot bends toward light, demonstrating response to an environmental stimulus."},
+          {"q":"Why is reproduction not regarded as an essential property for every individual organism?","o":["All organisms reproduce only asexually","Some individuals are sterile","Reproduction is non-biological","Only plants reproduce"],"a":"Some individuals are sterile","e":"Examples such as mule and worker bees show that an individual may be living yet sterile."},
+          {"q":"The main biological significance of reproduction is: ","o":["Individual metabolism","Species continuity","Cellular respiration","Homeostasis only"],"a":"Species continuity","e":"Reproduction produces offspring and maintains continuity of the species."},
+          {"q":"Which statement best describes homeostasis?","o":["Permanent increase in size","Maintenance of relatively stable internal conditions","Production of offspring","Movement from place to place"],"a":"Maintenance of relatively stable internal conditions","e":"Homeostasis maintains internal conditions within suitable limits despite external changes."},
+          {"q":"Which of the following is NOT sufficient by itself to establish that an object is living?","o":["Metabolism","Cellular organisation","Increase in size","Response to stimuli"],"a":"Increase in size","e":"Non-living crystals can also increase in size, so growth alone is not a defining property of life."},
+          {"q":"Which observation best demonstrates metabolism?","o":["A crystal becoming larger","A cell converting nutrients into energy","A rock changing position after a push","Ice melting"],"a":"A cell converting nutrients into energy","e":"Metabolic reactions transform substances and energy within living cells."},
+          {"q":"Which process is directly associated with energy release from complex organic molecules?","o":["Catabolism","Anabolism","Replication","Growth"],"a":"Catabolism","e":"Catabolic pathways break down molecules and generally release usable energy."},
+          {"q":"Which process generally requires energy to build complex cellular molecules?","o":["Anabolism","Catabolism","Passive diffusion","Decay"],"a":"Anabolism","e":"Anabolic synthesis generally requires energy input to construct complex molecules."},
+          {"q":"Which example best illustrates cellular organisation?","o":["Amoeba performing all life functions in one cell","A crystal growing","A river flowing","A machine operating"],"a":"Amoeba performing all life functions in one cell","e":"Amoeba is a unicellular organism whose single cell carries out life processes."},
+          {"q":"Which property enables organisms to detect changes in temperature, light or chemicals?","o":["Responsiveness to stimuli","Crystal growth","External accretion","Inertia"],"a":"Responsiveness to stimuli","e":"Living organisms detect environmental stimuli and produce appropriate responses."},
+          {"q":"Which statement about living systems is most accurate?","o":["They are completely static","They maintain organised internal processes through metabolism","They never exchange matter","They cannot respond to surroundings"],"a":"They maintain organised internal processes through metabolism","e":"Living systems are dynamic and maintain organisation through regulated metabolic activity."},
+          {"q":"Which of the following is a degradative pathway?","o":["Protein synthesis","DNA replication","Cellular respiration","Glycogen synthesis"],"a":"Cellular respiration","e":"Cellular respiration degrades fuel molecules and releases energy."},
+          {"q":"Which of the following is a biosynthetic pathway?","o":["Protein synthesis","Glucose oxidation","Fatty acid breakdown","Respiration"],"a":"Protein synthesis","e":"Protein synthesis builds a complex macromolecule from amino acids."},
+          {"q":"A living organism is best described as a system that is: ","o":["Metabolically active and organised","Always moving from place to place","Always capable of reproduction","Always multicellular"],"a":"Metabolically active and organised","e":"Living systems possess organised cellular structures and continuous metabolic activity."},
+          {"q":"Which statement about viruses is most relevant to the living/non-living boundary?","o":["They are cellular organisms","They are metabolically active independently outside hosts","They depend on host cells for multiplication","They contain organs"],"a":"They depend on host cells for multiplication","e":"Viruses lack independent cellular metabolism and multiply using host-cell machinery."},
+          {"q":"Which property is especially associated with the ability of organisms to maintain life despite changing surroundings?","o":["Regulation","Crystallisation","Inertia","External deposition"],"a":"Regulation","e":"Regulatory mechanisms help living organisms maintain suitable internal conditions."},
+          {"q":"Which example demonstrates reproduction at the organism level?","o":["A bacterium dividing into two cells","A crystal increasing in size","A stone breaking","Water evaporating"],"a":"A bacterium dividing into two cells","e":"Binary fission produces new bacterial individuals and is a form of reproduction."},
+          {"q":"Which statement about growth in multicellular organisms is correct?","o":["It can involve cell division and cell enlargement","It occurs only by external deposition","It is unrelated to cells","It occurs only after reproduction"],"a":"It can involve cell division and cell enlargement","e":"Multicellular growth involves increases in cell number and/or cell size."},
+          {"q":"Which combination contains only properties associated with living organisms?","o":["Metabolism, cellular organisation and response to stimuli","Crystallisation, erosion and melting","Mass, volume and density","Reflection, refraction and diffraction"],"a":"Metabolism, cellular organisation and response to stimuli","e":"These are characteristic biological properties of living systems."},
+          {"q":"Which process converts simpler molecules into more complex cellular substances?","o":["Anabolism","Catabolism","Respiratory breakdown","Decomposition"],"a":"Anabolism","e":"Anabolic pathways synthesise complex substances from simpler precursors."},
+          {"q":"Which process converts complex substrates into simpler products?","o":["Catabolism","Anabolism","Biosynthesis","Polymerisation"],"a":"Catabolism","e":"Catabolic pathways degrade complex molecules into simpler products."},
+          {"q":"Which statement is correct regarding movement and life?","o":["All living organisms must locomote","Movement alone is sufficient to define life","Movement may occur in living organisms but is not by itself a defining property","Only animals move"],"a":"Movement may occur in living organisms but is not by itself a defining property","e":"Movement can occur in living systems, but non-living objects can also move when acted upon."},
+          {"q":"Which example shows that growth can occur in non-living matter?","o":["Crystal enlargement by deposition","Cell division","Embryonic development","Seed germination"],"a":"Crystal enlargement by deposition","e":"Crystals can become larger through deposition of material on their surfaces."},
+          {"q":"Which property distinguishes biological growth from crystal growth most clearly?","o":["Biological growth is associated with cellular processes","Both require no matter","Crystals contain cells","Biological growth is always external"],"a":"Biological growth is associated with cellular processes","e":"Biological growth results from cellular division and enlargement under metabolic control."},
+          {"q":"Which statement about reproduction and metabolism is correct?","o":["Reproduction can occur without any biological processes","Reproduction depends on cellular metabolic activities","Metabolism occurs only during reproduction","They are identical processes"],"a":"Reproduction depends on cellular metabolic activities","e":"Reproductive processes require organised cellular metabolism, although reproduction itself is not obligatory for every individual."},
+          {"q":"Which of the following is a response to an external stimulus?","o":["Pupil constriction in bright light","Crystal deposition","Stone weathering","Metal rusting without regulation"],"a":"Pupil constriction in bright light","e":"The pupil changes in response to light intensity, demonstrating stimulus-response behaviour."},
+          {"q":"Which statement best explains why living organisms are called dynamic systems?","o":["Their components continuously undergo regulated chemical reactions","They never change","They are made only of minerals","They cannot exchange matter"],"a":"Their components continuously undergo regulated chemical reactions","e":"Living organisms continuously perform metabolic reactions and exchange matter and energy with their surroundings."},
+          {"q":"Which level of organisation is the basic unit of life?","o":["Cell","Tissue","Organ","Organ system"],"a":"Cell","e":"The cell is the basic structural and functional unit of life."},
+          {"q":"Which statement about unicellular organisms is correct?","o":["They lack metabolism","One cell performs all essential life functions","They must have organs","They cannot reproduce"],"a":"One cell performs all essential life functions","e":"A unicellular organism is a complete living unit at the cellular level."},
+          {"q":"Which of the following is an example of cellular response to a stimulus?","o":["Guard cells changing turgor in response to environmental signals","Crystal growth","Rock fragmentation","Water boiling"],"a":"Guard cells changing turgor in response to environmental signals","e":"Guard cells regulate stomatal opening through stimulus-sensitive changes in turgor."},
+          {"q":"Which statement would be incorrect about defining properties of life?","o":["Metabolism is a defining property","Cellular organisation is fundamental","Growth alone is sufficient to define life","Living organisms respond to stimuli"],"a":"Growth alone is sufficient to define life","e":"Growth alone cannot define life because non-living objects such as crystals can grow."}
+          ]
+
+          # Remove duplicates and add the 40 new questions.
+          for obj in extra:
+              q=re.sub(r'\s+',' ',obj['q']).strip().lower()
+              if q not in seen:
+                  unique.append("{" + ",".join([f"q:{obj['q']!r}", f"o:{obj['o']!r}", f"a:{obj['a']!r}", f"e:{obj['e']!r}"]) + "}")
+                  seen.add(q)
+          if len(unique) < 70:
+              raise SystemExit(f'Only {len(unique)} unique MCQs available')
+          # Keep the first 70 unique questions.
+          selected = unique[:70]
+          s = s[:body_start] + ','.join(selected) + s[end:]
+          p.write_text(s, encoding='utf-8')
+          print(f'Final What is Living MCQs: {len(selected)}')
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed'
+            exit 0
+          fi
+          git commit -m 'Expand What is Living to 70 MCQs'
+          git push

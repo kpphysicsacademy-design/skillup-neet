@@ -1,0 +1,51 @@
+name: Fix What is Living Lesson MCQs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fix-what-is-living.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicate MCQs and keep 30 unique questions
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.index("'What is Living?':[")
+          end = s.index("],\n'Biological Classification'", start)
+          block = s[start + len("'What is Living?':["):end]
+          objects = re.findall(r"\{(?:[^{}\"']+|\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*')*\}", block)
+          if not objects: raise SystemExit('Could not find What is Living MCQs')
+          unique=[]; seen=set()
+          for obj in objects:
+              m=re.search(r"(?:['\"]q['\"]):(['\"])(.*?)\1",obj,re.S)
+              if not m: raise SystemExit('Could not read question text')
+              q=re.sub(r'\\([\\\"\'])',r'\1',m.group(2)).strip().lower()
+              if q in seen: continue
+              seen.add(q); unique.append(obj)
+          selected=unique[:30]
+          if len(selected)<30: raise SystemExit(f'Only {len(selected)} unique MCQs found')
+          new_block="'What is Living?':["+','.join(selected)+"]"
+          s=s[:start]+new_block+s[end+1:]
+          p.write_text(s,encoding='utf-8')
+          print(f'Original MCQ objects: {len(objects)}')
+          print(f'Unique MCQs found: {len(unique)}')
+          print('Final What is Living? MCQs: 30')
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Fix What is Living lesson MCQs'
+          git push

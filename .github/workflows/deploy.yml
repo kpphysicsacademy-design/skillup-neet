@@ -31,6 +31,63 @@ jobs:
         with:
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
+      - name: Repair Zoology test JavaScript
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('zoology-chapter-test.html')
+          html = p.read_text(encoding='utf-8')
+          m = re.search(r'<script>(.*?)</script>', html, re.S)
+          if not m:
+              raise SystemExit('Zoology test script not found')
+          js = m.group(1)
+          out=[]; i=0; quote=None; changed=False
+          while i < len(js):
+              c=js[i]
+              if quote is None:
+                  out.append(c)
+                  if c in "'\"`": quote=c
+                  i += 1
+                  continue
+              if c == '\\':
+                  out.append(c)
+                  if i+1 < len(js):
+                      out.append(js[i+1]); i += 2
+                  else: i += 1
+                  continue
+              if quote == "'" and c == "'":
+                  j=i+1
+                  while j < len(js) and js[j].isspace(): j += 1
+                  nxt=js[j] if j < len(js) else ''
+                  if nxt in ',]}:;)' or nxt == '':
+                      out.append(c); quote=None
+                  else:
+                      out.append("\\'"); changed=True
+                  i += 1
+                  continue
+              if c == quote:
+                  out.append(c); quote=None; i += 1; continue
+              out.append(c); i += 1
+          fixed=''.join(out)
+          p.write_text(html[:m.start(1)] + fixed + html[m.end(1):], encoding='utf-8')
+          print('Zoology test repair changed:', changed)
+
+      - name: Verify 30 Lesson 1 MCQs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          m=re.search(r"'What is Living\?':\[(.*?)\],\s*'",s,re.S)
+          if not m: raise SystemExit('What is Living dataset missing')
+          count=len(re.findall(r"\{q:'",m.group(1)))
+          print('What is Living MCQs:',count)
+          if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
+          Path('/tmp/zoology-test.js').write_text(re.search(r'<script>(.*?)</script>',s,re.S).group(1),encoding='utf-8')
+          PY
+          node --check /tmp/zoology-test.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:

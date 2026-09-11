@@ -24,18 +24,34 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
-          import re
 
           path = Path('zoology-chapter-test.html')
           html = path.read_text(encoding='utf-8')
 
-          pattern = r"'What is Living\?':\[.*?\],(?='[^']+':\[)"
-          new_html, count = re.subn(pattern, '', html, count=1, flags=re.S)
-          if count != 1:
-              raise SystemExit('What is Living dataset was not found or could not be removed.')
+          start_marker = "'What is Living?':"
+          next_marker = "'Biological Classification':"
 
+          start = html.find(start_marker)
+          if start < 0:
+              raise SystemExit('What is Living dataset not found.')
+
+          end = html.find(next_marker, start)
+          if end < 0:
+              raise SystemExit('Biological Classification dataset marker not found.')
+
+          # Remove the complete What is Living array and its separating comma.
+          new_html = html[:start] + html[end:]
           path.write_text(new_html, encoding='utf-8')
           print('Removed What is Living MCQ dataset.')
+
+      - name: Verify removal
+        shell: python
+        run: |
+          from pathlib import Path
+          html = Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          if "'What is Living?'" in html:
+              raise SystemExit('Verification failed: What is Living dataset still exists.')
+          print('Verified: What is Living MCQs are absent from zoology-chapter-test.html.')
 
       - name: Commit removal
         run: |

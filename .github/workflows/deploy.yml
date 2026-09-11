@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DEPLOY_VERSION: zoology-unit-lesson-path
+  DEPLOY_VERSION: uniformly-accelerated-motion
 
 jobs:
   deploy:
@@ -129,6 +129,21 @@ jobs:
           print('Zoology path: UNIT -> LESSONS verified')
           PY
 
+      - name: Verify Uniformly Accelerated Motion quiz wiring
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path('question-bank.html').read_text(encoding='utf-8')
+          bank=Path('uniformly-accelerated-motion-question-bank.js').read_text(encoding='utf-8')
+          if 'uniformly-accelerated-motion-question-bank.js' not in html:
+              raise SystemExit('Uniformly Accelerated Motion script is not loaded')
+          if "SkillUpMCQBanks['uniformly accelerated motion']" not in bank:
+              raise SystemExit('Uniformly Accelerated Motion bank is missing')
+          count=bank.count("{q:'")
+          print('Uniformly Accelerated Motion MCQs:',count)
+          if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
+          PY
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -137,7 +152,7 @@ jobs:
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+            path: .
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -1,0 +1,50 @@
+name: Remove What is Living MCQs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-what-is-living-mcqs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Remove What is Living dataset
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('zoology-chapter-test.html')
+          html = path.read_text(encoding='utf-8')
+
+          pattern = r"'What is Living\?':\[.*?\],(?='[^']+':\[)"
+          new_html, count = re.subn(pattern, '', html, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('What is Living dataset was not found or could not be removed.')
+
+          path.write_text(new_html, encoding='utf-8')
+          print('Removed What is Living MCQ dataset.')
+
+      - name: Commit removal
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Remove What is Living MCQs from Zoology tests'
+            git push
+          fi

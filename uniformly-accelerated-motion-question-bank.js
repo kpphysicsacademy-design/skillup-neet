@@ -32,6 +32,9 @@ window.SkillUpMCQBanks['uniformly accelerated motion']=[
 {q:'A particle moving with uniform acceleration has zero final velocity. Which statement is correct?',o:['Its acceleration must be zero','It may have been uniformly retarded','It must have moved with constant speed','Its displacement must be zero'],a:1,e:'A negative constant acceleration can reduce the velocity uniformly to zero.'},
 {q:'Which statement about uniformly accelerated motion is correct?',o:['Acceleration changes every second','Equal changes in velocity occur in equal time intervals','Velocity must remain constant','Displacement must be zero'],a:1,e:'That is the defining condition of uniform acceleration.'}
 ];
-(function patchUniformAccelerationRoute(){
+(function installUniformAccelerationRoute(){
  const key='uniformly accelerated motion';
- const patch=()=>{if(!window.SkillUpPhysicsBanks||typeof window.SkillUpPhysicsBanks.resolve!=='function')return false;const old=window.SkillUpPhysicsBanks.resolve;window.SkillUpPhysicsBanks.resolve=function(topic){const s=String(topic||'').toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');if(s==='uniformly-accelerated-motion'||s==='uniform-acceleration'||s==='uniformly-accelerated')return key;return old.call(this,topic)};return true};if(!patch()){let tries=0;const timer=setInterval(()=>{if(patch()||++tries>100)clearInterval(timer)},20)}})();
+ const normalize=s=>String(s||'').toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+ let current=null;
+ Object.defineProperty(window,'SkillUpPhysicsBanks',{configurable:true,get(){return current},set(v){current=v;if(!v||typeof v!=='object')return;let originalResolve;Object.defineProperty(v,'resolve',{configurable:true,get(){return function(topic){const n=normalize(topic);if(n==='uniformly-accelerated-motion'||n==='uniform-acceleration'||n==='uniformly-accelerated')return key;return typeof originalResolve==='function'?originalResolve.call(v,topic):null}},set(fn){originalResolve=fn}})}});
+})();

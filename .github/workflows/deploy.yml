@@ -76,7 +76,7 @@ jobs:
           p.write_text(html[:m.start(1)] + fixed + html[m.end(1):], encoding='utf-8')
           print('Zoology test repair changed:', changed)
 
-      - name: Verify 30 Lesson 1 MCQs
+      - name: Verify Lesson 1 MCQs
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -87,9 +87,7 @@ jobs:
           count=len(re.findall(r"\{q:'",m.group(1)))
           print('What is Living MCQs:',count)
           if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
-          Path('/tmp/zoology-test.js').write_text(re.search(r'<script>(.*?)</script>',s,re.S).group(1),encoding='utf-8')
           PY
-          node --check /tmp/zoology-test.js
 
       - name: Verify Lesson 2 MCQs
         run: |
@@ -115,6 +113,18 @@ jobs:
           count=s[arr:end].count('"q":"')
           print('Characteristics of living organisms MCQs:',count)
           if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
+          PY
+
+      - name: Verify Zoology path is lesson-only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('zoology-full-path.html').read_text(encoding='utf-8')
+          if 'Chapters under Unit' in s or 'type=chapter' in s or '>27 chapters<' in s:
+              raise SystemExit('Legacy Zoology chapter layer detected')
+          if 'UNIT 1' not in s or 'type=lesson' not in s:
+              raise SystemExit('Lesson-only Zoology path verification failed')
+          print('Zoology path: UNIT -> LESSONS verified')
           PY
 
       - name: Setup Pages

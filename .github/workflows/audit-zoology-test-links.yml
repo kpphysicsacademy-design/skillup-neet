@@ -47,16 +47,15 @@ jobs:
               r'(<a class="chapter" href=")([^"]+)("[^>]*>\s*<div class="chapter-head">.*?'
               r'<div class="title">([^<]+)</div>)', re.I | re.S)
 
-          checked = changed = 0
+          state = {'checked': 0, 'changed': 0}
           def fix(match):
-              nonlocal checked, changed
               prefix, href, suffix, title = match.groups()
               title = re.sub(r'\s+', ' ', title).strip()
-              checked += 1
+              state['checked'] += 1
               kind = 'chapter' if title in test_keys else 'lesson'
               new_href = 'zoology-chapter-test.html?chapter=' + quote(title, safe='') + '&type=' + kind
               if new_href != href:
-                  changed += 1
+                  state['changed'] += 1
                   return prefix + new_href + suffix
               return match.group(0)
 
@@ -74,8 +73,8 @@ jobs:
 
           path.write_text(html, encoding='utf-8')
           test_path.write_text(test_html, encoding='utf-8')
-          print(f'Checked cards: {checked}')
-          print(f'Rewritten links: {changed}')
+          print(f"Checked cards: {state['checked']}")
+          print(f"Rewritten links: {state['changed']}")
           print(f'Chapter datasets: {len(test_keys)}')
           print(f'Typed links: {len(links)}')
 

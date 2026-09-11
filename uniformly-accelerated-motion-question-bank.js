@@ -12,7 +12,7 @@ window.SkillUpMCQBanks['uniformly accelerated motion']=[
 {q:'For uniformly accelerated motion, which equation is correct?',o:['v = u + at','v = u + a/t','v = u/t + a','v = ua + t'],a:0,e:'The first equation of motion is v = u + at.'},
 {q:'Which equation relates velocity, acceleration and displacement without time?',o:['v = u + at','s = ut + ½at²','v² = u² + 2as','s = vt'],a:2,e:'The third equation of motion is v² = u² + 2as.'},
 {q:'The equation s = ut + ½at² is valid for:',o:['Any variable acceleration','Constant acceleration','Zero displacement only','Circular motion only'],a:1,e:'The standard equations of motion apply when acceleration is constant.'},
-{q:'A particle moving with initial velocity 20 m/s is retarded at 4 m/s². Its velocity after 3 s is:',o:['4 m/s','8 m/s','12 m/s','32 m/s'],a:0,e:'v = 20 + (-4)(3) = 8 m/s. Correct option is B.'},
+{q:'A particle moving with initial velocity 20 m/s is retarded at 4 m/s². Its velocity after 3 s is:',o:['4 m/s','8 m/s','12 m/s','32 m/s'],a:1,e:'v = 20 + (-4)(3) = 8 m/s.'},
 {q:'A body starts with velocity 20 m/s and acceleration -5 m/s². Time taken to stop is:',o:['2 s','4 s','5 s','10 s'],a:1,e:'At stopping, 0 = 20 - 5t, so t = 4 s.'},
 {q:'A ball is thrown vertically upward with speed 20 m/s. Taking g = 10 m/s², time to reach maximum height is:',o:['1 s','2 s','3 s','4 s'],a:1,e:'At maximum height v = 0. 0 = 20 - 10t, so t = 2 s.'},
 {q:'For the ball in the previous question, maximum height is:',o:['10 m','20 m','30 m','40 m'],a:1,e:'H = u²/(2g) = 400/20 = 20 m.'},
@@ -32,3 +32,6 @@ window.SkillUpMCQBanks['uniformly accelerated motion']=[
 {q:'A particle moving with uniform acceleration has zero final velocity. Which statement is correct?',o:['Its acceleration must be zero','It may have been uniformly retarded','It must have moved with constant speed','Its displacement must be zero'],a:1,e:'A negative constant acceleration can reduce the velocity uniformly to zero.'},
 {q:'Which statement about uniformly accelerated motion is correct?',o:['Acceleration changes every second','Equal changes in velocity occur in equal time intervals','Velocity must remain constant','Displacement must be zero'],a:1,e:'That is the defining condition of uniform acceleration.'}
 ];
+(function patchUniformAccelerationRoute(){
+ const key='uniformly accelerated motion';
+ const patch=()=>{if(!window.SkillUpPhysicsBanks||typeof window.SkillUpPhysicsBanks.resolve!=='function')return false;const old=window.SkillUpPhysicsBanks.resolve;window.SkillUpPhysicsBanks.resolve=function(topic){const s=String(topic||'').toLowerCase().replace(/[–—]/g,'-').replace(/&/g,'and').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');if(s==='uniformly-accelerated-motion'||s==='uniform-acceleration'||s==='uniformly-accelerated')return key;return old.call(this,topic)};return true};if(!patch()){let tries=0;const timer=setInterval(()=>{if(patch()||++tries>100)clearInterval(timer)},20)}})();

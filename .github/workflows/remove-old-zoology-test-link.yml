@@ -1,0 +1,48 @@
+name: Remove old Zoology test link
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  remove-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove old back link
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          old = '<a class="back" href="zoology-full-path.html">← Back to Zoology path</a>'
+          if old in s:
+              s = s.replace(old, '')
+              p.write_text(s, encoding='utf-8')
+              print('Removed old Zoology path link.')
+          else:
+              print('Old Zoology path link already absent.')
+
+      - name: Verify removal
+        run: |
+          ! grep -F 'Back to Zoology path' zoology-chapter-test.html
+          ! grep -F 'href="zoology-full-path.html"' zoology-chapter-test.html
+          echo 'Verified: old Zoology path link is absent.'
+
+      - name: Commit removal
+        run: |
+          if git diff --quiet -- zoology-chapter-test.html; then
+            echo 'No source change needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          git commit -m 'Remove old Zoology test back link'
+          git push

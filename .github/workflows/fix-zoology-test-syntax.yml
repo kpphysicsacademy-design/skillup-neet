@@ -54,23 +54,27 @@ jobs:
                       i += 1
                   continue
 
-              if c == quote:
-                  out.append(c)
-                  quote = None
-                  i += 1
-                  continue
-
-              # Only an ASCII apostrophe inside a single-quoted string needs repair.
               if quote == "'" and c == "'":
                   j = i + 1
                   while j < len(js) and js[j].isspace():
                       j += 1
                   nxt = js[j] if j < len(js) else ''
-                  if nxt not in ',]}:;)' and nxt != '':
+                  # A quote followed by a JS delimiter closes the string.
+                  if nxt in ',]}:;)' or nxt == '':
+                      out.append(c)
+                      quote = None
+                  else:
+                      # Otherwise it is an apostrophe inside the string.
                       out.append("\\'")
                       changed = True
-                      i += 1
-                      continue
+                  i += 1
+                  continue
+
+              if c == quote:
+                  out.append(c)
+                  quote = None
+                  i += 1
+                  continue
 
               out.append(c)
               i += 1

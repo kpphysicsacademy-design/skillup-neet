@@ -20,13 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - name: Fix Zoology lesson routing
+      - name: Validate and repair Zoology test routing
         shell: python
         run: |
           from pathlib import Path
-          from urllib.parse import urlparse, parse_qs, quote, unquote
+          from urllib.parse import quote, unquote
           import re
 
           path = Path('zoology-full-path.html')
@@ -34,85 +34,52 @@ jobs:
           html = path.read_text(encoding='utf-8')
           test_html = test_path.read_text(encoding='utf-8')
 
-          # Remove the obsolete What is Living? dataset completely.
-          test_html, removed = re.subn(
-              r"'What is Living\?':\[.*?\],(?='[^']+':\[)",
-              '', test_html, count=1, flags=re.S
-          )
-          if removed:
-              print('Removed What is Living? MCQ dataset.')
+          # Remove obsolete shared lesson aliases and the What is Living dataset.
+          test_html = re.sub(r"\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);", '', test_html, flags=re.S)
+          test_html = re.sub(r"'What is Living\?':\[.*?\],(?='[^']+':\[)", '', test_html, count=1, flags=re.S)
 
-          # Remove every old shared concept-alias block. Lessons must never
-          # inherit a chapter's MCQs.
-          test_html = re.sub(
-              r"\nconst conceptAliases=\{.*?\};\nObject\.assign\(tests,conceptAliases\);",
-              '', test_html, flags=re.S
-          )
-
-          # Extract real chapter datasets that remain in the test engine.
+          # Use actual remaining datasets as chapter datasets.
           test_keys = set(re.findall(r"(?m)^'([^']+)':\[", test_html))
           if not test_keys:
-              raise SystemExit('No Zoology chapter test datasets were found.')
+              raise SystemExit('No Zoology test datasets remain.')
 
           card_re = re.compile(
               r'(<a class="chapter" href=")([^"]+)("[^>]*>\s*<div class="chapter-head">.*?'
-              r'<div class="title">([^<]+)</div>)', re.I | re.S
-          )
+              r'<div class="title">([^<]+)</div>)', re.I | re.S)
 
-          checked = 0
-          changed = 0
-          unresolved = []
-
-          def replace_card(match):
+          checked = changed = 0
+          def fix(match):
               nonlocal checked, changed
               prefix, href, suffix, title = match.groups()
               title = re.sub(r'\s+', ' ', title).strip()
               checked += 1
-
-              # A title matching an actual dataset is a chapter test.
-              # Everything else is a lesson test and gets a unique key.
-              test_type = 'chapter' if title in test_keys else 'lesson'
-              new_href = (
-                  'zoology-chapter-test.html?chapter=' + quote(title, safe='') +
-                  '&type=' + test_type
-              )
-
+              kind = 'chapter' if title in test_keys else 'lesson'
+              new_href = 'zoology-chapter-test.html?chapter=' + quote(title, safe='') + '&type=' + kind
               if new_href != href:
                   changed += 1
                   return prefix + new_href + suffix
               return match.group(0)
 
-          html = card_re.sub(replace_card, html)
+          html = card_re.sub(fix, html)
 
-          # Validate that every card has an explicit type and chapter key.
-          links = re.findall(
-              r'zoology-chapter-test\.html\?chapter=([^&"]+)&type=(chapter|lesson)',
-              html,
-              flags=re.I
-          )
+          links = re.findall(r'zoology-chapter-test\.html\?chapter=([^&"]+)&type=(chapter|lesson)', html, re.I)
           if not links:
               raise SystemExit('No typed Zoology test links found.')
 
-          # No lesson is allowed to masquerade as an existing chapter dataset.
-          # Lessons without dedicated MCQs will correctly show "Test not available"
-          # until their lesson-specific datasets are added.
-          for encoded, kind in links:
-              title = unquote(encoded)
-              if kind.lower() == 'chapter' and title not in test_keys:
-                  unresolved.append(title)
-
-          if unresolved:
-              raise SystemExit('Chapter links without datasets: ' + ', '.join(sorted(set(unresolved))))
+          # Every chapter link must have a real dataset; lesson links intentionally
+          # remain available for later lesson-specific datasets.
+          bad = [unquote(k) for k, kind in links if kind.lower() == 'chapter' and unquote(k) not in test_keys]
+          if bad:
+              raise SystemExit('Invalid chapter datasets: ' + ', '.join(sorted(set(bad))))
 
           path.write_text(html, encoding='utf-8')
           test_path.write_text(test_html, encoding='utf-8')
+          print(f'Checked cards: {checked}')
+          print(f'Rewritten links: {changed}')
+          print(f'Chapter datasets: {len(test_keys)}')
+          print(f'Typed links: {len(links)}')
 
-          print(f'Checked Zoology cards: {checked}')
-          print(f'Rewritten typed links: {changed}')
-          print(f'Chapter datasets retained: {len(test_keys)}')
-          print(f'Typed test links: {len(links)}')
-
-      - name: Commit changes
+      - name: Commit repaired files
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
@@ -120,7 +87,7 @@ jobs:
           git add zoology-full-path.html zoology-chapter-test.html
           if git diff --cached --quiet; then
             echo 'No changes needed.'
-            exit 0
+          else
+            git commit -m 'Repair Zoology audit execution and test routing'
+            git push
           fi
-          git commit -m 'Separate Zoology lesson tests from chapter tests'
-          git push

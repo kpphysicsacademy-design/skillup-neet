@@ -65,7 +65,9 @@ jobs:
               ) for q, opts, ans, exp in qs
           ) + "],\n"
 
-          html2, removed = re.subn(r"'What is Living\?':\[.*?\],(?='[^']+':\[)", '', html, count=1, flags=re.S)
+          # Replace any existing Lesson 1 dataset, allowing whitespace before the next key.
+          pattern = r"'What is Living\?':\[.*?\],\s*(?='[^']+':\[)"
+          html2, removed = re.subn(pattern, '', html, count=1, flags=re.S)
           if removed > 1:
               raise SystemExit('Unexpected duplicate What is Living datasets')
 
@@ -82,7 +84,7 @@ jobs:
           from pathlib import Path
           import re
           html = Path('zoology-chapter-test.html').read_text(encoding='utf-8')
-          m = re.search(r"'What is Living\?':\[(.*?)\],\n'", html, re.S)
+          m = re.search(r"'What is Living\?':\[(.*?)\],\s*'", html, re.S)
           if not m:
               raise SystemExit('What is Living dataset missing')
           count = len(re.findall(r"\{q:'", m.group(1)))

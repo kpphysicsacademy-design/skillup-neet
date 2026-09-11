@@ -1,0 +1,141 @@
+name: Add Unit 1 Lesson 2 Characteristics MCQs
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/add-unit1-lesson2-characteristics-mcqs.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add 30 dedicated MCQs
+        shell: python
+        run: |
+          from pathlib import Path
+          import json
+
+          p = Path('zoology-chapter-test.html')
+          html = p.read_text(encoding='utf-8')
+          key = "'Characteristics of living organisms':"
+
+          questions = [
+            {"q":"Which characteristic is a fundamental feature of living organisms?","o":["Metabolism","Rusting","Crystallisation","Evaporation"],"a":"Metabolism","e":"Living organisms continuously perform coordinated biochemical reactions called metabolism."},
+            {"q":"The sum total of all biochemical reactions occurring in an organism is called:","o":["Metabolism","Growth","Reproduction","Locomotion"],"a":"Metabolism","e":"Metabolism includes all anabolic and catabolic reactions occurring in living cells."},
+            {"q":"Which process builds complex molecules from simpler molecules?","o":["Anabolism","Catabolism","Diffusion","Excretion"],"a":"Anabolism","e":"Anabolism is constructive metabolism and generally requires energy."},
+            {"q":"Which process breaks complex molecules into simpler molecules?","o":["Catabolism","Anabolism","Growth","Reproduction"],"a":"Catabolism","e":"Catabolism is degradative metabolism and commonly releases usable energy."},
+            {"q":"Which feature enables an organism to detect and respond to environmental changes?","o":["Response to stimuli","Crystal growth","Rusting","External deposition"],"a":"Response to stimuli","e":"Living organisms sense environmental stimuli and coordinate appropriate responses."},
+            {"q":"Which example best demonstrates response to a stimulus?","o":["A plant bending toward light","A crystal increasing in size","Iron rusting","Salt dissolving"],"a":"A plant bending toward light","e":"Phototropic movement is a response of a living plant to light."},
+            {"q":"Which statement about growth in living organisms is correct?","o":["It involves an increase in cell number or cell size","It always occurs by surface deposition","It occurs only in animals","It is absent in plants"],"a":"It involves an increase in cell number or cell size","e":"Biological growth commonly results from cellular enlargement and/or cell division."},
+            {"q":"Growth of a non-living crystal generally occurs by:","o":["External accumulation of material","Cell division","Metabolism","Reproduction"],"a":"External accumulation of material","e":"Non-living objects can grow by accumulation of material on their surface."},
+            {"q":"Why is reproduction not an all-inclusive defining property of individual living organisms?","o":["Some living organisms are sterile","Only plants reproduce","Reproduction is non-cellular","Animals never reproduce"],"a":"Some living organisms are sterile","e":"Mules and sterile worker bees are living organisms that cannot normally reproduce."},
+            {"q":"Which two broad types of reproduction occur in living organisms?","o":["Sexual and asexual","Anabolic and catabolic","Aerobic and anaerobic","Autotrophic and heterotrophic"],"a":"Sexual and asexual","e":"Reproduction may occur through sexual or asexual methods."},
+            {"q":"Which is an example of asexual reproduction?","o":["Binary fission in Amoeba","Fusion of gametes","Fertilisation","Syngamy"],"a":"Binary fission in Amoeba","e":"Amoeba reproduces asexually by binary fission without fusion of gametes."},
+            {"q":"Which event is characteristic of sexual reproduction?","o":["Fusion of gametes","Binary fission","Budding only","Fragmentation only"],"a":"Fusion of gametes","e":"Sexual reproduction involves formation and fusion of male and female gametes."},
+            {"q":"The basic structural and functional unit of a living organism is the:","o":["Cell","Tissue","Organ","Organ system"],"a":"Cell","e":"The cell is the fundamental structural and functional unit of life."},
+            {"q":"Cellular organisation means that living organisms are composed of:","o":["Cells","Crystals","Only organs","Only tissues"],"a":"Cells","e":"All living organisms possess cellular organisation, from unicellular organisms to complex multicellular organisms."},
+            {"q":"Which feature distinguishes living growth from crystal growth?","o":["Living growth is associated with cellular processes","Living growth is always external","Crystals perform metabolism","Crystals reproduce by cell division"],"a":"Living growth is associated with cellular processes","e":"Biological growth results from cellular activities, whereas crystals grow mainly through deposition."},
+            {"q":"Which statement about movement in living organisms is correct?","o":["Movement can occur internally without locomotion","Every living organism must locomote","Only animals show movement","Plants never show movement"],"a":"Movement can occur internally without locomotion","e":"Plants and other organisms may show internal or growth movements without locomotion from place to place."},
+            {"q":"Which characteristic is common to bacteria and humans?","o":["Metabolism","Organ systems","Tissue organisation","Locomotion"],"a":"Metabolism","e":"Both bacteria and humans are living organisms and perform metabolism despite different levels of organisation."},
+            {"q":"Which observation supports that a dormant seed is living?","o":["It resumes metabolism and germinates under suitable conditions","It grows by surface deposition","It lacks cells","It cannot respond to conditions"],"a":"It resumes metabolism and germinates under suitable conditions","e":"A dormant seed remains alive and resumes metabolic activity when favourable conditions are provided."},
+            {"q":"Which characteristic is NOT universal among individual living organisms?","o":["Reproduction","Metabolism","Cellular organisation","Response to stimuli"],"a":"Reproduction","e":"Reproduction is not universal at the individual level because some living organisms are sterile."},
+            {"q":"Which process directly provides energy and materials needed for cellular activities?","o":["Metabolism","Taxonomy","Nomenclature","Classification"],"a":"Metabolism","e":"Metabolic reactions transform nutrients and energy to support cellular functions."},
+            {"q":"Consciousness in biology includes the ability to:","o":["Sense and respond to environmental stimuli","Only think consciously like humans","Reproduce in every case","Perform locomotion only"],"a":"Sense and respond to environmental stimuli","e":"Biological consciousness includes sensing environmental changes and responding appropriately."},
+            {"q":"Which is a correct example of growth in a living organism?","o":["Increase in cell number in a developing plant","A crystal depositing salt","Rust formation","A stone accumulating dust"],"a":"Increase in cell number in a developing plant","e":"Cell division and enlargement contribute to biological growth."},
+            {"q":"Which statement about metabolism is correct?","o":["It occurs in living cells","It occurs only in animals","It is absent in microorganisms","It is identical to reproduction"],"a":"It occurs in living cells","e":"Metabolism is a defining property of living systems and occurs in their cells."},
+            {"q":"A metabolic pathway involving breakdown of glucose to release energy is primarily:","o":["Catabolic","Anabolic","Reproductive","Structural"],"a":"Catabolic","e":"Breakdown reactions such as cellular respiration are catabolic and release energy."},
+            {"q":"Formation of proteins from amino acids is an example of:","o":["Anabolism","Catabolism","Excretion","Locomotion"],"a":"Anabolism","e":"Protein synthesis builds a complex molecule from simpler units and is anabolic."},
+            {"q":"Which statement best describes living systems?","o":["They show organised and coordinated biochemical reactions","They never exchange matter with the environment","They are always multicellular","They must all locomote"],"a":"They show organised and coordinated biochemical reactions","e":"Living systems maintain organisation through coordinated biochemical processes and exchange matter and energy with their surroundings."},
+            {"q":"Which characteristic allows a plant shoot to grow toward light?","o":["Response to stimulus","External deposition","Non-cellular growth","Crystallisation"],"a":"Response to stimulus","e":"Phototropism demonstrates a coordinated response to the stimulus of light."},
+            {"q":"Which statement correctly compares living and non-living growth?","o":["Living growth is generally internal and cellular, while non-living growth may occur by external deposition","Both always grow by cell division","Non-living objects perform metabolism","Living organisms grow only by deposition"],"a":"Living growth is generally internal and cellular, while non-living growth may occur by external deposition","e":"This distinction is important when identifying biological growth."},
+            {"q":"Why is metabolism considered one of the most important defining features of life?","o":["Living cells continuously perform integrated biochemical reactions","Only crystals perform it","It occurs only after reproduction","It occurs only outside organisms"],"a":"Living cells continuously perform integrated biochemical reactions","e":"The continuous, coordinated metabolic activity of living cells is a major defining feature of life."},
+            {"q":"Which combination contains only characteristics associated with living organisms?","o":["Metabolism, cellular organisation and response to stimuli","Rusting, crystallisation and melting","External deposition, corrosion and evaporation","Only colour, size and shape"],"a":"Metabolism, cellular organisation and response to stimuli","e":"Living organisms show cellular organisation, metabolism and the ability to sense and respond to stimuli."}
+          ]
+
+          if len(questions) != 30:
+              raise SystemExit(f'Question source contains {len(questions)}, expected 30')
+
+          def dataset_end(text, key_start):
+              arr = text.find('[', key_start)
+              if arr < 0: raise SystemExit('Dataset opening bracket not found')
+              depth = 0; quote = None; esc = False
+              for i in range(arr, len(text)):
+                  c = text[i]
+                  if quote:
+                      if esc: esc = False
+                      elif c == '\\': esc = True
+                      elif c == quote: quote = None
+                      continue
+                  if c in "'\"`": quote = c; continue
+                  if c == '[': depth += 1
+                  elif c == ']':
+                      depth -= 1
+                      if depth == 0: return i + 1
+              raise SystemExit('Unclosed dataset')
+
+          if key in html:
+              start = html.index(key)
+              end = dataset_end(html, start)
+              if end < len(html) and html[end] == ',': end += 1
+              html = html[:start] + html[end:]
+
+          marker = "'What is Living?':"
+          if marker not in html:
+              raise SystemExit('What is Living dataset not found')
+          start = html.index(marker)
+          end = dataset_end(html, start)
+          dataset = key + json.dumps(questions, ensure_ascii=False, separators=(',', ':')) + ','
+          html = html[:end] + dataset + html[end:]
+          p.write_text(html, encoding='utf-8')
+
+      - name: Verify
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          key="'Characteristics of living organisms':"
+          if key not in s: raise SystemExit('Characteristics dataset missing')
+          start=s.index(key)
+          arr=s.index('[',start)
+          depth=0; quote=None; esc=False
+          end=None
+          for i in range(arr,len(s)):
+              c=s[i]
+              if quote:
+                  if esc: esc=False
+                  elif c=='\\': esc=True
+                  elif c==quote: quote=None
+                  continue
+              if c in "'\"`": quote=c
+              elif c=='[': depth+=1
+              elif c==']':
+                  depth-=1
+                  if depth==0: end=i+1; break
+          if end is None: raise SystemExit('Dataset not closed')
+          count=s[arr:end].count('"q":"')
+          print('Characteristics of living organisms MCQs:',count)
+          if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
+          js=re.search(r'<script>(.*?)</script>',s,re.S).group(1)
+          Path('/tmp/zoology-test.js').write_text(js,encoding='utf-8')
+          PY
+          node --check /tmp/zoology-test.js
+
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Add 30 MCQs for Characteristics of living organisms'
+            git push
+          fi

@@ -1,6 +1,5 @@
 /* SkillUp NEET Physics — Vector Addition and Subtraction — Level 1 (30 MCQs) */
 (() => {
-  const topic = 'vector addition and subtraction';
   const questions = [
     {q:'Two vectors of magnitudes 3 and 4 act in the same direction. Their resultant magnitude is:',o:['1','4','7','12'],a:2,e:'For vectors in the same direction, the resultant magnitude is the sum: 3 + 4 = 7.'},
     {q:'Two vectors of magnitudes 5 and 3 act in opposite directions. The magnitude of their resultant is:',o:['2','8','15','1'],a:0,e:'For opposite directions, the resultant magnitude is the difference: |5 − 3| = 2.'},
@@ -34,21 +33,6 @@
     {q:'If the resultant of two vectors A and B is perpendicular to A, then:',o:['A = B','A² + B² = 0','A² + AB cosθ = 0','B = 0'],a:2,e:'Since R·A = (A + B)·A = A² + AB cosθ = 0 for a perpendicular resultant.'},
     {q:'Which operation gives the vector difference A − B?',o:['A + B','A + (−B)','B + (−A)','|A| − |B| only'],a:1,e:'Vector subtraction is defined as adding the negative of the vector: A − B = A + (−B).'}
   ];
-
-  function render(){
-    const root=document.getElementById('question-container')||document.getElementById('questions-container')||document.body;
-    root.innerHTML='';
-    const title=document.createElement('h2'); title.textContent='Vector Addition and Subtraction — Level 1'; root.appendChild(title);
-    const progress=document.createElement('div'); progress.style.margin='10px 0'; root.appendChild(progress);
-    let i=0;
-    function show(){
-      root.querySelectorAll('.mcq-card').forEach(x=>x.remove());
-      const q=questions[i], card=document.createElement('div'); card.className='mcq-card';
-      const qn=document.createElement('h3'); qn.textContent=`Q${i+1}. ${q.q}`; card.appendChild(qn);
-      q.o.forEach((opt,idx)=>{const b=document.createElement('button'); b.type='button'; b.textContent=`${String.fromCharCode(65+idx)}) ${opt}`; b.style.display='block'; b.style.margin='8px 0'; b.addEventListener('click',()=>{card.querySelectorAll('button').forEach(x=>x.disabled=true); const r=document.createElement('p'); r.textContent=idx===q.a?`Correct. ${q.e}`:`Incorrect. Correct answer: ${String.fromCharCode(65+q.a)}) ${q.o[q.a]}. ${q.e}`; card.appendChild(r); if(i<questions.length-1){const n=document.createElement('button'); n.textContent='Next Question'; n.addEventListener('click',()=>{i++;show()}); card.appendChild(n)}}); card.appendChild(b)});
-      root.appendChild(card); progress.textContent=`Question ${i+1} of ${questions.length}`;
-    }
-    show();
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
+  window.SkillUpMCQBanks = window.SkillUpMCQBanks || {};
+  window.SkillUpMCQBanks['vector addition and subtraction'] = questions;
 })();

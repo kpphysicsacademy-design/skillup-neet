@@ -6,6 +6,9 @@ on:
     paths: ['.github/workflows/add-unit1-lesson1-mcqs.yml']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   add:
     runs-on: ubuntu-latest
@@ -64,7 +67,6 @@ jobs:
               ) for q, opts, ans, exp in qs
           ) + "],\n"
 
-          # Replace any existing Lesson 1 dataset, allowing whitespace before the next key.
           pattern = r"'What is Living\?':\[.*?\],\s*(?='[^']+':\[)"
           html2, removed = re.subn(pattern, '', html, count=1, flags=re.S)
           if removed > 1:

@@ -31,3 +31,10 @@ window.SkillUpMCQBanks['uniform and non-uniform motion']=[
 {q:'Which statement is correct?',o:['Uniform speed always means uniform velocity','Uniform velocity requires both constant speed and constant direction','Non-uniform motion always has zero acceleration','A body at rest has nonzero velocity'],a:1,e:'Velocity is constant only when both magnitude and direction remain constant.'},
 {q:'A body moves along a straight line with constant velocity 8 m/s. Its displacement in 5 s is:',o:['13 m','20 m','40 m','64 m'],a:2,e:'For constant velocity, displacement = vt = 8 × 5 = 40 m.'}
 ];
+/* Allow the separately loaded Uniformly Accelerated Motion bank to participate in the existing Physics resolver. */
+(()=>{
+ const bank=window.SkillUpMCQBanks['uniformly accelerated motion'];
+ if(!bank)return;
+ let current=null;
+ Object.defineProperty(window,'SkillUpPhysicsBanks',{configurable:true,get(){return current},set(v){current=v;if(current)current['Uniformly Accelerated Motion']=bank;}});
+})();

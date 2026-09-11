@@ -23,53 +23,61 @@ jobs:
         run: |
           from pathlib import Path
           import re
-          p = Path('zoology-chapter-test.html')
-          s = p.read_text(encoding='utf-8')
 
-          # Repair apostrophes inside single-quoted JS strings, e.g. NCERT's.
-          # Structural closing quotes are followed by JS delimiters such as
-          # comma, ], }, or colon; apostrophes inside words are escaped.
+          p = Path('zoology-chapter-test.html')
+          html = p.read_text(encoding='utf-8')
+          m = re.search(r'<script>(.*?)</script>', html, re.S)
+          if not m:
+              raise SystemExit('Test script not found')
+
+          js = m.group(1)
           out = []
           i = 0
-          in_single = False
+          quote = None
           changed = False
-          while i < len(s):
-              c = s[i]
-              if not in_single:
+
+          while i < len(js):
+              c = js[i]
+              if quote is None:
                   out.append(c)
-                  if c == "'" and (i == 0 or s[i-1] != '\\'):
-                      in_single = True
+                  if c in "'\"`":
+                      quote = c
                   i += 1
                   continue
 
-              if c == "\\":
+              if c == '\\':
                   out.append(c)
-                  if i + 1 < len(s):
-                      out.append(s[i+1])
+                  if i + 1 < len(js):
+                      out.append(js[i + 1])
                       i += 2
                   else:
                       i += 1
                   continue
 
-              if c == "'":
-                  j = i + 1
-                  while j < len(s) and s[j].isspace():
-                      j += 1
-                  nxt = s[j] if j < len(s) else ''
-                  if nxt in ',]}:;)' or nxt == '':
-                      out.append(c)
-                      in_single = False
-                  else:
-                      out.append("\\'")
-                      changed = True
+              if c == quote:
+                  out.append(c)
+                  quote = None
                   i += 1
                   continue
+
+              # Only an ASCII apostrophe inside a single-quoted string needs repair.
+              if quote == "'" and c == "'":
+                  j = i + 1
+                  while j < len(js) and js[j].isspace():
+                      j += 1
+                  nxt = js[j] if j < len(js) else ''
+                  if nxt not in ',]}:;)' and nxt != '':
+                      out.append("\\'")
+                      changed = True
+                      i += 1
+                      continue
 
               out.append(c)
               i += 1
 
-          fixed = ''.join(out)
-          p.write_text(fixed, encoding='utf-8')
+          fixed_js = ''.join(out)
+          fixed_html = html[:m.start(1)] + fixed_js + html[m.end(1):]
+          p.write_text(fixed_html, encoding='utf-8')
           print('Syntax repair changed file:', changed)
 
       - name: Verify JavaScript syntax
@@ -82,7 +90,6 @@ jobs:
           if not m:
               raise SystemExit('Test script not found')
           Path('/tmp/zoology-test.js').write_text(m.group(1), encoding='utf-8')
-          print('Extracted JavaScript for syntax validation')
           PY
           node --check /tmp/zoology-test.js
 

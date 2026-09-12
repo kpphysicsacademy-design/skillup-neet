@@ -17,18 +17,26 @@ jobs:
           const fs=require('fs');
           const p='zoology-full-path.html';
           let s=fs.readFileSync(p,'utf8');
-          if(s.includes("name:'The Living World'")) { console.log('Already present'); process.exit(0); }
-          const marker=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'What is Living?',icon:'🌱',desc:'Living characteristics, metabolism, consciousness and reproduction'},";
-          const add=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'The Living World',icon:'🌍',desc:'Characteristics of living organisms, biodiversity, taxonomy, nomenclature and species'},\n";
-          if(!s.includes(marker)) throw new Error('Unit 1 anchor not found');
-          s=s.replace(marker,marker+'\n'+add);
-          s=s.replace('CHAPTERS DONE','TOPICS DONE').replace('CHAPTERS','TOPICS').replace('Search Zoology chapters','Search Zoology topics').replace('No chapter matches your search.','No topic matches your search.');
-          s=s.replace('const chapters=[','const topics=[').replace(/chapters\.filter/g,'topics.filter').replace(/chapters\.length/g,'topics.length').replace(/chapters\.some/g,'topics.some');
+          if(!s.includes("name:'The Living World'")){
+            const anchor="name:'Animal Kingdom',icon:'🦁'";
+            const i=s.indexOf(anchor);
+            if(i<0) throw new Error('Animal Kingdom anchor not found');
+            const lineStart=s.lastIndexOf('{',i);
+            const lineEnd=s.indexOf('\n',i);
+            const insert=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'The Living World',icon:'🌍',desc:'Characteristics of living organisms, biodiversity, taxonomy, nomenclature and species'},\n";
+            s=s.slice(0,lineStart)+insert+s.slice(lineStart);
+          }
           fs.writeFileSync(p,s);
           NODE
       - name: Validate
         run: |
-          node -e "const fs=require('fs'),vm=require('vm'); const s=fs.readFileSync('zoology-full-path.html','utf8'); if(!s.includes(\"name:'The Living World'\")) throw new Error('chapter missing'); console.log('The Living World inserted into Unit 1');"
+          node - <<'NODE'
+          const fs=require('fs'); const s=fs.readFileSync('zoology-full-path.html','utf8');
+          if(!s.includes("name:'The Living World'")) throw new Error('chapter missing');
+          const a=s.indexOf("name:'What is Living?'"), b=s.indexOf("name:'The Living World'"), c=s.indexOf("name:'Biological Classification'"), d=s.indexOf("name:'Animal Kingdom'");
+          if(!(a<b && b<c && c<d)) throw new Error('Unit 1 order invalid');
+          console.log('Validated: What is Living? → The Living World → Biological Classification → Animal Kingdom');
+          NODE
       - name: Commit
         run: |
           git config user.name 'github-actions[bot]'

@@ -1,0 +1,36 @@
+name: Fix Biological Classification Blank Page
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: ${{ !contains(github.event.head_commit.message, 'Fix Biological Classification JavaScript separator') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair missing comma before BC extra MCQs
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* SKILLUP-BC-EXTRA-20 */'
+          bad='}'+marker
+          good='},'+marker
+          if bad in s and good not in s:
+              s=s.replace(bad,good,1)
+              p.write_text(s,encoding='utf-8')
+              print('Repaired missing comma before BC extra MCQs')
+          else:
+              print('No repair needed')
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zoology-chapter-test.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix Biological Classification JavaScript separator"
+          git push

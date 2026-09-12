@@ -10,56 +10,49 @@ permissions:
 
 jobs:
   fix:
-    if: ${{ !contains(github.event.head_commit.message, 'Fix Zoology quiz JavaScript syntax') }}
+    if: ${{ !contains(github.event.head_commit.message, 'Fix Zoology chapter quiz runtime') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Repair known Zoology data-string syntax
-        shell: python
+      - name: Rebuild Zoology quiz runtime from validated question data
+        shell: bash
         run: |
-          from pathlib import Path
-          p=Path('zoology-chapter-test.html')
-          s=p.read_text(encoding='utf-8')
-          replacements={
-            "NCERT's five-kingdom discussion":"NCERT’s five-kingdom discussion",
-            "Whittaker's five-kingdom classification":"Whittaker’s five-kingdom classification",
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const path='zoology-chapter-test.html';
+          const old=fs.readFileSync(path,'utf8');
+          const m=old.match(/const tests=([\s\S]*?);\nconst params=/);
+          if(!m) throw new Error('Could not locate Zoology question bank');
+          const tests=vm.runInNewContext('('+m[1]+')');
+          const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
+          for(const ch of chapters){
+            if(!Array.isArray(tests[ch]) || !tests[ch].length) throw new Error('Empty question bank: '+ch);
+            tests[ch]=tests[ch].slice(0,30);
+            console.log(ch+': '+tests[ch].length+' questions retained');
           }
-          changed=False
-          for old,new in replacements.items():
-              if old in s:
-                  s=s.replace(old,new)
-                  changed=True
-                  print('Repaired:',old)
-          p.write_text(s,encoding='utf-8')
-          print('changed=',changed)
+          const data=JSON.stringify(tests).replace(/</g,'\\u003c');
+          const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp NEET Zoology — Chapter Test</title><style>:root{--bg:#f7f7f7;--card:#fff;--text:#18212f;--muted:#687385;--brand:#58cc02;--brand2:#46a302;--danger:#ff4b4b;--border:#e5e7eb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.wrap{max-width:720px;margin:auto;padding:18px 14px 42px}.head{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);padding:12px 14px}.top{max-width:720px;margin:auto;display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;flex:none}.copy{flex:1}.title{font-size:clamp(20px,5vw,30px);font-weight:850;margin:0}.muted{color:var(--muted);font-size:13px}.stats{display:flex;gap:7px;font-size:13px;font-weight:800}.pill{background:#f1f3f5;border-radius:999px;padding:6px 8px}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;max-width:720px;margin:10px auto 0}.progress i{display:block;height:100%;width:0;background:var(--brand);border-radius:999px;transition:width .25s}.q{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px 16px;margin:18px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}.num{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:8px}.q h2{font-size:20px;line-height:1.35;margin:0 0 18px}.options{display:grid;gap:11px}.opt{width:100%;text-align:left;border:2px solid #dfe3e8;border-bottom:4px solid #cfd4da;border-radius:14px;padding:13px;background:#fff;cursor:pointer;font-weight:700;font-size:15px}.opt.correct{border-color:var(--brand);background:#eaffd9}.opt.wrong{border-color:var(--danger);background:#ffe5e5}.letter{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:9px;background:#f1f3f5;margin-right:8px}.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-weight:650}.feedback.show{display:block}.ok{background:#eaffd9;border:1px solid #b7e892}.no{background:#ffe5e5;border:1px solid #ffb3b3}.next{display:none;width:100%;border:0;border-radius:14px;padding:14px;margin-top:12px;background:var(--brand);color:#fff;font-size:16px;font-weight:850;box-shadow:0 4px 0 var(--brand2);cursor:pointer}.next.show{display:block}.result{text-align:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:28px 18px;margin-top:18px}.score{font-size:44px;font-weight:900}.xp{color:#b77900;font-weight:900}@media(max-width:480px){.stats{font-size:12px}.pill{padding:5px 6px}.q{padding:18px 13px}.q h2{font-size:18px}}</style></head><body><header class="head"><div class="top"><svg class="logo" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#58cc02"/><circle cx="22" cy="27" r="5" fill="#fff"/><circle cx="42" cy="27" r="5" fill="#fff"/><circle cx="22" cy="27" r="2"/><circle cx="42" cy="27" r="2"/><path d="M24 40q8 7 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><div class="copy"><h1 class="title" id="title">Zoology Chapter Test</h1><div class="muted">Learn • Practice • Master</div></div><div class="stats"><span class="pill">⭐ <b id="xp">0</b></span><span class="pill">🔥 <b id="streak">0</b></span></div></div><div class="progress"><i id="bar"></i></div></header><main class="wrap"><div id="content"></div></main><script>const tests='+data+';const params=new URLSearchParams(location.search);const chapter=params.get("chapter")||"";const type=params.get("type")||"chapter";const items=tests[chapter];const title=document.getElementById("title");const content=document.getElementById("content");const bar=document.getElementById("bar");const xpEl=document.getElementById("xp");const streakEl=document.getElementById("streak");let i=0,score=0,xp=0,streak=0;const esc=v=>String(v).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));function render(){if(!items){title.textContent="Zoology Test";content.innerHTML="<section class=\"q\"><h2>Test not available</h2><p class=\"muted\">Please return to the Zoology learning path and select a chapter test.</p></section>";return}title.textContent=chapter+" — "+(type==="lesson"?"Lesson Test":"Chapter Test");if(i>=items.length){bar.style.width="100%";content.innerHTML="<section class=\"result\"><div style=\"font-size:64px\">🏆</div><h2>Lesson complete!</h2><div class=\"score\">"+score+" / "+items.length+"</div><b>"+Math.round(score/items.length*100)+"% accuracy</b><p class=\"xp\">⭐ "+xp+" XP earned &nbsp; 🔥 "+streak+" current streak</p><button class=\"next show\" onclick=\"location.reload()\">🔄 Try Again</button></section>";return}const x=items[i];bar.style.width=(i/items.length*100)+"%";content.innerHTML="<section class=\"q\"><div class=\"num\">Question "+(i+1)+" of "+items.length+"</div><h2>"+esc(x.q)+"</h2><div class=\"options\">"+x.o.map((v,j)=>"<button class=\"opt\" data-j=\""+j+"\"><span class=\"letter\">"+String.fromCharCode(65+j)+"</span>"+esc(v)+"</button>").join("")+"</div><div id=\"feedback\" class=\"feedback\"></div><button id=\"next\" class=\"next\">Continue ➜</button></section>";document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(Number(b.dataset.j)));document.getElementById("next").onclick=()=>{i++;render();scrollTo({top:0,behavior:"smooth"})}}function answer(j){const x=items[i],buttons=[...document.querySelectorAll(".opt")],right=x.o.indexOf(x.a),f=document.getElementById("feedback");buttons.forEach(b=>b.disabled=true);buttons[right].classList.add("correct");if(j===right){score++;xp+=10;streak++;f.className="feedback show ok";f.innerHTML="🎉 <b>Correct! +10 XP</b><div>"+esc(x.e)+"</div>"}else{streak=0;buttons[j].classList.add("wrong");f.className="feedback show no";f.innerHTML="💪 <b>Not quite.</b> Correct answer: "+esc(x.a)+"<div>"+esc(x.e)+"</div>"}xpEl.textContent=xp;streakEl.textContent=streak;document.getElementById("next").classList.add("show");bar.style.width=((i+1)/items.length*100)+"%"}render();</script></body></html>';
+          fs.writeFileSync(path,html);
+          NODE
 
-      - name: Validate embedded JavaScript
-        shell: python
+      - name: Validate rebuilt page
+        shell: bash
         run: |
-          import re, subprocess
-          from pathlib import Path
-          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
-          m=re.search(r'<script>([\s\S]*?)</script><script id="duo-js">',s)
-          if not m: raise SystemExit('Main quiz script missing')
-          Path('/tmp/main-quiz.js').write_text(m.group(1),encoding='utf-8')
-          d=re.search(r'<script id="duo-js">([\s\S]*?)</script>',s)
-          if not d: raise SystemExit('Duolingo script missing')
-          Path('/tmp/duo.js').write_text(d.group(1),encoding='utf-8')
-          for f in ['/tmp/main-quiz.js','/tmp/duo.js']:
-              r=subprocess.run(['node','--check',f],capture_output=True,text=True)
-              if r.returncode:
-                  print(r.stdout);print(r.stderr);raise SystemExit(f+' has invalid JavaScript')
-              print(f,'PASS')
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          const m=s.match(/<script>([\s\S]*?)<\/script>/);if(!m)throw Error('script missing');
+          new vm.Script(m[1]);
+          const dm=s.match(/const tests=([\s\S]*?);const params=/);if(!dm)throw Error('tests missing');
+          const tests=vm.runInNewContext('('+dm[1]+')');
+          for(const ch of ['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy']){if(!Array.isArray(tests[ch])||!tests[ch].length)throw Error('Empty '+ch);if(tests[ch].length>30)throw Error(ch+' >30');console.log('PASS '+ch+': '+tests[ch].length)}
+          console.log('Rebuilt Zoology page JavaScript: PASS');
+          NODE
 
-      - name: Commit repaired Zoology page
+      - name: Commit repaired page
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo "No Zoology syntax changes needed."
-          else
-            git commit -m "Fix Zoology quiz JavaScript syntax"
-            git push
-          fi
+          if git diff --cached --quiet; then echo "No page changes needed."; else git commit -m "Fix Zoology chapter quiz runtime"; git push; fi

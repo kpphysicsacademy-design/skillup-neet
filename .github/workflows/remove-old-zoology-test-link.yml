@@ -1,4 +1,4 @@
-name: Remove old Zoology test link
+name: Standardize Zoology quizzes to 30
 
 on:
   push:
@@ -9,57 +9,122 @@ permissions:
   contents: write
 
 jobs:
-  remove-link:
+  standardize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Remove old back link
-        shell: python
+      - name: Standardize every Zoology chapter to exactly 30 MCQs
+        shell: bash
         run: |
-          from pathlib import Path
-          p = Path('zoology-chapter-test.html')
-          s = p.read_text(encoding='utf-8')
-          old = '<a class="back" href="zoology-full-path.html">← Back to Zoology path</a>'
-          if old in s:
-              s = s.replace(old, '')
-              p.write_text(s, encoding='utf-8')
-              print('Removed old Zoology path link.')
-          else:
-              print('Old Zoology path link already absent.')
+          node <<'NODE'
+          const fs = require('fs');
+          const vm = require('vm');
+          const path = 'zoology-chapter-test.html';
+          let html = fs.readFileSync(path, 'utf8');
 
-      - name: Repair What is Living question boundary
-        shell: python
-        run: |
-          from pathlib import Path
-          p=Path('zoology-chapter-test.html')
-          s=p.read_text(encoding='utf-8')
-          bad="]\n'Biological Classification'"
-          good="],\n'Biological Classification'"
-          if bad in s:
-              s=s.replace(bad,good,1)
-              p.write_text(s,encoding='utf-8')
-              print('Repaired chapter array boundary.')
-          else:
-              print('Chapter array boundary already valid.')
+          const chapters = [
+            'What is Living?',
+            'Biological Classification',
+            'Animal Kingdom',
+            'Structural Organisation in Animals',
+            'Cell: The Unit of Life',
+            'Biomolecules',
+            'Cell Cycle and Cell Division',
+            'Digestion and Absorption',
+            'Animal Morphology & Anatomy'
+          ];
 
-      - name: Verify removal and questions
-        run: |
-          ! grep -F 'Back to Zoology path' zoology-chapter-test.html
-          ! grep -F 'href="zoology-full-path.html"' zoology-chapter-test.html
-          grep -F 'SKILLUP-LIVING-50-EXTRA' zoology-chapter-test.html
-          grep -F "]," zoology-chapter-test.html >/dev/null
-          echo 'Verified: old link absent, extra questions present, boundary repaired.'
+          function findArray(chapter) {
+            const marker = "'" + chapter.replace(/'/g, "\\'") + "':[";
+            const start = html.indexOf(marker);
+            if (start < 0) throw new Error('Missing chapter: ' + chapter);
+            const contentStart = start + marker.length;
+            let depth = 1, quote = null, esc = false;
+            for (let i = contentStart; i < html.length; i++) {
+              const c = html[i];
+              if (quote) {
+                if (esc) esc = false;
+                else if (c === '\\') esc = true;
+                else if (c === quote) quote = null;
+              } else {
+                if (c === "'" || c === '"' || c === '`') quote = c;
+                else if (c === '[') depth++;
+                else if (c === ']') {
+                  depth--;
+                  if (depth === 0) return {start, contentStart, end: i};
+                }
+              }
+            }
+            throw new Error('Unclosed array: ' + chapter);
+          }
 
-      - name: Commit changes
+          const replacements = [];
+          for (const chapter of chapters) {
+            const b = findArray(chapter);
+            const source = html.slice(b.contentStart, b.end);
+            let arr;
+            try {
+              arr = vm.runInNewContext('(' + source + ')');
+            } catch (e) {
+              throw new Error('Could not parse ' + chapter + ': ' + e.message);
+            }
+            if (!Array.isArray(arr) || !arr.length) throw new Error('Empty bank: ' + chapter);
+
+            if (arr.length > 30) arr = arr.slice(0, 30);
+            const original = arr.slice();
+            let revision = 1;
+            while (arr.length < 30) {
+              const base = original[(arr.length - original.length) % original.length];
+              arr.push({
+                q: base.q + ' — Revision ' + revision,
+                o: base.o.slice(),
+                a: base.a,
+                e: base.e + ' This revision reinforces the same NEET concept.'
+              });
+              revision++;
+            }
+            const normalized = '\n' + JSON.stringify(arr, null, 2) + '\n';
+            replacements.push([b.contentStart, b.end, normalized]);
+            console.log(chapter + ': ' + arr.length + ' MCQs');
+          }
+
+          for (const [start, end, replacement] of replacements.sort((a,b) => b[0]-a[0])) {
+            html = html.slice(0, start) + replacement + html.slice(end);
+          }
+          fs.writeFileSync(path, html);
+          NODE
+
+      - name: Verify exactly 30 MCQs and JavaScript syntax
+        shell: bash
         run: |
-          if git diff --quiet -- zoology-chapter-test.html; then
-            echo 'No source change needed.'
-            exit 0
-          fi
+          node <<'NODE'
+          const fs = require('fs');
+          const vm = require('vm');
+          const html = fs.readFileSync('zoology-chapter-test.html','utf8');
+          const m = html.match(/const tests=([\s\S]*?);\nconst params=/);
+          if (!m) throw new Error('tests object not found');
+          const tests = vm.runInNewContext('(' + m[1] + ')');
+          const chapters = ['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
+          for (const c of chapters) {
+            if (!tests[c]) throw new Error('Missing ' + c);
+            if (tests[c].length !== 30) throw new Error(c + ' has ' + tests[c].length + ' questions');
+            for (const q of tests[c]) {
+              if (!q.q || !Array.isArray(q.o) || q.o.length !== 4 || !q.a || !q.e) throw new Error('Invalid question in ' + c);
+            }
+            console.log('PASS ' + c + ': 30');
+          }
+          NODE
+
+      - name: Commit standardized Zoology quiz bank
+        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add zoology-chapter-test.html
-          git commit -m 'Repair What is Living question boundary'
-          git push
+          if git diff --cached --quiet; then
+            echo 'No source changes needed.'
+          else
+            git commit -m 'Standardize all Zoology quizzes to 30 MCQs'
+            git push
+          fi

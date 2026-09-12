@@ -25,12 +25,47 @@ jobs:
               p.write_text(s,encoding='utf-8')
               print('Repaired missing comma before BC extra MCQs')
           else:
-              print('No repair needed')
+              print('No repair needed for BC separator')
+      - name: Repair unescaped apostrophes in JavaScript strings
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text(encoding='utf-8')
+          fixes={
+            "NCERT's five-kingdom discussion":"NCERT\\'s five-kingdom discussion",
+            "Whittaker's five-kingdom classification":"Whittaker\\'s five-kingdom classification",
+          }
+          changed=False
+          for old,new in fixes.items():
+              if old in s:
+                  s=s.replace(old,new)
+                  changed=True
+                  print('Escaped:',old)
+          p.write_text(s,encoding='utf-8')
+          if not changed:
+              print('No apostrophe repair needed')
+      - name: Validate Zoology JavaScript syntax
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const vm=require('vm');
+          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          const m=s.match(/<script>([\s\S]*?)<\/script><script id="duo-js">/);
+          if(!m) throw new Error('Main quiz script not found');
+          new vm.Script(m[1]);
+          console.log('Main quiz JavaScript: PASS');
+          const d=s.match(/<script id="duo-js">([\s\S]*?)<\/script>/);
+          if(!d) throw new Error('Duolingo script not found');
+          new vm.Script(d[1]);
+          console.log('Duolingo JavaScript: PASS');
+          NODE
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html
           git diff --cached --quiet && exit 0
-          git commit -m "Fix Biological Classification JavaScript separator"
+          git commit -m "Fix Zoology quiz JavaScript syntax"
           git push

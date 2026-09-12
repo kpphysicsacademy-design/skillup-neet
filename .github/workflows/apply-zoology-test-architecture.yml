@@ -19,6 +19,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Repair What is Living array boundary
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text(encoding='utf-8')
+          bad="]\n'Biological Classification'"
+          good="],\n'Biological Classification'"
+          if bad in s:
+              s=s.replace(bad,good,1)
+              p.write_text(s,encoding='utf-8')
+              print('Repaired What is Living array boundary.')
+          else:
+              print('What is Living array boundary already valid.')
+
       - name: Separate lesson and chapter test routing
         shell: python
         run: |
@@ -29,13 +44,6 @@ jobs:
           s = p.read_text(encoding='utf-8')
           original = s
 
-          # Explicitly classify the request. Lesson tests and chapter tests use
-          # separate routes, while preserving compatibility with old chapter URLs.
-          old = "const params=new URLSearchParams(location.search);\nconst raw=params.get('chapter')||'What is Living';\nconst chapter=raw==='What is Living?'?'What is Living?':raw;\nconst data=tests[chapter]||tests['What is Living?'];\ndocument.getElementById('title').textContent=chapter+' — Chapter Test';\ndocument.getElementById('content').innerHTML=data.map((x,i)=>`<section class=\\\"q\\\"><h2>${i+1}. ${x.q}</h2>${x.o.map((z,j)=>`<div class=\\\"opt\\\">${String.fromCharCode(65+j)}. ${z}</div>`).join('')}<div class=\\\"answer\\\">Answer: ${x.a}</div><div class=\\\"explain\\\">${x.e}</div></section>`).join('');"
-
-          # The deployed file has historically been minified and may contain
-          # whitespace variations. Replace the routing block by its stable
-          # surrounding markers rather than depending on the entire minified line.
           pattern = re.compile(r"const params=new URLSearchParams\(location\.search\);.*?document\.getElementById\('content'\)\.innerHTML=data\.map\(.*?\.join\(''\);", re.S)
           replacement = r'''const params=new URLSearchParams(location.search);
 const raw=params.get('chapter')||'';
@@ -74,5 +82,5 @@ if(!chapter||!data){
             echo 'No changes to commit.'
             exit 0
           fi
-          git commit -m 'Separate Zoology lesson and chapter test routing'
+          git commit -m 'Repair Zoology Living test and routing'
           git push

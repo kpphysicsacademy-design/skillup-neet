@@ -1,0 +1,38 @@
+name: Add The Living World chapter to Zoology Unit 1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/trigger-add-living-world.txt'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert chapter
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const p='zoology-full-path.html';
+          let s=fs.readFileSync(p,'utf8');
+          if(s.includes("name:'The Living World'")) { console.log('Already present'); process.exit(0); }
+          const marker=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'What is Living?',icon:'🌱',desc:'Living characteristics, metabolism, consciousness and reproduction'},";
+          const add=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'The Living World',icon:'🌍',desc:'Characteristics of living organisms, biodiversity, taxonomy, nomenclature and species'},\n";
+          if(!s.includes(marker)) throw new Error('Unit 1 anchor not found');
+          s=s.replace(marker,marker+'\n'+add);
+          s=s.replace('CHAPTERS DONE','TOPICS DONE').replace('CHAPTERS','TOPICS').replace('Search Zoology chapters','Search Zoology topics').replace('No chapter matches your search.','No topic matches your search.');
+          s=s.replace('const chapters=[','const topics=[').replace(/chapters\.filter/g,'topics.filter').replace(/chapters\.length/g,'topics.length').replace(/chapters\.some/g,'topics.some');
+          fs.writeFileSync(p,s);
+          NODE
+      - name: Validate
+        run: |
+          node -e "const fs=require('fs'),vm=require('vm'); const s=fs.readFileSync('zoology-full-path.html','utf8'); if(!s.includes(\"name:'The Living World'\")) throw new Error('chapter missing'); console.log('The Living World inserted into Unit 1');"
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-full-path.html
+          git commit -m 'Add The Living World chapter to Zoology Unit 1' || echo 'No changes'
+          git push

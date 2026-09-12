@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Remove malformed JavaScript line-continuation backslashes
+      - name: Repair malformed JavaScript separators
         shell: python
         run: |
           from pathlib import Path
@@ -20,11 +20,12 @@ jobs:
           s = p.read_text(encoding='utf-8')
           old = s
           s = s.replace(']\\', '],')
+          s = s.replace('],n', '],')
           if s == old:
-              print('No malformed ]\\ sequences found')
+              print('No malformed JavaScript separators found')
           else:
               p.write_text(s, encoding='utf-8')
-              print('Fixed malformed ]\\ sequences:', old.count(']\\'))
+              print('Fixed malformed separators')
       - name: Commit fix
         shell: bash
         run: |
@@ -35,5 +36,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add zoology-chapter-test.html
-          git commit -m 'Fix Zoology test JavaScript syntax'
+          git commit -m 'Fix remaining Zoology test JavaScript syntax'
           git push

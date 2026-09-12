@@ -1,0 +1,63 @@
+name: Remove Biology Home Options
+
+on:
+  push:
+    paths:
+      - '.github/trigger-remove-biology-home-options.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  remove-options:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove learning-mode cards and navigation options
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('biology-home.html')
+          s = p.read_text(encoding='utf-8')
+
+          start = s.find('<div class="section-title">CHOOSE YOUR LEARNING MODE</div>')
+          if start != -1:
+              end = s.find('<a class="back"', start)
+              if end == -1:
+                  raise SystemExit('Back link not found after learning-mode section')
+              s = s[:start] + s[end:]
+
+          nav_start = s.find('<nav class="nav">')
+          if nav_start != -1:
+              nav_end = s.find('</nav>', nav_start)
+              if nav_end == -1:
+                  raise SystemExit('Navigation closing tag not found')
+              nav_end += len('</nav>')
+              s = s[:nav_start] + s[nav_end:]
+
+          s = s.replace('with Learn, Practice and Master paths.', 'with the complete NEET Biology syllabus.')
+          s = s.replace('Master the complete NEET Biology syllabus one concept at a time with a focused journey from Learn to Practice to Master.', 'Explore the complete NEET Biology syllabus, organized unit by unit for focused NEET preparation.')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Validate
+        run: |
+          grep -q 'NEET Biology Syllabus' biology-home.html
+          ! grep -q 'CHOOSE YOUR LEARNING MODE' biology-home.html
+          ! grep -q '<section class="grid">' biology-home.html
+          ! grep -q '<nav class="nav">' biology-home.html
+          ! grep -q 'Start your Biology journey' biology-home.html
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add biology-home.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Remove learning options from Biology home'
+          git push

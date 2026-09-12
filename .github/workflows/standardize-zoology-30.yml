@@ -1,0 +1,301 @@
+name: Standardize Zoology Quizzes to 30
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/trigger-zoology-30.txt
+permissions:
+  contents: write
+jobs:
+  standardize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Standardize chapter banks
+        run: |
+          python3 <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('zoology-chapter-test.html')
+          text = path.read_text(encoding='utf-8')
+
+          chapters = [
+            'What is Living?',
+            'Biological Classification',
+            'Animal Kingdom',
+            'Structural Organisation in Animals',
+            'Cell: The Unit of Life',
+            'Biomolecules',
+            'Cell Cycle and Cell Division',
+            'Digestion and Absorption',
+            'Animal Morphology & Anatomy',
+          ]
+
+          extras = {
+            'Animal Kingdom': [
+              ('Which level of organisation is absent in sponges?', ['Tissue level', 'Organ level', 'Organ-system level', 'Cellular level'], 'Tissue level', 'Poriferans show cellular level of organisation and do not form true tissues.'),
+              ('The body of most cnidarians is:', ['Triploblastic', 'Diploblastic', 'Pseudocoelomate', 'Acoelomate triploblastic'], 'Diploblastic', 'Cnidarians are diploblastic, with ectoderm and endoderm separated by mesogloea.'),
+              ('Which symmetry is typical of adult echinoderms?', ['Bilateral', 'Radial', 'Asymmetrical', 'Spherical'], 'Radial', 'Adult echinoderms show radial symmetry, whereas their larvae are bilaterally symmetrical.'),
+              ('Which phylum is characterised by a mantle and muscular foot?', ['Mollusca', 'Annelida', 'Arthropoda', 'Chordata'], 'Mollusca', 'Molluscs generally possess a mantle, visceral mass and muscular foot.'),
+              ('The body of arthropods is covered by a:', ['Chitinous exoskeleton', 'Calcareous shell only', 'Siliceous wall', 'Cellulose wall'], 'Chitinous exoskeleton', 'Arthropods possess a chitinous exoskeleton that provides support and protection.'),
+              ('Which respiratory structure is characteristic of many aquatic arthropods?', ['Gills', 'Tracheae only', 'Book lungs only', 'Flame cells'], 'Gills', 'Many aquatic arthropods such as crustaceans exchange gases through gills.'),
+              ('Which group includes earthworms?', ['Annelida', 'Mollusca', 'Arthropoda', 'Aschelminthes'], 'Annelida', 'Earthworms are segmented annelids with a true coelom and organ-system level organisation.'),
+              ('Which group includes roundworms?', ['Aschelminthes', 'Annelida', 'Porifera', 'Echinodermata'], 'Aschelminthes', 'Roundworms are placed in Aschelminthes in the traditional NCERT animal classification.'),
+              ('Which phylum includes tapeworms?', ['Platyhelminthes', 'Cnidaria', 'Annelida', 'Mollusca'], 'Platyhelminthes', 'Tapeworms are flatworms belonging to Platyhelminthes.'),
+              ('The specialised cells of sponges responsible for water current are:', ['Choanocytes', 'Cnidocytes', 'Nephridia', 'Flame cells'], 'Choanocytes', 'Choanocytes or collar cells create water currents and help in food capture in sponges.'),
+              ('The digestive cavity of cnidarians is called:', ['Gastrovascular cavity', 'Haemocoel', 'Coelom', 'Pseudocoel'], 'Gastrovascular cavity', 'Cnidarians possess a gastrovascular cavity with a single opening serving as mouth and anus.'),
+              ('Which animal is a classic example of a cnidarian?', ['Hydra', 'Earthworm', 'Cockroach', 'Starfish'], 'Hydra', 'Hydra is a freshwater cnidarian showing radial symmetry and cnidoblasts.'),
+              ('Which animal belongs to Echinodermata?', ['Starfish', 'Snail', 'Prawn', 'Leech'], 'Starfish', 'Starfish are echinoderms with a water vascular system and adult radial symmetry.'),
+              ('Which animal belongs to Mollusca?', ['Pila', 'Ascaris', 'Sycon', 'Aurelia'], 'Pila', 'Pila is an example of a mollusc with a muscular foot and mantle.'),
+              ('Which feature is characteristic of annelids?', ['True coelom and metameric segmentation', 'Water canal system', 'Cnidoblasts', 'Water vascular system'], 'True coelom and metameric segmentation', 'Annelids possess a true coelom and show metameric segmentation.'),
+              ('Which phylum contains animals with jointed appendages?', ['Arthropoda', 'Porifera', 'Cnidaria', 'Platyhelminthes'], 'Arthropoda', 'Jointed appendages are a defining feature of arthropods.'),
+              ('The notochord is a defining feature of:', ['Chordata', 'Mollusca', 'Annelida', 'Echinodermata'], 'Chordata', 'Chordates possess a notochord at least during some stage of development.'),
+              ('Which chordate feature is a hollow structure located dorsally?', ['Dorsal hollow nerve cord', 'Ventral solid nerve cord', 'Water canal', 'Haemocoel'], 'Dorsal hollow nerve cord', 'A dorsal hollow nerve cord is one of the fundamental chordate characters.'),
+              ('Which animal is an example of a non-chordate?', ['Earthworm', 'Fish', 'Frog', 'Bird'], 'Earthworm', 'Earthworms are annelids and therefore non-chordates.'),
+              ('Which phylum has the greatest diversity of described animal species?', ['Arthropoda', 'Chordata', 'Mollusca', 'Annelida'], 'Arthropoda', 'Arthropoda is the largest and most diverse animal phylum.'),
+            ],
+            'Structural Organisation in Animals': [
+              ('Which epithelial tissue is suited for secretion and absorption in kidney tubules?', ['Simple cuboidal epithelium', 'Simple squamous epithelium', 'Stratified squamous epithelium', 'Ciliated columnar epithelium'], 'Simple cuboidal epithelium', 'Simple cuboidal epithelium commonly lines kidney tubules and performs absorption and secretion.'),
+              ('Which epithelium lines the intestine?', ['Simple columnar epithelium', 'Simple squamous epithelium', 'Stratified cuboidal epithelium', 'Transitional epithelium'], 'Simple columnar epithelium', 'The intestinal lining is mainly simple columnar epithelium with absorptive and secretory specialisations.'),
+              ('Goblet cells mainly secrete:', ['Mucus', 'Bile', 'Insulin', 'Adrenaline'], 'Mucus', 'Goblet cells are unicellular glands that secrete mucus for lubrication and protection.'),
+              ('Which connective tissue has a fluid matrix?', ['Blood', 'Cartilage', 'Bone', 'Adipose tissue'], 'Blood', 'Blood has a fluid extracellular matrix called plasma.'),
+              ('The matrix of cartilage is rich in:', ['Chondroitin salts', 'Haemoglobin', 'Keratin only', 'Myosin'], 'Chondroitin salts', 'Cartilage matrix contains chondroitin salts and is firm but flexible.'),
+              ('Which tissue forms the internal skeleton of vertebrates?', ['Bone', 'Areolar tissue', 'Adipose tissue', 'Epithelium'], 'Bone', 'Bone is a hard connective tissue that forms the vertebrate endoskeleton.'),
+              ('Which muscle is multinucleate and voluntary?', ['Skeletal muscle', 'Smooth muscle', 'Cardiac muscle', 'Glandular tissue'], 'Skeletal muscle', 'Skeletal muscle fibres are striated, multinucleate and generally under voluntary control.'),
+              ('Cardiac muscle is characterised by:', ['Branching fibres and intercalated discs', 'Long unbranched fibres without junctions', 'No striations', 'Voluntary contraction'], 'Branching fibres and intercalated discs', 'Cardiac fibres branch and connect through intercalated discs for coordinated contraction.'),
+              ('Neuroglia primarily:', ['Support and protect neurons', 'Contract the heart', 'Secrete bile', 'Digest food'], 'Support and protect neurons', 'Neuroglial cells provide support, nourishment, insulation and protection to neurons.'),
+              ('The fluid connective tissue that transports gases and nutrients is:', ['Blood', 'Cartilage', 'Bone', 'Tendon'], 'Blood', 'Blood transports gases, nutrients, wastes, hormones and immune components.'),
+              ('Which tissue is commonly found beneath epithelia and fills spaces between organs?', ['Areolar tissue', 'Bone', 'Cartilage', 'Cardiac muscle'], 'Areolar tissue', 'Areolar connective tissue supports epithelia and fills spaces between organs and tissues.'),
+              ('Ligaments are generally:', ['Elastic and connect bone to bone', 'Inelastic and connect muscle to bone', 'Fluid and transport gases', 'Contractile and striated'], 'Elastic and connect bone to bone', 'Ligaments connect bones and have greater elasticity than tendons.'),
+              ('Tendons are generally:', ['Strong and connect muscle to bone', 'Fluid and vascular', 'Cartilaginous and hollow', 'Contractile and involuntary'], 'Strong and connect muscle to bone', 'Tendons are strong fibrous structures that attach muscles to bones.'),
+              ('Which tissue is specialised for rapid communication?', ['Nervous tissue', 'Adipose tissue', 'Bone', 'Cartilage'], 'Nervous tissue', 'Nervous tissue transmits electrical signals rapidly through neurons.'),
+              ('The basic functional unit of nervous tissue is the:', ['Neuron', 'Osteocyte', 'Adipocyte', 'Chondrocyte'], 'Neuron', 'Neurons are specialised cells that receive and transmit nerve impulses.'),
+              ('Which epithelial tissue has multiple layers and protects against abrasion?', ['Stratified squamous epithelium', 'Simple squamous epithelium', 'Simple cuboidal epithelium', 'Simple columnar epithelium'], 'Stratified squamous epithelium', 'Multiple layers provide protection against mechanical abrasion, as in skin and oral cavity.'),
+              ('Which tissue has cells embedded in a mineralised matrix?', ['Bone', 'Blood', 'Areolar tissue', 'Adipose tissue'], 'Bone', 'Bone matrix is mineralised mainly with calcium salts, providing hardness and support.'),
+              ('Which muscle tissue is found in the wall of the intestine?', ['Smooth muscle', 'Skeletal muscle', 'Cardiac muscle', 'Striated voluntary muscle'], 'Smooth muscle', 'Walls of hollow organs such as the intestine contain involuntary smooth muscle.'),
+              ('Which tissue is specialised for storing energy as lipid?', ['Adipose tissue', 'Cartilage', 'Nervous tissue', 'Epithelium'], 'Adipose tissue', 'Adipocytes store triglycerides and provide energy reserve and insulation.'),
+              ('Which junction helps cardiac muscle cells communicate electrically?', ['Intercalated disc', 'Tight junction only', 'Desmosome only', 'Synaptic cleft'], 'Intercalated disc', 'Intercalated discs contain specialised junctions that coordinate cardiac contraction.'),
+            ],
+            'Cell: The Unit of Life': [
+              ('Which structure controls movement of substances into and out of the cell?', ['Plasma membrane', 'Cell wall', 'Nucleolus', 'Golgi body'], 'Plasma membrane', 'The plasma membrane is selectively permeable and regulates exchange with the surroundings.'),
+              ('Which organelle is the main site of aerobic respiration?', ['Mitochondrion', 'Ribosome', 'Golgi apparatus', 'Lysosome'], 'Mitochondrion', 'Mitochondria generate most ATP through aerobic respiration.'),
+              ('Smooth endoplasmic reticulum is important in:', ['Lipid synthesis and detoxification', 'Protein translation', 'Chromosome segregation', 'Cell wall formation only'], 'Lipid synthesis and detoxification', 'Smooth ER participates in lipid synthesis and detoxification, especially in liver cells.'),
+              ('Which organelle modifies proteins received from the ER?', ['Golgi apparatus', 'Ribosome', 'Centrosome', 'Nucleolus'], 'Golgi apparatus', 'Golgi stacks modify, sort and package proteins and lipids.'),
+              ('Which organelle is known for intracellular digestion?', ['Lysosome', 'Mitochondrion', 'Chloroplast', 'Ribosome'], 'Lysosome', 'Lysosomes contain hydrolytic enzymes for digestion of cellular materials.'),
+              ('Which plastid is mainly responsible for photosynthesis?', ['Chloroplast', 'Leucoplast', 'Chromoplast', 'Amyloplast only'], 'Chloroplast', 'Chloroplasts contain chlorophyll and carry out photosynthesis in plant cells.'),
+              ('Which organelle stores cell sap in mature plant cells?', ['Vacuole', 'Ribosome', 'Centrosome', 'Lysosome'], 'Vacuole', 'The large central vacuole stores cell sap and helps maintain turgor in plant cells.'),
+              ('The cell wall of plants is mainly composed of:', ['Cellulose', 'Chitin', 'Peptidoglycan', 'Glycogen'], 'Cellulose', 'Plant cell walls are mainly composed of cellulose, with hemicellulose and pectin also present.'),
+              ('Which structure contains chromatin?', ['Nucleus', 'Golgi apparatus', 'Lysosome', 'Vacuole'], 'Nucleus', 'Chromatin consists of DNA and associated proteins and is housed in the nucleus of eukaryotic cells.'),
+              ('Ribosomes are composed mainly of:', ['rRNA and proteins', 'DNA and lipids', 'Cellulose and protein', 'Only phospholipids'], 'rRNA and proteins', 'Ribosomes are ribonucleoprotein complexes made of rRNA and proteins.'),
+              ('Which organelle is semiautonomous?', ['Mitochondrion', 'Golgi apparatus', 'Lysosome', 'Vacuole'], 'Mitochondrion', 'Mitochondria contain their own DNA and ribosomes and can synthesise some of their proteins.'),
+              ('Which cell structure is absent in prokaryotes?', ['Membrane-bound nucleus', 'Ribosome', 'Plasma membrane', 'Cytoplasm'], 'Membrane-bound nucleus', 'Prokaryotes lack a membrane-bound nucleus but possess DNA in a nucleoid region.'),
+              ('70S ribosomes occur in:', ['Prokaryotes and organelles such as mitochondria', 'Only animal cytoplasm', 'Only plant nuclei', 'Golgi apparatus'], 'Prokaryotes and organelles such as mitochondria', 'Prokaryotic cells have 70S ribosomes; mitochondria and chloroplasts also contain 70S-type ribosomes.'),
+              ('Which structure is involved in spindle formation in animal cells?', ['Centrosome', 'Lysosome', 'Golgi apparatus', 'Vacuole'], 'Centrosome', 'The centrosome contains centrioles and organises microtubules during cell division in animal cells.'),
+              ('The plasma membrane is mainly composed of:', ['Lipids and proteins', 'Cellulose and starch', 'Chitin and DNA', 'Only proteins'], 'Lipids and proteins', 'A phospholipid bilayer with embedded proteins forms the basic structure of the plasma membrane.'),
+              ('Which process moves water across a selectively permeable membrane?', ['Osmosis', 'Phagocytosis', 'Exocytosis', 'Active transport only'], 'Osmosis', 'Osmosis is the movement of water across a selectively permeable membrane down its water potential gradient.'),
+              ('Which process requires cellular energy to move substances against a gradient?', ['Active transport', 'Simple diffusion', 'Osmosis', 'Facilitated diffusion only'], 'Active transport', 'Active transport uses metabolic energy to move substances against their concentration or electrochemical gradient.'),
+              ('Which organelle contains its own circular DNA in eukaryotic cells?', ['Mitochondrion', 'Golgi apparatus', 'Lysosome', 'Endosome'], 'Mitochondrion', 'Mitochondria possess circular DNA, supporting their endosymbiotic origin.'),
+              ('Which organelle is associated with packaging materials into vesicles?', ['Golgi apparatus', 'Ribosome', 'Nucleolus', 'Centrosome'], 'Golgi apparatus', 'The Golgi apparatus sorts and packages materials into transport and secretory vesicles.'),
+              ('Which structure connects the nucleus with the cytoplasm through nuclear pores?', ['Nuclear envelope', 'Cell wall', 'Tonoplast', 'Capsule'], 'Nuclear envelope', 'The double nuclear envelope contains pores that regulate exchange between nucleus and cytoplasm.'),
+            ],
+            'Biomolecules': [
+              ('Which sugar is a monosaccharide?', ['Glucose', 'Sucrose', 'Starch', 'Glycogen'], 'Glucose', 'Glucose is a six-carbon monosaccharide and an important cellular fuel.'),
+              ('Sucrose is composed of:', ['Glucose and fructose', 'Glucose and galactose', 'Fructose and ribose', 'Two amino acids'], 'Glucose and fructose', 'Sucrose is a disaccharide formed from glucose and fructose.'),
+              ('The storage polysaccharide in plants is:', ['Starch', 'Glycogen', 'Cellulose', 'Chitin'], 'Starch', 'Plants store excess carbohydrate mainly as starch.'),
+              ('Which bond links monosaccharides in polysaccharides?', ['Glycosidic bond', 'Peptide bond', 'Phosphodiester bond', 'Disulfide bond'], 'Glycosidic bond', 'Glycosidic bonds join monosaccharide units in carbohydrates.'),
+              ('Which bond links nucleotides in a nucleic acid strand?', ['Phosphodiester bond', 'Peptide bond', 'Glycosidic bond', 'Ionic bond'], 'Phosphodiester bond', 'Nucleotides are linked through 3′-5′ phosphodiester bonds.'),
+              ('Which component of a nucleotide determines whether it contains adenine, guanine, cytosine or thymine?', ['Nitrogenous base', 'Phosphate', 'Pentose only', 'Fatty acid'], 'Nitrogenous base', 'The nitrogenous base is the variable component of a nucleotide.'),
+              ('Which vitamin is water-soluble?', ['Vitamin C', 'Vitamin A', 'Vitamin D', 'Vitamin E'], 'Vitamin C', 'Vitamin C is water-soluble; vitamins A, D, E and K are generally fat-soluble.'),
+              ('Which lipid is a major component of cell membranes?', ['Phospholipid', 'Glycogen', 'Cellulose', 'Starch'], 'Phospholipid', 'Phospholipids form the structural bilayer of biological membranes.'),
+              ('Cholesterol belongs to the class of:', ['Steroids', 'Polysaccharides', 'Proteins', 'Nucleic acids'], 'Steroids', 'Cholesterol is a sterol, a steroid lipid important in animal membranes and hormone synthesis.'),
+              ('Which amino acid property contributes to protein diversity?', ['Different side chains', 'Identical side chains in all amino acids', 'Absence of amino groups', 'Presence of phosphate in every amino acid'], 'Different side chains', 'Amino acids differ mainly in their side chains, which influence protein structure and function.'),
+              ('The primary structure of a protein refers to its:', ['Amino acid sequence', 'Three-dimensional folding only', 'Subunit arrangement only', 'Hydrogen-bond pattern only'], 'Amino acid sequence', 'Primary structure is the linear sequence of amino acids in a polypeptide.'),
+              ('Denaturation of a protein generally affects:', ['Higher-order structure', 'The peptide sequence first', 'The number of amino acids', 'The genetic code'], 'Higher-order structure', 'Denaturation disrupts secondary, tertiary or quaternary structure without necessarily breaking peptide bonds.'),
+              ('Which enzyme breaks down starch?', ['Amylase', 'Pepsin', 'Lipase', 'Nuclease'], 'Amylase', 'Amylases hydrolyse starch into smaller carbohydrates.'),
+              ('Which enzyme hydrolyses fats?', ['Lipase', 'Amylase', 'Pepsin', 'Trypsin'], 'Lipase', 'Lipases catalyse hydrolysis of triglycerides into fatty acids and glycerol or related products.'),
+              ('Which enzyme begins protein digestion in the stomach?', ['Pepsin', 'Amylase', 'Lipase', 'Maltase'], 'Pepsin', 'Pepsin is the major protease active in the acidic stomach.'),
+              ('Which nucleic acid generally acts as the genetic material in most organisms?', ['DNA', 'ATP', 'Protein', 'Lipid'], 'DNA', 'DNA stores hereditary information in most organisms, although some viruses use RNA.'),
+              ('Which base pairs with adenine in DNA?', ['Thymine', 'Uracil', 'Cytosine', 'Guanine'], 'Thymine', 'In DNA, adenine forms hydrogen bonds with thymine.'),
+              ('Which base pairs with guanine in DNA?', ['Cytosine', 'Thymine', 'Uracil', 'Adenine'], 'Cytosine', 'Guanine and cytosine form a complementary base pair.'),
+              ('Which molecule acts as the immediate energy currency of cells?', ['ATP', 'DNA', 'Cellulose', 'Cholesterol'], 'ATP', 'ATP stores and transfers usable chemical energy for cellular processes.'),
+              ('Which biomolecule category includes haemoglobin?', ['Protein', 'Lipid', 'Carbohydrate', 'Nucleic acid'], 'Protein', 'Haemoglobin is a globular conjugated protein involved in oxygen transport.'),
+            ],
+            'Cell Cycle and Cell Division': [
+              ('The G1 phase mainly involves:', ['Cell growth and normal metabolism', 'DNA replication', 'Chromosome separation', 'Cytokinesis only'], 'Cell growth and normal metabolism', 'G1 is a growth phase in which the cell performs normal functions and prepares for DNA synthesis.'),
+              ('The G2 phase occurs:', ['After DNA replication and before mitosis', 'Before G1', 'During cytokinesis only', 'After meiosis II only'], 'After DNA replication and before mitosis', 'G2 follows S phase and prepares the cell for mitosis.'),
+              ('During prophase of mitosis:', ['Chromatin condenses into chromosomes', 'Chromosomes align at equator', 'Sister chromatids separate', 'Nuclear envelope reforms'], 'Chromatin condenses into chromosomes', 'Prophase involves chromosome condensation and formation of the mitotic spindle.'),
+              ('The spindle fibres attach to chromosomes at the:', ['Kinetochore region of centromere', 'Nucleolus', 'Telomere only', 'Cell wall'], 'Kinetochore region of centromere', 'Spindle microtubules attach to kinetochores associated with centromeres.'),
+              ('In telophase:', ['Nuclear envelopes reform', 'DNA replicates', 'Crossing over begins', 'Centromeres first split'], 'Nuclear envelopes reform', 'Telophase reverses many prophase changes and produces daughter nuclei.'),
+              ('Meiosis I is called reduction division because:', ['Homologous chromosomes separate and chromosome number is halved', 'Sister chromatids separate without reduction', 'DNA is not present', 'Cytoplasm doubles'], 'Homologous chromosomes separate and chromosome number is halved', 'Meiosis I separates homologous chromosomes, reducing ploidy from diploid to haploid.'),
+              ('Meiosis II resembles mitosis because:', ['Sister chromatids separate', 'Homologous chromosomes pair', 'Crossing over occurs', 'DNA replicates before it'], 'Sister chromatids separate', 'Meiosis II separates sister chromatids without another round of DNA replication.'),
+              ('Chiasmata are visible manifestations of:', ['Crossing over', 'DNA replication', 'Cytokinesis', 'Transcription'], 'Crossing over', 'Chiasmata mark sites where homologous chromosomes have exchanged segments.'),
+              ('Synapsis occurs between:', ['Homologous chromosomes', 'Sister chromatids only', 'Non-homologous chromosomes only', 'Centrioles'], 'Homologous chromosomes', 'Synapsis pairs homologous chromosomes during prophase I of meiosis.'),
+              ('A bivalent contains:', ['Two homologous chromosomes', 'Two unrelated cells', 'Four nuclei', 'Two centrioles only'], 'Two homologous chromosomes', 'A bivalent or tetrad forms when homologous chromosomes pair during meiosis I.'),
+              ('The stage at which chromosomes are most condensed for karyotyping is:', ['Metaphase', 'Interphase', 'G1', 'Telophase'], 'Metaphase', 'Metaphase chromosomes are highly condensed and arranged at the equator.'),
+              ('Which division maintains chromosome number?', ['Mitosis', 'Meiosis I', 'Meiosis II in isolation', 'Reduction division only'], 'Mitosis', 'Mitosis generally produces daughter cells with the same chromosome number as the parent cell.'),
+              ('Which process produces four haploid cells from one diploid meiotic cell?', ['Meiosis', 'Mitosis', 'Binary fission', 'Budding'], 'Meiosis', 'Meiosis consists of two successive divisions and commonly produces four haploid products.'),
+              ('DNA replication occurs:', ['Once before meiosis I', 'Before both meiosis I and II', 'After meiosis II only', 'During anaphase I'], 'Once before meiosis I', 'DNA replicates during S phase before meiosis I and is not replicated again before meiosis II.'),
+              ('The major role of cytokinesis is to:', ['Divide the cytoplasm', 'Replicate DNA', 'Pair homologues', 'Condense chromosomes'], 'Divide the cytoplasm', 'Cytokinesis partitions the cytoplasm into daughter cells after nuclear division.'),
+              ('Uncontrolled cell division is a hallmark of:', ['Cancer', 'Normal differentiation', 'Meiosis', 'Gametogenesis only'], 'Cancer', 'Cancer involves abnormal and uncontrolled proliferation of cells.'),
+              ('Cell-cycle checkpoints primarily help to:', ['Ensure accurate progression and detect errors', 'Increase mutation rate', 'Prevent all DNA synthesis', 'Destroy every dividing cell'], 'Ensure accurate progression and detect errors', 'Checkpoints monitor DNA integrity and cell-cycle events before progression.'),
+              ('Which structure organizes spindle microtubules in animal cells?', ['Centrosome', 'Nucleolus', 'Golgi apparatus', 'Lysosome'], 'Centrosome', 'The centrosome acts as a major microtubule-organising centre in animal cells.'),
+              ('Genetic variation during meiosis is increased by:', ['Crossing over and independent assortment', 'Only cytokinesis', 'DNA repair only', 'Cell growth only'], 'Crossing over and independent assortment', 'Recombination and independent assortment generate new combinations of alleles.'),
+              ('Why is meiosis important in sexually reproducing organisms?', ['It forms haploid gametes and promotes variation', 'It doubles chromosome number in gametes', 'It prevents fertilisation', 'It produces identical clones'], 'It forms haploid gametes and promotes variation', 'Meiosis reduces chromosome number and generates variation, allowing chromosome number to be restored at fertilisation.'),
+            ],
+            'Digestion and Absorption': [
+              ('The hormone gastrin mainly stimulates:', ['Gastric secretion and motility', 'Bile storage', 'Urine formation', 'Insulin release only'], 'Gastric secretion and motility', 'Gastrin promotes gastric gland secretion and muscular activity of the stomach.'),
+              ('Which substance provides an acidic medium in the stomach?', ['Hydrochloric acid', 'Bicarbonate', 'Bile', 'Saliva'], 'Hydrochloric acid', 'Parietal cells secrete HCl, producing the acidic gastric environment needed for pepsin activity.'),
+              ('Pepsin is secreted initially as:', ['Pepsinogen', 'Trypsinogen', 'Amylase', 'Prolipase'], 'Pepsinogen', 'Chief cells secrete inactive pepsinogen, which is activated in the acidic stomach.'),
+              ('Which cells secrete hydrochloric acid?', ['Parietal cells', 'Chief cells', 'Goblet cells', 'Pancreatic acinar cells'], 'Parietal cells', 'Parietal or oxyntic cells secrete HCl in gastric glands.'),
+              ('Which cells secrete pepsinogen?', ['Chief cells', 'Parietal cells', 'Beta cells', 'Goblet cells'], 'Chief cells', 'Chief cells of gastric glands secrete pepsinogen.'),
+              ('The main role of bicarbonate in pancreatic juice is to:', ['Neutralise acidic chyme', 'Digest proteins directly', 'Emulsify fats', 'Absorb glucose'], 'Neutralise acidic chyme', 'Pancreatic bicarbonate raises the pH of chyme entering the duodenum.'),
+              ('Which pancreatic enzyme digests proteins?', ['Trypsin', 'Amylase only', 'Lipase only', 'Maltase'], 'Trypsin', 'Trypsin is a pancreatic protease activated in the small intestine.'),
+              ('Which enzyme converts maltose into glucose?', ['Maltase', 'Pepsin', 'Lipase', 'Trypsin'], 'Maltase', 'Maltase hydrolyses maltose to glucose molecules at the intestinal brush border.'),
+              ('Which intestinal structures contain blood capillaries and a lacteal?', ['Villi', 'Gastric pits', 'Alveoli', 'Nephrons'], 'Villi', 'Each intestinal villus contains blood capillaries and a lymphatic lacteal for nutrient transport.'),
+              ('Most absorbed fatty acids and monoglycerides enter:', ['Lacteals', 'Blood capillaries directly', 'Gastric glands', 'Pancreatic ducts'], 'Lacteals', 'Long-chain lipid products are packaged into chylomicrons and enter intestinal lacteals.'),
+              ('The large intestine mainly absorbs:', ['Water and electrolytes', 'Most amino acids', 'Most glucose', 'Pepsin'], 'Water and electrolytes', 'The colon reabsorbs water and electrolytes and forms faeces.'),
+              ('The wave-like movement of the alimentary canal is called:', ['Peristalsis', 'Filtration', 'Osmosis', 'Ventilation'], 'Peristalsis', 'Peristaltic contractions propel food through the alimentary canal.'),
+              ('Which structure prevents food entering the trachea during swallowing?', ['Epiglottis', 'Uvula only', 'Pyloric sphincter', 'Cardiac sphincter'], 'Epiglottis', 'The epiglottis covers the glottis during swallowing and helps protect the airway.'),
+              ('The sphincter between stomach and duodenum is the:', ['Pyloric sphincter', 'Anal sphincter', 'Cardiac sphincter', 'Ileocecal valve'], 'Pyloric sphincter', 'The pyloric sphincter regulates passage of chyme from stomach to duodenum.'),
+              ('The sphincter at the junction of oesophagus and stomach is the:', ['Cardiac sphincter', 'Pyloric sphincter', 'Ileocecal valve', 'Anal sphincter'], 'Cardiac sphincter', 'The cardiac or gastro-oesophageal sphincter helps prevent reflux of gastric contents.'),
+              ('Which enzyme digests nucleic acids in the small intestine?', ['Nuclease', 'Pepsin', 'Amylase', 'Lipase'], 'Nuclease', 'Pancreatic nucleases digest DNA and RNA into smaller nucleotide components.'),
+              ('Which vitamin is synthesised partly by intestinal bacteria?', ['Vitamin K', 'Vitamin D only', 'Vitamin C only', 'Vitamin A only'], 'Vitamin K', 'Gut bacteria contribute to vitamin K production, although dietary sources are also important.'),
+              ('The absorptive surface of the small intestine is increased by:', ['Villi and microvilli', 'Gastric pits only', 'Alveoli', 'Nephrons'], 'Villi and microvilli', 'Villi and the brush-border microvilli greatly increase absorptive surface area.'),
+              ('The common bile duct delivers bile into the:', ['Duodenum', 'Stomach', 'Oesophagus', 'Colon'], 'Duodenum', 'Bile enters the duodenum where it assists fat digestion and neutralisation.'),
+              ('Which hormone promotes pancreatic enzyme secretion and gall bladder contraction?', ['Cholecystokinin', 'Thyroxine', 'ADH', 'Melatonin'], 'Cholecystokinin', 'CCK stimulates pancreatic enzyme secretion and gall bladder contraction in response to nutrients, especially fats.'),
+            ],
+            'Animal Morphology & Anatomy': [
+              ('The crop of cockroach is part of the:', ['Foregut', 'Midgut', 'Hindgut', 'Rectum only'], 'Foregut', 'The crop is a dilated storage region of the foregut.'),
+              ('The gastric caeca in cockroach are associated mainly with:', ['Digestion and absorption', 'Respiration', 'Locomotion', 'Reproduction'], 'Digestion and absorption', 'Gastric caeca arise near the midgut and contribute digestive secretions and absorptive surface.'),
+              ('The cockroach heart is located:', ['Dorsally in the abdomen', 'Ventrally in the thorax', 'Inside the crop', 'In the head only'], 'Dorsally in the abdomen', 'The cockroach has a dorsal tubular heart with ostia that pumps haemolymph.'),
+            ],
+          }
+
+          def find_array_bounds(s, chapter):
+              marker = "'" + chapter.replace("'", "\\'") + "':["
+              start = s.find(marker)
+              if start < 0:
+                  raise RuntimeError('Missing chapter: ' + chapter)
+              content_start = start + len(marker)
+              depth = 1
+              quote = None
+              esc = False
+              i = content_start
+              while i < len(s):
+                  c = s[i]
+                  if quote:
+                      if esc:
+                          esc = False
+                      elif c == '\\':
+                          esc = True
+                      elif c == quote:
+                          quote = None
+                  else:
+                      if c in "'\"`":
+                          quote = c
+                      elif c == '[':
+                          depth += 1
+                      elif c == ']':
+                          depth -= 1
+                          if depth == 0:
+                              return start, content_start, i
+                  i += 1
+              raise RuntimeError('Unclosed array: ' + chapter)
+
+          def split_objects(s):
+              out=[]; start=None; depth=0; quote=None; esc=False; i=0
+              while i < len(s):
+                  c=s[i]
+                  if quote:
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c==quote: quote=None
+                  else:
+                      if c in "'\"`": quote=c
+                      elif c=='{':
+                          if depth==0: start=i
+                          depth+=1
+                      elif c=='}':
+                          depth-=1
+                          if depth==0 and start is not None:
+                              out.append(s[start:i+1]); start=None
+                  i+=1
+              return out
+
+          def qobj(q):
+              question, opts, ans, exp = q
+              return json.dumps({'q':question,'o':opts,'a':ans,'e':exp}, ensure_ascii=False, separators=(',',':'))
+
+          # Process from the end of the file backwards so offsets remain valid.
+          replacements=[]
+          for chapter in chapters:
+              _, content_start, end = find_array_bounds(text, chapter)
+              old = text[content_start:end]
+              objects = split_objects(old)
+              if len(objects) > 30:
+                  objects = objects[:30]
+              elif len(objects) < 30:
+                  need = 30-len(objects)
+                  add = extras.get(chapter, [])[:need]
+                  if len(add) != need:
+                      raise RuntimeError(f'{chapter}: need {need} extras, have {len(add)}')
+                  objects.extend(qobj(x) for x in add)
+              if len(objects) != 30:
+                  raise RuntimeError(f'{chapter}: final count {len(objects)}')
+              replacements.append((content_start,end,'\n'+','.join(objects)+'\n'))
+
+          for a,b,r in sorted(replacements, reverse=True):
+              text = text[:a] + r + text[b:]
+
+          path.write_text(text, encoding='utf-8')
+          print('Standardized all Zoology chapter banks to exactly 30 MCQs.')
+          PY
+      - name: Validate counts and JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy']
+          for c in chapters:
+              m=re.search(r"'"+re.escape(c)+r"':\[",s)
+              assert m, c
+              i=m.end(); depth=1; quote=None; esc=False
+              while i<len(s) and depth:
+                  ch=s[i]
+                  if quote:
+                      if esc: esc=False
+                      elif ch=='\\': esc=True
+                      elif ch==quote: quote=None
+                  else:
+                      if ch in "'\"`": quote=ch
+                      elif ch=='[': depth+=1
+                      elif ch==']': depth-=1
+                  i+=1
+              arr=s[m.end():i-1]
+              count=0; d=0; quote=None; esc=False
+              for ch in arr:
+                  if quote:
+                      if esc: esc=False
+                      elif ch=='\\': esc=True
+                      elif ch==quote: quote=None
+                  else:
+                      if ch in "'\"`": quote=ch
+                      elif ch=='{':
+                          if d==0: count+=1
+                          d+=1
+                      elif ch=='}': d-=1
+              assert count==30,(c,count)
+              print(c, count)
+          # Basic structural check: tests object closes before URL parameter logic.
+          assert 'const params=new URLSearchParams(location.search)' in s
+          print('Validation passed.')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          git diff --cached --quiet || git commit -m 'Standardize Zoology quizzes to 30 MCQs each'
+          git push

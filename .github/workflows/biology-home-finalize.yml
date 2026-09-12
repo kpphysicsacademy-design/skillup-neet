@@ -1,0 +1,51 @@
+name: Finalize Biology Home
+on:
+  push:
+    paths:
+      - '.github/biology-finalize-trigger.txt'
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update page
+        run: |
+          python3 - <<'PY'
+          p='biology-home.html'
+          s=open(p,encoding='utf-8').read()
+          import re
+          # Remove the standalone NEET Biology Syllabus heading and its 10-unit syllabus section.
+          s=re.sub(r'<div class="syllabus-head"><h2>📚 NEET Biology Syllabus</h2><span>10 UNITS • BOTANY \+ ZOOLOGY</span></div>\s*<section class="syllabus">.*?</section>', '', s, count=1, flags=re.S)
+          css='''<style>.subconcept-section{margin:30px 0}.subconcept-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 0 12px}.subconcept-title h2{margin:0;font-size:22px;font-weight:950}.subconcept-title span{font-size:10px;color:#667085;font-weight:800}.subconcept-grid{display:grid;gap:10px}.subunit{background:#fff;border:2px solid #dfe8dc;border-radius:18px;overflow:hidden}.subunit summary{list-style:none;cursor:pointer;padding:14px;display:flex;align-items:center;gap:11px}.subunit summary::-webkit-details-marker{display:none}.subunit summary:after{content:'+';font-size:20px;color:#8a94a3}.subunit[open] summary:after{content:'−'}.subicon{width:40px;height:40px;border-radius:13px;background:#eaf8e4;display:grid;place-items:center;font-size:21px;flex:0 0 auto}.subunit summary>span:nth-child(2){display:flex;flex-direction:column;gap:2px}.subunit summary b{font-size:9px;color:#46a302;letter-spacing:1px}.subunit summary strong{font-size:14px}.subunit summary em{margin-left:auto;font-style:normal;font-size:9px;color:#667085;font-weight:800}.subunit-body{padding:0 14px 15px}.subtopic{margin-top:9px;border:1px solid #e3eadf;border-radius:13px;overflow:hidden}.subtopic-head{display:flex;gap:8px;align-items:center;padding:10px;background:#f7faf5}.subtopic-head span{font-size:9px;font-weight:950;color:#46a302}.subtopic-head strong{font-size:11px}.subitems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:8px}.subitem{display:flex;align-items:center;gap:7px;padding:8px 9px;border:1px solid #e3e9e1;border-radius:10px;color:#263244;font-size:10px;font-weight:750;background:#fff}.subitem span{min-width:20px;height:20px;border-radius:7px;background:#eaf8e4;color:#3f8f05;display:grid;place-items:center;font-size:8px;font-weight:950}.subitem b{margin-left:auto;color:#98a2b3;font-size:15px}.subitem:hover{border-color:#b9e9a8;background:#f7fff3}@media(max-width:650px){.subconcept-title{align-items:flex-start;flex-direction:column}.subitems{grid-template-columns:1fr}.subunit summary{padding:12px}.subunit summary em{display:none}}</style>'''
+          data=[
+          ('🧬','Diversity in Living World',['What is Living?','Taxonomy and Systematics','Biological Classification','Plant Kingdom','Animal Kingdom']),
+          ('🌿','Structural Organisation in Animals and Plants',['Plant Morphology','Plant Anatomy','Plant Families','Animal Tissues','Animal Organisation']),
+          ('🔬','Cell Structure and Function',['Cell Basics','Cell Membrane and Wall','Cell Organelles','Nucleus','Biomolecules and Enzymes','Cell Division']),
+          ('🌱','Plant Physiology',['Photosynthesis','Respiration in Plants','Plant Growth and Development','Plant Growth Regulators']),
+          ('🫀','Human Physiology',['Breathing and Respiration','Body Fluids and Circulation','Excretory Products and Elimination','Locomotion and Movement','Neural Control and Coordination','Chemical Coordination and Integration']),
+          ('🌸','Reproduction',['Sexual Reproduction in Flowering Plants','Human Reproduction','Reproductive Health']),
+          ('🧬','Genetics and Evolution',['Heredity and Variation','Chromosomal Basis','Molecular Basis of Inheritance','Evolution']),
+          ('🦠','Biology and Human Welfare',['Human Health and Disease','Adolescence and Substance Abuse','Microbes in Human Welfare']),
+          ('🧪','Biotechnology and Its Applications',['Principles of Biotechnology','Applications in Health','Applications in Agriculture','Biosafety and Ethics']),
+          ('🌍','Ecology and Environment',['Organisms and Environment','Ecosystem','Biodiversity and Conservation'])]
+          section=css+'<section class="subconcept-section" id="subconcepts"><div class="subconcept-title"><h2>🧠 Biology Sub-concepts</h2><span>UNIT → TOPIC → SUB-CONCEPT</span></div><div class="subconcept-grid">'
+          for ui,(icon,unit,topics) in enumerate(data):
+              section+=f'<details class="subunit" {"open" if ui==0 else ""}><summary><span class="subicon">{icon}</span><span><b>UNIT {ui+1:02d}</b><strong>{unit}</strong></span><em>{len(topics)} topics</em></summary><div class="subunit-body">'
+              for ti,t in enumerate(topics):
+                  section+=f'<div class="subtopic"><div class="subtopic-head"><span>{ui+1}.{ti+1}</span><strong>{t}</strong></div><div class="subitems"><a class="subitem" href="question-bank.html?subject=biology&topic={t}"><span>✓</span>Open topic <b>›</b></a></div></div>'
+              section+='</div></details>'
+          section+='</div></section>'
+          pos=s.find('<div class="source-note">')
+          if pos<0: raise SystemExit('source-note marker missing')
+          s=s[:pos]+section+s[pos:]
+          open(p,'w',encoding='utf-8').write(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add biology-home.html
+          git commit -m 'Keep Biology sub-concepts and remove syllabus section'
+          git push

@@ -1,0 +1,31 @@
+name: Apply Zoology Duolingo UI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-zoology-duolingo.yml'
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add interactive MCQ UI
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text(encoding='utf-8')
+          css='''<style id="duo-css">body{background:#f7f7f7!important}.wrap{max-width:720px!important}.duo-head{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 14px}.duo-top{max-width:720px;margin:auto;display:flex;align-items:center;gap:10px}.duo-logo{width:42px;height:42px}.duo-copy{flex:1}#title{font-weight:850}.duo-stats{display:flex;gap:7px;font-size:13px;font-weight:800}.duo-pill{background:#f1f3f5;border-radius:999px;padding:6px 8px}.duo-progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;max-width:720px;margin:10px auto 0}.duo-progress i{display:block;height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .25s}.duo-q{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:20px 16px;margin:18px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}.duo-num{font-size:12px;color:#687385;font-weight:800;text-transform:uppercase;margin-bottom:8px}.duo-q h2{font-size:20px;line-height:1.35}.duo-options{display:grid;gap:11px}.duo-opt{width:100%;text-align:left;border:2px solid #dfe3e8;border-bottom:4px solid #cfd4da;border-radius:14px;padding:13px;background:#fff;cursor:pointer;font-weight:700;font-size:15px}.duo-opt.correct{border-color:#58cc02;background:#eaffd9}.duo-opt.wrong{border-color:#ff4b4b;background:#ffe5e5}.duo-letter{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:9px;background:#f1f3f5;margin-right:8px}.duo-feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-weight:650}.duo-feedback.show{display:block}.duo-ok{background:#eaffd9;border:1px solid #b7e892}.duo-no{background:#ffe5e5;border:1px solid #ffb3b3}.duo-next{display:none;width:100%;border:0;border-radius:14px;padding:14px;margin-top:12px;background:#58cc02;color:#fff;font-size:16px;font-weight:850;box-shadow:0 4px 0 #46a302}.duo-next.show{display:block}.duo-result{text-align:center;background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:28px 18px;margin-top:18px}.duo-score{font-size:44px;font-weight:900}.duo-xp{color:#b77900;font-weight:900}''' 
+          js='''<script id="duo-js">(()=>{const q=new URLSearchParams(location.search),ch=q.get("chapter")||"",items=(window.__duoTests&&window.__duoTests[ch])||tests[ch];if(!items)return;document.getElementById("content").innerHTML="";const h=document.querySelector("header");h.className="duo-head";h.innerHTML=`<div class="duo-top"><svg class="duo-logo" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#58cc02"/><circle cx="22" cy="27" r="5" fill="#fff"/><circle cx="42" cy="27" r="5" fill="#fff"/><circle cx="22" cy="27" r="2"/><circle cx="42" cy="27" r="2"/><path d="M24 40q8 7 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><div class="duo-copy"><h1 id="title">${ch||"Zoology Test"}</h1><div class="muted">Learn • Practice • Master</div></div><div class="duo-stats"><span class="duo-pill">⭐ <b id="dxp">0</b></span><span class="duo-pill">🔥 <b id="dstreak">0</b></span></div></div><div class="duo-progress"><i id="dbar"></i></div>`;const c=document.getElementById("content"),bar=document.getElementById("dbar"),xp=document.getElementById("dxp"),st=document.getElementById("dstreak");let i=0,score=0,points=0,streak=0;const safe=x=>String(x).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));function draw(){if(i>=items.length){bar.style.width="100%";c.innerHTML=`<section class="duo-result"><div style="font-size:64px">🏆</div><h2>Lesson complete!</h2><div class="duo-score">${score} / ${items.length}</div><b>${Math.round(score/items.length*100)}% accuracy</b><p class="duo-xp">⭐ ${points} XP earned</p><button class="duo-next show" onclick="location.reload()">🔄 Try Again</button></section>`;return}const x=items[i];bar.style.width=(i/items.length*100)+"%";c.innerHTML=`<section class="duo-q"><div class="duo-num">Question ${i+1} of ${items.length}</div><h2>${safe(x.q)}</h2><div class="duo-options">${x.o.map((v,j)=>`<button class="duo-opt"><span class="duo-letter">${String.fromCharCode(65+j)}</span>${safe(v)}</button>`).join("")}</div><div id="df" class="duo-feedback"></div><button id="dn" class="duo-next">Continue ➜</button></section>`;document.querySelectorAll(".duo-opt").forEach((b,j)=>b.onclick=()=>answer(j));document.getElementById("dn").onclick=()=>{i++;draw();scrollTo({top:0,behavior:"smooth"})}}function answer(j){const x=items[i],bs=[...document.querySelectorAll(".duo-opt")],right=x.o.indexOf(x.a),f=document.getElementById("df");bs.forEach(b=>b.disabled=true);bs[right].classList.add("correct");if(j===right){score++;points+=10;streak++;f.className="duo-feedback show duo-ok";f.innerHTML=`🎉 <b>Correct! +10 XP</b><div>${safe(x.e)}</div>`}else{streak=0;bs[j].classList.add("wrong");f.className="duo-feedback show duo-no";f.innerHTML=`💪 <b>Not quite.</b> Correct answer: ${safe(x.a)}<div>${safe(x.e)}</div>`}xp.textContent=points;st.textContent=streak;document.getElementById("dn").classList.add("show");bar.style.width=((i+1)/items.length*100)+"%"}draw()})()</script>'''
+          s=s.replace('</head>',css+'</head>').replace('</body>',js+'</body>')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit page
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if ! git diff --cached --quiet; then git commit -m 'Add Duolingo-style Zoology MCQs [skip ci]' && git push; fi

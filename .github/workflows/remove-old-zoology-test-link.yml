@@ -37,7 +37,7 @@ jobs:
           let s=fs.readFileSync(p,'utf8');
           const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
           function bounds(ch){
-            const marker="'"+ch.replace(/'/g,"\\'")+"':["];
+            const marker="'"+ch.replace(/'/g,"\\'")+"': [";
             const st=s.indexOf(marker);if(st<0)throw Error('Missing chapter: '+ch);
             const cs=st+marker.length;let d=1,q=null,e=false;
             for(let i=cs;i<s.length;i++){
@@ -82,7 +82,7 @@ jobs:
           const fs=require('fs'),vm=require('vm');
           const s=fs.readFileSync('zoology-chapter-test.html','utf8');
           const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
-          function bounds(ch){const m="'"+ch.replace(/'/g,"\\'")+"':["];const st=s.indexOf(m);if(st<0)throw Error('Missing '+ch);const cs=st+m.length;let d=1,q=null,e=false;for(let i=cs;i<s.length;i++){const c=s[i];if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='[')d++;else if(c===']'){d--;if(!d)return s.slice(cs,i)}}}throw Error('Unclosed '+ch)}
+          function bounds(ch){const m="'"+ch.replace(/'/g,"\\'")+"': [";const st=s.indexOf(m);if(st<0)throw Error('Missing '+ch);const cs=st+m.length;let d=1,q=null,e=false;for(let i=cs;i<s.length;i++){const c=s[i];if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='[')d++;else if(c===']'){d--;if(!d)return s.slice(cs,i)}}}throw Error('Unclosed '+ch)}
           function count(a){let n=0,d=0,q=null,e=false;for(const c of a){if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='{'){if(d===0)n++;d++}else if(c==='}')d--}}return n}
           for(const ch of chapters){const n=count(bounds(ch));if(n!==30)throw Error(ch+' has '+n);console.log('PASS '+ch+': 30')}
           const main=s.match(/<script>([\s\S]*?)<\/script><script id="duo-js">/);if(!main)throw Error('Main script missing');new vm.Script(main[1]);

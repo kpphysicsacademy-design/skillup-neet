@@ -1,54 +1,56 @@
 name: Add Biological Classification MCQs
-
 on:
   push:
-    paths:
-      - .github/workflows/add-biological-classification-mcqs.yml
-
+    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
-
 jobs:
   add-mcqs:
+    if: ${{ !contains(github.event.head_commit.message, 'Add 20 NEET MCQs to Biological Classification') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Add 20 NEET MCQs
+        shell: python
         run: |
-          python - <<'PY'
           from pathlib import Path
-          import re, json
+          import json
           p=Path('zoology-chapter-test.html')
           s=p.read_text(encoding='utf-8')
+          marker='/* SKILLUP-BC-EXTRA-20 */'
+          if marker in s:
+              print('Already added'); raise SystemExit(0)
           new=[
-          {"q":"Who proposed the five-kingdom classification system?","o":["R.H. Whittaker","Carolus Linnaeus","Ernst Haeckel","Robert Hooke"],"a":"R.H. Whittaker","e":"R.H. Whittaker proposed the five-kingdom classification in 1969 using criteria including cell structure, body organisation, mode of nutrition and reproduction."},
-          {"q":"Which kingdom contains organisms that are fundamentally prokaryotic?","o":["Monera","Protista","Fungi","Animalia"],"a":"Monera","e":"Members of Monera are prokaryotic and lack a true nucleus and membrane-bound organelles."},
-          {"q":"Which of the following is a characteristic feature of archaebacteria?","o":["They have unusual cell wall and membrane features","They always possess chloroplasts","They are multicellular animals","They lack DNA"],"a":"They have unusual cell wall and membrane features","e":"Archaebacteria have distinctive cell wall and membrane compositions that allow many species to survive extreme habitats."},
-          {"q":"Methanogens are commonly found in the rumen of cattle and are important in production of:","o":["Oxygen","Biogas","Starch","Lactic acid"],"a":"Biogas","e":"Methanogenic archaebacteria produce methane during anaerobic decomposition and contribute to biogas formation."},
-          {"q":"Cyanobacteria are also commonly called:","o":["Blue-green algae","Red algae","Brown algae","Golden algae"],"a":"Blue-green algae","e":"Cyanobacteria are photosynthetic prokaryotes historically called blue-green algae, although they are bacteria rather than true algae."},
-          {"q":"Which cyanobacterium is commonly associated with nitrogen fixation?","o":["Nostoc","Amoeba","Paramecium","Saccharomyces"],"a":"Nostoc","e":"Nostoc contains specialised cells called heterocysts that can carry out nitrogen fixation."},
-          {"q":"Which kingdom includes unicellular eukaryotic organisms such as Amoeba and Paramecium?","o":["Protista","Monera","Plantae","Animalia"],"a":"Protista","e":"Protista includes predominantly unicellular eukaryotes such as Amoeba, Paramecium and Euglena."},
-          {"q":"Euglena is unusual because it can show both:","o":["Autotrophic and heterotrophic nutrition","Prokaryotic and viral organisation","Sexual and asexual reproduction only","Plant and animal tissues"],"a":"Autotrophic and heterotrophic nutrition","e":"Euglena can photosynthesise in light and obtain food heterotrophically under suitable conditions."},
-          {"q":"Which group includes diatoms?","o":["Chrysophytes","Dinoflagellates","Slime moulds","Protozoans"],"a":"Chrysophytes","e":"Diatoms are photosynthetic protists placed under chrysophytes in the NCERT classification."},
-          {"q":"The cell walls of diatoms are mainly composed of:","o":["Silica","Chitin","Peptidoglycan","Cellulose only"],"a":"Silica","e":"Diatom cell walls are impregnated with silica, making them resistant and durable."},
-          {"q":"Red tides are commonly caused by blooms of:","o":["Dinoflagellates","Mosses","Fungi","Cyanophages"],"a":"Dinoflagellates","e":"Rapid multiplication of red-pigmented dinoflagellates can colour seawater reddish and produce red tides."},
-          {"q":"Slime moulds are best described as:","o":["Saprophytic protists","Photosynthetic bacteria","Multicellular fungi only","Infectious viruses"],"a":"Saprophytic protists","e":"Slime moulds are saprophytic protists that feed on decaying organic matter and may form an aggregation during favourable conditions."},
-          {"q":"The cell wall of fungi is primarily made of:","o":["Chitin","Cellulose","Peptidoglycan","Silica"],"a":"Chitin","e":"Fungal cell walls contain chitin, a structural polysaccharide distinct from plant cellulose."},
-          {"q":"Fungi obtain nutrition mainly by:","o":["Absorption after extracellular digestion","Ingestion of solid food","Photosynthesis","Chemosynthesis only"],"a":"Absorption after extracellular digestion","e":"Fungi secrete enzymes onto the substrate and absorb the soluble products of digestion."},
-          {"q":"Which fungal group includes Rhizopus and Mucor in the traditional NCERT classification?","o":["Phycomycetes","Ascomycetes","Basidiomycetes","Deuteromycetes"],"a":"Phycomycetes","e":"Rhizopus and Mucor are examples traditionally placed in Phycomycetes in NCERT's five-kingdom discussion."},
-          {"q":"Yeast belongs to which fungal group in the traditional NCERT classification?","o":["Ascomycetes","Phycomycetes","Basidiomycetes","Deuteromycetes only"],"a":"Ascomycetes","e":"Saccharomyces, the common yeast, is an example of Ascomycetes and reproduces commonly by budding."},
-          {"q":"Which statement about viruses is correct?","o":["They are acellular and replicate inside host cells","They are independent cellular organisms","They always possess cytoplasm","They carry out independent metabolism outside hosts"],"a":"They are acellular and replicate inside host cells","e":"Viruses are acellular infectious agents and depend on host cellular machinery for replication."},
-          {"q":"The genetic material of a virus may be:","o":["DNA or RNA","Only DNA","Only RNA","Always both DNA and RNA"],"a":"DNA or RNA","e":"A virus contains either DNA or RNA as its genetic material, enclosed by a protein coat and sometimes an envelope."},
-          {"q":"Lichens represent a symbiotic association between:","o":["Alga or cyanobacterium and fungus","Virus and bacterium","Protozoan and animal","Plant and insect"],"a":"Alga or cyanobacterium and fungus","e":"The photosynthetic partner supplies carbohydrates while the fungal partner provides shelter, water and minerals."},
-          {"q":"Which statement is most appropriate for NEET questions on biological classification?","o":["Classification is based on a single character","Modern classification considers multiple characteristics and evolutionary relationships","All microorganisms are placed in Monera","Viruses are cellular organisms"],"a":"Modern classification considers multiple characteristics and evolutionary relationships","e":"Classification systems use combinations of cellular, structural, nutritional, reproductive and evolutionary characteristics rather than a single feature."}
+          {"q":"Which of the following is a major criterion used by Whittaker in five-kingdom classification?","o":["Mode of nutrition","Body colour only","Geographical range only","Body temperature only"],"a":"Mode of nutrition","e":"Whittaker considered cell structure, body organisation, mode of nutrition, reproduction and phylogenetic relationships."},
+          {"q":"Which kingdom contains organisms with prokaryotic cellular organisation?","o":["Monera","Protista","Fungi","Animalia"],"a":"Monera","e":"Monerans are prokaryotes and lack a true membrane-bound nucleus."},
+          {"q":"Archaebacteria differ from eubacteria mainly in their:","o":["Cell wall and membrane characteristics","Absence of genetic material","Lack of ribosomes","Multicellular organisation"],"a":"Cell wall and membrane characteristics","e":"Archaebacteria possess distinctive cell wall and membrane features that help many species survive extreme environments."},
+          {"q":"Which archaebacteria are associated with marshes and the rumen of cattle?","o":["Methanogens","Halophiles","Thermoacidophiles","Cyanobacteria"],"a":"Methanogens","e":"Methanogens occur in anaerobic environments including cattle rumen and produce methane."},
+          {"q":"Which organism is a cyanobacterium?","o":["Anabaena","Amoeba","Paramecium","Rhizopus"],"a":"Anabaena","e":"Anabaena is a photosynthetic cyanobacterium and can fix atmospheric nitrogen using specialised cells."},
+          {"q":"Heterocysts in cyanobacteria are primarily associated with:","o":["Nitrogen fixation","Photosynthetic pigment storage only","Locomotion","Sexual reproduction"],"a":"Nitrogen fixation","e":"Heterocysts provide a suitable low-oxygen environment for nitrogen fixation."},
+          {"q":"Which protist possesses a silica-rich cell wall?","o":["Diatom","Amoeba","Paramecium","Plasmodium"],"a":"Diatom","e":"Diatom cell walls are impregnated with silica and form durable deposits after death."},
+          {"q":"The phenomenon of red tides is associated mainly with:","o":["Dinoflagellates","Diatoms","Slime moulds","Ciliates"],"a":"Dinoflagellates","e":"Blooms of certain dinoflagellates can colour marine water reddish and may release toxins."},
+          {"q":"Which protist is known for forming plasmodium-like masses during its life cycle?","o":["Slime mould","Diatom","Dinoflagellate","Euglena"],"a":"Slime mould","e":"Slime moulds are saprophytic protists that can form multinucleate plasmodial stages."},
+          {"q":"Which organism is commonly used as an example of a mixotrophic protist?","o":["Euglena","Amoeba","Paramecium","Plasmodium"],"a":"Euglena","e":"Euglena can photosynthesise and can also obtain organic nutrients heterotrophically under suitable conditions."},
+          {"q":"Which feature is characteristic of fungi?","o":["Absorptive heterotrophic nutrition","Ingestion of food by mouth","Chlorophyll in all cells","Peptidoglycan cell wall"],"a":"Absorptive heterotrophic nutrition","e":"Fungi digest food extracellularly and absorb the soluble products through their hyphae."},
+          {"q":"The fungal body is commonly composed of thread-like structures called:","o":["Hyphae","Cilia","Flagella","Heterocysts"],"a":"Hyphae","e":"Hyphae are filamentous structures that collectively form the mycelium of many fungi."},
+          {"q":"Which fungal group traditionally includes Penicillium and Aspergillus?","o":["Ascomycetes","Basidiomycetes","Phycomycetes","Monera"],"a":"Ascomycetes","e":"Penicillium and Aspergillus are commonly cited as ascomycetous fungi in the NCERT classification."},
+          {"q":"Which fungal group traditionally includes Agaricus?","o":["Basidiomycetes","Ascomycetes","Phycomycetes","Protista"],"a":"Basidiomycetes","e":"Agaricus, the common mushroom, is a basidiomycete producing basidiospores on basidia."},
+          {"q":"Which fungal group traditionally includes Rhizopus?","o":["Phycomycetes","Basidiomycetes","Ascomycetes","Monera"],"a":"Phycomycetes","e":"Rhizopus is traditionally placed in Phycomycetes in the NCERT five-kingdom discussion."},
+          {"q":"Which structure surrounds the genetic material of a typical virus?","o":["Protein coat","Cell wall","Cell membrane only","Chitin wall"],"a":"Protein coat","e":"The viral genome is enclosed by a protein coat called the capsid; some viruses also have an envelope."},
+          {"q":"Viruses are called obligate parasites because they:","o":["Replicate only inside living host cells","Can reproduce freely in water","Have independent cellular metabolism","Are multicellular"],"a":"Replicate only inside living host cells","e":"Viruses depend on host-cell machinery for replication and cannot reproduce independently."},
+          {"q":"Which statement correctly describes lichens?","o":["They are a symbiotic association of a photosynthetic partner and a fungus","They are viruses infecting algae","They are colonies of only fungi","They are bacterial spores"],"a":"They are a symbiotic association of a photosynthetic partner and a fungus","e":"The photosynthetic partner supplies organic food, while the fungal partner provides shelter and helps with water and minerals."},
+          {"q":"Diatomaceous earth is commercially useful mainly because it is rich in:","o":["Silica","Chitin","Peptidoglycan","Cellulose"],"a":"Silica","e":"Diatomaceous earth consists largely of the silica-rich remains of diatoms and has several industrial uses."},
+          {"q":"Which pairing is correctly matched?","o":["Methanogen — methane production","Diatom — chitin wall","Fungus — chlorophyll nutrition","Virus — independent metabolism"],"a":"Methanogen — methane production","e":"Methanogens produce methane under anaerobic conditions; the other pairings are incorrect."}
           ]
           start=s.index("'Biological Classification':[")
           end=s.index("],\n'Animal Kingdom'",start)
-          addition=','+','.join("{" + ",".join(f"{json.dumps(k)}:{json.dumps(v,ensure_ascii=False,separators=(',',':'))}" for k,v in x.items()) + "}" for x in new)
+          addition='\n'+marker+'\n'+','.join(json.dumps(x,ensure_ascii=False,separators=(',',':')) for x in new)+','
           s=s[:end]+addition+s[end:]
           p.write_text(s,encoding='utf-8')
-          print('Added',len(new),'MCQs to Biological Classification')
-          PY
+          print('Added',len(new),'MCQs')
+      - name: Commit
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html

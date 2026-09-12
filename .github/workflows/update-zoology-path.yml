@@ -1,0 +1,106 @@
+name: Update Zoology Learning Path
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/trigger-zoology-path-update.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update Zoology path UX and chapter grouping
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const path='zoology-full-path.html';
+          let s=fs.readFileSync(path,'utf8');
+
+          const start=s.indexOf('const chapters=[');
+          const end=s.indexOf('\nconst key=',start);
+          if(start<0||end<0) throw new Error('Could not locate chapters configuration');
+
+          const chapters=`const chapters=[
+           {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'What is Living?',icon:'🌱',desc:'Living characteristics, metabolism, consciousness and reproduction'},
+           {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Biological Classification',icon:'🧫',desc:'Five-kingdom classification, Monera, Protista, fungi, viruses and lichens'},
+           {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Animal Kingdom',icon:'🦁',desc:'Animal diversity, symmetry, organisation, major phyla and chordates'},
+           {unit:'UNIT 2',unitTitle:'Structural Organisation in Animals',name:'Structural Organisation in Animals',icon:'🧬',desc:'Animal tissues, epithelial, connective, muscular and nervous tissues'},
+           {unit:'UNIT 2',unitTitle:'Structural Organisation in Animals',name:'Animal Morphology & Anatomy',icon:'🫀',desc:'Cockroach morphology, anatomy, organ systems and reproductive features'},
+           {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Cell: The Unit of Life',icon:'🔬',desc:'Cell structure, organelles, membranes and transport'},
+           {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Biomolecules',icon:'🧪',desc:'Proteins, carbohydrates, lipids, nucleic acids and enzymes'},
+           {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Cell Cycle and Cell Division',icon:'🔄',desc:'Cell cycle, mitosis, meiosis, crossing over and significance'},
+           {unit:'UNIT 5',unitTitle:'Human Physiology',name:'Digestion and Absorption',icon:'🍎',desc:'Digestive system, enzymes, absorption, hormones and disorders'}
+          ];`;
+
+          s=s.slice(0,start)+chapters+s.slice(end);
+
+          const oldRenderStart=s.indexOf('function render(){');
+          const oldRenderEnd=s.indexOf('\ndocument.getElementById(\'search\')',oldRenderStart);
+          if(oldRenderStart<0||oldRenderEnd<0) throw new Error('Could not locate render function');
+
+          const render=`function render(){
+           const q=document.getElementById('search').value.trim().toLowerCase(), f=document.getElementById('filter').value;
+           const filtered=chapters.filter(c=>(!q||(c.name+' '+c.desc+' '+c.unitTitle).toLowerCase().includes(q))&&(f==='all'||(f==='done'?state.done.includes(c.name):!state.done.includes(c.name))));
+           const path=document.getElementById('path');path.innerHTML='';let last='';
+           filtered.forEach(c=>{
+             if(c.unit!==last){
+               last=c.unit;
+               const u=document.createElement('div');
+               u.className='unit';
+               u.innerHTML='<span class="unit-num">'+c.unit.replace('UNIT ','')+'</span><div><h2>'+c.unitTitle+'</h2><small>Learn → Practice → Master</small></div>';
+               path.appendChild(u);
+             }
+             const done=state.done.includes(c.name),el=document.createElement('article');
+             el.className='chapter '+(done?'done completed':'');
+             el.innerHTML='<span class="node"></span><a class="chapter-card" href="'+testUrl(c.name)+'"><div class="chapter-icon">'+c.icon+'</div><div class="chapter-main"><h3>'+c.name+'</h3><p>'+c.desc+'</p><div class="meta"><span class="tag">📖 Learn</span><span class="tag test">⚡ Practice Test</span><span class="tag">🏆 XP Progress</span></div></div><span class="go">→</span></a>';
+             path.appendChild(el);
+           });
+           document.getElementById('empty').style.display=filtered.length?'none':'block';
+           const d=state.done.filter(n=>chapters.some(c=>c.name===n)).length,p=Math.round(d/chapters.length*100);
+           document.getElementById('done').textContent=d;
+           document.getElementById('total').textContent=chapters.length;
+           document.getElementById('lessons').textContent=chapters.length*3;
+           document.getElementById('percent').textContent=p+'%';
+           document.getElementById('progress').style.width=p+'%';
+           document.getElementById('xp').textContent=state.xp;
+           document.getElementById('xp2').textContent=state.xp;
+          }`;
+
+          s=s.slice(0,oldRenderStart)+render+s.slice(oldRenderEnd);
+          s=s.replace('<span class="pill xp">⭐ <b id="xp">20</b> XP</span>','<span class="pill xp">⭐ <b id="xp">20</b> XP</span>');
+          fs.writeFileSync(path,s);
+          NODE
+
+      - name: Validate Zoology path
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const s=fs.readFileSync('zoology-full-path.html','utf8');
+          if(!s.includes('const chapters=[')||!s.includes('Animal Morphology & Anatomy')) throw new Error('Path content missing');
+          const m=s.match(/<script>([\s\S]*?)<\/script>/);
+          if(!m) throw new Error('Path script missing');
+          new vm.Script(m[1]);
+          const cm=m[1].match(/const chapters=([\s\S]*?);\nconst key=/);
+          if(!cm) throw new Error('Chapter configuration missing');
+          const chapters=vm.runInNewContext('('+cm[1]+')');
+          if(chapters.length!==9) throw new Error('Expected 9 Zoology chapters, got '+chapters.length);
+          const order=chapters.map(x=>x.unit).join('|');
+          if(order!=='UNIT 1|UNIT 1|UNIT 1|UNIT 2|UNIT 2|UNIT 3|UNIT 3|UNIT 3|UNIT 5') throw new Error('Incorrect unit order: '+order);
+          console.log('PASS: 9 chapters in correct unit order');
+          console.log('PASS: Zoology path JavaScript syntax');
+          NODE
+
+      - name: Commit Zoology path update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zoology-full-path.html
+          if git diff --cached --quiet; then echo 'No changes needed'; else git commit -m 'Update Zoology learning path'; git push; fi

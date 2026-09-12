@@ -1,0 +1,30 @@
+name: Repair Zoology 30-MCQ Standardizer v2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/trigger-zoology-30-fix-v2.txt
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Morphology extra bank
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/standardize-zoology-30.yml')
+          s=p.read_text(encoding='utf-8')
+          anchor="              ('The cockroach heart is located:', ['Dorsally in the abdomen', 'Ventrally in the thorax', 'Inside the crop', 'In the head only'], 'Dorsally in the abdomen', 'The cockroach has a dorsal tubular heart with ostia that pumps haemolymph.'),\n            ],"
+          replacement="              ('The cockroach heart is located:', ['Dorsally in the abdomen', 'Ventrally in the thorax', 'Inside the crop', 'In the head only'], 'Dorsally in the abdomen', 'The cockroach has a dorsal tubular heart with ostia that pumps haemolymph.'),\n              ('Which structure in cockroach helps grind food mechanically?', ['Gizzard', 'Crop', 'Rectum', 'Malpighian tubule'], 'Gizzard', 'The muscular gizzard or proventriculus contains chitinous structures that mechanically grind food.'),\n            ],"
+          if anchor not in s:
+              raise SystemExit('Morphology anchor not found')
+          p.write_text(s.replace(anchor,replacement,1),encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/standardize-zoology-30.yml
+          git commit -m 'Repair Morphology bank in Zoology standardizer'
+          git push

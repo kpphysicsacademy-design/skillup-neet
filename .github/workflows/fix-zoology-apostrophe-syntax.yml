@@ -1,0 +1,67 @@
+name: Fix Zoology Quiz JavaScript Syntax
+
+on:
+  push:
+    paths:
+      - '.github/trigger-zoology-apostrophe-fix.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Escape apostrophes inside existing JavaScript strings
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('zoology-chapter-test.html')
+          s=p.read_text(encoding='utf-8')
+          fixes={
+            "NCERT's five-kingdom discussion":"NCERT\\'s five-kingdom discussion",
+            "Whittaker's five-kingdom classification":"Whittaker\\'s five-kingdom classification",
+          }
+          changed=False
+          for old,new in fixes.items():
+            if old in s:
+              s=s.replace(old,new)
+              changed=True
+              print('Fixed:',old)
+          p.write_text(s,encoding='utf-8')
+          if not changed:
+            print('No apostrophe replacements were necessary.')
+
+      - name: Validate the page JavaScript syntax
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const vm=require('vm');
+          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          const m=s.match(/<script>([\s\S]*?)<\/script><script id="duo-js">/);
+          if(!m) throw new Error('Main quiz script not found');
+          new vm.Script(m[1]);
+          console.log('Main quiz JavaScript syntax: PASS');
+          const d=s.match(/<script id="duo-js">([\s\S]*?)<\/script>/);
+          if(!d) throw new Error('Duolingo script not found');
+          new vm.Script(d[1]);
+          console.log('Duolingo JavaScript syntax: PASS');
+          NODE
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Fix Zoology quiz JavaScript syntax'
+            git push
+          fi

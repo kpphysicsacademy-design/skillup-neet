@@ -1,0 +1,66 @@
+name: Update Zoology Test UI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-zoology-duolingo.yml'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Duolingo-style MCQ interface
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          marker = 'const tests={'
+          start = s.index(marker)
+          end_marker = 'const params=new URLSearchParams'
+          end = s.index(end_marker)
+          tests = s[start:end]
+
+          style = r'''<style>
+          :root{--bg:#f7f7f7;--card:#fff;--text:#18212f;--muted:#687385;--brand:#58cc02;--brand2:#46a302;--blue:#1cb0f6;--danger:#ff4b4b;--border:#e5e7eb;--shadow:0 3px 0 #d9dde3}
+          *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}.wrap{max-width:720px;margin:auto;padding:18px 14px 42px}
+          header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);padding:12px 14px}.top{max-width:720px;margin:auto;display:flex;align-items:center;gap:10px}.mascot{width:42px;height:42px;flex:none}.headcopy{flex:1}h1{font-size:clamp(20px,5vw,30px);margin:0;font-weight:850}.muted{color:var(--muted);font-size:13px}.stats{display:flex;gap:7px;font-size:13px;font-weight:800;white-space:nowrap}.pill{background:#f1f3f5;border-radius:999px;padding:6px 8px}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin:12px auto 0;max-width:720px}.progress>i{display:block;height:100%;width:0;background:var(--brand);border-radius:999px;transition:width .25s ease}
+          .lesson{display:flex;align-items:center;gap:12px;margin:12px 0 16px}.lesson svg{width:74px;height:74px;flex:none}.q{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 16px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}.q h2{font-size:20px;line-height:1.35;margin:0 0 18px}.qnum{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}.options{display:grid;gap:11px}.opt{position:relative;border:2px solid #dfe3e8;border-bottom-width:4px;border-radius:14px;padding:13px 14px;background:#fff;cursor:pointer;font-weight:700;transition:transform .08s,border-color .12s,background .12s}.opt:hover{border-color:#b8c0ca}.opt:active{transform:translateY(2px);border-bottom-width:2px}.opt.correct{border-color:var(--brand);background:#eaffd9}.opt.wrong{border-color:var(--danger);background:#ffe5e5}.letter{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:9px;background:#f1f3f5;margin-right:8px;font-weight:900}.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-weight:650}.feedback.show{display:block}.feedback.ok{background:#eaffd9;border:1px solid #b7e892}.feedback.no{background:#ffe5e5;border:1px solid #ffb3b3}.explain{margin-top:7px;color:#3c4655;font-weight:500}.next{display:none;width:100%;border:0;border-radius:14px;padding:14px;margin-top:12px;background:var(--brand);color:#fff;font-size:16px;font-weight:850;box-shadow:0 4px 0 var(--brand2);cursor:pointer}.next.show{display:block}.next:active{transform:translateY(2px);box-shadow:0 2px 0 var(--brand2)}.result{display:none;text-align:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:26px 18px;box-shadow:0 4px 12px rgba(0,0,0,.05)}.result.show{display:block}.score{font-size:42px;font-weight:900;margin:4px}.xp{color:#d99b00;font-weight:900}.back{display:inline-block;margin-top:18px;color:#315efb;text-decoration:none;font-weight:750}.hidden{display:none!important}@media(max-width:480px){.stats{font-size:12px}.pill{padding:5px 6px}.q{padding:18px 13px}.q h2{font-size:18px}.lesson svg{width:60px;height:60px}}
+          </style>'''
+
+          shell = r'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp NEET Zoology — Chapter Test</title>''' + style + r'''</head><body><header><div class="top"><svg class="mascot" viewBox="0 0 64 64" aria-label="SkillUp mascot"><circle cx="32" cy="32" r="30" fill="#58cc02"/><circle cx="22" cy="27" r="5" fill="#fff"/><circle cx="42" cy="27" r="5" fill="#fff"/><circle cx="22" cy="27" r="2"/><circle cx="42" cy="27" r="2"/><path d="M24 40q8 7 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><div class="headcopy"><h1 id="title">Zoology Chapter Test</h1><div class="muted">Learn • Practice • Master</div></div><div class="stats"><span class="pill">⭐ <b id="xp">0</b></span><span class="pill">🔥 <b id="streak">0</b></span></div></div><div class="progress"><i id="bar"></i></div></header><main class="wrap"><div id="content"></div></main><script>''' + tests + r'''
+          const params=new URLSearchParams(location.search);const chapter=params.get('chapter')||'';const type=params.get('type')||'chapter';const data=tests[chapter];
+          const titleSuffix=type==='lesson'?' — Lesson Test':' — Chapter Test';document.getElementById('title').textContent=chapter?chapter+titleSuffix:'Zoology Test';
+          const content=document.getElementById('content');const bar=document.getElementById('bar');const xpEl=document.getElementById('xp');const streakEl=document.getElementById('streak');let xp=0,streak=0,current=0,score=0;
+          const mascot='<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37" fill="#1cb0f6"/><circle cx="28" cy="34" r="6" fill="#fff"/><circle cx="52" cy="34" r="6" fill="#fff"/><circle cx="28" cy="34" r="2"/><circle cx="52" cy="34" r="2"/><path d="M27 49q13 10 26 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>';
+          function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+          function renderQuestion(){
+            if(!data){content.innerHTML='<section class="q"><h2>Test not available</h2><div class="explain">No test has been published for this lesson yet.</div></section>';return}
+            if(current>=data.length){showResult();return}
+            const x=data[current];bar.style.width=((current)/data.length*100)+'%';
+            content.innerHTML='<div class="lesson">'+mascot+'<div><b>🧠 Keep your streak alive!</b><div class="muted">Choose the best answer. You will see the explanation immediately.</div></div></div><section class="q"><div class="qnum">Question '+(current+1)+' of '+data.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+x.o.map((v,j)=>'<button class="opt" data-index="'+j+'"><span class="letter">'+String.fromCharCode(65+j)+'</span>'+esc(v)+'</button>').join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue ➜</button></section>';
+            [...document.querySelectorAll('.opt')].forEach((b,j)=>b.addEventListener('click',()=>answer(j)));
+            document.getElementById('next').addEventListener('click',()=>{current++;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});});
+          }
+          function answer(j){
+            const x=data[current];const buttons=[...document.querySelectorAll('.opt')];buttons.forEach(b=>b.disabled=true);const correct=x.o.indexOf(x.a);buttons[correct].classList.add('correct');const fb=document.getElementById('feedback');
+            if(j===correct){score++;xp+=10;streak++;streakEl.textContent=streak;xpEl.textContent=xp;fb.className='feedback show ok';fb.innerHTML='🎉 <b>Correct!</b> +10 XP<div class="explain">💡 '+esc(x.e)+'</div>';}
+            else{streak=0;streakEl.textContent=streak;buttons[j].classList.add('wrong');fb.className='feedback show no';fb.innerHTML='💪 <b>Not quite.</b> Correct answer: '+esc(x.a)+'<div class="explain">💡 '+esc(x.e)+'</div>';}
+            document.getElementById('next').classList.add('show');bar.style.width=((current+1)/data.length*100)+'%';
+          }
+          function showResult(){bar.style.width='100%';const pct=Math.round(score/data.length*100);content.innerHTML='<section class="result show"><div style="font-size:64px">🏆</div><h2>Lesson complete!</h2><div class="score">'+score+' / '+data.length+'</div><div><b>'+pct+'% accuracy</b></div><p class="xp">⭐ '+xp+' XP earned &nbsp; 🔥 '+streak+' current streak</p><p class="muted">Great work. Review the explanations and try again to improve your score.</p><button class="next show" onclick="location.reload()">🔄 Try Again</button><a class="back" href="javascript:history.back()">← Back</a></section>';}
+          renderQuestion();
+          </script></body></html>'''
+          p.write_text(shell, encoding='utf-8')
+          PY
+      - name: Commit updated page
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          if git diff --cached --quiet; then echo 'No changes'; else git commit -m 'Apply Duolingo-style MCQ interface [skip ci]' && git push; fi

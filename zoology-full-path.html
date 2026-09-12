@@ -23,14 +23,14 @@
 <script>
 const chapters=[
  {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'What is Living?',icon:'🌱',desc:'Living characteristics, metabolism, consciousness and reproduction'},
- {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Biological Classification',icon:'🧫',desc:'Five-kingdom classification, Monera, Protista and fungi'},
- {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Animal Kingdom',icon:'🦁',desc:'Animal diversity, classification and major phyla'},
- {unit:'UNIT 2',unitTitle:'Structural Organisation',name:'Structural Organisation in Animals',icon:'🧬',desc:'Animal tissues, morphology and structural organisation'},
+ {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Biological Classification',icon:'🧫',desc:'Five-kingdom classification, Monera, Protista, fungi, viruses and lichens'},
+ {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'Animal Kingdom',icon:'🦁',desc:'Animal diversity, symmetry, organisation, major phyla and chordates'},
+ {unit:'UNIT 2',unitTitle:'Structural Organisation in Animals',name:'Structural Organisation in Animals',icon:'🧬',desc:'Animal tissues, epithelial, connective, muscular and nervous tissues'},
+ {unit:'UNIT 2',unitTitle:'Structural Organisation in Animals',name:'Animal Morphology & Anatomy',icon:'🫀',desc:'Cockroach morphology, anatomy, organ systems and reproductive features'},
  {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Cell: The Unit of Life',icon:'🔬',desc:'Cell structure, organelles, membranes and transport'},
  {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Biomolecules',icon:'🧪',desc:'Proteins, carbohydrates, lipids, nucleic acids and enzymes'},
- {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Cell Cycle and Cell Division',icon:'🔄',desc:'Cell cycle, mitosis, meiosis and significance'},
- {unit:'UNIT 5',unitTitle:'Human Physiology',name:'Digestion and Absorption',icon:'🍎',desc:'Digestive system, enzymes, absorption and disorders'},
- {unit:'UNIT 2',unitTitle:'Structural Organisation',name:'Animal Morphology & Anatomy',icon:'🫀',desc:'Body plan, organs, systems and important anatomical features'}
+ {unit:'UNIT 3',unitTitle:'Cell: Structure and Function',name:'Cell Cycle and Cell Division',icon:'🔄',desc:'Cell cycle, mitosis, meiosis, crossing over and significance'},
+ {unit:'UNIT 5',unitTitle:'Human Physiology',name:'Digestion and Absorption',icon:'🍎',desc:'Digestive system, enzymes, absorption, hormones and disorders'}
 ];
 const key='skillup-zoology-progress-v2';
 let state={done:[],xp:20,streak:1};try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'))}catch(e){}
@@ -40,10 +40,28 @@ function render(){
  const q=document.getElementById('search').value.trim().toLowerCase(), f=document.getElementById('filter').value;
  const filtered=chapters.filter(c=>(!q||(c.name+' '+c.desc+' '+c.unitTitle).toLowerCase().includes(q))&&(f==='all'||(f==='done'?state.done.includes(c.name):!state.done.includes(c.name))));
  const path=document.getElementById('path');path.innerHTML='';let last='';
- filtered.forEach((c,i)=>{if(c.unit!==last){last=c.unit;const u=document.createElement('div');u.className='unit';u.innerHTML='<span class="unit-num">'+c.unit.replace('UNIT ','')+'</span><div><h2>'+c.unitTitle+'</h2><small>Learn → Practice → Master</small></div>';path.appendChild(u)}
- const done=state.done.includes(c.name),el=document.createElement('article');el.className='chapter '+(done?'done completed':'');el.innerHTML='<span class="node"></span><a class="chapter-card" href="'+testUrl(c.name)+'"><div class="chapter-icon">'+c.icon+'</div><div class="chapter-main"><h3>'+c.name+'</h3><p>'+c.desc+'</p><div class="meta"><span class="tag">📖 Learn</span><span class="tag test">⚡ 30 MCQs</span><span class="tag">🏆 +30 XP</span></div></div><span class="go">→</span></a>';path.appendChild(el)});
+ filtered.forEach(c=>{
+   if(c.unit!==last){
+     last=c.unit;
+     const u=document.createElement('div');
+     u.className='unit';
+     u.innerHTML='<span class="unit-num">'+c.unit.replace('UNIT ','')+'</span><div><h2>'+c.unitTitle+'</h2><small>Learn → Practice → Master</small></div>';
+     path.appendChild(u);
+   }
+   const done=state.done.includes(c.name),el=document.createElement('article');
+   el.className='chapter '+(done?'done completed':'');
+   el.innerHTML='<span class="node"></span><a class="chapter-card" href="'+testUrl(c.name)+'"><div class="chapter-icon">'+c.icon+'</div><div class="chapter-main"><h3>'+c.name+'</h3><p>'+c.desc+'</p><div class="meta"><span class="tag">📖 Learn</span><span class="tag test">⚡ Practice Test</span><span class="tag">🏆 XP Progress</span></div></div><span class="go">→</span></a>';
+   path.appendChild(el);
+ });
  document.getElementById('empty').style.display=filtered.length?'none':'block';
- const d=state.done.filter(n=>chapters.some(c=>c.name===n)).length,p=Math.round(d/chapters.length*100);document.getElementById('done').textContent=d;document.getElementById('total').textContent=chapters.length;document.getElementById('percent').textContent=p+'%';document.getElementById('progress').style.width=p+'%';document.getElementById('xp').textContent=state.xp;document.getElementById('xp2').textContent=state.xp;
+ const d=state.done.filter(n=>chapters.some(c=>c.name===n)).length,p=Math.round(d/chapters.length*100);
+ document.getElementById('done').textContent=d;
+ document.getElementById('total').textContent=chapters.length;
+ document.getElementById('lessons').textContent=chapters.length*3;
+ document.getElementById('percent').textContent=p+'%';
+ document.getElementById('progress').style.width=p+'%';
+ document.getElementById('xp').textContent=state.xp;
+ document.getElementById('xp2').textContent=state.xp;
 }
 document.getElementById('search').addEventListener('input',render);document.getElementById('filter').addEventListener('change',render);render();
 </script>

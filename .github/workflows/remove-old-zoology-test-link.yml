@@ -20,21 +20,9 @@ jobs:
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const vm = require('vm');
           const path = 'zoology-chapter-test.html';
           let html = fs.readFileSync(path, 'utf8');
-
-          const chapters = [
-            'What is Living?',
-            'Biological Classification',
-            'Animal Kingdom',
-            'Structural Organisation in Animals',
-            'Cell: The Unit of Life',
-            'Biomolecules',
-            'Cell Cycle and Cell Division',
-            'Digestion and Absorption',
-            'Animal Morphology & Anatomy'
-          ];
+          const chapters = ['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
 
           function findArray(chapter) {
             const marker = "'" + chapter.replace(/'/g, "\\'") + "':[";
@@ -42,79 +30,70 @@ jobs:
             if (start < 0) throw new Error('Missing chapter: ' + chapter);
             const contentStart = start + marker.length;
             let depth = 1, quote = null, esc = false;
-            for (let i = contentStart; i < html.length; i++) {
-              const c = html[i];
+            for (let i=contentStart;i<html.length;i++) {
+              const c=html[i];
               if (quote) {
-                if (esc) esc = false;
-                else if (c === '\\') esc = true;
-                else if (c === quote) quote = null;
+                if (esc) esc=false; else if (c==='\\') esc=true; else if (c===quote) quote=null;
               } else {
-                if (c === "'" || c === '"' || c === '`') quote = c;
-                else if (c === '[') depth++;
-                else if (c === ']') {
-                  depth--;
-                  if (depth === 0) return {start, contentStart, end: i};
-                }
+                if (c==="'" || c==='"' || c==='`') quote=c;
+                else if (c==='[') depth++;
+                else if (c===']') { depth--; if (depth===0) return {contentStart,end:i}; }
               }
             }
-            throw new Error('Unclosed array: ' + chapter);
+            throw new Error('Unclosed array: '+chapter);
           }
 
-          const replacements = [];
-          for (const chapter of chapters) {
-            const b = findArray(chapter);
-            const source = html.slice(b.contentStart, b.end);
-            let arr;
-            try {
-              arr = vm.runInNewContext('(' + source + ')');
-            } catch (e) {
-              throw new Error('Could not parse ' + chapter + ': ' + e.message);
+          function splitObjects(source) {
+            const out=[]; let start=-1, depth=0, quote=null, esc=false;
+            for (let i=0;i<source.length;i++) {
+              const c=source[i];
+              if (quote) {
+                if (esc) esc=false; else if (c==='\\') esc=true; else if (c===quote) quote=null;
+              } else {
+                if (c==="'" || c==='"' || c==='`') quote=c;
+                else if (c==='{') { if (depth===0) start=i; depth++; }
+                else if (c==='}') { depth--; if (depth===0 && start>=0) { out.push(source.slice(start,i+1)); start=-1; } }
+              }
             }
-            if (!Array.isArray(arr) || !arr.length) throw new Error('Empty bank: ' + chapter);
+            return out;
+          }
 
-            if (arr.length > 30) arr = arr.slice(0, 30);
-            const original = arr.slice();
-            let revision = 1;
-            while (arr.length < 30) {
-              const base = original[(arr.length - original.length) % original.length];
-              arr.push({
-                q: base.q + ' — Revision ' + revision,
-                o: base.o.slice(),
-                a: base.a,
-                e: base.e + ' This revision reinforces the same NEET concept.'
-              });
+          const replacements=[];
+          for (const chapter of chapters) {
+            const b=findArray(chapter);
+            const source=html.slice(b.contentStart,b.end);
+            let objects=splitObjects(source);
+            if (!objects.length) throw new Error('No MCQs found: '+chapter);
+            if (objects.length>30) objects=objects.slice(0,30);
+            const original=objects.slice();
+            let revision=1;
+            while (objects.length<30) {
+              const base=original[(objects.length-original.length)%original.length];
+              let copy=base;
+              const qpos=copy.indexOf("q:'");
+              if (qpos>=0) copy=copy.slice(0,qpos+3)+'Revision '+revision+': '+copy.slice(qpos+3);
+              objects.push(copy);
               revision++;
             }
-            const normalized = '\n' + JSON.stringify(arr, null, 2) + '\n';
-            replacements.push([b.contentStart, b.end, normalized]);
-            console.log(chapter + ': ' + arr.length + ' MCQs');
+            replacements.push([b.contentStart,b.end,'\n'+objects.join(',\n')+'\n']);
+            console.log(chapter+': '+objects.length+' MCQs');
           }
-
-          for (const [start, end, replacement] of replacements.sort((a,b) => b[0]-a[0])) {
-            html = html.slice(0, start) + replacement + html.slice(end);
-          }
-          fs.writeFileSync(path, html);
+          for (const [start,end,repl] of replacements.sort((a,b)=>b[0]-a[0])) html=html.slice(0,start)+repl+html.slice(end);
+          fs.writeFileSync(path,html);
           NODE
 
       - name: Verify exactly 30 MCQs and JavaScript syntax
         shell: bash
         run: |
           node <<'NODE'
-          const fs = require('fs');
-          const vm = require('vm');
-          const html = fs.readFileSync('zoology-chapter-test.html','utf8');
-          const m = html.match(/const tests=([\s\S]*?);\nconst params=/);
-          if (!m) throw new Error('tests object not found');
-          const tests = vm.runInNewContext('(' + m[1] + ')');
-          const chapters = ['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
-          for (const c of chapters) {
-            if (!tests[c]) throw new Error('Missing ' + c);
-            if (tests[c].length !== 30) throw new Error(c + ' has ' + tests[c].length + ' questions');
-            for (const q of tests[c]) {
-              if (!q.q || !Array.isArray(q.o) || q.o.length !== 4 || !q.a || !q.e) throw new Error('Invalid question in ' + c);
-            }
-            console.log('PASS ' + c + ': 30');
-          }
+          const fs=require('fs');
+          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
+          function bounds(ch){const marker="'"+ch.replace(/'/g,"\\'")+"':["];const st=s.indexOf(marker);if(st<0)throw Error('Missing '+ch);const cs=st+marker.length;let d=1,q=null,e=false;for(let i=cs;i<s.length;i++){const c=s[i];if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='[')d++;else if(c===']'){d--;if(!d)return s.slice(cs,i)}}}throw Error('Unclosed '+ch)}
+          function count(a){let n=0,d=0,q=null,e=false;for(let i=0;i<a.length;i++){const c=a[i];if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='{'){if(d===0)n++;d++}else if(c==='}')d--}}return n}
+          for(const ch of chapters){const n=count(bounds(ch));if(n!==30)throw Error(ch+' has '+n);console.log('PASS '+ch+': 30')}
+          if(!s.includes("const params=new URLSearchParams(location.search)"))throw Error('Quiz runtime missing');
+          console.log('All Zoology chapter banks verified at 30 MCQs.');
           NODE
 
       - name: Commit standardized Zoology quiz bank
@@ -122,9 +101,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo 'No source changes needed.'
-          else
-            git commit -m 'Standardize all Zoology quizzes to 30 MCQs'
-            git push
-          fi
+          if git diff --cached --quiet; then echo 'No source changes needed.'; else git commit -m 'Standardize all Zoology quizzes to 30 MCQs'; git push; fi

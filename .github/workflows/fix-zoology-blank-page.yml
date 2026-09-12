@@ -1,0 +1,35 @@
+name: Fix Zoology Test Blank Page
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-zoology-blank-page.yml'
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repair missing style closing tag
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('zoology-chapter-test.html')
+          s = p.read_text(encoding='utf-8')
+          old = '.duo-xp{color:#b77900;font-weight:900}</head>'
+          new = '.duo-xp{color:#b77900;font-weight:900}</style></head>'
+          if old not in s:
+              raise SystemExit('Expected broken style marker was not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add zoology-chapter-test.html
+          git diff --cached --quiet || (git commit -m 'Fix blank Zoology chapter test page' && git push)

@@ -1,71 +1,65 @@
 name: Fix Biological Classification Blank Page
+
 on:
   workflow_dispatch:
   push:
     branches: [main]
+
 permissions:
   contents: write
+
 jobs:
   fix:
-    if: ${{ !contains(github.event.head_commit.message, 'Fix Biological Classification JavaScript separator') }}
+    if: ${{ !contains(github.event.head_commit.message, 'Fix Zoology quiz JavaScript syntax') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Repair missing comma before BC extra MCQs
+
+      - name: Repair known Zoology data-string syntax
         shell: python
         run: |
           from pathlib import Path
           p=Path('zoology-chapter-test.html')
           s=p.read_text(encoding='utf-8')
-          marker='/* SKILLUP-BC-EXTRA-20 */'
-          bad='}\n'+marker
-          good='},\n'+marker
-          if bad in s:
-              s=s.replace(bad,good,1)
-              p.write_text(s,encoding='utf-8')
-              print('Repaired missing comma before BC extra MCQs')
-          else:
-              print('No repair needed for BC separator')
-      - name: Repair unescaped apostrophes in JavaScript strings
-        shell: python
-        run: |
-          from pathlib import Path
-          p=Path('zoology-chapter-test.html')
-          s=p.read_text(encoding='utf-8')
-          fixes={
-            "NCERT's five-kingdom discussion":"NCERT\\'s five-kingdom discussion",
-            "Whittaker's five-kingdom classification":"Whittaker\\'s five-kingdom classification",
+          replacements={
+            "NCERT's five-kingdom discussion":"NCERT’s five-kingdom discussion",
+            "Whittaker's five-kingdom classification":"Whittaker’s five-kingdom classification",
           }
           changed=False
-          for old,new in fixes.items():
+          for old,new in replacements.items():
               if old in s:
                   s=s.replace(old,new)
                   changed=True
-                  print('Escaped:',old)
+                  print('Repaired:',old)
           p.write_text(s,encoding='utf-8')
-          if not changed:
-              print('No apostrophe repair needed')
-      - name: Validate Zoology JavaScript syntax
-        shell: bash
+          print('changed=',changed)
+
+      - name: Validate embedded JavaScript
+        shell: python
         run: |
-          node <<'NODE'
-          const fs=require('fs');
-          const vm=require('vm');
-          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
-          const m=s.match(/<script>([\s\S]*?)<\/script><script id="duo-js">/);
-          if(!m) throw new Error('Main quiz script not found');
-          new vm.Script(m[1]);
-          console.log('Main quiz JavaScript: PASS');
-          const d=s.match(/<script id="duo-js">([\s\S]*?)<\/script>/);
-          if(!d) throw new Error('Duolingo script not found');
-          new vm.Script(d[1]);
-          console.log('Duolingo JavaScript: PASS');
-          NODE
-      - name: Commit
+          import re, subprocess
+          from pathlib import Path
+          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
+          m=re.search(r'<script>([\s\S]*?)</script><script id="duo-js">',s)
+          if not m: raise SystemExit('Main quiz script missing')
+          Path('/tmp/main-quiz.js').write_text(m.group(1),encoding='utf-8')
+          d=re.search(r'<script id="duo-js">([\s\S]*?)</script>',s)
+          if not d: raise SystemExit('Duolingo script missing')
+          Path('/tmp/duo.js').write_text(d.group(1),encoding='utf-8')
+          for f in ['/tmp/main-quiz.js','/tmp/duo.js']:
+              r=subprocess.run(['node','--check',f],capture_output=True,text=True)
+              if r.returncode:
+                  print(r.stdout);print(r.stderr);raise SystemExit(f+' has invalid JavaScript')
+              print(f,'PASS')
+
+      - name: Commit repaired Zoology page
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html
-          git diff --cached --quiet && exit 0
-          git commit -m "Fix Zoology quiz JavaScript syntax"
-          git push
+          if git diff --cached --quiet; then
+            echo "No Zoology syntax changes needed."
+          else
+            git commit -m "Fix Zoology quiz JavaScript syntax"
+            git push
+          fi

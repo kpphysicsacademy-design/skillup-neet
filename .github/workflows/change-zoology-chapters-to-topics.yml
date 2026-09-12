@@ -1,0 +1,69 @@
+name: Change Zoology Chapters to Topics
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/trigger-zoology-topics.txt
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update terminology
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'zoology-full-path.html';
+          let s = fs.readFileSync(path, 'utf8');
+
+          const replacements = [
+            ['chapter by chapter', 'topic by topic'],
+            ['chapter journey', 'topic journey'],
+            ['CHAPTERS DONE', 'TOPICS DONE'],
+            ['CHAPTERS', 'TOPICS'],
+            ['Search Zoology chapters…', 'Search Zoology topics…'],
+            ['aria-label="Search chapters"', 'aria-label="Search topics"'],
+            ['No chapter matches your search.', 'No topic matches your search.'],
+            ['const chapters=[', 'const topics=['],
+            ['chapters.filter(', 'topics.filter('],
+            ['chapters.length', 'topics.length'],
+            ['chapters.some(', 'topics.some('],
+            ['chapters.forEach(', 'topics.forEach(']
+          ];
+          for (const [a,b] of replacements) s = s.split(a).join(b);
+
+          fs.writeFileSync(path, s);
+          console.log('Updated Zoology Full Path from chapters to topics terminology.');
+          NODE
+
+      - name: Validate
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const vm = require('vm');
+          const s = fs.readFileSync('zoology-full-path.html', 'utf8');
+          if (!s.includes('TOPICS DONE') || !s.includes('Search Zoology topics')) throw new Error('Topic labels missing');
+          const js = s.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+          if (!js) throw new Error('Quiz path script missing');
+          new vm.Script(js);
+          if (!s.includes('const topics=[')) throw new Error('Topics data array missing');
+          console.log('Validation passed.');
+          NODE
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zoology-full-path.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Change Zoology chapters to topics"
+          git push origin main

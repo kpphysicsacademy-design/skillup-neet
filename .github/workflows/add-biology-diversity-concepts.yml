@@ -1,0 +1,71 @@
+name: Add Biology Diversity Concepts
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/trigger-biology-diversity-concepts.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add numbered concepts under Diversity in Living World
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('biology-home.html')
+          s = p.read_text(encoding='utf-8')
+
+          concepts = [
+            'What is Living?', 'Biodiversity', 'Need for Classification', 'Taxonomy',
+            'Systematics', 'Concept of Species', 'Taxonomical Hierarchy', 'Binomial Nomenclature',
+            'Five-Kingdom Classification', 'Kingdom Monera', 'Kingdom Protista', 'Kingdom Fungi',
+            'Major Groups of Monera', 'Major Groups of Protista', 'Major Groups of Fungi', 'Lichens',
+            'Viruses', 'Viroids', 'Algae', 'Bryophytes', 'Pteridophytes', 'Gymnosperms',
+            'Comparative Features of Major Plant Groups', 'Classification of Major Plant Groups',
+            'Examples of Major Plant Groups', 'Non-Chordates',
+            'Classification of Non-Chordates up to Phylum Level', 'Chordates',
+            'Classification of Chordates up to Class Level', 'Salient Features of Animal Phyla',
+            'Salient Features of Chordate Classes', 'Examples of Non-Chordates', 'Examples of Chordates'
+          ]
+
+          cards = '<div class="concepts">' + ''.join(
+            f'<div class="concept"><span class="concept-num">{i}</span><span class="concept-text">{name}</span></div>'
+            for i, name in enumerate(concepts, 1)
+          ) + '</div>'
+
+          # Add concept-card styling once.
+          marker = '.concepts{display:grid;gap:8px;margin-top:10px}'
+          if marker not in s:
+              s = s.replace('</style>', marker + '.concept{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#f8fbf6;border:1px solid #dfead9;border-radius:12px}.concept-num{min-width:28px;height:28px;border-radius:9px;background:#eaf8e4;color:#3f8f05;display:grid;place-items:center;font-size:10px;font-weight:950}.concept-text{font-size:11px;color:#263244;font-weight:800;line-height:1.45}@media(max-width:650px){.concept{padding:9px 10px}}</style>', 1)
+
+          pattern = r'(<details class="unit" open><summary>.*?<span>Diversity in Living World</span>.*?</summary><div class="unit-body">).*?(</div></details>)'
+          replacement = r'\1' + cards + r'\2'
+          s2, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit('Diversity in Living World unit not found')
+          s = s2
+
+          if s.count('class="concept"') < 33:
+              raise SystemExit('Expected 33 concept cards')
+          if 'Diversity in Living World</span>' not in s:
+              raise SystemExit('Unit heading missing')
+
+          p.write_text(s, encoding='utf-8')
+          print('Added 33 numbered concepts under Diversity in Living World')
+
+      - name: Commit update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add biology-home.html
+          git diff --cached --quiet && echo 'No changes needed' && exit 0
+          git commit -m 'Add 33 numbered Diversity in Living World concepts'
+          git push

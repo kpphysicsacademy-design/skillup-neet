@@ -1,4 +1,4 @@
-name: Add The Living World chapter to Zoology Unit 1
+name: Add The Living World chapter and quiz to Zoology Unit 1
 on:
   workflow_dispatch:
   push:
@@ -11,36 +11,85 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Insert chapter
+      - name: Update Zoology path and quiz
         run: |
           node <<'NODE'
           const fs=require('fs');
-          const p='zoology-full-path.html';
-          let s=fs.readFileSync(p,'utf8');
-          if(!s.includes("name:'The Living World'")){
+          let path=fs.readFileSync('zoology-full-path.html','utf8');
+          if(!path.includes("name:'The Living World'")){
             const anchor="name:'Animal Kingdom',icon:'🦁'";
-            const i=s.indexOf(anchor);
+            const i=path.indexOf(anchor);
             if(i<0) throw new Error('Animal Kingdom anchor not found');
-            const lineStart=s.lastIndexOf('{',i);
-            const lineEnd=s.indexOf('\n',i);
+            const lineStart=path.lastIndexOf('{',i);
             const insert=" {unit:'UNIT 1',unitTitle:'Diversity in Living World',name:'The Living World',icon:'🌍',desc:'Characteristics of living organisms, biodiversity, taxonomy, nomenclature and species'},\n";
-            s=s.slice(0,lineStart)+insert+s.slice(lineStart);
+            path=path.slice(0,lineStart)+insert+path.slice(lineStart);
+            fs.writeFileSync('zoology-full-path.html',path);
           }
-          fs.writeFileSync(p,s);
+
+          const p='zoology-chapter-test.html';
+          let s=fs.readFileSync(p,'utf8');
+          if(!s.includes('"The Living World":[')){
+            const quiz=`"The Living World":[
+{"q":"The basic unit of classification is:","o":["Species","Genus","Family","Order"],"a":"Species","e":"Species is the basic unit of classification."},
+{"q":"The scientific name of an organism is written using:","o":["Binomial nomenclature","Trinomial nomenclature","Polynomial nomenclature","Common nomenclature"],"a":"Binomial nomenclature","e":"Binomial nomenclature uses two names: genus and specific epithet."},
+{"q":"In Mangifera indica, Mangifera represents the:","o":["Genus","Species","Family","Order"],"a":"Genus","e":"In a binomial name, the first word denotes the genus."},
+{"q":"In Mangifera indica, indica is the:","o":["Specific epithet","Genus","Family name","Order name"],"a":"Specific epithet","e":"The second word in a binomial name is the specific epithet."},
+{"q":"Who introduced the binomial system of nomenclature?","o":["Carolus Linnaeus","R.H. Whittaker","Charles Darwin","Robert Hooke"],"a":"Carolus Linnaeus","e":"Carolus Linnaeus formalised binomial nomenclature."},
+{"q":"Which pair is correctly written according to binomial nomenclature?","o":["Mangifera indica","mangifera indica","MANGIFERA INDICA","Mangifera Indica"],"a":"Mangifera indica","e":"The genus begins with a capital letter and the specific epithet with a lowercase letter."},
+{"q":"The first word of a scientific name is written with:","o":["A capital initial letter","All capital letters","A lowercase initial letter","Roman numerals"],"a":"A capital initial letter","e":"The genus name begins with a capital letter."},
+{"q":"The second word of a binomial scientific name is normally written with:","o":["A lowercase initial letter","A capital initial letter","All capital letters","A numerical prefix"],"a":"A lowercase initial letter","e":"The specific epithet begins with a lowercase letter."},
+{"q":"A taxon is best described as:","o":["A group of organisms at any rank","Only a species","Only a genus","Only a kingdom"],"a":"A group of organisms at any rank","e":"A taxon is a taxonomic group of organisms assigned to a particular rank."},
+{"q":"Which sequence shows the taxonomic hierarchy from lower to higher rank?","o":["Species → Genus → Family → Order","Family → Species → Genus → Order","Genus → Species → Order → Family","Order → Family → Species → Genus"],"a":"Species → Genus → Family → Order","e":"The standard hierarchy rises from species to genus to family to order and then higher ranks."},
+{"q":"The group of related genera is called a:","o":["Family","Species","Order","Class"],"a":"Family","e":"Closely related genera are grouped into a family."},
+{"q":"The group of related families is called an:","o":["Order","Genus","Species","Phylum only"],"a":"Order","e":"Related families are placed in an order."},
+{"q":"The group of related orders is called a:","o":["Class","Family","Genus","Species"],"a":"Class","e":"Related orders are grouped into a class."},
+{"q":"In animals, related classes are grouped into a:","o":["Phylum","Family","Genus","Species"],"a":"Phylum","e":"In animal classification, related classes are grouped into a phylum."},
+{"q":"In plants, the term commonly used instead of phylum is:","o":["Division","Family","Genus","Species"],"a":"Division","e":"Division is commonly used for this rank in plant classification."},
+{"q":"The highest taxonomic category among the following is:","o":["Kingdom","Class","Order","Family"],"a":"Kingdom","e":"Kingdom is higher than class, order and family in the standard hierarchy."},
+{"q":"A herbarium is a collection of:","o":["Dried, pressed and preserved plant specimens","Live wild animals","Preserved insects only","Fresh fruits only"],"a":"Dried, pressed and preserved plant specimens","e":"Herbaria contain dried, pressed and systematically arranged plant specimens."},
+{"q":"A botanical garden mainly maintains:","o":["Living plant collections","Only dried specimens","Only animal specimens","Only fossils"],"a":"Living plant collections","e":"Botanical gardens maintain collections of living plants for study and reference."},
+{"q":"A museum is useful in taxonomy because it may contain:","o":["Preserved specimens and reference material","Only living plants","Only soil samples","Only microscopes"],"a":"Preserved specimens and reference material","e":"Museums maintain preserved specimens and other materials useful for taxonomic study."},
+{"q":"Zoological parks are especially useful for studying:","o":["Living wild animals","Dried plant specimens","Herbarium sheets","Fossil pollen only"],"a":"Living wild animals","e":"Zoological parks maintain living wild animals for observation and study."},
+{"q":"A taxonomic key is primarily used for:","o":["Identification of organisms","Measuring body temperature","Determining blood pressure","Growing cultures"],"a":"Identification of organisms","e":"Keys help identify organisms by selecting between contrasting characteristics."},
+{"q":"A taxonomic key generally uses:","o":["Contrasting character pairs","Random guesses","Only body size","Only geographical location"],"a":"Contrasting character pairs","e":"Keys use pairs of contrasting statements called couplets."},
+{"q":"The scientific name of a species is useful because it:","o":["Provides a universal reference name","Changes with every language","Describes only its habitat","Gives its exact population"],"a":"Provides a universal reference name","e":"Scientific names provide standardised communication across languages and regions."},
+{"q":"The term biodiversity refers broadly to:","o":["Variety of living organisms","Only animal diversity","Only plant diversity","Only microbial diversity"],"a":"Variety of living organisms","e":"Biodiversity includes the variety of living organisms and their forms."},
+{"q":"Which rank comes immediately above species?","o":["Genus","Family","Order","Class"],"a":"Genus","e":"Species are grouped into genera, so genus is the next higher rank."},
+{"q":"Which rank comes immediately above genus?","o":["Family","Order","Class","Kingdom"],"a":"Family","e":"Related genera are grouped into families."},
+{"q":"Which rank comes immediately above family?","o":["Order","Class","Phylum","Kingdom"],"a":"Order","e":"Related families are grouped into orders."},
+{"q":"Which rank comes immediately below kingdom in the animal hierarchy?","o":["Phylum","Class","Order","Family"],"a":"Phylum","e":"The usual sequence is Kingdom → Phylum → Class → Order → Family → Genus → Species."},
+{"q":"Why are common names less suitable than scientific names for universal communication?","o":["They vary among regions and languages","They always contain two words","They are written in italics","They identify taxonomic rank"],"a":"They vary among regions and languages","e":"Common names can differ between languages and regions, whereas scientific names are standardised."},
+{"q":"Which statement about species is most appropriate in taxonomy?","o":["Species is the fundamental taxonomic category","Species is always a family","Species is higher than kingdom","Species contains unrelated genera"],"a":"Species is the fundamental taxonomic category","e":"Species is treated as the basic or fundamental unit of classification."}
+],`;
+            const marker='"Biological Classification":[';
+            const i=s.indexOf(marker);
+            if(i<0) throw new Error('Biological Classification dataset not found');
+            s=s.slice(0,i)+quiz+s.slice(i);
+            s=s.replace('<title>SkillUp NEET Zoology — Chapter Test</title>','<title>SkillUp NEET Zoology — Topic Quiz</title>');
+            s=s.replace('Zoology Chapter Test','Zoology Topic Quiz');
+            fs.writeFileSync(p,s);
+          }
           NODE
       - name: Validate
         run: |
           node - <<'NODE'
-          const fs=require('fs'); const s=fs.readFileSync('zoology-full-path.html','utf8');
-          if(!s.includes("name:'The Living World'")) throw new Error('chapter missing');
-          const a=s.indexOf("name:'What is Living?'"), b=s.indexOf("name:'The Living World'"), c=s.indexOf("name:'Biological Classification'"), d=s.indexOf("name:'Animal Kingdom'");
-          if(!(a<b && b<c && c<d)) throw new Error('Unit 1 order invalid');
-          console.log('Validated: What is Living? → The Living World → Biological Classification → Animal Kingdom');
+          const fs=require('fs'),vm=require('vm');
+          const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          if(!s.includes('"The Living World":[')) throw new Error('The Living World quiz missing');
+          const m=s.match(/"The Living World":\[(.*?)\],"Biological Classification"/s);
+          if(!m) throw new Error('Quiz boundary missing');
+          const count=(m[1].match(/\{"q":/g)||[]).length;
+          console.log('The Living World MCQs:',count);
+          if(count!==30) throw new Error('Expected 30 MCQs, found '+count);
+          const script=s.match(/<script>([\s\S]*?)<\/script>/)[1];
+          new vm.Script(script);
+          if(!s.includes('zoology-chapter-test.html')) throw new Error('Quiz route missing');
+          console.log('Quiz JavaScript syntax validated.');
           NODE
       - name: Commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add zoology-full-path.html
-          git commit -m 'Add The Living World chapter to Zoology Unit 1' || echo 'No changes'
+          git add zoology-full-path.html zoology-chapter-test.html
+          git commit -m 'Add The Living World 30-question Zoology quiz' || echo 'No changes'
           git push

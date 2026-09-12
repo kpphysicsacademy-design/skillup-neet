@@ -1,0 +1,50 @@
+name: Update Biology Sub-concepts
+on:
+  push:
+    paths:
+      - '.github/trigger-biology-subconcepts.txt'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build sub-concept section
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const page='biology-home.html';
+          const data=JSON.parse(fs.readFileSync('biology-subconcepts.json','utf8'));
+          let html=fs.readFileSync(page,'utf8');
+          const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+          const icons=['🧬','🌿','🔬','🌱','🫀','🌸','🧬','🦠','🧪','🌍'];
+          let section='<section class="subconcept-section" id="subconcepts"><div class="subconcept-title"><h2>🧠 Sub-concepts</h2><span>UNIT → TOPIC → SUB-CONCEPT</span></div><div class="subconcept-grid">';
+          data.forEach((u,ui)=>{
+            section+=`<details class="subunit" ${ui===0?'open':''}><summary><span class="subicon">${icons[ui]}</span><span><b>Unit ${String(ui+1).padStart(2,'0')}</b><strong>${esc(u.unit)}</strong></span><em>${u.topics.reduce((n,t)=>n+t.sub.length,0)} sub-concepts</em></summary><div class="subunit-body">`;
+            u.topics.forEach((t,ti)=>{
+              section+=`<div class="subtopic"><div class="subtopic-head"><span>${ui+1}.${ti+1}</span><strong>${esc(t.topic)}</strong></div><div class="subitems">`;
+              t.sub.forEach((s,si)=>section+=`<a class="subitem" href="question-bank.html?subject=biology&topic=${encodeURIComponent(s)}"><span>${si+1}</span>${esc(s)}<b>›</b></a>`);
+              section+='</div></div>';
+            });
+            section+='</div></details>';
+          });
+          section+='</div></section>';
+          const css=`<style>.subconcept-section{margin:30px 0}.subconcept-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 0 12px}.subconcept-title h2{margin:0;font-size:22px;font-weight:950}.subconcept-title span{font-size:10px;color:#667085;font-weight:800}.subconcept-grid{display:grid;gap:10px}.subunit{background:#fff;border:2px solid #dfe8dc;border-radius:18px;overflow:hidden}.subunit summary{list-style:none;cursor:pointer;padding:14px;display:flex;align-items:center;gap:11px}.subunit summary::-webkit-details-marker{display:none}.subunit summary:after{content:'+';font-size:20px;color:#8a94a3}.subunit[open] summary:after{content:'−'}.subicon{width:40px;height:40px;border-radius:13px;background:#eaf8e4;display:grid;place-items:center;font-size:21px;flex:0 0 auto}.subunit summary>span:nth-child(2){display:flex;flex-direction:column;gap:2px}.subunit summary b{font-size:9px;color:#46a302;letter-spacing:1px}.subunit summary strong{font-size:14px}.subunit summary em{margin-left:auto;font-style:normal;font-size:9px;color:#667085;font-weight:800}.subunit-body{padding:0 14px 15px}.subtopic{margin-top:9px;border:1px solid #e3eadf;border-radius:13px;overflow:hidden}.subtopic-head{display:flex;gap:8px;align-items:center;padding:10px;background:#f7faf5}.subtopic-head span{font-size:9px;font-weight:950;color:#46a302}.subtopic-head strong{font-size:11px}.subitems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:8px}.subitem{display:flex;align-items:center;gap:7px;padding:8px 9px;border:1px solid #e3e9e1;border-radius:10px;color:#263244;font-size:10px;font-weight:750;background:#fff}.subitem span{min-width:20px;height:20px;border-radius:7px;background:#eaf8e4;color:#3f8f05;display:grid;place-items:center;font-size:8px;font-weight:950}.subitem b{margin-left:auto;color:#98a2b3;font-size:15px}.subitem:hover{border-color:#b9e9a8;background:#f7fff3}@media(max-width:650px){.subconcept-title{align-items:flex-start;flex-direction:column}.subitems{grid-template-columns:1fr}.subunit summary{padding:12px}.subunit summary em{display:none}}</style>`;
+          section=css+section;
+          const marker='</section><div class="source-note">';
+          if(!html.includes('id="subconcepts"')){
+            const pos=html.indexOf('<div class="source-note">');
+            if(pos<0) throw new Error('source-note marker not found');
+            html=html.slice(0,pos)+section+html.slice(pos);
+            fs.writeFileSync(page,html);
+          }
+          NODE
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add biology-home.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add Biology unit topic sub-concepts'
+          git push

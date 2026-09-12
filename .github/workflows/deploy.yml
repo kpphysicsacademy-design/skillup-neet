@@ -82,9 +82,10 @@ jobs:
           from pathlib import Path
           import re
           s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
-          m=re.search(r"'What is Living\?':\[(.*?)\],\s*'",s,re.S)
+          m=re.search(r"['\"]What is Living\?['\"]\s*:\s*\[(.*?)\],\s*['\"]",s,re.S)
           if not m: raise SystemExit('What is Living dataset missing')
-          count=len(re.findall(r"\{q:'",m.group(1)))
+          block=m.group(1)
+          count=len(re.findall(r"\bq\s*:\s*['\"]|['\"]q['\"]\s*:",block))
           print('What is Living MCQs:',count)
           if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
           PY

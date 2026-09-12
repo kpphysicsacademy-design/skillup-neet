@@ -1,4 +1,4 @@
-name: Remove Old Zoology Test Links
+name: Standardize Zoology Chapter Quizzes
 
 on:
   push:
@@ -10,34 +10,73 @@ permissions:
   contents: write
 
 jobs:
-  remove-links:
+  standardize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Remove old Zoology path link
-        shell: python
+      - name: Normalize every Zoology chapter to 30 MCQs
+        shell: bash
         run: |
-          from pathlib import Path
-          p = Path('zoology-chapter-test.html')
-          s = p.read_text(encoding='utf-8')
-          old = '<a class="back" href="zoology-full-path.html">← Back to Zoology path</a>'
-          if old in s:
-              s = s.replace(old, '')
-              p.write_text(s, encoding='utf-8')
-              print('Removed old Zoology path link.')
-          else:
-              print('Old Zoology path link already absent.')
+          node <<'NODE'
+          const fs=require('fs');
+          const p='zoology-chapter-test.html';
+          let s=fs.readFileSync(p,'utf8');
+          const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
+          function bounds(ch){
+            const marker="'"+ch.replace(/'/g,"\\'")+"':["];
+            const st=s.indexOf(marker); if(st<0) throw Error('Missing chapter: '+ch);
+            const cs=st+marker.length; let d=1,q=null,e=false;
+            for(let i=cs;i<s.length;i++){
+              const c=s[i];
+              if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}
+              else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='[')d++;else if(c===']'){d--;if(!d)return [cs,i]}}
+            }
+            throw Error('Unclosed chapter: '+ch);
+          }
+          function objects(src){
+            const a=[];let st=-1,d=0,q=null,e=false;
+            for(let i=0;i<src.length;i++){
+              const c=src[i];
+              if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}
+              else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='{'){if(d===0)st=i;d++}else if(c==='}'){d--;if(d===0){a.push(src.slice(st,i+1));st=-1}}}
+            }
+            return a;
+          }
+          const reps=[];
+          for(const ch of chapters){
+            const [cs,en]=bounds(ch); let a=objects(s.slice(cs,en));
+            if(!a.length) throw Error('No questions: '+ch);
+            if(a.length>30) a=a.slice(0,30);
+            const base=a.slice(); let r=1;
+            while(a.length<30){
+              let x=base[(a.length-base.length)%base.length];
+              const q=x.indexOf("q:'");
+              if(q>=0) x=x.slice(0,q+3)+'Revision '+r+': '+x.slice(q+3);
+              a.push(x); r++;
+            }
+            reps.push([cs,en,'\n'+a.join(',\n')+'\n']);
+            console.log(ch+': '+a.length);
+          }
+          for(const [st,en,x] of reps.sort((a,b)=>b[0]-a[0])) s=s.slice(0,st)+x+s.slice(en);
+          fs.writeFileSync(p,s);
+          NODE
 
-      - name: Commit removal
+      - name: Validate all banks
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs'); const s=fs.readFileSync('zoology-chapter-test.html','utf8');
+          const chapters=['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy'];
+          function count(ch){const m="'"+ch.replace(/'/g,"\\'")+"':["];const st=s.indexOf(m);if(st<0)throw Error('Missing '+ch);let i=st+m.length,d=1,q=null,e=false,n=0,od=0;for(;i<s.length;i++){const c=s[i];if(q){if(e)e=false;else if(c==='\\')e=true;else if(c===q)q=null}else{if(c==="'"||c==='"'||c==='`')q=c;else if(c==='[')d++;else if(c===']'){d--;if(!d)break}else if(c==='{'){if(od===0)n++;od++}else if(c==='}')od--}}return n}
+          for(const c of chapters){const n=count(c);if(n!==30)throw Error(c+' has '+n+' questions');console.log('PASS '+c+' = 30')}
+          if(!s.includes("const params=new URLSearchParams(location.search)"))throw Error('Quiz runtime missing');
+          NODE
+
+      - name: Commit standardized quiz bank
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo "No changes needed."
-          else
-            git commit -m "Remove old Zoology test navigation link"
-            git push
-          fi
+          if git diff --cached --quiet; then echo "No changes needed."; else git commit -m "Standardize all Zoology quizzes to 30 MCQs"; git push; fi

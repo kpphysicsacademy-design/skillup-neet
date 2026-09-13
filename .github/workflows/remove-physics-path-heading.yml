@@ -16,12 +16,14 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('physics-home.html')
           s=p.read_text(encoding='utf-8')
-          old='''<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b><span>Follow each unit from concept learning to NEET practice.</span></div>'''
-          s=s.replace(old,'')
-          s=s.replace('<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b>','')
+          old=s
+          s=re.sub(r'<div class="path-heading">\s*<b>🧭\s*Your 20-Unit Physics Path</b>.*?</div>\s*', '', s, count=1, flags=re.S)
+          s=re.sub(r'<b>🧭\s*Your 20-Unit Physics Path</b>', '', s)
           p.write_text(s,encoding='utf-8')
+          print('changed:', s != old)
           PY
       - name: Verify
         run: |
@@ -31,5 +33,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add physics-home.html
-          git commit -m 'Remove old Physics 20-unit path heading'
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m 'Remove old Physics 20-unit path heading'
+            git push
+          fi

@@ -15,7 +15,6 @@ c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;poin
 }
 setTimeout(run,250);
 }
-
 install('errors in measurement','Errors in Measurement',[
 ['What is an error in measurement?',['The difference between a measured value and the true value','The unit of measurement','The instrument scale only','The numerical value of the quantity'],0,'Measurement error is the deviation of a measured value from the true or accepted value.'],
 ['Which statement about errors is correct?',['Every physical measurement has some uncertainty','Errors occur only with digital instruments','Errors always make the value zero','Errors can always be removed completely'],0,'Measurements have finite precision, so some uncertainty is unavoidable.'],
@@ -33,7 +32,6 @@ install('errors in measurement','Errors in Measurement',[
 ['If the mean measured value is 10.0 cm and one reading is 10.2 cm, its absolute error relative to the mean is:',['0.02 cm','0.2 cm','2 cm','20 cm'],1,'Absolute error = |10.2 − 10.0| = 0.2 cm.'],
 ['Which statement is correct about accuracy and error?',['Smaller systematic error generally means greater accuracy','Larger error means greater accuracy','Accuracy and error are identical quantities','Random error is always zero'],0,'Reducing systematic error generally improves accuracy.']
 ],'Separate absolute, relative and percentage error carefully.');
-
 install('least count','Least Count',[
 ['What is the least count of a measuring instrument?',['The largest quantity the instrument can measure','The smallest measurement that can be measured reliably by the instrument','The average of all readings','The total range of the instrument'],1,'Least count is the smallest value that an instrument can measure reliably.'],
 ['The least count of a standard metre scale is generally:',['1 cm','1 mm','0.1 mm','10 mm'],1,'The smallest marked division on a standard metre scale is usually 1 mm.'],
@@ -51,7 +49,6 @@ install('least count','Least Count',[
 ['A metre scale marked in millimetres is used to measure 2.34 cm. The reading is limited by its least count because:',['The instrument cannot distinguish arbitrarily small intervals','The quantity has no unit','The scale measures only mass','Least count changes the length'],0,'The scale resolution limits how finely the length can be read.'],
 ['Which change would improve the ability to measure a very small length?',['Use an instrument with a smaller least count','Use a larger unit only','Ignore the scale divisions','Increase the zero error'],0,'A smaller least count provides finer measurement resolution.']
 ],'Focus on the smallest reliable division of the instrument.');
-
 install('accuracy and precision','Accuracy and Precision',[
 ['What does accuracy of a measurement indicate?',['How close a measured value is to the true or accepted value','How close repeated values are to each other','The size of the measuring instrument','The number of units used'],0,'Accuracy describes closeness to the true or accepted value.'],
 ['What does precision of a measurement indicate?',['Closeness to the true value only','Closeness of repeated measurements to one another','The largest measurable value','The unit system used'],1,'Precision describes repeatability or closeness of repeated measurements.'],
@@ -69,22 +66,21 @@ install('accuracy and precision','Accuracy and Precision',[
 ['Which pair is most appropriate?',['Accuracy—closeness to true value; Precision—repeatability','Accuracy—repeatability; Precision—true value','Accuracy—least count; Precision—unit conversion','Accuracy—range; Precision—zero error'],0,'Accuracy is closeness to true value; precision is repeatability.'],
 ['Which statement best summarizes good measurement quality?',['High accuracy and high precision are both desirable','Only precision matters','Only accuracy matters','Large random error is desirable'],0,'Ideal measurements are both close to the true value and highly repeatable.']
 ],'Remember: accuracy means closeness to the true value; precision means repeatability.');
-
 install('absolute uncertainty','Absolute Uncertainty',[
 ['What does absolute uncertainty of a measured quantity represent?',['The uncertainty expressed in the same units as the measured quantity','The uncertainty divided by the measured value','The uncertainty expressed only as a percentage','The number of significant figures'],0,'Absolute uncertainty has the same physical unit as the measured quantity.'],
 ['A length is reported as 20.0 ± 0.2 cm. What is the absolute uncertainty?',['0.02 cm','0.2 cm','2 cm','20.2 cm'],1,'The ± value gives the absolute uncertainty: 0.2 cm.'],
-['A measured mass is 50.0 ± 0.5 g. The absolute uncertainty is:',['0.01 g','0.05 g','0.5 g','5 g'],2,'The absolute uncertainty is the magnitude attached to the ± sign, 0.5 g.'],
+['A measured mass is 50.0 ± 0.5 g. The absolute uncertainty is:',['0.01 g','0.05 g','0.5 g','5 g'],2,'The absolute uncertainty is 0.5 g.'],
 ['For readings 10.2 cm, 10.4 cm and 10.3 cm, the mean value is:',['10.1 cm','10.2 cm','10.3 cm','10.4 cm'],2,'Mean = (10.2 + 10.4 + 10.3)/3 = 10.3 cm.'],
 ['For the readings 10.2 cm, 10.4 cm and 10.3 cm, the absolute error of the 10.2 cm reading relative to the mean is:',['0.01 cm','0.1 cm','0.2 cm','0.3 cm'],1,'Absolute error = |10.3 − 10.2| = 0.1 cm.'],
-['For the same three readings, the mean absolute uncertainty is:',['0 cm','0.067 cm','0.10 cm','0.30 cm'],2,'Absolute deviations are 0.1, 0.1 and 0 cm; their mean is 0.20/3 ≈ 0.067 cm, so 0.10 cm is not the mean.'],
+['For the same three readings, the mean absolute error is:',['0 cm','0.067 cm','0.10 cm','0.30 cm'],1,'Absolute deviations are 0.1, 0.1 and 0 cm; their mean is 0.20/3 ≈ 0.067 cm.'],
 ['A quantity is measured as 5.00 ± 0.05 m. Its relative uncertainty is:',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.05/5.00 = 0.01.'],
 ['A quantity is measured as 5.00 ± 0.05 m. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'Percentage uncertainty = (0.05/5.00) × 100 = 1%.'],
 ['If a result is written as a ± Δa, the symbol Δa represents:',['The central measured value','The absolute uncertainty','The unit only','The number of observations'],1,'In a ± Δa representation, Δa is the absolute uncertainty.'],
 ['If a length is 12.0 ± 0.3 cm, the possible interval stated by the uncertainty is:',['11.7 cm to 12.3 cm','11.0 cm to 13.0 cm','12.0 cm to 12.3 cm','11.3 cm to 12.0 cm'],0,'Subtracting and adding 0.3 cm gives 11.7 cm to 12.3 cm.'],
-['Which statement about absolute and relative uncertainty is correct?',['Absolute uncertainty has units, while relative uncertainty is dimensionless','Both always have units','Absolute uncertainty is always a percentage','Relative uncertainty always has the same unit as the measurement'],0,'Absolute uncertainty carries the measurement unit; relative uncertainty is a ratio and has no unit.'],
+['Which statement about absolute and relative uncertainty is correct?',['Absolute uncertainty has units, while relative uncertainty is dimensionless','Both always have units','Absolute uncertainty is always a percentage','Relative uncertainty always has the same unit as the measurement'],0,'Absolute uncertainty carries the measurement unit; relative uncertainty is a dimensionless ratio.'],
 ['A thermometer reads 25.0 ± 0.5 °C. The percentage uncertainty is:',['0.5%','1%','2%','5%'],2,'Percentage uncertainty = (0.5/25.0) × 100 = 2%.'],
-['If two measured lengths are A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in A + B is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For addition, maximum absolute uncertainties add: 0.2 + 0.1 = 0.3 cm.'],
+['If A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in A + B is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For addition, maximum absolute uncertainties add: 0.2 + 0.1 = 0.3 cm.'],
 ['If Z = A − B, with A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in Z is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For subtraction, maximum absolute uncertainties also add: 0.2 + 0.1 = 0.3 cm.'],
 ['Which reported result correctly expresses a measured length of 8.4 cm with absolute uncertainty 0.2 cm?',['8.4 ± 0.2 cm','8.4 ± 0.2','8.4 ± 2 cm','8.2 ± 0.4 cm'],0,'The value and its absolute uncertainty are reported together with the same length unit.']
-],'Track the ± value, its unit, and how it combines with the measured value.' );
+],'Track the ± value, its unit, and how it combines with the measured value.');
 })();

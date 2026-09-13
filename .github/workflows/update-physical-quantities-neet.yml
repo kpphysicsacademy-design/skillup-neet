@@ -1,0 +1,76 @@
+name: Upgrade Physical Quantities MCQs for NEET
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-physical-quantities-neet.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace Physical Quantities bank
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('physics-concept.html')
+          s = p.read_text(encoding='utf-8')
+
+          bank = r'''const physicalQuantitiesQuiz=[
+['A physical quantity is a quantity that:', ['can be measured and expressed by a numerical value and unit','must always have a direction','has no measurable magnitude','is defined only by a mathematical symbol'],0,'A measurable quantity is represented by a numerical value together with a unit.'],
+['Which pair contains only physical quantities?', ['length and time','beauty and mass','honesty and temperature','intelligence and velocity'],0,'Length and time are measurable and have standard units.'],
+['A physical measurement is correctly represented by:', ['numerical value × unit','unit ÷ numerical value','numerical value + direction only','unit alone'],0,'For example, 5 m contains the numerical value 5 and unit m.'],
+['Which one is an SI base quantity?', ['length','velocity','force','density'],0,'Length is one of the seven SI base quantities.'],
+['Which one is a derived physical quantity?', ['velocity','mass','time','temperature'],0,'Velocity is derived from length and time: v = l/t.'],
+['Which of the following is a scalar physical quantity?', ['mass','displacement','velocity','force'],0,'Mass has magnitude but no direction.'],
+['Which of the following is a vector physical quantity?', ['velocity','mass','time','temperature'],0,'Velocity requires both magnitude and direction.'],
+['The SI system contains how many base physical quantities?', ['7','5','6','9'],0,'There are seven SI base quantities.'],
+['If the length of a rod is 2.50 m, the number 2.50 represents its:', ['numerical value','unit','dimension','direction'],0,'In a measurement, the numerical value specifies how many units are present.'],
+['If a physical quantity is written as 12 kg, which statement is correct?', ['12 is the numerical value and kg is the unit','12 is the unit and kg is the numerical value','12 is the dimension and kg is the direction','kg is the physical quantity'],0,'The number and unit together express the measurement.'],
+['Which statement about a physical quantity is correct?', ['The same quantity may be expressed using different units','A quantity can have only one possible unit','Changing units changes the physical quantity itself','Every physical quantity must be a vector'],0,'Changing units changes the numerical representation, not the physical quantity.'],
+['A car has a speed of 72 km h⁻¹. Which statement identifies the physical quantity correctly?', ['speed is the physical quantity and km h⁻¹ is its unit','72 is the unit and speed is the numerical value','km h⁻¹ is the physical quantity','72 is the dimension of speed'],0,'Speed is the quantity; 72 is its numerical value and km h⁻¹ is the unit.'],
+['Which pair consists of one scalar and one vector physical quantity?', ['mass and velocity','velocity and displacement','force and acceleration','displacement and velocity'],0,'Mass is scalar, while velocity is vector.'],
+['Which statement best distinguishes a physical quantity from its unit?', ['The quantity is what is measured; the unit is the standard used to express its magnitude','The quantity and unit are always identical','The unit always has a direction','The physical quantity is only the numerical value'],0,'A unit is a standard reference; the physical quantity is the measurable property.'],
+['A length is expressed as 5 m or 500 cm. What remains unchanged?', ['the physical quantity','the numerical value','the unit','the unit symbol'],0,'Both measurements represent the same length even though the numerical value and unit differ.']
+];'''
+
+          pattern = r"const physicalQuantitiesQuiz=\[.*?\n\];"
+          s2, n = re.subn(pattern, bank, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit('Physical Quantities bank marker not found')
+          p.write_text(s2, encoding='utf-8')
+          PY
+
+      - name: Verify NEET bank
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('physics-concept.html').read_text(encoding='utf-8')
+          m=re.search(r"const physicalQuantitiesQuiz=\[(.*?)\n\];",s,re.S)
+          assert m, 'bank missing'
+          assert m.group(1).count("['") == 15, 'bank must contain exactly 15 questions'
+          assert 'const key=meta.concept.toLowerCase();' in s
+          assert "key==='physical quantities'?physicalQuantitiesQuiz" in s
+          print('PASS: 15 Physical Quantities NEET MCQs installed')
+          PY
+
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed'
+          else
+            git commit -m 'Upgrade Physical Quantities MCQs for NEET'
+            git push
+          fi

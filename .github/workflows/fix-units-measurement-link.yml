@@ -20,16 +20,14 @@ jobs:
           if old in s:
               s=s.replace(old,new)
           else:
-              # Handle dynamically generated concept links by adding a specific route override.
               marker='const topics=['
               if marker not in s:
                   raise SystemExit('Physics topics array not found')
               s=s.replace(marker, "const quizOverride='physics-units-quiz.html?utm_source=chatgpt.com';\n"+marker, 1)
-              # Replace the generated concept URL only for this exact sub-concept.
               needle="encodeURIComponent(c)"
               if needle in s:
                   s=s.replace(needle, "(c==='Units of Measurement' ? quizOverride : encodeURIComponent(c))", 1)
-              else:
+              elif 'quizOverride' not in s:
                   raise SystemExit('Concept URL builder not found')
           p.write_text(s)
           PY
@@ -44,3 +42,4 @@ jobs:
           git add physics-home.html
           git diff --cached --quiet || git commit -m 'Link Units of Measurement to quiz'
           git push
+# Triggered to apply the pending Units of Measurement quiz link fix.

@@ -1,0 +1,66 @@
+name: Fix Physics Home Restructure
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Repair Physics home CSS and JavaScript
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Remove all legacy rules that intentionally hid unit headings.
+          s=s.replace('/* SkillUp UI fix: keep one Physics and Measurement heading and remove the unit tagline. */\n.unit small{display:none!important}\n.chapter-main h3{display:flex!important}\n/* SVG + concept merged into heading */\n/* Remove duplicate unit heading; keep SVG + concept heading */\n.unit{display:none!important}\n/* FINAL UNIT HEADING HIDDEN */\n.unit,.unit h2,.unit small{display:none!important}\n/* FINAL ALL UNIT HEADINGS REMOVED */\n.unit{display:none!important}\n.unit h2{display:none!important}\n', '')
+
+          # Restore the intended visible unit hierarchy.
+          marker='/* PHYSICS HOME FINAL RESTRUCTURE */'
+          css='''\n/* PHYSICS HOME FINAL RESTRUCTURE */\n.unit{display:flex!important;position:relative;margin:28px 0 14px;align-items:center;gap:10px;scroll-margin-top:90px}\n.unit h2{display:block!important;margin:0;font-size:17px;color:var(--navy);font-weight:950}\n.unit small{display:block!important;color:var(--muted);font-size:9px;margin-top:2px}\n.unit-num{position:relative;z-index:3;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:12px;font-weight:950;border:4px solid #e7f1ff;box-shadow:0 3px 0 #a9c9ed;flex:0 0 42px}\n.path-heading{margin:24px 0 8px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:10px}\n.path-heading b{color:var(--navy);font-size:13px}.path-heading span{font-size:9px;color:var(--muted);font-weight:700}\n.subconcepts{grid-template-columns:repeat(3,minmax(0,1fr))}\n.lesson{margin-left:48px}\n.toolbar{position:sticky;top:76px;z-index:20;padding:5px 0;background:rgba(245,249,255,.94);backdrop-filter:blur(8px)}\n.progress-card:after{content:'LEARN  →  PRACTICE  →  MASTER';display:block;margin-top:12px;text-align:center;font-size:9px;font-weight:950;letter-spacing:1px;color:#52708f}\n@media(max-width:700px){.unit{margin-top:22px}.unit h2{font-size:14px}.unit-num{width:36px;height:36px;flex-basis:36px}.path-heading{display:block}.path-heading span{display:block;margin-top:3px}.subconcepts{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson{margin-left:30px}.toolbar{top:62px}}\n@media(max-width:430px){.subconcepts{grid-template-columns:1fr}}\n'''
+          if marker not in s:
+              s=s.replace('</style>',css+'</style>',1)
+
+          # Remove duplicate quizOverride declarations, then keep exactly one.
+          import re
+          s=re.sub(r"(?:const quizOverride='physics-units-quiz\.html\?utm_source=chatgpt\.com';\s*)+", "const quizOverride='physics-units-quiz.html?utm_source=chatgpt.com';\n", s, count=1)
+          # If the declaration was somehow absent, add it before topics.
+          if s.count("const quizOverride=") != 1:
+              s=s.replace('const topics=[', "const quizOverride='physics-units-quiz.html?utm_source=chatgpt.com';\nconst topics=[", 1)
+
+          # Add the path heading once before the path section.
+          heading='<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b><span>Follow each unit from concept learning to NEET practice.</span></div>'
+          if 'Your 20-Unit Physics Path' not in s:
+              s=s.replace('<section class="path" id="path"></section>',heading+'<section class="path" id="path"></section>',1)
+
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('physics-home.html').read_text(encoding='utf-8')
+          assert 'PHYSICS HOME FINAL RESTRUCTURE' in s
+          assert 'display:none!important' not in s[s.find('/* DUOLINGO PHYSICS PATH EFFECTS */'):]
+          assert s.count('const quizOverride=') == 1
+          assert 'Your 20-Unit Physics Path' in s
+          assert 'physics-units-quiz.html?utm_source=chatgpt.com' in s
+          print('Physics home repair verified')
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git diff --cached --quiet || git commit -m 'Fix Physics home restructuring conflicts'
+          git push

@@ -22,3 +22,27 @@ window.SKILLUP_PHYSICS_400 = [
 ['🧪','Experimental Skills',['Units in experiments','Measurement practice','Instrument selection','Least count practice','Vernier reading','Screw gauge reading','Meter-scale reading','Zero correction','Parallax correction','Significant-figure practice','Error calculation','Graph plotting','Slope calculation','Intercept calculation','Data tables','Experimental uncertainty','Dimensional checking','Circuit measurement','Optics measurement','Practical problem solving']]
 ];
 (function(){const n=window.SKILLUP_PHYSICS_400.reduce((a,u)=>a+u[2].length,0);if(n!==400)throw new Error('SkillUp Physics dataset must contain exactly 400 concepts');})();
+
+/* Resilient renderer: the fast page renders after the body exists, even if its inline renderer ran too early. */
+(function(){
+  function boot(){
+    var d=window.SKILLUP_PHYSICS_400||[];
+    if(!Array.isArray(d)||d.length!==20||d.some(function(u){return !u[2]||u[2].length!==20;}))return;
+    var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty'),lt=document.getElementById('lt'),pb=document.getElementById('pb');
+    if(!p||p.dataset.progressiveReady==='1')return;
+    p.dataset.progressiveReady='1';
+    var a=[];d.forEach(function(u,i){u[2].forEach(function(c){a.push({u:i+1,n:u[1],ic:u[0],c:c,ix:a.length+1});});});
+    var shown=0,filter='',B=20,I=40,icons=d.map(function(u){return u[0];});
+    function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+    function unit(x){return '<div class="unit"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.ic)+' '+esc(x.n)+'</h2><small>20 equal-level Physics chapters</small></div></div>';}
+    function card(x){return '<article class="chapter"><span class="node"></span><a href="physics-concept.html?concept='+encodeURIComponent(x.c)+'"><div><div class="title"><span class="icon">'+esc(icons[x.u-1])+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">⚡ +10 XP</span><span class="tag">📘 CONCEPT</span></div><span class="go">›</span></a></article>';}
+    function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;lt.textContent=filter?'Showing '+shown+' / '+list.length+' matches':'Showing '+shown+' / 400';pb.style.width=(filter&&list.length?100:shown/400*100)+'%';e.style.display=list.length?'none':'block';}
+    function more(){if(filter||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;lt.textContent='Showing '+shown+' / 400';pb.style.width=(shown/400*100)+'%';}
+    render(a,I);
+    var sentinel=document.createElement('div');sentinel.style.height='1px';sentinel.id='physics-progressive-sentinel';p.after(sentinel);
+    if(window.IntersectionObserver){var io=new IntersectionObserver(function(es){if(es.some(function(x){return x.isIntersecting;}))more();},{rootMargin:'900px'});io.observe(sentinel);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-900)more();},{passive:true});}
+    if(q)q.oninput=function(){filter=q.value.trim().toLowerCase();var list=filter?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(filter)>=0;}):a;render(list,filter?list.length:I);};
+    var clear=document.getElementById('clear');if(clear)clear.onclick=function(){q.value='';filter='';render(a,I);};
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();

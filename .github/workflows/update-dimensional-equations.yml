@@ -1,0 +1,77 @@
+name: Update Dimensional Equations Quiz
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-dimensional-equations.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Update Dimensional Equations quiz
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          bank="""const dimensionalEquationsQuiz=[
+          ['A dimensional equation is an equation that:',['contains only numerical values','expresses a physical quantity in terms of its dimensions','contains only SI units','has no variables'],1,'A dimensional equation expresses a physical quantity using fundamental dimensions.'],
+          ['Which dimensional equation represents velocity?',['[v]=[L T⁻¹]','[v]=[L T⁻²]','[v]=[M L T⁻¹]','[v]=[T L⁻¹]'],0,'Velocity = displacement/time, so [v]=[L T⁻¹].'],
+          ['The dimensional equation for acceleration is:',['[a]=[L T⁻¹]','[a]=[L T⁻²]','[a]=[M L T⁻²]','[a]=[L² T⁻¹]'],1,'Acceleration is change of velocity per unit time: [L T⁻²].'],
+          ['The dimensional equation for force is:',['[F]=[M L T⁻¹]','[F]=[M L T⁻²]','[F]=[M L² T⁻²]','[F]=[M⁻¹ L T⁻²]'],1,'From F=ma, [F]=[M L T⁻²].'],
+          ['The dimensional equation for work is:',['[W]=[M L T⁻²]','[W]=[M L² T⁻²]','[W]=[M L² T⁻³]','[W]=[M² L T⁻²]'],1,'Work = force × displacement, so [W]=[M L² T⁻²].'],
+          ['The dimensional equation for power is:',['[P]=[M L² T⁻²]','[P]=[M L² T⁻³]','[P]=[M L T⁻²]','[P]=[M⁻¹ L² T⁻³]'],1,'Power = work/time, so [P]=[M L² T⁻³].'],
+          ['The dimensional equation for pressure is:',['[p]=[M L⁻¹ T⁻²]','[p]=[M L T⁻²]','[p]=[M L² T⁻²]','[p]=[M⁻¹ L T⁻²]'],0,'Pressure = force/area, giving [M L⁻¹ T⁻²].'],
+          ['The dimensional equation for density is:',['[ρ]=[M L⁻¹]','[ρ]=[M L⁻²]','[ρ]=[M L⁻³]','[ρ]=[M⁻¹ L³]'],2,'Density = mass/volume, so [ρ]=[M L⁻³].'],
+          ['The dimensional equation for momentum is:',['[p]=[M L T⁻¹]','[p]=[M L T⁻²]','[p]=[M L² T⁻¹]','[p]=[M⁻¹ L T⁻¹]'],0,'Momentum = mass × velocity, giving [M L T⁻¹].'],
+          ['The dimensional equation for frequency is:',['[ν]=[T]','[ν]=[T⁻¹]','[ν]=[L T⁻¹]','[ν]=[M T⁻¹]'],1,'Frequency is reciprocal of time period, so [ν]=[T⁻¹].'],
+          ['The dimensional equation for gravitational constant G is:',['[G]=[M⁻¹ L³ T⁻²]','[G]=[M L³ T⁻²]','[G]=[M⁻¹ L² T⁻²]','[G]=[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², [G]=[M⁻¹ L³ T⁻²].'],
+          ['The dimensional equation for Planck constant h is:',['[h]=[M L² T⁻¹]','[h]=[M L T⁻¹]','[h]=[M L² T⁻²]','[h]=[M⁻¹ L² T⁻¹]'],0,'From E=hν, [h]=energy/frequency=[M L² T⁻¹].'],
+          ['Which equation is dimensionally correct?',['s=ut+½at²','s=u+t','v=u+at²','F=mv'],0,'ut and at² both have dimensions of length, matching s.'],
+          ['The principle used to check whether the dimensions on both sides of an equation agree is:',['principle of homogeneity','law of reflection','conservation of charge','Archimedes principle'],0,'The principle of homogeneity requires both sides of a physical equation to have the same dimensions.'],
+          ['Which statement about dimensional equations is correct?',['They can prove an equation is physically correct in every respect','They can check dimensional consistency but cannot determine dimensionless numerical constants','They replace SI units completely','They apply only to mechanics'],1,'Dimensional analysis checks consistency, but it cannot establish every physical detail or numerical constant.']
+          ];"""
+          pat=r"const dimensionalEquationsQuiz=\[.*?\];\nconst generic="
+          if re.search(pat,s,re.S): s=re.sub(pat,bank+'\nconst generic=',s,count=1,flags=re.S)
+          else: s=s.replace('const generic=',bank+'\nconst generic=',1)
+          if "key==='dimensional equations'?dimensionalEquationsQuiz" not in s:
+              if "key==='dimensions'?dimensionsQuiz:generic;" in s:
+                  s=s.replace("key==='dimensions'?dimensionsQuiz:generic;","key==='dimensions'?dimensionsQuiz:key==='dimensional equations'?dimensionalEquationsQuiz:generic;")
+              else:
+                  s=re.sub(r"const questions=.*?;let qi=0","const questions=key==='dimensional equations'?dimensionalEquationsQuiz:generic;let qi=0",s,count=1,flags=re.S)
+          block=re.search(r"const dimensionalEquationsQuiz=\[(.*?)\];\nconst generic=",s,re.S)
+          if not block or len(re.findall(r"^\s*\['",block.group(1),re.M))!=15: raise SystemExit('Dimensional Equations verification failed')
+          if "key==='dimensional equations'?dimensionalEquationsQuiz" not in s: raise SystemExit('selector verification failed')
+          p.write_text(s,encoding='utf-8')
+          print('PASS: 15 Dimensional Equations MCQs + selector')
+          PY
+
+      - name: Commit quiz update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git commit -m 'Update Dimensional Equations Physics quiz with 15 MCQs [skip ci]' || true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+
+      - name: Deploy Pages
+        uses: actions/deploy-pages@v4

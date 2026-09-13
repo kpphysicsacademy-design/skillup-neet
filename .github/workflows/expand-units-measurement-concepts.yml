@@ -1,0 +1,77 @@
+name: Expand Units and Measurement Concepts
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  expand:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add expanded equal-level concept list
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='<!-- SKILLUP-UNITS-MEASUREMENT-EXPANDED -->'
+          if marker in s:
+              raise SystemExit('Expansion already applied')
+          concepts=[
+            ('Units of Measurement','Standard units used to express physical quantities.'),
+            ('System of Units and SI Units','The internationally accepted SI framework and its base units.'),
+            ('Fundamental and Derived Units','Independent base units and units formed by combining them.'),
+            ('Least Count','The smallest value an instrument can reliably resolve.'),
+            ('Significant Figures','Digits that communicate the precision of a measured value.'),
+            ('Errors in Measurements','Sources and types of error that affect measured values.'),
+            ('Dimensions of Physical Quantities','Representation of physical quantities using base dimensions.'),
+            ('Dimensional Analysis and Applications','Using dimensions to check equations, derive relations and convert units.'),
+            ('Measurement of Physical Quantities','Numerical value, unit and proper measurement practice.'),
+            ('SI Prefixes','Multipliers such as kilo, milli, micro and nano.'),
+            ('Unit Conversion','Converting a quantity between compatible units.'),
+            ('Scientific Notation','Writing very large or small values as a × 10ⁿ.'),
+            ('Order of Magnitude','The nearest power-of-ten scale of a physical quantity.'),
+            ('Precision and Accuracy','Precision means repeatability; accuracy means closeness to the accepted value.'),
+            ('Absolute Uncertainty','The magnitude of uncertainty associated with a measurement.'),
+            ('Relative Uncertainty','Uncertainty expressed relative to the measured value.'),
+            ('Percentage Uncertainty','Relative uncertainty expressed as a percentage.'),
+            ('Combination of Errors','Propagation of uncertainties in sums, products, quotients and powers.'),
+            ('Significant-Figure Rules','Rules for counting and using significant figures in calculations.'),
+            ('Rounding Off','Reducing digits while retaining appropriate measurement precision.'),
+            ('Vernier Calipers','Measuring length, diameter and depth with fine resolution.'),
+            ('Screw Gauge','Measuring small thicknesses and diameters using pitch and least count.'),
+            ('Parallax Error','Error caused by viewing a scale from an incorrect angle.'),
+            ('Zero Error','Instrument offset when the true reading should be zero.'),
+            ('Dimensional Formulae','Formula notation using dimensions such as M, L and T.'),
+            ('Principle of Homogeneity','Every term in a valid physical equation must have matching dimensions.'),
+            ('Dimensional Equations','Equations expressing physical quantities in dimensional form.'),
+            ('Limitations of Dimensional Analysis','Cases where dimensional analysis cannot determine dimensionless constants or unique relations.'),
+            ('Conversion of Units Using Dimensions','Using dimensional factors to transform quantities between unit systems.')
+          ]
+          cards=[]
+          for i,(title,desc) in enumerate(concepts,1):
+              cards.append(f'<a class="um-concept" href="physics-concept.html?concept={title.replace(" ","%20")}"><span class="um-num">{i:02d}</span><span class="um-body"><b>{title}</b><small>{desc}</small></span><span class="um-go">›</span></a>')
+          css='''<style id="skillup-units-measurement-expanded-css">\n.um-expanded{margin-top:18px}.um-expanded-head{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(18,59,112,.08)}.um-expanded-head h2{margin:0;color:var(--navy);font-size:20px}.um-expanded-head p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.5}.um-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.um-concept{display:grid;grid-template-columns:36px 1fr 28px;gap:10px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px;text-decoration:none;box-shadow:0 5px 14px rgba(18,59,112,.06);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}.um-concept:hover{transform:translateY(-2px);border-color:#9dc4ed;box-shadow:0 10px 20px rgba(18,59,112,.1)}.um-num{width:36px;height:36px;border-radius:12px;background:#e9f2ff;color:#1769c2;display:grid;place-items:center;font-size:10px;font-weight:950}.um-body{min-width:0}.um-body b{display:block;color:var(--navy);font-size:12px;line-height:1.25}.um-body small{display:block;color:#667085;font-size:9px;line-height:1.35;margin-top:3px}.um-go{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#1677ff;color:#fff;font-size:19px;font-weight:950}.um-expanded .practice,.um-expanded .bottom{display:none!important}@media(max-width:700px){.um-grid{grid-template-columns:1fr}.um-expanded-head{padding:14px}.um-expanded-head h2{font-size:18px}.um-concept{grid-template-columns:34px 1fr 26px;padding:9px}.um-num{width:34px;height:34px}.um-body b{font-size:11px}.um-body small{font-size:8px}}\n</style>'''
+          script=f'''\n{marker}\n<script>\n(function(){{\n  const q=new URLSearchParams(location.search).get('concept')||'';\n  if(q.trim().toLowerCase()!=='units of measurement') return;\n  const host=document.getElementById('content');\n  if(!host) return;\n  const title=document.getElementById('title');\n  const intro=document.getElementById('intro');\n  if(title) title.textContent='Units & Measurement';\n  if(intro) intro.textContent='Choose a concept and learn it step by step for NEET Physics.';\n  host.innerHTML=`<section class="um-expanded"><div class="um-expanded-head"><h2>📏 Units & Measurement — Concepts</h2><p>29 equal-level concepts covering measurement, errors, instruments, significant figures and dimensional analysis.</p></div><div class="um-grid">{''.join(cards)}</div></section>`;\n  const practice=document.getElementById('practice');\n  if(practice) practice.style.display='none';\n}})();\n</script>\n'''
+          s=s.replace('</head>',css+'</head>',1)
+          s=s.replace('</body>',script+'</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'SKILLUP-UNITS-MEASUREMENT-EXPANDED' physics-concept.html
+          grep -q '29 equal-level concepts' physics-concept.html
+          grep -q 'Limitations of Dimensional Analysis' physics-concept.html
+          ! grep -q 'Choose a sub-concept' physics-concept.html
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git commit -m 'Expand Units and Measurement concepts'
+          git push
+          git rm .github/workflows/expand-units-measurement-concepts.yml
+          git commit -m 'Remove one-time concept expansion workflow'
+          git push

@@ -1,57 +1,75 @@
-name: Add Units Measurement Quiz
+name: Update Dimensions Quiz
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/workflows/add-units-measurement-quiz.yml'
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  update:
+  update-dimensions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add 15 MCQs to concept quiz
+      - name: Update Dimensions MCQs
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          marker='const banks={\n1:['
-          bank="""const banks={\n2:[
-['The SI unit of length is:', ['metre','kilogram','second','ampere'], 0, 'Length is an SI base quantity and its base unit is the metre.'],
-['Which of the following is an SI base quantity?', ['Force','Energy','Time','Pressure'], 2, 'Time is one of the seven SI base quantities.'],
-['Which quantity has the SI unit newton?', ['Work','Force','Power','Energy'], 1, 'The newton is the SI derived unit of force.'],
-['Which expression gives the dimensional formula of force?', ['[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]','[M T⁻¹]'], 0, 'Force equals mass multiplied by acceleration.'],
-['How many significant figures are in 0.005060?', ['3','4','5','6'], 1, 'Leading zeros are not significant; the zero between nonzero digits and the final zero are significant.'],
-['A measurement of 2.50 m contains:', ['2 significant figures','3 significant figures','4 significant figures','5 significant figures'], 1, 'The digits 2, 5 and the trailing zero are significant.'],
-['The least count of an instrument is its:', ['maximum range','smallest measurable interval','zero correction','percentage error'], 1, 'Least count is the smallest scale interval the instrument can reliably resolve.'],
-['If measured length is 10.0 cm and accepted length is 10.2 cm, the absolute error is:', ['0.02 cm','0.2 cm','2.0 cm','20.2 cm'], 1, 'Absolute error is the magnitude of the difference between measured and accepted values.'],
-['Relative error is equal to:', ['absolute error × measured value','absolute error ÷ measured value','measured value ÷ absolute error','absolute error + measured value'], 1, 'Relative error compares absolute error with the measured value.'],
-['A 2% relative error corresponds to a percentage error of:', ['0.02%','0.2%','2%','20%'], 2, 'Percentage error is relative error expressed in percent.'],
-['Which instrument is best suited to measure the diameter of a thin wire accurately?', ['metre scale','screw gauge','stopwatch','spring balance'], 1, 'A screw gauge is designed for precise small-length measurements such as wire diameter.'],
-['Parallax error is mainly caused by:', ['wrong unit','incorrect eye position while reading a scale','large range','high precision'], 1, 'Parallax occurs when the scale is viewed from an incorrect angle.'],
-['Which statement about accuracy and precision is correct?', ['Accuracy means repeatability only','Precision means closeness to the true value only','Accuracy concerns closeness to the accepted value, while precision concerns repeatability','They always mean exactly the same thing'], 2, 'Accuracy and precision describe different aspects of measurement quality.'],
-['Which dimensional formula represents energy?', ['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M⁰ L T⁻¹]'], 1, 'Energy has the same dimensions as work: force multiplied by distance.'],
-['The principle of homogeneity requires that:', ['all numerical values be equal','terms added or equated have the same dimensions','every quantity have an SI base unit','all measurements have zero error'], 1, 'A physically valid equation must be dimensionally consistent.']\n],\n1:["""
-          if 'const banks={\n2:[' not in s:
-              if marker not in s:
-                  raise SystemExit('banks marker not found')
-              s=s.replace(marker,bank,1)
-              p.write_text(s,encoding='utf-8')
+          import re
+          p = Path('physics-concept.html')
+          s = p.read_text(encoding='utf-8')
+          bank = r'''const dimensionsQuiz=[
+          ['The dimensions of a physical quantity describe:', ['its numerical value only','its dependence on fundamental quantities','only its SI unit symbol','the measuring instrument used'], 1, 'Dimensions show dependence on fundamental quantities such as mass, length and time.'],
+          ['The dimensional formula of velocity is:', ['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[L⁻¹ T]'], 0, 'Velocity = displacement/time, so its dimensions are [L T⁻¹].'],
+          ['The dimensional formula of acceleration is:', ['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[L² T⁻¹]'], 1, 'Acceleration = velocity/time, giving [L T⁻²].'],
+          ['The dimensional formula of force is:', ['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'], 1, 'From F=ma, force has dimensions [M L T⁻²].'],
+          ['The dimensional formula of work is:', ['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M² L T⁻²]'], 1, 'Work = force × displacement = [M L² T⁻²].'],
+          ['The dimensional formula of power is:', ['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M⁰ L T⁻¹]'], 1, 'Power = work/time, so [M L² T⁻³].'],
+          ['The dimensional formula of pressure is:', ['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'], 0, 'Pressure = force/area = [M L⁻¹ T⁻²].'],
+          ['The dimensional formula of density is:', ['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M⁻¹ L³]'], 2, 'Density = mass/volume = [M L⁻³].'],
+          ['The dimensional formula of momentum is:', ['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M⁻¹ L T⁻¹]'], 0, 'Momentum = mass × velocity = [M L T⁻¹].'],
+          ['Which quantity is dimensionless?', ['Velocity','Force','Strain','Momentum'], 2, 'Strain is a ratio of two lengths, so it is dimensionless.'],
+          ['The dimensional formula of the gravitational constant G is:', ['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻²]','[M L⁻³ T²]'], 0, 'From F=Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
+          ['The dimensional formula of Planck constant h is:', ['[M L² T⁻¹]','[M L T⁻¹]','[M L² T⁻²]','[M⁻¹ L² T⁻¹]'], 0, 'Since E=hν, h has dimensions energy/frequency = [M L² T⁻¹].'],
+          ['The dimensional formula of frequency is:', ['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'], 1, 'Frequency is cycles per unit time, so its dimension is [T⁻¹].'],
+          ['The dimensions of energy and work are:', ['different','the same','reciprocal','dimensionless'], 1, 'Both energy and work have [M L² T⁻²].'],
+          ['Which statement about dimensions is correct?', ['Dimensions depend on the unit system','Dimensions can test dimensional consistency','Dimensions and units are exactly the same','Every dimensionless quantity has numerical value zero'], 1, 'Dimensional analysis can test whether an equation is dimensionally consistent.']
+          ];'''
+          pattern = r"const dimensionsQuiz=\[.*?\];\nconst generic="
+          if re.search(pattern, s, flags=re.S):
+              s = re.sub(pattern, bank + "\nconst generic=", s, count=1, flags=re.S)
           else:
-              print('Units and Measurement bank already present')
+              marker = "const generic="
+              if marker not in s:
+                  raise SystemExit('generic quiz marker not found')
+              s = s.replace(marker, bank + "\nconst generic=", 1)
+          selector = r"const questions=.*?;let qi=0"
+          replacement = "const questions=key==='unit conversion'?unitConversionQuiz:key==='si prefixes'?siPrefixesQuiz:key==='unit systems'?unitSystemsQuiz:key==='derived units'?derivedUnitsQuiz:key==='dimensions'?dimensionsQuiz:generic;let qi=0"
+          if not re.search(selector, s, flags=re.S):
+              raise SystemExit('quiz selector not found')
+          s = re.sub(selector, replacement, s, count=1, flags=re.S)
+          block = re.search(r"const dimensionsQuiz=\[(.*?)\];\nconst generic=", s, flags=re.S)
+          if not block or len(re.findall(r"^\s*\['", block.group(1), flags=re.M)) != 15:
+              raise SystemExit('Dimensions bank verification failed')
+          if "key==='dimensions'?dimensionsQuiz" not in s:
+              raise SystemExit('Dimensions selector verification failed')
+          p.write_text(s, encoding='utf-8')
+          print('Dimensions quiz updated and verified: 15 MCQs')
           PY
-      - name: Commit change
+      - name: Commit Physics concept update
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add physics-concept.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Add 15 MCQs for Units and Measurement'
+          git commit -m 'Update Dimensions Physics quiz with 15 NEET MCQs'
           git push
-      - name: Remove one-time workflow
+      - name: Remove updater workflow
+        if: success()
         run: |
           git rm .github/workflows/add-units-measurement-quiz.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Remove one-time Units Measurement quiz workflow'
+          git commit -m 'Remove one-time Dimensions quiz updater'
           git push

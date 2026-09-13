@@ -1,0 +1,44 @@
+name: Remove Units Measurement Quiz UI
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-units-measurement-quiz.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove quiz controls from Units and Measurement explanation page
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('<div class="bottom"><a id="practice" href="question-bank.html?subject=physics">⚡ Practice this topic →</a></div>','')
+          s=s.replace("+'<a class=\"practice\" href=\"question-bank.html?subject=physics&topic='+encodeURIComponent(c.title)+'\">⚡ Practice '+c.title+' →</a></article>';","+'</article>';")
+          s=s.replace("document.getElementById('content').innerHTML=html;document.getElementById('practice').href='question-bank.html?subject=physics&topic='+encodeURIComponent(c.title);document.getElementById('practice').textContent='⚡ Practice this topic →';","document.getElementById('content').innerHTML=html;")
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify quiz UI removed
+        shell: bash
+        run: |
+          test "$(grep -o 'Practice' physics-concept.html | wc -l)" -eq 0
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          if git diff --cached --quiet; then echo 'No changes'; else git commit -m 'Remove quiz from Units and Measurement page' && git push; fi
+      - name: Disable this workflow
+        if: success()
+        shell: bash
+        run: |
+          rm -f .github/workflows/remove-units-measurement-quiz.yml
+          git add .github/workflows/remove-units-measurement-quiz.yml
+          git commit -m 'Disable one-time quiz removal workflow' || true
+          git push || true

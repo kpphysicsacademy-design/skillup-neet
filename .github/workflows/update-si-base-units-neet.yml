@@ -1,76 +1,59 @@
 name: Upgrade SI Base Units MCQs for NEET
-
 on:
   push:
-    branches: [main]
+    paths:
+      - '.github/workflows/update-si-base-units-neet.yml'
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install dedicated SI Base Units NEET bank
-        shell: python
+      - name: Install SI Base Units MCQs
         run: |
+          python - <<'PY'
           from pathlib import Path
-          import re
           p=Path('physics-concept.html')
           s=p.read_text(encoding='utf-8')
-          bank=r'''const siBaseUnitsQuiz=[
-['Which of the following is an SI base unit?', ['newton','joule','metre','watt'],2,'Metre (m) is the SI base unit of length. Newton, joule and watt are derived units.'],
-['The SI base unit of mass is:', ['gram','kilogram','tonne','milligram'],1,'Kilogram (kg) is the SI base unit of mass.'],
-['Which is the SI base unit of time?', ['minute','hour','second','day'],2,'The SI base unit of time is the second (s).'],
-['The SI base unit of electric current is:', ['coulomb','volt','ampere','ohm'],2,'Ampere (A) is the SI base unit of electric current.'],
-['Which is the SI base unit of thermodynamic temperature?', ['degree Celsius','kelvin','joule','degree Fahrenheit'],1,'Kelvin (K) is the SI base unit of thermodynamic temperature.'],
-['The SI base unit of amount of substance is:', ['gram','mole','litre','candela'],1,'Mole (mol) is the SI base unit of amount of substance.'],
-['Which is the SI base unit of luminous intensity?', ['lumen','lux','candela','watt'],2,'Candela (cd) is the SI base unit of luminous intensity.'],
-['How many SI base units are there in the SI system?', ['5','6','7','8'],2,'There are seven SI base units corresponding to seven SI base quantities.'],
-['Which pair contains only SI base units?', ['metre and second','newton and joule','volt and watt','pascal and coulomb'],0,'Metre and second are both SI base units; the other pairs contain derived units.'],
-['Which SI base unit is represented by the symbol kg?', ['length','mass','time','temperature'],1,'kg represents kilogram, the SI base unit of mass.'],
-['Which statement about SI base units is correct?', ['They are the base units corresponding to the seven SI base quantities','Every SI unit is a base unit','Newton is an SI base unit','Base units cannot be combined to form derived units'],0,'Derived SI units are formed from combinations of base units.'],
-['Which of the following is NOT an SI base unit?', ['ampere','kelvin','newton','candela'],2,'Newton (N) is a derived SI unit of force.'],
-['The SI unit symbol for amount of substance is:', ['M','mol','mole','am'],1,'The standardized SI symbol is mol.'],
-['Which SI base unit is used for length?', ['m','cm','km','mm'],0,'Metre (m) is the SI base unit of length.'],
-['Which statement correctly distinguishes an SI base unit from a derived SI unit?', ['Metre is a base unit, while newton is a derived unit','Newton is a base unit and metre is derived','Both metre and newton are base units','Neither metre nor newton is an SI unit'],0,'Newton can be expressed as kg·m·s⁻², while metre is a base unit.']
+          bank='''const siBaseUnitsQuiz=[
+['Which of the following is an SI base unit?',['newton','joule','metre','watt'],2,'Metre (m) is the SI base unit of length. Newton, joule and watt are derived units.'],
+['The SI base unit of mass is:',['gram','kilogram','tonne','milligram'],1,'Kilogram (kg) is the SI base unit of mass.'],
+['Which is the SI base unit of time?',['minute','hour','second','day'],2,'Second (s) is the SI base unit of time.'],
+['The SI base unit of electric current is:',['coulomb','volt','ampere','ohm'],2,'Ampere (A) is the SI base unit of electric current.'],
+['Which is the SI base unit of thermodynamic temperature?',['degree Celsius','kelvin','joule','degree Fahrenheit'],1,'Kelvin (K) is the SI base unit of thermodynamic temperature.'],
+['The SI base unit of amount of substance is:',['gram','mole','litre','candela'],1,'Mole (mol) is the SI base unit of amount of substance.'],
+['Which is the SI base unit of luminous intensity?',['lumen','lux','candela','watt'],2,'Candela (cd) is the SI base unit of luminous intensity.'],
+['How many SI base units are there?',['5','6','7','8'],2,'There are seven SI base units corresponding to seven SI base quantities.'],
+['Which pair contains only SI base units?',['metre and second','newton and joule','volt and watt','pascal and coulomb'],0,'Metre and second are both base units; the other pairs contain derived units.'],
+['The symbol kg represents the SI base unit of:',['length','mass','time','temperature'],1,'kg is the symbol for kilogram, the SI base unit of mass.'],
+['Which statement about SI base units is correct?',['They correspond to the SI base quantities','Every SI unit is a base unit','Newton is a base unit','Base units cannot be combined'],0,'Derived units are formed from combinations of base units.'],
+['Which is NOT an SI base unit?',['ampere','kelvin','newton','candela'],2,'Newton (N) is a derived SI unit of force.'],
+['The SI symbol for amount of substance is:',['M','mol','mole','am'],1,'The standardized SI symbol is mol.'],
+['Which is the SI base unit of length?',['m','cm','km','mm'],0,'Metre (m) is the SI base unit; the others are decimal multiples or submultiples.'],
+['Which statement correctly distinguishes base and derived SI units?',['Metre is a base unit while newton is derived','Newton is base and metre is derived','Both are base units','Neither is an SI unit'],0,'Newton can be expressed as kg m s^-2, while metre is a base unit.']
 ];'''
-          marker="const generic=[];"
           if 'const siBaseUnitsQuiz=' not in s:
+              marker='const generic=[];'
               if marker not in s: raise SystemExit('generic marker not found')
               s=s.replace(marker,bank+'\n'+marker,1)
           old="const questions=key==='units of measurement'?unitsQuiz:key==='physical quantities'?physicalQuantitiesQuiz:generic;"
           new="const questions=key==='units of measurement'?unitsQuiz:key==='physical quantities'?physicalQuantitiesQuiz:key==='si base units'?siBaseUnitsQuiz:generic;"
-          if old not in s: raise SystemExit('question selector not found')
-          s=s.replace(old,new,1)
+          if old in s: s=s.replace(old,new,1)
+          elif "key==='si base units'?siBaseUnitsQuiz" not in s: raise SystemExit('question selector not found')
           p.write_text(s,encoding='utf-8')
-      - name: Verify NEET bank
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          s=Path('physics-concept.html').read_text(encoding='utf-8')
-          m=re.search(r"const siBaseUnitsQuiz=\[(.*?)\n\];",s,re.S)
-          assert m and m.group(1).count("['")==15, 'SI Base Units bank must contain exactly 15 MCQs'
-          assert "key==='si base units'?siBaseUnitsQuiz" in s
-          print('PASS: 15 dedicated SI Base Units NEET MCQs installed')
+          t=p.read_text(encoding='utf-8')
+          assert t.count('const siBaseUnitsQuiz=')==1
+          block=t.split('const siBaseUnitsQuiz=',1)[1].split('];',1)[0]
+          assert block.count("['")==15
+          assert "key==='si base units'?siBaseUnitsQuiz" in t
+          print('PASS: 15 SI Base Units MCQs')
           PY
-      - name: Commit update
+      - name: Commit update and remove workflow
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add physics-concept.html
-          if ! git diff --cached --quiet; then
-            git commit -m 'Add dedicated SI Base Units NEET MCQs'
-            git push
-          fi
-      - name: Remove one-time workflow
-        if: always()
-        run: |
-          git rm .github/workflows/update-si-base-units-neet.yml || true
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Remove one-time SI Base Units workflow' || true
-          git push || true
+          git commit -m 'Add dedicated SI Base Units NEET MCQs'
+          git push

@@ -100,4 +100,21 @@ install('relative uncertainty','Relative Uncertainty',[
 ['A measurement is 80.0 ± 4.0 cm. Which statement is correct?',['Relative uncertainty is 0.005','Relative uncertainty is 0.05','Percentage uncertainty is 0.05%','Absolute uncertainty is dimensionless'],1,'Relative uncertainty = 4.0/80.0 = 0.05.'],
 ['Which statement best describes relative uncertainty?',['It compares the size of uncertainty with the measured value','It gives the measuring range of an instrument','It is always expressed in metres','It is the same as least count'],0,'Relative uncertainty measures the uncertainty as a fraction of the measured value.']
 ],'Compare the uncertainty with the measured value first; convert to percent only when requested.');
+install('percentage uncertainty','Percentage Uncertainty',[
+['What is percentage uncertainty?',['Absolute uncertainty divided by the measured value, multiplied by 100','Absolute uncertainty multiplied by the measured value','Measured value divided by absolute uncertainty','The least count expressed in metres'],0,'Percentage uncertainty is the absolute uncertainty relative to the measured value, multiplied by 100%.'],
+['A length is measured as 20.0 ± 0.2 cm. What is its percentage uncertainty?',['0.1%','1%','2%','10%'],1,'(0.2/20.0) × 100 = 1%.'],
+['A mass is measured as 50.0 ± 0.5 g. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'(0.5/50.0) × 100 = 1%.'],
+['A time interval is 10.0 ± 0.1 s. Its percentage uncertainty is:',['0.1%','1%','10%','100%'],1,'(0.1/10.0) × 100 = 1%.'],
+['A measurement is 5.00 ± 0.05 m. What is its percentage uncertainty?',['0.1%','1%','5%','10%'],1,'(0.05/5.00) × 100 = 1%.'],
+['If a quantity has relative uncertainty 0.02, its percentage uncertainty is:',['0.02%','0.2%','2%','20%'],2,'Percentage uncertainty = 0.02 × 100 = 2%.'],
+['If a quantity has relative uncertainty 0.005, its percentage uncertainty is:',['0.05%','0.5%','5%','50%'],1,'Percentage uncertainty = 0.005 × 100 = 0.5%.'],
+['A thermometer reads 25.0 ± 0.5 °C. The percentage uncertainty is:',['0.5%','1%','2%','5%'],2,'(0.5/25.0) × 100 = 2%.'],
+['A measurement is 100 ± 2 units. Its percentage uncertainty is:',['0.2%','2%','20%','50%'],1,'(2/100) × 100 = 2%.'],
+['A measurement is 40 ± 1 units. Its percentage uncertainty is:',['0.25%','1%','2.5%','4%'],2,'(1/40) × 100 = 2.5%.'],
+['Two measurements are 1.0 ± 0.1 cm and 10.0 ± 0.2 cm. Which has the smaller percentage uncertainty?',['1.0 ± 0.1 cm','10.0 ± 0.2 cm','Both are equal','There is not enough information'],1,'The first is 10%, while the second is 2%; therefore the second has the smaller percentage uncertainty.'],
+['If the absolute uncertainty stays fixed while the measured value increases, the percentage uncertainty generally:',['Increases','Decreases','Becomes exactly 100%','Always stays unchanged'],1,'With fixed absolute uncertainty, a larger measured value gives a smaller uncertainty fraction and percentage.'],
+['For x = ab, the maximum percentage uncertainty is obtained by:',['Adding the percentage uncertainties of a and b','Subtracting the percentage uncertainties','Multiplying the percentage uncertainties','Ignoring the uncertainty in b'],0,'For a product, maximum relative uncertainties add, so the percentage uncertainties add.'],
+['For x = a/b, the maximum percentage uncertainty is obtained by:',['Adding the percentage uncertainties of a and b','Subtracting the percentage uncertainties','Dividing the percentage uncertainties','Ignoring the denominator uncertainty'],0,'For a quotient, maximum relative uncertainties add, so the percentage uncertainties add.'],
+['Which statement best describes percentage uncertainty?',['It expresses the size of uncertainty relative to the measured value as a percentage','It gives the absolute measurement unit','It is the same as least count','It changes the physical quantity being measured'],0,'Percentage uncertainty provides a dimensionless comparison of uncertainty with the measured value.']
+],'First form the uncertainty-to-value ratio, then multiply by 100 to express it as a percentage.');
 })();

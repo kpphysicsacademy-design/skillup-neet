@@ -1,0 +1,48 @@
+name: Add Duolingo Physics Chapters
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  chapters:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add chapter path
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* DUOLINGO CHAPTER PATH V1 */'
+          if marker in s:
+              print('Chapter path already installed')
+              raise SystemExit
+          css='''\n<style>\n/* DUOLINGO CHAPTER PATH V1 */\n.chapter-path{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 24px;padding:6px}.chapter-bubble{position:relative;min-height:112px;padding:14px 10px 12px;border:2px solid #d9e5f2;border-radius:22px;background:#fff;box-shadow:0 7px 0 #d9e5f2,0 12px 24px rgba(18,59,112,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:transform .16s,box-shadow .16s,border-color .16s}.chapter-bubble:nth-child(3n+2){transform:translateY(12px)}.chapter-bubble:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 0 #c5d9ed,0 16px 28px rgba(18,59,112,.14);border-color:#8ebced}.chapter-bubble:nth-child(3n+2):hover{transform:translateY(9px) scale(1.03)}.chapter-bubble:active{transform:translateY(2px) scale(.98);box-shadow:0 4px 0 #c5d9ed}.chapter-bubble .badge{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#1677ff;color:#fff;font-weight:950;font-size:13px;border:4px solid #e7f1ff;box-shadow:0 3px 0 #a9c9ed;margin-bottom:7px}.chapter-bubble .emoji{font-size:23px;line-height:1;margin-bottom:5px}.chapter-bubble b{font-size:11px;color:#123b70;line-height:1.15}.chapter-bubble small{font-size:8px;color:#6b7280;margin-top:4px;font-weight:800}.chapter-bubble.done .badge{background:#22a06b}.chapter-bubble.current{border-color:#1677ff;box-shadow:0 7px 0 #a9c9ed,0 12px 24px rgba(22,119,255,.16)}@media(max-width:850px){.chapter-path{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.chapter-path{grid-template-columns:repeat(2,1fr);gap:10px}.chapter-bubble{min-height:102px}.chapter-bubble:nth-child(3n+2){transform:none}.chapter-bubble:nth-child(3n+2):hover{transform:translateY(-3px) scale(1.03)}}@media(prefers-reduced-motion:reduce){.chapter-bubble,.chapter-bubble:hover,.chapter-bubble:active{transform:none!important;transition:none}}\n</style>\n'''
+          s=s.replace('</head>',css+'</head>',1)
+          chapters=[
+          ('01','Physics and Measurement','📏','Measure'),('02','Kinematics','🏃','Motion'),('03','Laws of Motion','⚖️','Forces'),('04','Work, Energy and Power','⚡','Energy'),('05','Rotational Motion','🔄','Rotation'),('06','Gravitation','🌍','Gravity'),('07','Properties of Solids and Liquids','💧','Matter'),('08','Thermodynamics','🔥','Heat'),('09','Kinetic Theory of Gases','🎈','Gases'),('10','Oscillations and Waves','〰️','Waves'),('11','Electrostatics','⚡','Charge'),('12','Current Electricity','🔋','Current'),('13','Magnetic Effects and Magnetism','🧲','Magnetism'),('14','Electromagnetic Induction and AC','🔌','Induction'),('15','Electromagnetic Waves','📡','EM Waves'),('16','Optics','🔭','Light'),('17','Dual Nature of Matter and Radiation','🌟','Dual Nature'),('18','Atoms and Nuclei','⚛️','Atomic Physics'),('19','Electronic Devices','💻','Electronics'),('20','Experimental Skills','🧪','Experiments')]
+          cards=''.join(f'<a class="chapter-bubble" href="#chapter-{n}"><span class="badge">{n}</span><span class="emoji">{e}</span><b>{name}</b><small>{sub}</small></a>' for n,name,e,sub in chapters)
+          block=f'<div class="path-heading"><b>📚 Chapters</b><span>20-step Duolingo-style Physics journey</span></div><nav class="chapter-path" aria-label="Physics chapters">{cards}</nav>'
+          anchor='<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b>'
+          if anchor in s:
+              s=s.replace(anchor,block+anchor,1)
+          else:
+              s=s.replace('<div class="path">',block+'<div class="path">',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'DUOLINGO CHAPTER PATH V1' physics-home.html
+          test "$(grep -o 'class=\"chapter-bubble\"' physics-home.html | wc -l)" -eq 20
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git commit -m 'Add Duolingo-style Physics chapters'
+          git push

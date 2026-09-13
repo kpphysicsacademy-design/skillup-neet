@@ -1,0 +1,38 @@
+name: Physics heading deploy trigger
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Final heading cleanup
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html'); s=p.read_text(encoding='utf-8')
+          marker='/* FINAL ALL UNIT HEADINGS REMOVED */'
+          if marker not in s:
+              s=s.replace('</style>', marker+'\n.unit{display:none!important}\n.unit h2{display:none!important}\n</style>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git diff --cached --quiet || git commit -m 'Remove all duplicate Physics unit titles'
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with: {path: .}
+      - uses: actions/deploy-pages@v4
+      - name: Cleanup temporary workflow
+        run: |
+          rm -f .github/workflows/physics-heading-deploy-trigger.yml .github/workflows/final-physics-heading-deploy.yml
+          git add .github/workflows/physics-heading-deploy-trigger.yml .github/workflows/final-physics-heading-deploy.yml
+          git commit -m 'Cleanup heading deployment workflows' || true
+          git push || true

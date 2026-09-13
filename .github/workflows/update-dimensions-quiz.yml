@@ -1,0 +1,67 @@
+name: Update Dimensions Quiz
+on:
+  push:
+    paths:
+      - '.github/workflows/update-dimensions-quiz.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Dimensions bank only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-400-concepts.js')
+          s=p.read_text(encoding='utf-8')
+          start="'dimensions':{"
+          if start in s:
+              raise SystemExit('Dimensions bank already exists; refusing to overwrite it')
+          bank="""'dimensions':{title:'Dimensions',hint:'Express physical quantities in terms of the fundamental dimensions L, M, T, I, Θ, N and J.',quiz:[
+['What does the dimension of a physical quantity describe?',['Its dependence on the chosen unit system','Its relation to the fundamental physical quantities','Only its numerical value','Only the name of its SI unit'],1,'Dimension expresses how a quantity depends on the fundamental quantities.'],
+['The dimension of velocity is:',['LT⁻¹','LT⁻²','MLT⁻²','L²T⁻²'],0,'Velocity = length/time, so [v] = LT⁻¹.'],
+['The dimension of acceleration is:',['LT⁻¹','LT⁻²','MLT⁻²','L²T⁻²'],1,'Acceleration = velocity/time, so [a] = LT⁻².'],
+['The dimension of force is:',['MLT⁻¹','MLT⁻²','ML²T⁻²','ML²T⁻³'],1,'From F = ma, [F] = MLT⁻².'],
+['The dimension of work is:',['MLT⁻²','ML²T⁻²','ML²T⁻³','ML⁻¹T⁻²'],1,'Work = force × distance, so [W] = ML²T⁻².'],
+['The dimension of power is:',['ML²T⁻²','MLT⁻²','ML²T⁻³','ML⁻¹T⁻²'],2,'Power = work/time, so [P] = ML²T⁻³.'],
+['The dimension of pressure is:',['MLT⁻²','ML⁻¹T⁻²','ML²T⁻²','ML⁻³'],1,'Pressure = force/area, so [p] = ML⁻¹T⁻².'],
+['The dimension of density is:',['ML⁻¹','ML⁻²','ML⁻³','ML³'],2,'Density = mass/volume, so [ρ] = ML⁻³.'],
+['The dimension of momentum is:',['MLT⁻¹','MLT⁻²','ML²T⁻¹','ML⁻¹T⁻¹'],0,'Momentum = mass × velocity, so [p] = MLT⁻¹.'],
+['The dimension of strain is:',['L','L⁻¹','1','ML⁻¹'],2,'Strain is a ratio of two lengths, so it is dimensionless.'],
+['The dimension of gravitational constant G is:',['M⁻¹L³T⁻²','ML³T⁻²','M⁻¹L²T⁻²','ML⁻²T⁻²'],0,'From F = Gm₁m₂/r², [G] = M⁻¹L³T⁻².'],
+['The dimension of Planck constant h is:',['MLT⁻¹','ML²T⁻¹','ML²T⁻²','M⁻¹L²T⁻¹'],1,'From E = hν, [h] = energy/frequency = ML²T⁻¹.'],
+['The dimension of frequency is:',['T','T⁻¹','LT⁻¹','MLT⁻¹'],1,'Frequency is cycles per unit time, so [f] = T⁻¹.'],
+['Which pair has the same dimensions?',['Force and energy','Work and energy','Power and momentum','Pressure and force'],1,'Work and energy both have dimensions ML²T⁻².'],
+['A dimensionally consistent physical equation must have:',['The same dimensions on both sides','The same numerical values on both sides only','Only SI units on the left side','No units anywhere'],0,'The principle of dimensional consistency requires both sides to have the same dimensions.']
+]},
+"""
+          marker="'unit systems':{"
+          if marker not in s:
+              raise SystemExit('Unit Systems bank not found; refusing to modify file')
+          s=s.replace(marker,bank+marker,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Validate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('physics-400-concepts.js').read_text(encoding='utf-8')
+          assert s.count("'dimensions':{title:'Dimensions'")==1
+          section=s.split("'dimensions':{title:'Dimensions'",1)[1].split("'unit systems':{",1)[0]
+          assert section.count("['") == 15
+          assert "'si prefixes':" in s
+          assert "'unit systems':" in s
+          print('Dimensions bank validated: 15 MCQs; existing banks retained')
+          PY
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-400-concepts.js
+          git commit -m 'Update Dimensions physics quiz [skip ci]'
+          git rm .github/workflows/update-dimensions-quiz.yml
+          git commit -m 'Remove one-time Dimensions quiz updater [skip ci]'
+          git push origin HEAD:main

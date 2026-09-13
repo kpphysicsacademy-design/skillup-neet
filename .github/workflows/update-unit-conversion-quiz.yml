@@ -1,4 +1,5 @@
 name: Update Unit Conversion Quiz
+# Triggered by a follow-up commit so the updater runs on GitHub Actions.
 on:
   push:
     paths:
@@ -18,7 +19,8 @@ jobs:
           p=Path('physics-400-concepts.js')
           s=p.read_text(encoding='utf-8')
           if "'unit conversion':{title:'Unit Conversion'" in s:
-              raise SystemExit('Unit Conversion bank already exists; refusing to overwrite it')
+              print('Unit Conversion bank already exists; no quiz-bank change needed')
+              raise SystemExit(0)
           bank=r'''\'unit conversion\':{title:\'Unit Conversion\',hint:\'Convert the numerical representation correctly while preserving the physical quantity and its dimensions.\',quiz:[
 [\'What happens to a physical quantity when its unit is converted?\',[\'The physical quantity remains the same while its numerical value may change\',\'The physical quantity changes\',\'Its dimensions disappear\',\'It becomes dimensionless\'],0,\'A valid unit conversion changes the numerical representation, not the physical quantity.\'],
 [\'1 kilometre is equal to:\',[\'10 m\',\'100 m\',\'1000 m\',\'10,000 m\'],2,\'The SI prefix kilo represents 10^3, so 1 km = 1000 m.\'],
@@ -59,8 +61,12 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add physics-400-concepts.js
-          git commit -m 'Update Unit Conversion physics quiz [skip ci]'
+          if git diff --quiet -- physics-400-concepts.js; then
+            echo 'No quiz-bank change required.'
+          else
+            git add physics-400-concepts.js
+            git commit -m 'Update Unit Conversion physics quiz [skip ci]'
+          fi
           git rm .github/workflows/update-unit-conversion-quiz.yml
           git commit -m 'Remove one-time Unit Conversion quiz updater [skip ci]'
           git push origin HEAD:main

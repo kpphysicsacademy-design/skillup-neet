@@ -1,0 +1,38 @@
+name: Highlight Physics examples
+on:
+  push:
+    branches: [main]
+jobs:
+  update:
+    if: github.event.head_commit.message != 'Highlight Physics examples'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add example cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          if '/* EXAMPLE CARD */' not in s:
+              s=s.replace('.example{margin-top:16px;', '/* EXAMPLE CARD */ .example{margin-top:16px;', 1)
+              old='<div class="points">${d.points.map'
+              new='<div class="example"><b>💡 Example</b><div style="margin-top:6px">${d.example || "Apply this concept to a simple real-world situation."}</div></div><div class="points">${d.points.map'
+              if old not in s:
+                  raise SystemExit('points template not found')
+              s=s.replace(old,new,1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'EXAMPLE CARD' physics-concept.html
+          grep -q '💡 Example' physics-concept.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git commit -m 'Highlight Physics examples'
+          git push

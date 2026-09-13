@@ -83,4 +83,21 @@ install('absolute uncertainty','Absolute Uncertainty',[
 ['If Z = A − B, with A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in Z is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For subtraction, maximum absolute uncertainties also add: 0.2 + 0.1 = 0.3 cm.'],
 ['Which reported result correctly expresses a measured length of 8.4 cm with absolute uncertainty 0.2 cm?',['8.4 ± 0.2 cm','8.4 ± 0.2','8.4 ± 2 cm','8.2 ± 0.4 cm'],0,'The value and its absolute uncertainty are reported together with the same length unit.']
 ],'Track the ± value, its unit, and how it combines with the measured value.');
+install('relative uncertainty','Relative Uncertainty',[
+['What is relative uncertainty?',['Absolute uncertainty divided by the measured value','Absolute uncertainty multiplied by 100','Measured value divided by absolute uncertainty','The least count of the instrument'],0,'Relative uncertainty is the ratio of absolute uncertainty to the measured value.'],
+['A length is measured as 20.0 ± 0.2 cm. What is its relative uncertainty?',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.2/20.0 = 0.01.'],
+['A mass is measured as 50.0 ± 0.5 g. Its relative uncertainty is:',['0.001','0.01','0.05','0.1'],1,'Relative uncertainty = 0.5/50.0 = 0.01.'],
+['A time interval is 10.0 ± 0.1 s. Its relative uncertainty is:',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.1/10.0 = 0.01.'],
+['A measured length is 5.00 ± 0.05 m. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'Percentage uncertainty = 0.01 × 100 = 1%.'],
+['If the absolute uncertainty stays fixed while the measured value increases, the relative uncertainty generally:',['Increases','Decreases','Becomes exactly 1','Always remains unchanged'],1,'For fixed absolute uncertainty, dividing by a larger measured value gives a smaller ratio.'],
+['Which quantity is dimensionless?',['Absolute uncertainty','Relative uncertainty','Measured length','Absolute error in length'],1,'Relative uncertainty is a ratio of two quantities with the same dimensions.'],
+['A quantity is reported as 100 ± 2 units. Its relative uncertainty is:',['0.002','0.02','0.2','2'],1,'Relative uncertainty = 2/100 = 0.02.'],
+['A quantity is reported as 40 ± 1 units. Its percentage uncertainty is:',['0.25%','1%','2.5%','4%'],2,'Percentage uncertainty = (1/40) × 100 = 2.5%.'],
+['Two measurements have absolute uncertainties 0.1 cm and 0.2 cm. Which has the smaller relative uncertainty?',['1.0 ± 0.1 cm','10.0 ± 0.2 cm','Both have the same relative uncertainty','It cannot be compared'],1,'The relative uncertainties are 0.1/1.0 = 0.10 and 0.2/10.0 = 0.02; the second is smaller.'],
+['For x = a/b, the maximum relative uncertainty is obtained by:',['Adding the relative uncertainties of a and b','Subtracting the relative uncertainties','Multiplying only the absolute uncertainties','Ignoring the uncertainty in b'],0,'For multiplication or division, maximum relative uncertainties add.'],
+['If a quantity has absolute uncertainty Δx and measured value x, the relative uncertainty is represented by:',['Δx + x','Δx/x','x/Δx','100Δx'],1,'The ratio Δx/x is the relative uncertainty.'],
+['If the relative uncertainty is 0.005, the percentage uncertainty is:',['0.05%','0.5%','5%','50%'],1,'Multiplying 0.005 by 100 gives 0.5%.'],
+['A measurement is 80.0 ± 4.0 cm. Which statement is correct?',['Relative uncertainty is 0.005','Relative uncertainty is 0.05','Percentage uncertainty is 0.05%','Absolute uncertainty is dimensionless'],1,'Relative uncertainty = 4.0/80.0 = 0.05.'],
+['Which statement best describes relative uncertainty?',['It compares the size of uncertainty with the measured value','It gives the measuring range of an instrument','It is always expressed in metres','It is the same as least count'],0,'Relative uncertainty measures the uncertainty as a fraction of the measured value.']
+],'Compare the uncertainty with the measured value first; convert to percent only when requested.');
 })();

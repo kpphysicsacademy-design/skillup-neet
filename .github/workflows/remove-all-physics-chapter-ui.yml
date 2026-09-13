@@ -1,0 +1,69 @@
+name: Remove All Physics Chapter UI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove chapter navigator and chapter-only headings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Remove every dedicated chapter index/navigation section.
+          s=re.sub(r'<section[^>]*class=["\']chapter-index[^>]*>.*?</section>\s*', '', s, flags=re.S|re.I)
+          s=re.sub(r'<nav[^>]*class=["\']chapter-path[^>]*>.*?</nav>\s*', '', s, flags=re.S|re.I)
+
+          # Remove headings whose purpose is to introduce the separate chapter UI.
+          s=re.sub(r'<div[^>]*class=["\']path-heading[^>]*>\s*<b>\s*(?:📚\s*)?Physics Chapters.*?</div>\s*', '', s, flags=re.S|re.I)
+          s=re.sub(r'<div[^>]*class=["\']path-heading[^>]*>\s*<b>\s*📚\s*Chapters.*?</div>\s*', '', s, flags=re.S|re.I)
+          s=re.sub(r'<div[^>]*class=["\']path-heading[^>]*>\s*<b>\s*🧭\s*Your 20-Unit Physics Path.*?</div>\s*', '', s, flags=re.S|re.I)
+
+          # Remove obsolete chapter navigator styles/scripts by their markers.
+          s=re.sub(r'<style>\s*/\*\s*(?:PHYSICS CHAPTER NAVIGATOR V1|DUOLINGO CHAPTER PATH V1)\s*\*/.*?</style>\s*', '', s, flags=re.S|re.I)
+          s=re.sub(r'<script>\s*\(\(\)=>\{const names=\[.*?</script>\s*', '', s, flags=re.S)
+
+          # Remove chapter-specific heading styles while retaining core path CSS.
+          s=re.sub(r'<style>\s*/\*\s*(?:PHYSICS CHAPTER NAVIGATOR V1|DUOLINGO CHAPTER PATH V1)\s*\*/.*?</style>', '', s, flags=re.S|re.I)
+
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify chapter UI is gone
+        run: |
+          ! grep -qi 'Physics Chapters' physics-home.html
+          ! grep -q 'chapter-index' physics-home.html
+          ! grep -q 'chapter-path' physics-home.html
+          ! grep -q 'Your 20-Unit Physics Path' physics-home.html
+          grep -q 'Physics Learning Path' physics-home.html
+
+      - name: Commit cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet; then
+            echo 'No chapter UI remains.'
+            exit 0
+          fi
+          git add physics-home.html
+          git commit -m 'Remove all duplicate Physics chapter UI'
+          git push
+
+      - name: Remove temporary workflow
+        if: success()
+        run: |
+          rm -f .github/workflows/remove-all-physics-chapter-ui.yml
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove temporary Physics chapter cleanup workflow'
+          git push

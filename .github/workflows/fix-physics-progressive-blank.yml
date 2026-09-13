@@ -1,0 +1,46 @@
+name: Fix Physics progressive blank
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'physics-progressive-render-fix.js'
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install resilient renderer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home-fast.html')
+          s=p.read_text(encoding='utf-8')
+          tag='<script src="physics-progressive-render-fix.js?v=1"></script>'
+          if tag not in s:
+              s=s.replace('</head>',tag+'</head>',1)
+              p.write_text(s,encoding='utf-8')
+          # Make the page visibly resilient even if the canonical dataset script is delayed.
+          marker='<!-- PHYSICS PROGRESSIVE BLANK FIX V1 -->'
+          if marker not in s:
+              s=s.replace('<body>', '<body>'+marker, 1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'physics-progressive-render-fix.js?v=1' physics-home-fast.html
+          test -s physics-progressive-render-fix.js
+      - name: Commit
+        run: |
+          git config user.name 'skillup-bot'
+          git config user.email 'skillup-bot@users.noreply.github.com'
+          git add physics-home-fast.html
+          git diff --cached --quiet || git commit -m 'Fix blank progressive Physics path'
+          git push
+      - name: Remove one-time workflow
+        if: always()
+        run: |
+          git rm -f .github/workflows/fix-physics-progressive-blank.yml || true
+          git commit -m 'Remove one-time Physics blank fix workflow' || true
+          git push || true

@@ -86,7 +86,12 @@
 .neet-copy{min-width:0}.neet-copy strong{display:block;font-size:16px;line-height:1.25}.neet-copy span{display:block;margin-top:5px;color:#6b7280;font-size:12px}
 .neet-xp{margin-left:auto;white-space:nowrap;font-size:12px;font-weight:800;color:#58a700}
 @media(max-width:700px){.neet-concepts{grid-template-columns:1fr}.neet-concept{min-height:78px;padding:13px 14px}.neet-icon{width:46px;height:46px;flex-basis:46px}}
-</style></head>
+</style>
+<style id="skillup-physics-duplicate-fix">
+/* Keep one Physics Learning Path; remove the legacy duplicate chapter navigator. */
+#physics-chapters,.physics-chapters{display:none!important}
+</style>
+</head>
 <body>
 <header class="top"><nav class="nav"><a class="brand" href="index.html"><span class="mascot">⚛️</span><span>SKILLUP<small>PHYSICS • NEET</small></span></a><div class="navstats"><span class="pill streak">🔥 <b id="streak">1</b></span><span class="pill xp">⭐ <b id="xp">20</b> XP</span><span class="pill">❤️ 5</span></div></nav></header>
 <main class="wrap">
@@ -147,6 +152,29 @@ document.getElementById('search').addEventListener('input',render);document.getE
       if(svg && svg.animate) svg.animate([{transform:'scale(1) rotate(0deg)'},{transform:'scale(1.16) rotate(-5deg)'},{transform:'scale(1) rotate(0deg)'}],{duration:320,easing:'ease-out'});
     });
   });
+})();
+</script>
+
+<!-- SKILLUP PHYSICS DUPLICATE-CHAPTER FIX -->
+<script>
+(function(){
+  function removeDuplicate(){
+    var nodes=document.querySelectorAll('h1,h2,h3,h4,h5,h6,div,section');
+    for(var i=0;i<nodes.length;i++){
+      var el=nodes[i];
+      var text=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(text==='Physics Chapters'){
+        var target=el.closest('section')||el.closest('.section')||el.parentElement;
+        if(target && target.id!=='physics-learning-path' && target.id!=='path'){
+          target.remove();
+        }
+      }
+    }
+    var legacy=document.querySelector('#physics-chapters,.physics-chapters');
+    if(legacy) legacy.remove();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',removeDuplicate);
+  else removeDuplicate();
 })();
 </script>
 </body>

@@ -1,0 +1,39 @@
+name: Remove Units Measurement Quiz
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-units-quiz-from-concept.yml'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove practice quiz from Units and Measurement page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='<!-- UNITS MEASUREMENT QUIZ REMOVED -->'
+          if marker not in s:
+              inject='''\n<style>\n/* UNITS MEASUREMENT QUIZ REMOVED */\nbody.units-measurement-page #practice, body.units-measurement-page .bottom{display:none!important}\n</style>\n<script>\n(function(){\n  const c=new URLSearchParams(location.search).get('concept')||'';\n  if(c.trim().toLowerCase()==='units of measurement') document.body.classList.add('units-measurement-page');\n})();\n</script>\n<!-- UNITS MEASUREMENT QUIZ REMOVED -->\n'''
+              s=s.replace('</body>',inject+'</body>')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -F 'units-measurement-page' physics-concept.html
+          grep -F 'UNITS MEASUREMENT QUIZ REMOVED' physics-concept.html
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet || git commit -m 'Remove quiz from Units and Measurement page'
+          git push
+      - name: Remove temporary workflow
+        if: always()
+        run: |
+          git rm .github/workflows/remove-units-quiz-from-concept.yml || true
+          git commit -m 'Remove temporary quiz cleanup workflow' || true
+          git push || true

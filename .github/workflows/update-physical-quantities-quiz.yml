@@ -1,0 +1,56 @@
+name: Update Physical Quantities Quiz
+on:
+  push:
+    paths:
+      - '.github/workflows/update-physical-quantities-quiz.yml'
+      - 'PHYSICAL_QUANTITIES_UPDATE_TRIGGER'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch quiz bank
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('physics-400-concepts.js')
+          s = p.read_text(encoding='utf-8')
+          if "install('physical quantities'" in s:
+              print('Physical Quantities quiz already installed')
+              raise SystemExit(0)
+          block = r'''install('physical quantities','Physical Quantities',[
+['What is a physical quantity?',['A quantity that can be measured and expressed by a number and a unit','A unit symbol alone','A physical object only','A mathematical constant only'],0,'A physical quantity is measurable and is expressed with a numerical value and an appropriate unit.'],
+['Which pair is a physical quantity and its SI unit?',['Length and metre','Metre and kilogram','Second and time symbol only','Newton and metre as base unit'],0,'Length is a physical quantity and metre is its SI unit.'],
+['Which statement best describes measurement of a physical quantity?',['It compares the quantity with a chosen standard unit','It removes the need for units','It always gives a dimensionless number','It depends only on the name of the quantity'],0,'Measurement is comparison of a physical quantity with a standard unit.'],
+['Which of the following is an SI base quantity?',['Length','Velocity','Force','Density'],0,'Length is one of the seven SI base quantities; the others listed are derived quantities.'],
+['Which is a derived physical quantity?',['Mass','Time','Electric current','Speed'],3,'Speed is derived from length and time, so it is a derived quantity.'],
+['A physical quantity written as 2.50 m contains:',['Only a number','Only a unit','A numerical value and a unit','A dimension only'],2,'The measurement contains the numerical value 2.50 and the unit metre.'],
+['Which pair contains two scalar physical quantities?',['Mass and time','Displacement and velocity','Force and acceleration','Momentum and displacement'],0,'Mass and time are scalar quantities and do not require direction for their specification.'],
+['How many SI base quantities are there?',['5','6','7','9'],2,'The SI system has seven base quantities.'],
+['In the measurement 2.50 m, the numerical value is:',['0.025','2.50','250','2500'],1,'The numerical value is 2.50 when the quantity is expressed as 2.50 m.'],
+['The statement 12 kg represents:',['A numerical value of 12 with unit kilogram','A unit without a number','A dimension without a unit','A dimensionless quantity'],0,'The measurement has numerical value 12 and unit kilogram.'],
+['If a length is expressed as 2 m or 200 cm, which statement is correct?',['The physical quantity is different','The physical quantity is the same, but the numerical values differ','Both numerical values must be equal','Only centimetres can measure length'],1,'Changing units changes the numerical value but not the physical length.'],
+['Which representation is a derived physical quantity?',['5 kg','10 s','20 A','15 m s⁻¹'],3,'Metre per second is a derived unit for speed or velocity magnitude.'],
+['Which pair contains one scalar and one vector quantity?',['Mass and displacement','Time and temperature','Length and mass','Speed and distance'],0,'Mass is scalar, while displacement is a vector.'],
+['Which statement correctly distinguishes a physical quantity from a unit?',['A physical quantity is measured; a unit is a standard used for comparison','A unit is always larger than the quantity','A physical quantity is only a symbol','They are exactly the same thing'],0,'The quantity is what is measured, while the unit provides the standard for measurement.'],
+['A student writes 5 m and 500 cm for the same straight length. Which conclusion is correct?',['The lengths are unequal','The lengths are equal because 500 cm = 5 m','Only 500 cm is a physical quantity','The unit conversion changes the actual length'],1,'Since 100 cm = 1 m, 500 cm equals 5 m, so both represent the same length.']
+],'Identify the measurable quantity first, then distinguish its numerical value, unit, and physical nature.');
+'''
+          marker = '\n})();'
+          pos = s.rfind(marker)
+          if pos < 0:
+              raise SystemExit('Could not find quiz override terminator')
+          s = s[:pos] + '\n' + block + s[pos:]
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit update and clean up
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f PHYSICAL_QUANTITIES_UPDATE_TRIGGER .github/workflows/update-physical-quantities-quiz.yml
+          git add physics-400-concepts.js PHYSICAL_QUANTITIES_UPDATE_TRIGGER .github/workflows/update-physical-quantities-quiz.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Update Physical Quantities quiz with 15 MCQs'
+          git push

@@ -47,7 +47,7 @@ window.SKILLUP_PHYSICS_400 = [
     var shown=0,filter='',B=20,I=40,icons=d.map(function(u){return u[0];});
     function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
     function unit(x){return '<div class="unit"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.ic)+' '+esc(x.n)+'</h2><small>20 equal-level Physics chapters</small></div></div>';}
-    function card(x){return '<article class="chapter"><span class="node"></span><a href="physics-concept.html?concept='+encodeURIComponent(x.c)+'"><div><div class="title"><span class="icon">'+esc(icons[x.u-1])+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">⚡ +10 XP</span><span class="tag">📘 CONCEPT</span></div><span class="go">›</span></a></article>';}
+    function card(x){return '<article class="chapter"><span class="node"></span><a href="physics-concept.html?concept='+encodeURIComponent(x.c)+'"><div><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">⚡ +10 XP</span><span class="tag">📘 CONCEPT</span></div><span class="go">›</span></a></article>';}
     function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;lt.textContent=filter?'Showing '+shown+' / '+list.length+' matches':'Showing '+shown+' / 400';pb.style.width=(filter&&list.length?100:shown/400*100)+'%';e.style.display=list.length?'none':'block';}
     function more(){if(filter||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;lt.textContent='Showing '+shown+' / 400';pb.style.width=(shown/400*100)+'%';}
     render(a,I);
@@ -90,4 +90,37 @@ function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Nex
 c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60);
+})();
+
+/* DIMENSIONAL EQUATIONS OVERRIDE V1 */
+(function(){
+var quiz=[
+['A dimensional equation is an equation that:',['contains only numerical values','expresses a physical quantity in terms of its dimensions','contains only SI units','has no variables'],1,'A dimensional equation expresses a physical quantity using fundamental dimensions.'],
+['Which dimensional equation represents velocity?',['[v]=[L T⁻¹]','[v]=[L T⁻²]','[v]=[M L T⁻¹]','[v]=[T L⁻¹]'],0,'Velocity = displacement/time, so [v]=[L T⁻¹].'],
+['The dimensional equation for acceleration is:',['[a]=[L T⁻¹]','[a]=[L T⁻²]','[a]=[M L T⁻²]','[a]=[L² T⁻¹]'],1,'Acceleration is change of velocity per unit time: [L T⁻²].'],
+['The dimensional equation for force is:',['[F]=[M L T⁻¹]','[F]=[M L T⁻²]','[F]=[M L² T⁻²]','[F]=[M⁻¹ L T⁻²]'],1,'From F=ma, [F]=[M L T⁻²].'],
+['The dimensional equation for work is:',['[W]=[M L T⁻²]','[W]=[M L² T⁻²]','[W]=[M L² T⁻³]','[W]=[M² L T⁻²]'],1,'Work = force × displacement, so [W]=[M L² T⁻²].'],
+['The dimensional equation for power is:',['[P]=[M L² T⁻²]','[P]=[M L² T⁻³]','[P]=[M L T⁻²]','[P]=[M⁻¹ L² T⁻³]'],1,'Power = work/time, so [P]=[M L² T⁻³].'],
+['The dimensional equation for pressure is:',['[p]=[M L⁻¹ T⁻²]','[p]=[M L T⁻²]','[p]=[M L² T⁻²]','[p]=[M⁻¹ L T⁻²]'],0,'Pressure = force/area, giving [M L⁻¹ T⁻²].'],
+['The dimensional equation for density is:',['[ρ]=[M L⁻¹]','[ρ]=[M L⁻²]','[ρ]=[M L⁻³]','[ρ]=[M⁻¹ L³]'],2,'Density = mass/volume, so [ρ]=[M L⁻³].'],
+['The dimensional equation for momentum is:',['[p]=[M L T⁻¹]','[p]=[M L T⁻²]','[p]=[M L² T⁻¹]','[p]=[M⁻¹ L T⁻¹]'],0,'Momentum = mass × velocity, giving [M L T⁻¹].'],
+['The dimensional equation for frequency is:',['[ν]=[T]','[ν]=[T⁻¹]','[ν]=[L T⁻¹]','[ν]=[M T⁻¹]'],1,'Frequency is reciprocal of time period, so [ν]=[T⁻¹].'],
+['The dimensional equation for gravitational constant G is:',['[G]=[M⁻¹ L³ T⁻²]','[G]=[M L³ T⁻²]','[G]=[M⁻¹ L² T⁻²]','[G]=[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², [G]=[M⁻¹ L³ T⁻²].'],
+['The dimensional equation for Planck constant h is:',['[h]=[M L² T⁻¹]','[h]=[M L T⁻¹]','[h]=[M L² T⁻²]','[h]=[M⁻¹ L² T⁻¹]'],0,'From E=hν, [h]=energy/frequency=[M L² T⁻¹].'],
+['Which equation is dimensionally correct?',['s=ut+½at²','s=u+t','v=u+at²','F=mv'],0,'ut and at² both have dimensions of length, matching s.'],
+['The principle used to check whether the dimensions on both sides of an equation agree is:',['principle of homogeneity','law of reflection','conservation of charge','Archimedes principle'],0,'The principle of homogeneity requires both sides of a physical equation to have the same dimensions.'],
+['Which statement about dimensional equations is correct?',['They can prove an equation is physically correct in every respect','They can check dimensional consistency but cannot determine dimensionless numerical constants','They replace SI units completely','They apply only to mechanics'],1,'Dimensional analysis checks consistency, but it cannot establish every physical detail or numerical constant.']
+];
+function run(){
+var key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();
+if(key!=='dimensional equations')return;
+var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');
+if(!q||!o||!c||!n)return;
+var i=0,sel=-1,done=0,points=0;topic.textContent='Dimensional Equations';
+function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Check the dimensional form and use M, L and T.';f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});}
+function check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →';}
+function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Dimensional Equations Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}
+c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,80)});else setTimeout(run,80);
 })();

@@ -1,0 +1,72 @@
+name: Add Duolingo Style Physics Concepts
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  concepts:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add NEET concept cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* DUOLINGO NEET PHYSICS CONCEPTS V1 */'
+          if marker not in s:
+            css='''<style>\n/* DUOLINGO NEET PHYSICS CONCEPTS V1 */\n.neet-concepts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 26px}\n.neet-concept{position:relative;display:flex;align-items:center;gap:14px;min-height:86px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:22px;background:#fff;box-shadow:0 5px 0 #d9dde3;text-decoration:none;color:inherit;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}\n.neet-concept:hover{transform:translateY(-3px);box-shadow:0 8px 0 #cfd4db;border-color:#58cc02}\n.neet-concept:active{transform:translateY(2px);box-shadow:0 2px 0 #cfd4db}\n.neet-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:16px;background:#f1f8e9;font-size:29px}\n.neet-copy{min-width:0}.neet-copy strong{display:block;font-size:16px;line-height:1.25}.neet-copy span{display:block;margin-top:5px;color:#6b7280;font-size:12px}\n.neet-xp{margin-left:auto;white-space:nowrap;font-size:12px;font-weight:800;color:#58a700}\n@media(max-width:700px){.neet-concepts{grid-template-columns:1fr}.neet-concept{min-height:78px;padding:13px 14px}.neet-icon{width:46px;height:46px;flex-basis:46px}}\n</style>'''
+            s=s.replace('</head>',css+'</head>',1)
+          concepts=[
+            ('📏','Units & Measurement','Units, dimensions, errors','physics-concept.html?concept=Units%20of%20Measurement'),
+            ('🏃','Motion in 1D & 2D','Graphs, vectors, projectile motion','physics-concept.html?concept=Kinematics'),
+            ('⚖️','Laws of Motion','Newton’s laws, friction, circular motion','physics-concept.html?concept=Laws%20of%20Motion'),
+            ('⚡','Work, Energy & Power','Energy, momentum, collisions','physics-concept.html?concept=Work%2C%20Energy%2C%20and%20Power'),
+            ('🔄','Rotational Motion','Torque, angular momentum, rolling','physics-concept.html?concept=Rotational%20Motion'),
+            ('🌍','Gravitation','Orbits, satellites, escape velocity','physics-concept.html?concept=Gravitation'),
+            ('💧','Properties of Matter','Elasticity, fluids, surface tension','physics-concept.html?concept=Properties%20of%20Solids%20and%20Liquids'),
+            ('🔥','Thermodynamics','Heat, laws of thermodynamics, engines','physics-concept.html?concept=Thermodynamics'),
+            ('💨','Kinetic Theory','Gas laws and molecular motion','physics-concept.html?concept=Kinetic%20Theory%20of%20Gases'),
+            ('〰️','Oscillations & Waves','SHM, waves, sound','physics-concept.html?concept=Oscillations%20and%20Waves'),
+            ('⚡','Electrostatics','Charge, field, potential, capacitance','physics-concept.html?concept=Electrostatics'),
+            ('🔌','Current Electricity','Circuits, resistance, Kirchhoff laws','physics-concept.html?concept=Current%20Electricity'),
+            ('🧲','Magnetism','Magnetic force, fields and materials','physics-concept.html?concept=Magnetic%20Effects%20of%20Current%20and%20Magnetism'),
+            ('〽️','EMI & AC','Faraday law, inductance, AC circuits','physics-concept.html?concept=Electromagnetic%20Induction%20and%20Alternating%20Currents'),
+            ('📡','Electromagnetic Waves','Spectrum and wave properties','physics-concept.html?concept=Electromagnetic%20Waves'),
+            ('🔭','Optics','Ray optics, wave optics, instruments','physics-concept.html?concept=Optics'),
+            ('☯️','Dual Nature','Photoelectric effect and matter waves','physics-concept.html?concept=Dual%20Nature%20of%20Matter%20and%20Radiation'),
+            ('⚛️','Atoms & Nuclei','Models, spectra, radioactivity','physics-concept.html?concept=Atoms%20and%20Nuclei'),
+            ('💻','Electronic Devices','Semiconductors, diodes, logic gates','physics-concept.html?concept=Electronic%20Devices'),
+            ('🧪','Experimental Skills','Measurements, instruments and experiments','physics-concept.html?concept=Experimental%20Skills')]
+          cards=''.join(f'<a class="neet-concept" href="{u}"><span class="neet-icon">{i}</span><span class="neet-copy"><strong>{n}</strong><span>{d}</span></span><span class="neet-xp">+10 XP</span></a>' for i,n,d,u in concepts)
+          block='<section class="neet-concepts" aria-label="NEET Physics concepts">'+cards+'</section>'
+          if 'class="neet-concepts"' not in s:
+            m=re.search(r'(<section[^>]*id=["\']path["\'][^>]*>.*?</section>)',s,re.S|re.I)
+            if m:
+              s=s[:m.end()]+block+s[m.end():]
+            else:
+              s=s.replace('</main>',block+'</main>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add Duolingo style NEET Physics concepts'
+          git push
+      - name: Remove temporary workflow
+        if: success()
+        run: |
+          rm -f .github/workflows/add-duolingo-physics-concepts.yml
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove temporary Physics concepts workflow'
+          git push

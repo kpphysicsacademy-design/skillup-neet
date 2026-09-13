@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -24,72 +24,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Apply Dimensions quiz update
+      - name: Verify Physics Errors in Measurement quiz
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          bank="""const dimensionsQuiz=[
-          ['The dimensions of a physical quantity describe:',['its numerical value only','its dependence on fundamental quantities','only its SI unit symbol','the measuring instrument used'],1,'Dimensions show dependence on fundamental quantities such as mass, length and time.'],
-          ['The dimensional formula of velocity is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[L⁻¹ T]'],0,'Velocity = displacement/time, so its dimensions are [L T⁻¹].'],
-          ['The dimensional formula of acceleration is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[L² T⁻¹]'],1,'Acceleration = velocity/time, giving [L T⁻²].'],
-          ['The dimensional formula of force is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],1,'From F=ma, force has dimensions [M L T⁻²].'],
-          ['The dimensional formula of work is:',['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M² L T⁻²]'],1,'Work = force × displacement = [M L² T⁻²].'],
-          ['The dimensional formula of power is:',['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M⁰ L T⁻¹]'],1,'Power = work/time, so [M L² T⁻³].'],
-          ['The dimensional formula of pressure is:',['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],0,'Pressure = force/area = [M L⁻¹ T⁻²].'],
-          ['The dimensional formula of density is:',['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M⁻¹ L³]'],2,'Density = mass/volume = [M L⁻³].'],
-          ['The dimensional formula of momentum is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M⁻¹ L T⁻¹]'],0,'Momentum = mass × velocity = [M L T⁻¹].'],
-          ['Which quantity is dimensionless?',['Velocity','Force','Strain','Momentum'],2,'Strain is a ratio of two lengths, so it is dimensionless.'],
-          ['The dimensional formula of the gravitational constant G is:',['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻²]','[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
-          ['The dimensional formula of Planck constant h is:',['[M L² T⁻¹]','[M L T⁻¹]','[M L² T⁻²]','[M⁻¹ L² T⁻¹]'],0,'Since E=hν, h has dimensions energy/frequency = [M L² T⁻¹].'],
-          ['The dimensional formula of frequency is:',['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'],1,'Frequency is cycles per unit time, so its dimension is [T⁻¹].'],
-          ['The dimensions of energy and work are:',['different','the same','reciprocal','dimensionless'],1,'Both energy and work have [M L² T⁻²].'],
-          ['Which statement about dimensions is correct?',['Dimensions depend on the unit system','Dimensions can test dimensional consistency','Dimensions and units are exactly the same','Every dimensionless quantity has numerical value zero'],1,'Dimensional analysis can test whether an equation is dimensionally consistent.']
-          ];"""
-          pat=r"const dimensionsQuiz=\[.*?\];\nconst generic="
-          if re.search(pat,s,re.S):
-              s=re.sub(pat,bank+'\nconst generic=',s,count=1,flags=re.S)
-          else:
-              s=s.replace('const generic=',bank+'\nconst generic=',1)
-          selector="const questions=key==='unit conversion'?unitConversionQuiz:key==='si prefixes'?siPrefixesQuiz:key==='unit systems'?unitSystemsQuiz:key==='derived units'?derivedUnitsQuiz:key==='dimensions'?dimensionsQuiz:generic;"
-          s=re.sub(r"const questions=.*?;let qi=0",selector+'let qi=0',s,count=1,flags=re.S)
-          block=re.search(r"const dimensionsQuiz=\[(.*?)\];\nconst generic=",s,re.S)
-          if not block or len(re.findall(r"^\s*\['",block.group(1),re.M))!=15: raise SystemExit('Dimensions bank verification failed')
-          if "key==='dimensions'?dimensionsQuiz" not in s: raise SystemExit('Dimensions selector verification failed')
-          p.write_text(s,encoding='utf-8')
-          print('Verified Dimensions quiz: 15 MCQs')
+          s=Path('physics-concept.html').read_text(encoding='utf-8')
+          required=[
+            'What is an error in measurement?',
+            'Which statement about errors is correct?',
+            'What is absolute error?',
+            'Relative error is defined as:',
+            'Percentage error is:',
+            "key!=='errors in measurement'"
+          ]
+          missing=[x for x in required if x not in s]
+          if missing:
+              raise SystemExit('Errors in Measurement quiz verification failed: '+', '.join(missing))
+          print('Verified Errors in Measurement dedicated quiz in source.')
           PY
 
-      - name: Apply Dimensional Formulae quiz override
+      - name: Verify Physics quiz page
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('physics-400-concepts.js')
-          s=p.read_text(encoding='utf-8')
-          marker='/* DIMENSIONAL FORMULAE OVERRIDE V1 */'
-          if marker in s:
-              print('Dimensional Formulae override already present')
-          else:
-              code=r'''\n\n/* DIMENSIONAL FORMULAE OVERRIDE V1 */\n(function(){\nvar quiz=[\n['The dimensional formula of velocity is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[M L T⁻²]'],0,'Velocity is displacement divided by time, so its dimensions are [L T⁻¹].'],\n['The dimensional formula of acceleration is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[M L² T⁻²]'],1,'Acceleration is change of velocity per unit time, giving [L T⁻²].'],\n['The dimensional formula of force is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],1,'From F=ma, force has dimensions [M L T⁻²].'],\n['The dimensional formula of work is:',['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M² L T⁻²]'],1,'Work equals force multiplied by displacement, giving [M L² T⁻²].'],\n['The dimensional formula of power is:',['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M⁻¹ L² T⁻³]'],1,'Power is work divided by time, so [M L² T⁻³].'],\n['The dimensional formula of pressure is:',['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],0,'Pressure is force per unit area, giving [M L⁻¹ T⁻²].'],\n['The dimensional formula of density is:',['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M⁻¹ L³]'],2,'Density is mass divided by volume, so [M L⁻³].'],\n['The dimensional formula of momentum is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M⁻¹ L T⁻¹]'],0,'Momentum equals mass multiplied by velocity, giving [M L T⁻¹].'],\n['The dimensional formula of impulse is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M L² T⁻²]'],0,'Impulse equals force multiplied by time, giving [M L T⁻¹].'],\n['The dimensional formula of frequency is:',['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'],1,'Frequency is the reciprocal of time period, so [T⁻¹].'],\n['The dimensional formula of gravitational constant G is:',['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻²]','[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],\n['The dimensional formula of Planck constant h is:',['[M L² T⁻¹]','[M L T⁻¹]','[M L² T⁻²]','[M⁻¹ L² T⁻¹]'],0,'Since E=hν, h has dimensions [M L² T⁻¹].'],\n['The dimensional formula of surface tension is:',['[M T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]'],0,'Surface tension is force per unit length, giving [M T⁻²].'],\n['The dimensional formula of viscosity coefficient is:',['[M L⁻¹ T⁻¹]','[M L T⁻¹]','[M L⁻¹ T⁻²]','[M L² T⁻¹]'],0,'Dynamic viscosity has dimensions [M L⁻¹ T⁻¹].'],\n['Which statement about dimensional formulae is correct?',['They depend on unit names','They express a quantity using fundamental dimensions','They are identical to SI units','They apply only to scalar quantities'],1,'A dimensional formula expresses a physical quantity using fundamental dimensions such as M, L and T.']\n];\nfunction run(){\nvar key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();\nif(key!=='dimensional formulae')return;\nvar q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');\nif(!q||!o||!c||!n)return;\nvar i=0,sel=-1,done=0,points=0;topic.textContent='Dimensional Formulae';\nfunction render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Identify the physical relation and express it using M, L and T.';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});}\nfunction check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1){n.textContent='Finish Skill →';}}\nfunction next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Dimensional Formulae Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}\nc.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();\n}\nif(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60);\n})();\n'''
-              p.write_text(s+code,encoding='utf-8')
-              print('Added Dimensional Formulae override')
+          s=Path('physics-concept.html').read_text(encoding='utf-8')
+          if '<title>SkillUp | Physics Concept Quiz</title>' not in s:
+              raise SystemExit('Physics quiz page missing')
+          print('Physics quiz page verified.')
           PY
-
-      - name: Commit source updates
-        shell: bash
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add physics-concept.html physics-400-concepts.js
-          if git diff --cached --quiet; then
-            echo 'No source change needed.'
-          else
-            git commit -m 'Update Dimensional Formulae Physics quiz with 15 MCQs [skip ci]'
-          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

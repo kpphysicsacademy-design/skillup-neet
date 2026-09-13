@@ -16,20 +16,25 @@ function install(key,title,quiz,hint){
   setTimeout(run,300);
 }
 install('units of measurement','Units of Measurement',[
-['What is a unit of measurement?',['A standard reference used to measure and compare a physical quantity','A random numerical value','The instrument used for every measurement','A physical object only'],0,'A unit is an internationally accepted reference standard used for measurement.'],
-['What does the result of a physical measurement normally contain?',['A numerical value and a unit','A unit only','A number only with no unit','A dimension only'],0,'A measured physical quantity is expressed by a numerical value accompanied by a unit.'],
-['Why are standard units necessary?',['To make measurements consistent and comparable','To make every quantity dimensionless','To avoid using numerical values','To change the physical quantity itself'],0,'Standard units allow measurements to be communicated and compared consistently.'],
-['Which is the SI unit of length?',['Centimetre','Metre','Kilometre','Millimetre'],1,'The metre (m) is the SI base unit of length.'],
-['Which is the SI unit of mass?',['Gram','Kilogram','Milligram','Tonne'],1,'The kilogram (kg) is the SI base unit of mass.'],
-['Which is the SI unit of time?',['Minute','Hour','Second','Day'],2,'The second (s) is the SI base unit of time.'],
-['Which is the SI unit of electric current?',['Volt','Coulomb','Ampere','Ohm'],2,'The ampere (A) is the SI base unit of electric current.'],
-['Which is the SI unit of thermodynamic temperature?',['Degree Celsius','Fahrenheit','Kelvin','Joule'],2,'The kelvin (K) is the SI base unit of thermodynamic temperature.'],
-['Which is the SI unit of amount of substance?',['Mole','Gram','Litre','Candela'],0,'The mole (mol) is the SI base unit for amount of substance.'],
-['Which is the SI unit of luminous intensity?',['Lux','Lumen','Candela','Watt'],2,'The candela (cd) is the SI base unit of luminous intensity.'],
-['Which statement about SI units is correct?',['The SI system provides a standardized international system of units','SI units are used only for length','SI units cannot be converted using powers of ten','SI has only three base units'],0,'SI is the internationally accepted system based on seven base units.'],
-['If 1 m = 100 cm, then 2.5 m is equal to:',['25 cm','250 cm','2500 cm','0.025 cm'],1,'Multiplying by 100 gives 2.5 m = 250 cm.'],
-['If 1 km = 1000 m, then 3 km is equal to:',['30 m','300 m','3000 m','30000 m'],2,'3 × 1000 m = 3000 m.'],
-['A quantity is written as 5 m. What does the symbol m represent?',['The numerical value','The SI unit metre','The dimension only','The measuring instrument'],1,'m is the SI symbol for metre.'],
-['Which statement is correct when changing from metres to centimetres?',['The physical length changes','The numerical value changes but the physical quantity remains the same','The unit disappears','The dimensions change'],1,'Changing units changes the numerical representation, not the physical quantity.']
+['What is a unit of measurement?',['A standard reference used to measure and compare a physical quantity','A random numerical value','The measuring instrument itself','A physical object only'],0,'A unit is a standardized reference used to express the magnitude of a physical quantity.'],
+['A measurement of a physical quantity is normally expressed as:',['A numerical value with a unit','A unit without a number','A number without any unit','A dimension only'],0,'Measurement gives a numerical value together with the chosen unit.'],
+['Why are standard units important in physics?',['They make measurements consistent and comparable','They make all quantities dimensionless','They remove the need for numerical values','They change the physical quantity'],0,'Standard units provide a common basis for communicating and comparing measurements.'],
+['Which is the SI base unit of length?',['Centimetre','Metre','Kilometre','Millimetre'],1,'The SI base unit of length is metre, symbol m.'],
+['Which is the SI base unit of mass?',['Gram','Kilogram','Milligram','Tonne'],1,'The SI base unit of mass is kilogram, symbol kg.'],
+['Which is the SI base unit of time?',['Minute','Hour','Second','Day'],2,'The SI base unit of time is second, symbol s.'],
+['Which is the SI base unit of electric current?',['Volt','Coulomb','Ampere','Ohm'],2,'The SI base unit of electric current is ampere, symbol A.'],
+['Which is the SI base unit of thermodynamic temperature?',['Degree Celsius','Fahrenheit','Kelvin','Joule'],2,'The SI base unit of thermodynamic temperature is kelvin, symbol K.'],
+['Which is the SI base unit of amount of substance?',['Mole','Gram','Litre','Candela'],0,'The SI base unit of amount of substance is mole, symbol mol.'],
+['Which is the SI base unit of luminous intensity?',['Lux','Lumen','Candela','Watt'],2,'The SI base unit of luminous intensity is candela, symbol cd.'],
+['How many SI base units are associated with the seven SI base quantities?',['3','5','7','9'],2,'There are seven SI base quantities and seven corresponding SI base units.'],
+['Which statement about the SI system is correct?',['It is an internationally accepted system based on seven base units','It is used only for length','It contains only three base units','It cannot be used for derived quantities'],0,'The SI is the internationally accepted system; derived units are built from its base units.'],
+['If 1 m = 100 cm, then 2.5 m equals:',['25 cm','250 cm','2500 cm','0.025 cm'],1,'2.5 × 100 = 250 cm.'],
+['If 1 km = 1000 m, then 3 km equals:',['30 m','300 m','3000 m','30000 m'],2,'3 × 1000 = 3000 m.'],
+['A length is written as 5 m. What does m represent?',['The numerical value','The SI unit metre','The dimension only','The measuring instrument'],1,'m is the SI symbol for metre.'],
+['A length is written as 2 m and 200 cm. Which statement is correct?',['They represent different physical lengths','They represent the same physical length','Only 200 cm is a valid measurement','Changing units changes the actual length'],1,'Changing units changes the numerical value, not the physical quantity.'],
+['Which pair correctly matches a physical quantity with its SI unit?',['Time — second','Mass — gram','Length — centimetre','Temperature — joule'],0,'Time is measured in the SI base unit second.'],
+['Which of the following is NOT an SI base unit?',['Metre','Kilogram','Second','Newton'],3,'Newton is a derived SI unit, not a base unit.'],
+['The numerical value of a measurement changes when the unit is changed because:',['The same physical quantity is represented using a different-sized standard','The physical quantity changes','The dimensions disappear','The instrument becomes a different quantity'],0,'A different unit changes how many units fit into the same physical quantity.'],
+['Which statement about a unit is correct?',['It is a reference standard for expressing the magnitude of a physical quantity','It is always equal to the measured quantity','It has no symbol','It is the same as the numerical value'],0,'A unit provides the standard against which a physical quantity is measured.']
 ],'Remember: a unit is a standard reference; the numerical value tells how many such units are present.');
 })();

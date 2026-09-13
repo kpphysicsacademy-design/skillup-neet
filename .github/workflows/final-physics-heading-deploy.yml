@@ -1,0 +1,39 @@
+name: Final Physics heading deploy
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hide all Unit headings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html'); s=p.read_text(encoding='utf-8')
+          marker='/* FINAL UNIT HEADING HIDDEN */'
+          if marker not in s:
+              s=s.replace('</style>', marker+'\n.unit,.unit h2,.unit small{display:none!important}\n</style>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git diff --cached --quiet || git commit -m 'Hide all Physics unit headings'
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4
+      - name: Cleanup
+        run: |
+          rm -f .github/workflows/final-physics-heading-deploy.yml .github/workflows/remove-all-physics-unit-headings.yml
+          git add .github/workflows/final-physics-heading-deploy.yml .github/workflows/remove-all-physics-unit-headings.yml
+          git commit -m 'Cleanup temporary Physics heading workflows' || true
+          git push || true

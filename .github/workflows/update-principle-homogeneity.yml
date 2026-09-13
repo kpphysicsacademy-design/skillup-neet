@@ -19,74 +19,36 @@ jobs:
           p=Path('physics-400-concepts.js')
           s=p.read_text(encoding='utf-8')
           if '/* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */' in s:
-              print('already present')
               raise SystemExit(0)
           block=r'''
 
 /* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */
-(function(){
-var quiz=[
-['The principle of homogeneity states that:',['both sides of a physical equation must have the same dimensions','all quantities must have the same numerical value','only SI units can be used','every quantity must be dimensionless'],0,'For a physically meaningful equation, the dimensions of every term on one side must match the dimensions of the corresponding terms on the other side.'],
-['Which equation satisfies the principle of homogeneity?',['s=ut+½at²','s=u+t','v=u+at²','F=m+v'],0,'In s=ut+½at², both ut and at² have dimensions of length, matching s.'],
-['In the equation v=u+at, the dimensions of v, u and at are:',['different','the same','zero','dimensionless'],1,'Velocity, initial velocity and acceleration multiplied by time all have dimensions [L T⁻¹].'],
-['Why must terms added or subtracted in a physical equation have the same dimensions?',['Because addition and subtraction require comparable physical quantities','Because SI requires it','Because all constants are dimensionless','Because units are always identical'],0,'Terms can be added or subtracted only when they represent quantities with the same dimensions.'],
-['Which equation is dimensionally homogeneous?',['F=ma','F=m+a','P=W+t','v=u+a'],0,'F=ma is homogeneous because both sides have dimensions [M L T⁻²].'],
-['The dimensions of each term in a valid physical equation must be:',['individually consistent with the dimensions of the quantity represented','numerically equal to 1','expressed only in SI units','always dimensionless'],0,'Dimensional homogeneity requires each additive term to have the correct dimensions.'],
-['Which expression violates dimensional homogeneity?',['x=vt','x=v+t','p=mv','W=Fs'],1,'v and t have different dimensions, so they cannot be added directly.'],
-['If A+B=C in a physical equation, then A, B and C must have:',['the same dimensions','the same numerical values','the same units only','zero dimensions'],0,'For addition to be meaningful, A, B and C must have identical dimensions.'],
-['Which statement about a dimensionally homogeneous equation is correct?',['It may still be physically incomplete','It is always physically correct','It must contain only SI units','It cannot contain constants'],0,'Dimensional homogeneity is necessary but not sufficient to prove complete physical correctness.'],
-['For the equation y=at²+bt+c, if y has dimensions of length, then at², bt and c must each have:',['dimensions of length','dimensions of time','dimensions of acceleration','dimensionless values'],0,'All additive terms must have the same dimensions as y, namely length.'],
-['Which principle is directly used to check dimensional consistency?',['Principle of homogeneity','Archimedes principle','Conservation of charge','Lenz law'],0,'The principle of homogeneity requires matching dimensions on both sides of a physical equation.'],
-['Can a dimensionally non-homogeneous equation represent a valid physical law?',['No','Yes, always','Only in SI','Only for vectors'],0,'A physical equation must be dimensionally homogeneous to be meaningful.'],
-['If two terms have dimensions [M L T⁻²] and [M L² T⁻²], they can be:',['added directly','subtracted directly','neither added nor subtracted directly','multiplied only'],2,'Different dimensions cannot be directly added or subtracted.'],
-['The principle of homogeneity is useful because it can:',['test dimensional consistency of equations','determine every numerical constant','replace experiments completely','prove an equation is experimentally true'],0,'Dimensional homogeneity is a powerful consistency check, but it cannot replace experimental verification.'],
-['Which statement is correct about dimensional homogeneity?',['Every term in a physical equation must have compatible dimensions','Every term must have the same numerical value','Every variable must have SI unit metre','Only equations in mechanics can be checked'],0,'Compatible dimensions are required for all terms in a valid physical equation.']
-];
-function run(){
-var key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();
-if(key!=='principle of homogeneity')return;
-var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');
-if(!q||!o||!c||!n)return;
-var i=0,sel=-1,done=0,points=0;topic.textContent='Principle of Homogeneity';
-function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Remember: dimensions of comparable terms must match.';f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});}
-function check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →';}
-function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Principle of Homogeneity Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}
-c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60);
-})();
+(function(){var quiz=[
+['The principle of homogeneity states that:',['both sides of a physical equation must have the same dimensions','all quantities must have the same numerical value','only SI units can be used','every quantity must be dimensionless'],0,'For a meaningful physical equation, corresponding terms must have matching dimensions.'],
+['Which equation satisfies the principle of homogeneity?',['s=ut+½at²','s=u+t','v=u+at²','F=m+v'],0,'In s=ut+½at², ut and at² both have dimensions of length.'],
+['In v=u+at, v, u and at have:',['different dimensions','the same dimensions','zero dimensions','dimensionless values'],1,'All three have dimensions [L T⁻¹].'],
+['Why must terms added or subtracted have the same dimensions?',['Addition and subtraction require comparable physical quantities','SI units require it','All constants are dimensionless','Units are always identical'],0,'Only quantities with compatible dimensions can be added or subtracted.'],
+['Which equation is dimensionally homogeneous?',['F=ma','F=m+a','P=W+t','v=u+a'],0,'Both sides of F=ma have dimensions [M L T⁻²].'],
+['Each additive term in a valid physical equation must have:',['compatible dimensions','numerical value 1','only SI units','zero dimensions'],0,'Dimensional homogeneity requires every additive term to have the proper compatible dimensions.'],
+['Which expression violates dimensional homogeneity?',['x=vt','x=v+t','p=mv','W=Fs'],1,'Velocity and time have different dimensions and cannot be added.'],
+['If A+B=C, A, B and C must have:',['the same dimensions','the same numerical values','the same units only','zero dimensions'],0,'All three must represent quantities of the same dimensions.'],
+['A dimensionally homogeneous equation:',['may still be physically incomplete','is always physically correct','must contain only SI units','cannot contain constants'],0,'Dimensional consistency is necessary but not sufficient for complete physical correctness.'],
+['For y=at²+bt+c, if y is length, at², bt and c must each have:',['dimensions of length','dimensions of time','dimensions of acceleration','dimensionless values'],0,'Every additive term must have the same dimensions as y.'],
+['Which principle directly checks dimensional consistency?',['Principle of homogeneity','Archimedes principle','Conservation of charge','Lenz law'],0,'The principle of homogeneity requires matching dimensions in a physical equation.'],
+['Can a dimensionally non-homogeneous equation be a valid physical law?',['No','Yes, always','Only in SI','Only for vectors'],0,'A valid physical equation must be dimensionally homogeneous.'],
+['Terms with dimensions [M L T⁻²] and [M L² T⁻²] can be:',['added directly','subtracted directly','neither added nor subtracted directly','multiplied only'],2,'Different dimensions cannot be directly added or subtracted.'],
+['The principle of homogeneity can:',['test dimensional consistency','determine every numerical constant','replace experiments','prove an equation experimentally'],0,'It is a consistency check, not a replacement for experiment.'],
+['Which statement is correct?',['Every term in a physical equation must have compatible dimensions','Every term must have the same numerical value','Every variable must use metre','Only mechanics equations can be checked'],0,'Compatible dimensions are required for every valid physical equation.']
+];function run(){var key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(key!=='principle of homogeneity')return;var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');if(!q||!o||!c||!n)return;var i=0,sel=-1,done=0,points=0;topic.textContent='Principle of Homogeneity';function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Remember: dimensions of comparable terms must match.';f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)})}function check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →'}function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Principle of Homogeneity Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP'}}c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60)})();
 '''
           p.write_text(s+block,encoding='utf-8')
-          print('patched',p)
           PY
-      - name: Verify
+      - name: Verify and commit
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          s=Path('physics-400-concepts.js').read_text(encoding='utf-8')
-          assert '/* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */' in s
-          assert s.count("['The principle of homogeneity") == 1
-          print('verified: dedicated Principle of Homogeneity quiz present')
-          PY
-      - name: Commit with retry
-        run: |
+          grep -q 'PRINCIPLE OF HOMOGENEITY OVERRIDE V1' physics-400-concepts.js
           git config user.name 'skillup-bot'
           git config user.email 'skillup-bot@users.noreply.github.com'
           git add physics-400-concepts.js
-          git diff --cached --quiet && exit 0
           git commit -m 'Add Principle of Homogeneity Physics quiz [skip ci]'
-          for i in 1 2 3 4 5; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
-            git rebase --abort || true
-            git fetch origin main
-            git reset --hard origin/main
-            python - <<'PY'
-            from pathlib import Path
-            p=Path('physics-400-concepts.js'); s=p.read_text(encoding='utf-8')
-            if '/* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */' not in s:
-              raise SystemExit('override lost during concurrent update')
-            PY
-            git add physics-400-concepts.js
-            git commit -m 'Add Principle of Homogeneity Physics quiz [skip ci]' || true
-          done
-          exit 1
+          git pull --rebase origin main
+          git push origin HEAD:main

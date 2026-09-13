@@ -1,0 +1,60 @@
+name: Remove Duplicate Physics Chapter Sections
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicate chapter sections
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          # Keep the actual 20-unit learning path and remove the two duplicate
+          # chapter navigation presentations that were added above it.
+          s=re.sub(r'<section class="chapter-index".*?</section>\s*', '', s, count=1, flags=re.S)
+          s=re.sub(r'<div class="path-heading"><b>📚 Chapters</b>.*?</div>\s*<nav class="chapter-path".*?</nav>\s*', '', s, count=1, flags=re.S)
+          # Remove the chapter-index/chapter-path styling so stale duplicate UI
+          # cannot reappear through CSS or future rendering.
+          s=re.sub(r'<style>\s*/\* PHYSICS CHAPTER NAVIGATOR V1 \*/.*?</style>\s*', '', s, count=1, flags=re.S)
+          s=re.sub(r'<style>\s*/\* DUOLINGO CHAPTER PATH V1 \*/.*?</style>\s*', '', s, count=1, flags=re.S)
+          # Remove the obsolete chapter-jump script.
+          s=re.sub(r'<script>\s*\(\)=>\{const names=\[.*?\}\)\(\);\s*</script>\s*', '', s, count=1, flags=re.S)
+          # Remove any remaining old path-heading block containing the deleted title.
+          s=re.sub(r'<div class="path-heading">\s*<b>🧭 Your 20-Unit Physics Path</b>.*?</div>\s*', '', s, flags=re.S)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          ! grep -q 'Your 20-Unit Physics Path' physics-home.html
+          ! grep -q 'chapter-index' physics-home.html
+          ! grep -q 'chapter-path' physics-home.html
+          test "$(grep -o "'Physics and Measurement'" physics-home.html | wc -l)" -ge 1
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet; then
+            echo 'No duplicate chapter sections found.'
+            exit 0
+          fi
+          git add physics-home.html
+          git commit -m 'Remove duplicate Physics chapter sections'
+          git push
+      - name: Remove workflow
+        if: success()
+        run: |
+          rm -f .github/workflows/remove-duplicate-physics-chapters.yml
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove temporary duplicate chapter cleanup workflow'
+          git push

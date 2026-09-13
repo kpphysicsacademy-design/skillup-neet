@@ -1,0 +1,51 @@
+name: Apply Physics explanation links
+on:
+  push:
+    branches: [main]
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace Physics topic quiz links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text()
+          old='question-bank.html?subject=physics&topic='
+          new='physics-concept.html?concept='
+          count=s.count(old)
+          s=s.replace(old,new)
+          p.write_text(s)
+          print(f'Replaced {count} Physics topic quiz links with explanation links')
+          PY
+      - name: Commit page update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          if git diff --cached --quiet; then echo 'No changes'; else git commit -m 'Replace Physics concept quiz links with explanations'; git push; fi
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v4
+      - name: Remove temporary workflow
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --ff-only origin main
+          git rm .github/workflows/apply-physics-explanation-links.yml || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove temporary Physics explanation workflow' || true
+          git push || true

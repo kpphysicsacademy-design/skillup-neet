@@ -23,6 +23,19 @@ window.SKILLUP_PHYSICS_400 = [
 ];
 (function(){const n=window.SKILLUP_PHYSICS_400.reduce((a,u)=>a+u[2].length,0);if(n!==400)throw new Error('SkillUp Physics dataset must contain exactly 400 concepts');})();
 
+(function(){
+  function hideTip(){var h=document.getElementById('hint');if(h&&h.parentElement){h.parentElement.dataset.tipHidden='1';h.parentElement.style.display='none';}}
+  function revealTip(){var h=document.getElementById('hint');if(h&&h.parentElement){h.parentElement.style.display='';}}
+  function boot(){
+    var h=document.getElementById('hint'),c=document.getElementById('check'),n=document.getElementById('next');
+    if(!h||!c)return;
+    hideTip();
+    c.addEventListener('click',function(){setTimeout(function(){if(c.disabled)revealTip();},0);});
+    if(n)n.addEventListener('click',function(){setTimeout(hideTip,0);});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else setTimeout(boot,0);
+})();
+
 /* Resilient renderer: the fast page renders after the body exists, even if its inline renderer ran too early. */
 (function(){
   function boot(){

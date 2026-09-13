@@ -36,7 +36,6 @@ window.SKILLUP_PHYSICS_400 = [
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else setTimeout(boot,0);
 })();
 
-/* Resilient renderer: the fast page renders after the body exists, even if its inline renderer ran too early. */
 (function(){
   function boot(){
     var d=window.SKILLUP_PHYSICS_400||[];
@@ -58,4 +57,37 @@ window.SKILLUP_PHYSICS_400 = [
     var clear=document.getElementById('clear');if(clear)clear.onclick=function(){q.value='';filter='';render(a,I);};
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+
+/* DIMENSIONAL FORMULAE OVERRIDE V1 */
+(function(){
+var quiz=[
+['The dimensional formula of velocity is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[M L T⁻²]'],0,'Velocity is displacement divided by time, so its dimensions are [L T⁻¹].'],
+['The dimensional formula of acceleration is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[M L² T⁻²]'],1,'Acceleration is change of velocity per unit time, giving [L T⁻²].'],
+['The dimensional formula of force is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],1,'From F=ma, force has dimensions [M L T⁻²].'],
+['The dimensional formula of work is:',['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M² L T⁻²]'],1,'Work equals force multiplied by displacement, giving [M L² T⁻²].'],
+['The dimensional formula of power is:',['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M⁻¹ L² T⁻³]'],1,'Power is work divided by time, so [M L² T⁻³].'],
+['The dimensional formula of pressure is:',['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],0,'Pressure is force per unit area, giving [M L⁻¹ T⁻²].'],
+['The dimensional formula of density is:',['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M⁻¹ L³]'],2,'Density is mass divided by volume, so [M L⁻³].'],
+['The dimensional formula of momentum is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M⁻¹ L T⁻¹]'],0,'Momentum equals mass multiplied by velocity, giving [M L T⁻¹].'],
+['The dimensional formula of impulse is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M L² T⁻²]'],0,'Impulse equals force multiplied by time, giving [M L T⁻¹].'],
+['The dimensional formula of frequency is:',['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'],1,'Frequency is the reciprocal of time period, so [T⁻¹].'],
+['The dimensional formula of gravitational constant G is:',['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻²]','[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
+['The dimensional formula of Planck constant h is:',['[M L² T⁻¹]','[M L T⁻¹]','[M L² T⁻²]','[M⁻¹ L² T⁻¹]'],0,'Since E=hν, h has dimensions [M L² T⁻¹].'],
+['The dimensional formula of surface tension is:',['[M T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]'],0,'Surface tension is force per unit length, giving [M T⁻²].'],
+['The dimensional formula of viscosity coefficient is:',['[M L⁻¹ T⁻¹]','[M L T⁻¹]','[M L⁻¹ T⁻²]','[M L² T⁻¹]'],0,'Dynamic viscosity has dimensions [M L⁻¹ T⁻¹].'],
+['Which statement about dimensional formulae is correct?',['They depend on unit names','They express a quantity using fundamental dimensions','They are identical to SI units','They apply only to scalar quantities'],1,'A dimensional formula expresses a physical quantity using fundamental dimensions such as M, L and T.']
+];
+function run(){
+var key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();
+if(key!=='dimensional formulae')return;
+var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');
+if(!q||!o||!c||!n)return;
+var i=0,sel=-1,done=0,points=0;topic.textContent='Dimensional Formulae';
+function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Identify the physical relation and express it using M, L and T.';f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});}
+function check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →';}
+function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Dimensional Formulae Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}
+c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60);
 })();

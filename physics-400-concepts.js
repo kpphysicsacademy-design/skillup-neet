@@ -1,120 +1,43 @@
-/* SkillUp Physics concept quiz overrides. Canonical 400-concept dataset remains in physics-400-concepts-base.js. */
-document.write('<script src="physics-400-concepts-base.js"><\\/script>');
+/* SkillUp Physics quiz override loader. The previous override set is pinned by commit SHA; this file adds the Physical Quantities bank without removing existing concept quizzes. */
+document.write('<script src="https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/e96e5e3d77c095e1bb9ddeddb299efdc20d1ba90/physics-400-concepts.js"><\\/script>');
 (function(){
 function install(key,title,quiz,hint){
-function run(){
-var current=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();
-if(current!==key)return;
-var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');
-if(!q||!o||!c||!n)return;
-var i=0,sel=-1,done=0,points=0;
-function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';topic.textContent=title;h.textContent=hint;f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});}
-function check(){if(sel<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});if(sel===a[2]){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='🎯 Correct! +10 XP — '+a[3]}else{f.className='feedback bad';f.textContent='Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →';}
-function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 '+title+' Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+done+' / '+quiz.length+' correct • '+points+' XP';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}
-c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
+  function run(){
+    var current=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();
+    if(current!==key)return;
+    var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');
+    if(!q||!o||!c||!n)return;
+    var i=0,sel=-1,done=0,points=0;
+    function render(){
+      var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';topic.textContent=title;h.textContent=hint;f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';
+      a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)});
+    }
+    function check(){
+      if(sel<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}
+      var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});
+      if(sel===a[2]){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='🎯 Correct! +10 XP — '+a[3]}else{f.className='feedback bad';f.textContent='Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}
+      c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →';
+    }
+    function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 '+title+' Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+done+' / '+quiz.length+' correct • '+points+' XP';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP';}}
+    c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render();
+  }
+  setTimeout(run,300);
 }
-setTimeout(run,250);
-}
-install('errors in measurement','Errors in Measurement',[
-['What is an error in measurement?',['The difference between a measured value and the true value','The unit of measurement','The instrument scale only','The numerical value of the quantity'],0,'Measurement error is the deviation of a measured value from the true or accepted value.'],
-['Which statement about errors is correct?',['Every physical measurement has some uncertainty','Errors occur only with digital instruments','Errors always make the value zero','Errors can always be removed completely'],0,'Measurements have finite precision, so some uncertainty is unavoidable.'],
-['What is absolute error?',['The magnitude of the difference between a measured value and the true or mean value','Error divided by the measured value','Error expressed only in percent','The least count of an instrument'],0,'Absolute error is the magnitude of the difference between the measured and accepted or mean value.'],
-['Relative error is defined as:',['Absolute error divided by the measured value','Absolute error multiplied by 100 only','Measured value divided by error','True value divided by measured value'],0,'Relative error compares absolute error with the measured value.'],
-['Percentage error is:',['Relative error × 100','Absolute error ÷ 100','Measured value × 100','Relative error ÷ 100'],0,'Percentage error is relative error expressed as a percentage.'],
-['If a length is measured as 10.0 cm with an absolute error of 0.1 cm, the relative error is:',['0.01','0.1','1','10'],0,'Relative error = 0.1/10.0 = 0.01.'],
-['For the same measurement, the percentage error is:',['0.01%','0.1%','1%','10%'],2,'Percentage error = 0.01 × 100 = 1%.'],
-['Random errors are generally caused by:',['Unpredictable variations in measurement conditions','A fixed zero offset only','Incorrect unit conversion only','A mathematical identity'],0,'Random errors fluctuate unpredictably between repeated measurements.'],
-['Systematic error is characterized by:',['A consistent bias in one direction or according to a repeatable pattern','Completely random changes','No effect on measurements','Only human reaction time'],0,'Systematic errors tend to produce a consistent or predictable bias.'],
-['Which method helps reduce random error?',['Taking repeated measurements and using their mean','Changing the unit only','Ignoring all readings','Rounding every reading to one digit'],0,'Repeated measurements and averaging can reduce random fluctuations.'],
-['A zero error in an instrument is usually a type of:',['Systematic error','Random error','Percentage error','Relative uncertainty only'],0,'A persistent zero offset produces a systematic error.'],
-['Parallax error can be reduced by:',['Keeping the eye perpendicular to the scale at the reading position','Changing kilograms to grams','Taking only one reading','Increasing the numerical value'],0,'Correct eye alignment with the scale reduces parallax error.'],
-['If measured values are 9.8 cm, 10.0 cm and 10.2 cm, their mean is:',['9.8 cm','10.0 cm','10.2 cm','30.0 cm'],1,'Mean = (9.8 + 10.0 + 10.2)/3 = 10.0 cm.'],
-['If the mean measured value is 10.0 cm and one reading is 10.2 cm, its absolute error relative to the mean is:',['0.02 cm','0.2 cm','2 cm','20 cm'],1,'Absolute error = |10.2 − 10.0| = 0.2 cm.'],
-['Which statement is correct about accuracy and error?',['Smaller systematic error generally means greater accuracy','Larger error means greater accuracy','Accuracy and error are identical quantities','Random error is always zero'],0,'Reducing systematic error generally improves accuracy.']
-],'Separate absolute, relative and percentage error carefully.');
-install('least count','Least Count',[
-['What is the least count of a measuring instrument?',['The largest quantity the instrument can measure','The smallest measurement that can be measured reliably by the instrument','The average of all readings','The total range of the instrument'],1,'Least count is the smallest value that an instrument can measure reliably.'],
-['The least count of a standard metre scale is generally:',['1 cm','1 mm','0.1 mm','10 mm'],1,'The smallest marked division on a standard metre scale is usually 1 mm.'],
-['Which instrument generally has a smaller least count?',['Metre scale','Vernier calipers','Both always have the same least count','A measuring tape only'],1,'Vernier calipers can measure smaller intervals than an ordinary metre scale.'],
-['If one main scale division is 1 mm and 10 vernier divisions equal 9 main scale divisions, the least count is:',['1 mm','0.9 mm','0.1 mm','0.01 mm'],2,'1 VSD = 0.9 mm, so LC = 1 MSD − 1 VSD = 0.1 mm.'],
-['For a Vernier calipers, least count is calculated as:',['1 MSD + 1 VSD','1 MSD − 1 VSD','1 MSD × 1 VSD','1 MSD ÷ zero error'],1,'For the direct Vernier, LC = 1 MSD − 1 VSD.'],
-['If 20 vernier divisions coincide with 19 main scale divisions and 1 MSD = 1 mm, the least count is:',['1 mm','0.5 mm','0.05 mm','0.01 mm'],2,'1 VSD = 19/20 mm = 0.95 mm; LC = 0.05 mm.'],
-['The least count of a screw gauge depends mainly on:',['Pitch and number of circular scale divisions','Only the length of the main scale','Only zero error','The mass of the instrument'],0,'For a screw gauge, LC = pitch ÷ number of circular-scale divisions.'],
-['A screw gauge has pitch 1 mm and 100 circular-scale divisions. Its least count is:',['1 mm','0.1 mm','0.01 mm','0.001 mm'],2,'LC = 1/100 mm = 0.01 mm.'],
-['A screw gauge has pitch 0.5 mm and 50 circular-scale divisions. Its least count is:',['0.1 mm','0.05 mm','0.01 mm','0.001 mm'],2,'LC = 0.5/50 mm = 0.01 mm.'],
-['Which instrument is most suitable for measuring the diameter of a thin wire accurately?',['Metre scale','Screw gauge','Measuring tape','Stopwatch'],1,'A screw gauge is designed for small dimensions such as wire diameter.'],
-['If an instrument has a least count of 0.01 cm, it can resolve measurements differing by about:',['1 cm','0.1 cm','0.01 cm','10 cm'],2,'The least count gives the smallest reliably distinguishable measurement interval.'],
-['A smaller least count generally means:',['Lower resolution','Higher measurement resolution','Larger zero error','No measurement is possible'],1,'A smaller least count means finer measurement resolution.'],
-['Which statement correctly distinguishes least count and zero error?',['They are exactly the same','Least count is instrument resolution, while zero error is a systematic offset','Least count changes the physical quantity','Zero error is the smallest scale division'],1,'Least count describes resolution; zero error is an offset.'],
-['A metre scale marked in millimetres is used to measure 2.34 cm. The reading is limited by its least count because:',['The instrument cannot distinguish arbitrarily small intervals','The quantity has no unit','The scale measures only mass','Least count changes the length'],0,'The scale resolution limits how finely the length can be read.'],
-['Which change would improve the ability to measure a very small length?',['Use an instrument with a smaller least count','Use a larger unit only','Ignore the scale divisions','Increase the zero error'],0,'A smaller least count provides finer measurement resolution.']
-],'Focus on the smallest reliable division of the instrument.');
-install('accuracy and precision','Accuracy and Precision',[
-['What does accuracy of a measurement indicate?',['How close a measured value is to the true or accepted value','How close repeated values are to each other','The size of the measuring instrument','The number of units used'],0,'Accuracy describes closeness to the true or accepted value.'],
-['What does precision of a measurement indicate?',['Closeness to the true value only','Closeness of repeated measurements to one another','The largest measurable value','The unit system used'],1,'Precision describes repeatability or closeness of repeated measurements.'],
-['A set of readings is 10.01 cm, 10.02 cm and 10.01 cm, while the accepted value is 10.50 cm. These readings are:',['Accurate but not precise','Precise but not accurate','Both accurate and precise','Neither precise nor consistent'],1,'The readings are close to each other but far from the accepted value.'],
-['A set of readings is 10.48 cm, 10.51 cm and 10.49 cm for an accepted value of 10.50 cm. These readings are:',['Accurate and precise','Accurate but never precise','Precise but inaccurate','Neither accurate nor precise'],0,'The readings cluster tightly around the accepted value.'],
-['Which change generally improves accuracy?',['Reducing systematic error','Increasing random scatter','Using a larger numerical value','Changing units without calibration'],0,'Reducing systematic bias generally improves accuracy.'],
-['Which change generally improves precision?',['Reducing random variation','Increasing systematic bias','Changing metres to centimetres','Ignoring repeated readings'],0,'Reducing random variation makes repeated measurements more consistent.'],
-['A measurement can be:',['Accurate but imprecise','Precise but inaccurate','Both accurate and precise','All of these'],3,'Accuracy and precision are different properties, so all listed situations can occur.'],
-['A well-calibrated instrument mainly helps to improve:',['Accuracy','Only the unit symbol','Only the measurement range','Random scatter automatically'],0,'Calibration helps reduce systematic bias and therefore improves accuracy.'],
-['Repeated readings that are very close to each other show high:',['Accuracy only','Precision','Systematic error','Least count only'],1,'Close clustering of repeated readings indicates high precision.'],
-['If measurements are tightly clustered but all shifted from the accepted value by the same amount, the main issue is:',['Systematic error','Random error only','Unit conversion','No error'],0,'A consistent offset is characteristic of systematic error.'],
-['Which statement is correct?',['A precise instrument is always accurate','An accurate measurement is always highly precise','Accuracy and precision are distinct concepts','Accuracy and precision mean exactly the same thing'],2,'A measurement may be precise without being accurate, or accurate without high precision.'],
-['On a target, shots tightly grouped away from the bullseye represent:',['High precision but low accuracy','High accuracy but low precision','Both high accuracy and high precision','Both low accuracy and low precision'],0,'Tight grouping means precision; distance from the bullseye means inaccuracy.'],
-['On a target, shots scattered around the bullseye represent:',['High precision and low accuracy','Reasonably accurate overall but low precision','High precision only','No measurement information'],1,'The average can be near the true value while individual readings are scattered.'],
-['Which pair is most appropriate?',['Accuracy—closeness to true value; Precision—repeatability','Accuracy—repeatability; Precision—true value','Accuracy—least count; Precision—unit conversion','Accuracy—range; Precision—zero error'],0,'Accuracy is closeness to true value; precision is repeatability.'],
-['Which statement best summarizes good measurement quality?',['High accuracy and high precision are both desirable','Only precision matters','Only accuracy matters','Large random error is desirable'],0,'Ideal measurements are both close to the true value and highly repeatable.']
-],'Remember: accuracy means closeness to the true value; precision means repeatability.');
-install('absolute uncertainty','Absolute Uncertainty',[
-['What does absolute uncertainty of a measured quantity represent?',['The uncertainty expressed in the same units as the measured quantity','The uncertainty divided by the measured value','The uncertainty expressed only as a percentage','The number of significant figures'],0,'Absolute uncertainty has the same physical unit as the measured quantity.'],
-['A length is reported as 20.0 ± 0.2 cm. What is the absolute uncertainty?',['0.02 cm','0.2 cm','2 cm','20.2 cm'],1,'The ± value gives the absolute uncertainty: 0.2 cm.'],
-['A measured mass is 50.0 ± 0.5 g. The absolute uncertainty is:',['0.01 g','0.05 g','0.5 g','5 g'],2,'The absolute uncertainty is 0.5 g.'],
-['For readings 10.2 cm, 10.4 cm and 10.3 cm, the mean value is:',['10.1 cm','10.2 cm','10.3 cm','10.4 cm'],2,'Mean = (10.2 + 10.4 + 10.3)/3 = 10.3 cm.'],
-['For the readings 10.2 cm, 10.4 cm and 10.3 cm, the absolute error of the 10.2 cm reading relative to the mean is:',['0.01 cm','0.1 cm','0.2 cm','0.3 cm'],1,'Absolute error = |10.3 − 10.2| = 0.1 cm.'],
-['For the same three readings, the mean absolute error is:',['0 cm','0.067 cm','0.10 cm','0.30 cm'],1,'Absolute deviations are 0.1, 0.1 and 0 cm; their mean is 0.20/3 ≈ 0.067 cm.'],
-['A quantity is measured as 5.00 ± 0.05 m. Its relative uncertainty is:',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.05/5.00 = 0.01.'],
-['A quantity is measured as 5.00 ± 0.05 m. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'Percentage uncertainty = (0.05/5.00) × 100 = 1%.'],
-['If a result is written as a ± Δa, the symbol Δa represents:',['The central measured value','The absolute uncertainty','The unit only','The number of observations'],1,'In a ± Δa representation, Δa is the absolute uncertainty.'],
-['If a length is 12.0 ± 0.3 cm, the possible interval stated by the uncertainty is:',['11.7 cm to 12.3 cm','11.0 cm to 13.0 cm','12.0 cm to 12.3 cm','11.3 cm to 12.0 cm'],0,'Subtracting and adding 0.3 cm gives 11.7 cm to 12.3 cm.'],
-['Which statement about absolute and relative uncertainty is correct?',['Absolute uncertainty has units, while relative uncertainty is dimensionless','Both always have units','Absolute uncertainty is always a percentage','Relative uncertainty always has the same unit as the measurement'],0,'Absolute uncertainty carries the measurement unit; relative uncertainty is a dimensionless ratio.'],
-['A thermometer reads 25.0 ± 0.5 °C. The percentage uncertainty is:',['0.5%','1%','2%','5%'],2,'Percentage uncertainty = (0.5/25.0) × 100 = 2%.'],
-['If A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in A + B is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For addition, maximum absolute uncertainties add: 0.2 + 0.1 = 0.3 cm.'],
-['If Z = A − B, with A = 10.0 ± 0.2 cm and B = 5.0 ± 0.1 cm, the maximum absolute uncertainty in Z is:',['0.1 cm','0.2 cm','0.3 cm','0.4 cm'],2,'For subtraction, maximum absolute uncertainties also add: 0.2 + 0.1 = 0.3 cm.'],
-['Which reported result correctly expresses a measured length of 8.4 cm with absolute uncertainty 0.2 cm?',['8.4 ± 0.2 cm','8.4 ± 0.2','8.4 ± 2 cm','8.2 ± 0.4 cm'],0,'The value and its absolute uncertainty are reported together with the same length unit.']
-],'Track the ± value, its unit, and how it combines with the measured value.');
-install('relative uncertainty','Relative Uncertainty',[
-['What is relative uncertainty?',['Absolute uncertainty divided by the measured value','Absolute uncertainty multiplied by 100','Measured value divided by absolute uncertainty','The least count of the instrument'],0,'Relative uncertainty is the ratio of absolute uncertainty to the measured value.'],
-['A length is measured as 20.0 ± 0.2 cm. What is its relative uncertainty?',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.2/20.0 = 0.01.'],
-['A mass is measured as 50.0 ± 0.5 g. Its relative uncertainty is:',['0.001','0.01','0.05','0.1'],1,'Relative uncertainty = 0.5/50.0 = 0.01.'],
-['A time interval is 10.0 ± 0.1 s. Its relative uncertainty is:',['0.001','0.01','0.1','1'],1,'Relative uncertainty = 0.1/10.0 = 0.01.'],
-['A measured length is 5.00 ± 0.05 m. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'Percentage uncertainty = 0.01 × 100 = 1%.'],
-['If the absolute uncertainty stays fixed while the measured value increases, the relative uncertainty generally:',['Increases','Decreases','Becomes exactly 1','Always remains unchanged'],1,'For fixed absolute uncertainty, dividing by a larger measured value gives a smaller ratio.'],
-['Which quantity is dimensionless?',['Absolute uncertainty','Relative uncertainty','Measured length','Absolute error in length'],1,'Relative uncertainty is a ratio of two quantities with the same dimensions.'],
-['A quantity is reported as 100 ± 2 units. Its relative uncertainty is:',['0.002','0.02','0.2','2'],1,'Relative uncertainty = 2/100 = 0.02.'],
-['A quantity is reported as 40 ± 1 units. Its percentage uncertainty is:',['0.25%','1%','2.5%','4%'],2,'Percentage uncertainty = (1/40) × 100 = 2.5%.'],
-['Two measurements have absolute uncertainties 0.1 cm and 0.2 cm. Which has the smaller relative uncertainty?',['1.0 ± 0.1 cm','10.0 ± 0.2 cm','Both have the same relative uncertainty','It cannot be compared'],1,'The relative uncertainties are 0.1/1.0 = 0.10 and 0.2/10.0 = 0.02; the second is smaller.'],
-['For x = a/b, the maximum relative uncertainty is obtained by:',['Adding the relative uncertainties of a and b','Subtracting the relative uncertainties','Multiplying only the absolute uncertainties','Ignoring the uncertainty in b'],0,'For multiplication or division, maximum relative uncertainties add.'],
-['If a quantity has absolute uncertainty Δx and measured value x, the relative uncertainty is represented by:',['Δx + x','Δx/x','x/Δx','100Δx'],1,'The ratio Δx/x is the relative uncertainty.'],
-['If the relative uncertainty is 0.005, the percentage uncertainty is:',['0.05%','0.5%','5%','50%'],1,'Multiplying 0.005 by 100 gives 0.5%.'],
-['A measurement is 80.0 ± 4.0 cm. Which statement is correct?',['Relative uncertainty is 0.005','Relative uncertainty is 0.05','Percentage uncertainty is 0.05%','Absolute uncertainty is dimensionless'],1,'Relative uncertainty = 4.0/80.0 = 0.05.'],
-['Which statement best describes relative uncertainty?',['It compares the size of uncertainty with the measured value','It gives the measuring range of an instrument','It is always expressed in metres','It is the same as least count'],0,'Relative uncertainty measures the uncertainty as a fraction of the measured value.']
-],'Compare the uncertainty with the measured value first; convert to percent only when requested.');
-install('percentage uncertainty','Percentage Uncertainty',[
-['What is percentage uncertainty?',['Absolute uncertainty divided by the measured value, multiplied by 100','Absolute uncertainty multiplied by the measured value','Measured value divided by absolute uncertainty','The least count expressed in metres'],0,'Percentage uncertainty is the absolute uncertainty relative to the measured value, multiplied by 100%.'],
-['A length is measured as 20.0 ± 0.2 cm. What is its percentage uncertainty?',['0.1%','1%','2%','10%'],1,'(0.2/20.0) × 100 = 1%.'],
-['A mass is measured as 50.0 ± 0.5 g. Its percentage uncertainty is:',['0.1%','1%','5%','10%'],1,'(0.5/50.0) × 100 = 1%.'],
-['A time interval is 10.0 ± 0.1 s. Its percentage uncertainty is:',['0.1%','1%','10%','100%'],1,'(0.1/10.0) × 100 = 1%.'],
-['A measurement is 5.00 ± 0.05 m. What is its percentage uncertainty?',['0.1%','1%','5%','10%'],1,'(0.05/5.00) × 100 = 1%.'],
-['If a quantity has relative uncertainty 0.02, its percentage uncertainty is:',['0.02%','0.2%','2%','20%'],2,'Percentage uncertainty = 0.02 × 100 = 2%.'],
-['If a quantity has relative uncertainty 0.005, its percentage uncertainty is:',['0.05%','0.5%','5%','50%'],1,'Percentage uncertainty = 0.005 × 100 = 0.5%.'],
-['A thermometer reads 25.0 ± 0.5 °C. The percentage uncertainty is:',['0.5%','1%','2%','5%'],2,'(0.5/25.0) × 100 = 2%.'],
-['A measurement is 100 ± 2 units. Its percentage uncertainty is:',['0.2%','2%','20%','50%'],1,'(2/100) × 100 = 2%.'],
-['A measurement is 40 ± 1 units. Its percentage uncertainty is:',['0.25%','1%','2.5%','4%'],2,'(1/40) × 100 = 2.5%.'],
-['Two measurements are 1.0 ± 0.1 cm and 10.0 ± 0.2 cm. Which has the smaller percentage uncertainty?',['1.0 ± 0.1 cm','10.0 ± 0.2 cm','Both are equal','There is not enough information'],1,'The first is 10%, while the second is 2%; therefore the second has the smaller percentage uncertainty.'],
-['If the absolute uncertainty stays fixed while the measured value increases, the percentage uncertainty generally:',['Increases','Decreases','Becomes exactly 100%','Always stays unchanged'],1,'With fixed absolute uncertainty, a larger measured value gives a smaller uncertainty fraction and percentage.'],
-['For x = ab, the maximum percentage uncertainty is obtained by:',['Adding the percentage uncertainties of a and b','Subtracting the percentage uncertainties','Multiplying the percentage uncertainties','Ignoring the uncertainty in b'],0,'For a product, maximum relative uncertainties add, so the percentage uncertainties add.'],
-['For x = a/b, the maximum percentage uncertainty is obtained by:',['Adding the percentage uncertainties of a and b','Subtracting the percentage uncertainties','Dividing the percentage uncertainties','Ignoring the denominator uncertainty'],0,'For a quotient, maximum relative uncertainties add, so the percentage uncertainties add.'],
-['Which statement best describes percentage uncertainty?',['It expresses the size of uncertainty relative to the measured value as a percentage','It gives the absolute measurement unit','It is the same as least count','It changes the physical quantity being measured'],0,'Percentage uncertainty provides a dimensionless comparison of uncertainty with the measured value.']
-],'First form the uncertainty-to-value ratio, then multiply by 100 to express it as a percentage.');
+install('physical quantities','Physical Quantities',[
+['What is a physical quantity?',['A quantity that can be measured and expressed by a number and a unit','A unit symbol alone','A physical object only','A mathematical constant only'],0,'A physical quantity is measurable and is expressed with a numerical value and an appropriate unit.'],
+['Which pair is a physical quantity and its SI unit?',['Length and metre','Metre and kilogram','Second and time symbol only','Newton and metre as base unit'],0,'Length is a physical quantity and metre is its SI unit.'],
+['Which statement best describes measurement of a physical quantity?',['It compares the quantity with a chosen standard unit','It removes the need for units','It always gives a dimensionless number','It depends only on the name of the quantity'],0,'Measurement is comparison of a physical quantity with a standard unit.'],
+['Which of the following is an SI base quantity?',['Length','Velocity','Force','Density'],0,'Length is one of the seven SI base quantities; velocity, force and density are derived quantities.'],
+['Which is a derived physical quantity?',['Mass','Time','Electric current','Speed'],3,'Speed is derived from length and time, so it is a derived physical quantity.'],
+['A physical quantity written as 2.50 m contains:',['Only a number','Only a unit','A numerical value and a unit','A dimension only'],2,'The measurement contains the numerical value 2.50 and the unit metre.'],
+['Which pair contains two scalar physical quantities?',['Mass and time','Displacement and velocity','Force and acceleration','Momentum and displacement'],0,'Mass and time are scalar quantities and do not require direction for their specification.'],
+['How many SI base quantities are there?',['5','6','7','9'],2,'The SI system has seven base quantities.'],
+['In the measurement 2.50 m, the numerical value is:',['0.025','2.50','250','2500'],1,'The numerical value is 2.50 when the quantity is expressed as 2.50 m.'],
+['The statement 12 kg represents:',['A numerical value of 12 with unit kilogram','A unit without a number','A dimension without a unit','A dimensionless quantity'],0,'The measurement has numerical value 12 and unit kilogram.'],
+['If a length is expressed as 2 m or 200 cm, which statement is correct?',['The physical quantity is different','The physical quantity is the same, but the numerical values differ','Both numerical values must be equal','Only centimetres can measure length'],1,'Changing units changes the numerical value but not the physical length.'],
+['Which representation is a derived physical quantity?',['5 kg','10 s','20 A','15 m s⁻¹'],3,'Metre per second is a derived unit for speed or velocity magnitude.'],
+['Which pair contains one scalar and one vector quantity?',['Mass and displacement','Time and temperature','Length and mass','Speed and distance'],0,'Mass is scalar, while displacement is a vector.'],
+['Which statement correctly distinguishes a physical quantity from a unit?',['A physical quantity is measured; a unit is a standard used for comparison','A unit is always larger than the quantity','A physical quantity is only a symbol','They are exactly the same thing'],0,'The quantity is what is measured, while the unit provides the standard for measurement.'],
+['A student writes 5 m and 500 cm for the same straight length. Which conclusion is correct?',['The lengths are unequal','The lengths are equal because 500 cm = 5 m','Only 500 cm is a physical quantity','The unit conversion changes the actual length'],1,'Since 100 cm = 1 m, 500 cm equals 5 m, so both represent the same length.']
+],'Identify the measurable quantity first, then distinguish its numerical value, unit, and physical nature.');
 })();

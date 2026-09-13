@@ -1,0 +1,35 @@
+name: Remove Physics 20-Unit Path Heading
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  remove-heading:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove heading
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          old='''<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b><span>Follow each unit from concept learning to NEET practice.</span></div>'''
+          s=s.replace(old,'')
+          s=s.replace('<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b>','')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          ! grep -q 'Your 20-Unit Physics Path' physics-home.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git commit -m 'Remove old Physics 20-unit path heading'
+          git push

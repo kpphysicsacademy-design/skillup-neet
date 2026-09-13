@@ -1,0 +1,57 @@
+name: Add Units Measurement Quiz
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add 15 MCQs to concept quiz
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='const banks={\n1:['
+          bank="""const banks={\n2:[
+['The SI unit of length is:', ['metre','kilogram','second','ampere'], 0, 'Length is an SI base quantity and its base unit is the metre.'],
+['Which of the following is an SI base quantity?', ['Force','Energy','Time','Pressure'], 2, 'Time is one of the seven SI base quantities.'],
+['Which quantity has the SI unit newton?', ['Work','Force','Power','Energy'], 1, 'The newton is the SI derived unit of force.'],
+['Which expression gives the dimensional formula of force?', ['[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]','[M T⁻¹]'], 0, 'Force equals mass multiplied by acceleration.'],
+['How many significant figures are in 0.005060?', ['3','4','5','6'], 1, 'Leading zeros are not significant; the zero between nonzero digits and the final zero are significant.'],
+['A measurement of 2.50 m contains:', ['2 significant figures','3 significant figures','4 significant figures','5 significant figures'], 1, 'The digits 2, 5 and the trailing zero are significant.'],
+['The least count of an instrument is its:', ['maximum range','smallest measurable interval','zero correction','percentage error'], 1, 'Least count is the smallest scale interval the instrument can reliably resolve.'],
+['If measured length is 10.0 cm and accepted length is 10.2 cm, the absolute error is:', ['0.02 cm','0.2 cm','2.0 cm','20.2 cm'], 1, 'Absolute error is the magnitude of the difference between measured and accepted values.'],
+['Relative error is equal to:', ['absolute error × measured value','absolute error ÷ measured value','measured value ÷ absolute error','absolute error + measured value'], 1, 'Relative error compares absolute error with the measured value.'],
+['A 2% relative error corresponds to a percentage error of:', ['0.02%','0.2%','2%','20%'], 2, 'Percentage error is relative error expressed in percent.'],
+['Which instrument is best suited to measure the diameter of a thin wire accurately?', ['metre scale','screw gauge','stopwatch','spring balance'], 1, 'A screw gauge is designed for precise small-length measurements such as wire diameter.'],
+['Parallax error is mainly caused by:', ['wrong unit','incorrect eye position while reading a scale','large range','high precision'], 1, 'Parallax occurs when the scale is viewed from an incorrect angle.'],
+['Which statement about accuracy and precision is correct?', ['Accuracy means repeatability only','Precision means closeness to the true value only','Accuracy concerns closeness to the accepted value, while precision concerns repeatability','They always mean exactly the same thing'], 2, 'Accuracy and precision describe different aspects of measurement quality.'],
+['Which dimensional formula represents energy?', ['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M⁰ L T⁻¹]'], 1, 'Energy has the same dimensions as work: force multiplied by distance.'],
+['The principle of homogeneity requires that:', ['all numerical values be equal','terms added or equated have the same dimensions','every quantity have an SI base unit','all measurements have zero error'], 1, 'A physically valid equation must be dimensionally consistent.']\n],\n1:["""
+          if 'const banks={\n2:[' not in s:
+              if marker not in s:
+                  raise SystemExit('banks marker not found')
+              s=s.replace(marker,bank,1)
+              p.write_text(s,encoding='utf-8')
+          else:
+              print('Units and Measurement bank already present')
+          PY
+      - name: Commit change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add 15 MCQs for Units and Measurement'
+          git push
+      - name: Remove one-time workflow
+        run: |
+          git rm .github/workflows/add-units-measurement-quiz.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove one-time Units Measurement quiz workflow'
+          git push

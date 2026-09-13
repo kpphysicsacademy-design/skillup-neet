@@ -1,0 +1,40 @@
+name: Change Units of Measurement to list
+on:
+  push:
+    paths:
+      - '.github/workflows/change-units-measurement-to-list.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Change page to list
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<!-- TERMINATE UNITS OF MEASUREMENT URL -->\s*<script>.*?</script>\s*', '', s, flags=re.S)
+          marker='<!-- UNITS OF MEASUREMENT LIST PAGE -->'
+          script='''<script>\n(function(){\n  const c=new URLSearchParams(location.search).get('concept')||'';\n  if(c.trim().toLowerCase()!=='units of measurement') return;\n  document.title='SkillUp | Units of Measurement';\n  const intro=document.getElementById('intro');\n  if(intro) intro.textContent='Choose a sub-concept and learn it step by step for NEET Physics.';\n  const content=document.getElementById('content');\n  if(!content) return;\n  const items=[\n    ['01','Units of Measurement','📏','Standards, physical quantities and measurement basics.'],\n    ['02','System of Units and SI Units','🌐','SI base units, symbols and internationally accepted standards.'],\n    ['03','Fundamental and Derived Units','🧩','Base quantities and units derived from them.'],\n    ['04','Least Count','🎯','Smallest value an instrument can measure reliably.'],\n    ['05','Significant Figures','🔢','Meaningful digits and precision of measurements.'],\n    ['06','Errors in Measurements','⚠️','Absolute, relative, percentage, systematic and random errors.'],\n    ['07','Dimensions of Physical Quantities','📐','Dimensional representation using M, L, T and other bases.'],\n    ['08','Dimensional Analysis and Applications','🧮','Checking equations, deriving relations and converting units.']\n  ];\n  content.innerHTML='<section class="topic" style="padding:16px"><div style="font-weight:950;color:#123b70;font-size:16px;margin-bottom:10px">📚 Units & Measurement — Concept List</div>'+items.map(x=>'<a href="physics-concept.html?concept='+encodeURIComponent(x[1])+'" style="display:flex;align-items:center;gap:11px;padding:12px 10px;margin:7px 0;background:#f8fbff;border:2px solid #d9e5f2;border-radius:15px;color:#123b70;text-decoration:none"><span style="font-size:22px;width:30px">'+x[2]+'</span><span style="flex:1"><b style="display:block;font-size:12px">'+x[0]+' • '+x[1]+'</b><small style="display:block;margin-top:3px;color:#667085;font-size:9px;line-height:1.4">'+x[3]+'</small></span><span style="width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#1677ff;color:#fff;font-weight:950">→</span></a>').join('')+'</section>';\n  const practice=document.getElementById('practice');\n  if(practice) practice.style.display='none';\n})();\n</script>\n';
+          if marker not in s:
+              s=s.replace('</body>', marker+'\n'+script+'</body>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit list page
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet || git commit -m 'Change Units of Measurement page to concept list'
+          git push
+      - name: Remove one-time workflow
+        if: always()
+        run: |
+          git rm -f .github/workflows/change-units-measurement-to-list.yml || true
+          git diff --cached --quiet || git commit -m 'Remove one-time list conversion workflow'
+          git push || true

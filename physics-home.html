@@ -18,6 +18,24 @@
 /* FINAL ALL UNIT HEADINGS REMOVED */
 .unit{display:none!important}
 .unit h2{display:none!important}
+
+/* DUOLINGO PHYSICS PATH EFFECTS */
+.chapter-card{position:relative;overflow:hidden;transform:translateZ(0);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.chapter-card:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(180deg,#58b7ff,#1677ff);border-radius:20px 0 0 20px;opacity:.8}
+.chapter-card:hover{transform:translateY(-4px) scale(1.005);box-shadow:0 14px 30px rgba(18,59,112,.14);border-color:#8ebced}
+.chapter-card:active{transform:translateY(-1px) scale(.995)}
+.concept-svg{transition:transform .2s ease;filter:drop-shadow(0 3px 4px rgba(18,59,112,.12))}
+.chapter-card:hover .concept-svg{transform:rotate(-4deg) scale(1.08)}
+.go{transition:transform .18s ease,box-shadow .18s ease}
+.chapter-card:hover .go{transform:translateX(3px);box-shadow:0 5px 12px rgba(22,119,255,.28)}
+.path:before{background:repeating-linear-gradient(to bottom,#dbe8f5 0 12px,transparent 12px 22px)}
+.node{transition:transform .18s ease,background .18s ease,border-color .18s ease;box-shadow:0 0 0 0 rgba(22,119,255,0)}
+.chapter:hover .node{transform:scale(1.18);border-color:#6eaff0;box-shadow:0 0 0 5px rgba(22,119,255,.08)}
+.chapter.done .node{box-shadow:0 0 0 5px rgba(22,119,255,.08)}
+.chapter-card .meta .tag{transition:transform .15s ease}.chapter-card:hover .meta .tag{transform:translateY(-1px)}
+@keyframes skillup-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-mascot{animation:skillup-bob 2.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -55,6 +73,18 @@ const key='skillup-physics-progress-v4';let state={done:[],xp:20,streak:1};try{s
 const q=s=>'physics-concept.html?concept='+encodeURIComponent(s);
 function render(){const term=document.getElementById('search').value.trim().toLowerCase(),filter=document.getElementById('filter').value,path=document.getElementById('path');path.innerHTML='';let shown=0;topics.forEach(c=>{const hay=(c.name+' '+c.desc+' '+c.subs.join(' ')).toLowerCase();if(term&&!hay.includes(term))return;const done=state.done.includes(c.unit),show=filter==='all'||(filter==='done'?done:!done);if(!show)return;shown++;const wrap=document.createElement('div');wrap.innerHTML='<div class="unit"><span class="unit-num">'+c.unit+'</span><div><h2>UNIT '+c.unit+' • '+c.name+'</h2><small>Official syllabus unit • Learn → Practice → Master</small></div></div>';const lesson=document.createElement('article');lesson.className='lesson chapter '+(done?'done completed':'');lesson.innerHTML='<span class="node"></span><a class="chapter-card" href="'+q(c.name)+'"><span class="chapter-main"><h3><svg class="concept-svg" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="#fff" stroke="#b8d3ef" stroke-width="2"/><text x="22" y="29" text-anchor="middle" font-size="22">'+c.icon+'</text></svg>'+c.name+'</h3><p>'+c.desc+'</p><span class="meta"><span class="tag">'+c.subs.length+' SUB-CONCEPTS</span><span class="tag sub">UNIT '+c.unit+'</span></span></span><span class="go">→</span></a><div class="subconcepts">'+c.subs.map(s=>'<a class="subconcept" href="'+q(s)+'">'+s+' →</a>').join('')+'</div>';wrap.appendChild(lesson);path.appendChild(wrap)});document.getElementById('empty').style.display=shown?'none':'block';document.getElementById('conceptCount').textContent=topics.reduce((n,c)=>n+c.subs.length,0);const completed=state.done.length;document.getElementById('done').textContent=completed;const pct=Math.round(completed/topics.length*100);document.getElementById('percent').textContent=pct+'%';document.getElementById('progress').style.width=pct+'%';document.getElementById('xp').textContent=state.xp;document.getElementById('xp2').textContent=state.xp;document.getElementById('streak').textContent=state.streak}
 document.getElementById('search').addEventListener('input',render);document.getElementById('filter').addEventListener('change',render);render();
+</script>
+
+<script>
+/* Duolingo-style micro-interactions: progress feedback + animated SVGs */
+(function(){
+  document.querySelectorAll('.chapter-card').forEach(function(card){
+    card.addEventListener('click',function(){
+      var svg=this.querySelector('.concept-svg');
+      if(svg && svg.animate) svg.animate([{transform:'scale(1) rotate(0deg)'},{transform:'scale(1.16) rotate(-5deg)'},{transform:'scale(1) rotate(0deg)'}],{duration:320,easing:'ease-out'});
+    });
+  });
+})();
 </script>
 </body>
 </html>

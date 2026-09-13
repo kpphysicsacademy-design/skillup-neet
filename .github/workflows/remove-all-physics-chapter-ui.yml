@@ -1,0 +1,57 @@
+name: Remove All Physics Chapter UI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove ALL chapter presentation blocks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          # Remove dedicated chapter index/navigation containers.
+          s=re.sub(r'<section[^>]*class=["\'][^"\']*chapter-index[^"\']*["\'][^>]*>.*?</section>\s*','',s,flags=re.S|re.I)
+          s=re.sub(r'<nav[^>]*class=["\'][^"\']*chapter-path[^"\']*["\'][^>]*>.*?</nav>\s*','',s,flags=re.S|re.I)
+          # Remove all path-heading blocks that advertise chapters.
+          s=re.sub(r'<div[^>]*class=["\'][^"\']*path-heading[^"\']*["\'][^>]*>.*?</div>\s*','',s,flags=re.S|re.I)
+          # Remove chapter-specific scripts by known chapter navigation names/markers.
+          s=re.sub(r'<script>.*?(?:const names=\[|chapter-jump|physics-chapter-1).*?</script>\s*','',s,flags=re.S|re.I)
+          # Remove chapter-only CSS markers.
+          s=re.sub(r'<style>.*?(?:PHYSICS CHAPTER NAVIGATOR V1|DUOLINGO CHAPTER PATH V1).*?</style>\s*','',s,flags=re.S|re.I)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          ! grep -qi 'Physics Chapters' physics-home.html
+          ! grep -qi '20 chapters' physics-home.html
+          ! grep -qi 'Follow the path in order' physics-home.html
+          ! grep -q 'chapter-index' physics-home.html
+          ! grep -q 'chapter-path' physics-home.html
+          ! grep -q 'Your 20-Unit Physics Path' physics-home.html
+          grep -q 'Physics Learning Path' physics-home.html
+      - name: Commit page cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove Physics Chapters section completely'
+          git push
+      - name: Remove temporary workflow
+        if: success()
+        run: |
+          rm -f .github/workflows/remove-all-physics-chapter-ui.yml
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove temporary chapter cleanup workflow'
+          git push

@@ -2,6 +2,7 @@
  * Dedicated 15-question bank. Loaded only for concept=SI prefixes.
  * Uses the existing Duolingo-style physics quiz shell.
  * Verified against current NIST SI prefix definitions.
+ * Installer trigger V2.
  */
 (function(){
   'use strict';

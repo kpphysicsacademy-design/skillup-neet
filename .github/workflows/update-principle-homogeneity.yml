@@ -1,4 +1,4 @@
-name: Update Principle of Homogeneity Quiz
+name: Update Physics Quiz Overrides
 on:
   push:
     branches: [main]
@@ -12,43 +12,47 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Patch quiz
+      - name: Patch Physical Quantities quiz
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('physics-400-concepts.js')
           s=p.read_text(encoding='utf-8')
-          if '/* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */' in s:
+          if "install('physical quantities'" in s:
+              print('Physical Quantities quiz already present')
               raise SystemExit(0)
           block=r'''
-
-/* PRINCIPLE OF HOMOGENEITY OVERRIDE V1 */
-(function(){var quiz=[
-['The principle of homogeneity states that:',['both sides of a physical equation must have the same dimensions','all quantities must have the same numerical value','only SI units can be used','every quantity must be dimensionless'],0,'For a meaningful physical equation, corresponding terms must have matching dimensions.'],
-['Which equation satisfies the principle of homogeneity?',['s=ut+½at²','s=u+t','v=u+at²','F=m+v'],0,'In s=ut+½at², ut and at² both have dimensions of length.'],
-['In v=u+at, v, u and at have:',['different dimensions','the same dimensions','zero dimensions','dimensionless values'],1,'All three have dimensions [L T⁻¹].'],
-['Why must terms added or subtracted have the same dimensions?',['Addition and subtraction require comparable physical quantities','SI units require it','All constants are dimensionless','Units are always identical'],0,'Only quantities with compatible dimensions can be added or subtracted.'],
-['Which equation is dimensionally homogeneous?',['F=ma','F=m+a','P=W+t','v=u+a'],0,'Both sides of F=ma have dimensions [M L T⁻²].'],
-['Each additive term in a valid physical equation must have:',['compatible dimensions','numerical value 1','only SI units','zero dimensions'],0,'Dimensional homogeneity requires every additive term to have the proper compatible dimensions.'],
-['Which expression violates dimensional homogeneity?',['x=vt','x=v+t','p=mv','W=Fs'],1,'Velocity and time have different dimensions and cannot be added.'],
-['If A+B=C, A, B and C must have:',['the same dimensions','the same numerical values','the same units only','zero dimensions'],0,'All three must represent quantities of the same dimensions.'],
-['A dimensionally homogeneous equation:',['may still be physically incomplete','is always physically correct','must contain only SI units','cannot contain constants'],0,'Dimensional consistency is necessary but not sufficient for complete physical correctness.'],
-['For y=at²+bt+c, if y is length, at², bt and c must each have:',['dimensions of length','dimensions of time','dimensions of acceleration','dimensionless values'],0,'Every additive term must have the same dimensions as y.'],
-['Which principle directly checks dimensional consistency?',['Principle of homogeneity','Archimedes principle','Conservation of charge','Lenz law'],0,'The principle of homogeneity requires matching dimensions in a physical equation.'],
-['Can a dimensionally non-homogeneous equation be a valid physical law?',['No','Yes, always','Only in SI','Only for vectors'],0,'A valid physical equation must be dimensionally homogeneous.'],
-['Terms with dimensions [M L T⁻²] and [M L² T⁻²] can be:',['added directly','subtracted directly','neither added nor subtracted directly','multiplied only'],2,'Different dimensions cannot be directly added or subtracted.'],
-['The principle of homogeneity can:',['test dimensional consistency','determine every numerical constant','replace experiments','prove an equation experimentally'],0,'It is a consistency check, not a replacement for experiment.'],
-['Which statement is correct?',['Every term in a physical equation must have compatible dimensions','Every term must have the same numerical value','Every variable must use metre','Only mechanics equations can be checked'],0,'Compatible dimensions are required for every valid physical equation.']
-];function run(){var key=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(key!=='principle of homogeneity')return;var q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),h=document.getElementById('hint'),ct=document.getElementById('count'),pct=document.getElementById('pct'),qt=document.getElementById('qbadge'),mt=document.getElementById('masteryText'),fill=document.getElementById('fill'),xp=document.getElementById('xp'),m=document.getElementById('mastery'),topic=document.getElementById('topic'),res=document.getElementById('result'),score=document.getElementById('score'),retry=document.getElementById('retry');if(!q||!o||!c||!n)return;var i=0,sel=-1,done=0,points=0;topic.textContent='Principle of Homogeneity';function render(){var a=quiz[i];sel=-1;q.textContent=a[0];qt.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of '+quiz.length;pct.textContent=Math.round((i+1)/quiz.length*100)+'%';mt.textContent=done+' / '+quiz.length;fill.style.width=(done/quiz.length*100)+'%';h.textContent='Remember: dimensions of comparable terms must match.';f.className='feedback';f.innerHTML='';n.disabled=true;c.disabled=false;o.innerHTML='';a[1].forEach(function(v,j){var b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=function(){if(c.disabled)return;sel=j;Array.from(o.children).forEach(function(x){x.classList.remove('selected')});b.classList.add('selected')};o.appendChild(b)})}function check(){if(sel<0)return;var a=quiz[i],bs=Array.from(o.children);bs.forEach(function(b,j){b.classList.remove('correct','wrong');if(j===a[2])b.classList.add('correct');else if(j===sel)b.classList.add('wrong')});var ok=sel===a[2];if(ok){done++;points+=10;xp.textContent=points;m.textContent=Math.round(done/quiz.length*100)+'%';f.className='feedback good';f.textContent='✓ Correct — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — '+a[3]}c.disabled=true;n.disabled=false;mt.textContent=done+' / '+quiz.length;if(i===quiz.length-1)n.textContent='Finish Skill →'}function next(){if(!c.disabled)return;if(i<quiz.length-1){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Principle of Homogeneity Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';h.textContent='';f.className='feedback good';f.textContent='Skill complete. '+points+' XP earned.';res.style.display='block';score.textContent=done+' / '+quiz.length+' correct • '+points+' XP'}}c.onclick=check;n.onclick=next;if(retry)retry.onclick=function(){i=0;done=0;points=0;xp.textContent='0';m.textContent='0%';res.style.display='none';c.style.display='';n.style.display='';render()};render()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(run,60)});else setTimeout(run,60)})();
+install('physical quantities','Physical Quantities',[
+['What is a physical quantity?',['A quantity that can be measured and expressed by a number and a unit','A unit symbol alone','A physical object only','A mathematical constant only'],0,'A physical quantity is measurable and is expressed with a numerical value and an appropriate unit.'],
+['Which pair is a physical quantity and its SI unit?',['Length and metre','Metre and kilogram','Second and time symbol only','Newton and metre as base unit'],0,'Length is a physical quantity and metre is its SI unit.'],
+['Which statement best describes measurement of a physical quantity?',['It compares the quantity with a chosen standard unit','It removes the need for units','It always gives a dimensionless number','It depends only on the name of the quantity'],0,'Measurement is comparison of a physical quantity with a standard unit.'],
+['Which of the following is an SI base quantity?',['Length','Velocity','Force','Density'],0,'Length is one of the seven SI base quantities; the others listed are derived quantities.'],
+['Which is a derived physical quantity?',['Mass','Time','Electric current','Speed'],3,'Speed is derived from length and time, so it is a derived quantity.'],
+['A physical quantity written as 2.50 m contains:',['Only a number','Only a unit','A numerical value and a unit','A dimension only'],2,'The measurement contains the numerical value 2.50 and the unit metre.'],
+['Which pair contains two scalar physical quantities?',['Mass and time','Displacement and velocity','Force and acceleration','Momentum and displacement'],0,'Mass and time are scalar quantities and do not require direction for their specification.'],
+['How many SI base quantities are there?',['5','6','7','9'],2,'The SI system has seven base quantities.'],
+['In the measurement 2.50 m, the numerical value is:',['0.025','2.50','250','2500'],1,'The numerical value is 2.50 when the quantity is expressed as 2.50 m.'],
+['The statement 12 kg represents:',['A numerical value of 12 with unit kilogram','A unit without a number','A dimension without a unit','A dimensionless quantity'],0,'The measurement has numerical value 12 and unit kilogram.'],
+['If a length is expressed as 2 m or 200 cm, which statement is correct?',['The physical quantity is different','The physical quantity is the same, but the numerical values differ','Both numerical values must be equal','Only centimetres can measure length'],1,'Changing units changes the numerical value but not the physical length.'],
+['Which representation is a derived physical quantity?',['5 kg','10 s','20 A','15 m s⁻¹'],3,'Metre per second is a derived unit for speed or velocity magnitude.'],
+['Which pair contains one scalar and one vector quantity?',['Mass and displacement','Time and temperature','Length and mass','Speed and distance'],0,'Mass is scalar, while displacement is a vector.'],
+['Which statement correctly distinguishes a physical quantity from a unit?',['A physical quantity is measured; a unit is a standard used for comparison','A unit is always larger than the quantity','A physical quantity is only a symbol','They are exactly the same thing'],0,'The quantity is what is measured, while the unit provides the standard for measurement.'],
+['A student writes 5 m and 500 cm for the same straight length. Which conclusion is correct?',['The lengths are unequal','The lengths are equal because 500 cm = 5 m','Only 500 cm is a physical quantity','The unit conversion changes the actual length'],1,'Since 100 cm = 1 m, 500 cm equals 5 m, so both represent the same length.']
+],'Identify the measurable quantity first, then distinguish its numerical value, unit, and physical nature.');
 '''
-          p.write_text(s+block,encoding='utf-8')
+          marker='\n})();'
+          pos=s.rfind(marker)
+          if pos<0:
+              raise SystemExit('Could not find quiz override terminator')
+          p.write_text(s[:pos]+'\n'+block+s[pos:],encoding='utf-8')
           PY
       - name: Verify and commit
         run: |
-          grep -q 'PRINCIPLE OF HOMOGENEITY OVERRIDE V1' physics-400-concepts.js
+          grep -q "install('physical quantities'" physics-400-concepts.js
           git config user.name 'skillup-bot'
           git config user.email 'skillup-bot@users.noreply.github.com'
           git add physics-400-concepts.js
-          git commit -m 'Add Principle of Homogeneity Physics quiz [skip ci]'
+          git diff --cached --quiet && exit 0
+          git commit -m 'Update Physical Quantities quiz with 15 MCQs [skip ci]'
           git pull --rebase origin main
           git push origin HEAD:main

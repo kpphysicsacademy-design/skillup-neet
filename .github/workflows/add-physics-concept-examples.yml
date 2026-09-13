@@ -1,0 +1,177 @@
+name: Add examples to Physics explanations
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-physics-concept-examples.yml'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add examples section to every explanation point
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker=".point p{margin:0;color:#405a73;font-size:11px;line-height:1.55}"
+          css=".point-example{margin-top:8px;padding:8px 10px;background:#f4f8fd;border:1px solid #dbe8f5;border-radius:10px;color:#526b86;font-size:10px;line-height:1.5}.point-example b{color:#123b70}"
+          if '.point-example{' not in s:
+              s=s.replace(marker, marker+css, 1)
+          marker2="const data={"
+          examples="""
+const exampleByTitle={
+'Units of Measurement':'Example: A desk measured as 1.5 m has numerical value 1.5 and unit metre.',
+'System of Units and SI Units':'Example: Length is measured in metre (m), mass in kilogram (kg), and time in second (s).',
+'Fundamental and Derived Units':'Example: Force = mass × acceleration, so its SI unit is kg·m/s² = newton (N).',
+'Least Count':'Example: A ruler with 1 mm as its smallest division has least count 1 mm.',
+'Significant Figures':'Example: 0.00450 has three significant figures: 4, 5 and the final 0.',
+'Errors in Measurements':'Example: If the measured length is 10.2 cm and accepted value is 10.0 cm, the absolute error is 0.2 cm.',
+'Dimensions of Physical Quantities':'Example: Since velocity = displacement/time, its dimensions are [LT⁻¹].',
+'Dimensional Analysis and Applications':'Example: Checking s = ut + ½at² shows every term has dimensions of length.',
+'Frame of Reference':'Example: A passenger is at rest relative to a bus but moving relative to the road.',
+'Motion in a Straight Line':'Example: A car travelling along a straight road is an example of one-dimensional motion.',
+'Position-Time Graph':'Example: A straight position-time graph with constant slope represents constant velocity.',
+'Speed and Velocity':'Example: A runner completing one full lap can have non-zero speed but zero displacement.',
+'Uniform and Non-uniform Motion':'Example: A car covering equal distances in equal times has uniform motion.',
+'Average Speed and Instantaneous Velocity':'Example: The speedometer reading at one instant represents instantaneous speed.',
+'Uniformly Accelerated Motion':'Example: A freely falling body near Earth has approximately constant acceleration g.',
+'Velocity-Time and Position-Time Graphs':'Example: The area under a velocity-time graph gives displacement.',
+'Relations for Uniformly Accelerated Motion':'Example: For u=0, a=2 m/s² and t=3 s, v=6 m/s.',
+'Scalars and Vectors':'Example: Mass is scalar; displacement is vector.',
+'Vector Addition and Subtraction':'Example: Two perpendicular velocities can be combined using vector addition.',
+'Scalar and Vector Products':'Example: Work uses the scalar product F·s, while torque uses the vector product r×F.',
+'Unit Vector':'Example: i, j and k are unit vectors along x, y and z axes.',
+'Resolution of a Vector':'Example: A force F at angle θ has components F cosθ and F sinθ.',
+'Relative Velocity':'Example: Two cars moving in the same direction have relative speed equal to the difference of their speeds.',
+'Motion in a Plane':'Example: Projectile motion involves simultaneous horizontal and vertical motion.',
+'Projectile Motion':'Example: A ball thrown obliquely follows a parabolic path when air resistance is neglected.',
+'Uniform Circular Motion':'Example: A stone tied to a string and whirled at constant speed undergoes circular motion.',
+'Force and Inertia':'Example: Passengers jerk backward when a stationary bus suddenly accelerates because of inertia.',
+'Newton’s First Law of Motion':'Example: A book remains at rest on a table until an external force acts on it.',
+'Momentum':'Example: A 2 kg ball moving at 3 m/s has momentum 6 kg·m/s.',
+'Newton’s Second Law of Motion':'Example: A net force of 10 N on a 2 kg body produces acceleration 5 m/s².',
+'Impulse':'Example: Airbags increase collision time and reduce the average force for the same change in momentum.',
+'Newton’s Third Law of Motion':'Example: A swimmer pushes water backward and water pushes the swimmer forward.',
+'Conservation of Linear Momentum and Applications':'Example: In an isolated collision, total momentum before and after remains the same.',
+'Equilibrium of Concurrent Forces':'Example: A lamp hanging at rest has balanced upward tension and downward weight.',
+'Static and Kinetic Friction':'Example: Static friction prevents a box from sliding until the applied force exceeds its limiting value.',
+'Laws of Friction':'Example: Limiting friction is proportional to normal reaction: fₘₐₓ=μₛN.',
+'Rolling Friction':'Example: A wheel rolls more easily than a block slides because rolling friction is generally smaller.',
+'Centripetal Force':'Example: The tension in a string provides centripetal force when a stone is whirled in a circle.',
+'Vehicle on a Level Circular Road':'Example: Friction supplies the centripetal force for a car turning on a level road.',
+'Vehicle on a Banked Road':'Example: Banking allows part of the normal reaction to provide centripetal force.',
+'Work Done by a Constant Force':'Example: Pushing a box 5 m with a 10 N force in the direction of motion does 50 J of work.',
+'Work Done by a Variable Force':'Example: The work done by a spring changes as its extension changes.',
+'Kinetic Energy':'Example: A 2 kg object moving at 3 m/s has kinetic energy 9 J.',
+'Potential Energy':'Example: Raising a 2 kg mass by 5 m increases gravitational potential energy by about 98 J.',
+'Work-Energy Theorem':'Example: Positive net work on a car increases its kinetic energy.',
+'Power':'Example: Two machines doing the same work are compared by how quickly they do it; that is power.',
+'Potential Energy of a Spring':'Example: A spring with k=100 N/m stretched by 0.1 m stores 0.5 J.',
+'Conservation of Mechanical Energy':'Example: In ideal free fall, loss of potential energy equals gain in kinetic energy.',
+'Conservative and Non-conservative Forces':'Example: Gravity is conservative; kinetic friction is non-conservative.',
+'Motion in a Vertical Circle':'Example: A bucket of water can be swung in a vertical circle without spilling if its speed is sufficient at the top.',
+'Elastic Collisions in One and Two Dimensions':'Example: Ideal billiard-ball collisions approximately conserve both momentum and kinetic energy.',
+'Inelastic Collisions in One and Two Dimensions':'Example: Two clay balls stick together after collision; momentum is conserved but kinetic energy is not.',
+'Centre of Mass of a Two-Particle System':'Example: The centre of mass of equal masses lies midway between them.',
+'Centre of Mass of a Rigid Body':'Example: The centre of mass of a uniform circular disc is at its geometric centre.',
+'Basic Concepts of Rotational Motion':'Example: A ceiling fan rotates about its fixed axis.',
+'Moment of a Force':'Example: A force applied farther from a door hinge produces greater turning effect.',
+'Torque':'Example: A 10 N force applied 0.2 m perpendicular to a wrench gives torque 2 N·m.',
+'Angular Momentum':'Example: A spinning skater increases angular speed by pulling arms inward when angular momentum is conserved.',
+'Conservation of Angular Momentum and Applications':'Example: A diver rotates faster after tucking in the body.',
+'Moment of Inertia':'Example: A ring and disc of the same mass and radius have different moments of inertia because their mass is distributed differently.',
+'Radius of Gyration':'Example: If I=4 kg·m² and M=1 kg, k=2 m.',
+'Parallel Axis Theorem':'Example: Moment of inertia about an axis away from the centre can be found using I=Icm+Md².',
+'Perpendicular Axis Theorem':'Example: For a plane lamina, I_z=I_x+I_y.',
+'Equilibrium of Rigid Bodies':'Example: A uniform beam at rest has both net force and net torque equal to zero.',
+'Rigid Body Rotation':'Example: Every point of a rigid disc has the same angular velocity about its fixed axis.',
+'Equations of Rotational Motion':'Example: For constant angular acceleration, ω=ω₀+αt.',
+'Comparison of Linear and Rotational Motions':'Example: Force corresponds to torque, mass to moment of inertia, and linear acceleration to angular acceleration.',
+'Universal Law of Gravitation':'Example: Doubling one mass doubles the gravitational force between two bodies.',
+'Acceleration Due to Gravity':'Example: Near Earth’s surface, a freely falling body accelerates at about 9.8 m/s².',
+'Variation of g with Altitude':'Example: g decreases as altitude above Earth increases.',
+'Variation of g with Depth':'Example: Inside a uniform Earth model, g decreases with depth and becomes zero at the centre.',
+'Kepler’s Laws of Planetary Motion':'Example: A planet moves faster near the Sun and slower when farther away, consistent with equal areas in equal times.',
+'Gravitational Potential Energy':'Example: A satellite in a bound orbit has negative gravitational potential energy when zero is chosen at infinity.',
+'Gravitational Potential':'Example: Gravitational potential at a point is potential energy per unit mass placed there.',
+'Escape Velocity':'Example: The escape speed from Earth’s surface is about 11.2 km/s, ignoring atmosphere and rotation.',
+'Motion of a Satellite':'Example: An orbiting satellite is continuously falling toward Earth but keeps missing it because of its tangential speed.',
+'Orbital Velocity':'Example: A lower circular orbit requires greater orbital speed than a higher circular orbit.',
+'Time Period of a Satellite':'Example: Increasing orbital radius increases the period of a circular satellite.',
+'Energy of a Satellite':'Example: For a bound circular orbit, total energy is negative.',
+'Elastic Behaviour':'Example: A rubber band returns toward its original length after a small stretch.',
+'Stress-Strain Relationship':'Example: Stretching a wire produces tensile stress and strain.',
+'Hooke’s Law':'Example: Within the elastic limit, doubling the extension of a spring doubles the applied force.',
+'Young’s Modulus':'Example: Steel has a much larger Young’s modulus than rubber, so it is harder to stretch.',
+'Bulk Modulus':'Example: Water has a high bulk modulus and is difficult to compress.',
+'Modulus of Rigidity':'Example: Twisting a metal rod produces shear deformation described by rigidity modulus.',
+'Pressure Due to a Fluid Column':'Example: Pressure increases as you dive deeper into a swimming pool.',
+'Pascal’s Law and Applications':'Example: Hydraulic brakes transmit pressure through brake fluid.',
+'Effect of Gravity on Fluid Pressure':'Example: Water pressure at the bottom of a tank is greater than near the surface.',
+'Viscosity':'Example: Honey flows more slowly than water because it has greater viscosity.',
+'Stokes’ Law':'Example: A small sphere falling through glycerine experiences viscous drag described by Stokes’ law.',
+'Terminal Velocity':'Example: A falling raindrop eventually reaches nearly constant speed when drag balances its effective weight.',
+'Streamline Flow':'Example: Slow water flowing smoothly through a narrow tube can be approximately streamline flow.',
+'Turbulent Flow':'Example: Fast-flowing water behind an obstacle can become irregular and turbulent.',
+'Critical Velocity':'Example: Above a certain speed, smooth pipe flow may become turbulent.',
+'Bernoulli’s Principle and Applications':'Example: Air moving faster over an aerofoil can be associated with lower static pressure in the ideal-flow model.',
+'Surface Energy':'Example: Work is needed to increase the surface area of a liquid.',
+'Surface Tension':'Example: Small water droplets tend to become nearly spherical because surface tension minimizes surface area.',
+'Angle of Contact':'Example: Water wets clean glass with a small contact angle, while mercury has a large contact angle.',
+'Excess Pressure Across a Curved Surface':'Example: Pressure inside a small liquid drop is greater than outside because of surface tension.',
+'Surface Tension Applications: Drops':'Example: A falling liquid drop tends toward a spherical shape.',
+'Surface Tension Applications: Bubbles':'Example: A soap bubble has two surfaces and therefore has excess internal pressure.',
+'Capillary Rise':'Example: Water rises in a thin glass capillary tube.',
+'Heat and Temperature':'Example: A metal spoon becomes hot when placed in hot tea because energy is transferred to it.',
+'Thermal Expansion':'Example: Gaps are left between railway tracks to allow expansion in hot weather.',
+'Specific Heat Capacity':'Example: Water needs much more heat than an equal mass of many common materials for the same temperature rise.',
+'Calorimetry':'Example: In an insulated mixture, heat lost by the hot body equals heat gained by the cold body.',
+'Change of State':'Example: Ice absorbs heat while melting but its temperature remains constant during the phase change at fixed pressure.',
+'Latent Heat':'Example: Steam at 100°C carries latent heat that is released during condensation.',
+'Heat Transfer: Conduction, Convection and Radiation':'Example: A metal rod conducts heat, boiling water circulates by convection, and sunlight reaches Earth by radiation.',
+'Thermal Equilibrium':'Example: A thermometer reaches the same temperature as the object when thermal equilibrium is established.',
+'Zeroth Law of Thermodynamics':'Example: If thermometer A agrees with body B and body C, B and C have the same temperature.',
+'Concept of Temperature':'Example: Temperature indicates the direction in which heat would flow between bodies.',
+'First Law of Thermodynamics':'Example: Heat supplied to a gas can increase internal energy and also do expansion work.',
+'Internal Energy':'Example: Heating an ideal gas increases the average molecular energy and therefore its internal energy.',
+'Thermodynamic Processes':'Example: An isochoric process occurs at constant volume.',
+'Work Done by a Gas':'Example: A gas pushing a piston outward does positive work on the surroundings.',
+'Second Law':'Example: Heat naturally flows from a hotter body to a colder body without external work.',
+'Heat Engines and Refrigerators':'Example: A refrigerator uses electrical work to move heat from its cold interior to the warmer room.'
+};
+"""
+          if 'const exampleByTitle=' not in s:
+              s=s.replace(marker2, examples+marker2, 1)
+          # Render an example below every point paragraph. Existing topic-level examples remain too.
+          old="document.getElementById('content').innerHTML=`<section class=\"topic\"><div class=\"topic-head\"><div class=\"topic-icon\">${d.icon}</div><div><h2>${d.title}</h2><p class=\"intro\">${d.intro}</p></div></div><div class=\"points\">${d.points.map(x=>`<article class=\"point\"><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join('')}</div>"
+          new="document.getElementById('content').innerHTML=`<section class=\"topic\"><div class=\"topic-head\"><div class=\"topic-icon\">${d.icon}</div><div><h2>${d.title}</h2><p class=\"intro\">${d.intro}</p></div></div><div class=\"points\">${d.points.map(x=>`<article class=\"point\"><h3>${x[0]}</h3><p>${x[1]}</p>${exampleByTitle[x[0]]?`<div class=\"point-example\"><b>Example:</b> ${exampleByTitle[x[0]].replace(/^Example:\s*/,'')}</div>`:''}</article>`).join('')}</div>"
+          if old in s:
+              s=s.replace(old,new,1)
+          else:
+              # More robust fallback: modify the point template directly.
+              target="<article class=\"point\"><h3>${x[0]}</h3><p>${x[1]}</p></article>"
+              repl="<article class=\"point\"><h3>${x[0]}</h3><p>${x[1]}</p>${exampleByTitle[x[0]]?`<div class=\"point-example\"><b>Example:</b> ${exampleByTitle[x[0]].replace(/^Example:\\s*/,'')}</div>`:''}</article>"
+              s=s.replace(target,repl,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify examples are wired
+        run: |
+          grep -q 'const exampleByTitle=' physics-concept.html
+          grep -q 'point-example' physics-concept.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git commit -m 'Add practical examples to Physics explanations' || exit 0
+          git push
+      - name: Remove temporary workflow
+        if: always()
+        run: |
+          git rm .github/workflows/add-physics-concept-examples.yml || true
+          git commit -m 'Remove temporary examples workflow' || true
+          git push || true

@@ -1,0 +1,89 @@
+name: Add more Physics chapters
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/add-more-physics-chapters.yml'
+permissions:
+  contents: write
+jobs:
+  add-chapters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add chapter library
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('physics-home.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<!-- SKILLUP MORE PHYSICS CHAPTERS V1 -->'
+          if marker in s:
+              raise SystemExit('More Physics chapters already exist')
+          chapters = [
+            ('📏','Units & Measurements','Measurement, units, dimensions and errors','Units and Measurements'),
+            ('🏃','Motion in a Straight Line','Position, velocity, acceleration and graphs','Motion in a Straight Line'),
+            ('🛩️','Motion in a Plane','Vectors, projectile motion and relative motion','Motion in a Plane'),
+            ('⚖️','Laws of Motion','Newton’s laws, friction and circular motion','Laws of Motion'),
+            ('💪','Work, Energy & Power','Work-energy theorem, power and collisions','Work Energy and Power'),
+            ('🔄','System of Particles','Centre of mass, momentum and conservation laws','System of Particles and Centre of Mass'),
+            ('🌀','Rotational Motion','Torque, angular momentum and rolling motion','Rotational Motion'),
+            ('🌍','Gravitation','Gravitational field, potential, satellites and escape speed','Gravitation'),
+            ('🧱','Mechanical Properties of Solids','Stress, strain, elasticity and energy','Mechanical Properties of Solids'),
+            ('💧','Mechanical Properties of Fluids','Pressure, viscosity, surface tension and Bernoulli principle','Mechanical Properties of Fluids'),
+            ('🌡️','Thermal Properties','Temperature, expansion, calorimetry and heat transfer','Thermal Properties of Matter'),
+            ('🔥','Thermodynamics','Laws of thermodynamics, processes and heat engines','Thermodynamics'),
+            ('💨','Kinetic Theory','Ideal gas equation and molecular interpretation','Kinetic Theory of Gases'),
+            ('〰️','Oscillations','SHM, energy and pendulum motion','Oscillations'),
+            ('🌊','Waves','Wave motion, sound, standing waves and Doppler effect','Waves'),
+            ('⚡','Electrostatics','Charge, field, potential and capacitance','Electrostatics'),
+            ('🔌','Current Electricity','Drift, resistance, circuits and electrical power','Current Electricity'),
+            ('🧲','Moving Charges & Magnetism','Magnetic force, fields and charged-particle motion','Moving Charges and Magnetism'),
+            ('〽️','Electromagnetic Induction & AC','Faraday law, inductance, AC and transformers','Electromagnetic Induction and Alternating Current'),
+            ('📡','Electromagnetic Waves','EM spectrum, properties and applications','Electromagnetic Waves'),
+            ('🔭','Ray Optics','Reflection, refraction, mirrors, lenses and instruments','Ray Optics and Optical Instruments'),
+            ('🌈','Wave Optics','Interference, diffraction and polarization','Wave Optics'),
+            ('☯️','Dual Nature','Photoelectric effect, photons and matter waves','Dual Nature of Matter and Radiation'),
+            ('⚛️','Atoms','Atomic models, spectra and energy levels','Atoms'),
+            ('☢️','Nuclei','Nuclear properties, radioactivity, binding energy and reactions','Nuclei'),
+            ('💻','Semiconductor Electronics','Diodes, transistors, logic gates and digital basics','Semiconductor Electronics'),
+            ('🧪','Experimental Skills','Instruments, graphs, measurement and practical physics','Experimental Skills'),
+            ('🎯','Physics Formula Sprint','High-yield formulas across the NEET Physics syllabus','Physics Formula Revision'),
+            ('🧠','Physics Problem Solving','Mixed numerical practice and exam strategies','Physics Problem Solving'),
+            ('🏆','NEET Physics Grand Challenge','Mixed chapter practice for final revision','NEET Physics Grand Challenge'),
+          ]
+          import html
+          cards=[]
+          for i,(icon,title,desc,topic) in enumerate(chapters,1):
+              q=html.escape(topic, quote=True).replace(' ','%20')
+              cards.append(f'''<a class="chapter more-chapter" href="question-bank.html?subject=physics&topic={q}" data-chapter="{i}">
+    <span class="node" aria-hidden="true"></span>
+    <div class="chapter-card">
+      <div style="display:flex;gap:12px;align-items:center;min-width:0">
+        <div class="more-chapter-icon" aria-hidden="true">{icon}</div>
+        <div class="chapter-main"><h3>{html.escape(title)} <span class="chapter-star">★</span></h3><p>{html.escape(desc)}</p><div class="meta"><span class="tag">CHAPTER {i}</span><span class="tag">⚡ +10 XP</span></div></div>
+      </div><div class="go" aria-hidden="true">›</div>
+    </div>
+  </a>''')
+          section=f'''\n{marker}\n<section class="more-chapters" aria-label="More Physics chapters">\n  <div class="more-chapters-head"><div><b>🚀 More Physics Chapters</b><span>30 extra practice chapters to strengthen your NEET preparation</span></div><strong>30 CHAPTERS</strong></div>\n  <div class="more-chapters-grid">{''.join(cards)}</div>\n</section>\n'''
+          css='''\n/* MORE PHYSICS CHAPTERS */\n.more-chapters{margin:28px 0 30px}.more-chapters-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;background:#fff;border:2px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.more-chapters-head b{display:block;color:var(--navy);font-size:15px;font-weight:950}.more-chapters-head span{display:block;color:var(--muted);font-size:9px;margin-top:4px}.more-chapters-head strong{font-size:9px;color:var(--blue2);white-space:nowrap}.more-chapters-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.more-chapter{display:block}.more-chapter .chapter-card{min-height:92px}.more-chapter-icon{width:54px;height:54px;flex:0 0 54px;border-radius:17px;display:grid;place-items:center;font-size:29px;background:linear-gradient(145deg,#fff,#eaf4ff);border:2px solid #cfe2f6;box-shadow:0 5px 0 #b5cfe9,0 9px 18px rgba(18,59,112,.10);transition:.18s}.more-chapter:hover .more-chapter-icon{transform:translateY(-3px) rotate(-4deg) scale(1.05)}.chapter-star{color:#f2b600;font-size:12px}.more-chapter .node{top:36px}.more-chapter .tag{font-size:7px}\n@media(max-width:700px){.more-chapters-head{align-items:flex-start}.more-chapters-head strong{font-size:8px}.more-chapters-grid{grid-template-columns:1fr}.more-chapter-icon{width:48px;height:48px;flex-basis:48px;font-size:25px}}\n'''
+          if '</style>' not in s or '</body>' not in s:
+              raise SystemExit('Could not find HTML insertion points')
+          s=s.replace('</style>',css+'</style>',1)
+          s=s.replace('</body>',section+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+      - name: Verify chapter additions
+        run: |
+          test -f physics-home.html
+          grep -q 'SKILLUP MORE PHYSICS CHAPTERS V1' physics-home.html
+          test "$(grep -o 'class=\"chapter more-chapter\"' physics-home.html | wc -l)" -eq 30
+      - name: Commit page and remove one-time workflow
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html .github/workflows/add-more-physics-chapters.yml
+          git commit -m 'Add 30 more Physics chapters'
+          git rm .github/workflows/add-more-physics-chapters.yml
+          git commit -m 'Remove one-time Physics chapter workflow'
+          git push

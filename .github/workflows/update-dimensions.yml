@@ -1,0 +1,67 @@
+name: Update Dimensions Physics Quiz
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Dimensions bank
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          bank="""const dimensionsQuiz=[
+          ['The dimensions of a physical quantity describe:',['its numerical value only','its dependence on fundamental quantities','only its SI unit symbol','the measuring instrument used'],1,'Dimensions show dependence on fundamental quantities such as mass, length and time.'],
+          ['The dimensional formula of velocity is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[L⁻¹ T]'],0,'Velocity = displacement/time, so its dimensions are [L T⁻¹].'],
+          ['The dimensional formula of acceleration is:',['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[L² T⁻¹]'],1,'Acceleration = velocity/time, giving [L T⁻²].'],
+          ['The dimensional formula of force is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],1,'From F=ma, force has dimensions [M L T⁻²].'],
+          ['The dimensional formula of work is:',['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M² L T⁻²]'],1,'Work = force × displacement = [M L² T⁻²].'],
+          ['The dimensional formula of power is:',['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M⁰ L T⁻¹]'],1,'Power = work/time, so [M L² T⁻³].'],
+          ['The dimensional formula of pressure is:',['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻²]','[M⁻¹ L T⁻²]'],0,'Pressure = force/area = [M L⁻¹ T⁻²].'],
+          ['The dimensional formula of density is:',['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M⁻¹ L³]'],2,'Density = mass/volume = [M L⁻³].'],
+          ['The dimensional formula of momentum is:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻¹]','[M⁻¹ L T⁻¹]'],0,'Momentum = mass × velocity = [M L T⁻¹].'],
+          ['Which quantity is dimensionless?',['Velocity','Force','Strain','Momentum'],2,'Strain is a ratio of two lengths, so it is dimensionless.'],
+          ['The dimensional formula of the gravitational constant G is:',['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻²]','[M L⁻³ T²]'],0,'From F=Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
+          ['The dimensional formula of Planck constant h is:',['[M L² T⁻¹]','[M L T⁻¹]','[M L² T⁻²]','[M⁻¹ L² T⁻¹]'],0,'Since E=hν, h has dimensions energy/frequency = [M L² T⁻¹].'],
+          ['The dimensional formula of frequency is:',['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'],1,'Frequency is cycles per unit time, so its dimension is [T⁻¹].'],
+          ['The dimensions of energy and work are:',['different','the same','reciprocal','dimensionless'],1,'Both energy and work have [M L² T⁻²].'],
+          ['Which statement about dimensions is correct?',['Dimensions depend on the unit system','Dimensions can test dimensional consistency','Dimensions and units are exactly the same','Every dimensionless quantity has numerical value zero'],1,'Dimensional analysis can test whether an equation is dimensionally consistent.']
+          ];"""
+          pat=r"const dimensionsQuiz=\[.*?\];\nconst generic="
+          if re.search(pat,s,re.S):
+              s=re.sub(pat,bank+'\nconst generic=',s,count=1,flags=re.S)
+          else:
+              marker='const generic='
+              if marker not in s: raise SystemExit('generic marker not found')
+              s=s.replace(marker,bank+'\nconst generic=',1)
+          selector="const questions=key==='unit conversion'?unitConversionQuiz:key==='si prefixes'?siPrefixesQuiz:key==='unit systems'?unitSystemsQuiz:key==='derived units'?derivedUnitsQuiz:key==='dimensions'?dimensionsQuiz:generic;"
+          s=re.sub(r"const questions=.*?;let qi=0",selector+'let qi=0',s,count=1,flags=re.S)
+          block=re.search(r"const dimensionsQuiz=\[(.*?)\];\nconst generic=",s,re.S)
+          if not block or len(re.findall(r"^\s*\['",block.group(1),re.M))!=15: raise SystemExit('Dimensions bank is not 15 questions')
+          if "key==='dimensions'?dimensionsQuiz" not in s: raise SystemExit('Dimensions selector missing')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Update Dimensions Physics quiz with 15 MCQs'
+          git push
+      - name: Remove one-time updater
+        if: success()
+        run: |
+          git rm .github/workflows/update-dimensions.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove one-time Dimensions updater'
+          git push

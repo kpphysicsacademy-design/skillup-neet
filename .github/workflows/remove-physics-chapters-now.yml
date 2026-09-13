@@ -1,0 +1,50 @@
+name: Remove Physics Chapters Section Now
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  remove:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove all duplicate chapter UI
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Remove the complete visible 📚 Physics Chapters block.
+          s=re.sub(r'<div[^>]*class=["\']path-heading["\'][^>]*>\s*<b>📚\s*Physics Chapters</b>.*?</div>\s*<nav[^>]*class=["\']chapter-path["\'][^>]*>.*?</nav>\s*', '', s, flags=re.S|re.I)
+          s=re.sub(r'<div[^>]*class=["\']path-heading["\'][^>]*>\s*<b>📚\s*Chapters</b>.*?</div>\s*<nav[^>]*class=["\']chapter-path["\'][^>]*>.*?</nav>\s*', '', s, flags=re.S|re.I)
+
+          # Remove the 20-button chapter index, if present.
+          s=re.sub(r'<section[^>]*class=["\']chapter-index["\'][^>]*>.*?</section>\s*', '', s, flags=re.S|re.I)
+
+          # Remove the old Your 20-Unit Physics Path heading.
+          s=re.sub(r'<div[^>]*class=["\']path-heading["\'][^>]*>\s*<b>🧭\s*Your 20-Unit Physics Path</b>.*?</div>\s*', '', s, flags=re.S|re.I)
+
+          p.write_text(s,encoding='utf-8')
+          PY
+
+          ! grep -q 'Physics Chapters' physics-home.html
+          ! grep -q '20 chapters • Follow the path in order' physics-home.html
+          ! grep -q 'chapter-index' physics-home.html
+          ! grep -q 'chapter-path' physics-home.html
+
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git commit -m 'Remove duplicate Physics Chapters section'
+          rm -f .github/workflows/remove-physics-chapters-now.yml
+          git add -A
+          git commit -m 'Remove temporary Physics Chapters cleanup workflow'
+          git push

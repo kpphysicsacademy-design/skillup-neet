@@ -1,0 +1,59 @@
+name: Update Dimensional Analysis Quiz
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/update-dimensional-analysis.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Dimensional Analysis quiz route
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* SKILLUP DIMENSIONAL ANALYSIS EARLY ROUTE V1 */'
+          if marker not in s:
+              s=s.replace('<body>','<body><script>'+marker+'\n(function(){var c=(new URLSearchParams(location.search).get("concept")||"").trim().toLowerCase();if(c==="dimensional analysis"){location.replace("physics-dimensional-analysis.html?concept=Dimensional%20analysis");}})();</script>',1)
+              p.write_text(s,encoding='utf-8')
+          u=Path('physics-dimensional-analysis.html')
+          u.write_text('''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Dimensional Analysis</title><style>body{margin:0;font-family:system-ui;background:#eef7ff;color:#173b62}.wrap{max-width:1050px;margin:auto;padding:20px}.hero,.quiz,.panel,.mastery{background:#fff;border-radius:20px;padding:22px;margin:12px 0;box-shadow:0 6px 18px #123b7015}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff}.layout{display:grid;grid-template-columns:260px 1fr;gap:18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #dbe7f1;border-radius:15px;background:#fff;text-align:left;font-weight:700;cursor:pointer}.selected{border-color:#1677ff;background:#eef6ff}.correct{border-color:#2db84d;background:#eaffef}.wrong{border-color:#e5484d;background:#fff0f0}.btn{padding:12px 18px;border:0;border-radius:13px;font-weight:900;cursor:pointer;margin:8px 6px 0 0}.check{background:#2db84d;color:#fff}.next{background:#dcecff;color:#145b9e}.next:disabled{opacity:.45}.bar{height:13px;background:#dce8f2;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#42c95a}.feedback{margin-top:14px;padding:13px;border-radius:14px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}@media(max-width:750px){.layout{grid-template-columns:1fr}}</style></head><body><main class="wrap"><a href="physics-home.html">← Back to Physics Path</a><section class="hero"><div>PHYSICS • NEET 2026</div><h1>Dimensional Analysis</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section><section class="mastery"><b>🎯 Skill Mastery</b> <span id="mt">0 / 15</span><div class="bar"><div id="fill" class="fill"></div></div></section><div class="layout"><aside class="panel"><h3 id="count">Question 1 of 15</h3><div id="pct">7%</div><div>⚡ +10 XP each</div></aside><section class="quiz"><b id="badge">Q1</b><h2 id="question"></h2><div id="options" class="options"></div><button id="check" class="btn check">Check Answer</button><button id="next" class="btn next" disabled>Next Question →</button><div id="feedback"></div><p>💡 Use M, L and T dimensions.</p></section></div></main><script>var Q=[
+["What is the main purpose of dimensional analysis?",["To analyze physical quantities using their dimensions","To change a physical quantity","To remove units from every equation","To measure temperature directly"],0,"Dimensional analysis uses dimensions to test relations and derive results."],
+["The dimensional formula of velocity is:",["[LT⁻¹]","[LT⁻²]","[MLT⁻¹]","[L²T⁻¹]"],0,"Velocity = displacement/time."],
+["The dimensional formula of acceleration is:",["[LT⁻¹]","[LT⁻²]","[MLT⁻²]","[L²T⁻²]"],1,"Acceleration = velocity/time."],
+["The dimensional formula of force is:",["[MLT⁻¹]","[MLT⁻²]","[ML²T⁻²]","[M⁻¹LT²]"],1,"Force = mass × acceleration."],
+["The dimensional formula of work is:",["[MLT⁻²]","[ML²T⁻²]","[ML²T⁻³]","[ML⁻¹T⁻²]"],1,"Work = force × displacement."],
+["The dimensional formula of power is:",["[ML²T⁻²]","[ML²T⁻³]","[MLT⁻²]","[ML⁻¹T⁻²]"],1,"Power = work/time."],
+["The dimensional formula of pressure is:",["[MLT⁻²]","[ML²T⁻²]","[ML⁻¹T⁻²]","[ML⁻³]"],2,"Pressure = force/area."],
+["The dimensional formula of density is:",["[ML⁻³]","[ML³]","[M⁻¹L³]","[ML⁻¹]"],0,"Density = mass/volume."],
+["The dimensional formula of momentum is:",["[MLT⁻¹]","[MLT⁻²]","[ML²T⁻¹]","[M⁻¹LT⁻¹]"],0,"Momentum = mass × velocity."],
+["Strain is:",["Dimensionless","[L]","[LT⁻¹]","[ML⁻¹]"],0,"Strain is a ratio of two lengths."],
+["The dimensional formula of gravitational constant G is:",["[ML⁻¹T⁻²]","[M⁻¹L³T⁻²]","[ML³T⁻²]","[M⁻¹L²T⁻¹]"],1,"From F = Gm₁m₂/r²."],
+["The dimensional formula of Planck constant h is:",["[ML²T⁻¹]","[ML²T⁻²]","[MLT⁻¹]","[M⁻¹L²T⁻¹]"],0,"From E = hν."],
+["The dimensional formula of frequency is:",["[T]","[T⁻¹]","[LT⁻¹]","[MLT⁻¹]"],1,"Frequency is cycles per unit time."],
+["Work and energy have:",["Different dimensions","The same dimensions","No dimensions","Only mass dimensions"],1,"Both have [ML²T⁻²]."],
+["For a physically valid dimensional equation:",["Both sides must have the same dimensions","Only numbers must match","Units must be absent","The left side must always have larger dimensions"],0,"Dimensional homogeneity requires equal dimensions on both sides."]
+];
+(function(){var i=0,sel=-1,done=0,points=0,q=document.getElementById('question'),o=document.getElementById('options'),c=document.getElementById('check'),n=document.getElementById('next'),f=document.getElementById('feedback'),ct=document.getElementById('count'),pct=document.getElementById('pct'),b=document.getElementById('badge'),mt=document.getElementById('mt'),fill=document.getElementById('fill');function render(){var a=Q[i];sel=-1;q.textContent=a[0];b.textContent='Q'+(i+1);ct.textContent='Question '+(i+1)+' of 15';pct.textContent=Math.round((i+1)/15*100)+'%';mt.textContent=done+' / 15';fill.style.width=done/15*100+'%';f.className='feedback';f.textContent='';c.disabled=false;n.disabled=true;o.innerHTML='';a[1].forEach(function(v,j){var x=document.createElement('button');x.className='option';x.textContent=String.fromCharCode(65+j)+'. '+v;x.onclick=function(){sel=j;Array.from(o.children).forEach(function(z){z.classList.remove('selected')});x.classList.add('selected')};o.appendChild(x)})}c.onclick=function(){if(sel<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}var a=Q[i];Array.from(o.children).forEach(function(x,j){if(j===a[2])x.classList.add('correct');else if(j===sel)x.classList.add('wrong')});if(sel===a[2]){done++;points+=10;f.className='feedback good';f.textContent='🎯 Correct! +10 XP — '+a[3]}else{f.className='feedback bad';f.textContent='Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}c.disabled=true;n.disabled=false;if(i===14)n.textContent='Finish Skill →';mt.textContent=done+' / 15';fill.style.width=done/15*100+'%'};n.onclick=function(){if(i<14){i++;n.textContent='Next Question →';render()}else{q.textContent='🏆 Dimensional Analysis Complete!';o.innerHTML='';c.style.display='none';n.style.display='none';f.className='feedback good';f.textContent='Skill complete. '+done+' / 15 correct • '+points+' XP'}};render()})();</script></body></html>''',encoding='utf-8')
+          assert s.count(marker)==1
+          assert u.read_text(encoding='utf-8').count('],0,')+u.read_text(encoding='utf-8').count('],1,')+u.read_text(encoding='utf-8').count('],2,')==15
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'skillup-bot'
+          git config user.email 'skillup-bot@users.noreply.github.com'
+          git add physics-concept.html physics-dimensional-analysis.html
+          git commit -m 'Add Dimensional Analysis 15-MCQ quiz' || exit 0
+          git push
+      - name: Remove one-time workflow
+        if: always()
+        run: |
+          git rm .github/workflows/update-dimensional-analysis.yml || true
+          git commit -m 'Remove one-time Dimensional Analysis updater' || true
+          git push || true

@@ -1,0 +1,35 @@
+name: Link Units of Measurement quiz
+on:
+  push:
+    branches: [main]
+jobs:
+  update:
+    if: github.event.head_commit.message != 'Link Units of Measurement quiz'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Link quiz
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          old='physics-concept.html?concept=Units%20of%20Measurement'
+          new='physics-units-quiz.html'
+          if old not in s:
+              raise SystemExit('Units of Measurement explanation link not found')
+          s=s.replace(old,new)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'physics-units-quiz.html' physics-home.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git commit -m 'Link Units of Measurement quiz'
+          git push

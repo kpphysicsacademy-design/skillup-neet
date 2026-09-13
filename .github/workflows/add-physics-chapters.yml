@@ -1,0 +1,64 @@
+name: Add Physics chapters
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  chapters:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add chapter navigator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* PHYSICS CHAPTER NAVIGATOR V1 */'
+          if marker in s:
+              print('Chapter navigator already present')
+              raise SystemExit(0)
+
+          css='''<style>\n/* PHYSICS CHAPTER NAVIGATOR V1 */\n.chapter-index{margin:18px 0 12px;background:#fff;border:1px solid #d9e5f2;border-radius:20px;padding:13px;box-shadow:0 8px 24px rgba(18,59,112,.08)}\n.chapter-index-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.chapter-index-head b{font-size:13px;color:#123b70;font-weight:950}.chapter-index-head span{font-size:9px;color:#6b7280;font-weight:750}\n.chapter-index-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.chapter-jump{border:1px solid #dbe8f5;background:#f8fbff;border-radius:12px;padding:9px 8px;text-align:left;cursor:pointer;color:#405a73;font-size:9px;font-weight:900;transition:.16s}.chapter-jump:hover{transform:translateY(-2px);border-color:#9dc4ed;background:#eef6ff}.chapter-jump b{display:block;color:#1677ff;font-size:9px;margin-bottom:2px}.chapter-jump.active{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.10);background:#eef6ff}\n.physics-chapter-anchor{scroll-margin-top:145px}\n@media(max-width:700px){.chapter-index{padding:11px;border-radius:17px}.chapter-index-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chapter-jump{font-size:8px;padding:8px}.chapter-index-head{display:block}.chapter-index-head span{display:block;margin-top:3px}}\n</style>'''
+
+          names=[
+            ('01','Physics and Measurement','📏'),('02','Kinematics','🏃'),('03','Laws of Motion','⚖️'),
+            ('04','Work, Energy and Power','⚡'),('05','Rotational Motion','🔄'),('06','Gravitation','🌍'),
+            ('07','Properties of Solids and Liquids','💧'),('08','Thermodynamics','🔥'),('09','Kinetic Theory of Gases','💨'),
+            ('10','Oscillations and Waves','〰️'),('11','Electrostatics','⚡'),('12','Current Electricity','🔌'),
+            ('13','Magnetic Effects of Current and Magnetism','🧲'),('14','Electromagnetic Induction and Alternating Currents','〽️'),
+            ('15','Electromagnetic Waves','📡'),('16','Optics','🔭'),('17','Dual Nature of Matter and Radiation','☯️'),
+            ('18','Atoms and Nuclei','⚛️'),('19','Electronic Devices','💻'),('20','Experimental Skills','🧪')
+          ]
+          buttons=''.join(f'<button class="chapter-jump" data-chapter="{n}"><b>CHAPTER {n}</b>{icon} {name}</button>' for n,name,icon in names)
+          html=f'''<section class="chapter-index" aria-label="Physics chapters"><div class="chapter-index-head"><b>📚 Physics Chapters</b><span>20 chapters • Follow the path in order</span></div><div class="chapter-index-grid">{buttons}</div></section>'''
+
+          js='''<script>\n(()=>{const names=['Physics and Measurement','Kinematics','Laws of Motion','Work, Energy and Power','Rotational Motion','Gravitation','Properties of Solids and Liquids','Thermodynamics','Kinetic Theory of Gases','Oscillations and Waves','Electrostatics','Current Electricity','Magnetic Effects of Current and Magnetism','Electromagnetic Induction and Alternating Currents','Electromagnetic Waves','Optics','Dual Nature of Matter and Radiation','Atoms and Nuclei','Electronic Devices','Experimental Skills'];const units=[...document.querySelectorAll('.unit')];units.forEach((u,i)=>{u.classList.add('physics-chapter-anchor');u.id='physics-chapter-'+(i+1);});document.querySelectorAll('.chapter-jump').forEach((b,i)=>b.addEventListener('click',()=>document.getElementById('physics-chapter-'+(i+1))?.scrollIntoView({behavior:'smooth',block:'start'})));const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=units.indexOf(e.target);document.querySelectorAll('.chapter-jump').forEach((b,j)=>b.classList.toggle('active',i===j));}}),{rootMargin:'-120px 0px -65% 0px',threshold:0});units.forEach(u=>obs.observe(u));})();\n</script>'''
+
+          if '</head>' not in s or '</body>' not in s:
+              raise SystemExit('Missing HTML insertion points')
+          s=s.replace('</head>',css+'\n</head>',1)
+          # Put chapter index immediately before the learning path container when possible.
+          if '<div class="path-heading">' in s:
+              s=s.replace('<div class="path-heading">',html+'\n<div class="path-heading">',1)
+          elif '<div class="path"' in s:
+              s=s.replace('<div class="path"',html+'\n<div class="path"',1)
+          else:
+              s=s.replace('</main>',html+'\n</main>',1)
+          s=s.replace('</body>',js+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          grep -q 'PHYSICS CHAPTER NAVIGATOR V1' physics-home.html
+          grep -q 'Physics Chapters' physics-home.html
+          grep -q 'CHAPTER 20' physics-home.html
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git diff --cached --quiet || git commit -m 'Add 20 Physics chapters to learning path'
+          git push

@@ -1,0 +1,73 @@
+name: Restructure Physics Home Page
+on:
+  push:
+    branches: [main]
+jobs:
+  restructure:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restructure page UI
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-home.html')
+          s=p.read_text()
+          marker='/* PHYSICS HOME RESTRUCTURE V1 */'
+          if marker in s:
+              raise SystemExit('Already restructured')
+          css='''
+          <style>
+          /* PHYSICS HOME RESTRUCTURE V1 */
+          .unit{display:flex!important;position:sticky;top:76px;z-index:8;margin:24px 0 10px;padding:8px 10px 8px 4px;background:rgba(245,249,255,.94);backdrop-filter:blur(8px);border-radius:16px}
+          .unit h2{display:block!important;font-size:15px!important}
+          .unit small{display:block!important;font-size:9px!important}
+          .path{padding-left:8px}
+          .path:before{left:27px;top:54px}
+          .unit-num{width:40px;height:40px;flex:0 0 40px}
+          .lesson{margin-left:46px;margin-bottom:13px}
+          .chapter-card{min-height:86px}
+          .subconcepts{grid-template-columns:repeat(3,minmax(0,1fr));}
+          .subconcept{font-size:9px;line-height:1.3}
+          .toolbar{position:sticky;top:66px;z-index:9;background:rgba(245,249,255,.94);padding:8px 0;margin:14px 0 8px;backdrop-filter:blur(8px)}
+          .progress-card{position:relative;overflow:hidden}
+          .progress-card:after{content:'LEARN → PRACTICE → MASTER';display:block;margin-top:9px;font-size:8px;letter-spacing:1.1px;font-weight:950;color:#6b7f96}
+          @media(max-width:700px){
+            .unit{top:60px;margin:18px 0 8px;padding:7px 6px 7px 0}
+            .unit-num{width:34px;height:34px;flex-basis:34px}
+            .unit h2{font-size:13px!important}.unit small{font-size:8px!important}
+            .path{padding-left:0}.path:before{left:20px;top:47px}
+            .lesson{margin-left:30px}
+            .subconcepts{grid-template-columns:1fr 1fr}
+            .toolbar{top:60px}
+          }
+          @media(max-width:430px){.subconcepts{grid-template-columns:1fr}.chapter-card{min-height:0}}
+          </style>
+          '''
+          s=s.replace('</style>','</style>'+css,1)
+          # Add a compact section label above the path without disturbing the existing dynamic syllabus data.
+          old='<section class="path" id="path"></section>'
+          new='<div class="path-heading"><b>🧭 Your 20-Unit Physics Path</b><span>Follow each unit from concept learning to NEET practice.</span></div>'+old
+          if old in s:
+              s=s.replace(old,new,1)
+          else:
+              raise SystemExit('Path container not found')
+          extra='''<style>.path-heading{display:flex;align-items:baseline;gap:10px;margin:20px 2px 6px;color:#123b70}.path-heading b{font-size:14px;font-weight:950}.path-heading span{font-size:9px;color:#6b7280;font-weight:700}@media(max-width:700px){.path-heading{display:block;margin-top:16px}.path-heading b{font-size:13px}.path-heading span{display:block;margin-top:3px}}</style>'''
+          s=s.replace('</head>',extra+'</head>',1)
+          p.write_text(s)
+          PY
+      - name: Verify
+        run: |
+          grep -q 'PHYSICS HOME RESTRUCTURE V1' physics-home.html
+          grep -q 'Your 20-Unit Physics Path' physics-home.html
+          grep -q 'physics-units-quiz.html?utm_source=chatgpt.com' physics-home.html
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-home.html
+          git commit -m 'Restructure Physics home page'
+          git push

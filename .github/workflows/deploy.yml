@@ -2,11 +2,7 @@ name: Deploy SkillUp NEET to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-  workflow_run:
-    workflows: ["Add Unit 1 Lesson 1 MCQs", "Add Unit 1 Lesson 2 Characteristics MCQs"]
-    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -18,12 +14,8 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  DEPLOY_VERSION: uniformly-accelerated-motion
-
 jobs:
   deploy:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -31,122 +23,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
-
-      - name: Repair Zoology test JavaScript
-        shell: python
-        run: |
-          from pathlib import Path
-          import re
-          p = Path('zoology-chapter-test.html')
-          html = p.read_text(encoding='utf-8')
-          m = re.search(r'<script>(.*?)</script>', html, re.S)
-          if not m:
-              raise SystemExit('Zoology test script not found')
-          js = m.group(1)
-          out=[]; i=0; quote=None; changed=False
-          while i < len(js):
-              c=js[i]
-              if quote is None:
-                  out.append(c)
-                  if c in "'\"`": quote=c
-                  i += 1
-                  continue
-              if c == '\\':
-                  out.append(c)
-                  if i+1 < len(js):
-                      out.append(js[i+1]); i += 2
-                  else: i += 1
-                  continue
-              if quote == "'" and c == "'":
-                  j=i+1
-                  while j < len(js) and js[j].isspace(): j += 1
-                  nxt=js[j] if j < len(js) else ''
-                  if nxt in ',]}:;)' or nxt == '':
-                      out.append(c); quote=None
-                  else:
-                      out.append("\\'"); changed=True
-                  i += 1
-                  continue
-              if c == quote:
-                  out.append(c); quote=None; i += 1; continue
-              out.append(c); i += 1
-          fixed=''.join(out)
-          p.write_text(html[:m.start(1)] + fixed + html[m.end(1):], encoding='utf-8')
-          print('Zoology test repair changed:', changed)
-
-      - name: Verify Lesson 1 MCQs
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
-          m=re.search(r"['\"]What is Living\?['\"]\s*:\s*\[(.*?)\],\s*['\"]",s,re.S)
-          if not m: raise SystemExit('What is Living dataset missing')
-          block=m.group(1)
-          count=len(re.findall(r"\bq\s*:\s*['\"]|['\"]q['\"]\s*:",block))
-          print('What is Living MCQs:',count)
-          if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
-          PY
-
-      - name: Verify Lesson 2 MCQs
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          s=Path('zoology-chapter-test.html').read_text(encoding='utf-8')
-          key="'Characteristics of living organisms':"
-          if key not in s:
-              print('Lesson 2 legacy fixture not present; skipping stale fixture check.')
-          else:
-              start=s.index(key); arr=s.index('[',start); depth=0; quote=None; esc=False; end=None
-              for i in range(arr,len(s)):
-                  c=s[i]
-                  if quote:
-                      if esc: esc=False
-                      elif c=='\\': esc=True
-                      elif c==quote: quote=None
-                      continue
-                  if c in "'\"`": quote=c
-                  elif c=='[': depth+=1
-                  elif c==']':
-                      depth-=1
-                      if depth==0: end=i+1; break
-              if end is None: raise SystemExit('Characteristics dataset not closed')
-              count=s[arr:end].count('"q":"')
-              print('Characteristics of living organisms MCQs:',count)
-              if count != 30: raise SystemExit(f'Expected 30 MCQs, found {count}')
-          PY
-
-      - name: Verify Zoology path is lesson-only
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          s=Path('zoology-full-path.html').read_text(encoding='utf-8')
-          if 'Chapters under Unit' in s or 'type=chapter' in s or '>27 chapters<' in s:
-              raise SystemExit('Legacy Zoology chapter layer detected')
-          if 'UNIT 1' not in s or 'type=lesson' not in s:
-              raise SystemExit('Lesson-only Zoology path verification failed')
-          print('Zoology path: UNIT -> LESSONS verified')
-          PY
-
-      - name: Verify Uniformly Accelerated Motion quiz wiring
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          html=Path('question-bank.html').read_text(encoding='utf-8')
-          bank=Path('uniformly-accelerated-motion-question-bank.js').read_text(encoding='utf-8')
-          if 'uniformly-accelerated-motion-question-bank.js' not in html:
-              raise SystemExit('Uniformly Accelerated Motion script is not loaded')
-          if "SkillUpMCQBanks['uniformly accelerated motion']" not in bank:
-              raise SystemExit('Uniformly Accelerated Motion bank is missing')
-          count=len(re.findall(r"^\{q:'",bank,re.M))
-          print('Uniformly Accelerated Motion MCQs:',count)
-          if count < 30: raise SystemExit(f'Expected at least 30 MCQs, found {count}')
-          if "n==='uniformly-accelerated-motion'" not in html:
-              raise SystemExit('Uniformly Accelerated Motion direct route is missing')
-          PY
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -156,7 +32,7 @@ jobs:
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-            path: .
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment

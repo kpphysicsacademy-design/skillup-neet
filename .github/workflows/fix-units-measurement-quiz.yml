@@ -1,0 +1,80 @@
+name: Fix Units of Measurement Quiz
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-units-measurement-quiz.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace unit-of-measurement question bank
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('physics-concept.html')
+          s = p.read_text(encoding='utf-8')
+
+          new_bank = r'''const banks={
+1:[
+['What is the main purpose of a unit in physical measurement?',['To give a standard reference for a quantity','To change a scalar into a vector','To remove all measurement errors','To define only numerical values'],0,'Compare what a unit provides with what a measured number alone provides.'],
+['Which is the SI base unit of length?',['metre','centimetre','kilometre','inch'],0,'Identify the base SI unit, not a commonly used multiple or non-SI unit.'],
+['Which is the SI base unit of time?',['minute','hour','second','day'],2,'The SI base unit must be distinguished from other accepted time units.'],
+['Which is the SI base unit of mass?',['gram','kilogram','milligram','tonne'],1,'Among these choices, select the SI base unit for mass.'],
+['Which is the SI base unit of thermodynamic temperature?',['degree Celsius','kelvin','degree Fahrenheit','joule'],1,'Temperature has a specific SI base unit; compare the unit names carefully.'],
+['Which is the SI base unit of electric current?',['volt','coulomb','ampere','ohm'],2,'Electric current is one of the seven SI base quantities.'],
+['Which is the SI base unit of amount of substance?',['mole','gram','litre','candela'],0,'Amount of substance has its own SI base unit.'],
+['Which is the SI base unit of luminous intensity?',['lumen','lux','candela','watt'],2,'Luminous intensity is an SI base quantity with a named base unit.'],
+['Which of the following is an SI derived unit?',['metre','second','newton','kilogram'],2,'A derived unit is formed from combinations of SI base units.'],
+['The SI unit of force is:',['joule','watt','pascal','newton'],3,'Force is a derived quantity with a specific SI derived unit.'],
+['The prefix kilo- represents:',['10⁻³','10²','10³','10⁶'],2,'SI prefixes represent powers of ten; identify the factor associated with kilo.'],
+['The prefix milli- represents:',['10⁻⁶','10⁻³','10³','10⁶'],1,'Compare milli with the other powers of ten listed.'],
+['1 kilometre is equal to:',['10 m','100 m','1000 m','10 000 m'],2,'Use the SI prefix attached to metre to determine the factor.'],
+['Which statement about a physical quantity is correct?',['It is expressed only by a number','It is expressed by a numerical value and a unit','It always has a unit of metre','It cannot be measured'],1,'A measurement communicates both magnitude and the reference unit.'],
+['Which pair contains only SI base units?',['newton and joule','metre and second','watt and pascal','joule and coulomb'],1,'Check each pair against the seven SI base units rather than derived units.']
+]};'''
+
+          pattern = r"const banks=\{\s*1:\[.*?\n\]\};"
+          s2, n = re.subn(pattern, new_bank, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit('Could not locate the existing question bank')
+
+          # Make the page explicitly identify this as the Units of Measurement quiz.
+          s2 = s2.replace(
+              "Focus on definitions, SI units, dimensions, errors and instrument concepts.",
+              "Focus on units, SI base units, derived units, SI prefixes and unit conversion."
+          )
+          s2 = s2.replace(
+              "Physical quantities are described using numerical values and appropriate units.",
+              "A physical measurement is communicated with a numerical value and an appropriate unit."
+          )
+          s2 = s2.replace(
+              "Always check units, significant figures and dimensional consistency.",
+              "Always write the correct unit and distinguish SI base units from derived units."
+          )
+          p.write_text(s2, encoding='utf-8')
+          print('Updated Units of Measurement quiz bank.')
+          PY
+
+      - name: Commit quiz fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet || git commit -m 'Fix Units of Measurement quiz content'
+          git push
+
+      - name: Remove one-time workflow
+        if: always()
+        run: |
+          git rm -f .github/workflows/fix-units-measurement-quiz.yml || true
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Remove one-time Units quiz fixer' || true
+          git push || true

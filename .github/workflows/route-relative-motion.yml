@@ -1,0 +1,38 @@
+name: Route Relative Motion
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/route-relative-motion.yml'
+permissions:
+  contents: write
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add route
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker="'relative motion':'physics-relative-motion.html'"
+          if marker not in s:
+              needle="'motion graph':'physics-motion-graphs.html',"
+              if needle in s:
+                  s=s.replace(needle,needle+marker+',',1)
+              else:
+                  needle2="'motion graphs':'physics-motion-graphs.html',"
+                  if needle2 not in s: raise SystemExit('Route insertion point not found')
+                  s=s.replace(needle2,needle2+marker+',',1)
+              p.write_text(s,encoding='utf-8')
+      - name: Verify and commit
+        shell: bash
+        run: |
+          grep -q "relative motion.*physics-relative-motion.html" physics-concept.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git commit -m 'Route Relative Motion to dedicated quiz' || exit 0
+          git push

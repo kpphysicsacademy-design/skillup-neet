@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Derived Units</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.xp{font-weight:800}.intro{margin:8px 0 18px}.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}.q{font-size:1.3rem;font-weight:750;line-height:1.45}.opts{display:grid;gap:10px;margin-top:18px}.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer}.opts button:hover{border-color:#58cc02}.opts button.selected{border-color:#5146a5;background:#f3f1ff}.opts button.correct{border-color:#58cc02;background:#effbea}.opts button.wrong{border-color:#ff4b4b;background:#fff0f0}.feedback{font-weight:700;margin-top:16px;min-height:24px}.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}.next:disabled{opacity:.45}.back{display:inline-block;margin-top:18px;color:#5146a5}.tip{font-size:.95rem;color:#5a6272}
+</style></head>
+<body><main class="wrap"><div class="top"><h1>🧮 Derived Units</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div><p class="intro">Master SI derived units and their relationships with 15 NEET-style questions.</p><div class="bar"><div id="fill" class="fill"></div></div><section class="card"><div id="count"></div><p id="question" class="q"></p><div id="options" class="opts"></div><div id="feedback" class="feedback"></div><p class="tip">💡 Choose the best answer and build your Physics mastery.</p><button id="next" class="next" disabled>Continue →</button></section><a class="back" href="physics-home.html">← Back to Physics Path</a></main>
+<script>
+const qs=[
+['Which of the following is an SI derived unit?',['metre','second','kilogram','newton'],3],
+['The SI unit of force is:',['joule','newton','pascal','watt'],1],
+['One newton is equal to:',['kg m s⁻²','kg m² s⁻¹','kg s⁻²','m s⁻²'],0],
+['The SI unit of work is:',['watt','joule','newton','pascal'],1],
+['One joule is dimensionally equal to:',['N m','N/m','kg/m','W/s'],0],
+['The SI unit of power is:',['joule','watt','newton','coulomb'],1],
+['One watt is equal to:',['J s','J/s','N/s','kg m'],1],
+['The SI unit of pressure is:',['pascal','joule','watt','newton'],0],
+['One pascal is equal to:',['N m','N/m²','kg m/s','J m'],1],
+['The SI unit of electric charge is:',['ampere','volt','coulomb','ohm'],2],
+['The SI unit of potential difference is:',['volt','coulomb','farad','tesla'],0],
+['The SI unit of frequency is:',['hertz','radian','second','watt'],0],
+['The SI unit of energy and work is the same because both represent:',['Force only','Energy transferred or done as work','Time interval','Electric current'],1],
+['Which pair contains only SI derived units?',['metre and second','newton and joule','kilogram and kelvin','ampere and mole'],1],
+['Which statement about SI derived units is correct?',['They are formed from SI base units','They never have special names','They cannot be written in base units','They are all dimensionless'],0]
+];
+let i=0,xp=0,answered=false;const $=id=>document.getElementById(id);
+function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;$('next').textContent='Continue →';qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>{if(answered)return;[...$('options').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected');answer(j)};$('options').appendChild(b)});$('fill').style.width=`${i/qs.length*100}%`}
+function answer(j){if(answered)return;answered=true;const ok=j===qs[i][2];if(ok){xp+=10;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP';}else{$('feedback').textContent=`❌ Not quite. Correct answer: ${qs[i][1][qs[i][2]]}`;}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===qs[i][2])b.classList.add('correct');if(k===j&&j!==qs[i][2])b.classList.add('wrong')});$('next').disabled=false;if(i===qs.length-1)$('next').textContent='Finish →'}
+$('next').onclick=()=>{if(!answered)return;if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('question').textContent=`🎉 Derived Units mastered! You scored ${xp} XP out of ${qs.length*10} XP.`;$('options').innerHTML='';$('feedback').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none'}};render();
+</script></body></html>

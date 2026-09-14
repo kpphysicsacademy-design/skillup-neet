@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -38,12 +38,6 @@ jobs:
           '''
               s=s.replace('<body>', '<body>'+code, 1)
               p.write_text(s,encoding='utf-8')
-              import subprocess
-              subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
-              subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
-              subprocess.run(['git','add','physics-concept.html'],check=True)
-              subprocess.run(['git','commit','-m','Add Accuracy and Precision quiz route'],check=True)
-              subprocess.run(['git','push','origin','HEAD:main'],check=True)
           assert marker in p.read_text(encoding='utf-8')
           d=Path('physics-accuracy-and-precision.html')
           if not d.exists(): raise SystemExit('Accuracy and Precision page missing')

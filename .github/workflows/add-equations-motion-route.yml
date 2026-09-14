@@ -10,23 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add route
+      - name: Add routes
         shell: python
         run: |
           from pathlib import Path
           p=Path('physics-concept.html')
           s=p.read_text(encoding='utf-8')
+          changed=False
           if "'equations of motion':'physics-equations-of-motion.html'" not in s:
               marker="'motion graph':'physics-motion-graphs.html'"
               replacement=marker+",'equations of motion':'physics-equations-of-motion.html','equation of motion':'physics-equations-of-motion.html','equations of motions':'physics-equations-of-motion.html'"
               if marker not in s:
                   raise SystemExit('Motion graph route marker not found')
               s=s.replace(marker,replacement,1)
+              changed=True
+          if "'projectile motion':'physics-projectile-motion.html'" not in s:
+              marker="'relative motion':'physics-relative-motion.html',"
+              replacement=marker+"'projectile motion':'physics-projectile-motion.html','projectile':'physics-projectile-motion.html',"
+              if marker not in s:
+                  raise SystemExit('Relative motion route marker not found')
+              s=s.replace(marker,replacement,1)
+              changed=True
+          if changed:
               p.write_text(s,encoding='utf-8')
           else:
-              print('Route already present')
+              print('Routes already present')
       - name: Verify
-        run: grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
+        run: |
+          grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
+          grep -q "projectile motion.*physics-projectile-motion.html" physics-concept.html
       - name: Commit route
         shell: bash
         run: |
@@ -34,5 +46,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add physics-concept.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Route Equations of Motion concept to 15-MCQ quiz'
+          git commit -m 'Fix Projectile Motion concept route'
           git push

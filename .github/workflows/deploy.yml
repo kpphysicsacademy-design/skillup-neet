@@ -24,6 +24,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare Accuracy and Precision dedicated quiz route
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* SKILLUP ACCURACY PRECISION ROUTE V1 */'
+          if marker not in s:
+              code='''<script>/* SKILLUP ACCURACY PRECISION ROUTE V1 */\n(function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>\n'''
+              s=s.replace('<body>', '<body>'+code, 1)
+              p.write_text(s,encoding='utf-8')
+          assert marker in p.read_text(encoding='utf-8')
+          d=Path('physics-accuracy-and-precision.html')
+          if not d.exists(): raise SystemExit('Accuracy and Precision page missing')
+          h=d.read_text(encoding='utf-8')
+          assert 'Accuracy and precision' in h
+          assert h.count("['") == 15, 'Accuracy and Precision must contain exactly 15 MCQs'
+          print('Accuracy and Precision route validated: 15 MCQs')
+          PY
+
       - name: Verify Physics concept quizzes
         shell: bash
         run: |
@@ -36,8 +57,9 @@ jobs:
           assert s.count("['Round ") >= 4
           assert "key==='significant figures'||key==='significant figure'" in s
           assert "key==='least count'||key==='least-count'" in s
-          print('Physics concept router verified: Significant Figures, Rounding Off and Least Count')
-          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html']:
+          assert 'SKILLUP ACCURACY PRECISION ROUTE V1' in s
+          print('Physics concept router verified: Significant Figures, Rounding Off, Least Count and Accuracy and Precision')
+          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html','physics-accuracy-and-precision.html']:
               assert Path(f).exists(), f'Missing {f}'
           print('Dedicated physics quiz pages verified')
           PY

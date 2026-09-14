@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Units of Measurement</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.xp{font-weight:800}.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.q{font-size:1.3rem;font-weight:750;line-height:1.45}.opts{display:grid;gap:10px;margin-top:18px}.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer}.opts button:hover{border-color:#58cc02}.feedback{font-weight:700;margin-top:16px;min-height:24px}.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}.next:disabled{opacity:.45}.back{display:inline-block;margin-top:18px;color:#5146a5}</style></head>
+<body><main class="wrap"><div class="top"><h1>📏 Units of Measurement</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div><p>Master SI units and measurement concepts with 15 NEET-style questions.</p><div class="bar"><div id="fill" class="fill"></div></div><section class="card"><div id="count"></div><p id="question" class="q"></p><div id="options" class="opts"></div><div id="feedback" class="feedback"></div><button id="next" class="next" disabled>Continue →</button></section><a class="back" href="physics-home.html">← Back to Physics Path</a></main>
+<script>
+const qs=[
+['The SI unit of length is:', ['metre','centimetre','kilometre','foot'],0],
+['The SI unit of mass is:', ['gram','kilogram','milligram','tonne'],1],
+['The SI unit of time is:', ['minute','hour','second','day'],2],
+['Which is the SI unit of electric current?', ['volt','coulomb','ampere','ohm'],2],
+['The SI unit of thermodynamic temperature is:', ['degree Celsius','kelvin','fahrenheit','joule'],1],
+['Which is a derived SI unit?', ['metre','second','kilogram','newton'],3],
+['1 kilometre is equal to:', ['10 m','100 m','1000 m','10,000 m'],2],
+['The SI unit of force is:', ['joule','newton','pascal','watt'],1],
+['The SI unit of energy is:', ['newton','watt','joule','pascal'],2],
+['The SI unit of pressure is:', ['pascal','joule','newton','watt'],0],
+['Which quantity has the SI unit watt?', ['force','power','energy','pressure'],1],
+['The SI unit of frequency is:', ['hertz','second','radian','metre'],0],
+['The SI unit of amount of substance is:', ['mole','candela','kelvin','ampere'],0],
+['Which is an SI base unit?', ['newton','joule','candela','pascal'],2],
+['A physical measurement is normally expressed as:', ['number only','unit only','numerical value and unit','symbol only'],2]
+];
+let i=0,xp=0,answered=false;const $=id=>document.getElementById(id);
+function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>answer(j);$('options').appendChild(b)});$('fill').style.width=`${i/qs.length*100}%`}
+function answer(j){if(answered)return;answered=true;const ok=j===qs[i][2];if(ok){xp+=10;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP';}else{$('feedback').textContent=`❌ Not quite. Correct answer: ${qs[i][1][qs[i][2]]}`;}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===qs[i][2])b.style.borderColor='#58cc02'});$('next').disabled=false}
+$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('question').textContent=`🎉 Units mastered! You scored ${xp} XP out of ${qs.length*10} XP.`;$('options').innerHTML='';$('feedback').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none'}};render();
+</script></body></html>

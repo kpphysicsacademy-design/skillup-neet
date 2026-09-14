@@ -1,0 +1,38 @@
+name: Add Equations of Motion route
+on:
+  push:
+    paths:
+      - '.github/workflows/add-equations-motion-route.yml'
+permissions:
+  contents: write
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add route
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          if "'equations of motion':'physics-equations-of-motion.html'" not in s:
+              marker="'motion graph':'physics-motion-graphs.html'"
+              replacement=marker+",'equations of motion':'physics-equations-of-motion.html','equation of motion':'physics-equations-of-motion.html','equations of motions':'physics-equations-of-motion.html'"
+              if marker not in s:
+                  raise SystemExit('Motion graph route marker not found')
+              s=s.replace(marker,replacement,1)
+              p.write_text(s,encoding='utf-8')
+          else:
+              print('Route already present')
+      - name: Verify
+        run: grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
+      - name: Commit route
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add physics-concept.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Route Equations of Motion concept to 15-MCQ quiz'
+          git push

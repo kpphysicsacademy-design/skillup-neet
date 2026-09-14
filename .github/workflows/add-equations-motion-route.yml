@@ -1,4 +1,4 @@
-name: Add Equations of Motion route
+name: Add Physics concept routes
 on:
   push:
     paths:
@@ -10,23 +10,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add route
+      - name: Add routes
         shell: python
         run: |
           from pathlib import Path
           p=Path('physics-concept.html')
           s=p.read_text(encoding='utf-8')
-          if "'equations of motion':'physics-equations-of-motion.html'" not in s:
-              marker="'motion graph':'physics-motion-graphs.html'"
-              replacement=marker+",'equations of motion':'physics-equations-of-motion.html','equation of motion':'physics-equations-of-motion.html','equations of motions':'physics-equations-of-motion.html'"
-              if marker not in s:
-                  raise SystemExit('Motion graph route marker not found')
-              s=s.replace(marker,replacement,1)
+          changed=False
+          routes=[
+            ("'equations of motion':'physics-equations-of-motion.html'", "'motion graph':'physics-motion-graphs.html'", "'motion graph':'physics-motion-graphs.html','equations of motion':'physics-equations-of-motion.html','equation of motion':'physics-equations-of-motion.html','equations of motions':'physics-equations-of-motion.html'"),
+            ("'uniform motion':'physics-uniform-motion.html'", "'projectile motion':'physics-projectile-motion.html'", "'projectile motion':'physics-projectile-motion.html','projectile':'physics-projectile-motion.html','uniform motion':'physics-uniform-motion.html','uniform':'physics-uniform-motion.html'"),
+          ]
+          for present,marker,replacement in routes:
+              if present not in s:
+                  if marker not in s:
+                      raise SystemExit(f'Route marker not found: {marker}')
+                  s=s.replace(marker,replacement,1)
+                  changed=True
+          if changed:
               p.write_text(s,encoding='utf-8')
-          else:
-              print('Route already present')
       - name: Verify
-        run: grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
+        run: |
+          grep -q "uniform motion.*physics-uniform-motion.html" physics-concept.html
+          grep -q "projectile motion.*physics-projectile-motion.html" physics-concept.html
+          grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
       - name: Commit route
         shell: bash
         run: |
@@ -34,5 +41,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add physics-concept.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Route Equations of Motion concept to 15-MCQ quiz'
+          git commit -m 'Route Uniform Motion concept to dedicated quiz'
           git push

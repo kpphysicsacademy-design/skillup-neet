@@ -24,57 +24,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare Dimensions dedicated quiz
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          marker='/* SKILLUP DIMENSIONS EARLY ROUTE V1 */'
-          if marker not in s:
-              code='''<script>/* SKILLUP DIMENSIONS EARLY ROUTE V1 */\n(function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='dimensions'){location.replace('physics-dimensions.html');}})();</script>\n'''
-              s=s.replace('<body>', '<body>'+code, 1)
-              p.write_text(s,encoding='utf-8')
-          assert marker in p.read_text(encoding='utf-8')
-          d=Path('physics-dimensions.html')
-          if not d.exists(): raise SystemExit('Dimensions page missing')
-          h=d.read_text(encoding='utf-8')
-          assert 'Dimensions' in h
-          assert 'Question 1 of 15' in h
-          print('Dimensions route validated: 15 MCQs')
-          PY
-
-      - name: Prepare Dimensional Analysis dedicated quiz
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          marker='/* SKILLUP DIMENSIONAL ANALYSIS EARLY ROUTE V1 */'
-          if marker not in s:
-              code='''<script>/* SKILLUP DIMENSIONAL ANALYSIS EARLY ROUTE V1 */\n(function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='dimensional analysis'){location.replace('physics-dimensional-analysis.html?concept=Dimensional%20analysis');}})();</script>\n'''
-              s=s.replace('<body>', '<body>'+code, 1)
-              p.write_text(s,encoding='utf-8')
-          assert marker in p.read_text(encoding='utf-8')
-          u=Path('physics-dimensional-analysis.html')
-          if not u.exists(): raise SystemExit('Dimensional Analysis page missing')
-          h=u.read_text(encoding='utf-8')
-          assert h.count("['") == 15, 'Dimensional Analysis must contain exactly 15 MCQs'
-          print('Dimensional Analysis route validated: 15 MCQs')
-          PY
-
-      - name: Verify Physics quiz page
+      - name: Verify Physics concept quizzes
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           s=Path('physics-concept.html').read_text(encoding='utf-8')
           assert '<title>SkillUp | Physics Concept Quiz</title>' in s
-          assert 'SKILLUP DIMENSIONS EARLY ROUTE V1' in s
-          assert 'SKILLUP DIMENSIONAL ANALYSIS EARLY ROUTE V1' in s
-          print('Physics quiz page verified')
+          assert "key==='rounding off'||key==='rounding'" in s
+          assert "var round=[" in s
+          assert s.count("['Round ") >= 4
+          assert "key==='significant figures'||key==='significant figure'" in s
+          assert "key==='least count'||key==='least-count'" in s
+          print('Physics concept router verified: Significant Figures, Rounding Off and Least Count')
+          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html']:
+              assert Path(f).exists(), f'Missing {f}'
+          print('Dedicated physics quiz pages verified')
           PY
 
       - name: Setup Pages

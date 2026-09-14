@@ -24,64 +24,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare Accuracy and Precision dedicated quiz route
-        shell: bash
+      - name: Validate Physics pages
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          marker='/* SKILLUP ACCURACY PRECISION ROUTE V1 */'
-          if marker not in s:
-              code='''<script>/* SKILLUP ACCURACY PRECISION ROUTE V1 */
-          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>
-          '''
-              s=s.replace('<body>', '<body>'+code, 1)
-              p.write_text(s,encoding='utf-8')
-          assert marker in p.read_text(encoding='utf-8')
-          d=Path('physics-accuracy-and-precision.html')
-          if not d.exists(): raise SystemExit('Accuracy and Precision page missing')
-          h=d.read_text(encoding='utf-8')
-          assert 'Accuracy and precision' in h
-          assert 'Skill Mastery' in h
-          print('Accuracy and Precision route validated')
-          PY
-
-      - name: Prepare Equations of Motion dedicated quiz route
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('physics-concept.html')
-          s=p.read_text(encoding='utf-8')
-          marker='/* SKILLUP EQUATIONS OF MOTION ROUTE V1 */'
-          if marker not in s:
-              code='''<script>/* SKILLUP EQUATIONS OF MOTION ROUTE V1 */
-          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='equations of motion'||c==='equations of motions'){location.replace('physics-equations-of-motion.html');}})();</script>
-          '''
-              s=s.replace('<body>', '<body>'+code, 1)
-              p.write_text(s,encoding='utf-8')
-          assert marker in p.read_text(encoding='utf-8')
-          d=Path('physics-equations-of-motion.html')
-          if not d.exists(): raise SystemExit('Equations of Motion page missing')
-          h=d.read_text(encoding='utf-8')
-          assert '15 focused NEET-style MCQs' in h
-          print('Equations of Motion route validated: 15 MCQs')
-          PY
-
-      - name: Verify Physics concept quizzes
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          s=Path('physics-concept.html').read_text(encoding='utf-8')
-          assert '<title>SkillUp | Physics Concept Quiz</title>' in s
-          assert 'SKILLUP ACCURACY PRECISION ROUTE V1' in s
-          assert 'SKILLUP EQUATIONS OF MOTION ROUTE V1' in s
-          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html','physics-accuracy-and-precision.html','physics-equations-of-motion.html']:
-              assert Path(f).exists(), f'Missing {f}'
-          print('Physics concept routes and dedicated quiz pages verified')
-          PY
+          test -f physics-concept.html
+          test -f physics-units-of-measurement.html
+          grep -q "units of measurement.*physics-units-of-measurement.html" physics-concept.html
+          grep -q "uniform motion.*physics-uniform-motion.html" physics-concept.html
+          grep -q "two-dimensional motion.*physics-two-dimensional-motion.html" physics-concept.html
+          grep -q "free-fall motion.*physics-free-fall-motion.html" physics-concept.html
+          echo "Physics routes validated"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

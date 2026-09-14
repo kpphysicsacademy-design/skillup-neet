@@ -1,0 +1,44 @@
+name: Fix Projectile Motion Route
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-route:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add Projectile Motion route
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('physics-concept.html')
+          s = p.read_text(encoding='utf-8')
+          if "'projectile motion':'physics-projectile-motion.html'" in s:
+              print('Projectile Motion route already present')
+              raise SystemExit(0)
+          old = "'relative motion':'physics-relative-motion.html',"
+          new = old + "'projectile motion':'physics-projectile-motion.html','projectile':'physics-projectile-motion.html',"
+          if old not in s:
+              raise SystemExit('Route insertion anchor not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          print('Projectile Motion route added')
+          PY
+
+      - name: Commit route fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- physics-concept.html; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git add physics-concept.html
+          git commit -m "Fix Projectile Motion concept route"
+          git push

@@ -1,0 +1,60 @@
+name: Deploy Accuracy and Precision Fix to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: accuracy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inject Accuracy and Precision route
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('physics-concept.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* SKILLUP ACCURACY PRECISION ROUTE V2 */'
+          if marker not in s:
+              code = '''<script>/* SKILLUP ACCURACY PRECISION ROUTE V2 */
+          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>
+          '''
+              s = s.replace('<body>', '<body>' + code, 1)
+              p.write_text(s, encoding='utf-8')
+          assert marker in p.read_text(encoding='utf-8')
+          d = Path('physics-accuracy-and-precision.html')
+          assert d.exists(), 'Dedicated Accuracy and Precision page is missing'
+          h = d.read_text(encoding='utf-8')
+          assert '15 focused NEET-style MCQs' in h
+          assert h.count("['") == 15, 'Dedicated Accuracy and Precision page must contain 15 MCQs'
+          print('Accuracy and Precision route validated')
+          PY
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

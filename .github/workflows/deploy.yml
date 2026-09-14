@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -33,9 +33,17 @@ jobs:
           s=p.read_text(encoding='utf-8')
           marker='/* SKILLUP ACCURACY PRECISION ROUTE V1 */'
           if marker not in s:
-              code='''<script>/* SKILLUP ACCURACY PRECISION ROUTE V1 */\n(function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>\n'''
+              code='''<script>/* SKILLUP ACCURACY PRECISION ROUTE V1 */
+          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>
+          '''
               s=s.replace('<body>', '<body>'+code, 1)
               p.write_text(s,encoding='utf-8')
+              import subprocess
+              subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+              subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+              subprocess.run(['git','add','physics-concept.html'],check=True)
+              subprocess.run(['git','commit','-m','Add Accuracy and Precision quiz route'],check=True)
+              subprocess.run(['git','push','origin','HEAD:main'],check=True)
           assert marker in p.read_text(encoding='utf-8')
           d=Path('physics-accuracy-and-precision.html')
           if not d.exists(): raise SystemExit('Accuracy and Precision page missing')

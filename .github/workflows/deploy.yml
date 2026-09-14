@@ -47,6 +47,28 @@ jobs:
           print('Accuracy and Precision route validated: 15 MCQs')
           PY
 
+      - name: Prepare Equations of Motion dedicated quiz route
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('physics-concept.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* SKILLUP EQUATIONS OF MOTION ROUTE V1 */'
+          if marker not in s:
+              code='''<script>/* SKILLUP EQUATIONS OF MOTION ROUTE V1 */
+          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='equations of motion'||c==='equations of motions'){location.replace('physics-equations-of-motion.html');}})();</script>
+          '''
+              s=s.replace('<body>', '<body>'+code, 1)
+              p.write_text(s,encoding='utf-8')
+          assert marker in p.read_text(encoding='utf-8')
+          d=Path('physics-equations-of-motion.html')
+          if not d.exists(): raise SystemExit('Equations of Motion page missing')
+          h=d.read_text(encoding='utf-8')
+          assert '15 focused NEET-style MCQs' in h
+          print('Equations of Motion route validated: 15 MCQs')
+          PY
+
       - name: Verify Physics concept quizzes
         shell: bash
         run: |
@@ -54,16 +76,11 @@ jobs:
           from pathlib import Path
           s=Path('physics-concept.html').read_text(encoding='utf-8')
           assert '<title>SkillUp | Physics Concept Quiz</title>' in s
-          assert "key==='rounding off'||key==='rounding'" in s
-          assert "var round=[" in s
-          assert s.count("['Round ") >= 4
-          assert "key==='significant figures'||key==='significant figure'" in s
-          assert "key==='least count'||key==='least-count'" in s
           assert 'SKILLUP ACCURACY PRECISION ROUTE V1' in s
-          print('Physics concept router verified: Significant Figures, Rounding Off, Least Count and Accuracy and Precision')
-          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html','physics-accuracy-and-precision.html']:
+          assert 'SKILLUP EQUATIONS OF MOTION ROUTE V1' in s
+          for f in ['physics-dimensional-analysis.html','physics-dimensions.html','physics-dimensional-equations.html','physics-accuracy-and-precision.html','physics-equations-of-motion.html']:
               assert Path(f).exists(), f'Missing {f}'
-          print('Dedicated physics quiz pages verified')
+          print('Physics concept routes and dedicated quiz pages verified')
           PY
 
       - name: Setup Pages

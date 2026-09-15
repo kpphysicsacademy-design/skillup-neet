@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Energy of an Orbiting Satellite</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7f6;color:#18231f}.wrap{max-width:720px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px}.title{font-size:25px;font-weight:800}.xp{font-weight:800}.sub{margin:5px 0 18px;color:#64716c}.card{background:#fff;border:1px solid #e4e9e6;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 4px 14px #00000008}.mastery{font-weight:750}.bar{height:10px;background:#e9eeeb;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#43a047;transition:.3s}.qno{font-size:13px;color:#6b7772;font-weight:700}.question{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #dce4df;border-radius:13px;padding:13px 14px;margin:9px 0;font-size:16px;cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#80b68a}.opt.selected{border-color:#43a047;background:#f1faf2}.opt.correct{border-color:#43a047;background:#eaf7ec}.opt.wrong{border-color:#d9534f;background:#fff0ef}.actions{display:flex;gap:10px;margin-top:16px}.btn{border:0;border-radius:13px;padding:13px 18px;font-size:16px;font-weight:800;cursor:pointer;background:#43a047;color:#fff;flex:1}.btn:disabled{opacity:.55;cursor:not-allowed}.back{display:block;width:100%;background:#fff;color:#2f5e3b;border:2px solid #b9c8be;border-radius:13px;padding:12px;text-align:center;font-weight:800;cursor:pointer;transition:.15s}.back:hover{transform:translateY(-1px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;margin-top:12px;font-weight:700}.result{text-align:center}.result h2{margin-top:4px}@media(max-width:520px){.title{font-size:21px}.question{font-size:18px}.wrap{padding-top:16px}}
+</style>
+</head>
+<body><main class="wrap">
+<div class="head"><div class="title">🛰️ Energy of an Orbiting Satellite</div><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
+<div class="sub">Kinetic energy, potential energy and total mechanical energy of an orbiting satellite.</div>
+<section class="card"><div class="mastery">🎯 Skill Mastery <span id="count">0</span> / 15</div><div class="bar"><div class="fill" id="fill"></div></div></section>
+<section class="card" id="quiz"></section>
+<button class="back" id="back">← Back to Physics Path</button>
+</main>
+<script>
+const quiz=[
+['For a satellite of mass m in a circular orbit of radius r around a planet of mass M, its orbital speed is:', ['√(GM/r)','GM/r','√(GMr)','GM/r²'],0,'From gravitational force = centripetal force, v = √(GM/r).'],
+['The kinetic energy of a satellite in a circular orbit is:', ['GMm/(2r)','−GMm/r','GMm/r²','−GMm/(2r)'],0,'K = ½mv² = GMm/(2r).'],
+['The gravitational potential energy of a satellite at distance r from the planet centre is:', ['−GMm/r','GMm/r','−GMm/(2r)','GMm/(2r)'],0,'Taking potential energy zero at infinity, U = −GMm/r.'],
+['The total mechanical energy of a satellite in a circular orbit is:', ['−GMm/(2r)','GMm/(2r)','−GMm/r','0'],0,'E = K + U = GMm/(2r) − GMm/r = −GMm/(2r).'],
+['For a bound satellite orbit, total mechanical energy is:', ['negative','positive','always zero','infinite'],0,'A bound gravitational orbit has negative total energy.'],
+['If the orbital radius of a circular satellite is doubled, its kinetic energy becomes:', ['half','double','four times','one-fourth'],0,'K = GMm/(2r), so doubling r halves K.'],
+['If the orbital radius is doubled, the magnitude of gravitational potential energy becomes:', ['half','double','four times','unchanged'],0,'|U| = GMm/r, so it becomes half.'],
+['If a satellite moves to a higher circular orbit, its total energy:', ['becomes less negative','becomes more negative','becomes zero immediately','is unchanged'],0,'E = −GMm/(2r); increasing r makes E less negative.'],
+['For a circular orbit, the magnitude of gravitational potential energy is:', ['twice the kinetic energy','equal to kinetic energy','half the kinetic energy','four times kinetic energy'],0,'|U| = GMm/r = 2K.'],
+['A satellite is transferred from a lower circular orbit to a higher circular orbit. Energy must be:', ['supplied to it','removed from it','zero','converted entirely to heat'],0,'Higher orbit means higher total energy, so energy must be supplied.'],
+['At a very large distance from the planet, the gravitational potential energy approaches:', ['zero','−∞','+∞','GMm'],0,'With U = −GMm/r, U approaches zero from below as r → ∞.'],
+['For a satellite in circular orbit, the relation between speed v and radius r is:', ['v ∝ r⁻¹ᐟ²','v ∝ r','v ∝ r²','v ∝ r⁻¹'],0,'v = √(GM/r), hence v ∝ 1/√r.'],
+['The total energy of a satellite of mass m moving in a circular orbit with speed v is:', ['−½mv²','+½mv²','−mv²','+mv²'],0,'For a circular gravitational orbit, E = −K = −½mv².'],
+['If the speed of a circular-orbit satellite decreases, while it remains gravitationally bound, its orbit generally moves to:', ['a larger radius','a smaller radius','the planet centre','infinity immediately'],0,'For circular orbits, lower speed corresponds to a larger orbital radius.'],
+['Which statement is correct for a circular satellite orbit?', ['Total energy is negative','Potential energy is positive','Kinetic energy is negative','Total energy equals potential energy'],0,'Kinetic energy is positive, potential and total energy are negative; E = U/2.']
+];
+let i=0,score=0,selected=null,checked=false;const $=id=>document.getElementById(id);
+function render(){selected=null;checked=false;const a=quiz[i];$('quiz').innerHTML='<div class="qno">Question '+(i+1)+' of 15</div><div class="question">'+a[0]+'</div><div id="opts"></div><div class="actions"><button class="btn" id="continue">Continue →</button></div><div class="feedback" id="feedback"></div>';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(!checked){selected=x.index;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));b.classList.add('selected')}};$('opts').appendChild(b)});$('continue').onclick=check;update()}
+function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}if(!checked){checked=true;const a=quiz[i],ok=selected===a[2];if(ok)score++;document.querySelectorAll('.opt').forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===a[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Review: ')+a[4];$('xp').textContent=score*10;$('count').textContent=i+1;$('fill').style.width=((i+1)/15*100)+'%';$('continue').textContent=i===14?'Finish Skill →':'Continue →'}else{if(i<14){i++;render()}else finish()}}
+function finish(){$('quiz').innerHTML='<div class="result"><div style="font-size:42px">🏆</div><h2>Skill Complete!</h2><p>You scored <strong>'+score+'/15</strong> and earned <strong>+'+(score*10)+' XP</strong>.</p><button class="btn" onclick="i=0;score=0;render()">Retry Skill ↻</button></div>';}
+$('back').onclick=()=>{const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return}}catch(e){}}location.href='physics-home.html'};render();
+</script></body></html>

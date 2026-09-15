@@ -17,12 +17,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: release/v1.0-neet-prep
+          fetch-depth: 0
 
-      - name: Pull verified student-facing content from development
+      - name: Pull verified student-facing content from main
         shell: bash
         run: |
           set -euo pipefail
-          base='https://raw.githubusercontent.com/kpphysicsacademy-design/kp-physics-academy/main'
+          git fetch origin main --depth=1
           files=(
             full-physics-path.html
             chemistry-skillup-path.html
@@ -37,7 +38,11 @@ jobs:
             link-audit.js
           )
           for f in "${files[@]}"; do
-            curl -fsSL "$base/$f" -o "$f"
+            if git cat-file -e "origin/main:$f" 2>/dev/null; then
+              git show "origin/main:$f" > "$f"
+            else
+              echo "Skipping $f: not present on main"
+            fi
           done
 
       - name: Commit synchronized content

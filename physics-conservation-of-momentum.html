@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Conservation of Momentum</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}
+.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+h1{font-size:1.8rem;margin:0}
+.xp{font-weight:800;color:#5146a5}
+.hero{background:#5865f2;color:#fff;border-radius:22px;padding:24px;margin-bottom:18px}
+.hero h2{margin:0 0 8px;font-size:1.45rem}
+.hero p{margin:0;opacity:.95;line-height:1.5}
+.progress-card,.quiz-card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 6px 20px #17203312}
+.progress-card{margin-bottom:18px}
+.progress-row{display:flex;justify-content:space-between;font-weight:750;margin-bottom:10px}
+.track{height:12px;background:#e8e8ef;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:#58cc02;transition:width .25s ease}
+.quiz-card{min-height:360px}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#626b7d;font-weight:750;margin-bottom:18px}
+.badge{background:#eef0ff;color:#5146a5;padding:6px 10px;border-radius:999px}
+.question{font-size:1.3rem;font-weight:750;line-height:1.45;margin-bottom:18px}
+.options{display:grid;gap:11px}
+.option{width:100%;text-align:left;background:#fff;border:2px solid #d8dbe5;border-radius:14px;padding:15px;font:inherit;color:inherit;cursor:pointer;transition:transform .12s ease,border-color .12s ease,background .12s ease}
+.option:hover{border-color:#58cc02;background:#f7fff2;transform:translateY(-1px)}
+.option.selected{border-color:#5146a5;background:#f0edff}
+.option.correct{border-color:#58cc02;background:#eaffdf}
+.option.wrong{border-color:#ff4b4b;background:#fff0f0}
+.option:disabled{cursor:default}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+button.action{border:0;border-radius:14px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#check{background:#58cc02;color:#fff}
+#next{background:#5146a5;color:#fff}
+button.action:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.05)}
+button.action:disabled{opacity:.5;cursor:not-allowed}
+.feedback{margin-top:16px;min-height:28px;font-weight:750;line-height:1.5}
+.feedback.good{color:#2d8a00}.feedback.bad{color:#c53030}
+.hint{margin-top:10px;color:#687184;font-size:.95rem}
+.result{display:none;margin-top:18px;padding:18px;border-radius:16px;background:#f3f0ff;font-weight:800}
+.retry{margin-top:14px;background:#5146a5;color:#fff;border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}
+.back{display:inline-block;margin-top:22px;color:#5146a5;font-weight:800;text-decoration:underline;padding:10px 14px;border-radius:12px;transition:transform .12s ease,background .12s ease,box-shadow .12s ease}
+.back:hover{background:#f0edff;transform:translateY(-1px);box-shadow:0 4px 12px #5146a522}
+.back:focus-visible{outline:3px solid #9b94e8;outline-offset:2px;background:#f0edff}
+.back:active{transform:translateY(1px);box-shadow:none}
+@media(max-width:600px){.wrap{padding:20px 14px 34px}.top{align-items:flex-start}h1{font-size:1.5rem}.hero,.progress-card,.quiz-card{padding:20px;border-radius:18px}.question{font-size:1.15rem}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="top"><h1>Physics • Conservation of Momentum</h1><div class="xp">⚡ <span id="xp">0</span> XP</div></div>
+<section class="hero"><h2>Conservation of Momentum</h2><p>Learn how total linear momentum remains constant when the net external force on a system is zero.</p></section>
+<section class="progress-card">
+<div class="progress-row"><span>Mastery</span><span id="mastery">0%</span></div>
+<div class="track"><div id="fill" class="fill"></div></div>
+</section>
+<section class="quiz-card">
+<div class="meta"><span id="count">Question 1 of 15</span><span id="pct" class="badge">7%</span></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div class="actions"><button id="check" class="action">Check Answer</button><button id="next" class="action" disabled>Next Question →</button></div>
+<div id="feedback" class="feedback"></div>
+<div id="hint" class="hint"></div>
+<div id="result" class="result"><div id="score"></div><button id="retry" class="retry">Retry Skill</button></div>
+</section>
+<a id="back" class="back" href="physics-home.html">← Back to Physics Path</a>
+</main>
+<script>
+(function(){
+const quiz=[
+['What does the law of conservation of momentum state?',['The total momentum of an isolated system remains constant','Momentum is always zero after a collision','Kinetic energy is always conserved','Force is always constant'],0,'For an isolated system with no net external force, total linear momentum remains constant.'],
+['For a system to conserve total linear momentum, the net external force should be:',['Zero','Maximum','Constant and nonzero','Equal to the weight'],0,'Zero net external force means there is no external impulse changing the system momentum.'],
+['The total momentum of two interacting bodies before a collision is 12 kg m/s. If the system is isolated, the total momentum after collision is:',['6 kg m/s','12 kg m/s','24 kg m/s','0 kg m/s'],1,'Conservation of momentum gives the same total momentum before and after the interaction.'],
+['A 2 kg body moves at 3 m/s. Its linear momentum is:',['1.5 kg m/s','5 kg m/s','6 kg m/s','9 kg m/s'],2,'p = mv = 2 × 3 = 6 kg m/s.'],
+['Two bodies collide in an isolated system. Which quantity must be conserved?',['Total linear momentum','Velocity of each body','Kinetic energy in every collision','Acceleration of each body'],0,'Total linear momentum is conserved in an isolated system, even when kinetic energy is not.'],
+['In a perfectly inelastic collision, the bodies after collision:',['Move together with a common velocity','Always come to rest','Always have equal kinetic energies','Bounce apart with unchanged speeds'],0,'In a perfectly inelastic collision, the bodies stick together and move with one common velocity.'],
+['A 4 kg object at rest explodes into two parts. If one part gets momentum +8 kg m/s, the momentum of the other part is:',['+8 kg m/s','−8 kg m/s','0 kg m/s','+16 kg m/s'],1,'Initial momentum is zero, so the vector momenta of the fragments must add to zero.'],
+['A gun recoils when a bullet is fired mainly because of:',['Conservation of momentum','Conservation of mass only','Conservation of temperature','Newton’s law of cooling'],0,'The forward momentum of the bullet is balanced by equal and opposite recoil momentum of the gun.'],
+['A person jumps from a stationary boat onto the shore. The boat moves backward because:',['The total momentum of the person-boat system is conserved','The boat gains mass','Gravity reverses direction','The person creates momentum from nothing'],0,'The person and boat acquire opposite momenta so the total momentum remains equal to its initial value.'],
+['If the net external impulse on a system is zero, the system momentum:',['Remains unchanged','Must become zero','Doubles','Becomes equal to kinetic energy'],0,'Impulse equals change in momentum, so zero external impulse means no change in total momentum.'],
+['A 1 kg body moving at 4 m/s collides with a 3 kg body at rest and they stick together. Their common speed is:',['1 m/s','2 m/s','3 m/s','4 m/s'],0,'Initial momentum = 4 kg m/s. Total mass = 4 kg, so common speed = 1 m/s.'],
+['Which equation expresses conservation of momentum for a two-body isolated collision?',['m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂','m₁u₁ = m₂v₂ only','m₁v₁ + m₂v₂ = 0 in every collision','m₁u₁ + m₂u₂ = m₁v₁ − m₂v₂'],0,'The vector sum of momenta before interaction equals the vector sum after interaction.'],
+['Momentum conservation is especially useful in collisions because during a short collision:',['Internal forces may be large, while external impulse can be negligible','All forces are zero','Kinetic energy is always conserved','Mass changes continuously'],0,'Large internal forces cancel within the system, while a small external impulse can often be neglected.'],
+['If the initial total momentum of an isolated system is 20 kg m/s east, the final total momentum is:',['20 kg m/s west','0 kg m/s','20 kg m/s east','40 kg m/s east'],2,'The total momentum keeps both magnitude and direction when no net external impulse acts.'],
+['Which statement is correct?',['Momentum can be conserved even when kinetic energy is not conserved','Kinetic energy must be conserved whenever momentum is conserved','Momentum is conserved only when bodies have equal masses','Momentum conservation applies only to elastic collisions'],0,'Momentum conservation is broader than kinetic-energy conservation; inelastic collisions conserve momentum but not kinetic energy.']
+];
+const $=id=>document.getElementById(id);
+let i=0,selected=-1,correct=0,xp=0,checked=false;
+function render(){
+ const a=quiz[i]; selected=-1; checked=false;
+ $('question').textContent=a[0];$('count').textContent='Question '+(i+1)+' of '+quiz.length;$('pct').textContent=Math.round((i+1)/quiz.length*100)+'%';
+ $('feedback').className='feedback';$('feedback').textContent='';$('hint').textContent='Choose the best answer, then check it.';$('next').disabled=true;$('next').textContent='Next Question →';$('check').disabled=false;$('options').innerHTML='';
+ const order=a[1].map((text,index)=>({text,index}));
+ for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}
+ order.forEach(item=>{const b=document.createElement('button');b.className='option';b.textContent=item.text;b.dataset.index=item.index;b.onclick=()=>{if(checked)return;selected=item.index;[...$('options').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('options').appendChild(b)});
+ updateProgress();
+}
+function updateProgress(){$('mastery').textContent=Math.round(correct/quiz.length*100)+'%';$('fill').style.width=(correct/quiz.length*100)+'%';$('xp').textContent=xp}
+function check(){if(selected<0||checked)return;checked=true;const a=quiz[i],ok=selected===a[2];[...$('options').children].forEach(b=>{const idx=Number(b.dataset.index);b.disabled=true;if(idx===a[2])b.classList.add('correct');if(idx===selected&&!ok)b.classList.add('wrong')});if(ok){correct++;xp+=10;$('feedback').className='feedback good';$('feedback').textContent='✓ Correct — '+a[3]}else{$('feedback').className='feedback bad';$('feedback').textContent='✗ Review — '+a[3]}$('next').disabled=false;$('check').disabled=true;updateProgress();if(i===quiz.length-1)$('next').textContent='Finish Skill →'}
+function next(){if(!checked)return;if(i<quiz.length-1){i++;render()}else{ $('question').textContent='🏆 Conservation of Momentum Complete!';$('options').innerHTML='';$('check').style.display='none';$('next').style.display='none';$('hint').textContent='';$('feedback').className='feedback good';$('feedback').textContent='Skill complete. '+xp+' XP earned.';$('result').style.display='block';$('score').textContent=correct+' / '+quiz.length+' correct • '+xp+' XP'} }
+$('check').onclick=check;$('next').onclick=next;$('retry').onclick=()=>{i=0;selected=-1;correct=0;xp=0;$('result').style.display='none';$('check').style.display='';$('next').style.display='';render()};
+$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};
+render();
+})();
+</script>
+</body>
+</html>

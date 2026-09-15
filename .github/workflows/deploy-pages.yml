@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -22,13 +22,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout production release
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
       - name: Upload production site
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
       - name: Deploy production site
         id: deployment
         uses: actions/deploy-pages@v4

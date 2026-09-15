@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Coefficient of Friction</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.card{background:#fff;border-radius:22px;padding:28px;box-shadow:0 6px 20px #17203312}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.tag{font-weight:800;font-size:.9rem}.xp{font-weight:850}.bar{height:10px;background:#e8e8f1;border-radius:999px;overflow:hidden;margin:12px 0 24px}.fill{height:100%;width:0;background:#5b50c8;transition:width .25s ease}.q{font-size:1.22rem;font-weight:800;line-height:1.45;margin:20px 0}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:15px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .12s,background .12s,border-color .12s,box-shadow .12s}.opt:hover{transform:translateY(-2px);border-color:#aaa4df;box-shadow:0 4px 12px #17203310}.opt:focus{outline:3px solid #c9c3ff;outline-offset:2px}.opt.selected{border-color:#5b50c8;background:#f0edff}.opt.correct{border-color:#2d9b68;background:#eaf8f1}.opt.wrong{border-color:#d45555;background:#fff0f0}.feedback{min-height:72px;margin-top:18px;padding:14px 16px;border-radius:15px;background:#f4f3fb;line-height:1.5}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:#5b50c8;color:white}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:focus{outline:3px solid #c9c3ff;outline-offset:2px}.btn:active{transform:translateY(1px)}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:800;text-decoration:none;padding:11px 14px;border-radius:13px}.back:hover{background:#f0edff;transform:translateY(-1px)}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back:active{transform:translateY(1px)}.result{font-size:1.2rem;font-weight:750;line-height:1.6}
+</style>
+</head>
+<body>
+<main class="wrap"><section class="card">
+<div class="top"><div class="tag">🧲 Coefficient of Friction</div><div class="xp" id="xp">+10 XP</div></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div>
+<a class="back" id="back" href="physics-home.html">← Back to Physics Path</a>
+</section></main>
+<script>
+const qs=[
+['The coefficient of friction is defined as the ratio of:', ['frictional force to normal reaction','normal reaction to frictional force','frictional force to weight','weight to frictional force'],0,'For limiting friction, μ = F/N.'],
+['The coefficient of friction between two surfaces is:', ['dimensionless','measured in newtons','measured in pascals','measured in metres'],0,'It is a ratio of two forces, so it has no dimensions.'],
+['If the limiting friction is 20 N and the normal reaction is 50 N, μ is:', ['0.4','2.5','70','0.25'],0,'μ = F/N = 20/50 = 0.4.'],
+['For a block on a horizontal rough surface, the normal reaction is equal to the block’s:', ['weight, when no other vertical force acts','acceleration','coefficient of friction','frictional force'],0,'With no other vertical forces, N = mg.'],
+['The coefficient of friction mainly depends on:', ['the nature and condition of the contacting surfaces','the area of contact alone','the mass of the body alone','the speed of light'],0,'Surface materials and their condition determine μ in the idealized model.'],
+['If μ = 0.5 and N = 100 N, the limiting friction is:', ['50 N','200 N','100.5 N','2 N'],0,'F = μN = 0.5 × 100 = 50 N.'],
+['For dry surfaces, the coefficient of kinetic friction is generally:', ['less than the coefficient of limiting static friction','greater than the coefficient of limiting static friction','always equal to 1','zero'],0,'Typically μk < μs(max).'],
+['If the coefficient of friction increases while N remains constant, the limiting friction:', ['increases','decreases','becomes zero','is unchanged'],0,'Since Fmax = μN, increasing μ increases Fmax.'],
+['A body is just about to slide when the friction acting on it is:', ['limiting friction','zero','always less than limiting friction','equal to its weight in every case'],0,'At impending motion, static friction reaches its limiting value.'],
+['A coefficient of friction μ = 1 means that the limiting friction is:', ['equal in magnitude to the normal reaction','equal to the weight in every situation','zero','twice the normal reaction'],0,'From Fmax = μN, μ = 1 gives Fmax = N.'],
+['Which expression gives the coefficient of limiting friction?', ['μ = Fl/N','μ = N/Fl','μ = FlN','μ = Fl + N'],0,'The coefficient is the ratio of limiting friction to normal reaction.'],
+['A 10 kg block is on a horizontal surface. Take g = 10 m/s² and μ = 0.2. The limiting friction is:', ['20 N','2 N','50 N','100 N'],0,'N = mg = 100 N, so Fl = 0.2 × 100 = 20 N.'],
+['If both limiting friction and normal reaction are doubled, the coefficient of friction:', ['remains unchanged','doubles','halves','becomes four times'],0,'μ is their ratio, so multiplying both by the same factor does not change μ.'],
+['The coefficient of friction can be used to determine the limiting friction when the:', ['normal reaction is known','time is known','temperature alone is known','volume is known'],0,'The relation is Fl = μN.'],
+['For an ideal smooth surface, the coefficient of friction is taken as:', ['zero','one','infinite','negative one'],0,'A smooth, frictionless idealization has μ = 0.']
+];
+let i=0,selected=null,score=0;
+const $=id=>document.getElementById(id);
+function render(){
+ selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';
+ $('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';
+ const order=a[1].map((text,index)=>({text,index}));
+ for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}
+ order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});
+ $('check').onclick=check;
+}
+function check(){
+ if(selected===null){$('feedback').textContent='Please choose an answer first.';return}
+ const a=qs[i],ok=selected===a[2];if(ok)score++;
+ [...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});
+ $('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];
+ if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{ $('fill').style.width='100%'; const pct=Math.round(score/qs.length*100); $('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsCoefficientFrictionScore',String(score));}}
+function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}
+rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};
+render();
+</script>
+</body>
+</html>

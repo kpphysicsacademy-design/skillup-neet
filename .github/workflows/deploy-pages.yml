@@ -23,12 +23,29 @@ jobs:
     steps:
       - name: Checkout production release
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore missing Physics pages from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              git show "origin/main:$file" > "$file"
+            fi
+          done < <(git ls-tree -r --name-only origin/main | grep '^physics-.*\.html$' || true)
+          if [ ! -f index.html ] && git cat-file -e origin/main:index.html 2>/dev/null; then
+            git show origin/main:index.html > index.html
+          fi
+          touch .nojekyll
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload production site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
 

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Unit Conversion</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.xp{font-weight:800}.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.q{font-size:1.3rem;font-weight:750;line-height:1.45}.opts{display:grid;gap:10px;margin-top:18px}.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer;transition:.2s}.opts button:hover{border-color:#58cc02;transform:translateY(-1px)}.opts button:disabled{cursor:default;transform:none}.feedback{font-weight:700;margin-top:16px;min-height:24px}.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer;transition:.2s}.next:hover:not(:disabled){transform:translateY(-1px)}.next:disabled{opacity:.45;cursor:default}.back{display:inline-block;margin-top:18px;padding:12px 18px;border:2px solid #5146a5;border-radius:14px;color:#5146a5;text-decoration:none;font-weight:800;transition:.2s}.back:hover{background:#5146a5;color:white;transform:translateY(-1px)}.back:active{transform:scale(.97)}
+</style>
+</head>
+<body><main class="wrap">
+<div class="top"><h1>🔄 Unit Conversion</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
+<p>Master common physics unit conversions with 15 NEET-style questions.</p>
+<div class="bar"><div id="fill" class="fill"></div></div>
+<section class="card"><div id="count"></div><p id="question" class="q"></p><div id="options" class="opts"></div><div id="feedback" class="feedback"></div><button id="next" class="next" disabled>Continue →</button></section>
+<a class="back" href="physics-home.html">← Back to Physics Path</a>
+</main>
+<script>
+const qs=[
+['1 km is equal to:', ['10 m','100 m','1000 m','10,000 m'],2],
+['1 m is equal to:', ['10 cm','100 cm','1000 cm','0.1 cm'],1],
+['1 cm is equal to:', ['10 mm','100 mm','0.1 mm','1000 mm'],0],
+['1 hour is equal to:', ['60 s','600 s','3600 s','36,000 s'],2],
+['1 g is equal to:', ['0.001 kg','0.01 kg','0.1 kg','10 kg'],0],
+['1 kg is equal to:', ['10 g','100 g','1000 g','10,000 g'],2],
+['1 newton is equal to:', ['10^3 dynes','10^4 dynes','10^5 dynes','10^6 dynes'],2],
+['1 joule is equal to:', ['10^5 ergs','10^6 ergs','10^7 ergs','10^8 ergs'],2],
+['72 km/h expressed in m/s is:', ['10 m/s','20 m/s','36 m/s','72 m/s'],1],
+['10 m/s expressed in km/h is:', ['18 km/h','36 km/h','54 km/h','72 km/h'],1],
+['1 litre is equal to:', ['10^-1 m³','10^-2 m³','10^-3 m³','10^-4 m³'],2],
+['1 cm³ is equal to:', ['10^-3 m³','10^-4 m³','10^-5 m³','10^-6 m³'],3],
+['1 atmosphere is approximately:', ['1.013 × 10^3 Pa','1.013 × 10^4 Pa','1.013 × 10^5 Pa','1.013 × 10^6 Pa'],2],
+['To convert a length from cm to m, the numerical value is multiplied by:', ['100','10','0.1','0.01'],3],
+['A quantity is 5000 mm. Its value in metres is:', ['0.5 m','5 m','50 m','500 m'],1]
+];
+let i=0,xp=0,answered=false;const $=id=>document.getElementById(id);
+function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;$('next').textContent='Continue →';qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>answer(j);$('options').appendChild(b)});$('fill').style.width=`${i/qs.length*100}%`}
+function answer(j){if(answered)return;answered=true;const ok=j===qs[i][2];if(ok){xp+=10;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP'}else{$('feedback').textContent=`❌ Not quite. Correct answer: ${qs[i][1][qs[i][2]]}`}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===qs[i][2]){b.style.borderColor='#58cc02';b.style.fontWeight='700'}else if(k===j){b.style.borderColor='#d9534f'}});$('next').disabled=false;if(i===qs.length-1)$('next').textContent='Finish →'}
+$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('question').textContent=`🎉 Unit Conversion mastered! You scored ${xp} XP out of ${qs.length*10} XP.`;$('options').innerHTML='';$('feedback').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none'}};render();
+</script></body></html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Specific Heat at Constant Pressure</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center;font-size:28px}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px;line-height:1.5}.explain{margin-top:10px;font-weight:500}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>🔥 Specific Heat at Constant Pressure (Cₚ)</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['For one mole of an ideal gas, heat supplied at constant pressure is','Qₚ=CₚΔT','Qₚ=CᵥΔT','Qₚ=0','Qₚ=RT',0,'At constant pressure, Qₚ=nCₚΔT; for one mole, Qₚ=CₚΔT.'],
+['For an ideal gas, the molar heat capacity at constant pressure of a monatomic gas is','3R/2','5R/2','7R/2','R',1,'For a monatomic ideal gas, Cₚ=Cᵥ+R=3R/2+R=5R/2.'],
+['The molar heat capacity at constant pressure of a diatomic ideal gas at ordinary temperatures is','3R/2','5R/2','7R/2','R/2',2,'A diatomic ideal gas has Cᵥ=5R/2, hence Cₚ=7R/2.'],
+['Mayer’s relation for an ideal gas is','Cₚ+Cᵥ=R','Cₚ−Cᵥ=R','Cₚ/Cᵥ=R','CₚCᵥ=R',1,'For an ideal gas, the difference between molar heat capacities is R.'],
+['At constant pressure, the work done by an ideal gas during heating is','nRΔT','nCₚΔT','zero','PΔV only when P=0',0,'For an ideal gas, W=PΔV=nRΔT during a constant-pressure temperature change.'],
+['For the same temperature rise of an ideal gas, which heat capacity is larger?','Cᵥ','Cₚ','They are always equal','Both are zero',1,'Cₚ>Cᵥ because heat supplied at constant pressure also performs expansion work.'],
+['The ratio γ=Cₚ/Cᵥ for a monatomic ideal gas is','4/3','5/3','7/5','3/2',1,'For a monatomic ideal gas, Cₚ=5R/2 and Cᵥ=3R/2, so γ=5/3.'],
+['For a diatomic ideal gas at ordinary temperatures, γ is approximately','5/3','7/5','4/3','9/7',1,'For a diatomic ideal gas, γ=(7R/2)/(5R/2)=7/5.'],
+['If n moles of an ideal gas are heated by ΔT at constant pressure, heat supplied is','nCᵥΔT','nCₚΔT','nRΔT only','Cₚ/(nΔT)',1,'The definition gives Qₚ=nCₚΔT.'],
+['At constant pressure, the first law can be written as','Qₚ=ΔU+W','Qₚ=ΔU−W','Qₚ=W−ΔU','Qₚ=0 always',0,'The first law is Q=ΔU+W, with W=PΔV for the gas.'],
+['For an ideal gas, the extra heat required at constant pressure compared with constant volume per mole per kelvin is','0','R','Cₚ+Cᵥ','R/2',1,'Mayer’s relation gives Cₚ−Cᵥ=R.'],
+['During constant-pressure heating of an ideal gas, its volume','decreases','remains constant','increases','becomes zero',2,'From PV=nRT, with P and n constant, V is proportional to T.'],
+['Which process directly defines Cₚ?','Heat required per mole per kelvin at constant pressure','Heat required per mole per kelvin at constant volume','Work per mole','Pressure change per kelvin',0,'Cₚ is the heat capacity measured at constant pressure.'],
+['For an ideal gas, Cₚ is greater than Cᵥ because','pressure is always greater than volume','expansion work is done at constant pressure','internal energy decreases','temperature remains zero',1,'At constant pressure, part of the supplied heat performs expansion work.'],
+['If Cₚ=29 J mol⁻¹ K⁻¹ for an ideal gas, Cᵥ is approximately','20.7 J mol⁻¹ K⁻¹','29 J mol⁻¹ K⁻¹','37.3 J mol⁻¹ K⁻¹','8.3 J mol⁻¹ K⁻¹',0,'Using Cᵥ=Cₚ−R, 29−8.314≈20.7 J mol⁻¹ K⁻¹.']
+];
+let i=0,score=0,answered=false;
+const $=id=>document.getElementById(id);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;$('xp').textContent='';$('next').classList.add('hide');const q=qs[i];let h=`<div class="q">${q[0]}</div>`;for(let j=0;j<4;j++)h+=`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${q[j+1]}</button>`;$('quiz').innerHTML=h;document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.j));}
+function answer(choice){if(answered)return;answered=true;const q=qs[i],opts=document.querySelectorAll('.opt');opts.forEach((b,j)=>{b.disabled=true;if(j===q[5])b.classList.add('correct');else if(j===choice)b.classList.add('wrong')});if(choice===q[5]){score++;$('xp').textContent='✨ Correct! +1 XP';}else $('xp').textContent='💡 Review the explanation below.';$('score').textContent=`XP ${score}`;$('quiz').insertAdjacentHTML('beforeend',`<div class="explain">${q[6]}</div>`);if(i<14)$('next').classList.remove('hide');else finish();}
+function finish(){$('fill').style.width='100%';$('result').classList.remove('hide');$('result').innerHTML=`<h2>🎉 Quiz Complete!</h2><p>You scored <b>${score}/15</b> (${Math.round(score/15*100)}%).</p><button class="retry" onclick="retry()">Retry Quiz ↻</button>`;$('next').classList.add('hide');}
+$('next').onclick=()=>{i++;render()};function retry(){i=0;score=0;$('result').classList.add('hide');render()}render();
+</script>
+</body></html>

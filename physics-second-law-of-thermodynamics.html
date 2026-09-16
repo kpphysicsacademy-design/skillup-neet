@@ -1,98 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics — Second Law of Thermodynamics NEET skill">
-<title>SkillUp | Second Law of Thermodynamics</title>
-<style>
-body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;margin:0;color:#172033}
-.wrap{max-width:850px;margin:auto;padding:28px 18px}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.top h1{margin:0;font-size:1.65rem}.xp{font-weight:800;white-space:nowrap}
-.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}
-.q{font-size:1.3rem;font-weight:750;line-height:1.45;margin:10px 0 18px}
-.opts{display:grid;gap:10px;margin-top:18px}.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer;transition:.2s;color:#172033}.opts button:hover{border-color:#58cc02;transform:translateY(-1px)}.opts button:disabled{cursor:default;transform:none}.opts button.correct{border-color:#58cc02;background:#efffe8}.opts button.wrong{border-color:#ff4b4b;background:#fff0f0}
-.feedback{font-weight:700;margin-top:16px;min-height:48px;line-height:1.45}.next{margin-top:8px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer;transition:.2s}.next:hover:not(:disabled){transform:translateY(-1px)}.next:disabled{opacity:.45;cursor:not-allowed}
-.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.mastery{font-weight:800;margin-top:18px}.mastery .bar{margin-top:9px}
-.back{display:inline-block;margin-top:18px;padding:12px 18px;border:2px solid #5146a5;border-radius:14px;color:#5146a5;text-decoration:none;font-weight:800;transition:.2s}.back:hover{background:#5146a5;color:white;transform:translateY(-1px)}
-.result{display:none;font-weight:800;margin-top:18px;padding:16px;border-radius:14px;background:#efffe8;text-align:center}.retry{margin-top:12px;padding:12px 20px;border:0;border-radius:14px;background:#5146a5;color:white;font-weight:800;cursor:pointer}
-@media(max-width:600px){.wrap{padding:20px 14px}.top h1{font-size:1.4rem}.q{font-size:1.15rem}.top{align-items:flex-start}}
-</style>
-</head>
-<body>
-<main class="wrap">
-<div class="top"><h1>♨️ Second Law of Thermodynamics</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
-<p>Master entropy, heat engines, refrigerators, Carnot cycle and the direction of thermodynamic processes with 15 NEET-style questions.</p>
-<div class="mastery">🎯 Skill Mastery <span id="mastery">0 / 15</span><div class="bar"><div id="fill" class="fill"></div></div></div>
-<section class="card">
-<div id="count">Question 1 of 15</div>
-<p id="question" class="q"></p>
-<div id="options" class="opts"></div>
-<div id="feedback" class="feedback"></div>
-<button id="next" class="next" disabled>Continue →</button>
-<div id="result" class="result"></div>
-</section>
-<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</main>
-<script>
-const qs=[
-['The second law of thermodynamics determines the:', ['amount of matter in a system','direction of spontaneous thermodynamic processes','mass of a body','SI unit of temperature'],1,'The second law establishes the natural direction of thermodynamic processes and introduces entropy.'],
-['According to the second law, heat cannot spontaneously flow from:', ['a hot body to a cold body','a cold body to a hot body','a gas to a piston','a solid to a liquid'],1,'Heat flows spontaneously from higher temperature to lower temperature; reverse transfer requires external work.'],
-['The entropy of an isolated system in a spontaneous process:', ['always decreases','always remains zero','never decreases','must become infinite'],2,'For an isolated system, entropy cannot decrease; it increases for an irreversible spontaneous process and remains constant for a reversible one.'],
-['The SI unit of entropy is:', ['J','J K⁻¹','W K⁻¹','Pa'],1,'Entropy has SI unit joule per kelvin (J K⁻¹).'],
-['For a reversible process, the entropy change is given by:', ['dS = δQrev/T','dS = TδQrev','dS = δW/T','dS = P/T'],0,'For a reversible process, dS = δQrev/T.'],
-['The efficiency of a heat engine is defined as:', ['work output divided by heat input','heat input divided by work output','heat rejected divided by work output','work input divided by heat rejected'],0,'Thermal efficiency η = W/QH, where W is net work output and QH is heat absorbed from the source.'],
-['A heat engine operates between temperatures TH and TC. Its maximum possible efficiency is:', ['1 − TC/TH','1 − TH/TC','TC/TH','TH/TC'],0,'For a reversible Carnot engine, ηmax = 1 − TC/TH, with temperatures measured in kelvin.'],
-['A Carnot engine has source temperature 600 K and sink temperature 300 K. Its efficiency is:', ['25%','40%','50%','75%'],2,'η = 1 − 300/600 = 0.50, or 50%.'],
-['A refrigerator transfers heat from a low-temperature reservoir to a high-temperature reservoir by using:', ['no energy','external work','only gravity','chemical equilibrium'],1,'A refrigerator requires external work to transfer heat from cold to hot.'],
-['The coefficient of performance of a refrigerator is:', ['W/QC','QC/W','QH/W only','W/QH'],1,'For a refrigerator, COP = QC/W, where QC is heat removed from the cold reservoir.'],
-['In a reversible adiabatic process, the entropy of the working substance:', ['increases','decreases','remains constant','becomes zero'],2,'For a reversible adiabatic process, δQrev = 0, so ΔS = 0.'],
-['Which process produces entropy?', ['Every reversible process','An irreversible process','Only an isothermal reversible process','No thermodynamic process'],1,'Irreversible processes such as free expansion, friction and heat transfer through a finite temperature difference generate entropy.'],
-['The Clausius statement of the second law says that it is impossible for a cyclic device to:', ['convert work completely into heat','transfer heat from cold to hot without external work','absorb heat from a hot reservoir','reject heat to a cold reservoir'],1,'The Clausius statement says heat cannot, by itself, be transferred from a colder body to a hotter body.'],
-['For a reversible cycle, the net entropy change of the working substance is:', ['positive','negative','zero','infinite'],2,'The working substance returns to its initial state, so its state-function entropy has zero net change.'],
-['A perpetual motion machine of the second kind would violate the:', ['law of conservation of mass','first law only','second law of thermodynamics','law of reflection'],2,'A PMM2 would convert heat from a single reservoir completely into work in a cycle, violating the second law.']
-];
-let i=0,xp=0,answered=false,correct=0;
-const $=id=>document.getElementById(id);
-function render(){
- answered=false;
- $('count').textContent=`Question ${i+1} of ${qs.length}`;
- $('question').textContent=qs[i][0];
- $('options').innerHTML='';
- $('feedback').textContent='';
- $('next').disabled=true;
- qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=`${String.fromCharCode(65+j)}. ${o}`;b.onclick=()=>answer(j);$('options').appendChild(b)});
- $('fill').style.width=`${correct/qs.length*100}%`;
- $('mastery').textContent=`${correct} / ${qs.length}`;
-}
-function answer(j){
- if(answered)return;
- answered=true;
- const q=qs[i],ok=j===q[2];
- if(ok){xp+=10;correct++;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP — '+q[3]}
- else{$('feedback').textContent=`❌ Not quite. Correct answer: ${q[1][q[2]]} — ${q[3]}`}
- $('options').querySelectorAll('button').forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('correct');if(k===j&&k!==q[2])b.classList.add('wrong')});
- $('fill').style.width=`${correct/qs.length*100}%`;
- $('mastery').textContent=`${correct} / ${qs.length}`;
- $('next').disabled=false;
-}
-$('next').onclick=()=>{
- if(!answered)return;
- if(i<qs.length-1){i++;render()}
- else{
-  $('fill').style.width='100%';
-  $('mastery').textContent=`${correct} / ${qs.length}`;
-  $('count').textContent='Complete!';
-  $('question').textContent='🎉 Second Law of Thermodynamics mastered!';
-  $('options').innerHTML='';
-  $('feedback').textContent=`You scored ${correct} / ${qs.length} correct and earned ${xp} XP.`;
-  $('next').style.display='none';
-  $('result').style.display='block';
-  $('result').innerHTML=`Keep practicing to strengthen your Physics path.<br><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;
- }
-};
-render();
-</script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Second Law of Thermodynamics</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center;margin:14px 0 18px;font-size:28px}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.feedback{min-height:45px;font-weight:700;margin-top:15px;line-height:1.45}.next,.retry,.back{display:block;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#a8e77f;color:#fff}.next:disabled{opacity:.65;cursor:not-allowed}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00}@media(max-width:600px){.wrap{padding:14px}.card{padding:20px}h1{font-size:24px}}</style></head><body><div class="wrap"><div class="card"><h1>♨️ Second Law of Thermodynamics</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Continue →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
+['The second law of thermodynamics determines the direction of','heat flow','mass flow','electric current','momentum flow',0,'The second law determines the natural direction of thermodynamic processes.'],
+['According to the second law, heat cannot spontaneously flow from','hot body to cold body','cold body to hot body','gas to piston','solid to liquid',1,'Heat does not spontaneously flow from a colder body to a hotter body.'],
+['The entropy of an isolated system in a spontaneous process','always decreases','always remains zero','never decreases','becomes infinite',2,'For an isolated system, entropy never decreases.'],
+['The SI unit of entropy is','joule','joule per kelvin','watt','pascal',1,'The SI unit of entropy is J K⁻¹.'],
+['For a reversible process, the entropy change is','dS = δQrev/T','dS = TδQrev','dS = δW/T','dS = P/T',0,'For a reversible process, dS = δQrev/T.'],
+['The efficiency of a heat engine is','work output / heat input','heat input / work output','heat rejected / work output','work input / heat rejected',0,'Thermal efficiency is η = W/QH.'],
+['The maximum efficiency of a Carnot engine operating between TH and TC is','1 − TC/TH','1 − TH/TC','TC/TH','TH/TC',0,'Carnot efficiency is η = 1 − TC/TH, with temperatures in kelvin.'],
+['A Carnot engine works between 600 K and 300 K. Its efficiency is','25%','40%','50%','75%',2,'η = 1 − 300/600 = 0.50 = 50%.'],
+['A refrigerator transfers heat from a low-temperature reservoir to a high-temperature reservoir using','no energy','external work','gravity only','chemical equilibrium',1,'A refrigerator requires external work.'],
+['The coefficient of performance of a refrigerator is','W/QC','QC/W','QH/W','W/QH',1,'For a refrigerator, COP = QC/W.'],
+['In a reversible adiabatic process, the entropy of the working substance','increases','decreases','remains constant','becomes zero',2,'For a reversible adiabatic process, Qrev = 0, so ΔS = 0.'],
+['Which type of process produces entropy?','Every reversible process','An irreversible process','Only isothermal reversible process','No process',1,'Irreversible processes generate entropy.'],
+['The Clausius statement of the second law says it is impossible for a cyclic device to','convert work into heat','transfer heat from cold to hot without external work','absorb heat from a hot reservoir','reject heat to a cold reservoir',1,'Transfer from cold to hot requires external work.'],
+['For a reversible cycle, the net entropy change of the working substance is','positive','negative','zero','infinite',2,'Entropy is a state function, so it returns to its initial value after a cycle.'],
+['A perpetual motion machine of the second kind would violate the','law of conservation of mass','first law only','second law of thermodynamics','law of reflection',2,'A PMM-II violates the second law by attempting complete conversion of heat from one reservoir into work in a cycle.']
+];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script></body></html>

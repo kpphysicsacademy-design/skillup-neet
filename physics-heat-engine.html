@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Heat Engine</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
+.wrap{max-width:760px;margin:auto;padding:22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
+h1{text-align:center}
+.meta{display:flex;justify-content:space-between;font-weight:700}
+.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
+.fill{height:100%;width:0;background:#4caf50;transition:.3s}
+.q{font-size:20px;font-weight:700;margin-bottom:18px}
+.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
+.opt:hover{background:#f1f6ff}
+.correct{border-color:#39a852!important;background:#e9f8ed!important}
+.wrong{border-color:#e05252!important;background:#fff0f0!important}
+.feedback{min-height:45px;font-weight:700;margin-top:15px}
+.next,.retry,.back{display:block;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
+.next,.retry{background:#2563eb;color:#fff}
+.back{background:#172033;color:#fff}
+.hide{display:none}
+.xp{text-align:center;font-weight:700;color:#e08a00}
+@media(max-width:600px){.wrap{padding:12px}.card{padding:18px;border-radius:18px}h1{font-size:26px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>🔥 Heat Engine</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div>
+<div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div>
+</div>
+<script>
+const qs=[
+['A heat engine converts','heat energy into mechanical work','mechanical work into mass','electricity into heat only','mass into pressure',0,'A heat engine converts part of absorbed heat into useful mechanical work.'],
+['A heat engine operates between','one reservoir only','two reservoirs at different temperatures','three reservoirs only','vacuum only',1,'A cyclic heat engine exchanges heat with a hot source and a colder sink.'],
+['The source of heat in a heat engine is maintained at','lower temperature than the sink','higher temperature than the sink','zero temperature','the same temperature always',1,'Heat flows from the hotter source to the engine and ultimately to the colder sink.'],
+['The efficiency of a heat engine is defined as','Q₂/Q₁','W/Q₁','Q₁/W','W/Q₂',1,'Efficiency is useful work output divided by heat absorbed from the source: η=W/Q₁.'],
+['For a heat engine, the relation among heat absorbed Q₁, heat rejected Q₂ and work W is','W=Q₁+Q₂','W=Q₁−Q₂','W=Q₂−Q₁','W=Q₁Q₂',1,'Over one cycle, the net work is the difference between heat absorbed and heat rejected.'],
+['The efficiency of a real heat engine is always','100%','greater than 100%','less than 100%','zero for every engine',2,'A real engine must reject some heat to a sink, so its efficiency is below 100%.'],
+['The maximum possible efficiency between temperatures T₁ and T₂ is achieved by a','Carnot engine','refrigerator','single reservoir','free expansion',0,'The reversible Carnot engine has the maximum possible efficiency between two fixed temperatures.'],
+['For a Carnot engine, efficiency is','η=1−T₂/T₁','η=T₂/T₁','η=1+T₂/T₁','η=T₁/T₂',0,'For absolute temperatures, Carnot efficiency is η=1−T₂/T₁, with T₁>T₂.'],
+['In the Carnot efficiency formula, temperatures must be measured in','Celsius','Fahrenheit','kelvin','any unit without conversion',2,'Thermodynamic temperature must be used, so Kelvin is required.'],
+['If a heat engine absorbs 1000 J from the source and produces 300 J of work, its efficiency is','3%','30%','70%','300%',1,'η=W/Q₁=300/1000=0.30=30%.'],
+['If an engine absorbs 800 J and rejects 500 J per cycle, the work output is','300 J','1300 J','500 J','0 J',0,'Using W=Q₁−Q₂, W=800−500=300 J.'],
+['A heat engine has 40% efficiency and absorbs 500 J per cycle. Its work output is','100 J','200 J','300 J','400 J',1,'W=ηQ₁=0.40×500=200 J.'],
+['A heat engine cannot have 100% efficiency because','energy is not conserved','some heat must be rejected to a sink','work is not energy','temperature is always zero',1,'The second law requires rejection of some heat in a cyclic heat engine operating between finite temperatures.'],
+['For a Carnot engine operating between 600 K and 300 K, the efficiency is','25%','50%','75%','100%',1,'η=1−300/600=0.50, or 50%.'],
+['Increasing the source temperature while keeping the sink temperature fixed generally makes the Carnot efficiency','decrease','increase','unchanged','zero',1,'η=1−T₂/T₁ increases when T₁ increases while T₂ remains fixed.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){
+ answered=false;
+ $('count').textContent=`Question ${i+1}/15`;
+ $('score').textContent=`XP ${score}`;
+ $('fill').style.width=`${i/15*100}%`;
+ const q=qs[i];
+ $('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');
+ document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));
+ $('next').classList.add('hide');
+ $('xp').textContent='';
+}
+function answer(n){
+ if(answered)return;
+ answered=true;
+ const q=qs[i],ok=n===q[5];
+ document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});
+ if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];
+ $('score').textContent=`XP ${score}`;
+ $('next').classList.remove('hide');
+}
+function next(){
+ if(i<14){i++;render()}
+ else{
+  $('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';
+  $('result').classList.remove('hide');
+  $('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;
+ }
+}
+$('next').onclick=next;
+render();
+</script>
+</body>
+</html>

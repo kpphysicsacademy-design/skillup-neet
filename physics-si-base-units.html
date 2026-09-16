@@ -1,73 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | SI Base Units</title>
-<style>
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}
-.wrap{max-width:850px;margin:auto;padding:28px 18px}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.xp{font-weight:800}
-.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}
-.mastery{font-weight:800;margin-top:18px}
-.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden;margin-top:10px}
-.fill{height:100%;width:0;background:#58cc02;transition:.3s}
-.q{font-size:1.3rem;font-weight:750;line-height:1.45}
-.opts{display:grid;gap:10px;margin-top:18px}
-.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer}
-.opts button:hover{border-color:#58cc02}
-.opts button:disabled{cursor:default}
-.opts button.correct{border-color:#58cc02;background:#effbea}
-.opts button.wrong{border-color:#e5484d;background:#fff0f0}
-.feedback{font-weight:700;margin-top:16px;min-height:24px;line-height:1.5}
-.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}
-.next:disabled{opacity:.45;cursor:not-allowed}
-.back{display:inline-block;margin-top:18px;padding:12px 18px;border:2px solid #5146a5;border-radius:14px;color:#5146a5;text-decoration:none;font-weight:800;transition:.2s}
-.back:hover{background:#5146a5;color:white;transform:translateY(-1px)}
-.back:active{transform:scale(.97)}
-.meta{font-size:.95rem;color:#4b5563}
-@media(max-width:600px){.wrap{padding:20px 14px}.top h1{font-size:1.55rem}.card{padding:20px}.q{font-size:1.18rem}}
-</style>
-</head>
-<body>
-<main class="wrap">
-<div class="top"><h1>⚙️ SI Base Units</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
-<p>Master the seven SI base units and their symbols with 15 NEET-style questions.</p>
-<div class="mastery">🎯 Skill Mastery <span id="mastery">0 / 15</span></div>
-<div class="bar"><div id="fill" class="fill"></div></div>
-<section class="card">
-<div id="count" class="meta">Question 1 of 15</div>
-<p id="question" class="q"></p>
-<div id="options" class="opts"></div>
-<div id="feedback" class="feedback"></div>
-<button id="next" class="next" disabled>Continue →</button>
-</section>
-<a class="back" href="physics-home.html">← Back to Physics Path</a>
-</main>
-<script>
-const qs=[
-['How many SI base units are defined in the International System of Units?',['5','7','9','10'],1,'There are seven SI base units: metre, kilogram, second, ampere, kelvin, mole and candela.'],
-['Which SI base unit is used for length?',['metre (m)','centimetre (cm)','kilometre (km)','inch (in)'],0,'The metre (m) is the SI base unit of length.'],
-['Which SI base unit is used for mass?',['gram (g)','kilogram (kg)','milligram (mg)','tonne (t)'],1,'The kilogram (kg), not gram, is the SI base unit of mass.'],
-['The SI base unit of time is:',['minute (min)','hour (h)','second (s)','day (d)'],2,'The second (s) is the SI base unit of time.'],
-['The SI base unit of electric current is:',['volt (V)','coulomb (C)','ampere (A)','ohm (Ω)'],2,'The ampere (A) is the SI base unit of electric current.'],
-['The SI base unit of thermodynamic temperature is:',['degree Celsius (°C)','kelvin (K)','fahrenheit (°F)','joule (J)'],1,'The kelvin (K) is the SI base unit of thermodynamic temperature.'],
-['The SI base unit of amount of substance is:',['mole (mol)','gram (g)','candela (cd)','litre (L)'],0,'The mole (mol) is the SI base unit of amount of substance.'],
-['The SI base unit of luminous intensity is:',['lux (lx)','lumen (lm)','candela (cd)','watt (W)'],2,'The candela (cd) is the SI base unit of luminous intensity.'],
-['Which set contains only SI base units?',['m, kg, s, A','N, J, W, Pa','V, Ω, C, F','Hz, N, J, W'],0,'Metre, kilogram, second and ampere are all SI base units; the others are derived units.'],
-['Which of the following is NOT an SI base unit?',['metre','kilogram','newton','second'],2,'Newton (N) is a derived SI unit of force, not a base unit.'],
-['The SI base unit symbol for mass is:',['g','kg','mg','M'],1,'The SI base unit of mass is kilogram, with symbol kg.'],
-['Which SI base unit has the symbol K?',['kelvin','kilogram','kelvin only for Celsius','candela'],0,'K is the symbol for kelvin, the SI base unit of thermodynamic temperature.'],
-['Which SI base unit has the symbol mol?',['molarity','mole','metre','millimetre'],1,'mol is the symbol for the SI base unit mole.'],
-['Newton is a derived unit because it can be expressed in base units as:',['kg·m·s⁻²','kg·m²·s⁻¹','kg·s⁻²','m·s⁻¹'],0,'One newton equals kg·m·s⁻², so force is a derived quantity.'],
-['Which statement about SI base units is correct?',['They are defined as independent base units from which derived units can be formed','Every SI unit is a base unit','Newton and joule are base units','Base units have no symbols'],0,'SI base units form the reference set from which many derived SI units are expressed.']
-];
-let i=0,xp=0,answered=false;
-const $=id=>document.getElementById(id);
-function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>answer(j);$('options').appendChild(b)});$('fill').style.width=`${i/qs.length*100}%`}
-function answer(j){if(answered)return;answered=true;const a=qs[i],ok=j===a[2];if(ok){xp+=10;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP — '+a[3]}else{$('feedback').textContent='❌ Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===a[2])b.classList.add('correct');if(k===j&&k!==a[2])b.classList.add('wrong')});$('mastery').textContent=Math.round((i+(ok?1:0))/qs.length*100)+'%';$('next').disabled=false}
-$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('mastery').textContent='100%';$('question').textContent=`🎉 SI Base Units mastered! You scored ${xp} XP out of ${qs.length*10} XP.`;$('options').innerHTML='';$('feedback').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none'}};
-render();
-</script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | SI Base Units</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style></head><body><div class="wrap"><div class="card"><h1>⚙️ SI Base Units</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
+['How many SI base units are defined in the International System of Units?','5','7','9','10',1,'The SI system has seven base units: metre, kilogram, second, ampere, kelvin, mole and candela.'],
+['Which SI base unit is used for length?','metre (m)','centimetre (cm)','kilometre (km)','inch (in)',0,'The metre (m) is the SI base unit of length.'],
+['Which SI base unit is used for mass?','gram (g)','kilogram (kg)','milligram (mg)','tonne (t)',1,'The kilogram (kg) is the SI base unit of mass.'],
+['The SI base unit of time is:','minute (min)','hour (h)','second (s)','day (d)',2,'The second (s) is the SI base unit of time.'],
+['The SI base unit of electric current is:','volt (V)','coulomb (C)','ampere (A)','ohm (Ω)',2,'The ampere (A) is the SI base unit of electric current.'],
+['The SI base unit of thermodynamic temperature is:','degree Celsius (°C)','kelvin (K)','fahrenheit (°F)','joule (J)',1,'The kelvin (K) is the SI base unit of thermodynamic temperature.'],
+['The SI base unit of amount of substance is:','mole (mol)','gram (g)','candela (cd)','litre (L)',0,'The mole (mol) is the SI base unit of amount of substance.'],
+['The SI base unit of luminous intensity is:','lux (lx)','lumen (lm)','candela (cd)','watt (W)',2,'The candela (cd) is the SI base unit of luminous intensity.'],
+['Which set contains only SI base units?','m, kg, s, A','N, J, W, Pa','V, Ω, C, F','Hz, N, J, W',0,'Metre, kilogram, second and ampere are SI base units; the other sets contain derived units.'],
+['Which of the following is NOT an SI base unit?','metre','kilogram','newton','second',2,'Newton (N) is a derived SI unit of force, not a base unit.'],
+['The SI base unit symbol for mass is:','g','kg','mg','M',1,'The SI base unit of mass is kilogram, with symbol kg.'],
+['Which SI base unit has the symbol K?','kelvin','kilogram','mole','candela',0,'K is the symbol for kelvin, the SI base unit of thermodynamic temperature.'],
+['Which SI base unit has the symbol mol?','molarity','mole','metre','millimetre',1,'mol is the symbol for the SI base unit mole.'],
+['Newton is a derived unit because it can be expressed in base units as:','kg·m·s⁻²','kg·m²·s⁻¹','kg·s⁻²','m·s⁻¹',0,'One newton equals kg·m·s⁻², so force is a derived quantity.'],
+['Which statement about SI base units is correct?','They are independent reference units from which derived units can be formed','Every SI unit is a base unit','Newton and joule are base units','Base units have no symbols',0,'SI base units provide the reference set from which derived SI units are formed.']
+];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else{$('xp').textContent='❌ Incorrect. '+q[6]}$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script></body></html>

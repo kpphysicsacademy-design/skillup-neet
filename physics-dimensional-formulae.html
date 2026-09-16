@@ -1,79 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Dimensional Formulae</title>
-<style>
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}
-.wrap{max-width:850px;margin:auto;padding:28px 18px}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.xp{font-weight:800}
-.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}
-.mastery{font-weight:800;margin-top:18px}
-.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden;margin-top:10px}
-.fill{height:100%;width:0;background:#58cc02;transition:.3s}
-.q{font-size:1.3rem;font-weight:750;line-height:1.45}
-.opts{display:grid;gap:10px;margin-top:18px}
-.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;font-weight:650;cursor:pointer;transition:.15s}
-.opts button:hover{border-color:#58cc02}
-.opts button:disabled{cursor:default}
-.opts button.correct{border-color:#58cc02;background:#effbea}
-.opts button.wrong{border-color:#e5484d;background:#fff0f0}
-.feedback{font-weight:700;margin-top:16px;min-height:24px;line-height:1.5}
-.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}
-.next:disabled{opacity:.45;cursor:not-allowed}
-.back{display:inline-block;margin-top:18px;padding:12px 18px;border:2px solid #5146a5;border-radius:14px;color:#5146a5;text-decoration:none;font-weight:800;transition:.2s}
-.back:hover{background:#5146a5;color:white;transform:translateY(-1px)}
-.back:active{transform:scale(.97)}
-.meta{font-size:.95rem;color:#4b5563}
-.hint{color:#4b5563;line-height:1.5}
-.result{text-align:center}
-.retry{margin-top:12px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}
-@media(max-width:600px){.wrap{padding:20px 14px}.top h1{font-size:1.55rem}.card{padding:20px}.q{font-size:1.18rem}}
-</style>
-</head>
-<body>
-<main class="wrap">
-<div class="top"><h1>📐 Dimensional Formulae</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
-<p>Master dimensional formulae using M, L, T and other base dimensions with 15 NEET-style questions.</p>
-<div class="mastery">🎯 Skill Mastery <span id="mastery">0 / 15</span></div>
-<div class="bar"><div id="fill" class="fill"></div></div>
-<section class="card">
-<div id="count" class="meta">Question 1 of 15</div>
-<p id="question" class="q"></p>
-<div id="options" class="opts"></div>
-<div id="feedback" class="feedback"></div>
-<p class="hint">💡 <span id="hint">Use M, L, T and other base dimensions.</span></p>
-<button id="next" class="next" disabled>Continue →</button>
-<div id="result" class="result" style="display:none"><h2>🏆 Dimensional Formulae Complete!</h2><p id="score"></p><button id="retry" class="retry">Retry Skill</button></div>
-</section>
-<a class="back" href="physics-home.html">← Back to Physics Path</a>
-</main>
-<script>
-const qs=[
-['What is a dimensional formula?',['A unit symbol only','An expression showing a physical quantity in terms of powers of base dimensions','A numerical value only','A measurement error'],1,'A dimensional formula expresses a quantity using powers of base dimensions such as M, L and T.'],
-['The dimensional formula of velocity is:',['L⁻¹T','LT⁻¹','L²T⁻¹','LT'],1,'Velocity = displacement/time, so its dimensions are L T⁻¹.'],
-['The dimensional formula of acceleration is:',['LT⁻¹','LT⁻²','L²T⁻²','MLT⁻¹'],1,'Acceleration = velocity/time, giving L T⁻².'],
-['The dimensional formula of force is:',['MLT⁻¹','MLT⁻²','ML²T⁻²','M⁻¹LT⁻²'],1,'Force = mass × acceleration, giving M L T⁻².'],
-['The dimensional formula of work is:',['MLT⁻²','ML²T⁻²','ML²T⁻³','ML⁻¹T⁻²'],1,'Work = force × displacement, giving M L² T⁻².'],
-['The dimensional formula of power is:',['ML²T⁻²','ML²T⁻³','MLT⁻²','ML⁻¹T⁻²'],1,'Power = work/time, giving M L² T⁻³.'],
-['The dimensional formula of pressure is:',['MLT⁻²','ML²T⁻²','ML⁻¹T⁻²','ML⁻³'],2,'Pressure = force/area, giving M L⁻¹ T⁻².'],
-['The dimensional formula of density is:',['ML⁻³','ML⁻²','ML³','ML⁻¹'],0,'Density = mass/volume, giving M L⁻³.'],
-['The dimensional formula of momentum is:',['MLT⁻¹','MLT⁻²','ML²T⁻¹','M⁻¹L³T⁻²'],0,'Momentum = mass × velocity, giving M L T⁻¹.'],
-['The dimensional formula of strain is:',['L','T⁻¹','1 (dimensionless)','MLT⁻²'],2,'Strain is a ratio of two lengths, so all dimensions cancel.'],
-['The dimensional formula of gravitational constant G is:',['MLT⁻²','M⁻¹L³T⁻²','ML²T⁻¹','ML²T⁻³'],1,'From F = Gm₁m₂/r², G has dimensions M⁻¹ L³ T⁻².'],
-['The dimensional formula of Planck constant h is:',['MLT⁻¹','ML²T⁻¹','ML²T⁻²','M⁻¹L³T⁻²'],1,'Since h = energy/frequency, h has dimensions M L² T⁻¹.'],
-['The dimensional formula of frequency is:',['T','T⁻¹','LT⁻¹','MLT⁻²'],1,'Frequency is the reciprocal of time, so its dimensions are T⁻¹.'],
-['Which pair has the same dimensional formula?',['Force and pressure','Power and energy','Work and energy','Momentum and force'],2,'Work and energy both have dimensions M L² T⁻².'],
-['For a physically valid equation, the dimensions of both sides must be:',['Different','The same','Zero','Undefined'],1,'Dimensional homogeneity requires both sides of an equation to have identical dimensions.']
-];
-let i=0,xp=0,answered=false,correct=0;
-const $=id=>document.getElementById(id);
-function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;$('hint').textContent='Use M, L, T and other base dimensions.';qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>answer(j);$('options').appendChild(b)});$('fill').style.width=`${correct/qs.length*100}%`;$('mastery').textContent=`${correct} / ${qs.length}`}
-function answer(j){if(answered)return;answered=true;const a=qs[i],ok=j===a[2];if(ok){xp+=10;correct++;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP — '+a[3]}else{$('feedback').textContent='❌ Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===a[2])b.classList.add('correct');if(k===j&&k!==a[2])b.classList.add('wrong')});$('mastery').textContent=`${correct} / ${qs.length}`;$('fill').style.width=`${correct/qs.length*100}%`;$('next').disabled=false}
-$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('mastery').textContent=`${correct} / ${qs.length}`;$('question').textContent='🎉 Dimensional Formulae mastered!';$('options').innerHTML='';$('feedback').textContent=`You scored ${xp} XP out of ${qs.length*10} XP.`;$('hint').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none';$('result').style.display='block';$('score').textContent=`${correct} / ${qs.length} correct • ${xp} XP`}};
-$('retry').onclick=()=>{i=0;xp=0;correct=0;$('xp').textContent='0';$('next').style.display='';$('result').style.display='none';render()};
-render();
-</script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Dimensional Formulae</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{ text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style></head><body><div class="wrap"><div class="card"><h1>📐 Dimensional Formulae</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
+['What is a dimensional formula?','A unit symbol only','An expression showing a physical quantity in terms of powers of base dimensions','A numerical value only','A measurement error',1,'A dimensional formula expresses a quantity using powers of base dimensions such as M, L and T.'],
+['The dimensional formula of velocity is:','L⁻¹T','LT⁻¹','L²T⁻¹','LT',1,'Velocity = displacement/time, so its dimensions are L T⁻¹.'],
+['The dimensional formula of acceleration is:','LT⁻¹','LT⁻²','L²T⁻²','MLT⁻¹',1,'Acceleration = velocity/time, giving L T⁻².'],
+['The dimensional formula of force is:','MLT⁻¹','MLT⁻²','ML²T⁻²','M⁻¹LT⁻²',1,'Force = mass × acceleration, giving M L T⁻².'],
+['The dimensional formula of work is:','MLT⁻²','ML²T⁻²','ML²T⁻³','ML⁻¹T⁻²',1,'Work = force × displacement, giving M L² T⁻².'],
+['The dimensional formula of power is:','ML²T⁻²','ML²T⁻³','MLT⁻²','ML⁻¹T⁻²',1,'Power = work/time, giving M L² T⁻³.'],
+['The dimensional formula of pressure is:','MLT⁻²','ML²T⁻²','ML⁻¹T⁻²','ML⁻³',2,'Pressure = force/area, giving M L⁻¹ T⁻².'],
+['The dimensional formula of density is:','ML⁻³','ML⁻²','ML³','ML⁻¹',0,'Density = mass/volume, giving M L⁻³.'],
+['The dimensional formula of momentum is:','MLT⁻¹','MLT⁻²','ML²T⁻¹','M⁻¹L³T⁻²',0,'Momentum = mass × velocity, giving M L T⁻¹.'],
+['The dimensional formula of strain is:','L','T⁻¹','1 (dimensionless)','MLT⁻²',2,'Strain is a ratio of two lengths, so all dimensions cancel.'],
+['The dimensional formula of gravitational constant G is:','MLT⁻²','M⁻¹L³T⁻²','ML²T⁻¹','ML²T⁻³',1,'From F = Gm₁m₂/r², G has dimensions M⁻¹ L³ T⁻².'],
+['The dimensional formula of Planck constant h is:','MLT⁻¹','ML²T⁻¹','ML²T⁻²','M⁻¹L³T⁻²',1,'Since h = energy/frequency, h has dimensions M L² T⁻¹.'],
+['The dimensional formula of frequency is:','T','T⁻¹','LT⁻¹','MLT⁻²',1,'Frequency is the reciprocal of time, so its dimensions are T⁻¹.'],
+['Which pair has the same dimensional formula?','Force and pressure','Power and energy','Work and energy','Momentum and force',2,'Work and energy both have dimensions M L² T⁻².'],
+['For a physically valid equation, the dimensions of both sides must be:','Different','The same','Zero','Undefined',1,'Dimensional homogeneity requires both sides of an equation to have identical dimensions.']
+];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script></body></html>

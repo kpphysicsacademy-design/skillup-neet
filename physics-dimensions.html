@@ -1,73 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Dimensions</title>
-<style>
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;margin:0;color:#172033}
-.wrap{max-width:850px;margin:auto;padding:28px 18px}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.xp{font-weight:800}
-.card{background:white;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 5px 20px #00000012}
-.mastery{font-weight:800;margin-top:18px}
-.bar{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden;margin-top:10px}
-.fill{height:100%;width:0;background:#58cc02;transition:.3s}
-.q{font-size:1.3rem;font-weight:750;line-height:1.45}
-.opts{display:grid;gap:10px;margin-top:18px}
-.opts button{padding:15px;border:2px solid #e2e5eb;border-radius:14px;background:white;text-align:left;font-size:1rem;cursor:pointer}
-.opts button:hover{border-color:#58cc02}
-.opts button:disabled{cursor:default}
-.opts button.correct{border-color:#58cc02;background:#effbea}
-.opts button.wrong{border-color:#e5484d;background:#fff0f0}
-.feedback{font-weight:700;margin-top:16px;min-height:24px;line-height:1.5}
-.next{margin-top:18px;padding:13px 22px;border:0;border-radius:14px;background:#58cc02;color:white;font-weight:800;cursor:pointer}
-.next:disabled{opacity:.45;cursor:not-allowed}
-.back{display:inline-block;margin-top:18px;padding:12px 18px;border:2px solid #5146a5;border-radius:14px;color:#5146a5;text-decoration:none;font-weight:800;transition:.2s}
-.back:hover{background:#5146a5;color:white;transform:translateY(-1px)}
-.back:active{transform:scale(.97)}
-.meta{font-size:.95rem;color:#4b5563}
-@media(max-width:600px){.wrap{padding:20px 14px}.top h1{font-size:1.55rem}.card{padding:20px}.q{font-size:1.18rem}}
-</style>
-</head>
-<body>
-<main class="wrap">
-<div class="top"><h1>📐 Dimensions</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div>
-<p>Master dimensions of physical quantities and dimensional analysis with 15 NEET-style questions.</p>
-<div class="mastery">🎯 Skill Mastery <span id="mastery">0 / 15</span></div>
-<div class="bar"><div id="fill" class="fill"></div></div>
-<section class="card">
-<div id="count" class="meta">Question 1 of 15</div>
-<p id="question" class="q"></p>
-<div id="options" class="opts"></div>
-<div id="feedback" class="feedback"></div>
-<button id="next" class="next" disabled>Continue →</button>
-</section>
-<a class="back" href="physics-home.html">← Back to Physics Path</a>
-</main>
-<script>
-const qs=[
-['What does the dimension of a physical quantity describe?',['Its dependence on fundamental quantities','Its unit symbol only','Its numerical value only','Its colour'],0,'Dimensions show how a quantity depends on fundamental quantities such as mass, length and time.'],
-['The dimensions of velocity are:',['[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[M L² T⁻²]'],0,'Velocity = displacement/time, so its dimensions are [L T⁻¹].'],
-['The dimensions of acceleration are:',['[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[T⁻¹]'],1,'Acceleration = velocity/time, giving [L T⁻²].'],
-['The dimensions of force are:',['[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]','[L T⁻¹]'],0,'Force = mass × acceleration = [M L T⁻²].'],
-['The dimensions of work are:',['[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M L⁻¹ T⁻²]'],1,'Work = force × displacement = [M L² T⁻²].'],
-['The dimensions of power are:',['[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M L⁻¹ T⁻²]'],1,'Power = work/time = [M L² T⁻³].'],
-['The dimensions of pressure are:',['[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻³]','[M L⁻³]'],0,'Pressure = force/area = [M L⁻¹ T⁻²].'],
-['The dimensions of density are:',['[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M L³]'],2,'Density = mass/volume = [M L⁻³].'],
-['The dimensions of momentum are:',['[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[L T⁻¹]'],0,'Momentum = mass × velocity = [M L T⁻¹].'],
-['The dimensions of strain are:',['[M]','[L]','[T⁻¹]','[1]'],3,'Strain is a ratio of similar lengths, so it is dimensionless.'],
-['The dimensions of the gravitational constant G are:',['[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻¹]','[M L⁻¹ T⁻²]'],0,'From F = Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
-['The dimensions of Planck constant h are:',['[M L² T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[T⁻¹]'],0,'Planck constant has dimensions of energy × time = [M L² T⁻¹].'],
-['The dimensions of frequency are:',['[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]'],1,'Frequency is cycles per unit time, so its dimensions are [T⁻¹].'],
-['Which pair has the same dimensions?',['Work and energy','Force and power','Pressure and energy','Momentum and acceleration'],0,'Work and energy are both [M L² T⁻²].'],
-['For a physically meaningful dimensional equation, both sides must have:',['The same dimensions','The same numerical value in every unit system','The same unit symbol only','No units'],0,'Dimensional homogeneity requires identical dimensions on both sides.']
-];
-let i=0,xp=0,answered=false;
-const $=id=>document.getElementById(id);
-function render(){answered=false;$('count').textContent=`Question ${i+1} of ${qs.length}`;$('question').textContent=qs[i][0];$('options').innerHTML='';$('feedback').textContent='';$('next').disabled=true;qs[i][1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>answer(j);$('options').appendChild(b)});$('fill').style.width=`${i/qs.length*100}%`}
-function answer(j){if(answered)return;answered=true;const a=qs[i],ok=j===a[2];if(ok){xp+=10;$('xp').textContent=xp;$('feedback').textContent='✅ Correct! +10 XP — '+a[3]}else{$('feedback').textContent='❌ Not quite. Correct answer: '+a[1][a[2]]+' — '+a[3]}[...$('options').children].forEach((b,k)=>{b.disabled=true;if(k===a[2])b.classList.add('correct');if(k===j&&k!==a[2])b.classList.add('wrong')});$('mastery').textContent=(ok?i+1:i)+' / '+qs.length;$('next').disabled=false}
-$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else{$('fill').style.width='100%';$('mastery').textContent='15 / 15';$('question').textContent=`🎉 Dimensions mastered! You scored ${xp} XP out of ${qs.length*10} XP.`;$('options').innerHTML='';$('feedback').textContent='Excellent work — keep building your Physics path!';$('next').style.display='none'}};
-render();
-</script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Dimensions</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style></head><body><div class="wrap"><div class="card"><h1>📐 Dimensions</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
+['What does the dimension of a physical quantity describe?','Its dependence on fundamental quantities','Its unit symbol only','Its numerical value only','Its colour',0,'Dimensions show how a quantity depends on fundamental quantities such as mass, length and time.'],
+['The dimensions of velocity are:','[L T⁻¹]','[L T⁻²]','[M L T⁻¹]','[M L² T⁻²]',0,'Velocity = displacement/time, so its dimensions are [L T⁻¹].'],
+['The dimensions of acceleration are:','[L T⁻¹]','[L T⁻²]','[M L T⁻²]','[T⁻¹]',1,'Acceleration = velocity/time, giving [L T⁻²].'],
+['The dimensions of force are:','[M L T⁻²]','[M L² T⁻²]','[M L⁻¹ T⁻²]','[L T⁻¹]',0,'Force = mass × acceleration = [M L T⁻²].'],
+['The dimensions of work are:','[M L T⁻²]','[M L² T⁻²]','[M L² T⁻³]','[M L⁻¹ T⁻²]',1,'Work = force × displacement = [M L² T⁻²].'],
+['The dimensions of power are:','[M L² T⁻²]','[M L² T⁻³]','[M L T⁻²]','[M L⁻¹ T⁻²]',1,'Power = work/time = [M L² T⁻³].'],
+['The dimensions of pressure are:','[M L⁻¹ T⁻²]','[M L T⁻²]','[M L² T⁻³]','[M L⁻³]',0,'Pressure = force/area = [M L⁻¹ T⁻²].'],
+['The dimensions of density are:','[M L⁻¹]','[M L⁻²]','[M L⁻³]','[M L³]',2,'Density = mass/volume = [M L⁻³].'],
+['The dimensions of momentum are:','[M L T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[L T⁻¹]',0,'Momentum = mass × velocity = [M L T⁻¹].'],
+['The dimensions of strain are:','[M]','[L]','[T⁻¹]','[1]',3,'Strain is a ratio of similar lengths, so it is dimensionless.'],
+['The dimensions of the gravitational constant G are:','[M⁻¹ L³ T⁻²]','[M L³ T⁻²]','[M⁻¹ L² T⁻¹]','[M L⁻¹ T⁻²]',0,'From F = Gm₁m₂/r², G has dimensions [M⁻¹ L³ T⁻²].'],
+['The dimensions of Planck constant h are:','[M L² T⁻¹]','[M L T⁻²]','[M L² T⁻²]','[T⁻¹]',0,'Planck constant has dimensions of energy × time = [M L² T⁻¹].'],
+['The dimensions of frequency are:','[T]','[T⁻¹]','[L T⁻¹]','[M T⁻¹]',1,'Frequency is cycles per unit time, so its dimensions are [T⁻¹].'],
+['Which pair has the same dimensions?','Work and energy','Force and power','Pressure and energy','Momentum and acceleration',0,'Work and energy are both [M L² T⁻²].'],
+['For a physically meaningful dimensional equation, both sides must have:','The same dimensions','The same numerical value in every unit system','The same unit symbol only','No units',0,'Dimensional homogeneity requires identical dimensions on both sides.']
+];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script></body></html>

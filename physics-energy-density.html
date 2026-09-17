@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Energy Density</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Energy Density</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Energy density of an electric field is defined as','energy stored per unit volume','charge stored per unit volume','energy stored per unit charge','force per unit volume',0,'Energy density is the electric-field energy stored per unit volume.'],
+['The energy density in vacuum is','u=ε₀E²','u=½ε₀E²','u=2ε₀E²','u=E²/(2ε₀)',1,'For an electric field in vacuum, u=½ε₀E².'],
+['The SI unit of energy density is','J','J/m²','J/m³','N/C',2,'Energy density is energy per unit volume, so its SI unit is J/m³.'],
+['For a linear dielectric of permittivity ε, the electric-field energy density is','u=½εE²','u=εE²','u=2εE²','u=½E²/ε',0,'For a linear dielectric, u=½εE².'],
+['If the electric field is doubled while the medium remains unchanged, the energy density becomes','2 times','4 times','half','unchanged',1,'Since u is proportional to E², doubling E makes u four times larger.'],
+['If the electric field is halved while ε remains constant, the energy density becomes','4 times','2 times','1/4 times','1/2 times',2,'Since u∝E², halving E makes the energy density one-fourth.'],
+['In a capacitor, the total stored energy can be related to energy density by','U=uV','U=u/V','U=V/u','U=u+V',0,'Total field energy equals energy density multiplied by the volume occupied by the field.'],
+['For a parallel-plate capacitor approximately filled with a uniform field, the field volume is approximately','A/d','Ad','A+d','A/d²',1,'The volume between plates is area A multiplied by separation d: V=Ad.'],
+['A vacuum electric field has E=2×10⁶ N/C. Taking ε₀=8.85×10⁻¹² F/m, its energy density is approximately','17.7 J/m³','35.4 J/m³','8.85 J/m³','3.54 J/m³',0,'u=½ε₀E²=½×8.85×10⁻¹²×(2×10⁶)²≈17.7 J/m³.'],
+['For a dielectric with relative permittivity K, if E is fixed, its energy density compared with vacuum is','K times','1/K times','K² times','unchanged',0,'At fixed E, u=½Kε₀E², so the energy density is K times the vacuum value.'],
+['A capacitor has plate area 0.02 m², separation 1 mm and a uniform vacuum field of 1×10⁶ N/C. The field volume is','2×10⁻⁵ m³','2×10⁻⁴ m³','2×10⁻³ m³','2×10⁻² m³',0,'Volume between plates V=Ad=0.02×0.001=2×10⁻⁵ m³.'],
+['Using u=½ε₀E², if ε₀=8.85×10⁻¹² F/m and E=1×10⁶ N/C, the energy density is approximately','4.425 J/m³','8.85 J/m³','17.7 J/m³','0.4425 J/m³',0,'u=½×8.85×10⁻¹²×10¹²=4.425 J/m³.'],
+['For a fixed volume of electric field, if energy density doubles, the stored field energy','halves','doubles','becomes four times','remains unchanged',1,'Since U=uV and V is fixed, doubling u doubles U.'],
+['For a linear dielectric, electric susceptibility χₑ is related to permittivity by','ε=ε₀χₑ','ε=ε₀(1+χₑ)','ε=ε₀/(1+χₑ)','ε=χₑ/ε₀',1,'For a linear dielectric, ε=ε₀(1+χₑ).'],
+['The energy density expression u=½εE² is especially useful for','electric-field energy stored in a medium','calculating charge quantisation','finding magnetic monopoles','measuring atomic mass',0,'The expression directly gives the electrostatic energy stored per unit volume of the electric field.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

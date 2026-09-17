@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Combination of Capacitors</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Combination of Capacitors</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['For two capacitors C₁ and C₂ connected in series, the equivalent capacitance is','C₁+C₂','C₁C₂/(C₁+C₂)','C₁−C₂','C₁/C₂',1,'For capacitors in series, 1/Ceq=1/C₁+1/C₂, so Ceq=C₁C₂/(C₁+C₂).'],
+['For two capacitors C₁ and C₂ connected in parallel, the equivalent capacitance is','C₁C₂/(C₁+C₂)','C₁+C₂','C₁−C₂','C₁/C₂',1,'For capacitors in parallel, Ceq=C₁+C₂.'],
+['In a series combination of capacitors, the magnitude of charge on each capacitor is','different in general','the same','always zero','proportional to its capacitance',1,'The same charge magnitude appears on each capacitor in a series chain.'],
+['In a parallel combination of capacitors, the potential difference across each capacitor is','different in general','the same','always zero','inversely proportional to capacitance',1,'All branches are connected across the same two nodes, so they have the same potential difference.'],
+['Two capacitors of 2 μF and 4 μF are connected in series. Their equivalent capacitance is','6 μF','2 μF','4/3 μF','8 μF',2,'Ceq=(2×4)/(2+4)=8/6=4/3 μF.'],
+['Two capacitors of 2 μF and 3 μF are connected in parallel. Their equivalent capacitance is','1.2 μF','5 μF','6 μF','0.5 μF',1,'For parallel capacitors, Ceq=2+3=5 μF.'],
+['For capacitors connected in series, the equivalent capacitance is always','greater than the largest capacitor','equal to the sum','less than the smallest capacitor','equal to the largest capacitor',2,'A series equivalent capacitance is smaller than each individual capacitance.'],
+['For capacitors connected in parallel, the equivalent capacitance is','less than the smallest capacitor','greater than the largest capacitor','always zero','equal to the smallest capacitor',1,'A parallel equivalent is the sum, so it exceeds every positive individual capacitance.'],
+['A 3 μF and a 6 μF capacitor are connected in series across 18 V. The charge on each capacitor is','18 μC','36 μC','54 μC','9 μC',1,'Ceq=(3×6)/(3+6)=2 μF. Therefore Q=CeqV=2×18=36 μC.'],
+['Three capacitors of 3 μF, 6 μF and 9 μF are connected in parallel across 12 V. The total charge supplied is','36 μC','108 μC','216 μC','18 μC',1,'Ceq=3+6+9=18 μF. Thus Q=CeqV=18×12=216 μC.'],
+['Two identical capacitors, each of 3 μF, are connected in series. Their equivalent capacitance is','6 μF','3 μF','1.5 μF','9 μF',2,'For two identical capacitors in series, Ceq=C/2=3/2=1.5 μF.'],
+['Two identical capacitors, each of 3 μF, are connected in parallel. Their equivalent capacitance is','1.5 μF','3 μF','6 μF','9 μF',2,'For two identical capacitors in parallel, Ceq=2C=6 μF.'],
+['Two 2 μF capacitors are connected in parallel across a 10 V battery. The total stored energy is','50 μJ','100 μJ','200 μJ','400 μJ',2,'Ceq=4 μF. U=1/2 CV²=1/2×4×10⁻⁶×100=200 μJ.'],
+['A 2 μF capacitor is connected in parallel with a 3 μF capacitor. This combination is then connected in series with a 5 μF capacitor. The equivalent capacitance is','10 μF','5 μF','2.5 μF','1 μF',2,'The first parallel combination is 5 μF. Two 5 μF groups in series give Ceq=(5×5)/(5+5)=2.5 μF.'],
+['A 2 μF and 4 μF capacitor are connected in series across 12 V. The voltage across the 2 μF capacitor is','2 V','4 V','6 V','8 V',1,'Ceq=4/3 μF, so Q=CeqV=16 μC. Thus V₂=Q/C₂=16/2=8 V.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

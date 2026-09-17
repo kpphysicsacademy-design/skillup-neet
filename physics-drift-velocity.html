@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Drift Velocity</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Drift Velocity</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Drift velocity of charge carriers is the','random thermal velocity','average velocity acquired due to an applied electric field','speed of light','velocity of positive ions only',1,'Drift velocity is the average directed velocity acquired by charge carriers because of an applied electric field.'],
+['In a metallic conductor, electron drift velocity is directed','along the electric field','opposite to the electric field','perpendicular to the electric field','randomly with no average direction',1,'Electrons are negatively charged, so their drift is opposite to the applied electric field.'],
+['The conventional current direction in a metal is','opposite to electron drift','same as electron drift','always perpendicular to drift','independent of charge motion',0,'Conventional current is opposite to electron drift because electrons carry negative charge.'],
+['The relation between current I and drift velocity v_d is','I=nqAv_d','I=nq/(Av_d)','I=Av_d/(nq)','I=nqA/v_d',0,'For charge carriers of number density n and charge q, I=nqAv_d.'],
+['In I=nqAv_d, n represents the','electric field','number density of charge carriers','resistance','potential difference',1,'n is the number of mobile charge carriers per unit volume.'],
+['The SI unit of drift velocity is','m/s','A','C/m²','Ω',0,'Velocity is measured in metres per second (m/s).'],
+['If the current through a wire is doubled while n, q and A remain constant, the drift velocity','halves','doubles','becomes zero','remains unchanged',1,'From I=nqAv_d, with n, q and A fixed, v_d is directly proportional to I.'],
+['If the cross-sectional area of a wire is doubled at the same current, the drift velocity','doubles','halves','becomes four times','remains unchanged',1,'Since I=nqAv_d is constant, doubling A makes v_d half as large.'],
+['A wire carries 3.2 A. If n=8×10²⁸ m⁻³, q=1.6×10⁻¹⁹ C and A=1×10⁻⁶ m², the drift velocity is','2.5×10⁻⁴ m/s','2.5×10⁻³ m/s','2.5×10⁻⁵ m/s','4×10⁻⁴ m/s',0,'v_d=I/(nqA)=3.2/[(8×10²⁸)(1.6×10⁻¹⁹)(10⁻⁶)]=2.5×10⁻⁴ m/s.'],
+['The drift velocity of electrons in an ordinary metallic wire is generally','comparable to the speed of light','very small compared with random thermal speeds','always zero','equal to the electron orbital speed',1,'The directed drift speed is very small, even though electrons have much larger random thermal motion.'],
+['When an electric field is applied to a metal, electrons acquire','only random motion','a small average drift superimposed on random motion','no motion','motion exactly at c',1,'The applied field produces a small net drift in addition to the electrons’ random thermal motion.'],
+['The drift velocity in the Drude model is proportional to','electric field E','1/E','E² only','resistance only',0,'In the simple Drude model, v_d=qEτ/m in magnitude, so it is proportional to E.'],
+['The magnitude of drift velocity can be written as','v_d=qEτ/m','v_d=mE/(qτ)','v_d=qτ/(mE)','v_d=m/(qEτ)',0,'For a carrier of charge magnitude q, v_d=qEτ/m in the Drude model.'],
+['If the relaxation time τ is doubled while E, q and m remain constant, drift velocity','halves','doubles','becomes zero','remains unchanged',1,'From v_d=qEτ/m, drift velocity is directly proportional to relaxation time.'],
+['A current of 1.6 A flows through a wire of area 2×10⁻⁶ m² with n=5×10²⁸ m⁻³. Taking q=1.6×10⁻¹⁹ C, the drift velocity is','1×10⁻⁴ m/s','2×10⁻⁴ m/s','1×10⁻³ m/s','2×10⁻³ m/s',0,'v_d=I/(nqA)=1.6/[(5×10²⁸)(1.6×10⁻¹⁹)(2×10⁻⁶)]=1×10⁻⁴ m/s.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

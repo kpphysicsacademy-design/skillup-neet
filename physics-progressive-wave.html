@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Progressive Wave</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>🌊 Progressive Wave</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['A progressive wave is a wave in which','only the particles move permanently forward','the disturbance travels through the medium carrying energy','the medium as a whole travels with the wave','frequency becomes zero',1,'A progressive wave is a travelling disturbance that transfers energy from one region to another without transporting the medium bodily.'],
+['The standard equation of a sinusoidal progressive wave travelling in +x direction is','y=A sin(kx+ωt+φ)','y=A sin(kx−ωt+φ)','y=A sin(kx)+ωt','y=A cos(kx)',1,'For a wave travelling in the +x direction, a common form is y=A sin(kx−ωt+φ).'],
+['In the wave equation y=A sin(kx−ωt+φ), A represents','wavelength','frequency','amplitude','wave number',2,'A is the maximum displacement of a particle from its mean position, i.e. the amplitude.'],
+['In y=A sin(kx−ωt+φ), k represents','angular frequency','wave number','time period','amplitude',1,'The wave number is k=2π/λ.'],
+['The relation between wave number k and wavelength λ is','k=λ/2π','k=2π/λ','k=2πλ','k=1/λ²',1,'Wave number k is the phase change per unit distance: k=2π/λ.'],
+['For a progressive wave, angular frequency and frequency are related by','ω=f/2π','ω=2πf','ω=πf²','ω=2π/f',1,'Angular frequency is ω=2πf.'],
+['The speed of a progressive wave is','v=ωk','v=ω/k','v=k/ω','v=ω+k',1,'Using k=2π/λ and ω=2πf, wave speed is v=ω/k=fλ.'],
+['The phase difference between two points separated by distance λ is','0','π/2','π','2π',3,'A separation of one wavelength corresponds to a phase difference of 2π radians, so the points are in phase.'],
+['Two particles of a progressive wave separated by λ/2 have phase difference','0','π/2','π','2π',2,'A distance λ/2 corresponds to a phase difference k(λ/2)=π radians.'],
+['In an ideal progressive wave, particles of the medium','remain permanently displaced','oscillate about their mean positions','move with the wave at wave speed','do not move at all',1,'Particles oscillate about their equilibrium positions while the disturbance and energy propagate through the medium.'],
+['For a sinusoidal progressive wave, the particle velocity is generally','the same at all positions at all times','dependent on position and time','always equal to wave speed','always zero',1,'Particle velocity depends on the phase of the particle and is generally different from the propagation speed of the wave.'],
+['A wave has frequency 5 Hz and wavelength 2 m. Its propagation speed is','2.5 m/s','7 m/s','10 m/s','20 m/s',2,'v=fλ=5×2=10 m/s.'],
+['For y=A sin(kx−ωt), at a fixed position x, the particle executes','uniform linear motion','simple harmonic motion','circular motion only','no motion',1,'At fixed x, kx is constant, so displacement varies sinusoidally with time: SHM.'],
+['When a progressive wave travels from one point to another, what is primarily transferred?','Matter as a whole','Energy','Mass permanently','The medium itself',1,'A progressive wave transfers energy and information through the medium without transporting the medium bodily.'],
+['Which statement is correct for a progressive sinusoidal wave?','All particles are always in the same phase','Particles separated by one wavelength are in phase','Wave speed is always equal to particle speed','Amplitude must increase continuously with distance',1,'Particles separated by λ have a phase difference of 2π and therefore oscillate in phase.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

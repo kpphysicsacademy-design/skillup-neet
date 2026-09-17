@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Energy Stored in Capacitor</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Energy Stored in a Capacitor</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['The electrostatic energy stored in a capacitor is','U=QV','U=1/2 QV','U=Q/V','U=2QV',1,'The stored energy is U=1/2 QV.'],
+['In terms of capacitance C and potential difference V, the energy stored is','U=CV²','U=1/2 CV²','U=2CV²','U=V²/(2C)',1,'Using Q=CV in U=1/2 QV gives U=1/2 CV².'],
+['In terms of charge Q and capacitance C, the stored energy is','U=Q²/C','U=Q²/(2C)','U=2Q²/C','U=CQ²/2',1,'The equivalent form is U=Q²/(2C).'],
+['The SI unit of energy stored in a capacitor is','coulomb','volt','joule','farad',2,'Energy is measured in joules (J).'],
+['The energy stored in a capacitor is equal to the','area under the Q-V charging curve','slope of the Q-V curve','slope of the V-Q curve only','product Q/V',0,'During charging, U is the area under the V-Q curve, giving U=1/2 QV.'],
+['A 4 μF capacitor is charged to 5 V. Its stored energy is','10 μJ','25 μJ','50 μJ','100 μJ',2,'U=1/2 CV²=1/2×4×10⁻⁶×25=50 μJ.'],
+['A capacitor of 2 μF is charged to 10 V. Its stored energy is','50 μJ','100 μJ','200 μJ','20 μJ',0,'U=1/2×2 μF×(10 V)²=100 μJ? Check: 0.5×2×100 μJ=100 μJ.'],
+['If the potential difference across a capacitor is doubled while C remains constant, its stored energy becomes','2 times','4 times','1/2 times','unchanged',1,'Since U=1/2 CV², energy is proportional to V².'],
+['If the charge on an isolated capacitor is doubled while C remains constant, its stored energy becomes','2 times','4 times','1/4 times','unchanged',1,'Since U=Q²/(2C), energy is proportional to Q².'],
+['If capacitance is doubled while V remains constant, the stored energy becomes','half','double','four times','unchanged',1,'At constant V, U=1/2 CV², so doubling C doubles U.'],
+['A capacitor remains connected to a battery while a dielectric of constant K is inserted completely. Its stored energy becomes','U₀/K','KU₀','U₀','K²U₀',1,'The battery keeps V constant and C becomes KC₀, so U=1/2 CV² becomes KU₀.'],
+['A charged capacitor is disconnected from its battery before a dielectric of constant K is inserted. Its stored energy becomes','KU₀','U₀/K','U₀','K²U₀',1,'For an isolated capacitor Q is constant. Since C increases K times, U=Q²/(2C) decreases to U₀/K.'],
+['The energy density in the electric field of a capacitor filled with a linear dielectric is','u=εE²','u=1/2 εE²','u=2εE²','u=ε/E²',1,'For a linear dielectric, energy density is u=1/2 εE².'],
+['A capacitor has C=10 μF and V=20 V. Its stored energy is','1 mJ','2 mJ','4 mJ','20 mJ',1,'U=1/2×10×10⁻⁶×400=2×10⁻³ J=2 mJ.'],
+['The work done by the battery during charging an ideal capacitor from zero to charge Q at voltage V is','equal to stored energy only','twice the stored energy','half the stored energy','zero',1,'For an ideal capacitor, battery work is QV, while stored energy is 1/2 QV; the other half is associated with the charging process/field interaction in the ideal model.']
+];
+qs[6]=['A capacitor of 2 μF is charged to 10 V. Its stored energy is','50 μJ','100 μJ','200 μJ','20 μJ',1,'U=1/2 CV²=1/2×2×10⁻⁶×100=100 μJ.'];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

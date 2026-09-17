@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Wave Frequency</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>〰️ Wave Frequency</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Wave frequency is the number of','wavelengths in one metre only','complete oscillations passing a fixed point per unit time','metres travelled by the wave per second','particles present in the medium',1,'Wave frequency is the number of complete oscillations or cycles passing a fixed point per unit time.'],
+['The SI unit of wave frequency is','metre','second','hertz','radian',2,'Frequency is measured in hertz (Hz), which means cycles per second.'],
+['The relation between wave frequency f and time period T is','f=T','f=1/T','f=2πT','f=T²',1,'Frequency and time period are reciprocals: f=1/T.'],
+['A wave has frequency 5 Hz. Its time period is','5 s','1 s','0.2 s','0.05 s',2,'T=1/f=1/5=0.2 s.'],
+['A wave completes 20 oscillations in 4 s. Its frequency is','4 Hz','5 Hz','20 Hz','80 Hz',1,'f=number of oscillations/time=20/4=5 Hz.'],
+['If a wave has frequency 10 Hz, it means','10 metres are travelled every second','10 complete cycles pass a fixed point every second','the wavelength is 10 m','the time period is 10 s',1,'A frequency of 10 Hz means 10 complete cycles pass a fixed point each second.'],
+['For a wave travelling with speed v and wavelength λ, the frequency is','f=vλ','f=v/λ','f=λ/v','f=2πvλ',1,'From v=fλ, the wave frequency is f=v/λ.'],
+['A wave travels at 20 m/s and has wavelength 4 m. Its frequency is','2 Hz','4 Hz','5 Hz','80 Hz',2,'f=v/λ=20/4=5 Hz.'],
+['If wave speed remains constant and frequency is doubled, wavelength becomes','double','half','four times','unchanged',1,'Since v=fλ is constant, doubling f makes λ half.'],
+['If wavelength doubles while wave speed remains constant, frequency becomes','double','half','four times','unchanged',1,'For constant v, f=v/λ, so doubling wavelength halves frequency.'],
+['When a wave enters another medium, its frequency is generally determined by the','medium only','source','amplitude only','wavelength only',1,'The source fixes the frequency; when the wave enters another medium, its speed and wavelength can change while frequency remains the same.'],
+['A wave has frequency 50 Hz. How many cycles pass a fixed point in 2 s?','25','50','100','150',2,'Number of cycles=f×t=50×2=100 cycles.'],
+['If angular frequency is 20π rad/s, the wave frequency is','5 Hz','10 Hz','20 Hz','40 Hz',1,'Using ω=2πf, f=20π/(2π)=10 Hz.'],
+['A wave has time period 0.25 s and speed 8 m/s. Its wavelength is','0.5 m','1 m','2 m','32 m',2,'λ=vT=8×0.25=2 m.'],
+['Which statement about wave frequency is correct?','It is the reciprocal of wavelength in all cases','It is the number of cycles passing a fixed point per unit time','It always changes when a wave enters a new medium','It has SI unit metre',1,'Wave frequency is the rate at which cycles pass a fixed point, measured in hertz.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

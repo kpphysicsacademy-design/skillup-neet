@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Charging a Capacitor</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Charging a Capacitor</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['When a capacitor is connected to a DC battery through a resistor, the capacitor initially','has its final charge','begins to charge','has zero capacitance','discharges instantly',1,'A capacitor connected to a DC source through a resistance starts charging from its initial state.'],
+['For a charging RC circuit, the charge on the capacitor at time t is','Q=Q₀e^(−t/RC)','Q=Q₀(1−e^(−t/RC))','Q=Q₀e^(t/RC)','Q=Q₀/(1−e^(−t/RC))',1,'For charging, Q(t)=Q₀[1−e^(−t/RC)], where Q₀=CV is the final charge.'],
+['The time constant of an RC charging circuit is','R/C','RC','1/RC','R+C',1,'The RC time constant is τ=RC.'],
+['At t=0, immediately after a charging circuit is connected to an initially uncharged capacitor, the capacitor voltage is','zero','maximum','equal to the battery voltage always','infinite',0,'An initially uncharged capacitor has V_C=0 at the instant charging begins.'],
+['At t=0, the charging current in a series RC circuit is','zero','maximum, equal to V/R','equal to V/C','infinite',1,'Initially the uncharged capacitor behaves like a short circuit, so the initial current is I₀=V/R.'],
+['After a long time in a DC RC charging circuit, the capacitor voltage approaches','zero','V','V/2','infinity',1,'As t becomes very large, the capacitor becomes fully charged and V_C approaches the battery voltage V.'],
+['After a long time in a DC RC charging circuit, the current approaches','V/R','V/(2R)','zero','infinity',2,'The capacitor becomes fully charged and behaves as an open circuit to steady DC, so current approaches zero.'],
+['The capacitor voltage during charging is','V_C=Ve^(−t/RC)','V_C=V(1−e^(−t/RC))','V_C=V(1+e^(−t/RC))','V_C=Vt/RC',1,'For an initially uncharged capacitor, V_C(t)=V[1−e^(−t/RC)].'],
+['The charging current during an RC circuit is','I=(V/R)e^(−t/RC)','I=(V/R)(1−e^(−t/RC))','I=VRt','I=V/R+e^(−t/RC)',0,'The charging current is I(t)=(V/R)e^(−t/RC).'],
+['At one time constant t=RC during charging, the capacitor charge is approximately','37% of final charge','50% of final charge','63% of final charge','100% of final charge',2,'At t=τ, Q/Q₀=1−e⁻¹≈0.632, or about 63%.'],
+['At one time constant t=RC during charging, the charging current is approximately','63% of initial current','37% of initial current','50% of initial current','zero',1,'At t=τ, I/I₀=e⁻¹≈0.368, or about 37%.'],
+['After about 5 time constants during charging, the capacitor is','approximately 99.3% charged','approximately 37% charged','approximately 50% charged','completely uncharged',0,'At t=5τ, Q/Q₀=1−e⁻⁵≈0.993, so the capacitor is about 99.3% charged.'],
+['A 10 V battery charges a capacitor through a 2 kΩ resistor. The initial charging current is','2 mA','5 mA','10 mA','20 mA',1,'I₀=V/R=10/2000=0.005 A=5 mA.'],
+['An RC circuit has R=1 MΩ and C=2 μF. Its time constant is','0.5 s','1 s','2 s','2×10⁶ s',2,'τ=RC=(1×10⁶)(2×10⁻⁶)=2 s.'],
+['During charging of an ideal capacitor through a resistor from a DC source, the resistor mainly','stores all the electrical energy permanently','limits the charging current and dissipates some energy as heat','increases the final capacitance','makes the capacitor voltage infinite',1,'The resistor limits current and dissipates energy as heat while the capacitor stores electrostatic energy.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

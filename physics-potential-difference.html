@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Potential Difference</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>⚡ Potential Difference</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['The potential difference between points A and B is defined as','V_A−V_B only','V_B−V_A','V_A+V_B','V_AV_B','B','By convention, the potential difference from A to B is ΔV=V_B−V_A.'],
+['The SI unit of potential difference is','newton','joule','volt','coulomb','C','Potential difference is measured in volts (V).'],
+['One volt is equal to','1 J/C','1 C/J','1 N/C','1 J·C','A','1 V = 1 joule per coulomb.'],
+['The potential difference between two points is related to electric field by','ΔV=−∫E·dl','ΔV=∫E×dl','ΔV=E/q','ΔV=q/E','A','The potential difference is ΔV=−∫_A^B E·dl.'],
+['In a uniform electric field, when a displacement d is along the electric field, the potential difference is','+Ed','−Ed','Ed²','zero','B','Potential decreases in the direction of the electric field, so ΔV=−Ed.'],
+['In a uniform electric field, moving a charge perpendicular to the field lines gives a potential difference of','Ed','−Ed','zero','2Ed','C','For displacement perpendicular to E, E·dl=0, so the potential difference is zero.'],
+['Electric potential difference is a','vector quantity','scalar quantity','tensor quantity','dimensionless quantity','B','Potential difference is a scalar quantity; it has magnitude and sign but no direction.'],
+['If 20 J of work is required to move 2 C of charge between two points, the magnitude of the potential difference is','5 V','10 V','20 V','40 V','B','V=W/q=20/2=10 V.'],
+['A positive charge moves spontaneously in an electric field from','lower potential to higher potential','higher potential to lower potential','zero potential to infinite potential only','any direction with increasing potential','B','A positive charge tends to move from higher electric potential toward lower potential when released.'],
+['The work done by the electric field in moving charge q from A to B is','q(V_B−V_A)','q(V_A−V_B)','q(V_A+V_B)','q/(V_A−V_B)','B','Work done by the electric field is W=q(V_A−V_B)=−qΔV.'],
+['If V_A=50 V and V_B=20 V, the potential difference V_B−V_A is','+70 V','+30 V','−30 V','−70 V','C','V_B−V_A=20−50=−30 V.'],
+['A uniform electric field has magnitude 200 N/C. A point is displaced 0.5 m along the field. The potential change is','+100 V','−100 V','+400 V','zero','B','For displacement along E, ΔV=−Ed=−(200)(0.5)=−100 V.'],
+['A charge of 5 μC moves through a potential difference of 40 V. The magnitude of work associated with the potential change is','8 μJ','20 μJ','200 μJ','2 mJ','C','|W|=|qΔV|=(5×10⁻⁶)(40)=200×10⁻⁶ J=200 μJ.'],
+['Two points in an electrostatic field have the same electric potential. The work done in moving a charge between them is','positive','negative','zero','infinite','C','Since ΔV=0, the work done by or against the electrostatic field for the transfer is zero.'],
+['For an electrostatic field, the potential difference between two points is independent of the path because the field is','non-conservative','conservative','always uniform','always zero','B','Electrostatic fields are conservative, so the line integral between two points is path independent.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=String.fromCharCode(65+n)===q[5];const correct=q[5].charCodeAt(0)-65;document.querySelectorAll('.opt').forEach((b,k)=>{if(k===correct)b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

@@ -15,9 +15,9 @@ const qs=[
 ['In terms of capacitance C and potential difference V, the energy stored is','U=CV²','U=1/2 CV²','U=2CV²','U=V²/(2C)',1,'Using Q=CV in U=1/2 QV gives U=1/2 CV².'],
 ['In terms of charge Q and capacitance C, the stored energy is','U=Q²/C','U=Q²/(2C)','U=2Q²/C','U=CQ²/2',1,'The equivalent form is U=Q²/(2C).'],
 ['The SI unit of energy stored in a capacitor is','coulomb','volt','joule','farad',2,'Energy is measured in joules (J).'],
-['The energy stored in a capacitor is equal to the','area under the Q-V charging curve','slope of the Q-V curve','slope of the V-Q curve only','product Q/V',0,'During charging, U is the area under the V-Q curve, giving U=1/2 QV.'],
+['The energy stored in a capacitor is equal to the','area under the V-Q charging curve','slope of the Q-V curve','slope of the V-Q curve only','product Q/V',0,'During charging, the stored energy is the area under the V-Q graph, giving U=1/2 QV for a linear capacitor.'],
 ['A 4 μF capacitor is charged to 5 V. Its stored energy is','10 μJ','25 μJ','50 μJ','100 μJ',2,'U=1/2 CV²=1/2×4×10⁻⁶×25=50 μJ.'],
-['A capacitor of 2 μF is charged to 10 V. Its stored energy is','50 μJ','100 μJ','200 μJ','20 μJ',0,'U=1/2×2 μF×(10 V)²=100 μJ? Check: 0.5×2×100 μJ=100 μJ.'],
+['A capacitor of 2 μF is charged to 10 V. Its stored energy is','50 μJ','100 μJ','200 μJ','20 μJ',1,'U=1/2×2×10⁻⁶×100=100 μJ.'],
 ['If the potential difference across a capacitor is doubled while C remains constant, its stored energy becomes','2 times','4 times','1/2 times','unchanged',1,'Since U=1/2 CV², energy is proportional to V².'],
 ['If the charge on an isolated capacitor is doubled while C remains constant, its stored energy becomes','2 times','4 times','1/4 times','unchanged',1,'Since U=Q²/(2C), energy is proportional to Q².'],
 ['If capacitance is doubled while V remains constant, the stored energy becomes','half','double','four times','unchanged',1,'At constant V, U=1/2 CV², so doubling C doubles U.'],
@@ -25,9 +25,8 @@ const qs=[
 ['A charged capacitor is disconnected from its battery before a dielectric of constant K is inserted. Its stored energy becomes','KU₀','U₀/K','U₀','K²U₀',1,'For an isolated capacitor Q is constant. Since C increases K times, U=Q²/(2C) decreases to U₀/K.'],
 ['The energy density in the electric field of a capacitor filled with a linear dielectric is','u=εE²','u=1/2 εE²','u=2εE²','u=ε/E²',1,'For a linear dielectric, energy density is u=1/2 εE².'],
 ['A capacitor has C=10 μF and V=20 V. Its stored energy is','1 mJ','2 mJ','4 mJ','20 mJ',1,'U=1/2×10×10⁻⁶×400=2×10⁻³ J=2 mJ.'],
-['The work done by the battery during charging an ideal capacitor from zero to charge Q at voltage V is','equal to stored energy only','twice the stored energy','half the stored energy','zero',1,'For an ideal capacitor, battery work is QV, while stored energy is 1/2 QV; the other half is associated with the charging process/field interaction in the ideal model.']
+['The work done by an ideal battery during charging a capacitor from zero to final charge Q at final voltage V is','equal to stored energy only','twice the stored energy','half the stored energy','zero',1,'Battery work is W=QV, while the stored energy is U=1/2 QV. Therefore W=2U for an ideal capacitor charged from zero.']
 ];
-qs[6]=['A capacitor of 2 μF is charged to 10 V. Its stored energy is','50 μJ','100 μJ','200 μJ','20 μJ',1,'U=1/2 CV²=1/2×2×10⁻⁶×100=100 μJ.'];
 let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
 function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
 function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Ohm's Law</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Ohm's Law</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Ohm’s law for an ohmic conductor is expressed as','V=IR','V=I/R','V=R/I','V=I+R',0,'Ohm’s law states that, at constant physical conditions, V is directly proportional to I: V=IR.'],
+['The SI unit of electrical resistance is','volt','ampere','ohm','watt',2,'Resistance is measured in ohms (Ω).'],
+['From V=IR, resistance can be written as','R=VI','R=V/I','R=I/V','R=V+I',1,'Resistance is the ratio of potential difference to current: R=V/I.'],
+['A conductor carries 2 A when connected to 10 V. Its resistance is','2 Ω','5 Ω','10 Ω','20 Ω',1,'R=V/I=10/2=5 Ω.'],
+['For an ohmic conductor, the V-I graph is','a straight line through the origin','a circle','a horizontal line only','a parabola',0,'For an ohmic conductor at constant temperature, V is proportional to I, giving a straight line through the origin.'],
+['The slope of a V versus I graph for an ohmic conductor represents','current','conductance','resistance','power',2,'From V=IR, slope ΔV/ΔI=R.'],
+['If voltage across a fixed resistor is doubled, the current','halves','doubles','becomes four times','remains unchanged',1,'For fixed R, I=V/R, so doubling V doubles I.'],
+['If the resistance of a conductor is doubled at constant voltage, current','doubles','halves','becomes four times','remains unchanged',1,'I=V/R, so doubling R makes current half.'],
+['A 6 Ω resistor is connected across 12 V. The current is','0.5 A','2 A','6 A','72 A',1,'I=V/R=12/6=2 A.'],
+['A current of 3 A flows through a 4 Ω resistor. The potential difference is','0.75 V','1.33 V','7 V','12 V',3,'V=IR=(3)(4)=12 V.'],
+['The resistance of a metallic conductor generally increases when its temperature','decreases','increases','becomes zero','is unchanged in all cases',1,'For most metals, resistance increases with increasing temperature.'],
+['An ohmic conductor obeys Ohm’s law when','physical conditions such as temperature remain constant','its voltage is always zero','its current is always zero','it is disconnected',0,'Ohm’s law applies when the relevant physical conditions, especially temperature, remain constant.'],
+['Two resistors 2 Ω and 4 Ω are connected in series. Their equivalent resistance is','2 Ω','4 Ω','6 Ω','8 Ω',2,'For series resistors, R_eq=R1+R2=2+4=6 Ω.'],
+['Two resistors 2 Ω and 4 Ω are connected in parallel. Their equivalent resistance is','6 Ω','4/3 Ω','3 Ω','8 Ω',1,'For parallel resistors, R_eq=(2×4)/(2+4)=8/6=4/3 Ω.'],
+['A 10 Ω resistor carries 0.5 A. The power dissipated is','2.5 W','5 W','10 W','20 W',0,'P=I²R=(0.5)²(10)=2.5 W.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

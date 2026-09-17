@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Electric Current</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Electric Current</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Electric current is defined as the','rate of flow of electric charge','total charge stored','rate of change of voltage','electric field per unit charge',0,'Electric current is the rate of flow of electric charge: I=dQ/dt.'],
+['The SI unit of electric current is','volt','ampere','coulomb','ohm',1,'The ampere (A) is the SI base unit of electric current.'],
+['Electric current is a','vector quantity','scalar quantity','tensor quantity','dimensionless quantity',1,'Electric current is treated as a scalar quantity; its direction is specified separately.'],
+['If 10 C of charge passes through a conductor in 2 s, the current is','2 A','5 A','10 A','20 A',1,'I=Q/t=10/2=5 A.'],
+['In a metallic conductor, the mobile charge carriers are mainly','protons','neutrons','electrons','photons',2,'Conduction electrons are the main mobile charge carriers in metals.'],
+['The direction of conventional current in a metallic conductor is','opposite to electron drift','same as electron drift','always perpendicular to electron drift','random',0,'Conventional current is defined in the direction of positive-charge motion, opposite to electron drift in metals.'],
+['When no external electric field is applied, free electrons in a metal have','zero random speed','random motion with zero average velocity','only drift motion','uniform motion in one direction',1,'Electrons move randomly due to thermal motion; their average velocity is zero when there is no applied field.'],
+['Drift velocity of electrons in a conductor is directed','along the electric field','opposite to the electric field','perpendicular to the electric field','randomly',1,'An electron has negative charge, so its drift velocity is opposite to the applied electric field.'],
+['For a conductor with n charge carriers per unit volume, charge q, area A and drift velocity v_d, the current magnitude is','nqv_d/A','nqAv_d','qA/(nv_d)','nAv_d/q',1,'The current magnitude is I=nqAv_d. For electrons, the magnitude is I=neAv_d.'],
+['Current density is defined as','current × area','current per unit area normal to the flow','charge per unit volume','voltage per unit length',1,'Current density is j=I/A for uniform current through an area normal to the flow.'],
+['The SI unit of current density is','A m','A/m²','A/m','C/m²',1,'Current density has SI unit A m⁻².'],
+['A wire carries 2 A current uniformly through a cross-sectional area of 4×10⁻⁶ m². Its current density is','5×10⁵ A/m²','5×10⁵?','8×10⁻⁶ A/m²','2×10⁶ A/m²',0,'j=I/A=2/(4×10⁻⁶)=5×10⁵ A/m².'],
+['The SI unit of drift velocity is','m/s','m²/s','A/m²','V/m',0,'Drift velocity is a velocity, so its SI unit is m/s.'],
+['The relation between drift velocity and electric field magnitude in the Drude model is','v_d=eEτ/m','v_d=m/(eEτ)','v_d=e/(mEτ)','v_d=E/(eτm)',0,'The magnitude is v_d=eEτ/m, where τ is the relaxation time.'],
+['The relaxation time of electrons is the average time between','two successive collisions','two successive batteries','two voltage measurements','two current directions',0,'Relaxation time τ is the average interval between successive collisions of a conduction electron with ions.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

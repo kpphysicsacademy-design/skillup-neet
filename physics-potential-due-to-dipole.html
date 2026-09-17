@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Potential Due to a Dipole</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>⚡ Potential Due to a Dipole</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['The electric potential at a point due to an electric dipole is','always a vector','a scalar quantity','always zero','a tensor',1,'Electric potential is scalar. For a dipole it is the algebraic sum of the potentials of the two charges.'],
+['For a dipole of moment p, at a distant point r making angle θ with the dipole axis, the potential is proportional to','p/r','p/r²','p cosθ/r²','p cosθ/r³',2,'For r much larger than the dipole separation, V=(1/4πε₀)(p cosθ/r²).'],
+['The far-field dipole potential is directly proportional to','1/p','p','p²','zero',1,'The dipole potential in the far-field approximation is directly proportional to dipole moment p.'],
+['At the axial point of a short electric dipole, θ is','0°','45°','90°','180°',0,'On the axial line in the direction of the dipole moment, θ=0°, so the potential has maximum positive magnitude for a given r.'],
+['At the equatorial point of a short electric dipole, the angle between p and r is','0°','30°','60°','90°',3,'On the equatorial line, r is perpendicular to p, so θ=90° and cosθ=0.'],
+['The electric potential due to a short dipole at its equatorial point is','maximum positive','maximum negative','zero','infinite',2,'Since cos90°=0, the far-field dipole potential at an equatorial point is zero.'],
+['At the same large distance r, the magnitude of dipole potential is maximum on the','equatorial line','axial line','perpendicular bisector only','any direction equally',1,'The angular factor is cosθ, whose magnitude is maximum when θ=0° or 180°, i.e. on the axial line.'],
+['For a short dipole, if the distance from the dipole is doubled while θ remains fixed, the potential becomes','twice','half','one-fourth','four times',2,'Since V∝1/r² in the far field, doubling r reduces V to one-fourth.'],
+['If the dipole moment is doubled at the same distant point, the dipole potential','becomes half','doubles','becomes four times','remains unchanged',1,'The far-field dipole potential is directly proportional to p.'],
+['The potential at an axial point in the far-field approximation is','(1/4πε₀)(p/r²)','(1/4πε₀)(p/r)','(1/4πε₀)(p/r³)','zero',0,'For θ=0°, cosθ=1, giving V=(1/4πε₀)(p/r²).'],
+['The potential at an equatorial point of a short dipole is zero because','electric field is zero everywhere','the two charge potentials cancel','the charges are absent','r is zero',1,'At an equatorial point the distances to +q and −q are equal, so their scalar potentials are equal and opposite.'],
+['A dipole has p=2×10⁻⁸ C·m and a distant point is at r=1 m on its axial line. Taking k=9×10⁹ N·m²/C², the potential is','18 V','180 V','1.8 V','0.18 V',0,'V=kp/r²=(9×10⁹)(2×10⁻⁸)/1²=18 V.'],
+['For p=4×10⁻⁸ C·m, r=2 m and θ=60°, taking k=9×10⁹ N·m²/C², the far-field potential is','45 V','90 V','22.5 V','11.25 V',0,'V=kp cosθ/r²=(9×10⁹)(4×10⁻⁸)(0.5)/4=45 V.'],
+['For a short dipole, points with the same r and the same value of cosθ have','the same potential','opposite potential always','zero potential always','infinite potential',0,'In the far-field expression V=k p cosθ/r², equal r and equal cosθ give equal potential.'],
+['The potential due to an ideal electric dipole at very large distance decreases as','1/r','1/r²','1/r³','r²',1,'The dipole potential falls as 1/r², whereas the dipole electric field falls as 1/r³ in the far field.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

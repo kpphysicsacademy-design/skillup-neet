@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics — Ammeter concept practice with interactive MCQs.">
+<title>SkillUp Physics | Ammeter</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>⚡ Ammeter</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['An ammeter is used to measure','electric current','potential difference','resistance only','power only',0,'An ammeter measures the current flowing through a circuit.'],
+['An ideal ammeter has','zero resistance','infinite resistance','very high capacitance','zero inductance only',0,'An ideal ammeter has zero resistance so its insertion does not alter the circuit current.'],
+['An ammeter is connected in a circuit','in series','in parallel','across the battery only','in series with a capacitor only',0,'The same current being measured must pass through the ammeter, so it is connected in series.'],
+['A galvanometer is converted into an ammeter by connecting','a low resistance shunt in parallel','a high resistance in series','a high resistance in parallel','a capacitor in series',0,'A low-resistance shunt provides an alternative path for most of the current.'],
+['If galvanometer resistance is G and full-scale current is Ig, the shunt S for range I is','S=IgG/(I−Ig)','S=(I−Ig)G','S=IG/Ig','S=G(I+Ig)',0,'Using equal potential drops across G and S: IgG=(I−Ig)S, hence S=IgG/(I−Ig).'],
+['To increase the current range of an ammeter, the shunt resistance should generally be','decreased','increased','made infinite','removed',0,'A smaller shunt carries more of the excess current, allowing a larger total current range.'],
+['The resistance of a practical ammeter is','small but non-zero','infinite','always exactly zero','equal to the circuit resistance',0,'Real ammeters have a small internal resistance, although an ideal ammeter has zero resistance.'],
+['If an ammeter is mistakenly connected in parallel across a cell, it may','draw a very large current','measure voltage accurately','have no effect','increase its resistance to infinity',0,'Because an ammeter has very low resistance, a parallel connection can produce a large current and may damage the meter or circuit.'],
+['A 1 mA galvanometer of resistance 100 Ω is converted to a 1 A ammeter. The required shunt is approximately','0.100 Ω','10 Ω','100 Ω','0.001 Ω',0,'S=IgG/(I−Ig)=0.001×100/(1−0.001)≈0.100 Ω.'],
+['For an ammeter range I, the current through the shunt is','I−Ig','I+Ig','I/Ig','Ig−I',0,'The total current splits between the galvanometer and shunt: I=Ig+Is, so Is=I−Ig.'],
+['The potential difference across the galvanometer and its shunt in an ammeter is','the same','always zero','different by a factor of I','infinite',0,'The galvanometer and shunt are connected in parallel, so their potential differences are equal.'],
+['An ideal ammeter should cause the least possible','change in circuit current','change in voltage source','increase in circuit resistance','electromagnetic induction',0,'Its very low resistance minimizes disturbance to the circuit current.'],
+['If the shunt resistance is S and galvanometer resistance is G, their equivalent resistance is','GS/(G+S)','G+S','G−S','GS',0,'For parallel resistances, Req=GS/(G+S).'],
+['A 2 A current enters an ammeter whose galvanometer full-scale current is 2 mA. The approximate fraction of current through the galvanometer is','0.001','0.01','0.1','1',0,'Ig/I=0.002/2=0.001, so about 0.1% flows through the galvanometer.'],
+['The scale of a properly designed ideal ammeter is calibrated directly in','amperes','volts','ohms','watts',0,'An ammeter is calibrated to indicate current, whose SI unit is the ampere (A).']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`}}
+$('next').onclick=next;render();
+</script>
+</body></html>

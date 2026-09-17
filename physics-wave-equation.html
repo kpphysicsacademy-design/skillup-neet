@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Wave Equation</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>🌊 Wave Equation</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['A standard sinusoidal progressive wave travelling in the +x direction can be written as','y=A sin(kx+ωt+φ)','y=A sin(kx−ωt+φ)','y=A sin(ωx−kt)','y=A cos(kx)',1,'For propagation in the +x direction, a common form is y=A sin(kx−ωt+φ).'],
+['In the wave equation y=A sin(kx−ωt+φ), A represents','wavelength','frequency','amplitude','wave number',2,'A is the amplitude, the maximum displacement from the mean position.'],
+['In y=A sin(kx−ωt+φ), the quantity k is called','angular frequency','wave number','phase constant','time period',1,'The wave number is k=2π/λ and represents phase change per unit distance.'],
+['The wave number k is related to wavelength λ by','k=λ/2π','k=2π/λ','k=2πλ','k=1/λ²',1,'The relation is k=2π/λ.'],
+['The angular frequency ω is related to frequency f by','ω=f/2π','ω=2πf','ω=πf','ω=f²',1,'Angular frequency is ω=2πf.'],
+['The phase of a wave at position x and time t is represented by','A','k only','kx−ωt+φ','λ only',2,'The instantaneous phase is the dimensionless quantity kx−ωt+φ.'],
+['For y=A sin(kx−ωt+φ), the wave speed is','ωk','ω/k','k/ω','ω+k',1,'Using k=2π/λ and ω=2πf, v=ω/k=fλ.'],
+['If k=2π rad/m and ω=4π rad/s, the wave speed is','0.5 m/s','1 m/s','2 m/s','4 m/s',2,'v=ω/k=4π/2π=2 m/s.'],
+['For y=A sin(kx−ωt), at a fixed position x, the displacement varies with time as','a constant','a sinusoidal function','a linear function','zero always',1,'At fixed x, kx is constant, so displacement varies sinusoidally with time.'],
+['For y=A sin(kx−ωt), at a fixed time t, the displacement varies with x as','a sinusoidal function','a constant only','an exponential function','zero always',0,'At fixed t, −ωt is constant, so displacement varies sinusoidally with position.'],
+['Two points separated by one wavelength in a sinusoidal wave have phase difference','0','π/2','π','2π',3,'A distance λ corresponds to phase difference kλ=2π radians, so the points are in phase.'],
+['Two points separated by λ/2 have phase difference','0','π/2','π','2π',2,'The phase difference is k(λ/2)=π radians.'],
+['If the equation is y=0.02 sin(4πx−20πt), the wavelength is','0.25 m','0.5 m','1 m','2 m',1,'Comparing with kx−ωt, k=4π rad/m. Thus λ=2π/k=0.5 m.'],
+['For y=0.01 sin(2πx−10πt), the frequency is','2 Hz','5 Hz','10 Hz','20 Hz',1,'Comparing with ωt, ω=10π rad/s. Hence f=ω/(2π)=5 Hz.'],
+['Which statement about the wave equation is correct?','Amplitude and phase have the same units','k has unit rad/m and ω has unit rad/s','wave number has unit hertz','phase is measured in metres',1,'Wave number has units rad/m and angular frequency has units rad/s; radians are dimensionless.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

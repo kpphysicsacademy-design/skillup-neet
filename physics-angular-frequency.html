@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Angular Frequency</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}
+.wrap{max-width:760px;margin:auto;padding:22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}
+h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}
+.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}
+.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}
+.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}
+.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}
+.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}
+.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}
+.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}
+.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}
+@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>🔄 Angular Frequency</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Angular frequency of a periodic motion is represented by','T','f','ω','A',2,'Angular frequency is conventionally represented by ω.'],
+['The SI unit of angular frequency is','hertz','radian per second','second','metre per second',1,'Angular frequency has SI unit radian per second (rad s⁻¹).'],
+['The relation between angular frequency ω and frequency f is','ω=f/2π','ω=2πf','ω=πf','ω=f+2π',1,'One cycle corresponds to 2π radians, so ω=2πf.'],
+['The relation between angular frequency ω and time period T is','ω=2πT','ω=T/2π','ω=2π/T','ω=1/(2πT)',2,'Since f=1/T and ω=2πf, ω=2π/T.'],
+['If the frequency of an oscillator is 5 Hz, its angular frequency is','5π rad/s','10π rad/s','2.5π rad/s','25π rad/s',1,'ω=2πf=2π×5=10π rad/s.'],
+['If the time period is 2 s, the angular frequency is','π rad/s','2π rad/s','4π rad/s','1/π rad/s',0,'ω=2π/T=2π/2=π rad/s.'],
+['Angular frequency measures the rate of change of','mass','phase','amplitude','energy only',1,'For phase θ=ωt+φ, dθ/dt=ω, so angular frequency is the rate of phase change.'],
+['One complete oscillation corresponds to an angular phase change of','π/2','π','2π','4π',2,'A complete cycle corresponds to 2π radians of phase.'],
+['A particle has angular frequency 20 rad/s. Its frequency is','10/π Hz','20π Hz','20 Hz','40π Hz',0,'f=ω/(2π)=20/(2π)=10/π Hz.'],
+['If frequency is doubled while the motion remains periodic, angular frequency becomes','half','unchanged','double','four times',2,'Because ω=2πf, angular frequency is directly proportional to frequency.'],
+['If the time period is doubled, angular frequency becomes','double','half','four times','unchanged',1,'Since ω=2π/T, angular frequency is inversely proportional to time period.'],
+['For SHM x=A cos(ωt+φ), the angular frequency determines the','rate of oscillation','maximum displacement only','mass only','equilibrium position only',0,'ω determines how rapidly the phase changes and therefore the oscillation rate.'],
+['The angular frequency of a 1 Hz oscillator is','1 rad/s','π rad/s','2π rad/s','4π rad/s',2,'ω=2πf=2π×1=2π rad/s.'],
+['If ω=π rad/s, the time period is','1 s','2 s','π s','1/2 s',1,'T=2π/ω=2π/π=2 s.'],
+['Which statement is correct for angular frequency?','It is always equal to frequency','It is 2π times the ordinary frequency','It has SI unit second','It is independent of period',1,'Angular frequency and frequency are related by ω=2πf.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

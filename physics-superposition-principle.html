@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Superposition Principle</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>➕ Superposition Principle</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['The principle of superposition states that when two or more waves overlap, the resultant displacement is','the product of their displacements','the algebraic sum of their individual displacements','always zero','the average of their frequencies',1,'When waves overlap, the resultant displacement at a point is the algebraic (vector) sum of the individual displacements.'],
+['The superposition principle is applicable to','only sound waves','only light waves','linear wave systems','only stationary waves',2,'Superposition applies to waves obeying linearity, so the individual wave effects add.'],
+['If two waves produce displacements y₁ and y₂ at the same point, the resultant displacement is','y₁−y₂ always','y₁y₂','y₁+y₂','y₁/y₂',2,'For linear waves, the resultant displacement is y=y₁+y₂.'],
+['When two waves are in phase and have equal amplitudes A, their resultant amplitude is','0','A/2','A','2A',3,'Constructive interference occurs for in-phase equal waves, giving resultant amplitude 2A.'],
+['When two waves of equal amplitude A are exactly out of phase, the resultant amplitude is','0','A','2A','A²',0,'For a phase difference of π, equal displacements cancel, giving zero resultant amplitude.'],
+['For two waves of amplitudes A₁ and A₂ with phase difference φ, resultant amplitude R is','A₁+A₂ only','√(A₁²+A₂²+2A₁A₂ cosφ)','A₁A₂ cosφ','A₁²+A₂²',1,'The resultant amplitude is R=√(A₁²+A₂²+2A₁A₂ cosφ).'],
+['For two waves with equal amplitudes A and phase difference φ, the resultant amplitude is','2A cos(φ/2)','A cosφ','2A sinφ','A/2',0,'For equal amplitudes, R=2A|cos(φ/2)|. The magnitude is commonly written 2A cos(φ/2) for 0≤φ≤π.'],
+['Two equal waves have a phase difference of π/2. Their resultant amplitude is','0','A','√2 A','2A',2,'R=2A cos(π/4)=√2 A.'],
+['Constructive interference occurs when the phase difference is','π','3π/2','2nπ','(2n+1)π',2,'Constructive interference occurs when φ=2nπ, where n is an integer.'],
+['Destructive interference for equal amplitudes occurs when the phase difference is','2nπ','(2n+1)π','π/2 only','0 only',1,'Equal waves cancel when their phase difference is an odd multiple of π.'],
+['If two waves have amplitudes 3 units and 4 units and are in phase, the resultant amplitude is','1 unit','5 units','7 units','12 units',2,'For in-phase waves, R=A₁+A₂=3+4=7 units.'],
+['If two waves have amplitudes 3 units and 4 units and are opposite in phase, the resultant amplitude is','1 unit','7 units','12 units','0 units',0,'For opposite-phase waves, R=|A₁−A₂|=|3−4|=1 unit.'],
+['In interference, the intensity of a wave is proportional to','amplitude','amplitude squared','frequency only','wavelength only',1,'For a given type of wave, intensity is proportional to the square of amplitude: I∝A².'],
+['For two coherent waves, stable interference fringes require','random phase difference','a constant phase difference','different frequencies always','zero amplitudes',1,'Coherent waves maintain a constant phase difference, allowing a stable interference pattern.'],
+['Which is a direct consequence of superposition of waves?','Interference','Conservation of mass only','Gravitational attraction','Thermal expansion',0,'Interference—constructive and destructive—is a direct consequence of wave superposition.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

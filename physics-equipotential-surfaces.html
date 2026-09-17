@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Equipotential Surfaces</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>⚡ Equipotential Surfaces</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['An equipotential surface is a surface on which','electric field is constant','electric potential is the same at every point','charge is constant','electric flux is maximum',1,'Every point on an equipotential surface has the same electric potential.'],
+['The work done in moving a charge along an equipotential surface is','positive','negative','zero','infinite',2,'Since the potential difference along an equipotential surface is zero, W=qΔV=0.'],
+['Electric field lines are always','parallel to equipotential surfaces','perpendicular to equipotential surfaces','inside equipotential surfaces','randomly oriented',1,'The electric field is normal to an equipotential surface.'],
+['The electric field is related to potential by','E=+dV/dx','E=−dV/dx','E=Vx','E=x/V',1,'In one dimension, E=−dV/dx. The negative sign indicates potential decreases in the field direction.'],
+['For a point charge, equipotential surfaces are','planes','cylinders','spheres centered on the charge','cones',2,'For an isolated point charge, V depends only on r, so surfaces of constant V are concentric spheres.'],
+['For a uniform electric field, equipotential surfaces are','concentric spheres','parallel planes perpendicular to the field','parallel to the field lines','cylinders along the field',1,'In a uniform field, equal-potential surfaces are parallel planes normal to the electric-field direction.'],
+['Two points on the same equipotential surface have','different potentials','the same potential','opposite potentials always','zero charge',1,'By definition, all points on one equipotential surface have identical potential.'],
+['If the potential difference between two points is zero, the work done in moving charge q between them is','q','q²','zero','q/2',2,'W=qΔV, so when ΔV=0, the work is zero.'],
+['Equipotential surfaces can never','intersect each other','be spherical','be planar','surround a charge',0,'If two equipotential surfaces intersected, the intersection point would have two different potential values, which is impossible.'],
+['Where equipotential surfaces are closer together, the magnitude of electric field is generally','smaller','larger','zero','unchanged regardless of spacing',1,'A larger potential change over a smaller distance corresponds to a larger field magnitude, |E|≈|ΔV|/Δr.'],
+['Inside an ideal electrostatic conductor in equilibrium, the electric field is','maximum','zero','infinite','variable',1,'The electrostatic field inside a conductor in equilibrium is zero, so the conductor is an equipotential region.'],
+['The surface of an ideal conductor in electrostatic equilibrium is','an equipotential surface','always charged positively','parallel to electric field','a region of nonzero tangential field',0,'The tangential electric field at a conductor surface is zero; therefore the conductor surface is equipotential.'],
+['A charge of 2 μC is moved through an equipotential surface. The work done by the electrostatic field is','2 μJ','1 μJ','zero','4 μJ',2,'No potential difference exists along an equipotential surface, so W=qΔV=0.'],
+['In a uniform electric field of 100 N/C, the magnitude of potential difference for a displacement of 0.5 m along the field is','25 V','50 V','100 V','200 V',1,'|ΔV|=Ed=(100)(0.5)=50 V.'],
+['A positive test charge released in an electrostatic field tends to move toward','higher electric potential','lower electric potential','higher charge density only','infinite potential',1,'A positive charge naturally moves in the direction of decreasing electric potential because electric potential energy U=qV decreases.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

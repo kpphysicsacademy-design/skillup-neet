@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Frequency</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>🔁 Frequency</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Frequency of a periodic motion is the','time for one cycle','number of complete cycles per unit time','maximum displacement','angular displacement only',1,'Frequency is the number of complete cycles or oscillations occurring per unit time.'],
+['The SI unit of frequency is','second','radian','hertz','metre',2,'The SI unit of frequency is hertz (Hz), equal to one cycle per second.'],
+['The relation between frequency f and time period T is','f=T','f=1/T','f=2πT','f=T²',1,'Frequency and time period are reciprocals: f=1/T.'],
+['If an oscillator has time period 0.5 s, its frequency is','0.5 Hz','1 Hz','2 Hz','4 Hz',2,'f=1/T=1/0.5=2 Hz.'],
+['If a periodic motion has frequency 5 Hz, its time period is','5 s','1 s','0.2 s','0.05 s',2,'T=1/f=1/5=0.2 s.'],
+['A frequency of 10 Hz means that the motion completes','10 cycles per second','10 seconds per cycle','1 cycle per 10 seconds','100 cycles per second',0,'10 Hz means 10 complete cycles occur every second.'],
+['If frequency is doubled, the time period becomes','double','half','four times','unchanged',1,'Since T=1/f, doubling frequency makes the time period half.'],
+['If the time period is doubled, frequency becomes','double','half','four times','unchanged',1,'Since f=1/T, doubling T reduces frequency to half.'],
+['The frequency of a 1 Hz oscillator is','0.5 cycle/s','1 cycle/s','2 cycles/s','π cycles/s',1,'1 Hz is exactly one cycle per second.'],
+['A fan completes 120 rotations in 60 s. Its rotation frequency is','1 Hz','2 Hz','60 Hz','120 Hz',1,'f=number of rotations/time=120/60=2 Hz.'],
+['For periodic motion, frequency is related to angular frequency by','ω=f/2π','ω=2πf','ω=π/f','ω=f+2π',1,'Angular frequency is ω=2πf.'],
+['If angular frequency is 4π rad/s, the frequency is','1 Hz','2 Hz','4 Hz','8 Hz',1,'f=ω/(2π)=4π/(2π)=2 Hz.'],
+['A particle oscillates with frequency 2.5 Hz. Its time period is','0.2 s','0.4 s','2.5 s','5 s',1,'T=1/2.5=0.4 s.'],
+['The frequency of an ideal SHM is determined by its','rate of oscillation','maximum displacement only','instantaneous displacement only','position at one instant only',0,'Frequency specifies how rapidly the oscillator repeats its motion.'],
+['Which statement is correct?','Frequency and period have the same numerical meaning always','Frequency is the reciprocal of period','Frequency has SI unit second','Frequency is independent of periodic repetition',1,'The fundamental relation is f=1/T, with f in hertz and T in seconds.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

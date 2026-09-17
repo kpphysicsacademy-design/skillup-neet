@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Capacitor</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>⚡ Capacitor</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['A capacitor is a device used primarily to store','electric charge and electrical energy','magnetic flux only','mechanical energy only','electric current permanently',0,'A capacitor stores electric charge and electrical energy in its electric field.'],
+['The SI unit of capacitance is','coulomb','volt','farad','ohm',2,'Capacitance is measured in farads (F).'],
+['Capacitance is defined as','C=V/Q','C=Q/V','C=QV','C=Q+V',1,'Capacitance is the charge stored per unit potential difference: C=Q/V.'],
+['For an isolated parallel-plate capacitor in vacuum, capacitance is','ε₀A/d','ε₀d/A','d/(ε₀A)','A/(ε₀d)',0,'For parallel plates, C=ε₀A/d in vacuum.'],
+['If the plate area of a parallel-plate capacitor is doubled, its capacitance','halves','doubles','becomes four times','remains unchanged',1,'Since C∝A, doubling the plate area doubles capacitance.'],
+['If the separation between parallel plates is doubled, capacitance','doubles','halves','becomes four times','remains unchanged',1,'Since C∝1/d, doubling separation halves capacitance.'],
+['A dielectric inserted completely between capacitor plates generally','decreases capacitance','increases capacitance','makes capacitance zero','has no effect',1,'A dielectric with relative permittivity greater than one increases capacitance by that factor.'],
+['For a capacitor with dielectric constant K completely filling the space, capacitance becomes','C/K','KC','C+K','C−K',1,'With dielectric, C=K C₀ for the same geometry.'],
+['The energy stored in a capacitor is','CV','QV','½CV²','2CV²',2,'The stored electrostatic energy is U=½CV²=½QV=Q²/(2C).'],
+['A 2 μF capacitor is connected to 10 V. Its charge is','5 μC','20 μC','0.2 μC','200 μC',1,'Q=CV=(2 μF)(10 V)=20 μC.'],
+['A 4 μF capacitor charged to 5 V stores energy equal to','10 μJ','25 μJ','50 μJ','100 μJ',0,'U=½CV²=½(4×10⁻⁶)(25)=50×10⁻⁶ J=50 μJ.'],
+['Capacitors connected in parallel have equivalent capacitance','less than the smallest capacitor','equal to the largest only','sum of individual capacitances','reciprocal of the sum',2,'For parallel capacitors, C_eq=C₁+C₂+… .'],
+['For capacitors connected in series, the equivalent capacitance satisfies','C_eq=C₁+C₂','1/C_eq=1/C₁+1/C₂+…','C_eq=C₁C₂','C_eq is always larger than every capacitor',1,'For series capacitors, reciprocals add.'],
+['When a charged capacitor is disconnected from a battery and its plate separation is increased, its charge','remains constant','doubles','halves','becomes zero',0,'With the capacitor isolated, no charge path exists, so Q remains constant while V changes.'],
+['The electric field between large parallel capacitor plates, neglecting edge effects, is approximately','Q/(ε₀A)','Qε₀A','ε₀A/Q','A/(Qε₀)',0,'For parallel plates, E=σ/ε₀=Q/(ε₀A) in vacuum.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

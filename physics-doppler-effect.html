@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Doppler Effect</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
+.wrap{max-width:760px;margin:auto;padding:22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
+h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}
+.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
+.fill{height:100%;width:0;background:#4caf50;transition:.3s}
+.q{font-size:20px;font-weight:700;margin-bottom:18px}
+.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
+.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}
+.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
+.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}
+.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}
+@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>🚗 Doppler Effect</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['The Doppler effect is the apparent change in','amplitude only','frequency due to relative motion between source and observer','speed of light only','mass of the source',1,'The Doppler effect is the apparent change in observed frequency caused by relative motion between the source and observer.'],
+['When a sound source approaches a stationary observer, the observed frequency is','greater than the source frequency','less than the source frequency','zero','unchanged in every case',0,'Approaching motion causes successive wavefronts to reach the observer more rapidly, increasing the observed frequency.'],
+['When a sound source moves away from a stationary observer, the observed frequency is','greater than the source frequency','less than the source frequency','infinite','always equal to zero',1,'Receding motion spreads successive wavefronts farther apart, decreasing the observed frequency.'],
+['For a stationary source and observer moving toward the source with speed vₒ, the observed frequency in a medium with sound speed v is','f(v−vₒ)/v','f(v+vₒ)/v','fvₒ/v only','f',1,'For an observer moving toward a stationary source, f′ = f(v+vₒ)/v.'],
+['For a stationary source and observer moving away from the source with speed vₒ, the observed frequency is','f(v+vₒ)/v','f(v−vₒ)/v','fv/vₒ','f(vₒ−v)/v',1,'For an observer moving away from a stationary source, f′ = f(v−vₒ)/v.'],
+['For a stationary observer and source moving toward the observer with speed vₛ, the observed frequency is','fv/(v−vₛ)','fv/(v+vₛ)','f(v−vₛ)/v','f(v+vₛ)/v',0,'For an approaching source, wavefronts are compressed and f′ = fv/(v−vₛ).'],
+['For a stationary observer and source moving away with speed vₛ, the observed frequency is','fv/(v−vₛ)','fv/(v+vₛ)','f(v+vₛ)/v','f',1,'For a receding source, f′ = fv/(v+vₛ).'],
+['If source and observer are both stationary relative to the medium, the observed frequency is','always double the source frequency','equal to the source frequency','zero','half the source frequency',1,'With no relative motion between source and observer, there is no Doppler shift.'],
+['A source of frequency 500 Hz approaches a stationary observer at 20 m/s. If sound speed is 340 m/s, the observed frequency is approximately','472 Hz','531 Hz','500 Hz','360 Hz',1,'For an approaching source, f′ = fv/(v−vₛ) = 500×340/(340−20) ≈ 531 Hz.'],
+['A stationary source emits 680 Hz. An observer moves toward it at 34 m/s. If sound speed is 340 m/s, the observed frequency is','612 Hz','748 Hz','680 Hz','714 Hz',1,'f′ = f(v+vₒ)/v = 680×374/340 = 748 Hz.'],
+['The Doppler effect in sound requires a relative motion between','only the source and Earth','source and observer','only the observer and medium','two observers',1,'A relative motion between the source and observer changes the frequency received by the observer.'],
+['For sound waves, the velocity used in the Doppler formula is the velocity of sound','relative to the source only','relative to the medium','relative to the observer only','always equal to zero',1,'The standard formula uses the wave speed v relative to the medium through which sound propagates.'],
+['If both source and observer move toward each other, the observed frequency is generally','f(v+vₒ)/(v−vₛ)','f(v−vₒ)/(v+vₛ)','f(v−vₛ)/(v+vₒ)','f(v+vₛ)/(v−vₒ)',0,'When both approach each other, f′ = f(v+vₒ)/(v−vₛ).'],
+['A siren of frequency 600 Hz is stationary and an observer moves away at 30 m/s. If sound speed is 330 m/s, the observed frequency is','655 Hz','545 Hz','600 Hz','330 Hz',1,'f′ = 600(330−30)/330 ≈ 545 Hz.'],
+['The Doppler effect can be used in practical applications such as','measuring motion and speed','changing the mass of an object','creating vacuum','measuring only temperature',0,'Doppler shifts are used to determine relative motion or speed in systems such as radar and medical ultrasound.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

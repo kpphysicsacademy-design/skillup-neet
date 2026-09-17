@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Coulomb's Law</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
+.wrap{max-width:760px;margin:auto;padding:22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
+h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}
+.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
+.fill{height:100%;width:0;background:#4caf50;transition:.3s}
+.q{font-size:20px;font-weight:700;margin-bottom:18px}
+.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
+.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}
+.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
+.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}
+.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}
+@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>⚡ Coulomb's Law</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Coulomb’s law gives the electrostatic force between two','point charges','current-carrying wires only','neutral objects only','magnetic poles only',0,'Coulomb’s law describes the electrostatic force between two point charges.'],
+['The magnitude of electrostatic force between two point charges is','F=kq₁q₂/r','F=k|q₁q₂|/r²','F=k(q₁+q₂)/r²','F=kr²/(q₁q₂)',1,'The magnitude is F=k|q₁q₂|/r², where r is the separation between the charges.'],
+['The SI unit of electrostatic force is','coulomb','newton','volt','joule',1,'Force is measured in newtons (N).'],
+['The Coulomb constant in vacuum is approximately','9×10⁹ N m²/C²','9×10⁻⁹ N m²/C²','8.85×10⁻¹² N m²/C²','3×10⁸ N m²/C²',0,'In vacuum, k≈9×10⁹ N m²/C².'],
+['If the separation between two point charges is doubled, the force becomes','twice','four times','one-half','one-fourth',3,'Because F∝1/r², doubling the separation reduces the force to one-fourth.'],
+['If the separation between two charges is reduced to half, the force becomes','one-fourth','one-half','four times','twice',2,'Since F∝1/r², replacing r by r/2 makes the force four times larger.'],
+['If one charge is doubled while the other charge and separation remain unchanged, the force','becomes half','becomes double','becomes four times','remains unchanged',1,'Coulomb force is directly proportional to each charge, so doubling one charge doubles the force.'],
+['If both charges are doubled while their separation remains unchanged, the force becomes','double','four times','half','unchanged',1,'The force is proportional to q₁q₂. Doubling both charges makes the product four times larger.'],
+['Two like charges exert on each other a force that is','attractive','repulsive','zero in vacuum','always perpendicular to the line joining them',1,'Like charges repel each other.'],
+['Two unlike charges exert on each other a force that is','repulsive','attractive','zero','independent of charge magnitude',1,'Unlike charges attract each other.'],
+['Two charges +2 μC and +3 μC are separated by 1 m in vacuum. Taking k=9×10⁹ N m²/C², the force is','0.018 N','0.054 N','0.09 N','0.54 N',1,'F=kq₁q₂/r²=9×10⁹×2×10⁻⁶×3×10⁻⁶=0.054 N.'],
+['Two charges of 1 μC each are separated by 0.3 m in vacuum. Taking k=9×10⁹ N m²/C², the force is','0.01 N','0.1 N','1 N','10 N',1,'F=9×10⁹×10⁻⁶×10⁻⁶/(0.3)²=0.1 N.'],
+['In a medium of relative permittivity εᵣ, the electrostatic force compared with vacuum is','εᵣ times larger','εᵣ times smaller','unchanged','zero',1,'For the same charges and separation, F_medium=F_vacuum/εᵣ.'],
+['The electrostatic force between two point charges acts along','a line perpendicular to the line joining them','the line joining the two charges','a circular path around the charges','any arbitrary direction',1,'The Coulomb force on each point charge acts along the line joining the two charges.'],
+['If the signs of both charges are reversed, the magnitude of their electrostatic force','becomes zero','doubles','remains the same','becomes negative',2,'Reversing both signs leaves the product q₁q₂ unchanged, so the force magnitude remains the same and the direction remains repulsive or attractive as before.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script>
+</body>
+</html>

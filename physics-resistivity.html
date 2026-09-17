@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Resistivity</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style></head>
+<body><div class="wrap"><div class="card"><h1>⚡ Resistivity</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Resistivity of a material is defined by the relation','ρ=RA/L','ρ=RL/A','ρ=R/A L','ρ=A/(RL)',1,'From R=ρL/A, resistivity is ρ=RA/L.'],
+['The SI unit of resistivity is','Ω m','Ω/m','m/Ω','Ω m²',0,'The SI unit of resistivity is ohm metre (Ω m).'],
+['Resistance of a uniform wire is given by','R=ρA/L','R=ρL/A','R=L/(ρA)','R=ρ+A+L',1,'For a uniform conductor, R=ρL/A.'],
+['If the length of a wire is doubled while its area remains constant, its resistance','halves','doubles','becomes four times','remains unchanged',1,'Since R=ρL/A, resistance is directly proportional to length.'],
+['If the cross-sectional area of a wire is doubled, its resistance becomes','double','half','four times','unchanged',1,'Since R=ρL/A, resistance is inversely proportional to cross-sectional area.'],
+['For a given material at a fixed temperature, resistivity depends primarily on','length of the wire','cross-sectional area','nature of the material','current through the wire',2,'Resistivity is a material property and, at a given temperature, is independent of the conductor dimensions.'],
+['A wire has resistance 5 Ω, length 2 m and cross-sectional area 1×10⁻⁶ m². Its resistivity is','1×10⁻⁶ Ω m','2.5×10⁻⁶ Ω m','5×10⁻⁶ Ω m','10×10⁻⁶ Ω m',1,'ρ=RA/L=(5)(1×10⁻⁶)/2=2.5×10⁻⁶ Ω m.'],
+['Which material generally has very low resistivity and is commonly used for electrical wiring?','rubber','glass','copper','wood',2,'Copper has low resistivity and is widely used for electrical conductors.'],
+['The resistivity of most metallic conductors generally','increases with temperature','decreases with temperature','becomes zero with temperature','never changes with temperature',0,'For most metals, resistivity increases as temperature increases.'],
+['A wire is stretched to twice its original length without changing its volume. Its new resistance is','R/2','R','2R','4R',3,'Constant volume gives A proportional to 1/L. Therefore R=ρL/A becomes four times when L doubles.'],
+['Two wires are made of the same material and have equal lengths. Wire A has twice the area of wire B. The ratio R_A:R_B is','1:2','2:1','1:4','4:1',0,'For the same material and length, R is inversely proportional to area, so R_A:R_B=1:2.'],
+['Conductivity is the reciprocal of','resistance','resistivity','current','potential difference',1,'Electrical conductivity σ is the reciprocal of resistivity: σ=1/ρ.'],
+['The SI unit of conductivity is','Ω m','Ω⁻¹ m⁻¹','Ω m⁻¹','Ω⁻¹ m',1,'Conductivity has SI unit siemens per metre (S/m), equivalent to Ω⁻¹ m⁻¹.'],
+['A wire of resistivity 2×10⁻⁸ Ω m has length 1 m and area 1×10⁻⁶ m². Its resistance is','0.002 Ω','0.02 Ω','0.2 Ω','2 Ω',0,'R=ρL/A=(2×10⁻⁸)(1)/(1×10⁻⁶)=0.02 Ω.'],
+['Which statement correctly distinguishes resistance from resistivity?','Both depend only on material','Resistance is a material property only','Resistivity is a material property, while resistance also depends on dimensions','Resistivity depends only on length',2,'Resistivity characterizes the material; resistance depends on resistivity and the conductor geometry through R=ρL/A.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
+</script></body></html>

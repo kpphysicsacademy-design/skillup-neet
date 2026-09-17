@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Phase Difference</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>🔄 Phase Difference</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Phase difference between two oscillations describes their difference in','amplitude only','state of oscillation or phase angle','mass only','frequency units',1,'Phase difference tells how much one oscillation leads or lags another.'],
+['The SI unit used for phase difference is','metre','second','radian','hertz',2,'Phase difference is an angle, conventionally expressed in radians.'],
+['Two particles separated by one wavelength in a progressive wave have phase difference','0','π/2','π','2π',3,'A separation of one wavelength corresponds to 2π radians, so the particles are in phase.'],
+['Two particles separated by λ/2 have phase difference','0','π/2','π','2π',2,'Phase difference = 2π(λ/2)/λ = π radians.'],
+['Two particles separated by λ/4 have phase difference','0','π/4','π/2','π',2,'Phase difference = 2π(λ/4)/λ = π/2 radians.'],
+['If the phase difference between two oscillations is zero, they are','in phase','opposite in phase','always stationary','at different frequencies',0,'Zero phase difference means corresponding points of the oscillations occur together: they are in phase.'],
+['A phase difference of π radians means the oscillations are','in phase','opposite in phase','at the same position always','without frequency',1,'π radians corresponds to half a cycle, so the oscillations are in opposite phase.'],
+['A complete cycle corresponds to a phase change of','π/2','π','2π','4π',2,'One complete cycle is 360°, equal to 2π radians.'],
+['The phase difference due to a path separation Δx in a sinusoidal wave is','Δφ=Δx/λ','Δφ=2πΔx/λ','Δφ=λ/2πΔx','Δφ=2πλ/Δx',1,'For a progressive wave, Δφ=kΔx=2πΔx/λ.'],
+['If Δx=λ/3, the phase difference is','π/6','π/3','2π/3','2π',2,'Δφ=2π(λ/3)/λ=2π/3 radians.'],
+['If Δx=λ/2, the phase difference in degrees is','90°','180°','270°','360°',1,'π radians equals 180°.'],
+['For y=A sin(ωt), the phase at time t is','A','ωt','Aω','t/ω',1,'The phase angle is ωt for this simple form.'],
+['For y=A sin(ωt+π/2), the initial phase at t=0 is','0','π/4','π/2','π',2,'At t=0, phase = π/2 radians.'],
+['Two waves have phase difference π/2. Their phase difference corresponds to','one-eighth cycle','one-quarter cycle','one-half cycle','one complete cycle',1,'π/2 is 90°, which is one-quarter of a 360° cycle.'],
+['Which statement is correct?','2π phase difference means opposite phase','π phase difference means in phase','zero phase difference means in phase','λ/2 separation always gives zero phase difference',2,'Zero phase difference means the oscillations are in phase; for a sinusoidal travelling wave λ/2 gives π.']
+];
+let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script></body></html>

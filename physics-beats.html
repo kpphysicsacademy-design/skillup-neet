@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp Physics | Beats</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
+.wrap{max-width:760px;margin:auto;padding:22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
+h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}
+.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
+.fill{height:100%;width:0;background:#4caf50;transition:.3s}
+.q{font-size:20px;font-weight:700;margin-bottom:18px}
+.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
+.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}
+.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
+.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}
+.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}
+@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>🎵 Beats</h1>
+<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="quiz"></div><div class="xp" id="xp"></div>
+<button class="next hide" id="next">Next Question →</button>
+<div id="result" class="hide"></div>
+<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+</div></div>
+<script>
+const qs=[
+['Beats are produced when two sound waves have','the same frequency and amplitude','slightly different frequencies and nearly equal amplitudes','very different frequencies','zero amplitude',1,'Beats are produced by superposition of two waves with slightly different frequencies.'],
+['The beat frequency is equal to','f₁+f₂','f₁f₂','|f₁−f₂|','f₁/f₂',2,'The number of beats per second is the absolute difference between the two frequencies.'],
+['If two tuning forks have frequencies 256 Hz and 260 Hz, the beat frequency is','2 Hz','4 Hz','256 Hz','516 Hz',1,'Beat frequency = |260−256| = 4 Hz.'],
+['If the frequencies of two sound sources are 500 Hz and 505 Hz, the number of beats heard in 10 s is','5','10','50','505',2,'Beat frequency is 5 Hz, so 5 × 10 = 50 beats are heard.'],
+['For clearly audible beats, the two frequencies should be','exactly equal','slightly different','very far apart','zero',1,'A small frequency difference produces distinct periodic variations in loudness.'],
+['At the instant when two interfering sound waves are in phase, the resultant sound is generally','minimum','maximum','zero always','unchanged',1,'Constructive interference occurs when the waves are in phase, giving maximum amplitude.'],
+['At the instant when two equal-amplitude waves are exactly out of phase, their resultant amplitude is','maximum','double','zero','half',2,'For equal amplitudes with phase difference π, destructive interference gives zero resultant amplitude.'],
+['The loudness of sound during beats','remains constant','alternately increases and decreases','only increases','only decreases',1,'Superposition causes periodic constructive and destructive interference, so loudness varies periodically.'],
+['Two sound sources of 400 Hz and 404 Hz produce beats at','1 Hz','2 Hz','4 Hz','804 Hz',2,'Beat frequency = |404−400| = 4 Hz.'],
+['A tuning fork of frequency 256 Hz produces 6 beats per second with another fork. The possible frequency of the other fork is','250 Hz only','262 Hz only','250 Hz or 262 Hz','256 Hz only',2,'The second frequency can be 256−6 = 250 Hz or 256+6 = 262 Hz.'],
+['If the beat frequency between two sources decreases from 5 Hz to 2 Hz, their frequencies have become','farther apart','closer together','both zero','necessarily equal',1,'Beat frequency is the frequency difference, so a smaller beat frequency means the source frequencies are closer.'],
+['Beats can be used to','measure or compare frequencies','measure mass directly','determine charge directly','eliminate sound completely',0,'The beat method is useful for comparing an unknown frequency with a known frequency.'],
+['A known tuning fork of 512 Hz gives 3 beats per second with an unknown fork. The unknown frequency can be','509 Hz or 515 Hz','510 Hz or 514 Hz','512 Hz only','3 Hz or 512 Hz',0,'Using |f−512|=3 gives f=509 Hz or 515 Hz.'],
+['When one of two tuning forks is loaded with wax and its frequency decreases, the change in beat frequency can help determine','whether the original frequencies were equal or unequal','the mass of the Earth','the speed of light','the wavelength of visible light',0,'Changing one fork frequency changes the beat frequency, which helps compare the original frequencies.'],
+['For two waves with frequencies f₁ and f₂, the time interval between successive loudness maxima is','1/(f₁+f₂)','1/|f₁−f₂|','|f₁−f₂|','f₁f₂',1,'Beat frequency is |f₁−f₂|, so the beat period is its reciprocal.']
+];
+let i=0,score=0,answered=false;
+const $=x=>document.getElementById(x);
+function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
+function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
+function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
+$('next').onclick=next;render();
+</script>
+</body>
+</html>

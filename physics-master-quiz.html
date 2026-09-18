@@ -25,10 +25,19 @@ $('title').textContent='Physics Master Quiz • Unit '+unitNo;
 if(!u){$('quiz').textContent='Unit not found.';return;}
 $('sub').textContent=u[1]+' • 20 chapters • 20 MCQs';
 const slug=s=>s.toLowerCase().replace(/[–—]/g,'-').replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const fallback={
+  'Dimensional analysis':[
+    ['What is a main purpose of dimensional analysis?',['Check dimensional consistency of physical equations','Measure mass directly','Convert every quantity to centimetres','Determine temperature experimentally'],0]
+  ]
+};
 async function getQs(concept){
-  const urls=['physics-path-concept-3.html?concept='+encodeURIComponent(concept),'physics-'+slug(concept)+'.html'];
-  for(const url of urls){try{const t=await fetch(url,{cache:'no-store'}).then(r=>r.text());const m=t.match(/(?:const|var)\s+qs\s*=\s*(\[[\s\S]*?\])\s*;/);if(m){const qs=Function('return '+m[1])();if(Array.isArray(qs)&&qs.length)return qs;}}catch(e){}}
-  return [];
+  const url='physics-'+slug(concept)+'.html';
+  try{
+    const t=await fetch(url,{cache:'no-store'}).then(r=>r.text());
+    const m=t.match(/(?:const|var|let)\s+qs\s*=\s*(\[[\s\S]*?\])\s*;/);
+    if(m){const qs=Function('return '+m[1])();if(Array.isArray(qs)&&qs.length)return qs;}
+  }catch(e){}
+  return fallback[concept]||[];
 }
 function pick(qs){
   const candidates=qs.filter(q=>Array.isArray(q)&&q.length>=4&&typeof q[0]==='string'&&!seen.has(q[0].trim().toLowerCase()));

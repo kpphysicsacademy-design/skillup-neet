@@ -1,0 +1,17 @@
+window.SkillUpPercentageCompositionQuestions=[
+{q:"Percentage composition of an element in a compound is calculated as:",o:["(Mass of element in 1 mole of compound / Molar mass of compound) × 100","(Molar mass of compound / Mass of element) × 100","Mass of compound × 100","Moles of element + 100"],a:0,e:"Percentage by mass = (mass contributed by the element in one mole of the compound ÷ molar mass of the compound) × 100."},
+{q:"The percentage of oxygen in H₂O is approximately: (H = 1, O = 16)",o:["11.11%","50.00%","88.89%","94.12%"],a:2,e:"M(H₂O) = 18. Oxygen contributes 16 g per mole, so %O = (16/18) × 100 = 88.89%."},
+{q:"The percentage of hydrogen in H₂O is approximately:",o:["5.56%","11.11%","16.00%","88.89%"],a:1,e:"Hydrogen contributes 2 g per mole of H₂O. %H = (2/18) × 100 = 11.11%."},
+{q:"The percentage of carbon in CO₂ is approximately: (C = 12, O = 16)",o:["27.27%","36.36%","50.00%","72.73%"],a:0,e:"M(CO₂) = 44. Carbon contributes 12 g, so %C = (12/44) × 100 = 27.27%."},
+{q:"The percentage of oxygen in CO₂ is approximately:",o:["27.27%","36.36%","63.64%","72.73%"],a:3,e:"Oxygen contributes 32 g per mole of CO₂. %O = (32/44) × 100 = 72.73%."},
+{q:"The percentage of nitrogen in NH₃ is approximately: (N = 14, H = 1)",o:["17.65%","82.35%","14.00%","50.00%"],a:1,e:"M(NH₃) = 17. Nitrogen contributes 14 g, so %N = (14/17) × 100 = 82.35%."},
+{q:"The percentage of hydrogen in NH₃ is approximately:",o:["5.88%","17.65%","82.35%","94.12%"],a:1,e:"Hydrogen contributes 3 g per mole of NH₃. %H = (3/17) × 100 = 17.65%."},
+{q:"The percentage of calcium in CaCO₃ is: (Ca = 40, C = 12, O = 16)",o:["12%","16%","40%","56%"],a:2,e:"M(CaCO₃) = 100 g mol⁻¹. Calcium contributes 40 g, so its percentage is 40%."},
+{q:"The percentage of carbon in CaCO₃ is:",o:["10%","12%","16%","40%"],a:1,e:"M(CaCO₃) = 100 g mol⁻¹. Carbon contributes 12 g, so %C = 12%."},
+{q:"The percentage of oxygen in CaCO₃ is:",o:["16%","32%","48%","64%"],a:2,e:"Three oxygen atoms contribute 48 g per mole. Therefore, %O = 48/100 × 100 = 48%."},
+{q:"The sum of the mass percentages of all elements in a pure compound is:",o:["0%","50%","100%","More than 100%"],a:2,e:"In a pure compound, the constituent elements account for the entire mass, so their percentages add to 100%."},
+{q:"For a compound with formula AB₂, the contribution of element B to one mole is:",o:["Atomic mass of A","Atomic mass of B","2 × atomic mass of B","Molar mass of A"],a:2,e:"AB₂ contains two atoms of B per formula unit, so B contributes 2 × its atomic mass per mole of compound."},
+{q:"A compound contains 40% carbon by mass. In 200 g of the compound, the mass of carbon is:",o:["40 g","60 g","80 g","100 g"],a:2,e:"Mass of carbon = 40/100 × 200 g = 80 g."},
+{q:"A compound contains 25% element X by mass. The mass of X in 80 g of compound is:",o:["10 g","20 g","25 g","40 g"],a:1,e:"Mass of X = 25/100 × 80 g = 20 g."},
+{q:"Percentage composition data can be used to determine the:",o:["Empirical formula when combined with atomic masses","Speed of light","Boiling point only","Number of neutrons directly"],a:0,e:"Mass percentages can be converted into relative moles using atomic masses, allowing the empirical formula to be determined."}
+];

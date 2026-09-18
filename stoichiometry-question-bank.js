@@ -1,0 +1,17 @@
+window.SkillUpStoichiometryQuestions=[
+{q:"Stoichiometry is the quantitative study of:",o:["Colour changes only","Amounts of reactants and products in chemical reactions","Atomic orbitals only","Gas pressure only"],a:1,e:"Stoichiometry deals with quantitative relationships between reactants and products using a balanced chemical equation."},
+{q:"The coefficients in a balanced chemical equation represent:",o:["Mole ratios","Atomic numbers","Mass numbers","Densities"],a:0,e:"Balanced-equation coefficients give the relative mole ratio of reactants and products."},
+{q:"For N₂ + 3H₂ → 2NH₃, 1 mol N₂ reacts with:",o:["1 mol H₂","2 mol H₂","3 mol H₂","6 mol H₂"],a:2,e:"The coefficients show a 1:3:2 mole ratio, so 1 mol N₂ requires 3 mol H₂."},
+{q:"For 2H₂ + O₂ → 2H₂O, 2 mol H₂ produce:",o:["1 mol H₂O","2 mol H₂O","3 mol H₂O","4 mol H₂O"],a:1,e:"The stoichiometric ratio H₂:H₂O is 2:2, so 2 mol H₂ can produce 2 mol H₂O."},
+{q:"How many moles of O₂ are required to completely react with 4 mol H₂ in 2H₂ + O₂ → 2H₂O?",o:["1 mol","2 mol","4 mol","8 mol"],a:1,e:"The ratio H₂:O₂ is 2:1. Therefore 4 mol H₂ requires 2 mol O₂."},
+{q:"The mass of 2 mol CO₂ is: (M = 44 g mol⁻¹)",o:["22 g","44 g","88 g","132 g"],a:2,e:"Mass = moles × molar mass = 2 × 44 = 88 g."},
+{q:"How many moles are present in 49 g H₂SO₄? (M = 98 g mol⁻¹)",o:["0.25 mol","0.5 mol","1 mol","2 mol"],a:1,e:"n = mass/molar mass = 49/98 = 0.5 mol."},
+{q:"In 2Na + Cl₂ → 2NaCl, 0.5 mol Cl₂ produces, with excess Na:",o:["0.25 mol NaCl","0.5 mol NaCl","1.0 mol NaCl","2.0 mol NaCl"],a:2,e:"The ratio Cl₂:NaCl is 1:2, so 0.5 mol Cl₂ gives 1.0 mol NaCl."},
+{q:"A limiting reagent is the reactant that:",o:["Remains completely unused","Determines the maximum amount of product formed","Has the greatest molar mass","Is always a gas"],a:1,e:"The limiting reagent is consumed first and limits the theoretical amount of product."},
+{q:"If 2 mol H₂ reacts with 2 mol O₂ according to 2H₂ + O₂ → 2H₂O, the limiting reagent is:",o:["H₂","O₂","H₂O","Neither"],a:0,e:"2 mol H₂ needs only 1 mol O₂. Since 2 mol O₂ is available, H₂ is limiting."},
+{q:"For 2H₂ + O₂ → 2H₂O, if H₂ is limiting and 2 mol H₂ react completely, the maximum H₂O formed is:",o:["1 mol","2 mol","3 mol","4 mol"],a:1,e:"The ratio H₂:H₂O is 2:2, so 2 mol H₂ can form 2 mol H₂O."},
+{q:"Theoretical yield means the:",o:["Actual product obtained experimentally","Maximum product predicted from stoichiometry","Mass of catalyst used","Amount of excess reagent left"],a:1,e:"Theoretical yield is the maximum product calculated from the limiting reagent under ideal assumptions."},
+{q:"Percentage yield is calculated as:",o:["Theoretical yield/actual yield × 100","Actual yield/theoretical yield × 100","Actual yield + theoretical yield","Actual yield × theoretical yield"],a:1,e:"Percentage yield = (actual yield ÷ theoretical yield) × 100."},
+{q:"If the theoretical yield is 20 g and the actual yield is 15 g, the percentage yield is:",o:["50%","60%","75%","80%"],a:2,e:"% yield = (15/20) × 100 = 75%."},
+{q:"In stoichiometric calculations, a balanced chemical equation is essential because it provides:",o:["Mole relationships","Only temperature","Only colour information","Only reaction time"],a:0,e:"The coefficients of a balanced equation provide the mole relationships used to convert between reactants and products."}
+];

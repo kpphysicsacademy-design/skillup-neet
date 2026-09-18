@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Physics Master Quiz</title>
+<style>
+:root{--b:#1677ff;--n:#123b70;--m:#6b7280;--l:#d9e5f2}
+*{box-sizing:border-box}body{margin:0;background:#f5f9ff;color:#263238;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:18px 12px 60px}.top{background:#fff;border-bottom:1px solid var(--l);padding:13px 16px;font-weight:950;color:var(--n);display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:5}.back{margin-left:auto;text-decoration:none;color:var(--b);font-size:11px}.card{background:#fff;border:1px solid var(--l);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 6px 18px rgba(18,59,112,.06)}h1{font-size:25px;margin:0 0 5px}.sub{font-size:11px;color:var(--m)}.meta{display:flex;justify-content:space-between;margin-top:14px;font-size:11px;font-weight:900}.bar{height:8px;background:#e6eef7;border-radius:99px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--b)}.q{font-size:18px;font-weight:900;line-height:1.45;margin:18px 0}.opt{display:block;width:100%;text-align:left;border:2px solid var(--l);background:#fff;border-radius:14px;padding:13px;margin:8px 0;font-size:14px;cursor:pointer}.opt.selected{border-color:var(--b);background:#eef5ff}.opt.correct{border-color:#58cc02;background:#effbe9}.opt.wrong{border-color:#ff6b6b;background:#fff0f0}.action{width:100%;border:0;border-radius:14px;background:var(--b);color:#fff;padding:13px;font-weight:950;margin-top:10px;cursor:pointer}.action:disabled{opacity:.45;cursor:not-allowed}.note{text-align:center;color:var(--m);font-size:11px;margin-top:12px}.result{text-align:center}.retry{border:0;border-radius:13px;background:var(--b);color:#fff;padding:12px 18px;font-weight:950}
+</style>
+</head>
+<body>
+<header class="top">🚀 <span>SkillUp</span><span>PHYSICS</span><a class="back" href="physics-home-fast.html?v=4">← Physics Path</a></header>
+<main class="wrap"><section class="card"><h1 id="title">Physics Master Quiz</h1><div class="sub" id="sub">20 questions • 1 question from each chapter</div><div class="meta"><span id="count">Loading…</span><span id="score">Score 0</span></div><div class="bar"><i id="fill"></i></div></section>
+<section class="card" id="quizCard"><div id="quiz">Loading chapter questions…</div><button id="action" class="action" disabled>CHECK</button><div id="note" class="note"></div></section>
+<section class="card result" id="result" style="display:none"></section></main>
+<script src="physics-400-concepts-base.js"></script>
+<script>
+(function(){
+'use strict';
+const p=new URLSearchParams(location.search),unitNo=Math.max(1,Math.min(20,parseInt(p.get('unit')||'1',10)));
+const data=window.SKILLUP_PHYSICS_400||[],u=data[unitNo-1];
+const $=id=>document.getElementById(id),questions=[],seen=new Set();let i=0,score=0,selected=-1,answered=false;
+$('title').textContent='Physics Master Quiz • Unit '+unitNo;
+if(!u){$('quiz').textContent='Unit not found.';return;}
+$('sub').textContent=u[1]+' • 20 chapters • 20 MCQs';
+const slug=s=>s.toLowerCase().replace(/[–—]/g,'-').replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+async function getQs(concept){
+  const urls=['physics-path-concept-3.html?concept='+encodeURIComponent(concept),'physics-'+slug(concept)+'.html'];
+  for(const url of urls){try{const t=await fetch(url,{cache:'no-store'}).then(r=>r.text());const m=t.match(/(?:const|var)\s+qs\s*=\s*(\[[\s\S]*?\])\s*;/);if(m){const qs=Function('return '+m[1])();if(Array.isArray(qs)&&qs.length)return qs;}}catch(e){}}
+  return [];
+}
+function pick(qs){
+  const candidates=qs.filter(q=>Array.isArray(q)&&q.length>=4&&typeof q[0]==='string'&&!seen.has(q[0].trim().toLowerCase()));
+  const pool=candidates.length?candidates:qs.filter(q=>Array.isArray(q)&&q.length>=4&&typeof q[0]==='string');
+  if(!pool.length)return null;
+  const q=pool[Math.floor(Math.random()*pool.length)];seen.add(q[0].trim().toLowerCase());return q;
+}
+async function load(){
+  for(let k=0;k<u[2].length;k++){const qs=await getQs(u[2][k]);const q=pick(qs);if(q)questions.push({chapter:u[2][k],q});}
+  if(questions.length<20){$('quiz').innerHTML='<b>Master Quiz is not ready yet.</b><div class="note">'+questions.length+' of 20 chapter question banks were found. Add MCQs to the missing chapter pages to enable the full 20-question master quiz.</div>';$('action').style.display='none';return;}
+  render();
+}
+function render(){answered=false;selected=-1;const item=questions[i].q;$('count').textContent='Question '+(i+1)+'/20';$('score').textContent='Score '+score;$('fill').style.width=(i/20*100)+'%';$('quiz').innerHTML='<div class="q">'+item[0]+'</div>'+item[1].map((o,n)=>'<button type="button" class="opt" data-n="'+n+'">'+String.fromCharCode(65+n)+'. '+o+'</button>').join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(answered)return;selected=+b.dataset.n;document.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('action').disabled=false;$('action').textContent='CHECK';});$('note').textContent='Chapter: '+questions[i].chapter;$('action').disabled=true;$('action').textContent='CHECK';}
+function check(){if(selected<0)return;const q=questions[i].q;if(!answered){answered=true;const ok=selected===q[2];if(ok)score++;document.querySelectorAll('.opt').forEach((b,n)=>{b.disabled=true;if(n===q[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('score').textContent='Score '+score;$('fill').style.width=((i+1)/20*100)+'%';$('action').textContent=i===19?'FINISH':'Next Question →';return;}if(i<19){i++;render();window.scrollTo({top:0,behavior:'smooth'});}else finish();}
+function finish(){$('quizCard').style.display='none';$('result').style.display='block';$('result').innerHTML='<h2>🎉 Master Quiz Complete</h2><p>Score: <b>'+score+'/20</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>';}
+$('action').onclick=check;load();
+})();
+</script>
+</body></html>

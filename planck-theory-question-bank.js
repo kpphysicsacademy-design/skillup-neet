@@ -1,0 +1,17 @@
+window.SkillUpPlanckTheoryQuestions=[
+{q:"Planck proposed that electromagnetic energy is emitted or absorbed in:",o:["Continuous amounts only","Discrete packets called quanta","Whole atoms only","Sound waves"],a:1,e:"Planck proposed that energy exchange occurs in discrete packets called quanta."},
+{q:"The energy of one quantum of radiation is:",o:["E = hν","E = h/ν","E = ν/h","E = mc² only"],a:0,e:"The energy of a quantum (photon) is E = hν, where h is Planck's constant."},
+{q:"Planck's constant h has the approximate value:",o:["6.626 × 10⁻³⁴ J s","6.626 × 10³⁴ J s","3.00 × 10⁸ J s","9.11 × 10⁻³¹ J s"],a:0,e:"Planck's constant is approximately 6.626 × 10⁻³⁴ J s."},
+{q:"According to Planck's theory, the energy of an oscillator is quantized in units of:",o:["hν","h/ν","ν/h","cν"],a:0,e:"The allowed energy changes occur in multiples of hν."},
+{q:"If the frequency of radiation doubles, the energy of each quantum:",o:["Halves","Doubles","Becomes zero","Remains unchanged"],a:1,e:"Since E = hν, photon energy is directly proportional to frequency."},
+{q:"If the wavelength of electromagnetic radiation decreases, photon energy:",o:["Decreases","Increases","Remains unchanged","Becomes negative"],a:1,e:"Using E = hc/λ, photon energy increases as wavelength decreases."},
+{q:"The SI unit of Planck's constant is:",o:["J s","J mol⁻¹","m s⁻¹","Hz"],a:0,e:"Planck's constant has units of energy × time, or J s."},
+{q:"A photon has frequency 5 × 10¹⁴ Hz. Its energy is approximately: (h = 6.626 × 10⁻³⁴ J s)",o:["3.31 × 10⁻¹⁹ J","3.31 × 10¹⁹ J","1.33 × 10⁻⁴⁸ J","6.63 × 10⁻³⁴ J"],a:0,e:"E = hν = 6.626 × 10⁻³⁴ × 5 × 10¹⁴ ≈ 3.31 × 10⁻¹⁹ J."},
+{q:"The energy of a photon with frequency ν is independent of its:",o:["Frequency","Wavelength when frequency is fixed","Planck constant","Energy"],a:1,e:"For a fixed frequency, E = hν is fixed; wavelength is related to frequency by c = λν."},
+{q:"The relation Eₙ = n hν describes:",o:["Quantized energy levels of an oscillator","Continuous energy at all values","Atomic mass","Speed of light"],a:0,e:"Planck's oscillator model allowed energies Eₙ = n hν, where n is an integer."},
+{q:"For n = 3 and frequency ν, the oscillator energy according to Planck's expression is:",o:["hν","2hν","3hν","ν/3"],a:2,e:"Substituting n = 3 into Eₙ = n hν gives 3hν."},
+{q:"Which statement is consistent with Planck's quantum hypothesis?",o:["Energy can be exchanged in arbitrary infinitesimal amounts only","Energy exchange occurs in discrete amounts","Radiation has no energy","Frequency has no role in photon energy"],a:1,e:"The quantum hypothesis introduced discrete energy exchange rather than unrestricted continuous values."},
+{q:"A radiation quantum has energy 6.626 × 10⁻²⁰ J. Its frequency is approximately:",o:["10¹⁴ Hz","10¹⁵ Hz","10¹⁶ Hz","10¹³ Hz"],a:0,e:"ν = E/h = (6.626 × 10⁻²⁰)/(6.626 × 10⁻³⁴) = 10¹⁴ Hz."},
+{q:"Which equation combines Planck's relation with the wave relation?",o:["E = hc/λ","E = hλ/c","E = cλ/h","E = λν"],a:0,e:"Since ν = c/λ and E = hν, E = hc/λ."},
+{q:"Planck's quantum concept helped explain the:",o:["Quantized nature of blackbody radiation","Law of conservation of mass","Periodic law only","Ideal gas equation only"],a:0,e:"Planck introduced energy quantization in his treatment of blackbody radiation."}
+];

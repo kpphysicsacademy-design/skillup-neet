@@ -1,0 +1,17 @@
+window.SkillUpElectromagneticRadiationQuestions=[
+{q:"Electromagnetic radiation consists of:",o:["Oscillating electric and magnetic fields","Only stationary electric charges","Only sound waves","Only matter particles"],a:0,e:"Electromagnetic radiation consists of oscillating electric and magnetic fields that propagate through space."},
+{q:"The speed of electromagnetic radiation in vacuum is approximately:",o:["3×10⁶ m s⁻¹","3×10⁸ m s⁻¹","3×10¹⁰ m s⁻¹","3×10⁴ m s⁻¹"],a:1,e:"All electromagnetic radiation travels at about 3×10⁸ m s⁻¹ in vacuum."},
+{q:"The relationship between wavelength λ, frequency ν and speed c is:",o:["c = λν","c = λ/ν","c = ν/λ","c = λ + ν"],a:0,e:"For electromagnetic radiation, c = λν."},
+{q:"If wavelength increases, frequency of electromagnetic radiation in vacuum:",o:["Increases","Decreases","Remains exactly the same","Becomes zero"],a:1,e:"Since c = λν and c is constant in vacuum, frequency is inversely proportional to wavelength."},
+{q:"The SI unit of frequency is:",o:["Metre","Hertz","Joule","Newton"],a:1,e:"Frequency is measured in hertz (Hz), equivalent to s⁻¹."},
+{q:"The energy of a photon is given by:",o:["E = hν","E = h/ν","E = ν/h","E = mc"],a:0,e:"Planck's relation gives photon energy as E = hν."},
+{q:"In terms of wavelength, photon energy is:",o:["E = hc/λ","E = hλ/c","E = λ/hc","E = cλ/h"],a:0,e:"Using ν = c/λ in E = hν gives E = hc/λ."},
+{q:"Which electromagnetic radiation has the highest frequency?",o:["Radio waves","Microwaves","Visible light","Gamma rays"],a:3,e:"Gamma rays occupy the highest-frequency region of the electromagnetic spectrum among these choices."},
+{q:"Which has the longest wavelength among the following?",o:["Gamma rays","X-rays","Ultraviolet","Radio waves"],a:3,e:"Radio waves have the longest wavelengths among these choices."},
+{q:"When electromagnetic radiation passes from one medium to another, its frequency generally:",o:["Changes to zero","Remains unchanged at the boundary","Always doubles","Always halves"],a:1,e:"The frequency is fixed by the source and remains unchanged as the wave enters another medium; speed and wavelength change."},
+{q:"The wavelength of radiation with frequency 6×10¹⁴ Hz in vacuum is approximately:",o:["5×10⁻⁷ m","5×10⁻⁵ m","2×10⁻⁷ m","6×10⁷ m"],a:0,e:"λ = c/ν = (3×10⁸)/(6×10¹⁴) = 5×10⁻⁷ m."},
+{q:"A photon has frequency 3×10¹⁵ Hz. Its energy is approximately: (h = 6.626×10⁻³⁴ J s)",o:["1.99×10⁻¹⁸ J","1.99×10⁻¹⁵ J","2.21×10⁻⁴⁸ J","9.94×10⁻²⁰ J"],a:0,e:"E = hν = 6.626×10⁻³⁴ × 3×10¹⁵ ≈ 1.99×10⁻¹⁸ J."},
+{q:"Which statement about electromagnetic waves is correct?",o:["They require a material medium in vacuum","Electric and magnetic fields are mutually perpendicular","They are always longitudinal","They have no energy"],a:1,e:"In an electromagnetic wave, the electric field and magnetic field oscillate perpendicular to each other and to the direction of propagation."},
+{q:"The visible region of the electromagnetic spectrum lies approximately between:",o:["Radio and microwave","Infrared and ultraviolet","X-ray and gamma ray","Gamma ray and radio"],a:1,e:"Visible light lies between infrared and ultraviolet radiation in the electromagnetic spectrum."},
+{q:"According to Planck's quantum theory, electromagnetic energy is emitted or absorbed:",o:["Continuously only","In discrete packets called quanta","Only as sound","Without any energy"],a:1,e:"Planck proposed that electromagnetic energy is exchanged in discrete packets called quanta; for one photon, E = hν."}
+];

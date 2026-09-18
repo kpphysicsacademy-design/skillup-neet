@@ -5,7 +5,7 @@ window.SkillUpPurityCalculationsQuestions=[
 {q:"A 200 g sample contains 150 g of pure substance. The percentage purity is:",o:["50%","65%","75%","80%"],a:2,e:"Purity = (150/200) × 100 = 75%."},
 {q:"A 40 g impure sample is 75% pure. The mass of impurity is:",o:["5 g","10 g","15 g","30 g"],a:1,e:"Pure mass = 0.75 × 40 = 30 g. Impurity = 40 − 30 = 10 g."},
 {q:"If a sample is 95% pure, the impurity percentage is:",o:["2%","5%","10%","95%"],a:1,e:"Impurity percentage = 100 − 95 = 5%."},
-{q:"A 25 g sample contains 20 g pure substance. Its impurity percentage is:",o:["5%","20%","25%","80%"],a:2,e:"Impurity = 5 g. Impurity percentage = (5/25) × 100 = 20%. Therefore the correct option is 20%."},
+{q:"A 25 g sample contains 20 g pure substance. Its impurity percentage is:",o:["5%","20%","25%","80%"],a:1,e:"Impurity = 25 − 20 = 5 g. Impurity percentage = (5/25) × 100 = 20%."},
 {q:"Which expression gives the mass of pure substance from sample mass and purity P%?",o:["Sample mass × P/100","Sample mass × 100/P","Sample mass + P","Sample mass/P"],a:0,e:"Pure mass = sample mass × (P/100)."},
 {q:"A 120 g sample is 80% pure. The mass of pure material is:",o:["80 g","96 g","100 g","104 g"],a:1,e:"Pure mass = 120 × 0.80 = 96 g."},
 {q:"A 60 g sample contains 54 g pure substance. Its percentage purity is:",o:["80%","85%","90%","95%"],a:2,e:"Purity = (54/60) × 100 = 90%."},

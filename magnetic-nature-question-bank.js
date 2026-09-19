@@ -1,0 +1,17 @@
+window.SkillUpMagneticNatureQuestions=[
+{q:"A substance is paramagnetic when it contains:",o:["One or more unpaired electrons","Only paired electrons","No electrons","Only protons"],a:0,e:"Paramagnetic substances contain one or more unpaired electrons and are attracted by an external magnetic field."},
+{q:"A substance is diamagnetic when:",o:["All its electrons are paired","It has many unpaired electrons","It has only neutrons","It has no nuclei"],a:0,e:"Diamagnetic species have all electrons paired and are weakly repelled by an external magnetic field."},
+{q:"Which species is paramagnetic?",o:["N₂","O₂","F₂","Ne"],a:1,e:"O₂ has two unpaired electrons in its degenerate π* antibonding orbitals, so it is paramagnetic."},
+{q:"Which species is diamagnetic?",o:["O₂","O₂⁺","N₂","NO"],a:2,e:"N₂ has all electrons paired in its molecular orbitals and is therefore diamagnetic."},
+{q:"The paramagnetism of O₂ is explained by:",o:["Two unpaired electrons in π* antibonding molecular orbitals","Absence of electrons","Only paired electrons in σ orbitals","Its ionic character"],a:0,e:"Molecular orbital theory places two unpaired electrons in the π*2p orbitals of O₂."},
+{q:"Which of the following has two unpaired electrons?",o:["O₂","N₂","F₂","Ne₂"],a:0,e:"O₂ has two unpaired electrons in its π* antibonding molecular orbitals."},
+{q:"Which species is expected to be strongly paramagnetic among these?",o:["N₂","O₂","F₂","Ne"],a:1,e:"O₂ contains two unpaired electrons, whereas N₂, F₂ and Ne have paired electrons in their ground states."},
+{q:"The magnetic moment of a species depends mainly on its:",o:["Number of unpaired electrons","Number of neutrons only","Atomic mass only","Boiling point"],a:0,e:"For simple spin-only treatment, magnetic behavior and magnetic moment depend on the number of unpaired electrons."},
+{q:"The spin-only magnetic moment is given by:",o:["μ = √[n(n+2)] BM","μ = n² BM","μ = 2n BM only","μ = √n BM"],a:0,e:"The spin-only formula is μ = √[n(n+2)] BM, where n is the number of unpaired electrons."},
+{q:"The spin-only magnetic moment of a diamagnetic species is:",o:["0 BM","1 BM","2 BM","5 BM"],a:0,e:"For diamagnetic species, n = 0, so μ = √[0(0+2)] = 0 BM."},
+{q:"If a species has 3 unpaired electrons, its spin-only magnetic moment is approximately:",o:["1.73 BM","2.83 BM","3.87 BM","5.92 BM"],a:2,e:"For n = 3, μ = √[3(3+2)] = √15 ≈ 3.87 BM."},
+{q:"If a species has 2 unpaired electrons, its spin-only magnetic moment is approximately:",o:["1.73 BM","2.83 BM","3.87 BM","5.92 BM"],a:1,e:"For n = 2, μ = √[2(2+2)] = √8 ≈ 2.83 BM."},
+{q:"Which change generally decreases the number of unpaired electrons in a species?",o:["Pairing of electrons","Removal of all nuclei","Increasing neutron number only","Increasing molecular mass only"],a:0,e:"When previously unpaired electrons pair in the same orbital, the number of unpaired electrons decreases."},
+{q:"Which statement about diamagnetic substances is correct?",o:["They are weakly repelled by an external magnetic field","They are always strongly attracted","They always contain unpaired electrons","They have infinite magnetic moment"],a:0,e:"Diamagnetic substances have all electrons paired and are weakly repelled by an applied magnetic field."},
+{q:"Which statement about paramagnetic substances is correct?",o:["They are attracted by an external magnetic field","They are always repelled","They contain no electrons","They must have zero magnetic moment"],a:0,e:"Paramagnetic substances contain unpaired electrons and are attracted by an external magnetic field."}
+];

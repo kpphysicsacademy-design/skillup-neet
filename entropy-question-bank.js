@@ -1,0 +1,17 @@
+window.SkillUpEntropyQuestions=[
+{q:"Entropy is a thermodynamic quantity that measures:",o:["Heat capacity only","Energy dispersal or disorder","Pressure only","Volume only"],a:1,e:"Entropy is commonly related to the dispersal of energy and the number of accessible microscopic arrangements."},
+{q:"The SI unit of molar entropy is:",o:["J mol⁻¹ K⁻¹","J mol⁻¹","kJ mol⁻¹","Pa"],a:0,e:"Molar entropy is expressed in joules per mole per kelvin."},
+{q:"For a reversible process, the entropy change is given by:",o:["ΔS = qrev/T","ΔS = T/qrev","ΔS = qrevT","ΔS = qrev + T"],a:0,e:"For reversible heat transfer at temperature T, dS = δqrev/T."},
+{q:"For an isolated system undergoing a spontaneous process, entropy:",o:["Decreases","Increases","Always remains zero","Becomes negative"],a:1,e:"The second law requires ΔS of an isolated system to be positive for a spontaneous irreversible process."},
+{q:"For a reversible process, the entropy change of the universe is:",o:["Positive","Negative","Zero","Infinite"],a:2,e:"A reversible process generates no entropy, so the entropy change of the universe is zero."},
+{q:"Which phase change generally causes the greatest increase in entropy?",o:["Gas → liquid","Liquid → solid","Solid → gas","Gas → solid"],a:2,e:"Sublimation greatly increases molecular freedom, producing a large positive entropy change."},
+{q:"When a liquid freezes at its freezing point, its entropy:",o:["Increases","Decreases","Remains unchanged","Becomes infinite"],a:1,e:"Freezing reduces molecular freedom and therefore decreases entropy."},
+{q:"The entropy change for isothermal reversible expansion of an ideal gas is:",o:["nR ln(V₂/V₁)","nR ln(V₁/V₂)","0","nRT ln(V₂/V₁)"],a:0,e:"For an isothermal reversible expansion, ΔS = nR ln(V₂/V₁)."},
+{q:"For an ideal gas, entropy increases when:",o:["Volume decreases at constant temperature","Volume increases at constant temperature","The gas is compressed reversibly","Temperature and volume both decrease"],a:1,e:"At constant temperature, increasing the volume increases the number of accessible microstates and hence entropy."},
+{q:"Which process has ΔSsys approximately equal to zero for an ideal gas?",o:["Isothermal expansion","Isothermal compression","A reversible adiabatic process","Free expansion"],a:2,e:"A reversible adiabatic process has qrev = 0, so ΔS = ∫dqrev/T = 0."},
+{q:"At constant temperature and pressure, a spontaneous process has:",o:["ΔG > 0","ΔG < 0","ΔG = 0 in every case","ΔH = 0"],a:1,e:"At constant T and P, spontaneity corresponds to a negative Gibbs free-energy change."},
+{q:"The Gibbs equation relating free energy, enthalpy and entropy is:",o:["ΔG = ΔH + TΔS","ΔG = ΔH − TΔS","ΔG = TΔH − ΔS","ΔG = ΔS − TΔH"],a:1,e:"At constant temperature, ΔG = ΔH − TΔS."},
+{q:"For a process with ΔH < 0 and ΔS > 0, ΔG is:",o:["Negative at all temperatures","Positive at all temperatures","Zero at all temperatures","Dependent only on pressure"],a:0,e:"Both negative ΔH and positive ΔS favor a negative ΔG, so the process is thermodynamically spontaneous at all temperatures."},
+{q:"For a process with ΔH > 0 and ΔS > 0, spontaneity is favored at:",o:["Low temperature","High temperature","Only at 0 K","No temperature"],a:1,e:"Increasing temperature makes the −TΔS term more negative and can make ΔG negative."},
+{q:"The Clausius inequality for a cyclic process is:",o:["∮δq/T ≥ 0","∮δq/T ≤ 0","∮δq/T = 1","∮δq/T = ∞"],a:1,e:"The Clausius inequality states that ∮δq/T ≤ 0, with equality for a reversible cycle."}
+];

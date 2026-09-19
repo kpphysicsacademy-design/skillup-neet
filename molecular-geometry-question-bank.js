@@ -1,0 +1,17 @@
+window.SkillUpMolecularGeometryQuestions=[
+{q:"Molecular geometry describes the:",o:["Three-dimensional arrangement of atoms in a molecule","Number of neutrons in the nucleus","Atomic mass of the molecule","Electron configuration of isolated atoms only"],a:0,e:"Molecular geometry describes how atoms are arranged in three-dimensional space around the central atom."},
+{q:"The molecular geometry of BeCl2 is:",o:["Linear","Bent","Trigonal planar","Tetrahedral"],a:0,e:"BeCl2 has two bonding electron domains and no lone pair on Be, giving a linear shape."},
+{q:"The molecular geometry of BF3 is:",o:["Linear","Trigonal planar","Bent","Tetrahedral"],a:1,e:"BF3 has three bonding domains around boron and no lone pair, giving a trigonal planar shape."},
+{q:"The molecular geometry of CH4 is:",o:["Tetrahedral","Square planar","Linear","Trigonal planar"],a:0,e:"Four bonding pairs around carbon arrange tetrahedrally, giving CH4 a tetrahedral molecular geometry."},
+{q:"The molecular geometry of NH3 is:",o:["Trigonal pyramidal","Trigonal planar","Linear","Square planar"],a:0,e:"NH3 has three N-H bonds and one lone pair, producing a trigonal pyramidal molecular shape."},
+{q:"The molecular geometry of H2O is:",o:["Bent","Linear","Trigonal planar","Tetrahedral"],a:0,e:"Two O-H bonds and two lone pairs give H2O a bent molecular geometry."},
+{q:"What is the molecular geometry of CO2?",o:["Linear","Bent","Tetrahedral","Trigonal pyramidal"],a:0,e:"The carbon atom in CO2 has two electron domains arranged 180° apart, so the molecule is linear."},
+{q:"What is the molecular geometry of PCl5?",o:["Trigonal bipyramidal","Tetrahedral","Octahedral","Square planar"],a:0,e:"PCl5 has five bonding domains around phosphorus, giving trigonal bipyramidal geometry."},
+{q:"What is the molecular geometry of SF6?",o:["Octahedral","Tetrahedral","Trigonal planar","Linear"],a:0,e:"Six bonding domains around sulfur produce an octahedral molecular geometry."},
+{q:"What is the molecular geometry of XeF4?",o:["Square planar","Tetrahedral","Trigonal pyramidal","Linear"],a:0,e:"XeF4 has six electron domains, including two lone pairs opposite each other; the four F atoms form a square planar molecular shape."},
+{q:"Which molecule has a trigonal pyramidal molecular geometry?",o:["NH3","BF3","CO2","BeCl2"],a:0,e:"NH3 has three bonding pairs and one lone pair on nitrogen, giving trigonal pyramidal geometry."},
+{q:"Which molecule has a bent molecular geometry?",o:["H2O","CH4","BF3","PCl5"],a:0,e:"H2O is bent because two lone pairs on oxygen affect the arrangement of its two O-H bonds."},
+{q:"Which molecule has a trigonal planar molecular geometry?",o:["BF3","NH3","H2O","CH4"],a:0,e:"BF3 has three bonding domains and no lone pair on boron, producing trigonal planar geometry."},
+{q:"Which molecule has tetrahedral molecular geometry?",o:["CH4","CO2","BF3","NH3"],a:0,e:"CH4 has four bonding pairs around carbon and no lone pairs, giving a tetrahedral molecular shape."},
+{q:"Which statement correctly distinguishes electron-domain geometry from molecular geometry?",o:["Electron-domain geometry includes lone-pair domains, while molecular geometry describes atom positions","They are always identical","Molecular geometry includes only nuclei and electron-domain geometry includes only neutrons","Neither depends on electron-pair arrangement"],a:0,e:"Electron-domain geometry considers all electron domains, whereas molecular geometry focuses on the positions of bonded atoms."}
+];

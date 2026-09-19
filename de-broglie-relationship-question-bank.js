@@ -1,0 +1,17 @@
+window.SkillUpDeBroglieRelationshipQuestions=[
+{q:"The de Broglie wavelength of a particle is given by:",o:["λ = h/p","λ = hp","λ = p/h","λ = h + p"],a:0,e:"De Broglie proposed λ = h/p, where p is the momentum of the particle."},
+{q:"For a particle of mass m moving with velocity v, the de Broglie wavelength is:",o:["h/(mv)","mv/h","hmv","h/(m+v)"],a:0,e:"For non-relativistic motion, p = mv, so λ = h/(mv)."},
+{q:"The de Broglie hypothesis assigns wave nature to:",o:["Only photons","Only electrons","All moving matter particles","Only atoms at rest"],a:2,e:"Matter particles in motion have an associated de Broglie wavelength."},
+{q:"If the momentum of a particle is doubled, its de Broglie wavelength becomes:",o:["Double","Half","Four times","Unchanged"],a:1,e:"Since λ is inversely proportional to momentum, doubling p halves λ."},
+{q:"If the velocity of a non-relativistic particle is doubled while its mass remains constant, its de Broglie wavelength becomes:",o:["Double","Half","Four times","Unchanged"],a:1,e:"Because λ = h/(mv), doubling v reduces λ to one-half."},
+{q:"For particles having the same momentum, their de Broglie wavelengths are:",o:["Different for every particle","The same","Always zero","Proportional to mass"],a:1,e:"λ depends only on momentum through λ = h/p."},
+{q:"An electron and a proton have the same velocity. Which has the longer de Broglie wavelength?",o:["Electron","Proton","Both are equal","Cannot be related"],a:0,e:"At the same velocity, λ = h/(mv), so the lighter electron has the longer wavelength."},
+{q:"An electron and a proton have the same kinetic energy. Which has the longer de Broglie wavelength?",o:["Electron","Proton","Both are equal","Both have zero wavelength"],a:0,e:"For non-relativistic particles, λ = h/√(2mK); the lighter electron has the longer wavelength."},
+{q:"The de Broglie wavelength of a particle is inversely proportional to its:",o:["Momentum","Planck constant","Charge only","Temperature only"],a:0,e:"The relation λ = h/p shows inverse proportionality to momentum."},
+{q:"The SI unit of de Broglie wavelength is:",o:["J","m","kg m s⁻¹","Hz"],a:1,e:"Wavelength is a length, so its SI unit is metre."},
+{q:"For an electron accelerated through a potential difference V, its non-relativistic de Broglie wavelength varies as:",o:["1/√V","√V","V","1/V²"],a:0,e:"The electron momentum is proportional to √V, hence λ is proportional to 1/√V."},
+{q:"If the accelerating potential for an electron is increased by a factor of 4, its de Broglie wavelength becomes:",o:["4 times","2 times","Half","One-fourth"],a:2,e:"Since λ ∝ 1/√V, increasing V by 4 makes λ half its original value."},
+{q:"The de Broglie wavelength becomes very small for a macroscopic object mainly because its:",o:["Planck constant is zero","Momentum is large","Charge is zero","Temperature is zero"],a:1,e:"λ = h/p; macroscopic objects usually have very large momentum, making λ extremely small."},
+{q:"The wave nature of electrons was experimentally supported by:",o:["Millikan oil-drop experiment","Davisson–Germer experiment","Rutherford scattering only","Photoelectric effect only"],a:1,e:"Davisson and Germer observed electron diffraction, supporting the de Broglie matter-wave hypothesis."},
+{q:"For a particle with zero momentum, the de Broglie relation λ = h/p indicates:",o:["A finite wavelength h","Wavelength tends to infinity","Wavelength is zero","Momentum becomes infinite"],a:1,e:"As p approaches zero, h/p tends toward infinity. The simple matter-wave relation is interpreted as an infinite wavelength limit."}
+];

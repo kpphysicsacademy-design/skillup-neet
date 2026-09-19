@@ -6,7 +6,7 @@ window.SkillUpPhotonEnergyQuestions=[
 {q:"If the frequency of radiation is doubled, the energy of each photon:",o:["Halves","Doubles","Becomes four times","Remains unchanged"],a:1,e:"Since E = hν, doubling frequency doubles photon energy."},
 {q:"If the wavelength of radiation is doubled, photon energy:",o:["Doubles","Halves","Becomes four times","Remains unchanged"],a:1,e:"Since E = hc/λ, doubling wavelength halves photon energy."},
 {q:"The energy of a photon of frequency 5 × 10¹⁴ Hz is approximately: (h = 6.626 × 10⁻³⁴ J s)",o:["3.313 × 10⁻¹⁹ J","3.313 × 10⁻²⁰ J","1.325 × 10⁻¹⁹ J","6.626 × 10⁻³⁴ J"],a:0,e:"E = hν = 6.626 × 10⁻³⁴ × 5 × 10¹⁴ = 3.313 × 10⁻¹⁹ J."},
-{q:"A photon has wavelength 600 nm. Its energy is approximately: (h = 6.626 × 10⁻³⁴ J s, c = 3 × 10⁸ m s⁻¹)",o:["3.31 × 10⁻¹⁹ J","2.21 × 10⁻¹⁹ J","1.10 × 10⁻¹⁹ J","4.42 × 10⁻¹⁹ J"],a:1,e:"E = hc/λ = (6.626 × 10⁻³⁴ × 3 × 10⁸)/(600 × 10⁻⁹) ≈ 3.31 × 10⁻¹⁹ J."},
+{q:"A photon has wavelength 600 nm. Its energy is approximately: (h = 6.626 × 10⁻³⁴ J s, c = 3 × 10⁸ m s⁻¹)",o:["3.31 × 10⁻¹⁹ J","2.21 × 10⁻¹⁹ J","1.10 × 10⁻¹⁹ J","4.42 × 10⁻¹⁹ J"],a:0,e:"E = hc/λ = (6.626 × 10⁻³⁴ × 3 × 10⁸)/(600 × 10⁻⁹) ≈ 3.31 × 10⁻¹⁹ J."},
 {q:"Which photon has the greatest energy?",o:["λ = 700 nm","λ = 600 nm","λ = 500 nm","λ = 400 nm"],a:3,e:"Shorter wavelength means higher photon energy because E = hc/λ."},
 {q:"Which photon has the lowest energy?",o:["ν = 1 × 10¹⁵ Hz","ν = 8 × 10¹⁴ Hz","ν = 5 × 10¹⁴ Hz","ν = 2 × 10¹⁴ Hz"],a:3,e:"Lower frequency corresponds to lower photon energy because E = hν."},
 {q:"The energy of one mole of photons is:",o:["hνN_A","hν/N_A","hcN_A/λ","Both hνN_A and hcN_A/λ"],a:3,e:"One mole contains N_A photons, so molar photon energy is N_Ahν = N_Ahc/λ."},

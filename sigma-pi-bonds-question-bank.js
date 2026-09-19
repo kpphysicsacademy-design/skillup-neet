@@ -1,0 +1,17 @@
+window.SkillUpSigmaPiBondsQuestions=[
+{q:"A sigma (σ) bond is formed by:",o:["Head-on overlap along the internuclear axis","Sidewise overlap of parallel orbitals","Overlap of nuclei","Transfer of neutrons"],a:0,e:"A sigma bond results from head-on overlap of orbitals along the internuclear axis."},
+{q:"A pi (π) bond is formed by:",o:["Sidewise overlap of parallel orbitals","Head-on overlap only","Nuclear overlap","No orbital overlap"],a:0,e:"A pi bond forms by lateral or sidewise overlap of parallel orbitals."},
+{q:"Which bond is formed first when two atoms form a multiple covalent bond?",o:["Sigma bond","Pi bond","Two pi bonds","No bond"],a:0,e:"The first bond between two atoms is a sigma bond; additional bonds are pi bonds."},
+{q:"A single covalent bond contains:",o:["One sigma bond","One pi bond","One sigma and one pi bond","Two pi bonds"],a:0,e:"A single bond consists of one sigma bond."},
+{q:"A double covalent bond contains:",o:["One sigma and one pi bond","Two sigma bonds","Two pi bonds only","One pi bond only"],a:0,e:"A double bond contains one sigma and one pi bond."},
+{q:"A triple covalent bond contains:",o:["One sigma and two pi bonds","Three sigma bonds","Two sigma and one pi bond","Three pi bonds only"],a:0,e:"A triple bond consists of one sigma bond and two pi bonds."},
+{q:"Which molecule contains one sigma and one pi bond between the two atoms?",o:["O2","H2","F2","Cl2"],a:0,e:"O2 has a double bond, containing one sigma and one pi bond."},
+{q:"Which molecule contains one sigma and two pi bonds?",o:["N2","H2","O2","F2"],a:0,e:"N2 has a triple bond, consisting of one sigma and two pi bonds."},
+{q:"In a sigma bond, electron density is concentrated:",o:["Along the internuclear axis","Only above the axis","Only below the axis","At the nucleus only"],a:0,e:"Sigma bonding electron density is cylindrically distributed around and along the internuclear axis."},
+{q:"A pi bond requires:",o:["Parallel orbitals with suitable sidewise overlap","Only spherical s orbitals","No electron overlap","Two nuclei with no electrons"],a:0,e:"Parallel p or other suitable orbitals can overlap sidewise to form a pi bond."},
+{q:"Which type of overlap is generally stronger for the same orbitals?",o:["Head-on overlap forming a sigma bond","Sidewise overlap forming a pi bond","Neither can overlap","Both are always identical"],a:0,e:"Head-on overlap is generally more effective than sidewise overlap, making sigma bonding stronger."},
+{q:"Rotation around a carbon-carbon double bond is restricted mainly because:",o:["Rotation would disrupt the pi bond","The sigma bond disappears instantly","There are no electrons","The nuclei fuse"],a:0,e:"Free rotation would require loss of the sideways p-orbital overlap that forms the pi bond."},
+{q:"How many sigma bonds are present in ethene, C2H4?",o:["5","4","6","3"],a:0,e:"Ethene has one C=C sigma bond and four C-H sigma bonds, for a total of five sigma bonds."},
+{q:"How many pi bonds are present in ethyne, C2H2?",o:["2","1","3","0"],a:0,e:"The C≡C triple bond contains one sigma and two pi bonds."},
+{q:"Which statement is correct?",o:["A double bond has one sigma and one pi bond","A double bond has two pi bonds only","A triple bond has three sigma bonds","A single bond has one pi bond only"],a:0,e:"Bond multiplicity follows: single = one sigma; double = one sigma + one pi; triple = one sigma + two pi."}
+];

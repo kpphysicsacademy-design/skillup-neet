@@ -1,0 +1,17 @@
+window.SkillUpHeatCapacityQuestions=[
+{q:"Heat capacity of a body is the amount of heat required to raise its temperature by:",o:["1 K","10 K","100 K","1 °C only at 0 °C"],a:0,e:"Heat capacity is the heat required for a unit increase in temperature. A temperature difference of 1 K equals 1 °C."},
+{q:"The SI unit of heat capacity is:",o:["J K⁻¹","J mol⁻¹ K⁻¹","J kg⁻¹","cal g⁻¹"],a:0,e:"Heat capacity of a particular body is measured in joules per kelvin (J K⁻¹)."},
+{q:"Molar heat capacity is the heat required to raise the temperature of:",o:["1 mole of a substance by 1 K","1 g by 1 K","1 kg by 1 K","1 mole by 100 K"],a:0,e:"Molar heat capacity refers to one mole and a temperature rise of 1 K."},
+{q:"Specific heat capacity is the heat required to raise the temperature of:",o:["Unit mass of a substance by 1 K","One mole by 1 K","The whole body by 1 K","One litre by 1 K"],a:0,e:"Specific heat capacity is defined per unit mass: q = m c ΔT."},
+{q:"The relation between heat supplied q, mass m, specific heat c and temperature change ΔT is:",o:["q = mcΔT","q = m/(cΔT)","q = c/(mΔT)","q = mc/ΔT"],a:0,e:"For sensible heating, q = mcΔT."},
+{q:"For a given substance, if the mass is doubled while c and ΔT remain constant, the heat required becomes:",o:["Double","Half","Four times","Unchanged"],a:0,e:"Since q = mcΔT, heat is directly proportional to mass."},
+{q:"For an ideal gas, the molar heat capacity at constant pressure is denoted by:",o:["Cp","Cv","C0","Cs"],a:0,e:"Cp represents molar heat capacity at constant pressure, while Cv represents it at constant volume."},
+{q:"For an ideal gas, the difference between molar heat capacities Cp and Cv is:",o:["R","2R","R/2","Zero"],a:0,e:"For an ideal gas, Mayer's relation is Cp − Cv = R."},
+{q:"For a monatomic ideal gas, the molar heat capacity at constant volume is:",o:["3R/2","5R/2","R","7R/2"],a:0,e:"A monatomic ideal gas has Cv = 3R/2 per mole."},
+{q:"For a diatomic ideal gas at ordinary temperatures, Cv is approximately:",o:["5R/2","3R/2","7R/2","R/2"],a:0,e:"For a diatomic ideal gas with translational and rotational degrees of freedom active, Cv ≈ 5R/2."},
+{q:"Which quantity depends on the amount of substance present?",o:["Heat capacity","Specific heat capacity","Molar heat capacity","Specific latent heat"],a:0,e:"Total heat capacity is an extensive property and increases with the amount of material."},
+{q:"If two identical bodies are joined, their total heat capacity is:",o:["Twice the heat capacity of one body","Half of one","Equal to one","Four times one"],a:0,e:"For identical bodies, heat capacities add, giving 2C."},
+{q:"A substance with a high specific heat capacity requires, for the same mass and temperature rise:",o:["More heat","Less heat","No heat","Exactly half the heat"],a:0,e:"From q = mcΔT, a larger c requires more heat for the same m and ΔT."},
+{q:"A 2 kg body has specific heat capacity 500 J kg⁻¹ K⁻¹. Heat required for a 10 K rise is:",o:["10,000 J","1,000 J","2,500 J","25,000 J"],a:0,e:"q = mcΔT = 2 × 500 × 10 = 10,000 J."},
+{q:"At constant volume, the heat capacity of an ideal gas is related to the change in:",o:["Internal energy","Pressure only","Volume only","Mass only"],a:0,e:"At constant volume with only PV work, qv = ΔU, so Cv is associated with the temperature dependence of internal energy."}
+];

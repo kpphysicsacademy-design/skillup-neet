@@ -1,0 +1,17 @@
+window.SkillUpFirstLawQuestions=[
+{q:"The first law of thermodynamics is a statement of conservation of:",o:["Energy","Momentum","Mass only","Charge"],a:0,e:"The first law states that energy is conserved; heat and work transfer energy to or from a system."},
+{q:"Using the convention that w is work done on the system, the first-law equation is:",o:["ΔU = q + w","ΔU = q − w","ΔU = w − q","ΔU = q/w"],a:0,e:"With work done on the system taken as positive, ΔU = q + w."},
+{q:"If a system absorbs 500 J heat and 200 J work is done on it, ΔU is:",o:["700 J","300 J","−300 J","−700 J"],a:0,e:"ΔU = q + w = 500 + 200 = 700 J."},
+{q:"If a system absorbs 500 J heat and does 200 J work on the surroundings, ΔU is:",o:["300 J","700 J","−300 J","−700 J"],a:0,e:"When w denotes work done by the system, ΔU = q − w = 500 − 200 = 300 J."},
+{q:"For a process in which q = 0, the process is called:",o:["Adiabatic","Isothermal","Isobaric","Isochoric"],a:0,e:"An adiabatic process involves no heat transfer between the system and surroundings."},
+{q:"For a constant-volume process involving only PV work, the work done by the system is:",o:["Zero","PΔV","−PΔV","PV"],a:0,e:"At constant volume, ΔV = 0, so PV work is zero."},
+{q:"In a cyclic process, the net change in internal energy is:",o:["Zero","Positive","Negative","Equal to the heat supplied"],a:0,e:"Internal energy is a state function, so returning to the initial state gives ΔU = 0."},
+{q:"If q = 0 and the system does 100 J work on the surroundings, its internal energy changes by:",o:["−100 J","+100 J","0 J","+200 J"],a:0,e:"Using ΔU = q − w for work done by the system, ΔU = 0 − 100 = −100 J."},
+{q:"Which of the following is a path function?",o:["Heat","Internal energy","Enthalpy","Entropy"],a:0,e:"Heat and work are path functions; internal energy, enthalpy and entropy are state functions."},
+{q:"For an isolated system, heat and work exchange with the surroundings are:",o:["Both zero","Both positive","Both negative","Always unequal"],a:0,e:"An isolated system exchanges neither heat nor work with its surroundings."},
+{q:"If ΔU = 0 for a process, which statement is necessarily true?",o:["The system has returned to its initial state","q and w have equal magnitudes with opposite signs under the on-system convention","No heat was exchanged","No work was done"],a:1,e:"From ΔU = q + w, ΔU = 0 requires q = −w; the system need not have returned to its initial state."},
+{q:"The first law by itself does not determine the:",o:["Direction of a spontaneous process","Energy balance","Relationship among q, w and ΔU","Conservation of energy"],a:0,e:"The first law gives energy conservation but does not establish the direction or spontaneity of processes."},
+{q:"In a free expansion of an ideal gas into vacuum, the work done by the gas is:",o:["Zero","Positive","Negative","Equal to nRT"],a:0,e:"External pressure is zero during free expansion, so PV work is zero."},
+{q:"If 250 J heat leaves a system and 100 J work is done on the system, ΔU is:",o:["−150 J","+150 J","−350 J","+350 J"],a:0,e:"q = −250 J and w = +100 J, so ΔU = −250 + 100 = −150 J."},
+{q:"Which statement best expresses the first law?",o:["Energy can be created in a cycle","Energy can neither be created nor destroyed, only transferred or transformed","Heat always flows from cold to hot","Every process is reversible"],a:1,e:"The first law is the thermodynamic form of conservation of energy."}
+];

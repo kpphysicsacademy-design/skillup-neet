@@ -1,0 +1,17 @@
+window.SkillUpVSEPRTheoryQuestions=[
+{q:"VSEPR theory is mainly used to predict the:",o:["Molecular shape from electron-pair repulsions","Atomic mass","Number of neutrons","Melting point only"],a:0,e:"VSEPR theory predicts molecular geometry by considering repulsions among electron pairs around a central atom."},
+{q:"VSEPR stands for:",o:["Valence Shell Electron Pair Repulsion","Variable Shell Electron Proton Reaction","Valence State Energy Pair Rule","Vibrational Shell Electron Proton Repulsion"],a:0,e:"VSEPR means Valence Shell Electron Pair Repulsion."},
+{q:"According to VSEPR theory, electron pairs arrange themselves to:",o:["Minimize repulsions","Maximize nuclear charge","Remove all lone pairs","Increase atomic mass"],a:0,e:"Electron domains arrange as far apart as possible to minimize repulsion."},
+{q:"Which type of electron pair generally exerts the greatest repulsion?",o:["Lone pair","Bond pair","Core pair","Nuclear pair"],a:0,e:"Lone pairs occupy more space around the central atom and generally repel more strongly than bonding pairs."},
+{q:"The usual order of electron-pair repulsion is:",o:["LP-LP > LP-BP > BP-BP","BP-BP > LP-BP > LP-LP","LP-BP > BP-BP > LP-LP","All are equal"],a:0,e:"Lone pair-lone pair repulsion is strongest, followed by lone pair-bond pair, then bond pair-bond pair."},
+{q:"What is the electron-domain geometry for two electron domains around a central atom?",o:["Linear","Bent","Trigonal planar","Tetrahedral"],a:0,e:"Two electron domains arrange 180° apart, giving linear electron-domain geometry."},
+{q:"What is the electron-domain geometry for three electron domains?",o:["Linear","Trigonal planar","Tetrahedral","Octahedral"],a:1,e:"Three electron domains arrange in a trigonal planar arrangement with approximately 120° angles."},
+{q:"What is the electron-domain geometry for four electron domains?",o:["Linear","Trigonal planar","Tetrahedral","Square planar"],a:2,e:"Four electron domains adopt a tetrahedral electron-domain geometry."},
+{q:"What is the molecular shape of CH4 according to VSEPR theory?",o:["Linear","Bent","Trigonal planar","Tetrahedral"],a:3,e:"CH4 has four bonding pairs and no lone pairs on carbon, giving a tetrahedral molecular shape."},
+{q:"What is the molecular shape of NH3?",o:["Linear","Trigonal planar","Trigonal pyramidal","Tetrahedral"],a:2,e:"NH3 has three N-H bonding pairs and one lone pair, giving a trigonal pyramidal molecular shape."},
+{q:"What is the molecular shape of H2O?",o:["Linear","Bent","Trigonal planar","Tetrahedral"],a:1,e:"H2O has two bonding pairs and two lone pairs around oxygen, giving a bent molecular shape."},
+{q:"What is the molecular shape of CO2?",o:["Bent","Linear","Trigonal pyramidal","Tetrahedral"],a:1,e:"Carbon in CO2 has two electron domains; they arrange 180° apart, producing a linear molecule."},
+{q:"The ideal bond angle in a tetrahedral arrangement is approximately:",o:["90°","109.5°","120°","180°"],a:1,e:"The ideal tetrahedral bond angle is approximately 109.5°."},
+{q:"The ideal bond angle in a trigonal planar arrangement is approximately:",o:["90°","109.5°","120°","180°"],a:2,e:"Three electron domains in a trigonal planar arrangement are separated by approximately 120°."},
+{q:"Which molecule illustrates that lone pairs can compress bond angles?",o:["CH4","NH3","CO2","BeCl2"],a:1,e:"The lone pair on nitrogen in NH3 repels bonding pairs more strongly, reducing the H-N-H angle from the ideal tetrahedral value."}
+];

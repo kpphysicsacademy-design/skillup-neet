@@ -8,7 +8,7 @@ window.SkillUpHydrogenLikeSpeciesQuestions=[
 {q:"The ground-state ionization energy of Li²⁺ is:",o:["13.6 eV","27.2 eV","122.4 eV","54.4 eV"],a:2,e:"Li²⁺ has Z = 3, so ionization energy = 13.6Z² = 122.4 eV."},
 {q:"For the same principal quantum number n, increasing nuclear charge Z causes the Bohr radius to:",o:["Increase","Decrease","Remain unchanged","Become infinite"],a:1,e:"Since rₙ ∝ 1/Z, the orbit radius decreases as nuclear charge increases."},
 {q:"For the same n, the magnitude of binding energy of a hydrogen-like ion varies as:",o:["Z","Z²","1/Z","1/Z²"],a:1,e:"Binding energy magnitude is proportional to Z²."},
-{q:"The energy of an electron in the n = 2 orbit of He⁺ is:",o:["−54.4 eV","−27.2 eV","−13.6 eV","−3.4 eV"],a:1,e:"E₂ = −13.6 × 2²/2² = −13.6 eV? Wait: for He⁺, E₂ = −13.6 eV. Therefore the correct option should be −13.6 eV."},
+{q:"The energy of an electron in the n = 2 orbit of He⁺ is:",o:["−54.4 eV","−27.2 eV","−13.6 eV","−3.4 eV"],a:2,e:"For He⁺, E₂ = −13.6 × 2²/2² = −13.6 eV."},
 {q:"The correct relation for spectral wavenumber of a hydrogen-like species is:",o:["1/λ = RZ²(1/n₁² − 1/n₂²)","1/λ = R/Z²(1/n₁² − 1/n₂²)","λ = RZ²","ν = R/Z"],a:0,e:"The Rydberg relation for one-electron species includes the factor Z²."},
 {q:"Compared with hydrogen, the Lyman-α transition wavelength of He⁺ is:",o:["Four times longer","Two times longer","One-fourth as long","The same"],a:2,e:"Wavenumber scales as Z², so wavelength scales as 1/Z². For He⁺, λ is one-fourth of the hydrogen value."},
 {q:"Which species has the smallest ground-state Bohr radius?",o:["H","He⁺","Li²⁺","All are equal"],a:2,e:"For n = 1, r₁ = a₀/Z, so Li²⁺ (Z = 3) has the smallest radius."},

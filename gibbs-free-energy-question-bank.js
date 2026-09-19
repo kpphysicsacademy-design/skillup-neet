@@ -1,0 +1,17 @@
+window.SkillUpGibbsFreeEnergyQuestions=[
+{q:"Gibbs free energy is defined by the relation:",o:["G = H + TS","G = H − TS","G = U + PV","G = TS − H"],a:1,e:"Gibbs free energy is defined as G = H − TS."},
+{q:"At constant temperature and pressure, a process is spontaneous when:",o:["ΔG > 0","ΔG < 0","ΔG = 0 always","ΔH = 0"],a:1,e:"At constant T and P, a negative ΔG indicates a thermodynamically spontaneous process."},
+{q:"At equilibrium at constant temperature and pressure:",o:["ΔG < 0","ΔG > 0","ΔG = 0","ΔG = ΔH"],a:2,e:"At equilibrium, the Gibbs free-energy change for an infinitesimal process is zero."},
+{q:"The relation between Gibbs free energy, enthalpy and entropy is:",o:["ΔG = ΔH + TΔS","ΔG = ΔH − TΔS","ΔG = TΔH − ΔS","ΔG = ΔS − TΔH"],a:1,e:"The Gibbs equation is ΔG = ΔH − TΔS."},
+{q:"The SI unit of Gibbs free energy is:",o:["J mol⁻¹","J mol⁻¹ K⁻¹","K mol⁻¹","Pa"],a:0,e:"Molar Gibbs free energy is commonly expressed in J mol⁻¹."},
+{q:"If ΔG is negative, the reaction at constant T and P is:",o:["Thermodynamically spontaneous","At equilibrium","Thermodynamically impossible","Always instantaneous"],a:0,e:"Negative ΔG indicates thermodynamic spontaneity; it does not specify reaction speed."},
+{q:"If ΔG is positive at constant T and P, the forward process is:",o:["Spontaneous","Non-spontaneous","At equilibrium","Always explosive"],a:1,e:"A positive ΔG means the forward process is thermodynamically non-spontaneous under those conditions."},
+{q:"For a process with ΔH < 0 and ΔS > 0, ΔG is:",o:["Negative at all temperatures","Positive at all temperatures","Zero at all temperatures","Independent of temperature"],a:0,e:"Both terms favor negative ΔG, so the process is spontaneous at all temperatures under the stated conditions."},
+{q:"For a process with ΔH > 0 and ΔS > 0, spontaneity is favored at:",o:["Low temperature","High temperature","All temperatures","No temperature"],a:1,e:"At sufficiently high temperature, the −TΔS term can overcome positive ΔH."},
+{q:"For a process with ΔH < 0 and ΔS < 0, spontaneity is favored at:",o:["High temperature","Low temperature","All temperatures","No temperature"],a:1,e:"Negative ΔH favors spontaneity while negative ΔS opposes it; low temperature favors the enthalpy term."},
+{q:"The relationship between standard Gibbs energy change and equilibrium constant is:",o:["ΔG° = RT ln K","ΔG° = −RT ln K","ΔG° = K/RT","ΔG° = RT/K"],a:1,e:"The standard relation is ΔG° = −RT ln K."},
+{q:"When K > 1 for a reaction at a given temperature, ΔG° is:",o:["Positive","Negative","Always zero","Infinite"],a:1,e:"Because ΔG° = −RT ln K, K > 1 gives ln K > 0 and therefore ΔG° < 0."},
+{q:"When K = 1, the standard Gibbs free-energy change is:",o:["Positive","Negative","Zero","Equal to RT"],a:2,e:"For K = 1, ln K = 0, so ΔG° = 0."},
+{q:"The condition ΔG = 0 for a reaction at constant T and P corresponds to:",o:["Maximum reaction rate","Equilibrium","Complete conversion","Zero entropy in every subsystem"],a:1,e:"ΔG = 0 is the equilibrium condition at constant temperature and pressure."},
+{q:"Which statement is correct about Gibbs free energy?",o:["It determines reaction rate directly","It is a criterion of thermodynamic spontaneity at constant T and P","It is always equal to heat","It is independent of temperature"],a:1,e:"Gibbs free energy provides a thermodynamic criterion for spontaneity at constant temperature and pressure."}
+];

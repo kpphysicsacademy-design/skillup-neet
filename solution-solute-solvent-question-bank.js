@@ -1,0 +1,17 @@
+window.SkillUpSolutionSoluteSolventQuestions=[
+{q:"A solution is a:",o:["Heterogeneous mixture only","Homogeneous mixture of two or more components","Pure substance","Compound with fixed composition"],a:1,e:"A solution is a homogeneous mixture in which the components are uniformly distributed."},
+{q:"The component of a solution that is generally present in the larger amount is called the:",o:["Solute","Solvent","Precipitate","Colloid"],a:1,e:"The solvent is the component that usually constitutes the larger proportion of a solution."},
+{q:"The component that is dissolved in a solution is called the:",o:["Solvent","Solute","Medium","Dispersed phase"],a:1,e:"The solute is the substance dissolved in the solvent."},
+{q:"In a solution of sodium chloride in water, water acts as the:",o:["Solute","Solvent","Precipitate","Electrolyte only"],a:1,e:"Water is present as the dissolving medium, so it is the solvent."},
+{q:"In a solution containing 10 g glucose and 100 g water, glucose is the:",o:["Solvent","Solute","Pure solvent","Precipitate"],a:1,e:"Glucose is dissolved in water, so glucose is the solute."},
+{q:"Which of the following is a gaseous solution?",o:["Air","Salt water","Brass","Milk"],a:0,e:"Air is a homogeneous mixture of gases, with nitrogen as its major component."},
+{q:"Brass is best described as a:",o:["Solid solution","Gas solution","Liquid solution","Suspension"],a:0,e:"Brass is a homogeneous solid solution, mainly of copper and zinc."},
+{q:"Which of the following is a liquid solution?",o:["Air","Brass","Ethanol in water","Smoke"],a:2,e:"Ethanol and water form a homogeneous liquid solution."},
+{q:"A solution containing a gas dissolved in a liquid is:",o:["Air","Soda water","Brass","Bronze"],a:1,e:"Carbon dioxide dissolved in water in soda water is a gas-in-liquid solution."},
+{q:"In a solution, the solute particles are generally:",o:["Visible to the naked eye","Uniformly distributed at the molecular or ionic level","Always separated by filtration","Always larger than colloidal particles"],a:1,e:"True solutions contain solute particles dispersed uniformly at molecular or ionic dimensions."},
+{q:"Which property is characteristic of a true solution?",o:["It is always opaque","Its particles settle rapidly on standing","It is homogeneous","Its particles can always be separated by ordinary filtration"],a:2,e:"A true solution is homogeneous and does not show ordinary sedimentation."},
+{q:"If a small amount of iodine is dissolved in alcohol, alcohol acts as the:",o:["Solute","Solvent","Precipitate","Solid phase"],a:1,e:"Alcohol is the medium that dissolves iodine, so it acts as the solvent."},
+{q:"A mixture in which the solvent is water is commonly called an:",o:["Aqueous solution","Amalgam","Aerosol","Emulsion"],a:0,e:"A solution having water as its solvent is called an aqueous solution."},
+{q:"Which statement about solute and solvent is correct?",o:["The solute always has greater mass","The solvent is the substance that dissolves the solute","The solute must always be a solid","The solvent must always be water"],a:1,e:"The solvent is the component in which the solute dissolves; it need not be water."},
+{q:"When both components of a solution are liquids, the solvent is usually identified as the component:",o:["Present in the smaller amount","Present in the larger amount","With the higher density only","With the lower boiling point only"],a:1,e:"For liquid-liquid solutions, the component present in the larger amount is generally treated as the solvent."}
+];

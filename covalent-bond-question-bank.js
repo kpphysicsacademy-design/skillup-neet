@@ -1,0 +1,17 @@
+window.SkillUpCovalentBondQuestions=[
+{q:"A covalent bond is formed primarily by:",o:["Transfer of protons","Sharing of electron pairs between atoms","Sharing of neutrons","Complete loss of all electrons"],a:1,e:"A covalent bond results from sharing one or more pairs of electrons between atoms."},
+{q:"Which pair most commonly forms a covalent bond?",o:["H and H","Na and Cl","K and Br","Mg and O"],a:0,e:"Two hydrogen atoms share an electron pair to form the covalent H2 molecule."},
+{q:"A single covalent bond contains:",o:["One shared electron pair","Two shared electron pairs","Three shared electron pairs","No electrons"],a:0,e:"A single covalent bond consists of one shared pair of electrons."},
+{q:"A double covalent bond contains:",o:["One shared pair","Two shared pairs","Three shared pairs","Four shared pairs"],a:1,e:"A double bond contains two shared electron pairs."},
+{q:"A triple covalent bond contains:",o:["One shared pair","Two shared pairs","Three shared pairs","Four shared pairs"],a:2,e:"A triple bond consists of three shared electron pairs."},
+{q:"Which molecule contains a double covalent bond?",o:["H2","O2","N2","CH4"],a:1,e:"O2 is commonly represented with an O=O double bond."},
+{q:"Which molecule contains a triple covalent bond?",o:["H2","O2","N2","H2O"],a:2,e:"N2 is represented by an N≡N triple bond."},
+{q:"A nonpolar covalent bond is most likely when bonded atoms have:",o:["Very similar electronegativities","Extremely different charges","One atom is always a metal","No valence electrons"],a:0,e:"Similar electronegativities lead to relatively equal sharing of bonding electrons."},
+{q:"A polar covalent bond involves:",o:["Unequal sharing of bonding electrons","No electron sharing","Transfer of neutrons","Only metallic ions"],a:0,e:"Different electronegativities cause unequal sharing of the bonding electron pair."},
+{q:"Which bond is strongly polar covalent?",o:["H-H","Cl-Cl","H-Cl","N-N"],a:2,e:"Hydrogen and chlorine have different electronegativities, so the H-Cl bond is polar."},
+{q:"Which molecule is commonly treated as nonpolar because its identical atoms share electrons equally?",o:["HCl","Cl2","H2O","NH3"],a:1,e:"Cl2 contains two identical chlorine atoms, so the bonding electrons are shared equally."},
+{q:"In a Lewis structure, a covalent bond is commonly represented by:",o:["A line between bonded atoms","A neutron symbol","A nucleus only","A mass number"],a:0,e:"A line in a Lewis structure represents a shared electron pair, i.e. a covalent bond."},
+{q:"Which statement about bond length is generally correct?",o:["Triple bonds are generally shorter than double bonds between the same atoms","Single bonds are always shortest","Bond length is unrelated to bond order","Double bonds always have the longest length"],a:0,e:"Higher bond order generally corresponds to stronger and shorter bonds for the same pair of atoms."},
+{q:"Which statement about bond strength is generally correct for the same atoms?",o:["Higher bond order generally means a stronger bond","Single bonds are always strongest","Bond order has no relation to strength","Triple bonds contain no shared electrons"],a:0,e:"For the same atoms, increasing bond order generally increases bond strength and decreases bond length."},
+{q:"Which species is best described as having covalent bonds within the molecule?",o:["H2O","NaCl crystal","MgO lattice","KBr crystal"],a:0,e:"H2O consists of discrete molecules containing covalent O-H bonds."}
+];

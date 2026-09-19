@@ -1,0 +1,17 @@
+window.SkillUpSecondLawQuestions=[
+{q:"The second law of thermodynamics introduces the concept of:",o:["Temperature","Entropy","Pressure","Density"],a:1,e:"The second law establishes entropy as a state function that indicates the direction of spontaneous processes."},
+{q:"For a spontaneous process in an isolated system, the entropy of the universe:",o:["Decreases","Remains zero","Increases","Becomes negative"],a:2,e:"For a spontaneous irreversible process, ΔS_universe > 0."},
+{q:"For a reversible process, the entropy change of the universe is:",o:["Positive","Negative","Zero","Infinite"],a:2,e:"A reversible process produces no entropy, so ΔS_universe = 0."},
+{q:"The SI unit of molar entropy is:",o:["J mol⁻¹ K⁻¹","J mol⁻¹","kJ mol⁻¹","Pa mol⁻¹"],a:0,e:"Molar entropy is expressed in J mol⁻¹ K⁻¹."},
+{q:"Entropy is a measure of:",o:["Heat only","Disorder or energy dispersal","Pressure only","Mass of a system"],a:1,e:"Entropy is commonly described as a measure of disorder or the dispersal of energy."},
+{q:"For a reversible process, the entropy change is given by:",o:["ΔS = q_rev/T","ΔS = T/q_rev","ΔS = q_rev×T","ΔS = q_rev+T"],a:0,e:"For a reversible change at temperature T, dS = δq_rev/T."},
+{q:"When a solid melts at its melting point, its entropy:",o:["Decreases","Increases","Becomes zero","Does not change"],a:1,e:"Melting increases molecular freedom, so entropy increases."},
+{q:"Which change generally produces an increase in entropy?",o:["Gas → liquid","Liquid → solid","Solid → gas","Gas compression"],a:2,e:"Sublimation changes a solid directly to a gas and greatly increases molecular freedom."},
+{q:"The entropy change for an isothermal reversible expansion of an ideal gas is:",o:["nR ln(V₂/V₁)","nR ln(V₁/V₂)","0","nRT ln(V₂/V₁)"],a:0,e:"For an isothermal reversible ideal-gas expansion, ΔS = nR ln(V₂/V₁)."},
+{q:"For a spontaneous process at constant temperature and pressure, Gibbs free energy change is:",o:["ΔG > 0","ΔG = 0 always","ΔG < 0","ΔG = T"],a:2,e:"At constant T and P, a spontaneous process has ΔG < 0."},
+{q:"At equilibrium at constant temperature and pressure:",o:["ΔG < 0","ΔG > 0","ΔG = 0","ΔS = 0 for every subsystem"],a:2,e:"A system at equilibrium has minimum Gibbs free energy and ΔG = 0 for the infinitesimal change."},
+{q:"The relation between Gibbs free energy, enthalpy and entropy is:",o:["ΔG = ΔH + TΔS","ΔG = ΔH − TΔS","ΔG = TΔH − ΔS","ΔG = ΔS − TΔH"],a:1,e:"The fundamental relation at constant temperature is ΔG = ΔH − TΔS."},
+{q:"If ΔH < 0 and ΔS > 0, a process is:",o:["Spontaneous at all temperatures","Non-spontaneous at all temperatures","Spontaneous only at low temperature","Spontaneous only at high temperature"],a:0,e:"Both terms favor spontaneity: ΔG = ΔH − TΔS is negative at all temperatures."},
+{q:"For an endothermic process with ΔH > 0 and ΔS > 0, spontaneity is favored at:",o:["Low temperature","High temperature","Only 0 K","No temperature"],a:1,e:"At sufficiently high T, the −TΔS term can outweigh positive ΔH, making ΔG negative."},
+{q:"The Clausius statement of the second law says that heat cannot, by itself, flow:",o:["From hot to cold","From cold to hot","Within a gas","During expansion"],a:1,e:"The Clausius statement says that heat cannot spontaneously transfer from a colder body to a hotter body without external work."}
+];

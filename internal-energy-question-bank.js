@@ -1,0 +1,17 @@
+window.SkillUpInternalEnergyQuestions=[
+{q:"Internal energy of a system is the total:",o:["Microscopic kinetic and potential energy of its particles","Macroscopic kinetic energy only","Potential energy of the surroundings","Work done by the system"],a:0,e:"Internal energy is the sum of microscopic kinetic and potential energies associated with particles of the system."},
+{q:"Internal energy is a:",o:["State function","Path function","Mode of heat transfer","Unit of energy"],a:0,e:"Internal energy depends only on the state of the system, so it is a state function."},
+{q:"The symbol commonly used for internal energy is:",o:["U","H","q","w"],a:0,e:"U is commonly used to represent the internal energy of a thermodynamic system."},
+{q:"The SI unit of internal energy is:",o:["Joule","Pascal","Kelvin","Watt"],a:0,e:"Internal energy is energy, so its SI unit is the joule (J)."},
+{q:"For an ideal gas, internal energy depends primarily on:",o:["Temperature","Pressure alone","Volume alone","Shape of the container"],a:0,e:"For an ideal gas, internal energy is a function of temperature only."},
+{q:"If the temperature of an ideal gas increases, its internal energy generally:",o:["Increases","Decreases","Becomes zero","Remains unchanged"],a:0,e:"An increase in temperature increases the average molecular kinetic energy and therefore the internal energy of an ideal gas."},
+{q:"For a monatomic ideal gas, the internal energy is:",o:["U = 3nRT/2","U = nRT","U = 5nRT/2","U = 2nRT"],a:0,e:"A monatomic ideal gas has three translational degrees of freedom, giving U = 3nRT/2."},
+{q:"For an ideal gas, a change in internal energy can be written as:",o:["ΔU = nCᵥΔT","ΔU = nCₚΔT for every process","ΔU = PΔV always","ΔU = q + w regardless of sign convention"],a:0,e:"For an ideal gas, ΔU = nCᵥΔT, independent of the path."},
+{q:"If a system returns to its initial state after a cyclic process, the net change in internal energy is:",o:["Zero","Positive","Negative","Infinite"],a:0,e:"Because internal energy is a state function, its change over a complete cycle is zero."},
+{q:"During an isothermal change of an ideal gas, ΔU is:",o:["Zero","Always positive","Always negative","Equal to PΔV"],a:0,e:"For an ideal gas, internal energy depends only on temperature. Constant temperature therefore gives ΔU = 0."},
+{q:"If a closed system receives 600 J heat and does 150 J work on the surroundings, ΔU is:",o:["+450 J","+750 J","−450 J","−750 J"],a:0,e:"Using ΔU = q − w when w is work done by the system: 600 − 150 = +450 J."},
+{q:"If 200 J of work is done on a system and no heat is exchanged, the internal energy change is:",o:["+200 J","−200 J","0 J","+400 J"],a:0,e:"With q = 0 and work done on the system taken as positive, the internal energy increases by 200 J."},
+{q:"Which statement about ΔU is correct?",o:["It depends only on initial and final states","It depends on the path taken","It is always equal to heat supplied","It is always equal to work done"],a:0,e:"The change in a state function depends only on the initial and final states."},
+{q:"For an isolated system, the change in internal energy due to heat and work exchange with surroundings is:",o:["Zero","Always positive","Always negative","Undefined"],a:0,e:"An isolated system exchanges neither heat nor work with its surroundings, so ΔU = 0 for such a process."},
+{q:"Which quantity is not a state function?",o:["Heat","Internal energy","Enthalpy","Entropy"],a:0,e:"Heat is path-dependent, whereas internal energy, enthalpy and entropy are state functions."}
+];

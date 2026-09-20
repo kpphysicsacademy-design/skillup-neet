@@ -13,5 +13,5 @@ window.SkillUpHenrysLawQuestions = [
 {q:"Deep-sea divers can suffer from 'bends' when they ascend rapidly because:",o:["More gases dissolve at lower pressure","Dissolved gases can come out of solution rapidly as pressure decreases","Nitrogen becomes a liquid in blood","Oxygen has zero solubility"],a:1,e:"High pressure during deep diving increases dissolved gas levels; rapid pressure reduction can cause gases such as nitrogen to form bubbles in tissues and blood."},
 {q:"Which statement is correct for Henry's law at constant temperature?",o:["p/x is constant","p×x is constant","p+x is constant","p−x is constant"],a:0,e:"From p = KH x, the ratio p/x equals KH and is constant for a specified gas-solvent system at a fixed temperature."},
 {q:"If KH = 200 atm and the mole fraction of dissolved gas is 0.01, the partial pressure is:",o:["0.5 atm","2 atm","20 atm","200 atm"],a:1,e:"Using p = KH x = 200 × 0.01 = 2 atm."},
-{q:"If the partial pressure of a gas is 5 atm and KH = 250 atm, its dissolved mole fraction is:",o:["0.002","0.02","0.2","50"],a:0,e:"x = p/KH = 5/250 = 0.020, so the correct value is 0.02."}
+{q:"If the partial pressure of a gas is 5 atm and KH = 250 atm, its dissolved mole fraction is:",o:["0.002","0.02","0.2","50"],a:1,e:"x = p/KH = 5/250 = 0.020, so the correct value is 0.02."}
 ];

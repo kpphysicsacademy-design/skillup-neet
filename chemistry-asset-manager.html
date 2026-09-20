@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Chemistry Asset Manager</title>
+<style>
+:root{--navy:#071a31;--blue:#1f7aff;--green:#58cc02;--ink:#172033;--muted:#667085;--line:#dfe7ef;--bg:#f6f8fb;--red:#ef4444}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.topin{max-width:1050px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:12px}.brand{font-weight:950;font-size:20px}.badge{margin-left:auto;background:#eef5ff;color:#1f5fb5;border:1px solid #d8e9fb;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900}
+.wrap{max-width:1050px;margin:auto;padding:22px 16px 60px}.hero{background:linear-gradient(135deg,#071a31,#123a66);color:#fff;border-radius:24px;padding:24px;margin-bottom:18px}.hero h1{margin:0 0 7px;font-size:28px}.hero p{margin:0;color:#dbeafe;font-size:13px;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 7px 20px rgba(23,32,51,.06)}h2{font-size:16px;margin:0 0 14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:12px}.field label{display:block;font-size:11px;font-weight:900;color:#475467;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:2px solid #d8e2ec;border-radius:11px;padding:10px 11px;font:600 13px Inter,system-ui,sans-serif;outline:none;background:#fff}.field textarea{min-height:82px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}
+.drop{border:2px dashed #b8cbe0;border-radius:14px;padding:18px;text-align:center;background:#f8fbff}.drop strong{display:block;font-size:13px}.drop span{display:block;color:var(--muted);font-size:11px;margin-top:4px}.drop input{margin-top:10px}
+.preview{min-height:170px;border:2px solid var(--line);border-radius:14px;display:grid;place-items:center;background:#fbfdff;padding:12px;text-align:center}.preview img{max-width:100%;max-height:220px;object-fit:contain}.preview .empty{color:#98a2b3;font-size:12px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:950;cursor:pointer}.primary{background:var(--green);color:#fff}.secondary{background:#eef4fa;color:#27445f}.danger{background:#fff0f0;color:#b42318}.status{margin-top:12px;padding:11px;border-radius:11px;font-size:12px;font-weight:800;display:none}.ok{display:block;background:#ecfdf3;color:#067647;border:1px solid #abefc6}.err{display:block;background:#fff1f1;color:#b42318;border:1px solid #ffc4c4}
+.code{width:100%;min-height:260px;font:12px/1.5 Consolas,monospace;background:#0b1628;color:#dbeafe;border-radius:14px;border:0;padding:14px}
+.help{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}
+@media(max-width:760px){.grid,.row{grid-template-columns:1fr}.hero h1{font-size:24px}}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand">🧪 SkillUp Chemistry Asset Manager</div><span class="badge">ADMIN TOOL • ASSET LIBRARY</span></div></header>
+<main class="wrap">
+<section class="hero"><h1>Build reusable Chemistry media</h1><p>Create stable asset metadata for molecular structures, reaction schemes and diagrams. Existing question banks remain untouched. This tool prepares a clean asset record that can be added to the repository.</p></section>
+<div class="grid">
+<section class="card">
+<h2>1. Asset details</h2>
+<div class="row">
+<div class="field"><label>Asset type</label><select id="type"><option value="structure">Structure</option><option value="reaction">Reaction</option><option value="diagram">Diagram</option><option value="image">Image</option></select></div>
+<div class="field"><label>Asset ID</label><input id="id" readonly></div>
+</div>
+<div class="row">
+<div class="field"><label>Name *</label><input id="name" placeholder="e.g. Phenol"></div>
+<div class="field"><label>Formula</label><input id="formula" placeholder="e.g. C6H6O"></div>
+</div>
+<div class="field"><label>Common name / description</label><input id="common" placeholder="Hydroxybenzene"></div>
+<div class="field"><label>Tags</label><input id="tags" placeholder="phenol, aromatic, organic"></div>
+<div class="field"><label>Notes</label><textarea id="notes" placeholder="Optional teaching or usage notes"></textarea></div>
+<div class="drop"><strong>Upload asset</strong><span>SVG is preferred for structures and diagrams. PNG/JPG can be used for other images.</span><input id="file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></div>
+<div class="actions"><button class="btn primary" id="generate">Generate asset record</button><button class="btn secondary" id="clear">Clear</button></div>
+<div id="status" class="status"></div>
+</section>
+<section class="card">
+<h2>2. Preview</h2>
+<div class="preview" id="preview"><div class="empty">Upload an asset to preview it.</div></div>
+<p class="help">The browser only previews the selected file. It does not expose GitHub credentials or write directly to the repository.</p>
+<h2 style="margin-top:20px">Generated metadata</h2>
+<textarea class="code" id="output" spellcheck="false" placeholder="Generated JSON will appear here"></textarea>
+<div class="actions"><button class="btn secondary" id="copy">Copy JSON</button><button class="btn secondary" id="download">Download JSON</button></div>
+</section>
+</div>
+<section class="card" style="margin-top:16px">
+<h2>3. Workflow</h2>
+<div class="help">① Create the asset → ② verify preview and metadata → ③ generate JSON → ④ add the actual media file to <b>assets/chemistry/...</b> → ⑤ register the same permanent ID in the appropriate library → ⑥ reference that ID from MCQs.</div>
+</section>
+</main>
+<script>
+(async function(){
+  const session=await window.SkillUpAuth.requireAuth(location.href);
+  if(!session)return;
+
+  const $=id=>document.getElementById(id);
+  const file=$("file"),preview=$("preview"),output=$("output"),status=$("status");
+  let selected=null;
+  function newId(){
+    const prefix={structure:"CHEM-STR",reaction:"CHEM-RXN",diagram:"CHEM-DIA",image:"CHEM-IMG"}[$("type").value]||"CHEM-ASSET";
+    return prefix+"-"+String(Date.now()).slice(-6);
+  }
+  function setStatus(msg,ok=true){status.textContent=msg;status.className="status "+(ok?"ok":"err");}
+  function showPreview(f){
+    selected=f;if(!f){preview.innerHTML='<div class="empty">Upload an asset to preview it.</div>';return;}
+    const url=URL.createObjectURL(f);
+    if(f.type.startsWith("image/")||f.name.toLowerCase().endsWith(".svg")) preview.innerHTML='<img src="'+url+'" alt="Asset preview">';
+    else preview.innerHTML='<div><strong>'+f.name+'</strong><br><span class="help">Preview unavailable for this file type.</span></div>';
+  }
+  $("id").value=newId();
+  $("type").onchange=()=>{$("id").value=newId();};
+  file.onchange=()=>showPreview(file.files[0]||null);
+  $("generate").onclick=()=>{
+    const name=$("name").value.trim();
+    if(!name){setStatus("Asset name is required.",false);$("name").focus();return;}
+    if(!selected){setStatus("Select an asset file first.",false);return;}
+    const type=$("type").value, id=$("id").value;
+    const ext=(selected.name.split(".").pop()||"").toLowerCase();
+    const record={
+      id,name,
+      commonName:$("common").value.trim()||null,
+      formula:$("formula").value.trim()||null,
+      assetType:type,
+      format:ext,
+      sourceFile:selected.name,
+      path:"assets/chemistry/"+(type==="structure"?"structures":type==="reaction"?"reactions":type==="diagram"?"diagrams":"images")+"/"+selected.name,
+      tags:$("tags").value.split(",").map(x=>x.trim()).filter(Boolean),
+      notes:$("notes").value.trim()||null,
+      status:"pending-upload"
+    };
+    output.value=JSON.stringify(record,null,2);
+    setStatus("Asset record generated. Verify it before adding it to the repository.");
+  };
+  $("copy").onclick=async()=>{if(!output.value){setStatus("Generate a record first.",false);return;}await navigator.clipboard.writeText(output.value);setStatus("JSON copied.");};
+  $("download").onclick=()=>{
+    if(!output.value){setStatus("Generate a record first.",false);return;}
+    const blob=new Blob([output.value],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=($("id").value||"chemistry-asset")+".json";a.click();URL.revokeObjectURL(a.href);
+  };
+  $("clear").onclick=()=>{["name","common","formula","tags","notes"].forEach(id=>$(id).value="");output.value="";file.value="";selected=null;preview.innerHTML='<div class="empty">Upload an asset to preview it.</div>';$("id").value=newId();status.className="status";status.textContent="";};
+})();
+</script>
+</body>
+</html>

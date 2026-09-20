@@ -1,0 +1,17 @@
+window.SkillUpPPMQuestions=[
+{q:"ppm stands for:",o:["Parts per million","Percent per mole","Pressure per mole","Parts per molarity"],a:0,e:"ppm means parts per million and is used for very dilute concentrations."},
+{q:"1 ppm means:",o:["1 part solute in 100 parts solution","1 part solute in 1,000 parts solution","1 part solute in 1,000,000 parts solution","1 part solute in 10,000,000 parts solution"],a:2,e:"1 ppm represents 1 part of solute in 10^6 parts of solution or mixture."},
+{q:"For a dilute aqueous solution, 1 ppm is approximately equal to:",o:["1 g/L","1 mg/L","1 kg/L","1 mol/L"],a:1,e:"For dilute water-based solutions, 1 ppm is approximately 1 mg/L because 1 L of water has a mass close to 1 kg."},
+{q:"The ppm concentration by mass can be expressed as:",o:["Mass of solute/Mass of solution × 10^6","Mass of solute/Mass of solution × 10^2","Mass of solution/Mass of solute × 10^6","Mass of solute/Volume of solution × 10^6"],a:0,e:"Mass-based ppm = (mass of solute ÷ mass of solution) × 10^6."},
+{q:"A solution contains 2 mg solute in 1 L solution. Its approximate concentration in water is:",o:["0.2 ppm","2 ppm","20 ppm","200 ppm"],a:1,e:"For a dilute aqueous solution, 2 mg/L is approximately 2 ppm."},
+{q:"5 ppm means how many parts of solute are present in one million parts of solution?",o:["0.5","5","50","500"],a:1,e:"5 ppm means 5 parts solute per 10^6 parts of solution."},
+{q:"A water sample contains 10 mg of fluoride ions per litre. Its approximate concentration is:",o:["0.1 ppm","1 ppm","10 ppm","100 ppm"],a:2,e:"For dilute aqueous solutions, mg/L is approximately equal to ppm, so 10 mg/L is about 10 ppm."},
+{q:"If 3 g solute is present in 1,000,000 g of solution, the concentration is:",o:["0.3 ppm","3 ppm","30 ppm","300 ppm"],a:1,e:"ppm = (3/1,000,000) × 10^6 = 3 ppm."},
+{q:"Which unit is most suitable for expressing trace concentrations in water?",o:["ppm","kg","mol kg⁻¹ only","m³"],a:0,e:"ppm is commonly used to report very small concentrations such as contaminants in water."},
+{q:"100 ppm corresponds to what percentage by mass?",o:["0.001%","0.01%","0.1%","1%"],a:1,e:"100 ppm = 100/10^6 × 100% = 0.01%."},
+{q:"1% by mass is equivalent to:",o:["10 ppm","100 ppm","1,000 ppm","10,000 ppm"],a:3,e:"1% = 1/100, while ppm is parts per million; therefore 1% = 10,000 ppm."},
+{q:"A 250 mL aqueous sample contains 0.5 mg of solute. Its approximate concentration is:",o:["0.5 ppm","1 ppm","2 ppm","4 ppm"],a:2,e:"0.5 mg in 0.25 L corresponds to 2 mg/L, approximately 2 ppm for water."},
+{q:"If a solution has 25 ppm solute by mass, the mass fraction of solute is:",o:["25","2.5 × 10^-3","2.5 × 10^-5","2.5 × 10^-7"],a:2,e:"25 ppm = 25 × 10^-6 = 2.5 × 10^-5 as a mass fraction."},
+{q:"Which statement about ppm is correct?",o:["It is always exactly equal to molarity","It is used mainly for concentrated solutions","It represents parts of solute per million parts of solution","It has units of mol/L only"],a:2,e:"ppm is a ratio-based concentration expression representing parts of solute per million parts of solution."},
+{q:"A 4 ppm aqueous solution contains approximately how much solute in 2 L?",o:["2 mg","4 mg","8 mg","16 mg"],a:2,e:"At approximately 4 mg/L, 2 L contains 4 × 2 = 8 mg solute."}
+];

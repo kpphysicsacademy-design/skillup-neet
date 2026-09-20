@@ -82,7 +82,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000004"
   },
   {
     "id": "CHEM-MCQ-000003",
@@ -124,7 +125,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000005"
   },
   {
     "id": "CHEM-MCQ-000004",
@@ -166,7 +168,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000006"
   },
   {
     "id": "CHEM-MCQ-000005",
@@ -208,7 +211,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000007"
   },
   {
     "id": "CHEM-MCQ-000006",
@@ -250,7 +254,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000008"
   },
   {
     "id": "CHEM-MCQ-000007",
@@ -292,7 +297,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000009"
   },
   {
     "id": "CHEM-MCQ-000008",
@@ -334,7 +340,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000010"
   },
   {
     "id": "CHEM-MCQ-000009",
@@ -548,7 +555,8 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000004"
   },
   {
     "id": "CHEM-MCQ-000014",
@@ -632,6 +640,7 @@ window.SkillUpBondOrderQuestions=[
       "xp": 10,
       "masteryWeight": 1,
       "reviewEligible": true
-    }
+    },
+    "questionAssetId": "CHEM-STR-000011"
   }
 ];

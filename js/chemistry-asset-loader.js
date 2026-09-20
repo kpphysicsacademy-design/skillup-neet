@@ -1,18 +1,30 @@
-/* SkillUp Chemistry Asset Loader
- * Loads the central Chemistry asset index and resolves stable asset IDs.
- */
+/* SkillUp Chemistry Asset Loader */
 (function () {
   "use strict";
-  const state = { index: null, byId: Object.create(null) };
+  const state = {
+    indexes: Object.create(null),
+    byId: Object.create(null)
+  };
 
-  async function load(url) {
-    const response = await fetch(url || "data/chemistry/structure-library.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Unable to load Chemistry asset library: " + response.status);
-    const data = await response.json();
-    state.index = data;
-    state.byId = Object.create(null);
-    (data.assets || []).forEach(asset => { if (asset.id) state.byId[asset.id] = asset; });
-    return data;
+  const DEFAULT_INDEXES = [
+    "data/chemistry/asset-library.json",
+    "data/chemistry/reaction-library.json",
+    "data/chemistry/diagram-library.json"
+  ];
+
+  async function load(urls) {
+    const list = Array.isArray(urls) && urls.length ? urls : DEFAULT_INDEXES;
+    const results = await Promise.all(list.map(async url => {
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) throw new Error("Unable to load Chemistry asset library: " + response.status + " " + url);
+      const data = await response.json();
+      state.indexes[url] = data;
+      (data.assets || []).forEach(asset => {
+        if (asset.id) state.byId[asset.id] = asset;
+      });
+      return data;
+    }));
+    return results;
   }
 
   function get(id) {
@@ -21,8 +33,20 @@
 
   function path(id) {
     const asset = get(id);
-    return asset ? asset.path : null;
+    return asset && asset.path ? asset.path : null;
   }
 
-  window.SkillUpChemistryAssets = { load, get, path, state };
+  function search(term, assetType) {
+    const q = String(term || "").trim().toLowerCase();
+    return Object.values(state.byId).filter(asset => {
+      if (assetType && asset.assetType !== assetType) return false;
+      if (!q) return true;
+      return [asset.id, asset.name, asset.commonName, asset.formula, ...(asset.tags || [])]
+        .filter(Boolean)
+        .join(" ").toLowerCase()
+        .includes(q);
+    });
+  }
+
+  window.SkillUpChemistryAssets = { load, get, path, search, state };
 })();

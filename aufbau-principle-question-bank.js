@@ -335,7 +335,7 @@ window.SkillUpAufbauPrincipleQuestions=[
       }
     ],
     "answer": "B",
-    "explanation": "After 3p, the 4s subshell is lower in energy than 3d in the usual Aufbau filling scheme and fills first.",
+    "explanation": "After 3p, the 4s subshell fills before 3d in the usual Aufbau sequence.",
     "difficulty": "neet",
     "questionAssetId": "CHEM-STR-000090",
     "tags": [
@@ -381,7 +381,7 @@ window.SkillUpAufbauPrincipleQuestions=[
     "answer": "A",
     "explanation": "The 4s subshell is filled before 3d according to the usual Aufbau order.",
     "difficulty": "neet",
-    "questionAssetId": "CHEM-STR-000090",
+    "questionAssetId": "CHEM-STR-000091",
     "tags": [
       "aufbau-principle",
       "electronic-configuration",
@@ -423,7 +423,7 @@ window.SkillUpAufbauPrincipleQuestions=[
       }
     ],
     "answer": "B",
-    "explanation": "The usual Aufbau sequence is 4s → 3d → 4p.",
+    "explanation": "The usual filling sequence is 4s → 3d → 4p.",
     "difficulty": "neet",
     "questionAssetId": "CHEM-STR-000090",
     "tags": [

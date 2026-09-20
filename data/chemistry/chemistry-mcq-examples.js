@@ -35,7 +35,7 @@ window.SkillUpChemistryMCQExamples = [
       { id: "A", type: "structure", value: null, assetId: "CHEM-STR-000001" },
       { id: "B", type: "structure", value: null, assetId: "CHEM-STR-000002" },
       { id: "C", type: "structure", value: null, assetId: "CHEM-STR-000003" },
-      { id: "D", type: "structure", value: null, assetId: "CHEM-STR-000001" }
+      { id: "D", type: "structure", value: null, assetId: "CHEM-STR-000002" }
     ],
     answer: "B",
     explanation: "Phenol is hydroxybenzene, with an -OH group directly attached to an aromatic benzene ring.",

@@ -1,0 +1,17 @@
+window.SkillUpKcEquilibriumQuestions = [
+{q:"Kc is the equilibrium constant expressed in terms of:",o:["Equilibrium concentrations of species","Atomic masses only","Initial concentrations only","Temperatures only"],a:0,e:"Kc is calculated using equilibrium molar concentrations of the reacting species."},
+{q:"For aA + bB ⇌ cC + dD, the expression for Kc is:",o:["([A]^a[B]^b)/([C]^c[D]^d)","([C]^c[D]^d)/([A]^a[B]^b)","[A]+[B]+[C]+[D]","[C+D]/[A+B]"],a:1,e:"Products are in the numerator and reactants in the denominator, each raised to its stoichiometric coefficient."},
+{q:"For H₂ + I₂ ⇌ 2HI, Kc is:",o:["[H₂][I₂]/[HI]^2","[HI]^2/([H₂][I₂])","[HI]/([H₂][I₂])","[H₂]+[I₂]/[HI]"],a:1,e:"Kc = [HI]^2/([H₂][I₂])."},
+{q:"For N₂ + 3H₂ ⇌ 2NH₃, Kc is:",o:["[N₂][H₂]^3/[NH₃]^2","[NH₃]^2/([N₂][H₂]^3)","[NH₃]/([N₂][H₂])","[N₂][H₂]/[NH₃]"],a:1,e:"The stoichiometric coefficients become exponents in the equilibrium expression."},
+{q:"For CaCO₃(s) ⇌ CaO(s) + CO₂(g), Kc is:",o:["[CaO][CO₂]/[CaCO₃]","[CO₂]","[CaCO₃]/[CO₂]","[CaO][CaCO₃][CO₂]"],a:1,e:"Pure solids have unit activity and are omitted, leaving Kc = [CO₂]."},
+{q:"For 2SO₂(g) + O₂(g) ⇌ 2SO₃(g), Kc is:",o:["[SO₂]^2[O₂]/[SO₃]^2","[SO₃]^2/([SO₂]^2[O₂])","[SO₃]/([SO₂][O₂])","[SO₂]^2/[SO₃]^2[O₂]"],a:1,e:"Kc = [SO₃]^2/([SO₂]^2[O₂])."},
+{q:"At equilibrium, Kc is calculated using:",o:["Equilibrium concentrations","Only initial concentrations","Only final concentrations before equilibrium","The catalyst concentration"],a:0,e:"Only equilibrium concentrations are used in the Kc expression."},
+{q:"If Qc < Kc, the reaction tends to proceed:",o:["Forward","Reverse","Neither direction","Only after adding a catalyst"],a:0,e:"Qc < Kc means the system has relatively more reactants than at equilibrium, so it proceeds forward."},
+{q:"If Qc > Kc, the reaction tends to proceed:",o:["Forward","Reverse","At zero rate","Only at higher temperature"],a:1,e:"Qc > Kc means the system has relatively more products, so it proceeds in the reverse direction."},
+{q:"If the reaction A ⇌ B has Kc = 4, the equilibrium constant for B ⇌ A is:",o:["4","2","1/4","16"],a:2,e:"Reversing a reaction gives the reciprocal: K' = 1/K = 1/4."},
+{q:"If A ⇌ B has Kc = 3, the Kc for 2A ⇌ 2B is:",o:["3/2","6","9","√3"],a:2,e:"Multiplying all coefficients by 2 raises K to the second power: K' = 3² = 9."},
+{q:"If two reactions are added to obtain an overall reaction, their equilibrium constants are:",o:["Added","Multiplied","Divided regardless of direction","Always equal"],a:1,e:"Equilibrium constants multiply when reactions are added."},
+{q:"For a reaction with Δn = 0 for gaseous species, the relation between Kp and Kc is:",o:["Kp = Kc","Kp = KcRT","Kp = Kc/(RT)","Kp = Kc(RT)^2"],a:0,e:"Kp = Kc(RT)^Δn. When Δn = 0, Kp = Kc."},
+{q:"If Kc is very large, equilibrium generally contains:",o:["Predominantly products","Predominantly reactants","No products","Equal concentrations of every species"],a:0,e:"A large Kc indicates products are favoured in the equilibrium mixture, although Kc does not by itself give exact concentrations."},
+{q:"Which factor changes the value of Kc for a specified reaction?",o:["Concentration","Pressure","Catalyst","Temperature"],a:3,e:"For a specified reaction, the numerical value of Kc changes with temperature, not simply with concentration, pressure, or catalyst."}
+];

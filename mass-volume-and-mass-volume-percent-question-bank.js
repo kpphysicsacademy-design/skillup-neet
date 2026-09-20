@@ -1,0 +1,17 @@
+window.SkillUpMassVolumeMassVolumePercentQuestions=[
+{q:"Mass percent (w/w) of a solute in a solution is calculated as:",o:["Mass of solute/Mass of solution × 100","Mass of solution/Mass of solute × 100","Mass of solute/Volume of solution × 100","Volume of solute/Mass of solution × 100"],a:0,e:"Mass percent = (mass of solute ÷ mass of solution) × 100."},
+{q:"Mass/volume percent (w/v) represents:",o:["Grams of solute per 100 mL of solution","Millilitres of solute per 100 g of solution","Grams of solvent per 100 mL of solution","Moles of solute per litre of solution"],a:0,e:"Mass/volume percent is the mass of solute in grams present in 100 mL of solution."},
+{q:"A 10% (w/v) glucose solution contains:",o:["10 g glucose in 100 mL solution","10 g glucose in 100 g solution","10 mL glucose in 100 mL solution","100 g glucose in 10 mL solution"],a:0,e:"A 10% (w/v) solution contains 10 g of solute per 100 mL of solution."},
+{q:"A 5% (w/w) NaCl solution contains:",o:["5 g NaCl in 100 mL solution","5 g NaCl in 100 g solution","5 mol NaCl in 100 g solution","5 g NaCl in 1000 g solution"],a:1,e:"A 5% (w/w) solution contains 5 g NaCl in 100 g of solution."},
+{q:"If 20 g solute is present in 200 g of solution, the mass percent is:",o:["5%","10%","20%","40%"],a:1,e:"Mass percent = (20/200) × 100 = 10%."},
+{q:"If 15 g glucose is dissolved to make 300 mL of solution, the mass/volume percent is:",o:["2%","5%","10%","15%"],a:1,e:"Mass/volume percent = (15 g/300 mL) × 100 = 5%."},
+{q:"How much solute is required to prepare 250 mL of a 4% (w/v) solution?",o:["4 g","8 g","10 g","25 g"],a:2,e:"4% (w/v) means 4 g per 100 mL. For 250 mL, mass = 4 × 250/100 = 10 g."},
+{q:"A 12% (w/v) solution contains how much solute in 500 mL?",o:["6 g","12 g","60 g","120 g"],a:2,e:"12% (w/v) means 12 g per 100 mL. Thus 500 mL contains 60 g."},
+{q:"If 25 g solute is present in 125 g solution, the mass percent is:",o:["10%","20%","25%","30%"],a:1,e:"Mass percent = (25/125) × 100 = 20%."},
+{q:"Which statement is correct for 1% (w/v) solution?",o:["1 g solute in 1 mL solution","1 g solute in 100 mL solution","1 mL solute in 100 g solution","1 mol solute in 100 mL solution"],a:1,e:"A 1% (w/v) solution contains 1 g solute in 100 mL of solution."},
+{q:"A solution is prepared by dissolving 8 g solute and making the total solution mass 80 g. Its mass percent is:",o:["1%","8%","10%","20%"],a:2,e:"Mass percent = (8/80) × 100 = 10%."},
+{q:"A 2.5% (w/v) solution has how many grams of solute in 400 mL?",o:["2.5 g","5 g","10 g","25 g"],a:2,e:"2.5% (w/v) means 2.5 g per 100 mL; in 400 mL, it is 10 g."},
+{q:"Which denominator is used in mass/volume percent?",o:["Mass of solvent","Mass of solution","Volume of solution","Moles of solution"],a:2,e:"Mass/volume percent uses the volume of the final solution as the denominator."},
+{q:"A 20% (w/v) solution means:",o:["20 g solute in 100 g solution","20 mL solute in 100 mL solution","20 g solute in 100 mL solution","20 mol solute in 100 mL solution"],a:2,e:"20% (w/v) means 20 g of solute per 100 mL of solution."},
+{q:"If 30 g solute is present in 150 mL of solution, the mass/volume percent is:",o:["5%","10%","20%","30%"],a:2,e:"Mass/volume percent = (30/150) × 100 = 20%."}
+];

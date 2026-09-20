@@ -1,17 +1,662 @@
 window.SkillUpAtomicOrbitalsQuestions=[
-{q:"An atomic orbital is best described as:",o:["A fixed circular path","A region of space with high probability of finding an electron","The nucleus","A straight-line trajectory"],a:1,e:"An orbital is a three-dimensional region in which the probability of finding an electron is high."},
-{q:"The s orbital is:",o:["Spherical","Dumbbell-shaped","Four-lobed","Ring-shaped"],a:0,e:"An s orbital is spherically symmetric."},
-{q:"A p subshell contains how many orbitals?",o:["1","2","3","5"],a:2,e:"For l = 1, the number of orbitals is 2l + 1 = 3."},
-{q:"The three p orbitals are oriented approximately along:",o:["x, y and z axes","Only x-axis","Only y-axis","Only z-axis"],a:0,e:"The three p orbitals are commonly designated pₓ, pᵧ and p_z."},
-{q:"A d subshell contains:",o:["1 orbital","3 orbitals","5 orbitals","7 orbitals"],a:2,e:"For l = 2, there are 2l + 1 = 5 d orbitals."},
-{q:"An f subshell contains:",o:["3 orbitals","5 orbitals","7 orbitals","9 orbitals"],a:2,e:"For l = 3, there are 2l + 1 = 7 f orbitals."},
-{q:"The maximum number of electrons in an s subshell is:",o:["2","6","10","14"],a:0,e:"An s subshell has one orbital, and each orbital holds two electrons."},
-{q:"The maximum number of electrons in a p subshell is:",o:["2","6","10","14"],a:1,e:"A p subshell has three orbitals, so it can hold 3 × 2 = 6 electrons."},
-{q:"The maximum number of electrons in a d subshell is:",o:["2","6","10","14"],a:2,e:"A d subshell has five orbitals and can accommodate 10 electrons."},
-{q:"The maximum number of electrons in an f subshell is:",o:["2","6","10","14"],a:3,e:"An f subshell has seven orbitals and can accommodate 14 electrons."},
-{q:"The number of angular nodes in an orbital is equal to:",o:["n","l","m","2n"],a:1,e:"The number of angular nodes is determined by the azimuthal quantum number l."},
-{q:"The total number of nodes in a hydrogen-like orbital is:",o:["n","n−1","n+1","2n"],a:1,e:"For a hydrogen-like orbital, total nodes = n − 1."},
-{q:"The number of radial nodes is given by:",o:["n−l−1","l","2l+1","n+l"],a:0,e:"Radial nodes = n − l − 1."},
-{q:"Which orbital has a dumbbell-shaped electron-density distribution?",o:["s","p","d only","f only"],a:1,e:"p orbitals have two lobes separated by a nodal plane through the nucleus."},
-{q:"The probability of finding an electron at the nucleus for a hydrogen 1s orbital is:",o:["Zero","Maximum/non-zero","Always infinite","Exactly 1"],a:1,e:"The 1s wave function has non-zero magnitude at the nucleus, so its probability density there is non-zero and maximal relative to the radial distribution near the origin."}
+  {
+    "id": "CHEM-MCQ-001801",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "An atomic orbital is best described as:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "A fixed circular path"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "A region of space with high probability of finding an electron"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "The nucleus"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "A straight-line trajectory"
+      }
+    ],
+    "answer": "B",
+    "explanation": "An orbital is a three-dimensional region in which the probability of finding an electron is high.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001802",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The s orbital is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Spherical"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Dumbbell-shaped"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Four-lobed"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Ring-shaped"
+      }
+    ],
+    "answer": "A",
+    "explanation": "An s orbital is spherically symmetric.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001803",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A p subshell contains how many orbitals?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "1"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "3"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "5"
+      }
+    ],
+    "answer": "C",
+    "explanation": "For l = 1, the number of orbitals is 2l + 1 = 3.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000088",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001804",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The three p orbitals are oriented approximately along:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "x, y and z axes"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Only x-axis"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Only y-axis"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Only z-axis"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The three p orbitals are commonly designated pₓ, pᵧ and p_z.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000088",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001805",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A d subshell contains:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "1 orbital"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "3 orbitals"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "5 orbitals"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "7 orbitals"
+      }
+    ],
+    "answer": "C",
+    "explanation": "For l = 2, there are 2l + 1 = 5 d orbitals.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001806",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "An f subshell contains:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "3 orbitals"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "5 orbitals"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "7 orbitals"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "9 orbitals"
+      }
+    ],
+    "answer": "C",
+    "explanation": "For l = 3, there are 2l + 1 = 7 f orbitals.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001807",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The maximum number of electrons in an s subshell is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "6"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "10"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "14"
+      }
+    ],
+    "answer": "A",
+    "explanation": "An s subshell has one orbital, and each orbital holds two electrons.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001808",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The maximum number of electrons in a p subshell is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "6"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "10"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "14"
+      }
+    ],
+    "answer": "B",
+    "explanation": "A p subshell has three orbitals, so it can hold 3 × 2 = 6 electrons.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000088",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001809",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The maximum number of electrons in a d subshell is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "6"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "10"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "14"
+      }
+    ],
+    "answer": "C",
+    "explanation": "A d subshell has five orbitals and can accommodate 10 electrons.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001810",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The maximum number of electrons in an f subshell is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "6"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "10"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "14"
+      }
+    ],
+    "answer": "D",
+    "explanation": "An f subshell has seven orbitals and can accommodate 14 electrons.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001811",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The number of angular nodes in an orbital is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "n"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "l"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "m"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "2n"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The number of angular nodes is determined by the azimuthal quantum number l.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000089",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001812",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The total number of nodes in a hydrogen-like orbital is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "n"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "n−1"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "n+1"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "2n"
+      }
+    ],
+    "answer": "B",
+    "explanation": "For a hydrogen-like orbital, total nodes = n − 1.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000089",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001813",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The number of radial nodes is given by:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "n−l−1"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "l"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "2l+1"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "n+l"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Radial nodes = n − l − 1.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000089",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001814",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which orbital has a dumbbell-shaped electron-density distribution?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "s"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "p"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "d only"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "f only"
+      }
+    ],
+    "answer": "B",
+    "explanation": "p orbitals have two lobes separated by a nodal plane through the nucleus.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-001815",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The probability of finding an electron at the nucleus for a hydrogen 1s orbital is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Zero"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Maximum/non-zero"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always infinite"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Exactly 1"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The 1s wave function has non-zero magnitude at the nucleus, so its probability density there is non-zero and maximal at r = 0.",
+    "difficulty": "neet",
+    "questionAssetId": "CHEM-STR-000087",
+    "tags": [
+      "atomic-orbitals",
+      "quantum-mechanical-model",
+      "quantum-numbers",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Atomic Orbitals question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  }
 ];

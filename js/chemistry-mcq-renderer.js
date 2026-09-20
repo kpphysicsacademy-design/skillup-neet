@@ -1,6 +1,5 @@
 /* SkillUp Chemistry Universal MCQ Renderer
- * Supports text, formulas, structures, images, reactions and diagrams.
- * Existing question banks can be adapted without rewriting their source content.
+ * Handles text, formulas, structures, reactions, diagrams, images and future numeric types.
  */
 (function () {
   "use strict";
@@ -18,28 +17,31 @@
   function renderAsset(assetId, alt) {
     const asset = window.SkillUpChemistryAssets && window.SkillUpChemistryAssets.get(assetId);
     if (!asset || !asset.path) {
-      return '<span class="skillup-asset-missing">Asset not found: ' + esc(assetId) + '</span>';
+      return '<span class="skillup-asset-missing" role="img" aria-label="Missing asset">' + esc(assetId || "missing asset") + '</span>';
     }
     return '<img class="skillup-chem-asset" src="' + esc(asset.path) + '" alt="' + esc(alt || asset.name || assetId) + '" loading="lazy">';
   }
 
   function renderContent(type, value, assetId, alt) {
     switch (type) {
-      case "formula": return renderFormula(value);
+      case "formula":
+        return renderFormula(value);
       case "structure":
       case "image":
       case "reaction":
-      case "diagram": return renderAsset(assetId, value || alt);
-      default: return '<span>' + esc(value) + '</span>';
+      case "diagram":
+        return renderAsset(assetId, value || alt);
+      default:
+        return '<span>' + esc(value) + '</span>';
     }
   }
 
   function renderQuestion(container, question) {
     if (!container) throw new Error("MCQ container is required.");
-    const qHtml = question.questionType === "formula"
-      ? '<div class="skillup-q-text">' + esc(question.question) + '</div>' + renderFormula(question.questionFormula)
-      : '<div class="skillup-q-text">' + esc(question.question) + '</div>' +
-        (question.questionAssetId ? renderAsset(question.questionAssetId, question.question) : "");
+    const qContent =
+      '<div class="skillup-q-text">' + esc(question.question) + '</div>' +
+      (question.questionFormula ? renderFormula(question.questionFormula) : "") +
+      (question.questionAssetId ? renderAsset(question.questionAssetId, question.question) : "");
 
     const options = (question.options || []).map(opt =>
       '<button type="button" class="skillup-option" data-option-id="' + esc(opt.id) + '">' +
@@ -50,11 +52,14 @@
 
     container.innerHTML =
       '<article class="skillup-chem-mcq" data-mcq-id="' + esc(question.id) + '">' +
-      '<div class="skillup-mcq-question">' + qHtml + '</div>' +
+      '<div class="skillup-mcq-question">' + qContent + '</div>' +
       '<div class="skillup-mcq-options">' + options + '</div>' +
       '</article>';
 
-    if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise([container]);
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise([container]);
+    }
+    return container;
   }
 
   window.SkillUpChemistryMCQRenderer = { renderQuestion };

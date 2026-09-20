@@ -1,0 +1,17 @@
+window.SkillUpMolalityQuestions=[
+{q:"Molality of a solution is defined as:",o:["Moles of solute per litre of solution","Moles of solute per kilogram of solvent","Grams of solute per litre of solution","Moles of solvent per kilogram of solute"],a:1,e:"Molality (m) is the number of moles of solute present in one kilogram of solvent."},
+{q:"The unit of molality is:",o:["mol L⁻¹","mol kg⁻¹","g L⁻¹","kg mol⁻¹"],a:1,e:"Molality is expressed as mol kg⁻¹."},
+{q:"A solution containing 1 mol solute dissolved in 1 kg solvent has molality:",o:["0.1 m","1 m","10 m","100 m"],a:1,e:"m = moles of solute / mass of solvent in kg = 1/1 = 1 m."},
+{q:"The formula for molality is:",o:["m = n/W","m = W/n","m = n/V","m = V/n"],a:0,e:"Molality m = n/W, where n is moles of solute and W is mass of solvent in kilograms."},
+{q:"If 0.5 mol NaCl is dissolved in 2 kg water, the molality is:",o:["0.10 m","0.25 m","1.0 m","2.5 m"],a:1,e:"m = 0.5/2 = 0.25 m."},
+{q:"How many moles of solute are present in 500 g solvent of a 2 m solution?",o:["0.25 mol","0.50 mol","1.0 mol","4.0 mol"],a:1,e:"500 g = 0.5 kg. n = m × kg solvent = 2 × 0.5 = 1.0 mol."},
+{q:"What mass of solvent is required to dissolve 0.25 mol solute to prepare a 0.5 m solution?",o:["0.25 kg","0.50 kg","1.0 kg","2.0 kg"],a:1,e:"W = n/m = 0.25/0.5 = 0.5 kg."},
+{q:"A solution contains 9.0 g glucose (M = 180 g mol⁻¹) in 500 g water. Its molality is:",o:["0.01 m","0.05 m","0.10 m","0.20 m"],a:2,e:"Moles of glucose = 9/180 = 0.05 mol; solvent = 0.5 kg. Molality = 0.05/0.5 = 0.10 m."},
+{q:"Which quantity is used in the denominator of molality?",o:["Volume of solution","Mass of solution","Mass of solvent","Volume of solvent"],a:2,e:"Molality uses kilograms of solvent, not solution."},
+{q:"Unlike molarity, molality is generally independent of:",o:["Mass of solute","Moles of solute","Temperature","Molar mass"],a:2,e:"Molality is based on mass of solvent, which does not change appreciably with temperature."},
+{q:"A 1 m aqueous solution means:",o:["1 mol solute in 1 L solution","1 mol solute in 1 kg solvent","1 g solute in 1 kg solution","1 mol solvent in 1 kg solute"],a:1,e:"A 1 m solution contains 1 mol solute per 1 kg solvent."},
+{q:"If 2 mol solute is dissolved in 500 g solvent, the molality is:",o:["1 m","2 m","4 m","5 m"],a:2,e:"500 g = 0.5 kg; m = 2/0.5 = 4 m."},
+{q:"If 0.2 mol solute is dissolved in 400 g solvent, the molality is:",o:["0.2 m","0.5 m","2.0 m","5.0 m"],a:1,e:"400 g = 0.4 kg; m = 0.2/0.4 = 0.5 m."},
+{q:"Which statement correctly compares molarity and molality?",o:["Both use mass of solvent","Molarity uses volume of solution; molality uses mass of solvent","Molarity uses mass of solvent; molality uses volume of solution","Both are always temperature independent"],a:1,e:"Molarity is moles per litre of solution, whereas molality is moles per kilogram of solvent."},
+{q:"For a very dilute aqueous solution, which approximation may be useful?",o:["1 kg solvent ≈ 1 L solution","1 kg solvent ≈ 100 L solution","1 kg solvent ≈ 1 mL solution","1 kg solvent ≈ 10 L solution"],a:0,e:"For dilute aqueous solutions with density close to 1 g mL⁻¹, approximate volume and mass relationships can be used, but molarity and molality are still distinct quantities."}
+];

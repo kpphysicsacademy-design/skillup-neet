@@ -8,7 +8,7 @@ window.SkillUpKpEquilibriumQuestions = [
 {q:"For N₂ + 3H₂ ⇌ 2NH₃, Δn is:",o:["+2","+1","−2","−4"],a:2,e:"Δn = 2 − (1+3) = −2."},
 {q:"For PCl₅(g) ⇌ PCl₃(g) + Cl₂(g), Δn is:",o:["−1","0","+1","+2"],a:2,e:"One mole of gaseous reactant produces two moles of gaseous products, so Δn = 2 − 1 = +1."},
 {q:"If Kc = 4, R = 0.082 L atm mol⁻¹ K⁻¹, T = 300 K and Δn = 0, Kp is:",o:["0.016","4","98.4","12"],a:1,e:"Since Δn = 0, Kp = Kc = 4."},
-{q:"If Δn is positive, then at ordinary positive temperature and with R > 0, Kp compared with Kc is:",o:["Kp = Kc always","Kp > Kc","Kp < Kc","Kp = 0"],a:1,e:"Kp = Kc(RT)^Δn; the factor (RT)^Δn determines the numerical relationship and is not necessarily greater than 1 for every numerical T and unit choice. In standard chemistry problems, the formula should be applied directly."},
+{q:"If Δn = +1, the relation between Kp and Kc is:",o:["Kp = Kc/(RT)","Kp = KcRT","Kp = Kc","Kp = Kc(RT)^2"],a:1,e:"From Kp = Kc(RT)^Δn, when Δn = +1, Kp = KcRT."},
 {q:"Which species are included explicitly in a Kp expression?",o:["Gases only","Pure solids only","Pure liquids only","All substances including solids"],a:0,e:"Kp is formulated using partial pressures of gaseous species; pure solids and liquids are omitted."},
 {q:"For CaCO₃(s) ⇌ CaO(s) + CO₂(g), Kp is:",o:["P_CO₂","P_CaO × P_CO₂","P_CO₂/P_CaCO₃","1/P_CO₂"],a:0,e:"Pure solids are omitted, leaving Kp = P_CO₂."},
 {q:"For 2SO₂(g) + O₂(g) ⇌ 2SO₃(g), Δn is:",o:["+1","−1","−2","+2"],a:1,e:"Δn = 2 − (2+1) = −1."},

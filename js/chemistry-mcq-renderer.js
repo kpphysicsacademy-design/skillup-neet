@@ -62,5 +62,14 @@
     return container;
   }
 
-  window.SkillUpChemistryMCQRenderer = { renderQuestion };
+  function renderRichContent(input){
+  input=input||{};
+  return renderContent(
+    String(input.type||"text").toLowerCase(),
+    input.formula||input.value||"",
+    input.assetId||"",
+    input.alt||""
+  );
+}
+window.SkillUpChemistryMCQRenderer = { renderQuestion, renderContent: renderRichContent };
 })();

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skillupedu.in/schemas/chemistry-mcq.schema.json",
+  "title": "SkillUp Chemistry Universal MCQ",
+  "type": "object",
+  "required": ["id", "subject", "questionType", "question", "options", "answer", "explanation"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^CHEM-MCQ-[0-9]{6,}$"},
+    "subject": {"const": "chemistry"},
+    "chapterId": {"type": "string"},
+    "conceptId": {"type": "string"},
+    "questionType": {
+      "type": "string",
+      "enum": ["text", "formula", "structure", "reaction", "diagram", "image", "numerical", "assertion-reason", "match-column", "statement", "sequence", "graph", "table"]
+    },
+    "difficulty": {"type": "string", "enum": ["easy", "medium", "hard", "neet"]},
+    "question": {"type": "string"},
+    "questionFormula": {"type": ["string", "null"]},
+    "questionAssetId": {"type": ["string", "null"]},
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-F]$"},
+          "type": {"type": "string", "enum": ["text", "formula", "structure", "image", "reaction", "diagram"]},
+          "value": {"type": ["string", "null"]},
+          "assetId": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "answer": {"type": "string", "pattern": "^[A-F]$"},
+    "explanation": {"type": "string"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "source": {"type": ["string", "null"]},
+    "learning": {
+      "type": "object",
+      "properties": {
+        "xp": {"type": "integer", "minimum": 0},
+        "masteryWeight": {"type": "number", "minimum": 0},
+        "reviewEligible": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

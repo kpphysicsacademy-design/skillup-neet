@@ -1,31 +1,332 @@
 window.skillUpPlantTissuesQuestions = [
-{q:"Which meristem is mainly responsible for increasing the length of a plant organ?",o:["Apical meristem","Lateral meristem","Cork cambium","Vascular cambium"],a:0,e:"Apical meristems occur near shoot and root tips and contribute to primary growth in length."},
-{q:"Which tissue is composed of living cells with uneven thickening at the corners?",o:["Sclerenchyma","Collenchyma","Xylem","Cork"],a:1,e:"Collenchyma cells are living and commonly show uneven wall thickening, especially at the corners."},
-{q:"Which simple permanent tissue mainly provides flexible mechanical support to young plant parts?",o:["Parenchyma","Sclerenchyma","Collenchyma","Phloem"],a:2,e:"Collenchyma provides support while retaining flexibility, particularly in growing organs."},
-{q:"Which tissue is mainly composed of dead cells with thick, lignified walls at maturity?",o:["Parenchyma","Collenchyma","Epidermis","Sclerenchyma"],a:3,e:"Sclerenchymatous cells generally have thick, lignified walls and are dead at maturity."},
-{q:"Which simple permanent tissue commonly stores food and may contain chloroplasts in some locations?",o:["Parenchyma","Sclerenchyma","Cork","Xylem"],a:0,e:"Parenchyma is a versatile living tissue involved in storage and, when chloroplast-containing, photosynthesis."},
-{q:"Which complex tissue mainly conducts water and mineral salts from roots toward aerial parts?",o:["Phloem","Xylem","Epidermis","Collenchyma"],a:1,e:"Xylem is the principal conducting tissue for water and mineral transport."},
-{q:"Which xylem element is typically living at maturity?",o:["Vessel element","Tracheid","Xylem parenchyma","Xylem fibre"],a:2,e:"Xylem parenchyma consists of living cells, unlike the main conducting elements and fibres."},
-{q:"Which phloem element is closely associated with sieve tube elements in angiosperms?",o:["Vessel element","Tracheid","Cork cell","Companion cell"],a:3,e:"Companion cells are closely associated with sieve tube elements and support their functioning."},
-{q:"Which tissue forms the outer protective covering of young plant organs?",o:["Epidermis","Xylem","Phloem","Cambium"],a:0,e:"The epidermis forms the outermost protective tissue of young primary plant parts."},
-{q:"What is the main function of stomata in the epidermis?",o:["Only mechanical support","Transport of sugars through stems","Regulation of gas exchange and water loss","Formation of secondary xylem"],a:2,e:"Stomata regulate gaseous exchange and transpiration through controlled opening and closing."},
-{q:"Which meristem is associated with an increase in the girth of stems and roots?",o:["Apical meristem","Intercalary meristem","Lateral meristem","Protoderm"],a:2,e:"Lateral meristems such as vascular cambium and cork cambium contribute to secondary growth in thickness."},
-{q:"Which meristem can occur near nodes or the bases of leaves and help certain organs resume growth?",o:["Intercalary meristem","Lateral meristem","Root cap","Cork cambium"],a:0,e:"Intercalary meristems occur between mature tissues, commonly near nodes or leaf bases in some plants."},
-{q:"Which tissue transports organic nutrients such as sugars from photosynthetic or storage regions?",o:["Xylem","Phloem","Sclerenchyma","Epidermis"],a:1,e:"Phloem transports organic assimilates, including sugars, between source and sink regions."},
-{q:"Which pair consists only of complex permanent tissues?",o:["Parenchyma and collenchyma","Xylem and phloem","Sclerenchyma and epidermis","Collenchyma and xylem"],a:1,e:"Xylem and phloem are complex tissues because each contains multiple specialized cell types."}
-,{q:"Which tissue is commonly associated with the flexible support of leaf petioles and young stems?",o:["Collenchyma","Sclerenchyma","Xylem","Cork"],a:0,e:"Collenchyma provides flexible mechanical support in many young, growing plant parts."},
-{q:"Which tissue may develop large intercellular spaces that facilitate internal gas movement?",o:["Sclerenchyma","Aerenchyma","Cork","Xylem fibre"],a:1,e:"Aerenchyma is a form of parenchyma with prominent air spaces that facilitate gas movement, especially in aquatic plants."},
-{q:"Which conducting tissue is made up of sieve tube elements, companion cells, phloem parenchyma and phloem fibres in typical angiosperms?",o:["Xylem","Epidermis","Phloem","Collenchyma"],a:2,e:"Phloem is a complex tissue containing several specialized cell types for translocation and support."},
-{q:"Which xylem component mainly provides mechanical strength rather than serving as the principal conducting element?",o:["Vessel element","Xylem fibre","Xylem parenchyma","Tracheid"],a:1,e:"Xylem fibres are mainly supportive, with thick lignified walls."},
-{q:"Which cells regulate the opening and closing of a stoma?",o:["Guard cells","Companion cells","Sieve tube elements","Tracheids"],a:0,e:"Guard cells change their turgor and thereby regulate the stomatal pore."},
-{q:"Which tissue replaces the epidermis as a protective covering during secondary growth in many stems?",o:["Parenchyma","Cork","Phloem","Collenchyma"],a:1,e:"Cork produced by cork cambium forms a protective secondary covering in many stems undergoing secondary growth."},
-{q:"Which lateral meristem produces secondary xylem and secondary phloem?",o:["Apical meristem","Cork cambium","Vascular cambium","Intercalary meristem"],a:2,e:"Vascular cambium produces secondary xylem toward the inside and secondary phloem toward the outside."},
-{q:"Which tissue is characterized by cells that generally lack intercellular spaces and are closely packed?",o:["Parenchyma","Aerenchyma","Sclerenchyma only","Epidermis"],a:3,e:"Epidermal cells are generally compactly arranged and form a protective outer layer."},
-{q:"Which simple permanent tissue is especially associated with mechanical strength in mature plant parts?",o:["Sclerenchyma","Parenchyma","Collenchyma","Chlorenchyma"],a:0,e:"Sclerenchyma provides strong mechanical support because of its thick, commonly lignified cell walls."},
-{q:"A tissue contains living cells with chloroplasts and performs photosynthesis. Which specialized parenchyma is this?",o:["Aerenchyma","Chlorenchyma","Sclerenchyma","Cork"],a:1,e:"Chlorenchyma is chloroplast-rich parenchyma specialized for photosynthesis."},
-{q:"Which statement correctly compares xylem and phloem?",o:["Both transport only water","Xylem mainly conducts water and minerals, while phloem transports organic assimilates","Phloem is always dead and xylem is always living","Neither is a complex tissue"],a:1,e:"Xylem and phloem are complex vascular tissues with different principal transport functions."},
-{q:"Which structure is a specialized epidermal outgrowth that can reduce herbivory or aid protection?",o:["Trichome","Sieve tube","Vessel","Companion cell"],a:0,e:"Trichomes are epidermal outgrowths that can have protective, secretory or other specialized functions."},
-{q:"Which tissue type commonly contains large vacuoles in mature living cells and can serve as a storage tissue?",o:["Parenchyma","Sclerenchyma","Vessel element","Cork"],a:0,e:"Parenchyma consists of living cells that commonly have prominent vacuoles and can store food or water."},
-{q:"What is a major distinction between meristematic and permanent tissues?",o:["Meristematic cells are actively dividing, whereas permanent cells are generally specialized for particular functions","Permanent cells always divide faster","Meristematic cells are always dead","There is no structural difference"],a:0,e:"Meristematic tissues retain active cell division, while permanent tissues have undergone differentiation and specialization."},
-{q:"Which vascular tissue is primarily responsible for translocation of organic solutes from source tissues to sink tissues?",o:["Xylem","Phloem","Epidermis","Sclerenchyma"],a:1,e:"Phloem translocates organic assimilates such as sugars from source regions to sink regions."}
+  {
+    "q": "Which meristem is mainly responsible for increasing the length of a plant organ?",
+    "o": [
+      "Apical meristem",
+      "Lateral meristem",
+      "Cork cambium",
+      "Vascular cambium"
+    ],
+    "a": 0,
+    "e": "Apical meristems occur near shoot and root tips and contribute to primary growth in length."
+  },
+  {
+    "q": "Which tissue is composed of living cells with uneven thickening at the corners?",
+    "o": [
+      "Sclerenchyma",
+      "Collenchyma",
+      "Xylem",
+      "Cork"
+    ],
+    "a": 1,
+    "e": "Collenchyma cells are living and commonly show uneven wall thickening, especially at the corners."
+  },
+  {
+    "q": "Which simple permanent tissue mainly provides flexible mechanical support to young plant parts?",
+    "o": [
+      "Parenchyma",
+      "Sclerenchyma",
+      "Collenchyma",
+      "Phloem"
+    ],
+    "a": 2,
+    "e": "Collenchyma provides support while retaining flexibility, particularly in growing organs."
+  },
+  {
+    "q": "Which tissue is mainly composed of dead cells with thick, lignified walls at maturity?",
+    "o": [
+      "Parenchyma",
+      "Collenchyma",
+      "Epidermis",
+      "Sclerenchyma"
+    ],
+    "a": 3,
+    "e": "Sclerenchymatous cells generally have thick, lignified walls and are dead at maturity."
+  },
+  {
+    "q": "Which simple permanent tissue commonly stores food and may contain chloroplasts in some locations?",
+    "o": [
+      "Parenchyma",
+      "Sclerenchyma",
+      "Cork",
+      "Xylem"
+    ],
+    "a": 0,
+    "e": "Parenchyma is a versatile living tissue involved in storage and, when chloroplast-containing, photosynthesis."
+  },
+  {
+    "q": "Which complex tissue mainly conducts water and mineral salts from roots toward aerial parts?",
+    "o": [
+      "Phloem",
+      "Xylem",
+      "Epidermis",
+      "Collenchyma"
+    ],
+    "a": 1,
+    "e": "Xylem is the principal conducting tissue for water and mineral transport."
+  },
+  {
+    "q": "Which xylem element is typically living at maturity?",
+    "o": [
+      "Vessel element",
+      "Tracheid",
+      "Xylem parenchyma",
+      "Xylem fibre"
+    ],
+    "a": 2,
+    "e": "Xylem parenchyma consists of living cells, unlike the main conducting elements and fibres."
+  },
+  {
+    "q": "Which phloem element is closely associated with sieve tube elements in angiosperms?",
+    "o": [
+      "Vessel element",
+      "Tracheid",
+      "Cork cell",
+      "Companion cell"
+    ],
+    "a": 3,
+    "e": "Companion cells are closely associated with sieve tube elements and support their functioning."
+  },
+  {
+    "q": "Which tissue forms the outer protective covering of young plant organs?",
+    "o": [
+      "Epidermis",
+      "Xylem",
+      "Phloem",
+      "Cambium"
+    ],
+    "a": 0,
+    "e": "The epidermis forms the outermost protective tissue of young primary plant parts."
+  },
+  {
+    "q": "What is the main function of stomata in the epidermis?",
+    "o": [
+      "Only mechanical support",
+      "Transport of sugars through stems",
+      "Regulation of gas exchange and water loss",
+      "Formation of secondary xylem"
+    ],
+    "a": 2,
+    "e": "Stomata regulate gaseous exchange and transpiration through controlled opening and closing."
+  },
+  {
+    "q": "Which meristem is associated with an increase in the girth of stems and roots?",
+    "o": [
+      "Apical meristem",
+      "Intercalary meristem",
+      "Lateral meristem",
+      "Protoderm"
+    ],
+    "a": 2,
+    "e": "Lateral meristems such as vascular cambium and cork cambium contribute to secondary growth in thickness."
+  },
+  {
+    "q": "Which meristem can occur near nodes or the bases of leaves and help certain organs resume growth?",
+    "o": [
+      "Intercalary meristem",
+      "Lateral meristem",
+      "Root cap",
+      "Cork cambium"
+    ],
+    "a": 0,
+    "e": "Intercalary meristems occur between mature tissues, commonly near nodes or leaf bases in some plants."
+  },
+  {
+    "q": "Which tissue transports organic nutrients such as sugars from photosynthetic or storage regions?",
+    "o": [
+      "Xylem",
+      "Phloem",
+      "Sclerenchyma",
+      "Epidermis"
+    ],
+    "a": 1,
+    "e": "Phloem transports organic assimilates, including sugars, between source and sink regions."
+  },
+  {
+    "q": "Which pair consists only of complex permanent tissues?",
+    "o": [
+      "Parenchyma and collenchyma",
+      "Xylem and phloem",
+      "Sclerenchyma and epidermis",
+      "Collenchyma and xylem"
+    ],
+    "a": 1,
+    "e": "Xylem and phloem are complex tissues because each contains multiple specialized cell types."
+  },
+  {
+    "q": "Which tissue is commonly associated with the flexible support of leaf petioles and young stems?",
+    "o": [
+      "Collenchyma",
+      "Sclerenchyma",
+      "Xylem",
+      "Cork"
+    ],
+    "a": 0,
+    "e": "Collenchyma provides flexible mechanical support in many young, growing plant parts."
+  },
+  {
+    "q": "Which tissue may develop large intercellular spaces that facilitate internal gas movement?",
+    "o": [
+      "Sclerenchyma",
+      "Aerenchyma",
+      "Cork",
+      "Xylem fibre"
+    ],
+    "a": 1,
+    "e": "Aerenchyma is a form of parenchyma with prominent air spaces that facilitate gas movement, especially in aquatic plants."
+  },
+  {
+    "q": "Which conducting tissue is made up of sieve tube elements, companion cells, phloem parenchyma and phloem fibres in typical angiosperms?",
+    "o": [
+      "Xylem",
+      "Epidermis",
+      "Phloem",
+      "Collenchyma"
+    ],
+    "a": 2,
+    "e": "Phloem is a complex tissue containing several specialized cell types for translocation and support."
+  },
+  {
+    "q": "Which xylem component mainly provides mechanical strength rather than serving as the principal conducting element?",
+    "o": [
+      "Vessel element",
+      "Tracheid",
+      "Xylem parenchyma",
+      "Xylem fibre"
+    ],
+    "a": 3,
+    "e": "Xylem fibres are mainly supportive, with thick lignified walls."
+  },
+  {
+    "q": "Which cells regulate the opening and closing of a stoma?",
+    "o": [
+      "Guard cells",
+      "Companion cells",
+      "Sieve tube elements",
+      "Tracheids"
+    ],
+    "a": 0,
+    "e": "Guard cells change their turgor and thereby regulate the stomatal pore."
+  },
+  {
+    "q": "Which tissue replaces the epidermis as a protective covering during secondary growth in many stems?",
+    "o": [
+      "Parenchyma",
+      "Cork",
+      "Phloem",
+      "Collenchyma"
+    ],
+    "a": 1,
+    "e": "Cork produced by cork cambium forms a protective secondary covering in many stems undergoing secondary growth."
+  },
+  {
+    "q": "Which lateral meristem produces secondary xylem and secondary phloem?",
+    "o": [
+      "Apical meristem",
+      "Cork cambium",
+      "Vascular cambium",
+      "Intercalary meristem"
+    ],
+    "a": 2,
+    "e": "Vascular cambium produces secondary xylem toward the inside and secondary phloem toward the outside."
+  },
+  {
+    "q": "Which tissue is characterized by cells that generally lack intercellular spaces and are closely packed?",
+    "o": [
+      "Parenchyma",
+      "Aerenchyma",
+      "Sclerenchyma only",
+      "Epidermis"
+    ],
+    "a": 3,
+    "e": "Epidermal cells are generally compactly arranged and form a protective outer layer."
+  },
+  {
+    "q": "Which simple permanent tissue is especially associated with mechanical strength in mature plant parts?",
+    "o": [
+      "Parenchyma",
+      "Sclerenchyma",
+      "Collenchyma",
+      "Chlorenchyma"
+    ],
+    "a": 1,
+    "e": "Sclerenchyma provides strong mechanical support because of its thick, commonly lignified cell walls."
+  },
+  {
+    "q": "A tissue contains living cells with chloroplasts and performs photosynthesis. Which specialized parenchyma is this?",
+    "o": [
+      "Aerenchyma",
+      "Sclerenchyma",
+      "Chlorenchyma",
+      "Cork"
+    ],
+    "a": 2,
+    "e": "Chlorenchyma is chloroplast-rich parenchyma specialized for photosynthesis."
+  },
+  {
+    "q": "Which statement correctly compares xylem and phloem?",
+    "o": [
+      "Both transport only water",
+      "Neither is a complex tissue",
+      "Phloem is always dead and xylem is always living",
+      "Xylem mainly conducts water and minerals, while phloem transports organic assimilates"
+    ],
+    "a": 3,
+    "e": "Xylem and phloem are complex vascular tissues with different principal transport functions."
+  },
+  {
+    "q": "Which structure is a specialized epidermal outgrowth that can reduce herbivory or aid protection?",
+    "o": [
+      "Trichome",
+      "Sieve tube",
+      "Vessel",
+      "Companion cell"
+    ],
+    "a": 0,
+    "e": "Trichomes are epidermal outgrowths that can have protective, secretory or other specialized functions."
+  },
+  {
+    "q": "Which tissue type commonly contains large vacuoles in mature living cells and can serve as a storage tissue?",
+    "o": [
+      "Vessel element",
+      "Sclerenchyma",
+      "Parenchyma",
+      "Cork"
+    ],
+    "a": 2,
+    "e": "Parenchyma consists of living cells that commonly have prominent vacuoles and can store food or water."
+  },
+  {
+    "q": "What is a major distinction between meristematic and permanent tissues?",
+    "o": [
+      "There is no structural difference",
+      "Permanent cells always divide faster",
+      "Meristematic cells are always dead",
+      "Meristematic cells are actively dividing, whereas permanent cells are generally specialized for particular functions"
+    ],
+    "a": 3,
+    "e": "Meristematic tissues retain active cell division, while permanent tissues have undergone differentiation and specialization."
+  },
+  {
+    "q": "Which vascular tissue is primarily responsible for translocation of organic solutes from source tissues to sink tissues?",
+    "o": [
+      "Xylem",
+      "Phloem",
+      "Epidermis",
+      "Sclerenchyma"
+    ],
+    "a": 1,
+    "e": "Phloem translocates organic assimilates such as sugars from source regions to sink regions."
+  },
+  {
+    "q": "Which tissue is responsible for producing the protective periderm during secondary growth?",
+    "o": [
+      "Vascular cambium",
+      "Apical meristem",
+      "Cork cambium",
+      "Intercalary meristem"
+    ],
+    "a": 2,
+    "e": "Cork cambium produces cork toward the outside and contributes to the protective periderm."
+  }
 ];

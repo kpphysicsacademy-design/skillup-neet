@@ -49,6 +49,14 @@
     return chosen;
   }
 
+  function shuffleStable(items){
+    return items.slice().sort(function(a,b){
+      const ai=String(a&& (a.question_id||a.questionId||a.id)||"");
+      const bi=String(b&& (b.question_id||b.questionId||b.id)||"");
+      return ai.localeCompare(bi);
+    });
+  }
+
   function forConcept(studentId,conceptId,bank,count){
     if(!window.SkillUpMastery) return Array.isArray(bank)?bank.slice(0,count||10):[];
     const plan=window.SkillUpMastery.getAdaptivePlan(studentId||"anonymous",conceptId);

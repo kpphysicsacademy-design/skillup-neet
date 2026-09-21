@@ -16,10 +16,32 @@
     )).toLowerCase().trim();
     if(["easy","simple","basic"].includes(raw)) return "easy";
     if(["hard","difficult","advanced"].includes(raw)) return "hard";
+    if(["medium","moderate","intermediate"].includes(raw)) return "medium";
 
-    // Legacy banks without metadata remain usable; distribute conservatively.
-    const n=Number(index)||0;
-    return n%5===4 ? "hard" : (n%3===1 ? "easy" : "medium");
+    const text=String(q&&(
+      q.question||q.q||q.text||""
+    )).toLowerCase();
+    const options=Array.isArray(q&&q.options)?q.options:(Array.isArray(q&&q.o)?q.o:[]);
+    const combined=text+" "+options.map(v=>String(v&&typeof v==="object"?(v.text||v.value||v.label||""):v)).join(" ").toLowerCase();
+
+    // Content signals provide a more meaningful fallback than question position.
+    const hardSignals=[
+      /assertion.*reason/,/match.*column/,/multiple.*statement/,
+      /incorrect.*statement/,/correct.*statements/,/which.*combination/,
+      /calculate|determine|numerical|value of/,/ratio|graph|slope/,
+      /more than one|number of/
+    ];
+    const easySignals=[
+      /define|definition|unit of|symbol of|called as|known as/,
+      /which.*is.*example|identify|belongs to|basic principle/
+    ];
+    const hardScore=hardSignals.reduce((n,r)=>n+(r.test(combined)?1:0),0);
+    const easyScore=easySignals.reduce((n,r)=>n+(r.test(combined)?1:0),0);
+    if(hardScore>=2 || options.length>0 && /calculate|determine|numerical/.test(text)) return "hard";
+    if(easyScore>=1 && hardScore===0) return "easy";
+
+    // Stable medium fallback for ambiguous legacy questions.
+    return "medium";
   }
 
   function normalize(q,index,subject,topic){

@@ -47,6 +47,15 @@
     });
   }
 
+  function getCachedConcept(value) {
+    if (!cache) return null;
+    const key = normalize(value);
+    return cache.concepts.find(function (concept) {
+      if (normalize(concept.concept_id) === key || normalize(concept.name) === key || normalize(concept.slug) === key || normalize(concept.question_topic) === key) return true;
+      return (concept.aliases || []).some(function (alias) { return normalize(alias) === key; });
+    }) || null;
+  }
+
   async function getQuestionTopic(value) {
     const concept = await findConcept(value);
     return concept ? concept.question_topic : String(value || "");
@@ -56,6 +65,7 @@
     load: load,
     findConcept: findConcept,
     getConceptsBySubject: getConceptsBySubject,
-    getQuestionTopic: getQuestionTopic
+    getQuestionTopic: getQuestionTopic,
+    getCachedConcept: getCachedConcept
   };
 })(window);

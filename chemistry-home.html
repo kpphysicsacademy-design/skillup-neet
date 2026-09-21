@@ -21,11 +21,11 @@
 <body>
 <header class="top"><div class="nav"><div style="position:relative"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu">☰</button><div class="menu" id="menu"><div class="menu-title">SKILLUP</div><a href="index.html">🏠 SkillUp Home</a><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">🧪 Chemistry</a><a href="biology-home.html">🧬 Biology</a><a href="maths-home.html">📐 Maths</a><a href="question-bank.html">📝 Tests</a></div></div><span style="font-size:24px">⚗️</span><div class="brand">SkillUp<small>CHEMISTRY • JEE MAIN 2026</small></div><span class="nav-status">CHEMISTRY</span></div></header>
 <main class="wrap">
-<section class="hero"><h1>Chemistry • Learn. Practice. Master.</h1><p>JEE Main 2026 Chemistry learning path — chapter → microconcept → learn → practice → mastery, aligned to the official NTA syllabus.</p><div class="stats"><span class="stat" id="chapterCount">13 Chapters</span><span class="stat" id="unitCount">0 Units</span><span class="stat">JEE MAIN 2026</span><span class="stat">NEET OVERLAP</span></div></section>
+<section class="hero"><h1>Chemistry • Learn. Connect. Master.</h1><p>JEE Main 2026 Chemistry learning path — chapter → microconcept → learn → practice → mastery, aligned to the official NTA syllabus.</p><div class="stats"><span class="stat" id="chapterCount">20 Chapters</span><span class="stat" id="unitCount">0 Units</span><span class="stat">JEE MAIN 2026</span><span class="stat">NEET OVERLAP</span></div></section>
 <section class="progress"><div class="row"><span>Your Chemistry journey</span><span id="percent">0%</span></div><div class="bar"><i id="progress"></i></div></section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path"></section><div id="empty" class="empty">No matching Chemistry topics found.</div>
-<section class="card"><b>⚗️ Progressive learning</b><div class="tip">Each chapter is now split into small NEET microconcepts. Learn one idea at a time, then practice and revise. Existing MCQ banks are reused wherever available.</div></section>
+<section class="card"><b>⚗️ Progressive learning</b><div class="tip">Chemistry now uses one Learn + Relevant Concepts mode: choose a microconcept, learn it in one focused card, then move through related concepts and existing MCQs. The path contains 1,360 learning nodes across the official 20 JEE Main units.</div></section>
 </main>
 <script src="js/skillup-mastery-engine.js?v=1"></script>
 <script>
@@ -46,8 +46,8 @@ function render(filter){
    const box=sec.querySelector('.units');
    units.forEach(unit=>{
      const el=document.createElement('div');el.className='unit';
-     const href='question-bank.html?subject=chemistry&topic='+encodeURIComponent(unit);
-     el.innerHTML='<span class="dot"></span><a href="'+href+'"><div><div class="title"><span class="micro-badge">MICRO</span>'+unit+'</div><div class="sub">Learn one concept • Practice • Revision • NEET MCQs</div></div><span class="go">→</span></a>';
+     const href='chemistry-learn.html?concept='+encodeURIComponent(unit);
+     el.innerHTML='<span class="dot"></span><a href="'+href+'"><div><div class="title"><span class="micro-badge">MICRO</span>'+unit+'</div><div class="sub">Learn • Relevant Concepts • Practice • Revision</div></div><span class="go">→</span></a>';
      box.appendChild(el);
    });
    path.appendChild(sec);
@@ -55,7 +55,7 @@ function render(filter){
  empty.style.display=count?'none':'block';
 }
 async function load(){
- try{const r=await fetch('data/chemistry-content-map.json?v=3');data=await r.json();document.getElementById('chapterCount').textContent=(data.chapters||[]).length+' Chapters';document.getElementById('unitCount').textContent=(data.chapters||[]).reduce((n,c)=>n+(c.units||[]).length,0)+' Microconcepts';render('');}catch(e){path.innerHTML='<section class="card"><b>Content map could not load.</b><div class="tip">Please refresh the page after deployment.</div></section>';}}
+ try{const r=await fetch('data/chemistry-content-map.json?v=4');data=await r.json();document.getElementById('chapterCount').textContent=(data.chapters||[]).length+' Chapters';document.getElementById('unitCount').textContent=(data.total_learn_concepts||0)+' Learn Concepts';render('');}catch(e){path.innerHTML='<section class="card"><b>Content map could not load.</b><div class="tip">Please refresh the page after deployment.</div></section>';}}
 function search(){render(q.value.trim().toLowerCase());}
 document.getElementById('searchBtn').onclick=search;q.addEventListener('input',search);
 document.getElementById('menuBtn').onclick=()=>{document.getElementById('menu').classList.toggle('open')};

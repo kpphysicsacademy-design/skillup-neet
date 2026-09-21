@@ -49,7 +49,9 @@
       mastery: 0,
       status: "needs_learning",
       last_attempt: null,
-      revision_due: null
+      revision_due: null,
+      mistake_question_ids: [],
+      attempted_question_ids: []
     };
   }
 
@@ -60,6 +62,12 @@
     const d = ["easy", "medium", "hard"].includes(difficulty) ? difficulty : "medium";
 
     p.attempts += 1;
+    const qid = questionId == null ? null : String(questionId);
+    if (qid) {
+      p.attempted_question_ids = Array.isArray(p.attempted_question_ids) ? p.attempted_question_ids : [];
+      if (!p.attempted_question_ids.includes(qid)) p.attempted_question_ids.push(qid);
+      if (p.attempted_question_ids.length > 100) p.attempted_question_ids = p.attempted_question_ids.slice(-100);
+    }
     if (isCorrect) {
       p.correct += 1;
       p.consecutive_correct += 1;
@@ -83,6 +91,12 @@
     if (!isCorrect) {
       p.revision_due = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
       p.last_mistake_question_id = questionId || null;
+      if (qid) {
+        p.mistake_question_ids = Array.isArray(p.mistake_question_ids) ? p.mistake_question_ids : [];
+        p.mistake_question_ids = p.mistake_question_ids.filter(id => id !== qid);
+        p.mistake_question_ids.push(qid);
+        if (p.mistake_question_ids.length > 50) p.mistake_question_ids = p.mistake_question_ids.slice(-50);
+      }
     } else if (p.consecutive_correct >= 3) {
       p.revision_due = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
     }

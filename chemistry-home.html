@@ -30,14 +30,14 @@ function googleTranslateElementInit(){
 'use strict';
 var d=window.SKILLUP_CHEMISTRY_PROGRESSIVE||[],a=[],seen={};
 for(var i=0;i<d.length;i++){var x=d[i],k=x.parentId||x.parent||x.base;if(x.microIndex===1&&!seen[k]){seen[k]=1;a.push({u:x.u,n:x.unit,ic:x.icon,c:x.parent||x.base,ix:a.length+1,id:x.id,base:x.base});}}
-if(a.length<1){document.getElementById('path').innerHTML='<div class="card">Physics chapters could not be loaded. Please refresh the page.</div>';return;}
+if(a.length<1){document.getElementById('path').innerHTML='<div class="card">Chemistry concepts could not be loaded. Please refresh the page.</div>';return;}
 var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
 var shown=0,searchTerm='',B=20,I=20;
 var icons=[];
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function unit(x){if(document.getElementById('unit-'+x.u))return '';return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2><img class="unit-svg" src="'+esc(x.ic)+'" alt="" loading="lazy"> '+esc(x.n)+'</h2><small>CHEMISTRY CONCEPTS • UNIT '+x.u+' of 20</small></div></div></div>';}
 function unitQuiz(n){return '<div class="unit-quiz" id="unit-quiz-'+n+'"><a class="unit-link notranslate" translate="no" href="physics-master-quiz.html?unit='+n+'">🧠 TAKE UNIT '+n+' MASTER QUIZ • 20 MCQs</a></div>';}
-function card(x){return '<article class="chapter"><span class="node"></span><a href="physics-path-concept-3.html?concept='+encodeURIComponent(x.c)+'"><div><div class="title"><span class="icon">'+icons[x.u-1]+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
+function card(x){var href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id);return '<article class="chapter"><span class="node"></span><a href="'+href+'"><div><div class="title"><img class="icon-svg" src="'+esc(x.ic)+'" alt="" loading="lazy"><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
 function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(searchTerm||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){if(last){}h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);

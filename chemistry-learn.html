@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Chemistry — one Learn and Relevant Concepts mode for JEE Main 2026.">
+<title>SkillUp | Chemistry Learn</title>
+<style>
+:root{--g:#58cc02;--n:#17324d;--m:#718096;--l:#dbe8f5;--bg:#f5faff;--blue:#2563eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#263238;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--l)}.nav,.wrap{max-width:1050px;margin:auto}.nav{height:60px;padding:0 14px;display:flex;align-items:center;gap:10px}.brand{font-weight:950;color:var(--n)}.brand small{display:block;font-size:8px;letter-spacing:1px;color:#64809a}.back{border:1px solid var(--l);background:#fff;border-radius:12px;padding:8px 11px;text-decoration:none;color:var(--n);font-weight:900}.wrap{padding:18px 13px 70px}.hero,.learn,.related{background:#fff;border:1px solid var(--l);border-radius:18px;box-shadow:0 5px 16px rgba(31,72,110,.06)}.hero{padding:20px}.hero h1{margin:0 0 6px;font-size:clamp(24px,5vw,34px);color:var(--n)}.hero p{margin:0;color:var(--m);font-size:12px;line-height:1.5}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.stat{background:#f7fbff;border:1px solid var(--l);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:900}.tools{display:flex;gap:8px;margin:14px 0}.search{flex:1;padding:12px;border:2px solid var(--l);border-radius:13px;font-size:12px}.select{padding:0 10px;border:2px solid var(--l);border-radius:13px;background:#fff;font-weight:800}.learn{margin-top:14px;padding:20px}.eyebrow{font-size:9px;font-weight:950;letter-spacing:.8px;color:#3b7d18}.learn h2{margin:6px 0;font-size:24px;color:var(--n)}.parent{font-size:11px;color:var(--m)}.lesson{margin-top:16px;background:#f8fcff;border:1px solid var(--l);border-radius:15px;padding:15px}.lesson b{color:var(--n)}.lesson p{font-size:12px;line-height:1.6;margin:8px 0;color:#435568}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.btn{display:inline-block;padding:10px 14px;border-radius:12px;text-decoration:none;font-size:11px;font-weight:950}.primary{background:var(--g);color:#fff;box-shadow:0 3px 0 #46a302}.secondary{background:#eef5ff;color:#2458a8}.related{margin-top:14px;padding:16px}.related h3{margin:0 0 10px;color:var(--n);font-size:15px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.node{display:block;text-decoration:none;color:inherit;border:1px solid var(--l);border-radius:13px;padding:11px;background:#fff}.node:hover{border-color:#9ac7ef;transform:translateY(-1px)}.node strong{display:block;font-size:11px}.node span{display:block;margin-top:4px;font-size:9px;color:var(--m)}.empty{padding:20px;text-align:center;color:var(--m)}@media(max-width:650px){.grid{grid-template-columns:1fr}.select{max-width:45%}}
+</style>
+</head>
+<body>
+<header class="top"><div class="nav"><a class="back" href="chemistry-home.html">← Path</a><span style="font-size:23px">⚗️</span><div class="brand">SkillUp<small>CHEMISTRY • ONE LEARN MODE</small></div></div></header>
+<main class="wrap">
+<section class="hero"><h1>Learn one concept. See what connects.</h1><p>One focused Learn mode for the full JEE Main 2026 Chemistry scope. After each concept, SkillUp shows relevant nearby concepts and links the existing MCQ bank for practice.</p><div class="stats"><span class="stat" id="total">1,360 LEARN NODES</span><span class="stat">20 JEE MAIN UNITS</span><span class="stat">MCQs REUSED</span></div></section>
+<div class="tools"><input id="search" class="search" placeholder="Search any Chemistry concept…"><select id="chapter" class="select"><option value="">All chapters</option></select></div>
+<section id="learn" class="learn"><div class="empty">Select a concept from the results.</div></section>
+<section class="related"><h3>Relevant Concepts</h3><div id="related" class="grid"></div></section>
+</main>
+<script>
+(function(){
+let data={chapters:[]},all=[];
+const q=new URLSearchParams(location.search).get('concept');
+const search=document.getElementById('search'),chapter=document.getElementById('chapter'),learn=document.getElementById('learn'),related=document.getElementById('related');
+const slug=s=>String(s||'').toLowerCase().replace(/&/g,'and').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+function show(c){
+ if(!c){learn.innerHTML='<div class="empty">No matching concept. Search above or return to the Chemistry path.</div>';related.innerHTML='';return;}
+ const practice='question-bank.html?subject=chemistry&topic='+encodeURIComponent(c.parent_concept);
+ learn.innerHTML='<div class="eyebrow">'+c.chapter_name.toUpperCase()+' • LEARN</div><h2>'+c.title+'</h2><div class="parent">Core concept: <b>'+c.parent_concept+'</b></div><div class="lesson"><b>Learning focus</b><p>Understand the core idea of <b>'+c.parent_concept+'</b>, identify its key relationship, and apply it to a JEE Main-style problem. This is a bite-sized learning card designed to connect naturally to the concepts around it.</p><b>Next step</b><p>Check the relevant concepts below, then open the existing MCQ bank for practice and revision.</p></div><div class="actions"><a class="btn primary" href="'+practice+'">Practice MCQs →</a><a class="btn secondary" href="chemistry-home.html">Back to Path</a></div>';
+ const idx=all.indexOf(c), nearby=all.filter(x=>x.chapter_id===c.chapter_id&&x.id!==c.id).slice(Math.max(0,idx-4),Math.max(0,idx-4)+8);
+ related.innerHTML=nearby.map(x=>'<a class="node" href="chemistry-learn.html?concept='+encodeURIComponent(x.title)+'"><strong>'+x.parent_concept+'</strong><span>'+x.title.replace(x.parent_concept+' — ','')+'</span></a>').join('')||'<div class="empty">No related concepts.</div>';
+}
+function render(){
+ const term=search.value.trim().toLowerCase(),cid=chapter.value;
+ const matches=all.filter(c=>(!cid||c.chapter_id===cid)&&(!term||c.title.toLowerCase().includes(term)||c.parent_concept.toLowerCase().includes(term)));
+ show(matches[0]);
+}
+async function load(){
+ const r=await fetch('data/chemistry-content-map.json?v=4');data=await r.json();
+ data.chapters.forEach(ch=>{const o=document.createElement('option');o.value=ch.chapter_id;o.textContent=ch.chapter_id+' • '+ch.name;chapter.appendChild(o);(ch.learn_concepts||[]).forEach(c=>all.push({...c,chapter_name:ch.name,chapter_id:ch.chapter_id}));});
+ document.getElementById('total').textContent=all.length.toLocaleString()+' LEARN NODES';
+ const wanted=q?all.find(c=>c.title===q||c.parent_concept===q):all[0]; if(wanted)show(wanted); else render();
+}
+search.addEventListener('input',render);chapter.addEventListener('change',render);load();
+})();
+</script>
+</body></html>

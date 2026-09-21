@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Chemistry — 1062 progressive concept path from zero to exam hero for JEE Main and NEET.">
+<meta name="description" content="SkillUp Chemistry — 515 unique progressive concept path from zero to exam hero for JEE Main and NEET.">
 <meta name="x-skillup-build" content="20260921-chemistry-1062-progressive-v1">
 <title>SkillUp | Chemistry — 1062 Concept Path</title>
 <style>
@@ -41,8 +41,8 @@
 <body>
 <header class="top"><div class="nav"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu" aria-expanded="false">☰</button><div class="menu" id="menu"><div class="menu-title">SKILLUP</div><a href="index.html">🏠 SkillUp Home</a><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">⚗️ Chemistry</a><a href="biology-home.html">🧬 Biology</a><a href="maths-home.html">📐 Maths</a></div></div><span class="flask">⚗️</span><div class="brand">SkillUp<small>CHEMISTRY • JEE MAIN + NEET 2026</small></div><span class="nav-status">CHEMISTRY</span></div></header>
 <main class="wrap">
-<section class="hero"><div style="font-size:13px;font-weight:950;color:#58cc02">🧪 ZERO → HERO</div><h1>Chemistry Concept Path</h1><p>Learn one focused idea at a time. Build the foundation, apply it, connect relevant concepts, and progress toward exam-level mastery.</p><div class="modes"><span class="mode core">🌱 FOUNDATION</span><span class="mode">🧩 BUILDER</span><span class="mode">⚡ SOLVER</span><span class="mode hero-mode">🏆 EXAM HERO</span></div></section>
-<section class="progress"><div class="row"><span>CHEMISTRY PATH</span><span id="count">0 / 1062 concepts</span></div><div class="bar"><i id="bar"></i></div></section>
+<section class="hero"><div style="font-size:13px;font-weight:950;color:#58cc02">🧪 ZERO → HERO</div><h1>Chemistry Concept Path</h1><p>Learn one focused idea at a time. Build the foundation, apply it, connect relevant concepts, and progress toward exam-level mastery.</p></section>
+<section class="progress"><div class="row"><span>CHEMISTRY PATH</span><span id="count">0 concepts</span></div><div class="bar"><i id="bar"></i></div></section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><div id="empty" class="empty">No matching Chemistry concepts found.</div>
 <section class="card"><b>🧪 Progressive loading</b><div style="font-size:10px;color:#718096;margin-top:4px">20 concepts load first. The next concepts load automatically as you move down the path.</div></section>
@@ -51,12 +51,11 @@
 (function(){
 'use strict';
 var a=window.SKILLUP_CHEMISTRY_PROGRESSIVE||[],p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty'),count=document.getElementById('count'),bar=document.getElementById('bar');
-if(a.length<1000){p.innerHTML='<div class="card">Chemistry path data could not be loaded correctly.</div>';return;}
-var shown=0,term='',B=20,iconsByUnit={};
+if(!a.length){p.innerHTML='<div class="card">Chemistry path data could not be loaded correctly.</div>';return;}
+var shown=0,term='',B=20;
 function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function level(i){var r=i/a.length;if(r<.25)return ['🌱 FOUNDATION','core'];if(r<.5)return ['🧩 BUILDER',''];if(r<.75)return ['⚡ SOLVER',''];return ['🏆 EXAM HERO','hero'];}
 function unit(x){var id='unit-'+x.u;if(document.getElementById(id))return '';return '<div class="unit" id="'+id+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.icon)+' '+esc(x.unit)+'</h2><small>Progressive concepts • UNIT '+x.u+' of 20</small></div></div></div>';}
-function card(x,i){var lv=level(i),href='chemistry-concept.html?base='+encodeURIComponent(x.base)+'&mode='+x.mode+'&id='+encodeURIComponent(x.id);return '<article class="chapter"><span class="node"></span><a href="'+href+'"><div><div class="title"><span class="icon">'+x.icon+'</span><span>'+esc(x.title)+'</span></div><div class="sub">Concept '+(i+1)+' • '+esc(x.unit)+'</div><span class="tag '+(x.mode==='FOUNDATION'?'core':'')+'">'+(x.mode==='FOUNDATION'?'🎯 CORE':'⚡ APPLY')+'</span><span class="tag '+lv[1]+'">'+lv[0]+'</span><span class="tag">🔗 RELEVANT</span><span class="tag">🧠 PRACTICE</span></div><span class="go">›</span></a></article>';}
+function card(x,i){var href='chemistry-concept.html?base='+encodeURIComponent(x.base)+'&mode=CONCEPT&id='+encodeURIComponent(x.id);return '<article class="chapter"><span class="node"></span><a href="'+href+'"><div><div class="title"><span class="icon">'+x.icon+'</span><span>'+esc(x.base)+'</span></div><div class="sub">Concept '+(i+1)+' • '+esc(x.unit)+'</div><span class="tag">🔗 RELEVANT</span><span class="tag">🧠 PRACTICE</span></div><span class="go">›</span></a></article>';}
 function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i],a.indexOf(list[i]));}p.innerHTML=h;e.style.display=list.length?'none':'block';update(shown);}
 function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i],i);}p.insertAdjacentHTML('beforeend',h);shown=end;update(shown);}
 function update(n){count.textContent=n+' / '+a.length+' concepts';bar.style.width=Math.round((n/a.length)*100)+'%';}

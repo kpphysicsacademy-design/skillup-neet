@@ -14,6 +14,11 @@
   function conceptIdFromTopic(topic, subject) {
     const s = normalize(subject);
     const t = normalize(topic);
+    const registry = window.SkillUpConceptRegistry;
+    if (registry && typeof registry.getCachedConcept === "function") {
+      const concept = registry.getCachedConcept(topic);
+      if (concept && concept.concept_id) return concept.concept_id;
+    }
     if (!t) return "";
     const explicit = {
       "velocity": "PHY-KIN-MSL-005",

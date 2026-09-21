@@ -328,7 +328,7 @@
   const wrap=document.createElement("section");
   wrap.id="skillup-learning-intro";
   wrap.className="skillup-learning-intro";
-  const isMatter=/matter\\s+and\\s+classification/i.test(String(topic||title||""));
+  const isMatter=/matter\s+and\s+classification/i.test(String(topic||title||""));
   const lesson=isMatter?{
     title:"Matter & Classification",
     text:"Matter is anything that has mass and occupies space. It can be classified by its physical state and by its composition.",
@@ -346,8 +346,8 @@
     explanation:"Start the question set when you understand the basic idea."
   };
   wrap.innerHTML='<div class="skillup-learn-card"><div class="skillup-learn-label">📖 LEARN FIRST</div><h2>'+lesson.title+'</h2><p>'+lesson.text+'</p><div class="skillup-example"><b>💡 Example</b><br>'+lesson.example+'</div><div class="skillup-check"><b>🧠 Quick Check</b><p>'+lesson.question+'</p>'+lesson.options.map((x,i)=>'<button type="button" data-learn-option="'+x.replace(/"/g,'&quot;')+'">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'<div class="skillup-check-result" aria-live="polite"></div></div><button type="button" id="skillup-start-practice">🎯 Start Practice</button></div>';
-  const root=document.querySelector("main")||document.body;
-  root.prepend(wrap);
+  const quizRoot=document.getElementById("questions")||document.querySelector("main")||document.body;
+  if(quizRoot.parentNode) quizRoot.parentNode.insertBefore(wrap,quizRoot);
   wrap.querySelectorAll("[data-learn-option]").forEach(btn=>btn.addEventListener("click",()=>{
     const ok=btn.getAttribute("data-learn-option")===lesson.answer;
     wrap.querySelector(".skillup-check-result").textContent=ok?"✅ Correct — "+lesson.explanation:"❌ Review the explanation and try again: "+lesson.explanation;

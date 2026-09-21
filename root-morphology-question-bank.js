@@ -1,0 +1,17 @@
+window.skillUpRootMorphologyQuestions = [
+{q:"Which part of a typical root is covered by the root cap?",o:["Root tip","Root hair zone","Maturation zone","Lateral root"],a:0,e:"The root cap protects the delicate growing tip as the root pushes through soil."},
+{q:"Which region of a root contains actively dividing cells?",o:["Meristematic region","Maturation region","Root hair region only","Permanent lateral root"],a:0,e:"Cells in the meristematic region divide actively and contribute to root growth."},
+{q:"Root hairs mainly arise from which region?",o:["Region of maturation","Root cap","Region of cell division","Root apex"],a:0,e:"Root hairs develop from epidermal cells in the region of maturation and increase absorptive surface area."},
+{q:"What is the main function of root hairs?",o:["Absorption of water and mineral ions","Protection of the root tip","Production of pollen","Photosynthesis"],a:0,e:"Root hairs increase contact with soil and aid absorption of water and mineral ions."},
+{q:"Which region lies between the meristematic region and the region of maturation?",o:["Region of elongation","Root cap","Lateral root zone","Pericycle"],a:0,e:"Cells elongate rapidly in the region of elongation, increasing the length of the root."},
+{q:"The primary root develops directly from which embryonic structure?",o:["Radicle","Plumule","Cotyledon","Hypocotyl only"],a:0,e:"The radicle is the embryonic root that develops into the primary root."},
+{q:"Which root system is characterized by one prominent primary root with lateral roots?",o:["Tap root system","Fibrous root system","Adventitious root system","Haustorial system"],a:0,e:"A tap root system has a prominent primary root that gives rise to lateral roots."},
+{q:"Which root system is commonly associated with monocot plants?",o:["Fibrous root system","Tap root system","Storage root system only","Prop-root system only"],a:0,e:"Monocots commonly develop fibrous roots in which many roots arise from the base of the stem."},
+{q:"Roots that arise from parts of the plant other than the radicle are called:",o:["Adventitious roots","Primary roots","Tap roots","Lateral roots only"],a:0,e:"Adventitious roots arise from stems, leaves or other non-radicle regions."},
+{q:"Which structure protects the root apical meristem?",o:["Root cap","Root hair","Endodermis","Pericycle"],a:0,e:"The root cap covers and protects the root apical meristem."},
+{q:"Which root region is chiefly responsible for increase in cell length?",o:["Region of elongation","Region of maturation","Root cap","Lateral root"],a:0,e:"Cells elongate substantially in the elongation region, contributing to root length."},
+{q:"Lateral roots generally originate from which tissue of the primary root?",o:["Pericycle","Epidermis","Cortex","Endodermis"],a:0,e:"Lateral roots arise endogenously from the pericycle."},
+{q:"Which root modification is commonly associated with storage of food?",o:["Storage root","Prop root","Pneumatophore","Climbing root"],a:0,e:"Storage roots become swollen and accumulate reserve food materials."},
+{q:"Which root modification provides additional support to the aerial parts of a plant?",o:["Prop root","Storage root","Pneumatophore","Root hair"],a:0,e:"Prop roots arise from branches and help support the plant mechanically."},
+{q:"Which root modification helps certain plants obtain oxygen in waterlogged soil?",o:["Pneumatophore","Storage root","Climbing root","Prop root"],a:0,e:"Pneumatophores project upward and facilitate gaseous exchange in waterlogged habitats."}
+];

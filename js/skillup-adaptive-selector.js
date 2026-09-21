@@ -29,9 +29,18 @@
     const source=Array.isArray(bank)?bank:[];
     const n=Math.max(1,Math.min(Number(count)||10,source.length||1));
     const wanted=targetDifficulty(plan&&plan.stage);
+    const mistakeIds=new Set((plan&&Array.isArray(plan.mistake_question_ids))?plan.mistake_question_ids.map(String):[]);
+    const attemptedIds=new Set((plan&&Array.isArray(plan.attempted_question_ids))?plan.attempted_question_ids.map(String):[]);
     const scored=source.map(score);
 
     scored.sort((a,b)=>{
+      const aid=String(a.q&&(a.q.question_id||a.q.questionId||a.q.id)||"");
+      const bid=String(b.q&&(b.q.question_id||b.q.questionId||b.q.id)||"");
+      const am=mistakeIds.has(aid)?0:1, bm=mistakeIds.has(bid)?0:1;
+      if(plan&&plan.stage==="revision" && am!==bm) return am-bm;
+      const aa=(!mistakeIds.has(aid)&&attemptedIds.has(aid))?1:0;
+      const ba=(!mistakeIds.has(bid)&&attemptedIds.has(bid))?1:0;
+      if(plan&&plan.stage==="revision" && aa!==ba) return aa-ba;
       const ai=wanted.indexOf(a.d), bi=wanted.indexOf(b.d);
       return (ai-bi)||((a.index+17)%31-(b.index+17)%31);
     });
@@ -60,6 +69,9 @@
   function forConcept(studentId,conceptId,bank,count){
     if(!window.SkillUpMastery) return Array.isArray(bank)?bank.slice(0,count||10):[];
     const plan=window.SkillUpMastery.getAdaptivePlan(studentId||"anonymous",conceptId);
+    const mastery=window.SkillUpMastery.get(studentId||"anonymous",conceptId);
+    plan.mistake_question_ids=mastery.mistake_question_ids||[];
+    plan.attempted_question_ids=mastery.attempted_question_ids||[];
     return select(bank,plan,count||plan.min_questions);
   }
 

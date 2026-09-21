@@ -332,28 +332,24 @@
   const lesson=isMatter?{
     title:"Matter & Classification",
     text:"Matter is anything that has mass and occupies space. It can be classified by its physical state and by its composition.",
-    example:"Example: Ice is a solid, water is a liquid, and water vapour is a gas.",
-    question:"Which of the following is matter?",
-    options:["Light","Air","Sound","Heat"],
-    answer:"Air",
-    explanation:"Air has mass and occupies space, so it is matter."
+    points:["Matter has mass and occupies space.","Matter commonly exists as solid, liquid or gas.","Matter can also be classified as pure substances or mixtures."],
+    example:"Ice is a solid, water is a liquid, and water vapour is a gas."
   }:{
     title:String(title||topic||"Learn this concept"),
-    text:"Learn the key idea first, then practice with questions.",
-    example:"Read the explanation and example before starting the practice questions.",
-    question:"Ready to practice this concept?",
-    options:["Yes","Not yet"], answer:"Yes",
-    explanation:"Start the question set when you understand the basic idea."
+    text:"First understand the key idea. The questions will appear on the next page.",
+    points:["Read the explanation carefully.","Remember the important points.","Then continue to the questions."],
+    example:"Review the example before moving to practice."
   };
-  wrap.innerHTML='<div class="skillup-learn-card"><div class="skillup-learn-label">📖 LEARN FIRST</div><h2>'+lesson.title+'</h2><p>'+lesson.text+'</p><div class="skillup-example"><b>💡 Example</b><br>'+lesson.example+'</div><div class="skillup-check"><b>🧠 Quick Check</b><p>'+lesson.question+'</p>'+lesson.options.map((x,i)=>'<button type="button" data-learn-option="'+x.replace(/"/g,'&quot;')+'">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'<div class="skillup-check-result" aria-live="polite"></div></div><button type="button" id="skillup-start-practice">🎯 Start Practice</button></div>';
+  wrap.innerHTML='<div class="skillup-learn-card"><div class="skillup-learn-label">📖 PAGE 1 · LEARN</div><h2>'+lesson.title+'</h2><p>'+lesson.text+'</p><div class="skillup-learn-points"><b>Key points</b><ul>'+lesson.points.map(x=>'<li>'+x+'</li>').join('')+'</ul></div><div class="skillup-example"><b>💡 Example</b><br>'+lesson.example+'</div><button type="button" id="skillup-next-page">Next → Questions</button></div>';
   const quizRoot=document.getElementById("questions")||document.querySelector("main")||document.body;
   if(quizRoot.parentNode) quizRoot.parentNode.insertBefore(wrap,quizRoot);
-  wrap.querySelectorAll("[data-learn-option]").forEach(btn=>btn.addEventListener("click",()=>{
-    const ok=btn.getAttribute("data-learn-option")===lesson.answer;
-    wrap.querySelector(".skillup-check-result").textContent=ok?"✅ Correct — "+lesson.explanation:"❌ Review the explanation and try again: "+lesson.explanation;
-  }));
-  wrap.querySelector("#skillup-start-practice").addEventListener("click",()=>{const q=document.getElementById("questions");if(q){q.style.display="block";q.scrollIntoView({behavior:"smooth",block:"start"});}});
+  wrap.querySelector("#skillup-next-page").addEventListener("click",()=>{
+    wrap.remove();
+    quizRoot.style.display="block";
+    quizRoot.scrollIntoView({behavior:"smooth",block:"start"});
+  });
 }
+
 
 function render(bank,title,sub,topic){
     renderLearningIntro(title,sub,topic);

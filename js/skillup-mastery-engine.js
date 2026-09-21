@@ -103,10 +103,46 @@
   function getNextAction(studentId, conceptId) {
     const p = get(studentId, conceptId);
     if (p.attempts === 0) return "learn";
+    if (p.revision_due && new Date(p.revision_due).getTime() <= Date.now()) return "revision";
     if (p.mastery < 60) return "practice";
     if (p.mastery < 80) return "level_2";
     if (p.mastery < 95) return "level_3";
     return "revision";
+  }
+
+  function getAdaptivePlan(studentId, conceptId) {
+    const p = get(studentId, conceptId);
+    const action = getNextAction(studentId, conceptId);
+    const plans = {
+      learn: { stage: "learn", min_questions: 5, difficulty: "easy", reason: "No attempts recorded" },
+      practice: { stage: "practice", min_questions: 10, difficulty: "easy-medium", reason: "Mastery below 60" },
+      level_2: { stage: "level_2", min_questions: 10, difficulty: "medium", reason: "Mastery 60-79" },
+      level_3: { stage: "level_3", min_questions: 10, difficulty: "hard", reason: "Mastery 80-94" },
+      revision: { stage: "revision", min_questions: 5, difficulty: "mixed", reason: "Revision due or mastery established" }
+    };
+    return Object.assign({
+      student_id: studentId || "anonymous",
+      concept_id: conceptId || "",
+      mastery: p.mastery,
+      status: p.status,
+      accuracy: p.accuracy,
+      attempts: p.attempts
+    }, plans[action]);
+  }
+
+  function getRecommendedConcepts(studentId, concepts) {
+    const list = Array.isArray(concepts) ? concepts : [];
+    return list.map(c => {
+      const p = get(studentId, c.concept_id);
+      return Object.assign({}, c, {
+        mastery: p.mastery,
+        status: p.status,
+        next_action: getNextAction(studentId, c.concept_id)
+      });
+    }).sort((a,b) => {
+      const priority = { learn: 0, revision: 1, practice: 2, level_2: 3, level_3: 4 };
+      return (priority[a.next_action] - priority[b.next_action]) || (a.mastery - b.mastery);
+    });
   }
 
   window.SkillUpMastery = {
@@ -114,6 +150,8 @@
     recordAnswer,
     getRevisionQueue,
     getNextAction,
+    getAdaptivePlan,
+    getRecommendedConcepts,
     statusFor
   };
 })(window);

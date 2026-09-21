@@ -114,11 +114,11 @@
     const p = get(studentId, conceptId);
     const action = getNextAction(studentId, conceptId);
     const plans = {
-      learn: { stage: "learn", min_questions: 5, difficulty: "easy", reason: "No attempts recorded" },
-      practice: { stage: "practice", min_questions: 10, difficulty: "easy-medium", reason: "Mastery below 60" },
-      level_2: { stage: "level_2", min_questions: 10, difficulty: "medium", reason: "Mastery 60-79" },
-      level_3: { stage: "level_3", min_questions: 10, difficulty: "hard", reason: "Mastery 80-94" },
-      revision: { stage: "revision", min_questions: 5, difficulty: "mixed", reason: "Revision due or mastery established" }
+      learn: { stage: "learn", min_questions: 15, difficulty: "easy", reason: "No attempts recorded" },
+      practice: { stage: "practice", min_questions: 15, difficulty: "easy-medium", reason: "Mastery below 60" },
+      level_2: { stage: "level_2", min_questions: 15, difficulty: "medium", reason: "Mastery 60-79" },
+      level_3: { stage: "level_3", min_questions: 15, difficulty: "hard", reason: "Mastery 80-94" },
+      revision: { stage: "revision", min_questions: 15, difficulty: "mixed", reason: "Revision due or mastery established" }
     };
     return Object.assign({
       student_id: studentId || "anonymous",

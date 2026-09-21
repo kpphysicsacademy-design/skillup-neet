@@ -8,19 +8,15 @@
 <section id="result" class="result" style="margin-top:14px"><div>QUIZ COMPLETE 🎉</div><div id="final" class="score"></div><p id="message"></p><button class="restart" onclick="location.reload()">Try Again</button></section></main>
 <script src="what-is-living-question-bank.js"></script>
 <script src="biodiversity-question-bank.js"></script>
+<script src="need-for-classification-question-bank.js"></script>
 <script>
 (function(){
 'use strict';
 const params=new URLSearchParams(location.search),requested=(params.get('concept')||'What Is Living?').trim(),key=requested.toLowerCase();
-const banks={'what is living?':window.skillUpWhatIsLivingQuestions,'biodiversity':window.skillUpBiodiversityQuestions};
+const banks={'what is living?':window.skillUpWhatIsLivingQuestions,'biodiversity':window.skillUpBiodiversityQuestions,'need for classification':window.skillUpNeedForClassificationQuestions};
 const questionsSource=banks[key],title=document.getElementById('title'),subtitle=document.getElementById('subtitle'),quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
 title.textContent=requested;document.title='SkillUp | '+requested+' Quiz';
-if(!questionsSource||!questionsSource.length){
-quiz.style.display='none';notice.style.display='block';
-subtitle.textContent='Original concept quiz not added yet.';
-noticeText.textContent='There is currently no original quiz for “'+requested+'”. The Chapter 1 quiz is not reused for other concepts.';
-return;
-}
+if(!questionsSource||!questionsSource.length){quiz.style.display='none';notice.style.display='block';subtitle.textContent='Original concept quiz not added yet.';noticeText.textContent='There is currently no original quiz for “'+requested+'”. The Chapter 1 quiz is not reused for other concepts.';return;}
 const N=Math.min(15,questionsSource.length);let questions=questionsSource.slice(0,N),i=0,score=0,answered=false;
 subtitle.textContent=N+' original practice questions with explanations.';
 const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next'),counter=document.getElementById('counter'),scoreEl=document.getElementById('score'),bar=document.getElementById('bar');

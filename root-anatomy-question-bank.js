@@ -29,5 +29,5 @@ window.skillUpRootAnatomyQuestions = [
 {q:"The root generally lacks:",o:["Stomata","Vascular tissue","Cortex","Epidermis"],a:0,e:"Roots generally do not possess stomata because they are not primary photosynthetic organs."},
 {q:"Which feature is typical of a dicot root?",o:["Diarch to tetrarch or commonly fewer xylem arms and small pith","Large central pith and numerous xylem groups always","Scattered vascular bundles","Endarch xylem"],a:0,e:"Dicot roots commonly have relatively few xylem arms and a small pith."},
 {q:"Which feature is typical of a monocot root?",o:["Large pith and polyarch xylem","Star-shaped xylem with no pith","Only two xylem arms","No endodermis"],a:0,e:"Monocot roots commonly have a large pith and numerous xylem groups."},
-{q:"Which statement best summarizes root anatomy?",o:["A root has an epidermis, cortex, endodermis and stele, with vascular tissues arranged characteristically for roots","Roots contain only vascular tissue","Roots lack a cortex and endodermis","All roots have identical internal organization"],a:0,e:"Root anatomy includes the outer protective layer, cortex, endodermis and vascular cylinder with exarch xylem."}
+
 ];

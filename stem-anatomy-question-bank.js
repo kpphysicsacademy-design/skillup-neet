@@ -29,5 +29,5 @@ window.skillUpStemAnatomyQuestions = [
 {q:"A typical monocot stem generally lacks:",o:["Vascular cambium in its bundles and normal secondary growth","Epidermis","Xylem","Phloem"],a:0,e:"Closed bundles without vascular cambium mean typical monocot stems do not show normal secondary growth."},
 {q:"The arrangement of xylem and phloem on different radii is called:",o:["Radial","Conjoint collateral","Bicollateral","Scattered"],a:0,e:"Radial vascular bundles have xylem and phloem on separate radii, as in roots."},
 {q:"Which combination correctly describes a typical dicot stem?",o:["Ringed open bundles, collateral arrangement and endarch xylem","Scattered closed bundles, radial arrangement and exarch xylem","Scattered open bundles and exarch xylem","Radial bundles and endarch xylem"],a:0,e:"A typical dicot stem has ringed, conjoint collateral, open bundles with endarch xylem."},
-{q:"Which combination correctly describes a typical monocot stem?",o:["Scattered closed collateral bundles with endarch xylem","Ringed open bundles with exarch xylem","Radial open bundles with exarch xylem","Ringed bicollateral bundles with mesarch xylem"],a:0,e:"Monocot stems generally have scattered, closed, collateral bundles and endarch xylem."}
+
 ];

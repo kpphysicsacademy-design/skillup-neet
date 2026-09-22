@@ -29,5 +29,4 @@ window.skillUpDNAReplicationQuestions = [
 {q:"After two rounds of replication in the Meselson-Stahl experiment, the DNA population contains:",o:["Hybrid and light DNA","Only hybrid DNA","Only heavy DNA","Only protein"],a:0,e:"After two rounds, half the molecules are hybrid and half are light under the idealized model."},
 {q:"In eukaryotes, DNA replication occurs during which cell-cycle phase?",o:["S phase","G1 phase only","G2 phase only","M phase only"],a:0,e:"The S phase is the period of DNA synthesis in the cell cycle."},
 {q:"The replication of a chromosome with multiple origins helps eukaryotic cells:",o:["Copy large genomes efficiently","Eliminate DNA primers","Make RNA without templates","Avoid complementary base pairing"],a:0,e:"Multiple origins allow large eukaryotic chromosomes to be replicated efficiently within S phase."},
-{q:"Telomerase is important in eukaryotes because it:",o:["Extends telomeric DNA at chromosome ends","Unwinds every replication fork","Removes all histones","Joins all Okazaki fragments"],a:0,e:"Telomerase extends telomeres using its reverse-transcriptase activity, helping address end-replication limitations."}
 ];

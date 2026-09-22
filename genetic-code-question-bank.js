@@ -29,5 +29,4 @@ window.skillUpGeneticCodeQuestions = [
 {q:"The three stop codons account for the remaining codons because they:",o:["Signal termination rather than specify an amino acid","Specify three different amino acids","Act as tRNA anticodons","Start DNA replication"],a:0,e:"UAA, UAG and UGA terminate translation rather than encode amino acids."},
 {q:"A codon and its anticodon pair by:",o:["Complementary and antiparallel base pairing","Peptide bonding","Covalent bonding between all three bases","Random association"],a:0,e:"Codon-anticodon recognition depends on complementary base pairing in opposite orientations."},
 {q:"The genetic code is read during translation in the direction:",o:["5′→3′ along mRNA","3′→5′ along mRNA","Both directions at once","From protein to RNA"],a:0,e:"Ribosomes move along mRNA from its 5′ end toward its 3′ end while reading codons."},
-{q:"The standard genetic code links nucleotide sequence to:",o:["Amino acid sequence of proteins","DNA replication speed","Chromosome number","Cell membrane composition"],a:0,e:"The code provides the rules by which mRNA nucleotide sequences specify protein amino acid sequences."}
 ];

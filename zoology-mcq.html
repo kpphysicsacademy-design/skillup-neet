@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Zoology Quiz</title>
+<style>
+:root{--b:#58cc02;--n:#17452a;--m:#6b7280;--l:#dce8d8;--bg:#f5faf3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#263238;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--l)}
+.nav,.wrap{max-width:760px;margin:auto}.nav{height:60px;padding:0 14px;display:flex;align-items:center;gap:9px}
+.back{border:1px solid var(--l);border-radius:11px;background:#fff;padding:8px 11px;text-decoration:none;color:var(--n);font-weight:900;font-size:12px}
+.brand{font-weight:950;color:var(--n)}.brand small{display:block;font-size:8px;letter-spacing:1px;color:#64806b}
+.wrap{padding:18px 13px 60px}.hero,.q,.result,.status{background:#fff;border:1px solid var(--l);border-radius:18px;padding:18px;margin-bottom:14px}
+h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}.muted{color:var(--m);font-size:11px;line-height:1.5}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.pill{background:#eef8ea;color:#416044;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:900}
+.progress{height:9px;background:#e7efe5;border-radius:99px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;width:0;background:var(--b)}
+.qnum{font-size:10px;color:var(--m);font-weight:900;text-transform:uppercase}.q h2{font-size:19px;line-height:1.4;margin:8px 0 14px}
+.options{display:grid;gap:9px}.opt{width:100%;text-align:left;border:2px solid #dfe7dc;border-bottom:4px solid #cbd9c6;border-radius:13px;padding:12px;background:#fff;cursor:pointer;font-weight:750;font-size:14px}
+.opt.correct{border-color:#58cc02;background:#eaffd9}.opt.wrong{border-color:#ff4b4b;background:#ffe5e5}.opt:disabled{cursor:default}
+.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;font-size:12px;line-height:1.5}.feedback.show{display:block}.ok{background:#eaffd9;border:1px solid #b7e892}.no{background:#ffe5e5;border:1px solid #ffb3b3}
+.next{display:none;width:100%;border:0;border-radius:13px;padding:13px;margin-top:12px;background:var(--b);color:#fff;font-weight:900;cursor:pointer}.next.show{display:block}
+.score{text-align:center;font-size:44px;font-weight:950;color:var(--n)}.warn{color:#8a5b00;background:#fff7df;border:1px solid #efdca3;border-radius:12px;padding:11px;font-size:11px;margin-top:10px}
+</style>
+</head>
+<body>
+<header class="top"><div class="nav">
+<a class="back" href="zoology-home.html">← Zoology</a>
+<div class="brand">SkillUp<small>ZOOLOGY • CONCEPT QUIZ</small></div>
+</div></header>
+<main class="wrap">
+<section class="hero">
+<h1 id="title">Zoology Quiz</h1>
+<div class="muted" id="subtitle">Loading concept question bank…</div>
+<div class="meta"><span class="pill" id="bankCount">Loading…</span><span class="pill">🧠 Concept Quiz</span><span class="pill">📘 Practice</span></div>
+<div class="progress"><i id="bar"></i></div>
+</section>
+<div id="content"></div>
+</main>
+<script>
+(function(){
+'use strict';
+var params=new URLSearchParams(location.search);
+var concept=params.get('concept')||'';
+var title=document.getElementById('title');
+var subtitle=document.getElementById('subtitle');
+var bankCount=document.getElementById('bankCount');
+var content=document.getElementById('content');
+var bar=document.getElementById('bar');
+var items=[],i=0,score=0;
+function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function candidates(v){
+ var s=slug(v), out=[s+'-question-bank.js'];
+ if(s==='taxonomy-and-systematics') out.push('taxonomy-systematics-question-bank.js');
+ if(s==='biodiversity') out.push('biodiversity-patterns-question-bank.js');
+ return [...new Set(out)];
+}
+function loadScript(src){
+ return new Promise(function(resolve,reject){
+  var before={};
+  Object.keys(window).forEach(function(k){before[k]=window[k];});
+  var sc=document.createElement('script');sc.src=src;
+  sc.onload=function(){
+    var found=[];
+    Object.keys(window).forEach(function(k){
+      if(before[k]===window[k]) return;
+      var v=window[k];
+      if(Array.isArray(v)&&v.length&&v.every(function(x){return x&&typeof x==='object'&&('q' in x)&&('o' in x)&&('a' in x);})){
+        found.push(v);
+      }
+    });
+    resolve(found[0]||null);
+  };
+  sc.onerror=function(){sc.remove();reject(new Error('not found'));};
+  document.head.appendChild(sc);
+ });
+}
+async function load(){
+ title.textContent=concept||'Zoology Quiz';
+ if(!concept){showStatus('No concept was supplied. Return to the Zoology path and select a concept.');return;}
+ var files=candidates(concept), bank=null;
+ for(var n=0;n<files.length&&!bank;n++){
+   try{bank=await loadScript(files[n]);}catch(e){}
+ }
+ if(!bank){showStatus('A dedicated question bank is not connected for this concept yet. The concept link is now routed correctly, but its source bank still needs to be created.');return;}
+ items=bank.slice(0,30);
+ bankCount.textContent=items.length+' questions';
+ subtitle.textContent=items.length===30?'30-question concept bank':'Dedicated bank currently contains '+items.length+' questions';
+ if(items.length<30){
+   subtitle.insertAdjacentHTML('afterend','<div class="warn">This is the source bank count currently present in GitHub. No duplicate filler questions are added automatically.</div>');
+ }
+ render();
+}
+function showStatus(msg){content.innerHTML='<section class="status"><b>Quiz unavailable</b><p class="muted">'+esc(msg)+'</p></section>';bankCount.textContent='Not connected';}
+function render(){
+ if(i>=items.length){
+  bar.style.width='100%';
+  content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';
+  document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};
+  return;
+ }
+ var x=items[i], opts=x.o||[], ans=typeof x.a==='number'?x.a:opts.indexOf(x.a);
+ bar.style.width=(i/items.length*100)+'%';
+ content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
+ document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,ans,x);};});
+ document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
+}
+function answer(choice,ans,x){
+ var bs=[...document.querySelectorAll('.opt')],f=document.getElementById('feedback');
+ bs.forEach(function(b){b.disabled=true;});
+ if(ans>=0&&bs[ans])bs[ans].classList.add('correct');
+ if(choice===ans){score++;f.className='feedback show ok';f.innerHTML='<b>Correct!</b><div>'+esc(x.e||'')+'</div>';}
+ else{if(bs[choice])bs[choice].classList.add('wrong');f.className='feedback show no';f.innerHTML='<b>Not quite.</b> Correct answer: '+esc((x.o||[])[ans]||x.a)+'<div>'+esc(x.e||'')+'</div>';}
+ document.getElementById('next').classList.add('show');
+ bar.style.width=((i+1)/items.length*100)+'%';
+}
+load();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/* SkillUp Zoology — Diploblastic and Triploblastic Organisation
+ * Dedicated 30-question concept bank.
+ */
+window.skillUpDiploblasticTriploblasticQuestions = [
+  {q:"Animals with two embryonic germ layers are called:",o:["Monoblastic","Diploblastic","Triploblastic","Acoelomate"],a:1,e:"Diploblastic animals develop from two germ layers: ectoderm and endoderm."},
+  {q:"The two primary germ layers in diploblastic animals are:",o:["Ectoderm and mesoderm","Mesoderm and endoderm","Ectoderm and endoderm","Ectoderm and coelom"],a:2,e:"Diploblastic animals possess ectoderm and endoderm."},
+  {q:"Triploblastic animals possess:",o:["Only ectoderm","Ectoderm and endoderm","Ectoderm, mesoderm and endoderm","Mesoderm only"],a:2,e:"Triploblastic animals have three embryonic germ layers."},
+  {q:"The germ layer located between ectoderm and endoderm in triploblastic animals is:",o:["Mesoderm","Epidermis","Mesoglea","Coelom"],a:0,e:"Mesoderm is the third germ layer and lies between ectoderm and endoderm."},
+  {q:"Which group is classically diploblastic?",o:["Cnidaria","Annelida","Arthropoda","Chordata"],a:0,e:"Cnidarians are diploblastic animals."},
+  {q:"Which group is classically triploblastic?",o:["Cnidaria","Ctenophora","Platyhelminthes","Porifera"],a:2,e:"Platyhelminthes are triploblastic."},
+  {q:"Which germ layer primarily forms the outer covering of the developing animal embryo?",o:["Endoderm","Mesoderm","Ectoderm","Coelom"],a:2,e:"Ectoderm is the outer embryonic germ layer."},
+  {q:"The innermost embryonic germ layer is the:",o:["Ectoderm","Mesoderm","Endoderm","Mesoglea"],a:2,e:"Endoderm is the innermost germ layer."},
+  {q:"The mesoderm is significant because it:",o:["Is the only germ layer in animals","Provides an additional embryonic layer for development of many tissues and organs","Occurs only in sponges","Replaces ectoderm"],a:1,e:"Mesoderm contributes to many internal tissues and organs in triploblastic animals."},
+  {q:"Which combination is correct?",o:["Diploblastic — three germ layers","Triploblastic — two germ layers","Diploblastic — ectoderm and endoderm","Triploblastic — ectoderm only"],a:2,e:"Diploblastic animals possess ectoderm and endoderm."},
+  {q:"Which combination is correct?",o:["Triploblastic — ectoderm, mesoderm and endoderm","Diploblastic — ectoderm, mesoderm and endoderm","Diploblastic — mesoderm only","Triploblastic — endoderm only"],a:0,e:"Triploblastic animals develop with three germ layers."},
+  {q:"Cnidarians are described as diploblastic because they have:",o:["Three germ layers","Two germ layers","No germ layers","Only mesoderm"],a:1,e:"Cnidarians have ectoderm and endoderm as their two embryonic germ layers."},
+  {q:"Platyhelminthes are described as triploblastic because they possess:",o:["Only ectoderm","Ectoderm and endoderm","Ectoderm, mesoderm and endoderm","Only mesoderm"],a:2,e:"Platyhelminthes possess all three primary germ layers."},
+  {q:"The term 'germ layer' refers to:",o:["A mature organ system","An embryonic cell layer that contributes to tissues and organs","A body cavity","A taxonomic rank"],a:1,e:"Germ layers are embryonic layers from which body tissues and organs develop."},
+  {q:"Which of the following is NOT a germ layer?",o:["Ectoderm","Mesoderm","Endoderm","Coelom"],a:3,e:"Coelom is a body cavity, not an embryonic germ layer."},
+  {q:"Which statement best distinguishes diploblastic and triploblastic organisation?",o:["The number of body segments differs","The number of embryonic germ layers differs","The number of chromosomes differs","The type of nutrition differs"],a:1,e:"The defining distinction is whether two or three primary embryonic germ layers are present."},
+  {q:"In a diploblastic animal, the region between ectoderm and endoderm is commonly called:",o:["Mesoglea","Coelom","Haemocoel","Notochord"],a:0,e:"In cnidarians, mesoglea lies between the ectoderm and endoderm."},
+  {q:"Mesoglea in cnidarians should NOT be confused with:",o:["Mesoderm","Ectoderm","Endoderm","Germinal epithelium"],a:0,e:"Mesoglea is not equivalent to the true mesodermal germ layer of triploblastic animals."},
+  {q:"Which group is associated with diploblastic organisation?",o:["Cnidaria","Annelida","Mollusca","Echinodermata"],a:0,e:"Cnidarians are diploblastic."},
+  {q:"Which group is associated with triploblastic organisation?",o:["Cnidaria","Ctenophora","Annelida","Porifera"],a:2,e:"Annelids are triploblastic."},
+  {q:"Which statement about mesoderm is correct?",o:["It is absent in all triploblastic animals","It is the third germ layer in triploblastic animals","It is the same as the coelom","It is found only in diploblastic animals"],a:1,e:"Mesoderm is the third germ layer characteristic of triploblastic organisation."},
+  {q:"Which embryonic layer generally gives rise to the epidermis and nervous tissue?",o:["Ectoderm","Mesoderm","Endoderm","Mesoglea"],a:0,e:"Ectoderm contributes to the epidermis and nervous system."},
+  {q:"Which embryonic layer commonly contributes to the lining of the digestive tract?",o:["Ectoderm","Mesoderm","Endoderm","Mesoglea"],a:2,e:"Endoderm forms much of the epithelial lining of the digestive tract."},
+  {q:"Which embryonic layer contributes to muscles and connective tissues?",o:["Ectoderm","Mesoderm","Endoderm","Mesoglea"],a:1,e:"Mesoderm gives rise to muscles and many connective tissues."},
+  {q:"A triploblastic animal necessarily has:",o:["A true coelom","Three embryonic germ layers","Bilateral symmetry","Metameric segmentation"],a:1,e:"Triploblasty specifically means development from three germ layers; it does not by itself imply a coelom, bilateral symmetry or segmentation."},
+  {q:"A diploblastic animal necessarily has:",o:["A coelom","Two embryonic germ layers","Organ-system level organisation","Bilateral symmetry"],a:1,e:"Diploblasty specifically refers to two embryonic germ layers."},
+  {q:"Which statement is scientifically appropriate?",o:["All triploblastic animals are coelomates","Triploblasty and coelom are separate body-plan features","All diploblastic animals have a mesoderm","Diploblasty means absence of endoderm"],a:1,e:"Triploblasty describes germ layers, whereas coelom describes a body cavity and its mesodermal lining."},
+  {q:"Which sequence correctly identifies the three germ layers from outer to inner?",o:["Endoderm → mesoderm → ectoderm","Ectoderm → mesoderm → endoderm","Mesoderm → ectoderm → endoderm","Ectoderm → endoderm → mesoderm"],a:1,e:"In the basic embryonic arrangement, ectoderm is outer, mesoderm middle and endoderm inner."},
+  {q:"Why is germ-layer organisation important in animal classification?",o:["It reflects fundamental differences in embryonic development and body-plan construction","It measures body weight","It determines habitat alone","It identifies species by colour"],a:0,e:"Germ-layer organisation is a major developmental feature used to distinguish animal groups."},
+  {q:"Which pair is correctly matched?",o:["Cnidaria — diploblastic","Platyhelminthes — diploblastic","Annelida — diploblastic","Chordata — diploblastic"],a:0,e:"Cnidaria is a standard example of a diploblastic animal."}
+];

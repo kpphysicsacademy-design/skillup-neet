@@ -1,4 +1,4 @@
-window.skillUpBtCropsQuestions = [
+window.skillUpBTCropsQuestions=[
 {q:"Bt crops are genetically modified mainly to provide resistance against:",o:["Certain insect pests","Drought only","All plant diseases","Salinity only"],a:0,e:"Bt crops express insecticidal proteins derived from Bacillus thuringiensis that target susceptible insect pests."},
 {q:"The term Bt in Bt crops refers to:",o:["Bacillus thuringiensis","Bacillus tuberculosis","Bacillus typhimurium","Bacillus thermophilus"],a:0,e:"Bt refers to Bacillus thuringiensis, the bacterium from which the insecticidal protein genes are obtained."},
 {q:"Bt toxin is produced naturally by:",o:["Bacillus thuringiensis","Escherichia coli","Rhizobium","Agrobacterium"],a:0,e:"Bacillus thuringiensis naturally produces insecticidal crystal proteins."},

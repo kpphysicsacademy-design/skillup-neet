@@ -1,0 +1,35 @@
+/* SkillUp Zoology — Coelom and Body Cavity
+ * Dedicated 30-question concept bank.
+ */
+window.skillUpCoelomBodyCavityQuestions = [
+{q:"A coelom is a body cavity that is:",o:["Completely lined by mesoderm","Completely lined by ectoderm","Filled only with endoderm","Present only in diploblastic animals"],a:0,e:"A true coelom is completely lined by mesoderm."},
+{q:"Animals lacking a body cavity between the body wall and digestive tract are called:",o:["Coelomates","Pseudocoelomates","Acoelomates","Diploblasts"],a:2,e:"Acoelomates lack a body cavity between the body wall and gut."},
+{q:"Animals possessing a body cavity completely lined by mesoderm are called:",o:["Acoelomates","Pseudocoelomates","Coelomates","Diploblasts"],a:2,e:"Coelomates possess a true coelom completely lined by mesoderm."},
+{q:"A pseudocoelom is:",o:["Completely lined by mesoderm","Not completely lined by mesoderm","Completely lined by ectoderm","A germ layer"],a:1,e:"A pseudocoelom is not completely lined by mesoderm."},
+{q:"Which group is a classic example of acoelomates?",o:["Platyhelminthes","Annelida","Arthropoda","Echinodermata"],a:0,e:"Platyhelminthes are classically described as acoelomate."},
+{q:"Which group is classically described as pseudocoelomate?",o:["Nematoda/Aschelminthes","Annelida","Mollusca","Chordata"],a:0,e:"Nematodes, traditionally included under Aschelminthes, have a pseudocoel."},
+{q:"Which group is classically coelomate?",o:["Platyhelminthes","Annelida","Nematoda","Cnidaria"],a:1,e:"Annelids possess a true coelom."},
+{q:"The tissue layer that completely lines a true coelom is:",o:["Ectoderm","Mesoderm","Endoderm","Mesoglea"],a:1,e:"The true coelom is completely lined by mesoderm."},
+{q:"Which condition is represented by the absence of a body cavity?",o:["Acoelomate","Coelomate","Pseudocoelomate","Diploblastic"],a:0,e:"Acoelomates lack a body cavity between the body wall and gut."},
+{q:"Which statement correctly compares coelom and pseudocoelom?",o:["Both are completely lined by mesoderm","Only a true coelom is completely lined by mesoderm","Neither contains mesoderm","A pseudocoelom is a germ layer"],a:1,e:"A true coelom is completely mesoderm-lined, whereas a pseudocoelom is not."},
+{q:"Which statement best distinguishes an acoelomate from a coelomate?",o:["Acoelomates lack tissues","Acoelomates lack a body cavity while coelomates possess a true coelom","Coelomates lack mesoderm","Acoelomates are always diploblastic"],a:1,e:"The major distinction is the presence or absence of a true body cavity."},
+{q:"The coelom is located between the:",o:["Body wall and digestive tract","Ectoderm and atmosphere","Notochord and epidermis only","Brain and spinal cord only"],a:0,e:"The relevant body cavity lies between the body wall and digestive tract."},
+{q:"Which of the following is NOT a type of body-cavity condition?",o:["Acoelomate","Pseudocoelomate","Coelomate","Triploblast"],a:3,e:"Triploblast describes germ-layer organisation, not body-cavity condition."},
+{q:"A true coelom develops within:",o:["Mesoderm","Ectoderm only","Endoderm only","Mesoglea only"],a:0,e:"The true coelom is a cavity within the mesoderm."},
+{q:"In acoelomates, the space between body wall and gut is generally occupied by:",o:["Mesodermal tissue","A true coelom","Air","A pseudocoel only"],a:0,e:"In acoelomates, mesoderm fills the region between the body wall and gut rather than forming a true coelom."},
+{q:"Which body-cavity condition is associated with Platyhelminthes?",o:["True coelom","Pseudocoelom","No body cavity","Haemocoel only"],a:2,e:"Platyhelminthes are acoelomate."},
+{q:"Which body-cavity condition is associated with nematodes?",o:["Acoelomate","Pseudocoelomate","True coelomate","No mesoderm"],a:1,e:"Nematodes possess a pseudocoel."},
+{q:"Which body-cavity condition is associated with annelids?",o:["Acoelomate","Pseudocoelomate","True coelomate","Diploblastic cavity"],a:2,e:"Annelids have a true coelom."},
+{q:"Which statement about coelomates is correct?",o:["Their coelom is completely lined by mesoderm","They lack mesoderm","They have no body cavity","They are necessarily diploblastic"],a:0,e:"Complete mesodermal lining is the defining feature of a true coelom."},
+{q:"Which statement about pseudocoelomates is correct?",o:["Their body cavity is completely lined by mesoderm","Their body cavity is not completely lined by mesoderm","They lack a mesoderm","They are all diploblastic"],a:1,e:"A pseudocoel is not completely surrounded by mesoderm."},
+{q:"Which statement about acoelomates is correct?",o:["They possess a large true coelom","They possess no body cavity between body wall and gut","They have a pseudocoel","They lack all embryonic germ layers"],a:1,e:"Acoelomates have no body cavity between the body wall and gut."},
+{q:"Which pair is correctly matched?",o:["Platyhelminthes — acoelomate","Nematoda — coelomate","Annelida — pseudocoelomate","Cnidaria — true coelomate"],a:0,e:"Platyhelminthes are acoelomates."},
+{q:"Which pair is correctly matched?",o:["Nematoda — pseudocoelomate","Platyhelminthes — coelomate","Annelida — acoelomate","Mollusca — diploblastic"],a:0,e:"Nematodes are classically pseudocoelomate."},
+{q:"Which pair is correctly matched?",o:["Annelida — coelomate","Nematoda — acoelomate","Platyhelminthes — pseudocoelomate","Cnidaria — coelomate"],a:0,e:"Annelids possess a true coelom."},
+{q:"Which feature is specifically used to distinguish a true coelom from a pseudocoelom?",o:["Number of germ layers","Extent of mesodermal lining","Presence of a mouth","Body colour"],a:1,e:"The extent of mesodermal lining distinguishes the two cavity types."},
+{q:"Coelom is different from a germ layer because coelom is:",o:["A body cavity","An embryonic tissue layer","A taxonomic category","A type of symmetry"],a:0,e:"A coelom is a body cavity, whereas germ layers are embryonic tissue layers."},
+{q:"Which statement is correct regarding triploblasty and coelom?",o:["Every triploblast is necessarily coelomate","Triploblasty and coelom are separate characteristics","Only diploblasts can have a coelom","Triploblasty means a true coelom"],a:1,e:"Triploblasty concerns three germ layers; coelom concerns the body cavity."},
+{q:"Which body-cavity condition provides a spacious internal compartment completely lined by mesoderm?",o:["Acoelom","Pseudocoel","True coelom","Mesoglea"],a:2,e:"A true coelom is a mesoderm-lined internal body cavity."},
+{q:"Why is coelom classification useful in animal taxonomy?",o:["It reflects major differences in body-plan organisation","It determines only feeding behaviour","It measures chromosome number","It identifies species by colour"],a:0,e:"Body-cavity organisation is a fundamental feature of animal body plans and classification."},
+{q:"Which sequence correctly represents increasing body-cavity development?",o:["Coelomate → pseudocoelomate → acoelomate","Acoelomate → pseudocoelomate → coelomate","Pseudocoelomate → acoelomate → coelomate","Acoelomate → coelomate → pseudocoelomate"],a:1,e:"The sequence moves from no body cavity to an incompletely mesoderm-lined cavity to a true coelom."}
+];

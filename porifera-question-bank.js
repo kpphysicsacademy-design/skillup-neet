@@ -1,0 +1,35 @@
+/* SkillUp Zoology — Porifera
+ * Dedicated 30-question concept bank.
+ */
+window.skillUpPoriferaQuestions = [
+{q:"Porifera are commonly known as:",o:["Sponges","Jellyfish","Flatworms","Roundworms"],a:0,e:"Members of phylum Porifera are commonly called sponges."},
+{q:"The name Porifera refers to animals having:",o:["Numerous pores","Jointed appendages","A segmented body","A notochord"],a:0,e:"Porifera means pore-bearing animals."},
+{q:"Most sponges are:",o:["Asymmetrical","Bilaterally symmetrical","Pentaradial","Spherical"],a:0,e:"Most poriferans are asymmetrical, although some show radial symmetry."},
+{q:"The level of organisation in Porifera is:",o:["Cellular","Tissue","Organ","Organ-system"],a:0,e:"Poriferans have cellular level organisation."},
+{q:"The body wall of a sponge contains numerous openings called:",o:["Ostia","Siphons","Spiracles","Stomata"],a:0,e:"Ostia are small pores through which water enters the sponge."},
+{q:"The central cavity of a typical sponge is called the:",o:["Spongocoel","Coelom","Pseudocoel","Gastrovascular cavity"],a:0,e:"The internal cavity of a sponge is the spongocoel."},
+{q:"Water leaves the sponge primarily through the:",o:["Osculum","Ostium","Nematocyst","Nephridium"],a:0,e:"The osculum is the larger opening through which water exits."},
+{q:"The characteristic water-current system of sponges is called the:",o:["Canal system","Tracheal system","Portal system","Lymphatic system"],a:0,e:"Sponges possess a specialised canal system through which water circulates."},
+{q:"Which cells create water currents in sponges?",o:["Choanocytes","Cnidocytes","Flame cells","Nephridia"],a:0,e:"Flagellated choanocytes generate water currents and trap food particles."},
+{q:"Choanocytes are also called:",o:["Collar cells","Flame cells","Stinging cells","Muscle cells"],a:0,e:"Choanocytes are collar cells lining internal chambers of many sponges."},
+{q:"The main mode of nutrition in Porifera is:",o:["Filter feeding","Photosynthesis","Predation using jaws","Parasitism only"],a:0,e:"Sponges filter food particles from water flowing through their canal system."},
+{q:"Digestion in sponges is primarily:",o:["Intracellular","Extracellular only","Both only in a stomach","Absent"],a:0,e:"Sponges lack a digestive tract and digest food intracellularly."},
+{q:"Sponges generally lack:",o:["A true digestive system","Choanocytes","Pores","Water canals"],a:0,e:"Porifera do not have a true digestive tract."},
+{q:"The skeletal elements of many sponges include:",o:["Spicules","Vertebrae","Chitinous plates only","Bones"],a:0,e:"Spicules made of silica or calcium carbonate form the skeleton in many sponges."},
+{q:"In some sponges, the skeleton is made largely of:",o:["Spongin fibres","Keratin plates","Cartilage","Cellulose"],a:0,e:"Spongin is a proteinaceous skeletal material found in many demosponges."},
+{q:"Spicules of sponges may be composed of:",o:["Calcium carbonate or silica","Chitin only","Cellulose only","Keratin only"],a:0,e:"Sponge spicules can be calcareous or siliceous depending on the group."},
+{q:"Which cells are capable of producing spicules in many sponges?",o:["Sclerocytes","Choanocytes only","Cnidocytes","Neurons"],a:0,e:"Sclerocytes are specialised cells involved in spicule formation."},
+{q:"The body of a sponge is supported by:",o:["Spicules and/or spongin","A vertebral column","An exoskeleton of chitin","A notochord"],a:0,e:"Sponge support commonly comes from mineral spicules and/or spongin fibres."},
+{q:"Porifera are generally:",o:["Aquatic, mostly marine","Strictly terrestrial","Exclusively freshwater","Aerial"],a:0,e:"Most sponges are marine, although some freshwater species occur."},
+{q:"A freshwater sponge belongs to:",o:["Porifera","Cnidaria","Annelida","Arthropoda"],a:0,e:"Some poriferans inhabit freshwater environments."},
+{q:"Reproduction in sponges may occur by:",o:["Asexual and sexual methods","Only binary fission","Only fragmentation","Only external fertilisation"],a:0,e:"Sponges reproduce both asexually and sexually."},
+{q:"A common asexual reproductive method in sponges is:",o:["Budding","Binary fission only","Conjugation","Spore fusion"],a:0,e:"Budding is a common asexual reproductive method in sponges."},
+{q:"Gemmules are especially associated with:",o:["Asexual reproduction in freshwater sponges","Sexual reproduction in vertebrates","Digestion in cnidarians","Locomotion in annelids"],a:0,e:"Gemmules are resistant internal buds important in asexual reproduction of many freshwater sponges."},
+{q:"Most sponges are:",o:["Hermaphroditic","Strictly dioecious","Asexual throughout life","Male only"],a:0,e:"Many sponges are hermaphroditic, producing both male and female gametes at different times."},
+{q:"Fertilisation in sponges is generally:",o:["Internal","Always external","Absent","Only by budding"],a:0,e:"Sperm released into the water are captured and fertilisation commonly occurs within the sponge."},
+{q:"The larval stage of sponges is generally:",o:["Free-swimming","Always sessile","Absent in all species","A vertebrate larva"],a:0,e:"Sexual reproduction generally produces a free-swimming larva that later settles."},
+{q:"Which feature best explains the sessile lifestyle of adult sponges?",o:["They are attached to a substratum and rely on water currents for feeding","They possess jointed legs","They have wings","They actively chase prey"],a:0,e:"Adult sponges are generally sessile filter feeders attached to a substrate."},
+{q:"Which feature is most characteristic of Porifera among major animal groups?",o:["Pore-bearing body with a canal system","Notochord","Jointed appendages","Radial pharyngeal slits"],a:0,e:"The pore-bearing body and water canal system are characteristic sponge features."},
+{q:"Which pair is correctly matched?",o:["Porifera — choanocytes","Cnidaria — choanocytes","Annelida — cnidocytes","Arthropoda — choanocytes"],a:0,e:"Choanocytes are characteristic cells of sponges."},
+{q:"Which statement best summarises Porifera?",o:["Aquatic pore-bearing animals with cellular organisation and a canal system","Bilaterally symmetrical animals with a notochord","Segmented animals with jointed legs","Triploblastic animals with a complete digestive tract"],a:0,e:"Poriferans are aquatic, pore-bearing animals with cellular organisation and a specialised water-current system."}
+];

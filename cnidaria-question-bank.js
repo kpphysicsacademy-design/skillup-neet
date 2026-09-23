@@ -1,0 +1,35 @@
+/* SkillUp Zoology — Cnidaria
+ * Dedicated 30-question concept bank.
+ */
+window.skillUpCnidariaQuestions = [
+{q:"Cnidarians are characterised by the presence of:",o:["Cnidocytes","Choanocytes","Flame cells","Nephridia"],a:0,e:"Cnidocytes are specialised stinging cells characteristic of cnidarians."},
+{q:"Cnidaria are primarily:",o:["Aquatic, mostly marine","Terrestrial only","Freshwater only","Aerial"],a:0,e:"Cnidarians are aquatic animals, with most species occurring in marine habitats."},
+{q:"The specialised stinging structure of cnidarians is the:",o:["Nematocyst","Spicule","Seta","Radula"],a:0,e:"Nematocysts are stinging capsules housed within cnidocytes."},
+{q:"Cnidarians show which level of organisation?",o:["Tissue level","Cellular level","Organ level","Organ-system level"],a:0,e:"Cnidarians have tissue-level organisation."},
+{q:"Cnidarians are:",o:["Diploblastic","Triploblastic","Monoblastic","Acoelomate only"],a:0,e:"Cnidarians are diploblastic, developing from ectoderm and endoderm."},
+{q:"The symmetry generally seen in cnidarians is:",o:["Radial symmetry","Bilateral symmetry","Asymmetry","Pentaradial symmetry"],a:0,e:"Cnidarians generally show radial symmetry."},
+{q:"The body cavity of cnidarians is commonly called the:",o:["Gastrovascular cavity","Coelom","Pseudocoel","Haemocoel"],a:0,e:"Cnidarians possess a gastrovascular cavity for digestion and distribution."},
+{q:"The gastrovascular cavity has:",o:["A single opening serving as mouth and anus","Separate mouth and anus in all species","No opening","Only an anal opening"],a:0,e:"The gastrovascular cavity communicates with the exterior through a single opening."},
+{q:"Digestion in cnidarians is:",o:["Extracellular followed by intracellular digestion","Only intracellular","Only extracellular","Absent"],a:0,e:"Digestion begins extracellularly in the gastrovascular cavity and is completed intracellularly."},
+{q:"The two basic body forms in cnidarians are:",o:["Polyp and medusa","Larva and pupa","Trochophore and veliger","Nauplius and adult"],a:0,e:"Cnidarians commonly occur as polyp and medusa forms."},
+{q:"The polyp form is generally:",o:["Sessile","Free-swimming","Always parasitic","Terrestrial"],a:0,e:"Polyps are generally attached and sessile."},
+{q:"The medusa form is generally:",o:["Free-swimming","Permanently attached","Terrestrial","Segmented"],a:0,e:"Medusae are typically free-swimming."},
+{q:"Which cnidarian class includes Hydra?",o:["Hydrozoa","Scyphozoa","Anthozoa","Cubozoa only"],a:0,e:"Hydra is a member of Hydrozoa."},
+{q:"Which class includes true jellyfish?",o:["Scyphozoa","Anthozoa","Hydrozoa","Porifera"],a:0,e:"Scyphozoans are commonly called true jellyfish."},
+{q:"Which class includes sea anemones and corals?",o:["Anthozoa","Scyphozoa","Hydrozoa","Porifera"],a:0,e:"Sea anemones and corals belong to Anthozoa."},
+{q:"Which body form is dominant in Hydrozoa in many life cycles?",o:["Polyp","Medusa only","Larva only","Neither"],a:0,e:"Hydrozoans commonly have a prominent polyp stage, although life cycles vary."},
+{q:"Which body form is dominant in Scyphozoa?",o:["Medusa","Polyp only","Gemmule","Trochophore"],a:0,e:"The medusa is the dominant stage in scyphozoans."},
+{q:"Anthozoans characteristically:",o:["Lack a medusa stage","Have only a medusa stage","Have a notochord","Are asymmetrical"],a:0,e:"Anthozoans occur only as polyps and do not have a medusa stage."},
+{q:"Asexual reproduction by budding is common in:",o:["Cnidarians","Mammals only","Birds only","Echinoderms only"],a:0,e:"Many cnidarians reproduce asexually by budding, especially in polyp forms."},
+{q:"Sexual reproduction in cnidarians generally involves:",o:["Gametes","Gemmules only","Binary fission only","Spicules"],a:0,e:"Cnidarians can reproduce sexually through male and female gametes."},
+{q:"Alternation between polyp and medusa forms in a life cycle is called:",o:["Metagenesis","Metamerism","Cephalisation","Tagmatisation"],a:0,e:"Metagenesis refers to alternation of polyp and medusa generations in relevant cnidarians."},
+{q:"Which structure is used for prey capture and defence in cnidarians?",o:["Cnidocyte with nematocyst","Choanocyte","Flame cell","Nephridium"],a:0,e:"Cnidocytes contain nematocysts used for prey capture and defence."},
+{q:"The cells lining the inner layer of a cnidarian body are associated with:",o:["Endodermal/gastrodermal tissue","Ectoderm only","Mesoderm","Notochord"],a:0,e:"The inner gastrodermal layer is derived from endoderm."},
+{q:"Cnidarians possess which germ layers?",o:["Ectoderm and endoderm","Ectoderm, mesoderm and endoderm","Mesoderm only","Endoderm only"],a:0,e:"Cnidarians are diploblastic and possess ectoderm and endoderm."},
+{q:"Which statement about the mesoglea of cnidarians is correct?",o:["It lies between ectoderm and endoderm","It is a true mesodermal germ layer","It is the digestive cavity","It is a notochord"],a:0,e:"Mesoglea lies between the ectoderm and endoderm but is not equivalent to true mesoderm."},
+{q:"Which structure helps a polyp attach to a substratum?",o:["Basal disc or base","Nematocyst only","Radula","Setae"],a:0,e:"The basal region of a polyp attaches it to the substratum."},
+{q:"Which statement correctly matches the forms?",o:["Polyp — generally sessile; medusa — generally free-swimming","Polyp — always free-swimming; medusa — sessile","Both are always sessile","Both are always free-swimming"],a:0,e:"The polyp is generally attached, whereas the medusa is generally free-swimming."},
+{q:"Which pair is correctly matched?",o:["Hydra — Hydrozoa","Coral — Scyphozoa","Jellyfish — Anthozoa","Sea anemone — Porifera"],a:0,e:"Hydra belongs to Hydrozoa."},
+{q:"Which pair is correctly matched?",o:["Sea anemone — Anthozoa","True jellyfish — Anthozoa","Coral — Scyphozoa","Hydra — Porifera"],a:0,e:"Sea anemones belong to Anthozoa."},
+{q:"Which statement best summarises Cnidaria?",o:["Diploblastic, tissue-level, generally radially symmetrical aquatic animals with cnidocytes","Triploblastic segmented animals with a notochord","Cellular-level pore-bearing animals with choanocytes","Bilaterally symmetrical animals with jointed appendages"],a:0,e:"Cnidarians are aquatic, diploblastic, tissue-level animals characterised by cnidocytes and generally radial symmetry."}
+];

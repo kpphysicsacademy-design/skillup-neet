@@ -1,0 +1,35 @@
+/* SkillUp Zoology — Ctenophora
+ * Dedicated 30-question concept bank.
+ */
+window.skillUpCtenophoraQuestions = [
+{q:"Ctenophora are commonly known as:",o:["Comb jellies","Sponges","Flatworms","Sea anemones"],a:0,e:"Ctenophores are commonly called comb jellies because of their eight comb rows."},
+{q:"Ctenophores are primarily:",o:["Marine","Terrestrial","Freshwater only","Aerial"],a:0,e:"Ctenophores are exclusively marine animals."},
+{q:"The characteristic locomotory structures of ctenophores are:",o:["Comb plates","Jointed legs","Setae","Tube feet"],a:0,e:"Ctenophores possess eight rows of comb plates used for locomotion."},
+{q:"Comb plates in ctenophores are made of:",o:["Fused cilia","Chitin","Spicules","Muscle fibres"],a:0,e:"Each comb row consists of plates formed by fused cilia."},
+{q:"Ctenophores generally show:",o:["Radial or biradial symmetry","Strict bilateral symmetry","Asymmetry","Pentaradial symmetry"],a:0,e:"Ctenophores are commonly described as radially symmetrical or biradial."},
+{q:"The level of organisation in Ctenophora is:",o:["Tissue level","Cellular level","Organ level","Organ-system level"],a:0,e:"Ctenophores have tissue-level organisation."},
+{q:"Ctenophores are:",o:["Diploblastic","Triploblastic","Monoblastic","Acoelomate triploblasts"],a:0,e:"Ctenophores are diploblastic animals."},
+{q:"The adhesive cells of ctenophores are called:",o:["Colloblasts","Cnidocytes","Choanocytes","Flame cells"],a:0,e:"Colloblasts are specialised adhesive cells used in prey capture."},
+{q:"Colloblasts are mainly used for:",o:["Capturing prey","Producing gametes","Digestion","Locomotion"],a:0,e:"Colloblasts secrete adhesive substances that help capture prey."},
+{q:"Which feature distinguishes ctenophores from cnidarians?",o:["Ctenophores have colloblasts and comb plates rather than cnidocytes and nematocysts","Ctenophores possess a notochord","Ctenophores are terrestrial","Ctenophores are triploblastic"],a:0,e:"Ctenophores characteristically use colloblasts and comb plates, whereas cnidarians possess cnidocytes."},
+{q:"The digestive system of ctenophores includes:",o:["A mouth, gastrovascular canals and anal pores","Only a single gastrovascular opening","A complete vertebrate-like gut","No digestive structures"],a:0,e:"Ctenophores have a mouth and a gastrovascular canal system with small anal pores."},
+{q:"Ctenophores are generally:",o:["Bioluminescent","Non-luminous in all species","Terrestrial","Segmented"],a:0,e:"Many ctenophores are bioluminescent and produce visible light."},
+{q:"The eight comb rows of ctenophores are arranged:",o:["Around the body","Only on the oral surface","Only on the aboral surface","Inside the gut"],a:0,e:"Eight comb rows are arranged longitudinally around the body."},
+{q:"The two body ends of a ctenophore are commonly described as:",o:["Oral and aboral","Anterior and posterior only","Dorsal and ventral only","Cephalic and caudal"],a:0,e:"The mouth is at the oral end and the opposite end is the aboral end."},
+{q:"The sensory structure near the aboral end of many ctenophores is the:",o:["Aboral organ","Nematocyst","Statocyst only in vertebrates","Nephridium"],a:0,e:"The aboral organ coordinates ciliary activity and contributes to orientation."},
+{q:"Ctenophores usually capture prey using:",o:["Colloblasts","Nematocysts","Radula","Mandibles"],a:0,e:"Colloblasts are the characteristic adhesive prey-capture cells of ctenophores."},
+{q:"Which statement about ctenophore reproduction is correct?",o:["Most are hermaphroditic","All are strictly male or female","They reproduce only by budding","They are always asexual"],a:0,e:"Most ctenophores are hermaphroditic, producing both types of gametes."},
+{q:"Fertilisation in many ctenophores is:",o:["External","Always internal","Absent","By budding"],a:0,e:"In many ctenophores, gametes are released into the water and fertilisation is external."},
+{q:"Development in ctenophores commonly includes a:",o:["Free-swimming cydippid larva","Trochophore larva","Nauplius larva","Planula only"],a:0,e:"Many ctenophores have a cydippid-type larva during development."},
+{q:"Which statement about ctenophore locomotion is correct?",o:["Comb plates propel the animal through coordinated ciliary beating","Jointed legs provide propulsion","Tube feet provide all locomotion","Notochord drives movement"],a:0,e:"Coordinated beating of the comb plates produces locomotion."},
+{q:"Ctenophores are different from sponges because ctenophores:",o:["Have tissue-level organisation and comb rows","Have cellular-level organisation only","Possess choanocytes","Have spicules as their main locomotory structures"],a:0,e:"Ctenophores have tissue-level organisation and characteristic comb rows."},
+{q:"Which pair is correctly matched?",o:["Ctenophora — comb plates","Porifera — comb plates","Cnidaria — colloblasts","Annelida — comb plates"],a:0,e:"Comb plates are characteristic of Ctenophora."},
+{q:"Which pair is correctly matched?",o:["Ctenophora — colloblasts","Cnidaria — colloblasts","Porifera — cnidocytes","Annelida — colloblasts"],a:0,e:"Colloblasts are characteristic adhesive cells of ctenophores."},
+{q:"Which pair is correctly matched?",o:["Ctenophora — marine","Porifera — exclusively terrestrial","Cnidaria — exclusively freshwater","Annelida — exclusively marine"],a:0,e:"Ctenophores are marine animals."},
+{q:"Which statement about ctenophore symmetry is most appropriate?",o:["They are commonly described as radial or biradial","They are always asymmetrical","They are always bilateral like vertebrates","They are pentaradial like adult echinoderms"],a:0,e:"Ctenophore symmetry is commonly described as radial or biradial."},
+{q:"Which feature is responsible for the common name 'comb jelly'?",o:["Eight rows of comb plates","A gelatinous skeleton","A row of teeth","A comb-shaped digestive tract"],a:0,e:"The eight rows of ciliary comb plates give ctenophores their common name."},
+{q:"Which statement about ctenophore bioluminescence is correct?",o:["Many species can produce visible light","All species are photosynthetic","Only larvae glow","Bioluminescence is impossible in marine animals"],a:0,e:"Many ctenophore species are capable of bioluminescence."},
+{q:"Which structure is NOT characteristic of Ctenophora?",o:["Nematocyst","Comb plates","Colloblasts","Aboral organ"],a:0,e:"Nematocysts are characteristic of cnidarians, not ctenophores."},
+{q:"Which feature is shared by Ctenophora and Cnidaria?",o:["Diploblastic organisation","Colloblasts","Comb plates","Nematocysts"],a:0,e:"Both are diploblastic groups with tissue-level organisation."},
+{q:"Which statement best summarises Ctenophora?",o:["Marine, diploblastic animals with comb plates, colloblasts and characteristic radial/biradial symmetry","Terrestrial segmented animals with jointed appendages","Pore-bearing animals with choanocytes","Triploblastic animals with a notochord"],a:0,e:"Ctenophores are marine diploblastic animals characterised by comb plates and colloblasts."}
+];

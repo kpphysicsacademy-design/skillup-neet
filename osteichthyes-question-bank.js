@@ -28,4 +28,5 @@ window.skillUpOsteichthyesQuestions = [
 {q:"In many bony fishes, fertilisation is:",o:["External","Internal in every species","By budding","Asexual"],a:0,e:"Many bony fishes release eggs and sperm into water, resulting in external fertilisation, though exceptions occur."},
 {q:"Which statement distinguishes typical osteichthyans from chondrichthyans?",o:["Osteichthyans have a mainly bony skeleton and usually an operculum","Osteichthyans lack jaws","Osteichthyans have no fins","Osteichthyans are acoelomate"],a:0,e:"Typical bony fishes have a predominantly bony endoskeleton and an operculum over the gills."},
 {q:"Which pair consists entirely of bony fishes?",o:["Labeo and Catla","Scoliodon and Trygon","Petromyzon and Myxine","Asterias and Echinus"],a:0,e:"Labeo and Catla are bony fishes."}
+,{q:"Which structure in bony fishes provides the main surface for gas exchange?",o:["Gill filaments and lamellae","Swim bladder wall","Operculum only","Lateral line pores"],a:0,e:"Gill filaments bear numerous secondary lamellae that provide a large surface area for gas exchange."}
 ];

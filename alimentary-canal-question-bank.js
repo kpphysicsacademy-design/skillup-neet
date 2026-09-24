@@ -29,5 +29,5 @@ window.skillUpAlimentaryCanalQuestions = [
 {q:"Swallowing is also called:",o:["Deglutition","Micturition","Defecation","Filtration"],a:0,e:"Deglutition is the physiological process of swallowing."},
 {q:"The epiglottis helps swallowing by:",o:["Helping protect the airway during passage of food","Opening the pylorus","Producing bile","Absorbing glucose"],a:0,e:"The epiglottic mechanism helps direct the bolus away from the laryngeal airway."},
 {q:"The ileocecal valve helps regulate movement from the:",o:["Ileum into the caecum","Stomach into the oesophagus","Rectum into the colon","Duodenum into the stomach"],a:0,e:"The ileocecal valve regulates flow from the small intestine into the large intestine."},
-{q:"Which statement best describes the alimentary canal?",o:["It is a specialized muscular tube in which food is transported, digested, absorbed and eventually eliminated","It is only a digestive gland","It produces urine","It carries oxygen to tissues"],a:0,e:"The alimentary canal performs coordinated transport, digestion, absorption and elimination."}
+
 ];

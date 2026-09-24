@@ -30,3 +30,4 @@ window.skillUpTaxonomySystematicsQuestions = [
 {q:"Identification means:",o:["Determining the identity of an organism","Giving every organism the same name","Changing a species into a genus","Studying only fossils"],a:0,e:"Identification determines which known taxon an organism belongs to."},
 {q:"Nomenclature refers to:",o:["Giving scientifically regulated names to organisms","Measuring body size","Studying respiration","Counting populations"],a:0,e:"Nomenclature deals with assigning and regulating scientific names."},
 {q:"Modern systematics commonly uses evidence from:",o:["Morphology, anatomy, genetics and evolution","Only colour","Only geographical location","Only body weight"],a:0,e:"Systematics integrates multiple kinds of evidence to infer relationships."}
+];

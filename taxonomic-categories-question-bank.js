@@ -24,4 +24,9 @@ window.skillUpTaxonomicCategoriesQuestions = [
 {q:"Which statement about species is most appropriate?",o:["It is the most specific standard category in the hierarchy","It always contains several genera","It is broader than kingdom","It has no role in nomenclature"],a:0,e:"Species is the most specific standard taxonomic category and is central to biological nomenclature."},
 {q:"Why is hierarchical classification useful?",o:["It organizes biological diversity into progressively broader groups","It prevents the discovery of new species","It makes all organisms identical","It eliminates scientific names"],a:0,e:"Hierarchy organizes biodiversity into nested groups, making identification and communication easier."},
 {q:"A taxon can occur at which level?",o:["Only species","Only kingdom","Only genus","At any recognized taxonomic rank"],a:3,e:"Taxon refers to a recognized group at any taxonomic rank, such as species, genus, family or kingdom."}
-];
+,
+{q:"Which taxonomic category is immediately above species?",o:["Genus","Family","Order","Class"],a:0,e:"Genus is the next higher category above species."},
+{q:"Which category contains related genera?",o:["Family","Species","Kingdom","Individual"],a:0,e:"A family consists of related genera."},
+{q:"Which category contains related families?",o:["Order","Species","Genus","Variety"],a:0,e:"An order contains related families."},
+{q:"Which category contains related orders?",o:["Class","Genus","Species","Family"],a:0,e:"A class contains related orders."},
+{q:"Which is the broadest category among the following?",o:["Kingdom","Family","Genus","Species"],a:0,e:"Kingdom is broader than family, genus and species."}];

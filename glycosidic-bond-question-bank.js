@@ -28,4 +28,5 @@ window.skillUpGlycosidicBondQuestions = [
 {q:"The glycosidic bond in nucleosides links:",o:["Sugar to nitrogenous base","Two amino acids","Two fatty acids","Two phosphates"],a:0,e:"A nucleoside contains a sugar linked to a nitrogenous base by an N-glycosidic bond."},
 {q:"In DNA nucleotides, the base is attached to the sugar through a:",o:["N-glycosidic bond","Peptide bond","Disulfide bond","Ester bond to an amino acid"],a:0,e:"DNA bases are connected to deoxyribose by N-glycosidic bonds."},
 {q:"Which statement best summarizes glycosidic bonds?",o:["They are covalent linkages involving sugars and are central to carbohydrate and nucleoside structures","They are peptide bonds between amino acids","They are only phosphodiester bonds","They are noncovalent hydrogen bonds only"],a:0,e:"Glycosidic bonds are covalent sugar linkages found in carbohydrates and nucleosides."}
+{q:"Which bond links a nitrogenous base to the pentose sugar in a nucleoside?",o:["N-glycosidic bond","Peptide bond","Phosphodiester bond","Disulfide bond"],a:0,e:"A nucleoside contains a nitrogenous base linked to its sugar by an N-glycosidic bond."}
 ];

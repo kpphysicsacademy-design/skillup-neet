@@ -19,7 +19,6 @@ window.skillUpCockroachMorphologyAnatomyQuestions = [
 {q:"The terminal abdominal appendages of a cockroach are called:",o:["Cerci","Setae","Parapodia","Suckers"],a:0,e:"A pair of cerci at the posterior end detect air currents and other stimuli."},
 {q:"The anal styles are present in:",o:["Male cockroach","Female cockroach","Both sexes equally","Nymphs only"],a:0,e:"Anal styles are a pair of appendages found on the tenth abdominal segment of the male."},
 {q:"The cockroach circulatory system is:",o:["Open","Closed","Absent","Double closed"],a:0,e:"Haemolymph circulates through a haemocoel rather than a closed network of blood vessels."},
-{q:"The body cavity of a cockroach is mainly a:",o:["Haemocoel","True coelom","Pseudocoel","Gastrovascular cavity"],a:0,e:"The main body space is a haemocoel formed by blood sinuses."},
 {q:"Cockroach blood is called:",o:["Haemolymph","Lymph only","Plasma only","Serum"],a:0,e:"The circulating fluid of an arthropod is called haemolymph."},
 {q:"Cockroach respiration occurs through:",o:["Tracheal system","Gills","Lungs","Skin only"],a:0,e:"A network of tracheae carries air directly to tissues."},
 {q:"The external openings of the cockroach tracheal system are:",o:["Spiracles","Nephridiopores","Stomata","Ostia only"],a:0,e:"Spiracles open the tracheal system to the exterior."},

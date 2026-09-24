@@ -1,4 +1,4 @@
-window.skillUpTaxonomyAndSystematicsQuestions = [
+window.skillUpTaxonomySystematicsQuestions = [
 {q:"What is taxonomy primarily concerned with?",o:["Study of tissues only","Identification, nomenclature and classification of organisms","Study of ecosystems only","Study of fossils only"],a:1,e:"Taxonomy deals with identification, nomenclature and classification of organisms."},
 {q:"Systematics is broader than taxonomy because it also emphasizes:",o:["Only body size","Evolutionary relationships among organisms","Only geographical distribution","Only cell structure"],a:1,e:"Systematics includes taxonomy and the study of evolutionary relationships and diversity."},
 {q:"Which activity involves recognizing an unknown organism by comparing it with known characteristics?",o:["Identification","Respiration","Transpiration","Mutation"],a:0,e:"Identification is the process of recognizing and determining the identity of an organism."},
@@ -19,4 +19,14 @@ window.skillUpTaxonomyAndSystematicsQuestions = [
 {q:"Which term refers specifically to the evolutionary history of a group?",o:["Phylogeny","Physiology","Histology","Ethology"],a:0,e:"Phylogeny describes the evolutionary history and relationships of a group."},
 {q:"A dichotomous key is mainly used for:",o:["Identification of organisms using paired contrasting choices","Measuring blood pressure","Determining enzyme velocity","Calculating population growth"],a:0,e:"Dichotomous keys guide identification through a series of paired contrasting statements."},
 {q:"Which statement best describes the role of systematics in biology?",o:["It helps document biodiversity and infer relationships among organisms","It studies only human anatomy","It replaces all ecological studies","It deals only with laboratory chemicals"],a:0,e:"Systematics helps document biological diversity and investigate relationships among organisms."}
-];
+,
+{q:"Systematics differs from simple taxonomy because it also considers:",o:["Evolutionary relationships among organisms","Only body colour","Only habitat","Only common names"],a:0,e:"Systematics includes classification together with evolutionary relationships."},
+{q:"The basic unit of biological classification is:",o:["Species","Genus","Family","Order"],a:0,e:"Species is the fundamental unit of classification."},
+{q:"Binomial nomenclature gives each species:",o:["A two-part scientific name","A three-part common name","Only a genus name","Only a family name"],a:0,e:"The scientific name consists of genus and specific epithet."},
+{q:"In a scientific name, the first word represents the:",o:["Genus","Species epithet","Family","Order"],a:0,e:"The genus name is written first in binomial nomenclature."},
+{q:"Which sequence represents increasing taxonomic rank?",o:["Species → Genus → Family → Order","Order → Family → Genus → Species","Species → Family → Genus → Order","Genus → Species → Order → Family"],a:0,e:"Species, genus, family and order represent progressively broader groups."},
+{q:"A taxon is:",o:["A taxonomic group at any rank","Only a species","Only a genus","Only a kingdom"],a:0,e:"A taxon is a group of organisms recognised at any taxonomic level."},
+{q:"Classification is useful because it:",o:["Organises biological diversity systematically","Eliminates biodiversity","Prevents identification","Makes all organisms identical"],a:0,e:"Classification organises diversity and facilitates identification and study."},
+{q:"Identification means:",o:["Determining the identity of an organism","Giving every organism the same name","Changing a species into a genus","Studying only fossils"],a:0,e:"Identification determines which known taxon an organism belongs to."},
+{q:"Nomenclature refers to:",o:["Giving scientifically regulated names to organisms","Measuring body size","Studying respiration","Counting populations"],a:0,e:"Nomenclature deals with assigning and regulating scientific names."},
+{q:"Modern systematics commonly uses evidence from:",o:["Morphology, anatomy, genetics and evolution","Only colour","Only geographical location","Only body weight"],a:0,e:"Systematics integrates multiple kinds of evidence to infer relationships."}

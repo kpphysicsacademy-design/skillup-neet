@@ -19,7 +19,6 @@ window.skillUpSynapsisCrossingOverInMeiosisQuestions = [
 {q:"If crossing over occurs normally, the chromatids involved may become:",o:["Recombinant","Identical in all regions","Unreplicated","Polyploid"],a:0,e:"Exchange can create chromatids carrying new combinations of parental alleles."},
 {q:"Crossing over occurs after:",o:["Homologous chromosomes have paired","Cytokinesis is complete","Meiosis II is complete","Sister chromatids have separated"],a:0,e:"Pairing and synapsis bring homologues together before crossing over."},
 {q:"The chromosome pair held together during prophase I is called a:",o:["Bivalent","Dyad","Monad","Spindle"],a:0,e:"A bivalent is the paired unit of homologous chromosomes."},
-{q:"The four chromatids in a tetrad are derived from:",o:["Two replicated homologous chromosomes","Four unrelated chromosomes","One unreplicated chromosome","Two ribosomes"],a:0,e:"Each homologue has two sister chromatids after replication."},
 {q:"Which stage follows zygotene in prophase I?",o:["Pachytene","Leptotene","Diakinesis","Telophase I"],a:0,e:"The sequence is leptotene, zygotene, pachytene, diplotene, diakinesis."},
 {q:"Which prophase I stage is associated most strongly with crossing over?",o:["Pachytene","Zygotene","Diplotene","Diakinesis"],a:0,e:"Pachytene is the classic stage for crossing over."},
 {q:"Which prophase I stage is associated with visible chiasmata?",o:["Diplotene","Pachytene only","Leptotene","Zygotene only"],a:0,e:"Chiasmata become visible as homologues start separating in diplotene."},

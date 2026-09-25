@@ -27,7 +27,6 @@ window.skillUpCentralNervousSystemQuestions = [
 {q:"The reflex arc can be integrated in the:",o:["Spinal cord or other CNS centres depending on the reflex","Kidney only","Liver only","Skeletal muscle itself"],a:"A"},
 {q:"The blood-brain barrier helps regulate:",o:["Movement of substances from blood into nervous tissue","Bone growth","Urine flow","Muscle contraction directly"],a:"A"},
 {q:"The brainstem includes the:",o:["Midbrain, pons and medulla oblongata","Cerebrum and spinal cord only","Thalamus and hypothalamus only","Cerebellum and retina"],a:"A"},
-{q:"Which pairing is correct?",o:["Cerebellum—coordination and balance","Medulla—higher reasoning only","Hypothalamus—bone formation","Spinal cord—urine production"],a:"A"},
 {q:"Which sequence correctly describes the CNS?",o:["Brain + spinal cord → receives, integrates and coordinates neural information","Brain + kidneys → filters blood","Spinal cord + liver → produces hormones","Cerebrum + lungs → performs gas exchange"],a:"A"},
 {q:"Which statement best summarizes the central nervous system?",o:["The brain and spinal cord form the CNS and integrate information to coordinate responses throughout the body","The CNS consists only of peripheral nerves","The CNS has no role in reflexes","The CNS functions only during voluntary movement"],a:"A"}
 ];

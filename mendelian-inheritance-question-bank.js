@@ -29,5 +29,4 @@ window.skillUpMendelianInheritanceQuestions = [
 {q:"The parental generation in a genetic cross is commonly abbreviated as:",o:["P","F1","F2","G"],a:0,e:"P denotes the parental generation."},
 {q:"The first filial generation is abbreviated:",o:["F1","P","F2","G1"],a:0,e:"F1 denotes the first filial generation produced from the parental cross."},
 {q:"The second filial generation is abbreviated:",o:["F2","P2","G2","S2"],a:0,e:"F2 is the generation produced by crossing or selfing members of the F1 generation."},
-{q:"Which sequence best summarizes a Mendelian monohybrid cross?",o:["True-breeding parents → F1 heterozygotes → F2 segregation of alleles","F1 → P → gametes → no offspring","F2 → F1 → P without meiosis","Heterozygote → clone → identical offspring only"],a:0,e:"A typical monohybrid experiment crosses contrasting true-breeding parents, obtains heterozygous F1, and observes segregation in F2."}
 ];

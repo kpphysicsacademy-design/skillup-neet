@@ -56,11 +56,70 @@ const bank={
 "Daily-life connection":[["Melting ice is best classified as:",["A physical change","A chemical change","A nuclear change","No change"],0]],
 "atom molecule element compound":[["Which is the smallest unit of an element that retains its chemical identity?",["Atom","Molecule","Compound","Mixture"],0],["Which is a molecule of an element?",["H₂","H₂O","NaCl","CO₂"],0],["Which statement best defines an element?",["A pure substance containing one kind of atom","A substance made from two different elements in a fixed ratio","Any group of bonded atoms","A physical mixture of substances"],0],["Which is a compound?",["O₂","Na","H₂O","He"],2],["Which example is both a molecule and an element?",["O₂","H₂O","NaCl","CO₂"],0],["Which example is both a molecule and a compound?",["O₂","N₂","H₂O","He"],2],["Which statement about NaCl is correct?",["It is a compound with an ionic lattice in the solid state","It is a molecule of an element","It contains only one kind of atom","It is a mixture"],0],["What distinguishes a compound from an element?",["A compound contains different elements chemically combined in a definite proportion","A compound always contains only one atom","An element must be molecular","An element is always a mixture"],0],["Which pair is correctly matched?",["Na — atom of an element","H₂O — element","O₂ — compound","NaCl — molecule of an element"],0],["Which statement is correct?",["An element is a substance, while an atom is a particle of an element","Every element is a compound","Every compound is an element","Every molecule is a compound"],0]]
 };
-const qs=microBank||bank[concept]||bank[concept.toLowerCase()]||null;
-if(!qs){document.getElementById('app').innerHTML='<h2>Concept not found</h2><p>Please return to the Chemistry path and select a concept.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';}
-else{
+const bankAliases={
+ "atomic mass":"atomic-molecular-mass","mole concept":"mole-concept-avogadro","avogadro constant":"mole-concept-avogadro",
+ "empirical formula":"empirical-molecular-formula","molecular formula":"empirical-molecular-formula",
+ "balancing chemical equations":"chemical-equations","limiting reagent":"limiting-excess-reagent","excess reagent":"limiting-excess-reagent",
+ "planck quantum theory":"planck-theory","bohr postulates":"bohr-model","limitations of bohr model":"bohr-model",
+ "de broglie wavelength":"de-broglie-relationship","s p d orbital shapes":"orbital-shapes","ionic bond formation":"ionic-bond",
+ "sp hybridisation":"hybridisation","sp2 hybridisation":"hybridisation","sp3 hybridisation":"hybridisation","sp3d hybridisation":"hybridisation","sp3d2 hybridisation":"hybridisation",
+ "sigma and pi bonds":"sigma-pi-bonds","applications of hydrogen bonding":"hydrogen-bonding",
+ "extensive and intensive properties":"extensive-intensive-properties","state functions":"state-and-path-functions",
+ "first law of thermodynamics":"first-law","hydration enthalpy":"hydration-ionisation-solution-enthalpy","solution enthalpy":"hydration-ionisation-solution-enthalpy",
+ "gibbs energy":"gibbs-free-energy","standard gibbs energy":"gibbs-free-energy","gibbs energy and equilibrium constant":"delta-g-and-equilibrium-constant",
+ "ideal solutions":"ideal-non-ideal-solutions","non-ideal solutions":"ideal-non-ideal-solutions",
+ "positive deviation":"positive-negative-deviation","negative deviation":"positive-negative-deviation",
+ "association":"association-dissociation","dissociation":"association-dissociation",
+ "law of chemical equilibrium":"chemical-equilibrium","kc":"kc-equilibrium","kp":"kp-equilibrium","effect of catalyst":"effect-catalyst"
+};
+function slugify(s){return s.toLowerCase().trim().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function normalizeBank(v){
+ if(!Array.isArray(v))return null;
+ const out=[];
+ for(const x of v){
+   if(Array.isArray(x)&&typeof x[0]==='string'&&Array.isArray(x[1])){
+     const a=Number(x[2]); if(Number.isInteger(a)&&a>=0&&a<x[1].length)out.push([x[0],x[1].slice(),a]);
+   }else if(x&&typeof x.q==='string'&&Array.isArray(x.o)){
+     let a=typeof x.a==='number'?x.a:(typeof x.a==='string'?x.a.charCodeAt(0)-65:-1);
+     if(a>=0&&a<x.o.length)out.push([x.q,x.o.slice(),a]);
+   }
+ }
+ return out.length?out:null;
+}
+function loadScript(src){
+ return new Promise(function(resolve,reject){
+   const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
+ });
+}
+async function loadExistingBank(){
+ const key=concept.toLowerCase(), names=[];
+ const base=slugify(concept);
+ if(base)names.push(base);
+ if(micro)names.push(slugify(micro));
+ if(bankAliases[key])names.push(bankAliases[key]);
+ const unique=[...new Set(names)];
+ for(const name of unique){
+   try{
+     const before=new Set(Object.keys(window));
+     await loadScript(name+'-question-bank.js');
+     for(const k of Object.keys(window)){
+       if(before.has(k))continue;
+       const v=normalizeBank(window[k]);
+       if(v)return v;
+     }
+   }catch(e){}
+ }
+ return null;
+}
+function renderQuiz(qs){
  let s=Math.max(1,Math.min(qs.length,Number(p.get('step')||1))),q=qs[s-1];
  document.getElementById('app').innerHTML='<p><b>CONCEPT MCQ • '+s+' OF '+qs.length+'</b></p><div class="concept-head"><span class="concept-icon" aria-hidden="true">'+chemistryEmoji(concept)+'</span><h1 class="concept-title">'+concept+'</h1></div><div class="q">'+q[0]+'</div><div id="opts">'+q[1].map((x,i)=>'<button class="o" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div><div id="fb"></div>';
  window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
 }
+(async function(){
+ let qs=microBank||bank[concept]||bank[concept.toLowerCase()]||null;
+ if(!qs)qs=await loadExistingBank();
+ if(!qs){document.getElementById('app').innerHTML='<h2>Quiz bank not connected</h2><p>This Chemistry concept exists in the path, but a dedicated existing quiz bank was not found under the current or legacy bank name.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';return;}
+ renderQuiz(qs);
+})();
 </script></body></html>

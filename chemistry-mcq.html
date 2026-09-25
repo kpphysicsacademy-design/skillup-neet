@@ -1,5 +1,23 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Chemistry Concept MCQ</title><style>body{margin:0;background:#f7fbff;font-family:system-ui;color:#17324d}.wrap{max-width:700px;margin:auto;padding:25px 15px}.card{background:#fff;border:1px solid #dbe8f5;border-radius:22px;padding:22px}.q{font-size:20px;font-weight:800;line-height:1.5}.o{display:block;width:100%;margin:10px 0;padding:14px;text-align:left;border:2px solid #cbdbea;border-radius:14px;background:#fff;font-weight:700}.ok{background:#efffe5;border-color:#58cc02}.bad{background:#fff0f0;border-color:#ff6b6b}.btn{display:block;width:100%;margin-top:15px;padding:15px;border:0;border-radius:14px;background:#58cc02;color:#fff;font-weight:900;text-decoration:none;text-align:center}</style></head><body><main class="wrap"><section class="card" id="app"></section></main><script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Chemistry Concept MCQ</title><style>body{margin:0;background:#f7fbff;font-family:system-ui;color:#17324d}.wrap{max-width:700px;margin:auto;padding:25px 15px}.card{background:#fff;border:1px solid #dbe8f5;border-radius:22px;padding:22px}.q{font-size:20px;font-weight:800;line-height:1.5}.o{display:block;width:100%;margin:10px 0;padding:14px;text-align:left;border:2px solid #cbdbea;border-radius:14px;background:#fff;font-weight:700}.ok{background:#efffe5;border-color:#58cc02}.bad{background:#fff0f0;border-color:#ff6b6b}.concept-head{display:flex;align-items:center;gap:12px;margin:8px 0 16px}.concept-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:16px;background:#eef6ff;border:2px solid #cfe2f6;box-shadow:0 4px 0 #b5cfe9;font-size:30px}.concept-title{margin:0;font-size:26px;line-height:1.15}.btn{display:block;width:100%;margin-top:15px;padding:15px;border:0;border-radius:14px;background:#58cc02;color:#fff;font-weight:900;text-decoration:none;text-align:center}</style></head><body><main class="wrap"><section class="card" id="app"></section></main><script>
 const p=new URLSearchParams(location.search),concept=(p.get('concept')||'').trim(),micro=(p.get('micro')||'').trim();
+function chemistryEmoji(s){
+ const t=s.toLowerCase();
+ if(/atomic|atom|electron|quantum|orbital|bohr|spectrum/.test(t)) return '⚛️';
+ if(/bond|hybrid|molecular structure|vsepr|electronegativity/.test(t)) return '🔗';
+ if(/thermodynamic|enthalpy|entropy|gibbs|heat/.test(t)) return '🌡️';
+ if(/solution|solubility|concentration|colligative/.test(t)) return '🧪';
+ if(/equilibrium|acid|base|ph|ionic equilibrium/.test(t)) return '⚖️';
+ if(/redox|electrochem|galvanic|electrode|battery/.test(t)) return '🔋';
+ if(/kinetic|rate of reaction|activation energy/.test(t)) return '⏱️';
+ if(/periodic|element|periodicity|p-block|d-block|f-block/.test(t)) return '📊';
+ if(/coordination|complex|ligand/.test(t)) return '🧲';
+ if(/organic|hydrocarbon|alkane|alkene|alkyne|halo|alcohol|phenol|ether|aldehyde|ketone|carbox|amine|nitro/.test(t)) return '🧬';
+ if(/biomolecule|carbohydrate|protein|amino acid|vitamin|nucleic acid/.test(t)) return '🧬';
+ if(/practical|salt analysis|titration|laboratory|qualitative|volumetric/.test(t)) return '🧫';
+ if(/mole|stoichi|mass|matter|formula|chemical equation/.test(t)) return '⚖️';
+ return '🧪';
+}
+
 const microData=window.SKILLUP_CHEMISTRY_MICROCONCEPTS||[];
 const mx=microData.find(function(v){return v.id===micro;})||null;
 const microBank=(function(){
@@ -42,7 +60,7 @@ const qs=microBank||bank[concept]||bank[concept.toLowerCase()]||null;
 if(!qs){document.getElementById('app').innerHTML='<h2>Concept not found</h2><p>Please return to the Chemistry path and select a concept.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';}
 else{
  let s=Math.max(1,Math.min(qs.length,Number(p.get('step')||1))),q=qs[s-1];
- document.getElementById('app').innerHTML='<p><b>CONCEPT MCQ • '+s+' OF '+qs.length+'</b></p><h1>'+concept+'</h1><div class="q">'+q[0]+'</div><div id="opts">'+q[1].map((x,i)=>'<button class="o" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div><div id="fb"></div>';
+ document.getElementById('app').innerHTML='<p><b>CONCEPT MCQ • '+s+' OF '+qs.length+'</b></p><div class="concept-head"><span class="concept-icon" aria-hidden="true">'+chemistryEmoji(concept)+'</span><h1 class="concept-title">'+concept+'</h1></div><div class="q">'+q[0]+'</div><div id="opts">'+q[1].map((x,i)=>'<button class="o" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div><div id="fb"></div>';
  window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
 }
 </script></body></html>

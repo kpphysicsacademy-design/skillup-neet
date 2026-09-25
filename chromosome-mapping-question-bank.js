@@ -29,5 +29,4 @@ window.skillUpChromosomeMappingQuestions=[
 {q:"Interference is commonly calculated as:",o:["1 − coefficient of coincidence","Coefficient of coincidence × 2","Recombination frequency ÷ 100","1 + coefficient of coincidence"],a:0,e:"Interference measures the reduction in observed double crossovers relative to expectation and is 1 − coincidence."},
 {q:"If expected double crossovers are 20 and observed are 10, the coefficient of coincidence is:",o:["0.5","2.0","0.1","10"],a:0,e:"Coefficient of coincidence = 10/20 = 0.5."},
 {q:"If the coefficient of coincidence is 0.5, interference is:",o:["0.5","1.5","0.25","0"],a:0,e:"Interference = 1 − 0.5 = 0.5."},
-{q:"The main purpose of chromosome mapping is to:",o:["Establish relative gene order and distances","Determine only chromosome number","Replace DNA sequencing","Measure cell volume"],a:0,e:"Genetic mapping organizes loci by relative order and recombination-based distances."}
 ];

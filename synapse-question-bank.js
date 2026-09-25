@@ -27,7 +27,6 @@ window.skillUpSynapseQuestions = [
 {q:"Electrical synapses are associated with:",o:["Gap junctions","Synaptic vesicles only","Myelin internodes","Nissl bodies"],a:"A"},
 {q:"Chemical synaptic delay is largely related to:",o:["Neurotransmitter release and receptor activation","Bone movement","Blood clotting","DNA replication"],a:"A"},
 {q:"Synaptic integration refers to:",o:["Combining excitatory and inhibitory inputs to determine neuronal output","Formation of synaptic vesicles only","Growth of bones","Filtration of plasma"],a:"A"},
-{q:"Temporal summation occurs when:",o:["Repeated inputs from a synapse arrive close together in time","Inputs arise only from different neurons at the same instant","Myelin becomes thicker","A neuron loses its nucleus"],a:"A"},
 {q:"Spatial summation occurs when:",o:["Inputs from multiple synapses combine on a neuron","One synapse fires repeatedly at different times only","The axon becomes unmyelinated","Neurotransmitters enter blood"],a:"A"},
 {q:"Which statement best summarizes a chemical synapse?",o:["An arriving action potential triggers Ca2+-dependent neurotransmitter release, which acts on postsynaptic receptors to change the target cell's electrical state","Signals cross the synapse through bone","Neurotransmitters are stored in the nucleus","Synaptic transmission occurs without membrane receptors"],a:"A"}
 ];

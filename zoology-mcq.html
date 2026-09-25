@@ -85,7 +85,18 @@ async function load(){
    try{bank=await loadScript(files[n]);}catch(e){}
  }
  if(!bank){showStatus('A dedicated question bank is not connected for this concept yet. The concept link is now routed correctly, but its source bank still needs to be created.');return;}
- items=bank.slice(0,30);
+ items=bank.slice(0,30).map(function(item){
+   var x=Object.assign({},item);
+   x.o=Array.isArray(item.o)?item.o.slice():[];
+   var correct=typeof item.a==='number'?item.a:x.o.indexOf(item.a);
+   var order=x.o.map(function(_,idx){return idx;});
+   for(var j=order.length-1;j>0;j--){
+     var k=Math.floor(Math.random()*(j+1)),tmp=order[j];order[j]=order[k];order[k]=tmp;
+   }
+   x.o=order.map(function(idx){return item.o[idx];});
+   x.a=order.indexOf(correct);
+   return x;
+ });
  bankCount.textContent=items.length+' questions';
  subtitle.textContent=items.length===30?'30-question concept bank':'Dedicated bank currently contains '+items.length+' questions';
  if(items.length<30){

@@ -17,7 +17,6 @@ window.SkillUpMolecularFormulaQuestions=[
 {q:"A compound has empirical formula CH and molecular mass 78. Its molecular formula is:",o:["CH","C₂H₂","C₆H₆","C₇H₇"],a:2,e:"Empirical formula mass is 13; 78/13 = 6, so C₆H₆."},
 {q:"A compound has empirical formula CH₂O and molecular mass 60. Its molecular formula is:",o:["CH₂O","C₂H₄O₂","C₃H₆O₃","C₄H₈O₄"],a:1,e:"Empirical mass is 30; 60/30 = 2, giving C₂H₄O₂."},
 {q:"A compound has empirical formula NH₂ and molar mass 32. Its molecular formula is:",o:["NH₂","N₂H₄","N₃H₆","NH₄"],a:1,e:"Empirical mass is 16; 32/16 = 2, giving N₂H₄."},
-{q:"The empirical formula mass of C₂H₄ is:",o:["14","28","30","32"],a:1,e:"C₂H₄ has mass 2(12)+4(1) = 28, although it is not an empirical formula because it simplifies to CH₂."},
 {q:"The empirical formula of C₂H₄ is:",o:["CH","CH₂","C₂H₄","C₂H₂"],a:1,e:"Dividing subscripts 2:4 by 2 gives CH₂."},
 {q:"A molecular formula must contain subscripts that are:",o:["Always prime numbers","Positive whole numbers","Always even numbers","Always equal"],a:1,e:"Molecular formulas contain whole-number subscripts representing actual atom counts."},
 {q:"If n calculated from molar mass/empirical formula mass is 1, then:",o:["Molecular and empirical formulas are identical","The molecular formula is twice the empirical formula","The compound is ionic","The molar mass is incorrect"],a:0,e:"n = 1 means no multiplication is needed; the empirical formula is the molecular formula."},

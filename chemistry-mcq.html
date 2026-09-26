@@ -138,9 +138,9 @@ function renderQuiz(qs){
  window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
 }
 (async function(){
- let qs=bank[concept]||bank[concept.toLowerCase()]||null;
- // Use the dedicated Chemistry question bank before any generic microconcept generator.
- if(!qs)qs=await loadExistingBank();
+ // Chemistry-first: always try the dedicated concept bank before inline fallback banks.
+ let qs=await loadExistingBank();
+ if(!qs)qs=bank[concept]||bank[concept.toLowerCase()]||null;
  if(!qs&&micro)qs=microBank;
  if(!qs){document.getElementById('app').innerHTML='<h2>Quiz bank not connected</h2><p>This Chemistry concept exists in the path, but a dedicated existing quiz bank was not found under the current or legacy bank name.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';return;}
  renderQuiz(qs);

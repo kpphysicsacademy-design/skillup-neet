@@ -16,7 +16,6 @@ window.SkillUpBalancingChemicalEquationsQuestions=[
 {q:"Balance: C₃H₈ + O₂ → CO₂ + H₂O. The coefficient of O₂ is:",o:["3","4","5","6"],a:2,e:"C₃H₈ + 5O₂ → 3CO₂ + 4H₂O."},
 {q:"Balance: H₂SO₄ + NaOH → Na₂SO₄ + H₂O. The coefficient of NaOH is:",o:["1","2","3","4"],a:1,e:"H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O."},
 {q:"Balance: HCl + NaOH → NaCl + H₂O. The coefficients are:",o:["1:1:1:1","2:1:2:1","1:2:1:2","2:2:1:1"],a:0,e:"HCl + NaOH → NaCl + H₂O is already balanced with all coefficients 1."},
-{q:"Balance: CaCO₃ → CaO + CO₂. The coefficient of CaCO₃ is:",o:["1","2","3","4"],a:0,e:"CaCO₃ → CaO + CO₂ is already balanced."},
 {q:"Balance: KClO₃ → KCl + O₂. The coefficient of KClO₃ is:",o:["1","2","3","4"],a:1,e:"2KClO₃ → 2KCl + 3O₂."},
 {q:"Balance: HgO → Hg + O₂. The coefficient of HgO is:",o:["1","2","3","4"],a:1,e:"2HgO → 2Hg + O₂."},
 {q:"Balance: Zn + HCl → ZnCl₂ + H₂. The coefficient of HCl is:",o:["1","2","3","4"],a:1,e:"Zn + 2HCl → ZnCl₂ + H₂."},

@@ -659,4 +659,664 @@ window.SkillUpChemistryElevationBoilingPointQuestions=[
       "reviewEligible": true
     }
   }
-];
+,
+{
+  "id": "CHEM-MCQ-003616",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "For a non-volatile solute, adding solute to a solvent generally causes boiling point to:",
+  "questionAssetId": "CHEM-STR-000210",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Increase"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Decrease"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Remain necessarily unchanged"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Become zero"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Adding a non-volatile solute lowers solvent vapour pressure, so a higher temperature is required for boiling.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003617",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "If Kb = 0.50 K kg mol⁻¹ and m = 0.20 mol kg⁻¹, ΔTb is:",
+  "questionAssetId": "CHEM-STR-000211",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "0.10 K"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "0.20 K"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "2.50 K"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "0.40 K"
+    }
+  ],
+  "answer": "A",
+  "explanation": "ΔTb = Kb m = 0.50×0.20 = 0.10 K.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003618",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "A solution has pure solvent boiling point 100 °C and ΔTb = 0.80 K. Solution boiling point is:",
+  "questionAssetId": "CHEM-STR-000212",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "99.20 °C"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "100.00 °C"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "100.80 °C"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "101.80 °C"
+    }
+  ],
+  "answer": "C",
+  "explanation": "Tb = Tb° + ΔTb = 100 + 0.80 = 100.80 °C.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003619",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "The boiling point elevation is a colligative property because it depends on:",
+  "questionAssetId": "CHEM-STR-000213",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Number of dissolved particles"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Colour of solute"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Container shape"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Atomic number only"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Colligative properties depend on the effective number of dissolved particles.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003620",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "For ideal dissociation with i = 2, Kb = 0.50 and m = 0.20, ΔTb is:",
+  "questionAssetId": "CHEM-STR-000214",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "0.10 K"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "0.20 K"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "0.50 K"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "1.00 K"
+    }
+  ],
+  "answer": "B",
+  "explanation": "ΔTb = iKb m = 2×0.50×0.20 = 0.20 K.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003621",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "If ΔTb doubles for the same solvent and solute type, molality ideally:",
+  "questionAssetId": "CHEM-STR-000215",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Halves"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Doubles"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Becomes zero"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Cannot change"
+    }
+  ],
+  "answer": "B",
+  "explanation": "At fixed Kb, ΔTb is directly proportional to molality.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003622",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "The relation between solution and pure-solvent boiling points is:",
+  "questionAssetId": "CHEM-STR-000216",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Tb = Tb° + ΔTb"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Tb = Tb° − ΔTb"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Tb = ΔTb/Tb°"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Tb = Tb°ΔTb"
+    }
+  ],
+  "answer": "A",
+  "explanation": "The elevation is defined as Tb − Tb°.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003623",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "Kb is also called the:",
+  "questionAssetId": "CHEM-STR-000217",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Ebullioscopic constant"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Cryoscopic constant"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Osmotic constant"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Henry constant"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Kb is the ebullioscopic constant.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003624",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "For a non-electrolyte, i is:",
+  "questionAssetId": "CHEM-STR-000218",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "1"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "0"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "2"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "1/2"
+    }
+  ],
+  "answer": "A",
+  "explanation": "A non-electrolyte without association or dissociation has i = 1.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003625",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "If Kb is larger for solvent A than solvent B at the same molality, A shows:",
+  "questionAssetId": "CHEM-STR-000219",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Greater boiling-point elevation"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Smaller boiling-point elevation"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "No boiling point"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Always the same"
+    }
+  ],
+  "answer": "A",
+  "explanation": "ΔTb = Kb m, so a larger Kb gives a larger elevation at the same molality.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003626",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "Boiling occurs when vapour pressure equals:",
+  "questionAssetId": "CHEM-STR-000220",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "External pressure"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Osmotic pressure"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Zero pressure"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Solute pressure"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Boiling occurs when vapour pressure equals the external pressure.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003627",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "A non-volatile solute lowers vapour pressure, so a higher temperature is needed to:",
+  "questionAssetId": "CHEM-STR-000221",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Reach the external pressure"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Freeze immediately"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Dissolve more solute"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Lower the solvent mass"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Because vapour pressure is lowered, more heating is needed to reach external pressure.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003628",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "If m = 1 mol kg⁻¹ and Kb = 0.512 K kg mol⁻¹, ΔTb is:",
+  "questionAssetId": "CHEM-STR-000222",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "0.512 K"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "0.256 K"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "1.024 K"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "5.12 K"
+    }
+  ],
+  "answer": "A",
+  "explanation": "ΔTb = Kb m = 0.512×1 = 0.512 K.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003629",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "For association giving i < 1, the observed boiling-point elevation is:",
+  "questionAssetId": "CHEM-STR-000223",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Less than the ideal value"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Greater than the ideal value"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Always zero"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Exactly double"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Association reduces the effective particle number, so i < 1 and the elevation decreases.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-003630",
+  "subject": "chemistry",
+  "questionType": "structure",
+  "question": "The unit of molality used in ΔTb = Kb m is:",
+  "questionAssetId": "CHEM-STR-000224",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "mol kg⁻¹"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "kg mol⁻¹"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "mol L⁻¹"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "K kg mol⁻¹"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Molality is expressed as moles of solute per kilogram of solvent.",
+  "difficulty": "neet",
+  "tags": [
+    "elevation-of-boiling-point",
+    "colligative-properties",
+    "solutions",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Elevation of Boiling Point question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+}];

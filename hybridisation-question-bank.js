@@ -657,5 +657,125 @@ window.SkillUpHybridisationQuestions=[
       "reviewEligible": true
     },
     "questionAssetId": "CHEM-STR-000030"
+  },
+  {
+    "id":"CHEM-MCQ-HYB-016",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation gives a linear arrangement with a 180° angle?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"A","explanation":"sp hybridisation produces two hybrid orbitals oriented 180° apart.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-017",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation gives an ideal trigonal planar arrangement?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"B","explanation":"sp² hybridisation produces three coplanar hybrid orbitals separated by about 120°.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-018",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation gives an ideal tetrahedral arrangement?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"C","explanation":"sp³ hybridisation produces four hybrid orbitals directed toward the corners of a tetrahedron.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-019",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the central carbon in CO₂?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"A","explanation":"Carbon in CO₂ has two electron domains and is described as sp hybridised.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-020",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the central carbon in BF₄−?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"C","explanation":"BF₄− has four bonding domains around boron, corresponding to sp³ hybridisation.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-021",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the carbonyl carbon in CH₂O?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"B","explanation":"The carbonyl carbon has three electron domains and is approximately sp² hybridised.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-022",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the nitrogen atom in NH₄+?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"C","explanation":"Nitrogen in NH₄+ has four sigma bonds and no lone pair, giving an sp³ arrangement.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-023",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the nitrogen atom in NO₃−?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"B","explanation":"The nitrate nitrogen is approximately trigonal planar and is commonly described as sp² hybridised.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-024",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is commonly assigned to the oxygen atom in a carbonyl group?",
+    "options":[{"id":"A","type":"text","value":"sp"},{"id":"B","type":"text","value":"sp²"},{"id":"C","type":"text","value":"sp³"},{"id":"D","type":"text","value":"sp³d"}],
+    "answer":"B","explanation":"A carbonyl oxygen is commonly described as sp² hybridised, with an unhybridised p orbital participating in π bonding.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-025",
+    "subject":"chemistry","questionType":"structure","question":"How many hybrid orbitals are produced in sp hybridisation?",
+    "options":[{"id":"A","type":"text","value":"1"},{"id":"B","type":"text","value":"2"},{"id":"C","type":"text","value":"3"},{"id":"D","type":"text","value":"4"}],
+    "answer":"B","explanation":"One s and one p orbital combine to produce two sp hybrid orbitals.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-026",
+    "subject":"chemistry","questionType":"structure","question":"How many hybrid orbitals are produced in sp² hybridisation?",
+    "options":[{"id":"A","type":"text","value":"2"},{"id":"B","type":"text","value":"3"},{"id":"C","type":"text","value":"4"},{"id":"D","type":"text","value":"5"}],
+    "answer":"B","explanation":"One s and two p orbitals combine to produce three sp² hybrid orbitals.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-027",
+    "subject":"chemistry","questionType":"structure","question":"How many hybrid orbitals are produced in sp³ hybridisation?",
+    "options":[{"id":"A","type":"text","value":"2"},{"id":"B","type":"text","value":"3"},{"id":"C","type":"text","value":"4"},{"id":"D","type":"text","value":"5"}],
+    "answer":"C","explanation":"One s and three p orbitals combine to produce four sp³ hybrid orbitals.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-028",
+    "subject":"chemistry","questionType":"structure","question":"How many unhybridised p orbitals remain in sp³ hybridisation?",
+    "options":[{"id":"A","type":"text","value":"0"},{"id":"B","type":"text","value":"1"},{"id":"C","type":"text","value":"2"},{"id":"D","type":"text","value":"3"}],
+    "answer":"A","explanation":"All three p orbitals participate in sp³ hybridisation, so no p orbital remains unhybridised.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-029",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is associated with a trigonal bipyramidal electron-domain arrangement?",
+    "options":[{"id":"A","type":"text","value":"sp²"},{"id":"B","type":"text","value":"sp³"},{"id":"C","type":"text","value":"sp³d"},{"id":"D","type":"text","value":"sp³d²"}],
+    "answer":"C","explanation":"Five hybrid orbitals are commonly represented as sp³d, corresponding to trigonal bipyramidal electron-domain geometry.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-HYB-030",
+    "subject":"chemistry","questionType":"structure","question":"Which hybridisation is associated with an octahedral electron-domain arrangement?",
+    "options":[{"id":"A","type":"text","value":"sp³"},{"id":"B","type":"text","value":"sp³d"},{"id":"C","type":"text","value":"sp³d²"},{"id":"D","type":"text","value":"sp²"}],
+    "answer":"C","explanation":"Six hybrid orbitals are commonly represented as sp³d², corresponding to octahedral geometry.",
+    "difficulty":"neet","tags":["hybridisation","chemical-bonding","valence-bond-theory","neet"],"source":"SkillUp Academy NEET Chemistry",
+    "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
   }
 ];

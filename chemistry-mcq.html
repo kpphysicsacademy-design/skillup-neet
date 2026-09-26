@@ -65,7 +65,7 @@ var bankCount=document.getElementById('bankCount');
 var content=document.getElementById('content');
 var bar=document.getElementById('bar');
 var items=[],i=0,score=0;
-var BANK_VERSION='20260926-chemistry-architecture-v3';
+var BANK_VERSION='20260926-chemistry-architecture-v4';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
@@ -79,23 +79,30 @@ function candidates(v){
  }
  return [...new Set(out)];
 }
-function loadScript(src){
+function isBank(v){
+ return Array.isArray(v)&&v.length&&v.every(function(x){
+  return x&&typeof x==='object'&&(
+   (('q' in x)&&('o' in x)&&('a' in x)) ||
+   (('question' in x)&&Array.isArray(x.options)&&('answer' in x))
+  );
+ });
+}
+function loadScript(src,requestedSlug){
  return new Promise(function(resolve,reject){
+  var registry=window.SKILLUP_CHEMISTRY_BANK||{};
+  var registryBefore=registry[requestedSlug];
   var before={};
   Object.keys(window).forEach(function(k){before[k]=window[k];});
   var sc=document.createElement('script');
-  sc.src=src+(src.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=3';
+  sc.src=src+(src.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=4';
   sc.onload=function(){
+   var direct=window.SKILLUP_CHEMISTRY_BANK&&window.SKILLUP_CHEMISTRY_BANK[requestedSlug];
+   if(isBank(direct)&&direct!==registryBefore){resolve(direct);return;}
    var found=[];
    Object.keys(window).forEach(function(k){
     if(before[k]===window[k])return;
     var v=window[k];
-    if(Array.isArray(v)&&v.length&&v.every(function(x){
-      return x&&typeof x==='object'&&(
-        (('q' in x)&&('o' in x)&&('a' in x)) ||
-        (('question' in x)&&Array.isArray(x.options)&&('answer' in x))
-      );
-    }))found.push(v);
+    if(isBank(v))found.push(v);
    });
    resolve(found[0]||null);
   };
@@ -108,7 +115,7 @@ async function load(){
  if(!concept){showStatus('No concept was supplied. Return to the Chemistry path and select a concept.');return;}
  var files=candidates(concept),bank=null;
  for(var n=0;n<files.length&&!bank;n++){
-  try{bank=await loadScript(files[n]);}catch(e){}
+  try{bank=await loadScript(files[n],slug(micro||concept));}catch(e){}
  }
  if(!bank){
   showStatus('A dedicated Chemistry question bank is not connected for this concept yet.');

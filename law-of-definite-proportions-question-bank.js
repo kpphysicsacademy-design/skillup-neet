@@ -29,6 +29,5 @@ window.skillUpLawDefiniteProportionsQuestions=[
 {q:"A pure compound contains 70 g X and 30 g Y. Its X:Y mass ratio is:",o:["7:3","3:7","70:100","1:3"],a:0,e:"70:30 simplifies to 7:3."},
 {q:"A pure compound has X:Y = 4:3 by mass. If total mass is 35 g, mass of X is:",o:["15 g","20 g","25 g","28 g"],a:1,e:"There are 7 total ratio parts; 35/7 = 5 g per part, so X = 4×5 = 20 g."},
 {q:"A pure compound has A:B = 5:2 by mass. If B is 14 g, A is:",o:["28 g","30 g","35 g","42 g"],a:2,e:"If 2 parts = 14 g, one part = 7 g; 5 parts = 35 g."},
-{q:"Which conclusion follows from the law of definite proportions?",o:["A pure compound has a characteristic composition","All mixtures have fixed composition","Elements always occur in equal masses","Compounds can have arbitrary formulas"],a:0,e:"A pure compound has a characteristic and reproducible elemental composition."},
 {q:"The law of definite proportions provides an important basis for:",o:["Chemical formulae and percentage composition","Only gas pressure calculations","Only atomic spectra","Only phase changes"],a:0,e:"Knowing fixed elemental ratios helps establish chemical formulae and calculate percentage composition."}
 ];

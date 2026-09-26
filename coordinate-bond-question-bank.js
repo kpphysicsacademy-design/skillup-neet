@@ -1,0 +1,36 @@
+/* SkillUp Chemistry — Concept 55: Coordinate Bond
+ * Dedicated 30-question bank
+ */
+window.SkillUpCoordinateBondQuestions = [
+{q:"A coordinate bond is formed when the shared electron pair is donated by:",o:["Both atoms equally","Only one atom","Neither atom","An electron from each of two ions"],a:1,e:"In a coordinate (dative) bond, both electrons of the shared pair are supplied by the same atom."},
+{q:"A coordinate bond is also called a:",o:["Metallic bond","Dative bond","Hydrogen bond","Peptide bond"],a:1,e:"Coordinate bond and dative bond are synonymous terms."},
+{q:"In NH₄⁺ formation, the coordinate bond is formed between:",o:["N and H⁺","N and H₂","H and H","N and N"],a:0,e:"NH₃ donates its nitrogen lone pair to H⁺, forming a coordinate N→H bond."},
+{q:"The electron-pair donor in a coordinate bond is called the:",o:["Lewis acid","Lewis base","Electrophile only","Oxidizing agent"],a:1,e:"A Lewis base donates an electron pair; a Lewis acid accepts it."},
+{q:"The electron-pair acceptor in a coordinate bond is called a:",o:["Lewis acid","Lewis base","Nucleophile","Radical"],a:0,e:"A Lewis acid accepts an electron pair from a Lewis base."},
+{q:"Which species can donate a lone pair to form NH₄⁺?",o:["NH₃","Na⁺","H⁺","He"],a:0,e:"Nitrogen in NH₃ has a lone pair that can be donated to H⁺."},
+{q:"Which species accepts the lone pair from NH₃ during NH₄⁺ formation?",o:["NH₃","H⁺","Cl⁻","OH⁻"],a:1,e:"H⁺ accepts the nitrogen lone pair from NH₃."},
+{q:"The coordinate bond in NH₃→BF₃ is formed because:",o:["B donates a lone pair","N donates a lone pair to electron-deficient B","F donates a proton","N loses all valence electrons"],a:1,e:"BF₃ is electron deficient at boron, so nitrogen in NH₃ donates its lone pair to B."},
+{q:"Which molecule is electron deficient and can act as a Lewis acid toward NH₃?",o:["BF₃","NH₃","H₂O","CH₄"],a:0,e:"BF₃ has only six electrons around boron and can accept a lone pair."},
+{q:"In H₃O⁺ formation, the coordinate bond is formed by donation from:",o:["H⁺ to H₂O","O of H₂O to H⁺","H₂O to O₂","H to O"],a:1,e:"Water donates an oxygen lone pair to H⁺ to form H₃O⁺."},
+{q:"Which ion contains a coordinate bond formed by NH₃ donating a lone pair to H⁺?",o:["NH₂⁻","NH₄⁺","NO₃⁻","CO₃²⁻"],a:1,e:"NH₄⁺ is produced when NH₃ donates its lone pair to H⁺."},
+{q:"A coordinate bond is represented conventionally by an arrow pointing:",o:["From acceptor to donor","From donor to acceptor","From proton to electron","In both directions always"],a:1,e:"The arrow starts at the electron-pair donor and points toward the electron-pair acceptor."},
+{q:"In NH₃→BF₃, the arrow N→B indicates that:",o:["B donates both electrons","N supplies both bonding electrons","Each atom supplies one electron","No electrons are shared"],a:1,e:"The nitrogen atom supplies both electrons in the coordinate bond."},
+{q:"Which species acts as a Lewis base in H₂O + H⁺ → H₃O⁺?",o:["H⁺","H₂O","H₃O⁺","None"],a:1,e:"H₂O donates an oxygen lone pair, so it acts as a Lewis base."},
+{q:"Which species acts as a Lewis acid in H₂O + H⁺ → H₃O⁺?",o:["H₂O","OH⁻","H⁺","H₃O⁺"],a:2,e:"H⁺ accepts the electron pair and therefore acts as a Lewis acid."},
+{q:"Which compound commonly demonstrates coordinate bonding between a metal ion and a ligand?",o:["NaCl crystal only","[Cu(NH₃)₄]²⁺","CH₄ only","H₂ only"],a:1,e:"In metal complexes such as [Cu(NH₃)₄]²⁺, ligand lone pairs are donated to the metal ion."},
+{q:"In [Cu(NH₃)₄]²⁺, the donor atoms are:",o:["Hydrogen atoms","Nitrogen atoms of NH₃","Copper atoms","No atoms"],a:1,e:"Each NH₃ ligand donates a nitrogen lone pair to Cu²⁺."},
+{q:"A ligand generally forms a coordinate bond with a metal ion by donating:",o:["A proton","A lone pair of electrons","A neutron","A core electron"],a:1,e:"Ligands commonly act as Lewis bases and donate lone pairs to metal centers."},
+{q:"Which is a ligand that can donate a lone pair to a metal ion?",o:["NH₃","Na⁺","H⁺","Ne"],a:0,e:"NH₃ has a nitrogen lone pair and commonly acts as a ligand."},
+{q:"Which statement about a coordinate bond is correct after formation?",o:["It always remains physically different from every covalent bond","It is a type of covalent bond","It contains no shared electrons","It is always ionic"],a:1,e:"A coordinate bond is a covalent bond in which both bonding electrons originally come from one atom."},
+{q:"In NH₄⁺, after formation, the four N–H bonds are commonly treated as:",o:["Four completely ionic bonds","Equivalent N–H bonds in the ion","One covalent and three metallic bonds","Four hydrogen bonds"],a:1,e:"Although one bond is formed initially by donation, the four N–H bonds in NH₄⁺ become equivalent in the ion."},
+{q:"Which species contains a coordinate bond involving oxygen donation to boron?",o:["BF₃·OEt₂","CH₄","N₂","Cl₂"],a:0,e:"An ether oxygen can donate a lone pair to electron-deficient BF₃, forming a coordinate bond."},
+{q:"The central atom in BF₃ is electron deficient because boron has:",o:["Eight valence electrons in BF₃","Six electrons around it from three B–F bonds","Ten electrons around it","A complete noble-gas shell before bonding"],a:1,e:"Three B–F bonds provide six electrons around boron, leaving it electron deficient."},
+{q:"Which reaction best illustrates Lewis acid-base coordinate bonding?",o:["NH₃ + H⁺ → NH₄⁺","NaCl → Na⁺ + Cl⁻","H₂ → 2H atoms","Cl₂ → 2Cl atoms"],a:0,e:"NH₃ donates a lone pair to H⁺, giving a classic coordinate-bond example."},
+{q:"Which pair correctly identifies donor and acceptor in NH₃→BF₃?",o:["NH₃ donor; BF₃ acceptor","BF₃ donor; NH₃ acceptor","Both donors","Both acceptors"],a:0,e:"NH₃ donates its lone pair, while electron-deficient BF₃ accepts it."},
+{q:"Which orbital feature of NH₃ is directly involved in donation to BF₃?",o:["A lone pair on nitrogen","A proton on hydrogen","A core electron of hydrogen","A neutron"],a:0,e:"The nonbonding lone pair on nitrogen is donated to boron."},
+{q:"Which of the following is NOT a typical property required of a coordinate-bond donor?",o:["Availability of a lone pair","Ability to donate an electron pair","Being a Lewis base","Having to be positively charged"],a:3,e:"A coordinate-bond donor does not have to be positively charged; Lewis bases are typical donors."},
+{q:"Which species is most directly classified as a Lewis base because it can donate a lone pair?",o:["NH₃","BF₃","AlCl₃","H⁺"],a:0,e:"NH₃ has a readily available lone pair on nitrogen and is a Lewis base."},
+{q:"Which species is a Lewis acid because it can accept an electron pair?",o:["NH₃","OH⁻","BF₃","Cl⁻"],a:2,e:"BF₃ is electron deficient and accepts an electron pair, so it is a Lewis acid."},
+{q:"The essential distinction between a normal covalent bond and a coordinate bond is the:",o:["Presence of shared electrons","Origin of the two bonding electrons","Presence of atoms","Formation of molecules"],a:1,e:"Both are covalent bonds, but in a coordinate bond both shared electrons originate from the same donor atom."},
+{q:"Which combination correctly represents a coordinate bond formation?",o:["Donor lone pair → electron-pair acceptor","Electron-pair acceptor → donor lone pair","Proton → neutron","Metal → photon"],a:0,e:"A coordinate bond forms when a donor supplies a lone pair to an electron-pair acceptor."}
+];

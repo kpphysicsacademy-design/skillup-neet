@@ -13,5 +13,20 @@ window.SkillUpHydrogenSpectrumQuestions=[
 {q:"The Balmer series limit corresponds to the transition:",o:["2 → 1","∞ → 2","3 → 2","∞ → 1"],a:1,e:"The series limit occurs when the upper level approaches n = ∞ and the lower level is n = 2."},
 {q:"The wavelength of a spectral line is related to its frequency by:",o:["c = λν","c = λ/ν","c = ν/λ","c = λ + ν"],a:0,e:"For electromagnetic radiation, c = λν."},
 {q:"As the upper quantum number increases within a hydrogen spectral series, adjacent spectral lines:",o:["Become farther apart indefinitely","Converge toward a series limit","Disappear immediately","Move to zero frequency"],a:1,e:"The energy differences between successive high-n levels become smaller, so spectral lines converge."},
-{q:"The hydrogen spectrum provided evidence for:",o:["Continuous atomic energy only","Quantized electronic energy levels","No electronic structure","Only nuclear motion"],a:1,e:"Discrete spectral lines are explained by electrons occupying quantized energy levels."}
+{q:"The hydrogen spectrum provided evidence for:",o:["Continuous atomic energy only","Quantized electronic energy levels","No electronic structure","Only nuclear motion"],a:1,e:"Discrete spectral lines are explained by electrons occupying quantized energy levels."},
+{q:"The second line of the Balmer series is produced by:",o:["4 → 2","5 → 2","3 → 2","2 → 1"],a:0,e:"The second Balmer line is the transition from n = 4 to n = 2."},
+{q:"The first line of the Lyman series is produced by:",o:["2 → 1","3 → 1","4 → 1","∞ → 1"],a:0,e:"The first Lyman line is the transition n = 2 to n = 1."},
+{q:"The first line of the Paschen series is produced by:",o:["4 → 3","5 → 3","3 → 2","2 → 1"],a:0,e:"The first Paschen line corresponds to n = 4 → n = 3."},
+{q:"The first line of the Brackett series is produced by:",o:["5 → 4","4 → 3","6 → 4","3 → 2"],a:0,e:"The first Brackett line corresponds to n = 5 → n = 4."},
+{q:"The Pfund series consists of transitions ending at:",o:["n = 2","n = 3","n = 4","n = 5"],a:3,e:"Pfund-series transitions terminate at n = 5 and occur in the infrared region."},
+{q:"The Humphreys series of hydrogen terminates at:",o:["n = 4","n = 5","n = 6","n = 7"],a:2,e:"The Humphreys series consists of transitions ending at n = 6."},
+{q:"Which transition belongs to the Lyman series?",o:["4 → 2","5 → 3","3 → 1","6 → 4"],a:2,e:"Lyman-series transitions terminate at n = 1, so 3 → 1 belongs to Lyman."},
+{q:"Which transition belongs to the Balmer series?",o:["5 → 2","5 → 3","4 → 1","6 → 4"],a:0,e:"Balmer-series transitions terminate at n = 2, so 5 → 2 is a Balmer transition."},
+{q:"Which transition belongs to the Paschen series?",o:["6 → 3","6 → 2","4 → 1","7 → 5"],a:0,e:"Paschen-series transitions terminate at n = 3, so 6 → 3 is a Paschen transition."},
+{q:"The Rydberg constant for hydrogen is approximately:",o:["1.097×10⁷ m⁻¹","3×10⁸ m⁻¹","6.626×10⁻³⁴ m⁻¹","9.109×10⁻³¹ m⁻¹"],a:0,e:"The Rydberg constant for hydrogen is approximately 1.097×10⁷ m⁻¹."},
+{q:"For a transition from n₂ to n₁, the emitted photon energy is related to the energy-level difference by:",o:["Ephoton = E₂ − E₁","Ephoton = E₁ + E₂","Ephoton = E₁/E₂","Ephoton = 0"],a:0,e:"Emission occurs when an electron falls to a lower level; photon energy equals the energy difference between the levels."},
+{q:"For hydrogen, the energy of the electron in the nth Bohr orbit is:",o:["−13.6/n² eV","13.6n² eV","−13.6n² eV","13.6/n eV"],a:0,e:"For hydrogen, E_n = −13.6/n² eV."},
+{q:"The ground-state energy of hydrogen is:",o:["−13.6 eV","0 eV","+13.6 eV","−1.51 eV"],a:0,e:"For n = 1, E₁ = −13.6 eV."},
+{q:"The ionization energy of ground-state hydrogen is:",o:["13.6 eV","−13.6 eV","3.4 eV","1.51 eV"],a:0,e:"13.6 eV is required to take a ground-state hydrogen electron from n = 1 to n = ∞."},
+{q:"A transition from n = 3 to n = 2 in hydrogen emits a photon in the:",o:["Visible region","Microwave region","Gamma region","Radio region"],a:0,e:"The n = 3 → 2 transition is Hα of the Balmer series and lies in the visible region."}
 ];

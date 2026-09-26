@@ -780,4 +780,65 @@ window.SkillUpChemistryEntropyQuestions=[
     "tags":["entropy","thermodynamics","neet"],
     "source":"SkillUp Chemistry — Entropy question bank"
   }
+,
+  {
+    "id":"CHEM-MCQ-ENT-026",
+    "subject":"chemistry",
+    "questionType":"text",
+    "question":"According to Boltzmann's relation, entropy is proportional to the logarithm of the number of:",
+    "options":[{"id":"A","type":"text","value":"Accessible microstates"},{"id":"B","type":"text","value":"Moles only"},{"id":"C","type":"text","value":"Pressure units"},{"id":"D","type":"text","value":"Temperature units"}],
+    "answer":"A",
+    "explanation":"Boltzmann's relation is S = k ln W, where W represents the number of accessible microstates.",
+    "difficulty":"neet",
+    "tags":["entropy","thermodynamics","neet"],
+    "source":"SkillUp Chemistry — Entropy question bank"
+  },
+  {
+    "id":"CHEM-MCQ-ENT-027",
+    "subject":"chemistry",
+    "questionType":"text",
+    "question":"For a reversible isothermal expansion of an ideal gas, if V₂ > V₁, ΔS is:",
+    "options":[{"id":"A","type":"text","value":"Positive"},{"id":"B","type":"text","value":"Negative"},{"id":"C","type":"text","value":"Zero"},{"id":"D","type":"text","value":"Undefined"}],
+    "answer":"A",
+    "explanation":"ΔS = nR ln(V₂/V₁), which is positive when V₂ is greater than V₁.",
+    "difficulty":"neet",
+    "tags":["entropy","thermodynamics","neet"],
+    "source":"SkillUp Chemistry — Entropy question bank"
+  },
+  {
+    "id":"CHEM-MCQ-ENT-028",
+    "subject":"chemistry",
+    "questionType":"text",
+    "question":"Which process generally produces a decrease in entropy of the system?",
+    "options":[{"id":"A","type":"text","value":"Crystallization"},{"id":"B","type":"text","value":"Sublimation"},{"id":"C","type":"text","value":"Vaporization"},{"id":"D","type":"text","value":"Melting"}],
+    "answer":"A",
+    "explanation":"Crystallization converts a less ordered phase into a more ordered solid and generally decreases system entropy.",
+    "difficulty":"neet",
+    "tags":["entropy","thermodynamics","neet"],
+    "source":"SkillUp Chemistry — Entropy question bank"
+  },
+  {
+    "id":"CHEM-MCQ-ENT-029",
+    "subject":"chemistry",
+    "questionType":"text",
+    "question":"For a reversible adiabatic process, the process is:",
+    "options":[{"id":"A","type":"text","value":"Isentropic"},{"id":"B","type":"text","value":"Isobaric"},{"id":"C","type":"text","value":"Isochoric"},{"id":"D","type":"text","value":"Isothermal"}],
+    "answer":"A",
+    "explanation":"A reversible adiabatic process has q_rev = 0, so ΔS = 0 and it is isentropic.",
+    "difficulty":"neet",
+    "tags":["entropy","thermodynamics","neet"],
+    "source":"SkillUp Chemistry — Entropy question bank"
+  },
+  {
+    "id":"CHEM-MCQ-ENT-030",
+    "subject":"chemistry",
+    "questionType":"text",
+    "question":"For a spontaneous irreversible process in an isolated system, the entropy change is:",
+    "options":[{"id":"A","type":"text","value":"Greater than zero"},{"id":"B","type":"text","value":"Less than zero"},{"id":"C","type":"text","value":"Exactly zero"},{"id":"D","type":"text","value":"Always undefined"}],
+    "answer":"A",
+    "explanation":"The second law states that entropy increases for a spontaneous irreversible process in an isolated system.",
+    "difficulty":"neet",
+    "tags":["entropy","thermodynamics","neet"],
+    "source":"SkillUp Chemistry — Entropy question bank"
+  }
 ];

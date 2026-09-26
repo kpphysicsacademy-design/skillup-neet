@@ -14,4 +14,19 @@ window.SkillUpRaoultLawQuestions=[
 {q:"For an ideal binary solution, if xA decreases while pA° remains constant, pA:",o:["Increases","Decreases","Remains unchanged","Becomes zero immediately"],a:1,e:"Since pA = xA pA°, a decrease in xA causes a proportional decrease in pA."},
 {q:"For a binary ideal solution, the vapour-phase composition is related to partial pressure by:",o:["yA = pA/Ptotal","yA = Ptotal/pA","yA = xA Ptotal","yA = pA pB"],a:0,e:"For an ideal gas mixture, vapour-phase mole fraction yA = pA/Ptotal."},
 {q:"Which condition is most closely associated with an ideal solution?",o:["A-B interactions are approximately equal to A-A and B-B interactions","A-B interactions are much weaker","A-B interactions are much stronger","The components are completely immiscible"],a:0,e:"Ideal solutions have intermolecular interactions between unlike molecules comparable to those between like molecules."}
-];
+,
+{"q":"For a binary ideal solution, the partial pressure of B is given by:","o":["pB = xB pB°","pB = xA pB°","pB = xB/pB°","pB = pB°/xB"],"a":0,"e":"Raoult's law gives pB = xB pB°."},
+{"q":"If xA = 0.25, pA° = 120 kPa and xB = 0.75, pB° = 40 kPa, total vapour pressure is:","o":["30 kPa","60 kPa","80 kPa","90 kPa"],"a":1,"e":"pA = 0.25×120 = 30 kPa; pB = 0.75×40 = 30 kPa; total = 60 kPa. Correct option should be 60 kPa."},
+{"q":"A solution contains 2 mol A and 3 mol B. If pA° = 100 kPa and pB° = 50 kPa, total pressure is:","o":["60 kPa","70 kPa","80 kPa","90 kPa"],"a":1,"e":"xA = 2/5 and xB = 3/5. P = (2/5)100 + (3/5)50 = 40 + 30 = 70 kPa."},
+{"q":"In a binary ideal solution, the component with higher pure vapour pressure is generally:","o":["Less volatile","More volatile","Non-volatile","Always the solvent"],"a":1,"e":"Higher pure vapour pressure at the same temperature indicates greater volatility."},
+{"q":"At equilibrium, the total vapour pressure of a binary ideal solution is:","o":["xA pA° + xB pB°","xA + xB","pA° + pB° only","xA pB° + xB pA°"],"a":0,"e":"P = pA + pB = xA pA° + xB pB°."},
+{"q":"If a non-volatile solute is added to a solvent, xsolvent becomes 0.8 and p°solvent is 50 kPa. The new vapour pressure is:","o":["10 kPa","40 kPa","50 kPa","62.5 kPa"],"a":1,"e":"p = xsolvent p° = 0.8×50 = 40 kPa."},
+{"q":"For a dilute solution, if xsolute = 0.02, the relative lowering of vapour pressure is approximately:","o":["0.02","0.98","2","50"],"a":0,"e":"For a dilute solution, relative lowering ≈ xsolute."},
+{"q":"If the vapour pressure of a pure solvent is 80 kPa and the solution pressure is 72 kPa, the lowering is:","o":["8 kPa","9 kPa","72 kPa","152 kPa"],"a":0,"e":"Lowering = p° − p = 80 − 72 = 8 kPa."},
+{"q":"For an ideal solution containing two volatile components, xA + xB equals:","o":["0","0.5","1","2"],"a":2,"e":"For a binary solution, the mole fractions sum to unity."},
+{"q":"If xA = 0.6 and pA° = 50 kPa, pA equals:","o":["20 kPa","30 kPa","50 kPa","83.3 kPa"],"a":1,"e":"pA = 0.6×50 = 30 kPa."},
+{"q":"In Raoult's law, pA° denotes:","o":["Partial pressure of A in solution","Vapour pressure of pure A","Total pressure of solution","Mole fraction of A"],"a":1,"e":"pA° is the vapour pressure of pure component A at the same temperature."},
+{"q":"If xA increases in an ideal solution while pA° is constant, pA:","o":["Decreases","Increases","Remains fixed","Must become zero"],"a":1,"e":"pA is directly proportional to xA."},
+{"q":"A non-volatile solute contributes directly to the equilibrium vapour pressure of the solution:","o":["Yes, always","No","Only at high concentration","Only if solid"],"a":1,"e":"A non-volatile solute has negligible vapour pressure and does not contribute directly to the vapour phase."},
+{"q":"For a binary ideal solution, if pA = 24 kPa and pB = 16 kPa, total vapour pressure is:","o":["8 kPa","24 kPa","40 kPa","384 kPa"],"a":2,"e":"Dalton's law gives P = pA + pB = 40 kPa."},
+{"q":"If xA = 0.5 and pA° = 60 kPa, xB = 0.5 and pB° = 20 kPa, the partial pressure of A is:","o":["20 kPa","30 kPa","40 kPa","60 kPa"],"a":1,"e":"pA = xA pA° = 0.5×60 = 30 kPa."}];

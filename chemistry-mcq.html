@@ -88,10 +88,10 @@ function normalizeBank(v){
  const out=[];
  for(const x of v){
    if(Array.isArray(x)&&typeof x[0]==='string'&&Array.isArray(x[1])){
-     const a=Number(x[2]); if(Number.isInteger(a)&&a>=0&&a<x[1].length)out.push([x[0],x[1].slice(),a]);
+     const a=Number(x[2]); if(Number.isInteger(a)&&a>=0&&a<x[1].length)out.push([x[0],x[1].slice(),a,typeof x[3]==='string'?x[3]:'']);
    }else if(x&&typeof x.q==='string'&&Array.isArray(x.o)){
      let a=typeof x.a==='number'?x.a:(typeof x.a==='string'?x.a.charCodeAt(0)-65:-1);
-     if(a>=0&&a<x.o.length)out.push([x.q,x.o.slice(),a]);
+     if(a>=0&&a<x.o.length)out.push([x.q,x.o.slice(),a,typeof x.e==='string'?x.e:'']);
    }else if(x&&typeof x.question==='string'&&Array.isArray(x.options)){
      const opts=x.options.map(o=>typeof o==='string'?o:(o&&typeof o.value==='string'?o.value:null)).filter(o=>o!==null);
      if(opts.length===x.options.length){
@@ -102,7 +102,7 @@ function normalizeBank(v){
          if(/^[A-Z]$/.test(ans)) a=ans.charCodeAt(0)-65;
          else { const n=Number(ans); if(Number.isInteger(n)) a=n; }
        }
-       if(Number.isInteger(a)&&a>=0&&a<opts.length)out.push([x.question,opts,a]);
+       if(Number.isInteger(a)&&a>=0&&a<opts.length)out.push([x.question,opts,a,typeof x.explanation==='string'?x.explanation:'']);
      }
    }
  }
@@ -143,7 +143,7 @@ async function loadExistingBank(){
 function renderQuiz(qs){
  let s=Math.max(1,Math.min(qs.length,Number(p.get('step')||1))),q=qs[s-1];
  document.getElementById('app').innerHTML='<p><b>CONCEPT MCQ • '+s+' OF '+qs.length+'</b></p><div class="concept-head"><span class="concept-icon" aria-hidden="true">'+chemistryEmoji(concept)+'</span><h1 class="concept-title">'+concept+'</h1></div><div class="q">'+q[0]+'</div><div id="opts">'+q[1].map((x,i)=>'<button class="o" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div><div id="fb"></div>';
- window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
+ window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});var explanation=q[3]||'Explanation not available for this question.';document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><div style="margin-top:12px;padding:13px;border:1px solid #dbe8f5;border-radius:14px;background:#f7fbff"><b>💡 Explanation</b><div style="margin-top:6px;line-height:1.5">'+explanation+'</div></div><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
 }
 (async function(){
  // Chemistry-first: always try the dedicated concept bank before inline fallback banks.

@@ -658,5 +658,667 @@ window.SkillUpChemistryDaltonAtomicTheoryQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+
+  {
+    "id": "CHEM-MCQ-002716",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "According to Dalton, compounds are formed when atoms combine in:",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Random ratios"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Simple whole-number ratios"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Only equal ratios"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Fractional ratios"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dalton proposed that atoms combine in simple whole-number ratios to form compounds.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002717",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which postulate of Dalton explains conservation of mass?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Atoms are indivisible"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Atoms of different elements differ"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Atoms are neither created nor destroyed in chemical reactions"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Atoms always form gases"
+      }
+    ],
+    "answer": "C",
+    "explanation": "If atoms are only rearranged and not created or destroyed, total mass is conserved in a chemical reaction.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002718",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which postulate is challenged by isotopes?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Atoms are rearranged in reactions"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Atoms of an element have identical mass"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Compounds have fixed composition"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Atoms combine in whole-number ratios"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Isotopes are atoms of the same element with different masses, modifying Dalton's identical-mass postulate.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002719",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which discovery disproved the literal indivisibility of Dalton's atom?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Subatomic particles"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Periodic table"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Mole concept"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Avogadro constant"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Electrons, protons and neutrons showed that atoms have internal structure.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002720",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which law could Dalton's atomic theory not adequately explain?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Conservation of mass"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Definite proportions"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Multiple proportions"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Gaseous volumes"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Dalton's original atomic model could not account for Gay-Lussac's law of combining gaseous volumes.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002721",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Gay-Lussac's law concerns simple whole-number ratios of reacting gases by:",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Mass"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Volume"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Density"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Atomic number"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Gay-Lussac observed simple whole-number volume ratios when gases react under comparable conditions.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002722",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The difficulty Dalton faced with gaseous volumes was later addressed by the concept of:",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Molecules"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Isobars"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Electron shells"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Nuclear charge"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Recognizing molecular species such as H₂ and O₂ helped explain gaseous volume relationships.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002723",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which set contains limitations of Dalton's original theory?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Indivisibility and identical mass of all atoms of an element"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Conservation of mass and fixed ratios"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Existence of compounds and elements"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Whole-number ratios and rearrangement"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Subatomic particles and isotopes require modification of the indivisibility and identical-mass claims.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002724",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which statement is correct about Dalton's explanation of multiple proportions?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Atoms combine only in fractional ratios"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Different compounds can contain atoms in simple whole-number combinations"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "All compounds have identical formulas"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Only gases follow the law"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Whole-number combinations of atoms provide the atomic basis for the law of multiple proportions.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002725",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which statement best describes a chemical reaction in Dalton's model?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Atoms are rearranged"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Atoms are destroyed"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "New elements are always produced"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Mass is created"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Dalton viewed chemical reactions as rearrangements of existing atoms.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002726",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which statement about Dalton's theory is NOT correct?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Matter is composed of atoms"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Compounds contain atoms in fixed ratios"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Atoms can be divided into electrons and protons according to Dalton's original theory"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Atoms are rearranged in reactions"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Dalton regarded atoms as indivisible; subatomic structure was discovered later.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002727",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which pair is an example of isotopes that modifies Dalton's identical-mass claim?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "¹²C and ¹⁴C"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "¹²C and ¹²C"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Na and NaCl"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "O₂ and O₃"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Carbon-12 and carbon-14 are isotopes of carbon with different mass numbers.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002728",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Dalton's theory provided an atomic explanation for which group?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Laws of chemical combination"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Laws of optics"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Laws of electricity"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Laws of radioactivity"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The theory connected atoms with conservation, definite proportions and multiple proportions.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002729",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Why does a pure compound have a definite composition in Dalton's model?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Its atoms combine in fixed ratios"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Its atoms have random ratios"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Its molecules are always monatomic"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Its mass changes continuously"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A fixed ratio of constituent atoms gives a definite composition to a pure compound.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002730",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which statement gives the best modern summary of Dalton's contribution?",
+    "questionAssetId": "CHEM-STR-000128",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "All original postulates remain unchanged"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Atomic theory provided a foundation for chemical combination but was modified by later discoveries"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Atoms do not exist"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Chemical reactions create atoms"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dalton's atomic framework remains foundational, while subatomic particles, isotopes and molecular behavior modified parts of the original theory.",
+    "difficulty": "neet",
+    "tags": [
+      "dalton-atomic-theory",
+      "atomic-structure",
+      "chemical-laws",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dalton Atomic Theory question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
   }
+
 ];

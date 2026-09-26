@@ -658,5 +658,1265 @@ window.SkillUpChemistryDynamicEquilibriumQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+  {
+    "id": "CHEM-MCQ-003116",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At equilibrium, if the forward rate equals the reverse rate, the net reaction rate is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Positive"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Negative"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Infinite"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Equal opposing rates give zero net macroscopic reaction rate.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003117",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At dynamic equilibrium, the amounts of reactants and products:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Must be equal"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Remain constant with time"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Must be zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Continuously increase"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Their concentrations remain constant at equilibrium, but need not be equal.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003118",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For a reversible reaction, equilibrium can be reached starting from:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Only reactants"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Only products"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Either reactants or products under suitable conditions"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Neither"
+      }
+    ],
+    "answer": "C",
+    "explanation": "A reversible system can approach the same equilibrium state from either direction.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003119",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which condition favors establishment of a stable chemical equilibrium?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "A closed system"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Continuous removal of all products"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Continuous removal of all reactants"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "No reverse reaction"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A closed system permits both forward and reverse reactions to continue.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003120",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At equilibrium, molecules:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Stop colliding"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Continue reacting microscopically"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Disappear"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Have identical energies"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dynamic equilibrium is a microscopic state of continuing forward and reverse reactions.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003121",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Adding a reactant to an equilibrium mixture initially makes the forward reaction rate:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Increase"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Decrease"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Equal to zero permanently"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Increasing reactant concentration increases the forward rate initially.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003122",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Removing a product from an equilibrium mixture initially causes the reverse reaction rate to:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Increase"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Decrease"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Become infinite"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Remain necessarily unchanged"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Removing product lowers its concentration, reducing the reverse rate initially.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003123",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A catalyst reaches equilibrium faster because it:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Changes K"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Lowers activation energies for both directions"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Changes ΔG° permanently"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Removes products"
+      }
+    ],
+    "answer": "B",
+    "explanation": "A catalyst speeds both directions without changing K.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003124",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Changing a catalyst at fixed temperature changes the equilibrium constant:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Yes, increases it"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Yes, decreases it"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "No"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Only for gases"
+      }
+    ],
+    "answer": "C",
+    "explanation": "K depends on temperature, not on catalyst.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003125",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At a fixed temperature, K for a given reaction is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Dependent on time"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Constant"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Always one"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The equilibrium constant has a fixed value for a specified reaction at a given temperature.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003126",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If the reverse reaction is faster than the forward reaction after a disturbance, the system moves toward:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Products"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Reactants"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Neither side"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "The catalyst"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The faster reverse reaction consumes products and forms reactants until rates equalize.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003127",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Dynamic equilibrium is a state of:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Equal concentrations"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Equal reaction rates"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Equal masses of reactants and products"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Zero reaction rates"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The defining condition is equality of forward and reverse rates.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003128",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which is a macroscopic property that remains constant at equilibrium?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Concentration"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Individual molecular trajectory"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Every collision"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Individual molecular speed"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Concentration is a macroscopic observable that becomes constant.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003129",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Equilibrium does not mean that:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Forward and reverse rates are equal"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Concentrations are constant"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Reactions have stopped"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "The system is dynamic"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Reactions continue at equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003130",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For H2 + I2 ⇌ 2HI, adding HI initially increases the rate of:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Forward reaction"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Reverse reaction"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Neither"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Both equally at every instant"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Adding product increases its concentration and initially increases the reverse rate.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003131",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For N2 + 3H2 ⇌ 2NH3, removing NH3 initially causes the forward rate to:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Increase"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Decrease"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Become zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Remain unchanged"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Removing product drives the system toward products and initially increases the forward rate relative to reverse.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003132",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At equilibrium, the ratio of forward rate to reverse rate is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "0"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "1"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "2"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Depends only on pressure"
+      }
+    ],
+    "answer": "B",
+    "explanation": "At dynamic equilibrium, the rates are equal.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003133",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A reversible reaction reaches equilibrium when:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Reactants disappear"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Forward and reverse rates become equal"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Only products remain"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Temperature becomes zero"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Rate equality defines dynamic equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003134",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If an equilibrium mixture is left undisturbed, its macroscopic composition:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Changes continuously"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Remains constant"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Becomes pure reactant"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Becomes pure product"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Equal opposing rates maintain constant macroscopic composition.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003135",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The equilibrium state is called dynamic because:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Nothing happens"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Opposing microscopic reactions continue"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "K changes continuously"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Concentrations oscillate"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Forward and reverse molecular events continue.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003136",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A reaction that cannot proceed appreciably in the reverse direction under the given conditions is generally:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "A typical reversible equilibrium system"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Not treated as a reversible equilibrium"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always at dynamic equilibrium"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "A catalyst"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dynamic equilibrium requires both directions to operate appreciably.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003137",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If a system at equilibrium is disturbed, it will generally:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Never respond"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Adjust until a new equilibrium is established"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Stop both reactions"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Lose all reactants"
+      }
+    ],
+    "answer": "B",
+    "explanation": "A disturbed reversible system can adjust toward a new equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003138",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which statement about equilibrium concentrations is correct?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "They are necessarily equal"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "They are constant but depend on initial conditions and equilibrium conditions"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "They are always zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "They continuously increase"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Equilibrium concentrations are constant but need not be equal.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003139",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For a gaseous reversible reaction, equilibrium requires that reactants and products be:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Physically removed"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Able to participate in both directions"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "At absolute zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Absent"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Both species must remain available for the reversible process.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003140",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If forward and reverse rates are both doubled at the same time, the system can still be at equilibrium because:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Their equality is maintained"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "K becomes four times larger"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Concentrations become zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Reaction becomes irreversible"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Equilibrium requires equality of the two rates, not a particular rate magnitude.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003141",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At equilibrium, the forward rate is not necessarily:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Equal to reverse rate"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Zero"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Finite"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Dependent on concentrations"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The forward rate is generally nonzero; it equals the reverse rate.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003142",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which factor directly changes the equilibrium constant for a given reaction?",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Catalyst"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Temperature"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Initial concentration"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Amount of catalyst"
+      }
+    ],
+    "answer": "B",
+    "explanation": "K changes with temperature.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003143",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Adding an inert gas at constant volume to a gaseous equilibrium generally causes the equilibrium composition to:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Shift automatically"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Remain unchanged because reacting partial pressures do not change"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always shift right"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Always shift left"
+      }
+    ],
+    "answer": "B",
+    "explanation": "At constant volume, partial pressures of reacting species remain unchanged.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003144",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "At equilibrium, the net concentration change per unit time is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Positive"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Negative"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Infinite"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Equal forward and reverse rates give zero net change in concentrations.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003145",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Dynamic equilibrium can be established for:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Only gases"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Only liquids"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Reversible physical or chemical processes under suitable conditions"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Only solids"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Dynamic equilibrium applies to reversible chemical and physical processes.",
+    "difficulty": "neet",
+    "tags": [
+      "dynamic-equilibrium",
+      "chemical-equilibrium",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dynamic Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
   }
 ];

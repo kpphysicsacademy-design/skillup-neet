@@ -1,156 +1,171 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Chemistry Concept MCQ</title><style>body{margin:0;background:#f7fbff;font-family:system-ui;color:#17324d}.wrap{max-width:700px;margin:auto;padding:25px 15px}.card{background:#fff;border:1px solid #dbe8f5;border-radius:22px;padding:22px}.q{font-size:20px;font-weight:800;line-height:1.5}.o{display:block;width:100%;margin:10px 0;padding:14px;text-align:left;border:2px solid #cbdbea;border-radius:14px;background:#fff;font-weight:700}.ok{background:#efffe5;border-color:#58cc02}.bad{background:#fff0f0;border-color:#ff6b6b}.concept-head{display:flex;align-items:center;gap:12px;margin:8px 0 16px}.concept-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:16px;background:#eef6ff;border:2px solid #cfe2f6;box-shadow:0 4px 0 #b5cfe9;font-size:30px}.concept-title{margin:0;font-size:26px;line-height:1.15}.btn{display:block;width:100%;margin-top:15px;padding:15px;border:0;border-radius:14px;background:#58cc02;color:#fff;font-weight:900;text-decoration:none;text-align:center}</style></head><body><main class="wrap"><a class="back-path" href="chemistry-home.html" aria-label="Back to Chemistry Path" title="Back to Chemistry Path" style="display:grid;place-items:center;width:48px;height:48px;margin:0 0 12px 2px;border-radius:14px;background:#eef6ff;border:2px solid #cfe2f6;box-shadow:0 4px 0 #b5cfe9;color:#17324d;text-decoration:none;font-size:26px">⚗️</a><section class="card" id="app"></section></main><script>
-const p=new URLSearchParams(location.search),concept=(p.get('concept')||'').trim(),micro=(p.get('micro')||'').trim();
-function chemistryEmoji(s){
- const t=s.toLowerCase();
- if(/atomic|atom|electron|quantum|orbital|bohr|spectrum/.test(t)) return '⚛️';
- if(/bond|hybrid|molecular structure|vsepr|electronegativity/.test(t)) return '🔗';
- if(/thermodynamic|enthalpy|entropy|gibbs|heat/.test(t)) return '🌡️';
- if(/solution|solubility|concentration|colligative/.test(t)) return '🧪';
- if(/equilibrium|acid|base|ph|ionic equilibrium/.test(t)) return '⚖️';
- if(/redox|electrochem|galvanic|electrode|battery/.test(t)) return '🔋';
- if(/kinetic|rate of reaction|activation energy/.test(t)) return '⏱️';
- if(/periodic|element|periodicity|p-block|d-block|f-block/.test(t)) return '📊';
- if(/coordination|complex|ligand/.test(t)) return '🧲';
- if(/organic|hydrocarbon|alkane|alkene|alkyne|halo|alcohol|phenol|ether|aldehyde|ketone|carbox|amine|nitro/.test(t)) return '🧬';
- if(/biomolecule|carbohydrate|protein|amino acid|vitamin|nucleic acid/.test(t)) return '🧬';
- if(/practical|salt analysis|titration|laboratory|qualitative|volumetric/.test(t)) return '🧫';
- if(/mole|stoichi|mass|matter|formula|chemical equation/.test(t)) return '⚖️';
- return '🧪';
-}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillUp | Chemistry Quiz</title>
+<style>
+:root{--b:#1677ff;--n:#17324d;--m:#6b7280;--l:#dbe8f5;--bg:#f5f9ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#263238;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--l)}
+.nav,.wrap{max-width:760px;margin:auto}
+.nav{height:60px;padding:0 14px;display:flex;align-items:center;gap:9px}
+.back{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--l);border-radius:12px;background:#eef6ff;text-decoration:none;color:var(--n);font-size:23px;box-shadow:0 3px 0 #c5d9ee}
+.brand{font-weight:950;color:var(--n)}
+.brand small{display:block;font-size:8px;letter-spacing:1px;color:#6480a0}
+.wrap{padding:18px 13px 60px}
+.hero,.q,.result,.status{background:#fff;border:1px solid var(--l);border-radius:18px;padding:18px;margin-bottom:14px}
+h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}
+.muted{color:var(--m);font-size:11px;line-height:1.5}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.pill{background:#eef6ff;color:#315b86;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:900}
+.progress{height:9px;background:#e6eef7;border-radius:99px;overflow:hidden;margin-top:12px}
+.progress i{display:block;height:100%;width:0;background:var(--b)}
+.qnum{font-size:10px;color:var(--m);font-weight:900;text-transform:uppercase}
+.q h2{font-size:19px;line-height:1.4;margin:8px 0 14px}
+.options{display:grid;gap:9px}
+.opt{width:100%;text-align:left;border:2px solid #d8e4f0;border-bottom:4px solid #c4d5e6;border-radius:13px;padding:12px;background:#fff;cursor:pointer;font-weight:750;font-size:14px}
+.opt.correct{border-color:#58cc02;background:#efffe5}
+.opt.wrong{border-color:#ff4b4b;background:#ffe5e5}
+.opt:disabled{cursor:default}
+.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;font-size:12px;line-height:1.5}
+.feedback.show{display:block}
+.ok{background:#efffe5;border:1px solid #b7e892}
+.no{background:#ffe5e5;border:1px solid #ffb3b3}
+.next{display:none;width:100%;border:0;border-radius:13px;padding:13px;margin-top:12px;background:var(--b);color:#fff;font-weight:900;cursor:pointer}
+.next.show{display:block}
+.score{text-align:center;font-size:44px;font-weight:950;color:var(--n)}
+.warn{color:#8a5b00;background:#fff7df;border:1px solid #efdca3;border-radius:12px;padding:11px;font-size:11px;margin-top:10px}
+</style>
+</head>
+<body>
+<header class="top"><div class="nav">
+<a class="back" href="chemistry-home.html" aria-label="Back to Chemistry Path" title="Back to Chemistry Path">⚗️</a>
+<div class="brand">SkillUp<small>CHEMISTRY • CONCEPT QUIZ</small></div>
+</div></header>
+<main class="wrap">
+<section class="hero">
+<h1 id="title">Chemistry Quiz</h1>
+<div class="muted" id="subtitle">Loading concept question bank…</div>
+<div class="meta"><span class="pill" id="bankCount">Loading…</span><span class="pill">🧠 Concept Quiz</span><span class="pill">📘 Practice</span></div>
+<div class="progress"><i id="bar"></i></div>
+</section>
+<div id="content"></div>
+</main>
+<script>
+(function(){
+'use strict';
+var params=new URLSearchParams(location.search);
+var concept=params.get('concept')||'';
+var micro=params.get('micro')||'';
+var title=document.getElementById('title');
+var subtitle=document.getElementById('subtitle');
+var bankCount=document.getElementById('bankCount');
+var content=document.getElementById('content');
+var bar=document.getElementById('bar');
+var items=[],i=0,score=0;
+var BANK_VERSION='20260926-chemistry-architecture-v1';
 
-const microData=window.SKILLUP_CHEMISTRY_MICROCONCEPTS||[];
-const mx=microData.find(function(v){return v.id===micro;})||null;
-const microBank=(function(){
- if(!mx)return null;
- const t=(mx.microType||'').toLowerCase(), title=mx.microTitle||mx.title||mx.parent||concept;
- const parent=mx.parent||concept;
- const sibling=microData.filter(function(v){return v.parentId===mx.parentId&&v.id!==mx.id;}).slice(0,3).map(function(v){return v.microTitle||v.title;});
- const d=sibling.concat(['A different concept','An unrelated topic']);
- const wrong=function(n){return d[n%d.length]||'An unrelated concept';};
- const q=[];
- q.push(['Which statement is most directly associated with this microconcept?', [title,wrong(0),wrong(1),wrong(2)],0]);
- q.push(['Which topic is the parent concept of this microconcept?', [parent,wrong(1),wrong(2),wrong(3)],0]);
- if(t.indexOf('meaning')>-1) q.push(['What should you identify first when learning this microconcept?', ['Its basic meaning',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('parts')>-1) q.push(['Which learning focus best matches this microconcept?', ['Identifying its key parts',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('representation')>-1) q.push(['Which learning focus best matches this microconcept?', ['Symbols or representation',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('formation')>-1||t.indexOf('process')>-1) q.push(['Which learning focus best matches this microconcept?', ['Formation or process',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('factor')>-1||t.indexOf('condition')>-1) q.push(['Which learning focus best matches this microconcept?', ['Factors and conditions',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('trend')>-1||t.indexOf('relation')>-1) q.push(['Which learning focus best matches this microconcept?', ['Relations and trends',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('example')>-1) q.push(['Which learning focus best matches this microconcept?', ['A representative example',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('compare')>-1) q.push(['Which learning focus best matches this microconcept?', ['Compare and contrast',wrong(0),wrong(1),wrong(2)],0]);
- else if(t.indexOf('trap')>-1) q.push(['Which learning focus best matches this microconcept?', ['Avoiding a common exam trap',wrong(0),wrong(1),wrong(2)],0]);
- else q.push(['Which learning focus best matches this microconcept?', ['An exam check of the idea',wrong(0),wrong(1),wrong(2)],0]);
- while(q.length<10)q.push(['What is being tested in this microconcept?', [title,wrong(0),wrong(1),wrong(2)],0]);
- return q.slice(0,10);
-})();
-const bank={
-"Dalton atomic theory":[["What was a major purpose of Dalton's atomic theory?",["To explain chemical combination using atoms","To describe electron orbitals","To explain radioactivity","To discover the neutron"],0],["According to Dalton's original theory, matter is composed of:",["Atoms","Only molecules","Only ions","Only electrons"],0],["Which statement is a Daltonian postulate about compounds?",["Atoms combine in simple whole-number ratios","Atoms combine only in equal masses","Compounds contain only one element","Compounds are physical mixtures"],0],["During an ordinary chemical reaction, Dalton's theory describes atoms as being:",["Rearranged","Destroyed completely","Converted into photons","Changed into different elements"],0],["Which law is closely related to Dalton's idea of simple whole-number combinations of elements?",["Law of multiple proportions","Law of reciprocal proportions only","Boyle's law","Graham's law"],0],["In CO and CO₂, for a fixed mass of carbon, the masses of oxygen that combine are in a:",["Simple whole-number ratio","Random ratio","Ratio of zero","Ratio that is always equal to 1"],0],["Which original Dalton postulate is modified by the discovery of isotopes?",["Atoms of the same element have identical masses","Atoms combine in whole-number ratios","Matter contains atoms","Atoms are rearranged in chemical reactions"],0],["Why is the statement 'atoms are indivisible' not accepted in modern chemistry?",["Atoms contain subatomic particles","Atoms have no mass","Atoms cannot form compounds","Atoms are always molecules"],0],["Which statement best describes the limitation of Dalton's theory regarding isotopes?",["Atoms of the same element can have different masses","Different elements always have identical masses","Compounds have no fixed composition","Atoms cannot participate in reactions"],0],["Which statement correctly distinguishes Dalton's model from modern atomic theory?",["Dalton's theory was an early model; modern theory includes subatomic particles and isotopes","Modern theory says atoms do not exist","Dalton described quantum orbitals","Dalton discovered electrons and neutrons"],0]],
-"matter and its nature":[["Which statement best defines matter?",["Anything that has mass and occupies space","Anything that can be seen","Only substances that are solid","Only substances that contain atoms"],0],["Which set contains only particles that can constitute matter?",["Atoms, molecules and ions","Cells, tissues and organs","Light, sound and heat","Only electrons and photons"],0],["Why are gases generally more compressible than solids?",["Gas particles have much larger spaces between them","Gas particles have no mass","Solid particles do not move","Gas particles are always attracted more strongly"],0],["What generally happens to the average kinetic energy of particles when temperature increases?",["It increases","It becomes zero","It always decreases","It remains exactly unchanged"],0],["Which state of matter has definite volume but no definite shape?",["Solid","Liquid","Gas","None"],1],["Which statement about particles in a solid is most appropriate?",["They are closely packed and have restricted motion","They are very far apart and move freely","They have no attractive interactions","They occupy the entire container uniformly"],0],["Which is a physical property of a substance?",["Flammability","Density","Ability to react with oxygen","Tendency to decompose"],1],["Which is a chemical property?",["Melting point","Density","Flammability","Boiling point"],2],["Which change is a physical change?",["Burning paper","Rusting iron","Melting ice","Cooking food"],2],["Which statement correctly distinguishes a chemical change from a physical change?",["A chemical change forms new substance(s), whereas a physical change does not","A physical change always produces a gas","A chemical change never changes appearance","A physical change destroys the chemical identity of the substance"],0]],
-"What is matter?":[["What is matter?",["Anything that has mass and occupies space","Only solids","Anything visible","Only living things"],0]],
-"Matter is particulate":[["Matter is made of extremely small particles such as:",["Atoms, molecules and ions","Only cells","Only liquids","Only gases"],0]],
-"Particles have spaces":[["Why can gases be compressed much more easily than solids?",["Gases have larger spaces between particles","Gas particles have no mass","Solid particles do not exist","Gas particles never move"],0]],
-"Particles are always moving":[["What generally happens to the average kinetic energy of particles when temperature increases?",["It generally increases","It becomes zero","It always decreases","It disappears"],0]],
-"Particles attract each other":[["What type of interaction exists between particles of matter?",["Attractive interactions","No interactions","Only magnetic interactions","Only gravitational interactions"],0]],
-"States of matter":[["Which state has fixed volume but takes the shape of its container?",["Solid","Liquid","Gas","None"],1]],
-"Physical and chemical nature":[["Which is a physical property?",["Ability to react with oxygen","Density","Flammability","Ability to rust"],1]],
-"Daily-life connection":[["Melting ice is best classified as:",["A physical change","A chemical change","A nuclear change","No change"],0]],
-"atom molecule element compound":[["Which is the smallest unit of an element that retains its chemical identity?",["Atom","Molecule","Compound","Mixture"],0],["Which is a molecule of an element?",["H₂","H₂O","NaCl","CO₂"],0],["Which statement best defines an element?",["A pure substance containing one kind of atom","A substance made from two different elements in a fixed ratio","Any group of bonded atoms","A physical mixture of substances"],0],["Which is a compound?",["O₂","Na","H₂O","He"],2],["Which example is both a molecule and an element?",["O₂","H₂O","NaCl","CO₂"],0],["Which example is both a molecule and a compound?",["O₂","N₂","H₂O","He"],2],["Which statement about NaCl is correct?",["It is a compound with an ionic lattice in the solid state","It is a molecule of an element","It contains only one kind of atom","It is a mixture"],0],["What distinguishes a compound from an element?",["A compound contains different elements chemically combined in a definite proportion","A compound always contains only one atom","An element must be molecular","An element is always a mixture"],0],["Which pair is correctly matched?",["Na — atom of an element","H₂O — element","O₂ — compound","NaCl — molecule of an element"],0],["Which statement is correct?",["An element is a substance, while an atom is a particle of an element","Every element is a compound","Every compound is an element","Every molecule is a compound"],0]]
-};
-const bankAliases={
- "atom molecule element compound":"matter-and-its-nature",
- "law of conservation of mass":"laws-of-chemical-combination",
- "atomic mass":"atomic-molecular-mass",
- "mole concept":"mole-concept-avogadro",
- "avogadro constant":"mole-concept-avogadro",
- "empirical formula":"empirical-molecular-formula","molecular formula":"empirical-molecular-formula",
- "balancing chemical equations":"chemical-equations","limiting reagent":"limiting-excess-reagent","excess reagent":"limiting-excess-reagent",
- "planck quantum theory":"planck-theory","bohr postulates":"bohr-model","limitations of bohr model":"bohr-model",
- "de broglie wavelength":"de-broglie-relationship","s p d orbital shapes":"orbital-shapes","ionic bond formation":"ionic-bond",
- "sp hybridisation":"hybridisation","sp2 hybridisation":"hybridisation","sp3 hybridisation":"hybridisation","sp3d hybridisation":"hybridisation","sp3d2 hybridisation":"hybridisation",
- "sigma and pi bonds":"sigma-pi-bonds","applications of hydrogen bonding":"hydrogen-bonding",
- "extensive and intensive properties":"extensive-intensive-properties","state functions":"state-and-path-functions",
- "first law of thermodynamics":"first-law","hydration enthalpy":"hydration-ionisation-solution-enthalpy","solution enthalpy":"hydration-ionisation-solution-enthalpy",
- "gibbs energy":"gibbs-free-energy","standard gibbs energy":"gibbs-free-energy","gibbs energy and equilibrium constant":"delta-g-and-equilibrium-constant",
- "ideal solutions":"ideal-non-ideal-solutions","non-ideal solutions":"ideal-non-ideal-solutions",
- "positive deviation":"positive-negative-deviation","negative deviation":"positive-negative-deviation",
- "association":"association-dissociation","dissociation":"association-dissociation",
- "law of chemical equilibrium":"chemical-equilibrium","kc":"kc-equilibrium","kp":"kp-equilibrium","effect of catalyst":"effect-catalyst"
-};
-const CHEMISTRY_QUIZ_CONFIG={
- subject:'CHEMISTRY',
- bankVersion:'20260926-chemistry-v2',
- defaultBankSize:30,
- requireDedicatedBank:true
-};
-function slugify(s){return s.toLowerCase().trim().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
-function normalizeBank(v){
- if(!Array.isArray(v))return null;
- const out=[];
- for(const x of v){
-   if(Array.isArray(x)&&typeof x[0]==='string'&&Array.isArray(x[1])){
-     const a=Number(x[2]); if(Number.isInteger(a)&&a>=0&&a<x[1].length)out.push([x[0],x[1].slice(),a,typeof x[3]==='string'?x[3]:'']);
-   }else if(x&&typeof x.q==='string'&&Array.isArray(x.o)){
-     let a=typeof x.a==='number'?x.a:(typeof x.a==='string'?x.a.charCodeAt(0)-65:-1);
-     if(a>=0&&a<x.o.length)out.push([x.q,x.o.slice(),a,typeof x.e==='string'?x.e:'']);
-   }else if(x&&typeof x.question==='string'&&Array.isArray(x.options)){
-     const opts=x.options.map(o=>typeof o==='string'?o:(o&&typeof o.value==='string'?o.value:null)).filter(o=>o!==null);
-     if(opts.length===x.options.length){
-       let a=-1;
-       if(typeof x.answer==='number') a=x.answer;
-       else if(typeof x.answer==='string'){
-         const ans=x.answer.trim().toUpperCase();
-         if(/^[A-Z]$/.test(ans)) a=ans.charCodeAt(0)-65;
-         else { const n=Number(ans); if(Number.isInteger(n)) a=n; }
-       }
-       if(Number.isInteger(a)&&a>=0&&a<opts.length)out.push([x.question,opts,a,typeof x.explanation==='string'?x.explanation:'']);
-     }
-   }
+function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function candidates(v){
+ var s=slug(v),out=[];
+ if(s==='matter-and-its-nature')out.push('matter-and-its-nature-question-bank.js');
+ else if(s)out.push(s+'-question-bank.js');
+ if(micro){
+   var m=slug(micro);
+   if(m)out.push(m+'-question-bank.js');
  }
- return out.length?out:null;
+ return [...new Set(out)];
 }
 function loadScript(src){
  return new Promise(function(resolve,reject){
-   const s=document.createElement('script');s.src=src+(src.indexOf('?')>-1?'&':'?')+'v='+CHEMISTRY_QUIZ_CONFIG.bankVersion;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
+  var before={};
+  Object.keys(window).forEach(function(k){before[k]=window[k];});
+  var sc=document.createElement('script');
+  sc.src=src+(src.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION;
+  sc.onload=function(){
+   var found=[];
+   Object.keys(window).forEach(function(k){
+    if(before[k]===window[k])return;
+    var v=window[k];
+    if(Array.isArray(v)&&v.length&&v.every(function(x){
+      return x&&typeof x==='object'&&('q' in x)&&('o' in x)&&('a' in x);
+    }))found.push(v);
+   });
+   resolve(found[0]||null);
+  };
+  sc.onerror=function(){sc.remove();reject(new Error('not found'));};
+  document.head.appendChild(sc);
  });
 }
-async function loadExistingBank(){
- const key=concept.toLowerCase(), names=[];
- // Chemistry-first routing: the concept bank is authoritative; micro is an alias.
- const chemistryBankAliases={
-   "matter and its nature":"matter-and-its-nature"
- };
- // Chemistry coding rule: each mapped concept resolves to its dedicated subject bank.
- // Generic inline banks are only a last-resort fallback for legacy concepts.
- const base=slugify(concept);
- const preferred=chemistryBankAliases[key]||base;
- if(preferred)names.push(preferred);
- if(micro)names.push(slugify(micro));
- if(bankAliases[key])names.push(bankAliases[key]);
- const unique=[...new Set(names)];
- for(const name of unique){
-   try{
-     const before=new Set(Object.keys(window));
-     await loadScript(name+'-question-bank.js');
-     for(const k of Object.keys(window)){
-       if(before.has(k))continue;
-       const v=normalizeBank(window[k]);
-       if(v)return v;
-     }
-   }catch(e){}
+async function load(){
+ title.textContent=concept||'Chemistry Quiz';
+ if(!concept){showStatus('No concept was supplied. Return to the Chemistry path and select a concept.');return;}
+ var files=candidates(concept),bank=null;
+ for(var n=0;n<files.length&&!bank;n++){
+  try{bank=await loadScript(files[n]);}catch(e){}
  }
- return null;
+ if(!bank){
+  showStatus('A dedicated Chemistry question bank is not connected for this concept yet.');
+  return;
+ }
+ items=bank.slice(0,30).map(function(item){
+  var x=Object.assign({},item);
+  x.o=Array.isArray(item.o)?item.o.slice():[];
+  var correct=typeof item.a==='number'?item.a:x.o.indexOf(item.a);
+  var order=x.o.map(function(_,idx){return idx;});
+  for(var j=order.length-1;j>0;j--){
+   var k=Math.floor(Math.random()*(j+1)),tmp=order[j];order[j]=order[k];order[k]=tmp;
+  }
+  x.o=order.map(function(idx){return item.o[idx];});
+  x.a=order.indexOf(correct);
+  return x;
+ });
+ bankCount.textContent=items.length+' questions';
+ subtitle.textContent=items.length===30?'30-question concept bank':'Dedicated bank currently contains '+items.length+' questions';
+ if(items.length<30){
+  subtitle.insertAdjacentHTML('afterend','<div class="warn">This is the source bank count currently present in GitHub. No duplicate filler questions are added automatically.</div>');
+ }
+ render();
 }
-function renderQuiz(qs){
- let s=Math.max(1,Math.min(qs.length,Number(p.get('step')||1))),q=qs[s-1];
- document.getElementById('app').innerHTML='<p><b>CONCEPT MCQ • '+s+' OF '+qs.length+'</b></p><div class="concept-head"><span class="concept-icon" aria-hidden="true">'+chemistryEmoji(concept)+'</span><h1 class="concept-title">'+concept+'</h1></div><div class="q">'+q[0]+'</div><div id="opts">'+q[1].map((x,i)=>'<button class="o" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div><div id="fb"></div>';
- window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});var explanation=q[3]||'Explanation not available for this question.';document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><div style="margin-top:12px;padding:13px;border:1px solid #dbe8f5;border-radius:14px;background:#f7fbff"><b>💡 Explanation</b><div style="margin-top:6px;line-height:1.5">'+explanation+'</div></div><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
+function showStatus(msg){
+ content.innerHTML='<section class="status"><b>Quiz unavailable</b><p class="muted">'+esc(msg)+'</p></section>';
+ bankCount.textContent='Not connected';
 }
-(async function(){
- // Chemistry-first: always try the dedicated concept bank before inline fallback banks.
- let qs=await loadExistingBank();
- if(!qs&&!CHEMISTRY_QUIZ_CONFIG.requireDedicatedBank)qs=bank[concept]||bank[concept.toLowerCase()]||null;
- if(!qs&&micro&&!CHEMISTRY_QUIZ_CONFIG.requireDedicatedBank)qs=microBank;
- if(!qs){document.getElementById('app').innerHTML='<h2>Chemistry quiz bank not connected</h2><p>This Chemistry concept exists in the path, but a dedicated existing quiz bank was not found under the current or legacy bank name.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';return;}
- renderQuiz(qs);
+function render(){
+ if(i>=items.length){
+  bar.style.width='100%';
+  content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';
+  document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};
+  return;
+ }
+ var x=items[i],opts=x.o||[],ans=typeof x.a==='number'?x.a:opts.indexOf(x.a);
+ bar.style.width=(i/items.length*100)+'%';
+ content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
+ document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,ans,x);};});
+ document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
+}
+function answer(choice,ans,x){
+ var bs=[...document.querySelectorAll('.opt')],f=document.getElementById('feedback');
+ bs.forEach(function(b){b.disabled=true;});
+ if(ans>=0&&bs[ans])bs[ans].classList.add('correct');
+ var explanation=x.e||x.explanation||'';
+ if(choice===ans){
+  score++;
+  f.className='feedback show ok';
+  f.innerHTML='<b>Correct!</b><div>'+esc(explanation)+'</div>';
+ }else{
+  if(bs[choice])bs[choice].classList.add('wrong');
+  f.className='feedback show no';
+  f.innerHTML='<b>Not quite.</b> Correct answer: '+esc((x.o||[])[ans]||x.a)+'<div>'+esc(explanation)+'</div>';
+ }
+ document.getElementById('next').classList.add('show');
+ bar.style.width=((i+1)/items.length*100)+'%';
+}
+load();
 })();
-</script></body></html>
+</script>
+</body>
+</html>

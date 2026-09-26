@@ -658,5 +658,665 @@ window.SkillUpChemistryDipoleMomentQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+  {
+    "id": "CHEM-MCQ-003016",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The SI unit of electric dipole moment is:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "C m"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "C/m"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "N/C"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "J/C"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Electric dipole moment is charge multiplied by separation distance, so its SI unit is coulomb metre.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003017",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For a dipole consisting of charges +q and −q separated by distance r, the magnitude of dipole moment is:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "qr"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "q/r"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "r/q"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "q+r"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The magnitude of dipole moment is the product of charge magnitude and separation, p = qr.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003018",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Dipole moment is a:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Vector quantity"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Scalar quantity"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Dimensionless quantity"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Constant for every molecule"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Dipole moment has both magnitude and direction, so it is a vector quantity.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003019",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The direction of molecular dipole moment is conventionally taken from:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Negative charge toward positive charge"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Positive charge toward negative charge"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Nucleus toward electron shell"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Electron toward proton only"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The dipole moment vector is conventionally directed from the negative end toward the positive end.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003020",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A molecule with two identical atoms bonded together generally has:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Zero permanent dipole moment"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Maximum dipole moment"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "An infinite dipole moment"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "A dipole moment independent of bonding"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Identical atoms have equal electronegativities, so the bond has no permanent charge separation.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003021",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which molecule is non-polar despite having polar bonds?",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "CO2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "H2O"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "NH3"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "HCl"
+      }
+    ],
+    "answer": "A",
+    "explanation": "CO2 is linear and its two equal C=O bond dipoles cancel each other.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003022",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The dipole moment of H2O is non-zero mainly because:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Its bent geometry prevents complete cancellation of O–H bond dipoles"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "O–H bonds are non-polar"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "It is a linear molecule"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Hydrogen has a lone pair"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The bent geometry makes the two O–H bond dipoles add to a non-zero resultant.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003023",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which molecule has a symmetrical linear structure causing bond-dipole cancellation?",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "BeCl2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "H2O"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "NH3"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "SO2"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Linear BeCl2 has equal and opposite Be–Cl bond dipoles that cancel.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003024",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If the resultant dipole moment of a molecule is zero, the molecule is:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Non-polar overall"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Always ionic"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always linear"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Always made of identical atoms"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A zero resultant dipole moment indicates no net molecular polarity, although individual bonds may be polar.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003025",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Bond polarity generally increases when:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Electronegativity difference increases"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Atomic masses become equal"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Bond length becomes zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Both atoms have identical electronegativity"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A larger electronegativity difference produces greater separation of charge and greater bond polarity.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003026",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which molecule has a non-zero dipole moment?",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "NH3"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "BF3"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "CO2"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "CCl4"
+      }
+    ],
+    "answer": "A",
+    "explanation": "NH3 is trigonal pyramidal, so its N–H bond dipoles do not cancel completely.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003027",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "BF3 has zero dipole moment because:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Its trigonal planar geometry causes equal bond dipoles to cancel"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Its B–F bonds are non-polar"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "It has no bonds"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Fluorine has zero electronegativity"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The three equal B–F bond dipoles are symmetrically arranged at 120° and cancel.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003028",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "CCl4 has zero net dipole moment because:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Its tetrahedral symmetry cancels the four C–Cl bond dipoles"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "C–Cl bonds are non-polar"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Carbon has no valence electrons"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Chlorine atoms have no charge"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The four identical C–Cl bond dipoles cancel vectorially because of the tetrahedral symmetry.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003029",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Which factor can affect the magnitude of a bond dipole?",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Magnitude of charge separation and bond distance"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Number of neutrons only"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Atomic mass only"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Melting point only"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Dipole moment depends on the magnitude of separated charge and the distance between charge centers.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-003030",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For two molecules with similar charge separation, the molecule with the larger separation distance generally has:",
+    "questionAssetId": "CHEM-STR-000147",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Larger dipole moment"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Smaller dipole moment"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Zero dipole moment"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "No relationship at all"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Since p = qr, a greater charge separation gives a larger dipole moment when q is comparable.",
+    "difficulty": "neet",
+    "tags": [
+      "dipole-moment",
+      "chemical-bonding",
+      "periodic-trends",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Dipole Moment question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
   }
 ];

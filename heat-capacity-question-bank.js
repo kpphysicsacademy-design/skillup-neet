@@ -658,5 +658,110 @@ window.SkillUpChemistryHeatCapacityQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+  {
+    "id":"CHEM-MCQ-004036",
+    "subject":"chemistry","questionType":"structure","question":"The heat capacity of a body is defined as heat required per unit:",
+    "questionAssetId":"CHEM-STR-HEAT-036",
+    "options":[{"id":"A","type":"text","value":"Temperature rise"},{"id":"B","type":"text","value":"Mass only"},{"id":"C","type":"text","value":"Pressure only"},{"id":"D","type":"text","value":"Volume only"}],
+    "answer":"A","explanation":"Heat capacity is C = q/ΔT for the specified body.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004037",
+    "subject":"chemistry","questionType":"structure","question":"Specific heat capacity is heat required to raise the temperature of unit:",
+    "questionAssetId":"CHEM-STR-HEAT-037",
+    "options":[{"id":"A","type":"text","value":"Mass by one kelvin"},{"id":"B","type":"text","value":"Mole by one kelvin"},{"id":"C","type":"text","value":"Volume by one kelvin"},{"id":"D","type":"text","value":"Pressure by one pascal"}],
+    "answer":"A","explanation":"Specific heat capacity is heat required per unit mass per unit temperature rise.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004038",
+    "subject":"chemistry","questionType":"structure","question":"Molar heat capacity is heat required to raise the temperature of one:",
+    "questionAssetId":"CHEM-STR-HEAT-038",
+    "options":[{"id":"A","type":"text","value":"Mole by one kelvin"},{"id":"B","type":"text","value":"Kilogram by one kelvin"},{"id":"C","type":"text","value":"Litre by one kelvin"},{"id":"D","type":"text","value":"Pascal by one kelvin"}],
+    "answer":"A","explanation":"Molar heat capacity is heat required per mole for a one-kelvin temperature rise.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004039",
+    "subject":"chemistry","questionType":"structure","question":"For an ideal gas, Cp is generally:",
+    "questionAssetId":"CHEM-STR-HEAT-039",
+    "options":[{"id":"A","type":"text","value":"Greater than Cv"},{"id":"B","type":"text","value":"Less than Cv"},{"id":"C","type":"text","value":"Equal to zero"},{"id":"D","type":"text","value":"Equal to Cv − R"}],
+    "answer":"A","explanation":"At constant pressure the gas also expands and does work, so Cp > Cv.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004040",
+    "subject":"chemistry","questionType":"structure","question":"For a monatomic ideal gas, the molar heat capacity at constant pressure is:",
+    "questionAssetId":"CHEM-STR-HEAT-040",
+    "options":[{"id":"A","type":"text","value":"5R/2"},{"id":"B","type":"text","value":"3R/2"},{"id":"C","type":"text","value":"R/2"},{"id":"D","type":"text","value":"7R/2"}],
+    "answer":"A","explanation":"For a monatomic ideal gas, Cp = Cv + R = 5R/2.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004041",
+    "subject":"chemistry","questionType":"structure","question":"For a diatomic ideal gas at ordinary temperatures, Cp is approximately:",
+    "questionAssetId":"CHEM-STR-HEAT-041",
+    "options":[{"id":"A","type":"text","value":"7R/2"},{"id":"B","type":"text","value":"5R/2"},{"id":"C","type":"text","value":"3R/2"},{"id":"D","type":"text","value":"R/2"}],
+    "answer":"A","explanation":"With Cv ≈ 5R/2, Mayer's relation gives Cp ≈ 7R/2.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004042",
+    "subject":"chemistry","questionType":"structure","question":"The ratio γ for a monatomic ideal gas is:",
+    "questionAssetId":"CHEM-STR-HEAT-042",
+    "options":[{"id":"A","type":"text","value":"5/3"},{"id":"B","type":"text","value":"7/5"},{"id":"C","type":"text","value":"4/3"},{"id":"D","type":"text","value":"3/2"}],
+    "answer":"A","explanation":"γ = Cp/Cv = (5R/2)/(3R/2) = 5/3.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004043",
+    "subject":"chemistry","questionType":"structure","question":"The ratio γ for a diatomic ideal gas at ordinary temperatures is approximately:",
+    "questionAssetId":"CHEM-STR-HEAT-043",
+    "options":[{"id":"A","type":"text","value":"7/5"},{"id":"B","type":"text","value":"5/3"},{"id":"C","type":"text","value":"4/3"},{"id":"D","type":"text","value":"3/2"}],
+    "answer":"A","explanation":"Using Cp ≈ 7R/2 and Cv ≈ 5R/2 gives γ ≈ 7/5.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004044",
+    "subject":"chemistry","questionType":"structure","question":"If 1000 J heat raises a 2 kg sample by 5 K, its specific heat capacity is:",
+    "questionAssetId":"CHEM-STR-HEAT-044",
+    "options":[{"id":"A","type":"text","value":"100 J kg⁻¹ K⁻¹"},{"id":"B","type":"text","value":"250 J kg⁻¹ K⁻¹"},{"id":"C","type":"text","value":"500 J kg⁻¹ K⁻¹"},{"id":"D","type":"text","value":"50 J kg⁻¹ K⁻¹"}],
+    "answer":"A","explanation":"c = q/(mΔT) = 1000/(2×5) = 100 J kg⁻¹ K⁻¹.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004045",
+    "subject":"chemistry","questionType":"structure","question":"For a fixed mass, heat required for a temperature rise is proportional to:",
+    "questionAssetId":"CHEM-STR-HEAT-045",
+    "options":[{"id":"A","type":"text","value":"Specific heat capacity and temperature rise"},{"id":"B","type":"text","value":"Pressure only"},{"id":"C","type":"text","value":"Density only"},{"id":"D","type":"text","value":"Volume only"}],
+    "answer":"A","explanation":"The relation q = mcΔT shows q is proportional to c and ΔT for fixed mass.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004046",
+    "subject":"chemistry","questionType":"structure","question":"At constant pressure for an ideal gas, heat supplied is associated with a change in:",
+    "questionAssetId":"CHEM-STR-HEAT-046",
+    "options":[{"id":"A","type":"text","value":"Enthalpy"},{"id":"B","type":"text","value":"Internal energy only with no expansion"},{"id":"C","type":"text","value":"Entropy only"},{"id":"D","type":"text","value":"Volume only"}],
+    "answer":"A","explanation":"For a closed system with only PV work at constant pressure, q_p = ΔH.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004047",
+    "subject":"chemistry","questionType":"structure","question":"At constant volume for a closed system with only PV work, heat supplied is equal to:",
+    "questionAssetId":"CHEM-STR-HEAT-047",
+    "options":[{"id":"A","type":"text","value":"ΔU"},{"id":"B","type":"text","value":"ΔH always"},{"id":"C","type":"text","value":"PV"},{"id":"D","type":"text","value":"ΔS only"}],
+    "answer":"A","explanation":"At constant volume, boundary work is zero, so q_v = ΔU.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004048",
+    "subject":"chemistry","questionType":"structure","question":"Heat capacity is an extensive property because it depends on:",
+    "questionAssetId":"CHEM-STR-HEAT-048",
+    "options":[{"id":"A","type":"text","value":"Amount of material"},{"id":"B","type":"text","value":"Temperature only"},{"id":"C","type":"text","value":"Pressure only"},{"id":"D","type":"text","value":"Density only"}],
+    "answer":"A","explanation":"Total heat capacity increases with the amount of substance.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004049",
+    "subject":"chemistry","questionType":"structure","question":"Specific heat capacity is an intensive property because it is:",
+    "questionAssetId":"CHEM-STR-HEAT-049",
+    "options":[{"id":"A","type":"text","value":"Per unit mass"},{"id":"B","type":"text","value":"A total quantity"},{"id":"C","type":"text","value":"Equal to total heat capacity"},{"id":"D","type":"text","value":"Independent of material"}],
+    "answer":"A","explanation":"Dividing heat capacity by mass gives the intensive specific heat capacity.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
+  },
+  {
+    "id":"CHEM-MCQ-004050",
+    "subject":"chemistry","questionType":"structure","question":"For an ideal gas, Mayer's relation in molar form is:",
+    "questionAssetId":"CHEM-STR-HEAT-050",
+    "options":[{"id":"A","type":"text","value":"Cp − Cv = R"},{"id":"B","type":"text","value":"Cp + Cv = R"},{"id":"C","type":"text","value":"Cp/Cv = R"},{"id":"D","type":"text","value":"Cv − Cp = R"}],
+    "answer":"A","explanation":"For an ideal gas, the molar heat capacities satisfy Cp − Cv = R.","difficulty":"neet","tags":["heat-capacity","thermodynamics","specific-heat","neet"],"source":"SkillUp Chemistry — Heat Capacity question bank","learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
   }
 ];

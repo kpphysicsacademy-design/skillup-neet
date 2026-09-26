@@ -14,4 +14,19 @@ window.SkillUpDepressionFreezingPointQuestions = [
 {q:"Which colligative property is determined by cryoscopy?",o:["Depression of freezing point","Elevation of boiling point","Osmotic pressure","Relative lowering of vapour pressure"],a:0,e:"Cryoscopy is the method based on measuring the depression of freezing point."},
 {q:"A solution has ΔTf = 0.372 K and Kf = 1.86 K kg mol⁻¹. Its molality is:",o:["0.10 mol kg⁻¹","0.20 mol kg⁻¹","0.50 mol kg⁻¹","2.00 mol kg⁻¹"],a:1,e:"m = ΔTf/Kf = 0.372/1.86 = 0.20 mol kg⁻¹."},
 {q:"For equal molality solutions of non-electrolytes in the same solvent, the ideal depression in freezing point is:",o:["The same","Always different","Zero","Dependent only on solute colour"],a:0,e:"For the same solvent, Kf is constant; at equal molality and i = 1, ΔTf = Kf m is the same."}
-];
+,
+{"q":"If Kf=1.86 K kg mol^-1 and m=0.25 mol kg^-1, ΔTf is:","o":["0.465 K","0.93 K","1.86 K","7.44 K"],"a":0,"e":"ΔTf=Kf m=1.86×0.25=0.465 K."},
+{"q":"Pure solvent freezes at 10 °C and ΔTf=2.5 °C. Solution freezes at:","o":["7.5 °C","12.5 °C","2.5 °C","10 °C"],"a":0,"e":"Tf=Tf°−ΔTf=10−2.5=7.5 °C."},
+{"q":"If ΔTf doubles for the same solvent, molality ideally:","o":["Halves","Doubles","Becomes zero","Is unchanged"],"a":1,"e":"At constant Kf, ΔTf is directly proportional to molality."},
+{"q":"If Kf=2.0 K kg mol^-1 and m=0.30 mol kg^-1, ΔTf is:","o":["0.06 K","0.60 K","1.50 K","2.30 K"],"a":1,"e":"ΔTf=2.0×0.30=0.60 K."},
+{"q":"The relation between solution and pure-solvent freezing points is:","o":["Tf=Tf°−ΔTf","Tf=Tf°+ΔTf","Tf=ΔTf/Tf°","Tf=Tf°ΔTf"],"a":0,"e":"Freezing-point depression is Tf°−Tf."},
+{"q":"Kf is called the:","o":["Cryoscopic constant","Ebullioscopic constant","Henry constant","Osmotic constant"],"a":0,"e":"Kf is the cryoscopic constant."},
+{"q":"For a non-electrolyte without association or dissociation, i is:","o":["0","1","2","1/2"],"a":1,"e":"For an ideal non-electrolyte, i=1."},
+{"q":"For ideal complete dissociation of NaCl, i is:","o":["1","2","3","0.5"],"a":1,"e":"NaCl produces two ions, so i=2."},
+{"q":"For ideal complete dissociation of CaCl2, i is:","o":["1","2","3","4"],"a":2,"e":"CaCl2 produces three ions, so i=3."},
+{"q":"If a solute dimerizes completely, its ideal van't Hoff factor is:","o":["2","1","0.5","3"],"a":2,"e":"Two particles combine into one, so the effective particle count is halved."},
+{"q":"A solution has Tf°=0 °C and ΔTf=0.93 K. Its freezing point is:","o":["−0.93 °C","0.93 °C","−1.86 °C","0 °C"],"a":0,"e":"Tf=0−0.93=−0.93 °C."},
+{"q":"For the same solvent, a larger Kf gives at the same molality:","o":["Greater depression","Smaller depression","No depression","No relation"],"a":0,"e":"ΔTf=Kf m, so larger Kf gives greater depression."},
+{"q":"Freezing-point depression mainly results from lowering of the:","o":["Chemical potential of liquid solvent","Atomic mass of solute","Density of container","Nuclear energy"],"a":0,"e":"Solute lowers the chemical potential of the liquid solvent."},
+{"q":"For equal molality and equal i in the same solvent, ΔTf is:","o":["Equal","Always different","Zero","Infinite"],"a":0,"e":"ΔTf=iKf m; all factors are identical."},
+{"q":"Which method is based on measuring freezing-point depression?","o":["Cryoscopy","Ebullioscopy","Viscometry","Calorimetry"],"a":0,"e":"Cryoscopy is based on depression of freezing point."}];

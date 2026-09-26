@@ -639,5 +639,650 @@ window.SkillUpMetallicBondingQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+{
+  "id": "CHEM-MCQ-000816",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "The positive centers in the simple metallic bonding model are arranged in a:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Regular crystal lattice"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Random gas cloud"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Molecular chain only"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Hydrogen-bonded network"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Metal atoms form an ordered lattice of positive ion cores surrounded by delocalized electrons.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
   }
+},
+{
+  "id": "CHEM-MCQ-000817",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Metallic bonding can extend throughout a solid because the valence electrons are:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Delocalized"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Restricted to one covalent pair"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Absent"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Localized only in nuclei"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Delocalized electrons can interact with many metal ion cores throughout the crystal.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000818",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "A metal conducts electricity in the solid state because it contains:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Mobile charge carriers"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Only immobile ions"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "No electrons"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Only neutral molecules"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Delocalized electrons can move through the metallic lattice and carry electric charge.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000819",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "When a metal is heated, its thermal conductivity is largely related to the ability of:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Electrons to transfer energy"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Nuclei to evaporate"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Molecules to rotate freely"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Protons to move between atoms"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Mobile electrons efficiently transfer energy through the metallic lattice.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000820",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Metallic bonding is different from a localized covalent bond because metallic electrons are generally:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Delocalized over many atoms"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Shared by exactly two atoms only"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Confined to one nucleus"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Absent from the lattice"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Metallic bonding involves delocalized valence electrons rather than localized electron pairs between specific atoms.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000821",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Which property is most directly explained by the ability of metal layers to slide while bonding is retained?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Malleability"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Brittleness"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Volatility"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Low density in every case"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Because metallic bonding is non-directional, layers can shift while the attraction to the electron sea remains.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000822",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Ductility of metals refers to their ability to:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Be drawn into wires"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Be broken into powder easily"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Dissolve completely in water"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Form only gases"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Ductility is the ability of a material to undergo deformation and be drawn into wires.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000823",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Which statement about the directionality of metallic bonding is generally correct?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "It is largely non-directional"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "It is always directed along one fixed bond axis"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "It requires hydrogen atoms"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "It exists only between molecules"
+    }
+  ],
+  "answer": "A",
+  "explanation": "The attraction between ion cores and delocalized electrons is not restricted to a single directional bond.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000824",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "A stronger metallic bond generally results when there is greater:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Attraction between metal ion cores and delocalized electrons"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Number of neutral molecules only"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Hydrogen bonding"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Nuclear decay"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Greater electrostatic attraction between positive ion cores and the electron cloud can strengthen metallic bonding.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000825",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Which factor can affect the strength of metallic bonding?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Number of delocalized valence electrons and ionic size"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Only melting point"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Only color"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Only atomic mass"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Metallic bond strength is influenced by electron availability and the size and charge density of metal ion cores.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000826",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Why are many metals capable of being polished to a shiny surface?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Their mobile electrons interact with and reflect light"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "They contain hydrogen bonds"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Their nuclei emit visible light continuously"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "They have no electrons"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Delocalized electrons contribute to the characteristic reflection of electromagnetic radiation from metal surfaces.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000827",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Which substance most clearly exhibits metallic bonding in its elemental solid?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Copper"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Chlorine"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Sulfur"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Phosphorus"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Copper is a metal and its solid lattice is held together by metallic bonding.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000828",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "An alloy is commonly produced by combining:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Two or more elements, at least one of which is a metal"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Only nonmetals"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Only noble gases"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Only ionic compounds"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Alloys are mixtures or solid solutions involving metals, often with one or more additional elements.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000829",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "Which observation is least consistent with metallic bonding?",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Very low electrical conductivity in a typical pure metal"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "Electrical conductivity"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Malleability"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Thermal conductivity"
+    }
+  ],
+  "answer": "A",
+  "explanation": "Typical metals have delocalized electrons and therefore generally conduct electricity well.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+},
+{
+  "id": "CHEM-MCQ-000830",
+  "subject": "chemistry",
+  "questionType": "text",
+  "question": "In the electron-sea model, the delocalized electrons primarily provide:",
+  "options": [
+    {
+      "id": "A",
+      "type": "text",
+      "value": "Electrostatic attraction that holds the metal lattice together"
+    },
+    {
+      "id": "B",
+      "type": "text",
+      "value": "A covalent bond between every pair of atoms"
+    },
+    {
+      "id": "C",
+      "type": "text",
+      "value": "Nuclear stability"
+    },
+    {
+      "id": "D",
+      "type": "text",
+      "value": "Hydrogen-bond formation"
+    }
+  ],
+  "answer": "A",
+  "explanation": "The attraction between the mobile negative electron cloud and positive metal ion cores contributes to metallic cohesion.",
+  "difficulty": "neet",
+  "questionAssetId": "CHEM-STR-000052",
+  "tags": [
+    "metallic-bonding",
+    "chemical-bonding",
+    "neet"
+  ],
+  "source": "SkillUp Chemistry — Metallic Bonding question bank",
+  "learning": {
+    "xp": 10,
+    "masteryWeight": 1,
+    "reviewEligible": true
+  }
+}
 ];

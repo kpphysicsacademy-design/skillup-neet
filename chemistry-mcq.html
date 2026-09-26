@@ -82,6 +82,18 @@ function normalizeBank(v){
    }else if(x&&typeof x.q==='string'&&Array.isArray(x.o)){
      let a=typeof x.a==='number'?x.a:(typeof x.a==='string'?x.a.charCodeAt(0)-65:-1);
      if(a>=0&&a<x.o.length)out.push([x.q,x.o.slice(),a]);
+   }else if(x&&typeof x.question==='string'&&Array.isArray(x.options)){
+     const opts=x.options.map(o=>typeof o==='string'?o:(o&&typeof o.value==='string'?o.value:null)).filter(o=>o!==null);
+     if(opts.length===x.options.length){
+       let a=-1;
+       if(typeof x.answer==='number') a=x.answer;
+       else if(typeof x.answer==='string'){
+         const ans=x.answer.trim().toUpperCase();
+         if(/^[A-Z]$/.test(ans)) a=ans.charCodeAt(0)-65;
+         else { const n=Number(ans); if(Number.isInteger(n)) a=n; }
+       }
+       if(Number.isInteger(a)&&a>=0&&a<opts.length)out.push([x.question,opts,a]);
+     }
    }
  }
  return out.length?out:null;

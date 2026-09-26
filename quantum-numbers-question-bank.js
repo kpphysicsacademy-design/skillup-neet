@@ -13,5 +13,20 @@ window.SkillUpQuantumNumbersQuestions=[
 {q:"The spin quantum number of an electron can have which values?",o:["+1 and −1","+1/2 and −1/2","0 and 1","−1, 0 and +1"],a:1,e:"The electron spin quantum number mₛ is +1/2 or −1/2."},
 {q:"Which set of quantum numbers is not possible for an electron?",o:["n=2, l=1, mₗ=0, mₛ=+1/2","n=3, l=2, mₗ=−2, mₛ=−1/2","n=2, l=2, mₗ=0, mₛ=+1/2","n=4, l=3, mₗ=+2, mₛ=−1/2"],a:2,e:"For n = 2, l can only be 0 or 1; l = 2 is not allowed."},
 {q:"The number of orbitals in a subshell with azimuthal quantum number l is:",o:["l","2l","2l+1","l²"],a:2,e:"A subshell contains 2l + 1 orbitals."},
-{q:"The maximum number of electrons that can occupy a subshell with azimuthal quantum number l is:",o:["2l+1","2l","4l+2","l²"],a:2,e:"There are 2l+1 orbitals and each holds two electrons, giving 2(2l+1) = 4l+2."}
+{q:"The maximum number of electrons that can occupy a subshell with azimuthal quantum number l is:",o:["2l+1","2l","4l+2","l²"],a:2,e:"There are 2l+1 orbitals and each holds two electrons, giving 4l+2 electrons."},
+{q:"The maximum number of electrons in a shell with principal quantum number n is:",o:["n²","2n²","2n","4n"],a:1,e:"A shell with principal quantum number n can hold a maximum of 2n² electrons."},
+{q:"The number of orbitals in a shell with principal quantum number n is:",o:["n","2n","n²","2n²"],a:2,e:"The shell contains n² orbitals in total."},
+{q:"Which quantum number determines the orientation of an orbital in space?",o:["n","l","mₗ","mₛ"],a:2,e:"The magnetic quantum number mₗ determines the allowed spatial orientations of orbitals."},
+{q:"Which quantum number determines the orientation of electron spin?",o:["n","l","mₗ","mₛ"],a:3,e:"The spin quantum number mₛ specifies the two allowed spin projections of an electron."},
+{q:"For an s orbital, the value of mₗ is:",o:["0 only","−1, 0, +1","−2 to +2","+1/2"],a:0,e:"For s, l = 0, so mₗ has only the value 0."},
+{q:"For a d subshell, the possible mₗ values are:",o:["−1, 0, +1","−2, −1, 0, +1, +2","0 only","−3 to +3"],a:1,e:"For d, l = 2, giving mₗ = −2, −1, 0, +1, +2."},
+{q:"For an f subshell, the number of orbitals is:",o:["3","5","7","9"],a:2,e:"For f, l = 3, so 2l + 1 = 7 orbitals."},
+{q:"For n = 4, the maximum possible value of l is:",o:["1","2","3","4"],a:2,e:"The allowed l values are 0 through n−1, so for n = 4 the maximum is 3."},
+{q:"For n = 4 and l = 2, the subshell is:",o:["4s","4p","4d","4f"],a:2,e:"l = 2 corresponds to d, so the subshell is 4d."},
+{q:"Which set represents a valid electron state?",o:["n=3, l=2, mₗ=+1, mₛ=−1/2","n=2, l=2, mₗ=0, mₛ=+1/2","n=1, l=1, mₗ=0, mₛ=−1/2","n=3, l=1, mₗ=+2, mₛ=+1/2"],a:0,e:"For n=3, l=2 is allowed; mₗ=+1 lies between −2 and +2, and mₛ=−1/2 is valid."},
+{q:"Which quantum number has only two possible values for an electron?",o:["n","l","mₗ","mₛ"],a:3,e:"Electron spin quantum number mₛ has only +1/2 and −1/2."},
+{q:"How many orbitals are possible for l = 2?",o:["2","3","5","7"],a:2,e:"Number of orbitals = 2l + 1 = 5."},
+{q:"How many electrons can occupy a p subshell?",o:["2","6","10","14"],a:1,e:"A p subshell has three orbitals, each holding two electrons, for a maximum of 6."},
+{q:"How many electrons can occupy a d subshell?",o:["2","6","10","14"],a:2,e:"A d subshell has five orbitals and can hold 10 electrons."},
+{q:"Which statement about quantum numbers is correct?",o:["Each electron in an atom is specified by a unique set of four quantum numbers","n can be zero for an electron","l can exceed n−1","mₛ can have three values"],a:0,e:"The four quantum numbers n, l, mₗ and mₛ together specify an allowed electron state; n is a positive integer, l ranges from 0 to n−1, mₗ from −l to +l, and mₛ is ±1/2."}
 ];

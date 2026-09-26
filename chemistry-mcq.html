@@ -109,8 +109,13 @@ function loadScript(src){
 }
 async function loadExistingBank(){
  const key=concept.toLowerCase(), names=[];
+ // Chemistry-first routing: the concept bank is authoritative; micro is an alias.
+ const chemistryBankAliases={
+   "matter and its nature":"matter-and-its-nature"
+ };
  const base=slugify(concept);
- if(base)names.push(base);
+ const preferred=chemistryBankAliases[key]||base;
+ if(preferred)names.push(preferred);
  if(micro)names.push(slugify(micro));
  if(bankAliases[key])names.push(bankAliases[key]);
  const unique=[...new Set(names)];
@@ -133,8 +138,10 @@ function renderQuiz(qs){
  window.ans=i=>{document.querySelectorAll('.o').forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('ok');if(j===i&&i!==q[2])b.classList.add('bad')});document.getElementById('fb').innerHTML='<p>'+(i===q[2]?'✅ Correct!':'❌ Review this concept and try again.')+'</p><a class="btn" href="'+(s<qs.length?'chemistry-mcq.html?concept='+encodeURIComponent(concept)+'&step='+(s+1):'chemistry-home.html')+'">'+(s<qs.length?'NEXT MCQ →':'FINISH CONCEPT →')+'</a>';};
 }
 (async function(){
- let qs=microBank||bank[concept]||bank[concept.toLowerCase()]||null;
+ let qs=bank[concept]||bank[concept.toLowerCase()]||null;
+ // Use the dedicated Chemistry question bank before any generic microconcept generator.
  if(!qs)qs=await loadExistingBank();
+ if(!qs&&micro)qs=microBank;
  if(!qs){document.getElementById('app').innerHTML='<h2>Quiz bank not connected</h2><p>This Chemistry concept exists in the path, but a dedicated existing quiz bank was not found under the current or legacy bank name.</p><a class="btn" href="chemistry-home.html">← CHEMISTRY PATH</a>';return;}
  renderQuiz(qs);
 })();

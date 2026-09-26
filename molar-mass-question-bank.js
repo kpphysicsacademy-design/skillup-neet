@@ -13,5 +13,20 @@ window.SkillUpMolarMassQuestions=[
 {q:"The numerical value of molecular mass in u and molar mass in g mol⁻¹ are:",o:["Always different","Numerically equal","Always zero","Related only for gases"],a:1,e:"For a substance, the molecular mass in u and molar mass in g mol⁻¹ have the same numerical value."},
 {q:"The molar mass of H₂SO₄ is: (H = 1, S = 32, O = 16)",o:["96 g mol⁻¹","98 g mol⁻¹","100 g mol⁻¹","102 g mol⁻¹"],a:1,e:"M(H₂SO₄) = 2(1) + 32 + 4(16) = 98 g mol⁻¹."},
 {q:"What is the mass of 0.5 mol of CaCO₃? (M = 100 g mol⁻¹)",o:["25 g","50 g","100 g","200 g"],a:1,e:"Mass = 0.5 × 100 = 50 g."},
-{q:"If 5 mol of a compound has a mass of 290 g, its molar mass is:",o:["29 g mol⁻¹","58 g mol⁻¹","145 g mol⁻¹","290 g mol⁻¹"],a:1,e:"Molar mass = mass/moles = 290/5 = 58 g mol⁻¹."}
+{q:"If 5 mol of a compound has a mass of 290 g, its molar mass is:",o:["29 g mol⁻¹","58 g mol⁻¹","145 g mol⁻¹","290 g mol⁻¹"],a:1,e:"Molar mass = mass/moles = 290/5 = 58 g mol⁻¹."},
+{q:"The SI unit commonly used for molar mass is:",o:["g mol⁻¹","g","mol","u"],a:0,e:"Molar mass is commonly expressed in grams per mole, g mol⁻¹."},
+{q:"The molar mass of H₂O is:",o:["16 g mol⁻¹","18 g mol⁻¹","20 g mol⁻¹","22 g mol⁻¹"],a:1,e:"H₂O has molar mass 2(1)+16 = 18 g mol⁻¹."},
+{q:"The molar mass of CO₂ is:",o:["28 g mol⁻¹","32 g mol⁻¹","44 g mol⁻¹","48 g mol⁻¹"],a:2,e:"CO₂ has molar mass 12 + 2(16) = 44 g mol⁻¹."},
+{q:"The molar mass of NaCl is approximately:",o:["40.0 g mol⁻¹","58.5 g mol⁻¹","74.5 g mol⁻¹","117 g mol⁻¹"],a:1,e:"NaCl has molar mass 23.0 + 35.5 = 58.5 g mol⁻¹."},
+{q:"The molar mass of H₂SO₄ is:",o:["96 g mol⁻¹","98 g mol⁻¹","100 g mol⁻¹","102 g mol⁻¹"],a:1,e:"H₂SO₄ has molar mass 2 + 32 + 64 = 98 g mol⁻¹."},
+{q:"Mass of 2 mol of O₂ is:",o:["16 g","32 g","64 g","96 g"],a:2,e:"O₂ has molar mass 32 g mol⁻¹, so 2 mol weighs 64 g."},
+{q:"Moles present in 90 g of H₂O are:",o:["2 mol","5 mol","10 mol","18 mol"],a:0,e:"90/18 = 5 mol, so the correct answer is 5 mol."},
+{q:"Mass of 0.25 mol of CO₂ is:",o:["5.5 g","11 g","22 g","44 g"],a:1,e:"0.25 × 44 = 11 g."},
+{q:"Molar mass of NH₃ is:",o:["14 g mol⁻¹","15 g mol⁻¹","17 g mol⁻¹","18 g mol⁻¹"],a:2,e:"NH₃ has 14 + 3 = 17 g mol⁻¹."},
+{q:"Molar mass of CaCO₃ is:",o:["90 g mol⁻¹","98 g mol⁻¹","100 g mol⁻¹","110 g mol⁻¹"],a:2,e:"CaCO₃ has 40 + 12 + 48 = 100 g mol⁻¹."},
+{q:"If 36 g of H₂O is present, the amount is:",o:["1 mol","2 mol","3 mol","4 mol"],a:1,e:"36/18 = 2 mol."},
+{q:"Which relation is correct for moles n, mass m and molar mass M?",o:["n = mM","n = M/m","n = m/M","n = m + M"],a:2,e:"The mole amount is n = m/M."},
+{q:"The molar mass of C₂H₅OH is:",o:["44 g mol⁻¹","46 g mol⁻¹","48 g mol⁻¹","50 g mol⁻¹"],a:1,e:"C₂H₅OH is C₂H₆O: 24 + 6 + 16 = 46 g mol⁻¹."},
+{q:"A sample has molar mass 40 g mol⁻¹. Its mass for 0.5 mol is:",o:["10 g","20 g","40 g","80 g"],a:1,e:"Mass = nM = 0.5 × 40 = 20 g."},
+{q:"Molar mass of Al₂O₃ is:",o:["86 g mol⁻¹","102 g mol⁻¹","118 g mol⁻¹","120 g mol⁻¹"],a:1,e:"Al₂O₃ has 2(27)+3(16)=102 g mol⁻¹."}
 ];

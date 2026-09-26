@@ -673,5 +673,110 @@ window.SkillUpChemistryConcentrationInterconversionQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
-  }
+  },
+{
+ "question":"For a dilute aqueous solution, the relation between molarity and molality is often approximately:",
+ "options":[{"id":"A","type":"text","value":"M ≈ m"},{"id":"B","type":"text","value":"M = 10m always"},{"id":"C","type":"text","value":"M = m²"},{"id":"D","type":"text","value":"M = 1/m always"}],
+ "answer":"A",
+ "explanation":"For dilute aqueous solutions with density close to 1 kg L⁻¹, molarity and molality are numerically close.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A 10% (w/w) solution contains 10 g solute in:",
+ "options":[{"id":"A","type":"text","value":"100 g solution"},{"id":"B","type":"text","value":"100 g solvent"},{"id":"C","type":"text","value":"10 g solution"},{"id":"D","type":"text","value":"1 L solution"}],
+ "answer":"A",
+ "explanation":"10% w/w means 10 g solute per 100 g solution.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"For 100 g of a 10% (w/w) solution, the solvent mass is:",
+ "options":[{"id":"A","type":"text","value":"90 g"},{"id":"B","type":"text","value":"10 g"},{"id":"C","type":"text","value":"100 g"},{"id":"D","type":"text","value":"110 g"}],
+ "answer":"A",
+ "explanation":"Solvent mass = 100 − 10 = 90 g.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A 10% (w/w) solution contains a solute of molar mass 50 g mol⁻¹. Moles of solute in 100 g solution are:",
+ "options":[{"id":"A","type":"text","value":"0.2 mol"},{"id":"B","type":"text","value":"2 mol"},{"id":"C","type":"text","value":"0.02 mol"},{"id":"D","type":"text","value":"5 mol"}],
+ "answer":"A",
+ "explanation":"10 g / 50 g mol⁻¹ = 0.2 mol.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"If 0.2 mol solute is present in 90 g solvent, the molality is approximately:",
+ "options":[{"id":"A","type":"text","value":"2.22 m"},{"id":"B","type":"text","value":"0.22 m"},{"id":"C","type":"text","value":"1.8 m"},{"id":"D","type":"text","value":"22.2 m"}],
+ "answer":"A",
+ "explanation":"90 g = 0.09 kg; m = 0.2/0.09 ≈ 2.22 m.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"Conversion between molarity and molality requires knowledge of:",
+ "options":[{"id":"A","type":"text","value":"Solution density and solute molar mass"},{"id":"B","type":"text","value":"Only pressure"},{"id":"C","type":"text","value":"Only boiling point"},{"id":"D","type":"text","value":"Only atomic number"}],
+ "answer":"A",
+ "explanation":"Density connects solution mass and volume, while molar mass converts mass to moles.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A solution has density 1 g mL⁻¹ and contains 10 g solute of molar mass 100 g mol⁻¹ in 100 g solution. Its molarity is approximately:",
+ "options":[{"id":"A","type":"text","value":"1 M"},{"id":"B","type":"text","value":"0.1 M"},{"id":"C","type":"text","value":"10 M"},{"id":"D","type":"text","value":"0.01 M"}],
+ "answer":"A",
+ "explanation":"There are 0.1 mol solute and approximately 0.100 L solution, giving 1 M.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A 20% (w/w) solution of a solute with molar mass 40 g mol⁻¹ has molality:",
+ "options":[{"id":"A","type":"text","value":"6.25 m"},{"id":"B","type":"text","value":"5 m"},{"id":"C","type":"text","value":"0.625 m"},{"id":"D","type":"text","value":"2 m"}],
+ "answer":"A",
+ "explanation":"In 100 g solution, solute = 20 g = 0.5 mol and solvent = 80 g = 0.08 kg; m = 6.25 m.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"Mass percentage can be converted to molality when:",
+ "options":[{"id":"A","type":"text","value":"Molar mass of solute is known"},{"id":"B","type":"text","value":"Only solution volume is known"},{"id":"C","type":"text","value":"Only pressure is known"},{"id":"D","type":"text","value":"No molar mass is needed"}],
+ "answer":"A",
+ "explanation":"Mass percentage gives masses; molar mass is required to convert solute mass to moles.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"Molarity is based on:",
+ "options":[{"id":"A","type":"text","value":"Moles of solute per litre of solution"},{"id":"B","type":"text","value":"Moles of solute per kilogram of solvent"},{"id":"C","type":"text","value":"Mass percent"},{"id":"D","type":"text","value":"Moles of solvent per litre"}],
+ "answer":"A",
+ "explanation":"Molarity uses litre of solution as the denominator.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"Molality is based on:",
+ "options":[{"id":"A","type":"text","value":"Moles of solute per kilogram of solvent"},{"id":"B","type":"text","value":"Moles of solute per litre of solution"},{"id":"C","type":"text","value":"Mass of solution per litre"},{"id":"D","type":"text","value":"Volume percent"}],
+ "answer":"A",
+ "explanation":"Molality uses kilogram of solvent as the denominator.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"Which concentration unit is essentially temperature independent?",
+ "options":[{"id":"A","type":"text","value":"Molality"},{"id":"B","type":"text","value":"Molarity"},{"id":"C","type":"text","value":"Volume percentage"},{"id":"D","type":"text","value":"Volume-based normality"}],
+ "answer":"A",
+ "explanation":"Molality is mass-based and is not affected by thermal expansion of solution volume.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"If a solution density increases while its molality and solute identity remain fixed, its molarity generally:",
+ "options":[{"id":"A","type":"text","value":"Increases"},{"id":"B","type":"text","value":"Decreases"},{"id":"C","type":"text","value":"Remains exactly unchanged"},{"id":"D","type":"text","value":"Becomes zero"}],
+ "answer":"A",
+ "explanation":"Greater density means less solution volume for a given mass, increasing molarity.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A 2 M solution contains 2 mol solute per:",
+ "options":[{"id":"A","type":"text","value":"1 L solution"},{"id":"B","type":"text","value":"1 kg solvent"},{"id":"C","type":"text","value":"1 L solvent"},{"id":"D","type":"text","value":"100 g solution"}],
+ "answer":"A",
+ "explanation":"This is the definition of molarity.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+},
+{
+ "question":"A 2 m solution contains 2 mol solute per:",
+ "options":[{"id":"A","type":"text","value":"1 kg solvent"},{"id":"B","type":"text","value":"1 L solution"},{"id":"C","type":"text","value":"1 kg solution"},{"id":"D","type":"text","value":"1 L solvent"}],
+ "answer":"A",
+ "explanation":"This is the definition of molality.",
+ "difficulty":"neet","tags":["concentration","molarity","molality","solutions","neet"]
+}
 ];

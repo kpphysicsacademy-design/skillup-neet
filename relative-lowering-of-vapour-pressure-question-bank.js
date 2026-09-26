@@ -14,4 +14,19 @@ window.SkillUpRelativeLoweringVapourPressureQuestions = [
 {q:"For two dilute solutions of the same non-volatile solute in the same solvent, the relative lowering of vapour pressure is greater for the solution having:",o:["Lower solute mole fraction","Higher solute mole fraction","Lower solvent mole fraction only if temperature changes","Higher solvent vapour pressure only"],a:1,e:"Relative lowering equals the solute mole fraction, so it increases as the solute mole fraction increases."},
 {q:"Which equation connects vapour pressure lowering with mole fraction of solute?",o:["(p⁰−p)/p⁰ = x₂","(p⁰−p)/p⁰ = x₁","p⁰/p = x₂","p−p⁰ = x₁"],a:0,e:"Using Raoult's law, p = x₁p⁰, hence (p⁰−p)/p⁰ = 1−x₁ = x₂."},
 {q:"For a non-volatile solute, if the solution has a higher solute mole fraction, its solvent vapour pressure will generally be:",o:["Higher","Lower","Unchanged at all compositions","Always equal to atmospheric pressure"],a:1,e:"Increasing solute mole fraction decreases solvent mole fraction, so Raoult's law predicts a lower solvent vapour pressure."}
-];
+,
+{"q":"If p° = 200 kPa and p = 190 kPa, the relative lowering is:","o":["0.005","0.05","0.10","0.95"],"a":1,"e":"(200−190)/200 = 0.05."},
+{"q":"A solution contains 2 mol solute and 18 mol solvent. The relative lowering of vapour pressure is:","o":["0.05","0.10","0.90","0.20"],"a":1,"e":"xsolute = 2/(2+18) = 0.10. Correct value is 0.10; therefore the correct option is B."},
+{"q":"If the mole fraction of solvent is 0.92, the relative lowering of vapour pressure is:","o":["0.08","0.92","0.8464","1.08"],"a":0,"e":"Relative lowering = 1−xsolvent = 0.08."},
+{"q":"A pure solvent has vapour pressure 80 kPa. A solution has vapour pressure 76 kPa. The percentage lowering is:","o":["2%","5%","20%","95%"],"a":1,"e":"Percentage lowering = (80−76)/80 × 100 = 5%."},
+{"q":"For a dilute solution, relative lowering of vapour pressure is approximately n2/n1 when:","o":["n2 is much larger than n1","n2 is much smaller than n1","n1 is zero","Both are equal always"],"a":1,"e":"x2 = n2/(n1+n2) ≈ n2/n1 when n2 << n1."},
+{"q":"If relative lowering is 0.02 and pure solvent vapour pressure is 150 kPa, solution vapour pressure is:","o":["147 kPa","150 kPa","153 kPa","3 kPa"],"a":0,"e":"p = p°(1−0.02) = 150×0.98 = 147 kPa."},
+{"q":"For a non-volatile solute, lowering of vapour pressure is caused primarily by:","o":["Reduced mole fraction of solvent","Increased molar mass of solvent","Chemical conversion of solvent","Increase in atmospheric pressure"],"a":0,"e":"Adding solute decreases solvent mole fraction, reducing its escaping tendency and vapour pressure."},
+{"q":"If xsolute = 0.04, xsolvent is:","o":["0.04","0.96","1.04","0.16"],"a":1,"e":"For a binary solution, xsolute + xsolvent = 1, so xsolvent = 0.96."},
+{"q":"If nsolute = 1 mol and nsolvent = 19 mol, relative lowering is:","o":["0.02","0.05","0.10","0.95"],"a":1,"e":"xsolute = 1/(1+19) = 0.05."},
+{"q":"A 5% relative lowering means the solution vapour pressure is what fraction of the pure solvent pressure?","o":["0.05","0.95","1.05","5.0"],"a":1,"e":"p/p° = 1−0.05 = 0.95."},
+{"q":"Which quantity must be dimensionless?","o":["Relative lowering of vapour pressure","Vapour pressure","Molar mass","Temperature"],"a":0,"e":"Relative lowering is a ratio of pressures and therefore has no unit."},
+{"q":"If the relative lowering changes from 0.10 to 0.20, the solute mole fraction in the simple non-volatile-solute model:","o":["Decreases","Increases","Becomes zero","Must remain 0.10"],"a":1,"e":"For the standard model, relative lowering equals xsolute, so it increases from 0.10 to 0.20."},
+{"q":"For a non-volatile solute, p/p° is equal to:","o":["xsolvent","xsolute","1/xsolvent","xsolute+1"],"a":0,"e":"Raoult's law gives p = xsolvent p°, hence p/p° = xsolvent."},
+{"q":"A solution has xsolvent = 0.88 and pure solvent pressure 50 kPa. Its vapour pressure is:","o":["6 kPa","44 kPa","50 kPa","56.8 kPa"],"a":1,"e":"p = 0.88×50 = 44 kPa."},
+{"q":"A solution has 3 mol non-volatile solute and 27 mol solvent. Its relative lowering is:","o":["0.03","0.10","0.90","0.111"],"a":1,"e":"xsolute = 3/(3+27) = 0.10."}];

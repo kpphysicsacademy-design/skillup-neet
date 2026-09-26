@@ -658,5 +658,650 @@ window.SkillUpChemistryChemicalEquilibriumQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
+  },
+  {
+    "id": "CHEM-MCQ-002316",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For a reaction at equilibrium, the reaction quotient Q has a value:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Equal to K"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Always zero"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always one"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Greater than K"
+      }
+    ],
+    "answer": "A",
+    "explanation": "At equilibrium, Q equals the equilibrium constant K.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002317",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For 2SO2(g) + O2(g) ⇌ 2SO3(g), the expression for Kc is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "[SO2]^2[O2]/[SO3]^2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "[SO3]^2/([SO2]^2[O2])"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "[SO3]/([SO2][O2])"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "[SO2][O2]/[SO3]"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Products appear in the numerator with powers equal to stoichiometric coefficients.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002318",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For CaCO3(s) ⇌ CaO(s) + CO2(g), the equilibrium expression is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Kc = [CaCO3]/[CaO][CO2]"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Kc = [CO2]"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Kc = [CaO][CO2]"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Kc = [CaCO3][CO2]"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Pure solids are omitted from the equilibrium expression, leaving the gaseous CO2 term.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002319",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "Pure solids are omitted from a heterogeneous equilibrium expression because their:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Activities are taken as unity"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Concentrations are always zero"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Masses are equal"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Molar masses are zero"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The activity of a pure solid is treated as unity.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002320",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For a reaction written in reverse, the new equilibrium constant is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "K"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "1/K"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "K²"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "K+1"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reversing a reaction inverts its equilibrium constant.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002321",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If a balanced equation is multiplied by 2, the new equilibrium constant is:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "K/2"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "2K"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "K²"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "sqrt(K)"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiplying the reaction coefficients by n raises K to the power n.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002322",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If two reactions are added to obtain an overall reaction, their equilibrium constants are:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Multiplied"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Always added"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Always subtracted"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Equal to zero"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Equilibrium constants multiply when chemical equations are added.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002323",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For an equilibrium with K much greater than 1, the equilibrium mixture generally contains:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Relatively more products"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Only reactants"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Equal amounts necessarily"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "No products"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A large K indicates products are thermodynamically favored relative to reactants.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002324",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For an equilibrium with K much less than 1, the equilibrium mixture generally contains:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Relatively more reactants"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Only products"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Equal amounts necessarily"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "No reactants"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A small K indicates reactants are favored at equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002325",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "A large equilibrium constant means:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "The reaction is product-favoured at equilibrium"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "The reaction is necessarily fast"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "The reaction has no activation energy"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "A catalyst is present"
+      }
+    ],
+    "answer": "A",
+    "explanation": "K describes equilibrium composition, not reaction rate.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002326",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "The equilibrium constant provides information primarily about:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Equilibrium composition"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Reaction speed only"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Activation energy only"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Collision frequency only"
+      }
+    ],
+    "answer": "A",
+    "explanation": "K indicates the relative amounts of reactants and products at equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002327",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If more reactant is added to an equilibrium system, K at the same temperature:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Remains unchanged"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Doubles"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Becomes zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Changes immediately"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Changing concentrations shifts the composition but does not change K at fixed temperature.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002328",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "If pressure is changed for a gaseous equilibrium at constant temperature, K:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Remains unchanged"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Always doubles"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Becomes zero"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Changes according to volume"
+      }
+    ],
+    "answer": "A",
+    "explanation": "K for a given reaction depends on temperature, not pressure.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002329",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For H2(g) + I2(g) ⇌ 2HI(g), increasing pressure at constant temperature causes:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "No shift in equilibrium composition"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "A shift toward HI"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "A shift toward H2 and I2"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "K to change"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Both sides contain two moles of gas, so pressure change does not shift equilibrium.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
+  },
+  {
+    "id": "CHEM-MCQ-002330",
+    "subject": "chemistry",
+    "questionType": "structure",
+    "question": "For an endothermic equilibrium, decreasing temperature generally favours:",
+    "options": [
+      {
+        "id": "A",
+        "type": "text",
+        "value": "Reactants"
+      },
+      {
+        "id": "B",
+        "type": "text",
+        "value": "Products"
+      },
+      {
+        "id": "C",
+        "type": "text",
+        "value": "Both equally"
+      },
+      {
+        "id": "D",
+        "type": "text",
+        "value": "Neither"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Cooling favours the exothermic direction, which is the reverse for an endothermic forward reaction.",
+    "difficulty": "neet",
+    "tags": [
+      "chemical-equilibrium",
+      "equilibrium-constant",
+      "le-chatelier",
+      "neet"
+    ],
+    "source": "SkillUp Chemistry — Chemical Equilibrium question bank",
+    "learning": {
+      "xp": 10,
+      "masteryWeight": 1,
+      "reviewEligible": true
+    }
   }
 ];

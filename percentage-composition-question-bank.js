@@ -13,5 +13,20 @@ window.SkillUpPercentageCompositionQuestions=[
 {q:"For a compound with formula AB₂, the contribution of element B to one mole is:",o:["Atomic mass of A","Atomic mass of B","2 × atomic mass of B","Molar mass of A"],a:2,e:"AB₂ contains two atoms of B per formula unit, so B contributes 2 × its atomic mass per mole of compound."},
 {q:"A compound contains 40% carbon by mass. In 200 g of the compound, the mass of carbon is:",o:["40 g","60 g","80 g","100 g"],a:2,e:"Mass of carbon = 40/100 × 200 g = 80 g."},
 {q:"A compound contains 25% element X by mass. The mass of X in 80 g of compound is:",o:["10 g","20 g","25 g","40 g"],a:1,e:"Mass of X = 25/100 × 80 g = 20 g."},
-{q:"Percentage composition data can be used to determine the:",o:["Empirical formula when combined with atomic masses","Speed of light","Boiling point only","Number of neutrons directly"],a:0,e:"Mass percentages can be converted into relative moles using atomic masses, allowing the empirical formula to be determined."}
+{q:"Percentage composition data can be used to determine the:",o:["Empirical formula when combined with atomic masses","Speed of light","Boiling point only","Number of neutrons directly"],a:0,e:"Mass percentages can be converted into relative moles using atomic masses, allowing the empirical formula to be determined."},
+{q:"The percentage of oxygen in H₂O is approximately:",o:["11.1%","50.0%","88.9%","94.1%"],a:2,e:"Oxygen contributes 16/18 × 100 ≈ 88.9% of the mass of H₂O."},
+{q:"The percentage of carbon in CO₂ is approximately:",o:["27.27%","36.36%","72.73%","44.0%"],a:0,e:"Carbon contributes 12/44 × 100 = 27.27%."},
+{q:"The percentage of oxygen in CO₂ is approximately:",o:["27.27%","36.36%","72.73%","88.89%"],a:2,e:"Oxygen contributes 32/44 × 100 = 72.73%."},
+{q:"The percentage of hydrogen in NH₃ is approximately:",o:["5.88%","17.65%","82.35%","94.12%"],a:1,e:"Hydrogen contributes 3/17 × 100 ≈ 17.65%."},
+{q:"The percentage of nitrogen in NH₃ is approximately:",o:["17.65%","72.73%","82.35%","94.12%"],a:2,e:"Nitrogen contributes 14/17 × 100 ≈ 82.35%."},
+{q:"Percentage of calcium in CaCO₃ is:",o:["20%","40%","56%","60%"],a:1,e:"Calcium contributes 40/100 × 100 = 40%."},
+{q:"Percentage of carbon in CaCO₃ is:",o:["12%","20%","40%","48%"],a:0,e:"Carbon contributes 12/100 × 100 = 12%."},
+{q:"Percentage of oxygen in CaCO₃ is:",o:["40%","48%","52%","60%"],a:1,e:"Oxygen contributes 48/100 × 100 = 48%."},
+{q:"Percentage of sulfur in H₂SO₄ is approximately:",o:["16.33%","32.65%","65.31%","98%"],a:1,e:"Sulfur contributes 32/98 × 100 ≈ 32.65%."},
+{q:"Percentage of oxygen in H₂SO₄ is approximately:",o:["32.65%","49.0%","65.31%","98.0%"],a:2,e:"Oxygen contributes 64/98 × 100 ≈ 65.31%."},
+{q:"Percentage of sodium in Na₂CO₃ is approximately:",o:["21.70%","43.40%","45.28%","54.72%"],a:1,e:"Na₂CO₃ has molar mass 106; sodium contributes 46/106 × 100 ≈ 43.40%."},
+{q:"Percentage of carbon in Na₂CO₃ is approximately:",o:["11.32%","12.00%","43.40%","45.28%"],a:0,e:"Carbon contributes 12/106 × 100 ≈ 11.32%."},
+{q:"A compound contains 40% carbon by mass. In 100 g of the compound, carbon mass is:",o:["4 g","40 g","60 g","100 g"],a:1,e:"40% of 100 g is 40 g."},
+{q:"The sum of mass percentages of all elements in a pure compound is:",o:["50%","90%","100%","Depends on the compound"],a:2,e:"All constituent element percentages together account for 100% of the compound's mass."},
+{q:"If 12 g carbon is present in 44 g CO₂, carbon percentage is:",o:["12%","27.27%","36.36%","44%"],a:1,e:"12/44 × 100 = 27.27%."}
 ];

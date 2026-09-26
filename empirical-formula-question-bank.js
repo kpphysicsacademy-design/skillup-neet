@@ -21,7 +21,6 @@ window.SkillUpEmpiricalFormulaQuestions=[
 {q:"If the mole ratio is 1:1.33, a suitable multiplier is approximately:",o:["2","3","4","10"],a:1,e:"1.33 is approximately 4/3, so multiplying the ratio by 3 gives about 3:4."},
 {q:"If the mole ratio is 1:1.25, the suitable multiplier is:",o:["2","3","4","5"],a:2,e:"1.25 = 5/4, so multiplying by 4 gives 4:5."},
 {q:"If the mole ratio is 1:1.67, the suitable multiplier is approximately:",o:["2","3","4","6"],a:1,e:"1.67 is approximately 5/3, so multiplying by 3 gives about 3:5."},
-{q:"For a compound containing 50% C and 50% O by mass, the simplest mole ratio C:O is:",o:["1:1","2:1","1:2","3:2"],a:2,e:"Moles are 50/12 and 50/16; dividing by the smaller gives approximately 4:3, not 1:2. Therefore the provided options are not exact; this illustrates why mass percentages must be converted to moles carefully."},
 {q:"The empirical formula of CH₃COOH is:",o:["CH₂O","C₂H₄O₂","CHO","C₂H₃O"],a:0,e:"Acetic acid has molecular formula C₂H₄O₂; dividing all subscripts by 2 gives CH₂O."},
 {q:"The empirical formula of C₂H₂ is:",o:["CH","CH₂","C₂H₂","C₂H"],a:0,e:"Dividing the subscripts 2:2 by 2 gives CH."},
 {q:"The empirical formula of C₄H₈O₂ is:",o:["C₂H₄O","CH₂O","C₄H₈O₂","C₂H₈O"],a:1,e:"Dividing all subscripts by 2 gives C₂H₄O, not CH₂O. Therefore the correct option is C₂H₄O."},

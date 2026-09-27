@@ -7,8 +7,6 @@ window.SkillUpGibbsEnergyQuestions=[
 {q:"At equilibrium, for a reaction at constant T and P:",o:["ΔG = 0","ΔG < 0","ΔG > 0","ΔH = 0 necessarily"],a:0,e:"At equilibrium there is no net Gibbs driving force, so ΔG = 0."},
 {q:"If ΔG > 0 for a process under specified conditions, the forward process is:",o:["Nonspontaneous","Spontaneous","At equilibrium necessarily","Impossible under all conditions"],a:0,e:"Positive ΔG means the forward direction is thermodynamically unfavorable under those conditions."},
 {q:"Gibbs free energy is a:",o:["State function","Path function","Reaction rate","Concentration unit"],a:0,e:"Gibbs free energy depends only on the state of the system."},
-{q:"The term TΔS in ΔG = ΔH − TΔS represents:",o:["The temperature-weighted entropy contribution","Pressure-volume work only","Activation energy","Bond energy only"],a:0,e:"TΔS measures the entropy contribution to Gibbs free energy."},
-{q:"The SI unit of molar Gibbs free energy change is commonly:",o:["kJ mol⁻¹","kJ L⁻¹","mol kJ⁻¹","K mol⁻¹"],a:0,e:"Molar Gibbs energy changes are commonly expressed in kJ mol⁻¹."},
 {q:"If ΔH = −100 kJ mol⁻¹ and ΔS = −0.2 kJ mol⁻¹ K⁻¹ at 300 K, ΔG is:",o:["−40 kJ mol⁻¹","−160 kJ mol⁻¹","+40 kJ mol⁻¹","+160 kJ mol⁻¹"],a:0,e:"ΔG = −100 − 300(−0.2) = −40 kJ mol⁻¹."},
 {q:"If ΔH = +50 kJ mol⁻¹ and ΔS = +0.2 kJ mol⁻¹ K⁻¹ at 300 K, ΔG is:",o:["−10 kJ mol⁻¹","+110 kJ mol⁻¹","+50 kJ mol⁻¹","−50 kJ mol⁻¹"],a:0,e:"ΔG = 50 − 300(0.2) = −10 kJ mol⁻¹."},
 {q:"For ΔH < 0 and ΔS > 0, a process is:",o:["Spontaneous at all temperatures under the stated conditions","Never spontaneous","At equilibrium always","Spontaneous only at 0 K"],a:0,e:"Both terms favor negative ΔG: negative ΔH and positive entropy change."},
@@ -21,7 +19,6 @@ window.SkillUpGibbsEnergyQuestions=[
 {q:"Gibbs free energy does NOT directly determine:",o:["Reaction rate","Spontaneity","Equilibrium condition","Thermodynamic driving force"],a:0,e:"Kinetics determines rate; ΔG describes thermodynamic favorability."},
 {q:"A spontaneous process can be:",o:["Slow","Instantaneous only","Fast by definition","Impossible"],a:0,e:"Thermodynamic spontaneity does not specify how rapidly a process occurs."},
 {q:"A catalyst changes the Gibbs free energy difference between reactants and products by:",o:["No change","Making ΔG always negative","Making ΔG zero","Doubling ΔG"],a:0,e:"A catalyst lowers activation barriers but does not change the thermodynamic ΔG between states."},
-{q:"At constant temperature and pressure, the maximum non-expansion work obtainable from a reversible process is related to:",o:["Decrease in Gibbs free energy","Increase in enthalpy only","Entropy alone","Internal energy only"],a:0,e:"Under appropriate reversible conditions, −ΔG gives the maximum useful non-PV work."},
 {q:"The relation between standard Gibbs energy and equilibrium constant is:",o:["ΔG° = −RT ln K","ΔG° = RT ln K","ΔG° = −R/K","ΔG° = KRT"],a:0,e:"The standard relation is ΔG° = −RT ln K."},
 {q:"If K > 1 for a reaction, ΔG° is generally:",o:["Negative","Positive","Zero always","Undefined"],a:0,e:"Since ln K > 0, −RT ln K is negative."},
 {q:"If K = 1, ΔG° is:",o:["Zero","Positive","Negative","Infinite"],a:0,e:"ln 1 = 0, so ΔG° = 0."},
@@ -31,8 +28,6 @@ window.SkillUpGibbsEnergyQuestions=[
 {q:"If ΔG° = 0, the equilibrium constant is:",o:["1","0","∞","−1"],a:0,e:"From ΔG° = −RT ln K, zero requires ln K = 0, so K = 1."},
 {q:"Gibbs free energy combines:",o:["Enthalpy and entropy effects","Pressure and volume only","Mass and density only","Atomic number and mass number"],a:0,e:"G = H − TS combines energetic and entropy contributions."},
 {q:"Entropy increase tends to make ΔG:",o:["More negative through the −TΔS term","More positive always","Unchanged always","Equal to ΔH"],a:0,e:"A positive ΔS contributes negatively to ΔG."},
-{q:"An increase in temperature magnifies the contribution of:",o:["Entropy term TΔS","Atomic mass","Molar volume only","Activation energy necessarily"],a:0,e:"The entropy contribution is multiplied by temperature."},
 {q:"If ΔS = 0, then at constant temperature:",o:["ΔG = ΔH","ΔG = −TΔH","ΔG = TΔH","ΔG = 0 always"],a:0,e:"With ΔS = 0, the Gibbs relation reduces to ΔG = ΔH."},
-{q:"If ΔH = 0 and ΔS > 0 at T > 0, then:",o:["ΔG < 0","ΔG > 0","ΔG = 0","ΔG = ΔS"],a:0,e:"ΔG = −TΔS, which is negative for positive T and positive ΔS."},
 {q:"Which statement is correct?",o:["Gibbs energy helps predict spontaneity at constant temperature and pressure","Negative ΔG guarantees a fast reaction","A catalyst changes ΔG°","Equilibrium requires ΔG < 0"],a:0,e:"Gibbs energy provides thermodynamic criteria, while kinetics and catalysts concern reaction rate."}
 ];

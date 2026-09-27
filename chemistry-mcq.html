@@ -38,7 +38,7 @@ h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}
 .score{text-align:center;font-size:44px;font-weight:950;color:var(--n)}
 .warn{color:#8a5b00;background:#fff7df;border:1px solid #efdca3;border-radius:12px;padding:11px;font-size:11px;margin-top:10px}
 </style>
-<style>.skillup-reaction{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9}.skillup-equation{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9;font-size:1.08em}.skillup-inline-equation{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}.skillup-chem-inline{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}</style><script>window.MathJax={tex:{inlineMath:[["\\\\(","\\\\)"],["$","$"]],displayMath:[["\\\\[","\\\\]"],["$$","$$"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script></head><body>
+<style>.skillup-reaction{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9}.skillup-equation{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9;font-size:1.08em}.skillup-inline-equation{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}.skillup-chem-inline{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}</style><script>window.MathJax={tex:{inlineMath:[["\\\\(","\\\\)"],["$","$"]],displayMath:[["\\\\[","\\\\]"],["$","$"]],packages:{'[+]':['mhchem']}},loader:{load:['[tex]/mhchem']},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script></head><body>
 <header class="top"><div class="nav">
 <a class="back" href="chemistry-home.html" aria-label="Back to Chemistry Path" title="Back to Chemistry Path">⚗️</a>
 <div class="brand">SkillUp<small>CHEMISTRY • CONCEPT QUIZ</small></div>
@@ -67,7 +67,16 @@ var items=[],i=0,score=0;
 var BANK_VERSION='20260926-chemistry-architecture-v6';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function richText(v){var s=esc(v);s=s.replace(/\\$\\$([\\s\\S]+?)\\$\\$/g,'<div class="skillup-equation">\\\\[$1\\\\]</div>');s=s.replace(/\\\\\\(([\\s\\S]+?)\\\\\\)/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');s=s.replace(/\\$([^$\\n]+)\\$/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');return s;}function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function richText(v){
+ var s=esc(v);
+ s=s.replace(/\\[\\[reaction:([\\s\\S]+?)\\]\\]/g,'<div class="skillup-reaction">\\\\(\\\\ce{$1}\\\\)</div>');
+ s=s.replace(/\\[\\[chem:([\\s\\S]+?)\\]\\]/g,'<span class="skillup-chem-inline">\\\\(\\\\ce{$1}\\\\)</span>');
+ s=s.replace(/\\[\\[formula:([\\s\\S]+?)\\]\\]/g,'<div class="skillup-equation">\\\\[$1\\\\]</div>');
+ s=s.replace(/\\$\\$([\\s\\S]+?)\\$\\$/g,'<div class="skillup-equation">\\\\[$1\\\\]</div>');
+ s=s.replace(/\\\\\\(([\\s\\S]+?)\\\\\\)/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');
+ s=s.replace(/\\$([^$\\n]+)\\$/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');
+ return s;
+}function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){
  var s=slug(v),out=[];
  if(s==='matter-and-its-nature')out.push('matter-and-its-nature-question-bank.js');

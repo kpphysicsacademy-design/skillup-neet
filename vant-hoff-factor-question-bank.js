@@ -328,16 +328,5 @@ window.SkillUpChemistryVantHoffFactorQuestions = [
     ],
     "a": 0,
     "e": "The van’t Hoff factor is a ratio, so it is dimensionless."
-  },
-  {
-    "q": "For an ideal electrolyte producing ν particles per formula unit on complete dissociation, i equals:",
-    "o": [
-      "1/ν",
-      "ν",
-      "ν + 1",
-      "ν − 1"
-    ],
-    "a": 1,
-    "e": "Complete ideal dissociation produces ν particles per original formula unit, so i = ν."
   }
 ];

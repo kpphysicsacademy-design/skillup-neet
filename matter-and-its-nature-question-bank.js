@@ -31,3 +31,5 @@ window.skillUpMatterNatureQuestions = [
 {q:'Which statement about a pure compound is correct?',o:['Its composition can vary continuously','Its constituent elements are chemically combined in a fixed ratio','It can always be separated by filtration','It has properties identical to its elements'],a:1,e:'A compound has elements chemically combined in a definite ratio by mass.'},
 {q:'A mixture differs from a compound because the components of a mixture:',o:['Are always in a fixed ratio','Lose all their individual properties','Can generally be separated by physical methods','Are chemically combined'],a:2,e:'Mixture components retain their identities and can generally be separated physically.'}
 ];
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
+window.SKILLUP_CHEMISTRY_BANK["matter-and-its-nature"]=window.skillUpMatterNatureQuestions;

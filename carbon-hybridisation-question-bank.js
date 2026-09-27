@@ -1,4 +1,3 @@
-window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["carbon-hybridisation"]=[
   {
     "question": "Hybridisation is the process of:",
@@ -689,28 +688,5 @@ window.SKILLUP_CHEMISTRY_BANK["carbon-hybridisation"]=[
     ],
     "answer": "a",
     "explanation": "Ethene carbon uses sp2 hybrids for its three sigma bonds."
-  },
-  {
-    "question": "Which statement best summarizes carbon hybridisation?",
-    "options": [
-      {
-        "id": "a",
-        "value": "sp3 gives tetrahedral, sp2 gives trigonal-planar, and sp gives linear geometry."
-      },
-      {
-        "id": "b",
-        "value": "sp3 gives linear, sp2 gives tetrahedral, and sp gives octahedral geometry."
-      },
-      {
-        "id": "c",
-        "value": "All three give the same geometry."
-      },
-      {
-        "id": "d",
-        "value": "Hybridisation determines only atomic number."
-      }
-    ],
-    "answer": "a",
-    "explanation": "These three common carbon hybridisation schemes correspond to distinct geometries and bonding patterns."
   }
 ];

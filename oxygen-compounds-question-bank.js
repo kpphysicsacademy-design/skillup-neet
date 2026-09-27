@@ -1,4 +1,3 @@
-window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["oxygen-compounds"]=[
   {
     "question": "Which group is characteristic of alcohols?",
@@ -689,28 +688,5 @@ window.SKILLUP_CHEMISTRY_BANK["oxygen-compounds"]=[
     ],
     "answer": "a",
     "explanation": "CH3COCH3 is propanone, a ketone."
-  },
-  {
-    "question": "Which statement best summarizes oxygen-containing organic compounds?",
-    "options": [
-      {
-        "id": "a",
-        "value": "Their properties depend strongly on the oxygen functional group and the carbon framework."
-      },
-      {
-        "id": "b",
-        "value": "All oxygen compounds have identical reactions."
-      },
-      {
-        "id": "c",
-        "value": "Only alcohols contain oxygen."
-      },
-      {
-        "id": "d",
-        "value": "Oxygen compounds cannot undergo oxidation-reduction reactions."
-      }
-    ],
-    "answer": "a",
-    "explanation": "Different oxygen functional groups have characteristic reactivity and physical properties."
   }
 ];

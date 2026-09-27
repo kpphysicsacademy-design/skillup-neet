@@ -30,5 +30,5 @@ window.SKILLUP_CHEMISTRY_BANK["complex-formation"]=[
 {question:"In [Ag(NH3)2]+, the coordination number of Ag is:",options:[{id:"a",value:"2"},{id:"b",value:"1"},{id:"c",value:"3"},{id:"d",value:"6"}],answer:"a",explanation:"Two NH3 donor atoms are directly bonded to Ag+."},
 {question:"A ligand that can coordinate through different donor atoms is called:",options:[{id:"a",value:"ambidentate ligand"},{id:"b",value:"monodentate ligand only"},{id:"c",value:"inert ligand"},{id:"d",value:"counter-ion"}],answer:"a",explanation:"Ambidentate ligands have two or more possible donor atoms but normally coordinate through one at a time."},
 {question:"Which is an ambidentate ligand?",options:[{id:"a",value:"SCN−"},{id:"b",value:"NH3"},{id:"c",value:"en"},{id:"d",value:"EDTA4−"}],answer:"a",explanation:"SCN− can coordinate through sulfur or nitrogen, making it ambidentate."},
-{question:"Complex formation can change the properties of a transition-metal ion, including its:",options:[{id:"a",value:"colour, magnetic behaviour and reactivity"},{id:"b",value:"atomic number"},{id:"c",value:"number of protons"},{id:"d",value:"identity of the element"}],answer:"a",explanation:"Ligand coordination changes the electronic environment and can alter colour, magnetism and chemical reactivity."}
+
 ];

@@ -405,7 +405,7 @@ window.SkillUpDissociationQuestions=[
       {
         "id": "C",
         "type": "text",
-        "value": "1.75"
+        "value": "1.50"
       },
       {
         "id": "D",
@@ -413,7 +413,7 @@ window.SkillUpDissociationQuestions=[
         "value": "2.00"
       }
     ],
-    "answer": "C",
+    "answer": "B",
     "explanation": "i=1+2(0.25)=1.50.",
     "difficulty": "neet",
     "tags": [

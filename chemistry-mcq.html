@@ -68,7 +68,7 @@ var items=[],i=0,score=0;
 var BANK_VERSION='20260926-chemistry-architecture-v6';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function richText(v){var s=esc(v);s=s.replace(/\\$\\$([\\s\\S]+?)\\$\\$/g,'<div class="skillup-equation">\\\\[$1\\\\]</div>');s=s.replace(/\\\\\\(([\\s\\S]+?)\\\\\\)/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');s=s.replace(/\\$([^$\\n]+)\\$/g,'<span class="skillup-inline-equation">\\\\($1\\\\)</span>');return s;}function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){
  var s=slug(v),out=[];
  if(s==='matter-and-its-nature')out.push('matter-and-its-nature-question-bank.js');
@@ -163,7 +163,7 @@ function render(){
  }
  var x=items[i],opts=x.o||[],ans=typeof x.a==='number'?x.a:opts.indexOf(x.a);
  bar.style.width=(i/items.length*100)+'%';
- content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
+ content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+richText(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
  document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,ans,x);};});
  document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
 }

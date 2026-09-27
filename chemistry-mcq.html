@@ -153,6 +153,7 @@ function showStatus(msg){
  content.innerHTML='<section class="status"><b>Quiz unavailable</b><p class="muted">'+esc(msg)+'</p></section>';
  bankCount.textContent='Not connected';
 }
+function typeset(){if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([content]).catch(function(){});}
 function render(){
  if(i>=items.length){
   bar.style.width='100%';
@@ -164,6 +165,7 @@ function render(){
  bar.style.width=(i/items.length*100)+'%';
  content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+richText(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+richText(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
  document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,ans,x);};});
+ typeset();
  document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
 }
 function answer(choice,ans,x){

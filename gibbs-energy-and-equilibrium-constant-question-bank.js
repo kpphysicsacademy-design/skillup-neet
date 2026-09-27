@@ -28,6 +28,4 @@ window.SkillUpGibbsEnergyEquilibriumQuestions=[
 {q:"A large negative ΔG° corresponds to:",o:["Large K","Small K","K = 1","K = 0"],a:0,e:"Negative ΔG° corresponds to K > 1."},
 {q:"The equilibrium constant K at a given temperature is related to:",o:["Standard Gibbs energy change","Reaction rate only","Catalyst concentration","Initial concentration only"],a:0,e:"K is a thermodynamic quantity related to ΔG°."},
 {q:"A catalyst changes the value of K at a fixed temperature by:",o:["Not changing it","Doubling it","Halving it","Making it zero"],a:0,e:"A catalyst changes rates of forward and reverse reactions equally and does not change K."},
-{q:"Increasing reactant concentration generally changes:",o:["Q, and therefore the direction of spontaneous change","K at fixed temperature","ΔG° automatically","The stoichiometric equation"],a:0,e:"Changing composition changes Q; K remains constant at fixed temperature."},
-{q:"Which statement is correct?",o:["At equilibrium Q = K and ΔG = 0","At equilibrium Q = 0","K changes whenever concentration changes","ΔG° is always zero at equilibrium"],a:0,e:"These are the fundamental Gibbs-energy/equilibrium relationships."}
-];
+{q:"Increasing reactant concentration generally changes:",o:["Q, and therefore the direction of spontaneous change","K at fixed temperature","ΔG° automatically","The stoichiometric equation"],a:0,e:"Changing composition changes Q; K remains constant at fixed temperature."}, ];

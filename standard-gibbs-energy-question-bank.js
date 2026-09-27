@@ -28,6 +28,4 @@ window.SkillUpStandardGibbsEnergyQuestions=[
 {q:"If ΔG°rxn = 0, then the equilibrium constant is:",o:["1","0","∞","−1"],a:0,e:"ΔG° = −RT ln K; zero requires K = 1."},
 {q:"A very large positive ΔG° corresponds to:",o:["A very small K","A very large K","K = 1","K = ∞"],a:0,e:"Positive ΔG° makes K less than one; a large positive value gives a very small K."},
 {q:"A very large negative ΔG° corresponds to:",o:["A very large K","A very small K","K = 1","K = 0"],a:0,e:"Large negative ΔG° corresponds to a large equilibrium constant."},
-{q:"Which quantity is used to calculate ΔG°rxn from formation data?",o:["Standard Gibbs energies of formation","Atomic numbers only","Boiling points only","Reaction rates only"],a:0,e:"Formation Gibbs energies are combined using stoichiometric coefficients."},
-{q:"For a reaction at standard conditions, ΔG° < 0 indicates:",o:["Products are thermodynamically favored relative to reactants","Reactants are always favored","The reaction is necessarily fast","Equilibrium cannot occur"],a:0,e:"Negative standard Gibbs energy indicates a thermodynamic driving force toward products under standard conditions."}
-];
+{q:"Which quantity is used to calculate ΔG°rxn from formation data?",o:["Standard Gibbs energies of formation","Atomic numbers only","Boiling points only","Reaction rates only"],a:0,e:"Formation Gibbs energies are combined using stoichiometric coefficients."}, ];

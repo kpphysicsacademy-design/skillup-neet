@@ -28,5 +28,5 @@ window.SkillUpHessLawQuestions=[
 {q:"If C → D has ΔH = +40 kJ, then D → C has ΔH:",o:["+40 kJ","−40 kJ","0 kJ","+80 kJ"],a:1,e:"Reversing a thermochemical equation changes the sign of ΔH."},
 {q:"For a reaction obtained by adding several thermochemical equations, the overall ΔH is:",o:["The algebraic sum of their ΔH values","Their product","Their average always","Always zero"],a:0,e:"Enthalpy changes add when thermochemical equations are added."},
 {q:"Hess's law is useful when a reaction's enthalpy cannot be:",o:["Measured directly conveniently","Written chemically","Balanced","Made reversible"],a:0,e:"Hess's law allows ΔH to be calculated from known reactions when direct measurement is difficult."},
-
+{q:"Which quantity remains unchanged when the pathway of a reaction is changed between the same initial and final states?",o:["Enthalpy change","Reaction time","Activation energy","Reaction rate"],a:0,e:"Enthalpy is a state function, so the overall enthalpy change depends only on the initial and final states."}
 ];

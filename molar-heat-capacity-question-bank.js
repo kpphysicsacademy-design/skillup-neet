@@ -30,3 +30,6 @@ window.SkillUpMolarHeatCapacityQuestions=[
 {q:"For one mole of an ideal gas, heat supplied at constant pressure is:",o:["Cp,mΔT","Cv,mΔT only","RΔT only","Cp,m/ΔT"],a:0,e:"For one mole, qp = Cp,mΔT."},
 {q:"Which statement is correct?",o:["Cp,m and Cv,m are molar heat capacities at constant pressure and volume","Cp,m is always less than Cv,m","Cv,m equals R for every gas","Molar heat capacity is a path function"],a:0,e:"Cp,m and Cv,m are defined per mole under constant-pressure and constant-volume conditions, respectively."}
 ];
+
+{q:"For an ideal gas, the molar heat capacities at constant pressure and volume are related by:",o:["Cₚ − Cᵥ = R","Cₚ + Cᵥ = R","Cₚ/Cᵥ = R","CₚCᵥ = R"],a:0,e:"For an ideal gas, Mayer's relation is Cₚ − Cᵥ = R."}
+];

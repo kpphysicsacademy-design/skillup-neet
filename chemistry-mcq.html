@@ -102,25 +102,44 @@ function isBank(v){
 }
 function loadScript(src,requestedSlug){
  return new Promise(function(resolve,reject){
-  var registry=window.SKILLUP_CHEMISTRY_BANK||{};
-  var registryBefore=registry[requestedSlug];
-  var before={};
-  Object.keys(window).forEach(function(k){before[k]=window[k];});
-  var sc=document.createElement('script');
-  sc.src=src+(src.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=6&t='+Date.now();
-  sc.onload=function(){
+  var base='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
+  var urls=[src,base+src],attempt=0,timer=null;
+  function inspect(){
    var direct=window.SKILLUP_CHEMISTRY_BANK&&window.SKILLUP_CHEMISTRY_BANK[requestedSlug];
-   if(isBank(direct)){resolve(direct);return;}
-   var found=[];
-   Object.keys(window).forEach(function(k){
-    if(before[k]===window[k])return;
-    var v=window[k];
-    if(isBank(v))found.push(v);
-   });
-   resolve(found[0]||null);
-  };
-  sc.onerror=function(){sc.remove();reject(new Error('not found'));};
-  document.head.appendChild(sc);
+   if(isBank(direct)){if(timer)clearTimeout(timer);resolve(direct);return true;}
+   return false;
+  }
+  function attemptLoad(){
+   if(attempt>=urls.length){reject(new Error('bank unavailable'));return;}
+   var url=urls[attempt++];
+   var registry=window.SKILLUP_CHEMISTRY_BANK||{};
+   var before={};
+   Object.keys(window).forEach(function(k){before[k]=window[k];});
+   var sc=document.createElement('script');
+   sc.src=url+(url.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=7&t='+Date.now();
+   var settled=false;
+   function next(){
+    if(settled)return;
+    settled=true;
+    if(timer)clearTimeout(timer);
+    sc.remove();
+    if(!inspect()){
+     var found=[];
+     Object.keys(window).forEach(function(k){
+      if(before[k]===window[k])return;
+      var v=window[k];
+      if(isBank(v))found.push(v);
+     });
+     if(found.length){resolve(found[0]);return;}
+     attemptLoad();
+    }
+   }
+   sc.onload=next;
+   sc.onerror=next;
+   timer=setTimeout(next,7000);
+   document.head.appendChild(sc);
+  }
+  attemptLoad();
  });
 }
 async function load(){

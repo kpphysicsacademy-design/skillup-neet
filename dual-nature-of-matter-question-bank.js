@@ -29,5 +29,4 @@ window.SkillUpXQuestions=[
 {q:"Which statement about matter waves is correct?",o:["They are associated with moving particles","They occur only for charged particles","They occur only for electrons","They have no measurable consequences"],a:0,e:"Matter waves are associated with material particles; experiments such as electron diffraction demonstrate them."},
 {q:"The wave nature of matter was experimentally supported by:",o:["Electron diffraction","Oil-drop charge measurement only","Alpha-particle scattering only","Photoelectric effect alone"],a:0,e:"Electron diffraction provided direct evidence supporting the matter-wave hypothesis."},
 {q:"If a particle's momentum increases by a factor of 3, its de Broglie wavelength:",o:["Becomes one-third","Becomes three times","Becomes nine times","Does not change"],a:0,e:"Because λ = h/p, tripling momentum reduces wavelength to one-third."},
-{q:"The de Broglie relation connects a particle's wavelength with its:",o:["Momentum","Temperature only","Charge only","Volume only"],a:0,e:"The fundamental relation is λ = h/p, directly connecting wavelength and momentum."}
 ];

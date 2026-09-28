@@ -29,5 +29,4 @@ window.SkillUpPhotoelectricEffectQuestions=[
 {q:"The photoelectric current is primarily related to the:",o:["Number of photoelectrons collected per unit time","Energy of each photon only","Wavelength only","Mass of the metal"],a:0,e:"Photoelectric current depends on the rate at which emitted electrons are collected."},
 {q:"The stopping potential is independent of light intensity when frequency is fixed above threshold because:",o:["Kmax is determined by photon energy and work function","Intensity changes the work function","Intensity changes Planck's constant","No electrons are emitted"],a:0,e:"At fixed frequency, each photon has the same energy; intensity changes photon number, not Kmax."},
 {q:"The work function can be expressed in joules or:",o:["Electron volts","Hertz only","Metres only","Tesla"],a:0,e:"Work function is an energy, so it can be expressed in joules or electron volts."},
-{q:"A metal has work function 4 eV. Light of photon energy 4 eV is incident. The emitted electrons have maximum kinetic energy:",o:["0 eV","4 eV","8 eV","1 eV"],a:0,e:"At threshold, photon energy equals work function, so Kmax = 0."}
 ];

@@ -1,6 +1,6 @@
 window.SkillUpStoichiometricCalculationsQuestions=[
   {
-    "q": "In a stoichiometric calculation, what should be done first?",
+    "q": "[[image:assets/chemistry/stoichiometry-01.svg|Stoichiometric calculation ratio diagram]] In a stoichiometric calculation, what should be done first?",
     "o": [
       "Balance the chemical equation",
       "Calculate the density",

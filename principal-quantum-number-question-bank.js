@@ -28,6 +28,5 @@ window.SkillUpPrincipalQuantumNumberQuestions=[
 {q:"The shell corresponding to the letter M has:",o:["n = 1","n = 2","n = 3","n = 4"],a:2,e:"The M shell is n = 3."},
 {q:"The shell corresponding to the letter N has:",o:["n = 1","n = 2","n = 3","n = 4"],a:3,e:"The N shell is n = 4."},
 {q:"If n = 5, the maximum number of electrons in that shell is:",o:["25","50","10","32"],a:1,e:"2n² = 2(25) = 50 electrons."},
-{q:"If a shell contains 32 electrons at maximum capacity, its principal quantum number is:",o:["3","4","5","6"],a:1,e:"2n² = 32 gives n² = 16, so n = 4."},
-{q:"Which statement about the principal quantum number is correct?",o:["n cannot be zero and determines the principal shell","n can be zero for an electron","n determines only spin","n may be negative"],a:0,e:"For atomic electrons, n is a positive integer and identifies the principal shell."}
+{q:"If a shell contains 32 electrons at maximum capacity, its principal quantum number is:",o:["3","4","5","6"],a:1,e:"2n² = 32 gives n² = 16, so n = 4."}
 ];

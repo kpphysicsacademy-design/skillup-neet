@@ -29,5 +29,4 @@ window.SkillUpXQuestions=[
 {q:"A particle's mass is increased by a factor of 9 at constant velocity. Its wavelength becomes:",o:["One-third","Three times","One-ninth","Unchanged"],a:2,e:"At fixed velocity, λ ∝ 1/m, so a ninefold mass increase makes the wavelength one-ninth."},
 {q:"For a particle accelerated through potential difference V, the non-relativistic de Broglie wavelength varies as:",o:["1/√V","√V","V","1/V"],a:0,e:"For charge q, K = qV and λ = h/√(2mqV), so λ ∝ 1/√V."},
 {q:"If an electron is accelerated through four times the potential difference, its non-relativistic de Broglie wavelength becomes:",o:["Half","Double","One-fourth","Four times"],a:0,e:"Since λ ∝ 1/√V, increasing V by 4 reduces λ by 2."},
-{q:"The physical significance of the de Broglie wavelength is that it characterizes the:",o:["Wave nature associated with a moving particle","Rest mass of the particle","Electric charge only","Nuclear radius only"],a:0,e:"The de Broglie wavelength quantifies the wave aspect of matter."}
 ];

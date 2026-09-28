@@ -1,5 +1,5 @@
 window.SkillUpWavelengthFrequencyAndVelocityQuestions=[
-{q:"The relationship among speed (c), wavelength (λ) and frequency (ν) of electromagnetic radiation is:",o:["c = λν","c = λ/ν","c = ν/λ","c = λ + ν"],a:0,e:"For electromagnetic radiation, c = λν."},
+{q:"[[image:assets/chemistry/wavelength-frequency-01.svg|Wavelength and frequency wave diagram]]<br>The relationship among speed (c), wavelength (λ) and frequency (ν) of electromagnetic radiation is:",o:["c = λν","c = λ/ν","c = ν/λ","c = λ + ν"],a:0,e:"For electromagnetic radiation, c = λν."},
 {q:"The SI unit of wavelength is:",o:["Hz","m","J","s⁻¹"],a:1,e:"Wavelength is a distance, so its SI unit is metre (m)."},
 {q:"The SI unit of frequency is:",o:["metre","joule","hertz","watt"],a:2,e:"Frequency is measured in hertz (Hz), equivalent to s⁻¹."},
 {q:"The speed of light in vacuum is approximately:",o:["3×10⁶ m s⁻¹","3×10⁸ m s⁻¹","3×10¹⁰ m s⁻¹","3×10⁴ m s⁻¹"],a:1,e:"Electromagnetic radiation travels at approximately 3×10⁸ m s⁻¹ in vacuum."},
@@ -7,7 +7,7 @@ window.SkillUpWavelengthFrequencyAndVelocityQuestions=[
 {q:"If the frequency of radiation doubles in vacuum, its wavelength:",o:["Doubles","Halves","Becomes four times larger","Remains unchanged"],a:1,e:"With constant c, λ = c/ν; therefore doubling ν halves λ."},
 {q:"If wavelength is tripled in vacuum, frequency becomes:",o:["Three times larger","One-third","Nine times larger","Unchanged"],a:1,e:"Frequency is inversely proportional to wavelength, so tripling λ makes ν one-third."},
 {q:"A radiation has frequency 5×10¹⁴ Hz. Its wavelength in vacuum is:",o:["6×10⁻⁷ m","1×10⁻⁷ m","1.5×10⁻⁶ m","2.5×10⁻⁸ m"],a:0,e:"λ = c/ν = 3×10⁸/(5×10¹⁴) = 6×10⁻⁷ m."},
-{q:"A radiation has wavelength 600 nm. Its frequency is approximately:",o:["5×10¹⁴ Hz","5×10¹² Hz","1.8×10¹⁷ Hz","3×10⁸ Hz"],a:0,e:"600 nm = 6×10⁻⁷ m; ν = 3×10⁸/(6×10⁻⁷) = 5×10¹⁴ Hz."},
+{q:"[[image:assets/chemistry/wavelength-frequency-01.svg|Wavelength and frequency wave diagram]]<br>A radiation has wavelength 600 nm. Its frequency is approximately:",o:["5×10¹⁴ Hz","5×10¹² Hz","1.8×10¹⁷ Hz","3×10⁸ Hz"],a:0,e:"600 nm = 6×10⁻⁷ m; ν = 3×10⁸/(6×10⁻⁷) = 5×10¹⁴ Hz."},
 {q:"A radiation has wavelength 300 nm. Its frequency is:",o:["1×10¹⁵ Hz","1×10¹⁴ Hz","9×10¹⁵ Hz","3×10⁸ Hz"],a:0,e:"300 nm = 3×10⁻⁷ m; ν = 3×10⁸/(3×10⁻⁷) = 1×10¹⁵ Hz."},
 {q:"A wave has frequency 2×10¹⁵ Hz in vacuum. Its wavelength is:",o:["1.5×10⁻⁷ m","6×10⁻⁷ m","4×10²³ m","1.5×10⁻⁵ m"],a:0,e:"λ = 3×10⁸/(2×10¹⁵) = 1.5×10⁻⁷ m."},
 {q:"If λ = 2×10⁻⁷ m, the frequency in vacuum is:",o:["1.5×10¹⁵ Hz","6×10¹⁵ Hz","6×10¹ Hz","2×10⁻¹⁵ Hz"],a:0,e:"ν = c/λ = 3×10⁸/(2×10⁻⁷) = 1.5×10¹⁵ Hz."},

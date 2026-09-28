@@ -1,32 +1,332 @@
 window.SkillUpStoichiometricCalculationsQuestions=[
-{q:"Stoichiometric calculations are based primarily on:",o:["Balanced chemical equations","Unbalanced equations","Atomic numbers only","Boiling points"],a:0,e:"Balanced equations provide the correct quantitative ratios between reacting species."},
-{q:"For 2H₂ + O₂ → 2H₂O, 4 mol H₂ require:",o:["1 mol O₂","2 mol O₂","4 mol O₂","8 mol O₂"],a:1,e:"The H₂:O₂ ratio is 2:1, so 4 mol H₂ require 2 mol O₂."},
-{q:"For N₂ + 3H₂ → 2NH₃, 6 mol H₂ can produce:",o:["2 mol NH₃","3 mol NH₃","4 mol NH₃","6 mol NH₃"],a:2,e:"The ratio H₂:NH₃ is 3:2, so 6 mol H₂ can produce 4 mol NH₃."},
-{q:"For 2Na + Cl₂ → 2NaCl, 46 g Na reacts with how much Cl₂? (Na=23, Cl₂=71)",o:["35.5 g","71 g","142 g","23 g"],a:1,e:"46 g Na = 2 mol Na, requiring 1 mol Cl₂ = 71 g."},
-{q:"For CaCO₃ → CaO + CO₂, 100 g CaCO₃ produces theoretically:",o:["22 g CO₂","44 g CO₂","56 g CO₂","100 g CO₂"],a:1,e:"100 g CaCO₃ is 1 mol and produces 1 mol CO₂ = 44 g."},
-{q:"For 2KClO₃ → 2KCl + 3O₂, 245 g KClO₃ (M=122.5) produces:",o:["48 g O₂","96 g O₂","120 g O₂","160 g O₂"],a:1,e:"245 g is 2 mol KClO₃, producing 3 mol O₂ = 96 g."},
-{q:"For CH₄ + 2O₂ → CO₂ + 2H₂O, 16 g CH₄ produces:",o:["22 g CO₂","44 g CO₂","88 g CO₂","16 g CO₂"],a:1,e:"16 g CH₄ = 1 mol, producing 1 mol CO₂ = 44 g."},
-{q:"For C₃H₈ + 5O₂ → 3CO₂ + 4H₂O, 44 g propane produces:",o:["44 g CO₂","88 g CO₂","132 g CO₂","176 g CO₂"],a:2,e:"44 g C₃H₈ = 1 mol and produces 3 mol CO₂ = 132 g."},
-{q:"If 10 mol H₂ reacts according to 2H₂ + O₂ → 2H₂O, O₂ required is:",o:["2 mol","5 mol","10 mol","20 mol"],a:1,e:"The ratio H₂:O₂ is 2:1, so 10 mol H₂ requires 5 mol O₂."},
-{q:"For 2Al + 3Cl₂ → 2AlCl₃, 2 mol Al produce:",o:["1 mol AlCl₃","2 mol AlCl₃","3 mol AlCl₃","6 mol AlCl₃"],a:1,e:"The coefficient ratio Al:AlCl₃ is 2:2, so 2 mol Al produce 2 mol AlCl₃ if Cl₂ is sufficient."},
-{q:"For 2Mg + O₂ → 2MgO, 48 g Mg produces:",o:["40 g MgO","80 g MgO","96 g MgO","120 g MgO"],a:1,e:"48 g Mg = 2 mol; this forms 2 mol MgO, whose mass is 80 g."},
-{q:"For Zn + 2HCl → ZnCl₂ + H₂, 65 g Zn produces approximately:",o:["1 g H₂","2 g H₂","4 g H₂","65 g H₂"],a:1,e:"65 g Zn is approximately 1 mol and produces 1 mol H₂ ≈ 2 g."},
-{q:"For 2Fe + 3O₂ → 2Fe₂?O₃, the equation must first be:",o:["Ignored","Balanced correctly","Converted to ions","Divided by molar mass"],a:1,e:"Stoichiometric ratios can only be used reliably after the chemical equation is correctly balanced."},
-{q:"If 0.5 mol N₂ reacts completely with excess H₂, NH₃ formed is:",o:["0.5 mol","1.0 mol","1.5 mol","2.0 mol"],a:1,e:"N₂:NH₃ is 1:2, so 0.5 mol N₂ gives 1.0 mol NH₃."},
-{q:"Mass of 0.5 mol CO₂ is:",o:["11 g","22 g","44 g","88 g"],a:1,e:"CO₂ molar mass is 44 g mol⁻¹, so 0.5 mol weighs 22 g."},
-{q:"If 25 g CaCO₃ decomposes completely, CO₂ produced is:",o:["5.5 g","11 g","22 g","44 g"],a:1,e:"25 g CaCO₃ = 0.25 mol, producing 0.25 mol CO₂ = 11 g."},
-{q:"For H₂ + Cl₂ → 2HCl, 1 mol H₂ produces:",o:["0.5 mol HCl","1 mol HCl","2 mol HCl","3 mol HCl"],a:2,e:"The balanced equation gives 1 mol H₂ → 2 mol HCl."},
-{q:"For 2SO₂ + O₂ → 2SO₃, 64 g SO₂ (M=64) produces:",o:["40 g SO₃","64 g SO₃","80 g SO₃","160 g SO₃"],a:2,e:"1 mol SO₂ gives 1 mol SO₃; molar mass SO₃ = 80 g mol⁻¹."},
-{q:"For 2CO + O₂ → 2CO₂, 56 g CO (M=28) produces:",o:["44 g CO₂","88 g CO₂","112 g CO₂","56 g CO₂"],a:1,e:"56 g CO = 2 mol, producing 2 mol CO₂ = 88 g."},
-{q:"If 90% of a theoretical 50 g product is obtained, actual yield is:",o:["40 g","45 g","50 g","55 g"],a:1,e:"Actual yield = 0.90 × 50 = 45 g."},
-{q:"If actual yield is 18 g and theoretical yield is 24 g, percentage yield is:",o:["60%","75%","80%","90%"],a:1,e:"18/24 × 100 = 75%."},
-{q:"The mass of one mole of a substance is its:",o:["Atomic number","Molar mass","Molecular formula","Empirical ratio"],a:1,e:"Molar mass is the mass of one mole of a substance."},
-{q:"In a stoichiometric calculation, the usual sequence is:",o:["Mass → moles → mole ratio → moles → mass","Mass → atomic number → volume","Moles → colour → mass","Mass → temperature → moles"],a:0,e:"A standard method converts given mass to moles, applies the balanced-equation ratio, then converts product moles to the required unit."},
-{q:"For 2H₂ + O₂ → 2H₂O, 18 g H₂O corresponds to:",o:["0.5 mol H₂O","1 mol H₂O","2 mol H₂O","18 mol H₂O"],a:1,e:"18 g H₂O is 1 mol."},
-{q:"For N₂ + 3H₂ → 2NH₃, 28 g N₂ can theoretically produce:",o:["17 g NH₃","34 g NH₃","51 g NH₃","68 g NH₃"],a:1,e:"28 g N₂ = 1 mol and produces 2 mol NH₃ = 34 g."},
-{q:"For 2Na + 2H₂O → 2NaOH + H₂, 46 g Na produces:",o:["1 g H₂","2 g H₂","4 g H₂","23 g H₂"],a:1,e:"46 g Na = 2 mol and produces 1 mol H₂ = 2 g."},
-{q:"For 2H₂O₂ → 2H₂O + O₂, 68 g H₂O₂ (M=34) produces:",o:["16 g O₂","32 g O₂","34 g O₂","68 g O₂"],a:1,e:"2 mol H₂O₂ produces 1 mol O₂ = 32 g."},
-{q:"For 2HgO → 2Hg + O₂, 432 g HgO (M=216) produces:",o:["16 g O₂","32 g O₂","64 g O₂","216 g O₂"],a:1,e:"2 mol HgO produces 1 mol O₂ = 32 g."},
-{q:"If 10 g reactant theoretically gives 8 g product but actual product is 6 g, percentage yield is:",o:["60%","75%","80%","90%"],a:1,e:"Percentage yield = 6/8 × 100 = 75%."},
-{q:"A stoichiometric coefficient can be interpreted as the relative number of:",o:["Moles of species","Atomic numbers","Electrons only","Neutrons only"],a:0,e:"Coefficients in a balanced equation represent relative mole amounts of the reacting species."}
+  {
+    "q": "In a stoichiometric calculation, what should be done first?",
+    "o": [
+      "Balance the chemical equation",
+      "Calculate the density",
+      "Find the colour of reactants",
+      "Ignore the coefficients"
+    ],
+    "a": 0,
+    "e": "The balanced equation provides the correct mole ratios needed for calculation."
+  },
+  {
+    "q": "For 2H2 + O2 → 2H2O, 4 mol H2 require:",
+    "o": [
+      "2 mol O2",
+      "1 mol O2",
+      "4 mol O2",
+      "8 mol O2"
+    ],
+    "a": 0,
+    "e": "The H2:O2 ratio is 2:1, so 4 mol H2 require 2 mol O2."
+  },
+  {
+    "q": "For N2 + 3H2 → 2NH3, 6 mol H2 can produce, with excess N2:",
+    "o": [
+      "4 mol NH3",
+      "2 mol NH3",
+      "6 mol NH3",
+      "3 mol NH3"
+    ],
+    "a": 0,
+    "e": "The H2:NH3 ratio is 3:2, so 6 mol H2 gives 4 mol NH3."
+  },
+  {
+    "q": "How many moles are in 22 g CO2? (M = 44 g mol−1)",
+    "o": [
+      "0.50 mol",
+      "1.0 mol",
+      "2.0 mol",
+      "22 mol"
+    ],
+    "a": 0,
+    "e": "n = mass/molar mass = 22/44 = 0.50 mol."
+  },
+  {
+    "q": "What mass of O2 corresponds to 0.50 mol O2? (M = 32 g mol−1)",
+    "o": [
+      "16 g",
+      "8 g",
+      "32 g",
+      "64 g"
+    ],
+    "a": 0,
+    "e": "Mass = nM = 0.50 × 32 = 16 g."
+  },
+  {
+    "q": "For CaCO3 → CaO + CO2, 100 g CaCO3 is approximately how many moles? (M ≈ 100 g mol−1)",
+    "o": [
+      "1 mol",
+      "0.5 mol",
+      "2 mol",
+      "10 mol"
+    ],
+    "a": 0,
+    "e": "100 g divided by approximately 100 g mol−1 gives 1 mol."
+  },
+  {
+    "q": "For CaCO3 → CaO + CO2, 1 mol CaCO3 theoretically produces:",
+    "o": [
+      "1 mol CO2",
+      "2 mol CO2",
+      "0.5 mol CO2",
+      "3 mol CO2"
+    ],
+    "a": 0,
+    "e": "The coefficient ratio CaCO3:CO2 is 1:1."
+  },
+  {
+    "q": "If 2 mol N2 react with excess H2 in N2 + 3H2 → 2NH3, NH3 formed is:",
+    "o": [
+      "4 mol",
+      "2 mol",
+      "6 mol",
+      "1 mol"
+    ],
+    "a": 0,
+    "e": "The N2:NH3 ratio is 1:2, so 2 mol N2 gives 4 mol NH3."
+  },
+  {
+    "q": "If 5 mol H2 are available for N2 + 3H2 → 2NH3, the amount of N2 required for complete consumption is:",
+    "o": [
+      "5/3 mol",
+      "3 mol",
+      "5 mol",
+      "10/3 mol"
+    ],
+    "a": 0,
+    "e": "The ratio N2:H2 is 1:3, so N2 required = 5/3 mol."
+  },
+  {
+    "q": "For 2Na + Cl2 → 2NaCl, 46 g Na reacts completely with excess Cl2. Approximately how many moles NaCl form? (M Na ≈ 23 g mol−1)",
+    "o": [
+      "2 mol",
+      "1 mol",
+      "0.5 mol",
+      "4 mol"
+    ],
+    "a": 0,
+    "e": "46 g Na = 2 mol Na; the 2:2 ratio gives 2 mol NaCl."
+  },
+  {
+    "q": "For 2H2 + O2 → 2H2O, 16 g O2 with excess H2 gives how many moles H2O? (M O2 = 32 g mol−1)",
+    "o": [
+      "1 mol",
+      "0.5 mol",
+      "2 mol",
+      "4 mol"
+    ],
+    "a": 0,
+    "e": "16 g O2 = 0.5 mol; the O2:H2O ratio is 1:2, giving 1 mol H2O."
+  },
+  {
+    "q": "A sample contains 0.25 mol NaCl. Its mass is approximately: (M = 58.5 g mol−1)",
+    "o": [
+      "14.625 g",
+      "58.5 g",
+      "29.25 g",
+      "117 g"
+    ],
+    "a": 0,
+    "e": "Mass = 0.25 × 58.5 = 14.625 g."
+  },
+  {
+    "q": "If 10 mol reactant A are required to produce 5 mol product B, the mole ratio A:B is:",
+    "o": [
+      "2:1",
+      "1:2",
+      "5:10",
+      "10:10"
+    ],
+    "a": 0,
+    "e": "The ratio 10:5 simplifies to 2:1."
+  },
+  {
+    "q": "The limiting reagent is found most reliably by:",
+    "o": [
+      "Comparing available amounts with stoichiometric requirements",
+      "Comparing colours",
+      "Comparing boiling points",
+      "Comparing atomic symbols"
+    ],
+    "a": 0,
+    "e": "The limiting reactant is the one that is insufficient according to the balanced mole ratio."
+  },
+  {
+    "q": "For 2H2 + O2 → 2H2O, if 3 mol H2 and 2 mol O2 are mixed, the limiting reagent is:",
+    "o": [
+      "H2",
+      "O2",
+      "H2O",
+      "Neither"
+    ],
+    "a": 0,
+    "e": "3 mol H2 requires 1.5 mol O2, so H2 is consumed first."
+  },
+  {
+    "q": "For 2H2 + O2 → 2H2O, 3 mol H2 can produce a maximum of:",
+    "o": [
+      "3 mol H2O",
+      "1.5 mol H2O",
+      "6 mol H2O",
+      "2 mol H2O"
+    ],
+    "a": 0,
+    "e": "The H2:H2O ratio is 1:1, so 3 mol H2 gives 3 mol H2O."
+  },
+  {
+    "q": "If the theoretical yield is 12 g and actual yield is 9 g, percentage yield is:",
+    "o": [
+      "75%",
+      "25%",
+      "80%",
+      "133.3%"
+    ],
+    "a": 0,
+    "e": "(9/12) × 100 = 75%."
+  },
+  {
+    "q": "If 80% yield is obtained from a theoretical 25 g product, actual yield is:",
+    "o": [
+      "20 g",
+      "31.25 g",
+      "5 g",
+      "80 g"
+    ],
+    "a": 0,
+    "e": "Actual yield = 0.80 × 25 = 20 g."
+  },
+  {
+    "q": "If actual yield is 18 g at 90% yield, theoretical yield is:",
+    "o": [
+      "20 g",
+      "16.2 g",
+      "18.9 g",
+      "22 g"
+    ],
+    "a": 0,
+    "e": "Theoretical yield = 18/0.90 = 20 g."
+  },
+  {
+    "q": "A 20 g impure sample contains 15 g pure compound. Percentage purity is:",
+    "o": [
+      "75%",
+      "25%",
+      "80%",
+      "133.3%"
+    ],
+    "a": 0,
+    "e": "Purity = (15/20) × 100 = 75%."
+  },
+  {
+    "q": "For a reaction requiring 2 mol A per 1 mol B, 3 mol A and 2 mol B are mixed. The limiting reagent is:",
+    "o": [
+      "A",
+      "B",
+      "Product",
+      "Neither"
+    ],
+    "a": 0,
+    "e": "3 mol A can consume only 1.5 mol B, so A is limiting."
+  },
+  {
+    "q": "For 2KClO3 → 2KCl + 3O2, 4 mol KClO3 produce:",
+    "o": [
+      "6 mol O2",
+      "4 mol O2",
+      "3 mol O2",
+      "8 mol O2"
+    ],
+    "a": 0,
+    "e": "The ratio KClO3:O2 is 2:3, so 4 mol gives 6 mol O2."
+  },
+  {
+    "q": "For CH4 + 2O2 → CO2 + 2H2O, 16 g CH4 (M = 16) requires:",
+    "o": [
+      "64 g O2",
+      "32 g O2",
+      "16 g O2",
+      "128 g O2"
+    ],
+    "a": 0,
+    "e": "16 g CH4 = 1 mol; 1 mol CH4 requires 2 mol O2 = 64 g."
+  },
+  {
+    "q": "For CH4 + 2O2 → CO2 + 2H2O, 44 g CO2 corresponds to:",
+    "o": [
+      "1 mol CO2",
+      "2 mol CO2",
+      "0.5 mol CO2",
+      "44 mol CO2"
+    ],
+    "a": 0,
+    "e": "44 g CO2 divided by 44 g mol−1 equals 1 mol."
+  },
+  {
+    "q": "A 10 g sample of CaCO3 is 80% pure. Mass of pure CaCO3 is:",
+    "o": [
+      "8 g",
+      "2 g",
+      "10.8 g",
+      "12.5 g"
+    ],
+    "a": 0,
+    "e": "Pure mass = 0.80 × 10 g = 8 g."
+  },
+  {
+    "q": "If 8 g pure CaCO3 (M = 100) decomposes completely, moles CO2 formed are:",
+    "o": [
+      "0.08 mol",
+      "0.8 mol",
+      "8 mol",
+      "0.008 mol"
+    ],
+    "a": 0,
+    "e": "8 g CaCO3 = 0.08 mol; the 1:1 ratio gives 0.08 mol CO2."
+  },
+  {
+    "q": "If 0.08 mol CO2 is formed in the previous reaction, its mass is:",
+    "o": [
+      "3.52 g",
+      "0.08 g",
+      "8.8 g",
+      "44 g"
+    ],
+    "a": 0,
+    "e": "Mass = 0.08 × 44 = 3.52 g."
+  },
+  {
+    "q": "For 2Al + 3Cl2 → 2AlCl3, 4 mol Al require:",
+    "o": [
+      "6 mol Cl2",
+      "4 mol Cl2",
+      "3 mol Cl2",
+      "2 mol Cl2"
+    ],
+    "a": 0,
+    "e": "The Al:Cl2 ratio is 2:3, so 4 mol Al require 6 mol Cl2."
+  },
+  {
+    "q": "For 2Al + 3Cl2 → 2AlCl3, 3 mol Cl2 produce:",
+    "o": [
+      "2 mol AlCl3",
+      "3 mol AlCl3",
+      "1 mol AlCl3",
+      "6 mol AlCl3"
+    ],
+    "a": 0,
+    "e": "The ratio Cl2:AlCl3 is 3:2, so 3 mol Cl2 produce 2 mol AlCl3."
+  },
+  {
+    "q": "Why are units carried through stoichiometric calculations?",
+    "o": [
+      "They help track and cancel quantities consistently",
+      "They change the chemical equation",
+      "They replace balancing",
+      "They determine reaction colour"
+    ],
+    "a": 0,
+    "e": "Dimensional analysis uses units to ensure that conversions and final quantities are consistent."
+  }
 ];

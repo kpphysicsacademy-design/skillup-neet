@@ -30,5 +30,4 @@ window.SKILLUP_CHEMISTRY_BANK["trivial-nomenclature"]=[
 {question:"The common name of 2-methylpropan-2-ol is:",options:[{id:"a",value:"tert-butyl alcohol"},{id:"b",value:"isobutyl alcohol"},{id:"c",value:"sec-butyl alcohol"},{id:"d",value:"isopropyl alcohol"}],answer:"a",explanation:"2-Methylpropan-2-ol is tert-butyl alcohol."},
 {question:"The common name of 2-methylpropan-1-ol is:",options:[{id:"a",value:"isobutyl alcohol"},{id:"b",value:"tert-butyl alcohol"},{id:"c",value:"sec-butyl alcohol"},{id:"d",value:"isopropyl alcohol"}],answer:"a",explanation:"2-Methylpropan-1-ol is isobutyl alcohol."},
 {question:"The common name of 2-methylpropanoic acid is:",options:[{id:"a",value:"isobutyric acid"},{id:"b",value:"butyric acid"},{id:"c",value:"propionic acid"},{id:"d",value:"valeric acid"}],answer:"a",explanation:"2-Methylpropanoic acid is commonly called isobutyric acid."},
-{question:"The common name of ethanedioic acid is:",options:[{id:"a",value:"oxalic acid"},{id:"b",value:"malonic acid"},{id:"c",value:"succinic acid"},{id:"d",value:"acetic acid"}],answer:"a",explanation:"Ethanedioic acid is oxalic acid."}
-];
+;

@@ -1246,4 +1246,5 @@ window.SkillUpChemistryCellReactionQuestions=[
       "reviewEligible": true
     }
   }
+{question:"In a spontaneous galvanic cell reaction, the overall cell reaction corresponds to the sum of the two half-cell reactions.",options:["Correct statement","Incorrect statement","Only at equilibrium","Cannot be determined"],answer:0,explanation:"The overall cell reaction is obtained by combining the oxidation and reduction half-reactions after balancing electrons."},
 ];

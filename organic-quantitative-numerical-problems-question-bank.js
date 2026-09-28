@@ -30,6 +30,5 @@ window.SKILLUP_CHEMISTRY_BANK["organic-quantitative-numerical-problems"]=[
 {question:"A 0.25 g sample produces 0.111 g Mg2P2O7. The phosphorus percentage is approximately:",options:["3.1%","6.2%","12.4%","24.8%"],answer:2,explanation:"P = 0.111×62/222 ≈0.031 g; percentage ≈12.4%."},
 {question:"A 0.20 g sample gives 0.233 g BaSO4. The sulfur percentage is:",options:["8%","16%","32%","46.6%"],answer:1,explanation:"S = 0.233×32/233 = 0.032 g; percentage = 16%."},
 {question:"A 0.20 g sample gives 0.376 g AgBr. The bromine percentage is:",options:["40%","60%","80%","94%"],answer:2,explanation:"Br = 0.376×80/188 = 0.16 g; percentage = 80%."},
-{question:"A 0.20 g sample gives 0.287 g AgCl. The chlorine percentage is approximately:",options:["25%","35.5%","50%","71%"],answer:1,explanation:"Cl = 0.287×35.5/143.5 ≈0.071 g; percentage ≈35.5%."},
-{question:"The most reliable workflow for an organic quantitative numerical problem is:",options:["identify analytical data → convert to element mass → calculate percentage/formula","guess formula → ignore masses → choose largest option","use boiling point only","use color only"],answer:0,explanation:"The measured analytical product must first be converted stoichiometrically into the required elemental quantity."}
+{question:"A 0.20 g sample gives 0.287 g AgCl. The chlorine percentage is approximately:",options:["25%","35.5%","50%","71%"],answer:1,explanation:"Cl = 0.287×35.5/143.5 ≈0.071 g; percentage ≈35.5%."}
 ];

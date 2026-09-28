@@ -1,12 +1,12 @@
-window.SkillUpXQuestions=[
-{q:"The spin quantum number is represented by:",o:["n","l","mₗ","mₛ"],a:3,e:"The spin quantum number is denoted by mₛ."},
+window.SkillUpSpinQuantumNumberQuestions=[
+{q:"[[image:assets/chemistry/spin-quantum-number-01.svg|Electron spin states diagram]]<br>The spin quantum number is represented by:",o:["n","l","mₗ","mₛ"],a:3,e:"The spin quantum number is denoted by mₛ."},
 {q:"The spin quantum number describes the:",o:["Principal shell","Orbital shape","Orbital orientation","Intrinsic spin state of an electron"],a:3,e:"mₛ specifies the spin state of an electron."},
 {q:"The allowed values of mₛ for an electron are:",o:["0 and 1","+1 and −1","+1/2 and −1/2","−1, 0 and +1"],a:2,e:"An electron has two possible spin quantum-number values: +1/2 and −1/2."},
 {q:"The number of possible spin states of an electron is:",o:["1","2","3","4"],a:1,e:"There are two allowed spin states, represented by +1/2 and −1/2."},
 {q:"The spin quantum number is independent of:",o:["Electron spin state","The other quantum numbers n, l and mₗ","The existence of electrons","The Pauli principle"],a:1,e:"mₛ describes intrinsic spin and can take either value regardless of n, l and mₗ."},
 {q:"Which value of mₛ is allowed for an electron?",o:["+1","−1","+1/2","+2"],a:2,e:"For an electron, mₛ can be +1/2 or −1/2."},
 {q:"Which value of mₛ is NOT allowed for an electron?",o:["+1/2","−1/2","0","+1"],a:2,e:"The electron spin quantum number cannot be 0; it is +1/2 or −1/2."},
-{q:"Two electrons occupying the same orbital must have:",o:["The same spin","Opposite spins","Zero spin","Different principal quantum numbers"],a:1,e:"By the Pauli exclusion principle, two electrons in the same orbital have opposite spins."},
+{q:"[[image:assets/chemistry/spin-quantum-number-01.svg|Electron spin states diagram]]<br>Two electrons occupying the same orbital must have:",o:["The same spin","Opposite spins","Zero spin","Different principal quantum numbers"],a:1,e:"By the Pauli exclusion principle, two electrons in the same orbital have opposite spins."},
 {q:"The maximum number of electrons that can occupy one orbital is:",o:["1","2","3","4"],a:1,e:"An orbital can accommodate a maximum of two electrons with opposite spins."},
 {q:"If two electrons in an orbital have mₛ values +1/2 and −1/2, they are:",o:["Parallel spins","Opposite spins","Identical quantum states","Without spin"],a:1,e:"The opposite signs indicate opposite spin states."},
 {q:"The spin quantum number is associated with the electron's:",o:["Intrinsic angular momentum","Principal energy level only","Orbital radius only","Nuclear charge"],a:0,e:"Electron spin is an intrinsic form of angular momentum."},

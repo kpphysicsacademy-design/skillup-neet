@@ -1,10 +1,10 @@
 window.SkillUpPlanckQuantumTheoryQuestions=[
-{q:"According to Planck's quantum theory, radiant energy is emitted or absorbed:",o:["Continuously","In discrete packets called quanta","Only as matter","Without energy"],a:1,e:"Planck proposed that energy is exchanged in discrete packets called quanta."},
+{q:"[[image:assets/chemistry/planck-quantum-01.svg|Planck quantum energy diagram]]<br>According to Planck's quantum theory, radiant energy is emitted or absorbed:",o:["Continuously","In discrete packets called quanta","Only as matter","Without energy"],a:1,e:"Planck proposed that energy is exchanged in discrete packets called quanta."},
 {q:"The energy of one quantum of radiation is given by:",o:["E = hν","E = h/ν","E = ν/h","E = mc²"],a:0,e:"The energy of one quantum is E = hν, where h is Planck's constant and ν is frequency."},
 {q:"Planck's constant is approximately:",o:["6.626×10⁻³⁴ J s","6.626×10³⁴ J s","3×10⁸ J s","9.109×10⁻³¹ J s"],a:0,e:"Planck's constant h is approximately 6.626×10⁻³⁴ J s."},
 {q:"If an oscillator emits n quanta of frequency ν, its total energy is:",o:["nhν","hν/n","n+hν","hν²"],a:0,e:"If each quantum has energy hν, n quanta have total energy nhν."},
 {q:"Planck's theory introduced the concept of:",o:["Continuous energy only","Quantization of energy","Conservation of charge only","Nuclear fission"],a:1,e:"The key idea was that radiant energy is quantized rather than exchanged continuously."},
-{q:"The energy of a photon is directly proportional to its:",o:["Wavelength","Frequency","Time period","Mass only"],a:1,e:"From E = hν, photon energy is directly proportional to frequency."},
+{q:"[[image:assets/chemistry/planck-quantum-01.svg|Planck quantum energy diagram]]<br>The energy of a photon is directly proportional to its:",o:["Wavelength","Frequency","Time period","Mass only"],a:1,e:"From E = hν, photon energy is directly proportional to frequency."},
 {q:"The energy of a photon is inversely proportional to its:",o:["Frequency","Wavelength","Planck constant","Speed in vacuum"],a:1,e:"Since E = hc/λ, photon energy is inversely proportional to wavelength."},
 {q:"The frequency of radiation is 5×10¹⁴ Hz. Energy of one photon is approximately: (h = 6.626×10⁻³⁴ J s)",o:["3.313×10⁻¹⁹ J","3.313×10⁻²⁰ J","1.325×10⁻¹⁹ J","3.313×10¹⁹ J"],a:0,e:"E = hν = 6.626×10⁻³⁴ × 5×10¹⁴ = 3.313×10⁻¹⁹ J."},
 {q:"A photon has frequency 1×10¹⁵ Hz. Its energy is approximately:",o:["6.626×10⁻¹⁹ J","6.626×10⁻¹⁵ J","1.506×10⁻⁴⁹ J","3×10²³ J"],a:0,e:"E = hν = 6.626×10⁻³⁴ × 10¹⁵ = 6.626×10⁻¹⁹ J."},

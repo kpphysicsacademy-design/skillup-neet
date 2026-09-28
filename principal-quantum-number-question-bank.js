@@ -1,12 +1,12 @@
-window.SkillUpXQuestions=[
-{q:"The principal quantum number is represented by:",o:["n","l","mₗ","mₛ"],a:0,e:"The principal quantum number is denoted by n."},
+window.SkillUpPrincipalQuantumNumberQuestions=[
+{q:"[[image:assets/chemistry/principal-quantum-number-01.svg|Principal quantum number shell diagram]]<br>The principal quantum number is represented by:",o:["n","l","mₗ","mₛ"],a:0,e:"The principal quantum number is denoted by n."},
 {q:"The principal quantum number primarily specifies the:",o:["Main energy level or shell","Shape only","Orbital orientation only","Electron spin only"],a:0,e:"n identifies the principal shell and is associated with the main energy level and orbital size."},
 {q:"The allowed values of the principal quantum number are:",o:["0,1,2,...","1,2,3,...","−1,0,+1,...","1/2,3/2,..."],a:1,e:"For electrons, n is a positive integer: 1, 2, 3, ..."},
 {q:"The first shell has principal quantum number:",o:["0","1","2","3"],a:1,e:"The first shell is n = 1."},
 {q:"The second shell has principal quantum number:",o:["1","2","3","4"],a:1,e:"The second shell corresponds to n = 2."},
 {q:"The third shell has principal quantum number:",o:["1","2","3","4"],a:2,e:"The third shell corresponds to n = 3."},
 {q:"The fourth shell has principal quantum number:",o:["2","3","4","5"],a:2,e:"The fourth shell corresponds to n = 4."},
-{q:"The maximum number of electrons in a shell with principal quantum number n is:",o:["n²","2n²","2n","4n"],a:1,e:"The maximum electron capacity of a shell is 2n²."},
+{q:"[[image:assets/chemistry/principal-quantum-number-01.svg|Principal quantum number shell diagram]]<br>The maximum number of electrons in a shell with principal quantum number n is:",o:["n²","2n²","2n","4n"],a:1,e:"The maximum electron capacity of a shell is 2n²."},
 {q:"The maximum number of electrons in the n = 2 shell is:",o:["2","4","8","18"],a:2,e:"2n² = 2(2²) = 8."},
 {q:"The maximum number of electrons in the n = 3 shell is:",o:["8","18","32","9"],a:1,e:"2n² = 2(3²) = 18."},
 {q:"The maximum number of electrons in the n = 4 shell is:",o:["18","32","16","8"],a:1,e:"2n² = 2(4²) = 32."},

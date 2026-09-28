@@ -29,5 +29,4 @@ window.SkillUpXQuestions=[
 {q:"If a subshell has five orbitals, its azimuthal quantum number is:",o:["0","1","2","3"],a:2,e:"5 = 2l + 1 gives l = 2, corresponding to a d subshell."},
 {q:"If a subshell has seven orbitals, its azimuthal quantum number is:",o:["1","2","3","4"],a:2,e:"7 = 2l + 1 gives l = 3, corresponding to an f subshell."},
 {q:"For l = 1, the total number of orbitals and maximum electrons are respectively:",o:["3 and 6","2 and 4","5 and 10","1 and 2"],a:0,e:"l = 1 is a p subshell with three orbitals, accommodating six electrons."},
-{q:"Which statement about mₗ is correct?",o:["It ranges from 0 to n","It ranges from −l to +l in integral steps","It determines electron spin","It can never be zero"],a:1,e:"mₗ takes integral values from −l to +l and identifies orbital orientation."}
 ];

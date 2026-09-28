@@ -30,5 +30,4 @@ window.SkillUpMassPercentageQuestions=[
 {q:"To prepare 250 g of a 20% (w/w) solution, solvent required is:",o:["200 g","50 g","250 g","20 g"],a:0,e:"Solute = 50 g, so solvent = 250 − 50 = 200 g."},
 {q:"If water evaporates from a solution while solute remains, mass percentage of solute generally:",o:["Increases","Decreases","Remains unchanged","Becomes zero"],a:0,e:"The solute mass stays constant while total solution mass decreases."},
 {q:"If pure solvent is added to a solution, mass percentage of solute generally:",o:["Decreases","Increases","Remains unchanged","Becomes 100%"],a:0,e:"Adding solvent increases total mass while solute mass stays fixed."},
-{q:"Which statement is correct?",o:["Mass percentage is mass of solute per 100 mass units of solution","Mass percentage is moles per litre","Mass percentage is moles per kilogram solvent","Mass percentage is volume of solute per litre"],a:0,e:"This is the standard definition of percentage by mass."}
 ];

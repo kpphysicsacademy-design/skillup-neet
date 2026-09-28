@@ -1,32 +1,332 @@
 window.SkillUpStoichiometryQuestions=[
-{q:"Stoichiometry is the quantitative study of:",o:["Colour changes only","Amounts of reactants and products in chemical reactions","Atomic orbitals only","Gas pressure only"],a:1,e:"Stoichiometry deals with quantitative relationships between reactants and products using a balanced chemical equation."},
-{q:"The coefficients in a balanced chemical equation represent:",o:["Mole ratios","Atomic numbers","Mass numbers","Densities"],a:0,e:"Balanced-equation coefficients give the relative mole ratio of reactants and products."},
-{q:"For N₂ + 3H₂ → 2NH₃, 1 mol N₂ reacts with:",o:["1 mol H₂","2 mol H₂","3 mol H₂","6 mol H₂"],a:2,e:"The coefficients show a 1:3:2 mole ratio, so 1 mol N₂ requires 3 mol H₂."},
-{q:"For 2H₂ + O₂ → 2H₂O, 2 mol H₂ produce:",o:["1 mol H₂O","2 mol H₂O","3 mol H₂O","4 mol H₂O"],a:1,e:"The stoichiometric ratio H₂:H₂O is 2:2, so 2 mol H₂ can produce 2 mol H₂O."},
-{q:"How many moles of O₂ are required to completely react with 4 mol H₂ in 2H₂ + O₂ → 2H₂O?",o:["1 mol","2 mol","4 mol","8 mol"],a:1,e:"The ratio H₂:O₂ is 2:1. Therefore 4 mol H₂ requires 2 mol O₂."},
-{q:"The mass of 2 mol CO₂ is: (M = 44 g mol⁻¹)",o:["22 g","44 g","88 g","132 g"],a:2,e:"Mass = moles × molar mass = 2 × 44 = 88 g."},
-{q:"How many moles are present in 49 g H₂SO₄? (M = 98 g mol⁻¹)",o:["0.25 mol","0.5 mol","1 mol","2 mol"],a:1,e:"n = mass/molar mass = 49/98 = 0.5 mol."},
-{q:"In 2Na + Cl₂ → 2NaCl, 0.5 mol Cl₂ produces, with excess Na:",o:["0.25 mol NaCl","0.5 mol NaCl","1.0 mol NaCl","2.0 mol NaCl"],a:2,e:"The ratio Cl₂:NaCl is 1:2, so 0.5 mol Cl₂ gives 1.0 mol NaCl."},
-{q:"A limiting reagent is the reactant that:",o:["Remains completely unused","Determines the maximum amount of product formed","Has the greatest molar mass","Is always a gas"],a:1,e:"The limiting reagent is consumed first and limits the theoretical amount of product."},
-{q:"If 2 mol H₂ reacts with 2 mol O₂ according to 2H₂ + O₂ → 2H₂O, the limiting reagent is:",o:["H₂","O₂","H₂O","Neither"],a:0,e:"2 mol H₂ needs only 1 mol O₂. Since 2 mol O₂ is available, H₂ is limiting."},
-{q:"For 2H₂ + O₂ → 2H₂O, if H₂ is limiting and 2 mol H₂ react completely, the maximum H₂O formed is:",o:["1 mol","2 mol","3 mol","4 mol"],a:1,e:"The ratio H₂:H₂O is 2:2, so 2 mol H₂ can form 2 mol H₂O."},
-{q:"Theoretical yield means the:",o:["Actual product obtained experimentally","Maximum product predicted from stoichiometry","Mass of catalyst used","Amount of excess reagent left"],a:1,e:"Theoretical yield is the maximum product calculated from the limiting reagent under ideal assumptions."},
-{q:"Percentage yield is calculated as:",o:["Theoretical yield/actual yield × 100","Actual yield/theoretical yield × 100","Actual yield + theoretical yield","Actual yield × theoretical yield"],a:1,e:"Percentage yield = (actual yield ÷ theoretical yield) × 100."},
-{q:"If the theoretical yield is 20 g and the actual yield is 15 g, the percentage yield is:",o:["50%","60%","75%","80%"],a:2,e:"% yield = (15/20) × 100 = 75%."},
-{q:"In stoichiometric calculations, a balanced chemical equation is essential because it provides:",o:["Mole relationships","Only temperature","Only colour information","Only reaction time"],a:0,e:"The coefficients of a balanced equation provide the mole relationships used to convert between reactants and products."},
-{q:"A balanced chemical equation provides the stoichiometric ratio between:",o:["Only atoms of one element","Reactants and products","Only catalysts","Only solvents"],a:1,e:"Coefficients in a balanced equation give the mole ratios among reactants and products."},
-{q:"In 2H₂ + O₂ → 2H₂O, the mole ratio H₂:O₂ is:",o:["1:1","2:1","1:2","2:2"],a:1,e:"Two moles of H₂ react with one mole of O₂, giving a 2:1 ratio."},
-{q:"In N₂ + 3H₂ → 2NH₃, one mole of N₂ produces theoretically:",o:["1 mol NH₃","2 mol NH₃","3 mol NH₃","6 mol NH₃"],a:1,e:"The balanced equation shows 1 mol N₂ produces 2 mol NH₃ theoretically."},
-{q:"In 2KClO₃ → 2KCl + 3O₂, 2 mol KClO₃ produce:",o:["1 mol O₂","2 mol O₂","3 mol O₂","6 mol O₂"],a:2,e:"The coefficient ratio is 2:3, so 2 mol KClO₃ produce 3 mol O₂."},
-{q:"For CaCO₃ → CaO + CO₂, 1 mol CaCO₃ produces:",o:["0.5 mol CO₂","1 mol CO₂","2 mol CO₂","3 mol CO₂"],a:1,e:"The coefficients are 1:1, so one mole CaCO₃ produces one mole CO₂."},
-{q:"The theoretical yield is the amount of product:",o:["Actually obtained experimentally","Predicted from stoichiometry under ideal conversion","Lost during filtration","Used as catalyst"],a:1,e:"Theoretical yield is the maximum amount predicted from the balanced reaction and limiting reactant."},
-{q:"Actual yield refers to the amount of product:",o:["Predicted only","Actually obtained in the experiment","Present in the reactants","Equal to molar mass"],a:1,e:"Actual yield is the quantity of product actually recovered."},
-{q:"Percentage yield is calculated as:",o:["(Theoretical/Actual)×100","(Actual/Theoretical)×100","Actual + Theoretical","Actual × Theoretical"],a:1,e:"Percentage yield = actual yield divided by theoretical yield × 100."},
-{q:"If theoretical yield is 20 g and actual yield is 15 g, percentage yield is:",o:["25%","50%","75%","80%"],a:2,e:"15/20 × 100 = 75%."},
-{q:"If actual yield is 18 g and percentage yield is 90%, theoretical yield is:",o:["16.2 g","18 g","20 g","22 g"],a:2,e:"Theoretical yield = actual/0.90 = 20 g."},
-{q:"In stoichiometric calculations, coefficients are used to convert between:",o:["Moles of reacting species","Atomic numbers","Melting points","Colours"],a:0,e:"Balanced coefficients establish mole-to-mole conversion ratios."},
-{q:"The mass of product is usually obtained after first determining:",o:["Number of moles of product","Atomic number of product","Density of solvent only","Electron count"],a:0,e:"Stoichiometric calculations commonly find product moles first, then multiply by molar mass."},
-{q:"For 2Na + Cl₂ → 2NaCl, 1 mol Cl₂ requires:",o:["1 mol Na","2 mol Na","3 mol Na","4 mol Na"],a:1,e:"The coefficient ratio Na:Cl₂ is 2:1."},
-{q:"For CH₄ + 2O₂ → CO₂ + 2H₂O, 1 mol CH₄ requires:",o:["1 mol O₂","2 mol O₂","3 mol O₂","4 mol O₂"],a:1,e:"The balanced equation requires 2 mol O₂ per mole of CH₄."},
-{q:"A stoichiometric calculation should generally begin with:",o:["An unbalanced equation","A balanced chemical equation","The colour of the reactants","The boiling point"],a:1,e:"A balanced equation is necessary to obtain correct mole ratios."}
+  {
+    "q": "What does stoichiometry primarily deal with?",
+    "o": [
+      "Quantitative relationships among reactants and products in chemical reactions",
+      "Only molecular shapes",
+      "Only reaction mechanisms",
+      "Only physical states"
+    ],
+    "a": 0,
+    "e": "Stoichiometry uses balanced chemical equations to establish quantitative relationships among reactants and products."
+  },
+  {
+    "q": "For 2H2 + O2 → 2H2O, how many moles of H2O form from 2 mol H2 with sufficient O2?",
+    "o": [
+      "2 mol",
+      "1 mol",
+      "3 mol",
+      "4 mol"
+    ],
+    "a": 0,
+    "e": "The coefficient ratio H2:H2O is 2:2, so 2 mol H2 can form 2 mol H2O."
+  },
+  {
+    "q": "The coefficients in a balanced chemical equation represent:",
+    "o": [
+      "Mole ratios between reacting species",
+      "Atomic masses",
+      "Volumes under every condition",
+      "Numbers of neutrons"
+    ],
+    "a": 0,
+    "e": "Balanced coefficients give the relative mole ratios of reactants and products."
+  },
+  {
+    "q": "For N2 + 3H2 → 2NH3, the mole ratio N2:H2 is:",
+    "o": [
+      "1:3",
+      "3:1",
+      "1:2",
+      "2:3"
+    ],
+    "a": 0,
+    "e": "The coefficients show that 1 mol N2 reacts with 3 mol H2."
+  },
+  {
+    "q": "How many moles are present in 18 g H2O? (M = 18 g mol−1)",
+    "o": [
+      "1 mol",
+      "2 mol",
+      "0.5 mol",
+      "18 mol"
+    ],
+    "a": 0,
+    "e": "n = mass/molar mass = 18/18 = 1 mol."
+  },
+  {
+    "q": "How many molecules are present in 1 mol of a substance?",
+    "o": [
+      "6.022 × 10^23",
+      "3.011 × 10^23",
+      "1.000 × 10^23",
+      "9.033 × 10^23"
+    ],
+    "a": 0,
+    "e": "One mole contains Avogadro's constant, 6.022 × 10^23 entities."
+  },
+  {
+    "q": "The molar mass of CO2 is:",
+    "o": [
+      "44 g mol−1",
+      "28 g mol−1",
+      "32 g mol−1",
+      "18 g mol−1"
+    ],
+    "a": 0,
+    "e": "M(CO2) = 12 + 2(16) = 44 g mol−1."
+  },
+  {
+    "q": "How many moles are present in 58.5 g NaCl? (M ≈ 58.5 g mol−1)",
+    "o": [
+      "1 mol",
+      "0.5 mol",
+      "2 mol",
+      "58.5 mol"
+    ],
+    "a": 0,
+    "e": "58.5 g divided by 58.5 g mol−1 equals 1 mol."
+  },
+  {
+    "q": "The limiting reagent is the reactant that:",
+    "o": [
+      "Is consumed completely first and limits product formation",
+      "Has the greatest molar mass",
+      "Is always present in excess",
+      "Always has the smallest coefficient"
+    ],
+    "a": 0,
+    "e": "The limiting reagent is consumed first and determines the maximum product."
+  },
+  {
+    "q": "If 2 mol H2 react with 1 mol O2 according to 2H2 + O2 → 2H2O, the limiting reagent is:",
+    "o": [
+      "Neither; they are in exact stoichiometric proportion",
+      "H2",
+      "O2",
+      "H2O"
+    ],
+    "a": 0,
+    "e": "The available 2:1 ratio exactly matches the balanced equation."
+  },
+  {
+    "q": "If 3 mol H2 react with 1 mol O2 according to 2H2 + O2 → 2H2O, the limiting reagent is:",
+    "o": [
+      "O2",
+      "H2",
+      "H2O",
+      "Neither"
+    ],
+    "a": 0,
+    "e": "1 mol O2 requires 2 mol H2, so H2 is in excess and O2 is limiting."
+  },
+  {
+    "q": "For N2 + 3H2 → 2NH3, 1 mol N2 theoretically produces:",
+    "o": [
+      "2 mol NH3",
+      "1 mol NH3",
+      "3 mol NH3",
+      "6 mol NH3"
+    ],
+    "a": 0,
+    "e": "The balanced equation gives a 1:2 ratio for N2:NH3."
+  },
+  {
+    "q": "A reactant present in more than the required stoichiometric amount is called:",
+    "o": [
+      "Excess reagent",
+      "Limiting reagent",
+      "Catalyst",
+      "Product"
+    ],
+    "a": 0,
+    "e": "The excess reagent remains after the limiting reagent is consumed."
+  },
+  {
+    "q": "Percentage yield is:",
+    "o": [
+      "(Actual yield / Theoretical yield) × 100",
+      "(Theoretical yield / Actual yield) × 100",
+      "Actual yield × Theoretical yield",
+      "Actual yield + Theoretical yield"
+    ],
+    "a": 0,
+    "e": "Percentage yield compares actual product with the theoretical maximum."
+  },
+  {
+    "q": "If theoretical yield is 10 g and actual yield is 8 g, percentage yield is:",
+    "o": [
+      "80%",
+      "20%",
+      "125%",
+      "8%"
+    ],
+    "a": 0,
+    "e": "(8/10) × 100 = 80%."
+  },
+  {
+    "q": "The empirical formula represents:",
+    "o": [
+      "The simplest whole-number ratio of atoms",
+      "The exact number of atoms in a molecule",
+      "The molecular mass only",
+      "The number of electrons only"
+    ],
+    "a": 0,
+    "e": "An empirical formula gives the simplest whole-number atom ratio."
+  },
+  {
+    "q": "The empirical formula of H2O2 is:",
+    "o": [
+      "HO",
+      "H2O2",
+      "HO2",
+      "H2O"
+    ],
+    "a": 0,
+    "e": "Dividing both subscripts by 2 gives the simplest ratio HO."
+  },
+  {
+    "q": "A compound contains 40% C, 6.67% H and 53.33% O. Its empirical formula is:",
+    "o": [
+      "CH2O",
+      "CHO",
+      "C2H4O2",
+      "CH4O"
+    ],
+    "a": 0,
+    "e": "Using a 100 g sample gives mole ratios approximately 1:2:1, hence CH2O."
+  },
+  {
+    "q": "Molarity is defined as:",
+    "o": [
+      "Moles of solute per litre of solution",
+      "Moles of solute per kilogram of solvent",
+      "Mass of solute per mole of solution",
+      "Moles of solvent per litre of solute"
+    ],
+    "a": 0,
+    "e": "Molarity is moles of solute divided by litres of solution."
+  },
+  {
+    "q": "How many moles are present in 250 mL of a 2.0 M solution?",
+    "o": [
+      "0.50 mol",
+      "2.0 mol",
+      "0.25 mol",
+      "8.0 mol"
+    ],
+    "a": 0,
+    "e": "n = M × V = 2.0 × 0.250 = 0.50 mol."
+  },
+  {
+    "q": "Molality is defined as:",
+    "o": [
+      "Moles of solute per kilogram of solvent",
+      "Moles of solute per litre of solution",
+      "Grams of solute per litre of solution",
+      "Moles of solvent per kilogram of solute"
+    ],
+    "a": 0,
+    "e": "Molality uses kilograms of solvent as the denominator."
+  },
+  {
+    "q": "What is the mass of 0.5 mol NaOH? (M = 40 g mol−1)",
+    "o": [
+      "20 g",
+      "40 g",
+      "10 g",
+      "80 g"
+    ],
+    "a": 0,
+    "e": "Mass = moles × molar mass = 0.5 × 40 = 20 g."
+  },
+  {
+    "q": "For CaCO3 → CaO + CO2, 1 mol CaCO3 produces:",
+    "o": [
+      "1 mol CO2",
+      "2 mol CO2",
+      "0.5 mol CO2",
+      "3 mol CO2"
+    ],
+    "a": 0,
+    "e": "The coefficient ratio CaCO3:CO2 is 1:1."
+  },
+  {
+    "q": "What is the first essential step before applying mole ratios?",
+    "o": [
+      "Balance the chemical equation",
+      "Convert every substance to atoms",
+      "Ignore coefficients",
+      "Calculate density first"
+    ],
+    "a": 0,
+    "e": "Only a balanced equation provides the correct stoichiometric mole ratios."
+  },
+  {
+    "q": "If 0.25 mol O2 reacts with excess H2 according to 2H2 + O2 → 2H2O, H2O formed is:",
+    "o": [
+      "0.50 mol",
+      "0.25 mol",
+      "1.00 mol",
+      "2.00 mol"
+    ],
+    "a": 0,
+    "e": "The ratio O2:H2O is 1:2, so 0.25 mol O2 gives 0.50 mol H2O."
+  },
+  {
+    "q": "A 5.0 g sample contains 4.0 g pure substance. Its percentage purity is:",
+    "o": [
+      "80%",
+      "20%",
+      "125%",
+      "4%"
+    ],
+    "a": 0,
+    "e": "Purity = (4.0/5.0) × 100 = 80%."
+  },
+  {
+    "q": "If 0.20 mol solute is dissolved to make 500 mL solution, its molarity is:",
+    "o": [
+      "0.40 M",
+      "0.20 M",
+      "2.50 M",
+      "0.10 M"
+    ],
+    "a": 0,
+    "e": "M = 0.20/0.500 = 0.40 M."
+  },
+  {
+    "q": "When two reactants are given in different amounts, the limiting reagent is identified by comparing:",
+    "o": [
+      "Available amounts with their stoichiometric requirements",
+      "Their colours",
+      "Their boiling points",
+      "Their atomic numbers only"
+    ],
+    "a": 0,
+    "e": "The reactant that runs out first according to the required mole ratio is limiting."
+  },
+  {
+    "q": "For 2Na + Cl2 → 2NaCl, 1 mol Cl2 requires:",
+    "o": [
+      "2 mol Na",
+      "1 mol Na",
+      "3 mol Na",
+      "4 mol Na"
+    ],
+    "a": 0,
+    "e": "The coefficient ratio Na:Cl2 is 2:1."
+  },
+  {
+    "q": "For CH4 + 2O2 → CO2 + 2H2O, 1 mol CH4 requires:",
+    "o": [
+      "2 mol O2",
+      "1 mol O2",
+      "3 mol O2",
+      "4 mol O2"
+    ],
+    "a": 0,
+    "e": "The balanced equation requires 2 mol O2 per mole of CH4."
+  }
 ];

@@ -1,6 +1,6 @@
 window.SkillUpStoichiometryQuestions=[
   {
-    "q": "What does stoichiometry primarily deal with?",
+    "q": "[[image:assets/chemistry/stoichiometry-01.svg|Stoichiometric mole-ratio diagram]] What does stoichiometry primarily deal with?",
     "o": [
       "Quantitative relationships among reactants and products in chemical reactions",
       "Only molecular shapes",
@@ -11,7 +11,7 @@ window.SkillUpStoichiometryQuestions=[
     "e": "Stoichiometry uses balanced chemical equations to establish quantitative relationships among reactants and products."
   },
   {
-    "q": "For 2H2 + O2 → 2H2O, how many moles of H2O form from 2 mol H2 with sufficient O2?",
+    "q": "[[image:assets/chemistry/stoichiometry-01.svg|Stoichiometric mole-ratio diagram]] For 2H2 + O2 → 2H2O, how many moles of H2O form from 2 mol H2 with sufficient O2?",
     "o": [
       "2 mol",
       "1 mol",

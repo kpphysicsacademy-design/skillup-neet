@@ -30,5 +30,4 @@ window.SKILLUP_CHEMISTRY_BANK["phosphorus-compounds"]=[
 {question:"Phosphate ion has the formula:",options:[{id:"a",value:"PO4^3−"},{id:"b",value:"PO3^3−"},{id:"c",value:"P2O7^4−"},{id:"d",value:"HPO4−"}],answer:"a",explanation:"The phosphate ion is PO4^3−."},
 {question:"Pyrophosphate ion has the formula:",options:[{id:"a",value:"P2O7^4−"},{id:"b",value:"PO4^3−"},{id:"c",value:"PO3^3−"},{id:"d",value:"P2O5^2−"}],answer:"a",explanation:"The pyrophosphate ion is P2O7^4−."},
 {question:"A common phosphate fertilizer is:",options:[{id:"a",value:"superphosphate"},{id:"b",value:"sodium chloride"},{id:"c",value:"calcium carbonate only"},{id:"d",value:"potassium permanganate"}],answer:"a",explanation:"Superphosphate fertilizers supply phosphorus in forms available to plants."},
-{question:"Phosphate ions can be detected by formation of a yellow precipitate with:",options:[{id:"a",value:"ammonium molybdate under suitable acidic conditions"},{id:"b",value:"sodium chloride only"},{id:"c",value:"potassium permanganate only"},{id:"d",value:"calcium oxide only"}],answer:"a",explanation:"Phosphate gives a characteristic yellow ammonium phosphomolybdate precipitate under appropriate test conditions."}
-];
+;

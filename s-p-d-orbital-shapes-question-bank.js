@@ -1,7 +1,7 @@
-window.SkillUpXQuestions=[
-{q:"The shape of an s orbital is generally:",o:["Spherical","Dumbbell","Cloverleaf","Linear"],a:0,e:"An s orbital has spherical symmetry around the nucleus."},
-{q:"The shape of a p orbital is generally:",o:["Spherical","Dumbbell","Cloverleaf","Cubic"],a:1,e:"A p orbital has two lobes and is commonly described as dumbbell-shaped."},
-{q:"The shape of a d orbital is generally represented by:",o:["Spherical only","Dumbbell only","Cloverleaf for four orbitals, with d_z² having a different shape","Linear"],a:2,e:"Four d orbitals have four-lobed cloverleaf shapes, while d_z² has two lobes with a toroidal ring."},
+window.SkillUpSPDOrbitalShapesQuestions=[
+{q:"[[image:assets/chemistry/spd-orbital-shapes-01.svg|s p d orbital shapes diagram]]<br>The shape of an s orbital is generally:",o:["Spherical","Dumbbell","Cloverleaf","Linear"],a:0,e:"An s orbital has spherical symmetry around the nucleus."},
+{q:"[[image:assets/chemistry/spd-orbital-shapes-01.svg|s p d orbital shapes diagram]]<br>The shape of a p orbital is generally:",o:["Spherical","Dumbbell","Cloverleaf","Cubic"],a:1,e:"A p orbital has two lobes and is commonly described as dumbbell-shaped."},
+{q:"[[image:assets/chemistry/spd-orbital-shapes-01.svg|s p d orbital shapes diagram]]<br>The shape of a d orbital is generally represented by:",o:["Spherical only","Dumbbell only","Cloverleaf for four orbitals, with d_z² having a different shape","Linear"],a:2,e:"Four d orbitals have four-lobed cloverleaf shapes, while d_z² has two lobes with a toroidal ring."},
 {q:"How many orbitals are present in an s subshell?",o:["1","2","3","5"],a:0,e:"For l = 0, there is 2l + 1 = 1 orbital."},
 {q:"How many orbitals are present in a p subshell?",o:["1","2","3","5"],a:2,e:"For l = 1, there are 2l + 1 = 3 p orbitals."},
 {q:"How many orbitals are present in a d subshell?",o:["3","5","7","9"],a:1,e:"For l = 2, there are 2l + 1 = 5 d orbitals."},

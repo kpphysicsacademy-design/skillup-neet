@@ -29,5 +29,4 @@ window.SkillUpPhotonEnergyQuestions=[
 {q:"A photon has wavelength 300 nm. Its energy is approximately:",o:["6.626×10⁻¹⁹ J","3.313×10⁻¹⁹ J","9.94×10⁻²⁰ J","1.99×10⁻¹⁹ J"],a:0,e:"E = hc/λ = (6.626×10⁻³⁴×3×10⁸)/(300×10⁻⁹) ≈ 6.626×10⁻¹⁹ J."},
 {q:"Which electromagnetic radiation generally has the highest photon energy?",o:["Radio waves","Microwaves","Ultraviolet","Gamma rays"],a:3,e:"Gamma rays have the highest frequencies among electromagnetic radiations and therefore the highest photon energies."},
 {q:"Which electromagnetic radiation generally has the lowest photon energy?",o:["Gamma rays","X-rays","Visible light","Radio waves"],a:3,e:"Radio waves have the lowest frequencies among the listed radiations and therefore the lowest photon energies."},
-{q:"Which expression correctly represents the energy of n photons each of frequency ν?",o:["nhν","hν/n","n+hν","hν²"],a:0,e:"Each photon has energy hν, so n photons have total energy nhν."}
 ];

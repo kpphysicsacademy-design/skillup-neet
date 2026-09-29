@@ -690,27 +690,4 @@ window.SKILLUP_CHEMISTRY_BANK["ammonia-derivative-addition"]=[
     "answer": "a",
     "explanation": "This is the standard condensation sequence for oxime, hydrazone, and related formation."
   },
-  {
-    "question": "Which statement is correct about ammonia derivatives and carbonyl compounds?",
-    "options": [
-      {
-        "id": "a",
-        "value": "Hydroxylamine gives oximes, hydrazine gives hydrazones, and semicarbazide gives semicarbazones."
-      },
-      {
-        "id": "b",
-        "value": "Hydroxylamine gives cyanohydrins only."
-      },
-      {
-        "id": "c",
-        "value": "Hydrazine gives ethers."
-      },
-      {
-        "id": "d",
-        "value": "Semicarbazide gives alkanes directly."
-      }
-    ],
-    "answer": "a",
-    "explanation": "Each nitrogen reagent forms its characteristic carbonyl derivative."
-  }
 ];

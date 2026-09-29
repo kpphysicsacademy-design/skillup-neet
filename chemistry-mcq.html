@@ -64,7 +64,7 @@ var bankCount=document.getElementById('bankCount');
 var content=document.getElementById('content');
 var bar=document.getElementById('bar');
 var items=[],i=0,score=0;
-var BANK_VERSION='20260929-chemistry-loader-v11';
+var BANK_VERSION='20260929-chemistry-loader-v12';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function richText(v){
@@ -104,7 +104,7 @@ function loadScript(src,requestedSlug){
  return new Promise(function(resolve,reject){
   var rawBase='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
   var cdnBase='https://cdn.jsdelivr.net/gh/kpphysicsacademy-design/skillup-neet@main/';
-  var urls=[rawBase+src,cdnBase+src,src],attempt=0,timer=null;
+  var urls=[src,rawBase+src,cdnBase+src],attempt=0,timer=null;
   function inspect(){
    var registry=window.SKILLUP_CHEMISTRY_BANK||{};
    var keys=[requestedSlug,slug(concept),slug(micro)].filter(Boolean);
@@ -121,6 +121,7 @@ function loadScript(src,requestedSlug){
    var before={};
    Object.keys(window).forEach(function(k){before[k]=window[k];});
    var sc=document.createElement('script');
+   sc.async=false;
    sc.src=url+(url.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=11&t='+Date.now();
    sc.crossOrigin='anonymous';
    var settled=false;

@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["oxygen-compounds"]=[
   {
     "question": "Which group is characteristic of alcohols?",

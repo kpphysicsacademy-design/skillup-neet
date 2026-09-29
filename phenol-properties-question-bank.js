@@ -1,5 +1,5 @@
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-window.SKILLUP_CHEMISTRY_BANK["phenol-properties"]=[
+window.SKILLUP_CHEMISTRY_BANK["phenol-properties"]=["phenol-properties"]=[
   {
     "question": "Phenol has the functional group:",
     "options": [

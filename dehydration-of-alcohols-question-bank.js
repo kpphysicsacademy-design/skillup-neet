@@ -1,5 +1,5 @@
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-window.SKILLUP_CHEMISTRY_BANK["dehydration-of-alcohols"]=[
+window.SKILLUP_CHEMISTRY_BANK["dehydration-of-alcohols"]=["dehydration-of-alcohols"]=[
   {
     "question": "Dehydration of an alcohol generally produces:",
     "options": [

@@ -689,28 +689,5 @@ window.SKILLUP_CHEMISTRY_BANK["aldehyde-ketone-reactivity"]=[
     ],
     "answer": "a",
     "explanation": "Both phenyl groups hinder approach and conjugate with the carbonyl group."
-  },
-  {
-    "question": "A strong electron-withdrawing substituent increases nucleophilic addition because it:",
-    "options": [
-      {
-        "id": "a",
-        "value": "makes the carbonyl carbon more electron deficient"
-      },
-      {
-        "id": "b",
-        "value": "makes the nucleophile less nucleophilic in every case"
-      },
-      {
-        "id": "c",
-        "value": "blocks the carbonyl carbon sterically"
-      },
-      {
-        "id": "d",
-        "value": "removes oxygen"
-      }
-    ],
-    "answer": "a",
-    "explanation": "Greater electron deficiency makes nucleophilic attack more favorable."
   }
 ];

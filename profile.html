@@ -26,15 +26,19 @@ button,input,select{font:inherit}.top{height:68px;background:#fff;border-bottom:
 <div class="field"><label for="name">Display name</label><input id="name" type="text" maxlength="80" autocomplete="name" placeholder="Your name"></div>
 <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" maxlength="20" autocomplete="tel" placeholder="Optional"></div>
 <div class="field"><label for="exam">Learning goal</label><select id="exam"><option value="">Select goal</option><option>NEET</option><option>JEE</option><option>Other</option></select></div>
+<div class="field"><label for="classLevel">Class / level</label><select id="classLevel"><option value="">Select level</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Dropper</option><option>College / Graduate</option><option>Other</option></select></div>
+<div class="field"><label for="language">Preferred language</label><select id="language"><option value="">Select language</option><option>English</option><option>Hindi</option><option>Telugu</option></select></div>
 <div class="actions"><button class="btn primary" id="save" type="button">Save profile</button><button class="btn secondary" id="refresh" type="button">Refresh</button></div>
 <div id="notice" class="notice" role="status" aria-live="polite"></div>
 </section>
 <section class="card">
 <h2>Account</h2>
+<div class="field"><label for="uid">User ID</label><input id="uid" type="text" readonly aria-describedby="uidHelp"><small id="uidHelp" style="display:block;margin-top:6px;color:#98a2b3;font-size:12px">Used internally to keep your learning records linked to your account.</small></div>
 <div class="field"><label>Email address</label><input id="email" type="email" readonly></div>
 <div class="stat"><span>Account status</span><span id="status">Signed in</span></div>
 <div class="stat"><span>Email verified</span><span id="verified">—</span></div>
 <div class="stat"><span>Learning records</span><span id="records">0</span></div>
+<div class="stat"><span>Profile completion</span><span id="completion">0%</span></div>
 <div class="actions"><button class="btn danger" id="signout" type="button">Sign out</button></div>
 </section>
 <section class="card full">
@@ -51,18 +55,25 @@ button,input,select{font:inherit}.top{height:68px;background:#fff;border-bottom:
 <script src="central-auth.js"></script>
 <script>
 (async()=>{
-const A=window.SkillUpAuth, notice=document.getElementById('notice'), name=document.getElementById('name'), phone=document.getElementById('phone'), exam=document.getElementById('exam'), email=document.getElementById('email'), avatar=document.getElementById('avatar'), verified=document.getElementById('verified'), records=document.getElementById('records');
+const A=window.SkillUpAuth, notice=document.getElementById('notice'), name=document.getElementById('name'), phone=document.getElementById('phone'), exam=document.getElementById('exam'), classLevel=document.getElementById('classLevel'), language=document.getElementById('language'), email=document.getElementById('email'), uid=document.getElementById('uid'), avatar=document.getElementById('avatar'), verified=document.getElementById('verified'), records=document.getElementById('records'), completion=document.getElementById('completion');
 function show(t,ok){notice.textContent=t;notice.className='notice '+(ok?'ok':'bad')}
 if(!A||!A.configured){show('Authentication service is unavailable.',false);return}
 const session=await A.requireAuth(location.href); if(!session)return;
 const user=session.user;
-email.value=user.email||''; verified.textContent=user.emailVerified?'Verified':'Not verified';
+email.value=user.email||''; uid.value=user.uid||''; verified.textContent=user.emailVerified?'Verified':'Not verified';
 avatar.textContent=(user.displayName||user.email||'S').trim().charAt(0).toUpperCase();
 async function load(){
  try{
   const p=await A.getProfile(user.uid);
-  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';}
-  if(A.db){
+  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';classLevel.value=p.class_level||'';language.value=p.preferred_language||'';}
+ updateCompletion();
+  function updateCompletion(){
+ const fields=[name.value.trim(),phone.value.trim(),exam.value,classLevel.value,language.value];
+ const done=fields.filter(Boolean).length;
+ completion.textContent=Math.round(done/fields.length*100)+'%';
+}
+[name,phone,exam,classLevel,language].forEach(el=>el.addEventListener('input',updateCompletion));
+if(A.db){
    const snap=await A.db.collection('skillup_progress').where('user_id','==',user.uid).get();
    records.textContent=String(snap.size);
   }
@@ -71,9 +82,10 @@ async function load(){
 await load();
 document.getElementById('save').addEventListener('click',async()=>{
  try{
-  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value});
+  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value,class_level:classLevel.value,preferred_language:language.value});
   if(name.value.trim()) await user.updateProfile({displayName:name.value.trim()});
   avatar.textContent=(name.value.trim()||user.email||'S').charAt(0).toUpperCase();
+  updateCompletion();
   show('Profile saved successfully.',true);
  }catch(e){show('Unable to save your profile. Please try again.',false)}
 });

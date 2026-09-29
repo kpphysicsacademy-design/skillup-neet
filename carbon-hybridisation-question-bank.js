@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["carbon-hybridisation"]=[
   {
     "question": "Hybridisation is the process of:",

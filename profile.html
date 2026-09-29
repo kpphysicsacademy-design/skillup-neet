@@ -59,6 +59,8 @@ button,input,select{font:inherit}.page{min-height:100vh;padding:28px 16px 70px}.
 <div class="form-grid">
 <div class="field"><label for="name">Display name</label><input id="name" type="text" maxlength="80" autocomplete="name" placeholder="Your name"></div>
 <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" maxlength="20" autocomplete="tel" placeholder="Optional"></div>
+<div class="field"><label for="city">City</label><input id="city" type="text" maxlength="60" autocomplete="address-level2" placeholder="Your city"></div>
+<div class="field"><label for="board">Board / curriculum</label><select id="board"><option value="">Select board</option><option>CBSE</option><option>State Board</option><option>ISC</option><option>Other</option></select></div>
 <div class="field"><label for="exam">Learning goal</label><select id="exam"><option value="">Select goal</option><option>NEET</option><option>JEE</option><option>Other</option></select></div>
 <div class="field"><label for="classLevel">Class / level</label><select id="classLevel"><option value="">Select level</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Dropper</option><option>College / Graduate</option><option>Other</option></select></div>
 <div class="field"><label for="language">Preferred language</label><select id="language"><option value="">Select language</option><option>English</option><option>Hindi</option><option>Telugu</option></select></div>
@@ -67,7 +69,12 @@ button,input,select{font:inherit}.page{min-height:100vh;padding:28px 16px 70px}.
 <div class="field"><label for="studyLevel">Preparation level</label><select id="studyLevel"><option value="">Select level</option><option>Foundation</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Revision</option></select></div>
 <div class="field"><label for="dailyGoal">Daily practice goal</label><select id="dailyGoal"><option value="">Select goal</option><option>10 MCQs</option><option>20 MCQs</option><option>30 MCQs</option><option>50 MCQs</option><option>100 MCQs</option></select></div>
 <div class="field"><label for="studyTime">Daily study time</label><select id="studyTime"><option value="">Select time</option><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>3 hours</option><option>4+ hours</option></select></div>
+<div class="field"><label for="weakSubject">Focus subject</label><select id="weakSubject"><option value="">Select focus</option><option>Physics</option><option>Chemistry</option><option>Botany</option><option>Zoology</option><option>Mathematics</option><option>Balanced</option></select></div>
+<div class="field"><label for="learningMode">Learning mode</label><select id="learningMode"><option value="">Select mode</option><option>Learn</option><option>Practice</option><option>Test</option><option>Learn + Practice + Test</option></select></div>
+<div class="field"><label for="sessionTime">Preferred session</label><select id="sessionTime"><option value="">Select time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option><option>Flexible</option></select></div>
+<div class="field"><label for="weeklyGoal">Weekly target</label><select id="weeklyGoal"><option value="">Select target</option><option>100 MCQs</option><option>250 MCQs</option><option>500 MCQs</option><option>750 MCQs</option><option>1000+ MCQs</option></select></div>
 </div>
+<div class="field" style="margin-top:14px"><label for="studyGoal">Personal study goal</label><input id="studyGoal" type="text" maxlength="160" placeholder="Example: Complete 100 MCQs every day"></div>
 <div class="actions"><button class="btn primary" id="save" type="button">Save changes</button><button class="btn secondary" id="refresh" type="button">Refresh</button></div>
 <div id="notice" class="notice" role="status" aria-live="polite"></div>
 </section>
@@ -113,10 +120,10 @@ button,input,select{font:inherit}.page{min-height:100vh;padding:28px 16px 70px}.
 (async()=>{
 const A=window.SkillUpAuth;
 const $=id=>document.getElementById(id);
-const notice=$('notice'),name=$('name'),phone=$('phone'),exam=$('exam'),classLevel=$('classLevel'),language=$('language'),targetYear=$('targetYear'),subjects=$('subjects'),studyLevel=$('studyLevel'),dailyGoal=$('dailyGoal'),studyTime=$('studyTime'),email=$('email');
+const notice=$('notice'),name=$('name'),phone=$('phone'),city=$('city'),board=$('board'),exam=$('exam'),classLevel=$('classLevel'),language=$('language'),targetYear=$('targetYear'),subjects=$('subjects'),studyLevel=$('studyLevel'),dailyGoal=$('dailyGoal'),studyTime=$('studyTime'),weakSubject=$('weakSubject'),learningMode=$('learningMode'),sessionTime=$('sessionTime'),weeklyGoal=$('weeklyGoal'),studyGoal=$('studyGoal'),email=$('email');
 function show(message,ok){notice.textContent=message;notice.className='notice '+(ok?'ok':'bad')}
 function updateUI(){
- const fields=[name.value.trim(),exam.value,classLevel.value,language.value,targetYear.value,subjects.value,studyLevel.value,dailyGoal.value,studyTime.value];
+ const fields=[name.value.trim(),city.value.trim(),board.value,exam.value,classLevel.value,language.value,targetYear.value,subjects.value,studyLevel.value,dailyGoal.value,studyTime.value,weakSubject.value,learningMode.value,sessionTime.value,weeklyGoal.value,studyGoal.value];
  const pct=Math.round(fields.filter(Boolean).length/fields.length*100);
  $('completion').textContent=pct+'%';$('heroCompletion').textContent=pct+'%';$('heroProgress').style.width=pct+'%';
  const who=name.value.trim()||email.value||'S';$('heroAvatar').textContent=who.charAt(0).toUpperCase();
@@ -129,7 +136,7 @@ const user=session.user;email.value=user.email||'';$('verified').textContent=use
 async function load(){
  try{
   const p=await A.getProfile(user.uid);
-  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';classLevel.value=p.class_level||'';language.value=p.preferred_language||'';targetYear.value=p.target_exam_year||'';subjects.value=p.primary_subjects||'';studyLevel.value=p.preparation_level||'';dailyGoal.value=p.daily_practice_goal||'';studyTime.value=p.daily_study_time||''}
+  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';city.value=p.city||'';board.value=p.board||'';exam.value=p.learning_goal||'';classLevel.value=p.class_level||'';language.value=p.preferred_language||'';targetYear.value=p.target_exam_year||'';subjects.value=p.primary_subjects||'';studyLevel.value=p.preparation_level||'';dailyGoal.value=p.daily_practice_goal||'';studyTime.value=p.daily_study_time||'';weakSubject.value=p.focus_subject||'';learningMode.value=p.learning_mode||'';sessionTime.value=p.preferred_session||'';weeklyGoal.value=p.weekly_goal||'';studyGoal.value=p.personal_study_goal||''}
   if(A.db){const snap=await A.db.collection('skillup_progress').where('user_id','==',user.uid).get();$('records').textContent=String(snap.size)}
   updateUI();
  }catch(e){show('Unable to load your profile right now.',false)}
@@ -137,7 +144,7 @@ async function load(){
 await load();
 $('save').addEventListener('click',async()=>{
  try{
-  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value,class_level:classLevel.value,preferred_language:language.value,target_exam_year:targetYear.value,primary_subjects:subjects.value,preparation_level:studyLevel.value,daily_practice_goal:dailyGoal.value,daily_study_time:studyTime.value});
+  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),city:city.value.trim(),board:board.value,learning_goal:exam.value,class_level:classLevel.value,preferred_language:language.value,target_exam_year:targetYear.value,primary_subjects:subjects.value,preparation_level:studyLevel.value,daily_practice_goal:dailyGoal.value,daily_study_time:studyTime.value,focus_subject:weakSubject.value,learning_mode:learningMode.value,preferred_session:sessionTime.value,weekly_goal:weeklyGoal.value,personal_study_goal:studyGoal.value});
   if(name.value.trim())await user.updateProfile({displayName:name.value.trim()});
   updateUI();show('Profile saved successfully.',true);
  }catch(e){show('Unable to save your profile. Please try again.',false)}

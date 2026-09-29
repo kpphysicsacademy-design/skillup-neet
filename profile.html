@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp learner profile and account settings.">
+<meta name="theme-color" content="#315efb">
+<link rel="icon" type="image/svg+xml" href="skillup-logo.svg">
+<title>SkillUp | My Profile</title>
+<style>
+:root{--brand:#315efb;--brand-dark:#244bd4;--navy:#071a31;--text:#182033;--muted:#667085;--border:#e3e8f0;--bg:#f6f8fc;--card:#fff;--green:#067647;--danger:#b42318;--focus:0 0 0 4px rgba(49,94,251,.14)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+button,input,select{font:inherit}.top{height:68px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}.header{max-width:1000px;height:100%;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}.logo{width:42px;height:42px;border-radius:13px}.brand strong{display:block;font-size:20px}.brand small{display:block;font-size:9px;letter-spacing:1.5px;color:var(--muted);font-weight:800}
+.wrap{max-width:900px;margin:auto;padding:28px 20px 90px}.hero{background:linear-gradient(135deg,var(--navy),#123a66 65%,#0b6b78);color:#fff;border-radius:24px;padding:28px;margin-bottom:18px;box-shadow:0 12px 30px rgba(7,26,49,.15)}.hero h1{margin:0 0 7px;font-size:32px}.hero p{margin:0;color:#dbe7f5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 7px 22px rgba(23,32,51,.06)}.card.full{grid-column:1/-1}.card h2{font-size:18px;margin:0 0 18px}.avatar{width:72px;height:72px;border-radius:20px;background:#eaf0ff;color:var(--brand);display:grid;place-items:center;font-size:28px;font-weight:900;margin-bottom:14px}.field{margin-top:15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px;color:#475467}.field input,.field select{width:100%;min-height:46px;padding:10px 12px;border:1px solid #d5dce7;border-radius:11px;background:#fff;color:var(--text);outline:0}.field input:focus,.field select:focus{border-color:var(--brand);box-shadow:var(--focus)}.field input[readonly]{background:#f8fafc;color:#667085}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:11px;padding:11px 16px;font-weight:800;cursor:pointer}.primary{background:var(--brand);color:#fff}.primary:hover{background:var(--brand-dark)}.secondary{background:#eef2f8;color:#182033}.danger{background:#fff1f2;color:var(--danger);border:1px solid #fecdca}.stat{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #edf0f4}.stat:last-child{border-bottom:0}.stat span:last-child{font-weight:900;color:var(--brand)}.notice{display:none;margin-top:14px;padding:12px;border-radius:11px;font-size:14px;font-weight:650}.notice.ok{display:block;background:#ecfdf3;color:var(--green)}.notice.bad{display:block;background:#fff1f2;color:var(--danger)}.security{font-size:13px;color:var(--muted);line-height:1.55}.back{display:inline-block;margin-top:18px;color:var(--brand);font-weight:800;text-decoration:none}@media(max-width:700px){.header{padding:0 14px}.wrap{padding:20px 14px 82px}.grid{grid-template-columns:1fr}.card.full{grid-column:auto}.hero h1{font-size:27px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="header"><a class="brand" href="index.html" aria-label="SkillUp Home"><img class="logo" src="skillup-logo.svg" alt="SkillUp logo" width="42" height="42"><span><strong>SkillUp</strong><small>LEARN • PRACTICE • MASTER</small></span></a></div></header>
+<main class="wrap">
+<section class="hero"><h1>My Profile</h1><p>Manage your learner details, account information and SkillUp activity.</p></section>
+<div class="grid">
+<section class="card">
+<h2>Personal details</h2>
+<div class="avatar" id="avatar">S</div>
+<div class="field"><label for="name">Display name</label><input id="name" type="text" maxlength="80" autocomplete="name" placeholder="Your name"></div>
+<div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" maxlength="20" autocomplete="tel" placeholder="Optional"></div>
+<div class="field"><label for="exam">Learning goal</label><select id="exam"><option value="">Select goal</option><option>NEET</option><option>JEE</option><option>Other</option></select></div>
+<div class="actions"><button class="btn primary" id="save" type="button">Save profile</button><button class="btn secondary" id="refresh" type="button">Refresh</button></div>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>Account</h2>
+<div class="field"><label>Email address</label><input id="email" type="email" readonly></div>
+<div class="stat"><span>Account status</span><span id="status">Signed in</span></div>
+<div class="stat"><span>Email verified</span><span id="verified">—</span></div>
+<div class="stat"><span>Learning records</span><span id="records">0</span></div>
+<div class="actions"><button class="btn danger" id="signout" type="button">Sign out</button></div>
+</section>
+<section class="card full">
+<h2>Security & privacy</h2>
+<p class="security">Your password is handled by Firebase Authentication. SkillUp does not display or store your password on this page. Your profile is associated with your authenticated Firebase user ID so learning data can be separated by account.</p>
+<a class="back" href="index.html">← Back to SkillUp Home</a>
+</section>
+</div>
+</main>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>
+(async()=>{
+const A=window.SkillUpAuth, notice=document.getElementById('notice'), name=document.getElementById('name'), phone=document.getElementById('phone'), exam=document.getElementById('exam'), email=document.getElementById('email'), avatar=document.getElementById('avatar'), verified=document.getElementById('verified'), records=document.getElementById('records');
+function show(t,ok){notice.textContent=t;notice.className='notice '+(ok?'ok':'bad')}
+if(!A||!A.configured){show('Authentication service is unavailable.',false);return}
+const session=await A.requireAuth(location.href); if(!session)return;
+const user=session.user;
+email.value=user.email||''; verified.textContent=user.emailVerified?'Verified':'Not verified';
+avatar.textContent=(user.displayName||user.email||'S').trim().charAt(0).toUpperCase();
+async function load(){
+ try{
+  const p=await A.getProfile(user.uid);
+  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';}
+  if(A.db){
+   const snap=await A.db.collection('skillup_progress').where('user_id','==',user.uid).get();
+   records.textContent=String(snap.size);
+  }
+ }catch(e){show('Unable to load your profile right now.',false)}
+}
+await load();
+document.getElementById('save').addEventListener('click',async()=>{
+ try{
+  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value});
+  if(name.value.trim()) await user.updateProfile({displayName:name.value.trim()});
+  avatar.textContent=(name.value.trim()||user.email||'S').charAt(0).toUpperCase();
+  show('Profile saved successfully.',true);
+ }catch(e){show('Unable to save your profile. Please try again.',false)}
+});
+document.getElementById('refresh').addEventListener('click',load);
+document.getElementById('signout').addEventListener('click',async()=>{try{await A.signOut();location.replace('central-login.html')}catch(e){show('Unable to sign out. Please try again.',false)}});
+})();
+</script>
+</body>
+</html>

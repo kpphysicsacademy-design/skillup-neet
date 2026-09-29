@@ -64,7 +64,7 @@ var bankCount=document.getElementById('bankCount');
 var content=document.getElementById('content');
 var bar=document.getElementById('bar');
 var items=[],i=0,score=0;
-var BANK_VERSION='20260927-chemistry-architecture-v7';
+var BANK_VERSION='20260929-chemistry-loader-v8';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function richText(v){
@@ -105,8 +105,12 @@ function loadScript(src,requestedSlug){
   var base='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
   var urls=[src,base+src],attempt=0,timer=null;
   function inspect(){
-   var direct=window.SKILLUP_CHEMISTRY_BANK&&window.SKILLUP_CHEMISTRY_BANK[requestedSlug];
-   if(isBank(direct)){if(timer)clearTimeout(timer);resolve(direct);return true;}
+   var registry=window.SKILLUP_CHEMISTRY_BANK||{};
+   var keys=[requestedSlug,slug(concept),slug(micro)].filter(Boolean);
+   for(var ri=0;ri<keys.length;ri++){
+    var direct=registry[keys[ri]];
+    if(isBank(direct)){if(timer)clearTimeout(timer);resolve(direct);return true;}
+   }
    return false;
   }
   function attemptLoad(){
@@ -146,8 +150,11 @@ async function load(){
  title.textContent=concept||'Chemistry Quiz';
  if(!concept){showStatus('No concept was supplied. Return to the Chemistry path and select a concept.');return;}
  var files=candidates(concept),bank=null;
+ var bankKeys=[slug(micro||concept),slug(concept),slug(micro)].filter(Boolean);
  for(var n=0;n<files.length&&!bank;n++){
-  try{bank=await loadScript(files[n],slug(micro||concept));}catch(e){}
+  for(var bk=0;bk<bankKeys.length&&!bank;bk++){
+   try{bank=await loadScript(files[n],bankKeys[bk]);}catch(e){}
+  }
  }
  if(!bank){
   showStatus('A dedicated Chemistry question bank is not connected for this concept yet.');

@@ -102,8 +102,9 @@ function isBank(v){
 }
 function loadScript(src,requestedSlug){
  return new Promise(function(resolve,reject){
-  var base='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
-  var urls=[src,base+src],attempt=0,timer=null;
+  var rawBase='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
+  var cdnBase='https://cdn.jsdelivr.net/gh/kpphysicsacademy-design/skillup-neet@main/';
+  var urls=[cdnBase+src,rawBase+src,src],attempt=0,timer=null;
   function inspect(){
    var registry=window.SKILLUP_CHEMISTRY_BANK||{};
    var keys=[requestedSlug,slug(concept),slug(micro)].filter(Boolean);
@@ -120,7 +121,8 @@ function loadScript(src,requestedSlug){
    var before={};
    Object.keys(window).forEach(function(k){before[k]=window[k];});
    var sc=document.createElement('script');
-   sc.src=url+(url.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=7&t='+Date.now();
+   sc.src=url+(url.indexOf('?')>-1?'&':'?')+'v='+BANK_VERSION+'&cb=9&t='+Date.now();
+   sc.crossOrigin='anonymous';
    var settled=false;
    function next(){
     if(settled)return;

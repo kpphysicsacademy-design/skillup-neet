@@ -689,28 +689,5 @@ window.SKILLUP_CHEMISTRY_BANK["hcn-addition"]=[
     ],
     "answer": "a",
     "explanation": "The added CN group can undergo further transformations, making cyanohydrin formation synthetically useful. citeturn0search0"
-  },
-  {
-    "question": "Which sequence correctly represents cyanohydrin formation?",
-    "options": [
-      {
-        "id": "a",
-        "value": "CN− attack → alkoxide formation → protonation"
-      },
-      {
-        "id": "b",
-        "value": "protonation → radical cleavage → halogenation"
-      },
-      {
-        "id": "c",
-        "value": "elimination → oxidation → hydration"
-      },
-      {
-        "id": "d",
-        "value": "substitution → dehydration → nitration"
-      }
-    ],
-    "answer": "a",
-    "explanation": "This is the standard base-catalyzed sequence. citeturn0search0"
   }
 ];

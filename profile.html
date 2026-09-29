@@ -71,8 +71,26 @@ h1{margin:0;font-size:28px;letter-spacing:-.4px}
 <div class="field"><label for="exam">Learning goal</label><select id="exam"><option value="">Select goal</option><option>NEET</option><option>JEE</option><option>Other</option></select></div>
 <div class="field"><label for="classLevel">Class / level</label><select id="classLevel"><option value="">Select level</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Dropper</option><option>College / Graduate</option><option>Other</option></select></div>
 <div class="field"><label for="language">Preferred language</label><select id="language"><option value="">Select language</option><option>English</option><option>Hindi</option><option>Telugu</option></select></div>
+<div class="section" style="padding-top:20px;margin-top:20px;border-top:1px solid #edf0f4">
+<h2>Learning track</h2>
+<div class="field"><label for="targetYear">Target exam year</label><select id="targetYear"><option value="">Select year</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select></div>
+<div class="field"><label for="subjects">Primary subjects</label><select id="subjects"><option value="">Select track</option><option>Physics • Chemistry • Biology</option><option>Physics • Chemistry • Mathematics</option><option>Biology • Chemistry</option><option>Physics • Chemistry</option><option>All subjects</option></select></div>
+<div class="field"><label for="studyLevel">Current preparation level</label><select id="studyLevel"><option value="">Select level</option><option>Foundation</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Revision</option></select></div>
+<div class="field"><label for="dailyGoal">Daily practice goal</label><select id="dailyGoal"><option value="">Select goal</option><option>10 MCQs</option><option>20 MCQs</option><option>30 MCQs</option><option>50 MCQs</option><option>100 MCQs</option></select></div>
+<div class="field"><label for="studyTime">Daily study time</label><select id="studyTime"><option value="">Select time</option><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>3 hours</option><option>4+ hours</option></select></div>
+</div>
 <div class="actions"><button class="btn primary" id="save" type="button">Save profile</button><button class="btn secondary" id="refresh" type="button">Refresh</button></div>
 <div id="notice" class="notice" role="status" aria-live="polite"></div>
+</div>
+
+<div class="section">
+<h2>Your learning track</h2>
+<div class="stats">
+<div class="stat"><span class="stat-label">Goal</span><span class="stat-value" id="trackGoal">Not set</span></div>
+<div class="stat"><span class="stat-label">Target year</span><span class="stat-value" id="trackYear">Not set</span></div>
+<div class="stat"><span class="stat-label">Subjects</span><span class="stat-value" id="trackSubjects">Not set</span></div>
+<div class="stat"><span class="stat-label">Daily goal</span><span class="stat-value" id="trackDaily">Not set</span></div>
+</div>
 </div>
 
 <div class="section">
@@ -105,9 +123,9 @@ h1{margin:0;font-size:28px;letter-spacing:-.4px}
 <script>
 (async()=>{
 const A=window.SkillUpAuth;
-const notice=document.getElementById('notice'),name=document.getElementById('name'),phone=document.getElementById('phone'),exam=document.getElementById('exam'),classLevel=document.getElementById('classLevel'),language=document.getElementById('language'),email=document.getElementById('email'),uid=document.getElementById('uid'),avatar=document.getElementById('avatar'),profileName=document.getElementById('profileName'),verified=document.getElementById('verified'),records=document.getElementById('records'),completion=document.getElementById('completion');
+const notice=document.getElementById('notice'),name=document.getElementById('name'),phone=document.getElementById('phone'),exam=document.getElementById('exam'),classLevel=document.getElementById('classLevel'),language=document.getElementById('language'),targetYear=document.getElementById('targetYear'),subjects=document.getElementById('subjects'),studyLevel=document.getElementById('studyLevel'),dailyGoal=document.getElementById('dailyGoal'),studyTime=document.getElementById('studyTime'),email=document.getElementById('email'),uid=document.getElementById('uid'),avatar=document.getElementById('avatar'),profileName=document.getElementById('profileName'),verified=document.getElementById('verified'),records=document.getElementById('records'),completion=document.getElementById('completion'),trackGoal=document.getElementById('trackGoal'),trackYear=document.getElementById('trackYear'),trackSubjects=document.getElementById('trackSubjects'),trackDaily=document.getElementById('trackDaily');
 function show(message,ok){notice.textContent=message;notice.className='notice '+(ok?'ok':'bad')}
-function updateCompletion(){const fields=[name.value.trim(),phone.value.trim(),exam.value,classLevel.value,language.value];completion.textContent=Math.round(fields.filter(Boolean).length/fields.length*100)+'%';profileName.textContent=name.value.trim()||'SkillUp Learner';avatar.textContent=(name.value.trim()||email.value||'S').charAt(0).toUpperCase()}
+function updateCompletion(){const fields=[name.value.trim(),exam.value,classLevel.value,language.value,targetYear.value,subjects.value,studyLevel.value,dailyGoal.value,studyTime.value];completion.textContent=Math.round(fields.filter(Boolean).length/fields.length*100)+'%';profileName.textContent=name.value.trim()||'SkillUp Learner';avatar.textContent=(name.value.trim()||email.value||'S').charAt(0).toUpperCase();trackGoal.textContent=exam.value||'Not set';trackYear.textContent=targetYear.value||'Not set';trackSubjects.textContent=subjects.value||'Not set';trackDaily.textContent=dailyGoal.value||'Not set'}
 if(!A||!A.configured){show('Authentication service is unavailable.',false);return}
 const session=await A.requireAuth(location.href);if(!session)return;
 const user=session.user;
@@ -115,7 +133,7 @@ email.value=user.email||'';uid.value=user.uid||'';verified.textContent=user.emai
 async function load(){
  try{
   const p=await A.getProfile(user.uid);
-  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';classLevel.value=p.class_level||'';language.value=p.preferred_language||''}
+  if(p){name.value=p.display_name||p.name||'';phone.value=p.phone||'';exam.value=p.learning_goal||'';classLevel.value=p.class_level||'';language.value=p.preferred_language||'';targetYear.value=p.target_exam_year||'';subjects.value=p.primary_subjects||'';studyLevel.value=p.preparation_level||'';dailyGoal.value=p.daily_practice_goal||'';studyTime.value=p.daily_study_time||''}
   if(A.db){const snap=await A.db.collection('skillup_progress').where('user_id','==',user.uid).get();records.textContent=String(snap.size)}
   updateCompletion();
  }catch(e){show('Unable to load your profile right now.',false)}
@@ -123,7 +141,7 @@ async function load(){
 await load();
 document.getElementById('save').addEventListener('click',async()=>{
  try{
-  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value,class_level:classLevel.value,preferred_language:language.value});
+  await A.saveProfile({display_name:name.value.trim(),phone:phone.value.trim(),learning_goal:exam.value,class_level:classLevel.value,preferred_language:language.value,target_exam_year:targetYear.value,primary_subjects:subjects.value,preparation_level:studyLevel.value,daily_practice_goal:dailyGoal.value,daily_study_time:studyTime.value});
   if(name.value.trim())await user.updateProfile({displayName:name.value.trim()});
   updateCompletion();show('Profile saved successfully.',true);
  }catch(e){show('Unable to save your profile. Please try again.',false)}

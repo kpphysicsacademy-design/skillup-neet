@@ -1,5 +1,5 @@
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-window.SKILLUP_CHEMISTRY_BANK["phenol-preparation"]=[
+window.SKILLUP_CHEMISTRY_BANK["phenol-preparation"]=["phenol-preparation"]=[
   {
     "question": "Phenol can be prepared industrially from chlorobenzene by the:",
     "options": [

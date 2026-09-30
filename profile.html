@@ -7,12 +7,12 @@
 <link rel="icon" type="image/webp" href="skillup-logo-exact.webp">
 <title>SkillUp | My Profile</title>
 <style>
-:root{--brand:#2563eb;--brand2:#1d4ed8;--navy:#071a31;--text:#172033;--muted:#667085;--line:#e7ebf2;--bg:#f5f7fb;--green:#12b76a;--red:#b42318}
+:root{--brand:#2563eb;--brand2:#1d4ed8;--navy:#071a31;--text:#172033;--muted:#667085;--line:#dfe7f3;--bg:#f6f9ff;--green:#12b76a;--red:#b42318}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 .page{min-height:100vh;padding:16px 10px 44px}.shell{width:100%;max-width:680px;margin:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;box-shadow:0 5px 14px rgba(49,94,251,.18)}.brand strong{display:block;font-size:18px}.brand small{display:block;color:#6941c6;font-size:8px;font-weight:900;letter-spacing:1.3px;margin-top:2px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;box-shadow:0 5px 14px rgba(37,99,235,.18)}.brand strong{display:block;font-size:18px}.brand small{display:block;color:#2563eb;font-size:8px;font-weight:900;letter-spacing:1.3px;margin-top:2px}
 .home{border:1px solid var(--line);background:#fff;color:var(--navy);text-decoration:none;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:800}
-.hero{background:linear-gradient(125deg,#071a31,#12375d 52%,#315efb);color:#fff;border-radius:22px;padding:22px 20px;margin-bottom:14px;box-shadow:0 14px 35px rgba(16,24,40,.10)}.hero-user{display:flex;align-items:center;gap:12px}.avatar{width:54px;height:54px;border-radius:17px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;font-size:22px;font-weight:900}.hero h1{margin:0;font-size:28px;letter-spacing:-.7px}.hero p{margin:5px 0 0;color:#dce7f6;font-size:13px}
+.hero{background:linear-gradient(125deg,#071a31,#12375d 52%,#2563eb);color:#fff;border-radius:22px;padding:22px 20px;margin-bottom:14px;box-shadow:0 14px 35px rgba(16,24,40,.10)}.hero-user{display:flex;align-items:center;gap:12px}.avatar{width:54px;height:54px;border-radius:17px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;font-size:22px;font-weight:900}.hero h1{margin:0;font-size:28px;letter-spacing:-.7px}.hero p{margin:5px 0 0;color:#dce7f6;font-size:13px}
 .card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:18px;margin-bottom:14px;box-shadow:0 7px 24px rgba(16,24,40,.045)}.head{margin-bottom:15px}.head h2{margin:0;font-size:18px}.head p{margin:4px 0 0;color:var(--muted);font-size:12px}
 .details{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fbfcff}.label{display:block;color:var(--muted);font-size:11px;font-weight:700}.value{display:block;color:var(--navy);font-size:15px;font-weight:900;margin-top:5px;word-break:break-word}
 .actions{display:flex;gap:10px;margin-top:14px}.btn{flex:1;border:0;border-radius:11px;min-height:44px;padding:9px 13px;font-weight:850;cursor:pointer}.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}.secondary{background:#eef2f8;color:var(--navy)}
@@ -42,7 +42,7 @@
 <div class="field"><label for="name">Name</label><input id="name" maxlength="80" autocomplete="name" placeholder="Your name"></div>
 <div class="field"><label for="classLevel">Class / Level</label><select id="classLevel"><option value="">Select</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Dropper</option><option>College / Graduate</option><option>Other</option></select></div>
 <div class="field"><label for="college">College / School</label><input id="college" maxlength="120" autocomplete="organization" placeholder="School or college name"></div>
-<div class="field"><label for="target">Target</label><select id="target"><option value="">Select target</option><option>NEET 2026</option><option>NEET 2027</option><option>NEET 2028</option><option>JEE 2026</option><option>JEE 2027</option><option>Other</option></select></div>
+<div class="field"><label for="target">Target</label><select id="target"><option value="">Select target</option><option>JEE</option><option>NEET</option><option>CUET</option><option>Other competitive exam</option><option>Not decided yet</option></select></div>
 <div class="actions"><button class="btn primary" id="save" type="button">Save details</button><button class="btn secondary" id="cancel" type="button">Cancel</button></div>
 </div>
 <div id="notice" class="notice" role="status" aria-live="polite"></div>
@@ -78,7 +78,7 @@ function show(msg,ok){notice.textContent=msg;notice.className='notice '+(ok?'ok'
 if(!A||!A.configured)return;
 const session=await A.requireAuth(location.href);if(!session)return;
 const user=session.user;$('emailText').textContent=user.email||'Signed-in account';
-$('name').value=user.displayName||user.email?.split('@')[0]||'';
+$('name').value=user.displayName||'';
 async function load(){
  try{
   const p=await A.getProfile(user.uid)||{};

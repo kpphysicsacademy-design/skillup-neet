@@ -11,7 +11,7 @@
 :root{--brand:#2563eb;--brand-dark:#1d4ed8;--accent:#2563eb;--text:#182033;--muted:#667085;--border:#d8dfeb;--page:#f6f9ff;--danger:#b42318;--success:#067647;--focus:0 0 0 4px rgba(37,99,235,.14)}
 *{box-sizing:border-box}html{min-height:100%;background:var(--page)}
 body{min-height:100vh;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#e8f1ff 0,#f6f9ff 42%,#f6f9ff 100%);color:var(--text)}
-button,input{font:inherit}button{cursor:pointer}.wrap{width:min(100%,520px);margin:0 auto;padding:34px 20px 28px}
+button,input,select{font:inherit}button{cursor:pointer}.wrap{width:min(100%,520px);margin:0 auto;padding:34px 20px 28px}
 .brand{text-align:center;margin:0 0 20px}.brand-logo{display:block;width:76px;height:76px;margin:0 auto 10px;border-radius:18px;object-fit:cover;box-shadow:0 10px 24px rgba(37,99,235,.2)}
 .brand b{display:block;font-size:30px;line-height:1.05;letter-spacing:-.6px}.brand small{display:block;margin-top:6px;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:2.2px}
 .card{background:rgba(255,255,255,.98);border:1px solid #dfe7f3;border-radius:22px;padding:30px;box-shadow:0 14px 36px rgba(24,32,51,.09)}
@@ -19,6 +19,7 @@ h1{margin:0 0 8px;font-size:27px;letter-spacing:-.4px}.intro{margin:0 0 22px;col
 .field{margin-top:16px}label{display:block;margin:0 0 8px;font-size:13px;font-weight:800}
 input{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;outline:0;background:#fff;color:var(--text);transition:border-color .15s,box-shadow .15s}
 input:focus,select:focus{border-color:var(--brand);box-shadow:var(--focus)}input[aria-invalid="true"]{border-color:#d92d20}input::placeholder{color:#98a2b3}select{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;outline:0;background:#fff;color:var(--text)}
+.password-wrap{position:relative}.password-wrap input{padding-right:64px}.show-pass{position:absolute;right:7px;top:50%;transform:translateY(-50%);border:0;background:#eef3ff;color:var(--brand);border-radius:8px;padding:7px 9px;font-size:11px;font-weight:850}.show-pass:focus-visible{outline:0;box-shadow:var(--focus)}
 .btn{width:100%;min-height:50px;margin-top:24px;padding:13px 18px;border:0;border-radius:12px;background:var(--brand);color:#fff;font-weight:850;font-size:16px;box-shadow:0 7px 16px rgba(37,99,235,.2)}
 .btn:hover:not(:disabled){background:var(--brand-dark)}.btn:disabled{opacity:.68;cursor:not-allowed;box-shadow:none}
 .msg{display:none;margin-top:15px;padding:12px 13px;border-radius:11px;font-size:14px;line-height:1.45;font-weight:650}.msg.ok{display:block;background:#ecfdf3;color:var(--success);border:1px solid #abefc6}.msg.bad{display:block;background:#fff1f2;color:var(--danger);border:1px solid #fecdca}
@@ -36,8 +37,8 @@ input:focus,select:focus{border-color:var(--brand);box-shadow:var(--focus)}input
 <div class="field"><label for="classLevel">Class / Level</label><select id="classLevel"><option value="">Select class / level</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Dropper</option><option>College / Graduate</option><option>Other</option></select></div>
 <div class="field"><label for="college">College / School</label><input id="college" type="text" autocomplete="organization" maxlength="120" placeholder="School or college name"></div>
 <div class="field"><label for="target">Target</label><select id="target"><option value="">Select target</option><option>JEE</option><option>NEET</option><option>CUET</option><option>Other competitive exam</option><option>Not decided yet</option></select></div>
-<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required></div>
-<div class="field"><label for="confirm">Confirm password</label><input id="confirm" type="password" autocomplete="new-password" placeholder="Re-enter your password" required></div>
+<div class="field"><label for="password">Password</label><div class="password-wrap"><input id="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required><button type="button" class="show-pass" data-target="password" aria-label="Show password">Show</button></div></div>
+<div class="field"><label for="confirm">Confirm password</label><div class="password-wrap"><input id="confirm" type="password" autocomplete="new-password" placeholder="Re-enter your password" required><button type="button" class="show-pass" data-target="confirm" aria-label="Show password">Show</button></div></div>
 <button class="btn" id="submit" type="submit">Create account</button><div id="msg" class="msg" role="status" aria-live="polite"></div>
 </form>
 <p class="login-link">Already have an account? <a href="central-login.html">Sign in</a></p>
@@ -51,6 +52,7 @@ input:focus,select:focus{border-color:var(--brand);box-shadow:var(--focus)}input
 <script>
 (async()=>{
 const A=window.SkillUpAuth,form=document.getElementById('register'),msg=document.getElementById('msg'),btn=document.getElementById('submit');
+document.querySelectorAll('.show-pass').forEach(b=>b.addEventListener('click',()=>{const i=document.getElementById(b.dataset.target),v=i.type==='text';i.type=v?'password':'text';b.textContent=v?'Show':'Hide';b.setAttribute('aria-label',v?'Show password':'Hide password')}));
 const nameEl=document.getElementById('name'),emailEl=document.getElementById('email'),classEl=document.getElementById('classLevel'),collegeEl=document.getElementById('college'),targetEl=document.getElementById('target'),passEl=document.getElementById('password'),confirmEl=document.getElementById('confirm');
 function show(t,ok){msg.textContent=t;msg.className='msg '+(ok?'ok':'bad')}
 if(!A||!A.configured){show('Sign-up service is temporarily unavailable. Please try again later.',false);btn.disabled=true;return}

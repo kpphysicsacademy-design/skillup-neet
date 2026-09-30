@@ -63,7 +63,14 @@ btn.disabled=true;btn.textContent='Creating account…';
 try{
 await A.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 const cred=await A.auth.createUserWithEmailAndPassword(email,password);
-await A.saveProfile({name:name,email:email});
+try{
+  await cred.user.updateProfile({displayName:name});
+}catch(profileErr){}
+try{
+  await A.saveProfile({name:name,email:email});
+}catch(profileErr){
+  // Profile creation can be completed later from the signed-in Profile page.
+}
 show('✓ Account created. Opening SkillUp…',true);
 setTimeout(()=>location.replace('index.html'),500);
 }catch(err){
@@ -72,6 +79,8 @@ if(code==='auth/email-already-in-use')show('An account already exists for this e
 else if(code==='auth/invalid-email')show('Enter a valid email address.',false);
 else if(code==='auth/weak-password')show('Choose a stronger password.',false);
 else if(code==='auth/network-request-failed')show('Network connection failed. Try again.',false);
+else if(code==='auth/operation-not-allowed')show('Email/password sign-up is not enabled in Firebase Authentication.',false);
+else if(code==='auth/configuration-not-found')show('Firebase Authentication is not configured for this app.',false);
 else show('Unable to create your account right now. Please try again.',false);
 btn.disabled=false;btn.textContent='Create account';
 }

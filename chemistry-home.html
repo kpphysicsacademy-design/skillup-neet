@@ -69,4 +69,28 @@ if(ls){
 }
 if(mb&&mn){mb.onclick=function(){var o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap')){mn.classList.remove('open');mb.setAttribute('aria-expanded','false');}});}
 </script>
-<script src="shared-nav.js"></script></body></html>
+<script src="shared-nav.js"></script><script>
+(function(){
+  const p=new URLSearchParams(location.search),target=(p.get('resumeConcept')||'').trim();
+  if(!target)return;
+  const norm=s=>String(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+  const wanted=norm(target);
+  let done=false;
+  function resume(){
+    if(done)return;
+    const els=[...document.querySelectorAll('a,button,.chapter,.concept-card,[data-concept]')];
+    const el=els.find(x=>norm(x.getAttribute&&x.getAttribute('data-concept'))===wanted)||els.find(x=>norm(x.textContent).includes(wanted));
+    if(!el)return;
+    done=true;
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.style.outline='4px solid #58cc02';
+    el.style.outlineOffset='4px';
+    el.style.borderRadius='18px';
+    setTimeout(()=>{el.style.outline='';el.style.outlineOffset=''},5000);
+    history.replaceState({},'',location.pathname);
+  }
+  resume();
+  const mo=new MutationObserver(resume);mo.observe(document.body,{childList:true,subtree:true});
+  setTimeout(()=>mo.disconnect(),10000);
+})();
+</script></body></html>

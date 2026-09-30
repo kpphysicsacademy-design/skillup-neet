@@ -152,10 +152,11 @@ function startRealtime(){
 $('notifyBtn').onclick=async()=>{
  if(!user||!A||!A.db)return;
  try{
-   const snap=await A.db.collection('skillup_notifications').where('user_id','==',user.uid).where('read','==',false).limit(20).get();
-   if(!snap.size){showNotice('No new notifications.');return;}
-   showNotice(snap.docs.map(d=>d.data().message||'New community activity').slice(0,3).join(' • '));
-   const batch=A.db.batch();snap.docs.forEach(d=>batch.update(d.ref,{read:true}));await batch.commit();
+   const snap=await A.db.collection('skillup_notifications').where('user_id','==',user.uid).limit(50).get();
+   const unread=snap.docs.filter(d=>d.data().read===false).slice(0,20);
+   if(!unread.length){showNotice('No new notifications.');return;}
+   showNotice(unread.map(d=>d.data().message||'New community activity').slice(0,3).join(' • '));
+   const batch=A.db.batch();unread.forEach(d=>batch.update(d.ref,{read:true}));await batch.commit();
    $('notifyDot').style.display='none';
  }catch(e){showNotice('Notifications are temporarily unavailable.');}
 };

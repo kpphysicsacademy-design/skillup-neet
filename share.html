@@ -20,7 +20,7 @@
 <header class="top"><div class="brand"><img src="skillup-logo-exact.webp" alt="SkillUp"><div><b>SkillUp</b><small>NEET PRACTICE</small></div></div><div class="top-actions"><button class="icon" aria-label="Search">⌕</button><button class="icon" id="notifyBtn" aria-label="Notifications">♧<span id="notifyDot" style="display:none;position:absolute;background:#e11d48;width:8px;height:8px;border-radius:50%;margin:-22px 0 0 18px"></span></button></div></header>
 <section class="hero"><div class="eyebrow">LEARN • SHARE • GROW TOGETHER</div><h1>SkillUp Community</h1><p>Share your doubts, notes, MCQs and achievements with fellow learners.</p></section>
 <section class="composer"><div class="composer-row"><div class="avatar" id="myAvatar">S</div><textarea id="postText" maxlength="500" placeholder="Share your thoughts, doubts, notes or achievements..."></textarea></div><div class="composer-tools"><button class="tool" type="button">🖼️ Image</button><button class="tool" type="button" data-type="MCQ">🧠 MCQ</button><button class="tool" type="button" data-type="Note">📝 Note</button><button class="tool" type="button" data-type="Achievement">🏆 Achievement</button><button class="post-btn" id="postBtn" type="button">➤ Post</button></div><div id="notice" class="notice"></div></section>
-<nav class="filters" aria-label="Community filters"><button class="filter active" data-filter="All">All Posts</button><button class="filter" data-filter="Mine">My Posts</button><button class="filter" data-filter="Doubt">Doubts</button><button class="filter" data-filter="Note">Notes</button><button class="filter" data-filter="MCQ">MCQs</button><button class="filter" data-filter="Achievement">Achievements</button></nav>
+<nav class="filters" aria-label="Community filters"><button class="filter active" data-filter="All">👥 Community</button><button class="filter" data-filter="Mine">👤 My Posts</button><button class="filter" data-filter="Doubt">Doubts</button><button class="filter" data-filter="Note">📝 Notes</button><button class="filter" data-filter="MCQ">MCQs</button><button class="filter" data-filter="Achievement">Achievements</button></nav>
 <section id="feed">
 <article class="post" data-type="Note"><div class="post-head"><div class="avatar">S</div><div class="post-meta"><span class="post-name">SkillUp Learner <span class="badge">Class 12</span></span><span class="time">Today</span></div><button class="more">⋮</button></div><div class="post-text">Sharing my short notes on <span class="topic">Photosynthesis</span> 🌱. Hope this helps with revision!</div><div class="media">🌿 PHOTOSYNTHESIS<br><small>Light + CO₂ + H₂O → Glucose + O₂</small></div><div class="post-actions"><button class="action like">♡ 38</button><button class="action">💬 6</button><button class="action">↗ Share</button><button class="action">🔖 Save</button></div></article>
 <article class="post" data-type="Achievement"><div class="post-head"><div class="avatar" style="background:linear-gradient(135deg,#168b57,#38c976)">R</div><div class="post-meta"><span class="post-name">SkillUp Learner <span class="badge">NEET 2026</span></span><span class="time">Today</span></div><button class="more">⋮</button></div><div class="post-text"><b>Today's Practice Score ✅</b><br>Completed 100 MCQs in Botany. Most mistakes were in Plant Physiology.</div><div class="score"><div><strong>100 / 100</strong><span>MCQs Completed • Botany</span></div><div>🎯</div></div><div class="post-actions"><button class="action like">♡ 24</button><button class="action">💬 4</button><button class="action">↗ Share</button><button class="action">🔖 Save</button></div></article>
@@ -40,8 +40,14 @@ document.querySelectorAll('.tool[data-type]').forEach(b=>b.onclick=()=>{postType
 async function postMeta(id){
  try{
   const ref=A.db.collection('skillup_posts').doc(id);
-  const [likes,comments]=await Promise.all([ref.collection('likes').get(),ref.collection('comments').orderBy('created_at','asc').limit(20).get()]);
-  return {likes,comments};
+  const [likes,comments]=await Promise.all([ref.collection('likes').get(),ref.collection('comments').limit(20).get()]);
+  const docs=comments.docs.slice().sort((a,b)=>{
+    const av=a.data().created_at,bv=b.data().created_at;
+    const ad=av&&typeof av.toDate==='function'?av.toDate():new Date(av||0);
+    const bd=bv&&typeof bv.toDate==='function'?bv.toDate():new Date(bv||0);
+    return ad-bd;
+  });
+  return {likes,comments:{docs,size:comments.size}};
  }catch(e){return {likes:{size:0},comments:{docs:[]}}}
 }
 async function loadPosts(){
@@ -140,11 +146,17 @@ $('postBtn').onclick=async()=>{
  finally{b.disabled=false;b.textContent='➤ Post';}
 };
 document.querySelectorAll('.filter').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderPosts(btn.dataset.filter);});
-function startRealtime(){
+async function startRealtime(){
  if(!A||!A.db)return;
  if(unsubPosts)unsubPosts();
- unsubPosts=A.db.collection('skillup_posts').orderBy('created_at','desc').limit(50).onSnapshot(snap=>{
+ unsubPosts=A.db.collection('skillup_posts').orderBy('created_at','desc').limit(50).onSnapshot(async snap=>{
    allPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
+   await Promise.all(allPosts.map(async p=>{
+     const m=await postMeta(p.id);
+     p.likeCount=m.likes.size;
+     p.commentRows=m.comments.docs.map(d=>({id:d.id,...d.data()}));
+     p.likedByUser=!!user && m.likes.docs.some(d=>d.id===user.uid);
+   }));
    const active=document.querySelector('.filter.active')?.dataset.filter||'All';
    renderPosts(active);
  });

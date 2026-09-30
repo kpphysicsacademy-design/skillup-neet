@@ -29,6 +29,13 @@
 <a class="subject zoology" href="zoology-home.html"><span class="icon">🐾</span><span><span class="name">Zoology</span><span class="desc">Animal Biology • NCERT • NEET</span></span><span class="arrow">›</span></a>
 <a class="subject maths" href="maths-home.html"><span class="icon">➗</span><span><span class="name">Mathematics</span><span class="desc">Learn → Practice → Master</span></span><span class="arrow">›</span></a>
 </section>
+<section id="homeActivity" style="max-width:900px;margin:0 auto 28px;display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px">
+    <div class="label" style="margin:0;text-align:left">RECENT ACTIVITY</div>
+    <a href="progress.html" style="font-size:11px;font-weight:900;color:#315efb">View Progress →</a>
+  </div>
+  <div id="homeActivityList" style="display:grid;gap:10px"></div>
+</section>
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -42,6 +49,27 @@
   const session=await window.SkillUpAuth.requireAuth(next);
   if(!session) return;
   document.documentElement.dataset.authenticated="true";
+  try{
+    const db=window.SkillUpAuth&&window.SkillUpAuth.db;
+    const uid=session&&session.user&&session.user.uid;
+    if(db&&uid){
+      const snap=await db.collection('skillup_progress').where('user_id','==',uid).limit(15).get();
+      const rows=snap.docs.map(d=>d.data()).sort((a,b)=>String(b.updated_at||b.completed_at||'').localeCompare(String(a.updated_at||a.completed_at||''))).slice(0,5);
+      const list=document.getElementById('homeActivityList'),box=document.getElementById('homeActivity');
+      if(rows.length&&list&&box){
+        list.innerHTML=rows.map(r=>{
+          const topic=String(r.topic||r.concept||'Practice session');
+          const subject=String(r.subject||'SkillUp');
+          const score=r.score??r.percentage;
+          const sc=Number.isFinite(Number(score))?Math.round(Number(score))+'%':'';
+          const d=new Date(r.updated_at||r.completed_at||'');
+          const when=Number.isFinite(d.getTime())?d.toLocaleDateString(undefined,{day:'2-digit',month:'short'}):'';
+          return '<a href="question-bank.html?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic)+'" style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5ebf2;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(23,32,51,.05)"><span style="font-size:22px">📚</span><span style="min-width:0;flex:1"><b style="display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+topic.replace(/[&<>"]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]))+'</b><small style="display:block;margin-top:3px;color:#667085">'+subject+(sc?' · '+sc:'')+(when?' · '+when:'')+'</small></span><span style="font-size:18px;color:#98a2b3">›</span></a>';
+        }).join('');
+        box.style.display='block';
+      }
+    }
+  }catch(e){console.warn('SkillUp home activity load failed',e)}
 })();
 </script>
 <script src="shared-nav.js"></script></body></html>

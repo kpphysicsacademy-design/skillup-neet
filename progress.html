@@ -77,7 +77,7 @@
 (async()=>{
 const A=window.SkillUpAuth,$=id=>document.getElementById(id);if(!A||!A.configured)return;const s=await A.requireAuth(location.href);if(!s)return;const user=s.user;
 const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const dateOf=r=>{const raw=r.updated_at||r.completed_at||r.created_at;if(raw&&typeof raw.toDate==='function'){const d=raw.toDate();return Number.isFinite(d.getTime())?d:null}const d=new Date(raw);return Number.isFinite(d.getTime())?d:null};
+const dateOf=r=>{const raw=r.updated_at||r.completed_at||r.created_at;if(raw&&typeof raw.toDate==='function'){const d=raw.toDate();return Number.isFinite(d.getTime())?d:null}if(raw&&typeof raw.seconds==='number'){const d=new Date(raw.seconds*1000);return Number.isFinite(d.getTime())?d:null}const d=new Date(raw);return Number.isFinite(d.getTime())?d:null};
 const icons={Physics:'⚡',Chemistry:'🧪',Botany:'🌿',Zoology:'🐾',Biology:'🧬',Maths:'📐',Mathematics:'📐'};
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')});
 function scoreOf(r){const raw=typeof r.score==='number'?r.score:(typeof r.percentage==='number'?r.percentage:null);const v=typeof raw==='string'?parseFloat(raw):raw;return v!=null&&Number.isFinite(v)?Math.max(0,Math.min(100,v)):null}

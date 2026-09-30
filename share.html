@@ -31,17 +31,58 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script>
 <script>
 (async()=>{
-const A=window.SkillUpAuth,$=id=>document.getElementById(id);let user=null,postType='Note';
-if(A&&A.configured){const s=await A.requireAuth(location.href);if(!s)return;user=s.user;$('myAvatar').textContent=(user.displayName||user.email||'S').charAt(0).toUpperCase()}
-document.querySelectorAll('.tool[data-type]').forEach(b=>b.onclick=()=>{postType=b.dataset.type;document.querySelectorAll('.tool[data-type]').forEach(x=>x.style.outline='');b.style.outline='2px solid #315efb'});
+const A=window.SkillUpAuth,$=id=>document.getElementById(id);
+let user=null,postType='Note',allPosts=[];
+const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const when=v=>{const d=v&&typeof v.toDate==='function'?v.toDate():new Date(v);if(!Number.isFinite(d.getTime()))return 'Recently';return d.toLocaleString([], {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});};
+if(A&&A.configured){const s=await A.requireAuth(location.href);if(!s)return;user=s.user;$('myAvatar').textContent=(user.displayName||user.email||'S').charAt(0).toUpperCase();}
+document.querySelectorAll('.tool[data-type]').forEach(b=>b.onclick=()=>{postType=b.dataset.type;document.querySelectorAll('.tool[data-type]').forEach(x=>x.style.outline='');b.style.outline='2px solid #315efb';});
+async function loadPosts(){
+ const feed=$('feed');feed.innerHTML='<div class="empty" style="display:block">Loading community posts…</div>';
+ if(!A||!A.db){feed.innerHTML='';return;}
+ try{
+   const snap=await A.db.collection('skillup_posts').orderBy('created_at','desc').limit(50).get();
+   allPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
+   renderPosts(document.querySelector('.filter.active')?.dataset.filter||'All');
+ }catch(e){
+   console.warn('Community feed load failed',e);
+   feed.innerHTML='<div class="empty" style="display:block">Community posts are temporarily unavailable.</div>';
+ }
+}
+function renderPosts(filter){
+ const feed=$('feed');feed.innerHTML='';let rows=allPosts;
+ if(filter==='Mine')rows=rows.filter(p=>user&&p.user_id===user.uid);else if(filter!=='All')rows=rows.filter(p=>p.type===filter);
+ $('empty').style.display=rows.length?'none':'block';
+ rows.forEach(p=>{
+   const initials=(p.display_name||'S').trim().charAt(0).toUpperCase();
+   const article=document.createElement('article');article.className='post';article.dataset.type=p.type||'Note';article.dataset.id=p.id;
+   article.innerHTML='<div class="post-head"><div class="avatar">'+esc(initials)+'</div><div class="post-meta"><span class="post-name">'+esc(p.display_name||'SkillUp Learner')+' <span class="badge">'+esc(p.type||'Post')+'</span></span><span class="time">'+esc(when(p.created_at))+'</span></div><button class="more" aria-label="Post options">⋮</button></div><div class="post-text">'+esc(p.text||'')+'</div><div class="post-actions"><button class="action like" data-action="like">♡ 0</button><button class="action" data-action="comment">💬 0</button><button class="action" data-action="share">↗ Share</button><button class="action" data-action="save">🔖 Save</button></div>';
+   feed.appendChild(article);
+ });
+ bindActions();
+}
+function bindActions(){
+ document.querySelectorAll('.action').forEach(b=>b.onclick=async()=>{
+   const post=b.closest('.post'),id=post?.dataset.id,act=b.dataset.action;if(!id)return;
+   if(act==='like'){const n=parseInt((b.textContent.match(/\d+/)||['0'])[0],10),liked=b.classList.toggle('liked');b.textContent=(liked?'♥ ':'♡ ')+(liked?n+1:Math.max(0,n-1));return;}
+   if(act==='share'){const url=location.origin+location.pathname+'?post='+encodeURIComponent(id);try{await navigator.clipboard.writeText(url);showNotice('Post link copied.')}catch(e){showNotice(url)}return;}
+   if(act==='save'){try{await A.db.collection('skillup_posts').doc(id).set({saved_by:{[user.uid]:true}},{merge:true});showNotice('Post saved.')}catch(e){showNotice('Could not save this post.')}return;}
+   if(act==='comment'){showNotice('Comments will be added in the next community update.');}
+ });
+}
+function showNotice(msg){$('notice').textContent=msg;$('notice').classList.add('show');clearTimeout(showNotice.t);showNotice.t=setTimeout(()=>$('notice').classList.remove('show'),2600);}
 $('postBtn').onclick=async()=>{
  const text=$('postText').value.trim();if(!text)return;
- if(!A||!A.db||!user){$('notice').textContent='Please sign in to share a post.';$('notice').classList.add('show');return}
- try{await A.db.collection('skillup_posts').add({user_id:user.uid,display_name:user.displayName||user.email||'SkillUp Learner',type:postType,text,created_at:new Date().toISOString()});$('postText').value='';$('notice').textContent='Post shared with the SkillUp community.';$('notice').classList.add('show');setTimeout(()=>location.reload(),500)}
- catch(e){$('notice').textContent='Post could not be shared. Check your community database rules.';$('notice').classList.add('show')}
+ if(!A||!A.db||!user){showNotice('Please sign in to share a post.');return;}
+ const b=$('postBtn');b.disabled=true;b.textContent='Posting…';
+ try{
+   await A.db.collection('skillup_posts').add({user_id:user.uid,display_name:user.displayName||user.email||'SkillUp Learner',type:postType,text,created_at:firebase.firestore.FieldValue.serverTimestamp()});
+   $('postText').value='';showNotice('Post shared with the SkillUp community.');await loadPosts();
+ }catch(e){console.warn(e);showNotice('Post could not be shared. Check your community database rules.');}
+ finally{b.disabled=false;b.textContent='➤ Post';}
 };
-document.querySelectorAll('.filter').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;let visible=0;document.querySelectorAll('.post').forEach(p=>{const ok=f==='All'||p.dataset.type===f;p.style.display=ok?'block':'none';if(ok)visible++});$('empty').style.display=visible?'none':'block'});
-document.querySelectorAll('.like').forEach(b=>b.onclick=()=>{b.classList.toggle('liked');b.textContent=b.classList.contains('liked')?'♥ '+((parseInt(b.textContent.match(/\d+/)||[0])+1)):'♡ '+((parseInt(b.textContent.match(/\d+/)||[0])-1))});
+document.querySelectorAll('.filter').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderPosts(btn.dataset.filter);});
+await loadPosts();
 })();
 </script>
 <script src="shared-nav.js"></script></body></html>

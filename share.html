@@ -21,7 +21,7 @@
 <section class="hero"><div class="eyebrow">LEARN • SHARE • GROW TOGETHER</div><h1>SkillUp Community</h1><p>Share your doubts, notes, MCQs and achievements with fellow learners.</p></section>
 <section class="composer"><div class="composer-row"><div class="avatar" id="myAvatar">S</div><textarea id="postText" maxlength="500" placeholder="Share your thoughts, doubts, notes or achievements..."></textarea></div><div class="composer-tools"><button class="tool" type="button">🖼️ Image</button><button class="tool" type="button" data-type="MCQ">🧠 MCQ</button><button class="tool" type="button" data-type="Note">📝 Note</button><button class="tool" type="button" data-type="Achievement">🏆 Achievement</button><button class="post-btn" id="postBtn" type="button">➤ Post</button></div><div id="notice" class="notice"></div></section>
 <nav class="filters" aria-label="Community filters"><button class="filter active" data-filter="All">👥 Community</button><button class="filter" data-filter="Mine">👤 My Posts</button><button class="filter" data-filter="Doubt">Doubts</button><button class="filter" data-filter="Note">📝 Notes</button><button class="filter" data-filter="MCQ">MCQs</button><button class="filter" data-filter="Achievement">Achievements</button><button class="filter" data-filter="Saved">🔖 Saved</button></nav>
-<div class="community-bar"><button id="createCommunityBtn" class="create-community" type="button">➕ Create Community</button></div>
+<div class="community-bar"><button id="browseCommunityBtn" class="create-community" type="button" style="background:#fff;color:#315efb;border:1px solid #dbe3ff">👥 Communities</button><button id="createCommunityBtn" class="create-community" type="button">➕ Create Community</button></div><section id="communityList" style="display:none;margin-bottom:11px"></section>
 <section id="feed"></section><div id="empty" class="empty">No posts in this category yet.</div>
 </div></div>
 <div id="communityModal" class="community-modal" role="dialog" aria-modal="true" aria-labelledby="communityTitle">
@@ -163,8 +163,18 @@ $('postBtn').onclick=async()=>{
  }catch(e){console.warn(e);showNotice('Post could not be shared. Check your community database rules.');}
  finally{b.disabled=false;b.textContent='➤ Post';}
 };
+async function loadCommunities(){
+ const box=$('communityList');box.style.display='block';box.innerHTML='<div class="empty" style="display:block">Loading communities…</div>';
+ try{
+  const snap=await A.db.collection('skillup_communities').orderBy('created_at','desc').limit(30).get();
+  if(!snap.size){box.innerHTML='<div class="empty" style="display:block">No communities yet. Create the first one.</div>';return;}
+  box.innerHTML=snap.docs.map(d=>{const x=d.data();return '<article class="post" style="margin-bottom:7px"><div class="post-head"><div class="avatar">👥</div><div class="post-meta"><span class="post-name">'+esc(x.name||'Community')+'</span><span class="time">'+esc(x.subject||'General')+' • '+Number(x.member_count||1)+' member'+(Number(x.member_count||1)===1?'':'s')+'</span></div><button class="action" data-community="'+esc(d.id)+'">Join</button></div><div class="post-text" style="margin-bottom:0">'+esc(x.description||'Learning community')+'</div></article>';}).join('');
+  box.querySelectorAll('[data-community]').forEach(b=>b.onclick=async()=>{if(!user){showNotice('Please sign in to join a community.');return;}const id=b.dataset.community;try{await A.db.collection('skillup_communities').doc(id).collection('members').doc(user.uid).set({user_id:user.uid,role:'member',joined_at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});await A.db.collection('skillup_communities').doc(id).set({member_count:firebase.firestore.FieldValue.increment(1)},{merge:true});b.textContent='Joined';b.disabled=true;showNotice('Joined community.');}catch(e){showNotice('Could not join community.');}});
+ }catch(e){box.innerHTML='<div class="empty" style="display:block">Communities are temporarily unavailable.</div>';}
+}
 $('createCommunityBtn').onclick=()=>{$('communityModal').classList.add('show');$('communityName').focus();};
 $('communityCancel').onclick=()=>{$('communityModal').classList.remove('show');};
+$('browseCommunityBtn').onclick=()=>{const box=$('communityList');if(box.style.display==='block'){box.style.display='none';}else loadCommunities();};
 $('communityModal').onclick=e=>{if(e.target.id==='communityModal')$('communityModal').classList.remove('show');};
 $('communityCreate').onclick=async()=>{
  const name=$('communityName').value.trim(),subject=$('communitySubject').value,description=$('communityDescription').value.trim();

@@ -152,14 +152,76 @@ function bindActions(){
 }
 function showNotice(msg){$('notice').textContent=msg;$('notice').classList.add('show');clearTimeout(showNotice.t);showNotice.t=setTimeout(()=>$('notice').classList.remove('show'),2600);}
 $('postBtn').onclick=async()=>{
- const text=$('postText').value.trim();if(!text)return;
- if(!A||!A.db||!user){showNotice('Please sign in to share a post.');return;}
- const b=$('postBtn');b.disabled=true;b.textContent='Posting…';
+ const text=$('postText').value.trim();
+ if(!text){showNotice('Write something before posting.');$('postText').focus();return;}
+ const b=$('postBtn');
+ b.disabled=true;b.textContent='Posting…';
  try{
-   await A.db.collection('skillup_posts').add({user_id:user.uid,display_name:user.displayName||user.email||'SkillUp Learner',type:postType,text,created_at:firebase.firestore.FieldValue.serverTimestamp()});
-   $('postText').value='';showNotice('Post shared with the SkillUp community.');await loadPosts();
- }catch(e){console.warn(e);showNotice('Post could not be shared. Check your community database rules.');}
- finally{b.disabled=false;b.textContent='➤ Post';}
+   // Always resolve the current Firebase session immediately before writing.
+   if(!A||!A.configured||!A.db){
+     throw new Error('firebase_not_ready');
+   }
+   const session=await A.getSession();
+   user=session&&session.user?session.user:(A.auth&&A.auth.currentUser?A.auth.currentUser:null);
+   if(!user) {
+     showNotice('Your session has expired. Please sign in again.');
+     setTimeout(()=>location.href='central-login.html?next='+encodeURIComponent(location.href),700);
+     return;
+   }
+
+   // Refresh the ID token so Firestore evaluates the write against the
+   // current authenticated account.
+   try{await user.getIdToken(true);}catch(_){}
+
+   const displayName=(user.displayName||'').trim() ||
+     (user.email||'').split('@')[0].trim() ||
+     'SkillUp Learner';
+
+   const payload={
+     user_id:user.uid,
+     display_name:displayName,
+     type:postType||'Note',
+     text:text,
+     created_at:firebase.firestore.FieldValue.serverTimestamp()
+   };
+
+   const ref=await A.db.collection('skillup_posts').add(payload);
+
+   // Clear only after Firestore confirms the document was created.
+   $('postText').value='';
+   showNotice('Post shared successfully.');
+   await loadPosts();
+
+   // Ensure the newly created post is visible even if the realtime listener
+   // has not delivered its snapshot yet.
+   const active=document.querySelector('.filter.active')?.dataset.filter||'All';
+   if(active==='All'){
+     const exists=allPosts.some(p=>p.id===ref.id);
+     if(!exists){
+       allPosts.unshift({
+         id:ref.id,...payload,
+         created_at:new Date(),
+         likeCount:0,commentRows:[],likedByUser:false,savedByUser:false
+       });
+       renderPosts(active);
+     }
+   }
+ }catch(e){
+   console.error('SkillUp Community post failed:',e);
+   let message='Post could not be shared.';
+   if(e&&e.code==='permission-denied'){
+     message='Post blocked by Firestore permissions. Please check the deployed community rules.';
+   }else if(e&&e.code==='unauthenticated'){
+     message='Your login session expired. Please sign in again.';
+   }else if(e&&e.code==='failed-precondition'){
+     message='Community database configuration needs attention.';
+   }else if(e&&e.message==='firebase_not_ready'){
+     message='Community service is still loading. Please try again.';
+   }
+   showNotice(message);
+ }finally{
+   b.disabled=false;b.textContent='➤ Post';
+ }
 };
 async function loadCommunities(){
  const box=$('communityList');box.style.display='block';box.innerHTML='<div class="empty" style="display:block">Loading communities…</div>';

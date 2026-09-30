@@ -25,7 +25,7 @@ service cloud.firestore {
     // Learning/progress records: private to the account owner.
     match /skillup_progress/{docId} {
       allow get: if ownExisting();
-      allow list: if signedIn() && request.query.where.size() >= 0;
+      allow list: if signedIn() && resource.data.user_id == request.auth.uid;
       allow create: if ownNew();
       allow update: if ownExisting() &&
         request.resource.data.user_id == resource.data.user_id;

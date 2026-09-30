@@ -169,7 +169,23 @@ async function loadCommunities(){
   const snap=await A.db.collection('skillup_communities').orderBy('created_at','desc').limit(30).get();
   if(!snap.size){box.innerHTML='<div class="empty" style="display:block">No communities yet. Create the first one.</div>';return;}
   box.innerHTML=snap.docs.map(d=>{const x=d.data();return '<article class="post" style="margin-bottom:7px"><div class="post-head"><div class="avatar">👥</div><div class="post-meta"><span class="post-name">'+esc(x.name||'Community')+'</span><span class="time">'+esc(x.subject||'General')+' • '+Number(x.member_count||1)+' member'+(Number(x.member_count||1)===1?'':'s')+'</span></div><button class="action" data-community="'+esc(d.id)+'">Join</button></div><div class="post-text" style="margin-bottom:0">'+esc(x.description||'Learning community')+'</div></article>';}).join('');
-  box.querySelectorAll('[data-community]').forEach(b=>b.onclick=async()=>{if(!user){showNotice('Please sign in to join a community.');return;}const id=b.dataset.community;try{await A.db.collection('skillup_communities').doc(id).collection('members').doc(user.uid).set({user_id:user.uid,role:'member',joined_at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});await A.db.collection('skillup_communities').doc(id).set({member_count:firebase.firestore.FieldValue.increment(1)},{merge:true});b.textContent='Joined';b.disabled=true;showNotice('Joined community.');}catch(e){showNotice('Could not join community.');}});
+  box.querySelectorAll('[data-community]').forEach(b=>b.onclick=async()=>{
+ if(!user){showNotice('Please sign in to join a community.');return;}
+ const id=b.dataset.community,ref=A.db.collection('skillup_communities').doc(id),member=ref.collection('members').doc(user.uid);
+ b.disabled=true;
+ try{
+  let joined=false;
+  await A.db.runTransaction(async tx=>{
+   const [communitySnap,memberSnap]=await Promise.all([tx.get(ref),tx.get(member)]);
+   if(!communitySnap.exists)throw new Error('community_missing');
+   if(memberSnap.exists){joined=true;return;}
+   tx.set(member,{user_id:user.uid,role:'member',joined_at:firebase.firestore.FieldValue.serverTimestamp()});
+   tx.update(ref,{member_count:firebase.firestore.FieldValue.increment(1)});
+  });
+  b.textContent=joined?'Joined':'Joined';b.classList.add('saved');
+  showNotice(joined?'You are already a member.':'Joined community.');
+ }catch(e){console.warn(e);b.disabled=false;showNotice('Could not join community.');}
+});
  }catch(e){box.innerHTML='<div class="empty" style="display:block">Communities are temporarily unavailable.</div>';}
 }
 $('createCommunityBtn').onclick=()=>{$('communityModal').classList.add('show');$('communityName').focus();};

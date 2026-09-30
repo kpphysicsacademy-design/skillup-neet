@@ -64,7 +64,7 @@ function renderPosts(filter){
  rows.forEach(p=>{
    const initials=(p.display_name||'S').trim().charAt(0).toUpperCase();
    const article=document.createElement('article');article.className='post';article.dataset.type=p.type||'Note';article.dataset.id=p.id;
-   article.innerHTML='<div class="post-head"><div class="avatar">'+esc(initials)+'</div><div class="post-meta"><span class="post-name">'+esc(p.display_name||'SkillUp Learner')+' <span class="badge">'+esc(p.type||'Post')+'</span></span><span class="time">'+esc(when(p.created_at))+'</span></div><button class="more" aria-label="Post options">⋮</button></div><div class="post-text">'+esc(p.text||'')+'</div><div class="post-actions"><button class="action like ${p.likedByUser?'liked':''}" data-action="like">${p.likedByUser?'♥':'♡'} ${p.likeCount||0}</button><button class="action" data-action="comment">💬 ${(p.commentRows||[]).length}</button><button class="action" data-action="share">↗ Share</button><button class="action" data-action="save">🔖 Save</button></div>';
+   article.innerHTML='<div class="post-head"><div class="avatar">'+esc(initials)+'</div><div class="post-meta"><span class="post-name">'+esc(p.display_name||'SkillUp Learner')+' <span class="badge">'+esc(p.type||'Post')+'</span></span><span class="time">'+esc(when(p.created_at))+'</span></div><button class="more" aria-label="Post options" data-action="menu">⋮</button></div><div class="post-text">'+esc(p.text||'')+'</div><div class="post-actions"><button class="action like ${p.likedByUser?'liked':''}" data-action="like">${p.likedByUser?'♥':'♡'} ${p.likeCount||0}</button><button class="action" data-action="comment">💬 ${(p.commentRows||[]).length}</button><button class="action" data-action="share">↗ Share</button><button class="action" data-action="save">🔖 Save</button></div>';
    feed.appendChild(article);
    const comments=p.commentRows||[];
    if(comments.length){
@@ -76,6 +76,29 @@ function renderPosts(filter){
  bindActions();
 }
 function bindActions(){
+ document.querySelectorAll('.more[data-action="menu"]').forEach(b=>b.onclick=()=>{
+   const post=b.closest('.post'),id=post?.dataset.id,p=allPosts.find(x=>x.id===id);if(!p)return;
+   const mine=user&&p.user_id===user.uid;
+   const old=post.querySelector('.post-menu');if(old){old.remove();return;}
+   const menu=document.createElement('div');menu.className='post-menu';menu.style.cssText='position:absolute;right:14px;top:48px;background:#fff;border:1px solid #e7ebf2;border-radius:10px;box-shadow:0 8px 24px rgba(16,24,40,.12);padding:5px;z-index:5';
+   menu.innerHTML=mine
+    ? '<button data-menu="edit" style="display:block;width:100%;border:0;background:none;padding:9px 12px;text-align:left;font-weight:700">✏️ Edit</button><button data-menu="delete" style="display:block;width:100%;border:0;background:none;padding:9px 12px;text-align:left;color:#d92d20;font-weight:700">🗑️ Delete</button>'
+    : '<button data-menu="report" style="display:block;width:100%;border:0;background:none;padding:9px 12px;text-align:left;color:#d92d20;font-weight:700">⚑ Report</button>';
+   post.style.position='relative';post.appendChild(menu);
+   menu.querySelector('[data-menu="edit"]')?.addEventListener('click',()=>{
+     const input=document.createElement('textarea');input.value=p.text||'';input.maxLength=500;input.style.cssText='width:100%;min-height:80px;margin-top:10px;padding:10px;border:1px solid #dfe4ed;border-radius:10px;font:inherit';
+     const save=document.createElement('button');save.textContent='Save edit';save.style.cssText='margin-top:7px;border:0;border-radius:9px;padding:8px 12px;background:#315efb;color:#fff;font-weight:800';
+     const text=post.querySelector('.post-text');text.replaceWith(input);input.after(save);menu.remove();
+     save.onclick=async()=>{const v=input.value.trim();if(!v)return;try{await A.db.collection('skillup_posts').doc(id).update({text:v,updated_at:firebase.firestore.FieldValue.serverTimestamp()});showNotice('Post updated.');await loadPosts()}catch(e){showNotice('Post could not be updated.')}};
+   });
+   menu.querySelector('[data-menu="delete"]')?.addEventListener('click',async()=>{
+     if(!confirm('Delete this post?'))return;
+     try{await A.db.collection('skillup_posts').doc(id).delete();showNotice('Post deleted.');await loadPosts()}catch(e){showNotice('Post could not be deleted.')}
+   });
+   menu.querySelector('[data-menu="report"]')?.addEventListener('click',async()=>{
+     try{await A.db.collection('skillup_reports').add({post_id:id,reported_by:user.uid,reason:'Community report',created_at:firebase.firestore.FieldValue.serverTimestamp()});showNotice('Post reported.');menu.remove()}catch(e){showNotice('Report could not be submitted.')}
+   });
+ });
  document.querySelectorAll('.action').forEach(b=>b.onclick=async()=>{
    const post=b.closest('.post'),id=post?.dataset.id,act=b.dataset.action;if(!id)return;
    if(act==='like'){

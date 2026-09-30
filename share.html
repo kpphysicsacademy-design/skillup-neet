@@ -50,14 +50,14 @@ document.querySelectorAll('.tool[data-type]').forEach(b=>b.onclick=()=>{postType
 async function postMeta(id){
  try{
   const ref=A.db.collection('skillup_posts').doc(id);
-  const [likes,comments]=await Promise.all([ref.collection('likes').get(),ref.collection('comments').limit(20).get()]);
+  const [likes,comments,save]=await Promise.all([ref.collection('likes').get(),ref.collection('comments').limit(20).get(),user?ref.collection('saves').doc(user.uid).get():Promise.resolve({exists:false})]);
   const docs=comments.docs.slice().sort((a,b)=>{
     const av=a.data().created_at,bv=b.data().created_at;
     const ad=av&&typeof av.toDate==='function'?av.toDate():new Date(av||0);
     const bd=bv&&typeof bv.toDate==='function'?bv.toDate():new Date(bv||0);
     return ad-bd;
   });
-  return {likes,comments:{docs,size:comments.size}};
+  return {likes,comments:{docs,size:comments.size},save};
  }catch(e){return {likes:{size:0},comments:{docs:[]}}}
 }
 async function loadPosts(){
@@ -131,12 +131,10 @@ function bindActions(){
    if(act==='share'){const url=location.origin+location.pathname+'?post='+encodeURIComponent(id);try{await navigator.clipboard.writeText(url);showNotice('Post link copied.')}catch(e){showNotice(url)}return;}
    if(act==='save'){
  try{
-  const ref=A.db.collection('skillup_posts').doc(id),p=allPosts.find(x=>x.id===id);
-  const saved=!!(p&&p.saved_by&&p.saved_by[user.uid]),next={...(p&&p.saved_by||{})};
-  if(saved)delete next[user.uid];else next[user.uid]=true;
-  await ref.set({saved_by:next},{merge:true}); if(p)p.saved_by=next;
-  b.classList.toggle('saved',!saved);b.textContent=!saved?'🔖 Saved':'🔖 Save';
-  showNotice(!saved?'Post saved.':'Post removed from Saved.');
+  const ref=A.db.collection('skillup_posts').doc(id).collection('saves').doc(user.uid),p=allPosts.find(x=>x.id===id);
+  const snap=await ref.get();
+  if(snap.exists){await ref.delete();if(p)p.savedByUser=false;b.classList.remove('saved');b.textContent='🔖 Save';showNotice('Post removed from Saved.');}
+  else{await ref.set({user_id:user.uid,created_at:firebase.firestore.FieldValue.serverTimestamp()});if(p)p.savedByUser=true;b.classList.add('saved');b.textContent='🔖 Saved';showNotice('Post saved.');}
  }catch(e){showNotice('Could not update Saved.')}return;}
    if(act==='comment'){
  const existing=post.querySelector('.comment-box');
@@ -218,7 +216,7 @@ async function startRealtime(){
      const m=await postMeta(p.id);
      p.likeCount=m.likes.size;
      p.commentRows=m.comments.docs.map(d=>({id:d.id,...d.data()}));
-     p.likedByUser=!!user && m.likes.docs.some(d=>d.id===user.uid); p.savedByUser=!!user && !!(p.saved_by && p.saved_by[user.uid]);
+     p.likedByUser=!!user && m.likes.docs.some(d=>d.id===user.uid); p.savedByUser=!!user && !!m.save.exists;
    }));
    const active=document.querySelector('.filter.active')?.dataset.filter||'All';
    renderPosts(active);

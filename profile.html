@@ -7,10 +7,10 @@
 <link rel="icon" type="image/webp" href="skillup-logo-exact.webp">
 <title>SkillUp | My Profile</title>
 <style>
-:root{--brand:#2563eb;--brand2:#1d4ed8;--navy:#071a31;--text:#172033;--muted:#667085;--line:#dfe7f3;--bg:#f6f9ff;--green:#12b76a;--red:#b42318}
+:root{--brand:#2563eb;--brand2:#1d4ed8;--navy:#071a31;--text:#172033;--muted:#667085;--line:#dfe7f3;--bg:#f6f9ff;--red:#b42318}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 .page{min-height:100vh;padding:16px 10px 44px}.shell{width:100%;max-width:680px;margin:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;box-shadow:0 5px 14px rgba(37,99,235,.18)}.brand strong{display:block;font-size:18px}.brand small{display:block;color:#2563eb;font-size:8px;font-weight:900;letter-spacing:1.3px;margin-top:2px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;box-shadow:0 5px 14px rgba(37,99,235,.18)}.brand strong{display:block;font-size:18px}
 .home{border:1px solid var(--line);background:#fff;color:var(--navy);text-decoration:none;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:800}
 .hero{background:linear-gradient(125deg,#071a31,#12375d 52%,#2563eb);color:#fff;border-radius:22px;padding:22px 20px;margin-bottom:14px;box-shadow:0 14px 35px rgba(16,24,40,.10)}.hero-user{display:flex;align-items:center;gap:12px}.avatar{width:54px;height:54px;border-radius:17px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;font-size:22px;font-weight:900}.hero h1{margin:0;font-size:28px;letter-spacing:-.7px}.hero p{margin:5px 0 0;color:#dce7f6;font-size:13px}
 .card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:18px;margin-bottom:14px;box-shadow:0 7px 24px rgba(16,24,40,.045)}.head{margin-bottom:15px}.head h2{margin:0;font-size:18px}.head p{margin:4px 0 0;color:var(--muted);font-size:12px}
@@ -25,16 +25,13 @@
 </head>
 <body>
 <main class="page"><div class="shell">
-<header class="topbar"><div class="brand"><img src="skillup-logo-exact.webp" alt="SkillUp"><div><strong>SkillUp</strong><small>MAKE EVERY CONCEPT COUNT</small></div></div><a class="home" href="index.html">← Home</a></header>
+<header class="topbar"><div class="brand"><img src="skillup-logo-exact.webp" alt="SkillUp"><div><strong>SkillUp</strong></div></div><a class="home" href="index.html">← Home</a></header>
 
 <section class="hero"><div class="hero-user"><div class="avatar" id="avatar">S</div><div><h1 id="heroName">My Profile</h1><p>Your learner identity and SkillUp progress.</p></div></div></section>
-
-<section class="card"><div class="head"><h2>🏷️ Profile name</h2><p>This is the name shown across your SkillUp profile.</p></div><div class="item"><span class="label">Profile name</span><span class="value" id="profileName">Not set</span></div></section>
 
 <section class="card">
 <div class="head"><h2>👤 Learner details</h2><p>Only the essential profile information.</p></div>
 <div class="details">
-<div class="item"><span class="label">Name</span><span class="value" id="viewName">Not set</span></div>
 <div class="item"><span class="label">Class / Level</span><span class="value" id="viewClass">Not set</span></div>
 <div class="item"><span class="label">College / School</span><span class="value" id="viewCollege">Not set</span></div>
 <div class="item"><span class="label">Target</span><span class="value" id="viewTarget">Not set</span></div>
@@ -80,20 +77,17 @@ function show(msg,ok){notice.textContent=msg;notice.className='notice '+(ok?'ok'
 if(!A||!A.configured)return;
 const session=await A.requireAuth(location.href);if(!session)return;
 const user=session.user;$('emailText').textContent=user.email||'Signed-in account';
-$('name').value=user.displayName||'';
 async function load(){
  try{
   const p=await A.getProfile(user.uid)||{};
-  // Firebase Auth is the primary source for account identity.
-  // Firestore adds optional learner details when available.
   const name=String(p.display_name||p.name||user.displayName||'SkillUp Learner').trim()||'SkillUp Learner';
   const cls=String(p.class_level||'').trim()||'Not set',college=String(p.college||p.institution||'').trim()||'Not set',target=String(p.target||p.target_exam||p.target_exam_year||'').trim()||'Not set';
-  $('viewName').textContent=name;$('viewClass').textContent=cls;$('viewCollege').textContent=college;$('viewTarget').textContent=target;
-  $('heroName').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();$('profileName').textContent=name;
+  $('viewClass').textContent=cls;$('viewCollege').textContent=college;$('viewTarget').textContent=target;
+  $('heroName').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();
   $('name').value=p.display_name||p.name||user.displayName||'';$('classLevel').value=p.class_level||'';$('college').value=p.college||p.institution||'';$('target').value=p.target||p.target_exam||'';
   if(A.db){
    const snap=await A.db.collection('skillup_progress').where('user_id','==',user.uid).get();
-   const rows=snap.docs.map(d=>d.data()), subj=[...new Set(rows.map(r=>String(r.subject||'').trim()).filter(Boolean))];
+   const rows=snap.docs.map(d=>d.data()),subj=[...new Set(rows.map(r=>String(r.subject||'').trim()).filter(Boolean))];
    $('records').textContent=String(rows.length);$('topics').textContent=String(new Set(rows.map(r=>String(r.topic||'').trim()).filter(Boolean)).size);$('subjectsCount').textContent=String(subj.length);
    $('subjects').innerHTML=subj.map(s=>'<span class="pill">'+s.replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))+'</span>').join('');
    const times=rows.map(r=>new Date(r.updated_at||r.completed_at||r.created_at).getTime()).filter(Number.isFinite);
@@ -106,10 +100,7 @@ $('editBtn').onclick=()=>{$('editForm').classList.toggle('open');$('editBtn').te
 $('cancel').onclick=()=>{$('editForm').classList.remove('open');$('editBtn').textContent='Edit details'};
 $('refreshBtn').onclick=load;
 $('save').onclick=async()=>{
- try{await A.saveProfile({display_name:$('name').value.trim(),class_level:$('classLevel').value,college:$('college').value.trim(),target:$('target').value});
- if($('name').value.trim())await user.updateProfile({displayName:$('name').value.trim()});
- $('editForm').classList.remove('open');$('editBtn').textContent='Edit details';await load();show('Profile details saved.',true)
- }catch(e){show('Unable to save details. Please try again.',false)}
+ try{const n=$('name').value.trim();await A.saveProfile({display_name:n,class_level:$('classLevel').value,college:$('college').value.trim(),target:$('target').value});if(n)await user.updateProfile({displayName:n});$('editForm').classList.remove('open');$('editBtn').textContent='Edit details';await load();show('Profile details saved.',true)}catch(e){show('Unable to save details. Please try again.',false)}
 };
 $('logout').onclick=async()=>{try{await A.signOut();location.replace('central-login.html')}catch(e){show('Unable to log out. Please try again.',false)}};
 })();

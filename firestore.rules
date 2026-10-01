@@ -37,7 +37,9 @@ service cloud.firestore {
     match /skillup_posts/{postId} {
       allow read: if signedIn();
       allow create: if ownNew() &&
-        request.resource.data.keys().hasAll(['user_id', 'text', 'type', 'created_at']);
+        request.resource.data.keys().hasAll(['user_id', 'text', 'type', 'created_at']) &&
+        request.resource.data.text is string &&
+        request.resource.data.type is string;
       allow update: if signedIn() &&
         resource.data.user_id == request.auth.uid &&
         request.resource.data.user_id == resource.data.user_id &&
@@ -76,6 +78,7 @@ service cloud.firestore {
     match /skillup_notifications/{notificationId} {
       allow get, list: if signedIn() && resource.data.user_id == request.auth.uid;
       allow create: if signedIn() &&
+        request.resource.data.keys().hasAll(['actor_id', 'user_id', 'post_id']) &&
         request.resource.data.actor_id == request.auth.uid &&
         request.resource.data.user_id != request.auth.uid &&
         exists(/databases/$(database)/documents/skillup_posts/$(request.resource.data.post_id)) &&
@@ -92,6 +95,7 @@ service cloud.firestore {
     // Reports are not readable from the client.
     match /skillup_reports/{reportId} {
       allow create: if signedIn() &&
+        request.resource.data.keys().hasAll(['reported_by', 'post_id']) &&
         request.resource.data.reported_by == request.auth.uid &&
         request.resource.data.post_id is string;
       allow read, update, delete: if false;

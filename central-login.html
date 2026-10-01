@@ -267,6 +267,9 @@ input[aria-invalid="true"]{border-color:#d92d20}
 <script>
 (async()=>{
   const HOME='https://skillupedu.in/index.html';
+  const params=new URLSearchParams(location.search);
+  const requestedNext=params.get('next')||'';
+  const nextTarget=/^(https:\/\/skillupedu\.in\/|\/)/i.test(requestedNext)?requestedNext:HOME;
   const form=document.getElementById('login');
   const msg=document.getElementById('msg');
   const btn=document.getElementById('submit');
@@ -346,7 +349,7 @@ input[aria-invalid="true"]{border-color:#d92d20}
       if(!session) throw new Error('session-not-restored');
 
       show('✓ Signed in successfully. Opening SkillUp…',true);
-      setTimeout(()=>location.replace(HOME),350);
+      setTimeout(()=>location.replace(nextTarget),350);
     }catch(err){
       const code=err&&err.code||'';
       if(code==='auth/invalid-credential'||code==='auth/wrong-password'||code==='auth/user-not-found'){

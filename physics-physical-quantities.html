@@ -35,7 +35,7 @@ var params=new URLSearchParams(location.search),concept=params.get('concept')||'
 var title=document.getElementById('title'),subtitle=document.getElementById('subtitle'),bankCount=document.getElementById('bankCount'),content=document.getElementById('content'),bar=document.getElementById('bar');
 var items=[],i=0,score=0;
 window.SKILLUP_PHYSICS_BANK=window.SKILLUP_PHYSICS_BANK||{};
-var BANK_VERSION='20261001-physics-loader-v1';
+var BANK_VERSION='20261001-physics-loader-v2';
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function slug(v){return String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function richText(v){return esc(v).replace(/\$\$([\s\S]+?)\$\$/g,'<span>$$$1$$</span>');}
@@ -50,7 +50,7 @@ function loadScript(src,key){
 }
 async function load(){
  title.textContent=concept;
- var key=slug(micro||concept),file=key+'-question-bank.js',bank;
+ var key=slug(micro||concept),file='physics-'+key+'-question-bank.js',bank;
  try{bank=await loadScript(file,key);}catch(e){}
  if(!bank){showStatus('A dedicated Physics question bank is not connected for this concept yet.');return;}
  items=bank.slice(0,30).map(function(item){var x={q:item.q,o:item.o.slice(),a:item.a,e:item.e||''},order=x.o.map(function(_,n){return n;});for(var j=order.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=order[j];order[j]=order[k];order[k]=t;}var correct=x.a;x.o=order.map(function(n){return x.o[n];});x.a=order.indexOf(correct);return x;});

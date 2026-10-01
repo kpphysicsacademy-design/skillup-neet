@@ -20,7 +20,7 @@
 <body>
 <header class="top"><div class="header"><a class="brand" href="index.html" aria-label="SkillUp Home"><img class="rocket" src="skillup-logo-exact.webp" alt="SkillUp logo" width="42" height="42"><span><strong>SkillUp</strong><small>LEARN • PRACTICE • MASTER</small></span></a></div></header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">NEET LEARNING JOURNEY</div><h1>Dream big.<br><span>Learn smart. Achieve more.</span></h1><p>Master every concept. Practice with purpose. Build the confidence to reach your NEET goal.</p></section>
+<section class="hero"><div class="eyebrow" id="welcomeName">NEET LEARNING JOURNEY</div><h1>Dream big.<br><span>Learn smart. Achieve more.</span></h1><p>Master every concept. Practice with purpose. Build the confidence to reach your NEET goal.</p></section>
 <div class="label">CHOOSE YOUR NEET SUBJECT</div>
 <section class="grid">
 <a class="subject physics" href="physics-home.html"><span class="icon">⚡</span><span><span class="name">Physics</span><span class="desc">Learn → Practice → Master</span></span><span class="arrow">›</span></a>
@@ -49,6 +49,7 @@
   const session=await window.SkillUpAuth.requireAuth(next);
   if(!session) return;
   document.documentElement.dataset.authenticated="true";
+  try{const u=session.user;const p=await window.SkillUpAuth.getProfile(u.uid);const name=String((p&& (p.display_name||p.name))||u.displayName||'').trim();if(name)document.getElementById('welcomeName').textContent='WELCOME, '+name.toUpperCase();}catch(e){}
   try{
     const db=window.SkillUpAuth&&window.SkillUpAuth.db;
     const uid=session&&session.user&&session.user.uid;

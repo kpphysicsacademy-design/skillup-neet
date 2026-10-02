@@ -1,4 +1,4 @@
-/* SkillUp Mathematics question bank — starter set */
+/* SkillUp Mathematics question bank — MathJax enabled */
 window.SkillUpMathematicsQuestions = [
 {q:"If A={1,2,3} and B={3,4,5}, how many elements are in A∪B?",o:["3","4","5","6"],a:2,e:"A∪B has the five elements 1,2,3,4,5."},
 {q:"If f(x)=2x+3, what is f(4)?",o:["8","10","11","12"],a:2,e:"Substitution gives 2(4)+3=11."},
@@ -62,3 +62,20 @@ window.SkillUpMathematicsQuestions = [
 ,{q:"The angle between two vectors with positive dot product can be:",o:["obtuse only","right only","acute","always 180°"],a:2,e:"A positive dot product corresponds to an acute angle between nonzero vectors."}
 ,{q:"For the matrix [[1,0],[0,1]], its square is:",o:["zero matrix","itself","twice itself","undefined"],a:1,e:"The identity matrix multiplied by itself remains the identity matrix."}
 ];
+/* Convert common mathematical Unicode notation to MathJax while preserving normal prose. */
+(function(){
+  var B=window.SkillUpMathematicsQuestions||[];
+  function f(s){
+    if(typeof s!=='string') return s;
+    var out=s;
+    var replacements=[
+      [/x²/g,'x^2'],[/x³/g,'x^3'],[/y²/g,'y^2'],[/y³/g,'y^3'],[/sin²θ/g,'\\sin^2\\theta'],[/cos²θ/g,'\\cos^2\\theta'],[/√/g,'\\sqrt'],[/π/g,'\\pi'],[/θ/g,'\\theta'],[/∞/g,'\\infty'],[/±/g,'\\pm'],[/≤/g,'\\le'],[/≥/g,'\\ge'],[/∩/g,'\\cap'],[/∪/g,'\\cup'],[/ᶜ/g,'^c'],[/∧/g,'\\land'],[/∨/g,'\\lor'],[/¬/g,'\\neg'],[/→/g,'\\to'],[/∫/g,'\\int'],[/∈/g,'\\in']
+    ];
+    replacements.forEach(function(r){out=out.replace(r[0],r[1]);});
+    /* Wrap clearly mathematical fragments, leaving prose readable. */
+    out=out.replace(/(\\\\(?:sin|cos|tan|ln|log|sqrt|int|pi|theta|infty|pm|le|ge|cap|cup|land|lor|neg|to|in)[^,.;?)]*)/g,'\\($1\\)');
+    out=out.replace(/([A-Za-z0-9]+\^\{?\d+\}?\s*[=<>≤≥−+*/]|[A-Za-z0-9]+\s*[=<>]\s*[-+]?\d+(?:\.\d+)?)/g,'\\($1\\)');
+    return out;
+  }
+  B.forEach(function(item){['q','e'].forEach(function(k){item[k]=f(item[k]);});if(Array.isArray(item.o))item.o=item.o.map(f);});
+})();

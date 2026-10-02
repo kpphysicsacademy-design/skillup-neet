@@ -20,4 +20,14 @@ window.SkillUpSetRepresentationQuestions=[
 {q:"If A={x∈N : x divides 12}, which is A?",o:["{1,2,3,4,6,12}","{2,3,4,6}","{1,2,3,12}","{1,4,12}"],a:0,e:"The positive natural divisors of 12 are 1,2,3,4,6,12."},
 {q:"Which condition represents the interval [2,5] over the real numbers?",o:["{x∈R : 2≤x≤5}","{x∈R : 2<x<5}","{x∈R : x<2 or x>5}","{x∈R : x≥5}"],a:0,e:"The closed interval includes both endpoints, so 2≤x≤5."},
 {q:"A set written as {x∈N : x is a multiple of 5 and x≤20} has how many elements?",o:["3","4","5","20"],a:1,e:"The positive natural multiples are 5,10,15,20, giving four elements."}
+{q:"Which notation represents the set of positive integers less than 5 in set-builder form?",o:["{x∈Z : 0<x<5}","{x∈Z : x≤5}","{x∈N : x>5}","{x∈R : x<5}"],a:0,e:"The integers satisfying 0<x<5 are 1, 2, 3 and 4."},
+{q:"If A={a,e,i,o,u}, which statement is true?",o:["b∈A","a∈A","{a}∈A","A∈a"],a:1,e:"The vowel a is explicitly an element of A, so a∈A."},
+{q:"Which set is finite?",o:["Set of all integers","Set of all real numbers","Set of prime numbers less than 20","Set of rational numbers"],a:2,e:"There are only finitely many prime numbers below 20: 2, 3, 5, 7, 11, 13, 17 and 19."},
+{q:"The roster form of {x∈Z : |x|≤2} is:",o:["{−2,−1,0,1,2}","{−2,2}","{0,1,2}","{−1,0,1}"],a:0,e:"Integers whose absolute value is at most 2 are −2, −1, 0, 1 and 2."},
+{q:"Which symbol correctly expresses that every element of A is also an element of B?",o:["A∈B","A⊂B","A>B","A∩B=∅"],a:1,e:"A⊂B states that A is a subset of B; every element of A belongs to B."},
+{q:"If A={1,2} and B={1,2}, then:",o:["A⊂B only","A=B","A and B are disjoint","A has more elements than B"],a:1,e:"Two sets containing exactly the same elements are equal."},
+{q:"Which set-builder form represents the even integers?",o:["{x∈Z : x=2n, n∈Z}","{x∈N : x=2n+1}","{x∈Z : x=2n+1, n∈Z}","{x∈R : x>0}"],a:0,e:"Every even integer can be written as 2n where n is an integer."},
+{q:"The cardinality of the set {2,4,6,8,10} is:",o:["4","5","6","10"],a:1,e:"There are five distinct elements in the set."},
+{q:"Which description represents the singleton set {0}?",o:["The set containing no elements","The set containing exactly zero as an element","The set containing all integers","The set containing all natural numbers"],a:1,e:"{0} has one element, namely 0. It is not the empty set."},
+{q:"Which representation is useful when the rule defining the elements is more important than listing them?",o:["Roster form","Set-builder form","Numerical form","Decimal form"],a:1,e:"Set-builder form specifies elements through a defining property or condition."}
 ];

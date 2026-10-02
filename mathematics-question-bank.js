@@ -30,4 +30,35 @@ window.SkillUpMathematicsQuestions = [
 {q:"The probability of an even result on one fair die roll is:",o:["1/6","1/3","1/2","2/3"],a:2,e:"There are three even outcomes among six, so the probability is 1/2."},
 {q:"The equation of the x-axis is:",o:["x=0","y=0","x=y","y=1"],a:1,e:"Every point on the x-axis has y-coordinate zero."},
 {q:"If two nonzero vectors have dot product zero, they are:",o:["parallel","equal","perpendicular","opposite"],a:2,e:"Nonzero vectors with zero dot product are perpendicular."}
+,{q:"If A={1,2,3,4}, how many proper subsets does A have?",o:["8","12","15","16"],a:2,e:"There are 2⁴=16 subsets including A itself, so 15 are proper subsets."}
+,{q:"If f(x)=x²−1, then f(−3) is:",o:["−10","−8","8","10"],a:2,e:"f(−3)=9−1=8."}
+,{q:"The principal value of sin⁻¹(1) is:",o:["0","π/4","π/2","π"],a:2,e:"The principal value of sin⁻¹(1) is π/2."}
+,{q:"The roots of x²−5x+6=0 are:",o:["1,6","2,3","−2,−3","−1,−6"],a:1,e:"The equation factors as (x−2)(x−3)=0."}
+,{q:"The sum of the first 10 positive integers is:",o:["45","50","55","60"],a:2,e:"10×11/2=55."}
+,{q:"The common ratio of 2,6,18,54,… is:",o:["2","3","4","6"],a:1,e:"Each term is three times the preceding term."}
+,{q:"The equation x²+y²=25 represents a circle with radius:",o:["3","4","5","25"],a:2,e:"Comparing with x²+y²=r² gives r=5."}
+,{q:"The midpoint of (2,4) and (6,8) is:",o:["(3,5)","(4,6)","(5,7)","(8,12)"],a:1,e:"The midpoint is ((2+6)/2,(4+8)/2)=(4,6)."}
+,{q:"The limit lim(x→0) sin x/x is:",o:["0","1","∞","does not exist"],a:1,e:"The standard trigonometric limit is 1."}
+,{q:"The derivative of sin x is:",o:["−sin x","cos x","tan x","sec²x"],a:1,e:"d(sin x)/dx=cos x."}
+,{q:"The derivative of ln x for x>0 is:",o:["x","1/x","ln x","eˣ"],a:1,e:"The derivative of ln x is 1/x."}
+,{q:"A function continuous on [a,b] and differentiable on (a,b) satisfies Rolle's theorem when:",o:["f(a)=f(b)","f(a)>f(b)","f'(a)=f'(b)","a=b"],a:0,e:"Rolle's theorem requires equal endpoint values in addition to its continuity and differentiability conditions."}
+,{q:"∫₀² 2x dx equals:",o:["2","4","6","8"],a:1,e:"The antiderivative is x², giving 4−0=4."}
+,{q:"If F'(x)=f(x), then ∫ₐᵇ f(x)dx equals:",o:["F(a)+F(b)","F(b)−F(a)","F(a)−F(b)","F(a)F(b)"],a:1,e:"The fundamental theorem gives F(b)−F(a)."}
+,{q:"If P(A)=0.3, then P(Aᶜ) is:",o:["0.3","0.5","0.7","1.3"],a:2,e:"Complementary probability is 1−0.3=0.7."}
+,{q:"Two events with P(A∩B)=P(A)P(B) are:",o:["mutually exclusive","independent","exhaustive","complementary"],a:1,e:"That equality is the defining probability condition for independence."}
+,{q:"The variance of the constant data set 5,5,5 is:",o:["0","1","5","25"],a:0,e:"Every value equals the mean, so every deviation is zero and the variance is zero."}
+,{q:"The cross product of two parallel vectors is:",o:["a unit vector","zero vector","a scalar 1","undefined"],a:1,e:"Parallel vectors have angle 0 or π, so their cross product has magnitude zero."}
+,{q:"The magnitude of vector (3,4) is:",o:["3","4","5","7"],a:2,e:"Magnitude is √(3²+4²)=5."}
+,{q:"The determinant of [[1,2],[3,4]] is:",o:["−2","−1","2","10"],a:0,e:"The determinant is 1×4−2×3=−2."}
+,{q:"The identity matrix of order 2 is:",o:["[[0,1],[1,0]]","[[1,0],[0,1]]","[[1,1],[0,1]]","[[0,0],[0,0]]"],a:1,e:"The identity matrix has ones on the main diagonal and zeros elsewhere."}
+,{q:"If a matrix is invertible, its determinant is:",o:["always zero","nonzero","always one","negative"],a:1,e:"A square matrix is invertible only when its determinant is nonzero."}
+,{q:"The negation of p∧q is:",o:["¬p∧¬q","¬p∨¬q","p∨q","p→q"],a:1,e:"De Morgan's law gives ¬(p∧q)=¬p∨¬q."}
+,{q:"The statement p∨¬p is a:",o:["contradiction","tautology","conditional","biconditional"],a:1,e:"A proposition or its negation is always true, so it is a tautology."}
+,{q:"For positive x and y, which is always true?",o:["x+y<2√xy","x+y≥2√xy","x+y=2√xy for all x,y","x−y≥2√xy"],a:1,e:"AM-GM gives (x+y)/2≥√xy, hence x+y≥2√xy."}
+,{q:"The solution set of x²<9 is:",o:["x<−3","x>3","−3<x<3","x≤−3 or x≥3"],a:2,e:"Numbers whose square is less than 9 lie strictly between −3 and 3."}
+,{q:"If log₂x=5, x equals:",o:["10","16","25","32"],a:3,e:"The logarithmic equation means x=2⁵=32."}
+,{q:"The value of 2sin30° is:",o:["0","1","2","√3"],a:1,e:"sin30°=1/2, so 2sin30°=1."}
+,{q:"If a line has slope 2, a perpendicular line has slope:",o:["2","−2","1/2","−1/2"],a:3,e:"For nonvertical perpendicular lines, the product of slopes is −1."}
+,{q:"The angle between two vectors with positive dot product can be:",o:["obtuse only","right only","acute","always 180°"],a:2,e:"A positive dot product corresponds to an acute angle between nonzero vectors."}
+,{q:"For the matrix [[1,0],[0,1]], its square is:",o:["zero matrix","itself","twice itself","undefined"],a:1,e:"The identity matrix multiplied by itself remains the identity matrix."}
 ];

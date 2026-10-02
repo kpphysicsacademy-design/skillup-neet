@@ -19,7 +19,7 @@ window.SkillUpSetRepresentationQuestions=[
 {q:"Which pair represents the same set?",o:["{1,2,3} and {3,2,1}","{1,2} and {1,2,3}","{a,b} and {a,c}","{0,1} and {0,2}"],a:0,e:"Order does not matter in a set, so both sets contain exactly 1,2,3."},
 {q:"If A={x∈N : x divides 12}, which is A?",o:["{1,2,3,4,6,12}","{2,3,4,6}","{1,2,3,12}","{1,4,12}"],a:0,e:"The positive natural divisors of 12 are 1,2,3,4,6,12."},
 {q:"Which condition represents the interval [2,5] over the real numbers?",o:["{x∈R : 2≤x≤5}","{x∈R : 2<x<5}","{x∈R : x<2 or x>5}","{x∈R : x≥5}"],a:0,e:"The closed interval includes both endpoints, so 2≤x≤5."},
-{q:"A set written as {x∈N : x is a multiple of 5 and x≤20} has how many elements?",o:["3","4","5","20"],a:1,e:"The positive natural multiples are 5,10,15,20, giving four elements."}
+{q:"A set written as {x∈N : x is a multiple of 5 and x≤20} has how many elements?",o:["3","4","5","20"],a:1,e:"The positive natural multiples are 5,10,15,20, giving four elements."},
 {q:"Which notation represents the set of positive integers less than 5 in set-builder form?",o:["{x∈Z : 0<x<5}","{x∈Z : x≤5}","{x∈N : x>5}","{x∈R : x<5}"],a:0,e:"The integers satisfying 0<x<5 are 1, 2, 3 and 4."},
 {q:"If A={a,e,i,o,u}, which statement is true?",o:["b∈A","a∈A","{a}∈A","A∈a"],a:1,e:"The vowel a is explicitly an element of A, so a∈A."},
 {q:"Which set is finite?",o:["Set of all integers","Set of all real numbers","Set of prime numbers less than 20","Set of rational numbers"],a:2,e:"There are only finitely many prime numbers below 20: 2, 3, 5, 7, 11, 13, 17 and 19."},

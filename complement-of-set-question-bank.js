@@ -17,7 +17,7 @@ window.SkillUpComplementOfSetQuestions=[
 {level:"Developing",q:"Which identity is correct?",o:["A−B=A∩Bᶜ","A−B=A∪Bᶜ","A−B=Aᶜ∩B","A−B=Aᶜ∪B"],a:0,e:"A−B contains elements in A and outside B, so A−B=A∩Bᶜ."},
 {level:"Developing",q:"If A⊆B⊆U, which relation is correct?",o:["Bᶜ⊆Aᶜ","Aᶜ⊆Bᶜ","Aᶜ=Bᶜ always","A∩Bᶜ=A"],a:0,e:"Taking complements reverses subset inclusion."},
 {level:"Developing",q:"If A and B are disjoint, then A∩Bᶜ equals:",o:["A","B","∅","U"],a:0,e:"If A∩B=∅, no element of A is in B, so every element of A is in Bᶜ."},
-{level:"Developing",q:"If n(U)=50, n(A)=28 and n(B)=20 with A∩B=∅, then n((A∪B)ᶜ) is:",o:["2","8","22","30"],a:1,e:"n(A∪B)=28+20=48, so its complement has 50−48=2. Correct option is 2."},
+{level:"Developing",q:"If n(U)=50, n(A)=28 and n(B)=20 with A∩B=∅, then n((A∪B)ᶜ) is:",o:["2","8","22","30"],a:0,e:"n(A∪B)=28+20=48, so its complement has 50−48=2."},
 {level:"Developing",q:"If Aᶜ=∅, then A must be:",o:["∅","U","Aᶜ","A−U"],a:1,e:"Only U has no elements outside itself."},
 {level:"Developing",q:"If Aᶜ=U, then A must be:",o:["U","∅","A","Aᶜ"],a:1,e:"The complement can equal all of U only when A contains no elements."},
 {level:"Developing",q:"Which statement is always true?",o:["A⊆Aᶜ","A∩Aᶜ=∅","A∪Aᶜ=A","Aᶜ⊆A"],a:1,e:"A set and its complement are always disjoint."},

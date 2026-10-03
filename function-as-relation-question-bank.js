@@ -12,9 +12,9 @@ window.SkillUpFunctionAsRelationQuestions=[
 {level:"Basic",q:"The graph of a function cannot contain:",o:["Two pairs with different first coordinates","Two pairs with the same first coordinate and different second coordinates","A pair (a,b)","A repeated identical pair"],a:1,e:"A single input cannot have two distinct outputs."},
 
 {level:"Developing",q:"Let A={1,2,3} and B={a,b}. Which relation is a function A→B?",o:["{(1,a),(2,b),(3,a)}","{(1,a),(1,b),(2,a)}","{(1,a),(2,b)}","{(1,a),(2,b),(3,a),(3,b)}"],a:0,e:"Each element 1,2,3 appears exactly once as a first coordinate."},
-{level:"Developing",q:"How many functions are there from a 2-element set A to a 3-element set B?",o:["5","6","8","9"],a:2,e:"Each of the 2 inputs has 3 choices, giving 3²=9. Thus option D is correct."},
+{level:"Developing",q:"How many functions are there from a 2-element set A to a 3-element set B?",o:["5","6","8","9"],a:3,e:"Each of the 2 inputs has 3 choices, giving 3²=9."},
 {level:"Developing",q:"How many functions are there from a 3-element set A to a 2-element set B?",o:["6","8","9","12"],a:1,e:"Each of 3 inputs has 2 choices, giving 2³=8."},
-{level:"Developing",q:"If f:A→B and |A|=4, |B|=3, the number of possible functions is:",o:["7","12","64","81"],a:2,e:"There are 3 choices for each of 4 inputs: 3⁴=81. Thus option D is correct."},
+{level:"Developing",q:"If f:A→B and |A|=4, |B|=3, the number of possible functions is:",o:["7","12","64","81"],a:3,e:"There are 3 choices for each of 4 inputs: 3⁴=81."},
 {level:"Developing",q:"If f(x)=2x+1, then f(3) is:",o:["5","6","7","8"],a:2,e:"f(3)=2(3)+1=7."},
 {level:"Developing",q:"If f(x)=x²−1, then f(4) is:",o:["12","15","16","17"],a:1,e:"f(4)=16−1=15."},
 {level:"Developing",q:"If f(x)=3x−2 and f(x)=10, then x is:",o:["3","4","5","6"],a:1,e:"3x−2=10 gives x=4."},
@@ -28,10 +28,10 @@ window.SkillUpFunctionAsRelationQuestions=[
 {level:"Intermediate",q:"If f:A→B is a function with |A|=4 and |B|=2, can its range contain 4 elements?",o:["Yes","No","Only if f is one-one","Only if A=B"],a:1,e:"The range is a subset of B, so it can contain at most 2 elements."},
 {level:"Intermediate",q:"If f:A→B is a function and two different elements of A have the same image, then f is:",o:["One-one","Many-one","Not a function","Onto necessarily"],a:1,e:"A many-one function maps multiple inputs to one output."},
 
-{level:"Advanced",q:"Let A={1,2,3,4} and B={a,b,c}. How many functions A→B use exactly two distinct values in their range?",o:["18","24","36","42"],a:2,e:"Choose 2 outputs from 3: C(3,2)=3. Onto functions from 4 inputs to 2 selected outputs: 2⁴−2=14. Total 3×14=42. Thus option D is correct."},
+{level:"Advanced",q:"Let A={1,2,3,4} and B={a,b,c}. How many functions A→B use exactly two distinct values in their range?",o:["18","24","36","42"],a:3,e:"Choose 2 outputs from 3 and count onto maps to them: 3×(2⁴−2)=42."},
 {level:"Advanced",q:"How many functions from a 4-element set to a 3-element set are not constant?",o:["3","27","78","81"],a:2,e:"Total functions=3⁴=81; constant functions=3; nonconstant=78."},
 {level:"Advanced",q:"If f:A→B has |A|=3 and |B|=3 and f is one-one, how many possible functions f are there?",o:["3","6","9","27"],a:1,e:"A one-one function between equal 3-element sets is a permutation: 3!=6."},
 
-{level:"Master",q:"How many functions from a 5-element set to a 3-element set have range containing exactly two elements?",o:["90","120","150","180"],a:2,e:"Choose 2 outputs: C(3,2)=3. Onto maps from 5 inputs to those 2 outputs: 2⁵−2=30. Total=90. Thus option A is correct."},
-{level:"Master",q:"How many functions f:{1,2,3,4}→{a,b,c} have range equal to {a,b,c}?",o:["24","36","48","81"],a:2,e:"Onto functions are 3⁴−C(3,1)2⁴+C(3,2)1⁴=81−48+3=36. Thus option B is correct."}
+{level:"Master",q:"How many functions from a 5-element set to a 3-element set have range containing exactly two elements?",o:["90","120","150","180"],a:0,e:"Choose 2 outputs and count onto maps: 3×(2⁵−2)=90."},
+{level:"Master",q:"How many functions f:{1,2,3,4}→{a,b,c} have range equal to {a,b,c}?",o:["24","36","48","81"],a:1,e:"By inclusion-exclusion, onto functions=81−3(16)+3=36."}
 ];

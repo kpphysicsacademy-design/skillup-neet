@@ -23,11 +23,11 @@ window.SkillUpCompositionOfFunctionsQuestions=[
 
 {level:"Intermediate",q:"If f(x)=1/(x−1) and g(x)=x+2, then the domain of f∘g is:",o:["R\{1}","R\{−1}","R\{2}","R"],a:1,e:"g(x)−1=x+1 cannot be zero, so x≠−1."},
 {level:"Intermediate",q:"If f(x)=√x and g(x)=x−3, then the domain of f∘g is:",o:["x≥0","x≥3","x>3","R"],a:1,e:"The input x−3 to √· must be nonnegative."},
-{level:"Intermediate",q:"If f(x)=x² and g(x)=x+1, then (f∘g)(x)−(g∘f)(x) equals:",o:["2x","2x−1","2x+1","0"],a:1,e:"(x+1)²−(x²+1)=2x."},
+{level:"Intermediate",q:"If f(x)=x² and g(x)=x+1, then (f∘g)(x)−(g∘f)(x) equals:",o:["2x","2x−1","2x+1","0"],a:0,e:"(x+1)²−(x²+1)=2x."},
 {level:"Intermediate",q:"If f(x)=2x+3 and g(x)=x−2, then (f∘g)(x) is:",o:["2x−1","2x+1","2x+5","x+1"],a:0,e:"2(x−2)+3=2x−1."},
 {level:"Intermediate",q:"If f∘g=I and f is injective, then g is:",o:["Not unique","A right inverse and unique","Constant","Zero"],a:1,e:"An injective function has at most one right inverse on the relevant codomain."},
 
-{level:"Advanced",q:"If f(x)=x+1 and g(x)=x², then the equation (f∘g)(x)=(g∘f)(x) has solutions:",o:["x=−1/2 only","x=−1/2, 1","x=0,1","All real x"],a:1,e:"x²+1=(x+1)² gives 2x+1=1, so x=0. Correct option should be x=0."},
+{level:"Advanced",q:"If f(x)=x+1 and g(x)=x², then the equation (f∘g)(x)=(g∘f)(x) has solution:",o:["x=−1/2","x=0","x=1","All real x"],a:1,e:"x²+1=(x+1)² gives x=0."},
 {level:"Advanced",q:"If f(x)=2x−1 and g(x)=3x+2, then (f∘g)(x) is:",o:["6x+3","6x−1","6x+2","5x+1"],a:0,e:"2(3x+2)−1=6x+3."},
 {level:"Advanced",q:"If f(x)=x² and g(x)=√x for x≥0, then (f∘g)(x) equals:",o:["x","√x","x²","|x|"],a:0,e:"(√x)²=x for x≥0."},
 

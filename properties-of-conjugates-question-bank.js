@@ -11,7 +11,7 @@ window.SkillUpPropertiesConjugatesQuestions=[
 {level:"Basic",q:"If z is purely imaginary, then conjugate(z) is:",o:["−z","z","|z|","z²"],a:0,e:"For z=bi, conjugate(z)=−bi=−z."},
 {level:"Basic",q:"The modulus satisfies |conjugate(z)| =:",o:["|z|","−|z|","z","conjugate(z)"],a:0,e:"Conjugation does not change modulus."},
 {level:"Developing",q:"If z=1+2i and w=3−i, conjugate(z+w) equals:",o:["4−i","4+i","−4−i","2−3i"],a:0,e:"z+w=4+i, so its conjugate is 4−i."},
-{level:"Developing",q:"If z=2+i and w=1−3i, conjugate(zw) equals:",o:["−1+5i","−1−5i","5−i","1+5i"],a:0,e:"zw=5−5i, hence conjugate(zw)=5+5i. Correct option should be 5+5i."},
+{level:"Developing",q:"If z=2+i and w=1−3i, conjugate(zw) equals:",o:["5+5i","−1−5i","5−i","1+5i"],a:0,e:"zw=5−5i, hence conjugate(zw)=5+5i."},
 {level:"Developing",q:"For z=a+bi, z·conjugate(z) equals:",o:["a²+b²","a²−b²","2abi","a²+b²i"],a:0,e:"(a+bi)(a−bi)=a²+b²."},
 {level:"Developing",q:"For z≠0, conjugate(1/z) equals:",o:["1/conjugate(z)","1/z","conjugate(z)","−1/conjugate(z)"],a:0,e:"Conjugation distributes over division, so conjugate(1/z)=1/conjugate(z)."},
 {level:"Developing",q:"For z,w with w≠0, conjugate(z/w) equals:",o:["conjugate(z)/conjugate(w)","z/conjugate(w)","conjugate(z)/w","w/conjugate(z)"],a:0,e:"Conjugation distributes over division."},
@@ -24,10 +24,10 @@ window.SkillUpPropertiesConjugatesQuestions=[
 {level:"Intermediate",q:"If z=2+i and w=1+2i, then conjugate(z)conjugate(w) equals:",o:["conjugate(zw)","zw","z+w","conjugate(z+w)"],a:0,e:"By the product property, conjugate(z)conjugate(w)=conjugate(zw)."},
 {level:"Intermediate",q:"If z is nonzero and z/conjugate(z)=1, then z is:",o:["real","purely imaginary","zero","necessarily |z|=1"],a:0,e:"z=conjugate(z) means the imaginary part is zero."},
 {level:"Intermediate",q:"If z is nonzero and z/conjugate(z)=−1, then z is:",o:["purely imaginary","real","zero","necessarily |z|=1"],a:0,e:"z=−conjugate(z) means the real part is zero."},
-{level:"Intermediate",q:"If z=3+4i, then conjugate(z)/z equals:",o:["(7−24i)/25","(7+24i)/25","1","−1"],a:0,e:"(3−4i)/(3+4i)=(3−4i)²/25=(−7−24i)/25. Correct option should be (−7−24i)/25."},
+{level:"Intermediate",q:"If z=3+4i, then conjugate(z)/z equals:",o:["(−7−24i)/25","(7+24i)/25","1","−1"],a:0,e:"Multiply by the conjugate of the denominator: (3−4i)^2/25=(−7−24i)/25."},
 {level:"Advanced",q:"If z+w is real and z−w is purely imaginary, then conjugate(z) is:",o:["w","z","−w","−z"],a:0,e:"From z+w=conjugate(z)+conjugate(w) and z−w=−conjugate(z)+conjugate(w), adding gives 2z=2conjugate(w), so conjugate(z)=w."},
 {level:"Advanced",q:"If z is nonzero and z+1/conjugate(z)=2, then z is:",o:["1","−1","i","any nonzero real number"],a:0,e:"Writing z=re^{iθ} shows the equation forces θ=0 and r=1."},
-{level:"Advanced",q:"If z+conjugate(z)=4 and z·conjugate(z)=13, then z can be:",o:["2+i or 2−i","1+2i or 1−2i","4±3i","3±2i"],a:0,e:"Re(z)=2 and |z|²=13, giving Im(z)=±3."},
+{level:"Advanced",q:"If z+conjugate(z)=4 and z·conjugate(z)=13, then z can be:",o:["2+3i or 2−3i","1+2i or 1−2i","4±3i","3±2i"],a:0,e:"Re(z)=2 and |z|²=13, giving Im(z)=±3."},
 {level:"Master",q:"If z and w satisfy |z+w|=|z−w|, then which condition follows?",o:["z·conjugate(w) is purely imaginary","z·conjugate(w) is real","z=w","z=−w"],a:0,e:"Squaring gives 2 Re(z conjugate(w))=0, so z conjugate(w) is purely imaginary."},
 {level:"Master",q:"If z≠0 and |z+conjugate(z)|=2|z|, then z must be:",o:["real","purely imaginary","zero","of modulus 1"],a:0,e:"The left side is 2|Re(z)|; equality with 2|z| requires Im(z)=0."}
 ];

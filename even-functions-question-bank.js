@@ -1,0 +1,35 @@
+window.SkillUpEvenFunctionsQuestions=[
+{level:"Basic",q:"A function f is even if:",o:["f(−x)=f(x)","f(−x)=−f(x)","f(x)=x","f(0)=1"],a:0,e:"An even function has the same value at x and −x."},
+{level:"Basic",q:"The graph of an even function is symmetric about the:",o:["x-axis","y-axis","line y=x","origin"],a:1,e:"f(−x)=f(x) gives reflection symmetry about the y-axis."},
+{level:"Basic",q:"Which function is even?",o:["f(x)=x","f(x)=x²","f(x)=x³","f(x)=2x+1"],a:1,e:"(−x)²=x²."},
+{level:"Basic",q:"Which function is not even?",o:["x²","|x|","x⁴+1","x³"],a:3,e:"(−x)³=−x³, so x³ is odd rather than even."},
+{level:"Basic",q:"For an even function, f(−3) equals:",o:["−f(3)","f(3)","3f(3)","0"],a:1,e:"Evenness means f(−x)=f(x)."},
+{level:"Basic",q:"Which function is even on R?",o:["sin x","cos x","tan x","x"],a:1,e:"cos(−x)=cos x."},
+{level:"Basic",q:"The function f(x)=5 is:",o:["Even","Odd","Neither","Not a function"],a:0,e:"f(−x)=5=f(x), so a constant function is even."},
+{level:"Basic",q:"The function f(x)=0 is:",o:["Even only","Odd only","Both even and odd","Neither"],a:2,e:"The zero function satisfies both definitions."},
+{level:"Basic",q:"For an even function with f(2)=7, f(−2) is:",o:["−7","0","7","2"],a:2,e:"Evenness gives equal values at opposite inputs."},
+{level:"Basic",q:"If the domain of an even function contains x, it must also contain:",o:["x+1","−x","2x","1/x"],a:1,e:"The domain must be symmetric about zero."},
+
+{level:"Developing",q:"Which is even?",o:["x³+x","x²+3","x³−x","2x+5"],a:1,e:"Both x² and 3 are even, so their sum is even."},
+{level:"Developing",q:"Which is even?",o:["x⁴−2x²+1","x³+x²","x⁵−x","x+|x|"],a:0,e:"All powers in the polynomial are even, including the constant term."},
+{level:"Developing",q:"Which is even?",o:["sin x","cos x","sin x+cos x","x cos x"],a:1,e:"Cosine is even."},
+{level:"Developing",q:"The product of two even functions is:",o:["Always even","Always odd","Always neither","Always constant"],a:0,e:"f(−x)g(−x)=f(x)g(x)."},
+{level:"Developing",q:"The sum of two even functions is:",o:["Even","Odd","Neither","Undefined"],a:0,e:"The sum preserves f(−x)=f(x)."},
+{level:"Developing",q:"If f is even and g is odd, then fg is:",o:["Even","Odd","Constant","Neither"],a:1,e:"f(−x)g(−x)=f(x)(−g(x))=−f(x)g(x)."},
+{level:"Developing",q:"If f(x)=x²+1, then f(−x) is:",o:["−x²−1","x²+1","x²−1","−x²+1"],a:1,e:"Replacing x by −x leaves x² unchanged."},
+{level:"Developing",q:"If f(x)=|x|+x², then f is:",o:["Even","Odd","Neither","Constant"],a:0,e:"Both |x| and x² are even."},
+{level:"Developing",q:"If f(x)=x²/(x²+1), then f is:",o:["Even","Odd","Neither","Constant"],a:0,e:"Both numerator and denominator are unchanged under x→−x."},
+{level:"Developing",q:"If f is even and f(−4)=9, then f(4) is:",o:["−9","0","9","4"],a:2,e:"The values at ±4 are equal."},
+
+{level:"Intermediate",q:"Which function is even on its domain?",o:["f(x)=1/x","f(x)=x/(x²+1)","f(x)=1/(x²+1)","f(x)=x+1"],a:2,e:"Replacing x by −x leaves 1/(x²+1) unchanged."},
+{level:"Intermediate",q:"If f and g are even, then f∘g is:",o:["Even","Odd","Neither","Constant"],a:0,e:"g(−x)=g(x), so f(g(−x))=f(g(x))."},
+{level:"Intermediate",q:"If f is even and g is even, then f+g is:",o:["Even","Odd","Neither","Not defined"],a:0,e:"The sum of even functions is even."},
+{level:"Intermediate",q:"If f is even and nonzero, then 1/f is:",o:["Even","Odd","Neither","Constant"],a:0,e:"1/f(−x)=1/f(x) wherever defined."},
+{level:"Intermediate",q:"If f(x)=x⁴−3x²+2, then f is:",o:["Even","Odd","Neither","Both"],a:0,e:"All powers of x are even."},
+
+{level:"Advanced",q:"If f(x)=x³+x²−x+1, which statement is correct?",o:["f is even","f is odd","f is neither even nor odd","f is both"],a:2,e:"It contains both even and odd parts, so it satisfies neither condition."},
+{level:"Advanced",q:"If f is even and differentiable, then f′ is:",o:["Even","Odd","Constant","Neither"],a:1,e:"Differentiating f(−x)=f(x) gives f′(−x)=−f′(x)."},
+{level:"Advanced",q:"If f is even and f(x)>0 for all x, then ln(f(x)) is:",o:["Even","Odd","Neither","Constant"],a:0,e:"Composition with ln preserves equality f(−x)=f(x)."},
+{level:"Master",q:"If f is even and g is odd, with composition defined, f∘g is:",o:["Even","Odd","Neither","Always constant"],a:0,e:"g(−x)=−g(x), and f is even, so f(g(−x))=f(−g(x))=f(g(x))."},
+{level:"Master",q:"If f is odd and g is even, with composition defined, f∘g is:",o:["Even","Odd","Neither","Always constant"],a:0,e:"g(−x)=g(x), so f(g(−x))=f(g(x))."}
+];

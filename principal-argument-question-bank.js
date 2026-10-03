@@ -25,7 +25,7 @@ window.SkillUpPrincipalArgumentQuestions=[
 {level:"Intermediate",q:"If Arg z=−3π/4 and Arg w=−π/2, the principal argument of zw is:",o:["3π/4","−5π/4","−π/4","π/4"],a:0,e:"The sum is −5π/4; add 2π to obtain 3π/4."},
 {level:"Intermediate",q:"If Arg z=5π/6, the principal argument of z² is:",o:["−π/3","5π/3","2π/3","π/3"],a:0,e:"2Arg z=5π/3; subtract 2π to get −π/3."},
 {level:"Intermediate",q:"If Arg z=−2π/3, the principal argument of z³ is:",o:["0","−2π","2π/3","π"],a:0,e:"3(−2π/3)=−2π, equivalent to 0."},
-{level:"Advanced",q:"If Arg z=2π/3 and Arg w=−3π/4, the principal argument of z/w is:",o:["5π/12","−5π/12","17π/12","−19π/12"],a:0,e:"Subtract: 2π/3−(−3π/4)=17π/12; subtract 2π to get −7π/12. Correct value is −7π/12."},
+{level:"Advanced",q:"If Arg z=2π/3 and Arg w=−3π/4, the principal argument of z/w is:",o:["−7π/12","−5π/12","17π/12","7π/12"],a:0,e:"Subtract: 2π/3−(−3π/4)=17π/12; subtract 2π to get −7π/12."},
 {level:"Advanced",q:"If Arg z=−5π/6 and Arg w=π/3, the principal argument of zw is:",o:["−π/2","π/2","−π/6","π/6"],a:0,e:"Sum is −5π/6+π/3=−π/2."},
 {level:"Advanced",q:"If Arg z=7π/8, then the principal argument of 1/z is:",o:["−7π/8","7π/8","π/8","−π/8"],a:0,e:"For nonzero z, Arg(1/z)=−Arg z when Arg z is already principal."},
 {level:"Master",q:"If Arg z=3π/4 and Arg w=5π/6, then the principal argument of zw is:",o:["−5π/12","5π/12","19π/12","7π/12"],a:0,e:"The sum is 19π/12; subtract 2π to obtain −5π/12."},

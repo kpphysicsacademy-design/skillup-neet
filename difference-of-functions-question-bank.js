@@ -14,7 +14,7 @@ window.SkillUpDifferenceOfFunctionsQuestions=[
 {level:"Developing",q:"If f(x)=1/x and g(x)=x, then (f−g)(x) is:",o:["1/x−x","x−1/x","1/(x−1)","x/(x−1)"],a:0,e:"Direct subtraction gives 1/x−x, x≠0."},
 {level:"Developing",q:"If f(x)=√x and g(x)=x, the domain of f−g is:",o:["R","[0,∞)","(0,∞)","R\{0}"],a:1,e:"Both functions must be defined; √x requires x≥0."},
 {level:"Developing",q:"If f has domain A and g has domain B, the domain of f−g is:",o:["A∪B","A∩B","A\B","B\A"],a:1,e:"Both functions must be defined at the same x."},
-{level:"Developing",q:"If f(x)=2x−3 and g(x)=x², then (f−g)(2) is:",o:["−3","−4","1","5"],a:1,e:"f(2)=1 and g(2)=4, so the difference is −3. Correct option should be −3."},
+{level:"Developing",q:"If f(x)=2x−3 and g(x)=x², then (f−g)(2) is:",o:["−3","−4","1","5"],a:0,e:"f(2)=1 and g(2)=4, so the difference is −3."},
 {level:"Developing",q:"If f(x)=|x| and g(x)=−|x|, then f−g is:",o:["0","|x|","2|x|","−2|x|"],a:2,e:"|x|−(−|x|)=2|x|."},
 {level:"Developing",q:"If f(x)=x² and g(x)=−x²+4, then (f−g)(x) is:",o:["4","2x²−4","−2x²+4","2x²+4"],a:1,e:"x²−(−x²+4)=2x²−4."},
 {level:"Developing",q:"If (f−g)(x)=7 and f(x)=2, then g(x) is:",o:["−5","5","9","14"],a:0,e:"2−g=7, so g=−5."},
@@ -31,6 +31,6 @@ window.SkillUpDifferenceOfFunctionsQuestions=[
 {level:"Advanced",q:"If f(x)=e^x and g(x)=e^(−x), then (f−g)(0) is:",o:["−2","−1","0","2"],a:2,e:"e⁰−e⁰=0."},
 {level:"Advanced",q:"If f(x)=x+1 and g(x)=1/(x−2), the domain of f−g is:",o:["R","R\{2}","(2,∞)","[2,∞)"],a:1,e:"g is undefined at x=2."},
 
-{level:"Master",q:"If f(x)=x² and g(x)=2x−1, the minimum value of (f−g)(x) is:",o:["−2","−1","0","1"],a:1,e:"x²−2x+1=(x−1)², whose minimum is 0. Correct option should be 0."},
+{level:"Master",q:"If f(x)=x² and g(x)=2x−1, the minimum value of (f−g)(x) is:",o:["−2","−1","0","1"],a:2,e:"x²−2x+1=(x−1)², whose minimum is 0."},
 {level:"Master",q:"If f(x)=1/(1+x²) and g(x)=x²/(1+x²), then (f−g)(x) equals:",o:["(1−x²)/(1+x²)","1","x²","0"],a:0,e:"Subtracting gives (1−x²)/(1+x²)."}
 ];

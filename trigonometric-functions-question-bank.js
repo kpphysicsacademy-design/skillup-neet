@@ -24,8 +24,8 @@ window.SkillUpTrigonometricFunctionsQuestions=[
 {level:"Intermediate",q:"The range of sin²x is:",o:["[−1,1]","[0,1]","R","(0,1)"],a:1,e:"A square of sine lies between 0 and 1."},
 {level:"Intermediate",q:"The period of sin(3x) is:",o:["2π","π","2π/3","3π"],a:2,e:"The period is 2π/|3|=2π/3."},
 {level:"Intermediate",q:"The period of cos(2x+1) is:",o:["π","2π","π/2","2"],a:0,e:"The period is 2π/2=π."},
-{level:"Intermediate",q:"The period of tan(4x−2) is:",o:["π","π/2","2π","4π"],a:1,e:"The period is π/4."},
-{level:"Intermediate",q:"The maximum value of 2sin x−3cos x is:",o:["1","√5","5","−1"],a:2,e:"For a sin x+b cos x, maximum is √(a²+b²)=√13, not 5. Correct option should be √13."},
+{level:"Intermediate",q:"The period of tan(4x−2) is:",o:["π/4","π/2","π","2π"],a:0,e:"The period is π/4."},
+{level:"Intermediate",q:"The maximum value of 2sin x−3cos x is:",o:["√5","√13","5","1"],a:1,e:"For a sin x+b cos x, the maximum is √(a²+b²)=√13."},
 
 {level:"Advanced",q:"The maximum value of 3sin x+4cos x is:",o:["4","5","7","1"],a:1,e:"The maximum is √(3²+4²)=5."},
 {level:"Advanced",q:"The range of 5sin x−12cos x is:",o:["[−17,17]","[−13,13]","[−12,12]","R"],a:1,e:"Its amplitude is √(25+144)=13."},

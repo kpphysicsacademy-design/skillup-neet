@@ -30,7 +30,7 @@ window.SkillUpRelationsQuestions=[
 
 {level:"Advanced",q:"If R is a relation on A={1,2,3} defined by xRy iff x≤y, how many ordered pairs does R contain?",o:["3","5","6","9"],a:2,e:"Pairs are (1,1),(1,2),(1,3),(2,2),(2,3),(3,3): 6."},
 {level:"Advanced",q:"On A={1,2,3,4}, define xRy iff x divides y. How many ordered pairs are in R?",o:["6","8","10","12"],a:1,e:"The divisibility pairs are (1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4): 8."},
-{level:"Advanced",q:"On A={1,2,3}, define xRy iff x+y is even. How many ordered pairs are in R?",o:["3","4","5","6"],a:3,e:"Pairs with same parity qualify: (1,1),(1,3),(2,2),(3,1),(3,3), giving 5. Thus option C is correct."},
+{level:"Advanced",q:"On A={1,2,3}, define xRy iff x+y is even. How many ordered pairs are in R?",o:["3","4","5","6"],a:2,e:"Pairs with same parity qualify: (1,1),(1,3),(2,2),(3,1),(3,3), giving 5."},
 
 {level:"Master",q:"On A={1,2,3,4}, define xRy iff |x−y|≤1. How many ordered pairs are in R?",o:["8","10","12","14"],a:1,e:"There are 4 diagonal pairs and 6 adjacent ordered pairs, giving 10."},
 {level:"Master",q:"On A={1,2,3,4,5}, define xRy iff x+y=6. How many ordered pairs are in R?",o:["3","4","5","6"],a:2,e:"The pairs are (1,5),(2,4),(3,3),(4,2),(5,1), giving 5."}

@@ -66,13 +66,12 @@ const units=[
 let concepts=[],id=0;
 units.forEach((u,ui)=>u[1].forEach(t=>concepts.push({u:ui+1,name:u[0],concept:t[0],icon:t[1],id:++id})));
 const path=document.getElementById('path'),q=document.getElementById('q'),empty=document.getElementById('empty');
-topicStat.textContent=concepts.length+' Concepts';
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function render(list){
  let h='',last=0;
  list.forEach(x=>{if(x.u!==last){h+=`<div class="unit" id="unit-${x.u}"><div class="unit-main"><span class="unum">${x.u}</span><div><h2>${esc(x.name)}</h2><small>NCERT + NEET Botany • ${units[x.u-1][1].length} concepts</small></div></div></div>`;last=x.u;}
  h+=`<article class="chapter"><span class="node"></span><a href="botany-mcq.html?concept=${encodeURIComponent(x.concept)}&v=20260923-botany-quiz-v3"><div><div class="title"><span class="icon">${esc(x.icon)}</span><span>${esc(x.concept)}</span></div><div class="sub">Concept ${x.id} • ${esc(x.name)}</div><span class="tag">🎯 CONCEPT ${x.id}</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>`;});
- path.innerHTML=h; empty.style.display=list.length?'none':'block'; count.textContent=list.length+' concepts'; bar.style.width=(concepts.length?Math.round(list.length/concepts.length*100):0)+'%';
+ path.innerHTML=h; empty.style.display=list.length?'none':'block';
 }
 render(concepts);
 function search(){const term=q.value.trim().toLowerCase();render(term?concepts.filter(x=>(x.concept+' '+x.name).toLowerCase().includes(term)):concepts);}

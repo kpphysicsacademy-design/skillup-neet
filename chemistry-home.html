@@ -22,8 +22,8 @@ function googleTranslateElementInit(){
 <header class="top"><div class="nav"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu" aria-expanded="false">☰</button><div class="menu" id="menu" aria-label="SkillUp navigation"><div class="menu-title">SKILLUP</div><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">🧪 Chemistry</a><a href="botany-home.html">🌿 Botany</a><a href="zoology-home.html">🦁 Zoology</a><a href="maths-home.html">📐 Mathematics</a><a href="profile.html">👤 Profile</a><a href="progress.html">📊 My Progress</a><a href="tests.html">📝 My Tests</a><a href="revision.html">🔄 Revision</a><a href="achievements.html">🏆 Achievements</a><div class="menu-title">MORE</div><a href="help.html">❓ Help &amp; Feedback</a><a href="about.html">ℹ️ About SkillUp</a></div></div><span class="rocket" aria-hidden="true">⚗️</span><div class="brand notranslate" translate="no">SkillUp</div><span class="nav-status notranslate" translate="no" aria-label="Chemistry">CHEMISTRY</span></div></header>
 <main class="wrap">
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
-<section id="path" class="path"></section><div id="empty" class="empty">No matching Chemistry concepts found.</div>
-<section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load first. The next 20 load automatically as you scroll.</div></section>
+<section id="path" class="path"></section><button id="loadMoreBtn" type="button" style="display:none;width:100%;margin:14px 0;padding:13px;border:0;border-radius:14px;background:#1677ff;color:#fff;font-weight:950;font-size:12px;box-shadow:0 3px 0 #0d5bbf">LOAD MORE CONCEPTS</button><div id="empty" class="empty">No matching Chemistry concepts found.</div>
+<section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load at a time. More concepts load automatically, or use the button if needed.</div></section>
 </main>
 <script>
 (function(){
@@ -41,6 +41,14 @@ function card(x){var href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+
 function render(list,limit){p.innerHTML='';shown=Math.min(limit,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';if(count)count.textContent=list.length+' concepts';if(bar)bar.style.width=(a.length?Math.round(list.length/a.length*100):0)+'%';}
 function more(){if(searchTerm||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){if(last){}h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);
+var loadBtn=document.getElementById('loadMoreBtn');
+function updateLoadButton(){
+  if(!loadBtn)return;
+  loadBtn.style.display=(!searchTerm&&shown<a.length)?'block':'none';
+  loadBtn.textContent='LOAD MORE CONCEPTS • '+Math.min(B,a.length-shown)+'';
+}
+if(loadBtn)loadBtn.onclick=function(){loadBatch();updateLoadButton();setTimeout(fillViewport,50);};
+updateLoadButton();
 var s=document.createElement('div');s.style.height='1px';s.setAttribute('aria-hidden','true');p.after(s);
 var loadingMore=false;
 function loadBatch(){
@@ -48,6 +56,7 @@ function loadBatch(){
   loadingMore=true;
   more();
   loadingMore=false;
+  updateLoadButton();
 }
 function fillViewport(){
   if(searchTerm||shown>=a.length)return;

@@ -12,10 +12,10 @@ window.SkillUpOrderedPairsQuestions=[
 {level:"Basic",q:"If a=b, then the ordered pair (a,b) can be written as:",o:["(a,a)","(b,0)","(0,a)","(a,0)"],a:0,e:"When a=b, both coordinates are a."},
 
 {level:"Developing",q:"If (2x,3)=(8,y), then x and y are:",o:["x=4,y=3","x=2,y=8","x=8,y=3","x=4,y=8"],a:0,e:"2x=8 gives x=4, and 3=y gives y=3."},
-{level:"Developing",q:"If (x+1,2y)=(5,8), then x+y is:",o:["6","7","8","9"],a:1,e:"x=4 and y=4, so x+y=8. Thus option C is correct."},
-{level:"Developing",q:"If (3x−2,y+4)=(10,9), then x+y is:",o:["6","7","8","9"],a:2,e:"3x−2=10 gives x=4; y+4=9 gives y=5; x+y=9. Thus option D is correct."},
+{level:"Developing",q:"If (x+1,2y)=(5,8), then x+y is:",o:["6","7","8","9"],a:2,e:"x=4 and y=4, so x+y=8."},
+{level:"Developing",q:"If (3x−2,y+4)=(10,9), then x+y is:",o:["6","7","8","9"],a:2,e:"x=4 and y=5, so x+y=9."},
 {level:"Developing",q:"If (x², y−1)=(16,4), and x>0, then x+y is:",o:["7","8","9","10"],a:2,e:"x²=16 and x>0 gives x=4; y=5; sum=9."},
-{level:"Developing",q:"If (2x+1,3y−2)=(7,10), then (x,y) is:",o:["(2,4)","(3,4)","(4,3)","(2,3)"],a:0,e:"2x+1=7 gives x=3, while 3y−2=10 gives y=4. Thus option B is correct."},
+{level:"Developing",q:"If (2x+1,3y−2)=(7,10), then (x,y) is:",o:["(2,4)","(3,4)","(4,3)","(2,3)"],a:1,e:"2x+1=7 gives x=3 and 3y−2=10 gives y=4."},
 {level:"Developing",q:"If (a+b,a−b)=(7,1), then a is:",o:["3","4","5","6"],a:1,e:"Adding equations gives 2a=8, so a=4."},
 {level:"Developing",q:"If (a+b,a−b)=(9,3), then b is:",o:["2","3","4","6"],a:1,e:"Subtracting the second equation from the first gives 2b=6, so b=3."},
 {level:"Developing",q:"If (x−y,x+y)=(2,10), then x is:",o:["4","5","6","8"],a:2,e:"Adding gives 2x=12, hence x=6."},
@@ -23,15 +23,15 @@ window.SkillUpOrderedPairsQuestions=[
 {level:"Developing",q:"If (a/2,b/3)=(4,5), then a+b is:",o:["18","21","23","26"],a:2,e:"a=8 and b=15, so a+b=23."},
 
 {level:"Intermediate",q:"If (x²−1, y²−4)=(8,5), with x>0 and y>0, then x+y is:",o:["5","6","7","8"],a:1,e:"x²=9 gives x=3; y²=9 gives y=3; sum=6."},
-{level:"Intermediate",q:"If (2x−y, x+y)=(7,11), then x is:",o:["4","5","6","7"],a:1,e:"Adding the equations gives 3x=18, so x=6. Thus option C is correct."},
+{level:"Intermediate",q:"If (2x−y, x+y)=(7,11), then x is:",o:["4","5","6","7"],a:2,e:"Adding the equations gives 3x=18, so x=6."},
 {level:"Intermediate",q:"If (2x−y, x+y)=(7,11), then y is:",o:["3","4","5","6"],a:2,e:"From x=6 and x+y=11, y=5."},
 {level:"Intermediate",q:"If (a+b,ab)=(7,10), which unordered pair {a,b} is possible?",o:["{1,10}","{2,5}","{3,4}","{1,6}"],a:1,e:"Numbers with sum 7 and product 10 are 2 and 5."},
 {level:"Intermediate",q:"If (a−b,ab)=(1,12) and a>b, then a+b is:",o:["5","7","9","11"],a:1,e:"a−b=1 and ab=12 gives a=4,b=3, so a+b=7."},
 
-{level:"Advanced",q:"If (x+y, x²+y²)=(10,58), then xy is:",o:["18","20","21","24"],a:1,e:"x²+y²=(x+y)²−2xy, so 58=100−2xy, giving xy=21. Thus option C is correct."},
+{level:"Advanced",q:"If (x+y, x²+y²)=(10,58), then xy is:",o:["18","20","21","24"],a:2,e:"58=100−2xy, so xy=21."},
 {level:"Advanced",q:"If (x+y, xy)=(9,20), then the possible values of {x,y} are:",o:["{2,7}","{4,5}","{3,6}","{1,8}"],a:1,e:"The numbers have sum 9 and product 20, so they are 4 and 5."},
-{level:"Advanced",q:"If (x−y, x²−y²)=(3,21), then x+y is:",o:["5","6","7","8"],a:1,e:"x²−y²=(x−y)(x+y), so 21=3(x+y), giving x+y=7. Thus option C is correct."},
+{level:"Advanced",q:"If (x−y, x²−y²)=(3,21), then x+y is:",o:["5","6","7","8"],a:2,e:"21=3(x+y), so x+y=7."},
 
 {level:"Master",q:"If (x+y, x−y)=(10,4), then x²+y² is:",o:["52","56","58","60"],a:2,e:"x=7 and y=3, so x²+y²=49+9=58."},
-{level:"Master",q:"If (x+y, xy)=(11,24), then x²+y² is:",o:["67","71","73","77"],a:1,e:"x²+y²=(x+y)²−2xy=121−48=73. Thus option C is correct."}
+{level:"Master",q:"If (x+y, xy)=(11,24), then x²+y² is:",o:["67","71","73","77"],a:2,e:"x²+y²=121−48=73."}
 ];

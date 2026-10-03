@@ -25,12 +25,12 @@ window.SkillUpCartesianProductFiniteSetsQuestions=[
 {level:"Intermediate",q:"If n(A)=4 and n(B)=3, how many ordered pairs in A×B have distinct coordinates when A and B share exactly 2 elements?",o:["8","10","12","6"],a:1,e:"There are 12 total pairs; equal-coordinate pairs are the 2 common elements, so 12−2=10."},
 {level:"Intermediate",q:"If A={1,2,3} and B={2,3,4}, which is A×B∩B×A?",o:["{(2,2),(3,3)}","{(2,3),(3,2)}","A×B","∅"],a:0,e:"A pair belongs to both products only when both coordinates belong to A∩B; hence (A∩B)×(A∩B)."},
 {level:"Intermediate",q:"If n(A)=5, n(B)=4 and n(A∩B)=2, how many pairs are in (A×B)∩(B×A)?",o:["2","4","6","8"],a:1,e:"The intersection is (A∩B)×(A∩B), with 2×2=4 pairs."},
-{level:"Intermediate",q:"If A={1,2} and B={2,3,4}, how many pairs in A×B have first coordinate less than second coordinate?",o:["3","4","5","6"],a:1,e:"Pairs are (1,2),(1,3),(1,4),(2,3),(2,4): 5. Thus option C is correct."},
+{level:"Intermediate",q:"If A={1,2} and B={2,3,4}, how many pairs in A×B have first coordinate less than second coordinate?",o:["3","4","5","6"],a:2,e:"Pairs are (1,2),(1,3),(1,4),(2,3),(2,4), giving 5."},
 {level:"Intermediate",q:"If n(A×B)=36 and n(A)=n(B), then n(A)=:",o:["4","5","6","9"],a:2,e:"If n(A)=n(B)=n, then n²=36, so n=6."},
 
 {level:"Advanced",q:"If A×B=B×A for nonempty sets A and B, which conclusion follows?",o:["A=B","A∩B=∅","A and B have equal cardinality only","A∪B=∅"],a:0,e:"For nonempty sets, equality of the Cartesian products forces A=B."},
 {level:"Advanced",q:"If A×B has 20 elements and A has one more element than B, which possible cardinalities are n(A),n(B)?",o:["5 and 4","4 and 3","6 and 5","10 and 2"],a:0,e:"The product 5×4=20 and 5 is one more than 4."},
-{level:"Advanced",q:"Let A and B be finite nonempty sets with n(A×B)=n(A∪B). If n(A)=3 and n(B)=3, what is n(A∩B)?",o:["0","1","2","3"],a:2,e:"9=n(A∪B)=6−n(A∩B), so n(A∩B) cannot be negative; therefore this data are inconsistent. The correct conclusion is that no such sets exist."},
+{level:"Advanced",q:"Let A and B be finite nonempty sets with n(A)=2 and n(B)=3. If n(A×B)=n(A∪B), what is n(A∩B)?",o:["0","1","2","3"],a:1,e:"n(A×B)=6 and n(A∪B)=5−n(A∩B). Equating gives n(A∩B)=−1, which is impossible; therefore no such sets exist."},
 
 {level:"Master",q:"Let A and B be finite sets with n(A)=4, n(B)=5, and n(A∩B)=2. How many elements are in (A×B)\(B×A)?",o:["14","16","18","20"],a:1,e:"A×B has 20 pairs; its intersection with B×A has 2²=4 pairs. Difference has 20−4=16."},
 {level:"Master",q:"If A and B are finite sets with n(A)=3, n(B)=4 and n(A×B∩B×A)=9, what is n(A∩B)?",o:["2","3","4","6"],a:1,e:"The intersection equals (A∩B)×(A∩B), so n(A∩B)²=9 and n(A∩B)=3."}

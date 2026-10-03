@@ -11,8 +11,8 @@ window.SkillUpGreatestIntegerFunctionQuestions=[
 {level:"Basic",q:"The range of y=[x] is:",o:["R","Positive integers","Integers","Nonnegative integers"],a:2,e:"Every integer occurs as [x]."},
 
 {level:"Developing",q:"The solution of [x]=3 is:",o:["3≤x<4","2≤x<3","3<x≤4","x=3 only"],a:0,e:"[x]=3 exactly when 3≤x<4."},
-{level:"Developing",q:"The solution of [x]=−2 is:",o:["−2≤x<−1","−3≤x<−2","−2<x≤−1","x=−2 only"],a:1,e:"[x]=−2 exactly when −2≤x<−1. Correct option should be A."},
-{level:"Developing",q:"If [x]=0, then x belongs to:",o:["(−1,0)","[0,1)","[−1,0)∪[0,1)","[0,1]"],a:1,e:"[x]=0 for 0≤x<1."},
+{level:"Developing",q:"The solution of [x]=−2 is:",o:["−2≤x<−1","−3≤x<−2","−2<x≤−1","x=−2 only"],a:0,e:"[x]=−2 exactly when −2≤x<−1."},
+{level:"Developing",q:"If [x]=0, then x belongs to:",o:["(−1,0)","[0,1)","[−1,0)","[0,1]"],a:1,e:"[x]=0 for 0≤x<1."},
 {level:"Developing",q:"The value of [7/3] is:",o:["2","3","7/3","1"],a:0,e:"7/3=2.333..., so its greatest integer is 2."},
 {level:"Developing",q:"The value of [−7/3] is:",o:["−2","−3","2","3"],a:1,e:"−3≤−7/3<−2, so the value is −3."},
 {level:"Developing",q:"For integer n, the interval on which [x]=n is:",o:["(n−1,n]","[n,n+1)","[n−1,n)","(n,n+1]"],a:1,e:"The value n occurs for n≤x<n+1."},
@@ -24,11 +24,11 @@ window.SkillUpGreatestIntegerFunctionQuestions=[
 {level:"Intermediate",q:"The solution of [x]+[x+1]=5 is:",o:["2≤x<3","3≤x<4","4≤x<5","1≤x<2"],a:0,e:"For x in [2,3), [x]=2 and [x+1]=3, giving 5."},
 {level:"Intermediate",q:"The number of integers satisfying [x]=2 and x<2.5 is:",o:["0","1","Infinitely many","2"],a:2,e:"Every real x in [2,2.5) satisfies it, so there are infinitely many real solutions."},
 {level:"Intermediate",q:"Solve [2x]=3.",o:["3/2≤x<2","1≤x<3/2","2≤x<5/2","0≤x<1"],a:0,e:"3≤2x<4 gives 3/2≤x<2."},
-{level:"Intermediate",q:"Solve [x/2]=−1.",o:["−2≤x<0","−4≤x<−2","−2<x≤0","0≤x<2"],a:1,e:"−1≤x/2<0 gives −2≤x<0. Correct option should be A."},
+{level:"Intermediate",q:"Solve [x/2]=−1.",o:["−2≤x<0","−4≤x<−2","−2<x≤0","0≤x<2"],a:0,e:"−1≤x/2<0 gives −2≤x<0."},
 {level:"Intermediate",q:"The value of [x]+[−x] for non-integer x is:",o:["−1","0","1","x"],a:0,e:"For non-integer x, [x]+[−x]=−1."},
 
 {level:"Advanced",q:"The number of real solutions of [x]+[2x]=5 is:",o:["1","2","3","Infinitely many"],a:3,e:"The expression is constant on intervals; x∈[5/3,2) gives value 2+3=5, so infinitely many solutions."},
-{level:"Advanced",q:"Solve [x]+[x+1/2]=3.",o:["1≤x<2","3/2≤x<2","2≤x<5/2","1≤x<3/2"],a:0,e:"For x∈[1,1.5), floors are 1 and 1, sum 2; for x∈[1.5,2), they are 1 and 2, sum 3."},
+{level:"Advanced",q:"Solve [x]+[x+1/2]=3.",o:["1≤x<3/2","3/2≤x<2","2≤x<5/2","1≤x<2"],a:1,e:"For x∈[3/2,2), the floors are 1 and 2, giving sum 3."},
 {level:"Advanced",q:"The equation [x]=[2x] has solutions:",o:["Only integers","Only x=0","Infinitely many real x","No real solutions"],a:2,e:"For example, every x∈[0.5,1) gives [x]=0 while [2x]=1, so not those; but x∈[1,1.5) gives [x]=1 and [2x]=2. In fact solutions include intervals such as [0,0.5) where both are 0, hence infinitely many."},
 
 {level:"Master",q:"For x∈[0,10), the number of real x satisfying [x]+[10−x]=9 is:",o:["0","1","9","Infinitely many"],a:3,e:"For every non-integer x∈[0,10), [x]+[10−x]=9; there are infinitely many such x."},

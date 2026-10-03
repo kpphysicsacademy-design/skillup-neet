@@ -18,7 +18,7 @@ window.SkillUpExponentialFunctionsQuestions=[
 {level:"Developing",q:"Simplify 5^x/5^2:",o:["5^(x+2)","5^(x−2)","5^(2x)","5^(2−x)"],a:1,e:"For the same base, exponents subtract."},
 {level:"Developing",q:"Simplify (3^x)^2:",o:["3^(x+2)","3^(x−2)","3^(2x)","6^x"],a:2,e:"A power raised to a power multiplies exponents."},
 {level:"Developing",q:"The range of 2^x−4 is:",o:["(−4,∞)","[−4,∞)","R","(0,∞)"],a:0,e:"2^x>0, so 2^x−4>−4."},
-{level:"Developing",q:"The minimum value of 3^x+5 is:",o:["3","5","6","0"],a:1,e:"3^x approaches 0 but never reaches it, so the function has infimum 5, not an attained minimum."},
+{level:"Developing",q:"The infimum of 3^x+5 is:",o:["3","5","6","0"],a:1,e:"3^x approaches 0 from above as x→−∞, so the infimum is 5."},
 {level:"Developing",q:"Which equation has no real solution?",o:["2^x=5","3^x=1","5^x=−2","10^x=10"],a:2,e:"A positive-base exponential is always positive."},
 
 {level:"Intermediate",q:"Solve 2^(x+1)=16.",o:["2","3","4","5"],a:1,e:"16=2⁴, so x+1=4 and x=3."},
@@ -31,6 +31,6 @@ window.SkillUpExponentialFunctionsQuestions=[
 {level:"Advanced",q:"Solve 3^x+3^(x+1)=108.",o:["2","3","4","5"],a:1,e:"4·3^x=108, so 3^x=27 and x=3."},
 {level:"Advanced",q:"The number of real solutions of 2^x= x+2 is:",o:["0","1","2","3"],a:2,e:"The curves meet at x=−1 and x=2."},
 
-{level:"Master",q:"For x∈R, the minimum value of 2^x+4·2^(−x) is:",o:["2","4","5","6"],a:2,e:"Let t=2^x>0. Then t+4/t≥4, with equality at t=2, so the minimum is 4. Correct option should be 4."},
+{level:"Master",q:"For x∈R, the minimum value of 2^x+4·2^(−x) is:",o:["2","4","5","6"],a:1,e:"Let t=2^x>0. Then t+4/t≥4, with equality at t=2."},
 {level:"Master",q:"If 2^x+2^(−x)=5, then 4^x+4^(−x) equals:",o:["21","23","25","27"],a:1,e:"Squaring gives 4^x+2+4^(−x)=25, hence the value is 23."}
 ];

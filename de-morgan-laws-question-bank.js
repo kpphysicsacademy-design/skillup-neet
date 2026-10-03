@@ -21,7 +21,7 @@ window.SkillUpDeMorganLawsQuestions=[
 {level:"Developing",q:"If Aᶜ∪Bᶜ=U, then:",o:["A∩B=U","A∩B=∅","A∪B=U","A=B"],a:1,e:"Aᶜ∪Bᶜ=(A∩B)ᶜ=U, hence A∩B=∅."},
 {level:"Developing",q:"Which statement is equivalent to A⊆B?",o:["A∩Bᶜ=∅","A∪Bᶜ=U","Aᶜ∩B=∅","Aᶜ∪B=∅"],a:0,e:"A⊆B means no element of A lies outside B, so A∩Bᶜ=∅."},
 
-{level:"Intermediate",q:"Simplify (A∪Bᶜ)ᶜ:",o:["Aᶜ∩B","A∩Bᶜ","Aᶜ∪B","A∪B"],a:0,e:"By De Morgan, (A∪Bᶜ)ᶜ=Aᶜ∩(Bᶜ)ᶜ=Aᶜ∩B."},
+{level:"Developing",q:"If A∪B=U, which equivalent De Morgan statement is true?",o:["Aᶜ∩Bᶜ=∅","Aᶜ∪Bᶜ=∅","A∩B=U","A∩B=∅"],a:0,e:"Taking complements gives (A∪B)ᶜ=Aᶜ∩Bᶜ=∅."},{level:"Intermediate",q:"Simplify (A∪Bᶜ)ᶜ:",o:["Aᶜ∩B","A∩Bᶜ","Aᶜ∪B","A∪B"],a:0,e:"By De Morgan, (A∪Bᶜ)ᶜ=Aᶜ∩(Bᶜ)ᶜ=Aᶜ∩B."},
 {level:"Intermediate",q:"Simplify (Aᶜ∩B)ᶜ:",o:["A∪Bᶜ","Aᶜ∪B","A∩Bᶜ","A∪B"],a:0,e:"The complement of Aᶜ∩B is A∪Bᶜ."},
 {level:"Intermediate",q:"If U={1,2,3,4,5}, A={1,2,3}, B={3,4}, then (A∩B)ᶜ is:",o:["{3}","{1,2,4,5}","{1,2,3,4}","{5}"],a:1,e:"A∩B={3}; all other elements of U form its complement."},
 {level:"Intermediate",q:"If Aᶜ∩Bᶜ=Aᶜ, what follows?",o:["A⊆B","B⊆A","A∩B=∅","A=B"],a:1,e:"Aᶜ∩Bᶜ=Aᶜ means Aᶜ⊆Bᶜ. Taking complements reverses inclusion, so B⊆A."},

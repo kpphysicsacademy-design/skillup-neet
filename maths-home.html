@@ -112,7 +112,7 @@ window.SKILLUP_MATHEMATICS_PROGRESSIVE=[
 'use strict';
 const source=window.SKILLUP_MATHEMATICS_PROGRESSIVE||[];
 const units=source.map(u=>({icon:u[0],name:u[1],concepts:u[2]}));
-const all=[];units.forEach((u,ui)=>u.concepts.forEach((concept,ci)=>all.push({unit:ui+1,unitName:u.name,icon:u.icon,concept,index:ci+1,global:all.length+1})));
+const all=[];units.forEach((u,ui)=>u.concepts.forEach((concept,ci)=>{const pos=ci/(Math.max(1,u.concepts.length-1));const difficulty=pos<.2?'EASY':pos<.45?'BASIC':pos<.7?'INTERMEDIATE':pos<.9?'ADVANCED':'MASTER';all.push({unit:ui+1,unitName:u.name,icon:u.icon,concept,index:ci+1,difficulty,global:all.length+1});}));
 const path=document.getElementById('path'),empty=document.getElementById('empty'),q=document.getElementById('q');
 const topicStat=document.getElementById('topicStat'),unitStat=document.getElementById('unitStat'),quizStat=document.getElementById('quizStat'),emptyStat=document.getElementById('emptyStat'),filters=document.getElementById('filters');
 const quizKeys=new Set(['set representation','empty, finite and infinite sets','algebra of sets','union of sets','intersection of sets','difference of sets','symmetric difference','complement of a set','de morgan laws','algebraic properties of sets','practical set problems','cartesian product of finite sets','ordered pairs','relations','domain and codomain of a relation','equivalence relation','function as a relation','functions as mappings','domain of a function','codomain of a function','range of a function','one-one functions','many-one functions','into functions','onto functions','invertible functions','even functions','odd functions','polynomial functions','trigonometric functions','exponential functions','logarithmic functions','power functions','absolute value function','greatest integer function','sum of functions','difference of functions','product of functions','composition of functions','mixed relations and functions','complex numbers','algebra of complex numbers','addition and multiplication','conjugate of a complex number','properties of conjugates','modulus of a complex number','properties of modulus','principal argument']);
@@ -121,12 +121,12 @@ unitStat.textContent=units.length;topicStat.textContent=all.length;quizStat.text
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function hrefFor(x){return quizKeys.has(x.concept.toLowerCase())?'question-bank.html?subject=mathematics&topic='+encodeURIComponent(x.concept)+'&v=20261003-math-quiz-v4':'maths-path-concept.html?concept='+encodeURIComponent(x.concept);}
 function render(list){
- const byUnit=new Map();list.forEach(x=>{if(!byUnit.has(x.unit))byUnit.set(x.unit,[]);byUnit.get(x.unit).push(x);});
+ const byUnit=new Map();list.forEach(x=>{if(!byUnit.has(x.unit))byUnit.set(x.unit,[]);byUnit.get(x.unit).push(x);});byUnit.forEach(items=>items.sort((a,b)=>a.index-b.index));
  let html='',visible=0;
  byUnit.forEach((items,unitNo)=>{
    const u=units[unitNo-1];
    html+=`<section class="unit"><span class="unit-no">${unitNo}</span><div class="unit-title"><h2>${esc(u.icon)} ${esc(u.name)}</h2><small>UNIT ${unitNo} OF ${units.length} • EASY → ADVANCED • ${u.concepts.length} CONCEPTS</small></div></section><div class="grid">`;
-   items.forEach(x=>{visible++;const quiz=quizKeys.has(x.concept.toLowerCase());const cardIcon=quiz?'🧠':u.icon;html+=`<a class="concept" href="${hrefFor(x)}"><span class="icon">${esc(cardIcon)}</span><span class="info"><span class="name">${esc(x.concept)}</span><span class="meta">Concept ${x.global} • Unit ${x.unit}</span><span class="pill">${quiz?'🧠 QUIZ':'📘 CONCEPT'}</span></span><span class="arrow">›</span></a>`;});
+   items.forEach(x=>{visible++;const quiz=quizKeys.has(x.concept.toLowerCase());const cardIcon=quiz?'🧠':u.icon;html+=`<a class="concept" href="${hrefFor(x)}"><span class="icon">${esc(cardIcon)}</span><span class="info"><span class="name">${esc(x.concept)}</span><span class="meta">Concept ${x.global} • Unit ${x.unit} • ${x.difficulty}</span><span class="pill">${quiz?'🧠 QUIZ':'📘 CONCEPT'}</span></span><span class="arrow">›</span></a>`;});
    html+='</div>';
  });
  path.innerHTML=html;empty.style.display=visible?'none':'block';

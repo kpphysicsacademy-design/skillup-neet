@@ -15,7 +15,7 @@ window.SkillUpSymmetricDifferenceQuestions=[
 {level:"Developing",q:"Which identity is correct?",o:["A△B=(A−B)∪(B−A)","A△B=(A−B)∩(B−A)","A△B=A∩B","A△B=A−B"],a:0,e:"The two one-sided differences are disjoint and their union is the symmetric difference."},
 {level:"Developing",q:"If A⊆B, then A△B equals:",o:["A","B","B−A","A∩B"],a:2,e:"Since A has no elements outside B, the elements in exactly one set are B−A."},
 {level:"Developing",q:"If A△B=∅, then:",o:["A and B are disjoint","A=B","A⊆B only","B⊆A only"],a:1,e:"No element belongs to exactly one set, so the sets have identical elements."},
-{level:"Developing",q:"If A△B=A, then what must be true?",o:["A⊆B","A∩B=∅","A=B","B⊆A"],a:1,e:"For the symmetric difference to equal A, B can share no element with A and cannot add elements outside A; hence A∩B=∅ and B=∅ is stronger, so this option alone is insufficient."},
+{level:"Developing",q:"If A△B=A, then what must be true?",o:["A⊆B","B=∅","A=B","B⊆A"],a:1,e:"A△B=A means B contributes no elements outside A and removes none from A; therefore B must be empty."},
 {level:"Developing",q:"If A△B=B, then which condition is necessary?",o:["A∩B=∅ and A=∅","A⊆B","B⊆A","A=B"],a:0,e:"A△B=B forces A to contribute no elements and share none with B, so A=∅; thus the stated condition holds."},
 {level:"Developing",q:"If n(A)=12, n(B)=10 and n(A∩B)=4, then n(A△B) is:",o:["6","14","18","26"],a:1,e:"n(A△B)=n(A)+n(B)−2n(A∩B)=12+10−8=14."},
 {level:"Developing",q:"If A and B have 7 common elements, which elements are excluded from A△B?",o:["Elements only in A","Elements only in B","Elements common to A and B","All elements"],a:2,e:"Common elements do not belong to the symmetric difference."},

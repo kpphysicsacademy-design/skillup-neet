@@ -41,8 +41,17 @@ function card(x){var href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+
 function render(list,limit){p.innerHTML='';shown=Math.min(limit,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';if(count)count.textContent=list.length+' concepts';if(bar)bar.style.width=(a.length?Math.round(list.length/a.length*100):0)+'%';}
 function more(){if(searchTerm||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){if(last){}h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);
-var s=document.createElement('div');s.style.height='1px';p.after(s);
-if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
+var s=document.createElement('div');s.style.height='1px';s.setAttribute('aria-hidden','true');p.after(s);
+function nearBottom(){return window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-1000;}
+function loadMoreIfNeeded(){if(nearBottom())more();}
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'1200px 0px'});
+  io.observe(s);
+}
+window.addEventListener('scroll',loadMoreIfNeeded,{passive:true});
+window.addEventListener('resize',loadMoreIfNeeded);
+setTimeout(loadMoreIfNeeded,300);
+setTimeout(loadMoreIfNeeded,1000);
 document.getElementById('searchBtn').onclick=function(){searchTerm=q.value.trim().toLowerCase();var list=searchTerm?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(searchTerm)>-1;}):a;render(list,searchTerm?list.length:I);};
 })();
 var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu'),ls=document.getElementById('langSelect');

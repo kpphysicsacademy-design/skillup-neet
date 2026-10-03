@@ -32,6 +32,6 @@ window.SkillUpFunctionsAsMappingsQuestions=[
 {level:"Advanced",q:"How many onto mappings are possible from a 4-element set to a 2-element set?",o:["8","10","12","16"],a:1,e:"Total functions 2⁴=16; subtract two constant functions: 14. Thus none of the listed options is correct."},
 {level:"Advanced",q:"How many functions from a 3-element set to a 3-element set are both one-one and onto?",o:["3","6","9","27"],a:1,e:"Such functions are permutations, so 3!=6."},
 
-{level:"Master",q:"How many one-one mappings are possible from a 4-element set to a 6-element set?",o:["120","180","240","360"],a:2,e:"6×5×4×3=360. Thus option D is correct."},
-{level:"Master",q:"How many onto mappings are possible from a 5-element set to a 3-element set?",o:["90","120","150","180"],a:0,e:"By inclusion-exclusion: 3⁵−3·2⁵+3·1⁵=243−96+3=150. Thus option C is correct."}
+{level:"Master",q:"How many one-one mappings are possible from a 4-element set to a 6-element set?",o:["120","180","240","360"],a:3,e:"6×5×4×3=360."},
+{level:"Master",q:"How many onto mappings are possible from a 5-element set to a 3-element set?",o:["90","120","150","180"],a:2,e:"By inclusion-exclusion: 3⁵−3·2⁵+3=150."}
 ];

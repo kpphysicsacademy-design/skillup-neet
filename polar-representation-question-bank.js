@@ -28,5 +28,5 @@ window.SkillUpPolarRepresentationQuestions=[
 {level:"Intermediate",q:"If z=2(cosπ/6+i sinπ/6), then z³ in polar form is:",o:["8(cosπ/2+i sinπ/2)","6(cosπ/2+i sinπ/2)","8(cosπ/6+i sinπ/6)","8(cos3π+i sin3π)"],a:0,e:"The modulus becomes 2³=8 and the argument becomes 3π/6=π/2."},
 {level:"Advanced",q:"If z=2(cosπ/3+i sinπ/3), the polar form of 1/z is:",o:["(1/2)(cos(−π/3)+i sin(−π/3))","2(cos(−π/3)+i sin(−π/3))","(1/2)(cosπ/3+i sinπ/3)","2(cosπ/3+i sinπ/3)"],a:0,e:"The reciprocal has modulus 1/2 and argument −π/3."},
 {level:"Master",q:"If z=3(cosπ/4+i sinπ/4), the polar form of z⁴ is:",o:["81(cosπ+i sinπ)","12(cosπ+i sinπ)","81(cosπ/4+i sinπ/4)","9(cosπ+i sinπ)"],a:0,e:"The modulus is 3⁴=81 and the argument is 4π/4=π."},
-{level:"Master",q:"If z=2(cosπ/6+i sinπ/6), then z⁶ in Cartesian form is:",o:["64","64i","−64","32+32i"],a:0,e:"z⁶ has modulus 64 and argument π, so it equals 64(cosπ+i sinπ)=−64. Correct option is −64."}
+{level:"Master",q:"If z=2(cosπ/6+i sinπ/6), then z⁶ in Cartesian form is:",o:["64","64i","−64","32+32i"],a:2,e:"z⁶ has modulus 64 and argument π, so it equals 64(cosπ+i sinπ)=−64."}
 ];

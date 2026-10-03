@@ -30,8 +30,8 @@ window.SkillUpEquivalenceRelationQuestions=[
 
 {level:"Advanced",q:"How many equivalence relations are there on a 3-element set?",o:["3","4","5","6"],a:1,e:"Equivalence relations correspond to partitions; a 3-element set has 5 partitions."},
 {level:"Advanced",q:"On A={1,2,3,4}, let R have equivalence classes {1,2} and {3,4}. How many ordered pairs belong to R?",o:["4","6","8","10"],a:2,e:"Each class of size 2 contributes 2²=4 ordered pairs, total 8."},
-{level:"Advanced",q:"An equivalence relation on a 5-element set has classes of sizes 2 and 3. How many ordered pairs belong to the relation?",o:["10","13","14","15"],a:2,e:"A class of size m contributes m² pairs: 2²+3²=4+9=13. Thus option B is correct."},
+{level:"Advanced",q:"An equivalence relation on a 5-element set has classes of sizes 2 and 3. How many ordered pairs belong to the relation?",o:["10","13","14","15"],a:1,e:"A class of size m contributes m² pairs: 2²+3²=4+9=13."},
 
-{level:"Master",q:"An equivalence relation on a 7-element set has equivalence-class sizes 1,2 and 4. How many ordered pairs are in the relation?",o:["17","21","23","25"],a:2,e:"The relation contains 1²+2²+4²=1+4+16=21 pairs. Thus option B is correct."},
+{level:"Master",q:"An equivalence relation on a 7-element set has equivalence-class sizes 1,2 and 4. How many ordered pairs are in the relation?",o:["17","21","23","25"],a:1,e:"The relation contains 1²+2²+4²=21 pairs."},
 {level:"Master",q:"An equivalence relation on a 6-element set has exactly 3 classes, and every class has the same size. How many ordered pairs are in the relation?",o:["6","8","12","18"],a:2,e:"Three equal classes have size 2. The relation contains 3×2²=12 ordered pairs."}
 ];

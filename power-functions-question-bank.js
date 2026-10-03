@@ -27,7 +27,7 @@ window.SkillUpPowerFunctionsQuestions=[
 {level:"Intermediate",q:"The minimum value of x²+4 is:",o:["0","2","4","−4"],a:2,e:"x²≥0, so x²+4≥4."},
 {level:"Intermediate",q:"For x>0, if x^(1/2)=3, then x=",o:["3","6","9","27"],a:2,e:"Squaring gives x=9."},
 
-{level:"Advanced",q:"For x>0, if x^(2/3)=4, then x=",o:["4","6","8","16"],a:3,e:"Raise both sides to the 3/2 power: x=4^(3/2)=8. Correct option should be 8."},
+{level:"Advanced",q:"For x>0, if x^(2/3)=4, then x=",o:["4","6","8","16"],a:2,e:"Raise both sides to the 3/2 power: x=4^(3/2)=8."},
 {level:"Advanced",q:"The number of real solutions of x²=9 is:",o:["0","1","2","3"],a:2,e:"x=3 and x=−3."},
 {level:"Advanced",q:"The domain of f(x)=x^(−1/2) is:",o:["R","[0,∞)","(0,∞)","R\{0}"],a:2,e:"1/√x requires x>0."},
 

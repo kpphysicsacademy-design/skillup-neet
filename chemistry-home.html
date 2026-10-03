@@ -42,16 +42,35 @@ function render(list,limit){p.innerHTML='';shown=Math.min(limit,list.length);var
 function more(){if(searchTerm||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){if(last){}h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);
 var s=document.createElement('div');s.style.height='1px';s.setAttribute('aria-hidden','true');p.after(s);
-function nearBottom(){return window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-1000;}
-function loadMoreIfNeeded(){if(nearBottom())more();}
+var loadingMore=false;
+function loadBatch(){
+  if(loadingMore||searchTerm||shown>=a.length)return;
+  loadingMore=true;
+  more();
+  loadingMore=false;
+}
+function fillViewport(){
+  if(searchTerm||shown>=a.length)return;
+  var guard=0;
+  while(document.documentElement.scrollHeight<=window.innerHeight+900 && shown<a.length && guard<10){
+    loadBatch(); guard++;
+  }
+}
+function loadMoreIfNeeded(){
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-1200)loadBatch();
+  fillViewport();
+}
 if('IntersectionObserver' in window){
-  var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'1200px 0px'});
+  var io=new IntersectionObserver(function(es){
+    if(es[0]&&es[0].isIntersecting){loadBatch();setTimeout(fillViewport,50);}
+  },{rootMargin:'1600px 0px'});
   io.observe(s);
 }
 window.addEventListener('scroll',loadMoreIfNeeded,{passive:true});
 window.addEventListener('resize',loadMoreIfNeeded);
-setTimeout(loadMoreIfNeeded,300);
-setTimeout(loadMoreIfNeeded,1000);
+setTimeout(fillViewport,100);
+setTimeout(fillViewport,500);
+setTimeout(fillViewport,1200);
 document.getElementById('searchBtn').onclick=function(){searchTerm=q.value.trim().toLowerCase();var list=searchTerm?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(searchTerm)>-1;}):a;render(list,searchTerm?list.length:I);};
 })();
 var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu'),ls=document.getElementById('langSelect');

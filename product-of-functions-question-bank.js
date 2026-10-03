@@ -1,6 +1,6 @@
 window.SkillUpProductOfFunctionsQuestions=[
 {level:"Basic",q:"If f(x)=x+2 and g(x)=x−1, then (fg)(x) is:",o:["x²+x−2","2x+1","x²+1","x²−x+2"],a:0,e:"(fg)(x)=(x+2)(x−1)=x²+x−2."},
-{level:"Basic",q:"If f(x)=3x and g(x)=2x, then (fg)(x) is:",o:["5x","6x","x²","6x²"],a:1,e:"3x·2x=6x². Correct option should be 6x²."},
+{level:"Basic",q:"If f(x)=3x and g(x)=2x, then (fg)(x) is:",o:["5x","6x","x²","6x²"],a:3,e:"3x·2x=6x²."},
 {level:"Basic",q:"The product of two functions f and g is defined by:",o:["(fg)(x)=f(x)+g(x)","(fg)(x)=f(x)g(x)","(fg)(x)=f(g(x))","(fg)(x)=f(x)−g(x)"],a:1,e:"Function multiplication is pointwise multiplication."},
 {level:"Basic",q:"If f(x)=x² and g(x)=2, then (fg)(x) is:",o:["x²+2","2x²","x²/2","2x"],a:1,e:"x²·2=2x²."},
 {level:"Basic",q:"If f(2)=5 and g(2)=3, then (fg)(2) equals:",o:["8","2","15","10"],a:2,e:"5·3=15."},

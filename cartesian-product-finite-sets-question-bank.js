@@ -30,7 +30,7 @@ window.SkillUpCartesianProductFiniteSetsQuestions=[
 
 {level:"Advanced",q:"If A×B=B×A for nonempty sets A and B, which conclusion follows?",o:["A=B","A∩B=∅","A and B have equal cardinality only","A∪B=∅"],a:0,e:"For nonempty sets, equality of the Cartesian products forces A=B."},
 {level:"Advanced",q:"If A×B has 20 elements and A has one more element than B, which possible cardinalities are n(A),n(B)?",o:["5 and 4","4 and 3","6 and 5","10 and 2"],a:0,e:"The product 5×4=20 and 5 is one more than 4."},
-{level:"Advanced",q:"Let A and B be finite nonempty sets with n(A)=2 and n(B)=3. If n(A×B)=n(A∪B), what is n(A∩B)?",o:["0","1","2","3"],a:1,e:"n(A×B)=6 and n(A∪B)=5−n(A∩B). Equating gives n(A∩B)=−1, which is impossible; therefore no such sets exist."},
+{level:"Advanced",q:"If n(A)=4, n(B)=5 and n(A∩B)=2, how many ordered pairs are in (A×B)∪(B×A)?",o:["32","36","40","44"],a:1,e:"Each product has 20 pairs and their intersection has 2²=4 pairs. Hence the union has 20+20−4=36 pairs."},
 
 {level:"Master",q:"Let A and B be finite sets with n(A)=4, n(B)=5, and n(A∩B)=2. How many elements are in (A×B)\(B×A)?",o:["14","16","18","20"],a:1,e:"A×B has 20 pairs; its intersection with B×A has 2²=4 pairs. Difference has 20−4=16."},
 {level:"Master",q:"If A and B are finite sets with n(A)=3, n(B)=4 and n(A×B∩B×A)=9, what is n(A∩B)?",o:["2","3","4","6"],a:1,e:"The intersection equals (A∩B)×(A∩B), so n(A∩B)²=9 and n(A∩B)=3."}

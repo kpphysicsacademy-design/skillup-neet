@@ -32,5 +32,5 @@ window.SkillUpSumOfFunctionsQuestions=[
 {level:"Advanced",q:"If f(x)=x+1 and g(x)=1/(x−2), the domain of f+g is:",o:["R","R\{2}","(2,∞)","[2,∞)"],a:1,e:"g is undefined only at x=2."},
 
 {level:"Master",q:"If f(x)=x² and g(x)=−2x+1, the minimum value of (f+g)(x) is:",o:["−1","0","1","2"],a:0,e:"x²−2x+1=(x−1)², whose minimum is 0."},
-{level:"Master",q:"If f(x)=1/(1+x²) and g(x)=x²/(1+x²), then (f+g)(x) equals:",o:["0","1","x²","1+x²"],a:1,e:"The numerators add to 1, giving 1/(1+x²). Correct option should be 1."}
+{level:"Master",q:"If f(x)=1/(1+x²) and g(x)=x²/(1+x²), then (f+g)(x) equals:",o:["0","1","x²","1+x²"],a:1,e:"The numerators add to 1, giving 1."}
 ];

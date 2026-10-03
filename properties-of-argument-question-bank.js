@@ -25,8 +25,8 @@ window.SkillUpPropertiesArgumentQuestions=[
 {level:"Intermediate",q:"If Arg z=π/5 and Arg w=−4π/5, the principal argument of z²/w is:",o:["−4π/5","4π/5","−π/5","π/5"],a:0,e:"2π/5−(−4π/5)=6π/5; subtract 2π to get −4π/5."},
 {level:"Intermediate",q:"If Arg z=3π/4, the principal argument of z³ is:",o:["π/4","9π/4","−3π/4","3π/4"],a:0,e:"3(3π/4)=9π/4; subtract 2π to get π/4."},
 {level:"Intermediate",q:"If Arg z=−2π/5, the principal argument of z⁴ is:",o:["2π/5","−8π/5","−2π/5","4π/5"],a:0,e:"4(−2π/5)=−8π/5; add 2π to get 2π/5."},
-{level:"Advanced",q:"If Arg z=7π/12 and Arg w=5π/6, the principal argument of zw is:",o:["π/4","17π/12","−7π/12","−π/4"],a:0,e:"7π/12+10π/12=17π/12; subtract 2π to obtain −7π/12, so the first option is not correct. Wait: correct option should be −7π/12."},
-{level:"Advanced",q:"If Arg z=5π/6 and Arg w=−2π/3, the principal argument of z/w is:",o:["3π/2","−π/6","π/6","5π/2"],a:1,e:"5π/6−(−2π/3)=3π/2; in the principal range this is −π/2, so options need correction."},
+{level:"Advanced",q:"If Arg z=7π/12 and Arg w=5π/6, the principal argument of zw is:",o:["π/4","17π/12","−7π/12","−π/4"],a:2,e:"7π/12+10π/12=17π/12; subtract 2π to obtain −7π/12."},
+{level:"Advanced",q:"If Arg z=5π/6 and Arg w=−2π/3, the principal argument of z/w is:",o:["−π/2","π/2","−π/6","π/6"],a:0,e:"5π/6−(−2π/3)=3π/2; subtract 2π to obtain −π/2."},
 {level:"Master",q:"If Arg z=3π/4 and Arg w=5π/6, the principal argument of zw is:",o:["−5π/12","5π/12","19π/12","7π/12"],a:0,e:"19π/12−2π=−5π/12."},
 {level:"Master",q:"If Arg z=π/6 and Arg w=−5π/6, the principal argument of z³/w is:",o:["4π/3","−2π/3","2π/3","−4π/3"],a:1,e:"3π/6−(−5π/6)=8π/6=4π/3; principal value is −2π/3."}
 ];

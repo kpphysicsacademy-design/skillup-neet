@@ -1,4 +1,4 @@
-/* SkillUp Mathematics — NCERT Class 11 + 12 chapter-aligned concept path */
+/* SkillUp Mathematics — fixed 27-chapter display order aligned to the requested combined NCERT Class 11 + 12 sequence */
 window.SKILLUP_MATHEMATICS_PROGRESSIVE=[
 ["🔢","Sets",[
 "Set representation","Roster form","Set-builder form","Empty set","Singleton set","Finite sets","Infinite sets","Equal sets","Subset","Proper subset","Universal set","Power set","Cardinality of a set","Venn diagrams","Union of sets","Intersection of sets","Difference of sets","Complement of a set","Properties of set operations","De Morgan laws","Practical set problems"

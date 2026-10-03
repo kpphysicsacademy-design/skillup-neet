@@ -19,7 +19,7 @@ window.SkillUpManyOneFunctionsQuestions=[
 {level:"Developing",q:"The function f(x)=x² restricted to [0,∞) is:",o:["Many-one","One-one","Constant","Neither"],a:1,e:"On [0,∞), x² is strictly increasing."},
 {level:"Developing",q:"The function f(x)=x² restricted to R is:",o:["One-one","Many-one","Onto R","Constant"],a:1,e:"Positive and negative inputs can have the same square."},
 {level:"Developing",q:"If |A|=5 and |B|=3, every function A→B is necessarily:",o:["One-one","Many-one","Identity","Undefined"],a:1,e:"Five inputs cannot have five distinct images in a three-element codomain."},
-{level:"Developing",q:"If |A|=2 and |B|=5, a many-one function A→B is:",o:["Possible","Impossible","Always onto","Always one-one"],a:1,e:"With two distinct domain elements, many-one requires them to share an image; this is possible, so the correct option should be Possible."},
+{level:"Developing",q:"If |A|=2 and |B|=5, a many-one function A→B is:",o:["Possible","Impossible","Always onto","Always one-one"],a:0,e:"With two distinct domain elements, many-one requires them to share an image; this is possible, so the correct option should be Possible."},
 
 {level:"Intermediate",q:"For f(x)=x²+2x on R, f is:",o:["One-one","Many-one","Constant","Onto R"],a:1,e:"f(0)=0 and f(−2)=0, so it is many-one."},
 {level:"Intermediate",q:"For f(x)=x²−6x+8 on R, which pair has the same image?",o:["1 and 5","2 and 4","0 and 2","3 and 6"],a:0,e:"f(1)=3 and f(5)=3."},
@@ -31,6 +31,6 @@ window.SkillUpManyOneFunctionsQuestions=[
 {level:"Advanced",q:"For f(x)=x², which domain makes it many-one?",o:["[0,∞)","(−∞,0]","R","{0,1,2}"],a:2,e:"On R, positive and negative inputs can share the same square."},
 {level:"Advanced",q:"If f:A→B is many-one and |A|=6, the range can have:",o:["Exactly 6 elements only","At most 5 elements","At most 6 elements and fewer than 6","More than 6 elements"],a:2,e:"Many-one means at least two inputs share an image, so fewer than 6 distinct images occur."},
 
-{level:"Master",q:"How many many-one functions exist from a 3-element set to a 2-element set?",o:["2","4","6","8"],a:2,e:"There are 2³=8 total functions; two constant functions are one-one? More precisely, no function from 3 to 2 is one-one, so all 8 are many-one. Correct answer is 8."},
+{level:"Master",q:"How many many-one functions exist from a 3-element set to a 2-element set?",o:["2","4","6","8"],a:3,e:"There are 2³=8 total functions; two constant functions are one-one? More precisely, no function from 3 to 2 is one-one, so all 8 are many-one. Correct answer is 8."},
 {level:"Master",q:"For f:R→R defined by f(x)=x², which statement is correct?",o:["It is one-one and onto","It is many-one and into","It is one-one and into","It is many-one and onto"],a:1,e:"It is many-one because f(x)=f(−x), and into because negative reals are not in its range."}
 ];

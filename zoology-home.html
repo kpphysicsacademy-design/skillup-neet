@@ -36,8 +36,6 @@
 <body>
 <header class="top"><div class="nav"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu" aria-expanded="false">☰</button><div class="menu" id="menu" aria-label="SkillUp navigation"><div class="menu-title">SKILLUP</div><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">🧪 Chemistry</a><a href="botany-home.html">🌿 Botany</a><a href="zoology-home.html">🦁 Zoology</a><a href="maths-home.html">📐 Mathematics</a><a href="profile.html">👤 Profile</a><a href="progress.html">📊 My Progress</a><a href="tests.html">📝 My Tests</a><a href="revision.html">🔄 Revision</a><a href="achievements.html">🏆 Achievements</a><div class="menu-title">MORE</div><a href="help.html">❓ Help &amp; Feedback</a><a href="about.html">ℹ️ About SkillUp</a></div></div><span class="mascot">🐾</span><div class="brand">SkillUp<small>ZOOLOGY • NCERT + NEET 2026</small></div><span class="nav-status">ZOOLOGY</span></div></header>
 <main class="wrap">
-<section class="hero"><div style="font-size:13px;font-weight:950;color:#58cc02">🧬 ZERO → HERO</div><h1>Zoology Concept Path</h1><p>NCERT-aligned learning path mapped to the official NEET (UG) 2026 Biology syllabus. One focused concept at a time, followed by quiz and practice.</p><div class="stats"><span class="stat">14 Core Units</span><span class="stat" id="topicStat">0 Concepts</span><span class="stat">NCERT + NEET 2026</span></div></section>
-<section class="progress"><div class="row"><span>ZOOLOGY PATH</span><span id="count">0 concepts</span></div><div class="bar"><i id="bar"></i></div></section>
 <div class="tools"><input id="q" class="search" placeholder="Search Zoology concepts…" aria-label="Search Zoology concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><div id="empty" class="empty">No matching Zoology concepts found.</div>
 <section class="card"><b>🐾 Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 Zoology concepts load first. More concepts load automatically as you move down the path.</div></section>
@@ -62,15 +60,13 @@ var units=[["Diversity in Living World",[["What is Living?","🧬"],["Biodiversi
 
 var a=[],ix=0;
 units.forEach(function(u,ui){u[1].forEach(function(t){a.push({u:ui+1,n:u[0],c:t[0],ic:t[1],ix:++ix});});});
-var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty'),count=document.getElementById('count'),bar=document.getElementById('bar'),topicStat=document.getElementById('topicStat');
-topicStat.textContent=a.length+' Concepts';
+var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
 var shown=0,term='',B=20,I=20;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function unit(x){if(document.getElementById('unit-'+x.u))return '';return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.ic)+' '+esc(x.n)+'</h2><small>'+a.filter(function(v){return v.u===x.u;}).length+' concepts • UNIT '+x.u+' of 14</small></div></div></div>';}
 function card(x){var href='zoology-mcq.html?concept='+encodeURIComponent(x.c);return '<article class="chapter"><span class="node"></span><a href="'+href+'"><div><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
-function update(n,total){count.textContent=n+' / '+total+' concepts';bar.style.width=Math.round((n/total)*100)+'%';}
-function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';update(shown,list.length);}
-function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;update(shown,a.length);}
+function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
+function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);
 var s=document.createElement('div');s.style.height='1px';p.after(s);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}

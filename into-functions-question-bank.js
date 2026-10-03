@@ -18,7 +18,7 @@ window.SkillUpIntoFunctionsQuestions=[
 {level:"Developing",q:"For f:R→[1,∞), f(x)=x²+1, f is:",o:["Into","Onto","Constant","Not defined"],a:1,e:"Its range is exactly [1,∞)."},
 {level:"Developing",q:"For f:{1,2,3,4}→{a,b,c,d,e} with range {a,b,c}, f is:",o:["Onto","Into","One-one and onto","Identity"],a:1,e:"Two codomain elements are not attained."},
 {level:"Developing",q:"If |A|=3 and |B|=5, every function A→B is necessarily:",o:["Onto","Into","Constant","One-one"],a:1,e:"At most three codomain elements can be attained, so five cannot all be covered."},
-{level:"Developing",q:"If |A|=5 and |B|=3, can an into function A→B exist?",o:["Yes","No","Only if one-one","Only if constant"],a:1,e:"An into function requires the range to have fewer than 3 elements; this is possible, so the correct answer is Yes."},
+{level:"Developing",q:"If |A|=5 and |B|=3, can an into function A→B exist?",o:["Yes","No","Only if one-one","Only if constant"],a:0,e:"An into function requires the range to have fewer than 3 elements; this is possible, so the correct answer is Yes."},
 {level:"Developing",q:"If f:A→B is one-one but not onto, then f is:",o:["Into","Onto","Constant","Identity"],a:0,e:"Not onto means its range is a proper subset of B, so it is into."},
 
 {level:"Intermediate",q:"Let f:R→R be f(x)=x²−4. Then f is:",o:["Onto","Into","One-one and onto","Identity"],a:1,e:"Its range is [−4,∞), which is a proper subset of R."},

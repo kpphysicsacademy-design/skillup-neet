@@ -19,7 +19,6 @@ window.SkillUpAlgebraOfSetsQuestions=[
 {q:"If A⊆B, then A∩B equals:",o:["A","B","∅","U"],a:0,e:"When every element of A is in B, their common elements are exactly A."},
 {q:"If A⊆B, then A∪B equals:",o:["A","B","∅","Aᶜ"],a:1,e:"Since A contributes no elements outside B, the union is B."},
 {q:"If A and B are disjoint, then A∩B equals:",o:["A","B","U","∅"],a:3,e:"Disjoint sets have no common elements."},
-{q:"If n(A)=20, n(B)=15 and n(A∩B)=5, then n(A∪B) is:",o:["25","30","35","40"],a:0,e:"n(A∪B)=n(A)+n(B)−n(A∩B)=20+15−5=30. Wait: the computed value is 30."},
 {q:"If n(A)=20, n(B)=15 and n(A∩B)=5, the correct value of n(A∪B) is:",o:["25","30","35","40"],a:1,e:"Using n(A∪B)=n(A)+n(B)−n(A∩B), we get 20+15−5=30."},
 {q:"If U={1,2,3,4,5} and A={1,3,5}, then Aᶜ is:",o:["{1,3,5}","{2,4}","{1,2,3}","∅"],a:1,e:"The complement contains elements of U not in A: {2,4}."},
 {q:"If A={1,2} and B={2,3}, then (A∪B)−B is:",o:["{1}","{2}","{3}","{1,3}"],a:0,e:"A∪B={1,2,3}; removing B={2,3} leaves {1}."},
@@ -28,7 +27,6 @@ window.SkillUpAlgebraOfSetsQuestions=[
 {q:"If A={1,2,3} and B={3,4,5}, then A△B is:",o:["{3}","{1,2,4,5}","{1,2,3,4,5}","∅"],a:1,e:"The common element 3 is excluded; the remaining elements are {1,2,4,5}."},
 {q:"Which statement is always true?",o:["A−B=A∩B","A−B=A∩Bᶜ","A−B=A∪Bᶜ","A−B=B−A"],a:1,e:"An element is in A−B exactly when it is in A and not in B."},
 {q:"Which relation is always true for any sets A and B?",o:["A−B=B−A","A∩B⊆A∪B","A∪B⊆A∩B","A∩B=A∪B"],a:1,e:"Every common element is necessarily an element of the union."},
-{q:"If A∪B=A and A∩B=B, then:",o:["A⊆B","B⊆A","A and B are disjoint","A=B"],a:3,e:"A∩B=B implies B⊆A, while A∪B=A also implies B⊆A; with B as the intersection, B is contained in A, but equality is not forced. Wait: these conditions allow B⊂A, so A=B is not necessary."},
 {q:"If A∪B=B and A∩B=A, then:",o:["A⊆B","B⊆A","A and B are disjoint","A=B"],a:0,e:"A∪B=B means every element of A is in B, so A⊆B; the intersection condition is consistent with this."},
 {q:"If A⊆B and B⊆A, then:",o:["A∩B=∅","A=B","A∪B=∅","A and B are disjoint"],a:1,e:"Mutual inclusion means the two sets contain exactly the same elements, hence A=B."}
 ];

@@ -26,7 +26,7 @@ window.SkillUpOddFunctionsQuestions=[
 {level:"Intermediate",q:"If f is odd and nonzero, then 1/f is:",o:["Even","Odd","Neither","Constant"],a:1,e:"1/f(−x)=−1/f(x)."},
 {level:"Intermediate",q:"If f(x)=x⁵−3x³+x, then f is:",o:["Even","Odd","Neither","Both"],a:1,e:"Every power is odd."},
 {level:"Intermediate",q:"If f is odd and differentiable, then f′ is:",o:["Even","Odd","Constant","Neither"],a:0,e:"Differentiating f(−x)=−f(x) gives f′(−x)=f′(x)."},
-{level:"Intermediate",q:"If f is odd and g is even, then f∘g is:",o:["Even","Odd","Neither","Always zero"],a:0,e:"g(−x)=g(x), hence f(g(−x))=f(g(x))."},
+
 
 {level:"Advanced",q:"If f(x)=x³+x²−x, then f is:",o:["Even","Odd","Neither even nor odd","Both"],a:2,e:"It contains both even and odd powers and satisfies neither symmetry condition."},
 {level:"Advanced",q:"If f is odd and g is odd, then f+g is:",o:["Even","Odd","Neither","Constant"],a:1,e:"The sum of two odd functions is odd."},

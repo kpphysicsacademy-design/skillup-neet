@@ -32,5 +32,5 @@ window.SkillUpLogarithmicFunctionsQuestions=[
 {level:"Advanced",q:"If log₂x=a and log₂y=b, then log₂(x²/y) equals:",o:["2a−b","a−2b","2a+b","a+b"],a:0,e:"log₂(x²/y)=2log₂x−log₂y=2a−b."},
 
 {level:"Master",q:"The number of real solutions of log₂x=3−x is:",o:["0","1","2","3"],a:1,e:"Both sides are respectively increasing and decreasing on x>0, so they intersect exactly once."},
-{level:"Master",q:"If log₂x+log₂(4−x)=2, the number of real solutions is:",o:["0","1","2","3"],a:2,e:"x(4−x)=4 gives (x−2)²=0, so there is exactly one distinct solution. Correct option should be 1."}
+{level:"Master",q:"If log₂x+log₂(4−x)=2, the number of real solutions is:",o:["0","1","2","3"],a:1,e:"x(4−x)=4 gives (x−2)²=0, so there is exactly one distinct solution."}
 ];

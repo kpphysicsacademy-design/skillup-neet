@@ -53,7 +53,7 @@ window.SkillUpProofDivisibilityResultsQuestions=[
     "q": "If \\(a\\mid b\\), then by definition there exists \\(m\\in\\mathbb Z\\) such that:",
     "o": [
       "\\(b=am\\)",
-      "\\(a=bm)",
+      "\\(a=bm\\)",
       "\\(b=a+m\\)",
       "\\(m=ab+1\\)"
     ],

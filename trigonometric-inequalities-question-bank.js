@@ -1,33 +1,363 @@
 /* SkillUp Mathematics — Trigonometric Inequalities — 30 MCQs */
 window.SkillUpTrigonometricInequalitiesQuestions=[
-{level:"Basic",q:"Solve \(\sin x>0\) for \(x\in\mathbb R\).",o:["\(2n\pi<x<(2n+1)\pi\)","\( (2n+1)\pi<x<(2n+2)\pi\)","\(n\pi<x<(n+1)\pi\)","\(x=n\pi\)"],a:0,e:"Sine is positive in quadrants I and II."},
-{level:"Basic",q:"Solve \(\cos x\ge0\) for \(x\in\mathbb R\).",o:["\([\pi/2+2n\pi,3\pi/2+2n\pi]\)"," \([-\pi/2+2n\pi,\pi/2+2n\pi]\)","\((n\pi,(n+1)\pi)\)","\([0,\pi]+2n\pi\)"],a:1,e:"Cosine is non-negative in quadrants I and IV."},
-{level:"Basic",q:"The solution of \(\tan x>0\) is:",o:["\((n\pi-\pi/2,n\pi)\)","\((2n\pi,(2n+1)\pi)\)","\((n\pi,n\pi+\pi/2)\)","\(x=n\pi\)"],a:2,e:"Tangent is positive in quadrants I and III."},
-{level:"Basic",q:"For \(0\le x\le2\pi\), solve \(\sin x<1/2\).",o:["\([0,\pi/6)\cup(5\pi/6,2\pi]\)","\((\pi/6,5\pi/6)\)","\([0,\pi/6]\cup[5\pi/6,2\pi)\)","\((0,\pi/6)\cup(5\pi/6,2\pi)\)"],a:0,e:"The boundary points where \(\sin x=1/2\) are excluded."},
-{level:"Basic",q:"For \(0\le x\le2\pi\), solve \(\cos x>1/2\).",o:["\([0,\pi/3)\cup(5\pi/3,2\pi]\)","\((\pi/3,5\pi/3)\)","\([0,\pi/3]\cup[5\pi/3,2\pi]\)","\((0,\pi/3)\cup(5\pi/3,2\pi)\)"],a:0,e:"Cosine exceeds \(1/2\) near \(0\) and \(2\pi\)."},
-{level:"Basic",q:"For \(-\pi/2<x<\pi/2\), solve \(\tan x\le1\).",o:["\((-\pi/2,\pi/4)\)","\((-\pi/2,\pi/4]\)","\([\pi/4,\pi/2)\)","\([-\pi/2,\pi/4]\)"],a:1,e:"Tangent is increasing and \(\tan(\pi/4)=1\)."},
-{level:"Basic",q:"For \(0\le x\le2\pi\), solve \(\sin x\ge0\).",o:["\((0,\pi)\)","\([0,\pi]\)","\([0,\pi]\cup\{2\pi\}\)","\([\pi,2\pi]\)"],a:2,e:"Sine is non-negative on \([0,\pi]\) and at \(2\pi\)."},
-{level:"Basic",q:"For \(0\le x\le2\pi\), solve \(\cos x\le0\).",o:["\((\pi/2,3\pi/2)\)","\([0,\pi/2]\cup[3\pi/2,2\pi]\)","\([\pi/2,\pi]\)","\([\pi/2,3\pi/2]\)"],a:3,e:"Cosine is non-positive in quadrants II and III."},
-{level:"Developing",q:"For \(0\le x\le2\pi\), solve \(\sin x>\sqrt3/2\).",o:["\((\pi/3,2\pi/3)\)","\([\pi/3,2\pi/3]\)","\((0,\pi/3)\cup(2\pi/3,\pi)\)","\([\pi/6,5\pi/6]\)"],a:0,e:"Sine is strictly above \(\sqrt3/2\) between its two intersections."},
-{level:"Developing",q:"For \(0\le x\le2\pi\), solve \(\cos x\ge-1/2\).",o:["\((2\pi/3,4\pi/3)\)","\([0,2\pi/3]\cup[4\pi/3,2\pi]\)","\([2\pi/3,4\pi/3]\)","\([0,\pi/3]\cup[5\pi/3,2\pi]\)"],a:1,e:"Cosine is at least \(-1/2\) outside \((2\pi/3,4\pi/3)\)."},
-{level:"Developing",q:"For \(0<x<2\pi\), solve \(\tan x<0\).",o:["\((0,\pi/2)\cup(\pi,3\pi/2)\)","\((\pi/2,3\pi/2)\)","\((\pi/2,\pi)\cup(3\pi/2,2\pi)\)","\((0,\pi)\cup(3\pi/2,2\pi)\)"],a:2,e:"Tangent is negative in quadrants II and IV."},
-{level:"Developing",q:"For \(0\le x\le2\pi\), solve \(\sin x\le\cos x\).",o:["\([\pi/4,5\pi/4]\)","\((0,\pi/4)\cup(5\pi/4,2\pi)\)","\([0,\pi/4]\cup[5\pi/4,2\pi]\)","\([0,3\pi/4]\cup[7\pi/4,2\pi]\)"],a:2,e:"Use \(\sin x-\cos x=\sqrt2\sin(x-\pi/4)\)."},
-{level:"Developing",q:"For \(0\le x\le2\pi\), solve \(2\sin x-1>0\).",o:["\((\pi/6,5\pi/6)\)","\([\pi/6,5\pi/6]\)","\((0,\pi/6)\cup(5\pi/6,2\pi)\)","\([0,\pi/6]\cup[5\pi/6,2\pi]\)"],a:0,e:"This is equivalent to \(\sin x>1/2\)."},
-{level:"Developing",q:"For \(0\le x\le2\pi\), solve \(2\cos x+1\le0\).",o:["\([0,2\pi/3]\cup[4\pi/3,2\pi]\)","\([2\pi/3,4\pi/3]\)","\((2\pi/3,4\pi/3)\)","\([\pi/3,5\pi/3]\)"],a:1,e:"This gives \(\cos x\le-1/2\)."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(\sin2x>0\).",o:["\([0,\pi/2]\cup[\pi,3\pi/2]\)","\((\pi/2,\pi)\cup(3\pi/2,2\pi)\)","\((0,\pi/2)\cup(\pi,3\pi/2)\)","\((0,\pi)\)"],a:2,e:"Apply the positive-sine intervals to \(2x\)."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(\cos2x\le0\).",o:["\([0,\pi/4]\cup[3\pi/4,5\pi/4]\)","\([\pi/4,3\pi/4]\)","\((\pi/4,3\pi/4)\cup(5\pi/4,7\pi/4)\)","\([\pi/4,3\pi/4]\cup[5\pi/4,7\pi/4]\)"],a:3,e:"Cosine is non-positive for \(2x\in[\pi/2,3\pi/2]\cup[5\pi/2,7\pi/2]\)."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(\sin x\cos x>0\).",o:["\((0,\pi/2)\cup(\pi,3\pi/2)\)","\([0,\pi/2]\cup[\pi,3\pi/2]\)","\((\pi/2,\pi)\cup(3\pi/2,2\pi)\)","\((0,\pi)\)"],a:0,e:"The product is positive when sine and cosine have the same sign."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(|\sin x|\le1/2\).",o:["\([0,\pi/6]\cup[5\pi/6,7\pi/6]\cup[11\pi/6,2\pi]\)","\((\pi/6,5\pi/6)\)","\([\pi/6,5\pi/6]\cup[7\pi/6,11\pi/6]\)","\([0,\pi/6)\cup(5\pi/6,7\pi/6)\cup(11\pi/6,2\pi)\)"],a:0,e:"Equality is included because the inequality is non-strict."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(|\cos x|>\sqrt2/2\).",o:["\((0,\pi/4)\cup(3\pi/4,5\pi/4)\cup(7\pi/4,2\pi)\)","\([0,\pi/4]\cup[3\pi/4,5\pi/4]\cup[7\pi/4,2\pi]\)","\([0,\pi/4)\cup(3\pi/4,5\pi/4)\cup(7\pi/4,2\pi]\)","\([0,\pi/4)\cup[3\pi/4,5\pi/4]\cup[7\pi/4,2\pi)\)"],a:2,e:"The equality points are excluded, while \(0\) and \(2\pi\) are included."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(\sin x+\cos x>0\).",o:["\([0,3\pi/4)\cup(7\pi/4,2\pi]\)","\((3\pi/4,7\pi/4)\)","\([0,\pi/4]\cup[5\pi/4,2\pi]\)","\((0,3\pi/4)\cup(7\pi/4,2\pi)\)"],a:0,e:"Use \(\sin x+\cos x=\sqrt2\sin(x+\pi/4)\)."},
-{level:"Intermediate",q:"For \(0\le x\le2\pi\), solve \(\sin x-\cos x\ge0\).",o:["\([0,\pi/4]\cup[5\pi/4,2\pi]\)","\([\pi/4,5\pi/4]\)","\((\pi/4,5\pi/4)\)","\([3\pi/4,7\pi/4]\)"],a:1,e:"Use \(\sin x-\cos x=\sqrt2\sin(x-\pi/4)\)."},
-{level:"Advanced",q:"For \(0\le x\le2\pi\), solve \(2\sin x\cos x\le0\).",o:["\([0,\pi/2]\cup[\pi,3\pi/2]\)","\((0,\pi/2)\cup(\pi,3\pi/2)\)","\([\pi/2,\pi]\cup[3\pi/2,2\pi]\)","\([\pi/4,3\pi/4]\cup[5\pi/4,7\pi/4]\)"],a:2,e:"Since \(2\sin x\cos x=\sin2x\), solve \(\sin2x\le0\)."},
-{level:"Advanced",q:"For \(0\le x\le2\pi\), solve \(\tan x>0\).",o:["\((0,\pi/2)\cup(\pi,3\pi/2)\)","\((\pi/2,\pi)\cup(3\pi/2,2\pi)\)","\([0,\pi/2)\cup[\pi,3\pi/2)\)","\((0,\pi)\cup(\pi,2\pi)\)"],a:0,e:"Tangent is positive in quadrants I and III."},
-{level:"Advanced",q:"For \(0\le x<2\pi\), solve \((1-\cos x)/(1+\cos x)\le1\).",o:["\([0,\pi/2]\cup[3\pi/2,2\pi)\)","\((0,\pi/2)\cup(3\pi/2,2\pi)\)","\([\pi/2,3\pi/2)\)","\([0,\pi]\)"],a:0,e:"The expression is \(\tan^2(x/2)\); the point \(x=\pi\) is excluded from the domain."},
-{level:"Advanced",q:"For \(0\le x\le2\pi\), solve \(\sin^2x\ge1/2\).",o:["\([0,\pi/4]\cup[3\pi/4,5\pi/4]\cup[7\pi/4,2\pi]\)","\([\pi/4,3\pi/4]\cup[5\pi/4,7\pi/4]\)","\((\pi/4,3\pi/4)\cup(5\pi/4,7\pi/4)\)","\([\pi/6,5\pi/6]\cup[7\pi/6,11\pi/6]\)"],a:1,e:"This is \(|\sin x|\ge1/\sqrt2\)."},
-{level:"Advanced",q:"For \(0\le x\le2\pi\), solve \(\cos^2x<1/4\).",o:["\([0,\pi/3)\cup(5\pi/3,2\pi]\)","\([\pi/3,2\pi/3]\cup[4\pi/3,5\pi/3]\)","\((\pi/3,2\pi/3)\cup(4\pi/3,5\pi/3)\)","\((0,\pi/3)\cup(4\pi/3,2\pi)\)"],a:2,e:"This is \(|\cos x|<1/2\), so equality points are excluded."},
-{level:"Master",q:"For \(0\le x\le2\pi\), solve \(2\sin^2x-3\sin x+1\ge0\).",o:["\([0,\pi/6]\cup[5\pi/6,2\pi]\)","\((0,\pi/6]\cup\{\pi/2\}\cup[5\pi/6,2\pi)\)","\([0,\pi/6]\cup\{\pi/2\}\cup[5\pi/6,2\pi]\)","\([\pi/6,5\pi/6]\)"],a:2,e:"Factor as \((2\sin x-1)(\sin x-1)\ge0\)."},
-{level:"Master",q:"For \(0\le x\le2\pi\), solve \(2\cos^2x-3\cos x+1>0\).",o:["\([0,\pi/3)\cup(5\pi/3,2\pi]\)","\((\pi/3,5\pi/3)\)","\([\pi/3,5\pi/3]\)","\((0,\pi/3)\cup(5\pi/3,2\pi)\)"],a:1,e:"Factor as \((2\cos x-1)(\cos x-1)>0\), giving \(\cos x<1/2\)."},
-{level:"Master",q:"For \(0\le x\le2\pi\), if \(\sin x\ge1/2\) and \(\cos x\ge1/2\), then x lies in:",o:["\([\pi/6,\pi/3]\)","\([0,\pi/6]\)","\([\pi/3,\pi/2]\)","\([\pi/6,\pi/2]\)"],a:0,e:"Intersect \(\sin x\ge1/2\) with \(\cos x\ge1/2\)."},
-{level:"Master",q:"For \(0\le x\le2\pi\), solve \(\sin x\cos x\ge1/4\).",o:["\([\pi/12,5\pi/12]\cup[13\pi/12,17\pi/12]\)","\([\pi/6,\pi/3]\cup[7\pi/6,5\pi/3]\)","\((0,\pi/2)\cup(\pi,3\pi/2)\)","\([\pi/12,5\pi/12]\cup[7\pi/6,11\pi/6]\)"],a:0,e:"Use \(2\sin x\cos x=\sin2x\), so \(\sin2x\ge1/2\)."}
+  {
+    "level": "Basic",
+    "q": "Solve (sin x>0) for (xinmathbb R).",
+    "o": [
+      "(2npi<x<(2n+1)pi)",
+      "( (2n+1)pi<x<(2n+2)pi)",
+      "(npi<x<(n+1)pi)",
+      "(x=npi)"
+    ],
+    "a": 0,
+    "e": "Sine is positive in quadrants I and II."
+  },
+  {
+    "level": "Basic",
+    "q": "Solve (cos xge0) for (xinmathbb R).",
+    "o": [
+      " ([-pi/2+2npi,pi/2+2npi])",
+      "([pi/2+2npi,3pi/2+2npi])",
+      "((npi,(n+1)pi))",
+      "([0,pi]+2npi)"
+    ],
+    "a": 0,
+    "e": "Cosine is non-negative in quadrants I and IV."
+  },
+  {
+    "level": "Basic",
+    "q": "The solution of (\tan x>0) is:",
+    "o": [
+      "((npi,npi+pi/2))",
+      "((2npi,(2n+1)pi))",
+      "((npi-pi/2,npi))",
+      "(x=npi)"
+    ],
+    "a": 0,
+    "e": "Tangent is positive in quadrants I and III."
+  },
+  {
+    "level": "Basic",
+    "q": "For (0le xle2pi), solve (sin x<1/2).",
+    "o": [
+      "([0,pi/6)cup(5pi/6,2pi])",
+      "((pi/6,5pi/6))",
+      "([0,pi/6]cup[5pi/6,2pi))",
+      "((0,pi/6)cup(5pi/6,2pi))"
+    ],
+    "a": 0,
+    "e": "The boundary points where (sin x=1/2) are excluded."
+  },
+  {
+    "level": "Basic",
+    "q": "For (0le xle2pi), solve (cos x>1/2).",
+    "o": [
+      "([0,pi/3)cup(5pi/3,2pi])",
+      "((pi/3,5pi/3))",
+      "([0,pi/3]cup[5pi/3,2pi])",
+      "((0,pi/3)cup(5pi/3,2pi))"
+    ],
+    "a": 0,
+    "e": "Cosine exceeds (1/2) near (0) and (2pi)."
+  },
+  {
+    "level": "Basic",
+    "q": "For (-pi/2<x<pi/2), solve (\tan xle1).",
+    "o": [
+      "((-pi/2,pi/4])",
+      "((-pi/2,pi/4))",
+      "([pi/4,pi/2))",
+      "([-pi/2,pi/4])"
+    ],
+    "a": 0,
+    "e": "Tangent is increasing and (\tan(pi/4)=1)."
+  },
+  {
+    "level": "Basic",
+    "q": "For (0le xle2pi), solve (sin xge0).",
+    "o": [
+      "([0,pi]cup{2pi})",
+      "([0,pi])",
+      "((0,pi))",
+      "([pi,2pi])"
+    ],
+    "a": 0,
+    "e": "Sine is non-negative on ([0,pi]) and at (2pi)."
+  },
+  {
+    "level": "Basic",
+    "q": "For (0le xle2pi), solve (cos xle0).",
+    "o": [
+      "([pi/2,3pi/2])",
+      "([0,pi/2]cup[3pi/2,2pi])",
+      "([pi/2,pi])",
+      "((pi/2,3pi/2))"
+    ],
+    "a": 0,
+    "e": "Cosine is non-positive in quadrants II and III."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0le xle2pi), solve (sin x>sqrt3/2).",
+    "o": [
+      "([pi/3,2pi/3])",
+      "((pi/3,2pi/3))",
+      "((0,pi/3)cup(2pi/3,pi))",
+      "([pi/6,5pi/6])"
+    ],
+    "a": 1,
+    "e": "Sine is strictly above (sqrt3/2) between its two intersections."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0le xle2pi), solve (cos xge-1/2).",
+    "o": [
+      "((2pi/3,4pi/3))",
+      "([0,2pi/3]cup[4pi/3,2pi])",
+      "([2pi/3,4pi/3])",
+      "([0,pi/3]cup[5pi/3,2pi])"
+    ],
+    "a": 1,
+    "e": "Cosine is at least (-1/2) outside ((2pi/3,4pi/3))."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0<x<2pi), solve (\tan x<0).",
+    "o": [
+      "((0,pi/2)cup(pi,3pi/2))",
+      "((pi/2,pi)cup(3pi/2,2pi))",
+      "((pi/2,3pi/2))",
+      "((0,pi)cup(3pi/2,2pi))"
+    ],
+    "a": 1,
+    "e": "Tangent is negative in quadrants II and IV."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0le xle2pi), solve (sin xlecos x).",
+    "o": [
+      "([pi/4,5pi/4])",
+      "([0,pi/4]cup[5pi/4,2pi])",
+      "((0,pi/4)cup(5pi/4,2pi))",
+      "([0,3pi/4]cup[7pi/4,2pi])"
+    ],
+    "a": 1,
+    "e": "Use (sin x-cos x=sqrt2sin(x-pi/4))."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0le xle2pi), solve (2sin x-1>0).",
+    "o": [
+      "([pi/6,5pi/6])",
+      "((pi/6,5pi/6))",
+      "((0,pi/6)cup(5pi/6,2pi))",
+      "([0,pi/6]cup[5pi/6,2pi])"
+    ],
+    "a": 1,
+    "e": "This is equivalent to (sin x>1/2)."
+  },
+  {
+    "level": "Developing",
+    "q": "For (0le xle2pi), solve (2cos x+1le0).",
+    "o": [
+      "([0,2pi/3]cup[4pi/3,2pi])",
+      "([2pi/3,4pi/3])",
+      "((2pi/3,4pi/3))",
+      "([pi/3,5pi/3])"
+    ],
+    "a": 1,
+    "e": "This gives (cos xle-1/2)."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (sin2x>0).",
+    "o": [
+      "([0,pi/2]cup[pi,3pi/2])",
+      "((0,pi/2)cup(pi,3pi/2))",
+      "((pi/2,pi)cup(3pi/2,2pi))",
+      "((0,pi))"
+    ],
+    "a": 1,
+    "e": "Apply the positive-sine intervals to (2x)."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (cos2xle0).",
+    "o": [
+      "([0,pi/4]cup[3pi/4,5pi/4])",
+      "([pi/4,3pi/4]cup[5pi/4,7pi/4])",
+      "((pi/4,3pi/4)cup(5pi/4,7pi/4))",
+      "([pi/4,3pi/4])"
+    ],
+    "a": 1,
+    "e": "Cosine is non-positive for (2xin[pi/2,3pi/2]cup[5pi/2,7pi/2])."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (sin xcos x>0).",
+    "o": [
+      "((pi/2,pi)cup(3pi/2,2pi))",
+      "([0,pi/2]cup[pi,3pi/2])",
+      "((0,pi/2)cup(pi,3pi/2))",
+      "((0,pi))"
+    ],
+    "a": 2,
+    "e": "The product is positive when sine and cosine have the same sign."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (|sin x|le1/2).",
+    "o": [
+      "([pi/6,5pi/6]cup[7pi/6,11pi/6])",
+      "((pi/6,5pi/6))",
+      "([0,pi/6]cup[5pi/6,7pi/6]cup[11pi/6,2pi])",
+      "([0,pi/6)cup(5pi/6,7pi/6)cup(11pi/6,2pi))"
+    ],
+    "a": 2,
+    "e": "Equality is included because the inequality is non-strict."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (|cos x|>sqrt2/2).",
+    "o": [
+      "((0,pi/4)cup(3pi/4,5pi/4)cup(7pi/4,2pi))",
+      "([0,pi/4]cup[3pi/4,5pi/4]cup[7pi/4,2pi])",
+      "([0,pi/4)cup(3pi/4,5pi/4)cup(7pi/4,2pi])",
+      "([0,pi/4)cup[3pi/4,5pi/4]cup[7pi/4,2pi))"
+    ],
+    "a": 2,
+    "e": "The equality points are excluded, while (0) and (2pi) are included."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (sin x+cos x>0).",
+    "o": [
+      "([0,pi/4]cup[5pi/4,2pi])",
+      "((3pi/4,7pi/4))",
+      "([0,3pi/4)cup(7pi/4,2pi])",
+      "((0,3pi/4)cup(7pi/4,2pi))"
+    ],
+    "a": 2,
+    "e": "Use (sin x+cos x=sqrt2sin(x+pi/4))."
+  },
+  {
+    "level": "Intermediate",
+    "q": "For (0le xle2pi), solve (sin x-cos xge0).",
+    "o": [
+      "([0,pi/4]cup[5pi/4,2pi])",
+      "((pi/4,5pi/4))",
+      "([pi/4,5pi/4])",
+      "([3pi/4,7pi/4])"
+    ],
+    "a": 2,
+    "e": "Use (sin x-cos x=sqrt2sin(x-pi/4))."
+  },
+  {
+    "level": "Advanced",
+    "q": "For (0le xle2pi), solve (2sin xcos xle0).",
+    "o": [
+      "([0,pi/2]cup[pi,3pi/2])",
+      "((0,pi/2)cup(pi,3pi/2))",
+      "([pi/2,pi]cup[3pi/2,2pi])",
+      "([pi/4,3pi/4]cup[5pi/4,7pi/4])"
+    ],
+    "a": 2,
+    "e": "Since (2sin xcos x=sin2x), solve (sin2xle0)."
+  },
+  {
+    "level": "Advanced",
+    "q": "For (0le xle2pi), solve (\tan x>0).",
+    "o": [
+      "([0,pi/2)cup[pi,3pi/2))",
+      "((pi/2,pi)cup(3pi/2,2pi))",
+      "((0,pi/2)cup(pi,3pi/2))",
+      "((0,pi)cup(pi,2pi))"
+    ],
+    "a": 2,
+    "e": "Tangent is positive in quadrants I and III."
+  },
+  {
+    "level": "Advanced",
+    "q": "For (0le x<2pi), solve ((1-cos x)/(1+cos x)le1).",
+    "o": [
+      "([0,pi])",
+      "((0,pi/2)cup(3pi/2,2pi))",
+      "([pi/2,3pi/2))",
+      "([0,pi/2]cup[3pi/2,2pi))"
+    ],
+    "a": 3,
+    "e": "The expression is (\tan^2(x/2)); the point (x=pi) is excluded from the domain."
+  },
+  {
+    "level": "Advanced",
+    "q": "For (0le xle2pi), solve (sin^2xge1/2).",
+    "o": [
+      "([0,pi/4]cup[3pi/4,5pi/4]cup[7pi/4,2pi])",
+      "([pi/6,5pi/6]cup[7pi/6,11pi/6])",
+      "((pi/4,3pi/4)cup(5pi/4,7pi/4))",
+      "([pi/4,3pi/4]cup[5pi/4,7pi/4])"
+    ],
+    "a": 3,
+    "e": "This is (|sin x|ge1/sqrt2)."
+  },
+  {
+    "level": "Advanced",
+    "q": "For (0le xle2pi), solve (cos^2x<1/4).",
+    "o": [
+      "([0,pi/3)cup(5pi/3,2pi])",
+      "([pi/3,2pi/3]cup[4pi/3,5pi/3])",
+      "((0,pi/3)cup(4pi/3,2pi))",
+      "((pi/3,2pi/3)cup(4pi/3,5pi/3))"
+    ],
+    "a": 3,
+    "e": "This is (|cos x|<1/2), so equality points are excluded."
+  },
+  {
+    "level": "Master",
+    "q": "For (0le xle2pi), solve (2sin^2x-3sin x+1ge0).",
+    "o": [
+      "([0,pi/6]cup[5pi/6,2pi])",
+      "((0,pi/6]cup{pi/2}cup[5pi/6,2pi))",
+      "([pi/6,5pi/6])",
+      "([0,pi/6]cup{pi/2}cup[5pi/6,2pi])"
+    ],
+    "a": 3,
+    "e": "Factor as ((2sin x-1)(sin x-1)ge0)."
+  },
+  {
+    "level": "Master",
+    "q": "For (0le xle2pi), solve (2cos^2x-3cos x+1>0).",
+    "o": [
+      "([0,pi/3)cup(5pi/3,2pi])",
+      "((0,pi/3)cup(5pi/3,2pi))",
+      "([pi/3,5pi/3])",
+      "((pi/3,5pi/3))"
+    ],
+    "a": 3,
+    "e": "Factor as ((2cos x-1)(cos x-1)>0), giving (cos x<1/2)."
+  },
+  {
+    "level": "Master",
+    "q": "For (0le xle2pi), if (sin xge1/2) and (cos xge1/2), then x lies in:",
+    "o": [
+      "([pi/6,pi/2])",
+      "([0,pi/6])",
+      "([pi/3,pi/2])",
+      "([pi/6,pi/3])"
+    ],
+    "a": 3,
+    "e": "Intersect (sin xge1/2) with (cos xge1/2)."
+  },
+  {
+    "level": "Master",
+    "q": "For (0le xle2pi), solve (sin xcos xge1/4).",
+    "o": [
+      "([pi/12,5pi/12]cup[7pi/6,11pi/6])",
+      "([pi/6,pi/3]cup[7pi/6,5pi/3])",
+      "((0,pi/2)cup(pi,3pi/2))",
+      "([pi/12,5pi/12]cup[13pi/12,17pi/12])"
+    ],
+    "a": 3,
+    "e": "Use (2sin xcos x=sin2x), so (sin2xge1/2)."
+  }
 ];

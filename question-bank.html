@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="cache-control" content="no-cache,no-store,must-revalidate"><meta name="x-skillup-build" content="20261004-math-cartesian-v4"><script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script><meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>SkillUp NEET Question Bank</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="cache-control" content="no-cache,no-store,must-revalidate"><meta name="x-skillup-build" content="20261004-math-global-fallback-v1"><script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script><meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>SkillUp NEET Question Bank</title><style>
 :root{--blue:#1f7aff;--blue-dark:#155dcc;--green:#58cc02;--green-dark:#46a900;--red:#ff4b4b;--gold:#ffc800;--ink:#17324d;--muted:#718096;--line:#d9e7f5;--bg:#f7fbff}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f3f9ff 0,#f9fcff 55%,#eef7ff 100%);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 
@@ -650,5 +650,86 @@ if((subject==='mathematics'||subject==='maths')&&Array.isArray(window.SkillUpSet
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(recoverMathQuiz,50);});
   else setTimeout(recoverMathQuiz,50);
   setTimeout(recoverMathQuiz,800);
+})();
+</script><script>
+(function(){
+  'use strict';
+  function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function findBank(topic){
+    var target=norm(topic), keys=Object.keys(window), best=null,bestScore=-1;
+    keys.forEach(function(k){
+      if(!/^skillup.*questions$/i.test(k)) return;
+      var b=window[k];
+      if(!Array.isArray(b)||b.length<15) return;
+      var nk=norm(k.replace(/^skillup/i,'').replace(/questions$/i,''));
+      var score=0;
+      if(nk===target) score=1000;
+      else {
+        var tt=String(topic||'').toLowerCase().split(/\s+/).filter(Boolean);
+        var kk=String(k).replace(/^skillup/i,'').replace(/questions$/i,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase();
+        tt.forEach(function(t){if(t.length>2&&kk.indexOf(t)>-1) score+=10;});
+        if(target.indexOf(nk)>-1||nk.indexOf(target)>-1) score+=20;
+      }
+      if(score>bestScore){bestScore=score;best={key:k,bank:b};}
+    });
+    return best;
+  }
+  function run(){
+    try{
+      var p=new URLSearchParams(location.search);
+      var subject=(p.get('subject')||'').trim().toLowerCase();
+      var topic=(p.get('topic')||'').trim();
+      var root=document.getElementById('questions');
+      if(subject!=='mathematics'||!topic||!root||root.children.length) return;
+      var found=findBank(topic);
+      if(!found) return;
+      var bank=found.bank.slice(0,30),i=0,answered=0,correct=0,xp=0;
+      var title=document.getElementById('title'),sub=document.getElementById('quizSubtext'),label=document.getElementById('progressLabel'),pct=document.getElementById('percent'),bar=document.getElementById('progressBar');
+      if(title) title.textContent=topic;
+      if(sub) sub.textContent='30 MCQs';
+      function update(){
+        if(label) label.textContent=answered+'/'+bank.length;
+        if(pct) pct.textContent=Math.round(answered/bank.length*100)+'%';
+        if(bar) bar.style.width=Math.round(answered/bank.length*100)+'%';
+      }
+      function show(){
+        root.innerHTML='';
+        if(i>=bank.length){
+          if(bar) bar.style.width='100%';
+          var result=document.createElement('section');
+          result.className='card result';
+          result.innerHTML='<div class="big">'+Math.round(correct/bank.length*100)+'%</div><h2>Lesson complete</h2><p>'+correct+' / '+bank.length+' correct • '+xp+' XP earned</p><button class="restart" style="display:inline-block">Practice Again</button>';
+          root.appendChild(result);
+          result.querySelector('.restart').onclick=function(){i=answered=correct=xp=0;show();update();};
+          update(); return;
+        }
+        var z=bank[i]||{},q=z.q!==undefined?z.q:z.question||'',optsData=Array.isArray(z.o)?z.o:(Array.isArray(z.options)?z.options:[]),ans=Number(z.a!==undefined?z.a:z.answer)||0;
+        var card=document.createElement('article'); card.className='card';
+        card.innerHTML='<div class="math-question-label">QUESTION '+(i+1)+' OF '+bank.length+'</div><div class="math-question-text">'+esc(q)+'</div>';
+        var opts=document.createElement('div'); opts.className='options'; var done=false;
+        optsData.forEach(function(v,j){
+          var b=document.createElement('button'); b.type='button'; b.className='option math-option'; b.innerHTML=esc(v);
+          b.onclick=function(){
+            if(done)return; done=true; var ok=j===ans;
+            Array.prototype.forEach.call(opts.children,function(w,k){w.disabled=true;if(k===ans)w.classList.add('correctOpt');if(k===j&&!ok)w.classList.add('wrongOpt');});
+            var f=document.createElement('div'); f.className='feedback '+(ok?'correct':'wrong'); f.textContent=ok?'🎉 Correct! +10 XP':'💡 Not quite — review the explanation'; card.appendChild(f);
+            var e=document.createElement('div'); e.className='explanation'; e.textContent='Explanation: '+String(z.e!==undefined?z.e:z.explanation||'Review the concept carefully.'); card.appendChild(e);
+            if(ok){correct++;xp+=10;} answered++; update(); next.classList.remove('locked'); next.style.display='block';
+          };
+          opts.appendChild(b);
+        });
+        card.appendChild(opts);
+        var next=document.createElement('button'); next.type='button'; next.className='nextBtn locked'; next.textContent=i===bank.length-1?'🏆 See Results':'CONTINUE →';
+        next.onclick=function(){if(!done)return;i++;show();};
+        card.appendChild(next); root.appendChild(card); update();
+        if(window.MathJax&&MathJax.typesetPromise) MathJax.typesetPromise([card]).catch(function(){});
+      }
+      show();
+      console.warn('SkillUp Math fallback renderer used for '+topic+' from '+found.key);
+    }catch(err){console.error('SkillUp Math fallback renderer failed',err);}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(run,300);setTimeout(run,1200);});
+  else {setTimeout(run,300);setTimeout(run,1200);}
 })();
 </script></body></html>

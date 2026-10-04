@@ -52,8 +52,8 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "level": "Foundation",
     "q": "What does the inductive step usually establish?",
     "o": [
-      "\\(\\(P(k)\\)\\Rightarrow P(k+1)\\)",
-      "\\(P(k+1)\\Rightarrow \\(P(k)\\)\\)",
+      "\\(P(k)\\)\\Rightarrow P(k+1)\\)",
+      "\\(P(k+1)\\Rightarrow \\(P(k)\\)",
       "\\(P(1)\\) is false",
       "\\(P(k)\\) is a counterexample"
     ],
@@ -62,7 +62,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
   },
   {
     "level": "Foundation",
-    "q": "If \\(P(1)\\) is true and \\(\\(P(k)\\)\\Rightarrow P(k+1)\\) for every \\(k\\in\\mathbb{N}\\), what follows?",
+    "q": "If \\(P(1)\\) is true and \\(P(k)\\)\\Rightarrow P(k+1)\\) for every \\(k\\in\\mathbb{N}\\), what follows?",
     "o": [
       "\\(P(n)\\) is false for every n",
       "\\(P(n)\\) is true for every \\(n\\in\\mathbb{N}\\)",
@@ -101,9 +101,9 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "q": "For the statement \\(P(n)\\): \\(1+2+\\cdots+n=\\frac{n(n+1)}{2}\\), a natural base case is:",
     "o": [
       "\\(n=1\\)",
-      "n=−1",
-      "\\(n=π\\)",
-      "\\(n=1\\)/2"
+      "\\(n=-1\\)",
+      "\\(n=\\pi\\)",
+      "\\(n=\\frac{1}{2}\\)"
     ],
     "a": 0,
     "e": "The induction principle requires a valid starting case and a valid transition to the next natural-number case."
@@ -209,7 +209,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "q": "Ordinary induction commonly uses which implication?",
     "o": [
       "P(k+1)⇒\\(P(k)\\)",
-      "\\(\\(P(k)\\)\\Rightarrow P(k+1)\\)",
+      "\\(P(k)\\)\\Rightarrow P(k+1)\\)",
       "\\(P(k)\\)⇒¬P(k+1)",
       "\\(P(1)\\)⇒\\(P(k)\\)"
     ],
@@ -256,7 +256,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "level": "Advanced",
     "q": "Which is NOT a valid substitute for an inductive step?",
     "o": [
-      "Proving \\(\\(P(k)\\)\\Rightarrow P(k+1)\\)",
+      "Proving \\(P(k)\\)\\Rightarrow P(k+1)\\)",
       "Checking \\(P(1)\\), \\(P(2)\\), and P(3) only",
       "Using a valid recurrence implication",
       "Establishing the required transition"
@@ -353,7 +353,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "q": "Which condition is essential for standard induction on \\(n=1\\),2,3,…?",
     "o": [
       "Only a base case",
-      "A valid base case and a valid implication \\(\\(P(k)\\)\\Rightarrow P(k+1)\\) for every relevant k",
+      "A valid base case and a valid implication \\(P(k)\\)\\Rightarrow P(k+1)\\) for every relevant k",
       "Only three examples",
       "Only the final value"
     ],

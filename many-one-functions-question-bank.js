@@ -29,8 +29,8 @@ window.SkillUpManyOneFunctionsQuestions=[
 
 {level:"Advanced",q:"For f(x)=sin x, which restriction makes it one-one?",o:["R","[−π/2,π/2]","[0,2π]","[−π,π]"],a:1,e:"Sine is strictly increasing on [−π/2,π/2]."},
 {level:"Advanced",q:"For f(x)=x², which domain makes it many-one?",o:["[0,∞)","(−∞,0]","R","{0,1,2}"],a:2,e:"On R, positive and negative inputs can share the same square."},
-{level:"Advanced",q:"If f:A→B is many-one and |A|=6, the range can have:",o:["Exactly 6 elements only","At most 5 elements","At most 6 elements and fewer than 6","More than 6 elements"],a:2,e:"Many-one means at least two inputs share an image, so fewer than 6 distinct images occur."},
+{level:"Advanced",q:"If f:A→B is many-one and |A|=6, the range can have:",o:["Exactly 6 elements","Exactly 5 elements","At most 5 elements","More than 6 elements"],a:2,e:"Many-one means at least two inputs share an image, so the range has at most 5 distinct elements."},
 
-{level:"Master",q:"How many many-one functions exist from a 3-element set to a 2-element set?",o:["2","4","6","8"],a:3,e:"There are 2³=8 total functions; two constant functions are one-one? More precisely, no function from 3 to 2 is one-one, so all 8 are many-one. Correct answer is 8."},
+{level:"Master",q:"How many many-one functions exist from a 3-element set to a 2-element set?",o:["2","4","6","8"],a:3,e:"There are 2³=8 total functions. No function from a 3-element set to a 2-element set can be one-one, so all 8 are many-one."},
 {level:"Master",q:"For f:R→R defined by f(x)=x², which statement is correct?",o:["It is one-one and onto","It is many-one and into","It is one-one and into","It is many-one and onto"],a:1,e:"It is many-one because f(x)=f(−x), and into because negative reals are not in its range."}
 ];

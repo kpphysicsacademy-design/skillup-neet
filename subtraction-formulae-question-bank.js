@@ -1,33 +1,333 @@
-/* SkillUp Mathematics — Subtraction Formulae question bank | audited & balanced 2026-10-04 */
+/* SkillUp Mathematics — Subtraction Formulae question bank | audited 2026-10-04 */
 window.SkillUpSubtractionFormulaeQuestions=[
-{q:'Which is the sine subtraction formula?',o:['\\(\\sin(A-B)=\\sin A\\cos B-\\cos A\\sin B\\)','\\(\\sin(A-B)=\\sin A\\cos B+\\cos A\\sin B\\)','\\(\\sin(A-B)=\\cos A\\cos B-\\sin A\\sin B\\)','\\(\\sin(A-B)=\\sin A-\\sin B\\)'],a:0,e:'The sine difference formula uses a minus sign between the two product terms.'},
-{q:'Which is the cosine subtraction formula?',o:['\\(\\cos(A-B)=\\cos A\\cos B-\\sin A\\sin B\\)','\\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\)','\\(\\cos(A-B)=\\sin A\\cos B-\\cos A\\sin B\\)','\\(\\cos(A-B)=\\cos A-\\cos B\\)'],a:1,e:'Cosine of a difference is the sum of the two product terms.'},
-{q:'Which is the tangent subtraction formula?',o:['\\(\\tan(A-B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}\\)','\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1+\\tan A\\tan B}\\)','\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1-\\tan A\\tan B}\\)','\\(\\tan(A-B)=\\tan A-\\tan B\\)'],a:1,e:'The tangent difference formula has denominator \\(1+\\tan A\\tan B\\).'},
-{q:'\\(\\sin(60^\\circ-30^\\circ)\\) equals',o:['\\(0\\)','\\frac12','\\frac{\\sqrt3}{2}','\\(1\\)'],a:1,e:'The difference is 30°, so sine is \\(1/2\\).'},
-{q:'\\(\\cos(60^\\circ-30^\\circ)\\) equals',o:['\\frac12','\\(0\\)','\\frac{\\sqrt3}{2}','\\(1\\)'],a:2,e:'The difference is 30°, so cosine is \\(\\sqrt3/2\\).'},
-{q:'\\(\\tan(60^\\circ-30^\\circ)\\) equals',o:['\\sqrt3','\\frac{1}{\\sqrt3}','\\(0\\)','\\(1\\)'],a:1,e:'The difference is 30°, and \\(\\tan30^\\circ=1/\\sqrt3\\).'},
-{q:'\\(\\sin(45^\\circ-30^\\circ)\\) equals',o:['\\frac12','\\frac{\\sqrt3}{2}','\\frac{\\sqrt6-\\sqrt2}{4}','\\frac{\\sqrt6+\\sqrt2}{4}'],a:2,e:'Apply the sine subtraction formula using the standard values of 45° and 30°.'},
-{q:'\\(\\cos(45^\\circ-30^\\circ)\\) equals',o:['\\frac{\\sqrt6-\\sqrt2}{4}','\\frac12','\\frac{\\sqrt6+\\sqrt2}{4}','\\frac{\\sqrt3}{2}'],a:3,e:'Use \\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\).'},
-{q:'\\(\\sin(45^\\circ-45^\\circ)\\) equals',o:['\\(0\\)','\\frac12','\\frac{\\sqrt2}{2}','\\(1\\)'],a:0,e:'The difference is 0°, so the sine is zero.'},
-{q:'\\(\\cos(45^\\circ-45^\\circ)\\) equals',o:['\\frac12','\\(1\\)','\\frac{\\sqrt2}{2}','\\(0\\)'],a:1,e:'The difference is 0°, so cosine is 1.'},
-{q:'If \\(A>B\\), which expression equals \\(\\sin(A-B)\\)?',o:['\\sin A\\cos B+\\cos A\\sin B','\\cos A\\cos B+\\sin A\\sin B','\\sin A\\cos B-\\cos A\\sin B','\\cos A\\sin B-\\sin A\\cos B'],a:2,e:'This is the standard sine difference identity.'},
-{q:'If \\(A>B\\), which expression equals \\(\\cos(A-B)\\)?',o:['\\sin A\\cos B-\\cos A\\sin B','\\cos A\\cos B+\\sin A\\sin B','\\cos A\\cos B-\\sin A\\sin B','\\sin A\\sin B+\\cos A\\cos B'],a:1,e:'Cosine of a difference uses a plus sign between the product terms.'},
-{q:'If \\(\\tan A=1\\) and \\(\\tan B=1/2\\), then \\(\\tan(A-B)\\) is',o:['\\frac12','\\frac13','\\frac23','\\frac32'],a:1,e:'\\((1-1/2)/(1+1/2)=1/3\\).'},
-{q:'If \\(\\tan A=2\\) and \\(\\tan B=1\\), then \\(\\tan(A-B)\\) is',o:['\\frac12','\\(1\\)','\\frac13','\\frac32'],a:2,e:'\\((2-1)/(1+2)=1/3\\), so the correct value is 1/3.'},
-{q:'\\(\\sin(90^\\circ-B)\\) equals',o:['\\sin B','\\cos B','-\\cos B','-\\sin B'],a:1,e:'The cofunction identity gives \\(\\sin(90^\\circ-B)=\\cos B\\).'},
-{q:'\\(\\cos(90^\\circ-B)\\) equals',o:['\\sin B','\\cos B','-\\sin B','-\\cos B'],a:0,e:'The cofunction identity gives \\(\\cos(90^\\circ-B)=\\sin B\\).'},
-{q:'\\(\\tan(90^\\circ-B)\\) equals',o:['\\tan B','-\\cot B','\\cot B','-\\tan B'],a:2,e:'The cofunction identity gives \\(\\tan(90^\\circ-B)=\\cot B\\).'},
-{q:'\\(\\sin(180^\\circ-B)\\) equals',o:['-\\sin B','\\cos B','-\\cos B','\\sin B'],a:3,e:'Sine is positive in the second quadrant, so it equals \\(\\sin B\\).'},
-{q:'\\(\\cos(180^\\circ-B)\\) equals',o:['\\cos B','-\\cos B','\\sin B','-\\sin B'],a:1,e:'Cosine is negative in the second quadrant.'},
-{q:'\\(\\tan(180^\\circ-B)\\) equals',o:['\\tan B','-\\tan B','\\cot B','-\\cot B'],a:1,e:'Tangent is negative in the second quadrant.'},
-{q:'If \\(A+B=90^\\circ\\), then \\(\\sin(A-B)\\) equals',o:['\\cos^2A-\\sin^2A','\\sin^2A-\\cos^2A','\\sin2A','\\cos2A'],a:1,e:'With \\(B=90^\\circ-A\\), \\(\\sin(A-B)=\\sin^2A-\\cos^2A\\).'},
-{q:'If \\(A+B=90^\\circ\\), then \\(\\cos(A-B)\\) equals',o:['\\sin2A','\\cos2A','\\sin^2A-\\cos^2A','\\cos^2A-\\sin^2A'],a:0,e:'Since \\(A-B=2A-90^\\circ\\), \\(\\cos(A-B)=\\sin2A\\).'},
-{q:'For \\(A=75^\\circ\\) and \\(B=45^\\circ\\), \\(A-B\\) is',o:['\\(45^\\circ\\)','\\(30^\\circ\\)','\\(15^\\circ\\)','\\(120^\\circ\\)'],a:1,e:'75° − 45° = 30°.'},
-{q:'\\(\\sin(75^\\circ-45^\\circ)\\) equals',o:['\\frac{\\sqrt3}{2}','\\frac12','\\frac{\\sqrt2}{2}','\\(1\\)'],a:1,e:'The difference is 30°, so the sine is 1/2.'},
-{q:'\\(\\cos(75^\\circ-45^\\circ)\\) equals',o:['\\frac12','\\frac{\\sqrt3}{2}','\\frac{\\sqrt2}{2}','\\(1\\)'],a:1,e:'The difference is 30°, so the cosine is \\(\\sqrt3/2\\).'},
-{q:'\\(\\sin(120^\\circ-30^\\circ)\\) equals',o:['\\frac12','\\frac{\\sqrt3}{2}','\\(0\\)','\\(1\\)'],a:3,e:'The difference is 90°, so sine is 1.'},
-{q:'\\(\\cos(120^\\circ-30^\\circ)\\) equals',o:['\\frac{\\sqrt3}{2}','\\(0\\)','\\frac12','\\(1\\)'],a:1,e:'The difference is 90°, so cosine is zero.'},
-{q:'Setting \\(B=0\\) in the cosine subtraction formula gives',o:['\\cos A','\\cos A+1','\\sin A','\\cos A-1'],a:0,e:'Using \\(\\cos0=1\\) and \\(\\sin0=0\\), the formula reduces to \\(\\cos A\\).'},
-{q:'Setting \\(B=0\\) in the sine subtraction formula gives',o:['\\sin A+1','\\cos A','\\sin A','\\sin A-1'],a:2,e:'Using \\(\\cos0=1\\) and \\(\\sin0=0\\), the formula reduces to \\(\\sin A\\).'},
-{q:'Which relation follows from the sine subtraction formula when A=90°?',o:['\\sin(90^\\circ-B)=\\sin B','\\sin(90^\\circ-B)=\\cos B','\\sin(90^\\circ-B)=-\\cos B','\\sin(90^\\circ-B)=\\tan B'],a:1,e:'Substituting A=90° gives the cofunction identity \\(\\sin(90^\\circ-B)=\\cos B\\).'}
+  {
+    "q": "Which is the sine subtraction formula?",
+    "o": [
+      "\\(\\sin(A-B)=\\sin A\\cos B-\\cos A\\sin B\\)",
+      "\\(\\sin(A-B)=\\sin A\\cos B+\\cos A\\sin B\\)",
+      "\\(\\sin(A-B)=\\cos A\\cos B-\\sin A\\sin B\\)",
+      "\\(\\sin(A-B)=\\sin A-\\sin B\\)"
+    ],
+    "a": 0,
+    "e": "The sine difference formula uses a minus sign between the two product terms."
+  },
+  {
+    "q": "Which is the cosine subtraction formula?",
+    "o": [
+      "\\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\)",
+      "\\(\\cos(A-B)=\\cos A\\cos B-\\sin A\\sin B\\)",
+      "\\(\\cos(A-B)=\\sin A\\cos B-\\cos A\\sin B\\)",
+      "\\(\\cos(A-B)=\\cos A-\\cos B\\)"
+    ],
+    "a": 0,
+    "e": "Cosine of a difference is the sum of the two product terms."
+  },
+  {
+    "q": "Which is the tangent subtraction formula?",
+    "o": [
+      "\\(\\tan(A-B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}\\)",
+      "\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1+\\tan A\\tan B}\\)",
+      "\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1-\\tan A\\tan B}\\)",
+      "\\(\\tan(A-B)=\\tan A-\\tan B\\)"
+    ],
+    "a": 1,
+    "e": "The tangent difference formula has denominator \\(1+\\tan A\\tan B\\)."
+  },
+  {
+    "q": "\\(\\sin(60^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\(0\\)",
+      "\\frac12",
+      "\\frac{\\sqrt3}{2}",
+      "\\(1\\)"
+    ],
+    "a": 1,
+    "e": "The difference is 30°, so sine is \\(1/2\\)."
+  },
+  {
+    "q": "\\(\\cos(60^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\frac12",
+      "\\(0\\)",
+      "\\frac{\\sqrt3}{2}",
+      "\\(1\\)"
+    ],
+    "a": 2,
+    "e": "The difference is 30°, so cosine is \\(\\sqrt3/2\\)."
+  },
+  {
+    "q": "\\(\\tan(60^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\sqrt3",
+      "\\frac{1}{\\sqrt3}",
+      "\\(0\\)",
+      "\\(1\\)"
+    ],
+    "a": 1,
+    "e": "The difference is 30°, and \\(\\tan30^\\circ=1/\\sqrt3\\)."
+  },
+  {
+    "q": "\\(\\sin(45^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\frac12",
+      "\\frac{\\sqrt3}{2}",
+      "\\frac{\\sqrt6-\\sqrt2}{4}",
+      "\\frac{\\sqrt6+\\sqrt2}{4}"
+    ],
+    "a": 2,
+    "e": "Apply the sine subtraction formula using the standard values of 45° and 30°."
+  },
+  {
+    "q": "\\(\\cos(45^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\frac{\\sqrt6-\\sqrt2}{4}",
+      "\\frac12",
+      "\\frac{\\sqrt6+\\sqrt2}{4}",
+      "\\frac{\\sqrt3}{2}"
+    ],
+    "a": 3,
+    "e": "Use \\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\)."
+  },
+  {
+    "q": "\\(\\sin(45^\\circ-45^\\circ)\\) equals",
+    "o": [
+      "\\(0\\)",
+      "\\frac12",
+      "\\frac{\\sqrt2}{2}",
+      "\\(1\\)"
+    ],
+    "a": 0,
+    "e": "The difference is 0°, so the sine is zero."
+  },
+  {
+    "q": "\\(\\cos(45^\\circ-45^\\circ)\\) equals",
+    "o": [
+      "\\frac12",
+      "\\(1\\)",
+      "\\frac{\\sqrt2}{2}",
+      "\\(0\\)"
+    ],
+    "a": 1,
+    "e": "The difference is 0°, so cosine is 1."
+  },
+  {
+    "q": "If \\(A>B\\), which expression equals \\(\\sin(A-B)\\)?",
+    "o": [
+      "\\sin A\\cos B+\\cos A\\sin B",
+      "\\cos A\\cos B+\\sin A\\sin B",
+      "\\sin A\\cos B-\\cos A\\sin B",
+      "\\cos A\\sin B-\\sin A\\cos B"
+    ],
+    "a": 2,
+    "e": "This is the standard sine difference identity."
+  },
+  {
+    "q": "If \\(A>B\\), which expression equals \\(\\cos(A-B)\\)?",
+    "o": [
+      "\\cos A\\cos B+\\sin A\\sin B",
+      "\\sin A\\cos B-\\cos A\\sin B",
+      "\\cos A\\cos B-\\sin A\\sin B",
+      "\\sin A\\sin B+\\cos A\\cos B"
+    ],
+    "a": 0,
+    "e": "Cosine of a difference uses a plus sign between the product terms."
+  },
+  {
+    "q": "If \\(\\tan A=1\\) and \\(\\tan B=1/2\\), then \\(\\tan(A-B)\\) is",
+    "o": [
+      "\\frac12",
+      "\\frac13",
+      "\\frac23",
+      "\\frac32"
+    ],
+    "a": 1,
+    "e": "\\((1-1/2)/(1+1/2)=1/3\\)."
+  },
+  {
+    "q": "If \\(\\tan A=2\\) and \\(\\tan B=1\\), then \\(\\tan(A-B)\\) is",
+    "o": [
+      "\\frac12",
+      "\\(1\\)",
+      "\\frac13",
+      "\\frac32"
+    ],
+    "a": 2,
+    "e": "\\((2-1)/(1+2)=1/3\\), so the correct value is 1/3."
+  },
+  {
+    "q": "\\(\\sin(90^\\circ-B)\\) equals",
+    "o": [
+      "\\sin B",
+      "-\\cos B",
+      "\\cos B",
+      "-\\sin B"
+    ],
+    "a": 2,
+    "e": "The cofunction identity gives \\(\\sin(90^\\circ-B)=\\cos B\\)."
+  },
+  {
+    "q": "\\(\\cos(90^\\circ-B)\\) equals",
+    "o": [
+      "-\\cos B",
+      "\\cos B",
+      "-\\sin B",
+      "\\sin B"
+    ],
+    "a": 3,
+    "e": "The cofunction identity gives \\(\\cos(90^\\circ-B)=\\sin B\\)."
+  },
+  {
+    "q": "\\(\\tan(90^\\circ-B)\\) equals",
+    "o": [
+      "\\tan B",
+      "-\\cot B",
+      "\\cot B",
+      "-\\tan B"
+    ],
+    "a": 2,
+    "e": "The cofunction identity gives \\(\\tan(90^\\circ-B)=\\cot B\\)."
+  },
+  {
+    "q": "\\(\\sin(180^\\circ-B)\\) equals",
+    "o": [
+      "-\\sin B",
+      "\\cos B",
+      "-\\cos B",
+      "\\sin B"
+    ],
+    "a": 3,
+    "e": "Sine is positive in the second quadrant, so it equals \\(\\sin B\\)."
+  },
+  {
+    "q": "\\(\\cos(180^\\circ-B)\\) equals",
+    "o": [
+      "\\cos B",
+      "-\\sin B",
+      "\\sin B",
+      "-\\cos B"
+    ],
+    "a": 3,
+    "e": "Cosine is negative in the second quadrant."
+  },
+  {
+    "q": "\\(\\tan(180^\\circ-B)\\) equals",
+    "o": [
+      "\\tan B",
+      "-\\tan B",
+      "\\cot B",
+      "-\\cot B"
+    ],
+    "a": 1,
+    "e": "Tangent is negative in the second quadrant."
+  },
+  {
+    "q": "If \\(A+B=90^\\circ\\), then \\(\\sin(A-B)\\) equals",
+    "o": [
+      "\\cos^2A-\\sin^2A",
+      "\\cos2A",
+      "\\sin2A",
+      "\\sin^2A-\\cos^2A"
+    ],
+    "a": 3,
+    "e": "With \\(B=90^\\circ-A\\), \\(\\sin(A-B)=\\sin^2A-\\cos^2A\\)."
+  },
+  {
+    "q": "If \\(A+B=90^\\circ\\), then \\(\\cos(A-B)\\) equals",
+    "o": [
+      "\\sin2A",
+      "\\cos2A",
+      "\\sin^2A-\\cos^2A",
+      "\\cos^2A-\\sin^2A"
+    ],
+    "a": 0,
+    "e": "Since \\(A-B=2A-90^\\circ\\), \\(\\cos(A-B)=\\sin2A\\)."
+  },
+  {
+    "q": "For \\(A=75^\\circ\\) and \\(B=45^\\circ\\), \\(A-B\\) is",
+    "o": [
+      "\\(45^\\circ\\)",
+      "\\(30^\\circ\\)",
+      "\\(15^\\circ\\)",
+      "\\(120^\\circ\\)"
+    ],
+    "a": 1,
+    "e": "75° − 45° = 30°."
+  },
+  {
+    "q": "\\(\\sin(75^\\circ-45^\\circ)\\) equals",
+    "o": [
+      "\\frac{\\sqrt3}{2}",
+      "\\frac12",
+      "\\frac{\\sqrt2}{2}",
+      "\\(1\\)"
+    ],
+    "a": 1,
+    "e": "The difference is 30°, so the sine is 1/2."
+  },
+  {
+    "q": "\\(\\cos(75^\\circ-45^\\circ)\\) equals",
+    "o": [
+      "\\frac12",
+      "\\(1\\)",
+      "\\frac{\\sqrt2}{2}",
+      "\\frac{\\sqrt3}{2}"
+    ],
+    "a": 3,
+    "e": "The difference is 30°, so the cosine is \\(\\sqrt3/2\\)."
+  },
+  {
+    "q": "\\(\\sin(120^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\frac12",
+      "\\frac{\\sqrt3}{2}",
+      "\\(0\\)",
+      "\\(1\\)"
+    ],
+    "a": 3,
+    "e": "The difference is 90°, so sine is 1."
+  },
+  {
+    "q": "\\(\\cos(120^\\circ-30^\\circ)\\) equals",
+    "o": [
+      "\\frac{\\sqrt3}{2}",
+      "\\(0\\)",
+      "\\frac12",
+      "\\(1\\)"
+    ],
+    "a": 1,
+    "e": "The difference is 90°, so cosine is zero."
+  },
+  {
+    "q": "Setting \\(B=0\\) in the cosine subtraction formula gives",
+    "o": [
+      "\\cos A",
+      "\\cos A+1",
+      "\\sin A",
+      "\\cos A-1"
+    ],
+    "a": 0,
+    "e": "Using \\(\\cos0=1\\) and \\(\\sin0=0\\), the formula reduces to \\(\\cos A\\)."
+  },
+  {
+    "q": "Setting \\(B=0\\) in the sine subtraction formula gives",
+    "o": [
+      "\\sin A+1",
+      "\\cos A",
+      "\\sin A",
+      "\\sin A-1"
+    ],
+    "a": 2,
+    "e": "Using \\(\\cos0=1\\) and \\(\\sin0=0\\), the formula reduces to \\(\\sin A\\)."
+  },
+  {
+    "q": "Which relation follows from the sine subtraction formula when A=90°?",
+    "o": [
+      "\\sin(90^\\circ-B)=\\sin B",
+      "\\sin(90^\\circ-B)=\\cos B",
+      "\\sin(90^\\circ-B)=-\\cos B",
+      "\\sin(90^\\circ-B)=\\tan B"
+    ],
+    "a": 1,
+    "e": "Substituting A=90° gives the cofunction identity \\(\\sin(90^\\circ-B)=\\cos B\\)."
+  }
 ];

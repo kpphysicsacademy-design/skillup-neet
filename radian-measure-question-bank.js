@@ -1,4 +1,4 @@
-/* SkillUp Mathematics — Radian Measure question bank */
+/* SkillUp Mathematics — Radian Measure question bank | rebuilt 2026-10-04 */
 window.SkillUpRadianMeasureQuestions = [
 {q:"One radian is the angle subtended at the centre of a circle by an arc whose length is:",o:["equal to the radius","equal to the diameter","twice the radius","half the radius"],a:0,e:"By definition, one radian subtends an arc whose length equals the radius."},
 {q:"The radian measure of a complete revolution is:",o:["π","2π","π/2","4π"],a:1,e:"A full turn is 2π radians."},

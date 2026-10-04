@@ -7,7 +7,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
       "\\(2n\\pi<x<(2n+1)\\pi\\)",
       "\\( (2n+1)\\pi<x<(2n+2)\\pi\\)",
       "\\(n\\pi<x<(n+1)\\pi\\)",
-      "\\((x=n\\pi)\\)"
+      "\\(x=n\\pi\\)"
     ],
     "a": 0,
     "e": "Sine is positive in quadrants I and II."
@@ -18,7 +18,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\( ([-\\pi/2+2n\\pi,\\pi/2+2n\\pi])\\)",
       "\\(([\\pi/2+2n\\pi,3\\pi/2+2n\\pi])\\)",
-      "\\(((n\\pi,(n+1)\\pi))\\)",
+      "\\((n\\pi,(n+1)\\pi)\\)",
       "\\(([0,\\pi]+2n\\pi)\\)"
     ],
     "a": 0,
@@ -28,10 +28,10 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "level": "Basic",
     "q": "The solution of \\(\tan x>0\\) is:",
     "o": [
-      "\\(((n\\pi,n\\pi+\\pi/2))\\)",
-      "\\(((2n\\pi,(2n+1)\\pi))\\)",
-      "\\(((n\\pi-\\pi/2,n\\pi))\\)",
-      "\\((x=n\\pi)\\)"
+      "\\((n\\pi,n\\pi+\\pi/2)\\)",
+      "\\((2n\\pi,(2n+1)\\pi)\\)",
+      "\\((n\\pi-\\pi/2,n\\pi)\\)",
+      "\\(x=n\\pi\\)"
     ],
     "a": 0,
     "e": "Tangent is positive in quadrants I and III."
@@ -41,9 +41,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin x<1/2\\).",
     "o": [
       "\\(([0,\\pi/6)\\cup(5\\pi/6,2\\pi])\\)",
-      "\\(((\\pi/6,5\\pi/6))\\)",
+      "\\((\\pi/6,5\\pi/6)\\)",
       "\\(([0,\\pi/6]\\cup[5\\pi/6,2\\pi))\\)",
-      "\\(((0,\\pi/6)\\cup(5\\pi/6,2\\pi))\\)"
+      "\\((0,\\pi/6)\\cup(5\\pi/6,2\\pi)\\)"
     ],
     "a": 0,
     "e": "The boundary points where \\(\\sin x=1/2\\) are excluded."
@@ -53,9 +53,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\cos x>1/2\\).",
     "o": [
       "\\(([0,\\pi/3)\\cup(5\\pi/3,2\\pi])\\)",
-      "\\(((\\pi/3,5\\pi/3))\\)",
+      "\\((\\pi/3,5\\pi/3)\\)",
       "\\(([0,\\pi/3]\\cup[5\\pi/3,2\\pi])\\)",
-      "\\(((0,\\pi/3)\\cup(5\\pi/3,2\\pi))\\)"
+      "\\((0,\\pi/3)\\cup(5\\pi/3,2\\pi)\\)"
     ],
     "a": 0,
     "e": "Cosine exceeds \\(1/2\\) near \\(0\\) and \\(2\\pi\\)."
@@ -65,7 +65,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(-\\pi/2<x<\\pi/2\\), solve \\(\tan x\\le1\\).",
     "o": [
       "\\(((-\\pi/2,\\pi/4])\\)",
-      "\\(((-\\pi/2,\\pi/4))\\)",
+      "\\((-\\pi/2,\\pi/4)\\)",
       "\\(([\\pi/4,\\pi/2))\\)",
       "\\(([-\\pi/2,\\pi/4])\\)"
     ],
@@ -78,7 +78,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([0,\\pi]\\cup{2\\pi})\\)",
       "\\(([0,\\pi])\\)",
-      "\\(((0,\\pi))\\)",
+      "\\((0,\\pi)\\)",
       "\\(([\\pi,2\\pi])\\)"
     ],
     "a": 0,
@@ -91,7 +91,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
       "\\(([\\pi/2,3\\pi/2])\\)",
       "\\(([0,\\pi/2]\\cup[3\\pi/2,2\\pi])\\)",
       "\\(([\\pi/2,\\pi])\\)",
-      "\\(((\\pi/2,3\\pi/2))\\)"
+      "\\((\\pi/2,3\\pi/2)\\)"
     ],
     "a": 0,
     "e": "Cosine is non-positive in quadrants II and III."
@@ -101,8 +101,8 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin x>\\sqrt{3}/2\\).",
     "o": [
       "\\(([\\pi/3,2\\pi/3])\\)",
-      "\\(((\\pi/3,2\\pi/3))\\)",
-      "\\(((0,\\pi/3)\\cup(2\\pi/3,\\pi))\\)",
+      "\\((\\pi/3,2\\pi/3)\\)",
+      "\\((0,\\pi/3)\\cup(2\\pi/3,\\pi)\\)",
       "\\(([\\pi/6,5\\pi/6])\\)"
     ],
     "a": 1,
@@ -112,7 +112,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "level": "Developing",
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\cos x\\ge-1/2\\).",
     "o": [
-      "\\(((2\\pi/3,4\\pi/3))\\)",
+      "\\((2\\pi/3,4\\pi/3)\\)",
       "\\(([0,2\\pi/3]\\cup[4\\pi/3,2\\pi])\\)",
       "\\(([2\\pi/3,4\\pi/3])\\)",
       "\\(([0,\\pi/3]\\cup[5\\pi/3,2\\pi])\\)"
@@ -124,10 +124,10 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "level": "Developing",
     "q": "For \\(0<x<2\\pi\\), solve \\(\tan x<0\\).",
     "o": [
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
-      "\\(((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi))\\)",
-      "\\(((\\pi/2,3\\pi/2))\\)",
-      "\\(((0,\\pi)\\cup(3\\pi/2,2\\pi))\\)"
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
+      "\\((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi)\\)",
+      "\\((\\pi/2,3\\pi/2)\\)",
+      "\\((0,\\pi)\\cup(3\\pi/2,2\\pi)\\)"
     ],
     "a": 1,
     "e": "Tangent is negative in quadrants II and IV."
@@ -138,7 +138,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([\\pi/4,5\\pi/4])\\)",
       "\\(([0,\\pi/4]\\cup[5\\pi/4,2\\pi])\\)",
-      "\\(((0,\\pi/4)\\cup(5\\pi/4,2\\pi))\\)",
+      "\\((0,\\pi/4)\\cup(5\\pi/4,2\\pi)\\)",
       "\\(([0,3\\pi/4]\\cup[7\\pi/4,2\\pi])\\)"
     ],
     "a": 1,
@@ -149,8 +149,8 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(2\\sin x-1>0\\).",
     "o": [
       "\\(([\\pi/6,5\\pi/6])\\)",
-      "\\(((\\pi/6,5\\pi/6))\\)",
-      "\\(((0,\\pi/6)\\cup(5\\pi/6,2\\pi))\\)",
+      "\\((\\pi/6,5\\pi/6)\\)",
+      "\\((0,\\pi/6)\\cup(5\\pi/6,2\\pi)\\)",
       "\\(([0,\\pi/6]\\cup[5\\pi/6,2\\pi])\\)"
     ],
     "a": 1,
@@ -162,7 +162,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([0,2\\pi/3]\\cup[4\\pi/3,2\\pi])\\)",
       "\\(([2\\pi/3,4\\pi/3])\\)",
-      "\\(((2\\pi/3,4\\pi/3))\\)",
+      "\\((2\\pi/3,4\\pi/3)\\)",
       "\\(([\\pi/3,5\\pi/3])\\)"
     ],
     "a": 1,
@@ -173,9 +173,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin2x>0\\).",
     "o": [
       "\\(([0,\\pi/2]\\cup[\\pi,3\\pi/2])\\)",
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
-      "\\(((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi))\\)",
-      "\\(((0,\\pi))\\)"
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
+      "\\((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi)\\)",
+      "\\((0,\\pi)\\)"
     ],
     "a": 1,
     "e": "Apply the positive-sine intervals to \\(2x\\)."
@@ -186,7 +186,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([0,\\pi/4]\\cup[3\\pi/4,5\\pi/4])\\)",
       "\\(([\\pi/4,3\\pi/4]\\cup[5\\pi/4,7\\pi/4])\\)",
-      "\\(((\\pi/4,3\\pi/4)\\cup(5\\pi/4,7\\pi/4))\\)",
+      "\\((\\pi/4,3\\pi/4)\\cup(5\\pi/4,7\\pi/4)\\)",
       "\\(([\\pi/4,3\\pi/4])\\)"
     ],
     "a": 1,
@@ -196,10 +196,10 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "level": "Intermediate",
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin x\\cos x>0\\).",
     "o": [
-      "\\(((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi))\\)",
+      "\\((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi)\\)",
       "\\(([0,\\pi/2]\\cup[\\pi,3\\pi/2])\\)",
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
-      "\\(((0,\\pi))\\)"
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
+      "\\((0,\\pi)\\)"
     ],
     "a": 2,
     "e": "The product is positive when sine and cosine have the same sign."
@@ -209,7 +209,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(|\\sin x|\\le1/2\\).",
     "o": [
       "\\(([\\pi/6,5\\pi/6]\\cup[7\\pi/6,11\\pi/6])\\)",
-      "\\(((\\pi/6,5\\pi/6))\\)",
+      "\\((\\pi/6,5\\pi/6)\\)",
       "\\(([0,\\pi/6]\\cup[5\\pi/6,7\\pi/6]\\cup[11\\pi/6,2\\pi])\\)",
       "\\(([0,\\pi/6)\\cup(5\\pi/6,7\\pi/6)\\cup(11\\pi/6,2\\pi))\\)"
     ],
@@ -220,7 +220,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "level": "Intermediate",
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(|\\cos x|>\\sqrt{2}/2\\).",
     "o": [
-      "\\(((0,\\pi/4)\\cup(3\\pi/4,5\\pi/4)\\cup(7\\pi/4,2\\pi))\\)",
+      "\\((0,\\pi/4)\\cup(3\\pi/4,5\\pi/4)\\cup(7\\pi/4,2\\pi)\\)",
       "\\(([0,\\pi/4]\\cup[3\\pi/4,5\\pi/4]\\cup[7\\pi/4,2\\pi])\\)",
       "\\(([0,\\pi/4)\\cup(3\\pi/4,5\\pi/4)\\cup(7\\pi/4,2\\pi])\\)",
       "\\(([0,\\pi/4)\\cup[3\\pi/4,5\\pi/4]\\cup[7\\pi/4,2\\pi))\\)"
@@ -233,9 +233,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin x+\\cos x>0\\).",
     "o": [
       "\\(([0,\\pi/4]\\cup[5\\pi/4,2\\pi])\\)",
-      "\\(((3\\pi/4,7\\pi/4))\\)",
+      "\\((3\\pi/4,7\\pi/4)\\)",
       "\\(([0,3\\pi/4)\\cup(7\\pi/4,2\\pi])\\)",
-      "\\(((0,3\\pi/4)\\cup(7\\pi/4,2\\pi))\\)"
+      "\\((0,3\\pi/4)\\cup(7\\pi/4,2\\pi)\\)"
     ],
     "a": 2,
     "e": "Use \\(\\sin x+\\cos x=\\sqrt{2}\\sin(x+\\pi/4)\\)."
@@ -245,7 +245,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\\sin x-\\cos x\\ge0\\).",
     "o": [
       "\\(([0,\\pi/4]\\cup[5\\pi/4,2\\pi])\\)",
-      "\\(((\\pi/4,5\\pi/4))\\)",
+      "\\((\\pi/4,5\\pi/4)\\)",
       "\\(([\\pi/4,5\\pi/4])\\)",
       "\\(([3\\pi/4,7\\pi/4])\\)"
     ],
@@ -257,7 +257,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(2\\sin x\\cos x\\le0\\).",
     "o": [
       "\\(([0,\\pi/2]\\cup[\\pi,3\\pi/2])\\)",
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
       "\\(([\\pi/2,\\pi]\\cup[3\\pi/2,2\\pi])\\)",
       "\\(([\\pi/4,3\\pi/4]\\cup[5\\pi/4,7\\pi/4])\\)"
     ],
@@ -269,9 +269,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(\tan x>0\\).",
     "o": [
       "\\(([0,\\pi/2)\\cup[\\pi,3\\pi/2))\\)",
-      "\\(((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi))\\)",
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
-      "\\(((0,\\pi)\\cup(\\pi,2\\pi))\\)"
+      "\\((\\pi/2,\\pi)\\cup(3\\pi/2,2\\pi)\\)",
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
+      "\\((0,\\pi)\\cup(\\pi,2\\pi)\\)"
     ],
     "a": 2,
     "e": "Tangent is positive in quadrants I and III."
@@ -281,7 +281,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x<2\\pi\\), solve \\(\\(1-\\cos x\\)/\\(1+\\cos x\\)le1\\).",
     "o": [
       "\\(([0,\\pi])\\)",
-      "\\(((0,\\pi/2)\\cup(3\\pi/2,2\\pi))\\)",
+      "\\((0,\\pi/2)\\cup(3\\pi/2,2\\pi)\\)",
       "\\(([\\pi/2,3\\pi/2))\\)",
       "\\(([0,\\pi/2]\\cup[3\\pi/2,2\\pi))\\)"
     ],
@@ -294,7 +294,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([0,\\pi/4]\\cup[3\\pi/4,5\\pi/4]\\cup[7\\pi/4,2\\pi])\\)",
       "\\(([\\pi/6,5\\pi/6]\\cup[7\\pi/6,11\\pi/6])\\)",
-      "\\(((\\pi/4,3\\pi/4)\\cup(5\\pi/4,7\\pi/4))\\)",
+      "\\((\\pi/4,3\\pi/4)\\cup(5\\pi/4,7\\pi/4)\\)",
       "\\(([\\pi/4,3\\pi/4]\\cup[5\\pi/4,7\\pi/4])\\)"
     ],
     "a": 3,
@@ -306,8 +306,8 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([0,\\pi/3)\\cup(5\\pi/3,2\\pi])\\)",
       "\\(([\\pi/3,2\\pi/3]\\cup[4\\pi/3,5\\pi/3])\\)",
-      "\\(((0,\\pi/3)\\cup(4\\pi/3,2\\pi))\\)",
-      "\\(((\\pi/3,2\\pi/3)\\cup(4\\pi/3,5\\pi/3))\\)"
+      "\\((0,\\pi/3)\\cup(4\\pi/3,2\\pi)\\)",
+      "\\((\\pi/3,2\\pi/3)\\cup(4\\pi/3,5\\pi/3)\\)"
     ],
     "a": 3,
     "e": "This is \\(|\\cos x|<1/2\\), so equality points are excluded."
@@ -317,7 +317,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(2\\sin^2x-3\\sin x+1\\ge0\\).",
     "o": [
       "\\(([0,\\pi/6]\\cup[5\\pi/6,2\\pi])\\)",
-      "\\(((0,\\pi/6]\\cup{\\pi/2}\\cup[5\\pi/6,2\\pi))\\)",
+      "\\((0,\\pi/6]\\cup{\\pi/2}\\cup[5\\pi/6,2\\pi)\\)",
       "\\(([\\pi/6,5\\pi/6])\\)",
       "\\(([0,\\pi/6]\\cup{\\pi/2}\\cup[5\\pi/6,2\\pi])\\)"
     ],
@@ -329,9 +329,9 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "q": "For \\(0\\le x\\le2\\pi\\), solve \\(2\\cos^2x-3\\cos x+1>0\\).",
     "o": [
       "\\(([0,\\pi/3)\\cup(5\\pi/3,2\\pi])\\)",
-      "\\(((0,\\pi/3)\\cup(5\\pi/3,2\\pi))\\)",
+      "\\((0,\\pi/3)\\cup(5\\pi/3,2\\pi)\\)",
       "\\(([\\pi/3,5\\pi/3])\\)",
-      "\\(((\\pi/3,5\\pi/3))\\)"
+      "\\((\\pi/3,5\\pi/3)\\)"
     ],
     "a": 3,
     "e": "Factor as \\((2cos x-1)(\\cos x-1)>0\\), giving \\(\\cos x<1/2\\)."
@@ -354,7 +354,7 @@ window.SkillUpTrigonometricInequalitiesQuestions=[
     "o": [
       "\\(([\\pi/12,5\\pi/12]\\cup[7\\pi/6,11\\pi/6])\\)",
       "\\(([\\pi/6,\\pi/3]\\cup[7\\pi/6,5\\pi/3])\\)",
-      "\\(((0,\\pi/2)\\cup(\\pi,3\\pi/2))\\)",
+      "\\((0,\\pi/2)\\cup(\\pi,3\\pi/2)\\)",
       "\\(([\\pi/12,5\\pi/12]\\cup[13\\pi/12,17\\pi/12])\\)"
     ],
     "a": 3,

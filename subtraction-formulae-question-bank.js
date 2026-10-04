@@ -13,7 +13,7 @@ window.SkillUpSubtractionFormulaeQuestions=[
 {q:'If \\(A>B\\), which expression equals \\(\\sin(A-B)\\)?',o:['\\sin A\\cos B+\\cos A\\sin B','\\cos A\\cos B+\\sin A\\sin B','\\sin A\\cos B-\\cos A\\sin B','\\cos A\\sin B-\\sin A\\cos B'],a:2,e:'This is the standard sine difference identity.'},
 {q:'If \\(A>B\\), which expression equals \\(\\cos(A-B)\\)?',o:['\\sin A\\cos B-\\cos A\\sin B','\\cos A\\cos B+\\sin A\\sin B','\\cos A\\cos B-\\sin A\\sin B','\\sin A\\sin B+\\cos A\\cos B'],a:1,e:'Cosine of a difference uses a plus sign between the product terms.'},
 {q:'If \\(\\tan A=1\\) and \\(\\tan B=1/2\\), then \\(\\tan(A-B)\\) is',o:['\\frac12','\\frac13','\\frac23','\\frac32'],a:1,e:'\\((1-1/2)/(1+1/2)=1/3\\).'},
-{q:'If \\(\\tan A=2\\) and \\(\\tan B=1\\), then \\(\\tan(A-B)\\) is',o:['\\frac12','\\frac13','\\frac32','\\(1\\)'],a:2,e:'\\((2-1)/(1+2)=1/3\\), so the correct value is 1/3.'},
+{q:'If \\(\\tan A=2\\) and \\(\\tan B=1\\), then \\(\\tan(A-B)\\) is',o:['\\frac12','\\(1\\)','\\frac13','\\frac32'],a:2,e:'\\((2-1)/(1+2)=1/3\\), so the correct value is 1/3.'},
 {q:'\\(\\sin(90^\\circ-B)\\) equals',o:['\\sin B','\\cos B','-\\cos B','-\\sin B'],a:1,e:'The cofunction identity gives \\(\\sin(90^\\circ-B)=\\cos B\\).'},
 {q:'\\(\\cos(90^\\circ-B)\\) equals',o:['\\sin B','\\cos B','-\\sin B','-\\cos B'],a:0,e:'The cofunction identity gives \\(\\cos(90^\\circ-B)=\\sin B\\).'},
 {q:'\\(\\tan(90^\\circ-B)\\) equals',o:['\\tan B','-\\cot B','\\cot B','-\\tan B'],a:2,e:'The cofunction identity gives \\(\\tan(90^\\circ-B)=\\cot B\\).'},

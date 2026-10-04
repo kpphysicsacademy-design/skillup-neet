@@ -14,7 +14,7 @@
 {level:"Developing",q:"The identity \\(1+\\cos2A\\) is equal to:",o:["\\(2\\cos^2A\\)","\\(\\cos^2A\\)","\\(2\\sin^2A\\)","\\(1+2\\cos^2A\\)"],a:0,e:"From \\(\\cos2A=2\\cos^2A-1\\), \\(1+\\cos2A=2\\cos^2A\\)."},
 {level:"Developing",q:"The identity \\(\\sin2A\\) in terms of \\(\\tan A\\) is:",o:["\\(\\frac{2\\tan A}{1-\\tan^2A}\\)","\\(\\frac{2\\tan A}{1+\\tan^2A}\\)","\\(\\frac{\\tan A}{1+\\tan^2A}\\)","\\(\\frac{1-\\tan^2A}{2\\tan A}\\)"],a:1,e:"Divide \\(2\\sin A\\cos A\\) by \\(\\cos^2A\\): \\(\\sin2A=2\\tan A/(1+\\tan^2A)\\)."},
 {level:"Developing",q:"If \\(\\sin A+\\cos A=\\sqrt2\\), then \\(\\sin2A\\) is:",o:["\\(0\\)","\\(\\frac12\\)","\\(1\\)","\\(\\sqrt2\\)"],a:2,e:"Squaring gives \\(1+\\sin2A=2\\), so \\(\\sin2A=1\\)."},
-{level:"Developing",q:"If \\(\\sin A+\\cos A=1\\), then \\(\\sin2A\\) is:",o:["\\(-1\\)","\\(1\\)","\\(\\frac12\\)","\\(0\\)"],a:3,e:"Squaring gives \\(1+\\sin2A=1\\), hence \\(\\sin2A=0\\)."},
+
 {level:"Intermediate",q:"If \\(\\sin A\\cos A=\\frac14\\), then \\(\\sin2A\\) equals:",o:["\\(\\frac14\\)","\\(1\\)","\\(\\frac12\\)","\\(\\frac18\\)"],a:2,e:"\\(\\sin2A=2\\sin A\\cos A=1/2\\)."},
 {level:"Intermediate",q:"If \\(\\cos2A=\\frac12\\), then \\(\\sin^2A\\) equals:",o:["\\(\\frac14\\)","\\(\\frac12\\)","\\(\\frac34\\)","\\(1\\)"],a:0,e:"\\(\\sin^2A=(1-\\cos2A)/2=(1-1/2)/2=1/4\\)."},
 {level:"Intermediate",q:"If \\(\\cos2A=-\\frac13\\), then \\(\\cos^2A\\) is:",o:["\\(\\frac23\\)","\\(\\frac13\\)","\\(\\frac12\\)","\\(\\frac16\\)"],a:1,e:"\\(2\\cos^2A-1=-1/3\\) gives \\(\\cos^2A=1/3\\)."},

@@ -30,5 +30,4 @@ window.SkillUpDegreeMeasureQuestions = [
 {q:"A 360° angle represents:",o:["no turn","half turn","one complete turn","two complete turns"],a:2,e:"360° is exactly one complete turn."},
 {q:"A 720° angle represents:",o:["one turn","one and a half turns","two complete turns","three turns"],a:2,e:"720°=2×360°, so it represents two complete turns."},
 {q:"The degree measure of a full turn divided into 12 equal parts is:",o:["15°","20°","30°","45°"],a:0,e:"360°÷12=30°."},
-{q:"The degree measure of a full turn divided into 24 equal parts is:",o:["10°","12°","15°","20°"],a:2,e:"360°÷24=15°."}
 ];

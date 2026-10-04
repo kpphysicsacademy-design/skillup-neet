@@ -27,7 +27,6 @@ window.SkillUpUnitCircleQuestions = [
 {q:'Which point lies on the unit circle?',o:['$(\\frac35,\\frac45)$','$(1,1)$','$(\\frac12,\\frac12)$','$(2,0)$'],a:0,e:'$(\frac35)^2+(\frac45)^2=\frac9{25}+\frac{16}{25}=1$.'},
 {q:'The x-intercepts of the unit circle are',o:['$(1,0)$ and $(-1,0)$','$(0,1)$ and $(0,-1)$','$(1,1)$ and $(-1,-1)$','$(0,0)$ only'],a:0,e:'Setting $y=0$ gives $x=\pm1$.'},
 {q:'The y-intercepts of the unit circle are',o:['$(0,1)$ and $(0,-1)$','$(1,0)$ and $(-1,0)$','$(1,1)$ and $(-1,-1)$','$(0,0)$ only'],a:0,e:'Setting $x=0$ gives $y=\pm1$.'},
-{q:'For every point $(x,y)$ on the unit circle, which identity is true?',o:['$x^2+y^2=1$','$x+y=1$','$x^2-y^2=1$','$xy=1$'],a:0,e:'This is the defining equation of the unit circle.'},
 {q:'If the terminal point is $(0,-1)$, one principal angle is',o:['$\\frac{3\\pi}{2}$','$\\frac{\\pi}{2}$','$\\pi$','$0$'],a:0,e:'$\frac{3\pi}{2}$ reaches the bottom of the unit circle.'},
 {q:'The unit-circle definition of tangent is',o:['$\\tan\\theta=\\frac{y}{x}$','$\\tan\\theta=\\frac{x}{y}$','$\\tan\\theta=x+y$','$\\tan\\theta=xy$'],a:0,e:'Since $x=\cos\theta$ and $y=\sin\theta$, $\tan\theta=\frac{y}{x}$ when $x\ne0$.'},
 {q:'At an angle where the unit-circle point has $x=0$, $\\tan\\theta$ is',o:['undefined','0','1','$-1$'],a:0,e:'$\tan\theta=\frac{\sin\theta}{\cos\theta}$, so it is undefined when $\cos\theta=0$.'}

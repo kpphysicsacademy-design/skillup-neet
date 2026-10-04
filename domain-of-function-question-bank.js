@@ -27,7 +27,7 @@ window.SkillUpDomainOfFunctionQuestions=[
 {level:"Intermediate",q:"The domain of f(x)=√((x+1)/(2−x)) is:",o:["−1≤x<2","x≤−1 or x>2","−1<x≤2","All real x"],a:0,e:"The quotient must be non-negative and x≠2; sign analysis gives −1≤x<2."},
 {level:"Intermediate",q:"If f(x)=√(x−2)+1/(x−5), its domain is:",o:["[2,5)∪(5,∞)","[2,∞)","(−∞,5)","All real numbers"],a:0,e:"Need x≥2 and x≠5."},
 
-{level:"Advanced",q:"The domain of f(x)=√((x−1)/(x²−4)) is:",o:["(−2,1]∪(2,∞)","[−2,1]∪(2,∞)","(−∞,−2)∪[1,2)","[−2,1]∪(2,∞)"],a:3,e:"Critical points are −2, 1, 2. Sign analysis gives [−2,1]∪(2,∞)."},
+{level:"Advanced",q:"The domain of f(x)=√((x−1)/(x²−4)) is:",o:["(−2,1]∪(2,∞)","[−2,1]∪(2,∞)","(−∞,−2)∪[1,2)","(−∞,−2)∪[1,2)"],a:1,e:"Critical points are −2, 1, 2. Sign analysis gives [−2,1]∪(2,∞)."},
 {level:"Advanced",q:"The domain of f(x)=1/(x−1)+√(x+3) is:",o:["[−3,1)∪(1,∞)","(−3,1)∪(1,∞)","[−3,∞)","All real numbers"],a:0,e:"Need x≥−3 and x≠1."},
 {level:"Advanced",q:"The domain of f(x)=√(1−1/x) is:",o:["(−∞,0)∪[1,∞)","(−∞,0)∪(1,∞)","[0,1]","All real numbers"],a:0,e:"1−1/x≥0 gives x<0 or x≥1."},
 

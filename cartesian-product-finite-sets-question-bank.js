@@ -23,7 +23,7 @@ window.SkillUpCartesianProductFiniteSetsQuestions=[
 {level:"Developing",q:"If |A×B|=15 and |B|=5, then |A| is:",o:["2","3","4","5"],a:1,e:"15=|A|×5, so |A|=3."},
 
 {level:"Intermediate",q:"If |A|=4, |B|=3, and |A∩B|=2, how many pairs in A×B have equal coordinates?",o:["0","2","3","12"],a:1,e:"An equal-coordinate pair must be (x,x) with x∈A∩B. There are 2 such elements."},
-{level:"Intermediate",q:"If A={1,2,3} and B={2,3,4}, then (A×B)∩(B×A) equals:",o:["{(2,2),(3,3)}","{(2,3),(3,2)}","A×B","∅"],a:0,e:"The intersection is (A∩B)×(A∩B)={2,3}×{2,3}, which contains four pairs, including (2,2),(2,3),(3,2),(3,3). The displayed option A is therefore incomplete."},
+{level:"Intermediate",q:"If A={1,2,3} and B={2,3,4}, then (A×B)∩(B×A) equals:",o:["{(2,2),(2,3),(3,2),(3,3)}","{(2,2),(3,3)}","{(2,3),(3,2)}","∅"],a:0,e:"The intersection is (A∩B)×(A∩B)={2,3}×{2,3}, which contains all four ordered pairs shown in option A."},
 {level:"Intermediate",q:"If |A|=5, |B|=4, and |A∩B|=2, then |(A×B)∩(B×A)| is:",o:["2","4","8","20"],a:1,e:"The intersection is (A∩B)×(A∩B), so its size is 2²=4."},
 {level:"Intermediate",q:"If A={1,2} and B={2,3,4}, how many pairs in A×B have first coordinate less than the second?",o:["3","4","5","6"],a:2,e:"The pairs are (1,2),(1,3),(1,4),(2,3),(2,4), giving 5."},
 {level:"Intermediate",q:"If |A×B|=36 and |A|=|B|, then |A| is:",o:["4","5","6","9"],a:2,e:"Let |A|=|B|=n. Then n²=36, so n=6."},

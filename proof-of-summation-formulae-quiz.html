@@ -97,7 +97,7 @@ const qs=[
 let i=0,score=0,answered=false;
 const app=document.getElementById("app"),bar=document.getElementById("bar");
 function render(){
- answered=false;bar.style.width=(i/qs.length*100)+"%";document.getElementById("progressText").textContent="Question "+(i+1)+" of "+qs.length;
+ answered=false;bar.style.width=(i/qs.length*100)+"%";const progressText=document.getElementById("progressText");if(progressText)progressText.textContent="Question "+(i+1)+" of "+qs.length;
  const x=qs[i];app.innerHTML='<section class="card"><div class="qhead"><span class="qnum">Q'+(i+1)+'</span><span class="muted">Single-answer question</span></div><div class="q">'+x.q+'</div><div class="opts">'+x.o.map((v,j)=>'<button class="opt" data-i="'+j+'">'+String.fromCharCode(65+j)+'. '+v+'</button>').join('')+'</div><div id="fb"></div><button class="next" id="next" style="display:none">'+(i===qs.length-1?'Finish Quiz':'Next Question')+'</button></section>';
  if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([app]);
  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>choose(+b.dataset.i));

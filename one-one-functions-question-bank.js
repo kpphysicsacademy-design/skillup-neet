@@ -27,7 +27,7 @@ window.SkillUpOneOneFunctionsQuestions=[
 {level:"Intermediate",q:"For f(x)=ln x on (0,∞), f is:",o:["One-one","Not one-one","Constant","Periodic"],a:0,e:"ln x is strictly increasing on its domain."},
 {level:"Intermediate",q:"If f:A→B is one-one and A,B are finite with |A|=|B|, then f is:",o:["Onto","Constant","Many-one","Undefined"],a:0,e:"A one-one map between equal finite cardinalities is onto."},
 
-{level:"Advanced",q:"For f(x)=x², the largest interval containing 0 on which f is one-one is:",o:["[−1,1]","[0,∞)","R","(−∞,∞)"],a:1,e:"On [0,∞), x² is strictly increasing."},
+{level:"Advanced",q:"For f(x)=x², which interval is a one-one restriction of f?",o:["[−1,1]","[0,∞)","R","(−∞,∞)"],a:1,e:"On [0,∞), x² is strictly increasing."},
 {level:"Advanced",q:"For f(x)=sin x, which interval gives a one-one restriction?",o:["[−π/2,π/2]","[0,2π]","R","[−π,π]"],a:0,e:"sin x is strictly increasing on [−π/2,π/2]."},
 {level:"Advanced",q:"For f(x)=x+1/x on (0,∞), f is:",o:["One-one","Not one-one","Constant","Periodic"],a:1,e:"f(1/2)=2.5=f(2), with distinct inputs."},
 

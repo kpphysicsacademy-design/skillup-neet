@@ -23,7 +23,6 @@ window.SkillUpIdentityRelationQuestions=[
 {level:"Intermediate",q:"If |A|=n, the identity relation on A has how many ordered pairs?",o:["n","n²","2n","2^n"],a:0,e:"There is exactly one pair (a,a) for each of the n elements."},
 {level:"Intermediate",q:"If A={1,2,3,4}, how many pairs are in A×A but not in I_A?",o:["4","8","12","16"],a:2,e:"A×A has 16 pairs and I_A has 4, leaving 12."},
 {level:"Intermediate",q:"For a nonempty set A, the identity relation is equal to the universal relation when:",o:["|A|=1","|A|=2","|A|=3","A is infinite"],a:0,e:"When A has one element, A×A contains only its single diagonal pair."},
-{level:"Intermediate",q:"If R=I_A and S is any relation on A, then R∘S is:",o:["Always S","Not necessarily equal to S","Always ∅","Always A×A"],a:1,e:"With standard composition, I_A∘S=S, but the exact expression depends on composition order; identity acts as the neutral relation."},
 {level:"Intermediate",q:"If S is any relation on A, then S∘I_A is:",o:["S","∅","I_A","A×A"],a:0,e:"Identity is the neutral element for relation composition: S∘I_A=S."},
 {level:"Intermediate",q:"Which relation on A represents equality of elements?",o:["Universal relation","Empty relation","Identity relation","Inverse relation"],a:2,e:"a I_A b exactly when a=b."},
 {level:"Advanced",q:"How many identity relations can be defined on a fixed set A?",o:["0","1","2","2^|A|"],a:1,e:"A fixed set has exactly one identity relation."},

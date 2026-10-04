@@ -4,10 +4,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Foundation",
     "q": "What does the inductive step prove?",
     "o": [
-      "\\\\(P(k)⇒P(k+1)\\\\)",
-      "\\\\(P(k+1)⇒P(k)\\\\)",
-      "\\\\(P(1)⇒P(0)\\\\)",
-      "\\\\(P(k)⇒P(k−1)\\\\)"
+      "\\(P(k)⇒P(k+1)\\)",
+      "\\(P(k+1)⇒P(k)\\)",
+      "\\(P(1)⇒P(0)\\)",
+      "\\(P(k)⇒P(k−1)\\)"
     ],
     "a": 0,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -26,7 +26,7 @@ window.SkillUpInductiveStepQuestions=[
   },
   {
     "level": "Foundation",
-    "q": "The assumption \\\\(P(k)\\\\) is called the:",
+    "q": "The assumption \\(P(k)\\) is called the:",
     "o": [
       "base case",
       "counterexample",
@@ -38,7 +38,7 @@ window.SkillUpInductiveStepQuestions=[
   },
   {
     "level": "Foundation",
-    "q": "The target after assuming \\\\(P(k)\\\\) is:",
+    "q": "The target after assuming \\(P(k)\\) is:",
     "o": [
       "P(k−1)",
       "P(k)",
@@ -88,10 +88,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Intermediate",
     "q": "For 1+3+⋯+(2n−1)=n², the hypothesis is:",
     "o": [
-      "\\\\(1+3+⋯+k=k²\\\\)",
-      "\\\\(1+3+⋯+(2k+1)=k²\\\\)",
-      "\\\\(1+3+⋯+(2k−1)=(k+1)²\\\\)",
-      "\\\\(1+3+⋯+(2k−1)=k²\\\\)"
+      "\\(1+3+⋯+k=k²\\)",
+      "\\(1+3+⋯+(2k+1)=k²\\)",
+      "\\(1+3+⋯+(2k−1)=(k+1)²\\)",
+      "\\(1+3+⋯+(2k−1)=k²\\)"
     ],
     "a": 3,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -112,10 +112,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Intermediate",
     "q": "The key identity is:",
     "o": [
-      "\\\\(k²+1=k+1\\\\)",
-      "\\\\(k²+2k+1=(k+1)²\\\\)",
-      "\\\\(2k+1=k²\\\\)",
-      "\\\\(k²+2=k+1\\\\)"
+      "\\(k²+1=k+1\\)",
+      "\\(k²+2k+1=(k+1)²\\)",
+      "\\(2k+1=k²\\)",
+      "\\(k²+2=k+1\\)"
     ],
     "a": 1,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -148,10 +148,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Intermediate",
     "q": "For n²+n even, the next expression is:",
     "o": [
-      "\\\\((k+1)²+(k+1)\\\\)",
-      "\\\\(k²+k\\\\)",
-      "\\\\((k+1)²−k\\\\)",
-      "\\\\(k²+1\\\\)"
+      "\\((k+1)²+(k+1)\\)",
+      "\\(k²+k\\)",
+      "\\((k+1)²−k\\)",
+      "\\(k²+1\\)"
     ],
     "a": 0,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -160,10 +160,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Intermediate",
     "q": "(k+1)²+(k+1) equals:",
     "o": [
-      "\\\\(k²+2k+1\\\\)",
-      "\\\\(k²+3k+2\\\\)",
-      "\\\\(k²+k+1\\\\)",
-      "\\\\(k²+2\\\\)"
+      "\\(k²+2k+1\\)",
+      "\\(k²+3k+2\\)",
+      "\\(k²+k+1\\)",
+      "\\(k²+2\\)"
     ],
     "a": 1,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -173,9 +173,9 @@ window.SkillUpInductiveStepQuestions=[
     "q": "If k²+k is even, k²+3k+2 is even because it equals:",
     "o": [
       "2k+1",
-      "\\\\(k²+k+1\\\\)",
-      "\\\\((k²+k)+2(k+1)\\\\)",
-      "\\\\(k²+2\\\\)"
+      "\\(k²+k+1\\)",
+      "\\((k²+k)+2(k+1)\\)",
+      "\\(k²+2\\)"
     ],
     "a": 2,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -198,7 +198,7 @@ window.SkillUpInductiveStepQuestions=[
     "o": [
       "3k(k+1)",
       "3k+1",
-      "\\\\(k³−k\\\\)",
+      "\\(k³−k\\)",
       "k+1"
     ],
     "a": 0,
@@ -208,10 +208,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Advanced",
     "q": "For sum r², the next partial sum is:",
     "o": [
-      "\\\\(Σr² to k\\\\)",
-      "\\\\(Σr² to k+1 = Σr² to k +(k+1)²\\\\)",
-      "\\\\(Σr to k\\\\)",
-      "\\\\(k²+k\\\\)"
+      "\\(Σr² to k\\)",
+      "\\(Σr² to k+1 = Σr² to k +(k+1)²\\)",
+      "\\(Σr to k\\)",
+      "\\(k²+k\\)"
     ],
     "a": 1,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -256,10 +256,10 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Advanced",
     "q": "For n³−n divisible by 3, the next expression can be written as:",
     "o": [
-      "\\\\((k³−k)+1\\\\)",
-      "\\\\((k³−k)+3k(k+1)\\\\)",
-      "\\\\(3(k³−k)\\\\)",
-      "\\\\(k³+k\\\\)"
+      "\\((k³−k)+1\\)",
+      "\\((k³−k)+3k(k+1)\\)",
+      "\\(3(k³−k)\\)",
+      "\\(k³+k\\)"
     ],
     "a": 1,
     "e": "The inductive step establishes the required transition from the arbitrary case k to the next case k+1."
@@ -278,7 +278,7 @@ window.SkillUpInductiveStepQuestions=[
   },
   {
     "level": "Advanced",
-    "q": "If the hypothesis is \\\\(P(k)\\\\), one must not simply assume:",
+    "q": "If the hypothesis is \\(P(k)\\), one must not simply assume:",
     "o": [
       "P(k)",
       "k is arbitrary",
@@ -340,9 +340,9 @@ window.SkillUpInductiveStepQuestions=[
     "level": "Master",
     "q": "The complete induction transition is:",
     "o": [
-      "\\\\(P(n0) true and ∀k≥n0, P(k)⇒P(k+1)\\\\)",
+      "\\(P(n0) true and ∀k≥n0, P(k)⇒P(k+1)\\)",
       "P(n0) only",
-      "\\\\(P(k+1)⇒P(k)\\\\)",
+      "\\(P(k+1)⇒P(k)\\)",
       "P(k) for one value"
     ],
     "a": 0,

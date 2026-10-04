@@ -53,7 +53,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "q": "What does the inductive step usually establish?",
     "o": [
       "\\(P(k)\\Rightarrow P(k+1)\\)",
-      "\\(P(k+1)\\Rightarrow \\(P(k)\\)",
+      "\\(P(k+1)\\Rightarrow P(k)\\)",
       "\\(P(1)\\) is false",
       "\\(P(k)\\) is a counterexample"
     ],

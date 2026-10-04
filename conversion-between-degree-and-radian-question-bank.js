@@ -1,7 +1,6 @@
 /* SkillUp Mathematics — Conversion Between Degree and Radian question bank */
 window.SkillUpConversionDegreeRadianQuestions = [
 {q:"Convert 1° to radians.",o:["π/180","π/90","180π","1/π"],a:0,e:"Multiply degrees by π/180: 1° = π/180 radians."},
-{q:"Convert 2° to radians.",o:["π/90","π/180","π/60","π/45"],a:0,e:"2π/180 simplifies to π/90."},
 {q:"Convert 5° to radians.",o:["π/36","π/45","π/30","π/18"],a:1,e:"5π/180 simplifies to π/36? Actually 5/180=1/36, so π/36."},
 {q:"Convert 10° to radians.",o:["π/18","π/36","π/12","π/9"],a:0,e:"10π/180 = π/18."},
 {q:"Convert 15° to radians.",o:["π/6","π/12","π/9","π/18"],a:1,e:"15π/180 = π/12."},

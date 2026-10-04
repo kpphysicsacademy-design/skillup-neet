@@ -23,7 +23,7 @@
 .card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:24px;margin-bottom:15px;box-shadow:var(--shadow)}
 .qhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}.qmeta{display:flex;align-items:center;gap:10px}.qprogress{font-size:12px;font-weight:750;color:var(--muted)}.qnum{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:32px;padding:0 12px;border-radius:10px;background:#eef5ff;color:var(--blue);font-size:12px;font-weight:950}.qtype{font-size:12px;font-weight:750;color:var(--muted)}
 .q{text-align:center;font-size:clamp(20px,3.5vw,24px);font-weight:750;line-height:1.65;word-spacing:.12em}.q mjx-container{font-size:1.12em!important;font-weight:400!important;font-style:italic!important}.formula{display:block;margin:14px auto;text-align:center;font-size:1.28em}.opt mjx-container{display:block!important;text-align:center!important;margin:3px 0!important;font-size:1.15em!important}.opt{display:flex;align-items:center;gap:8px}.opt mjx-container:first-child{margin-left:auto!important}.opt mjx-container:last-child{margin-right:auto!important}.opts{display:grid;gap:12px;margin-top:24px}
-.opt{width:100%;min-height:78px;border:2px solid #d9e0e8;border-bottom-width:4px;border-radius:16px;background:#fff;color:var(--ink);padding:14px 18px;text-align:center;font-size:17px;font-weight:400;line-height:1.65;letter-spacing:.01em;cursor:pointer;transition:.12s ease;display:flex;align-items:center;justify-content:center;gap:12px;position:relative}.optlabel{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-weight:950;font-size:16px}.optmath{display:block;width:100%;text-align:center;font-weight:400!important;font-style:italic!important;letter-spacing:.02em}.optmath mjx-container{font-size:1.2em!important;margin:0 auto!important;font-weight:400!important;font-style:italic!important}
+.opt{width:100%;min-height:78px;border:2px solid #d9e0e8;border-bottom-width:4px;border-radius:16px;background:#fff;color:var(--ink);padding:14px 18px;text-align:center;font-size:17px;font-weight:400;line-height:1.65;letter-spacing:.01em;cursor:pointer;transition:.12s ease;display:flex;align-items:center;justify-content:center;gap:12px;position:relative}.optlabel{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-weight:950;font-size:16px}.optmath{display:block;width:100%;text-align:center;font-weight:400!important;letter-spacing:.02em;word-spacing:.12em}.math-inline{font-style:italic}.math-inline mjx-container{font-style:italic!important;font-weight:400!important}.optmath mjx-container{font-size:1.2em!important;margin:0 auto!important;font-weight:400!important;font-style:italic!important}
 .opt:hover:not(:disabled){border-color:#9dbbf5;background:#f8fbff;transform:translateY(-1px)}.opt:active:not(:disabled){transform:translateY(2px);border-bottom-width:2px}.opt:disabled{cursor:default}
 .opt.correct{background:var(--greenBg);border-color:var(--green);border-bottom-color:var(--greenDark);color:#166534}.opt.wrong{background:var(--redBg);border-color:var(--red);border-bottom-color:#b91c1c;color:#991b1b}
 .hintbox{margin:18px 0 0}.hintbtn{border:1px solid #d9e0e8;background:#f8fafc;color:#475467;border-radius:12px;padding:9px 12px;font-weight:800;cursor:pointer}.hinttext{display:none;margin-top:9px;padding:11px 13px;border-radius:12px;background:#f5f7fa;color:#667085;font-size:13px;line-height:1.5}.hinttext.show{display:block}.feedback{margin-top:16px;padding:15px 16px;border-radius:15px;background:#f7f9fc;border:1px solid var(--line);font-size:14px;line-height:1.55;color:#344054}
@@ -90,21 +90,23 @@ const m=[
 for(const [a,b] of m)s=s.split(a).join(b); return s;
 }
 function formulaOption(s){
-let t=String(s).trim();
-t=t.replace(/−/g,"-").replace(/⋯/g,"\\cdots").replace(/²/g,"^2").replace(/³/g,"^3");
+const raw=String(s).trim();
+const isPureEquation=/^[0-9A-Za-z_()\[\]\s+\-−×·⋯²³=\\/.,]+$/.test(raw) && /[=+\-−×·⋯²³\\/]/.test(raw);
+const mathify=(v)=>{let t=String(v).replace(/−/g,"-").replace(/⋯/g,"\\cdots").replace(/²/g,"^2").replace(/³/g,"^3");
 const replacements=[
-["[n(n+1)/2]²","\\\\left[\\\\frac{n(n+1)}{2}\\\\right]^2"],
-["[k(k+1)/2]²","\\\\left[\\\\frac{k(k+1)}{2}\\\\right]^2"],
-["n(n+1)(2n+1)/6","\\\\frac{n(n+1)(2n+1)}{6}"],
-["(k+1)(k+2)/2","\\\\frac{(k+1)(k+2)}{2}"],
-["n(n+1)/2","\\\\frac{n(n+1)}{2}"],
-["k(k+1)/2","\\\\frac{k(k+1)}{2}"],
-["n(n-1)/2","\\\\frac{n(n-1)}{2}"],
-["(k+1)^2/2","\\\\frac{(k+1)^2}{2}"],
-["n^2(n+1)^2/4","\\\\frac{n^2(n+1)^2}{4}"]
+["[n(n+1)/2]²","\\left[\\frac{n(n+1)}{2}\\right]^2"],["[k(k+1)/2]²","\\left[\\frac{k(k+1)}{2}\\right]^2"],
+["n(n+1)(2n+1)/6","\\frac{n(n+1)(2n+1)}{6}"],["(k+1)(k+2)/2","\\frac{(k+1)(k+2)}{2}"],
+["n(n+1)/2","\\frac{n(n+1)}{2}"],["k(k+1)/2","\\frac{k(k+1)}{2}"],["n(n-1)/2","\\frac{n(n-1)}{2}"],
+["(n+1)^2/2","\\frac{(n+1)^2}{2}"],["n^2(n+1)^2/4","\\frac{n^2(n+1)^2}{4}"]
 ];
-for(const [a,b] of replacements)t=t.split(a).join(b);
-return "\\("+t+"\\)";
+for(const [a,b] of replacements)t=t.split(a).join(b); return t;};
+if(isPureEquation)return "\\("+mathify(raw)+"\\)";
+let out=raw.replace(/n\s*≥\s*1/g,"<span class="math-inline">\\(n\\ge 1\\)</span>");
+out=out.replace(/\bn\s*=\s*1\b/g,"<span class="math-inline">\\(n=1\\)</span>");
+out=out.replace(/\bn\s*=\s*2\b/g,"<span class="math-inline">\\(n=2\\)</span>");
+out=out.replace(/\bn\s*=\s*0\b/g,"<span class="math-inline">\\(n=0\\)</span>");
+out=out.replace(/\bk\s*=\s*k\b/g,"<span class="math-inline">\\(k=k\\)</span>");
+return out;
 }
 function render(){
  answered=false;bar.style.width=(i/qs.length*100)+"%";const progressText=document.getElementById("progressText");if(progressText)progressText.textContent="Question "+(i+1)+" of "+qs.length;

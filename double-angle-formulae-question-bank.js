@@ -26,6 +26,8 @@
 {level:"Advanced",q:"If \\(\\tan A=\\frac34\\), then \\(\\sin2A\\) is:",o:["\\(\\frac{7}{25}\\)","\\(\\frac34\\)","\\(\\frac{24}{25}\\)","\\(\\frac45\\)"],a:2,e:"\\(\\sin2A=2\\tan A/(1+\\tan^2A)=24/25\\)."},
 {level:"Advanced",q:"For \\(\\tan A=\\frac12\\), the value of \\(\\cos2A\\) is:",o:["\\(\\frac35\\)","\\(\\frac45\\)","\\(-\\frac35\\)","\\(\\frac12\\)"],a:0,e:"\\(\\cos2A=(1-1/4)/(1+1/4)=3/5\\)."},
 {level:"Advanced",q:"If \\(\\cos2A=\\frac35\\), then \\(\\sin^2A\\) equals:",o:["\\(\\frac35\\)","\\(\\frac15\\)","\\(\\frac25\\)","\\(\\frac45\\)"],a:1,e:"\\(\\cos2A=1-2\\sin^2A\\) gives \\(\\sin^2A=(1-3/5)/2=1/5\\)."},
-{level:"Master",q:"If \\(\\sin2A=\\frac35\\) and A is acute with \\(A<45^\\circ\\), then \\(\\cos2A\\) is:",o:["\\(\\frac45\\)","\\(-\\frac45\\)","\\(\\frac35\\)","\\(-\\frac35\\)"],a:0,e:"Here 0<2A<90°, so \\(\\cos2A>0\\). Using \\(\\sin^22A+\\cos^22A=1\\), \\(\\cos2A=4/5\\)."},,
-{level:"Master",q:"If \\(\\sin2A=\\frac35\\) and A is acute with \\(A>45^\\circ\\), then \\(\\cos2A\\) is:",o:["\\(\\frac45\\)","\\(-\\frac45\\)","\\(\\frac35\\)","\\(-\\frac35\\)"],a:1,e:"Here 90°<2A<180°, so \\(\\cos2A<0\\). Thus \\(\\cos2A=-4/5\\)."}
-\n{level:"Master",q:"If \\(\\sin A\\cos A=-\\frac14\\), then \\(\\sin2A\\) equals:",o:["\\(\\frac12\\)","\\(0\\)","\\(-1\\)","\\(-\\frac12\\)"],a:3,e:"Using \\(\\sin2A=2\\sin A\\cos A\\), we get \\(\\sin2A=-1/2\\)."}];})();
+{level:"Master",q:"If \\(\\sin2A=\\frac35\\) and A is acute with \\(A<45^\\circ\\), then \\(\\cos2A\\) is:",o:["\\(\\frac45\\)","\\(-\\frac45\\)","\\(\\frac35\\)","\\(-\\frac35\\)"],a:0,e:"Here 0<2A<90°, so \\(\\cos2A>0\\). Using \\(\\sin^22A+\\cos^22A=1\\), \\(\\cos2A=4/5\\)."},
+{level:"Master",q:"If \\(\\sin2A=\\frac35\\) and A is acute with \\(A>45^\\circ\\), then \\(\\cos2A\\) is:",o:["\\(\\frac45\\)","\\(-\\frac45\\)","\\(\\frac35\\)","\\(-\\frac35\\)"],a:1,e:"Here 90°<2A<180°, so \\(\\cos2A<0\\). Thus \\(\\cos2A=-4/5\\)."},
+{level:"Master",q:"If \\(\\cos2A=\\frac35\\), then \\(\\sin^2A\\) equals:",o:["\\(\\frac35\\)","\\(\\frac15\\)","\\(\\frac25\\)","\\(\\frac45\\)"],a:1,e:"\\(\\cos2A=1-2\\sin^2A\\) gives \\(\\sin^2A=(1-3/5)/2=1/5\\)."},
+{level:"Master",q:"If \\(\\sin A\\cos A=-\\frac14\\), then \\(\\sin2A\\) equals:",o:["\\(\\frac12\\)","\\(0\\)","\\(-1\\)","\\(-\\frac12\\)"],a:3,e:"Using \\(\\sin2A=2\\sin A\\cos A\\), we get \\(\\sin2A=-1/2\\)."}
+];})();

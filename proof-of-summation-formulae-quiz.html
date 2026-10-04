@@ -90,19 +90,20 @@ const m=[
 for(const [a,b] of m)s=s.split(a).join(b); return s;
 }
 function formulaOption(s){
-const key=String(s).trim();
-const map={
-"n(n+1)/2":"\\frac{n(n+1)}{2}",
-"n²/2":"\\frac{n^2}{2}",
-"n(n−1)/2":"\\frac{n(n-1)}{2}",
-"(n+1)²/2":"\\frac{(n+1)^2}{2}",
-"k(k+1)/2":"\\frac{k(k+1)}{2}",
-"(k+1)(k+2)/2":"\\frac{(k+1)(k+2)}{2}",
-"n(n+1)(2n+1)/6":"\\frac{n(n+1)(2n+1)}{6}",
-"[n(n+1)/2]²":"\\left[\\frac{n(n+1)}{2}\\right]^2"
-};
-let t=map[key]||key;
+let t=String(s).trim();
 t=t.replace(/−/g,"-").replace(/⋯/g,"\\cdots").replace(/²/g,"^2").replace(/³/g,"^3");
+const replacements=[
+["[n(n+1)/2]²","\\\\left[\\\\frac{n(n+1)}{2}\\\\right]^2"],
+["[k(k+1)/2]²","\\\\left[\\\\frac{k(k+1)}{2}\\\\right]^2"],
+["n(n+1)(2n+1)/6","\\\\frac{n(n+1)(2n+1)}{6}"],
+["(k+1)(k+2)/2","\\\\frac{(k+1)(k+2)}{2}"],
+["n(n+1)/2","\\\\frac{n(n+1)}{2}"],
+["k(k+1)/2","\\\\frac{k(k+1)}{2}"],
+["n(n-1)/2","\\\\frac{n(n-1)}{2}"],
+["(k+1)^2/2","\\\\frac{(k+1)^2}{2}"],
+["n^2(n+1)^2/4","\\\\frac{n^2(n+1)^2}{4}"]
+];
+for(const [a,b] of replacements)t=t.split(a).join(b);
 return "\\("+t+"\\)";
 }
 function render(){

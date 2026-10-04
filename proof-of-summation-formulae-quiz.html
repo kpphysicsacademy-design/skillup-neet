@@ -91,18 +91,16 @@ for(const [a,b] of m)s=s.split(a).join(b); return s;
 }
 function formulaOption(s){
 let t=String(s).trim();
-if(!/[=+\\-−×·⋯²³Σ∑\\/]/.test(t)) return fm(t);
 t=t.replace(/−/g,"-").replace(/⋯/g,"\\cdots").replace(/²/g,"^2").replace(/³/g,"^3");
-const f=[
-[/n\\(n\\+1\\)\\/2/g,"\\\\frac{n(n+1)}{2}"],
-[/k\\(k\\+1\\)\\/2/g,"\\\\frac{k(k+1)}{2}"],
-[/\\(k\\+1\\)\\(k\\+2\\)\\/2/g,"\\\\frac{(k+1)(k+2)}{2}"],
-[/n\\(n\\+1\\)\\(2n\\+1\\)\\/6/g,"\\\\frac{n(n+1)(2n+1)}{6}"],
-[/n\\(n-1\\)\\/2/g,"\\\\frac{n(n-1)}{2}"],
-[/\\[n\\(n\\+1\\)\\/2\\]\\^2/g,"\\\\left[\\\\frac{n(n+1)}{2}\\\\right]^2"],
-[/\\[k\\(k\\+1\\)\\/2\\]\\^2/g,"\\\\left[\\\\frac{k(k+1)}{2}\\\\right]^2"]
-];
-for(const [re,v] of f)t=t.replace(re,v);
+t=t.split("[n(n+1)/2]²").join("\\left[\\frac{n(n+1)}{2}\\right]^2");
+t=t.split("[k(k+1)/2]²").join("\\left[\\frac{k(k+1)}{2}\\right]^2");
+t=t.split("n(n+1)(2n+1)/6").join("\\frac{n(n+1)(2n+1)}{6}");
+t=t.split("k(k+1)/2").join("\\frac{k(k+1)}{2}");
+t=t.split("(k+1)(k+2)/2").join("\\frac{(k+1)(k+2)}{2}");
+t=t.split("n(n+1)/2").join("\\frac{n(n+1)}{2}");
+t=t.split("n(n−1)/2").join("\\frac{n(n-1)}{2}");
+t=t.split("n(n-1)/2").join("\\frac{n(n-1)}{2}");
+t=t.split("n(n+1)(2n+1)/6").join("\\frac{n(n+1)(2n+1)}{6}");
 return "\\("+t+"\\)";
 }
 function render(){

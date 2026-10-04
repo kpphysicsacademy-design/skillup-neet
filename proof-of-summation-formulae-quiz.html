@@ -90,17 +90,19 @@ const m=[
 for(const [a,b] of m)s=s.split(a).join(b); return s;
 }
 function formulaOption(s){
-let t=String(s).trim();
+const key=String(s).trim();
+const map={
+"n(n+1)/2":"\\frac{n(n+1)}{2}",
+"n²/2":"\\frac{n^2}{2}",
+"n(n−1)/2":"\\frac{n(n-1)}{2}",
+"(n+1)²/2":"\\frac{(n+1)^2}{2}",
+"k(k+1)/2":"\\frac{k(k+1)}{2}",
+"(k+1)(k+2)/2":"\\frac{(k+1)(k+2)}{2}",
+"n(n+1)(2n+1)/6":"\\frac{n(n+1)(2n+1)}{6}",
+"[n(n+1)/2]²":"\\left[\\frac{n(n+1)}{2}\\right]^2"
+};
+let t=map[key]||key;
 t=t.replace(/−/g,"-").replace(/⋯/g,"\\cdots").replace(/²/g,"^2").replace(/³/g,"^3");
-t=t.split("[n(n+1)/2]²").join("\\left[\\frac{n(n+1)}{2}\\right]^2");
-t=t.split("[k(k+1)/2]²").join("\\left[\\frac{k(k+1)}{2}\\right]^2");
-t=t.split("n(n+1)(2n+1)/6").join("\\frac{n(n+1)(2n+1)}{6}");
-t=t.split("k(k+1)/2").join("\\frac{k(k+1)}{2}");
-t=t.split("(k+1)(k+2)/2").join("\\frac{(k+1)(k+2)}{2}");
-t=t.split("n(n+1)/2").join("\\frac{n(n+1)}{2}");
-t=t.split("n(n−1)/2").join("\\frac{n(n-1)}{2}");
-t=t.split("n(n-1)/2").join("\\frac{n(n-1)}{2}");
-t=t.split("n(n+1)(2n+1)/6").join("\\frac{n(n+1)(2n+1)}{6}");
 return "\\("+t+"\\)";
 }
 function render(){

@@ -124,12 +124,12 @@ window.SkillUpSubtractionFormulaeQuestions=[
   {
     "q": "If \\(A>B\\), which expression equals \\(\\cos(A-B)\\)?",
     "o": [
-      "\\cos A\\cos B+\\sin A\\sin B",
-      "\\sin A\\cos B-\\cos A\\sin B",
       "\\cos A\\cos B-\\sin A\\sin B",
+      "\\sin A\\cos B-\\cos A\\sin B",
+      "\\cos A\\cos B+\\sin A\\sin B",
       "\\sin A\\sin B+\\cos A\\cos B"
     ],
-    "a": 0,
+    "a": 2,
     "e": "Cosine of a difference uses a plus sign between the product terms."
   },
   {
@@ -159,10 +159,10 @@ window.SkillUpSubtractionFormulaeQuestions=[
     "o": [
       "\\sin B",
       "-\\cos B",
-      "\\cos B",
-      "-\\sin B"
+      "-\\sin B",
+      "\\cos B"
     ],
-    "a": 2,
+    "a": 3,
     "e": "The cofunction identity gives \\(\\sin(90^\\circ-B)=\\cos B\\)."
   },
   {

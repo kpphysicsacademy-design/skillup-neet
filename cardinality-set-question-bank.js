@@ -14,7 +14,7 @@ window.SkillUpCardinalitySetQuestions = [
 {q:'If A and B are disjoint finite sets, then |A∪B|=',o:['|A|−|B|','|A|+|B|','|A||B|','|A|/|B|'],a:1,e:'For disjoint sets, no element is counted twice.'},
 {q:'If |A|=5, |B|=3 and A∩B=∅, then |A∪B|=',o:['2','5','8','15'],a:2,e:'5+3=8.'},
 {q:'If |A|=5, |B|=4 and |A∩B|=2, then |A∪B|=',o:['7','9','11','20'],a:0,e:'|A∪B|=|A|+|B|−|A∩B|=5+4−2=7.'},
-{q:'If |A∪B|=10, |A|=6 and |B|=7, then |A∩B|=',o:['1','2','3','4'],a:1,e:'|A∩B|=6+7−10=3. Correction: the correct option is 3.'},
+{q:'If |A∪B|=10, |A|=6 and |B|=7, then |A∩B|=',o:['1','2','3','4'],a:2,e:'|A∩B|=6+7−10=3.'},
 {q:'The number of elements in {x∈N:x<6} is:',o:['5','6','7','4'],a:0,e:'The set is {1,2,3,4,5}, so it has 5 elements.'},
 {q:'The cardinality of {x∈Z:-2≤x≤2} is:',o:['4','5','6','3'],a:1,e:'The elements are -2,-1,0,1,2.'},
 {q:'The cardinality of {a,e,i,o,u} is:',o:['4','5','6','26'],a:1,e:'There are five vowels in this set.'},

@@ -12,7 +12,7 @@
 {level:"Developing",q:"If \\(\\tan A=2\\), then \\(\\tan2A\\) equals:",o:["\\(\\frac43\\)","\\(-\\frac45\\)","\\(-\\frac43\\)","\\(\\frac45\\)"],a:2,e:"\\(\\tan2A=4/(1-4)=-4/3\\)."},
 {level:"Developing",q:"The identity \\(1-\\cos2A\\) is equal to:",o:["\\(2\\cos^2A\\)","\\(\\sin^2A\\)","\\(1-2\\sin^2A\\)","\\(2\\sin^2A\\)"],a:3,e:"Since \\(\\cos2A=1-2\\sin^2A\\), we get \\(1-\\cos2A=2\\sin^2A\\)."},
 {level:"Developing",q:"The identity \\(1+\\cos2A\\) is equal to:",o:["\\(2\\cos^2A\\)","\\(\\cos^2A\\)","\\(2\\sin^2A\\)","\\(1+2\\cos^2A\\)"],a:0,e:"From \\(\\cos2A=2\\cos^2A-1\\), \\(1+\\cos2A=2\\cos^2A\\)."},
-{level:"Developing",q:"The identity \\(\\sin2A\\) in terms of \\(\\tan A\\) is:",o:["\\(\\frac{2\\tan A}{1-\\tan^2A}\\)","\\(\\frac{2\\tan A}{1+\\tan^2A}\\)","\\(\\frac{\\tan A}{1+\\tan^2A}\\)","\\(\\frac{1-\\tan^2A}{2\\tan A}\\)"],a:1,e:"Divide \\(2\\sin A\\cos A\\) by \\(\\cos^2A\\): \\(\\sin2A=2\\tan A/(1+\\tan^2A)\\)."},
+{level:"Developing",q:"The identity \\(\\sin2A\\) in terms of \\(\\tan A\\) is:",o:["\\(\\frac{2\\tan A}{1-\\tan^2A}\\)","\\(\\frac{\\tan A}{1+\\tan^2A}\\)","\\(\\frac{1-\\tan^2A}{2\\tan A}\\)","\\(\\frac{2\\tan A}{1+\\tan^2A}\\)"],a:3,e:"Divide \\(2\\sin A\\cos A\\) by \\(\\cos^2A\\): \\(\\sin2A=2\\tan A/(1+\\tan^2A)\\)."},
 {level:"Developing",q:"If \\(\\sin A+\\cos A=\\sqrt2\\), then \\(\\sin2A\\) is:",o:["\\(0\\)","\\(\\frac12\\)","\\(1\\)","\\(\\sqrt2\\)"],a:2,e:"Squaring gives \\(1+\\sin2A=2\\), so \\(\\sin2A=1\\)."},
 
 {level:"Intermediate",q:"If \\(\\sin A\\cos A=\\frac14\\), then \\(\\sin2A\\) equals:",o:["\\(\\frac14\\)","\\(1\\)","\\(\\frac12\\)","\\(\\frac18\\)"],a:2,e:"\\(\\sin2A=2\\sin A\\cos A=1/2\\)."},

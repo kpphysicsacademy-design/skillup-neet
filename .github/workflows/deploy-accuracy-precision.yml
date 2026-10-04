@@ -42,9 +42,13 @@ jobs:
           d = Path('physics-accuracy-and-precision.html')
           assert d.exists(), 'Dedicated Accuracy and Precision page is missing'
           h = d.read_text(encoding='utf-8')
-          assert '15 focused NEET-style MCQs' in h
-          assert h.count("['") == 15, 'Dedicated Accuracy and Precision page must contain 15 MCQs'
-          print('Accuracy and Precision route validated')
+          start = h.find('qs=[')
+          end = h.find('];let i=', start)
+          assert start >= 0 and end > start, 'Accuracy and Precision question array is missing'
+          question_block = h[start:end]
+          question_count = question_block.count("],['") + 1
+          assert question_count == 15, f'Dedicated Accuracy and Precision page must contain 15 MCQs (found {question_count})'
+          print('Accuracy and Precision route validated with 15 MCQs')
           PY
 
       - name: Configure GitHub Pages

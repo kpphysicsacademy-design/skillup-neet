@@ -102,7 +102,7 @@ window.SkillUpNeedForMathematicalInductionQuestions=[
     "o": [
       "\\(n=1\\)",
       "n=−1",
-      "n=π",
+      "\\(n=π\\)",
       "\\(n=1\\)/2"
     ],
     "a": 0,

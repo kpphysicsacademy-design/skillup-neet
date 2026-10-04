@@ -5,7 +5,7 @@ window.SkillUpPracticalSetProblemsQuestions=[
 {level:"Basic",q:"If 30 students like tea, 25 like coffee and 10 like both, how many like tea or coffee?",o:["45","55","65","35"],a:0,e:"30+25−10=45."},
 {level:"Basic",q:"If n(A)=24, n(B)=18 and n(A∩B)=7, find n(A∪B).",o:["35","42","49","31"],a:0,e:"24+18−7=35."},
 {level:"Basic",q:"If n(A∪B)=40, n(A)=25 and n(B)=22, find n(A∩B).",o:["5","7","10","12"],a:1,e:"25+22−40=7."},
-{level:"Basic",q:"A survey of 50 students finds 28 like Biology, 20 like Chemistry and 8 like both. How many like neither?",o:["10","12","14","18"],a:1,e:"Union=28+20−8=40; neither=50−40=10. The correct option is A."},
+{level:"Basic",q:"A survey of 50 students finds 28 like Biology, 20 like Chemistry and 8 like both. How many like neither?",o:["10","12","14","18"],a:1,e:"Union=28+20−8=40; neither=50−40=10. The correct option is B."},
 {level:"Basic",q:"A set of 40 people has 22 who use app A, 18 who use app B, and 6 who use both. How many use only A?",o:["16","22","28","10"],a:0,e:"Only A=22−6=16."},
 {level:"Basic",q:"Using n(B)=18 and n(A∩B)=6, how many use only B?",o:["6","12","16","18"],a:1,e:"Only B=18−6=12."},
 {level:"Basic",q:"If 60 people were surveyed and 45 belong to A∪B, how many belong to neither A nor B?",o:["10","15","20","25"],a:1,e:"Neither=60−45=15."},

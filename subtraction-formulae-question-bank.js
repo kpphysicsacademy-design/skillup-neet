@@ -25,23 +25,23 @@ window.SkillUpSubtractionFormulaeQuestions=[
   {
     "q": "Which is the tangent subtraction formula?",
     "o": [
-      "\\(\\tan(A-B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}\\)",
       "\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1+\\tan A\\tan B}\\)",
+      "\\(\\tan(A-B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}\\)",
       "\\(\\tan(A-B)=\\frac{\\tan A-\\tan B}{1-\\tan A\\tan B}\\)",
       "\\(\\tan(A-B)=\\tan A-\\tan B\\)"
     ],
-    "a": 1,
+    "a": 0,
     "e": "The tangent difference formula has denominator \\(1+\\tan A\\tan B\\)."
   },
   {
     "q": "\\(\\sin(60^\\circ-30^\\circ)\\) equals",
     "o": [
-      "\\(0\\)",
       "\\frac12",
+      "\\(0\\)",
       "\\frac{\\sqrt3}{2}",
       "\\(1\\)"
     ],
-    "a": 1,
+    "a": 0,
     "e": "The difference is 30°, so sine is \\(1/2\\)."
   },
   {
@@ -59,11 +59,11 @@ window.SkillUpSubtractionFormulaeQuestions=[
     "q": "\\(\\tan(60^\\circ-30^\\circ)\\) equals",
     "o": [
       "\\sqrt3",
-      "\\frac{1}{\\sqrt3}",
       "\\(0\\)",
+      "\\frac{1}{\\sqrt3}",
       "\\(1\\)"
     ],
-    "a": 1,
+    "a": 2,
     "e": "The difference is 30°, and \\(\\tan30^\\circ=1/\\sqrt3\\)."
   },
   {

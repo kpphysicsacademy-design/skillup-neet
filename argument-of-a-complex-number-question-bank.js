@@ -30,9 +30,9 @@ window.SkillUpArgumentOfAComplexNumberQuestions=[
 
 {level:"Advanced",q:"If arg z=5π/6, then the principal argument of z³ is:",o:["5π/2","π/2","−π/2","3π/2"],a:1,e:"3(5π/6)=5π/2. Subtract 2π to obtain π/2."},
 {level:"Advanced",q:"If arg z=−3π/4, then the principal argument of z⁴ is:",o:["−3π","π","0","3π/2"],a:2,e:"4(−3π/4)=−3π, which is congruent to π modulo 2π, not 0."},
-{level:"Advanced",q:"If arg z₁=2π/3 and arg z₂=−3π/4, the principal argument of z₁/z₂ is:",o:["−π/12","π/12","17π/12","−17π/12"],a:0,e:"arg(z₁/z₂)=2π/3−(−3π/4)=17π/12. Subtract 2π to get −7π/12, so the correct principal value is actually −7π/12; therefore none of the listed options is correct."},
+{level:"Advanced",q:"If arg z₁=2π/3 and arg z₂=−3π/4, the principal argument of z₁/z₂ is:",o:["−7π/12","−π/12","7π/12","17π/12"],a:0,e:"arg(z₁/z₂)=2π/3−(−3π/4)=17π/12. Subtract 2π to obtain the principal value −7π/12."},
 
-{level:"Master",q:"Let arg z=7π/8. What is the principal argument of z⁵?",o:["35π/8","3π/8","−5π/8","−13π/8"],a:2,e:"5(7π/8)=35π/8. Subtract 4π=32π/8 to get 3π/8, so the correct option is B, not C."},
+{level:"Master",q:"Let arg z=7π/8. What is the principal argument of z⁵?",o:["35π/8","3π/8","−5π/8","−13π/8"],a:1,e:"5(7π/8)=35π/8. Subtract 4π=32π/8 to get the principal value 3π/8."},
 {level:"Master",q:"If arg z=−5π/6, what is the principal argument of z⁷?",o:["π/6","−π/6","7π/6","−7π/6"],a:0,e:"7(−5π/6)=−35π/6. Adding 6π=36π/6 gives π/6."}
 ];
 })();

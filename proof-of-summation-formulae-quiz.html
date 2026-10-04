@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<title>SkillUp | Proof of Summation Formulae</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<style>
+body{margin:0;background:#f5f9ff;color:#17324d;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:900px;margin:auto;padding:18px 14px 50px}.hero,.card{background:#fff;border:2px solid #d9e7f5;border-radius:20px;padding:18px;margin-bottom:15px;box-shadow:0 7px 18px rgba(18,59,112,.07)}
+h1{margin:0 0 5px;font-size:26px}.muted{color:#718096;font-size:12px}.bar{height:10px;background:#e6eef6;border-radius:99px;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;width:0;background:#58cc02}.q{font-size:18px;font-weight:850;line-height:1.5}.opts{display:grid;gap:9px;margin-top:14px}.opt{border:2px solid #cbdbea;border-radius:14px;background:#fff;padding:12px;text-align:left;font-size:15px;cursor:pointer}.opt:hover{border-color:#58cc02}.opt.correct{background:#efffe5;border-color:#58cc02}.opt.wrong{background:#fff0f0;border-color:#ff4b4b}.feedback{margin-top:10px;padding:11px;border-radius:12px;background:#f3f8fd;font-size:13px;line-height:1.45}.next,.restart{width:100%;margin-top:13px;border:0;border-radius:14px;padding:13px;background:#58cc02;color:#fff;font-weight:900;cursor:pointer}.result{text-align:center}.score{font-size:48px;font-weight:950;color:#1f7aff}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="muted">MATHEMATICS • PRINCIPLE OF MATHEMATICAL INDUCTION</div>
+<h1>Proof of Summation Formulae</h1>
+<div class="muted">30-question practice quiz • Select one answer for each question.</div>
+<div class="bar"><i id="bar"></i></div>
+</section>
+<section id="app"></section>
+</main>
+<script>
+(async function(){
+"use strict";
+if(window.SkillUpAuth) await window.SkillUpAuth.requireAuth(location.href);
+const qs=[
+{q:"Using mathematical induction, which is the first step when proving a formula for all n≥1?",o:["Verify the formula for n=1","Assume the formula for n=1 and n=2","Differentiate both sides","Set n=0"],a:0,e:"The base case verifies the statement at the first permitted value, here n=1."},
+{q:"The standard formula for 1+2+⋯+n is:",o:["n(n+1)/2","n²/2","n(n−1)/2","(n+1)²/2"],a:0,e:"The sum of the first n natural numbers is n(n+1)/2."},
+{q:"For proving 1+2+⋯+n = n(n+1)/2 by induction, the inductive hypothesis assumes the formula for:",o:["n−1","n","n+1","2n"],a:1,e:"The induction hypothesis assumes the statement is true for an arbitrary positive integer n."},
+{q:"After assuming 1+2+⋯+k = k(k+1)/2, what expression must be proved?",o:["1+2+⋯+k+1 = (k+1)(k+2)/2","1+2+⋯+k = (k+1)(k+2)/2","1+2+⋯+k+1 = k(k+1)/2","1+2+⋯+k = k(k+2)/2"],a:0,e:"The next case replaces n by k+1, giving (k+1)(k+2)/2."},
+{q:"The sum 1+3+5+⋯+(2n−1) equals:",o:["n²","n(n+1)","2n²","n(n−1)"],a:0,e:"The first n odd positive integers have sum n²."},
+{q:"The sum 2+4+6+⋯+2n equals:",o:["n²","n(n+1)","2n²","n(n−1)"],a:1,e:"Factor 2: 2(1+2+⋯+n)=2·n(n+1)/2=n(n+1)."},
+{q:"The sum 1²+2²+⋯+n² is:",o:["n(n+1)/2","n(n+1)(2n+1)/6","n²(n+1)²/4","n(n−1)(2n−1)/6"],a:1,e:"The standard square-sum formula is n(n+1)(2n+1)/6."},
+{q:"The sum 1³+2³+⋯+n³ is:",o:["n(n+1)(2n+1)/6","[n(n+1)/2]²","n²(n+1)","n(n−1)²"],a:1,e:"The sum of cubes equals the square of the sum of the first n natural numbers."},
+{q:"For 1+2+⋯+n = n(n+1)/2, the inductive step starts from:",o:["1+2+⋯+k = k(k+1)/2","1+2+⋯+k+1 = (k+1)(k+2)/2","1+2+⋯+n = n²","1+2+⋯+k = k²"],a:0,e:"The inductive hypothesis is the statement assumed true for k."},
+{q:"If S_k = k(k+1)/2, then S_{k+1} can be written as:",o:["S_k+k+1","S_k+k","S_k+2k+1","S_k−k−1"],a:0,e:"The next partial sum adds the next term k+1."},
+{q:"If S_k=k(k+1)/2, then S_{k+1}=:",o:["k(k+1)/2+k+1","k(k+2)/2","(k+1)(k+2)/2","k(k+1)/2−(k+1)"],a:2,e:"Adding k+1 gives [k(k+1)+2(k+1)]/2=(k+1)(k+2)/2."},
+{q:"Which equality completes the inductive step for the first-n-natural-numbers sum?",o:["k(k+1)/2+k+1=(k+1)(k+2)/2","k(k+1)/2+k=(k+1)(k+2)/2","k(k+1)/2=(k+1)(k+2)/2","k(k+1)/2−k−1=(k+1)(k+2)/2"],a:0,e:"Factoring k+1 from the numerator produces the required next-case formula."},
+{q:"For the odd-number sum, if 1+3+⋯+(2k−1)=k², the next term is:",o:["2k−1","2k","2k+1","2k+2"],a:2,e:"Replacing n by k+1 gives the next odd term 2(k+1)−1=2k+1."},
+{q:"Using the odd-number induction hypothesis, the next sum becomes:",o:["k²+2k+1","k²+2k","k²+1","k²−2k+1"],a:0,e:"Adding 2k+1 to k² gives (k+1)²."},
+{q:"Which identity is central to proving 1+3+⋯+(2n−1)=n²?",o:["k²+2k+1=(k+1)²","k²+k=(k+1)²","2k+1=(k+1)²","k²−1=(k+1)²"],a:0,e:"The inductive step reduces exactly to the expansion of (k+1)²."},
+{q:"For the square-sum formula, after assuming the result for k, the next sum is:",o:["S_k+(k+1)²","S_k+k²","S_k+(2k+1)","S_k+(k+1)"],a:0,e:"The next square added to the first k squares is (k+1)²."},
+{q:"A summation formula is proved by induction only if the base case and what else are established?",o:["The inductive step","A graph","A derivative","A numerical approximation"],a:0,e:"The inductive step establishes that truth at k implies truth at k+1."},
+{q:"In an induction proof, k is usually taken as:",o:["A fixed number only","An arbitrary integer in the allowed domain","Always zero","Always one"],a:1,e:"The inductive hypothesis must hold for an arbitrary k in the permitted set."},
+{q:"If a formula is claimed for all n≥1 and the base case n=1 fails, the induction proof:",o:["Still works if n=2 works","Is invalid","Can skip the base case","Proves only even n"],a:1,e:"A false base case means the chain of induction cannot begin."},
+{q:"For Σ_{r=1}^n r, the next case after n=k is:",o:["Σ_{r=1}^{k−1}r","Σ_{r=1}^{k+1}r","Σ_{r=1}^{2k}r","Σ_{r=0}^{k}r"],a:1,e:"The next natural index is k+1."},
+{q:"The notation Σ_{r=1}^n r represents:",o:["1+2+⋯+n","0+1+⋯+n−1","n terms all equal to n","1×2×⋯×n"],a:0,e:"Sigma notation here means the sum of r from 1 through n."},
+{q:"For Σ_{r=1}^n r², the induction step adds:",o:["k+1","(k+1)²","2k+1","k²−1"],a:1,e:"The next term of the square sum is (k+1)²."},
+{q:"The denominator in the formula Σ_{r=1}^n r² is:",o:["2","3","6","12"],a:2,e:"The square-sum formula has denominator 6."},
+{q:"The factor 2n+1 in the square-sum formula becomes what in the next case?",o:["2k+1","2k+2","2k+3","k+1"],a:2,e:"For n=k+1, 2n+1=2(k+1)+1=2k+3."},
+{q:"The formula Σ_{r=1}^n r³=[n(n+1)/2]² can be proved by induction because the next case adds:",o:["(k+1)","(k+1)²","(k+1)³","2(k+1)"],a:2,e:"The next term in a sum of cubes is (k+1)³."},
+{q:"If S_k=[k(k+1)/2]², then S_{k+1} is:",o:["S_k+(k+1)³","S_k+(k+1)²","S_k+k³","S_k+2k+1"],a:0,e:"The next cube added is (k+1)³."},
+{q:"A correct inductive step must show:",o:["P(k) is false","P(k+1) follows from P(k)","P(k) follows from P(k+1) only","Only P(1)"],a:1,e:"The implication P(k) ⇒ P(k+1) is the core of the inductive step."},
+{q:"Which statement best describes why the inductive step proves every later case?",o:["It creates a chain from the verified base case to successive integers","It tests only one numerical example","It replaces algebra with approximation","It proves only the largest value"],a:0,e:"Base case plus the implication P(k)⇒P(k+1) propagates truth through all later integers."},
+{q:"To prove Σ_{r=1}^n r = n(n+1)/2 for n≥1, the base case gives:",o:["1=1(2)/2","1=1(1)/2","2=1(2)/2","1=2(3)/2"],a:0,e:"At n=1, both sides equal 1."},
+{q:"For n=5, the first-n-natural-numbers formula gives:",o:["10","15","20","25"],a:1,e:"5(6)/2=15."}
+];
+let i=0,score=0,answered=false;
+const app=document.getElementById("app"),bar=document.getElementById("bar");
+function render(){
+ answered=false;bar.style.width=(i/qs.length*100)+"%";
+ const x=qs[i];app.innerHTML='<section class="card"><div class="muted">Question '+(i+1)+' of '+qs.length+'</div><div class="q">'+x.q+'</div><div class="opts">'+x.o.map((v,j)=>'<button class="opt" data-i="'+j+'">'+String.fromCharCode(65+j)+'. '+v+'</button>').join('')+'</div><div id="fb"></div><button class="next" id="next" style="display:none">'+(i===qs.length-1?'Finish Quiz':'Next Question')+'</button></section>';
+ if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([app]);
+ app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>choose(+b.dataset.i));
+ document.getElementById("next").onclick=()=>{i++;i<qs.length?render():finish();};
+}
+function choose(n){
+ if(answered)return;answered=true;
+ const x=qs[i], buttons=[...app.querySelectorAll(".opt")];buttons.forEach(b=>b.disabled=true);
+ buttons[x.a].classList.add("correct");if(n!==x.a)buttons[n].classList.add("wrong");else score++;
+ document.getElementById("fb").innerHTML='<div class="feedback">'+x.e+'</div>';
+ document.getElementById("next").style.display="block";
+}
+async function finish(){
+ bar.style.width="100%";const pct=Math.round(score/qs.length*100);
+ app.innerHTML='<section class="card result"><div class="muted">QUIZ COMPLETE</div><div class="score">'+score+'/'+qs.length+'</div><h2>'+pct+'%</h2><p>Proof of Summation Formulae</p><button class="restart" id="restart" style="display:block">Retry Quiz</button><a href="maths-path-concept.html?concept=Proof%20of%20summation%20formulae" style="display:block;margin-top:12px">Back to Mathematics Path</a></section>';
+ if(window.SkillUpAuth){try{await window.SkillUpAuth.saveProgress({subject:"Mathematics",topic:"Proof of Summation Formulae",score:score,percentage:pct,total:qs.length,completed_at:new Date().toISOString(),practice_count:1});}catch(e){console.warn("Progress save failed",e);}}
+ document.getElementById("restart").onclick=()=>{i=0;score=0;render();};
+}
+render();
+})();
+</script>
+</body>
+</html>

@@ -29,7 +29,7 @@ window.SkillUpFunctionsAsMappingsQuestions=[
 {level:"Intermediate",q:"A function f:{1,2,3,4}→{a,b,c} is defined by 1→a, 2→b, 3→c, 4→a. Which is true?",o:["One-one only","Onto but not one-one","Neither","One-one and onto"],a:1,e:"All a,b,c are used, so it is onto; 1 and 4 share a, so it is not one-one."},
 
 {level:"Advanced",q:"How many one-one mappings are possible from a 3-element set A to a 5-element set B?",o:["15","30","60","125"],a:2,e:"Choose distinct images: 5×4×3=60."},
-{level:"Advanced",q:"How many onto mappings are possible from a 4-element set to a 2-element set?",o:["8","10","12","16"],a:1,e:"Total functions 2⁴=16; subtract two constant functions: 14. Thus none of the listed options is correct."},
+{level:"Advanced",q:"How many onto mappings are possible from a 4-element set to a 2-element set?",o:["8","14","12","16"],a:1,e:"Total functions are 2⁴=16. Subtract the two constant functions, giving 16−2=14 onto mappings."},
 {level:"Advanced",q:"How many functions from a 3-element set to a 3-element set are both one-one and onto?",o:["3","6","9","27"],a:1,e:"Such functions are permutations, so 3!=6."},
 
 {level:"Master",q:"How many one-one mappings are possible from a 4-element set to a 6-element set?",o:["120","180","240","360"],a:3,e:"6×5×4×3=360."},

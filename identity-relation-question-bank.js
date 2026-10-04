@@ -27,7 +27,7 @@ window.SkillUpIdentityRelationQuestions=[
 {level:"Intermediate",q:"If S is any relation on A, then S∘I_A is:",o:["S","∅","I_A","A×A"],a:0,e:"Identity is the neutral element for relation composition: S∘I_A=S."},
 {level:"Intermediate",q:"Which relation on A represents equality of elements?",o:["Universal relation","Empty relation","Identity relation","Inverse relation"],a:2,e:"a I_A b exactly when a=b."},
 {level:"Advanced",q:"How many identity relations can be defined on a fixed set A?",o:["0","1","2","2^|A|"],a:1,e:"A fixed set has exactly one identity relation."},
-{level:"Advanced",q:"If A has 5 elements, what fraction of the pairs in A×A belong to I_A?",o:["1/5","1/10","1/25","5/25"],a:2,e:"I_A has 5 pairs and A×A has 25, so the fraction is 5/25=1/5. The correct option should be 1/5."},
+{level:"Advanced",q:"If A has 5 elements, what fraction of the pairs in A×A belong to I_A?",o:["1/5","1/10","1/25","5/25"],a:0,e:"I_A has 5 pairs and A×A has 25, so the fraction is 5/25=1/5. The correct option should be 1/5."},
 {level:"Advanced",q:"For a relation R on A, R=I_A exactly when:",o:["Every pair is present","Only pairs (a,a) are present for all a∈A","No pair is present","A has one element only"],a:1,e:"Identity contains all and only diagonal pairs."},
 {level:"Master",q:"If |A|=6, how many ordered pairs in A×A are outside the identity relation?",o:["6","12","30","36"],a:2,e:"A×A has 36 pairs and I_A has 6, so 36−6=30."},
 {level:"Master",q:"Let R be the identity relation on A. If (x,y)∈R and (y,z)∈R, then:",o:["x≠z","x=z=y","x=z but y differs","No conclusion"],a:1,e:"xRy implies x=y and yRz implies y=z; therefore x=y=z."}

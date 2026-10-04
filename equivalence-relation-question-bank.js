@@ -28,7 +28,7 @@ window.SkillUpEquivalenceRelationQuestions=[
 {level:"Intermediate",q:"On A={1,2,3,4,5,6}, under congruence modulo 3, [2] is:",o:["{1,4}","{2,5}","{3,6}","{2,3,5,6}"],a:1,e:"Elements congruent to 2 modulo 3 are 2 and 5."},
 {level:"Intermediate",q:"If an equivalence relation on a finite set has 4 equivalence classes, can one element belong to two different classes?",o:["Yes, always","No","Only if classes are equal","Only for infinite sets"],a:1,e:"Distinct equivalence classes are disjoint."},
 
-{level:"Advanced",q:"How many equivalence relations are there on a 3-element set?",o:["3","4","5","6"],a:1,e:"Equivalence relations correspond to partitions; a 3-element set has 5 partitions."},
+{level:"Advanced",q:"How many equivalence relations are there on a 3-element set?",o:["3","4","5","6"],a:2,e:"Equivalence relations correspond to partitions; a 3-element set has 5 partitions."},
 {level:"Advanced",q:"On A={1,2,3,4}, let R have equivalence classes {1,2} and {3,4}. How many ordered pairs belong to R?",o:["4","6","8","10"],a:2,e:"Each class of size 2 contributes 2²=4 ordered pairs, total 8."},
 {level:"Advanced",q:"An equivalence relation on a 5-element set has classes of sizes 2 and 3. How many ordered pairs belong to the relation?",o:["10","13","14","15"],a:1,e:"A class of size m contributes m² pairs: 2²+3²=4+9=13."},
 

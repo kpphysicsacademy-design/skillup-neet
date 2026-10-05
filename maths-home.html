@@ -29,24 +29,13 @@ function render(list){
   const xs=document.getElementById('xpStat'); if(xs) xs.textContent=xp+' XP';
   let h='',lastLevel=0,lastChapter='';list.forEach(function(x){if(x.level!==lastLevel){h+='<div class="unit"><div class="unit-main"><span class="unum">'+x.level+'</span><div><h2>'+esc(x.levelName)+'</h2><small>IIT-JEE Mathematics • '+data[x.level-1][2].length+' chapters</small></div></div></div>';lastLevel=x.level;lastChapter=''}if(x.chapter!==lastChapter){h+='<div class="chapter-heading">'+esc(x.chapter)+'</div>';lastChapter=x.chapter}h+='<article class="chapter"><span class="node"></span><a href="/maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261005"><div><div class="title"><span class="icon">'+x.icon+'</span><span>'+esc(x.concept)+'</span></div><div class="sub">Concept '+x.index+' • '+esc(x.chapter)+'</div><span class="tag">🎯 CONCEPT '+x.index+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span><span class="tag" data-completed="'+esc(x.concept)+'">○ NOT STARTED</span></div><span class="go">›</span></a></article>'});path.innerHTML=h;empty.style.display=list.length?'none':'block';
 
-  // Progressive Duolingo-style unlocking: first concept is open; each
-  // following concept unlocks after the previous concept is completed.
+  // All Mathematics concepts are unlocked.
+  // Progress and mastery are tracked independently of access. 
   const cards=path.querySelectorAll('.chapter');
-  cards.forEach(function(card,i){
-    const current=list[i];
-    if(current && current.index===1) return;
-    if(!current) return;
-    const previous=all[current.index-2];
-    const previousRow=progress[String(previous && previous.concept||'')];
-    if(!previousRow || !previousRow.completed){
-      card.setAttribute('data-locked','true');
-      const a=card.querySelector('a');
-      if(a){
-        a.addEventListener('click',function(e){e.preventDefault();});
-      }
-      const go=card.querySelector('.go');
-      if(go) go.textContent='🔒';
-    }
+  cards.forEach(function(card){
+    card.removeAttribute('data-locked');
+    const go=card.querySelector('.go');
+    if(go) go.textContent='›';
   });
 
 if(window.SKILLUP_MATHS_PROGRESS){

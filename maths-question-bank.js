@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Equivalence classes":[
+["For an equivalence relation R on A, the equivalence class of a∈A is:",["[a]={x∈A:xRa}","[a]={x∈A:x<a}","[a]={x∈A:a<x}","[a]={a only}"],0,"The class [a] contains exactly the elements related to a."],
+["If aRb under an equivalence relation, then [a] and [b] are:",["Equal","Always disjoint","Both empty","Unrelated"],0,"Related elements belong to the same equivalence class."],
+["Two equivalence classes of the same equivalence relation are:",["Either identical or disjoint","Always identical","Always disjoint even when equal","Always overlapping without equality"],0,"Equivalence classes form a partition, so two classes are equal or disjoint."],
+["The equivalence classes of an equivalence relation on A form a:",["Partition of A","Power set of A","Single equivalence class only","Subset excluding related elements"],0,"The classes are nonempty, pairwise disjoint blocks whose union is A."],
+["If A={1,2,3} and a relation has classes {1,2} and {3}, then which elements are equivalent?",["1 and 2","1 and 3","2 and 3","None"],0,"Elements in the same equivalence class are equivalent."],
+["For congruence modulo 3 on integers, the equivalence class of 1 is:",["{…,−5,−2,1,4,7,…}","{…,−4,−1,2,5,8,…}","{…,−3,0,3,6,…}","{1,2,3}"],0,"The class of 1 contains all integers congruent to 1 modulo 3."],
+["If [a]=[b] for an equivalence relation, then:",["aRb","a is never related to b","a=b necessarily","[a] is empty"],0,"Equality of equivalence classes implies that a and b are related."],
+["If a∈A, then a belongs to:",["Its own equivalence class [a]","No equivalence class","Every equivalence class","Only the empty class"],0,"Reflexivity gives aRa, so a∈[a]."],
+["Which collection is a valid partition of {1,2,3,4}?",["{{1,2},{3,4}}","{{1,2},{2,3},{4}}","{{1},{1,2},{3,4}}","{{1,2,3,4},{4}}"],0,"A partition consists of nonempty pairwise disjoint subsets whose union is the set."],
+["If an equivalence relation has exactly three equivalence classes, each element of the underlying set belongs to:",["Exactly one class","Exactly two classes","All three classes","No class"],0,"Equivalence classes partition the set, so every element lies in exactly one class."]
+],
+
 "Equivalence relation":[
 ["A relation R on a set A is an equivalence relation if it is:",["Reflexive, symmetric and transitive","Reflexive and antisymmetric only","Symmetric and antisymmetric only","Transitive only"],0,"An equivalence relation must satisfy reflexivity, symmetry and transitivity."],
 ["Which condition must hold for every a∈A in an equivalence relation R?",["aRa","aRa is false","aRb for every b","aR a only when a is distinct"],0,"Reflexivity requires aRa for every element a of A."],

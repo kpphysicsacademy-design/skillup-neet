@@ -954,4 +954,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which statement is true?",["Every bijection is invertible","Every constant function is bijective","Every onto function is one-to-one","Every one-to-one function is onto its codomain"],0,"A bijection has a well-defined inverse function."],
 ["The inverse of a bijection f:A→B has type:",["A→B","B→A","A→A only","R→R only"],1,"The inverse reverses domain and codomain."]
 ]
+,"Limits":[
+["What does lim_{x→2} x represent?",["The value of x at 2 only","The value approached by x as x approaches 2","The derivative at 2","The integral at 2"],1,"A limit describes the value a function approaches as the input approaches a point."],
+["What is lim_{x→3}(x+2)?",["3","4","5","6"],2,"For a continuous linear function, substitute x=3: 3+2=5."],
+["What is lim_{x→1} x²?",["0","1","2","3"],1,"Substitution gives 1²=1."],
+["What is lim_{x→0} (x+5)?",["0","1","5","Undefined"],2,"Substitution gives 0+5=5."],
+["If lim_{x→a} f(x)=L, then f(x) approaches:",["a","L","0","∞"],1,"L is the limiting value of f(x) as x approaches a."],
+["A limit can exist even if f(a) is:",["Undefined","Both always","Negative only","Infinite only"],0,"The limit concerns nearby values and can exist even when the function is undefined at the point."],
+["What is lim_{x→2}(3x−1)?",["3","5","6","7"],1,"Substitution gives 3(2)−1=5."],
+["What is lim_{x→−1}(x²+2)?",["1","2","3","4"],2,"Substitution gives (−1)²+2=3."],
+["If the left- and right-hand limits at a point are equal, the two-sided limit:",["Exists","Never exists","Must be zero","Must be infinite"],0,"Equality of the one-sided limits gives the two-sided limit."],
+["Limits are fundamentally about function behavior:",["Near a point","Only at infinity","Only at integers","Only at zero"],0,"A limit studies values arbitrarily close to the point of approach."]
+],
+"Left-hand limit":[
+["The left-hand limit x→a− approaches a from:",["Values greater than a","Values less than a","Only a itself","Infinity only"],1,"The minus sign indicates approach from values smaller than a."],
+["What does lim_{x→2−} f(x) mean?",["Approach 2 from the right","Approach 2 from the left","Set x=2 only","Differentiate at 2"],1,"The left-hand limit uses x-values less than 2 approaching 2."],
+["For f(x)=x+1, lim_{x→3−}f(x) is:",["2","3","4","5"],2,"The linear function is continuous, so the left-hand limit is 3+1=4."],
+["For f(x)=x², lim_{x→0−}f(x) is:",["−1","0","1","Undefined"],1,"As x approaches 0 from the left, x² approaches 0."],
+["If lim_{x→a−}f(x)=5, then f(x) approaches 5 when x approaches a from:",["Left","Right","Neither side","Exactly a"],0,"That is the definition of the left-hand limit."],
+["For a function to have a two-sided limit at a, its left-hand limit must:",["Equal the right-hand limit","Be zero","Be infinite","Be undefined"],0,"Both one-sided limits must agree."],
+["For the step function f(x)=0 for x<0 and 1 for x≥0, lim_{x→0−}f(x) is:",["0","1","1/2","Undefined"],0,"From the left, x<0, so f(x)=0."],
+["If lim_{x→a−}f(x)=3 and lim_{x→a+}f(x)=5, the two-sided limit is:",["3","5","4","Does not exist"],3,"The one-sided limits are unequal, so the two-sided limit does not exist."],
+["The notation a− indicates approach from:",["Smaller x-values","Larger x-values","Negative outputs","Negative function values"],0,"The input approaches a through values below a."],
+["For f(x)=|x|, lim_{x→0−}f(x) is:",["−1","0","1","Does not exist"],1,"Absolute value approaches 0 from either side."]
+],
+"Right-hand limit":[
+["The right-hand limit x→a+ approaches a from:",["Values less than a","Values greater than a","Only a itself","Negative values only"],1,"The plus sign indicates approach from values larger than a."],
+["What does lim_{x→2+} f(x) mean?",["Approach 2 from the left","Approach 2 from the right","Set x=2 only","Find f'(2)"],1,"The right-hand limit uses x-values greater than 2."],
+["For f(x)=x+1, lim_{x→3+}f(x) is:",["2","3","4","5"],2,"Substitution gives 3+1=4."],
+["For f(x)=x², lim_{x→0+}f(x) is:",["−1","0","1","Undefined"],1,"x² approaches 0 as x approaches 0 from the right."],
+["If lim_{x→a+}f(x)=7, then f(x) approaches 7 when x approaches a from:",["Left","Right","Both necessarily","Exactly a"],1,"That is the definition of the right-hand limit."],
+["A two-sided limit exists when the left- and right-hand limits:",["Are equal","Are both zero","Are both infinite","Are undefined"],0,"The two one-sided limits must have the same finite value for an ordinary real limit."],
+["For f(x)=0 when x<0 and 1 when x≥0, lim_{x→0+}f(x) is:",["0","1","1/2","Undefined"],1,"From the right, x>0, so f(x)=1."],
+["If lim_{x→a−}f(x)=2 and lim_{x→a+}f(x)=2, then lim_{x→a}f(x) is:",["0","1","2","Does not exist"],2,"Equal one-sided limits give the common two-sided limit 2."],
+["The notation a+ indicates approach from:",["Smaller x-values","Larger x-values","Negative outputs","Zero only"],1,"The input approaches a through values above a."],
+["For f(x)=|x|, lim_{x→0+}f(x) is:",["−1","0","1","Does not exist"],1,"Absolute value approaches 0 from the right."]
+],
+"Limit laws":[
+["The sum law for limits states that lim(f+g) equals:",["The sum of the limits","The product of the limits","The difference only","Always zero"],0,"When the component limits exist, the limit of a sum is their sum."],
+["The product law gives lim(fg) as:",["lim f + lim g","lim f × lim g","lim f − lim g","(lim f)/(lim g) always"],1,"The limit of a product is the product of the limits when they exist."],
+["The constant multiple law gives lim(cf) as:",["c+lim f","c·lim f","c−lim f","lim f/c"],1,"A constant factor can be taken outside the limit."],
+["If lim f=3 and lim g=4, then lim(f+g) is:",["1","7","12","−1"],1,"Add the limits: 3+4=7."],
+["If lim f=3 and lim g=4, then lim(fg) is:",["7","12","1","−12"],1,"Multiply the limits: 3×4=12."],
+["If lim f=8 and lim g=2, then lim(f/g), provided the denominator limit is nonzero, is:",["2","4","6","16"],1,"The quotient law gives 8/2=4."],
+["The limit of a polynomial at a point can be found by:",["Direct substitution","Always factoring","Differentiation only","Integration only"],0,"Polynomials are continuous, so direct substitution works."],
+["lim_{x→2}(x²+3x) equals:",["7","8","10","12"],2,"Substitute x=2: 4+6=10."],
+["If lim f=L and c is constant, lim(cf) equals:",["L+c","cL","L/c only","c−L"],1,"The constant multiple law gives cL."],
+["Limit laws generally require the component limits to:",["Exist","Be integers","Be positive","Be equal to zero"],0,"The algebraic limit laws apply when the relevant limits exist, with quotient denominators nonzero."]
+],
+"Continuity":[
+["A function f is continuous at x=a if:",["lim_{x→a}f(x)=f(a)","f(a)=0 always","The derivative is always 1","The function is periodic"],0,"Continuity requires the limit to exist and equal the function value."],
+["Which condition is essential for continuity at a?",["f(a) is defined","f(a) must be zero","f(a) must be positive","f(a) must be an integer"],0,"The function must be defined at the point."],
+["If lim_{x→a}f(x)=f(a), then f is:",["Continuous at a","Discontinuous at a","Periodic","Constant"],0,"This equality is the defining condition for continuity at a."],
+["Polynomials are continuous on:",["All real numbers","Integers only","Positive numbers only","No real numbers"],0,"Polynomial functions have no breaks or undefined points on R."],
+["Rational functions are continuous where:",["Their denominator is nonzero","Their numerator is zero","x is an integer","They are periodic"],0,"A rational function is continuous at points where its denominator does not vanish."],
+["The function f(x)=|x| is continuous at:",["Every real number","Only 0","Only positive numbers","No point"],0,"Absolute value has no break or hole anywhere on R."],
+["If a function has a removable hole at x=a and is undefined there, it is:",["Not continuous at a","Continuous at a","Always differentiable there","Constant there"],0,"Continuity requires the function value to be defined and match the limit."],
+["If the left and right limits at a are equal to f(a), the function is:",["Continuous at a","Discontinuous at a","Undefined everywhere","Periodic"],0,"Equal one-sided limits matching f(a) establish continuity."],
+["A continuous graph can be drawn near a point without a:",["Break or jump","Slope","Minimum","Maximum"],0,"Continuity is associated with no break, hole, or jump at the point."],
+["Which function is continuous on R?",["1/x","√x","x²+1","tan x"],2,"The polynomial x²+1 is continuous for every real x."]
+],
+"Discontinuity":[
+["A function is discontinuous at a if continuity conditions:",["Fail at a","Always hold","Require f(a)=0","Require a<0"],0,"Any failure of the continuity conditions gives a discontinuity."],
+["A removable discontinuity is commonly represented by a:",["Hole","Vertical line only","Parabola","Constant segment"],0,"A removable discontinuity can often be fixed by defining the missing point appropriately."],
+["A jump discontinuity occurs when the left and right limits:",["Exist but are unequal","Are equal","Are both zero","Do not exist anywhere"],0,"Different finite one-sided limits create a jump."],
+["An infinite discontinuity is associated with:",["Unbounded behavior near a point","Equal one-sided limits","A constant function","A polynomial everywhere"],0,"The function grows without bound near the discontinuity."],
+["Which function has a discontinuity at x=0?",["x²","x+1","1/x","|x|"],2,"1/x is undefined and unbounded near x=0."],
+["The function f(x)=1/(x−2) has an infinite discontinuity at:",["x=0","x=1","x=2","x=3"],2,"The denominator becomes zero at x=2."],
+["If lim_{x→a−}f(x)=2 and lim_{x→a+}f(x)=5, the discontinuity is:",["Jump","Removable","Infinite","None"],0,"Unequal finite one-sided limits produce a jump discontinuity."],
+["If lim_{x→a}f(x)=L but f(a) is undefined, the discontinuity is usually:",["Removable","Jump","Infinite","Periodic"],0,"Defining f(a)=L can remove the hole."],
+["A vertical asymptote often indicates:",["An infinite discontinuity","A removable discontinuity","Continuity","A constant function"],0,"Values become unbounded near a vertical asymptote."],
+["Which function is continuous on its entire real domain?",["1/x","x³","1/(x−1)","tan x"],1,"A polynomial such as x³ is continuous for every real x."]
+]
 };

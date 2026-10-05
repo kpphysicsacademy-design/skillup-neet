@@ -55,7 +55,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
-<script src="maths-question-bank.js?v=20261005-safe1"></script>
+<script src="maths-question-bank.js?v=20261005-safe2"></script>
 <script>
 const qs=new URLSearchParams(location.search),concept=qs.get('concept')||'Natural numbers';
 let skillUpSession=null;
@@ -104,17 +104,18 @@ function validateQuizBank(bank){
   });
 }
 if(!validateQuizBank(bankQuiz)){
- console.warn('Invalid Maths quiz bank detected for concept:',concept);
+ console.warn('Invalid Maths quiz bank detected for concept:',concept,bankQuiz);
  const refreshed=sessionStorage.getItem('skillupMathsQuizBankRefreshed')==='1';
  if(!refreshed){
    sessionStorage.setItem('skillupMathsQuizBankRefreshed','1');
    const refreshScript=document.createElement('script');
-   refreshScript.src='maths-question-bank.js?v=20261005-safe1&refresh=1';
+   refreshScript.src='maths-question-bank.js?v=20261005-safe2&refresh=1';
    refreshScript.onload=()=>location.reload();
    refreshScript.onerror=()=>console.error('Unable to refresh Maths quiz bank.');
    document.head.appendChild(refreshScript);
    throw new Error('Refreshing Maths quiz bank…');
  }
+ document.getElementById('question').textContent='Quiz is temporarily refreshing. Please reload once.';
  throw new Error('Invalid Maths quiz bank for '+concept);
 }
 sessionStorage.removeItem('skillupMathsQuizBankRefreshed');

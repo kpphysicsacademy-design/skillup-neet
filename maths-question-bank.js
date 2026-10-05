@@ -2477,4 +2477,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A transitive relation must always be reflexive.",["True","False","Only for identity relations","Only for empty sets"],1,"A relation can be transitive without being reflexive."],
 ["For the relation ≤ on real numbers, if a≤b and b≤c, then:",["a≤c","c≤a","a=b","b=c"],0,"The usual order relation ≤ is transitive."],
 ["Which test is used for transitivity?",["Follow two links and require the direct link","Reverse every pair","Check every diagonal pair only","Count the elements"],0,"Transitivity checks whether two consecutive relation links imply the third link."]
-],};
+],
+"Set difference identities":[
+["Which identity is correct for set difference?",["A−B=A∩B^c","A−B=A∪B","A−B=A^c∩B","A−B=A∩B"],0,"Elements in A but not in B are in A∩B^c."],
+["If A={1,2,3} and B={2,3,4}, then A−B is:",["{1}","{4}","{2,3}","{1,4}"],0,"Only 1 belongs to A and not to B."],
+["The identity A−B can be written as:",["A∩B^c","A∪B","A^c∩B","B−A"],0,"Set difference means intersection with the complement of the second set."],
+["If A⊆B, then A−B equals:",["∅","A","B","U"],0,"Every element of A is already in B, so none remains in A−B."],
+["Which identity is generally true?",["A−(B∪C)=(A−B)∩(A−C)","A−(B∪C)=(A−B)∪(A−C)","A−(B∩C)=(A−B)∩(A−C)","A−B=B−A"],0,"Removing B and C is equivalent to removing their union, giving the intersection of the two differences."],
+["Which identity is correct?",["A−(B∩C)=(A−B)∪(A−C)","A−(B∩C)=(A−B)∩(A−C)","A−(B∩C)=B−A","A−(B∩C)=A∩B∩C"],0,"Using complements gives A−(B∩C)=(A−B)∪(A−C)."],
+["The complement of A−B is:",["A^c∪B","A∪B^c","A^c∩B","A∩B^c"],0,"(A∩B^c)^c=A^c∪B by De Morgan's law."],
+["Which statement about set difference is correct?",["A−B need not equal B−A","A−B always equals B−A","A−B always equals A∩B","A−B always equals A∪B"],0,"Set difference is not commutative in general."],
+["If A−B=∅, then:",["A⊆B","B⊆A","A=B always","A∩B=∅"],0,"No element of A lies outside B, so every element of A belongs to B."],
+["Which identity gives B−A?",["B∩A^c","A∩B^c","A∪B^c","B∪A"],0,"By definition, B−A=B∩A^c."]
+],
+};

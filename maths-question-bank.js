@@ -1151,7 +1151,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x=t² and y=t³, dy/dx equals:",["t","3t/2","2t/3","t²"],1,"dy/dt=3t² and dx/dt=2t, so dy/dx=3t/2 for t≠0."],
 ["If x=2t and y=t², dy/dx is:",["t","2t","t²","1/t"],0,"dy/dt=2t and dx/dt=2, giving t."],
 ["Parametric equations express x and y in terms of a:",["Parameter","Constant only","Derivative only","Limit"],0,"A parameter such as t determines both x and y."],
-["For x=cos t and y=sin t, dy/dx is:",["tan t","−tan t","cot t","−cot t"],1,"dy/dt=cos t and dx/dt=−sin t, giving −cot t? Actually cos/(−sin)=−cot."],
+["For x=cos t and y=sin t, dy/dx is:",["tan t","−tan t","cot t","−cot t"],3,"dy/dt=cos t and dx/dt=−sin t, so dy/dx=−cot t."],
 ["The condition needed for dy/dx=(dy/dt)/(dx/dt) is:",["dx/dt≠0","dy/dt=0","x=0","t=0"],0,"Division by dx/dt requires it to be nonzero."],
 ["If x=t+1 and y=2t−3, dy/dx is:",["1","2","3","−3"],1,"dy/dt=2 and dx/dt=1, so dy/dx=2."],
 ["Parametric differentiation is especially useful when:",["y is not easily expressed explicitly in x","The function is constant","No parameter exists","Only integers occur"],0,"Parametric curves may be difficult to write as y=f(x), but derivatives can still be found."],

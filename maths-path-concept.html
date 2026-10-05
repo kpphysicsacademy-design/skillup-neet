@@ -81,13 +81,13 @@ h1{margin:5px 0 8px;font-size:clamp(30px,7vw,44px);line-height:1.05;color:var(--
 <section class="hero">
  <div class="eyebrow">MATHEMATICS • CONCEPT PRACTICE</div>
  <h1 id="conceptTitle">Loading…</h1>
- <div class="progress"><span id="progressBar"></span></div><div class="progressLabel"><span id="progressText">Question 1 of 10</span><span>Mastery practice</span></div>
+ <div class="progress"><span id="progressBar"></span></div><div class="progressLabel"><span id="progressText">Question 1 of 30</span><span>Mastery practice</span></div>
 </section>
 
 <div id="errorBox" class="error"></div>
 
-<section class="quiz" id="quiz">
- <div class="quizhead"><div class="level">🎯 PRACTICE</div><div class="qnum" id="qnum">1 / 10</div></div>
+<section class="hero" id="lesson"><div class="eyebrow">STEP 1 • LEARN THE CONCEPT</div><h2 id="lessonTitle">Concept lesson</h2><div id="lessonBody" class="subtitle"></div><div class="pills"><span class="pill">Learn</span><span class="pill">Understand</span><span class="pill">30 MCQs</span></div><div class="actions"><button id="startPractice" class="continue" style="display:inline-block">Start practice →</button></div></section>\n\n<section class="quiz" id="quiz" style="display:none">
+ <div class="quizhead"><div class="level">🎯 PRACTICE</div><div class="qnum" id="qnum">1 / 30</div></div>
  <div id="question" class="qtext"></div>
  <div id="answers" class="answers"></div>
  <div id="feedback" class="feedback"></div>
@@ -114,14 +114,14 @@ h1{margin:5px 0 8px;font-size:clamp(30px,7vw,44px);line-height:1.05;color:var(--
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
 <script src="iit-maths-path-curriculum.js?v=20261005"></script>
-<script src="maths-question-bank.js?v=20261005-safe31"></script>
+<script src="maths-question-bank.js?v=20261005-safe32"></script>
 <script>
 (function(){
 "use strict";
 const qs=new URLSearchParams(location.search);
 const concept=(qs.get("concept")||"Natural numbers").trim();
 const $=id=>document.getElementById(id);
-$("conceptTitle").textContent=concept;
+$("conceptTitle").textContent=concept;\nconst guides={"Real numbers":`<p><strong>Real numbers</strong> are all numbers that can be represented on the real number line.</p><p>They include rational numbers such as $-3$, $\\frac{2}{5}$ and $0.75$, and irrational numbers such as $\\sqrt2$ and $\\pi$.</p><p><strong>Number-system hierarchy:</strong> $\\mathbb N\\subseteq\\mathbb Z\\subseteq\\mathbb Q\\subseteq\\mathbb R$.</p><p><strong>Key idea:</strong> a rational number can be written as $\\frac{p}{q}$ where $p,q\\in\\mathbb Z$ and $q\\ne0$.</p><p><strong>Exam tip:</strong> compare real numbers using a number line, decimal approximation, or algebraic comparison.</p>`};\n$("lessonTitle").textContent=concept+" — Concept lesson";\n$("lessonBody").innerHTML=guides[concept]||`<p>Learn the definition, key relationships, formulas, restrictions and common mistakes before starting the 30-MCQ practice.</p>`;
 $("retry").href=location.href;
 
 let skillUpSession=null;
@@ -134,7 +134,7 @@ let skillUpSession=null;
 })();
 
 function validQuizBank(list){
- if(!Array.isArray(list)||list.length!==10)return false;
+ if(!Array.isArray(list)||list.length!==30)return false;
  const seenQ=new Set();
  return list.every(function(q){
   if(!Array.isArray(q)||q.length<4)return false;
@@ -159,7 +159,7 @@ if(!validQuizBank(questions)){
 let i=0,score=0,answered=false;
 const startedAt=Date.now();
 
-function typeset(){
+$("startPractice").addEventListener("click",function(){ $("lesson").style.display="none"; $("quiz").style.display="block"; typeset(); window.scrollTo({top:0,behavior:"smooth"}); });\nfunction typeset(){
  if(window.MathJax&&window.MathJax.typesetPromise) window.MathJax.typesetPromise().catch(()=>{});
 }
 function render(){
@@ -204,7 +204,7 @@ async function finish(){
  const accuracy=Math.round(score/total*100);
  const time=Math.max(1,Math.round((Date.now()-startedAt)/1000));
  $("progressBar").style.width="100%";
- $("progressText").textContent="Completed — 10 of 10";
+ $("progressText").textContent="Completed — "+total+" of "+total;
  $("quiz").style.display="none";
  $("result").style.display="block";
  $("finalScore").textContent=score+" / "+total+" correct";

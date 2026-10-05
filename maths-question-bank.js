@@ -2129,5 +2129,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The gradient and level-set geometry connect calculus with:",["Optimization","Only arithmetic","Only number theory","Only sequences"],0,"Gradients identify normals and steepest change."],
 ["If ∇f is parallel to a vector n, n can serve as a:",["Normal direction","Tangent direction","Zero vector","Function value"],0,"Any nonzero scalar multiple of a normal is also normal."],
 ["Level surfaces are especially useful for visualizing:",["Multivariable functions","Only polynomials in one variable","Only sequences","Only matrices"],0,"They represent constant-value sets in space."]
+],
+"Directional derivative applications":[
+["A directional derivative gives the rate of change along a:",["Specified direction","Only x-axis","Only y-axis","Normal only"],0,"It measures change along a chosen direction."],
+["The direction of fastest increase is the direction of:",["Gradient","Negative gradient","Any level curve","Zero vector"],0,"The gradient points toward steepest increase."],
+["The direction of fastest decrease is:",["Negative gradient","Gradient","A tangent to a level curve","Any unit vector"],0,"The negative gradient gives steepest decrease."],
+["If ∇f·u=5 for a unit vector u, the directional derivative is:",["5","1","0","25"],0,"The directional derivative equals the dot product."],
+["A directional derivative can be zero when the direction is:",["Tangent to a level curve","Parallel to the gradient","Opposite the gradient","The gradient itself"],0,"There is no first-order change along a level curve."],
+["The maximum directional derivative equals:",["|∇f|","−|∇f|","0","f"],0,"The maximum occurs in the unit gradient direction."],
+["If ∇f=0 at a point, every directional derivative there is:",["0","1","Undefined","Maximum"],0,"The dot product with every unit direction is zero."],
+["For a unit vector u, the directional derivative is bounded above by:",["|∇f|","|u|","f²","0"],0,"By Cauchy-Schwarz, ∇f·u≤|∇f|."],
+["Directional derivatives are especially useful in:",["Multivariable optimization","Prime factorisation","Polynomial division","Set representation"],0,"They describe local rates in selected directions."],
+["A direction vector must be normalized before the standard formula is applied because:",["The formula uses a unit direction","Normalization changes the function","The gradient must be zero","All vectors are already unit vectors"],0,"The standard directional derivative uses a unit vector."]
 ]
 };

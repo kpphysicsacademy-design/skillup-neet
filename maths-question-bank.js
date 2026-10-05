@@ -2918,3 +2918,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The set $\\mathbb R\\setminus\\mathbb Q$ represents:",["Irrational numbers","Integers","Rational numbers","Natural numbers"],0,"Removing rational numbers from the real numbers leaves the irrational numbers."],
 ["Which statement is false?",["Every real number is rational","Every integer is rational","Every rational number is real","Every irrational number is real"],0,"The first statement is false because irrational real numbers such as $\\sqrt2$ are not rational."]
 ]
+;

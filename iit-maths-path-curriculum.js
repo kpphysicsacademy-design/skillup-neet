@@ -37,7 +37,7 @@ window.SKILLUP_IIT_MATHS_PATH=[
 ["Limits",["Concept of limit","Left-hand limit","Right-hand limit","Existence of limit","Algebra of limits","Standard limits","Rationalisation","Trigonometric limits","Exponential limits","Logarithmic limits","Indeterminate forms","0/0","Infinity/infinity"]],
 ["Continuity",["Continuity at a point","Left continuity","Right continuity","Continuity on interval","Algebra of continuous functions","Discontinuities","Removable discontinuity"]],
 ["Differentiation",["Derivative concept","First principles","Geometrical meaning","Physical meaning","Standard derivatives","Sum rule","Product rule","Quotient rule","Chain rule","Implicit differentiation","Parametric differentiation","Logarithmic differentiation","Higher derivatives"]],
-["Mean Value Theorems",["Rolle's theorem","Lagrange MVT","Geometrical interpretation","Applications of MVT","Inequality applications"]],
+["Mean Value Theorems",["Rolle's theorem","Lagrange's Mean Value Theorem","Geometrical interpretation","Applications of MVT","Inequality applications"]],
 ["Application of Derivatives",["Rate of change","Increasing functions","Decreasing functions","Monotonicity","Critical points","Tangents","Normals","Maxima","Minima","First derivative test","Second derivative test","Optimization"]]
 ]],
 ["LEVEL 7","Integral Calculus",[

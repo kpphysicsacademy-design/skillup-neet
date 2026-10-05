@@ -2711,4 +2711,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["For any finite set A, its cardinality is always a:",["Negative integer","Nonnegative integer","Fraction","Complex number"],1,"Cardinality counts elements, so it is a nonnegative integer for a finite set."]
 ],
 
+
+"Trigonometric functions":[
+["The function $f(x)=\\sin x$ has domain:",["$\\mathbb R$","$(0,\\infty)$","$[-1,1]$","$[0,2\\pi]$"],0,"Sine is defined for every real number, so its domain is $\\mathbb R$."],
+["The range of $f(x)=\\sin x$ is:",["$[-1,1]$","$\\mathbb R$","$(0,1)$","$[0,2\\pi]$"],0,"For every real $x$, $-1\\le\\sin x\\le1$, and both endpoints are attained."],
+["The period of $f(x)=\\sin x$ is:",["$2\\pi$","$\\pi$","$\\pi/2$","$4\\pi$"],0,"Sine satisfies $\\sin(x+2\\pi)=\\sin x$."],
+["Which identity is always true?",["$\\sin^2x+\\cos^2x=1$","$\\sin x+\\cos x=1$","$\\tan x=\\sin x\\cos x$","$\\sin^2x-\\cos^2x=1$"],0,"The fundamental Pythagorean identity is $\\sin^2x+\\cos^2x=1$."],
+["For values where $\\cos x\\ne0$, $\\tan x$ equals:",["$\\dfrac{\\sin x}{\\cos x}$","$\\dfrac{\\cos x}{\\sin x}$","$\\sin x\\cos x$","$\\sin x+\\cos x$"],0,"By definition, $\\tan x=\\sin x/\\cos x$ when $\\cos x\\ne0$."],
+["The function $f(x)=\\cos x$ is:",["Even","Odd","Neither even nor odd","Constant"],0,"Since $\\cos(-x)=\\cos x$, cosine is an even function."],
+["The function $f(x)=\\sin x$ is:",["Odd","Even","Constant","Neither"],0,"Since $\\sin(-x)=-\\sin x$, sine is an odd function."],
+["Evaluate $\\sin\\left(\\dfrac{\\pi}{6}\\right)$.",["$\\dfrac12$","$\\dfrac{\\sqrt3}{2}$","$1$","$0$"],0,"The standard-angle value is $\\sin(\\pi/6)=1/2$."],
+["A program samples $x$ over $[0,2\\pi]$ and records the largest value of $\\sin x$. The correct mathematical maximum is:",["$1$","$0$","$-1$","$2$"],0,"The sine function reaches its maximum value $1$ at $x=\\pi/2$."],
+["For $f(x)=\\sin x$ and $g(x)=2x$, which expression represents the composite function $(f\\circ g)(x)$?",["$\\sin(2x)$","$2\\sin x$","$\\sin x+2x$","$\\sin(x/2)$"],0,"Composition means $(f\\circ g)(x)=f(g(x))$, hence $\\sin(2x)$."]
+],
+
 };

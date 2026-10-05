@@ -2442,4 +2442,40 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Can the codomain contain elements never reached by the function?",["Yes","No","Only for constant functions","Only when A is empty"],0,"Yes. Such elements are in the codomain but not the range."],
 ["For f:ℝ→ℝ, f(x)=x², which is correct?",["Codomain ℝ; range [0,∞)","Codomain [0,∞); range ℝ","Both are ℝ","Both are [0,∞)"],0,"The declared codomain is ℝ, while actual outputs are non-negative."]
 ]
-};
+
+"Reflexive relation":[
+["A relation R on A is reflexive if:",["(a,a)∈R for every a∈A","(a,b)∈R implies (b,a)∈R","(a,b),(b,c)∈R implies (a,c)∈R","No pair belongs to R"],0,"Reflexivity requires every element to be related to itself."],
+["If A={1,2,3}, which relation is reflexive?",["{(1,1),(2,2),(3,3)}","{(1,2),(2,3)}","{(1,2),(2,1)}","∅"],0,"All three diagonal pairs are present."],
+["For a reflexive relation on a set of n elements, the relation must contain at least:",["n ordered pairs","n−1 ordered pairs","2n ordered pairs","n² ordered pairs"],0,"Every element requires its own diagonal pair, giving at least n pairs."],
+["Is the empty relation on a non-empty set reflexive?",["No","Yes","Only if the set has two elements","Cannot be determined"],0,"A reflexive relation must contain every (a,a), but the empty relation contains none."],
+["On A={1,2}, which relation is reflexive?",["{(1,1),(2,2)}","{(1,2)}","{(2,1)}","∅"],0,"Both required diagonal pairs are present."],
+["If (3,3) is missing from a relation on {1,2,3}, the relation is:",["Not reflexive","Reflexive","Always symmetric","Always transitive"],0,"Reflexivity requires (3,3) to be present."],
+["Which pair is essential for element a in a reflexive relation?",["(a,a)","(a,b) for every b","(b,a) only","(a,0)"],0,"The defining condition is (a,a)∈R for every a."],
+["The identity relation I_A={(a,a):a∈A} is:",["Reflexive","Never reflexive","Only symmetric","Only transitive"],0,"Every element appears in its own diagonal pair."],
+["A relation can be both reflexive and symmetric.",["True","False","Only on empty sets","Only on infinite sets"],0,"Reflexivity and symmetry are independent properties and can hold together."],
+["If A has 5 elements, every reflexive relation on A contains all:",["5 diagonal pairs","10 diagonal pairs","25 diagonal pairs","1 diagonal pair"],0,"There is one required diagonal pair for each of the 5 elements."]
+],
+"Symmetric relation":[
+["A relation R is symmetric if:",["(a,b)∈R implies (b,a)∈R","(a,a)∈R for every a","(a,b),(b,c)∈R implies (a,c)∈R","No pair belongs to R"],0,"Symmetry requires reversing every related pair to produce another pair in R."],
+["If (2,5)∈R and R is symmetric, which pair must be in R?",["(5,2)","(2,2)","(5,5)","(2,5) only"],0,"Symmetry requires the reversed pair."],
+["Which relation is symmetric?",["{(1,2),(2,1)}","{(1,2)}","{(1,2),(2,3)}","{(1,2),(3,1)}"],0,"The reverse of (1,2), namely (2,1), is present."],
+["Is the empty relation symmetric?",["Yes","No","Only on finite sets","Only on sets with one element"],0,"There is no pair violating the symmetry condition, so the empty relation is symmetric."],
+["Is the identity relation {(a,a):a∈A} symmetric?",["Yes","No","Only when A is empty","Only for two elements"],0,"Reversing (a,a) gives the same pair."],
+["If (x,y) is in a symmetric relation, then:",["(y,x) is also in the relation","(x,x) must be in the relation","(y,y) must be in the relation","No conclusion is possible"],0,"This is exactly the defining symmetry condition."],
+["A symmetric relation must contain how many pairs for a distinct pair (a,b)?",["Both (a,b) and (b,a)","Only (a,b)","Only (b,a)","Neither"],0,"For a≠b, symmetry requires both directions."],
+["A relation may be symmetric without being reflexive.",["True","False","Only for infinite sets","Only for functions"],0,"For example, the empty relation is symmetric but not reflexive on a non-empty set."],
+["If R={(1,1),(1,2),(2,1)}, R is:",["Symmetric","Not symmetric","Only reflexive","Neither a relation"],0,"The reverse of (1,2) is (2,1), which is present; (1,1) reverses to itself."],
+["Which condition checks symmetry?",["Reverse every ordered pair","Check every diagonal pair","Check only the first components","Count all elements"],0,"Symmetry is tested by reversing each ordered pair."]
+],
+"Transitive relation":[
+["A relation R is transitive if:",["(a,b),(b,c)∈R implies (a,c)∈R","(a,b)∈R implies (b,a)∈R","(a,a)∈R for every a","No pair belongs to R"],0,"Transitivity requires the composed connection (a,c) whenever the first two links exist."],
+["If (1,2) and (2,3) belong to a transitive relation, which pair must belong?",["(1,3)","(3,1)","(2,1)","(3,2)"],0,"Apply the transitive condition with a=1, b=2, c=3."],
+["Which relation is transitive?",["{(1,2),(2,3),(1,3)}","{(1,2),(2,3)}","{(1,2),(3,1)}","{(2,1),(3,2)}"],0,"The required pair (1,3) is included."],
+["Is the empty relation transitive?",["Yes","No","Only on a two-element set","Only on infinite sets"],0,"There are no pairs (a,b),(b,c) to violate transitivity."],
+["Is the identity relation transitive?",["Yes","No","Only when A has one element","Only when A is empty"],0,"If (a,a) and (a,a) occur, the required (a,a) is already present."],
+["If (a,b) and (b,c) are in R but (a,c) is not, R is:",["Not transitive","Transitive","Reflexive","Symmetric"],0,"This directly violates the transitivity condition."],
+["A transitive relation must always be symmetric.",["True","False","Only for finite sets","Only for functions"],1,"Transitivity and symmetry are different properties."],
+["A transitive relation must always be reflexive.",["True","False","Only for identity relations","Only for empty sets"],1,"A relation can be transitive without being reflexive."],
+["For the relation ≤ on real numbers, if a≤b and b≤c, then:",["a≤c","c≤a","a=b","b=c"],0,"The usual order relation ≤ is transitive."],
+["Which test is used for transitivity?",["Follow two links and require the direct link","Reverse every pair","Check every diagonal pair only","Count the elements"],0,"Transitivity checks whether two consecutive relation links imply the third link."]
+],};

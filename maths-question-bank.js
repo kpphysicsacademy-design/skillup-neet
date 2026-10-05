@@ -2872,6 +2872,6 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If $f(x)=\sqrt{x+2}$ and $g(x)=\dfrac1{x-1}$, the domain of $(f+g)(x)$ is:",["$[-2,1)\cup(1,\infty)$","$[-2,\infty)$","$(-2,1)$","$\mathbb R\setminus\{1\}$"],0,"We need $x+2\ge0$ and $x-1\ne0$. Therefore $x\ge-2$ with $x\ne1$."],
 ["A mathematical program represents two functions as procedures f(x) and g(x). To compute $(f+g)(a)$, it should:",["Return f(a)+g(a)","Return f(a)g(a)","Return f(g(a))","Return f(a)-g(a)"],0,"Function addition is defined pointwise: $(f+g)(a)=f(a)+g(a)$."],
 ["A program computes $(f/g)(x)$ for $f(x)=x^2$ and $g(x)=x-2$. Which safety check is necessary before division?",["Check that $x\ne2$","Check that $x>2$","Check that $x\ne0$","Check that $x<2$"],0,"Division by $g(x)$ requires $g(x)\ne0$. Since $x-2=0$ at $x=2$, that input must be rejected."],
-["If $f(x)=x+1$ and $g(x)=2x-1$, then $(f+g)(x)(f-g)(x)$ simplifies to:",["$3x^2+2x-2$","$x^2+2x-1$","$4x^2-1$","$3x^2-2x+2$"],0,"Use $(f+g)(f-g)=f^2-g^2$. Thus $(x+1)^2-(2x-1)^2= -3x^2+6x$, so the displayed options need checking; the correct simplified result is $-3x^2+6x$."]
+["If $f(x)=x+1$ and $g(x)=2x-1$, then $(f+g)(x)(f-g)(x)$ simplifies to:",["$-3x^2+6x$","$3x^2-6x$","$x^2+2x-1$","$4x^2-1$"],0,"Use $(f+g)(f-g)=f^2-g^2$. Thus $(x+1)^2-(2x-1)^2= -3x^2+6x$, so the displayed options need checking; the correct simplified result is $-3x^2+6x$."]
 ],
 };

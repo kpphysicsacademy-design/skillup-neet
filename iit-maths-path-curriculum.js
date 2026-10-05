@@ -50,7 +50,7 @@ window.SKILLUP_IIT_MATHS_PATH=[
 ["Vectors",["Scalar","Vector","Magnitude","Direction","Unit vector","Position vector","Components","Vector addition","Scalar multiplication","Section formula","Dot product","Projection","Angle between vectors","Cross product","Area using cross product","Scalar triple product","Vector triple product","Coplanarity"]],
 ["3D Geometry",["3D coordinates","Direction ratios","Direction cosines","Equation of line","Symmetric line equation","Parametric line equation","Angle between lines","Skew lines","Shortest distance","Plane","Equation of plane","Normal vector","Angle between planes","Line-plane angle","Distance from point to plane","Intersection problems"]],
 ["Statistics",["Mean","Weighted mean","Mode","Range","Mean deviation","Variance","Standard deviation","Grouped data","Ungrouped data","Combined statistics"]],
-["Probability",["Random experiment","Sample space","Events","Mutually exclusive events","Exhaustive events","Classical probability","Addition theorem","Multiplication theorem","Conditional probability","Independence","Total probability","Bayes theorem","Random variables","Probability distribution"]]
+["Probability",["Random experiment","Sample space","Events","Mutually exclusive events","Exhaustive events","Classical probability","Addition theorem","Multiplication theorem","Conditional probability","Independence","Total probability","Bayes' theorem","Random variables","Probability distribution"]]
 ]],
 ["LEVEL 9","JEE Mastery",[
 ["JEE Main Mathematics",["Chapter-wise practice","Formula application","Speed calculation","Mixed algebra","Mixed trigonometry","Mixed coordinate geometry","Mixed calculus","Mixed vectors and 3D","Mixed probability","JEE Main PYQs","Timed chapter tests","Full mathematics mocks"]],

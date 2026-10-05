@@ -316,8 +316,8 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x<4, which statement is always true?",["x+1<5","x+1>5","x−1>4","2x>8"],0,"Adding 1 to both sides preserves the inequality: x+1<5."],
 ["Which inequality is true?",["−3>−1","−4<−2","5<2","0<−1"],1,"−4 lies to the left of −2 on the number line, so −4<−2."],
 ["When multiplying an inequality by a negative number, the inequality sign:",["Stays the same","Reverses","Becomes equal","Disappears"],1,"Multiplication or division by a negative reverses the direction of the inequality."]
-
-,"Variables":[
+],
+"Variables":[
 ["In the expression 3x+5, x is a:",["Variable","Constant","Coefficient","Exponent"],0,"x can take different values, so it is the variable."],
 ["Which is a variable?",["7","−3","y","1/2"],2,"y represents a quantity that can vary."],
 ["In 4a−9, the coefficient of a is:",["−9","4","a","13"],1,"The coefficient is the numerical factor multiplying a, which is 4."],

@@ -2777,4 +2777,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program has a bijection $f$ and a candidate inverse $g$. Which test verifies the inverse on the required domain and codomain?",["Check $g(f(x))=x$ and $f(g(y))=y$ for all allowed $x,y$","Check only $g(x)=f(x)$","Check only $g(0)=0$","Check whether $f$ is constant"],0,"Both compositions must return the identity on their respective sets: $g\\circ f=I_A$ and $f\\circ g=I_B$."],
 ["If $f(x)=\\dfrac{x-1}{x+2}$, with $x\\ne-2$, then solving $y=f(x)$ for $x$ gives:",["$x=\\dfrac{1+2y}{1-y}$","$x=\\dfrac{1-2y}{1+y}$","$x=\\dfrac{y-1}{y+2}$","$x=\\dfrac{1+y}{2-y}$"],0,"From $y=(x-1)/(x+2)$, we get $yx+2y=x-1$, so $(y-1)x=-(1+2y)$ and $x=(1+2y)/(1-y)$."]
 ],
+
+"Graphs of functions":[
+["The graph of a function $y=f(x)$ represents:",["The set of points $(x,f(x))$ for allowed $x$","Only the $x$-intercepts","Only the $y$-intercept","All points $(f(x),x)$"],0,"A function graph contains each input-output pair as the point $(x,f(x))$."],
+["The graph of $f(x)=x^2$ is a:",["Parabola","Circle","Straight line","Hyperbola"],0,"The equation $y=x^2$ is the standard upward-opening parabola."],
+["The graph of $f(x)=2x+1$ is:",["A straight line","A parabola","A circle","A hyperbola"],0,"An equation of the form $y=mx+c$ represents a straight line."],
+["The $y$-intercept of $y=f(x)$ is obtained by setting:",["$x=0$","$y=0$","$x=1$","$y=1$"],0,"At the $y$-axis, the horizontal coordinate is $x=0$, so the intercept is $(0,f(0))$ when defined."],
+["The $x$-intercepts of $y=f(x)$ occur where:",["$f(x)=0$","$f(x)=1$","$x=0$","$f(x)=x$"],0,"Points on the $x$-axis have $y=0$, so solve $f(x)=0$."],
+["If $g(x)=f(x)+3$, the graph of $g$ is obtained from the graph of $f$ by shifting it:",["Up by $3$ units","Down by $3$ units","Right by $3$ units","Left by $3$ units"],0,"Adding $3$ to every output increases every $y$-coordinate by $3$."],
+["If $g(x)=f(x-2)$, the graph of $g$ is obtained from the graph of $f$ by shifting it:",["Right by $2$ units","Left by $2$ units","Up by $2$ units","Down by $2$ units"],0,"Replacing $x$ by $x-2$ moves each graph point two units to the right."],
+["Which test determines whether a plotted curve represents a function of $x$?",["Vertical line test","Horizontal line test","Midpoint test","Slope test"],0,"Every vertical line must intersect the graph at most once for it to define a function of $x$."],
+["A mathematical program stores sampled points $(x,f(x))$. To approximate the graph correctly, it should:",["Plot each input $x$ against its corresponding output $f(x)$","Swap every pair to $(f(x),x)$","Plot only the maximum value","Use $f(x)$ as the horizontal coordinate always"],0,"The standard Cartesian graph places $x$ on the horizontal axis and $f(x)$ on the vertical axis."],
+["For $f(x)=|x|$, the graph has its minimum at:",["$(0,0)$","$(1,0)$","$(0,1)$","$(-1,1)$"],0,"Since $|x|\\ge0$ for every real $x$, its smallest value is $0$ at $x=0$."]
+],
 };

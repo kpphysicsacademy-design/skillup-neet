@@ -1,4 +1,16 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Decimal representation":[
+["Which fraction has a terminating decimal expansion?",["1/3","2/5","4/9","7/11"],1,"A fraction in lowest terms terminates when its denominator has no prime factors other than 2 and 5. 2/5=0.4."],
+["0.75 written as a fraction in simplest form is:",["1/2","2/3","3/4","4/5"],2,"0.75=75/100=3/4 after dividing by 25."],
+["Which decimal is greater than 0.6?",["0.56","0.59","0.605","0.599"],2,"0.605 is greater than 0.600."],
+["3.2 as a fraction in simplest form is:",["16/5","32/5","8/5","3/20"],0,"3.2=32/10=16/5 after simplification."],
+["Which decimal represents 7/8?",["0.75","0.825","0.875","0.925"],2,"7/8=0.875."],
+["0.125 is equal to:",["1/4","1/8","1/16","3/8"],1,"0.125=125/1000=1/8."],
+["Which decimal is terminating?",["0.333…","0.272727…","0.625","0.1010010001…"],2,"0.625 ends after three decimal places."],
+["Round 4.376 to two decimal places.",["4.37","4.38","4.40","4.30"],1,"The third decimal digit is 6, so 4.37 rounds up to 4.38."],
+["What is 2.5+0.75?",["2.75","3.15","3.25","3.75"],2,"Align decimal places: 2.50+0.75=3.25."],
+["Which statement about 0.999… is correct?",["It is less than 1","It equals 1","It equals 0.9","It is not a real number"],1,"The recurring decimal 0.999… is equal to 1."]
+],
 "Fractions":[
 ["Which fraction is equivalent to 3/5?",["6/10","5/8","9/20","12/25"],0,"Multiplying numerator and denominator by 2 gives 6/10."],
 ["Simplify 18/24 to lowest terms.",["2/3","3/4","4/5","5/6"],1,"Divide numerator and denominator by their greatest common divisor, 6: 18/24=3/4."],

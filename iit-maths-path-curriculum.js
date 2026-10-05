@@ -10,7 +10,7 @@ window.SKILLUP_IIT_MATHS_PATH=[
 ]],
 ["LEVEL 2","Core Algebra",[
 ["Quadratic Equations",["Quadratic expressions","Standard form","Factorisation method","Quadratic formula","Discriminant","Nature of roots","Relation between roots and coefficients","Formation of equation","Symmetric functions of roots","Common roots","Location of roots","Roots in an interval","Quadratic inequalities"]],
-["Sequences and Series",["Sequence","General term","Arithmetic progression","nth term of an AP","Sum of AP","Arithmetic mean","Geometric progression","nth term of GP","Sum of GP","Geometric mean","Infinite GP","Special series","Sum of natural numbers","Sum of squares","Sum of cubes","Sigma notation"]],
+["Sequences and Series",["Sequence","General term","Arithmetic progression","nth term of an AP","Sum of AP","Arithmetic mean","Geometric progression","nth term of a GP","Sum of GP","Geometric mean","Infinite GP","Special series","Sum of natural numbers","Sum of squares","Sum of cubes","Sigma notation"]],
 ["Permutations and Combinations",["Fundamental counting principle","Factorial","Permutations","Restricted permutations","Repeated objects","Circular permutations","Combinations","Restricted combinations","Distribution","Identical objects","Non-identical objects","Selection problems","Counting by complement","Counting by cases"]],
 ["Binomial Theorem",["Binomial expansion","General term","Middle term","Binomial coefficients","Pascal's triangle","Properties of coefficients","Independent term","Coefficient comparison"]]
 ]],

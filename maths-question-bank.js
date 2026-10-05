@@ -2021,5 +2021,89 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A normal vector to a level surface f(x,y,z)=c is given by:",["∇f","f","f_x only","x+y+z"],0,"The gradient is normal to the level surface."],
 ["If ∇f=0 at an interior point, it is a:",["Critical point candidate","Guaranteed maximum","Guaranteed minimum","Point at infinity"],0,"A zero gradient identifies a critical point candidate."],
 ["Gradients are useful in:",["Optimization and directional derivatives","Only integration","Only factorisation","Only sequence sums"],0,"They are central to multivariable optimization and rate calculations."]
+],
+"Directional derivatives":[
+["The directional derivative of f in unit direction u is:",["∇f·u","∇f×u","f/u","|∇f|+|u|"],0,"The directional derivative is the dot product of the gradient with the unit direction vector."],
+["A directional derivative measures:",["Rate of change in a specified direction","Only maximum value","Only minimum value","Area"],0,"It measures how fast the function changes along a chosen direction."],
+["The maximum directional derivative at a point is:",["|∇f|","0","f","|f|"],0,"The maximum occurs in the gradient direction and equals its magnitude."],
+["The direction of steepest increase is:",["∇f","−∇f","Any tangent direction","The zero vector"],0,"The gradient points toward greatest increase."],
+["The direction of steepest decrease is:",["−∇f","∇f","A level-curve tangent","The x-axis always"],0,"The negative gradient gives the greatest decrease."],
+["For f=x²+y², ∇f at (1,2) is:",["⟨2,4⟩","⟨1,2⟩","⟨4,2⟩","⟨2,2⟩"],0,"∇f=⟨2x,2y⟩, so at (1,2) it is ⟨2,4⟩."],
+["A unit direction vector must have magnitude:",["1","0","2","−1"],0,"Unit vectors have length one."],
+["If ∇f is perpendicular to a direction u, the directional derivative is:",["0","|∇f|","1","Undefined"],0,"∇f·u=0 means no first-order change in that direction."],
+["For a non-unit direction vector v, the standard directional derivative formula uses:",["v/|v|","v|v|","|v|v","v²"],0,"The direction must be normalized."],
+["Directional derivatives are especially useful for:",["Rates of change and optimization","Only factoring","Only solving quadratics","Only counting sets"],0,"They describe directional rates in multivariable problems."]
+],
+"Tangent planes":[
+["The tangent plane to z=f(x,y) at (a,b) uses:",["f_x(a,b) and f_y(a,b)","Only f(a,b)","Only f_x","Only f_y"],0,"The first partial derivatives determine the local plane slopes."],
+["The tangent plane equation to z=f(x,y) at (a,b) is:",["z−f(a,b)=f_x(a,b)(x−a)+f_y(a,b)(y−b)","z=f(a,b) only","x+y=a+b","z−a=x−b"],0,"This is the linear approximation at the point."],
+["For f(x,y)=x²+y² at (1,1), f_x and f_y are:",["2 and 2","1 and 1","2 and 1","1 and 2"],0,"Both first partial derivatives equal 2 at (1,1)."],
+["A tangent plane is a:",["Local linear approximation","Quadratic curve","Constant function always","Level curve only"],0,"It approximates a smooth surface near a point."],
+["For an implicit surface F(x,y,z)=0, a normal vector at a regular point is:",["∇F","F itself","⟨1,1,1⟩ always","Zero vector always"],0,"The gradient of the implicit function is normal to the surface."],
+["A tangent plane is perpendicular to the:",["Surface normal","x-axis always","z-axis always","Origin"],0,"The normal vector is perpendicular to the tangent plane."],
+["The linearization of f(x,y) is based on:",["First-order partial derivatives","Second-order derivatives only","Integrals only","Limits only"],0,"Linearization uses the first-order Taylor approximation."],
+["If f_x(a,b)=0 and f_y(a,b)=0, the tangent plane to z=f(x,y) is:",["Horizontal","Vertical always","Undefined always","A line"],0,"Both local slopes are zero, so the tangent plane is horizontal."],
+["For a differentiable surface, the tangent plane gives the:",["Best first-order local approximation","Exact surface everywhere","Maximum value","Minimum value"],0,"It captures first-order local behavior."],
+["Tangent planes are used in:",["Linear approximation and surface geometry","Only number theory","Only sequence tests","Only factorisation"],0,"They connect multivariable derivatives with geometry and approximation."]
+],
+"Total differential":[
+["For z=f(x,y), the total differential is:",["dz=f_x dx+f_y dy","dz=f dxdy","dz=f_x+f_y","dz=dx+dy"],0,"The differential combines first-order changes in x and y."],
+["The total differential approximates:",["Small changes in a function","Only exact large changes","Only second derivatives","A definite integral"],0,"It provides a first-order approximation for small input changes."],
+["If z=x²+y², dz is:",["2x dx+2y dy","x dx+y dy","2xy dxdy","dx+dy"],0,"Differentiate with respect to each variable."],
+["The total differential is closely related to:",["Linearization","Prime factorisation","Cross products only","Sequences only"],0,"It is the differential form of the linear approximation."],
+["For f(x,y), the coefficients of dx and dy are:",["f_x and f_y","f and x","x and y","f_xx and f_yy only"],0,"The first partial derivatives multiply the corresponding differentials."],
+["If dx and dy are very small, df provides a good:",["First-order estimate of change in f","Second-order exact value","Limit test only","Area formula"],0,"df estimates the change to first order."],
+["The differential df for one variable f(x) is:",["f'(x)dx","f(x)dx","dx/f'(x)","f''(x)dx"],0,"The one-variable differential is derivative times dx."],
+["Total differentials are useful for:",["Error and uncertainty estimation","Only polynomial division","Only set notation","Only graph transformations"],0,"Small measurement errors can be propagated using differentials."],
+["If f_x=3 and f_y=4, dx=0.1 and dy=0.2, df is:",["1.1","0.7","1.4","2.0"],0,"df=3(0.1)+4(0.2)=1.1."],
+["A total differential ignores:",["Higher-order terms in the first-order approximation","All first derivatives","All variables","The function itself"],0,"It captures first-order behavior and omits higher-order terms."]
+],
+"Jacobian":[
+["The Jacobian matrix contains:",["First-order partial derivatives","Only function values","Only second derivatives","Only constants"],0,"It organizes first partial derivatives of a vector-valued transformation."],
+["For u=x+y and v=x−y, the Jacobian ∂(u,v)/∂(x,y) is:",["−2","2","0","1"],0,"The determinant is (1)(−1)−(1)(1)=−2."],
+["The Jacobian determinant is used in:",["Change of variables in multiple integrals","Only solving quadratics","Only differentiation of one variable","Only sequences"],0,"It supplies the area or volume scaling factor."],
+["For u=x and v=y, the Jacobian determinant is:",["1","0","2","−1"],0,"The identity transformation has determinant one."],
+["A Jacobian determinant equal to zero can indicate:",["Local loss of invertibility","Guaranteed maximum","A constant function","An integral value"],0,"A zero determinant signals singularity of the derivative matrix."],
+["The Jacobian of a transformation is analogous to:",["Derivative matrix","Only scalar derivative","Integral table","Sequence sum"],0,"It generalizes the derivative to vector-valued mappings."],
+["In polar coordinates x=r cosθ, y=r sinθ, |∂(x,y)/∂(r,θ)| equals:",["r","1","r²","sinθ"],0,"The polar area element is r dr dθ."],
+["A Jacobian can describe:",["Local area or volume scaling","Only angle measurement","Only function value","Only curvature"],0,"Its determinant measures local scaling of oriented area or volume."],
+["For a two-variable transformation, the Jacobian matrix is typically:",["2×2","1×1 always","3×3 always","4×4"],0,"Two outputs depending on two inputs give a 2×2 derivative matrix."],
+["Jacobian methods are important in:",["Multivariable integration and coordinate transformations","Only algebraic identities","Only number theory","Only trigonometric identities"],0,"They are fundamental in change-of-variable formulas."]
+],
+"Hessian matrix":[
+["The Hessian matrix contains:",["Second-order partial derivatives","Only first derivatives","Only function values","Only constants"],0,"The Hessian organizes second partial derivatives."],
+["For f(x,y), the Hessian is:",["[[f_xx,f_xy],[f_yx,f_yy]]","[f_x,f_y]","[[x,y],[f,1]]","f_x+f_y"],0,"It is the 2×2 matrix of second partial derivatives."],
+["At a critical point, the Hessian can help classify:",["Local extrema","Only roots of equations","Only limits","Only line slopes"],0,"Second-order information helps distinguish minima, maxima, and saddle behavior."],
+["For f=x²+y², the Hessian is:",["[[2,0],[0,2]]","[[1,0],[0,1]]","[[2,2],[2,2]]","[[0,2],[2,0]]"],0,"Both second pure derivatives are 2 and mixed derivatives are zero."],
+["A positive definite Hessian at a critical point indicates a:",["Local minimum","Local maximum","Saddle point always","Discontinuity"],0,"Positive curvature in all directions gives a local minimum."],
+["A negative definite Hessian at a critical point indicates a:",["Local maximum","Local minimum","Saddle point always","Limit failure"],0,"Negative curvature in all directions gives a local maximum."],
+["An indefinite Hessian at a critical point is associated with a:",["Saddle point","Local minimum always","Local maximum always","Constant function"],0,"Opposite curvature directions produce saddle behavior."],
+["The Hessian is especially useful in:",["Second-order optimization analysis","Only first-order limits","Only arithmetic","Only set operations"],0,"It provides second-order curvature information."],
+["For sufficiently smooth functions, mixed partials often make the Hessian:",["Symmetric","Skew-symmetric","Zero","Diagonal always"],0,"If f_xy=f_yx, the Hessian is symmetric."],
+["The determinant of the Hessian in two variables is part of the:",["Second derivative test","First derivative test","Remainder theorem","Mean value theorem"],0,"The Hessian determinant is used in the multivariable second derivative test."]
+],
+"Constrained optimization":[
+["Constrained optimization finds extrema subject to:",["Restrictions or constraints","No conditions","Only integer values","Only equal variables"],0,"A constraint limits the feasible points."],
+["A constraint can be written as:",["g(x,y)=c","f(x)=0 only","x+y always","df=0 always"],0,"A common equality constraint has the form g(x,y)=c."],
+["The feasible set consists of:",["Points satisfying the constraints","All points in space","Only critical points","Only boundary points"],0,"Feasible points obey every specified constraint."],
+["A constrained maximum is the largest value of f on the:",["Feasible set","Entire plane regardless of constraints","x-axis only","Origin only"],0,"The objective is optimized only over allowed points."],
+["Boundary constraints can cause extrema even when:",["The unconstrained gradient is nonzero","The function is constant","No feasible points exist","The Hessian is undefined always"],0,"An extremum can occur on a constraint boundary."],
+["Lagrange multipliers are a method for:",["Equality-constrained optimization","Only integration","Only solving sequences","Only graphing lines"],0,"They convert a constrained extremum problem into equations."],
+["For a closed and bounded feasible set, a continuous function is guaranteed to attain:",["A maximum and minimum","Only a maximum","Only a minimum","Neither"],0,"This follows from the extreme value theorem on compact sets."],
+["In constrained optimization, the objective function is usually called:",["Objective","Constraint only","Jacobian","Hessian"],0,"The function being maximized or minimized is the objective."],
+["A constraint can reduce the problem from a plane to a:",["Curve","Higher-dimensional space always","Matrix only","Sequence"],0,"One equality constraint in two variables often defines a curve."],
+["Constrained optimization is important in:",["Resource allocation and engineering design","Only factorisation","Only number representation","Only logarithms"],0,"Many practical optimization problems include restrictions."]
+],
+"Lagrange multipliers":[
+["At a regular constrained extremum, the Lagrange multiplier condition is:",["∇f=λ∇g","∇f=∇g+λ","f=λg always","∇f×∇g=λ"],0,"The objective gradient is parallel to the constraint gradient."],
+["For constraint g(x,y)=c, the Lagrange equations include:",["∇f=λ∇g and g=c","Only ∇f=0","Only f=c","g=0 always"],0,"Both the gradient condition and the original constraint are required."],
+["The geometric meaning of ∇f=λ∇g is that the gradients are:",["Parallel","Perpendicular","Equal to zero always","Unrelated"],0,"One is a scalar multiple of the other."],
+["If ∇g is nonzero on the constraint, it is normal to the:",["Constraint curve or surface","Objective value","x-axis always","Origin"],0,"The gradient of a level-set constraint is normal to it."],
+["For maximizing f subject to g=c, λ is:",["A Lagrange multiplier","A partial derivative always","A coordinate","A Hessian entry"],0,"λ is the multiplier introduced to enforce the constraint."],
+["Lagrange multipliers can be extended to:",["Multiple constraints","Only one variable","Only linear functions","Only circles"],0,"Additional constraints introduce additional multipliers."],
+["If f and g have gradients that are not parallel at a feasible point, that point is generally:",["Not a regular constrained extremum","Always a maximum","Always a minimum","A saddle point necessarily"],0,"The necessary Lagrange condition fails there."],
+["For one constraint in two variables, solving Lagrange equations usually gives:",["Candidate constrained extrema","The exact global answer automatically","Only zeros of f","Only boundary points"],0,"The solutions are candidates and require further comparison."],
+["The method is named after:",["Lagrange","Newton","Euler","Gauss"],0,"The technique is associated with Joseph-Louis Lagrange."],
+["Lagrange multipliers are widely used in:",["Optimization under constraints","Only polynomial expansion","Only integration by parts","Only sequence convergence"],0,"They are a central method in constrained optimization."]
 ]
 };

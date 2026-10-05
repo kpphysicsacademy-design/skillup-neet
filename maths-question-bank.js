@@ -193,7 +193,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Simplify 8√5−3√5.",["5√5","5√2","11√5","√5"],0,"Subtract the coefficients of like surds: 8√5−3√5=5√5."],
 ["Which is a like surd to 4√7?",["3√7","4√5","7√4","√14"],0,"Like surds have the same irrational part under the radical; 3√7 matches √7."],
 ["Simplify √12+√27.",["5√3","3√3","7√3","√39"],0,"√12=2√3 and √27=3√3, so the sum is 5√3."],
-["What is √5×√20?",["5","10","20","√25"],0,"√5×√20=√100=10, so the correct value is 10."],
+["What is √5×√20?",["5","10","20","√25"],1,"√5×√20=√100=10, so the correct value is 10."],
 ["Simplify (√3)^2.",["√3","3","6","9"],1,"Squaring a square root gives the radicand: (√3)^2=3."],
 ["Which statement is correct?",["√a+√b=√(a+b) for all a,b≥0","√(ab)=√a√b for a,b≥0","√a−√b=√(a−b) for all a,b≥0","(√a)^2=a only when a is irrational"],1,"For non-negative a and b, the product rule √(ab)=√a√b is valid."],
 ["Simplify √50−√8.",["3√2","7√2","√42","2√2"],0,"√50=5√2 and √8=2√2, so the difference is 3√2."]

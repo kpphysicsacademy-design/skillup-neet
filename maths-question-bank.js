@@ -24,6 +24,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If 7 workers complete a task in 12 days, how many worker-days are required?",["19","42","84","96"],2,"Worker-days=7×12=84."],
 ["In a proportion a:b=c:d, which relation is always true?",["a+b=c+d","a×d=b×c","a−b=c−d","a/b=c+d"],1,"For a valid proportion, the product of the extremes equals the product of the means: ad=bc."]
 ],
+"Percentages":[
+["25% of 200 is:",["25","40","50","75"],2,"25% means 25/100. Thus 25% of 200 = 50."],
+["Convert 0.35 to a percentage.",["3.5%","35%","350%","0.035%"],1,"Multiply the decimal by 100: 0.35×100=35%."],
+["What percentage is 30 out of 120?",["20%","25%","30%","40%"],1,"30/120×100=25%."],
+["Increase 500 by 20%. What is the new value?",["520","550","600","620"],2,"20% of 500 is 100, so the new value is 600."],
+["Decrease 800 by 15%. What is the new value?",["680","700","720","760"],0,"15% of 800 is 120. Therefore 800−120=680."],
+["A student scores 72 out of 90. What is the percentage score?",["70%","75%","80%","85%"],2,"72/90×100=80%."],
+["If 40% of a number is 60, the number is:",["120","150","180","240"],1,"0.40x=60, so x=60/0.40=150."],
+["A price of ₹1000 is increased by 10% and then decreased by 10%. What is the final price?",["₹980","₹990","₹1000","₹1010"],1,"After 10% increase the price is ₹1100. A 10% decrease gives ₹990."],
+["What percentage of 80 is 12?",["10%","12%","15%","20%"],2,"12/80×100=15%."],
+["If a number is increased from 200 to 250, the percentage increase is:",["20%","25%","30%","50%"],1,"Increase=50. Percentage increase=50/200×100=25%."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

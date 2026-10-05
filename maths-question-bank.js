@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Polynomial function":[
+["A polynomial function over $\\mathbb{R}$ has the form:",["$f(x)=a_nx^n+\\cdots+a_1x+a_0$ with $a_n\\ne0$","$f(x)=\\frac1x$ only","$f(x)=\\sqrt{x}$ only","$f(x)=\\sin x$ only"],0,"A polynomial is a finite sum of nonnegative integer powers of x with real coefficients."],
+["The degree of $f(x)=5x^4-3x^2+7$ is:",["4","2","7","5"],0,"The highest power of x with a nonzero coefficient is 4."],
+["The polynomial $p(x)=x^3-4x$ is:",["Odd","Even","Neither","Constant"],0,"$p(-x)=-x^3+4x=-p(x)$, so it is odd."],
+["If $p(a)=0$, then $x-a$ is:",["A factor of $p(x)$","Never a factor","The degree of p","Always the leading coefficient"],0,"By the factor theorem, $p(a)=0$ exactly when $x-a$ divides p(x)."],
+["What is the remainder when $p(x)$ is divided by $x-a$?",["$p(a)$","$p(-a)$","0 always","The degree of p"],0,"The remainder theorem states that the remainder is p(a)."],
+["For $p(x)=x^2-5x+6$, the zeros are:",["2 and 3","1 and 6","−2 and −3","0 and 6"],0,"Factorization gives $p(x)=(x-2)(x-3)$."],
+["Which pseudocode correctly evaluates a polynomial efficiently using Horner's method?",["Set r=a_n; repeatedly update r=r·x+a_k","Multiply all coefficients together","Set r=x for every coefficient","Differentiate before evaluating"],0,"Horner's method evaluates $a_nx^n+\\cdots+a_0$ using repeated multiply-add steps."],
+["If a polynomial of degree n has more than n distinct real zeros, then it is:",["The zero polynomial","A polynomial of degree n with exactly n zeros","Always quadratic","A constant nonzero polynomial"],0,"A nonzero polynomial of degree n has at most n distinct zeros."],
+["For $p(x)=x^3+2x^2-x-2$, which factorization is correct?",["$(x-1)(x+1)(x+2)$","$(x+1)(x+2)(x+2)$","$(x-2)(x-1)(x+1)$","$(x+2)(x-1)^2$"],0,"Grouping gives $x^2(x+2)-1(x+2)=(x^2-1)(x+2)$."],
+["An algorithm receives coefficients $[a_n,\ldots,a_0]$. Which condition identifies a polynomial root r?",["Evaluating the polynomial gives $p(r)=0$","The leading coefficient is zero","The degree becomes negative","Every coefficient equals r"],0,"A root is a value r for which the polynomial evaluates to zero."]
+],
+
 "Bijective function":[
 ["A function $f:A\\to B$ is bijective when it is:",["Both one-one and onto","Only one-one","Only onto","Neither one-one nor onto"],0,"A bijection is simultaneously injective and surjective."],
 ["For a bijective function $f:A\\to B$, every element of $B$ has:",["Exactly one preimage in A","At least two preimages","No preimage","An infinite number of preimages"],0,"Surjectivity gives at least one preimage and injectivity gives at most one, hence exactly one."],

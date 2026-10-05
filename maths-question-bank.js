@@ -73,6 +73,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Simplify (2^−2)^3.",["2^−5","2^−6","2^6","2^5"],1,"For a power raised to a power, multiply exponents: 2^(−2×3)=2^−6."]
 ],
 "Fractional exponents":[["What is \\(16^{1/2}\\)?",["2","4","8","16"],1,"\\(16^{1/2}=\\sqrt{16}=4\\)."],["What is \\(27^{1/3}\\)?",["3","6","9","27"],0,"\\(27^{1/3}=\\sqrt[3]{27}=3\\)."],["Which expression is equal to \\(x^{1/2}\\)?",["\\(\\sqrt{x}\\)","\\(x^2\\)","\\(2x\\)","\\(1/x\\)"],0,"\\(x^{1/2}\\) represents the square root of \\(x\\)."],["Simplify \\(8^{2/3}\\).",["2","4","6","8"],1,"\\(8^{2/3}=(\\sqrt[3]{8})^2=2^2=4\\)."],["Which expression is equal to \\(a^{3/2}\\)?",["\\(\\sqrt{a^3}\\)","\\(3\\sqrt a\\)","\\(a/2\\)","\\(\\sqrt{a/3}\\)"],0,"\\(a^{3/2}=\\sqrt{a^3}\\) where defined in the real-number domain."],["What is \\(81^{3/4}\\)?",["9","27","54","81"],1,"\\(81^{3/4}=(\\sqrt[4]{81})^3=3^3=27\\)."],["Simplify \\(x^{1/3}x^{2/3}\\), for \\(x>0\\).",["\\(x^{1/3}\\)","\\(x^{2/3}\\)","\\(x\\)","\\(x^2\\)"],2,"Add exponents: \\(x^{1/3+2/3}=x\\)."],["Which is equal to \\(\\sqrt[3]{x^2}\\)?",["\\(x^{1/2}\\)","\\(x^{2/3}\\)","\\(x^{3/2}\\)","\\(x^{-2/3}\\)"],1,"\\(\\sqrt[3]{x^2}=x^{2/3}\\)."],["If \\(x^{1/2}=5\\) and \\(x>0\\), what is \\(x\\)?",["5","10","25","50"],2,"Squaring both sides gives \\(x=5^2=25\\)."],["Which law is correct for \\(a>0\\)?",["\\(a^{m/n}=(\\sqrt[n]{a})^m\\)","\\(a^{m/n}=a^{m+n}\\)","\\(a^{m/n}=a^{mn}\\)","\\(a^{m/n}=m/n\\)"],0,"A fractional exponent can be written as \\(a^{m/n}=(\\sqrt[n]{a})^m\\)."]],
+"Roots":[
+["What is \\(\\sqrt{49}\\)?",["5","6","7","8"],2,"The principal square root of 49 is 7."],
+["What is \\(\\sqrt[3]{125}\\)?",["3","4","5","6"],2,"Since \\(5^3=125\\), \\(\\sqrt[3]{125}=5\\)."],
+["Simplify \\(\\sqrt{50}\\).",["\\(5\\sqrt2\\)","\\(10\\sqrt2\\)","\\(25\\sqrt2\\)","\\(2\\sqrt5\\)"],0,"\\(\\sqrt{50}=\\sqrt{25\\cdot2}=5\\sqrt2\\)."],
+["What is \\(\\sqrt{81/16}\\)?",["\\(4/9\\)","\\(9/4\\)","\\(81/16\\)","\\(3/4\\)"],1,"\\(\\sqrt{81/16}=\\sqrt{81}/\\sqrt{16}=9/4\\)."],
+["Which statement is correct for real \\(x\\)?",["\\(\\sqrt{x^2}=x\\) always","\\(\\sqrt{x^2}=|x|\\)","\\(\\sqrt{x^2}=x^2\\)","\\(\\sqrt{x^2}=2x\\)"],1,"The principal square root is non-negative, so \\(\\sqrt{x^2}=|x|\\)."],
+["What is \\(\\sqrt{12}\\) in simplest surd form?",["\\(2\\sqrt3\\)","\\(3\\sqrt2\\)","\\(6\\sqrt2\\)","\\(4\\sqrt3\\)"],0,"\\(\\sqrt{12}=\\sqrt{4\\cdot3}=2\\sqrt3\\)."],
+["What is \\(\\sqrt[3]{-27}\\)?",["−9","−3","3","9"],1,"The cube root of −27 is −3 because \\((-3)^3=-27\\)."],
+["Which is greater?",["\\(\\sqrt{36}\\)","5","They are equal","Cannot be compared"],0,"\\(\\sqrt{36}=6\\), and 6 is greater than 5."],
+["If \\(\\sqrt{x}=6\\) and \\(x\\ge0\\), then \\(x\\) is:",["6","12","36","42"],2,"Squaring both sides gives \\(x=36\\)."],
+["Which identity is valid for \\(a,b\\ge0\\)?",["\\(\\sqrt{ab}=\\sqrt a+\\sqrt b\\)","\\(\\sqrt{ab}=\\sqrt a\\,\\sqrt b\\)","\\(\\sqrt{a+b}=\\sqrt a+\\sqrt b\\)","\\(\\sqrt{a/b}=\\sqrt a+\\sqrt b\\)"],1,"For non-negative a and b, \\(\\sqrt{ab}=\\sqrt a\\,\\sqrt b\\)."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

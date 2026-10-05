@@ -1938,4 +1938,88 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The dot product of velocity and acceleration can relate to:",["Change in speed","Only position","Only time","Volume"],0,"v·a is connected to the derivative of speed squared."],
 ["Vector functions are fundamental in:",["Multivariable calculus and mechanics","Only arithmetic","Only sequences","Only factorisation"],0,"They describe curves, fields, and physical motion."]
 ]
+,"Vector algebra":[
+["A vector has:",["Magnitude and direction","Only magnitude","Only direction","Only a scalar value"],0,"A vector quantity is characterized by both magnitude and direction."],
+["The magnitude of ⟨a,b⟩ is:",["√(a²+b²)","a+b","ab","a²+b²"],0,"Use the Euclidean norm."],
+["The zero vector has magnitude:",["0","1","−1","Undefined"],0,"All components are zero, so its magnitude is zero."],
+["Two vectors are equal when they have:",["Equal corresponding components","Only equal magnitudes","Only equal directions","Opposite directions"],0,"Vector equality requires both magnitude and direction, represented by equal components."],
+["The vector from A(x₁,y₁) to B(x₂,y₂) is:",["⟨x₂−x₁,y₂−y₁⟩","⟨x₁−x₂,y₁−y₂⟩","⟨x₁+x₂,y₁+y₂⟩","⟨x₁x₂,y₁y₂⟩"],0,"Subtract the initial point from the terminal point."],
+["A unit vector has magnitude:",["1","0","2","−1"],0,"By definition, a unit vector has length one."],
+["A vector can be multiplied by a scalar to:",["Change its magnitude and possibly direction","Always make it zero","Only change its components equally by addition","Remove its direction"],0,"Scalar multiplication scales the vector; a negative scalar reverses direction."],
+["If v=⟨3,4⟩, |v| is:",["5","7","12","25"],0,"|v|=√(3²+4²)=5."],
+["The negative of a vector has:",["Same magnitude and opposite direction","Different magnitude and same direction","Zero magnitude","No direction"],0,"−v reverses direction without changing magnitude."],
+["Vectors are commonly used to represent:",["Displacement and force","Only temperature","Only mass","Only scalar constants"],0,"Displacement and force are standard vector quantities."]
+],
+"Dot product":[
+["The dot product of a=⟨a₁,a₂⟩ and b=⟨b₁,b₂⟩ is:",["a₁b₁+a₂b₂","a₁+b₁+a₂+b₂","a₁b₂−a₂b₁","|a||b|"],0,"Multiply corresponding components and add."],
+["If a·b=0 for nonzero vectors, then the vectors are:",["Perpendicular","Parallel","Equal","Opposite only"],0,"A zero dot product indicates orthogonality."],
+["The geometric formula for a·b is:",["|a||b|cosθ","|a||b|sinθ","|a|+|b|","|a|−|b|"],0,"θ is the angle between the vectors."],
+["The dot product of a vector with itself is:",["|a|²","|a|","0","1 always"],0,"a·a=|a|²."],
+["If a=⟨1,2⟩ and b=⟨3,4⟩, a·b is:",["11","10","14","7"],0,"1·3+2·4=11."],
+["The dot product is a:",["Scalar","Vector","Matrix always","Function always"],0,"Its output is a scalar number."],
+["For parallel vectors pointing in the same direction, their dot product is:",["Positive","Negative","Zero","Undefined"],0,"The angle is 0°, so cosθ=1."],
+["For parallel vectors pointing in opposite directions, their dot product is:",["Negative","Positive","Zero always","Undefined"],0,"The angle is 180°, so cosθ=−1."],
+["The projection of a onto a unit vector u is related to:",["a·u","a×u","|a|+|u|","a/u"],0,"The scalar component along u is a·u."],
+["Dot products are useful for finding:",["Angles and orthogonality","Only area","Only volume","Only limits"],0,"The dot product provides angle and perpendicularity information."]
+],
+"Cross product":[
+["The cross product is defined for vectors in:",["Three-dimensional space","One-dimensional space only","Scalars only","Two numbers only"],0,"The standard cross product produces a 3D vector."],
+["The cross product a×b is:",["Perpendicular to both a and b","Parallel to both always","A scalar","Always zero"],0,"Its direction is perpendicular to the plane containing a and b."],
+["The magnitude |a×b| equals:",["|a||b|sinθ","|a||b|cosθ","|a|+|b|","|a|−|b|"],0,"The magnitude is base times height in parallelogram geometry."],
+["If a and b are parallel, a×b is:",["Zero","A unit vector","Maximum","Undefined"],0,"sin0°=0, so the cross product vanishes."],
+["The cross product of i and j is:",["k","−k","i","j"],0,"Using the right-hand rule, i×j=k."],
+["The cross product is:",["Anticommutative","Commutative","Associative in all cases","A scalar"],0,"a×b=−(b×a)."],
+["The vector a×b is normal to the:",["Plane containing a and b","x-axis always","y-axis always","Origin only"],0,"It gives a normal vector to the two-vector plane."],
+["The area of the parallelogram spanned by a and b is:",["|a×b|","a·b","|a|+|b|","|a−b|"],0,"The cross-product magnitude equals the parallelogram area."],
+["The area of the triangle spanned by a and b is:",["(1/2)|a×b|","|a×b|","2|a×b|","a·b/2"],0,"A triangle has half the parallelogram area."],
+["Cross products are especially useful for finding:",["Normals and areas","Only limits","Only derivatives","Only scalar sums"],0,"They provide perpendicular vectors and geometric areas."]
+],
+"Planes and lines":[
+["A line in 3D can be represented parametrically as:",["r=r₀+tv","r=r₀·v","r=v/t","r=t+r₀v²"],0,"A point plus a scalar multiple of a direction vector defines a line."],
+["A plane can be represented using a point and:",["A normal vector","Only a tangent scalar","Only a radius","A sequence"],0,"A normal vector determines the plane's orientation."],
+["The equation of a plane with normal ⟨A,B,C⟩ through (x₀,y₀,z₀) is:",["A(x−x₀)+B(y−y₀)+C(z−z₀)=0","Ax+By+C=0 always","x+y+z=0 always","A+B+C=0"],0,"The displacement from the point is perpendicular to the normal."],
+["Two planes are parallel when their normal vectors are:",["Parallel","Perpendicular","Equal to zero","Unit only"],0,"Parallel normals imply parallel planes."],
+["A line is parallel to a plane when its direction vector is:",["Perpendicular to the plane's normal","Parallel to the normal","Zero only","Equal to the origin"],0,"v·n=0 means the line direction lies parallel to the plane."],
+["The intersection of two nonparallel planes is generally a:",["Line","Point always","Plane","Circle"],0,"Two distinct nonparallel planes intersect in a line."],
+["The distance from a point to a plane uses the:",["Plane equation and point coordinates","Cross product only","Determinant only","Slope only"],0,"Substitute the point into the plane-distance formula."],
+["A line direction vector determines:",["Its orientation","Its length only","Its endpoint uniquely","Its plane always"],0,"The direction vector controls the line's direction."],
+["A plane normal vector is:",["Perpendicular to every direction lying in the plane","Parallel to every direction in the plane","A point on the plane","A scalar"],0,"By definition, the normal is perpendicular to the plane."],
+["Lines in 3D can be:",["Intersecting, parallel, or skew","Only intersecting","Only parallel","Always coplanar"],0,"Skew lines are nonparallel, nonintersecting, and noncoplanar."]
+],
+"Multivariable limits":[
+["A multivariable limit considers approaching a point from:",["All possible paths","Only the x-axis","Only the y-axis","One fixed direction"],0,"The limit must agree regardless of the path of approach."],
+["If two paths give different limiting values, the multivariable limit:",["Does not exist","Equals their average","Is zero","Is infinite always"],0,"Path dependence proves nonexistence."],
+["A limit of f(x,y) as (x,y)→(a,b) requires:",["The function approach one common value along all paths","Only one path","f(a,b) exist necessarily","The derivatives exist"],0,"All approaches must yield the same value."],
+["Polar coordinates can help analyze limits near:",["The origin","Only infinity","Only a line","Only a rectangle"],0,"x=r cosθ and y=r sinθ can reveal directional behavior near (0,0)."],
+["If |f(x,y)|≤g(x,y) and g→0, the squeeze theorem can show:",["f→0","f→1","f diverges","f is undefined"],0,"The squeeze theorem extends to multivariable functions."],
+["A function may have a limit at a point even if it is:",["Undefined at that point","Always discontinuous nearby","Unbounded everywhere","Constant only"],0,"The limit concerns nearby behavior, not necessarily the function's value at the point."],
+["Continuity at (a,b) requires the limit to equal:",["f(a,b)","0 always","1 always","The derivative"],0,"Continuity means lim f(x,y)=f(a,b)."],
+["A common path test uses paths such as:",["y=mx","Only y=x²","Only x=0","Only y=0"],0,"Different straight-line paths can test path dependence."],
+["If every tested path gives the same value, the limit is:",["Not automatically proved","Always proved","Zero","Undefined"],0,"Checking a few paths can disprove a limit, but usually cannot prove it."],
+["Multivariable limits are foundational for:",["Continuity and multivariable derivatives","Only arithmetic","Only sequences","Only factorisation"],0,"Limits underpin continuity and differentiation in several variables."]
+],
+"Partial derivatives":[
+["The partial derivative ∂f/∂x treats y as:",["Constant","Zero","Equal to x","Undefined"],0,"Differentiate with respect to x while holding other variables fixed."],
+["For f(x,y)=x²y, ∂f/∂x is:",["2xy","x²","2x","y"],0,"Treat y as constant: derivative is 2xy."],
+["For f(x,y)=x²y, ∂f/∂y is:",["x²","2xy","y²","2x"],0,"Treat x as constant."],
+["The notation f_x means:",["∂f/∂x","∂f/∂y","df/dx only for one variable","f/x"],0,"f_x denotes the partial derivative with respect to x."],
+["A partial derivative measures change with respect to:",["One variable while others are held fixed","All variables simultaneously","No variable","Only time"],0,"This is the defining idea of partial differentiation."],
+["For f(x,y)=x+y, f_x is:",["1","0","x","y"],0,"The derivative of x is 1 and y is treated as constant."],
+["For f(x,y)=xy², f_y is:",["2xy","y²","x","2y"],0,"Differentiate y² to get 2y and multiply by x."],
+["Second partial derivatives include:",["f_xx and f_xy","Only f_x","Only f_y","f/x"],0,"They are obtained by differentiating partial derivatives again."],
+["For sufficiently smooth functions, mixed partials often satisfy:",["f_xy=f_yx","f_xy=−f_yx","f_xy=0 always","f_xy=1 always"],0,"Clairaut's theorem gives equality under suitable continuity conditions."],
+["Partial derivatives are central to:",["Multivariable calculus","Only arithmetic","Only algebraic identities","Only one-variable sequences"],0,"They describe local change in several variables."]
+],
+"Gradient":[
+["The gradient of f(x,y) is:",["⟨f_x,f_y⟩","f_x+f_y only","⟨f,f_x⟩","f_xf_y"],0,"The gradient collects all first partial derivatives."],
+["The gradient points in the direction of:",["Steepest increase","Steepest decrease always","Zero change always","The x-axis always"],0,"∇f points toward the greatest directional increase."],
+["The magnitude |∇f| gives the:",["Maximum rate of increase","Minimum function value","Function value always","Second derivative"],0,"The gradient magnitude is the maximum directional derivative."],
+["A level curve f(x,y)=c has tangent direction:",["Perpendicular to ∇f","Parallel to ∇f","Equal to ∇f","Zero"],0,"The gradient is normal to level curves."],
+["For f=x²+y², ∇f is:",["⟨2x,2y⟩","⟨x,y⟩","x²+y²","⟨2,2⟩"],0,"Take the two partial derivatives."],
+["At (1,2), the gradient of x²+y² is:",["⟨2,4⟩","⟨1,2⟩","⟨2,2⟩","⟨4,2⟩"],0,"Substitute x=1,y=2 into ⟨2x,2y⟩."],
+["The gradient is a:",["Vector","Scalar","Constant always","Matrix only"],0,"It contains directional components."],
+["A normal vector to a level surface f(x,y,z)=c is given by:",["∇f","f","f_x only","x+y+z"],0,"The gradient is normal to the level surface."],
+["If ∇f=0 at an interior point, it is a:",["Critical point candidate","Guaranteed maximum","Guaranteed minimum","Point at infinity"],0,"A zero gradient identifies a critical point candidate."],
+["Gradients are useful in:",["Optimization and directional derivatives","Only integration","Only factorisation","Only sequence sums"],0,"They are central to multivariable optimization and rate calculations."]
+]
 };

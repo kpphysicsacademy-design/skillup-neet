@@ -55,7 +55,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
-<script src="maths-question-bank.js?v=20261005ag"></script>
+<script src="maths-question-bank.js?v=20261005-final"></script>
 <script>
 const qs=new URLSearchParams(location.search),concept=qs.get('concept')||'Natural numbers';
 let skillUpSession=null;
@@ -91,12 +91,15 @@ questions:[
 const data=bank[concept]||null;document.getElementById('headerTitle').textContent=concept;
 function typeset(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}
 if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(typeset);
-const bankQuiz=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept]);
+let bankQuiz=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept]);
 if(!Array.isArray(bankQuiz)||!bankQuiz.length){
- console.warn('Dedicated Maths quiz bank entry not loaded for concept:',concept);
- document.getElementById('quiz').style.display='none';
- document.getElementById('result').style.display='none';
- throw new Error('No dedicated Maths quiz available for concept: '+concept);
+ console.warn('Refreshing Maths quiz bank for concept:',concept);
+ const refreshScript=document.createElement('script');
+ refreshScript.src='maths-question-bank.js?v=20261005-final';
+ refreshScript.onload=()=>location.reload();
+ refreshScript.onerror=()=>console.error('Unable to refresh Maths quiz bank.');
+ document.head.appendChild(refreshScript);
+ throw new Error('Refreshing Maths quiz bank…');
 }
 const questions=bankQuiz;
 let i=0,score=0,answered=false;

@@ -316,4 +316,77 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x<4, which statement is always true?",["x+1<5","x+1>5","x−1>4","2x>8"],0,"Adding 1 to both sides preserves the inequality: x+1<5."],
 ["Which inequality is true?",["−3>−1","−4<−2","5<2","0<−1"],1,"−4 lies to the left of −2 on the number line, so −4<−2."],
 ["When multiplying an inequality by a negative number, the inequality sign:",["Stays the same","Reverses","Becomes equal","Disappears"],1,"Multiplication or division by a negative reverses the direction of the inequality."]
+
+,"Variables":[
+["In the expression 3x+5, x is a:",["Variable","Constant","Coefficient","Exponent"],0,"x can take different values, so it is the variable."],
+["Which is a variable?",["7","−3","y","1/2"],2,"y represents a quantity that can vary."],
+["In 4a−9, the coefficient of a is:",["−9","4","a","13"],1,"The coefficient is the numerical factor multiplying a, which is 4."],
+["Which expression contains two variables?",["x+5","3a−2b","7x","12"],1,"a and b are two different variables."],
+["If x=5, the value of x+2 is:",["5","6","7","10"],2,"Substitute x=5: 5+2=7."],
+["Which symbol is commonly used for a variable?",["x","0","π only","100"],0,"Letters such as x, y, and z are commonly used to represent variables."],
+["In 7mn, which are variables?",["7 only","m and n","7 and m","7 and n"],1,"m and n can vary, while 7 is a constant coefficient."],
+["If a=3 and b=4, then a+b is:",["5","6","7","12"],2,"Substitution gives 3+4=7."],
+["Which statement is true?",["A variable always has one fixed value","A variable can represent different values","A variable must be a whole number","A variable cannot appear in an equation"],1,"A variable represents a quantity whose value may change."],
+["In 2x²+3, x is the:",["Constant","Variable","Coefficient of 3","Whole expression"],1,"x is the variable in the expression."]
+],
+"Constants":[
+["In 5x+7, the constant term is:",["5","x","7","12"],2,"The term 7 has no variable, so it is the constant term."],
+["Which is a constant?",["x","y","−8","2a"],2,"−8 has a fixed numerical value and no variable."],
+["In 3a−5, the constant is:",["3","a","−5","3a"],2,"−5 is independent of the variable a."],
+["What is the constant term in x²+4x+9?",["1","4","9","x"],2,"The term without x is 9."],
+["Which expression has constant term 12?",["3x+12","12x+3","x−12","x/12"],0,"In 3x+12, 12 is the constant term."],
+["A constant has:",["A fixed value","An always-changing value","Only a variable","No numerical value"],0,"A constant remains fixed in a given expression or problem."],
+["In 7−2y, the constant term is:",["7","−2","y","2y"],0,"7 does not contain the variable y."],
+["Which is not a constant?",["0","5","−11","p"],3,"p is a variable."],
+["If c=10 is declared constant, c:",["Must change","Has a fixed value","Must equal 0","Must be negative"],1,"By definition, a constant is fixed."],
+["The constant term of 4x−3y+6 is:",["4","−3","6","x"],2,"6 is the term without a variable."]
+],
+"Terms":[
+["How many terms are in 3x+5?",["1","2","3","5"],1,"The two terms are 3x and 5."],
+["The terms of 7a−4 are:",["7 and a","7a and −4","a and −4","7a−4 only"],1,"Terms are separated by plus or minus signs."],
+["How many terms are in x²+3x−7?",["2","3","4","7"],1,"The three terms are x², 3x, and −7."],
+["Which is a single term?",["x+2","3ab","a−b","x/y+1"],1,"3ab is one term because it has no addition or subtraction separating parts."],
+["In 5x−2y+9, which is a term?",["5x","x−2","2y+9","5"],0,"5x is one of the terms of the expression."],
+["Like terms must have:",["The same variables with the same exponents","The same coefficients only","Different variables","No variables"],0,"Like terms have identical variable parts, including exponents."],
+["How many terms are in 4a²−3a+2?",["1","2","3","4"],2,"The terms are 4a², −3a, and 2."],
+["Which expression has exactly four terms?",["x+1","a+b+c","p+q+r+s","2x−3"],2,"p, q, r, and s are four separate terms."],
+["The terms in 9m+2n−6 are:",["9m, 2n, −6","9, m, 2, n, 6","9m+2n, −6","m,n only"],0,"The expression has three terms: 9m, 2n, and −6."],
+["A term can contain:",["Only numbers","Only variables","Numbers and variables multiplied together","Only addition"],2,"A term may be a constant or a product of numerical and variable factors."]
+],
+"Coefficients":[
+["In 7x, the coefficient of x is:",["7","x","0","1/7"],0,"The numerical factor multiplying x is 7."],
+["In −3y, the coefficient of y is:",["3","−3","y","−y"],1,"The sign is part of the coefficient, so it is −3."],
+["What is the coefficient of a in a?",["0","1","a","−1"],1,"The coefficient of a alone is understood to be 1."],
+["In 5x², the coefficient of x² is:",["2","5","x","25"],1,"5 multiplies x², so it is the coefficient."],
+["In −8ab, the coefficient of ab is:",["8","−8","ab","−ab"],1,"The numerical factor is −8."],
+["What is the coefficient of x in 4x+9?",["4","9","x","13"],0,"4 is the numerical factor multiplying x."],
+["In 3p²−7p+2, the coefficient of p is:",["3","−7","2","p"],1,"The p-term is −7p, so its coefficient is −7."],
+["The coefficient of xy in xy is:",["0","1","x","y"],1,"When no number is written, the coefficient is 1."],
+["Which is the coefficient of z² in −z²+4?",["−1","1","2","4"],0,"The coefficient of z² is −1."],
+["In 6m+2n, the coefficient of n is:",["6","2","m","n"],1,"2 is the numerical factor multiplying n."]
+],
+"Like terms":[
+["Which pair are like terms?",["3x and 5x","3x and 5y","x and x²","2a and 2b"],0,"Both 3x and 5x have the same variable part x."],
+["Which pair are unlike terms?",["4a and 7a","2x² and 5x²","3p and 3q","9y and −2y"],2,"p and q are different variables, so the terms are unlike."],
+["Simplify 3x+5x.",["8","8x","15x","2x"],1,"Add coefficients of like terms: 3+5=8."],
+["Simplify 9a−4a.",["5","5a","13a","−5a"],1,"9a−4a=(9−4)a=5a."],
+["Simplify 2x+3y+4x.",["6x+3y","9xy","5x+3y","6x+4y"],0,"Combine 2x and 4x to get 6x; 3y remains."],
+["Which terms can be combined?",["2a and 3a","2a and 3b","x and x²","5 and 5x"],0,"Only terms with the same variable part can be directly combined."],
+["Simplify 7m−2n+3m.",["10m−2n","10mn","5m−2n","7m+n"],0,"7m+3m=10m, while −2n remains."],
+["What is 4p+6−p?",["3p+6","5p+6","4p+5","3p−6"],0,"4p−p=3p, so the result is 3p+6."],
+["Which statement is correct?",["Unlike terms are always combined","Like terms have identical variable parts","Like terms must have equal coefficients","Constants can never be like terms"],1,"Like terms have the same variables raised to the same powers."],
+["Simplify 5x²+2x−3x².",["2x²+2x","8x²","2x²−2x","5x²−x"],0,"5x²−3x²=2x², and 2x remains unchanged."]
+],
+"Algebraic expressions":[
+["Which is an algebraic expression?",["3x+5","7=7","x=2","Hello"],0,"3x+5 combines numbers and variables using mathematical operations."],
+["Which expression represents '5 more than x'?",["5x","x−5","x+5","5−x"],2,"Adding 5 to x gives x+5."],
+["Which expression represents 'three times y'?",["y+3","3+y","3y","y/3"],2,"Three times y is written as 3y."],
+["Simplify 4x+3x.",["7","7x","12x","x"],1,"Combine like terms: 4x+3x=7x."],
+["What is the value of 2x+1 when x=4?",["7","8","9","10"],2,"Substitute x=4: 2(4)+1=9."],
+["Which is a binomial?",["x","x+2","x²+x+1","5"],1,"A binomial has exactly two terms: x and 2."],
+["Which is a trinomial?",["x+1","x²+2x+1","3x","7"],1,"x²+2x+1 has three terms."],
+["The expression 6a−4 contains:",["One term","Two terms","Three terms","Four terms"],1,"The terms are 6a and −4."],
+["Which expression represents 'twice x decreased by 3'?",["2(x−3)","2x−3","x−6","3−2x"],1,"Twice x is 2x, then subtract 3: 2x−3."],
+["If a=2 and b=5, the value of 3a+b is:",["8","9","10","11"],1,"3(2)+5=11." ]
+
 ]};

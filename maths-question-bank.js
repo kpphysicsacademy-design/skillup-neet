@@ -604,4 +604,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The domain of (f/g)(x) must exclude values where:",["f(x)=0","g(x)=0","f(x)=g(x)","x=0 always"],1,"Division by g(x) requires g(x)≠0."],
 ["If f(x)=x+1 and g(x)=x−1, then (f+g)(x) is:",["2x","2","x²−1","x"],0,"(x+1)+(x−1)=2x."],
 ["Which operation combines two functions by adding their outputs?",["f+g","fg","f∘g","f−g"],0,"(f+g)(x)=f(x)+g(x)."]
+,"Range finding":[
+["The range of f(x)=2x+1 for real x is:",["y≥1","y≤1","All real numbers","y>0"],2,"A non-constant linear function with real input has every real number as an output."],
+["The range of f(x)=x²−4 is:",["y≥−4","y≤−4","All real y","y>−4"],0,"Since x²≥0, x²−4≥−4."],
+["The minimum value of x²+3 is:",["0","2","3","−3"],2,"x² is at least 0, so x²+3 is at least 3."],
+["The range of f(x)=|x|−2 is:",["y≥−2","y≤−2","All real y","y>2"],0,"Since |x|≥0, |x|−2≥−2."],
+["For f(x)=1/x over the reals, the range is:",["All real numbers","y≠0","y≥0","y≤0"],1,"1/x can never equal 0, but every other real value is possible."],
+["The range of f(x)=√(x+1) is:",["y≥0","y≥1","y≤0","All real y"],0,"A principal square root is always non-negative."],
+["If f(x)=x² and x is restricted to x≥0, the range is:",["y<0","y≥0","y≤0","All real y"],1,"Squaring non-negative x gives every non-negative output."],
+["For f(x)=3−x, x∈R, the range is:",["y≤3","y≥3","All real numbers","y>3"],2,"As x varies over all reals, 3−x also takes every real value."],
+["If f maps {−1,0,1} to outputs {0,1}, which set could be its range?",["{−1,0,1}","{0,1}","{2,3}","All reals"],1,"The range contains actual outputs, which may be 0 and 1."],
+["The range of f(x)=(x−2)²+5 is:",["y≥5","y≤5","y>5","All real y"],0,"The square term is non-negative, so the minimum output is 5."]
+],
+"Domain restrictions":[
+["For f(x)=1/(x−4), which value is excluded?",["−4","0","4","8"],2,"The denominator is zero when x=4."],
+["For f(x)=√(x−5), the real domain requires:",["x≤5","x≥5","x<5","All x"],1,"The radicand must satisfy x−5≥0."],
+["For f(x)=1/(x²−9), the excluded values are:",["3 only","−3 only","±3","0"],2,"x²−9=0 at x=±3."],
+["For f(x)=√(2x+6), the real-domain condition is:",["x≥−3","x≤−3","x≥3","x>−6"],0,"2x+6≥0 gives x≥−3."],
+["For f(x)=1/√x over the reals, the domain is:",["x≥0","x>0","x<0","All reals"],1,"The square root requires x≥0, and the denominator cannot be zero, so x>0."],
+["For f(x)=√(x−1)/(x−3), which values are excluded?",["x<1","x=1 only","x=3 only","x=3 and x<1"],2,"The square root requires x≥1, while the denominator excludes x=3."],
+["The domain of a polynomial function is:",["All real numbers","Only positive reals","Only integers","All nonzero reals"],0,"Polynomials have no denominator or even-root restrictions."],
+["For f(x)=1/(x+2), the domain excludes:",["2","−2","0","−1"],1,"x+2 cannot equal zero, so x≠−2."],
+["For f(x)=√(4−x), the real domain is:",["x≥4","x≤4","x>4","All real x"],1,"4−x≥0 gives x≤4."],
+["A domain restriction is introduced whenever an input makes the expression:",["Undefined","Larger","Positive","An integer"],0,"Inputs producing undefined expressions must be excluded."]
+],
+"Piecewise functions":[
+["A piecewise function uses:",["Different formulas on specified parts of the domain","Only one formula everywhere","No variables","Only constants"],0,"Different rules apply on different intervals or conditions."],
+["If f(x)=x for x<0 and f(x)=2x for x≥0, then f(3) is:",["3","6","0","−6"],1,"Since 3≥0, use f(x)=2x, giving 6."],
+["For the same function, f(−2) is:",["−2","−4","2","4"],0,"Since −2<0, use f(x)=x."],
+["If f(x)=x+1 for x<2 and f(x)=x² for x≥2, then f(2) is:",["2","3","4","5"],2,"At x=2 use the second rule: 2²=4."],
+["A condition such as x≤1 determines:",["Which formula applies","The coefficient only","The range only","The derivative"],0,"The condition selects the applicable branch."],
+["A piecewise function can be continuous at a boundary when:",["The relevant one-sided values agree with the function value","The formulas are always identical","The domain is empty","The output is always zero"],0,"Continuity at a boundary requires matching limiting values and the function value."],
+["If f(x)=0 for x<1 and f(x)=1 for x≥1, then f(1) is:",["0","1","Undefined","−1"],1,"The condition x≥1 includes x=1 in the second branch."],
+["For f(x)=x+2 when x≤0 and x−2 when x>0, f(−3) is:",["−5","−1","1","5"],0,"−3≤0, so f(−3)=−3+2=−1."],
+["A piecewise definition must clearly specify:",["The rule and its applicable condition","Only the first formula","Only the largest input","No conditions"],0,"Each branch needs a formula and a condition."],
+["Piecewise functions are especially useful for:",["Rules that change across different input intervals","Only quadratic equations","Only constant values","Avoiding all domains"],0,"They model situations where different rules apply in different regions."]
+],
+"Function composition":[
+["If f(x)=x+1 and g(x)=2x, then (f∘g)(x) is:",["2x+1","2x+2","x+3","3x"],0,"f(g(x))=f(2x)=2x+1."],
+["If f(x)=2x and g(x)=x+3, then (g∘f)(x) is:",["2x+3","2x+6","x+6","2x²+3"],1,"g(f(x))=g(2x)=2x+3."],
+["In f∘g, which function is applied first?",["f","g","Both simultaneously","Neither"],1,"(f∘g)(x)=f(g(x)), so g acts first."],
+["If f(x)=x² and g(x)=x+1, then (f∘g)(2) is:",["4","6","9","16"],2,"g(2)=3, then f(3)=9."],
+["If f(x)=x−1 and g(x)=3x, then (f∘g)(4) is:",["9","11","12","13"],1,"g(4)=12 and f(12)=11."],
+["Function composition is generally:",["Commutative","Not commutative","Always constant","Undefined"],1,"Usually f∘g and g∘f are different."],
+["If I is the identity function, then f∘I equals:",["I","0","f","f²"],2,"f(I(x))=f(x)."],
+["If f(x)=x+2 and g(x)=x−2, then (f∘g)(x) is:",["x","x+4","x−4","2x"],0,"f(g(x))=(x−2)+2=x."],
+["For composition, the output of the inner function must belong to the:",["Domain of the outer function","Range of the outer function","Coefficient set","Constant term"],0,"The inner output must be an allowed input for the outer function."],
+["Which notation represents composition?",["f+g","fg","f∘g","f−g"],2,"The symbol ∘ denotes function composition."]
+],
+"Composition properties":[
+["Function composition is generally:",["Associative","Commutative","Idempotent for all functions","Undefined"],0,"Composition is associative: (f∘g)∘h=f∘(g∘h)."],
+["In general, f∘g is equal to:",["g∘f always","g∘f only for special functions","0","1"],1,"Composition is not commutative in general, though some functions may commute."],
+["Which property does composition satisfy?",["Associativity","Subtraction only","No algebraic property","Always commutativity"],0,"Associativity holds whenever the compositions are defined."],
+["If f∘g=I, then g may act as a:",["Inverse of f on the relevant domain/range","Constant function","Zero function","Derivative"],0,"A two-sided or appropriate inverse composition can yield the identity."],
+["If f∘I is defined, it equals:",["I","f","0","1"],1,"Applying identity first does not change the input to f."],
+["If I∘f is defined, it equals:",["f","I","0","f²"],0,"The identity leaves the output of f unchanged."],
+["For three functions, associativity means:",["(f∘g)∘h=f∘(g∘h)","f∘g=g∘f","f+g=h","f∘g=0"],0,"Grouping of composition can change without changing the result."],
+["If f∘g and g∘f both exist, they:",["Must be equal","May be different","Must be zero","Must be identity"],1,"Composition need not commute."],
+["Composition of functions is possible only when:",["The relevant ranges and domains are compatible","All functions are constant","All domains are integers","The functions are identical"],0,"The output of one function must be valid input for the next."],
+["Which statement is true?",["Composition can be associative without being commutative","Composition is always commutative","Composition never has an identity","Composition cannot be repeated"],0,"Associativity holds generally, while commutativity does not."]
+],
+"Inverse existence":[
+["A function has an inverse function only if it is:",["One-to-one on the relevant domain","Constant","Always quadratic","Undefined"],0,"An inverse function requires distinct inputs to produce distinct outputs."],
+["The horizontal line test is used to check whether a function is:",["One-to-one","Constant","Periodic","Even"],0,"A horizontal line should intersect the graph at most once for one-to-one behavior."],
+["If f is one-to-one, then its inverse satisfies:",["f⁻¹(f(x))=x","f⁻¹(x)=0","f(x)=0","f⁻¹=f always"],0,"Inverse functions undo the original function."],
+["A function that maps two different inputs to the same output is:",["Not one-to-one","Always invertible","The identity","Constant necessarily"],0,"Equal outputs from different inputs violate one-to-one behavior."],
+["The inverse of f(x)=2x+3 is:",["(x−3)/2","(x+3)/2","2x−3","3x−2"],0,"Set y=2x+3, interchange x and y, then solve y=(x−3)/2."],
+["For f(x)=x² over all real numbers, an inverse function does not exist because f is:",["Not one-to-one","Not defined","Constant","Linear"],0,"f(2)=f(−2)=4, so it is not one-to-one on R."],
+["Restricting x² to x≥0 makes it:",["One-to-one","Constant","Undefined","Periodic"],0,"On x≥0, x² is strictly increasing and therefore one-to-one."],
+["If f⁻¹ exists, then f∘f⁻¹ equals:",["I","0","f","1"],0,"An inverse followed by the original gives the identity on the appropriate range."],
+["The domain of f⁻¹ corresponds to the:",["Range of f","Domain of f","Coefficient set","Constants"],0,"Inputs to the inverse are outputs of the original function."],
+["To find an inverse algebraically, a common first step is to:",["Write y=f(x)","Set x=0 always","Square both sides always","Differentiate immediately"],0,"Start with y=f(x), interchange x and y, then solve for y."]
+]
 ]};

@@ -2502,4 +2502,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["De Morgan's second law is:",["(A∩B)^c=A^c∪B^c","(A∩B)^c=A^c∩B^c","(A∩B)^c=A∩B","(A∩B)^c=A∪B"],0,"The complement of an intersection equals the union of the complements."],
 ["Which statement correctly describes commutativity?",["A∪B=B∪A and A∩B=B∩A","A∪B=A−B","A∩B=A∪B","A−B=B−A"],0,"Union and intersection are commutative; set difference generally is not."]
 ],
+"Finite set counting":[
+["If A has 7 elements, its cardinality is:",["7","6","8","14"],0,"The cardinality of a finite set is the number of elements it contains, so |A|=7."],
+["If A={2,4,6,8,10}, then |A| is:",["4","5","6","10"],1,"There are five distinct elements in the set."],
+["If |A|=6 and |B|=4 and A and B are disjoint, then |A∪B| is:",["2","10","24","6"],1,"For disjoint sets, the union contains all elements from both sets, so 6+4=10."],
+["If |A|=8, |B|=5 and |A∩B|=2, then |A∪B| is:",["11","13","15","6"],0,"Use |A∪B|=|A|+|B|−|A∩B|=8+5−2=11."],
+["If A⊆B, |A|=4 and |B|=9, then |B−A| is:",["5","13","36","4"],0,"Since A is contained in B, removing the 4 elements of A from B leaves 9−4=5."],
+["A finite set with exactly one element is called a:",["Empty set","Singleton set","Universal set","Infinite set"],1,"A singleton set contains exactly one element."],
+["If a finite set has n elements, its power set has how many elements?",["n","n²","2n","2^n"],3,"Every element has two choices: included or not included, giving 2^n subsets."],
+["If |A|=12 and |B|=9 with |A∩B|=0, then |A∪B| is:",["3","21","108","12"],1,"An empty intersection means A and B are disjoint, so 12+9=21."],
+["If |A∪B|=15, |A|=9 and |B|=8, then |A∩B| is:",["1","2","7","17"],1,"Rearrange |A∪B|=|A|+|B|−|A∩B|: 15=9+8−x, so x=2."],
+["For any finite set A, its cardinality is always a:",["Negative integer","Nonnegative integer","Fraction","Complex number"],1,"Cardinality counts elements, so it is a nonnegative integer for a finite set."]
+],
+
 };

@@ -810,4 +810,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If ⌊x⌋=4, then x belongs to:",["[3,4)","[4,5)","(4,5]","[5,6)"],1,"Floor value 4 means 4≤x<5."],
 ["The greatest integer function is also called the:",["Floor function","Ceiling function","Identity function","Sign function"],0,"⌊x⌋ is commonly called the floor function."]
 ]
+,"Ceiling function":[
+["The ceiling function ⌈x⌉ gives:",["The greatest integer less than or equal to x","The smallest integer greater than or equal to x","The nearest integer to x","The fractional part of x"],1,"By definition, the ceiling is the smallest integer greater than or equal to x."],
+["⌈3.2⌉ equals:",["3","4","3.2","2"],1,"The smallest integer greater than or equal to 3.2 is 4."],
+["⌈−2.3⌉ equals:",["−2","−3","2","3"],0,"−2 is the smallest integer greater than or equal to −2.3."],
+["⌈5⌉ equals:",["4","5","6","0"],1,"An integer is its own ceiling."],
+["For 2<x≤3, ⌈x⌉ equals:",["2","3","4","x"],1,"Every value strictly above 2 and at most 3 has ceiling 3."],
+["The graph of y=⌈x⌉ consists of:",["Horizontal step segments","A parabola","A circle","One straight line"],0,"The ceiling function is constant on intervals of the form (n−1,n]."],
+["Which statement is true for every real x?",["⌈x⌉−1<x≤⌈x⌉","⌈x⌉≤x<⌈x⌉+1","x≤⌈x⌉−1","⌈x⌉<x always"],0,"The ceiling is at least x, while x is strictly greater than one less than the ceiling."],
+["If ⌈x⌉=4, then x belongs to:",["[3,4)","(3,4]","[4,5)","(4,5)"],1,"Ceiling value 4 means 3<x≤4."],
+["⌈0.01⌉ equals:",["0","1","0.01","−1"],1,"The smallest integer greater than or equal to 0.01 is 1."],
+["The ceiling function is also called the:",["Floor function","Least integer function","Greatest integer function","Identity function"],1,"⌈x⌉ is commonly called the ceiling or least-integer function."]
+],
+"Sign function":[
+["For x>0, sgn(x) equals:",["−1","0","1","x"],2,"The sign function is 1 for every positive x."],
+["For x<0, sgn(x) equals:",["−1","0","1","|x|"],0,"The sign function is −1 for every negative x."],
+["sgn(0) equals:",["−1","0","1","Undefined"],1,"The sign function is defined as 0 at x=0."],
+["Which is the correct piecewise definition of sgn(x)?",["1 for x<0, 0 for x=0, −1 for x>0","−1 for x<0, 0 for x=0, 1 for x>0","0 for x<0, 1 for x≥0","x for all x"],1,"The sign records whether x is negative, zero, or positive."],
+["For x≠0, sgn(x) can be written as:",["|x|/x","x/|x|","x²","1/x²"],1,"For nonzero x, x/|x| is 1 when x is positive and −1 when x is negative."],
+["What is sgn(−7)+sgn(7)?",["−2","−1","0","2"],2,"sgn(−7)=−1 and sgn(7)=1, so the sum is 0."],
+["What is sgn(5)×sgn(−2)?",["−1","0","1","2"],0,"The product is 1×(−1)=−1."],
+["The range of the sign function is:",["R","{−1,0,1}","{0,1}","{−1,1,2}"],1,"Only the three values −1, 0, and 1 occur."],
+["Which statement is true for x≠0?",["sgn(x)=|x|","sgn(x)x=|x|","sgn(x)+x=0","sgn(x)=x²"],1,"Multiplying x by its sign gives its magnitude: sgn(x)x=|x|."],
+["The sign function changes value at:",["x=−1 only","x=0","x=1 only","Every integer"],1,"Its value jumps from −1 to 1 across zero, with sgn(0)=0."]
+],
+"Fractional part function":[
+["The fractional part of x is defined as:",["x−⌊x⌋","⌈x⌉−x","⌊x⌋−x","|x|"],0,"The fractional part is {x}=x−⌊x⌋."],
+["The fractional part of 3.7 is:",["0.3","0.7","3","4"],1,"3.7−⌊3.7⌋=3.7−3=0.7."],
+["The fractional part of 5 is:",["0","1","5","−1"],0,"For an integer n, {n}=n−n=0."],
+["The fractional part of −2.3 is:",["−0.3","0.3","0.7","−0.7"],2,"⌊−2.3⌋=−3, so {−2.3}=−2.3−(−3)=0.7."],
+["For every real x, the fractional part {x} lies in:",["[−1,0)","[0,1)","(0,1]","R"],1,"By definition, 0≤{x}<1."],
+["If ⌊x⌋=4 and x=4.25, then {x} is:",["4","0.25","0.75","1.25"],1,"The fractional part is x−⌊x⌋=4.25−4=0.25."],
+["Which identity is correct?",["x=⌊x⌋+{x}","x=⌊x⌋−{x}","{x}=⌊x⌋−x","x={x} only"],0,"Every real number equals its integer part plus its fractional part."],
+["If {x}=0, then x is:",["Always negative","An integer","Between 0 and 1 only","Irrational"],1,"A zero fractional part occurs exactly when x is an integer."],
+["The fractional part function is periodic with period:",["1","2","π","It is not periodic"],0,"{x+1}={x}, so 1 is a period."],
+["What is {7.99}?",["7","0.99","1","8"],1,"The fractional part is 7.99−7=0.99."]
+],
+"Dirichlet function":[
+["The Dirichlet function on R is commonly defined by f(x)=1 when x is:",["Rational","Irrational","Integer only","Positive"],0,"The standard Dirichlet function takes value 1 at rational numbers."],
+["For the standard Dirichlet function, f(x)=0 when x is:",["Rational","Irrational","An integer","Positive"],1,"It takes value 0 at irrational numbers."],
+["What is f(1/2) for the Dirichlet function?",["0","1","1/2","Undefined"],1,"1/2 is rational, so the function value is 1."],
+["What is f(√2)?",["0","1","√2","Undefined"],0,"√2 is irrational, so the standard Dirichlet function has value 0."],
+["The range of the standard Dirichlet function is:",["R","{0,1}","{−1,0,1}","[0,1]"],1,"Only 0 and 1 occur."],
+["The Dirichlet function is continuous at:",["Every real number","No real number","Only rational numbers","Only irrational numbers"],1,"Every neighborhood of any point contains both rational and irrational numbers, causing discontinuity everywhere."],
+["The Dirichlet function is discontinuous at:",["No points","Every real number","Only 0","Only integers"],1,"Its values oscillate between 0 and 1 arbitrarily close to every real point."],
+["The Dirichlet function is periodic with period:",["1","2","π","Any positive real number"],0,"For any integer n, rationality of x+n is the same as rationality of x, so 1 is a period."],
+["Which statement is true about rational and irrational numbers near any real x?",["Only rationals occur","Only irrationals occur","Both types occur arbitrarily close","Neither type occurs"],2,"Both rational and irrational numbers are dense in R."],
+["The Dirichlet function is an example of a function that is:",["Continuous everywhere","Discontinuous everywhere","Differentiable everywhere","Constant"],1,"It is discontinuous at every real number."]
+],
+"Heaviside step function":[
+["The Heaviside step function is used to model a sudden:",["Change or switch","Polynomial degree","Square root","Fraction"],0,"It models a step-like transition from one level to another."],
+["A common definition of the Heaviside function H(x) is:",["0 for x<0 and 1 for x>0","1 for x<0 and 0 for x>0","x for all x","−1 for x<0 and 1 for x>0 only"],0,"A common convention assigns 0 to negative inputs and 1 to positive inputs."],
+["Under the convention H(0)=1/2, H(0) equals:",["0","1/2","1","Undefined"],1,"The midpoint convention sets the value at zero to 1/2."],
+["For x>0, H(x) under the common convention equals:",["−1","0","1","x"],2,"Positive inputs are assigned value 1."],
+["For x<0, H(x) under the common convention equals:",["−1","0","1","x"],1,"Negative inputs are assigned value 0."],
+["The graph of a Heaviside step function has a:",["Jump discontinuity at the origin","Parabolic vertex","Circular arc","Constant slope everywhere"],0,"The standard step changes abruptly at x=0."],
+["If H(0)=1/2, then H(x)+H(−x) for x≠0 is:",["0","1","2","x"],1,"For nonzero x, one of x and −x is positive and the other negative, so the values sum to 1."],
+["Which application is closely associated with the Heaviside function?",["Switching signals","Prime factorisation","Triangle area","Matrix inversion"],0,"It is widely used to represent on/off or switching behavior."],
+["A shifted step H(x−a) changes its value around:",["x=0","x=a","x=−a","x=1"],1,"Replacing x by x−a shifts the step from 0 to a."],
+["The Heaviside function is generally:",["Continuous everywhere","Discontinuous at the step point","A polynomial","Periodic"],1,"Its abrupt jump at the step point makes it discontinuous there."]
+],
+"Inverse functions":[
+["A function f has an inverse function when it is one-to-one on its domain and:",["Its range is nonempty","The inverse maps its range back to the domain","It is constant","It is periodic"],1,"For an inverse function, each output must correspond to exactly one input, and the inverse maps the range back to the domain."],
+["If f(x)=2x+3, then f^−1(x) is:",["(x+3)/2","(x−3)/2","2x−3","3x−2"],1,"Set y=2x+3, swap x and y, then solve: y=(x−3)/2."],
+["If f(x)=x−5, then f^−1(x) is:",["x−5","x+5","5−x","1/(x−5)"],1,"The inverse reverses subtracting 5 by adding 5."],
+["If f is invertible, then f^−1(f(x)) equals:",["0","1","x","f(x)"],2,"Applying the inverse after f returns the original input."],
+["If f is invertible, then f(f^−1(x)) equals:",["0","1","x","f(x)"],2,"Applying f after its inverse returns the original value in the range."],
+["The graph of f^−1 is the reflection of the graph of f in the:",["x-axis","y-axis","line y=x","origin"],2,"Inverse functions swap x and y, corresponding to reflection in y=x."],
+["A function that is not one-to-one on its full domain may still have an inverse after:",["Restricting its domain appropriately","Adding zero","Multiplying by 1 only","Changing notation only"],0,"A suitable domain restriction can make the function one-to-one."],
+["If f(4)=9, then f^−1(9) equals:",["4","9","13","1/4"],0,"The inverse reverses the ordered pair: f(4)=9 means f^−1(9)=4."],
+["Which function is one-to-one on R?",["x²","|x|","x³","sin x"],2,"x³ is strictly increasing on R and therefore one-to-one."],
+["If f and f^−1 are inverses, their compositions give the:",["Zero function","Identity function","Constant function","Sign function"],1,"Both f^−1∘f and f∘f^−1 are identity maps on their appropriate domains."]
+]
 };

@@ -2790,4 +2790,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program stores sampled points $(x,f(x))$. To approximate the graph correctly, it should:",["Plot each input $x$ against its corresponding output $f(x)$","Swap every pair to $(f(x),x)$","Plot only the maximum value","Use $f(x)$ as the horizontal coordinate always"],0,"The standard Cartesian graph places $x$ on the horizontal axis and $f(x)$ on the vertical axis."],
 ["For $f(x)=|x|$, the graph has its minimum at:",["$(0,0)$","$(1,0)$","$(0,1)$","$(-1,1)$"],0,"Since $|x|\\ge0$ for every real $x$, its smallest value is $0$ at $x=0$."]
 ],
+
+"Function notation":[
+["If $f(x)=2x+3$, then $f(4)$ equals:",["$11$","$8$","$5$","$14$"],0,"Substitute $x=4$: $f(4)=2(4)+3=11$."],
+["If $f(x)=x^2-1$, then $f(-2)$ is:",["$3$","$-3$","$5$","$-5$"],0,"Using the notation, $f(-2)=(-2)^2-1=4-1=3$."],
+["For $f(x)=3x-5$, the expression $f(a)$ is:",["$3a-5$","$3x-5$","$a^2-5$","$3a+5$"],0,"Replace the input variable $x$ by $a$, giving $f(a)=3a-5$."],
+["If $f(x)=x+2$ and $g(x)=2x$, then $(f+g)(x)$ is:",["$3x+2$","$2x+2$","$3x$","$x+4$"],0,"By definition, $(f+g)(x)=f(x)+g(x)=(x+2)+2x=3x+2$."],
+["If $f(x)=x^2$ and $g(x)=x+1$, then $(f\circ g)(x)$ equals:",["$(x+1)^2$","$x^2+1$","$(x^2+1)^2$","$x^2+x$"],0,"Composition means $(f\circ g)(x)=f(g(x))$. Hence $f(x+1)=(x+1)^2$."],
+["The notation $f:A\to B$ indicates that:",["$f$ maps elements of $A$ into $B$","$f$ maps elements of $B$ into $A$","$A$ and $B$ must be equal","$f$ has no domain"],0,"In $f:A\to B$, $A$ is the domain and $B$ is the codomain."],
+["If $f(x)=2x+1$, then $f(x+h)-f(x)$ simplifies to:",["$2h$","$2x+h$","$2h+1$","$h$"],0,"$f(x+h)=2(x+h)+1=2x+2h+1$, so $f(x+h)-f(x)=2h$."],
+["Which statement correctly uses function notation?",["$f(2)$ means the output when the input is $2$","$f(2)$ always means $f$ times $2$","$f(x)$ must always equal $x$","$f(2)$ is the domain"],0,"Function notation $f(2)$ denotes the value of the function at input $2$."],
+["A mathematical program defines f(x)=x*x+1. What should it compute for f(3)?",["$10$","$7$","$6$","$4$"],0,"The program evaluates $f(3)=3^2+1=10$. Function notation corresponds directly to supplying an input to the program."],
+["If $f(x)=\dfrac{1}{x-2}$, which input is excluded from the domain?",["$x=2$","$x=0$","$x=1$","$x=-2$"],0,"The denominator cannot be zero. Since $x-2=0$ at $x=2$, that input is excluded."]
+],
 };

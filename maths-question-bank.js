@@ -1,4 +1,16 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Fractions":[
+["Which fraction is equivalent to 3/5?",["6/10","5/8","9/20","12/25"],0,"Multiplying numerator and denominator by 2 gives 6/10."],
+["Simplify 18/24 to lowest terms.",["2/3","3/4","4/5","5/6"],1,"Divide numerator and denominator by their greatest common divisor, 6: 18/24=3/4."],
+["Which is the greater fraction?",["5/8","3/4","2/3","7/10"],1,"3/4=0.75, which is greater than 5/8=0.625, 2/3≈0.667, and 7/10=0.7."],
+["What is 2/7+3/7?",["5/14","5/7","6/7","1"],1,"The denominators are equal, so add the numerators: 2/7+3/7=5/7."],
+["What is 5/6−1/3?",["1/6","1/2","2/3","5/18"],1,"Convert 1/3 to 2/6, then 5/6−2/6=3/6=1/2."],
+["What is 2/3×9/10?",["3/5","2/5","4/5","6/10"],0,"Multiply and simplify: (2×9)/(3×10)=18/30=3/5."],
+["What is 3/4÷2/5?",["3/10","5/6","15/8","8/15"],2,"Divide by multiplying by the reciprocal: 3/4×5/2=15/8."],
+["The mixed number 2 3/5 written as an improper fraction is:",["8/5","10/5","13/5","15/5"],2,"Multiply the whole part by the denominator and add the numerator: 2×5+3=13, so 13/5."],
+["Which fraction is already in simplest form?",["12/18","15/25","14/21","7/13"],3,"7 and 13 have no common factor greater than 1, so 7/13 is already simplest."],
+["What is 1/2+1/3?",["2/5","5/6","3/5","1/6"],1,"Using denominator 6 gives 3/6+2/6=5/6."]
+],
 "Natural numbers":[
 ["Which set represents the natural numbers?",["{1,2,3,4,…}","{0,1,2,3,…}","{…,−2,−1,0,1,…}","{1/2,1,2,…}"],0,"In this course, natural numbers start with 1."],
 ["What is the successor of 8?",["7","8","9","10"],2,"The successor is 8+1=9."],

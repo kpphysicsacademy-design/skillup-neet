@@ -2816,4 +2816,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program samples $f(x)$ on a finite input list. To estimate the range from those samples, it should:",["Collect the distinct computed output values","Discard all output values","Use only the smallest input","Replace each output by its input"],0,"For sampled data, the estimated range is the set of distinct outputs produced by the sampled inputs."],
 ["If $f(x)=\dfrac{x-1}{x-1}$ for $x\ne1$, the range is:",["$\{1\}$","$\mathbb R\setminus\{1\}$","$\mathbb R$","$\{0\}$"],0,"For every allowed $x$, $f(x)=1$. Thus the only attained output is $1$, so the range is $\{1\}$."]
 ],
+
+"Domain restrictions":[
+["For $f(x)=\dfrac{1}{x-3}$, which value is excluded from the domain?",["$3$","$0$","$-3$","$1$"],0,"The denominator cannot be zero. Since $x-3=0$ at $x=3$, that input is excluded."],
+["The domain of $f(x)=\sqrt{x-4}$ is:",["$[4,\infty)$","$(-\infty,4]$","$(4,\infty)$","$\mathbb R$"],0,"For a real square root, $x-4\ge0$, so $x\ge4$."],
+["For $f(x)=\dfrac{1}{x^2-9}$, the restricted values are:",["$x=3$ and $x=-3$","$x=9$ only","$x=0$ only","$x=3$ only"],0,"The denominator factors as $(x-3)(x+3)$ and cannot equal zero, excluding $x=\pm3$."],
+["The domain of $f(x)=\sqrt{5-x}$ is:",["$(-\infty,5]$","$[5,\infty)$","$( -\infty,5)$","$\mathbb R$"],0,"The radicand must satisfy $5-x\ge0$, giving $x\le5$."],
+["For $f(x)=\dfrac{\sqrt{x+1}}{x-2}$, the domain is:",["$[-1,2)\cup(2,\infty)$","$(-1,\infty)$","$[-1,\infty)$","$\mathbb R\setminus\{-1,2\}$"],0,"We need $x+1\ge0$, so $x\ge-1$, and $x\ne2$ because the denominator is zero there."],
+["Which condition is required for $f(x)=\sqrt{x^2-4}$ to be real-valued?",["$x^2-4\ge0$","$x^2-4<0$","$x^2-4=1$","$x^2+4<0$"],0,"A real square root requires a nonnegative radicand, so $x^2-4\ge0$."],
+["For $f(x)=\log(x-2)$, the real-domain restriction is:",["$x>2$","$x\ge2$","$x<2$","$x\ne2$"],0,"The argument of a real logarithm must be strictly positive: $x-2>0$, hence $x>2$."],
+["If $f(x)=\dfrac{x+1}{x^2+x}$, which values must be excluded before simplification?",["$x=0$ and $x=-1$","$x=1$ only","$x=0$ only","No values"],0,"The original denominator is $x(x+1)$, so both $x=0$ and $x=-1$ are excluded even though cancellation may simplify the expression."],
+["A mathematical program checks whether an input belongs to the domain of $f(x)=\sqrt{x-1}$. Which condition should it implement?",["Reject inputs with $x<1$","Reject inputs with $x>1$","Accept only $x<1$","Reject only $x=0$"],0,"The program should require $x-1\ge0$, equivalently $x\ge1$, so values below $1$ are rejected."],
+["For $f(x)=\dfrac{1}{\sqrt{x-2}}$, the domain is:",["$(2,\infty)$","$[2,\infty)$","$(-\infty,2)$","$\mathbb R$"],0,"The square root requires $x-2\ge0$, but because it is in the denominator it cannot be zero. Therefore $x>2$."]
+],
 };

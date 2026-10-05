@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Composition of relations":[
+["If R is a relation from A to B and S is a relation from B to C, then the composition S∘R is a relation from:",["A to C","C to A","A to B only","B to C only"],0,"The composition first follows R from A to B and then S from B to C."],
+["For relations R and S, (a,c)∈S∘R when there exists b such that:",["aRb and bSc","aSb and bRc","aRc and bSa","aRb and cSb"],0,"Composition requires an intermediate element b with aRb and bSc."],
+["Let R={(1,2),(2,3)} and S={(2,4),(3,5)}. Then S∘R is:",["{(1,4),(2,5)}","{(1,2),(2,3)}","{(2,4),(3,5)}","{(1,5),(2,4)}"],0,"1R2 and 2S4 give (1,4); 2R3 and 3S5 give (2,5)."],
+["If R is a relation on A, then R∘R is called the:",["Composition of R with itself","Inverse of R","Complement of R","Identity relation"],0,"R∘R applies R twice and is the self-composition of R."],
+["If R and S are relations with compatible domains and ranges, then in general:",["S∘R may differ from R∘S","S∘R=R∘S always","Both compositions are always empty","Neither composition can be formed"],0,"Relation composition is generally not commutative."],
+["If R is the identity relation I_A on A, then:",["R∘I_A=R and I_A∘R=R when defined","Both compositions are always empty","R∘I_A=I_A only","I_A∘R is undefined always"],0,"The identity relation acts as a neutral element for composition."],
+["If R⊆A×B and S⊆B×C, then S∘R is a subset of:",["A×C","B×A","C×B","A×B"],0,"The first coordinate comes from A and the second from C."],
+["Let R={(1,2),(2,1)} and S={(1,3),(2,4)}. Then S∘R contains:",["(1,4) and (2,3)","(1,3) and (2,4)","(1,2) and (2,1)","(3,1) and (4,2)"],0,"1R2 and 2S4 give (1,4); 2R1 and 1S3 give (2,3)."],
+["If (a,b)∈R and (b,c)∈S, then which ordered pair belongs to S∘R?",["(a,c)","(b,a)","(c,b)","(a,b)"],0,"The composition follows the path a→b→c, producing (a,c)."],
+["For three compatible relations R, S and T, relation composition is:",["Associative: T∘(S∘R)=(T∘S)∘R","Always commutative","Always idempotent","Never associative"],0,"Relation composition is associative whenever the compositions are defined."]
+],
+
 "Inverse relation":[
 ["If R is a relation from A to B, the inverse relation R⁻¹ is a relation from:",["B to A","A to A","B to B","A to B only"],0,"The inverse reverses every ordered pair, so its direction is from B to A."],
 ["If (a,b)∈R, then which ordered pair belongs to R⁻¹?",["(b,a)","(a,b) only","(a,a)","(b,b)"],0,"By definition, (b,a)∈R⁻¹ whenever (a,b)∈R."],

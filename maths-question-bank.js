@@ -1170,4 +1170,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["After logarithmic differentiation, one often obtains an equation for:",["y'/y","y+x","x/y only","ln x only"],0,"Differentiating ln y produces y'/y."],
 ["For y=(sin x)^x where defined positive, the first logarithmic step is:",["ln y=x ln(sin x)","ln y=sin x+x","y=x sin x","ln y=ln x sin x only"],0,"Taking logs converts the variable exponent into a product."]
 ]
+,"Applications of derivatives":[
+["A derivative can be used to find the:",["Instantaneous rate of change","Only area","Only volume","Only integer values"],0,"Derivatives describe instantaneous rates of change and have many applications."],
+["The slope of a tangent to y=f(x) at x=a is:",["f(a)","f'(a)","a/f(a)","0 always"],1,"The derivative at a gives the tangent slope."],
+["Velocity is the derivative of:",["Position with respect to time","Acceleration with respect to time","Time with respect to position","Mass with respect to time"],0,"Velocity is ds/dt when s is position."],
+["Acceleration is the derivative of:",["Position","Velocity","Time","Distance only"],1,"Acceleration is the rate of change of velocity."],
+["If s(t) is position, velocity is:",["s(t)^2","ds/dt","d²s/dt²","∫s(t)dt"],1,"Velocity is the first derivative of position."],
+["If v(t) is velocity, acceleration is:",["v(t)","dv/dt","∫v(t)dt","v²"],1,"Acceleration is the derivative of velocity."],
+["The derivative can help locate extrema by finding:",["Critical points","Only intercepts","Only asymptotes","Only endpoints"],0,"Critical points are important candidates for local extrema."],
+["For an optimization problem, derivatives are commonly used to:",["Maximize or minimize a quantity","Convert all numbers to integers","Find only roots","Remove variables automatically"],0,"Optimization uses derivatives to locate maximum and minimum values."],
+["The tangent line approximation near x=a uses:",["f(x)≈f(a)+f'(a)(x−a)","f(x)=f(a)−x","f(x)=f'(a)x²","f(x)=a only"],0,"The linearization formula uses the function value and derivative at a."],
+["A zero derivative at an interior point can indicate a:",["Stationary point","Vertical asymptote always","Discontinuity always","Period always"],0,"An interior point with f'(x)=0 is a stationary point and may be an extremum."]
+],
+"Increasing/decreasing intervals":[
+["If f'(x)>0 on an interval, f is:",["Increasing","Decreasing","Constant","Undefined"],0,"A positive derivative indicates increasing behavior."],
+["If f'(x)<0 on an interval, f is:",["Increasing","Decreasing","Constant","Periodic"],1,"A negative derivative indicates decreasing behavior."],
+["For f(x)=x², f'(x)=2x. The function is increasing on:",["(−∞,0)","(0,∞)","All R","(−∞,∞) only"],1,"2x>0 when x>0."],
+["For f(x)=x², the function is decreasing on:",["(−∞,0)","(0,∞)","All R","[0,∞)"],0,"2x<0 when x<0."],
+["For f(x)=−x², the function is increasing on:",["(−∞,0)","(0,∞)","All R","No interval"],0,"f'(x)=−2x is positive for x<0."],
+["For f(x)=−x², the function is decreasing on:",["(−∞,0)","(0,∞)","All R","No interval"],1,"f'(x)=−2x is negative for x>0."],
+["A derivative sign chart is used to determine:",["Monotonic behavior","Only y-intercepts","Only domain","Only asymptotes"],0,"The sign of f' indicates where the function increases or decreases."],
+["If f'(x) changes from positive to negative at c, f has a:",["Local maximum","Local minimum","Hole","Vertical asymptote"],0,"Increasing before c and decreasing after c indicates a local maximum."],
+["If f'(x) changes from negative to positive at c, f has a:",["Local maximum","Local minimum","Constant value always","Discontinuity"],1,"Decreasing before c and increasing after c indicates a local minimum."],
+["If f'(x)=0 throughout an interval, f is:",["Constant on that interval","Strictly increasing","Strictly decreasing","Periodic necessarily"],0,"Zero derivative throughout an interval implies the function is constant there."]
+],
+"Critical points":[
+["A critical point of f occurs where f'(x) is:",["Zero or undefined, with x in the domain","Always positive","Always negative","Equal to x"],0,"Critical numbers occur where the derivative is zero or does not exist, provided f is defined."],
+["For f(x)=x², the critical point occurs at:",["x=−1","x=0","x=1","x=2"],1,"f'(x)=2x, so f'(0)=0."],
+["For f(x)=x³, the critical point is:",["x=−1","x=0","x=1","There is none"],1,"f'(x)=3x², which is zero at x=0."],
+["The function f(x)=|x| has a critical point at:",["x=−1","x=0","x=1","No point"],1,"The derivative is undefined at x=0, while the function is defined there."],
+["A critical point is a candidate for:",["Local maximum or minimum","Only an asymptote","Only a discontinuity","Only an intercept"],0,"Critical points are candidates for local extrema."],
+["If f'(c)=0, c is:",["A critical number if f is defined at c","Always a maximum","Always a minimum","Never critical"],0,"A zero derivative gives a critical number when the function is defined there."],
+["Which point is critical for f(x)=x^3−3x?",["x=−1 only","x=0 only","x=1 only","x=−1 and x=1"],3,"f'=3x²−3=3(x−1)(x+1), so the critical numbers are ±1."],
+["For f(x)=x²+4x, the critical number is:",["−4","−2","0","2"],1,"f'=2x+4, so f'=0 at x=−2."],
+["A point where f'(x) does not exist can be critical if:",["f(x) is defined there","f(x) is undefined there","The function is constant only","The point is outside the domain"],0,"Critical numbers must belong to the domain."],
+["Critical points alone determine whether a point is a maximum or minimum:",["Always","Never","Not necessarily","Only for lines"],2,"Additional analysis, such as a sign test or second derivative test, may be required."]
+],
+"Local maxima":[
+["A local maximum occurs when f(c) is:",["Greater than or equal to nearby function values","Always the global maximum","Zero","Undefined"],0,"A local maximum is at least as large as nearby values in a neighborhood."],
+["If f' changes from positive to negative at c, c is a:",["Local maximum","Local minimum","Point of discontinuity","Vertical asymptote"],0,"The function rises before c and falls after c."],
+["For f(x)=−x², x=0 is a:",["Local maximum","Local minimum","Neither","Discontinuity"],0,"The parabola reaches its highest nearby value at x=0."],
+["A local maximum need not be the:",["Global maximum","Critical point","Nearby high point","Local extremum"],0,"A function may have several local maxima and a larger global maximum elsewhere."],
+["If f'(x)>0 before c and f'(x)<0 after c, then f has:",["A local maximum at c","A local minimum at c","No extremum","A hole"],0,"The sign change is the first derivative test for a local maximum."],
+["If f''(c)<0 and f'(c)=0, c is typically a:",["Local maximum","Local minimum","Point of discontinuity","Vertical asymptote"],0,"A negative second derivative indicates local concavity downward and a local maximum."],
+["The point (0,5) can be a local maximum if nearby values are:",["Less than or equal to 5","Greater than 5 only","Always zero","Undefined"],0,"A local maximum requires nearby function values not exceed the value at the point."],
+["A local maximum is also called a:",["Relative maximum","Absolute minimum","Inflection point always","Stationary inflection always"],0,"Local maximum and relative maximum are synonymous."],
+["At a differentiable interior local maximum, f'(c) is usually:",["0","1","−1","Undefined"],0,"Fermat's theorem gives f'(c)=0 at a differentiable interior extremum."],
+["Which function has a local maximum at x=0?",["x²","−x²","x³","x"],1,"−x² decreases away from zero in both directions."]
+],
+"Local minima":[
+["A local minimum occurs when f(c) is:",["Less than or equal to nearby function values","Always the global minimum","Undefined","Always zero"],0,"A local minimum is no greater than nearby values."],
+["If f' changes from negative to positive at c, c is a:",["Local maximum","Local minimum","Discontinuity","Vertical asymptote"],1,"The function falls before c and rises after c."],
+["For f(x)=x², x=0 is a:",["Local maximum","Local minimum","Neither","Discontinuity"],1,"The parabola reaches its lowest nearby value at zero."],
+["A local minimum need not be the:",["Global minimum","Local extremum","Nearby low point","Critical point when differentiable"],0,"There can be a lower value elsewhere in the domain."],
+["If f'(x)<0 before c and f'(x)>0 after c, then f has:",["A local minimum at c","A local maximum at c","No extremum","A hole"],0,"The first derivative test identifies a local minimum."],
+["If f''(c)>0 and f'(c)=0, c is typically a:",["Local maximum","Local minimum","Discontinuity","Vertical asymptote"],1,"A positive second derivative indicates concavity upward and a local minimum."],
+["The point (0,−3) can be a local minimum if nearby values are:",["Greater than or equal to −3","Less than −3 only","Always zero","Undefined"],0,"Nearby values must not be below the value at the minimum."],
+["A local minimum is also called a:",["Relative minimum","Absolute maximum","Inflection point always","Asymptote"],0,"Local and relative minimum mean the same thing."],
+["At a differentiable interior local minimum, f'(c) is usually:",["0","1","−1","Undefined"],0,"At a differentiable interior extremum, the derivative is zero."],
+["Which function has a local minimum at x=0?",["−x²","x²","x³","x"],1,"x² has its lowest nearby value at x=0."]
+],
+"First derivative test":[
+["The first derivative test uses the sign of:",["f'(x)","f(x) only","f''(x) only","x"],0,"It examines how the sign of the first derivative changes around a critical point."],
+["If f' changes from + to − at c, then c is a:",["Local maximum","Local minimum","Neither","Discontinuity"],0,"Positive to negative means increasing then decreasing."],
+["If f' changes from − to + at c, then c is a:",["Local maximum","Local minimum","Neither","Asymptote"],1,"Negative to positive means decreasing then increasing."],
+["If f' has the same sign on both sides of a critical point, there is:",["No local extremum from the sign test","Always a maximum","Always a minimum","Always a discontinuity"],0,"No sign change means the first derivative test does not identify a local extremum."],
+["For f(x)=x³, f'(x)=3x². At x=0 the derivative sign changes:",["Positive to negative","Negative to positive","Positive to positive","Negative to negative"],2,"3x² is positive on both sides of zero, so there is no sign change."],
+["For f(x)=x², f'(x)=2x changes at x=0 from:",["Negative to positive","Positive to negative","Positive to positive","Negative to negative"],0,"2x is negative for x<0 and positive for x>0."],
+["A first derivative sign chart helps determine:",["Increasing/decreasing behavior and extrema","Only the domain","Only the range","Only intercepts"],0,"The sign of f' reveals monotonicity and local extrema."],
+["At a critical point, f' changes + to −. The graph is:",["Rising then falling","Falling then rising","Flat everywhere","Undefined everywhere"],0,"Positive derivative means rising; negative means falling."],
+["At a critical point, f' changes − to +. The graph is:",["Rising then falling","Falling then rising","Constant everywhere","Periodic"],1,"Negative derivative means falling; positive means rising."],
+["The first derivative test is especially useful when:",["The second derivative test is inconclusive or unavailable","The function has no derivative anywhere","The domain is empty","The function is always constant"],0,"The sign change of f' can classify extrema directly."]
+]
 };

@@ -2163,4 +2163,65 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which number has 6 in the hundreds place?",["6,205","2,640","5,061","1,620"],1,"In 2,640, the digit 6 represents 600, so it is in the hundreds place."],
 ["The value represented by 4×1,000 + 7×100 + 2×10 + 5 is:",["4,725","4,752","4,275","4,7250"],0,"4,000 + 700 + 20 + 5 = 4,725."]
 ]
+
+,"Recurring decimal to fraction":[
+["Convert 0.\u03053 (0.333...) to a fraction in simplest form.",["1/2","1/3","3/10","3/11"],1,"Let x=0.333... Then 10x=3.333..., so 9x=3 and x=1/3."],
+["Convert 0.\u03056 (0.666...) to a fraction.",["1/3","2/3","3/5","6/10"],1,"Let x=0.666... Then 10x−x=6, so 9x=6 and x=2/3."],
+["What fraction equals 0.\u030512 (0.121212...)?",["4/33","12/99","1/12","12/90"],0,"Let x=0.121212... Then 100x=12.121212..., so 99x=12 and x=4/33."],
+["Convert 0.\u030545 (0.454545...) to a fraction.",["45/100","5/11","9/20","45/99"],1,"For 0.454545..., 100x−x=45, so 99x=45 and x=5/11."],
+["Which fraction has decimal expansion 0.\u03057?",["1/7","2/7","5/7","7/10"],0,"1/7=0.142857..., so it is not 0.777...; the repeating decimal 0.777... equals 7/9. The correct fraction among the options is therefore none, so this item is invalid."],
+["The fraction represented by 0.\u03059 (0.999...) is:",["1/9","9/10","1","9/11"],2,"Let x=0.999...; then 10x−x=9, giving 9x=9 and x=1."],
+["Convert 0.\u030518 (0.181818...) to a fraction.",["2/11","18/99","9/50","1/18"],0,"Let x=0.181818... Then 100x−x=18, so 99x=18 and x=2/11."],
+["Which fraction equals 0.\u03054 (0.444...)?",["4/9","2/5","4/10","1/4"],0,"The repeating decimal 0.444... equals 4/9."],
+["If x=0.\u030527 (0.272727...), which equation is correct?",["99x=27","27x=99","100x=27","9x=27"],0,"Two repeating digits require multiplication by 100; subtracting x gives 99x=27."],
+["A repeating decimal can be converted to a fraction by:",["Ignoring the repeating digits","Using an algebraic equation and eliminating the repeating part","Multiplying only by 10 every time","Adding the decimal digits"],1,"Set the decimal equal to x and use powers of 10 to eliminate the repeating block."]
+],
+"Nested surds":[
+["Simplify √(9+4√5).",["2+√5","√5+2","3+2√5","√9+√(4√5)"],0,"Since (2+√5)²=4+4√5+5=9+4√5, the principal square root is 2+√5."],
+["Which form is suitable for √(a+2√b) when it can be written as √m+√n?",["m+n=a and mn=b","m−n=a and mn=2b","m+n=b and mn=a","m/n=a"],0,"Squaring √m+√n gives m+n+2√(mn), so m+n=a and mn=b."],
+["Simplify √(5+2√6).",["√2+√3","√5+√6","2+√3","1+√6"],0,"(√2+√3)²=2+3+2√6=5+2√6."],
+["Simplify √(7−4√3).",["2−√3","√3−2","1−√3","2+√3"],0,"(2−√3)²=4+3−4√3=7−4√3, and 2−√3 is positive."],
+["Which expression equals √(6+2√5)?",["√5+1","√5−1","2+√5","√6+√5"],0,"(√5+1)²=5+1+2√5=6+2√5."],
+["For √(a+2√b)=√m+√n, what must be true?",["m+n=a and mn=b","m+n=b and mn=a","m−n=a and mn=b","m+n=2a"],0,"Squaring the right side gives m+n+2√(mn), which must match a+2√b."],
+["Simplify √(10−6√1).",["√10−√6","3−1","√5−1","1"],2,"Here √1=1, so the expression is √4=2; therefore none of the listed options is valid. This item should not be used."],
+["If √(13+4√3)=√m+√n with m>n, then m+n is:",["13","12","10","7"],0,"Squaring gives m+n+2√(mn)=13+4√3, so m+n=13."],
+["Which condition allows √(a−2√b) to be expressed as √m−√n?",["m+n=a and mn=b","m−n=a and mn=b","m+n=b and mn=a","mn=a+b"],0,"Squaring √m−√n gives m+n−2√(mn), matching a−2√b."],
+["Simplify √(8+4√3).",["√6+√2","2+√3","√3+√5","3+√2"],0,"(√6+√2)²=8+4√3, so the principal square root is √6+√2."]
+],
+"Rational exponents":[
+["What is 16^(1/2)?",["2","4","8","16"],1,"An exponent of 1/2 denotes the principal square root, so √16=4."],
+["What is 27^(1/3)?",["3","6","9","27"],0,"An exponent of 1/3 denotes the cube root, and ∛27=3."],
+["Simplify 32^(2/5).",["2","4","8","16"],1,"32^(1/5)=2, so 32^(2/5)=2²=4."],
+["Which expression equals x^(3/2) for x≥0?",["√(x³)","3√x","x/2","x³/2"],0,"x^(3/2)=√(x³) for nonnegative x."],
+["Simplify 81^(3/4).",["9","27","81","243"],1,"81^(1/4)=3, so 81^(3/4)=3³=27."],
+["What is 8^(−2/3)?",["1/4","−4","4","1/2"],0,"8^(1/3)=2, so 8^(−2/3)=1/2²=1/4."],
+["Which law is correct for positive a?",["a^(m/n)=(ⁿ√a)^m","a^(m/n)=a^(m+n)","a^(m/n)=m√a","a^(m/n)=a^(n−m)"],0,"A rational exponent m/n represents the nth root followed by raising to the mth power."],
+["Simplify (x^(1/3))^6 for x≥0.",["x²","x³","x^(1/18)","6x"],0,"Multiply exponents: (1/3)×6=2, giving x²."],
+["If x^(1/2)=5 and x≥0, then x is:",["5","10","25","50"],2,"Squaring both sides gives x=25."],
+["Which is equal to 125^(2/3)?",["5","10","25","125"],2,"∛125=5, and 5²=25."]
+],
+"Irrationality proofs":[
+["Which is the standard contradiction setup to prove √2 is irrational?",["Assume √2=p/q in lowest terms","Assume √2 is an integer","Assume √2=2","Assume √2 has a terminating decimal"],0,"A proof by contradiction assumes √2=p/q with coprime integers p and q, then derives a contradiction."],
+["If √2=p/q in lowest terms, squaring gives:",["p²=2q²","p=2q","p²=q²","2p=q²"],0,"Squaring p/q=√2 gives p²/q²=2, hence p²=2q²."],
+["From p²=2q², what follows about p?",["p is odd","p is even","p is irrational","p=1"],1,"Because p² is even, p itself must be even."],
+["If p=2k in p²=2q², what follows?",["q is even","q is odd","q is irrational","q=0"],0,"Substitution gives 4k²=2q², so q²=2k² and q is even."],
+["Why does p and q both being even create a contradiction?",["They are not coprime","They become irrational","Their squares become negative","The fraction becomes 1"],0,"The original fraction p/q was assumed to be in lowest terms, so both being even is impossible."],
+["Which statement is true?",["√2 is rational","√2 is irrational","√2 is an integer","√2 is natural"],1,"√2 cannot be expressed as a ratio of two integers, so it is irrational."],
+["A proof that √3 is irrational can use the same basic strategy as √2 by:",["Assuming √3=p/q in lowest terms and deriving a contradiction","Assuming √3=3","Assuming p=q","Using a calculator only"],0,"The contradiction method begins by assuming a lowest-terms rational representation."],
+["Which fact is essential when using p/q in the standard irrationality proof?",["p and q are coprime integers and q≠0","p and q are both even","q=0","p is always prime"],0,"Lowest terms means p and q share no common factor, and q cannot be zero."],
+["Which conclusion completes the contradiction for √2?",["p and q must both be even, contradicting lowest terms","p=q=1","√2=2","q must be zero"],0,"The derivation forces both integers to be even, contradicting the assumption that the fraction was reduced."],
+["Which number is irrational?",["√4","√9","√11","4/11"],2,"√11 is not the square root of a perfect square and is irrational."]
+],
+"Number line inequalities":[
+["Which interval represents x>3?",["(3,∞)","[3,∞)","(−∞,3)","(−∞,3]"],0,"Because 3 is excluded, use a parenthesis at 3; values extend to infinity."],
+["Which interval represents x≤−2?",["(−∞,−2]","(−∞,−2)","[−2,∞)","(−2,∞)"],0,"Values less than or equal to −2 extend left and include −2."],
+["Which inequality represents the interval [1,5)?",["1<x≤5","1≤x<5","1<x<5","1≤x≤5"],1,"The square bracket includes 1, while the parenthesis excludes 5."],
+["On a number line, x<4 is shown with:",["An open point at 4 and shading left","A closed point at 4 and shading left","An open point at 4 and shading right","A closed point at 4 and shading right"],0,"Strict inequality x<4 excludes 4 and includes values to its left."],
+["Which number satisfies −3<x≤2?",["−4","−3","0","3"],2,"0 is greater than −3 and less than or equal to 2."],
+["Solve x+5>9.",["x>4","x≥4","x<4","x≤4"],0,"Subtract 5 from both sides to obtain x>4."],
+["Solve 2x≤10.",["x≤5","x<5","x≥5","x>5"],0,"Dividing by positive 2 preserves the inequality: x≤5."],
+["Solve −3x>12.",["x>−4","x<−4","x>4","x<4"],1,"Dividing by −3 reverses the inequality, giving x<−4."],
+["Which interval represents −1≤x<3?",["[−1,3)","(−1,3]","[−1,3]","(−1,3)"],0,"Include −1 and exclude 3, so use a bracket then a parenthesis."],
+["The solution of 2<x+1≤6 is:",["1<x≤5","2<x≤6","1≤x<5","−1<x≤7"],0,"Subtract 1 throughout: 1<x≤5."]
+]
 };

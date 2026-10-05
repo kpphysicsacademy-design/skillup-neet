@@ -1458,4 +1458,100 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A point of inflection is identified by a change in:",["Concavity","Domain","Intercept count only","Period only"],0,"An inflection point requires a change in concavity."],
 ["A good curve sketch combines:",["Domain, intercepts, asymptotes, extrema, and concavity","Only a table of values","Only the derivative","Only endpoints"],0,"Combining these features gives a reliable qualitative graph."]
 ]
+,"Antiderivatives":[
+["An antiderivative F(x) of f(x) satisfies:",["F'(x)=f(x)","F(x)=f'(x)","F''(x)=f(x)","F(x)=0"],0,"An antiderivative differentiates to the original function."],
+["An indefinite integral represents:",["A family of antiderivatives","Only one number","A derivative only","A limit only"],0,"The constant of integration gives a family of antiderivatives."],
+["∫x dx equals:",["x²","x²/2+C","2x+C","x+C"],1,"Using the power rule, ∫x dx=x²/2+C."],
+["The derivative of an antiderivative of f is:",["f","0","1","f'"],0,"Differentiating the antiderivative returns f."],
+["If F'(x)=3x², then F(x) can be:",["x³+C","6x+C","3x³+C","x²+C"],0,"The derivative of x³+C is 3x²."],
+["Two antiderivatives of the same function differ by a:",["Constant","Linear term","Quadratic term","Derivative"],0,"Their difference has derivative zero, so it is constant."],
+["∫cos x dx equals:",["−sin x+C","sin x+C","cos x+C","tan x+C"],1,"The derivative of sin x is cos x."],
+["∫1/x dx for x≠0 equals:",["ln|x|+C","1/x²+C","x+C","e^x+C"],0,"The antiderivative of 1/x is ln|x|+C."],
+["The constant C in an indefinite integral is called the:",["Constant of integration","Critical constant","Domain constant","Slope constant"],0,"It accounts for all constant differences between antiderivatives."],
+["Finding an antiderivative is also called:",["Indefinite integration","Differentiation","Factorisation","Optimization"],0,"Indefinite integration is the process of finding antiderivatives."]
+],
+"Definite integrals":[
+["A definite integral usually represents a:",["Number","Family of functions","Derivative","Domain"],0,"A definite integral has specified limits and evaluates to a number."],
+["In ∫_a^b f(x)dx, a and b are the:",["Limits of integration","Coefficients","Roots","Derivatives"],0,"They specify the lower and upper bounds."],
+["The Fundamental Theorem connects definite integration with:",["Antidifferentiation","Factorisation","Matrices","Probability only"],0,"It connects derivatives and definite integrals."],
+["If F'(x)=f(x), then ∫_a^b f(x)dx equals:",["F(b)−F(a)","F(a)+F(b)","F(a)F(b)","F'(b)−F'(a)"],0,"This is the evaluation form of the Fundamental Theorem."],
+["∫_0^1 x dx equals:",["0","1/2","1","2"],1,"An antiderivative is x²/2, giving 1/2."],
+["Reversing the limits changes the sign because:",["∫_b^a f dx=−∫_a^b f dx","The function changes","The derivative changes","The domain doubles"],0,"Swapping limits reverses orientation."],
+["∫_a^a f(x)dx equals:",["0","f(a)","1","2a"],0,"An integral over an interval of zero length is zero."],
+["Definite integrals can be interpreted as:",["Net signed area","Only positive area","Only perimeter","Only slope"],0,"They represent accumulated signed area."],
+["If f(x)≥0 on [a,b], then ∫_a^b f(x)dx is:",["Nonnegative","Always negative","Always zero","Undefined"],0,"The integral of a nonnegative function is nonnegative."],
+["The notation dx indicates the:",["Variable of integration","Upper limit","Function value","Constant of integration"],0,"It identifies the differential variable."]
+],
+"Fundamental theorem of calculus":[
+["The Fundamental Theorem of Calculus links:",["Differentiation and integration","Algebra and geometry only","Matrices and limits only","Probability and sets"],0,"It establishes differentiation and integration as inverse processes."],
+["If F(x)=∫_a^x f(t)dt, then F'(x) is:",["f(x)","f(a)","0","F(x)"],0,"The derivative of an accumulation function returns the integrand."],
+["If f is continuous, the accumulation function F(x)=∫_a^x f(t)dt is:",["Differentiable","Always constant","Undefined","Always decreasing"],0,"Continuity of f ensures differentiability of F."],
+["The evaluation theorem states ∫_a^b f(x)dx=",["F(b)−F(a) when F'=f","F(a)+F(b)","f(b)−f(a)","F'(b)"],0,"An antiderivative evaluated at the endpoints gives the definite integral."],
+["For F(x)=∫_0^x t²dt, F'(x) is:",["x²","2x","x³/3","0"],0,"By the FTC, the derivative is the integrand evaluated at x."],
+["∫_1^3 2x dx equals:",["4","8","9","10"],1,"An antiderivative is x², so 9−1=8."],
+["The first part of the FTC shows that integration can produce a function whose derivative is:",["The original integrand","Zero always","The endpoint","A constant only"],0,"The accumulation function differentiates to f."],
+["A continuous integrand is important because it ensures the accumulation function is:",["Differentiable","Periodic","Bounded always","Linear"],0,"Continuity is a standard hypothesis for the derivative form."],
+["The FTC can greatly simplify a definite integral by avoiding:",["Direct summation of infinitely many rectangles","All differentiation","All algebra","Finding the domain"],0,"It allows evaluation through an antiderivative."],
+["The FTC is fundamental to:",["Calculus","Only arithmetic","Only geometry","Only statistics"],0,"It is one of the central theorems of calculus."]
+],
+"Substitution method":[
+["The substitution method is based on the:",["Chain rule","Product rule only","Quotient rule only","Remainder theorem"],0,"u-substitution reverses the chain rule."],
+["For ∫2x cos(x²)dx, a useful substitution is:",["u=x²","u=2x","u=cos x","u=x"],0,"Let u=x², so du=2x dx."],
+["If u=g(x), then du equals:",["g'(x)dx","g(x)dx","dx/g'(x)","g''(x)"],0,"Differentiating u=g(x) gives du=g'(x)dx."],
+["∫2x(x²+1)^5dx can be simplified by taking u=",["x","x²+1","(x²+1)^5","2x"],1,"Then du=2x dx."],
+["After substitution in a definite integral, the limits can be:",["Changed to u-values","Always removed","Set to zero","Ignored"],0,"Changing the limits avoids converting back to x."],
+["∫cos(3x)dx equals:",["sin(3x)+C","(1/3)sin(3x)+C","3sin x+C","−sin(3x)+C"],1,"Let u=3x, so dx=du/3."],
+["A good substitution usually simplifies the:",["Integrand","Domain only","Constant C","Answer choices"],0,"The goal is to transform the integral into a simpler form."],
+["For ∫f(g(x))g'(x)dx, substitution often gives:",["∫f(u)du","∫g(u)du","f(g(x))","g'(u)"],0,"The inner function becomes u and its derivative supplies du."],
+["In u-substitution, the variable u is:",["A new integration variable","Always a constant","The upper limit only","A derivative"],0,"u replaces a chosen expression in the integrand."],
+["Substitution is especially effective when an integrand contains:",["A function and its derivative","Only constants","Only polynomials","No variables"],0,"This pattern is the hallmark of chain-rule reversal."]
+],
+"Integration by parts":[
+["Integration by parts is based on the:",["Product rule","Chain rule","Quotient rule","Power rule only"],0,"It follows from integrating the product rule."],
+["The formula for integration by parts is:",["∫u dv=uv−∫v du","∫u dv=u+v","∫u dv=uv+∫v du","∫u dv=u/v"],0,"This is the standard formula."],
+["In choosing u and dv, a common goal is to make ∫v du:",["Simpler","More complicated","Undefined","A limit"],0,"A good choice reduces the complexity of the remaining integral."],
+["∫x e^x dx is naturally suited to:",["Integration by parts","Only partial fractions","Only substitution","No method"],0,"Take u=x and dv=e^x dx."],
+["For ∫x e^x dx, choosing u=x gives du=",["dx","x dx","e^x dx","1/x dx"],0,"The derivative of x is dx."],
+["For ∫ln x dx, a useful choice is u=",["ln x","1","x²","e^x"],0,"Taking u=ln x and dv=dx makes du=dx/x."],
+["The integration-by-parts formula can be remembered as:",["First times second minus integral of second times derivative of first","First plus second","Derivative of first times second only","Product divided by x"],0,"It is uv−∫vdu."],
+["For a definite integral, integration by parts gives:",["[uv]_a^b−∫_a^b vdu","uv only","∫u+v","u/v"],0,"The endpoint term replaces the indefinite constant."],
+["Integration by parts is useful for products involving:",["Polynomial and exponential functions","Only constants","Only identical constants","Only roots"],0,"It often reduces products such as x e^x or x sin x."],
+["A poor choice of u may make the remaining integral:",["More difficult","Zero automatically","A constant always","Undefined always"],0,"The choice should simplify the remaining integration."]
+],
+"Partial fractions":[
+["Partial fractions decompose a rational function into:",["Simpler rational terms","Only polynomials","Only constants","Trigonometric terms"],0,"The method splits a rational expression into simpler fractions."],
+["Partial fractions generally apply to rational functions where the degree of the numerator is:",["Less than the degree of the denominator","Greater always","Equal always only","Zero only"],0,"A proper rational function has lower numerator degree."],
+["For 1/((x−1)(x+2)), the partial fraction form is:",["A/(x−1)+B/(x+2)","A/(x−1)(x+2)","A(x−1)+B(x+2)","A+B"],0,"Distinct linear factors receive separate constant numerators."],
+["For a repeated factor (x−1)^2, the decomposition includes terms with:",["1/(x−1) and 1/(x−1)^2","Only 1/(x−1)^2","Only x−1","No fractions"],0,"Every power of the repeated factor appears."],
+["Before decomposing an improper rational function, first perform:",["Polynomial division","Differentiation","Integration","Factor cancellation only"],0,"Long division converts it to a polynomial plus a proper fraction."],
+["Partial fractions are especially useful for integrating:",["Rational functions","Only exponentials","Only trig functions","Only constants"],0,"The decomposition reduces rational integrals to standard forms."],
+["For 1/(x(x+1)), the decomposition uses:",["A/x+B/(x+1)","Ax+B","A/x(x+1)","A+B"],0,"Distinct linear factors each get a constant numerator."],
+["The constants in a partial-fraction decomposition are found by:",["Equating coefficients or substituting convenient values","Differentiating only","Guessing","Using limits only"],0,"Algebraic coefficient comparison or strategic substitution determines them."],
+["A quadratic irreducible factor generally uses a numerator of:",["Linear form","Constant only","Quadratic form only","Zero"],0,"For an irreducible quadratic, use Ax+B over the factor."],
+["Partial fractions can turn a complicated integral into a sum of:",["Elementary integrals","Derivatives only","Limits only","Matrices"],0,"Each simpler fraction can often be integrated directly."]
+],
+"Area under curves":[
+["The area under y=f(x) above the x-axis from a to b is represented by:",["∫_a^b f(x)dx","f(b)−f(a)","f'(x)","∫_a^b f'(x)dx only"],0,"When f≥0, the definite integral gives the geometric area."],
+["If f(x) is below the x-axis, the definite integral gives:",["Negative signed area","Positive geometric area automatically","Zero","The perimeter"],0,"The integral is signed; geometric area uses absolute value."],
+["The geometric area between a curve and the x-axis can be found using:",["∫|f(x)|dx","Only ∫f(x)dx","f'(x)","f''(x)"],0,"Absolute value accounts for regions below the axis."],
+["The area between y=f(x) and y=g(x), with f≥g, is:",["∫_a^b[f(x)−g(x)]dx","∫_a^b[f(x)+g(x)]dx","f(b)−g(a)","f'(x)−g'(x)"],0,"Area is upper function minus lower function."],
+["To find the area between two curves, one must first identify:",["Their intersection points","Only their derivatives","Only y=0","The constant C"],0,"Intersections often determine the limits of integration."],
+["The area under y=x from 0 to 2 is:",["1","2","3","4"],1,"∫_0^2 x dx=2."],
+["If f(x)≥0 on [a,b], then the geometric area equals:",["The definite integral","The negative integral","The derivative","The second derivative"],0,"No sign correction is needed when the function stays nonnegative."],
+["If two curves cross inside [a,b], area between them may require:",["Splitting the integral","Ignoring the crossing","Using only one endpoint","Differentiating twice"],0,"The upper and lower functions can switch at intersection points."],
+["Area is measured in:",["Square units","Linear units","Cubic units","No units"],0,"An integral of height with respect to length produces square units."],
+["The integral of a rate over time gives:",["Accumulated change","Only a slope","A derivative","A domain"],0,"Integration accumulates a changing quantity."]
+],
+"Volumes of revolution":[
+["Rotating a planar region around an axis produces a:",["Solid of revolution","Line segment","Point","Derivative"],0,"Rotation creates a three-dimensional solid."],
+["The disk method commonly uses cross-sectional area:",["πR²","2πR","πR","R²/2"],0,"A circular disk has area πR²."],
+["The washer method uses cross-sectional area:",["π(R²−r²)","π(R−r)","2π(R−r)","R+r"],0,"A washer is an outer disk minus an inner disk."],
+["When revolving around the x-axis using disks, the volume is commonly:",["∫π[f(x)]²dx","∫f(x)dx","∫2πf(x)dx","∫f'(x)dx"],0,"The radius is the y-value f(x)."],
+["The shell method commonly uses:",["2π(radius)(height)","π(radius)² only","2π(radius)²","radius+height"],0,"Cylindrical shells have circumference 2πr times height."],
+["A solid formed by rotating a region around the y-axis can often use shells with radius:",["x","y²","f'(x)","1/x"],0,"For vertical shells around the y-axis, the radius is x."],
+["If a disk has radius 3, its area is:",["3π","6π","9π","12π"],2,"Area=π(3²)=9π."],
+["Volume is measured in:",["Cubic units","Square units","Linear units","No units"],0,"Volume is three-dimensional."],
+["For washers around the x-axis, the outer radius is:",["The farther curve from the axis","Always x","Always 1","The inner radius"],0,"The outer radius determines the larger disk."],
+["Choosing disks, washers, or shells depends mainly on:",["The axis of rotation and convenient description of the region","The constant C","The derivative only","The answer choices"],0,"The method should simplify the radius and height expressions."]
+]
 };

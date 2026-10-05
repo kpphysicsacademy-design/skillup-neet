@@ -2725,4 +2725,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["For $f(x)=\\sin x$ and $g(x)=2x$, which expression represents the composite function $(f\\circ g)(x)$?",["$\\sin(2x)$","$2\\sin x$","$\\sin x+2x$","$\\sin(x/2)$"],0,"Composition means $(f\\circ g)(x)=f(g(x))$, hence $\\sin(2x)$."]
 ],
 
+
+"Even functions":[
+["A function $f$ is even when it satisfies:",["$f(-x)=f(x)$ for every $x$ in its domain","$f(-x)=-f(x)$ for every $x$","$f(x)=0$ for every $x$","$f(x)=x$ for every $x$"],0,"The defining condition is $f(-x)=f(x)$ whenever both inputs belong to the domain."],
+["Which function is even on $\\mathbb R$?",["$x^2$","$x^3$","$x$","$2x+1$"],0,"Since $(-x)^2=x^2$, the function $x^2$ satisfies the even-function condition."],
+["Which statement correctly describes the graph of an even function?",["It is symmetric about the $y$-axis","It is symmetric about the $x$-axis","It is symmetric about the line $y=x$","It has no symmetry"],0,"If $(x,f(x))$ lies on the graph, then $(-x,f(x))$ also lies on it, giving $y$-axis symmetry."],
+["If $f(x)=\\cos x$, then $f(-x)$ equals:",["$\\cos x$","$-\\cos x$","$\\sin x$","$-\\sin x$"],0,"The cosine identity $\\cos(-x)=\\cos x$ shows that cosine is even."],
+["If $f$ and $g$ are even functions on a common symmetric domain, then $f+g$ is:",["Even","Odd","Neither necessarily","Constant"],0,"$(f+g)(-x)=f(-x)+g(-x)=f(x)+g(x)$, so the sum is even."],
+["If $f$ is even and $c$ is a constant, then $cf$ is:",["Even","Odd for every nonzero $c$","Undefined","Always constant"],0,"$(cf)(-x)=c f(-x)=c f(x)=(cf)(x)$, so scalar multiplication preserves evenness."],
+["Which function is neither even nor odd on $\\mathbb R$?",["$x+1$","$x^2$","$x^3$","$\\cos x$"],0,"For $f(x)=x+1$, $f(-x)=1-x$, which is neither $f(x)$ nor $-f(x)$ for general $x$."],
+["For an even function with $f(3)=7$, the value of $f(-3)$ is:",["$7$","$-7$","$3$","$-3$"],0,"Applying $f(-x)=f(x)$ at $x=3$ gives $f(-3)=f(3)=7$."],
+["A mathematical program checks whether sampled values satisfy the evenness condition. For paired samples $x$ and $-x$, which test should it perform?",["Check whether $f(-x)=f(x)$","Check whether $f(-x)=-f(x)$","Check whether $f(x)=x$","Check whether $f(-x)=0$"],0,"The numerical test for evenness compares each symmetric input pair and requires equal function values."],
+["If $f(x)=x^4-3x^2+5$, then $f$ is:",["Even","Odd","Neither even nor odd","Not a function"],0,"Substituting $-x$ gives $(-x)^4-3(-x)^2+5=x^4-3x^2+5=f(x)$, so the function is even."]
+],
 };

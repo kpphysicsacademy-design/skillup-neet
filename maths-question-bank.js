@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Modulus function":[
+["The modulus function is defined by:",["$|x|=\\begin{cases}x,&x\\ge0\\\\-x,&x<0\\end{cases}$","$|x|=x^2$ for all x","$|x|=1/x$ for all x","$|x|=x+1$ for all x"],0,"The modulus gives the nonnegative magnitude of a real number."],
+["The domain and range of $f(x)=|x|$ are:",["Domain $\\mathbb R$, range $[0,\\infty)$","Domain $[0,\\infty)$, range $\\mathbb R$","Both are $\\mathbb R$","Both are $[0,\\infty)$"],0,"Every real x is allowed, while $|x|\\ge0$."],
+["Solve $|x|=5$.",["$x=\\pm5$","$x=5$ only","$x=-5$ only","No real solution"],0,"The numbers whose distance from zero is 5 are 5 and −5."],
+["For $x<0$, the expression $|x|$ equals:",["$-x$","$x$","$x^2$","$1/x$"],0,"When x is negative, its modulus is its additive inverse."],
+["The graph of $y=|x|$ has the shape of:",["A V with vertex at $(0,0)$","A circle","A straight horizontal line","A downward-opening parabola"],0,"The two linear pieces $y=x$ and $y=-x$ meet at the origin."],
+["Solve the inequality $|x|<3$.",["$-3<x<3$","$x>3$","$x<-3$","$x\\le-3$ or $x\\ge3$"],0,"A number with distance from zero less than 3 lies between −3 and 3."],
+["For $f(x)=|x-2|$, the minimum value is:",["0 at $x=2$","1 at $x=2$","2 at $x=0$","−2 at $x=2$"],0,"The modulus is minimized when its argument is zero, giving $x=2$ and value 0."],
+["A mathematical-programming implementation of $|x|$ can use:",["if x≥0 return x; else return −x","if x≥0 return −x; else return x","always return x²","always return 1/x"],0,"The piecewise definition translates directly into an if–else algorithm."],
+["Solve $|2x-1|=3$.",["$x=2$ or $x=-1$","$x=1$ or $x=-2$","$x=3$ only","No real solution"],0,"Set $2x-1=3$ or $2x-1=-3$, giving $x=2$ or $x=-1$."],
+["For $a>0$, the equation $|x|=a$ has:",["Exactly two real solutions, $x=\\pm a$","Exactly one real solution","No real solution","Infinitely many solutions"],0,"Positive distance a from zero corresponds to the two points $a$ and −a."]
+],
+
 "Rational function":[
 ["A rational function has the form:",["$f(x)=\\dfrac{p(x)}{q(x)}$ where p and q are polynomials and $q(x)\\ne0$","$f(x)=\\sqrt{x}$ only","$f(x)=\\sin x$ only","$f(x)=x^n$ only"],0,"A rational function is a quotient of two polynomials with a nonzero denominator."],
 ["The domain of $f(x)=\\dfrac{1}{x-3}$ is:",["$\\mathbb{R}\\setminus\\{3\\}$","$\\mathbb{R}$","$\\{3\\}$","$[3,\\infty)$"],0,"The denominator cannot be zero, so $x\\ne3$."],

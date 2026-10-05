@@ -12,6 +12,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The compound ratio of 2:3 and 4:5 is:",["6:8","8:15","2:15","4:8"],1,"Multiply corresponding terms: (2×4):(3×5)=8:15."],
 ["What is the simplest ratio of 250 g to 1 kg?",["1:2","1:3","1:4","1:5"],2,"1 kg=1000 g. Therefore 250:1000 simplifies to 1:4."]
 ],
+"Proportion":[
+["Which statement represents a proportion?",["2:3=4:5","2:3=4:6","3:4=6:8","5:6=10:13"],2,"3:4 and 6:8 are equivalent because both simplify to 3:4."],
+["If 3:5=x:20, what is x?",["9","10","12","15"],2,"3/5=x/20, so x=(3×20)/5=12."],
+["If 4:7=12:x, what is x?",["14","18","21","28"],2,"4/7=12/x gives 4x=84, so x=21."],
+["Are 6:9 and 10:15 in proportion?",["Yes","No","Only if both are doubled","Cannot be determined"],0,"6/9=2/3 and 10/15=2/3, so the ratios are proportional."],
+["If 5 pens cost ₹60, what is the cost of 8 pens at the same rate?",["₹84","₹90","₹96","₹100"],2,"One pen costs ₹12, so 8 pens cost 8×12=₹96."],
+["A car travels 150 km in 3 hours. At the same speed, how far will it travel in 5 hours?",["200 km","225 km","250 km","300 km"],2,"Speed=150/3=50 km/h. In 5 hours, distance=50×5=250 km."],
+["If x/6=5/3, what is x?",["8","10","12","15"],1,"x=6×5/3=10."],
+["Which pair forms a proportion?",["4:6 and 8:12","3:5 and 9:20","2:7 and 6:14","5:8 and 15:20"],0,"4/6=2/3 and 8/12=2/3, so the two ratios are equal."],
+["If 7 workers complete a task in 12 days, how many worker-days are required?",["19","42","84","96"],2,"Worker-days=7×12=84."],
+["In a proportion a:b=c:d, which relation is always true?",["a+b=c+d","a×d=b×c","a−b=c−d","a/b=c+d"],1,"For a valid proportion, the product of the extremes equals the product of the means: ad=bc."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

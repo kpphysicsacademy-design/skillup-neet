@@ -676,4 +676,77 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If f⁻¹ exists, then f∘f⁻¹ equals:",["I","0","f","1"],0,"An inverse followed by the original gives the identity on the appropriate range."],
 ["The domain of f⁻¹ corresponds to the:",["Range of f","Domain of f","Coefficient set","Constants"],0,"Inputs to the inverse are outputs of the original function."],
 ["To find an inverse algebraically, a common first step is to:",["Write y=f(x)","Set x=0 always","Square both sides always","Differentiate immediately"],0,"Start with y=f(x), interchange x and y, then solve for y."]
-]};
+],
+"Inverse of composite functions":[
+["If f and g are invertible, then (f∘g)^−1 equals:",["f^−1∘g^−1","g^−1∘f^−1","f∘g","g∘f"],1,"The order reverses when taking the inverse of a composition."],
+["If f(x)=2x+1 and g(x)=x−3, then (f∘g)(x) is:",["2x−5","2x+4","x−2","2x−3"],0,"f(g(x))=2(x−3)+1=2x−5."],
+["For invertible f and g, which identity is correct?",["(f∘g)^−1=g^−1∘f^−1","(f∘g)^−1=f^−1∘g^−1","(f∘g)^−1=f∘g","(f∘g)^−1=I"],0,"The inverse of a composition reverses the order."],
+["If f(x)=x+2 and g(x)=3x, then (f∘g)^−1(11) is:",["1","2","3","5"],2,"f∘g=3x+2. Solving 3x+2=11 gives x=3."],
+["The domain of (f^−1) is the:",["Domain of f","Range of f","Coefficient set of f","None of these"],1,"The inverse swaps the domain and range of the original function."],
+["If f is invertible, then f^−1(f(x)) equals:",["0","1","x","f(x)"],2,"An inverse undoes f, returning the original input."],
+["If g is invertible, applying g^−1 after g gives:",["g","I","0","g^2"],1,"g^−1∘g is the identity on the appropriate domain."],
+["If f(x)=2x and g(x)=x+1, then (g∘f)^−1(10) is:",["3","4","9/2","5"],2,"g∘f=2x+1. Setting 2x+1=10 gives x=9/2."],
+["When finding the inverse of a composite function, the order of component inverses is:",["Unchanged","Reversed","Random","Removed"],1,"Composition inversion reverses the order of the component inverses."],
+["If f and g are bijections with compatible domains and ranges, then f∘g is:",["Not invertible","Invertible","Always constant","Always identity"],1,"A composition of compatible bijections is itself a bijection and hence invertible."]
+],
+"Transformations of graphs":[
+["The graph of y=f(x)+3 is obtained by shifting y=f(x):",["3 units up","3 units down","3 units right","3 units left"],0,"Adding a positive constant shifts every output upward."],
+["The graph of y=f(x−2) is shifted:",["2 units left","2 units right","2 units up","2 units down"],1,"Replacing x by x−2 shifts the graph 2 units to the right."],
+["The graph of y=−f(x) is a reflection in the:",["x-axis","y-axis","origin","line y=x"],0,"Negating the output reflects the graph across the x-axis."],
+["The graph of y=f(−x) is a reflection in the:",["x-axis","y-axis","origin","line y=x"],1,"Negating the input reflects the graph across the y-axis."],
+["The graph of y=f(x)+5 is:",["5 units below f","5 units above f","5 units right of f","5 units left of f"],1,"A positive vertical constant shifts the graph upward."],
+["The graph of y=f(x+4) is shifted:",["4 units right","4 units left","4 units up","4 units down"],1,"Replacing x by x+4 shifts the graph 4 units left."],
+["Multiplying f(x) by 2 changes the graph by a vertical:",["Compression by factor 2","Stretch by factor 2","Shift right 2","Reflection"],1,"y=2f(x) doubles every output, producing a vertical stretch."],
+["The graph of y=f(x)−4 is shifted:",["4 units up","4 units down","4 units left","4 units right"],1,"Subtracting 4 from the output moves the graph downward by 4."],
+["The graph of y=|f(x)| is obtained by:",["Reflecting negative portions above the x-axis","Reflecting in the y-axis","Shifting right","Shifting down"],0,"Negative output portions are reflected upward across the x-axis."],
+["The transformation y=f(x−h)+k moves the graph:",["h left and k down","h right and k up","h up and k right","h down and k left"],1,"x−h gives a horizontal shift right by h; +k gives a vertical shift up by k."]
+],
+"Vertical line test":[
+["The vertical line test determines whether a graph represents:",["A function of x","An even function only","A constant only","A polynomial only"],0,"A graph represents y as a function of x if each x has at most one y-value."],
+["A graph passes the vertical line test if every vertical line intersects it:",["At most once","Exactly twice","At least twice","Never"],0,"At most one intersection means each input x has at most one output."],
+["Which graph fails the vertical line test?",["A parabola y=x²","A line y=2x+1","A circle x²+y²=1","A cubic y=x³"],2,"Some vertical lines intersect a circle at two points, so it is not y=f(x)."],
+["If one vertical line crosses a graph at two points, the graph:",["Represents a function of x","Does not represent a function of x","Must be even","Must be odd"],1,"One x-value having two y-values violates the definition of a function."],
+["The vertical line test concerns repeated:",["Outputs for one input","Inputs with one output","Slopes only","Intercepts only"],0,"It checks whether one input x produces more than one output y."],
+["The graph y=x² passes the vertical line test because:",["Each x gives exactly one y","Each y gives exactly one x","It is a circle","It has no range"],0,"For every x, x² gives one unique output."],
+["A sideways parabola x=y² fails the vertical line test because:",["Some x-values correspond to two y-values","It has no points","It is a line","It has no domain"],0,"For x>0, both positive and negative y can occur."],
+["The vertical line test is mainly a graphical version of:",["The definition of a function","The definition of an integer","The product rule","The remainder theorem"],0,"It checks the one-output-per-input requirement graphically."],
+["If every vertical line intersects a graph at most once, then it is:",["A function of x","Never a function","Always constant","Always one-to-one"],0,"Passing the vertical line test establishes that y is a function of x."],
+["Which relation fails the function test?",["y=x+1","y=x²","x=y²","y=|x|"],2,"x=y² gives two y-values for many positive x-values."]
+],
+"Horizontal line test":[
+["The horizontal line test is used to determine whether a function is:",["One-to-one","Constant","Even","Periodic"],0,"A one-to-one function has each output associated with at most one input."],
+["A graph passes the horizontal line test if every horizontal line intersects it:",["At most once","Exactly twice","At least once","Never"],0,"At most one intersection means no two inputs share an output."],
+["Which function fails the horizontal line test on all real numbers?",["f(x)=x","f(x)=2x+1","f(x)=x²","f(x)=x+5"],2,"x² is not one-to-one on R because f(2)=f(−2)."],
+["The graph of a strictly increasing function passes the horizontal line test because:",["Different inputs have different outputs","All outputs are zero","Its domain is empty","It is always quadratic"],0,"Strict increase guarantees distinct inputs produce distinct outputs."],
+["If a horizontal line intersects a graph twice, the function is:",["Not one-to-one","Always constant","Always even","Not a function"],0,"Two intersections mean two inputs share the same output."],
+["Restricting f(x)=x² to x≥0 makes it pass the horizontal line test because it becomes:",["One-to-one","Constant","Undefined","Periodic"],0,"On x≥0, x² is increasing, so each output has one input."],
+["The horizontal line test is related to the existence of a:",["Function inverse","Derivative only","Constant term","Vertical asymptote"],0,"A one-to-one function has an inverse function on its range."],
+["A function can pass the vertical line test but fail the horizontal line test.",["True","False","Only for constants","Only for circles"],0,"For example, y=x² is a function but is not one-to-one on R."],
+["Which function passes the horizontal line test?",["f(x)=x³","f(x)=x²","f(x)=|x|","f(x)=x²+1"],0,"x³ is strictly increasing on R, so it is one-to-one."],
+["Passing the horizontal line test means each output occurs for:",["At most one input","At least two inputs","Exactly two inputs","No inputs"],0,"This is the graphical condition for one-to-one behavior."]
+],
+"Even functions":[
+["A function f is even if:",["f(−x)=f(x)","f(−x)=−f(x)","f(x)=x","f(x)=0"],0,"Even functions have equal outputs at x and −x."],
+["The graph of an even function is symmetric about the:",["x-axis","y-axis","origin","line y=x"],1,"Reflection across the y-axis leaves an even graph unchanged."],
+["Which function is even?",["f(x)=x³","f(x)=x²","f(x)=x","f(x)=x+1"],1,"(−x)²=x², so x² is even."],
+["For an even function, if f(3)=7, then f(−3) is:",["−7","0","3","7"],3,"Evenness gives f(−3)=f(3)=7."],
+["Which trigonometric function is even?",["sin x","cos x","tan x","x"],1,"cos(−x)=cos x, so cosine is even."],
+["If f(−x)=f(x) for every x in its symmetric domain, f is:",["Odd","Even","Constant only","Not a function"],1,"This is the defining property of an even function."],
+["Which graph symmetry indicates an even function?",["Symmetry about the y-axis","Symmetry about the x-axis only","Symmetry about the origin only","No symmetry"],0,"Even functions are symmetric about the y-axis."],
+["Is f(x)=|x| even?",["Yes","No","Only for x>0","Only at x=0"],0,"|−x|=|x|, so the absolute-value function is even."],
+["If f is even, then f(−5)−f(5) equals:",["−10","−5","0","10"],2,"Since f(−5)=f(5), their difference is zero."],
+["Which function is not even?",["x²","x⁴","|x|","x³"],3,"(−x)³=−x³, so x³ is odd rather than even."]
+],
+"Odd functions":[
+["A function f is odd if:",["f(−x)=f(x)","f(−x)=−f(x)","f(x)=x²","f(x)=1"],1,"Odd functions change sign when x is replaced by −x."],
+["The graph of an odd function is symmetric about the:",["x-axis","y-axis","origin","line y=x"],2,"Origin symmetry is the graphical property of odd functions."],
+["Which function is odd?",["x²","x³","|x|","x²+1"],1,"(−x)³=−x³, so x³ is odd."],
+["For an odd function, if f(4)=9, then f(−4) is:",["−9","0","4","9"],0,"Oddness gives f(−4)=−f(4)=−9."],
+["Which trigonometric function is odd?",["cos x","sin x","|x|","x²"],1,"sin(−x)=−sin x, so sine is odd."],
+["If f(−x)=−f(x) for every x in its symmetric domain, f is:",["Even","Odd","Constant only","Undefined"],1,"This is the defining condition for an odd function."],
+["An odd function defined at x=0 must satisfy:",["f(0)=1","f(0)=−1","f(0)=0","f(0) can never exist"],2,"f(0)=−f(0) implies f(0)=0."],
+["Is f(x)=x^5 odd?",["Yes","No","Only for positive x","Only for x=0"],0,"(−x)^5=−x^5, so x^5 is odd."],
+["If f is odd, then f(−2)+f(2) equals:",["−4","−2","0","4"],2,"Odd symmetry gives f(−2)=−f(2), so the sum is zero."],
+["Which function is neither even nor odd?",["x²","x³","x+1","0"],2,"For x+1, neither even nor odd symmetry holds for all x."]
+]
+};

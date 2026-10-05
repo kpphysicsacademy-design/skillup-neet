@@ -42,8 +42,26 @@
  .chapter>a,.chapter:nth-of-type(odd)>a,.chapter:nth-of-type(even)>a{margin:0}
 }
 @media(prefers-reduced-motion:reduce){.chapter .node{animation:none!important}}
+/* Progressive learning journey */
+.progress-legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:8px auto 22px;font-size:10px;font-weight:900;letter-spacing:.5px;color:#66788a}
+.progress-legend span:first-child{color:#58a900}.progress-legend span:nth-child(2){color:#168de2}.progress-legend span:last-child{color:#f0a000}
+.unit{scroll-margin-top:90px}
+.unit-main{transition:transform .18s ease,box-shadow .18s ease}
+.unit-main:hover{transform:translateY(-2px);box-shadow:0 6px 0 #c6d1dc}
+.chapter{transition:opacity .35s ease,transform .35s ease}
+.chapter[data-progress="first"] .node{background:#58cc02}
+.chapter[data-progress="learn"] .node{background:#1cb0f6;box-shadow:0 4px 0 #168de2}
+.chapter[data-progress="master"] .node{background:#ffc800;box-shadow:0 4px 0 #dca900}
+.chapter[data-progress="first"]>a{border-color:#b9e6a1}
+.chapter[data-progress="learn"]>a{border-color:#b9def5}
+.chapter[data-progress="master"]>a{border-color:#f2d879}
+.chapter .stage{display:inline-flex;align-items:center;gap:5px;margin-bottom:7px;padding:4px 8px;border-radius:999px;font-size:8px;font-weight:900;letter-spacing:.5px;background:#f1f5f8;color:#607284}
+.chapter[data-progress="first"] .stage{background:#e9f8df;color:#439800}
+.chapter[data-progress="learn"] .stage{background:#e6f6ff;color:#087dbd}
+.chapter[data-progress="master"] .stage{background:#fff7d8;color:#9b7300}
+@media(max-width:700px){.progress-legend{justify-content:flex-start;margin-left:38px}}
 </style>
-<script src="iit-maths-path-curriculum.js?v=20261005"></script>
+<script src="iit-maths-path-curriculum.js?v=20261005">function applyProgressStages(){document.querySelectorAll('.chapter').forEach((el,i)=>{if(el.dataset.progress)return;const n=i%3;const stage=n===0?'START':n===1?'LEARN':'MASTER';el.dataset.progress=n===0?'first':n===1?'learn':'master';const a=el.querySelector('a');if(a&&!a.querySelector('.stage')){const s=document.createElement('div');s.className='stage';s.textContent=n===0?'● START HERE':n===1?'→ KEEP LEARNING':'★ MASTER';a.prepend(s)}})};</script>
 </head>
 <body>
 <header class="top"><div class="nav"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu" aria-expanded="false">☰</button><div class="menu" id="menu"><div class="menu-title">SKILLUP</div><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">🧪 Chemistry</a><a href="botany-home.html">🌿 Botany</a><a href="zoology-home.html">🦁 Zoology</a><a href="maths-home.html">📐 Mathematics</a><a href="profile.html">👤 Profile</a><a href="progress.html">📊 My Progress</a><a href="tests.html">📝 My Tests</a><a href="revision.html">🔄 Revision</a><a href="achievements.html">🏆 Achievements</a><div class="menu-title">MORE</div><a href="help.html">❓ Help &amp; Feedback</a><a href="about.html">ℹ️ About SkillUp</a></div></div><span class="mark">📐</span><span class="brand">SkillUp</span><span class="nav-status">MATHEMATICS</span></div></header>
@@ -120,4 +138,4 @@ document.getElementById('searchBtn').onclick=function(){term=q.value.trim().toLo
 q.addEventListener('keydown',function(ev){if(ev.key==='Enter')document.getElementById('searchBtn').click();});
 })();
 </script>
-</body></html>
+<script>applyProgressStages();new MutationObserver(applyProgressStages).observe(document.querySelector(".path")||document.body,{childList:true,subtree:true});</script></body></html>

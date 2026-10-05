@@ -604,7 +604,8 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The domain of (f/g)(x) must exclude values where:",["f(x)=0","g(x)=0","f(x)=g(x)","x=0 always"],1,"Division by g(x) requires g(x)≠0."],
 ["If f(x)=x+1 and g(x)=x−1, then (f+g)(x) is:",["2x","2","x²−1","x"],0,"(x+1)+(x−1)=2x."],
 ["Which operation combines two functions by adding their outputs?",["f+g","fg","f∘g","f−g"],0,"(f+g)(x)=f(x)+g(x)."]
-,"Range finding":[
+],
+"Range finding":[
 ["The range of f(x)=2x+1 for real x is:",["y≥1","y≤1","All real numbers","y>0"],2,"A non-constant linear function with real input has every real number as an output."],
 ["The range of f(x)=x²−4 is:",["y≥−4","y≤−4","All real y","y>−4"],0,"Since x²≥0, x²−4≥−4."],
 ["The minimum value of x²+3 is:",["0","2","3","−3"],2,"x² is at least 0, so x²+3 is at least 3."],

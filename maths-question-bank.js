@@ -185,7 +185,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which is the smallest whole number?",["−1","0","1","There is no smallest"],1,"Whole numbers begin at 0, so 0 is the smallest whole number."],
 ["What is 8×(10+2)?",["88","96","100","104"],1,"Using the distributive property, 8×12=96. Therefore the correct value is 96."],
 ["Which statement about whole numbers is true?",["Every whole number is negative","Every whole number is an integer","Every integer is a whole number","Whole numbers include fractions"],1,"Whole numbers are a subset of the integers, consisting of 0 and positive integers."],
-["Which operation can produce a result outside the whole numbers?",["Addition","Multiplication","Subtraction","Addition and multiplication"],2,"For example, 3−5=−2, which is not a whole number."],
+["Which operation can produce a result outside the whole numbers?",["Addition","Multiplication","Subtraction","Addition and multiplication"],2,"For example, 3−5=−2, which is not a whole number."]],
 "Surds":[
 ["Which expression is a surd?",["√2","√4","3","0.25"],0,"√2 is irrational and cannot be simplified to a rational number, so it is a surd."],
 ["Simplify √18.",["3√2","2√3","9√2","6√2"],0,"√18=√(9×2)=3√2."],

@@ -2105,5 +2105,29 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["For one constraint in two variables, solving Lagrange equations usually gives:",["Candidate constrained extrema","The exact global answer automatically","Only zeros of f","Only boundary points"],0,"The solutions are candidates and require further comparison."],
 ["The method is named after:",["Lagrange","Newton","Euler","Gauss"],0,"The technique is associated with Joseph-Louis Lagrange."],
 ["Lagrange multipliers are widely used in:",["Optimization under constraints","Only polynomial expansion","Only integration by parts","Only sequence convergence"],0,"They are a central method in constrained optimization."]
+],
+"Linearization":[
+["The linearization of f(x,y) near (a,b) is based on:",["First partial derivatives","Second derivatives only","Integrals only","Function values at infinity"],0,"Linearization is the first-order Taylor approximation."],
+["For z=f(x,y), linearization is:",["f(a,b)+f_x(a,b)(x−a)+f_y(a,b)(y−b)","f(a,b)(x+y)","f_x+f_y","x+y"],0,"This is the tangent-plane approximation."],
+["Linearization is most accurate when the input changes are:",["Small","Very large","Infinite","Undefined"],0,"Higher-order terms become smaller for small changes."],
+["The linearization of f(x)=x² at x=3 is:",["9+6(x−3)","6+9(x−3)","x²+6","3+9x"],0,"f(3)=9 and f'(3)=6."],
+["Linearization provides an approximation to:",["Function values near a point","All function values exactly","Only derivatives","Only integrals"],0,"It approximates nearby values using a tangent model."],
+["For f(x,y), the linear approximation error is primarily associated with:",["Higher-order terms","First derivatives","The function value only","The coordinates alone"],0,"Second- and higher-order terms determine the leading approximation error."],
+["A tangent plane is the geometric form of:",["Linearization for a surface","A second derivative","A definite integral","A level curve only"],0,"The tangent plane gives the first-order linear approximation."],
+["Linearization can be used to estimate:",["Nearby complicated function values","Only exact roots","Only maxima","Only areas"],0,"It replaces a complicated function locally with a simpler linear model."],
+["If f(a,b)=10 and both first partial derivatives are zero, the linearization is:",["10","0","x+y","10+x+y"],0,"With zero first derivatives, the first-order approximation is constant."],
+["Linearization is closely connected to:",["Differentiability","Prime numbers","Factorisation","Set complements"],0,"Differentiability guarantees a valid first-order local linear approximation."]
+],
+"Gradient and level surfaces":[
+["For a level surface f(x,y,z)=c, the gradient is:",["Normal to the surface","Tangent to every curve","Parallel to every axis","Zero always"],0,"The gradient is perpendicular to the level surface."],
+["A level surface consists of points where f is:",["Constant","Zero always","Increasing always","Undefined"],0,"Every point on f=c has the same function value."],
+["For f=x²+y²+z², the gradient is:",["⟨2x,2y,2z⟩","⟨x,y,z⟩","x²+y²+z²","⟨2,2,2⟩"],0,"Differentiate with respect to x, y, and z."],
+["At a regular point of a level surface, ∇f is:",["Nonzero and normal","Always zero","Tangent","A scalar"],0,"A regular level point has nonzero gradient."],
+["The tangent plane to a level surface is:",["Perpendicular to ∇f","Parallel to ∇f","Equal to f","Always horizontal"],0,"The gradient is its normal vector."],
+["For f=x²+y², the level curves are:",["Circles centered at the origin","Straight lines only","Parabolas only","Hyperbolas only"],0,"x²+y²=c describes circles for c>0."],
+["Moving along a level curve causes the directional derivative to be:",["0","1","Maximum","Undefined"],0,"The function remains constant along the level curve."],
+["The gradient and level-set geometry connect calculus with:",["Optimization","Only arithmetic","Only number theory","Only sequences"],0,"Gradients identify normals and steepest change."],
+["If ∇f is parallel to a vector n, n can serve as a:",["Normal direction","Tangent direction","Zero vector","Function value"],0,"Any nonzero scalar multiple of a normal is also normal."],
+["Level surfaces are especially useful for visualizing:",["Multivariable functions","Only polynomials in one variable","Only sequences","Only matrices"],0,"They represent constant-value sets in space."]
 ]
 };

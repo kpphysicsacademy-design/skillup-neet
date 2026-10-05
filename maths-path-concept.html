@@ -25,6 +25,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 .ans:hover{border-color:#a9c7dc;transform:translateY(-1px)}.ans:disabled{cursor:default;transform:none}.ans.correct{border-color:var(--green);background:#effbe9;box-shadow:0 2px 0 var(--green-dark)}.ans.correct:before{border-color:var(--green);color:var(--green-dark)}.ans.wrong{border-color:var(--red);background:#fff0f0;box-shadow:0 2px 0 #d83a3a}.ans.wrong:before{border-color:var(--red);color:var(--red)}
 .actions{display:flex;justify-content:flex-end;margin-top:16px}.continue{display:none;border:0;border-radius:14px;background:var(--green);box-shadow:0 4px 0 var(--green-dark);color:#fff;padding:13px 22px;font-size:15px;font-weight:950;cursor:pointer}.continue:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-dark)}
 .result{display:none;background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px 22px;text-align:center;box-shadow:0 5px 18px #183b6312}.trophy{font-size:52px}.result h2{color:var(--navy);font-size:28px}.score{font-size:20px;font-weight:950}.next{display:inline-block;margin-top:12px;background:var(--navy);color:#fff;text-decoration:none;padding:13px 20px;border-radius:14px;font-weight:950}
+
+.result .pathmeta{display:flex;gap:7px;flex-wrap:wrap}.result .pill{font-size:11px}.result .next{border:0;cursor:pointer}
 @media(max-width:560px){.stats .stat{padding:6px 8px;font-size:11px}.wrap{padding:12px 10px 70px}.hero,.lesson,.quiz,.result{border-radius:20px;padding:18px}.qtext{font-size:19px}.ans{font-size:15px;min-height:54px}}
 </style>
 </head>
@@ -35,6 +37,18 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 
 <section class="quiz" id="quiz"><div class="quizhead"><div class="level">🎯 PRACTICE</div><div class="qnum" id="qnum">1 / 10</div></div><div id="question" class="qtext"></div><div id="answers" class="answers"></div><div class="actions"><button id="continue" class="continue">Continue →</button></div></section>
 
+<section class="result" id="result">
+<div class="trophy" id="resultIcon">🏆</div>
+<h2 id="resultTitle">Quiz complete!</h2>
+<div class="score" id="finalScore"></div>
+<div class="pathmeta" style="justify-content:center;margin-top:14px">
+<span class="pill" id="accuracyStat">Accuracy 0%</span>
+<span class="pill" id="correctStat">Correct 0</span>
+<span class="pill" id="timeStat">Time 0s</span>
+</div>
+<div id="analyticsSummary" style="margin-top:18px;line-height:1.6;font-weight:700;color:#52616f"></div>
+<a class="next" id="retry" href="#">Try again</a>
+</section>
 </main>
 <script src="maths-question-bank.js"></script>
 <script>
@@ -66,10 +80,22 @@ const data=bank[concept]||fallback;document.getElementById('headerTitle').textCo
 function typeset(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}
 if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(typeset);
 const questions=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept])||data.questions;let i=0,score=0,answered=false;
-const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),cont=document.getElementById('continue');
+const startedAt=Date.now();
+const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),cont=document.getElementById('continue'),quizEl=document.getElementById('quiz'),resultEl=document.getElementById('result');
 function render(){answered=false;cont.style.display='none';cont.disabled=false;cont.textContent='Continue →';document.getElementById('qnum').textContent=(i+1)+' / '+questions.length;const q=questions[i];qEl.innerHTML=q[0];aEl.innerHTML='';q[1].slice(0,4).forEach((x,n)=>{const b=document.createElement('button');b.className='ans';b.dataset.letter=String.fromCharCode(65+n);b.textContent=x;b.onclick=()=>answer(n,b);aEl.appendChild(b)});typeset()}
 function answer(n,button){if(answered)return;answered=true;const q=questions[i];[...aEl.children].forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('correct')});if(n===q[2])score++;else button.classList.add('wrong');cont.textContent=(i===questions.length-1)?'Done ✓':'Continue →';cont.style.display='inline-block'}
-cont.onclick=()=>{if(i<questions.length-1){i++;render()}else{cont.disabled=true;cont.textContent='Done ✓'}};
+function showResults(){
+ const total=questions.length,accuracy=total?Math.round(score/total*100):0,time=Math.max(1,Math.round((Date.now()-startedAt)/1000));
+ quizEl.style.display='none';resultEl.style.display='block';
+ document.getElementById('finalScore').textContent=score+' / '+total+' correct';
+ document.getElementById('accuracyStat').textContent='Accuracy '+accuracy+'%';
+ document.getElementById('correctStat').textContent='Correct '+score;
+ document.getElementById('timeStat').textContent='Time '+time+'s';
+ document.getElementById('analyticsSummary').textContent=accuracy>=90?'Excellent mastery — ready to move forward.':accuracy>=70?'Good progress — review the missed questions once.':'Keep practising — review this concept before moving forward.';
+ const icon=document.getElementById('resultIcon');icon.textContent=accuracy>=90?'🏆':accuracy>=70?'⭐':'💪';
+ document.getElementById('retry').href=location.href;
+}
+cont.onclick=()=>{if(i<questions.length-1){i++;render()}else{showResults()}};
 render();
 </script>
 </body></html>

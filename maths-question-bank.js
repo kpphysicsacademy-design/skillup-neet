@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Equivalence relation properties":[
+["Which three properties characterize an equivalence relation?",["Reflexive, symmetric and transitive","Reflexive, antisymmetric and transitive","Symmetric, antisymmetric and transitive","Reflexive, symmetric and antisymmetric"],0,"An equivalence relation must be reflexive, symmetric and transitive."],
+["If R is reflexive on A, then for every a∈A:",["aRa","aRb for every b","aRa is false","aRb only when a≠b"],0,"Reflexivity means every element is related to itself."],
+["If R is symmetric and aRb, then:",["bRa","aRa only","bRb only","aRc for every c"],0,"Symmetry reverses every related pair."],
+["If R is transitive and aRb and bRc, then:",["aRc","cRa only","aRb is false","bRc is false"],0,"Transitivity connects the first and third elements."],
+["Which relation on integers is an equivalence relation?",["aRb iff a−b is divisible by 5","aRb iff a<b","aRb iff a=b+1","aRb iff a+b is odd"],0,"Congruence modulo 5 is reflexive, symmetric and transitive."],
+["If R is reflexive and symmetric but not transitive, then R is:",["Not an equivalence relation","An equivalence relation","Always antisymmetric","Always an identity relation"],0,"All three required properties are necessary."],
+["If R is an equivalence relation, its inverse R⁻¹ is:",["Also an equivalence relation","Never an equivalence relation","Always empty","Always asymmetric"],0,"Reflexivity, symmetry and transitivity are preserved under inversion."],
+["If R is an equivalence relation and aRb, which statement follows?",["a and b belong to the same equivalence class","a and b must be unequal","a and b belong to different classes","aRb cannot be reversed"],0,"Symmetry and the definition of classes imply [a]=[b]."],
+["A relation that is both reflexive and antisymmetric is necessarily an equivalence relation.",["True","False","Only on finite sets","Only on integers"],1,"Antisymmetry does not imply symmetry, so these two properties alone are insufficient."],
+["If every equivalence class contains exactly one element, the equivalence relation is:",["The equality relation","The universal relation","A strict order","Always empty"],0,"Singleton equivalence classes correspond to a=b, the equality relation."]
+],
+
 "Composition of relations":[
 ["If R is a relation from A to B and S is a relation from B to C, then the composition S∘R is a relation from:",["A to C","C to A","A to B only","B to C only"],0,"The composition first follows R from A to B and then S from B to C."],
 ["For relations R and S, (a,c)∈S∘R when there exists b such that:",["aRb and bSc","aSb and bRc","aRc and bSa","aRb and cSb"],0,"Composition requires an intermediate element b with aRb and bSc."],

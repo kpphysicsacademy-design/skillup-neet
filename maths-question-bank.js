@@ -244,7 +244,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which number is divisible by 6?",["25","42","55","77"],1,"A number divisible by 6 must be divisible by both 2 and 3; 42 satisfies both."],
 ["Which number is divisible by 8?",["216","214","222","230"],0,"The last three digits 216 are divisible by 8."],
 ["Which number is divisible by 11?",["121","123","125","127"],0,"121=11×11."],
-["If a number is divisible by both 3 and 4, it is necessarily divisible by:",["7","12","10","18"],1,"Since 3 and 4 are coprime, divisibility by both implies divisibility by 12."]
+["If a number is divisible by both 3 and 4, it is necessarily divisible by:",["7","12","10","18"],1,"Since 3 and 4 are coprime, divisibility by both implies divisibility by 12."]]
 ,"Prime factorisation":[
 ["The prime factorisation of 60 is:",["2×3×10","2²×3×5","2×3²×5","2²×15"],1,"60=2×2×3×5=2²×3×5."],
 ["Which is a prime factor of 84?",["4","6","7","12"],2,"84=2²×3×7, so 7 is a prime factor."],

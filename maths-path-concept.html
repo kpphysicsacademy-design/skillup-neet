@@ -7,7 +7,7 @@
 <script>
 window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 :root{
  --green:#58cc02;--green2:#46a302;--blue:#1cb0f6;--navy:#183b63;
@@ -128,6 +128,7 @@ const guides={"Real numbers":`<div style="display:grid;gap:16px"><div style="pad
 $("lessonBody").innerHTML=guides[concept]||`<p>Learn the definition, key relationships, formulas, restrictions and common mistakes before starting the 30-MCQ practice.</p>`;
 typeset();
 window.addEventListener("load",typeset,{once:true});
+document.addEventListener("DOMContentLoaded",typeset,{once:true});
 $("retry").href=location.href;
 
 let skillUpSession=null;
@@ -177,9 +178,10 @@ function formatQuizMath(value){
 }
 let mathTypesetQueue=Promise.resolve();
 function typeset(){
- if(!window.MathJax||!window.MathJax.typesetPromise) return;
  mathTypesetQueue=mathTypesetQueue.then(async function(){
   try{
+   for(let n=0;n<100&&!window.MathJax;n++) await new Promise(r=>setTimeout(r,50));
+   if(!window.MathJax||!window.MathJax.typesetPromise) return;
    if(window.MathJax.startup&&window.MathJax.startup.promise) await window.MathJax.startup.promise;
    await window.MathJax.typesetPromise();
   }catch(e){console.warn("MathJax typesetting failed",e);}

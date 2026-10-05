@@ -1242,4 +1242,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["At a critical point, f' changes − to +. The graph is:",["Rising then falling","Falling then rising","Constant everywhere","Periodic"],1,"Negative derivative means falling; positive means rising."],
 ["The first derivative test is especially useful when:",["The second derivative test is inconclusive or unavailable","The function has no derivative anywhere","The domain is empty","The function is always constant"],0,"The sign change of f' can classify extrema directly."]
 ]
+,"Second derivative test":[
+["The second derivative test uses the sign of:",["f(x)","f'(x)","f''(x)","x"],2,"It uses the second derivative at a critical point."],
+["If f'(c)=0 and f''(c)>0, then c is typically a:",["Local maximum","Local minimum","Point of discontinuity","Vertical asymptote"],1,"A positive second derivative means the graph is concave up, giving a local minimum."],
+["If f'(c)=0 and f''(c)<0, then c is typically a:",["Local maximum","Local minimum","Inflection point always","Constant point"],0,"A negative second derivative indicates concave down and a local maximum."],
+["If f'(c)=0 and f''(c)=0, the second derivative test is:",["Conclusive","Inconclusive","Always a maximum","Always a minimum"],1,"A zero second derivative does not by itself classify the critical point."],
+["For f(x)=x² at x=0, f''(0) is:",["−2","0","2","4"],2,"f''(x)=2, so f''(0)=2 and x=0 is a local minimum."],
+["For f(x)=−x² at x=0, f''(0) is:",["−2","0","2","4"],0,"f''(x)=−2, indicating a local maximum."],
+["If f'(c)=0 and f''(c)>0, the graph is locally:",["Concave up","Concave down","Linear only","Discontinuous"],0,"Positive second derivative indicates concavity upward."],
+["The second derivative test requires the first derivative at the candidate point to be:",["Zero","Positive","Negative","Infinite"],0,"The standard test is applied at a critical point where f'(c)=0."],
+["For f(x)=x^4, at x=0 the second derivative is:",["−2","0","2","4"],1,"f''(x)=12x², so f''(0)=0; the test is inconclusive even though x=0 is a minimum."],
+["The second derivative test is an alternative to the:",["First derivative test","Product rule","Quotient rule","Chain rule"],0,"Both tests can classify local extrema."]
+],
+"Concavity":[
+["A function is concave up on an interval when:",["f''(x)>0","f''(x)<0","f'(x)=0","f(x)=0"],0,"Positive second derivative indicates concave-up behavior."],
+["A function is concave down when:",["f''(x)>0","f''(x)<0","f'(x)>0 always","f(x)>0"],1,"Negative second derivative indicates concave-down behavior."],
+["For f(x)=x², the graph is:",["Concave down","Concave up","Linear","Periodic"],1,"f''(x)=2>0 everywhere."],
+["For f(x)=−x², the graph is:",["Concave up","Concave down","Constant","Undefined"],1,"f''(x)=−2<0 everywhere."],
+["Concavity describes how the graph bends as:",["The input changes","Only y changes","The domain disappears","The function becomes constant"],0,"It describes the bending behavior of the graph."],
+["If f''(x)>0, the slope f'(x) is generally:",["Increasing","Decreasing","Constant always","Undefined"],0,"A positive second derivative means the first derivative is increasing."],
+["If f''(x)<0, the slope f'(x) is generally:",["Increasing","Decreasing","Zero","Periodic"],1,"A negative second derivative means the first derivative is decreasing."],
+["The graph of a concave-up function resembles a:",["Cup","Cap","Vertical line","Circle necessarily"],0,"Concave-up graphs bend upward like a cup."],
+["The graph of a concave-down function resembles a:",["Cup","Cap","Horizontal line","Parabola only"],1,"Concave-down graphs bend downward like a cap."],
+["For f(x)=x³, f''(x)=6x. The graph is concave up for:",["x<0","x>0","All x","No x"],1,"6x>0 when x>0."]
+],
+"Points of inflection":[
+["A point of inflection is where the graph changes:",["Concavity","Domain","Codomain","Period"],0,"An inflection point is associated with a change in concavity."],
+["For f(x)=x³, x=0 is a:",["Local maximum","Local minimum","Point of inflection","Discontinuity"],2,"x³ changes from concave down to concave up at zero."],
+["A candidate inflection point often occurs where:",["f''(x)=0 or is undefined","f(x)=0 only","f'(x)=1 only","x=0 always"],0,"Such points are candidates; an actual change in concavity must be verified."],
+["If f'' changes from positive to negative at c, the graph changes from:",["Concave up to concave down","Concave down to concave up","Increasing to decreasing necessarily","Decreasing to increasing necessarily"],0,"The sign of the second derivative determines concavity."],
+["If f'' changes from negative to positive at c, the graph changes from:",["Concave up to down","Concave down to up","Maximum to minimum necessarily","Constant to linear"],1,"Negative second derivative means concave down; positive means concave up."],
+["For f(x)=x³, f''(x)=6x changes sign at:",["x=−1","x=0","x=1","x=6"],1,"6x changes from negative to positive at x=0."],
+["An inflection point must involve:",["A change in concavity","A zero function value","A maximum always","A minimum always"],0,"The defining feature is the change in concavity."],
+["A point where f''(c)=0 is:",["Automatically an inflection point","A candidate for an inflection point","Never an inflection point","Always a maximum"],1,"A sign change in concavity must be checked."],
+["For f(x)=x^4, x=0 is:",["An inflection point","Not an inflection point","A discontinuity","A local maximum"],1,"f''=12x² is nonnegative on both sides, so concavity does not change."],
+["An inflection point can occur where f'' is:",["Undefined","Only zero","Always positive","Always negative"],0,"The second derivative may fail to exist at an inflection point."]
+],
+"Absolute maxima":[
+["An absolute maximum is a value that is:",["At least as large as every other value in the domain","Only larger than nearby values","Always zero","Always at an endpoint"],0,"It is the greatest function value over the entire domain."],
+["A global maximum is another name for an:",["Absolute maximum","Local minimum","Inflection point","Asymptote"],0,"Absolute and global maximum are synonymous."],
+["On a closed interval, absolute extrema are guaranteed for a function that is:",["Continuous","Periodic only","Constant only","Undefined"],0,"The Extreme Value Theorem guarantees extrema for continuous functions on closed bounded intervals."],
+["To find an absolute maximum on [a,b], candidates include:",["Critical points and endpoints","Only endpoints","Only critical points","Only zeros"],0,"Both interior critical points and interval endpoints must be checked."],
+["For f(x)=−x² on [−2,2], the absolute maximum occurs at:",["x=−2","x=0","x=2","All points"],1,"The largest value is f(0)=0."],
+["For f(x)=x on [1,5], the absolute maximum is:",["1","4","5","6"],2,"The increasing function reaches its largest value at x=5."],
+["An absolute maximum may also be a local maximum if it occurs at:",["An interior point","A point outside the domain","An undefined point","No point"],0,"An interior global maximum is also a local maximum."],
+["A continuous function on a closed bounded interval:",["Must attain an absolute maximum and minimum","Must be constant","Must be linear","Has no extrema"],0,"This is the Extreme Value Theorem."],
+["If f(x) has the greatest value M on its entire domain, M is the:",["Absolute maximum value","Absolute minimum value","Local minimum","Derivative"],0,"M is the largest output attained anywhere in the domain."],
+["When comparing candidates for an absolute maximum, choose the:",["Largest function value","Smallest x-value","Largest derivative","Smallest function value"],0,"The greatest candidate output is the absolute maximum."]
+],
+"Absolute minima":[
+["An absolute minimum is a value that is:",["At most as large as every other value","No greater than every other value in the domain","Always zero","Always at an endpoint"],1,"It is the smallest function value over the entire domain."],
+["A global minimum is another name for an:",["Absolute minimum","Local maximum","Inflection point","Derivative"],0,"Global and absolute minimum are synonymous."],
+["On a closed interval, absolute extrema are guaranteed for a function that is:",["Continuous","Periodic only","Constant only","Undefined"],0,"The Extreme Value Theorem applies to continuous functions on closed bounded intervals."],
+["To find an absolute minimum on [a,b], candidates include:",["Critical points and endpoints","Only endpoints","Only critical points","Only zeros"],0,"Both interior critical points and endpoints must be evaluated."],
+["For f(x)=x² on [−2,2], the absolute minimum occurs at:",["x=−2","x=0","x=2","All points"],1,"The smallest value is f(0)=0."],
+["For f(x)=−x on [1,5], the absolute minimum is:",["−5","−1","1","5"],0,"The decreasing function has its smallest value at x=5."],
+["An absolute minimum may also be a local minimum if it occurs at:",["An interior point","An undefined point","Outside the domain","Never"],0,"An interior global minimum is locally minimal as well."],
+["A continuous function on a closed bounded interval:",["Must attain an absolute minimum","Must be constant","Must be periodic","Cannot have extrema"],0,"The Extreme Value Theorem guarantees an absolute minimum."],
+["If f(x) has the smallest value m over its entire domain, m is the:",["Absolute minimum value","Absolute maximum value","Derivative","Upper bound only"],0,"m is the smallest attained output."],
+["When comparing candidates for an absolute minimum, choose the:",["Largest function value","Smallest function value","Largest derivative","Largest x-value always"],1,"The smallest candidate output is the absolute minimum."]
+],
+"Optimization problems":[
+["Optimization using derivatives seeks to:",["Maximize or minimize a quantity","Only solve linear equations","Only find limits","Only compute integrals"],0,"Optimization identifies maximum or minimum values subject to conditions."],
+["The first step in a typical optimization problem is to:",["Define the quantity to optimize","Differentiate immediately","Ignore constraints","Choose an answer"],0,"A clear objective function is needed before differentiating."],
+["A critical point for an optimization problem can occur where:",["f'(x)=0 or f'(x) is undefined","f(x)=1 only","x=0 always","f''=1 only"],0,"Critical numbers are important candidates for extrema."],
+["A box with fixed surface area can be optimized to find:",["Maximum volume","Only its color","Only its perimeter","Its derivative only"],0,"Geometric optimization can maximize volume under a surface-area constraint."],
+["For a fixed perimeter rectangle, the maximum area occurs for a:",["Square","Very long thin rectangle","Triangle","Circle"],0,"Among rectangles with fixed perimeter, the square has maximum area."],
+["For a fixed area rectangle, the minimum perimeter occurs for a:",["Square","Line segment","Triangle","Any rectangle equally"],0,"The square minimizes perimeter among rectangles of fixed area."],
+["In optimization, constraints are used to:",["Reduce variables and define feasible values","Remove the objective","Guarantee a maximum always","Make derivatives zero everywhere"],0,"Constraints relate variables and restrict the feasible set."],
+["After finding critical points, an optimization problem should compare:",["Relevant candidates and endpoints when applicable","Only the first candidate","Only derivatives","Only x-values"],0,"Comparing objective values identifies the required maximum or minimum."],
+["A local maximum is not necessarily an absolute maximum because:",["A larger value may occur elsewhere","It cannot be differentiable","It must be negative","It is always at an endpoint"],0,"Global comparison is required for an absolute extremum."],
+["A well-posed optimization problem should identify:",["Objective function, constraints, and domain","Only a derivative","Only a graph","Only an endpoint"],0,"These components define what is being optimized and where."]
+]
 };

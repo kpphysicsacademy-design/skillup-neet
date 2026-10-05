@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Into function":[
+["A function $f:A\\to B$ is called into when:",["$f(A)\\subsetneq B$","$f(A)=B$","$f(A)=\\varnothing$ always","Every element of $B$ has exactly two preimages"],0,"An into function does not cover the entire codomain: $f(A)$ is a proper subset of $B$."],
+["For $f:\\mathbb{R}\\to\\mathbb{R}$ defined by $f(x)=x^2$, the function is:",["Into and many-one","Onto and one-one","Into and one-one","Onto and many-one only"],0,"No negative real number is an image, so it is into; also $f(1)=f(-1)$, so it is many-one."],
+["Which function $f:\\mathbb{R}\\to\\mathbb{R}$ is into?",["$f(x)=x^2$","$f(x)=x+1$","$f(x)=2x-3$","$f(x)=x^3$"],0,"For $x^2$, the range is $[0,\\infty)$, a proper subset of $\\mathbb{R}$."],
+["For $f:A\\to B$, if there exists $b\\in B$ such that no $a\\in A$ satisfies $f(a)=b$, then $f$ is:",["Into","Onto","One-one necessarily","Constant necessarily"],0,"An unused codomain element means $f(A)\\neq B$, so the function is into."],
+["Let $f:\\mathbb{R}\\to\\mathbb{R}$ be $f(x)=x^2+1$. Which statement is correct?",["$\\operatorname{Range}(f)=[1,\\infty)$, so $f$ is into","$\\operatorname{Range}(f)=\\mathbb{R}$, so $f$ is onto","$f$ is one-one because $x^2$ is increasing","$f$ is constant"],0,"Since $x^2\\ge0$, $f(x)\\ge1$; therefore values below 1 are not attained."],
+["Which pseudocode correctly tests whether a finite function $f:A\\to B$ is into?",["Check whether some $b\\in B$ is absent from the set of computed values $\\{f(a):a\\in A\\}$","Check whether every $b\\in B$ occurs","Check whether $f(a)=a$ for every $a$","Check whether $|A|=|B|$"],0,"Compute the image set and test whether it is a proper subset of the codomain."],
+["Suppose $A=\{1,2,3\}$, $B=\{a,b,c,d\}$ and $f(1)=a,f(2)=b,f(3)=c$. Then $f$ is:",["Into","Onto","Both onto and into","Not a function"],0,"The image is $\{a,b,c\}$, leaving $d$ unused; hence $f$ is into."],
+["If $f:A\\to B$ is into, then the cardinalities of finite sets satisfy:",["$|f(A)|<|B|$","$|f(A)|=|B|$","$|A|<|f(A)|$ always","$|B|<|f(A)|$"],0,"Into means the image is a proper subset of the codomain, so its size is smaller for finite sets."],
+["Which mathematical-programming statement is equivalent to 'f is onto' but not required for an into function?",["For every $b\\in B$, find an $a\\in A$ with $f(a)=b$","Find one $a\\in A$","Check $f(a)=a$ for one element","Check that $A$ and $B$ have no common elements"],0,"Onto requires every codomain value to be hit; an into function leaves at least one codomain value unhit."],
+["If $f:A\\to B$ is both one-one and into, then:",["Distinct elements of $A$ have distinct images, but some elements of $B$ may be unused","Every element of $B$ must have a preimage","Every element of $A$ has the same image","$f$ cannot be a function"],0,"One-one controls repeated images, while into means the codomain need not be completely covered."]
+],
+
 "One-one function":[
 ["A function f:A→B is one-one if:",["f(a₁)=f(a₂) implies a₁=a₂","f(a₁)=f(a₂) for all a₁,a₂","Every element of B has two preimages","A and B must have equal sizes"],0,"A one-one function maps distinct elements of A to distinct elements of B."],
 ["For a one-one function f, if a₁≠a₂, then:",["f(a₁)≠f(a₂)","f(a₁)=f(a₂)","f(a₁)=a₁","f(a₂)=a₂"],0,"This is the contrapositive form of injectivity."],

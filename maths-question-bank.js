@@ -749,4 +749,65 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If f is odd, then f(−2)+f(2) equals:",["−4","−2","0","4"],2,"Odd symmetry gives f(−2)=−f(2), so the sum is zero."],
 ["Which function is neither even nor odd?",["x²","x³","x+1","0"],2,"For x+1, neither even nor odd symmetry holds for all x."]
 ]
+
+,"Periodic functions":[
+["A function f is periodic if there is a positive number T such that:",["f(x+T)=f(x)","f(x+T)=x","f(x+T)=0","f(x+T)=−f(x)"],0,"A periodic function repeats its values after a positive period T."],
+["The smallest positive period of sin x is:",["π/2","π","2π","4π"],2,"sin(x+2π)=sin x, and no smaller positive period works for all x."],
+["The smallest positive period of cos x is:",["π/2","π","2π","4π"],2,"Cosine repeats every 2π."],
+["The function f(x)=sin(2x) has period:",["π/2","π","2π","4π"],1,"For sin(kx), the period is 2π/|k|, so here it is π."],
+["Which function is periodic?",["x","x²","sin x","2x+1"],2,"Sine repeats its values at regular intervals."],
+["If T is a period of f, then:",["2T is also a period","T/2 is always a period","T−1 is always a period","Only T is a period"],0,"Any positive integer multiple of a period is also a period."],
+["A constant function is:",["Never periodic","Periodic with every positive period","Periodic only with period 1","Periodic only with period 2"],1,"For a constant function, f(x+T)=f(x) for every positive T."],
+["The period of tan x is:",["π/2","π","2π","4π"],1,"tan(x+π)=tan x."],
+["If f(x)=cos(3x), its period is:",["π/3","2π/3","π","3π"],1,"The period is 2π/3."],
+["A periodic function repeats its pattern along the:",["x-axis direction","y-axis only","origin only","vertical axis only"],0,"Periodicity means repetition as x increases by a fixed positive amount."]
+],
+"Monotonic functions":[
+["A function is increasing on an interval if x₁<x₂ implies:",["f(x₁)<f(x₂)","f(x₁)>f(x₂)","f(x₁)=f(x₂)","f(x₁)=0"],0,"Increasing means larger inputs produce larger outputs."],
+["A function is decreasing if x₁<x₂ implies:",["f(x₁)<f(x₂)","f(x₁)>f(x₂)","f(x₁)=f(x₂)","x₁=x₂"],1,"Decreasing means larger inputs produce smaller outputs."],
+["Which function is strictly increasing on R?",["x³","x²","−x²","|x|"],0,"x³ increases throughout the real line."],
+["Which function is strictly decreasing on R?",["x²","−x","x³","|x|"],1,"For x₁<x₂, −x₁>−x₂."],
+["A constant function is both non-decreasing and:",["Strictly increasing","Non-increasing","Strictly decreasing","Neither"],1,"A constant never rises, so it is both non-decreasing and non-increasing."],
+["If f is strictly increasing, then f is:",["One-to-one","Constant","Even always","Periodic always"],0,"Strict increase guarantees distinct inputs have distinct outputs."],
+["If f is strictly decreasing, then it is:",["One-to-one","Constant","Even always","Undefined"],0,"Strict decrease also guarantees one-to-one behavior."],
+["For f(x)=x², the function is increasing on:",["All R","[0,∞)","(−∞,0) only","No interval"],1,"x² increases as x increases from 0 onward."],
+["For f(x)=x², the function is decreasing on:",["[0,∞)","(−∞,0]","All R","[1,∞) only"],1,"As x moves toward zero from the left, x² decreases."],
+["Monotonicity describes how function values:",["Change as the input changes","Are factored","Become integers","Are differentiated only"],0,"It describes whether outputs consistently increase or decrease."]
+],
+"Increasing/decreasing functions":[
+["If f'(x)>0 throughout an interval, f is generally:",["Increasing","Decreasing","Constant","Undefined"],0,"A positive derivative indicates increasing behavior on the interval."],
+["If f'(x)<0 throughout an interval, f is generally:",["Increasing","Decreasing","Constant","Periodic"],1,"A negative derivative indicates decreasing behavior."],
+["The graph of an increasing function generally rises as x moves:",["Left to right","Right to left only","Vertically upward","Toward the origin only"],0,"Increasing means outputs rise as inputs increase."],
+["The graph of a decreasing function generally falls as x moves:",["Left to right","Right to left only","Vertically upward","Nowhere"],0,"Decreasing means outputs fall as x increases."],
+["For f(x)=2x+5, the function is:",["Increasing","Decreasing","Constant","Periodic"],0,"Its positive slope is 2."],
+["For f(x)=−3x+1, the function is:",["Increasing","Decreasing","Constant","Even"],1,"Its slope is negative."],
+["For f(x)=x², which statement is correct?",["Increasing on all R","Decreasing on all R","Decreasing on (−∞,0] and increasing on [0,∞)","Constant"],2,"The parabola falls to its minimum at zero and then rises."],
+["A strictly monotonic function is necessarily:",["One-to-one","Constant","Periodic","Even"],0,"Strict increase or strict decrease prevents repeated output values."],
+["If x₁<x₂ and f(x₁)≤f(x₂), this is consistent with:",["Non-decreasing behavior","Strictly decreasing behavior","Oddness","Periodicity"],0,"Non-decreasing functions never decrease as x increases."],
+["A function can be increasing on one interval and decreasing on another.",["True","False","Only if constant","Never"],0,"Different intervals can have different monotonic behavior."]
+],
+"Bounded functions":[
+["A function f is bounded above if there is a number M such that:",["f(x)≤M for all x","f(x)≥M for all x","f(x)=M for all x","x≤M"],0,"M is an upper bound for all function values."],
+["A function is bounded below if there is m such that:",["f(x)≤m","f(x)≥m for all x","f(x)=m","x≥m only"],1,"m is a lower bound for all outputs."],
+["Which function is bounded on R?",["x","x²","sin x","x³"],2,"Sine always lies between −1 and 1."],
+["The function f(x)=x² is:",["Bounded above on R","Bounded below on R","Unbounded below","Neither bounded above nor below"],1,"x²≥0, so it has a lower bound but no upper bound."],
+["The function f(x)=sin x has range:",["[−1,1]","[0,∞)","R","(1,∞)"],0,"Sine values lie between −1 and 1 inclusive."],
+["If |f(x)|≤5 for all x, then f is:",["Bounded","Unbounded","Constant","Periodic necessarily"],0,"The absolute-value bound gives −5≤f(x)≤5."],
+["A bounded function must be:",["Constant","Limited within finite bounds","Linear","Integer-valued"],1,"Bounded means its outputs stay within some finite lower and upper limits."],
+["Which function is bounded below but unbounded above on R?",["x","−x","sin x","x²"],3,"x²≥0 but grows without bound as |x| increases."],
+["A function bounded both above and below is:",["Bounded","Always constant","Always periodic","Never continuous"],0,"Having both finite upper and lower bounds means the function is bounded."],
+["If f(x)≤7 for all x, then 7 is a/an:",["Lower bound","Upper bound","Input","Period"],1,"7 bounds all function values from above."]
+],
+"Greatest integer function":[
+["The greatest integer function ⌊x⌋ gives:",["The greatest integer less than or equal to x","The smallest integer greater than x","The nearest integer","The fractional part only"],0,"By definition, floor(x) is the greatest integer ≤x."],
+["⌊3.7⌋ equals:",["3","4","3.7","2"],0,"The greatest integer not exceeding 3.7 is 3."],
+["⌊−2.3⌋ equals:",["−2","−3","2","3"],1,"−3 is the greatest integer less than or equal to −2.3."],
+["⌊5⌋ equals:",["4","5","6","0"],1,"An integer is its own greatest integer value."],
+["The graph of y=⌊x⌋ is made of:",["Horizontal step segments","A single straight line","A parabola","A circle"],0,"The floor function is constant on each interval [n,n+1)."],
+["For 0≤x<1, ⌊x⌋ equals:",["−1","0","1","x"],1,"Every x in [0,1) has greatest integer 0."],
+["⌊7.99⌋ equals:",["7","8","7.99","6"],0,"The greatest integer not exceeding 7.99 is 7."],
+["Which statement is true for every real x?",["x−1<⌊x⌋≤x","⌊x⌋≤x<⌊x⌋+1","⌊x⌋<x<⌊x⌋+1 always","x≤⌊x⌋"],1,"The floor is at most x, while x is strictly below the next integer."],
+["If ⌊x⌋=4, then x belongs to:",["[3,4)","[4,5)","(4,5]","[5,6)"],1,"Floor value 4 means 4≤x<5."],
+["The greatest integer function is also called the:",["Floor function","Ceiling function","Identity function","Sign function"],0,"⌊x⌋ is commonly called the floor function."]
+]
 };

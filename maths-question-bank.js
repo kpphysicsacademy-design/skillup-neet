@@ -1638,4 +1638,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The integrating factor method is designed for:",["First-order linear equations","Only nonlinear equations","Only second-order equations","Only algebraic equations"],0,"It is a standard method for linear first-order ODEs."],
 ["If P(x)=0 in y'+P(x)y=Q(x), the equation reduces to:",["y'=Q(x)","y''=Q(x)","y=Q'(x)","0=Q(x)"],0,"With P=0, the equation is simply dy/dx=Q(x)."]
 ]
+,"Arc length":[
+["For y=f(x), the arc length from x=a to x=b is:",["∫_a^b√(1+(f'(x))²)dx","∫_a^b f(x)dx","∫_a^b f'(x)dx","f(b)−f(a)"],0,"The arc-length formula comes from small line elements ds=√(1+(dy/dx)²)dx."],
+["For a straight line y=mx+c, its arc length over [a,b] is:",["(b−a)√(1+m²)","(b−a)m","b−a","m(b+a)"],0,"The slope is constant, so the arc length is √(1+m²)(b−a)."],
+["If f'(x)=0 throughout an interval, the arc length equals:",["b−a","0","b+a","1"],0,"The curve is horizontal, so its length equals the horizontal distance."],
+["The arc-length integrand for y=f(x) is:",["√(1+(f'(x))²)","f'(x)","1+f'(x)²","f(x)²"],0,"This is the standard Cartesian arc-length element."],
+["For a parametric curve x=x(t), y=y(t), arc length uses:",["∫√((dx/dt)²+(dy/dt)²)dt","∫(x+y)dt","∫xydt","∫(dx/dt+dy/dt)dt"],0,"The speed is √((dx/dt)²+(dy/dt)²)."],
+["Arc length is measured in:",["Linear units","Square units","Cubic units","No units"],0,"Length is a one-dimensional measure."],
+["If a curve has f'(x)=3 everywhere on [0,4], its arc length is:",["4","12","4√10","16"],2,"Length=∫_0^4√10 dx=4√10."],
+["Arc length generally requires integrating a:",["Square-root expression involving slope","Polynomial only","Constant only","Second derivative only"],0,"The slope contributes through √(1+(dy/dx)²)."],
+["For x=g(y), arc length with respect to y uses:",["∫√(1+(g'(y))²)dy","∫g(y)dy","∫g'(y)dy","g'(y)"],0,"The analogous formula is taken with y as the independent variable."],
+["Arc length is an application of integration for finding:",["Distance along a curve","Area only","Volume only","Slope only"],0,"It accumulates infinitesimal lengths along the curve."]
+],
+"Surface area":[
+["Surface area of a solid of revolution measures:",["The area of its outer surface","Its volume","Its mass always","Its perimeter only"],0,"Surface area measures the two-dimensional area covering the solid."],
+["When y=f(x) is revolved about the x-axis, the surface-area formula is based on:",["2πy ds","πy²dx","y dx","2πx dx"],0,"A thin strip generates a band with area approximately circumference times arc length."],
+["For y=f(x) about the x-axis, surface area is:",["2π∫_a^b f(x)√(1+(f'(x))²)dx","π∫f(x)²dx","∫f'(x)dx","2π∫x dx"],0,"The radius is y and ds=√(1+(f')²)dx."],
+["If a horizontal line y=r is revolved about the x-axis over length L, the surface is:",["2πrL","πr²L","2πL","rL"],0,"It forms a cylinder of lateral surface area 2πrL."],
+["Surface area is measured in:",["Square units","Linear units","Cubic units","No units"],0,"Surface area is two-dimensional."],
+["For a cylinder of radius r and height h, lateral surface area is:",["2πrh","πr²h","2πr²","πrh"],0,"Unrolling the curved surface gives a rectangle 2πr by h."],
+["The differential arc length ds contributes to surface area as:",["Circumference × ds","Radius × ds only","Area × ds","Derivative × ds"],0,"A small strip swept around an axis has area approximately 2π(radius)ds."],
+["For revolution about the y-axis, the radius of a point (x,y) is:",["|x|","y","x²","1/x"],0,"Distance from the y-axis is |x|."],
+["Surface area differs from volume because it measures:",["A boundary surface rather than enclosed space","Only height","Only radius","A one-dimensional path"],0,"Volume measures enclosed three-dimensional space; surface area measures the boundary."],
+["The surface-area integrand contains a factor representing:",["Arc length","Only area under the curve","Only slope","Only the endpoint"],0,"The arc-length element is essential to the surface-area calculation."]
+],
+"Differential equations":[
+["A differential equation contains:",["A function and one or more of its derivatives","Only constants","Only algebraic terms","Only coordinates"],0,"It relates an unknown function to its derivatives and possibly other variables."],
+["The order of a differential equation is the highest:",["Derivative order present","Power of x","Coefficient","Constant"],0,"Order is determined by the highest derivative appearing."],
+["The equation y'=3x² is a:",["First-order differential equation","Second-order equation","Algebraic equation only","Integral equation"],0,"The highest derivative is y', so its order is one."],
+["A solution of a differential equation is a function that:",["Satisfies the equation","Makes every derivative zero","Must be constant","Has no domain"],0,"Substitution of the function and its derivatives must satisfy the equation."],
+["A differential equation can model:",["Growth, motion, and change","Only geometry","Only arithmetic","Only sets"],0,"Differential equations model changing systems in many fields."],
+["The order of y''+3y'+2y=0 is:",["1","2","3","0"],1,"The highest derivative is y'', so the order is 2."],
+["An initial condition specifies:",["A function value or derivative at a particular input","Only the coefficient","Only the domain","A random constant"],0,"Initial conditions select a particular solution from a family."],
+["A general solution often contains:",["Arbitrary constants","No constants","Only integers","Only derivatives"],0,"Integration introduces arbitrary constants."],
+["A particular solution is obtained by using:",["Initial or boundary conditions","Only differentiation","Only factorisation","No additional information"],0,"Conditions determine the constants in the general solution."],
+["Differential equations are central to:",["Mathematical modelling","Only factorisation","Only set theory","Only counting"],0,"They describe rates of change in mathematical models."]
+],
+"First-order differential equations":[
+["A first-order differential equation contains derivatives up to:",["First order","Second order","Third order","Fourth order"],0,"The highest derivative is the first derivative."],
+["The equation dy/dx=ky is a:",["First-order differential equation","Second-order equation","Algebraic identity","Integral"],0,"Only the first derivative appears."],
+["A first-order equation can often be written as:",["dy/dx=F(x,y)","d²y/dx²=F(x,y)","y'''+y=0","x+y=0 only"],0,"This is a common general form."],
+["The equation dy/dx=0 has solutions:",["y=C","y=x+C","y=x²+C","y=e^x"],0,"A zero derivative means y is constant."],
+["The order of dy/dx+y=x is:",["0","1","2","3"],1,"The highest derivative is first order."],
+["A first-order equation may be solved using:",["Separation or integrating factors, depending on form","Only matrices","Only geometry","Only factorisation"],0,"Different forms call for different solution methods."],
+["An initial condition for a first-order equation commonly has the form:",["y(x₀)=y₀","y''(x₀)=0 only","x₀+y₀=1 always","f'(x)=0"],0,"One condition usually determines the one arbitrary constant."],
+["The equation dy/dx=x+y is:",["First order","Second order","Third order","Not differential"],0,"Only dy/dx appears."],
+["A first-order autonomous equation has the form:",["dy/dx=F(y)","dy/dx=F(x,y) with explicit x always","y''=F(y)","y=x"],0,"An autonomous equation does not explicitly depend on x."],
+["The solution of a first-order equation is generally a:",["Family of curves before conditions are applied","Single number","Constant always","Derivative only"],0,"A general first-order solution typically contains one arbitrary constant."]
+],
+"Separable equations":[
+["A separable differential equation can be rearranged into:",["G(y)dy=F(x)dx","y''=x","x+y=0","dy+dx=1 only"],0,"The variables can be separated into different sides."],
+["For dy/dx=xy, separation gives:",["dy/y=x dx","dy/x=y dx","dy=xy dx","dx/y=x dy"],0,"Divide by y to obtain dy/y=x dx."],
+["After separating variables, the next main step is:",["Integrate both sides","Differentiate both sides","Set x=0","Multiply by y"],0,"Integration produces the general solution."],
+["For dy/dx=ky, separation leads to:",["dy/y=k dx","dy=dx/k","dy/y=dx/k²","dy=k/y dx"],0,"Divide by y and multiply by dx."],
+["The solution of dy/dx=ky has the form:",["y=Ce^{kx}","y=kx+C","y=Cx^k","y=e^x+k"],0,"Integrating dy/y=kdx gives ln|y|=kx+C, hence y=Ce^{kx}."],
+["A constant solution may be lost when dividing by:",["A variable expression such as y","A constant 2","dx","1"],0,"Dividing by y assumes y≠0, so y=0 should be checked separately."],
+["For dy/dx=x/y, separation gives:",["y dy=x dx","dy=x/y dx","y dx=x dy","dy/y=x dx"],0,"Multiply by y dx to get y dy=x dx."],
+["Integrating y dy=x dx gives:",["y²/2=x²/2+C","y=x+C","y²=x+C","ln y=x+C"],0,"Integrate both sides directly."],
+["The constant of integration is normally included:",["After integrating","Before separating only","Never","Only on the left"],0,"Each indefinite integral introduces a constant; they can be combined into one."],
+["Separation is especially useful when the differential equation:",["Can be expressed as a product of a function of y and a function of x","Contains no variables","Is always second order","Is purely algebraic"],0,"The method relies on separating the variables."]
+],
+"Linear differential equations":[
+["A first-order linear differential equation has standard form:",["dy/dx+P(x)y=Q(x)","dy/dx=y²","dy/dx=P(x)y²","y''+y=0"],0,"This is the standard linear first-order form."],
+["The integrating factor for y'+P(x)y=Q(x) is:",["e^{∫P(x)dx}","∫Q(x)dx","P(x)Q(x)","e^{Q(x)}"],0,"The integrating factor is μ(x)=e^{∫P(x)dx}."],
+["For y'+2y=0, an integrating factor is:",["e^{2x}","2x","e^x","x²"],0,"μ=e^{∫2dx}=e^{2x}."],
+["Multiplying a linear equation by the integrating factor makes the left side:",["The derivative of μy","Zero always","A constant","The second derivative"],0,"It becomes d(μy)/dx."],
+["The integrating factor method is used for:",["First-order linear equations","Only second-order equations","Only algebraic equations","Only separable equations"],0,"It is a standard method for first-order linear ODEs."],
+["For y'+P(x)y=Q(x), after multiplying by μ, the equation becomes:",["d(μy)/dx=μQ","μy=Q","y'=μ","μ'=Q"],0,"This converts the left side into an exact derivative."],
+["If P(x)=3, the integrating factor is:",["e^{3x}","3e^x","x³","e^3x"],0,"Integrate P: ∫3dx=3x."],
+["The homogeneous equation y'+P(x)y=0 has solution:",["y=Ce^{-∫Pdx}","y=∫Pdx","y=P+C","y=e^{∫Pdx} only"],0,"Solving gives y=C exp(−∫Pdx)."],
+["A first-order linear equation is linear because:",["y and y' occur only to the first power and are not multiplied together","It always has a straight-line graph","It has no derivatives","It contains only constants"],0,"Linearity refers to the powers and combinations of the unknown function and derivative."],
+["An initial condition in a first-order linear ODE is used to:",["Determine the arbitrary constant","Change the order","Remove the derivative","Find the integrating factor"],0,"The condition selects one particular solution."]
+]
 };

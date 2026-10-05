@@ -1386,4 +1386,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If the radius of a circle increases, its area rate is generally:",["Positive","Negative","Zero always","Undefined"],0,"Since dA/dt=2πr dr/dt and r>0, a positive dr/dt gives positive dA/dt."],
 ["Related rates are an application of:",["Implicit differentiation","Only integration","Matrix algebra","Probability"],0,"They commonly use implicit differentiation with respect to time."]
 ]
+,"Derivatives of inverse functions":[
+["If y=f(x) has an inverse and f'(x)≠0, then the derivative of the inverse is:",["(f^{-1})'(x)=f'(x)","(f^{-1})'(x)=1/f'(f^{-1}(x))","(f^{-1})'(x)=f^{-1}(x)","(f^{-1})'(x)=0"],1,"The inverse-function derivative formula is (f^{-1})'(x)=1/f'(f^{-1}(x))."],
+["If f(x)=2x+3, then (f^{-1})'(x) is:",["2","1/2","x/2","3"],1,"The inverse is (x−3)/2, whose derivative is 1/2."],
+["If f(x)=x³, then (f^{-1})'(8) is:",["1/3","1/12","3","8"],1,"f^{-1}(8)=2 and f'(2)=12, so the inverse derivative is 1/12."],
+["The derivative of an inverse function is evaluated using the original derivative at:",["The same input x always","f^{-1}(x)","f(x)","0"],1,"The original derivative is evaluated at the corresponding preimage f^{-1}(x)."],
+["If f(2)=5 and f'(2)=4, then (f^{-1})'(5) equals:",["4","1/4","5/4","2"],1,"Use 1/f'(2)=1/4."],
+["For a differentiable inverse function, f'(f^{-1}(x)) must be:",["Zero","Nonzero","Always one","Negative"],1,"A nonzero derivative is needed for the standard inverse derivative formula."],
+["If f is increasing and f'(x)>0, then where defined its inverse is generally:",["Decreasing","Increasing","Constant","Periodic"],1,"An inverse of a strictly increasing function is increasing."],
+["If f is decreasing and f'(x)<0, then its inverse is generally:",["Increasing","Decreasing","Constant","Undefined"],1,"An inverse of a strictly decreasing function is decreasing."],
+["For f(x)=e^x, f^{-1}(x) is:",["e^{-x}","ln x","x^e","1/x"],1,"The inverse of the exponential function is the natural logarithm."],
+["The graphs of f and f^{-1} are reflections across:",["The x-axis","The y-axis","The line y=x","The line x=0"],2,"Inverse-function graphs are mirror images across y=x."]
+],
+"Derivatives of logarithmic functions":[
+["The derivative of ln x for x>0 is:",["x","1/x","ln x","e^x"],1,"d(ln x)/dx=1/x."],
+["The derivative of log_a x is:",["1/x","1/(x ln a)","ln a/x","a^x"],1,"For a>0, a≠1, d(log_a x)/dx=1/(x ln a)."],
+["The derivative of ln|x| for x≠0 is:",["|x|","1/x","ln|x|/x","x"],1,"The derivative is 1/x on both positive and negative intervals."],
+["The derivative of ln(x²) for x≠0 is:",["2x","1/x","2/x","x²"],2,"Using the chain rule gives 2x/x²=2/x."],
+["If y=ln(3x+1), then dy/dx is:",["3x+1","3/(3x+1)","1/(3x+1)","3"],1,"Apply the chain rule: derivative is 3/(3x+1)."],
+["If y=ln(x²+1), then y' is:",["2x/(x²+1)","1/(x²+1)","2x","ln(2x)"],0,"The chain rule gives 2x/(x²+1)."],
+["The derivative of log_10 x is:",["10/x","1/(x ln 10)","ln 10/x","x ln 10"],1,"Change-of-base differentiation gives 1/(x ln 10)."],
+["For y=ln(sin x), where defined, y' is:",["sin x","cos x","cot x","tan x"],2,"By the chain rule, y'=cos x/sin x=cot x."],
+["For y=ln(x+sqrt(x²+1)), the derivative is:",["1/sqrt(x²+1)","sqrt(x²+1)","1/(x+1)","x"],0,"This standard inverse-hyperbolic-sine form differentiates to 1/sqrt(x²+1)."],
+["Logarithmic differentiation is especially useful when:",["Variables occur in products, quotients, or powers","The function is constant","There are no variables","Only linear functions occur"],0,"Taking logarithms can simplify complicated products, quotients, and variable exponents."]
+],
+"Derivatives of exponential functions":[
+["The derivative of e^x is:",["e^x","xe^{x−1}","1/x","ln x"],0,"The exponential e^x is its own derivative."],
+["The derivative of a^x is:",["a^x","a^x ln a","x a^{x−1}","ln x"],1,"For a>0, a≠1, d(a^x)/dx=a^x ln a."],
+["If y=e^{3x}, then y' is:",["e^{3x}","3e^{3x}","3x e^{3x}","e^x"],1,"The chain rule contributes a factor of 3."],
+["If y=2^x, then y' is:",["2x","2^x ln 2","x2^{x−1}","2^x/ln 2"],1,"Use d(a^x)/dx=a^x ln a."],
+["If y=e^{x²}, then y' is:",["e^{x²}","2xe^{x²}","x e^x","2e^x"],1,"Apply the chain rule to x²."],
+["The derivative of e^{-x} is:",["e^{-x}","−e^{-x}","xe^{-x}","1/e^x only"],1,"The inner derivative of −x is −1."],
+["For y=5e^{2x+1}, y' is:",["5e^{2x+1}","10e^{2x+1}","10x e^{2x}","2e^x"],1,"Differentiate the exponent and multiply by 5e^{2x+1}."],
+["The derivative of ln(e^x) is:",["e^x","1","x","ln x"],1,"ln(e^x)=x, so its derivative is 1."],
+["The derivative of e^{ln x} for x>0 is:",["1/x","1","x","e^x"],2,"Since e^{ln x}=x, the derivative is 1; wait: the correct simplification is x, whose derivative is 1."],
+["Exponential growth models commonly use:",["e^{kt}","ln t only","t² only","1/t only"],0,"The form e^{kt} naturally models continuous exponential growth or decay."]
+],
+"Derivatives of trigonometric functions":[
+["The derivative of sin x is:",["sin x","cos x","−cos x","tan x"],1,"d(sin x)/dx=cos x."],
+["The derivative of cos x is:",["sin x","−sin x","cos x","−cos x"],1,"d(cos x)/dx=−sin x."],
+["The derivative of tan x is:",["sec²x","csc²x","−sec²x","cot x"],0,"d(tan x)/dx=sec²x."],
+["The derivative of cot x is:",["csc²x","−csc²x","sec²x","−sec²x"],1,"d(cot x)/dx=−csc²x."],
+["The derivative of sec x is:",["sec x tan x","−sec x tan x","csc x cot x","tan x"],0,"d(sec x)/dx=sec x tan x."],
+["The derivative of csc x is:",["csc x cot x","−csc x cot x","sec x tan x","−sec²x"],1,"d(csc x)/dx=−csc x cot x."],
+["If y=sin(3x), then y' is:",["cos(3x)","3cos(3x)","sin(3x)","3sin x"],1,"The chain rule contributes the factor 3."],
+["If y=cos(x²), then y' is:",["−sin(x²)","−2x sin(x²)","2x cos(x²)","sin x²"],1,"Differentiate the outer cosine and multiply by 2x."],
+["If y=tan(2x+1), then y' is:",["sec²(2x+1)","2sec²(2x+1)","2tan(2x+1)","sec(2x+1)"],1,"The chain rule gives 2sec²(2x+1)."],
+["The derivatives of trigonometric functions are essential for:",["Rates, slopes, and calculus models","Only counting","Only factorisation","Only set notation"],0,"Trig derivatives are used throughout differential calculus."]
+],
+"Higher-order applications":[
+["The second derivative f''(x) represents the derivative of:",["f(x)","f'(x)","x","A constant only"],1,"The second derivative is the derivative of the first derivative."],
+["The third derivative is written as:",["f'(x)","f''(x)","f'''(x)","f(x)"],2,"Three primes denote the third derivative."],
+["If f''(x)>0 on an interval, f' is:",["Increasing","Decreasing","Constant","Zero"],0,"Positive second derivative means the slope is increasing."],
+["If f''(x)<0 on an interval, f' is:",["Increasing","Decreasing","Constant","Undefined"],1,"Negative second derivative means the slope is decreasing."],
+["For position s(t), velocity is:",["s(t)","s'(t)","s''(t)","s'''(t)"],1,"Velocity is the first time derivative of position."],
+["For position s(t), acceleration is:",["s'(t)","s''(t)","s(t)","s'''(t)"],1,"Acceleration is the second time derivative of position."],
+["If acceleration is positive, velocity is generally:",["Increasing","Decreasing","Zero","Constant always"],0,"Positive acceleration means velocity increases with time."],
+["Higher derivatives can help determine:",["Curvature and motion behavior","Only domain","Only range","Only intercepts"],0,"They provide information about bending and rates of change."],
+["If f(x)=x^4, then f''(x) is:",["4x³","12x²","24x","x³"],1,"f'=4x³ and f''=12x²."],
+["If f(x)=sin x, then f''(x) is:",["sin x","−sin x","cos x","−cos x"],1,"f'=cos x and f''=−sin x."]
+],
+"Curve sketching":[
+["A first step in curve sketching is to determine the function's:",["Domain","Only maximum","Only minimum","Only y-intercept"],0,"The domain identifies where the graph exists."],
+["Critical points occur where f'(x) is:",["Zero or undefined","Always positive","Always negative","Equal to x"],0,"Critical numbers occur where the derivative is zero or does not exist, when the point is in the domain."],
+["Intervals of increase and decrease are determined using:",["The sign of f'(x)","Only f(x)","Only f''(x)","The denominator only"],0,"The first derivative's sign indicates increasing or decreasing behavior."],
+["Concavity is commonly determined using:",["f''(x)","f(x) only","The domain only","The y-intercept only"],0,"The second derivative determines concavity where applicable."],
+["Vertical asymptotes often occur where:",["The function tends to infinity near a finite x-value","f(x)=0","f'(x)=0","The function is constant"],0,"A vertical asymptote is associated with unbounded behavior near a finite input."],
+["A horizontal asymptote describes behavior as x approaches:",["Infinity or negative infinity","Only zero","Only a critical point","A root"],0,"Horizontal asymptotes describe end behavior."],
+["The x-intercepts are found by solving:",["f(x)=0","f'(x)=0","f''(x)=0","x=1"],0,"An x-intercept has y=0."],
+["The y-intercept is obtained by setting:",["x=0","y=0","f'(x)=0","x=1"],0,"At the y-axis, x=0."],
+["A point of inflection is identified by a change in:",["Concavity","Domain","Intercept count only","Period only"],0,"An inflection point requires a change in concavity."],
+["A good curve sketch combines:",["Domain, intercepts, asymptotes, extrema, and concavity","Only a table of values","Only the derivative","Only endpoints"],0,"Combining these features gives a reliable qualitative graph."]
+]
 };

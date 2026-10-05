@@ -1,4 +1,18 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+
+"Integration of rational functions":[
+["For a proper rational function with a factorised denominator, which method is commonly used first?",["Partial fractions","Integration by parts","Taylor expansion","Newton's method"],0,"Partial fractions decomposes a rational function into simpler terms that can be integrated directly."],
+["The integral of 1/(x+a) dx is:",["ln|x+a|+C","1/(x+a)^2+C","x/(x+a)+C","e^(x+a)+C"],0,"The antiderivative of 1/u is ln|u|, with u=x+a."],
+["For ∫ P(x)/Q(x) dx with deg P ≥ deg Q, the first algebraic step is usually:",["Polynomial division","Partial differentiation","Trigonometric substitution","Completing the square only"],0,"Polynomial division reduces an improper rational function to a polynomial plus a proper rational function."],
+["Which decomposition is suitable when the denominator contains distinct linear factors (x−a)(x−b)?",["A/(x−a)+B/(x−b)","A/(x−a)^2+B/(x−b)^2 only","A(x−a)+B(x−b)","A/(x−a)(x−b)"],0,"Distinct linear factors are represented by separate simple fractions."],
+["The integral ∫ dx/(x²−a²), for a≠0, is best approached by:",["Partial fractions","Integration by parts only","Differentiating the denominator","Using the binomial theorem"],0,"x²−a² factors as (x−a)(x+a), allowing partial-fraction decomposition."],
+["If the denominator contains an irreducible quadratic ax²+bx+c, the corresponding partial-fraction numerator is generally:",["A linear expression","A constant only","A quadratic expression","An exponential"],0,"A proper fraction over an irreducible quadratic uses a linear numerator, Ax+B."],
+["What is ∫ dx/(x²+1)?",["tan⁻¹x+C","ln|x²+1|+C","1/(x²+1)+C","sin⁻¹x+C"],0,"The standard integral ∫dx/(1+x²)=tan⁻¹x+C."],
+["In partial fractions, repeated factor (x−a)² requires terms of the form:",["A/(x−a)+B/(x−a)²","A/(x−a)² only","A(x−a)+B","A/(x−a)+B"],0,"A repeated linear factor requires one term for each power up to the repetition."],
+["Which derivative is useful for integrating 1/(ax+b)?",["d/dx ln|ax+b| = a/(ax+b)","d/dx e^(ax+b)=1/(ax+b)","d/dx sin(ax+b)=1/(ax+b)","d/dx (ax+b)^2=1/(ax+b)"],0,"The logarithmic derivative gives a/(ax+b), so a constant factor completes the integral."],
+["After partial-fraction decomposition, the resulting terms are integrated using:",["Standard elementary integrals","Only numerical approximation","Only integration by parts","Only differentiation"],0,"The decomposition reduces the rational function to elementary terms such as logarithmic and inverse-tangent integrals."]
+],
+
 "Ratio":[
 ["Simplify the ratio 12:18.",["2:3","3:2","4:5","6:9"],0,"Divide both terms by their greatest common divisor, 6. Thus 12:18=2:3."],
 ["If a:b=3:5 and a=12, what is b?",["15","18","20","25"],2,"Since 3 parts correspond to 12, one part is 4. Therefore b=5×4=20."],
@@ -2353,7 +2367,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which set is finite?",["Integers","Real numbers","Prime numbers","{1,2,3,4,5}"],3,"The listed set has exactly five elements."],
 ["The set of all integers is:",["Finite","Infinite","Empty","Singleton"],1,"There are infinitely many positive and negative integers."],
 ["A set with n elements has power set cardinality:",["n","2n","n²","2^n"],3,"Every element can be either included or excluded, giving 2^n subsets."],
-["Which is infinite?",["{x∈ℕ:x≤10}","{x∈ℤ:−3≤x≤3}","{x∈ℝ:0<x<1}","{2,4,6}"],2,"There are infinitely many real numbers between 0 and 1."],
+["Which set contains infinitely many real numbers?",["{x∈ℕ:x≤10}","{x∈ℤ:−3≤x≤3}","{x∈ℝ:0<x<1}","{2,4,6}"],2,"There are infinitely many real numbers between 0 and 1."],
 ["A finite set can have:",["Exactly zero or a positive finite number of elements","Only one element","Only zero elements","Only infinitely many elements"],0,"Finite sets include the empty set, singleton sets, and all finite cardinalities."],
 ["The set of prime numbers is:",["Finite","Infinite","Empty","Singleton"],1,"There are infinitely many prime numbers."],
 ["A set with 100 elements is:",["Finite","Infinite","Empty","Undefined"],0,"100 is a finite cardinality."]

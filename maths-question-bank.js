@@ -532,7 +532,8 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x−1 is a factor of x²−5x+4, the other factor is:",["x−4","x+4","x−1","x+1"],0,"x²−5x+4=(x−1)(x−4)."],
 ["A root of a polynomial corresponds to:",["A factor of the form x−a","A constant only","The leading coefficient only","The degree only"],0,"If a is a root, x−a is a factor."],
 ["If f(2)=0 and f(x) is quadratic, one possible factorisation is:",["(x−2)(x−3)","(x+2)(x+3)","x(x+2)","(x−2)+3"],0,"Any quadratic with root 2 has x−2 as a factor; the listed factorisation is an example."]
-,"Function as mapping":[
+],
+"Function as mapping":[
 ["A function assigns each input to:",["Exactly one output","At least two outputs","No output","Only itself"],0,"A function maps every input in its domain to exactly one output."],
 ["In f(x)=2x+1, the input variable is usually:",["x","2","1","f"],0,"x represents the input to the function."],
 ["If f(x)=x+3, then f(2) is:",["3","5","6","9"],1,"Substitute x=2: f(2)=2+3=5."],
@@ -603,5 +604,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The domain of (f/g)(x) must exclude values where:",["f(x)=0","g(x)=0","f(x)=g(x)","x=0 always"],1,"Division by g(x) requires g(x)≠0."],
 ["If f(x)=x+1 and g(x)=x−1, then (f+g)(x) is:",["2x","2","x²−1","x"],0,"(x+1)+(x−1)=2x."],
 ["Which operation combines two functions by adding their outputs?",["f+g","fg","f∘g","f−g"],0,"(f+g)(x)=f(x)+g(x)."]
-]
-]};
+};

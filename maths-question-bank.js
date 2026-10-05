@@ -1419,7 +1419,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The derivative of e^{-x} is:",["e^{-x}","−e^{-x}","xe^{-x}","1/e^x only"],1,"The inner derivative of −x is −1."],
 ["For y=5e^{2x+1}, y' is:",["5e^{2x+1}","10e^{2x+1}","10x e^{2x}","2e^x"],1,"Differentiate the exponent and multiply by 5e^{2x+1}."],
 ["The derivative of ln(e^x) is:",["e^x","1","x","ln x"],1,"ln(e^x)=x, so its derivative is 1."],
-["The derivative of e^{ln x} for x>0 is:",["1/x","1","x","e^x"],2,"Since e^{ln x}=x, the derivative is 1; wait: the correct simplification is x, whose derivative is 1."],
+["The derivative of e^{ln x} for x>0 is:",["1/x","1","x","e^x"],1,"Since e^{ln x}=x, its derivative is 1."],
 ["Exponential growth models commonly use:",["e^{kt}","ln t only","t² only","1/t only"],0,"The form e^{kt} naturally models continuous exponential growth or decay."]
 ],
 "Derivatives of trigonometric functions":[

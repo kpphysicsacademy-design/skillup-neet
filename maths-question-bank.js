@@ -1782,4 +1782,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Differential-equation models are useful in:",["Physics, biology, chemistry, and engineering","Only arithmetic","Only geometry","Only grammar"],0,"They are widely used across science and engineering."],
 ["Model validation involves comparing model predictions with:",["Observed or known behavior","Only derivatives","Only constants","Only the domain"],0,"A useful model should agree reasonably with relevant observations or known results."]
 ]
+,"Systems of differential equations":[
+["A system of differential equations contains:",["Two or more dependent functions related by differential equations","Only one constant","No derivatives","Only algebraic equations"],0,"A system couples multiple unknown functions through differential equations."],
+["A first-order linear system can be written in matrix form as:",["X'=AX+B","X''=AX","X=A+B","A'=X"],0,"The standard linear system form is X'=AX+B."],
+["For a homogeneous linear system, the forcing vector is:",["Zero","Always one","Undefined","Equal to x"],0,"A homogeneous system has X'=AX."],
+["A two-variable system commonly has equations for:",["dx/dt and dy/dt","Only x","Only y","Only constants"],0,"The system specifies the rates of both state variables."],
+["An equilibrium point occurs when:",["All derivatives are zero","All variables are zero necessarily","Time is zero","The matrix is zero"],0,"At equilibrium the state does not change, so the derivative vector is zero."],
+["For x'=ax, the equilibrium x=0 is:",["A constant solution","Never a solution","A second-order solution","An integral"],0,"If x=0 then x'=a(0)=0."],
+["Systems of ODEs are useful for modeling:",["Interacting populations and coupled physical systems","Only arithmetic","Only factorisation","Only geometry"],0,"Coupled systems naturally model interacting quantities."],
+["Matrix methods for linear systems often use:",["Eigenvalues and eigenvectors","Only logarithms","Only trigonometric identities","Only integration by parts"],0,"Eigenstructure helps construct solutions of X'=AX."],
+["If X'=AX and X is an equilibrium state, then:",["AX=0","AX=1","A+X=0 always","X'=1"],0,"Equilibrium requires X'=0, hence AX=0."],
+["The dimension of X in a two-variable system is:",["2","1","3","0"],0,"X contains two state variables."]
+],
+"Laplace transforms":[
+["The Laplace transform converts a function of t into a function of:",["s","x only","y only","t²"],0,"The transform is commonly written F(s)."],
+["The Laplace transform is especially useful for solving:",["Initial-value differential equations","Only algebraic identities","Only geometry","Only limits"],0,"It converts differential equations into algebraic equations in s."],
+["The Laplace transform of 1 is:",["1/s","s","0","e^s"],0,"For s>0, L{1}=1/s."],
+["The Laplace transform of e^{at} is:",["1/(s−a)","1/(s+a)","s−a","e^a"],0,"L{e^{at}}=1/(s−a)."],
+["The Laplace transform of t is:",["1/s²","s²","1/s","s"],0,"L{t}=1/s²."],
+["The Laplace transform of a derivative involves:",["The initial value and the transform of the function","Only the derivative","Only zero","Only a constant"],0,"L{f'}=sF(s)−f(0)."],
+["Laplace transforms can convert differentiation into:",["Algebraic expressions in s","Integration only","Factorisation only","Geometry"],0,"Derivative terms become algebraic terms involving s and initial values."],
+["The inverse Laplace transform recovers:",["The original time-domain function","Only its derivative","Only its domain","A constant"],0,"Inverse transformation maps F(s) back to f(t)."],
+["L{sin at} equals:",["a/(s²+a²)","s/(s²+a²)","1/(s+a)","a/(s+a)"],0,"This is the standard sine transform."],
+["L{cos at} equals:",["s/(s²+a²)","a/(s²+a²)","1/s²","1/(s−a)"],0,"This is the standard cosine transform."]
+],
+"Fourier series":[
+["A Fourier series represents a periodic function using:",["Sines and cosines","Only polynomials","Only exponentials","Only constants"],0,"Periodic functions can be expanded in trigonometric harmonics."],
+["The constant term in a Fourier series represents the:",["Average or DC component","Maximum derivative","Period only","Amplitude of every term"],0,"The constant coefficient captures the mean value."],
+["For a function with period 2π, the Fourier basis uses:",["sin(nx) and cos(nx)","sin(x/2) only","e^x only","x^n only"],0,"The harmonics are sin(nx) and cos(nx), n≥1."],
+["An even function has a Fourier series containing:",["Cosine terms only, apart from the constant","Sine terms only","No terms","Only tangent terms"],0,"Odd sine terms integrate to zero for an even function."],
+["An odd function has a Fourier series containing:",["Sine terms only","Cosine terms only","A constant only","No terms"],0,"Even cosine terms vanish for an odd function."],
+["Fourier coefficients are found using:",["Definite integrals over a period","Only differentiation","Only factorisation","Only limits"],0,"Orthogonality gives integral formulas for the coefficients."],
+["Orthogonality of sine and cosine functions helps:",["Separate Fourier coefficients","Find derivatives only","Change the period","Remove the function"],0,"Orthogonality isolates individual harmonic coefficients."],
+["The fundamental frequency corresponds to:",["The first harmonic","The tenth harmonic always","The constant term","The derivative"],0,"The first nonzero frequency is the fundamental."],
+["Fourier series are useful for studying:",["Periodic phenomena and signals","Only quadratic equations","Only sets","Only counting"],0,"They are widely used in waves, heat, signals, and periodic models."],
+["A Fourier series may contain infinitely many:",["Harmonics","Domains","Derivatives only","Variables"],0,"A general Fourier expansion is an infinite trigonometric series."]
+],
+"Sequences":[
+["A sequence is an ordered list of:",["Terms","Equations only","Derivatives","Matrices"],0,"A sequence assigns a term to each positive integer index."],
+["The nth term of a sequence is commonly denoted:",["a_n","a+n","an only","n_a"],0,"a_n denotes the term at index n."],
+["The sequence 2,4,6,8,... is:",["Arithmetic","Geometric","Constant","Alternating only"],0,"Each term increases by a constant difference of 2."],
+["The common difference of 5,8,11,14,... is:",["3","2","4","5"],0,"Subtract consecutive terms: 8−5=3."],
+["The sequence 3,6,12,24,... is:",["Geometric","Arithmetic","Constant","Harmonic"],0,"Each term is multiplied by 2."],
+["The common ratio of 3,6,12,24,... is:",["2","3","6","1/2"],0,"6/3=2 and 12/6=2."],
+["An arithmetic sequence has nth term:",["a_n=a_1+(n−1)d","a_n=a_1r^n","a_n=a_1+n^2","a_n=d/n"],0,"This is the standard arithmetic-sequence formula."],
+["A geometric sequence has nth term:",["a_n=a_1r^{n−1}","a_n=a_1+(n−1)r","a_n=nr","a_n=r/n"],0,"Each term is multiplied by the common ratio r."],
+["A sequence that approaches a finite number is called:",["Convergent","Divergent","Periodic necessarily","Constant necessarily"],0,"Convergence means the terms approach a finite limit."],
+["The sequence 1/n converges to:",["0","1","∞","−1"],0,"As n becomes arbitrarily large, 1/n approaches zero."]
+],
+"Series":[
+["A series is formed by:",["Adding the terms of a sequence","Multiplying all terms","Differentiating a sequence","Listing terms only"],0,"A series is the sum of sequence terms."],
+["The partial sum of a series is:",["The sum of its first n terms","The nth term only","The last term","The derivative"],0,"Partial sums build the series term by term."],
+["The geometric series with first term a and ratio r converges when:",["|r|<1","|r|>1","r=2 always","r<−2 only"],0,"For |r|<1, the infinite geometric sum converges."],
+["For |r|<1, the sum of ar^{n} from n=0 to infinity is:",["a/(1−r)","a/(1+r)","ar","1/a"],0,"This is the standard infinite geometric-series formula."],
+["The harmonic series Σ1/n is:",["Divergent","Convergent","Finite","Zero"],0,"The harmonic series diverges."],
+["A necessary condition for Σa_n to converge is:",["a_n→0","a_n→1","a_n→∞","a_n<0 always"],0,"If the terms do not approach zero, the series cannot converge."],
+["Absolute convergence means:",["Σ|a_n| converges","Σa_n is zero","Every term is positive","The series is finite"],0,"Absolute convergence is convergence of the series of absolute values."],
+["A power series is commonly centered at:",["A number c","Zero only","Infinity","A derivative"],0,"A power series has terms involving powers of (x−c)."],
+["The radius of convergence describes:",["How far from the center the power series converges","The first term","The sum only","The derivative order"],0,"It determines the interval around the center of convergence."],
+["Series are useful for:",["Approximating functions and solving mathematical models","Only counting","Only factorisation","Only geometry"],0,"Infinite series provide representations and approximations."]
+],
+"Taylor series":[
+["A Taylor series expands a function around:",["A point a","Only zero","Infinity","A random integer"],0,"Taylor series are centered at a chosen point a."],
+["The Taylor series of f(x) about a begins with:",["f(a)","f'(a)x only","f''(a) only","a"],0,"The constant term is f(a)."],
+["The Maclaurin series is a Taylor series centered at:",["0","1","−1","∞"],0,"Maclaurin means Taylor expansion about x=0."],
+["The general Taylor term contains:",["f^{(n)}(a)(x−a)^n/n!","f(a)x^n","f'(x)/n","n!f(x)"],0,"This is the standard Taylor coefficient formula."],
+["The Maclaurin series for e^x is:",["Σx^n/n!","Σx^n","Σn!x^n","1+x only"],0,"e^x=1+x+x²/2!+..."],
+["The Maclaurin series for sin x contains:",["Odd powers of x","Only even powers","Only constants","No powers"],0,"sin x=x−x³/3!+x⁵/5!−..."],
+["The Maclaurin series for cos x contains:",["Even powers of x","Odd powers only","Only linear terms","No powers"],0,"cos x=1−x²/2!+x⁴/4!−..."],
+["Taylor polynomials are useful for:",["Approximating functions near a point","Finding only exact roots","Only integration","Only matrices"],0,"A finite Taylor polynomial gives a local approximation."],
+["The factorial n! appears in Taylor coefficients because of:",["Repeated differentiation","Only multiplication","The domain","The period"],0,"Repeated derivatives produce factorial factors."],
+["The radius of convergence determines where a Taylor series:",["Converges to the represented function under suitable conditions","Has no terms","Is always finite","Has derivative zero"],0,"Convergence controls the valid interval or disk of the expansion."]
+]
 };

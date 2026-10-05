@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Rational function":[
+["A rational function has the form:",["$f(x)=\\dfrac{p(x)}{q(x)}$ where p and q are polynomials and $q(x)\\ne0$","$f(x)=\\sqrt{x}$ only","$f(x)=\\sin x$ only","$f(x)=x^n$ only"],0,"A rational function is a quotient of two polynomials with a nonzero denominator."],
+["The domain of $f(x)=\\dfrac{1}{x-3}$ is:",["$\\mathbb{R}\\setminus\\{3\\}$","$\\mathbb{R}$","$\\{3\\}$","$[3,\\infty)$"],0,"The denominator cannot be zero, so $x\\ne3$."],
+["The vertical asymptote of $f(x)=\\dfrac{2}{x+1}$ is:",["$x=-1$","$x=1$","$y=-1$","$y=2$"],0,"The denominator is zero at $x=-1$, giving the vertical asymptote."],
+["For $f(x)=\\dfrac{x+2}{x-1}$, the horizontal asymptote is:",["$y=1$","$y=2$","$x=1$","$y=0$"],0,"The numerator and denominator have equal degree, so the asymptote is the ratio of leading coefficients: $y=1$."],
+["Which value is excluded from the domain of $f(x)=\\dfrac{x^2-1}{x-1}$?",["$x=1$","$x=-1$","$x=0$","No value"],0,"Although the expression simplifies to $x+1$, the original denominator excludes $x=1$."],
+["A removable discontinuity in a rational function commonly occurs when:",["A common factor cancels but its zero remains excluded from the original domain","The denominator never becomes zero","The numerator has higher degree only","The function is constant"],0,"Cancellation can create a hole at a value excluded by the original denominator."],
+["For $f(x)=\\dfrac{x^2-4}{x-2}$, the simplified expression for $x\\ne2$ is:",["$x+2$","$x-2$","$x^2+2$","$1/(x+2)$"],0,"Factor $x^2-4=(x-2)(x+2)$ and cancel for $x\\ne2$."],
+["Which pseudocode correctly checks whether x is in the domain of $p(x)/q(x)$?",["Evaluate q(x); accept x only if q(x)\\ne0","Evaluate p(x) only","Accept every x automatically","Reject x whenever p(x)=0"],0,"The domain excludes exactly those x for which the denominator is zero."],
+["For $f(x)=\\dfrac{3x+1}{x-2}$, the vertical asymptote is:",["$x=2$","$x=-2$","$y=2$","$y=3$"],0,"The denominator vanishes at $x=2$, and the numerator is nonzero there."],
+["If a rational function has numerator degree less than denominator degree, then its horizontal asymptote is:",["$y=0$","$y=1$","$x=0$","No horizontal asymptote is possible"],0,"As $|x|\\to\\infty$, the ratio tends to zero when the denominator degree is larger."]
+],
+
 "Polynomial function":[
 ["A polynomial function over $\\mathbb{R}$ has the form:",["$f(x)=a_nx^n+\\cdots+a_1x+a_0$ with $a_n\\ne0$","$f(x)=\\frac1x$ only","$f(x)=\\sqrt{x}$ only","$f(x)=\\sin x$ only"],0,"A polynomial is a finite sum of nonnegative integer powers of x with real coefficients."],
 ["The degree of $f(x)=5x^4-3x^2+7$ is:",["4","2","7","5"],0,"The highest power of x with a nonzero coefficient is 4."],

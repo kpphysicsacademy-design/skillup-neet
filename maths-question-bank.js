@@ -532,4 +532,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x−1 is a factor of x²−5x+4, the other factor is:",["x−4","x+4","x−1","x+1"],0,"x²−5x+4=(x−1)(x−4)."],
 ["A root of a polynomial corresponds to:",["A factor of the form x−a","A constant only","The leading coefficient only","The degree only"],0,"If a is a root, x−a is a factor."],
 ["If f(2)=0 and f(x) is quadratic, one possible factorisation is:",["(x−2)(x−3)","(x+2)(x+3)","x(x+2)","(x−2)+3"],0,"Any quadratic with root 2 has x−2 as a factor; the listed factorisation is an example."]
+,"Function as mapping":[
+["A function assigns each input to:",["Exactly one output","At least two outputs","No output","Only itself"],0,"A function maps every input in its domain to exactly one output."],
+["In f(x)=2x+1, the input variable is usually:",["x","2","1","f"],0,"x represents the input to the function."],
+["If f(x)=x+3, then f(2) is:",["3","5","6","9"],1,"Substitute x=2: f(2)=2+3=5."],
+["Which relation is a function?",["{(1,2),(1,3)}","{(1,2),(2,3)}","{(1,2),(2,2),(1,4)}","{(3,1),(3,2)}"],1,"Each input appears with exactly one output in {(1,2),(2,3)}."],
+["In a mapping diagram, one input connected to two different outputs:",["Is always a function","Cannot define a function","Is the identity function","Is a constant function"],1,"A function cannot assign the same input to two different outputs."],
+["If f(x)=3x, f(4) equals:",["7","12","16","64"],1,"3×4=12."],
+["If f(a)=a², then f(−3) is:",["−9","−6","6","9"],3,"f(−3)=(−3)²=9."],
+["Which statement describes a function?",["Every output has exactly one input","Every input has exactly one output","Every input has many outputs","Inputs are not required"],1,"The defining rule is one output for each input."],
+["If f(x)=5−x, then f(1) is:",["1","4","5","6"],1,"5−1=4."],
+["A function can be represented by:",["A formula","A table","A mapping diagram","All of these"],3,"Functions can be represented in multiple equivalent ways."]
+],
+"Domain":[
+["The domain of a function is the set of:",["Outputs","Allowed inputs","Coefficients","Constants"],1,"The domain consists of the input values for which the function is defined."],
+["For f(x)=x+2, with real x, the domain is:",["All real numbers","Only positive numbers","Only integers","x>2"],0,"There is no restriction on real x."],
+["The domain of f(x)=1/x is:",["All real numbers","x≠0","x>0","x<0"],1,"Division by zero is undefined, so x cannot be 0."],
+["The domain of f(x)=√x over the reals is:",["x<0","x≤0","x≥0","All real x"],2,"A real square root requires x≥0."],
+["The domain of f(x)=1/(x−3) is:",["x≠3","x=3","x>3 only","x<3 only"],0,"The denominator cannot be zero, so x≠3."],
+["For f(x)=√(x−2), the real domain is:",["x≤2","x≥2","x>−2","All real x"],1,"Require x−2≥0, hence x≥2."],
+["If a function is given only for x=1,2,3, its domain is:",["{1,2,3}","{0,1,2}","All reals","{3}"],0,"The listed input values form the domain."],
+["Which restriction is needed for f(x)=1/(x²−4)?",["x≠2 only","x≠−2 only","x≠±2","No restriction"],2,"x²−4=0 at x=±2."],
+["The domain of a polynomial such as x³−2x+1 is:",["All real numbers","x≥0","x≠1","Only integers"],0,"Polynomials are defined for every real input."],
+["A value excluded from the domain is an input for which the function is:",["Undefined","Always zero","Constant","An identity"],0,"Excluded inputs make the function undefined."]
+],
+"Range":[
+["The range of a function is the set of:",["Allowed inputs","Actual outputs","Coefficients","Domains"],1,"The range contains output values produced by the function."],
+["For f(x)=x² over real x, the range is:",["All real numbers","y≥0","y≤0","y>1"],1,"A square is never negative, so f(x)≥0."],
+["For f(x)=x+1 over real x, the range is:",["All real numbers","y≥1","y≤1","y>0"],0,"Every real output is possible."],
+["If f(x)=5 is constant, its range is:",["All real numbers","{5}","{0}","x=5"],1,"Every input produces the single output 5."],
+["For f(x)=√x over real x, the range is:",["y≥0","y≤0","All real y","y>1"],0,"The principal square root is non-negative."],
+["If a function maps {1,2,3} to {4,5}, its range could be:",["{1,2,3}","{4,5}","All reals","{0}"],1,"The range consists of outputs, here 4 and 5 if both occur."],
+["The range of f(x)=x²+1 for real x is:",["y≥1","y≤1","All real y","y>1 only"],0,"Since x²≥0, x²+1≥1."],
+["Which can be a range?",["A set of outputs","Only positive numbers","Only integers","Only one number"],0,"A range is a set of actual output values and can have any suitable values."],
+["If f(1)=2, f(2)=4, f(3)=2, the range is:",["{1,2,3}","{2,4}","{1,2,4}","{2,3,4}"],1,"The distinct outputs are 2 and 4."],
+["For f(x)=|x| over real x, the range is:",["y<0","y≤0","y≥0","All real y"],2,"Absolute value is always non-negative."]
+],
+"Identity function":[
+["The identity function is commonly written as:",["f(x)=0","f(x)=1","f(x)=x","f(x)=x²"],2,"The identity function maps every input to itself."],
+["For the identity function f(x)=x, f(7) is:",["0","1","7","49"],2,"f(7)=7."],
+["The graph of f(x)=x is:",["A vertical line","The line y=x","A parabola","The x-axis"],1,"Its graph is the straight line y=x."],
+["The identity function maps x to:",["x+1","x²","x itself","−x"],2,"Each input is unchanged."],
+["The domain and range of f(x)=x over the reals are:",["Both all real numbers","Both positive reals only","Domain real, range integers","Domain integers, range real"],0,"Every real input is allowed and every real output occurs."],
+["Which value is fixed by the identity function?",["f(3)=0","f(3)=1","f(3)=3","f(3)=9"],2,"The output equals the input."],
+["Composing the identity function with f gives:",["0","1","f","f² only"],2,"Identity composition leaves f unchanged: I∘f=f and f∘I=f."],
+["The identity function is:",["One-to-one on its domain","Never one-to-one","Constant","Undefined"],0,"Different inputs remain different, so it is one-to-one."],
+["If I(x)=x, then I(−5) equals:",["−25","−5","0","5"],1,"The identity leaves −5 unchanged."],
+["The identity function acts as an:",["Additive inverse","Multiplicative zero","Identity element under composition","Undefined mapping"],2,"Composing with the identity function does not change a function."]
+],
+"Constant function":[
+["A constant function has:",["The same output for every input","Different outputs for every input","No domain","Only one input"],0,"A constant function always returns one fixed output."],
+["Which is a constant function?",["f(x)=x","f(x)=2x","f(x)=7","f(x)=x²"],2,"f(x)=7 has the same output for every x."],
+["If f(x)=4, then f(−2) is:",["−8","−2","4","8"],2,"The output is always 4."],
+["The graph of y=5 is:",["A horizontal line","A vertical line","A parabola","A circle"],0,"A constant function y=c is a horizontal line."],
+["The range of f(x)=−3 is:",["All reals","{−3}","{3}","x=−3"],1,"Only −3 occurs as an output."],
+["A constant function is generally:",["One-to-one","Not one-to-one if the domain has multiple elements","Always identity","Always increasing"],1,"Different inputs have the same output, so it is not one-to-one on a multi-element domain."],
+["If f(x)=2x+1, is it constant?",["Yes","No","Only at x=0","Only for negative x"],1,"Its value changes with x."],
+["For f(x)=c, changing x:",["Changes the output","Does not change the output","Makes it undefined","Makes c zero"],1,"The output remains c."],
+["The slope of the graph of a constant function is:",["1","−1","0","Undefined"],2,"A horizontal line has slope zero."],
+["If f(x)=9 for all x, then f(100) is:",["0","9","100","900"],1,"Every input maps to 9."]
+],
+"Algebra of functions":[
+["If f(x)=x+2 and g(x)=3x, then (f+g)(x) is:",["4x+2","3x+2","x+6","4x"],0,"Add the functions: x+2+3x=4x+2."],
+["If f(x)=2x and g(x)=x−1, then (f−g)(x) is:",["x+1","x−1","3x−1","2x−1"],0,"2x−(x−1)=x+1."],
+["If f(x)=x+1 and g(x)=2x, then (fg)(x) is:",["3x+1","2x²+2x","x²+2x","2x+1"],1,"Multiply: (x+1)(2x)=2x²+2x."],
+["If f(x)=x+3 and g(x)=x, then (f/g)(x) is:",["x+3","1+3/x","3/x","x/(x+3)"],1,"(x+3)/x=1+3/x, for x≠0."],
+["For (f+g)(x), the outputs are:",["f(x)+g(x)","f(x)g(x)","f(g(x))","f(x)−g(x)"],0,"Function addition is defined pointwise."],
+["If f(x)=2x+1 and g(x)=x−2, then (f+g)(3) is:",["4","6","8","10"],2,"f(3)=7 and g(3)=1, so the sum is 8."],
+["If f(x)=x² and g(x)=x, then (f−g)(2) is:",["0","2","4","6"],1,"4−2=2."],
+["The domain of (f/g)(x) must exclude values where:",["f(x)=0","g(x)=0","f(x)=g(x)","x=0 always"],1,"Division by g(x) requires g(x)≠0."],
+["If f(x)=x+1 and g(x)=x−1, then (f+g)(x) is:",["2x","2","x²−1","x"],0,"(x+1)+(x−1)=2x."],
+["Which operation combines two functions by adding their outputs?",["f+g","fg","f∘g","f−g"],0,"(f+g)(x)=f(x)+g(x)."]
+]
 ]};

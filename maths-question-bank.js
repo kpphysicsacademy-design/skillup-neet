@@ -2309,4 +2309,113 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["|x|>4 means:",["−4<x<4","x<−4 or x>4","x≤4","x≥4"],1,"Distance from zero is greater than 4."],
 ["The graph of y=|x| has vertex at:",["(0,0)","(1,0)","(0,1)","(−1,0)"],0,"The absolute-value graph has its vertex at the origin."]
 ]
+
+,"Fractional inequalities":[
+["Solve x/3>2.",["x>6","x<6","x≥6","x≤6"],0,"Multiply by positive 3, giving x>6."],
+["Solve (x−1)/2≤3.",["x≤7","x<7","x≥7","x>7"],0,"Multiply by positive 2: x−1≤6, so x≤7."],
+["Solve (2x+1)/5≥1.",["x≥2","x≤2","x>2","x<2"],0,"2x+1≥5 gives 2x≥4, hence x≥2."],
+["Solve (x+3)/(-2)>4.",["x<−11","x>−11","x≤−11","x≥−11"],0,"Multiplying by −2 reverses the inequality: x+3<−8, so x<−11."],
+["Solve 1/x>0.",["x>0","x<0","x≠0","All real x"],0,"The reciprocal is positive exactly when x is positive."],
+["Solve 1/x<0.",["x>0","x<0","x=0","All real x"],1,"The reciprocal is negative exactly when x is negative."],
+["Solve (x−2)/(x+1)>0.",["x<−1 or x>2","−1<x<2","x≤−1 or x≥2","−1≤x≤2"],0,"The quotient is positive when numerator and denominator have the same sign."],
+["For (x−3)/(x−1)≤0, the solution is:",["1<x≤3","x≤1 or x≥3","1≤x<3","x<1 or x>3"],0,"The critical points are 1 (excluded) and 3 (included); the quotient is nonpositive between them."],
+["When solving a rational inequality, a denominator zero is:",["Excluded from the domain","Always included","A solution","A numerator zero"],0,"A zero denominator makes the original expression undefined."],
+["The sign of a rational expression can change at:",["Zeros of numerator or denominator","Only positive numbers","Only constants","Only infinity"],0,"Critical points occur where numerator or denominator is zero."]
+],
+"Empty set":[
+["Which symbol represents the empty set?",["∅","ℕ","ℤ","ℝ"],0,"∅ denotes a set containing no elements."],
+["The set of real solutions of x²+1=0 is:",["∅","{0}","{1}","{−1,1}"],0,"No real number has square equal to −1."],
+["If A has no elements, then A is:",["Empty","Infinite","Universal","Singleton"],0,"A set with zero elements is empty."],
+["The cardinality of ∅ is:",["0","1","−1","∞"],0,"The empty set contains zero elements."],
+["Which is an empty set?",["{x∈ℝ:x²<0}","{0}","{1,2}","{x∈ℝ:x²=1}"],0,"No real x has x²<0."],
+["∅ is a subset of:",["Every set","Only ∅","Only ℝ","No set"],0,"The empty set is a subset of every set."],
+["Which statement is true?",["∅ has no elements","∅ has one element","∅ is infinite","∅ equals {∅}"],0,"The empty set contains no elements; {∅} contains one element."],
+["The number of elements in {x∈ℕ:x<0} is:",["0","1","2","∞"],0,"There are no negative natural numbers under the usual convention."],
+["Which set has exactly zero elements?",["{}","{∅}","{0}","{1}"],0,"{} is another notation for the empty set."],
+["If A∩B=∅, A and B are:",["Disjoint","Equal","Identical","Universal"],0,"Disjoint sets have no common elements."]
+],
+"Singleton set":[
+["A singleton set contains exactly:",["0 elements","1 element","2 elements","Infinitely many"],1,"By definition, a singleton has exactly one element."],
+["Which is a singleton set?",["{5}","{1,2}","∅","{1,2,3}"],0,"{5} contains exactly one element."],
+["The cardinality of {a} is:",["0","1","2","a"],1,"A set containing one element has cardinality 1."],
+["Which set is not a singleton?",["{7}","{−2}","{x∈ℝ:x²=0}","{1,2}"],3,"{1,2} has two distinct elements."],
+["The set of real solutions of x−4=0 is:",["{4}","∅","{−4}","{0,4}"],0,"The only real solution is x=4."],
+["If A={π}, then |A| is:",["0","1","π","2"],1,"π is one element of A."],
+["Which notation represents a singleton?",["{x}","{}","{x,y}","ℝ"],0,"{x} contains exactly one element."],
+["A singleton can contain:",["One element of any type","Only numbers","Only integers","Only symbols"],0,"A set's single element may be any object."],
+["If A={1} and B={1}, then A and B are:",["Equal","Disjoint","Different","Infinite"],0,"They contain exactly the same element."],
+["The power set of a singleton has how many elements?",["1","2","3","4"],1,"For n=1, a power set has 2^1=2 subsets: ∅ and the set itself."]
+],
+"Finite and infinite sets":[
+["A finite set has:",["A limited number of elements","No elements","Infinitely many elements","Exactly one element"],0,"Finite means the number of elements is bounded and countable to a last element."],
+["Which is infinite?",["{1,2,3}","{a,b}","ℕ","{0}"],2,"The natural numbers continue without end."],
+["The cardinality of {2,4,6,8} is:",["2","3","4","8"],2,"There are four distinct elements."],
+["Which set is finite?",["Integers","Real numbers","Prime numbers","{1,2,3,4,5}"],3,"The listed set has exactly five elements."],
+["The set of all integers is:",["Finite","Infinite","Empty","Singleton"],1,"There are infinitely many positive and negative integers."],
+["A set with n elements has power set cardinality:",["n","2n","n²","2^n"],3,"Every element can be either included or excluded, giving 2^n subsets."],
+["Which is infinite?",["{x∈ℕ:x≤10}","{x∈ℤ:−3≤x≤3}","{x∈ℝ:0<x<1}","{2,4,6}"],2,"There are infinitely many real numbers between 0 and 1."],
+["A finite set can have:",["Exactly zero or a positive finite number of elements","Only one element","Only zero elements","Only infinitely many elements"],0,"Finite sets include the empty set, singleton sets, and all finite cardinalities."],
+["The set of prime numbers is:",["Finite","Infinite","Empty","Singleton"],1,"There are infinitely many prime numbers."],
+["A set with 100 elements is:",["Finite","Infinite","Empty","Undefined"],0,"100 is a finite cardinality."]
+],
+"Equal sets":[
+["Two sets are equal when they have:",["Exactly the same elements","The same order of elements","The same number only","The same symbols only"],0,"Set equality depends on membership, not order."],
+["Are {1,2,3} and {3,2,1} equal?",["Yes","No","Only sometimes","Cannot compare"],0,"Order does not matter in sets."],
+["{1,1,2} is equal to:",["{1,2}","{1,1}","{2,2}","∅"],0,"Repeated elements do not change a set."],
+["If A={a,b} and B={b,a}, then:",["A=B","A∩B=∅","A⊂B only","A has more elements"],0,"Both sets contain exactly a and b."],
+["Which pair is equal?",["{1,2} and {2,1}","{1,2} and {1,3}","{a} and ∅","{0} and {0,1}"],0,"The first pair has the same elements."],
+["If A=B, then their cardinalities are:",["Equal","Always different","Both zero","Undefined"],0,"Equal sets necessarily have equal cardinality."],
+["Which statement is false?",["Set equality depends on order","{1,2}={2,1}","Repeated elements are ignored","Equal sets have the same members"],0,"Order does not affect set equality."],
+["If A={x:x is a positive integer less than 3}, then A is:",["{1,2}","{0,1,2}","{1,2,3}","{2,3}"],0,"The positive integers below 3 are 1 and 2."],
+["If A={1,2} and B={1,2,3}, then:",["A≠B","A=B","B=∅","A is universal"],0,"B contains an additional element 3."],
+["Which property characterizes equal sets?",["Same membership","Same ordering","Same notation only","Same physical arrangement"],0,"Two sets are equal precisely when they have the same elements."]
+],
+"Subsets":[
+["A⊆B means:",["Every element of A is in B","Every element of B is in A","A and B are disjoint","A has one element"],0,"Subset means all members of A belong to B."],
+["Which is always a subset of every set A?",["∅","A only","ℝ","{A}"],0,"The empty set is a subset of every set."],
+["If A={1,2} and B={1,2,3}, then:",["A⊆B","B⊆A","A=B is false and neither is subset","A∩B=∅"],0,"Both 1 and 2 are in B."],
+["If A⊆B and B⊆A, then:",["A=B","A∩B=∅","A has more elements","B is empty"],0,"Mutual inclusion implies equality."],
+["How many subsets does a 3-element set have?",["3","6","8","9"],2,"A set with n elements has 2^n subsets."],
+["If A has 4 elements, its power set has:",["4","8","12","16"],3,"2^4=16 subsets."],
+["Which is a subset of {1,2,3}?",["{1,3}","{1,4}","{0}","{2,4}"],0,"Every element 1 and 3 belongs to the given set."],
+["If A⊆B, then A∩B equals:",["A","B","∅","A∪B"],0,"Intersecting a subset with its superset gives the subset."],
+["If A⊆B, then A∪B equals:",["A","B","∅","A∩B"],1,"The union is the larger set B."],
+["For any set A, A⊆A is:",["True","False","True only if finite","True only if nonempty"],0,"Every set is a subset of itself."]
+],
+"Proper subsets":[
+["A proper subset A⊂B is a subset that is:",["Not equal to B","Equal to B","Disjoint from B","Infinite"],0,"A proper subset is contained in B but is not B itself."],
+["If A={1,2} and B={1,2,3}, then A is a:",["Proper subset of B","Superset of B","Equal set","Disjoint set"],0,"A is contained in B and differs from B."],
+["Is A a proper subset of itself?",["No","Yes","Only if finite","Only if empty"],0,"A⊂A is false because a proper subset must be different."],
+["A set with n elements has how many proper subsets?",["n","2^n−1","2n","n²"],1,"There are 2^n subsets including the set itself; remove it to get 2^n−1 proper subsets."],
+["The empty set is a proper subset of a nonempty set B:",["Always","Never","Only if B has two elements","Only if B is infinite"],0,"∅⊂B whenever B is nonempty."],
+["If A⊂B, which is true?",["A⊆B and A≠B","A=B","B⊆A only","A∩B=∅"],0,"Proper inclusion combines subset and inequality."],
+["Which is not a proper subset of {1,2}?",["{1}","{2}","∅","{1,2}"],3,"The set itself is a subset but not a proper subset."],
+["How many proper subsets does a 4-element set have?",["8","12","15","16"],2,"2^4−1=15."],
+["If B is a singleton, its only proper subset is:",["∅","B","{the element}","ℝ"],0,"A singleton has subsets ∅ and itself; only ∅ is proper."],
+["If A has 0 elements, how many proper subsets does A have?",["0","1","2","Undefined"],0,"The empty set has only itself as a subset, so it has no proper subsets."]
+],
+"Power set":[
+["The power set P(A) is the set of:",["All subsets of A","All elements of A only","All supersets of A","Only proper subsets"],0,"The power set contains every subset, including ∅ and A."],
+["If A={1,2}, P(A) has:",["2","3","4","5"],2,"2^2=4 subsets."],
+["P(∅) is:",["{∅}","∅","{{∅}}","{0}"],0,"The empty set has exactly one subset: itself."],
+["If |A|=3, then |P(A)| is:",["3","6","8","9"],2,"2^3=8."],
+["Which belongs to P({a,b})?",["{a}","{a,c}","c","{a,b,c}"],0,"{a} is a subset of {a,b}."],
+["Does P(A) contain A itself?",["Yes","No","Only when A is empty","Only when A is singleton"],0,"Every set is a subset of itself."],
+["Does P(A) contain ∅?",["Yes","No","Only if A is nonempty","Only if A has one element"],0,"∅ is a subset of every set."],
+["If |P(A)|=16, then |A| is:",["2","3","4","8"],2,"2^n=16 gives n=4."],
+["If A has 5 elements, the number of proper subsets is:",["16","25","31","32"],2,"There are 32 subsets; excluding A leaves 31 proper subsets."],
+["P({1}) is:",["{∅,{1}}","{{1}}","∅","{1}"],0,"The subsets of {1} are ∅ and {1}."]
+],
+"Universal set":[
+["A universal set U contains:",["All objects under consideration","Only one element","No elements","Only integers"],0,"U is the reference set for a particular discussion."],
+["If U={1,2,3,4} and A={1,3}, then A is:",["A subset of U","A superset of U","Equal to U","Disjoint from U"],0,"Every element of A occurs in U."],
+["The complement of A is usually written:",["A′ or A^c","A∪U","A−A","∅ only"],0,"The complement contains elements of U not in A."],
+["If U={1,2,3,4} and A={1,2}, then A^c is:",["{3,4}","{1,2}","{1,3}","{2,4}"],0,"Remove the elements of A from U."],
+["The universal set is determined by:",["The context of the problem","The alphabet only","The real numbers always","The empty set"],0,"Different problems can use different universal sets."],
+["For any A⊆U, A∪A^c equals:",["U","A","∅","A^c"],0,"Every element of U is either in A or its complement."],
+["For any A⊆U, A∩A^c equals:",["∅","U","A","A^c"],0,"No element can be both in A and outside A."],
+["The complement of U relative to U is:",["∅","U","{0}","Undefined"],0,"There are no elements of U outside U."],
+["The complement of ∅ relative to U is:",["U","∅","{∅}","A"],0,"Every element of U lies outside the empty set."],
+["If A={1,2} and U={1,2,3}, then A^c is:",["{3}","{1,2}","∅","U"],0,"The only element of U not in A is 3."]
+]
 };

@@ -387,9 +387,8 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which is a trinomial?",["x+1","x²+2x+1","3x","7"],1,"x²+2x+1 has three terms."],
 ["The expression 6a−4 contains:",["One term","Two terms","Three terms","Four terms"],1,"The terms are 6a and −4."],
 ["Which expression represents 'twice x decreased by 3'?",["2(x−3)","2x−3","x−6","3−2x"],1,"Twice x is 2x, then subtract 3: 2x−3."],
-["If a=2 and b=5, the value of 3a+b is:",["8","9","10","11"],1,"3(2)+5=11." ]
-
-,"Expansion":[
+["If a=2 and b=5, the value of 3a+b is:",["8","9","10","11"],1,"3(2)+5=11." ],
+"Expansion":[
 ["Expand 3(x+4).",["3x+4","3x+12","x+12","3x+7"],1,"Distribute 3 to both terms: 3x+12."],
 ["Expand 5(2x−3).",["10x−3","10x−15","7x−15","10x+15"],1,"Multiply 5 by both 2x and −3."],
 ["Expand (x+2)(x+3).",["x²+5x+6","x²+6x+5","x²+5","x²+6"],0,"FOIL gives x²+3x+2x+6=x²+5x+6."],

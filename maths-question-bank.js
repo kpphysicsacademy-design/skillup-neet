@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Equivalence relation":[
+["A relation R on a set A is an equivalence relation if it is:",["Reflexive, symmetric and transitive","Reflexive and antisymmetric only","Symmetric and antisymmetric only","Transitive only"],0,"An equivalence relation must satisfy reflexivity, symmetry and transitivity."],
+["Which condition must hold for every a∈A in an equivalence relation R?",["aRa","aRa is false","aRb for every b","aR a only when a is distinct"],0,"Reflexivity requires aRa for every element a of A."],
+["If aRb in an equivalence relation, which statement must also be true?",["bRa","aRa only","bRb only","a is different from b"],0,"Symmetry requires bRa whenever aRb."],
+["If aRb and bRc in an equivalence relation, then:",["aRc","cRa only","aRb is false","bRa is false"],0,"Transitivity requires aRc whenever aRb and bRc."],
+["The equivalence class of a under R is the set of elements x such that:",["xRa","a≠x","x is not related to a","x∈A and x<a"],0,"The equivalence class [a] consists of all x∈A for which xRa."],
+["Equivalence classes of an equivalence relation are:",["Pairwise disjoint or identical","Always disjoint and unequal","Always overlapping without equality","Always singletons"],0,"Two equivalence classes are either identical or disjoint."],
+["If aRb, then the equivalence classes [a] and [b] are:",["Equal","Always disjoint","Empty","Singletons"],0,"Related elements belong to the same equivalence class."],
+["Which relation on integers is an equivalence relation?",["aRb iff a−b is divisible by 3","aRb iff a<b","aRb iff a=b+1","aRb iff a+b is odd"],0,"Congruence modulo 3 is reflexive, symmetric and transitive."],
+["For congruence modulo n, a≡b (mod n) means:",["n divides a−b","a+b divides n","a divides b+n","n=a−b exactly"],0,"By definition, a≡b (mod n) when n divides a−b."],
+["The equivalence classes of an equivalence relation form a:",["Partition of the set","Subset containing only one element","Power set with no overlaps","Relation that is never transitive"],0,"The equivalence classes partition the underlying set into nonempty pairwise disjoint blocks."]
+],
+
 
 "Integration of rational functions":[
 ["For a proper rational function with a factorised denominator, which method is commonly used first?",["Partial fractions","Integration by parts","Taylor expansion","Newton's method"],0,"Partial fractions decomposes a rational function into simpler terms that can be integrated directly."],

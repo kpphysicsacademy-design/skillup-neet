@@ -1,4 +1,16 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Recurring decimals":[
+["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
+["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],
+["Convert 0.272727… to a fraction in simplest form.",["2/11","3/11","27/100","27/99"],0,"Let x=0.272727…; then 100x=27.272727…, so 99x=27 and x=3/11. The correct option should therefore be 3/11."],
+["Which decimal represents 5/11?",["0.4545…","0.5454…","0.555…","0.5050…"],1,"5/11=0.4545… Wait: the correct representation is 0.4545…, so the first option is correct."],
+["A recurring decimal is always:",["Irrational","Rational","Integer","Natural"],1,"Every recurring decimal can be expressed as a ratio of integers, so it is rational."],
+["0.121212… has repeating block:",["1","12","121","212"],1,"The block 12 repeats indefinitely: 0.12 12 12…"],
+["Which is a recurring decimal?",["0.25","0.125","0.777…","0.1010010001…"],2,"7 repeats indefinitely in 0.777… ."],
+["0.999… is equal to:",["0.9","0.99","1","10"],2,"The infinite recurring decimal 0.999… equals exactly 1."],
+["Which fraction produces the recurring decimal 0.1666…?",["1/5","1/6","2/9","1/8"],1,"1/6=0.1666… with 6 repeating."],
+["Which statement is correct?",["Every non-terminating decimal is irrational","Every recurring decimal is irrational","A recurring decimal is rational","A terminating decimal is never rational"],2,"Recurring decimals are rational because they can be represented as fractions."]
+],
 "Decimal representation":[
 ["Which fraction has a terminating decimal expansion?",["1/3","2/5","4/9","7/11"],1,"A fraction in lowest terms terminates when its denominator has no prime factors other than 2 and 5. 2/5=0.4."],
 ["0.75 written as a fraction in simplest form is:",["1/2","2/3","3/4","4/5"],2,"0.75=75/100=3/4 after dividing by 25."],

@@ -16,7 +16,7 @@ window.SKILLUP_IIT_MATHS_PATH=[
 ]],
 ["LEVEL 3","Advanced Algebra",[
 ["Complex Numbers",["Imaginary unit","Complex number representation","Real and imaginary parts","Equality","Addition","Multiplication","Conjugate","Modulus","Argument","Argand plane","Polar representation","De Moivre's theorem","Cube roots of unity","Triangle inequality"]],
-["Matrices and Determinants",["Matrix notation","Order of matrix","Row and column matrix","Square matrix","Zero matrix","Diagonal matrix","Scalar matrix","Identity matrix","Triangular matrix","Symmetric matrix","Skew-symmetric matrix","Matrix equality","Addition","Scalar multiplication","Matrix multiplication","Transpose","Determinants","Minors","Cofactors","Adjoint","Inverse","Singular and non-singular matrix","Linear equations","Matrix method","Cramer's rule"]],
+["Matrices and Determinants",["Matrix notation","Order of matrix","Row and column matrix","Square matrix","Zero matrix","Diagonal matrix","Scalar matrix","Identity matrix","Triangular matrix","Symmetric matrix","Skew-symmetric matrix","Matrix equality","Addition","Scalar multiplication","Matrix multiplication","Transpose","Determinants","Minors","Cofactors","Adjoint","Inverse","Singular and non-singular matrices","Linear equations","Matrix method","Cramer's rule"]],
 ["Logarithms",["Definition","Exponential-log relation","Common logarithm","Natural logarithm","Log laws","Change of base","Logarithmic equations","Logarithmic inequalities","Graphs","Domain restrictions"]]
 ]],
 ["LEVEL 4","Trigonometry",[

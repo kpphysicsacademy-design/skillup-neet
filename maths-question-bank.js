@@ -1026,4 +1026,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A vertical asymptote often indicates:",["An infinite discontinuity","A removable discontinuity","Continuity","A constant function"],0,"Values become unbounded near a vertical asymptote."],
 ["Which function is continuous on its entire real domain?",["1/x","x³","1/(x−1)","tan x"],1,"A polynomial such as x³ is continuous for every real x."]
 ]
+,"Derivative":[
+["The derivative of f at x=a represents the:",["Slope of the tangent at x=a","Area under the curve","y-intercept","Average value only"],0,"The derivative gives the instantaneous rate of change and tangent slope."],
+["The derivative of x^2 is:",["x","2x","x^3","2"],1,"Using the power rule, d(x^2)/dx=2x."],
+["The derivative of a constant is:",["1","0","The constant","Undefined"],1,"A constant does not change, so its derivative is zero."],
+["The derivative of x is:",["0","1","x","2x"],1,"The slope of y=x is 1."],
+["If f'(a)>0, the tangent slope at a is:",["Negative","Zero","Positive","Undefined"],2,"A positive derivative means a positive tangent slope."],
+["What is d/dx(x^3)?",["x^2","2x^2","3x^2","3x"],2,"The power rule gives 3x^2."],
+["The derivative measures:",["Instantaneous rate of change","Only total change","Only area","Only distance"],0,"Derivative measures how rapidly the function changes at an instant."],
+["If f'(a)=0, the tangent line at a is:",["Vertical","Horizontal","Undefined always","At 45° always"],1,"A zero derivative gives a horizontal tangent when the derivative exists."],
+["What is d/dx(5x)?",["0","1","5","5x"],2,"The derivative of 5x is its constant slope 5."],
+["The derivative of f(x)=x^n is:",["nx^(n−1)","x^(n+1)","n+x","x/n"],0,"The power rule gives nx^(n−1)."]
+],
+"Derivative from first principles":[
+["The derivative from first principles uses the limit:",["lim_{h→0}[f(x+h)−f(x)]/h","lim_{h→∞}f(x)","lim_{h→0}f(x+h)","f(x)/x"],0,"The difference quotient limit defines the derivative."],
+["The denominator in the difference quotient is:",["x","h","f(x)","a"],1,"The increment h in the input appears in the denominator."],
+["The derivative f'(a) from first principles is:",["lim_{h→0}[f(a+h)−f(a)]/h","lim_{h→∞}[f(a+h)−f(a)]","f(a)/a","f(a+h)"],0,"This is the derivative definition at x=a."],
+["For f(x)=x^2, the difference quotient simplifies to:",["2x+h","x+h","2x−h","x^2+h"],0,"[(x+h)^2−x^2]/h=2x+h."],
+["Taking h→0 in 2x+h gives:",["0","x","2x","2"],2,"The limit is 2x."],
+["Using first principles, the derivative of x^2 is:",["x","2x","x^2","2"],1,"The difference quotient limit gives 2x."],
+["Why is h required to approach zero rather than equal zero in the quotient?",["Because division by zero is undefined","Because h must be positive","Because x must be zero","Because derivatives are averages"],0,"The quotient is formed for h≠0 and its limit is then taken as h approaches zero."],
+["The first-principles quotient represents the slope of a:",["Secant line","Horizontal line always","Normal line only","Asymptote"],0,"For h≠0 it gives the slope of a secant through two nearby points."],
+["As h approaches zero, the secant slope approaches the:",["Tangent slope","y-intercept","x-intercept","Average only"],0,"The limiting secant slope becomes the tangent slope."],
+["For f(x)=x^3, the first-principles derivative is:",["x^2","2x","3x^2","3x"],2,"Expanding [(x+h)^3−x^3]/h and taking h→0 gives 3x^2."]
+],
+"Differentiability":[
+["A function is differentiable at x=a if its derivative:",["Exists at a","Is always zero","Is always positive","Is infinite"],0,"Differentiability means the derivative exists at the point."],
+["If a function is differentiable at a point, it must be:",["Continuous there","Periodic there","Constant there","Bounded everywhere"],0,"Differentiability implies continuity."],
+["A function can be continuous but not:",["Differentiable","Defined","Real-valued","A function"],0,"For example, |x| is continuous at 0 but not differentiable there."],
+["The function f(x)=|x| is not differentiable at:",["x=−1","x=0","x=1","Every x"],1,"The left and right derivatives at 0 are −1 and 1."],
+["At a differentiable point, the left and right derivatives are:",["Equal","Opposite always","Both zero","Undefined"],0,"A derivative exists when the one-sided derivatives agree."],
+["A sharp corner in a graph generally indicates:",["Non-differentiability","Constant behavior","Periodicity","An asymptote"],0,"A corner usually has different one-sided slopes."],
+["A vertical tangent may cause the ordinary finite derivative to be:",["Undefined","Always 1","Always 0","A polynomial"],0,"A vertical tangent corresponds to an unbounded slope, so the finite derivative does not exist."],
+["Which function is differentiable for every real x?",["|x|","x^3","√x","1/x"],1,"Polynomials are differentiable everywhere on R."],
+["If f is differentiable at a, then:",["lim_{h→0}[f(a+h)−f(a)]/h exists","f(a)=0","f'(a)=1","f is periodic"],0,"Existence of the difference-quotient limit is the definition of differentiability."],
+["Differentiability is a stronger condition than:",["Continuity","Being defined","Having a domain","Being a function"],0,"Every differentiable function is continuous, but not every continuous function is differentiable."]
+],
+"Rules of differentiation":[
+["The power rule for x^n is:",["nx^(n−1)","x^(n+1)","n+x","x/n"],0,"The derivative of x^n is nx^(n−1)."],
+["The derivative of a sum f+g is:",["f'+g'","f'g'","f'−g'","fg"],0,"Differentiation is linear over sums."],
+["The derivative of a constant multiple cf is:",["cf'","c+f'","f'/c","c−f'"],0,"The constant can be taken outside the derivative."],
+["d/dx(sin x) equals:",["−sin x","cos x","tan x","1"],1,"The derivative of sine is cosine."],
+["d/dx(cos x) equals:",["sin x","−sin x","cos x","−cos x"],1,"The derivative of cosine is negative sine."],
+["d/dx(e^x) equals:",["1","x e^(x−1)","e^x","0"],2,"The exponential e^x is its own derivative."],
+["d/dx(ln x), x>0, equals:",["x","1/x","ln x","e^x"],1,"The derivative of ln x is 1/x."],
+["What is d/dx(7)?",["7","1","0","−7"],2,"The derivative of a constant is zero."],
+["If f(x)=3x^2+4x, then f'(x) is:",["3x+4","6x+4","6x^2+4","x^2+4"],1,"Differentiate each term: 6x+4."],
+["Which rule allows differentiation term by term?",["Sum rule","Remainder theorem","Factor theorem","Division algorithm"],0,"The sum rule permits term-by-term differentiation."]
+],
+"Product rule":[
+["The product rule for f(x)g(x) is:",["f'g'","f'g+fg'","fg'−f'g","f'+g'"],1,"The derivative is f'g+fg'."],
+["If y=x^2 sin x, then y' is:",["2x sin x+x^2 cos x","2x cos x+x^2 sin x","x sin x","2x cos x"],0,"Apply the product rule to x^2 and sin x."],
+["If f=uv, then f' equals:",["u'v+uv'","u'v'","u+v","uv"],0,"Product differentiation gives u'v+uv'."],
+["The product rule is needed when:",["Two differentiable functions are multiplied","Functions are added only","A constant appears alone","A function is inverted only"],0,"Products require the product rule unless simplified by another method."],
+["d/dx[x e^x] equals:",["e^x","xe^x","e^x+xe^x","x+e^x"],2,"Using the product rule: 1·e^x+x·e^x."],
+["d/dx[(x+1)(x−2)] equals:",["2x−1","x−1","2x+1","x^2−2"],0,"Expanding gives x^2−x−2, whose derivative is 2x−1."],
+["If u=x^2 and v=x^3, then (uv)' is:",["5x^4","6x^5","x^5","6x^4"],0,"uv=x^5, so its derivative is 5x^4."],
+["The product rule can be written as:",["(uv)'=u'v+uv'","(uv)'=u'v'","(uv)'=u+v","(uv)'=uv"],0,"This is the standard product rule."],
+["For y=(2x)(sin x), y' is:",["2sin x","2cos x","2sin x+2x cos x","sin x+2x"],2,"Apply the product rule to 2x and sin x."],
+["Which expression is generally not equal to the derivative of fg?",["f'g+fg'","g'f+gf'","f'g'","fg derivative by product rule"],2,"f'g' alone omits the two product-rule terms."]
+],
+"Quotient rule":[
+["The quotient rule for y=u/v is:",["(u'v−uv')/v^2","u'v'","(u+v)/(u'v')","u'/v'"],0,"The quotient rule is (u'v−uv')/v^2."],
+["For y=x^2/(x+1), y' is:",["[2x(x+1)−x^2]/(x+1)^2","2x/(x+1)","x^2/(x+1)^2","1"],0,"Apply the quotient rule with u=x^2 and v=x+1."],
+["The denominator in the quotient rule is:",["v","v^2","u^2","uv"],1,"The denominator is squared."],
+["If u=x and v=x+1, then (u/v)' is:",["1/(x+1)^2","1/(x+1)","x/(x+1)^2","0"],0,"[(1)(x+1)−x(1)]/(x+1)^2=1/(x+1)^2."],
+["The quotient rule is useful when:",["One differentiable function is divided by another","Two functions are added","A constant is alone","A function is only translated"],0,"A quotient of functions is differentiated using this rule when convenient."],
+["d/dx(1/x), x≠0, equals:",["1/x^2","−1/x^2","x","−x"],1,"Rewrite x^−1 and differentiate to get −x^−2."],
+["If y=(sin x)/x, then y' is:",["(x cos x−sin x)/x^2","cos x/x","sin x/x^2","(sin x−x cos x)/x"],0,"Use u=sin x and v=x in the quotient rule."],
+["If u=2x and v=3x+1, then (u/v)' is:",["2/(3x+1)^2","6/(3x+1)^2","2/(3x+1)","0"],0,"[(2)(3x+1)−(2x)(3)]/(3x+1)^2=2/(3x+1)^2."],
+["The quotient rule numerator is:",["u'v−uv'","u'v+uv'","uv","u'v'"],0,"The numerator is first derivative times denominator minus numerator times derivative of denominator."],
+["For y=(x+1)/(x−1), y' is:",["−2/(x−1)^2","2/(x−1)^2","1/(x−1)","0"],0,"[(1)(x−1)−(x+1)(1)]/(x−1)^2=−2/(x−1)^2."]
+]
 };

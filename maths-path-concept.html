@@ -55,7 +55,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
-<script src="maths-question-bank.js?v=20261005-final2"></script>
+<script src="maths-question-bank.js?v=20261005-safe1"></script>
 <script>
 const qs=new URLSearchParams(location.search),concept=qs.get('concept')||'Natural numbers';
 let skillUpSession=null;
@@ -92,10 +92,16 @@ const data=bank[concept]||null;document.getElementById('headerTitle').textConten
 function typeset(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}
 if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(typeset);
 let bankQuiz=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept]);
-if(!Array.isArray(bankQuiz)||!bankQuiz.length){
- console.warn('Refreshing Maths quiz bank for concept:',concept);
+function validateQuizBank(bank){
+  if(!Array.isArray(bank)||bank.length!==10)return false;
+  return bank.every(function(q){
+    return Array.isArray(q)&&q.length>=4&&typeof q[0]==='string'&&Array.isArray(q[1])&&q[1].length===4&&Number.isInteger(q[2])&&q[2]>=0&&q[2]<4&&typeof q[3]==='string'&&q[1][q[2]]!=null;
+  });
+}
+if(!validateQuizBank(bankQuiz)){
+ console.warn('Refreshing/validating Maths quiz bank for concept:',concept);
  const refreshScript=document.createElement('script');
- refreshScript.src='maths-question-bank.js?v=20261005-final';
+ refreshScript.src='maths-question-bank.js?v=20261005-safe1';
  refreshScript.onload=()=>location.reload();
  refreshScript.onerror=()=>console.error('Unable to refresh Maths quiz bank.');
  document.head.appendChild(refreshScript);
@@ -108,7 +114,7 @@ if(concept==='Nested surds' && Array.isArray(questions) && questions.length>=7){
 let i=0,score=0,answered=false;
 const startedAt=Date.now();
 const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),cont=document.getElementById('continue'),quizEl=document.getElementById('quiz'),resultEl=document.getElementById('result');
-function render(){answered=false;cont.style.display='none';cont.disabled=false;cont.textContent='Continue →';document.getElementById('qnum').textContent=(i+1)+' / '+questions.length;const q=questions[i];qEl.innerHTML=q[0];aEl.innerHTML='';q[1].slice(0,4).forEach((x,n)=>{const b=document.createElement('button');b.className='ans';b.dataset.letter=String.fromCharCode(65+n);b.textContent=x;b.onclick=()=>answer(n,b);aEl.appendChild(b)});typeset()}
+function render(){answered=false;cont.style.display='none';cont.disabled=false;cont.textContent='Continue →';document.getElementById('qnum').textContent=(i+1)+' / '+questions.length;const q=questions[i];qEl.textContent=q[0];aEl.textContent='';q[1].slice(0,4).forEach((x,n)=>{const b=document.createElement('button');b.className='ans';b.dataset.letter=String.fromCharCode(65+n);b.textContent=x;b.onclick=()=>answer(n,b);aEl.appendChild(b)});typeset()}
 function answer(n,button){if(answered)return;answered=true;const q=questions[i];[...aEl.children].forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('correct')});if(n===q[2])score++;else button.classList.add('wrong');cont.textContent=(i===questions.length-1)?'Done ✓':'Continue →';cont.style.display='inline-block'}
 async function showResults(){
  const total=questions.length,accuracy=total?Math.round(score/total*100):0,time=Math.max(1,Math.round((Date.now()-startedAt)/1000));

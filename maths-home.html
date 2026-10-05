@@ -129,8 +129,14 @@
  .unit{margin-left:-18px!important}
  .unit-main{max-width:calc(100% - 4px)!important}
 }
+/* Final full-path vertical layout */
+.path{position:relative}
+.path:before{content:"";position:absolute;left:50%;top:0;bottom:25px;width:5px;transform:translateX(-50%);background:linear-gradient(#58cc02,#1cb0f6 48%,#ffc800);border-radius:99px;z-index:0}
+.chapter,.unit{position:relative;z-index:1}
+@media(max-width:700px){.path:before{left:18px;transform:none}.path{padding-left:36px}.chapter .node{left:-27px!important;right:auto!important}.unit{margin-left:-28px}}
+.chapter .concepts{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:none!important}.chapter .concepts::-webkit-scrollbar{display:none}
 </style>
-<script src="iit-maths-path-curriculum.js?v=20261005">function applyProgressStages(){document.querySelectorAll('.chapter').forEach((el,i)=>{if(el.dataset.progress)return;const n=i%3;const stage=n===0?'START':n===1?'LEARN':'MASTER';el.dataset.progress=n===0?'first':n===1?'learn':'master';const a=el.querySelector('a');if(a&&!a.querySelector('.stage')){const s=document.createElement('div');s.className='stage';s.textContent=n===0?'● START HERE':n===1?'→ KEEP LEARNING':'★ MASTER';a.prepend(s)}})};</script>
+<script src="iit-maths-path-curriculum.js?v=20261005"></script>
 </head>
 <body>
 <header class="top"><div class="nav"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open SkillUp menu" aria-expanded="false">☰</button><div class="menu" id="menu"><div class="menu-title">SKILLUP</div><a href="physics-home-fast.html">🚀 Physics</a><a href="chemistry-home.html">🧪 Chemistry</a><a href="botany-home.html">🌿 Botany</a><a href="zoology-home.html">🦁 Zoology</a><a href="maths-home.html">📐 Mathematics</a><a href="profile.html">👤 Profile</a><a href="progress.html">📊 My Progress</a><a href="tests.html">📝 My Tests</a><a href="revision.html">🔄 Revision</a><a href="achievements.html">🏆 Achievements</a><div class="menu-title">MORE</div><a href="help.html">❓ Help &amp; Feedback</a><a href="about.html">ℹ️ About SkillUp</a></div></div><span class="mark">📐</span><span class="brand">SkillUp</span><span class="nav-status">MATHEMATICS</span></div></header>
@@ -199,12 +205,11 @@ return h+'</div>';
 function card(x){return '<article class="chapter"><span class="node"></span><a href="/iit-maths-path.html?chapter='+encodeURIComponent(x.c)+'&v=20261005"><div><div class="title"><span class="icon">'+icons[(x.u-1)%icons.length]+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+' • '+x.concepts.length+' concepts + basics</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a>'+concepts(x)+'</article>';}
 function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){var x=list[i];if(x.u!==last){h+=unit(x);last=x.u;}h+=card(x);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(term||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){var x=a[i];if(x.u!==last){h+=unit(x);last=x.u;}h+=card(x);}p.insertAdjacentHTML('beforeend',h);shown=end;}
-render(a,I);
+render(a,a.length);
 var sentinel=document.createElement('div');sentinel.style.height='1px';p.after(sentinel);
-if('IntersectionObserver' in window){new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'}).observe(sentinel);}
-else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
+
 document.getElementById('searchBtn').onclick=function(){term=q.value.trim().toLowerCase();var list=term?a.filter(function(x){return (x.c+' '+x.n+' '+x.concepts.join(' ')).toLowerCase().indexOf(term)>-1;}):a;render(list,term?list.length:I);};
 q.addEventListener('keydown',function(ev){if(ev.key==='Enter')document.getElementById('searchBtn').click();});
 })();
 </script>
-<script>applyProgressStages();new MutationObserver(applyProgressStages).observe(document.querySelector(".path")||document.body,{childList:true,subtree:true});</script></body></html>
+</body></html>

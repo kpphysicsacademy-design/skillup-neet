@@ -1554,4 +1554,16 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["For washers around the x-axis, the outer radius is:",["The farther curve from the axis","Always x","Always 1","The inner radius"],0,"The outer radius determines the larger disk."],
 ["Choosing disks, washers, or shells depends mainly on:",["The axis of rotation and convenient description of the region","The constant C","The derivative only","The answer choices"],0,"The method should simplify the radius and height expressions."]
 ]
+,"Cubic identities":[
+["Which identity is correct for a³+b³?",["(a+b)³−3ab(a+b)","(a+b)(a²−ab+b²)","Both A and B","a³−b³"],2,"Both forms are equivalent: a³+b³=(a+b)(a²−ab+b²)=(a+b)³−3ab(a+b)."],
+["Which identity is correct for a³−b³?",["(a−b)(a²+ab+b²)","(a+b)(a²−ab+b²)","(a−b)³","a³+b³"],0,"The difference of cubes factors as (a−b)(a²+ab+b²)."],
+["The identity (a+b)³ equals:",["a³+b³+3ab(a+b)","a³+b³−3ab(a+b)","a³+b³+ab","a³+b³"],0,"Expanding gives a³+3a²b+3ab²+b³=a³+b³+3ab(a+b)."],
+["The identity (a−b)³ equals:",["a³−b³−3ab(a−b)","a³−b³+3ab(a−b)","a³+b³−3ab","a³−b³"],0,"Expanding gives a³−3a²b+3ab²−b³=a³−b³−3ab(a−b)."],
+["If a+b=5 and ab=6, then a³+b³ is:",["125","35","53","65"],1,"a³+b³=(a+b)³−3ab(a+b)=125−90=35."],
+["If a−b=2 and ab=3, then a³−b³ is:",["8","26","−10","14"],1,"a³−b³=(a−b)³+3ab(a−b)=8+18=26."],
+["The factorisation of x³+8 is:",["(x+2)(x²−2x+4)","(x−2)(x²+2x+4)","(x+8)(x²+1)","(x+2)³"],0,"Since 8=2³, x³+2³=(x+2)(x²−2x+4)."],
+["The factorisation of x³−27 is:",["(x−3)(x²+3x+9)","(x+3)(x²−3x+9)","(x−27)(x²+1)","(x−3)³"],0,"Since 27=3³, x³−3³=(x−3)(x²+3x+9)."],
+["If x+y=7 and xy=10, then x³+y³ is:",["103","133","203","343"],1,"x³+y³=(x+y)³−3xy(x+y)=343−210=133."],
+["The expression a²+ab+b² is the factor paired with:",["a³−b³","a³+b³","(a+b)³","a²−b²"],0,"a³−b³=(a−b)(a²+ab+b²)."]
+]
 };

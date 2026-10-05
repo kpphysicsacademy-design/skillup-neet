@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"One-one function":[
+["A function f:A→B is one-one if:",["f(a₁)=f(a₂) implies a₁=a₂","f(a₁)=f(a₂) for all a₁,a₂","Every element of B has two preimages","A and B must have equal sizes"],0,"A one-one function maps distinct elements of A to distinct elements of B."],
+["For a one-one function f, if a₁≠a₂, then:",["f(a₁)≠f(a₂)","f(a₁)=f(a₂)","f(a₁)=a₁","f(a₂)=a₂"],0,"This is the contrapositive form of injectivity."],
+["Which function from ℝ to ℝ is one-one?",["f(x)=2x+1","f(x)=x²","f(x)=|x|","f(x)=sin x"],0,"A nonconstant linear function with nonzero slope is one-one on ℝ."],
+["The function f(x)=x² from ℝ to ℝ is:",["Not one-one","One-one","Both one-one and many-one","Undefined"],0,"For example, f(1)=f(−1), although 1≠−1."],
+["A horizontal line intersects the graph of a one-one function at:",["At most one point","Exactly two points","At least two points","Infinitely many points"],0,"This is the horizontal-line test for injectivity."],
+["If f:A→B is one-one and A is finite, then:",["|A|≤|B|","|A|>|B| always","|A|=0 always","|A|=|B| necessarily"],0,"Distinct elements of A require distinct images in B."],
+["If f:A→B and g:B→C are both one-one, then g∘f is:",["One-one","Many-one","Constant","Not a function"],0,"If g(f(a₁))=g(f(a₂)), injectivity of g gives f(a₁)=f(a₂), then injectivity of f gives a₁=a₂."],
+["If f is one-one, then its inverse relation f⁻¹ is:",["A function on the range of f","Never a function","Always a constant function","A function on all possible codomains"],0,"Injectivity ensures each element in the range has at most one preimage."],
+["Which condition is sufficient for f:A→B to be one-one?",["f(a₁)=f(a₂) only when a₁=a₂","Every b∈B has a preimage","f(a)=0 for every a","A and B are empty"],0,"This is exactly the defining condition for a one-one function."],
+["If f(x)=3x−5 on ℝ, then f is:",["One-one","Not one-one","Many-one only","Constant"],0,"Since its slope is nonzero, f(x)=3x−5 is strictly increasing and therefore injective."]
+],
+
 "Equivalence relation properties":[
 ["Which three properties characterize an equivalence relation?",["Reflexive, symmetric and transitive","Reflexive, antisymmetric and transitive","Symmetric, antisymmetric and transitive","Reflexive, symmetric and antisymmetric"],0,"An equivalence relation must be reflexive, symmetric and transitive."],
 ["If R is reflexive on A, then for every a∈A:",["aRa","aRb for every b","aRa is false","aRb only when a≠b"],0,"Reflexivity means every element is related to itself."],

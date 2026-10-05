@@ -531,5 +531,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x−1 is a factor of x²−5x+4, the other factor is:",["x−4","x+4","x−1","x+1"],0,"x²−5x+4=(x−1)(x−4)."],
 ["A root of a polynomial corresponds to:",["A factor of the form x−a","A constant only","The leading coefficient only","The degree only"],0,"If a is a root, x−a is a factor."],
 ["If f(2)=0 and f(x) is quadratic, one possible factorisation is:",["(x−2)(x−3)","(x+2)(x+3)","x(x+2)","(x−2)+3"],0,"Any quadratic with root 2 has x−2 as a factor; the listed factorisation is an example."]
-]
-]};
+};

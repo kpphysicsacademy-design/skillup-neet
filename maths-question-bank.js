@@ -2441,8 +2441,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["In f:A→B, every actual output belongs to:",["B","A","The empty set","A×B"],0,"B is the codomain and contains all outputs."],
 ["Can the codomain contain elements never reached by the function?",["Yes","No","Only for constant functions","Only when A is empty"],0,"Yes. Such elements are in the codomain but not the range."],
 ["For f:ℝ→ℝ, f(x)=x², which is correct?",["Codomain ℝ; range [0,∞)","Codomain [0,∞); range ℝ","Both are ℝ","Both are [0,∞)"],0,"The declared codomain is ℝ, while actual outputs are non-negative."]
-]
-
+],
 "Reflexive relation":[
 ["A relation R on A is reflexive if:",["(a,a)∈R for every a∈A","(a,b)∈R implies (b,a)∈R","(a,b),(b,c)∈R implies (a,c)∈R","No pair belongs to R"],0,"Reflexivity requires every element to be related to itself."],
 ["If A={1,2,3}, which relation is reflexive?",["{(1,1),(2,2),(3,3)}","{(1,2),(2,3)}","{(1,2),(2,1)}","∅"],0,"All three diagonal pairs are present."],

@@ -882,4 +882,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which function is one-to-one on R?",["x²","|x|","x³","sin x"],2,"x³ is strictly increasing on R and therefore one-to-one."],
 ["If f and f^−1 are inverses, their compositions give the:",["Zero function","Identity function","Constant function","Sign function"],1,"Both f^−1∘f and f∘f^−1 are identity maps on their appropriate domains."]
 ]
+,"Logarithmic functions":[
+["The logarithm log_a x is defined for:",["x>0 and a>0, a≠1","x<0 and a>0","a=1 only","all real x for every a"],0,"For real logarithms, the argument must be positive and the base must be positive and different from 1."],
+["What is log_2 8?",["2","3","4","8"],1,"Since 2^3=8, log_2 8=3."],
+["What is log_10 1000?",["2","3","10","100"],1,"10^3=1000, so the logarithm is 3."],
+["What is log_a 1 for a>0, a≠1?",["0","1","a","−1"],0,"a^0=1, hence log_a 1=0."],
+["What is log_a a?",["0","1","a","−1"],1,"a^1=a, so log_a a=1."],
+["Which law is correct?",["log_a(xy)=log_a x+log_a y","log_a(xy)=log_a x−log_a y","log_a(xy)=log_a x log_a y","log_a(xy)=log_a(x+y)"],0,"The logarithm of a product is the sum of the logarithms."],
+["Which law is correct for x,y>0?",["log_a(x/y)=log_a x+log_a y","log_a(x/y)=log_a x−log_a y","log_a(x/y)=log_a x log_a y","log_a(x/y)=log_a(x−y)"],1,"The logarithm of a quotient is the difference of the logarithms."],
+["log_a(x^n), for x>0, equals:",["n log_a x","log_a x/n","log_a(x+n)","(log_a x)^n"],0,"The power rule gives log_a(x^n)=n log_a x."],
+["What is log_3 27+log_3 9?",["3","4","5","6"],2,"log_3 27=3 and log_3 9=2, giving 5."],
+["The graph of y=log_a x, a>1, is:",["Decreasing","Increasing","Constant","Periodic"],1,"For a>1, the logarithmic function is strictly increasing."]
+],
+"Exponential functions":[
+["An exponential function has the variable primarily in the:",["Exponent","Denominator only","Coefficient only","Constant term"],0,"In y=a^x, x appears in the exponent."],
+["For a>1, y=a^x is:",["Decreasing","Increasing","Constant","Periodic"],1,"Larger x gives larger powers when a>1."],
+["For 0<a<1, y=a^x is:",["Increasing","Decreasing","Constant","Undefined"],1,"Bases between 0 and 1 produce decreasing exponential functions."],
+["What is 2^4?",["8","12","16","32"],2,"2^4=16."],
+["The y-intercept of y=3^x is:",["0","1","3","−1"],1,"At x=0, y=3^0=1."],
+["The range of y=2^x over R is:",["R","[0,∞)","(0,∞)","[1,∞)"],2,"An exponential function with positive base never reaches zero and is always positive."],
+["The horizontal asymptote of y=2^x is:",["x=0","y=0","y=1","x=1"],1,"As x approaches negative infinity, 2^x approaches 0."],
+["Which equation is exponential?",["y=x^2","y=2x+1","y=3^x","y=log_3 x"],2,"The variable x is in the exponent in y=3^x."],
+["If 5^x=25, x is:",["1","2","3","5"],1,"25=5^2, so x=2."],
+["The functions y=2^x and y=log_2 x are:",["Equal","Inverse functions","Both constant","Both periodic"],1,"Exponential and logarithmic functions with the same valid base are inverses."]
+],
+"Composite functions":[
+["The composition (f∘g)(x) means:",["f(g(x))","g(f(x))","f(x)+g(x)","f(x)g(x)"],0,"Composition applies g first and then f."],
+["If f(x)=x+2 and g(x)=3x, then (f∘g)(x) is:",["3x+2","3x+6","x+6","3x−2"],0,"f(g(x))=3x+2."],
+["If f(x)=2x and g(x)=x+1, then (g∘f)(x) is:",["2x+1","2x+2","x+3","3x+1"],0,"g(f(x))=2x+1."],
+["In general, f∘g is:",["Always equal to g∘f","Not necessarily equal to g∘f","Always the identity","Always constant"],1,"Function composition is generally not commutative."],
+["If f(x)=x² and g(x)=x+1, then (f∘g)(2) is:",["4","6","9","12"],2,"g(2)=3 and f(3)=9."],
+["If f(x)=2x+1 and g(x)=x−3, then (g∘f)(x) is:",["2x−2","2x−3","2x+4","x−2"],0,"g(f(x))=(2x+1)−3=2x−2."],
+["The domain of f∘g requires x to be in:",["The domain of f only","The domain of g and g(x) in the domain of f","The range of f only","All real numbers always"],1,"Both stages of the composition must be defined."],
+["If f and g are identity functions, then f∘g is:",["Identity","Zero","Undefined","Constant 1"],0,"Applying identity after identity leaves x unchanged."],
+["If f(x)=x+1 and g(x)=x−1, then (f∘g)(x) is:",["x−2","x","x+2","1"],1,"f(g(x))=(x−1)+1=x."],
+["Which statement is correct?",["Composition reverses function order automatically","Composition applies the rightmost function first","Composition is multiplication","Composition requires both functions to be constant"],1,"In f∘g, g acts first and f acts second."]
+],
+"One-to-one functions":[
+["A function is one-to-one if:",["Different inputs always have different outputs","Every output has many inputs","It is constant","Its domain has one element"],0,"One-to-one means no two distinct inputs share the same output."],
+["Which test is commonly used graphically for one-to-one functions?",["Vertical line test","Horizontal line test","Derivative test only","Circle test"],1,"The horizontal line test checks whether a function is one-to-one."],
+["Which function is one-to-one on R?",["x²","|x|","x³","sin x"],2,"x³ is strictly increasing on R."],
+["Which function is not one-to-one on R?",["x","2x+1","x³","x²"],3,"x² gives the same output for x and −x."],
+["If f(a)=f(b) for a one-to-one function, then:",["a=b","a=−b always","f(a)=0","a+b=0 always"],0,"Injectivity means equal outputs imply equal inputs."],
+["A strictly increasing function is:",["One-to-one","Constant","Periodic","Never invertible"],0,"Strict monotonicity guarantees injectivity."],
+["A strictly decreasing function is:",["One-to-one","Constant","Even always","Periodic always"],0,"Strict decrease also prevents repeated output values."],
+["A one-to-one function can have an inverse function on its:",["Range","Empty set only","Coefficient set","Derivative"],0,"The inverse maps each value in the range back to its unique input."],
+["If f(2)=7 and f is one-to-one, which is true?",["f(7)=2","f^−1(7)=2","f^−1(2)=7","f(2)=2"],1,"The inverse reverses f(2)=7 to f^−1(7)=2."],
+["Which graph property indicates one-to-one behavior?",["Every horizontal line meets the graph at most once","Every vertical line meets it twice","It must be symmetric","It must be periodic"],0,"At most one horizontal intersection means each output has at most one input."]
+],
+"Onto functions":[
+["A function f:A→B is onto if:",["Every element of B has a preimage in A","Every element of A has two images","A and B are equal sets","f is constant"],0,"Onto means the range equals the codomain."],
+["An onto function is also called:",["Injective","Surjective","Bijective","Constant"],1,"Surjective is another name for onto."],
+["If the range of f equals its codomain, f is:",["Onto","One-to-one necessarily","Constant","Undefined"],0,"That is exactly the definition of surjectivity."],
+["Which function R→R is onto?",["x²","e^x","x³","x²+1"],2,"x³ takes every real value."],
+["Which function R→R is not onto?",["x","x³","x²","2x+1"],2,"x² has range [0,∞), so negative reals are not attained."],
+["For f:R→R, f(x)=x+5 is:",["Onto","Not onto","Constant","Periodic"],0,"For any y∈R, x=y−5 gives f(x)=y."],
+["A constant function R→R is generally:",["Onto","Not onto","Bijective","One-to-one"],1,"Its range contains only one value, so it cannot cover all R."],
+["If codomain is larger than the range, the function is:",["Onto","Not onto","Always one-to-one","Always bijective"],1,"Onto requires every codomain value to occur."],
+["An onto function need not be:",["Surjective","One-to-one","A function","Defined on its domain"],1,"A function can be onto while multiple inputs map to the same output."],
+["If f:A→B is onto, then every b∈B has:",["At least one a∈A with f(a)=b","Exactly no preimages","Exactly one preimage always","A negative preimage"],0,"Surjectivity requires at least one preimage for each codomain element."]
+],
+"Bijective functions":[
+["A function is bijective if it is both:",["Even and odd","One-to-one and onto","Increasing and decreasing","Constant and periodic"],1,"Bijective means injective and surjective."],
+["A bijection has an inverse that is:",["A function from the codomain to the domain","Always constant","Undefined","Only a relation"],0,"Because each codomain value has exactly one preimage."],
+["Which function R→R is bijective?",["x²","|x|","2x+3","sin x"],2,"A nonzero-slope linear function is both one-to-one and onto R."],
+["Which condition is sufficient for a function between finite sets of equal size to be bijective?",["Onto","Constant","Undefined","Periodic"],0,"For finite sets of equal cardinality, onto implies one-to-one and hence bijective."],
+["If f is bijective, then f^−1∘f equals:",["0","I","f","f²"],1,"The inverse followed by the function gives the identity on the domain."],
+["If f is bijective, then f∘f^−1 equals:",["0","I","f","1"],1,"The function after its inverse gives the identity on the codomain."],
+["A bijection maps each input to:",["A unique output and covers the entire codomain","No output","Exactly two outputs","Only zero"],0,"It is both injective and surjective."],
+["If |A|=|B| for finite sets and f:A→B is one-to-one, then f is:",["Onto and bijective","Constant","Not a function","Undefined"],0,"For equal finite cardinalities, injectivity forces surjectivity."],
+["Which statement is true?",["Every bijection is invertible","Every constant function is bijective","Every onto function is one-to-one","Every one-to-one function is onto its codomain"],0,"A bijection has a well-defined inverse function."],
+["The inverse of a bijection f:A→B has type:",["A→B","B→A","A→A only","R→R only"],1,"The inverse reverses domain and codomain."]
+]
 };

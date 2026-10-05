@@ -27,7 +27,7 @@
 (function(){
 'use strict';
 var d=window.SKILLUP_MATHS_BASICS_20||[],a=[],p=document.getElementById('path'),q=document.getElementById('q'),empty=document.getElementById('empty');
-for(var i=0;i<d.length;i++){var u=d[i];for(var j=0;j<u[2].length;j++){var c=u[2][j];a.push({u:i+1,n:u[1],ic:u[0],c:c.title,subs:c.subs||[],ix:a.length+1});}}
+for(var i=0;i<d.length;i++){var u=d[i];for(var j=0;j<u[2].length;j++){var raw=u[2][j],c=typeof raw==="string"?raw:raw.title,subs=typeof raw==="string"?[]:(raw.subs||[]);if(!c)continue;a.push({u:i+1,n:u[1],ic:u[0],c:c,subs:subs,ix:a.length+1});}}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function card(x){return '<article class="chapter"><span class="node"></span><a href="maths-basics-quiz.html?concept='+encodeURIComponent(x.c)+'"><div><div class="title"><span class="icon">🔢</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+'</div><div class="sublist">'+x.subs.map(function(s){return '<span class="subitem">'+esc(s)+'</span>';}).join('')+'</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
 function render(list){p.innerHTML='<div class="unit"><span class="unum">1</span><div><h2>Mathematics Basics</h2><small>20 chapters • FOUNDATION UNIT • '+a.reduce(function(n,x){return n+x.subs.length;},0)+' sub-concepts</small></div></div>'+list.map(card).join('');empty.style.display=list.length?'none':'block';document.getElementById('count').textContent=list.length+' / 20';document.getElementById('bar').style.width=Math.round(list.length/20*100)+'%';}

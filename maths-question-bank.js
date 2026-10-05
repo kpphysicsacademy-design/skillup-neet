@@ -604,4 +604,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The domain of (f/g)(x) must exclude values where:",["f(x)=0","g(x)=0","f(x)=g(x)","x=0 always"],1,"Division by g(x) requires g(x)≠0."],
 ["If f(x)=x+1 and g(x)=x−1, then (f+g)(x) is:",["2x","2","x²−1","x"],0,"(x+1)+(x−1)=2x."],
 ["Which operation combines two functions by adding their outputs?",["f+g","fg","f∘g","f−g"],0,"(f+g)(x)=f(x)+g(x)."]
-};
+]};

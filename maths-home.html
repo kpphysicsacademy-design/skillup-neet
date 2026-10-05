@@ -17,7 +17,7 @@
 .area a:hover{transform:translateY(-2px);border-color:#8ebced}.title{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:950;color:#263238}
 .icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#fff,#e5f1ff);border:2px solid #cfe2f6;box-shadow:0 4px 0 #b5cfe9,0 7px 14px rgba(22,119,255,.12);font-size:21px}
 .sub{margin:3px 0 0 49px;font-size:8px;color:var(--m)}.tag{display:inline-block;margin-top:5px;margin-right:4px;padding:3px 6px;border-radius:99px;background:#eef4fb;color:#526b86;font-size:7px;font-weight:900}
-.go{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;background:var(--b);color:#fff;font-weight:950;box-shadow:0 4px 0 #0d5bbf}.basics{margin:0 0 10px 43px;background:#fff;border:1px solid var(--l);border-radius:13px;padding:9px 11px}.basics summary{cursor:pointer;color:var(--n);font-size:10px;font-weight:950}.concepts{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.concept{padding:5px 7px;border-radius:8px;background:#f1f6fc;color:#526b86;font-size:8px;font-weight:750}
+.go{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;background:var(--b);color:#fff;font-weight:950;box-shadow:0 4px 0 #0d5bbf}.basics{margin:0 0 10px 43px;background:#fff;border:1px solid var(--l);border-radius:13px;padding:9px 11px}.basics summary{cursor:pointer;color:var(--n);font-size:10px;font-weight:950}.concepts{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.concept{padding:5px 7px;border-radius:8px;background:#f1f6fc;color:#526b86;font-size:8px;font-weight:750}.subchapter{position:relative;margin:7px 0 7px 43px}.subchapter:before{content:"";position:absolute;left:-27px;top:22px;width:14px;height:14px;border-radius:50%;background:#fff;border:4px solid #b8d3ef}.subchapter a{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#fff;border:2px solid var(--l);border-radius:15px;padding:9px 10px;text-decoration:none;color:inherit;box-shadow:0 5px 13px rgba(18,59,112,.06)}.subchapter-title{font-size:11px;font-weight:900}.subchapter-meta{margin-top:3px;font-size:7px;color:var(--m)}
 .cta{display:block;margin:18px 0 0;background:var(--b);color:#fff;text-align:center;text-decoration:none;padding:13px;border-radius:14px;font-size:11px;font-weight:950;box-shadow:0 4px 0 #0d5bbf}
 @media(max-width:700px){.wrap{padding:12px 9px 60px}.area{margin-left:28px}.node{left:-18px}.area a{padding:9px}.title{font-size:11px}.icon{width:37px;height:37px;flex-basis:37px;font-size:19px}.go{width:30px;height:30px}}
 </style>
@@ -67,9 +67,12 @@ var basics=[
 ];
 var p=document.getElementById("path");
 p.innerHTML=areas.map(function(x,i){
-  return '<div class="unit"><span class="unum">'+(i+1)+'</span><div><h2>'+x[0]+' '+x[1]+'</h2><small>'+basics[i].length+' progressive chapters • UNIT '+(i+1)+' of '+areas.length+'</small></div></div>'+
-  '<article class="area"><span class="node"></span><a href="/iit-maths-path.html?area='+encodeURIComponent(x[1])+'&v=20261005"><div><div class="title"><span class="icon">'+x[0]+'</span><span>'+x[1]+'</span></div><div class="sub">Chapter path • Core Mathematics</div><span class="tag">🎯 UNIT '+(i+1)+'</span><span class="tag">📘 CONCEPT</span><span class="tag">🧠 PRACTICE</span></div><span class="go">›</span></a>'+
-  '<details class="basics"><summary>📚 '+basics[i].length+' Chapters • Open Basics Path</summary><div class="concepts">'+basics[i].map(function(z,j){return '<span class="concept">Chapter '+(j+1)+' • '+z+'</span>';}).join('')+'</div></details></article>';
+  var h='<div class="unit"><span class="unum">'+(i+1)+'</span><div><h2>'+x[0]+' '+x[1]+'</h2><small>'+basics[i].length+' progressive chapters • UNIT '+(i+1)+' of '+areas.length+'</small></div></div>';
+  h+='<article class="area"><span class="node"></span><a href="/iit-maths-path.html?area='+encodeURIComponent(x[1])+'&v=20261005"><div><div class="title"><span class="icon">'+x[0]+'</span><span>'+x[1]+'</span></div><div class="sub">Unit overview • Core Mathematics</div><span class="tag">🎯 UNIT '+(i+1)+'</span><span class="tag">📘 CONCEPT</span><span class="tag">🧠 PRACTICE</span></div><span class="go">›</span></a></article>';
+  h+=basics[i].map(function(z,j){
+    return '<article class="subchapter"><a href="/iit-maths-path.html?concept='+encodeURIComponent(z)+'&v=20261005"><div><div class="subchapter-title">'+z+'</div><div class="subchapter-meta">Chapter '+(j+1)+' • Sub Concept • Unit '+(i+1)+'</div></div><span class="go">›</span></a></article>';
+  }).join('');
+  return h;
 }).join("");
 })();</script>
 </body>

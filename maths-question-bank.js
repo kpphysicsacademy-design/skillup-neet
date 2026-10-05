@@ -60,6 +60,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If 2^x=32, what is x?",["4","5","6","8"],1,"Since 32=2^5, x=5."],
 ["Which law is correct for nonzero a?",["a^m/a^n=a^(m+n)","a^m/a^n=a^(m−n)","a^m/a^n=a^(mn)","a^m/a^n=a^(n−m) always"],1,"Dividing powers with the same nonzero base means subtracting the exponent of the denominator."]
 ],
+"Negative exponents":[
+["What is 2^−3?",["−8","−1/8","1/8","8"],2,"A negative exponent means reciprocal: 2^−3=1/2^3=1/8."],
+["Which expression is equal to 5^−2?",["−25","−1/25","1/25","25"],2,"5^−2=1/5^2=1/25."],
+["Simplify x^−4 for x≠0.",["−x^4","1/x^4","x^4","4/x"],1,"A negative exponent places the base in the denominator: x^−4=1/x^4."],
+["Which is equal to 1/3^5?",["3^5","3^−5","−3^5","−3^−5"],1,"By the negative exponent rule, 1/3^5=3^−5."],
+["Simplify 2^−2×2^3.",["2","2^5","2^−6","1/2"],0,"Add exponents: 2^(−2+3)=2^1=2."],
+["Simplify 7^−4÷7^−2.",["7^−6","7^−2","7^2","7^6"],1,"Subtract exponents: 7^(−4−(−2))=7^−2."],
+["What is 10^−3 in decimal form?",["0.001","0.01","0.1","1000"],0,"10^−3=1/1000=0.001."],
+["Which statement is correct for a≠0?",["a^−n=−a^n","a^−n=1/a^n","a^−n=a/n","a^−n=n/a"],1,"The negative exponent represents the reciprocal of the corresponding positive power."],
+["If x^−1=1/7, then x is:",["−7","1/7","7","0"],2,"x^−1=1/x, so 1/x=1/7 and x=7."],
+["Simplify (2^−2)^3.",["2^−5","2^−6","2^6","2^5"],1,"For a power raised to a power, multiply exponents: 2^(−2×3)=2^−6."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

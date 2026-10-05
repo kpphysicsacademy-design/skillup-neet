@@ -2764,4 +2764,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program defines $f(x)=x+2$ and $g(x)=3x$. Which expression should it compute to evaluate $(g\\circ f)(x)$?",["$3(x+2)$","$x+2+3x$","$3x+2$","$(3x)^2$"],0,"The program must apply $f$ first and pass its output to $g$, giving $g(f(x))=3(x+2)$."],
 ["If $f(x)=x^2$ and $g(x)=\\sqrt{x}$ with suitable real domains, then $(g\\circ f)(x)$ equals:",["$|x|$","$x^2$","$x$ for every real $x$","$\\sqrt{x^2}=x$ for every real $x$"],0,"Since $g(f(x))=\\sqrt{x^2}=|x|$, the result is nonnegative even when $x<0$."]
 ],
+
+"Inverse functions":[
+["A function $f:A\\to B$ has an inverse function when $f$ is:",["Bijective","Constant","Many-one only","Into only"],0,"An inverse function from $B$ to $A$ requires every element of $B$ to have exactly one preimage, which is precisely bijectivity."],
+["If $f(x)=2x+3$, then $f^{-1}(x)$ is:",["$\\dfrac{x-3}{2}$","$\\dfrac{x+3}{2}$","$2x-3$","$3-2x$"],0,"Set $y=2x+3$ and solve for $x$: $x=(y-3)/2$. Hence $f^{-1}(x)=(x-3)/2$."],
+["For an invertible function $f$, the composition $f^{-1}\\circ f$ equals:",["$I_A$","$I_B$","$f$","$0$"],0,"On the domain $A$, applying $f$ and then $f^{-1}$ returns the original input, so $f^{-1}\\circ f=I_A$."],
+["For an invertible function $f:A\\to B$, the composition $f\\circ f^{-1}$ equals:",["$I_B$","$I_A$","$f$","$0$"],0,"On the codomain $B$, applying $f^{-1}$ and then $f$ returns the original element, giving $I_B$."],
+["Which function has an inverse on $\\mathbb R$?",["$f(x)=2x-1$","$f(x)=x^2$","$f(x)=|x|$","$f(x)=\\sin x$"],0,"The nonconstant linear function $2x-1$ is one-one and onto $\\mathbb R$, so it is bijective."],
+["The graph of a function has an inverse function precisely when it passes the:",["Horizontal line test","Vertical line test only","Midpoint test","Slope test"],0,"A horizontal line must meet the graph at most once for the function to be one-one and hence invertible onto its range."],
+["If $f$ is increasing and one-one, then its inverse on its range is:",["Also increasing","Always decreasing","Constant","Undefined"],0,"If $x_1<x_2$, increasing $f$ gives $f(x_1)<f(x_2)$; reversing this relation preserves order, so $f^{-1}$ is increasing."],
+["If $f(x)=x^3$, then $f^{-1}(x)$ is:",["$\\sqrt[3]{x}$","$x^3$","$\\sqrt{x}$","$1/x^3$"],0,"From $y=x^3$, solving for $x$ gives $x=\\sqrt[3]{y}$."],
+["A mathematical program has a bijection $f$ and a candidate inverse $g$. Which test verifies the inverse on the required domain and codomain?",["Check $g(f(x))=x$ and $f(g(y))=y$ for all allowed $x,y$","Check only $g(x)=f(x)$","Check only $g(0)=0$","Check whether $f$ is constant"],0,"Both compositions must return the identity on their respective sets: $g\\circ f=I_A$ and $f\\circ g=I_B$."],
+["If $f(x)=\\dfrac{x-1}{x+2}$, with $x\\ne-2$, then solving $y=f(x)$ for $x$ gives:",["$x=\\dfrac{1+2y}{1-y}$","$x=\\dfrac{1-2y}{1+y}$","$x=\\dfrac{y-1}{y+2}$","$x=\\dfrac{1+y}{2-y}$"],0,"From $y=(x-1)/(x+2)$, we get $yx+2y=x-1$, so $(y-1)x=-(1+2y)$ and $x=(1+2y)/(1-y)$."]
+],
 };

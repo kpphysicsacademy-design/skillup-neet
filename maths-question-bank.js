@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Onto function":[
+["A function $f:A\\to B$ is onto if:",["$f(A)=B$","$f(A)\\subsetneq B$","$f(A)=\\varnothing$ always","Every element of $A$ has two images"],0,"Onto means every element of the codomain is the image of at least one domain element."],
+["For $f:\\mathbb{R}\\to\\mathbb{R}$ defined by $f(x)=2x-3$, the function is:",["Onto and one-one","Onto but not one-one","Into but not one-one","Neither"],0,"Given any $y\\in\\mathbb{R}$, choosing $x=(y+3)/2$ gives $f(x)=y$; the function is also injective."],
+["Which function $f:\\mathbb{R}\\to\\mathbb{R}$ is onto?",["$f(x)=x^3$","$f(x)=x^2$","$f(x)=e^x$","$f(x)=x^2+1$"],0,"Every real $y$ has the real preimage $x=\\sqrt[3]{y}$ under $x^3$."],
+["For $f:\\mathbb{R}\\to[0,\\infty)$, $f(x)=x^2$ is:",["Onto but not one-one","One-one but not onto","Both one-one and onto","Neither"],0,"Every $y\\ge0$ has preimages $\\pm\\sqrt y$, so it is onto but not one-one."],
+["A finite function $f:A\\to B$ is onto exactly when:",["Every $b\\in B$ occurs among the values $f(a)$","Some $b\\in B$ is missing","$f(a)=a$ for all $a$","$|A|<|B|$ necessarily"],0,"The image must equal the whole codomain: $f(A)=B$."],
+["Which pseudocode correctly tests whether a finite function $f:A\\to B$ is onto?",["For every $b\\in B$, check that some $a\\in A$ satisfies $f(a)=b","Check only the first element of $B$","Check whether $f(a)=a$ for every $a$","Check whether one value is repeated"],0,"The defining condition is $\\forall b\\in B,\\;\\exists a\\in A$ such that $f(a)=b$."],
+["If $f:A\\to B$ is onto and $B$ is finite, then:",["$|f(A)|=|B|$","$|f(A)|<|B|$","$|A|=0$ always","$|B|=0$ always"],0,"Onto means $f(A)=B$, so their cardinalities are equal."],
+["If $f:A\\to B$ is both one-one and onto, then $f$ is called:",["Bijective","Into only","Many-one","Constant"],0,"A function that is both injective and surjective is bijective."],
+["For $f:\\mathbb{Z}\\to\\mathbb{Z}$, $f(n)=n+1$ is:",["Onto and one-one","Onto but many-one","Into but not onto","Neither"],0,"For any $m\\in\\mathbb Z$, $n=m-1$ gives $f(n)=m$; distinct integers have distinct images."],
+["If an algorithm computes the image set $I=\{f(a):a\\in A\}$, then $f:A\\to B$ is onto exactly when:",["$I=B$","$I\\subsetneq B$","$I=\\varnothing$","$I=A$ always"],0,"The image equals the codomain precisely when the function is surjective."]
+],
+
 "Into function":[
 ["A function $f:A\\to B$ is called into when:",["$f(A)\\subsetneq B$","$f(A)=B$","$f(A)=\\varnothing$ always","Every element of $B$ has exactly two preimages"],0,"An into function does not cover the entire codomain: $f(A)$ is a proper subset of $B$."],
 ["For $f:\\mathbb{R}\\to\\mathbb{R}$ defined by $f(x)=x^2$, the function is:",["Into and many-one","Onto and one-one","Into and one-one","Onto and many-one only"],0,"No negative real number is an image, so it is into; also $f(1)=f(-1)$, so it is many-one."],

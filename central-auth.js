@@ -67,5 +67,14 @@
     return row;
   }
 
-  window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress};
+  async function getProgress(subject){
+    if(!db||!auth.currentUser) return [];
+    const snap=await db.collection('skillup_progress')
+      .where('user_id','==',auth.currentUser.uid)
+      .where('subject','==',subject)
+      .get();
+    return snap.docs.map(d=>d.data());
+  }
+
+  window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress,getProgress};
 })();

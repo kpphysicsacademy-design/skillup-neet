@@ -1314,4 +1314,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A local maximum is not necessarily an absolute maximum because:",["A larger value may occur elsewhere","It cannot be differentiable","It must be negative","It is always at an endpoint"],0,"Global comparison is required for an absolute extremum."],
 ["A well-posed optimization problem should identify:",["Objective function, constraints, and domain","Only a derivative","Only a graph","Only an endpoint"],0,"These components define what is being optimized and where."]
 ]
+,"Rolle's theorem":[
+["Rolle's theorem applies to a function that is continuous on:",["(a,b)","[a,b]","Neither","Only a point"],1,"Continuity is required on the closed interval [a,b]."],
+["Rolle's theorem requires differentiability on:",["[a,b]","(a,b)","Only a","Only b"],1,"The function must be differentiable throughout the open interval (a,b)."],
+["The endpoint condition in Rolle's theorem is:",["f(a)=f(b)","f(a)>f(b)","f(a)<f(b)","f(a)=0"],0,"Equal endpoint values are required."],
+["Rolle's theorem guarantees at least one c in:",["[a,b]","(a,b)","Outside the interval","At a"],1,"There is at least one c∈(a,b) such that f'(c)=0."],
+["For f(x)=x²−4x+3 on [1,3], Rolle's theorem gives c=",["0","1","2","3"],2,"f(1)=f(3)=0 and f'(x)=2x−4, so c=2."],
+["If f(a)=f(b) and all other hypotheses hold, Rolle's theorem guarantees:",["f'(c)=0 for some c","f(c)=0 for all c","f'(c)=1","f''(c)=0 for all c"],0,"The conclusion is that some interior derivative is zero."],
+["Rolle's theorem is a special case of the:",["Mean Value Theorem","Chain rule","Product rule","Fundamental theorem of algebra"],0,"Rolle's theorem follows from the Mean Value Theorem when endpoint values are equal."],
+["For a constant function on [a,b], Rolle's theorem is:",["Applicable and f'(x)=0","Not applicable","Applicable only if a=b","Applicable only at endpoints"],0,"A constant function satisfies the hypotheses and has derivative zero everywhere."],
+["If a function is continuous on [a,b] but not differentiable on (a,b), Rolle's theorem:",["Still guarantees c","Cannot be applied","Always gives two c values","Requires only continuity"],1,"Differentiability on the open interval is essential."],
+["Geometrically, Rolle's theorem guarantees a point where the tangent is:",["Vertical","Horizontal","Undefined","At 45° always"],1,"f'(c)=0 means the tangent is horizontal."]
+],
+"Mean Value Theorem":[
+["The Mean Value Theorem requires continuity on:",["[a,b]","(a,b)","Only a","Only b"],0,"Continuity is required on the closed interval."],
+["The Mean Value Theorem requires differentiability on:",["[a,b]","(a,b)","Only endpoints","No interval"],1,"Differentiability is required on the open interval."],
+["The conclusion of the Mean Value Theorem is that for some c∈(a,b):",["f'(c)=(f(b)−f(a))/(b−a)","f'(c)=0 always","f(c)=0","f'(c)=1 always"],0,"The instantaneous rate equals the average rate at some interior point."],
+["The quantity (f(b)−f(a))/(b−a) represents the:",["Average rate of change","Second derivative","Function value","Domain"],0,"It is the slope of the secant line."],
+["For f(x)=x² on [1,3], the MVT gives c=",["1","2","3","4"],1,"Average slope is 4, and f'(x)=2x, so c=2."],
+["If f is differentiable and f'(x)>0 throughout an interval, then f is:",["Increasing","Decreasing","Constant","Undefined"],0,"Positive derivative indicates increasing behavior."],
+["Rolle's theorem follows from the MVT when:",["f(a)=f(b)","f'(a)=f'(b)","a=b only","f(a)=0"],0,"The average slope becomes zero when endpoint values are equal."],
+["The MVT connects a secant slope with a:",["Tangent slope","Second derivative","Function value","Limit only"],0,"At some interior point, the tangent slope equals the secant slope."],
+["For f(x)=3x+2 on [1,5], the MVT derivative value is:",["1","2","3","5"],2,"The derivative is constantly 3."],
+["The MVT is useful for relating local derivative information to:",["Overall change over an interval","Only endpoint values","Only roots","Only asymptotes"],0,"It connects derivative behavior with net change across the interval."]
+],
+"Cauchy Mean Value Theorem":[
+["Cauchy's Mean Value Theorem is a generalization of the:",["Mean Value Theorem","Chain rule","Product rule","Taylor theorem"],0,"It generalizes the ordinary MVT to two functions."],
+["For functions f and g, CMVT compares:",["f'(c) and g'(c)","f(c) and f'(c) only","g(a) and g(b) only","Second derivatives only"],0,"The theorem relates f'(c)/g'(c) to corresponding endpoint changes."],
+["A standard CMVT conclusion is:",["(f(b)−f(a))g'(c)=(g(b)−g(a))f'(c)","f'(c)=0 always","g'(c)=0 always","f(c)=g(c)"],0,"This is the cross-multiplied form of the theorem."],
+["CMVT generally requires f and g to be continuous on:",["[a,b]","(a,b)","Only (a,b)","No interval"],0,"Both functions must be continuous on the closed interval."],
+["CMVT generally requires f and g to be differentiable on:",["[a,b]","(a,b)","Only endpoints","No interval"],1,"Both must be differentiable on the open interval."],
+["If g(x)=x, CMVT reduces to the:",["Mean Value Theorem","Rolle's theorem only","Product rule","Quotient rule"],0,"Since g'(x)=1, the CMVT becomes the ordinary MVT."],
+["CMVT is especially useful when studying ratios such as:",["(f(b)−f(a))/(g(b)−g(a))","f(a)+g(a) only","a+b only","f'(a)+g'(b) only"],0,"It connects ratios of finite differences with ratios of derivatives."],
+["For f(x)=x² and g(x)=x on [1,2], CMVT gives c satisfying:",["2c=3?","2c=1","c=0","c=2"],0,"The finite-difference ratio is (4−1)/(2−1)=3, while f'(c)/g'(c)=2c, so 2c=3."],
+["CMVT can be used in proofs involving:",["Limits and inequalities","Only geometry","Only matrices","Only probability"],0,"It is a useful derivative-based tool in analysis."],
+["The point c guaranteed by CMVT lies:",["Inside the interval","At a necessarily","At b necessarily","Outside the interval"],0,"The point satisfies c∈(a,b)."]
+],
+"L'Hopital's rule":[
+["L'Hopital's rule is commonly used for limits of the form:",["0/0 or ∞/∞","1/1 only","0+0","∞−∞ only without rewriting"],0,"The rule directly applies to the indeterminate quotient forms 0/0 and ∞/∞ under its hypotheses."],
+["For a 0/0 quotient, L'Hopital's rule replaces a limit of f/g by a limit involving:",["f'/g'","f+g","fg","f''+g'' always"],0,"Differentiate numerator and denominator separately."],
+["Evaluate lim(x→0) sin x/x using L'Hopital's rule:",["0","1","∞","−1"],1,"The derivative ratio is cos x/1, whose limit is 1."],
+["Evaluate lim(x→∞) ln x/x:",["0","1","∞","−1"],0,"It is ∞/∞; differentiating gives (1/x)/1→0."],
+["Before applying L'Hopital to ∞−∞, one should usually:",["Rewrite it as a quotient","Set the limit to zero","Differentiate the whole expression once","Ignore the form"],0,"The standard rule is for quotient forms 0/0 or ∞/∞."],
+["L'Hopital's rule differentiates:",["Numerator and denominator separately","The quotient as one product","Only the numerator","Only the denominator"],0,"It uses f'(x)/g'(x), not the quotient rule."],
+["Evaluate lim(x→0) (e^x−1)/x:",["0","1","e","∞"],1,"Differentiation gives e^x/1, whose limit at zero is 1."],
+["If after one application the result is still 0/0, L'Hopital's rule may be:",["Applied again if hypotheses remain satisfied","Never applied again","Replaced by multiplication","Set equal to 0"],0,"Repeated application can be valid when the required conditions hold."],
+["L'Hopital's rule is named after:",["Guillaume de l'Hopital","Isaac Newton","Euler","Gauss"],0,"The rule is historically associated with Guillaume de l'Hopital."],
+["The main purpose of L'Hopital's rule is to evaluate certain:",["Indeterminate limits","Definite integrals","Matrices","Sequences only"],0,"It provides a method for resolving suitable indeterminate quotient limits."]
+],
+"Tangent and normal":[
+["The slope of the tangent to y=f(x) at x=a is:",["f(a)","f'(a)","1/f(a)","a"],1,"The derivative gives the tangent slope."],
+["If the tangent slope is m, the tangent equation through (a,f(a)) is:",["y−f(a)=m(x−a)","y=m/a","y+f(a)=x+a","y=mx only"],0,"This is the point-slope form."],
+["The slope of the normal to a curve with tangent slope m≠0 is:",["m","−m","−1/m","1/m²"],2,"Perpendicular lines have slopes whose product is −1."],
+["For y=x² at x=1, the tangent slope is:",["1","2","3","4"],1,"f'(x)=2x, so f'(1)=2."],
+["For y=x² at x=1, the tangent equation is:",["y−1=2(x−1)","y−2=x−1","y=2x+1","y−1=x−1"],0,"The point is (1,1) and slope is 2."],
+["If a tangent is horizontal, its slope is:",["0","1","−1","∞"],0,"A horizontal line has zero slope."],
+["If a tangent is horizontal and the normal exists, the normal is:",["Horizontal","Vertical","Parallel to tangent","Undefined always"],1,"A line perpendicular to a horizontal tangent is vertical."],
+["For a vertical tangent, the normal is:",["Vertical","Horizontal","Parallel","Undefined always"],1,"A vertical tangent has a horizontal normal."],
+["The tangent line represents the curve's:",["Instantaneous linear direction","Entire graph exactly","Area","Second derivative"],0,"It gives the local linear direction at a point."],
+["If f'(a)=−2, the normal slope is:",["−2","2","1/2","−1/2"],2,"Normal slope is −1/(−2)=1/2."]
+],
+"Related rates":[
+["Related rates problems involve quantities that change with respect to:",["Time","Only x","Only y","Constants"],0,"The variables are functions of time."],
+["If x and y depend on time t, differentiating x²+y²=25 gives:",["2x+2y=25","2x dx/dt + 2y dy/dt=0","x²+y²=0","dx/dt+dy/dt=25"],1,"Differentiate both sides with respect to time."],
+["If dr/dt is positive, the radius is:",["Increasing","Decreasing","Constant","Undefined"],0,"A positive time derivative means the quantity is increasing."],
+["In related rates, known rates are used to find:",["An unknown rate","Only a function value","A domain","A root"],0,"The goal is usually to determine a missing time derivative."],
+["For the area of a circle A=πr², dA/dt equals:",["π dr/dt","2πr dr/dt","2πr","πr²"],1,"Differentiate with respect to time: dA/dt=2πr dr/dt."],
+["For the volume of a sphere V=(4/3)πr³, dV/dt equals:",["4πr dr/dt","3πr² dr/dt","4πr² dr/dt","πr³"],2,"Differentiating gives dV/dt=4πr² dr/dt."],
+["The first step in many related-rates problems is to:",["Write a relation between variables","Plug in numbers immediately","Differentiate constants only","Find a maximum"],0,"A geometric or physical equation connects the variables."],
+["After differentiating a related-rates equation, numerical values are usually substituted:",["At the specified instant","Before defining variables","Never","Only at t=0"],0,"Substitution is typically done after implicit differentiation."],
+["If the radius of a circle increases, its area rate is generally:",["Positive","Negative","Zero always","Undefined"],0,"Since dA/dt=2πr dr/dt and r>0, a positive dr/dt gives positive dA/dt."],
+["Related rates are an application of:",["Implicit differentiation","Only integration","Matrix algebra","Probability"],0,"They commonly use implicit differentiation with respect to time."]
+]
 };

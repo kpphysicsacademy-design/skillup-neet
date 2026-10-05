@@ -676,4 +676,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If f⁻¹ exists, then f∘f⁻¹ equals:",["I","0","f","1"],0,"An inverse followed by the original gives the identity on the appropriate range."],
 ["The domain of f⁻¹ corresponds to the:",["Range of f","Domain of f","Coefficient set","Constants"],0,"Inputs to the inverse are outputs of the original function."],
 ["To find an inverse algebraically, a common first step is to:",["Write y=f(x)","Set x=0 always","Square both sides always","Differentiate immediately"],0,"Start with y=f(x), interchange x and y, then solve for y."]
-};
+]};

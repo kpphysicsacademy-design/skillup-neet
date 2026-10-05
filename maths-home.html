@@ -53,7 +53,7 @@ if(window.SKILLUP_MATHS_PROGRESS){
 }}
 render(all);
 function search(){const term=q.value.trim().toLowerCase();render(term?all.filter(function(x){return (x.concept+' '+x.chapter+' '+x.levelName).toLowerCase().indexOf(term)>-1}):all)}
-document.getElementById('searchBtn').onclick=search;q.addEventListener('keydown',function(e){if(e.key==='Enter')search()});
+document.getElementById('searchBtn').onclick=search;q.addEventListener('keydown',function(e){if(e.key==='Enter')search()});window.SKILLUP_MATHS_RENDER=render;window.SKILLUP_MATHS_ALL=all;
 const mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');mb.onclick=function(){const o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false')};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap'))mn.classList.remove('open')});
 })();
 </script>
@@ -68,7 +68,7 @@ const mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');m
     rows.forEach(function(r){
       window.SKILLUP_MATHS_PROGRESS[String(r.topic||'')]=r;
     });
-    render(all);
+    if(window.SKILLUP_MATHS_RENDER) window.SKILLUP_MATHS_RENDER(window.SKILLUP_MATHS_ALL||[]);
   }catch(err){console.warn('Mathematics progress could not be loaded',err);}
 })();
 </script>

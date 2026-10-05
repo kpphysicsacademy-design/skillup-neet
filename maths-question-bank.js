@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Logarithmic function":[
+["A logarithmic function is the inverse of:",["An exponential function","A polynomial function only","A modulus function","A constant function"],0,"For $a>0$, $a\\ne1$, $y=\\log_a x$ is the inverse relation of $y=a^x$."],
+["The domain of $f(x)=\\log_2 x$ is:",["$(0,\\infty)$","$\\mathbb R$","$[0,\\infty)$","$(-\\infty,0)$"],0,"The argument of a logarithm must be positive."],
+["The range of $f(x)=\\log_a x$, where $a>0$ and $a\\ne1$, is:",["$\\mathbb R$","$(0,\\infty)$","$[0,\\infty)$","$(-\\infty,0)$"],0,"Every real number occurs as a logarithm of a positive number."],
+["Evaluate $\\log_2 8$.",["3","2","4","8"],0,"Since $2^3=8$, $\\log_2 8=3$."],
+["Which identity is correct for $x>0,y>0$?",["$\\log_a(xy)=\\log_a x+\\log_a y$","$\\log_a(xy)=\\log_a x\\log_a y$","$\\log_a(x+y)=\\log_a x+\\log_a y$","$\\log_a(x/y)=\\log_a x\\log_a y$"],0,"The product rule converts multiplication into addition of logarithms."],
+["Solve $\\log_3 x=2$.",["$x=9$","$x=6$","$x=3$","$x=\\frac13$"],0,"Converting to exponential form gives $x=3^2=9$."],
+["For $0<a<1$, the function $f(x)=\\log_a x$ is:",["Strictly decreasing","Strictly increasing","Constant","Undefined for x>0"],0,"A logarithm with base between 0 and 1 is decreasing on $(0,\\infty)$."],
+["A mathematical-programming routine for $\\log_a x$ should first verify:",["$x>0$, $a>0$, and $a\\ne1$","$x<0$ only","$a=1$","$x=0$"],0,"These are the domain and valid-base conditions for a real logarithm."],
+["Solve $\\log_2(x-1)=3$.",["$x=9$","$x=8$","$x=7$","$x=4$"],0,"The argument must satisfy $x-1=2^3=8$, hence $x=9$."],
+["The change-of-base formula is:",["$\\log_a x=\\dfrac{\\ln x}{\\ln a}$","$\\log_a x=\\ln(ax)$","$\\log_a x=\\ln a+\\ln x$","$\\log_a x=\\dfrac{a}{x}$"],0,"Changing to natural logarithms gives the standard change-of-base formula."]
+],
+
 "Exponential function":[
 ["An exponential function has the form:",["$f(x)=a^x$ where $a>0$ and $a\\ne1$","$f(x)=x^a$ only","$f(x)=a+x$ only","$f(x)=\\log_a x$ only"],0,"The basic exponential function uses the variable as the exponent."],
 ["For $f(x)=2^x$, the range is:",["$(0,\\infty)$","$\\mathbb R$","$[0,\\infty)$","$(-\\infty,0)$"],0,"A positive base raised to any real power is always positive."],

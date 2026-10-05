@@ -460,7 +460,8 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Simplify 2x²+3x−x²+x.",["x²+4x","3x²+4x","x²+2x","2x²+4x"],0,"Combine 2x²−x²=x² and 3x+x=4x."],
 ["Which expression is simplest?",["2x+3x","5x","x+x+x+x+x","10x/2"],1,"5x is already a single simplified term."],
 ["If x=2, the value of 3x+4−x is:",["6","8","10","12"],1,"3(2)+4−2=8."]
-,"Substitution":[
+],
+"Substitution":[
 ["If x=4, what is 3x+2?",["10","12","14","16"],2,"Substitute x=4: 3(4)+2=14."],
 ["If a=5 and b=2, find a²+b.",["12","25","27","29"],2,"5²+2=25+2=27."],
 ["Evaluate 2x−3 when x=7.",["10","11","12","14"],1,"2(7)−3=11."],

@@ -16,12 +16,30 @@
 const data=window.SKILLUP_IIT_MATHS_PATH||[],path=document.getElementById('path'),q=document.getElementById('q'),empty=document.getElementById('empty'),icons=['🔢','🔗','📐','🧮','📊','📍','📈','∫','🧭','🏆'];let all=[];
 data.forEach((u,ui)=>(u[2]||[]).forEach((ch)=>(ch[1]||[]).forEach((concept)=>all.push({level:ui+1,levelName:u[1],chapter:ch[0],concept:concept,index:all.length+1,icon:icons[ui%icons.length]}))));
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function render(list){let h='',lastLevel=0,lastChapter='';list.forEach(function(x){if(x.level!==lastLevel){h+='<div class="unit"><div class="unit-main"><span class="unum">'+x.level+'</span><div><h2>'+esc(x.levelName)+'</h2><small>IIT-JEE Mathematics • '+data[x.level-1][2].length+' chapters</small></div></div></div>';lastLevel=x.level;lastChapter=''}if(x.chapter!==lastChapter){h+='<div class="chapter-heading">'+esc(x.chapter)+'</div>';lastChapter=x.chapter}h+='<article class="chapter"><span class="node"></span><a href="/maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261005"><div><div class="title"><span class="icon">'+x.icon+'</span><span>'+esc(x.concept)+'</span></div><div class="sub">Concept '+x.index+' • '+esc(x.chapter)+'</div><span class="tag">🎯 CONCEPT '+x.index+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>'});path.innerHTML=h;empty.style.display=list.length?'none':'block'}
+function render(list){let h='',lastLevel=0,lastChapter='';list.forEach(function(x){if(x.level!==lastLevel){h+='<div class="unit"><div class="unit-main"><span class="unum">'+x.level+'</span><div><h2>'+esc(x.levelName)+'</h2><small>IIT-JEE Mathematics • '+data[x.level-1][2].length+' chapters</small></div></div></div>';lastLevel=x.level;lastChapter=''}if(x.chapter!==lastChapter){h+='<div class="chapter-heading">'+esc(x.chapter)+'</div>';lastChapter=x.chapter}h+='<article class="chapter"><span class="node"></span><a href="/maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261005"><div><div class="title"><span class="icon">'+x.icon+'</span><span>'+esc(x.concept)+'</span></div><div class="sub">Concept '+x.index+' • '+esc(x.chapter)+'</div><span class="tag">🎯 CONCEPT '+x.index+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span><span class="tag" data-completed="'+esc(x.concept)+'">○ NOT STARTED</span></div><span class="go">›</span></a></article>'});path.innerHTML=h;empty.style.display=list.length?'none':'block';
+if(window.SKILLUP_MATHS_COMPLETED){
+  path.querySelectorAll('[data-completed]').forEach(function(el){
+    if(window.SKILLUP_MATHS_COMPLETED.has(el.getAttribute('data-completed'))){
+      el.textContent='✓ COMPLETED';el.style.background='#e9f8e2';el.style.color='#338700';
+    }
+  });
+}}
 render(all);
 function search(){const term=q.value.trim().toLowerCase();render(term?all.filter(function(x){return (x.concept+' '+x.chapter+' '+x.levelName).toLowerCase().indexOf(term)>-1}):all)}
 document.getElementById('searchBtn').onclick=search;q.addEventListener('keydown',function(e){if(e.key==='Enter')search()});
 const mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');mb.onclick=function(){const o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false')};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap'))mn.classList.remove('open')});
 })();
 </script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>
+(async function(){
+  if(!window.SkillUpAuth) return;
+  const session=await window.SkillUpAuth.requireAuth(location.href);
+  if(!session) return;
+  try{
+    const rows=await window.SkillUpAuth.getProgress('Mathematics');
+    window.SKILLUP_MATHS_COMPLETED=new Set(rows.filter(r=>r.completed).map(r=>String(r.topic||'')));
+    render(all);
+  }catch(err){console.warn('Mathematics progress could not be loaded',err);}
+})();
+</script>
 </body></html>

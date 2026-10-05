@@ -19,6 +19,16 @@ window.SKILLUP_MATHS_BASICS_20=[
 {title:"Percentages",subs:["Meaning of percentage","Percentage as a fraction","Percentage as a decimal","Finding a percentage of a quantity","Converting fractions to percentages","Converting decimals to percentages","Percentage increase","Percentage decrease","Simple percentage word problems"]},
 {title:"Ratio and Proportion",subs:["Meaning of ratio","Writing ratios","Equivalent ratios","Simplifying ratios","Comparing ratios","Ratio in simplest form","Sharing in a ratio","Unitary method","Direct proportion","Proportion word problems"]},
 {title:"Powers and Roots",subs:["Repeated multiplication","Base and exponent","Squares","Cubes","Powers of 10","Laws of exponents basics","Square roots","Cube roots","Perfect squares","Perfect cubes"]},
-{title:"Order of Operations",subs:["Why order matters","Brackets/parentheses","Exponents","Multiplication and division","Addition and subtraction","BODMAS/PEMDAS","Nested brackets","Mixed-operation expressions","Basic arithmetic word problems"]}
+{title:"Order of Operations",subs:["Why order matters","Brackets/parentheses","Exponents","Multiplication and division","Addition and subtraction","BODMAS/PEMDAS","Nested brackets","Mixed-operation expressions","Basic arithmetic word problems"]},
+{title:"Divisibility Rules",subs:["Divisibility by 2","Divisibility by 3","Divisibility by 4","Divisibility by 5","Divisibility by 6","Divisibility by 8","Divisibility by 9","Divisibility by 10","Divisibility by 11"]},
+{title:"HCF and LCM",subs:["Meaning of HCF","Finding HCF by factors","Finding HCF by prime factorisation","Meaning of LCM","Finding LCM by multiples","Finding LCM by prime factorisation","HCF-LCM relationship","Word problems"]},
+{title:"Averages",subs:["Meaning of average","Arithmetic mean","Finding a missing value","Average of consecutive numbers","Weighted-average intuition","Average word problems"]},
+{title:"Units of Measurement",subs:["Length","Mass","Capacity","Time","Temperature","Metric units","Converting units","Choosing appropriate units"]},
+{title:"Time and Calendar",subs:["Reading a clock","12-hour and 24-hour time","AM and PM","Elapsed time","Converting time units","Days and weeks","Months and years","Calendar calculations"]},
+{title:"Money and Financial Arithmetic",subs:["Rupees and paise","Adding money","Subtracting money","Multiplying money","Dividing money","Unit price","Simple shopping problems","Bills and change"]},
+{title:"Estimation and Mental Math",subs:["Rounding for estimation","Compatible numbers","Mental addition","Mental subtraction","Mental multiplication","Mental division","Checking reasonableness"]},
+{title:"Patterns and Sequences Basics",subs:["Recognising patterns","Number patterns","Increasing patterns","Decreasing patterns","Skip counting","Finding the next term","Simple rule-based patterns"]},
+{title:"Word Problems and Problem Solving",subs:["Identifying given information","Identifying what is asked","Choosing an operation","Writing a number sentence","Multi-step arithmetic problems","Checking an answer","Units in answers"]},
+{title:"Arithmetic Review and Mixed Practice",subs:["Mixed number operations","Fractions and decimals","Percentages and ratios","Factors and multiples","Powers and roots","Measurement problems","Time and money problems","Multi-step mixed practice"]},
 ]]
 ];

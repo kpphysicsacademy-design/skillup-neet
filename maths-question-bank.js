@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+window.SKILLUP_MATHS_QUIZ_BANK={
+"Ratio":[
+["Simplify the ratio 12:18.",["2:3","3:2","4:5","6:9"],0,"Divide both terms by their greatest common divisor, 6. Thus 12:18=2:3."],
+["If a:b=3:5 and a=12, what is b?",["15","18","20","25"],2,"Since 3 parts correspond to 12, one part is 4. Therefore b=5×4=20."],
+["Which ratio is equivalent to 4:7?",["8:21","12:21","16:35","20:28"],1,"Multiplying both terms of 4:7 by 3 gives 12:21."],
+["Divide 84 in the ratio 3:4. What is the smaller share?",["28","32","36","48"],2,"Total parts=7. One part=84/7=12, so the 3-part share is 36."],
+["What is the ratio of 45 minutes to 1 hour in simplest form?",["3:4","4:3","45:60","2:3"],0,"1 hour=60 minutes, so 45:60 simplifies to 3:4."],
+["The ratio of boys to girls is 2:3. If there are 25 students, how many are boys?",["8","10","12","15"],1,"Total parts=5. Each part represents 5 students, so boys=2×5=10."],
+["If x:y=5:2 and y=14, what is x?",["28","30","35","40"],2,"Two parts correspond to 14, so one part is 7. Hence x=5×7=35."],
+["Which ratio is greater?",["2:3","3:5","4:7","5:8"],0,"Compare their decimal values: 2/3≈0.667, 3/5=0.6, 4/7≈0.571, and 5/8=0.625. Thus 2:3 is greatest."],
+["The compound ratio of 2:3 and 4:5 is:",["6:8","8:15","2:15","4:8"],1,"Multiply corresponding terms: (2×4):(3×5)=8:15."],
+["What is the simplest ratio of 250 g to 1 kg?",["1:2","1:3","1:4","1:5"],2,"1 kg=1000 g. Therefore 250:1000 simplifies to 1:4."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

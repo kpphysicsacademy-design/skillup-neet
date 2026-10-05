@@ -460,4 +460,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Simplify 2x²+3x−x²+x.",["x²+4x","3x²+4x","x²+2x","2x²+4x"],0,"Combine 2x²−x²=x² and 3x+x=4x."],
 ["Which expression is simplest?",["2x+3x","5x","x+x+x+x+x","10x/2"],1,"5x is already a single simplified term."],
 ["If x=2, the value of 3x+4−x is:",["6","8","10","12"],1,"3(2)+4−2=8."]
+,"Substitution":[
+["If x=4, what is 3x+2?",["10","12","14","16"],2,"Substitute x=4: 3(4)+2=14."],
+["If a=5 and b=2, find a²+b.",["12","25","27","29"],2,"5²+2=25+2=27."],
+["Evaluate 2x−3 when x=7.",["10","11","12","14"],1,"2(7)−3=11."],
+["If p=3 and q=4, what is 2p+q?",["7","8","10","12"],1,"2(3)+4=10."],
+["Evaluate x²−2x+1 for x=5.",["14","16","20","21"],1,"25−10+1=16."],
+["If m=−2, then 3m+5 equals:",["−11","−1","1","11"],1,"3(−2)+5=−1."],
+["If a=2 and b=3, evaluate ab+a.",["5","8","9","10"],1,"ab+a=(2)(3)+2=8."],
+["Which operation is performed first when substituting a value into 2(x+3)?",["Add 2 and x","Replace x by its value","Divide by x","Square 2"],1,"Substitution means replacing the variable with its given value."],
+["If x=−3, evaluate x²+2x.",["−15","−3","3","15"],2,"(−3)²+2(−3)=9−6=3."],
+["If r=1/2, evaluate 4r+1.",["2","3","4","5"],1,"4(1/2)+1=2+1=3."]
+],
+"Algebraic identities":[
+["Which is the identity for (a+b)²?",["a²+b²","a²+2ab+b²","a²−2ab+b²","2a+2b"],1,"The square of a sum is a²+2ab+b²."],
+["Which is the identity for (a−b)²?",["a²+b²","a²+2ab+b²","a²−2ab+b²","a²−b²"],2,"The square of a difference is a²−2ab+b²."],
+["The identity for (a+b)(a−b) is:",["a²+b²","a²−b²","a²+2ab+b²","2a−2b"],1,"This is the difference of two squares."],
+["Using an identity, 101² equals:",["10001","10201","10101","11001"],1,"(100+1)²=10000+200+1=10201."],
+["Using (a+b)², (x+3)² equals:",["x²+3x+9","x²+6x+9","x²−6x+9","x²+9"],1,"x²+2(x)(3)+9=x²+6x+9."],
+["Using (a−b)², (x−4)² equals:",["x²−4x+16","x²−8x+16","x²+8x+16","x²−16"],1,"x²−2(x)(4)+16=x²−8x+16."],
+["What is a²−b² equal to?",["(a−b)²","(a+b)²","(a+b)(a−b)","a(a−b)"],2,"The difference of squares factors as (a+b)(a−b)."],
+["Which expression equals (x+5)(x−5)?",["x²+25","x²−25","x²+10x+25","x²−10x+25"],1,"It is a difference of squares: x²−25."],
+["The identity (a+b+c)² contains:",["Only squared terms","Squared terms and pairwise product terms","Only product terms","No cross terms"],1,"It expands to a²+b²+c²+2ab+2bc+2ca."],
+["Why are algebraic identities useful?",["They provide standard relationships for simplifying and expanding expressions","They make all variables zero","They remove equations","They apply only to numbers"],0,"Identities allow common algebraic patterns to be transformed quickly."]
+],
+"Polynomial multiplication":[
+["Multiply x(x+3).",["x²+3","x²+3x","2x+3","x²+x"],1,"Distribute x: x²+3x."],
+["Multiply (x+2)(x+3).",["x²+5x+6","x²+6x+5","x²+5","x²+6"],0,"x²+3x+2x+6=x²+5x+6."],
+["Multiply 2x(3x+4).",["6x²+8x","6x+8","5x²+6x","6x²+4"],0,"2x times 3x is 6x² and times 4 is 8x."],
+["The product of two polynomials is found by:",["Multiplying each term appropriately","Adding only constants","Dividing all terms","Ignoring variables"],0,"The distributive property is used to multiply every relevant pair of terms."],
+["Multiply (a+b)(c+d).",["ac+bd","ac+ad+bc+bd","ab+cd","a+b+c+d"],1,"Each term in the first factor multiplies each term in the second."],
+["Multiply (x−2)(x+5).",["x²+3x−10","x²−3x−10","x²+7x−10","x²−10"],0,"x²+5x−2x−10=x²+3x−10."],
+["Multiply (2x+3)(x+1).",["2x²+5x+3","2x²+4x+3","2x²+3x+1","x²+5x+3"],0,"2x²+2x+3x+3=2x²+5x+3."],
+["The degree of the product of nonzero polynomials is generally:",["The sum of their degrees","The difference of their degrees","Always 1","Always 0"],0,"For nonzero polynomials over a field, degrees add under multiplication."],
+["Multiply (x+1)(x²+x+1).",["x³+2x²+2x+1","x³+x²+x+1","x³+1","x²+2x+1"],0,"Distribute: x³+x²+x+x²+x+1=x³+2x²+2x+1."],
+["Which property justifies polynomial multiplication?",["Distributive property","Only commutative property","Only identity property","Only inverse property"],0,"Polynomial multiplication uses repeated application of the distributive property."]
+],
+"Polynomial division":[
+["What is the quotient when x² is divided by x?",["x","x²","1","0"],0,"For x≠0, x²/x=x."],
+["Dividing 6x² by 3x gives:",["2x","2x²","3x","6x"],0,"6x²/(3x)=2x."],
+["Polynomial long division is analogous to:",["Long division of numbers","Prime factorisation only","Addition only","Square rooting"],0,"The procedure mirrors long division with terms ordered by degree."],
+["When dividing x²+5x+6 by x+2, the quotient is:",["x+2","x+3","x−3","x+6"],1,"(x+2)(x+3)=x²+5x+6, so the quotient is x+3."],
+["The remainder in a polynomial division can have degree:",["Greater than the divisor","Equal to the divisor","Less than the divisor","Always 2"],2,"The remainder must have degree lower than the divisor."],
+["Divide x²−9 by x−3. The quotient is:",["x−3","x+3","x²+3","x+3 with remainder 3"],1,"x²−9=(x−3)(x+3)."],
+["If a polynomial divides exactly by another polynomial, the remainder is:",["0","1","The divisor","The quotient"],0,"Exact division leaves remainder zero."],
+["Divide 2x²+7x+3 by x+3. The quotient is:",["2x+1","2x+3","x+1","2x−1"],0,"(x+3)(2x+1)=2x²+7x+3."],
+["In polynomial division, the first step is usually to:",["Divide the leading terms","Add all coefficients","Ignore the highest degree","Set x=0"],0,"Divide the leading term of the dividend by the leading term of the divisor."],
+["If dividend = divisor×quotient + remainder, then the remainder has degree:",["At least the divisor degree","Less than the divisor degree","Always equal to 0","Greater than the dividend"],1,"This is the polynomial division algorithm."]
+],
+"Remainder theorem":[
+["The remainder theorem states that the remainder when f(x) is divided by x−a is:",["f(0)","f(a)","a","x−a"],1,"The remainder is f(a)."],
+["If f(x)=x²+3x+2, the remainder on division by x−1 is:",["4","6","8","10"],0,"f(1)=1+3+2=6."],
+["If f(x)=x²+3x+2, the remainder on division by x+1 is:",["0","1","2","6"],0,"x+1=x−(−1), so evaluate f(−1)=1−3+2=0."],
+["To find the remainder on division by x−5, evaluate the polynomial at:",["0","1","5","−5"],2,"The theorem requires f(5)."],
+["If f(2)=7, the remainder when f(x) is divided by x−2 is:",["0","2","5","7"],3,"By the remainder theorem, the remainder is f(2)=7."],
+["For divisor x+a, the value to substitute is:",["a","−a","0","1"],1,"x+a=x−(−a), so use x=−a."],
+["If f(x)=x³−1, the remainder on division by x−1 is:",["0","1","2","−1"],0,"f(1)=1−1=0."],
+["If f(x)=2x+3, the remainder on division by x+2 is:",["−1","0","1","7"],0,"f(−2)=−4+3=−1."],
+["The remainder theorem is useful because it avoids:",["Direct polynomial division when only the remainder is needed","All algebra","Factorisation always","Substitution"],0,"Evaluating f(a) is often much faster than performing full division."],
+["If f(3)=0, then the remainder when f(x) is divided by x−3 is:",["0","1","3","−3"],0,"The remainder is f(3), which is 0."]
+],
+"Factor theorem":[
+["If f(a)=0, then which is a factor of f(x)?",["x+a","x−a","x","a"],1,"The factor theorem says x−a is a factor exactly when f(a)=0."],
+["If x−2 is a factor of f(x), then:",["f(2)=0","f(−2)=0","f(0)=2","f(2)=2"],0,"A factor x−2 corresponds to the root x=2."],
+["If f(−3)=0, a factor is:",["x−3","x+3","x","3"],1,"Since a=−3, the factor is x−(−3)=x+3."],
+["Which condition proves x−5 is a factor?",["f(5)=0","f(−5)=0","f(0)=5","f(5)=1"],0,"The factor theorem gives x−5 as a factor when f(5)=0."],
+["If x+1 is a factor, which value is a root?",["1","−1","0","2"],1,"x+1=x−(−1), so the root is −1."],
+["The factor theorem is closely related to the:",["Remainder theorem","Pythagorean theorem","Binomial theorem only","Euclidean theorem"],0,"The factor theorem follows directly from the remainder theorem."],
+["If f(4)=0, which factor must divide f(x)?",["x+4","x−4","4x","x"],1,"A zero at x=4 gives factor x−4."],
+["If x−1 is a factor of x²−5x+4, the other factor is:",["x−4","x+4","x−1","x+1"],0,"x²−5x+4=(x−1)(x−4)."],
+["A root of a polynomial corresponds to:",["A factor of the form x−a","A constant only","The leading coefficient only","The degree only"],0,"If a is a root, x−a is a factor."],
+["If f(2)=0 and f(x) is quadratic, one possible factorisation is:",["(x−2)(x−3)","(x+2)(x+3)","x(x+2)","(x−2)+3"],0,"Any quadratic with root 2 has x−2 as a factor; the listed factorisation is an example."]
+]
 ]};

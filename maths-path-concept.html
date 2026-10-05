@@ -94,19 +94,30 @@ if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(typeset);
 let bankQuiz=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept]);
 function validateQuizBank(bank){
   if(!Array.isArray(bank)||bank.length!==10)return false;
+  const seenQuestions=new Set();
   return bank.every(function(q){
-    return Array.isArray(q)&&q.length>=4&&typeof q[0]==='string'&&Array.isArray(q[1])&&q[1].length===4&&Number.isInteger(q[2])&&q[2]>=0&&q[2]<4&&typeof q[3]==='string'&&q[1][q[2]]!=null;
+    if(!Array.isArray(q)||q.length<4||typeof q[0]!=='string'||!q[0].trim()||seenQuestions.has(q[0].trim()))return false;
+    seenQuestions.add(q[0].trim());
+    if(!Array.isArray(q[1])||q[1].length!==4||new Set(q[1].map(function(x){return String(x).trim();})).size!==4)return false;
+    if(q[1].some(function(x){return x==null||!String(x).trim();}))return false;
+    return Number.isInteger(q[2])&&q[2]>=0&&q[2]<4&&typeof q[3]==='string'&&q[3].trim().length>0&&q[1][q[2]]!=null;
   });
 }
 if(!validateQuizBank(bankQuiz)){
- console.warn('Refreshing/validating Maths quiz bank for concept:',concept);
- const refreshScript=document.createElement('script');
- refreshScript.src='maths-question-bank.js?v=20261005-safe1';
- refreshScript.onload=()=>location.reload();
- refreshScript.onerror=()=>console.error('Unable to refresh Maths quiz bank.');
- document.head.appendChild(refreshScript);
- throw new Error('Refreshing Maths quiz bank…');
+ console.warn('Invalid Maths quiz bank detected for concept:',concept);
+ const refreshed=sessionStorage.getItem('skillupMathsQuizBankRefreshed')==='1';
+ if(!refreshed){
+   sessionStorage.setItem('skillupMathsQuizBankRefreshed','1');
+   const refreshScript=document.createElement('script');
+   refreshScript.src='maths-question-bank.js?v=20261005-safe1&refresh=1';
+   refreshScript.onload=()=>location.reload();
+   refreshScript.onerror=()=>console.error('Unable to refresh Maths quiz bank.');
+   document.head.appendChild(refreshScript);
+   throw new Error('Refreshing Maths quiz bank…');
+ }
+ throw new Error('Invalid Maths quiz bank for '+concept);
 }
+sessionStorage.removeItem('skillupMathsQuizBankRefreshed');
 const questions=bankQuiz;
 if(concept==='Nested surds' && Array.isArray(questions) && questions.length>=7){
   questions[6]=['Simplify √(10−6√1).',['1','2','3','4'],1,'Since √1=1, the expression becomes √4=2.'];

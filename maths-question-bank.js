@@ -2224,4 +2224,89 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which interval represents −1≤x<3?",["[−1,3)","(−1,3]","[−1,3]","(−1,3)"],0,"Include −1 and exclude 3, so use a bracket then a parenthesis."],
 ["The solution of 2<x+1≤6 is:",["1<x≤5","2<x≤6","1≤x<5","−1<x≤7"],0,"Subtract 1 throughout: 1<x≤5."]
 ]
+
+,"Factorisation of polynomials":[
+["Which is the factorisation of x²−9?",["(x−3)(x+3)","(x−9)(x+1)","(x−3)²","(x+9)(x−1)"],0,"x²−9 is a difference of squares: (x−3)(x+3)."],
+["Factorise x²+5x+6.",["(x+1)(x+6)","(x+2)(x+3)","(x−2)(x−3)","(x+5)(x+1)"],1,"Two numbers with product 6 and sum 5 are 2 and 3."],
+["Factorise 2x²+7x+3.",["(2x+1)(x+3)","(2x+3)(x+1)","(x+1)(2x+3)","(2x−1)(x−3)"],0,"Expanding (2x+1)(x+3) gives 2x²+7x+3."],
+["A common factor of 6x²+9x is:",["2x","3x","6x²","9"],1,"Both terms are divisible by 3x."],
+["Factorise x³−x.",["x(x−1)","x(x−1)(x+1)","(x−1)(x+1)","x³(1−x)"],1,"x³−x=x(x²−1)=x(x−1)(x+1)."],
+["Factorise 4x²−25.",["(2x−5)(2x+5)","(4x−5)(x+5)","(2x−25)(2x+1)","(4x−25)(x+1)"],0,"This is a difference of squares."],
+["If x²−7x+12=0, its factorisation is:",["(x−3)(x−4)","(x+3)(x+4)","(x−2)(x−6)","(x−1)(x−12)"],0,"3 and 4 have product 12 and sum 7."],
+["Factorise ax+ay+bx+by.",["(a+b)(x+y)","(a+x)(b+y)","(a+y)(b+x)","ab(x+y)"],0,"Group terms: a(x+y)+b(x+y)=(a+b)(x+y)."],
+["The first step in factorising a polynomial often is to:",["Find a common factor","Differentiate it","Take its logarithm","Convert it to a fraction"],0,"A common factor should be extracted when one exists."],
+["Which expression is completely factorised?",["x²−1","(x−1)(x+1)","x²+2x+1","2x+4"],1,"The difference of squares has been fully factored."]
+],
+"Polynomial roots":[
+["If P(2)=0, then 2 is a:",["Coefficient","Root of P(x)","Constant term","Degree"],1,"A number r is a root when P(r)=0."],
+["The roots of x²−5x+6 are:",["1,6","2,3","−2,−3","3,4"],1,"x²−5x+6=(x−2)(x−3)."],
+["If x=−1 is a root of P(x), then:",["P(−1)=1","P(−1)=0","P(1)=0","P(0)=−1"],1,"By definition, a root makes the polynomial zero."],
+["A quadratic polynomial can have at most how many real roots?",["1","2","3","4"],1,"A nonzero quadratic has degree 2, so it has at most two roots."],
+["The roots of x²−9=0 are:",["0,9","3 only","−3,3","−9,9"],2,"x²=9 gives x=±3."],
+["If roots are 4 and 5, the monic quadratic is:",["x²+9x+20","x²−9x+20","x²−20x+9","x²+9x−20"],1,"(x−4)(x−5)=x²−9x+20."],
+["For P(x)=x²−4x+3, P(1) is:",["0","1","2","3"],0,"1−4+3=0, so 1 is a root."],
+["If P(a)=0, then (x−a) is a:",["Factor of P(x)","Coefficient","Constant","Degree"],0,"This is the factor theorem."],
+["The sum of roots of ax²+bx+c=0 is:",["c/a","−b/a","b/a","−c/a"],1,"By Vieta's relation, sum of roots is −b/a."],
+["The product of roots of ax²+bx+c=0 is:",["−b/a","b/a","c/a","−c/a"],2,"By Vieta's relation, product of roots is c/a."]
+],
+"Synthetic division":[
+["Synthetic division is mainly used to divide a polynomial by:",["x−a","x²+1","2x²+3","Any matrix"],0,"Synthetic division is especially efficient for a linear divisor x−a."],
+["Dividing x²−5x+6 by x−2 gives quotient:",["x−3","x+3","x−2","x+2"],0,"(x²−5x+6)=(x−2)(x−3)."],
+["The synthetic number used for divisor x−4 is:",["−4","0","4","1/4"],2,"For x−a, use a=4 in synthetic division."],
+["If synthetic division by x−3 gives remainder 0, then:",["3 is a root","−3 is a root","3 is the degree","3 is the coefficient"],0,"Zero remainder means P(3)=0."],
+["Divide x²+3x+2 by x+1. The quotient is:",["x+2","x−2","x+1","x+3"],0,"x²+3x+2=(x+1)(x+2)."],
+["For x³−1 divided by x−1, the remainder is:",["−1","0","1","2"],1,"P(1)=1−1=0."],
+["Synthetic division requires the coefficients to be written in:",["Descending powers, including zeros","Ascending powers only","Random order","Fractions only"],0,"Missing powers must be represented by zero coefficients."],
+["If division by x−a has remainder P(a), this is the:",["Remainder theorem","Binomial theorem","Chain rule","AM-GM theorem"],0,"The remainder theorem states that the remainder is P(a)."],
+["Divide x²−1 by x−1. The quotient is:",["x+1","x−1","x","1"],0,"x²−1=(x−1)(x+1)."],
+["If the final synthetic remainder is nonzero, then the divisor is:",["Not a factor","Always a factor","The degree","A coefficient"],0,"A zero remainder is required for a divisor to be a factor."]
+],
+"Partial fractions basics":[
+["Partial fractions decompose a rational expression into:",["Simpler rational terms","Only integers","Only polynomials","Trigonometric functions"],0,"The goal is to express a rational function as simpler fractions."],
+["1/[x(x+1)] can be written as:",["1/x+1/(x+1)","A/x+B/(x+1)","A/x²+B/(x+1)","A/(x+1)²"],1,"Distinct linear factors use A/x+B/(x+1)."],
+["For 1/[x(x+1)], the constants A and B satisfy:",["A=1,B=1","A=1,B=−1","A=−1,B=1","A=0,B=1"],1,"1=A(x+1)+Bx gives A=1 and B=−1."],
+["Repeated linear factor (x−a)² requires terms of the form:",["A/(x−a) only","A/(x−a)+B/(x−a)²","A/(x−a)² only","A(x−a)+B"],1,"Each power of a repeated factor appears in the decomposition."],
+["For denominator (x−1)(x+2), the standard form is:",["A/(x−1)+B/(x+2)","A/(x−1)²+B/(x+2)²","A(x−1)+B(x+2)","A/(x+1)+B/(x−2)"],0,"Use one constant numerator for each distinct linear factor."],
+["Before partial fractions, a rational function should first be:",["Proper if needed by polynomial division","Differentiated","Squared","Converted to a logarithm"],0,"If numerator degree is at least denominator degree, divide first."],
+["For 1/(x²−1), the denominator factors as:",["(x−1)(x+1)","(x−1)²","(x+1)²","x(x−1)"],0,"x²−1 is a difference of squares."],
+["If A/(x−1)+B/(x+1)=1/(x²−1), then A is:",["1/2","1","−1/2","2"],0,"1=A(x+1)+B(x−1); comparing gives A=1/2."],
+["Partial fractions are especially useful for:",["Integration of rational functions","Finding matrix rank only","Measuring angles","Solving triangles only"],0,"They can turn a complicated rational integral into simpler logarithmic terms."],
+["For an irreducible quadratic factor, the numerator generally has:",["A constant only","A linear numerator","A quadratic numerator","No numerator"],1,"A+Bx is used over an irreducible quadratic factor."]
+],
+"Rational expressions":[
+["Which is a rational expression?",["(x+1)/(x−2)","√x+1","sin x","2^x"],0,"A quotient of polynomials is a rational expression."],
+["The domain restriction of 1/(x−3) is:",["x=3","x≠3","x>3","x<3"],1,"The denominator cannot be zero."],
+["Simplify x/x for x≠0.",["0","1","x","x²"],1,"For nonzero x, x divided by x equals 1."],
+["The LCD of 1/x and 1/(x+2) is:",["x+2","x","x(x+2)","2x"],2,"The least common denominator contains both distinct factors."],
+["Simplify 1/x+1/x.",["1/x²","2/x","2x","1"],1,"Like rational terms add their numerators."],
+["When multiplying rational expressions, we should:",["Factor and cancel common nonzero factors","Always add numerators","Differentiate first","Set every denominator to zero"],0,"Factoring exposes common factors that can cancel."],
+["(x²−4)/(x−2), x≠2, simplifies to:",["x−2","x+2","x²+2","1"],1,"x²−4=(x−2)(x+2)."],
+["The expression 1/(x²−9) is undefined at:",["x=0","x=3 or −3","x=9 only","x=−9 only"],1,"x²−9=0 when x=±3."],
+["To add rational expressions, first find a:",["Common denominator","Common derivative","Common exponent","Common root only"],0,"A common denominator allows the fractions to be combined."],
+["An excluded value is a value that:",["Makes the original denominator zero","Makes the numerator zero","Is always positive","Must be an integer"],0,"Excluded values come from zeros of the original denominator."]
+],
+"Algebraic inequalities":[
+["Solve x+3>7.",["x>4","x<4","x≥4","x≤4"],0,"Subtract 3 from both sides."],
+["Multiplying an inequality by a negative number:",["Keeps the sign","Reverses the sign","Makes it an equation","Removes the variable"],1,"The inequality direction reverses."],
+["Solve 2x−1≤5.",["x≤3","x<3","x≥3","x>3"],0,"2x≤6, so x≤3."],
+["The solution of x²<4 is:",["x<−2 or x>2","−2<x<2","x≤−2","x≥2"],1,"The numbers whose square is less than 4 lie between −2 and 2."],
+["Solve 3−x>1.",["x>2","x<2","x≥2","x≤2"],1,"−x>−2, so x<2 after reversing the sign."],
+["If x≥2, then x+5 is:",["≥7","≤7","<7","=7"],0,"Adding 5 preserves the inequality."],
+["The solution of |x|<3 is:",["x<−3 or x>3","−3<x<3","x≤−3","x≥3"],1,"Absolute value less than 3 means distance from zero is less than 3."],
+["Solve 5x≥20.",["x≥4","x≤4","x>4","x<4"],0,"Divide by positive 5."],
+["For a<b, adding the same number c gives:",["a+c<b+c","a+c>b+c","a+c=b+c","No conclusion"],0,"Adding the same number preserves order."],
+["The solution of x−4<0 is:",["x<4","x>4","x≤4","x≥4"],0,"Add 4 to both sides."]
+],
+"Modulus inequalities":[
+["|x|<2 is equivalent to:",["−2<x<2","x<−2 or x>2","x≤−2","x≥2"],0,"A number with distance from zero less than 2 lies between −2 and 2."],
+["|x|≤3 means:",["−3≤x≤3","x<−3 or x>3","x>3","x<−3"],0,"Distance from zero is at most 3."],
+["|x−2|<4 gives:",["−2<x<6","−6<x<2","x<−2 or x>6","2<x<4"],0,"Subtract 4 and add 2: −2<x<6."],
+["|x+1|≥2 gives:",["x≥1 or x≤−3","−3≤x≤1","−1≤x≤2","x≥−1"],0,"Distance from −1 is at least 2, so x≤−3 or x≥1."],
+["|x|=5 has solutions:",["5 only","−5 only","−5 and 5","0 and 5"],2,"Both numbers have distance 5 from zero."],
+["If |x−3|=0, then:",["x=0","x=3","x=−3","No solution"],1,"Absolute value is zero only when its inside is zero."],
+["|2x|<6 is equivalent to:",["−3<x<3","−6<x<6","x<−3 or x>3","x≥3"],0,"Divide the inequality |2x|<6 by 2."],
+["|x−1|≤2 gives:",["−1≤x≤3","−3≤x≤1","1≤x≤2","x≤−1"],0,"−2≤x−1≤2, hence −1≤x≤3."],
+["|x|>4 means:",["−4<x<4","x<−4 or x>4","x≤4","x≥4"],1,"Distance from zero is greater than 4."],
+["The graph of y=|x| has vertex at:",["(0,0)","(1,0)","(0,1)","(−1,0)"],0,"The absolute-value graph has its vertex at the origin."]
+]
 };

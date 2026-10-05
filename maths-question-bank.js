@@ -2803,4 +2803,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program defines f(x)=x*x+1. What should it compute for f(3)?",["$10$","$7$","$6$","$4$"],0,"The program evaluates $f(3)=3^2+1=10$. Function notation corresponds directly to supplying an input to the program."],
 ["If $f(x)=\dfrac{1}{x-2}$, which input is excluded from the domain?",["$x=2$","$x=0$","$x=1$","$x=-2$"],0,"The denominator cannot be zero. Since $x-2=0$ at $x=2$, that input is excluded."]
 ],
+
+"Range finding":[
+["The range of a function is the set of:",["All output values actually attained","All possible input values","The codomain only","All real numbers always"],0,"The range consists of output values $f(x)$ that are actually obtained from inputs in the domain."],
+["For $f(x)=x^2$ with domain $\mathbb R$, the range is:",["$[0,\infty)$","$(-\infty,0]$","$\mathbb R$","$(0,\infty)$"],0,"Since $x^2\ge0$ for every real $x$ and every nonnegative value is attained, the range is $[0,\infty)$."],
+["For $f(x)=2x+1$ with domain $\mathbb R$, the range is:",["$\mathbb R$","$[1,\infty)$","$(0,\infty)$","$[-1,1]$"],0,"A nonconstant linear function with real domain can attain every real output, so its range is $\mathbb R$."],
+["If $f(x)=\dfrac{1}{x}$ with domain $\mathbb R\setminus\{0\}$, its range is:",["$\mathbb R\setminus\{0\}$","$[0,\infty)$","$\mathbb R$","$(0,\infty)$"],0,"The value $0$ can never be produced by $1/x$, while every nonzero real value can be obtained."],
+["For $f(x)=\sqrt{x-2}$, the range is:",["$[0,\infty)$","$(-\infty,2]$","$[2,\infty)$","$\mathbb R$"],0,"A square root is always nonnegative. Every $y\ge0$ occurs by taking $x=y^2+2$."],
+["If $f(x)=x^2-4$ for $x\in\mathbb R$, the minimum value of $f$ is:",["$-4$","$0$","$4$","$-2$"],0,"Because $x^2\ge0$, we have $x^2-4\ge-4$, with equality at $x=0$. Thus the range begins at $-4$."],
+["For $f(x)=|x-3|$, the range is:",["$[0,\infty)$","$(-\infty,0]$","$[3,\infty)$","$\mathbb R$"],0,"Absolute value is nonnegative and reaches $0$ at $x=3$, so all outputs are $y\ge0$."],
+["A useful graphical method for finding the range is to examine:",["Horizontal lines intersecting the graph","Only the vertical axis","Only the $x$-intercepts","The slope at the origin"],0,"The horizontal-line viewpoint identifies which $y$-values occur on the graph; equivalently, project the graph onto the $y$-axis."],
+["A mathematical program samples $f(x)$ on a finite input list. To estimate the range from those samples, it should:",["Collect the distinct computed output values","Discard all output values","Use only the smallest input","Replace each output by its input"],0,"For sampled data, the estimated range is the set of distinct outputs produced by the sampled inputs."],
+["If $f(x)=\dfrac{x-1}{x-1}$ for $x\ne1$, the range is:",["$\{1\}$","$\mathbb R\setminus\{1\}$","$\mathbb R$","$\{0\}$"],0,"For every allowed $x$, $f(x)=1$. Thus the only attained output is $1$, so the range is $\{1\}$."]
+],
 };

@@ -1710,4 +1710,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A first-order linear equation is linear because:",["y and y' occur only to the first power and are not multiplied together","It always has a straight-line graph","It has no derivatives","It contains only constants"],0,"Linearity refers to the powers and combinations of the unknown function and derivative."],
 ["An initial condition in a first-order linear ODE is used to:",["Determine the arbitrary constant","Change the order","Remove the derivative","Find the integrating factor"],0,"The condition selects one particular solution."]
 ]
+,"Exact differential equations":[
+["A first-order differential equation M dx+N dy=0 is exact if:",["∂M/∂y=∂N/∂x","M=N","M+N=0","∂M/∂x=∂N/∂y"],0,"Exactness requires equality of the cross partial derivatives."],
+["For M dx+N dy=0, the test for exactness involves:",["Cross partial derivatives","Only M","Only N","The second derivative of y"],0,"Compare ∂M/∂y with ∂N/∂x."],
+["If an equation is exact, it can be written as:",["dF=0","dy=0 always","dx=0 always","F'=1"],0,"An exact differential equation has a potential function F with dF=Mdx+Ndy."],
+["If F(x,y)=x²+y², then dF is:",["2x dx+2y dy","x dx+y dy","x²dx+y²dy","2x+2y"],0,"Differentiate F with respect to both variables."],
+["The solution of an exact equation dF=0 is:",["F(x,y)=C","F(x,y)=0 only","F'=C","x+y=C always"],0,"Integrating dF=0 gives F=C."],
+["For M=2xy and N=x², the equation Mdx+Ndy=0 is:",["Exact","Not exact","Second order","Algebraic"],0,"∂M/∂y=2x and ∂N/∂x=2x."],
+["An exact differential equation is associated with a:",["Potential function","Characteristic polynomial","Periodic function","Matrix inverse"],0,"The potential function generates the differential expression."],
+["If ∂M/∂y and ∂N/∂x are unequal, the equation is:",["Not exact","Always exact","Second order","Separable automatically"],0,"Unequal cross partial derivatives fail the standard exactness test."],
+["The arbitrary constant in an exact-equation solution appears after:",["Integrating the differential","Differentiating twice","Factoring M","Setting x=0"],0,"The equation integrates to a constant-level curve."],
+["Exact equations are generally solved by finding:",["A function F(x,y) whose differential matches the equation","Only y'","Only x","Only an integrating factor"],0,"Find F such that F_x=M and F_y=N."]
+],
+"Bernoulli equations":[
+["A Bernoulli differential equation has the form:",["y'+P(x)y=Q(x)y^n","y''+y=0","y'=P(x)+Q(x)","y'+P(x)=Q(x)"],0,"This is the standard Bernoulli form."],
+["For a Bernoulli equation, the substitution is commonly:",["v=y^{1−n}","v=y^n","v=ln y always","v=x^n"],0,"The substitution v=y^(1−n) transforms it into a linear equation."],
+["If n=0, the Bernoulli equation becomes:",["A linear first-order equation","Second order","Always separable only","An algebraic equation"],0,"The nonlinear term becomes 1, giving y'+Py=Q."],
+["If n=1, the Bernoulli equation becomes:",["A linear first-order equation","Second order","Undefined","Always exact"],0,"y'+Py=Qy can be rearranged into a linear homogeneous equation."],
+["For n≠0,1, Bernoulli's substitution is useful because it:",["Linearizes the equation","Raises the order","Removes x","Makes y constant"],0,"The transformed variable satisfies a first-order linear equation."],
+["If v=y^(1−n), then dv/dx is proportional to:",["y^(−n)dy/dx","y^n dy/dx","y dy/dx","dy/dx only"],0,"Differentiating gives dv/dx=(1−n)y^(−n)y'."],
+["A Bernoulli equation is generally:",["Nonlinear in y","Always linear","Second order","Algebraic"],0,"The y^n term makes it nonlinear when n is not 0 or 1."],
+["The integrating factor is typically applied:",["After transforming to a linear equation","Before defining v","To the original nonlinear term only","Never"],0,"First use the Bernoulli substitution, then solve the resulting linear equation."],
+["A common mistake is to forget the case:",["y=0 when dividing by powers of y","x=0 only","n=2 only","P(x)=0 only"],0,"Dividing by y-related factors can exclude the zero solution, which should be checked."],
+["Bernoulli equations combine ideas from:",["Substitution and linear ODE methods","Only integration by parts","Only geometry","Only matrices"],0,"The method transforms the equation and then uses linear-equation techniques."]
+],
+"Second-order differential equations":[
+["A second-order differential equation contains a highest derivative of:",["Second order","First order","Third order","Zero order"],0,"The highest derivative is y''."],
+["The equation y''+4y=0 is:",["Second order","First order","Third order","Algebraic"],0,"The highest derivative is y''."],
+["A general second-order ODE solution typically contains:",["Two arbitrary constants","One arbitrary constant","No constants","Three constants always"],0,"Two integrations generally introduce two independent constants."],
+["For a second-order equation, two independent initial conditions are often needed to determine:",["The two constants","The order","The variable x","The derivative formula"],0,"Conditions such as y(x₀) and y'(x₀) determine the constants."],
+["A second-order linear ODE has y and its derivatives:",["To the first power and not multiplied together","Squared always","Only as constants","Without derivatives"],0,"That is the meaning of linearity."],
+["The equation y''−3y'+2y=0 is:",["Linear homogeneous second order","Nonlinear first order","Separable first order","Algebraic"],0,"It is second order, linear, and has zero right side."],
+["The complementary solution of a homogeneous linear ODE is found using:",["The characteristic equation","Only integration by parts","Only substitution","A definite integral"],0,"The characteristic polynomial determines the fundamental solutions."],
+["A nonhomogeneous second-order ODE contains:",["A nonzero forcing term","No derivatives","Only constants","Only y''"],0,"A forcing function appears on the right or after rearrangement."],
+["Second-order ODEs can model:",["Oscillations and mechanical motion","Only arithmetic","Only sets","Only factorisation"],0,"They are widely used for motion, vibrations, circuits, and other systems."],
+["The highest derivative in y''+y'+y=sin x is:",["y''","y'","y","sin x"],0,"The equation is second order because y'' is the highest derivative."]
+],
+"Homogeneous linear ODEs":[
+["A homogeneous linear ODE has:",["Zero forcing term","A nonzero forcing term","No derivatives","Only constants"],0,"The right-hand side is zero in the homogeneous equation."],
+["For y''+ay'+by=0, the characteristic equation is:",["r²+ar+b=0","r+a+b=0","ar+b=0","r²+a+b=0"],0,"Replace derivatives by powers of r to form the characteristic polynomial."],
+["If the characteristic roots are distinct real numbers r₁,r₂, the solution is:",["C₁e^{r₁x}+C₂e^{r₂x}","C₁e^{r₁x} only","C₁+C₂x","C₁cos x+C₂sin x always"],0,"Distinct real roots give two independent exponential solutions."],
+["If the characteristic root is repeated r, the solution is:",["(C₁+C₂x)e^{rx}","C₁e^{rx}","C₁+C₂","C₁x²e^{rx}"],0,"A repeated root requires multiplication of the second solution by x."],
+["For complex roots α±iβ, the real solution uses:",["e^{αx}(C₁cosβx+C₂sinβx)","C₁e^{αx}+C₂e^{βx}","C₁x+C₂","Only e^{iβx}"],0,"Complex conjugate roots produce sine and cosine terms multiplied by e^{αx}."],
+["The characteristic equation is obtained by assuming a solution of the form:",["y=e^{rx}","y=x^r only","y=rx","y=sin rx only"],0,"Substitution of y=e^{rx} yields the characteristic polynomial."],
+["For y''−5y'+6y=0, the characteristic equation is:",["r²−5r+6=0","r²+5r+6=0","r−5+6=0","5r²−6=0"],0,"Replace y'' by r² and y' by r."],
+["The roots of r²−5r+6=0 are:",["2 and 3","−2 and −3","1 and 6","0 and 5"],0,"Factor as (r−2)(r−3)=0."],
+["A homogeneous linear ODE follows the:",["Principle of superposition","Product rule only","Remainder theorem","Pythagorean theorem"],0,"Linear combinations of solutions are also solutions."],
+["Initial conditions for a second-order homogeneous ODE determine:",["The constants in the general solution","The characteristic polynomial only","The order","The independent variable"],0,"The two conditions determine C₁ and C₂."]
+],
+"Characteristic equation":[
+["For y''+3y'+2y=0, the characteristic equation is:",["r²+3r+2=0","r²−3r+2=0","3r²+r+2=0","r+3+2=0"],0,"Replace y'' with r² and y' with r."],
+["The roots of r²+3r+2=0 are:",["−1 and −2","1 and 2","−1 and 2","1 and −2"],0,"Factor as (r+1)(r+2)=0."],
+["If the characteristic roots are 1 and 4, the complementary solution is:",["C₁e^x+C₂e^{4x}","C₁e^x+C₂e^x","C₁cos x+C₂sin x","C₁+C₂x"],0,"Each distinct real root gives an exponential solution."],
+["For a repeated root r=2, the second independent solution is:",["xe^{2x}","e^x","x²","2x"],0,"A repeated root requires multiplication by x."],
+["If roots are 2±3i, the real solution has the form:",["e^{2x}(C₁cos3x+C₂sin3x)","e^{3x}(C₁cos2x+C₂sin2x)","C₁e^{2x}+C₂e^{3x}","C₁cos2x+C₂sin3x"],0,"The real part controls exponential growth and the imaginary part controls oscillation."],
+["The degree of the characteristic polynomial for a second-order linear ODE is:",["2","1","3","4"],0,"A second-order equation produces a quadratic characteristic equation for constant coefficients."],
+["The discriminant of r²+br+c is:",["b²−4c","b²+4c","4c−b²","b−4c"],0,"The quadratic discriminant is b²−4c."],
+["A negative discriminant gives:",["Complex conjugate roots","Two distinct real roots","A repeated real root","No solution always"],0,"A quadratic with negative discriminant has complex conjugate roots."],
+["A zero discriminant gives:",["A repeated real root","Two distinct real roots","Complex roots","No roots"],0,"The quadratic has one repeated real root."],
+["The characteristic equation is especially useful for:",["Constant-coefficient linear homogeneous ODEs","All nonlinear equations","Only separable equations","Only algebraic identities"],0,"It is the standard method for this class of ODEs."]
+],
+"Applications of differential equations":[
+["Differential equations can model population growth because population changes with:",["Time","Only position","Only angle","Only area"],0,"Population is a time-dependent quantity."],
+["The exponential growth model is commonly:",["dP/dt=kP","dP/dt=P+k only","P'=0","P''=k"],0,"Growth proportional to population gives dP/dt=kP."],
+["Newton's law of cooling relates temperature change to:",["Difference from ambient temperature","Square of time only","Mass only","Position only"],0,"The cooling rate is proportional to the difference between object and surroundings."],
+["In a simple harmonic oscillator, the acceleration is proportional to:",["Negative displacement","Positive displacement only","Time squared","Velocity only"],0,"The model is x''=−ω²x."],
+["A logistic growth model includes:",["A carrying-capacity effect","Only unlimited growth","No population dependence","Only constant temperature"],0,"Logistic growth slows as the population approaches carrying capacity."],
+["An initial value problem consists of:",["A differential equation plus initial condition(s)","Only an equation","Only a graph","Only a boundary"],0,"Initial data selects a particular solution."],
+["In radioactive decay, the rate is commonly proportional to:",["The amount remaining","The square of time","The derivative of time","A constant only"],0,"The standard model is dN/dt=−kN."],
+["A solution curve of an ODE represents:",["A state that satisfies the governing rate relation","Only an x-intercept","Only a derivative","A random curve"],0,"Every point on a solution curve satisfies the differential equation."],
+["Differential-equation models are useful in:",["Physics, biology, chemistry, and engineering","Only arithmetic","Only geometry","Only grammar"],0,"They are widely used across science and engineering."],
+["Model validation involves comparing model predictions with:",["Observed or known behavior","Only derivatives","Only constants","Only the domain"],0,"A useful model should agree reasonably with relevant observations or known results."]
+]
 };

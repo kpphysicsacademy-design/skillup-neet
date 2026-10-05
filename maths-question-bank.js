@@ -2738,4 +2738,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program checks whether sampled values satisfy the evenness condition. For paired samples $x$ and $-x$, which test should it perform?",["Check whether $f(-x)=f(x)$","Check whether $f(-x)=-f(x)$","Check whether $f(x)=x$","Check whether $f(-x)=0$"],0,"The numerical test for evenness compares each symmetric input pair and requires equal function values."],
 ["If $f(x)=x^4-3x^2+5$, then $f$ is:",["Even","Odd","Neither even nor odd","Not a function"],0,"Substituting $-x$ gives $(-x)^4-3(-x)^2+5=x^4-3x^2+5=f(x)$, so the function is even."]
 ],
+
+"Odd functions":[
+["A function $f$ is odd when it satisfies:",["$f(-x)=-f(x)$ for every $x$ in its domain","$f(-x)=f(x)$ for every $x$","$f(x)=0$ for every $x$","$f(x)=x^2$ for every $x$"],0,"The defining condition for an odd function is $f(-x)=-f(x)$."],
+["Which function is odd on $\\mathbb R$?",["$x^3$","$x^2$","$|x|$","$x^2+1$"],0,"Since $(-x)^3=-x^3$, the function $x^3$ satisfies the odd-function condition."],
+["Which statement correctly describes the graph of an odd function?",["It has symmetry about the origin","It has symmetry about the $y$-axis","It has symmetry about the $x$-axis","It has no possible symmetry"],0,"If $(x,f(x))$ is on the graph, then $(-x,-f(x))$ is also on it, giving origin symmetry."],
+["If $f(x)=\\sin x$, then $f(-x)$ equals:",["$-\\sin x$","$\\sin x$","$\\cos x$","$-\\cos x$"],0,"The identity $\\sin(-x)=-\\sin x$ shows that sine is odd."],
+["If $f$ and $g$ are odd functions on a common symmetric domain, then $f+g$ is:",["Odd","Even","Constant","Neither necessarily"],0,"$(f+g)(-x)=f(-x)+g(-x)=-f(x)-g(x)=-(f+g)(x)$, so the sum is odd."],
+["If $f$ is odd and $c$ is a constant, then $cf$ is:",["Odd","Even for every nonzero $c$","Always constant","Undefined"],0,"$(cf)(-x)=c f(-x)=-c f(x)=-(cf)(x)$, so scalar multiplication preserves oddness."],
+["Which function is neither even nor odd on $\\mathbb R$?",["$x^2+x$","$x^2$","$x^3$","$\\sin x$"],0,"For $f(x)=x^2+x$, $f(-x)=x^2-x$, which is neither $f(x)$ nor $-f(x)$ for general $x$."],
+["For an odd function with $f(4)=-3$, the value of $f(-4)$ is:",["$3$","$-3$","$4$","$-4$"],0,"Using $f(-x)=-f(x)$ at $x=4$ gives $f(-4)=-(-3)=3$."],
+["A mathematical program tests oddness using paired inputs $x$ and $-x$. Which condition should it verify?",["$f(-x)=-f(x)$","$f(-x)=f(x)$","$f(x)=x$","$f(-x)=0$"],0,"For each symmetric input pair, an odd function must produce opposite function values."],
+["If $f(x)=x^5-2x^3+x$, then $f$ is:",["Odd","Even","Neither even nor odd","Not defined on $\\mathbb R$"],0,"Every term has an odd power, so $f(-x)=-f(x)$; therefore the polynomial is odd."]
+],
 };

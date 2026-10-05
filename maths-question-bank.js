@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Exponential function":[
+["An exponential function has the form:",["$f(x)=a^x$ where $a>0$ and $a\\ne1$","$f(x)=x^a$ only","$f(x)=a+x$ only","$f(x)=\\log_a x$ only"],0,"The basic exponential function uses the variable as the exponent."],
+["For $f(x)=2^x$, the range is:",["$(0,\\infty)$","$\\mathbb R$","$[0,\\infty)$","$(-\\infty,0)$"],0,"A positive base raised to any real power is always positive."],
+["The function $f(x)=2^x$ is:",["Strictly increasing","Strictly decreasing","Constant","Neither increasing nor decreasing"],0,"Since the base 2 is greater than 1, increasing x increases $2^x$."],
+["The function $f(x)=(1/2)^x$ is:",["Strictly decreasing","Strictly increasing","Constant","Undefined for all x"],0,"A positive base between 0 and 1 produces a decreasing exponential."],
+["Solve $2^x=8$.",["$x=3$","$x=2$","$x=4$","$x=1$"],0,"Since $8=2^3$, the exponent is $x=3$."],
+["For $f(x)=a^x$ with $a>1$, the graph passes through:",["$(0,1)$","$(1,0)$","$(0,0)$","$(1,1)$ only"],0,"$a^0=1$, so every exponential function of this form passes through $(0,1)$."],
+["The horizontal asymptote of $y=2^x$ is:",["$y=0$","$x=0$","$y=1$","$x=1$"],0,"As $x\to-\\infty$, $2^x\to0$, so $y=0$ is the horizontal asymptote."],
+["A programming algorithm for $a^n$ with positive integer n can use repeated multiplication. For $a=2,n=4$, the result is:",["16","8","12","24"],0,"Repeated multiplication gives $2\\times2\\times2\\times2=16$."],
+["Solve $3^{2x-1}=27$.",["$x=2$","$x=1$","$x=3$","$x=4$"],0,"Since $27=3^3$, $2x-1=3$, giving $x=2$."],
+["If $a^x=a^y$ for $a>0$ and $a\\ne1$, then:",["$x=y$","$x=-y$ always","$x+y=1$ always","No conclusion is possible"],0,"An exponential function with an admissible base is one-one, so equal outputs imply equal exponents."]
+],
+
 "Modulus function":[
 ["The modulus function is defined by:",["$|x|=\\begin{cases}x,&x\\ge0\\\\-x,&x<0\\end{cases}$","$|x|=x^2$ for all x","$|x|=1/x$ for all x","$|x|=x+1$ for all x"],0,"The modulus gives the nonnegative magnitude of a real number."],
 ["The domain and range of $f(x)=|x|$ are:",["Domain $\\mathbb R$, range $[0,\\infty)$","Domain $[0,\\infty)$, range $\\mathbb R$","Both are $\\mathbb R$","Both are $[0,\\infty)$"],0,"Every real x is allowed, while $|x|\\ge0$."],

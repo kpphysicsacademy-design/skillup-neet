@@ -16,8 +16,8 @@
 .wrap{padding:16px 13px 70px}.tools{display:flex;gap:8px;margin:17px 0 10px}.search{flex:1;padding:11px;border:2px solid var(--l);border-radius:13px;font-size:12px;background:#fff}.search-btn{border:0;border-radius:13px;background:var(--b);color:#fff;font-weight:950;padding:0 16px;cursor:pointer;box-shadow:0 3px 0 #0d5bbf}
 .path{padding-left:9px;position:relative}.unit-group{margin:20px 0 12px}.unit{display:flex;align-items:center;gap:8px;margin:0 0 9px}.unit-main{display:flex;align-items:center;gap:8px;min-width:0}.unum{width:36px;height:36px;flex:0 0 36px;border-radius:50%;display:grid;place-items:center;background:var(--b);color:#fff;font-size:11px;font-weight:950;border:4px solid #e7f1ff}.unit h2{margin:0;color:var(--n);font-size:15px}.unit small{color:var(--m);font-size:8px}
 .chapter{position:relative;margin:7px 0 7px 43px}.node{position:absolute;left:-27px;top:23px;width:17px;height:17px;border-radius:50%;background:#fff;border:5px solid #b8d3ef}.chapter a{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#fff;border:2px solid var(--l);border-radius:17px;padding:10px;box-shadow:0 6px 16px rgba(18,59,112,.07);transition:.16s;text-decoration:none;color:inherit}.chapter a:hover{transform:translateY(-2px);border-color:#8ebced}.title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:950}.icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#fff,#e5f1ff);border:2px solid #cfe2f6;box-shadow:0 4px 0 #b5cfe9,0 7px 14px rgba(22,119,255,.12);font-size:21px}.sub{margin:3px 0 0;font-size:8px;color:var(--m)}.tag{display:inline-block;margin-top:5px;margin-right:4px;padding:3px 6px;border-radius:99px;background:#eef4fb;color:#526b86;font-size:7px;font-weight:900}.go{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;background:var(--b);color:#fff;font-weight:950;box-shadow:0 4px 0 #0d5bbf}
-.concepts{margin:5px 0 14px 28px;display:grid;gap:5px}.concept{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center;background:#fff;border:1px solid var(--l);border-radius:12px;padding:8px 9px;text-decoration:none;color:#526b86;font-size:9px;font-weight:800;box-shadow:0 3px 9px rgba(18,59,112,.04)}.concept:hover{border-color:#8ebced}.cmeta{font-size:7px;color:#98a4b3}.empty{text-align:center;padding:20px;color:var(--m);display:none}.card{margin-top:14px;background:#fff;border:1px solid var(--l);border-radius:16px;padding:13px}
-@media(max-width:700px){.wrap{padding:12px 9px 70px}.chapter{margin-left:28px}.node{left:-18px}.concepts{margin-left:18px}.title{font-size:11px}.icon{width:37px;height:37px;flex-basis:37px;font-size:19px}.go{width:30px;height:30px}}
+.section-label{margin:8px 0 4px 28px;font-size:8px;font-weight:950;color:var(--n);letter-spacing:.5px}.concepts{margin:5px 0 14px 28px;display:grid;gap:5px}.basics{margin-bottom:7px}.concept{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center;background:#fff;border:1px solid var(--l);border-radius:12px;padding:8px 9px;text-decoration:none;color:#526b86;font-size:9px;font-weight:800;box-shadow:0 3px 9px rgba(18,59,112,.04)}.concept:hover{border-color:#8ebced}.cmeta{font-size:7px;color:#98a4b3}.empty{text-align:center;padding:20px;color:var(--m);display:none}.card{margin-top:14px;background:#fff;border:1px solid var(--l);border-radius:16px;padding:13px}
+@media(max-width:700px){.wrap{padding:12px 9px 70px}.chapter{margin-left:28px}.node{left:-18px}.section-label{margin-left:18px}.concepts{margin-left:18px}.title{font-size:11px}.icon{width:37px;height:37px;flex-basis:37px;font-size:19px}.go{width:30px;height:30px}}
 </style>
 <script src="iit-maths-path-curriculum.js?v=20261005"></script>
 </head>
@@ -36,8 +36,56 @@ var icons=['🔢','🔗','📐','🧮','📊','📍','📈','∫','🧭','🏆']
 for(var i=0;i<d.length;i++){var cs=d[i][2]||[];for(var j=0;j<cs.length;j++)a.push({u:i+1,n:d[i][1],c:cs[j][0],concepts:cs[j][1]||[],ix:a.length+1});}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function unit(x){return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.n)+'</h2><small>'+d[x.u-1][2].length+' chapters • UNIT '+x.u+' of '+d.length+'</small></div></div></div>';}
-function concepts(x){var h='<div class="concepts">';x.concepts.forEach(function(v){h+='<a class="concept" href="/iit-maths-path.html?concept='+encodeURIComponent(v)+'&v=20261005"><span>'+esc(v)+'</span><span class="cmeta">›</span></a>';});return h+'</div>';}
-function card(x){return '<article class="chapter"><span class="node"></span><a href="/iit-maths-path.html?chapter='+encodeURIComponent(x.c)+'&v=20261005"><div><div class="title"><span class="icon">'+icons[(x.u-1)%icons.length]+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+' • '+x.concepts.length+' concepts</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a>'+concepts(x)+'</article>';}
+var basics={
+'Number Sense':['Natural numbers','Whole numbers','Integers','Rational numbers','Number line'],
+'Algebraic Manipulation':['Variables','Constants','Terms','Coefficients','Algebraic expressions'],
+'Sets':['Set representation','Empty set','Singleton set','Finite and infinite sets','Subsets'],
+'Relations':['Ordered pairs','Cartesian product','Relations','Domain','Range'],
+'Functions':['Function as mapping','Domain','Codomain','Range','Function notation'],
+'Quadratic Equations':['Quadratic expressions','Standard form','Roots','Factorisation method','Quadratic formula'],
+'Sequences and Series':['Sequence','General term','Arithmetic progression','nth term of AP','Sum of AP'],
+'Mathematical Induction':['Principle of induction','Base case','Induction hypothesis','Induction step'],
+'Permutations and Combinations':['Fundamental counting principle','Factorial','Permutations','Combinations','Selection problems'],
+'Binomial Theorem':['Binomial expansion','General term','Binomial coefficients','Pascal triangle','Middle term'],
+'Complex Numbers':['Imaginary unit','Complex number representation','Real and imaginary parts','Equality','Modulus'],
+'Matrices and Determinants':['Matrix notation','Order of matrix','Row and column matrix','Square matrix','Identity matrix'],
+'Logarithms':['Definition','Exponential-log relation','Common logarithm','Natural logarithm','Log laws'],
+'Trigonometric Ratios and Identities':['Angle measurement','Degree','Radian','Trigonometric ratios','Unit circle'],
+'Trigonometric Equations':['Basic equations','General solutions','Principal solutions'],
+'Inverse Trigonometric Functions':['Definitions','Domain','Range','Principal values','Graphs'],
+'Properties of Triangles':['Triangle basics','Congruence','Similarity','Pythagoras theorem','Area formulae'],
+'Cartesian Coordinate System':['Cartesian plane','Coordinates','Quadrants','Distance formula','Midpoint'],
+'Straight Lines':['General equation','Slope','Slope-intercept form','Point-slope form','Parallel lines'],
+'Circle':['Standard equation','Centre and radius','Diameter form','Tangent','Chord'],
+'Parabola':['Definition','Focus','Directrix','Eccentricity','Standard equations'],
+'Ellipse':['Definition','Standard equation','Focus','Directrix','Eccentricity'],
+'Hyperbola':['Standard equation','Focus','Directrix','Eccentricity','Transverse axis'],
+'Limits':['Concept of limit','Left-hand limit','Right-hand limit','Existence of limit','Algebra of limits'],
+'Continuity':['Continuity at a point','Left continuity','Right continuity','Continuity on interval','Discontinuities'],
+'Differentiation':['Derivative concept','First principles','Geometrical meaning','Physical meaning','Standard derivatives'],
+'Mean Value Theorems':["Rolle's theorem",'Lagrange MVT','Geometrical interpretation','Applications of MVT'],
+'Application of Derivatives':['Rate of change','Increasing functions','Decreasing functions','Monotonicity','Critical points'],
+'Indefinite Integration':['Antiderivative','Standard integrals','Substitution','Integration by parts','Partial fractions'],
+'Definite Integration':['Definite integral','Fundamental theorem','Properties','Symmetry','Limits of integration'],
+'Area Under Curves':['Area with x-axis','Area with y-axis','Area between curves','Intersection points','Splitting regions'],
+'Differential Equations':['Differential equation concept','Order','Degree','Formation','General solution'],
+'Vectors':['Scalar','Vector','Magnitude','Direction','Unit vector'],
+'3D Geometry':['3D coordinates','Direction ratios','Direction cosines','Equation of line','Plane'],
+'Statistics':['Mean','Weighted mean','Median','Mode','Range'],
+'Probability':['Random experiment','Sample space','Events','Mutually exclusive events','Classical probability'],
+'JEE Main Mathematics':['Chapter-wise practice','Formula application','Speed calculation','Mixed algebra','Mixed trigonometry'],
+'JEE Advanced Mathematics':['Advanced algebra problems','Advanced complex numbers','Advanced P&C and probability','Advanced coordinate geometry','Advanced calculus']
+};
+function linkConcept(v){return '<a class="concept" href="/iit-maths-path.html?concept='+encodeURIComponent(v)+'&v=20261005"><span>'+esc(v)+'</span><span class="cmeta">›</span></a>';}
+function concepts(x){
+var b=basics[x.c]||[],h=b.length?'<div class="section-label">📌 BASICS</div><div class="concepts basics">':'';
+b.forEach(function(v){h+=linkConcept(v);});
+if(b.length)h+='</div>';
+h+='<div class="section-label">📚 SUB-CONCEPTS</div><div class="concepts">';
+x.concepts.forEach(function(v){h+=linkConcept(v);});
+return h+'</div>';
+}
+function card(x){return '<article class="chapter"><span class="node"></span><a href="/iit-maths-path.html?chapter='+encodeURIComponent(x.c)+'&v=20261005"><div><div class="title"><span class="icon">'+icons[(x.u-1)%icons.length]+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Chapter '+x.ix+' • '+esc(x.n)+' • '+x.concepts.length+' concepts + basics</div><span class="tag">🎯 CHAPTER '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a>'+concepts(x)+'</article>';}
 function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){var x=list[i];if(x.u!==last){h+=unit(x);last=x.u;}h+=card(x);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(term||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){var x=a[i];if(x.u!==last){h+=unit(x);last=x.u;}h+=card(x);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);

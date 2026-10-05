@@ -55,7 +55,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$','$']]},svg:{fo
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
-<script src="maths-question-bank.js?v=20261005af"></script>
+<script src="maths-question-bank.js?v=20261005af2"></script>
 <script>
 const qs=new URLSearchParams(location.search),concept=qs.get('concept')||'Natural numbers';
 let skillUpSession=null;
@@ -88,13 +88,17 @@ questions:[
 ['The additive inverse of 6 is:',['6','0','−6','1/6'],2,'6+(−6)=0.']
 ]}
 };
-const fallback={learn:'This concept is part of the SkillUp Mathematics progressive path. Study the definition, key properties, worked examples, then practise before moving to the next concept.',formula:'',next:'Integers',questions:[['Is this concept available for practice?',['Yes','No','Only later','Not sure'],0,'This concept is connected to the progressive practice flow.']]};
-const data=bank[concept]||fallback;document.getElementById('headerTitle').textContent=concept;
+const data=bank[concept]||null;document.getElementById('headerTitle').textContent=concept;
 function typeset(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}
 if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(typeset);
 const bankQuiz=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept]);
-const questions=Array.isArray(bankQuiz)&&bankQuiz.length?bankQuiz:data.questions;
-if(!Array.isArray(bankQuiz)||!bankQuiz.length){console.warn('Dedicated Maths quiz bank entry not loaded for concept:',concept);}
+if(!Array.isArray(bankQuiz)||!bankQuiz.length){
+ console.warn('Dedicated Maths quiz bank entry not loaded for concept:',concept);
+ document.getElementById('quiz').style.display='none';
+ document.getElementById('result').style.display='none';
+ throw new Error('No dedicated Maths quiz available for concept: '+concept);
+}
+const questions=bankQuiz;
 let i=0,score=0,answered=false;
 const startedAt=Date.now();
 const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),cont=document.getElementById('continue'),quizEl=document.getElementById('quiz'),resultEl=document.getElementById('result');

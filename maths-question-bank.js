@@ -2896,6 +2896,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If $f(x)=x+1$ and $g(x)=2x-1$, then $(f+g)(x)(f-g)(x)$ simplifies to:",["$-3x^2+6x$","$3x^2-6x$","$x^2+2x-1$","$4x^2-1$"],0,"Use $(f+g)(f-g)=f^2-g^2$. Thus $(x+1)^2-(2x-1)^2= -3x^2+6x$, so the displayed options need checking; the correct simplified result is $-3x^2+6x$."]
 ],
 };,
+
 ["For $a,b\\in\\mathbb R$, which statement is always true?",["$a+b\\in\\mathbb R$","$a+b$ is irrational","$ab>0$","$a/b$ is always defined"],0,"The real numbers are closed under addition, so $a+b$ is always real."],
 ["Which number is irrational?",["$\\sqrt2$","$0.25$","$\\dfrac37$","$-5$"],0,"$\\sqrt2$ cannot be expressed as a ratio of integers, so it is irrational."],
 ["Which set contains all integers?",["$\\mathbb Z$","$\\mathbb N$","$\\mathbb Q$","$\\mathbb R^+$"],0,"$\\mathbb Z$ denotes the set of all integers."],

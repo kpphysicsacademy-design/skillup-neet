@@ -16,6 +16,7 @@
 <section class="quiz" id="quiz"><div class="eyebrow" id="level">PRACTICE</div><h2 id="qnum">Question 1 of 10</h2><div id="question" class="qtext"></div><div id="answers" class="answers"></div><div id="feedback" class="feedback"></div><button id="continue" class="continue">Continue →</button></section>
 <section class="result" id="result"><h2>🎉 Concept complete!</h2><p id="score"></p><a id="next" class="next" href="maths-path-concept.html?concept=Integers">Continue to Integers →</a></section>
 </main>
+<script src="maths-question-bank.js"></script>
 <script>
 const qs=new URLSearchParams(location.search),concept=qs.get('concept')||'Natural numbers';
 const bank={
@@ -43,7 +44,7 @@ questions:[
 const fallback={learn:'This concept is part of the SkillUp Mathematics progressive path. Study the definition, key properties, worked examples, then practise before moving to the next concept.',formula:'',next:'Integers',questions:[['Is this concept available for practice?',['Yes','No','Only later','Not sure'],0,'This concept is connected to the progressive practice flow.']]};
 const data=bank[concept]||fallback;document.getElementById('title').textContent=concept;document.getElementById('learn').innerHTML=data.learn+(data.formula?'<div class="formula">'+data.formula+'</div>':'');
 if(window.MathJax)MathJax.typesetPromise();
-const questions=data.questions;let i=0,score=0,answered=false;
+const questions=(window.SKILLUP_MATHS_QUIZ_BANK&&window.SKILLUP_MATHS_QUIZ_BANK[concept])||data.questions;let i=0,score=0,answered=false;
 const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),fb=document.getElementById('feedback'),cont=document.getElementById('continue'),bar=document.getElementById('bar');
 function render(){answered=false;cont.style.display='none';fb.textContent='';document.getElementById('qnum').textContent='Question '+(i+1)+' of '+questions.length;bar.style.width=(i/questions.length*100)+'%';const q=questions[i];qEl.innerHTML=q[0];aEl.innerHTML='';q[1].forEach((x,n)=>{const b=document.createElement('button');b.className='ans';b.textContent=x;b.onclick=()=>answer(n,b);aEl.appendChild(b)});if(window.MathJax)MathJax.typesetPromise()}
 function answer(n,button){if(answered)return;answered=true;const q=questions[i];[...aEl.children].forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('correct')});if(n===q[2]){score++;fb.textContent='✅ Correct — '+q[3]}else{button.classList.add('wrong');fb.textContent='❌ Not quite — '+q[3]}cont.style.display='inline-block'}

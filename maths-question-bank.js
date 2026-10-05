@@ -316,5 +316,4 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If x<4, which statement is always true?",["x+1<5","x+1>5","x−1>4","2x>8"],0,"Adding 1 to both sides preserves the inequality: x+1<5."],
 ["Which inequality is true?",["−3>−1","−4<−2","5<2","0<−1"],1,"−4 lies to the left of −2 on the number line, so −4<−2."],
 ["When multiplying an inequality by a negative number, the inequality sign:",["Stays the same","Reverses","Becomes equal","Disappears"],1,"Multiplication or division by a negative reverses the direction of the inequality."]
-]
-]};
+};

@@ -36,6 +36,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["What percentage of 80 is 12?",["10%","12%","15%","20%"],2,"12/80×100=15%."],
 ["If a number is increased from 200 to 250, the percentage increase is:",["20%","25%","30%","50%"],1,"Increase=50. Percentage increase=50/200×100=25%."]
 ],
+"Powers":[
+["What is 2^5?",["10","16","25","32"],3,"2^5 means multiplying five 2s: 2×2×2×2×2=32."],
+["Which expression is equal to 3^4?",["3+3+3+3","4×3","3×3×3×3","3×4"],2,"A power represents repeated multiplication, so 3^4=3×3×3×3."],
+["What is 5^0?",["0","1","5","Undefined"],1,"Every nonzero number raised to the zero power equals 1."],
+["Simplify 2^3×2^4.",["2^7","2^12","4^7","2"],0,"When multiplying powers with the same base, add the exponents: 2^(3+4)=2^7."],
+["Simplify 7^5÷7^2.",["7^2","7^3","7^7","7^10"],1,"When dividing powers with the same base, subtract the exponents: 7^(5−2)=7^3."],
+["What is (3^2)^4?",["3^6","3^8","3^10","9^4"],1,"For a power raised to another power, multiply exponents: 3^(2×4)=3^8."],
+["Which is equal to 10^3?",["30","100","1000","10000"],2,"10^3=10×10×10=1000."],
+["Simplify 4^2×4^3.",["4^5","4^6","8^5","16^5"],0,"Add the exponents for the same base: 4^(2+3)=4^5."],
+["Which statement is correct?",["a^m×a^n=a^(m−n)","a^m×a^n=a^(m+n)","a^m×a^n=a^(mn)","a^m×a^n=a^(m/n)"],1,"For the same nonzero base, multiplication of powers adds their exponents."],
+["What is 2^0+3^0?",["0","1","2","3"],2,"Both 2^0 and 3^0 equal 1, so their sum is 2."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

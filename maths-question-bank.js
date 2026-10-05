@@ -2490,4 +2490,16 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["If A−B=∅, then:",["A⊆B","B⊆A","A=B always","A∩B=∅"],0,"No element of A lies outside B, so every element of A belongs to B."],
 ["Which identity gives B−A?",["B∩A^c","A∩B^c","A∪B^c","B∪A"],0,"By definition, B−A=B∩A^c."]
 ],
+"Set algebra identities":[
+["Which is the identity law for union?",["A∪∅=A","A∪U=A","A∪A=A^c","A∪A^c=∅"],0,"Union with the empty set leaves the set unchanged."],
+["Which is the identity law for intersection?",["A∩U=A","A∩∅=A","A∩A^c=A","A∩A=∅"],0,"Intersecting with the universal set leaves A unchanged."],
+["Which is an idempotent law?",["A∪A=A","A∪∅=∅","A∩U=U","A−A=A"],0,"Union and intersection are idempotent."],
+["Which is a complement law?",["A∪A^c=U","A∪A^c=∅","A∩A^c=A","A−A=U"],0,"A set together with its complement gives the universal set."],
+["Which identity is the absorption law?",["A∪(A∩B)=A","A∪B=A∩B","A∩B=A∪B","A−B=A"],0,"The absorption law states A∪(A∩B)=A."],
+["Which is the distributive law of intersection over union?",["A∩(B∪C)=(A∩B)∪(A∩C)","A∩(B∪C)=A∪B∪C","A∩(B∪C)=(A∩B)∩(A∩C)","A∩(B∪C)=B∪C"],0,"Intersection distributes over union."],
+["Which is the distributive law of union over intersection?",["A∪(B∩C)=(A∪B)∩(A∪C)","A∪(B∩C)=A∩B∩C","A∪(B∩C)=A∪B∪C","A∪(B∩C)=B∩C"],0,"Union distributes over intersection."],
+["De Morgan's first law is:",["(A∪B)^c=A^c∩B^c","(A∪B)^c=A^c∪B^c","(A∩B)^c=A^c∩B^c","(A∪B)^c=A∪B"],0,"The complement of a union equals the intersection of the complements."],
+["De Morgan's second law is:",["(A∩B)^c=A^c∪B^c","(A∩B)^c=A^c∩B^c","(A∩B)^c=A∩B","(A∩B)^c=A∪B"],0,"The complement of an intersection equals the union of the complements."],
+["Which statement correctly describes commutativity?",["A∪B=B∪A and A∩B=B∩A","A∪B=A−B","A∩B=A∪B","A−B=B−A"],0,"Union and intersection are commutative; set difference generally is not."]
+],
 };

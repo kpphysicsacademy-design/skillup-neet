@@ -2169,7 +2169,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Convert 0.\u03056 (0.666...) to a fraction.",["1/3","2/3","3/5","6/10"],1,"Let x=0.666... Then 10x−x=6, so 9x=6 and x=2/3."],
 ["What fraction equals 0.\u030512 (0.121212...)?",["4/33","12/99","1/12","12/90"],0,"Let x=0.121212... Then 100x=12.121212..., so 99x=12 and x=4/33."],
 ["Convert 0.\u030545 (0.454545...) to a fraction.",["45/100","5/11","9/20","45/99"],1,"For 0.454545..., 100x−x=45, so 99x=45 and x=5/11."],
-["Which fraction has decimal expansion 0.\u03057?",["1/7","2/7","5/7","7/10"],0,"1/7=0.142857..., so it is not 0.777...; the repeating decimal 0.777... equals 7/9. The correct fraction among the options is therefore none, so this item is invalid."],
+["Which fraction equals 0.\u03057 (0.777...)?",["7/8","7/9","8/9","9/10"],1,"Let x=0.777... Then 10x-x=7, so 9x=7 and x=7/9."],
 ["The fraction represented by 0.\u03059 (0.999...) is:",["1/9","9/10","1","9/11"],2,"Let x=0.999...; then 10x−x=9, giving 9x=9 and x=1."],
 ["Convert 0.\u030518 (0.181818...) to a fraction.",["2/11","18/99","9/50","1/18"],0,"Let x=0.181818... Then 100x−x=18, so 99x=18 and x=2/11."],
 ["Which fraction equals 0.\u03054 (0.444...)?",["4/9","2/5","4/10","1/4"],0,"The repeating decimal 0.444... equals 4/9."],

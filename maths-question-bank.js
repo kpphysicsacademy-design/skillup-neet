@@ -183,6 +183,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which property is shown by 7+12=12+7?",["Associative","Commutative","Distributive","Closure"],1,"The order of addends changes without changing the sum, so this is the commutative property."],
 ["Which number is the additive identity for whole numbers?",["0","1","−1","10"],0,"Adding zero leaves every whole number unchanged: n+0=n."],
 ["Which is the smallest whole number?",["−1","0","1","There is no smallest"],1,"Whole numbers begin at 0, so 0 is the smallest whole number."],
-["What is 8×(10+2)?",["88","96","100","104"],3,"Using the distributive property, 8×12=96. Therefore the correct value is 96."],
+["What is 8×(10+2)?",["88","96","100","104"],1,"Using the distributive property, 8×12=96. Therefore the correct value is 96."],
 ["Which statement about whole numbers is true?",["Every whole number is negative","Every whole number is an integer","Every integer is a whole number","Whole numbers include fractions"],1,"Whole numbers are a subset of the integers, consisting of 0 and positive integers."],
-["Which operation can produce a result outside the whole numbers?",["Addition","Multiplication","Subtraction","Addition and multiplication"],2,"For example, 3−5=−2, which is not a whole number."]};
+["Which operation can produce a result outside the whole numbers?",["Addition","Multiplication","Subtraction","Addition and multiplication"],2,"For example, 3−5=−2, which is not a whole number."],
+"Surds":[
+["Which expression is a surd?",["√2","√4","3","0.25"],0,"√2 is irrational and cannot be simplified to a rational number, so it is a surd."],
+["Simplify √18.",["3√2","2√3","9√2","6√2"],0,"√18=√(9×2)=3√2."],
+["Simplify 2√3+5√3.",["7√3","10√3","7√6","√3"],0,"Like surds are combined by adding coefficients: 2√3+5√3=7√3."],
+["Simplify 8√5−3√5.",["5√5","5√2","11√5","√5"],0,"Subtract the coefficients of like surds: 8√5−3√5=5√5."],
+["Which is a like surd to 4√7?",["3√7","4√5","7√4","√14"],0,"Like surds have the same irrational part under the radical; 3√7 matches √7."],
+["Simplify √12+√27.",["5√3","3√3","7√3","√39"],0,"√12=2√3 and √27=3√3, so the sum is 5√3."],
+["What is √5×√20?",["5","10","20","√25"],0,"√5×√20=√100=10, so the correct value is 10."],
+["Simplify (√3)^2.",["√3","3","6","9"],1,"Squaring a square root gives the radicand: (√3)^2=3."],
+["Which statement is correct?",["√a+√b=√(a+b) for all a,b≥0","√(ab)=√a√b for a,b≥0","√a−√b=√(a−b) for all a,b≥0","(√a)^2=a only when a is irrational"],1,"For non-negative a and b, the product rule √(ab)=√a√b is valid."],
+["Simplify √50−√8.",["3√2","7√2","√42","2√2"],0,"√50=5√2 and √8=2√2, so the difference is 3√2."]
+]};

@@ -6,6 +6,11 @@
 <style>
 body{margin:0;background:#f7f9fc;color:#263238;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:820px;margin:auto;padding:18px 14px 60px}.card{background:#fff;border:1px solid #d9e0e8;border-radius:18px;padding:18px;margin-bottom:14px}.hero{background:#123b70;color:#fff}.hero h1{margin:0 0 8px}.q{padding:14px 0;border-top:1px solid #e5e7eb}.q:first-child{border-top:0}.opts label{display:block;padding:9px;margin:6px 0;background:#f7f9fc;border-radius:10px;cursor:pointer}.btn{border:0;background:#6b5bd6;color:#fff;padding:11px 15px;border-radius:11px;font-weight:800;font-size:15px}.result{font-weight:800;margin-top:14px}.small{color:#667085}
 </style>
+<script src="central-config.js?v=20260909fb3"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="central-auth.js?v=20260910authfix4"></script>
 </head><body><main class="wrap">
 <section class="card hero"><h1>🧩 Fractions — Beginner Quiz</h1><p>10 questions • Goal: 8/10 or higher</p></section>
 <form id="quiz" class="card">
@@ -23,5 +28,19 @@ body{margin:0;background:#f7f9fc;color:#263238;font-family:system-ui,-apple-syst
 <p class="small">Answers: 1-A, 2-C, 3-B, 4-B, 5-B, 6-B, 7-A, 8-A, 9-B, 10-C</p>
 </form></main>
 <script>
-function grade(){const a=['A','C','B','B','B','B','A','A','B','C'];let s=0;for(let i=1;i<=10;i++){const x=document.querySelector('input[name="q'+i+'"]:checked');if(x&&x.value===a[i-1])s++;}const r=document.getElementById('result');r.textContent='Score: '+s+'/10 — '+(s>=8?'🎉 Mastery achieved. You can move to the next practice set.':'Keep learning and retry. Target 8/10 or higher.');}
+let skillUpSession=null;
+(async()=>{ skillUpSession=await window.SkillUpAuth.requireAuth(location.href); })();
+async function grade(){const a=['A','C','B','B','B','B','A','A','B','C'];let s=0;for(let i=1;i<=10;i++){const x=document.querySelector('input[name="q'+i+'"]:checked');if(x&&x.value===a[i-1])s++;}const r=document.getElementById('result');r.textContent='Score: '+s+'/10 — '+(s>=8?'🎉 Mastery achieved. You can move to the next practice set.':'Keep learning and retry. Target 8/10 or higher.');
+if(skillUpSession && window.SkillUpAuth.saveProgress){
+  try{
+    await window.SkillUpAuth.saveProgress({
+      subject:'Mathematics',
+      topic:'Fractions — Beginner Quiz',
+      score:s,total:10,accuracy:s*10,time_seconds:null,
+      completed:true,source:'maths-level1-fractions-quiz',
+      completed_at:new Date().toISOString()
+    });
+    r.textContent+=' Progress saved to your SkillUp account.';
+  }catch(err){console.warn('Unable to save quiz progress',err);}
+}}
 </script></body></html>

@@ -2751,4 +2751,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program tests oddness using paired inputs $x$ and $-x$. Which condition should it verify?",["$f(-x)=-f(x)$","$f(-x)=f(x)$","$f(x)=x$","$f(-x)=0$"],0,"For each symmetric input pair, an odd function must produce opposite function values."],
 ["If $f(x)=x^5-2x^3+x$, then $f$ is:",["Odd","Even","Neither even nor odd","Not defined on $\\mathbb R$"],0,"Every term has an odd power, so $f(-x)=-f(x)$; therefore the polynomial is odd."]
 ],
+
+"Composite functions":[
+["For functions $f:A\\to B$ and $g:B\\to C$, the composite $(g\\circ f)(x)$ is defined as:",["$g(f(x))$","$f(g(x))$","$f(x)+g(x)$","$f(x)g(x)$"],0,"Composition applies $f$ first and then $g$, so $(g\\circ f)(x)=g(f(x))$."],
+["Let $f(x)=2x+1$ and $g(x)=x^2$. Then $(g\\circ f)(x)$ is:",["$(2x+1)^2$","$2x^2+1$","$x^2+2x$","$(x^2+1)^2$"],0,"Substitute $f(x)=2x+1$ into $g$: $g(f(x))=(2x+1)^2$."],
+["Using $f(x)=2x+1$ and $g(x)=x^2$, $(f\\circ g)(x)$ equals:",["$2x^2+1$","$(2x+1)^2$","$x^2+1$","$2x+1$"],0,"Here $f$ is applied after $g$, so $f(g(x))=2x^2+1$."],
+["In general, function composition is:",["Not necessarily commutative","Always commutative","Always equal to addition","Undefined for real functions"],0,"Usually $g\\circ f\\ne f\\circ g$; the order of application matters."],
+["If $f(x)=x+3$ and $g(x)=2x$, then $(g\\circ f)(2)$ is:",["$10$","$7$","$8$","$5$"],0,"First $f(2)=5$, then $g(5)=10$, so $(g\\circ f)(2)=10$."],
+["If $f:A\\to B$ and $g:B\\to C$, which set contains the values of $g\\circ f$?",["$C$","$A$ only","$B$ only","$A\\times B$"],0,"The output of $f$ lies in $B$, and $g$ maps those values into $C$."],
+["If $f$ and $g$ are both one-one, then $g\\circ f$ is:",["One-one","Onto necessarily","Constant","Many-one necessarily"],0,"If $g(f(x_1))=g(f(x_2))$, injectivity of $g$ gives $f(x_1)=f(x_2)$, and injectivity of $f$ gives $x_1=x_2$."],
+["If $f$ and $g$ are both onto and their domains and codomains are compatible, then $g\\circ f$ is:",["Onto","One-one necessarily","Constant","Undefined"],0,"For every $c$ in the codomain of $g$, surjectivity of $g$ gives a $b$, and surjectivity of $f$ gives an $a$ with $f(a)=b$."],
+["A mathematical program defines $f(x)=x+2$ and $g(x)=3x$. Which expression should it compute to evaluate $(g\\circ f)(x)$?",["$3(x+2)$","$x+2+3x$","$3x+2$","$(3x)^2$"],0,"The program must apply $f$ first and pass its output to $g$, giving $g(f(x))=3(x+2)$."],
+["If $f(x)=x^2$ and $g(x)=\\sqrt{x}$ with suitable real domains, then $(g\\circ f)(x)$ equals:",["$|x|$","$x^2$","$x$ for every real $x$","$\\sqrt{x^2}=x$ for every real $x$"],0,"Since $g(f(x))=\\sqrt{x^2}=|x|$, the result is nonnegative even when $x<0$."]
+],
 };

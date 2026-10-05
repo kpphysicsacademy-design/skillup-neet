@@ -245,4 +245,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which number is divisible by 8?",["216","214","222","230"],0,"The last three digits 216 are divisible by 8."],
 ["Which number is divisible by 11?",["121","123","125","127"],0,"121=11×11."],
 ["If a number is divisible by both 3 and 4, it is necessarily divisible by:",["7","12","10","18"],1,"Since 3 and 4 are coprime, divisibility by both implies divisibility by 12."]
+,"Prime factorisation":[
+["The prime factorisation of 60 is:",["2×3×10","2²×3×5","2×3²×5","2²×15"],1,"60=2×2×3×5=2²×3×5."],
+["Which is a prime factor of 84?",["4","6","7","12"],2,"84=2²×3×7, so 7 is a prime factor."],
+["The prime factorisation of 72 is:",["2³×3²","2²×3³","2⁴×3","2×3⁴"],0,"72=8×9=2³×3²."],
+["How many distinct prime factors does 30 have?",["2","3","4","5"],1,"30=2×3×5, so it has three distinct prime factors."],
+["Which is the prime factorisation of 100?",["2×5²","2²×5²","2⁴×5","10²"],1,"100=4×25=2²×5²."],
+["If n=2³×3×5, then n is:",["60","90","120","180"],2,"2³×3×5=8×15=120."],
+["Which number is already in prime factorised form?",["12","2²×3","18","45"],1,"2²×3 is a product of prime powers and equals 12."],
+["The prime factorisation of 45 is:",["3×15","3²×5","5×9","1×45"],1,"45=9×5=3²×5."],
+["If a number has prime factorisation 2²×3², the number is:",["18","24","36","72"],2,"2²×3²=4×9=36."],
+["Which statement is true?",["Every composite number has exactly one prime factor","Prime factorisation is unique apart from order","Every prime number has two different prime factors","1 is a prime number"],1,"The Fundamental Theorem of Arithmetic gives a unique prime factorisation apart from the order of factors."]
+],
+"HCF":[
+["The HCF of 12 and 18 is:",["2","3","6","9"],2,"Common factors are 1,2,3,6; the greatest is 6."],
+["The HCF of 24 and 36 is:",["6","8","12","18"],2,"24=2³×3 and 36=2²×3², so HCF=2²×3=12."],
+["The HCF of 45 and 60 is:",["5","10","15","20"],2,"45=3²×5 and 60=2²×3×5, so HCF=3×5=15."],
+["If the prime factors of two numbers are 2²×3×5 and 2×3²×7, their HCF is:",["2×3","2²×3","2×3²","3×5"],0,"Take the lowest power of each common prime: 2×3=6."],
+["The HCF of two consecutive positive integers is always:",["0","1","2","The larger integer"],1,"Consecutive integers have no common factor greater than 1."],
+["The HCF of 8, 12 and 20 is:",["2","4","6","8"],1,"Common factors include 1,2,4; the greatest is 4."],
+["If the HCF of 18 and x is 6, which could be x?",["5","12","25","35"],1,"HCF(18,12)=6, so 12 is a valid choice."],
+["The HCF is also called the:",["Least common multiple","Greatest common divisor","Common multiple","Prime number"],1,"HCF stands for highest common factor, also called greatest common divisor."],
+["If a and b are both divisible by 15, their HCF is:",["Always 1","Always 15","At least 15","At most 5"],2,"Since 15 is a common factor, the greatest common factor is at least 15."],
+["The HCF of 0 and 14 is:",["0","1","7","14"],3,"Every integer divides 0, so the greatest common factor of 0 and 14 is 14."]
+],
+"LCM":[
+["The LCM of 4 and 6 is:",["8","10","12","24"],2,"Multiples of 4 and 6 first meet at 12."],
+["The LCM of 8 and 12 is:",["16","20","24","48"],2,"8=2³ and 12=2²×3, so LCM=2³×3=24."],
+["The LCM of 5 and 7 is:",["12","30","35","70"],2,"5 and 7 are coprime, so their LCM is 5×7=35."],
+["The LCM of 9 and 15 is:",["18","30","45","90"],2,"9=3² and 15=3×5, so LCM=3²×5=45."],
+["The LCM of two coprime positive integers is their:",["HCF","Sum","Product","Difference"],2,"Coprime numbers have no common prime factors, so their LCM equals their product."],
+["If a=2²×3 and b=2×3², their LCM is:",["6","12","18","36"],3,"Take the highest powers: 2²×3²=36."],
+["The LCM of 6, 8 and 12 is:",["12","18","24","48"],2,"24 is the smallest number divisible by 6, 8 and 12."],
+["If a number is a common multiple of 4 and 10, it must be a multiple of:",["5","14","20","40"],2,"LCM(4,10)=20, so every common multiple is divisible by 20."],
+["The LCM of 1 and 25 is:",["1","5","25","50"],2,"Every positive integer is a multiple of 1, so the LCM is 25."],
+["For positive integers a and b, which relation is true?",["HCF×LCM=a+b","HCF×LCM=a×b","HCF+LCM=a×b","HCF−LCM=a×b"],1,"For two positive integers, HCF(a,b)×LCM(a,b)=a×b."]
+],
+"Euclidean algorithm":[
+["The Euclidean algorithm is mainly used to find the:",["LCM","HCF","Average","Square root"],1,"The Euclidean algorithm efficiently finds the greatest common divisor, or HCF."],
+["Using 48=18×2+12, the next remainder is:",["6","12","18","24"],1,"48−36=12, so the remainder is 12."],
+["For 48 and 18, after 48=18×2+12, we use:",["18=12×1+6","18=12×2+6","12=18×1+6","18=6×4+2"],0,"The next division is 18=12×1+6."],
+["The HCF of 48 and 18 is:",["3","6","9","12"],1,"The Euclidean steps end with remainder 6, so HCF=6."],
+["If a=bq+r, then the remainder r satisfies:",["r>b","0≤r<b","r=b","r<0 always"],1,"In Euclidean division, the remainder is non-negative and smaller than the divisor."],
+["The HCF of 252 and 105 is:",["7","14","21","42"],2,"252=105×2+42; 105=42×2+21; 42=21×2, so HCF=21."],
+["The Euclidean algorithm stops when the remainder becomes:",["1 only","0","Equal to the divisor","Negative"],1,"The last non-zero remainder is the HCF; the next remainder is 0."],
+["If HCF(a,b)=d, then d divides:",["Only a","Only b","Both a and b","Neither"],2,"A common divisor divides both numbers."],
+["For 119 and 34, 119=34×3+17. The next useful division is:",["34=17×2+0","17=34×1+0","34=17×1+1","119=17×7+1"],0,"34 is exactly divisible by 17, so the next remainder is 0 and HCF=17."],
+["Which statement is correct?",["The Euclidean algorithm requires prime factorisation first","Each step replaces the pair by the divisor and the remainder","The remainder can equal the divisor","It finds only LCM"],1,"Each step replaces (a,b) by (b,r), preserving the HCF."]
+],
+"Remainders":[
+["When 17 is divided by 5, the remainder is:",["1","2","3","4"],1,"17=5×3+2, so the remainder is 2."],
+["The remainder when 29 is divided by 6 is:",["3","4","5","6"],2,"29=6×4+5."],
+["What is the remainder when 100 is divided by 9?",["0","1","2","4"],1,"100=9×11+1."],
+["A remainder after division by 7 must be:",["Less than 7","Equal to 7","Greater than 7","Always 0"],0,"A remainder is always non-negative and less than the divisor."],
+["If n=4q+3, the remainder when n is divided by 4 is:",["0","1","2","3"],3,"The division form directly shows remainder 3."],
+["What is the remainder when 45 is divided by 5?",["0","1","4","5"],0,"45 is exactly divisible by 5."],
+["The remainder when 123 is divided by 10 is:",["1","2","3","10"],2,"Division by 10 leaves the units digit as the remainder: 3."],
+["If a number leaves remainder 2 when divided by 5, which could be the number?",["21","22","23","24"],1,"22=5×4+2."],
+["What is the remainder when 2^5 is divided by 3?",["0","1","2","3"],2,"2^5=32, and 32 divided by 3 leaves remainder 2."],
+["If a=bq+r with 0≤r<b, then when r=0, a is:",["Not divisible by b","Divisible by b","Prime","Odd"],1,"r=0 means a=bq, so b divides a exactly."]
+],
+"Basic number inequalities":[
+["Which statement is true?",["5<3","7>4","2>9","1=6"],1,"7 is greater than 4."],
+["If x>3, which value could x be?",["2","3","3.5","−1"],2,"3.5 is greater than 3."],
+["If x≤5, which value is allowed?",["6","5","7","8"],1,"The inequality includes 5 because it uses ≤."],
+["Which is equivalent to x<−2?",["x is greater than −2","x is less than −2","x equals −2","x is greater than 2"],1,"The symbol < means x is less than −2."],
+["Which number is greatest?",["−5","−2","0","−1"],2,"0 is greater than every negative number listed."],
+["If a<b and b<c, then:",["a>c","a=c","a<c","a>b"],2,"Inequalities are transitive: a<b<c implies a<c."],
+["Which interval represents x>1?",["[1,∞)","(1,∞)","(−∞,1)","(−∞,1]"],1,"x>1 excludes 1, so the interval starts with a parenthesis."],
+["If x<4, which statement is always true?",["x+1<5","x+1>5","x−1>4","2x>8"],0,"Adding 1 to both sides preserves the inequality: x+1<5."],
+["Which inequality is true?",["−3>−1","−4<−2","5<2","0<−1"],1,"−4 lies to the left of −2 on the number line, so −4<−2."],
+["When multiplying an inequality by a negative number, the inequality sign:",["Stays the same","Reverses","Becomes equal","Disappears"],1,"Multiplication or division by a negative reverses the direction of the inequality."]
+]
 ]};

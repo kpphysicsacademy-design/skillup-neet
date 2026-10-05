@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Mathematics Basics Quiz</title>
+<style>
+body{margin:0;background:#f5f9ff;color:#17324d;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:18px 12px 50px}.card{background:#fff;border:2px solid #d9e7f5;border-radius:20px;padding:20px;margin-top:14px}.q{font-size:20px;font-weight:900;line-height:1.4}.opt{display:block;width:100%;margin-top:10px;padding:13px;border:2px solid #cbdbea;border-radius:14px;background:#fff;text-align:left;font-weight:800;cursor:pointer}.correct{background:#efffe5;border-color:#58cc02}.wrong{background:#fff0f0;border-color:#ff4b4b}.next{display:none;margin-top:14px;width:100%;padding:13px;border:0;border-radius:13px;background:#58cc02;color:#fff;font-weight:900}.small{font-size:11px;color:#6b7280}.score{font-size:40px;font-weight:950;color:#1677ff}
+</style></head><body><main class="wrap"><section class="card"><h1>Mathematics Basics Quiz</h1><div class="small" id="concept"></div><div id="root"></div></section></main>
+<script>
+(function(){
+var bank=[
+["Which set contains 0, 1, 2, 3, …?",["Natural numbers","Whole numbers","Integers","Prime numbers"],1,"Whole numbers include 0 and all positive counting numbers."],
+["Which number is an integer?",["2.5","−7","3/4","√2"],1,"Integers include negative whole numbers, zero and positive whole numbers."],
+["Which is greater?",["−5","−2","−8","−10"],1,"On the number line, −2 lies to the right of the other negative numbers."],
+["What is 7 + 5?",["10","11","12","13"],2,"Adding 5 to 7 gives 12."],
+["What is 9 × 4?",["13","32","36","40"],2,"9 groups of 4 give 36."],
+["What is 24 ÷ 6?",["3","4","5","6"],1,"24 divided into 6 equal groups gives 4."],
+["Which number is prime?",["9","15","17","21"],2,"17 has exactly two positive factors: 1 and 17."],
+["Which number is even?",["13","17","22","29"],2,"An even number is divisible by 2; 22 is divisible by 2."],
+["What is 1/2 as a decimal?",["0.2","0.25","0.5","2"],2,"One half is 0.5."],
+["What is 25% as a fraction in simplest form?",["1/2","1/4","1/5","3/4"],1,"25% means 25 out of 100, which simplifies to 1/4."],
+["What is 3²?",["6","8","9","12"],2,"3² means 3 × 3, which is 9."],
+["What is √49?",["6","7","8","9"],1,"7 × 7 = 49."],
+["What is 15 − 8?",["5","6","7","8"],2,"Subtracting 8 from 15 gives 7."],
+["Which is a factor of 18?",["5","7","9","11"],2,"18 ÷ 9 = 2, so 9 is a factor of 18."],
+["Which is a multiple of 6?",["14","18","22","25"],1,"18 = 6 × 3, so it is a multiple of 6."],
+["What is 0.75 as a fraction in simplest form?",["1/2","2/3","3/4","4/5"],2,"0.75 = 75/100 = 3/4."],
+["If 2:3 represents a ratio, what is the total number of parts?",["2","3","5","6"],2,"The total number of ratio parts is 2 + 3 = 5."],
+["What is 10% of 80?",["4","8","10","16"],1,"10% means one tenth; 80 ÷ 10 = 8."],
+["Evaluate 2 + 3 × 4 using standard order of operations.",["20","14","24","18"],1,"Multiplication is done before addition: 2 + 12 = 14."],
+["Which fraction is equal to 2/4?",["1/2","1/3","2/3","3/4"],0,"Dividing numerator and denominator by 2 gives 1/2."]
+];
+var concept=new URLSearchParams(location.search).get('concept')||'All Basics';
+document.getElementById('concept').textContent='Concept: '+concept+' • 20 MCQs';
+var root=document.getElementById('root'),i=0,score=0;
+function show(){
+root.innerHTML='';
+if(i>=bank.length){root.innerHTML='<div class="score">'+score+'/'+bank.length+'</div><h2>Basics quiz complete</h2><p>Repeat until you reach 80% or higher.</p><button class="next" style="display:block" onclick="location.reload()">Practice Again</button>';return;}
+var z=bank[i],c=document.createElement('div');c.className='card';c.innerHTML='<div class="small">QUESTION '+(i+1)+' OF '+bank.length+'</div><div class="q">'+z[0]+'</div>';
+var done=false;
+z[1].forEach(function(v,j){var b=document.createElement('button');b.className='opt';b.textContent=v;b.onclick=function(){if(done)return;done=true;Array.from(c.querySelectorAll('.opt')).forEach(function(x,k){x.disabled=true;if(k===z[2])x.classList.add('correct');});if(j===z[2])score++;else b.classList.add('wrong');var e=document.createElement('p');e.textContent=z[3];c.appendChild(e);next.style.display='block';};c.appendChild(b);});
+var next=document.createElement('button');next.className='next';next.textContent=i===bank.length-1?'SEE RESULT':'CONTINUE';next.onclick=function(){i++;show();};c.appendChild(next);root.appendChild(c);
+}
+show();
+})();
+</script></body></html>

@@ -2829,4 +2829,17 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["A mathematical program checks whether an input belongs to the domain of $f(x)=\sqrt{x-1}$. Which condition should it implement?",["Reject inputs with $x<1$","Reject inputs with $x>1$","Accept only $x<1$","Reject only $x=0$"],0,"The program should require $x-1\ge0$, equivalently $x\ge1$, so values below $1$ are rejected."],
 ["For $f(x)=\dfrac{1}{\sqrt{x-2}}$, the domain is:",["$(2,\infty)$","$[2,\infty)$","$(-\infty,2)$","$\mathbb R$"],0,"The square root requires $x-2\ge0$, but because it is in the denominator it cannot be zero. Therefore $x>2$."]
 ],
+
+"Piecewise functions":[
+["If $f(x)=\begin{cases}x+1,&x<2\\x^2,&x\ge2\end{cases}$, then $f(2)$ is:",["$4$","$3$","$2$","$1$"],0,"Because $2\ge2$, use the second branch: $f(2)=2^2=4$."],
+["For $f(x)=\begin{cases}2x,&x<1\\x+3,&x\ge1\end{cases}$, $f(0)$ equals:",["$0$","$3$","$1$","$2$"],0,"Since $0<1$, use the first branch: $f(0)=2(0)=0$."],
+["A piecewise function is one whose rule:",["Changes according to the input interval or condition","Must be quadratic everywhere","Has no domain restrictions","Always has exactly two branches"],0,"A piecewise function can use different formulas on different parts of its domain."],
+["For $f(x)=\begin{cases}x+2,&x<0\\x^2+1,&x\ge0\end{cases}$, the left-hand expression at $x=0$ approaches:",["$2$","$1$","$0$","$-2$"],0,"For $x<0$, the rule is $x+2$. As $x\to0^-$, $x+2\to2$."],
+["For $f(x)=\begin{cases}x^2,&x<1\\2x-1,&x\ge1\end{cases}$, the value $f(1)$ is:",["$1$","$0$","$2$","$-1$"],0,"The condition $x\ge1$ selects the second branch, giving $2(1)-1=1$."],
+["Which piecewise definition represents $|x|$?",["$\begin{cases}-x,&x<0\\x,&x\ge0\end{cases}$","$\begin{cases}x,&x<0\\-x,&x\ge0\end{cases}$","$x^2$ for all $x$","$-x$ for all $x$"],0,"For negative $x$, $|x|=-x$; for nonnegative $x$, $|x|=x$."],
+["For $f(x)=\begin{cases}x+1,&x\le2\\3x-3,&x>2\end{cases}$, the two branch values at the boundary $x=2$ are:",["$3$ and $3$","$2$ and $6$","$3$ and $6$","$1$ and $3$"],0,"The first branch gives $2+1=3$. The second expression approaches $3(2)-3=3$ from the right."],
+["To make a two-branch piecewise function continuous at $x=a$, the appropriate condition is generally:",["The left and right limits agree with $f(a)$","Only the left limit exists","Only the right limit exists","The two formulas must be identical everywhere"],0,"Continuity at $a$ requires $\lim_{x\to a^-}f(x)=\lim_{x\to a^+}f(x)=f(a)$."],
+["A mathematical program evaluates $f(x)=\begin{cases}x^2,&x<0\\x+2,&x\ge0\end{cases}$. For input $-3$, which branch should the program execute?",["The $x^2$ branch","The $x+2$ branch","Both branches","Neither branch"],0,"Because $-3<0$, the program selects the first condition and computes $(-3)^2=9$."],
+["For $f(x)=\begin{cases}2x+1,&x<3\\7,&x\ge3\end{cases}$, which statement is true?",["$f(3)=7$","$f(3)=6$","$f(3)=5$","$f(3)$ is undefined"],0,"At $x=3$, the condition $x\ge3$ applies, so $f(3)=7$."]
+],
 };

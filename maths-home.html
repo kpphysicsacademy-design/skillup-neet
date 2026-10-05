@@ -34,9 +34,11 @@ function render(list){
   const progress=window.SKILLUP_MATHS_PROGRESS||{};
   const cards=path.querySelectorAll('.chapter');
   cards.forEach(function(card,i){
-    if(i===0) return;
-    const previous=list[i-1];
-    const previousRow=progress[String(previous.concept||'')];
+    const current=list[i];
+    if(current && current.index===1) return;
+    if(!current) return;
+    const previous=all[current.index-2];
+    const previousRow=progress[String(previous && previous.concept||'')];
     if(!previousRow || !previousRow.completed){
       card.setAttribute('data-locked','true');
       const a=card.querySelector('a');

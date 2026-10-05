@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Inverse relation":[
+["If R is a relation from A to B, the inverse relation R⁻¹ is a relation from:",["B to A","A to A","B to B","A to B only"],0,"The inverse reverses every ordered pair, so its direction is from B to A."],
+["If (a,b)∈R, then which ordered pair belongs to R⁻¹?",["(b,a)","(a,b) only","(a,a)","(b,b)"],0,"By definition, (b,a)∈R⁻¹ whenever (a,b)∈R."],
+["If R={(1,2),(2,3)}, then R⁻¹ is:",["{(2,1),(3,2)}","{(1,2),(2,3)}","{(1,3),(2,1)}","{(2,2),(3,3)}"],0,"Reverse the coordinates of every ordered pair."],
+["If R is a relation from A to B, then the domain of R⁻¹ equals the:",["Range of R","Domain of R","Codomain of R only","Empty set"],0,"The first coordinates of R⁻¹ are the second coordinates of R."],
+["The range of R⁻¹ equals the:",["Domain of R","Range of R","Codomain of R only","Empty set"],0,"The second coordinates of R⁻¹ are the first coordinates of R."],
+["For any relation R, taking the inverse twice gives:",["R","R⁻¹","The identity relation always","The empty relation always"],0,"Reversing each ordered pair twice returns the original relation."],
+["If R is a relation on A, then R is symmetric exactly when:",["R=R⁻¹","R≠R⁻¹","R is empty only","R is universal only"],0,"Symmetry means (a,b)∈R implies (b,a)∈R, which is equivalent to R=R⁻¹."],
+["If R={(1,1),(1,2),(2,1)}, then R⁻¹ is:",["{(1,1),(2,1),(1,2)}","{(1,1),(1,2)}","{(2,1),(1,2)}","{(1,1),(2,2)}"],0,"Each ordered pair is reversed; the resulting set contains the same three pairs in a different order."],
+["If R is a relation from A to B, which statement is always true?",["R⁻¹⊆B×A","R⁻¹⊆A×B","R⁻¹⊆A×A","R⁻¹⊆B×B"],0,"Since R⊆A×B, reversing pairs gives R⁻¹⊆B×A."],
+["If R is reflexive on A, then R⁻¹ is:",["Reflexive on A","Never reflexive","Defined on B only","Always antisymmetric"],0,"Reflexive pairs (a,a) remain unchanged when inverted, so R⁻¹ is reflexive."]
+],
+
 "Equivalence classes":[
 ["For an equivalence relation R on A, the equivalence class of a∈A is:",["[a]={x∈A:xRa}","[a]={x∈A:x<a}","[a]={x∈A:a<x}","[a]={a only}"],0,"The class [a] contains exactly the elements related to a."],
 ["If aRb under an equivalence relation, then [a] and [b] are:",["Equal","Always disjoint","Both empty","Unrelated"],0,"Related elements belong to the same equivalence class."],

@@ -1854,4 +1854,88 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The factorial n! appears in Taylor coefficients because of:",["Repeated differentiation","Only multiplication","The domain","The period"],0,"Repeated derivatives produce factorial factors."],
 ["The radius of convergence determines where a Taylor series:",["Converges to the represented function under suitable conditions","Has no terms","Is always finite","Has derivative zero"],0,"Convergence controls the valid interval or disk of the expansion."]
 ]
+,"Taylor and Maclaurin applications":[
+["The Taylor polynomial of degree n uses derivatives up to:",["The nth derivative","The first derivative only","The second derivative only","No derivatives"],0,"A degree-n Taylor polynomial uses derivatives through order n."],
+["The linear Taylor approximation of f near a is:",["f(a)+f'(a)(x−a)","f(a)x","f'(a)x²","f(a)+f''(a)x"],0,"The first-degree Taylor polynomial is the tangent-line approximation."],
+["The quadratic Taylor approximation includes:",["f''(a)(x−a)²/2!","f'(a)(x−a) only","f'''(a) only","No constant term"],0,"The second-order term is f''(a)(x−a)²/2."],
+["For e^x about x=0, the first-degree approximation is:",["1+x","x²","1−x","e"],0,"e^x=1+x+x²/2!+..., so the linear approximation is 1+x."],
+["For sin x near 0, the first nonzero approximation is:",["x","1+x","x²","1−x"],0,"sin x=x−x³/3!+..., so sin x≈x near zero."],
+["For cos x near 0, a quadratic approximation is:",["1−x²/2","x","1+x","x²/2"],0,"cos x=1−x²/2!+..., so the quadratic approximation is 1−x²/2."],
+["Taylor approximation is generally most accurate:",["Near the expansion point","Far from the expansion point always","Only at infinity","Only at zero"],0,"Taylor polynomials are local approximations centered at a."],
+["The remainder term measures:",["Approximation error","The domain","The derivative order","The period"],0,"The remainder quantifies the difference between the function and its Taylor polynomial."],
+["Maclaurin expansion is particularly convenient when derivatives at:",["0 are simple","Infinity are simple","1 are impossible","No point exist"],0,"Maclaurin series use derivatives evaluated at zero."],
+["Taylor expansions can simplify numerical calculations by:",["Replacing complicated functions with polynomials","Removing all variables","Making every function constant","Avoiding arithmetic"],0,"Polynomial approximations are often easier to evaluate."]
+],
+"Power series":[
+["A power series centered at c has the form:",["Σ a_n(x−c)^n","Σ a_n x","Σ n(x+c)","Σ a_n/(x−c)"],0,"This is the standard form of a power series."],
+["The center of Σa_n(x−3)^n is:",["3","−3","0","n"],0,"The expression is written in powers of x−3."],
+["The radius of convergence is commonly denoted:",["R","C","n","a"],0,"R measures the distance from the center within which convergence occurs."],
+["Inside the radius of convergence, a power series generally:",["Converges absolutely under the standard radius theorem","Always diverges","Has only one term","Is undefined"],0,"Power series converge absolutely for |x−c|<R."],
+["Outside the radius of convergence, a power series generally:",["Diverges","Converges absolutely","Becomes constant","Equals zero"],0,"For |x−c|>R, a power series diverges."],
+["At the endpoints of the interval of convergence:",["They must be tested separately","They always converge","They always diverge","They are not part of the problem"],0,"Endpoint behavior is not determined solely by the radius."],
+["The ratio test is often useful for finding:",["Radius of convergence","Only the sum at one point","The derivative order","The domain of every function"],0,"The ratio test often gives the radius for power series."],
+["Differentiating a power series within its radius gives:",["Another power series with the same radius","A constant always","A divergent series","No series"],0,"Power series may be differentiated term by term inside the radius."],
+["Integrating a power series within its radius gives:",["Another power series","Only a number","A derivative","No expression"],0,"Term-by-term integration is valid inside the radius."],
+["A power series is a special type of:",["Infinite series","Finite polynomial only","Differential equation","Matrix"],0,"It is an infinite series of powers of the variable."]
+],
+"Convergence tests":[
+["The nth-term test says that if Σa_n converges, then:",["a_n→0","a_n→1","a_n→∞","a_n is always positive"],0,"Term convergence to zero is necessary."],
+["The comparison test compares a series with:",["A known benchmark series","Only its derivative","A polynomial identity","A matrix"],0,"Comparison transfers convergence or divergence under suitable inequalities."],
+["The limit comparison test is commonly used for:",["Positive-term series","Only alternating series","Only finite sums","Differential equations"],0,"It compares asymptotic behavior of positive terms."],
+["The ratio test is especially useful for series involving:",["Factorials and powers","Only constants","Only rational numbers","Only finite sums"],0,"Ratios often simplify factorial and exponential terms."],
+["If the ratio-test limit L<1, the series:",["Converges absolutely","Diverges","Is always conditional","Has sum zero"],0,"L<1 guarantees absolute convergence."],
+["If the ratio-test limit L>1, the series:",["Diverges","Converges absolutely","Is alternating only","Has finite sum always"],0,"L>1 implies divergence."],
+["If the ratio-test limit L=1, the test is:",["Inconclusive","Always convergent","Always divergent","A proof of absolute convergence"],0,"Additional analysis is required."],
+["The integral test applies when a_n comes from a function that is positive and:",["Continuous and decreasing","Increasing and negative","Constant only","Periodic only"],0,"The standard integral test requires positivity, continuity, and eventual decrease."],
+["The alternating series test applies to terms that:",["Decrease to zero in magnitude and alternate sign","Are all positive","Increase without bound","Are all constant"],0,"These are the key conditions for the Leibniz test."],
+["Absolute convergence implies:",["Convergence","Divergence","Alternation","No limit"],0,"If Σ|a_n| converges, then Σa_n also converges."]
+],
+"Improper integrals":[
+["An improper integral may have:",["An infinite limit or an unbounded integrand","Only finite limits","Only polynomials","No integrand"],0,"Improperness arises from infinite intervals or singularities."],
+["∫_1^∞ 1/x² dx is:",["Convergent","Divergent","Undefined always","Oscillatory"],0,"The integral equals 1 and converges."],
+["∫_1^∞ 1/x dx is:",["Divergent","Convergent","Zero","−1"],0,"The logarithmic limit grows without bound."],
+["An integral with an infinite upper limit is evaluated using:",["A limit as the upper endpoint tends to infinity","Direct substitution of infinity","A derivative","A finite sum"],0,"Infinity is handled through a limit."],
+["If an integrand becomes unbounded at an endpoint, the integral is:",["Improper","Always zero","A polynomial","A derivative"],0,"A singularity at an endpoint creates an improper integral."],
+["For ∫_0^1 1/√x dx, the integral is:",["Convergent","Divergent","Zero","Undefined"],0,"The singularity is integrable and the value is 2."],
+["For ∫_0^1 1/x² dx, the integral is:",["Divergent","Convergent","1","0"],0,"The singularity is too strong for convergence."],
+["An improper integral converges if its defining:",["Limit exists and is finite","Integrand is always zero","Derivative is constant","Interval is empty"],0,"A finite limiting value defines convergence."],
+["Improper integrals are useful for computing:",["Infinite-area or unbounded-domain quantities","Only finite sums","Only derivatives","Only polynomial roots"],0,"They extend integration to unbounded settings."],
+["When an interior singularity occurs, the integral is usually:",["Split at the singular point and limits taken separately","Evaluated by ignoring the singularity","Set to zero","Differentiated"],0,"Each improper piece must converge appropriately."]
+],
+"Double integrals":[
+["A double integral integrates over:",["A two-dimensional region","A line only","A point only","A time interval only"],0,"Double integration accumulates over an area."],
+["The notation ∬_D f(x,y)dA indicates integration over:",["Region D","Only x-axis","Only y-axis","A single point"],0,"D is the region of integration."],
+["A double integral of 1 over region D gives:",["The area of D","The perimeter of D","The derivative of D","The volume always"],0,"Integrating 1 over area returns the region's area."],
+["Fubini's theorem often allows a double integral to be written as:",["An iterated integral","A derivative","A series only","A single endpoint"],0,"Under suitable conditions, double integration can be performed successively."],
+["For a rectangle [a,b]×[c,d], the area is:",["(b−a)(d−c)","a+b+c+d","bd−ac","ab+cd"],0,"Width times height gives the rectangular area."],
+["If f(x,y)≥0 on D, then ∬_D f dA is:",["Nonnegative","Always negative","Zero always","Undefined"],0,"A nonnegative integrand has a nonnegative double integral."],
+["Changing the order of integration means:",["Integrating with respect to the other variable first","Changing the function","Changing the region automatically","Removing dA"],0,"The order of the iterated integrals is reversed."],
+["A double integral can represent:",["Volume under a surface when f≥0","Only a derivative","Only a perimeter","Only a slope"],0,"Integrating height over a base region gives volume."],
+["Polar coordinates are often useful for regions involving:",["Circles and radial symmetry","Only rectangles","Only straight lines","Only sequences"],0,"Polar coordinates simplify circular geometry."],
+["In polar coordinates, the area element is:",["r dr dθ","dr dθ","r²drdθ","dxdy only"],0,"The Jacobian contributes the factor r."]
+],
+"Triple integrals":[
+["A triple integral integrates over:",["A three-dimensional region","A curve only","A surface only","A point"],0,"Triple integration accumulates over volume."],
+["The notation ∭_V f dV indicates integration over:",["Volume region V","A line segment","Only a surface","Only a point"],0,"V denotes a three-dimensional region."],
+["A triple integral of 1 over V gives:",["The volume of V","The area of V","The perimeter","The derivative"],0,"Integrating 1 over volume returns volume."],
+["Triple integrals are useful for finding:",["Mass, volume, and accumulated quantities in 3D","Only slopes","Only roots","Only limits"],0,"They are central to three-dimensional accumulation problems."],
+["In Cartesian coordinates, dV is:",["dx dy dz","dx+dy+dz","xyz","dxdy"],0,"The volume element is the product of the three coordinate differentials."],
+["For a rectangular box, volume is:",["Length×width×height","Length+width+height","2πr","Area/height"],0,"Multiplying the three side lengths gives volume."],
+["Cylindrical coordinates use the volume element:",["r dr dθ dz","dr dθ dz","r²drdθdz","dxdy"],0,"The cylindrical Jacobian contributes r."],
+["Spherical coordinates use a volume element containing:",["ρ²sinφ dρ dφ dθ","ρ dρdφdθ","sinφ dρ","dxdy"],0,"The spherical Jacobian is ρ²sinφ."],
+["A triple integral can compute mass when the integrand is:",["Density","Area only","Slope","Derivative"],0,"Mass is the integral of density over volume."],
+["Changing coordinates in a triple integral requires accounting for the:",["Jacobian","Constant of integration","Derivative order","Period"],0,"The Jacobian adjusts the volume element under coordinate transformation."]
+],
+"Vector functions":[
+["A vector-valued function of t has the form:",["r(t)=⟨x(t),y(t),z(t)⟩","r(t)=x+y+z only","r(t)=t² only","r=x/y"],0,"A vector function assigns a vector to each parameter value."],
+["The derivative r'(t) gives the:",["Velocity vector","Position only","Acceleration only","Scalar speed always"],0,"For a position vector, the first derivative is velocity."],
+["The second derivative r''(t) gives:",["Acceleration","Velocity","Position","Speed only"],0,"The second derivative of position is acceleration."],
+["The magnitude of r'(t) represents:",["Speed","Position","Acceleration","Curvature always"],0,"Speed is the magnitude of the velocity vector."],
+["A vector function can describe:",["Motion in space","Only scalar equations","Only constants","Only matrices"],0,"Vector functions naturally model trajectories."],
+["The tangent vector to a curve is related to:",["r'(t)","r(t) only","r''(t) only","|r(t)| only"],0,"The derivative points in the tangent direction when nonzero."],
+["If r(t)=⟨t,t²⟩, then r'(t) is:",["⟨1,2t⟩","⟨t,2t⟩","⟨1,t⟩","⟨2,t²⟩"],0,"Differentiate each component."],
+["A unit tangent vector is obtained by:",["r'(t)/|r'(t)|","r(t)/t","r''(t)/r'(t)","|r'(t)|r'(t)"],0,"Normalize the velocity vector."],
+["The dot product of velocity and acceleration can relate to:",["Change in speed","Only position","Only time","Volume"],0,"v·a is connected to the derivative of speed squared."],
+["Vector functions are fundamental in:",["Multivariable calculus and mechanics","Only arithmetic","Only sequences","Only factorisation"],0,"They describe curves, fields, and physical motion."]
+]
 };

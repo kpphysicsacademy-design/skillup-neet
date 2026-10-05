@@ -17,18 +17,25 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},svg:{
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 .top{height:64px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
-.nav{max-width:820px;height:64px;margin:auto;padding:0 16px;display:flex;align-items:center;justify-content:center}
-.brand{font-weight:950;font-size:20px;color:var(--navy)}
+.nav{max-width:920px;height:64px;margin:auto;padding:0 14px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.brand{font-weight:950;font-size:19px;color:var(--navy);white-space:nowrap}
+.back{justify-self:start;text-decoration:none;color:var(--muted);font-weight:900;font-size:13px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.back:hover{border-color:#9ec6df;color:var(--navy)}
+.navRight{justify-self:end;display:flex;align-items:center;gap:7px}
+.navBadge{font-size:11px;font-weight:950;color:#338700;background:#eef8e9;padding:7px 10px;border-radius:999px}
 .wrap{max-width:820px;margin:auto;padding:18px 14px 90px}
 .hero,.quiz,.result{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:0 5px 18px #183b6310}
 .hero{padding:20px 22px;margin-bottom:14px}
 .eyebrow{font-size:11px;font-weight:950;letter-spacing:1px;color:var(--muted)}
 h1{margin:5px 0 8px;font-size:clamp(30px,7vw,44px);line-height:1.05;color:var(--navy)}
 .subtitle{color:var(--muted);font-weight:650;line-height:1.5}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.meta span{font-size:11px;font-weight:850;color:#52616f;background:#f2f6f9;border:1px solid #e2e9ee;padding:6px 9px;border-radius:999px}
 .pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
 .pill{padding:7px 11px;border-radius:999px;background:#eef8e9;color:#338700;font-size:11px;font-weight:900}
 .progress{height:10px;background:#e8eef3;border-radius:99px;overflow:hidden;margin-top:16px}
 .progress>span{display:block;height:100%;width:0;background:var(--green);border-radius:99px;transition:.25s}
+.progressLabel{display:flex;justify-content:space-between;margin-top:7px;font-size:11px;font-weight:850;color:var(--muted)}
 .quiz{padding:22px;margin-bottom:14px}
 .quizhead{display:flex;align-items:center;gap:12px}
 .level{flex:1;font-size:11px;font-weight:950;letter-spacing:1px;color:var(--muted)}
@@ -65,14 +72,19 @@ h1{margin:5px 0 8px;font-size:clamp(30px,7vw,44px);line-height:1.05;color:var(--
 </style>
 </head>
 <body>
-<header class="top"><nav class="nav"><span class="brand">SkillUp Mathematics</span></nav></header>
+<header class="top"><nav class="nav">
+ <a class="back" href="maths-home.html">← Maths Path</a>
+ <span class="brand">SkillUp Mathematics</span>
+ <div class="navRight"><span class="navBadge">CONCEPT QUIZ</span></div>
+</nav></header>
 <main class="wrap">
 <section class="hero">
  <div class="eyebrow">MATHEMATICS • CONCEPT PRACTICE</div>
  <h1 id="conceptTitle">Loading…</h1>
- <div class="subtitle" id="subtitle">Master the concept with 10 progressive questions.</div>
+ <div class="subtitle" id="subtitle">Master this concept with focused practice and instant feedback.</div>
+ <div class="meta"><span id="levelMeta">Level —</span><span id="chapterMeta">Chapter —</span><span>10 questions</span></div>
  <div class="pills"><span class="pill">🎯 10 Questions</span><span class="pill">⚡ Instant Feedback</span><span class="pill">📊 Final Analytics</span></div>
- <div class="progress"><span id="progressBar"></span></div>
+ <div class="progress"><span id="progressBar"></span></div><div class="progressLabel"><span id="progressText">Question 1 of 10</span><span>Mastery practice</span></div>
 </section>
 
 <div id="errorBox" class="error"></div>
@@ -104,7 +116,8 @@ h1{margin:5px 0 8px;font-size:clamp(30px,7vw,44px);line-height:1.05;color:var(--
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="central-auth.js?v=20260910authfix4"></script>
-<script src="maths-question-bank.js?v=20261005-safe3"></script>
+<script src="iit-maths-path-curriculum.js?v=20261005"></script>
+<script src="maths-question-bank.js?v=20261005-safe4"></script>
 <script>
 (function(){
 "use strict";
@@ -113,6 +126,14 @@ const concept=(qs.get("concept")||"Natural numbers").trim();
 const $=id=>document.getElementById(id);
 $("conceptTitle").textContent=concept;
 $("retry").href=location.href;
+function findMeta(name){
+ const path=window.SKILLUP_IIT_MATHS_PATH||[];
+ for(const level of path){for(const chapter of (level[2]||[])){if((chapter[1]||[]).includes(name))return {level:level[0],chapter:chapter[0]};}}
+ return {level:"Maths",chapter:"Concept Practice"};
+}
+const meta=findMeta(concept);
+$("levelMeta").textContent=meta.level;
+$("chapterMeta").textContent=meta.chapter;
 
 let skillUpSession=null;
 (async function(){
@@ -158,6 +179,7 @@ function render(){
  $("feedback").style.display="none";
  $("feedback").textContent="";
  $("qnum").textContent=(i+1)+" / "+questions.length;
+ $("progressText").textContent="Question "+(i+1)+" of "+questions.length;
  $("progressBar").style.width=((i)/questions.length*100)+"%";
  const q=questions[i];
  $("question").textContent=q[0];
@@ -182,7 +204,7 @@ function answer(n,button){
  });
  const correct=n===q[2];
  if(correct)score++; else button.classList.add("wrong");
- $("feedback").innerHTML="<strong>"+(correct?"Correct!":"Review this one:")+"</strong> "+q[3];
+ $("feedback").textContent=(correct?"Correct — ":"Review this one — ")+q[3];
  $("feedback").style.display="block";
  $("continue").textContent=i===questions.length-1?"Finish ✓":"Continue →";
  $("continue").style.display="inline-block";
@@ -192,6 +214,7 @@ async function finish(){
  const accuracy=Math.round(score/total*100);
  const time=Math.max(1,Math.round((Date.now()-startedAt)/1000));
  $("progressBar").style.width="100%";
+ $("progressText").textContent="Completed — 10 of 10";
  $("quiz").style.display="none";
  $("result").style.display="block";
  $("finalScore").textContent=score+" / "+total+" correct";
@@ -216,6 +239,10 @@ async function finish(){
   }catch(e){console.warn("Progress save failed",e);}
  }
 }
+document.addEventListener("keydown",function(e){
+ if(answered && (e.key==="Enter" || e.key===" ")){e.preventDefault();$("continue").click();return;}
+ if(!answered && /^[1-4]$/.test(e.key)){const n=Number(e.key)-1;const btn=$("answers").children[n];if(btn)btn.click();}
+});
 $("continue").addEventListener("click",function(){
  if(i<questions.length-1){i++;render();window.scrollTo({top:0,behavior:"smooth"});}
  else finish();

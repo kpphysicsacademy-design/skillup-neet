@@ -1,4 +1,17 @@
 window.SKILLUP_MATHS_QUIZ_BANK={
+"Bijective function":[
+["A function $f:A\\to B$ is bijective when it is:",["Both one-one and onto","Only one-one","Only onto","Neither one-one nor onto"],0,"A bijection is simultaneously injective and surjective."],
+["For a bijective function $f:A\\to B$, every element of $B$ has:",["Exactly one preimage in A","At least two preimages","No preimage","An infinite number of preimages"],0,"Surjectivity gives at least one preimage and injectivity gives at most one, hence exactly one."],
+["Which function $f:\\mathbb{R}\\to\\mathbb{R}$ is bijective?",["$f(x)=3x-2$","$f(x)=x^2$","$f(x)=|x|$","$f(x)=e^x$"],0,"The linear function has nonzero slope, so it is both one-one and onto $\\mathbb R$."],
+["If $f:A\\to B$ is bijective, then the inverse relation $f^{-1}$ is:",["A function from B to A","Never a function","A constant relation","A function from A to B only"],0,"Bijectivity guarantees exactly one preimage for each element of B."],
+["If $f:A\\to B$ is bijective and $g:B\\to C$ is bijective, then $g\\circ f$ is:",["Bijective","Only one-one","Only onto","Never a function"],0,"The composition of two bijections is both injective and surjective."],
+["For finite sets A and B, if a bijection $f:A\\to B$ exists, then:",["$|A|=|B|$","$|A|<|B|$ always","$|A|>|B|$ always","$|A|=0$ necessarily"],0,"A bijection pairs each element of A with exactly one distinct element of B."],
+["Which pseudocode correctly tests bijectivity of a finite function $f:A\\to B$?",["Verify every $b\\in B$ has exactly one preimage in A","Check only whether one value repeats","Check only whether one element maps to B","Check whether $A$ and $B$ have different sizes"],0,"Exactly one preimage combines the one-one and onto requirements."],
+["If $f(x)=2x+5$ on $\\mathbb R$, then its inverse is:",["$f^{-1}(y)=\\frac{y-5}{2}$","$f^{-1}(y)=2y+5$","$f^{-1}(y)=\\frac{y+5}{2}$","$f^{-1}(y)=5-2y$"],0,"Solving $y=2x+5$ for x gives $x=(y-5)/2$."],
+["For a bijection $f:A\\to B$, the identities are:",["$f^{-1}\\circ f=I_A$ and $f\\circ f^{-1}=I_B$","$f^{-1}\\circ f=0$ always","$f\\circ f^{-1}=f$ always","Both compositions are undefined"],0,"A function and its inverse undo each other on their respective sets."],
+["An algorithm computes the image set and counts preimages for each $b\\in B$. The function is bijective exactly when:",["Every $b$ has exactly one preimage","Some $b$ has zero preimages","Some $b$ has two preimages","The image is a proper subset of B"],0,"Exactly one preimage for every codomain element is equivalent to bijectivity."]
+],
+
 "Onto function":[
 ["A function $f:A\\to B$ is onto if:",["$f(A)=B$","$f(A)\\subsetneq B$","$f(A)=\\varnothing$ always","Every element of $A$ has two images"],0,"Onto means every element of the codomain is the image of at least one domain element."],
 ["For $f:\\mathbb{R}\\to\\mathbb{R}$ defined by $f(x)=2x-3$, the function is:",["Onto and one-one","Onto but not one-one","Into but not one-one","Neither"],0,"Given any $y\\in\\mathbb{R}$, choosing $x=(y+3)/2$ gives $f(x)=y$; the function is also injective."],

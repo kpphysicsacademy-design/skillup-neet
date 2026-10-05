@@ -511,7 +511,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ],
 "Remainder theorem":[
 ["The remainder theorem states that the remainder when f(x) is divided by x−a is:",["f(0)","f(a)","a","x−a"],1,"The remainder is f(a)."],
-["If f(x)=x²+3x+2, the remainder on division by x−1 is:",["4","6","8","10"],0,"f(1)=1+3+2=6."],
+["If f(x)=x²+3x+2, the remainder on division by x−1 is:",["4","6","8","10"],1,"f(1)=1+3+2=6."],
 ["If f(x)=x²+3x+2, the remainder on division by x+1 is:",["0","1","2","6"],0,"x+1=x−(−1), so evaluate f(−1)=1−3+2=0."],
 ["To find the remainder on division by x−5, evaluate the polynomial at:",["0","1","5","−5"],2,"The theorem requires f(5)."],
 ["If f(2)=7, the remainder when f(x) is divided by x−2 is:",["0","2","5","7"],3,"By the remainder theorem, the remainder is f(2)=7."],

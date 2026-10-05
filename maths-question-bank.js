@@ -1098,4 +1098,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["The quotient rule numerator is:",["u'v−uv'","u'v+uv'","uv","u'v'"],0,"The numerator is first derivative times denominator minus numerator times derivative of denominator."],
 ["For y=(x+1)/(x−1), y' is:",["−2/(x−1)^2","2/(x−1)^2","1/(x−1)","0"],0,"[(1)(x−1)−(x+1)(1)]/(x−1)^2=−2/(x−1)^2."]
 ]
+,"Chain rule":[
+["The chain rule is used when a function is:",["A composition of functions","A constant only","A simple sum only","A polynomial only"],0,"The chain rule differentiates composite functions."],
+["If y=f(g(x)), then dy/dx is:",["f'(g(x))g'(x)","f'(x)+g'(x)","f'(x)g(x)","f(g'(x))"],0,"The chain rule multiplies the outer derivative by the inner derivative."],
+["d/dx[(3x+1)^5] equals:",["5(3x+1)^4","15(3x+1)^4","3(3x+1)^5","15(3x+1)^5"],1,"Outer derivative gives 5(3x+1)^4 and multiply by 3."],
+["d/dx[sin(x^2)] equals:",["cos(x^2)","2x cos(x^2)","2x sin(x^2)","cos(2x)"],1,"Differentiate sine and multiply by d(x²)/dx=2x."],
+["d/dx[e^(2x)] equals:",["e^(2x)","2e^(2x)","2xe^(2x)","e^x"],1,"The inner derivative of 2x is 2."],
+["d/dx[ln(x^2+1)] equals:",["1/(x²+1)","2x/(x²+1)","ln(2x)","2/(x²+1)"],1,"Use the chain rule: derivative of the inside is 2x."],
+["If y=(x^2+1)^3, then y' is:",["3(x²+1)^2","6x(x²+1)^2","3x(x²+1)^2","6(x²+1)^3"],1,"The outer derivative is 3(x²+1)² and the inner derivative is 2x."],
+["For y=cos(4x), y' is:",["−sin(4x)","−4sin(4x)","4cos(4x)","sin(4x)"],1,"Differentiate cosine and multiply by the inner derivative 4."],
+["The chain rule can be viewed as multiplying:",["Outer rate of change by inner rate of change","Two function values","Two constants only","Inputs only"],0,"It combines the rates of change through a composition."],
+["If u=g(x) and y=f(u), then dy/dx equals:",["dy/du·du/dx","dy+du","dy/du+du/dx","du/dy"],0,"The chain rule gives dy/dx=(dy/du)(du/dx)."]
+],
+"Derivatives of composite functions":[
+["For y=(2x+3)^4, the inner function is:",["4","2x+3","(2x+3)^4","x"],1,"The inner expression is 2x+3."],
+["d/dx[(x^2+2)^5] equals:",["5(x²+2)^4","10x(x²+2)^4","2x(x²+2)^5","5x(x²+2)^4"],1,"Apply the chain rule and multiply by 2x."],
+["d/dx[√(3x+1)] equals:",["1/(3x+1)","3/[2√(3x+1)]","1/[2√(3x+1)]","3√(3x+1)"],1,"Write the square root as (3x+1)^(1/2) and apply the chain rule."],
+["d/dx[(5x−2)^−2] equals:",["−2(5x−2)^−3","−10(5x−2)^−3","10(5x−2)^−3","−2(5x−2)^−2"],1,"Power rule gives −2 times the inner derivative 5."],
+["If f(x)=sin(x^3), then f'(x) is:",["cos(x³)","3x²cos(x³)","3x²sin(x³)","x²cos x"],1,"Differentiate sine and multiply by 3x²."],
+["If f(x)=ln(5x+1), then f'(x) is:",["1/(5x+1)","5/(5x+1)","ln 5","5ln(5x+1)"],1,"The derivative of the inside is 5."],
+["For y=e^(x²+1), y' is:",["e^(x²+1)","2xe^(x²+1)","(x²+1)e^x","2e^(x²+1)"],1,"The derivative of the exponent x²+1 is 2x."],
+["Which is a composite function?",["x+1","3x","sin(x²)","5"],2,"sin(x²) is a function applied to another function."],
+["If y=cos(x+1), then y' is:",["sin(x+1)","−sin(x+1)","−cos(x+1)","1"],1,"The inner derivative of x+1 is 1."],
+["The derivative of a composite function requires:",["The chain rule","Only the quotient rule","Only the product rule","No rule"],0,"The chain rule is the standard rule for differentiating compositions."]
+],
+"Implicit differentiation":[
+["Implicit differentiation is useful when y is:",["Not isolated as a function of x","Always constant","Always zero","Independent of x"],0,"It allows differentiation of equations involving x and y without explicitly solving for y."],
+["When differentiating y with respect to x, d(y)/dx is written as:",["0","1","dy/dx","y"],2,"The derivative of y with respect to x is dy/dx."],
+["What is d/dx(y^2) when y depends on x?",["2y","2x","2y dy/dx","y²"],2,"Apply the chain rule to y²."],
+["For x²+y²=25, the differentiated equation is:",["2x+2y=0","2x+2y dy/dx=0","x+y=25","2x+y=0"],1,"Differentiate y² using the chain rule."],
+["From x²+y²=25, dy/dx equals:",["−x/y","x/y","−y/x","y/x"],0,"2x+2y y'=0 gives y'=−x/y."],
+["For xy=1, implicit differentiation gives:",["y+x dy/dx=0","x+y=0","dy/dx=1","xy'=1"],0,"Differentiate xy using the product rule."],
+["For y^3=x, differentiating gives:",["3y² dy/dx=1","3y²=x","y'=3x²","dy/dx=1"],0,"The chain rule gives 3y² y'=1."],
+["When differentiating a term containing y, remember to multiply by:",["dy/dx when appropriate","x only","0 always","y only"],0,"Because y is a function of x, the chain rule applies."],
+["For x²+xy=10, the derivative includes:",["2x+y+x dy/dx","2x+xy","x+y","2x+dy/dx only"],0,"Differentiate x² and the product xy."],
+["Implicit differentiation can find dy/dx without first:",["Solving explicitly for y","Defining x","Using calculus","Using derivatives"],0,"The main advantage is avoiding explicit isolation of y."]
+],
+"Higher-order derivatives":[
+["The second derivative of f is written as:",["f'","f''","f'''","∫f"],1,"The second derivative is denoted f''(x)."],
+["If f(x)=x^3, then f''(x) is:",["3x²","6x","6","x"],1,"f'=3x² and f''=6x."],
+["If f(x)=x^4, then f''(x) is:",["4x³","12x²","16x²","24x"],1,"f'=4x³ and f''=12x²."],
+["The third derivative is the derivative of the:",["First derivative","Second derivative","Original function only","Integral"],1,"Differentiate f'' to obtain f'''."],
+["If f(x)=x^3, then f'''(x) is:",["3x²","6x","6","0"],2,"The derivatives are 3x², 6x, then 6."],
+["For f(x)=sin x, the second derivative is:",["sin x","cos x","−sin x","−cos x"],2,"f'=cos x and f''=−sin x."],
+["Higher-order derivatives describe:",["Successive rates of change","Only function values","Only areas","Only intercepts"],0,"Each derivative measures the rate of change of the previous derivative."],
+["If f''(a)>0, the graph is locally:",["Concave up","Concave down","Always linear","Periodic"],0,"A positive second derivative indicates concave-up behavior."],
+["If f''(a)<0, the graph is locally:",["Concave up","Concave down","Constant","Undefined"],1,"A negative second derivative indicates concave-down behavior."],
+["The fourth derivative is obtained by differentiating:",["f'''","f'' only","f' only","f itself"],0,"Each higher derivative is obtained from the preceding derivative."]
+],
+"Parametric differentiation":[
+["For x=x(t), y=y(t), dy/dx is:",["dy/dt ÷ dx/dt","dx/dt ÷ dy/dt","dy/dt+dx/dt","x/y"],0,"When dx/dt≠0, dy/dx=(dy/dt)/(dx/dt)."],
+["If x=t² and y=t³, dy/dx equals:",["t","3t/2","2t/3","t²"],1,"dy/dt=3t² and dx/dt=2t, so dy/dx=3t/2 for t≠0."],
+["If x=2t and y=t², dy/dx is:",["t","2t","t²","1/t"],0,"dy/dt=2t and dx/dt=2, giving t."],
+["Parametric equations express x and y in terms of a:",["Parameter","Constant only","Derivative only","Limit"],0,"A parameter such as t determines both x and y."],
+["For x=cos t and y=sin t, dy/dx is:",["tan t","−tan t","cot t","−cot t"],1,"dy/dt=cos t and dx/dt=−sin t, giving −cot t? Actually cos/(−sin)=−cot."],
+["The condition needed for dy/dx=(dy/dt)/(dx/dt) is:",["dx/dt≠0","dy/dt=0","x=0","t=0"],0,"Division by dx/dt requires it to be nonzero."],
+["If x=t+1 and y=2t−3, dy/dx is:",["1","2","3","−3"],1,"dy/dt=2 and dx/dt=1, so dy/dx=2."],
+["Parametric differentiation is especially useful when:",["y is not easily expressed explicitly in x","The function is constant","No parameter exists","Only integers occur"],0,"Parametric curves may be difficult to write as y=f(x), but derivatives can still be found."],
+["For x=t²+1 and y=t²−1, dy/dx is:",["1","−1","2t","1/t"],0,"Both derivatives are 2t, so their ratio is 1 where t≠0."],
+["The second derivative in parametric form uses:",["(d/dt(dy/dx))/(dx/dt)","dy/dt only","dx/dt only","x/y"],0,"Differentiate dy/dx with respect to t, then divide by dx/dt."]
+],
+"Logarithmic differentiation":[
+["Logarithmic differentiation is especially useful for functions involving:",["Variable powers and products","Only constants","Only linear terms","Only integers"],0,"Taking logarithms simplifies products, quotients, and variable exponents."],
+["If y>0, taking natural logarithms gives:",["ln y","log y only","1/y","e^y"],0,"The natural logarithm is applied to both sides."],
+["For y=x^x, logarithmic differentiation begins with:",["ln y=x ln x","y=ln x","ln y=x+x","ln x=y"],0,"Taking logs gives ln y=x ln x."],
+["For y=x^x, dy/dx equals:",["x^x","x^x(ln x+1)","x ln x","x^x ln x"],1,"Differentiate ln y=x ln x: y'/y=ln x+1, so y'=x^x(ln x+1)."],
+["Logarithmic differentiation uses the identity ln(ab)=:",["ln a+ln b","ln a−ln b","ln a·ln b","ln(a+b)"],0,"The logarithm of a product becomes a sum."],
+["The identity ln(a/b) equals:",["ln a+ln b","ln a−ln b","ln a ln b","ln(a−b)"],1,"The quotient becomes a difference of logarithms."],
+["The identity ln(a^n) equals:",["n ln a","ln a/n","ln(a+n)","(ln a)^n"],0,"The power rule for logarithms brings the exponent down."],
+["For y=(x+1)^x, logarithmic differentiation is useful because:",["Both base and exponent depend on x","It is constant","It is linear","It has no exponent"],0,"The variable occurs in both the base and exponent."],
+["After logarithmic differentiation, one often obtains an equation for:",["y'/y","y+x","x/y only","ln x only"],0,"Differentiating ln y produces y'/y."],
+["For y=(sin x)^x where defined positive, the first logarithmic step is:",["ln y=x ln(sin x)","ln y=sin x+x","y=x sin x","ln y=ln x sin x only"],0,"Taking logs converts the variable exponent into a product."]
+]
 };

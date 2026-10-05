@@ -389,4 +389,76 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which expression represents 'twice x decreased by 3'?",["2(x−3)","2x−3","x−6","3−2x"],1,"Twice x is 2x, then subtract 3: 2x−3."],
 ["If a=2 and b=5, the value of 3a+b is:",["8","9","10","11"],1,"3(2)+5=11." ]
 
+,"Expansion":[
+["Expand 3(x+4).",["3x+4","3x+12","x+12","3x+7"],1,"Distribute 3 to both terms: 3x+12."],
+["Expand 5(2x−3).",["10x−3","10x−15","7x−15","10x+15"],1,"Multiply 5 by both 2x and −3."],
+["Expand (x+2)(x+3).",["x²+5x+6","x²+6x+5","x²+5","x²+6"],0,"FOIL gives x²+3x+2x+6=x²+5x+6."],
+["Expand (x−4)(x+2).",["x²−2x−8","x²+6x−8","x²−2x+8","x²−8"],0,"x²+2x−4x−8=x²−2x−8."],
+["Which is the expansion of (a+b)²?",["a²+b²","a²+2ab+b²","a²−2ab+b²","2a+2b"],1,"The identity is (a+b)²=a²+2ab+b²."],
+["Expand (x−5)².",["x²−10x+25","x²−5x+25","x²+10x+25","x²−25"],0,"Using (a−b)²=a²−2ab+b² gives x²−10x+25."],
+["Expand 2x(x+3).",["2x²+3","2x²+6x","2x+6x","2x²+3x"],1,"Multiply 2x by each term: 2x²+6x."],
+["Expand (2x+1)(x+4).",["2x²+9x+4","2x²+8x+1","2x²+4x+4","2x²+5x+4"],0,"2x²+8x+x+4=2x²+9x+4."],
+["Expand (a−b)(a+b).",["a²+b²","a²−b²","a²−2ab+b²","2a²"],1,"This is the difference of squares: a²−b²."],
+["Which property is mainly used to expand products?",["Distributive property","Identity property","Inverse property","Closure only"],0,"Expansion distributes multiplication across addition or subtraction."]
+],
+"Factorisation":[
+["Factorise 6x+12.",["6(x+2)","3(x+4)","2(3x+12)","6(x+12)"],0,"Take the common factor 6: 6(x+2)."],
+["Factorise x²+5x+6.",["(x+2)(x+3)","(x+1)(x+6)","(x−2)(x−3)","(x+5)(x+1)"],0,"2 and 3 multiply to 6 and add to 5."],
+["Factorise x²−9.",["(x−9)(x+1)","(x−3)²","(x−3)(x+3)","x(x−9)"],2,"x²−9 is a difference of squares."],
+["The common factor of 8x and 12 is:",["2","4","8","12"],1,"Both terms are divisible by 4, and 4 is the greatest common numerical factor."],
+["Factorise 3x²+6x.",["3x(x+2)","3(x²+2)","x(3x+6x)","6x(x+1)"],0,"The common factor is 3x."],
+["Factorise x²−7x+12.",["(x−3)(x−4)","(x+3)(x+4)","(x−2)(x−6)","(x−1)(x−12)"],0,"−3 and −4 multiply to 12 and add to −7."],
+["Which is a factor of x²−16?",["x−4","x−16","x+16","x−8"],0,"x²−16=(x−4)(x+4)."],
+["Factorise 5a+5b.",["5(a+b)","5(a−b)","a(5+b)","b(5+a)"],0,"Take 5 as the common factor."],
+["Factorisation is the reverse of:",["Expansion","Addition","Subtraction","Division"],0,"Expansion multiplies factors to form an expression; factorisation reverses this."],
+["Which expression is completely factorised over integers?",["2(x+3)","x²−9","3x+6","x²+5x+6"],0,"2(x+3) has no further common factor or integer factorisation needed."]
+],
+"Common factors":[
+["A common factor of 12 and 18 is:",["5","6","7","8"],1,"6 divides both 12 and 18."],
+["The greatest common factor of 24 and 32 is:",["4","6","8","12"],2,"Factors common to both include 1,2,4,8; greatest is 8."],
+["Which number is a factor of both 15 and 25?",["3","5","7","10"],1,"5 divides both numbers."],
+["How many positive factors does 12 have?",["4","5","6","8"],2,"The factors are 1,2,3,4,6,12: six factors."],
+["Which is NOT a factor of 36?",["3","4","6","8"],3,"36 is not divisible by 8."],
+["The common factors of 8 and 12 are:",["1,2,4","1,3,6","2,4,8","1,2,3,4"],0,"Both numbers are divisible by 1, 2, and 4."],
+["If d divides both a and b, then d is a:",["Common factor","Common multiple","Prime only","Remainder"],0,"A common factor divides both numbers exactly."],
+["The HCF of 18 and 30 is their:",["Smallest factor","Greatest common factor","Least common multiple","Sum"],1,"HCF means highest or greatest common factor."],
+["Which pair has HCF 1?",["8 and 12","9 and 15","8 and 15","14 and 21"],2,"8 and 15 have no common factor greater than 1."],
+["If 6 is a common factor of a and b, then a and b are both:",["Divisible by 6","Prime","Odd","Less than 6"],0,"A common factor divides both numbers."]
+],
+"Grouping":[
+["Factorise ax+ay by grouping the common factor:",["a(x+y)","x(a+y)","y(a+x)","a(x−y)"],0,"a is common to both terms, giving a(x+y)."],
+["Factorise 3x+3y+2x+2y by grouping.",["5(x+y)","5(x−y)","3(x+y)+2","5xy"],0,"Group as 3(x+y)+2(x+y)=5(x+y)."],
+["Factorise ax+ay+bx+by.",["(a+b)(x+y)","(a+x)(b+y)","ab(x+y)","(a−b)(x−y)"],0,"Group a(x+y)+b(x+y)=(a+b)(x+y)."],
+["In grouping, the first step is usually to:",["Pair terms with common factors","Add all terms","Divide by zero","Take square roots"],0,"Grouping rearranges terms so useful common factors appear."],
+["Factorise x²+3x+2x+6.",["(x+2)(x+3)","(x+6)(x−1)","x(x+5)+6","(x+2)(x+6)"],0,"Group x(x+3)+2(x+3)=(x+2)(x+3)."],
+["Which grouping is useful for ab+ac+db+dc?",["a(b+c)+d(b+c)","b(a+c)+d(a+c)","ab(c+d)","a(b−c)+d(b−c)"],0,"Both groups share the factor (b+c)."],
+["Factorise 2x²+6x+3x+9.",["(2x+3)(x+3)","(2x+9)(x+1)","(x+3)(x+6)","3(2x²+3x+3)"],0,"Group 2x(x+3)+3(x+3)=(2x+3)(x+3)."],
+["Grouping is especially useful when an expression has:",["Four terms that can be paired","Only one term","No variables","Only constants"],0,"Pairing terms can reveal a common binomial factor."],
+["Which factorisation is correct for x²+xy+3x+3y?",["(x+3)(x+y)","(x+y)(x−3)","x(x+y+3)+3y","(x+3)(x−y)"],0,"Group x(x+y)+3(x+y)=(x+3)(x+y)."],
+["The common factor after grouping should be:",["The same in each group","Different in every group","Zero","Always a prime"],0,"Successful grouping creates a common factor shared by the groups."]
+],
+"Algebraic fractions":[
+["Simplify x/3+x/3.",["x/3","2x/3","x/6","2/3"],1,"Add numerators because the denominators are equal: 2x/3."],
+["Simplify 1/x+2/x, x≠0.",["1/x","2/x","3/x","3/2x"],2,"The common denominator is x, so the result is 3/x."],
+["Simplify 6x/3.",["x","2x","3x","6x"],1,"6x divided by 3 is 2x."],
+["Which value of x is excluded from 1/(x−2)?",["0","1","2","3"],2,"The denominator cannot be zero, so x−2≠0 and x≠2."],
+["Simplify (x²)/x for x≠0.",["x","x²","1","2x"],0,"Cancel the common nonzero factor x."],
+["Add 1/2+1/4.",["1/4","1/2","3/4","3/8"],2,"Using denominator 4: 2/4+1/4=3/4."],
+["Simplify 3/x × x/6, x≠0.",["1/2","1","2","3"],0,"Cancel x, giving 3/6=1/2."],
+["Which is a factor of the denominator of 2/(3x)?",["2","3","x","2x"],1,"The denominator is 3x, so 3 is a factor."],
+["Simplify 4/x−1/x, x≠0.",["3/x","4/x","5/x","3"],0,"Subtract numerators over the common denominator x."],
+["For algebraic fractions, a denominator must be:",["Zero","Nonzero","Negative always","A prime always"],1,"Division by zero is undefined, so denominators cannot be zero."]
+],
+"Simplification":[
+["Simplify 3x+2x.",["5x","6x","5","x"],0,"Combine like terms to get 5x."],
+["Simplify 7a−3a+2.",["4a+2","10a+2","4a−2","7a−1"],0,"7a−3a=4a, so the result is 4a+2."],
+["Simplify 2(x+3).",["2x+3","2x+6","x+6","2x+9"],1,"Distribute 2: 2x+6."],
+["Simplify 4x+3−x+5.",["3x+8","5x+8","3x−2","4x+8"],0,"Combine 4x−x=3x and 3+5=8."],
+["Simplify 5a−2b+3a+b.",["8a−b","8a+b","2a−b","8ab"],0,"5a+3a=8a and −2b+b=−b."],
+["Simplify (x+2)+(3x−5).",["4x−3","2x−3","4x+7","3x−3"],0,"Combine x+3x=4x and 2−5=−3."],
+["Simplify 3(2x−1)+x.",["7x−3","6x−1","7x−1","6x−3"],0,"3(2x−1)+x=6x−3+x=7x−3."],
+["Simplify 2x²+3x−x²+x.",["x²+4x","3x²+4x","x²+2x","2x²+4x"],0,"Combine 2x²−x²=x² and 3x+x=4x."],
+["Which expression is simplest?",["2x+3x","5x","x+x+x+x+x","10x/2"],1,"5x is already a single simplified term."],
+["If x=2, the value of 3x+4−x is:",["6","8","10","12"],1,"3(2)+4−2=8."]
+]
 ]};

@@ -48,6 +48,18 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which statement is correct?",["a^m×a^n=a^(m−n)","a^m×a^n=a^(m+n)","a^m×a^n=a^(mn)","a^m×a^n=a^(m/n)"],1,"For the same nonzero base, multiplication of powers adds their exponents."],
 ["What is 2^0+3^0?",["0","1","2","3"],2,"Both 2^0 and 3^0 equal 1, so their sum is 2."]
 ],
+"Exponents":[
+["What is 2^3?",["6","8","9","12"],1,"2^3=2×2×2=8."],
+["Simplify 5^2×5^3.",["5^5","5^6","10^5","25^5"],0,"For the same base, add exponents: 5^(2+3)=5^5."],
+["Simplify 7^6÷7^2.",["7^2","7^3","7^4","7^8"],2,"For the same base, subtract exponents: 7^(6−2)=7^4."],
+["What is (2^3)^2?",["2^5","2^6","4^5","2^9"],1,"Multiply the exponents: (2^3)^2=2^(3×2)=2^6."],
+["Which expression equals 3^0?",["0","1","3","−1"],1,"Any nonzero number raised to the zero power equals 1."],
+["Simplify x^4×x^2.",["x^2","x^6","x^8","2x^4"],1,"For the same base, exponents are added: x^(4+2)=x^6."],
+["Simplify a^9÷a^5, where a≠0.",["a^4","a^5","a^14","a^45"],0,"Subtract the exponents: a^(9−5)=a^4."],
+["Which is equal to 10^−2?",["−100","−0.01","0.01","100"],2,"A negative exponent gives the reciprocal: 10^−2=1/10^2=0.01."],
+["If 2^x=32, what is x?",["4","5","6","8"],1,"Since 32=2^5, x=5."],
+["Which law is correct for nonzero a?",["a^m/a^n=a^(m+n)","a^m/a^n=a^(m−n)","a^m/a^n=a^(mn)","a^m/a^n=a^(n−m) always"],1,"Dividing powers with the same nonzero base means subtracting the exponent of the denominator."]
+],
 "Recurring decimals":[
 ["Which fraction is equal to 0.333…?",["1/2","1/3","2/3","3/10"],1,"The recurring decimal 0.333… represents 1/3."],
 ["0.666… is equal to:",["1/3","2/3","3/4","5/6"],1,"0.666… is the recurring decimal representation of 2/3."],

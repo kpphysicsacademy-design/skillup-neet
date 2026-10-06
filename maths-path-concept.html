@@ -64,6 +64,14 @@ function lessonHtml(){
  return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Explore}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
 function explorerHtml(){
+ if(norm(concept)==="equivalent rational numbers") return `
+<div class="visual-banner"><div class="frac"><span class="n" id="en">2</span><span id="ed">3</span></div><div class="eq">=</div><div class="frac"><span class="n" id="ekn">4</span><span id="ekd">6</span></div><div class="value-box"><small>SAME VALUE</small><strong id="eval">0.667</strong><span class="pill">Equivalent</span></div></div>
+<div class="props"><div class="prop"><span>Original fraction</span><strong id="eoriginal">2 / 3</strong></div><div class="prop"><span>Multiplier</span><strong id="emult">2</strong></div><div class="prop"><span>Equivalent fraction</span><strong id="eequiv">4 / 6</strong></div><div class="prop"><span>Decimal value</span><strong id="edec">0.667</strong></div></div>
+<div class="control"><div class="head"><span>Numerator</span><span class="val" id="env">2</span></div><input class="range" id="enslider" type="range" min="-12" max="12" value="2"></div>
+<div class="control"><div class="head"><span>Denominator</span><span class="val" id="edv">3</span></div><input class="range" id="edslider" type="range" min="1" max="12" value="3"></div>
+<div class="control"><div class="head"><span>Multiply by</span><span class="val" id="ekv">2</span></div><input class="range" id="ekslider" type="range" min="-6" max="6" value="2"></div>
+<div class="checks" id="ework"></div>
+<div class="presets"><button class="preset ep" data-n="2" data-d="3" data-k="2">2/3 → 4/6</button><button class="preset ep" data-n="-3" data-d="4" data-k="3">−3/4 → −9/12</button><button class="preset ep" data-n="1" data-d="2" data-k="5">1/2 → 5/10</button><button class="preset ep" data-n="3" data-d="5" data-k="-2">3/5 → −6/−10</button></div>`;
  if(norm(concept)==="rational numbers") return `
 <div class="visual-banner"><div class="frac"><span class="n" id="rn">3</span><span id="rd">4</span></div><div class="eq">=</div><div class="value-box"><small>DECIMAL VALUE</small><strong id="rdecimal">0.750</strong><span class="pill" id="rkind">Rational</span></div></div>
 <div class="props"><div class="prop"><span>Numerator</span><strong id="rleft">3</strong></div><div class="prop"><span>Denominator</span><strong id="rright">4</strong></div><div class="prop"><span>Fraction</span><strong id="rfrac">3 / 4</strong></div><div class="prop"><span>Number line</span><strong id="rline">0.75</strong></div></div>
@@ -89,6 +97,20 @@ app.innerHTML=`
 <section class="card"><h2>Step 2 • Concept Explorer</h2>${explorerHtml()}</section>
 <section class="card"><h2>Step 3 • Mastery Quiz</h2><div id="quiz"></div></section>`;
 function startExplorer(){
+ if(norm(concept)==="equivalent rational numbers"){
+  const N=document.getElementById("enslider"),D=document.getElementById("edslider"),K=document.getElementById("ekslider");
+  function updateE(){
+   const n=+N.value,d=+D.value,k=+K.value,nn=n*k,dd=d*k,v=n/d;
+   document.getElementById("en").textContent=n;document.getElementById("ed").textContent=d;document.getElementById("ekn").textContent=nn;document.getElementById("ekd").textContent=dd;
+   document.getElementById("env").textContent=n;document.getElementById("edv").textContent=d;document.getElementById("ekv").textContent=k;
+   document.getElementById("eoriginal").textContent=n+" / "+d;document.getElementById("emult").textContent=k;document.getElementById("eequiv").textContent=nn+" / "+dd;
+   document.getElementById("eval").textContent=v.toFixed(3);document.getElementById("edec").textContent=v.toFixed(3);
+   document.getElementById("ework").innerHTML=k===0?"<b>Important:</b> multiplying numerator and denominator by 0 is not allowed. Choose a non-zero multiplier.":"<b>Rule:</b> multiply both numerator and denominator by the same non-zero number.<br><b>Calculation:</b> "+n+" × "+k+" = "+nn+" and "+d+" × "+k+" = "+dd+"<br><b>Therefore:</b> "+n+" / "+d+" = "+nn+" / "+dd;
+  }
+  [N,D,K].forEach(e=>e.addEventListener("input",updateE));
+  document.querySelectorAll(".ep").forEach(x=>x.addEventListener("click",()=>{N.value=x.dataset.n;D.value=x.dataset.d;K.value=x.dataset.k;updateE()}));
+  updateE();return;
+ }
  if(norm(concept)==="rational numbers"){
   const N=document.getElementById("rnslider"),D=document.getElementById("rdslider");
   const gcd=(x,y)=>{x=Math.abs(x);y=Math.abs(y);while(y){let t=x%y;x=y;y=t}return x||1};

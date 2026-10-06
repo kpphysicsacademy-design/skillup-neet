@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261006-2115</title>
+<title>SkillUp Mathematics • Concept Practice • v20261006-2130</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -25,7 +25,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261006-2115";</script>
-<script src="maths-quiz-bank.js?v=20261006-2115"></script>
+<script src="maths-quiz-bank.js?v=20261006-2130"></script>
 <script>
 (function(){
 "use strict";
@@ -64,6 +64,15 @@ function lessonHtml(){
  return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Explore}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
 function explorerHtml(){
+ if(norm(concept)==="comparing rational numbers") return `
+<div class="visual-banner"><div class="frac"><span class="n" id="can">3</span><span id="cad">4</span></div><div class="eq" id="ccompare">></div><div class="frac"><span class="n" id="ccn">5</span><span id="ccd">8</span></div><div class="value-box"><small>COMPARISON</small><strong id="cresult">3/4 > 5/8</strong><span class="pill" id="cpill">Greater</span></div></div>
+<div class="props"><div class="prop"><span>First fraction</span><strong id="cleft">3 / 4</strong></div><div class="prop"><span>Second fraction</span><strong id="cright">5 / 8</strong></div><div class="prop"><span>Cross products</span><strong id="ccross">24 vs 20</strong></div><div class="prop"><span>Decimal values</span><strong id="cdec">0.750 vs 0.625</strong></div></div>
+<div class="control"><div class="head"><span>First numerator</span><span class="val" id="canv">3</span></div><input class="range" id="cans" type="range" min="-12" max="12" value="3"></div>
+<div class="control"><div class="head"><span>First denominator</span><span class="val" id="cadv">4</span></div><input class="range" id="cads" type="range" min="1" max="12" value="4"></div>
+<div class="control"><div class="head"><span>Second numerator</span><span class="val" id="ccnv">5</span></div><input class="range" id="ccns" type="range" min="-12" max="12" value="5"></div>
+<div class="control"><div class="head"><span>Second denominator</span><span class="val" id="ccdv">8</span></div><input class="range" id="ccds" type="range" min="1" max="12" value="8"></div>
+<div class="checks" id="cwork"></div>
+<div class="presets"><button class="preset cp" data-a="3" data-b="4" data-c="5" data-d="8">3/4 vs 5/8</button><button class="preset cp" data-a="-2" data-b="3" data-c="1" data-d="6">−2/3 vs 1/6</button><button class="preset cp" data-a="2" data-b="5" data-c="4" data-d="10">2/5 vs 4/10</button><button class="preset cp" data-a="-3" data-b="4" data-c="-2" data-d="3">−3/4 vs −2/3</button></div>`;
  if(norm(concept)==="equivalent rational numbers") return `
 <div class="visual-banner"><div class="frac"><span class="n" id="en">2</span><span id="ed">3</span></div><div class="eq">=</div><div class="frac"><span class="n" id="ekn">4</span><span id="ekd">6</span></div><div class="value-box"><small>SAME VALUE</small><strong id="eval">0.667</strong><span class="pill">Equivalent</span></div></div>
 <div class="props"><div class="prop"><span>Original fraction</span><strong id="eoriginal">2 / 3</strong></div><div class="prop"><span>Multiplier</span><strong id="emult">2</strong></div><div class="prop"><span>Equivalent fraction</span><strong id="eequiv">4 / 6</strong></div><div class="prop"><span>Decimal value</span><strong id="edec">0.667</strong></div></div>
@@ -97,6 +106,19 @@ app.innerHTML=`
 <section class="card"><h2>Step 2 • Concept Explorer</h2>${explorerHtml()}</section>
 <section class="card"><h2>Step 3 • Mastery Quiz</h2><div id="quiz"></div></section>`;
 function startExplorer(){
+ if(norm(concept)==="comparing rational numbers"){
+  const A=document.getElementById("cans"),B=document.getElementById("cads"),C=document.getElementById("ccns"),D=document.getElementById("ccds");
+  function updateC(){
+   const a=+A.value,b=+B.value,c=+C.value,d=+D.value, left=a/b, right=c/d, x=a*d, y=c*b;
+   let sign=x>y?">":x<y?"<":"="; let label=x>y?"Greater":x<y?"Less":"Equal";
+   document.getElementById("can").textContent=a;document.getElementById("cad").textContent=b;document.getElementById("ccn").textContent=c;document.getElementById("ccd").textContent=d;document.getElementById("ccompare").textContent=sign;
+   document.getElementById("canv").textContent=a;document.getElementById("cadv").textContent=b;document.getElementById("ccnv").textContent=c;document.getElementById("ccdv").textContent=d;
+   document.getElementById("cleft").textContent=a+" / "+b;document.getElementById("cright").textContent=c+" / "+d;document.getElementById("ccross").textContent=x+" vs "+y;document.getElementById("cdec").textContent=left.toFixed(3)+" vs "+right.toFixed(3);document.getElementById("cresult").textContent=a+"/"+b+" "+sign+" "+c+"/"+d;document.getElementById("cpill").textContent=label;
+   document.getElementById("cwork").innerHTML="<b>Cross multiplication:</b> "+a+" × "+d+" = "+x+" and "+c+" × "+b+" = "+y+"<br><b>Compare:</b> "+x+" "+sign+" "+y+"<br><b>Conclusion:</b> "+a+"/"+b+" "+sign+" "+c+"/"+d;
+  }
+  [A,B,C,D].forEach(e=>e.addEventListener("input",updateC));
+  document.querySelectorAll(".cp").forEach(x=>x.addEventListener("click",()=>{A.value=x.dataset.a;B.value=x.dataset.b;C.value=x.dataset.c;D.value=x.dataset.d;updateC()}));updateC();return;
+ }
  if(norm(concept)==="equivalent rational numbers"){
   const N=document.getElementById("enslider"),D=document.getElementById("edslider"),K=document.getElementById("ekslider");
   function updateE(){

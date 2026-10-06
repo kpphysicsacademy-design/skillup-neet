@@ -64,6 +64,13 @@ function lessonHtml(){
  return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Explore}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
 function explorerHtml(){
+ if(norm(concept)==="rational numbers") return `
+<div class="visual-banner"><div class="frac"><span class="n" id="rn">3</span><span id="rd">4</span></div><div class="eq">=</div><div class="value-box"><small>DECIMAL VALUE</small><strong id="rdecimal">0.750</strong><span class="pill" id="rkind">Rational</span></div></div>
+<div class="props"><div class="prop"><span>Numerator</span><strong id="rleft">3</strong></div><div class="prop"><span>Denominator</span><strong id="rright">4</strong></div><div class="prop"><span>Fraction</span><strong id="rfrac">3 / 4</strong></div><div class="prop"><span>Number line</span><strong id="rline">0.75</strong></div></div>
+<div class="control"><div class="head"><span>Numerator</span><span class="val" id="rnv">3</span></div><input class="range" id="rnslider" type="range" min="-12" max="12" value="3"></div>
+<div class="control"><div class="head"><span>Denominator</span><span class="val" id="rdv">4</span></div><input class="range" id="rdslider" type="range" min="1" max="12" value="4"></div>
+<div class="checks" id="rwork"></div>
+<div class="presets"><button class="preset rp" data-n="1" data-d="2">1/2</button><button class="preset rp" data-n="-3" data-d="4">−3/4</button><button class="preset rp" data-n="5" data-d="2">5/2</button><button class="preset rp" data-n="0" data-d="7">0/7</button></div>`;
  if(norm(concept)!=="operations on rational numbers") return '<div class="empty">A concept-specific interactive explorer is not yet available for this concept. No unrelated visualizer is shown.</div>';
  return `
 <div class="visual-banner"><div class="frac"><span class="n" id="an">1</span><span id="ad">2</span></div><div class="eq" id="sign">+</div><div class="frac"><span class="n" id="cn">1</span><span id="cd">3</span></div><div class="eq">=</div><div class="value-box"><small>SIMPLIFIED RESULT</small><strong id="result">5 / 6</strong><span class="pill" id="pill">Addition</span></div></div>
@@ -82,6 +89,13 @@ app.innerHTML=`
 <section class="card"><h2>Step 2 • Concept Explorer</h2>${explorerHtml()}</section>
 <section class="card"><h2>Step 3 • Mastery Quiz</h2><div id="quiz"></div></section>`;
 function startExplorer(){
+ if(norm(concept)==="rational numbers"){
+  const N=document.getElementById("rnslider"),D=document.getElementById("rdslider");
+  const gcd=(x,y)=>{x=Math.abs(x);y=Math.abs(y);while(y){let t=x%y;x=y;y=t}return x||1};
+  const simp=(n,d)=>{let g=gcd(n,d);n/=g;d/=g;if(d<0){n=-n;d=-d}return[n,d]};
+  function updateR(){const n=+N.value,d=+D.value,s=simp(n,d),v=n/d;document.getElementById("rn").textContent=n;document.getElementById("rd").textContent=d;document.getElementById("rnv").textContent=n;document.getElementById("rdv").textContent=d;document.getElementById("rleft").textContent=n;document.getElementById("rright").textContent=d;document.getElementById("rfrac").textContent=n+" / "+d;document.getElementById("rdecimal").textContent=v.toFixed(3);document.getElementById("rline").textContent=v.toFixed(3);document.getElementById("rwork").innerHTML="<b>Why rational?</b> "+n+" / "+d+" has integer numerator and non-zero integer denominator.<br><b>Simplified form:</b> "+s[0]+" / "+s[1]+"<br><b>Decimal:</b> "+v.toFixed(3);}
+  [N,D].forEach(e=>e.addEventListener("input",updateR));document.querySelectorAll(".rp").forEach(x=>x.addEventListener("click",()=>{N.value=x.dataset.n;D.value=x.dataset.d;updateR()}));updateR();return;
+ }
  if(norm(concept)!=="operations on rational numbers")return;
  const A=document.getElementById("a"),B=document.getElementById("b"),C=document.getElementById("c"),D=document.getElementById("d"),O=document.getElementById("op");
  const gcd=(x,y)=>{x=Math.abs(x);y=Math.abs(y);while(y){let t=x%y;x=y;y=t}return x||1};

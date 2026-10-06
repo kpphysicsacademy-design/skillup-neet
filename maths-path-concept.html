@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261006-2315</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0005</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -25,7 +25,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261006-2145";</script>
-<script src="maths-quiz-bank.js?v=20261006-2315"></script>
+<script src="maths-quiz-bank.js?v=20261007-0005"></script>
 <script>
 (function(){
 "use strict";
@@ -62,6 +62,15 @@ function lessonHtml(){
 <strong>To compare rational numbers, convert them to a common denominator or compare their cross-products when denominators are positive.</strong>
 <div class="formula">\\(\\frac{a}{b}\\ ?\\ \\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ cb\\)</div>
 <p>Example: \\(3/4\\) and \\(5/8\\): \\(3\\times8=24\\) and \\(5\\times4=20\\), so \\(3/4>5/8\\).</p>`;
+ if(norm(concept)==="powers and exponents") return `
+<strong>A power is a compact way to write repeated multiplication of the same number.</strong>
+<div class="formula">\\(a^n=\\underbrace{a\\times a\\times\\cdots\\times a}_{n\\text{ factors}}\\)</div>
+<p>Here <b>a</b> is the <b>base</b> and <b>n</b> is the <b>exponent</b>. For example, \\(2^4=2\\times2\\times2\\times2=16\\).</p>
+<div class="formula">\\(a^m\\times a^n=a^{m+n}\\)</div>
+<div class="formula">\\(a^m\\div a^n=a^{m-n}\\quad(a\\ne0,\\ m\\ge n)\\)</div>
+<div class="formula">\\((a^m)^n=a^{mn}\\)</div>
+<div class="formula">\\(a^m b^m=(ab)^m\\)</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> the exponent tells how many times the base is used as a factor. \\(a^1=a\\) and for non-zero \\(a\\), \\(a^0=1\\).</p>`;
  if(norm(concept)==="properties of rational numbers") return `
 <strong>Rational numbers follow important properties that make calculations consistent and predictable.</strong>
 <div class="formula">\\(a+b=b+a\\quad\\text{and}\\quad a\\times b=b\\times a\\)</div>
@@ -107,6 +116,13 @@ function explorerHtml(){
 <div class="control"><div class="head"><span>Denominator</span><span class="val" id="rdv">4</span></div><input class="range" id="rdslider" type="range" min="1" max="12" value="4"></div>
 <div class="checks" id="rwork"></div>
 <div class="presets"><button class="preset rp" data-n="1" data-d="2">1/2</button><button class="preset rp" data-n="-3" data-d="4">−3/4</button><button class="preset rp" data-n="5" data-d="2">5/2</button><button class="preset rp" data-n="0" data-d="7">0/7</button></div>`;
+ if(norm(concept)==="powers and exponents") return `
+<div class="visual-banner"><div class="frac"><span class="n" id="powbase">2</span><span id="powexp">3</span></div><div class="eq">=</div><div class="value-box"><small>POWER VALUE</small><strong id="powvalue">8</strong><span class="pill" id="powpill">2³ = 8</span></div></div>
+<div class="props"><div class="prop"><span>Base</span><strong id="powbval">2</strong></div><div class="prop"><span>Exponent</span><strong id="poweval">3</strong></div><div class="prop"><span>Expanded form</span><strong id="powexpanded">2 × 2 × 2</strong></div><div class="prop"><span>Value</span><strong id="powvval">8</strong></div></div>
+<div class="control"><div class="head"><span>Base</span><span class="val" id="powbv">2</span></div><input class="range" id="pbase" type="range" min="2" max="10" value="2"></div>
+<div class="control"><div class="head"><span>Exponent</span><span class="val" id="powev">3</span></div><input class="range" id="pexp" type="range" min="0" max="6" value="3"></div>
+<div class="checks" id="powwork"></div>
+<div class="presets"><button class="preset powp" data-b="2" data-e="3">2³</button><button class="preset powp" data-b="5" data-e="2">5²</button><button class="preset powp" data-b="10" data-e="3">10³</button><button class="preset powp" data-b="3" data-e="4">3⁴</button></div>`;
  if(norm(concept)!=="operations on rational numbers") return '<div class="empty">A concept-specific interactive explorer is not yet available for this concept. No unrelated visualizer is shown.</div>';
  return `
 <div class="visual-banner"><div class="frac"><span class="n" id="an">1</span><span id="ad">2</span></div><div class="eq" id="sign">+</div><div class="frac"><span class="n" id="cn">1</span><span id="cd">3</span></div><div class="eq">=</div><div class="value-box"><small>SIMPLIFIED RESULT</small><strong id="result">5 / 6</strong><span class="pill" id="pill">Addition</span></div></div>
@@ -198,6 +214,27 @@ function startExplorer(){
   const simp=(n,d)=>{let g=gcd(n,d);n/=g;d/=g;if(d<0){n=-n;d=-d}return[n,d]};
   function updateR(){const n=+N.value,d=+D.value,s=simp(n,d),v=n/d;document.getElementById("rn").textContent=n;document.getElementById("rd").textContent=d;document.getElementById("rnv").textContent=n;document.getElementById("rdv").textContent=d;document.getElementById("rleft").textContent=n;document.getElementById("rright").textContent=d;document.getElementById("rfrac").textContent=n+" / "+d;document.getElementById("rdecimal").textContent=v.toFixed(3);document.getElementById("rline").textContent=v.toFixed(3);document.getElementById("rwork").innerHTML="<b>Why rational?</b> "+n+" / "+d+" has integer numerator and non-zero integer denominator.<br><b>Simplified form:</b> "+s[0]+" / "+s[1]+"<br><b>Decimal:</b> "+v.toFixed(3);}
   [N,D].forEach(e=>e.addEventListener("input",updateR));document.querySelectorAll(".rp").forEach(x=>x.addEventListener("click",()=>{N.value=x.dataset.n;D.value=x.dataset.d;updateR()}));updateR();return;
+ }
+ if(norm(concept)==="powers and exponents"){
+  const B=document.getElementById("pbase"),E=document.getElementById("pexp");
+  function updatePow(){
+   const b=Number(B.value),e=Number(E.value),v=Math.pow(b,e);
+   const expanded=e===0?"1":Array(e).fill(String(b)).join(" × ");
+   document.getElementById("powbase").textContent=b;
+   document.getElementById("powexp").textContent=e;
+   document.getElementById("powbv").textContent=b;
+   document.getElementById("powev").textContent=e;
+   document.getElementById("powbval").textContent=b;
+   document.getElementById("poweval").textContent=e;
+   document.getElementById("powexpanded").textContent=expanded;
+   document.getElementById("powvval").textContent=v;
+   document.getElementById("powvalue").textContent=v;
+   document.getElementById("powpill").textContent=b+"^"+e+" = "+v;
+   document.getElementById("powwork").innerHTML="<b>Interpretation:</b> "+b+" is the base and "+e+" is the exponent.<br><b>Expanded:</b> "+expanded+"<br><b>Value:</b> "+b+"^"+e+" = "+v+".";
+  }
+  [B,E].forEach(el=>el.addEventListener("input",updatePow));
+  document.querySelectorAll(".powp").forEach(btn=>btn.addEventListener("click",()=>{B.value=btn.dataset.b;E.value=btn.dataset.e;updatePow()}));
+  updatePow();return;
  }
  if(norm(concept)!=="operations on rational numbers")return;
  const A=document.getElementById("a"),B=document.getElementById("b"),C=document.getElementById("c"),D=document.getElementById("d"),O=document.getElementById("op");

@@ -26,7 +26,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-appl
 h1{margin:6px 0 7px;font-size:clamp(30px,6vw,46px);line-height:1.05}
 .lead{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
 .meta{display:none}.learn{margin-top:18px;padding:16px;border-radius:20px;background:#121814;border:2px solid #29362e}.learn h2{margin:0 0 8px;font-size:18px}.sublist{display:flex;flex-wrap:wrap;gap:6px}.subitem{padding:7px 10px;border:2px solid #304036;border-radius:999px;background:#1b251e;color:#c9d6ce;font-size:11px;font-weight:800}
-.number-lab{display:none;padding:18px;margin-bottom:14px;overflow:hidden}.number-lab.show{display:block}
+.number-lab{display:none;padding:18px;margin-bottom:14px;overflow:hidden}.number-lab.show{display:block}.equiv-lab{display:none;margin-bottom:16px;background:var(--panel);border:2px solid var(--stroke);border-radius:28px;padding:18px;box-shadow:0 8px 0 #080b09}.equiv-lab.show{display:block}.equiv-visual{background:#101511;border:2px solid #2d3932;border-radius:20px;padding:18px;text-align:center}.frac-label{font-size:14px;color:var(--muted);margin-bottom:8px}.frac-label b{font-size:18px;color:#8ee99c}.frac-bar{display:flex;height:30px;width:100%;border-radius:8px;overflow:hidden;border:1px solid #39463e;margin-bottom:14px}.frac-seg{height:100%;border-right:1px solid #101511;flex:1}.frac-math{display:inline-block;margin-top:4px;padding:10px 14px;border-radius:12px;background:#1b241e;border:1px solid #35453a;font-size:18px}.equiv-controls{margin-top:14px;background:#101511;border:2px solid #2d3932;border-radius:20px;padding:18px}.equiv-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-size:14px}.equiv-value{font-weight:950;color:#8ee99c;font-size:16px}.equiv-range{width:100%;margin-bottom:16px;accent-color:#58cc6d}.k-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.k-btn{border:2px solid #344239;background:#19201b;color:#f3f8f4;border-radius:14px;padding:11px;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 3px 0 #0a0e0b}.k-btn.active{background:#245c31;border-color:#58cc6d;color:#fff}.equiv-note{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5}@media(max-width:650px){.k-buttons{grid-template-columns:repeat(4,1fr)}.frac-math{font-size:16px}}
 .lesson-card{background:#1b1b1b;border:1px solid #303138;border-radius:22px;padding:22px 20px}.lesson-title{font-size:clamp(27px,7vw,46px);line-height:1.1;font-weight:350;letter-spacing:-1.2px}.tip{display:inline-block;margin-top:18px;padding:9px 14px;border-radius:999px;background:#101010;color:#a9a9ad;font-style:italic;font-size:16px}
 .equation{margin-top:20px;font-size:clamp(30px,7vw,52px);font-weight:850;letter-spacing:-1px}.equation .answer{color:var(--accent)}
 .line-wrap{margin-top:24px;background:#121212;border:1px solid #303138;border-radius:20px;padding:20px 14px 18px;min-height:220px;display:flex;align-items:center}
@@ -63,6 +63,29 @@ h1{margin:6px 0 7px;font-size:clamp(30px,6vw,46px);line-height:1.05}
   </div>
 </section>
 
+<section class="equiv-lab" id="equivLab">
+  <div class="equiv-visual">
+    <div class="frac-label">Base Fraction: <b id="baseText">2 / 3</b></div>
+    <div id="baseBar" class="frac-bar" aria-label="Base fraction visual"></div>
+    <div class="frac-label">Equivalent Fraction: <b id="scaledText">4 / 6</b> &nbsp; (k = <span id="kVal">2</span>)</div>
+    <div id="scaledBar" class="frac-bar" aria-label="Equivalent fraction visual"></div>
+    <div id="mathEquation" class="frac-math">\((2\times2)/(3\times2)=4/6\)</div>
+  </div>
+  <div class="equiv-controls">
+    <div class="equiv-row"><span>Numerator (a)</span><span id="numVal" class="equiv-value">2</span></div>
+    <input class="equiv-range" id="numRange" type="range" min="1" max="6" value="2" aria-label="Numerator">
+    <div class="equiv-row"><span>Denominator (b)</span><span id="denVal" class="equiv-value">3</span></div>
+    <input class="equiv-range" id="denRange" type="range" min="1" max="8" value="3" aria-label="Denominator">
+    <div class="equiv-row"><span>Multiplier (k)</span><span class="equiv-value" id="kLabel">2×</span></div>
+    <div class="k-buttons">
+      <button class="k-btn active" data-k="2" type="button">×2</button>
+      <button class="k-btn" data-k="3" type="button">×3</button>
+      <button class="k-btn" data-k="4" type="button">×4</button>
+      <button class="k-btn" data-k="5" type="button">×5</button>
+    </div>
+    <div class="equiv-note">Multiplying the numerator and denominator by the same non-zero number keeps the value of the rational number unchanged.</div>
+  </div>
+</section>
 <section class="quiz" id="quiz"><div class="quiz-head"><h2>Mastery Quiz</h2><div class="progress" id="progress"></div></div><div class="duo-progress"><div class="duo-progress-fill" id="duoProgressFill"></div></div><div class="question"><div class="qno" id="qno"></div><div class="qtext" id="qtext"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explanation" id="explanation"></div><button class="next" id="next" disabled>Next Question →</button></div></section>
 <section class="result" id="result"><div class="score" id="score"></div><h2>Quiz complete 🎉</h2><p id="message"></p><button class="restart" id="restart">Try Again</button></section>
 <div id="error" class="error" hidden></div>
@@ -74,14 +97,18 @@ const norm=s=>String(s).toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,
 const path=window.SKILLUP_MATH_PATH||[], bank=window.SKILLUP_MATHS_QUIZ_BANK||{};
 const all=path.flatMap(([level,obj])=>Object.entries(obj).map(([concept,subs])=>({level,concept,subs})));
 const specialNumberLine=norm(requested)==='number line';
+const specialEquivalent=norm(requested)==='equivalent rational numbers';
 const chapterItem=all.find(x=>norm(x.concept)===norm(requested));
 const subMatch=all.map(x=>({parent:x,sub:x.subs.find(s=>norm(s)===norm(requested))})).find(x=>x.sub);
 const item=specialNumberLine
  ? {level:'JEE • VISUAL FOUNDATION',concept:'Number line',subs:['Increasing and decreasing values','Distance on a number line','Signed integer movement']}
+ : specialEquivalent
+ ? {level:'JEE • VISUAL FOUNDATION',concept:'Equivalent rational numbers',subs:['Equivalent fractions','Scaling numerator and denominator','Rational-number representation']}
  : (chapterItem|| (subMatch ? {level:subMatch.parent.level,concept:subMatch.sub,subs:[subMatch.sub],chapter:subMatch.parent.concept} : all[0]));
 const title=document.getElementById('title'),level=document.getElementById('level'),sublist=document.getElementById('sublist'),badge=document.getElementById('badge'),lead=document.getElementById('lead');
 title.textContent=item.concept;level.textContent=item.level;badge.textContent='MATHS • 30 MCQs';
 if(specialNumberLine)lead.textContent='Explore signed integer movement visually with MathJax, then practise with 30 mastery questions.';
+if(specialEquivalent)lead.textContent='Scale a fraction interactively and see why equivalent rational numbers keep the same value.';
 item.subs.forEach(s=>{const el=document.createElement('span');el.className='subitem';el.textContent=s;sublist.appendChild(el);});
 
 const NUMBER_LINE_FALLBACK=[
@@ -156,7 +183,19 @@ function setupNumberLine(){
  minus.onclick=()=>{op='−';minus.classList.add('active');plus.classList.remove('active');update(false)};
  anim.onclick=()=>update(true);update(false);
 }
-setupNumberLine();render();
+function setupEquivalentLab(){
+ if(!specialEquivalent)return;
+ const lab=document.getElementById('equivLab');lab.classList.add('show');
+ const baseBar=document.getElementById('baseBar'),scaledBar=document.getElementById('scaledBar'),numRange=document.getElementById('numRange'),denRange=document.getElementById('denRange');
+ const numVal=document.getElementById('numVal'),denVal=document.getElementById('denVal'),baseText=document.getElementById('baseText'),scaledText=document.getElementById('scaledText'),kVal=document.getElementById('kVal'),kLabel=document.getElementById('kLabel'),eq=document.getElementById('mathEquation');
+ let a=2,b=3,k=2;
+ const renderEq=()=>{if(a>b){a=b;numRange.value=a;}numVal.textContent=a;denVal.textContent=b;kVal.textContent=k;kLabel.textContent=k+'×';baseText.textContent=a+' / '+b;scaledText.textContent=(a*k)+' / '+(b*k);eq.innerHTML='\\(\\frac{'+a+'\\times'+k+'}{'+b+'\\times'+k+'}=\\frac{'+(a*k)+'}{'+(b*k)+'}\\)';baseBar.innerHTML='';scaledBar.innerHTML='';for(let j=0;j<b;j++){const d=document.createElement('div');d.className='frac-seg';d.style.background=j<a?'#58cc6d':'#303a33';baseBar.appendChild(d);}for(let j=0;j<b*k;j++){const d=document.createElement('div');d.className='frac-seg';d.style.background=j<a*k?'#8ee99c':'#303a33';scaledBar.appendChild(d);}if(window.MathJax)MathJax.typesetPromise([eq]);};
+ numRange.oninput=e=>{a=Number(e.target.value);if(a>b){b=a;denRange.value=b;}renderEq();};
+ denRange.oninput=e=>{b=Number(e.target.value);if(a>b){a=b;numRange.value=a;}renderEq();};
+ document.querySelectorAll('.k-btn').forEach(btn=>btn.onclick=()=>{k=Number(btn.dataset.k);document.querySelectorAll('.k-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderEq();});
+ renderEq();
+}
+setupNumberLine();setupEquivalentLab();render();
 })();
 </script>
 </body>

@@ -139,11 +139,11 @@ function setupNumberLine(){
  const fmt=n=>n<0?'−'+Math.abs(n):String(n);
  function update(animated=false){
    const start=Number(sr.value), raw=Number(or.value), signed=op==='+'?raw:-raw, result=start+signed;
-   sv.textContent=fmt(start);ov.textContent=fmt(raw);eq.innerHTML=fmt(start)+' '+op+' ('+fmt(raw)+') = <span class="answer">'+fmt(result)+'</span>';
-   marker.style.left=((start+10)/20*100+3)+'%';
+   sv.textContent=fmt(start);ov.textContent=fmt(raw);eq.innerHTML='\\('+fmt(start)+' '+op+' ('+fmt(raw)+') = \\mathbf{'+fmt(result)+'}\\)';if(window.MathJax)MathJax.typesetPromise([eq]);
+   marker.style.left=(3+((start+10)/20)*94)+'%';
    const end=Math.max(-10,Math.min(10,result));
-   jump.style.left=((start+10)/20*100+3)+'%';jump.style.width=(Math.abs(end-start)/20*94)+'%';jump.style.transform=end<start?'translateX(-100%)':'none';
-   if(animated){marker.style.transition='none';marker.style.left=((start+10)/20*100+3)+'%';requestAnimationFrame(()=>{marker.style.transition='left .75s cubic-bezier(.2,.8,.2,1)';marker.style.left=((end+10)/20*100+3)+'%';jump.classList.add('show');});setTimeout(()=>jump.classList.remove('show'),900);}
+   jump.style.left=(3+((start+10)/20)*94)+'%';jump.style.width=(Math.abs(end-start)/20*94)+'%';jump.style.transform=end<start?'translateX(-100%)':'none';
+   if(animated){marker.style.transition='none';marker.style.left=(3+((start+10)/20)*94)+'%';requestAnimationFrame(()=>{marker.style.transition='left .75s cubic-bezier(.2,.8,.2,1)';marker.style.left=(3+((end+10)/20)*94)+'%';jump.classList.add('show');});setTimeout(()=>jump.classList.remove('show'),900);}
  }
  sr.oninput=()=>update(false);or.oninput=()=>update(false);
  plus.onclick=()=>{op='+';plus.classList.add('active');minus.classList.remove('active');update(false)};

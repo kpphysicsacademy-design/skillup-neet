@@ -179,8 +179,21 @@ canvas{width:100%;height:88px;display:block}
   }) || requested;
   const qs = Array.isArray(bank[key]) ? bank[key] : [];
 
+  const levelParam = (params.get("level") || "").trim();
+  const chapterParam = (params.get("chapter") || "").trim();
   $("conceptTitle").textContent = key;
   document.title = "SkillUp • " + key + " • Concept Practice";
+  const hero = document.querySelector(".hero");
+  const supportedInteractive = key.toLowerCase() === "equivalent rational numbers";
+  const supportedQuiz = qs.length > 0;
+  if(levelParam) hero.querySelector(".kicker").textContent = levelParam + (chapterParam ? " • " + chapterParam : "");
+  if(!supportedInteractive){
+    document.querySelectorAll("main > section.card").forEach(function(section){
+      if(section.classList.contains("hero") || section.id === "quizCard" || section.id === "result") return;
+      section.hidden = true;
+    });
+    hero.querySelector("p").textContent = supportedQuiz ? "Concept module is being built. Complete the available practice quiz below without showing unrelated lesson content." : "This concept is mapped in the learning path. Its dedicated lesson and mastery quiz are being built."; 
+  }
 
   const num = $("num");
   const den = $("den");

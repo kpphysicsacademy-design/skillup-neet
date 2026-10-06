@@ -20,14 +20,27 @@ jobs:
           # Remove tracking parameters from internal SkillUp quiz navigation.
           s = s.replace('physics-units-quiz.html?utm_source=chatgpt.com', 'physics-units-quiz.html')
           # Remove absolute HTTP(S) URLs from anchor hrefs while preserving internal navigation.
-          s = re.sub(r'<a([^>]*?)href=[\"\']https?://[^\"\']+[\"\']([^>]*)>', r'<a\1href="#"\2>', s, flags=re.I)
+          s = re.sub(r'<a([^>]*?)href=["\']https?://[^"\']+["\']([^>]*)>', r'<a\1href="#"\2>', s, flags=re.I)
           p.write_text(s, encoding='utf-8')
           PY
       - name: Verify
         run: |
-          ! grep -Eqi '<a[^>]+href=["'"']https?://' physics-home.html
-          ! grep -q 'utm_source=chatgpt.com' physics-home.html
-          grep -q 'physics-units-quiz.html' physics-home.html
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          s = Path('physics-home.html').read_text(encoding='utf-8')
+          if re.search(r'<a[^>]+href=["\']https?://', s, flags=re.I):
+              print('ERROR: external HTTP(S) anchor links remain')
+              sys.exit(1)
+          if 'utm_source=chatgpt.com' in s:
+              print('ERROR: tracking parameter remains')
+              sys.exit(1)
+          if 'physics-units-quiz.html' not in s:
+              print('ERROR: expected physics-units-quiz.html link is missing')
+              sys.exit(1)
+          print('Verification passed')
+          PY
       - name: Commit
         run: |
           git config user.name 'github-actions[bot]'

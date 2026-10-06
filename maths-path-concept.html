@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0045</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0110</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0045";</script>
-<script src="maths-quiz-bank.js?v=20261007-0045"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0110";</script>
+<script src="maths-quiz-bank.js?v=20261007-0110"></script>
 <script>
 (function(){
 "use strict";
@@ -62,6 +62,12 @@ function lessonHtml(){
 <strong>To compare rational numbers, convert them to a common denominator or compare their cross-products when denominators are positive.</strong>
 <div class="formula">\\(\\frac{a}{b}\\ ?\\ \\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ cb\\)</div>
 <p>Example: \\(3/4\\) and \\(5/8\\): \\(3\\times8=24\\) and \\(5\\times4=20\\), so \\(3/4>5/8\\).</p>`;
+ if(norm(concept)==="squares and square roots") return `
+<div class="visual-banner"><div class="frac"><span class="n" id="sqnum">6</span><span id="sqexp">2</span></div><div class="eq">=</div><div class="value-box"><small>SQUARE VALUE</small><strong id="sqvalue">36</strong><span class="pill" id="sqpill">6² = 36</span></div></div>
+<div class="props"><div class="prop"><span>Number</span><strong id="sqnval">6</strong></div><div class="prop"><span>Square</span><strong id="sqsv">36</strong></div><div class="prop"><span>Square root</span><strong id="sqrval">6</strong></div><div class="prop"><span>Perfect square</span><strong id="sqperfect">Yes</strong></div></div>
+<div class="control"><div class="head"><span>Number</span><span class="val" id="sqnv">6</span></div><input class="range" id="sqslider" type="range" min="0" max="30" value="6"></div>
+<div class="checks" id="sqwork"></div>
+<div class="presets"><button class="preset sqp" data-n="4">4²</button><button class="preset sqp" data-n="9">9²</button><button class="preset sqp" data-n="12">12²</button><button class="preset sqp" data-n="25">25²</button></div>`;
  if(norm(concept)==="powers and exponents") return `
 <strong>A power is a compact way to write repeated multiplication of the same number.</strong>
 <div class="formula">\\(a^n=\\underbrace{a\\times a\\times\\cdots\\times a}_{n\\text{ factors}}\\)</div>
@@ -71,6 +77,13 @@ function lessonHtml(){
 <div class="formula">\\((a^m)^n=a^{mn}\\)</div>
 <div class="formula">\\(a^m b^m=(ab)^m\\)</div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> the exponent tells how many times the base is used as a factor. \\(a^1=a\\) and for non-zero \\(a\\), \\(a^0=1\\).</p>`;
+ if(norm(concept)==="squares and square roots") return `
+<strong>A square is the product of a number multiplied by itself. A square root asks which non-negative number produces a given perfect square.</strong>
+<div class="formula">\\(a^2=a\\times a\\)</div>
+<p>For example, \\(6^2=36\\). Therefore \\(\\sqrt{36}=6\\). The numbers 1, 4, 9, 16, 25, 36, ... are perfect squares.</p>
+<div class="formula">\\(\\sqrt{a^2}=|a|\\)</div>
+<p><b>Perfect square:</b> its square root is an integer. <b>Non-perfect square:</b> its square root is not an integer.</p>
+<p><b>Useful facts:</b> the square of an even number is even, the square of an odd number is odd, and a perfect square has an integer square root.</p>`;
  if(norm(concept)==="properties of rational numbers") return `
 <strong>Rational numbers follow important properties that make calculations consistent and predictable.</strong>
 <div class="formula">\\(a+b=b+a\\quad\\text{and}\\quad a\\times b=b\\times a\\)</div>
@@ -214,6 +227,25 @@ function startExplorer(){
   const simp=(n,d)=>{let g=gcd(n,d);n/=g;d/=g;if(d<0){n=-n;d=-d}return[n,d]};
   function updateR(){const n=+N.value,d=+D.value,s=simp(n,d),v=n/d;document.getElementById("rn").textContent=n;document.getElementById("rd").textContent=d;document.getElementById("rnv").textContent=n;document.getElementById("rdv").textContent=d;document.getElementById("rleft").textContent=n;document.getElementById("rright").textContent=d;document.getElementById("rfrac").textContent=n+" / "+d;document.getElementById("rdecimal").textContent=v.toFixed(3);document.getElementById("rline").textContent=v.toFixed(3);document.getElementById("rwork").innerHTML="<b>Why rational?</b> "+n+" / "+d+" has integer numerator and non-zero integer denominator.<br><b>Simplified form:</b> "+s[0]+" / "+s[1]+"<br><b>Decimal:</b> "+v.toFixed(3);}
   [N,D].forEach(e=>e.addEventListener("input",updateR));document.querySelectorAll(".rp").forEach(x=>x.addEventListener("click",()=>{N.value=x.dataset.n;D.value=x.dataset.d;updateR()}));updateR();return;
+ }
+ if(norm(concept)==="squares and square roots"){
+  const N=document.getElementById("sqslider");
+  function updateSq(){
+   const n=Number(N.value),square=n*n,root=Math.sqrt(square),perfect=Number.isInteger(root);
+   document.getElementById("sqnum").textContent=n;
+   document.getElementById("sqexp").textContent="2";
+   document.getElementById("sqnv").textContent=n;
+   document.getElementById("sqnval").textContent=n;
+   document.getElementById("sqsv").textContent=square;
+   document.getElementById("sqrval").textContent=root;
+   document.getElementById("sqperfect").textContent=perfect?"Yes":"Yes";
+   document.getElementById("sqvalue").textContent=square;
+   document.getElementById("sqpill").textContent=n+"² = "+square;
+   document.getElementById("sqwork").innerHTML="<b>Square:</b> "+n+" × "+n+" = "+square+"<br><b>Square root:</b> √"+square+" = "+root+"<br><b>Conclusion:</b> "+square+" is a perfect square because its square root is an integer.";
+  }
+  N.addEventListener("input",updateSq);
+  document.querySelectorAll(".sqp").forEach(btn=>btn.addEventListener("click",()=>{N.value=btn.dataset.n;updateSq()}));
+  updateSq();return;
  }
  if(norm(concept)==="powers and exponents"){
   const B=document.getElementById("pbase"),E=document.getElementById("pexp");

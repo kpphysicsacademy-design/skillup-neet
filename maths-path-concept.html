@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261006-2200</title>
+<title>SkillUp Mathematics • Concept Practice • v20261006-2230</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -25,7 +25,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261006-2145";</script>
-<script src="maths-quiz-bank.js?v=20261006-2200"></script>
+<script src="maths-quiz-bank.js?v=20261006-2230"></script>
 <script>
 (function(){
 "use strict";
@@ -126,22 +126,43 @@ app.innerHTML=`
 function startExplorer(){
  if(norm(concept)==="properties of rational numbers"){
   const A=document.getElementById("pas"),B=document.getElementById("pbs"),C=document.getElementById("pcs"),D=document.getElementById("pds"),P=document.getElementById("prop");
+  if(!A||!B||!C||!D||!P)return;
   function updateP(){
-   const a=+A.value,b=+B.value,c=+C.value,d=+D.value,p=P.value,x=a/b,y=c/d;
-   let name,r1,r2,expr1,expr2,ok;
-   if(p==="comm"){name="Commutative";r1=x+y;r2=y+x;expr1=a+"/"+b+" + "+c+"/"+d;expr2=c+"/"+d+" + "+a+"/"+b;}
-   else if(p==="assoc"){name="Associative";r1=(x+y)+x;r2=x+(y+x);expr1="("+a+"/"+b+" + "+c+"/"+d+") + "+a+"/"+b;expr2=a+"/"+b+" + ("+c+"/"+d+" + "+a+"/"+b);}
-   else if(p==="identity"){name="Identity";r1=x+0;r2=x;expr1=a+"/"+b+" + 0";expr2=a+"/"+b;}
-   else if(p==="inverse"){name="Additive inverse";r1=x+(-x);r2=0;expr1=a+"/"+b+" + ("+(-a)+"/"+b+")";expr2="0";}
-   else {name="Closure";r1=x+y;r2=r1;expr1=a+"/"+b+" + "+c+"/"+d;expr2="A rational number";}
-   ok=Math.abs(r1-r2)<1e-10;
-   document.getElementById("pa").textContent=a;document.getElementById("pb").textContent=b;document.getElementById("pc").textContent=c;document.getElementById("pd").textContent=d;document.getElementById("psign").textContent=p==="inverse"?"+" :"+";
-   document.getElementById("pav").textContent=a;document.getElementById("pbv").textContent=b;document.getElementById("pcv").textContent=c;document.getElementById("pdv").textContent=d;document.getElementById("pov").textContent=name;document.getElementById("pname").textContent=name;
-   document.getElementById("pexpr1").textContent=expr1;document.getElementById("pexpr2").textContent=expr2;document.getElementById("psame").textContent=ok?"Yes":"No";document.getElementById("presult").textContent=Number.isFinite(r1)?r1.toFixed(3):"Undefined";document.getElementById("ppill").textContent=ok?"Verified":"Check";
-   document.getElementById("pwork").innerHTML="<b>Property:</b> "+name+"<br><b>Calculation:</b> "+expr1+" = "+(Number.isFinite(r1)?r1.toFixed(3):"Undefined")+"<br><b>Conclusion:</b> "+(ok?"The selected property is verified for this example.":"Check the selected condition.");
+   const a=Number(A.value),b=Number(B.value),c=Number(C.value),d=Number(D.value),p=P.value;
+   const x=a/b,y=c/d;
+   let name="Commutative",r1=x+y,r2=y+x,expr1=a+"/"+b+" + "+c+"/"+d,expr2=c+"/"+d+" + "+a+"/"+b;
+   if(p==="assoc"){name="Associative";r1=(x+y)+x;r2=x+(y+x);expr1="("+a+"/"+b+" + "+c+"/"+d+") + "+a+"/"+b;expr2=a+"/"+b+" + ("+c+"/"+d+" + "+a+"/"+b+")";}
+   if(p==="identity"){name="Identity";r1=x;r2=x;expr1=a+"/"+b+" + 0";expr2=a+"/"+b;}
+   if(p==="inverse"){name="Additive inverse";r1=x+(-x);r2=0;expr1=a+"/"+b+" + ("+(-a)+"/"+b+")";expr2="0";}
+   if(p==="closure"){name="Closure";r1=x+y;r2=r1;expr1=a+"/"+b+" + "+c+"/"+d;expr2="a rational number";}
+   const ok=Math.abs(r1-r2)<1e-10;
+   document.getElementById("pa").textContent=a;
+   document.getElementById("pb").textContent=b;
+   document.getElementById("pc").textContent=c;
+   document.getElementById("pd").textContent=d;
+   document.getElementById("psign").textContent="+";
+   document.getElementById("pav").textContent=a;
+   document.getElementById("pbv").textContent=b;
+   document.getElementById("pcv").textContent=c;
+   document.getElementById("pdv").textContent=d;
+   document.getElementById("pov").textContent=name;
+   document.getElementById("pname").textContent=name;
+   document.getElementById("pexpr1").textContent=expr1;
+   document.getElementById("pexpr2").textContent=expr2;
+   document.getElementById("psame").textContent=ok?"Yes":"No";
+   document.getElementById("presult").textContent=Number.isFinite(r1)?r1.toFixed(3):"Undefined";
+   document.getElementById("ppill").textContent=ok?"Verified":"Check";
+   document.getElementById("pwork").innerHTML="<b>Property:</b> "+name+"<br><b>Check:</b> "+expr1+" = "+(Number.isFinite(r1)?r1.toFixed(3):"Undefined")+"<br><b>Conclusion:</b> "+(ok?"Verified for this example.":"Review the property conditions.");
   }
-  [A,B,C,D,P].forEach(e=>e.addEventListener("input",updateP));P.addEventListener("change",updateP);
-  document.querySelectorAll(".pp").forEach(x=>x.addEventListener("click",()=>{A.value=x.dataset.a;B.value=x.dataset.b;C.value=x.dataset.c;D.value=x.dataset.d;P.value=x.dataset.o;updateP()}));updateP();return;
+  [A,B,C,D,P].forEach(function(el){el.addEventListener("input",updateP);});
+  P.addEventListener("change",updateP);
+  document.querySelectorAll(".pp").forEach(function(btn){
+   btn.addEventListener("click",function(){
+    A.value=btn.dataset.a;B.value=btn.dataset.b;C.value=btn.dataset.c;D.value=btn.dataset.d;P.value=btn.dataset.o;updateP();
+   });
+  });
+  updateP();
+  return;
  }
  if(norm(concept)==="comparing rational numbers"){
   const A=document.getElementById("cans"),B=document.getElementById("cads"),C=document.getElementById("ccns"),D=document.getElementById("ccds");

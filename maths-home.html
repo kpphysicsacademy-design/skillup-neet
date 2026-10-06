@@ -71,143 +71,15 @@
 const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
 const path=document.getElementById("path"),empty=document.getElementById("empty"),input=document.getElementById("q"),stat=document.getElementById("conceptStat"),subStat=document.getElementById("subStat");
 const all=[];
-data.forEach(function(entry){
- const level=entry[0],chapters=entry[1]||{};
- Object.entries(chapters).forEach(function(pair){
-  const chapter=pair[0],subs=Array.isArray(pair[1])?pair[1]:[];
-  subs.forEach(function(concept){all.push({level:level,chapter:chapter,concept:concept});});
- });
-});
-stat.textContent=all.length+" Concepts";
-subStat.textContent=data.length+" Levels";
+data.forEach(function(entry){const level=entry[0],chapters=entry[1]||{};Object.entries(chapters).forEach(function(pair){const chapter=pair[0],subs=Array.isArray(pair[1])?pair[1]:[];subs.forEach(function(concept){all.push({level:level,chapter:chapter,concept:concept});});});});
+stat.textContent=all.length+" Concepts";subStat.textContent=data.length+" Levels";
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function render(list){
- let html='<div class="single-path">';
- list.forEach(function(x,i){
-  html+='<article class="path-lesson">';
-  html+='<div class="path-dot">'+(i+1)+'</div>';
-  html+='<a href="maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261006">';
-  html+='<div class="lesson-context">'+esc(x.level)+' • '+esc(x.chapter)+'</div>';
-  html+='<div class="lesson-name">'+esc(x.concept)+'</div>';
-  html+='<span class="lesson-arrow" aria-hidden="true">›</span>';
-  html+='</a></article>';
- });
- html+='</div>';
- path.innerHTML=html;
- empty.style.display=list.length?"none":"block";
-}
-function runSearch(){
- const term=input.value.trim().toLowerCase();
- render(term?all.filter(function(x){return(x.level+" "+x.chapter+" "+x.concept).toLowerCase().includes(term);}):all);
-}
-render(all);
-input.addEventListener("input",runSearch);
-document.getElementById("searchBtn").addEventListener("click",runSearch);
-const menuBtn=document.getElementById("menuBtn"),menu=document.getElementById("menu");
-menuBtn.addEventListener("click",function(e){e.stopPropagation();const open=menu.classList.toggle("open");menuBtn.setAttribute("aria-expanded",String(open));});
-document.addEventListener("click",function(e){if(!e.target.closest(".menu-wrap")){menu.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");}});
-})();
-</script>
-</body>
-</html<script>
-(function(){
-"use strict";
-const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
-const path=document.getElementById("path"),empty=document.getElementById("empty"),input=document.getElementById("q"),stat=document.getElementById("conceptStat"),subStat=document.getElementById("subStat");
-const levels=data.map(function(entry,index){const level=entry[0],chapters=entry[1]||{};return{level,index,chapters:Object.entries(chapters).map(function(pair){return{concept:pair[0],subs:Array.isArray(pair[1])?pair[1]:[]};})};});
-const all=[];levels.forEach(function(l){l.chapters.forEach(function(c){all.push({level:l.level,levelIndex:l.index,concept:c.concept,subs:c.subs});});});
-stat.textContent=all.length+" Concepts";subStat.textContent=all.reduce((n,x)=>n+x.subs.length,0)+" Sub-concepts";
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function render(list){
- const groups={};list.forEach(function(x){(groups[x.level]||(groups[x.level]=[])).push(x);});
- let html="";
- levels.forEach(function(level){
-  const items=groups[level.level]||[];if(!items.length)return;
-  html+='<section class="level">';
-  html+='<div class="unit-card"><div class="unit-top"><span class="unit-title">'+esc(level.level)+'</span><span class="unit-count">'+items.length+' lessons</span></div><div class="unit-progress"><span></span></div></div>';
-  html+='<div class="chapters">';
-  items.forEach(function(x,i){
-   html+='<article class="chapter"><a href="maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261006"><span class="lesson-num">'+(i+1)+'</span><div><div class="name">'+esc(x.concept)+'</div><div class="lesson-label">Lesson '+(i+1)+' • Learn &amp; Practice</div></div><span class="arrow" aria-hidden="true">›</span></a></article>';
-  });
-  html+='</div></section>';
- });
- path.innerHTML=html;empty.style.display=list.length?"none":"block";
-}
-function runSearch(){const term=input.value.trim().toLowerCase();render(term?all.filter(x=>(x.level+" "+x.concept+" "+x.subs.join(" ")).toLowerCase().includes(term)):all);}
+function render(list){let html='<div class="single-path">';list.forEach(function(x,i){html+='<article class="path-lesson"><div class="path-dot">'+(i+1)+'</div><a href="maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261006"><div class="lesson-context">'+esc(x.level)+' • '+esc(x.chapter)+'</div><div class="lesson-name">'+esc(x.concept)+'</div><span class="lesson-arrow" aria-hidden="true">›</span></a></article>';});html+='</div>';path.innerHTML=html;empty.style.display=list.length?"none":"block";}
+function runSearch(){const term=input.value.trim().toLowerCase();render(term?all.filter(function(x){return(x.level+" "+x.chapter+" "+x.concept).toLowerCase().includes(term);}):all);}
 render(all);input.addEventListener("input",runSearch);document.getElementById("searchBtn").addEventListener("click",runSearch);
 const menuBtn=document.getElementById("menuBtn"),menu=document.getElementById("menu");
 menuBtn.addEventListener("click",function(e){e.stopPropagation();const open=menu.classList.toggle("open");menuBtn.setAttribute("aria-expanded",String(open));});
 document.addEventListener("click",function(e){if(!e.target.closest(".menu-wrap")){menu.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");}});
-})();
-</script>
-<script>
-(function(){
-"use strict";
-const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
-const path=document.getElementById("path");
-const empty=document.getElementById("empty");
-const input=document.getElementById("q");
-const stat=document.getElementById("conceptStat");
-const subStat=document.getElementById("subStat");
-const icons=["🔢","📐","📊","📈","🧮","📏","🎯","🧠","∞","📍","⚡","🧩"];
-
-const levels=data.map(function(entry,index){
- const level=entry[0], chapters=entry[1]||{};
- return {level,index,chapters:Object.entries(chapters).map(function(pair){return {concept:pair[0],subs:Array.isArray(pair[1])?pair[1]:[]};})};
-});
-const all=[];
-levels.forEach(function(l){
- l.chapters.forEach(function(c){all.push({level:l.level,levelIndex:l.index,concept:c.concept,subs:c.subs});});
-});
-const subTotal=all.reduce((n,x)=>n+x.subs.length,0);
-stat.textContent=all.length+" Concepts";
-subStat.textContent=subTotal+" Sub-concepts";
-
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function render(list){
- const groups={};
- list.forEach(function(x){(groups[x.level]||(groups[x.level]=[])).push(x);});
- let html="";
- levels.forEach(function(level){
-   const items=groups[level.level]||[];
-   if(!items.length)return;
-   html+='<section class="level">';
-   html+='<div class="level-head"><span class="level-num">'+(level.index+1)+'</span><div><h2>'+esc(level.level)+'</h2><small>Mathematics • '+items.length+' concepts</small></div></div>';
-   html+='<div class="chapters">';
-   items.forEach(function(x){
-     const originalIndex=all.findIndex(function(a){return a===x;});
-     const count=x.subs.length;
-     html+='<article class="chapter"><a href="maths-path-concept.html?concept='+encodeURIComponent(x.concept)+'&v=20261006">';
-     html+='<div class="title"><div><div class="name">'+esc(x.concept)+'</div></div></div>';
-     html+='<span class="arrow" aria-hidden="true">›</span></a></article>';
-   });
-   html+='</div></section>';
- });
- path.innerHTML=html;
- empty.style.display=list.length?"none":"block";
-}
-
-function runSearch(){
- const term=input.value.trim().toLowerCase();
- if(!term){render(all);return;}
- render(all.filter(function(x){
-   return (x.level+" "+x.concept+" "+x.subs.join(" ")).toLowerCase().includes(term);
- }));
-}
-render(all);
-input.addEventListener("input",runSearch);
-document.getElementById("searchBtn").addEventListener("click",runSearch);
-
-const menuBtn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-menuBtn.addEventListener("click",function(e){
- e.stopPropagation();
- const open=menu.classList.toggle("open");
- menuBtn.setAttribute("aria-expanded",String(open));
-});
-document.addEventListener("click",function(e){
- if(!e.target.closest(".menu-wrap")){menu.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");}
-});
 })();
 </script>
 </body>

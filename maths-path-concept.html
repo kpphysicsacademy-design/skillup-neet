@@ -120,7 +120,7 @@ const NUMBER_LINE_FALLBACK=[
  const add=arr=>{if(!Array.isArray(arr))return;arr.forEach(q=>{if(!Array.isArray(q)||q.length<4||!Array.isArray(q[1])||q[1].length<2)return;const sig=String(q[0])+'|'+JSON.stringify(q[1]);if(!seen.has(sig)){seen.add(sig);out.push(q.map((v,i)=>i===1?[...v]:v));}});};
  const keys=Object.keys(bank);
  const direct=keys.find(k=>norm(k)===norm(item.concept)); add(direct?bank[direct]:null);
- item.subs.forEach(s=>{const k=keys.find(k=>norm(s)===norm(s)); const exact=keys.find(k=>norm(k)===norm(s)); add(exact?bank[exact]:null);});
+ item.subs.forEach(s=>{const exact=keys.find(k=>norm(k)===norm(s)); add(exact?bank[exact]:null);});
  if(specialNumberLine && out.length<30) add(NUMBER_LINE_FALLBACK);
  if(out.length<30 && item.chapter){const parentKey=keys.find(k=>norm(k)===norm(item.chapter));add(parentKey?bank[parentKey]:null);}
  if(out.length<30){const words=norm(item.concept).split(' ').filter(w=>w.length>3);Object.entries(bank).forEach(([k,v])=>{const nk=norm(k);if(words.some(w=>nk.includes(w)))add(v);});}

@@ -98,33 +98,42 @@ canvas{width:100%;height:88px;display:block}
 <section class="card">
   <h2>Step 1 • Learn the Concept</h2>
   <div class="lesson">
-    <strong>Equivalent rational numbers have the same value.</strong>
-    <p>Multiply or divide the numerator and denominator by the <b>same non-zero number</b>.</p>
-    <div class="formula">\(\frac{a}{b}=\frac{a\times k}{b\times k},\quad k\ne0,\ b\ne0\)</div>
-    <p style="margin:0;color:#66736b">Example: \(\frac{2}{3}=\frac{4}{6}=\frac{6}{9}\).</p>
+    <strong id="lessonHeading">Rational numbers are numbers that can be written as p/q.</strong>
+    <p id="lessonDescription">Here p and q are integers and q is not zero. Rational numbers include integers, fractions, terminating decimals, and repeating decimals.</p>
+    <div class="formula" id="lessonFormula">\(\frac{p}{q},\quad p,q\in\mathbb{Z},\ q\ne0\)</div>
+    <p style="margin:0;color:#66736b" id="lessonExample">Examples: \(\frac{3}{4},\ -\frac{5}{2},\ 7,\ 0.25\).</p>
   </div>
 </section>
 
 <section class="card visual">
-  <h2>Step 2 • Interactive Visualizer</h2>
+  <h2>Step 2 • Rational Number Visualizer</h2>
   <div class="visual-banner">
-    <div class="frac"><span class="n" id="baseN">2</span><span id="baseD">3</span></div>
+    <div class="frac"><span class="n" id="ratN">3</span><span id="ratD">4</span></div>
     <div class="eq">=</div>
-    <div class="frac"><span class="n" id="eqN">4</span><span id="eqD">6</span></div>
-    <div class="value-box"><small>VALUE</small><strong id="eqDecimal">0.667</strong><span class="pill" id="eqStatus">Equivalent</span></div>
+    <div class="value-box"><small>DECIMAL VALUE</small><strong id="ratDecimal">0.750</strong><span class="pill" id="ratType">Positive</span></div>
   </div>
-  <div class="canvas-wrap"><canvas id="nlCanvas" width="600" height="88"></canvas></div>
+  <div class="canvas-wrap"><canvas id="ratCanvas" width="600" height="110"></canvas></div>
   <div class="props">
-    <div class="prop"><span>Original</span><strong id="propOriginal">2 / 3</strong></div>
-    <div class="prop"><span>Multiplier</span><strong id="propMultiplier">× 2</strong></div>
-    <div class="prop"><span>Equivalent</span><strong id="propEquivalent">4 / 6</strong></div>
-    <div class="prop"><span>Simplest Form</span><strong id="propSimple">2 / 3</strong></div>
+    <div class="prop"><span>Numerator</span><strong id="ratNumProp">3</strong></div>
+    <div class="prop"><span>Denominator</span><strong id="ratDenProp">4</strong></div>
+    <div class="prop"><span>Sign</span><strong id="ratSignProp">Positive</strong></div>
+    <div class="prop"><span>Simplest form</span><strong id="ratSimpleProp">3 / 4</strong></div>
   </div>
   <div class="control">
-    <div class="control-head"><span>Common multiplier</span><span class="control-value" id="multiplierValue">× 2</span></div>
-    <input id="multiplier" class="range" type="range" min="-5" max="5" value="2" step="1">
+    <div class="control-head"><span>Numerator</span><span class="control-value" id="ratNumValue">3</span></div>
+    <input id="ratNum" class="range" type="range" min="-12" max="12" value="3" step="1">
   </div>
-  <div class="checks" id="checks"></div>
+  <div class="control">
+    <div class="control-head"><span>Denominator</span><span class="control-value" id="ratDenValue">4</span></div>
+    <input id="ratDen" class="range" type="range" min="-12" max="12" value="4" step="1">
+  </div>
+  <div class="checks" id="ratChecks"></div>
+  <div class="presets">
+    <button class="preset ratPreset" data-n="-3" data-d="4">−3/4</button>
+    <button class="preset ratPreset" data-n="1" data-d="2">1/2</button>
+    <button class="preset ratPreset" data-n="5" data-d="4">5/4</button>
+    <button class="preset ratPreset" data-n="0" data-d="7">0/7</button>
+  </div>
 </section>
 
 <section class="card">
@@ -254,123 +263,76 @@ canvas{width:100%;height:88px;display:block}
     }
   }
 
-  const num = $("num");
-  const den = $("den");
-  const multiplier = $("multiplier");
-  const canvas = $("nlCanvas");
-  const ctx = canvas.getContext("2d");
+  const ratNum=$("ratNum"), ratDen=$("ratDen"), ratCanvas=$("ratCanvas");
+  const ratCtx=ratCanvas.getContext("2d");
 
-  const baseN = $("baseN"), baseD = $("baseD");
-  const eqN = $("eqN"), eqD = $("eqD");
-  const eqDecimal = $("eqDecimal"), eqStatus = $("eqStatus");
-  const propOriginal = $("propOriginal"), propMultiplier = $("propMultiplier");
-  const propEquivalent = $("propEquivalent"), propSimple = $("propSimple");
-  const checks = $("checks");
-
-  function gcd(a,b){
+  function ratGcd(a,b){
     a=Math.abs(a); b=Math.abs(b);
-    while(b){ const t=a%b; a=b; b=t; }
+    while(b){const t=a%b;a=b;b=t;}
     return a;
   }
 
-  function draw(value){
-    const w=canvas.width, h=canvas.height, left=38, right=w-38, y=36;
-    ctx.clearRect(0,0,w,h);
-    ctx.strokeStyle="#474e61";
-    ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(left,y); ctx.lineTo(right,y); ctx.stroke();
-
-    for(let i=0;i<=4;i++){
-      const x=left+i*(right-left)/4;
-      ctx.beginPath(); ctx.moveTo(x,y-7); ctx.lineTo(x,y+7); ctx.stroke();
-      ctx.fillStyle="#8d95a5"; ctx.font="10px sans-serif"; ctx.textAlign="center";
-      ctx.fillText(String(i/4),x,y+24);
+  function drawRational(value){
+    const w=ratCanvas.width, y=48, left=35, right=w-35;
+    ratCtx.clearRect(0,0,w,ratCanvas.height);
+    ratCtx.strokeStyle="#474e61"; ratCtx.lineWidth=2;
+    ratCtx.beginPath(); ratCtx.moveTo(left,y); ratCtx.lineTo(right,y); ratCtx.stroke();
+    for(let v=-2;v<=2;v++){
+      const x=left+(v+2)*(right-left)/4;
+      ratCtx.beginPath(); ratCtx.moveTo(x,y-8); ratCtx.lineTo(x,y+8); ratCtx.stroke();
+      ratCtx.fillStyle="#9ca3af"; ratCtx.font="10px sans-serif"; ratCtx.textAlign="center";
+      ratCtx.fillText(String(v),x,y+25);
     }
-
-    const clamped=Math.max(0,Math.min(1,value));
-    const x=left+clamped*(right-left);
-    ctx.beginPath(); ctx.arc(x,y,8,0,Math.PI*2);
-    ctx.fillStyle="#3b82f6"; ctx.fill();
-    ctx.strokeStyle="#fff"; ctx.stroke();
-    ctx.fillStyle="#10b981"; ctx.font="bold 11px sans-serif"; ctx.textAlign="center";
-    ctx.fillText(Number.isFinite(value)?value.toFixed(3):"—",x,y-14);
+    if(!Number.isFinite(value)) return;
+    const clamped=Math.max(-2,Math.min(2,value));
+    const x=left+(clamped+2)*(right-left)/4;
+    ratCtx.beginPath(); ratCtx.arc(x,y,8,0,Math.PI*2);
+    ratCtx.fillStyle="#3b82f6"; ratCtx.fill();
+    ratCtx.strokeStyle="#fff"; ratCtx.stroke();
+    ratCtx.fillStyle="#10b981"; ratCtx.font="bold 11px sans-serif";
+    ratCtx.fillText(value.toFixed(3),x,y-15);
   }
 
-  function update(){
-    const a=Number(num.value);
-    const b=Number(den.value);
-    const k=Number(multiplier.value);
-
-    $("numValue").textContent=a;
-    $("denValue").textContent=b;
-    $("multiplierValue").textContent="× "+k;
-
-    if(b===0){
-      eqStatus.textContent="Undefined";
-      eqStatus.style.background="#4a1f1f";
-      eqStatus.style.color="#fca5a5";
-      baseN.textContent=a; baseD.textContent="0";
-      eqN.textContent="—"; eqD.textContent="—";
-      eqDecimal.textContent="—";
-      propOriginal.textContent="undefined";
-      propMultiplier.textContent="× "+k;
-      propEquivalent.textContent="undefined";
-      propSimple.textContent="undefined";
-      checks.innerHTML="<b>Denominator cannot be zero.</b> A rational number needs a non-zero denominator.";
-      draw(0);
-      return;
+  function updateRational(){
+    const n=Number(ratNum.value), d=Number(ratDen.value);
+    $("ratNumValue").textContent=n; $("ratDenValue").textContent=d;
+    if(d===0){
+      $("ratN").textContent=n; $("ratD").textContent="0";
+      $("ratDecimal").textContent="—"; $("ratType").textContent="Undefined";
+      $("ratType").style.background="#4a1f1f"; $("ratType").style.color="#fca5a5";
+      $("ratNumProp").textContent=n; $("ratDenProp").textContent="0";
+      $("ratSignProp").textContent="Undefined"; $("ratSimpleProp").textContent="—";
+      $("ratChecks").innerHTML="<b>Undefined:</b> the denominator of a rational number cannot be zero.";
+      drawRational(NaN); return;
     }
-
-    if(k===0){
-      eqStatus.textContent="Invalid multiplier";
-      eqStatus.style.background="#4a1f1f";
-      eqStatus.style.color="#fca5a5";
-      baseN.textContent=a; baseD.textContent=b;
-      eqN.textContent="—"; eqD.textContent="—";
-      eqDecimal.textContent=(a/b).toFixed(3);
-      propOriginal.textContent=a+" / "+b;
-      propMultiplier.textContent="× 0";
-      propEquivalent.textContent="—";
-      const g0=gcd(a,b)||1;
-      let s0=a/g0, d0=b/g0;
-      if(d0<0){s0=-s0;d0=-d0;}
-      propSimple.textContent=s0+" / "+d0;
-      checks.innerHTML="<b>Multiplier cannot be zero.</b> Choose any non-zero multiplier.";
-      draw(a/b);
-      return;
-    }
-
-    const en=a*k, ed=b*k, value=a/b;
-    const g=gcd(a,b)||1;
-    let sn=a/g, sd=b/g;
+    const value=n/d;
+    const g=ratGcd(n,d)||1;
+    let sn=n/g, sd=d/g;
     if(sd<0){sn=-sn;sd=-sd;}
-
-    eqStatus.textContent="Equivalent";
-    eqStatus.style.background="#153d25";
-    eqStatus.style.color="#7ee35a";
-    baseN.textContent=a; baseD.textContent=b;
-    eqN.textContent=en; eqD.textContent=ed;
-    eqDecimal.textContent=value.toFixed(3);
-    propOriginal.textContent=a+" / "+b;
-    propMultiplier.textContent="× "+k;
-    propEquivalent.textContent=en+" / "+ed;
-    propSimple.textContent=sn+" / "+sd;
-    checks.innerHTML=
-      "Same non-zero multiplier: <b>"+a+" × "+k+" = "+en+"</b> and <b>"+b+" × "+k+" = "+ed+"</b><br>"+
-      "Both fractions have the same value: <b>"+value.toFixed(3)+"</b><br>"+
-      "Simplest form: <b>"+sn+" / "+sd+"</b>";
-    draw(value);
+    const sign=value>0?"Positive":value<0?"Negative":"Zero";
+    $("ratN").textContent=n; $("ratD").textContent=d;
+    $("ratDecimal").textContent=value.toFixed(3);
+    $("ratType").textContent=sign;
+    $("ratType").style.background=sign==="Negative"?"#4a2630":"#153d25";
+    $("ratType").style.color=sign==="Negative"?"#fca5a5":"#7ee35a";
+    $("ratNumProp").textContent=n; $("ratDenProp").textContent=d;
+    $("ratSignProp").textContent=sign; $("ratSimpleProp").textContent=sn+" / "+sd;
+    $("ratChecks").innerHTML="<b>Value:</b> "+n+" ÷ "+d+" = <b>"+value.toFixed(3)+"</b><br><b>Sign:</b> "+sign+"<br><b>Number-line position:</b> "+(value<0?"left of 0":value>0?"right of 0":"at 0");
+    drawRational(value);
   }
 
-  [num,den,multiplier].forEach(function(el){el.addEventListener("input",update);});
-  document.querySelectorAll(".preset").forEach(function(btn){
+  [ratNum,ratDen].forEach(function(el){el.addEventListener("input",updateRational);});
+  document.querySelectorAll(".ratPreset").forEach(function(btn){
     btn.addEventListener("click",function(){
-      num.value=this.dataset.n;
-      den.value=this.dataset.d;
-      if(Number(multiplier.value)===0) multiplier.value=2;
-      update();
+      ratNum.value=this.dataset.n; ratDen.value=this.dataset.d; updateRational();
     });
   });
+
+  if(validRoute && requested.toLowerCase()==="rational numbers"){
+    $("lessonHeading").textContent="Rational numbers describe exact values using a ratio of integers.";
+    $("lessonDescription").textContent="A rational number can be written as p/q, where p and q are integers and q is not zero. The same number may have different representations, such as 1/2 = 2/4 = 0.5.";
+    $("lessonExample").innerHTML="Examples: \\(3/4\\), \\(-5/2\\), \\(7\\), and \\(0.25\\).";
+  }
 
   const quizCard=$("quizCard");
   if(!validRoute){

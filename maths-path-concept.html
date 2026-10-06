@@ -37,7 +37,7 @@ h1{margin:6px 0 7px;font-size:clamp(30px,6vw,46px);line-height:1.05}
 </style>
 </head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><div class="badge" id="badge">MATHS</div></div></header>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><div class="badge" id="badge">MATHS</div></div></header>
 <main class="wrap">
 <section class="hero"><div class="kicker" id="level">Mathematics</div><h1 id="title">Loading…</h1><p class="lead" id="lead">Learn the concept structure, then practise with 30 mastery questions.</p><div class="meta"><span class="pill">Learn</span><span class="pill">Practice</span><span class="pill">30 MCQs</span><span class="pill">MathJax</span></div><div class="learn"><h2>Concept map</h2><div id="sublist" class="sublist"></div></div></section>
 
@@ -74,7 +74,11 @@ const norm=s=>String(s).toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,
 const path=window.SKILLUP_MATH_PATH||[], bank=window.SKILLUP_MATHS_QUIZ_BANK||{};
 const all=path.flatMap(([level,obj])=>Object.entries(obj).map(([concept,subs])=>({level,concept,subs})));
 const specialNumberLine=norm(requested)==='number line';
-const item=specialNumberLine?{level:'JEE • VISUAL FOUNDATION',concept:'Number line',subs:['Increasing and decreasing values','Distance on a number line','Signed integer movement']}:(all.find(x=>norm(x.concept)===norm(requested))||all[0]);
+const chapterItem=all.find(x=>norm(x.concept)===norm(requested));
+const subMatch=all.map(x=>({parent:x,sub:x.subs.find(s=>norm(s)===norm(requested))})).find(x=>x.sub);
+const item=specialNumberLine
+ ? {level:'JEE • VISUAL FOUNDATION',concept:'Number line',subs:['Increasing and decreasing values','Distance on a number line','Signed integer movement']}
+ : (chapterItem|| (subMatch ? {level:subMatch.parent.level,concept:subMatch.sub,subs:[subMatch.sub],chapter:subMatch.parent.concept} : all[0]));
 const title=document.getElementById('title'),level=document.getElementById('level'),sublist=document.getElementById('sublist'),badge=document.getElementById('badge'),lead=document.getElementById('lead');
 title.textContent=item.concept;level.textContent=item.level;badge.textContent='MATHS • 30 MCQs';
 if(specialNumberLine)lead.textContent='Explore signed integer movement visually with MathJax, then practise with 30 mastery questions.';
@@ -115,8 +119,10 @@ const NUMBER_LINE_FALLBACK=[
  const out=[],seen=new Set();
  const add=arr=>{if(!Array.isArray(arr))return;arr.forEach(q=>{if(!Array.isArray(q)||q.length<4||!Array.isArray(q[1])||q[1].length<2)return;const sig=String(q[0])+'|'+JSON.stringify(q[1]);if(!seen.has(sig)){seen.add(sig);out.push(q.map((v,i)=>i===1?[...v]:v));}});};
  const keys=Object.keys(bank);
- const direct=keys.find(k=>norm(k)===norm(item.concept)); add(direct?bank[direct]:null); if(specialNumberLine && out.length<30) add(NUMBER_LINE_FALLBACK);
- item.subs.forEach(s=>{const k=keys.find(k=>norm(k)===norm(s));add(k?bank[k]:null);});
+ const direct=keys.find(k=>norm(k)===norm(item.concept)); add(direct?bank[direct]:null);
+ item.subs.forEach(s=>{const k=keys.find(k=>norm(s)===norm(s)); const exact=keys.find(k=>norm(k)===norm(s)); add(exact?bank[exact]:null);});
+ if(specialNumberLine && out.length<30) add(NUMBER_LINE_FALLBACK);
+ if(out.length<30 && item.chapter){const parentKey=keys.find(k=>norm(k)===norm(item.chapter));add(parentKey?bank[parentKey]:null);}
  if(out.length<30){const words=norm(item.concept).split(' ').filter(w=>w.length>3);Object.entries(bank).forEach(([k,v])=>{const nk=norm(k);if(words.some(w=>nk.includes(w)))add(v);});}
  return out.slice(0,30);
 }

@@ -193,7 +193,7 @@ canvas{width:100%;height:88px;display:block}
   $("conceptTitle").textContent = key;
   document.title = "SkillUp • " + key + " • Concept Practice";
   const hero = document.querySelector(".hero");
-  const supportedInteractive = key.toLowerCase() === "equivalent rational numbers";
+  const supportedInteractive = ["rational numbers","equivalent rational numbers"].includes(key.toLowerCase());
   const validRoute = requested.length > 0;
   const supportedQuiz = qs.length > 0;
   if(!validRoute){
@@ -329,7 +329,22 @@ canvas{width:100%;height:88px;display:block}
   });
 
   if(validRoute && requested.toLowerCase()==="rational numbers"){
+    const genericLessonTitle=document.getElementById("lessonTitle");
+    const genericLessonIntro=document.getElementById("lessonIntro");
+    const genericLessonFocus=document.getElementById("lessonFocus");
+    const genericLessonPoints=document.getElementById("lessonPoints");
+    const genericExplorerTitle=document.getElementById("explorerTitle");
+    const genericExplorerText=document.getElementById("explorerText");
+    if(genericLessonTitle){
+      const card=genericLessonTitle.closest(".card");
+      card.innerHTML='<h2>Step 1 • Learn the Concept</h2><div class="lesson"><strong id="lessonHeading">Rational numbers are numbers that can be written as p/q.</strong><p id="lessonDescription">A rational number can be written as p/q, where p and q are integers and q is not zero.</p><div class="formula" id="lessonFormula">\\(\\frac{p}{q},\\quad p,q\\in\\mathbb{Z},\\ q\\ne0\\)</div><p style="margin:0;color:#66736b" id="lessonExample">Examples: \\(3/4\\), \\(-5/2\\), 7, and 0.25.</p></div>';
+    }
+    if(genericExplorerTitle){
+      const card=genericExplorerTitle.closest(".card");
+      card.innerHTML='<h2>Step 2 • Rational Number Visualizer</h2><div class="visual-banner"><div class="frac"><span class="n" id="ratN">3</span><span id="ratD">4</span></div><div class="eq">=</div><div class="value-box"><small>DECIMAL VALUE</small><strong id="ratDecimal">0.750</strong><span class="pill" id="ratType">Positive</span></div></div><div class="canvas-wrap"><canvas id="ratCanvas" width="600" height="110"></canvas></div><div class="props"><div class="prop"><span>Numerator</span><strong id="ratNumProp">3</strong></div><div class="prop"><span>Denominator</span><strong id="ratDenProp">4</strong></div><div class="prop"><span>Sign</span><strong id="ratSignProp">Positive</strong></div><div class="prop"><span>Simplest form</span><strong id="ratSimpleProp">3 / 4</strong></div></div><div class="control"><div class="control-head"><span>Numerator</span><span class="control-value" id="ratNumValue">3</span></div><input id="ratNum" class="range" type="range" min="-12" max="12" value="3" step="1"></div><div class="control"><div class="control-head"><span>Denominator</span><span class="control-value" id="ratDenValue">4</span></div><input id="ratDen" class="range" type="range" min="-12" max="12" value="4" step="1"></div><div class="checks" id="ratChecks"></div><div class="presets"><button class="preset ratPreset" data-n="-3" data-d="4">−3/4</button><button class="preset ratPreset" data-n="1" data-d="2">1/2</button><button class="preset ratPreset" data-n="5" data-d="4">5/4</button><button class="preset ratPreset" data-n="0" data-d="7">0/7</button></div>';
+    }
     $("lessonHeading").textContent="Rational numbers describe exact values using a ratio of integers.";
+
     $("lessonDescription").textContent="A rational number can be written as p/q, where p and q are integers and q is not zero. The same number may have different representations, such as 1/2 = 2/4 = 0.5.";
     $("lessonExample").innerHTML="Examples: \\(3/4\\), \\(-5/2\\), \\(7\\), and \\(0.25\\).";
   }

@@ -224,6 +224,79 @@ function rationalVisualizer(){
  update();
 }
 
+function comparingLesson(){
+ $("lessonCard").innerHTML=
+ '<h2>Step 1 • Learn the Concept</h2>'+
+ '<div class="lesson">'+
+ '<strong>Compare rational numbers by finding which value is greater, smaller, or equal.</strong>'+
+ '<p>For fractions with positive denominators, cross multiplication gives a reliable comparison: compare ad with bc for a/b and c/d.</p>'+
+ '<div class="formula">\\(\\frac{a}{b}\\ ?\\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ bc,\\quad b,d>0\\)</div>'+
+ '<p style="margin:0;color:#66736b"><b>Example:</b> \\(\\frac{3}{4}\\) and \\(\\frac{5}{8}\\): 3×8=24 and 5×4=20, so \\(\\frac{3}{4}>\\frac{5}{8}\\).</p>'+
+ '</div>';
+}
+
+function comparingVisualizer(){
+ $("visualCard").innerHTML=
+ '<h2>Step 2 • Comparing Rational Numbers</h2>'+
+ '<div class="visual-banner">'+
+ '<div class="frac"><span class="n" id="cn1">3</span><span id="cd1">4</span></div>'+
+ '<div class="eq" id="compareSign">></div>'+
+ '<div class="frac"><span class="n" id="cn2">5</span><span id="cd2">8</span></div>'+
+ '<div class="value-box"><small>RESULT</small><strong id="compareResult">3/4 is greater</strong><span class="pill" id="comparePill">Greater</span></div>'+
+ '</div>'+
+ '<div class="canvas-wrap"><canvas id="compareCanvas" width="600" height="110"></canvas></div>'+
+ '<div class="props">'+
+ '<div class="prop"><span>Left value</span><strong id="leftValue">0.750</strong></div>'+
+ '<div class="prop"><span>Right value</span><strong id="rightValue">0.625</strong></div>'+
+ '<div class="prop"><span>Cross products</span><strong id="crossValues">24 vs 20</strong></div>'+
+ '<div class="prop"><span>Comparison</span><strong id="comparisonText">Left > Right</strong></div>'+
+ '</div>'+
+ '<div class="control"><div class="control-head"><span>Left numerator</span><span class="control-value" id="lNv">3</span></div><input id="lN" class="range" type="range" min="-12" max="12" value="3"></div>'+
+ '<div class="control"><div class="control-head"><span>Left denominator</span><span class="control-value" id="lDv">4</span></div><input id="lD" class="range" type="range" min="1" max="12" value="4"></div>'+
+ '<div class="control"><div class="control-head"><span>Right numerator</span><span class="control-value" id="rNv">5</span></div><input id="rN" class="range" type="range" min="-12" max="12" value="5"></div>'+
+ '<div class="control"><div class="control-head"><span>Right denominator</span><span class="control-value" id="rDv">8</span></div><input id="rD" class="range" type="range" min="1" max="12" value="8"></div>'+
+ '<div class="checks" id="compareChecks"></div>'+
+ '<div class="presets"><button class="preset cp" data-a="3" data-b="4" data-c="5" data-d="8">3/4 vs 5/8</button><button class="preset cp" data-a="-2" data-b="3" data-c="-1" data-d="2">−2/3 vs −1/2</button><button class="preset cp" data-a="2" data-b="5" data-c="4" data-d="10">2/5 vs 4/10</button><button class="preset cp" data-a="-3" data-b="4" data-c="1" data-d="2">−3/4 vs 1/2</button></div>';
+
+ const lN=$("lN"),lD=$("lD"),rN=$("rN"),rD=$("rD"),cv=$("compareCanvas"),ctx=cv.getContext("2d");
+ function draw(a,b){
+  const left=35,right=cv.width-35,y=47;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.strokeStyle="#474e61";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(right,y);ctx.stroke();
+  for(let i=-2;i<=2;i++){
+   const x=left+(i+2)*(right-left)/4;
+   ctx.beginPath();ctx.moveTo(x,y-8);ctx.lineTo(x,y+8);ctx.stroke();
+   ctx.fillStyle="#9ca3af";ctx.font="10px sans-serif";ctx.textAlign="center";ctx.fillText(String(i),x,y+25);
+  }
+  function point(v,label,offset){
+   const clamped=Math.max(-2,Math.min(2,v)),x=left+(clamped+2)*(right-left)/4;
+   ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.fillStyle=offset?"#10b981":"#3b82f6";ctx.fill();
+   ctx.strokeStyle="#fff";ctx.stroke();ctx.fillStyle=offset?"#34d399":"#60a5fa";ctx.font="bold 10px sans-serif";ctx.fillText(label,x,y+(offset?38:-15));
+  }
+  point(a,a.toFixed(2),false);point(b,b.toFixed(2),true);
+ }
+ function update(){
+  const a=Number(lN.value),b=Number(lD.value),c=Number(rN.value),d=Number(rD.value);
+  const left=a/b,right=c/d,ad=a*d,bc=c*b;
+  $("lNv").textContent=a;$("lDv").textContent=b;$("rNv").textContent=c;$("rDv").textContent=d;
+  $("leftValue").textContent=left.toFixed(3);$("rightValue").textContent=right.toFixed(3);
+  $("crossValues").textContent=ad+" vs "+bc;
+  let sign="=",word="Equal";
+  if(left>right){sign=">";word="Greater"} else if(left<right){sign="<";word="Smaller"}
+  $("compareSign").textContent=sign;
+  $("compareResult").textContent=word==="Equal"?"Equal values":(left>right?"Left is greater":"Right is greater");
+  $("comparePill").textContent=word;$("comparePill").className="pill"+(word==="Smaller"?" negative":"");
+  $("comparisonText").textContent="Left "+sign+" Right";
+  $("compareChecks").innerHTML="<b>Cross multiplication:</b> "+a+" × "+d+" = "+ad+" and "+c+" × "+b+" = "+bc+"<br><b>Decimal check:</b> "+left.toFixed(3)+" "+sign+" "+right.toFixed(3)+"<br><b>Rule:</b> the larger cross product gives the larger rational number.";
+  draw(left,right);
+ }
+ [lN,lD,rN,rD].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".cp").forEach(btn=>btn.addEventListener("click",function(){
+  lN.value=this.dataset.a;lD.value=this.dataset.b;rN.value=this.dataset.c;rD.value=this.dataset.d;update();
+ }));
+ update();
+}
+
 function genericLesson(){
  $("lessonCard").innerHTML='<h2>Step 1 • Learn the Concept</h2><div class="lesson"><strong>'+escapeHtml(key)+'</strong><p>This page is routed specifically to this concept under '+escapeHtml(chapter||"Mathematics")+'. No other concept lesson is reused.</p><div class="formula">Concept focus: '+escapeHtml(key)+'</div><p style="margin:0;color:#66736b">The dedicated lesson will be expanded with definitions, examples, and worked practice.</p></div>';
  $("visualCard").innerHTML='<h2>Step 2 • Concept Explorer</h2><div class="empty">The concept-specific interactive visualizer is being built. No unrelated visualizer is shown here.</div>';
@@ -233,6 +306,9 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":
 if(slug==="rational numbers"){
  rationalLesson();rationalVisualizer();
  $("heroText").textContent="Learn the definition, explore rational numbers on a number line, then complete the dedicated 30-question mastery quiz.";
+}else if(slug==="comparing rational numbers"){
+ comparingLesson();comparingVisualizer();
+ $("heroText").textContent="Learn how to compare rational numbers, use cross multiplication, and see the comparison on a number line.";
 }else if(slug==="equivalent rational numbers"){
  genericLesson();
 }else{

@@ -194,16 +194,64 @@ canvas{width:100%;height:88px;display:block}
   }
   if(levelParam) hero.querySelector(".kicker").textContent = levelParam + (chapterParam ? " • " + chapterParam : "");
   if(!supportedInteractive && validRoute){
-    document.querySelectorAll("main > section.card").forEach(function(section){
-      if(section.classList.contains("hero") || section.id === "quizCard" || section.id === "result") return;
-      section.hidden = true;
-    });
-    hero.querySelector("p").textContent = supportedQuiz ? "Concept module is being built. Complete the available practice quiz below without showing unrelated lesson content." : "This concept is mapped in the learning path. Its dedicated lesson and mastery quiz are being built."; 
+    const lessonCard=document.querySelector("main > section.card:nth-of-type(2)");
+    const visualCard=document.querySelector("main > section.card:nth-of-type(3)");
+    if(lessonCard){
+      lessonCard.innerHTML =
+        '<h2>Step 1 • Learn the Concept</h2>'+
+        '<div class="lesson">'+
+        '<strong id="lessonTitle"></strong>'+
+        '<p id="lessonIntro"></p>'+
+        '<div class="formula" id="lessonFocus"></div>'+
+        '<p id="lessonPoints"></p>'+
+        '</div>';
+    }
+    if(visualCard){
+      visualCard.innerHTML =
+        '<h2>Step 2 • Concept Explorer</h2>'+
+        '<div class="lesson">'+
+        '<strong id="explorerTitle"></strong>'+
+        '<p id="explorerText"></p>'+
+        '<div class="props">'+
+        '<div class="prop"><span>Level</span><strong id="explorerLevel"></strong></div>'+
+        '<div class="prop"><span>Chapter</span><strong id="explorerChapter"></strong></div>'+
+        '<div class="prop"><span>Concept</span><strong id="explorerConcept"></strong></div>'+
+        '<div class="prop"><span>Practice</span><strong id="explorerPractice"></strong></div>'+
+        '</div></div>';
+    }
+    hero.querySelector("p").textContent = supportedQuiz
+      ? "Learn this concept first, then complete its dedicated mastery questions."
+      : "This concept has its own lesson route. Its dedicated 30-question mastery bank is being prepared.";
   }
 
   function quizCardPlaceholder(){
     const card=document.getElementById("quizCard");
     if(card) card.innerHTML='<h2>Concept route required</h2><div class="empty">No concept was supplied in the URL. Open this page from the Mathematics Learning Path.</div>';
+  }
+
+  if(validRoute && !supportedInteractive){
+    const lessonTitle=$("lessonTitle");
+    const lessonIntro=$("lessonIntro");
+    const lessonFocus=$("lessonFocus");
+    const lessonPoints=$("lessonPoints");
+    const explorerTitle=$("explorerTitle");
+    const explorerText=$("explorerText");
+    const explorerLevel=$("explorerLevel");
+    const explorerChapter=$("explorerChapter");
+    const explorerConcept=$("explorerConcept");
+    const explorerPractice=$("explorerPractice");
+    if(lessonTitle){
+      lessonTitle.textContent=key;
+      lessonIntro.textContent="This lesson is specifically routed to “"+key+"” under "+(chapterParam || "Mathematics")+" in "+(levelParam || "the Mathematics path")+". It will never reuse another concept's lesson.";
+      lessonFocus.textContent="Concept focus: "+key;
+      lessonPoints.textContent="Learn the definition, identify the key relationships, work through examples, and then practise with concept-specific questions.";
+      explorerTitle.textContent=key+" • Concept Explorer";
+      explorerText.textContent="Interactive examples and visual practice for "+key+" will be connected here as this concept module is completed.";
+      explorerLevel.textContent=levelParam || "Mathematics";
+      explorerChapter.textContent=chapterParam || "—";
+      explorerConcept.textContent=key;
+      explorerPractice.textContent=qs.length+" dedicated questions";
+    }
   }
 
   const num = $("num");

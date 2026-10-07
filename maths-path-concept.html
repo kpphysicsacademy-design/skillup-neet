@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0700</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0715</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0700";</script>
-<script src="maths-quiz-bank.js?v=20261007-0700"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0715";</script>
+<script src="maths-quiz-bank.js?v=20261007-0715"></script>
 <script>
 (function(){
 "use strict";
@@ -218,7 +218,14 @@ function explorerHtml(){
 <div class="control"><div class="head"><span>Number</span><span class="val" id="cubenv">4</span></div><input class="range" id="cubeslider" type="range" min="-20" max="20" value="4"></div>
 <div class="checks" id="cubework"></div>
 <div class="presets"><button class="preset cubep" data-n="2">2³</button><button class="preset cubep" data-n="3">3³</button><button class="preset cubep" data-n="5">5³</button><button class="preset cubep" data-n="-3">−3³</button></div>`;
- if(norm(concept)==="algebraic expressions") return `
+ if(norm(concept)==="terms and coefficients") return `
+<div class="visual-banner"><div class="value-box"><small>TERM</small><strong id="tcTerm">−4x</strong><span class="pill">coefficient <span id="tcCoeff">−4</span></span></div><div class="eq">→</div><div class="value-box"><small>VARIABLE</small><strong>x</strong><span class="pill">value <span id="tcX">2</span></span></div></div>
+<div class="props"><div class="prop"><span>Coefficient</span><strong id="tcCoeffBox">−4</strong></div><div class="prop"><span>Variable value</span><strong id="tcXBox">2</strong></div><div class="prop"><span>Term value</span><strong id="tcValue">−8</strong></div><div class="prop"><span>Term type</span><strong>Variable term</strong></div></div>
+<div class="control"><div class="head"><span>Coefficient</span><span class="val" id="tcCV">−4</span></div><input class="range" id="tcCS" type="range" min="-10" max="10" value="-4"></div>
+<div class="control"><div class="head"><span>Variable value</span><span class="val" id="tcXV">2</span></div><input class="range" id="tcXS" type="range" min="-10" max="10" value="2"></div>
+<div class="checks" id="tcWork"></div>
+<div class="presets"><button class="preset tcP" data-c="-4" data-x="2">−4x</button><button class="preset tcP" data-c="5" data-x="3">5x</button><button class="preset tcP" data-c="-2" data-x="-3">−2x</button><button class="preset tcP" data-c="7" data-x="0">7x</button></div>`;
+if(norm(concept)==="algebraic expressions") return `
 <div class="visual-banner"><div class="value-box"><small>COEFFICIENT</small><strong id="aeCoef" style="color:#60a5fa">3</strong><span class="pill">multiplies x</span></div><div class="eq">×</div><div class="value-box"><small>VARIABLE</small><strong style="color:#60a5fa">x</strong><span class="pill">value <span id="aeXv">2</span></span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong id="aeConst" style="color:#fbbf24">5</strong><span class="pill">fixed</span></div></div>
 <div class="props"><div class="prop"><span>Expression</span><strong id="aeExpr">3x + 5</strong></div><div class="prop"><span>Variable value</span><strong id="aeValue">2</strong></div><div class="prop"><span>Term value</span><strong id="aeTerm">6</strong></div><div class="prop"><span>Expression value</span><strong id="aeTotal">11</strong></div></div>
 <div class="control"><div class="head"><span>Coefficient</span><span class="val" id="aeCoefV">3</span></div><input class="range" id="aeCoefS" type="range" min="-10" max="10" value="3"></div>
@@ -369,6 +376,11 @@ function startExplorer(){
  [C,X].forEach(e=>e.addEventListener("input",updateTC));
  document.querySelectorAll(".tcP").forEach(b=>b.addEventListener("click",()=>{C.value=b.dataset.c;X.value=b.dataset.x;updateTC()}));
  updateTC();return;
+}
+if(norm(concept)==="terms and coefficients"){
+ const C=document.getElementById("tcCS"),X=document.getElementById("tcXS");
+ function updateTC(){const cc=+C.value,x=+X.value,v=cc*x;document.getElementById("tcTerm").textContent=cc+"x";document.getElementById("tcCoeff").textContent=cc;document.getElementById("tcCoeffBox").textContent=cc;document.getElementById("tcX").textContent=x;document.getElementById("tcXBox").textContent=x;document.getElementById("tcXV").textContent=x;document.getElementById("tcCV").textContent=cc;document.getElementById("tcValue").textContent=v;document.getElementById("tcWork").innerHTML="<b>Term:</b> "+cc+"x<br><b>Substitute x = "+x+":</b> "+cc+" × "+x+"<br><b>Term value:</b> "+v}
+ [C,X].forEach(e=>e.addEventListener("input",updateTC));document.querySelectorAll(".tcP").forEach(btn=>btn.addEventListener("click",()=>{C.value=btn.dataset.c;X.value=btn.dataset.x;updateTC()}));updateTC();return;
 }
 if(norm(concept)==="algebraic expressions"){
  const A=document.getElementById("aeCoefS"),X=document.getElementById("aeXS"),C=document.getElementById("aeConstS");

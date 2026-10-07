@@ -372,8 +372,8 @@ if(norm(concept)==="comparing rational numbers") return `
 if(norm(concept)==="properties of rational numbers") return `
 <strong>Change the values to see each rational-number property work live.</strong>
 <div class="control"><div class="head"><span>Property</span></div><select class="range" id="prProperty"><option value="commAdd">Commutative • addition</option><option value="commMul">Commutative • multiplication</option><option value="assocAdd">Associative • addition</option><option value="assocMul">Associative • multiplication</option><option value="dist">Distributive</option><option value="addId">Additive identity</option><option value="mulId">Multiplicative identity</option><option value="inverse">Additive inverse</option><option value="closure">Closure • division</option></select></div>
-<div class="visual-banner"><div class="value-box" style="flex:1;min-width:0"><small>LIVE PROPERTY</small><strong id="prEquation" style="font-size:18px;display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap"></strong></div></div>
-<div class="props"><div class="prop"><span>First</span><strong id="prAv">1/2</strong></div><div class="prop"><span>Second</span><strong id="prCv">1/3</strong></div><div class="prop"><span>Third</span><strong id="prEv">2/5</strong></div><div class="prop"><span>Status</span><strong id="prStatus">TRUE</strong></div></div>
+<div class="visual-banner"><div class="value-box" style="flex:1;min-width:0;overflow:hidden"><small>LIVE PROPERTY</small><strong id="prEquation" style="font-size:18px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;overflow-x:auto;padding:8px 4px"></strong></div></div>
+<div class="props"><div class="prop"><span>First</span><strong id="prAv">1/2</strong></div><div class="prop"><span>Second</span><strong id="prCv">1/3</strong></div><div class="prop" id="prThirdProp"><span>Third</span><strong id="prEv">2/5</strong></div><div class="prop"><span>Status</span><strong id="prStatus">TRUE</strong></div></div>
 <div class="control"><div class="head"><span>First numerator</span><span class="val" id="prAvN">1</span></div><input class="range" id="prA" type="range" min="-9" max="9" value="1"></div>
 <div class="control"><div class="head"><span>First denominator</span><span class="val" id="prBv">2</span></div><input class="range" id="prB" type="range" min="1" max="12" value="2"></div>
 <div class="control"><div class="head"><span>Second numerator</span><span class="val" id="prCvN">1</span></div><input class="range" id="prC" type="range" min="-9" max="9" value="1"></div>
@@ -442,7 +442,7 @@ function startEquivalentDemo(){
 function startPropertiesDemo(){
  const pick=document.getElementById("prProperty");if(!pick)return;
  const sl=["prA","prB","prC","prD","prE","prF"].map(id=>document.getElementById(id));
- const eq=document.getElementById("prEquation"),out=document.getElementById("prWork"),status=document.getElementById("prStatus"),third=document.getElementById("prThirdControls"),thirdDen=document.getElementById("prThirdDenControl");
+ const eq=document.getElementById("prEquation"),out=document.getElementById("prWork"),status=document.getElementById("prStatus"),third=document.getElementById("prThirdControls"),thirdDen=document.getElementById("prThirdDenControl"),thirdProp=document.getElementById("prThirdProp");
  const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t;}return a||1};
  const q=(n,d)=>{if(!d)return null;if(d<0){n=-n;d=-d}const g=gcd(n,d);return[n/g,d/g]};
  const add=(x,y)=>q(x[0]*y[1]+y[0]*x[1],x[1]*y[1]),mul=(x,y)=>q(x[0]*y[0],x[1]*y[1]),neg=x=>q(-x[0],x[1]),div=(x,y)=>y[0]===0?null:q(x[0]*y[1],x[1]*y[0]);
@@ -454,7 +454,7 @@ function startPropertiesDemo(){
   const [an,b,cn,d,en,f]=sl.map(x=>Number(x.value)),a=q(an,b),c=q(cn,d),e=q(en,f),p=pick.value;
   document.getElementById("prAvN").textContent=an;document.getElementById("prBv").textContent=b;document.getElementById("prCvN").textContent=cn;document.getElementById("prDv").textContent=d;document.getElementById("prEvN").textContent=en;document.getElementById("prFv").textContent=f;
   document.getElementById("prAv").textContent=ftext(a);document.getElementById("prCv").textContent=ftext(c);document.getElementById("prEv").textContent=ftext(e);
-  const show=["assocAdd","assocMul","dist"].includes(p);third.style.display=show?"":"none";thirdDen.style.display=show?"":"none";
+  const show=["assocAdd","assocMul","dist"].includes(p);third.style.display=show?"":"none";thirdDen.style.display=show?"":"none";thirdProp.style.display=show?"":"none";
   let l,r,parts,desc;
   if(p==="commAdd"){l=add(a,c);r=add(c,a);parts=[F(a),"+",F(c),"=",F(c),"+",F(a)];desc="Changing the order keeps the sum the same."}
   else if(p==="commMul"){l=mul(a,c);r=mul(c,a);parts=[F(a),"×",F(c),"=",F(c),"×",F(a)];desc="Changing the order keeps the product the same."}

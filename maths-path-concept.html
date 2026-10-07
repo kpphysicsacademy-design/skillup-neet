@@ -42,6 +42,45 @@ const key=Object.keys(bank).find(k=>norm(k)===norm(concept));
 const title=concept||"Mathematics Concept";
 const header=level||"MATHEMATICS";
 const chapterText=chapter||"Concept Practice";
+
+function mathifyText(s){
+ let t=String(s);
+ if(t.includes("\\(")||t.includes("\\["))return t;
+ t=t.replace(/([−-]?\d+)\s*\/\s*([−-]?\d+)/g,"\\(\\frac{$1}{$2}\\)");
+ t=t.replace(/([A-Za-z0-9]+)\^(\d+)/g,"\\($1^{$2}\\)");
+ t=t.replace(/([A-Za-z0-9]+)²/g,"\\($1^2\\)");
+ t=t.replace(/([A-Za-z0-9]+)³/g,"\\($1^3\\)");
+ t=t.replace(/√\s*([−-]?\d+(?:\.\d+)?)/g,"\\(\\sqrt{$1}\\)");
+ t=t.replace(/∛\s*([−-]?\d+(?:\.\d+)?)/g,"\\(\\sqrt[3]{$1}\\)");
+ const term="(?:[−-]?\\d*[A-Za-z](?:\\^\\d+|²|³)?|[−-]?\\d+(?:\\.\\d+)?)";
+ const expr=new RegExp("("+term+"(?:\\s*[+−\\-×÷=<>]\\s*"+term+")+)","g");
+ t=t.replace(expr,"\\($1\\)");
+ t=t.replace(/([−-]?\d*[A-Za-z](?:\^\d+|²|³))/g,"\\($1\\)");
+ return t;
+}
+function mathifyDom(root){
+ const walker=document.createTreeWalker(root,4);
+ const nodes=[];
+ let node;
+ while(node=walker.nextNode())nodes.push(node);
+ nodes.forEach(function(n){
+  if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
+  const p=n.parentElement;
+  if(!p||p.closest("script,style,textarea,mjx-container"))return;
+  const out=mathifyText(n.nodeValue);
+  if(out!==n.nodeValue)n.nodeValue=out;
+ });
+}
+let mathTimer=0;
+function refreshMath(){
+ mathifyDom(app);
+ if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([app]).catch(()=>{});
+}
+function scheduleMath(){
+ clearTimeout(mathTimer);
+ mathTimer=setTimeout(refreshMath,40);
+}
+
 function lessonHtml(){
  if(norm(concept)==="operations on rational numbers") return `
 <strong>Rational numbers can be added, subtracted, multiplied, and divided using fraction rules.</strong>
@@ -289,6 +328,9 @@ app.innerHTML=`
 <section class="card"><h2>Step 1 • Learn the Concept</h2><div class="lesson">${lessonHtml()}</div></section>
 <section class="card"><h2>Step 2 • Concept Explorer</h2>${explorerHtml()}</section>
 <section class="card"><h2>Step 3 • Mastery Quiz</h2><div id="quiz"></div></section>`;
+app.addEventListener("input",scheduleMath);
+app.addEventListener("change",scheduleMath);
+app.addEventListener("click",function(e){if(e.target.closest(".preset,.next,.opt"))scheduleMath();});
 function startExplorer(){
  if(norm(concept)==="properties of rational numbers"){
   const A=document.getElementById("pas"),B=document.getElementById("pbs"),C=document.getElementById("pcs"),D=document.getElementById("pds"),P=document.getElementById("prop");
@@ -548,7 +590,7 @@ function startQuiz(){
  function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.textContent=item[3]||"";ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }
-startExplorer();startQuiz();if(window.MathJax)window.MathJax.typesetPromise().catch(()=>{});
+startExplorer();startQuiz();refreshMath();
 })();
 </script>
 </body>

@@ -171,11 +171,11 @@ function whenMathJaxReady(){
 function squaresLessonHtml(){return `
 <strong>Change the number to see its square and square root update live.</strong>
 <div class="visual-banner">
- <div class="value-box"><small>NUMBER</small><strong id="sqN">8</strong></div>
+ <div class="value-box"><small>NUMBER</small><strong id="sqN">8</strong><span class="pill">input</span></div>
  <div class="eq">→</div>
- <div class="value-box"><small>SQUARE</small><strong id="sqSquare">\\(8^2=64\\)</strong></div>
+ <div class="value-box"><small>SQUARE</small><strong id="sqSquare">8² = 64</strong><span class="pill">n × n</span></div>
  <div class="eq">→</div>
- <div class="value-box"><small>SQUARE ROOT</small><strong id="sqRoot">\\(\\sqrt{64}=8\\)</strong></div>
+ <div class="value-box"><small>SQUARE ROOT</small><strong id="sqRoot">√64 = 8</strong><span class="pill">reverse</span></div>
 </div>
 <div class="props">
  <div class="prop"><span>Number</span><strong id="sqNProp">8</strong></div>
@@ -184,9 +184,9 @@ function squaresLessonHtml(){return `
  <div class="prop"><span>Perfect square</span><strong id="sqPerfect">Yes</strong></div>
 </div>
 <div class="control"><div class="head"><span>Number</span><b id="sqSliderVal">8</b></div><input class="range" id="sqSlider" type="range" min="1" max="20" step="1" value="8"></div>
-<div class="checks" id="sqWork"><b>Result:</b> \\(8^2=64\\), so \\(\\sqrt{64}=8\\).</div>
+<div class="checks" id="sqWork"><b>Result:</b> 8² = 64, so √64 = 8.</div>
 <div class="presets"><button class="preset sqP" data-n="4">4²</button><button class="preset sqP" data-n="7">7²</button><button class="preset sqP" data-n="10">10²</button><button class="preset sqP" data-n="15">15²</button></div>
-<div class="formula">\\(n^2=n\\times n\\qquad\\sqrt{n^2}=n\\text{ for }n\\ge0\\)</div>
+<div class="formula">n² = n × n &nbsp;&nbsp; √(n²) = n for n ≥ 0</div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> a square is a number multiplied by itself. The principal square root of a perfect square is the non-negative number that produces it.</p>`;}
 function startSquaresDemo(){
  if(norm(concept)!=="squares and square roots")return;
@@ -213,7 +213,44 @@ function startSquaresDemo(){
  window.addEventListener("load",()=>setTimeout(typeset,50));
 }
 
+function cubesLessonHtml(){return `
+<strong>Change the number to see its cube and cube root update live.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>NUMBER</small><strong id="cbN">4</strong><span class="pill">input</span></div>
+ <div class="eq">→</div>
+ <div class="value-box"><small>CUBE</small><strong id="cbCube">4³ = 64</strong><span class="pill">n × n × n</span></div>
+ <div class="eq">→</div>
+ <div class="value-box"><small>CUBE ROOT</small><strong id="cbRoot">∛64 = 4</strong><span class="pill">reverse</span></div>
+</div>
+<div class="props">
+ <div class="prop"><span>Number</span><strong id="cbNProp">4</strong></div>
+ <div class="prop"><span>Cube</span><strong id="cbCubeProp">64</strong></div>
+ <div class="prop"><span>Cube root</span><strong id="cbRootProp">4</strong></div>
+ <div class="prop"><span>Perfect cube</span><strong id="cbPerfect">Yes</strong></div>
+</div>
+<div class="control"><div class="head"><span>Number</span><b id="cbSliderVal">4</b></div><input class="range" id="cbSlider" type="range" min="1" max="20" step="1" value="4"></div>
+<div class="checks" id="cbWork"><b>Result:</b> 4³ = 64, so ∛64 = 4.</div>
+<div class="presets"><button class="preset cbP" data-n="2">2³</button><button class="preset cbP" data-n="3">3³</button><button class="preset cbP" data-n="5">5³</button><button class="preset cbP" data-n="10">10³</button></div>
+<div class="formula">n³ = n × n × n &nbsp;&nbsp; ∛(n³) = n</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> a cube is a number multiplied by itself three times. The cube root reverses the cube operation.</p>`;}
+function startCubesDemo(){
+ if(norm(concept)!=="cubes and cube roots")return;
+ const s=document.getElementById("cbSlider"); if(!s)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function update(){
+  const n=Math.max(1,Number(s.value)),cube=n*n*n;
+  set("cbN",n);set("cbCube",n+"³ = "+cube);set("cbRoot","∛"+cube+" = "+n);
+  set("cbNProp",n);set("cbCubeProp",cube);set("cbRootProp",n);set("cbPerfect","Yes");set("cbSliderVal",n);
+  const work=document.getElementById("cbWork");
+  if(work)work.innerHTML="<b>Result:</b> "+n+"³ = "+cube+", so ∛"+cube+" = "+n+".";
+ }
+ s.addEventListener("input",update);
+ document.querySelectorAll(".cbP").forEach(btn=>btn.addEventListener("click",()=>{s.value=btn.dataset.n;update();}));
+ update();
+}
+
 function lessonHtml(){
+if(norm(concept)==="cubes and cube roots") return cubesLessonHtml();
 if(norm(concept)==="squares and square roots") return squaresLessonHtml();
 if(norm(concept)==="perimeter") return `
 <strong>Perimeter = the total distance around a closed figure.</strong>
@@ -727,7 +764,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

@@ -396,6 +396,11 @@ app.addEventListener("input",scheduleMath);
 app.addEventListener("change",scheduleMath);
 app.addEventListener("click",function(e){if(e.target.closest(".preset,.next,.opt"))scheduleMath();});
 function startExplorer(){
+if(norm(concept)==="geometric constructions"){
+ const S=document.getElementById("gcSlider"); if(!S)return;
+ function updateGC(){const l=+S.value,h=l/2;document.getElementById("gcSeg").textContent=l+" cm";document.getElementById("gcMid").textContent=h+" cm";document.getElementById("gcLenV").textContent=l+" cm";document.getElementById("gcHalfV").textContent=h+" cm";document.getElementById("gcSliderV").textContent=l+" cm";document.getElementById("gcWork").innerHTML="<b>Construction check:</b> the segment is divided into two equal parts of "+h+" cm, and the perpendicular bisector meets the segment at 90°.";scheduleMath();}
+ S.addEventListener("input",updateGC);document.querySelectorAll(".gcP").forEach(btn=>btn.addEventListener("click",()=>{S.value=btn.dataset.l;updateGC();}));updateGC();return;
+}
 if(norm(concept)==="factorisation basics"){
  const A=document.getElementById("fbA"),B=document.getElementById("fbB"),X=document.getElementById("fbXV"); if(!A||!B||!X)return;
  function updateFB(){const a=+A.value,b=+B.value,x=+X.value,orig=a*x+a*b,fact=a*(x+b);document.getElementById("fbAVal").textContent=a;document.getElementById("fbBVal").textContent=b;document.getElementById("fbX").textContent=x;document.getElementById("fbXVal").textContent=x;document.getElementById("fbExpr").textContent=a+"x + "+a*b;document.getElementById("fbFact").textContent=a+"(x + "+b+")";document.getElementById("fbGcf").textContent=a;document.getElementById("fbOrig").textContent=orig;document.getElementById("fbFactVal").textContent=fact;document.getElementById("fbWork").innerHTML="<b>Check:</b> \\("+a+"(x+"+b+")="+a+"x+"+a*b+"="+orig+"\\) when x="+x+".";scheduleMath();}

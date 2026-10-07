@@ -145,16 +145,16 @@ function lessonHtml(){if(norm(concept)==="polygons") return `
 <div class="concept-image" role="img" aria-label="Regular hexagon diagram showing six equal sides, six equal angles and diagonals">
 <svg viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="640" height="300" rx="18" fill="#f8fcf6"/>
-<polygon points="170,55 285,55 345,150 285,245 170,245 110,150" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
-<line x1="170" y1="55" x2="345" y2="150" stroke="#58cc02" stroke-width="3" stroke-dasharray="8 7"/>
-<line x1="285" y1="55" x2="285" y2="245" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>
-<line x1="345" y1="150" x2="170" y2="245" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8 7"/>
+<polygon id="polyShape" points="170,55 285,55 345,150 285,245 170,245 110,150" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
+<line id="polyDiagLine1" x1="170" y1="55" x2="345" y2="150" stroke="#58cc02" stroke-width="3" stroke-dasharray="8 7"/>
+<line id="polyDiagLine2" x1="285" y1="55" x2="285" y2="245" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>
+<line id="polyDiagLine3" x1="345" y1="150" x2="170" y2="245" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8 7"/>
 <circle cx="170" cy="55" r="6" fill="#173f27"/><circle cx="285" cy="55" r="6" fill="#173f27"/><circle cx="345" cy="150" r="6" fill="#173f27"/><circle cx="285" cy="245" r="6" fill="#173f27"/><circle cx="170" cy="245" r="6" fill="#173f27"/><circle cx="110" cy="150" r="6" fill="#173f27"/>
-<text x="415" y="78" font-family="system-ui,sans-serif" font-size="24" font-weight="800" fill="#173f27">REGULAR HEXAGON</text>
-<text x="415" y="116" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal sides</text>
-<text x="415" y="148" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal interior angles</text>
-<text x="415" y="180" font-family="system-ui,sans-serif" font-size="18" fill="#263238">Interior sum = 720°</text>
-<text x="415" y="212" font-family="system-ui,sans-serif" font-size="18" fill="#263238">Diagonals = 9</text>
+<text id="polyImgTitle" x="415" y="78" font-family="system-ui,sans-serif" font-size="24" font-weight="800" fill="#173f27">REGULAR HEXAGON</text>
+<text id="polyImgSides" x="415" y="116" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal sides</text>
+<text id="polyImgAngles" x="415" y="148" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal interior angles</text>
+<text id="polyImgSum" x="415" y="180" font-family="system-ui,sans-serif" font-size="18" fill="#263238">Interior sum = 720°</text>
+<text id="polyImgDiag" x="415" y="212" font-family="system-ui,sans-serif" font-size="18" fill="#263238">Diagonals = 9</text>
 <text x="415" y="250" font-family="system-ui,sans-serif" font-size="15" fill="#66736b">Diagonal joins non-adjacent vertices</text>
 </svg>
 </div>
@@ -454,6 +454,14 @@ if(norm(concept)==="polygons"){
  const names={3:"Triangle",4:"Quadrilateral",5:"Pentagon",6:"Hexagon",7:"Heptagon",8:"Octagon",9:"Nonagon",10:"Decagon",11:"Undecagon",12:"Dodecagon"};
  function updatePoly(){
   const n=+S.value, sum=(n-2)*180, interior=sum/n, exterior=360/n, diagonals=n*(n-3)/2;
+  const pts=[]; for(let k=0;k<n;k++){const a=-Math.PI/2+k*2*Math.PI/n;pts.push((230+120*Math.cos(a)).toFixed(1)+","+ (150+95*Math.sin(a)).toFixed(1));}
+  const shape=document.getElementById("polyShape"); if(shape)shape.setAttribute("points",pts.join(" "));
+  const title=document.getElementById("polyImgTitle"), sides=document.getElementById("polyImgSides"), angles=document.getElementById("polyImgAngles"), imgSum=document.getElementById("polyImgSum"), imgDiag=document.getElementById("polyImgDiag");
+  if(title)title.textContent="REGULAR "+(names[n]||("POLYGON WITH "+n+" SIDES")).toUpperCase();
+  if(sides)sides.textContent=n+" equal sides";
+  if(angles)angles.textContent=n+" equal interior angles";
+  if(imgSum)imgSum.textContent="Interior sum = "+sum+"°";
+  if(imgDiag)imgDiag.textContent="Diagonals = "+diagonals;
   document.getElementById("polyN").textContent=n; document.getElementById("polyName").textContent=names[n]||("Polygon with "+n+" sides");
   document.getElementById("polySum").textContent=sum+"°"; document.getElementById("polyInterior").textContent=interior+"°"; document.getElementById("polyExterior").textContent=exterior+"°";
   document.getElementById("polyDiag").textContent=diagonals; document.getElementById("polyDiag2").textContent=diagonals; document.getElementById("polySliderV").textContent=n;

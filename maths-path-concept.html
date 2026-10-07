@@ -21,7 +21,25 @@
 .quiz-head{display:flex;justify-content:space-between;gap:8px}.progress{font-size:9px;font-weight:900;color:#64806b}.bar{height:6px;background:#e8efe5;border-radius:99px;overflow:hidden;margin-bottom:13px}.fill{height:100%;width:0;background:var(--g)}.qno{font-size:9px;color:#64806b;font-weight:950}.question{font-size:15px;font-weight:850;line-height:1.5;margin-top:4px}.options{display:grid;gap:7px;margin-top:12px}.opt{width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px;font-size:12px;cursor:pointer}.opt.correct{border-color:var(--g);background:#eefbe9}.opt.wrong{border-color:#ef9b94;background:#fff3f2}.feedback{margin-top:10px;font-weight:950;font-size:12px}.explain{margin-top:7px;padding:10px;background:#f8fcf6;border-radius:11px;font-size:11px;line-height:1.55}.next{margin-top:11px;border:0;border-radius:12px;padding:11px 15px;background:var(--g);color:#fff;font-weight:950}.result{text-align:center}.score{font-size:40px;font-weight:950;color:var(--deep)}
 @media(max-width:520px){.gc-formula{font-size:15px;white-space:normal;line-height:1.35}.concept-image svg{min-width:0}.nav{padding:0 8px}.hero{padding:18px 14px}.hero h1{font-size:23px}.visual-banner{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:5px;padding:11px 7px}.visual-banner .eq{font-size:17px}.visual-banner .value-box strong{font-size:14px}.visual-banner .pill{font-size:8px;padding:4px 6px}.formula.squares-formula{font-size:16px;padding:9px 6px;overflow:hidden}.question{font-size:14px}}
  .stacked-fraction{display:inline-flex!important;max-width:100%; display:inline-flex!important;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;font-family:Georgia,serif;font-size:24px!important;min-width:34px}.stacked-fraction span:first-child{border-bottom:2px solid currentColor;padding:0 7px 3px}.stacked-fraction span:last-child{padding-top:3px}.pr-side{display:inline-flex;align-items:center;justify-content:center;gap:clamp(3px,1vw,8px);min-width:0;white-space:nowrap;overflow:hidden}.pr-side .stacked-fraction{flex:none}</style>
-</head>
+<style>
+.pr-side{display:flex!important;align-items:center;justify-content:center;gap:clamp(5px,1vw,12px);min-width:0;white-space:nowrap;overflow:visible;flex:1}
+.pr-op,.pr-eq{font-size:clamp(16px,2.2vw,22px);font-weight:900;line-height:1}
+#prEquation{width:100%!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:clamp(6px,1.5vw,16px)!important;overflow:hidden!important}
+@media(max-width:600px){
+ .wrap{padding:8px 6px 45px!important}
+ .card{padding:11px!important;border-radius:15px}
+ #prEquation{gap:5px!important;font-size:14px!important}
+ .pr-side{gap:4px!important;overflow:visible}
+ .stacked-fraction{font-size:19px!important;min-width:28px!important}
+ .stacked-fraction span:first-child{padding:0 4px 2px!important}
+ .stacked-fraction span:last-child{padding-top:2px!important}
+ .pr-op,.pr-eq{font-size:15px!important}
+ .props{gap:5px!important}
+ .prop{padding:7px!important}
+ .control{margin-top:9px!important}
+ .checks{font-size:10px!important}
+}
+</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0510">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0510";</script>
@@ -443,31 +461,33 @@ function startPropertiesDemo(){
  const pick=document.getElementById("prProperty");if(!pick)return;
  const sl=["prA","prB","prC","prD","prE","prF"].map(id=>document.getElementById(id));
  const eq=document.getElementById("prEquation"),out=document.getElementById("prWork"),status=document.getElementById("prStatus"),third=document.getElementById("prThirdControls"),thirdDen=document.getElementById("prThirdDenControl"),thirdProp=document.getElementById("prThirdProp");
- const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t;}return a||1};
+ const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t}return a||1};
  const q=(n,d)=>{if(!d)return null;if(d<0){n=-n;d=-d}const g=gcd(n,d);return[n/g,d/g]};
  const add=(x,y)=>q(x[0]*y[1]+y[0]*x[1],x[1]*y[1]),mul=(x,y)=>q(x[0]*y[0],x[1]*y[1]),neg=x=>q(-x[0],x[1]),div=(x,y)=>y[0]===0?null:q(x[0]*y[1],x[1]*y[0]);
- const frac=x=>x?[x[0],x[1]]:null;
  const fhtml=x=>!x?"<span>Undefined</span>":x[1]===1?"<span>"+x[0]+"</span>":"<span>"+x[0]+"</span><span>"+x[1]+"</span>";
  const ftext=x=>!x?"Undefined":x[1]===1?String(x[0]):x[0]+"/"+x[1];
- const F=x=>"<span class=\"stacked-fraction\">"+fhtml(x)+"</span>"; const side=items=>"<span class=\"pr-side\">"+items.join(" ")+"</span>";
+ const F=x=>"<span class=\"stacked-fraction\">"+fhtml(x)+"</span>";
+ const token=x=>typeof x==="string"?"<span class=\"pr-op\">"+x+"</span>":x;
+ const side=items=>"<span class=\"pr-side\">"+items.map(token).join("")+"</span>";
  function update(){
   const [an,b,cn,d,en,f]=sl.map(x=>Number(x.value)),a=q(an,b),c=q(cn,d),e=q(en,f),p=pick.value;
   document.getElementById("prAvN").textContent=an;document.getElementById("prBv").textContent=b;document.getElementById("prCvN").textContent=cn;document.getElementById("prDv").textContent=d;document.getElementById("prEvN").textContent=en;document.getElementById("prFv").textContent=f;
   document.getElementById("prAv").textContent=ftext(a);document.getElementById("prCv").textContent=ftext(c);document.getElementById("prEv").textContent=ftext(e);
   const show=["assocAdd","assocMul","dist"].includes(p);third.style.display=show?"":"none";thirdDen.style.display=show?"":"none";thirdProp.style.display=show?"":"none";
-  let l,r,parts,desc;
-  if(p==="commAdd"){l=add(a,c);r=add(c,a);parts=[F(a),"+",F(c),"=",F(c),"+",F(a)];desc="Changing the order keeps the sum the same."}
-  else if(p==="commMul"){l=mul(a,c);r=mul(c,a);parts=[F(a),"×",F(c),"=",F(c),"×",F(a)];desc="Changing the order keeps the product the same."}
-  else if(p==="assocAdd"){l=add(add(a,c),e);r=add(a,add(c,e));parts=["(",F(a),"+",F(c),")","+ ",F(e),"=",F(a),"+","(",F(c),"+",F(e),")"];desc="Changing the grouping keeps the sum the same."}
-  else if(p==="assocMul"){l=mul(mul(a,c),e);r=mul(a,mul(c,e));parts=["(",F(a),"×",F(c),")","×",F(e),"=",F(a),"×","(",F(c),"×",F(e),")"];desc="Changing the grouping keeps the product the same."}
-  else if(p==="dist"){l=mul(a,add(c,e));r=add(mul(a,c),mul(a,e));parts=[F(a),"×","(",F(c),"+",F(e),")","=",F(a),"×",F(c),"+",F(a),"×",F(e)];desc="Multiplication distributes across addition."}
-  else if(p==="addId"){l=add(a,[0,1]);r=a;parts=[F(a),"+",F([0,1]),"=",F(a)];desc="Adding zero leaves a rational number unchanged."}
-  else if(p==="mulId"){l=mul(a,[1,1]);r=a;parts=[F(a),"×",F([1,1]),"=",F(a)];desc="Multiplying by one leaves a rational number unchanged."}
-  else if(p==="inverse"){l=add(a,neg(a));r=[0,1];parts=[F(a),"+",F(neg(a)),"=",F([0,1])];desc="A rational number plus its additive inverse is zero."}
-  else {l=div(a,c);r=l;parts=[F(a),"÷",F(c),"=",F(l)];desc=l?"The quotient is rational because the divisor is non-zero.":"Division by zero is undefined."}
-  const eqParts=parts.length===3?[side(parts.slice(0,1)),parts[1],side(parts.slice(2))]:parts; eq.innerHTML=eqParts.join(" ");
-  const ok=l&&r&&l[0]===r[0]&&l[1]===r[1];
-  status.textContent=ok?"TRUE":"UNDEFINED";out.innerHTML="<b>Result:</b> "+(l&&r?ftext(l)+" = "+ftext(r)+". ":"")+desc;
+  let l,r,L,R,desc;
+  if(p==="commAdd"){l=add(a,c);r=add(c,a);L=[a,"+",c];R=[c,"+",a];desc="Changing the order keeps the sum the same."}
+  else if(p==="commMul"){l=mul(a,c);r=mul(c,a);L=[a,"×",c];R=[c,"×",a];desc="Changing the order keeps the product the same."}
+  else if(p==="assocAdd"){l=add(add(a,c),e);r=add(a,add(c,e));L=["(",a,"+",c,")","+",e];R=[a,"+","(",c,"+",e,")"];desc="Changing the grouping keeps the sum the same."}
+  else if(p==="assocMul"){l=mul(mul(a,c),e);r=mul(a,mul(c,e));L=["(",a,"×",c,")","×",e];R=[a,"×","(",c,"×",e,")"];desc="Changing the grouping keeps the product the same."}
+  else if(p==="dist"){l=mul(a,add(c,e));r=add(mul(a,c),mul(a,e));L=[a,"×","(",c,"+",e,")"];R=[a,"×",c,"+",a,"×",e];desc="Multiplication distributes across addition."}
+  else if(p==="addId"){l=add(a,[0,1]);r=a;L=[a,"+",[0,1]];R=[a];desc="Adding zero leaves a rational number unchanged."}
+  else if(p==="mulId"){l=mul(a,[1,1]);r=a;L=[a,"×",[1,1]];R=[a];desc="Multiplying by one leaves a rational number unchanged."}
+  else if(p==="inverse"){l=add(a,neg(a));r=[0,1];L=[a,"+",neg(a)];R=[[0,1]];desc="A rational number plus its additive inverse is zero."}
+  else {l=div(a,c);r=l;L=[a,"÷",c];R=[l];desc=l?"The quotient is rational because the divisor is non-zero.":"Division by zero is undefined. Change the second numerator."}
+  eq.innerHTML=side(L)+"<span class=\"pr-eq\">=</span>"+side(R);
+  const ok=!!(l&&r&&l[0]===r[0]&&l[1]===r[1]);
+  status.textContent=ok?"TRUE":"UNDEFINED";
+  out.innerHTML="<b>Result:</b> "+(l&&r?ftext(l)+" = "+ftext(r)+". ":"")+desc;
  }
  [...sl,pick].forEach(x=>x.addEventListener("input",update));
  document.querySelectorAll(".prP").forEach(btn=>btn.addEventListener("click",()=>{pick.value=btn.dataset.p;sl[0].value=btn.dataset.a;sl[1].value=btn.dataset.b;sl[2].value=btn.dataset.c;sl[3].value=btn.dataset.d;sl[4].value=btn.dataset.e;sl[5].value=btn.dataset.f;update()}));

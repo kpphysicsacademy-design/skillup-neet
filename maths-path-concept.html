@@ -98,7 +98,17 @@ function whenMathJaxReady(){
  }
 }
 
-function lessonHtml(){
+function lessonHtml(){if(norm(concept)==="factorisation basics") return `
+<strong>Factorisation means writing an algebraic expression as a product of simpler factors.</strong>
+<div class="formula">\\(6x+12=6(x+2)\\)</div>
+<p><b>Common factor:</b> find the greatest common factor of all terms, then take it outside the brackets.</p>
+<div class="formula">\\(8a^2+12a=4a(2a+3)\\)</div>
+<p><b>Grouping:</b> group terms that share a common factor and then factor the common expression.</p>
+<div class="formula">\\(x^2+5x=x(x+5)\\)</div>
+<p><b>Check:</b> expand the factors again. If you get the original expression, the factorisation is correct.</p>
+<div class="visual-banner"><div class="value-box"><small>EXPRESSION</small><strong style="color:#60a5fa">\\(6x+12\\)</strong><span class="pill">factorise</span></div><div class="eq">=</div><div class="value-box"><small>FACTORS</small><strong style="color:#fbbf24">\\(6(x+2)\\)</strong><span class="pill">product form</span></div></div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> factorisation is the reverse process of expansion.</p>`;
+
 if(norm(concept)==="algebraic identities") return `
 <strong>Algebraic identities are formulas that remain true for all allowed values of the variables.</strong>
 <div class="formula">\\((a+b)^2=a^2+2ab+b^2\\)</div>
@@ -215,7 +225,15 @@ if(norm(concept)==="algebraic expressions") return `
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> an expression does not have an equals sign. A term may contain a coefficient, variable, and exponent.</p>`;
  return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Explore}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
-function explorerHtml(){
+function explorerHtml(){if(norm(concept)==="factorisation basics") return `
+<div class="visual-banner"><div class="value-box"><small>EXPRESSION</small><strong id="fbExpr">6x+12</strong><span class="pill">original</span></div><div class="eq">=</div><div class="value-box"><small>FACTORS</small><strong id="fbFact">6(x+2)</strong><span class="pill">product form</span></div></div>
+<div class="props"><div class="prop"><span>Common factor</span><strong id="fbGcf">6</strong></div><div class="prop"><span>x value</span><strong id="fbXVal">2</strong></div><div class="prop"><span>Original value</span><strong id="fbOrig">24</strong></div><div class="prop"><span>Factored value</span><strong id="fbFactVal">24</strong></div></div>
+<div class="control"><div class="head"><span>First coefficient</span><span class="val" id="fbAVal">6</span></div><input class="range" id="fbA" type="range" min="2" max="12" value="6"></div>
+<div class="control"><div class="head"><span>Constant multiplier</span><span class="val" id="fbBVal">2</span></div><input class="range" id="fbB" type="range" min="1" max="12" value="2"></div>
+<div class="control"><div class="head"><span>x</span><span class="val" id="fbX">2</span></div><input class="range" id="fbXV" type="range" min="-5" max="5" value="2"></div>
+<div class="work" id="fbWork"><b>Check:</b> 6(x+2) expands to 6x+12.</div>
+<div class="presets"><button class="preset fbP" data-a="6" data-b="2" data-x="2">6x + 12</button><button class="preset fbP" data-a="4" data-b="3" data-x="5">4x + 12</button><button class="preset fbP" data-a="8" data-b="4" data-x="-2">8x + 32</button></div>`;
+
 if(norm(concept)==="algebraic identities") return `
 <div class="visual-banner"><div class="value-box"><small>LEFT</small><strong id="aiLeft">\\((2+3)^2\\)</strong><span class="pill">identity</span></div><div class="eq">=</div><div class="value-box"><small>RIGHT</small><strong id="aiRight">\\(2^2+2(2)(3)+3^2\\)</strong><span class="pill">expanded</span></div></div>
 <div class="props"><div class="prop"><span>a</span><strong id="aiAVal">2</strong></div><div class="prop"><span>b</span><strong id="aiBVal">3</strong></div><div class="prop"><span>Identity</span><strong id="aiName">Square of a sum</strong></div><div class="prop"><span>Value</span><strong id="aiResult">25</strong></div></div>
@@ -346,6 +364,13 @@ app.addEventListener("input",scheduleMath);
 app.addEventListener("change",scheduleMath);
 app.addEventListener("click",function(e){if(e.target.closest(".preset,.next,.opt"))scheduleMath();});
 function startExplorer(){
+if(norm(concept)==="factorisation basics"){
+ const A=document.getElementById("fbA"),B=document.getElementById("fbB"),X=document.getElementById("fbXV"); if(!A||!B||!X)return;
+ function updateFB(){const a=+A.value,b=+B.value,x=+X.value,orig=a*x+a*b,fact=a*(x+b);document.getElementById("fbAVal").textContent=a;document.getElementById("fbBVal").textContent=b;document.getElementById("fbX").textContent=x;document.getElementById("fbXVal").textContent=x;document.getElementById("fbExpr").textContent=a+"x + "+a*b;document.getElementById("fbFact").textContent=a+"(x + "+b+")";document.getElementById("fbGcf").textContent=a;document.getElementById("fbOrig").textContent=orig;document.getElementById("fbFactVal").textContent=fact;document.getElementById("fbWork").innerHTML="<b>Check:</b> "+a+"(x + "+b+") = "+a+"x + "+a*b+"; both forms give "+orig+" when x = "+x+".";scheduleMath();}
+ [A,B,X].forEach(e=>e.addEventListener("input",updateFB));
+ document.querySelectorAll(".fbP").forEach(btn=>btn.addEventListener("click",()=>{A.value=btn.dataset.a;B.value=btn.dataset.b;X.value=btn.dataset.x;updateFB();}));
+ updateFB();return;
+}
 if(norm(concept)==="algebraic identities"){
  const T=document.getElementById("aiType"),A=document.getElementById("aiA"),B=document.getElementById("aiB"); if(!T||!A||!B)return;
  function updateAI(){const type=T.value,a=+A.value,b=+B.value;let left,right,result,name;

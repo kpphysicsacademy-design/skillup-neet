@@ -471,6 +471,31 @@ if(norm(concept)==="algebraic expressions") return `
 function renderConceptPage(){
  app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>'+esc(title)+'</h1><p>Learn the concept, then complete 30-question mastery practice.</p></section><section class="card"><h2>STEP 1 • LEARN</h2><div class="lesson">'+lessonHtml()+'</div></section><section class="card"><h2>STEP 2 • MASTERY QUIZ</h2><div id="quiz"></div></section>';
 }
+function startRationalDemo(){
+ if(norm(concept)!=="rational numbers")return;
+ const ns=document.getElementById("rnslider"),ds=document.getElementById("rdslider");
+ if(!ns||!ds)return;
+ const nv=document.getElementById("rn"),dv=document.getElementById("rd");
+ const topN=document.getElementById("rnNv"),topD=document.getElementById("rnDv"),value=document.getElementById("rnrval"),pill=document.getElementById("rnpill");
+ const propN=document.getElementById("rnv"),propD=document.getElementById("rdv"),frac=document.getElementById("rfrac"),dec=document.getElementById("rdecimal"),work=document.getElementById("rwork");
+ function update(){
+  let n=Number(ns.value),d=Number(ds.value);
+  if(d===0){d=1;ds.value="1";}
+  const v=n/d;
+  const fraction=n+" / "+d;
+  const decimal=v.toFixed(3);
+  [nv,topN,propN].forEach(el=>{if(el)el.textContent=n;});
+  [dv,topD,propD].forEach(el=>{if(el)el.textContent=d;});
+  if(value)value.textContent=decimal;
+  if(pill)pill.textContent=fraction;
+  if(frac)frac.textContent=fraction;
+  if(dec)dec.textContent=decimal;
+  if(work)work.innerHTML="<b>Result:</b> "+fraction+" = "+decimal+". The numerator is an integer and the denominator is a non-zero integer, so this is a rational number.";
+ }
+ ns.addEventListener("input",update);
+ ds.addEventListener("input",update);
+ update();
+}
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -502,7 +527,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

@@ -568,6 +568,14 @@ function startPowersDemo(){
  const bs=document.getElementById("peBaseSlider"),es=document.getElementById("peExpSlider");
  if(!bs||!es)return;
  const set=(id,v,math=false)=>{const el=document.getElementById(id);if(el){if(math)el.innerHTML=v;else el.textContent=v;}};
+ const typeset=()=>{
+  const els=["peEquation","peBase","peExp","peValue","pePower","peExpanded","peBaseProp","peExpProp","peWork"]
+   .map(id=>document.getElementById(id)).filter(Boolean);
+  if(!window.MathJax)return;
+  const run=()=>{try{window.MathJax.typesetClear(els);return window.MathJax.typesetPromise(els)}catch(_){return Promise.resolve()}};
+  if(window.MathJax.startup&&window.MathJax.startup.promise)window.MathJax.startup.promise.then(run).catch(()=>{});
+  else if(window.MathJax.typesetPromise)window.MathJax.typesetPromise(els).catch(()=>{});
+ };
  function update(){
   const base=Math.max(1,Number(bs.value)),exp=Math.max(0,Number(es.value)),value=Math.pow(base,exp);
   const power="\\("+base+"^{"+exp+"}\\)";
@@ -584,11 +592,7 @@ function startPowersDemo(){
   set("peBaseSliderVal",base);set("peExpSliderVal",exp);
   const work=document.getElementById("peWork");
   if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = \\("+value+"\\). The exponent tells how many times the base is used as a factor.";
-  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([
-   document.getElementById("peEquation"),document.getElementById("peBase"),document.getElementById("peExp"),
-   document.getElementById("peValue"),document.getElementById("pePower"),document.getElementById("peExpanded"),
-   document.getElementById("peBaseProp"),document.getElementById("peExpProp"),work
-  ].filter(Boolean)).catch(()=>{});
+  typeset();
  }
  bs.addEventListener("input",update);es.addEventListener("input",update);
  document.querySelectorAll(".peP").forEach(btn=>btn.addEventListener("click",()=>{bs.value=btn.dataset.b;es.value=btn.dataset.e;update();}));

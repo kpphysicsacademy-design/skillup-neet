@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0610-powers-exponents-interactive">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0620-powers-exponents-mathjax">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-0610</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-0620</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 </style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0610">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0610";</script>
-<script src="maths-quiz-bank.js?v=20261008-0610"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0620">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0620";</script>
+<script src="maths-quiz-bank.js?v=20261008-0620"></script>
 <script>
 (function(){
 "use strict";
@@ -571,22 +571,27 @@ function startPowersDemo(){
  if(norm(concept)!=="powers and exponents")return;
  const bs=document.getElementById("peBaseSlider"),es=document.getElementById("peExpSlider");
  if(!bs||!es)return;
- const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
- const supers={0:"⁰",1:"¹",2:"²",3:"³",4:"⁴",5:"⁵",6:"⁶"};
+ const set=(id,v,math=false)=>{const el=document.getElementById(id);if(el){if(math)el.innerHTML=v;else el.textContent=v;}};
  function update(){
   const b=Math.max(1,Number(bs.value)),e=Math.max(0,Number(es.value)),value=Math.pow(b,e);
-  const power=String(b)+(supers[e]||("^"+e));
-  const expanded=e===0?"1":Array(e).fill(String(b)).join(" × ");
-  set("peBase",b);set("peExp",e);set("peValue",value);
-  set("pePower",power);set("peExpanded",expanded);set("peBaseProp",b);set("peExpProp",e);
+  const power="\\("+b+"^{"+e+"}\\)";
+  const expanded=e===0?"\\(1\\)":e===1?"\\("+b+"\\)":Array(e).fill("\\("+b+"\\)").join(" \\times ");
+  set("peBase","\\("+b+"\\)",true);set("peExp","\\("+e+"\\)",true);set("peValue","\\("+value+"\\)",true);
+  set("pePower",power,true);set("peExpanded",expanded,true);set("peBaseProp","\\("+b+"\\)",true);set("peExpProp","\\("+e+"\\)",true);
   set("peBaseSliderVal",b);set("peExpSliderVal",e);
   const work=document.getElementById("peWork");
-  if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = "+value+". The exponent tells how many times the base is used as a factor.";
+  if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = \\("+value+"\\). The exponent tells how many times the base is used as a factor.";
+  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([
+   document.getElementById("peBase"),document.getElementById("peExp"),document.getElementById("peValue"),
+   document.getElementById("pePower"),document.getElementById("peExpanded"),document.getElementById("peBaseProp"),
+   document.getElementById("peExpProp"),work
+  ].filter(Boolean)).catch(()=>{});
  }
  bs.addEventListener("input",update);es.addEventListener("input",update);
  document.querySelectorAll(".peP").forEach(btn=>btn.addEventListener("click",()=>{bs.value=btn.dataset.b;es.value=btn.dataset.e;update();}));
  update();
 }
+
 function startRationalDemo(){
  if(norm(concept)!=="rational numbers")return;
  const ns=document.getElementById("rnslider"),ds=document.getElementById("rdslider");

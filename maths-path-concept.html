@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0630</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0645</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0630";</script>
-<script src="maths-quiz-bank.js?v=20261007-0630"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0645";</script>
+<script src="maths-quiz-bank.js?v=20261007-0645"></script>
 <script>
 (function(){
 "use strict";
@@ -129,6 +129,23 @@ function lessonHtml(){
 <p><b>Coefficient:</b> the numerical factor multiplying a variable. For example, the coefficient of <b>x</b> in <b>-4x</b> is <b>-4</b>.</p>
 <p><b>Special case:</b> when no number is written, the coefficient is 1. So <b>x = 1x</b>.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> the sign belongs to the term. In <b>6a − 2b + 9</b>, the terms are <b>6a</b>, <b>−2b</b>, and <b>9</b>.</p>
+`;
+if(norm(concept)==="terms and coefficients") return `
+<div class="visual-banner">
+  <div class="value-box"><small>TERM</small><strong id="tcTerm">-4x</strong><span class="pill">coefficient <span id="tcCoeff">-4</span></span></div>
+  <div class="eq">→</div>
+  <div class="value-box"><small>VARIABLE</small><strong id="tcVar">x</strong><span class="pill">coefficient = <span id="tcCoeff2">-4</span></span></div>
+</div>
+<div class="props">
+  <div class="prop"><span>Coefficient</span><strong id="tcCoeffBox">-4</strong></div>
+  <div class="prop"><span>Variable value</span><strong id="tcX">2</strong></div>
+  <div class="prop"><span>Term value</span><strong id="tcValue">-8</strong></div>
+  <div class="prop"><span>Term type</span><strong id="tcType">Variable term</strong></div>
+</div>
+<div class="control"><div class="head"><span>Coefficient</span><span class="val" id="tcCV">-4</span></div><input class="range" id="tcCS" type="range" min="-10" max="10" value="-4"></div>
+<div class="control"><div class="head"><span>Variable value</span><span class="val" id="tcXV">2</span></div><input class="range" id="tcXS" type="range" min="-10" max="10" value="2"></div>
+<div class="checks" id="tcWork"></div>
+<div class="presets"><button class="preset tcP" data-c="-4" data-x="2">−4x</button><button class="preset tcP" data-c="5" data-x="3">5x</button><button class="preset tcP" data-c="-2" data-x="-3">−2x</button><button class="preset tcP" data-c="7" data-x="0">7x</button></div>
 `;
 if(norm(concept)==="algebraic expressions") return `
 <strong>An algebraic expression combines numbers, variables, and operations without an equals sign.</strong>
@@ -338,7 +355,22 @@ function startExplorer(){
   document.querySelectorAll(".cubep").forEach(btn=>btn.addEventListener("click",()=>{N.value=btn.dataset.n;updateCube()}));
   updateCube();return;
  }
- if(norm(concept)==="algebraic expressions"){
+ if(norm(concept)==="terms and coefficients"){
+ const C=document.getElementById("tcCS"),X=document.getElementById("tcXS");
+ function updateTC(){
+  const c=+C.value,x=+X.value,v=c*x;
+  document.getElementById("tcTerm").textContent=(c===0?"0":(c===1?"x":(c===-1?"−x":c+"x")));
+  document.getElementById("tcCoeff").textContent=c;document.getElementById("tcCoeff2").textContent=c;
+  document.getElementById("tcCoeffBox").textContent=c;document.getElementById("tcX").textContent=x;document.getElementById("tcXV").textContent=x;
+  document.getElementById("tcCV").textContent=c;document.getElementById("tcValue").textContent=v;
+  document.getElementById("tcType").textContent=c===0?"Zero term":(x===0?"Variable term at x = 0":"Variable term");
+  document.getElementById("tcWork").innerHTML="<b>Term:</b> "+(c+"x")+"<br><b>Substitute x = "+x+":</b> "+c+" × "+x+"<br><b>Term value:</b> "+v;
+ }
+ [C,X].forEach(e=>e.addEventListener("input",updateTC));
+ document.querySelectorAll(".tcP").forEach(b=>b.addEventListener("click",()=>{C.value=b.dataset.c;X.value=b.dataset.x;updateTC()}));
+ updateTC();return;
+}
+if(norm(concept)==="algebraic expressions"){
  const A=document.getElementById("aeCoefS"),X=document.getElementById("aeXS"),C=document.getElementById("aeConstS");
  function updateAE(){
   const a=+A.value,x=+X.value,k=+C.value,term=a*x,total=term+k;

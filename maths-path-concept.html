@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0300</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0330</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0300";</script>
-<script src="maths-quiz-bank.js?v=20261007-0300"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0330";</script>
+<script src="maths-quiz-bank.js?v=20261007-0330"></script>
 <script>
 (function(){
 "use strict";
@@ -75,6 +75,20 @@ function lessonHtml(){
 <div class="control"><div class="head"><span>Number</span><span class="val" id="cubenv">4</span></div><input class="range" id="cubeslider" type="range" min="-20" max="20" value="4"></div>
 <div class="checks" id="cubework"></div>
 <div class="presets"><button class="preset cubep" data-n="2">2³</button><button class="preset cubep" data-n="3">3³</button><button class="preset cubep" data-n="5">5³</button><button class="preset cubep" data-n="-3">−3³</button></div>`;
+ if(norm(concept)==="variables and constants") return `
+<strong>A variable is a symbol whose value can change. A constant is a fixed value that does not change.</strong>
+<div class="formula">\\(x+5\\)</div>
+<p>In \\(x+5\\), <b>x</b> is the variable and <b>5</b> is the constant.</p>
+<div class="visual-banner"><div class="value-box"><small>VARIABLE</small><strong style="color:#60a5fa">x</strong><span class="pill">can change</span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong style="color:#fbbf24">5</strong><span class="pill">fixed</span></div></div>
+<p><b>Examples:</b> In \\(7+y\\), \\(y\\) is the variable and \\(7\\) is the constant. In \\(a-3\\), \\(a\\) is the variable and \\(3\\) is the constant.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> a variable represents a value that may change, while a constant keeps the same value within the expression.</p>`;
+ if(norm(concept)==="variables and constants") return `
+<div class="visual-banner"><div class="value-box"><small>VARIABLE</small><strong id="varname" style="color:#60a5fa">x</strong><span class="pill">changes</span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong id="constval" style="color:#fbbf24">5</strong><span class="pill">fixed</span></div><div class="eq">=</div><div class="value-box"><small>EXPRESSION VALUE</small><strong id="exprval">9</strong><span class="pill" id="exprpill">x + 5 = 9</span></div></div>
+<div class="props"><div class="prop"><span>Variable</span><strong>x</strong></div><div class="prop"><span>Current value of x</span><strong id="xval">4</strong></div><div class="prop"><span>Constant</span><strong id="cval">5</strong></div><div class="prop"><span>Expression</span><strong id="exprtext">x + 5</strong></div></div>
+<div class="control"><div class="head"><span>Change the variable x</span><span class="val" id="xsliderVal">4</span></div><input class="range" id="xslider" type="range" min="-10" max="10" value="4"></div>
+<div class="control"><div class="head"><span>Choose the constant</span><span class="val" id="csliderVal">5</span></div><input class="range" id="cslider" type="range" min="0" max="10" value="5"></div>
+<div class="checks" id="varwork"></div>
+<div class="presets"><button class="preset vp" data-x="2" data-c="5">x = 2, +5</button><button class="preset vp" data-x="7" data-c="3">x = 7, +3</button><button class="preset vp" data-x="-2" data-c="8">x = −2, +8</button><button class="preset vp" data-x="10" data-c="1">x = 10, +1</button></div>`;
  if(norm(concept)==="powers and exponents") return `
 <strong>A power is a compact way to write repeated multiplication of the same number.</strong>
 <div class="formula">\\(a^n=\\underbrace{a\\times a\\times\\cdots\\times a}_{n\\text{ factors}}\\)</div>
@@ -277,6 +291,24 @@ function startExplorer(){
   N.addEventListener("input",updateCube);
   document.querySelectorAll(".cubep").forEach(btn=>btn.addEventListener("click",()=>{N.value=btn.dataset.n;updateCube()}));
   updateCube();return;
+ }
+ if(norm(concept)==="variables and constants"){
+  const X=document.getElementById("xslider"),C=document.getElementById("cslider");
+  function updateVar(){
+   const x=Number(X.value),k=Number(C.value),v=x+k;
+   document.getElementById("xsliderVal").textContent=x;
+   document.getElementById("csliderVal").textContent=k;
+   document.getElementById("xval").textContent=x;
+   document.getElementById("cval").textContent=k;
+   document.getElementById("constval").textContent=k;
+   document.getElementById("exprval").textContent=v;
+   document.getElementById("exprtext").textContent="x + "+k;
+   document.getElementById("exprpill").textContent="x + "+k+" = "+v;
+   document.getElementById("varwork").innerHTML="<b>Variable:</b> x = "+x+" (can change)<br><b>Constant:</b> "+k+" (fixed for this expression)<br><b>Substitution:</b> x + "+k+" = "+x+" + "+k+" = "+v;
+  }
+  [X,C].forEach(el=>el.addEventListener("input",updateVar));
+  document.querySelectorAll(".vp").forEach(btn=>btn.addEventListener("click",()=>{X.value=btn.dataset.x;C.value=btn.dataset.c;updateVar()}));
+  updateVar();return;
  }
  if(norm(concept)==="powers and exponents"){
   const B=document.getElementById("pbase"),E=document.getElementById("pexp");

@@ -370,13 +370,16 @@ if(norm(concept)==="comparing rational numbers") return `
 <div class="formula">\\(\\frac{a}{b}\\ ?\\ \\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ cb\\)</div>
 <p style="margin-bottom:0;color:#66736b"><b>Rule:</b> when denominators are positive, compare the cross-products. The larger cross-product gives the larger fraction.</p>`
 if(norm(concept)==="properties of rational numbers") return `
-<strong>Rational numbers follow important properties that make calculations consistent and predictable.</strong>
-<div class="formula">\\(a+b=b+a\\quad\\text{and}\\quad a\\times b=b\\times a\\)</div>
-<p><b>Commutative:</b> changing the order does not change the sum or product.</p>
-<div class="formula">\\((a+b)+c=a+(b+c)\\quad\\text{and}\\quad(a\\times b)\\times c=a\\times(b\\times c)\\)</div>
-<p><b>Associative:</b> changing the grouping does not change the result.</p>
-<div class="formula">\\(a+0=a,\\quad a\\times1=a,\\quad a+(-a)=0\\)</div>
-<p style="margin-bottom:0;color:#66736b"><b>Key idea:</b> rational numbers are closed under addition, subtraction and multiplication; division is closed when the divisor is non-zero.</p>`;
+<strong>Move the sliders to discover how rational-number properties work.</strong>
+<div class="control"><label>Property</label><select id="prProperty"><option value="commAdd">Commutative • addition</option><option value="commMul">Commutative • multiplication</option><option value="assocAdd">Associative • addition</option><option value="assocMul">Associative • multiplication</option><option value="dist">Distributive</option><option value="addId">Additive identity</option><option value="mulId">Multiplicative identity</option><option value="inverse">Additive inverse</option><option value="closure">Closure • division</option></select></div>
+<div class="visual-banner"><div class="value-box"><small>LEFT SIDE</small><strong id="prLeft">0.833</strong></div><div class="eq">=</div><div class="value-box"><small>RIGHT SIDE</small><strong id="prRight">0.833</strong></div></div>
+<div class="control"><label>First numerator: <b id="prAv">1</b></label><input type="range" id="prA" min="-9" max="9" value="1"></div>
+<div class="control"><label>First denominator: <b id="prBv">2</b></label><input type="range" id="prB" min="1" max="12" value="2"></div>
+<div class="control"><label>Second numerator: <b id="prCv">1</b></label><input type="range" id="prC" min="-9" max="9" value="1"></div>
+<div class="control"><label>Second denominator: <b id="prDv">3</b></label><input type="range" id="prD" min="1" max="12" value="3"></div>
+<div class="control" id="prThirdControls"><label>Third numerator: <b id="prEv">2</b></label><input type="range" id="prE" min="-9" max="9" value="2"><label>Third denominator: <b id="prFv">5</b></label><input type="range" id="prF" min="1" max="12" value="5"></div>
+<div class="checks" id="prWork">Change a value to see the property.</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> order and grouping work for addition and multiplication, not generally for subtraction or division. Never divide by zero.</p>`;
  if(norm(concept)==="terms and coefficients") return `
 <strong>Every algebraic expression is built from terms, and each variable term has a coefficient.</strong>
 <div class="formula">\\(5x + 3y - 7\\)</div>
@@ -432,6 +435,32 @@ function startEquivalentDemo(){
  ns.addEventListener("input",update);ds.addEventListener("input",update);ks.addEventListener("input",update);
  document.querySelectorAll(".erP").forEach(btn=>btn.addEventListener("click",()=>{ns.value=btn.dataset.n;ds.value=btn.dataset.d;ks.value=btn.dataset.k;update();}));
  update();
+}
+function startPropertiesDemo(){
+ const pick=document.getElementById("prProperty");if(!pick)return;
+ const ids=["prA","prB","prC","prD","prE","prF"],sl=ids.map(id=>document.getElementById(id));
+ const out=document.getElementById("prWork"),left=document.getElementById("prLeft"),right=document.getElementById("prRight"),third=document.getElementById("prThirdControls");
+ const fmt=n=>Number.isFinite(n)?Number(n.toFixed(6)).toString():"Undefined";
+ const fraction=(n,d)=>n+"/"+d;
+ function update(){
+  const [an,b,cn,d,en,f]=sl.map(x=>Number(x.value)),a=an/b,c=cn/d,e=en/f,p=pick.value;
+  ["prAv","prBv","prCv","prDv","prEv","prFv"].forEach((id,i)=>document.getElementById(id).textContent=sl[i].value);
+  third.style.display=["assocAdd","assocMul","dist"].includes(p)?"":"none";
+  let l=0,r=0,expr="",detail="",valid=true;
+  if(p==="commAdd"){l=a+c;r=c+a;expr="a + b = b + a";}
+  if(p==="commMul"){l=a*c;r=c*a;expr="a × b = b × a";}
+  if(p==="assocAdd"){l=(a+c)+e;r=a+(c+e);expr="(a + b) + c = a + (b + c)";}
+  if(p==="assocMul"){l=(a*c)*e;r=a*(c*e);expr="(a × b) × c = a × (b × c)";}
+  if(p==="dist"){l=a*(c+e);r=a*c+a*e;expr="a × (b + c) = a × b + a × c";}
+  if(p==="addId"){l=a+0;r=a;expr="a + 0 = a";}
+  if(p==="mulId"){l=a*1;r=a;expr="a × 1 = a";}
+  if(p==="inverse"){l=a+(-a);r=0;expr="a + (−a) = 0";}
+  if(p==="closure"){valid=cn!==0;l=valid?a/c:NaN;r=valid?(an*d)/(b*cn):NaN;expr="(a/b) ÷ (c/d) = (ad)/(bc)";detail=valid?"The quotient is rational.":"Undefined: the divisor is zero. Change the second numerator.";}
+  left.textContent=fmt(l);right.textContent=valid?fmt(r):"Undefined";
+  const values="a = "+fraction(an,b)+", b = "+fraction(cn,d)+(third.style.display!=="none"?", c = "+fraction(en,f):"");
+  out.innerHTML="<b>"+expr+"</b><div>"+values+"</div><div>"+(detail||("Both sides = "+fmt(l)+" ✓"))+"</div>";
+ }
+ [...sl,pick].forEach(x=>x.addEventListener("input",update));update();
 }
 function startRationalOperationsDemo(){
  if(norm(concept)!=="operations on rational numbers")return;
@@ -541,7 +570,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

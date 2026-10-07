@@ -146,7 +146,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -705,23 +705,16 @@ function startQuiz(){
  }
  if(!Array.isArray(quizSource)||quizSource.length===0){host.innerHTML='<div class="empty">No dedicated 30-question bank is available for <b>'+esc(title)+'</b> yet. This quiz is intentionally empty — no other concept questions are reused.</div>';return}
  const questions=quizSource.slice(0,30), total=questions.length;let i=0,score=0,answered=false;
- host.innerHTML='<div class="quiz-head"><span class="progress" id="qp">Question 1 of '+total+'</span><span class="progress" id="qs">Score 0</span></div><div class="bar"><div class="fill" id="qf"></div></div><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explain" id="explain"></div><button class="next" id="next" disabled>Next</button>';
+ host.className="quiz-section";host.innerHTML='<div class="quiz-head"><span class="progress" id="qp">Question 1 of '+total+'</span><span class="progress" id="qs">Score 0</span></div><div class="bar"><div class="fill" id="qf"></div></div><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explain" id="explain"></div><button class="next" id="next" disabled>Next</button>';
  const qno=document.getElementById("qno"),q=document.getElementById("question"),opts=document.getElementById("options"),fb=document.getElementById("feedback"),ex=document.getElementById("explain"),next=document.getElementById("next");
- function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.innerHTML=quizMath(item[0]);opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+quizMath(o)+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));
- const typesetQuiz=()=>{
-  const nodes=[q,opts].filter(Boolean);
-  const run=()=>{if(!window.MathJax||!window.MathJax.typesetPromise)return;try{window.MathJax.typesetClear(nodes);window.MathJax.typesetPromise(nodes).catch(()=>{});}catch(_){}};
-  if(window.MathJax&&window.MathJax.startup&&window.MathJax.startup.promise)window.MathJax.startup.promise.then(()=>requestAnimationFrame(run)).catch(()=>{});
-  else setTimeout(run,0);
- };
- typesetQuiz();
- setTimeout(typesetQuiz,120);
-}
- function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.innerHTML=mathifyText(esc(item[3]||""));ex.style.display="block";if(window.MathJax&&window.MathJax.startup&&window.MathJax.startup.promise){
-  window.MathJax.startup.promise.then(function(){
-   try{window.MathJax.typesetClear([ex]);window.MathJax.typesetPromise([ex]).catch(()=>{});}catch(_){}
-  }).catch(()=>{});
- }else if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([ex]).catch(()=>{});next.disabled=false;document.getElementById("qs").textContent="Score "+score;scheduleMath()}
+ function quizPlain(s){
+  let t=esc(String(s));
+  t=t.replace(/\\\(([^]*?)\\\)/g,"$1").replace(/\\\[([^]*?)\\\]/g,"$1").replace(/\\\)/g,"").replace(/\\\]/g,"");
+  return t;
+ }
+ function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.textContent=String(item[0]).replace(/\\\(([^]*?)\\\)/g,"$1").replace(/\\\[([^]*?)\\\]/g,"$1").replace(/\\\)/g,"").replace(/\\\]/g,"");opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+quizPlain(o)+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));
+ }
+ function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.textContent=quizPlain(item[3]||"");ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score;}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }
 window.addEventListener("error",function(e){

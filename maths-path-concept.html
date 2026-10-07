@@ -677,10 +677,10 @@ if(norm(concept)==="polygons") return `
 <div class="visual-banner"><div class="value-box"><small>LEFT</small><strong id="leLeft">2x+5</strong><span class="pill">equation</span></div><div class="eq">=</div><div class="value-box"><small>RIGHT</small><strong id="leRight">13</strong><span class="pill">target</span></div></div>
 <div class="props"><div class="prop"><span>Coefficient a</span><strong id="leAVal">2</strong></div><div class="prop"><span>Constant b</span><strong id="leBVal">5</strong></div><div class="prop"><span>Target c</span><strong id="leCVal">13</strong></div><div class="prop"><span>Solution x</span><strong id="leXVal">4</strong></div></div>
 <div class="control"><div class="head"><span>Coefficient a</span><span class="val" id="leAS">2</span></div><input class="range" id="leA" type="range" min="1" max="9" value="2"></div>
-<div class="control"><div class="head"><span>Constant b</span><span class="val" id="leBS">5</span></div><input class="range" id="leB" type="range" min":-10" max="10" value="5"></div>
+<div class="control"><div class="head"><span>Constant b</span><span class="val" id="leBS">5</span></div><input class="range" id="leB" type="range" min="-10" max="10" value="5"></div>
 <div class="control"><div class="head"><span>Target c</span><span class="val" id="leCS">13</span></div><input class="range" id="leC" type="range" min="-20" max="30" value="13"></div>
 <div class="work" id="leWork"></div>
-<div class="presets"><button class="preset leP" data-a="2" data-b="5" data-c="13">2x+5=13</button><button class="preset leP" data-a="3" data-b="-2" data-c="16">3xâ2=16</button><button class="preset leP" data-a="5" data-b="7" data-c="22">5x+7=22</button></div>`;
+<div class="presets"><button class="preset leP" data-a="2" data-b="5" data-c="13">2x+5=13</button><button class="preset leP" data-a="3" data-b="-2" data-c="16">3x−2=16</button><button class="preset leP" data-a="5" data-b="7" data-c="22">5x+7=22</button></div>`;
 if(norm(concept)==="factorisation basics") return `
 <div class="visual-banner"><div class="value-box"><small>EXPRESSION</small><strong id="fbExpr">6x+12</strong><span class="pill">original</span></div><div class="eq">=</div><div class="value-box"><small>FACTORS</small><strong id="fbFact">6(x+2)</strong><span class="pill">product form</span></div></div>
 <div class="props"><div class="prop"><span>Common factor</span><strong id="fbGcf">6</strong></div><div class="prop"><span>x value</span><strong id="fbXVal">2</strong></div><div class="prop"><span>Original value</span><strong id="fbOrig">24</strong></div><div class="prop"><span>Factored value</span><strong id="fbFactVal">24</strong></div></div>
@@ -1215,7 +1215,22 @@ function startQuiz(){
  function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.innerHTML=mathifyText(esc(item[3]||""));ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score;scheduleMath()}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }
-startExplorer();startQuiz();refreshMath();whenMathJaxReady();
+window.addEventListener("error",function(e){
+  try{
+    const box=document.getElementById("app");
+    if(box&&!box.dataset.runtimeErrorShown){
+      box.dataset.runtimeErrorShown="1";
+      const msg=(e&&e.message)?e.message:"Unknown JavaScript error";
+      console.error("SkillUp Maths runtime error:",e);
+      box.insertAdjacentHTML("afterbegin",'<div class="card"><div class="empty"><b>Page recovery:</b> A rendering script error was detected. The lesson remains available, and the quiz can be reloaded safely.<br><small>'+esc(msg)+'</small></div></div>');
+    }
+  }catch(_){}
+});
+try{startExplorer();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+  console.error("SkillUp Maths bootstrap error:",err);
+  const box=document.getElementById("app");
+  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');
+}
 window.addEventListener("load",function(){whenMathJaxReady();});
 })();
 </script>

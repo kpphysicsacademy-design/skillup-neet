@@ -136,13 +136,6 @@ function lessonHtml(){
 <div class="visual-banner"><div class="value-box"><small>VARIABLE</small><strong style="color:#60a5fa">x</strong><span class="pill">can change</span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong style="color:#fbbf24">5</strong><span class="pill">fixed</span></div></div>
 <p><b>Examples:</b> In \\(7+y\\), \\(y\\) is the variable and \\(7\\) is the constant. In \\(a-3\\), \\(a\\) is the variable and \\(3\\) is the constant.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> a variable represents a value that may change, while a constant keeps the same value within the expression.</p>`;
- if(norm(concept)==="variables and constants") return `
-<div class="visual-banner"><div class="value-box"><small>VARIABLE</small><strong id="varname" style="color:#60a5fa">x</strong><span class="pill">changes</span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong id="constval" style="color:#fbbf24">5</strong><span class="pill">fixed</span></div><div class="eq">=</div><div class="value-box"><small>EXPRESSION VALUE</small><strong id="exprval">9</strong><span class="pill" id="exprpill">x + 5 = 9</span></div></div>
-<div class="props"><div class="prop"><span>Variable</span><strong>x</strong></div><div class="prop"><span>Current value of x</span><strong id="xval">4</strong></div><div class="prop"><span>Constant</span><strong id="cval">5</strong></div><div class="prop"><span>Expression</span><strong id="exprtext">x + 5</strong></div></div>
-<div class="control"><div class="head"><span>Change the variable x</span><span class="val" id="xsliderVal">4</span></div><input class="range" id="xslider" type="range" min="-10" max="10" value="4"></div>
-<div class="control"><div class="head"><span>Choose the constant</span><span class="val" id="csliderVal">5</span></div><input class="range" id="cslider" type="range" min="0" max="10" value="5"></div>
-<div class="checks" id="varwork"></div>
-<div class="presets"><button class="preset vp" data-x="2" data-c="5">x = 2, +5</button><button class="preset vp" data-x="7" data-c="3">x = 7, +3</button><button class="preset vp" data-x="-2" data-c="8">x = −2, +8</button><button class="preset vp" data-x="10" data-c="1">x = 10, +1</button></div>`;
  if(norm(concept)==="powers and exponents") return `
 <strong>A power is a compact way to write repeated multiplication of the same number.</strong>
 <div class="formula">\\(a^n=\\underbrace{a\\times a\\times\\cdots\\times a}_{n\\text{ factors}}\\)</div>
@@ -182,23 +175,6 @@ function lessonHtml(){
 <p><b>Coefficient:</b> the numerical factor multiplying a variable. For example, the coefficient of <b>x</b> in <b>-4x</b> is <b>-4</b>.</p>
 <p><b>Special case:</b> when no number is written, the coefficient is 1. So <b>x = 1x</b>.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> the sign belongs to the term. In <b>6a − 2b + 9</b>, the terms are <b>6a</b>, <b>−2b</b>, and <b>9</b>.</p>
-`;
-if(norm(concept)==="terms and coefficients") return `
-<div class="visual-banner">
-  <div class="value-box"><small>TERM</small><strong id="tcTerm">-4x</strong><span class="pill">coefficient <span id="tcCoeff">-4</span></span></div>
-  <div class="eq">→</div>
-  <div class="value-box"><small>VARIABLE</small><strong id="tcVar">x</strong><span class="pill">coefficient = <span id="tcCoeff2">-4</span></span></div>
-</div>
-<div class="props">
-  <div class="prop"><span>Coefficient</span><strong id="tcCoeffBox">-4</strong></div>
-  <div class="prop"><span>Variable value</span><strong id="tcX">2</strong></div>
-  <div class="prop"><span>Term value</span><strong id="tcValue">-8</strong></div>
-  <div class="prop"><span>Term type</span><strong id="tcType">Variable term</strong></div>
-</div>
-<div class="control"><div class="head"><span>Coefficient</span><span class="val" id="tcCV">-4</span></div><input class="range" id="tcCS" type="range" min="-10" max="10" value="-4"></div>
-<div class="control"><div class="head"><span>Variable value</span><span class="val" id="tcXV">2</span></div><input class="range" id="tcXS" type="range" min="-10" max="10" value="2"></div>
-<div class="checks" id="tcWork"></div>
-<div class="presets"><button class="preset tcP" data-c="-4" data-x="2">−4x</button><button class="preset tcP" data-c="5" data-x="3">5x</button><button class="preset tcP" data-c="-2" data-x="-3">−2x</button><button class="preset tcP" data-c="7" data-x="0">7x</button></div>
 `;
 if(norm(concept)==="algebraic expressions") return `
 <strong>An algebraic expression combines numbers, variables, and operations without an equals sign.</strong>
@@ -498,11 +474,6 @@ if(norm(concept)==="terms and coefficients"){
  [C,X].forEach(e=>e.addEventListener("input",updateTC));
  document.querySelectorAll(".tcP").forEach(b=>b.addEventListener("click",()=>{C.value=b.dataset.c;X.value=b.dataset.x;updateTC()}));
  updateTC();return;
-}
-if(norm(concept)==="terms and coefficients"){
- const C=document.getElementById("tcCS"),X=document.getElementById("tcXS");
- function updateTC(){const cc=+C.value,x=+X.value,v=cc*x;document.getElementById("tcTerm").textContent=cc+"x";document.getElementById("tcCoeff").textContent=cc;document.getElementById("tcCoeffBox").textContent=cc;document.getElementById("tcX").textContent=x;document.getElementById("tcXBox").textContent=x;document.getElementById("tcXV").textContent=x;document.getElementById("tcCV").textContent=cc;document.getElementById("tcValue").textContent=v;document.getElementById("tcWork").innerHTML="<b>Term:</b> "+cc+"x<br><b>Substitute x = "+x+":</b> "+cc+" × "+x+"<br><b>Term value:</b> "+v}
- [C,X].forEach(e=>e.addEventListener("input",updateTC));document.querySelectorAll(".tcP").forEach(btn=>btn.addEventListener("click",()=>{C.value=btn.dataset.c;X.value=btn.dataset.x;updateTC()}));updateTC();return;
 }
 if(norm(concept)==="algebraic expressions"){
  const A=document.getElementById("aeCoefS"),X=document.getElementById("aeXS"),C=document.getElementById("aeConstS");

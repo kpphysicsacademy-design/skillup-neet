@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-1310</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-1400</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -308,8 +308,22 @@ if(norm(concept)==="algebraic expressions") return `
  return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Explore}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
 function explorerHtml(){if(norm(concept)==="basic geometric ideas") return `
-<div class="visual-banner"><div class="value-box"><small>ANGLE TYPE</small><strong id="bgAngleType">Right</strong><span class="pill" id="bgAngleDeg">90°</span></div><div class="eq">∠</div><div class="value-box"><small>ENDPOINTS</small><strong id="bgEndpoints">2</strong><span class="pill">segment</span></div></div>
-<div class="props"><div class="prop"><span>Angle</span><strong id="bgAVal">90°</strong></div><div class="prop"><span>Figure</span><strong id="bgFVal">Segment</strong></div><div class="prop"><span>Dimensions</span><strong id="bgDVal">1D</strong></div></div>
+<div class="visual-banner" style="flex-direction:column;align-items:stretch">
+<svg id="bgSvg" viewBox="0 0 320 170" role="img" aria-label="Interactive angle diagram" style="width:100%;height:auto;max-height:190px">
+<line x1="160" y1="145" x2="55" y2="145" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<line id="bgRay" x1="160" y1="145" x2="265" y2="145" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<circle cx="160" cy="145" r="6" fill="currentColor"/>
+<path id="bgArc" d="" fill="none" stroke="currentColor" stroke-width="3"/>
+<text x="160" y="162" text-anchor="middle" fill="currentColor" font-size="12" font-weight="700">vertex</text>
+</svg>
+<div style="text-align:center"><span class="pill" id="bgAngleDeg">90°</span> <span class="pill" id="bgAngleType">Right angle</span></div>
+</div>
+<div class="props">
+<div class="prop"><span>Angle</span><strong id="bgAVal">90°</strong></div>
+<div class="prop"><span>Classification</span><strong id="bgFVal">Right angle</strong></div>
+<div class="prop"><span>Special case</span><strong id="bgDVal">Perpendicular arms</strong></div>
+<div class="prop"><span>Vertex</span><strong id="bgEndpoints">Common endpoint</strong></div>
+</div>
 <div class="control"><div class="head"><span>Angle size</span><span class="val" id="bgAS">90°</span></div><input class="range" id="bgA" type="range" min="0" max="180" value="90"></div>
 <div class="presets"><button class="preset bgP" data-a="45">45° • Acute</button><button class="preset bgP" data-a="90">90° • Right</button><button class="preset bgP" data-a="120">120° • Obtuse</button><button class="preset bgP" data-a="180">180° • Straight</button></div>
 <div class="work" id="bgWork"></div>`;if(norm(concept)==="linear equations in one variable") return `
@@ -460,7 +474,21 @@ app.addEventListener("change",scheduleMath);
 app.addEventListener("click",function(e){if(e.target.closest(".preset,.next,.opt"))scheduleMath();});
 function startExplorer(){if(norm(concept)==="basic geometric ideas"){
  const A=document.getElementById("bgA"); if(!A)return;
- function updateBG(){const a=+A.value;const type=a===0?"Zero":a<90?"Acute":a===90?"Right":a<180?"Obtuse":"Straight";document.getElementById("bgAVal").textContent=a+"°";document.getElementById("bgAS").textContent=a+"°";document.getElementById("bgAngleType").textContent=type;document.getElementById("bgAngleDeg").textContent=a+"°";document.getElementById("bgWork").innerHTML="<b>Classify:</b> \\("+a+"^\\circ\\) is a \\("+type.toLowerCase()+"\\) angle.";scheduleMath();}
+ function updateBG(){
+  const a=+A.value;
+  const type=a===0?"Zero angle":a<90?"Acute angle":a===90?"Right angle":a<180?"Obtuse angle":"Straight angle";
+  const special=a===90?"Perpendicular arms":a===180?"Opposite rays":a===0?"Same direction":"Two rays with a common vertex";
+  document.getElementById("bgAVal").textContent=a+"°";document.getElementById("bgAS").textContent=a+"°";
+  document.getElementById("bgAngleType").textContent=type;document.getElementById("bgAngleDeg").textContent=a+"°";
+  document.getElementById("bgFVal").textContent=type;document.getElementById("bgDVal").textContent=special;
+  const theta=a*Math.PI/180,len=105,cx=160,cy=145,ex=cx+len*Math.cos(theta),ey=cy-len*Math.sin(theta);
+  const ray=document.getElementById("bgRay"),arc=document.getElementById("bgArc");ray.setAttribute("x2",ex.toFixed(1));ray.setAttribute("y2",ey.toFixed(1));
+  const r=42,ax=cx+r,ay=cy,bx=cx+r*Math.cos(theta),by=cy-r*Math.sin(theta);
+  if(a===0)arc.setAttribute("d","M "+ax+" "+ay+" L "+ax+" "+ay);
+  else if(a===180)arc.setAttribute("d","M "+(cx-r)+" "+cy+" A "+r+" "+r+" 0 0 0 "+(cx+r)+" "+cy);
+  else arc.setAttribute("d","M "+ax+" "+ay+" A "+r+" "+r+" 0 0 0 "+bx.toFixed(1)+" "+by.toFixed(1));
+  document.getElementById("bgWork").innerHTML="<b>Classify:</b> \\("+a+"^\\circ\\) is a \\("+type.toLowerCase()+"\\).";scheduleMath();
+ }
  A.addEventListener("input",updateBG);document.querySelectorAll(".bgP").forEach(btn=>btn.addEventListener("click",()=>{A.value=btn.dataset.a;updateBG();}));updateBG();return;
 }
 if(norm(concept)==="linear equations in one variable"){
@@ -730,7 +758,7 @@ function startQuiz(){
  try{
   const quizKey=norm(concept)==="properties of rational numbers" ? "Properties of rational numbers" : key;
   const dedicated=bank[quizKey];
-  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : (norm(concept)==="linear equations in one variable" ? (dedicated||INLINE_LINEAR_EQUATIONS_QUIZ) : dedicated)))));
+  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : (norm(concept)==="linear equations in one variable" ? (dedicated||INLINE_LINEAR_EQUATIONS_QUIZ) : (norm(concept)==="basic geometric ideas" ? (dedicated||INLINE_BASIC_GEOMETRIC_IDEAS_QUIZ) : dedicated))))));
  }catch(e){
   host.innerHTML='<div class="empty">Mastery Quiz could not load. Please refresh this page.</div>';
   return;

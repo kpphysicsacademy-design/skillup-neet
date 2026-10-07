@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0620-powers-exponents-mathjax">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0630-powers-exponents-mathjax">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-0620</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-0630</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 </style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0620">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0620";</script>
-<script src="maths-quiz-bank.js?v=20261008-0620"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0630">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0630";</script>
+<script src="maths-quiz-bank.js?v=20261008-0630"></script>
 <script>
 (function(){
 "use strict";
@@ -288,11 +288,7 @@ if(norm(concept)==="quadrilaterals") return `
 if(norm(concept)==="powers and exponents") return `
 <strong>Change the base and exponent to see the power change live.</strong>
 <div class="visual-banner">
-<div class="value-box"><small>BASE</small><strong id="peBase">2</strong></div>
-<div class="eq">^</div>
-<div class="value-box"><small>EXPONENT</small><strong id="peExp">3</strong></div>
-<div class="eq">=</div>
-<div class="value-box"><small>VALUE</small><strong id="peValue">8</strong></div>
+<div class="value-box" style="grid-column:1/-1"><small>LIVE POWER</small><strong id="peEquation">\\(2^{3}=8\\)</strong></div>
 </div>
 <div class="props">
 <div class="prop"><span>Power</span><strong id="pePower">2³</strong></div>
@@ -574,24 +570,30 @@ function startPowersDemo(){
  const set=(id,v,math=false)=>{const el=document.getElementById(id);if(el){if(math)el.innerHTML=v;else el.textContent=v;}};
  function update(){
   const b=Math.max(1,Number(bs.value)),e=Math.max(0,Number(es.value)),value=Math.pow(b,e);
-  const power="\\("+b+"^{"+e+"}\\)";
-  const expanded=e===0?"\\(1\\)":e===1?"\\("+b+"\\)":Array(e).fill("\\("+b+"\\)").join(" \\times ");
-  set("peBase","\\("+b+"\\)",true);set("peExp","\\("+e+"\\)",true);set("peValue","\\("+value+"\\)",true);
-  set("pePower",power,true);set("peExpanded",expanded,true);set("peBaseProp","\\("+b+"\\)",true);set("peExpProp","\\("+e+"\\)",true);
+  const power="\\\\("+b+"^{"+e+"}\\\\)";
+  const expanded=e===0?"\\\\(1\\\\)":"\\\\("+Array(e).fill(b).join(" \\\\times ")+"\\\\)";
+  const equation="\\\\("+b+"^{"+e+"}="+value+"\\\\)";
+  set("peEquation",equation,true);
+  set("peBase","\\\\("+b+"\\\\)",true);
+  set("peExp","\\\\("+e+"\\\\)",true);
+  set("peValue","\\\\("+value+"\\\\)",true);
+  set("pePower",power,true);
+  set("peExpanded",expanded,true);
+  set("peBaseProp","\\\\("+b+"\\\\)",true);
+  set("peExpProp","\\\\("+e+"\\\\)",true);
   set("peBaseSliderVal",b);set("peExpSliderVal",e);
   const work=document.getElementById("peWork");
-  if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = \\("+value+"\\). The exponent tells how many times the base is used as a factor.";
+  if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = \\\\("+value+"\\\\). The exponent tells how many times the base is used as a factor.";
   if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([
-   document.getElementById("peBase"),document.getElementById("peExp"),document.getElementById("peValue"),
-   document.getElementById("pePower"),document.getElementById("peExpanded"),document.getElementById("peBaseProp"),
-   document.getElementById("peExpProp"),work
+   document.getElementById("peEquation"),document.getElementById("peBase"),document.getElementById("peExp"),
+   document.getElementById("peValue"),document.getElementById("pePower"),document.getElementById("peExpanded"),
+   document.getElementById("peBaseProp"),document.getElementById("peExpProp"),work
   ].filter(Boolean)).catch(()=>{});
  }
  bs.addEventListener("input",update);es.addEventListener("input",update);
  document.querySelectorAll(".peP").forEach(btn=>btn.addEventListener("click",()=>{bs.value=btn.dataset.b;es.value=btn.dataset.e;update();}));
  update();
 }
-
 function startRationalDemo(){
  if(norm(concept)!=="rational numbers")return;
  const ns=document.getElementById("rnslider"),ds=document.getElementById("rdslider");

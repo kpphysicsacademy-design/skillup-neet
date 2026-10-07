@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0740-squares-quiz-mathjax">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0750-mcq-delimiter-fix">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-0740</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-0750</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -97,6 +97,8 @@ const chapterText=chapter||"Concept Practice";
 
 function mathifyText(s){
  let t=String(s);
+ // Remove orphaned MathJax closing delimiters from quiz text.
+ if(!t.includes("\\(")&&!t.includes("\\["))t=t.replace(/\\\)/g,"");
  if(t.includes("\\(")||t.includes("\\[")){
   return t.replace(/\\\(([^]*?)\\\)/g,function(_,inner){
    inner=inner.replace(/([A-Za-z0-9]+)²/g,"$1^2").replace(/([A-Za-z0-9]+)³/g,"$1^3");
@@ -115,6 +117,7 @@ function mathifyText(s){
 }
 function mathifyOption(s){
  let t=String(s);
+ if(!t.includes("\\(")&&!t.includes("\\["))t=t.replace(/\\\)/g,"");
  if(t.includes("\\(")||t.includes("\\["))return t;
  if(/[²³^√∛]/.test(t) || (/[+−×÷=]/.test(t) && /[A-Za-z0-9]/.test(t)) || /^\s*[−-]?\d+\s*\/\s*[−-]?\d+\s*$/.test(t)){
   t=t.replace(/([A-Za-z0-9]+)²/g,"$1^2").replace(/([A-Za-z0-9]+)³/g,"$1^3");

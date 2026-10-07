@@ -46,17 +46,27 @@ const chapterText=chapter||"Concept Practice";
 function mathifyText(s){
  let t=String(s);
  if(t.includes("\\(")||t.includes("\\["))return t;
- t=t.replace(/([−-]?\d+)\s*\/\s*([−-]?\d+)/g,"\\(\\frac{$1}{$2}\\)");
- t=t.replace(/([A-Za-z0-9]+)\^(\d+)/g,"\\($1^{$2}\\)");
- t=t.replace(/([A-Za-z0-9]+)²/g,"\\($1^2\\)");
- t=t.replace(/([A-Za-z0-9]+)³/g,"\\($1^3\\)");
- t=t.replace(/√\s*([−-]?\d+(?:\.\d+)?)/g,"\\(\\sqrt{$1}\\)");
- t=t.replace(/∛\s*([−-]?\d+(?:\.\d+)?)/g,"\\(\\sqrt[3]{$1}\\)");
- const term="(?:[−-]?\\d*[A-Za-z](?:\\^\\d+|²|³)?|[−-]?\\d+(?:\\.\\d+)?)";
+ t=t.replace(/([A-Za-z0-9]+)²/g,"$1^2").replace(/([A-Za-z0-9]+)³/g,"$1^3");
+ t=t.replace(/√\s*([−-]?\d+(?:\.\d+)?)/g,"\\sqrt{$1}");
+ t=t.replace(/∛\s*([−-]?\d+(?:\.\d+)?)/g,"\\sqrt[3]{$1}");
+ t=t.replace(/([−-]?\d+)\s*\/\s*([−-]?\d+)/g,"\\frac{$1}{$2}");
+ const term="(?:[−-]?\\d*[A-Za-z](?:\\^\\d+)?|[−-]?\\d+(?:\\.\d+)?)";
  const expr=new RegExp("("+term+"(?:\\s*[+−\\-×÷=<>]\\s*"+term+")+)","g");
  t=t.replace(expr,"\\($1\\)");
- t=t.replace(/([−-]?\d*[A-Za-z](?:\^\d+|²|³))/g,"\\($1\\)");
+ t=t.replace(/(\([^()]+\)(?:\^\d+)?)/g,"\\($1\\)");
+ t=t.replace(/([−-]?\\d*[A-Za-z](?:\\^\\d+))/g,"\\($1\\)");
  return t;
+}
+function mathifyOption(s){
+ let t=String(s);
+ if(t.includes("\\(")||t.includes("\\["))return t;
+ if(/[²³^√∛]/.test(t) || (/[+−×÷=]/.test(t) && /[A-Za-z0-9]/.test(t)) || /^\s*[−-]?\d+\s*\/\s*[−-]?\d+\s*$/.test(t)){
+  t=t.replace(/([A-Za-z0-9]+)²/g,"$1^2").replace(/([A-Za-z0-9]+)³/g,"$1^3");
+  t=t.replace(/√\s*([−-]?\d+(?:\.\d+)?)/g,"\\sqrt{$1}");
+  t=t.replace(/∛\s*([−-]?\d+(?:\.\d+)?)/g,"\\sqrt[3]{$1}");
+  return "\\("+t+"\\)";
+ }
+ return mathifyText(t);
 }
 function mathifyDom(root){
  const walker=document.createTreeWalker(root,4);
@@ -596,7 +606,7 @@ function startQuiz(){
  const questions=quizSource.slice(0,30), total=questions.length;let i=0,score=0,answered=false;
  host.innerHTML='<div class="quiz-head"><span class="progress" id="qp">Question 1 of '+total+'</span><span class="progress" id="qs">Score 0</span></div><div class="bar"><div class="fill" id="qf"></div></div><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explain" id="explain"></div><button class="next" id="next" disabled>Next</button>';
  const qno=document.getElementById("qno"),q=document.getElementById("question"),opts=document.getElementById("options"),fb=document.getElementById("feedback"),ex=document.getElementById("explain"),next=document.getElementById("next");
- function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.innerHTML=mathifyText(item[0]);opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+mathifyText(esc(o))+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([q,opts]).catch(()=>{})}
+ function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.innerHTML=mathifyText(item[0]);opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+mathifyOption(esc(o))+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([q,opts]).catch(()=>{})}
  function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.innerHTML=mathifyText(esc(item[3]||""));ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score;scheduleMath()}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }

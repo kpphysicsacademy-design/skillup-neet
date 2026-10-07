@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0730</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0800</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -336,7 +336,7 @@ function startExplorer(){
    document.getElementById("sqnval").textContent=n;
    document.getElementById("sqsv").textContent=square;
    document.getElementById("sqrval").textContent=root;
-   document.getElementById("sqperfect").textContent=perfect?"Yes":"Yes";
+   document.getElementById("sqperfect").textContent=perfect?"Yes":"No";
    document.getElementById("sqvalue").textContent=square;
    document.getElementById("sqpill").textContent=n+"² = "+square;
    document.getElementById("sqwork").innerHTML="<b>Square:</b> "+n+" × "+n+" = "+square+"<br><b>Square root:</b> √"+square+" = "+root+"<br><b>Conclusion:</b> "+square+" is a perfect square because its square root is an integer.";
@@ -451,8 +451,16 @@ if(norm(concept)==="variables and constants"){
 }
 function startQuiz(){
  const host=document.getElementById("quiz");
- const quizKey=norm(concept)==="properties of rational numbers" ? "Properties of rational numbers" : key;
- const quizSource=norm(concept)==="properties of rational numbers" ? INLINE_PROPERTIES_QUIZ : (norm(concept)==="squares and square roots" ? INLINE_SQUARES_QUIZ : (norm(concept)==="terms and coefficients" ? INLINE_TERMS_COEFFICIENTS_QUIZ : bank[quizKey]));
+ if(!host)return;
+ host.innerHTML='<div style="padding:14px;color:#64806b;font-size:12px;font-weight:800">Loading mastery quiz…</div>';
+ let quizSource;
+ try{
+  const quizKey=norm(concept)==="properties of rational numbers" ? "Properties of rational numbers" : key;
+  quizSource=norm(concept)==="properties of rational numbers" ? INLINE_PROPERTIES_QUIZ : (norm(concept)==="squares and square roots" ? INLINE_SQUARES_QUIZ : (norm(concept)==="terms and coefficients" ? INLINE_TERMS_COEFFICIENTS_QUIZ : bank[quizKey]));
+ }catch(e){
+  host.innerHTML='<div class="empty">Mastery Quiz could not load. Please refresh this page.</div>';
+  return;
+ }
  if(!Array.isArray(quizSource)||quizSource.length===0){host.innerHTML='<div class="empty">No dedicated 30-question bank is available for <b>'+esc(title)+'</b> yet. This quiz is intentionally empty — no other concept questions are reused.</div>';return}
  const questions=quizSource.slice(0,30), total=questions.length;let i=0,score=0,answered=false;
  host.innerHTML='<div class="quiz-head"><span class="progress" id="qp">Question 1 of '+total+'</span><span class="progress" id="qs">Score 0</span></div><div class="bar"><div class="fill" id="qf"></div></div><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explain" id="explain"></div><button class="next" id="next" disabled>Next</button>';

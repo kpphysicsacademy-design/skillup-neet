@@ -370,16 +370,21 @@ if(norm(concept)==="comparing rational numbers") return `
 <div class="formula">\\(\\frac{a}{b}\\ ?\\ \\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ cb\\)</div>
 <p style="margin-bottom:0;color:#66736b"><b>Rule:</b> when denominators are positive, compare the cross-products. The larger cross-product gives the larger fraction.</p>`
 if(norm(concept)==="properties of rational numbers") return `
-<strong>Move the sliders to discover how rational-number properties work.</strong>
+<strong>Move the sliders to see the property with real changing fractions.</strong>
 <div class="control"><label>Property</label><select id="prProperty"><option value="commAdd">Commutative • addition</option><option value="commMul">Commutative • multiplication</option><option value="assocAdd">Associative • addition</option><option value="assocMul">Associative • multiplication</option><option value="dist">Distributive</option><option value="addId">Additive identity</option><option value="mulId">Multiplicative identity</option><option value="inverse">Additive inverse</option><option value="closure">Closure • division</option></select></div>
-<div class="visual-banner"><div class="value-box"><small>LEFT SIDE</small><strong id="prLeft">0.833</strong></div><div class="eq">=</div><div class="value-box"><small>RIGHT SIDE</small><strong id="prRight">0.833</strong></div></div>
+<div class="visual-banner">
+  <div class="value-box"><small>LEFT SIDE</small><strong id="prLeftFrac" class="stacked-fraction"><span>1</span><span>2</span></strong></div>
+  <div class="eq">=</div>
+  <div class="value-box"><small>RIGHT SIDE</small><strong id="prRightFrac" class="stacked-fraction"><span>1</span><span>2</span></strong></div>
+</div>
 <div class="control"><label>First numerator: <b id="prAv">1</b></label><input type="range" id="prA" min="-9" max="9" value="1"></div>
 <div class="control"><label>First denominator: <b id="prBv">2</b></label><input type="range" id="prB" min="1" max="12" value="2"></div>
 <div class="control"><label>Second numerator: <b id="prCv">1</b></label><input type="range" id="prC" min="-9" max="9" value="1"></div>
 <div class="control"><label>Second denominator: <b id="prDv">3</b></label><input type="range" id="prD" min="1" max="12" value="3"></div>
-<div class="control" id="prThirdControls"><label>Third numerator: <b id="prEv">2</b></label><input type="range" id="prE" min="-9" max="9" value="2"><label>Third denominator: <b id="prFv">5</b></label><input type="range" id="prF" min="1" max="12" value="5"></div>
+<div class="control" id="prThirdControls"><label>Third numerator: <b id="prEv">2</b></label><input type="range" id="prE" min="-9" max="9" value="2"></div>
+<div class="control" id="prThirdDenControl"><label>Third denominator: <b id="prFv">5</b></label><input type="range" id="prF" min="1" max="12" value="5"></div>
 <div class="checks" id="prWork">Change a value to see the property.</div>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> order and grouping work for addition and multiplication, not generally for subtraction or division. Never divide by zero.</p>`;
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> commutative and associative properties apply to addition and multiplication. Identity, inverse, and closure have their own conditions. Division by zero is undefined.</p>`;
  if(norm(concept)==="terms and coefficients") return `
 <strong>Every algebraic expression is built from terms, and each variable term has a coefficient.</strong>
 <div class="formula">\\(5x + 3y - 7\\)</div>
@@ -439,26 +444,32 @@ function startEquivalentDemo(){
 function startPropertiesDemo(){
  const pick=document.getElementById("prProperty");if(!pick)return;
  const ids=["prA","prB","prC","prD","prE","prF"],sl=ids.map(id=>document.getElementById(id));
- const out=document.getElementById("prWork"),left=document.getElementById("prLeft"),right=document.getElementById("prRight"),third=document.getElementById("prThirdControls");
- const fmt=n=>Number.isFinite(n)?Number(n.toFixed(6)).toString():"Undefined";
- const fraction=(n,d)=>n+"/"+d;
+ const out=document.getElementById("prWork"),left=document.getElementById("prLeftFrac"),right=document.getElementById("prRightFrac"),third=document.getElementById("prThirdControls"),thirdDen=document.getElementById("prThirdDenControl");
+ const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t;}return a||1;};
+ const q=(n,d)=>{if(d===0)return null;if(d<0){n=-n;d=-d;}const g=gcd(n,d);return [n/g,d/g];};
+ const add=(x,y)=>q(x[0]*y[1]+y[0]*x[1],x[1]*y[1]);
+ const mul=(x,y)=>q(x[0]*y[0],x[1]*y[1]);
+ const neg=x=>q(-x[0],x[1]);
+ const div=(x,y)=>y[0]===0?null:q(x[0]*y[1],x[1]*y[0]);
+ const html=x=>{if(!x)return "<span>Undefined</span>";const n=x[0],d=x[1];return d===1?"<span>"+n+"</span>":"<span>"+n+"</span><span>"+d+"</span>";};
+ const text=x=>!x?"Undefined":x[1]===1?String(x[0]):x[0]+"/"+x[1];
  function update(){
-  const [an,b,cn,d,en,f]=sl.map(x=>Number(x.value)),a=an/b,c=cn/d,e=en/f,p=pick.value;
-  ["prAv","prBv","prCv","prDv","prEv","prFv"].forEach((id,i)=>document.getElementById(id).textContent=sl[i].value);
-  third.style.display=["assocAdd","assocMul","dist"].includes(p)?"":"none";
-  let l=0,r=0,expr="",detail="",valid=true;
-  if(p==="commAdd"){l=a+c;r=c+a;expr="a + b = b + a";}
-  if(p==="commMul"){l=a*c;r=c*a;expr="a × b = b × a";}
-  if(p==="assocAdd"){l=(a+c)+e;r=a+(c+e);expr="(a + b) + c = a + (b + c)";}
-  if(p==="assocMul"){l=(a*c)*e;r=a*(c*e);expr="(a × b) × c = a × (b × c)";}
-  if(p==="dist"){l=a*(c+e);r=a*c+a*e;expr="a × (b + c) = a × b + a × c";}
-  if(p==="addId"){l=a+0;r=a;expr="a + 0 = a";}
-  if(p==="mulId"){l=a*1;r=a;expr="a × 1 = a";}
-  if(p==="inverse"){l=a+(-a);r=0;expr="a + (−a) = 0";}
-  if(p==="closure"){valid=cn!==0;l=valid?a/c:NaN;r=valid?(an*d)/(b*cn):NaN;expr="(a/b) ÷ (c/d) = (ad)/(bc)";detail=valid?"The quotient is rational.":"Undefined: the divisor is zero. Change the second numerator.";}
-  left.textContent=fmt(l);right.textContent=valid?fmt(r):"Undefined";
-  const values="a = "+fraction(an,b)+", b = "+fraction(cn,d)+(third.style.display!=="none"?", c = "+fraction(en,f):"");
-  out.innerHTML="<b>"+expr+"</b><div>"+values+"</div><div>"+(detail||("Both sides = "+fmt(l)+" ✓"))+"</div>";
+  const [an,b,cn,d,en,f]=sl.map(x=>Number(x.value)),a=q(an,b),c=q(cn,d),e=q(en,f),p=pick.value;
+  ["prAv","prBv","prCv","prDv","prEv","prFv"].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=sl[i].value;});
+  const showThird=["assocAdd","assocMul","dist"].includes(p);
+  third.style.display=showThird?"":"none";thirdDen.style.display=showThird?"":"none";
+  let l,r,expr,detail="";
+  if(p==="commAdd"){l=add(a,c);r=add(c,a);expr="a + b = b + a";}
+  else if(p==="commMul"){l=mul(a,c);r=mul(c,a);expr="a × b = b × a";}
+  else if(p==="assocAdd"){l=add(add(a,c),e);r=add(a,add(c,e));expr="(a + b) + c = a + (b + c)";}
+  else if(p==="assocMul"){l=mul(mul(a,c),e);r=mul(a,mul(c,e));expr="(a × b) × c = a × (b × c)";}
+  else if(p==="dist"){l=mul(a,add(c,e));r=add(mul(a,c),mul(a,e));expr="a × (b + c) = a × b + a × c";}
+  else if(p==="addId"){l=add(a,[0,1]);r=a;expr="a + 0 = a";}
+  else if(p==="mulId"){l=mul(a,[1,1]);r=a;expr="a × 1 = a";}
+  else if(p==="inverse"){l=add(a,neg(a));r=[0,1];expr="a + (−a) = 0";}
+  else {l=div(a,c);r=l;expr="(a/b) ÷ (c/d) = (ad)/(bc)";if(!l)detail="Undefined: the divisor is zero. Change the second numerator.";}
+  left.innerHTML=html(l);right.innerHTML=html(r);
+  out.innerHTML="<b>"+expr+"</b><div style=\"display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px\"><span class=\"stacked-fraction\">"+html(a)+"</span><span>and</span><span class=\"stacked-fraction\">"+html(c)+"</span>"+(showThird?"<span>and</span><span class=\"stacked-fraction\">"+html(e)+"</span>":"")+"</div><div style=\"margin-top:6px\">"+(detail||("Both sides = <b>"+text(l)+"</b>"))+"</div>";
  }
  [...sl,pick].forEach(x=>x.addEventListener("input",update));update();
 }

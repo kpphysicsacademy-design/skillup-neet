@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-0215</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-0230</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0215";</script>
-<script src="maths-quiz-bank.js?v=20261007-0215"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-0230";</script>
+<script src="maths-quiz-bank.js?v=20261007-0230"></script>
 <script>
 (function(){
 "use strict";
@@ -62,6 +62,19 @@ function lessonHtml(){
 <strong>To compare rational numbers, convert them to a common denominator or compare their cross-products when denominators are positive.</strong>
 <div class="formula">\\(\\frac{a}{b}\\ ?\\ \\frac{c}{d}\\quad\\Longleftrightarrow\\quad ad\\ ?\\ cb\\)</div>
 <p>Example: \\(3/4\\) and \\(5/8\\): \\(3\\times8=24\\) and \\(5\\times4=20\\), so \\(3/4>5/8\\).</p>`;
+ if(norm(concept)==="cubes and cube roots") return `
+<strong>A cube is the product of a number multiplied by itself three times. A cube root asks which number produces a given perfect cube.</strong>
+<div class="formula">\\(a^3=a\\times a\\times a\\)</div>
+<p>For example, \\(4^3=4\\times4\\times4=64\\). Therefore \\(\\sqrt[3]{64}=4\\).</p>
+<div class="formula">\\(\\sqrt[3]{a^3}=a\\)</div>
+<p><b>Perfect cube:</b> the cube of an integer, such as 1, 8, 27, 64 and 125. Unlike square roots, cube roots can be negative: \\(\\sqrt[3]{-27}=-3\\).</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> an odd number has an odd cube and an even number has an even cube.</p>`;
+ if(norm(concept)==="cubes and cube roots") return `
+<div class="visual-banner"><div style="font-size:42px;font-weight:950;line-height:1;color:#f3f4f6"><span id="cuben">4</span><sup style="font-size:22px">3</sup></div><div class="eq">=</div><div class="value-box"><small>CUBE VALUE</small><strong id="cubevalue">64</strong><span class="pill" id="cubepill">4³ = 64</span></div></div>
+<div class="props"><div class="prop"><span>Number</span><strong id="cubenval">4</strong></div><div class="prop"><span>Cube</span><strong id="cubecval">64</strong></div><div class="prop"><span>Cube root</span><strong id="cuberootval">4</strong></div><div class="prop"><span>Perfect cube</span><strong id="cubeperfect">Yes</strong></div></div>
+<div class="control"><div class="head"><span>Number</span><span class="val" id="cubenv">4</span></div><input class="range" id="cubeslider" type="range" min="-20" max="20" value="4"></div>
+<div class="checks" id="cubework"></div>
+<div class="presets"><button class="preset cubep" data-n="2">2³</button><button class="preset cubep" data-n="3">3³</button><button class="preset cubep" data-n="5">5³</button><button class="preset cubep" data-n="-3">−3³</button></div>`;
  if(norm(concept)==="powers and exponents") return `
 <strong>A power is a compact way to write repeated multiplication of the same number.</strong>
 <div class="formula">\\(a^n=\\underbrace{a\\times a\\times\\cdots\\times a}_{n\\text{ factors}}\\)</div>
@@ -246,6 +259,24 @@ function startExplorer(){
   N.addEventListener("input",updateSq);
   document.querySelectorAll(".sqp").forEach(btn=>btn.addEventListener("click",()=>{N.value=btn.dataset.n;updateSq()}));
   updateSq();return;
+ }
+ if(norm(concept)==="cubes and cube roots"){
+  const N=document.getElementById("cubeslider");
+  function updateCube(){
+   const n=Number(N.value),cube=n*n*n,root=n;
+   document.getElementById("cuben").textContent=n;
+   document.getElementById("cubenv").textContent=n;
+   document.getElementById("cubenval").textContent=n;
+   document.getElementById("cubecval").textContent=cube;
+   document.getElementById("cuberootval").textContent=root;
+   document.getElementById("cubeperfect").textContent="Yes";
+   document.getElementById("cubevalue").textContent=cube;
+   document.getElementById("cubepill").textContent=n+"³ = "+cube;
+   document.getElementById("cubework").innerHTML="<b>Cube:</b> "+n+" × "+n+" × "+n+" = "+cube+"<br><b>Cube root:</b> ∛"+cube+" = "+root+"<br><b>Conclusion:</b> "+cube+" is a perfect cube because its cube root is an integer.";
+  }
+  N.addEventListener("input",updateCube);
+  document.querySelectorAll(".cubep").forEach(btn=>btn.addEventListener("click",()=>{N.value=btn.dataset.n;updateCube()}));
+  updateCube();return;
  }
  if(norm(concept)==="powers and exponents"){
   const B=document.getElementById("pbase"),E=document.getElementById("pexp");

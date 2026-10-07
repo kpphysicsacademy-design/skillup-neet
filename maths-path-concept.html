@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261007-1945-perimeter-blank-fix">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261007-2000-perimeter-selection-image">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-1945</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-2000</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-1945";</script>
-<script src="maths-quiz-bank.js?v=20261007-1945"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-2000";</script>
+<script src="maths-quiz-bank.js?v=20261007-2000"></script>
 <script>
 (function(){
 "use strict";
@@ -402,7 +402,18 @@ if(norm(concept)==="algebraic expressions") return `
 }
 function explorerHtml(){if(norm(concept)==="perimeter") return `
 <div class="visual-banner"><div class="value-box"><small>SHAPE</small><strong id="perName">Rectangle</strong><span class="pill" id="perKind">2(l + w)</span></div><div class="eq">→</div><div class="value-box"><small>DIMENSIONS</small><strong id="perDims">8 × 5</strong><span class="pill">cm</span></div><div class="eq">→</div><div class="value-box"><small>PERIMETER</small><strong id="perValue">26 cm</strong><span class="pill">boundary</span></div></div>
-<div class="props"><div class="prop"><span>Shape</span><strong id="perShapeProp">Rectangle</strong></div><div class="prop"><span>Dimensions</span><strong id="perDimProp">8 cm × 5 cm</strong></div><div class="prop"><span>Rule</span><strong id="perRule">2(l + w)</strong></div><div class="prop"><span>Perimeter</span><strong id="perPerProp">26 cm</strong></div></div>
+<div class="concept-image" role="img" aria-label="Interactive perimeter diagram">
+<svg id="perExplorerSvg" viewBox="0 0 640 300" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="640" height="300" rx="18" fill="#f8fcf6"/>
+<g id="perExplorerShape"></g>
+<text id="perImgTitle" x="370" y="70" font-family="system-ui,sans-serif" font-size="21" font-weight="800" fill="#173f27">RECTANGLE</text>
+<text id="perImgLine1" x="370" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#263238">P = 2(l + w)</text>
+<text id="perImgLine2" x="370" y="138" font-family="system-ui,sans-serif" font-size="15" fill="#263238">8 cm × 5 cm</text>
+<text id="perImgLine3" x="370" y="168" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Perimeter = 26 cm</text>
+<text id="perImgLine4" x="370" y="198" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Boundary distance</text>
+<text x="370" y="228" font-family="system-ui,sans-serif" font-size="13" fill="#66736b">Change the selection to update the diagram</text>
+</svg>
+</div><div class="props"><div class="prop"><span>Shape</span><strong id="perShapeProp">Rectangle</strong></div><div class="prop"><span>Dimensions</span><strong id="perDimProp">8 cm × 5 cm</strong></div><div class="prop"><span>Rule</span><strong id="perRule">2(l + w)</strong></div><div class="prop"><span>Perimeter</span><strong id="perPerProp">26 cm</strong></div></div>
 <div class="control"><div class="head"><span>Choose shape</span><span class="val" id="perShapeV">Rectangle</span></div><select id="perShape"><option value="rectangle">Rectangle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="regular">Regular polygon</option></select></div>
 <div class="control"><div class="head"><span>First dimension / side</span><span class="val" id="perAVal">8 cm</span></div><input class="range" id="perA" type="range" min="2" max="20" value="8"></div>
 <div class="control" id="perBControl"><div class="head"><span>Second dimension</span><span class="val" id="perBVal">5 cm</span></div><input class="range" id="perB" type="range" min="2" max="20" value="5"></div>
@@ -582,6 +593,8 @@ app.addEventListener("click",function(e){if(e.target.closest(".preset,.next,.opt
 function startExplorer(){if(norm(concept)==="perimeter"){
  const S=document.getElementById("perShape"),A=document.getElementById("perA"),B=document.getElementById("perB"),N=document.getElementById("perN");
  if(!S||!A||!B||!N)return;
+ const shapeHost=document.getElementById("perExplorerShape");
+ const imgTitle=document.getElementById("perImgTitle"),imgLine1=document.getElementById("perImgLine1"),imgLine2=document.getElementById("perImgLine2"),imgLine3=document.getElementById("perImgLine3"),imgLine4=document.getElementById("perImgLine4");
  let triC=9;
  function updatePer(){
   const shape=S.value,a=+A.value,b=+B.value,n=+N.value;
@@ -593,6 +606,29 @@ function startExplorer(){if(norm(concept)==="perimeter"){
   const name=shape==="rectangle"?"Rectangle":shape==="square"?"Square":shape==="triangle"?"Triangle":"Regular polygon";
   document.getElementById("perName").textContent=name;document.getElementById("perKind").textContent=kind;document.getElementById("perDims").textContent=dim;document.getElementById("perValue").textContent=p+" cm";document.getElementById("perShapeProp").textContent=name;document.getElementById("perDimProp").textContent=dim+" cm";document.getElementById("perRule").textContent=rule;document.getElementById("perPerProp").textContent=p+" cm";document.getElementById("perShapeV").textContent=name;document.getElementById("perAVal").textContent=a+" cm";document.getElementById("perBVal").textContent=shape==="triangle"?b+" cm":b+" cm";document.getElementById("perNVal").textContent=n;
   document.getElementById("perWork").innerHTML=shape==="rectangle"?"<b>Explorer check:</b> P = 2("+a+" + "+b+") = "+p+" cm.":shape==="square"?"<b>Explorer check:</b> P = 4 × "+a+" = "+p+" cm.":shape==="triangle"?"<b>Explorer check:</b> P = "+a+" + "+b+" + "+triC+" = "+p+" cm.":"<b>Explorer check:</b> P = "+n+" × "+a+" = "+p+" cm.";
+  if(shapeHost){
+   const scale=9, x=55, y=215;
+   let svg="";
+   if(shape==="rectangle"){
+    const w=Math.max(150,Math.min(270,a*scale)),h=Math.max(90,Math.min(150,b*scale));
+    svg='<rect x="'+x+'" y="'+(y-h)+'" width="'+w+'" height="'+h+'" rx="4" fill="#eaf8e6" stroke="#173f27" stroke-width="5"/><path d="M'+x+' '+(y-h-12)+'H'+(x+w)+' M'+(x-12)+' '+(y-h)+'V'+y+'" stroke="#60a5fa" stroke-width="4" fill="none"/><text x="'+(x+w/2)+'" y="'+(y-h-20)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#2563eb">'+a+' cm</text><text x="'+(x-22)+'" y="'+(y-h/2)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#b45309">'+b+' cm</text>';
+   }else if(shape==="square"){
+    const side=Math.max(110,Math.min(175,a*scale)),sx=120,sy=215-side;
+    svg='<rect x="'+sx+'" y="'+sy+'" width="'+side+'" height="'+side+'" rx="4" fill="#eaf8e6" stroke="#173f27" stroke-width="5"/><path d="M'+sx+' '+(sy-12)+'H'+(sx+side)+'" stroke="#60a5fa" stroke-width="4"/><text x="'+(sx+side/2)+'" y="'+(sy-20)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#2563eb">'+a+' cm</text>';
+   }else if(shape==="triangle"){
+    const pts="55,215 205,65 345,215";
+    svg='<polygon points="'+pts+'" fill="#eaf8e6" stroke="#173f27" stroke-width="5"/><text x="130" y="235" text-anchor="middle" font-size="15" font-weight="800" fill="#2563eb">'+a+' cm</text><text x="278" y="140" font-size="15" font-weight="800" fill="#2563eb">'+triC+' cm</text><text x="125" y="130" font-size="15" font-weight="800" fill="#2563eb">'+b+' cm</text>';
+   }else{
+    const cx=200,cy=145,r=75,pts=[]; for(let k=0;k<n;k++){const ang=-Math.PI/2+k*2*Math.PI/n;pts.push((cx+r*Math.cos(ang)).toFixed(1)+","+(cy+r*Math.sin(ang)).toFixed(1));}
+    svg='<polygon points="'+pts.join(" ")+'" fill="#eaf8e6" stroke="#173f27" stroke-width="5"/><text x="200" y="250" text-anchor="middle" font-size="15" font-weight="800" fill="#2563eb">'+n+' sides × '+a+' cm</text>';
+   }
+   shapeHost.innerHTML=svg;
+   imgTitle.textContent=name.toUpperCase();
+   imgLine1.textContent=rule;
+   imgLine2.textContent=dim+" cm";
+   imgLine3.textContent="Perimeter = "+p+" cm";
+   imgLine4.textContent=shape==="rectangle"?"Two lengths + two widths":shape==="square"?"Four equal sides":shape==="triangle"?"Add the 3 sides":"Add all "+n+" equal sides";
+  }
   scheduleMath();
  }
  [S,A,B,N].forEach(el=>el.addEventListener("input",updatePer));S.addEventListener("change",updatePer);

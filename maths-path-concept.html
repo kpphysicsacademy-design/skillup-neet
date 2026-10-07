@@ -80,6 +80,13 @@ function scheduleMath(){
  clearTimeout(mathTimer);
  mathTimer=setTimeout(refreshMath,40);
 }
+function whenMathJaxReady(){
+ if(window.MathJax&&window.MathJax.startup&&window.MathJax.startup.promise){
+  window.MathJax.startup.promise.then(function(){refreshMath();}).catch(function(){});
+ }else{
+  setTimeout(whenMathJaxReady,100);
+ }
+}
 
 function lessonHtml(){
 if(norm(concept)==="algebraic identities") return `
@@ -593,7 +600,8 @@ function startQuiz(){
  function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.textContent=item[3]||"";ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }
-startExplorer();startQuiz();refreshMath();
+startExplorer();startQuiz();refreshMath();whenMathJaxReady();
+window.addEventListener("load",function(){whenMathJaxReady();});
 })();
 </script>
 </body>

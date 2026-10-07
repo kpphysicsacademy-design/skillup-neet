@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-1015</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-1515</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-1500";</script>
-<script src="maths-quiz-bank.js?v=20261007-1500"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-1515";</script>
+<script src="maths-quiz-bank.js?v=20261007-1515"></script>
 <script>
 (function(){
 "use strict";
@@ -145,11 +145,9 @@ function lessonHtml(){if(norm(concept)==="polygons") return `
 <div class="concept-image" role="img" aria-label="Regular hexagon diagram showing six equal sides, six equal angles and diagonals">
 <svg viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="640" height="300" rx="18" fill="#f8fcf6"/>
-<polygon id="polyShape" points="170,55 285,55 345,150 285,245 170,245 110,150" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
-<line id="polyDiagLine1" x1="170" y1="55" x2="345" y2="150" stroke="#58cc02" stroke-width="3" stroke-dasharray="8 7"/>
-<line id="polyDiagLine2" x1="285" y1="55" x2="285" y2="245" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>
-<line id="polyDiagLine3" x1="345" y1="150" x2="170" y2="245" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8 7"/>
-<circle cx="170" cy="55" r="6" fill="#173f27"/><circle cx="285" cy="55" r="6" fill="#173f27"/><circle cx="345" cy="150" r="6" fill="#173f27"/><circle cx="285" cy="245" r="6" fill="#173f27"/><circle cx="170" cy="245" r="6" fill="#173f27"/><circle cx="110" cy="150" r="6" fill="#173f27"/>
+<polygon id="polyShape" points="230,55 350,150 230,245 110,150" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
+<g id="polyDiags"></g>
+<g id="polyVertices"></g>
 <text id="polyImgTitle" x="415" y="78" font-family="system-ui,sans-serif" font-size="24" font-weight="800" fill="#173f27">REGULAR HEXAGON</text>
 <text id="polyImgSides" x="415" y="116" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal sides</text>
 <text id="polyImgAngles" x="415" y="148" font-family="system-ui,sans-serif" font-size="18" fill="#263238">6 equal interior angles</text>
@@ -158,7 +156,7 @@ function lessonHtml(){if(norm(concept)==="polygons") return `
 <text x="415" y="250" font-family="system-ui,sans-serif" font-size="15" fill="#66736b">Diagonal joins non-adjacent vertices</text>
 </svg>
 </div>
-<div class="visual-banner"><div class="value-box"><small>HEXAGON</small><strong style="color:#60a5fa">\\(n=6\\)</strong><span class="pill">6 sides</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong style="color:#fbbf24">\\(720^\\circ\\)</strong><span class="pill">\\((6-2)\\times180^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong style="color:#34d399">9</strong><span class="pill">\\(6(6-3)/2\\)</span></div></div>
+<div class="visual-banner"><div class="value-box"><small id="polyLessonName">HEXAGON</small><strong id="polyLessonN" style="color:#60a5fa">\\(n=6\\)</strong><span class="pill" id="polyLessonSides">6 sides</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong id="polyLessonSum" style="color:#fbbf24">\\(720^\\circ\\)</strong><span class="pill" id="polyLessonFormula">\\((6-2)\\times180^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong id="polyLessonDiag" style="color:#34d399">9</strong><span class="pill" id="polyLessonDiagFormula">\\(6(6-3)/2\\)</span></div></div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> identify \\(n\\) first, then choose the correct polygon formula.</p>`;
 if(norm(concept)==="factorisation basics") return `
 <strong>Factorisation means writing an algebraic expression as a product of simpler factors.</strong>
@@ -454,14 +452,35 @@ if(norm(concept)==="polygons"){
  const names={3:"Triangle",4:"Quadrilateral",5:"Pentagon",6:"Hexagon",7:"Heptagon",8:"Octagon",9:"Nonagon",10:"Decagon",11:"Undecagon",12:"Dodecagon"};
  function updatePoly(){
   const n=+S.value, sum=(n-2)*180, interior=sum/n, exterior=360/n, diagonals=n*(n-3)/2;
-  const pts=[]; for(let k=0;k<n;k++){const a=-Math.PI/2+k*2*Math.PI/n;pts.push((230+120*Math.cos(a)).toFixed(1)+","+ (150+95*Math.sin(a)).toFixed(1));}
-  const shape=document.getElementById("polyShape"); if(shape)shape.setAttribute("points",pts.join(" "));
+  const pts=[]; for(let k=0;k<n;k++){const a=-Math.PI/2+k*2*Math.PI/n;pts.push([230+120*Math.cos(a),150+95*Math.sin(a)]);}
+  const pointText=pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
+  const shape=document.getElementById("polyShape"); if(shape)shape.setAttribute("points",pointText);
+  const vertices=document.getElementById("polyVertices"),diags=document.getElementById("polyDiags");
+  if(vertices){vertices.innerHTML=pts.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="6" fill="#173f27"/>').join("");}
+  if(diags){
+    let d="";
+    const diagPairs=[];
+    for(let a=0;a<n;a++){for(let b=a+1;b<n;b++){if(b!==a+1 && !(a===0&&b===n-1))diagPairs.push([a,b]);}}
+    diagPairs.slice(0,Math.min(3,diagPairs.length)).forEach((pair,i)=>{
+      const p=pts[pair[0]],q=pts[pair[1]],dash=i===0?"#58cc02":(i===1?"#60a5fa":"#f59e0b");
+      d+='<line x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="'+dash+'" stroke-width="3" stroke-dasharray="8 7"/>';
+    });
+    diags.innerHTML=d;
+  }
   const title=document.getElementById("polyImgTitle"), sides=document.getElementById("polyImgSides"), angles=document.getElementById("polyImgAngles"), imgSum=document.getElementById("polyImgSum"), imgDiag=document.getElementById("polyImgDiag");
   if(title)title.textContent="REGULAR "+(names[n]||("POLYGON WITH "+n+" SIDES")).toUpperCase();
   if(sides)sides.textContent=n+" equal sides";
   if(angles)angles.textContent=n+" equal interior angles";
   if(imgSum)imgSum.textContent="Interior sum = "+sum+"°";
   if(imgDiag)imgDiag.textContent="Diagonals = "+diagonals;
+  const lessonName=document.getElementById("polyLessonName"), lessonN=document.getElementById("polyLessonN"), lessonSides=document.getElementById("polyLessonSides"), lessonSum=document.getElementById("polyLessonSum"), lessonFormula=document.getElementById("polyLessonFormula"), lessonDiag=document.getElementById("polyLessonDiag"), lessonDiagFormula=document.getElementById("polyLessonDiagFormula");
+  if(lessonName)lessonName.textContent=(names[n]||("POLYGON WITH "+n+" SIDES")).toUpperCase();
+  if(lessonN)lessonN.textContent="n = "+n;
+  if(lessonSides)lessonSides.textContent=n+" sides";
+  if(lessonSum)lessonSum.textContent=sum+"°";
+  if(lessonFormula)lessonFormula.textContent="("+n+"−2) × 180°";
+  if(lessonDiag)lessonDiag.textContent=diagonals;
+  if(lessonDiagFormula)lessonDiagFormula.textContent=n+"("+n+"−3)/2";
   document.getElementById("polyN").textContent=n; document.getElementById("polyName").textContent=names[n]||("Polygon with "+n+" sides");
   document.getElementById("polySum").textContent=sum+"°"; document.getElementById("polyInterior").textContent=interior+"°"; document.getElementById("polyExterior").textContent=exterior+"°";
   document.getElementById("polyDiag").textContent=diagonals; document.getElementById("polyDiag2").textContent=diagonals; document.getElementById("polySliderV").textContent=n;

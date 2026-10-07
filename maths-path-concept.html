@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261007-1000</title>
+<title>SkillUp Mathematics • Concept Practice • v20261007-1015</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261006-quiz">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-1000";</script>
-<script src="maths-quiz-bank.js?v=20261007-1000"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261007-1015";</script>
+<script src="maths-quiz-bank.js?v=20261007-1015"></script>
 <script>
 (function(){
 "use strict";
@@ -596,8 +596,8 @@ function startQuiz(){
  const questions=quizSource.slice(0,30), total=questions.length;let i=0,score=0,answered=false;
  host.innerHTML='<div class="quiz-head"><span class="progress" id="qp">Question 1 of '+total+'</span><span class="progress" id="qs">Score 0</span></div><div class="bar"><div class="fill" id="qf"></div></div><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="explain" id="explain"></div><button class="next" id="next" disabled>Next</button>';
  const qno=document.getElementById("qno"),q=document.getElementById("question"),opts=document.getElementById("options"),fb=document.getElementById("feedback"),ex=document.getElementById("explain"),next=document.getElementById("next");
- function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.innerHTML=item[0];opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+esc(o)+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));if(window.MathJax)window.MathJax.typesetPromise([q]).catch(()=>{})}
- function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.textContent=item[3]||"";ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score}
+ function render(){answered=false;next.disabled=true;fb.textContent="";ex.textContent="";ex.style.display="none";const item=questions[i];qno.textContent="MASTERY PRACTICE • "+(i+1);q.innerHTML=mathifyText(item[0]);opts.innerHTML=item[1].map((o,j)=>'<button class="opt" data-i="'+j+'">'+mathifyText(esc(o))+'</button>').join("");document.getElementById("qp").textContent="Question "+(i+1)+" of "+total;document.getElementById("qf").style.width=(i/total*100)+"%";document.getElementById("qs").textContent="Score "+score;opts.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>answer(+btn.dataset.i)));if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([q,opts]).catch(()=>{})}
+ function answer(j){if(answered)return;answered=true;const item=questions[i],correct=item[2];opts.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add("correct");else if(k===j)b.classList.add("wrong")});if(j===correct){score++;fb.textContent="Correct";}else fb.textContent="Review the highlighted answer";ex.innerHTML=mathifyText(esc(item[3]||""));ex.style.display="block";next.disabled=false;document.getElementById("qs").textContent="Score "+score;scheduleMath()}
  next.addEventListener("click",()=>{i++;if(i>=total){host.innerHTML='<div class="result"><div class="score">'+score+' / '+total+'</div><p>Mastery quiz complete for <b>'+esc(title)+'</b>.</p><button class="next" id="again">Try Again</button></div>';document.getElementById("again").onclick=()=>startQuiz();return}render()});render();
 }
 startExplorer();startQuiz();refreshMath();whenMathJaxReady();

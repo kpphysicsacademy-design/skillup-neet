@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0555-properties-live-fractions">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0610-powers-exponents-interactive">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-0555</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-0610</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 </style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0555">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0510";</script>
-<script src="maths-quiz-bank.js?v=20261008-0555"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0610">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0610";</script>
+<script src="maths-quiz-bank.js?v=20261008-0610"></script>
 <script>
 (function(){
 "use strict";
@@ -285,6 +285,26 @@ if(norm(concept)==="quadrilaterals") return `
 <div class="visual-banner"><div class="value-box"><small id="quadLessonType">QUADRILATERAL</small><strong id="quadLessonSides" style="color:#60a5fa">4 sides</strong><span class="pill">4 vertices</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong id="quadLessonSum" style="color:#fbbf24">360°</strong><span class="pill">\\(4\\times90^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong id="quadLessonDiag" style="color:#34d399">2</strong><span class="pill">opposite vertices</span></div></div>
 <p><b>Key properties:</b> opposite angles of a parallelogram are equal and adjacent angles are supplementary. Rectangle diagonals are equal. Rhombus diagonals are perpendicular. A square combines rectangle and rhombus properties.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> start with the 360° angle-sum rule, then identify the special quadrilateral from its side, angle, parallel-line, or diagonal properties.</p>`;
+if(norm(concept)==="powers and exponents") return `
+<strong>Change the base and exponent to see the power change live.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>BASE</small><strong id="peBase">2</strong></div>
+<div class="eq">^</div>
+<div class="value-box"><small>EXPONENT</small><strong id="peExp">3</strong></div>
+<div class="eq">=</div>
+<div class="value-box"><small>VALUE</small><strong id="peValue">8</strong></div>
+</div>
+<div class="props">
+<div class="prop"><span>Power</span><strong id="pePower">2³</strong></div>
+<div class="prop"><span>Expanded</span><strong id="peExpanded">2 × 2 × 2</strong></div>
+<div class="prop"><span>Base</span><strong id="peBaseProp">2</strong></div>
+<div class="prop"><span>Exponent</span><strong id="peExpProp">3</strong></div>
+</div>
+<div class="control"><div class="head"><span>Base</span><span class="val" id="peBaseSliderVal">2</span></div><input class="range" id="peBaseSlider" type="range" min="1" max="9" value="2"></div>
+<div class="control"><div class="head"><span>Exponent</span><span class="val" id="peExpSliderVal">3</span></div><input class="range" id="peExpSlider" type="range" min="0" max="6" value="3"></div>
+<div class="checks" id="peWork"><b>Result:</b> 2³ = 2 × 2 × 2 = 8. The exponent tells how many times the base is used as a factor.</div>
+<div class="presets"><button class="preset peP" data-b="2" data-e="3">2³</button><button class="preset peP" data-b="5" data-e="2">5²</button><button class="preset peP" data-b="3" data-e="4">3⁴</button><button class="preset peP" data-b="10" data-e="2">10²</button></div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the base is the repeated factor and the exponent tells how many times it is multiplied by itself. Any non-zero number raised to the power 0 equals 1.</p>`;
 if(norm(concept)==="rational numbers") return `
 <div class="visual-banner"><div class="value-box"><small>FRACTION</small><strong class="stacked-fraction"><span id="rnNv">3</span><span id="rnDv">5</span></strong></div><div class="eq">→</div><div class="value-box"><small>DECIMAL VALUE</small><strong id="rnrval">0.600</strong></div></div>
 <div class="props"><div class="prop"><span>Numerator</span><strong id="rnv">3</strong></div><div class="prop"><span>Denominator</span><strong id="rdv">5</strong></div><div class="prop"><span>Fraction</span><strong id="rfrac">3 / 5</strong></div><div class="prop"><span>Decimal</span><strong id="rdecimal">0.600</strong></div></div>
@@ -547,6 +567,26 @@ function startComparingRationalDemo(){
  }));
  update();
 }
+function startPowersDemo(){
+ if(norm(concept)!=="powers and exponents")return;
+ const bs=document.getElementById("peBaseSlider"),es=document.getElementById("peExpSlider");
+ if(!bs||!es)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const supers={0:"⁰",1:"¹",2:"²",3:"³",4:"⁴",5:"⁵",6:"⁶"};
+ function update(){
+  const b=Math.max(1,Number(bs.value)),e=Math.max(0,Number(es.value)),value=Math.pow(b,e);
+  const power=String(b)+(supers[e]||("^"+e));
+  const expanded=e===0?"1":Array(e).fill(String(b)).join(" × ");
+  set("peBase",b);set("peExp",e);set("peValue",value);
+  set("pePower",power);set("peExpanded",expanded);set("peBaseProp",b);set("peExpProp",e);
+  set("peBaseSliderVal",b);set("peExpSliderVal",e);
+  const work=document.getElementById("peWork");
+  if(work)work.innerHTML="<b>Result:</b> "+power+" = "+expanded+" = "+value+". The exponent tells how many times the base is used as a factor.";
+ }
+ bs.addEventListener("input",update);es.addEventListener("input",update);
+ document.querySelectorAll(".peP").forEach(btn=>btn.addEventListener("click",()=>{bs.value=btn.dataset.b;es.value=btn.dataset.e;update();}));
+ update();
+}
 function startRationalDemo(){
  if(norm(concept)!=="rational numbers")return;
  const ns=document.getElementById("rnslider"),ds=document.getElementById("rdslider");
@@ -603,7 +643,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

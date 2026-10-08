@@ -2443,7 +2443,7 @@ function startFactorTheoremBasicsDemo(){
  if(!mode||!a||!b||!cc||!d||!x)return;
  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
  const fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(3)));
- const expr=(A,B,C,D,deg)=>{const p=[];if(deg===3&&A!==0)p.push((A===1?"":A===-1?"−":A)+"x³");if(B!==0)p.push((p.length?(B>0?" + ":" − "):"")+(Math.abs(B)===1?"":Math.abs(B))+"x²");if(C!==0)p.push((p.length?(C>0?" + ":" − "):"")+(Math.abs(C)===1&&p.length?"":Math.abs(C))+"x");if(D!==0)p.push((p.length?(D>0?" + ":" − "):"")+Math.abs(D));return p.join("")||"0";};
+ const expr=(A,B,C,D,deg)=>{const p=[];if(deg===2){if(A!==0)p.push((A===1?"":A===-1?"−":A)+"x²");if(B!==0)p.push((p.length?(B>0?" + ":" − "):"")+(Math.abs(B)===1&&p.length?"":Math.abs(B))+"x");if(C!==0)p.push((p.length?(C>0?" + ":" − "):"")+Math.abs(C));}else{if(A!==0)p.push((A===1?"":A===-1?"−":A)+"x³");if(B!==0)p.push((p.length?(B>0?" + ":" − "):"")+(Math.abs(B)===1?"":Math.abs(B))+"x²");if(C!==0)p.push((p.length?(C>0?" + ":" − "):"")+(Math.abs(C)===1?"":Math.abs(C))+"x");if(D!==0)p.push((p.length?(D>0?" + ":" − "):"")+Math.abs(D));}return p.join("")||"0";};
  const update=()=>{
   const deg=mode.value==="cubic"?3:2;let A=+a.value,B=+b.value,C=+cc.value,D=+d.value,k=+x.value;
   if(A===0){A=1;a.value=1;}
@@ -2456,7 +2456,7 @@ function startFactorTheoremBasicsDemo(){
    if(deg===2) quotient=A+"x "+((B-A*k)>=0?"+ ":"− ")+Math.abs(B-A*k);
    else {const q1=B+A*k,q0=C+k*q1;quotient=A+"x² "+(q1>=0?"+ ":"− ")+Math.abs(q1)+"x "+(q0>=0?"+ ":"− ")+Math.abs(q0);}
   }
-  set("ftbExpression",polynomial);set("ftbXVal",k);set("ftbValue",fmt(value));set("ftbRuleVal","P("+k+") = "+fmt(value));set("ftbFactorVal",divisible?"x − "+k+" is a factor":"x − "+k+" is not a factor");set("ftbQuotientVal",quotient);set("ftbModeVal",deg===3?"Cubic":"Quadratic");set("ftbAVal",a.value);set("ftbBVal",b.value);set("ftbCVal",cc.value);set("ftbDVal",d.value);
+  set("ftbExpression",polynomial);set("ftbModeLabel",deg===3?"Cubic":"Quadratic");set("ftbXVal",k);set("ftbValue",fmt(value));set("ftbRuleVal","P("+k+") = "+fmt(value));set("ftbFactorVal",divisible?"x − "+k+" is a factor":"x − "+k+" is not a factor");set("ftbQuotientVal",quotient);set("ftbModeVal",deg===3?"Cubic":"Quadratic");set("ftbAVal",a.value);set("ftbBVal",b.value);set("ftbCVal",cc.value);set("ftbDVal",d.value);
   const point=document.getElementById("ftbPoint"),label=document.getElementById("ftbPointLabel"),px=70+(k+6)*41.6667,py=170-Math.max(-70,Math.min(70,value))*0.65;
   if(point){point.setAttribute("cx",px);point.setAttribute("cy",py);point.setAttribute("fill",divisible?"#58cc02":"#ef9b94")}
   if(label){label.setAttribute("x",px);label.setAttribute("y",py-48);label.textContent="("+k+", "+fmt(value)+")"}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-linear-equations-live">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-basic-geometric-ideas-live">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-linear-equations-live</title>
@@ -41,7 +41,15 @@
  .control{margin-top:9px!important}
  .checks{font-size:10px!important}
 }
-.algebra-lesson .visual-banner{margin-top:10px}.terms-lesson .visual-banner{margin-top:10px}.terms-lesson .value-box strong{color:#60a5fa}.terms-lesson .formula{font-size:20px}.terms-lesson .checks{font-size:12px}.terms-lesson .preset{font-weight:900}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
+.algebra-lesson .visual-banner{margin-top:10px}.terms-lesson .visual-banner{margin-top:10px}.terms-lesson .value-box strong{color:#60a5fa}.terms-lesson .formula{font-size:20px}.terms-lesson .checks{font-size:12px}.terms-lesson .preset{font-weight:900}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}<style>
+.geometry-lesson .geometry-svg{width:100%;display:block;border:1px solid var(--line);border-radius:14px;background:#f8fcf6;margin-top:10px}
+.geometry-lesson .geo-point{fill:#58cc02;stroke:#173f27;stroke-width:3}
+.geometry-lesson .geo-line{stroke:#173f27;stroke-width:5;stroke-linecap:round}
+.geometry-lesson .geo-accent{stroke:#60a5fa;stroke-width:5;stroke-linecap:round}
+.geometry-lesson .geo-arc{fill:none;stroke:#f59e0b;stroke-width:4}
+.geometry-lesson .geo-label{font:800 18px system-ui,sans-serif;fill:#173f27}
+.geometry-lesson .geo-note{font:600 14px system-ui,sans-serif;fill:#66736b}
+</style></style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-linear-equations-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-linear-equations-live";</script>
@@ -178,7 +186,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson,.factor-lesson,.linear-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson,.factor-lesson,.linear-lesson,.geometry-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -365,7 +373,53 @@ function linearEquationsLessonHtml(){return `
 <div class="formula">ax + b = c &nbsp;→&nbsp; x = (c − b) / a</div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> isolate x by undoing the constant first, then divide by the coefficient.</p>
 </div>`;}
+function basicGeometricIdeasLessonHtml(){return `
+<div class="geometry-lesson">
+<strong>Change the idea and value to see the geometry change live.</strong>
+<div class="control"><div class="head"><span>Choose a basic geometric idea</span><span class="val" id="bgiTypeVal">Line segment</span></div>
+<select id="bgiTypeSelect">
+ <option value="segment">Line segment</option>
+ <option value="ray">Ray</option>
+ <option value="line">Line</option>
+ <option value="angle">Angle</option>
+</select></div>
+<div class="visual-banner">
+ <div class="value-box"><small id="bgiLeftLabel">SEGMENT</small><strong id="bgiLeft">8 cm</strong><span class="pill" id="bgiLeftPill">2 endpoints</span></div>
+ <div class="eq">→</div>
+ <div class="value-box"><small id="bgiMiddleLabel">MEASURE</small><strong id="bgiMiddle">8 cm</strong><span class="pill" id="bgiMiddlePill">finite</span></div>
+ <div class="eq">→</div>
+ <div class="value-box"><small id="bgiRightLabel">KEY IDEA</small><strong id="bgiRight">2 endpoints</strong><span class="pill" id="bgiRightPill">closed ends</span></div>
+</div>
+<svg class="geometry-svg" id="bgiSvg" viewBox="0 0 700 280" role="img" aria-label="Interactive basic geometric ideas diagram" xmlns="http://www.w3.org/2000/svg">
+ <rect width="700" height="280" rx="16" fill="#f8fcf6"/>
+ <g id="bgiShape"></g>
+ <text id="bgiImgTitle" x="405" y="72" class="geo-label">LINE SEGMENT</text>
+ <text id="bgiImgLine1" x="405" y="108" class="geo-note">A finite part of a line</text>
+ <text id="bgiImgLine2" x="405" y="138" class="geo-note">2 endpoints</text>
+ <text id="bgiImgLine3" x="405" y="168" class="geo-note">Length = 8 cm</text>
+ <text id="bgiImgLine4" x="405" y="198" class="geo-note">It has a definite measure</text>
+</svg>
+<div class="props">
+ <div class="prop"><span>Type</span><strong id="bgiTypeProp">Line segment</strong></div>
+ <div class="prop"><span>Measure</span><strong id="bgiMeasureProp">8 cm</strong></div>
+ <div class="prop"><span>Endpoints</span><strong id="bgiEndsProp">2</strong></div>
+ <div class="prop"><span>Key property</span><strong id="bgiPropertyProp">Finite length</strong></div>
+</div>
+<div class="control" id="bgiMeasureControl"><div class="head"><span id="bgiSliderLabel">Segment length</span><span class="val" id="bgiSliderVal">8</span></div><input id="bgiSlider" class="range" type="range" min="2" max="20" value="8" step="1"></div>
+<div class="checks" id="bgiWork"><b>Result:</b> A line segment has 2 endpoints and a finite length of 8 cm.</div>
+<div class="presets">
+ <button class="preset bgiP" data-t="segment" data-v="8">Segment 8</button>
+ <button class="preset bgiP" data-t="segment" data-v="14">Segment 14</button>
+ <button class="preset bgiP" data-t="ray" data-v="10">Ray</button>
+ <button class="preset bgiP" data-t="line" data-v="10">Line</button>
+ <button class="preset bgiP" data-t="angle" data-v="60">60° angle</button>
+ <button class="preset bgiP" data-t="angle" data-v="120">120° angle</button>
+</div>
+<p><b>Point:</b> an exact position with no length. <b>Line:</b> extends endlessly in both directions. <b>Ray:</b> starts at one endpoint and extends endlessly in one direction. <b>Segment:</b> has two endpoints and a finite length. <b>Angle:</b> is formed by two rays with a common endpoint.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> look at endpoints and whether the figure extends forever or has a finite measure. For an angle, the measure tells how wide the two rays open.</p>
+</div>`;}
 function lessonHtml(){
+if(norm(concept)==="basic geometric ideas") return basicGeometricIdeasLessonHtml();
 if(norm(concept)==="linear equations in one variable") return linearEquationsLessonHtml();
 if(norm(concept)==="cubes and cube roots") return cubesLessonHtml();
 if(norm(concept)==="squares and square roots") return squaresLessonHtml();
@@ -1143,6 +1197,55 @@ function startAlgebraIdentitiesDemo(){
  document.querySelectorAll(".idP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;as.value=btn.dataset.a;bs.value=btn.dataset.b;update();}));
  update();
 }
+function startBasicGeometricIdeasDemo(){
+ if(norm(concept)!=="basic geometric ideas")return;
+ const type=document.getElementById("bgiTypeSelect"),slider=document.getElementById("bgiSlider");
+ if(!type||!slider)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ const escSvg=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ function update(){
+  const t=type.value, v=Number(slider.value), shape=document.getElementById("bgiShape");
+  let title,desc1,desc2,desc3,measure,ends,property,left,middle,right,lp,mp,rp;
+  if(t==="segment"){
+   title="LINE SEGMENT";desc1="A finite part of a line";desc2="2 endpoints";desc3="Length = "+v+" cm";
+   measure=v+" cm";ends="2";property="Finite length";left="Segment";middle=v+" cm";right="2 endpoints";lp="finite";mp="measured";rp="closed ends";
+   shape.innerHTML='<line x1="55" y1="145" x2="'+(55+v*12)+'" y2="145" class="geo-line"/><circle cx="55" cy="145" r="7" class="geo-point"/><circle cx="'+(55+v*12)+'" cy="145" r="7" class="geo-point"/><text x="50" y="178" class="geo-note">A</text><text x="'+(50+v*12)+'" y="178" class="geo-note">B</text>';
+  }else if(t==="ray"){
+   title="RAY";desc1="Starts at one endpoint";desc2="Extends endlessly one way";desc3="1 endpoint";
+   measure="∞";ends="1";property="One-way extension";left="Ray";middle="∞";right="1 endpoint";lp="one direction";mp="infinite";rp="start point";
+   shape.innerHTML='<line x1="70" y1="145" x2="350" y2="145" class="geo-accent"/><path d="M350 145 L330 134 L330 156 Z" fill="#60a5fa"/><circle cx="70" cy="145" r="7" class="geo-point"/><text x="62" y="178" class="geo-note">A</text>';
+  }else if(t==="line"){
+   title="LINE";desc1="Extends endlessly both ways";desc2="No endpoints";desc3="No finite length";
+   measure="∞";ends="0";property="Two-way extension";left="Line";middle="∞";right="0 endpoints";lp="both directions";mp="infinite";rp="no endpoints";
+   shape.innerHTML='<line x1="45" y1="145" x2="355" y2="145" class="geo-line"/><path d="M45 145 L65 134 L65 156 Z" fill="#173f27"/><path d="M355 145 L335 134 L335 156 Z" fill="#173f27"/>';
+  }else{
+   title="ANGLE";desc1="Two rays share a vertex";desc2="Measure = "+v+"°";desc3="1 common vertex";
+   measure=v+"°";ends="1 vertex";property="Opening between rays";left="Angle";middle=v+"°";right="1 vertex";lp="two rays";mp="measure";rp="common point";
+   const rad=v*Math.PI/180, x2=70+210*Math.cos(rad), y2=145-210*Math.sin(rad);
+   shape.innerHTML='<line x1="70" y1="145" x2="330" y2="145" class="geo-accent"/><line x1="70" y1="145" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" class="geo-accent"/><path d="M110 145 A40 40 0 '+(v>180?1:0)+' 0 '+(110+40*Math.cos(rad)).toFixed(1)+' '+(145-40*Math.sin(rad)) .toFixed(1)+'" class="geo-arc"/><circle cx="70" cy="145" r="7" class="geo-point"/><text x="62" y="178" class="geo-note">O</text>';
+  }
+  set("bgiTypeVal",t==="segment"?"Line segment":t==="ray"?"Ray":t==="line"?"Line":"Angle");
+  set("bgiLeft",left);set("bgiMiddle",middle);set("bgiRight",right);set("bgiLeftPill",lp);set("bgiMiddlePill",mp);set("bgiRightPill",rp);
+  set("bgiTypeProp",t==="segment"?"Line segment":t==="ray"?"Ray":t==="line"?"Line":"Angle");set("bgiMeasureProp",measure);set("bgiEndsProp",ends);set("bgiPropertyProp",property);
+  set("bgiSliderLabel",t==="angle"?"Angle measure":"Size / value");set("bgiSliderVal",v);
+  document.getElementById("bgiMeasureControl").style.display="block";
+  set("bgiImgTitle",title);set("bgiImgLine1",desc1);set("bgiImgLine2",desc2);set("bgiImgLine3",desc3);set("bgiImgLine4",property);
+  const work=document.getElementById("bgiWork");
+  if(work){
+   const name=t==="segment"?"line segment":t==="ray"?"ray":t==="line"?"line":"angle";
+   work.innerHTML="<b>Result:</b> This is a "+name+". "+desc2+". "+desc3+".";
+  }
+ }
+ [type,slider].forEach(el=>el.addEventListener("input",update));
+ type.addEventListener("change",()=>{
+  if(type.value==="angle"){slider.min="10";slider.max="170";slider.value="60";}
+  else{slider.min="2";slider.max="20";slider.value="8";}
+  update();
+ });
+ document.querySelectorAll(".bgiP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;slider.value=btn.dataset.v;type.dispatchEvent(new Event("change"));}));
+ update();
+}
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -1180,7 +1283,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

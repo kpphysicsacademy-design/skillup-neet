@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-maths-mobile-v5">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-maths-mobile-v6">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-maths-path-auditfix</title>
@@ -628,25 +628,52 @@ if(norm(concept)==="parallel lines and transversals") return `
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> identify the pair first, then apply either the equality rule or the 180° sum rule.</p>
 </div>`;
 if(norm(concept)==="quadrilaterals") return `
-<strong>A quadrilateral is a closed polygon with 4 sides, 4 vertices and 4 interior angles.</strong>
-<div class="formula">\\(\text{Interior-angle sum}=360^\\circ\\)</div>
-<p><b>Core types:</b> a parallelogram has two pairs of parallel sides; a rectangle has four right angles; a rhombus has four equal sides; a square has four equal sides and four right angles; a trapezium has one pair of parallel sides; a kite has two pairs of adjacent equal sides.</p>
-<div class="concept-image" role="img" aria-label="Quadrilateral diagram comparing common quadrilateral families">
-<svg viewBox="0 0 640 300" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-<rect x="0" y="0" width="640" height="300" rx="18" fill="#f8fcf6"/>
-<polygon id="quadShape" points="72,205 122,75 292,75 342,205" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
-<g id="quadDiags"></g><g id="quadVertices"></g>
-<text id="quadImgTitle" x="370" y="70" font-family="system-ui,sans-serif" font-size="21" font-weight="800" fill="#173f27">PARALLELOGRAM</text>
-<text id="quadImgLine1" x="370" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Opposite sides are parallel</text>
-<text id="quadImgLine2" x="370" y="138" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Opposite sides are equal</text>
-<text id="quadImgLine3" x="370" y="168" font-family="system-ui,sans-serif" font-size="15" fill="#263238">4 interior angles</text>
-<text id="quadImgLine4" x="370" y="198" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Angle sum = 360°</text>
-<text x="370" y="228" font-family="system-ui,sans-serif" font-size="13" fill="#66736b">Diagonals join opposite vertices</text>
-</svg>
+<div class="geometry-lesson quadrilateral-interactive-lesson">
+<strong>Change the quadrilateral type and angle to explore its shape and properties live.</strong>
+<div class="control"><div class="head"><span>Explore quadrilateral</span><span class="val" id="quadModeVal">Parallelogram</span></div>
+<select id="quadModeSelectLive">
+<option value="parallelogram">Parallelogram</option>
+<option value="rectangle">Rectangle</option>
+<option value="rhombus">Rhombus</option>
+<option value="square">Square</option>
+<option value="trapezium">Trapezium</option>
+<option value="kite">Kite</option>
+</select></div>
+<div class="visual-banner">
+<div class="value-box"><small>SIDES</small><strong id="quadSidesLive">4</strong><span class="pill">closed polygon</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>ANGLE SUM</small><strong id="quadSumLive">360°</strong><span class="pill">always 360°</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>DIAGONALS</small><strong id="quadDiagLive">2</strong><span class="pill">opposite vertices</span></div>
 </div>
-<div class="visual-banner"><div class="value-box"><small id="quadLessonType">QUADRILATERAL</small><strong id="quadLessonSides" style="color:#60a5fa">4 sides</strong><span class="pill">4 vertices</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong id="quadLessonSum" style="color:#fbbf24">360°</strong><span class="pill">\\(4\\times90^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong id="quadLessonDiag" style="color:#34d399">2</strong><span class="pill">opposite vertices</span></div></div>
-<p><b>Key properties:</b> opposite angles of a parallelogram are equal and adjacent angles are supplementary. Rectangle diagonals are equal. Rhombus diagonals are perpendicular. A square combines rectangle and rhombus properties.</p>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> start with the 360° angle-sum rule, then identify the special quadrilateral from its side, angle, parallel-line, or diagonal properties.</p>`;
+<svg class="geometry-svg" id="quadLiveSvg" viewBox="0 0 700 340" role="img" aria-label="Interactive quadrilateral diagram" xmlns="http://www.w3.org/2000/svg">
+<rect width="700" height="340" rx="16" fill="#f8fcf6"/>
+<polygon id="quadLiveShape" points="80,260 150,80 420,80 490,260" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
+<g id="quadLiveMarks"></g>
+<text id="quadLiveTitle" x="520" y="80" class="geo-label">PARALLELOGRAM</text>
+<text id="quadLiveLine1" x="520" y="115" class="geo-note">Opposite sides parallel</text>
+<text id="quadLiveLine2" x="520" y="145" class="geo-note">Opposite sides equal</text>
+<text id="quadLiveLine3" x="520" y="175" class="geo-note">4 interior angles</text>
+<text id="quadLiveLine4" x="520" y="205" class="geo-note">Angle sum = 360°</text>
+</svg>
+<div class="control"><div class="head"><span>Shape angle</span><span class="val" id="quadAngleVal">60°</span></div><input id="quadAngleSlider" class="range" type="range" min="35" max="145" value="60"></div>
+<div class="props">
+<div class="prop"><span>TYPE</span><strong id="quadTypePropLive">Parallelogram</strong></div>
+<div class="prop"><span>ANGLE SUM</span><strong>360°</strong></div>
+<div class="prop"><span>DIAGONALS</span><strong>2</strong></div>
+<div class="prop"><span>KEY PROPERTY</span><strong id="quadPropertyLive">Opposite sides are parallel and equal</strong></div>
+</div>
+<div class="checks" id="quadWorkLive"><b>Result:</b> A parallelogram has 4 sides and an interior-angle sum of 360°.</div>
+<div class="presets">
+<button class="preset quadLiveP" data-t="parallelogram" data-a="60">Parallelogram</button>
+<button class="preset quadLiveP" data-t="rectangle" data-a="90">Rectangle</button>
+<button class="preset quadLiveP" data-t="rhombus" data-a="60">Rhombus</button>
+<button class="preset quadLiveP" data-t="square" data-a="90">Square</button>
+<button class="preset quadLiveP" data-t="trapezium" data-a="75">Trapezium</button>
+<button class="preset quadLiveP" data-t="kite" data-a="60">Kite</button>
+</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> every quadrilateral has four sides, four vertices and interior angles totaling 360°. Special types are identified by side, angle, parallel-line and diagonal properties.</p>
+</div>`;
 if(norm(concept)==="powers and exponents") return `
 <strong>Change the base and exponent to see the power change live.</strong>
 <div class="visual-banner">
@@ -1398,6 +1425,52 @@ function startTrianglesDemo(){
  [aSlider,bSlider].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
  document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));update();
 }
+function startQuadrilateralsDemo(){
+ if(norm(concept)!=="quadrilaterals")return;
+ const mode=document.getElementById("quadModeSelectLive"),slider=document.getElementById("quadAngleSlider"); if(!mode||!slider)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function update(){
+  const t=mode.value,a=Number(slider.value);
+  const names={parallelogram:"Parallelogram",rectangle:"Rectangle",rhombus:"Rhombus",square:"Square",trapezium:"Trapezium",kite:"Kite"};
+  const props={
+   parallelogram:"Opposite sides are parallel and equal",
+   rectangle:"Four right angles; opposite sides equal",
+   rhombus:"Four equal sides; diagonals are perpendicular",
+   square:"Four equal sides and four right angles",
+   trapezium:"One pair of parallel sides",
+   kite:"Two pairs of adjacent equal sides"
+  };
+  set("quadModeVal",names[t]);set("quadSidesLive","4");set("quadSumLive","360°");set("quadDiagLive","2");set("quadAngleVal",a+"°");set("quadTypePropLive",names[t]);set("quadPropertyLive",props[t]);
+  set("quadLiveTitle",names[t].toUpperCase());set("quadLiveLine3","4 interior angles");set("quadLiveLine4","Angle sum = 360°");
+  const poly=document.getElementById("quadLiveShape"),marks=document.getElementById("quadLiveMarks");if(!poly||!marks)return;
+  const rad=a*Math.PI/180;
+  let pts;
+  if(t==="rectangle"||t==="square"){
+   const w=t==="square"?220:280,h=t==="square"?180:150;
+   pts=[{x:90,y:260},{x:90,y:260-h},{x:90+w,y:260-h},{x:90+w,y:260}];
+  }else if(t==="trapezium"){
+   const shift=Math.max(15,Math.min(95,(a-35)*0.8));
+   pts=[{x:90,y:260},{x:150+shift,y:90},{x:390-shift,y:90},{x:470,y:260}];
+  }else if(t==="kite"){
+   const dx=70+45*Math.cos(rad), top=65+25*Math.sin(rad);
+   pts=[{x:290,y:55},{x:290+dx,y:160},{x:290,y:270},{x:290-dx,y:160}];
+  }else{
+   const dx=75*Math.cos(rad),dy=75*Math.sin(rad);
+   pts=[{x:100,y:260},{x:165-dx,y:95+dy},{x:405+dx,y:95+dy},{x:470,y:260}];
+   if(t==="rhombus") pts=[{x:110,y:260},{x:290-105*Math.cos(rad),y:105-105*Math.sin(rad)},{x:470,y:260},{x:290+105*Math.cos(rad),y:105+105*Math.sin(rad)}];
+  }
+  poly.setAttribute("points",pts.map(p=>p.x.toFixed(1)+","+p.y.toFixed(1)).join(" "));
+  marks.innerHTML=pts.map((p,i)=>'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="5" class="geo-point"/><text x="'+(p.x+7).toFixed(1)+'" y="'+(p.y-8).toFixed(1)+'" class="geo-note">'+String.fromCharCode(65+i)+'</text>').join("");
+  const line1=t==="rectangle"||t==="square"?"Four right angles":t==="trapezium"?"One pair of parallel sides":t==="kite"?"Two pairs of adjacent equal sides":"Opposite sides are parallel";
+  const line2=t==="rhombus"||t==="square"?"All four sides equal":t==="kite"?"Adjacent sides are equal":t==="rectangle"||t==="parallelogram"?"Opposite sides are equal":"Non-parallel sides may differ";
+  set("quadLiveLine1",line1);set("quadLiveLine2",line2);
+  const work=document.getElementById("quadWorkLive");if(work)work.innerHTML="<b>Result:</b> "+names[t]+" has 4 sides and an interior-angle sum of 360°. "+props[t]+".";
+ }
+ [slider,mode].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
+ document.querySelectorAll(".quadLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;slider.value=btn.dataset.a;update();}));
+ update();
+}
+
 function startBasicGeometricIdeasDemo(){
  if(norm(concept)!=="basic geometric ideas")return;
  const type=document.getElementById("bgiTypeSelect"),slider=document.getElementById("bgiSlider");
@@ -1490,7 +1563,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

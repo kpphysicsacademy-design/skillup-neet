@@ -957,17 +957,17 @@ if(norm(concept)==="laws of exponents") return `
 </div>`;
 if(norm(concept)==="degree of polynomial") return `
 <div class="geometry-lesson degree-polynomial-interactive-lesson">
-<strong>Change the values and watch the polynomial degree update live.</strong>
+<strong>Change the coefficients and degree target to see the polynomial structure update live.</strong>
 <div class="visual-banner">
-<div class="value-box"><small>POLYNOMIAL</small><strong id="dopExpression">3x⁴ − 2x² + 1</strong><span class="pill">Degree <span id="dopTypeVal">4</span></span></div>
+<div class="value-box"><small>POLYNOMIAL</small><strong id="dopExpression">3x⁴ − 2x² + 1</strong><span class="pill">Target degree <span id="dopTypeVal">4</span></span></div>
 <div class="eq">→</div>
 <div class="value-box"><small>LEADING TERM</small><strong id="dopLeadingVal">3x⁴</strong><span class="pill" id="dopCoeffVal">coefficient 3</span></div>
 <div class="eq">→</div>
 <div class="value-box"><small>DEGREE</small><strong id="dopDegreeVal">4</strong><span class="pill">highest non-zero power</span></div>
 </div>
-<div class="control"><div class="head"><span>Choose degree</span><span class="val" id="dopModeVal">4</span></div>
+<div class="control"><div class="head"><span>Target degree</span><span class="val" id="dopModeVal">4</span></div>
 <select id="dopDegreeSelect"><option value="0">0 • Constant</option><option value="1">1 • Linear</option><option value="2">2 • Quadratic</option><option value="3">3 • Cubic</option><option value="4" selected>4 • Quartic</option></select></div>
-<div class="control"><div class="head"><span>Leading coefficient</span><span class="val" id="dopAVal">3</span></div><input id="dopASlider" class="range" type="range" min="-5" max="5" step="1" value="3"></div>
+<div class="control"><div class="head"><span>x⁴ coefficient</span><span class="val" id="dopAVal">3</span></div><input id="dopASlider" class="range" type="range" min="-5" max="5" step="1" value="3"></div>
 <div class="control"><div class="head"><span>x³ coefficient</span><span class="val" id="dopBVal">0</span></div><input id="dopBSlider" class="range" type="range" min="-5" max="5" step="1" value="0"></div>
 <div class="control"><div class="head"><span>x² coefficient</span><span class="val" id="dopCVal">-2</span></div><input id="dopCSlider" class="range" type="range" min="-5" max="5" step="1" value="-2"></div>
 <div class="control"><div class="head"><span>x coefficient</span><span class="val" id="dopDVal">0</span></div><input id="dopDSlider" class="range" type="range" min="-5" max="5" step="1" value="0"></div>
@@ -977,9 +977,9 @@ if(norm(concept)==="degree of polynomial") return `
 <div class="checks" id="dopWork"><b>Explorer result:</b> 3x⁴ − 2x² + 1 has highest non-zero power 4, so its degree is 4.</div>
 <div class="presets">
 <button class="preset dopP" data-deg="0" data-a="0" data-b="0" data-c="0" data-d="0" data-e="7" data-x="2">7</button>
-<button class="preset dopP" data-deg="1" data-a="2" data-b="0" data-c="0" data-d="-3" data-e="1" data-x="2">2x − 3</button>
-<button class="preset dopP" data-deg="2" data-a="1" data-b="0" data-c="-2" data-d="3" data-e="1" data-x="2">x² − 2x + 1</button>
-<button class="preset dopP" data-deg="3" data-a="1" data-b="-1" data-c="0" data-d="2" data-e="-3" data-x="2">x³ − x² + 2x − 3</button>
+<button class="preset dopP" data-deg="1" data-a="0" data-b="0" data-c="0" data-d="2" data-e="-3" data-x="2">2x − 3</button>
+<button class="preset dopP" data-deg="2" data-a="0" data-b="0" data-c="1" data-d="-2" data-e="1" data-x="2">x² − 2x + 1</button>
+<button class="preset dopP" data-deg="3" data-a="0" data-b="1" data-c="-1" data-d="2" data-e="-3" data-x="2">x³ − x² + 2x − 3</button>
 <button class="preset dopP" data-deg="4" data-a="3" data-b="0" data-c="-2" data-d="0" data-e="1" data-x="2">3x⁴ − 2x² + 1</button>
 </div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the degree is the highest exponent whose coefficient is not zero. A non-zero constant has degree 0.</p>
@@ -2342,21 +2342,22 @@ function startLawsOfExponentsDemo(){
 }
 function startDegreeOfPolynomialDemo(){
  if(norm(concept)!=="degree of polynomial")return;
- const sel=document.getElementById("dopDegreeSelect"),a=document.getElementById("dopASlider"),b=document.getElementById("dopBSlider"),c=document.getElementById("dopCSlider"),d=document.getElementById("dopDSlider"),e=document.getElementById("dopESlider"),x=document.getElementById("dopXSlider");
- if(!sel||!a||!b||!c||!d||!e||!x)return;
+ const sel=document.getElementById("dopDegreeSelect"),a=document.getElementById("dopASlider"),b=document.getElementById("dopBSlider"),cc=document.getElementById("dopCSlider"),d=document.getElementById("dopDSlider"),e=document.getElementById("dopESlider"),x=document.getElementById("dopXSlider");
+ if(!sel||!a||!b||!cc||!d||!e||!x)return;
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
  const term=(n,p)=>{if(!n)return "";const z=Math.abs(n),s=p===0?String(z):(z===1?"":z)+"x"+(p===1?"":p===2?"²":p===3?"³":p===4?"⁴":"^"+p);return {s,sign:n<0?"−":"+"};};
- const expr=(deg,A,B,C,D,E)=>{const arr=deg===0?[[E,0]]:[[A,deg],[B,3],[C,2],[D,1],[E,0]];let out="",seen=0;arr.forEach(([n,p])=>{if(!n)return;const t=term(n,p);out+=seen?(" "+t.sign+" "+t.s):(n<0?"−":"")+t.s;seen++;});return out||"0";};
+ const expression=(A,B,C,D,E)=>{const arr=[[A,4],[B,3],[C,2],[D,1],[E,0]];let out="",seen=0;arr.forEach(([n,p])=>{if(!n)return;const t=term(n,p);out+=seen?(" "+t.sign+" "+t.s):(n<0?"−":"")+t.s;seen++;});return out||"0";};
  function update(){
-  const deg=+sel.value;let A=+a.value,B=+b.value,C=+c.value,D=+d.value,E=+e.value,X=+x.value;
-  if(deg===0){A=B=C=D=0;a.value=b.value=c.value=d.value=0;}else if(A===0){A=1;a.value=1;}
-  const text=expr(deg,A,B,C,D,E),value=deg===0?E:A*Math.pow(X,deg)+B*X**3+C*X**2+D*X+E;
-  const arr=deg===0?[[E,0]]:[[A,deg],[B,3],[C,2],[D,1],[E,0]],nz=arr.filter(z=>z[0]!==0),lead=nz[0]||[0,0],lt=term(lead[0],lead[1]);
+  const deg=+sel.value;let A=+a.value,B=+b.value,C=+cc.value,D=+d.value,E=+e.value;
+  if(deg<4){A=0;a.value=0;} if(deg<3){B=0;b.value=0;} if(deg<2){C=0;cc.value=0;} if(deg<1){D=0;d.value=0;}
+  if(deg===0&&E===0){E=1;e.value=1;}
+  if(deg===1&&D===0){D=1;d.value=1;} if(deg===2&&C===0){C=1;cc.value=1;} if(deg===3&&B===0){B=1;b.value=1;} if(deg===4&&A===0){A=1;a.value=1;}
+  const text=expression(A,B,C,D,E),X=+x.value,value=A*X**4+B*X**3+C*X**2+D*X+E,arr=[[A,4],[B,3],[C,2],[D,1],[E,0]],nz=arr.filter(z=>z[0]!==0),lead=nz[0]||[0,0],lt=term(lead[0],lead[1]);
   set("dopExpression",text);set("dopTypeVal",deg);set("dopLeadingVal",(lead[0]<0?"−":"")+lt.s);set("dopCoeffVal","coefficient "+lead[0]);set("dopDegreeVal",deg);set("dopModeVal",deg);set("dopDegreeProp",deg);set("dopTermsProp",nz.length);set("dopLeadProp",lead[0]);set("dopValueProp",value);set("dopAVal",A);set("dopBVal",B);set("dopCVal",C);set("dopDVal",D);set("dopEVal",E);set("dopXVal",X);
   const w=document.getElementById("dopWork");if(w)w.innerHTML="<b>Explorer result:</b> "+text+" has highest non-zero power "+deg+", so its degree is "+deg+". At x = "+X+", p(x) = "+value+".";
  }
- [sel,a,b,c,d,e,x].forEach(el=>el.addEventListener("input",update));sel.addEventListener("change",update);
- document.querySelectorAll(".dopP").forEach(btn=>btn.addEventListener("click",()=>{sel.value=btn.dataset.deg;a.value=btn.dataset.a;b.value=btn.dataset.b;c.value=btn.dataset.c;d.value=btn.dataset.d;e.value=btn.dataset.e;x.value=btn.dataset.x;update();}));update();
+ [sel,a,b,cc,d,e,x].forEach(el=>el.addEventListener("input",update));sel.addEventListener("change",update);
+ document.querySelectorAll(".dopP").forEach(btn=>btn.addEventListener("click",()=>{sel.value=btn.dataset.deg;a.value=btn.dataset.a;b.value=btn.dataset.b;cc.value=btn.dataset.c;d.value=btn.dataset.d;e.value=btn.dataset.e;x.value=btn.dataset.x;update();}));update();
 }
 function startPolynomialBasicsDemo(){
  if(norm(concept)!=="polynomial basics")return;

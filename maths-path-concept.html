@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-factorisation-live">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-linear-equations-live">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-factorisation-live</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-linear-equations-live</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 .algebra-lesson .visual-banner{margin-top:10px}.terms-lesson .visual-banner{margin-top:10px}.terms-lesson .value-box strong{color:#60a5fa}.terms-lesson .formula{font-size:20px}.terms-lesson .checks{font-size:12px}.terms-lesson .preset{font-weight:900}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-factorisation-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-factorisation-live";</script>
-<script src="maths-quiz-bank.js?v=20261008-factorisation-live"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-linear-equations-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-linear-equations-live";</script>
+<script src="maths-quiz-bank.js?v=20261008-linear-equations-live"></script>
 <script>
 (function(){
 "use strict";
@@ -178,7 +178,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson,.factor-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson,.factor-lesson,.linear-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -338,6 +338,33 @@ function startVariablesDemo(){
  update();
 }
 
+function linearEquationsLessonHtml(){return `
+<div class="linear-lesson">
+<strong>Change the coefficients and constant to solve the equation instantly.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>EQUATION</small><strong id="leEquation">3x + 6 = 18</strong><span class="pill">change values</span></div>
+ <div class="eq">→</div>
+ <div class="value-box"><small>SOLUTION</small><strong id="leSolution">x = 4</strong><span class="pill">x value</span></div>
+</div>
+<div class="props">
+ <div class="prop"><span>Coefficient a</span><strong id="leAProp">3</strong></div>
+ <div class="prop"><span>Constant b</span><strong id="leBProp">6</strong></div>
+ <div class="prop"><span>Right side c</span><strong id="leCProp">18</strong></div>
+ <div class="prop"><span>Check</span><strong id="leStatus">TRUE</strong></div>
+</div>
+<div class="control"><div class="head"><span>Coefficient a</span><span class="val" id="leASliderVal">3</span></div><input id="leASlider" class="range" type="range" min="1" max="10" value="3"></div>
+<div class="control"><div class="head"><span>Constant b</span><span class="val" id="leBSliderVal">6</span></div><input id="leBSlider" class="range" type="range" min="-20" max="20" value="6"></div>
+<div class="control"><div class="head"><span>Right side c</span><span class="val" id="leCSliderVal">18</span></div><input id="leCSlider" class="range" type="range" min="-20" max="40" value="18"></div>
+<div class="checks" id="leWork"><b>Result:</b> 3x + 6 = 18 → 3x = 12 → x = 4. Check: 3(4) + 6 = 18.</div>
+<div class="presets">
+ <button class="preset leP" data-a="2" data-b="4" data-c="14">2x + 4 = 14</button>
+ <button class="preset leP" data-a="3" data-b="6" data-c="18">3x + 6 = 18</button>
+ <button class="preset leP" data-a="5" data-b="-5" data-c="20">5x − 5 = 20</button>
+ <button class="preset leP" data-a="4" data-b="8" data-c="0">4x + 8 = 0</button>
+</div>
+<div class="formula">ax + b = c &nbsp;→&nbsp; x = (c − b) / a</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> isolate x by undoing the constant first, then divide by the coefficient.</p>
+</div>`;}
 function lessonHtml(){
 if(norm(concept)==="cubes and cube roots") return cubesLessonHtml();
 if(norm(concept)==="squares and square roots") return squaresLessonHtml();
@@ -1004,6 +1031,29 @@ function startLikeUnlikeDemo(){
  document.querySelectorAll(".luP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;p1.value=btn.dataset.p1;p2.value=btn.dataset.p2;update();}));
  update();
 }
+function startLinearEquationsDemo(){
+ if(norm(concept)!=="linear equations in one variable")return;
+ const a=document.getElementById("leASlider"),b=document.getElementById("leBSlider"),c=document.getElementById("leCSlider");
+ if(!a||!b||!c)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ const expr=(coef,constant)=>coef+"x "+(constant<0?"− "+Math.abs(constant):"+ "+constant);
+ function update(){
+  const av=Number(a.value),bv=Number(b.value),cv=Number(c.value);
+  const x=(cv-bv)/av;
+  const exact=Math.abs(x-Math.round(x))<1e-9;
+  const xs=exact?String(Math.round(x)):x.toFixed(2);
+  set("leEquation",expr(av,bv)+" = "+fmt(cv));set("leSolution","x = "+xs);
+  set("leAProp",fmt(av));set("leBProp",fmt(bv));set("leCProp",fmt(cv));
+  set("leASliderVal",fmt(av));set("leBSliderVal",fmt(bv));set("leCSliderVal",fmt(cv));set("leStatus","TRUE");
+  const lhs=av*x+bv;
+  const work=document.getElementById("leWork");
+  if(work)work.innerHTML="<b>Result:</b> "+expr(av,bv)+" = "+fmt(cv)+" → "+fmt(av)+"x = "+fmt(cv-bv)+" → x = "+xs+". Check: "+fmt(av)+"("+xs+") "+(bv<0?"− "+Math.abs(bv):"+ "+bv)+" = "+fmt(lhs.toFixed(2))+".";
+ }
+ [a,b,c].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".leP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;c.value=btn.dataset.c;update();}));
+ update();
+}
 function startFactorisationDemo(){
  if(norm(concept)!=="factorisation basics")return;
  const type=document.getElementById("facTypeSelect"),a=document.getElementById("facASlider"),b=document.getElementById("facBSlider");
@@ -1129,7 +1179,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

@@ -916,5 +916,5 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
 ["Which number has a non-terminating non-repeating decimal expansion?",["0.75","0.121212…","√2","0.625"],2,"√2 is irrational, so its decimal expansion is non-terminating and non-repeating."],
 ["Which decimal is rational?",["0.101001000100001…","π","0.272727…","√3"],2,"0.272727… is repeating, so it is rational."],
 ["Which decimal is irrational?",["0.5","0.125","0.333…","0.101001000100001…"],3,"The last decimal is non-terminating and non-repeating."],
-["For 13/50, what is the decimal expansion?",["0.026","0.13","0.26","2.6"],2,"13 ÷ 50 = 0.26."]
+["For 13/50, what is the decimal expansion?",["0.026","0.13","0.26","2.6"],2,"13 ÷ 50 = 0.26."] ]
 };

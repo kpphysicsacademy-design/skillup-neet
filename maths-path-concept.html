@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-rationalisation-basics-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-rationalisation-basics-v2">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-real-numbers-interactive-v1</title>
@@ -263,7 +263,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-decimal-expansions-interactive-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-real-numbers-interactive-v1";</script>
-<script src="maths-quiz-bank.js?v=20261008-rationalisation-basics-v1"></script>
+<script src="maths-quiz-bank.js?v=20261008-rationalisation-basics-v2"></script>
 <script src="maths-path-data.js?v=20261008-real-numbers-interactive-v2"></script>
 <script>
 (function(){
@@ -982,7 +982,7 @@ if(norm(concept)==="rationalisation basics") return `
 <div class="prop"><span>Second term</span><strong id="rbAProp">1</strong></div>
 <div class="prop"><span>Result</span><strong id="rbResultProp">√2 / 2</strong></div>
 </div>
-<div class="control"><div class="head"><span>Form</span><span class="val" id="rbDenType">single radical</span></div>
+<div class="control"><div class="head"><span>Form</span><span class="val" id="rbModeVal">single radical</span></div>
 <select class="range" id="rbMode"><option value="single">k / √n</option><option value="binomial">k / (a + √n)</option></select></div>
 <div class="control"><div class="head"><span>Numerator k</span><span class="val" id="rbKVal">1</span></div><input class="range" id="rbKSlider" type="range" min="1" max="8" value="1" step="1"></div>
 <div class="control"><div class="head"><span>Radicand n</span><span class="val" id="rbNVal">2</span></div><input class="range" id="rbNSlider" type="range" min="2" max="12" value="2" step="1"></div>
@@ -2286,7 +2286,8 @@ function startRationalisationBasicsDemo(){
  const sup=n=>String(n).replace(/0/g,"⁰").replace(/1/g,"¹").replace(/2/g,"²").replace(/3/g,"³").replace(/4/g,"⁴").replace(/5/g,"⁵").replace(/6/g,"⁶").replace(/7/g,"⁷").replace(/8/g,"⁸").replace(/9/g,"⁹");
  const fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(3)));
  function update(){
-  const m=mode.value,k=Number(kEl.value)||1,n=Math.max(2,Number(nEl.value)||2),a=Math.max(1,Number(aEl.value)||1);
+  const m=mode.value,k=Number(kEl.value)||1;let n=Math.max(2,Number(nEl.value)||2),a=Math.max(1,Number(aEl.value)||1);
+  if(m==="binomial"&&a*a===n){n=n<12?n+1:n-1;nEl.value=n;}
   let expr,result,rule,denType;
   if(m==="single"){
    expr=k+" / √"+n;
@@ -2300,7 +2301,7 @@ function startRationalisationBasicsDemo(){
    denType="binomial radical";
   }
   set("rbExpression",expr);set("rbResult",result);set("rbRule",rule);set("rbDenType",denType);
-  set("rbKVal",k);set("rbNVal",n);set("rbAVal",a);set("rbKProp",k);set("rbNProp",n);set("rbAProp",a);set("rbResultProp",result);
+  set("rbKVal",k);set("rbNVal",n);set("rbAVal",a);set("rbModeVal",denType);set("rbKProp",k);set("rbNProp",n);set("rbAProp",a);set("rbResultProp",result);
   const work=document.getElementById("rbWork");
   if(work)work.innerHTML=m==="single"
    ? "<b>Explorer result:</b> "+expr+" = "+result+". The denominator becomes rational because √"+n+" × √"+n+" = "+n+"."

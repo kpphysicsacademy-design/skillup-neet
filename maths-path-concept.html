@@ -2507,6 +2507,36 @@ function startLawsOfExponentsDemo(){
 }
 
 
+function startGraphLinearEquationDemo(){
+ const m=document.getElementById("gleMSlider"),cc=document.getElementById("gleCSlider");
+ const line=document.getElementById("gleLine"),point=document.getElementById("glePoint"),label=document.getElementById("glePointLabel");
+ const eq=document.getElementById("gleEquation"),ms=document.getElementById("gleSlopeVal"),cs=document.getElementById("gleInterceptVal");
+ const mp=document.getElementById("gleMVal"),cp=document.getElementById("gleCVal"),sp=document.getElementById("gleSlopeProp"),yp=document.getElementById("gleYIntProp"),vp=document.getElementById("gleYAt2Prop"),tp=document.getElementById("gleTypeProp"),work=document.getElementById("gleWork");
+ if(!m||!cc||!line||!point)return;
+ const fmt=n=>String(n).replace(/-/g,"−");
+ function update(){
+  const slope=Number(m.value),intercept=Number(cc.value),y2=slope*2+intercept;
+  const xMin=-6,xMax=6,yMin=-8,yMax=8;
+  const left=40,right=600,top=45,bottom=275;
+  const sx=x=>(x-xMin)/(xMax-xMin)*(right-left)+left;
+  const sy=y=>(yMax-y)/(yMax-yMin)*(bottom-top)+top;
+  const yA=slope*xMin+intercept,yB=slope*xMax+intercept;
+  line.setAttribute("x1",sx(xMin));line.setAttribute("y1",sy(yA));line.setAttribute("x2",sx(xMax));line.setAttribute("y2",sy(yB));
+  point.setAttribute("cx",sx(2));point.setAttribute("cy",sy(y2));label.setAttribute("x",sx(2));label.setAttribute("y",Math.max(58,sy(y2)-12));label.textContent="(2, "+fmt(y2)+")";
+  const eqText=slope===0?"y = "+fmt(intercept):"y = "+fmt(slope)+"x "+(intercept>=0?"+ "+intercept:"− "+Math.abs(intercept));
+  [eq,ms,mp,sp].forEach(el=>{if(el)el.textContent=slope===0&&el!==eq?"0":fmt(slope)});
+  [cs,cp].forEach(el=>{if(el)el.textContent=fmt(intercept)});
+  if(yp)yp.textContent="(0, "+fmt(intercept)+")";
+  if(vp)vp.textContent=fmt(y2);
+  if(tp)tp.textContent=slope>0?"Increasing":slope<0?"Decreasing":"Horizontal";
+  if(eq)eq.textContent=eqText;
+  if(work)work.innerHTML="<b>Explorer result:</b> "+eqText+". At x = 2, y = "+fmt(y2)+", so (2, "+fmt(y2)+") lies on the line.";
+ }
+ m.addEventListener("input",update);cc.addEventListener("input",update);
+ document.querySelectorAll(".glePreset").forEach(btn=>btn.addEventListener("click",()=>{m.value=btn.dataset.m;cc.value=btn.dataset.c;update();}));
+ update();
+}
+
 function startCoordinateRepresentationDemo(){
  if(norm(concept)!=="coordinate representation")return;
  const x=document.getElementById("crXSlider"),y=document.getElementById("crYSlider");

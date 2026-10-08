@@ -394,6 +394,338 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
     "The total number of observations is 5 + 3 + 2 = 10."
   ]
 ],
+  "Bar graphs": [
+  [
+    "What does the height of a bar represent in a bar graph?",
+    [
+      "The category name",
+      "The frequency",
+      "The graph title",
+      "The axis label"
+    ],
+    1,
+    "Bar height represents the frequency of the category."
+  ],
+  [
+    "Which graph is best for comparing frequencies of separate categories?",
+    [
+      "Bar graph",
+      "Number line",
+      "Only a pie crust",
+      "Angle bisector"
+    ],
+    0,
+    "A bar graph is designed to compare separate categories."
+  ],
+  [
+    "A bar graph shows A=10, B=16, C=8, D=6. What is the total frequency?",
+    [
+      "30",
+      "36",
+      "40",
+      "46"
+    ],
+    2,
+    "10 + 16 + 8 + 6 = 40."
+  ],
+  [
+    "In a bar graph, what does the horizontal axis usually show?",
+    [
+      "Categories",
+      "Only totals",
+      "The graph answer",
+      "The maximum frequency"
+    ],
+    0,
+    "Categories are commonly placed on the horizontal axis."
+  ],
+  [
+    "In a bar graph, what does the vertical axis usually show?",
+    [
+      "Category names",
+      "Frequency or another numerical measure",
+      "The title",
+      "The source only"
+    ],
+    1,
+    "The vertical axis commonly shows numerical frequency."
+  ],
+  [
+    "If category A has frequency 12 and category B has frequency 7, which bar is taller?",
+    [
+      "A",
+      "B",
+      "Both are equal",
+      "Cannot be compared"
+    ],
+    0,
+    "The larger frequency gives the taller bar."
+  ],
+  [
+    "A bar has height 15. If height represents frequency, how many observations are in that category?",
+    [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    2,
+    "The bar height is 15, so the frequency is 15."
+  ],
+  [
+    "Four categories have frequencies 5, 9, 4 and 9. Which categories tie for the greatest frequency?",
+    [
+      "First and third",
+      "Second and fourth",
+      "First and second",
+      "Third and fourth"
+    ],
+    1,
+    "Both the second and fourth categories have frequency 9."
+  ],
+  [
+    "A bar graph has frequencies 6, 10, 8 and 4. What is the total number of observations?",
+    [
+      "24",
+      "26",
+      "28",
+      "30"
+    ],
+    2,
+    "6 + 10 + 8 + 4 = 28."
+  ],
+  [
+    "What is the mode in a bar graph representing frequencies?",
+    [
+      "The category with the tallest bar",
+      "The category with the shortest label",
+      "The axis title",
+      "The total only"
+    ],
+    0,
+    "The tallest bar represents the greatest frequency, so its category is the mode."
+  ],
+  [
+    "If every bar height is doubled, what happens to every frequency?",
+    [
+      "It is halved",
+      "It doubles",
+      "It stays unchanged",
+      "It becomes zero"
+    ],
+    1,
+    "Doubling bar heights doubles the corresponding frequencies."
+  ],
+  [
+    "A category has frequency 0. What should its bar height be?",
+    [
+      "0",
+      "1",
+      "5",
+      "10"
+    ],
+    0,
+    "Frequency 0 is represented by a bar of height 0."
+  ],
+  [
+    "A bar graph has frequencies 3, 7, 5 and 2. Which category is least frequent?",
+    [
+      "First",
+      "Second",
+      "Third",
+      "Fourth"
+    ],
+    3,
+    "The smallest frequency is 2, the fourth category."
+  ],
+  [
+    "A bar graph has frequencies 8, 12, 6 and 4. How many more observations are in the second category than the fourth?",
+    [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    2,
+    "12 − 4 = 8."
+  ],
+  [
+    "A bar graph has frequencies 5, 10 and 15. What fraction of all observations belong to the third category?",
+    [
+      "1/6",
+      "1/3",
+      "1/2",
+      "2/3"
+    ],
+    2,
+    "The total is 30, so 15/30 = 1/2."
+  ],
+  [
+    "A bar graph has frequencies 20, 15, 10 and 5. What is the total?",
+    [
+      "40",
+      "45",
+      "50",
+      "55"
+    ],
+    2,
+    "20 + 15 + 10 + 5 = 50."
+  ],
+  [
+    "If one category changes from frequency 8 to frequency 13, how much does its bar height increase?",
+    [
+      "3 units",
+      "5 units",
+      "8 units",
+      "21 units"
+    ],
+    1,
+    "13 − 8 = 5 units."
+  ],
+  [
+    "A bar graph has a scale of 1 unit per square. A bar reaches 14 squares. What is its frequency?",
+    [
+      "7",
+      "12",
+      "14",
+      "28"
+    ],
+    2,
+    "With 1 frequency unit per square, 14 squares means frequency 14."
+  ],
+  [
+    "A graph uses a scale where 1 square represents 2 observations. A bar reaches 6 squares. What is the frequency?",
+    [
+      "6",
+      "8",
+      "10",
+      "12"
+    ],
+    3,
+    "6 × 2 = 12 observations."
+  ],
+  [
+    "If a graph scale is 1 square = 5 observations, how many observations does a 4-square bar represent?",
+    [
+      "9",
+      "15",
+      "20",
+      "25"
+    ],
+    2,
+    "4 × 5 = 20."
+  ],
+  [
+    "A bar graph shows frequencies 9, 4, 7 and 5. Which category has the second-highest frequency?",
+    [
+      "First",
+      "Second",
+      "Third",
+      "Fourth"
+    ],
+    2,
+    "The frequencies rank 9, 7, 5, 4, so the third category is second-highest."
+  ],
+  [
+    "A bar graph has total frequency 36. Three categories have frequencies 10, 8 and 7. What is the missing frequency?",
+    [
+      "9",
+      "11",
+      "12",
+      "13"
+    ],
+    1,
+    "10 + 8 + 7 = 25; 36 − 25 = 11."
+  ],
+  [
+    "A bar graph has frequencies 4, 6, 10 and 5. What percentage of observations are in the third category?",
+    [
+      "20%",
+      "30%",
+      "40%",
+      "50%"
+    ],
+    2,
+    "The total is 25, so 10/25 × 100 = 40%."
+  ],
+  [
+    "Which feature makes a bar graph easy to read?",
+    [
+      "Clear labels and an appropriate scale",
+      "Random bar widths",
+      "No axis labels",
+      "Hidden categories"
+    ],
+    0,
+    "Clear labels and a suitable scale make comparisons easy."
+  ],
+  [
+    "If two bars have equal height, what can you conclude?",
+    [
+      "Their frequencies are equal",
+      "Their categories are identical",
+      "The total is zero",
+      "One is always the mode"
+    ],
+    0,
+    "Equal bar heights represent equal frequencies."
+  ],
+  [
+    "A bar graph has frequencies 2, 4, 6 and 8. If 2 observations are added to every category, what are the new frequencies?",
+    [
+      "4, 6, 8, 10",
+      "2, 6, 8, 10",
+      "4, 4, 8, 8",
+      "0, 2, 4, 6"
+    ],
+    0,
+    "Add 2 to each: 4, 6, 8 and 10."
+  ],
+  [
+    "A bar graph has frequencies 7, 11, 5 and 9. If the tallest category loses 3 observations, what is its new frequency?",
+    [
+      "6",
+      "8",
+      "9",
+      "14"
+    ],
+    1,
+    "The tallest frequency is 11; 11 − 3 = 8."
+  ],
+  [
+    "A bar graph has categories A, B, C with frequencies 12, 8, 10. If one observation moves from A to B, what are the new frequencies?",
+    [
+      "11, 9, 10",
+      "12, 9, 9",
+      "11, 8, 11",
+      "13, 7, 10"
+    ],
+    0,
+    "One leaves A and enters B, giving 11, 9 and 10."
+  ],
+  [
+    "A graph has frequencies 5, 5, 8 and 2. What is the difference between the greatest and least frequencies?",
+    [
+      "3",
+      "5",
+      "6",
+      "10"
+    ],
+    2,
+    "8 − 2 = 6."
+  ],
+  [
+    "A bar graph has frequencies 6, 9, 3 and 12. Which category has the greatest share of the total?",
+    [
+      "First",
+      "Second",
+      "Third",
+      "Fourth"
+    ],
+    3,
+    "The fourth category has the largest frequency, 12."
+  ]
+],
   "Data collection": [
     ["What is data collection?",["Gathering observations or responses","Deleting all observations","Solving an equation","Drawing only circles"],0,"Data collection is the systematic gathering of observations, measurements, or responses."],
     ["Which is an example of collecting data?",["Asking 30 students their favourite fruit","Memorising a formula","Solving 5 + 7","Drawing a square"],0,"Asking students for their responses gathers information that can be recorded as data."],

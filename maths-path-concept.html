@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-variables-interactive">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-variables-live-values">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-variables-interactive</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-variables-live-values</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -44,7 +44,7 @@
 .variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0720">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-variables-interactive";</script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-variables-live-values";</script>
 <script src="maths-quiz-bank.js?v=20261008-0720"></script>
 <script>
 (function(){
@@ -285,49 +285,50 @@ function startCubesDemo(){
 
 function variablesLessonHtml(){return `
 <div class="variables-lesson">
-<strong>Change the values to see how a variable can change while a constant stays fixed.</strong>
+<strong>Change coefficient, variable, and constant values to see the algebraic expression update live.</strong>
 <div class="visual-banner">
  <div class="value-box"><small>COEFFICIENT</small><strong id="vcCoeff">3</strong><span class="pill">multiplies x</span></div>
  <div class="eq">×</div>
  <div class="value-box"><small>VARIABLE</small><strong id="vcVar">4</strong><span class="pill">can change</span></div>
  <div class="eq">+</div>
- <div class="value-box"><small>CONSTANT</small><strong id="vcConst">5</strong><span class="pill">stays fixed</span></div>
+ <div class="value-box"><small>CONSTANT</small><strong id="vcConst">5</strong><span class="pill">fixed term</span></div>
 </div>
 <div class="formula" id="vcExpression">3 × 4 + 5 = 17</div>
 <div class="props">
+ <div class="prop"><span>Coefficient</span><strong id="vcCoeffProp">3</strong></div>
  <div class="prop"><span>Variable</span><strong id="vcVarProp">4</strong></div>
  <div class="prop"><span>Constant</span><strong id="vcConstProp">5</strong></div>
- <div class="prop"><span>Coefficient</span><strong id="vcCoeffProp">3</strong></div>
  <div class="prop"><span>Expression value</span><strong id="vcValueProp">17</strong></div>
 </div>
+<div class="control"><div class="head"><span>Coefficient</span><span class="val" id="vcCoeffSliderVal">3</span></div><input class="range" id="vcCoeffSlider" type="range" min="-10" max="10" value="3" step="1"></div>
 <div class="control"><div class="head"><span>Variable value (x)</span><span class="val" id="vcVarSliderVal">4</span></div><input class="range" id="vcVarSlider" type="range" min="-10" max="10" value="4" step="1"></div>
 <div class="control"><div class="head"><span>Constant</span><span class="val" id="vcConstSliderVal">5</span></div><input class="range" id="vcConstSlider" type="range" min="-10" max="10" value="5" step="1"></div>
 <div class="presets">
- <button class="preset vcP" data-x="2" data-c="5">x = 2</button>
- <button class="preset vcP" data-x="5" data-c="5">x = 5</button>
- <button class="preset vcP" data-x="-2" data-c="5">x = −2</button>
- <button class="preset vcP" data-x="8" data-c="-3">x = 8, c = −3</button>
+ <button class="preset vcP" data-a="3" data-x="4" data-c="5">3x + 5</button>
+ <button class="preset vcP" data-a="2" data-x="6" data-c="1">2x + 1</button>
+ <button class="preset vcP" data-a="-2" data-x="3" data-c="7">−2x + 7</button>
+ <button class="preset vcP" data-a="4" data-x="-2" data-c="-3">4x − 3</button>
 </div>
-<div class="checks" id="vcWork"><b>Result:</b> 3 × 4 + 5 = 17. x is the variable; 5 is the constant.</div>
-<p><b>Remember:</b> a variable represents a value that can change. A constant keeps the same value in a given expression. In 3x + 5, <b>3</b> is the coefficient, <b>x</b> is the variable, and <b>5</b> is the constant.</p>
+<div class="checks" id="vcWork"><b>Result:</b> 3 × 4 + 5 = 17. The coefficient multiplies the variable; the constant stays as a fixed term.</div>
+<p><b>Remember:</b> in <b>ax + c</b>, <b>a</b> is the coefficient, <b>x</b> is the variable, and <b>c</b> is the constant. Changing x changes the value; changing c shifts the result by the same amount.</p>
 </div>`;}
 function startVariablesDemo(){
  if(norm(concept)!=="variables and constants")return;
- const xs=document.getElementById("vcVarSlider"),cs=document.getElementById("vcConstSlider");
- if(!xs||!cs)return;
+ const as=document.getElementById("vcCoeffSlider"),xs=document.getElementById("vcVarSlider"),cs=document.getElementById("vcConstSlider");
+ if(!as||!xs||!cs)return;
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
  function update(){
-  const x=Number(xs.value),c=Number(cs.value),coeff=3,value=coeff*x+c;
+  const a=Number(as.value),x=Number(xs.value),c=Number(cs.value),value=a*x+c;
   const sign=c>=0?"+":"−",absC=Math.abs(c);
-  set("vcCoeff",coeff);set("vcVar",x);set("vcConst",c);
-  set("vcCoeffProp",coeff);set("vcVarProp",x);set("vcConstProp",c);set("vcValueProp",value);
-  set("vcVarSliderVal",x);set("vcConstSliderVal",c);
-  set("vcExpression",coeff+" × "+x+" "+sign+" "+absC+" = "+value);
+  set("vcCoeff",a);set("vcVar",x);set("vcConst",c);
+  set("vcCoeffProp",a);set("vcVarProp",x);set("vcConstProp",c);set("vcValueProp",value);
+  set("vcCoeffSliderVal",a);set("vcVarSliderVal",x);set("vcConstSliderVal",c);
+  set("vcExpression",a+" × "+x+" "+sign+" "+absC+" = "+value);
   const work=document.getElementById("vcWork");
-  if(work)work.innerHTML="<b>Result:</b> "+coeff+" × "+x+" "+sign+" "+absC+" = "+value+". x is the variable; "+c+" is the constant.";
+  if(work)work.innerHTML="<b>Result:</b> "+a+" × "+x+" "+sign+" "+absC+" = "+value+". The coefficient is "+a+", the variable value is "+x+", and the constant is "+c+".";
  }
- xs.addEventListener("input",update);cs.addEventListener("input",update);
- document.querySelectorAll(".vcP").forEach(btn=>btn.addEventListener("click",()=>{xs.value=btn.dataset.x;cs.value=btn.dataset.c;update();}));
+ [as,xs,cs].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".vcP").forEach(btn=>btn.addEventListener("click",()=>{as.value=btn.dataset.a;xs.value=btn.dataset.x;cs.value=btn.dataset.c;update();}));
  update();
 }
 

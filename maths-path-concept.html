@@ -259,7 +259,7 @@
  .pie-charts-interactive-lesson .props{grid-template-columns:1fr 1fr!important}
  .pie-charts-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}
 }
-</style><style>.histograms-interactive-lesson .hg-responsive-svg{display:block;width:100%;max-width:100%;height:auto}@media(max-width:600px){.histograms-interactive-lesson{width:100%;overflow:hidden}.histograms-interactive-lesson .hg-responsive-svg{width:100%!important;height:auto!important}.histograms-interactive-lesson .props,.histograms-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}}</style></head>
+</style><style>.histograms-interactive-lesson .hg-responsive-svg{display:block;width:100%;max-width:100%;height:auto}@media(max-width:600px){.histograms-interactive-lesson{width:100%;overflow:hidden}.histograms-interactive-lesson .hg-responsive-svg{width:100%!important;height:auto!important}.histograms-interactive-lesson .props,.histograms-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}}</style><style>.probability-basics-interactive-lesson{width:100%;min-width:0;overflow:hidden}.probability-basics-interactive-lesson .pb-responsive-svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:600px){.probability-basics-interactive-lesson{padding:10px!important}.probability-basics-interactive-lesson .props{grid-template-columns:1fr 1fr!important;gap:6px!important}.probability-basics-interactive-lesson .prop{padding:7px!important}.probability-basics-interactive-lesson .preset{font-size:9px!important;padding:8px 6px!important}}</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-maths-mobile-app-v20">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-maths-mobile-app-v20";</script>
@@ -918,6 +918,18 @@ if(norm(concept)==="pie charts") return `
 <div class="checks" id="pcWork"><b>Explorer result:</b> 40 observations. Category B is largest at 40%, so its sector is 144°.</div>
 <div class="presets"><button class="preset pcP" data-a="10" data-b="16" data-c="8" data-d="6">Starter</button><button class="preset pcP" data-a="20" data-b="10" data-c="5" data-d="5">A leads</button><button class="preset pcP" data-a="10" data-b="10" data-c="10" data-d="10">Equal</button><button class="preset pcP" data-a="0" data-b="0" data-c="0" data-d="0">Empty</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> sector angle = frequency ÷ total × 360°.</p>
+</div>`;
+if(norm(concept)==="probability basics") return `
+<div class="geometry-lesson probability-basics-interactive-lesson">
+<strong>Change the number of favourable outcomes and total outcomes to see probability update live.</strong>
+<div class="visual-banner"><div class="value-box"><small>FAVOURABLE</small><strong id="pbFav">3</strong><span class="pill">outcomes</span></div><div class="eq">→</div><div class="value-box"><small>PROBABILITY</small><strong id="pbProb">3/8</strong><span class="pill" id="pbPercent">37.5%</span></div><div class="eq">→</div><div class="value-box"><small>CHANCE</small><strong id="pbChance">Possible</strong><span class="pill">between 0 and 1</span></div></div>
+<div class="concept-image" role="img" aria-label="Interactive probability model"><svg class="pb-responsive-svg" viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" rx="18" fill="#f8fcf6"/><text x="320" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#173f27">PROBABILITY MODEL</text><g id="pbBoxes"></g><g id="pbLabels"></g><text x="320" y="275" text-anchor="middle" font-size="14" fill="#66736b">Probability = favourable outcomes ÷ total equally likely outcomes</text></svg></div>
+<div class="props"><div class="prop"><span>Favourable outcomes</span><strong id="pbFavProp">3</strong></div><div class="prop"><span>Unfavourable outcomes</span><strong id="pbUnfavProp">5</strong></div><div class="prop"><span>Total outcomes</span><strong id="pbTotalProp">8</strong></div><div class="prop"><span>Probability</span><strong id="pbFracProp">3/8</strong></div></div>
+<div class="control"><div class="head"><span>Favourable outcomes</span><span class="val" id="pbFavVal">3</span></div><input class="range" id="pbFavSlider" type="range" min="0" max="20" value="3" step="1"></div>
+<div class="control"><div class="head"><span>Total outcomes</span><span class="val" id="pbTotalVal">8</span></div><input class="range" id="pbTotalSlider" type="range" min="1" max="20" value="8" step="1"></div>
+<div class="checks" id="pbWork"><b>Explorer result:</b> 3 favourable outcomes out of 8 gives probability 3/8 = 37.5%.</div>
+<div class="presets"><button class="preset pbP" data-f="1" data-t="2">Fair half</button><button class="preset pbP" data-f="1" data-t="4">One quarter</button><button class="preset pbP" data-f="3" data-t="8">Three eighths</button><button class="preset pbP" data-f="0" data-t="8">Impossible</button></div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> for equally likely outcomes, probability = favourable outcomes ÷ total outcomes. It is always from 0 to 1 inclusive.</p>
 </div>`;
 if(norm(concept)==="histograms") return `
 <div class="geometry-lesson histograms-interactive-lesson">
@@ -1923,6 +1935,23 @@ function startPieChartsDemo(){
  }
  els.forEach(el=>el.addEventListener("input",update));document.querySelectorAll(".pcP").forEach(btn=>btn.addEventListener("click",()=>{els[0].value=btn.dataset.a;els[1].value=btn.dataset.b;els[2].value=btn.dataset.c;els[3].value=btn.dataset.d;update();}));update();
 }
+function startProbabilityBasicsDemo(){
+ if(norm(concept)!=="probability basics")return;
+ const f=document.getElementById("pbFavSlider"),t=document.getElementById("pbTotalSlider");if(!f||!t)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  let total=Math.max(1,Math.min(20,Number(t.value)||1)),fav=Math.max(0,Math.min(total,Number(f.value)||0));f.value=fav;
+  const pct=fav/total*100,frac=fav+"/"+total,unfav=total-fav;
+  set("pbFav",fav);set("pbFavVal",fav);set("pbFavProp",fav);set("pbUnfavProp",unfav);set("pbTotalVal",total);set("pbTotalProp",total);set("pbProb",frac);set("pbFracProp",frac);set("pbPercent",pct.toFixed(1)+"%");set("pbChance",fav===0?"Impossible":fav===total?"Certain":"Possible");
+  const w=document.getElementById("pbWork");if(w)w.innerHTML="<b>Explorer result:</b> "+fav+" favourable outcomes out of "+total+" gives probability "+frac+" = "+pct.toFixed(1)+"%.";
+  const boxes=document.getElementById("pbBoxes"),labs=document.getElementById("pbLabels");if(!boxes||!labs)return;boxes.innerHTML="";labs.innerHTML="";
+  const colors=["#4CAF50","#F44336"],x0=70,gap=25;for(let i=0;i<total;i++){const r=document.createElementNS("http://www.w3.org/2000/svg","rect");r.setAttribute("x",x0+i*gap);r.setAttribute("y",105);r.setAttribute("width",19);r.setAttribute("height",70);r.setAttribute("rx",5);r.setAttribute("fill",i<fav?colors[0]:colors[1]);r.setAttribute("stroke","#fff");r.setAttribute("stroke-width","2");boxes.appendChild(r);}
+  const a=document.createElementNS("http://www.w3.org/2000/svg","text");a.setAttribute("x","70");a.setAttribute("y","205");a.setAttribute("font-size","13");a.setAttribute("font-weight","700");a.setAttribute("fill","#173f27");a.textContent="Green = favourable";labs.appendChild(a);
+  const b=document.createElementNS("http://www.w3.org/2000/svg","text");b.setAttribute("x","260");b.setAttribute("y","205");b.setAttribute("font-size","13");b.setAttribute("font-weight","700");b.setAttribute("fill","#173f27");b.textContent="Red = unfavourable";labs.appendChild(b);
+ }
+ [f,t].forEach(e=>e.addEventListener("input",update));document.querySelectorAll(".pbP").forEach(b=>b.addEventListener("click",()=>{f.value=b.dataset.f;t.value=b.dataset.t;update();}));update();
+}
+
 function startHistogramsDemo(){
  if(norm(concept)!=="histograms")return;
  const ids=["hgASlider","hgBSlider","hgCSlider","hgDSlider"],els=ids.map(id=>document.getElementById(id));if(els.some(x=>!x))return;
@@ -2186,7 +2215,8 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

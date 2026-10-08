@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-0800-mastery-quiz-math-fix">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-variables-interactive">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-0800</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-variables-interactive</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -41,14 +41,46 @@
  .control{margin-top:9px!important}
  .checks{font-size:10px!important}
 }
-</style></head>
+.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0720">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-0720";</script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-variables-interactive";</script>
 <script src="maths-quiz-bank.js?v=20261008-0720"></script>
 <script>
 (function(){
 "use strict";
+const INLINE_VARIABLES_CONSTANTS_QUIZ=[
+["Which part of an expression can change its value?",["Variable","Constant","Equals sign","Operator"],0,"A variable represents a value that can change."],
+["Which part keeps a fixed value in a given expression?",["Variable","Constant","Coefficient","Term"],1,"A constant has a fixed value."],
+["In 3x + 5, what is x?",["Coefficient","Variable","Constant","Operator"],1,"x is the variable."],
+["In 3x + 5, what is 5?",["Variable","Constant","Coefficient","Term"],1,"5 is the constant term."],
+["In 3x + 5, what is 3?",["Variable","Constant","Coefficient","Operator"],2,"3 is the coefficient of x."],
+["Which is a variable?",["7","−2","m","10"],2,"m can represent a changing value."],
+["Which is a constant?",["p","q","9","x"],2,"9 is a fixed number."],
+["What is the coefficient of y in 8y?",["8","y","0","1"],0,"The coefficient is the number multiplying the variable."],
+["What is the coefficient of a in −4a?",["4","−4","a","−a"],1,"The coefficient includes the negative sign: −4."],
+["What is the constant in 7x − 2?",["7","x","−2","2x"],2,"The number without a variable is the constant term."],
+["Which expression contains one variable and one constant?",["4x + 9","7 + 3","x + y","12"],0,"4x + 9 contains variable x and constant 9."],
+["Which symbol commonly represents a variable?",["x","5","10","100"],0,"Letters such as x, y, and n commonly represent variables."],
+["If x = 4, what is 3x + 5?",["12","17","20","9"],1,"Substitute x = 4: 3 × 4 + 5 = 17."],
+["If x = 2, what is 5x − 3?",["7","10","13","3"],0,"5 × 2 − 3 = 7."],
+["If y = 6, what is 2y + 1?",["12","13","14","11"],1,"2 × 6 + 1 = 13."],
+["If a = −2, what is 3a + 5?",["−1","1","11","−11"],0,"3 × (−2) + 5 = −1."],
+["Which statement about a variable is correct?",["It must always be 5","It can represent different values","It can never be negative","It is always a constant"],1,"A variable can take different values."],
+["Which statement about a constant is correct?",["It changes whenever x changes","It has a fixed value in the expression","It must be a letter","It is always zero"],1,"A constant remains fixed in a given expression."],
+["In 6m + 11, how many variable terms are present?",["0","1","2","11"],1,"There is one variable term: 6m."],
+["In 4p + 3q + 7, how many variables are present?",["1","2","3","7"],1,"The variables are p and q."],
+["In 9z − 4, how many constants are shown?",["0","1","2","9"],1,"The constant is −4."],
+["Which expression has coefficient 5?",["5x + 2","x + 5","5 + y","x − 2"],0,"In 5x + 2, 5 multiplies x."],
+["Which expression has constant −7?",["7x − 7","−7x + 2","x + 7","7 − x"],0,"The constant term in 7x − 7 is −7."],
+["What happens to 3x + 5 when x changes?",["Only x-related value changes","5 must change","3 must change","The expression cannot change"],0,"The value of the variable term changes while the constant stays fixed."],
+["If x increases by 1 in 2x + 4, what happens to the expression value?",["It increases by 2","It increases by 1","It decreases by 2","It stays fixed"],0,"The coefficient 2 means a change of 1 in x changes the value by 2."],
+["Which is NOT a variable?",["n","t","25","k"],2,"25 is a number, so it is a constant rather than a variable."],
+["Which is NOT a constant?",["−3","12","c","0"],2,"c is a letter and can represent a variable."],
+["In 10r + 6, what does r represent?",["A variable","A constant","A coefficient","An operation"],0,"r is the variable."],
+["In 10r + 6, what does 10 represent?",["A variable","A coefficient","A constant term","An equals sign"],1,"10 is the coefficient of r."],
+["In 10r + 6, what does 6 represent?",["A variable","A coefficient","A constant","An operator"],2,"6 is the constant term."]
+];
 const INLINE_OPERATIONS_QUIZ=[["What is 2/3 + 1/6?",["1/2","5/6","2/9","1"],1,"Use a common denominator of 6: 4/6 + 1/6 = 5/6."],["What is 5/8 − 1/4?",["1/8","3/8","4/8","5/12"],1,"Rewrite 1/4 as 2/8, then 5/8 − 2/8 = 3/8."],["What is −2/5 + 1/5?",["−3/5","−1/5","1/5","3/5"],1,"The denominators are equal, so add the numerators: −2 + 1 = −1."],["What is 3/7 + 2/7?",["5/14","1/7","5/7","6/7"],2,"Add the numerators over the same denominator: 3 + 2 = 5."],["What is 7/9 − 4/9?",["1/3","3/5","4/9","11/9"],0,"7/9 − 4/9 = 3/9 = 1/3."],["What is −3/4 − 1/8?",["−1/2","−5/8","−7/8","−3/8"],2,"Convert −3/4 to −6/8, then −6/8 − 1/8 = −7/8."],["What is 2/3 × 3/5?",["2/5","6/15","5/2","1/5"],0,"Multiply to get 6/15 and simplify to 2/5."],["What is −4/7 × 14/9?",["−8/9","8/9","−4/9","−2/3"],0,"Cancel 14 with 7, giving −4×2/9 = −8/9."],["What is 5/6 × 9/10?",["1/2","3/4","2/3","5/12"],1,"The product is 45/60, which simplifies to 3/4."],["What is −2/3 × −9/4?",["−3/2","3/2","2/3","9/6"],1,"A negative times a negative is positive; 18/12 simplifies to 3/2."],["What is 3/5 ÷ 2/7?",["6/35","21/10","7/10","10/21"],1,"Divide by multiplying by the reciprocal: 3/5 × 7/2 = 21/10."],["What is −4/9 ÷ 2/3?",["−2/3","2/3","−8/27","−6/8"],0,"Multiply by 3/2: −4/9 × 3/2 = −2/3."],["What is 5/12 ÷ (−5/6)?",["−1/2","1/2","−2","2"],0,"Multiply by −6/5: 5/12 × −6/5 = −1/2."],["What is 7/10 ÷ 7/20?",["1/2","2","7/2","20/10"],1,"Multiply by the reciprocal: 7/10 × 20/7 = 2."],["Which operation is equivalent to dividing by 3/5?",["Multiplying by 3/5","Multiplying by 5/3","Adding 5/3","Subtracting 3/5"],1,"Division by a non-zero fraction means multiplication by its reciprocal, 5/3."],["What is 1/2 + 3/4 − 1/4?",["1/2","3/4","1","5/4"],2,"First 3/4 − 1/4 = 1/2; then 1/2 + 1/2 = 1."],["What is 2/3 − (−1/6)?",["1/2","5/6","−1/2","1"],1,"Subtracting a negative becomes addition: 4/6 + 1/6 = 5/6."],["What is −1/2 + 3/4?",["−1/4","1/4","5/4","−5/4"],1,"Convert −1/2 to −2/4; −2/4 + 3/4 = 1/4."],["What is 1 − 3/8?",["3/8","5/8","7/8","1/8"],1,"Write 1 as 8/8: 8/8 − 3/8 = 5/8."],["What is −2/3 + 5/6?",["−1/6","1/6","7/6","−7/6"],1,"−2/3 = −4/6, so −4/6 + 5/6 = 1/6."],["Which property is shown by 2/5 + 3/7 = 3/7 + 2/5?",["Associative","Commutative","Distributive","Closure"],1,"The order changes but the sum stays the same, showing commutativity."],["Which property is shown by (1/2 + 1/3) + 1/6 = 1/2 + (1/3 + 1/6)?",["Commutative","Associative","Identity","Inverse"],1,"The grouping changes without changing the order, so this is associative."],["What is the additive identity for rational numbers?",["1","−1","0","2"],2,"Adding 0 leaves a rational number unchanged."],["What is the multiplicative identity for rational numbers?",["0","1","−1","10"],1,"Multiplying by 1 leaves a rational number unchanged."],["Which rational number is the multiplicative inverse of −5/8?",["5/8","−8/5","8/5","−5/8"],1,"The reciprocal of −5/8 is −8/5."],["What is 0 × (−7/9)?",["−7/9","0","7/9","Undefined"],1,"Any rational number multiplied by zero equals zero."],["What is 0 ÷ 5/7?",["0","5/7","7/5","Undefined"],0,"Zero divided by a non-zero number is zero."],["What is 4/9 ÷ 0?",["0","4/9","9/4","Undefined"],3,"Division by zero is undefined."],["What is (−3/5) ÷ (−9/10)?",["−2/3","2/3","3/2","−3/2"],1,"Multiply by the reciprocal: −3/5 × −10/9 = 30/45 = 2/3."],["What is 2/3 × (−3/4) + 1/2?",["−1/2","0","1/2","1"],1,"The product is −1/2, and −1/2 + 1/2 = 0."]];
 const INLINE_PROPERTIES_QUIZ=[["Which property states that a + b = b + a for rational numbers?",["Associative","Commutative","Identity","Closure"],1,"The order of addends changes, but the sum remains the same."],["Which property states that (a + b) + c = a + (b + c)?",["Commutative","Associative","Inverse","Identity"],1,"The grouping changes while the order stays the same, which is associative."],["Which property states that a × b = b × a?",["Associative","Commutative","Identity","Closure"],1,"Changing the order of factors does not change the product."],["Which property states that (a × b) × c = a × (b × c)?",["Commutative","Associative","Identity","Inverse"],1,"Changing the grouping without changing order is associativity."],["What is the additive identity for rational numbers?",["1","−1","0","10"],2,"Adding zero leaves every rational number unchanged."],["What is the multiplicative identity for rational numbers?",["0","1","−1","2"],1,"Multiplying by one leaves every rational number unchanged."],["What is the additive inverse of 7/9?",["7/9","−7/9","9/7","−9/7"],1,"A number plus its additive inverse equals zero."],["What is the additive inverse of −5/6?",["−5/6","5/6","6/5","−6/5"],1,"Changing the sign gives the additive inverse."],["What is the multiplicative inverse of 3/7?",["3/7","−3/7","7/3","−7/3"],2,"The reciprocal of a non-zero fraction is its multiplicative inverse."],["What is the multiplicative inverse of −4/11?",["4/11","−11/4","11/4","−4/11"],1,"The reciprocal keeps the negative sign: −11/4."],["Which expression demonstrates the additive identity?",["a + 0 = a","a × 0 = 0","a + a = 2a","a − 0 = 0"],0,"Adding zero leaves a unchanged."],["Which expression demonstrates the multiplicative identity?",["a + 1 = a","a × 1 = a","a × 0 = a","a ÷ 1 = 0"],1,"Multiplication by one leaves a unchanged."],["Which expression demonstrates the additive inverse property?",["a + a = 2a","a + (−a) = 0","a × 1 = a","a × 0 = 1"],1,"A number plus its opposite is zero."],["For rational numbers, which operation is commutative?",["Subtraction","Division","Addition","None"],2,"Addition is commutative: a + b = b + a."],["For rational numbers, which operation is also commutative?",["Division","Multiplication","Subtraction","None"],1,"Multiplication is commutative: ab = ba."],["Which operation is not commutative for rational numbers?",["Addition","Multiplication","Subtraction","Both addition and multiplication"],2,"In general, a − b is not equal to b − a."],["Which operation is not associative for rational numbers?",["Addition","Multiplication","Subtraction","Both addition and multiplication"],2,"Subtraction is generally not associative."],["Which operation is not associative for rational numbers?",["Addition","Multiplication","Division","Both addition and multiplication"],2,"Division is generally not associative."],["Which statement about closure under addition is correct?",["The sum of two rational numbers is rational","The sum is always an integer","The sum is never zero","The sum is irrational"],0,"Adding two rational numbers produces another rational number."],["Which statement about closure under subtraction is correct?",["The difference of two rational numbers is rational","The difference is always positive","The difference is always an integer","The difference is irrational"],0,"Subtracting two rational numbers produces another rational number."],["Which statement about closure under multiplication is correct?",["The product of two rational numbers is rational","The product is always positive","The product is never zero","The product is irrational"],0,"Multiplying two rational numbers gives a rational number."],["When is division of rational numbers closed within the rational numbers?",["Only when the dividend is zero","When the divisor is non-zero","Only when both numbers are positive","Never"],1,"Division by a non-zero rational number gives a rational result."],["Which equation shows associativity of addition?",["1/2 + 1/3 = 1/3 + 1/2","(1/2 + 1/3) + 1/6 = 1/2 + (1/3 + 1/6)","1/2 + 0 = 1/2","1/2 + (−1/2) = 0"],1,"The parentheses change while the order remains unchanged."],["Which equation shows commutativity of multiplication?",["(1/2 × 2/3) × 3/4 = 1/2 × (2/3 × 3/4)","1/2 × 1 = 1/2","1/2 × 2/3 = 2/3 × 1/2","1/2 × 0 = 0"],2,"The factors switch order without changing the product."],["What is the value of 5/8 + 0?",["0","5/8","8/5","−5/8"],1,"Zero is the additive identity, so the value remains 5/8."],["What is the value of (−3/5) × 1?",["−1","0","−3/5","3/5"],2,"One is the multiplicative identity."],["What is 4/7 + (−4/7)?",["8/7","0","−8/7","1"],1,"A rational number plus its additive inverse equals zero."],["Which rational number is the multiplicative inverse of 2/5?",["2/5","−2/5","5/2","−5/2"],2,"The reciprocal of 2/5 is 5/2."],["Which statement is true for rational numbers?",["Addition is associative","Subtraction is commutative","Division is associative","Zero has a multiplicative inverse"],0,"Addition is associative; the other statements are false."],["Which statement is true?",["Every rational number has a multiplicative inverse","Zero has a multiplicative inverse","Every non-zero rational number has a multiplicative inverse","Subtraction is commutative"],2,"Every non-zero rational number has a reciprocal that is also rational."]];
 const INLINE_SQUARES_QUIZ=[["What is 7²?",["14","49","21","56"],1,"7² means 7 × 7 = 49."],["What is 12²?",["24","124","144","132"],2,"12 × 12 = 144."],["What is 15²?",["225","215","125","250"],0,"15 × 15 = 225."],["What is 20²?",["40","200","400","2000"],2,"20 × 20 = 400."],["Which number is a perfect square?",["18","24","36","50"],2,"36 = 6², so it is a perfect square."],["What is √49?",["6","7","8","9"],1,"7 × 7 = 49, so √49 = 7."],["What is √81?",["7","8","9","10"],2,"9 × 9 = 81."],["What is √144?",["10","11","12","14"],2,"12 × 12 = 144."],["What is √225?",["12","15","20","25"],1,"15 × 15 = 225."],["Which is the square of 9?",["18","27","81","90"],2,"9² = 81."],["Which is the square root of 64?",["6","7","8","9"],2,"8² = 64."],["Which pair are consecutive perfect squares?",["16 and 25","20 and 30","25 and 40","36 and 50"],0,"16 = 4² and 25 = 5²."],["What is 6² + 8²?",["36","64","100","128"],2,"36 + 64 = 100."],["What is 10² − 6²?",["36","64","40","16"],2,"100 − 36 = 64."],["Which number is NOT a perfect square?",["25","49","72","100"],2,"72 is not the square of an integer."],["The square of an even number is always:",["Odd","Even","Prime","Negative"],1,"An even number times an even number is even."],["The square of an odd number is always:",["Even","Odd","Zero","Prime"],1,"An odd number times an odd number is odd."],["What is the smallest perfect square greater than 50?",["49","64","81","100"],1,"7² = 49 and 8² = 64."],["What is the largest perfect square less than 100?",["64","81","90","99"],1,"9² = 81 and 10² = 100."],["Which number lies between 8² and 9²?",["63","70","80","82"],2,"8² = 64 and 9² = 81, so 80 lies between them."],["If n² = 121, what is the non-negative value of n?",["9","10","11","12"],2,"11² = 121."],["What is √1?",["0","1","2","10"],1,"1² = 1."],["What is √0?",["0","1","Undefined","10"],0,"0² = 0."],["Which statement is true?",["√36 = −6","√36 = 6","√36 = 36","√36 = 18"],1,"The principal square root is non-negative, so √36 = 6."],["What is the square of 25?",["125","500","625","650"],2,"25 × 25 = 625."],["Which expression equals 11²?",["11 + 11","11 × 11","2 × 11","121 + 11"],1,"A square means multiplying the number by itself."],["Which number has square root 13?",["156","169","196","219"],1,"13² = 169."],["Between which two consecutive integers does √50 lie?",["5 and 6","6 and 7","7 and 8","8 and 9"],2,"49 < 50 < 64, so 7 < √50 < 8."],["A perfect square has:",["An integer square root","Only an even square root","A negative square root only","No square root"],0,"A perfect square is the square of an integer."],["What is 18²?",["324","288","316","342"],0,"18 × 18 = 324."]];
@@ -146,7 +178,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -251,9 +283,58 @@ function startCubesDemo(){
  update();
 }
 
+function variablesLessonHtml(){return `
+<div class="variables-lesson">
+<strong>Change the values to see how a variable can change while a constant stays fixed.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>COEFFICIENT</small><strong id="vcCoeff">3</strong><span class="pill">multiplies x</span></div>
+ <div class="eq">×</div>
+ <div class="value-box"><small>VARIABLE</small><strong id="vcVar">4</strong><span class="pill">can change</span></div>
+ <div class="eq">+</div>
+ <div class="value-box"><small>CONSTANT</small><strong id="vcConst">5</strong><span class="pill">stays fixed</span></div>
+</div>
+<div class="formula" id="vcExpression">3 × 4 + 5 = 17</div>
+<div class="props">
+ <div class="prop"><span>Variable</span><strong id="vcVarProp">4</strong></div>
+ <div class="prop"><span>Constant</span><strong id="vcConstProp">5</strong></div>
+ <div class="prop"><span>Coefficient</span><strong id="vcCoeffProp">3</strong></div>
+ <div class="prop"><span>Expression value</span><strong id="vcValueProp">17</strong></div>
+</div>
+<div class="control"><div class="head"><span>Variable value (x)</span><span class="val" id="vcVarSliderVal">4</span></div><input class="range" id="vcVarSlider" type="range" min="-10" max="10" value="4" step="1"></div>
+<div class="control"><div class="head"><span>Constant</span><span class="val" id="vcConstSliderVal">5</span></div><input class="range" id="vcConstSlider" type="range" min="-10" max="10" value="5" step="1"></div>
+<div class="presets">
+ <button class="preset vcP" data-x="2" data-c="5">x = 2</button>
+ <button class="preset vcP" data-x="5" data-c="5">x = 5</button>
+ <button class="preset vcP" data-x="-2" data-c="5">x = −2</button>
+ <button class="preset vcP" data-x="8" data-c="-3">x = 8, c = −3</button>
+</div>
+<div class="checks" id="vcWork"><b>Result:</b> 3 × 4 + 5 = 17. x is the variable; 5 is the constant.</div>
+<p><b>Remember:</b> a variable represents a value that can change. A constant keeps the same value in a given expression. In 3x + 5, <b>3</b> is the coefficient, <b>x</b> is the variable, and <b>5</b> is the constant.</p>
+</div>`;}
+function startVariablesDemo(){
+ if(norm(concept)!=="variables and constants")return;
+ const xs=document.getElementById("vcVarSlider"),cs=document.getElementById("vcConstSlider");
+ if(!xs||!cs)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function update(){
+  const x=Number(xs.value),c=Number(cs.value),coeff=3,value=coeff*x+c;
+  const sign=c>=0?"+":"−",absC=Math.abs(c);
+  set("vcCoeff",coeff);set("vcVar",x);set("vcConst",c);
+  set("vcCoeffProp",coeff);set("vcVarProp",x);set("vcConstProp",c);set("vcValueProp",value);
+  set("vcVarSliderVal",x);set("vcConstSliderVal",c);
+  set("vcExpression",coeff+" × "+x+" "+sign+" "+absC+" = "+value);
+  const work=document.getElementById("vcWork");
+  if(work)work.innerHTML="<b>Result:</b> "+coeff+" × "+x+" "+sign+" "+absC+" = "+value+". x is the variable; "+c+" is the constant.";
+ }
+ xs.addEventListener("input",update);cs.addEventListener("input",update);
+ document.querySelectorAll(".vcP").forEach(btn=>btn.addEventListener("click",()=>{xs.value=btn.dataset.x;cs.value=btn.dataset.c;update();}));
+ update();
+}
+
 function lessonHtml(){
 if(norm(concept)==="cubes and cube roots") return cubesLessonHtml();
 if(norm(concept)==="squares and square roots") return squaresLessonHtml();
+if(norm(concept)==="variables and constants") return variablesLessonHtml();
 if(norm(concept)==="perimeter") return `
 <strong>Perimeter = the total distance around a closed figure.</strong>
 <div class="formula">\\(P=\\text{sum of all side lengths}\\)</div>
@@ -737,7 +818,7 @@ function startQuiz(){
  try{
   const quizKey=norm(concept)==="properties of rational numbers" ? "Properties of rational numbers" : key;
   const dedicated=bank[quizKey];
-  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : dedicated))));
+  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : (norm(concept)==="variables and constants" ? (dedicated||INLINE_VARIABLES_CONSTANTS_QUIZ) : dedicated)))));
  }catch(e){
   host.innerHTML='<div class="empty">Mastery Quiz could not load. Please refresh this page.</div>';
   return;
@@ -766,7 +847,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

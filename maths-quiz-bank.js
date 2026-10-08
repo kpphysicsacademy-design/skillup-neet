@@ -92,7 +92,6 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
     ["If the frequencies of four categories are 8, 12, 6 and 14, which category has the greatest frequency?",["The category with frequency 8","The category with frequency 12","The category with frequency 6","The category with frequency 14"],3,"The greatest frequency is 14, so that category has the most responses."],
     ["Why can organising data in a frequency table be useful?",["It makes repeated values and their counts easier to read","It removes all information","It changes numerical data into geometry","It guarantees every answer is correct"],0,"A frequency table groups values or categories with their counts, making the data easier to inspect."],
     ["A fair survey should avoid which problem?",["Leading questions that push people toward an answer","Clear questions","Recording every response","Using a suitable sample"],0,"Leading questions can influence responses and make collected data less reliable."],
-    ["A survey records 10, 12, 8 and 10 responses in four categories. What is the total number of responses?",["30","36","40","42"],2,"The total is 10 + 12 + 8 + 10 = 40."],
-    ["What is the main purpose of collecting data in a mathematical investigation?",["To obtain information that can be organised and analysed","To make every result equal","To avoid recording observations","To replace all calculations"],0,"Collected data provides information that can be organised, represented, compared, and analysed."]
+    ["A survey records 10, 12, 8 and 10 responses in four categories. What is the total number of responses?",["30","36","40","42"],2,"The total is 10 + 12 + 8 + 10 = 40."]
   ]
 };

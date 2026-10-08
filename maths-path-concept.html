@@ -929,7 +929,7 @@ if(norm(concept)==="geometric constructions") return `
 <option value="angle">Angle bisector</option>
 <option value="perpendicular">Perpendicular line</option>
 <option value="parallel">Parallel line</option>
-</select></div>
+</select><div class="control"><div class="head"><span>Compass radius / scale</span><span class="val" id="gcRadiusVal">105</span></div><input id="gcRadiusSlider" class="range" type="range" min="70" max="125" value="105"></div><div class="control"><div class="head"><span>Construction step</span><span class="val" id="gcStepVal">4</span></div><input id="gcStepSlider" class="range" type="range" min="1" max="4" step="1" value="4"></div><div class="checks" id="gcStage">STEP 4 / 4</div></div>
 <div class="concept-image" role="img" aria-label="Interactive geometric construction diagram">
 <svg id="gcSvg" viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
 <rect width="640" height="300" rx="18" fill="#f8fcf6"/>
@@ -1444,39 +1444,46 @@ function startTrianglesDemo(){
 }
 function startGeometricConstructionsDemo(){
  if(norm(concept)!=="geometric constructions")return;
- const type=document.getElementById("gcTypeSelect"); if(!type)return;
+ const type=document.getElementById("gcTypeSelect"),slider=document.getElementById("gcRadiusSlider"),step=document.getElementById("gcStepSlider");if(!type||!slider||!step)return;
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const names={bisector:"Perpendicular bisector",angle:"Angle bisector",perpendicular:"Perpendicular line",parallel:"Parallel line"};
  function update(){
-  const t=type.value;
-  const data={
-   bisector:{name:"Perpendicular bisector",tool:"Compass",method:"ARC INTERSECTIONS",result:"90° + MIDPOINT",steps:"3",key:"Perpendicular at midpoint",why:"Equal radii create symmetric intersections",s1:"Draw equal-radius arcs from both endpoints",s2:"Mark the two arc intersections",s3:"Join the intersections",res:"Midpoint + 90°",work:"Equal arcs from both endpoints meet at two points; joining them gives the perpendicular bisector."},
-   angle:{name:"Angle bisector",tool:"Compass",method:"EQUAL ARC MARKS",result:"TWO EQUAL ANGLES",steps:"4",key:"Two equal angles",why:"Equal arc marks create equal distances from the arms",s1:"Draw an arc from the vertex",s2:"Mark equal points on both arms",s3:"Draw equal arcs to meet",res:"∠1 = ∠2",work:"An arc marks equal points on the arms; equal arcs locate the final point, which is joined to the vertex."},
-   perpendicular:{name:"Perpendicular line",tool:"Compass",method:"EQUAL DISTANCE ARCS",result:"90°",steps:"3",key:"Right angle",why:"Symmetric points lie on a perpendicular",s1:"Mark equal distances around the point",s2:"Intersect the construction arcs",s3:"Join the intersection to the point",res:"90°",work:"Equal-distance construction points create a line perpendicular to the given line."},
-   parallel:{name:"Parallel line",tool:"Compass + straightedge",method:"COPY THE ANGLE",result:"SAME ANGLE",steps:"4",key:"Equal corresponding angles",why:"A copied angle preserves direction",s1:"Choose the given angle",s2:"Copy its arc and chord",s3:"Place the copied angle",res:"Corresponding angles equal",work:"Copying the corresponding angle creates a line with the same direction, so the two lines are parallel."}
-  }[t];
-  set("gcTypeVal",data.name);set("gcTool",data.tool.toUpperCase());set("gcMethod",data.method);set("gcResultBox",data.result);set("gcStepsProp",data.steps);set("gcToolProp",data.tool);set("gcResultProp",data.key);set("gcWhyProp",data.why);set("gcTitle",data.name.toUpperCase());set("gcStep1",data.s1);set("gcStep2",data.s2);set("gcStep3",data.s3);set("gcResult",data.res);
-  const work=document.getElementById("gcWork");if(work)work.innerHTML="<b>Result:</b> "+data.work;
-  const arcs=document.getElementById("gcArcs"),lines=document.getElementById("gcLines"),points=document.getElementById("gcPoints");if(!arcs||!lines||!points)return;
+  const t=type.value,r=Number(slider.value),st=Number(step.value);
+  set("gcTypeVal",names[t]);set("gcRadiusVal",r);set("gcStepVal",st);
+  const arcs=document.getElementById("gcArcs"),lines=document.getElementById("gcLines"),points=document.getElementById("gcPoints"),stage=document.getElementById("gcStage");if(!arcs||!lines||!points)return;
+  arcs.innerHTML="";lines.innerHTML="";points.innerHTML="";
+  let result="",method="",tool="Compass",steps=4,why="";
   if(t==="bisector"){
-   arcs.innerHTML='<circle cx="70" cy="185" r="105" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="330" cy="185" r="105" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
-   lines.innerHTML='<line x1="70" y1="185" x2="330" y2="185" stroke="#173f27" stroke-width="5"/><line x1="200" y1="65" x2="200" y2="270" stroke="#f59e0b" stroke-width="4"/>';
-   points.innerHTML='<circle cx="70" cy="185" r="6" class="geo-point"/><circle cx="330" cy="185" r="6" class="geo-point"/><circle cx="200" cy="80" r="5" class="geo-point"/><circle cx="200" cy="290" r="5" class="geo-point"/>';
+   method="EQUAL-RADIUS ARCS";result="MIDPOINT + 90°";steps=4;why="Equal arcs meet symmetrically";
+   lines.innerHTML='<line x1="55" y1="185" x2="335" y2="185" stroke="#173f27" stroke-width="5"/>';
+   if(st>=2)arcs.innerHTML='<circle cx="55" cy="185" r="'+r+'" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="335" cy="185" r="'+r+'" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   if(st>=3)points.innerHTML='<circle cx="195" cy="'+(185-r).toFixed(1)+'" r="6" class="geo-point"/><circle cx="195" cy="'+(185+r).toFixed(1)+'" r="6" class="geo-point"/>';
+   if(st>=4)lines.innerHTML+='<line x1="195" y1="'+Math.max(40,185-r).toFixed(1)+'" x2="195" y2="'+Math.min(285,185+r).toFixed(1)+'" stroke="#f59e0b" stroke-width="4"/>';
   }else if(t==="angle"){
-   arcs.innerHTML='<path d="M90 230 A110 110 0 0 1 185 145" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><path d="M140 190 A58 58 0 0 1 175 160" fill="none" stroke="#60a5fa" stroke-width="3"/>';
-   lines.innerHTML='<line x1="95" y1="230" x2="350" y2="230" stroke="#173f27" stroke-width="5"/><line x1="95" y1="230" x2="285" y2="70" stroke="#173f27" stroke-width="5"/><line x1="95" y1="230" x2="245" y2="130" stroke="#f59e0b" stroke-width="4"/>';
-   points.innerHTML='<circle cx="95" cy="230" r="6" class="geo-point"/><circle cx="185" cy="145" r="5" class="geo-point"/><circle cx="175" cy="160" r="5" class="geo-point"/>';
+   method="EQUAL ARC MARKS";result="TWO EQUAL ANGLES";steps=4;why="Equal arc marks force equal distances";
+   lines.innerHTML='<line x1="80" y1="235" x2="350" y2="235" stroke="#173f27" stroke-width="5"/><line x1="80" y1="235" x2="285" y2="70" stroke="#173f27" stroke-width="5"/>';
+   if(st>=2)arcs.innerHTML='<path d="M'+(80+r)+' 235 A '+r+' '+r+' 0 0 1 '+(80+r*.65).toFixed(1)+' '+(235-r*.76).toFixed(1)+'" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   if(st>=3)points.innerHTML='<circle cx="'+(80+r*.65).toFixed(1)+'" cy="'+(235-r*.76).toFixed(1)+'" r="6" class="geo-point"/>';
+   if(st>=4){lines.innerHTML+='<line x1="80" y1="235" x2="'+(245+r*.35).toFixed(1)+'" y2="'+(135-r*.2).toFixed(1)+'" stroke="#f59e0b" stroke-width="4"/>';points.innerHTML+='<circle cx="'+(245+r*.35).toFixed(1)+'" cy="'+(135-r*.2).toFixed(1)+'" r="6" class="geo-point"/>';}
   }else if(t==="perpendicular"){
-   arcs.innerHTML='<circle cx="125" cy="150" r="62" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="275" cy="150" r="62" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
-   lines.innerHTML='<line x1="70" y1="150" x2="350" y2="150" stroke="#173f27" stroke-width="5"/><line x1="200" y1="55" x2="200" y2="245" stroke="#f59e0b" stroke-width="4"/>';
-   points.innerHTML='<circle cx="125" cy="150" r="6" class="geo-point"/><circle cx="275" cy="150" r="6" class="geo-point"/><circle cx="200" cy="150" r="6" class="geo-point"/>';
+   method="SYMMETRIC ARCS";result="90°";steps=4;why="Symmetric points define a perpendicular";
+   lines.innerHTML='<line x1="55" y1="165" x2="335" y2="165" stroke="#173f27" stroke-width="5"/>';
+   if(st>=2)arcs.innerHTML='<circle cx="145" cy="165" r="'+r*.55+'" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="245" cy="165" r="'+r*.55+'" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   if(st>=3)points.innerHTML='<circle cx="195" cy="'+(165-r*.45).toFixed(1)+'" r="6" class="geo-point"/><circle cx="195" cy="'+(165+r*.45).toFixed(1)+'" r="6" class="geo-point"/>';
+   if(st>=4)lines.innerHTML+='<line x1="195" y1="'+(165-r*.5).toFixed(1)+'" x2="195" y2="'+(165+r*.5).toFixed(1)+'" stroke="#f59e0b" stroke-width="4"/>';
   }else{
-   arcs.innerHTML='<path d="M80 105 A55 55 0 0 1 135 50" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><path d="M80 215 A55 55 0 0 1 135 160" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
-   lines.innerHTML='<line x1="80" y1="80" x2="350" y2="80" stroke="#173f27" stroke-width="5"/><line x1="80" y1="210" x2="350" y2="210" stroke="#f59e0b" stroke-width="4"/><line x1="130" y1="80" x2="130" y2="210" stroke="#173f27" stroke-width="3" stroke-dasharray="6 6"/>';
-   points.innerHTML='<circle cx="130" cy="80" r="6" class="geo-point"/><circle cx="130" cy="210" r="6" class="geo-point"/>';
+   tool="Compass + straightedge";method="COPY CORRESPONDING ANGLE";result="PARALLEL";steps=4;why="Equal corresponding angles preserve direction";
+   lines.innerHTML='<line x1="55" y1="95" x2="345" y2="95" stroke="#173f27" stroke-width="5"/>';
+   if(st>=2)arcs.innerHTML='<path d="M110 95 A55 55 0 0 1 145 55" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   if(st>=3)points.innerHTML='<circle cx="145" cy="55" r="6" class="geo-point"/><circle cx="120" cy="215" r="6" class="geo-point"/>';
+   if(st>=4)lines.innerHTML+='<line x1="120" y1="215" x2="410" y2="215" stroke="#f59e0b" stroke-width="4"/><line x1="120" y1="95" x2="120" y2="215" stroke="#173f27" stroke-width="3" stroke-dasharray="6 6"/>';
   }
+  set("gcTool",tool.toUpperCase());set("gcMethod",method);set("gcResultBox",result);set("gcStepsProp",steps);set("gcToolProp",tool);set("gcResultProp",result);set("gcWhyProp",why);set("gcTitle",names[t].toUpperCase());
+  set("gcStepVal",st);set("gcStage","STEP "+st+" / 4");
+  const work=document.getElementById("gcWork");if(work)work.innerHTML="<b>Result:</b> Step "+st+" of 4: "+(st<4?"Complete the next construction step.":"Construction complete — "+result+".");
  }
- type.addEventListener("change",update);
- document.querySelectorAll(".gcP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;update();}));
+ [type,slider,step].forEach(el=>el.addEventListener("input",update));type.addEventListener("change",update);
+ document.querySelectorAll(".gcP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;step.value=4;update();}));
  update();
 }
 

@@ -394,6 +394,38 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
     "The total number of observations is 5 + 3 + 2 = 10."
   ]
 ],
+  "Pie charts": [
+  ["What does a sector of a pie chart represent?",["A part of the whole","Only the title","The x-axis","A single equation"],0,"Each sector represents one category's share of the whole."],
+  ["A complete pie chart represents what total angle?",["90°","180°","270°","360°"],3,"A full circle measures 360°, so all sectors together total 360°."],
+  ["If a category has frequency 10 out of a total of 40, what fraction of the whole is it?",["1/2","1/4","1/5","3/4"],1,"The fraction is 10/40 = 1/4."],
+  ["For 10 out of 40 observations, what is the sector angle?",["45°","60°","90°","120°"],2,"10/40 × 360° = 90°."],
+  ["A category has frequency 15 out of 60. What percentage does it represent?",["15%","20%","25%","30%"],2,"15/60 × 100 = 25%."],
+  ["A category represents 25% of a pie chart. What is its angle?",["45°","60°","90°","120°"],2,"25% of 360° is 90°."],
+  ["A sector has angle 72°. What fraction of the whole does it represent?",["1/10","1/5","1/4","1/2"],1,"72/360 = 1/5."],
+  ["A sector has angle 72°. What percentage does it represent?",["10%","15%","20%","25%"],2,"72/360 × 100 = 20%."],
+  ["A pie chart has categories with frequencies 10, 20, 30 and 40. What is the total?",["80","90","100","120"],2,"10 + 20 + 30 + 40 = 100."],
+  ["In a pie chart for frequencies 10, 20, 30 and 40, which category has the largest sector?",["10","20","30","40"],3,"The largest frequency produces the largest sector."],
+  ["A total of 50 observations has 15 in category A. What angle should A have?",["90°","108°","120°","135°"],1,"15/50 × 360° = 108°."],
+  ["A total of 80 observations has 20 in category B. What angle should B have?",["45°","60°","90°","120°"],2,"20/80 × 360° = 90°."],
+  ["A sector angle is 144° in a chart of 40 observations. What frequency does it represent?",["10","12","16","20"],2,"144/360 × 40 = 16 observations."],
+  ["A sector angle is 54° in a chart of 40 observations. What frequency does it represent?",["4","6","8","10"],1,"54/360 × 40 = 6 observations."],
+  ["A category has frequency 12 in a total of 48. What is its sector angle?",["60°","75°","90°","120°"],2,"12/48 × 360° = 90°."],
+  ["Four categories have frequencies 8, 12, 10 and 10. Which two have equal sectors?",["8 and 12","12 and 10","10 and 10","8 and 10"],2,"Equal frequencies give equal sector angles, so the two frequency-10 categories match."],
+  ["If every frequency in a pie-chart data set is doubled, what happens to the sector angles?",["Every angle doubles","Every angle halves","The angles stay the same","Every angle becomes 360°"],2,"Doubling every category and the total keeps each frequency-to-total ratio unchanged."],
+  ["If one category's frequency increases while the total is recalculated, what happens to its sector angle?",["It must decrease","It must increase","It must become 0°","It must become 360°"],1,"With the other frequencies fixed, the category's share of the new total increases, so its angle increases."],
+  ["A pie chart has angles 90°, 120° and 60°. What is the fourth angle?",["60°","90°","120°","150°"],1,"The known angles total 270°, so 360° − 270° = 90°."],
+  ["A pie chart has angles 45°, 90°, 135° and 90°. What is the largest sector?",["45°","90°","135°","All are equal"],2,"135° is the greatest of the four sector angles."],
+  ["A sector is 30% of a pie chart. What angle does it have?",["90°","108°","120°","135°"],1,"30% of 360° is 108°."],
+  ["A sector is 15% of a pie chart. What angle does it have?",["36°","45°","54°","72°"],2,"15% of 360° is 54°."],
+  ["A sector has angle 180°. What percentage of the whole is it?",["25%","40%","50%","75%"],2,"180° is half of 360°, so it represents 50%."],
+  ["A sector has angle 36°. What percentage does it represent?",["5%","10%","15%","20%"],1,"36/360 × 100 = 10%."],
+  ["A survey has 30 students: 12 choose A, 9 choose B, 6 choose C and 3 choose D. What angle represents A?",["108°","120°","144°","180°"],2,"12/30 × 360° = 144°."],
+  ["Using the same survey, what angle represents D?",["18°","24°","36°","54°"],2,"3/30 × 360° = 36°."],
+  ["A pie chart shows A = 20%, B = 35%, C = 25%. What percentage is D?",["10%","15%","20%","25%"],2,"20% + 35% + 25% = 80%, so D is 20%."],
+  ["A chart represents 200 observations. A sector is 18% of the whole. What frequency does it represent?",["18","30","36","40"],2,"18% of 200 is 36."],
+  ["A chart represents 120 observations. A sector has angle 60°. What frequency does it represent?",["10","20","30","40"],2,"60/360 × 120 = 20, so the correct choice is 20."],
+  ["Why must the sector angles in a complete pie chart add to 360°?",["They form one complete circle","They form a straight line","They represent one rectangle","They are all equal"],0,"All sectors together form the complete circle, which measures 360°."]
+],
   "Bar graphs": [
   [
     "What does the height of a bar represent in a bar graph?",

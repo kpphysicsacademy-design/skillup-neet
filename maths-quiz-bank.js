@@ -62,6 +62,338 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
     ["Why is the area of a circle written in square units such as cm²?",["Area measures distance around the boundary","Area measures the surface inside the circle","Area measures only the radius","Area measures the diameter"],1,"Area measures a two-dimensional surface, so square units are used."]
   ]
 ,
+  "Frequency tables": [
+  [
+    "A frequency table shows 0, 1, 2 and 3 books with frequencies 6, 12, 8 and 4. What is the total number of observations?",
+    [
+      "26",
+      "30",
+      "32",
+      "34"
+    ],
+    1,
+    "Add all the frequencies: 6 + 12 + 8 + 4 = 30."
+  ],
+  [
+    "In a frequency table, what does frequency mean?",
+    [
+      "The largest value",
+      "The number of times a value occurs",
+      "The difference between two values",
+      "The total number of categories"
+    ],
+    1,
+    "Frequency counts how many observations have a particular value or category."
+  ],
+  [
+    "A value appears 9 times in a data set. What is its frequency?",
+    [
+      "3",
+      "6",
+      "9",
+      "18"
+    ],
+    2,
+    "The frequency is the number of occurrences, so it is 9."
+  ],
+  [
+    "The frequencies of four values are 5, 7, 3 and 9. Which value has the greatest frequency?",
+    [
+      "The value with frequency 5",
+      "The value with frequency 7",
+      "The value with frequency 3",
+      "The value with frequency 9"
+    ],
+    3,
+    "The greatest frequency is 9, so that value is the most frequent."
+  ],
+  [
+    "A frequency table has frequencies 4, 6, 8 and 2. What is the total frequency?",
+    [
+      "16",
+      "18",
+      "20",
+      "22"
+    ],
+    2,
+    "4 + 6 + 8 + 2 = 20."
+  ],
+  [
+    "If the frequencies for red, blue and green are 7, 11 and 5, which colour is the mode?",
+    [
+      "Red",
+      "Blue",
+      "Green",
+      "There is no mode"
+    ],
+    1,
+    "Blue has the highest frequency, 11."
+  ],
+  [
+    "A table records the number of siblings: 0, 1, 2, 3 with frequencies 5, 12, 8, 3. What is the mode?",
+    [
+      "0 siblings",
+      "1 sibling",
+      "2 siblings",
+      "3 siblings"
+    ],
+    1,
+    "The highest frequency is 12, corresponding to 1 sibling."
+  ],
+  [
+    "A frequency table has values 2, 4, 6 and 8 with frequencies 3, 5, 7 and 5. How many observations are there?",
+    [
+      "15",
+      "18",
+      "20",
+      "25"
+    ],
+    2,
+    "The total is 3 + 5 + 7 + 5 = 20."
+  ],
+  [
+    "Which table is a frequency table?",
+    [
+      "Value: 1,2,3; Frequency: 4,7,2",
+      "Only a list of values with no counts",
+      "A list of formulas",
+      "A list of shapes"
+    ],
+    0,
+    "A frequency table pairs each value or category with the number of times it occurs."
+  ],
+  [
+    "A value has frequency 0. What does this mean?",
+    [
+      "It occurs zero times in the data",
+      "It occurs once",
+      "It is the mode",
+      "It is the largest value"
+    ],
+    0,
+    "A frequency of zero means no observation has that value."
+  ],
+  [
+    "The frequencies are 10, 10, 4 and 6. How many observations are recorded?",
+    [
+      "20",
+      "24",
+      "30",
+      "40"
+    ],
+    2,
+    "10 + 10 + 4 + 6 = 30."
+  ],
+  [
+    "If a frequency table has total frequency 25 and one category has frequency 9, how many observations belong to the other categories altogether?",
+    [
+      "14",
+      "16",
+      "18",
+      "34"
+    ],
+    1,
+    "The remaining frequency is 25 − 9 = 16."
+  ],
+  [
+    "A data set is 2, 2, 3, 3, 3, 4. What is the frequency of 3?",
+    [
+      "2",
+      "3",
+      "4",
+      "6"
+    ],
+    1,
+    "The value 3 appears three times."
+  ],
+  [
+    "A table has values 1, 2, 3 and frequencies 8, 5 and 7. What percentage of observations have value 1?",
+    [
+      "20%",
+      "40%",
+      "50%",
+      "80%"
+    ],
+    1,
+    "The total is 20, and 8 out of 20 is 40%."
+  ],
+  [
+    "A frequency table has total 40 observations. A value has frequency 12. What percentage has that value?",
+    [
+      "20%",
+      "25%",
+      "30%",
+      "40%"
+    ],
+    2,
+    "12 ÷ 40 × 100 = 30%."
+  ],
+  [
+    "Frequencies are 6, 9, 5 and 10. Which statement is true?",
+    [
+      "The total is 20",
+      "The total is 30",
+      "The total is 35",
+      "The total is 40"
+    ],
+    1,
+    "Adding the frequencies gives 6 + 9 + 5 + 10 = 30."
+  ],
+  [
+    "If every frequency in a table is doubled, what happens to the total frequency?",
+    [
+      "It is halved",
+      "It stays the same",
+      "It doubles",
+      "It becomes zero"
+    ],
+    2,
+    "Doubling every frequency doubles their sum."
+  ],
+  [
+    "A frequency table has frequencies 3, 5 and 2. If 4 observations are added to the second category, what is its new frequency?",
+    [
+      "5",
+      "7",
+      "9",
+      "11"
+    ],
+    2,
+    "The second frequency changes from 5 to 5 + 4 = 9."
+  ],
+  [
+    "A frequency table has frequencies 4, 7, 6 and 3. If the frequency 7 is reduced by 2, what is the new total?",
+    [
+      "16",
+      "18",
+      "20",
+      "22"
+    ],
+    1,
+    "The original total is 20; reducing one frequency by 2 gives 18."
+  ],
+  [
+    "Which graph is especially suitable for displaying frequencies of separate categories?",
+    [
+      "Bar graph",
+      "Circle circumference",
+      "Number line only",
+      "Angle bisector"
+    ],
+    0,
+    "A bar graph compares frequencies of separate categories clearly."
+  ],
+  [
+    "In a bar graph made from a frequency table, what does the height of a bar represent?",
+    [
+      "The frequency of that category",
+      "The name of the category",
+      "The colour of the paper",
+      "The number of axes"
+    ],
+    0,
+    "The bar height represents the category's frequency."
+  ],
+  [
+    "A frequency table has values 1, 2, 3 with frequencies 2, 9, 4. If one observation changes from value 2 to value 3, what are the new frequencies?",
+    [
+      "2, 8, 5",
+      "2, 9, 4",
+      "3, 8, 4",
+      "2, 10, 3"
+    ],
+    0,
+    "One count leaves value 2 and enters value 3, so the frequencies become 2, 8 and 5."
+  ],
+  [
+    "A table has frequencies 5, 8 and 7. If 3 observations are removed from the category with frequency 8, what is the total?",
+    [
+      "14",
+      "17",
+      "20",
+      "23"
+    ],
+    1,
+    "The original total is 20; removing 3 gives 17."
+  ],
+  [
+    "Values 1, 2, 3 and 4 have frequencies 2, 6, 6 and 3. Which values tie for the highest frequency?",
+    [
+      "1 and 4",
+      "2 and 3",
+      "1 and 2",
+      "3 and 4"
+    ],
+    1,
+    "Both 2 and 3 have the greatest frequency, 6."
+  ],
+  [
+    "A frequency table contains frequencies 0, 4, 0 and 7. How many observations are recorded?",
+    [
+      "7",
+      "11",
+      "14",
+      "0"
+    ],
+    1,
+    "The total frequency is 0 + 4 + 0 + 7 = 11."
+  ],
+  [
+    "A table has frequencies 5, 5, 5 and 5. What is true about the four values?",
+    [
+      "They have equal frequencies",
+      "The first value is the only mode",
+      "The last value is the only mode",
+      "The total is 5"
+    ],
+    0,
+    "Each value occurs 5 times, so all four frequencies are equal."
+  ],
+  [
+    "A frequency table has total 32. The frequencies of three categories are 8, 11 and 7. What is the missing frequency?",
+    [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    1,
+    "The known frequencies total 26, so the missing frequency is 32 − 26 = 6."
+  ],
+  [
+    "A survey gives frequencies 12, 9, 6 and 3. What fraction of the observations belong to the first category?",
+    [
+      "1/4",
+      "1/3",
+      "2/5",
+      "1/2"
+    ],
+    2,
+    "The total is 30, so the first category represents 12/30 = 2/5."
+  ],
+  [
+    "A frequency table has values 0, 1, 2 and 3 with frequencies 4, 9, 5 and 2. Which value is least frequent?",
+    [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    3,
+    "The smallest frequency is 2, corresponding to value 3."
+  ],
+  [
+    "A data set contains 5 occurrences of 1, 3 occurrences of 2, and 2 occurrences of 3. How many observations are there altogether?",
+    [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    2,
+    "The total number of observations is 5 + 3 + 2 = 10."
+  ]
+],
   "Data collection": [
     ["What is data collection?",["Gathering observations or responses","Deleting all observations","Solving an equation","Drawing only circles"],0,"Data collection is the systematic gathering of observations, measurements, or responses."],
     ["Which is an example of collecting data?",["Asking 30 students their favourite fruit","Memorising a formula","Solving 5 + 7","Drawing a square"],0,"Asking students for their responses gathers information that can be recorded as data."],

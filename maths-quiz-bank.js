@@ -820,7 +820,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
 ["Which value is closest to √2?",["1.14","1.41","2.14","2.41"],1,"√2 ≈ 1.414, so 1.41 is closest."],
 ["Which value is closest to √7?",["1.65","2.15","2.65","3.65"],2,"√7 ≈ 2.646, so 2.65 is closest."],
 ["If a = √2 and b = √8, which statement is correct?",["a = b","b = 2a","a = 2b","a + b = 0"],1,"√8 = √(4×2) = 2√2, so b = 2a."],
-["Which sum is irrational?",["√2 + (−√2)","√9 + 2","√5 + 3","1/2 + 1/4"],2,"√5 is irrational, and adding a rational number 3 keeps the result irrational."],
+["Which sum is irrational?",["√2 + (−√2)","√9 + 2","√5 + 3","1/2 + 1/4"],2,"√5 is irrational, and adding a rational number 3 keeps the result irrational."],]
 "Probability basics": [
 ["What is the probability of an event?",["Favourable outcomes divided by total equally likely outcomes","Total outcomes divided by favourable outcomes","Favourable outcomes multiplied by total outcomes","Total outcomes minus favourable outcomes"],0,"For equally likely outcomes, probability is favourable outcomes divided by total outcomes."],
 ["A bag has 3 red balls and 5 blue balls. What is the probability of choosing a red ball?",["3/5","3/8","5/8","1/3"],1,"There are 3 favourable red outcomes out of 8 total outcomes, so the probability is 3/8."],

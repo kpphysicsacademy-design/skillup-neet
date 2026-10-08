@@ -52,7 +52,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
     ["A circle has diameter 6 cm. Using π = 3.14, what is its area?",["9.42 cm²","18.84 cm²","28.26 cm²","56.52 cm²"],2,"The radius is 3 cm, so the area is 28.26 cm²."],
     ["Using π = 3.14, which radius gives an area of 153.86 cm²?",["5 cm","6 cm","7 cm","8 cm"],2,"153.86 ÷ 3.14 = 49, so r = 7 cm."],
     ["If a circle's radius changes from 10 cm to 20 cm, what happens to its area?",["It doubles","It becomes three times as large","It becomes four times as large","It becomes eight times as large"],2,"The radius doubles, so the area becomes 2² = 4 times as large."],
-    ["Using π = 3.14, by how much does the area increase when radius changes from 4 cm to 6 cm?",["62.8 cm²","87.92 cm²","113.04 cm²","163.28 cm²"],1,"The areas are 50.24 cm² and 113.04 cm²; the increase is 62.80 cm²."],
+    ["Using π = 3.14, by how much does the area increase when radius changes from 4 cm to 6 cm?",["62.8 cm²","87.92 cm²","113.04 cm²","163.28 cm²"],0,"The areas are 50.24 cm² and 113.04 cm²; the increase is 62.80 cm²."],
     ["A circle has diameter 30 cm. Using π = 3.14, what is its area?",["94.2 cm²","235.5 cm²","706.5 cm²","1413 cm²"],2,"The radius is 15 cm, so the area is 706.5 cm²."],
     ["Using π = 3.14, what is the area of a circle with diameter 10 cm?",["31.4 cm²","78.5 cm²","157 cm²","314 cm²"],1,"The radius is 5 cm, so the area is 78.5 cm²."],
     ["Using π = 3.14, a circle has area 200.96 cm². What is its radius?",["4 cm","6 cm","8 cm","10 cm"],2,"200.96 ÷ 3.14 = 64, so r = 8 cm."],

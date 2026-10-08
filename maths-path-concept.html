@@ -178,7 +178,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -645,6 +645,35 @@ if(norm(concept)==="terms and coefficients") return `
 <p><b>Key idea:</b> a term is a part of an expression separated by + or −. A coefficient is the number multiplying a variable. A constant term has no variable.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> the sign belongs to the term. If no coefficient is written, the coefficient is 1, so x means 1x.</p>
 </div>`;
+if(norm(concept)==="like and unlike terms") return `
+<div class="like-lesson">
+<strong>Change the coefficients and variable parts to see whether the terms are like or unlike.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>TERM 1</small><strong id="luTerm1">3x</strong><span class="pill" id="luPart1">x</span></div>
+ <div class="eq">?</div>
+ <div class="value-box"><small>TERM 2</small><strong id="luTerm2">5x</strong><span class="pill" id="luPart2">x</span></div>
+</div>
+<div class="control"><div class="head"><span>Coefficient of term 1</span><span class="val" id="luAVal">3</span></div><input id="luASlider" class="range" type="range" min="-10" max="10" value="3"></div>
+<div class="control"><div class="head"><span>Variable part of term 1</span></div><select id="luPart1Select"><option value="x">x</option><option value="y">y</option><option value="x²">x²</option><option value="xy">xy</option></select></div>
+<div class="control"><div class="head"><span>Coefficient of term 2</span><span class="val" id="luBVal">5</span></div><input id="luBSlider" class="range" type="range" min="-10" max="10" value="5"></div>
+<div class="control"><div class="head"><span>Variable part of term 2</span></div><select id="luPart2Select"><option value="x">x</option><option value="y">y</option><option value="x²">x²</option><option value="xy">xy</option></select></div>
+<div class="formula" id="luFormula">3x and 5x → LIKE TERMS</div>
+<div class="props">
+ <div class="prop"><span>TERM 1</span><strong id="luProp1">3x</strong></div>
+ <div class="prop"><span>TERM 2</span><strong id="luProp2">5x</strong></div>
+ <div class="prop"><span>VARIABLE PARTS</span><strong id="luParts">x and x</strong></div>
+ <div class="prop"><span>COMBINE?</span><strong id="luCombine">Yes</strong></div>
+</div>
+<div class="presets">
+ <button class="preset luP" data-a="3" data-p1="x" data-b="5" data-p2="x">3x + 5x</button>
+ <button class="preset luP" data-a="4" data-p1="x" data-b="7" data-p2="y">4x + 7y</button>
+ <button class="preset luP" data-a="2" data-p1="x²" data-b="-5" data-p2="x²">2x² − 5x²</button>
+ <button class="preset luP" data-a="3" data-p1="xy" data-b="8" data-p2="xy">3xy + 8xy</button>
+</div>
+<div class="checks" id="luWork"><b>Result:</b> 3x and 5x are like terms because their variable parts are identical. They can be combined: 3x + 5x = 8x.</div>
+<p><b>Key idea:</b> like terms have exactly the same variable part, including the same powers. Their coefficients may be different.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> 3x and 5x are like; 3x and 5y are unlike; x and x² are unlike because their powers differ.</p>
+</div>`;
 if(norm(concept)==="geometric constructions") return `
 <strong>Geometric constructions create exact lines, angles, and points using a compass and straightedge.</strong>
 <p><b>Core idea:</b> the compass transfers equal distances and draws arcs; the straightedge joins the construction points.</p>
@@ -899,6 +928,29 @@ function startTermsDemo(){
  document.querySelectorAll(".tcP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;x.value=btn.dataset.x;b.value=btn.dataset.b;y.value=btn.dataset.y;cc.value=btn.dataset.c;update();}));
  update();
 }
+function startLikeUnlikeDemo(){
+ if(norm(concept)!=="like and unlike terms")return;
+ const a=document.getElementById("luASlider"),b=document.getElementById("luBSlider"),p1=document.getElementById("luPart1Select"),p2=document.getElementById("luPart2Select");
+ if(!a||!b||!p1||!p2)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ const term=(coef,part)=>{if(coef===0)return "0";if(coef===1)return part;if(coef===-1)return "−"+part;return fmt(coef)+part;};
+ function update(){
+  const av=Number(a.value),bv=Number(b.value),part1=p1.value,part2=p2.value, t1=term(av,part1),t2=term(bv,part2),like=part1===part2;
+  set("luTerm1",t1);set("luTerm2",t2);set("luPart1",part1);set("luPart2",part2);set("luAVal",fmt(av));set("luBVal",fmt(bv));
+  set("luProp1",t1);set("luProp2",t2);set("luParts",part1+" and "+part2);set("luCombine",like?"Yes":"No");
+  const status=like?"LIKE TERMS":"UNLIKE TERMS";set("luFormula",t1+" and "+t2+" → "+status);
+  const work=document.getElementById("luWork");
+  if(work){
+   if(like){const sum=av+bv;work.innerHTML="<b>Result:</b> "+t1+" and "+t2+" are like terms because their variable parts are identical. They can be combined: "+t1+" + "+t2+" = "+term(sum,part1)+".";}
+   else work.innerHTML="<b>Result:</b> "+t1+" and "+t2+" are unlike terms because their variable parts are different. They cannot be combined into one term.";
+  }
+ }
+ [a,b,p1,p2].forEach(el=>el.addEventListener("input",update));
+ [p1,p2].forEach(el=>el.addEventListener("change",update));
+ document.querySelectorAll(".luP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;p1.value=btn.dataset.p1;p2.value=btn.dataset.p2;update();}));
+ update();
+}
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -936,7 +988,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startTermsDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

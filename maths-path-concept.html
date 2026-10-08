@@ -261,10 +261,10 @@
 }
 </style><style>.histograms-interactive-lesson .hg-responsive-svg{display:block;width:100%;max-width:100%;height:auto}@media(max-width:600px){.histograms-interactive-lesson{width:100%;overflow:hidden}.histograms-interactive-lesson .hg-responsive-svg{width:100%!important;height:auto!important}.histograms-interactive-lesson .props,.histograms-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}}</style><style>.probability-basics-interactive-lesson{width:100%;min-width:0;overflow:hidden}.probability-basics-interactive-lesson .pb-responsive-svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:600px){.probability-basics-interactive-lesson{padding:10px!important}.probability-basics-interactive-lesson .props{grid-template-columns:1fr 1fr!important;gap:6px!important}.probability-basics-interactive-lesson .prop{padding:7px!important}.probability-basics-interactive-lesson .preset{font-size:9px!important;padding:8px 6px!important}}</style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-real-numbers-interactive-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-real-numbers-interactive-v2">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-real-numbers-interactive-v1";</script>
-<script src="maths-quiz-bank.js?v=20261008-real-numbers-interactive-v1"></script>
-<script src="maths-path-data.js?v=20261008-real-numbers-interactive-v1"></script>
+<script src="maths-quiz-bank.js?v=20261008-real-numbers-interactive-v2"></script>
+<script src="maths-path-data.js?v=20261008-real-numbers-interactive-v2"></script>
 <script>
 (function(){
 "use strict";
@@ -963,11 +963,11 @@ if(norm(concept)==="irrational numbers") return `
 </div>`;
 if(norm(concept)==="real numbers") return `
 <div class="geometry-lesson real-numbers-interactive-lesson">
-<strong>Change the values and explore how rational and irrational numbers both belong to the real-number system.</strong>
+<strong>Change the values just like the Rational Numbers explorer and watch the real-number classification update live.</strong>
 <div class="visual-banner">
 <div class="value-box"><small>NUMBER</small><strong id="realValue">3/5</strong><span class="pill" id="realDecimal">0.600</span></div>
 <div class="eq">→</div>
-<div class="value-box"><small>NUMBER TYPE</small><strong id="realType">Rational</strong><span class="pill">real number</span></div>
+<div class="value-box"><small>NUMBER TYPE</small><strong id="realType">Rational</strong><span class="pill" id="realSetPill">Rational ⊂ Real</span></div>
 <div class="eq">→</div>
 <div class="value-box"><small>NUMBER LINE</small><strong id="realPosition">0.600</strong><span class="pill">point on ℝ</span></div>
 </div>
@@ -978,7 +978,7 @@ if(norm(concept)==="real numbers") return `
 <line x1="55" y1="190" x2="585" y2="190" stroke="#173f27" stroke-width="3"/>
 <g id="realTicks"></g><circle id="realPoint" cx="320" cy="190" r="9" fill="#2196F3"/>
 <text id="realPointLabel" x="320" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#2563eb">3/5</text>
-<text x="320" y="252" text-anchor="middle" font-size="14" fill="#66736b">Every real number corresponds to a point on the real number line.</text>
+<text id="realScaleNote" x="320" y="278" text-anchor="middle" font-size="13" fill="#66736b">Scale changes automatically so the selected value stays visible.</text>
 </svg>
 </div>
 <div class="props">
@@ -986,28 +986,31 @@ if(norm(concept)==="real numbers") return `
 <div class="prop"><span>Decimal</span><strong id="realPropDecimal">0.600</strong></div>
 <div class="prop"><span>Type</span><strong id="realPropType">Rational</strong></div>
 <div class="prop"><span>Real?</span><strong id="realPropReal">Yes</strong></div>
+<div class="prop"><span>Set</span><strong id="realPropSet">ℚ ⊂ ℝ</strong></div>
 </div>
-<div class="control"><div class="head"><span>Representation</span></div>
+<div class="control"><div class="head"><span>Representation</span><span class="val" id="realModeVal">Rational</span></div>
 <select class="range" id="realMode">
 <option value="rational">Rational number</option>
 <option value="irrational">Irrational number</option>
 </select></div>
 <div id="realRationalControls">
-<div class="control"><div class="head"><span>Numerator</span><span class="val" id="realNVal">3</span></div><input class="range" id="realNSlider" type="range" min="-9" max="9" value="3" step="1"></div>
-<div class="control"><div class="head"><span>Denominator</span><span class="val" id="realDVal">5</span></div><input class="range" id="realDSlider" type="range" min="1" max="9" value="5" step="1"></div>
+<div class="control"><div class="head"><span>Numerator</span><span class="val" id="realNVal">3</span></div><input class="range" id="realNSlider" type="range" min="-12" max="12" value="3" step="1"></div>
+<div class="control"><div class="head"><span>Denominator</span><span class="val" id="realDVal">5</span></div><input class="range" id="realDSlider" type="range" min="1" max="12" value="5" step="1"></div>
 </div>
 <div id="realIrrationalControls" style="display:none">
 <div class="control"><div class="head"><span>Radicand</span><span class="val" id="realRadVal">2</span></div><input class="range" id="realRadSlider" type="range" min="2" max="50" value="2" step="1"></div>
 </div>
-<div class="checks" id="realWork"><b>Explorer result:</b> 3/5 = 0.600. It is rational, and every rational number is a real number.</div>
+<div class="checks" id="realWork"><b>Explorer result:</b> 3/5 = 0.600. It is rational, so it belongs to the real numbers.</div>
 <div class="presets">
 <button class="preset realP" data-mode="rational" data-n="1" data-d="2">1/2</button>
 <button class="preset realP" data-mode="rational" data-n="-7" data-d="2">−7/2</button>
+<button class="preset realP" data-mode="rational" data-n="7" data-d="2">7/2</button>
 <button class="preset realP" data-mode="irrational" data-r="2">√2</button>
 <button class="preset realP" data-mode="irrational" data-r="5">√5</button>
 <button class="preset realP" data-mode="irrational" data-r="10">√10</button>
+<button class="preset realP" data-mode="irrational" data-r="25">√25</button>
 </div>
-<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> Real numbers = rational numbers + irrational numbers. Both types are represented on the real number line.</p>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> Real numbers = rational numbers + irrational numbers. Every rational or irrational value can be placed on the real number line.</p>
 </div>`;
 if(norm(concept)==="probability basics") return `
 <div class="geometry-lesson probability-basics-interactive-lesson">
@@ -2082,49 +2085,51 @@ function startRealNumbersDemo(){
  if(!mode||!ns||!ds||!rs)return;
  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
  const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t;}return a||1;};
  function update(){
-  const m=mode.value;
-  const rc=document.getElementById("realRationalControls"),ic=document.getElementById("realIrrationalControls");
+  const m=mode.value,rc=document.getElementById("realRationalControls"),ic=document.getElementById("realIrrationalControls");
   if(rc)rc.style.display=m==="rational"?"block":"none";
   if(ic)ic.style.display=m==="irrational"?"block":"none";
-  let value,decimal,type,label;
+  set("realModeVal",m==="rational"?"Rational":"Irrational");
+  let value,decimal,type,label,setText;
   if(m==="rational"){
-   let n=Number(ns.value),d=Math.max(1,Number(ds.value));ds.value=d;
-   value=n/d;decimal=value.toFixed(3);type="Rational";label=n+"/"+d;
+   let n=Number(ns.value)||0,d=Math.max(1,Number(ds.value)||1);ds.value=d;
+   const g=gcd(n,d),sn=n/g,sd=d/g;
+   value=n/d;decimal=value.toFixed(3);type="Rational";label=fmt(sn)+"/"+sd;setText="ℚ ⊂ ℝ";
    set("realNVal",n);set("realDVal",d);
   }else{
-   const r=Math.max(2,Math.min(50,Number(rs.value)||2)),root=Math.sqrt(r);
-   value=root;decimal=root.toFixed(3);type=Number.isInteger(root)?"Rational":"Irrational";
-   label=Number.isInteger(root)?"√"+r+" = "+root:"√"+r;
+   const r=Math.max(2,Math.min(50,Number(rs.value)||2)),root=Math.sqrt(r),perfect=Number.isInteger(root);
+   value=root;decimal=root.toFixed(3);type=perfect?"Rational":"Irrational";
+   label=perfect?"√"+r+" = "+root:"√"+r;setText=perfect?"ℚ ⊂ ℝ":"ℝ \ ℚ";
    set("realRadVal",r);
   }
-  set("realValue",label);set("realDecimal",decimal);set("realType",type);
-  set("realPosition",decimal);set("realPropValue",label);set("realPropDecimal",decimal);set("realPropType",type);set("realPropReal","Yes");
+  set("realValue",label);set("realDecimal",decimal);set("realType",type);set("realPosition",decimal);
+  set("realPropValue",label);set("realPropDecimal",decimal);set("realPropType",type);set("realPropReal","Yes");
+  set("realPropSet",setText);set("realSetPill",type==="Rational"?"Rational ⊂ Real":"Irrational ⊂ Real");
   const work=document.getElementById("realWork");
   if(work){
    work.innerHTML=m==="rational"
-    ? "<b>Explorer result:</b> "+label+" = "+decimal+". The numerator and denominator are integers with a non-zero denominator, so the number is rational and therefore real."
+    ? "<b>Explorer result:</b> "+fmt(Number(ns.value)||0)+"/"+(Number(ds.value)||1)+" = "+decimal+". After simplifying to "+label+", it is rational and therefore real."
     : (type==="Rational"
       ? "<b>Explorer result:</b> "+label+" is a perfect-square root, so it is rational and real."
       : "<b>Explorer result:</b> "+label+" ≈ "+decimal+". The radicand is not a perfect square, so the root is irrational but still real.");
   }
   const ticks=document.getElementById("realTicks"),point=document.getElementById("realPoint"),pl=document.getElementById("realPointLabel");
   if(!ticks||!point)return;
-  const lo=-5,hi=5,span=10,x0=55,x1=585;
+  const maxAbs=Math.max(2.5,Math.ceil(Math.abs(value)*1.35)),lo=-maxAbs,hi=maxAbs,span=hi-lo,x0=55,x1=585;
   ticks.innerHTML="";
-  for(let v=lo;v<=hi;v++){
+  const step=maxAbs<=6?1:Math.ceil(maxAbs/6);
+  for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step){
    const x=x0+(v-lo)/span*(x1-x0);
    const line=document.createElementNS("http://www.w3.org/2000/svg","line");
-   line.setAttribute("x1",x);line.setAttribute("x2",x);line.setAttribute("y1","182");line.setAttribute("y2","198");
-   line.setAttribute("stroke","#173f27");line.setAttribute("stroke-width","2");ticks.appendChild(line);
+   line.setAttribute("x1",x);line.setAttribute("x2",x);line.setAttribute("y1","182");line.setAttribute("y2","198");line.setAttribute("stroke","#173f27");line.setAttribute("stroke-width","2");ticks.appendChild(line);
    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
    t.setAttribute("x",x);t.setAttribute("y","224");t.setAttribute("text-anchor","middle");t.setAttribute("font-size","12");t.setAttribute("font-weight","700");t.setAttribute("fill","#263238");t.textContent=v;ticks.appendChild(t);
   }
-  const clipped=Math.max(lo,Math.min(hi,value)),px=x0+(clipped-lo)/span*(x1-x0);
-  point.setAttribute("cx",px);if(pl){pl.setAttribute("x",px);pl.textContent=label;}
+  const px=x0+(value-lo)/span*(x1-x0);
+  point.setAttribute("cx",px);pl&&pl.setAttribute("x",px);if(pl)pl.textContent=label;
  }
- [mode,ns,ds,rs].forEach(el=>el.addEventListener("input",update));
- mode.addEventListener("change",update);
+ [ns,ds,rs].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
  document.querySelectorAll(".realP").forEach(btn=>btn.addEventListener("click",()=>{
   mode.value=btn.dataset.mode;
   if(btn.dataset.mode==="rational"){ns.value=btn.dataset.n;ds.value=btn.dataset.d;}

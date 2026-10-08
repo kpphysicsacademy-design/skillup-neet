@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-laws-exponents-quiz-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-laws-exponents-quiz-v2">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-real-numbers-interactive-v1</title>
@@ -263,7 +263,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-decimal-expansions-interactive-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-real-numbers-interactive-v1";</script>
-<script src="maths-quiz-bank.js?v=20261008-laws-exponents-quiz-v1"></script>
+<script src="maths-quiz-bank.js?v=20261008-laws-exponents-quiz-v2"></script>
 <script src="maths-path-data.js?v=20261008-real-numbers-interactive-v2"></script>
 <script>
 (function(){
@@ -370,13 +370,14 @@ function mathifyText(s){
 }
 function quizMath(s){
  let t=esc(String(s));
- // Normalize escaped delimiters and convert simple math to valid MathJax.
- t=t.replace(/\\\\[()\\[\\]]/g,"");
+ // Strip any pre-existing MathJax delimiters first, then rebuild clean delimiters.
+ // This prevents nested \\( ... \\) when bank text already contains escaped math.
+ t=t.replace(/\\\\([()\\[\\]])/g,"$1");
  t=t.replace(/([A-Za-z0-9]+)²/g,"\\\\($1^2\\\\)").replace(/([A-Za-z0-9]+)³/g,"\\\\($1^3\\\\)");
  t=t.replace(/([A-Za-z0-9]+)\\^{?(\\d+)}?/g,"\\\\($1^{$2}\\\\)");
  t=t.replace(/√\\s*([−-]?\\d+(?:\\.\\d+)?)/g,"\\\\(\\\\sqrt{$1}\\\\)");
  t=t.replace(/∛\\s*([−-]?\\d+(?:\\.\\d+)?)/g,"\\\\(\\\\sqrt[3]{$1}\\\\)");
- t=t.replace(/([−-]?\\d+)\\s*\/\\s*([−-]?\\d+)/g,"\\\\(\\\\frac{$1}{$2}\\\\)");
+ t=t.replace(/([−-]?\\d+)\\s*\\/\\s*([−-]?\\d+)/g,"\\\\(\\\\frac{$1}{$2}\\\\)");
  return t;
 }
 function mathifyOption(s){

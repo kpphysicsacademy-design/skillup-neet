@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-linear-equations-two-variables-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-factor-theorem-basics-v1</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-linear-equations-two-variables-v2</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -262,7 +262,7 @@
 </style><style>.histograms-interactive-lesson .hg-responsive-svg{display:block;width:100%;max-width:100%;height:auto}@media(max-width:600px){.histograms-interactive-lesson{width:100%;overflow:hidden}.histograms-interactive-lesson .hg-responsive-svg{width:100%!important;height:auto!important}.histograms-interactive-lesson .props,.histograms-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}}</style><style>.probability-basics-interactive-lesson{width:100%;min-width:0;overflow:hidden}.probability-basics-interactive-lesson .pb-responsive-svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:600px){.probability-basics-interactive-lesson{padding:10px!important}.probability-basics-interactive-lesson .props{grid-template-columns:1fr 1fr!important;gap:6px!important}.probability-basics-interactive-lesson .prop{padding:7px!important}.probability-basics-interactive-lesson .preset{font-size:9px!important;padding:8px 6px!important}}</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-decimal-expansions-interactive-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-factor-theorem-basics-v1";</script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-linear-equations-two-variables-v2";</script>
 <script src="maths-quiz-bank.js?v=20261008-factor-theorem-basics-v1"></script>
 <script src="maths-path-data.js?v=20261008-real-numbers-interactive-v2"></script>
 <script>
@@ -2457,27 +2457,55 @@ function startLawsOfExponentsDemo(){
 
 function startLinearEquationsInTwoVariablesDemo(){
  if(norm(concept)!=="linear equations in two variables")return;
- const mode=document.getElementById("levMode"),a=document.getElementById("levASlider"),b=document.getElementById("levBSlider"),cc=document.getElementById("levCSlider");
- if(!mode||!a||!b||!cc)return;
+ const a=document.getElementById("levASlider"),b=document.getElementById("levBSlider"),cc=document.getElementById("levCSlider");
+ if(!a||!b||!cc)return;
  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
  const fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(2)));
+ const signed=(n,suffix="")=>n===0?"":(n>0?" + ":" − ")+Math.abs(n)+suffix;
  const update=()=>{
   let A=+a.value,B=+b.value,C=+cc.value;
-  if(A===0)A=1;if(B===0)B=1;
-  const eq=A+"x "+(B>=0?"+ ":"− ")+Math.abs(B)+"y "+(C>=0?"+ ":"− ")+Math.abs(C)+" = 0";
-  const xInt=-C/A,yInt=-C/B,slope=-A/B;
-  const horizontal=A===0,vertical=B===0;
+  if(A===0&&B===0){B=1;b.value=1;}
+  const rhs=-C;
+  const eq=(A===1?"":A===-1?"−":A)+"x"+signed(B,"y")+signed(C)+" = 0";
+  let slope="—",xInt="—",yInt="—",form="—";
+  if(B!==0){
+   slope=-A/B;yInt=-C/B;
+   form="y = "+fmt(slope)+"x "+(yInt>=0?"+ ":"− ")+Math.abs(yInt);
+   if(A!==0)xInt=-C/A;
+  }else{
+   xInt=-C/A;form="x = "+fmt(xInt);
+  }
+  if(A===0){slope=0;yInt=-C/B;form="y = "+fmt(yInt);}
   set("levEquation",eq);set("levAVal",A);set("levBVal",B);set("levCVal",C);
-  set("levSlopeVal",fmt(slope));set("levXIntVal",fmt(xInt));set("levYIntVal",fmt(yInt));
-  set("levFormVal","y = "+fmt(slope)+"x "+(yInt>=0?"+ ":"− ")+Math.abs(yInt));
-  set("levCheckVal","Any point (x,y) on the line satisfies "+A+"x "+(B>=0?"+ ":"− ")+Math.abs(B)+"y = "+(-C));
+  set("levSlopeVal",B===0?"Undefined (vertical)":fmt(slope));
+  set("levXIntVal",xInt==="—"?"None":fmt(xInt));
+  set("levYIntVal",yInt==="—"?"None":fmt(yInt));
+  set("levFormVal",form);
+  set("levCheckVal",A===0?"Every point on y = "+fmt(yInt)+" satisfies the equation.":B===0?"Every point on x = "+fmt(xInt)+" satisfies the equation.":"Points on the line satisfy "+A+"x "+(B>=0?"+ ":"− ")+Math.abs(B)+"y = "+rhs+".");
   const line=document.getElementById("levLine"),p1=document.getElementById("levP1"),p2=document.getElementById("levP2");
-  if(line){line.setAttribute("x1","40");line.setAttribute("y1",String(150-50*(slope*(-4)+yInt)));line.setAttribute("x2","600");line.setAttribute("y2",String(150-50*(slope*4+yInt)));}
-  if(p1){p1.setAttribute("cx",120);p1.setAttribute("cy",String(150-50*yInt));} if(p2){p2.setAttribute("cx",520);p2.setAttribute("cy",String(150-50*(slope*4+yInt)));}
+  const toX=x=>320+x*42,toY=y=>150-y*32;
+  if(line&&p1&&p2){
+   if(B===0){
+    const px=toX(xInt);line.setAttribute("x1",px);line.setAttribute("y1",25);line.setAttribute("x2",px);line.setAttribute("y2",255);
+    p1.setAttribute("cx",px);p1.setAttribute("cy",90);p2.setAttribute("cx",px);p2.setAttribute("cy",210);
+   }else{
+    const yAt=x=>(-A*x-C)/B;
+    let xL=-6,xR=6;
+    const yL=yAt(xL),yR=yAt(xR);
+    const maxY=Math.max(3,Math.abs(yL),Math.abs(yR),Math.abs(yInt||0));
+    const sy=Math.min(32,105/maxY);
+    const toYSafe=y=>150-y*sy;
+    line.setAttribute("x1",toX(xL));line.setAttribute("y1",toYSafe(yL));line.setAttribute("x2",toX(xR));line.setAttribute("y2",toYSafe(yR));
+    const px1=toX(-4),px2=toX(4),y1=yAt(-4),y2=yAt(4);
+    p1.setAttribute("cx",px1);p1.setAttribute("cy",toYSafe(y1));p2.setAttribute("cx",px2);p2.setAttribute("cy",toYSafe(y2));
+   }
+  }
  };
- [a,b,cc].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
- document.querySelectorAll(".levPreset").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;cc.value=btn.dataset.c;update()}));update();
+ [a,b,cc].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".levPreset").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;cc.value=btn.dataset.c;update();}));
+ update();
 }
+
 function startFactorTheoremBasicsDemo(){
  if(norm(concept)!=="factor theorem basics")return;
  const mode=document.getElementById("ftbMode"),a=document.getElementById("ftbASlider"),b=document.getElementById("ftbBSlider"),cc=document.getElementById("ftbCSlider"),d=document.getElementById("ftbDSlider"),x=document.getElementById("ftbXSlider");

@@ -1371,10 +1371,13 @@ function startTrianglesDemo(){
   set("triLiveLine4",typeName==="Equilateral"?"3 equal angles":typeName==="Isosceles"?"2 equal angles":typeName==="Right triangle"?"Other angles sum to 90°":"No equal-angle requirement");
   const work=document.getElementById("triWorkLive");if(work)work.innerHTML="<b>Result:</b> "+a+"° + "+b+"° + "+c+"° = 180°. This is a "+typeName.toLowerCase()+".";
   const poly=document.getElementById("triLiveShape");const marks=document.getElementById("triLiveMarks");if(!poly||!marks)return;
-  const A=[210,70],B=[70,250],C=[350,250],scale=0.9+Math.min(a,b,c)/300;
-  const xA=210,yA=70,xB=70,yB=250,xC=350,yC=250;
-  poly.setAttribute("points",xB+","+yB+" "+xA+","+yA+" "+xC+","+yC);
-  marks.innerHTML='<circle cx="'+xA+'" cy="'+yA+'" r="5" class="geo-point"/><circle cx="'+xB+'" cy="'+yB+'" r="5" class="geo-point"/><circle cx="'+xC+'" cy="'+yC+'" r="5" class="geo-point"/><text x="202" y="55" class="geo-note">A = '+a+'°</text><text x="42" y="270" class="geo-note">B = '+b+'°</text><text x="350" y="270" class="geo-note">C = '+c+'°</text>';
+  const bx=70,cx=350,base=cx-bx,by=250;
+  const ar=a*Math.PI/180,br=b*Math.PI/180,cr=c*Math.PI/180;
+  const ab=base*Math.sin(cr)/Math.sin(ar);
+  const xA=bx+ab*Math.cos(br), yA=by-ab*Math.sin(br);
+  poly.setAttribute("points",bx+","+by+" "+xA.toFixed(1)+","+yA.toFixed(1)+" "+cx+","+by);
+  const labelY=Math.max(28,yA-12);
+  marks.innerHTML='<circle cx="'+xA.toFixed(1)+'" cy="'+yA.toFixed(1)+'" r="5" class="geo-point"/><circle cx="'+bx+'" cy="'+by+'" r="5" class="geo-point"/><circle cx="'+cx+'" cy="'+by+'" r="5" class="geo-point"/><text x="'+(xA-8).toFixed(1)+'" y="'+labelY.toFixed(1)+'" class="geo-note">A = '+a+'°</text><text x="42" y="270" class="geo-note">B = '+b+'°</text><text x="350" y="270" class="geo-note">C = '+c+'°</text>';
  }
  [aSlider,bSlider,mode].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
  document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));

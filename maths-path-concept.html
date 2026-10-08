@@ -1347,11 +1347,10 @@ function startTrianglesDemo(){
  const mode=document.getElementById("triModeSelectLive"),aSlider=document.getElementById("triSliderA"),bSlider=document.getElementById("triSliderB"); if(!mode||!aSlider||!bSlider)return;
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
  function classify(a,b,c){
-  if(a===60&&b===60&&c===60)return "Equilateral";
-  const right=Math.abs(a-90)<0.001||Math.abs(b-90)<0.001||Math.abs(c-90)<0.001;
-  const iso=a===b||b===c||a===c;
-  if(right)return "Right triangle";
-  if(iso)return "Isosceles";
+  const eps=0.001;
+  if(Math.abs(a-60)<eps&&Math.abs(b-60)<eps&&Math.abs(c-60)<eps)return "Equilateral";
+  if(Math.abs(a-90)<eps||Math.abs(b-90)<eps||Math.abs(c-90)<eps)return "Right triangle";
+  if(Math.abs(a-b)<eps||Math.abs(b-c)<eps||Math.abs(a-c)<eps)return "Isosceles";
   return "Scalene";
  }
  function update(){
@@ -1368,20 +1367,35 @@ function startTrianglesDemo(){
   set("triLiveLine1",a+"° + "+b+"° + "+c+"° = 180°");
   set("triLiveLine2",typeName==="Right triangle"?"One angle is 90°":"Interior angles total 180°");
   set("triLiveLine3",typeName==="Equilateral"?"3 equal sides":typeName==="Isosceles"?"2 equal sides":typeName==="Right triangle"?"One right angle":"All sides may differ");
-  set("triLiveLine4",typeName==="Equilateral"?"3 equal angles":typeName==="Isosceles"?"2 equal angles":typeName==="Right triangle"?"Other angles sum to 90°":"No equal-angle requirement");
+  set("triLiveLine4",typeName==="Equilateral"?"3 equal angles":typeName==="Isosceles"?"2 equal angles":typeName==="Right triangle"?"Other angles sum to 90°":"No equal-angle requirement";
   const work=document.getElementById("triWorkLive");if(work)work.innerHTML="<b>Result:</b> "+a+"° + "+b+"° + "+c+"° = 180°. This is a "+typeName.toLowerCase()+".";
-  const poly=document.getElementById("triLiveShape");const marks=document.getElementById("triLiveMarks");if(!poly||!marks)return;
-  const bx=70,cx=350,base=cx-bx,by=250;
+  const poly=document.getElementById("triLiveShape"),marks=document.getElementById("triLiveMarks");if(!poly||!marks)return;
+
+  /* Build the triangle from the actual angle values, then auto-fit it into the SVG.
+     Base BC is fixed first; the sine rule determines the other sides. This makes the
+     drawn triangle itself change whenever either angle slider changes. */
+  const bx=0,cx=280,by=0,base=cx-bx;
   const ar=a*Math.PI/180,br=b*Math.PI/180,cr=c*Math.PI/180;
   const ab=base*Math.sin(cr)/Math.sin(ar);
-  const xA=bx+ab*Math.cos(br), yA=by-ab*Math.sin(br);
-  poly.setAttribute("points",bx+","+by+" "+xA.toFixed(1)+","+yA.toFixed(1)+" "+cx+","+by);
-  const labelY=Math.max(28,yA-12);
-  marks.innerHTML='<circle cx="'+xA.toFixed(1)+'" cy="'+yA.toFixed(1)+'" r="5" class="geo-point"/><circle cx="'+bx+'" cy="'+by+'" r="5" class="geo-point"/><circle cx="'+cx+'" cy="'+by+'" r="5" class="geo-point"/><text x="'+(xA-8).toFixed(1)+'" y="'+labelY.toFixed(1)+'" class="geo-note">A = '+a+'°</text><text x="42" y="270" class="geo-note">B = '+b+'°</text><text x="350" y="270" class="geo-note">C = '+c+'°</text>';
+  const rawA={x:ab*Math.cos(br),y:-ab*Math.sin(br)};
+  const pts=[{x:bx,y:by},rawA,{x:cx,y:by}];
+  const minX=Math.min(...pts.map(p=>p.x)),maxX=Math.max(...pts.map(p=>p.x));
+  const minY=Math.min(...pts.map(p=>p.y)),maxY=Math.max(...pts.map(p=>p.y));
+  const width=Math.max(1,maxX-minX),height=Math.max(1,maxY-minY);
+  const pad=35,targetW=350,targetH=220;
+  const scale=Math.min(targetW/width,targetH/height);
+  const ox=35-minX*scale+(targetW-width*scale)/2;
+  const oy=35-minY*scale+(targetH-height*scale)/2;
+  const p=pts.map(q=>({x:q.x*scale+ox,y:q.y*scale+oy}));
+  poly.setAttribute("points",p.map(q=>q.x.toFixed(1)+","+q.y.toFixed(1)).join(" "));
+  poly.setAttribute("vector-effect","non-scaling-stroke");
+
+  const angleLabel=(q,dx,dy)=>({x:q.x+dx,y:q.y+dy});
+  const la=angleLabel(p[1],0,-14),lb=angleLabel(p[0],-3,18),lc=angleLabel(p[2],-28,18);
+  marks.innerHTML='<circle cx="'+p[0].x.toFixed(1)+'" cy="'+p[0].y.toFixed(1)+'" r="5" class="geo-point"/><circle cx="'+p[1].x.toFixed(1)+'" cy="'+p[1].y.toFixed(1)+'" r="5" class="geo-point"/><circle cx="'+p[2].x.toFixed(1)+'" cy="'+p[2].y.toFixed(1)+'" r="5" class="geo-point"/><text x="'+la.x.toFixed(1)+'" y="'+la.y.toFixed(1)+'" text-anchor="middle" class="geo-note">A = '+a+'°</text><text x="'+lb.x.toFixed(1)+'" y="'+lb.y.toFixed(1)+'" text-anchor="end" class="geo-note">B = '+b+'°</text><text x="'+lc.x.toFixed(1)+'" y="'+lc.y.toFixed(1)+'" class="geo-note">C = '+c+'°</text>';
  }
- [aSlider,bSlider,mode].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
- document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));
- update();
+ [aSlider,bSlider].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
+ document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));update();
 }
 function startBasicGeometricIdeasDemo(){
  if(norm(concept)!=="basic geometric ideas")return;

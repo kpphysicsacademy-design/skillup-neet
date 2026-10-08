@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-rationalisation-basics-v3">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-polynomial-basics-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-real-numbers-interactive-v1</title>
@@ -263,7 +263,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-decimal-expansions-interactive-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-real-numbers-interactive-v1";</script>
-<script src="maths-quiz-bank.js?v=20261008-rationalisation-basics-v3"></script>
+<script src="maths-quiz-bank.js?v=20261008-polynomial-basics-v1"></script>
 <script src="maths-path-data.js?v=20261008-real-numbers-interactive-v2"></script>
 <script>
 (function(){
@@ -954,6 +954,39 @@ if(norm(concept)==="laws of exponents") return `
 <button class="preset leP" data-mode="zero" data-a="5" data-m="0" data-n="2">5⁰</button>
 </div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> same-base multiplication adds exponents, division subtracts exponents, a power of a power multiplies exponents, and every non-zero base to the zero power equals 1.</p>
+</div>`;
+if(norm(concept)==="polynomial basics") return `
+<div class="geometry-lesson polynomial-basics-interactive-lesson">
+<strong>Change the polynomial values and watch its degree, value, and structure update live.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>POLYNOMIAL</small><strong id="pbExpression">x² + 2x + 1</strong><span class="pill" id="pbTypeVal">Quadratic</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>AT x</small><strong id="pbAtX">x = 2</strong><span class="pill" id="pbValueVal">p(2) = 9</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>DEGREE</small><strong id="pbDegreeVal">2</strong><span class="pill">highest power</span></div>
+</div>
+<div class="control"><div class="head"><span>Polynomial type</span><span class="val" id="pbModeVal">Quadratic</span></div>
+<select id="pbMode"><option value="linear">Linear</option><option value="quadratic" selected>Quadratic</option><option value="cubic">Cubic</option></select></div>
+<div class="control"><div class="head"><span>Leading coefficient a</span><span class="val" id="pbAVal">1</span></div><input id="pbASlider" class="range" type="range" min="-5" max="5" step="1" value="1"></div>
+<div class="control"><div class="head"><span>Coefficient b</span><span class="val" id="pbBVal">2</span></div><input id="pbBSlider" class="range" type="range" min="-5" max="5" step="1" value="2"></div>
+<div class="control"><div class="head"><span>Coefficient c</span><span class="val" id="pbCVal">1</span></div><input id="pbCSlider" class="range" type="range" min="-5" max="5" step="1" value="1"></div>
+<div class="control"><div class="head"><span>Coefficient d</span><span class="val" id="pbDVal">0</span></div><input id="pbDSlider" class="range" type="range" min="-5" max="5" step="1" value="0"></div>
+<div class="control"><div class="head"><span>Value of x</span><span class="val" id="pbXVal">2</span></div><input id="pbXSlider" class="range" type="range" min="-5" max="5" step="1" value="2"></div>
+<div class="props">
+<div class="prop"><span>Degree</span><strong id="pbDegreeProp">2</strong></div>
+<div class="prop"><span>Terms</span><strong id="pbTermsProp">3</strong></div>
+<div class="prop"><span>Leading coefficient</span><strong id="pbLeadProp">1</strong></div>
+<div class="prop"><span>Value p(x)</span><strong id="pbValueProp">9</strong></div>
+</div>
+<div class="checks" id="pbWork"><b>Explorer result:</b> p(x)=x²+2x+1 is quadratic, has degree 2, and p(2)=9.</div>
+<div class="presets">
+<button class="preset pbP" data-t="linear" data-a="2" data-b="3" data-c="0" data-d="0" data-x="2">2x + 3</button>
+<button class="preset pbP" data-t="quadratic" data-a="1" data-b="-2" data-c="-3" data-d="0" data-x="3">x² − 2x − 3</button>
+<button class="preset pbP" data-t="quadratic" data-a="2" data-b="0" data-c="1" data-d="0" data-x="-2">2x² + 1</button>
+<button class="preset pbP" data-t="cubic" data-a="1" data-b="-1" data-c="0" data-d="2" data-x="2">x³ − x² + 2</button>
+<button class="preset pbP" data-t="cubic" data-a="-1" data-b="2" data-c="1" data-d="-2" data-x="-1">−x³ + 2x² + x − 2</button>
+</div>
+<div class="checks"><b>Remember:</b> A polynomial uses non-negative integer powers. Its degree is the highest exponent with a non-zero coefficient; the number of terms determines whether it is a monomial, binomial, or trinomial.</div>
 </div>`;
 if(norm(concept)==="rationalisation basics") return `
 <div class="geometry-lesson rationalisation-basics-interactive-lesson">
@@ -2278,6 +2311,44 @@ function startLawsOfExponentsDemo(){
  [bEl,mEl,nEl].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
  document.querySelectorAll(".leP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.mode;bEl.value=btn.dataset.a;mEl.value=btn.dataset.m;nEl.value=btn.dataset.n;update();}));update();
 }
+function startPolynomialBasicsDemo(){
+ if(norm(concept)!=="polynomial basics")return;
+ const mode=document.getElementById("pbMode"),aEl=document.getElementById("pbASlider"),bEl=document.getElementById("pbBSlider"),cEl=document.getElementById("pbCSlider"),dEl=document.getElementById("pbDSlider"),xEl=document.getElementById("pbXSlider");
+ if(!mode||!aEl||!bEl||!cEl||!dEl||!xEl)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ const term=(coef,pow)=>{
+  if(coef===0)return "";
+  const sign=coef<0?"−":"+";
+  const abs=Math.abs(coef);
+  const lead=pow===0?String(abs):(abs===1?"":String(abs))+"x"+(pow===1?"":pow===2?"²":pow===3?"³":"^"+pow);
+  return {sign,lead};
+ };
+ function expression(t,a,b,c,d){
+  const terms=t==="linear"?[[a,1],[b,0]]:t==="quadratic"?[[a,2],[b,1],[c,0]]:[[a,3],[b,2],[c,1],[d,0]];
+  let out="";
+  terms.forEach(([co,p],i)=>{if(!co)return;const q=term(co,p);if(i===0)out+=(co<0?"−":"")+q.lead;else out+=" "+q.sign+" "+q.lead;});
+  return out||"0";
+ }
+ function update(){
+  const t=mode.value;let a=Number(aEl.value),b=Number(bEl.value),c=Number(cEl.value),d=Number(dEl.value),x=Number(xEl.value);
+  if(t!=="linear"&&a===0){a=1;aEl.value=1;}
+  if(t==="linear"){c=0;d=0;cEl.value=0;dEl.value=0;}
+  if(t==="quadratic"){d=0;dEl.value=0;}
+  const deg=t==="cubic"?3:t==="quadratic"?2:(a!==0?1:0);
+  const value=t==="linear"?a*x+b:t==="quadratic"?a*x*x+b*x+c:a*x*x*x+b*x*x+c*x+d;
+  const expr=expression(t,a,b,c,d);
+  const termCount=(t==="linear"?[[a,1],[b,0]]:t==="quadratic"?[[a,2],[b,1],[c,0]]:[[a,3],[b,2],[c,1],[d,0]]).filter(z=>z[0]!==0).length;
+  const names={linear:"Linear",quadratic:"Quadratic",cubic:"Cubic"};
+  set("pbExpression",expr);set("pbTypeVal",names[t]);set("pbModeVal",names[t]);set("pbAtX","x = "+x);set("pbValueVal","p("+x+") = "+value);set("pbDegreeVal",deg);set("pbDegreeProp",deg);set("pbTermsProp",termCount);set("pbLeadProp",a);set("pbValueProp",value);
+  set("pbAVal",a);set("pbBVal",b);set("pbCVal",c);set("pbDVal",d);set("pbXVal",x);
+  const work=document.getElementById("pbWork");if(work)work.innerHTML="<b>Explorer result:</b> p(x) = "+expr+" is a "+names[t].toLowerCase()+" polynomial with degree "+deg+", "+termCount+" non-zero term"+(termCount===1?"":"s")+", and p("+x+") = "+value+".";
+ }
+ [mode,aEl,bEl,cEl,dEl,xEl].forEach(el=>el.addEventListener("input",update));
+ mode.addEventListener("change",update);
+ document.querySelectorAll(".pbP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;cEl.value=btn.dataset.c;dEl.value=btn.dataset.d;xEl.value=btn.dataset.x;update();}));
+ update();
+}
 function startRationalisationBasicsDemo(){
  if(norm(concept)!=="rationalisation basics")return;
  const mode=document.getElementById("rbMode"),kEl=document.getElementById("rbKSlider"),nEl=document.getElementById("rbNSlider"),aEl=document.getElementById("rbASlider");
@@ -2609,6 +2680,8 @@ function startBasicGeometricIdeasDemo(){
 }
 
 const INLINE_RATIONALISATION_BASICS_QUIZ=[["What is the rationalised form of 1/√2?",["√2/2","1/2","2/√2","√2"],0,"Multiply numerator and denominator by √2 to obtain √2/2."],["What is the rationalised form of 3/√5?",["3√5/5","√5/3","15/√5","3√5"],0,"Multiplying by √5/√5 gives 3√5/5."],["Why is 1/√3 not rationalised?",["The numerator is irrational","The denominator contains a radical","The fraction is negative","The numerator is 1"],1,"Rationalisation specifically removes a radical from the denominator."],["Which multiplier rationalises 1/√7?",["√7/√7","7/7","√7/7","1/7"],0,"Multiplying by √7/√7 equals 1 and removes the radical from the denominator."],["What is √3 × √3?",["3","√6","9","1"],0,"The product of identical square roots is the radicand: √3 × √3 = 3."],["What is the rationalised form of 2/√3?",["2√3/3","√3/2","6/√3","2√3"],0,"Multiply numerator and denominator by √3 to get 2√3/3."],["Which expression is a rationalising factor for 5/√11?",["√11/√11","11/5","√5/√11","11/√11"],0,"The factor √11/√11 is equal to 1 and removes √11 from the denominator."],["What is the rationalised denominator of 4/√10?",["10","√10","4√10","40"],0,"Multiplying by √10 makes the denominator √10 × √10 = 10."],["Which form has a rational denominator?",["1/√5","√5/5","2/(1+√2)","1/(√3+1)"],1,"√5/5 has an integer denominator, while the other listed forms still contain a radical in the denominator."],["What is the conjugate of 3 + √5?",["3 − √5","−3 + √5","3 + √5","√3 − 5"],0,"The conjugate changes the sign between the two terms."],["What is (3+√5)(3−√5)?",["4","9+5","14","9−√5"],0,"Using difference of squares gives 3² − (√5)² = 9 − 5 = 4."],["What is the rationalised form of 1/(1+√2)?",["√2−1","1−√2","√2+1","1/3"],0,"Multiply by the conjugate 1−√2; the denominator becomes 1−2 = −1, giving √2−1."],["Which is the conjugate of 5−√7?",["5+√7","−5−√7","5−√7","√5+7"],0,"The conjugate reverses only the sign between the two terms."],["What is (4+√3)(4−√3)?",["13","16+3","7","12"],0,"The product is 4² − (√3)² = 16 − 3 = 13."],["Which method is used for a denominator a+√b?",["Multiply by its conjugate","Add a and b","Square only a","Divide by √b"],0,"The conjugate a−√b turns the denominator into a²−b."],["What is the rationalised denominator of 1/(2+√3)?",["1","4−3","2−√3","4+3"],1,"Multiplying by the conjugate 2−√3 gives 2²−(√3)² = 4−3 = 1."],["What is the rationalised form of 1/(2+√3)?",["2−√3","2+√3","√3−2","1/(2−√3)"],0,"Because the conjugate product is 1, the fraction becomes 2−√3."],["Which statement about a conjugate pair is true?",["Their product can remove the radical from a binomial denominator","They always have equal signs","Their sum is always 1","Their product is always irrational"],0,"For a±√b, multiplying by a∓√b gives a²−b, which is rational."],["What is the conjugate of 7+2√3?",["7−2√3","−7+2√3","7+2√3","2√7−3"],0,"The conjugate changes the sign between the rational and radical terms."],["What is (7+2√3)(7−2√3)?",["37","49−12","61","25"],1,"The product is 7² − (2√3)² = 49 − 12 = 37."],["What is the rationalised form of 2/(1+√3)?",["√3−1","1−√3","2(1−√3)","2/(1−√3)"],0,"Multiplying by 1−√3 gives denominator 1−3 = −2, so the result is √3−1."],["Which denominator is already rational?",["1/5","1/√5","1/(2+√3)","3/(√7−1)"],0,"The denominator 5 is rational and contains no radical."],["What happens to the value of a fraction when multiplying numerator and denominator by the same non-zero expression?",["It stays unchanged","It becomes zero","It doubles","It becomes undefined"],0,"Multiplying both parts by the same non-zero quantity multiplies the fraction by 1."],["What is the rationalising factor for 1/(√6−1)?",["√6+1","√6−1","6−1","1/√6"],0,"The conjugate √6+1 makes the denominator 6−1 = 5."],["What is (√6−1)(√6+1)?",["5","7","6","1"],0,"Using difference of squares gives 6−1 = 5."],["What is the rationalised form of 1/(√6−1)?",["(√6+1)/5","(√6−1)/5","5/(√6+1)","√6+1"],0,"Multiplying by the conjugate gives (√6+1)/(6−1) = (√6+1)/5."],["Which denominator is made rational by multiplying by its conjugate?",["2+√5","√5","7","3/2"],0,"A binomial involving a radical is rationalised using its conjugate."],["What is the rationalised form of 3/(2+√5)?",["3(2−√5)/(−1)","3(2+√5)/9","(2−√5)/3","3/(2−√5)"],0,"The conjugate gives denominator 2²−5 = −1, so the result is −3(2−√5), equivalent to 3(√5−2)."],["Which denominator results from rationalising 1/(a+√b)?",["a²−b","a²+b","a+b","√(a²−b)"],0,"Multiplying by a−√b uses difference of squares: a²−b."],["Which statement best describes rationalisation?",["Removing a radical from the denominator without changing the value","Removing every radical from a fraction","Changing an irrational number into a rational number","Making the numerator equal to 1"],0,"Rationalisation changes the form of a fraction so its denominator is rational while preserving its value."]];
+
+const INLINE_POLYNOMIAL_BASICS_QUIZ=[["What is a polynomial?",["An expression made only from variables with non-negative integer exponents and constants","An expression with variables only in denominators","An expression containing only square roots","An expression with negative powers only"],0,"A polynomial is built from constants and variables raised to non-negative integer powers."],["Which is a polynomial in x?",["3x² − 5x + 7","2/x + 1","√x + 3","x⁻² + 4"],0,"3x² − 5x + 7 has only non-negative integer powers of x."],["What is the degree of 5x³ − 2x + 9?",["1","2","3","9"],2,"The highest exponent of x is 3, so the degree is 3."],["What is the degree of 7x⁴ + x² − 6?",["2","4","6","7"],1,"The highest exponent is 4."],["What is the constant term of 4x² − 7x + 11?",["4","−7","11","2"],2,"The term without x is the constant term, 11."],["What is the coefficient of x² in 6x² − 3x + 8?",["6","−3","8","2"],0,"The numerical factor multiplying x² is 6."],["How many terms are in 3x² − 5x + 2?",["1","2","3","4"],2,"The terms are 3x², −5x, and 2."],["Which is a monomial?",["4x³","x + 2","x² − 1","2x + 3x²"],0,"A monomial has exactly one term; 4x³ is one term."],["Which is a binomial?",["7x²","x² + 3x","x³ + x² − 1","9"],1,"A binomial has exactly two terms; x² + 3x has two."],["Which is a trinomial?",["5x","x + 1","x² + 2x + 3","7"],2,"A trinomial has three terms."],["What is the degree of the constant polynomial 8?",["0","1","8","Undefined"],0,"A non-zero constant polynomial has degree 0."],["What is the value of p(x)=2x+3 at x=4?",["7","8","11","14"],2,"p(4)=2(4)+3=11."],["If p(x)=x²−5, what is p(3)?",["2","4","9","14"],1,"p(3)=3²−5=9−5=4."],["If p(x)=3x²−2x+1, what is p(−1)?",["0","2","6","−4"],2,"p(−1)=3(1)+2+1=6."],["Which polynomial has degree 2?",["5x³+1","2x²−7","x⁴−x","9x+2"],1,"The highest exponent in 2x²−7 is 2."],["Which polynomial has degree 1?",["4x+9","x²+1","7x³","6"],0,"The highest exponent of x in 4x+9 is 1."],["Which polynomial has degree 3?",["x²+x+1","4x³−2x","5x⁴+1","7x+3"],1,"The highest exponent in 4x³−2x is 3."],["Which expression is not a polynomial in x?",["x³−2x+1","5x²+4","1/x + 2","7"],2,"1/x = x⁻¹ has a negative exponent, so it is not a polynomial."],["Which expression is not a polynomial in x?",["√x+1","x²−4","3x+5","9"],0,"√x = x^(1/2), and fractional exponents are not allowed in a polynomial."],["If p(x)=5x−2, what is the coefficient of x?",["−2","2","5","0"],2,"The coefficient of x is 5."],["If p(x)=7x²+4x−9, what is the constant term?",["7","4","−9","2"],2,"The term without x is −9."],["A polynomial with exactly two terms is called a:",["Monomial","Binomial","Trinomial","Constant"],1,"A binomial contains exactly two terms."],["A polynomial with exactly three terms is called a:",["Monomial","Binomial","Trinomial","Linear polynomial"],2,"A trinomial contains exactly three terms."],["What is the leading coefficient of 9x⁴−3x²+1?",["1","−3","9","4"],2,"The leading term is 9x⁴, so its coefficient is 9."],["What is the leading term of −4x³+7x−2?",["−4x³","7x","−2","4x³"],0,"The leading term has the highest power, so it is −4x³."],["Which polynomial is quadratic?",["x+2","x²−3x+1","x³+1","5"],1,"A quadratic polynomial has degree 2."],["Which polynomial is cubic?",["2x²+1","x³−4x","7x+2","9"],1,"A cubic polynomial has degree 3."],["If p(x)=x²+2x+1, what is p(−2)?",["−1","0","1","4"],1,"p(−2)=4−4+1=1."],["If p(x)=2x³−x, what is p(2)?",["6","10","14","16"],2,"p(2)=2(8)−2=14."],["Which statement about the degree of a non-zero polynomial is correct?",["It is the highest exponent of the variable","It is always the number of terms","It is always the constant term","It is always the leading coefficient"],0,"The degree is the highest exponent with a non-zero coefficient."]];
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -2626,6 +2699,7 @@ function startQuiz(){
   else if(norm(concept)==="variables and constants") quizSource=dedicated||INLINE_VARIABLES_CONSTANTS_QUIZ;
   else if(norm(concept)==="irrational numbers") quizSource=dedicated||INLINE_IRRATIONAL_QUIZ;
   else if(norm(concept)==="real numbers") quizSource=dedicated||INLINE_REAL_NUMBERS_QUIZ;
+  else if(norm(concept)==="polynomial basics") quizSource=dedicated||INLINE_POLYNOMIAL_BASICS_QUIZ;
   else if(norm(concept)==="rationalisation basics") quizSource=dedicated||INLINE_RATIONALISATION_BASICS_QUIZ;
   else quizSource=dedicated;
  }catch(e){
@@ -2657,7 +2731,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalNumbersDemo();startRealNumbersDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
+startIrrationalNumbersDemo();startRealNumbersDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

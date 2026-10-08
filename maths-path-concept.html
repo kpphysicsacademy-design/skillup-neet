@@ -921,15 +921,33 @@ if(norm(concept)==="like and unlike terms") return `
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> 3x and 5x are like; 3x and 5y are unlike; x and x² are unlike because their powers differ.</p>
 </div>`;
 if(norm(concept)==="geometric constructions") return `
-<strong>Geometric constructions create exact lines, angles, and points using a compass and straightedge.</strong>
-<p><b>Core idea:</b> the compass transfers equal distances and draws arcs; the straightedge joins the construction points.</p>
-<div class="formula gc-formula">\\(\\text{Given}\\rightarrow\\text{arcs}\\rightarrow\\text{intersections}\\rightarrow\\text{result}\\)</div>
-<div class="concept-image" role="img" aria-label="Perpendicular bisector construction with equal arcs">
-<svg viewBox="0 0 640 300" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-<rect width="640" height="300" rx="18" fill="#f8fcf6"/><line x1="65" y1="190" x2="330" y2="190" stroke="#173f27" stroke-width="5"/><circle cx="65" cy="190" r="112" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="330" cy="190" r="112" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><line x1="197.5" y1="65" x2="197.5" y2="270" stroke="#f59e0b" stroke-width="4"/><circle cx="197.5" cy="190" r="6" fill="#173f27"/><text x="365" y="65" font-family="system-ui,sans-serif" font-size="18" font-weight="800" fill="#173f27">PERPENDICULAR BISECTOR</text><text x="365" y="102" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Equal arcs meet</text><text x="365" y="128" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Join the intersections</text><text x="365" y="154" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Midpoint + 90°</text><text x="365" y="184" font-family="system-ui,sans-serif" font-size="11" fill="#66736b">Blue = arcs • Orange = result</text></svg></div>
-<div class="visual-banner"><div class="value-box"><small>GIVEN</small><strong style="color:#60a5fa">AB</strong><span class="pill">segment</span></div><div class="eq">→</div><div class="value-box"><small>MIDPOINT</small><strong style="color:#fbbf24">AM = MB</strong><span class="pill">equal halves</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE</small><strong style="color:#34d399">90°</strong><span class="pill">perpendicular</span></div></div>
-<p><b>Copy a segment:</b> set the compass opening to the given segment and transfer the same opening to the new starting point.</p><p><b>Perpendicular bisector:</b> draw equal-radius arcs from both endpoints, then join their intersections. The line crosses the segment at its midpoint and at 90°.</p><p><b>Angle bisector:</b> draw an arc from the vertex, mark equal points on both arms, then use equal arcs to locate the final point and join it to the vertex.</p><p><b>Perpendicular and parallel lines:</b> use equal-distance arcs for a perpendicular; copy a corresponding angle or use two perpendiculars to construct a parallel.</p>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> construction marks are evidence of the method. Do not guess the final point or line—let the compass arcs determine it.</p>`;
+<div class="geometry-lesson construction-interactive-lesson">
+<strong>Choose a construction and watch the compass-and-straightedge steps change live.</strong>
+<div class="control"><div class="head"><span>Choose construction</span><span class="val" id="gcTypeVal">Perpendicular bisector</span></div>
+<select id="gcTypeSelect">
+<option value="bisector">Perpendicular bisector</option>
+<option value="angle">Angle bisector</option>
+<option value="perpendicular">Perpendicular line</option>
+<option value="parallel">Parallel line</option>
+</select></div>
+<div class="concept-image" role="img" aria-label="Interactive geometric construction diagram">
+<svg id="gcSvg" viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="300" rx="18" fill="#f8fcf6"/>
+<g id="gcArcs"></g><g id="gcLines"></g><g id="gcPoints"></g>
+<text id="gcTitle" x="365" y="65" font-family="system-ui,sans-serif" font-size="18" font-weight="800" fill="#173f27">PERPENDICULAR BISECTOR</text>
+<text id="gcStep1" x="365" y="102" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Draw equal-radius arcs</text>
+<text id="gcStep2" x="365" y="128" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Use their intersections</text>
+<text id="gcStep3" x="365" y="154" font-family="system-ui,sans-serif" font-size="12" fill="#263238">Join the construction points</text>
+<text id="gcResult" x="365" y="184" font-family="system-ui,sans-serif" font-size="12" font-weight="800" fill="#173f27">Midpoint + 90°</text>
+<text x="365" y="218" font-family="system-ui,sans-serif" font-size="11" fill="#66736b">Blue = compass arcs • Orange = final line</text>
+</svg></div>
+<div class="visual-banner"><div class="value-box"><small>TOOL</small><strong id="gcTool">COMPASS</strong><span class="pill">equal distances</span></div><div class="eq">→</div><div class="value-box"><small>METHOD</small><strong id="gcMethod">ARC INTERSECTIONS</strong><span class="pill">construction</span></div><div class="eq">→</div><div class="value-box"><small>RESULT</small><strong id="gcResultBox">90° + MIDPOINT</strong><span class="pill">exact</span></div></div>
+<div class="props"><div class="prop"><span>STEPS</span><strong id="gcStepsProp">3</strong></div><div class="prop"><span>MAIN TOOL</span><strong id="gcToolProp">Compass</strong></div><div class="prop"><span>KEY RESULT</span><strong id="gcResultProp">Perpendicular at midpoint</strong></div><div class="prop"><span>WHY IT WORKS</span><strong id="gcWhyProp">Equal radii create symmetric intersections</strong></div></div>
+<div class="checks" id="gcWork"><b>Result:</b> Equal arcs from both endpoints meet at two points; joining them gives the perpendicular bisector.</div>
+<div class="presets"><button class="preset gcP" data-t="bisector">Bisector</button><button class="preset gcP" data-t="angle">Angle bisector</button><button class="preset gcP" data-t="perpendicular">Perpendicular</button><button class="preset gcP" data-t="parallel">Parallel</button></div>
+<p><b>Core idea:</b> the compass transfers equal distances and draws arcs; the straightedge joins the construction points. Construction marks are evidence of the method, not decoration.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> use exact equal-radius arcs and join the correct intersections. Never guess the final line.</p>
+</div>`;
 if(norm(concept)==="algebraic expressions") return `
 <div class="algebra-lesson">
 <strong>Change the coefficient, variable, and constant to build an algebraic expression live.</strong>
@@ -1424,6 +1442,44 @@ function startTrianglesDemo(){
  [aSlider,bSlider].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
  document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));update();
 }
+function startGeometricConstructionsDemo(){
+ if(norm(concept)!=="geometric constructions")return;
+ const type=document.getElementById("gcTypeSelect"); if(!type)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function update(){
+  const t=type.value;
+  const data={
+   bisector:{name:"Perpendicular bisector",tool:"Compass",method:"ARC INTERSECTIONS",result:"90° + MIDPOINT",steps:"3",key:"Perpendicular at midpoint",why:"Equal radii create symmetric intersections",s1:"Draw equal-radius arcs from both endpoints",s2:"Mark the two arc intersections",s3:"Join the intersections",res:"Midpoint + 90°",work:"Equal arcs from both endpoints meet at two points; joining them gives the perpendicular bisector."},
+   angle:{name:"Angle bisector",tool:"Compass",method:"EQUAL ARC MARKS",result:"TWO EQUAL ANGLES",steps:"4",key:"Two equal angles",why:"Equal arc marks create equal distances from the arms",s1:"Draw an arc from the vertex",s2:"Mark equal points on both arms",s3:"Draw equal arcs to meet",res:"∠1 = ∠2",work:"An arc marks equal points on the arms; equal arcs locate the final point, which is joined to the vertex."},
+   perpendicular:{name:"Perpendicular line",tool:"Compass",method:"EQUAL DISTANCE ARCS",result:"90°",steps:"3",key:"Right angle",why:"Symmetric points lie on a perpendicular",s1:"Mark equal distances around the point",s2:"Intersect the construction arcs",s3:"Join the intersection to the point",res:"90°",work:"Equal-distance construction points create a line perpendicular to the given line."},
+   parallel:{name:"Parallel line",tool:"Compass + straightedge",method:"COPY THE ANGLE",result:"SAME ANGLE",steps:"4",key:"Equal corresponding angles",why:"A copied angle preserves direction",s1:"Choose the given angle",s2:"Copy its arc and chord",s3:"Place the copied angle",res:"Corresponding angles equal",work:"Copying the corresponding angle creates a line with the same direction, so the two lines are parallel."}
+  }[t];
+  set("gcTypeVal",data.name);set("gcTool",data.tool.toUpperCase());set("gcMethod",data.method);set("gcResultBox",data.result);set("gcStepsProp",data.steps);set("gcToolProp",data.tool);set("gcResultProp",data.key);set("gcWhyProp",data.why);set("gcTitle",data.name.toUpperCase());set("gcStep1",data.s1);set("gcStep2",data.s2);set("gcStep3",data.s3);set("gcResult",data.res);
+  const work=document.getElementById("gcWork");if(work)work.innerHTML="<b>Result:</b> "+data.work;
+  const arcs=document.getElementById("gcArcs"),lines=document.getElementById("gcLines"),points=document.getElementById("gcPoints");if(!arcs||!lines||!points)return;
+  if(t==="bisector"){
+   arcs.innerHTML='<circle cx="70" cy="185" r="105" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="330" cy="185" r="105" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   lines.innerHTML='<line x1="70" y1="185" x2="330" y2="185" stroke="#173f27" stroke-width="5"/><line x1="200" y1="65" x2="200" y2="270" stroke="#f59e0b" stroke-width="4"/>';
+   points.innerHTML='<circle cx="70" cy="185" r="6" class="geo-point"/><circle cx="330" cy="185" r="6" class="geo-point"/><circle cx="200" cy="80" r="5" class="geo-point"/><circle cx="200" cy="290" r="5" class="geo-point"/>';
+  }else if(t==="angle"){
+   arcs.innerHTML='<path d="M90 230 A110 110 0 0 1 185 145" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><path d="M140 190 A58 58 0 0 1 175 160" fill="none" stroke="#60a5fa" stroke-width="3"/>';
+   lines.innerHTML='<line x1="95" y1="230" x2="350" y2="230" stroke="#173f27" stroke-width="5"/><line x1="95" y1="230" x2="285" y2="70" stroke="#173f27" stroke-width="5"/><line x1="95" y1="230" x2="245" y2="130" stroke="#f59e0b" stroke-width="4"/>';
+   points.innerHTML='<circle cx="95" cy="230" r="6" class="geo-point"/><circle cx="185" cy="145" r="5" class="geo-point"/><circle cx="175" cy="160" r="5" class="geo-point"/>';
+  }else if(t==="perpendicular"){
+   arcs.innerHTML='<circle cx="125" cy="150" r="62" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><circle cx="275" cy="150" r="62" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   lines.innerHTML='<line x1="70" y1="150" x2="350" y2="150" stroke="#173f27" stroke-width="5"/><line x1="200" y1="55" x2="200" y2="245" stroke="#f59e0b" stroke-width="4"/>';
+   points.innerHTML='<circle cx="125" cy="150" r="6" class="geo-point"/><circle cx="275" cy="150" r="6" class="geo-point"/><circle cx="200" cy="150" r="6" class="geo-point"/>';
+  }else{
+   arcs.innerHTML='<path d="M80 105 A55 55 0 0 1 135 50" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/><path d="M80 215 A55 55 0 0 1 135 160" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 7"/>';
+   lines.innerHTML='<line x1="80" y1="80" x2="350" y2="80" stroke="#173f27" stroke-width="5"/><line x1="80" y1="210" x2="350" y2="210" stroke="#f59e0b" stroke-width="4"/><line x1="130" y1="80" x2="130" y2="210" stroke="#173f27" stroke-width="3" stroke-dasharray="6 6"/>';
+   points.innerHTML='<circle cx="130" cy="80" r="6" class="geo-point"/><circle cx="130" cy="210" r="6" class="geo-point"/>';
+  }
+ }
+ type.addEventListener("change",update);
+ document.querySelectorAll(".gcP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;update();}));
+ update();
+}
+
 function startPolygonsDemo(){
  if(norm(concept)!=="polygons")return;
  const type=document.getElementById("polyTypeSelect"),slider=document.getElementById("polySlider"); if(!type||!slider)return;
@@ -1587,7 +1643,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

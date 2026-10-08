@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-maths-mobile-v3">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-maths-mobile-v4">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-maths-path-auditfix</title>
@@ -582,26 +582,28 @@ if(norm(concept)==="perimeter") return `
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> trace the complete outside boundary and add each side exactly once. Keep the answer in linear units.</p>
 `;
 if(norm(concept)==="triangles") return `
-<strong>A triangle is a closed polygon with 3 sides, 3 vertices and 3 interior angles.</strong>
-<div class="formula">\\(\\text{Interior-angle sum}=180^\\circ\\)</div>
-<p><b>Classify by sides:</b> an equilateral triangle has 3 equal sides; an isosceles triangle has 2 equal sides; a scalene triangle has all sides different.</p>
-<p><b>Classify by angles:</b> an acute triangle has all angles less than \\(90^\\circ\\); a right triangle has one \\(90^\\circ\\) angle; an obtuse triangle has one angle greater than \\(90^\\circ\\).</p>
-<div class="concept-image" role="img" aria-label="Triangle diagram showing three sides, three vertices and an angle sum of 180 degrees">
-<svg data-skillup-image="geometric-constructions-20261007-1845" viewBox="0 0 640 300" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-<rect x="0" y="0" width="640" height="300" rx="18" fill="#f8fcf6"/>
-<polygon id="triShape" points="72,225 202,65 332,225" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/>
-<g id="triVertices"></g>
-<text id="triImgTitle" x="370" y="70" font-family="system-ui,sans-serif" font-size="21" font-weight="800" fill="#173f27">TRIANGLE</text>
-<text id="triImgLine1" x="370" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#263238">3 sides • 3 vertices</text>
-<text id="triImgLine2" x="370" y="138" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Interior angles total 180°</text>
-<text id="triImgLine3" x="370" y="168" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Three sides determine its type</text>
-<text id="triImgLine4" x="370" y="198" font-family="system-ui,sans-serif" font-size="15" fill="#263238">Angle types: acute, right, obtuse</text>
-<text x="370" y="228" font-family="system-ui,sans-serif" font-size="13" fill="#66736b">A triangle has no diagonal</text>
+<div class="geometry-lesson triangle-interactive-lesson">
+<strong>Change the triangle angles and watch the shape, type, and missing angle update live.</strong>
+<div class="control"><div class="head"><span>Explore triangle</span><span class="val" id="triModeVal">Free angles</span></div>
+<select id="triModeSelectLive"><option value="free">Free angles — A + B + C = 180°</option><option value="equilateral">Equilateral — 60°, 60°, 60°</option><option value="isosceles">Isosceles — A = B</option><option value="right">Right triangle — C = 90°</option></select></div>
+<div class="visual-banner"><div class="value-box"><small>ANGLE A</small><strong id="triALive">60°</strong><span class="pill">given</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE B</small><strong id="triBLive">60°</strong><span class="pill">given</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE C</small><strong id="triCLive">60°</strong><span class="pill">calculated</span></div></div>
+<svg class="geometry-svg" id="triLiveSvg" viewBox="0 0 700 320" role="img" aria-label="Interactive triangle angle diagram" xmlns="http://www.w3.org/2000/svg">
+<rect width="700" height="320" rx="16" fill="#f8fcf6"/><polygon id="triLiveShape" points="70,250 210,70 350,250" fill="#eaf8e6" stroke="#173f27" stroke-width="4"/><g id="triLiveMarks"></g>
+<text id="triLiveTitle" x="395" y="62" class="geo-label">EQUILATERAL TRIANGLE</text>
+<text id="triLiveLine1" x="395" y="100" class="geo-note">A = 60°, B = 60°, C = 60°</text>
+<text id="triLiveLine2" x="395" y="130" class="geo-note">Interior angles total 180°</text>
+<text id="triLiveLine3" x="395" y="160" class="geo-note">3 equal sides</text>
+<text id="triLiveLine4" x="395" y="190" class="geo-note">3 equal angles</text>
+<text x="395" y="225" class="geo-note">Change the values below</text>
 </svg>
-</div>
-<div class="visual-banner"><div class="value-box"><small id="triLessonType">TRIANGLE</small><strong id="triLessonSides" style="color:#60a5fa">3 sides</strong><span class="pill">3 vertices</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong id="triLessonSum" style="color:#fbbf24">180°</strong><span class="pill">\\(3\\times60^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong id="triLessonDiag" style="color:#34d399">0</strong><span class="pill">none</span></div></div>
-<p><b>Key properties:</b> the three interior angles always add to 180°. Equal sides are opposite equal angles. In a right triangle, the two acute angles add to 90°.</p>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> start with 180°, then identify the triangle from its side or angle properties.</p>`;
+<div class="props"><div class="prop"><span>Angle A</span><strong id="triAPropLive">60°</strong></div><div class="prop"><span>Angle B</span><strong id="triBPropLive">60°</strong></div><div class="prop"><span>Angle C</span><strong id="triCPropLive">60°</strong></div><div class="prop"><span>Triangle type</span><strong id="triTypePropLive">Equilateral</strong></div></div>
+<div class="control"><div class="head"><span>Angle A</span><span class="val" id="triSliderAVal">60°</span></div><input id="triSliderA" class="range" type="range" min="10" max="160" value="60" step="1"></div>
+<div class="control"><div class="head"><span>Angle B</span><span class="val" id="triSliderBVal">60°</span></div><input id="triSliderB" class="range" type="range" min="10" max="160" value="60" step="1"></div>
+<div class="checks" id="triWorkLive"><b>Result:</b> 60° + 60° + 60° = 180°. This is an equilateral triangle.</div>
+<div class="presets"><button class="preset triLiveP" data-a="60" data-b="60" data-t="free">60° • 60° • 60°</button><button class="preset triLiveP" data-a="50" data-b="50" data-t="isosceles">50° • 50° • 80°</button><button class="preset triLiveP" data-a="30" data-b="60" data-t="right">30° • 60° • 90°</button><button class="preset triLiveP" data-a="50" data-b="70" data-t="free">50° • 70° • 60°</button></div>
+<p><b>Key idea:</b> every triangle has an interior-angle sum of 180°. Equal angles are opposite equal sides; a right triangle has one 90° angle.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> change A and B, then C is calculated automatically so the three angles always total 180°.</p>
+</div>`;
 if(norm(concept)==="parallel lines and transversals") return `
 <div class="lines-angles-lesson parallel-transversal-lesson">
 <strong>Change the angle and relationship to see the parallel-line geometry change live.</strong>
@@ -1340,6 +1342,44 @@ function startParallelTransversalsDemo(){
  slider.addEventListener("input",update);type.addEventListener("change",()=>{if(type.value==="cointerior"&&Number(slider.value)>170)slider.value="75";update();});
  document.querySelectorAll(".ptLiveP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;slider.value=btn.dataset.a;update();}));update();
 }
+function startTrianglesDemo(){
+ if(norm(concept)!=="triangles")return;
+ const mode=document.getElementById("triModeSelectLive"),aSlider=document.getElementById("triSliderA"),bSlider=document.getElementById("triSliderB"); if(!mode||!aSlider||!bSlider)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function classify(a,b,c){
+  if(a===60&&b===60&&c===60)return "Equilateral";
+  const right=Math.abs(a-90)<0.001||Math.abs(b-90)<0.001||Math.abs(c-90)<0.001;
+  const iso=a===b||b===c||a===c;
+  if(right)return "Right triangle";
+  if(iso)return "Isosceles";
+  return "Scalene";
+ }
+ function update(){
+  let a=Number(aSlider.value),b=Number(bSlider.value);
+  if(mode.value==="equilateral"){a=60;b=60;aSlider.value=60;bSlider.value=60;}
+  else if(mode.value==="isosceles"){a=Math.min(89,Math.max(31,Number(aSlider.value)));b=a;aSlider.value=a;bSlider.value=b;}
+  else if(mode.value==="right"){b=Math.min(80,Math.max(10,Number(bSlider.value)));a=90;aSlider.value=90;}
+  else {a=Math.min(160,Math.max(10,a));b=Math.min(160,Math.max(10,b));if(a+b>170){b=170-a;bSlider.value=b;}}
+  const c=180-a-b;if(c<=0)return;
+  const typeName=classify(a,b,c);
+  set("triALive",a+"°");set("triBLive",b+"°");set("triCLive",c+"°");set("triAPropLive",a+"°");set("triBPropLive",b+"°");set("triCPropLive",c+"°");set("triTypePropLive",typeName);set("triSliderAVal",a+"°");set("triSliderBVal",b+"°");
+  set("triModeVal",mode.value==="equilateral"?"Equilateral":mode.value==="isosceles"?"Isosceles":mode.value==="right"?"Right triangle":"Free angles");
+  set("triLiveTitle",typeName.toUpperCase());
+  set("triLiveLine1",a+"° + "+b+"° + "+c+"° = 180°");
+  set("triLiveLine2",typeName==="Right triangle"?"One angle is 90°":"Interior angles total 180°");
+  set("triLiveLine3",typeName==="Equilateral"?"3 equal sides":typeName==="Isosceles"?"2 equal sides":typeName==="Right triangle"?"One right angle":"All sides may differ");
+  set("triLiveLine4",typeName==="Equilateral"?"3 equal angles":typeName==="Isosceles"?"2 equal angles":typeName==="Right triangle"?"Other angles sum to 90°":"No equal-angle requirement");
+  const work=document.getElementById("triWorkLive");if(work)work.innerHTML="<b>Result:</b> "+a+"° + "+b+"° + "+c+"° = 180°. This is a "+typeName.toLowerCase()+".";
+  const poly=document.getElementById("triLiveShape");const marks=document.getElementById("triLiveMarks");if(!poly||!marks)return;
+  const A=[210,70],B=[70,250],C=[350,250],scale=0.9+Math.min(a,b,c)/300;
+  const xA=210,yA=70,xB=70,yB=250,xC=350,yC=250;
+  poly.setAttribute("points",xB+","+yB+" "+xA+","+yA+" "+xC+","+yC);
+  marks.innerHTML='<circle cx="'+xA+'" cy="'+yA+'" r="5" class="geo-point"/><circle cx="'+xB+'" cy="'+yB+'" r="5" class="geo-point"/><circle cx="'+xC+'" cy="'+yC+'" r="5" class="geo-point"/><text x="202" y="55" class="geo-note">A = '+a+'°</text><text x="42" y="270" class="geo-note">B = '+b+'°</text><text x="350" y="270" class="geo-note">C = '+c+'°</text>';
+ }
+ [aSlider,bSlider,mode].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
+ document.querySelectorAll(".triLiveP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.t;aSlider.value=btn.dataset.a;bSlider.value=btn.dataset.b;update();}));
+ update();
+}
 function startBasicGeometricIdeasDemo(){
  if(norm(concept)!=="basic geometric ideas")return;
  const type=document.getElementById("bgiTypeSelect"),slider=document.getElementById("bgiSlider");
@@ -1432,7 +1472,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startLinesAnglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

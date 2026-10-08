@@ -423,7 +423,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
   ["Using the same survey, what angle represents D?",["18°","24°","36°","54°"],2,"3/30 × 360° = 36°."],
   ["A pie chart shows A = 20%, B = 35%, C = 25%. What percentage is D?",["10%","15%","20%","25%"],2,"20% + 35% + 25% = 80%, so D is 20%."],
   ["A chart represents 200 observations. A sector is 18% of the whole. What frequency does it represent?",["18","30","36","40"],2,"18% of 200 is 36."],
-  ["A chart represents 120 observations. A sector has angle 60°. What frequency does it represent?",["10","20","30","40"],2,"60/360 × 120 = 20, so the correct choice is 20."],
+  ["A chart represents 120 observations. A sector has angle 60°. What frequency does it represent?",["10","20","30","40"],1,"60/360 × 120 = 20, so the correct choice is 20."],
   ["Why must the sector angles in a complete pie chart add to 360°?",["They form one complete circle","They form a straight line","They represent one rectangle","They are all equal"],0,"All sectors together form the complete circle, which measures 360°."]
 ],
   "Bar graphs": [

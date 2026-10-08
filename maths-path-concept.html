@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-variables-live-values">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-algebraic-expressions-live">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-variables-live-values</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-algebraic-expressions-live</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -41,10 +41,10 @@
  .control{margin-top:9px!important}
  .checks{font-size:10px!important}
 }
-.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
+.algebra-lesson .visual-banner{margin-top:10px}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-0720">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-variables-live-values";</script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-algebraic-expressions-live";</script>
 <script src="maths-quiz-bank.js?v=20261008-0720"></script>
 <script>
 (function(){
@@ -634,14 +634,35 @@ if(norm(concept)==="geometric constructions") return `
 <p><b>Copy a segment:</b> set the compass opening to the given segment and transfer the same opening to the new starting point.</p><p><b>Perpendicular bisector:</b> draw equal-radius arcs from both endpoints, then join their intersections. The line crosses the segment at its midpoint and at 90°.</p><p><b>Angle bisector:</b> draw an arc from the vertex, mark equal points on both arms, then use equal arcs to locate the final point and join it to the vertex.</p><p><b>Perpendicular and parallel lines:</b> use equal-distance arcs for a perpendicular; copy a corresponding angle or use two perpendiculars to construct a parallel.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> construction marks are evidence of the method. Do not guess the final point or line—let the compass arcs determine it.</p>`;
 if(norm(concept)==="algebraic expressions") return `
-<strong>An algebraic expression combines numbers, variables, and operations without an equals sign.</strong>
-<div class="formula">\\(3x+5\\)</div>
-<p>In \\(3x+5\\), <b>3</b> is the coefficient of \\(x\\), <b>x</b> is the variable, and <b>5</b> is the constant term.</p>
-<div class="visual-banner"><div class="value-box"><small>COEFFICIENT</small><strong style="color:#60a5fa">3</strong><span class="pill">multiplies x</span></div><div class="eq">×</div><div class="value-box"><small>VARIABLE</small><strong style="color:#60a5fa">x</strong><span class="pill">can change</span></div><div class="eq">+</div><div class="value-box"><small>CONSTANT</small><strong style="color:#fbbf24">5</strong><span class="pill">fixed</span></div></div>
-<p><b>Terms:</b> the parts separated by + or − are terms. So \\(3x+5\\) has two terms: \\(3x\\) and \\(5\\).</p>
-<p><b>Examples:</b> \\(7a-2\\), \\(4m+3n\\), and \\(9x^2-5x+1\\) are algebraic expressions.</p>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> an expression does not have an equals sign. A term may contain a coefficient, variable, and exponent.</p>`;
- return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
+<div class="algebra-lesson">
+<strong>Change the coefficient, variable, and constant to build an algebraic expression live.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>COEFFICIENT</small><strong id="aeCoeff">3</strong><span class="pill">multiplies x</span></div>
+ <div class="eq">×</div>
+ <div class="value-box"><small>VARIABLE</small><strong id="aeVar">4</strong><span class="pill">changing value</span></div>
+ <div class="eq">+</div>
+ <div class="value-box"><small>CONSTANT</small><strong id="aeConst">5</strong><span class="pill">fixed term</span></div>
+</div>
+<div class="control"><div class="head"><span>Coefficient (a)</span><span class="val" id="aeCoeffVal">3</span></div><input id="aeCoeffSlider" class="range" type="range" min="-10" max="10" value="3"></div>
+<div class="control"><div class="head"><span>Variable value (x)</span><span class="val" id="aeVarVal">4</span></div><input id="aeVarSlider" class="range" type="range" min="-10" max="10" value="4"></div>
+<div class="control"><div class="head"><span>Constant (c)</span><span class="val" id="aeConstVal">5</span></div><input id="aeConstSlider" class="range" type="range" min="-10" max="10" value="5"></div>
+<div class="formula" id="aeFormula">3 × 4 + 5 = 17</div>
+<div class="props">
+ <div class="prop"><span>VARIABLE TERM</span><strong id="aeTerm">3 × 4 = 12</strong></div>
+ <div class="prop"><span>CONSTANT TERM</span><strong id="aeConstantTerm">5</strong></div>
+ <div class="prop"><span>EXPRESSION VALUE</span><strong id="aeResult">17</strong></div>
+ <div class="prop"><span>NUMBER OF TERMS</span><strong>2</strong></div>
+</div>
+<div class="presets">
+ <button class="preset aeP" data-a="3" data-x="4" data-c="5">3x + 5</button>
+ <button class="preset aeP" data-a="2" data-x="6" data-c="1">2x + 1</button>
+ <button class="preset aeP" data-a="-2" data-x="3" data-c="7">−2x + 7</button>
+ <button class="preset aeP" data-a="4" data-x="5" data-c="-3">4x − 3</button>
+</div>
+<div class="checks" id="aeWork"><b>Result:</b> 3 × 4 + 5 = 17. The expression has two terms: 3x and 5.</div>
+<p><b>Key idea:</b> an algebraic expression has numbers, variables, and operations, but no equals sign. In <b>ax + c</b>, <b>a</b> is the coefficient, <b>x</b> is the variable, and <b>c</b> is the constant.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> terms are separated by + or −. A variable can change; a constant stays fixed within the expression.</p>
+</div>`; return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
 }
 function renderConceptPage(){
  app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>'+esc(title)+'</h1><p>Learn the concept, then complete 30-question mastery practice.</p></section><section class="card"><h2>STEP 1 • LEARN</h2><div class="lesson">'+lessonHtml()+'</div></section><section class="card"><h2>STEP 2 • MASTERY QUIZ</h2><div id="quiz"></div></section>';
@@ -811,6 +832,29 @@ function startRationalDemo(){
  ds.addEventListener("input",update);
  update();
 }
+function startAlgebraDemo(){
+ if(norm(concept)!=="algebraic expressions")return;
+ const a=document.getElementById("aeCoeffSlider"),x=document.getElementById("aeVarSlider"),cc=document.getElementById("aeConstSlider");
+ if(!a||!x||!cc)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ function update(){
+  const av=Number(a.value),xv=Number(x.value),cv=Number(cc.value),term=av*xv,total=term+cv;
+  set("aeCoeff",fmt(av));set("aeVar",fmt(xv));set("aeConst",fmt(cv));
+  set("aeCoeffVal",fmt(av));set("aeVarVal",fmt(xv));set("aeConstVal",fmt(cv));
+  set("aeTerm",fmt(av)+" × "+fmt(xv)+" = "+fmt(term));
+  set("aeConstantTerm",fmt(cv));set("aeResult",fmt(total));
+  const sign=cv<0?" − ":" + ";
+  const cpart=cv<0?fmt(Math.abs(cv)):fmt(cv);
+  const formula=fmt(av)+" × "+fmt(xv)+sign+cpart+" = "+fmt(total);
+  set("aeFormula",formula);
+  const work=document.getElementById("aeWork");
+  if(work)work.innerHTML="<b>Result:</b> "+formula+". The expression has two terms: "+fmt(av)+"x and "+fmt(cv)+".";
+ }
+ [a,x,cc].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".aeP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;x.value=btn.dataset.x;cc.value=btn.dataset.c;update();}));
+ update();
+}
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -848,7 +892,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

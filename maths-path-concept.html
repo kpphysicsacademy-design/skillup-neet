@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-like-unlike-live">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-algebra-identities-live">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-like-unlike-live</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-algebra-identities-live</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 .algebra-lesson .visual-banner{margin-top:10px}.terms-lesson .visual-banner{margin-top:10px}.terms-lesson .value-box strong{color:#60a5fa}.terms-lesson .formula{font-size:20px}.terms-lesson .checks{font-size:12px}.terms-lesson .preset{font-weight:900}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-like-unlike-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-like-unlike-live";</script>
-<script src="maths-quiz-bank.js?v=20261008-like-unlike-live"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-algebra-identities-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-algebra-identities-live";</script>
+<script src="maths-quiz-bank.js?v=20261008-algebra-identities-live"></script>
 <script>
 (function(){
 "use strict";
@@ -178,7 +178,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -544,16 +544,40 @@ if(norm(concept)==="factorisation basics") return `
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> factorisation is the reverse process of expansion.</p>`;
 
 if(norm(concept)==="algebraic identities") return `
-<strong>Algebraic identities are formulas that remain true for all allowed values of the variables.</strong>
-<div class="formula">\\((a+b)^2=a^2+2ab+b^2\\)</div>
-<p><b>Square of a sum:</b> square the first term, add twice the product, then add the square of the second term.</p>
-<div class="formula">\\((a-b)^2=a^2-2ab+b^2\\)</div>
-<p><b>Square of a difference:</b> the middle term is negative.</p>
-<div class="formula">\\(a^2-b^2=(a+b)(a-b)\\)</div>
-<p><b>Difference of two squares:</b> factor as the sum multiplied by the difference.</p>
-<div class="visual-banner"><div class="value-box"><small>IDENTITY</small><strong style="color:#60a5fa">\\((a+b)^2\\)</strong><span class="pill">square of a sum</span></div><div class="eq">↔</div><div class="value-box"><small>EXPANDED</small><strong style="color:#fbbf24">\\(a^2+2ab+b^2\\)</strong><span class="pill">always equal</span></div></div>
-<p><b>Example:</b> \\((x+3)^2=x^2+6x+9\\).</p>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> an identity stays true when valid values are substituted.</p>`;
+<div class="identity-lesson">
+<strong>Change a and b to see three algebraic identities stay true live.</strong>
+<div class="control"><div class="head"><span>Choose identity</span><span class="val" id="idTypeVal">Square of a sum</span></div>
+<select id="idTypeSelect">
+ <option value="sum">Square of a sum</option>
+ <option value="diff">Square of a difference</option>
+ <option value="squares">Difference of two squares</option>
+</select></div>
+<div class="visual-banner">
+ <div class="value-box"><small id="idLeftLabel">LEFT SIDE</small><strong id="idLeft">25</strong><span class="pill" id="idLeftPill">(a+b)²</span></div>
+ <div class="eq">=</div>
+ <div class="value-box"><small id="idRightLabel">RIGHT SIDE</small><strong id="idRight">25</strong><span class="pill" id="idRightPill">a² + 2ab + b²</span></div>
+</div>
+<div class="props">
+ <div class="prop"><span>a</span><strong id="idAProp">2</strong></div>
+ <div class="prop"><span>b</span><strong id="idBProp">3</strong></div>
+ <div class="prop"><span>Left value</span><strong id="idLeftProp">25</strong></div>
+ <div class="prop"><span>Right value</span><strong id="idRightProp">25</strong></div>
+ <div class="prop"><span>Identity check</span><strong id="idStatus">TRUE</strong></div>
+ <div class="prop"><span>Difference</span><strong id="idDiffProp">0</strong></div>
+</div>
+<div class="control"><div class="head"><span>Change a</span><span class="val" id="idASliderVal">2</span></div><input id="idASlider" class="range" type="range" min="-10" max="10" value="2" step="1"></div>
+<div class="control"><div class="head"><span>Change b</span><span class="val" id="idBSliderVal">3</span></div><input id="idBSlider" class="range" type="range" min="-10" max="10" value="3" step="1"></div>
+<div class="formula" id="idFormula">(2 + 3)² = 2² + 2×2×3 + 3²</div>
+<div class="checks" id="idWork"><b>Result:</b> (2 + 3)² = 25 and 2² + 2×2×3 + 3² = 25. Both sides are equal.</div>
+<div class="presets">
+ <button class="preset idP" data-t="sum" data-a="2" data-b="3">2 + 3</button>
+ <button class="preset idP" data-t="diff" data-a="7" data-b="2">7 − 2</button>
+ <button class="preset idP" data-t="squares" data-a="8" data-b="3">8² − 3²</button>
+ <button class="preset idP" data-t="sum" data-a="-2" data-b="5">−2 + 5</button>
+</div>
+<p><b>Key idea:</b> an identity is true for every valid value of its variables. Changing a or b changes both sides, but they remain equal.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> (a+b)² = a² + 2ab + b², (a−b)² = a² − 2ab + b², and a²−b² = (a+b)(a−b).</p>
+</div>`;
 
  if(norm(concept)==="operations on rational numbers") return `
 <strong>Use the sliders to see how each operation changes two rational numbers.</strong>
@@ -951,6 +975,47 @@ function startLikeUnlikeDemo(){
  document.querySelectorAll(".luP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;p1.value=btn.dataset.p1;p2.value=btn.dataset.p2;update();}));
  update();
 }
+function startAlgebraIdentitiesDemo(){
+ if(norm(concept)!=="algebraic identities")return;
+ const type=document.getElementById("idTypeSelect"),as=document.getElementById("idASlider"),bs=document.getElementById("idBSlider");
+ if(!type||!as||!bs)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ function update(){
+  const a=Number(as.value),b=Number(bs.value),t=type.value;
+  let left,right,leftLabel,rightLabel,leftPill,rightPill,formula,explain;
+  if(t==="sum"){
+   left=(a+b)*(a+b); right=a*a+2*a*b+b*b;
+   leftLabel="LEFT SIDE"; rightLabel="RIGHT SIDE"; leftPill="(a+b)²"; rightPill="a² + 2ab + b²";
+   formula="("+fmt(a)+" + "+fmt(b)+")² = "+fmt(a)+"² + 2×"+fmt(a)+"×"+fmt(b)+" + "+fmt(b)+"²";
+   explain="Square of a sum: square the first term, add twice the product, then square the second term.";
+   set("idTypeVal","Square of a sum");
+  }else if(t==="diff"){
+   left=(a-b)*(a-b); right=a*a-2*a*b+b*b;
+   leftLabel="LEFT SIDE"; rightLabel="RIGHT SIDE"; leftPill="(a−b)²"; rightPill="a² − 2ab + b²";
+   formula="("+fmt(a)+" − "+fmt(b)+")² = "+fmt(a)+"² − 2×"+fmt(a)+"×"+fmt(b)+" + "+fmt(b)+"²";
+   explain="Square of a difference: the middle term is negative.";
+   set("idTypeVal","Square of a difference");
+  }else{
+   left=a*a-b*b; right=(a+b)*(a-b);
+   leftLabel="LEFT SIDE"; rightLabel="RIGHT SIDE"; leftPill="a² − b²"; rightPill="(a+b)(a−b)";
+   formula=fmt(a)+"² − "+fmt(b)+"² = ("+fmt(a)+" + "+fmt(b)+")("+fmt(a)+" − "+fmt(b)+")";
+   explain="Difference of two squares: factor it as sum × difference.";
+   set("idTypeVal","Difference of two squares");
+  }
+  set("idAProp",fmt(a));set("idBProp",fmt(b));set("idASliderVal",fmt(a));set("idBSliderVal",fmt(b));
+  set("idLeftLabel",leftLabel);set("idRightLabel",rightLabel);set("idLeftPill",leftPill);set("idRightPill",rightPill);
+  set("idLeft",fmt(left));set("idRight",fmt(right));set("idLeftProp",fmt(left));set("idRightProp",fmt(right));
+  set("idDiffProp",fmt(left-right));set("idStatus",left===right?"TRUE":"CHECK");
+  set("idFormula",formula);
+  const work=document.getElementById("idWork");
+  if(work)work.innerHTML="<b>Result:</b> "+formula+" = "+fmt(left)+". Both sides are equal. "+explain;
+ }
+ [type,as,bs].forEach(el=>el.addEventListener("input",update));
+ type.addEventListener("change",update);
+ document.querySelectorAll(".idP").forEach(btn=>btn.addEventListener("click",()=>{type.value=btn.dataset.t;as.value=btn.dataset.a;bs.value=btn.dataset.b;update();}));
+ update();
+}
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -988,7 +1053,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

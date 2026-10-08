@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-algebra-identities-live">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261008-factorisation-live">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261008-algebra-identities-live</title>
+<title>SkillUp Mathematics • Concept Practice • v20261008-factorisation-live</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -43,9 +43,9 @@
 }
 .algebra-lesson .visual-banner{margin-top:10px}.terms-lesson .visual-banner{margin-top:10px}.terms-lesson .value-box strong{color:#60a5fa}.terms-lesson .formula{font-size:20px}.terms-lesson .checks{font-size:12px}.terms-lesson .preset{font-weight:900}.algebra-lesson .value-box strong{color:#60a5fa}.algebra-lesson .formula{font-size:20px}.algebra-lesson .checks{font-size:12px}.algebra-lesson .preset{font-weight:900}.variables-lesson .visual-banner{margin-top:10px}.variables-lesson .value-box strong{color:#60a5fa}.variables-lesson .formula{font-size:20px}.variables-lesson .checks{font-size:12px}.variables-lesson .preset{font-weight:900}</style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-algebra-identities-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-algebra-identities-live";</script>
-<script src="maths-quiz-bank.js?v=20261008-algebra-identities-live"></script>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261008-factorisation-live">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-factorisation-live";</script>
+<script src="maths-quiz-bank.js?v=20261008-factorisation-live"></script>
 <script>
 (function(){
 "use strict";
@@ -178,7 +178,7 @@ function mathifyDom(root){
  nodes.forEach(function(n){
   if(!n.nodeValue||n.nodeValue.includes("\\(")||n.nodeValue.includes("\\["))return;
   const p=n.parentElement;
-  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson"))return;
+  if(!p||p.closest("script,style,textarea,mjx-container,.peP,.sqP,.quiz-section,.cube-lesson,.variables-lesson,.algebra-lesson,.terms-lesson,.like-lesson,.identity-lesson,.factor-lesson"))return;
   const out=mathifyText(n.nodeValue);
   if(out!==n.nodeValue)n.nodeValue=out;
  });
@@ -533,15 +533,44 @@ if(norm(concept)==="polygons") return `
 <div class="visual-banner"><div class="value-box"><small id="polyLessonName">HEXAGON</small><strong id="polyLessonN" style="color:#60a5fa">\\(n=6\\)</strong><span class="pill" id="polyLessonSides">6 sides</span></div><div class="eq">→</div><div class="value-box"><small>ANGLE SUM</small><strong id="polyLessonSum" style="color:#fbbf24">\\(720^\\circ\\)</strong><span class="pill" id="polyLessonFormula">\\((6-2)\\times180^\\circ\\)</span></div><div class="eq">→</div><div class="value-box"><small>DIAGONALS</small><strong id="polyLessonDiag" style="color:#34d399">9</strong><span class="pill" id="polyLessonDiagFormula">\\(6(6-3)/2\\)</span></div></div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> identify \\(n\\) first, then choose the correct polygon formula.</p>`;
 if(norm(concept)==="factorisation basics") return `
-<strong>Factorisation means writing an algebraic expression as a product of simpler factors.</strong>
-<div class="formula">\\(6x+12=6(x+2)\\)</div>
-<p><b>Common factor:</b> find the greatest common factor of all terms, then take it outside the brackets.</p>
-<div class="formula">\\(8a^2+12a=4a(2a+3)\\)</div>
-<p><b>Grouping:</b> group terms that share a common factor and then factor the common expression.</p>
-<div class="formula">\\(x^2+5x=x(x+5)\\)</div>
-<p><b>Check:</b> expand the factors again. If you get the original expression, the factorisation is correct.</p>
-<div class="visual-banner"><div class="value-box"><small>EXPRESSION</small><strong style="color:#60a5fa">\\(6x+12\\)</strong><span class="pill">factorise</span></div><div class="eq">=</div><div class="value-box"><small>FACTORS</small><strong style="color:#fbbf24">\\(6(x+2)\\)</strong><span class="pill">product form</span></div></div>
-<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> factorisation is the reverse process of expansion.</p>`;
+<div class="factor-lesson">
+<strong>Change the values to see an expression factorise live and verify it by expansion.</strong>
+<div class="control"><div class="head"><span>Choose method</span><span class="val" id="facTypeVal">Common factor</span></div>
+<select id="facTypeSelect">
+ <option value="common">Common factor</option>
+ <option value="squares">Difference of two squares</option>
+</select></div>
+<div class="visual-banner">
+ <div class="value-box"><small id="facLeftLabel">EXPRESSION</small><strong id="facLeft">6x + 12</strong><span class="pill" id="facLeftPill">expand</span></div>
+ <div class="eq">=</div>
+ <div class="value-box"><small id="facRightLabel">FACTORS</small><strong id="facRight">6(x + 2)</strong><span class="pill" id="facRightPill">factorised</span></div>
+</div>
+<div class="props">
+ <div class="prop"><span id="facAName">Common factor</span><strong id="facAProp">6</strong></div>
+ <div class="prop"><span id="facBName">Inside value</span><strong id="facBProp">2</strong></div>
+ <div class="prop"><span>Expanded value</span><strong id="facExpandedProp">6x + 12</strong></div>
+ <div class="prop"><span>Check</span><strong id="facStatus">TRUE</strong></div>
+</div>
+<div id="facCommonControls">
+ <div class="control"><div class="head"><span>Common factor</span><span class="val" id="facASliderVal">6</span></div><input id="facASlider" class="range" type="range" min="1" max="10" step="1" value="6"></div>
+ <div class="control"><div class="head"><span>Inside value</span><span class="val" id="facBSliderVal">2</span></div><input id="facBSlider" class="range" type="range" min="1" max="10" step="1" value="2"></div>
+</div>
+<div id="facSquareControls" style="display:none">
+ <div class="control"><div class="head"><span>a</span><span class="val" id="facSquareASliderVal">5</span></div><input id="facSquareASlider" class="range" type="range" min="1" max="10" step="1" value="5"></div>
+ <div class="control"><div class="head"><span>b</span><span class="val" id="facSquareBSliderVal">2</span></div><input id="facSquareBSlider" class="range" type="range" min="1" max="9" step="1" value="2"></div>
+</div>
+<div class="checks" id="facWork"><b>Result:</b> 6x + 12 = 6(x + 2). Expanding the factors gives the original expression.</div>
+<div class="presets">
+ <button class="preset facP" data-t="common" data-a="3" data-b="4">3x + 12</button>
+ <button class="preset facP" data-t="common" data-a="5" data-b="2">5x + 10</button>
+ <button class="preset facP" data-t="common" data-a="8" data-b="3">8x + 24</button>
+ <button class="preset facP" data-t="squares" data-a="7" data-b="3">7² − 3²</button>
+</div>
+<div class="formula" id="facFormula">ax + ab = a(x + b)</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> factorisation is the reverse of expansion. Look for a common factor first.</p>
+</div>`;
+
+
 
 if(norm(concept)==="algebraic identities") return `
 <div class="identity-lesson">
@@ -975,6 +1004,53 @@ function startLikeUnlikeDemo(){
  document.querySelectorAll(".luP").forEach(btn=>btn.addEventListener("click",()=>{a.value=btn.dataset.a;b.value=btn.dataset.b;p1.value=btn.dataset.p1;p2.value=btn.dataset.p2;update();}));
  update();
 }
+function startFactorisationDemo(){
+ if(norm(concept)!=="factorisation basics")return;
+ const type=document.getElementById("facTypeSelect"),a=document.getElementById("facASlider"),b=document.getElementById("facBSlider");
+ const sa=document.getElementById("facSquareASlider"),sb=document.getElementById("facSquareBSlider");
+ if(!type||!a||!b||!sa||!sb)return;
+ const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>n<0?"−"+Math.abs(n):String(n);
+ function update(){
+  const t=type.value;
+  const commonControls=document.getElementById("facCommonControls"),squareControls=document.getElementById("facSquareControls");
+  if(commonControls)commonControls.style.display=t==="common"?"block":"none";
+  if(squareControls)squareControls.style.display=t==="squares"?"block":"none";
+  let left,right,expanded,formula,work;
+  if(t==="common"){
+   const av=Number(a.value),bv=Number(b.value),product=av*bv;
+   left=av+"x + "+product; right=av+"(x + "+bv+")"; expanded=left;
+   formula="ax + ab = a(x + b)";
+   work="<b>Result:</b> "+left+" = "+right+". Expand the bracket: "+av+"×x + "+av+"×"+bv+" = "+left+".";
+   set("facTypeVal","Common factor");set("facAName","Common factor");set("facBName","Inside value");
+   set("facAProp",fmt(av));set("facBProp",fmt(bv));set("facASliderVal",fmt(av));set("facBSliderVal",fmt(bv));
+   set("facSquareASliderVal",fmt(sa.value));set("facSquareBSliderVal",fmt(sb.value));
+   set("facLeftPill","expand");set("facRightPill","factorised");
+  }else{
+   let av=Number(sa.value),bv=Number(sb.value);
+   if(bv>=av){bv=Math.max(1,av-1);sb.value=String(bv);}
+   const diff=av*av-bv*bv;
+   left=av+"² − "+bv+"²";right="("+av+" + "+bv+")("+av+" − "+bv+")";expanded=left;
+   formula="a² − b² = (a + b)(a − b)";
+   work="<b>Result:</b> "+left+" = "+right+". The difference of two squares factors into sum × difference.";
+   set("facTypeVal","Difference of two squares");set("facAName","a");set("facBName","b");
+   set("facAProp",fmt(av));set("facBProp",fmt(bv));set("facSquareASliderVal",fmt(av));set("facSquareBSliderVal",fmt(bv));
+   set("facASliderVal",fmt(a.value));set("facBSliderVal",fmt(b.value));
+   set("facLeftPill","expand");set("facRightPill","factorised");
+  }
+  set("facLeft",left);set("facRight",right);set("facExpandedProp",expanded);set("facStatus","TRUE");set("facFormula",formula);
+  const w=document.getElementById("facWork");if(w)w.innerHTML=work;
+ }
+ [type,a,b,sa,sb].forEach(el=>el.addEventListener("input",update));
+ type.addEventListener("change",update);
+ document.querySelectorAll(".facP").forEach(btn=>btn.addEventListener("click",()=>{
+  type.value=btn.dataset.t;
+  if(btn.dataset.t==="common"){a.value=btn.dataset.a;b.value=btn.dataset.b;}
+  else{sa.value=btn.dataset.a;sb.value=btn.dataset.b;}
+  update();
+ }));
+ update();
+}
 function startAlgebraIdentitiesDemo(){
  if(norm(concept)!=="algebraic identities")return;
  const type=document.getElementById("idTypeSelect"),as=document.getElementById("idASlider"),bs=document.getElementById("idBSlider");
@@ -1053,7 +1129,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+try{renderConceptPage();startRationalDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startAlgebraIdentitiesDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

@@ -921,6 +921,45 @@ if(norm(concept)==="pie charts") return `
 <div class="presets"><button class="preset pcP" data-a="10" data-b="16" data-c="8" data-d="6">Starter</button><button class="preset pcP" data-a="20" data-b="10" data-c="5" data-d="5">A leads</button><button class="preset pcP" data-a="10" data-b="10" data-c="10" data-d="10">Equal</button><button class="preset pcP" data-a="0" data-b="0" data-c="0" data-d="0">Empty</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> sector angle = frequency ÷ total × 360°.</p>
 </div>`;
+if(norm(concept)==="laws of exponents") return `
+<div class="geometry-lesson laws-exponents-interactive-lesson">
+<strong>Change the base and exponents and watch the exponent law update live.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>EXPRESSION</small><strong id="leExpression">2³ × 2²</strong><span class="pill" id="leRulePill">same base → add exponents</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>RESULT</small><strong id="leResult">32</strong><span class="pill" id="lePowerForm">2⁵</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>LAW</small><strong id="leLaw">aᵐ × aⁿ = aᵐ⁺ⁿ</strong><span class="pill">exponents combine</span></div>
+</div>
+<div class="concept-image" role="img" aria-label="Interactive laws of exponents number line">
+<svg viewBox="0 0 640 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="300" rx="18" fill="#f8fcf6"/>
+<text x="320" y="36" text-anchor="middle" font-size="22" font-weight="800" fill="#173f27">EXPONENT LAW EXPLORER</text>
+<line x1="55" y1="205" x2="585" y2="205" stroke="#173f27" stroke-width="3"/>
+<g id="leTicks"></g><circle id="lePoint" cx="320" cy="205" r="9" fill="#2196F3"/>
+<text id="lePointLabel" x="320" y="175" text-anchor="middle" font-size="15" font-weight="800" fill="#2563eb">32</text>
+<text x="320" y="270" text-anchor="middle" font-size="13" fill="#66736b">The number line rescales automatically as the value changes.</text>
+</svg>
+</div>
+<div class="props">
+<div class="prop"><span>Base</span><strong id="leBaseProp">2</strong></div><div class="prop"><span>First exponent</span><strong id="leMProp">3</strong></div>
+<div class="prop"><span>Second exponent</span><strong id="leNProp">2</strong></div><div class="prop"><span>Result</span><strong id="leResultProp">32</strong></div>
+<div class="prop"><span>Power form</span><strong id="lePowerProp">2⁵</strong></div><div class="prop"><span>Law</span><strong id="leLawProp">Product of powers</strong></div>
+</div>
+<div class="control"><div class="head"><span>Base</span><span class="val" id="leBaseVal">2</span></div><input class="range" id="leBaseSlider" type="range" min="2" max="6" value="2" step="1"></div>
+<div class="control"><div class="head"><span>First exponent</span><span class="val" id="leMVal">3</span></div><input class="range" id="leMSlider" type="range" min="0" max="6" value="3" step="1"></div>
+<div class="control"><div class="head"><span>Second exponent</span><span class="val" id="leNVal">2</span></div><input class="range" id="leNSlider" type="range" min="0" max="6" value="2" step="1"></div>
+<div class="control"><div class="head"><span>Choose a law</span><span class="val" id="leModeVal">Multiply powers</span></div>
+<select class="range" id="leMode"><option value="multiply">aᵐ × aⁿ = aᵐ⁺ⁿ</option><option value="divide">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</option><option value="power">(aᵐ)ⁿ = aᵐⁿ</option><option value="zero">a⁰ = 1</option></select></div>
+<div class="checks" id="leWork"><b>Explorer result:</b> 2³ × 2² = 2⁵ = 32.</div>
+<div class="presets">
+<button class="preset leP" data-mode="multiply" data-a="2" data-m="3" data-n="2">2³ × 2²</button>
+<button class="preset leP" data-mode="divide" data-a="3" data-m="5" data-n="2">3⁵ ÷ 3²</button>
+<button class="preset leP" data-mode="power" data-a="2" data-m="3" data-n="2">(2³)²</button>
+<button class="preset leP" data-mode="zero" data-a="5" data-m="0" data-n="2">5⁰</button>
+</div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> same-base multiplication adds exponents, division subtracts exponents, a power of a power multiplies exponents, and every non-zero base to the zero power equals 1.</p>
+</div>`;
 if(norm(concept)==="decimal expansions") return `
 <div class="geometry-lesson decimal-expansions-interactive-lesson">
 <strong>Change the numerator and denominator and watch the decimal expansion change live.</strong>
@@ -2178,6 +2217,30 @@ function startRealNumbersDemo(){
  }));
  update();
 }
+function startLawsOfExponentsDemo(){
+ if(norm(concept)!=="laws of exponents")return;
+ const bEl=document.getElementById("leBaseSlider"),mEl=document.getElementById("leMSlider"),nEl=document.getElementById("leNSlider"),mode=document.getElementById("leMode");if(!bEl||!mEl||!nEl||!mode)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ const sup=n=>String(n).replace(/0/g,"⁰").replace(/1/g,"¹").replace(/2/g,"²").replace(/3/g,"³").replace(/4/g,"⁴").replace(/5/g,"⁵").replace(/6/g,"⁶").replace(/7/g,"⁷").replace(/8/g,"⁸").replace(/9/g,"⁹").replace(/-/g,"⁻");
+ const fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(6)));
+ function update(){
+  const a=Number(bEl.value)||2,m=Math.max(0,Number(mEl.value)||0),n=Math.max(0,Number(nEl.value)||0),kind=mode.value;
+  let value=1,expression="",power="",law="",name="",rule="";
+  if(kind==="multiply"){value=Math.pow(a,m+n);expression=a+sup(m)+" × "+a+sup(n);power=a+sup(m+n);law="aᵐ × aⁿ = aᵐ⁺ⁿ";name="Product of powers";rule="same base → add exponents";}
+  else if(kind==="divide"){value=Math.pow(a,m-n);expression=a+sup(m)+" ÷ "+a+sup(n);power=m>=n?a+sup(m-n):"1/"+a+sup(n-m);law="aᵐ ÷ aⁿ = aᵐ⁻ⁿ";name="Quotient of powers";rule="same base → subtract exponents";}
+  else if(kind==="power"){value=Math.pow(a,m*n);expression="("+a+sup(m)+")"+sup(n);power=a+sup(m*n);law="(aᵐ)ⁿ = aᵐⁿ";name="Power of a power";rule="multiply exponents";}
+  else{value=1;expression=a+"⁰";power="1";law="a⁰ = 1";name="Zero exponent";rule="non-zero base → result 1";}
+  set("leExpression",expression);set("leResult",fmt(value));set("lePowerForm",power);set("leLaw",law);set("leRulePill",rule);
+  set("leBaseProp",a);set("leMProp",m);set("leNProp",n);set("leResultProp",fmt(value));set("lePowerProp",power);set("leLawProp",name);set("leBaseVal",a);set("leMVal",m);set("leNVal",n);set("leModeVal",mode.options[mode.selectedIndex].textContent.trim());
+  const w=document.getElementById("leWork");if(w)w.innerHTML="<b>Explorer result:</b> "+expression+" = "+power+" = "+fmt(value)+".";
+  const ticks=document.getElementById("leTicks"),point=document.getElementById("lePoint"),label=document.getElementById("lePointLabel");if(!ticks||!point||!label)return;
+  const lo=Math.min(0,Math.floor(value*0.15)),hi=Math.max(10,Math.ceil(value*1.15)),x0=55,x1=585,span=hi-lo,px=x0+(value-lo)/span*(x1-x0);ticks.innerHTML="";
+  for(let i=0;i<=6;i++){const x=x0+i/6*(x1-x0),v=lo+i/6*span,line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("x1",x);line.setAttribute("x2",x);line.setAttribute("y1",195);line.setAttribute("y2",215);line.setAttribute("stroke","#9aa7a0");line.setAttribute("stroke-width","2");ticks.appendChild(line);const t=document.createElementNS("http://www.w3.org/2000/svg","text");t.setAttribute("x",x);t.setAttribute("y",235);t.setAttribute("text-anchor","middle");t.setAttribute("font-size","11");t.setAttribute("fill","#66736b");t.textContent=fmt(v);ticks.appendChild(t);}
+  point.setAttribute("cx",Math.max(x0,Math.min(x1,px)));label.setAttribute("x",Math.max(x0,Math.min(x1,px)));label.textContent=fmt(value);
+ }
+ [bEl,mEl,nEl].forEach(el=>el.addEventListener("input",update));mode.addEventListener("change",update);
+ document.querySelectorAll(".leP").forEach(btn=>btn.addEventListener("click",()=>{mode.value=btn.dataset.mode;bEl.value=btn.dataset.a;mEl.value=btn.dataset.m;nEl.value=btn.dataset.n;update();}));update();
+}
 function startDecimalExpansionsDemo(){
  if(norm(concept)!=="decimal expansions")return;
  const nEl=document.getElementById("deNSlider"),dEl=document.getElementById("deDSlider");if(!nEl||!dEl)return;
@@ -2479,7 +2542,7 @@ function startQuiz(){
  try{
   const quizKey=norm(concept)==="properties of rational numbers" ? "Properties of rational numbers" : key;
   const dedicated=bank[quizKey];
-  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : (norm(concept)==="variables and constants" ? (dedicated||INLINE_VARIABLES_CONSTANTS_QUIZ) : (norm(concept)==="irrational numbers" ? (dedicated||INLINE_IRRATIONAL_QUIZ) : (norm(concept)==="real numbers" ? (dedicated||INLINE_REAL_NUMBERS_QUIZ) : dedicated)))))));
+  quizSource=norm(concept)==="properties of rational numbers" ? (dedicated||INLINE_PROPERTIES_QUIZ) : (norm(concept)==="laws of exponents" ? dedicated : (norm(concept)==="squares and square roots" ? (dedicated||INLINE_SQUARES_QUIZ) : (norm(concept)==="terms and coefficients" ? (dedicated||INLINE_TERMS_COEFFICIENTS_QUIZ) : (norm(concept)==="like and unlike terms" ? (dedicated||INLINE_LIKE_AND_UNLIKE_TERMS_QUIZ) : (norm(concept)==="factorisation basics" ? (dedicated||INLINE_FACTORISATION_BASICS_QUIZ) : (norm(concept)==="variables and constants" ? (dedicated||INLINE_VARIABLES_CONSTANTS_QUIZ) : (norm(concept)==="irrational numbers" ? (dedicated||INLINE_IRRATIONAL_QUIZ) : (norm(concept)==="real numbers" ? (dedicated||INLINE_REAL_NUMBERS_QUIZ) : dedicated)))))))));
  }catch(e){
   host.innerHTML='<div class="empty">Mastery Quiz could not load. Please refresh this page.</div>';
   return;
@@ -2509,7 +2572,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalNumbersDemo();startRealNumbersDemo();startDecimalExpansionsDemo();
+startIrrationalNumbersDemo();startRealNumbersDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

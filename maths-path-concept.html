@@ -1627,6 +1627,22 @@ if(norm(concept)==="irrational numbers") return `
 </div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> for a positive integer n, √n is rational exactly when n is a perfect square. Otherwise √n is irrational.</p>
 </div>`;
+if(norm(concept)==="fundamental theorem of arithmetic") return `
+<div class="geometry-lesson fundamental-theorem-arithmetic-lesson">
+<strong>Fundamental Theorem of Arithmetic: every composite integer greater than 1 has a prime factorisation that is unique apart from the order of the factors.</strong>
+<p style="margin:6px 0 10px">Break a number into prime factors. The prime powers you get are the same no matter which factor tree or division path you use.</p>
+<div class="visual-banner">
+<div class="value-box"><small>NUMBER</small><strong id="ftaN">360</strong><span class="pill">composite</span></div><div class="eq">→</div>
+<div class="value-box"><small>PRIME FACTORS</small><strong id="ftaFactors">2³ × 3² × 5</strong><span class="pill">prime powers</span></div>
+</div>
+<div class="concept-image" role="img" aria-label="Prime factorisation tree for 360">
+<svg viewBox="0 0 640 200" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="200" rx="16" fill="#f8fcf6"/><g stroke="#8cae8a" stroke-width="2" fill="none"><path d="M320 52 L190 100 M320 52 L450 100 M190 115 L130 155 M190 115 L250 155 M450 115 L400 155 M450 115 L510 155"/></g><g font-size="15" font-weight="800" text-anchor="middle" fill="#245b35"><rect x="284" y="20" width="72" height="34" rx="8" fill="#dff0d8"/><text x="320" y="42">360</text><rect x="154" y="84" width="72" height="34" rx="8" fill="#dff0d8"/><text x="190" y="106">36</text><rect x="414" y="84" width="72" height="34" rx="8" fill="#dff0d8"/><text x="450" y="106">10</text><rect x="94" y="140" width="72" height="34" rx="8" fill="#e8f3e5"/><text x="130" y="162">4</text><rect x="214" y="140" width="72" height="34" rx="8" fill="#e8f3e5"/><text x="250" y="162">9</text><rect x="364" y="140" width="72" height="34" rx="8" fill="#e8f3e5"/><text x="400" y="162">2 × 2</text><rect x="474" y="140" width="72" height="34" rx="8" fill="#e8f3e5"/><text x="510" y="162">5</text></g><text x="320" y="190" text-anchor="middle" font-size="11" fill="#66736b">Continue splitting composite branches until every leaf is prime.</text></svg>
+</div>
+<div class="control"><div class="head"><span>Choose a number to factorise</span><span class="val" id="ftaNVal">360</span></div><input class="range" id="ftaNSlider" type="range" min="2" max="500" value="360" step="1"></div>
+<div class="checks" id="ftaWork"><b>Division steps:</b><br>360 ÷ 2 = 180<br>180 ÷ 2 = 90<br>90 ÷ 2 = 45<br>45 ÷ 3 = 15<br>15 ÷ 3 = 5<br>5 ÷ 5 = 1<br><b>360 = 2³ × 3² × 5</b></div>
+<div class="presets"><button class="preset ftaPreset" data-n="360">360</button><button class="preset ftaPreset" data-n="420">420</button><button class="preset ftaPreset" data-n="252">252</button><button class="preset ftaPreset" data-n="997">997 (prime)</button></div>
+<p style="margin:8px 0 0;color:#66736b"><b>Applications:</b> find HCF using the smallest powers of common primes; find LCM using the greatest powers of all primes involved. The theorem also helps prove irrationality.</p>
+</div>`;
 if(norm(concept)==="euclid division algorithm") return `
 <div class="geometry-lesson euclid-division-algorithm-lesson">
 <strong>Euclid’s Division Algorithm: a = bq + r, where 0 ≤ r &lt; b.</strong>
@@ -3363,6 +3379,15 @@ function startDecimalExpansionsDemo(){
  update();
 }
 
+function startFundamentalTheoremArithmeticDemo(){
+ if(norm(concept)!=="fundamental theorem of arithmetic")return;
+ const input=document.getElementById("ftaNSlider");if(!input)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function factor(n){let x=n,factors=[],steps=[];for(let p=2;p*p<=x;p++){while(x%p===0){factors.push(p);steps.push(x+" ÷ "+p+" = "+(x/p));x/=p;}}if(x>1){factors.push(x);steps.push(x+" ÷ "+x+" = 1");}return {factors,steps};}
+ function format(fs){if(!fs.length)return "1";let parts=[];for(let i=0;i<fs.length;){let j=i+1;while(j<fs.length&&fs[j]===fs[i])j++;parts.push(fs[i]+(j-i>1?"<sup>"+(j-i)+"</sup>":""));i=j;}return parts.join(" × ");}
+ function update(){const n=Math.max(2,Math.min(1000,Number(input.value)||2));input.value=n;set("ftaN",n);set("ftaNVal",n);const f=factor(n);const factors=document.getElementById("ftaFactors");if(factors)factors.innerHTML=format(f.factors);const box=document.getElementById("ftaWork");if(box){const lines=f.steps.length?f.steps.join("<br>"):"This number is prime; it has no smaller prime divisor.";box.innerHTML="<b>Repeated division:</b><br>"+lines+"<br><b>"+n+" = "+format(f.factors)+"</b>";}}
+ input.addEventListener("input",update);document.querySelectorAll(".ftaPreset").forEach(b=>b.addEventListener("click",()=>{input.value=b.dataset.n;update();}));update();
+}
 function startEuclidDivisionAlgorithmDemo(){
  if(norm(concept)!=="euclid division algorithm")return;
  const aEl=document.getElementById("edaASlider"),bEl=document.getElementById("edaBSlider");if(!aEl||!bEl)return;
@@ -4117,6 +4142,38 @@ const INLINE_MEAN_QUIZ=[
 ["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
 ["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
 ];
+const INLINE_FUNDAMENTAL_THEOREM_ARITHMETIC_QUIZ=[
+["The Fundamental Theorem of Arithmetic states that every composite number:",["Has exactly two factors","Has a unique prime factorisation apart from order","Is divisible by every prime","Is itself prime"],1,"Every composite integer greater than 1 can be expressed as a product of primes uniquely apart from order."],
+["Which is the prime factorisation of 360?",["2² × 3² × 5","2³ × 3² × 5","2³ × 3 × 5²","2 × 3³ × 5"],1,"360 = 2×2×2×3×3×5 = 2³×3²×5."],
+["Which number is prime?",["21","27","29","33"],2,"29 has no positive divisors other than 1 and 29."],
+["The prime factorisation of 84 is:",["2² × 3 × 7","2 × 3 × 7","2² × 7²","3 × 28"],0,"84 = 2×2×3×7 = 2²×3×7."],
+["In prime factorisation, each factor must be:",["Composite","Negative","Prime","Even"],2,"Prime factorisation expresses a number as a product of prime numbers."],
+["The prime factorisation of 100 is:",["2² × 5²","2 × 5²","2² × 5","10² × 2"],0,"100 = 4×25 = 2²×5²."],
+["Which number is neither prime nor composite?",["1","2","9","15"],0,"The number 1 has only one positive factor, so it is neither prime nor composite."],
+["The prime factorisation of 252 is:",["2² × 3² × 7","2 × 3² × 7","2² × 3 × 7²","2³ × 3 × 7"],0,"252 = 4×63 = 2²×3²×7."],
+["Why is the prime factorisation called unique?",["The order of factors is fixed by nature","The prime factors and their powers are the same apart from order","Every number has only one factor","A number has only one divisor"],1,"Different factor trees produce the same prime factors with the same multiplicities."],
+["Find the HCF of 24 and 36 using prime factors.",["6","12","18","72"],1,"24=2³×3 and 36=2²×3²; HCF=2²×3=12."],
+["Find the LCM of 12 and 18.",["6","18","24","36"],3,"12=2²×3 and 18=2×3²; LCM=2²×3²=36."],
+["For HCF by prime factorisation, use:",["Greatest powers of every prime","Smallest powers of common prime factors","All powers added together","Only the largest prime"],1,"HCF uses the minimum exponent of each prime common to all numbers."],
+["For LCM by prime factorisation, use:",["Smallest powers of common primes only","Greatest powers of all primes involved","Only common primes","The sum of the numbers"],1,"LCM uses the maximum exponent of each prime appearing in any number."],
+["The prime factorisation of 72 is:",["2³ × 3²","2² × 3³","2 × 3²","2³ × 3"],0,"72 = 8×9 = 2³×3²."],
+["Which is a prime factor of 455?",["4","5","9","15"],1,"455 ends in 5, so it is divisible by the prime 5."],
+["The prime factorisation of 125 is:",["5²","3×5²","5³","25³"],2,"125 = 5×5×5 = 5³."],
+["If n=2³×3×7, what is n?",["42","84","168","294"],2,"8×3×7 = 168."],
+["Which is the correct prime factorisation of 150?",["2×3×5²","2×3²×5","2²×3×5","3×5²"],0,"150 = 2×75 = 2×3×5²."],
+["If two numbers have no common prime factor, their HCF is:",["0","1","Their product","Their sum"],1,"Numbers with no common prime factor are coprime, so their HCF is 1."],
+["The HCF of 2³×3² and 2²×3×5 is:",["2²×3","2³×3²×5","2²×3²","2×3×5"],0,"Take the minimum powers of the common primes 2 and 3: 2²×3."],
+["The LCM of 2³×3 and 2²×3² is:",["2²×3","2³×3²","2⁵×3³","2×3"],1,"Take the maximum powers: 2³×3²."],
+["The prime factorisation of 997 is:",["997","7×142","11×91","31×32"],0,"997 is prime, so its prime factorisation is just 997."],
+["Which statement follows from uniqueness of prime factorisation?",["A composite number has one fixed set of prime factors with fixed powers","Every composite number is even","Every prime has three factors","Every number ends in 5"],0,"The theorem guarantees the same prime factors and exponents regardless of the factorisation route."],
+["The prime factorisation of 540 is:",["2²×3³×5","2³×3²×5","2²×3²×5²","2×3³×5²"],0,"540 = 54×10 = 2²×3³×5."],
+["For two positive integers a and b, HCF(a,b) × LCM(a,b) equals:",["a+b","a−b","a×b","a÷b"],2,"The identity HCF(a,b)×LCM(a,b)=a×b holds for two positive integers."],
+["Which is the prime factorisation of 441?",["3²×7²","3×7²","3²×7","21²×3"],0,"441 = 21² = 3²×7²."],
+["A number is written as 2²×3×5. How many prime factors are counted with repetition?",["3","4","5","8"],2,"The repeated list is 2, 2, 3, 5—four factors. (The distinct primes are 2, 3 and 5.)"],
+["Which prime powers are used for HCF of 48 and 80?",["2⁴×3×5","2⁴×5","2×3×5","2⁴"],3,"48=2⁴×3 and 80=2⁴×5; only 2 is common, with minimum exponent 4, so HCF=2⁴."],
+["The prime factorisation of 98 is:",["2×7²","2²×7","7²","2×49²"],0,"98 = 2×49 = 2×7²."],
+["Why can a factor tree be useful?",["It guarantees a different answer each time","It breaks a composite number into smaller factors until prime leaves remain","It finds only even factors","It avoids using prime numbers"],1,"A factor tree visually decomposes a number until all terminal factors are prime."]
+];
 const INLINE_EUCLID_DIVISION_ALGORITHM_QUIZ=[
 ["Euclid’s division algorithm is written as:",["a=bq+r, 0≤r<b","a=b+r+q","a=br+q","a=q/r"],0,"For positive integers a and b, a=bq+r with remainder r satisfying 0≤r<b."],
 ["In a=bq+r, what does q represent?",["Remainder","Quotient","HCF","Dividend"],1,"q is the quotient obtained when a is divided by b."],
@@ -4313,6 +4370,7 @@ function startQuiz(){
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="frequency distribution") quizSource=dedicated||INLINE_FREQUENCY_DISTRIBUTION_QUIZ;
+  else if(norm(concept)==="fundamental theorem of arithmetic") quizSource=dedicated||INLINE_FUNDAMENTAL_THEOREM_ARITHMETIC_QUIZ;
   else if(norm(concept)==="euclid division algorithm") quizSource=dedicated||INLINE_EUCLID_DIVISION_ALGORITHM_QUIZ;
   else if(norm(concept)==="simple events") quizSource=dedicated||INLINE_SIMPLE_EVENTS_QUIZ;
   else if(norm(concept)==="theoretical probability") quizSource=dedicated||INLINE_THEORETICAL_PROBABILITY_QUIZ;
@@ -4359,7 +4417,7 @@ window.addEventListener("error",function(e){
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

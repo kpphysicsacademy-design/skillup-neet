@@ -82,12 +82,18 @@ button,input{font:inherit}.top{position:sticky;top:0;z-index:20;background:#fff;
 <div class="searchbox"><div class="searchrow"><input id="q" class="search" type="search" placeholder="Search a concept or chapter…" aria-label="Search Mathematics"><button id="clear" class="clear" type="button">Clear</button></div><div class="hint">Tap any concept to open its Learn + Mastery Quiz page.</div></div>
 <section id="path" aria-live="polite"></section>
 </main>
-<script src="maths-path-data.js?v=20261008-2300"></script>
+<script src="maths-path-data.js?v=20261009-path-audit-fix-v1"></script>
 <script>
 (function(){
 "use strict";
-const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
 const path=document.getElementById("path"), all=[],stageNumbers=new Map();
+const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
+if(!data.length){
+ path.innerHTML='<div class="noresults"><b>Maths path could not load.</b><br><span class="hint">The curriculum data script did not load or returned no concepts. Refresh the page; if this continues, check maths-path-data.js deployment.</span></div>';
+ document.getElementById("conceptStat").textContent="—";
+ document.getElementById("chapterStat").textContent="—";
+ return;
+}
 data.forEach(function(stage,stageIndex){
  const level=stage[0], chapters=stage[1]||{};
  stageNumbers.set(level,stageIndex+1);
@@ -100,7 +106,7 @@ const chapterCount=new Set(all.map(function(x){return x.chapter+"||"+x.level;}))
 document.getElementById("conceptStat").textContent=all.length;
 document.getElementById("chapterStat").textContent=chapterCount;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]);});}
-function link(x){return "maths-path-concept.html?concept="+encodeURIComponent(x.concept)+"&level="+encodeURIComponent(x.level)+"&chapter="+encodeURIComponent(x.chapter)+"&v=20261008-maths-mobile-app-v7";}
+function link(x){return "maths-path-concept.html?concept="+encodeURIComponent(x.concept)+"&level="+encodeURIComponent(x.level)+"&chapter="+encodeURIComponent(x.chapter)+"&v=20261009-path-audit-fix-v1";}
 function render(list){
  if(!list.length){path.innerHTML='<div class="noresults">No matching concept found.<br><span class="hint">Try a different concept or chapter name.</span></div>';return;}
  const byStage=new Map();

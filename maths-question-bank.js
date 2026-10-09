@@ -3379,4 +3379,336 @@ window.SKILLUP_MATHS_QUIZ_BANK={
     "(√3/2)/(1/2) = √3."
   ]
 ]
+  "Trigonometric identities": [
+  [
+    "Which is the Pythagorean trigonometric identity?",
+    [
+      "sin²θ + cos²θ = 1",
+      "sin θ + cos θ = 1",
+      "tan θ = sin θ × cos θ",
+      "sin²θ − cos²θ = 1"
+    ],
+    0,
+    "The fundamental identity is sin²θ + cos²θ = 1."
+  ],
+  [
+    "If sin θ = 3/5 and θ is acute, what is cos² θ?",
+    [
+      "9/25",
+      "16/25",
+      "3/5",
+      "4/5"
+    ],
+    1,
+    "cos²θ = 1 − sin²θ = 1 − 9/25 = 16/25."
+  ],
+  [
+    "Which identity relates tan θ and sec θ?",
+    [
+      "1 + tan²θ = sec²θ",
+      "1 + cot²θ = sec²θ",
+      "tan²θ + sec θ = 1",
+      "sec²θ − tan θ = 1"
+    ],
+    0,
+    "Dividing sin²θ + cos²θ = 1 by cos²θ gives 1 + tan²θ = sec²θ."
+  ],
+  [
+    "Which identity is correct for cot θ and cosec θ?",
+    [
+      "1 + cot²θ = cosec²θ",
+      "1 + cosec²θ = cot²θ",
+      "cot²θ − cosec²θ = 1",
+      "cot θ + cosec θ = 1"
+    ],
+    0,
+    "Dividing sin²θ + cos²θ = 1 by sin²θ gives 1 + cot²θ = cosec²θ."
+  ],
+  [
+    "If tan θ = 3/4 for an acute angle, sec² θ equals:",
+    [
+      "7/16",
+      "9/16",
+      "25/16",
+      "25/9"
+    ],
+    2,
+    "sec²θ = 1 + tan²θ = 1 + 9/16 = 25/16."
+  ],
+  [
+    "If cot θ = 5/12, then cosec² θ equals:",
+    [
+      "25/144",
+      "144/25",
+      "169/144",
+      "119/144"
+    ],
+    2,
+    "cosec²θ = 1 + cot²θ = 1 + 25/144 = 169/144."
+  ],
+  [
+    "Simplify (1 − sin²θ).",
+    [
+      "tan²θ",
+      "cos²θ",
+      "sec²θ",
+      "1"
+    ],
+    1,
+    "From sin²θ + cos²θ = 1, subtract sin²θ to get cos²θ."
+  ],
+  [
+    "Simplify (1 − cos²θ).",
+    [
+      "sin²θ",
+      "cot²θ",
+      "cosec²θ",
+      "1"
+    ],
+    0,
+    "Rearranging sin²θ + cos²θ = 1 gives 1 − cos²θ = sin²θ."
+  ],
+  [
+    "Simplify sec²θ − tan²θ.",
+    [
+      "0",
+      "1",
+      "sin²θ",
+      "cos²θ"
+    ],
+    1,
+    "Since sec²θ = 1 + tan²θ, their difference is 1."
+  ],
+  [
+    "Simplify cosec²θ − cot²θ.",
+    [
+      "0",
+      "1",
+      "tan²θ",
+      "2"
+    ],
+    1,
+    "Since cosec²θ = 1 + cot²θ, their difference is 1."
+  ],
+  [
+    "If sin θ = 5/13 and θ is acute, cos θ equals:",
+    [
+      "5/12",
+      "12/13",
+      "13/12",
+      "8/13"
+    ],
+    1,
+    "cos²θ = 1 − 25/169 = 144/169; the positive root is 12/13."
+  ],
+  [
+    "If cos θ = 8/17 and θ is acute, sin θ equals:",
+    [
+      "8/15",
+      "15/17",
+      "9/17",
+      "√8/17"
+    ],
+    1,
+    "sin²θ = 1 − 64/289 = 225/289, so sin θ = 15/17."
+  ],
+  [
+    "If tan θ = 1, then sec² θ is:",
+    [
+      "0",
+      "1",
+      "2",
+      "√2"
+    ],
+    2,
+    "sec²θ = 1 + tan²θ = 2."
+  ],
+  [
+    "If sec θ = 13/5, then tan² θ equals:",
+    [
+      "144/25",
+      "169/25",
+      "12/5",
+      "25/144"
+    ],
+    0,
+    "tan²θ = sec²θ − 1 = 169/25 − 25/25 = 144/25."
+  ],
+  [
+    "If cosec θ = 5/3, then cot² θ equals:",
+    [
+      "16/9",
+      "25/9",
+      "4/3",
+      "9/16"
+    ],
+    0,
+    "cot²θ = cosec²θ − 1 = 25/9 − 9/9 = 16/9."
+  ],
+  [
+    "Which expression equals tan θ?",
+    [
+      "sin θ / cos θ",
+      "cos θ / sin θ",
+      "1 / sin θ",
+      "1 / cos θ"
+    ],
+    0,
+    "By definition, tan θ = sin θ divided by cos θ, where cos θ ≠ 0."
+  ],
+  [
+    "Which expression equals sec θ?",
+    [
+      "1 / sin θ",
+      "1 / cos θ",
+      "sin θ / cos θ",
+      "cos θ / sin θ"
+    ],
+    1,
+    "Secant is the reciprocal of cosine."
+  ],
+  [
+    "Which expression equals cosec θ?",
+    [
+      "1 / cos θ",
+      "1 / tan θ",
+      "1 / sin θ",
+      "sin θ / cos θ"
+    ],
+    2,
+    "Cosecant is the reciprocal of sine."
+  ],
+  [
+    "Which expression equals cot θ?",
+    [
+      "sin θ / cos θ",
+      "cos θ / sin θ",
+      "1 / cos θ",
+      "1 / sin θ"
+    ],
+    1,
+    "Cotangent is cosine divided by sine."
+  ],
+  [
+    "For which angle is tan θ undefined among these choices?",
+    [
+      "0°",
+      "30°",
+      "45°",
+      "90°"
+    ],
+    3,
+    "tan θ = sin θ / cos θ, and cos 90° = 0."
+  ],
+  [
+    "If sin θ = 0.6 and θ is acute, sin²θ + cos²θ equals:",
+    [
+      "0.36",
+      "0.64",
+      "1",
+      "1.36"
+    ],
+    2,
+    "The Pythagorean identity gives a sum of 1 for every angle where sine and cosine are defined."
+  ],
+  [
+    "Which step derives 1 + tan²θ = sec²θ?",
+    [
+      "Divide sin²θ + cos²θ = 1 by cos²θ",
+      "Multiply sin²θ + cos²θ = 1 by sin²θ",
+      "Divide by tan²θ",
+      "Square both sides only"
+    ],
+    0,
+    "Dividing each term by cos²θ gives tan²θ + 1 = sec²θ."
+  ],
+  [
+    "If sin θ = 4/5 for an acute θ, tan θ equals:",
+    [
+      "3/4",
+      "4/3",
+      "5/4",
+      "4/5"
+    ],
+    1,
+    "The corresponding cosine is 3/5, so tan θ = (4/5)/(3/5) = 4/3."
+  ],
+  [
+    "If cos θ = 12/13 for an acute θ, tan θ equals:",
+    [
+      "5/12",
+      "12/5",
+      "5/13",
+      "13/5"
+    ],
+    0,
+    "The sine is 5/13, so tan θ = (5/13)/(12/13) = 5/12."
+  ],
+  [
+    "Simplify (sec²θ − 1) / tan²θ when tan θ ≠ 0.",
+    [
+      "0",
+      "1",
+      "sec²θ",
+      "tan²θ"
+    ],
+    1,
+    "sec²θ − 1 = tan²θ, so the quotient is 1."
+  ],
+  [
+    "Simplify (cosec²θ − 1) / cot²θ when cot θ ≠ 0.",
+    [
+      "0",
+      "1",
+      "cosec²θ",
+      "cot²θ"
+    ],
+    1,
+    "cosec²θ − 1 = cot²θ, so the quotient is 1."
+  ],
+  [
+    "If tan θ = 2, then sec²θ equals:",
+    [
+      "3",
+      "4",
+      "5",
+      "√5"
+    ],
+    2,
+    "sec²θ = 1 + 2² = 5."
+  ],
+  [
+    "If cot θ = 3, then cosec²θ equals:",
+    [
+      "8",
+      "9",
+      "10",
+      "√10"
+    ],
+    2,
+    "cosec²θ = 1 + 3² = 10."
+  ],
+  [
+    "Which identity is equivalent to sin²θ + cos²θ = 1 after division by sin²θ?",
+    [
+      "1 + tan²θ = sec²θ",
+      "1 + cot²θ = cosec²θ",
+      "sec²θ − tan²θ = 0",
+      "sin θ cos θ = 1"
+    ],
+    1,
+    "Dividing by sin²θ gives 1 + cot²θ = cosec²θ."
+  ],
+  [
+    "For an acute θ, sin θ = 7/25. What is sec θ?",
+    [
+      "25/24",
+      "25/7",
+      "24/25",
+      "7/24"
+    ],
+    0,
+    "cos θ = 24/25, so sec θ = 1/cos θ = 25/24."
+  ]
+]
 };

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-quadratic-formula-live-visual-v3">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-quadratic-formula-virtual-calculation-v4">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • 20261009-quadratic-formula-live-visual-v3</title>
+<title>SkillUp Mathematics • Concept Practice • 20261009-quadratic-formula-virtual-calculation-v4</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -261,10 +261,10 @@
 }
 </style><style>.histograms-interactive-lesson .hg-responsive-svg{display:block;width:100%;max-width:100%;height:auto}@media(max-width:600px){.histograms-interactive-lesson{width:100%;overflow:hidden}.histograms-interactive-lesson .hg-responsive-svg{width:100%!important;height:auto!important}.histograms-interactive-lesson .props,.histograms-interactive-lesson .presets{grid-template-columns:1fr 1fr!important}}</style><style>.probability-basics-interactive-lesson{width:100%;min-width:0;overflow:hidden}.probability-basics-interactive-lesson .pb-responsive-svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:600px){.probability-basics-interactive-lesson{padding:10px!important}.probability-basics-interactive-lesson .props{grid-template-columns:1fr 1fr!important;gap:6px!important}.probability-basics-interactive-lesson .prop{padding:7px!important}.probability-basics-interactive-lesson .preset{font-size:9px!important;padding:8px 6px!important}}</style></head>
 <body>
-<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261009-quadratic-formula-live-visual-v3">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
+<header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261009-quadratic-formula-virtual-calculation-v4">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261008-coordinate-representation-v1";</script>
-<script src="maths-quiz-bank.js?v=20261009-quadratic-formula-live-visual-v3"></script>
-<script src="maths-path-data.js?v=20261009-quadratic-formula-live-visual-v3"></script>
+<script src="maths-quiz-bank.js?v=20261009-quadratic-formula-virtual-calculation-v4"></script>
+<script src="maths-path-data.js?v=20261009-quadratic-formula-virtual-calculation-v4"></script>
 <script>
 (function(){
 "use strict";
@@ -2352,6 +2352,16 @@ if(norm(concept)==="algebraic expressions") return `
   <div class="value-box"><small>ROOTS</small><strong id="qfRoots">x = 2, 1</strong><span>from the quadratic formula</span></div>
  </div>
  <svg id="qfGraph" viewBox="0 0 600 260" width="100%" height="auto" role="img" aria-label="Live graph of the quadratic equation"><rect width="600" height="260" rx="12" fill="#f8fafc"/><path id="qfCurve" d="" fill="none" stroke="#2563eb" stroke-width="3"/><line id="qfXAxis" x1="0" y1="130" x2="600" y2="130" stroke="#94a3b8"/><line x1="300" y1="8" x2="300" y2="252" stroke="#94a3b8"/><g id="qfRootMarks"></g></svg>
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0">
+  <div class="value-box"><small>−b</small><strong id="qfNegB">3</strong><span>Change the sign of b</span></div>
+  <div class="value-box"><small>√D</small><strong id="qfSqrtD">1</strong><span>Square root of discriminant</span></div>
+  <div class="value-box"><small>2a</small><strong id="qfDenom">2</strong><span>Common denominator</span></div>
+ </div>
+ <div class="checks" style="margin:10px 0">
+  <b>Virtual calculation • watch every step change</b>
+  <p id="qfPlusCalc">x₁ = (−b + √D)/(2a) = (3 + 1)/2 = 2</p>
+  <p id="qfMinusCalc" style="margin-bottom:0">x₂ = (−b − √D)/(2a) = (3 − 1)/2 = 1</p>
+ </div>
  <p id="qfWorking" style="margin-bottom:0">D = b² − 4ac = 1.</p>
 </div>
 <div class="checks">
@@ -2391,7 +2401,17 @@ function startQuadraticFormulaDemo(){
   else if(Math.abs(D)<1e-8){nature="One repeated real root";roots=[-b/(2*a)];}
   else {nature="No real roots";roots=[];}
   put("qfNature",nature);put("qfRoots",roots.length?roots.map(x=>"x = "+fmt(x)).join(", "):"Complex roots");
-  put("qfWorking","D = b² − 4ac = ("+fmt(b)+")² − 4("+fmt(a)+")("+fmt(d)+") = "+fmt(D)+". "+(roots.length?"Substitute in x = (−b ± √D)/(2a).":"Since D < 0, √D is not real; there are no real x-intercepts."));
+  const negB=-b,sqrtD=D>=0?Math.sqrt(D):NaN,denom=2*a;
+  put("qfNegB","−b = "+fmt(negB));put("qfSqrtD",D>=0?"√D = "+fmt(sqrtD):"√D is not real");put("qfDenom","2a = "+fmt(denom));
+  if(D>=0){
+   const plusNum=negB+sqrtD,minusNum=negB-sqrtD;
+   put("qfPlusCalc","x₁ = (−b + √D)/(2a) = ("+fmt(negB)+" + "+fmt(sqrtD)+") / "+fmt(denom)+" = "+fmt(plusNum/denom));
+   put("qfMinusCalc","x₂ = (−b − √D)/(2a) = ("+fmt(negB)+" − "+fmt(sqrtD)+") / "+fmt(denom)+" = "+fmt(minusNum/denom));
+  }else{
+   put("qfPlusCalc","x₁ = (−b + i√|D|)/(2a) = ("+fmt(negB)+" + i"+fmt(Math.sqrt(-D))+") / "+fmt(denom));
+   put("qfMinusCalc","x₂ = (−b − i√|D|)/(2a) = ("+fmt(negB)+" − i"+fmt(Math.sqrt(-D))+") / "+fmt(denom));
+  }
+  put("qfWorking","Step 1: D = b² − 4ac = ("+fmt(b)+")² − 4("+fmt(a)+")("+fmt(d)+") = "+fmt(D)+". Step 2: −b = "+fmt(negB)+", √D = "+(D>=0?fmt(sqrtD):"not real")+", 2a = "+fmt(denom)+". Step 3: use both + and − versions shown above.");
   const curve=document.getElementById("qfCurve"),marks=document.getElementById("qfRootMarks");
   if(curve){
    const pts=[];for(let px=0;px<=600;px+=3){const x=(px-300)/40,y=a*x*x+b*x+d,py=130-y*14;pts.push((px===0?"M":"L")+px.toFixed(1)+" "+Math.max(-1000,Math.min(1000,py)).toFixed(1));}

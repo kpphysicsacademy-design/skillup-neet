@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-frequency-distribution-visual-learn-quiz-v3">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-frequency-distribution-interactive-visualizer-v4">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • v20261009-frequency-distribution-visual-learn-quiz-v3</title>
+<title>SkillUp Mathematics • Concept Practice • v20261009-frequency-distribution-interactive-visualizer-v4</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -1061,6 +1061,49 @@ if(norm(concept)==="frequency distribution") return `
 </svg>
 </div>
 </div>
+
+<div class="lesson fd-visualizer" style="margin:14px 0">
+<strong>Interactive frequency visualizer</strong>
+<p>Move the sliders to change how many students read 0, 1, 2 or 3 books. Watch the bars, total and mode update instantly.</p>
+<div class="visual-banner">
+<div class="value-box"><small>TOTAL STUDENTS</small><strong id="fdTotal">12</strong><span class="pill">all frequencies added</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>MODE</small><strong id="fdMode">1 book</strong><span class="pill">most common value</span></div>
+<div class="eq">→</div>
+<div class="value-box"><small>HIGHEST FREQUENCY</small><strong id="fdMax">6</strong><span class="pill">students</span></div>
+</div>
+<div class="concept-image" role="img" aria-label="Interactive bar chart for number of books read by students">
+<svg viewBox="0 0 640 340" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="340" rx="16" fill="#f8fcf6"/>
+<text x="320" y="28" text-anchor="middle" font-size="18" font-weight="800" fill="#245b35">Explore the frequency distribution</text>
+<line x1="72" y1="275" x2="600" y2="275" stroke="#45664b" stroke-width="2"/>
+<line x1="72" y1="55" x2="72" y2="275" stroke="#45664b" stroke-width="2"/>
+<g id="fdGrid" stroke="#dce9d7" stroke-width="1"></g>
+<g id="fdBars"></g><g id="fdLabels"></g>
+<text x="22" y="165" transform="rotate(-90 22 165)" text-anchor="middle" font-size="12" fill="#66736b">Frequency (students)</text>
+<text x="330" y="326" text-anchor="middle" font-size="12" fill="#66736b">Number of books read</text>
+</svg>
+</div>
+<div class="props">
+<div class="prop"><span>0 books</span><strong id="fdProp0">3</strong></div>
+<div class="prop"><span>1 book</span><strong id="fdProp1">6</strong></div>
+<div class="prop"><span>2 books</span><strong id="fdProp2">2</strong></div>
+<div class="prop"><span>3 books</span><strong id="fdProp3">1</strong></div>
+</div>
+<div class="control"><div class="head"><span>Frequency of 0 books</span><span class="val" id="fdVal0">3</span></div><input class="range" id="fdSlider0" type="range" min="0" max="20" value="3" step="1" aria-label="Frequency of zero books"></div>
+<div class="control"><div class="head"><span>Frequency of 1 book</span><span class="val" id="fdVal1">6</span></div><input class="range" id="fdSlider1" type="range" min="0" max="20" value="6" step="1" aria-label="Frequency of one book"></div>
+<div class="control"><div class="head"><span>Frequency of 2 books</span><span class="val" id="fdVal2">2</span></div><input class="range" id="fdSlider2" type="range" min="0" max="20" value="2" step="1" aria-label="Frequency of two books"></div>
+<div class="control"><div class="head"><span>Frequency of 3 books</span><span class="val" id="fdVal3">1</span></div><input class="range" id="fdSlider3" type="range" min="0" max="20" value="1" step="1" aria-label="Frequency of three books"></div>
+<div class="checks" id="fdWork"><b>Result:</b> 12 students in total. 1 book is the mode with frequency 6.</div>
+<div class="presets">
+<button class="preset fdPreset" data-a="3" data-b="6" data-c="2" data-d="1">Original example</button>
+<button class="preset fdPreset" data-a="4" data-b="4" data-c="4" data-d="4">Equal frequencies</button>
+<button class="preset fdPreset" data-a="2" data-b="3" data-c="8" data-d="5">2-book mode</button>
+<button class="preset fdPreset" data-a="0" data-b="0" data-c="0" data-d="0">Clear data</button>
+</div>
+<p style="margin:10px 0 0;color:#66736b"><b>Try this:</b> set all four frequencies equal. The distribution has no single mode. Clear the data to see why an empty table has no mode.</p>
+</div>
+
 <div class="lesson" style="margin:10px 0">
 <strong>3. Grouped frequency distribution</strong>
 <p>When there are many different observations, combine them into class intervals. Example: 0–10, 10–20, 20–30. Each observation must be counted in exactly one class.</p>
@@ -2686,6 +2729,30 @@ function startDataCollectionDemo(){
  update();
 }
 
+function startFrequencyDistributionDemo(){
+ if(norm(concept)!=="frequency distribution")return;
+ const ids=["fdSlider0","fdSlider1","fdSlider2","fdSlider3"],els=ids.map(id=>document.getElementById(id));
+ if(els.some(x=>!x))return;
+ const names=["0 books","1 book","2 books","3 books"],set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ function update(){
+  const vals=els.map(x=>Math.max(0,Number(x.value)||0)),total=vals.reduce((a,b)=>a+b,0),max=Math.max(...vals);
+  const leaders=names.filter((_,i)=>vals[i]===max&&max>0),mode=leaders.length===1?leaders[0]:(max===0?"None":leaders.join(" & "));
+  vals.forEach((v,i)=>{set("fdProp"+i,v);set("fdVal"+i,v);});
+  set("fdTotal",total);set("fdMode",mode);set("fdMax",max);
+  const work=document.getElementById("fdWork");
+  if(work)work.innerHTML="<b>Result:</b> "+total+" students in total. "+(mode==="None"?"The data are empty, so there is no mode.":leaders.length>1?"There is a tie for the highest frequency ("+max+"): "+leaders.join(" and ")+".":"The mode is "+mode+" with frequency "+max+".");
+  const bars=document.getElementById("fdBars"),labels=document.getElementById("fdLabels"),grid=document.getElementById("fdGrid");
+  if(!bars||!labels||!grid)return;
+  bars.innerHTML="";labels.innerHTML="";grid.innerHTML="";
+  const baseY=275,startX=118,gap=125,barW=62,maxH=190,scale=max?maxH/max:0,top=max?Math.ceil(max/5)*5:5;
+  for(let n=0;n<=5;n++){const y=baseY-(n/5)*maxH,line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("x1","72");line.setAttribute("x2","600");line.setAttribute("y1",y);line.setAttribute("y2",y);grid.appendChild(line);const tick=document.createElementNS("http://www.w3.org/2000/svg","text");tick.setAttribute("x","62");tick.setAttribute("y",y+4);tick.setAttribute("text-anchor","end");tick.setAttribute("font-size","11");tick.setAttribute("fill","#66736b");tick.textContent=Math.round(top*n/5);labels.appendChild(tick);}
+  vals.forEach((v,i)=>{const h=v*scale,x=startX+i*gap,y=baseY-h,rect=document.createElementNS("http://www.w3.org/2000/svg","rect");rect.setAttribute("x",x);rect.setAttribute("y",y);rect.setAttribute("width",barW);rect.setAttribute("height",h);rect.setAttribute("rx","7");rect.setAttribute("fill",v===max&&max>0?"#7dbb70":"#dbeee0");rect.setAttribute("stroke","#245b35");rect.setAttribute("stroke-width","1.5");bars.appendChild(rect);const val=document.createElementNS("http://www.w3.org/2000/svg","text");val.setAttribute("x",x+barW/2);val.setAttribute("y",Math.max(48,y-8));val.setAttribute("text-anchor","middle");val.setAttribute("font-size","15");val.setAttribute("font-weight","800");val.setAttribute("fill","#245b35");val.textContent=v;labels.appendChild(val);const lab=document.createElementNS("http://www.w3.org/2000/svg","text");lab.setAttribute("x",x+barW/2);lab.setAttribute("y","297");lab.setAttribute("text-anchor","middle");lab.setAttribute("font-size","12");lab.setAttribute("fill","#263238");lab.textContent=String(i)+" book"+(i===1?"":"s");labels.appendChild(lab);});
+ }
+ els.forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".fdPreset").forEach(btn=>btn.addEventListener("click",()=>{els[0].value=btn.dataset.a;els[1].value=btn.dataset.b;els[2].value=btn.dataset.c;els[3].value=btn.dataset.d;update();}));
+ update();
+}
+
 function startFrequencyTablesDemo(){
  if(norm(concept)!=="frequency tables")return;
  const ids=["ftF0Slider","ftF1Slider","ftF2Slider","ftF3Slider"],els=ids.map(id=>document.getElementById(id));if(els.some(x=>!x))return;
@@ -4105,7 +4172,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);

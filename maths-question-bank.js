@@ -3742,4 +3742,37 @@ window.SKILLUP_MATHS_QUIZ_BANK={
     "cos θ = 24/25, so sec θ = 1/cos θ = 25/24."
   ]
 ]
+,
+"Grouped data":[
+["What is grouped data?",["Data arranged into class intervals with frequencies","Data listed only in alphabetical order","Data with no observations","Data shown only as a pie chart"],0,"Grouped data organises observations into intervals and records how many fall in each class."],
+["For the class interval 10–20, what is the class width?",["5","10","15","20"],1,"Class width is upper boundary minus lower boundary: 20 − 10 = 10."],
+["The frequencies of three classes are 4, 7 and 9. What is the total frequency?",["16","18","20","21"],2,"Add the frequencies: 4 + 7 + 9 = 20 observations."],
+["What is the class mark of interval 20–30?",["10","20","25","30"],2,"Class mark is the midpoint: (20 + 30)/2 = 25."],
+["A grouped table has frequencies 3, 8, 5 and 4. How many observations are represented?",["16","18","20","22"],2,"Total frequency is 3 + 8 + 5 + 4 = 20 observations."],
+["For class interval 40–50, the class mark is:",["40","45","50","90"],1,"The midpoint of 40 and 50 is (40 + 50)/2 = 45."],
+["A class has frequency 12. What does this mean?",["Its interval width is 12","There are 12 observations in that class","The class mark is 12","The total data set has exactly 12 classes"],1,"Frequency counts the observations belonging to that class."],
+["Class intervals are 0–10, 10–20, 20–30. What is the width of each class?",["5","10","20","30"],1,"Each interval spans 10 units."],
+["The class marks are 5, 15 and 25, with frequencies 2, 3 and 5. What is Σfx?",["100","150","180","250"],2,"Σfx = 5×2 + 15×3 + 25×5 = 10 + 45 + 125 = 180."],
+["For grouped data, the estimated mean is calculated using:",["Σf ÷ Σx","Σfx ÷ Σf","Σx ÷ Σf","Σf² ÷ Σx"],1,"Multiply each class mark by its frequency, then divide Σfx by total frequency Σf."],
+["The class interval 5–15 has class mark:",["5","10","15","20"],1,"Class mark = (5 + 15)/2 = 10."],
+["Frequencies are 6, 10 and 4. What is the cumulative frequency through the second class?",["6","10","16","20"],2,"Cumulative frequency through class two is 6 + 10 = 16."],
+["Which quantity is obtained by adding all class frequencies?",["Class mark","Class width","Total frequency","Range of class marks"],2,"The total frequency Σf is the sum of all class frequencies."],
+["If each class interval has width 5, the interval 15–20 has width:",["3","5","15","20"],1,"20 − 15 = 5."],
+["A grouped table uses class marks 10, 20 and 30 with frequencies 1, 2 and 1. What is the estimated mean?",["15","20","25","30"],1,"Σfx = 10 + 40 + 30 = 80 and Σf = 4, so mean = 80/4 = 20."],
+["What is the midpoint of the interval 30–40?",["30","35","40","70"],1,"Class mark = (30 + 40)/2 = 35."],
+["Frequencies for four classes are 2, 5, 7 and 6. The cumulative frequency for the third class is:",["7","12","14","20"],2,"Cumulative frequency through the third class is 2 + 5 + 7 = 14."],
+["Why are class intervals used in a large data set?",["To hide the number of observations","To organise many observations into manageable groups","To make every frequency equal","To remove the need to count data"],1,"Intervals summarise a large set while frequencies preserve the count in each group."],
+["If class mark is 18 and class width is 6 for a symmetric interval, the interval is:",["12–18","15–21","18–24","12–24"],1,"The interval extends 3 units either side of its midpoint: 15–21."],
+["A class has lower boundary 25 and upper boundary 35. Its class mark is:",["25","30","35","60"],1,"The midpoint is (25 + 35)/2 = 30."],
+["For class marks 5, 15, 25 and frequencies 4, 3, 2, what is total frequency?",["5","9","15","45"],1,"Total frequency is 4 + 3 + 2 = 9."],
+["Using class marks 5, 15 and 25 with frequencies 4, 3 and 2, what is Σfx?",["80","95","115","125"],2,"Σfx = 5×4 + 15×3 + 25×2 = 20 + 45 + 50 = 115."],
+["If Σfx = 240 and Σf = 12, the estimated mean is:",["12","20","24","28"],1,"Estimated mean = Σfx/Σf = 240/12 = 20."],
+["What is the class width of 100–120?",["10","20","100","120"],1,"Class width = 120 − 100 = 20."],
+["The frequencies of classes are 5, 9, 11 and 5. Which class has the greatest frequency?",["First class","Second class","Third class","Fourth class"],2,"The greatest frequency is 11, in the third class."],
+["What is the class mark of 50–70?",["50","55","60","70"],2,"Class mark = (50 + 70)/2 = 60."],
+["A grouped frequency table has total frequency 40. What does 40 represent?",["The number of classes","The sum of all class frequencies","The largest class width","The highest class mark"],1,"Adding all class counts gives the total number of observations, 40."],
+["For intervals 0–10 and 10–20, using exclusive upper limits means an observation of 10 belongs to:",["0–10 only","10–20 only","Both classes","Neither class"],1,"With exclusive intervals, the upper limit is excluded from the earlier class and included in the next."],
+["If all class frequencies are doubled while class marks stay unchanged, the estimated mean:",["Doubles","Halves","Stays the same","Becomes zero"],2,"Both Σfx and Σf double, so their ratio (the mean) remains unchanged."],
+["A grouped data table has class marks 10, 20 and 30 with frequencies 2, 4 and 6. What is the estimated mean?",["20","22","23⅓","25"],2,"Σfx = 20 + 80 + 180 = 280 and Σf = 12, so the mean is 280/12 = 23⅓."]
+]
 };

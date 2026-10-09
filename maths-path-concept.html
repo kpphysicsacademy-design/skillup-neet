@@ -760,7 +760,47 @@ put("apSumCheck","S"+n+" = "+n+"/2 ("+a+" + "+nth+") = "+sum);
 }
 [aEl,dEl,nEl].forEach(el=>el.addEventListener("input",update));update();
 }
+function nthTermLessonHtml(){
+return `
+<div class="lesson-block">
+<h3>Nth Term of an Arithmetic Progression</h3>
+<p>The <b>nth term</b> helps you find any term without writing all the terms before it.</p>
+<div class="formula">aₙ = a + (n − 1)d</div>
+<p><b>a</b> = first term, <b>d</b> = common difference, <b>n</b> = term position.</p>
+<h3>Example</h3>
+<p>Find the 6th term of 4, 7, 10, 13, …</p>
+<div class="formula">a = 4, d = 3, n = 6</div>
+<div class="formula">a₆ = 4 + (6 − 1) × 3 = 19</div>
+<h3>Try it yourself</h3>
+<p>Change the values to calculate a term in any arithmetic progression.</p>
+<div class="interactive-panel">
+<div class="control-row"><label for="ntFirst">First term (a)</label><input id="ntFirst" type="range" min="-10" max="20" value="4"><b id="ntFirstVal">4</b></div>
+<div class="control-row"><label for="ntDiff">Common difference (d)</label><input id="ntDiff" type="range" min="-6" max="8" value="3"><b id="ntDiffVal">3</b></div>
+<div class="control-row"><label for="ntPosition">Term position (n)</label><input id="ntPosition" type="range" min="1" max="20" value="6"><b id="ntPositionVal">6</b></div>
+<div class="formula"><b>Sequence:</b> <span id="ntSequence">4, 7, 10, 13, 16, …</span></div>
+<div class="formula"><b>Answer:</b> <span id="ntAnswer">a₆ = 19</span></div>
+<div class="formula"><b>Working:</b> <span id="ntWorking">a₆ = 4 + (6 − 1) × 3 = 19</span></div>
+</div>
+<h3>Quick tips</h3>
+<ul><li>Use n − 1, not n, in the formula.</li><li>If d is negative, the terms go down.</li><li>Check the term number carefully: the first term is n = 1.</li></ul>
+</div>`;
+}
+function startNthTermDemo(){
+if(norm(concept)!=="nth term")return;
+const aEl=document.getElementById("ntFirst"),dEl=document.getElementById("ntDiff"),nEl=document.getElementById("ntPosition");
+if(!aEl||!dEl||!nEl)return;
+const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+function update(){
+const a=Number(aEl.value),d=Number(dEl.value),n=Number(nEl.value),answer=a+(n-1)*d;
+put("ntFirstVal",a);put("ntDiffVal",d);put("ntPositionVal",n);
+put("ntSequence",Array.from({length:6},(_,i)=>a+i*d).join(", ")+" …");
+put("ntAnswer","a"+n+" = "+answer);
+put("ntWorking","a"+n+" = "+a+" + ("+n+" − 1) × "+d+" = "+answer);
+}
+[aEl,dEl,nEl].forEach(el=>el.addEventListener("input",update));update();
+}
 function lessonHtml(){
+if(norm(concept)==="nth term") return nthTermLessonHtml();
 if(norm(concept)==="arithmetic progression") return arithmeticProgressionLessonHtml();
 if(norm(concept)==="lines and angles") return linesAnglesLessonHtml();
 if(norm(concept)==="basic geometric ideas") return basicGeometricIdeasLessonHtml();
@@ -5191,7 +5231,7 @@ function safeInit(label, fn) {
  }
 }
 safeInit("concept lesson", renderConceptPage);
-[startSequenceDemo,startArithmeticProgressionDemo,startQuadraticFormulaDemo,startModeDemo,startMedianDemo,startMeanDemo,startDataRepresentationDemo,startTriangleAreaDemo,startHeronsVisualExplorer,startRationalDemo,startHistogramsDemo,startDataCollectionDemo,startFrequencyDistributionDemo,startFrequencyTablesDemo,startBarGraphsDemo,startPieChartsDemo,startVolumeDemo,startAreaPolygonsDemo,startSurfaceAreaDemo,startCircleAreaDemo,startPerimeterDemo,startPowersDemo,startSquaresDemo,startCubesDemo,startVariablesDemo,startAlgebraDemo,startFactorisationDemo,startLinearEquationsDemo,startAlgebraIdentitiesDemo,startBasicGeometricIdeasDemo,startPolygonsDemo,startGeometricConstructionsDemo,startQuadrilateralsDemo,startLinesAnglesDemo,startTrianglesDemo,startParallelTransversalsDemo,startTermsDemo,startLikeUnlikeDemo,startEquivalentDemo,startComparingRationalDemo,startRationalOperationsDemo,startPropertiesDemo,startIrrationalityProofsDemo,startIrrationalNumbersDemo,startGraphLinearEquationDemo,startRealNumbersDemo,startZerosOfPolynomialDemo,startRemainderTheoremBasicsDemo,startFactorTheoremBasicsDemo,startEuclidGeometryDemo,startTrianglesCongruenceDemo,startCirclesDemo,startCartesianPlaneDemo,startParallelogramDemo,startDistanceIntuitionDemo,startPlottingPointsDemo,startCoordinatesOfPointDemo,startCoordinateRepresentationDemo,startPairWordProblemsDemo,startConsistencyOfEquationsDemo,startEliminationMethodDemo,startSubstitutionMethodDemo,startLinearEquationsInTwoVariablesDemo,startFactorisationOfPolynomialsDemo,startDegreeOfPolynomialDemo,startPolynomialBasicsDemo,startRationalisationBasicsDemo,startDecimalExpansionsDemo,startLawsOfExponentsDemo,startProbabilityBasicsDemo,startExperimentalProbabilityDemo,startHcfLcmDemo,startPrimeFactorisationDemo,startFundamentalTheoremArithmeticDemo,startEuclidDivisionAlgorithmDemo,startSimpleEventsDemo,startTheoreticalProbabilityDemo].forEach(function(fn) { safeInit(fn.name, fn); });
+[startSequenceDemo,startNthTermDemo,startArithmeticProgressionDemo,startQuadraticFormulaDemo,startModeDemo,startMedianDemo,startMeanDemo,startDataRepresentationDemo,startTriangleAreaDemo,startHeronsVisualExplorer,startRationalDemo,startHistogramsDemo,startDataCollectionDemo,startFrequencyDistributionDemo,startFrequencyTablesDemo,startBarGraphsDemo,startPieChartsDemo,startVolumeDemo,startAreaPolygonsDemo,startSurfaceAreaDemo,startCircleAreaDemo,startPerimeterDemo,startPowersDemo,startSquaresDemo,startCubesDemo,startVariablesDemo,startAlgebraDemo,startFactorisationDemo,startLinearEquationsDemo,startAlgebraIdentitiesDemo,startBasicGeometricIdeasDemo,startPolygonsDemo,startGeometricConstructionsDemo,startQuadrilateralsDemo,startLinesAnglesDemo,startTrianglesDemo,startParallelTransversalsDemo,startTermsDemo,startLikeUnlikeDemo,startEquivalentDemo,startComparingRationalDemo,startRationalOperationsDemo,startPropertiesDemo,startIrrationalityProofsDemo,startIrrationalNumbersDemo,startGraphLinearEquationDemo,startRealNumbersDemo,startZerosOfPolynomialDemo,startRemainderTheoremBasicsDemo,startFactorTheoremBasicsDemo,startEuclidGeometryDemo,startTrianglesCongruenceDemo,startCirclesDemo,startCartesianPlaneDemo,startParallelogramDemo,startDistanceIntuitionDemo,startPlottingPointsDemo,startCoordinatesOfPointDemo,startCoordinateRepresentationDemo,startPairWordProblemsDemo,startConsistencyOfEquationsDemo,startEliminationMethodDemo,startSubstitutionMethodDemo,startLinearEquationsInTwoVariablesDemo,startFactorisationOfPolynomialsDemo,startDegreeOfPolynomialDemo,startPolynomialBasicsDemo,startRationalisationBasicsDemo,startDecimalExpansionsDemo,startLawsOfExponentsDemo,startProbabilityBasicsDemo,startExperimentalProbabilityDemo,startHcfLcmDemo,startPrimeFactorisationDemo,startFundamentalTheoremArithmeticDemo,startEuclidDivisionAlgorithmDemo,startSimpleEventsDemo,startTheoreticalProbabilityDemo].forEach(function(fn) { safeInit(fn.name, fn); });
 safeInit("mastery quiz", startQuiz);
 safeInit("math refresh", refreshMath);
 safeInit("MathJax", whenMathJaxReady);

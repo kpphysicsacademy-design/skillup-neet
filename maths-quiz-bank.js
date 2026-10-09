@@ -23,7 +23,7 @@ window.SKILLUP_MATHS_QUIZ_BANK={"Basic geometric ideas":[["Which undefined geome
 ["Find the next term: 20, 15, 10, 5, …",["0","1","−5","−10"],0,"Subtract 5 each time, giving 0."],
 ["Is 1, 4, 7, 10, … arithmetic?",["Yes, d = 3","Yes, d = 4","No, differences vary","No, terms decrease"],0,"Every consecutive difference is 3."],
 ["What is the 1st term if aₙ = 5 + (n−1)4?",["1","4","5","9"],2,"At n=1, a₁ = 5 + 0 = 5."],
-["If a = 3 and d = 5, what is a₆?",["23","28","30","33"],0,"a₆ = 3 + 5×5 = 28."],
+["If a = 3 and d = 5, what is a₆?",["23","28","30","33"],1,"a₆ = 3 + 5×5 = 28."],
 ["Find the 10th term of 4, 7, 10, 13, …",["28","30","31","34"],2,"a₁₀ = 4 + 9×3 = 31."],
 ["If the common difference is zero, the sequence is:",["Constant","Strictly increasing","Strictly decreasing","Geometric with ratio zero"],0,"Adding zero leaves every term unchanged."],
 ["Which sequence has a negative common difference?",["3, 6, 9, 12","8, 5, 2, −1","1, 2, 4, 8","2, 4, 8, 16"],1,"Each term decreases by 3."],

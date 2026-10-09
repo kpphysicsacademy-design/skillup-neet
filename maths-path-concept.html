@@ -1627,6 +1627,21 @@ if(norm(concept)==="irrational numbers") return `
 </div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> for a positive integer n, √n is rational exactly when n is a perfect square. Otherwise √n is irrational.</p>
 </div>`;
+if(norm(concept)==="euclid division algorithm") return `
+<div class="geometry-lesson euclid-division-algorithm-lesson">
+<strong>Euclid’s Division Algorithm: a = bq + r, where 0 ≤ r &lt; b.</strong>
+<p style="margin:6px 0 10px">For positive integers a and b, divide a by b to get quotient q and remainder r. Repeat using the previous divisor and non-zero remainder; the last non-zero remainder is the HCF (GCD).</p>
+<div class="visual-banner">
+<div class="value-box"><small>DIVIDEND a</small><strong id="edaA">252</strong><span class="pill">number to divide</span></div><div class="eq">÷</div>
+<div class="value-box"><small>DIVISOR b</small><strong id="edaB">105</strong><span class="pill">positive integer</span></div><div class="eq">→</div>
+<div class="value-box"><small>HCF</small><strong id="edaGcd">21</strong><span class="pill">last non-zero remainder</span></div>
+</div>
+<div class="control"><div class="head"><span>Dividend (a)</span><span class="val" id="edaAVal">252</span></div><input class="range" id="edaASlider" type="range" min="2" max="500" value="252" step="1"></div>
+<div class="control"><div class="head"><span>Divisor (b)</span><span class="val" id="edaBVal">105</span></div><input class="range" id="edaBSlider" type="range" min="1" max="250" value="105" step="1"></div>
+<div class="checks" id="edaSteps"><b>Euclid’s steps:</b><br>252 = 105 × 2 + 42<br>105 = 42 × 2 + 21<br>42 = 21 × 2 + 0<br><b>HCF = 21</b></div>
+<div class="presets"><button class="preset edaPreset" data-a="252" data-b="105">HCF of 252 and 105</button><button class="preset edaPreset" data-a="135" data-b="48">HCF of 135 and 48</button><button class="preset edaPreset" data-a="144" data-b="60">HCF of 144 and 60</button><button class="preset edaPreset" data-a="17" data-b="5">HCF of 17 and 5</button></div>
+<p style="margin:8px 0 0;color:#66736b"><b>Exam tip:</b> the algorithm uses repeated division, not prime factorisation. The final non-zero remainder is the HCF; if the divisor divides the dividend exactly, that divisor is the HCF.</p>
+</div>`;
 if(norm(concept)==="real numbers") return `
 <div class="geometry-lesson real-numbers-interactive-lesson">
 <strong>Change the values just like the Rational Numbers explorer and watch the real-number classification update live.</strong>
@@ -3348,6 +3363,23 @@ function startDecimalExpansionsDemo(){
  update();
 }
 
+function startEuclidDivisionAlgorithmDemo(){
+ if(norm(concept)!=="euclid division algorithm")return;
+ const aEl=document.getElementById("edaASlider"),bEl=document.getElementById("edaBSlider");if(!aEl||!bEl)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  let a=Math.max(2,Math.min(500,Number(aEl.value)||2)),b=Math.max(1,Math.min(250,Number(bEl.value)||1));aEl.value=a;bEl.value=b;
+  set("edaA",a);set("edaAVal",a);set("edaB",b);set("edaBVal",b);
+  let x=Math.max(a,b),y=Math.min(a,b),steps=[],gcd=0,guard=0;
+  while(y!==0&&guard++<30){const q=Math.floor(x/y),rem=x%y;steps.push(x+" = "+y+" × "+q+" + "+rem);if(rem===0){gcd=y;break;}x=y;y=rem;}
+  if(y===0)gcd=x;
+  set("edaGcd",gcd);
+  const box=document.getElementById("edaSteps");if(box)box.innerHTML="<b>Euclid’s steps:</b><br>"+steps.join("<br>")+"<br><b>HCF = "+gcd+"</b>";
+ }
+ aEl.addEventListener("input",update);bEl.addEventListener("input",update);
+ document.querySelectorAll(".edaPreset").forEach(btn=>btn.addEventListener("click",()=>{aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;update();}));
+ update();
+}
 function startSimpleEventsDemo(){
  if(norm(concept)!=="simple events")return;
  const total=document.getElementById("seTotalSlider");if(!total)return;
@@ -4085,6 +4117,38 @@ const INLINE_MEAN_QUIZ=[
 ["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
 ["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
 ];
+const INLINE_EUCLID_DIVISION_ALGORITHM_QUIZ=[
+["Euclid’s division algorithm is written as:",["a=bq+r, 0≤r<b","a=b+r+q","a=br+q","a=q/r"],0,"For positive integers a and b, a=bq+r with remainder r satisfying 0≤r<b."],
+["In a=bq+r, what does q represent?",["Remainder","Quotient","HCF","Dividend"],1,"q is the quotient obtained when a is divided by b."],
+["In a=bq+r, what condition must the remainder satisfy?",["r>b","r=b","0≤r<b","r<0"],2,"The remainder is non-negative and smaller than the divisor."],
+["Find the HCF of 252 and 105 using Euclid’s algorithm.",["7","14","21","35"],2,"252=105×2+42; 105=42×2+21; 42=21×2+0, so HCF=21."],
+["If 65=8×8+1, what are the quotient and remainder?",["q=1,r=8","q=8,r=1","q=8,r=8","q=1,r=1"],1,"The quotient is 8 and the remainder is 1."],
+["Find the HCF of 135 and 48.",["3","6","9","12"],2,"135=48×2+39; 48=39+9; 39=9×4+3; 9=3×3+0, so HCF=3."],
+["When does Euclid’s division process stop?",["When quotient is 1","When remainder is 0","When dividend is odd","When divisor is prime"],1,"Stop when a division has remainder zero; the previous non-zero remainder is the HCF."],
+["The HCF of 17 and 5 is:",["1","2","3","5"],0,"17=5×3+2; 5=2×2+1; 2=1×2+0, so HCF=1."],
+["If a number divides another exactly, the remainder is:",["0","1","The divisor","The quotient"],0,"Exact division has remainder zero."],
+["Find the HCF of 144 and 60.",["6","12","18","24"],1,"144=60×2+24; 60=24×2+12; 24=12×2+0, so HCF=12."],
+["In 23=4×5+3, the divisor is:",["23","4","5","3"],1,"The divisor is the number being multiplied by the quotient: 4."],
+["Which remainder is valid when the divisor is 7?",["7","8","−1","6"],3,"A valid remainder must be at least 0 and less than 7."],
+["The HCF of 36 and 24 is:",["6","12","18","24"],1,"36=24+12; 24=12×2+0, so the HCF is 12."],
+["If a=bq+r and r=0, then:",["b divides a exactly","a is prime","b must be 1","q is zero"],0,"A zero remainder means a is an exact multiple of b."],
+["Which is the first step for HCF(91,26)?",["91=26×3+13","91=26×2+39","26=91×3+13","91=13×2+26"],0,"91 divided by 26 gives quotient 3 and remainder 13."],
+["The HCF of 91 and 26 is:",["1","13","26","39"],1,"91=26×3+13 and 26=13×2+0, so HCF=13."],
+["If the HCF of two positive integers is 1, they are:",["Equal","Coprime","Both prime","Both even"],1,"Integers with HCF 1 are coprime (relatively prime)."],
+["Euclid’s algorithm finds the HCF by repeatedly:",["Adding the two numbers","Dividing and using remainders","Multiplying both numbers","Listing all multiples"],1,"Each step replaces the pair with divisor and remainder."],
+["If 100=24×4+4, what is the remainder?",["24","4","100","0"],1,"The remainder in this division is 4."],
+["The HCF of 100 and 24 is:",["2","4","8","12"],1,"100=24×4+4; 24=4×6+0, so HCF=4."],
+["Which statement is always true for a positive divisor b?",["Remainder is less than b","Remainder is greater than b","Remainder is negative","Remainder equals b"],0,"The remainder must satisfy 0≤r<b."],
+["For HCF(56,42), the first division is:",["56=42×1+14","56=42×2+28","42=56×1+14","56=14×2+42"],0,"56 divided by 42 gives quotient 1 and remainder 14."],
+["The HCF of 56 and 42 is:",["7","14","21","28"],1,"56=42+14 and 42=14×3+0, so HCF=14."],
+["If the remainder sequence ends with 0 after 18 divides 54, the HCF is:",["0","3","18","54"],2,"54=18×3+0, so the HCF is 18."],
+["Find the HCF of 65 and 40.",["5","10","15","20"],0,"65=40+25; 40=25+15; 25=15+10; 15=10+5; 10=5×2+0, so HCF=5."],
+["Which method is Euclid’s division algorithm?",["Repeated division with remainders","Repeated subtraction of 1 only","Prime factor listing only","Decimal approximation"],0,"The method repeatedly divides and carries the remainder forward."],
+["If a=3b+r and r=2 with b=5, then a is:",["13","15","17","20"],2,"a=3×5+2=17."],
+["What is the HCF of 48 and 18?",["3","6","9","12"],1,"48=18×2+12; 18=12+6; 12=6×2+0, so HCF=6."],
+["Why must the divisor be positive in the usual school form of the algorithm?",["The remainder bound is defined using positive b","It makes every number prime","It forces remainder to equal divisor","It removes the quotient"],0,"The standard division algorithm is stated for positive divisor b."],
+["What is the HCF of 84 and 30?",["2","3","6","12"],2,"84=30×2+24; 30=24+6; 24=6×4+0, so HCF=6."]
+];
 const INLINE_SIMPLE_EVENTS_QUIZ=[
 ["A simple event contains:",["Exactly one outcome","No outcomes","Every possible outcome","At least ten outcomes"],0,"A simple event consists of exactly one outcome in the sample space."],
 ["Which is a simple event when rolling a fair die?",["Rolling an even number","Rolling a number less than 5","Rolling a 3","Rolling a prime number"],2,"Rolling a 3 names exactly one outcome."],
@@ -4249,6 +4313,7 @@ function startQuiz(){
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="frequency distribution") quizSource=dedicated||INLINE_FREQUENCY_DISTRIBUTION_QUIZ;
+  else if(norm(concept)==="euclid division algorithm") quizSource=dedicated||INLINE_EUCLID_DIVISION_ALGORITHM_QUIZ;
   else if(norm(concept)==="simple events") quizSource=dedicated||INLINE_SIMPLE_EVENTS_QUIZ;
   else if(norm(concept)==="theoretical probability") quizSource=dedicated||INLINE_THEORETICAL_PROBABILITY_QUIZ;
   else if(norm(concept)==="experimental probability") quizSource=dedicated||INLINE_EXPERIMENTAL_PROBABILITY_QUIZ;
@@ -4294,7 +4359,7 @@ window.addEventListener("error",function(e){
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

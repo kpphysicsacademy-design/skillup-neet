@@ -1696,6 +1696,24 @@ if(norm(concept)==="experimental probability") return `
 <div class="presets"><button class="preset epPreset" data-s="12" data-t="20">12 out of 20</button><button class="preset epPreset" data-s="7" data-t="10">7 out of 10</button><button class="preset epPreset" data-s="25" data-t="100">25 out of 100</button><button class="preset epPreset" data-s="0" data-t="20">No successes</button></div>
 <p style="margin:8px 0 0;color:#66736b"><b>Remember:</b> experimental probability is based on observed results. It may differ from theoretical probability and often gets closer with many trials.</p>
 </div>`;
+if(norm(concept)==="theoretical probability") return `
+<div class="geometry-lesson theoretical-probability-lesson">
+<strong>Theoretical probability = favourable outcomes ÷ total equally likely outcomes.</strong>
+<p style="margin:6px 0 10px">Use the model for a fair die, coin, or equally likely spinner. Unlike experimental probability, this is calculated from the sample space—not from trial results.</p>
+<div class="visual-banner">
+<div class="value-box"><small>FAVOURABLE</small><strong id="tpFav">2</strong><span class="pill">outcomes</span></div><div class="eq">÷</div>
+<div class="value-box"><small>TOTAL</small><strong id="tpTotal">6</strong><span class="pill">equally likely</span></div><div class="eq">→</div>
+<div class="value-box"><small>PROBABILITY</small><strong id="tpProb">1/3</strong><span class="pill" id="tpPercent">33.3%</span></div>
+</div>
+<div class="concept-image" role="img" aria-label="Theoretical probability model highlighting favourable outcomes">
+<svg viewBox="0 0 640 190" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="190" rx="16" fill="#f8fcf6"/><text x="320" y="25" text-anchor="middle" font-size="17" font-weight="800" fill="#245b35">Equally likely outcomes</text><g id="tpMarks"></g><text x="320" y="170" text-anchor="middle" font-size="12" fill="#66736b">Green = favourable • Grey = not favourable</text></svg>
+</div>
+<div class="control"><div class="head"><span>Favourable outcomes</span><span class="val" id="tpFavVal">2</span></div><input class="range" id="tpFavSlider" type="range" min="0" max="20" value="2" step="1"></div>
+<div class="control"><div class="head"><span>Total outcomes</span><span class="val" id="tpTotalVal">6</span></div><input class="range" id="tpTotalSlider" type="range" min="1" max="20" value="6" step="1"></div>
+<div class="checks" id="tpWork"><b>Example:</b> On a fair die, an even number has 3 favourable outcomes out of 6, so P(even) = 3/6 = 1/2.</div>
+<div class="presets"><button class="preset tpPreset" data-f="3" data-t="6">Even number on a die</button><button class="preset tpPreset" data-f="1" data-t="2">Heads on a fair coin</button><button class="preset tpPreset" data-f="4" data-t="10">4 of 10 outcomes</button><button class="preset tpPreset" data-f="0" data-t="6">Impossible event</button></div>
+<p style="margin:8px 0 0;color:#66736b"><b>Key facts:</b> probability is from 0 to 1; impossible = 0, certain = 1, and P(not E) = 1 − P(E).</p>
+</div>`;
 if(norm(concept)==="probability basics") return `
 <div class="geometry-lesson probability-basics-interactive-lesson">
 <strong>Change the number of favourable outcomes and total outcomes to see probability update live.</strong>
@@ -3313,6 +3331,23 @@ function startDecimalExpansionsDemo(){
  update();
 }
 
+function startTheoreticalProbabilityDemo(){
+ if(norm(concept)!=="theoretical probability")return;
+ const fav=document.getElementById("tpFavSlider"),total=document.getElementById("tpTotalSlider");if(!fav||!total)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const n=Math.max(1,Math.min(20,Number(total.value)||1)),k=Math.max(0,Math.min(n,Number(fav.value)||0));fav.max=n;fav.value=k;
+  const p=k/n,gcd=(a,b)=>b?gcd(b,a%b):a,div=gcd(k,n),fraction=k===0?"0":k/div+"/"+n/div;
+  set("tpFav",k);set("tpFavVal",k);set("tpTotal",n);set("tpTotalVal",n);set("tpProb",fraction);set("tpPercent",(p*100).toFixed(1)+"%");
+  const work=document.getElementById("tpWork");if(work)work.innerHTML="<b>Calculation:</b> P(E) = "+k+"/"+n+" = "+fraction+" = "+(p*100).toFixed(1)+"%.";
+  const marks=document.getElementById("tpMarks");if(!marks)return;marks.innerHTML="";
+  const cols=10,gap=48,x0=104,y0=55;
+  for(let i=0;i<n;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",x0+(i%cols)*gap);c.setAttribute("cy",y0+Math.floor(i/cols)*34);c.setAttribute("r","10");c.setAttribute("fill",i<k?"#7dbb70":"#d8e0d6");c.setAttribute("stroke","#ffffff");c.setAttribute("stroke-width","2");marks.appendChild(c);}
+ }
+ fav.addEventListener("input",update);total.addEventListener("input",update);
+ document.querySelectorAll(".tpPreset").forEach(b=>b.addEventListener("click",()=>{total.value=b.dataset.t;fav.max=b.dataset.t;fav.value=b.dataset.f;update();}));
+ update();
+}
 function startExperimentalProbabilityDemo(){
  if(norm(concept)!=="experimental probability")return;
  const success=document.getElementById("epSuccessSlider"),total=document.getElementById("epTotalSlider");if(!success||!total)return;
@@ -4017,6 +4052,38 @@ const INLINE_MEAN_QUIZ=[
 ["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
 ["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
 ];
+const INLINE_THEORETICAL_PROBABILITY_QUIZ=[
+["Theoretical probability is calculated using:",["Observed results only","Favourable outcomes ÷ total equally likely outcomes","Total outcomes ÷ favourable outcomes","Number of trials × successes"],1,"Theoretical probability uses the sample space of equally likely outcomes."],
+["A fair coin is tossed. The probability of heads is:",["0","1/4","1/2","1"],2,"There are two equally likely outcomes and one is heads."],
+["A fair six-sided die is rolled. Probability of getting 4 is:",["1/2","1/6","4/6","5/6"],1,"Only one of the six equally likely faces shows 4."],
+["What is the probability of rolling an even number on a fair die?",["1/6","1/3","1/2","2/3"],2,"The favourable faces are 2, 4 and 6: 3/6 = 1/2."],
+["A bag has 3 red and 2 blue balls. One ball is selected at random. P(red) is:",["2/5","3/5","1/2","3/2"],1,"There are 3 red balls among 5 balls in total."],
+["The probability of an impossible event is:",["0","1/2","1","−1"],0,"An impossible event has no favourable outcomes, so its probability is zero."],
+["The probability of a certain event is:",["0","1/4","1/2","1"],3,"A certain event always occurs and has probability 1."],
+["Which value cannot be a probability?",["0","0.25","1","1.2"],3,"Every probability must lie between 0 and 1 inclusive."],
+["A letter is chosen at random from A, B, C, D. P(vowel) is:",["0","1/4","1/2","1"],1,"Only A is a vowel, so the probability is 1/4."],
+["A fair die is rolled. P(number greater than 4) is:",["1/6","1/3","1/2","2/3"],1,"The favourable outcomes are 5 and 6: 2/6 = 1/3."],
+["A spinner has 8 equal sectors, 3 are green. P(green) is:",["3/8","5/8","3/5","8/3"],0,"Three of the eight equally likely sectors are green."],
+["If P(E)=0.7, then P(not E) equals:",["0.7","1.7","0.3","−0.3"],2,"The complement rule gives P(not E)=1−0.7=0.3."],
+["A fair die is rolled. P(getting a number less than 7) is:",["0","1/6","5/6","1"],3,"All six possible outcomes are less than 7, so the event is certain."],
+["A fair die is rolled. P(getting 7) is:",["0","1/6","1/2","1"],0,"A standard six-sided die has no face labelled 7."],
+["There are 5 equally likely outcomes and 2 are favourable. Probability is:",["2/5","3/5","5/2","1/5"],0,"Use favourable outcomes divided by total outcomes: 2/5."],
+["Two fair coins are tossed. How many equally likely outcomes are there?",["2","3","4","6"],2,"The sample space is HH, HT, TH and TT."],
+["Two fair coins are tossed. Probability of two heads is:",["1/2","1/3","1/4","3/4"],2,"Only HH out of the four equally likely outcomes has two heads."],
+["A fair die is rolled. Probability of getting a prime number is:",["1/6","1/3","1/2","2/3"],2,"Prime faces are 2, 3 and 5: 3/6 = 1/2."],
+["A bag contains 4 white and 6 black counters. P(white) is:",["2/5","3/5","4/6","4/10 only"],0,"There are 4 white counters out of 10, and 4/10 simplifies to 2/5."],
+["If all outcomes are equally likely, probability is found by:",["Total ÷ favourable","Favourable ÷ total","Favourable + total","Total − favourable"],1,"This is the standard theoretical probability formula."],
+["A number is chosen at random from 1 to 10. P(multiple of 3) is:",["1/10","2/10","3/10","4/10"],1,"The multiples are 3, 6 and 9—three outcomes, so correct probability is 3/10."],
+["Which event has probability 1/2 for a fair die?",["Rolling a 1","Rolling an even number","Rolling a number greater than 6","Rolling a 6"],1,"Three of the six die faces are even."],
+["A box has 2 yellow and 8 green balls. P(not yellow) is:",["1/5","2/5","4/5","8/2"],2,"Not yellow means green: 8/10 = 4/5."],
+["If an event has 7 favourable outcomes out of 7 possible equally likely outcomes, its probability is:",["0","1/7","1/2","1"],3,"All possible outcomes are favourable, so the event is certain."],
+["A fair die is rolled. P(odd number) is:",["1/6","1/3","1/2","5/6"],2,"The odd faces 1, 3 and 5 give 3/6 = 1/2."],
+["A card is selected from cards numbered 1 to 5. P(number greater than 3) is:",["1/5","2/5","3/5","4/5"],1,"The favourable cards are 4 and 5, so probability is 2/5."],
+["A fair coin is tossed three times. How many equally likely sequences are possible?",["3","6","8","9"],2,"Each toss has two outcomes, giving 2×2×2 = 8 sequences."],
+["For equally likely outcomes, a probability of 3/4 means:",["3 favourable out of 4 outcomes","4 favourable out of 3 outcomes","3 trials always succeed","The event is impossible"],0,"Three of four equally likely outcomes favour the event."],
+["A fair die is rolled. P(number from 1 through 6) is:",["0","1/6","5/6","1"],3,"Every possible die outcome is from 1 through 6."],
+["Which statement compares theoretical and experimental probability correctly?",["They are always equal after one trial","Theoretical uses equally likely outcomes; experimental uses observed results","Experimental probability can exceed 1","Theoretical probability must be based on a trial"],1,"Theoretical probability is calculated from possible outcomes; experimental probability uses observed data."]
+];
 const INLINE_EXPERIMENTAL_PROBABILITY_QUIZ=[["Experimental probability is based on:",["Observed results from trials","Only mathematical theory","A guaranteed future result","The number of possible values"],0,"Experimental probability uses what actually happens in an experiment."],["The formula for experimental probability of event E is:",["Total trials ÷ successes","Successes ÷ total trials","Successes × total trials","1 − total trials"],1,"P(E) = number of times E occurs ÷ total number of trials."],["A coin is tossed 20 times and lands heads 12 times. Experimental probability of heads is:",["12/20 = 3/5","20/12","8/20","1/2 exactly"],0,"Heads occurred 12 times out of 20 trials, so 12/20 = 3/5."],["A die is rolled 30 times and a 6 appears 4 times. Experimental probability of 6 is:",["1/6 exactly","4/30 = 2/15","26/30","30/4"],1,"The observed frequency is 4 in 30 trials, giving 4/30 = 2/15."],["If an event occurs 9 times in 15 trials, its experimental probability is:",["9/15 = 3/5","15/9","6/15","1"],0,"Divide the number of occurrences by the total trials."],["A coin is tossed 50 times. Tails appears 28 times. How many heads were observed?",["22","28","50","78"],0,"Heads = 50 − 28 = 22."],["An event occurs 0 times in 18 trials. Its experimental probability is:",["0","1/18","1","18"],0,"Observed frequency zero gives experimental probability 0/18 = 0."],["An event occurs on every one of 12 trials. Its experimental probability is:",["0","1/12","1","12"],2,"12 occurrences in 12 trials gives 12/12 = 1."],["A spinner lands on blue 16 times in 40 spins. Experimental probability of blue is:",["16/40 = 2/5","24/40","40/16","1/4"],0,"16/40 simplifies to 2/5."],["A bag draw experiment has 7 red results in 25 draws. Probability estimate for red is:",["7/25","18/25","25/7","7/18"],0,"Use red results divided by total draws: 7/25."],["A coin lands heads 6 times in 10 tosses. The experimental probability of tails is:",["6/10","4/10 = 2/5","1","0"],1,"Tails occurred 10 − 6 = 4 times, so 4/10 = 2/5."],["Which is a valid experimental probability?",["−0.2","1.4","0.65","2"],2,"Probabilities lie between 0 and 1 inclusive; 0.65 is valid."],["In 100 trials, an event happens 37 times. Its experimental probability as a percentage is:",["37%","63%","0.37%","100%"],0,"37/100 = 0.37 = 37%."],["A die is rolled 25 times. An even number appears 14 times. Experimental probability of even is:",["14/25","11/25","1/2 exactly","25/14"],0,"Even results occurred 14 times out of 25."],["A student gets 18 correct answers out of 30 guesses. Experimental success rate is:",["3/5 = 60%","2/5 = 40%","18%","30/18"],0,"18/30 = 0.6 = 60%."],["Why may experimental probability differ from theoretical probability?",["Random variation in a limited number of trials","Probability can exceed 1","The formula never uses observations","Trials always give identical results"],0,"Random outcomes vary, especially when the number of trials is small."],["What often happens to experimental probability as the number of trials becomes large?",["It tends to stabilise near theoretical probability","It must become 1","It becomes 0","It cannot be calculated"],0,"With many trials, relative frequencies often approach the theoretical probability."],["A coin is tossed 8 times and heads appears 7 times. Experimental probability of heads is:",["7/8","1/8","1/2","8/7"],0,"Heads occurred in 7 of the 8 tosses."],["An event occurs 24 times in 60 trials. Simplified experimental probability is:",["2/5","3/5","5/2","24/60 = 1"],0,"24/60 simplifies by dividing numerator and denominator by 12 to get 2/5."],["In 40 trials, an event does not occur 31 times. How many times does it occur?",["9","31","40","71"],0,"Occurrence count = 40 − 31 = 9."],["A red result occurs 15 times in 60 trials. Experimental probability of red is:",["1/4","1/3","3/4","4"],0,"15/60 = 1/4."],["A student records 3 rainy days in a 20-day observation period. Experimental probability estimate of rain is:",["3/20","17/20","20/3","1/3"],0,"The observed relative frequency is 3 rainy days out of 20 days."],["If 2 successes occur in 5 trials, the experimental probability is:",["0.4","0.2","2.5","5"],0,"2/5 = 0.4."],["A coin is tossed 10 times. The result is 5 heads and 5 tails. Experimental probability of tails is:",["1/2","1/10","5","0"],0,"Tails occurred 5 times in 10 trials, so 5/10 = 1/2."],["A result has experimental probability 0.2 over 50 trials. How many times did it occur?",["10","20","2","25"],0,"0.2 × 50 = 10 occurrences."],["A result occurs 32 times in 80 trials. Experimental probability is:",["0.4","0.32","2.5","0.8"],0,"32/80 = 0.4."],["Which statement is correct about experimental probability?",["It is calculated from observed frequencies","It never changes between experiments","It is always equal to theoretical probability","It can be greater than 1"],0,"Different experiments can give different observed relative frequencies."],["A die is rolled 12 times and numbers greater than 4 occur 5 times. Experimental probability is:",["5/12","7/12","1/3 exactly","12/5"],0,"Numbers greater than 4 occurred five times in twelve rolls."],["If an event occurs 45 times in 90 trials, its experimental probability is:",["1/2","1/3","2","45"],0,"45/90 simplifies to 1/2."],["A spinner is spun 20 times and green occurs 6 times. If spun 100 times under similar conditions, a reasonable estimate is about:",["30 green results","6 green results","100 green results","94 green results"],0,"The observed rate is 6/20 = 0.3; 0.3 × 100 = 30 as an estimate."]];
 
 const INLINE_FREQUENCY_DISTRIBUTION_QUIZ=[
@@ -4117,6 +4184,7 @@ function startQuiz(){
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="frequency distribution") quizSource=dedicated||INLINE_FREQUENCY_DISTRIBUTION_QUIZ;
+  else if(norm(concept)==="theoretical probability") quizSource=dedicated||INLINE_THEORETICAL_PROBABILITY_QUIZ;
   else if(norm(concept)==="experimental probability") quizSource=dedicated||INLINE_EXPERIMENTAL_PROBABILITY_QUIZ;
   else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
   else if(norm(concept)==="volumes") quizSource=dedicated||INLINE_VOLUMES_QUIZ;
@@ -4160,7 +4228,7 @@ window.addEventListener("error",function(e){
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

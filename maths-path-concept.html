@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-mean-visual-explorer-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-median-visual-explorer-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-distance-intuition-v1</title>
@@ -660,6 +660,27 @@ if(norm(concept)==="area of triangle") return `
 <div class="checks" id="taWork"><b>Working:</b> A = ½ × 8 × 6 = 24 cm².</div>
 <div class="presets"><button class="preset taPreset" data-b="8" data-h="6">Base 8, height 6</button><button class="preset taPreset" data-b="10" data-h="4">Base 10, height 4</button><button class="preset taPreset" data-b="12" data-h="8">Base 12, height 8</button><button class="preset taPreset" data-b="5" data-h="5">Base 5, height 5</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> A = ½bh. Use the perpendicular height, not a sloping side. Area is written in square units.</p>
+</div>`;
+if(norm(concept)==="median") return `
+<div class="geometry-lesson median-interactive-lesson">
+<strong>Explore the median: arrange values in order, then find the middle value.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>OBSERVATIONS</small><strong id="medianCount">5</strong><span class="pill">number of values</span></div><div class="eq">→</div>
+ <div class="value-box"><small>ORDERED DATA</small><strong id="medianOrdered" style="font-size:18px">2, 4, 6, 8, 10</strong><span class="pill">smallest to largest</span></div><div class="eq">→</div>
+ <div class="value-box"><small>MEDIAN</small><strong id="medianResult">6</strong><span class="pill" id="medianPosition">3rd value</span></div>
+</div>
+<div class="concept-image"><svg id="medianChart" viewBox="0 0 640 240" width="100%" height="auto" role="img" aria-label="Ordered values with the median highlighted"><rect width="640" height="240" rx="18" fill="#f8fcf6"/><line x1="35" y1="125" x2="605" y2="125" stroke="#d9e8d4" stroke-width="3"/><g id="medianDots"></g></svg></div>
+<div class="props" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px">
+<label class="prop">Value 1 <input id="medianS0" type="range" min="0" max="30" value="2"><strong id="medianSV0">2</strong></label>
+<label class="prop">Value 2 <input id="medianS1" type="range" min="0" max="30" value="4"><strong id="medianSV1">4</strong></label>
+<label class="prop">Value 3 <input id="medianS2" type="range" min="0" max="30" value="6"><strong id="medianSV2">6</strong></label>
+<label class="prop">Value 4 <input id="medianS3" type="range" min="0" max="30" value="8"><strong id="medianSV3">8</strong></label>
+<label class="prop">Value 5 <input id="medianS4" type="range" min="0" max="30" value="10"><strong id="medianSV4">10</strong></label>
+<label class="prop">Value 6 <input id="medianS5" type="range" min="0" max="30" value="12"><strong id="medianSV5">12</strong></label>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="medianPreset" data-values="2,4,6,8,10">5 values (odd)</button><button type="button" class="medianPreset" data-values="2,4,6,8,10,12">6 values (even)</button><button type="button" class="medianPreset" data-values="1,1,4,7,20">Try repeated values</button></div>
+<p id="medianWork" style="margin:12px 0 0;color:#66736b"><b>Method:</b> Arrange the values in order. The middle value is 6.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> For an odd count, the median is the single middle value. For an even count, average the two middle values. Sort the data before finding the median.</p>
 </div>`;
 if(norm(concept)==="mean") return `
 <div class="geometry-lesson mean-interactive-lesson">
@@ -3254,6 +3275,23 @@ function startTriangleAreaDemo(){
  document.querySelectorAll(".taPreset").forEach(btn=>btn.addEventListener("click",()=>{bS.value=btn.dataset.b;hS.value=btn.dataset.h;update();}));
  update();
 }
+function startMedianDemo(){
+ if(norm(concept)!=="median")return;
+ const sliders=Array.from({length:6},(_,i)=>document.getElementById("medianS"+i));if(sliders.some(x=>!x))return;
+ const colors=["#60a5fa","#f59e0b","#58cc02","#a78bfa","#fb7185","#14b8a6"],set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const vals=sliders.map(x=>Math.max(0,Number(x.value)||0)).slice(0,sliders.filter((_,i)=>i<6).length);
+  const sorted=vals.slice().sort((a,b)=>a-b),n=sorted.length,mid=(n-1)/2,median=n%2?sorted[Math.floor(mid)]:(sorted[n/2-1]+sorted[n/2])/2;
+  set("medianCount",n);set("medianOrdered",sorted.join(", "));set("medianResult",median);set("medianPosition",n%2?(Math.floor(n/2)+1)+"th value":"average of "+(n/2)+"th and "+(n/2+1)+"th");
+  sliders.forEach((s,i)=>set("medianSV"+i,s.value));
+  const g=document.getElementById("medianDots");
+  if(g)g.innerHTML=sorted.map((v,i)=>{const x=55+i*(530/Math.max(1,n-1)),highlight=n%2?i===Math.floor(n/2):(i===n/2-1||i===n/2);return '<circle cx="'+x+'" cy="125" r="'+(highlight?24:18)+'" fill="'+(highlight?"#58cc02":colors[i%colors.length])+'" stroke="'+(highlight?"#173f27":"white")+'" stroke-width="3"/><text x="'+x+'" y="130" text-anchor="middle" font-size="14" font-weight="800" fill="'+(highlight?"#173f27":"white")+'">'+v+'</text><text x="'+x+'" y="175" text-anchor="middle" font-size="12" fill="#173f27">'+(i+1)+'</text>';}).join("");
+  const work=document.getElementById("medianWork");if(work)work.innerHTML="<b>Method:</b> Ordered values: "+sorted.join(", ")+". "+(n%2?"The middle ("+(Math.floor(n/2)+1)+"th) value is "+median+".":"The two middle values are "+sorted[n/2-1]+" and "+sorted[n/2]+". Median = ("+sorted[n/2-1]+" + "+sorted[n/2]+") ÷ 2 = "+median+".");
+ }
+ sliders.forEach(x=>x.addEventListener("input",update));
+ document.querySelectorAll(".medianPreset").forEach(btn=>btn.addEventListener("click",()=>{const vals=btn.dataset.values.split(",");sliders.forEach((s,i)=>{s.value=vals[i]===undefined?"0":vals[i];});update();}));
+ update();
+}
 function startMeanDemo(){
  if(norm(concept)!=="mean")return;
  const sliders=Array.from({length:5},(_,i)=>document.getElementById("meanS"+i));if(sliders.some(x=>!x))return;
@@ -3708,6 +3746,38 @@ const INLINE_AREA_OF_TRIANGLE_QUIZ=[
 ["A triangle's base is 13 cm and height is 12 cm. Area =",["156 cm²","78 cm²","25 cm²","39 cm²"],1,"A = ½ × 13 × 12 = 78 cm²."],
 ["A triangle has base 10 cm and height 0 cm. The calculated area is:",["0 cm²","5 cm²","10 cm²","Cannot calculate"],0,"A = ½ × 10 × 0 = 0; a non-degenerate triangle has positive height."]
 ];
+const INLINE_MEDIAN_QUIZ=[
+["What is the median of a data set?",["The sum of all values","The middle value after arranging values in order","The largest value","The difference between extremes"],1,"The median is the middle of ordered data."],
+["Find the median of 3, 1, 2.",["1","2","3","6"],1,"Ordered data are 1, 2, 3; the middle value is 2."],
+["Find the median of 2, 4, 6, 8, 10.",["4","5","6","8"],2,"There are five values; the third value, 6, is the median."],
+["Find the median of 2, 4, 6, 8.",["4","5","6","8"],1,"For four values, average the two middle values: (4 + 6) ÷ 2 = 5."],
+["What should you do first when finding the median?",["Multiply all values","Arrange values in order","Find the range","Divide by zero"],1,"Sorting the values makes the middle position clear."],
+["Find the median of 7, 3, 9, 1, 5.",["3","5","7","9"],1,"Ordered values are 1, 3, 5, 7, 9; the median is 5."],
+["Find the median of 10, 2, 8, 4.",["4","5","6","8"],1,"Ordered values are 2, 4, 8, 10; median = (4 + 8) ÷ 2 = 6."],
+["The median of 1, 3, 5 is:",["1","3","4","5"],1,"The middle value is 3."],
+["The median of 4, 4, 4, 4, 4 is:",["0","2","4","20"],2,"All values are 4, so the middle value is 4."],
+["For an even number of observations, the median is:",["The first value","The average of the two middle values","Always the largest value","Always zero"],1,"With an even count, there are two central observations; average them."],
+["Find the median of 6, 2, 10, 4, 8.",["4","6","8","10"],1,"Ordered values are 2, 4, 6, 8, 10; the median is 6."],
+["Find the median of 12, 6, 8, 10.",["8","9","10","12"],1,"Ordered values are 6, 8, 10, 12; median = (8 + 10) ÷ 2 = 9."],
+["The median of 2, 5, 7, 9, 11, 13 is:",["7","8","9","10"],1,"The middle values are 7 and 9; their average is 8."],
+["Which measure is based on the middle position of ordered data?",["Mean","Median","Range","Total"],1,"The median is determined by the central position."],
+["Find the median of 15, 10, 20.",["10","15","20","45"],1,"Ordered values are 10, 15, 20; the median is 15."],
+["Find the median of 1, 2, 100.",["1","2","34.33","100"],1,"The ordered middle value is 2, even though 100 is much larger."],
+["Adding the same new largest value to an odd-sized data set can:",["Always leave the median unchanged","Change the number of observations and median position","Make the median zero","Remove the need to sort"],1,"Adding an observation changes the count and may change which value is central."],
+["Find the median of 9, 1, 7, 3.",["3","5","7","9"],1,"Ordered values are 1, 3, 7, 9; median = (3 + 7) ÷ 2 = 5."],
+["The median of 4, 6, 8, 10, 12 is:",["6","8","9","10"],1,"The third of five ordered values is 8."],
+["The median of 5, 7, 9, 11 is:",["7","8","9","10"],1,"The two middle values are 7 and 9; their average is 8."],
+["Which data set has median 6?",["1, 4, 6, 8, 9","1, 2, 3, 4, 5","6, 8, 9, 10, 11","2, 4, 8, 10, 12"],0,"In the first set, the middle (third) value is 6."],
+["Find the median of 0, 4, 2, 6, 8.",["2","4","5","6"],1,"Ordered values are 0, 2, 4, 6, 8; the middle value is 4."],
+["If the ordered data are 3, 5, 7, 9, the median is:",["5","6","7","9"],1,"Average the two middle values: (5 + 7) ÷ 2 = 6."],
+["Find the median of 11, 3, 7.",["3","7","11","21"],1,"Ordered values are 3, 7, 11; the median is 7."],
+["The median of 2, 2, 8, 10 is:",["2","5","8","10"],1,"Middle values are 2 and 8; median = (2 + 8) ÷ 2 = 5."],
+["Which statement is true about repeated values?",["They must be removed before finding median","They are kept when ordering data","They are always ignored","They make the median undefined"],1,"Keep every observation, including duplicates, when sorting."],
+["Find the median of 14, 6, 12, 8, 10.",["8","10","12","14"],1,"Ordered values are 6, 8, 10, 12, 14; median = 10."],
+["For the data 1, 2, 3, 4, 5, 6, the median is:",["3","3.5","4","4.5"],1,"The two middle values are 3 and 4; median = 3.5."],
+["Why is the median useful when a data set has an extreme value?",["It is often less affected by extreme values than the mean","It always equals the maximum","It uses only the sum","It removes the extreme observation"],0,"Because it depends on the central position, an extreme value often has less effect on the median."],
+["Find the median of 8, 2, 6, 4, 10, 12.",["5","6","7","8"],1,"Ordered values are 2, 4, 6, 8, 10, 12; median = (6 + 8) ÷ 2 = 7."]
+];
 const INLINE_MEAN_QUIZ=[
 ["What is the arithmetic mean of a data set?",["The largest observation","The sum of observations divided by their number","The middle observation only","The difference between largest and smallest"],1,"Mean = sum of observations ÷ number of observations."],
 ["Find the mean of 2, 4 and 6.",["3","4","5","6"],1,"(2 + 4 + 6) ÷ 3 = 4."],
@@ -3801,6 +3871,7 @@ function startQuiz(){
   else if(norm(concept)==="triangles and congruence") quizSource=dedicated||INLINE_TRIANGLES_AND_CONGRUENCE_QUIZ;
   else if(norm(concept)==="graph of a linear equation") quizSource=dedicated||INLINE_GRAPH_LINEAR_EQUATION_QUIZ;
   else if(norm(concept)==="area of triangle") quizSource=dedicated||INLINE_AREA_OF_TRIANGLE_QUIZ;
+  else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
   else if(norm(concept)==="volumes") quizSource=dedicated||INLINE_VOLUMES_QUIZ;
@@ -3842,7 +3913,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+try{renderConceptPage();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);

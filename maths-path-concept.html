@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-area-of-triangle-visual-explorer-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-data-representation-visual-explorer-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-distance-intuition-v1</title>
@@ -660,6 +660,20 @@ if(norm(concept)==="area of triangle") return `
 <div class="checks" id="taWork"><b>Working:</b> A = ½ × 8 × 6 = 24 cm².</div>
 <div class="presets"><button class="preset taPreset" data-b="8" data-h="6">Base 8, height 6</button><button class="preset taPreset" data-b="10" data-h="4">Base 10, height 4</button><button class="preset taPreset" data-b="12" data-h="8">Base 12, height 8</button><button class="preset taPreset" data-b="5" data-h="5">Base 5, height 5</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> A = ½bh. Use the perpendicular height, not a sloping side. Area is written in square units.</p>
+</div>`;
+if(norm(concept)==="data representation") return `
+<div class="geometry-lesson data-representation-interactive-lesson">
+<strong>Turn a small data table into a live bar graph and compare the values.</strong>
+<div class="visual-banner"><div class="value-box"><small>DATA VALUES</small><strong id="drTotal">100</strong><span class="pill">observations</span></div><div class="eq">→</div><div class="value-box"><small>LARGEST VALUE</small><strong id="drMax">40</strong><span class="pill" id="drLeader">Category B</span></div><div class="eq">→</div><div class="value-box"><small>MEAN</small><strong id="drMean">25</strong><span class="pill">total ÷ 4</span></div></div>
+<div class="concept-image"><svg id="drChart" viewBox="0 0 640 310" width="100%" height="auto" role="img" aria-label="Bar chart updating from the data values" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="310" rx="18" fill="#f8fcf6"/><g stroke="#d9e8d4" stroke-width="1"><line x1="70" y1="70" x2="600" y2="70"/><line x1="70" y1="110" x2="600" y2="110"/><line x1="70" y1="150" x2="600" y2="150"/><line x1="70" y1="190" x2="600" y2="190"/><line x1="70" y1="230" x2="600" y2="230"/></g><line x1="70" y1="45" x2="70" y2="250" stroke="#173f27" stroke-width="3"/><line x1="70" y1="250" x2="600" y2="250" stroke="#173f27" stroke-width="3"/><g id="drBars"><rect id="drBar0" x="120" y="170" width="65" height="80" rx="5" fill="#58cc02"/><rect id="drBar1" x="245" y="90" width="65" height="160" rx="5" fill="#60a5fa"/><rect id="drBar2" x="370" y="130" width="65" height="120" rx="5" fill="#f59e0b"/><rect id="drBar3" x="495" y="210" width="65" height="40" rx="5" fill="#a78bfa"/></g><g font-size="15" font-weight="800" fill="#173f27" text-anchor="middle"><text id="drBarLabel0" x="152" y="165">20</text><text id="drBarLabel1" x="277" y="85">40</text><text id="drBarLabel2" x="402" y="125">30</text><text id="drBarLabel3" x="527" y="205">10</text><text x="152" y="275">A</text><text x="277" y="275">B</text><text x="402" y="275">C</text><text x="527" y="275">D</text></g></svg></div>
+<div class="props"><div class="prop"><span>Category A</span><strong id="drAProp">20</strong></div><div class="prop"><span>Category B</span><strong id="drBProp">40</strong></div><div class="prop"><span>Category C</span><strong id="drCProp">30</strong></div><div class="prop"><span>Category D</span><strong id="drDProp">10</strong></div></div>
+<div class="control"><div class="head"><span>Category A</span><span class="val" id="drAVal">20</span></div><input class="range" id="drASlider" type="range" min="0" max="50" value="20"></div>
+<div class="control"><div class="head"><span>Category B</span><span class="val" id="drBVal">40</span></div><input class="range" id="drBSlider" type="range" min="0" max="50" value="40"></div>
+<div class="control"><div class="head"><span>Category C</span><span class="val" id="drCVal">30</span></div><input class="range" id="drCSlider" type="range" min="0" max="50" value="30"></div>
+<div class="control"><div class="head"><span>Category D</span><span class="val" id="drDVal">10</span></div><input class="range" id="drDSlider" type="range" min="0" max="50" value="10"></div>
+<div class="checks" id="drWork"><b>Read the graph:</b> Category B has the greatest value, 40. Total = 100 and mean = 25.</div>
+<div class="presets"><button class="preset drPreset" data-values="20,40,30,10">Example A</button><button class="preset drPreset" data-values="10,10,30,50">Example B</button><button class="preset drPreset" data-values="25,25,25,25">Equal values</button></div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> A frequency table lists values and counts; a bar graph compares categories; a pictograph uses symbols; and a line graph can show change over time. Choose a representation that makes the data easy to read.</p>
 </div>`;
 if(norm(concept)==="area of circle") return `
 <div class="geometry-lesson circle-area-interactive-lesson">
@@ -3219,6 +3233,20 @@ function startTriangleAreaDemo(){
  document.querySelectorAll(".taPreset").forEach(btn=>btn.addEventListener("click",()=>{bS.value=btn.dataset.b;hS.value=btn.dataset.h;update();}));
  update();
 }
+function startDataRepresentationDemo(){
+ if(norm(concept)!=="data representation")return;
+ const ids=["drASlider","drBSlider","drCSlider","drDSlider"],els=ids.map(id=>document.getElementById(id));if(els.some(x=>!x))return;
+ const cats=["A","B","C","D"],colors=["#58cc02","#60a5fa","#f59e0b","#a78bfa"],set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const vals=els.map(x=>Math.max(0,Number(x.value)||0)),total=vals.reduce((a,b)=>a+b,0),max=Math.max(...vals),leaders=cats.filter((_,i)=>vals[i]===max&&max>0),mean=total/4,scale=4;
+  vals.forEach((v,i)=>{set("dr"+cats[i]+"Val",v);set("dr"+cats[i]+"Prop",v);const bar=document.getElementById("drBar"+i),label=document.getElementById("drBarLabel"+i),h=v*scale,y=250-h;bar.setAttribute("y",y);bar.setAttribute("height",h);bar.setAttribute("fill",colors[i]);label.setAttribute("y",Math.max(35,y-7));label.textContent=v;});
+  set("drTotal",total);set("drMax",max);set("drLeader",max===0?"No values":leaders.map(x=>"Category "+x).join(" & "));set("drMean",Number(mean.toFixed(2)));
+  set("drWork","");const w=document.getElementById("drWork");if(w)w.innerHTML="<b>Read the graph:</b> Total = "+total+". Mean = "+total+" ÷ 4 = "+Number(mean.toFixed(2))+". "+(max===0?"All categories are zero.":"Highest value: "+leaders.map(x=>"Category "+x).join(" and ")+" ("+max+").");
+ }
+ els.forEach(x=>x.addEventListener("input",update));
+ document.querySelectorAll(".drPreset").forEach(btn=>btn.addEventListener("click",()=>{btn.dataset.values.split(",").forEach((v,i)=>els[i].value=v);update();}));
+ update();
+}
 function startAreaPolygonsDemo(){
  if(norm(concept)!=="area of polygons")return;
  const type=document.getElementById("areaTypeSelect"),bs=document.getElementById("areaBaseSlider"),hs=document.getElementById("areaHeightSlider"),as=document.getElementById("areaSecondSlider");
@@ -3643,6 +3671,38 @@ const INLINE_AREA_OF_TRIANGLE_QUIZ=[
 ["A triangle's base is 13 cm and height is 12 cm. Area =",["156 cm²","78 cm²","25 cm²","39 cm²"],1,"A = ½ × 13 × 12 = 78 cm²."],
 ["A triangle has base 10 cm and height 0 cm. The calculated area is:",["0 cm²","5 cm²","10 cm²","Cannot calculate"],0,"A = ½ × 10 × 0 = 0; a non-degenerate triangle has positive height."]
 ];
+const INLINE_DATA_REPRESENTATION_QUIZ=[
+["What is data representation?",["Deleting collected data","Presenting data in an organised visual or tabular form","Changing every value to a fraction","Finding only the largest value"],1,"Tables, charts and graphs help organise and communicate data."],
+["Which representation is usually suitable for comparing values in different categories?",["Bar graph","Paragraph only","Number line only","Compass"],0,"Bar graphs make category comparisons easy."],
+["A frequency table records:",["Only the smallest value","Values or categories and how often they occur","Only the mean","The area of each bar"],1,"Frequency is the number of times a value or category occurs."],
+["In a bar graph, the height of a bar usually represents:",["The category name","The frequency or value","The graph title","The page number"],1,"Bar height is proportional to the value shown on the vertical axis."],
+["Which chart uses pictures or symbols to represent counts?",["Pictograph","Line graph","Number line","Venn diagram"],0,"A pictograph uses a key to show how many items each symbol represents."],
+["Which graph is often useful for showing change over time?",["Line graph","Pictograph only","Tally marks only","A single number"],0,"A line graph helps show trends over time."],
+["Values are 4, 7, 3 and 6. What is the total?",["16","20","18","14"],2,"4 + 7 + 3 + 6 = 20. Correction: the total is 20."],
+["A bar for category A is 12 and category B is 19. Which is greater?",["A","B","They are equal","Cannot compare"],1,"19 is greater than 12, so category B is greater."],
+["What should a graph title tell the reader?",["The topic of the data","The author's favourite colour","Only the total","The answer key"],0,"A clear title communicates what the graph represents."],
+["Why are labels important on graph axes?",["They decorate the graph","They explain the categories and units","They change the data","They replace the title"],1,"Axis labels tell readers what is being measured and in which units."],
+["If one pictograph symbol stands for 5 books, 4 symbols stand for:",["9 books","15 books","20 books","25 books"],2,"4 × 5 = 20 books."],
+["A bar graph has values 8, 8, 8 and 8. What can be concluded?",["All displayed categories have equal values","The total is 8","One category is largest","No data was collected"],0,"Every category has the same displayed value."],
+["What is the total of frequencies 3, 5, 7 and 5?",["15","20","25","10"],1,"3 + 5 + 7 + 5 = 20."],
+["Which representation lists observations alongside their counts?",["Frequency table","Decorative picture","Map legend only","Unlabelled sketch"],0,"A frequency table records each value/category and its frequency."],
+["What is the mean of 2, 4, 6 and 8?",["4","5","6","20"],1,"Mean = (2 + 4 + 6 + 8) ÷ 4 = 5."],
+["Which graph feature helps distinguish the quantities represented by different colours?",["Legend or key","Page border","Font size only","Blank space"],0,"A legend or key explains what each colour or symbol represents."],
+["A line graph rises from Monday to Tuesday. What does this indicate?",["The measured value increased","The value became zero","The categories disappeared","The scale changed automatically"],0,"An upward line indicates an increase in the plotted value."],
+["Which is a sensible first step before drawing a graph?",["Organise and check the data","Guess the bars","Remove labels","Choose a random scale"],0,"Organising and checking data helps prevent plotting errors."],
+["A category has frequency zero. Its bar should have:",["Zero height","Maximum height","Twice the scale","A negative height"],0,"A frequency of zero is represented by a bar with zero height."],
+["Why should a graph use a consistent scale?",["To make comparisons fair and accurate","To hide small values","To increase the total","To change the frequency"],0,"A consistent scale allows readers to compare values correctly."],
+["A pictograph key says one symbol = 10 students. What do 3½ symbols represent?",["15","25","30","35"],3,"3.5 × 10 = 35 students."],
+["Which representation is most suitable for showing how a whole is divided into parts?",["Pie chart","Line graph","Tally column only","Number line"],0,"A pie chart displays categories as parts of a whole."],
+["Four categories have values 10, 20, 30 and 40. What is the greatest value?",["10","20","30","40"],3,"40 is the largest of the four values."],
+["For values 10, 20, 30 and 40, the total is:",["80","90","100","110"],2,"10 + 20 + 30 + 40 = 100."],
+["If every value in a data set doubles, its total:",["Doubles","Halves","Stays the same","Becomes zero"],0,"Multiplying every observation by 2 also multiplies the total by 2."],
+["What is a tally chart useful for?",["Recording counts as observations are collected","Measuring angles","Finding the area of a triangle","Drawing a solid cube"],0,"Tally marks provide a quick way to count occurrences."],
+["A bar graph compares favourite fruits. What should the horizontal axis usually show?",["Fruit categories","Only the graph total","The page width","The mean alone"],0,"Categories such as apple or mango are usually placed on the horizontal axis."],
+["If the vertical scale increases by 5 each grid line, the third grid line above zero represents:",["5","10","15","20"],2,"Three intervals of 5 give 3 × 5 = 15."],
+["What is a common problem with a misleading graph?",["Its scale or presentation distorts comparisons","It has a clear title","It labels its axes","It shows all values accurately"],0,"A misleading scale or omitted context can make differences appear larger or smaller than they are."],
+["Why should the chosen graph match the type of data?",["Different graphs highlight different comparisons or patterns","Every graph always shows identical information","It changes the original values","It removes the need for labels"],0,"Choose the display that communicates the data's structure and purpose clearly."]
+];
 function startQuiz(){
  const host=document.getElementById("quiz");
  if(!host)return;
@@ -3672,6 +3732,7 @@ function startQuiz(){
   else if(norm(concept)==="triangles and congruence") quizSource=dedicated||INLINE_TRIANGLES_AND_CONGRUENCE_QUIZ;
   else if(norm(concept)==="graph of a linear equation") quizSource=dedicated||INLINE_GRAPH_LINEAR_EQUATION_QUIZ;
   else if(norm(concept)==="area of triangle") quizSource=dedicated||INLINE_AREA_OF_TRIANGLE_QUIZ;
+  else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
   else if(norm(concept)==="volumes") quizSource=dedicated||INLINE_VOLUMES_QUIZ;
   else if(norm(concept)==="surface areas") quizSource=dedicated||INLINE_SURFACE_AREAS_QUIZ;
   else if(norm(concept)==="heron's formula") quizSource=dedicated||INLINE_HERONS_FORMULA_QUIZ;
@@ -3711,7 +3772,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+try{renderConceptPage();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);

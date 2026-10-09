@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-trigonometric-ratios-visual-lab-v2">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-heights-distances-virtual-lab-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • 20261009-trigonometric-ratios-lab-v1</title>
@@ -968,6 +968,17 @@ put("cdPattern",d>0?"Each term increases by "+d+".":d<0?"Each term decreases by 
 [aEl,dEl].forEach(el=>el.addEventListener("input",update));update();
 }
 function lessonHtml(){
+if(norm(concept)==="heights and distances") return `<div class="geometry-lesson heights-distances-lab">
+<strong>Heights and Distances — Virtual Lab</strong>
+<p>Use the angle of elevation and horizontal distance to estimate an object height. Assume level ground and ignore eye height.</p>
+<div class="formula">tan θ = height ÷ distance &nbsp; ⇒ &nbsp; height = distance × tan θ</div>
+<div class="concept-image"><svg id="hdSvg" viewBox="0 0 340 220" role="img" aria-label="Observer looking up at the top of a tower"><rect width="340" height="220" rx="12" fill="#f8fcf6"/><path d="M18 176H322" stroke="#173f27" stroke-width="2"/><rect id="hdTower" x="278" y="55" width="12" height="121" fill="#86c879" stroke="#256d45" stroke-width="2"/><circle cx="42" cy="157" r="7" fill="#f2c9a5" stroke="#173f27" stroke-width="1.5"/><path d="M42 165V190M42 172L31 183M42 172L53 183M42 190L34 205M42 190L50 205" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/><path id="hdRay" d="M42 157L284 55" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="5 4"/><path id="hdGround" d="M42 176H284" stroke="#2563eb" stroke-width="2"/><path id="hdHeight" d="M284 176V55" stroke="#256d45" stroke-width="2.5"/><path id="hdAngleArc" d="M72 176A30 30 0 0 0 69 164" fill="none" stroke="#d97706" stroke-width="2.5"/><text id="hdThetaLabel" x="72" y="168" font-size="11" font-weight="800" fill="#b45309">θ</text><text id="hdHeightSvg" x="294" y="116" font-size="11" font-weight="800" fill="#173f27">h</text><text id="hdDistanceSvg" x="140" y="193" font-size="11" font-weight="800" fill="#2563eb">d</text><text x="18" y="25" font-size="11" font-weight="800" fill="#173f27">Angle of elevation</text></svg></div>
+<div class="control"><div class="head"><label for="hdAngle">Angle of elevation θ</label><span class="val"><span id="hdAngleOut">35</span>°</span></div><input id="hdAngle" class="range" type="range" min="10" max="75" step="1" value="35"></div>
+<div class="control"><div class="head"><label for="hdDistance">Horizontal distance</label><span class="val"><span id="hdDistanceOut">20</span> m</span></div><input id="hdDistance" class="range" type="range" min="5" max="100" step="1" value="20"></div>
+<div class="props"><div class="prop"><span>Angle</span><strong id="hdAngleProp">35°</strong></div><div class="prop"><span>Horizontal distance</span><strong id="hdDistanceProp">20 m</strong></div><div class="prop"><span>Estimated height</span><strong id="hdHeightProp">14.00 m</strong></div><div class="prop"><span>Line of sight</span><strong id="hdSightProp">24.42 m</strong></div></div>
+<div class="checks" id="hdWorking" aria-live="polite">height = 20 × tan(35°) ≈ 14.00 m.</div>
+<div class="presets"><button type="button" class="preset hdPreset" data-angle="30" data-distance="20">30° • 20 m</button><button type="button" class="preset hdPreset" data-angle="45" data-distance="30">45° • 30 m</button><button type="button" class="preset hdPreset" data-angle="60" data-distance="15">60° • 15 m</button></div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> use tangent when horizontal distance and vertical height are involved. Use sine or cosine when the line of sight (hypotenuse) is known.</p></div>`;
 if(norm(concept)==="trigonometric ratios") return `
 <div class="geometry-lesson trig-ratios-simple"><strong>Trigonometric Ratios — Interactive Lab</strong><p>For a right triangle and angle θ: sine compares opposite to hypotenuse, cosine compares adjacent to hypotenuse, and tangent compares opposite to adjacent.</p>
 <div class="formula">sin θ = Opposite/Hypotenuse<br>cos θ = Adjacent/Hypotenuse<br>tan θ = Opposite/Adjacent</div>
@@ -5655,6 +5666,24 @@ function initMidpointLab(){
  document.querySelectorAll(".mpPreset").forEach(btn=>btn.addEventListener("click",()=>{btn.dataset.values.split(",").forEach((v,i)=>{$(ids[i]).value=v;});update();}));
  update();
 }
+function initHeightsDistancesLab(){
+ if(norm(concept)!=="heights and distances")return;
+ const $=id=>document.getElementById(id),angle=$("hdAngle"),distance=$("hdDistance");
+ if(!angle||!distance)return;
+ const put=(id,v)=>{const el=$(id);if(el)el.textContent=v;};
+ const fmt=n=>Number.isInteger(n)?String(n):String(Math.round(n*100)/100);
+ const update=()=>{
+  const deg=+angle.value,d=+distance.value,rad=deg*Math.PI/180,h=d*Math.tan(rad),sight=Math.hypot(d,h);
+  put("hdAngleOut",deg);put("hdDistanceOut",d);put("hdAngleProp",deg+"°");put("hdDistanceProp",d+" m");put("hdHeightProp",fmt(h)+" m");put("hdSightProp",fmt(sight)+" m");
+  put("hdWorking","tan("+deg+"°) = height ÷ "+d+"; height = "+d+" × tan("+deg+"°) ≈ "+fmt(h)+" m. Line of sight ≈ "+fmt(sight)+" m.");
+  const ground=$("hdGround"),height=$("hdHeight"),ray=$("hdRay"),tower=$("hdTower"),distLabel=$("hdDistanceSvg"),heightLabel=$("hdHeightSvg"),arc=$("hdAngleArc");
+  const top=176-Math.max(25,Math.min(121,121*h/Math.max(1,h)));
+  if(ground)ground.setAttribute("d","M42 176H284");if(height)height.setAttribute("d","M284 176V"+top);if(tower){tower.setAttribute("y",String(top));tower.setAttribute("height",String(176-top));}if(ray)ray.setAttribute("d","M42 157L284 "+top);
+  if(distLabel){distLabel.setAttribute("x","140");distLabel.setAttribute("y","193");distLabel.textContent="d = "+d+" m";}if(heightLabel){heightLabel.setAttribute("x","294");heightLabel.setAttribute("y",String((176+top)/2));heightLabel.textContent="h";}
+  const r=30,radAngle=deg*Math.PI/180;if(arc)arc.setAttribute("d","M72 176A30 30 0 0 0 "+(42+r*Math.cos(radAngle))+" "+(176-r*Math.sin(radAngle)));
+ };
+ angle.addEventListener("input",update);distance.addEventListener("input",update);document.querySelectorAll(".hdPreset").forEach(btn=>btn.addEventListener("click",()=>{angle.value=btn.dataset.angle;distance.value=btn.dataset.distance;update();}));update();
+}
 function initTrigonometricRatiosLab(){
  if(norm(concept)!=="trigonometric ratios")return;
  const $=id=>document.getElementById(id),angle=$("trAngle"),hypInput=$("trHyp");if(!angle||!hypInput)return;
@@ -5770,6 +5799,7 @@ function initPythagorasVirtualLab(){
 safeInit("mastery quiz", startQuiz);
 safeInit("Applications of Similarity virtual skills", initApplicationsSimilarityLab);
 safeInit("Pythagoras virtual lab", initPythagorasVirtualLab);
+safeInit("Heights and distances virtual lab", initHeightsDistancesLab);
 safeInit("math refresh", refreshMath);
 safeInit("MathJax", whenMathJaxReady);
 window.addEventListener("load",function(){whenMathJaxReady();});

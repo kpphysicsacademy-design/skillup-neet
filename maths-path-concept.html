@@ -1396,6 +1396,21 @@ if(norm(concept)==="coordinate representation") return `
 <div class="presets"><button class="preset crPreset" data-x="2" data-y="3">(2, 3)</button><button class="preset crPreset" data-x="-4" data-y="2">(−4, 2)</button><button class="preset crPreset" data-x="-3" data-y="-4">(−3, −4)</button><button class="preset crPreset" data-x="5" data-y="-2">(5, −2)</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the first number gives horizontal position x; the second gives vertical position y. The signs tell you the quadrant.</p>
 </div>`;
+if(norm(concept)==="substitution method") return `
+<div class="geometry-lesson substitution-method-interactive-lesson">
+<strong>Express one variable in terms of the other, substitute into the second equation, solve, and back-substitute.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>STEP 1</small><strong>Rearrange</strong><span class="pill">isolate x or y</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 2</small><strong>Substitute</strong><span class="pill">one variable</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 3</small><strong>Solve & check</strong><span class="pill">ordered pair</span></div>
+</div>
+<p><b>Worked example:</b> Solve x + y = 7 and x − y = 1.</p>
+<ol><li>From x + y = 7, write x = 7 − y.</li><li>Substitute into x − y = 1: (7 − y) − y = 1.</li><li>7 − 2y = 1, so y = 3.</li><li>Then x = 7 − 3 = 4. Solution: (4, 3).</li></ol>
+<div class="control"><div class="head"><span>Choose a practice example</span></div>
+<select id="subPreset"><option value="7,1">x + y = 7; x − y = 1</option><option value="14,4">x + y = 14; x − y = 4</option><option value="11,3">2x + y = 11; x − y = 1</option><option value="9,3">x + 2y = 9; x − y = 3</option></select></div>
+<div class="checks" id="subWork"><b>Try it:</b> select an example to see the substitution steps and solution.</div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> substitute the entire expression using brackets, simplify carefully, and verify the final values in both original equations. If the variables cancel and leave a true statement, there may be infinitely many solutions; if they leave a false statement, there is no solution.</p>
+</div>`;
 if(norm(concept)==="linear equations in two variables"||norm(concept)==="graphical solution") return `
 <div class="geometry-lesson linear-equations-two-variables-interactive-lesson">
 <strong>Change a, b and c to see the equation, slope, intercepts and line update live.</strong>
@@ -3215,6 +3230,20 @@ function startCoordinateRepresentationDemo(){
  document.querySelectorAll(".crPreset").forEach(btn=>btn.addEventListener("click",()=>{x.value=btn.dataset.x;y.value=btn.dataset.y;update();}));
  update();
 }
+function startSubstitutionMethodDemo(){
+ if(norm(concept)!=="substitution method")return;
+ const select=document.getElementById("subPreset"),out=document.getElementById("subWork");
+ if(!select||!out)return;
+ const render=()=>{
+  const [sum,diff]=select.value.split(",").map(Number);
+  let x,y,eq1,eq2,steps;
+  if(select.value==="11,3"){x=4;y=3;eq1="2x + y = 11";eq2="x − y = 1";steps="From x − y = 1, x = y + 1. Substitute: 2(y + 1) + y = 11 → 3y = 9 → y = 3, so x = 4.";}
+  else if(select.value==="9,3"){x=5;y=2;eq1="x + 2y = 9";eq2="x − y = 3";steps="From x − y = 3, x = y + 3. Substitute: (y + 3) + 2y = 9 → 3y = 6 → y = 2, so x = 5.";}
+  else {x=(sum+diff)/2;y=(sum-diff)/2;eq1="x + y = "+sum;eq2="x − y = "+diff;steps="From "+eq1+", x = "+sum+" − y. Substitute into "+eq2+": ("+sum+" − y) − y = "+diff+" → "+sum+" − 2y = "+diff+" → y = "+y+". Then x = "+sum+" − "+y+" = "+x+".";}
+  out.innerHTML="<b>Step-by-step:</b><br>"+eq1+"<br>"+eq2+"<br>"+steps+"<br><b>Solution:</b> ("+x+", "+y+")<br><b>Check:</b> both original equations are satisfied.";
+ };
+ select.addEventListener("change",render);render();
+}
 function startLinearEquationsInTwoVariablesDemo(){
  if(norm(concept)!=="linear equations in two variables"&&norm(concept)!=="graphical solution")return;
  const a=document.getElementById("levASlider"),b=document.getElementById("levBSlider"),cc=document.getElementById("levCSlider");
@@ -3982,6 +4011,38 @@ const INLINE_GRAPHICAL_SOLUTION_QUIZ=[
 ["The pair x−y=2 and 2x−2y=4 has:",["No solution","Unique solution","Infinitely many solutions","Exactly two solutions"],2,"The second equation is twice the first, so both lines coincide."],
 ["The pair x−y=2 and 2x−2y=6 has:",["No solution","Unique solution","Infinitely many solutions","Solution (2,0)"],0,"They imply x−y=2 and x−y=3: parallel distinct lines."]
 ];
+const INLINE_SUBSTITUTION_METHOD_QUIZ=[
+["What is the first step in substitution?",["Add both equations","Express one variable in terms of the other","Draw a circle","Multiply both sides by zero"],1,"Isolate one variable in either equation."],
+["Solve x+y=10 and x−y=2.",["(4,6)","(6,4)","(5,5)","(2,10)"],1,"Adding gives 2x=12, so x=6 and y=4."],
+["From 2x+y=9, y equals:",["9−2x","2x−9","9+2x","(9−x)/2"],0,"Subtract 2x from both sides."],
+["If y=5−x, substituting into 2x+y=8 gives:",["2x+5−x=8","2x−5−x=8","2x+5+x=8","x+5=8"],0,"Replace y with the complete expression 5−x."],
+["Solve x=3+y and x+y=9.",["(3,6)","(6,3)","(9,3)","(3,9)"],1,"Substitute: 3+y+y=9, so y=3 and x=6."],
+["Why use brackets when substituting an expression?",["To change the equation","To preserve the whole expression and its signs","To remove the variable","To make every term positive"],1,"Brackets prevent sign errors when distributing a minus sign."],
+["Solve x+y=14 and x−y=4.",["(5,9)","(9,5)","(10,4)","(4,14)"],1,"Adding gives x=9; then y=5."],
+["From x−y=3, express x in terms of y.",["x=y−3","x=3−y","x=y+3","x=3y"],2,"Add y to both sides: x=y+3."],
+["Solve 2x+y=11 and x−y=1.",["(3,5)","(4,3)","(5,1)","(1,4)"],1,"From x−y=1, x=y+1. Then 2(y+1)+y=11 gives y=3, x=4."],
+["After finding one variable, what should you do next?",["Stop immediately","Substitute back to find the other variable","Square the answer","Swap x and y"],1,"Back-substitute into a rearranged original equation."],
+["Solve x+2y=9 and x−y=3.",["(5,2)","(2,5)","(3,2)","(6,3)"],0,"x=y+3, so (y+3)+2y=9; y=2 and x=5."],
+["If substitution leads to 0=0, the equations may have:",["No solution","Infinitely many solutions","Exactly two solutions","Only negative solutions"],1,"A true identity indicates dependent equations in this context."],
+["If substitution leads to 0=5, the pair has:",["Infinitely many solutions","One solution","No solution","Two solutions"],2,"A false statement indicates inconsistent equations."],
+["Which solution satisfies x+y=8 and x=3?",["(3,5)","(5,3)","(8,3)","(3,8)"],0,"Substitute x=3: 3+y=8, so y=5."],
+["Solve y=2x and x+y=12.",["(4,8)","(6,6)","(8,4)","(2,10)"],0,"x+2x=12 gives x=4 and y=8."],
+["From 3x−y=7, y equals:",["7−3x","3x−7","7+3x","3x+7"],1,"Rearrange: −y=7−3x, hence y=3x−7."],
+["Solve x+y=5 and y=2.",["(2,3)","(3,2)","(5,2)","(2,5)"],1,"x+2=5, so x=3."],
+["Which is a correct verification for x=4,y=3 in 2x+y=11?",["8+3=11","4+3=11","8−3=11","4×3=11"],0,"Substitute: 2(4)+3=11."],
+["From 2x−y=1, express y in terms of x.",["y=1−2x","y=2x−1","y=2x+1","y=x−2"],1,"Rearranging gives −y=1−2x, so y=2x−1."],
+["Solve x=2y and x+y=9.",["(3,6)","(6,3)","(9,2)","(2,7)"],1,"2y+y=9 gives y=3 and x=6."],
+["When choosing which equation to rearrange, prefer one that:",["Makes isolation simple","Has the most fractions always","Cannot be simplified","Has no variables"],0,"A variable with coefficient 1 or −1 often makes substitution easier."],
+["Solve 3x+y=13 and y=4.",["(3,4)","(4,3)","(13,4)","(4,13)"],0,"3x+4=13, so x=3."],
+["If x=7−y, then 2x+y=10 becomes:",["2(7−y)+y=10","2(7+y)+y=10","2x+7−y=10","7−2y=10"],0,"Replace x with (7−y) throughout."],
+["Solve x+y=6 and x=2.",["(2,4)","(4,2)","(2,6)","(6,2)"],0,"2+y=6, so y=4."],
+["Which pair has solution (2,3)?",["x+y=5 and x−y=−1","x+y=6 and x−y=1","x+y=4 and x−y=1","x+y=5 and x−y=1"],0,"2+3=5 and 2−3=−1."],
+["Solve x−2y=0 and x+y=9.",["(3,6)","(6,3)","(9,0)","(0,9)"],1,"x=2y, so 3y=9; y=3 and x=6."],
+["Why verify the answer in both equations?",["To check arithmetic and ensure the pair satisfies both","To make the answer longer","It is not necessary","To change the equations"],0,"A solution to a pair must satisfy each original equation."],
+["From 4x+y=17 and x=3, find y.",["5","4","3","17"],0,"12+y=17 gives y=5."],
+["Solve x+y=1 and x−y=5.",["(3,−2)","(−2,3)","(1,5)","(5,1)"],0,"Adding gives 2x=6, x=3; then y=−2."],
+["The substitution method reduces a pair of linear equations to:",["One equation in one variable","A cubic equation always","A graph only","No equation"],0,"After replacing one variable, solve the resulting single-variable equation."]
+];
 const INLINE_LINEAR_EQUATIONS_TWO_VARIABLES_QUIZ=[["Which graph represents a linear equation in two variables?",["A straight line","A circle only","A parabola only","A point only"],0,"A linear equation in two variables graphs as a straight line."],["How many ordered-pair solutions can a linear equation in two variables have?",["Only one","Exactly two","Infinitely many","None"],2,"A straight line contains infinitely many points, each giving a solution."],["Which is a linear equation in two variables?",["2x+3y=6","x²+y=4","xy=5","x³+y=1"],0,"Both variables have degree 1 and are not multiplied together."],["For 2x+3y=6, what is the y-intercept?",["1","2","3","6"],1,"Set x=0: 3y=6, so y=2."],["For 2x+3y=6, what is the x-intercept?",["1","2","3","6"],2,"Set y=0: 2x=6, so x=3."],["Which ordered pair satisfies x+y=5?",["(1,1)","(2,3)","(5,5)","(0,6)"],1,"2+3=5."],["Which ordered pair satisfies 2x−y=4?",["(1,2)","(2,0)","(0,4)","(3,1)"],1,"2(2)−0=4."],["The equation x−y=0 represents which relationship?",["y=x","y=x+1","y=−x","x=0"],0,"x−y=0 gives y=x."],["In y=mx+c, what does m represent?",["Y-intercept","Slope","X-intercept","Constant term only"],1,"m is the slope of the line."],["In y=mx+c, what does c represent?",["Slope","Y-intercept","X-intercept","Coefficient of x"],1,"c is the y-intercept."],["What is the slope of 2x+3y=6?",["2/3","−2/3","3/2","−3/2"],1,"Rearranging gives y=−(2/3)x+2."],["What is the slope of 3x+2y=12?",["3/2","−3/2","2/3","−2/3"],1,"y=−(3/2)x+6."],["Which point lies on y=2x+1?",["(0,1)","(1,1)","(2,2)","(−1,1)"],0,"At x=0, y=1."],["If x=3 in x+2y=7, what is y?",["1","2","3","4"],0,"3+2y=7, so y=2."],["If y=2 in 3x+y=11, what is x?",["2","3","4","5"],2,"3x+2=11, so x=3."],["Which pair is a solution of 3x+2y=12?",["(2,3)","(4,1)","(0,6)","(3,2)"],0,"6+6=12."],["The graph of x=4 is:",["Horizontal line","Vertical line","Slant line","A circle"],1,"x=4 fixes x, so the graph is vertical."],["The graph of y=−2 is:",["Vertical line","Horizontal line","A parabola","A point"],1,"y=−2 fixes y, so the graph is horizontal."],["Which equation has slope 1?",["y=x+3","y=2x+3","y=−x+3","y=3"],0,"The coefficient of x is 1."],["Which equation has y-intercept −4?",["y=2x−4","y=−4x+2","4y=x","y=x+4"],0,"In slope-intercept form, the constant is −4."],["For x+2y+4=0, the y-intercept is:",["−4","−2","2","4"],1,"Set x=0: 2y+4=0, so y=−2."],["For x+2y+4=0, the x-intercept is:",["−4","−2","2","4"],0,"Set y=0: x+4=0, so x=−4."],["Which equation is equivalent to 2x+4y=8?",["x+2y=4","x+4y=8","2x+2y=4","x+y=8"],0,"Divide every term by 2."],["If (2,1) is on ax+by=5 with a=2 and b=1, is it a solution?",["Yes","No","Only if x=0","Only if y=0"],0,"2(2)+1(1)=5."],["What happens when x increases along a line with negative slope?",["y increases","y decreases","y stays fixed","The line becomes vertical"],1,"A negative slope means y decreases as x increases."],["Which statement about solutions is correct?",["Every solution is an ordered pair on the graph","Only integer pairs are solutions","Only intercepts are solutions","There is one solution only"],0,"Each ordered pair satisfying the equation is a point on its graph."],["For 4x−2y=8, the slope is:",["2","−2","4","−4"],0,"−2y=−4x+8, so y=2x−4."],["Which equation passes through (0,5) and has slope 2?",["y=2x+5","y=5x+2","y=2x−5","y=x+5"],0,"Slope 2 and y-intercept 5 give y=2x+5."],["If a point does not satisfy the equation, where is it relative to the solution set?",["It lies on the line","It is not on the line","It must be an intercept","It must be the origin"],1,"Non-solutions are points not lying on the graph of the equation."],["What is the key idea of a linear equation in two variables?",["It represents a straight-line set of solutions","It always has one solution","It contains squared variables","It cannot be graphed"],0,"The solution set forms a straight line."]];
 
 
@@ -4701,7 +4762,8 @@ function startQuiz(){
   else if(norm(concept)==="plotting points") quizSource=dedicated||INLINE_PLOTTING_POINTS_QUIZ;
   else if(norm(concept)==="coordinates of a point") quizSource=dedicated||INLINE_COORDINATES_OF_A_POINT_QUIZ;
   else if(norm(concept)==="coordinate representation") quizSource=dedicated||INLINE_COORDINATE_REPRESENTATION_QUIZ;
-  else if(norm(concept)==="linear equations in two variables") quizSource=dedicated||INLINE_LINEAR_EQUATIONS_TWO_VARIABLES_QUIZ;
+  else if(norm(concept)==="substitution method") quizSource=dedicated||INLINE_SUBSTITUTION_METHOD_QUIZ;
+   else if(norm(concept)==="linear equations in two variables") quizSource=dedicated||INLINE_LINEAR_EQUATIONS_TWO_VARIABLES_QUIZ;
    else if(norm(concept)==="graphical solution") quizSource=dedicated||INLINE_GRAPHICAL_SOLUTION_QUIZ;
   else if(norm(concept)==="factorisation of polynomials") quizSource=dedicated||INLINE_FACTORISATION_OF_POLYNOMIALS_QUIZ;
    else if(norm(concept)==="quadratic polynomial factorisation") quizSource=dedicated||INLINE_FACTORISATION_OF_POLYNOMIALS_QUIZ;
@@ -4737,7 +4799,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
+startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startSubstitutionMethodDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

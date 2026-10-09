@@ -3036,4 +3036,347 @@ window.SKILLUP_MATHS_QUIZ_BANK={
 ["Which statement about equivalent rational numbers is correct?",["They must have the same numerator","They must have the same denominator","They represent the same value","They must look identical"],2,"Equivalent rational numbers can have different numerators and denominators while representing the same value."],
 ["In the interactive visual, 2/3 is scaled by k=5. What fraction is shown?",["7/8","10/15","10/8","15/10"],1,"Multiplying both terms by 5 gives 10/15."]
 ],
+  "Values of standard angles": [
+  [
+    "What is sin 0°?",
+    [
+      "0",
+      "1/2",
+      "1",
+      "Undefined"
+    ],
+    0,
+    "At 0°, the opposite side is zero relative to a unit hypotenuse, so sin 0° = 0."
+  ],
+  [
+    "What is cos 0°?",
+    [
+      "0",
+      "1/2",
+      "1",
+      "√3/2"
+    ],
+    2,
+    "On the unit circle, the cosine coordinate at 0° is 1."
+  ],
+  [
+    "What is sin 30°?",
+    [
+      "√3/2",
+      "1/2",
+      "1",
+      "0"
+    ],
+    1,
+    "The standard exact value is sin 30° = 1/2."
+  ],
+  [
+    "What is cos 30°?",
+    [
+      "1/2",
+      "1",
+      "√3/2",
+      "0"
+    ],
+    2,
+    "The standard exact value is cos 30° = √3/2."
+  ],
+  [
+    "What is tan 30°?",
+    [
+      "√3",
+      "1",
+      "1/√3",
+      "0"
+    ],
+    2,
+    "tan 30° = sin 30° / cos 30° = (1/2)/(√3/2) = 1/√3."
+  ],
+  [
+    "What is sin 45°?",
+    [
+      "1/2",
+      "1/√2",
+      "√3/2",
+      "1"
+    ],
+    1,
+    "In a 45°–45°–90° triangle, each leg divided by the hypotenuse is 1/√2."
+  ],
+  [
+    "What is cos 45°?",
+    [
+      "1",
+      "1/2",
+      "1/√2",
+      "√3/2"
+    ],
+    2,
+    "The equal acute angles in an isosceles right triangle give cos 45° = 1/√2."
+  ],
+  [
+    "What is tan 45°?",
+    [
+      "0",
+      "1/√3",
+      "√3",
+      "1"
+    ],
+    3,
+    "At 45°, opposite and adjacent legs are equal, so their ratio is 1."
+  ],
+  [
+    "What is sin 60°?",
+    [
+      "1/2",
+      "√3/2",
+      "1",
+      "1/√3"
+    ],
+    1,
+    "The standard exact value is sin 60° = √3/2."
+  ],
+  [
+    "What is cos 60°?",
+    [
+      "√3/2",
+      "1",
+      "1/2",
+      "0"
+    ],
+    2,
+    "The standard exact value is cos 60° = 1/2."
+  ],
+  [
+    "What is tan 60°?",
+    [
+      "√3",
+      "1",
+      "1/√3",
+      "2"
+    ],
+    0,
+    "tan 60° = (√3/2)/(1/2) = √3."
+  ],
+  [
+    "What is sin 90°?",
+    [
+      "0",
+      "1/2",
+      "1",
+      "Undefined"
+    ],
+    2,
+    "The sine coordinate at 90° on the unit circle is 1."
+  ],
+  [
+    "What is cos 90°?",
+    [
+      "1",
+      "0",
+      "−1",
+      "Undefined"
+    ],
+    1,
+    "The cosine coordinate at 90° on the unit circle is 0."
+  ],
+  [
+    "What is tan 0°?",
+    [
+      "1",
+      "Undefined",
+      "0",
+      "√3"
+    ],
+    2,
+    "tan 0° = sin 0° / cos 0° = 0/1 = 0."
+  ],
+  [
+    "Which standard-angle tangent value is undefined?",
+    [
+      "tan 0°",
+      "tan 30°",
+      "tan 45°",
+      "tan 90°"
+    ],
+    3,
+    "tan θ = sin θ / cos θ; cos 90° = 0, so the quotient is undefined."
+  ],
+  [
+    "Which is the correct value of sin 30° and cos 60°?",
+    [
+      "Both are 1/2",
+      "Both are √3/2",
+      "They are 0 and 1",
+      "They are 1 and 0"
+    ],
+    0,
+    "sin 30° = 1/2 and cos 60° = 1/2."
+  ],
+  [
+    "Which pair has equal values?",
+    [
+      "sin 30° and cos 30°",
+      "sin 60° and cos 60°",
+      "sin 45° and cos 45°",
+      "tan 30° and tan 60°"
+    ],
+    2,
+    "At 45°, sine and cosine are both 1/√2."
+  ],
+  [
+    "Evaluate sin 60° × cos 30°.",
+    [
+      "1/4",
+      "3/4",
+      "√3/2",
+      "1"
+    ],
+    1,
+    "(√3/2)(√3/2) = 3/4."
+  ],
+  [
+    "Evaluate sin 30° + cos 60°.",
+    [
+      "0",
+      "1/2",
+      "1",
+      "√3"
+    ],
+    2,
+    "1/2 + 1/2 = 1."
+  ],
+  [
+    "Evaluate tan 30° × tan 60°.",
+    [
+      "1",
+      "√3",
+      "1/3",
+      "3"
+    ],
+    0,
+    "(1/√3) × √3 = 1."
+  ],
+  [
+    "Evaluate sin² 30° + cos² 30°.",
+    [
+      "1/4",
+      "1/2",
+      "1",
+      "3/4"
+    ],
+    2,
+    "(1/2)² + (√3/2)² = 1/4 + 3/4 = 1."
+  ],
+  [
+    "Evaluate 2 sin 30° cos 60°.",
+    [
+      "1/2",
+      "1",
+      "2",
+      "√3/2"
+    ],
+    0,
+    "2 × 1/2 × 1/2 = 1/2."
+  ],
+  [
+    "Evaluate cos 0° + sin 90°.",
+    [
+      "0",
+      "1",
+      "2",
+      "1/2"
+    ],
+    2,
+    "cos 0° = 1 and sin 90° = 1, so the sum is 2."
+  ],
+  [
+    "Evaluate sin 0° + cos 90°.",
+    [
+      "0",
+      "1",
+      "2",
+      "Undefined"
+    ],
+    0,
+    "Both sin 0° and cos 90° are zero."
+  ],
+  [
+    "If sin θ = cos 30° and θ is acute, θ is:",
+    [
+      "30°",
+      "45°",
+      "60°",
+      "90°"
+    ],
+    2,
+    "cos 30° = √3/2 = sin 60°, so the acute angle is 60°."
+  ],
+  [
+    "If tan θ = 1 and θ is acute, θ is:",
+    [
+      "30°",
+      "45°",
+      "60°",
+      "90°"
+    ],
+    1,
+    "tan 45° = 1."
+  ],
+  [
+    "Which value equals 1/√3?",
+    [
+      "tan 60°",
+      "sin 60°",
+      "tan 30°",
+      "cos 30°"
+    ],
+    2,
+    "tan 30° = 1/√3."
+  ],
+  [
+    "Which value equals √3?",
+    [
+      "tan 30°",
+      "tan 45°",
+      "tan 60°",
+      "sin 90°"
+    ],
+    2,
+    "tan 60° = √3."
+  ],
+  [
+    "Which statement is correct?",
+    [
+      "sin 0° = 1",
+      "cos 0° = 1",
+      "cos 90° = 1",
+      "tan 45° = 0"
+    ],
+    1,
+    "The standard values include cos 0° = 1; the other listed equalities are false."
+  ],
+  [
+    "For an acute angle θ, which identity is always true?",
+    [
+      "sin θ + cos θ = 1",
+      "sin² θ + cos² θ = 1",
+      "tan θ = sin θ × cos θ",
+      "sin θ = cos θ for every θ"
+    ],
+    1,
+    "The Pythagorean identity gives sin² θ + cos² θ = 1."
+  ],
+  [
+    "What is the value of (sin 60°)/(cos 60°)?",
+    [
+      "1/√3",
+      "1",
+      "√3",
+      "0"
+    ],
+    2,
+    "(√3/2)/(1/2) = √3."
+  ]
+]
 };

@@ -5019,13 +5019,26 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startPairWordProblemsDemo();startConsistencyOfEquationsDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
- console.error("SkillUp Maths bootstrap error:",err);
- const box=document.getElementById("app");
- if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');
+// P1 recovery: isolate each renderer so one broken demo cannot stop the lesson or quiz.
+function safeInit(label, fn) {
+ try { fn(); }
+ catch (err) {
+  console.error("SkillUp Maths init failed [" + label + "]:", err);
+  const box = document.getElementById("app");
+  if (box && !box.querySelector('[data-init-warning="' + label.replace(/[^a-z0-9_-]/gi, "-") + '"]')) {
+   const warning = document.createElement("section");
+   warning.className = "card";
+   warning.dataset.initWarning = label.replace(/[^a-z0-9_-]/gi, "-");
+   warning.innerHTML = '<div class="empty"><b>Some interactive content could not load.</b> The lesson and quiz may still be available. Refresh the page or report this error if it continues.</div>';
+   box.prepend(warning);
+  }
+ }
 }
+safeInit("concept lesson", renderConceptPage);
+[startModeDemo,startMedianDemo,startMeanDemo,startDataRepresentationDemo,startTriangleAreaDemo,startHeronsVisualExplorer,startRationalDemo,startHistogramsDemo,startDataCollectionDemo,startFrequencyDistributionDemo,startFrequencyTablesDemo,startBarGraphsDemo,startPieChartsDemo,startVolumeDemo,startAreaPolygonsDemo,startSurfaceAreaDemo,startCircleAreaDemo,startPerimeterDemo,startPowersDemo,startSquaresDemo,startCubesDemo,startVariablesDemo,startAlgebraDemo,startFactorisationDemo,startLinearEquationsDemo,startAlgebraIdentitiesDemo,startBasicGeometricIdeasDemo,startPolygonsDemo,startGeometricConstructionsDemo,startQuadrilateralsDemo,startLinesAnglesDemo,startTrianglesDemo,startParallelTransversalsDemo,startTermsDemo,startLikeUnlikeDemo,startEquivalentDemo,startComparingRationalDemo,startRationalOperationsDemo,startPropertiesDemo,startIrrationalityProofsDemo,startIrrationalNumbersDemo,startGraphLinearEquationDemo,startRealNumbersDemo,startZerosOfPolynomialDemo,startRemainderTheoremBasicsDemo,startFactorTheoremBasicsDemo,startEuclidGeometryDemo,startTrianglesCongruenceDemo,startCirclesDemo,startCartesianPlaneDemo,startParallelogramDemo,startDistanceIntuitionDemo,startPlottingPointsDemo,startCoordinatesOfPointDemo,startCoordinateRepresentationDemo,startPairWordProblemsDemo,startConsistencyOfEquationsDemo,startEliminationMethodDemo,startSubstitutionMethodDemo,startLinearEquationsInTwoVariablesDemo,startFactorisationOfPolynomialsDemo,startDegreeOfPolynomialDemo,startPolynomialBasicsDemo,startRationalisationBasicsDemo,startDecimalExpansionsDemo,startLawsOfExponentsDemo,startProbabilityBasicsDemo,startExperimentalProbabilityDemo,startHcfLcmDemo,startPrimeFactorisationDemo,startFundamentalTheoremArithmeticDemo,startEuclidDivisionAlgorithmDemo,startSimpleEventsDemo,startTheoreticalProbabilityDemo].forEach(function(fn) { safeInit(fn.name, fn); });
+safeInit("mastery quiz", startQuiz);
+safeInit("math refresh", refreshMath);
+safeInit("MathJax", whenMathJaxReady);
 window.addEventListener("load",function(){whenMathJaxReady();});
 })();
 </script>

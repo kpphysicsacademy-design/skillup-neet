@@ -1627,6 +1627,24 @@ if(norm(concept)==="irrational numbers") return `
 </div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> for a positive integer n, √n is rational exactly when n is a perfect square. Otherwise √n is irrational.</p>
 </div>`;
+if(norm(concept)==="hcf and lcm") return `
+<div class="geometry-lesson hcf-lcm-lesson">
+<strong>HCF = greatest common factor. LCM = least common multiple.</strong>
+<p style="margin:6px 0 10px">For HCF, take common prime factors with the smallest powers. For LCM, take every prime factor with the greatest powers.</p>
+<div class="visual-banner">
+<div class="value-box"><small>HCF</small><strong id="hlHcf">12</strong><span class="pill">greatest common factor</span></div>
+<div class="value-box"><small>LCM</small><strong id="hlLcm">72</strong><span class="pill">least common multiple</span></div>
+<div class="value-box"><small>PRODUCT CHECK</small><strong id="hlCheck">864 = 864</strong><span class="pill">for two numbers</span></div>
+</div>
+<div class="control"><div class="head"><span>First number (a)</span><span class="val" id="hlAVal">24</span></div><input class="range" id="hlASlider" type="range" min="1" max="100" value="24" step="1"></div>
+<div class="control"><div class="head"><span>Second number (b)</span><span class="val" id="hlBVal">36</span></div><input class="range" id="hlBSlider" type="range" min="1" max="100" value="36" step="1"></div>
+<div class="checks" id="hlWork"><b>Prime factors:</b><br>24 = 2³ × 3<br>36 = 2² × 3²<br><b>HCF = 2² × 3 = 12</b><br><b>LCM = 2³ × 3² = 72</b><br>HCF × LCM = 12 × 72 = 864 = 24 × 36</div>
+<div class="concept-image" role="img" aria-label="Parallel multiples showing the first common multiple">
+<svg viewBox="0 0 640 170" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="170" rx="16" fill="#f8fcf6"/><text x="320" y="24" text-anchor="middle" font-size="16" font-weight="800" fill="#245b35">Multiples meet at the LCM</text><g id="hlMultiples"></g><text x="320" y="155" text-anchor="middle" font-size="12" fill="#66736b">Green marker = first common positive multiple</text></svg>
+</div>
+<div class="presets"><button class="preset hlPreset" data-a="24" data-b="36">24 and 36</button><button class="preset hlPreset" data-a="12" data-b="18">12 and 18</button><button class="preset hlPreset" data-a="7" data-b="9">7 and 9</button><button class="preset hlPreset" data-a="15" data-b="25">15 and 25</button></div>
+<p style="margin:8px 0 0;color:#66736b"><b>Word-problem clue:</b> HCF for largest equal groups or pieces; LCM for the earliest time repeating events happen together. The identity HCF(a,b) × LCM(a,b) = a × b applies to two positive integers.</p>
+</div>`;
 if(norm(concept)==="prime factorisation") return `
 <div class="geometry-lesson prime-factorisation-lesson">
 <strong>Prime factorisation writes a composite number as a product of prime numbers.</strong>
@@ -3395,6 +3413,22 @@ function startDecimalExpansionsDemo(){
  update();
 }
 
+function startHcfLcmDemo(){
+ if(norm(concept)!=="hcf and lcm")return;
+ const aEl=document.getElementById("hlASlider"),bEl=document.getElementById("hlBSlider");if(!aEl||!bEl)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function gcd(a,b){while(b){const r=a%b;a=b;b=r;}return a;}
+ function factor(n){const fs=[];for(let p=2;p*p<=n;p++){while(n%p===0){fs.push(p);n/=p;}}if(n>1)fs.push(n);return fs;}
+ function fmt(fs){if(!fs.length)return "1";const parts=[];for(let i=0;i<fs.length;){let j=i+1;while(j<fs.length&&fs[j]===fs[i])j++;parts.push(fs[i]+(j-i>1?"^"+(j-i):""));i=j;}return parts.join(" × ");}
+ function update(){
+  const a=Math.max(1,Math.min(100,Number(aEl.value)||1)),b=Math.max(1,Math.min(100,Number(bEl.value)||1));aEl.value=a;bEl.value=b;
+  const h=gcd(a,b),l=a/h*b,fa=factor(a),fb=factor(b);
+  set("hlAVal",a);set("hlBVal",b);set("hlHcf",h);set("hlLcm",l);set("hlCheck",(h*l)+" = "+(a*b));
+  const box=document.getElementById("hlWork");if(box)box.innerHTML="<b>Prime factors:</b><br>"+a+" = "+fmt(fa)+"<br>"+b+" = "+fmt(fb)+"<br><b>HCF = "+h+"</b><br><b>LCM = "+l+"</b><br>HCF × LCM = "+h+" × "+l+" = "+(h*l)+" = "+a+" × "+b;
+  const svg=document.getElementById("hlMultiples");if(svg){svg.innerHTML="";const common=l,scale=500/Math.max(l,1),maxA=Math.min(8,Math.floor(l/a)),maxB=Math.min(8,Math.floor(l/b));const add=(x,y,label,green)=>{const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",x);c.setAttribute("cy",y);c.setAttribute("r","6");c.setAttribute("fill",green?"#7dbb70":"#b7cbb4");svg.appendChild(c);if(label){const t=document.createElementNS("http://www.w3.org/2000/svg","text");t.setAttribute("x",x);t.setAttribute("y",y-10);t.setAttribute("font-size","10");t.setAttribute("text-anchor","middle");t.setAttribute("fill","#245b35");t.textContent=label;svg.appendChild(t);}};const line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("x1","70");line.setAttribute("x2","570");line.setAttribute("y1","62");line.setAttribute("y2","62");line.setAttribute("stroke","#b7cbb4");line.setAttribute("stroke-width","2");svg.appendChild(line);const line2=line.cloneNode();line2.setAttribute("y1","112");line2.setAttribute("y2","112");svg.appendChild(line2);const stepsA=Math.min(8,Math.floor(500/a)),stepsB=Math.min(8,Math.floor(500/b));for(let i=1;i<=stepsA;i++){const x=70+i*a*scale;add(Math.min(570,x),62,i*a<=l?String(i*a):"",i*a===l);}for(let i=1;i<=stepsB;i++){const x=70+i*b*scale;add(Math.min(570,x),112,i*b<=l?String(i*b):"",i*b===l);}const t=document.createElementNS("http://www.w3.org/2000/svg","text");t.setAttribute("x","320");t.setAttribute("y","143");t.setAttribute("font-size","12");t.setAttribute("text-anchor","middle");t.setAttribute("fill","#245b35");t.textContent="LCM = "+l;svg.appendChild(t);}
+ }
+ aEl.addEventListener("input",update);bEl.addEventListener("input",update);document.querySelectorAll(".hlPreset").forEach(btn=>btn.addEventListener("click",()=>{aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;update();}));update();
+}
 function startPrimeFactorisationDemo(){
  if(norm(concept)!=="prime factorisation")return;
  const input=document.getElementById("pfNSlider");if(!input)return;
@@ -4167,6 +4201,39 @@ const INLINE_MEAN_QUIZ=[
 ["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
 ["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
 ];
+const INLINE_HCF_AND_LCM_QUIZ=[
+["HCF means:",["Highest Common Factor","Highest Composite Factor","Highest Common Fraction","Highest Count Factor"],0,"HCF is the greatest positive integer that divides each given number exactly."],
+["LCM means:",["Lowest Common Factor","Least Common Multiple","Largest Common Multiple","Least Composite Number"],1,"LCM is the smallest positive integer divisible by all the given numbers."],
+["The HCF of 24 and 36 is:",["6","12","18","72"],1,"24=2³×3 and 36=2²×3², so HCF=2²×3=12."],
+["The LCM of 12 and 18 is:",["6","18","24","36"],3,"12=2²×3 and 18=2×3², so LCM=2²×3²=36."],
+["For HCF by prime factorisation, choose:",["Largest powers of all primes","Smallest powers of common primes","All prime powers added","Only the largest prime"],1,"HCF uses common prime factors at the smallest exponents."],
+["For LCM by prime factorisation, choose:",["Only common primes","Smallest powers of common primes","Greatest powers of all primes involved","Only even primes"],2,"LCM uses the greatest exponent of every prime appearing in any input."],
+["For two positive integers a and b, which identity is correct?",["HCF+LCM=a×b","HCF×LCM=a×b","HCF÷LCM=a×b","HCF−LCM=a×b"],1,"The product of HCF and LCM equals the product of the two integers."],
+["Find the HCF of 15 and 25.",["3","5","15","75"],1,"Common factors are 1 and 5; the greatest is 5."],
+["Find the LCM of 7 and 9.",["16","42","63","72"],2,"7 and 9 are coprime, so their LCM is 7×9=63."],
+["Find the HCF of 48 and 60.",["6","12","24","30"],1,"48=2⁴×3 and 60=2²×3×5; HCF=2²×3=12."],
+["Find the LCM of 8 and 12.",["12","16","24","48"],2,"8=2³ and 12=2²×3, so LCM=2³×3=24."],
+["Two bells ring every 6 and 8 minutes. They ring together again after:",["12 minutes","14 minutes","24 minutes","48 minutes"],0,"The first common time is LCM(6,8)=24 minutes."],
+["The largest equal length pieces cut from 48 cm and 60 cm rods have length:",["6 cm","10 cm","12 cm","24 cm"],2,"The greatest length dividing both is HCF(48,60)=12 cm."],
+["If HCF(18,30)=6, their LCM is:",["60","90","120","180"],1,"LCM=(18×30)/6=90."],
+["The HCF of two coprime positive integers is:",["0","1","Their sum","Their product"],1,"Coprime numbers have no common positive factor greater than 1."],
+["If one number divides the other exactly, their HCF is:",["The larger number","The smaller number","Their product","Always 1"],1,"The smaller number divides both, and no larger common divisor can divide the smaller number."],
+["Find HCF(54, 90).",["9","18","27","36"],1,"54=2×3³ and 90=2×3²×5, so HCF=2×3²=18."],
+["Find LCM(15, 20).",["30","45","60","120"],2,"15=3×5 and 20=2²×5, so LCM=2²×3×5=60."],
+["Which problem usually calls for HCF?",["When will two repeating events meet again?","What is the longest equal piece length?","Find the first shared multiple","Find a repeating cycle"],1,"HCF is useful for the greatest equal length or largest equal grouping."],
+["Which problem usually calls for LCM?",["Largest equal tile size","Greatest number of identical groups","When will repeating events coincide?","Largest common divisor"],2,"LCM finds the earliest common multiple of repeating intervals."],
+["HCF(16, 24) is:",["4","8","12","16"],1,"Common factors include 1,2,4,8; the greatest is 8."],
+["LCM(9, 12) is:",["18","24","36","108"],2,"9=3² and 12=2²×3, so LCM=2²×3²=36."],
+["If two numbers are 8 and 14, their HCF×LCM equals:",["22","56","112","196"],1,"For two integers, HCF×LCM=8×14=112. (The correct product is 112.)"],
+["Which pair is coprime?",["8 and 12","9 and 15","8 and 15","21 and 35"],2,"HCF(8,15)=1, so they are coprime."],
+["If HCF=4 and LCM=60 for two positive integers, their product is:",["15","64","240","600"],2,"Product of the two numbers = HCF×LCM = 4×60 = 240."],
+["Find HCF(72, 120).",["12","18","24","36"],2,"72=2³×3² and 120=2³×3×5; HCF=2³×3=24."],
+["Find LCM(6, 15).",["15","30","45","90"],1,"6=2×3 and 15=3×5; LCM=2×3×5=30."],
+["The HCF of 18, 24 and 30 is:",["3","6","12","18"],1,"Common divisors of all three include 1,2,3,6; the greatest is 6."],
+["The LCM of 3, 4 and 5 is:",["12","20","30","60"],3,"The numbers are pairwise coprime, so LCM=3×4×5=60."],
+["The formula HCF×LCM=a×b is directly valid for:",["Any number of integers without qualification","Two positive integers","Only prime numbers","Only equal integers"],1,"This simple product identity is for two positive integers; do not assume it for three or more."],
+["A number divisible by both 4 and 6 must be a multiple of:",["2","6","12","24"],2,"The least positive common multiple of 4 and 6 is 12."]
+];
 const INLINE_PRIME_FACTORISATION_QUIZ=[
 ["Prime factorisation expresses a composite number as a product of:",["Composite numbers","Prime numbers","Negative numbers","Fractions"],1,"Prime factorisation breaks a composite number into prime factors."],
 ["The prime factorisation of 360 is:",["2² × 3² × 5","2³ × 3² × 5","2³ × 3 × 5²","2 × 3³ × 5"],1,"360 = 2×2×2×3×3×5 = 2³×3²×5."],
@@ -4427,6 +4494,7 @@ function startQuiz(){
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="frequency distribution") quizSource=dedicated||INLINE_FREQUENCY_DISTRIBUTION_QUIZ;
+  else if(norm(concept)==="hcf and lcm") quizSource=dedicated||INLINE_HCF_AND_LCM_QUIZ;
   else if(norm(concept)==="prime factorisation") quizSource=dedicated||INLINE_PRIME_FACTORISATION_QUIZ;
   else if(norm(concept)==="fundamental theorem of arithmetic") quizSource=dedicated||INLINE_FUNDAMENTAL_THEOREM_ARITHMETIC_QUIZ;
   else if(norm(concept)==="euclid division algorithm") quizSource=dedicated||INLINE_EUCLID_DIVISION_ALGORITHM_QUIZ;
@@ -4475,7 +4543,7 @@ window.addEventListener("error",function(e){
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

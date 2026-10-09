@@ -992,6 +992,18 @@ if(norm(concept)==="heights and distances") return `<div class="geometry-lesson 
 <div class="presets"><button type="button" class="preset hdPreset" data-angle="30" data-distance="20">30° • 20 m</button><button type="button" class="preset hdPreset" data-angle="45" data-distance="30">45° • 30 m</button><button type="button" class="preset hdPreset" data-angle="60" data-distance="15">60° • 15 m</button></div>
 <div class="formula hd-challenge"><b>Quick challenge</b><p style="margin:8px 0">A tower is observed at an angle of elevation of <b>45°</b> from <b>25 m</b> away. Estimate its height (ignore eye height).</p><label for="hdAnswer">Your answer (metres)</label> <input id="hdAnswer" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="Enter height" style="max-width:150px;padding:8px;border:1px solid #9bb59a;border-radius:8px"><button type="button" class="preset" id="hdCheckAnswer">Check answer</button><button type="button" class="preset" id="hdResetAnswer">Try again</button><p id="hdFeedback" role="status" aria-live="polite" style="margin:8px 0 0">Use height = distance × tan θ.</p></div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> use tangent when horizontal distance and vertical height are involved. Use sine or cosine when the line of sight (hypotenuse) is known.</p></div>`;
+if(norm(concept)==="trigonometric identities") return `
+<div class="geometry-lesson trig-identities-lab">
+<strong>Trigonometric Identities — Interactive Explorer</strong>
+<p>An identity remains true for every angle where its expressions are defined. Change θ to check the Pythagorean identity and see how tangent and secant are related.</p>
+<div class="formula">sin²θ + cos²θ = 1<br>1 + tan²θ = sec²θ<br>1 + cot²θ = cosec²θ</div>
+<div class="control"><div class="head"><label for="tiAngle">Choose angle θ</label><span class="val"><span id="tiAngleOut">30</span>°</span></div><input id="tiAngle" class="range" type="range" min="5" max="85" step="1" value="30"></div>
+<div class="props"><div class="prop"><span>sin²θ + cos²θ</span><strong id="tiPythagorean">1.0000</strong></div><div class="prop"><span>tan²θ + 1</span><strong id="tiTanLeft">1.3333</strong></div><div class="prop"><span>sec²θ</span><strong id="tiSecRight">1.3333</strong></div><div class="prop"><span>cot²θ + 1</span><strong id="tiCotLeft">4.0000</strong></div><div class="prop"><span>cosec²θ</span><strong id="tiCosecRight">4.0000</strong></div></div>
+<div class="checks" id="tiCheck" aria-live="polite">Both sides match (allowing for rounding), so the identities are verified for this angle.</div>
+<h3>How to derive the identities</h3>
+<ul><li>Start with sin²θ + cos²θ = 1.</li><li>Divide every term by cos²θ (where cos θ ≠ 0) to obtain 1 + tan²θ = sec²θ.</li><li>Divide every term by sin²θ (where sin θ ≠ 0) to obtain 1 + cot²θ = cosec²θ.</li></ul>
+<div class="formula"><b>Remember:</b> an identity is not just true for one example. It holds for every permitted value of θ.</div>
+</div>`;
 if(norm(concept)==="trigonometric ratios") return `
 <div class="geometry-lesson trig-ratios-simple"><strong>Trigonometric Ratios — Interactive Lab</strong><p>For a right triangle and angle θ: sine compares opposite to hypotenuse, cosine compares adjacent to hypotenuse, and tangent compares opposite to adjacent.</p>
 <div class="formula">sin θ = Opposite/Hypotenuse<br>cos θ = Adjacent/Hypotenuse<br>tan θ = Opposite/Adjacent</div>
@@ -5699,6 +5711,20 @@ function initStandardAnglesLab(){
  document.querySelectorAll(".saPreset").forEach(btn=>btn.addEventListener("click",()=>{angle.value=btn.dataset.index;update();}));
  update();
 }
+function initTrigonometricIdentitiesLab(){
+ if(norm(concept)!=="trigonometric identities")return;
+ const angle=document.getElementById("tiAngle");if(!angle)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>Number.isFinite(n)?n.toFixed(4):"Undefined";
+ const update=()=>{
+  const deg=Number(angle.value),rad=deg*Math.PI/180,s=Math.sin(rad),co=Math.cos(rad),t=Math.tan(rad),cot=1/t;
+  const pyth=s*s+co*co,tanLeft=t*t+1,secRight=1/(co*co),cotLeft=cot*cot+1,cosecRight=1/(s*s);
+  put("tiAngleOut",deg);put("tiPythagorean",fmt(pyth));put("tiTanLeft",fmt(tanLeft));put("tiSecRight",fmt(secRight));put("tiCotLeft",fmt(cotLeft));put("tiCosecRight",fmt(cosecRight));
+  const ok=Math.abs(pyth-1)<1e-10&&Math.abs(tanLeft-secRight)<1e-10&&Math.abs(cotLeft-cosecRight)<1e-10;
+  put("tiCheck",ok?"All three identities match at θ = "+deg+"° (allowing for rounding).":"Recheck the values; the two sides should match.");
+ };
+ angle.addEventListener("input",update);update();
+}
 function initHeightsDistancesLab(){
  if(norm(concept)!=="heights and distances")return;
  const $=id=>document.getElementById(id),angle=$("hdAngle"),distance=$("hdDistance");
@@ -5837,6 +5863,7 @@ safeInit("mastery quiz", startQuiz);
 safeInit("Applications of Similarity virtual skills", initApplicationsSimilarityLab);
 safeInit("Pythagoras virtual lab", initPythagorasVirtualLab);
 safeInit("Standard-angle interactive lab", initStandardAnglesLab);
+safeInit("Trigonometric identities interactive lab", initTrigonometricIdentitiesLab);
 safeInit("Heights and distances virtual lab", initHeightsDistancesLab);
 safeInit("math refresh", refreshMath);
 safeInit("MathJax", whenMathJaxReady);

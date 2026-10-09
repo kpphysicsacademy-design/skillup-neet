@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-common-difference-learn-quiz-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-pythagoras-lab-quiz-fix-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • 20261009-arithmetic-progression-quiz-v1</title>
+<title>SkillUp Mathematics • Concept Practice • 20261009-pythagoras-lab-quiz-fix-v1</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -464,7 +464,7 @@ const INLINE_PYTHAGORAS_THEOREM_QUIZ=[
 ["A 20 m cable runs from the top of a pole to a point 12 m from its base. How tall is the pole?",["8 m","12 m","16 m","24 m"],2,"h² = 20² − 12² = 256, so h = 16 m."],
 ["What is the square of a hypotenuse of length 13?",["26","39","144","169"],3,"13² = 169."],
 ["If legs are 6 and 8, what is the hypotenuse?",["9","10","12","14"],1,"c² = 36 + 64 = 100, so c = 10."],
-["A right triangle has legs x and 7 and hypotenuse 25. Find x.",["18","24","32","√576 = 24"],1,"x² = 25² − 7² = 576, so x = 24."],
+["A right triangle has legs x and 7 and hypotenuse 25. Find x.",["18","24","20","32"],1,"x² = 25² − 7² = 576, so x = 24."],
 ["Which statement is false?",["The hypotenuse is opposite the right angle","The hypotenuse is the longest side","Pythagoras applies directly to every triangle","The theorem relates all three side lengths of a right triangle"],2,"It applies directly only to right triangles; the converse can test whether a triangle is right-angled."],
 ["A right triangle has legs 20 and 21. Find the hypotenuse.",["28","29","30","31"],1,"c² = 400 + 441 = 841, so c = 29."]
 ];
@@ -1000,20 +1000,27 @@ put("cdPattern",d>0?"Each term increases by "+d+".":d<0?"Each term decreases by 
 function lessonHtml(){
 if(norm(concept)==="pythagoras theorem") return `
 <div class="terms-lesson pythagoras-virtual-lesson">
-<strong>Pythagoras Theorem — Virtual Concept Lab</strong>
-<p>For a right-angled triangle, the square of the hypotenuse equals the sum of the squares of the other two sides.</p>
+<strong>Pythagoras Theorem — Interactive Virtual Lab</strong>
+<p>Explore how the two perpendicular legs determine the hypotenuse. The hypotenuse is always opposite the 90° angle.</p>
 <div class="formula">a² + b² = c²</div>
-<div class="concept-image" role="img" aria-label="Right triangle with legs a and b and hypotenuse c">
-<svg viewBox="0 0 320 205" width="100%" class="pc-responsive-svg" xmlns="http://www.w3.org/2000/svg">
-<path d="M45 170 L45 45 L255 170 Z" fill="#e4f3e8" stroke="#256d45" stroke-width="3"/>
-<path d="M45 151 L64 151 L64 170" fill="none" stroke="#256d45" stroke-width="2"/>
-<text x="32" y="110" font-size="13" fill="currentColor">a</text><text x="145" y="190" font-size="13" fill="currentColor">b</text><text x="164" y="96" font-size="13" fill="currentColor">c</text><text x="76" y="69" font-size="11" fill="#256d45">90°</text>
+<div class="concept-image" role="img" aria-label="Interactive right triangle with adjustable legs a and b and hypotenuse c">
+<svg id="pythTriangle" viewBox="0 0 320 205" width="100%" class="pc-responsive-svg" xmlns="http://www.w3.org/2000/svg">
+<path id="pythTriFill" d="M48 166 L48 48 L250 166 Z" fill="#e4f3e8" stroke="#256d45" stroke-width="3"/>
+<path id="pythRightMark" d="M48 148 L66 148 L66 166" fill="none" stroke="#256d45" stroke-width="2"/>
+<text id="pythSvgA" x="29" y="112" font-size="13" font-weight="800" fill="currentColor">a = 3</text>
+<text id="pythSvgB" x="143" y="188" font-size="13" font-weight="800" fill="currentColor">b = 4</text>
+<text id="pythSvgC" x="168" y="95" font-size="13" font-weight="800" fill="currentColor">c = 5</text>
+<text x="75" y="67" font-size="11" font-weight="800" fill="#256d45">90°</text>
 </svg></div>
-<div class="checks"><b>Explore the relationship</b><br>Change the two perpendicular sides below. The lab calculates the hypotenuse and checks the squared-length relationship.</div>
-<div class="checks"><label for="pythA">Leg a: <b id="pythALabel">3</b></label><input id="pythA" type="range" min="1" max="20" step="1" value="3" style="width:100%"><label for="pythB">Leg b: <b id="pythBLabel">4</b></label><input id="pythB" type="range" min="1" max="20" step="1" value="4" style="width:100%"><div class="formula" id="pythResult">c = √(3² + 4²) = 5</div><p id="pythCheck">9 + 16 = 25, so the relationship holds.</p></div>
-<div class="checks"><b>Worked example</b><br>When a = 5 cm and b = 12 cm, c² = 25 + 144 = 169, so c = 13 cm.</div>
-<div class="checks"><b>Converse theorem</b><br>If the square of the longest side equals the sum of the squares of the other two sides, the triangle is right-angled.</div>
-<div class="checks"><b>Common mistakes</b><br>Use the side opposite the 90° angle as c. To find a leg, subtract the square of the known leg from c² before taking the square root.</div>
+<div class="checks"><b>1. Change the legs</b><br>Move either slider or choose a preset. Watch the side labels and calculations update.</div>
+<div class="checks"><label for="pythA">Leg a: <b id="pythALabel">3</b> units</label><input id="pythA" type="range" min="1" max="20" step="1" value="3" style="width:100%;accent-color:#58cc02"><label for="pythB">Leg b: <b id="pythBLabel">4</b> units</label><input id="pythB" type="range" min="1" max="20" step="1" value="4" style="width:100%;accent-color:#58cc02">
+<div class="presets"><button type="button" class="preset pythPreset" data-a="3" data-b="4">3–4–5</button><button type="button" class="preset pythPreset" data-a="5" data-b="12">5–12–13</button><button type="button" class="preset pythPreset" data-a="8" data-b="15">8–15–17</button><button type="button" class="preset pythPreset" data-a="6" data-b="6">Equal legs</button></div>
+<div class="formula" id="pythResult" aria-live="polite">c = √(3² + 4²) = 5 units</div>
+<div class="props"><div class="prop"><span>Square of leg a</span><strong id="pythASquare">3² = 9</strong></div><div class="prop"><span>Square of leg b</span><strong id="pythBSquare">4² = 16</strong></div><div class="prop"><span>Sum of squares</span><strong id="pythSumSquare">9 + 16 = 25</strong></div><div class="prop"><span>Hypotenuse</span><strong id="pythHypSquare">c² = 25</strong></div></div>
+<p id="pythCheck" aria-live="polite">9 + 16 = 25, so c² = 25. The relationship holds.</p></div>
+<div class="checks"><b>2. Find a missing leg</b><br>If c and a are known, rearrange the theorem: b = √(c² − a²). For example, c = 13 and a = 5 gives b = √(169 − 25) = 12.</div>
+<div class="checks"><b>3. Check the converse</b><br>For side lengths 5, 12 and 13, 5² + 12² = 25 + 144 = 169 = 13², so the triangle is right-angled.</div>
+<div class="checks"><b>Remember</b><br>Use the theorem only for right triangles. Do not add the side lengths; add the squares of the two legs, then take the square root.</div>
 </div>`;
 if(norm(concept)==="basic proportionality theorem") return `
 <div class="terms-lesson">
@@ -5515,15 +5522,31 @@ function initPythagorasVirtualLab(){
  if(norm(concept)!=="pythagoras theorem") return;
  const aEl=document.getElementById("pythA"), bEl=document.getElementById("pythB");
  if(!aEl||!bEl) return;
+ const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+ const fmt=n=>Number.isInteger(n)?String(n):String(Math.round(n*100)/100);
  const update=()=>{
-  const a=Number(aEl.value), b=Number(bEl.value), sum=a*a+b*b, hyp=Math.sqrt(sum);
-  const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2);
-  const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  const a=Number(aEl.value),b=Number(bEl.value),a2=a*a,b2=b*b,sum=a2+b2,hyp=Math.sqrt(sum);
   put("pythALabel",a);put("pythBLabel",b);
-  put("pythResult","c = √("+a+"² + "+b+"²) = "+fmt(hyp));
-  put("pythCheck",a+"² + "+b+"² = "+sum+"; c² = "+fmt(hyp*hyp)+". The relationship holds.");
+  put("pythResult","c = √("+a+"² + "+b+"²) = "+fmt(hyp)+" units");
+  put("pythASquare",a+"² = "+a2);put("pythBSquare",b+"² = "+b2);
+  put("pythSumSquare",a2+" + "+b2+" = "+sum);put("pythHypSquare","c² = "+sum);
+  put("pythCheck",a2+" + "+b2+" = "+sum+" and c² = "+fmt(hyp*hyp)+". The two sides agree"+(Number.isInteger(hyp)?" exactly.":" (to rounding)."));
+  put("pythSvgA","a = "+a);put("pythSvgB","b = "+b);put("pythSvgC","c = "+fmt(hyp));
+  const tri=document.getElementById("pythTriFill"),mark=document.getElementById("pythRightMark");
+  const svgA=document.getElementById("pythSvgA"),svgB=document.getElementById("pythSvgB"),svgC=document.getElementById("pythSvgC");
+  if(tri){
+   const scale=180/Math.max(a,b),height=Math.max(45,Math.min(120,a*scale)),width=Math.max(60,Math.min(205,b*scale));
+   const x=48,y=166-height,right=48+width;
+   tri.setAttribute("d","M48 166 L48 "+y+" L"+right+" 166 Z");
+   if(mark)mark.setAttribute("d","M48 "+(166-Math.min(18,height))+" L"+(48+Math.min(18,width))+" "+(166-Math.min(18,height))+" L"+(48+Math.min(18,width))+" 166");
+   if(svgA){svgA.setAttribute("x","8");svgA.setAttribute("y",String(y+height/2));}
+   if(svgB){svgB.setAttribute("x",String(48+width/2-12));svgB.setAttribute("y","190");}
+   if(svgC){svgC.setAttribute("x",String(Math.min(200,48+width*.58));svgC.setAttribute("y",String(Math.max(35,y+height*.52)));}
+  }
  };
- aEl.addEventListener("input",update);bEl.addEventListener("input",update);update();
+ aEl.addEventListener("input",update);bEl.addEventListener("input",update);
+ document.querySelectorAll(".pythPreset").forEach(btn=>btn.addEventListener("click",()=>{aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;update();}));
+ update();
 }
 safeInit("mastery quiz", startQuiz);
 safeInit("Pythagoras virtual lab", initPythagorasVirtualLab);

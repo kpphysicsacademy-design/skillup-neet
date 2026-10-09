@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-visual-learn-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-common-difference-learn-quiz-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • 20261009-arithmetic-progression-quiz-v1</title>
@@ -822,7 +822,55 @@ put("ntWorking","a"+n+" = "+a+" + ("+n+" − 1) × "+d+" = "+answer);
 }
 [aEl,dEl,nEl].forEach(el=>el.addEventListener("input",update));update();
 }
+function commonDifferenceLessonHtml(){
+return `
+<div class="lesson-block">
+<h3>Common Difference in an Arithmetic Progression</h3>
+<p>The <b>common difference (d)</b> is the fixed amount added to or subtracted from one term to get the next term.</p>
+<div class="formula">d = next term − previous term</div>
+<div class="concept-image" role="img" aria-label="Visual arithmetic progression showing the same difference between consecutive terms">
+<svg viewBox="0 0 640 230" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="230" rx="18" fill="#f4f9ff"/>
+<text x="320" y="29" text-anchor="middle" font-size="18" font-weight="800" fill="#1e3a5f">The gap stays the same</text>
+<path d="M75 105 H565" stroke="#9bb0c8" stroke-width="4" stroke-linecap="round"/>
+<g fill="#dbeafe" stroke="#2563eb" stroke-width="2"><circle cx="80" cy="105" r="28"/><circle cx="200" cy="105" r="28"/><circle cx="320" cy="105" r="28"/><circle cx="440" cy="105" r="28"/><circle cx="560" cy="105" r="28"/></g>
+<g fill="#1d4ed8" font-size="20" font-weight="800" text-anchor="middle"><text x="80" y="112">2</text><text x="200" y="112">5</text><text x="320" y="112">8</text><text x="440" y="112">11</text><text x="560" y="112">14</text></g>
+<g fill="#166534" font-size="15" font-weight="800" text-anchor="middle"><text x="140" y="70">+3</text><text x="260" y="70">+3</text><text x="380" y="70">+3</text><text x="500" y="70">+3</text></g>
+<g fill="#475569" font-size="13" text-anchor="middle"><text x="80" y="151">Term 1</text><text x="200" y="151">Term 2</text><text x="320" y="151">Term 3</text><text x="440" y="151">Term 4</text><text x="560" y="151">Term 5</text></g>
+<rect x="105" y="177" width="430" height="32" rx="15" fill="#d1fae5"/><text x="320" y="198" text-anchor="middle" font-size="15" font-weight="800" fill="#065f46">5 − 2 = 8 − 5 = 11 − 8 = 3</text>
+</svg></div>
+<h3>Worked example</h3>
+<p>For 18, 13, 8, 3, … subtract consecutive terms: 13 − 18 = −5 and 8 − 13 = −5. So <b>d = −5</b>; the sequence decreases by 5 each step.</p>
+<div class="formula">d = a₂ − a₁</div>
+<h3>Explore the difference</h3>
+<p>Move the sliders and watch how the common difference changes the sequence.</p>
+<div class="interactive-panel">
+<div class="control-row"><label for="cdFirst">First term (a)</label><input id="cdFirst" type="range" min="-10" max="20" value="2"><b id="cdFirstVal">2</b></div>
+<div class="control-row"><label for="cdDiff">Common difference (d)</label><input id="cdDiff" type="range" min="-6" max="8" value="3"><b id="cdDiffVal">3</b></div>
+<div class="formula"><b>Sequence:</b> <span id="cdSequence">2, 5, 8, 11, 14, …</span></div>
+<div class="formula"><b>Check:</b> <span id="cdCheck">5 − 2 = 3</span></div>
+<div class="formula"><b>Pattern:</b> <span id="cdPattern">Each term increases by 3.</span></div>
+</div>
+<h3>Remember</h3>
+<ul><li>Positive d: terms increase.</li><li>Negative d: terms decrease.</li><li>Zero d: all terms are equal.</li><li>Check more than one pair to confirm the difference is constant.</li></ul>
+</div>`;
+}
+function startCommonDifferenceDemo(){
+if(norm(concept)!=="common difference")return;
+const aEl=document.getElementById("cdFirst"),dEl=document.getElementById("cdDiff");
+if(!aEl||!dEl)return;
+const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+function update(){
+const a=Number(aEl.value),d=Number(dEl.value);
+put("cdFirstVal",a);put("cdDiffVal",d);
+put("cdSequence",Array.from({length:5},(_,i)=>a+i*d).join(", ")+" …");
+put("cdCheck",(a+d)+" − "+a+" = "+d);
+put("cdPattern",d>0?"Each term increases by "+d+".":d<0?"Each term decreases by "+Math.abs(d)+".":"Every term stays equal to "+a+".");
+}
+[aEl,dEl].forEach(el=>el.addEventListener("input",update));update();
+}
 function lessonHtml(){
+if(norm(concept)==="common difference") return commonDifferenceLessonHtml();
 if(norm(concept)==="nth term") return nthTermLessonHtml();
 if(norm(concept)==="arithmetic progression") return arithmeticProgressionLessonHtml();
 if(norm(concept)==="lines and angles") return linesAnglesLessonHtml();

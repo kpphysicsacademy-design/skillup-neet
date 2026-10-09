@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-data-representation-visual-explorer-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-mean-visual-explorer-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-distance-intuition-v1</title>
@@ -660,6 +660,27 @@ if(norm(concept)==="area of triangle") return `
 <div class="checks" id="taWork"><b>Working:</b> A = ½ × 8 × 6 = 24 cm².</div>
 <div class="presets"><button class="preset taPreset" data-b="8" data-h="6">Base 8, height 6</button><button class="preset taPreset" data-b="10" data-h="4">Base 10, height 4</button><button class="preset taPreset" data-b="12" data-h="8">Base 12, height 8</button><button class="preset taPreset" data-b="5" data-h="5">Base 5, height 5</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> A = ½bh. Use the perpendicular height, not a sloping side. Area is written in square units.</p>
+</div>`;
+if(norm(concept)==="mean") return `
+<div class="geometry-lesson mean-interactive-lesson">
+<strong>Explore the arithmetic mean: share the total equally across all observations.</strong>
+<div class="visual-banner">
+ <div class="value-box"><small>SUM</small><strong id="meanSum">30</strong><span class="pill">add all values</span></div><div class="eq">÷</div>
+ <div class="value-box"><small>COUNT</small><strong id="meanCount">5</strong><span class="pill">observations</span></div><div class="eq">=</div>
+ <div class="value-box"><small>MEAN</small><strong id="meanResult">6</strong><span class="pill">sum ÷ count</span></div>
+</div>
+<div class="concept-image"><svg id="meanChart" viewBox="0 0 640 260" width="100%" height="auto" role="img" aria-label="Five data values displayed as bars"><rect width="640" height="260" rx="18" fill="#f8fcf6"/><g stroke="#d9e8d4"><line x1="45" y1="55" x2="600" y2="55"/><line x1="45" y1="100" x2="600" y2="100"/><line x1="45" y1="145" x2="600" y2="145"/><line x1="45" y1="190" x2="600" y2="190"/></g><line x1="45" y1="205" x2="600" y2="205" stroke="#173f27" stroke-width="2"/><g id="meanBars"></g><line id="meanAverageLine" x1="45" y1="115" x2="600" y2="115" stroke="#e879f9" stroke-width="3" stroke-dasharray="7 5"/><text id="meanAverageLabel" x="590" y="105" text-anchor="end" fill="#86198f" font-size="13" font-weight="800">Mean = 6</text></svg></div>
+<div class="props"><div class="prop"><span>Value 1</span><strong id="meanV0">2</strong></div><div class="prop"><span>Value 2</span><strong id="meanV1">4</strong></div><div class="prop"><span>Value 3</span><strong id="meanV2">6</strong></div><div class="prop"><span>Value 4</span><strong id="meanV3">8</strong></div><div class="prop"><span>Value 5</span><strong id="meanV4">10</strong></div></div>
+<div class="props" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px">
+<label class="prop">Value 1 <input id="meanS0" type="range" min="0" max="20" value="2"><strong id="meanSV0">2</strong></label>
+<label class="prop">Value 2 <input id="meanS1" type="range" min="0" max="20" value="4"><strong id="meanSV1">4</strong></label>
+<label class="prop">Value 3 <input id="meanS2" type="range" min="0" max="20" value="6"><strong id="meanSV2">6</strong></label>
+<label class="prop">Value 4 <input id="meanS3" type="range" min="0" max="20" value="8"><strong id="meanSV3">8</strong></label>
+<label class="prop">Value 5 <input id="meanS4" type="range" min="0" max="20" value="10"><strong id="meanSV4">10</strong></label>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="meanPreset" data-values="2,4,6,8,10">Evenly spaced</button><button type="button" class="meanPreset" data-values="5,5,5,5,5">All equal</button><button type="button" class="meanPreset" data-values="0,0,10,10,10">Try a change</button></div>
+<p id="meanWork" style="margin:12px 0 0;color:#66736b"><b>Calculation:</b> (2 + 4 + 6 + 8 + 10) ÷ 5 = 6.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> Mean = sum of all observations ÷ number of observations. The mean need not be one of the original values.</p>
 </div>`;
 if(norm(concept)==="data representation") return `
 <div class="geometry-lesson data-representation-interactive-lesson">
@@ -3233,6 +3254,22 @@ function startTriangleAreaDemo(){
  document.querySelectorAll(".taPreset").forEach(btn=>btn.addEventListener("click",()=>{bS.value=btn.dataset.b;hS.value=btn.dataset.h;update();}));
  update();
 }
+function startMeanDemo(){
+ if(norm(concept)!=="mean")return;
+ const sliders=Array.from({length:5},(_,i)=>document.getElementById("meanS"+i));if(sliders.some(x=>!x))return;
+ const colors=["#58cc02","#60a5fa","#f59e0b","#a78bfa","#fb7185"],set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const vals=sliders.map(x=>Math.max(0,Number(x.value)||0)),sum=vals.reduce((a,b)=>a+b,0),avg=sum/vals.length,max=Math.max(20,...vals),scale=130/max;
+  set("meanSum",sum);set("meanCount",vals.length);set("meanResult",Number(avg.toFixed(2)));
+  vals.forEach((v,i)=>{set("meanV"+i,v);set("meanSV"+i,v);const g=document.getElementById("meanBars");if(!g)return;});
+  const g=document.getElementById("meanBars");if(g)g.innerHTML=vals.map((v,i)=>{const h=v*scale,x=75+i*108,y=205-h;return '<rect x="'+x+'" y="'+y+'" width="54" height="'+h+'" rx="5" fill="'+colors[i]+'"/><text x="'+(x+27)+'" y="'+Math.max(18,y-7)+'" text-anchor="middle" fill="#173f27" font-size="14" font-weight="800">'+v+'</text><text x="'+(x+27)+'" y="230" text-anchor="middle" fill="#173f27" font-size="12">Value '+(i+1)+'</text>';}).join("");
+  const lineY=205-avg*scale,line=document.getElementById("meanAverageLine");if(line){line.setAttribute("y1",lineY);line.setAttribute("y2",lineY);}set("meanAverageLabel","Mean = "+Number(avg.toFixed(2)));const label=document.getElementById("meanAverageLabel");if(label)label.setAttribute("y",Math.max(16,lineY-7));
+  const work=document.getElementById("meanWork");if(work)work.innerHTML="<b>Calculation:</b> ("+vals.join(" + ")+") ÷ "+vals.length+" = "+Number(avg.toFixed(2))+".";
+ }
+ sliders.forEach(x=>x.addEventListener("input",update));
+ document.querySelectorAll(".meanPreset").forEach(btn=>btn.addEventListener("click",()=>{btn.dataset.values.split(",").forEach((v,i)=>sliders[i].value=v);update();}));
+ update();
+}
 function startDataRepresentationDemo(){
  if(norm(concept)!=="data representation")return;
  const ids=["drASlider","drBSlider","drCSlider","drDSlider"],els=ids.map(id=>document.getElementById(id));if(els.some(x=>!x))return;
@@ -3671,6 +3708,38 @@ const INLINE_AREA_OF_TRIANGLE_QUIZ=[
 ["A triangle's base is 13 cm and height is 12 cm. Area =",["156 cm²","78 cm²","25 cm²","39 cm²"],1,"A = ½ × 13 × 12 = 78 cm²."],
 ["A triangle has base 10 cm and height 0 cm. The calculated area is:",["0 cm²","5 cm²","10 cm²","Cannot calculate"],0,"A = ½ × 10 × 0 = 0; a non-degenerate triangle has positive height."]
 ];
+const INLINE_MEAN_QUIZ=[
+["What is the arithmetic mean of a data set?",["The largest observation","The sum of observations divided by their number","The middle observation only","The difference between largest and smallest"],1,"Mean = sum of observations ÷ number of observations."],
+["Find the mean of 2, 4 and 6.",["3","4","5","6"],1,"(2 + 4 + 6) ÷ 3 = 4."],
+["What is the mean of 5, 5, 5 and 5?",["0","4","5","20"],2,"The sum is 20 and there are 4 observations, so the mean is 5."],
+["Find the mean of 3, 7 and 8.",["5","6","7","18"],1,"(3 + 7 + 8) ÷ 3 = 6."],
+["The observations are 4, 6, 8. Their mean is:",["5","6","7","8"],1,"(4 + 6 + 8) ÷ 3 = 6."],
+["The sum of 6 observations is 42. Find the mean.",["6","7","8","36"],1,"Mean = 42 ÷ 6 = 7."],
+["The mean of 5 numbers is 8. Their total is:",["13","35","40","45"],2,"Total = mean × number of observations = 8 × 5 = 40."],
+["Find the mean of 10, 12, 14 and 16.",["12","13","14","15"],1,"The sum is 52; 52 ÷ 4 = 13."],
+["If every observation increases by 3, the mean:",["Decreases by 3","Increases by 3","Does not change","Doubles"],1,"Adding the same amount to every observation adds that amount to the mean."],
+["If every observation is doubled, the mean:",["Is doubled","Is halved","Stays unchanged","Increases by 2 only"],0,"Multiplying all observations by 2 also multiplies their mean by 2."],
+["The mean of 4, 8 and x is 6. Find x.",["4","5","6","8"],0,"(4 + 8 + x) ÷ 3 = 6, so 12 + x = 18 and x = 6."],
+["Find the mean of 1, 2, 3, 4 and 5.",["2","3","4","5"],1,"The total is 15 and 15 ÷ 5 = 3."],
+["A student's marks are 6, 8, 10 and 12. Mean marks are:",["8","9","10","36"],1,"(6 + 8 + 10 + 12) ÷ 4 = 9."],
+["The mean of 7, 9 and 11 is:",["8","9","10","27"],1,"(7 + 9 + 11) ÷ 3 = 9."],
+["There are 8 observations with mean 12. Their sum is:",["20","48","96","108"],2,"Sum = 8 × 12 = 96."],
+["Which is the correct formula for the arithmetic mean?",["Number of values ÷ sum","Sum ÷ number of values","Largest − smallest","Sum × number of values"],1,"The arithmetic mean is total divided by count."],
+["The mean of 2, 4, 6 and 8 is:",["4","5","6","20"],1,"The total is 20; 20 ÷ 4 = 5."],
+["The mean of 9, 11 and 13 is:",["10","11","12","33"],1,"(9 + 11 + 13) ÷ 3 = 11."],
+["Five numbers have mean 10. Four of them sum to 36. The fifth is:",["10","12","14","16"],2,"Total must be 5 × 10 = 50; fifth number = 50 − 36 = 14."],
+["The mean of 3, 5, 7 and 9 is:",["5","6","7","8"],1,"The sum is 24; 24 ÷ 4 = 6."],
+["A data set has values 0, 4, 8 and 12. Its mean is:",["4","5","6","8"],2,"The total is 24 and there are 4 values, so mean = 6."],
+["Which statement about the mean is always true?",["It is always the largest value","It equals the total divided by the count","It must be an original observation","It is always a whole number"],1,"The mean is defined as the sum divided by the number of observations."],
+["The mean of 4 numbers is 7. If a fifth number 12 is added, the new mean is:",["7","8","9","12"],1,"Old sum = 4 × 7 = 28; new mean = (28 + 12) ÷ 5 = 8."],
+["The mean of 10, 20 and 30 is:",["10","15","20","30"],2,"60 ÷ 3 = 20."],
+["If one value in a data set increases by 10 and all others stay the same, the mean of 5 values increases by:",["2","5","10","50"],0,"The sum rises by 10, so the mean rises by 10 ÷ 5 = 2."],
+["The mean of 6 and 14 is:",["8","10","12","20"],1,"(6 + 14) ÷ 2 = 10."],
+["A team scores 12, 15, 18, 15 points in four games. Mean score is:",["14","15","16","60"],1,"The total is 60; 60 ÷ 4 = 15."],
+["The sum of 7 observations is 63. Their mean is:",["7","8","9","56"],2,"63 ÷ 7 = 9."],
+["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
+["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
+];
 const INLINE_DATA_REPRESENTATION_QUIZ=[
 ["What is data representation?",["Deleting collected data","Presenting data in an organised visual or tabular form","Changing every value to a fraction","Finding only the largest value"],1,"Tables, charts and graphs help organise and communicate data."],
 ["Which representation is usually suitable for comparing values in different categories?",["Bar graph","Paragraph only","Number line only","Compass"],0,"Bar graphs make category comparisons easy."],
@@ -3732,6 +3801,7 @@ function startQuiz(){
   else if(norm(concept)==="triangles and congruence") quizSource=dedicated||INLINE_TRIANGLES_AND_CONGRUENCE_QUIZ;
   else if(norm(concept)==="graph of a linear equation") quizSource=dedicated||INLINE_GRAPH_LINEAR_EQUATION_QUIZ;
   else if(norm(concept)==="area of triangle") quizSource=dedicated||INLINE_AREA_OF_TRIANGLE_QUIZ;
+  else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
   else if(norm(concept)==="volumes") quizSource=dedicated||INLINE_VOLUMES_QUIZ;
   else if(norm(concept)==="surface areas") quizSource=dedicated||INLINE_SURFACE_AREAS_QUIZ;
@@ -3772,7 +3842,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+try{renderConceptPage();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-ap-route-refresh-v2">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-ap-learn-update-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • 20261009-arithmetic-progression-quiz-v1</title>
@@ -704,7 +704,60 @@ function linesAnglesLessonHtml(){return `
 <p><b>Key idea:</b> complementary angles total 90°, a linear pair totals 180°, and vertically opposite angles are equal.</p>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> identify the relationship first, then use its rule.</p>
 </div>`;}
+function arithmeticProgressionLessonHtml(){
+return `
+<div class="lesson-block">
+<h3>1. What is an Arithmetic Progression (AP)?</h3>
+<p>An arithmetic progression is a sequence in which the difference between consecutive terms is constant. This fixed difference is the <b>common difference</b>, <i>d</i>.</p>
+<div class="formula">a, a+d, a+2d, a+3d, …</div>
+<p><b>Example:</b> 4, 7, 10, 13, … has first term <b>a = 4</b> and common difference <b>d = 3</b>.</p>
+<h3>2. Important formulas</h3>
+<ul>
+<li><b>Common difference:</b> d = a₂ − a₁</li>
+<li><b>nth term:</b> aₙ = a + (n − 1)d</li>
+<li><b>Sum of first n terms:</b> Sₙ = n/2 [2a + (n − 1)d]</li>
+<li>When the last term l is known: Sₙ = n/2 (a + l)</li>
+</ul>
+<h3>3. Explore an AP</h3>
+<p>Change the first term, common difference, and term number. The sequence and nth term update automatically.</p>
+<div class="interactive-panel">
+<div class="control-row"><label for="apFirst">First term (a)</label><input id="apFirst" type="range" min="-10" max="20" value="4"><b id="apFirstVal">4</b></div>
+<div class="control-row"><label for="apDiff">Common difference (d)</label><input id="apDiff" type="range" min="-6" max="8" value="3"><b id="apDiffVal">3</b></div>
+<div class="control-row"><label for="apTerm">Term number (n)</label><input id="apTerm" type="range" min="1" max="12" value="5"><b id="apTermVal">5</b></div>
+<div class="formula"><b>Sequence:</b> <span id="apSequence">4, 7, 10, 13, 16, …</span></div>
+<div class="formula"><b>nth term:</b> <span id="apNth">a₅ = 16</span></div>
+<div class="formula"><b>Substitution:</b> <span id="apWork">a₅ = 4 + (5 − 1) × 3 = 16</span></div>
+</div>
+<h3>4. Worked example</h3>
+<p>Find the 10th term of 2, 5, 8, 11, …</p>
+<p>Here a = 2, d = 3, n = 10.</p>
+<div class="formula">a₁₀ = 2 + (10 − 1) × 3 = 2 + 27 = 29</div>
+<h3>5. Quick checks</h3>
+<ul>
+<li>If d is positive, the terms increase.</li>
+<li>If d is negative, the terms decrease.</li>
+<li>If d = 0, every term is the same.</li>
+<li>Always use n − 1 in the nth-term formula, because the first term is a.</li>
+</ul>
+</div>`;
+}
+function startArithmeticProgressionDemo(){
+if(norm(concept)!=="arithmetic progression")return;
+const aEl=document.getElementById("apFirst"),dEl=document.getElementById("apDiff"),nEl=document.getElementById("apTerm");
+if(!aEl||!dEl||!nEl)return;
+const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+function update(){
+const a=Number(aEl.value),d=Number(dEl.value),n=Number(nEl.value);
+put("apFirstVal",a);put("apDiffVal",d);put("apTermVal",n);
+put("apSequence",Array.from({length:6},(_,i)=>a+i*d).join(", ")+" …");
+const nth=a+(n-1)*d;
+put("apNth","a"+(["₁","₂","₃","₄","₅","₆","₇","₈","₉","₁₀","₁₁","₁₂"][n-1])+" = "+nth);
+put("apWork","aₙ = "+a+" + ("+n+" − 1) × "+d+" = "+nth);
+}
+[aEl,dEl,nEl].forEach(el=>el.addEventListener("input",update));update();
+}
 function lessonHtml(){
+if(norm(concept)==="arithmetic progression") return arithmeticProgressionLessonHtml();
 if(norm(concept)==="lines and angles") return linesAnglesLessonHtml();
 if(norm(concept)==="basic geometric ideas") return basicGeometricIdeasLessonHtml();
 if(norm(concept)==="linear equations in one variable") return linearEquationsLessonHtml();
@@ -5134,7 +5187,7 @@ function safeInit(label, fn) {
  }
 }
 safeInit("concept lesson", renderConceptPage);
-[startSequenceDemo,startQuadraticFormulaDemo,startModeDemo,startMedianDemo,startMeanDemo,startDataRepresentationDemo,startTriangleAreaDemo,startHeronsVisualExplorer,startRationalDemo,startHistogramsDemo,startDataCollectionDemo,startFrequencyDistributionDemo,startFrequencyTablesDemo,startBarGraphsDemo,startPieChartsDemo,startVolumeDemo,startAreaPolygonsDemo,startSurfaceAreaDemo,startCircleAreaDemo,startPerimeterDemo,startPowersDemo,startSquaresDemo,startCubesDemo,startVariablesDemo,startAlgebraDemo,startFactorisationDemo,startLinearEquationsDemo,startAlgebraIdentitiesDemo,startBasicGeometricIdeasDemo,startPolygonsDemo,startGeometricConstructionsDemo,startQuadrilateralsDemo,startLinesAnglesDemo,startTrianglesDemo,startParallelTransversalsDemo,startTermsDemo,startLikeUnlikeDemo,startEquivalentDemo,startComparingRationalDemo,startRationalOperationsDemo,startPropertiesDemo,startIrrationalityProofsDemo,startIrrationalNumbersDemo,startGraphLinearEquationDemo,startRealNumbersDemo,startZerosOfPolynomialDemo,startRemainderTheoremBasicsDemo,startFactorTheoremBasicsDemo,startEuclidGeometryDemo,startTrianglesCongruenceDemo,startCirclesDemo,startCartesianPlaneDemo,startParallelogramDemo,startDistanceIntuitionDemo,startPlottingPointsDemo,startCoordinatesOfPointDemo,startCoordinateRepresentationDemo,startPairWordProblemsDemo,startConsistencyOfEquationsDemo,startEliminationMethodDemo,startSubstitutionMethodDemo,startLinearEquationsInTwoVariablesDemo,startFactorisationOfPolynomialsDemo,startDegreeOfPolynomialDemo,startPolynomialBasicsDemo,startRationalisationBasicsDemo,startDecimalExpansionsDemo,startLawsOfExponentsDemo,startProbabilityBasicsDemo,startExperimentalProbabilityDemo,startHcfLcmDemo,startPrimeFactorisationDemo,startFundamentalTheoremArithmeticDemo,startEuclidDivisionAlgorithmDemo,startSimpleEventsDemo,startTheoreticalProbabilityDemo].forEach(function(fn) { safeInit(fn.name, fn); });
+[startSequenceDemo,startArithmeticProgressionDemo,startQuadraticFormulaDemo,startModeDemo,startMedianDemo,startMeanDemo,startDataRepresentationDemo,startTriangleAreaDemo,startHeronsVisualExplorer,startRationalDemo,startHistogramsDemo,startDataCollectionDemo,startFrequencyDistributionDemo,startFrequencyTablesDemo,startBarGraphsDemo,startPieChartsDemo,startVolumeDemo,startAreaPolygonsDemo,startSurfaceAreaDemo,startCircleAreaDemo,startPerimeterDemo,startPowersDemo,startSquaresDemo,startCubesDemo,startVariablesDemo,startAlgebraDemo,startFactorisationDemo,startLinearEquationsDemo,startAlgebraIdentitiesDemo,startBasicGeometricIdeasDemo,startPolygonsDemo,startGeometricConstructionsDemo,startQuadrilateralsDemo,startLinesAnglesDemo,startTrianglesDemo,startParallelTransversalsDemo,startTermsDemo,startLikeUnlikeDemo,startEquivalentDemo,startComparingRationalDemo,startRationalOperationsDemo,startPropertiesDemo,startIrrationalityProofsDemo,startIrrationalNumbersDemo,startGraphLinearEquationDemo,startRealNumbersDemo,startZerosOfPolynomialDemo,startRemainderTheoremBasicsDemo,startFactorTheoremBasicsDemo,startEuclidGeometryDemo,startTrianglesCongruenceDemo,startCirclesDemo,startCartesianPlaneDemo,startParallelogramDemo,startDistanceIntuitionDemo,startPlottingPointsDemo,startCoordinatesOfPointDemo,startCoordinateRepresentationDemo,startPairWordProblemsDemo,startConsistencyOfEquationsDemo,startEliminationMethodDemo,startSubstitutionMethodDemo,startLinearEquationsInTwoVariablesDemo,startFactorisationOfPolynomialsDemo,startDegreeOfPolynomialDemo,startPolynomialBasicsDemo,startRationalisationBasicsDemo,startDecimalExpansionsDemo,startLawsOfExponentsDemo,startProbabilityBasicsDemo,startExperimentalProbabilityDemo,startHcfLcmDemo,startPrimeFactorisationDemo,startFundamentalTheoremArithmeticDemo,startEuclidDivisionAlgorithmDemo,startSimpleEventsDemo,startTheoreticalProbabilityDemo].forEach(function(fn) { safeInit(fn.name, fn); });
 safeInit("mastery quiz", startQuiz);
 safeInit("math refresh", refreshMath);
 safeInit("MathJax", whenMathJaxReady);

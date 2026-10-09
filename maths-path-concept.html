@@ -1396,6 +1396,21 @@ if(norm(concept)==="coordinate representation") return `
 <div class="presets"><button class="preset crPreset" data-x="2" data-y="3">(2, 3)</button><button class="preset crPreset" data-x="-4" data-y="2">(−4, 2)</button><button class="preset crPreset" data-x="-3" data-y="-4">(−3, −4)</button><button class="preset crPreset" data-x="5" data-y="-2">(5, −2)</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the first number gives horizontal position x; the second gives vertical position y. The signs tell you the quadrant.</p>
 </div>`;
+if(norm(concept)==="elimination method") return `
+<div class="geometry-lesson elimination-method-interactive-lesson">
+<strong>Eliminate one variable by making its coefficients equal or opposite, solve for the remaining variable, then substitute back.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>STEP 1</small><strong>Align coefficients</strong><span class="pill">multiply if needed</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 2</small><strong>Add or subtract</strong><span class="pill">remove one variable</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 3</small><strong>Back-substitute</strong><span class="pill">check both equations</span></div>
+</div>
+<p><b>Worked example:</b> Solve 2x + y = 11 and x − y = 1.</p>
+<ol><li>Add the equations: (2x + y) + (x − y) = 11 + 1.</li><li>So 3x = 12 and x = 4.</li><li>Substitute into x − y = 1: 4 − y = 1, hence y = 3.</li><li>Solution: (4, 3). Check: 2(4)+3=11 and 4−3=1.</li></ol>
+<div class="control"><div class="head"><span>Choose a practice pair</span></div>
+<select id="elimPreset"><option value="basic">2x + y = 11; x − y = 1</option><option value="equal">x + y = 7; x − y = 1</option><option value="multiply">2x + 3y = 12; 3x − 3y = 3</option><option value="subtract">3x + 2y = 16; 3x − y = 7</option><option value="negative">2x − y = 1; 3x + y = 9</option></select></div>
+<div class="checks" id="elimWork"><b>Try it:</b> choose a pair to reveal the elimination steps and solution.</div>
+<p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> multiply an entire equation by the same non-zero number. Whatever operation you use to eliminate a variable, apply it to both sides. Always check the final ordered pair in both original equations.</p>
+</div>`;
 if(norm(concept)==="substitution method") return `
 <div class="geometry-lesson substitution-method-interactive-lesson">
 <strong>Express one variable in terms of the other, substitute into the second equation, solve, and back-substitute.</strong>
@@ -3230,6 +3245,20 @@ function startCoordinateRepresentationDemo(){
  document.querySelectorAll(".crPreset").forEach(btn=>btn.addEventListener("click",()=>{x.value=btn.dataset.x;y.value=btn.dataset.y;update();}));
  update();
 }
+function startEliminationMethodDemo(){
+ if(norm(concept)!=="elimination method")return;
+ const select=document.getElementById("elimPreset"),out=document.getElementById("elimWork");
+ if(!select||!out)return;
+ const examples={
+  basic:{x:4,y:3,e1:"2x + y = 11",e2:"x − y = 1",steps:"Add the equations: 3x = 12, so x = 4. Substitute into x − y = 1: 4 − y = 1, so y = 3."},
+  equal:{x:4,y:3,e1:"x + y = 7",e2:"x − y = 1",steps:"Add the equations to eliminate y: 2x = 8, so x = 4. Then 4 + y = 7 gives y = 3."},
+  multiply:{x:3,y:2,e1:"2x + 3y = 12",e2:"3x − 3y = 3",steps:"Add the equations to eliminate y: 5x = 15, so x = 3. Then 2(3) + 3y = 12 gives y = 2."},
+  subtract:{x:4,y:2,e1:"3x + 2y = 16",e2:"3x − y = 10",steps:"Subtract the second equation from the first: 3y = 6, so y = 2. Then 3x − 2 = 10 gives x = 4."},
+  negative:{x:2,y:3,e1:"2x − y = 1",e2:"3x + y = 9",steps:"Add the equations to eliminate y: 5x = 10, so x = 2. Then 2(2) − y = 1 gives y = 3."}
+ };
+ const render=()=>{const v=examples[select.value]||examples.basic;out.innerHTML="<b>Step-by-step:</b><br>"+v.e1+"<br>"+v.e2+"<br>"+v.steps+"<br><b>Solution:</b> ("+v.x+", "+v.y+")<br><b>Check:</b> substitute both values into both original equations.";};
+ select.addEventListener("change",render);render();
+}
 function startSubstitutionMethodDemo(){
  if(norm(concept)!=="substitution method")return;
  const select=document.getElementById("subPreset"),out=document.getElementById("subWork");
@@ -4011,6 +4040,38 @@ const INLINE_GRAPHICAL_SOLUTION_QUIZ=[
 ["The pair x−y=2 and 2x−2y=4 has:",["No solution","Unique solution","Infinitely many solutions","Exactly two solutions"],2,"The second equation is twice the first, so both lines coincide."],
 ["The pair x−y=2 and 2x−2y=6 has:",["No solution","Unique solution","Infinitely many solutions","Solution (2,0)"],0,"They imply x−y=2 and x−y=3: parallel distinct lines."]
 ];
+const INLINE_ELIMINATION_METHOD_QUIZ=[
+["The elimination method solves a pair of equations by:",["Removing one variable using addition or subtraction","Drawing only one axis","Squaring both equations","Changing variables"],0,"Choose operations that cancel one variable."],
+["Solve x+y=7 and x−y=1.",["(3,4)","(4,3)","(7,1)","(1,7)"],1,"Add: 2x=8, x=4; then y=3."],
+["To eliminate +y and −y, we should:",["Add the equations","Subtract the equations","Multiply by zero","Square both"],0,"Adding opposite y terms gives zero."],
+["Solve 2x+y=11 and x−y=1.",["(3,4)","(4,3)","(5,1)","(2,7)"],1,"Add to get 3x=12, so x=4 and y=3."],
+["If coefficients of x are 2 and 3, a convenient equal coefficient is:",["5","6","1","−1"],1,"The LCM of 2 and 3 is 6."],
+["When multiplying an equation by 3, you must multiply:",["Only the first term","Both sides and every term","Only the variable","Only the constant"],1,"An equivalent equation requires every term on both sides to be multiplied."],
+["Solve x+y=5 and x−y=3.",["(4,1)","(1,4)","(5,3)","(3,2)"],0,"Adding gives 2x=8, x=4, y=1."],
+["Solve 2x+2y=10 and x−y=1.",["(3,2)","(2,3)","(4,1)","(1,4)"],0,"First equation gives x+y=5; adding with x−y=1 gives 2x=6."],
+["To eliminate +3y and +6y, one can:",["Multiply the first equation by 2 and subtract","Add without changing either","Multiply both by zero","Divide only one term"],0,"After multiplying the first equation by 2, the y coefficients match and subtraction cancels them."],
+["Solve 2x+y=8 and x+y=5.",["(3,2)","(2,3)","(4,0)","(1,4)"],0,"Subtract the second equation from the first: x=3, then y=2."],
+["If elimination gives 0=0, the equations may have:",["No solution","Infinitely many solutions","Exactly one solution always","No variables"],1,"A true identity can indicate dependent equations with infinitely many solutions."],
+["If elimination gives 0=5, the pair has:",["Infinitely many solutions","One solution","No solution","Two solutions"],2,"A false statement means the equations are inconsistent."],
+["Solve 3x+y=10 and x+y=4.",["(3,1)","(1,3)","(2,4)","(4,0)"],0,"Subtract to get 2x=6, x=3, then y=1."],
+["Solve 2x−y=1 and 3x+y=9.",["(2,3)","(3,2)","(1,7)","(4,1)"],0,"Add to get 5x=10, x=2, then y=3."],
+["To eliminate y from 2x+3y=12 and 3x−3y=3, we should:",["Add the equations","Subtract the second from the first","Multiply both by zero","Divide only the y terms"],0,"The +3y and −3y terms cancel on addition."],
+["Solve 2x+3y=12 and 3x−3y=3.",["(3,2)","(2,3)","(1,4)","(4,1)"],0,"Add to get 5x=15, x=3; then y=2."],
+["In elimination, after finding one variable, the next step is to:",["Substitute into an original equation","Start a new pair","Ignore the other variable","Always divide by zero"],0,"Back-substitution finds the second variable."],
+["Solve 3x+2y=16 and 3x−y=10.",["(4,2)","(2,4)","(3,3)","(5,1)"],0,"Subtract the second equation from the first: 3y=6, y=2; then x=4."],
+["Which operation preserves an equation?",["Adding the same quantity to both sides","Adding only to the left side","Multiplying one term only","Changing the sign of one term arbitrarily"],0,"Doing the same operation to both sides preserves equality."],
+["Solve x+y=9 and x−y=5.",["(7,2)","(2,7)","(9,5)","(5,4)"],0,"Add to get 2x=14, x=7 and y=2."],
+["If coefficients are −2 and 4 for a variable, multiplying the first equation by 2 makes its coefficient:",["−4","2","4","−2"],0,"2×(−2)=−4, matching the magnitude of 4."],
+["Solve 4x+y=14 and 2x+y=8.",["(3,2)","(2,3)","(4,−2)","(1,10)"],0,"Subtract to get 2x=6, x=3, then y=2."],
+["Solve 2x+3y=13 and 2x−y=5.",["(4,1)","(1,4)","(3,2)","(2,3)"],0,"Subtract the second from the first: 4y=8, y=2; then x=3. Correct pair is (3,2)."],
+["Solve 5x+2y=16 and 5x−2y=4.",["(2,3)","(3,2)","(1,5)","(4,−2)"],0,"Add to get 10x=20, x=2; then y=3."],
+["If you want to eliminate x from 2x+y=7 and 3x−y=8, a valid first step is:",["Multiply the first equation by 3 and the second by 2","Multiply only x by 3","Add 2 to one side","Delete x terms"],0,"Both x coefficients become 6, so subtraction can eliminate x."],
+["Solve 2x+y=7 and 3x−y=8.",["(3,1)","(1,3)","(2,3)","(4,−1)"],0,"Add to get 5x=15, x=3, then y=1."],
+["When coefficients of a variable are already equal with opposite signs, use:",["Addition","Multiplication by zero","Squaring","No operation is possible"],0,"Opposite coefficients cancel when equations are added."],
+["Solve 3x+2y=12 and 3x−2y=4.",["(8/3,2)","(2,8/3)","(4,0)","(3,1)"],0,"Add to get 6x=16, x=8/3; then 3x−2y=4 gives y=2."],
+["Why check the answer in both equations?",["To verify the ordered pair satisfies the original system","To make the numbers larger","To remove a variable again","It is never useful"],0,"A solution must satisfy every equation in the pair."],
+["Solve 2x+y=9 and x−y=0.",["(3,3)","(4,1)","(2,5)","(5,−1)"],0,"Since x=y, 3x=9, so x=y=3."]
+];
 const INLINE_SUBSTITUTION_METHOD_QUIZ=[
 ["What is the first step in substitution?",["Add both equations","Express one variable in terms of the other","Draw a circle","Multiply both sides by zero"],1,"Isolate one variable in either equation."],
 ["Solve x+y=10 and x−y=2.",["(4,6)","(6,4)","(5,5)","(2,10)"],1,"Adding gives 2x=12, so x=6 and y=4."],
@@ -4762,7 +4823,8 @@ function startQuiz(){
   else if(norm(concept)==="plotting points") quizSource=dedicated||INLINE_PLOTTING_POINTS_QUIZ;
   else if(norm(concept)==="coordinates of a point") quizSource=dedicated||INLINE_COORDINATES_OF_A_POINT_QUIZ;
   else if(norm(concept)==="coordinate representation") quizSource=dedicated||INLINE_COORDINATE_REPRESENTATION_QUIZ;
-  else if(norm(concept)==="substitution method") quizSource=dedicated||INLINE_SUBSTITUTION_METHOD_QUIZ;
+  else if(norm(concept)==="elimination method") quizSource=dedicated||INLINE_ELIMINATION_METHOD_QUIZ;
+   else if(norm(concept)==="substitution method") quizSource=dedicated||INLINE_SUBSTITUTION_METHOD_QUIZ;
    else if(norm(concept)==="linear equations in two variables") quizSource=dedicated||INLINE_LINEAR_EQUATIONS_TWO_VARIABLES_QUIZ;
    else if(norm(concept)==="graphical solution") quizSource=dedicated||INLINE_GRAPHICAL_SOLUTION_QUIZ;
   else if(norm(concept)==="factorisation of polynomials") quizSource=dedicated||INLINE_FACTORISATION_OF_POLYNOMIALS_QUIZ;
@@ -4799,7 +4861,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startSubstitutionMethodDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
+startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

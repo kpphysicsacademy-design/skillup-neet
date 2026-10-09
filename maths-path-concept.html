@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-heights-distances-virtual-lab-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-heights-distances-interactive-v2">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • 20261009-trigonometric-ratios-lab-v1</title>
@@ -978,6 +978,7 @@ if(norm(concept)==="heights and distances") return `<div class="geometry-lesson 
 <div class="props"><div class="prop"><span>Angle</span><strong id="hdAngleProp">35°</strong></div><div class="prop"><span>Horizontal distance</span><strong id="hdDistanceProp">20 m</strong></div><div class="prop"><span>Estimated height</span><strong id="hdHeightProp">14.00 m</strong></div><div class="prop"><span>Line of sight</span><strong id="hdSightProp">24.42 m</strong></div></div>
 <div class="checks" id="hdWorking" aria-live="polite">height = 20 × tan(35°) ≈ 14.00 m.</div>
 <div class="presets"><button type="button" class="preset hdPreset" data-angle="30" data-distance="20">30° • 20 m</button><button type="button" class="preset hdPreset" data-angle="45" data-distance="30">45° • 30 m</button><button type="button" class="preset hdPreset" data-angle="60" data-distance="15">60° • 15 m</button></div>
+<div class="formula hd-challenge"><b>Quick challenge</b><p style="margin:8px 0">A tower is observed at an angle of elevation of <b>45°</b> from <b>25 m</b> away. Estimate its height (ignore eye height).</p><label for="hdAnswer">Your answer (metres)</label> <input id="hdAnswer" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="Enter height" style="max-width:150px;padding:8px;border:1px solid #9bb59a;border-radius:8px"><button type="button" class="preset" id="hdCheckAnswer">Check answer</button><button type="button" class="preset" id="hdResetAnswer">Try again</button><p id="hdFeedback" role="status" aria-live="polite" style="margin:8px 0 0">Use height = distance × tan θ.</p></div>
 <p style="margin-bottom:0;color:#66736b"><b>Remember:</b> use tangent when horizontal distance and vertical height are involved. Use sine or cosine when the line of sight (hypotenuse) is known.</p></div>`;
 if(norm(concept)==="trigonometric ratios") return `
 <div class="geometry-lesson trig-ratios-simple"><strong>Trigonometric Ratios — Interactive Lab</strong><p>For a right triangle and angle θ: sine compares opposite to hypotenuse, cosine compares adjacent to hypotenuse, and tangent compares opposite to adjacent.</p>
@@ -5682,7 +5683,11 @@ function initHeightsDistancesLab(){
   if(distLabel){distLabel.setAttribute("x","140");distLabel.setAttribute("y","193");distLabel.textContent="d = "+d+" m";}if(heightLabel){heightLabel.setAttribute("x","294");heightLabel.setAttribute("y",String((176+top)/2));heightLabel.textContent="h";}
   const r=30,radAngle=deg*Math.PI/180;if(arc)arc.setAttribute("d","M72 176A30 30 0 0 0 "+(42+r*Math.cos(radAngle))+" "+(176-r*Math.sin(radAngle)));
  };
- angle.addEventListener("input",update);distance.addEventListener("input",update);document.querySelectorAll(".hdPreset").forEach(btn=>btn.addEventListener("click",()=>{angle.value=btn.dataset.angle;distance.value=btn.dataset.distance;update();}));update();
+ angle.addEventListener("input",update);distance.addEventListener("input",update);document.querySelectorAll(".hdPreset").forEach(btn=>btn.addEventListener("click",()=>{angle.value=btn.dataset.angle;distance.value=btn.dataset.distance;update();}));
+ const answer=$("hdAnswer"),feedback=$("hdFeedback"),check=$("hdCheckAnswer"),reset=$("hdResetAnswer");
+ if(check&&answer&&feedback)check.addEventListener("click",()=>{const raw=answer.value.trim();if(raw===""){feedback.textContent="Enter your estimate first.";return;}const value=Number(raw);if(!Number.isFinite(value)||value<0){feedback.textContent="Enter a valid non-negative height.";return;}const expected=25*Math.tan(Math.PI/4);feedback.textContent=Math.abs(value-expected)<=0.5?"Correct! tan 45° = 1, so height = 25 × 1 = 25 m.":"Not quite. Use tan 45° = height ÷ 25, so height = 25 × tan 45° = 25 m. Try again.";});
+ if(reset&&answer&&feedback)reset.addEventListener("click",()=>{answer.value="";feedback.textContent="Use height = distance × tan θ.";answer.focus();});
+ update();
 }
 function initTrigonometricRatiosLab(){
  if(norm(concept)!=="trigonometric ratios")return;

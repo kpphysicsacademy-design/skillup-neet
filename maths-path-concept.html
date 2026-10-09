@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-median-visual-explorer-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261009-mode-visual-explorer-v1">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>SkillUp Mathematics • Concept Practice • v20261008-distance-intuition-v1</title>
@@ -660,6 +660,24 @@ if(norm(concept)==="area of triangle") return `
 <div class="checks" id="taWork"><b>Working:</b> A = ½ × 8 × 6 = 24 cm².</div>
 <div class="presets"><button class="preset taPreset" data-b="8" data-h="6">Base 8, height 6</button><button class="preset taPreset" data-b="10" data-h="4">Base 10, height 4</button><button class="preset taPreset" data-b="12" data-h="8">Base 12, height 8</button><button class="preset taPreset" data-b="5" data-h="5">Base 5, height 5</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> A = ½bh. Use the perpendicular height, not a sloping side. Area is written in square units.</p>
+</div>`;
+if(norm(concept)==="mode") return `
+<div class="geometry-lesson mode-interactive-lesson">
+<strong>Explore the mode: find the value or category that occurs most often.</strong>
+<div class="visual-banner"><div class="value-box"><small>OBSERVATIONS</small><strong id="modeCount">12</strong><span class="pill">total frequency</span></div><div class="eq">→</div><div class="value-box"><small>HIGHEST FREQUENCY</small><strong id="modeHighest">4</strong><span class="pill">most common count</span></div><div class="eq">→</div><div class="value-box"><small>MODE</small><strong id="modeResult">3</strong><span class="pill">most frequent value</span></div></div>
+<div class="concept-image"><svg id="modeChart" viewBox="0 0 640 270" width="100%" height="auto" role="img" aria-label="Frequency bar chart for values one through six"><rect width="640" height="270" rx="18" fill="#f8fcf6"/><g stroke="#d9e8d4"><line x1="50" y1="55" x2="600" y2="55"/><line x1="50" y1="95" x2="600" y2="95"/><line x1="50" y1="135" x2="600" y2="135"/><line x1="50" y1="175" x2="600" y2="175"/></g><line x1="50" y1="205" x2="600" y2="205" stroke="#173f27" stroke-width="2"/><g id="modeBars"></g></svg></div>
+<div class="props"><div class="prop"><span>Value 1 frequency</span><strong id="modeF0">1</strong></div><div class="prop"><span>Value 2 frequency</span><strong id="modeF1">2</strong></div><div class="prop"><span>Value 3 frequency</span><strong id="modeF2">4</strong></div><div class="prop"><span>Value 4 frequency</span><strong id="modeF3">3</strong></div><div class="prop"><span>Value 5 frequency</span><strong id="modeF4">1</strong></div><div class="prop"><span>Value 6 frequency</span><strong id="modeF5">1</strong></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:12px">
+<label class="prop">Value 1 <input id="modeS0" type="range" min="0" max="8" value="1"><strong id="modeSV0">1</strong></label>
+<label class="prop">Value 2 <input id="modeS1" type="range" min="0" max="8" value="2"><strong id="modeSV1">2</strong></label>
+<label class="prop">Value 3 <input id="modeS2" type="range" min="0" max="8" value="4"><strong id="modeSV2">4</strong></label>
+<label class="prop">Value 4 <input id="modeS3" type="range" min="0" max="8" value="3"><strong id="modeSV3">3</strong></label>
+<label class="prop">Value 5 <input id="modeS4" type="range" min="0" max="8" value="1"><strong id="modeSV4">1</strong></label>
+<label class="prop">Value 6 <input id="modeS5" type="range" min="0" max="8" value="1"><strong id="modeSV5">1</strong></label>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="modePreset" data-values="1,2,4,3,1,1">One mode</button><button type="button" class="modePreset" data-values="2,4,2,4,1,1">Two modes</button><button type="button" class="modePreset" data-values="2,2,2,2,2,2">All equal</button></div>
+<p id="modeWork" style="margin:12px 0 0;color:#66736b"><b>Result:</b> Value 3 occurs most often (4 times), so the mode is 3.</p>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> The mode is the most frequent value. A data set may have one mode, more than one mode, or no unique mode when all frequencies are equal.</p>
 </div>`;
 if(norm(concept)==="median") return `
 <div class="geometry-lesson median-interactive-lesson">
@@ -3275,6 +3293,21 @@ function startTriangleAreaDemo(){
  document.querySelectorAll(".taPreset").forEach(btn=>btn.addEventListener("click",()=>{bS.value=btn.dataset.b;hS.value=btn.dataset.h;update();}));
  update();
 }
+function startModeDemo(){
+ if(norm(concept)!=="mode")return;
+ const sliders=Array.from({length:6},(_,i)=>document.getElementById("modeS"+i));if(sliders.some(x=>!x))return;
+ const colors=["#60a5fa","#f59e0b","#58cc02","#a78bfa","#fb7185","#14b8a6"],set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const vals=sliders.map(x=>Math.max(0,Number(x.value)||0)),total=vals.reduce((a,b)=>a+b,0),highest=Math.max(...vals),leaders=vals.map((v,i)=>v===highest?i+1:null).filter(x=>x!==null),allEqual=highest===Math.min(...vals);
+  set("modeCount",total);set("modeHighest",highest);set("modeResult",allEqual?"No unique mode":leaders.join(" and "));
+  vals.forEach((v,i)=>{set("modeF"+i,v);set("modeSV"+i,v);});
+  const g=document.getElementById("modeBars"),scale=130/8;if(g)g.innerHTML=vals.map((v,i)=>{const h=v*scale,x=70+i*88,y=205-h,highlight=!allEqual&&v===highest;return '<rect x="'+x+'" y="'+y+'" width="48" height="'+h+'" rx="5" fill="'+(highlight?"#58cc02":colors[i])+'" stroke="'+(highlight?"#173f27":"none")+'" stroke-width="2"/><text x="'+(x+24)+'" y="'+Math.max(18,y-7)+'" text-anchor="middle" fill="#173f27" font-size="13" font-weight="800">'+v+'</text><text x="'+(x+24)+'" y="228" text-anchor="middle" fill="#173f27" font-size="13">Value '+(i+1)+'</text>';}).join("");
+  const work=document.getElementById("modeWork");if(work)work.innerHTML="<b>Result:</b> Frequencies are "+vals.join(", ")+". "+(allEqual?"All values occur equally often, so there is no unique mode.":(leaders.length>1?"Values "+leaders.join(" and ")+" tie for the highest frequency of "+highest+".":"Value "+leaders[0]+" occurs most often ("+highest+" times), so the mode is "+leaders[0]+"."));
+ }
+ sliders.forEach(x=>x.addEventListener("input",update));
+ document.querySelectorAll(".modePreset").forEach(btn=>btn.addEventListener("click",()=>{btn.dataset.values.split(",").forEach((v,i)=>sliders[i].value=v);update();}));
+ update();
+}
 function startMedianDemo(){
  if(norm(concept)!=="median")return;
  const sliders=Array.from({length:6},(_,i)=>document.getElementById("medianS"+i));if(sliders.some(x=>!x))return;
@@ -3746,6 +3779,38 @@ const INLINE_AREA_OF_TRIANGLE_QUIZ=[
 ["A triangle's base is 13 cm and height is 12 cm. Area =",["156 cm²","78 cm²","25 cm²","39 cm²"],1,"A = ½ × 13 × 12 = 78 cm²."],
 ["A triangle has base 10 cm and height 0 cm. The calculated area is:",["0 cm²","5 cm²","10 cm²","Cannot calculate"],0,"A = ½ × 10 × 0 = 0; a non-degenerate triangle has positive height."]
 ];
+const INLINE_MODE_QUIZ=[
+["What is the mode of a data set?",["The sum of all values","The most frequently occurring value","The middle value only","The difference between extremes"],1,"The mode is the value that occurs most often."],
+["Find the mode of 2, 3, 3, 4, 5.",["2","3","4","5"],1,"3 occurs twice; each other value occurs once."],
+["Find the mode of 1, 1, 2, 2, 3.",["1 only","2 only","1 and 2","3"],2,"Both 1 and 2 occur twice, the greatest frequency."],
+["Which data set has mode 4?",["2, 3, 4, 5","4, 4, 2, 3","1, 2, 3, 5","1, 1, 2, 2"],1,"4 appears twice in the second set."],
+["What is the mode of 6, 7, 7, 8, 9?",["6","7","8","9"],1,"7 occurs more often than any other value."],
+["If all values occur equally often, the data set has:",["A unique mode always","No unique mode","Mean zero","Median zero"],1,"Equal frequencies mean there is no single most frequent value."],
+["In a frequency table, the mode is the value with:",["The smallest frequency","The greatest frequency","The middle frequency always","Frequency zero"],1,"Look for the largest frequency."],
+["Find the mode: 5, 5, 5, 2, 3, 4.",["2","3","4","5"],3,"5 occurs three times, more than the other values."],
+["A shoe size frequency table shows size 6: 4 students, size 7: 9, size 8: 5. The mode is:",["6","7","8","9"],1,"Size 7 has the greatest frequency, 9."],
+["A data set has modes 2 and 5. This means:",["Both occur with the highest equal frequency","2 is always the median","5 is the only value","The mean is 7"],0,"Two values can share the greatest frequency."],
+["Find the mode of 8, 9, 8, 10, 11, 8.",["8","9","10","11"],0,"8 appears three times."],
+["Which is true about the mode?",["It must be the largest value","It must be the mean","It can be a category or number","It must be unique"],2,"The mode can describe the most common numerical value or category."],
+["Favourite fruit counts are mango 12, apple 7, banana 9. The mode category is:",["Apple","Banana","Mango","All equal"],2,"Mango has the greatest count, 12."],
+["Find the mode of 4, 6, 4, 7, 6, 8.",["4 only","6 only","4 and 6","8"],2,"Both 4 and 6 appear twice, more than the others."],
+["The mode of 1, 2, 2, 2, 3, 4 is:",["1","2","3","4"],1,"2 occurs three times."],
+["A value occurs 7 times while every other value occurs at most 4 times. The mode is:",["The value occurring 7 times","The value occurring 4 times","The smallest value","The total count"],0,"The value with frequency 7 has the greatest frequency."],
+["Can a data set have more than one mode?",["No, never","Yes, if multiple values tie for greatest frequency","Only if there are two observations","Only if all values differ"],1,"Two or more values can share the highest frequency."],
+["Find the mode of 3, 4, 5, 6.",["3","4","5","No unique mode"],3,"Each value occurs once, so none occurs more often than the others."],
+["The mode of red, blue, red, green, red is:",["Red","Blue","Green","There is no mode"],0,"Red appears three times."],
+["A class has absences 0, 1, 0, 2, 0, 1. The mode is:",["0","1","2","3"],0,"0 occurs three times."],
+["In a bar chart of frequencies, the mode corresponds to:",["The shortest bar","The tallest bar","The bar nearest the origin only","The title"],1,"The tallest bar marks the greatest frequency."],
+["Find the mode of 10, 12, 12, 13, 13, 13, 15.",["10","12","13","15"],2,"13 occurs three times, more than any other value."],
+["If one occurrence of a non-modal value is added, the mode:",["Always changes","May stay the same","Must become zero","Always disappears"],1,"The mode may stay the same if the added count does not create a new tie or exceed it."],
+["Which measure identifies the most common observation?",["Mean","Median","Mode","Range"],2,"Mode describes the most frequent value."],
+["Values 2 and 6 each occur 5 times; all others occur less often. The data set is:",["Unimodal","Bimodal","Without any mode","Always symmetric"],1,"Two values share the greatest frequency, so it is bimodal."],
+["If value 9 occurs most often, 9 is the:",["Mean","Median","Mode","Range"],2,"The mode is the value with the greatest frequency."],
+["Which statement about the mode is correct?",["It is always an average of two values","It may be used with categories","It requires sorting all values","It is always the largest number"],1,"Categorical data can have a mode, such as the most popular colour."],
+["A data set is 2, 2, 3, 4, 4, 5. Its modes are:",["2 only","4 only","2 and 4","5 only"],2,"2 and 4 both occur twice; other values occur once."],
+["The most popular bus route is used by 18 students, more than any other route. That route is the:",["Mean route","Median route","Modal category","Range"],2,"The modal category is the category with the greatest frequency."],
+["Why is mode useful for categorical data?",["It identifies the most common category","It requires numerical addition","It always gives a midpoint","It measures spread"],0,"Mode works with labels/categories even when arithmetic mean cannot be calculated."]
+];
 const INLINE_MEDIAN_QUIZ=[
 ["What is the median of a data set?",["The sum of all values","The middle value after arranging values in order","The largest value","The difference between extremes"],1,"The median is the middle of ordered data."],
 ["Find the median of 3, 1, 2.",["1","2","3","6"],1,"Ordered data are 1, 2, 3; the middle value is 2."],
@@ -3871,6 +3936,7 @@ function startQuiz(){
   else if(norm(concept)==="triangles and congruence") quizSource=dedicated||INLINE_TRIANGLES_AND_CONGRUENCE_QUIZ;
   else if(norm(concept)==="graph of a linear equation") quizSource=dedicated||INLINE_GRAPH_LINEAR_EQUATION_QUIZ;
   else if(norm(concept)==="area of triangle") quizSource=dedicated||INLINE_AREA_OF_TRIANGLE_QUIZ;
+  else if(norm(concept)==="mode") quizSource=dedicated||INLINE_MODE_QUIZ;
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
@@ -3913,7 +3979,7 @@ window.addEventListener("error",function(e){
   }
  }catch(_){}
 });
-try{renderConceptPage();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
+try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);

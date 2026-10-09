@@ -1396,6 +1396,23 @@ if(norm(concept)==="coordinate representation") return `
 <div class="presets"><button class="preset crPreset" data-x="2" data-y="3">(2, 3)</button><button class="preset crPreset" data-x="-4" data-y="2">(−4, 2)</button><button class="preset crPreset" data-x="-3" data-y="-4">(−3, −4)</button><button class="preset crPreset" data-x="5" data-y="-2">(5, −2)</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the first number gives horizontal position x; the second gives vertical position y. The signs tell you the quadrant.</p>
 </div>`;
+if(norm(concept)==="word problems") return `
+<div class="geometry-lesson pair-word-problems-interactive-lesson">
+<strong>Translate a real-life situation into two linear equations, solve them, and check the answer in the original context.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>STEP 1</small><strong>Choose variables</strong><span class="pill">what is unknown?</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 2</small><strong>Form equations</strong><span class="pill">two conditions</span></div><div class="eq">→</div>
+<div class="value-box"><small>STEP 3</small><strong>Solve & check</strong><span class="pill">units matter</span></div>
+</div>
+<p><b>Example — tickets:</b> Adult tickets cost ₹100 and child tickets cost ₹60. There are 20 tickets and the total collection is ₹1,600. Let a be adult tickets and c be child tickets.</p>
+<p>Number of tickets: a+c=20. Collection: 100a+60c=1600. Divide the second equation by 20: 5a+3c=80. Subtract 3(a+c)=60 to get 2a=20, so a=10 and c=10.</p>
+<div class="control"><div class="head"><span>Choose a worked situation</span></div>
+<select id="pairWordPreset" class="select">
+<option value="tickets">Ticket sales</option><option value="numbers">Two numbers</option><option value="ages">Age puzzle</option><option value="prices">Stationery purchase</option>
+</select></div>
+<div class="checks" id="pairWordWork"><b>Model:</b> a+c=20 and 100a+60c=1600. Solution: 10 adult tickets and 10 child tickets.</div>
+<p style="margin-bottom:0;color:#66736b"><b>Tip:</b> define variables clearly, use the two statements to build equations, solve, then check both the equations and the real-world meaning.</p>
+</div>`;
 if(norm(concept)==="consistency of equations") return `
 <div class="geometry-lesson consistency-equations-interactive-lesson">
 <strong>Decide whether a pair of linear equations has one solution, no solution, or infinitely many solutions.</strong>
@@ -3287,6 +3304,19 @@ function startCoordinateRepresentationDemo(){
  document.querySelectorAll(".crPreset").forEach(btn=>btn.addEventListener("click",()=>{x.value=btn.dataset.x;y.value=btn.dataset.y;update();}));
  update();
 }
+function startPairWordProblemsDemo(){
+ if(norm(concept)!=="word problems")return;
+ const select=document.getElementById("pairWordPreset"),out=document.getElementById("pairWordWork");
+ if(!select||!out)return;
+ const examples={
+ tickets:"<b>Ticket sales</b><br>Let a=adult tickets and c=child tickets. a+c=20; 100a+60c=1600. Solve: a=10, c=10. Check: 10+10=20 and ₹1,000+₹600=₹1,600.",
+ numbers:"<b>Two numbers</b><br>The sum is 35 and the difference is 9. Let x be the larger and y the smaller: x+y=35, x−y=9. Add: 2x=44, so x=22; then y=13. Check: 22+13=35 and 22−13=9.",
+ ages:"<b>Age puzzle</b><br>A parent and child have a total age of  fifty years; the parent is 4 times the child's age. Let p be parent age and c be child age: p+c=50 and p=4c. Then 5c=50, so c=10 and p=40. Check: 40+10=50 and 40=4×10.",
+ prices:"<b>Stationery purchase</b><br>Two notebooks and three pens cost ₹ ninety; three notebooks and two pens cost ₹110. Let n be notebook price and p be pen price: 2n+3p=90; 3n+2p=110. Multiply to eliminate p: 4n+6p=180 and 9n+6p=330. Subtract: 5n=150, n=30; then p=10. Check both totals."
+ };
+ select.addEventListener("change",()=>{out.innerHTML=examples[select.value]||examples.tickets;});
+ out.innerHTML=examples[select.value]||examples.tickets;
+}
 function startConsistencyOfEquationsDemo(){
  if(norm(concept)!=="consistency of equations")return;
  const select=document.getElementById("consistencyPreset"),out=document.getElementById("consistencyWork");
@@ -4105,6 +4135,38 @@ const INLINE_GRAPHICAL_SOLUTION_QUIZ=[
 ["For a pair ax+by+c=0, each equation graphs as a:",["Straight line","Circle","Parabola","Triangle"],0,"A first-degree equation in two variables represents a straight line."],
 ["The pair x−y=2 and 2x−2y=4 has:",["No solution","Unique solution","Infinitely many solutions","Exactly two solutions"],2,"The second equation is twice the first, so both lines coincide."],
 ["The pair x−y=2 and 2x−2y=6 has:",["No solution","Unique solution","Infinitely many solutions","Solution (2,0)"],0,"They imply x−y=2 and x−y=3: parallel distinct lines."]
+];
+const INLINE_WORD_PROBLEMS_QUIZ=[
+["When translating a word problem, what should you do first?",["Choose and define variables","Multiply all numbers","Guess the answer","Draw a graph every time"],0,"Define what each variable represents before forming equations."],
+["Two numbers have sum 20. If they are x and y, which equation represents the sum?",["x−y=20","xy=20","x+y=20","x/y=20"],2,"The word sum means addition."],
+["Two numbers have difference 7, with x the larger. Which equation is correct?",["y−x=7","x−y=7","x+y=7","xy=7"],1,"Larger minus smaller equals the positive difference."],
+["Adult tickets cost ₹100, child tickets ₹50. For a adult and c child tickets, total revenue is:",["a+c","100a+50c","50a+100c","150(a+c)"],1,"Multiply each ticket count by its price and add."],
+["A total of 18 coins are all ₹5 or ₹10 coins. If x and y are their counts, the total-value equation is:",["x+y=18","5x+10y=18","10x+5y=18","5x+10y=18 only if x=y"],0,"The count equation is x+y=18; a separate value equation models the money."],
+["A pair of linear equations is useful in word problems when there are:",["Two unknown quantities and two independent conditions","Only one unknown and no condition","Three unrelated unknowns","No numerical information"],0,"Two conditions can form a pair of equations in two unknowns."],
+["The sum of two numbers is 30 and their difference is 4. The numbers are:",["13 and 17","15 and 15","10 and 20","12 and 18"],0,"Add equations: 2x=34, so larger=17 and smaller=13."],
+["A mother is 3 times her child's age. Their ages total 48. The child's age is:",["12","16","24","36"],0,"Let child=c and mother=3c. Then 4c=48, c=12."],
+["Two pens and one notebook cost ₹50; one pen and one notebook cost ₹35. A pen costs:",["₹10","₹15","₹20","₹25"],0,"Subtract the second equation from the first: one pen costs ₹15? Check: 2p+n=50 and p+n=35 gives p=15."],
+["A boat travels 24 km downstream in 2 hours. Its downstream speed is:",["10 km/h","12 km/h","14 km/h","48 km/h"],1,"Speed=distance/time=24/2=12 km/h."],
+["A two-digit number has tens digit x and units digit y. The number is:",["x+y","10x+y","x+10y","10y+x²"],1,"The tens digit contributes ten times its value."],
+["The digits of a two-digit number add to 9. If tens digit is x and units digit y, the digit equation is:",["10x+y=9","x+y=9","x−y=9","xy=9"],1,"The sum of the digits is x+y=9."],
+["A shop sells 12 items, some at ₹20 and others at ₹30. If x are ₹20 items and y are ₹30 items, count equation is:",["20x+30y=12","x+y=12","x−y=12","x+y=50"],1,"The total number of items is x+y=12."],
+["If x+y=16 and x−y=6, the larger number is:",["5","6","11","16"],2,"Adding gives 2x=22, so x=11 and y=5."],
+["Three adult and two child tickets cost ₹440; one adult and two child tickets cost ₹240. Adult ticket price is:",["₹80","₹100","₹120","₹140"],1,"Subtract equations: 2 adult tickets cost ₹200, so each is ₹100."],
+["When a statement says 'twice as many x as y', write:",["x=y+2","x=2y","2x=y","x+y=2"],1,"Twice as many means x equals two times y."],
+["A rectangle has perimeter 34 cm. If length l and width w, the equation is:",["l+w=34","2l+w=34","2(l+w)=34","lw=34"],2,"Perimeter of a rectangle is 2(l+w)."],
+["The length of a rectangle is 3 cm more than its width. If width is w, length is:",["w−3","3w","w+3","3−w"],2,"Three more than w is w+3."],
+["A number is 5 more than another. If the smaller is y and larger is x:",["x+y=5","x−y=5","y−x=5","xy=5"],1,"The larger minus the smaller is 5."],
+["A taxi charges a fixed fee ₹40 plus ₹12 per km. For k km, total fare F is:",["F=40k+12","F=12k−40","F=40+12k","F=52k"],2,"Add the fixed fee to the distance-based charge."],
+["If x+y=25 and 2x+y=40, x equals:",["10","15","20","25"],1,"Subtract the first equation from the second: x=15."],
+["A father is 26 years older than his son. If their ages are f and s:",["f+s=26","f−s=26","s−f=26","fs=26"],1,"The age difference is father minus son."],
+["A class has 40 students. There are x boys and y girls. The count equation is:",["x−y=40","xy=40","x+y=40","2x+2y=40"],2,"Total students equals boys plus girls."],
+["A ₹50 and ₹20 note combination totals ₹230. If counts are x and y, value equation is:",["x+y=230","50x+20y=230","20x+50y=230 always","70xy=230"],1,"Multiply each note count by its denomination."],
+["Two numbers are in the ratio 2:3 and total 25. If they are 2k and 3k, k equals:",["3","5","10","25"],1,"2k+3k=25, so 5k=25 and k=5."],
+["A train travels 180 km in t hours at 60 km/h. The equation is:",["60t=180","180t=60","t=180×60","60+t=180"],0,"Distance=speed×time."],
+["One equation from a word problem gives x+y=10. A second condition gives x=4. Then y is:",["4","6","10","14"],1,"Substitute x=4: 4+y=10, so y=6."],
+["Why check the solution in the original word problem?",["To confirm both conditions and units make sense","To change the variables","To avoid solving equations","To make answers larger"],0,"Substitution checks correctness and ensures the answer fits the context."],
+["A problem gives x+y=12 and x−y=2. The smaller number is:",["5","7","10","12"],0,"Subtracting the difference from the sum gives 2y=10, so y=5."],
+["For two unknown prices, the best final answer should include:",["Only variable letters","The prices with currency units and a check","Only the equations","An approximate guess"],1,"State what each variable means, give the prices with units, and verify the conditions."]
 ];
 const INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ=[
 ["A pair of linear equations is consistent if it has:",["At least one solution","No solution","Only negative solutions","No variables"],0,"Consistent systems have one or more solutions."],
@@ -4953,7 +5015,8 @@ function startQuiz(){
   else if(norm(concept)==="plotting points") quizSource=dedicated||INLINE_PLOTTING_POINTS_QUIZ;
   else if(norm(concept)==="coordinates of a point") quizSource=dedicated||INLINE_COORDINATES_OF_A_POINT_QUIZ;
   else if(norm(concept)==="coordinate representation") quizSource=dedicated||INLINE_COORDINATE_REPRESENTATION_QUIZ;
-  else if(norm(concept)==="consistency of equations") quizSource=dedicated||INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ;
+  else if(norm(concept)==="word problems") quizSource=dedicated||INLINE_WORD_PROBLEMS_QUIZ;
+   else if(norm(concept)==="consistency of equations") quizSource=dedicated||INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ;
    else if(norm(concept)==="elimination method") quizSource=dedicated||INLINE_ELIMINATION_METHOD_QUIZ;
    else if(norm(concept)==="substitution method") quizSource=dedicated||INLINE_SUBSTITUTION_METHOD_QUIZ;
    else if(norm(concept)==="consistency of equations") quizSource=dedicated||INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ;
@@ -4993,7 +5056,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startConsistencyOfEquationsDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startConsistencyOfEquationsDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
+startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startPairWordProblemsDemo();startConsistencyOfEquationsDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startConsistencyOfEquationsDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

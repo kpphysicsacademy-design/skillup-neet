@@ -1696,6 +1696,23 @@ if(norm(concept)==="experimental probability") return `
 <div class="presets"><button class="preset epPreset" data-s="12" data-t="20">12 out of 20</button><button class="preset epPreset" data-s="7" data-t="10">7 out of 10</button><button class="preset epPreset" data-s="25" data-t="100">25 out of 100</button><button class="preset epPreset" data-s="0" data-t="20">No successes</button></div>
 <p style="margin:8px 0 0;color:#66736b"><b>Remember:</b> experimental probability is based on observed results. It may differ from theoretical probability and often gets closer with many trials.</p>
 </div>`;
+if(norm(concept)==="simple events") return `
+<div class="geometry-lesson simple-events-lesson">
+<strong>A simple event contains exactly one outcome.</strong>
+<p style="margin:6px 0 10px">For equally likely outcomes, P(simple event) = 1 ÷ total outcomes. Select a sample-space size to see one outcome highlighted.</p>
+<div class="visual-banner">
+<div class="value-box"><small>FAVOURABLE</small><strong id="seFav">1</strong><span class="pill">one outcome</span></div><div class="eq">÷</div>
+<div class="value-box"><small>TOTAL OUTCOMES</small><strong id="seTotal">6</strong><span class="pill">equally likely</span></div><div class="eq">→</div>
+<div class="value-box"><small>PROBABILITY</small><strong id="seProb">1/6</strong><span class="pill" id="sePercent">16.7%</span></div>
+</div>
+<div class="concept-image" role="img" aria-label="Sample space with one outcome highlighted for a simple event">
+<svg viewBox="0 0 640 180" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="180" rx="16" fill="#f8fcf6"/><text x="320" y="25" text-anchor="middle" font-size="17" font-weight="800" fill="#245b35">Sample space: one outcome is the event</text><g id="seMarks"></g><text x="320" y="160" text-anchor="middle" font-size="12" fill="#66736b">Green = event • Grey = other possible outcomes</text></svg>
+</div>
+<div class="control"><div class="head"><span>Total equally likely outcomes</span><span class="val" id="seTotalVal">6</span></div><input class="range" id="seTotalSlider" type="range" min="2" max="20" value="6" step="1"></div>
+<div class="checks" id="seWork"><b>Example:</b> Rolling a 3 on a fair die is a simple event. P(rolling 3) = 1/6 ≈ 16.7%.</div>
+<div class="presets"><button class="preset sePreset" data-t="2">One side of a fair coin</button><button class="preset sePreset" data-t="6">Roll a 3 on a die</button><button class="preset sePreset" data-t="8">One sector on 8-part spinner</button><button class="preset sePreset" data-t="10">One number from 1–10</button></div>
+<p style="margin:8px 0 0;color:#66736b"><b>Remember:</b> a simple event has one outcome; a compound event has two or more outcomes. Probability 1/n applies here when all n outcomes are equally likely.</p>
+</div>`;
 if(norm(concept)==="theoretical probability") return `
 <div class="geometry-lesson theoretical-probability-lesson">
 <strong>Theoretical probability = favourable outcomes ÷ total equally likely outcomes.</strong>
@@ -3331,6 +3348,22 @@ function startDecimalExpansionsDemo(){
  update();
 }
 
+function startSimpleEventsDemo(){
+ if(norm(concept)!=="simple events")return;
+ const total=document.getElementById("seTotalSlider");if(!total)return;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ function update(){
+  const n=Math.max(2,Math.min(20,Number(total.value)||2));total.value=n;
+  const p=1/n;set("seFav",1);set("seTotal",n);set("seTotalVal",n);set("seProb","1/"+n);set("sePercent",(p*100).toFixed(1)+"%");
+  const work=document.getElementById("seWork");if(work)work.innerHTML="<b>Calculation:</b> One favourable outcome out of "+n+" equally likely outcomes gives P(E) = 1/"+n+" ≈ "+(p*100).toFixed(1)+"%.";
+  const marks=document.getElementById("seMarks");if(!marks)return;marks.innerHTML="";
+  const cols=10,gap=48,x0=104,y0=53;
+  for(let i=0;i<n;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",x0+(i%cols)*gap);c.setAttribute("cy",y0+Math.floor(i/cols)*32);c.setAttribute("r","10");c.setAttribute("fill",i===0?"#7dbb70":"#d8e0d6");c.setAttribute("stroke","#ffffff");c.setAttribute("stroke-width","2");marks.appendChild(c);}
+ }
+ total.addEventListener("input",update);
+ document.querySelectorAll(".sePreset").forEach(b=>b.addEventListener("click",()=>{total.value=b.dataset.t;update();}));
+ update();
+}
 function startTheoreticalProbabilityDemo(){
  if(norm(concept)!=="theoretical probability")return;
  const fav=document.getElementById("tpFavSlider"),total=document.getElementById("tpTotalSlider");if(!fav||!total)return;
@@ -4052,6 +4085,38 @@ const INLINE_MEAN_QUIZ=[
 ["If each value in a list is increased by 1, the mean:",["Increases by 1","Decreases by 1","Stays the same","Increases by the count"],0,"Adding one to each value increases the average by one."],
 ["Why can the mean be different from every individual observation?",["It is calculated from the total and count","It must be the maximum","It ignores all observations","It is always the median"],0,"The mean can lie between observed values; it need not occur in the data set."]
 ];
+const INLINE_SIMPLE_EVENTS_QUIZ=[
+["A simple event contains:",["Exactly one outcome","No outcomes","Every possible outcome","At least ten outcomes"],0,"A simple event consists of exactly one outcome in the sample space."],
+["Which is a simple event when rolling a fair die?",["Rolling an even number","Rolling a number less than 5","Rolling a 3","Rolling a prime number"],2,"Rolling a 3 names exactly one outcome."],
+["A fair coin is tossed. The event 'heads' is:",["A compound event","A simple event","An impossible event","A certain event"],1,"The sample space is heads or tails; heads is one outcome."],
+["A fair six-sided die is rolled. P(rolling a 2) is:",["1/2","1/3","1/6","5/6"],2,"One of six equally likely outcomes is favourable."],
+["A spinner has 8 equal sectors numbered 1–8. P(landing on 5) is:",["1/8","5/8","7/8","1/5"],0,"Only one of the eight sectors is labelled 5."],
+["Which is a compound event for a fair die?",["Rolling a 1","Rolling a 6","Rolling an odd number","Rolling a 2"],2,"Odd numbers include 1, 3 and 5, so there are multiple outcomes."],
+["For n equally likely outcomes, a simple event has probability:",["n","0","1/n","n/1"],2,"One favourable outcome divided by n total outcomes gives 1/n."],
+["A bag has 4 equally likely numbered tokens, 1–4. P(selecting token 2) is:",["1/2","1/4","2/4","3/4"],1,"One token is favourable out of four."],
+["Which statement about a simple event is correct?",["It always has probability 1","It has exactly one outcome","It must be impossible","It always has two outcomes"],1,"The defining feature is exactly one outcome."],
+["A fair die is rolled. Is 'rolling a number greater than 4' a simple event?",["Yes, only 5 is possible","Yes, only 6 is possible","No, it has outcomes 5 and 6","No, it has no outcomes"],2,"Both 5 and 6 satisfy the event, so it is compound."],
+["A fair coin is tossed. What is P(tails)?",["0","1/4","1/2","1"],2,"There are two equally likely sides and one is tails."],
+["A box contains 10 equally likely numbered balls. The probability of drawing ball 7 is:",["1/10","7/10","3/10","10/7"],0,"One specific ball is favourable out of ten."],
+["Which event is impossible on a standard six-sided die?",["Rolling a 6","Rolling an odd number","Rolling a 0","Rolling a number less than 3"],2,"A standard die has faces 1 through 6, not 0."],
+["Which event is certain when rolling a standard die?",["Rolling a 7","Rolling a number from 1 to 6","Rolling a 2 only","Rolling an even number"],1,"Every possible face is between 1 and 6."],
+["A fair die is rolled. 'Rolling 1 or 2' is:",["Simple","Compound","Impossible","Certain"],1,"The event contains two outcomes: 1 and 2."],
+["A spinner has 5 equal sectors. Probability of landing on one specified sector is:",["1/5","2/5","4/5","5"],0,"One sector out of five is favourable."],
+["An event consists of outcome A only in a sample space {A, B, C}. It is:",["Simple","Compound","Certain","Impossible"],0,"The event contains one sample-space outcome."],
+["A fair die is rolled. How many outcomes make 'rolling 4' occur?",["0","1","2","4"],1,"Only the face numbered 4 satisfies the event."],
+["If a simple event has probability 1/12 with equally likely outcomes, how many outcomes are possible?",["6","10","12","24"],2,"For a simple event P=1/n; 1/n=1/12 means n=12."],
+["A card is chosen from cards numbered 1 to 9. 'Choose 8' is:",["Simple event","Compound event","Certain event","Impossible event"],0,"Only one card, number 8, satisfies the event."],
+["A fair die is rolled. 'Rolling less than 4' has how many favourable outcomes?",["1","2","3","4"],2,"The favourable outcomes are 1, 2 and 3."],
+["Which probability belongs to an impossible event?",["0","1/6","1/2","1"],0,"An impossible event has zero favourable outcomes."],
+["Which probability belongs to a certain event?",["0","1/6","1/2","1"],3,"A certain event includes every possible outcome."],
+["For a fair coin, which event is simple?",["Getting heads","Getting heads or tails","Getting a side that is not on the coin","Getting two heads in one toss"],0,"A single toss outcome 'heads' is one outcome."],
+["A bag has 3 equally likely coloured tokens: red, blue, green. Probability of blue is:",["1/3","2/3","1/2","3"],0,"One of three equally likely tokens is blue."],
+["A die is rolled. 'Getting 2 or an even number' includes which distinct outcomes?",["Only 2, 4 and 6","Only 2","1, 3 and 5","All numbers"],0,"The event is the set {2, 4, 6}; it is compound."],
+["A sample space has 20 equally likely outcomes. Probability of one specified outcome is:",["1/20","1/10","19/20","20"],0,"A single outcome is one favourable result out of twenty."],
+["Why does P(simple event)=1/n require equally likely outcomes?",["Because each outcome then has equal chance","Because outcomes disappear","Because the event has no outcome","Because probability can exceed 1"],0,"The formula assumes each of the n outcomes is equally likely."],
+["A fair die is rolled. 'Rolling a number at least 1' is:",["Simple","Compound","Certain","Impossible"],2,"All faces 1 through 6 satisfy the event, so it is certain."],
+["Which comparison is correct?",["Simple event: one outcome; compound event: multiple outcomes","Simple event: all outcomes; compound event: no outcomes","Both always have probability 1","A simple event cannot have a probability"],0,"Simple and compound events are distinguished by the number of outcomes they include."]
+];
 const INLINE_THEORETICAL_PROBABILITY_QUIZ=[
 ["Theoretical probability is calculated using:",["Observed results only","Favourable outcomes ÷ total equally likely outcomes","Total outcomes ÷ favourable outcomes","Number of trials × successes"],1,"Theoretical probability uses the sample space of equally likely outcomes."],
 ["A fair coin is tossed. The probability of heads is:",["0","1/4","1/2","1"],2,"There are two equally likely outcomes and one is heads."],
@@ -4184,6 +4249,7 @@ function startQuiz(){
   else if(norm(concept)==="median") quizSource=dedicated||INLINE_MEDIAN_QUIZ;
   else if(norm(concept)==="mean") quizSource=dedicated||INLINE_MEAN_QUIZ;
   else if(norm(concept)==="frequency distribution") quizSource=dedicated||INLINE_FREQUENCY_DISTRIBUTION_QUIZ;
+  else if(norm(concept)==="simple events") quizSource=dedicated||INLINE_SIMPLE_EVENTS_QUIZ;
   else if(norm(concept)==="theoretical probability") quizSource=dedicated||INLINE_THEORETICAL_PROBABILITY_QUIZ;
   else if(norm(concept)==="experimental probability") quizSource=dedicated||INLINE_EXPERIMENTAL_PROBABILITY_QUIZ;
   else if(norm(concept)==="data representation") quizSource=dedicated||INLINE_DATA_REPRESENTATION_QUIZ;
@@ -4228,7 +4294,7 @@ window.addEventListener("error",function(e){
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
 startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
-startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
+startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");
  if(box)box.insertAdjacentHTML("afterbegin",'<section class="card"><div class="empty"><b>Page recovery:</b> The concept renderer hit an error. Please reload once.</div></section>');

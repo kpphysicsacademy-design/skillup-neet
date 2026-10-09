@@ -1396,6 +1396,30 @@ if(norm(concept)==="coordinate representation") return `
 <div class="presets"><button class="preset crPreset" data-x="2" data-y="3">(2, 3)</button><button class="preset crPreset" data-x="-4" data-y="2">(−4, 2)</button><button class="preset crPreset" data-x="-3" data-y="-4">(−3, −4)</button><button class="preset crPreset" data-x="5" data-y="-2">(5, −2)</button></div>
 <p style="margin:10px 0 0;color:#66736b"><b>Remember:</b> the first number gives horizontal position x; the second gives vertical position y. The signs tell you the quadrant.</p>
 </div>`;
+if(norm(concept)==="consistency of equations") return `
+<div class="geometry-lesson consistency-equations-interactive-lesson">
+<strong>Decide whether a pair of linear equations has one solution, no solution, or infinitely many solutions.</strong>
+<div class="visual-banner">
+<div class="value-box"><small>COMPARE</small><strong>a₁/a₂</strong><span class="pill">x coefficients</span></div><div class="eq">↔</div>
+<div class="value-box"><small>COMPARE</small><strong>b₁/b₂</strong><span class="pill">y coefficients</span></div><div class="eq">↔</div>
+<div class="value-box"><small>COMPARE</small><strong>c₁/c₂</strong><span class="pill">constants</span></div>
+</div>
+<p>For equations a₁x+b₁y+c₁=0 and a₂x+b₂y+c₂=0, compare the coefficient ratios:</p>
+<ul>
+<li><b>Unique solution (consistent, independent):</b> a₁/a₂ ≠ b₁/b₂.</li>
+<li><b>No solution (inconsistent):</b> a₁/a₂ = b₁/b₂ ≠ c₁/c₂.</li>
+<li><b>Infinitely many solutions (consistent, dependent):</b> a₁/a₂ = b₁/b₂ = c₁/c₂.</li>
+</ul>
+<p><b>Important:</b> the ratios use the coefficients of the equations written in the form ax+by+c=0. Parallel distinct lines have no common point; coincident lines share every point.</p>
+<div class="control"><div class="head"><span>Explore a pair</span></div>
+<select id="consistencyPreset">
+<option value="unique">Unique solution: x+y−5=0; x−y−1=0</option>
+<option value="none">No solution: x+y−2=0; 2x+2y−6=0</option>
+<option value="infinite">Infinitely many: x+y−3=0; 2x+2y−6=0</option>
+</select></div>
+<div class="checks" id="consistencyWork"><b>Result:</b> Unique solution. The two lines intersect at one point.</div>
+<p style="margin-bottom:0;color:#66736b"><b>Remember:</b> consistent means at least one solution; inconsistent means no solution.</p>
+</div>`;
 if(norm(concept)==="elimination method") return `
 <div class="geometry-lesson elimination-method-interactive-lesson">
 <strong>Eliminate one variable by making its coefficients equal or opposite, solve for the remaining variable, then substitute back.</strong>
@@ -3263,6 +3287,18 @@ function startCoordinateRepresentationDemo(){
  document.querySelectorAll(".crPreset").forEach(btn=>btn.addEventListener("click",()=>{x.value=btn.dataset.x;y.value=btn.dataset.y;update();}));
  update();
 }
+function startConsistencyOfEquationsDemo(){
+ if(norm(concept)!=="consistency of equations")return;
+ const select=document.getElementById("consistencyPreset"),out=document.getElementById("consistencyWork");
+ if(!select||!out)return;
+ const cases={
+  unique:"<b>Consistent and independent — one solution.</b><br>x+y=5 and x−y=1 intersect at (3, 2). Here the x- and y-coefficient ratios are unequal.",
+  none:"<b>Inconsistent — no solution.</b><br>x+y=2 and 2x+2y=6 become x+y=2 and x+y=3. Same slope, different lines, so they never meet.",
+  infinite:"<b>Consistent and dependent — infinitely many solutions.</b><br>2x+2y=6 is exactly twice x+y=3. Both equations describe the same line."
+ };
+ const render=()=>{out.innerHTML="<b>Classification:</b><br>"+cases[select.value];};
+ select.addEventListener("change",render);render();
+}
 function startEliminationMethodDemo(){
  if(norm(concept)!=="elimination method")return;
  const select=document.getElementById("elimPreset"),out=document.getElementById("elimWork");
@@ -4069,6 +4105,38 @@ const INLINE_GRAPHICAL_SOLUTION_QUIZ=[
 ["For a pair ax+by+c=0, each equation graphs as a:",["Straight line","Circle","Parabola","Triangle"],0,"A first-degree equation in two variables represents a straight line."],
 ["The pair x−y=2 and 2x−2y=4 has:",["No solution","Unique solution","Infinitely many solutions","Exactly two solutions"],2,"The second equation is twice the first, so both lines coincide."],
 ["The pair x−y=2 and 2x−2y=6 has:",["No solution","Unique solution","Infinitely many solutions","Solution (2,0)"],0,"They imply x−y=2 and x−y=3: parallel distinct lines."]
+];
+const INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ=[
+["A pair of linear equations is consistent if it has:",["At least one solution","No solution","Only negative solutions","No variables"],0,"Consistent systems have one or more solutions."],
+["If a₁/a₂ ≠ b₁/b₂, the pair has:",["No solution","A unique solution","Infinitely many solutions","Always two solutions"],1,"Unequal coefficient ratios for x and y mean the lines intersect once."],
+["If a₁/a₂=b₁/b₂≠c₁/c₂, the pair has:",["A unique solution","No solution","Infinitely many solutions","Exactly two solutions"],1,"Equal x- and y-coefficient ratios but a different constant ratio indicate parallel distinct lines."],
+["If a₁/a₂=b₁/b₂=c₁/c₂, the pair has:",["No solution","One solution","Infinitely many solutions","Two solutions"],2,"All ratios equal means the equations represent the same line."],
+["Which term describes a pair with no solution?",["Consistent","Inconsistent","Dependent","Equivalent"],1,"An inconsistent pair has no common solution."],
+["Coincident lines represent:",["No solution","One solution","Infinitely many solutions","Two solutions"],2,"Every point on the shared line satisfies both equations."],
+["Distinct parallel lines represent:",["One solution","No solution","Infinitely many solutions","Exactly three solutions"],1,"Parallel distinct lines never intersect."],
+["The equations x+y=4 and x−y=2 have:",["No solution","One solution","Infinitely many solutions","No common variables"],1,"They intersect at (3,1), so the solution is unique."],
+["The pair x+y=3 and 2x+2y=6 is:",["Inconsistent","Consistent and dependent","Consistent and independent","Impossible to classify"],1,"The second equation is twice the first, so both lines coincide."],
+["The pair x+y=2 and 2x+2y=6 is:",["Consistent and dependent","Consistent and independent","Inconsistent","A single equation"],2,"They reduce to x+y=2 and x+y=3, which cannot both hold."],
+["For x+y=5 and x−y=1, the solution count is:",["Zero","One","Infinitely many","Two"],1,"The lines intersect at (3,2), so there is one solution."],
+["If two equations have proportional x and y coefficients but non-proportional constants, the lines are:",["Coincident","Parallel and distinct","Perpendicular","The same line"],1,"The constant ratio differs, so the lines are distinct and parallel."],
+["Which pair has infinitely many solutions?",["x+y=4; x+y=5","x−y=1; 2x−2y=2","x+y=4; x−y=4","2x+y=4; x+2y=4"],1,"The second equation is twice the first."],
+["Which pair has no solution?",["x+y=4; 2x+2y=8","x−y=2; 2x−2y=7","x+y=5; x−y=1","x=1; y=2"],1,"The second equation implies x−y=3.5, conflicting with x−y=2."],
+["A pair with exactly one solution is called:",["Consistent and independent","Consistent and dependent","Inconsistent","Undefined"],0,"Intersecting distinct lines have one solution."],
+["If two equations are equivalent multiples of each other, their solution sets are:",["Disjoint","Identical","Always empty","Finite with two points"],1,"Multiplying an equation by a non-zero constant preserves its solutions."],
+["For 3x+6y=9 and x+2y=3, the pair is:",["Inconsistent","Consistent and dependent","Consistent and independent","No variables"],1,"The first equation is three times the second."],
+["For 2x+4y=8 and x+2y=5, the pair is:",["Consistent and dependent","Consistent and independent","Inconsistent","Unique solution"],2,"Both left sides are proportional, but the constants are not."],
+["If a pair of lines intersect, the system is:",["Inconsistent","Consistent with one solution","Consistent with infinitely many solutions","Undefined"],1,"A single intersection is a unique common solution."],
+["Which ratio condition signals infinitely many solutions?",["a₁/a₂ ≠ b₁/b₂","a₁/a₂=b₁/b₂≠c₁/c₂","a₁/a₂=b₁/b₂=c₁/c₂","a₁/a₂≠c₁/c₂ only"],2,"All three coefficient ratios equal means coincident lines."],
+["Which ratio condition signals no solution?",["a₁/a₂=b₁/b₂=c₁/c₂","a₁/a₂=b₁/b₂≠c₁/c₂","a₁/a₂≠b₁/b₂","c₁=0 only"],1,"Equal first two ratios and a different constant ratio mean no intersection."],
+["If a₁/a₂ differs from b₁/b₂, what is the number of solutions?",["None","Exactly one","Infinitely many","Cannot be determined"],1,"The lines have different slopes and intersect at one point."],
+["A system is dependent when its equations:",["Have no shared point","Represent the same line","Are always perpendicular","Have different slopes"],1,"Dependent equations describe the same line."],
+["A system is inconsistent when its lines are:",["Coincident","Intersecting","Parallel and distinct","The same line"],2,"Parallel distinct lines have no common point."],
+["For x+y=6 and 2x+2y=12, the number of solutions is:",["Zero","One","Infinitely many","Two"],2,"The equations are equivalent, so every point on the line is a solution."],
+["For x+y=6 and 2x+2y=10, the number of solutions is:",["Zero","One","Infinitely many","Two"],0,"They reduce to x+y=6 and x+y=5, so no point satisfies both."],
+["Which statement about consistency is correct?",["Every pair has one solution","Consistent means at least one solution","Inconsistent means infinitely many solutions","Parallel lines always coincide"],1,"Consistency means the system has at least one solution."],
+["If two lines cross at (0,0), the pair is:",["Inconsistent","Consistent and independent","Consistent and dependent always","Without a solution"],1,"A single crossing point gives exactly one solution."],
+["Which equations are coincident?",["x+y=2 and x+y=4","x−y=3 and 2x−2y=6","x+y=1 and x−y=1","2x+y=4 and x+2y=4"],1,"The second equation is twice the first, so they are equivalent."],
+["When the ratios a₁/a₂ and b₁/b₂ are equal but c₁/c₂ is different, the graph shows:",["Intersecting lines","Coincident lines","Parallel distinct lines","Perpendicular lines"],2,"The equations have proportional variable coefficients but incompatible constants."]
 ];
 const INLINE_ELIMINATION_METHOD_QUIZ=[
 ["The elimination method solves a pair of equations by:",["Removing one variable using addition or subtraction","Drawing only one axis","Squaring both equations","Changing variables"],0,"Choose operations that cancel one variable."],
@@ -4885,7 +4953,8 @@ function startQuiz(){
   else if(norm(concept)==="plotting points") quizSource=dedicated||INLINE_PLOTTING_POINTS_QUIZ;
   else if(norm(concept)==="coordinates of a point") quizSource=dedicated||INLINE_COORDINATES_OF_A_POINT_QUIZ;
   else if(norm(concept)==="coordinate representation") quizSource=dedicated||INLINE_COORDINATE_REPRESENTATION_QUIZ;
-  else if(norm(concept)==="elimination method") quizSource=dedicated||INLINE_ELIMINATION_METHOD_QUIZ;
+  else if(norm(concept)==="consistency of equations") quizSource=dedicated||INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ;
+   else if(norm(concept)==="elimination method") quizSource=dedicated||INLINE_ELIMINATION_METHOD_QUIZ;
    else if(norm(concept)==="substitution method") quizSource=dedicated||INLINE_SUBSTITUTION_METHOD_QUIZ;
    else if(norm(concept)==="consistency of equations") quizSource=dedicated||INLINE_CONSISTENCY_OF_EQUATIONS_QUIZ;
    else if(norm(concept)==="linear equations in two variables") quizSource=dedicated||INLINE_LINEAR_EQUATIONS_TWO_VARIABLES_QUIZ;
@@ -4924,7 +4993,7 @@ window.addEventListener("error",function(e){
  }catch(_){}
 });
 try{renderConceptPage();startModeDemo();startMedianDemo();startMeanDemo();startDataRepresentationDemo();startTriangleAreaDemo();startHeronsVisualExplorer();startRationalDemo();startHistogramsDemo();startDataCollectionDemo();startFrequencyDistributionDemo();startFrequencyTablesDemo();startBarGraphsDemo();startPieChartsDemo();startVolumeDemo();startAreaPolygonsDemo();startSurfaceAreaDemo();startCircleAreaDemo();startPerimeterDemo();startPowersDemo();startSquaresDemo();startCubesDemo();startVariablesDemo();startAlgebraDemo();startFactorisationDemo();startLinearEquationsDemo();startAlgebraIdentitiesDemo();startBasicGeometricIdeasDemo();startPolygonsDemo();startGeometricConstructionsDemo();startQuadrilateralsDemo();startLinesAnglesDemo();startTrianglesDemo();startParallelTransversalsDemo();startTermsDemo();startLikeUnlikeDemo();startEquivalentDemo();startComparingRationalDemo();startRationalOperationsDemo();startPropertiesDemo();
-startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startConsistencyOfEquationsDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
+startIrrationalityProofsDemo();startIrrationalNumbersDemo();startGraphLinearEquationDemo();startRealNumbersDemo();startZerosOfPolynomialDemo();startRemainderTheoremBasicsDemo();startFactorTheoremBasicsDemo();startEuclidGeometryDemo();startTrianglesCongruenceDemo();startCirclesDemo();startCartesianPlaneDemo();startParallelogramDemo();startDistanceIntuitionDemo();startPlottingPointsDemo();startCoordinatesOfPointDemo();startCoordinateRepresentationDemo();startConsistencyOfEquationsDemo();startEliminationMethodDemo();startSubstitutionMethodDemo();startConsistencyOfEquationsDemo();startLinearEquationsInTwoVariablesDemo();startFactorisationOfPolynomialsDemo();startDegreeOfPolynomialDemo();startPolynomialBasicsDemo();startRationalisationBasicsDemo();startDecimalExpansionsDemo();startLawsOfExponentsDemo();
 startProbabilityBasicsDemo();startExperimentalProbabilityDemo();startHcfLcmDemo();startPrimeFactorisationDemo();startFundamentalTheoremArithmeticDemo();startEuclidDivisionAlgorithmDemo();startSimpleEventsDemo();startTheoreticalProbabilityDemo();startQuiz();refreshMath();whenMathJaxReady();}catch(err){
  console.error("SkillUp Maths bootstrap error:",err);
  const box=document.getElementById("app");

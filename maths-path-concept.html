@@ -1000,6 +1000,28 @@ if(norm(concept)==="set representation") return `
 <div class="formula">Roster: B = {1, 2, 3, 4}</div><div class="formula">Set-builder: B = {x ∈ ℕ | 1 ≤ x &lt; 5}</div>
 <div class="checks"><b>Remember:</b> Roster form lists elements; set-builder form states the defining property. Make sure the rule and the listed elements match exactly.</div>
 </div>`;
+if(norm(concept)==="cartesian product") return `
+<div class="geometry-lesson cartesian-product-virtual-lesson">
+<strong>Cartesian Product — Virtual Learn Lab</strong>
+<p>The Cartesian product of sets A and B, written <b>A × B</b>, is the set of all ordered pairs (a, b) where a ∈ A and b ∈ B.</p>
+<div class="formula">A × B = {(a, b) | a ∈ A and b ∈ B}</div>
+<p><b>Important:</b> Order matters. In general, (a, b) ≠ (b, a), and A × B is not usually the same as B × A.</p>
+<h3>Explore ordered pairs</h3>
+<p>Choose sample sets and watch their Cartesian product update.</p>
+<div class="control"><div class="head"><label for="cpASet">Set A</label></div><select id="cpASet" class="range" style="width:100%;min-height:42px"><option value="1,2">A = {1, 2}</option><option value="a,b">A = {a, b}</option><option value="red,blue">A = {red, blue}</option><option value="2,4,6">A = {2, 4, 6}</option></select></div>
+<div class="control"><div class="head"><label for="cpBSet">Set B</label></div><select id="cpBSet" class="range" style="width:100%;min-height:42px"><option value="x,y">B = {x, y}</option><option value="3,4">B = {3, 4}</option><option value="red,blue">B = {red, blue}</option><option value="p,q,r">B = {p, q, r}</option></select></div>
+<div class="props"><div class="prop"><span>Elements in A</span><strong id="cpACount">2</strong></div><div class="prop"><span>Elements in B</span><strong id="cpBCount">2</strong></div><div class="prop"><span>Pairs in A × B</span><strong id="cpProductCount">4</strong></div></div>
+<div class="checks" id="cpProductResult" aria-live="polite">A × B = {(1, x), (1, y), (2, x), (2, y)}</div>
+<div class="formula" id="cpProductRule">n(A × B) = n(A) × n(B) = 2 × 2 = 4</div>
+<div class="checks" id="cpProductExplanation" aria-live="polite">Each element of A pairs with every element of B.</div>
+<h3>Worked example</h3>
+<p>If A = {1, 2} and B = {a, b, c}, then:</p>
+<div class="formula">A × B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)}</div>
+<p>There are 2 × 3 = 6 ordered pairs.</p>
+<h3>Key facts</h3>
+<ul><li>If n(A) = m and n(B) = n, then n(A × B) = mn.</li><li>Usually A × B ≠ B × A because the order of each pair changes.</li><li>If either set is empty, the Cartesian product is empty: A × ∅ = ∅.</li><li>A relation from A to B is any subset of A × B.</li></ul>
+<div class="checks"><b>Remember:</b> First choose an element from A, then pair it with every element of B. Repeat for each element of A.</div>
+</div>`;
 if(norm(concept)==="tangent to a circle") return `
 <div class="geometry-lesson tangent-lesson">
 <strong>Tangent to a Circle — Learn with Virtual Diagram</strong>
@@ -6284,6 +6306,24 @@ function initSetRepresentationVirtualLab(){
  mode.addEventListener("change",update);limit.addEventListener("input",update);update();
 }
 safeInit("Set representation virtual learn lab", initSetRepresentationVirtualLab);
+function initCartesianProductVirtualLab(){
+ if(norm(concept)!=="cartesian product")return;
+ const aEl=document.getElementById("cpASet"),bEl=document.getElementById("cpBSet");
+ if(!aEl||!bEl)return;
+ const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+ const setText=arr=>"{"+arr.join(", ")+"}";
+ const update=()=>{
+  const A=aEl.value.split(","),B=bEl.value.split(",");
+  const pairs=[];
+  A.forEach(a=>B.forEach(b=>pairs.push("("+a+", "+b+")")));
+  put("cpACount",A.length);put("cpBCount",B.length);put("cpProductCount",pairs.length);
+  put("cpProductResult","A × B = "+(pairs.length?"{"+pairs.join(", ")+"}":"∅"));
+  put("cpProductRule","n(A × B) = n(A) × n(B) = "+A.length+" × "+B.length+" = "+pairs.length);
+  put("cpProductExplanation",A.length&&B.length?"Each of the "+A.length+" element(s) in A pairs with all "+B.length+" element(s) in B, giving "+pairs.length+" ordered pair(s).":"At least one set is empty, so the Cartesian product is empty.");
+ };
+ aEl.addEventListener("change",update);bEl.addEventListener("change",update);update();
+}
+safeInit("Cartesian product virtual learn lab", initCartesianProductVirtualLab);
 safeInit("mastery quiz", startQuiz);
 safeInit("Applications of Similarity virtual skills", initApplicationsSimilarityLab);
 safeInit("Pythagoras virtual lab", initPythagorasVirtualLab);

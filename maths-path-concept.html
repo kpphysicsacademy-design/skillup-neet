@@ -7270,5 +7270,23 @@ safeInit("MathJax", whenMathJaxReady);
 window.addEventListener("load",function(){whenMathJaxReady();});
 })();
 </script>
+<script>
+/* Independent recovery: prevent an empty concept area if the primary renderer fails. */
+(function(){
+ "use strict";
+ function recoverIfBlank(){
+  var app=document.getElementById("app");
+  if(!app || app.children.length || (app.textContent||"").trim()) return;
+  var params=new URLSearchParams(window.location.search);
+  var concept=(params.get("concept")||"Mathematics concept").trim();
+  var chapter=(params.get("chapter")||"Mathematics").trim();
+  var safe=function(s){return String(s).replace(/[&<>"]/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch];});};
+  app.innerHTML='<section class="card hero"><div class="kicker">'+safe(chapter)+' • RECOVERY MODE</div><h1>'+safe(concept)+'</h1><p>The lesson did not load correctly. Use the Maths Path link below, or reload this page after the latest deployment.</p><p style="margin-top:14px"><a href="/maths-path.html" style="display:inline-block;padding:12px 16px;border-radius:12px;background:#58cc02;color:#fff;text-decoration:none;font-weight:900">Back to Maths Path</a> <button type="button" id="mathsRetry" style="margin-left:6px;padding:12px 16px;border:1px solid #d9e8d4;border-radius:12px;background:#fff;font-weight:900">Reload page</button></p><p style="font-size:11px;margin-top:12px">If this message persists, the concept renderer needs further JavaScript debugging.</p></section>';
+  var retry=document.getElementById("mathsRetry");
+  if(retry) retry.addEventListener("click",function(){window.location.reload();});
+ }
+ window.addEventListener("load",function(){window.setTimeout(recoverIfBlank,1200);});
+})();
+</script>
 </body>
-</html
+</html>

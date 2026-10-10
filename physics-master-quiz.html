@@ -34,7 +34,7 @@ async function getQs(concept){
   const url='physics-'+slug(concept)+'.html';
   try{
     const t=await fetch(url,{cache:'no-store'}).then(r=>r.text());
-    const m=t.match(/(?:const|var|let)\s+qs\s*=\s*(\[[\s\S]*?\])\s*;/);
+    const m=t.match(/(?:const|var|let)\s+(?:qs|Q)\s*=\s*(\[[\s\S]*?\])\s*;/);
     if(m){const qs=Function('return '+m[1])();if(Array.isArray(qs)&&qs.length)return qs;}
   }catch(e){}
   return fallback[concept]||[];

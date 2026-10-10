@@ -21250,334 +21250,334 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
   ],
   "Set representation": [
     [
-      "Membership practice 1: A = {4, 6, 8}. Which number belongs to A?",
+      "Which is the roster form of the even natural numbers less than 10?",
       [
-        "6",
+        "{2, 4, 6, 8}",
+        "{1, 3, 5, 7, 9}",
+        "{0, 2, 4, 6, 8, 10}",
+        "{2, 4, 6, 8, 10}"
+      ],
+      0,
+      "List the even natural numbers strictly below 10: 2, 4, 6 and 8."
+    ],
+    [
+      "Which set-builder description represents A = {2, 4, 6, 8}?",
+      [
+        "{x ∈ ℕ | x is even and 2 ≤ x ≤ 8}",
+        "{x ∈ ℕ | x is odd and 2 ≤ x ≤ 8}",
+        "{x ∈ ℕ | x is even and 2 < x < 8}",
+        "{x ∈ ℕ | x ≤ 8}"
+      ],
+      0,
+      "The condition selects exactly the even natural numbers from 2 through 8."
+    ],
+    [
+      "If A = {a, e, i, o, u}, which statement is true?",
+      [
+        "u ∈ A",
+        "b ∈ A",
+        "{a} ∈ A",
+        "A ∈ u"
+      ],
+      0,
+      "The symbol ∈ means 'is an element of'; u is listed in A."
+    ],
+    [
+      "Let B = {1, 2, 2, 3, 3, 3}. What is B when written as a set?",
+      [
+        "{1, 2, 3}",
+        "{1, 2, 2, 3}",
+        "{1, 2, 3, 3}",
+        "{1, 2, 2, 3, 3, 3}"
+      ],
+      0,
+      "Repeated entries do not create new elements in a set."
+    ],
+    [
+      "Which roster form represents the integers x satisfying −2 ≤ x ≤ 2?",
+      [
+        "{−2, −1, 0, 1, 2}",
+        "{−1, 0, 1}",
+        "{−2, 2}",
+        "{−2, −1, 1, 2}"
+      ],
+      0,
+      "Both endpoints and every integer between them are included."
+    ],
+    [
+      "Which is the correct set-builder form for the prime numbers less than 10?",
+      [
+        "{x ∈ ℕ | x is prime and x < 10}",
+        "{x ∈ ℕ | x is composite and x < 10}",
+        "{x ∈ ℕ | x is prime and x ≤ 1}",
+        "{x ∈ ℕ | x is odd and x < 10}"
+      ],
+      0,
+      "The condition describes all primes below 10: 2, 3, 5 and 7."
+    ],
+    [
+      "For A = {3, 6, 9, 12}, which statement is false?",
+      [
+        "5 ∈ A",
+        "6 ∈ A",
+        "12 ∈ A",
+        "9 ∈ A"
+      ],
+      0,
+      "5 is not listed in A, so 5 ∉ A."
+    ],
+    [
+      "Which set is equal to {red, blue, green}?",
+      [
+        "{green, red, blue}",
+        "{red, blue}",
+        "{red, blue, green, yellow}",
+        "{red, red, blue, green} with yellow added"
+      ],
+      0,
+      "Order does not matter; equal sets contain exactly the same elements."
+    ],
+    [
+      "What does x ∉ A mean?",
+      [
+        "x is not an element of A",
+        "x is a subset of A",
+        "A is an element of x",
+        "x must be the empty set"
+      ],
+      0,
+      "The symbol ∉ indicates non-membership."
+    ],
+    [
+      "Let A = {x ∈ ℤ | −1 < x ≤ 3}. Which is A in roster form?",
+      [
+        "{0, 1, 2, 3}",
+        "{−1, 0, 1, 2, 3}",
+        "{0, 1, 2}",
+        "{−1, 1, 2, 3}"
+      ],
+      0,
+      "The integers greater than −1 and at most 3 are 0, 1, 2 and 3."
+    ],
+    [
+      "Which description is well-defined as a set?",
+      [
+        "The natural numbers less than 6",
+        "The most interesting books",
+        "The best songs",
+        "Tall students, without a height rule"
+      ],
+      0,
+      "Membership in a set must be determined by an unambiguous rule."
+    ],
+    [
+      "If A = {1, 3, 5, 7}, then n(A) equals:",
+      [
+        "4",
+        "3",
         "5",
-        "7",
-        "9"
+        "7"
       ],
       0,
-      "6 is listed in A."
+      "There are four distinct elements in A."
     ],
     [
-      "Membership practice 2: A = {5, 7, 9}. Which number belongs to A?",
+      "Which symbol correctly completes: 4 __ {2, 4, 6}?",
       [
-        "7",
-        "6",
-        "8",
-        "10"
+        "∈",
+        "⊆",
+        "∉",
+        "="
       ],
       0,
-      "7 is listed in A."
+      "4 is an element of the set, so use ∈."
     ],
     [
-      "Membership practice 3: A = {6, 8, 10}. Which number belongs to A?",
+      "Which symbol correctly completes: {4} __ {2, 4, 6}?",
       [
-        "8",
-        "7",
-        "9",
-        "11"
+        "⊆",
+        "∈",
+        "∉",
+        "∩"
       ],
       0,
-      "8 is listed in A."
+      "The singleton {4} is a subset because its only element belongs to the larger set."
     ],
     [
-      "Membership practice 4: A = {7, 9, 11}. Which number belongs to A?",
+      "Which is the roster form of {x ∈ ℕ | x² = 16}, taking ℕ = {1, 2, 3, …}?",
       [
-        "9",
-        "8",
-        "10",
-        "12"
+        "{4}",
+        "{−4, 4}",
+        "{16}",
+        "{−4}"
       ],
       0,
-      "9 is listed in A."
+      "Only 4 is a natural number whose square is 16."
     ],
     [
-      "Membership practice 5: A = {8, 10, 12}. Which number belongs to A?",
+      "Which set-builder condition describes A = {5, 10, 15, 20}?",
       [
-        "10",
-        "9",
-        "11",
-        "13"
+        "{x ∈ ℕ | x is a multiple of 5 and 5 ≤ x ≤ 20}",
+        "{x ∈ ℕ | x is a multiple of 10 and x ≤ 20}",
+        "{x ∈ ℕ | x < 20}",
+        "{x ∈ ℕ | x is odd and x ≤ 20}"
       ],
       0,
-      "10 is listed in A."
+      "The condition selects precisely the multiples of 5 from 5 to 20."
     ],
     [
-      "Membership practice 6: A = {9, 11, 13}. Which number belongs to A?",
+      "Which statement about a set is correct?",
       [
-        "11",
-        "10",
-        "12",
-        "14"
+        "The order of listing elements does not matter",
+        "Repeated elements are counted repeatedly",
+        "Every set must contain a number",
+        "A set cannot contain letters"
       ],
       0,
-      "11 is listed in A."
+      "Sets are unordered collections of distinct objects."
     ],
     [
-      "Membership practice 7: A = {10, 12, 14}. Which number belongs to A?",
+      "Let A = {a, b, c}. Which is not an element of A?",
       [
-        "12",
-        "11",
-        "13",
-        "15"
+        "d",
+        "a",
+        "b",
+        "c"
       ],
       0,
-      "12 is listed in A."
+      "d does not appear among the listed elements."
     ],
     [
-      "Membership practice 8: A = {11, 13, 15}. Which number belongs to A?",
+      "Which roster form represents the vowels in the English alphabet?",
       [
-        "13",
-        "12",
-        "14",
-        "16"
+        "{a, e, i, o, u}",
+        "{a, b, e, i, o, u}",
+        "{a, e, i, o}",
+        "{a, e, i, o, u, y}"
       ],
       0,
-      "13 is listed in A."
+      "The five standard vowel letters are a, e, i, o and u."
     ],
     [
-      "Membership practice 9: A = {12, 14, 16}. Which number belongs to A?",
+      "A = {x ∈ ℤ | x is even and −4 ≤ x ≤ 4}. Which is A?",
       [
-        "14",
-        "13",
-        "15",
-        "17"
+        "{−4, −2, 0, 2, 4}",
+        "{−3, −1, 1, 3}",
+        "{−4, −2, 2, 4}",
+        "{−4, −2, 0, 2, 4, 6}"
       ],
       0,
-      "14 is listed in A."
+      "Include every even integer in the interval, including zero and both endpoints."
     ],
     [
-      "Membership practice 10: A = {13, 15, 17}. Which number belongs to A?",
+      "Which expression means 'the set of natural numbers x such that x is less than 5'?",
       [
-        "15",
-        "14",
-        "16",
-        "18"
+        "{x ∈ ℕ | x < 5}",
+        "{x ∈ ℕ | x > 5}",
+        "{x ∈ ℤ | x = 5}",
+        "{x ∈ ℕ | x ≤ 0}"
       ],
       0,
-      "15 is listed in A."
+      "The vertical bar means 'such that'; the condition is x < 5."
     ],
     [
-      "Membership practice 11: A = {14, 16, 18}. Which number belongs to A?",
+      "If A = {2, 4, 6}, which statement is correct?",
       [
-        "16",
-        "15",
-        "17",
-        "19"
+        "2 ∈ A and 5 ∉ A",
+        "2 ∉ A and 5 ∈ A",
+        "{2} ∈ A",
+        "A ∈ 2"
       ],
       0,
-      "16 is listed in A."
+      "2 is listed as an element; 5 is not."
     ],
     [
-      "Membership practice 12: A = {15, 17, 19}. Which number belongs to A?",
+      "Which set has exactly one element?",
       [
-        "17",
-        "16",
-        "18",
-        "20"
+        "{0}",
+        "∅",
+        "{0, 1}",
+        "{1, 2, 3}"
       ],
       0,
-      "17 is listed in A."
+      "The set {0} contains one element. The empty set contains none."
     ],
     [
-      "Membership practice 13: A = {16, 18, 20}. Which number belongs to A?",
+      "If A = {1, 2, 3, 4}, what does the condition x ∈ A state?",
       [
-        "18",
-        "17",
-        "19",
-        "21"
+        "x is one of 1, 2, 3 or 4",
+        "x must be greater than 4",
+        "x is a subset of A",
+        "A contains every real number"
       ],
       0,
-      "18 is listed in A."
+      "Membership means x equals one of the listed elements."
     ],
     [
-      "Membership practice 14: A = {17, 19, 21}. Which number belongs to A?",
+      "Which roster form corresponds to {x ∈ ℕ | 1 ≤ x < 5}?",
       [
-        "19",
-        "18",
-        "20",
-        "22"
+        "{1, 2, 3, 4}",
+        "{1, 2, 3, 4, 5}",
+        "{2, 3, 4}",
+        "{0, 1, 2, 3, 4}"
       ],
       0,
-      "19 is listed in A."
+      "The lower endpoint 1 is included, while 5 is excluded."
     ],
     [
-      "Membership practice 15: A = {18, 20, 22}. Which number belongs to A?",
+      "Which is the best reason to use set-builder notation?",
       [
-        "20",
-        "19",
-        "21",
-        "23"
+        "It describes a set using a common property",
+        "It always lists every element separately",
+        "It makes every set infinite",
+        "It shows the order of elements"
       ],
       0,
-      "20 is listed in A."
+      "Set-builder notation defines membership through a condition or property."
     ],
     [
-      "Membership practice 16: A = {19, 21, 23}. Which number belongs to A?",
+      "For A = {2, 3, 5, 7}, which condition is exact?",
       [
-        "21",
-        "20",
-        "22",
-        "24"
+        "{x ∈ ℕ | x is prime and x < 10}",
+        "{x ∈ ℕ | x is odd and x < 10}",
+        "{x ∈ ℕ | x is prime and x ≤ 5}",
+        "{x ∈ ℕ | x is composite and x < 10}"
       ],
       0,
-      "21 is listed in A."
+      "The prime natural numbers below 10 are exactly 2, 3, 5 and 7."
     ],
     [
-      "Membership practice 17: A = {20, 22, 24}. Which number belongs to A?",
+      "Which statement is true for A = {1, 2, 3}?",
       [
-        "22",
-        "21",
-        "23",
-        "25"
+        "3 ∈ A",
+        "3 ⊆ A",
+        "{1, 2, 3} ∈ A",
+        "A ∈ 1"
       ],
       0,
-      "22 is listed in A."
+      "3 is an element of A. Subset notation applies to sets, not the number 3."
     ],
     [
-      "Membership practice 18: A = {21, 23, 25}. Which number belongs to A?",
+      "A student writes {2, 4, 6, 8, 10} for even natural numbers less than 10. What is the error?",
       [
-        "23",
-        "22",
-        "24",
-        "26"
+        "10 should be excluded because the condition is less than 10",
+        "2 should be excluded",
+        "All even numbers should be removed",
+        "The elements must be written in reverse order"
       ],
       0,
-      "23 is listed in A."
+      "'Less than 10' is a strict inequality, so 10 is not included."
     ],
     [
-      "Membership practice 19: A = {22, 24, 26}. Which number belongs to A?",
+      "Which set contains all integers x for which x is a solution of x + 2 = 5?",
       [
-        "24",
-        "23",
-        "25",
-        "27"
+        "{3}",
+        "{−3, 3}",
+        "{5}",
+        "{−2, 2}"
       ],
       0,
-      "24 is listed in A."
-    ],
-    [
-      "Membership practice 20: A = {23, 25, 27}. Which number belongs to A?",
-      [
-        "25",
-        "24",
-        "26",
-        "28"
-      ],
-      0,
-      "25 is listed in A."
-    ],
-    [
-      "Membership practice 21: A = {24, 26, 28}. Which number belongs to A?",
-      [
-        "26",
-        "25",
-        "27",
-        "29"
-      ],
-      0,
-      "26 is listed in A."
-    ],
-    [
-      "Membership practice 22: A = {25, 27, 29}. Which number belongs to A?",
-      [
-        "27",
-        "26",
-        "28",
-        "30"
-      ],
-      0,
-      "27 is listed in A."
-    ],
-    [
-      "Membership practice 23: A = {26, 28, 30}. Which number belongs to A?",
-      [
-        "28",
-        "27",
-        "29",
-        "31"
-      ],
-      0,
-      "28 is listed in A."
-    ],
-    [
-      "Membership practice 24: A = {27, 29, 31}. Which number belongs to A?",
-      [
-        "29",
-        "28",
-        "30",
-        "32"
-      ],
-      0,
-      "29 is listed in A."
-    ],
-    [
-      "Membership practice 25: A = {28, 30, 32}. Which number belongs to A?",
-      [
-        "30",
-        "29",
-        "31",
-        "33"
-      ],
-      0,
-      "30 is listed in A."
-    ],
-    [
-      "Membership practice 26: A = {29, 31, 33}. Which number belongs to A?",
-      [
-        "31",
-        "30",
-        "32",
-        "34"
-      ],
-      0,
-      "31 is listed in A."
-    ],
-    [
-      "Membership practice 27: A = {30, 32, 34}. Which number belongs to A?",
-      [
-        "32",
-        "31",
-        "33",
-        "35"
-      ],
-      0,
-      "32 is listed in A."
-    ],
-    [
-      "Membership practice 28: A = {31, 33, 35}. Which number belongs to A?",
-      [
-        "33",
-        "32",
-        "34",
-        "36"
-      ],
-      0,
-      "33 is listed in A."
-    ],
-    [
-      "Membership practice 29: A = {32, 34, 36}. Which number belongs to A?",
-      [
-        "34",
-        "33",
-        "35",
-        "37"
-      ],
-      0,
-      "34 is listed in A."
-    ],
-    [
-      "Membership practice 30: A = {33, 35, 37}. Which number belongs to A?",
-      [
-        "35",
-        "34",
-        "36",
-        "38"
-      ],
-      0,
-      "35 is listed in A."
+      "Solving x + 2 = 5 gives x = 3, so the solution set is {3}."
     ]
   ],
   "Types of sets": [

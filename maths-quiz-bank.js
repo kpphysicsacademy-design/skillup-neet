@@ -17268,56 +17268,56 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which is a quadratic equation?",
       [
+        "1/x=2",
         "2x+5=0",
         "x²−4=0",
-        "x³−1=0",
-        "1/x=2"
+        "x³−1=0"
       ],
-      1,
+      0,
       "A quadratic equation has degree 2."
     ],
     [
       "In 3x²−7x+2=0, coefficient a is:",
       [
+        "7",
         "−7",
         "2",
-        "3",
-        "7"
+        "3"
       ],
-      2,
+      1,
       "Compare with ax²+bx+c=0."
     ],
     [
       "The standard form is:",
       [
-        "ax+b=0",
         "ax²+bx+c=0, a≠0",
         "ax³+bx+c=0",
-        "ax²=bx²"
+        "ax²=bx²",
+        "ax+b=0"
       ],
-      1,
+      2,
       "The coefficient of x² must be nonzero."
     ],
     [
       "For x²−9x+20=0, (a,b,c) is:",
       [
+        "(1,−9,−20)",
         "(1,−9,20)",
         "(1,9,20)",
-        "(−1,−9,20)",
-        "(1,−9,−20)"
+        "(−1,−9,20)"
       ],
-      0,
+      3,
       "Read coefficients from standard form."
     ],
     [
       "Which is not quadratic?",
       [
-        "x²+2x+1=0",
-        "4x²−3=0",
         "7x−2=0",
-        "2x²+x−6=0"
+        "2x²+x−6=0",
+        "x²+2x+1=0",
+        "4x²−3=0"
       ],
-      2,
+      0,
       "7x−2=0 is linear."
     ],
     [
@@ -17345,78 +17345,78 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "In 4x² + 9x − 2 = 0, the coefficient a is:",
       [
+        "0",
         "4",
         "9",
-        "−2",
-        "0"
+        "−2"
       ],
-      0,
+      3,
       "Compare with ax² + bx + c = 0: a = 4, b = 9 and c = −2."
     ],
     [
       "In x² − 6x + 8 = 0, the coefficient c is:",
       [
-        "1",
-        "−6",
         "8",
-        "−8"
+        "−8",
+        "1",
+        "−6"
       ],
-      2,
+      0,
       "The constant term is c = 8."
     ],
     [
       "Which equation is not quadratic?",
       [
+        "3x² + 2x − 1 = 0",
         "x² + 1 = 0",
         "5x² − x = 0",
-        "7x − 4 = 0",
-        "3x² + 2x − 1 = 0"
+        "7x − 4 = 0"
       ],
-      2,
+      1,
       "7x − 4 = 0 has degree 1, so it is linear."
     ],
     [
       "What is the discriminant of ax² + bx + c = 0?",
       [
-        "b² + 4ac",
         "b² − 4ac",
         "a² − 4bc",
-        "2a − b"
+        "2a − b",
+        "b² + 4ac"
       ],
-      1,
+      2,
       "The discriminant is D = b² − 4ac."
     ],
     [
       "For x² − 5x + 6 = 0, the discriminant is:",
       [
+        "49",
         "1",
         "−1",
-        "25",
-        "49"
+        "25"
       ],
-      0,
+      3,
       "D = (−5)² − 4(1)(6) = 25 − 24 = 1."
     ],
     [
       "If D > 0, a quadratic equation has:",
       [
+        "Infinitely many roots",
         "No real roots",
         "Two distinct real roots",
-        "One repeated real root",
-        "Infinitely many roots"
+        "One repeated real root"
       ],
-      1,
+      0,
       "A positive discriminant gives two distinct real roots."
     ],
     [
       "If D = 0, the roots are:",
       [
+        "Always zero",
         "Two distinct real roots",
         "Not real",
-        "Equal real roots",
-        "Always zero"
+        "Equal real roots"
       ],
-      2,
+      1,
       "When D = 0, both roots equal −b/(2a)."
     ],
     [
@@ -17433,111 +17433,111 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "The quadratic formula is:",
       [
+        "(−b ± √D)/a",
         "(−b ± √(b²−4ac))/(2a)",
         "(b ± √(b²+4ac))/a",
-        "(−a ± √D)/(2b)",
-        "(−b ± √D)/a"
+        "(−a ± √D)/(2b)"
       ],
-      0,
+      3,
       "The denominator is 2a and D = b² − 4ac."
     ],
     [
       "Solve x² − 7x + 12 = 0.",
       [
+        "x = 1, 12",
         "x = 2, 6",
         "x = 3, 4",
-        "x = −3, −4",
-        "x = 1, 12"
+        "x = −3, −4"
       ],
-      1,
+      0,
       "Factor: (x − 3)(x − 4) = 0, so x = 3 or 4."
     ],
     [
       "The sum of roots of 2x² − 10x + 3 = 0 is:",
       [
+        "−3/2",
         "3/2",
         "−5",
-        "5",
-        "−3/2"
+        "5"
       ],
-      2,
+      1,
       "For ax² + bx + c = 0, sum of roots = −b/a = 10/2 = 5."
     ],
     [
       "The product of roots of 3x² + 2x − 4 = 0 is:",
       [
-        "2/3",
         "−4/3",
         "−2/3",
-        "4/3"
+        "4/3",
+        "2/3"
       ],
-      1,
+      2,
       "Product of roots = c/a = −4/3."
     ],
     [
       "If one root of x² − 9x + 20 = 0 is 4, the other is:",
       [
-        "4",
-        "5",
         "9",
-        "20"
+        "20",
+        "4",
+        "5"
       ],
-      1,
+      3,
       "The sum of roots is 9, so the other root is 9 − 4 = 5."
     ],
     [
       "Which pair are roots of x² + x − 12 = 0?",
       [
+        "−6 and 2",
         "4 and −3",
         "−4 and 3",
-        "6 and −2",
-        "−6 and 2"
+        "6 and −2"
       ],
-      1,
+      0,
       "(x + 4)(x − 3) = 0, so the roots are −4 and 3."
     ],
     [
       "The graph of y = ax² + bx + c (a ≠ 0) is a:",
       [
+        "Hyperbola",
         "Straight line",
         "Circle",
-        "Parabola",
-        "Hyperbola"
+        "Parabola"
       ],
-      2,
+      1,
       "A quadratic function graphs as a parabola."
     ],
     [
       "If a > 0, the parabola y = ax² + bx + c opens:",
       [
-        "Downward",
         "Upward",
         "Sideways",
-        "It is always a line"
+        "It is always a line",
+        "Downward"
       ],
-      1,
+      2,
       "A positive leading coefficient makes the parabola open upward."
     ],
     [
       "For x² + 4x + 4 = 0, the roots are:",
       [
+        "−2 and 2",
         "−2 and −2",
         "2 and 2",
-        "−4 and 0",
-        "−2 and 2"
+        "−4 and 0"
       ],
-      0,
+      3,
       "x² + 4x + 4 = (x + 2)², so x = −2 is a repeated root."
     ],
     [
       "Which value of k makes x² + 6x + k = 0 have equal roots?",
       [
+        "−9",
         "6",
         "9",
-        "12",
-        "−9"
+        "12"
       ],
-      1,
+      0,
       "Equal roots require D = 0: 36 − 4k = 0, so k = 9."
     ],
     [
@@ -17554,34 +17554,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which condition ensures ax² + bx + c = 0 is genuinely quadratic?",
       [
-        "a = 0",
         "a ≠ 0",
         "b = 0",
-        "c = 0"
+        "c = 0",
+        "a = 0"
       ],
-      1,
+      2,
       "If a = 0, the x² term disappears and the equation is no longer quadratic."
     ],
     [
       "For x² − 2x − 8 = 0, the product of roots is:",
       [
+        "8",
         "−8",
         "−2",
-        "2",
-        "8"
+        "2"
       ],
-      0,
+      3,
       "The product is c/a = −8."
     ],
     [
       "The axis of symmetry of y = ax² + bx + c is:",
       [
+        "x = −c/a",
         "x = b/(2a)",
         "x = −b/(2a)",
-        "y = −b/(2a)",
-        "x = −c/a"
+        "y = −b/(2a)"
       ],
-      1,
+      0,
       "The vertex's x-coordinate is −b/(2a)."
     ],
     [
@@ -17600,12 +17600,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Solve x²−5x+6=0.",
       [
+        "−1, −6",
         "1, 6",
         "2, 3",
-        "−2, −3",
-        "−1, −6"
+        "−2, −3"
       ],
-      1,
+      0,
       "(x−2)(x−3)=0."
     ],
     [
@@ -17622,23 +17622,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Solve x²+7x+12=0.",
       [
-        "3, 4",
         "−3, −4",
         "−2, −6",
-        "2, 6"
+        "2, 6",
+        "3, 4"
       ],
-      1,
+      2,
       "(x+3)(x+4)=0."
     ],
     [
       "Which pair multiplies to 12 and adds to 7?",
       [
-        "2 and 6",
-        "3 and 4",
         "1 and 12",
-        "−3 and −4"
+        "−3 and −4",
+        "2 and 6",
+        "3 and 4"
       ],
-      1,
+      3,
       "3×4=12 and 3+4=7."
     ],
     [
@@ -17655,78 +17655,78 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Solve 2x²−8x=0.",
       [
-        "0 or 4",
         "2 or 4",
         "−4 or 0",
-        "0 or 8"
+        "0 or 8",
+        "0 or 4"
       ],
-      0,
+      1,
       "2x(x−4)=0."
     ],
     [
       "Factorise x² − 16.",
       [
-        "(x − 8)(x + 2)",
         "(x − 4)(x + 4)",
         "(x − 16)(x + 1)",
-        "(x − 4)²"
+        "(x − 4)²",
+        "(x − 8)(x + 2)"
       ],
-      1,
+      2,
       "Use the difference of squares: x² − 4² = (x − 4)(x + 4)."
     ],
     [
       "Solve x² − 8x + 15 = 0.",
       [
-        "x = 1, 15",
-        "x = 3, 5",
         "x = −3, −5",
-        "x = 2, 7"
+        "x = 2, 7",
+        "x = 1, 15",
+        "x = 3, 5"
       ],
-      1,
+      3,
       "(x − 3)(x − 5) = 0, so x = 3 or 5."
     ],
     [
       "Factorise x² + 9x + 20.",
       [
+        "(x + 1)(x + 20)",
         "(x + 2)(x + 10)",
         "(x + 4)(x + 5)",
-        "(x − 4)(x − 5)",
-        "(x + 1)(x + 20)"
+        "(x − 4)(x − 5)"
       ],
-      1,
+      0,
       "The numbers 4 and 5 multiply to 20 and add to 9."
     ],
     [
       "Solve x² + x − 20 = 0.",
       [
-        "x = 4, −5",
         "x = −4, 5",
         "x = 2, −10",
-        "x = 5, 4"
+        "x = 5, 4",
+        "x = 4, −5"
       ],
-      0,
+      1,
       "(x + 5)(x − 4) = 0, so x = −5 or 4."
     ],
     [
       "Factorise 2x² + 7x + 3.",
       [
-        "(2x + 1)(x + 3)",
-        "(2x + 3)(x + 1)",
         "(2x − 1)(x − 3)",
-        "(x + 1)(x + 3)"
+        "(x + 1)(x + 3)",
+        "(2x + 1)(x + 3)",
+        "(2x + 3)(x + 1)"
       ],
-      0,
+      2,
       "Expanding (2x + 1)(x + 3) gives 2x² + 7x + 3."
     ],
     [
       "Solve 3x² − 12x = 0.",
       [
-        "x = 4 only",
         "x = 0 only",
         "x = 0 or 4",
-        "x = −4 or 0"
+        "x = −4 or 0",
+        "x = 4 only"
       ],
-      2,
+      3,
       "Factor 3x(x − 4) = 0 and use the zero-product rule."
     ],
     [
@@ -17743,34 +17743,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Solve 2x² − 5x − 3 = 0.",
       [
-        "x = 3, −1/2",
         "x = −3, 1/2",
         "x = 1, −3",
-        "x = 2, −3"
+        "x = 2, −3",
+        "x = 3, −1/2"
       ],
-      0,
+      1,
       "(2x + 1)(x − 3) = 0, giving x = −1/2 or 3."
     ],
     [
       "Which pair multiplies to −18 and adds to 3?",
       [
-        "6 and −3",
-        "−6 and 3",
         "9 and −2",
-        "−9 and 2"
+        "−9 and 2",
+        "6 and −3",
+        "−6 and 3"
       ],
-      0,
+      2,
       "6(−3) = −18 and 6 + (−3) = 3."
     ],
     [
       "Factorise 4x² − 25.",
       [
-        "(4x − 5)(x + 5)",
-        "(2x − 5)(2x + 5)",
         "(2x − 5)²",
-        "(4x + 5)(x − 5)"
+        "(4x + 5)(x − 5)",
+        "(4x − 5)(x + 5)",
+        "(2x − 5)(2x + 5)"
       ],
-      1,
+      3,
       "4x² − 25 = (2x)² − 5²."
     ],
     [
@@ -17787,34 +17787,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Factorise x² − 2x − 35.",
       [
-        "(x − 7)(x + 5)",
         "(x + 7)(x − 5)",
         "(x − 5)(x − 7)",
-        "(x + 1)(x − 35)"
+        "(x + 1)(x − 35)",
+        "(x − 7)(x + 5)"
       ],
-      0,
+      1,
       "−7 × 5 = −35 and −7 + 5 = −2."
     ],
     [
       "Solve 5x² − 20x = 0.",
       [
-        "x = 4 only",
         "x = 0 or 4",
         "x = 0 or −4",
-        "x = 5 or 20"
+        "x = 5 or 20",
+        "x = 4 only"
       ],
-      1,
+      2,
       "5x(x − 4) = 0, so x = 0 or 4."
     ],
     [
       "Factorise x² + 2x − 24.",
       [
+        "(x − 2)(x + 12)",
         "(x + 6)(x − 4)",
         "(x − 6)(x + 4)",
-        "(x + 8)(x − 3)",
-        "(x − 2)(x + 12)"
+        "(x + 8)(x − 3)"
       ],
-      0,
+      3,
       "6 × (−4) = −24 and 6 − 4 = 2."
     ],
     [
@@ -17831,89 +17831,89 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Factorise 3x² + 11x + 6.",
       [
-        "(3x + 2)(x + 3)",
         "(3x + 3)(x + 2)",
         "(x + 1)(3x + 6)",
-        "(3x − 2)(x − 3)"
+        "(3x − 2)(x − 3)",
+        "(3x + 2)(x + 3)"
       ],
-      0,
+      1,
       "(3x + 2)(x + 3) expands to 3x² + 11x + 6."
     ],
     [
       "Solve 2x² + x − 6 = 0.",
       [
-        "x = 3/2, −2",
-        "x = 2, −3/2",
         "x = −2, −3",
-        "x = 1, −3"
+        "x = 1, −3",
+        "x = 3/2, −2",
+        "x = 2, −3/2"
       ],
-      0,
+      2,
       "(2x − 3)(x + 2) = 0, so x = 3/2 or x = −2."
     ],
     [
       "Factorise x² − 10x + 25.",
       [
+        "(x − 10)(x + 2)",
         "(x − 5)²",
         "(x + 5)²",
-        "(x − 25)(x + 1)",
-        "(x − 10)(x + 2)"
+        "(x − 25)(x + 1)"
       ],
-      0,
+      3,
       "This is a perfect-square trinomial: x² − 2·5·x + 5²."
     ],
     [
       "Solve x² + 6x + 5 = 0.",
       [
+        "x = −1, 5",
         "x = 1, 5",
         "x = −1, −5",
-        "x = 1, −5",
-        "x = −1, 5"
+        "x = 1, −5"
       ],
-      1,
+      0,
       "(x + 1)(x + 5) = 0."
     ],
     [
       "Factorise 6x² + x − 2.",
       [
-        "(3x + 2)(2x − 1)",
         "(3x − 2)(2x + 1)",
         "(6x − 1)(x + 2)",
-        "(2x + 1)(3x − 2)"
+        "(2x + 1)(3x − 2)",
+        "(3x + 2)(2x − 1)"
       ],
-      0,
+      1,
       "(3x + 2)(2x − 1) expands to 6x² + x − 2."
     ],
     [
       "Solve x² − 13x + 40 = 0.",
       [
-        "x = 5, 8",
-        "x = 4, 10",
         "x = −5, −8",
-        "x = 2, 20"
+        "x = 2, 20",
+        "x = 5, 8",
+        "x = 4, 10"
       ],
-      0,
+      2,
       "(x − 5)(x − 8) = 0."
     ],
     [
       "Factorise 9x² − 12x + 4.",
       [
+        "(3x − 4)(3x + 1)",
         "(3x − 2)²",
         "(3x + 2)²",
-        "(9x − 2)(x − 2)",
-        "(3x − 4)(3x + 1)"
+        "(9x − 2)(x − 2)"
       ],
-      0,
+      3,
       "(3x − 2)² = 9x² − 12x + 4."
     ],
     [
       "Solve 4x² − 9 = 0.",
       [
+        "x = ±2",
         "x = ±3",
         "x = ±3/2",
-        "x = 9/4",
-        "x = ±2"
+        "x = 9/4"
       ],
-      1,
+      0,
       "(2x − 3)(2x + 3) = 0, so x = ±3/2."
     ],
     [
@@ -17932,12 +17932,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "sin 30° equals:",
       [
+        "1",
         "0",
         "1/2",
-        "√3/2",
-        "1"
+        "√3/2"
       ],
-      1,
+      0,
       "sin 30°=1/2."
     ],
     [
@@ -17965,67 +17965,67 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "sin 90° equals:",
       [
-        "0",
         "1/2",
         "1",
-        "√3/2"
+        "√3/2",
+        "0"
       ],
-      2,
+      3,
       "sin 90°=1."
     ],
     [
       "cos 30° equals:",
       [
+        "0",
         "1/2",
         "√3/2",
-        "1",
-        "0"
+        "1"
       ],
-      1,
+      0,
       "cos 30°=√3/2."
     ],
     [
       "tan 60° equals:",
       [
+        "0",
         "1/√3",
         "1",
-        "√3",
-        "0"
+        "√3"
       ],
-      2,
+      1,
       "tan 60°=√3."
     ],
     [
       "cos 0° equals:",
       [
-        "0",
         "1",
         "1/2",
-        "Undefined"
+        "Undefined",
+        "0"
       ],
-      1,
+      2,
       "The cosine of 0° is 1."
     ],
     [
       "sin 0° equals:",
       [
+        "√3/2",
         "0",
         "1",
-        "1/2",
-        "√3/2"
+        "1/2"
       ],
-      0,
+      3,
       "The sine of 0° is 0."
     ],
     [
       "tan 0° equals:",
       [
+        "Undefined",
         "1",
         "0",
-        "√3",
-        "Undefined"
+        "√3"
       ],
-      1,
+      0,
       "tan θ = sin θ/cos θ, so tan 0° = 0/1 = 0."
     ],
     [
@@ -18042,34 +18042,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which angle has tangent 1/√3 in the first quadrant?",
       [
-        "30°",
-        "45°",
         "60°",
-        "90°"
+        "90°",
+        "30°",
+        "45°"
       ],
-      0,
+      2,
       "tan 30° = 1/√3."
     ],
     [
       "tan 30° equals:",
       [
-        "√3",
         "1",
         "1/√3",
-        "0"
+        "0",
+        "√3"
       ],
-      2,
+      3,
       "tan 30° = (1/2)/(√3/2) = 1/√3."
     ],
     [
       "sin 45° equals:",
       [
-        "1/2",
-        "√3/2",
         "1/√2",
-        "1"
+        "1",
+        "1/2",
+        "√3/2"
       ],
-      2,
+      0,
       "sin 45° = √2/2 = 1/√2."
     ],
     [
@@ -18086,34 +18086,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which angle has sine 1 in the standard-angle set?",
       [
+        "90°",
         "0°",
         "30°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      3,
+      2,
       "sin 90° = 1."
     ],
     [
       "sin 60° equals:",
       [
-        "1/2",
-        "√3/2",
         "1/√2",
-        "1"
+        "1",
+        "1/2",
+        "√3/2"
       ],
-      1,
+      3,
       "sin 60° = √3/2."
     ],
     [
       "Which exact value is equal to cos 30°?",
       [
+        "√3",
         "1/2",
         "√3/2",
-        "1/√2",
-        "√3"
+        "1/√2"
       ],
-      1,
+      0,
       "cos 30° = √3/2."
     ],
     [
@@ -18141,23 +18141,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "cos 90° equals:",
       [
-        "1",
-        "0",
         "1/2",
-        "Undefined"
+        "Undefined",
+        "1",
+        "0"
       ],
-      1,
+      3,
       "cos 90° = 0."
     ],
     [
       "tan 90° is:",
       [
-        "0",
         "1",
         "−1",
-        "Undefined"
+        "Undefined",
+        "0"
       ],
-      3,
+      0,
       "tan 90° = sin 90°/cos 90° involves division by zero."
     ],
     [
@@ -18174,89 +18174,89 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Convert 90° to radians.",
       [
-        "π",
         "π/2",
         "π/3",
-        "2π"
+        "2π",
+        "π"
       ],
-      1,
+      2,
       "90° × π/180° = π/2."
     ],
     [
       "Convert 60° to radians.",
       [
-        "π/6",
-        "π/3",
         "π/2",
-        "2π/3"
+        "2π/3",
+        "π/6",
+        "π/3"
       ],
-      1,
+      3,
       "60° × π/180° = π/3."
     ],
     [
       "Convert π/4 radians to degrees.",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      1,
+      0,
       "π radians = 180°, so π/4 = 45°."
     ],
     [
       "Convert π/6 radians to degrees.",
       [
-        "30°",
         "45°",
         "60°",
-        "90°"
+        "90°",
+        "30°"
       ],
-      0,
+      1,
       "π/6 × 180°/π = 30°."
     ],
     [
       "Which angle has sin θ = cos θ for 0° ≤ θ ≤ 90°?",
       [
-        "30°",
         "45°",
         "60°",
-        "90°"
+        "90°",
+        "30°"
       ],
-      1,
+      2,
       "At 45°, sine and cosine both equal 1/√2."
     ],
     [
       "Which is the exact value of tan 60°?",
       [
+        "√2",
         "√3",
         "1",
-        "1/√3",
-        "√2"
+        "1/√3"
       ],
-      0,
+      3,
       "tan 60° = √3."
     ],
     [
       "Which standard angle has cosine 1/2?",
       [
-        "30°",
-        "45°",
         "60°",
-        "90°"
+        "90°",
+        "30°",
+        "45°"
       ],
-      2,
+      0,
       "cos 60° = 1/2."
     ],
     [
       "Which standard angle has sine √3/2?",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      2,
+      1,
       "sin 60° = √3/2."
     ]
   ],
@@ -18264,12 +18264,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which is a fundamental identity?",
       [
+        "sinθcosθ=1",
         "sinθ+cosθ=1",
         "sin²θ+cos²θ=1",
-        "tanθ+1=0",
-        "sinθcosθ=1"
+        "tanθ+1=0"
       ],
-      1,
+      0,
       "Sine squared plus cosine squared equals 1."
     ],
     [
@@ -18297,67 +18297,67 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "sec θ is reciprocal of:",
       [
-        "sin θ",
-        "cos θ",
         "tan θ",
-        "cot θ"
+        "cot θ",
+        "sin θ",
+        "cos θ"
       ],
-      1,
+      3,
       "secθ=1/cosθ."
     ],
     [
       "If sinθ=3/5 for acute θ, cosθ is:",
       [
-        "2/5",
-        "3/4",
         "4/5",
-        "5/4"
+        "5/4",
+        "2/5",
+        "3/4"
       ],
-      2,
+      0,
       "cos²θ=1−9/25=16/25."
     ],
     [
       "Which identity is correct?",
       [
-        "1−sin²θ=cos²θ",
         "1+sin²θ=cos²θ",
         "sin²θ−cos²θ=1",
-        "tanθ=cosθ/sinθ"
+        "tanθ=cosθ/sinθ",
+        "1−sin²θ=cos²θ"
       ],
-      0,
+      1,
       "Rearrange sin²θ+cos²θ=1."
     ],
     [
       "Which is the fundamental Pythagorean identity?",
       [
-        "sin²θ + cos²θ = 1",
-        "sin θ + cos θ = 1",
         "tan²θ − 1 = 0",
-        "sin²θ − cos²θ = 1"
+        "sin²θ − cos²θ = 1",
+        "sin²θ + cos²θ = 1",
+        "sin θ + cos θ = 1"
       ],
-      0,
+      2,
       "For every angle where the functions are defined, sin²θ + cos²θ = 1."
     ],
     [
       "tan θ is equal to:",
       [
-        "cos θ/sin θ",
-        "sin θ/cos θ",
         "1/sin θ",
-        "1/cos θ"
+        "1/cos θ",
+        "cos θ/sin θ",
+        "sin θ/cos θ"
       ],
-      1,
+      3,
       "tan θ = sin θ/cos θ when cos θ ≠ 0."
     ],
     [
       "1 + tan²θ equals:",
       [
+        "sin²θ",
         "cosec²θ",
         "sec²θ",
-        "cot²θ",
-        "sin²θ"
+        "cot²θ"
       ],
-      1,
+      0,
       "Divide sin²θ + cos²θ = 1 by cos²θ to obtain 1 + tan²θ = sec²θ."
     ],
     [
@@ -18385,12 +18385,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "1 + cot²θ equals:",
       [
-        "sec²θ",
-        "cosec²θ",
         "tan²θ",
-        "1"
+        "1",
+        "sec²θ",
+        "cosec²θ"
       ],
-      1,
+      3,
       "Divide sin²θ + cos²θ = 1 by sin²θ."
     ],
     [
@@ -18418,23 +18418,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "If sin θ = 3/5 and θ is acute, cos θ is:",
       [
-        "4/5",
-        "3/4",
         "5/4",
-        "1/5"
+        "1/5",
+        "4/5",
+        "3/4"
       ],
-      0,
+      2,
       "Using cos²θ = 1 − sin²θ gives cos θ = √(1 − 9/25) = 4/5."
     ],
     [
       "If tan θ = 3/4 for an acute angle, sec θ is:",
       [
-        "3/5",
         "4/5",
         "5/4",
-        "5/3"
+        "5/3",
+        "3/5"
       ],
-      2,
+      3,
       "sec²θ = 1 + tan²θ = 25/16, so sec θ = 5/4."
     ],
     [
@@ -18462,23 +18462,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "tan 2θ equals:",
       [
-        "2 tan θ/(1 − tan²θ)",
-        "2 tan θ/(1 + tan²θ)",
         "tan²θ − 1",
-        "1/tan θ"
+        "1/tan θ",
+        "2 tan θ/(1 − tan²θ)",
+        "2 tan θ/(1 + tan²θ)"
       ],
-      0,
+      2,
       "The identity is tan 2θ = 2tan θ/(1 − tan²θ), when defined."
     ],
     [
       "sin(A + B) equals:",
       [
+        "cos A cos B − sin A sin B",
         "sin A cos B + cos A sin B",
         "sin A sin B + cos A cos B",
-        "sin A cos B − cos A sin B",
-        "cos A cos B − sin A sin B"
+        "sin A cos B − cos A sin B"
       ],
-      0,
+      3,
       "Use the sine addition formula."
     ],
     [
@@ -18495,89 +18495,89 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "sin(A − B) equals:",
       [
-        "sin A cos B − cos A sin B",
         "sin A cos B + cos A sin B",
         "cos A cos B − sin A sin B",
-        "sin A sin B"
+        "sin A sin B",
+        "sin A cos B − cos A sin B"
       ],
-      0,
+      1,
       "The minus-angle sine formula has a minus sign between the terms."
     ],
     [
       "Which identity is valid where both sides are defined?",
       [
-        "sec²θ − tan²θ = 1",
-        "sec²θ + tan²θ = 1",
         "cosec²θ − cot²θ = −1",
-        "tan θ = cos θ/sin θ"
+        "tan θ = cos θ/sin θ",
+        "sec²θ − tan²θ = 1",
+        "sec²θ + tan²θ = 1"
       ],
-      0,
+      2,
       "Since sec²θ = 1 + tan²θ, subtracting tan²θ gives 1."
     ],
     [
       "If cot θ = 2, tan θ is:",
       [
-        "2",
-        "1/2",
         "√2",
-        "−2"
+        "−2",
+        "2",
+        "1/2"
       ],
-      1,
+      3,
       "tan θ and cot θ are reciprocals when defined."
     ],
     [
       "If sin θ = 0 for an angle θ, then cos²θ equals:",
       [
+        "2",
         "0",
         "1",
-        "−1",
-        "2"
+        "−1"
       ],
-      1,
+      0,
       "From sin²θ + cos²θ = 1, cos²θ = 1."
     ],
     [
       "Which is equivalent to 1 − cos²θ?",
       [
-        "sin²θ",
         "tan²θ",
         "sec²θ",
-        "1 + sin²θ"
+        "1 + sin²θ",
+        "sin²θ"
       ],
-      0,
+      1,
       "Rearrange sin²θ + cos²θ = 1."
     ],
     [
       "For an acute θ, if cos θ = 12/13, sin θ is:",
       [
-        "5/13",
-        "12/5",
         "13/5",
-        "1/13"
+        "1/13",
+        "5/13",
+        "12/5"
       ],
-      0,
+      2,
       "sin θ = √(1 − 144/169) = 5/13."
     ],
     [
       "Which formula gives cos(A − B)?",
       [
+        "sin A sin B",
         "cos A cos B + sin A sin B",
         "cos A cos B − sin A sin B",
-        "sin A cos B − cos A sin B",
-        "sin A sin B"
+        "sin A cos B − cos A sin B"
       ],
-      0,
+      3,
       "The cosine difference formula uses a plus sign."
     ],
     [
       "If tan θ = 1 and 0° < θ < 90°, θ is:",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      1,
+      0,
       "tan 45° = 1."
     ],
     [
@@ -18596,56 +18596,56 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A tree casts a 10 m shadow at 45° solar elevation. Height?",
       [
+        "20 m",
         "5 m",
         "10 m",
-        "10√3 m",
-        "20 m"
+        "10√3 m"
       ],
-      1,
+      0,
       "tan45°=height/10, so height=10 m."
     ],
     [
       "A 5 m pole casts a 5√3 m shadow. Elevation angle?",
       [
-        "30°",
         "45°",
         "60°",
-        "90°"
+        "90°",
+        "30°"
       ],
-      0,
+      1,
       "tanθ=1/√3, so θ=30°."
     ],
     [
       "From 20 m away, a tower's elevation is 45°. Height above eye level?",
       [
-        "10 m",
         "20 m",
         "20√3 m",
-        "40 m"
+        "40 m",
+        "10 m"
       ],
-      1,
+      2,
       "tan45°=h/20, so h=20 m."
     ],
     [
       "A 20 m kite string makes 30° with horizontal. Vertical height?",
       [
+        "5 m",
         "10 m",
         "10√3 m",
-        "20√3 m",
-        "5 m"
+        "20√3 m"
       ],
-      0,
+      3,
       "Height=20sin30°=10 m."
     ],
     [
       "A 10 m ladder makes 60° with ground. Vertical reach?",
       [
+        "10√3 m",
         "5 m",
         "5√3 m",
-        "10 m",
-        "10√3 m"
+        "10 m"
       ],
-      1,
+      0,
       "Height=10sin60°=5√3 m."
     ],
     [
@@ -18662,23 +18662,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A pole casts a 6 m shadow when the sun's elevation is 45°. Its height is:",
       [
-        "3 m",
         "6 m",
         "6√3 m",
-        "12 m"
+        "12 m",
+        "3 m"
       ],
-      1,
+      2,
       "tan 45° = height/shadow = 1, so height = 6 m."
     ],
     [
       "A tower is viewed from 20 m away at an elevation of 45°. Ignoring eye height, its height is:",
       [
-        "10 m",
-        "20 m",
         "20√3 m",
-        "40 m"
+        "40 m",
+        "10 m",
+        "20 m"
       ],
-      1,
+      3,
       "tan 45° = h/20, so h = 20 m."
     ],
     [
@@ -18706,23 +18706,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A person stands 15 m from a tree. The angle of elevation is 30°. Tree height above eye level is:",
       [
-        "5√3 m",
-        "15√3 m",
         "15 m",
-        "7.5 m"
+        "7.5 m",
+        "5√3 m",
+        "15√3 m"
       ],
-      0,
+      2,
       "h = 15 tan 30° = 15/√3 = 5√3 m."
     ],
     [
       "A 10 m pole casts a shadow of 10√3 m. The sun's elevation angle is:",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      0,
+      3,
       "tan θ = 10/(10√3) = 1/√3, so θ = 30°."
     ],
     [
@@ -18739,45 +18739,45 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A kite string of length 20 m makes a 30° angle with horizontal. The vertical height gained is:",
       [
-        "10 m",
         "10√3 m",
         "20 m",
-        "20√3 m"
+        "20√3 m",
+        "10 m"
       ],
-      0,
+      1,
       "Vertical component = 20 sin 30° = 10 m."
     ],
     [
       "A building is 24 m high. From a point at ground level, the angle of elevation is 45°. The horizontal distance is:",
       [
-        "12 m",
         "24 m",
         "24√3 m",
-        "48 m"
+        "48 m",
+        "12 m"
       ],
-      1,
+      2,
       "tan 45° = 24/d = 1, so d = 24 m."
     ],
     [
       "Angle of depression is measured from the:",
       [
-        "Vertical downward line",
-        "Horizontal line through the observer",
         "Ground only",
-        "Line to the object's base only"
+        "Line to the object's base only",
+        "Vertical downward line",
+        "Horizontal line through the observer"
       ],
-      1,
+      3,
       "The angle of depression is measured downward from the observer's horizontal."
     ],
     [
       "If the angle of elevation increases while the observer moves closer to a fixed tower, the height is:",
       [
+        "Impossible to determine",
         "Changing",
         "Fixed",
-        "Zero",
-        "Impossible to determine"
+        "Zero"
       ],
-      1,
+      0,
       "The tower's height remains fixed; the viewing angle changes with distance."
     ],
     [
@@ -18805,56 +18805,56 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A tower is 30 m tall. From 30√3 m away, the angle of elevation is:",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      0,
+      3,
       "tan θ = 30/(30√3) = 1/√3, so θ = 30°."
     ],
     [
       "From a point 8 m from a building, the angle of elevation is 60°. Height above eye level is:",
       [
-        "8/√3 m",
-        "8 m",
         "8√3 m",
-        "16 m"
+        "16 m",
+        "8/√3 m",
+        "8 m"
       ],
-      2,
+      0,
       "h = 8 tan 60° = 8√3 m."
     ],
     [
       "A 10 m ladder rests against a wall with its foot 6 m from the wall. The height reached is:",
       [
+        "√136 m",
         "4 m",
         "6 m",
-        "8 m",
-        "√136 m"
+        "8 m"
       ],
-      2,
+      1,
       "h = √(10² − 6²) = √64 = 8 m."
     ],
     [
       "A balloon is 50 m above the ground. Its angle of elevation from a point is 30°. Horizontal distance is:",
       [
-        "50/√3 m",
         "50√3 m",
         "25 m",
-        "100 m"
+        "100 m",
+        "50/√3 m"
       ],
-      1,
+      2,
       "tan 30° = 50/d, so d = 50√3 m."
     ],
     [
       "Which ratio relates opposite side to adjacent side in a right triangle?",
       [
-        "sin θ",
         "cos θ",
         "tan θ",
-        "sec θ"
+        "sec θ",
+        "sin θ"
       ],
-      2,
+      3,
       "tan θ = opposite/adjacent."
     ],
     [
@@ -18882,34 +18882,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "If an object is directly overhead, the angle of elevation is:",
       [
+        "90°",
         "0°",
         "30°",
-        "45°",
-        "90°"
+        "45°"
       ],
-      3,
+      2,
       "The line of sight is vertical, making 90° with the horizontal."
     ],
     [
       "A 7 m flagpole casts a shadow of 7√3 m. The elevation angle is:",
       [
+        "90°",
         "30°",
         "45°",
-        "60°",
-        "90°"
+        "60°"
       ],
-      0,
+      3,
       "tan θ = 7/(7√3) = 1/√3, so θ = 30°."
     ],
     [
       "A 13 m ladder has its foot 5 m from a wall. How high does it reach?",
       [
+        "√194 m",
         "8 m",
         "12 m",
-        "18 m",
-        "√194 m"
+        "18 m"
       ],
-      1,
+      0,
       "h = √(13² − 5²) = √144 = 12 m."
     ],
     [
@@ -20278,166 +20278,166 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "If N=40, N/2 equals:",
       [
-        "10",
         "20",
         "30",
-        "40"
+        "40",
+        "10"
       ],
-      1,
+      2,
       "40/2=20."
     ],
     [
       "In the median formula, h is:",
       [
-        "Mean",
-        "Class width",
         "Total frequency",
-        "Class mark"
+        "Class mark",
+        "Mean",
+        "Class width"
       ],
-      1,
+      3,
       "h denotes the median class width."
     ],
     [
       "In the formula, cf means:",
       [
+        "Class mark",
         "Modal frequency",
         "Cumulative frequency before median class",
-        "Total frequency",
-        "Class mark"
+        "Total frequency"
       ],
-      1,
+      0,
       "cf is cumulative frequency preceding median class."
     ],
     [
       "Total frequency N equals:",
       [
-        "Sum of class frequencies",
         "Class width",
         "Median class mark",
-        "Largest value"
+        "Largest value",
+        "Sum of class frequencies"
       ],
-      0,
+      1,
       "N=Σf."
     ],
     [
       "The grouped-data median formula is:",
       [
-        "l + [(N/2 − cf)/f]h",
-        "l + [(f1−f0)/(2f1−f0−f2)]h",
         "Σfx/Σf",
-        "N/Σf"
+        "N/Σf",
+        "l + [(N/2 − cf)/f]h",
+        "l + [(f1−f0)/(2f1−f0−f2)]h"
       ],
-      0,
+      2,
       "The median is l + [(N/2 − cf)/f]h for the median class."
     ],
     [
       "The median class is the class whose cumulative frequency first reaches or exceeds:",
       [
-        "N",
-        "N/2",
         "2N",
-        "f/2"
+        "f/2",
+        "N",
+        "N/2"
       ],
-      1,
+      3,
       "Locate the class containing the N/2-th observation."
     ],
     [
       "If total frequency N = 48, then N/2 is:",
       [
+        "96",
         "12",
         "24",
-        "48",
-        "96"
+        "48"
       ],
-      1,
+      0,
       "N/2 = 48/2 = 24."
     ],
     [
       "In the median formula, h represents:",
       [
-        "Class width",
         "Total frequency",
         "Median class frequency",
-        "Lower limit"
+        "Lower limit",
+        "Class width"
       ],
-      0,
+      1,
       "h is the class width."
     ],
     [
       "In the median formula, cf usually means:",
       [
-        "Frequency of the median class",
         "Cumulative frequency before the median class",
         "Total class width",
-        "Upper class limit"
+        "Upper class limit",
+        "Frequency of the median class"
       ],
-      1,
+      2,
       "cf is the cumulative frequency of the class immediately before the median class."
     ],
     [
       "If N = 60, the median position is:",
       [
-        "15th",
-        "30th",
         "60th",
-        "120th"
+        "120th",
+        "15th",
+        "30th"
       ],
-      1,
+      3,
       "For grouped data, locate N/2 = 30."
     ],
     [
       "The lower boundary of the median class is denoted by:",
       [
-        "h",
-        "f",
         "l",
-        "N"
+        "N",
+        "h",
+        "f"
       ],
-      2,
+      0,
       "l is the lower boundary of the median class."
     ],
     [
       "If N = 40, cf = 12, f = 8, h = 5 and l = 20, the median is:",
       [
-        "25",
         "30",
         "22.5",
-        "17.5"
+        "17.5",
+        "25"
       ],
-      0,
+      1,
       "Median = 20 + [(20 − 12)/8]×5 = 25."
     ],
     [
       "If the median class frequency is f = 10, it is used as:",
       [
-        "The total number of classes",
         "The frequency in the median class",
         "The cumulative frequency before it",
-        "The class width"
+        "The class width",
+        "The total number of classes"
       ],
-      1,
+      2,
       "f is the frequency of the median class."
     ],
     [
       "What is the first step in finding a grouped median?",
       [
-        "Find the mean",
-        "Calculate cumulative frequencies",
         "Multiply all class limits",
-        "Find the modal class"
+        "Find the modal class",
+        "Find the mean",
+        "Calculate cumulative frequencies"
       ],
-      1,
+      3,
       "Cumulative frequencies identify the class containing the N/2-th observation."
     ],
     [
       "For class intervals 0–10, 10–20, 20–30 with frequencies 3, 8, 9, total N is:",
       [
+        "9",
         "17",
         "20",
-        "30",
-        "9"
+        "30"
       ],
-      1,
+      0,
       "N = 3 + 8 + 9 = 20."
     ],
     [
@@ -20454,111 +20454,111 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "If N = 20, the median class contains the:",
       [
-        "10th observation",
-        "20th observation only",
         "First observation",
-        "Last observation only"
+        "Last observation only",
+        "10th observation",
+        "20th observation only"
       ],
-      0,
+      2,
       "The median position is N/2 = 10."
     ],
     [
       "For the grouped median formula, which frequency is subtracted from N/2?",
       [
-        "Frequency of the median class",
-        "Cumulative frequency before the median class",
         "Total frequency",
-        "Next class frequency"
+        "Next class frequency",
+        "Frequency of the median class",
+        "Cumulative frequency before the median class"
       ],
-      1,
+      3,
       "The numerator is N/2 − cf."
     ],
     [
       "If N/2 equals the cumulative frequency at the end of a class, the median lies at:",
       [
+        "The class width",
         "The lower boundary of the next class",
         "The upper boundary of that class",
-        "Zero always",
-        "The class width"
+        "Zero always"
       ],
-      1,
+      0,
       "The cumulative count reaches the middle at that class boundary."
     ],
     [
       "Which measure divides ordered data into two equal halves?",
       [
+        "Range",
         "Mean",
         "Mode",
-        "Median",
-        "Range"
+        "Median"
       ],
-      2,
+      1,
       "The median is the central value or central partition."
     ],
     [
       "For grouped data, why is the median an estimate?",
       [
-        "It ignores frequencies",
         "It assumes observations are distributed within the median class",
         "It uses only the highest class",
-        "It always equals the mean"
+        "It always equals the mean",
+        "It ignores frequencies"
       ],
-      1,
+      2,
       "The formula interpolates within the median class, assuming an even spread there."
     ],
     [
       "If class intervals are equal, h is:",
       [
+        "The cumulative frequency",
         "The common class width",
         "The median value",
-        "The total frequency",
-        "The cumulative frequency"
+        "The total frequency"
       ],
-      0,
+      3,
       "For equal-width classes, h is their shared width."
     ],
     [
       "For the classes 10–20, 20–30, 30–40, the class width h is:",
       [
+        "30",
         "5",
         "10",
-        "20",
-        "30"
+        "20"
       ],
-      1,
+      0,
       "Each interval has width 10."
     ],
     [
       "If l = 30, N = 50, cf = 20, f = 10 and h = 10, the median is:",
       [
-        "35",
         "40",
         "30",
-        "25"
+        "25",
+        "35"
       ],
-      0,
+      1,
       "Median = 30 + [(25 − 20)/10]×10 = 35."
     ],
     [
       "Which information is not directly required in the grouped median formula?",
       [
+        "Largest individual observation",
         "Lower boundary l",
         "Total frequency N",
-        "Median class frequency f",
-        "Largest individual observation"
+        "Median class frequency f"
       ],
-      3,
+      2,
       "The formula uses class boundaries and frequencies, not the largest raw observation."
     ],
     [
       "A frequency table has N = 70. The median position is:",
       [
+        "17.5",
         "35",
         "70",
-        "140",
-        "17.5"
+        "140"
       ],
-      0,
+      3,
       "N/2 = 35."
     ],
     [
@@ -20588,45 +20588,45 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "The modal class has the:",
       [
+        "Median frequency",
         "Smallest width",
         "Highest frequency",
-        "Lowest class mark",
-        "Median frequency"
+        "Lowest class mark"
       ],
-      1,
+      0,
       "The modal class has maximum frequency."
     ],
     [
       "Grouped-data mode formula is:",
       [
-        "l+[(f1−f0)/(2f1−f0−f2)]h",
         "Σfx/Σf",
         "l+[(N/2−cf)/f]h",
-        "(max−min)/2"
+        "(max−min)/2",
+        "l+[(f1−f0)/(2f1−f0−f2)]h"
       ],
-      0,
+      1,
       "This is the standard grouped mode formula."
     ],
     [
       "In the mode formula, f1 is frequency of the:",
       [
-        "Previous class",
         "Modal class",
         "Next class",
-        "First class"
+        "First class",
+        "Previous class"
       ],
-      1,
+      2,
       "f1 is modal class frequency."
     ],
     [
       "Frequencies 4,9,6: modal class is the:",
       [
-        "First",
-        "Second",
         "Third",
-        "Cannot tell"
+        "Cannot tell",
+        "First",
+        "Second"
       ],
-      1,
+      3,
       "9 is the largest frequency."
     ],
     [
@@ -20654,34 +20654,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "The modal class is the class with the:",
       [
-        "Smallest class width",
         "Highest frequency",
         "Lowest lower boundary",
-        "Middle class mark"
+        "Middle class mark",
+        "Smallest class width"
       ],
-      1,
+      2,
       "The modal class has the greatest frequency."
     ],
     [
       "The grouped-data mode formula is:",
       [
-        "l + [(N/2 − cf)/f]h",
-        "l + [(f1−f0)/(2f1−f0−f2)]h",
         "Σfx/Σf",
-        "l + h/2"
+        "l + h/2",
+        "l + [(N/2 − cf)/f]h",
+        "l + [(f1−f0)/(2f1−f0−f2)]h"
       ],
-      1,
+      3,
       "The formula interpolates using the modal class and adjacent frequencies."
     ],
     [
       "In the mode formula, f1 is the frequency of the:",
       [
+        "First class always",
         "Preceding class",
         "Modal class",
-        "Succeeding class",
-        "First class always"
+        "Succeeding class"
       ],
-      1,
+      0,
       "f1 denotes the modal class frequency."
     ],
     [
@@ -20698,78 +20698,78 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "In the grouped mode formula, l denotes the:",
       [
-        "Lower boundary of the modal class",
-        "Class width",
         "Total frequency",
-        "Frequency of the preceding class"
+        "Frequency of the preceding class",
+        "Lower boundary of the modal class",
+        "Class width"
       ],
-      0,
+      2,
       "l is the lower boundary of the modal class."
     ],
     [
       "Mode identifies the value or class that occurs:",
       [
-        "Least often",
-        "Most often",
         "Exactly twice",
-        "At the centre always"
+        "At the centre always",
+        "Least often",
+        "Most often"
       ],
-      1,
+      3,
       "The mode is the most frequent value or class."
     ],
     [
       "In the grouped mode formula, f0 is the frequency of the:",
       [
+        "Whole dataset",
         "Modal class",
         "Class preceding the modal class",
-        "Class succeeding the modal class",
-        "Whole dataset"
+        "Class succeeding the modal class"
       ],
-      1,
+      0,
       "f0 is the frequency before the modal class."
     ],
     [
       "In the grouped mode formula, f2 is the frequency of the:",
       [
+        "First class",
         "Class before the modal class",
         "Modal class",
-        "Class after the modal class",
-        "First class"
+        "Class after the modal class"
       ],
-      2,
+      1,
       "f2 is the frequency of the succeeding class."
     ],
     [
       "If l = 20, h = 10, f1 = 12, f0 = 8 and f2 = 6, the mode is:",
       [
-        "24",
-        "26",
         "25",
-        "30"
+        "30",
+        "24",
+        "26"
       ],
-      0,
+      2,
       "Mode = 20 + [(12−8)/(24−8−6)]×10 = 20 + 4/10×10 = 24."
     ],
     [
       "If the preceding and succeeding frequencies are equal, f0 = f2, the denominator becomes:",
       [
+        "0 always",
         "2f1 − 2f0",
         "f1 + f0",
-        "N − f1",
-        "0 always"
+        "N − f1"
       ],
-      0,
+      3,
       "2f1 − f0 − f2 becomes 2f1 − 2f0."
     ],
     [
       "A distribution has frequencies 5, 12, 18, 10, 4. The modal class is the:",
       [
-        "First",
-        "Second",
         "Third",
-        "Fifth"
+        "Fifth",
+        "First",
+        "Second"
       ],
-      2,
+      0,
       "18 is the greatest frequency, so its class is modal."
     ],
     [
@@ -20797,12 +20797,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "If f1 = 20, f0 = 12, f2 = 8, the numerator f1 − f0 is:",
       [
+        "28",
         "8",
         "12",
-        "20",
-        "28"
+        "20"
       ],
-      0,
+      3,
       "20 − 12 = 8."
     ],
     [
@@ -20819,100 +20819,100 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Which measure is useful for the most popular shoe size?",
       [
+        "Range",
         "Mean",
         "Median",
-        "Mode",
-        "Range"
+        "Mode"
       ],
-      2,
+      1,
       "Mode identifies the most frequent category or value."
     ],
     [
       "If the modal class is 40–50, its width h is:",
       [
-        "10",
-        "40",
         "50",
-        "5"
+        "5",
+        "10",
+        "40"
       ],
-      0,
+      2,
       "Class width = 50 − 40 = 10."
     ],
     [
       "Which frequency is expected to be greatest in a single modal class?",
       [
-        "f0",
-        "f1",
         "f2",
-        "N/2"
+        "N/2",
+        "f0",
+        "f1"
       ],
-      1,
+      3,
       "f1 is the modal class frequency and should exceed adjacent frequencies."
     ],
     [
       "If f1 = 18 and f0 = 10, then f1 − f0 is:",
       [
+        "18",
         "4",
         "8",
-        "14",
-        "18"
+        "14"
       ],
-      1,
+      0,
       "18 − 10 = 8."
     ],
     [
       "A distribution with two distinct peaks may be:",
       [
-        "Bimodal",
         "Always uniform",
         "Without any mode",
-        "Always symmetric"
+        "Always symmetric",
+        "Bimodal"
       ],
-      0,
+      1,
       "Two distinct peaks can indicate a bimodal distribution."
     ],
     [
       "The grouped mode formula estimates a value within the:",
       [
-        "Modal class",
-        "First class always",
         "Last class always",
-        "Class before the modal class"
+        "Class before the modal class",
+        "Modal class",
+        "First class always"
       ],
-      0,
+      2,
       "The interpolation is based on the modal class and its neighbours."
     ],
     [
       "If every class has the same frequency, the modal class is:",
       [
-        "Uniquely the first class",
         "Uniquely the last class",
         "Not uniquely determined",
-        "Always the middle class"
+        "Always the middle class",
+        "Uniquely the first class"
       ],
-      2,
+      3,
       "There is no unique modal class when all class frequencies tie."
     ],
     [
       "Which statement about mode is true?",
       [
-        "It must equal the mean",
-        "It must be an observed value in grouped data",
         "It represents the most frequent value or class",
-        "It is always the central observation"
+        "It is always the central observation",
+        "It must equal the mean",
+        "It must be an observed value in grouped data"
       ],
-      2,
+      0,
       "Mode measures frequency, not central position or arithmetic average."
     ],
     [
       "For classes of unequal widths, which requires care when identifying the modal class?",
       [
-        "Comparing raw frequencies alone in every case",
         "Adding all class limits",
         "Finding N/2",
-        "Using the median formula"
+        "Using the median formula",
+        "Comparing raw frequencies alone in every case"
       ],
-      0,
+      1,
       "For unequal class widths, frequency density may be more appropriate than raw frequency."
     ]
   ],
@@ -20953,78 +20953,78 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Probability of drawing an ace from 52 cards:",
       [
-        "1/52",
-        "1/13",
         "4/13",
-        "1/4"
+        "1/4",
+        "1/52",
+        "1/13"
       ],
-      1,
+      3,
       "4/52=1/13."
     ],
     [
       "Choose a number from 1 to 10. P(even) is:",
       [
-        "1/10",
-        "2/10",
         "1/2",
-        "8/10"
+        "8/10",
+        "1/10",
+        "2/10"
       ],
-      2,
+      0,
       "Five of ten numbers are even."
     ],
     [
       "Probability of an impossible event is:",
       [
-        "0",
         "1/2",
         "1",
-        "−1"
+        "−1",
+        "0"
       ],
-      0,
+      1,
       "Impossible events have probability zero."
     ],
     [
       "A fair die is rolled. What is P(getting a number less than 3)?",
       [
-        "1/6",
         "1/3",
         "1/2",
-        "2/3"
+        "2/3",
+        "1/6"
       ],
-      1,
+      2,
       "The favourable outcomes are 1 and 2, so P = 2/6 = 1/3."
     ],
     [
       "A bag contains 7 white and 3 black counters. P(white) is:",
       [
-        "3/10",
-        "7/10",
         "1/3",
-        "7/3"
+        "7/3",
+        "3/10",
+        "7/10"
       ],
-      1,
+      3,
       "There are 7 white counters out of 10 total."
     ],
     [
       "One integer is chosen from 1 to 12. P(selecting a multiple of 3) is:",
       [
-        "1/6",
-        "1/4",
         "1/3",
-        "1/2"
+        "1/2",
+        "1/6",
+        "1/4"
       ],
-      2,
+      0,
       "The multiples are 3, 6, 9 and 12: 4/12 = 1/3."
     ],
     [
       "Probability of drawing an ace from a standard 52-card deck is:",
       [
-        "1/13",
         "1/4",
         "4/13",
-        "1/52"
+        "1/52",
+        "1/13"
       ],
-      0,
+      1,
       "There are 4 aces among 52 cards, so 4/52 = 1/13."
     ],
     [
@@ -21041,23 +21041,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "The probability of an impossible event is:",
       [
+        "−1",
         "0",
         "1/2",
-        "1",
-        "−1"
+        "1"
       ],
-      0,
+      3,
       "An impossible event has probability zero."
     ],
     [
       "The probability of a certain event is:",
       [
-        "0",
-        "1/4",
         "1",
-        "Cannot be found"
+        "Cannot be found",
+        "0",
+        "1/4"
       ],
-      2,
+      0,
       "A certain event always occurs and has probability 1."
     ],
     [
@@ -21074,34 +21074,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A bag has 3 red and 2 blue balls. One ball is selected at random. P(blue) is:",
       [
-        "2/5",
-        "3/5",
         "1/2",
-        "1/5"
+        "1/5",
+        "2/5",
+        "3/5"
       ],
-      0,
+      2,
       "There are 2 blue balls among 5 balls."
     ],
     [
       "If P(E) = 0.35, then P(not E) is:",
       [
-        "0.35",
-        "0.65",
         "1.35",
-        "−0.35"
+        "−0.35",
+        "0.35",
+        "0.65"
       ],
-      1,
+      3,
       "The complement rule gives 1 − 0.35 = 0.65."
     ],
     [
       "Which value cannot be a probability?",
       [
-        "0",
         "0.4",
         "1",
-        "1.2"
+        "1.2",
+        "0"
       ],
-      3,
+      0,
       "Probabilities must lie between 0 and 1 inclusive."
     ],
     [
@@ -21118,34 +21118,34 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "Two fair coins are tossed. Probability of exactly one head is:",
       [
-        "1/4",
         "1/2",
         "3/4",
-        "1"
+        "1",
+        "1/4"
       ],
-      1,
+      2,
       "Outcomes are HH, HT, TH, TT; HT and TH give exactly one head."
     ],
     [
       "A die is rolled. P(an odd number) is:",
       [
-        "1/6",
         "1/3",
         "1/2",
-        "2/3"
+        "2/3",
+        "1/6"
       ],
-      2,
+      3,
       "Odd outcomes are 1, 3 and 5: 3/6 = 1/2."
     ],
     [
       "A number is chosen from 1 to 8. P(multiple of 4) is:",
       [
+        "3/8",
         "1/8",
         "1/4",
-        "1/2",
-        "3/8"
+        "1/2"
       ],
-      1,
+      0,
       "Multiples are 4 and 8, so 2/8 = 1/4."
     ],
     [
@@ -21162,45 +21162,45 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A fair die is rolled. P(not getting 6) is:",
       [
-        "1/6",
         "5/6",
         "1/2",
-        "0"
+        "0",
+        "1/6"
       ],
-      1,
+      2,
       "Five faces are not 6, so the probability is 5/6."
     ],
     [
       "A bag has 4 green and 6 yellow balls. P(green) is:",
       [
+        "4/6",
         "2/5",
         "3/5",
-        "1/4",
-        "4/6"
+        "1/4"
       ],
-      0,
+      3,
       "4/(4+6) = 4/10 = 2/5."
     ],
     [
       "Which statement is always true?",
       [
-        "P(E) < 0",
-        "P(E) > 1",
         "0 ≤ P(E) ≤ 1",
-        "P(E) = 2"
+        "P(E) = 2",
+        "P(E) < 0",
+        "P(E) > 1"
       ],
-      2,
+      0,
       "Every probability is between 0 and 1 inclusive."
     ],
     [
       "A letter is chosen randomly from the word MATHS. P(vowel) is:",
       [
-        "1/5",
         "2/5",
         "3/5",
-        "1"
+        "1",
+        "1/5"
       ],
-      0,
+      1,
       "There is one vowel, A, among five letters."
     ],
     [
@@ -21217,23 +21217,23 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "One card is drawn from 52 cards. P(a king or queen) is:",
       [
-        "1/13",
-        "2/13",
         "4/13",
-        "1/2"
+        "1/2",
+        "1/13",
+        "2/13"
       ],
-      1,
+      3,
       "There are 4 kings and 4 queens, so 8/52 = 2/13."
     ],
     [
       "If P(E) = 1, the event is:",
       [
+        "Complementary",
         "Impossible",
         "Certain",
-        "Unlikely",
-        "Complementary"
+        "Unlikely"
       ],
-      1,
+      0,
       "Probability 1 means the event is certain."
     ],
     [

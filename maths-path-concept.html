@@ -1090,6 +1090,39 @@ if(norm(concept)==="set representation") return `
 <div class="formula">Roster: B = {1, 2, 3, 4}</div><div class="formula">Set-builder: B = {x ∈ ℕ | 1 ≤ x &lt; 5}</div>
 <div class="checks"><b>Remember:</b> Roster form lists elements; set-builder form states the defining property. Make sure the rule and the listed elements match exactly.</div>
 </div>`;
+if(norm(concept)==="ordered pairs") return `
+<div class="geometry-lesson ordered-pairs-virtual-lesson">
+<strong>Ordered Pairs — Virtual Learn Lab</strong>
+<p>An ordered pair is written as <b>(a, b)</b>. The first component is <b>a</b> and the second is <b>b</b>. Position matters: in general, (a, b) ≠ (b, a).</p>
+<div class="concept-image" aria-label="Ordered pair component diagram">
+<svg viewBox="0 0 320 100" role="img" aria-label="First component 2 and second component 5 form the ordered pair (2,5)">
+<rect x="8" y="12" width="112" height="72" rx="12" fill="#dceafe" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="64" y="39" text-anchor="middle" font-size="11" font-weight="700" fill="#174ea6">FIRST</text><text x="64" y="67" text-anchor="middle" font-size="24" font-weight="900" fill="#174ea6">2</text>
+<path d="M128 48 H145" stroke="#64748b" stroke-width="2"/><path d="M140 42 L146 48 L140 54" fill="none" stroke="#64748b" stroke-width="2"/>
+<rect x="152" y="12" width="112" height="72" rx="12" fill="#ddf5e4" stroke="#58a65c" stroke-width="1.5"/>
+<text x="208" y="39" text-anchor="middle" font-size="11" font-weight="700" fill="#176534">SECOND</text><text x="208" y="67" text-anchor="middle" font-size="24" font-weight="900" fill="#176534">5</text>
+<text x="292" y="55" text-anchor="middle" font-size="18" font-weight="900" fill="#173f27">→</text>
+</svg>
+</div>
+<div class="formula">(2, 5) ≠ (5, 2)</div>
+<h3>Experiment 1 — Build a pair</h3>
+<p>Change the first and second components. The lab updates the pair and shows whether it matches the target pair (3, 7).</p>
+<div class="control"><div class="head"><label for="opFirst">First component (a)</label><b><span id="opFirstOut">3</span></b></div><input id="opFirst" class="range" type="range" min="0" max="10" step="1" value="3"/></div>
+<div class="control"><div class="head"><label for="opSecond">Second component (b)</label><b><span id="opSecondOut">7</span></b></div><input id="opSecond" class="range" type="range" min="0" max="10" step="1" value="7"/></div>
+<div class="props"><div class="prop"><span>Current pair</span><strong id="opCurrent">(3, 7)</strong></div><div class="prop"><span>Target pair</span><strong>(3, 7)</strong></div></div>
+<div class="checks" id="opMatch" aria-live="polite">The pairs are equal because both corresponding components match.</div>
+<h3>Experiment 2 — Test equality</h3>
+<p>Two ordered pairs are equal if and only if their corresponding components are equal.</p>
+<div class="formula">(a, b) = (c, d) ⇔ a = c and b = d</div>
+<div class="control"><div class="head"><label for="opC">Compare first component c</label><b><span id="opCOut">3</span></b></div><input id="opC" class="range" type="range" min="0" max="10" step="1" value="3"/></div>
+<div class="control"><div class="head"><label for="opD">Compare second component d</label><b><span id="opDOut">7</span></b></div><input id="opD" class="range" type="range" min="0" max="10" step="1" value="7"/></div>
+<div class="props"><div class="prop"><span>Pair 1</span><strong id="opPair1">(3, 7)</strong></div><div class="prop"><span>Pair 2</span><strong id="opPair2">(3, 7)</strong></div></div>
+<div class="checks" id="opEquality" aria-live="polite">Equal: first components and second components match.</div>
+<h3>Worked example</h3>
+<p>If (x + 2, 2y) = (5, 8), equate corresponding components:</p>
+<div class="formula">x + 2 = 5 ⇒ x = 3</div><div class="formula">2y = 8 ⇒ y = 4</div>
+<div class="checks"><b>Remember:</b> Compare first with first and second with second. Do not swap the components.</div>
+</div>`;
 if(norm(concept)==="cartesian product") return `
 <div class="geometry-lesson cartesian-product-virtual-lesson">
 <strong>Cartesian Product — Virtual Learn Lab</strong>
@@ -6967,6 +7000,20 @@ function initPythagorasVirtualLab(){
  document.querySelectorAll(".pythPreset").forEach(btn=>btn.addEventListener("click",()=>{aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;update();}));
  update();
 }
+function initOrderedPairsVirtualLab(){
+ if(norm(concept)!=="ordered pairs")return;
+ const get=id=>document.getElementById(id),put=(id,v)=>{const el=get(id);if(el)el.textContent=v;};
+ const a=get("opFirst"),b=get("opSecond"),cc=get("opC"),d=get("opD");
+ if(!a||!b||!cc||!d)return;
+ const update=()=>{
+  const av=Number(a.value),bv=Number(b.value),cv=Number(cc.value),dv=Number(d.value);
+  put("opFirstOut",av);put("opSecondOut",bv);put("opCurrent","("+av+", "+bv+")");
+  put("opMatch",av===3&&bv===7?"Match! The pair is exactly (3, 7).":"Not a match yet. Set the first component to 3 and the second to 7.");
+  put("opCOut",cv);put("opDOut",dv);put("opPair1","("+av+", "+bv+")");put("opPair2","("+cv+", "+dv+")");
+  put("opEquality",av===cv&&bv===dv?"Equal: first components and second components match.":"Not equal: "+(av!==cv?"the first components differ. ":"")+(bv!==dv?"the second components differ.":""));
+ };
+ [a,b,cc,d].forEach(el=>el.addEventListener("input",update));update();
+}
 function initSetRepresentationVirtualLab(){
  if(norm(concept)!=="set representation")return;
  const mode=document.getElementById("srMode"),limit=document.getElementById("srLimit");
@@ -6985,7 +7032,7 @@ function initSetRepresentationVirtualLab(){
  };
  mode.addEventListener("change",update);limit.addEventListener("input",update);update();
 }
-function initAngleMeasureLab(){
+safeInit("ordered pairs virtual learn lab",initOrderedPairsVirtualLab);\nfunction initAngleMeasureLab(){
  if(!["angle measure","degree and radian measure","conversion between degree and radian"].includes(norm(concept)))return;
  const slider=document.getElementById("amDegrees");if(!slider)return;
  const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};

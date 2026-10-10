@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbf5">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261010-signs-quadrants-v1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><meta name="skillup-release" content="20261010-signs-quadrants-virtual-v2">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>SkillUp Mathematics • Concept Practice • 20261010-trig-functions-v2</title>
+<title>SkillUp Mathematics • Concept Practice • 20261010-signs-quadrants-virtual-v2</title>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -1102,6 +1102,15 @@ if(norm(concept)==="trigonometric identities") return `
 <ul><li>Start with sin²θ + cos²θ = 1.</li><li>Divide every term by cos²θ (where cos θ ≠ 0) to obtain 1 + tan²θ = sec²θ.</li><li>Divide every term by sin²θ (where sin θ ≠ 0) to obtain 1 + cot²θ = cosec²θ.</li></ul>
 <div class="formula"><b>Remember:</b> an identity is not just true for one example. It holds for every permitted value of θ.</div>
 </div>`;
+if(norm(concept)==="signs in quadrants") return `
+<div class="geometry-lesson signs-quadrants-lesson"><strong>Signs in Quadrants — Virtual Sign Lab</strong>
+<p>Move the angle around the coordinate plane and see how the signs of sine, cosine and tangent change. On the unit circle, cos θ is the x-coordinate and sin θ is the y-coordinate.</p>
+<div class="lesson"><b>ASTC memory rule</b><div class="formula">Quadrant I: All positive<br>Quadrant II: Sine positive<br>Quadrant III: Tangent positive<br>Quadrant IV: Cosine positive</div><p>Reciprocal functions share the sign of their partner: cosec with sine, sec with cosine, cot with tangent.</p></div>
+<div class="concept-image"><svg id="sqvPlane" viewBox="0 0 320 260" role="img" aria-label="Four quadrants with trigonometric signs"><rect x="164" y="25" width="125" height="100" rx="10" fill="#dcfce7"/><rect x="31" y="25" width="125" height="100" rx="10" fill="#dbeafe"/><rect x="31" y="132" width="125" height="100" rx="10" fill="#fef3c7"/><rect x="164" y="132" width="125" height="100" rx="10" fill="#fce7f3"/><path d="M18 130H302 M160 245V12" stroke="#52665a" stroke-width="2"/><path d="M294 124L302 130L294 136 M154 20L160 12L166 20" fill="none" stroke="#52665a" stroke-width="2"/><g font-size="12" font-weight="800" text-anchor="middle" fill="#173f27"><text x="225" y="47">I</text><text x="225" y="68">sin + · cos +</text><text x="225" y="85">tan +</text><text x="94" y="47">II</text><text x="94" y="68">sin + · cos −</text><text x="94" y="85">tan −</text><text x="94" y="155">III</text><text x="94" y="176">sin − · cos −</text><text x="94" y="193">tan +</text><text x="225" y="155">IV</text><text x="225" y="176">sin − · cos +</text><text x="225" y="193">tan −</text></g><circle id="sqvDot" cx="225" cy="80" r="7" fill="#2563eb" stroke="white" stroke-width="2"/></svg></div>
+<div class="control"><div class="head"><label for="sqvAngle">Angle θ</label><span class="val"><span id="sqvAngleOut">45</span>°</span></div><input id="sqvAngle" class="range" type="range" min="0" max="360" step="15" value="45" aria-label="Choose an angle from 0 to 360 degrees"><div class="presets"><button type="button" class="preset" data-sqv="30">30°</button><button type="button" class="preset" data-sqv="120">120°</button><button type="button" class="preset" data-sqv="210">210°</button><button type="button" class="preset" data-sqv="315">315°</button></div></div>
+<div class="lesson"><b id="sqvQuadrant">Quadrant I</b><p id="sqvSigns">sin θ: + · cos θ: + · tan θ: +</p><div class="formula" id="sqvValues">sin θ = +0.707 · cos θ = +0.707 · tan θ = +1</div><p id="sqvReason">Sine and cosine are positive here, so tangent is positive too.</p></div>
+<div class="lesson"><b>Worked examples</b><ul><li>150° is in Quadrant II: sine positive, cosine negative, tangent negative.</li><li>225° is in Quadrant III: sine and cosine negative, tangent positive.</li><li>330° is in Quadrant IV: sine negative, cosine positive, tangent negative.</li></ul></div>
+<div class="formula"><b>Watch out:</b> 0°, 90°, 180°, 270° and 360° lie on axes, not inside quadrants. Tangent is undefined at 90° and 270°.</div></div>`;
 if(norm(concept)==="trigonometric functions") return `
 <div class="geometry-lesson trig-functions-lesson"><strong>Trigonometric Functions — Unit Circle Explorer</strong>
 <p>Trigonometric functions connect an angle to coordinates on a circle. For a point on the unit circle at angle θ, the coordinates are <b>(cos θ, sin θ)</b>. This extends sine and cosine beyond right-triangle angles.</p>
@@ -6699,6 +6708,28 @@ function initAngleMeasureLab(){
  slider.addEventListener("input",update);document.querySelectorAll(".amPreset").forEach(btn=>btn.addEventListener("click",()=>{slider.value=btn.dataset.deg;update();}));update();
 }
 safeInit("angle measure interactive lab",initAngleMeasureLab);
+function initSignsInQuadrantsLab(){
+ if(norm(concept)!=="signs in quadrants")return;
+ const angle=document.getElementById("sqvAngle");if(!angle)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const nearZero=n=>Math.abs(n)<1e-8;
+ const fmt=n=>nearZero(n)?"0":(n>0?"+":"")+n.toFixed(3);
+ const update=()=>{
+  const deg=Number(angle.value),rad=deg*Math.PI/180,c=Math.cos(rad),sn=Math.sin(rad);
+  const quadrant=nearZero(sn)?(c>0?"Positive x-axis":"Negative x-axis"):nearZero(c)?(sn>0?"Positive y-axis":"Negative y-axis"):c>0?(sn>0?"Quadrant I":"Quadrant IV"):(sn>0?"Quadrant II":"Quadrant III");
+  const sign=n=>nearZero(n)?"0":n>0?"+":"−",tan=nearZero(c)?null:sn/c;
+  put("sqvAngleOut",deg);put("sqvQuadrant",quadrant);
+  put("sqvSigns","sin θ: "+sign(sn)+" · cos θ: "+sign(c)+" · tan θ: "+(tan===null?"undefined":sign(tan)));
+  put("sqvValues","sin θ = "+fmt(sn)+" · cos θ = "+fmt(c)+" · tan θ = "+(tan===null?"undefined":fmt(tan)));
+  put("sqvReason",tan===null?"Tangent is undefined because cos θ = 0 on this axis.":nearZero(sn)?"Sine is zero on the x-axis.":nearZero(c)?"Cosine is zero on the y-axis.":sign(sn)===sign(c)?"Sine and cosine have the same sign, so tangent is positive.":"Sine and cosine have opposite signs, so tangent is negative.");
+  const dot=document.getElementById("sqvDot");if(dot){dot.setAttribute("cx",160+92*c);dot.setAttribute("cy",130-92*sn);}
+ };
+ angle.addEventListener("input",update);
+ document.querySelectorAll("[data-sqv]").forEach(btn=>btn.addEventListener("click",()=>{angle.value=btn.dataset.sqv;update();}));
+ update();
+}
+safeInit("signs in quadrants virtual lab",initSignsInQuadrantsLab);
+
 function initTrigonometricFunctionsLab(){
  if(norm(concept)!=="trigonometric functions")return;
  const angle=document.getElementById("tfAngle");if(!angle)return;

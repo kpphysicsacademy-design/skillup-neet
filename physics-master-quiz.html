@@ -34,14 +34,14 @@ async function getQs(concept){
   const url='physics-'+slug(concept)+'.html';
   try{
     const t=await fetch(url,{cache:'no-store'}).then(r=>r.text());
-    const m=t.match(/(?:const|var|let)\s+(?:qs|Q)\s*=\s*(\[[\s\S]*?\])\s*;/);
+    const m=t.match(/(?:const|var|let)\s+(?:qs|Q|quiz)\s*=\s*(\[[\s\S]*?\])\s*;/);
     if(m){const qs=Function('return '+m[1])();if(Array.isArray(qs)&&qs.length)return qs;}
   }catch(e){}
   return fallback[concept]||[];
 }
 function pick(qs){
-  const candidates=qs.filter(q=>Array.isArray(q)&&q.length>=4&&typeof q[0]==='string'&&!seen.has(q[0].trim().toLowerCase()));
-  const pool=candidates.length?candidates:qs.filter(q=>Array.isArray(q)&&q.length>=4&&typeof q[0]==='string');
+  const candidates=qs.filter(q=>Array.isArray(q)&&q.length>=3&&Array.isArray(q[1])&&Number.isInteger(q[2])&&typeof q[0]==='string'&&!seen.has(q[0].trim().toLowerCase()));
+  const pool=candidates.length?candidates:qs.filter(q=>Array.isArray(q)&&q.length>=3&&Array.isArray(q[1])&&Number.isInteger(q[2])&&typeof q[0]==='string');
   if(!pool.length)return null;
   const q=pool[Math.floor(Math.random()*pool.length)];seen.add(q[0].trim().toLowerCase());return q;
 }

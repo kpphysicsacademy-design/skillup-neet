@@ -1,4 +1,4 @@
-/* SkillUp Maths quiz bank release: 20261010-maths-world-class-audit-v1 */
+/* SkillUp Maths quiz bank release: Class 11 Sets chapter — 20261010 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
   "Basic geometric ideas": [
     [
@@ -21246,6 +21246,4322 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       ],
       1,
       "Probability 0 means the event cannot occur."
+    ]
+  ],
+  "Set representation": [
+    [
+      "Membership practice 1: A = {4, 6, 8}. Which number belongs to A?",
+      [
+        "6",
+        "5",
+        "7",
+        "9"
+      ],
+      0,
+      "6 is listed in A."
+    ],
+    [
+      "Membership practice 2: A = {5, 7, 9}. Which number belongs to A?",
+      [
+        "7",
+        "6",
+        "8",
+        "10"
+      ],
+      0,
+      "7 is listed in A."
+    ],
+    [
+      "Membership practice 3: A = {6, 8, 10}. Which number belongs to A?",
+      [
+        "8",
+        "7",
+        "9",
+        "11"
+      ],
+      0,
+      "8 is listed in A."
+    ],
+    [
+      "Membership practice 4: A = {7, 9, 11}. Which number belongs to A?",
+      [
+        "9",
+        "8",
+        "10",
+        "12"
+      ],
+      0,
+      "9 is listed in A."
+    ],
+    [
+      "Membership practice 5: A = {8, 10, 12}. Which number belongs to A?",
+      [
+        "10",
+        "9",
+        "11",
+        "13"
+      ],
+      0,
+      "10 is listed in A."
+    ],
+    [
+      "Membership practice 6: A = {9, 11, 13}. Which number belongs to A?",
+      [
+        "11",
+        "10",
+        "12",
+        "14"
+      ],
+      0,
+      "11 is listed in A."
+    ],
+    [
+      "Membership practice 7: A = {10, 12, 14}. Which number belongs to A?",
+      [
+        "12",
+        "11",
+        "13",
+        "15"
+      ],
+      0,
+      "12 is listed in A."
+    ],
+    [
+      "Membership practice 8: A = {11, 13, 15}. Which number belongs to A?",
+      [
+        "13",
+        "12",
+        "14",
+        "16"
+      ],
+      0,
+      "13 is listed in A."
+    ],
+    [
+      "Membership practice 9: A = {12, 14, 16}. Which number belongs to A?",
+      [
+        "14",
+        "13",
+        "15",
+        "17"
+      ],
+      0,
+      "14 is listed in A."
+    ],
+    [
+      "Membership practice 10: A = {13, 15, 17}. Which number belongs to A?",
+      [
+        "15",
+        "14",
+        "16",
+        "18"
+      ],
+      0,
+      "15 is listed in A."
+    ],
+    [
+      "Membership practice 11: A = {14, 16, 18}. Which number belongs to A?",
+      [
+        "16",
+        "15",
+        "17",
+        "19"
+      ],
+      0,
+      "16 is listed in A."
+    ],
+    [
+      "Membership practice 12: A = {15, 17, 19}. Which number belongs to A?",
+      [
+        "17",
+        "16",
+        "18",
+        "20"
+      ],
+      0,
+      "17 is listed in A."
+    ],
+    [
+      "Membership practice 13: A = {16, 18, 20}. Which number belongs to A?",
+      [
+        "18",
+        "17",
+        "19",
+        "21"
+      ],
+      0,
+      "18 is listed in A."
+    ],
+    [
+      "Membership practice 14: A = {17, 19, 21}. Which number belongs to A?",
+      [
+        "19",
+        "18",
+        "20",
+        "22"
+      ],
+      0,
+      "19 is listed in A."
+    ],
+    [
+      "Membership practice 15: A = {18, 20, 22}. Which number belongs to A?",
+      [
+        "20",
+        "19",
+        "21",
+        "23"
+      ],
+      0,
+      "20 is listed in A."
+    ],
+    [
+      "Membership practice 16: A = {19, 21, 23}. Which number belongs to A?",
+      [
+        "21",
+        "20",
+        "22",
+        "24"
+      ],
+      0,
+      "21 is listed in A."
+    ],
+    [
+      "Membership practice 17: A = {20, 22, 24}. Which number belongs to A?",
+      [
+        "22",
+        "21",
+        "23",
+        "25"
+      ],
+      0,
+      "22 is listed in A."
+    ],
+    [
+      "Membership practice 18: A = {21, 23, 25}. Which number belongs to A?",
+      [
+        "23",
+        "22",
+        "24",
+        "26"
+      ],
+      0,
+      "23 is listed in A."
+    ],
+    [
+      "Membership practice 19: A = {22, 24, 26}. Which number belongs to A?",
+      [
+        "24",
+        "23",
+        "25",
+        "27"
+      ],
+      0,
+      "24 is listed in A."
+    ],
+    [
+      "Membership practice 20: A = {23, 25, 27}. Which number belongs to A?",
+      [
+        "25",
+        "24",
+        "26",
+        "28"
+      ],
+      0,
+      "25 is listed in A."
+    ],
+    [
+      "Membership practice 21: A = {24, 26, 28}. Which number belongs to A?",
+      [
+        "26",
+        "25",
+        "27",
+        "29"
+      ],
+      0,
+      "26 is listed in A."
+    ],
+    [
+      "Membership practice 22: A = {25, 27, 29}. Which number belongs to A?",
+      [
+        "27",
+        "26",
+        "28",
+        "30"
+      ],
+      0,
+      "27 is listed in A."
+    ],
+    [
+      "Membership practice 23: A = {26, 28, 30}. Which number belongs to A?",
+      [
+        "28",
+        "27",
+        "29",
+        "31"
+      ],
+      0,
+      "28 is listed in A."
+    ],
+    [
+      "Membership practice 24: A = {27, 29, 31}. Which number belongs to A?",
+      [
+        "29",
+        "28",
+        "30",
+        "32"
+      ],
+      0,
+      "29 is listed in A."
+    ],
+    [
+      "Membership practice 25: A = {28, 30, 32}. Which number belongs to A?",
+      [
+        "30",
+        "29",
+        "31",
+        "33"
+      ],
+      0,
+      "30 is listed in A."
+    ],
+    [
+      "Membership practice 26: A = {29, 31, 33}. Which number belongs to A?",
+      [
+        "31",
+        "30",
+        "32",
+        "34"
+      ],
+      0,
+      "31 is listed in A."
+    ],
+    [
+      "Membership practice 27: A = {30, 32, 34}. Which number belongs to A?",
+      [
+        "32",
+        "31",
+        "33",
+        "35"
+      ],
+      0,
+      "32 is listed in A."
+    ],
+    [
+      "Membership practice 28: A = {31, 33, 35}. Which number belongs to A?",
+      [
+        "33",
+        "32",
+        "34",
+        "36"
+      ],
+      0,
+      "33 is listed in A."
+    ],
+    [
+      "Membership practice 29: A = {32, 34, 36}. Which number belongs to A?",
+      [
+        "34",
+        "33",
+        "35",
+        "37"
+      ],
+      0,
+      "34 is listed in A."
+    ],
+    [
+      "Membership practice 30: A = {33, 35, 37}. Which number belongs to A?",
+      [
+        "35",
+        "34",
+        "36",
+        "38"
+      ],
+      0,
+      "35 is listed in A."
+    ]
+  ],
+  "Types of sets": [
+    [
+      "Classify example 1: A = {4, 5, 6}, B = {p, q, r}.",
+      [
+        "equivalent",
+        "equal",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets contain three elements."
+    ],
+    [
+      "Classify example 2: A = {5, 7}, B = {6, 8}.",
+      [
+        "disjoint",
+        "equal",
+        "equivalent",
+        "overlapping"
+      ],
+      0,
+      "There are no common elements."
+    ],
+    [
+      "Classify example 3: A = {6, 7}, B = {7, 8}.",
+      [
+        "overlapping",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "Both sets contain 7."
+    ],
+    [
+      "Classify example 4: A = {7, 8, 9}, B = ℕ.",
+      [
+        "one finite and one infinite",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "A is finite while the natural numbers are infinite."
+    ],
+    [
+      "Classify example 5: A = {x ∈ ℕ | x < −8}.",
+      [
+        "empty",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "No natural number satisfies the condition."
+    ],
+    [
+      "Classify example 6: A = {9, 10}, B = {9, 10}.",
+      [
+        "equal",
+        "equivalent",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets have the same elements."
+    ],
+    [
+      "Classify example 7: A = {10, 11, 12}, B = {p, q, r}.",
+      [
+        "equivalent",
+        "equal",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets contain three elements."
+    ],
+    [
+      "Classify example 8: A = {11, 13}, B = {12, 14}.",
+      [
+        "disjoint",
+        "equal",
+        "equivalent",
+        "overlapping"
+      ],
+      0,
+      "There are no common elements."
+    ],
+    [
+      "Classify example 9: A = {12, 13}, B = {13, 14}.",
+      [
+        "overlapping",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "Both sets contain 13."
+    ],
+    [
+      "Classify example 10: A = {13, 14, 15}, B = ℕ.",
+      [
+        "one finite and one infinite",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "A is finite while the natural numbers are infinite."
+    ],
+    [
+      "Classify example 11: A = {x ∈ ℕ | x < −14}.",
+      [
+        "empty",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "No natural number satisfies the condition."
+    ],
+    [
+      "Classify example 12: A = {15, 16}, B = {15, 16}.",
+      [
+        "equal",
+        "equivalent",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets have the same elements."
+    ],
+    [
+      "Classify example 13: A = {16, 17, 18}, B = {p, q, r}.",
+      [
+        "equivalent",
+        "equal",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets contain three elements."
+    ],
+    [
+      "Classify example 14: A = {17, 19}, B = {18, 20}.",
+      [
+        "disjoint",
+        "equal",
+        "equivalent",
+        "overlapping"
+      ],
+      0,
+      "There are no common elements."
+    ],
+    [
+      "Classify example 15: A = {18, 19}, B = {19, 20}.",
+      [
+        "overlapping",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "Both sets contain 19."
+    ],
+    [
+      "Classify example 16: A = {19, 20, 21}, B = ℕ.",
+      [
+        "one finite and one infinite",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "A is finite while the natural numbers are infinite."
+    ],
+    [
+      "Classify example 17: A = {x ∈ ℕ | x < −20}.",
+      [
+        "empty",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "No natural number satisfies the condition."
+    ],
+    [
+      "Classify example 18: A = {21, 22}, B = {21, 22}.",
+      [
+        "equal",
+        "equivalent",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets have the same elements."
+    ],
+    [
+      "Classify example 19: A = {22, 23, 24}, B = {p, q, r}.",
+      [
+        "equivalent",
+        "equal",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets contain three elements."
+    ],
+    [
+      "Classify example 20: A = {23, 25}, B = {24, 26}.",
+      [
+        "disjoint",
+        "equal",
+        "equivalent",
+        "overlapping"
+      ],
+      0,
+      "There are no common elements."
+    ],
+    [
+      "Classify example 21: A = {24, 25}, B = {25, 26}.",
+      [
+        "overlapping",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "Both sets contain 25."
+    ],
+    [
+      "Classify example 22: A = {25, 26, 27}, B = ℕ.",
+      [
+        "one finite and one infinite",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "A is finite while the natural numbers are infinite."
+    ],
+    [
+      "Classify example 23: A = {x ∈ ℕ | x < −26}.",
+      [
+        "empty",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "No natural number satisfies the condition."
+    ],
+    [
+      "Classify example 24: A = {27, 28}, B = {27, 28}.",
+      [
+        "equal",
+        "equivalent",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets have the same elements."
+    ],
+    [
+      "Classify example 25: A = {28, 29, 30}, B = {p, q, r}.",
+      [
+        "equivalent",
+        "equal",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets contain three elements."
+    ],
+    [
+      "Classify example 26: A = {29, 31}, B = {30, 32}.",
+      [
+        "disjoint",
+        "equal",
+        "equivalent",
+        "overlapping"
+      ],
+      0,
+      "There are no common elements."
+    ],
+    [
+      "Classify example 27: A = {30, 31}, B = {31, 32}.",
+      [
+        "overlapping",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "Both sets contain 31."
+    ],
+    [
+      "Classify example 28: A = {31, 32, 33}, B = ℕ.",
+      [
+        "one finite and one infinite",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "A is finite while the natural numbers are infinite."
+    ],
+    [
+      "Classify example 29: A = {x ∈ ℕ | x < −32}.",
+      [
+        "empty",
+        "equal",
+        "equivalent",
+        "disjoint"
+      ],
+      0,
+      "No natural number satisfies the condition."
+    ],
+    [
+      "Classify example 30: A = {33, 34}, B = {33, 34}.",
+      [
+        "equal",
+        "equivalent",
+        "disjoint",
+        "overlapping"
+      ],
+      0,
+      "Both sets have the same elements."
+    ]
+  ],
+  "Empty set": [
+    [
+      "Which set is empty under condition 1: x is both even and odd (integer x ≥ 1)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 2: 2 < x < 3 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 3: x > 8 and x < 3 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 4: x + 4 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 5: x² = −5 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 6: x is both even and odd (integer x ≥ 6)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 7: 7 < x < 8 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 8: x > 13 and x < 8 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 9: x + 9 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 10: x² = −10 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 11: x is both even and odd (integer x ≥ 11)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 12: 12 < x < 13 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 13: x > 18 and x < 13 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 14: x + 14 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 15: x² = −15 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 16: x is both even and odd (integer x ≥ 16)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 17: 17 < x < 18 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 18: x > 23 and x < 18 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 19: x + 19 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 20: x² = −20 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 21: x is both even and odd (integer x ≥ 21)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 22: 22 < x < 23 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 23: x > 28 and x < 23 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 24: x + 24 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 25: x² = −25 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 26: x is both even and odd (integer x ≥ 26)?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 27: 27 < x < 28 for integer x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 28: x > 33 and x < 28 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 29: x + 29 = x for natural x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ],
+    [
+      "Which set is empty under condition 30: x² = −30 for real x?",
+      [
+        "The described set",
+        "{0}",
+        "{1, 2}",
+        "ℝ"
+      ],
+      0,
+      "No value satisfies the stated condition."
+    ]
+  ],
+  "Finite and infinite sets": [
+    [
+      "Classify set 1: {1, 3, 5, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 2: {x ∈ ℤ | 2 ≤ x ≤ 7}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 3: {x ∈ ℕ | x is a multiple of 4}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 4: {4, 5, 6, 7, 8, 9}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 5: {5, 7, 9, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 6: {x ∈ ℤ | 6 ≤ x ≤ 11}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 7: {x ∈ ℕ | x is a multiple of 8}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 8: {8, 9, 10, 11, 12}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 9: {9, 11, 13, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 10: {x ∈ ℤ | 10 ≤ x ≤ 15}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 11: {x ∈ ℕ | x is a multiple of 12}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 12: {12, 13, 14, 15}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 13: {13, 15, 17, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 14: {x ∈ ℤ | 14 ≤ x ≤ 19}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 15: {x ∈ ℕ | x is a multiple of 16}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 16: {16, 17, 18}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 17: {17, 19, 21, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 18: {x ∈ ℤ | 18 ≤ x ≤ 23}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 19: {x ∈ ℕ | x is a multiple of 20}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 20: {20, 21}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 21: {21, 23, 25, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 22: {x ∈ ℤ | 22 ≤ x ≤ 27}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 23: {x ∈ ℕ | x is a multiple of 24}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 24: {24, 25, 26, 27, 28, 29}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 25: {25, 27, 29, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 26: {x ∈ ℤ | 26 ≤ x ≤ 31}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 27: {x ∈ ℕ | x is a multiple of 28}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 28: {28, 29, 30, 31, 32}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 29: {29, 31, 33, …}.",
+      [
+        "infinite",
+        "finite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ],
+    [
+      "Classify set 30: {x ∈ ℤ | 30 ≤ x ≤ 35}.",
+      [
+        "finite",
+        "infinite",
+        "singleton",
+        "empty"
+      ],
+      0,
+      "A bounded list or bounded integer interval is finite; an unending sequence of multiples is infinite."
+    ]
+  ],
+  "Subset": [
+    [
+      "If A = {4, 6} and B = {4, 5, 6}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {5, 7} and B = {5, 6, 7}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {6, 8} and B = {6, 7, 8}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {7, 9} and B = {7, 8, 9}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {8, 10} and B = {8, 9, 10}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {9, 11} and B = {9, 10, 11}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {10, 12} and B = {10, 11, 12}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {11, 13} and B = {11, 12, 13}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {12, 14} and B = {12, 13, 14}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {13, 15} and B = {13, 14, 15}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {14, 16} and B = {14, 15, 16}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {15, 17} and B = {15, 16, 17}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {16, 18} and B = {16, 17, 18}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {17, 19} and B = {17, 18, 19}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {18, 20} and B = {18, 19, 20}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {19, 21} and B = {19, 20, 21}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {20, 22} and B = {20, 21, 22}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {21, 23} and B = {21, 22, 23}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {22, 24} and B = {22, 23, 24}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {23, 25} and B = {23, 24, 25}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {24, 26} and B = {24, 25, 26}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {25, 27} and B = {25, 26, 27}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {26, 28} and B = {26, 27, 28}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {27, 29} and B = {27, 28, 29}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {28, 30} and B = {28, 29, 30}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {29, 31} and B = {29, 30, 31}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {30, 32} and B = {30, 31, 32}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {31, 33} and B = {31, 32, 33}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {32, 34} and B = {32, 33, 34}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ],
+    [
+      "If A = {33, 35} and B = {33, 34, 35}, which relation holds?",
+      [
+        "A ⊆ B",
+        "B ⊆ A",
+        "A ∩ B = ∅",
+        "A = ∅"
+      ],
+      0,
+      "Every element of A also belongs to B."
+    ]
+  ],
+  "Power set": [
+    [
+      "Power set 1: A = {b1}. Find n(P(A)).",
+      [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      0,
+      "n(P(A)) = 2^1 = 2."
+    ],
+    [
+      "Power set 2: A = {c2, d2}. Find n(P(A)).",
+      [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      0,
+      "n(P(A)) = 2^2 = 4."
+    ],
+    [
+      "Power set 3: A = {d3, e3, f3}. Find n(P(A)).",
+      [
+        "8",
+        "9",
+        "7",
+        "16"
+      ],
+      0,
+      "n(P(A)) = 2^3 = 8."
+    ],
+    [
+      "Power set 4: A = {e4, f4, a4, b4}. Find n(P(A)).",
+      [
+        "16",
+        "17",
+        "15",
+        "32"
+      ],
+      0,
+      "n(P(A)) = 2^4 = 16."
+    ],
+    [
+      "Power set 5: A = {f5, a5, b5, c5, d5}. Find n(P(A)).",
+      [
+        "32",
+        "33",
+        "31",
+        "64"
+      ],
+      0,
+      "n(P(A)) = 2^5 = 32."
+    ],
+    [
+      "Power set 6: A = {}. Find n(P(A)).",
+      [
+        "1",
+        "2",
+        "0",
+        "Other option 1"
+      ],
+      0,
+      "n(P(A)) = 2^0 = 1."
+    ],
+    [
+      "Power set 7: A = {b7}. Find n(P(A)).",
+      [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      0,
+      "n(P(A)) = 2^1 = 2."
+    ],
+    [
+      "Power set 8: A = {c8, d8}. Find n(P(A)).",
+      [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      0,
+      "n(P(A)) = 2^2 = 4."
+    ],
+    [
+      "Power set 9: A = {d9, e9, f9}. Find n(P(A)).",
+      [
+        "8",
+        "9",
+        "7",
+        "16"
+      ],
+      0,
+      "n(P(A)) = 2^3 = 8."
+    ],
+    [
+      "Power set 10: A = {e10, f10, a10, b10}. Find n(P(A)).",
+      [
+        "16",
+        "17",
+        "15",
+        "32"
+      ],
+      0,
+      "n(P(A)) = 2^4 = 16."
+    ],
+    [
+      "Power set 11: A = {f11, a11, b11, c11, d11}. Find n(P(A)).",
+      [
+        "32",
+        "33",
+        "31",
+        "64"
+      ],
+      0,
+      "n(P(A)) = 2^5 = 32."
+    ],
+    [
+      "Power set 12: A = {}. Find n(P(A)).",
+      [
+        "1",
+        "2",
+        "0",
+        "Other option 1"
+      ],
+      0,
+      "n(P(A)) = 2^0 = 1."
+    ],
+    [
+      "Power set 13: A = {b13}. Find n(P(A)).",
+      [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      0,
+      "n(P(A)) = 2^1 = 2."
+    ],
+    [
+      "Power set 14: A = {c14, d14}. Find n(P(A)).",
+      [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      0,
+      "n(P(A)) = 2^2 = 4."
+    ],
+    [
+      "Power set 15: A = {d15, e15, f15}. Find n(P(A)).",
+      [
+        "8",
+        "9",
+        "7",
+        "16"
+      ],
+      0,
+      "n(P(A)) = 2^3 = 8."
+    ],
+    [
+      "Power set 16: A = {e16, f16, a16, b16}. Find n(P(A)).",
+      [
+        "16",
+        "17",
+        "15",
+        "32"
+      ],
+      0,
+      "n(P(A)) = 2^4 = 16."
+    ],
+    [
+      "Power set 17: A = {f17, a17, b17, c17, d17}. Find n(P(A)).",
+      [
+        "32",
+        "33",
+        "31",
+        "64"
+      ],
+      0,
+      "n(P(A)) = 2^5 = 32."
+    ],
+    [
+      "Power set 18: A = {}. Find n(P(A)).",
+      [
+        "1",
+        "2",
+        "0",
+        "Other option 1"
+      ],
+      0,
+      "n(P(A)) = 2^0 = 1."
+    ],
+    [
+      "Power set 19: A = {b19}. Find n(P(A)).",
+      [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      0,
+      "n(P(A)) = 2^1 = 2."
+    ],
+    [
+      "Power set 20: A = {c20, d20}. Find n(P(A)).",
+      [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      0,
+      "n(P(A)) = 2^2 = 4."
+    ],
+    [
+      "Power set 21: A = {d21, e21, f21}. Find n(P(A)).",
+      [
+        "8",
+        "9",
+        "7",
+        "16"
+      ],
+      0,
+      "n(P(A)) = 2^3 = 8."
+    ],
+    [
+      "Power set 22: A = {e22, f22, a22, b22}. Find n(P(A)).",
+      [
+        "16",
+        "17",
+        "15",
+        "32"
+      ],
+      0,
+      "n(P(A)) = 2^4 = 16."
+    ],
+    [
+      "Power set 23: A = {f23, a23, b23, c23, d23}. Find n(P(A)).",
+      [
+        "32",
+        "33",
+        "31",
+        "64"
+      ],
+      0,
+      "n(P(A)) = 2^5 = 32."
+    ],
+    [
+      "Power set 24: A = {}. Find n(P(A)).",
+      [
+        "1",
+        "2",
+        "0",
+        "Other option 1"
+      ],
+      0,
+      "n(P(A)) = 2^0 = 1."
+    ],
+    [
+      "Power set 25: A = {b25}. Find n(P(A)).",
+      [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      0,
+      "n(P(A)) = 2^1 = 2."
+    ],
+    [
+      "Power set 26: A = {c26, d26}. Find n(P(A)).",
+      [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      0,
+      "n(P(A)) = 2^2 = 4."
+    ],
+    [
+      "Power set 27: A = {d27, e27, f27}. Find n(P(A)).",
+      [
+        "8",
+        "9",
+        "7",
+        "16"
+      ],
+      0,
+      "n(P(A)) = 2^3 = 8."
+    ],
+    [
+      "Power set 28: A = {e28, f28, a28, b28}. Find n(P(A)).",
+      [
+        "16",
+        "17",
+        "15",
+        "32"
+      ],
+      0,
+      "n(P(A)) = 2^4 = 16."
+    ],
+    [
+      "Power set 29: A = {f29, a29, b29, c29, d29}. Find n(P(A)).",
+      [
+        "32",
+        "33",
+        "31",
+        "64"
+      ],
+      0,
+      "n(P(A)) = 2^5 = 32."
+    ],
+    [
+      "Power set 30: A = {}. Find n(P(A)).",
+      [
+        "1",
+        "2",
+        "0",
+        "Other option 1"
+      ],
+      0,
+      "n(P(A)) = 2^0 = 1."
+    ]
+  ],
+  "Universal set": [
+    [
+      "If U = {7, 8, 9, 10, 11, 12} and A = {8, 10, 12}, find A′ relative to U.",
+      [
+        "{7, 9, 11}",
+        "{8, 10, 12}",
+        "{7, 8, 9, 10, 11, 12}",
+        "{6}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {7, 9, 11}."
+    ],
+    [
+      "If U = {13, 14, 15, 16, 17, 18} and A = {13, 15, 17}, find A′ relative to U.",
+      [
+        "{14, 16, 18}",
+        "{13, 15, 17}",
+        "{13, 14, 15, 16, 17, 18}",
+        "{12}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {14, 16, 18}."
+    ],
+    [
+      "If U = {19, 20, 21, 22, 23, 24} and A = {20, 22, 24}, find A′ relative to U.",
+      [
+        "{19, 21, 23}",
+        "{20, 22, 24}",
+        "{19, 20, 21, 22, 23, 24}",
+        "{18}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {19, 21, 23}."
+    ],
+    [
+      "If U = {25, 26, 27, 28, 29, 30} and A = {25, 27, 29}, find A′ relative to U.",
+      [
+        "{26, 28, 30}",
+        "{25, 27, 29}",
+        "{25, 26, 27, 28, 29, 30}",
+        "{24}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {26, 28, 30}."
+    ],
+    [
+      "If U = {31, 32, 33, 34, 35, 36} and A = {32, 34, 36}, find A′ relative to U.",
+      [
+        "{31, 33, 35}",
+        "{32, 34, 36}",
+        "{31, 32, 33, 34, 35, 36}",
+        "{30}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {31, 33, 35}."
+    ],
+    [
+      "If U = {37, 38, 39, 40, 41, 42} and A = {37, 39, 41}, find A′ relative to U.",
+      [
+        "{38, 40, 42}",
+        "{37, 39, 41}",
+        "{37, 38, 39, 40, 41, 42}",
+        "{36}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {38, 40, 42}."
+    ],
+    [
+      "If U = {43, 44, 45, 46, 47, 48} and A = {44, 46, 48}, find A′ relative to U.",
+      [
+        "{43, 45, 47}",
+        "{44, 46, 48}",
+        "{43, 44, 45, 46, 47, 48}",
+        "{42}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {43, 45, 47}."
+    ],
+    [
+      "If U = {49, 50, 51, 52, 53, 54} and A = {49, 51, 53}, find A′ relative to U.",
+      [
+        "{50, 52, 54}",
+        "{49, 51, 53}",
+        "{49, 50, 51, 52, 53, 54}",
+        "{48}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {50, 52, 54}."
+    ],
+    [
+      "If U = {55, 56, 57, 58, 59, 60} and A = {56, 58, 60}, find A′ relative to U.",
+      [
+        "{55, 57, 59}",
+        "{56, 58, 60}",
+        "{55, 56, 57, 58, 59, 60}",
+        "{54}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {55, 57, 59}."
+    ],
+    [
+      "If U = {61, 62, 63, 64, 65, 66} and A = {61, 63, 65}, find A′ relative to U.",
+      [
+        "{62, 64, 66}",
+        "{61, 63, 65}",
+        "{61, 62, 63, 64, 65, 66}",
+        "{60}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {62, 64, 66}."
+    ],
+    [
+      "If U = {67, 68, 69, 70, 71, 72} and A = {68, 70, 72}, find A′ relative to U.",
+      [
+        "{67, 69, 71}",
+        "{68, 70, 72}",
+        "{67, 68, 69, 70, 71, 72}",
+        "{66}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {67, 69, 71}."
+    ],
+    [
+      "If U = {73, 74, 75, 76, 77, 78} and A = {73, 75, 77}, find A′ relative to U.",
+      [
+        "{74, 76, 78}",
+        "{73, 75, 77}",
+        "{73, 74, 75, 76, 77, 78}",
+        "{72}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {74, 76, 78}."
+    ],
+    [
+      "If U = {79, 80, 81, 82, 83, 84} and A = {80, 82, 84}, find A′ relative to U.",
+      [
+        "{79, 81, 83}",
+        "{80, 82, 84}",
+        "{79, 80, 81, 82, 83, 84}",
+        "{78}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {79, 81, 83}."
+    ],
+    [
+      "If U = {85, 86, 87, 88, 89, 90} and A = {85, 87, 89}, find A′ relative to U.",
+      [
+        "{86, 88, 90}",
+        "{85, 87, 89}",
+        "{85, 86, 87, 88, 89, 90}",
+        "{84}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {86, 88, 90}."
+    ],
+    [
+      "If U = {91, 92, 93, 94, 95, 96} and A = {92, 94, 96}, find A′ relative to U.",
+      [
+        "{91, 93, 95}",
+        "{92, 94, 96}",
+        "{91, 92, 93, 94, 95, 96}",
+        "{90}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {91, 93, 95}."
+    ],
+    [
+      "If U = {97, 98, 99, 100, 101, 102} and A = {97, 99, 101}, find A′ relative to U.",
+      [
+        "{98, 100, 102}",
+        "{97, 99, 101}",
+        "{97, 98, 99, 100, 101, 102}",
+        "{96}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {98, 100, 102}."
+    ],
+    [
+      "If U = {103, 104, 105, 106, 107, 108} and A = {104, 106, 108}, find A′ relative to U.",
+      [
+        "{103, 105, 107}",
+        "{104, 106, 108}",
+        "{103, 104, 105, 106, 107, 108}",
+        "{102}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {103, 105, 107}."
+    ],
+    [
+      "If U = {109, 110, 111, 112, 113, 114} and A = {109, 111, 113}, find A′ relative to U.",
+      [
+        "{110, 112, 114}",
+        "{109, 111, 113}",
+        "{109, 110, 111, 112, 113, 114}",
+        "{108}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {110, 112, 114}."
+    ],
+    [
+      "If U = {115, 116, 117, 118, 119, 120} and A = {116, 118, 120}, find A′ relative to U.",
+      [
+        "{115, 117, 119}",
+        "{116, 118, 120}",
+        "{115, 116, 117, 118, 119, 120}",
+        "{114}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {115, 117, 119}."
+    ],
+    [
+      "If U = {121, 122, 123, 124, 125, 126} and A = {121, 123, 125}, find A′ relative to U.",
+      [
+        "{122, 124, 126}",
+        "{121, 123, 125}",
+        "{121, 122, 123, 124, 125, 126}",
+        "{120}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {122, 124, 126}."
+    ],
+    [
+      "If U = {127, 128, 129, 130, 131, 132} and A = {128, 130, 132}, find A′ relative to U.",
+      [
+        "{127, 129, 131}",
+        "{128, 130, 132}",
+        "{127, 128, 129, 130, 131, 132}",
+        "{126}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {127, 129, 131}."
+    ],
+    [
+      "If U = {133, 134, 135, 136, 137, 138} and A = {133, 135, 137}, find A′ relative to U.",
+      [
+        "{134, 136, 138}",
+        "{133, 135, 137}",
+        "{133, 134, 135, 136, 137, 138}",
+        "{132}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {134, 136, 138}."
+    ],
+    [
+      "If U = {139, 140, 141, 142, 143, 144} and A = {140, 142, 144}, find A′ relative to U.",
+      [
+        "{139, 141, 143}",
+        "{140, 142, 144}",
+        "{139, 140, 141, 142, 143, 144}",
+        "{138}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {139, 141, 143}."
+    ],
+    [
+      "If U = {145, 146, 147, 148, 149, 150} and A = {145, 147, 149}, find A′ relative to U.",
+      [
+        "{146, 148, 150}",
+        "{145, 147, 149}",
+        "{145, 146, 147, 148, 149, 150}",
+        "{144}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {146, 148, 150}."
+    ],
+    [
+      "If U = {151, 152, 153, 154, 155, 156} and A = {152, 154, 156}, find A′ relative to U.",
+      [
+        "{151, 153, 155}",
+        "{152, 154, 156}",
+        "{151, 152, 153, 154, 155, 156}",
+        "{150}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {151, 153, 155}."
+    ],
+    [
+      "If U = {157, 158, 159, 160, 161, 162} and A = {157, 159, 161}, find A′ relative to U.",
+      [
+        "{158, 160, 162}",
+        "{157, 159, 161}",
+        "{157, 158, 159, 160, 161, 162}",
+        "{156}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {158, 160, 162}."
+    ],
+    [
+      "If U = {163, 164, 165, 166, 167, 168} and A = {164, 166, 168}, find A′ relative to U.",
+      [
+        "{163, 165, 167}",
+        "{164, 166, 168}",
+        "{163, 164, 165, 166, 167, 168}",
+        "{162}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {163, 165, 167}."
+    ],
+    [
+      "If U = {169, 170, 171, 172, 173, 174} and A = {169, 171, 173}, find A′ relative to U.",
+      [
+        "{170, 172, 174}",
+        "{169, 171, 173}",
+        "{169, 170, 171, 172, 173, 174}",
+        "{168}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {170, 172, 174}."
+    ],
+    [
+      "If U = {175, 176, 177, 178, 179, 180} and A = {176, 178, 180}, find A′ relative to U.",
+      [
+        "{175, 177, 179}",
+        "{176, 178, 180}",
+        "{175, 176, 177, 178, 179, 180}",
+        "{174}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {175, 177, 179}."
+    ],
+    [
+      "If U = {181, 182, 183, 184, 185, 186} and A = {181, 183, 185}, find A′ relative to U.",
+      [
+        "{182, 184, 186}",
+        "{181, 183, 185}",
+        "{181, 182, 183, 184, 185, 186}",
+        "{180}"
+      ],
+      0,
+      "A′ contains the elements in U that are not in A: {182, 184, 186}."
+    ]
+  ],
+  "Union": [
+    [
+      "Union example 1: A = {9, 10, 12, 13, 15}, B = {11, 12, 13, 14, 15}. Find A ∪ B.",
+      [
+        "{9, 10, 11, 12, 13, 14, 15}",
+        "{9, 10, 12, 13, 15}",
+        "{11, 12, 13, 14, 15}",
+        "{16}"
+      ],
+      0,
+      "union gives {9, 10, 11, 12, 13, 14, 15}."
+    ],
+    [
+      "Union example 2: A = {17, 19, 20, 22, 23}, B = {21, 23}. Find A ∪ B.",
+      [
+        "{17, 19, 20, 21, 22, 23}",
+        "{17, 19, 20, 22, 23}",
+        "{21, 23}",
+        "{18, 24}"
+      ],
+      0,
+      "union gives {17, 19, 20, 21, 22, 23}."
+    ],
+    [
+      "Union example 3: A = {26, 27, 29, 30, 32}, B = {27, 28, 29, 30, 31}. Find A ∪ B.",
+      [
+        "{26, 27, 28, 29, 30, 31, 32}",
+        "{26, 27, 29, 30, 32}",
+        "{27, 28, 29, 30, 31}",
+        "{25}"
+      ],
+      0,
+      "union gives {26, 27, 28, 29, 30, 31, 32}."
+    ],
+    [
+      "Union example 4: A = {33, 34, 36, 37, 39}, B = {38, 40}. Find A ∪ B.",
+      [
+        "{33, 34, 36, 37, 38, 39, 40}",
+        "{33, 34, 36, 37, 39}",
+        "{38, 40}",
+        "{35}"
+      ],
+      0,
+      "union gives {33, 34, 36, 37, 38, 39, 40}."
+    ],
+    [
+      "Union example 5: A = {41, 43, 44, 46, 47}, B = {43, 44, 45, 46, 47}. Find A ∪ B.",
+      [
+        "{41, 43, 44, 45, 46, 47}",
+        "{41, 43, 44, 46, 47}",
+        "{43, 44, 45, 46, 47}",
+        "{42, 48}"
+      ],
+      0,
+      "union gives {41, 43, 44, 45, 46, 47}."
+    ],
+    [
+      "Union example 6: A = {50, 51, 53, 54, 56}, B = {53, 55}. Find A ∪ B.",
+      [
+        "{50, 51, 53, 54, 55, 56}",
+        "{50, 51, 53, 54, 56}",
+        "{53, 55}",
+        "{49, 52}"
+      ],
+      0,
+      "union gives {50, 51, 53, 54, 55, 56}."
+    ],
+    [
+      "Union example 7: A = {57, 58, 60, 61, 63}, B = {59, 60, 61, 62, 63}. Find A ∪ B.",
+      [
+        "{57, 58, 59, 60, 61, 62, 63}",
+        "{57, 58, 60, 61, 63}",
+        "{59, 60, 61, 62, 63}",
+        "{64}"
+      ],
+      0,
+      "union gives {57, 58, 59, 60, 61, 62, 63}."
+    ],
+    [
+      "Union example 8: A = {65, 67, 68, 70, 71}, B = {70, 72}. Find A ∪ B.",
+      [
+        "{65, 67, 68, 70, 71, 72}",
+        "{65, 67, 68, 70, 71}",
+        "{70, 72}",
+        "{66, 69}"
+      ],
+      0,
+      "union gives {65, 67, 68, 70, 71, 72}."
+    ],
+    [
+      "Union example 9: A = {74, 75, 77, 78, 80}, B = {75, 76, 77, 78, 79}. Find A ∪ B.",
+      [
+        "{74, 75, 76, 77, 78, 79, 80}",
+        "{74, 75, 77, 78, 80}",
+        "{75, 76, 77, 78, 79}",
+        "{73}"
+      ],
+      0,
+      "union gives {74, 75, 76, 77, 78, 79, 80}."
+    ],
+    [
+      "Union example 10: A = {81, 82, 84, 85, 87}, B = {85, 87}. Find A ∪ B.",
+      [
+        "{81, 82, 84, 85, 87}",
+        "{85, 87}",
+        "{83, 86, 88}",
+        "Other option 1"
+      ],
+      0,
+      "union gives {81, 82, 84, 85, 87}."
+    ],
+    [
+      "Union example 11: A = {89, 91, 92, 94, 95}, B = {91, 92, 93, 94, 95}. Find A ∪ B.",
+      [
+        "{89, 91, 92, 93, 94, 95}",
+        "{89, 91, 92, 94, 95}",
+        "{91, 92, 93, 94, 95}",
+        "{90, 96}"
+      ],
+      0,
+      "union gives {89, 91, 92, 93, 94, 95}."
+    ],
+    [
+      "Union example 12: A = {98, 99, 101, 102, 104}, B = {102, 104}. Find A ∪ B.",
+      [
+        "{98, 99, 101, 102, 104}",
+        "{102, 104}",
+        "{97, 100, 103}",
+        "Other option 1"
+      ],
+      0,
+      "union gives {98, 99, 101, 102, 104}."
+    ],
+    [
+      "Union example 13: A = {105, 106, 108, 109, 111}, B = {107, 108, 109, 110, 111}. Find A ∪ B.",
+      [
+        "{105, 106, 107, 108, 109, 110, 111}",
+        "{105, 106, 108, 109, 111}",
+        "{107, 108, 109, 110, 111}",
+        "{112}"
+      ],
+      0,
+      "union gives {105, 106, 107, 108, 109, 110, 111}."
+    ],
+    [
+      "Union example 14: A = {113, 115, 116, 118, 119}, B = {117, 119}. Find A ∪ B.",
+      [
+        "{113, 115, 116, 117, 118, 119}",
+        "{113, 115, 116, 118, 119}",
+        "{117, 119}",
+        "{114, 120}"
+      ],
+      0,
+      "union gives {113, 115, 116, 117, 118, 119}."
+    ],
+    [
+      "Union example 15: A = {122, 123, 125, 126, 128}, B = {123, 124, 125, 126, 127}. Find A ∪ B.",
+      [
+        "{122, 123, 124, 125, 126, 127, 128}",
+        "{122, 123, 125, 126, 128}",
+        "{123, 124, 125, 126, 127}",
+        "{121}"
+      ],
+      0,
+      "union gives {122, 123, 124, 125, 126, 127, 128}."
+    ],
+    [
+      "Union example 16: A = {129, 130, 132, 133, 135}, B = {134, 136}. Find A ∪ B.",
+      [
+        "{129, 130, 132, 133, 134, 135, 136}",
+        "{129, 130, 132, 133, 135}",
+        "{134, 136}",
+        "{131}"
+      ],
+      0,
+      "union gives {129, 130, 132, 133, 134, 135, 136}."
+    ],
+    [
+      "Union example 17: A = {137, 139, 140, 142, 143}, B = {139, 140, 141, 142, 143}. Find A ∪ B.",
+      [
+        "{137, 139, 140, 141, 142, 143}",
+        "{137, 139, 140, 142, 143}",
+        "{139, 140, 141, 142, 143}",
+        "{138, 144}"
+      ],
+      0,
+      "union gives {137, 139, 140, 141, 142, 143}."
+    ],
+    [
+      "Union example 18: A = {146, 147, 149, 150, 152}, B = {149, 151}. Find A ∪ B.",
+      [
+        "{146, 147, 149, 150, 151, 152}",
+        "{146, 147, 149, 150, 152}",
+        "{149, 151}",
+        "{145, 148}"
+      ],
+      0,
+      "union gives {146, 147, 149, 150, 151, 152}."
+    ],
+    [
+      "Union example 19: A = {153, 154, 156, 157, 159}, B = {155, 156, 157, 158, 159}. Find A ∪ B.",
+      [
+        "{153, 154, 155, 156, 157, 158, 159}",
+        "{153, 154, 156, 157, 159}",
+        "{155, 156, 157, 158, 159}",
+        "{160}"
+      ],
+      0,
+      "union gives {153, 154, 155, 156, 157, 158, 159}."
+    ],
+    [
+      "Union example 20: A = {161, 163, 164, 166, 167}, B = {166, 168}. Find A ∪ B.",
+      [
+        "{161, 163, 164, 166, 167, 168}",
+        "{161, 163, 164, 166, 167}",
+        "{166, 168}",
+        "{162, 165}"
+      ],
+      0,
+      "union gives {161, 163, 164, 166, 167, 168}."
+    ],
+    [
+      "Union example 21: A = {170, 171, 173, 174, 176}, B = {171, 172, 173, 174, 175}. Find A ∪ B.",
+      [
+        "{170, 171, 172, 173, 174, 175, 176}",
+        "{170, 171, 173, 174, 176}",
+        "{171, 172, 173, 174, 175}",
+        "{169}"
+      ],
+      0,
+      "union gives {170, 171, 172, 173, 174, 175, 176}."
+    ],
+    [
+      "Union example 22: A = {177, 178, 180, 181, 183}, B = {181, 183}. Find A ∪ B.",
+      [
+        "{177, 178, 180, 181, 183}",
+        "{181, 183}",
+        "{179, 182, 184}",
+        "Other option 1"
+      ],
+      0,
+      "union gives {177, 178, 180, 181, 183}."
+    ],
+    [
+      "Union example 23: A = {185, 187, 188, 190, 191}, B = {187, 188, 189, 190, 191}. Find A ∪ B.",
+      [
+        "{185, 187, 188, 189, 190, 191}",
+        "{185, 187, 188, 190, 191}",
+        "{187, 188, 189, 190, 191}",
+        "{186, 192}"
+      ],
+      0,
+      "union gives {185, 187, 188, 189, 190, 191}."
+    ],
+    [
+      "Union example 24: A = {194, 195, 197, 198, 200}, B = {198, 200}. Find A ∪ B.",
+      [
+        "{194, 195, 197, 198, 200}",
+        "{198, 200}",
+        "{193, 196, 199}",
+        "Other option 1"
+      ],
+      0,
+      "union gives {194, 195, 197, 198, 200}."
+    ],
+    [
+      "Union example 25: A = {201, 202, 204, 205, 207}, B = {203, 204, 205, 206, 207}. Find A ∪ B.",
+      [
+        "{201, 202, 203, 204, 205, 206, 207}",
+        "{201, 202, 204, 205, 207}",
+        "{203, 204, 205, 206, 207}",
+        "{208}"
+      ],
+      0,
+      "union gives {201, 202, 203, 204, 205, 206, 207}."
+    ],
+    [
+      "Union example 26: A = {209, 211, 212, 214, 215}, B = {213, 215}. Find A ∪ B.",
+      [
+        "{209, 211, 212, 213, 214, 215}",
+        "{209, 211, 212, 214, 215}",
+        "{213, 215}",
+        "{210, 216}"
+      ],
+      0,
+      "union gives {209, 211, 212, 213, 214, 215}."
+    ],
+    [
+      "Union example 27: A = {218, 219, 221, 222, 224}, B = {219, 220, 221, 222, 223}. Find A ∪ B.",
+      [
+        "{218, 219, 220, 221, 222, 223, 224}",
+        "{218, 219, 221, 222, 224}",
+        "{219, 220, 221, 222, 223}",
+        "{217}"
+      ],
+      0,
+      "union gives {218, 219, 220, 221, 222, 223, 224}."
+    ],
+    [
+      "Union example 28: A = {225, 226, 228, 229, 231}, B = {230, 232}. Find A ∪ B.",
+      [
+        "{225, 226, 228, 229, 230, 231, 232}",
+        "{225, 226, 228, 229, 231}",
+        "{230, 232}",
+        "{227}"
+      ],
+      0,
+      "union gives {225, 226, 228, 229, 230, 231, 232}."
+    ],
+    [
+      "Union example 29: A = {233, 235, 236, 238, 239}, B = {235, 236, 237, 238, 239}. Find A ∪ B.",
+      [
+        "{233, 235, 236, 237, 238, 239}",
+        "{233, 235, 236, 238, 239}",
+        "{235, 236, 237, 238, 239}",
+        "{234, 240}"
+      ],
+      0,
+      "union gives {233, 235, 236, 237, 238, 239}."
+    ],
+    [
+      "Union example 30: A = {242, 243, 245, 246, 248}, B = {245, 247}. Find A ∪ B.",
+      [
+        "{242, 243, 245, 246, 247, 248}",
+        "{242, 243, 245, 246, 248}",
+        "{245, 247}",
+        "{241, 244}"
+      ],
+      0,
+      "union gives {242, 243, 245, 246, 247, 248}."
+    ]
+  ],
+  "Intersection": [
+    [
+      "Intersection example 1: A = {9, 10, 12, 13, 15}, B = {11, 12, 13, 14, 15}. Find A ∩ B.",
+      [
+        "{12, 13, 15}",
+        "{9, 10, 12, 13, 15}",
+        "{11, 12, 13, 14, 15}",
+        "{9, 10, 11, 14, 16}"
+      ],
+      0,
+      "intersection gives {12, 13, 15}."
+    ],
+    [
+      "Intersection example 2: A = {17, 19, 20, 22, 23}, B = {21, 23}. Find A ∩ B.",
+      [
+        "{23}",
+        "{17, 19, 20, 22, 23}",
+        "{21, 23}",
+        "{17, 18, 19, 20, 21, 22, 24}"
+      ],
+      0,
+      "intersection gives {23}."
+    ],
+    [
+      "Intersection example 3: A = {26, 27, 29, 30, 32}, B = {27, 28, 29, 30, 31}. Find A ∩ B.",
+      [
+        "{27, 29, 30}",
+        "{26, 27, 29, 30, 32}",
+        "{27, 28, 29, 30, 31}",
+        "{25, 26, 28, 31, 32}"
+      ],
+      0,
+      "intersection gives {27, 29, 30}."
+    ],
+    [
+      "Intersection example 4: A = {33, 34, 36, 37, 39}, B = {38, 40}. Find A ∩ B.",
+      [
+        "{}",
+        "{33, 34, 36, 37, 39}",
+        "{38, 40}",
+        "{33, 34, 35, 36, 37, 38, 39, 40}"
+      ],
+      0,
+      "intersection gives {}."
+    ],
+    [
+      "Intersection example 5: A = {41, 43, 44, 46, 47}, B = {43, 44, 45, 46, 47}. Find A ∩ B.",
+      [
+        "{43, 44, 46, 47}",
+        "{41, 43, 44, 46, 47}",
+        "{43, 44, 45, 46, 47}",
+        "{41, 42, 45, 48}"
+      ],
+      0,
+      "intersection gives {43, 44, 46, 47}."
+    ],
+    [
+      "Intersection example 6: A = {50, 51, 53, 54, 56}, B = {53, 55}. Find A ∩ B.",
+      [
+        "{53}",
+        "{50, 51, 53, 54, 56}",
+        "{53, 55}",
+        "{49, 50, 51, 52, 54, 55, 56}"
+      ],
+      0,
+      "intersection gives {53}."
+    ],
+    [
+      "Intersection example 7: A = {57, 58, 60, 61, 63}, B = {59, 60, 61, 62, 63}. Find A ∩ B.",
+      [
+        "{60, 61, 63}",
+        "{57, 58, 60, 61, 63}",
+        "{59, 60, 61, 62, 63}",
+        "{57, 58, 59, 62, 64}"
+      ],
+      0,
+      "intersection gives {60, 61, 63}."
+    ],
+    [
+      "Intersection example 8: A = {65, 67, 68, 70, 71}, B = {70, 72}. Find A ∩ B.",
+      [
+        "{70}",
+        "{65, 67, 68, 70, 71}",
+        "{70, 72}",
+        "{65, 66, 67, 68, 69, 71, 72}"
+      ],
+      0,
+      "intersection gives {70}."
+    ],
+    [
+      "Intersection example 9: A = {74, 75, 77, 78, 80}, B = {75, 76, 77, 78, 79}. Find A ∩ B.",
+      [
+        "{75, 77, 78}",
+        "{74, 75, 77, 78, 80}",
+        "{75, 76, 77, 78, 79}",
+        "{73, 74, 76, 79, 80}"
+      ],
+      0,
+      "intersection gives {75, 77, 78}."
+    ],
+    [
+      "Intersection example 10: A = {81, 82, 84, 85, 87}, B = {85, 87}. Find A ∩ B.",
+      [
+        "{85, 87}",
+        "{81, 82, 84, 85, 87}",
+        "{81, 82, 83, 84, 86, 88}",
+        "Other option 1"
+      ],
+      0,
+      "intersection gives {85, 87}."
+    ],
+    [
+      "Intersection example 11: A = {89, 91, 92, 94, 95}, B = {91, 92, 93, 94, 95}. Find A ∩ B.",
+      [
+        "{91, 92, 94, 95}",
+        "{89, 91, 92, 94, 95}",
+        "{91, 92, 93, 94, 95}",
+        "{89, 90, 93, 96}"
+      ],
+      0,
+      "intersection gives {91, 92, 94, 95}."
+    ],
+    [
+      "Intersection example 12: A = {98, 99, 101, 102, 104}, B = {102, 104}. Find A ∩ B.",
+      [
+        "{102, 104}",
+        "{98, 99, 101, 102, 104}",
+        "{97, 98, 99, 100, 101, 103}",
+        "Other option 1"
+      ],
+      0,
+      "intersection gives {102, 104}."
+    ],
+    [
+      "Intersection example 13: A = {105, 106, 108, 109, 111}, B = {107, 108, 109, 110, 111}. Find A ∩ B.",
+      [
+        "{108, 109, 111}",
+        "{105, 106, 108, 109, 111}",
+        "{107, 108, 109, 110, 111}",
+        "{105, 106, 107, 110, 112}"
+      ],
+      0,
+      "intersection gives {108, 109, 111}."
+    ],
+    [
+      "Intersection example 14: A = {113, 115, 116, 118, 119}, B = {117, 119}. Find A ∩ B.",
+      [
+        "{119}",
+        "{113, 115, 116, 118, 119}",
+        "{117, 119}",
+        "{113, 114, 115, 116, 117, 118, 120}"
+      ],
+      0,
+      "intersection gives {119}."
+    ],
+    [
+      "Intersection example 15: A = {122, 123, 125, 126, 128}, B = {123, 124, 125, 126, 127}. Find A ∩ B.",
+      [
+        "{123, 125, 126}",
+        "{122, 123, 125, 126, 128}",
+        "{123, 124, 125, 126, 127}",
+        "{121, 122, 124, 127, 128}"
+      ],
+      0,
+      "intersection gives {123, 125, 126}."
+    ],
+    [
+      "Intersection example 16: A = {129, 130, 132, 133, 135}, B = {134, 136}. Find A ∩ B.",
+      [
+        "{}",
+        "{129, 130, 132, 133, 135}",
+        "{134, 136}",
+        "{129, 130, 131, 132, 133, 134, 135, 136}"
+      ],
+      0,
+      "intersection gives {}."
+    ],
+    [
+      "Intersection example 17: A = {137, 139, 140, 142, 143}, B = {139, 140, 141, 142, 143}. Find A ∩ B.",
+      [
+        "{139, 140, 142, 143}",
+        "{137, 139, 140, 142, 143}",
+        "{139, 140, 141, 142, 143}",
+        "{137, 138, 141, 144}"
+      ],
+      0,
+      "intersection gives {139, 140, 142, 143}."
+    ],
+    [
+      "Intersection example 18: A = {146, 147, 149, 150, 152}, B = {149, 151}. Find A ∩ B.",
+      [
+        "{149}",
+        "{146, 147, 149, 150, 152}",
+        "{149, 151}",
+        "{145, 146, 147, 148, 150, 151, 152}"
+      ],
+      0,
+      "intersection gives {149}."
+    ],
+    [
+      "Intersection example 19: A = {153, 154, 156, 157, 159}, B = {155, 156, 157, 158, 159}. Find A ∩ B.",
+      [
+        "{156, 157, 159}",
+        "{153, 154, 156, 157, 159}",
+        "{155, 156, 157, 158, 159}",
+        "{153, 154, 155, 158, 160}"
+      ],
+      0,
+      "intersection gives {156, 157, 159}."
+    ],
+    [
+      "Intersection example 20: A = {161, 163, 164, 166, 167}, B = {166, 168}. Find A ∩ B.",
+      [
+        "{166}",
+        "{161, 163, 164, 166, 167}",
+        "{166, 168}",
+        "{161, 162, 163, 164, 165, 167, 168}"
+      ],
+      0,
+      "intersection gives {166}."
+    ],
+    [
+      "Intersection example 21: A = {170, 171, 173, 174, 176}, B = {171, 172, 173, 174, 175}. Find A ∩ B.",
+      [
+        "{171, 173, 174}",
+        "{170, 171, 173, 174, 176}",
+        "{171, 172, 173, 174, 175}",
+        "{169, 170, 172, 175, 176}"
+      ],
+      0,
+      "intersection gives {171, 173, 174}."
+    ],
+    [
+      "Intersection example 22: A = {177, 178, 180, 181, 183}, B = {181, 183}. Find A ∩ B.",
+      [
+        "{181, 183}",
+        "{177, 178, 180, 181, 183}",
+        "{177, 178, 179, 180, 182, 184}",
+        "Other option 1"
+      ],
+      0,
+      "intersection gives {181, 183}."
+    ],
+    [
+      "Intersection example 23: A = {185, 187, 188, 190, 191}, B = {187, 188, 189, 190, 191}. Find A ∩ B.",
+      [
+        "{187, 188, 190, 191}",
+        "{185, 187, 188, 190, 191}",
+        "{187, 188, 189, 190, 191}",
+        "{185, 186, 189, 192}"
+      ],
+      0,
+      "intersection gives {187, 188, 190, 191}."
+    ],
+    [
+      "Intersection example 24: A = {194, 195, 197, 198, 200}, B = {198, 200}. Find A ∩ B.",
+      [
+        "{198, 200}",
+        "{194, 195, 197, 198, 200}",
+        "{193, 194, 195, 196, 197, 199}",
+        "Other option 1"
+      ],
+      0,
+      "intersection gives {198, 200}."
+    ],
+    [
+      "Intersection example 25: A = {201, 202, 204, 205, 207}, B = {203, 204, 205, 206, 207}. Find A ∩ B.",
+      [
+        "{204, 205, 207}",
+        "{201, 202, 204, 205, 207}",
+        "{203, 204, 205, 206, 207}",
+        "{201, 202, 203, 206, 208}"
+      ],
+      0,
+      "intersection gives {204, 205, 207}."
+    ],
+    [
+      "Intersection example 26: A = {209, 211, 212, 214, 215}, B = {213, 215}. Find A ∩ B.",
+      [
+        "{215}",
+        "{209, 211, 212, 214, 215}",
+        "{213, 215}",
+        "{209, 210, 211, 212, 213, 214, 216}"
+      ],
+      0,
+      "intersection gives {215}."
+    ],
+    [
+      "Intersection example 27: A = {218, 219, 221, 222, 224}, B = {219, 220, 221, 222, 223}. Find A ∩ B.",
+      [
+        "{219, 221, 222}",
+        "{218, 219, 221, 222, 224}",
+        "{219, 220, 221, 222, 223}",
+        "{217, 218, 220, 223, 224}"
+      ],
+      0,
+      "intersection gives {219, 221, 222}."
+    ],
+    [
+      "Intersection example 28: A = {225, 226, 228, 229, 231}, B = {230, 232}. Find A ∩ B.",
+      [
+        "{}",
+        "{225, 226, 228, 229, 231}",
+        "{230, 232}",
+        "{225, 226, 227, 228, 229, 230, 231, 232}"
+      ],
+      0,
+      "intersection gives {}."
+    ],
+    [
+      "Intersection example 29: A = {233, 235, 236, 238, 239}, B = {235, 236, 237, 238, 239}. Find A ∩ B.",
+      [
+        "{235, 236, 238, 239}",
+        "{233, 235, 236, 238, 239}",
+        "{235, 236, 237, 238, 239}",
+        "{233, 234, 237, 240}"
+      ],
+      0,
+      "intersection gives {235, 236, 238, 239}."
+    ],
+    [
+      "Intersection example 30: A = {242, 243, 245, 246, 248}, B = {245, 247}. Find A ∩ B.",
+      [
+        "{245}",
+        "{242, 243, 245, 246, 248}",
+        "{245, 247}",
+        "{241, 242, 243, 244, 246, 247, 248}"
+      ],
+      0,
+      "intersection gives {245}."
+    ]
+  ],
+  "Complement": [
+    [
+      "Complement example 1: A = {9, 10, 12, 13, 15}, B = {11, 12, 13, 14, 15}, U = {9, 10, 11, 12, 13, 14, 15, 16}. Find A′.",
+      [
+        "{11, 14, 16}",
+        "{9, 10, 12, 13, 15}",
+        "{11, 12, 13, 14, 15}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {11, 14, 16}."
+    ],
+    [
+      "Complement example 2: A = {17, 19, 20, 22, 23}, B = {21, 23}, U = {17, 18, 19, 20, 21, 22, 23, 24}. Find A′.",
+      [
+        "{18, 21, 24}",
+        "{17, 19, 20, 22, 23}",
+        "{21, 23}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {18, 21, 24}."
+    ],
+    [
+      "Complement example 3: A = {26, 27, 29, 30, 32}, B = {27, 28, 29, 30, 31}, U = {25, 26, 27, 28, 29, 30, 31, 32}. Find A′.",
+      [
+        "{25, 28, 31}",
+        "{26, 27, 29, 30, 32}",
+        "{27, 28, 29, 30, 31}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {25, 28, 31}."
+    ],
+    [
+      "Complement example 4: A = {33, 34, 36, 37, 39}, B = {38, 40}, U = {33, 34, 35, 36, 37, 38, 39, 40}. Find A′.",
+      [
+        "{35, 38, 40}",
+        "{33, 34, 36, 37, 39}",
+        "{38, 40}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {35, 38, 40}."
+    ],
+    [
+      "Complement example 5: A = {41, 43, 44, 46, 47}, B = {43, 44, 45, 46, 47}, U = {41, 42, 43, 44, 45, 46, 47, 48}. Find A′.",
+      [
+        "{42, 45, 48}",
+        "{41, 43, 44, 46, 47}",
+        "{43, 44, 45, 46, 47}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {42, 45, 48}."
+    ],
+    [
+      "Complement example 6: A = {50, 51, 53, 54, 56}, B = {53, 55}, U = {49, 50, 51, 52, 53, 54, 55, 56}. Find A′.",
+      [
+        "{49, 52, 55}",
+        "{50, 51, 53, 54, 56}",
+        "{53, 55}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {49, 52, 55}."
+    ],
+    [
+      "Complement example 7: A = {57, 58, 60, 61, 63}, B = {59, 60, 61, 62, 63}, U = {57, 58, 59, 60, 61, 62, 63, 64}. Find A′.",
+      [
+        "{59, 62, 64}",
+        "{57, 58, 60, 61, 63}",
+        "{59, 60, 61, 62, 63}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {59, 62, 64}."
+    ],
+    [
+      "Complement example 8: A = {65, 67, 68, 70, 71}, B = {70, 72}, U = {65, 66, 67, 68, 69, 70, 71, 72}. Find A′.",
+      [
+        "{66, 69, 72}",
+        "{65, 67, 68, 70, 71}",
+        "{70, 72}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {66, 69, 72}."
+    ],
+    [
+      "Complement example 9: A = {74, 75, 77, 78, 80}, B = {75, 76, 77, 78, 79}, U = {73, 74, 75, 76, 77, 78, 79, 80}. Find A′.",
+      [
+        "{73, 76, 79}",
+        "{74, 75, 77, 78, 80}",
+        "{75, 76, 77, 78, 79}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {73, 76, 79}."
+    ],
+    [
+      "Complement example 10: A = {81, 82, 84, 85, 87}, B = {85, 87}, U = {81, 82, 83, 84, 85, 86, 87, 88}. Find A′.",
+      [
+        "{83, 86, 88}",
+        "{81, 82, 84, 85, 87}",
+        "{85, 87}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {83, 86, 88}."
+    ],
+    [
+      "Complement example 11: A = {89, 91, 92, 94, 95}, B = {91, 92, 93, 94, 95}, U = {89, 90, 91, 92, 93, 94, 95, 96}. Find A′.",
+      [
+        "{90, 93, 96}",
+        "{89, 91, 92, 94, 95}",
+        "{91, 92, 93, 94, 95}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {90, 93, 96}."
+    ],
+    [
+      "Complement example 12: A = {98, 99, 101, 102, 104}, B = {102, 104}, U = {97, 98, 99, 100, 101, 102, 103, 104}. Find A′.",
+      [
+        "{97, 100, 103}",
+        "{98, 99, 101, 102, 104}",
+        "{102, 104}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {97, 100, 103}."
+    ],
+    [
+      "Complement example 13: A = {105, 106, 108, 109, 111}, B = {107, 108, 109, 110, 111}, U = {105, 106, 107, 108, 109, 110, 111, 112}. Find A′.",
+      [
+        "{107, 110, 112}",
+        "{105, 106, 108, 109, 111}",
+        "{107, 108, 109, 110, 111}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {107, 110, 112}."
+    ],
+    [
+      "Complement example 14: A = {113, 115, 116, 118, 119}, B = {117, 119}, U = {113, 114, 115, 116, 117, 118, 119, 120}. Find A′.",
+      [
+        "{114, 117, 120}",
+        "{113, 115, 116, 118, 119}",
+        "{117, 119}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {114, 117, 120}."
+    ],
+    [
+      "Complement example 15: A = {122, 123, 125, 126, 128}, B = {123, 124, 125, 126, 127}, U = {121, 122, 123, 124, 125, 126, 127, 128}. Find A′.",
+      [
+        "{121, 124, 127}",
+        "{122, 123, 125, 126, 128}",
+        "{123, 124, 125, 126, 127}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {121, 124, 127}."
+    ],
+    [
+      "Complement example 16: A = {129, 130, 132, 133, 135}, B = {134, 136}, U = {129, 130, 131, 132, 133, 134, 135, 136}. Find A′.",
+      [
+        "{131, 134, 136}",
+        "{129, 130, 132, 133, 135}",
+        "{134, 136}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {131, 134, 136}."
+    ],
+    [
+      "Complement example 17: A = {137, 139, 140, 142, 143}, B = {139, 140, 141, 142, 143}, U = {137, 138, 139, 140, 141, 142, 143, 144}. Find A′.",
+      [
+        "{138, 141, 144}",
+        "{137, 139, 140, 142, 143}",
+        "{139, 140, 141, 142, 143}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {138, 141, 144}."
+    ],
+    [
+      "Complement example 18: A = {146, 147, 149, 150, 152}, B = {149, 151}, U = {145, 146, 147, 148, 149, 150, 151, 152}. Find A′.",
+      [
+        "{145, 148, 151}",
+        "{146, 147, 149, 150, 152}",
+        "{149, 151}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {145, 148, 151}."
+    ],
+    [
+      "Complement example 19: A = {153, 154, 156, 157, 159}, B = {155, 156, 157, 158, 159}, U = {153, 154, 155, 156, 157, 158, 159, 160}. Find A′.",
+      [
+        "{155, 158, 160}",
+        "{153, 154, 156, 157, 159}",
+        "{155, 156, 157, 158, 159}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {155, 158, 160}."
+    ],
+    [
+      "Complement example 20: A = {161, 163, 164, 166, 167}, B = {166, 168}, U = {161, 162, 163, 164, 165, 166, 167, 168}. Find A′.",
+      [
+        "{162, 165, 168}",
+        "{161, 163, 164, 166, 167}",
+        "{166, 168}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {162, 165, 168}."
+    ],
+    [
+      "Complement example 21: A = {170, 171, 173, 174, 176}, B = {171, 172, 173, 174, 175}, U = {169, 170, 171, 172, 173, 174, 175, 176}. Find A′.",
+      [
+        "{169, 172, 175}",
+        "{170, 171, 173, 174, 176}",
+        "{171, 172, 173, 174, 175}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {169, 172, 175}."
+    ],
+    [
+      "Complement example 22: A = {177, 178, 180, 181, 183}, B = {181, 183}, U = {177, 178, 179, 180, 181, 182, 183, 184}. Find A′.",
+      [
+        "{179, 182, 184}",
+        "{177, 178, 180, 181, 183}",
+        "{181, 183}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {179, 182, 184}."
+    ],
+    [
+      "Complement example 23: A = {185, 187, 188, 190, 191}, B = {187, 188, 189, 190, 191}, U = {185, 186, 187, 188, 189, 190, 191, 192}. Find A′.",
+      [
+        "{186, 189, 192}",
+        "{185, 187, 188, 190, 191}",
+        "{187, 188, 189, 190, 191}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {186, 189, 192}."
+    ],
+    [
+      "Complement example 24: A = {194, 195, 197, 198, 200}, B = {198, 200}, U = {193, 194, 195, 196, 197, 198, 199, 200}. Find A′.",
+      [
+        "{193, 196, 199}",
+        "{194, 195, 197, 198, 200}",
+        "{198, 200}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {193, 196, 199}."
+    ],
+    [
+      "Complement example 25: A = {201, 202, 204, 205, 207}, B = {203, 204, 205, 206, 207}, U = {201, 202, 203, 204, 205, 206, 207, 208}. Find A′.",
+      [
+        "{203, 206, 208}",
+        "{201, 202, 204, 205, 207}",
+        "{203, 204, 205, 206, 207}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {203, 206, 208}."
+    ],
+    [
+      "Complement example 26: A = {209, 211, 212, 214, 215}, B = {213, 215}, U = {209, 210, 211, 212, 213, 214, 215, 216}. Find A′.",
+      [
+        "{210, 213, 216}",
+        "{209, 211, 212, 214, 215}",
+        "{213, 215}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {210, 213, 216}."
+    ],
+    [
+      "Complement example 27: A = {218, 219, 221, 222, 224}, B = {219, 220, 221, 222, 223}, U = {217, 218, 219, 220, 221, 222, 223, 224}. Find A′.",
+      [
+        "{217, 220, 223}",
+        "{218, 219, 221, 222, 224}",
+        "{219, 220, 221, 222, 223}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {217, 220, 223}."
+    ],
+    [
+      "Complement example 28: A = {225, 226, 228, 229, 231}, B = {230, 232}, U = {225, 226, 227, 228, 229, 230, 231, 232}. Find A′.",
+      [
+        "{227, 230, 232}",
+        "{225, 226, 228, 229, 231}",
+        "{230, 232}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {227, 230, 232}."
+    ],
+    [
+      "Complement example 29: A = {233, 235, 236, 238, 239}, B = {235, 236, 237, 238, 239}, U = {233, 234, 235, 236, 237, 238, 239, 240}. Find A′.",
+      [
+        "{234, 237, 240}",
+        "{233, 235, 236, 238, 239}",
+        "{235, 236, 237, 238, 239}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {234, 237, 240}."
+    ],
+    [
+      "Complement example 30: A = {242, 243, 245, 246, 248}, B = {245, 247}, U = {241, 242, 243, 244, 245, 246, 247, 248}. Find A′.",
+      [
+        "{241, 244, 247}",
+        "{242, 243, 245, 246, 248}",
+        "{245, 247}",
+        "Other option 1"
+      ],
+      0,
+      "complement gives {241, 244, 247}."
+    ]
+  ],
+  "Difference": [
+    [
+      "Difference example 1: A = {9, 10, 12, 13, 15}, B = {11, 12, 13, 14, 15}. Find A − B.",
+      [
+        "{9, 10}",
+        "{9, 10, 12, 13, 15}",
+        "{11, 12, 13, 14, 15}",
+        "{11, 12, 13, 14, 15, 16}"
+      ],
+      0,
+      "difference gives {9, 10}."
+    ],
+    [
+      "Difference example 2: A = {17, 19, 20, 22, 23}, B = {21, 23}. Find A − B.",
+      [
+        "{17, 19, 20, 22}",
+        "{17, 19, 20, 22, 23}",
+        "{21, 23}",
+        "{18, 21, 23, 24}"
+      ],
+      0,
+      "difference gives {17, 19, 20, 22}."
+    ],
+    [
+      "Difference example 3: A = {26, 27, 29, 30, 32}, B = {27, 28, 29, 30, 31}. Find A − B.",
+      [
+        "{26, 32}",
+        "{26, 27, 29, 30, 32}",
+        "{27, 28, 29, 30, 31}",
+        "{25, 27, 28, 29, 30, 31}"
+      ],
+      0,
+      "difference gives {26, 32}."
+    ],
+    [
+      "Difference example 4: A = {33, 34, 36, 37, 39}, B = {38, 40}. Find A − B.",
+      [
+        "{33, 34, 36, 37, 39}",
+        "{38, 40}",
+        "{35, 38, 40}",
+        "Other option 1"
+      ],
+      0,
+      "difference gives {33, 34, 36, 37, 39}."
+    ],
+    [
+      "Difference example 5: A = {41, 43, 44, 46, 47}, B = {43, 44, 45, 46, 47}. Find A − B.",
+      [
+        "{41}",
+        "{41, 43, 44, 46, 47}",
+        "{43, 44, 45, 46, 47}",
+        "{42, 43, 44, 45, 46, 47, 48}"
+      ],
+      0,
+      "difference gives {41}."
+    ],
+    [
+      "Difference example 6: A = {50, 51, 53, 54, 56}, B = {53, 55}. Find A − B.",
+      [
+        "{50, 51, 54, 56}",
+        "{50, 51, 53, 54, 56}",
+        "{53, 55}",
+        "{49, 52, 53, 55}"
+      ],
+      0,
+      "difference gives {50, 51, 54, 56}."
+    ],
+    [
+      "Difference example 7: A = {57, 58, 60, 61, 63}, B = {59, 60, 61, 62, 63}. Find A − B.",
+      [
+        "{57, 58}",
+        "{57, 58, 60, 61, 63}",
+        "{59, 60, 61, 62, 63}",
+        "{59, 60, 61, 62, 63, 64}"
+      ],
+      0,
+      "difference gives {57, 58}."
+    ],
+    [
+      "Difference example 8: A = {65, 67, 68, 70, 71}, B = {70, 72}. Find A − B.",
+      [
+        "{65, 67, 68, 71}",
+        "{65, 67, 68, 70, 71}",
+        "{70, 72}",
+        "{66, 69, 70, 72}"
+      ],
+      0,
+      "difference gives {65, 67, 68, 71}."
+    ],
+    [
+      "Difference example 9: A = {74, 75, 77, 78, 80}, B = {75, 76, 77, 78, 79}. Find A − B.",
+      [
+        "{74, 80}",
+        "{74, 75, 77, 78, 80}",
+        "{75, 76, 77, 78, 79}",
+        "{73, 75, 76, 77, 78, 79}"
+      ],
+      0,
+      "difference gives {74, 80}."
+    ],
+    [
+      "Difference example 10: A = {81, 82, 84, 85, 87}, B = {85, 87}. Find A − B.",
+      [
+        "{81, 82, 84}",
+        "{81, 82, 84, 85, 87}",
+        "{85, 87}",
+        "{83, 85, 86, 87, 88}"
+      ],
+      0,
+      "difference gives {81, 82, 84}."
+    ],
+    [
+      "Difference example 11: A = {89, 91, 92, 94, 95}, B = {91, 92, 93, 94, 95}. Find A − B.",
+      [
+        "{89}",
+        "{89, 91, 92, 94, 95}",
+        "{91, 92, 93, 94, 95}",
+        "{90, 91, 92, 93, 94, 95, 96}"
+      ],
+      0,
+      "difference gives {89}."
+    ],
+    [
+      "Difference example 12: A = {98, 99, 101, 102, 104}, B = {102, 104}. Find A − B.",
+      [
+        "{98, 99, 101}",
+        "{98, 99, 101, 102, 104}",
+        "{102, 104}",
+        "{97, 100, 102, 103, 104}"
+      ],
+      0,
+      "difference gives {98, 99, 101}."
+    ],
+    [
+      "Difference example 13: A = {105, 106, 108, 109, 111}, B = {107, 108, 109, 110, 111}. Find A − B.",
+      [
+        "{105, 106}",
+        "{105, 106, 108, 109, 111}",
+        "{107, 108, 109, 110, 111}",
+        "{107, 108, 109, 110, 111, 112}"
+      ],
+      0,
+      "difference gives {105, 106}."
+    ],
+    [
+      "Difference example 14: A = {113, 115, 116, 118, 119}, B = {117, 119}. Find A − B.",
+      [
+        "{113, 115, 116, 118}",
+        "{113, 115, 116, 118, 119}",
+        "{117, 119}",
+        "{114, 117, 119, 120}"
+      ],
+      0,
+      "difference gives {113, 115, 116, 118}."
+    ],
+    [
+      "Difference example 15: A = {122, 123, 125, 126, 128}, B = {123, 124, 125, 126, 127}. Find A − B.",
+      [
+        "{122, 128}",
+        "{122, 123, 125, 126, 128}",
+        "{123, 124, 125, 126, 127}",
+        "{121, 123, 124, 125, 126, 127}"
+      ],
+      0,
+      "difference gives {122, 128}."
+    ],
+    [
+      "Difference example 16: A = {129, 130, 132, 133, 135}, B = {134, 136}. Find A − B.",
+      [
+        "{129, 130, 132, 133, 135}",
+        "{134, 136}",
+        "{131, 134, 136}",
+        "Other option 1"
+      ],
+      0,
+      "difference gives {129, 130, 132, 133, 135}."
+    ],
+    [
+      "Difference example 17: A = {137, 139, 140, 142, 143}, B = {139, 140, 141, 142, 143}. Find A − B.",
+      [
+        "{137}",
+        "{137, 139, 140, 142, 143}",
+        "{139, 140, 141, 142, 143}",
+        "{138, 139, 140, 141, 142, 143, 144}"
+      ],
+      0,
+      "difference gives {137}."
+    ],
+    [
+      "Difference example 18: A = {146, 147, 149, 150, 152}, B = {149, 151}. Find A − B.",
+      [
+        "{146, 147, 150, 152}",
+        "{146, 147, 149, 150, 152}",
+        "{149, 151}",
+        "{145, 148, 149, 151}"
+      ],
+      0,
+      "difference gives {146, 147, 150, 152}."
+    ],
+    [
+      "Difference example 19: A = {153, 154, 156, 157, 159}, B = {155, 156, 157, 158, 159}. Find A − B.",
+      [
+        "{153, 154}",
+        "{153, 154, 156, 157, 159}",
+        "{155, 156, 157, 158, 159}",
+        "{155, 156, 157, 158, 159, 160}"
+      ],
+      0,
+      "difference gives {153, 154}."
+    ],
+    [
+      "Difference example 20: A = {161, 163, 164, 166, 167}, B = {166, 168}. Find A − B.",
+      [
+        "{161, 163, 164, 167}",
+        "{161, 163, 164, 166, 167}",
+        "{166, 168}",
+        "{162, 165, 166, 168}"
+      ],
+      0,
+      "difference gives {161, 163, 164, 167}."
+    ],
+    [
+      "Difference example 21: A = {170, 171, 173, 174, 176}, B = {171, 172, 173, 174, 175}. Find A − B.",
+      [
+        "{170, 176}",
+        "{170, 171, 173, 174, 176}",
+        "{171, 172, 173, 174, 175}",
+        "{169, 171, 172, 173, 174, 175}"
+      ],
+      0,
+      "difference gives {170, 176}."
+    ],
+    [
+      "Difference example 22: A = {177, 178, 180, 181, 183}, B = {181, 183}. Find A − B.",
+      [
+        "{177, 178, 180}",
+        "{177, 178, 180, 181, 183}",
+        "{181, 183}",
+        "{179, 181, 182, 183, 184}"
+      ],
+      0,
+      "difference gives {177, 178, 180}."
+    ],
+    [
+      "Difference example 23: A = {185, 187, 188, 190, 191}, B = {187, 188, 189, 190, 191}. Find A − B.",
+      [
+        "{185}",
+        "{185, 187, 188, 190, 191}",
+        "{187, 188, 189, 190, 191}",
+        "{186, 187, 188, 189, 190, 191, 192}"
+      ],
+      0,
+      "difference gives {185}."
+    ],
+    [
+      "Difference example 24: A = {194, 195, 197, 198, 200}, B = {198, 200}. Find A − B.",
+      [
+        "{194, 195, 197}",
+        "{194, 195, 197, 198, 200}",
+        "{198, 200}",
+        "{193, 196, 198, 199, 200}"
+      ],
+      0,
+      "difference gives {194, 195, 197}."
+    ],
+    [
+      "Difference example 25: A = {201, 202, 204, 205, 207}, B = {203, 204, 205, 206, 207}. Find A − B.",
+      [
+        "{201, 202}",
+        "{201, 202, 204, 205, 207}",
+        "{203, 204, 205, 206, 207}",
+        "{203, 204, 205, 206, 207, 208}"
+      ],
+      0,
+      "difference gives {201, 202}."
+    ],
+    [
+      "Difference example 26: A = {209, 211, 212, 214, 215}, B = {213, 215}. Find A − B.",
+      [
+        "{209, 211, 212, 214}",
+        "{209, 211, 212, 214, 215}",
+        "{213, 215}",
+        "{210, 213, 215, 216}"
+      ],
+      0,
+      "difference gives {209, 211, 212, 214}."
+    ],
+    [
+      "Difference example 27: A = {218, 219, 221, 222, 224}, B = {219, 220, 221, 222, 223}. Find A − B.",
+      [
+        "{218, 224}",
+        "{218, 219, 221, 222, 224}",
+        "{219, 220, 221, 222, 223}",
+        "{217, 219, 220, 221, 222, 223}"
+      ],
+      0,
+      "difference gives {218, 224}."
+    ],
+    [
+      "Difference example 28: A = {225, 226, 228, 229, 231}, B = {230, 232}. Find A − B.",
+      [
+        "{225, 226, 228, 229, 231}",
+        "{230, 232}",
+        "{227, 230, 232}",
+        "Other option 1"
+      ],
+      0,
+      "difference gives {225, 226, 228, 229, 231}."
+    ],
+    [
+      "Difference example 29: A = {233, 235, 236, 238, 239}, B = {235, 236, 237, 238, 239}. Find A − B.",
+      [
+        "{233}",
+        "{233, 235, 236, 238, 239}",
+        "{235, 236, 237, 238, 239}",
+        "{234, 235, 236, 237, 238, 239, 240}"
+      ],
+      0,
+      "difference gives {233}."
+    ],
+    [
+      "Difference example 30: A = {242, 243, 245, 246, 248}, B = {245, 247}. Find A − B.",
+      [
+        "{242, 243, 246, 248}",
+        "{242, 243, 245, 246, 248}",
+        "{245, 247}",
+        "{241, 244, 245, 247}"
+      ],
+      0,
+      "difference gives {242, 243, 246, 248}."
+    ]
+  ],
+  "De Morgan's laws": [
+    [
+      "De Morgan identity 1: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 2: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 3: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 4: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 5: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 6: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 7: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 8: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 9: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 10: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 11: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 12: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 13: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 14: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 15: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 16: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 17: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 18: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 19: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 20: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 21: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 22: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 23: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 24: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 25: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 26: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 27: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 28: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ],
+    [
+      "De Morgan identity 29: simplify (A ∩ B)′.",
+      [
+        "A′ ∪ B′",
+        "A′ ∩ B′",
+        "A ∪ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∩ B)′ = A′ ∪ B′."
+    ],
+    [
+      "De Morgan identity 30: simplify (A ∪ B)′.",
+      [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∪ B′ ∪ C′"
+      ],
+      0,
+      "De Morgan's law gives (A ∪ B)′ = A′ ∩ B′."
+    ]
+  ],
+  "Cardinality": [
+    [
+      "Cardinality 1: n(A) = 6, n(B) = 6, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "10",
+        "12",
+        "14",
+        "0"
+      ],
+      0,
+      "n(A ∪ B) = 6 + 6 − 2 = 10."
+    ],
+    [
+      "Cardinality 2: n(A) = 7, n(B) = 8, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "12",
+        "15",
+        "18",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 7 + 8 − 3 = 12."
+    ],
+    [
+      "Cardinality 3: n(A) = 8, n(B) = 4, n(A ∩ B) = 4. Find n(A ∪ B).",
+      [
+        "8",
+        "12",
+        "16",
+        "4"
+      ],
+      0,
+      "n(A ∪ B) = 8 + 4 − 4 = 8."
+    ],
+    [
+      "Cardinality 4: n(A) = 9, n(B) = 6, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "10",
+        "15",
+        "20",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 9 + 6 − 5 = 10."
+    ],
+    [
+      "Cardinality 5: n(A) = 10, n(B) = 8, n(A ∩ B) = 6. Find n(A ∪ B).",
+      [
+        "12",
+        "18",
+        "24",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 10 + 8 − 6 = 12."
+    ],
+    [
+      "Cardinality 6: n(A) = 11, n(B) = 4, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "12",
+        "15",
+        "18",
+        "7"
+      ],
+      0,
+      "n(A ∪ B) = 11 + 4 − 3 = 12."
+    ],
+    [
+      "Cardinality 7: n(A) = 5, n(B) = 6, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "8",
+        "11",
+        "14",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 5 + 6 − 3 = 8."
+    ],
+    [
+      "Cardinality 8: n(A) = 6, n(B) = 8, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "11",
+        "14",
+        "17",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 6 + 8 − 3 = 11."
+    ],
+    [
+      "Cardinality 9: n(A) = 7, n(B) = 4, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "9",
+        "11",
+        "13",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 7 + 4 − 2 = 9."
+    ],
+    [
+      "Cardinality 10: n(A) = 8, n(B) = 6, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "9",
+        "14",
+        "19",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 8 + 6 − 5 = 9."
+    ],
+    [
+      "Cardinality 11: n(A) = 9, n(B) = 8, n(A ∩ B) = 4. Find n(A ∪ B).",
+      [
+        "13",
+        "17",
+        "21",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 9 + 8 − 4 = 13."
+    ],
+    [
+      "Cardinality 12: n(A) = 10, n(B) = 4, n(A ∩ B) = 1. Find n(A ∪ B).",
+      [
+        "13",
+        "14",
+        "15",
+        "6"
+      ],
+      0,
+      "n(A ∪ B) = 10 + 4 − 1 = 13."
+    ],
+    [
+      "Cardinality 13: n(A) = 11, n(B) = 6, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "15",
+        "17",
+        "19",
+        "5"
+      ],
+      0,
+      "n(A ∪ B) = 11 + 6 − 2 = 15."
+    ],
+    [
+      "Cardinality 14: n(A) = 5, n(B) = 8, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "8",
+        "13",
+        "18",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 5 + 8 − 5 = 8."
+    ],
+    [
+      "Cardinality 15: n(A) = 6, n(B) = 4, n(A ∩ B) = 4. Find n(A ∪ B).",
+      [
+        "6",
+        "10",
+        "14",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 6 + 4 − 4 = 6."
+    ],
+    [
+      "Cardinality 16: n(A) = 7, n(B) = 6, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "8",
+        "13",
+        "18",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 7 + 6 − 5 = 8."
+    ],
+    [
+      "Cardinality 17: n(A) = 8, n(B) = 8, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "14",
+        "16",
+        "18",
+        "0"
+      ],
+      0,
+      "n(A ∪ B) = 8 + 8 − 2 = 14."
+    ],
+    [
+      "Cardinality 18: n(A) = 9, n(B) = 4, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "10",
+        "13",
+        "16",
+        "5"
+      ],
+      0,
+      "n(A ∪ B) = 9 + 4 − 3 = 10."
+    ],
+    [
+      "Cardinality 19: n(A) = 10, n(B) = 6, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "14",
+        "16",
+        "18",
+        "4"
+      ],
+      0,
+      "n(A ∪ B) = 10 + 6 − 2 = 14."
+    ],
+    [
+      "Cardinality 20: n(A) = 11, n(B) = 8, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "14",
+        "19",
+        "24",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 11 + 8 − 5 = 14."
+    ],
+    [
+      "Cardinality 21: n(A) = 5, n(B) = 4, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "7",
+        "9",
+        "11",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 5 + 4 − 2 = 7."
+    ],
+    [
+      "Cardinality 22: n(A) = 6, n(B) = 6, n(A ∩ B) = 5. Find n(A ∪ B).",
+      [
+        "7",
+        "12",
+        "17",
+        "0"
+      ],
+      0,
+      "n(A ∪ B) = 6 + 6 − 5 = 7."
+    ],
+    [
+      "Cardinality 23: n(A) = 7, n(B) = 8, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "12",
+        "15",
+        "18",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 7 + 8 − 3 = 12."
+    ],
+    [
+      "Cardinality 24: n(A) = 8, n(B) = 4, n(A ∩ B) = 1. Find n(A ∪ B).",
+      [
+        "11",
+        "12",
+        "13",
+        "4"
+      ],
+      0,
+      "n(A ∪ B) = 8 + 4 − 1 = 11."
+    ],
+    [
+      "Cardinality 25: n(A) = 9, n(B) = 6, n(A ∩ B) = 2. Find n(A ∪ B).",
+      [
+        "13",
+        "15",
+        "17",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 9 + 6 − 2 = 13."
+    ],
+    [
+      "Cardinality 26: n(A) = 10, n(B) = 8, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "15",
+        "18",
+        "21",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 10 + 8 − 3 = 15."
+    ],
+    [
+      "Cardinality 27: n(A) = 11, n(B) = 4, n(A ∩ B) = 4. Find n(A ∪ B).",
+      [
+        "11",
+        "15",
+        "19",
+        "7"
+      ],
+      0,
+      "n(A ∪ B) = 11 + 4 − 4 = 11."
+    ],
+    [
+      "Cardinality 28: n(A) = 5, n(B) = 6, n(A ∩ B) = 4. Find n(A ∪ B).",
+      [
+        "7",
+        "11",
+        "15",
+        "1"
+      ],
+      0,
+      "n(A ∪ B) = 5 + 6 − 4 = 7."
+    ],
+    [
+      "Cardinality 29: n(A) = 6, n(B) = 8, n(A ∩ B) = 6. Find n(A ∪ B).",
+      [
+        "8",
+        "14",
+        "20",
+        "2"
+      ],
+      0,
+      "n(A ∪ B) = 6 + 8 − 6 = 8."
+    ],
+    [
+      "Cardinality 30: n(A) = 7, n(B) = 4, n(A ∩ B) = 3. Find n(A ∪ B).",
+      [
+        "8",
+        "11",
+        "14",
+        "3"
+      ],
+      0,
+      "n(A ∪ B) = 7 + 4 − 3 = 8."
     ]
   ]
 };

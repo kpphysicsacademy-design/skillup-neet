@@ -3023,7 +3023,18 @@ if(norm(concept)==="classical probability") return `
 <p>Choosing an integer from 1 to 10, the multiples of 3 are 3, 6 and 9, so the probability is \\(3/10\\).</p>
 <div class="checks"><b>Method:</b> list the sample space, count favourable outcomes and divide.</div></div>`;
 
-return `<strong>Build this concept from definition → example → practice.</strong><p>This page is routed specifically to <b>${esc(title)}</b>. No other concept's lesson is reused.</p><div class="formula">\\(\\text{Learn}\\rightarrow\\text{Practice}\\)</div><p style="margin-bottom:0;color:#66736b">The dedicated lesson can be expanded with concept-specific definitions, examples, and worked practice.</p>`;
+const sample=Array.isArray(bank[key])&&bank[key].length?bank[key][0]:null;
+const sampleOptions=sample&&Array.isArray(sample[1])?sample[1]:[];
+const sampleAnswer=sample&&Number.isInteger(sample[2])?sampleOptions[sample[2]]:"";
+return `<div class="geometry-lesson generic-lesson">
+<h3>Learning outcomes</h3>
+<ul><li>Explain <b>${esc(title)}</b> in your own words.</li><li>Identify the information given and what the question asks.</li><li>Choose the relevant definition, property or formula and justify each step.</li></ul>
+<h3>Learn it in four steps</h3>
+<ol><li><b>Understand:</b> write the key definition or theorem for ${esc(title)}.</li><li><b>Represent:</b> convert the question into symbols, a diagram, a table or a number line where useful.</li><li><b>Solve:</b> show one step at a time; state the rule used and check its conditions.</li><li><b>Verify:</b> substitute the result back, check signs and units, and decide whether the answer is reasonable.</li></ol>
+<div class="checks"><b>Study focus:</b> ${esc(chapterText)} → ${esc(title)}. Keep a short formula/definition card and revisit it before mastery practice.</div>
+${sample?`<h3>Concept check from this topic</h3><p><b>${quizMath(sample[0])}</b></p><p><b>Correct answer:</b> ${quizMath(sampleAnswer)}</p><p><b>Why:</b> ${quizMath(sample[3]||"Review the definition and verify the selected answer.")}</p>`:`<h3>Worked-example checklist</h3><p>Use a textbook or teacher-approved example for this concept. Annotate the given data, the rule selected, each algebraic step and a final verification. This page does not substitute unrelated questions for a missing concept-specific bank.</p>`}
+<div class="checks"><b>Common mistakes to avoid:</b> using a formula without checking its conditions, skipping intermediate steps, confusing a definition with an example, and not checking the final result.</div>
+</div>`;
 }
 function renderConceptPage(){
  app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>'+esc(title)+'</h1><p>Learn the concept, then complete 30-question mastery practice.</p></section><section class="card"><h2>STEP 1 • LEARN</h2><div class="lesson">'+lessonHtml()+'</div></section><section class="card"><h2>STEP 2 • MASTERY QUIZ</h2><div id="quiz"></div></section>';

@@ -12816,15 +12816,15 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "1/x = x⁻¹ has a negative exponent, so it is not a polynomial."
     ],
     [
-      "Which expression is not a polynomial in x?",
+      "Which expression is a polynomial in x?",
       [
-        "√x+1",
-        "x²−4",
-        "3x+5",
-        "9"
+        "1/x + 2",
+        "√x + 1",
+        "3x² − 4x + 1",
+        "x⁻² + 1"
       ],
-      0,
-      "√x = x^(1/2), and fractional exponents are not allowed in a polynomial."
+      2,
+      "A polynomial has non-negative integer exponents on its variable."
     ],
     [
       "If p(x)=5x−2, what is the coefficient of x?",
@@ -17493,8 +17493,8 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "6 and −2",
         "−6 and 2"
       ],
-      0,
-      "(x + 4)(x − 3) = 0, giving −4 and 3. "
+      1,
+      "(x + 4)(x − 3) = 0, so the roots are −4 and 3."
     ],
     [
       "The graph of y = ax² + bx + c (a ≠ 0) is a:",
@@ -17847,8 +17847,8 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "x = −2, −3",
         "x = 1, −3"
       ],
-      1,
-      "(2x − 3)(x + 2) = 0."
+      0,
+      "(2x − 3)(x + 2) = 0, so x = 3/2 or x = −2."
     ],
     [
       "Factorise x² − 10x + 25.",
@@ -17880,8 +17880,8 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "(6x − 1)(x + 2)",
         "(2x + 1)(3x − 2)"
       ],
-      1,
-      "(3x − 2)(2x + 1) = 6x² − x − 2. "
+      0,
+      "(3x + 2)(2x − 1) expands to 6x² + x − 2."
     ],
     [
       "Solve x² − 13x + 40 = 0.",
@@ -18029,26 +18029,26 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "tan θ = sin θ/cos θ, so tan 0° = 0/1 = 0."
     ],
     [
-      "sin 30° equals:",
+      "Which angle has cosine √2/2 in the first quadrant?",
       [
-        "√3/2",
-        "1/2",
-        "1",
-        "0"
+        "30°",
+        "45°",
+        "60°",
+        "90°"
       ],
       1,
-      "sin 30° = 1/2."
+      "cos 45° = √2/2."
     ],
     [
-      "cos 30° equals:",
+      "Which angle has tangent 1/√3 in the first quadrant?",
       [
-        "1/2",
-        "√3/2",
-        "√2/2",
-        "0"
+        "30°",
+        "45°",
+        "60°",
+        "90°"
       ],
-      1,
-      "cos 30° = √3/2."
+      0,
+      "tan 30° = 1/√3."
     ],
     [
       "tan 30° equals:",
@@ -18084,15 +18084,15 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "Sine and cosine are equal at 45°."
     ],
     [
-      "tan 45° equals:",
+      "Which angle has sine 1 in the standard-angle set?",
       [
-        "0",
-        "1/√3",
-        "1",
-        "√3"
+        "0°",
+        "30°",
+        "60°",
+        "90°"
       ],
-      2,
-      "tan 45° = sin 45°/cos 45° = 1."
+      3,
+      "sin 90° = 1."
     ],
     [
       "sin 60° equals:",
@@ -18106,37 +18106,37 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "sin 60° = √3/2."
     ],
     [
-      "cos 60° equals:",
+      "Which exact value is equal to cos 30°?",
       [
-        "1",
+        "1/2",
         "√3/2",
-        "1/2",
-        "0"
+        "1/√2",
+        "√3"
       ],
-      2,
-      "cos 60° = 1/2."
+      1,
+      "cos 30° = √3/2."
     ],
     [
-      "tan 60° equals:",
+      "Which exact value is equal to sin 60°?",
       [
-        "1/√3",
-        "1",
-        "√3",
-        "Undefined"
+        "1/2",
+        "√3/2",
+        "1/√2",
+        "√3"
       ],
-      2,
-      "tan 60° = √3."
+      1,
+      "sin 60° = √3/2."
     ],
     [
-      "sin 90° equals:",
+      "Which trigonometric ratio is undefined at 90°?",
       [
-        "0",
-        "1/2",
-        "1",
-        "Undefined"
+        "sin θ",
+        "cos θ",
+        "tan θ",
+        "Both cos θ and tan θ"
       ],
       2,
-      "sin 90° = 1."
+      "tan 90° is undefined because cos 90° = 0."
     ],
     [
       "cos 90° equals:",
@@ -18394,15 +18394,15 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "Divide sin²θ + cos²θ = 1 by sin²θ."
     ],
     [
-      "Which identity is correct?",
+      "If sin θ = 5/13 and θ is acute, tan θ equals:",
       [
-        "sin(−θ)=sin θ",
-        "cos(−θ)=−cos θ",
-        "sin(−θ)=−sin θ",
-        "tan(−θ)=tan θ"
+        "5/12",
+        "12/5",
+        "5/13",
+        "12/13"
       ],
-      2,
-      "Sine is an odd function: sin(−θ) = −sin θ."
+      0,
+      "cos θ = 12/13 by the Pythagorean identity, so tan θ = 5/12."
     ],
     [
       "Which function is even?",
@@ -18794,12 +18794,12 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     [
       "A 15 m ladder reaches a height of 12 m on a wall. Its horizontal distance from the wall is:",
       [
-        "3 m",
+        "6 m",
+        "8 m",
         "9 m",
-        "√81 m",
-        "9 m"
+        "12 m"
       ],
-      1,
+      2,
       "By Pythagoras, distance = √(15² − 12²) = √81 = 9 m."
     ],
     [
@@ -20696,15 +20696,15 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "The second class has the highest frequency, 9."
     ],
     [
-      "In the mode formula, h denotes:",
+      "In the grouped mode formula, l denotes the:",
       [
+        "Lower boundary of the modal class",
         "Class width",
         "Total frequency",
-        "Modal frequency",
-        "Lower boundary"
+        "Frequency of the preceding class"
       ],
       0,
-      "h is the class width."
+      "l is the lower boundary of the modal class."
     ],
     [
       "Mode identifies the value or class that occurs:",
@@ -20984,37 +20984,37 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "Impossible events have probability zero."
     ],
     [
-      "For equally likely outcomes, P(E) is:",
+      "A fair die is rolled. What is P(getting a number less than 3)?",
       [
-        "n(E)/n(S)",
-        "n(S)/n(E)",
-        "n(E)+n(S)",
-        "1−n(S)"
-      ],
-      0,
-      "Probability is favourable outcomes divided by total equally likely outcomes."
-    ],
-    [
-      "A fair die is rolled. P(getting 4) is:",
-      [
-        "1/2",
-        "1/3",
         "1/6",
-        "1"
+        "1/3",
+        "1/2",
+        "2/3"
       ],
-      2,
-      "One of the six equally likely faces is 4."
+      1,
+      "The favourable outcomes are 1 and 2, so P = 2/6 = 1/3."
     ],
     [
-      "A fair coin is tossed. P(tails) is:",
+      "A bag contains 7 white and 3 black counters. P(white) is:",
       [
-        "0",
+        "3/10",
+        "7/10",
+        "1/3",
+        "7/3"
+      ],
+      1,
+      "There are 7 white counters out of 10 total."
+    ],
+    [
+      "One integer is chosen from 1 to 12. P(selecting a multiple of 3) is:",
+      [
+        "1/6",
         "1/4",
-        "1/2",
-        "1"
+        "1/3",
+        "1/2"
       ],
       2,
-      "There are two equally likely outcomes and one is tails."
+      "The multiples are 3, 6, 9 and 12: 4/12 = 1/3."
     ],
     [
       "Probability of drawing an ace from a standard 52-card deck is:",

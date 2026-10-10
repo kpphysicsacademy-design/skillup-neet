@@ -968,7 +968,65 @@ put("cdPattern",d>0?"Each term increases by "+d+".":d<0?"Each term decreases by 
 }
 [aEl,dEl].forEach(el=>el.addEventListener("input",update));update();
 }
+function initRealImaginaryPartsLab(){
+ if(norm(concept)!=="real and imaginary parts")return;
+ const aEl=document.getElementById("ripA"),bEl=document.getElementById("ripB");
+ if(!aEl||!bEl)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fmt=n=>String(Number(n));
+ const update=()=>{
+  const a=Number(aEl.value),b=Number(bEl.value);
+  put("ripAVal",fmt(a));put("ripBVal",fmt(b));put("ripRe",fmt(a));put("ripIm",fmt(b));
+  put("ripZ","z = "+a+(b<0?" − "+Math.abs(b)+"i":b>0?" + "+b+"i":""));
+  const x=130+a*16,y=116-b*16;
+  const h=document.getElementById("ripH"),v=document.getElementById("ripV"),p=document.getElementById("ripPoint"),l=document.getElementById("ripPointLabel");
+  if(h){h.setAttribute("x2",x);h.setAttribute("y2",116);}
+  if(v){v.setAttribute("x1",x);v.setAttribute("y1",116);v.setAttribute("x2",x);v.setAttribute("y2",y);}
+  if(p){p.setAttribute("cx",x);p.setAttribute("cy",y);}
+  if(l){l.setAttribute("x",Math.min(202,x+7));l.setAttribute("y",Math.max(28,y-7));l.textContent="("+a+", "+b+")";}
+ };
+ aEl.addEventListener("input",update);bEl.addEventListener("input",update);update();
+}
+safeInit("real and imaginary parts lab",initRealImaginaryPartsLab);
+
 function lessonHtml(){
+if(norm(concept)==="real and imaginary parts") return `
+<div class="geometry-lesson real-imaginary-parts-lesson">
+<strong>Real and Imaginary Parts — Learn and Explore</strong>
+<p>Write a complex number in standard form as <b>z = a + bi</b>, where <b>a</b> and <b>b</b> are real numbers and <b>i² = −1</b>.</p>
+<div class="lesson"><b>Key definitions</b>
+<div class="formula">Re(z) = a &nbsp;&nbsp; Im(z) = b</div>
+<p><b>Important:</b> the imaginary part is the real-number coefficient <b>b</b>, not the term <b>bi</b>. For example, if z = 4 − 7i, then Re(z) = 4 and Im(z) = −7.</p></div>
+<div class="lesson"><b>Worked examples</b>
+<ul>
+<li>z = 6 + 3i → Re(z) = 6, Im(z) = 3</li>
+<li>z = −2 − 5i → Re(z) = −2, Im(z) = −5</li>
+<li>z = 8 → Re(z) = 8, Im(z) = 0</li>
+<li>z = −4i → Re(z) = 0, Im(z) = −4</li>
+<li>z = 0 → Re(z) = 0, Im(z) = 0</li>
+</ul></div>
+<div class="lesson"><b>Explore the parts interactively</b>
+<p>Change a and b. Notice that the real part is the horizontal coordinate and the imaginary part is the vertical coordinate on the Argand plane.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:center">
+<div style="padding:12px;border:1px solid var(--line);border-radius:12px">
+<label for="ripA">Real coefficient a: <b id="ripAVal">3</b></label><input id="ripA" type="range" min="-5" max="5" step="1" value="3" style="width:100%">
+<label for="ripB">Imaginary coefficient b: <b id="ripBVal">2</b></label><input id="ripB" type="range" min="-5" max="5" step="1" value="2" style="width:100%">
+<div class="formula" id="ripZ">z = 3 + 2i</div>
+<p>Re(z) = <b id="ripRe">3</b><br>Im(z) = <b id="ripIm">2</b></p>
+</div>
+<svg id="ripPlane" viewBox="0 0 260 230" role="img" aria-label="Argand plane showing real and imaginary coordinates" style="width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff">
+<defs><pattern id="ripGrid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#dce7dd" stroke-width="1"/></pattern></defs>
+<rect x="34" y="20" width="192" height="192" fill="url(#ripGrid)"/>
+<line x1="34" y1="116" x2="226" y2="116" stroke="#315c3b" stroke-width="1.8"/><line x1="130" y1="20" x2="130" y2="212" stroke="#315c3b" stroke-width="1.8"/>
+<text x="228" y="110" font-size="10" fill="#315c3b">Re</text><text x="137" y="15" font-size="10" fill="#315c3b">Im</text>
+<line id="ripH" x1="130" y1="116" x2="178" y2="116" stroke="#60a5fa" stroke-width="2" stroke-dasharray="3 3"/>
+<line id="ripV" x1="178" y1="116" x2="178" y2="84" stroke="#60a5fa" stroke-width="2" stroke-dasharray="3 3"/>
+<circle id="ripPoint" cx="178" cy="84" r="5" fill="#2563eb"/>
+<text id="ripPointLabel" x="185" y="78" font-size="11" fill="#173f27">(3, 2)</text>
+<text x="134" y="129" font-size="9" fill="#66736b">0</text>
+</svg></div></div>
+<div class="checks"><b>Remember:</b> Re(z) and Im(z) are always real numbers. If z = a + bi, the point on the Argand plane is (a, b).</div>
+</div>`;
 if(norm(concept)==="complex number representation") return `
 <div class="geometry-lesson complex-representation-lesson">
 <strong>Complex Number Representation — Learn and Explore</strong>

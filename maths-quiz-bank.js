@@ -22970,7 +22970,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "1",
         "2",
         "0",
-        "Other option 1"
+        "4"
       ],
       0,
       "n(P(A)) = 2^0 = 1."
@@ -23036,7 +23036,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "1",
         "2",
         "0",
-        "Other option 1"
+        "4"
       ],
       0,
       "n(P(A)) = 2^0 = 1."
@@ -23102,7 +23102,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "1",
         "2",
         "0",
-        "Other option 1"
+        "4"
       ],
       0,
       "n(P(A)) = 2^0 = 1."
@@ -23168,7 +23168,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "1",
         "2",
         "0",
-        "Other option 1"
+        "4"
       ],
       0,
       "n(P(A)) = 2^0 = 1."
@@ -23234,7 +23234,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "1",
         "2",
         "0",
-        "Other option 1"
+        "4"
       ],
       0,
       "n(P(A)) = 2^0 = 1."
@@ -23678,7 +23678,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{81, 82, 84, 85, 87}",
         "{85, 87}",
         "{83, 86, 88}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "union gives {81, 82, 84, 85, 87}."
@@ -23700,7 +23700,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{98, 99, 101, 102, 104}",
         "{102, 104}",
         "{97, 100, 103}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "union gives {98, 99, 101, 102, 104}."
@@ -23810,7 +23810,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{177, 178, 180, 181, 183}",
         "{181, 183}",
         "{179, 182, 184}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "union gives {177, 178, 180, 181, 183}."
@@ -23832,7 +23832,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{194, 195, 197, 198, 200}",
         "{198, 200}",
         "{193, 196, 199}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "union gives {194, 195, 197, 198, 200}."
@@ -24010,7 +24010,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{85, 87}",
         "{81, 82, 84, 85, 87}",
         "{81, 82, 83, 84, 86, 88}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "intersection gives {85, 87}."
@@ -24032,7 +24032,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{102, 104}",
         "{98, 99, 101, 102, 104}",
         "{97, 98, 99, 100, 101, 103}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "intersection gives {102, 104}."
@@ -24142,7 +24142,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{181, 183}",
         "{177, 178, 180, 181, 183}",
         "{177, 178, 179, 180, 182, 184}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "intersection gives {181, 183}."
@@ -24164,7 +24164,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{198, 200}",
         "{194, 195, 197, 198, 200}",
         "{193, 194, 195, 196, 197, 199}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "intersection gives {198, 200}."
@@ -24243,7 +24243,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{11, 14, 16}",
         "{9, 10, 12, 13, 15}",
         "{11, 12, 13, 14, 15}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {11, 14, 16}."
@@ -24254,7 +24254,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{18, 21, 24}",
         "{17, 19, 20, 22, 23}",
         "{21, 23}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {18, 21, 24}."
@@ -24265,7 +24265,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{25, 28, 31}",
         "{26, 27, 29, 30, 32}",
         "{27, 28, 29, 30, 31}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {25, 28, 31}."
@@ -24276,7 +24276,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{35, 38, 40}",
         "{33, 34, 36, 37, 39}",
         "{38, 40}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {35, 38, 40}."
@@ -24287,7 +24287,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{42, 45, 48}",
         "{41, 43, 44, 46, 47}",
         "{43, 44, 45, 46, 47}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {42, 45, 48}."
@@ -24298,7 +24298,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{49, 52, 55}",
         "{50, 51, 53, 54, 56}",
         "{53, 55}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {49, 52, 55}."
@@ -24309,7 +24309,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{59, 62, 64}",
         "{57, 58, 60, 61, 63}",
         "{59, 60, 61, 62, 63}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {59, 62, 64}."
@@ -24320,7 +24320,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{66, 69, 72}",
         "{65, 67, 68, 70, 71}",
         "{70, 72}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {66, 69, 72}."
@@ -24331,7 +24331,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{73, 76, 79}",
         "{74, 75, 77, 78, 80}",
         "{75, 76, 77, 78, 79}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {73, 76, 79}."
@@ -24342,7 +24342,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{83, 86, 88}",
         "{81, 82, 84, 85, 87}",
         "{85, 87}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {83, 86, 88}."
@@ -24353,7 +24353,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{90, 93, 96}",
         "{89, 91, 92, 94, 95}",
         "{91, 92, 93, 94, 95}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {90, 93, 96}."
@@ -24364,7 +24364,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{97, 100, 103}",
         "{98, 99, 101, 102, 104}",
         "{102, 104}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {97, 100, 103}."
@@ -24375,7 +24375,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{107, 110, 112}",
         "{105, 106, 108, 109, 111}",
         "{107, 108, 109, 110, 111}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {107, 110, 112}."
@@ -24386,7 +24386,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{114, 117, 120}",
         "{113, 115, 116, 118, 119}",
         "{117, 119}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {114, 117, 120}."
@@ -24397,7 +24397,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{121, 124, 127}",
         "{122, 123, 125, 126, 128}",
         "{123, 124, 125, 126, 127}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {121, 124, 127}."
@@ -24408,7 +24408,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{131, 134, 136}",
         "{129, 130, 132, 133, 135}",
         "{134, 136}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {131, 134, 136}."
@@ -24419,7 +24419,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{138, 141, 144}",
         "{137, 139, 140, 142, 143}",
         "{139, 140, 141, 142, 143}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {138, 141, 144}."
@@ -24430,7 +24430,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{145, 148, 151}",
         "{146, 147, 149, 150, 152}",
         "{149, 151}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {145, 148, 151}."
@@ -24441,7 +24441,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{155, 158, 160}",
         "{153, 154, 156, 157, 159}",
         "{155, 156, 157, 158, 159}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {155, 158, 160}."
@@ -24452,7 +24452,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{162, 165, 168}",
         "{161, 163, 164, 166, 167}",
         "{166, 168}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {162, 165, 168}."
@@ -24463,7 +24463,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{169, 172, 175}",
         "{170, 171, 173, 174, 176}",
         "{171, 172, 173, 174, 175}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {169, 172, 175}."
@@ -24474,7 +24474,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{179, 182, 184}",
         "{177, 178, 180, 181, 183}",
         "{181, 183}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {179, 182, 184}."
@@ -24485,7 +24485,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{186, 189, 192}",
         "{185, 187, 188, 190, 191}",
         "{187, 188, 189, 190, 191}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {186, 189, 192}."
@@ -24496,7 +24496,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{193, 196, 199}",
         "{194, 195, 197, 198, 200}",
         "{198, 200}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {193, 196, 199}."
@@ -24507,7 +24507,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{203, 206, 208}",
         "{201, 202, 204, 205, 207}",
         "{203, 204, 205, 206, 207}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {203, 206, 208}."
@@ -24518,7 +24518,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{210, 213, 216}",
         "{209, 211, 212, 214, 215}",
         "{213, 215}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {210, 213, 216}."
@@ -24529,7 +24529,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{217, 220, 223}",
         "{218, 219, 221, 222, 224}",
         "{219, 220, 221, 222, 223}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {217, 220, 223}."
@@ -24540,7 +24540,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{227, 230, 232}",
         "{225, 226, 228, 229, 231}",
         "{230, 232}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {227, 230, 232}."
@@ -24551,7 +24551,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{234, 237, 240}",
         "{233, 235, 236, 238, 239}",
         "{235, 236, 237, 238, 239}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {234, 237, 240}."
@@ -24562,7 +24562,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{241, 244, 247}",
         "{242, 243, 245, 246, 248}",
         "{245, 247}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "complement gives {241, 244, 247}."
@@ -24608,7 +24608,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{33, 34, 36, 37, 39}",
         "{38, 40}",
         "{35, 38, 40}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "difference gives {33, 34, 36, 37, 39}."
@@ -24740,7 +24740,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{129, 130, 132, 133, 135}",
         "{134, 136}",
         "{131, 134, 136}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "difference gives {129, 130, 132, 133, 135}."
@@ -24872,7 +24872,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "{225, 226, 228, 229, 231}",
         "{230, 232}",
         "{227, 230, 232}",
-        "Other option 1"
+        "{999999, 1000000}"
       ],
       0,
       "difference gives {225, 226, 228, 229, 231}."

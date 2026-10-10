@@ -1,5 +1,37 @@
 /* SkillUp Maths quiz bank release: Class 11 Sets chapter — 20261010 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Complex number representation": [
+    ["In standard form z = a + bi, what does a represent?",["Imaginary unit","Real part","Modulus","Argument"],1,"The real part is Re(z) = a."],
+    ["In z = 4 − 3i, what is the imaginary part Im(z)?",["−3","−3i","4","3"],0,"Im(z) is the coefficient of i, so it is −3."],
+    ["What is the value of i²?",["1","−1","i","0"],1,"By definition, i² = −1."],
+    ["Which is in standard form a + bi?",["3i + 2","2 + 3i","2i + 3i","2 + 3"],1,"Standard form separates the real part and the coefficient of i."],
+    ["For z = −5 + 2i, the ordered pair on the Argand plane is:",["(2, −5)","(−5, 2)","(−5, −2)","(5, 2)"],1,"Plot (real part, imaginary coefficient) = (−5, 2)."],
+    ["Which axis represents the real part on an Argand plane?",["Vertical axis","Horizontal axis","Neither axis","Both axes equally"],1,"The real axis is horizontal."],
+    ["Which axis represents the imaginary coefficient?",["Horizontal axis","Vertical axis","Neither axis","The origin only"],1,"The imaginary axis is vertical."],
+    ["If z = 7 + 0i, z is:",["Purely imaginary","A real number","Not a complex number","Undefined"],1,"When the imaginary coefficient is zero, the complex number is real."],
+    ["If z = 0 − 4i, z is:",["Purely imaginary","Positive real","Neither complex nor real","Equal to 4"],0,"Its real part is zero and its imaginary coefficient is non-zero."],
+    ["What is Re(−2 + 9i)?",["9","−9","−2","2"],2,"The real part is −2."],
+    ["What is Im(6 − i)?",["−i","−1","6","1"],1,"The imaginary coefficient is −1, not −i."],
+    ["Which complex number represents the point (3, −2)?",["−2 + 3i","3 − 2i","−3 + 2i","2 − 3i"],1,"The point (a, b) represents z = a + bi."],
+    ["The point for z = 0 + 5i is:",["(5, 0)","(0, 5)","(0, −5)","(5, 5)"],1,"The real coordinate is 0 and the imaginary coordinate is 5."],
+    ["If z = a + bi and a = 0, which form is possible?",["Purely imaginary","Always positive real","Always zero","Never a complex number"],0,"With zero real part, z = bi; it is purely imaginary when b is non-zero."],
+    ["Which equality condition is correct for a + bi = c + di?",["a = d and b = c","a = c and b = d","a + b = c + d only","a = b and c = d"],1,"Equal complex numbers have equal real parts and equal imaginary coefficients."],
+    ["If 2 + 5i = x + 5i, x equals:",["5","−2","2","i"],2,"Equating real parts gives x = 2."],
+    ["If 3 + yi = 3 − 4i, y equals:",["4","−4","3","−3"],1,"Equating imaginary coefficients gives y = −4."],
+    ["Which point represents the complex number −3 − 2i?",["(3, 2)","(−3, 2)","(−3, −2)","(−2, −3)"],2,"Use (real part, imaginary coefficient) = (−3, −2)."],
+    ["What is the complex number at the origin of the Argand plane?",["1 + i","−1 − i","0 + 0i","i"],2,"The origin has both coordinates zero, representing z = 0."],
+    ["Which of these is a real number?",["2i","−7","4 − i","i"],1,"A real number has imaginary coefficient zero."],
+    ["For z = −i, the ordered pair is:",["(−1, 0)","(0, −1)","(1, 0)","(0, 1)"],1,"−i has real part 0 and imaginary coefficient −1."],
+    ["Which statement about Im(3 + 8i) is true?",["It is 8i","It is 3","It is 8","It is 3 + 8i"],2,"Im(z) refers to the coefficient 8, not the term 8i."],
+    ["If z = 5 + bi lies on the real axis, b must be:",["5","−5","0","1"],2,"Points on the real axis have imaginary coordinate zero."],
+    ["If z = ai + 2 has real part 2, what is a?",["0","1","2","Cannot be determined"],3,"The real part is already 2 for every value of a; a is not determined by that condition."],
+    ["Which complex number corresponds to the point (−1, 4)?",["4 − i","−1 + 4i","1 − 4i","−4 + i"],1,"The horizontal coordinate is −1 and the vertical coordinate is 4."],
+    ["What does the symbol i represent?",["A real variable only","The imaginary unit with i² = −1","The real part","The modulus"],1,"The imaginary unit is defined by i² = −1."],
+    ["If z = 2 − 7i, which pair gives (Re(z), Im(z))?",["(2, −7)","(2, −7i)","(−7, 2)","(7, 2)"],0,"Re(z) = 2 and Im(z) = −7."],
+    ["A point lies 4 units right and 3 units up from the origin. Its complex number is:",["−4 + 3i","3 + 4i","4 + 3i","4 − 3i"],2,"Right means positive real part; up means positive imaginary coefficient."],
+    ["Which statement is false?",["The real axis is horizontal","The imaginary axis is vertical","Im(2 + 6i) = 6i","i² = −1"],2,"Im(2 + 6i) = 6, the coefficient of i."],
+    ["A complex number z = a + bi is plotted at:",["(b, a)","(a, b)","(a + b, 0)","(0, a + b)"],1,"The Argand-plane coordinates are (Re(z), Im(z)) = (a, b)."]
+  ],
   "Basic geometric ideas": [
     [
       "Which undefined geometric term represents an exact location?",

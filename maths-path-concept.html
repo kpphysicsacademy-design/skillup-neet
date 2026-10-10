@@ -971,6 +971,35 @@ put("cdPattern",d>0?"Each term increases by "+d+".":d<0?"Each term decreases by 
 function lessonHtml(){
 const mappedLesson=window.SKILLUP_MATHS_LESSONS&&window.SKILLUP_MATHS_LESSONS[norm(concept)];
 if(mappedLesson)return mappedLesson;
+if(norm(concept)==="set representation") return `
+<div class="geometry-lesson set-representation-virtual-lesson">
+<strong>Set Representation — Virtual Learn Lab</strong>
+<p>A <b>set</b> is a well-defined collection of distinct objects. We usually name a set with a capital letter and write its elements inside braces <b>{ }</b>.</p>
+<div class="lesson"><b>Two common ways to represent a set</b>
+<p><b>1. Roster (tabular) form:</b> list each element inside braces.</p>
+<div class="formula">A = {2, 4, 6, 8, 10}</div>
+<p><b>2. Set-builder form:</b> describe the rule that every element follows.</p>
+<div class="formula">A = {x ∈ ℕ | x is even and 2 ≤ x ≤ 10}</div>
+<p>Both forms describe the same set. The symbol “|” means “such that”. Here ℕ denotes the natural numbers.</p></div>
+<h3>Explore it yourself</h3>
+<p>Choose a rule and watch the roster form and set-builder description update. This virtual model uses the selected range of natural numbers.</p>
+<div class="control"><div class="head"><label for="srMode">Choose a set rule</label></div>
+<select id="srMode" class="range" style="width:100%;min-height:44px">
+<option value="even">Even numbers from 2 to the upper limit</option>
+<option value="odd">Odd numbers from 1 to the upper limit</option>
+<option value="multiples">Multiples of 3 up to the upper limit</option>
+<option value="squares">Perfect squares up to the upper limit</option>
+</select></div>
+<div class="control"><div class="head"><label for="srLimit">Upper limit</label><b><span id="srLimitOut">10</span></b></div><input id="srLimit" class="range" type="range" min="5" max="30" step="1" value="10"/></div>
+<div class="props"><div class="prop"><span>Roster form</span><strong id="srRoster">{2, 4, 6, 8, 10}</strong></div><div class="prop"><span>Number of elements</span><strong id="srCount">5</strong></div></div>
+<div class="checks" id="srBuilder" aria-live="polite">A = {x ∈ ℕ | x is even and 2 ≤ x ≤ 10}</div>
+<div class="checks" id="srExplanation" aria-live="polite">Each listed element follows the selected rule. No element is repeated.</div>
+<h3>Notation you should know</h3>
+<ul><li><b>∈</b> means “is an element of”: 4 ∈ A.</li><li><b>∉</b> means “is not an element of”: 5 ∉ A when A contains only even numbers.</li><li><b>{ }</b> are braces used to enclose the elements of a set.</li><li>Order does not matter and repeated elements are written only once: {1, 2, 2, 3} = {1, 2, 3}.</li></ul>
+<h3>Worked example</h3><p>Write the set of natural numbers less than 5 in roster form and set-builder form.</p>
+<div class="formula">Roster: B = {1, 2, 3, 4}</div><div class="formula">Set-builder: B = {x ∈ ℕ | 1 ≤ x &lt; 5}</div>
+<div class="checks"><b>Remember:</b> Roster form lists elements; set-builder form states the defining property. Make sure the rule and the listed elements match exactly.</div>
+</div>`;
 if(norm(concept)==="tangent to a circle") return `
 <div class="geometry-lesson tangent-lesson">
 <strong>Tangent to a Circle — Learn with Virtual Diagram</strong>
@@ -6235,6 +6264,24 @@ function initPythagorasVirtualLab(){
  aEl.addEventListener("input",update);bEl.addEventListener("input",update);
  document.querySelectorAll(".pythPreset").forEach(btn=>btn.addEventListener("click",()=>{aEl.value=btn.dataset.a;bEl.value=btn.dataset.b;update();}));
  update();
+}
+function initSetRepresentationVirtualLab(){
+ if(norm(concept)!=="set representation")return;
+ const mode=document.getElementById("srMode"),limit=document.getElementById("srLimit");
+ if(!mode||!limit)return;
+ const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+ const update=()=>{
+  const max=Number(limit.value),kind=mode.value;
+  let values=[],rule="";
+  if(kind==="even"){values=Array.from({length:Math.max(0,Math.floor(max/2))},(_,i)=>(i+1)*2);rule="x is even and 2 ≤ x ≤ "+max;}
+  else if(kind==="odd"){values=Array.from({length:Math.max(0,Math.ceil(max/2))},(_,i)=>2*i+1).filter(x=>x<=max);rule="x is odd and 1 ≤ x ≤ "+max;}
+  else if(kind==="multiples"){values=Array.from({length:Math.floor(max/3)},(_,i)=>(i+1)*3);rule="x is a multiple of 3 and 3 ≤ x ≤ "+max;}
+  else {values=Array.from({length:Math.floor(Math.sqrt(max))},(_,i)=>(i+1)*(i+1));rule="x = n² for n ∈ ℕ and x ≤ "+max;}
+  put("srLimitOut",max);put("srRoster",values.length?"{"+values.join(", ")+"}":"∅");put("srCount",values.length);
+  put("srBuilder","A = {x ∈ ℕ | "+rule+"}");
+  put("srExplanation",values.length+" distinct element"+(values.length===1?"":"s")+" satisfy the selected rule. "+(values.length?"Roster form lists them; set-builder form describes the same collection.":"No natural number in the chosen range satisfies this rule."));
+ };
+ mode.addEventListener("change",update);limit.addEventListener("input",update);update();
 }
 safeInit("mastery quiz", startQuiz);
 safeInit("Applications of Similarity virtual skills", initApplicationsSimilarityLab);

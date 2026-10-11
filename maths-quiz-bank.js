@@ -3514,7 +3514,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "8",
         "11"
       ],
-      2,
+      1,
       "9 − 2 = 7."
     ],
     [

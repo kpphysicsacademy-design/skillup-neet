@@ -25725,4 +25725,37 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["Why must the number of valid choices at each stage be counted carefully?",["Because multiplication is never used","Because later-stage choices may depend on earlier choices","Because the answer must always be a sum","Because all stages must have equal choices"],1,"If the available choices depend on earlier decisions, the number of choices may vary; count valid cases accurately."]
   ],
 
+  "Factorial": [
+    ["What does 4! mean?",["4 × 1","4 × 3 × 2 × 1","4 + 3 + 2 + 1","4 × 4"],1,"Factorial multiplies all positive integers from 4 down to 1."],
+    ["Evaluate 5!.",["20","60","120","720"],2,"5! = 5 × 4 × 3 × 2 × 1 = 120."],
+    ["What is 0!?",["0","1","Undefined","−1"],1,"By definition, 0! = 1."],
+    ["Which recursive identity is correct for n ≥ 1?",["n! = n + (n−1)!","n! = n × (n−1)!","n! = (n−1)! ÷ n","n! = n²"],1,"A factorial equals n times the factorial of the previous non-negative integer."],
+    ["Evaluate 3!.",["3","6","9","1"],1,"3! = 3 × 2 × 1 = 6."],
+    ["Evaluate 6!.",["120","360","720","5040"],2,"6! = 6 × 5 × 4 × 3 × 2 × 1 = 720."],
+    ["Simplify 7!/6!.",["1","6","7","42"],2,"Since 7! = 7 × 6!, the ratio is 7."],
+    ["Simplify 8!/7!.",["56","8","7","1"],1,"8! = 8 × 7!, so 8!/7! = 8."],
+    ["Simplify 5!/3!.",["2","10","20","60"],2,"5!/3! = (5 × 4 × 3!)/3! = 5 × 4 = 20."],
+    ["Simplify 6!/(4! × 2!).",["15","30","60","720"],0,"Cancel 4!: (6 × 5 × 4!)/(4! × 2) = 30/2 = 15."],
+    ["If n! = 24 and n is a non-negative integer, n equals…",["3","4","5","6"],1,"4! = 24."],
+    ["Which statement is true?",["1! = 0","0! = 1","0! = 0","n! = n for all n"],1,"The factorial convention defines 0! as 1."],
+    ["Evaluate 1!.",["0","1","2","Undefined"],1,"1! = 1."],
+    ["Evaluate 2! + 3!.",["8","9","12","24"],1,"2! + 3! = 2 + 6 = 8."],
+    ["Evaluate 4! − 3!.",["12","18","20","24"],0,"4! − 3! = 24 − 6 = 18."],
+    ["Simplify 9!/8!.",["72","9","8","1"],1,"9! = 9 × 8!, so the ratio equals 9."],
+    ["Simplify 10!/8!.",["20","80","90","100"],0,"10!/8! = 10 × 9 = 90."],
+    ["Which is the correct expansion of 5!?",["5 × 4 × 3 × 2 × 1","5 × 5 × 5 × 5 × 5","5 + 4 + 3 + 2 + 1","5 × 4"],0,"Factorial includes every integer from n down to 1."],
+    ["How many ways can 4 distinct objects be arranged in a row?",["4","12","24","16"],2,"The number of arrangements is 4! = 24."],
+    ["How many ways can 3 distinct books be arranged on a shelf?",["3","6","9","1"],1,"Three distinct books can be arranged in 3! = 6 orders."],
+    ["Which is larger?",["5!","4!","They are equal","Cannot compare"],0,"5! = 5 × 4!, so 5! is five times 4!."],
+    ["Evaluate 7!/(5! × 2!).",["7","14","21","42"],2,"Cancel 5!: (7 × 6)/(2 × 1) = 42/2 = 21."],
+    ["If n!/(n−1)! = 11 for positive integer n, n is…",["10","11","12","22"],1,"The ratio simplifies to n, so n = 11."],
+    ["Evaluate 5!/(4! × 1!).",["1","4","5","24"],2,"5!/(4! × 1!) = 5."],
+    ["Which expression equals 6 × 5!?",["6!","5!","7!","30!"],0,"By the recursive identity, 6 × 5! = 6!."],
+    ["How many trailing zeros does 5! have?",["0","1","2","5"],0,"5! = 120 has one trailing zero."],
+    ["How many trailing zeros does 10! have?",["1","2","3","10"],1,"10! has floor(10/5) = 2 factors of 5, so it ends in two zeros."],
+    ["For n ≥ 1, what is n!/(n−1)!?",["n","n−1","n²","1"],0,"Since n! = n × (n−1)!, the ratio is n."],
+    ["Evaluate 3! × 2!.",["8","12","24","36"],1,"3! × 2! = 6 × 2 = 12."],
+    ["Why is 0! defined as 1?",["Because 0 is the largest integer","It keeps counting identities and factorial formulas consistent","Because 0 × 1 = 1","It means no calculation is needed"],1,"The convention 0! = 1 makes recursive and combinatorial formulas work consistently."]
+  ],
+
 };

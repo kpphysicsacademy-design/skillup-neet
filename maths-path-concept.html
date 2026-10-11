@@ -110,6 +110,7 @@ const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';
 const volumeWordProblems=/^volume word problems$/.test(concept.toLowerCase());
 const mixedMensuration=/^mixed mensuration practice$/.test(concept.toLowerCase());
+const compositeSolids=/^mensuration\s*[—-]\s*composite solids and combined shapes$|^composite solids and combined shapes$/.test(concept.toLowerCase());
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase())||volumeWordProblems;
 const surfaceConcept=/^surface area basics$|^surface area of cube and cuboid$/.test(concept.toLowerCase());
 const advancedSurfaceConcept=/^surface area of cube and cuboid$/.test(concept.toLowerCase());
@@ -682,13 +683,58 @@ if(mixedMensuration){
  ['mmL','mmB','mmH'].forEach(id=>$(id).addEventListener('input',updateMixedLab));updateMixedLab();
 }
 
+
+if(compositeSolids){
+ $('heroDescription').textContent='Break combined 3D shapes into simple cuboids, add or subtract volumes, and calculate exposed surface area without counting hidden faces.';
+ $('heroFormula').innerHTML='\\(V_{\\text{combined}}=V_1+V_2\\qquad V_{\\text{cut-out}}=V_{\\text{large}}-V_{\\text{removed}}\\)';
+ $('learn').innerHTML='<h2>1. Learn · Split the solid into simple shapes</h2><p>A <b>composite solid</b> is made by joining two or more familiar solids. At this level, focus on shapes built from cuboids and cubes.</p><h3>Volume of joined solids</h3><p>If two blocks join without overlapping, add their volumes.</p><div class="formula">\\(V_{\\text{total}}=V_1+V_2\\)</div><p>If a smaller block is removed from a larger block, subtract the removed volume.</p><div class="formula">\\(V_{\\text{remaining}}=V_{\\text{large}}-V_{\\text{cut-out}}\\)</div><h3>Surface area needs extra care</h3><p>When blocks are joined, the faces touching each other become hidden. Do not count those faces as exposed surface area. For an accurate calculation, count only the faces visible on the outside.</p><div class="callout"><b>Reliable method:</b> sketch the solid, mark dimensions, split it into non-overlapping blocks, calculate each volume, then add or subtract. For surface area, count exposed faces only.</div><h3>Common L-shaped block</h3><p>Imagine a long cuboid with a smaller cuboid stacked on one end. The total volume is the volume of the base plus the volume of the upper block. If the two blocks share a face, that shared face is internal and is not part of the outside surface.</p>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Two joined blocks</strong><p>A base block is 8 cm × 4 cm × 2 cm. A second block of 3 cm × 4 cm × 2 cm sits beside it without overlap. Find total volume.</p><div class="formula">\\(V=8\\times4\\times2+3\\times4\\times2=64+24=88\\text{ cm}^3\\)</div></div><div class="example"><strong>Example B · A cut-out</strong><p>A solid block is 10 cm × 6 cm × 4 cm. A 2 cm × 3 cm × 4 cm section is removed. Find remaining volume.</p><div class="formula">\\(V=240-(2\\times3\\times4)=240-24=216\\text{ cm}^3\\)</div></div><div class="example"><strong>Example C · Step-shaped solid</strong><p>A lower block is 10 cm × 4 cm × 2 cm and an upper block is 4 cm × 4 cm × 3 cm. They are stacked with no overlap.</p><div class="formula">\\(V=80+48=128\\text{ cm}^3\\)</div></div><div class="example"><strong>Example D · Exposed faces</strong><p>Two 2 cm cubes are joined face-to-face. The combined shape has 10 exposed square faces, because the two touching faces are hidden.</p><div class="formula">\\(\\text{Area}=10\\times(2\\times2)=40\\text{ cm}^2\\)</div><p>Counting all 12 faces would incorrectly include the hidden joining faces.</p></div>';
+ $('lab').innerHTML='<h2>3. Interactive composite-volume lab</h2><p class="muted">Adjust the dimensions of two blocks. The total volume updates live.</p><div class="lab"><h3>Block A</h3><label for="csL1">Length (cm) <b id="csL1Label">8</b></label><input id="csL1" type="range" min="1" max="20" value="8"><label for="csB1">Breadth (cm) <b id="csB1Label">4</b></label><input id="csB1" type="range" min="1" max="20" value="4"><label for="csH1">Height (cm) <b id="csH1Label">2</b></label><input id="csH1" type="range" min="1" max="20" value="2"><h3>Block B</h3><label for="csL2">Length (cm) <b id="csL2Label">3</b></label><input id="csL2" type="range" min="1" max="20" value="3"><label for="csB2">Breadth (cm) <b id="csB2Label">4</b></label><input id="csB2" type="range" min="1" max="20" value="4"><label for="csH2">Height (cm) <b id="csH2Label">2</b></label><input id="csH2" type="range" min="1" max="20" value="2"></div><div class="big-result" id="csResult">88 cm³</div><div class="formula" id="csWorking">V = 8 × 4 × 2 + 3 × 4 × 2 = 88 cm³</div><p class="muted">This lab assumes the blocks are joined without overlapping, so their volumes can be added.</p>';
+ $('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Composite solid checklist</h3><ol><li>Split into simple blocks.</li><li>Calculate each block’s volume.</li><li>Add joined volumes or subtract cut-outs.</li><li>For surface area, exclude hidden faces.</li><li>Include units in the final answer.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Counting overlapping volume twice.</li><li>Counting faces hidden inside the joined solid.</li><li>Subtracting the wrong cut-out volume.</li><li>Mixing cm and m.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('Block A has volume 8 × 4 × 2 cm³ and block B has volume 3 × 4 × 2 cm³. Total volume is:',['64 cm³','24 cm³','88 cm³','96 cm³'],2,'Add the non-overlapping volumes: 64 + 24 = 88 cm³.'),
+ makeQ('A 10 × 6 × 4 cm block has a 2 × 3 × 4 cm section removed. Remaining volume is:',['24 cm³','216 cm³','240 cm³','264 cm³'],1,'240 − 24 = 216 cm³.'),
+ makeQ('A 5 cm cube is joined to a 2 cm cube without overlap. Total volume is:',['27 cm³','125 cm³','133 cm³','343 cm³'],2,'5³ + 2³ = 125 + 8 = 133 cm³.'),
+ makeQ('Two 2 cm cubes are joined face-to-face. How many square faces remain exposed?',['6','8','10','12'],2,'Two faces touch and become hidden, leaving 12 − 2 = 10 exposed faces.'),
+ makeQ('A base block is 10 × 4 × 2 cm and an upper block is 4 × 4 × 3 cm. Total volume is:',['80 cm³','48 cm³','128 cm³','160 cm³'],2,'80 + 48 = 128 cm³.'),
+ makeQ('A composite solid is made from two blocks that overlap in a 10 cm³ region. If their volumes are 60 cm³ and 40 cm³, union volume is:',['90 cm³','100 cm³','110 cm³','2,400 cm³'],0,'Subtract the overlap once: 60 + 40 − 10 = 90 cm³.'),
+ makeQ('A cuboid of 8 × 5 × 4 cm has volume:',['17 cm³','40 cm³','160 cm³','320 cm³'],2,'8 × 5 × 4 = 160 cm³.'),
+ makeQ('Two non-overlapping cuboids have volumes 72 cm³ and 36 cm³. Combined volume is:',['36 cm³','72 cm³','108 cm³','2,592 cm³'],2,'Add the volumes: 72 + 36 = 108 cm³.'),
+ makeQ('A block of volume 500 cm³ has a 5 × 4 × 3 cm cut-out. Remaining volume is:',['440 cm³','460 cm³','480 cm³','560 cm³'],0,'Cut-out volume = 60 cm³; 500 − 60 = 440 cm³.'),
+ makeQ('A 4 cm cube is attached to a 6 × 4 × 4 cm cuboid along a full 4 × 4 face. Combined volume is:',['64 cm³','96 cm³','160 cm³','192 cm³'],2,'Cube = 64 cm³; cuboid = 96 cm³; total = 160 cm³.'),
+ makeQ('When two blocks are joined, the touching faces are:',['Added twice to TSA','Counted as exposed','Hidden inside the solid','Always triangular'],2,'The joining faces are internal and do not count toward exposed surface area.'),
+ makeQ('A 6 × 5 × 2 cm base has a 2 × 5 × 3 cm block placed on top without overlap. Total volume is:',['60 cm³','30 cm³','90 cm³','120 cm³'],2,'Base volume = 60; upper volume = 30; total = 90 cm³.'),
+ makeQ('A large block has volume 360 cm³. A cut-out of volume 80 cm³ is removed. Remaining volume is:',['280 cm³','360 cm³','440 cm³','45 cm³'],0,'360 − 80 = 280 cm³.'),
+ makeQ('A composite solid consists of three non-overlapping blocks with volumes 20, 35 and 45 cm³. Total volume is:',['80 cm³','90 cm³','100 cm³','3,150 cm³'],2,'20 + 35 + 45 = 100 cm³.'),
+ makeQ('A 3 cm cube has volume:',['9 cm³','18 cm³','27 cm³','36 cm³'],2,'3³ = 27 cm³.'),
+ makeQ('A 12 × 5 × 2 cm cuboid has a 2 × 5 × 2 cm cut-out removed. Remaining volume is:',['100 cm³','110 cm³','120 cm³','140 cm³'],0,'Original volume = 120; cut-out = 20; remaining = 100 cm³.'),
+ makeQ('A step-shaped solid has blocks of 40 cm³ and 24 cm³ joined without overlap. Total volume is:',['16 cm³','40 cm³','64 cm³','960 cm³'],2,'Add 40 + 24 = 64 cm³.'),
+ makeQ('Two 3 cm cubes are joined face-to-face. Their combined volume is:',['18 cm³','27 cm³','54 cm³','108 cm³'],2,'Each cube has volume 27 cm³; total is 54 cm³.'),
+ makeQ('For a joined solid, why should shared faces not be counted in exposed surface area?',['They have zero area','They are hidden inside','They become curved','They are always bases'],1,'Shared faces are internal after joining, so they are not exposed.'),
+ makeQ('A cuboid 9 × 4 × 3 cm is split into two equal-volume pieces. Each piece has volume:',['27 cm³','36 cm³','54 cm³','108 cm³'],2,'Original volume = 108 cm³; half is 54 cm³.'),
+ makeQ('A solid is made from a 4 × 4 × 4 cm cube and a 4 × 4 × 2 cm cuboid stacked on it. Total volume is:',['64 cm³','32 cm³','96 cm³','128 cm³'],2,'64 + 32 = 96 cm³.'),
+ makeQ('A 10 × 10 × 10 cm cube has a 2 × 2 × 2 cm cube removed. Remaining volume is:',['992 cm³','984 cm³','936 cm³','800 cm³'],1,'1,000 − 8 = 992 cm³.'),
+ makeQ('A cuboid 8 × 6 × 5 cm has a 2 × 3 × 5 cm tunnel removed through its full height. Remaining volume is:',['180 cm³','210 cm³','240 cm³','270 cm³'],1,'Original = 240; tunnel = 30; remaining = 210 cm³.'),
+ makeQ('A composite solid uses two blocks with volumes 3 m³ and 700 L. Total volume in litres is:',['703 L','3,700 L','4,000 L','7,000 L'],2,'3 m³ = 3,000 L; 3,000 + 700 = 3,700 L.'),
+ makeQ('A block 6 × 4 × 3 cm is combined with a 2 × 4 × 3 cm block. Total volume is:',['24 cm³','72 cm³','96 cm³','144 cm³'],2,'72 + 24 = 96 cm³.'),
+ makeQ('A 5 × 4 × 3 cm cuboid has a 1 × 4 × 3 cm slice removed. Remaining volume is:',['12 cm³','48 cm³','60 cm³','72 cm³'],1,'Original = 60; removed = 12; remaining = 48 cm³.'),
+ makeQ('A composite solid is formed by adding blocks of 120 cm³ and 80 cm³. Total volume is:',['40 cm³','120 cm³','200 cm³','9,600 cm³'],2,'120 + 80 = 200 cm³.'),
+ makeQ('If every dimension of a composite solid is doubled, its volume becomes how many times as large?',['2','4','6','8'],3,'Every linear dimension doubles, so volume scales by 2³ = 8.'),
+ makeQ('A solid has volume 250 cm³. Two cut-outs of 15 cm³ each are removed. Remaining volume is:',['220 cm³','235 cm³','250 cm³','280 cm³'],0,'250 − 15 − 15 = 220 cm³.'),
+ makeQ('A cuboid 4 × 3 × 2 cm is joined to a 2 × 3 × 2 cm cuboid without overlap. Total volume is:',['24 cm³','12 cm³','36 cm³','48 cm³'],2,'24 + 12 = 36 cm³.')
+ ];
+ const updateCompositeLab=()=>{const a=+$('csL1').value*+$('csB1').value*+$('csH1').value,b=+$('csL2').value*+$('csB2').value*+$('csH2').value;[['csL1','csL1Label'],['csB1','csB1Label'],['csH1','csH1Label'],['csL2','csL2Label'],['csB2','csB2Label'],['csH2','csH2Label']].forEach(pair=>$(pair[1]).textContent=$(pair[0]).value);$('csResult').textContent=(a+b).toLocaleString('en-IN')+' cm³';$('csWorking').textContent='V = '+$('csL1').value+' × '+$('csB1').value+' × '+$('csH1').value+' + '+$('csL2').value+' × '+$('csB2').value+' × '+$('csH2').value+' = '+(a+b)+' cm³';};
+ ['csL1','csB1','csH1','csL2','csB2','csH2'].forEach(id=>$(id).addEventListener('input',updateCompositeLab));updateCompositeLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration&&!compositeSolids){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

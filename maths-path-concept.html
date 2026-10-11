@@ -86,7 +86,7 @@ function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetP
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function makeTriangle(max){let root=$('pascalTriangle');root.innerHTML='';for(let n=0;n<=max;n++){let row=document.createElement('div');row.className='tri-row';for(let r=0;r<=n;r++){let cell=document.createElement('span');cell.className='tri-num';cell.textContent=choose(n,r);row.appendChild(cell)}root.appendChild(row)}}
 function updateLab(){let n=+$('nRange').value;let r=Math.min(+$('rRange').value,n);$('rRange').max=n;$('rRange').value=r;$('nLabel').textContent=n;$('rLabel').textContent=r;let c=choose(n,r);$('labResult').textContent=c;$('labFormula').innerHTML='\\(\\binom{'+n+'}{'+r+'}='+c+'\\)';$('labMeaning').textContent='There are '+c+' ways to select '+r+' item(s) from '+n+'.';let row=$('coefficientRow');row.innerHTML='';for(let k=0;k<=n;k++){let el=document.createElement('span');el.className='tri-num'+(k===r?' focus':'');el.textContent=choose(n,k);row.appendChild(el)}renderMath()}
-let questions=[
+const binomialQuestions=[
 {q:'What is the value of C(5, 2)?',o:['5','10','15','20'],a:1,e:'C(5, 2) = 5!/(2!3!) = 10.'},
 {q:'In (x + y)⁶, what is the coefficient of x⁴y²?',o:['6','12','15','20'],a:2,e:'The exponent of y is 2, so the coefficient is C(6, 2) = 15.'},
 {q:'Which identity expresses symmetry?',o:['C(n,r) = C(n,n−r)','C(n,r) = C(r,n)','C(n,r) = n+r','C(n,r) = nr'],a:0,e:'Choosing r objects is equivalent to choosing the n−r objects left out.'},
@@ -98,6 +98,7 @@ let questions=[
 {q:'Which is the correct value of C(8, 7)?',o:['1','7','8','56'],a:2,e:'By symmetry, C(8,7) = C(8,1) = 8.'},
 {q:'For n ≥ 1, which statement is always true?',o:['C(n,1)=1','C(n,0)=n','C(n,n)=1','C(n,2)=n'],a:2,e:'There is exactly one way to choose all n objects, so C(n,n) = 1.'}
 ];
+let questions=[];
 let currentQuestion=0,quizScore=0,questionChecked=false,answeredQuestions=[];
 function renderQuiz(){let root=$('quizQuestions');root.innerHTML='';$('quizScore').classList.remove('show');$('quizScore').innerHTML='';if(!questions.length){let msg=document.createElement('p');msg.className='muted';msg.textContent='A concept-specific quiz is being prepared for this lesson. Please explore the Learn and Worked examples sections in the meantime.';root.appendChild(msg);$('submitQuiz').disabled=true;$('resetQuiz').disabled=true;$('quizCounter').textContent='';updateProgress();return;}$('submitQuiz').disabled=false;$('resetQuiz').disabled=false;questionChecked=!!answeredQuestions[currentQuestion];const q=questions[currentQuestion];$('quizCounter').textContent='Question '+(currentQuestion+1)+' of '+questions.length;let block=document.createElement('div');block.className='question';let head=document.createElement('div');head.className='qhead';let num=document.createElement('div');num.className='qnum';num.textContent=currentQuestion+1;let stem=document.createElement('div');let strong=document.createElement('b');strong.textContent=q.q;stem.appendChild(strong);head.append(num,stem);block.appendChild(head);let opts=document.createElement('div');opts.className='options';q.o.forEach((v,j)=>{let label=document.createElement('label');label.className='option';label.style.display='flex';let input=document.createElement('input');input.type='radio';input.name='q'+currentQuestion;input.value=j;input.checked=answeredQuestions[currentQuestion]&&answeredQuestions[currentQuestion].selected===j;input.disabled=questionChecked;input.addEventListener('change',updateProgress);let text=document.createElement('span');text.textContent=v;label.append(input,text);if(questionChecked&&j===q.a)label.style.borderColor='var(--mint)';if(questionChecked&&answeredQuestions[currentQuestion].selected===j&&j!==q.a)label.style.borderColor='var(--red)';opts.appendChild(label)});block.appendChild(opts);let fb=document.createElement('div');fb.className='feedback';fb.id='currentFeedback';if(questionChecked){fb.textContent=(answeredQuestions[currentQuestion].selected===q.a?'Well done. ':'Review this one. ')+q.e;fb.classList.add('show')}block.appendChild(fb);root.appendChild(block);$('submitQuiz').textContent=questionChecked?(currentQuestion===questions.length-1?'See results':'Next question'):'Check answer';updateProgress()}
 function updateProgress(){let count=answeredQuestions.filter(Boolean).length;$('quizProgress').style.width=(questions.length?count/questions.length*100:0)+'%'}
@@ -962,7 +963,10 @@ if(frequencyTables){
 
 
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
-const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
+const normalizeConcept=value=>String(value||'').normalize('NFKC').trim().replace(/\\s+/g,' ').toLocaleLowerCase();
+const bankKey=quizBank?Object.keys(quizBank).find(key=>normalizeConcept(key)===normalizeConcept(concept)):null;
+const bankRows=bankKey&&Array.isArray(quizBank[bankKey])?quizBank[bankKey]:null;
+if(normalizeConcept(concept)==='binomial coefficients'&&!bankRows){questions=binomialQuestions;}
 if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration&&!mensurationRevision&&!dataCollection&&!frequencyTables){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);

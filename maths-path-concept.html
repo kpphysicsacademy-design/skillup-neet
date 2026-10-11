@@ -79,7 +79,7 @@
 'use strict';
 const $=id=>document.getElementById(id);
 function showLessonError(){const main=document.querySelector('main');if(!main)return;let notice=document.getElementById('lessonRuntimeNotice');if(!notice){notice=document.createElement('section');notice.id='lessonRuntimeNotice';notice.className='card';notice.setAttribute('role','alert');notice.style.borderColor='var(--red)';notice.innerHTML='<h2>Some lesson features could not load</h2><p class="muted">Your lesson content is still available. Refresh the page once; if the problem continues, try again later.</p>';main.prepend(notice);}}
-window.addEventListener('error',function(event){if(event&&event.message)showLessonError();});
+window.addEventListener('error',function(event){if(event&&(event.message||(event.target&&event.target!==window)))showLessonError();},true);
 window.addEventListener('unhandledrejection',function(){showLessonError();});
 function choose(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v)}
 function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{});}

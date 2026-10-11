@@ -73,6 +73,7 @@
 </div>
 <footer class="footer">SkillUp Academy · Build concepts step by step. <br>Practice carefully, review each explanation, and try again to improve.</footer>
 </div>
+<script src="maths-quiz-bank.js?v=20261011-quiz-bank-v1"></script>
 <script>
 (function(){
 'use strict';
@@ -93,8 +94,8 @@ let questions=[
 {q:'Which is the correct value of C(8, 7)?',o:['1','7','8','56'],a:2,e:'By symmetry, C(8,7) = C(8,1) = 8.'},
 {q:'For n ≥ 1, which statement is always true?',o:['C(n,1)=1','C(n,0)=n','C(n,n)=1','C(n,2)=n'],a:2,e:'There is exactly one way to choose all n objects, so C(n,n) = 1.'}
 ];
-function renderQuiz(){let root=$('quizQuestions');root.innerHTML='';questions.forEach((q,i)=>{let block=document.createElement('div');block.className='question';let head=document.createElement('div');head.className='qhead';let num=document.createElement('div');num.className='qnum';num.textContent=i+1;let stem=document.createElement('div');stem.innerHTML='<b>'+q.q+'</b>';head.append(num,stem);block.appendChild(head);let opts=document.createElement('div');opts.className='options';q.o.forEach((v,j)=>{let label=document.createElement('label');label.className='option';let input=document.createElement('input');input.type='radio';input.name='q'+i;input.value=j;input.addEventListener('change',updateProgress);let text=document.createElement('span');text.textContent=v;label.append(input,text);opts.appendChild(label)});block.appendChild(opts);let fb=document.createElement('div');fb.className='feedback';fb.id='feedback'+i;block.appendChild(fb);root.appendChild(block)});updateProgress()}
-function updateProgress(){let count=questions.filter((q,i)=>document.querySelector('input[name="q'+i+'"]:checked')).length;$('quizProgress').style.width=(count/questions.length*100)+'%'}
+function renderQuiz(){let root=$('quizQuestions');root.innerHTML='';if(!questions.length){let msg=document.createElement('p');msg.className='muted';msg.textContent='A concept-specific quiz is being prepared for this lesson. Please explore the Learn and Worked examples sections in the meantime.';root.appendChild(msg);$('submitQuiz').disabled=true;$('resetQuiz').disabled=true;updateProgress();return;}$('submitQuiz').disabled=false;$('resetQuiz').disabled=false;questions.forEach((q,i)=>{let block=document.createElement('div');block.className='question';let head=document.createElement('div');head.className='qhead';let num=document.createElement('div');num.className='qnum';num.textContent=i+1;let stem=document.createElement('div');let strong=document.createElement('b');strong.textContent=q.q;stem.appendChild(strong);head.append(num,stem);block.appendChild(head);let opts=document.createElement('div');opts.className='options';q.o.forEach((v,j)=>{let label=document.createElement('label');label.className='option';let input=document.createElement('input');input.type='radio';input.name='q'+i;input.value=j;input.addEventListener('change',updateProgress);let text=document.createElement('span');text.textContent=v;label.append(input,text);opts.appendChild(label)});block.appendChild(opts);let fb=document.createElement('div');fb.className='feedback';fb.id='feedback'+i;block.appendChild(fb);root.appendChild(block)});updateProgress()}
+function updateProgress(){let count=questions.filter((q,i)=>document.querySelector('input[name="q'+i+'"]:checked')).length;$('quizProgress').style.width=(questions.length?count/questions.length*100:0)+'%'}
 function submit(){let score=0;questions.forEach((q,i)=>{let selected=document.querySelector('input[name="q'+i+'"]:checked');let fb=$('feedback'+i);let opts=document.querySelectorAll('input[name="q'+i+'"]');opts.forEach((input,j)=>{input.disabled=true;let label=input.closest('label');if(j===q.a)label.style.borderColor='var(--mint)';if(selected&&j===+selected.value&&j!==q.a)label.style.borderColor='var(--red)'});if(selected&&+selected.value===q.a)score++;fb.textContent=(selected&&+selected.value===q.a?'Well done. ':'Review this one. ')+q.e;fb.classList.add('show')});let box=$('quizScore');box.innerHTML='<strong>'+score+' / '+questions.length+'</strong><p>'+ (score===questions.length?'Excellent work! You have mastered this set.':score>=7?'Good progress. Review the explanations for the missed questions.':'Keep practising. Revisit the formula, symmetry, and worked examples before retrying.')+'</p>';box.classList.add('show');$('submitQuiz').disabled=true;box.scrollIntoView({behavior:'smooth',block:'nearest'})}
 function reset(){renderQuiz();$('quizScore').classList.remove('show');$('quizScore').innerHTML='';$('submitQuiz').disabled=false;updateProgress()}
 document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!==btn.dataset.tab));if(btn.dataset.tab==='learn')renderMath();else if(btn.dataset.tab==='examples')renderMath();else if(btn.dataset.tab==='lab')renderMath();else renderMath();window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'})}));
@@ -136,6 +137,15 @@ function updateRationalLab(){const a=+$('numA').value, da=+$('denA').value, b=+$
 ['numA','denA','numB','denB','ratOp'].forEach(id=>$(id).addEventListener('input',updateRationalLab));
 $('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
 updateRationalLab();
+}
+const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
+const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
+if(bankRows&&bankRows.length){
+ const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
+ const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
+ questions=valid.length?valid:[];
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'){
+ questions=[];
 }
 if(!rational){makeTriangle(6);updateLab();}renderQuiz();renderMath();
 if(rational){$('ratLine').dispatchEvent(new Event('input'));renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!=='learn'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();}

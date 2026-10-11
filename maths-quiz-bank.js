@@ -25884,6 +25884,6 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["How many circular arrangements of 6 people have A and B together?",["24","48","120","240"],1,"Treat AB as one block: 5 units around the circle give 4! ways, times 2 internal orders = 48."],
     ["How many circular arrangements of 6 people have A and B not together?",["48","72","120","240"],1,"Total 5! = 120; together 48; not together = 72."],
     ["Which statement is true for distinct objects around a round table?",["n! arrangements because seats are labelled","(n−1)! because rotations are equivalent","(n−1)!/2 in every seating problem","n arrangements"],1,"Standard round-table arrangements identify rotations but not reflections."],
-    ["How many ways can 4 distinct people sit around a round table if two specified people must not sit next to each other?",["2","3","4","6"],1,"Total circular arrangements = 3! = 6; together = 2×2! = 4; apart = 2."]
+    ["How many ways can 4 distinct people sit around a round table if two specified people must not sit next to each other?",["2","3","4","6"],0,"Total circular arrangements = 3! = 6; together = 2×2! = 4; apart = 2."]
   ],
 };

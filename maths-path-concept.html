@@ -300,7 +300,7 @@
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261009-arithmetic-progression-quiz-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
 <main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261011-counting-principle-lab-v1";</script>
-<script src="maths-quiz-bank.js?v=20261011-counting-principle-lab-v1"></script>
+<script src="maths-quiz-bank.js?v=20261011-factorial-lab-v1"></script>
 <script src="maths-class11-sets-lessons.js?v=20261010-maths-world-class-audit-v1"></script>
 <script src="maths-path-data.js?v=20261010-maths-world-class-audit-v1"></script>
 <script>
@@ -1081,7 +1081,45 @@ update();
 }
 safeInit("fundamental principle of counting lab",initCountingPrincipleLab);
 
+
+function initFactorialLab(){
+if(norm(concept)!=="factorial")return;
+const nEl=document.getElementById("facN");
+if(!nEl)return;
+const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+const factorial=n=>{let v=1;for(let i=2;i<=n;i++)v*=i;return v;};
+const update=()=>{
+const n=Number(nEl.value),v=factorial(n);
+put("facNOut",n);put("facValue",v);
+put("facExpansion",n===0?"0! = 1":Array.from({length:n},(_,i)=>n-i).join(" × ")+" = "+v);
+put("facRecursive",n===0?"0! = 1":n+"! = "+n+" × "+(n-1)+"! = "+v);
+put("facInterpretation",n===0?"There is exactly one way to arrange zero objects: the empty arrangement.": "The "+n+" distinct objects can be arranged in "+v+" different orders.");
+};
+nEl.addEventListener("input",update);
+document.querySelectorAll(".facPreset").forEach(el=>el.addEventListener("click",()=>{nEl.value=el.dataset.n;update();}));
+const reset=document.getElementById("facReset");if(reset)reset.addEventListener("click",()=>{nEl.value=5;update();});
+update();
+}
+safeInit("factorial virtual lab",initFactorialLab);
+
 function lessonHtml(){
+if(norm(concept)==="factorial") return `
+<div class="geometry-lesson factorial-virtual-lesson">
+<strong>Factorial — Learn & Virtual Lab</strong>
+<p>The factorial of a non-negative integer <b>n</b> is the product of all positive integers from <b>n</b> down to 1.</p>
+<div class="lesson"><div class="formula">n! = n × (n − 1) × (n − 2) × … × 2 × 1</div><div class="formula">0! = 1 &nbsp; and &nbsp; n! = n × (n − 1)!</div><p>Factorial notation is used to count arrangements and selections. Factorials grow quickly: for example, 5! = 120 and 6! = 720.</p></div>
+<h3>Worked examples</h3>
+<ul><li><b>4!</b> = 4 × 3 × 2 × 1 = <b>24</b></li><li><b>5!</b> = 5 × 4! = 5 × 24 = <b>120</b></li><li><b>0!</b> = <b>1</b> by definition; this makes counting formulas work consistently.</li></ul>
+<h3>Explore factorials</h3><p>Move the slider to see the expansion, value, and recursive form for each n.</p>
+<div class="lesson"><label for="facN">Choose n: <b id="facNOut">5</b></label><input id="facN" type="range" min="0" max="10" value="5" style="width:100%">
+<div class="formula"><b>Expansion</b><br><span id="facExpansion">5 × 4 × 3 × 2 × 1 = 120</span></div>
+<div class="formula"><b>Recursive form</b><br><span id="facRecursive">5! = 5 × 4! = 120</span></div>
+<div class="formula"><b>Value</b><br><strong id="facValue">120</strong></div>
+<p id="facInterpretation">The 5 distinct objects can be arranged in 120 different orders.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0"><button type="button" class="facPreset" data-n="0">0!</button><button type="button" class="facPreset" data-n="3">3!</button><button type="button" class="facPreset" data-n="5">5!</button><button type="button" class="facPreset" data-n="7">7!</button><button type="button" id="facReset">Reset</button></div></div>
+<h3>Common mistakes to avoid</h3><ul><li>Do not read n! as n × 1 only; include every positive integer down to 1.</li><li>Remember that 0! = 1, not 0.</li><li>Factorial is defined here for non-negative integers, not arbitrary real numbers.</li><li>When simplifying factorial fractions, cancel common factors before multiplying large values.</li></ul>
+<div class="lesson"><b>Quick check:</b> 6! = 6 × 5! = 6 × 120 = 720.</div>
+</div>`;
 if(norm(concept)==="fundamental principle of counting") return `
 <div class="geometry-lesson counting-principle-virtual-lesson">
 <strong>Fundamental Principle of Counting — Learn & Virtual Lab</strong>

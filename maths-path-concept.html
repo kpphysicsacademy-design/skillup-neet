@@ -299,8 +299,8 @@
 </head>
 <body>
 <header class="top"><div class="nav"><a class="back" href="maths-home.html?v=20261009-arithmetic-progression-quiz-v1">← Maths Path</a><div class="brand">SkillUp<small>MATHEMATICS • CONCEPT PRACTICE</small></div><span class="badge">30 • MASTERY</span></div></header>
-<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261010-maths-world-class-audit-v1";</script>
-<script src="maths-quiz-bank.js?v=20261011-polar-representation-lab-v1"></script>
+<main class="wrap" id="app"></main><script>document.documentElement.dataset.skillupMathsVersion="20261011-counting-principle-lab-v1";</script>
+<script src="maths-quiz-bank.js?v=20261011-counting-principle-lab-v1"></script>
 <script src="maths-class11-sets-lessons.js?v=20261010-maths-world-class-audit-v1"></script>
 <script src="maths-path-data.js?v=20261010-maths-world-class-audit-v1"></script>
 <script>
@@ -1059,7 +1059,51 @@ update();
 }
 safeInit("polar representation virtual lab",initPolarRepresentationLab);
 
+
+function initCountingPrincipleLab(){
+if(norm(concept)!=="fundamental principle of counting")return;
+const first=document.getElementById("fpcFirst"),second=document.getElementById("fpcSecond"),third=document.getElementById("fpcThird");
+if(!first||!second||!third)return;
+const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+const update=()=>{
+const a=Number(first.value),b=Number(second.value),c=Number(third.value);
+put("fpcFirstOut",a);put("fpcSecondOut",b);put("fpcThirdOut",c);
+put("fpcProduct",a*b*c);
+put("fpcSteps",a+" × "+b+" × "+c+" = "+(a*b*c)+" possible outcomes");
+put("fpcExplanation","For every choice in stage 1, there are "+b+" choices in stage 2 and "+c+" choices in stage 3.");
+};
+[first,second,third].forEach(el=>el.addEventListener("input",update));
+document.querySelectorAll(".fpcPreset").forEach(el=>el.addEventListener("click",()=>{
+first.value=el.dataset.a;second.value=el.dataset.b;third.value=el.dataset.c;update();
+}));
+const reset=document.getElementById("fpcReset");if(reset)reset.addEventListener("click",()=>{first.value=3;second.value=2;third.value=4;update();});
+update();
+}
+safeInit("fundamental principle of counting lab",initCountingPrincipleLab);
+
 function lessonHtml(){
+if(norm(concept)==="fundamental principle of counting") return `
+<div class="geometry-lesson counting-principle-virtual-lesson">
+<strong>Fundamental Principle of Counting — Learn & Virtual Lab</strong>
+<p>If a task is completed in successive stages, and stage 1 can be done in <b>m</b> ways, stage 2 in <b>n</b> ways, and so on, then the total number of outcomes is the product of the number of choices at each stage.</p>
+<div class="lesson"><div class="formula">Total outcomes = n₁ × n₂ × n₃ × … × nₖ</div><p><b>Use the multiplication principle</b> when each complete outcome is formed by making one choice at every stage. The number of choices available at a later stage may depend on earlier choices; if it does, count the valid choices for each case carefully.</p></div>
+<h3>Worked example</h3>
+<p>A student has 3 shirts, 2 pairs of trousers, and 4 pairs of shoes. Choosing one item from each category gives</p>
+<div class="formula">3 × 2 × 4 = 24 outfits</div>
+<p>Each outfit is one shirt + one pair of trousers + one pair of shoes. The order in which you list the items does not create a different outfit.</p>
+<h3>Try the interactive counter</h3>
+<p>Change the number of choices at each stage. The total updates instantly.</p>
+<div class="lesson" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;align-items:center">
+<div><label for="fpcFirst">Stage 1 choices: <b id="fpcFirstOut">3</b></label><input id="fpcFirst" type="range" min="1" max="8" value="3" style="width:100%"></div>
+<div><label for="fpcSecond">Stage 2 choices: <b id="fpcSecondOut">2</b></label><input id="fpcSecond" type="range" min="1" max="8" value="2" style="width:100%"></div>
+<div><label for="fpcThird">Stage 3 choices: <b id="fpcThirdOut">4</b></label><input id="fpcThird" type="range" min="1" max="8" value="4" style="width:100%"></div>
+</div>
+<div class="formula" style="margin-top:12px"><b id="fpcSteps">3 × 2 × 4 = 24 possible outcomes</b><p id="fpcExplanation">For every choice in stage 1, there are 2 choices in stage 2 and 4 choices in stage 3.</p><strong>Total: <span id="fpcProduct">24</span> outcomes</strong></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0"><button type="button" class="fpcPreset" data-a="2" data-b="3" data-c="2">2 × 3 × 2</button><button type="button" class="fpcPreset" data-a="4" data-b="3" data-c="5">4 × 3 × 5</button><button type="button" class="fpcPreset" data-a="6" data-b="2" data-c="3">6 × 2 × 3</button><button type="button" id="fpcReset">Reset</button></div>
+<h3>How to recognise the principle</h3>
+<ul><li>Identify the separate stages of the task.</li><li>Count the valid choices at each stage.</li><li>Multiply the stage counts to get the total number of complete outcomes.</li><li>If the question says “or” and asks for mutually exclusive alternatives, addition may be appropriate instead.</li></ul>
+<div class="lesson"><b>Remember:</b> “and then” across successive stages usually signals multiplication. Avoid multiplying blindly if choices overlap or later-stage counts vary; split into cases when necessary.</div>
+</div>`;
 if(norm(concept)==="polar representation") return `
 <div class="geometry-lesson polar-representation-virtual-lesson"><strong>Polar Representation — Learn & Virtual Lab</strong>
 <p>A non-zero complex number can be described by its distance <b>r</b> from the origin and its angle <b>θ</b> measured from the positive real axis.</p>

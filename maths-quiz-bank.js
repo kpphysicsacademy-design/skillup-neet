@@ -771,7 +771,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "2/5"
       ],
       0,
-      "Using denominator 24 gives 12/24, 9/24, 10/24 and 9.6/24; 1/2 is greatest."
+      "Using denominator 120 gives 60/120, 45/120, 50/120 and 48/120; 1/2 is greatest."
     ],
     [
       "Which is the smallest number?",

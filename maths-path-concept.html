@@ -80,7 +80,7 @@
 const $=id=>document.getElementById(id);
 function choose(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v)}
 function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{});}
-function escapeHtml(value){return String(value).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function makeTriangle(max){let root=$('pascalTriangle');root.innerHTML='';for(let n=0;n<=max;n++){let row=document.createElement('div');row.className='tri-row';for(let r=0;r<=n;r++){let cell=document.createElement('span');cell.className='tri-num';cell.textContent=choose(n,r);row.appendChild(cell)}root.appendChild(row)}}
 function updateLab(){let n=+$('nRange').value;let r=Math.min(+$('rRange').value,n);$('rRange').max=n;$('rRange').value=r;$('nLabel').textContent=n;$('rLabel').textContent=r;let c=choose(n,r);$('labResult').textContent=c;$('labFormula').innerHTML='\\(\\binom{'+n+'}{'+r+'}='+c+'\\)';$('labMeaning').textContent='There are '+c+' ways to select '+r+' item(s) from '+n+'.';let row=$('coefficientRow');row.innerHTML='';for(let k=0;k<=n;k++){let el=document.createElement('span');el.className='tri-num'+(k===r?' focus':'');el.textContent=choose(n,k);row.appendChild(el)}renderMath()}
 let questions=[

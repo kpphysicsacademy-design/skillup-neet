@@ -25628,4 +25628,36 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "n(A ∪ B) = 7 + 4 − 3 = 8."
     ]
   ]
+"Argand plane": [
+    ["On the Argand plane, z = −4 + 3i is represented by which point?",["(−4, 3)","(3, −4)","(−4, −3)","(4, 3)"],0,"The real part is −4 and the imaginary coefficient is 3."],
+    ["Which axis represents the imaginary coefficient?",["Horizontal axis","Vertical axis","Both axes","Neither axis"],1,"The imaginary coefficient is plotted vertically."],
+    ["In which quadrant is z = −2 + 5i?",["I","II","III","IV"],1,"Negative real and positive imaginary coordinates give quadrant II."],
+    ["Find |3 + 4i|.",["7","1","5","25"],2,"√(3² + 4²) = √25 = 5."],
+    ["The point (0, −3) represents which complex number?",["3i","−3i","−3","3 − i"],1,"Its real part is zero and its imaginary coefficient is −3."],
+    ["What is the conjugate of −2 + 7i?",["2 + 7i","−2 − 7i","2 − 7i","−7 − 2i"],1,"Conjugation reverses the sign of the imaginary term."],
+    ["If z = a + bi lies on the real axis, which condition holds?",["a = 0","b = 0","a = b","a² + b² = 0"],1,"Points on the real axis have imaginary coordinate zero."],
+    ["The point for z = 2 − 3i lies in which quadrant?",["I","II","III","IV"],3,"Positive real and negative imaginary coordinates give quadrant IV."],
+    ["What is the distance from the origin to (−5, 12)?",["17","7","13","√7"],2,"√(25 + 144) = √169 = 13."],
+    ["Conjugate points are reflections across which axis?",["Imaginary axis","Real axis","Line y = x","Neither axis"],1,"(a,b) becomes (a,−b), a reflection across the real axis."],
+    ["Which point represents 4?",["(0,4)","(−4,0)","(4,0)","(4,1)"],2,"A real number has imaginary coordinate zero."],
+    ["What is |−8i|?",["−8","8","64","0"],1,"The modulus is √(0² + (−8)²) = 8."],
+    ["Which point lies in quadrant III?",["(2,−5)","(−2,5)","(−2,−5)","(2,5)"],2,"Both coordinates are negative in quadrant III."],
+    ["Find |5 − 12i|.",["13","17","7","169"],0,"√(25 + 144) = √169 = 13."],
+    ["Which point represents −6?",["(0,−6)","(−6,0)","(6,0)","(0,6)"],1,"The real coordinate is −6 and the imaginary coordinate is zero."],
+    ["Coordinates of −z when z corresponds to (a,b)?",["(a,−b)","(−a,b)","(−a,−b)","(b,a)"],2,"Negating z changes both coordinates' signs."],
+    ["Find |1 + i|.",["1","√2","2","0"],1,"√(1² + 1²) = √2."],
+    ["A point with a > 0 and b = 0 lies on the…",["Quadrant I","Imaginary axis","Positive real axis","Origin"],2,"It is on the positive real axis, not inside a quadrant."],
+    ["What is the conjugate of 6 − 9i?",["−6 − 9i","6 + 9i","−6 + 9i","9 + 6i"],1,"The real part stays 6 and the imaginary sign changes."],
+    ["Which number corresponds to (−3, −4)?",["−3 + 4i","3 − 4i","−3 − 4i","4 − 3i"],2,"The coordinates are the real part and imaginary coefficient."],
+    ["Distance between (1,2) and (4,6)?",["4","5","7","25"],1,"√((4−1)² + (6−2)²) = √25 = 5."],
+    ["If |3 + bi| = 5, what can b be?",["Only 4","Only −4","4 or −4","5 or −5"],2,"9 + b² = 25 gives b² = 16, so b = ±4."],
+    ["Where is z = 0 plotted?",["No point","(0,0)","Quadrant IV","(1,0)"],1,"Zero is represented by the origin and has modulus zero."],
+    ["What is |conjugate of −3 − 4i|?",["−5","5","7","25"],1,"Conjugation preserves modulus; √(9 + 16) = 5."],
+    ["Reflection of (−2,5) across the real axis?",["(2,5)","(−2,−5)","(2,−5)","(5,−2)"],1,"Reflection keeps x and reverses y."],
+    ["Geometrically, what does |z| measure?",["Argument angle","Distance from origin","Horizontal coordinate","Area"],1,"The modulus is the distance from the origin to (a,b)."],
+    ["The point (−4,0) lies on the…",["Negative real axis","Positive real axis","Negative imaginary axis","Quadrant III"],0,"The imaginary coordinate is zero and the real coordinate is negative."],
+    ["If z = 2 + 3i, which point represents iz?",["(2,3)","(−3,2)","(3,−2)","(−2,−3)"],1,"i(2+3i)=−3+2i, so the point is (−3,2)."],
+    ["Equation of points at distance 4 from origin?",["a+b=4","a²+b²=4","a²+b²=16","a²−b²=16"],2,"√(a²+b²)=4 implies a²+b²=16."],
+    ["For z = −7i, which statement is true?",["Negative imaginary axis","Negative real axis","Real part is −7","Modulus is −7"],0,"The point is (0,−7); its modulus is positive 7."]
+  ],
 };

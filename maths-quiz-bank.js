@@ -25778,7 +25778,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["How many 4-digit numbers can be formed from digits 1–7 without repetition?", ["840","720","2,401","343"], 0, "7P4 = 7 × 6 × 5 × 4 = 840."],
     ["How many ways can president, secretary and treasurer be selected from 8 people, with no person holding more than one role?", ["56","336","512","24"], 1, "Roles are distinct, so 8P3 = 8 × 7 × 6 = 336."],
     ["How many ways can 3 of 9 runners finish first, second and third?", ["84","504","729","27"], 1, "Finishing positions matter: 9P3 = 9 × 8 × 7 = 504."],
-    ["Evaluate 9P4.", ["126","3024","3,0240","362,880"], 1, "9P4 = 9 × 8 × 7 × 6 = 3024."],
+    ["Evaluate 9P4.", ["126","3024","30,240","362,880"], 1, "9P4 = 9 × 8 × 7 × 6 = 3024."],
     ["If nP3 = 120, find the positive integer n.", ["5","6","8","10"], 1, "n(n−1)(n−2) = 120; 6 × 5 × 4 = 120, so n = 6."],
     ["How many arrangements of 6 distinct objects have a specified object in the first position?", ["120","720","600","60"], 0, "Fix the specified object first; arrange the other five in 5! = 120 ways."],
     ["How many arrangements of 6 distinct objects have a specified object not in the first position?", ["120","600","720","360"], 1, "Total 6! − arrangements with it first = 720 − 120 = 600."],

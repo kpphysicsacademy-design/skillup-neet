@@ -113,6 +113,7 @@ const mixedMensuration=/^mixed mensuration practice$/.test(concept.toLowerCase()
 const compositeSolids=/^mensuration\s*[—-]\s*composite solids and combined shapes$|^composite solids and combined shapes$/.test(concept.toLowerCase());
 const unitCapacity=/^mensuration\s*[—-]\s*unit conversion and capacity problems$|^unit conversion and capacity problems$/.test(concept.toLowerCase());
 const realLifeMensuration=/^mensuration\s*[—-]\s*real-life applications and mixed challenge problems$|^real-life applications and mixed challenge problems$/.test(concept.toLowerCase());
+const mensurationRevision=/^mensuration\s*[—-]\s*revision test and formula mastery$|^revision test and formula mastery$/.test(concept.toLowerCase());
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase())||volumeWordProblems;
 const surfaceConcept=/^surface area basics$|^surface area of cube and cuboid$/.test(concept.toLowerCase());
 const advancedSurfaceConcept=/^surface area of cube and cuboid$/.test(concept.toLowerCase());
@@ -820,9 +821,54 @@ if(realLifeMensuration){
  ['rlL','rlB','rlH'].forEach(id=>$(id).addEventListener('input',updateRealLifeLab));$('rlMode').addEventListener('change',updateRealLifeLab);updateRealLifeLab();
 }
 
+
+if(mensurationRevision){
+ $('heroDescription').textContent='Consolidate mensuration with a formula map, quick decision rules, an interactive formula selector and a 30-question mastery test.';
+ $('heroFormula').innerHTML='\\(V=lbh\\qquad \\mathrm{LSA}=2h(l+b)\\qquad \\mathrm{TSA}=2(lb+bh+hl)\\)';
+ $('learn').innerHTML='<h2>1. Formula mastery · Choose the quantity first</h2><p>Before calculating, decide what the question asks you to measure. Keep all dimensions in the same unit and write the correct unit in the final answer.</p><div class="example"><strong>Volume of a cuboid</strong><div class="formula">\\(V=l\\times b\\times h\\)</div><p>Measures the space inside. Units are cubic: cm³, m³. Capacity: 1 m³ = 1,000 L.</p></div><div class="example"><strong>Lateral surface area (four side faces)</strong><div class="formula">\\(\\mathrm{LSA}=2h(l+b)\\)</div><p>Useful for four walls or side faces, when top and bottom are excluded.</p></div><div class="example"><strong>Total surface area of a closed cuboid</strong><div class="formula">\\(\\mathrm{TSA}=2(lb+bh+hl)\\)</div><p>Includes all six faces. For a cube of edge a: volume = a³ and TSA = 6a².</p></div><div class="callout"><b>Decision rule:</b> capacity → volume; four walls → LSA; all outer faces → TSA; floor → length × breadth; cost → measured area × rate.</div><h3>Unit checkpoints</h3><ul><li>1 m = 100 cm; 1 m² = 10,000 cm².</li><li>1 m³ = 1,000,000 cm³ = 1,000 L.</li><li>1 L = 1,000 mL = 1,000 cm³.</li><li>Convert lengths before multiplying; area and volume conversion factors are squared and cubed.</li></ul><h3>Interactive formula selector</h3><p class="muted">Choose the situation and enter dimensions in one consistent unit.</p><div class="lab"><label for="mrTask">What do you need?</label><select id="mrTask" style="width:100%;padding:10px;border-radius:10px;background:#19243c;color:#f2f5ff;border:1px solid #2a3856"><option value="v">Volume / capacity</option><option value="lsa">Four side faces / four walls</option><option value="tsa">All six faces of a closed cuboid</option><option value="floor">Floor or base area</option><option value="cubev">Cube volume</option><option value="cubetsa">Cube total surface area</option></select><label for="mrL">Length / edge (cm) <b id="mrLL">10</b></label><input id="mrL" type="range" min="1" max="30" value="10"><label for="mrB">Breadth (cm) <b id="mrBB">5</b></label><input id="mrB" type="range" min="1" max="30" value="5"><label for="mrH">Height (cm) <b id="mrHH">4</b></label><input id="mrH" type="range" min="1" max="30" value="4"></div><div class="big-result" id="mrResult">200 cm³</div><div class="formula" id="mrFormula">V = 10 × 5 × 4 = 200 cm³</div><p class="muted" id="mrHint">Volume uses cubic units.</p><h3>Worked checkpoints</h3><div class="example"><strong>Example A</strong><p>For l = 8 cm, b = 3 cm and h = 2 cm, volume = 8 × 3 × 2 = 48 cm³.</p></div><div class="example"><strong>Example B</strong><p>For the same cuboid, TSA = 2(24 + 6 + 16) = 92 cm²; LSA = 2 × 2 × (8 + 3) = 44 cm².</p></div><div class="example"><strong>Example C</strong><p>A 2 m × 1.5 m × 1 m tank has volume 3 m³ and capacity 3,000 L.</p></div><div class="callout">Mastery goal: identify the measure, choose the formula, convert units, calculate carefully and interpret the result.</div>';
+ $('examples').innerHTML='<h2>Worked examples</h2><p>All formula summaries and worked checkpoints are included in the Learn section for easy revision.</p>';
+ $('lab').innerHTML='<h2>Interactive formula selector</h2><p>Use the selector in the Learn section.</p>';
+ $('aside').innerHTML='<section class="card"><span class="tag">FORMULA RECAP</span><h3>Remember</h3><p>Volume = lbh</p><p>LSA = 2h(l+b)</p><p>TSA = 2(lb+bh+hl)</p><p>Cube: V = a³; TSA = 6a²</p><p>Floor area = l × b</p></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('A cuboid measures 8 cm × 3 cm × 2 cm. Its volume is:',['13 cm³','48 cm³','52 cm³','96 cm³'],1,'V = lbh = 8 × 3 × 2 = 48 cm³.'),
+ makeQ('The formula for the total surface area of a closed cuboid is:',['lbh','2h(l+b)','2(lb+bh+hl)','4lb'],2,'TSA includes all three pairs of opposite faces.'),
+ makeQ('Which formula gives the area of four side walls?',['lbh','2h(l+b)','2(lb+bh+hl)','l+b+h'],1,'The four side faces have combined area 2h(l+b).'),
+ makeQ('A cube has edge 4 cm. Its volume is:',['16 cm³','48 cm³','64 cm³','96 cm³'],2,'V = 4³ = 64 cm³.'),
+ makeQ('A cube has edge 4 cm. Its total surface area is:',['16 cm²','64 cm²','96 cm²','128 cm²'],2,'TSA = 6 × 4² = 96 cm².'),
+ makeQ('A cuboid is 10 cm × 5 cm × 4 cm. Its TSA is:',['100 cm²','180 cm²','220 cm²','200 cm²'],1,'TSA = 2(50 + 20 + 40) = 220 cm².'),
+ makeQ('A cuboid is 10 cm × 5 cm × 4 cm. Its LSA is:',['60 cm²','100 cm²','120 cm²','220 cm²'],2,'LSA = 2 × 4 × (10 + 5) = 120 cm².'),
+ makeQ('A tank is 2 m × 1.5 m × 1 m. Capacity is:',['300 L','1,500 L','3,000 L','30,000 L'],2,'Volume = 3 m³ = 3,000 L.'),
+ makeQ('Convert 2.4 m³ to litres.',['24 L','240 L','2,400 L','24,000 L'],2,'Multiply cubic metres by 1,000.'),
+ makeQ('Convert 1.2 m to centimetres.',['12 cm','120 cm','1,200 cm','0.12 cm'],1,'1 m = 100 cm, so 1.2 m = 120 cm.'),
+ makeQ('Convert 1 m² to cm².',['100 cm²','1,000 cm²','10,000 cm²','1,000,000 cm²'],2,'Square the length conversion: 100² = 10,000.'),
+ makeQ('Convert 1 m³ to cm³.',['1,000 cm³','10,000 cm³','100,000 cm³','1,000,000 cm³'],3,'Cube the length conversion: 100³ = 1,000,000.'),
+ makeQ('The floor of a 6 m × 4 m room has area:',['10 m²','20 m²','24 m²','48 m²'],2,'Floor area = 6 × 4 = 24 m².'),
+ makeQ('A room is 5 m long, 4 m wide and 3 m high. Four-wall area is:',['20 m²','27 m²','54 m²','60 m²'],2,'LSA = 2 × 3 × (5 + 4) = 54 m².'),
+ makeQ('A cuboid has l = 12 cm, b = 5 cm, h = 2 cm. Volume is:',['19 cm³','60 cm³','120 cm³','240 cm³'],2,'12 × 5 × 2 = 120 cm³.'),
+ makeQ('A cuboid has volume 360 cm³, l = 10 cm and b = 6 cm. Height is:',['3 cm','5 cm','6 cm','10 cm'],1,'h = 360 ÷ (10 × 6) = 6 cm.'),
+ makeQ('A closed cube of edge 3 m is wrapped on all faces. Area required is:',['9 m²','18 m²','27 m²','54 m²'],3,'TSA = 6 × 3² = 54 m².'),
+ makeQ('Painting costs ₹15 per m². If area is 40 m², cost is:',['₹55','₹400','₹600','₹1,500'],2,'Cost = area × rate = 40 × 15 = ₹600.'),
+ makeQ('A tank of volume 5 m³ is half full. Water volume is:',['1 m³','2 m³','2.5 m³','10 m³'],2,'Half of 5 m³ is 2.5 m³.'),
+ makeQ('A 40 cm × 30 cm × 20 cm box has volume:',['24,000 cm³','9,000 cm³','2,400 cm³','240 cm³'],0,'40 × 30 × 20 = 24,000 cm³.'),
+ makeQ('A cube edge is tripled. Its volume becomes:',['3 times','6 times','9 times','27 times'],3,'Volume scales with the cube of the edge factor: 3³ = 27.'),
+ makeQ('A cube edge is doubled. Its surface area becomes:',['2 times','4 times','6 times','8 times'],1,'Surface area scales with the square of the edge factor: 2² = 4.'),
+ makeQ('Which unit is appropriate for volume?',['cm','cm²','cm³','L²'],2,'Volume is measured in cubic units, such as cm³ or m³.'),
+ makeQ('Which unit is appropriate for surface area?',['m','m²','m³','L'],1,'Area is measured in square units.'),
+ makeQ('A cuboid has l = 7 cm, b = 4 cm, h = 3 cm. TSA is:',['84 cm²','122 cm²','146 cm²','168 cm²'],1,'TSA = 2(28 + 12 + 21) = 122 cm².'),
+ makeQ('A cuboid has l = 7 cm, b = 4 cm, h = 3 cm. LSA is:',['22 cm²','42 cm²','66 cm²','84 cm²'],2,'LSA = 2 × 3 × (7 + 4) = 66 cm².'),
+ makeQ('A 1.5 m × 80 cm × 50 cm tank volume is:',['0.06 m³','0.6 m³','6 m³','60 m³'],1,'Convert to metres: 1.5 × 0.8 × 0.5 = 0.6 m³.'),
+ makeQ('A litre is equivalent to:',['10 cm³','100 cm³','1,000 cm³','10,000 cm³'],2,'1 L = 1,000 cm³.'),
+ makeQ('A closed cuboid has l = 4 cm, b = 3 cm, h = 2 cm. TSA is:',['24 cm²','36 cm²','52 cm²','72 cm²'],2,'TSA = 2(12 + 6 + 8) = 52 cm².'),
+ makeQ('If the height of a cuboid doubles and other dimensions stay fixed, volume:',['Halves','Doubles','Triples','Becomes four times'],1,'V = lbh, so doubling h doubles the volume.')
+ ];
+ const updateMensurationRevision=()=>{const l=+$('mrL').value,b=+$('mrB').value,h=+$('mrH').value,task=$('mrTask').value;let value,formula,unit,hint;if(task==='v'){value=l*b*h;formula='V = '+l+' × '+b+' × '+h+' = '+value;unit='cm³';hint='Volume measures interior space.'}else if(task==='lsa'){value=2*h*(l+b);formula='LSA = 2 × '+h+' × ('+l+' + '+b+') = '+value;unit='cm²';hint='Four side faces; top and bottom are excluded.'}else if(task==='tsa'){value=2*(l*b+b*h+h*l);formula='TSA = 2('+l+'×'+b+' + '+b+'×'+h+' + '+h+'×'+l+') = '+value;unit='cm²';hint='All six faces of the closed cuboid.'}else if(task==='floor'){value=l*b;formula='Base area = '+l+' × '+b+' = '+value;unit='cm²';hint='Only the rectangular base is measured.'}else if(task==='cubev'){value=l**3;formula='V = '+l+'³ = '+value;unit='cm³';hint='A cube has equal edges; breadth and height match the edge.'}else{value=6*l*l;formula='TSA = 6 × '+l+'² = '+value;unit='cm²';hint='Six congruent square faces.'}$('mrLL').textContent=l;$('mrBB').textContent=b;$('mrHH').textContent=h;$('mrResult').textContent=value.toLocaleString('en-IN')+' '+unit;$('mrFormula').textContent=formula+' '+unit;$('mrHint').textContent=hint;};
+ ['mrL','mrB','mrH','mrTask'].forEach(id=>$(id).addEventListener('input',updateMensurationRevision));updateMensurationRevision();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration&&!mensurationRevision){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];

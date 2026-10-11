@@ -143,6 +143,17 @@ updateRationalLab();
 }
 
 
+
+else if(concept.toLowerCase()==='comparing rational numbers'){
+ $('heroDescription').textContent='Compare fractions with three easy steps. Learn which number is greater, practise with examples, and try the interactive comparison.';
+ $('heroFormula').innerHTML='\\(\\frac{a}{b}\\;\\square\\;\\frac{c}{d}\\)';
+ $('learn').innerHTML='<h2>1. Three easy rules</h2><div class="callout"><b>Rule 1:</b> A positive number is greater than a negative number.</div><div class="callout"><b>Rule 2:</b> If the denominators are the same, compare the numerators.</div><div class="callout"><b>Rule 3:</b> If denominators differ, make them the same or cross-multiply (for positive denominators).</div><h3>Example: Which is greater, 2/3 or 3/5?</h3><p>Step 1: Multiply across: 2 × 5 = 10 and 3 × 3 = 9.</p><p>Step 2: Compare 10 and 9. Since 10 is greater than 9:</p><div class="formula">\\(\\frac{2}{3}>\\frac{3}{5}\\)</div><p class="muted">For negative fractions, be careful: the number closer to zero is greater.</p>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><b>Example 1: Same denominator</b><p>Compare −3/7 and −5/7.</p><p>Since −3 is greater than −5, \(−3/7 > −5/7\).</p></div><div class="example"><b>Example 2: Different denominators</b><p>Compare 3/4 and 5/8.</p><p>3/4 = 6/8, and 6/8 is greater than 5/8. So 3/4 > 5/8.</p></div><div class="example"><b>Example 3: Opposite signs</b><p>Compare −1/4 and 1/6.</p><p>Any positive rational number is greater than any negative rational number, so 1/6 > −1/4.</p></div>';
+ $('lab').innerHTML='<h2>3. Try it yourself</h2><p class="muted">Choose two fractions and check which is greater.</p><div class="lab"><div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>First numerator<input id="cmpA" type="number" min="-20" max="20" value="2"></label><label>First denominator<input id="cmpB" type="number" min="1" max="20" value="3"></label><label>Second numerator<input id="cmpC" type="number" min="-20" max="20" value="3"></label><label>Second denominator<input id="cmpD" type="number" min="1" max="20" value="5"></label></div><button class="btn" id="cmpCheck" type="button">Compare fractions</button><div class="formula" id="cmpResult" aria-live="polite">2/3 > 3/5</div><p class="muted" id="cmpExplain">Compare the cross-products.</p></div>';
+ const updateCompare=()=>{const a=Number($('cmpA').value),b=Number($('cmpB').value),c=Number($('cmpC').value),d=Number($('cmpD').value);if(![a,b,c,d].every(Number.isFinite)||![b,d].every(v=>Number.isInteger(v)&&v>0)||![a,c].every(Number.isInteger)){ $('cmpResult').textContent='Enter whole-number numerators and positive denominators.';$('cmpExplain').textContent='Denominators must be greater than zero.';return;}const left=a*d,right=c*b;const sign=left>right?'>':left<right?'<':'=';$('cmpResult').textContent=a+'/'+b+' '+sign+' '+c+'/'+d;$('cmpExplain').textContent='Cross-products: '+a+' × '+d+' = '+left+' and '+c+' × '+b+' = '+right+'.';renderMath();};
+ $('cmpCheck').addEventListener('click',updateCompare);updateCompare();
+}
+
 else if(concept.toLowerCase()==='binomial expansion'){
  $('heroDescription').textContent='Expand powers of two-term expressions efficiently. Discover the binomial pattern, predict coefficients, and test expansions with a live explorer.';
  $('heroFormula').innerHTML='\\( (a+b)^n=\\displaystyle\\sum_{r=0}^{n}\\binom nr a^{n-r}b^r \\)';

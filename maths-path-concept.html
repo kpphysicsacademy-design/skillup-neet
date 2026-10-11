@@ -80,6 +80,7 @@
 const $=id=>document.getElementById(id);
 function choose(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v)}
 function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{});}
+function escapeHtml(value){return String(value).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));}
 function makeTriangle(max){let root=$('pascalTriangle');root.innerHTML='';for(let n=0;n<=max;n++){let row=document.createElement('div');row.className='tri-row';for(let r=0;r<=n;r++){let cell=document.createElement('span');cell.className='tri-num';cell.textContent=choose(n,r);row.appendChild(cell)}root.appendChild(row)}}
 function updateLab(){let n=+$('nRange').value;let r=Math.min(+$('rRange').value,n);$('rRange').max=n;$('rRange').value=r;$('nLabel').textContent=n;$('rLabel').textContent=r;let c=choose(n,r);$('labResult').textContent=c;$('labFormula').innerHTML='\\(\\binom{'+n+'}{'+r+'}='+c+'\\)';$('labMeaning').textContent='There are '+c+' ways to select '+r+' item(s) from '+n+'.';let row=$('coefficientRow');row.innerHTML='';for(let k=0;k<=n;k++){let el=document.createElement('span');el.className='tri-num'+(k===r?' focus':'');el.textContent=choose(n,k);row.appendChild(el)}renderMath()}
 let questions=[
@@ -138,6 +139,16 @@ function updateRationalLab(){const a=+$('numA').value, da=+$('denA').value, b=+$
 $('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
 updateRationalLab();
 }
+
+else if(concept.toLowerCase()!=='binomial coefficients'){
+ $('heroDescription').textContent='A focused lesson for '+concept+' is being prepared. This page will not substitute unrelated Binomial Coefficients content.';
+ $('heroFormula').textContent='Learn · Worked examples · Explore · Practice';
+ $('learn').innerHTML='<h2>Lesson content in preparation</h2><p class="muted">The lesson for this concept is not yet connected to a verified content profile.</p><div class="callout"><b>Concept:</b> '+escapeHtml(concept)+'<br> <b>Chapter:</b> '+escapeHtml(chapter)+'<br><br>This placeholder prevents unrelated formulas or explanations from being presented as if they belong to this topic.</div><p>Use the Quiz tab if a concept-specific question bank is available.</p>';
+ $('examples').innerHTML='<h2>Worked examples</h2><p class="muted">Verified worked examples for this concept are not connected yet.</p>';
+ $('lab').innerHTML='<h2>Interactive lab</h2><p class="muted">A concept-specific interactive activity will appear here when it is ready.</p>';
+ document.querySelector('aside').innerHTML='<section class="card"><span class="tag">CONTENT STATUS</span><h3>'+escapeHtml(concept)+'</h3><p class="muted">The route is recognized, but its dedicated Learn content, examples, and lab still need to be added and checked.</p><div class="callout">No unrelated binomial lesson is shown for this concept.</div></section>';
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
 if(bankRows&&bankRows.length){
@@ -147,7 +158,7 @@ if(bankRows&&bankRows.length){
 }else if(!rational&&concept.toLowerCase()!=='binomial coefficients'){
  questions=[];
 }
-if(!rational){makeTriangle(6);updateLab();}renderQuiz();renderMath();
+if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();renderMath();
 if(rational){$('ratLine').dispatchEvent(new Event('input'));renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!=='learn'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();}
 
 })();

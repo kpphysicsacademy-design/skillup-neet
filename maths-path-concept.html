@@ -112,6 +112,7 @@ const volumeWordProblems=/^volume word problems$/.test(concept.toLowerCase());
 const mixedMensuration=/^mixed mensuration practice$/.test(concept.toLowerCase());
 const compositeSolids=/^mensuration\s*[—-]\s*composite solids and combined shapes$|^composite solids and combined shapes$/.test(concept.toLowerCase());
 const unitCapacity=/^mensuration\s*[—-]\s*unit conversion and capacity problems$|^unit conversion and capacity problems$/.test(concept.toLowerCase());
+const realLifeMensuration=/^mensuration\s*[—-]\s*real-life applications and mixed challenge problems$|^real-life applications and mixed challenge problems$/.test(concept.toLowerCase());
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase())||volumeWordProblems;
 const surfaceConcept=/^surface area basics$|^surface area of cube and cuboid$/.test(concept.toLowerCase());
 const advancedSurfaceConcept=/^surface area of cube and cuboid$/.test(concept.toLowerCase());
@@ -774,13 +775,58 @@ if(unitCapacity){
  ['ucL','ucB','ucH'].forEach(id=>$(id).addEventListener('input',updateUnitCapacityLab));updateUnitCapacityLab();
 }
 
+
+if(realLifeMensuration){
+ $('heroDescription').textContent='Bring mensuration together through real-life challenges: water tanks, painting, wrapping, capacity, missing dimensions and multi-step decisions.';
+ $('heroFormula').innerHTML='\\(V=lbh\\qquad \\text{TSA}=2(lb+bh+hl)\\qquad \\text{LSA}=2h(l+b)\\)';
+ $('learn').innerHTML='<h2>1. Learn · Solve the situation, not just the formula</h2><p>Real-life mensuration questions often combine several steps. Identify the object, determine what is being measured, convert units, calculate, then interpret the result.</p><h3>Choose the correct measure</h3><ul><li><b>Water or storage capacity:</b> volume.</li><li><b>Wrapping or painting every outer face:</b> total surface area.</li><li><b>Painting side walls only:</b> lateral surface area.</li><li><b>Cost:</b> area × rate per unit area, or volume × rate per unit volume if stated.</li></ul><div class="formula">\\(V_{\\text{cuboid}}=lbh\\quad \\text{TSA}=2(lb+bh+hl)\\quad \\text{LSA}=2h(l+b)\\)</div><h3>Multi-step strategy</h3><ol><li>Underline the quantity requested.</li><li>Write the known dimensions with units.</li><li>Convert all dimensions to a common unit.</li><li>Choose the formula and calculate.</li><li>Apply rates, capacity conversion or subtraction if needed.</li><li>Check the unit and whether the answer is reasonable.</li></ol><div class="callout"><b>Cost tip:</b> if painting costs ₹r per m² and the area is A m², total cost = ₹r × A. If a face is not painted, do not include it.</div><h3>Useful relationships</h3><div class="formula">\\(1\\text{ m}^3=1000\\text{ L}\\qquad 1\\text{ L}=1000\\text{ cm}^3\\)</div><p>When dimensions of a solid scale by a factor \\(k\\), its volume scales by \\(k^3\\), while surface area scales by \\(k^2\\).</p>';
+ $('examples').innerHTML='<h2>2. Worked real-life challenges</h2><div class="example"><strong>Example A · Water storage</strong><p>A tank is 2 m × 1.5 m × 1.2 m. Find capacity in litres.</p><div class="formula">\\(V=2\\times1.5\\times1.2=3.6\\text{ m}^3=3600\\text{ L}\\)</div></div><div class="example"><strong>Example B · Painting the outside</strong><p>A closed cube has edge 5 m. Painting costs ₹18 per m². Find total cost.</p><div class="formula">\\(\\text{TSA}=6\\times5^2=150\\text{ m}^2\\)</div><div class="formula">\\(\\text{Cost}=150\\times18=₹2700\\)</div></div><div class="example"><strong>Example C · Wallpaper for four walls</strong><p>A rectangular room is 6 m long, 4 m wide and 3 m high. Find the area of its four walls, ignoring doors and windows.</p><div class="formula">\\(\\text{LSA}=2h(l+b)=2\\times3\\times(6+4)=60\\text{ m}^2\\)</div></div><div class="example"><strong>Example D · Missing dimension</strong><p>A storage box has volume 1.2 m³, length 2 m and breadth 0.5 m. Find height.</p><div class="formula">\\(h=\\frac{1.2}{2\\times0.5}=1.2\\text{ m}\\)</div></div><div class="example"><strong>Example E · Compare scaling</strong><p>A cube edge changes from 2 cm to 4 cm. Volume goes from 8 cm³ to 64 cm³ (8 times), while TSA goes from 24 cm² to 96 cm² (4 times).</p></div>';
+ $('lab').innerHTML='<h2>3. Interactive real-life challenge lab</h2><p class="muted">Model a storage tank and calculate volume, capacity and estimated lining area.</p><div class="lab"><label for="rlL">Length (m) <b id="rlLLabel">2</b></label><input id="rlL" type="range" min="1" max="10" step="0.5" value="2"><label for="rlB">Breadth (m) <b id="rlBLabel">1.5</b></label><input id="rlB" type="range" min="0.5" max="5" step="0.5" value="1.5"><label for="rlH">Height (m) <b id="rlHLabel">1.2</b></label><input id="rlH" type="range" min="0.5" max="5" step="0.5" value="1.2"><label for="rlMode">Lining area</label><select id="rlMode"><option value="tsa">All six faces (TSA)</option><option value="lsa">Four walls only (LSA)</option></select></div><div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px"><div class="card"><span class="tag">VOLUME</span><div class="big-result" id="rlVolume">3.6 m³</div></div><div class="card"><span class="tag">CAPACITY</span><div class="big-result" id="rlLitres">3,600 L</div></div><div class="card"><span class="tag">LINING AREA</span><div class="big-result" id="rlArea">18.6 m²</div></div></div><div class="formula" id="rlWorking">V = 2 × 1.5 × 1.2 = 3.6 m³</div><p class="muted">Real tanks may have wall thickness, freeboard and fittings; this model treats the dimensions as internal measurements and assumes a simple cuboid.</p>';
+ $('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Challenge checklist</h3><ol><li>What does the question ask for?</li><li>Volume, TSA or LSA?</li><li>Are units consistent?</li><li>Is there a rate, cost or capacity conversion?</li><li>Does the answer have the correct unit?</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Painting costs calculated from volume.</li><li>Including the ceiling/floor when only walls are asked for.</li><li>Forgetting to convert m³ to litres.</li><li>Scaling volume by k² instead of k³.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('A tank is 2 m × 1.5 m × 1.2 m. Capacity is:',['360 L','1,200 L','3,600 L','36,000 L'],2,'Volume = 3.6 m³ = 3,600 L.'),
+ makeQ('A cube of edge 5 m is painted on all faces at ₹18 per m². Cost is:',['₹270','₹900','₹2,700','₹4,500'],2,'TSA = 150 m²; cost = 150 × 18 = ₹2,700.'),
+ makeQ('A room is 6 m × 4 m × 3 m. Area of four walls is:',['24 m²','48 m²','60 m²','72 m²'],2,'LSA = 2h(l+b) = 2 × 3 × 10 = 60 m².'),
+ makeQ('A box has volume 1.2 m³, length 2 m and breadth 0.5 m. Height is:',['0.6 m','1.2 m','2.4 m','3.7 m'],1,'h = 1.2 ÷ (2 × 0.5) = 1.2 m.'),
+ makeQ('If cube edge doubles, its volume becomes:',['2 times','4 times','6 times','8 times'],3,'Volume scales by 2³ = 8.'),
+ makeQ('If cube edge doubles, its total surface area becomes:',['2 times','4 times','6 times','8 times'],1,'Surface area scales by 2² = 4.'),
+ makeQ('A cuboid is 8 m × 5 m × 2 m. Volume is:',['15 m³','40 m³','80 m³','160 m³'],2,'8 × 5 × 2 = 80 m³.'),
+ makeQ('A closed box is 4 m × 3 m × 2 m. Area to wrap all faces is:',['24 m²','36 m²','52 m²','72 m²'],2,'TSA = 2(12 + 6 + 8) = 52 m².'),
+ makeQ('A tank capacity is 2.5 m³. This equals:',['25 L','250 L','2,500 L','25,000 L'],2,'2.5 × 1,000 = 2,500 L.'),
+ makeQ('A cuboid has volume 600 cm³ and base 10 cm × 6 cm. Height is:',['5 cm','10 cm','12 cm','15 cm'],0,'h = 600 ÷ 60 = 10 cm.'),
+ makeQ('A room is 5 m long, 4 m wide and 3 m high. Painting four walls at ₹20/m² costs:',['₹240','₹600','₹1,080','₹1,200'],3,'Four-wall area = 2 × 3 × (5 + 4) = 54 m²; cost = ₹1,080.'),
+ makeQ('A 60 cm × 40 cm × 25 cm container holds how many litres?',['6 L','24 L','60 L','600 L'],2,'Volume = 60,000 cm³ = 60 L.'),
+ makeQ('Convert 0.75 m³ to litres.',['7.5 L','75 L','750 L','7,500 L'],2,'0.75 × 1,000 = 750 L.'),
+ makeQ('A cuboid is 1.5 m × 80 cm × 50 cm. Volume in m³ is:',['0.06','0.6','6','60'],1,'Convert to metres: 1.5 × 0.8 × 0.5 = 0.6 m³.'),
+ makeQ('A cube edge is 4 cm. Its volume and TSA are:',['64 cm³ and 96 cm²','16 cm³ and 64 cm²','64 cm² and 96 cm³','8 cm³ and 24 cm²'],0,'Volume = 4³ = 64 cm³; TSA = 6 × 16 = 96 cm².'),
+ makeQ('A tank has internal dimensions 3 m × 2 m × 1 m. It is half full. Water volume is:',['1 m³','2 m³','3 m³','6 m³'],2,'Full volume = 6 m³; half full = 3 m³.'),
+ makeQ('A closed cuboid has l = 10 cm, b = 4 cm and h = 3 cm. TSA is:',['80 cm²','124 cm²','164 cm²','240 cm²'],2,'TSA = 2(40 + 12 + 30) = 164 cm².'),
+ makeQ('A cube of edge 3 m is painted at ₹10/m². Cost is:',['₹90','₹180','₹270','₹540'],2,'TSA = 54 m²; cost = 54 × 10 = ₹540.'),
+ makeQ('A 10 × 6 × 4 cm box has volume:',['20 cm³','120 cm³','240 cm³','480 cm³'],2,'10 × 6 × 4 = 240 cm³.'),
+ makeQ('A box volume is 960 cm³, length 12 cm and breadth 8 cm. Height is:',['5 cm','10 cm','12 cm','15 cm'],1,'h = 960 ÷ (12 × 8) = 10 cm.'),
+ makeQ('Four side walls of a 10 m × 8 m room, height 3 m, have area:',['24 m²','54 m²','108 m²','240 m²'],2,'LSA = 2 × 3 × (10 + 8) = 108 m².'),
+ makeQ('A tank holds 12,000 cm³. Its capacity is:',['1.2 L','12 L','120 L','1,200 L'],1,'12,000 ÷ 1,000 = 12 L.'),
+ makeQ('A cuboid’s dimensions are all tripled. Its volume becomes:',['3 times','6 times','9 times','27 times'],3,'Volume scales by 3³ = 27.'),
+ makeQ('A cube edge changes from 2 cm to 6 cm. Volume changes from 8 cm³ to:',['24 cm³','54 cm³','108 cm³','216 cm³'],3,'6³ = 216 cm³.'),
+ makeQ('A closed cube has edge 2 m. Total area to cover is:',['4 m²','8 m²','16 m²','24 m²'],3,'TSA = 6 × 2² = 24 m².'),
+ makeQ('A tank is 2 m × 1 m × 0.5 m. Capacity is:',['100 L','500 L','1,000 L','2,000 L'],1,'Volume = 1 m³ = 1,000 L.'),
+ makeQ('A 5 m × 4 m floor is tiled. Floor area is:',['9 m²','18 m²','20 m²','40 m²'],2,'Floor area = length × breadth = 20 m².'),
+ makeQ('A cuboid is 2 m × 30 cm × 20 cm. Volume in cm³ is:',['12,000','120,000','1,200,000','120'],1,'Convert 2 m to 200 cm: 200 × 30 × 20 = 120,000 cm³.'),
+ makeQ('A cuboid volume is 480 cm³ and base area is 80 cm². Height is:',['4 cm','5 cm','6 cm','8 cm'],2,'Height = 480 ÷ 80 = 6 cm.'),
+ makeQ('A room’s four-wall area is 72 m². Length is 8 m and breadth 4 m. Height is:',['2 m','3 m','4 m','6 m'],1,'72 = 2h(8 + 4) = 24h, so h = 3 m.')
+ ];
+ const updateRealLifeLab=()=>{const l=+$('rlL').value,b=+$('rlB').value,h=+$('rlH').value,v=l*b*h,tsa=2*(l*b+b*h+h*l),lsa=2*h*(l+b),area=$('rlMode').value==='tsa'?tsa:lsa;[['rlL','rlLLabel'],['rlB','rlBLabel'],['rlH','rlHLabel']].forEach(p=>$(p[1]).textContent=$(p[0]).value);$('rlVolume').textContent=v.toLocaleString('en-IN')+' m³';$('rlLitres').textContent=(v*1000).toLocaleString('en-IN')+' L';$('rlArea').textContent=area.toLocaleString('en-IN')+' m²';$('rlWorking').textContent='V = '+l+' × '+b+' × '+h+' = '+v+' m³; selected area = '+area+' m²';};
+ ['rlL','rlB','rlH'].forEach(id=>$(id).addEventListener('input',updateRealLifeLab));$('rlMode').addEventListener('change',updateRealLifeLab);updateRealLifeLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

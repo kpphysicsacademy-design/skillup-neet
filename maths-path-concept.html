@@ -109,6 +109,7 @@ const level=params.get('level')||'CLASS 11 • SENIOR CORE';
 const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';
 const volumeWordProblems=/^volume word problems$/.test(concept.toLowerCase());
+const mixedMensuration=/^mixed mensuration practice$/.test(concept.toLowerCase());
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase())||volumeWordProblems;
 const surfaceConcept=/^surface area basics$|^surface area of cube and cuboid$/.test(concept.toLowerCase());
 const advancedSurfaceConcept=/^surface area of cube and cuboid$/.test(concept.toLowerCase());
@@ -635,13 +636,59 @@ if(volumeWordProblems){
  ];
 }
 
+
+if(mixedMensuration){
+ $('heroDescription').textContent='Master mixed cube and cuboid questions by deciding whether each situation needs volume, total surface area or lateral surface area. Practise unit conversions, costs and missing dimensions.';
+ $('heroFormula').innerHTML='\\(V=lbh\\qquad \\text{TSA}=2(lb+bh+hl)\\qquad \\text{LSA}=2h(l+b)\\)';
+ $('learn').innerHTML='<h2>1. Learn · Choose the right measure</h2><p>Mixed mensuration problems test whether you can identify what the question is asking before using a formula.</p><div class="formula">\\(\\text{Volume}=lbh\\quad(\\text{cubic units})\\)</div><div class="formula">\\(\\text{Cuboid TSA}=2(lb+bh+hl)\\quad(\\text{square units})\\)</div><div class="formula">\\(\\text{Cuboid LSA}=2h(l+b)\\quad(\\text{square units})\\)</div><div class="formula">\\(\\text{Cube volume}=a^3\\qquad \\text{Cube TSA}=6a^2\\)</div><h3>Keyword clues</h3><ul><li><b>Fill, hold, capacity, space inside:</b> volume.</li><li><b>Wrap, paint every face, cover completely:</b> total surface area.</li><li><b>Four side walls only, top and bottom excluded:</b> lateral surface area.</li><li><b>Cost:</b> calculate the relevant area or volume first, then multiply by the rate.</li></ul><div class="callout"><b>Unit check:</b> surface area uses cm² or m²; volume uses cm³ or m³. Before calculating, convert every dimension to the same unit.</div><h3>Missing dimensions</h3><div class="formula">\\(h=\\frac{V}{lb}\\qquad h=\\frac{\\text{TSA}/2-lb}{l+b}\\)</div><p>For a cube, use \\(a=\\sqrt[3]{V}\\) when volume is known, or \\(a=\\sqrt{\\text{TSA}/6}\\) when total surface area is known.</p>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Volume and capacity</strong><p>A tank is 2 m × 1.5 m × 1 m. Find its volume and capacity.</p><div class="formula">\\(V=2\\times1.5\\times1=3\\text{ m}^3=3{,}000\\text{ L}\\)</div></div><div class="example"><strong>Example B · Wrapping a box</strong><p>A closed cuboid is 8 cm × 5 cm × 3 cm. Find the paper area needed to cover every face.</p><div class="formula">\\(\\text{TSA}=2(40+15+24)=158\\text{ cm}^2\\)</div></div><div class="example"><strong>Example C · Four side faces</strong><p>A cuboid has length 10 cm, breadth 4 cm and height 6 cm. Find lateral surface area.</p><div class="formula">\\(\\text{LSA}=2\\times6\\times(10+4)=168\\text{ cm}^2\\)</div></div><div class="example"><strong>Example D · Painting cost</strong><p>A cube of edge 4 m is painted on all faces at ₹12 per m².</p><div class="formula">\\(\\text{TSA}=6\\times4^2=96\\text{ m}^2;\\quad \\text{cost}=96\\times12=₹1{,}152\\)</div></div><div class="example"><strong>Example E · Find a missing height</strong><p>A cuboid has volume 360 cm³ and base 12 cm × 5 cm.</p><div class="formula">\\(h=\\frac{360}{12\\times5}=6\\text{ cm}\\)</div></div>';
+ $('lab').innerHTML='<h2>3. Interactive mensuration lab</h2><p class="muted">Change the dimensions and compare volume with surface area.</p><div class="lab"><label for="mmL">Length / cube edge (cm) <b id="mmLLabel">8</b></label><input id="mmL" type="range" min="1" max="20" value="8"><label for="mmB">Breadth (cm) <b id="mmBLabel">5</b></label><input id="mmB" type="range" min="1" max="20" value="5"><label for="mmH">Height (cm) <b id="mmHLabel">3</b></label><input id="mmH" type="range" min="1" max="20" value="3"></div><div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px"><div class="card"><span class="tag">VOLUME</span><div class="big-result" id="mmVolume">120 cm³</div></div><div class="card"><span class="tag">TOTAL SURFACE AREA</span><div class="big-result" id="mmTsa">158 cm²</div></div><div class="card"><span class="tag">LATERAL AREA</span><div class="big-result" id="mmLsa">78 cm²</div></div></div><div class="formula" id="mmWorking">V = 8 × 5 × 3 = 120 cm³</div><p class="muted">Notice that volume and surface area use different units and answer different questions.</p>';
+ $('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Before you calculate</h3><ol><li>Identify what is being measured.</li><li>Choose the correct formula.</li><li>Make units consistent.</li><li>Substitute dimensions carefully.</li><li>Check square/cubic units and the final context.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Using TSA when only side faces are painted.</li><li>Giving volume in square units.</li><li>Forgetting to multiply by the rate for a cost question.</li><li>Mixing metres and centimetres.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → 30-question Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('A cuboid is 8 cm × 5 cm × 3 cm. What is its volume?',['16 cm³','40 cm³','120 cm³','158 cm³'],2,'Volume = 8 × 5 × 3 = 120 cm³.'),
+ makeQ('A cube has edge 4 cm. Its total surface area is:',['16 cm²','64 cm²','96 cm²','128 cm²'],2,'TSA = 6 × 4² = 96 cm².'),
+ makeQ('Which unit is correct for volume?',['cm','cm²','cm³','m²'],2,'Volume is measured in cubic units.'),
+ makeQ('A cuboid has l = 10 cm, b = 4 cm, h = 6 cm. Its TSA is:',['164 cm²','248 cm²','168 cm²','240 cm²'],0,'TSA = 2(40 + 24 + 60) = 248 cm².'),
+ makeQ('A cuboid has l = 10 cm, b = 4 cm, h = 6 cm. Its LSA is:',['84 cm²','120 cm²','168 cm²','248 cm²'],2,'LSA = 2h(l+b) = 2 × 6 × 14 = 168 cm².'),
+ makeQ('A tank measures 2 m × 1.5 m × 1 m. Its capacity is:',['300 L','1,500 L','3,000 L','30,000 L'],2,'Volume = 3 m³ = 3,000 L.'),
+ makeQ('A cube has volume 216 cm³. Its edge length is:',['4 cm','5 cm','6 cm','8 cm'],2,'Cube root of 216 is 6.'),
+ makeQ('A closed cuboid is 8 cm × 5 cm × 3 cm. Paper to cover every face is:',['120 cm²','158 cm²','94 cm²','240 cm²'],1,'TSA = 2(40 + 15 + 24) = 158 cm².'),
+ makeQ('A cuboid has volume 360 cm³, length 12 cm and breadth 5 cm. Height is:',['4 cm','5 cm','6 cm','8 cm'],2,'h = 360 ÷ (12 × 5) = 6 cm.'),
+ makeQ('A cube of edge 4 m is painted all over. Area painted is:',['16 m²','64 m²','96 m²','128 m²'],2,'TSA = 6 × 4² = 96 m².'),
+ makeQ('At ₹12 per m², painting a cube of edge 4 m on all faces costs:',['₹96','₹576','₹1,152','₹1,536'],2,'Area = 96 m²; cost = 96 × 12 = ₹1,152.'),
+ makeQ('A cuboid is 1 m × 50 cm × 20 cm. Volume in cm³ is:',['1,000','10,000','100,000','1,000,000'],2,'Convert 1 m to 100 cm: 100 × 50 × 20 = 100,000 cm³.'),
+ makeQ('A cuboid has volume 1,200 cm³ and base area 150 cm². Height is:',['6 cm','8 cm','10 cm','12 cm'],1,'Height = volume ÷ base area = 1,200 ÷ 150 = 8 cm.'),
+ makeQ('The area of one face of a cube is 25 cm². Its TSA is:',['30 cm²','75 cm²','125 cm²','150 cm²'],3,'Six equal faces: 6 × 25 = 150 cm².'),
+ makeQ('Which situation requires volume?',['Wrapping a box','Painting the outside','Filling a tank','Covering four side walls'],2,'Filling measures the space inside, so use volume.'),
+ makeQ('Which situation usually requires lateral surface area?',['Filling a cuboid','Wrapping every face','Painting four side walls only','Finding space inside'],2,'LSA covers the four side faces, excluding top and bottom.'),
+ makeQ('A cuboid is 6 cm × 4 cm × 3 cm. Its volume is:',['13 cm³','24 cm³','72 cm³','144 cm³'],2,'V = 6 × 4 × 3 = 72 cm³.'),
+ makeQ('A cuboid is 6 cm × 4 cm × 3 cm. Its TSA is:',['72 cm²','84 cm²','108 cm²','144 cm²'],1,'TSA = 2(24 + 12 + 18) = 108 cm².'),
+ makeQ('If every dimension doubles, volume becomes:',['2 times','4 times','6 times','8 times'],3,'Volume scales by 2³ = 8.'),
+ makeQ('If every edge of a cube doubles, its TSA becomes:',['2 times','4 times','6 times','8 times'],1,'Surface area scales by the square of scale factor: 2² = 4.'),
+ makeQ('A box has TSA 94 cm², length 5 cm and breadth 4 cm. Height is:',['2 cm','3 cm','4 cm','5 cm'],1,'94 = 2(20 + 9h), so 47 = 20 + 9h and h = 3 cm.'),
+ makeQ('A cube has TSA 384 cm². Edge length is:',['4 cm','6 cm','8 cm','16 cm'],2,'6a² = 384, so a² = 64 and a = 8 cm.'),
+ makeQ('A cuboid has l = 9 cm, b = 4 cm, h = 2 cm. Its LSA is:',['26 cm²','36 cm²','52 cm²','72 cm²'],2,'LSA = 2 × 2 × (9 + 4) = 52 cm².'),
+ makeQ('A box has volume 6,000 cm³. Its capacity in litres is:',['0.6 L','6 L','60 L','600 L'],1,'1,000 cm³ = 1 L, so 6,000 cm³ = 6 L.'),
+ makeQ('A cuboid has dimensions 12 cm × 5 cm × 4 cm. Its volume is:',['21 cm³','60 cm³','240 cm³','480 cm³'],2,'V = 12 × 5 × 4 = 240 cm³.'),
+ makeQ('A cube edge is 7 cm. Its total surface area is:',['49 cm²','147 cm²','294 cm²','343 cm²'],2,'TSA = 6 × 49 = 294 cm².'),
+ makeQ('A cuboid is 10 cm × 6 cm × 4 cm. Its TSA is:',['124 cm²','200 cm²','248 cm²','480 cm²'],2,'TSA = 2(60 + 24 + 40) = 248 cm².'),
+ makeQ('A tank is 0.5 m³. Its capacity is:',['50 L','100 L','500 L','5,000 L'],2,'1 m³ = 1,000 L, so 0.5 m³ = 500 L.'),
+ makeQ('A cuboid has volume 480 cm³, length 12 cm and height 8 cm. Breadth is:',['4 cm','5 cm','6 cm','8 cm'],1,'b = 480 ÷ (12 × 8) = 5 cm.'),
+ makeQ('A cube of edge 3 cm has volume and TSA respectively:',['27 cm³ and 54 cm²','9 cm³ and 27 cm²','27 cm² and 54 cm³','18 cm³ and 36 cm²'],0,'Volume = 3³ = 27 cm³; TSA = 6 × 3² = 54 cm².'),
+ makeQ('A cuboid has l = 8 cm, b = 5 cm, h = 3 cm. Its volume and TSA are:',['120 cm³ and 158 cm²','158 cm³ and 120 cm²','120 cm² and 158 cm³','16 cm³ and 94 cm²'],0,'Volume = 120 cm³; TSA = 2(40 + 15 + 24) = 158 cm².')
+ ];
+ const updateMixedLab=()=>{const l=+$('mmL').value,b=+$('mmB').value,h=+$('mmH').value;const v=l*b*h,tsa=2*(l*b+b*h+h*l),lsa=2*h*(l+b);$('mmLLabel').textContent=l;$('mmBLabel').textContent=b;$('mmHLabel').textContent=h;$('mmVolume').textContent=v.toLocaleString('en-IN')+' cm³';$('mmTsa').textContent=tsa.toLocaleString('en-IN')+' cm²';$('mmLsa').textContent=lsa.toLocaleString('en-IN')+' cm²';$('mmWorking').textContent='V = '+l+' × '+b+' × '+h+' = '+v+' cm³';renderMath();};
+ ['mmL','mmB','mmH'].forEach(id=>$(id).addEventListener('input',updateMixedLab));updateMixedLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

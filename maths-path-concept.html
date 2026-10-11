@@ -3789,6 +3789,16 @@ function renderConceptPage(){
   return;
  }
  app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>'+esc(title)+'</h1><p>Learn the concept, then complete 30-question mastery practice.</p></section><section class="card"><h2>STEP 1 • LEARN</h2><div class="lesson">'+lessonHtml()+'</div></section><section class="card"><h2>STEP 2 • MASTERY QUIZ</h2><div id="quiz"></div></section>';
+ if(norm(concept)==="general term"){
+  const quizCard=app.querySelector("#quiz")?.closest(".card");
+  if(quizCard){
+   const labCard=document.createElement("section");labCard.className="card";
+   const heading=document.createElement("h2");heading.textContent="STEP 2 • VIRTUAL LAB";labCard.appendChild(heading);
+   const description=document.createElement("p");description.textContent="Explore binomial coefficients and inspect any selected term interactively.";labCard.appendChild(description);
+   const link=document.createElement("a");link.className="btn";link.href="binomial-expansion-virtual-lab.html";link.textContent="Open Binomial Expansion Virtual Lab ↗";labCard.appendChild(link);
+   quizCard.before(labCard);quizCard.querySelector("h2").textContent="STEP 3 • MASTERY QUIZ";
+  }
+ }
 }
 function startSumOfTermsDemo(){
  if(norm(concept)!=="sum of terms")return;
@@ -7980,7 +7990,7 @@ function initBinomialExpansionLab(){
  const ids=["binomN","binomX","binomY","binomR"],el=id=>document.getElementById(id),put=(id,v)=>{if(el(id))el(id).textContent=v;};
  if(ids.some(id=>!el(id)))return;
  const choose=(n,r)=>{if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v);},fmt=v=>Number.isInteger(v)?String(v):String(Number(v.toFixed(4))),pow=(x,n)=>n===0?1:Math.pow(x,n);
- function update(){const n=+el("binomN").value,x=+el("binomX").value,y=+el("binomY").value;el("binomR").max=n;const r=Math.min(+el("binomR").value,n);el("binomR").value=r;put("binomNOut",n);put("binomXOut",x);put("binomYOut",y);put("binomROut",r);const cs=Array.from({length:n+1},(_,i)=>choose(n,i));el("binomCoeffs").innerHTML=cs.map(v=>'<span class="coeff">'+v+'</span>').join("");let sum=0,parts=[];for(let i=0;i<=n;i++){const co=cs[i]*pow(y,i),xp=n-i;sum+=cs[i]*pow(x,xp)*pow(y,i);if(!co)continue;const body=(Math.abs(co)===1&&xp>0?"":fmt(Math.abs(co)))+(xp===0?"":"x"+(xp===1?"":"^"+xp));parts.push((parts.length?(co<0?" − ":" + "):(co<0?"−":""))+body);}const direct=pow(x+y,n);put("binomExpansion",parts.length?parts.join(""):"0");put("binomDirect",fmt(direct));put("binomSum",fmt(sum));put("binomTermCount",n+1);const co=choose(n,r),xp=n-r;let term=String(co)+(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));if(co===1)term=(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));put("binomPosition",(r+1)+(["st","nd","rd"][r]||"th")+" term");put("binomTerm",term);put("binomTermValue",fmt(co*pow(x,xp)*pow(y,r)));put("binomCheck",Math.abs(direct-sum)<1e-7?"Verified: direct power equals the sum of terms.":"Check the arithmetic.");}
+ function update(){const n=+el("binomN").value,x=+el("binomX").value,y=+el("binomY").value;el("binomR").max=n;const r=Math.min(+el("binomR").value,n);el("binomR").value=r;put("binomNOut",n);put("binomXOut",x);put("binomYOut",y);put("binomROut",r);const cs=Array.from({length:n+1},(_,i)=>choose(n,i));el("binomCoeffs").innerHTML=cs.map(v=>'<span class="coeff">'+v+'</span>').join("");let sum=0,parts=[];for(let i=0;i<=n;i++){const co=cs[i],xp=n-i;sum+=cs[i]*pow(x,xp)*pow(y,i);if(!co)continue;let body=String(co);if(xp>0)body+="x"+(xp===1?"":"^"+xp);if(i>0)body+="y"+(i===1?"":"^"+i);parts.push((parts.length?" + ":"")+body);}const direct=pow(x+y,n);put("binomExpansion",parts.length?parts.join(""):"0");put("binomDirect",fmt(direct));put("binomSum",fmt(sum));put("binomTermCount",n+1);const co=choose(n,r),xp=n-r;let term=String(co)+(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));if(co===1)term=(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));put("binomPosition",(r+1)+(["st","nd","rd"][r]||"th")+" term");put("binomTerm",term);put("binomTermValue",fmt(co*pow(x,xp)*pow(y,r)));put("binomCheck",Math.abs(direct-sum)<1e-7?"Verified: direct power equals the sum of terms.":"Check the arithmetic.");}
  ids.forEach(id=>el(id).addEventListener("input",update));update();
 }
 safeInit("mastery quiz", startQuiz);

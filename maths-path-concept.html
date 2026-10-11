@@ -109,6 +109,7 @@ const level=params.get('level')||'CLASS 11 • SENIOR CORE';
 const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase());
+const surfaceConcept=/^surface area basics$/.test(concept.toLowerCase());
 $('conceptTitle').textContent=concept;
 $('levelPill').textContent=level;
 $('chapterEyebrow').textContent=chapter+' · Concept Studio';
@@ -492,13 +493,70 @@ if(volumeConcept){
  updateVolumeLab();
 }
 
+
+if(surfaceConcept){
+ $('heroDescription').textContent='Learn how to measure the outside of 3D solids. Explore cube and cuboid faces, calculate total surface area, and practise with a step-by-step mastery quiz.';
+ $('heroFormula').innerHTML='\\(\\text{Cube: TSA}=6a^2\\qquad\\text{Cuboid: TSA}=2(lb+bh+hl)\\)';
+ $('learn').innerHTML='<h2>1. Learn · What is surface area?</h2><p><b>Surface area</b> is the total area covering the outside of a three-dimensional solid. It is measured in square units such as cm² or m².</p><div class="formula">\\(\\text{Surface area} = \\text{sum of the areas of all outer faces}\\)</div><h3>Surface area of a cube</h3><p>A cube has six identical square faces. If each edge is \\(a\\), each face has area \\(a^2\\).</p><div class="formula">\\(\\text{TSA}=6a^2\\)</div><div class="callout"><b>Example:</b> for side 4 cm, total surface area is \\(6\\times4^2=96\\text{ cm}^2\\).</div><h3>Surface area of a cuboid</h3><p>A cuboid has three pairs of equal rectangular faces: top/bottom, front/back and left/right.</p><div class="formula">\\(\\text{TSA}=2(lb+bh+hl)\\)</div><p>Here, \\(l\\) is length, \\(b\\) is breadth and \\(h\\) is height.</p><h3>Total vs lateral surface area</h3><div class="formula">\\(\\text{LSA of cuboid}=2h(l+b)\\)</div><p>Lateral surface area counts the four side faces, excluding top and bottom. Total surface area includes all six faces.</p><div class="callout"><b>Units matter:</b> area uses square units (cm²), while volume uses cubic units (cm³). Convert all dimensions to the same unit before calculating.</div>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Cube</strong><p>A cube has side 5 cm. Find its total surface area.</p><div class="formula">\\(\\text{TSA}=6a^2=6\\times5^2=6\\times25=150\\text{ cm}^2\\)</div><p><b>Answer:</b> 150 cm².</p></div><div class="example"><strong>Example B · Cuboid</strong><p>Find the total surface area of a cuboid with length 8 cm, breadth 4 cm and height 3 cm.</p><div class="formula">\\(\\text{TSA}=2(lb+bh+hl)=2(32+12+24)=136\\text{ cm}^2\\)</div><p><b>Answer:</b> 136 cm².</p></div><div class="example"><strong>Example C · Lateral surface area</strong><p>A cuboid is 6 cm long, 2 cm wide and 5 cm high. Find its lateral surface area.</p><div class="formula">\\(\\text{LSA}=2h(l+b)=2\\times5\\times(6+2)=80\\text{ cm}^2\\)</div><p><b>Answer:</b> 80 cm².</p></div><div class="example"><strong>Example D · Find the cube side</strong><p>A cube has total surface area 216 cm². Find its side length.</p><div class="formula">\\(6a^2=216\\Rightarrow a^2=36\\Rightarrow a=6\\text{ cm}\\)</div><p><b>Answer:</b> 6 cm.</p></div>';
+ $('lab').innerHTML='<h2>3. Interactive surface-area lab</h2><p class="muted">Choose a solid and adjust its dimensions to see the surface area update live.</p><div class="lab"><label for="saShape">Solid</label><select id="saShape"><option value="cuboid">Cuboid</option><option value="cube">Cube</option></select><label for="saL">Length / side (cm) <b id="saLLabel">8</b></label><input id="saL" type="range" min="1" max="20" value="8"><div id="saBWrap"><label for="saB">Breadth (cm) <b id="saBLabel">4</b></label><input id="saB" type="range" min="1" max="20" value="4"></div><div id="saHWrap"><label for="saH">Height (cm) <b id="saHLabel">3</b></label><input id="saH" type="range" min="1" max="20" value="3"></div><label for="saMode">Calculate</label><select id="saMode"><option value="total">Total surface area</option><option value="lateral">Lateral surface area (cuboid)</option></select></div><div class="big-result" id="saResult">136 cm²</div><div class="formula" id="saFormula">\\(2(8\\times4+4\\times3+3\\times8)=136\\text{ cm}^2\\)</div><div id="saVisual" class="callout" role="img" aria-label="Surface area dimensions">Cuboid: 8 cm × 4 cm × 3 cm</div><p class="muted" id="saExplanation">Add the areas of all six faces.</p>';
+ document.querySelector('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Remember these formulas</h3><ol><li>Cube TSA: 6a².</li><li>Cuboid TSA: 2(lb + bh + hl).</li><li>Cuboid LSA: 2h(l + b).</li><li>Area is measured in square units.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Using cm³ instead of cm².</li><li>Forgetting the factor 2 in cuboid TSA.</li><li>Confusing lateral and total surface area.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('A cube has side 3 cm. What is its total surface area?',['9 cm²','18 cm²','36 cm²','54 cm²'],2,'TSA = 6a² = 6 × 9 = 54 cm².'),
+ makeQ('Find the total surface area of a cube with side 4 cm.',['16 cm²','64 cm²','96 cm²','128 cm²'],2,'TSA = 6 × 4² = 96 cm².'),
+ makeQ('Which unit is appropriate for surface area?',['cm','cm²','cm³','cm/s'],1,'Surface area is measured in square units such as cm².'),
+ makeQ('A cuboid has l = 5 cm, b = 3 cm, h = 2 cm. Find TSA.',['31 cm²','62 cm²','30 cm²','60 cm²'],1,'TSA = 2(15 + 6 + 10) = 62 cm².'),
+ makeQ('What is the total surface area formula for a cuboid?',['lbh','2(lb+bh+hl)','2(l+b+h)','lb+bh+hl'],1,'There are two faces for each of the three pair areas.'),
+ makeQ('A cube has side 10 cm. Its total surface area is:',['100 cm²','400 cm²','600 cm²','1,000 cm²'],2,'6 × 10² = 600 cm².'),
+ makeQ('A cuboid is 7 cm × 4 cm × 3 cm. Its TSA is:',['84 cm²','122 cm²','122 cm³','42 cm²'],1,'TSA = 2(28 + 12 + 21) = 122 cm².'),
+ makeQ('The lateral surface area of a cuboid excludes which faces?',['All side faces','Top and bottom','Front and back only','No faces'],1,'Lateral surface area excludes the top and bottom faces.'),
+ makeQ('A cube has TSA 150 cm². What is its side?',['4 cm','5 cm','6 cm','25 cm'],1,'6a² = 150, so a² = 25 and a = 5 cm.'),
+ makeQ('Find the lateral surface area of a cuboid with l = 6, b = 2, h = 5 cm.',['40 cm²','60 cm²','80 cm²','100 cm²'],2,'LSA = 2h(l+b) = 10 × 8 = 80 cm².'),
+ makeQ('A square face has side 8 cm. Its area is:',['16 cm²','32 cm²','64 cm²','256 cm²'],2,'Area of a square = side² = 8² = 64 cm².'),
+ makeQ('How many faces does a cube have?',['4','6','8','12'],1,'A cube has six equal square faces.'),
+ makeQ('A cuboid has l = 10 cm, b = 5 cm and h = 2 cm. TSA is:',['100 cm²','160 cm²','200 cm²','170 cm²'],1,'TSA = 2(50 + 10 + 20) = 160 cm².'),
+ makeQ('If the side of a cube doubles, its surface area becomes:',['2 times','4 times','6 times','8 times'],1,'Surface area depends on a², so doubling side multiplies area by 4.'),
+ makeQ('A cube has side 6 cm. Its TSA is:',['36 cm²','72 cm²','216 cm²','256 cm²'],2,'6 × 6² = 216 cm².'),
+ makeQ('Which is the lateral surface area formula for a cuboid?',['2(lb+bh+hl)','2h(l+b)','lbh','6a²'],1,'LSA = perimeter of base × height = 2(l+b)h.'),
+ makeQ('A cube has TSA 96 cm². Its side length is:',['2 cm','4 cm','8 cm','16 cm'],1,'6a² = 96, so a² = 16 and a = 4 cm.'),
+ makeQ('What is the area of a rectangle 9 cm by 4 cm?',['13 cm²','26 cm²','36 cm²','72 cm²'],2,'Rectangle area = length × breadth = 9 × 4 = 36 cm².'),
+ makeQ('A cuboid measures 4 cm × 3 cm × 2 cm. Its TSA is:',['24 cm²','36 cm²','52 cm²','48 cm²'],2,'TSA = 2(12 + 6 + 8) = 52 cm².'),
+ makeQ('Surface area measures:',['Space inside a solid','Outer covering area','Mass of an object','Distance around a circle'],1,'Surface area is the area covering the outside of a solid.'),
+ makeQ('A cube side is 2.5 cm. TSA is:',['6.25 cm²','15 cm²','37.5 cm²','25 cm²'],2,'TSA = 6 × 2.5² = 6 × 6.25 = 37.5 cm².'),
+ makeQ('A cuboid has l = 8, b = 6, h = 4 cm. TSA is:',['96 cm²','192 cm²','208 cm²','240 cm²'],2,'TSA = 2(48 + 24 + 32) = 208 cm².'),
+ makeQ('If all dimensions of a cuboid are doubled, its surface area becomes:',['2 times','4 times','6 times','8 times'],1,'Every face dimension doubles in both directions, so each face area becomes 4 times.'),
+ makeQ('A cube has side 7 cm. Area of one face is:',['14 cm²','28 cm²','49 cm²','343 cm²'],2,'One face is a square: 7² = 49 cm².'),
+ makeQ('A cuboid has TSA 94 cm², l = 5 cm, b = 4 cm. Find h.',['2 cm','3 cm','4 cm','5 cm'],1,'94 = 2(20 + 4h + 5h); 47 = 20 + 9h, so h = 3 cm.'),
+ makeQ('A cube has 6 faces, each with area 25 cm². TSA is:',['31 cm²','125 cm²','150 cm²','625 cm²'],2,'Total surface area = 6 × 25 = 150 cm².'),
+ makeQ('A cuboid’s length and breadth are 8 cm and 3 cm. Height is 5 cm. LSA is:',['55 cm²','80 cm²','110 cm²','120 cm²'],2,'LSA = 2 × 5 × (8 + 3) = 110 cm².'),
+ makeQ('Which quantity is measured in cm³?',['Surface area','Area of a face','Volume','Perimeter'],2,'Cubic units measure volume, not surface area.'),
+ makeQ('A cube side changes from 2 cm to 4 cm. TSA changes from:',['24 to 48 cm²','24 to 96 cm²','8 to 64 cm²','12 to 24 cm²'],1,'For side 2, TSA = 24; for side 4, TSA = 96 cm².'),
+ makeQ('A cuboid is 12 cm × 5 cm × 2 cm. Total surface area is:',['120 cm²','148 cm²','180 cm²','240 cm²'],1,'TSA = 2(60 + 10 + 24) = 188 cm².')
+ ];
+ const updateSurfaceLab=()=>{
+  const shape=$('saShape').value,L=Number($('saL').value),B=Number($('saB').value),H=Number($('saH').value),cube=shape==='cube',mode=$('saMode').value;
+  $('saLLabel').textContent=L;$('saBLabel').textContent=B;$('saHLabel').textContent=H;
+  $('saBWrap').style.display=cube?'none':'block';$('saHWrap').style.display=cube?'none':'block';
+  $('saMode').disabled=cube;
+  const v=cube?6*L*L:(mode==='lateral'?2*H*(L+B):2*(L*B+B*H+H*L));
+  $('saResult').textContent=v.toLocaleString('en-IN')+' cm²';
+  $('saFormula').innerHTML=cube?'\\(\\text{TSA}=6\\times'+L+'^2='+v+'\\text{ cm}^2\\)':mode==='lateral'?'\\(\\text{LSA}=2\\times'+H+'\\times('+L+'+'+B+')='+v+'\\text{ cm}^2\\)':'\\(\\text{TSA}=2('+L+'\\times'+B+'+'+B+'\\times'+H+'+'+H+'\\times'+L+')='+v+'\\text{ cm}^2\\)';
+  $('saVisual').textContent=cube?'Cube: '+L+' cm per edge':'Cuboid: '+L+' cm × '+B+' cm × '+H+' cm';
+  $('saExplanation').textContent=cube?'Multiply the area of one square face by six.':mode==='lateral'?'Add length and breadth, then multiply by twice the height.':'Add the three different face areas and multiply their sum by two.';
+  renderMath();
+ };
+ ['saShape','saL','saB','saH','saMode'].forEach(id=>$(id).addEventListener(id==='saShape'||id==='saMode'?'change':'input',updateSurfaceLab));
+ updateSurfaceLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

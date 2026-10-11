@@ -24,7 +24,7 @@
 ["A 20 N force acts at 120° measured anticlockwise from +x-axis. Its x-component is:",["+10 N","−10 N","+10√3 N","−10√3 N"],1,"Fₓ = 20 cos 120° = 20(−1/2) = −10 N."],
 ["A 20 N force acts at 150° measured anticlockwise from +x-axis. Its y-component is:",["+10 N","−10 N","+10√3 N","−10√3 N"],0,"Fᵧ = 20 sin 150° = 20(1/2) = +10 N."],
 ["A vector has components (−3, 4). Its magnitude is:",["1","5","7","12"],1,"A = √((−3)² + 4²) = √25 = 5."],
-["A vector has components (−5, −12). Its magnitude is:",["7","13","17","60"],1,"A = √(25 + 144) = √169 = 13."],
+
 ["Two vectors have x-components +4 N and −7 N. The x-component of their resultant is:",["+11 N","+3 N","−3 N","−11 N"],2,"Resultant components add algebraically: Rₓ = 4 + (−7) = −3 N."],
 ["Vector A has components (2, 5) and vector B has components (3, −1). The resultant A + B is:",["(5, 4)","(−1, 6)","(6, 5)","(1, 4)"],0,"Add corresponding components: R = (2 + 3, 5 − 1) = (5, 4)."],
 ["For perpendicular components Aₓ and Aᵧ, which relation gives the vector magnitude A?",["A = Aₓ + Aᵧ for all directions","A² = Aₓ² + Aᵧ²","A² = Aₓ² − Aᵧ²","A = AₓAᵧ"],1,"Perpendicular components form a right triangle, so A² = Aₓ² + Aᵧ²."],

@@ -3784,6 +3784,14 @@ ${sample?`<h3>Concept check from this topic</h3><p><b>${quizMath(sample[0])}</b>
 </div>`;
 }
 function renderConceptPage(){
+ if(norm(concept)==="general term"){
+  app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>General Term of a Binomial Expansion</h1><p>Explore how the term number, combination index, powers, and coefficient connect — all in one interactive lesson.</p><div class="concept-image" style="padding:14px"><div style="display:flex;gap:8px;align-items:center;justify-content:space-around;flex-wrap:wrap"><div class="stat"><span class="muted">Index</span><strong>r = 0…n</strong></div><div class="stat"><span class="muted">Term position</span><strong>r + 1</strong></div><div class="stat"><span class="muted">Coefficient</span><strong>ⁿCᵣ</strong></div></div></div></section>'+
+  '<section class="card"><h2>STEP 1 • LEARN THE PATTERN</h2><div class="lesson"><p>For the expansion of (a + b)<sup>n</sup>, the general term is the formula that gives any chosen term without expanding everything.</p><div class="formula">T<sub>r+1</sub> = ⁿCᵣ a<sup>n−r</sup>b<sup>r</sup></div><ul><li><b>n</b> is the power of the binomial.</li><li><b>r</b> is the combination index and ranges from 0 to n.</li><li><b>r + 1</b> is the actual term position. The first term uses r = 0.</li><li>The exponent of a decreases from n to 0; the exponent of b increases from 0 to n.</li><li>If the binomial is (a − b)<sup>n</sup>, use −b in the formula to account for signs.</li></ul></div></section>'+
+  '<section class="card"><h2>STEP 2 • INTERACTIVE TERM EXPLORER</h2><p class="muted">Adjust the power, term index, and values of a and b. The selected term is recalculated instantly.</p><div class="controls"><label for="gtN">Power n: <b id="gtNOut">5</b></label><input id="gtN" type="range" min="1" max="12" value="5"></div><div class="controls"><label for="gtR">Index r: <b id="gtROut">2</b></label><input id="gtR" type="range" min="0" max="5" value="2"></div><div class="controls"><label for="gtA">a value: <b id="gtAOut">2</b></label><input id="gtA" type="range" min="-3" max="3" value="2"></div><div class="controls"><label for="gtB">b value: <b id="gtBOut">1</b></label><input id="gtB" type="range" min="-3" max="3" value="1"></div><div class="formula" id="gtFormula">T₃ = ⁵C₂ a³b²</div><div class="grid"><div class="stat"><span class="muted">Term position</span><strong id="gtPosition">3rd term</strong></div><div class="stat"><span class="muted">Combination coefficient</span><strong id="gtCoefficient">10</strong></div><div class="stat"><span class="muted">Powers (a, b)</span><strong id="gtPowers">3, 2</strong></div><div class="stat"><span class="muted">Selected term value</span><strong id="gtValue">80</strong></div></div><p id="gtCheck" class="muted" aria-live="polite"></p></section>'+
+  '<section class="card"><h2>STEP 3 • WORKED EXAMPLES</h2><div class="lesson"><h3>Example A: Find the fourth term of (x + 2y)<sup>6</sup></h3><p>Fourth term means r + 1 = 4, so r = 3.</p><div class="formula">T₄ = ⁶C₃ x³(2y)³ = 20 × 8x³y³ = <b>160x³y³</b></div><h3>Example B: Find the coefficient of x² in (x + 3)<sup>5</sup></h3><p>For x², the power of x is n − r = 2, so r = 3.</p><div class="formula">⁵C₃ × 3³ = 10 × 27 = <b>270</b></div><h3>Example C: Signs in (x − 2)<sup>4</sup></h3><p>Use b = −2. The third term uses r = 2:</p><div class="formula">T₃ = ⁴C₂ x²(−2)² = <b>24x²</b></div></div></section>'+
+  '<section class="card"><h2>STEP 4 • MASTERY QUIZ</h2><div id="quiz"></div></section>';
+  return;
+ }
  if(norm(concept)==="binomial expansion"){
   app.innerHTML='<section class="card hero"><div class="kicker">'+esc(header)+' • '+esc(chapterText)+'</div><h1>'+esc(title)+'</h1><p>Learn the theorem, experiment with coefficients and terms, and practise in one interactive concept page.</p></section>'+
   '<section class="card"><h2>STEP 1 • LEARN</h2><div class="lesson geometry-lesson"><p>For a non-negative integer n, the binomial theorem expands a sum of two terms raised to the power n. It produces n + 1 terms.</p><div class="formula">(x + y)<sup>n</sup> = Σ<sub>r=0</sub><sup>n</sup> ⁿCᵣ x<sup>n−r</sup>y<sup>r</sup></div><h3>General term</h3><div class="formula">T<sub>r+1</sub> = ⁿCᵣ x<sup>n−r</sup>y<sup>r</sup></div><div class="grid"><div class="stat"><strong>Number of terms</strong>n + 1</div><div class="stat"><strong>First term</strong>x<sup>n</sup></div><div class="stat"><strong>Last term</strong>y<sup>n</sup></div></div><ul><li>n is the power and r runs from 0 to n.</li><li>The term number is r + 1, because the index starts at zero.</li><li>The power of x decreases while the power of y increases.</li><li>For (x − y)<sup>n</sup>, substitute −y; signs alternate.</li></ul><div class="checks"><b>Common mistakes:</b> confusing r with the term number, forgetting powers, and losing negative signs.</div></div></section>'+
@@ -7980,6 +7988,31 @@ function initCartesianProductVirtualLab(){
  aEl.addEventListener("change",update);bEl.addEventListener("change",update);update();
 }
 safeInit("Cartesian product virtual learn lab", initCartesianProductVirtualLab);
+function initGeneralTermExplorer(){
+ if(norm(concept)!=="general term")return;
+ const ids=["gtN","gtR","gtA","gtB"],el=id=>document.getElementById(id),put=(id,v)=>{if(el(id))el(id).textContent=v;};
+ if(ids.some(id=>!el(id)))return;
+ const choose=(n,r)=>{if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v);};
+ const fmt=v=>Number.isInteger(v)?String(v):String(Number(v.toFixed(4)));
+ function update(){
+  const n=+el("gtN").value,a=+el("gtA").value,b=+el("gtB").value;
+  el("gtR").max=n;
+  const r=Math.min(+el("gtR").value,n);el("gtR").value=r;
+  const c=choose(n,r),ap=n-r,bp=r;
+  const ord=["st","nd","rd"][r]||"th";
+  const aTerm=ap===0?"":(ap===1?"a":"a^"+ap);
+  const bTerm=bp===0?"":(bp===1?"b":"b^"+bp);
+  const variables=[aTerm,bTerm].filter(Boolean).join("");
+  let formula="T"+(r+1)+" = "+n+"C"+r+" · "+(c===1?(variables||"1"):c+(variables||""));
+  if(!variables&&c===1)formula="T"+(r+1)+" = "+n+"C"+r+" = 1";
+  put("gtNOut",n);put("gtROut",r);put("gtAOut",a);put("gtBOut",b);
+  put("gtFormula",formula);put("gtPosition",(r+1)+ord+" term");
+  put("gtCoefficient",c);put("gtPowers",ap+", "+bp);
+  put("gtValue",fmt(c*Math.pow(a,ap)*Math.pow(b,bp)));
+  put("gtCheck","Verified: term position = r + 1 = "+(r+1)+", and the exponents add to n ("+ap+" + "+bp+" = "+n+").");
+ }
+ ids.forEach(id=>el(id).addEventListener("input",update));update();
+}
 function initBinomialExpansionLab(){
  if(norm(concept)!=="binomial expansion")return;
  const ids=["binomN","binomX","binomY","binomR"],el=id=>document.getElementById(id),put=(id,v)=>{if(el(id))el(id).textContent=v;};
@@ -7988,6 +8021,7 @@ function initBinomialExpansionLab(){
  function update(){const n=+el("binomN").value,x=+el("binomX").value,y=+el("binomY").value;el("binomR").max=n;const r=Math.min(+el("binomR").value,n);el("binomR").value=r;put("binomNOut",n);put("binomXOut",x);put("binomYOut",y);put("binomROut",r);const cs=Array.from({length:n+1},(_,i)=>choose(n,i));el("binomCoeffs").innerHTML=cs.map(v=>'<span class="coeff">'+v+'</span>').join("");let sum=0,parts=[];for(let i=0;i<=n;i++){const term=cs[i]*pow(x,n-i)*pow(y,i);sum+=term;if(Math.abs(term)<1e-12)continue;parts.push((parts.length?(term<0?" − ":" + "):(term<0?"−":""))+fmt(Math.abs(term)));}const direct=pow(x+y,n);put("binomExpansion",parts.length?parts.join(""):"0");put("binomDirect",fmt(direct));put("binomSum",fmt(sum));put("binomTermCount",n+1);const co=choose(n,r),xp=n-r;let term=String(co)+(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));if(co===1)term=(xp===0?"":"x"+(xp===1?"":"^"+xp))+(r===0?"":"y"+(r===1?"":"^"+r));put("binomPosition",(r+1)+(["st","nd","rd"][r]||"th")+" term");put("binomTerm",term);put("binomTermValue",fmt(co*pow(x,xp)*pow(y,r)));put("binomCheck",Math.abs(direct-sum)<1e-7?"Verified: direct power equals the sum of terms.":"Check the arithmetic.");if(el("binomPascal")){el("binomPascal").innerHTML=Array.from({length:n+1},(_,row)=>'<div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;width:100%;margin:4px 0">'+Array.from({length:row+1},(_,col)=>'<span class="coeff">'+choose(row,col)+'</span>').join("")+'</div>').join("");}}
  ids.forEach(id=>el(id).addEventListener("input",update));update();
 }
+safeInit("general term interactive explorer",initGeneralTermExplorer);
 safeInit("mastery quiz", startQuiz);
 safeInit("binomial expansion virtual lab",initBinomialExpansionLab);
 safeInit("Applications of Similarity virtual skills", initApplicationsSimilarityLab);

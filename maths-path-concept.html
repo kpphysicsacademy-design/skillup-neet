@@ -108,6 +108,7 @@ const concept=(params.get('concept')||'Binomial Coefficients').trim();
 const level=params.get('level')||'CLASS 11 • SENIOR CORE';
 const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';
+const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase());
 $('conceptTitle').textContent=concept;
 $('levelPill').textContent=level;
 $('chapterEyebrow').textContent=chapter+' · Concept Studio';
@@ -435,13 +436,69 @@ else if(concept.toLowerCase()!=='binomial coefficients'){
  document.querySelector('aside').innerHTML='<section class="card"><span class="tag">CONTENT STATUS</span><h3>'+escapeHtml(concept)+'</h3><p class="muted">The route is recognized, but its dedicated Learn content, examples, and lab still need to be added and checked.</p><div class="callout">No unrelated binomial lesson is shown for this concept.</div></section>';
 }
 
+
+if(volumeConcept){
+ $('heroDescription').textContent='Understand how much space a solid occupies. Explore cubes and cuboids, change dimensions in the virtual lab, and practise with a step-by-step mastery quiz.';
+ $('heroFormula').innerHTML='\\(V_{\\text{cube}}=a^3\\qquad V_{\\text{cuboid}}=l\\times b\\times h\\)';
+ $('learn').innerHTML='<h2>1. Learn · What is volume?</h2><p><b>Volume</b> measures the space occupied by a 3D object. It is measured in cubic units such as cm³ or m³.</p><div class="formula">\\(\\text{Cube: }V=a^3\\qquad\\text{Cuboid: }V=lbh\\)</div><div class="callout"><b>Remember:</b> use the same unit for every dimension before multiplying. If each dimension is in centimetres, the answer is in cm³.</div><h3>Cube</h3><p>A cube has six equal square faces, so length, breadth and height are all equal to side length \\(a\\).</p><div class="formula">\\(V=a\\times a\\times a=a^3\\)</div><h3>Cuboid</h3><p>A cuboid has length \\(l\\), breadth \\(b\\), and height \\(h\\), which may all be different.</p><div class="formula">\\(V=l\\times b\\times h\\)</div><h3>Volume versus surface area</h3><p>Volume measures the space <i>inside</i> a solid and uses cubic units. Surface area measures the total area of its outer faces and uses square units.</p><div class="callout"><b>Quick check:</b> A box 4 cm long, 3 cm wide and 2 cm high holds \\(4\\times3\\times2=24\\text{ cm}^3\\).</div>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Volume of a cube</strong><p>A cube has side 5 cm. Find its volume.</p><div class="formula">\\(V=a^3=5^3=5\\times5\\times5=125\\text{ cm}^3\\)</div><p><b>Answer:</b> 125 cm³.</p></div><div class="example"><strong>Example B · Volume of a cuboid</strong><p>Find the volume when length = 8 cm, breadth = 4 cm and height = 3 cm.</p><div class="formula">\\(V=lbh=8\\times4\\times3=96\\text{ cm}^3\\)</div><p><b>Answer:</b> 96 cm³.</p></div><div class="example"><strong>Example C · Find a missing dimension</strong><p>A cuboid has volume 120 cm³, length 10 cm and breadth 4 cm. Find its height.</p><div class="formula">\\(h=\\frac{V}{lb}=\\frac{120}{10\\times4}=3\\text{ cm}\\)</div><p><b>Answer:</b> 3 cm.</p></div><div class="example"><strong>Example D · Convert units first</strong><p>A cuboid measures 1 m × 30 cm × 20 cm. Convert 1 m to 100 cm first.</p><div class="formula">\\(V=100\\times30\\times20=60{,}000\\text{ cm}^3\\)</div><p><b>Answer:</b> 60,000 cm³. Never multiply dimensions expressed in mixed units.</p></div>';
+ $('lab').innerHTML='<h2>3. Interactive virtual lab</h2><p class="muted">Choose a solid and change its dimensions. The result updates immediately.</p><div class="lab"><label for="volShape">Solid</label><select id="volShape"><option value="cuboid">Cuboid</option><option value="cube">Cube</option></select><label for="volL">Length / side (cm) <b id="volLLabel">8</b></label><input id="volL" type="range" min="1" max="20" value="8"><div id="volBWrap"><label for="volB">Breadth (cm) <b id="volBLabel">4</b></label><input id="volB" type="range" min="1" max="20" value="4"></div><div id="volHWrap"><label for="volH">Height (cm) <b id="volHLabel">3</b></label><input id="volH" type="range" min="1" max="20" value="3"></div></div><div class="big-result" id="volResult">96 cm³</div><div class="formula" id="volFormula">\\(V=8\\times4\\times3=96\\text{ cm}^3\\)</div><div id="volVisual" class="callout" role="img" aria-label="Volume dimensions">Cuboid: 8 cm × 4 cm × 3 cm</div><p class="muted" id="volExplanation">Multiply length, breadth and height.</p>';
+ document.querySelector('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Remember these rules</h3><ol><li>Cube: side × side × side.</li><li>Cuboid: length × breadth × height.</li><li>Use cubic units (cm³, m³).</li><li>Convert mixed units before calculating.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Writing cm² instead of cm³ for volume.</li><li>Using the surface-area formula instead of volume.</li><li>Multiplying measurements in different units without conversion.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('A cube has side 3 cm. What is its volume?',['9 cm³','18 cm³','27 cm³','36 cm³'],2,'V = a³ = 3³ = 27 cm³.'),
+ makeQ('Find the volume of a cuboid measuring 5 cm × 4 cm × 2 cm.',['11 cm³','20 cm³','40 cm³','80 cm³'],2,'V = l × b × h = 5 × 4 × 2 = 40 cm³.'),
+ makeQ('Which unit is appropriate for volume?',['cm','cm²','cm³','cm/s'],2,'Volume is measured in cubic units such as cm³.'),
+ makeQ('A cube has side 6 m. Find its volume.',['36 m³','108 m³','216 m³','256 m³'],2,'6³ = 6 × 6 × 6 = 216 m³.'),
+ makeQ('A cuboid has l = 7 cm, b = 3 cm and h = 4 cm. Its volume is:',['14 cm³','42 cm³','84 cm³','98 cm³'],2,'7 × 3 × 4 = 84 cm³.'),
+ makeQ('What is the volume of a cube with side 1 cm?',['1 cm³','3 cm³','6 cm³','9 cm³'],0,'1³ = 1 cm³.'),
+ makeQ('A cuboid is 10 cm long, 2 cm wide and 5 cm high. Find its volume.',['17 cm³','50 cm³','100 cm³','200 cm³'],2,'10 × 2 × 5 = 100 cm³.'),
+ makeQ('If the side of a cube doubles, its volume becomes:',['2 times','4 times','6 times','8 times'],3,'(2a)³ = 8a³, so the volume becomes eight times.'),
+ makeQ('A cuboid has volume 60 cm³, l = 5 cm and b = 4 cm. Height is:',['2 cm','3 cm','4 cm','5 cm'],1,'h = V ÷ (l × b) = 60 ÷ 20 = 3 cm.'),
+ makeQ('Which formula gives the volume of a cuboid?',['l + b + h','2(lb + bh + hl)','l × b × h','l × b'],2,'Multiply length, breadth and height.'),
+ makeQ('A cube has volume 64 cm³. Its side length is:',['4 cm','8 cm','16 cm','32 cm'],0,'The cube root of 64 is 4 because 4³ = 64.'),
+ makeQ('Convert 1 m to centimetres before calculating volume.',['10 cm','100 cm','1,000 cm','10,000 cm'],1,'1 metre equals 100 centimetres.'),
+ makeQ('A box is 1 m × 20 cm × 10 cm. Its volume in cm³ is:',['200 cm³','2,000 cm³','20,000 cm³','200,000 cm³'],2,'Convert 1 m to 100 cm: 100 × 20 × 10 = 20,000 cm³.'),
+ makeQ('A cuboid has dimensions 9 cm, 2 cm and 3 cm. Volume is:',['14 cm³','27 cm³','54 cm³','81 cm³'],2,'9 × 2 × 3 = 54 cm³.'),
+ makeQ('A cube side is 4 cm. How many 1 cm³ unit cubes fill it?',['12','16','32','64'],3,'Its volume is 4³ = 64 cm³, so 64 unit cubes fit.'),
+ makeQ('Which statement is true?',['Volume uses square units','Surface area uses cubic units','Volume measures space inside a solid','Volume and surface area are identical'],2,'Volume measures the space occupied by a solid.'),
+ makeQ('A cuboid volume is 120 cm³. If l = 6 cm and h = 5 cm, breadth is:',['2 cm','3 cm','4 cm','5 cm'],2,'b = 120 ÷ (6 × 5) = 4 cm.'),
+ makeQ('What is 2 × 3 × 4?',['9','12','18','24'],3,'2 × 3 × 4 = 24.'),
+ makeQ('A cube has side 10 cm. Volume is:',['100 cm³','300 cm³','1,000 cm³','10,000 cm³'],2,'10³ = 1,000 cm³.'),
+ makeQ('A cuboid’s dimensions are all measured in metres. Its volume unit is:',['m','m²','m³','cm³'],2,'Multiplying three metre measurements gives cubic metres.'),
+ makeQ('A cube has volume 125 cm³. Find its side.',['3 cm','4 cm','5 cm','25 cm'],2,'5³ = 125, so the side is 5 cm.'),
+ makeQ('A cuboid is 12 cm × 5 cm × 2 cm. Its volume is:',['19 cm³','60 cm³','120 cm³','240 cm³'],2,'12 × 5 × 2 = 120 cm³.'),
+ makeQ('If a cuboid’s height triples while l and b stay fixed, volume:',['stays the same','doubles','triples','becomes nine times'],2,'V = lbh, so tripling h triples the product.'),
+ makeQ('A cube side is 2.5 cm. Its volume is:',['6.25 cm³','12.5 cm³','15.625 cm³','25 cm³'],2,'2.5³ = 15.625 cm³.'),
+ makeQ('A cuboid has V = 96 cm³, l = 8 cm, b = 4 cm. Height is:',['2 cm','3 cm','4 cm','6 cm'],1,'h = 96 ÷ (8 × 4) = 3 cm.'),
+ makeQ('Which has the greater volume: a cube with side 3 cm or cuboid 4 × 2 × 3 cm?',['Cube','Cuboid','They are equal','Cannot be found'],0,'Cube: 27 cm³. Cuboid: 24 cm³.'),
+ makeQ('A tank measures 2 m × 1 m × 1 m. Its volume is:',['2 m³','3 m³','4 m³','5 m³'],0,'2 × 1 × 1 = 2 m³.'),
+ makeQ('A cuboid has volume 150 cm³. l = 10 cm and b = 5 cm. Find h.',['2 cm','3 cm','5 cm','10 cm'],1,'h = 150 ÷ (10 × 5) = 3 cm.'),
+ makeQ('A cube side changes from 2 cm to 4 cm. The volume changes from:',['8 to 16 cm³','8 to 32 cm³','8 to 64 cm³','4 to 16 cm³'],2,'2³ = 8 and 4³ = 64 cm³.'),
+ makeQ('A cuboid has dimensions 0.5 m × 0.2 m × 0.1 m. Volume is:',['0.01 m³','0.1 m³','1 m³','10 m³'],0,'0.5 × 0.2 × 0.1 = 0.01 m³.')
+ ];
+ const updateVolumeLab=()=>{
+  const shape=$('volShape').value,L=Number($('volL').value),B=Number($('volB').value),H=Number($('volH').value),cube=shape==='cube';
+  $('volLLabel').textContent=L;$('volBLabel').textContent=B;$('volHLabel').textContent=H;
+  $('volBWrap').style.display=cube?'none':'block';$('volHWrap').style.display=cube?'none':'block';
+  const v=cube?L**3:L*B*H;
+  $('volResult').textContent=v.toLocaleString('en-IN')+' cm³';
+  $('volFormula').innerHTML=cube?'\\(V='+L+'^3='+v+'\\text{ cm}^3\\)':'\\(V='+L+'\\times'+B+'\\times'+H+'='+v+'\\text{ cm}^3\\)';
+  $('volVisual').textContent=cube?'Cube: '+L+' cm × '+L+' cm × '+L+' cm':'Cuboid: '+L+' cm × '+B+' cm × '+H+' cm';
+  $('volExplanation').textContent=cube?'Multiply the side length three times.':'Multiply length × breadth × height.';
+  renderMath();
+ };
+ ['volShape','volL','volB','volH'].forEach(id=>$(id).addEventListener(id==='volShape'?'change':'input',updateVolumeLab));
+ updateVolumeLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
 if(bankRows&&bankRows.length){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

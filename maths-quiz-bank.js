@@ -7971,10 +7971,10 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "21 cm²",
         "24 cm²",
         "28 cm²",
-        "35 cm²"
+        "32 cm²"
       ],
-      2,
-      "New dimensions are 8 cm and 4 cm, so area = 32 cm²."
+      3,
+      "New dimensions are 8 cm and 4 cm, so area = 8 × 4 = 32 cm²."
     ],
     [
       "A triangle has base 12 cm and height 5 cm. What is its area?",

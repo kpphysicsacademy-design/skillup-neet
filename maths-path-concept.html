@@ -111,6 +111,7 @@ const rational=concept.toLowerCase()==='rational numbers';
 const volumeWordProblems=/^volume word problems$/.test(concept.toLowerCase());
 const mixedMensuration=/^mixed mensuration practice$/.test(concept.toLowerCase());
 const compositeSolids=/^mensuration\s*[—-]\s*composite solids and combined shapes$|^composite solids and combined shapes$/.test(concept.toLowerCase());
+const unitCapacity=/^mensuration\s*[—-]\s*unit conversion and capacity problems$|^unit conversion and capacity problems$/.test(concept.toLowerCase());
 const volumeConcept=/^volume of (a )?cube and cuboid$/.test(concept.toLowerCase())||volumeWordProblems;
 const surfaceConcept=/^surface area basics$|^surface area of cube and cuboid$/.test(concept.toLowerCase());
 const advancedSurfaceConcept=/^surface area of cube and cuboid$/.test(concept.toLowerCase());
@@ -728,13 +729,58 @@ if(compositeSolids){
  ['csL1','csB1','csH1','csL2','csB2','csH2'].forEach(id=>$(id).addEventListener('input',updateCompositeLab));updateCompositeLab();
 }
 
+
+if(unitCapacity){
+ $('heroDescription').textContent='Convert length, area and volume units confidently. Solve tank capacity, litres, millilitres and mixed-unit word problems using clear conversion steps.';
+ $('heroFormula').innerHTML='\\(1\\text{ m}=100\\text{ cm}\\qquad 1\\text{ m}^3=1000\\text{ L}\\qquad 1\\text{ cm}^3=1\\text{ mL}\\)';
+ $('learn').innerHTML='<h2>1. Learn · Convert before calculating</h2><p>In mensuration, every dimension used in one formula must be expressed in compatible units. Convert first, then calculate.</p><h3>Length conversions</h3><div class="formula">\\(1\\text{ m}=100\\text{ cm}\\qquad 1\\text{ cm}=10\\text{ mm}\\qquad 1\\text{ km}=1000\\text{ m}\\)</div><h3>Area conversions</h3><p>Area conversion squares the length conversion factor.</p><div class="formula">\\(1\\text{ m}^2=10{,}000\\text{ cm}^2\\qquad 1\\text{ cm}^2=100\\text{ mm}^2\\)</div><h3>Volume and capacity</h3><div class="formula">\\(1\\text{ m}^3=1{,}000{,}000\\text{ cm}^3=1000\\text{ L}\\)</div><div class="formula">\\(1\\text{ L}=1000\\text{ mL}=1000\\text{ cm}^3\\qquad 1\\text{ mL}=1\\text{ cm}^3\\)</div><div class="callout"><b>Remember:</b> for volume, cube the length conversion factor: 1 m³ = 100³ cm³ = 1,000,000 cm³. For capacity, 1 m³ is 1,000 L.</div><h3>Conversion strategy</h3><ol><li>Read what unit the answer must use.</li><li>Convert every dimension to one unit.</li><li>Calculate area or volume.</li><li>Convert the final result to the requested capacity unit if needed.</li></ol>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Mixed dimensions</strong><p>A tank measures 1.2 m × 50 cm × 40 cm. Find its volume in cm³.</p><div class="formula">\\(1.2\\text{ m}=120\\text{ cm}\\)</div><div class="formula">\\(V=120\\times50\\times40=240{,}000\\text{ cm}^3=240\\text{ L}\\)</div></div><div class="example"><strong>Example B · Litres to cubic metres</strong><p>Convert 2,500 L to m³.</p><div class="formula">\\(2500\\div1000=2.5\\text{ m}^3\\)</div></div><div class="example"><strong>Example C · Area conversion</strong><p>Convert 3.5 m² to cm².</p><div class="formula">\\(3.5\\times10{,}000=35{,}000\\text{ cm}^2\\)</div></div><div class="example"><strong>Example D · Capacity of a box</strong><p>A container is 60 cm × 40 cm × 25 cm. Find its capacity in litres.</p><div class="formula">\\(V=60\\times40\\times25=60{,}000\\text{ cm}^3=60\\text{ L}\\)</div></div><div class="example"><strong>Example E · Millilitres</strong><p>A container holds 1.75 L. Convert to millilitres.</p><div class="formula">\\(1.75\\times1000=1750\\text{ mL}\\)</div></div>';
+ $('lab').innerHTML='<h2>3. Interactive unit converter</h2><p class="muted">Adjust the length in metres and the other dimensions in centimetres. Compare the volume in cubic centimetres and litres.</p><div class="lab"><label for="ucL">Length (m) <b id="ucLLabel">1.2</b></label><input id="ucL" type="range" min="1" max="5" step="0.1" value="1.2"><label for="ucB">Breadth (cm) <b id="ucBLabel">50</b></label><input id="ucB" type="range" min="10" max="100" step="5" value="50"><label for="ucH">Height (cm) <b id="ucHLabel">40</b></label><input id="ucH" type="range" min="10" max="100" step="5" value="40"></div><div class="big-result" id="ucCm">240,000 cm³</div><div class="formula" id="ucFormula">V = 120 × 50 × 40 = 240,000 cm³</div><div class="callout" id="ucLitres">Capacity = 240 L</div><p class="muted">The length is converted from metres to centimetres before multiplying.</p>';
+ $('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Key conversions</h3><ol><li>1 m = 100 cm.</li><li>1 m² = 10,000 cm².</li><li>1 m³ = 1,000,000 cm³.</li><li>1 L = 1,000 mL = 1,000 cm³.</li><li>1 m³ = 1,000 L.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Using 100 instead of 10,000 for m² to cm².</li><li>Using 100 instead of 1,000,000 for m³ to cm³.</li><li>Mixing m and cm in one multiplication.</li><li>Confusing litres with millilitres.</li></ul><div class="callout">Study order: Learn → Virtual Lab → Worked Examples → Mastery Quiz.</div></section>';
+ const makeQ=(q,o,a,e)=>({q,o,a,e});
+ questions=[
+ makeQ('Convert 2.5 m to centimetres.',['25 cm','250 cm','2,500 cm','0.25 cm'],1,'2.5 × 100 = 250 cm.'),
+ makeQ('Convert 3 m² to cm².',['300 cm²','3,000 cm²','30,000 cm²','300,000 cm²'],2,'1 m² = 10,000 cm², so 3 m² = 30,000 cm².'),
+ makeQ('Convert 1 m³ to cm³.',['100 cm³','10,000 cm³','100,000 cm³','1,000,000 cm³'],3,'1 m³ = 100 × 100 × 100 = 1,000,000 cm³.'),
+ makeQ('How many litres are in 4,000 mL?',['0.4 L','4 L','40 L','400 L'],1,'1,000 mL = 1 L, so 4,000 mL = 4 L.'),
+ makeQ('Convert 2.5 m³ to litres.',['25 L','250 L','2,500 L','25,000 L'],2,'1 m³ = 1,000 L, so 2.5 m³ = 2,500 L.'),
+ makeQ('A box is 100 cm × 50 cm × 20 cm. Its capacity is:',['10 L','50 L','100 L','1,000 L'],2,'Volume = 100,000 cm³ = 100 L.'),
+ makeQ('Convert 750 mL to litres.',['0.075 L','0.75 L','7.5 L','75 L'],1,'750 ÷ 1,000 = 0.75 L.'),
+ makeQ('Convert 0.8 km to metres.',['8 m','80 m','800 m','8,000 m'],2,'0.8 × 1,000 = 800 m.'),
+ makeQ('Convert 45,000 cm³ to litres.',['4.5 L','45 L','450 L','0.45 L'],1,'1,000 cm³ = 1 L, so 45,000 cm³ = 45 L.'),
+ makeQ('A tank measures 1.2 m × 50 cm × 40 cm. Volume in cm³ is:',['24,000','240,000','2,400,000','240'],1,'Convert 1.2 m to 120 cm: 120 × 50 × 40 = 240,000 cm³.'),
+ makeQ('Convert 5,000 cm² to m².',['0.05 m²','0.5 m²','5 m²','50 m²'],1,'5,000 ÷ 10,000 = 0.5 m².'),
+ makeQ('How many cm³ are equal to 2 L?',['20 cm³','200 cm³','2,000 cm³','20,000 cm³'],2,'1 L = 1,000 cm³, so 2 L = 2,000 cm³.'),
+ makeQ('Convert 350 cm to metres.',['0.35 m','3.5 m','35 m','350 m'],1,'350 ÷ 100 = 3.5 m.'),
+ makeQ('A container holds 1.75 L. This equals:',['175 mL','1,075 mL','1,750 mL','17,500 mL'],2,'1.75 × 1,000 = 1,750 mL.'),
+ makeQ('Convert 0.25 m³ to litres.',['2.5 L','25 L','250 L','2,500 L'],2,'0.25 × 1,000 = 250 L.'),
+ makeQ('Convert 2,400,000 cm³ to m³.',['0.24 m³','2.4 m³','24 m³','240 m³'],1,'1 m³ = 1,000,000 cm³, so 2,400,000 cm³ = 2.4 m³.'),
+ makeQ('A cuboid is 2 m × 30 cm × 20 cm. Volume in cm³ is:',['1,200','12,000','120,000','1,200,000'],2,'Convert 2 m to 200 cm: 200 × 30 × 20 = 120,000 cm³.'),
+ makeQ('Convert 6.2 L to millilitres.',['62 mL','620 mL','6,200 mL','62,000 mL'],2,'6.2 × 1,000 = 6,200 mL.'),
+ makeQ('Convert 90,000 mm² to cm².',['9 cm²','90 cm²','900 cm²','9,000 cm²'],2,'1 cm² = 100 mm², so 90,000 ÷ 100 = 900 cm².'),
+ makeQ('A tank holds 0.6 m³. Capacity is:',['6 L','60 L','600 L','6,000 L'],2,'0.6 × 1,000 = 600 L.'),
+ makeQ('Convert 4.5 m² to cm².',['450 cm²','4,500 cm²','45,000 cm²','450,000 cm²'],2,'4.5 × 10,000 = 45,000 cm².'),
+ makeQ('How many millilitres are in 3.25 L?',['325 mL','3,025 mL','3,250 mL','32,500 mL'],2,'3.25 × 1,000 = 3,250 mL.'),
+ makeQ('Convert 1,250,000 cm³ to m³.',['0.125 m³','1.25 m³','12.5 m³','125 m³'],1,'1,250,000 ÷ 1,000,000 = 1.25 m³.'),
+ makeQ('A box is 60 cm × 40 cm × 25 cm. Its capacity is:',['6 L','24 L','60 L','600 L'],2,'60 × 40 × 25 = 60,000 cm³ = 60 L.'),
+ makeQ('Convert 0.09 m² to cm².',['9 cm²','90 cm²','900 cm²','9,000 cm²'],2,'0.09 × 10,000 = 900 cm².'),
+ makeQ('Which equals 1 m³?',['100 L','500 L','1,000 L','10,000 L'],2,'1 m³ equals 1,000 litres.'),
+ makeQ('Convert 5,600 mL to litres.',['0.56 L','5.6 L','56 L','560 L'],1,'5,600 ÷ 1,000 = 5.6 L.'),
+ makeQ('A cuboid has volume 80,000 cm³. Capacity in litres is:',['8 L','80 L','800 L','8,000 L'],1,'80,000 ÷ 1,000 = 80 L.'),
+ makeQ('Convert 125 cm to metres.',['0.125 m','1.25 m','12.5 m','125 m'],1,'125 ÷ 100 = 1.25 m.'),
+ makeQ('A tank is 2 m × 1 m × 0.5 m. Capacity is:',['100 L','500 L','1,000 L','10,000 L'],2,'Volume = 1 m³ = 1,000 L.')
+ ];
+ const updateUnitCapacityLab=()=>{const l=+$('ucL').value,b=+$('ucB').value,h=+$('ucH').value,cmL=l*100,v=cmL*b*h;[['ucL','ucLLabel'],['ucB','ucBLabel'],['ucH','ucHLabel']].forEach(p=>$(p[1]).textContent=$(p[0]).value);$('ucCm').textContent=v.toLocaleString('en-IN')+' cm³';$('ucFormula').textContent='V = '+cmL+' × '+b+' × '+h+' = '+v.toLocaleString('en-IN')+' cm³';$('ucLitres').textContent='Capacity = '+(v/1000).toLocaleString('en-IN')+' L';};
+ ['ucL','ucB','ucH'].forEach(id=>$(id).addEventListener('input',updateUnitCapacityLab));updateUnitCapacityLab();
+}
+
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
-if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids){
+if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity){
  const mapped=bankRows.map(row=>({q:String(row[0]??''),o:Array.isArray(row[1])?row[1].map(String):[],a:Number(row[2]),e:String(row[3]??'')}));
  const valid=mapped.filter(q=>q.q&&q.o.length>=2&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
  questions=valid.length?valid:[];
-}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration&&!compositeSolids){
+}else if(!rational&&concept.toLowerCase()!=='binomial coefficients'&&!volumeConcept&&!surfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity){
  questions=[];
 }
 if(concept.toLowerCase()==='binomial coefficients'){makeTriangle(6);updateLab();}renderQuiz();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id==='quiz'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();

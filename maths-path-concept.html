@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#10182b">
-<title>Binomial Coefficients | SkillUp Academy</title>
+<title>Maths Concept Studio | SkillUp Academy</title>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -15,12 +15,12 @@
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand">SkillUp <span>Academy</span> · Maths</div><div class="pill">CLASS 11 • SENIOR CORE</div></header>
+<header class="top"><div class="brand">SkillUp <span>Academy</span> · Maths</div><div class="pill" id="levelPill">CLASS 11 • SENIOR CORE</div></header>
 <section class="hero">
-<div class="eyebrow">Binomial Theorem · Concept Studio</div>
-<h1>Binomial Coefficients</h1>
-<p>Discover how combinations create the coefficients in a binomial expansion. Learn the pattern, experiment with values, and test your understanding with a progressive quiz.</p>
-<div class="hero-formula">\((x+y)^n=\displaystyle\sum_{r=0}^{n}\binom nr x^{n-r}y^r\)</div>
+<div class="eyebrow" id="chapterEyebrow">Binomial Theorem · Concept Studio</div>
+<h1 id="conceptTitle">Binomial Coefficients</h1>
+<p id="heroDescription">Discover how combinations create the coefficients in a binomial expansion. Learn the pattern, experiment with values, and test your understanding with a progressive quiz.</p>
+<div class="hero-formula" id="heroFormula">\((x+y)^n=\displaystyle\sum_{r=0}^{n}\binom nr x^{n-r}y^r\)</div>
 <div class="stats"><div class="stat"><b>01</b> · Learn</div><div class="stat"><b>02</b> · Explore</div><div class="stat"><b>03</b> · Practice</div><div class="stat"><b>10</b> · Quiz questions</div></div>
 </section>
 <nav class="tabs" aria-label="Lesson sections"><button class="tab active" data-tab="learn">Learn</button><button class="tab" data-tab="examples">Worked examples</button><button class="tab" data-tab="lab">Interactive lab</button><button class="tab" data-tab="quiz">Quiz</button></nav>
@@ -81,7 +81,7 @@ function choose(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;
 function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{});}
 function makeTriangle(max){let root=$('pascalTriangle');root.innerHTML='';for(let n=0;n<=max;n++){let row=document.createElement('div');row.className='tri-row';for(let r=0;r<=n;r++){let cell=document.createElement('span');cell.className='tri-num';cell.textContent=choose(n,r);row.appendChild(cell)}root.appendChild(row)}}
 function updateLab(){let n=+$('nRange').value;let r=Math.min(+$('rRange').value,n);$('rRange').max=n;$('rRange').value=r;$('nLabel').textContent=n;$('rLabel').textContent=r;let c=choose(n,r);$('labResult').textContent=c;$('labFormula').innerHTML='\\(\\binom{'+n+'}{'+r+'}='+c+'\\)';$('labMeaning').textContent='There are '+c+' ways to select '+r+' item(s) from '+n+'.';let row=$('coefficientRow');row.innerHTML='';for(let k=0;k<=n;k++){let el=document.createElement('span');el.className='tri-num'+(k===r?' focus':'');el.textContent=choose(n,k);row.appendChild(el)}renderMath()}
-const questions=[
+let questions=[
 {q:'What is the value of C(5, 2)?',o:['5','10','15','20'],a:1,e:'C(5, 2) = 5!/(2!3!) = 10.'},
 {q:'In (x + y)⁶, what is the coefficient of x⁴y²?',o:['6','12','15','20'],a:2,e:'The exponent of y is 2, so the coefficient is C(6, 2) = 15.'},
 {q:'Which identity expresses symmetry?',o:['C(n,r) = C(n,n−r)','C(n,r) = C(r,n)','C(n,r) = n+r','C(n,r) = nr'],a:0,e:'Choosing r objects is equivalent to choosing the n−r objects left out.'},
@@ -99,8 +99,47 @@ function submit(){let score=0;questions.forEach((q,i)=>{let selected=document.qu
 function reset(){renderQuiz();$('quizScore').classList.remove('show');$('quizScore').innerHTML='';$('submitQuiz').disabled=false;updateProgress()}
 document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!==btn.dataset.tab));if(btn.dataset.tab==='learn')renderMath();else if(btn.dataset.tab==='examples')renderMath();else if(btn.dataset.tab==='lab')renderMath();else renderMath();window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'})}));
 $('nRange').addEventListener('input',updateLab);$('rRange').addEventListener('input',updateLab);$('submitQuiz').addEventListener('click',submit);$('resetQuiz').addEventListener('click',reset);$('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
+const params=new URLSearchParams(location.search);
+const concept=(params.get('concept')||'Binomial Coefficients').trim();
+const level=params.get('level')||'CLASS 11 • SENIOR CORE';
+const chapter=params.get('chapter')||'Binomial Theorem';
+const rational=concept.toLowerCase()==='rational numbers';
+$('conceptTitle').textContent=concept;
+$('levelPill').textContent=level;
+$('chapterEyebrow').textContent=chapter+' · Concept Studio';
+document.title=concept+' | SkillUp Academy';
+if(rational){
+$('heroDescription').textContent='Build confidence with positive and negative fractions. Learn standard form, compare rational numbers, use operation rules, and practise on an interactive number line.';
+$('heroFormula').innerHTML='\\(\\displaystyle \\frac{p}{q},\\quad p,q\\in\\mathbb Z,\\ q\\ne0\\)';
+$('learn').innerHTML='<h2>1. What are rational numbers?</h2><p>A <b>rational number</b> is any number that can be written as \\(p/q\\), where \\(p\\) and \\(q\\) are integers and \\(q\\ne0\\). The denominator can never be zero.</p><div class="formula">\\(\\mathbb Q=\\{p/q:p,q\\in\\mathbb Z, q\\ne0\\}\\)</div><p>Examples: \\(3/5\\), \\(-7/4\\), \\(0=0/1\\), and \\(5=5/1\\). Every integer is rational.</p><div class="callout"><b>Standard form:</b> the denominator is positive and the numerator and denominator have no common factor except 1. For example, \\(-12/18=-2/3\\).</div><h3>Rules to remember</h3><ul><li><b>Equivalent fractions:</b> multiply or divide numerator and denominator by the same non-zero number.</li><li><b>Add/subtract:</b> use a common denominator first.</li><li><b>Multiply:</b> multiply numerators together and denominators together.</li><li><b>Divide:</b> multiply by the reciprocal of the second fraction; never divide by zero.</li><li><b>Compare:</b> use a common denominator or cross multiplication with care about signs.</li><li><b>Between two rationals:</b> their average is a rational number strictly between them when they are different.</li></ul><h3>Rational numbers on a number line</h3><p class="muted">The slider marks a rational number from −2 to 2. Move it to explore negative, zero, and positive values.</p><div class="lab"><label for="ratLine">Selected value <b id="ratLineLabel">1/2</b></label><input id="ratLine" type="range" min="-8" max="8" value="2" step="1"></div><div id="ratLineVisual" class="formula">−2 ───── −1 ───── 0 ───── 1/2 ───── 1 ───── 2</div><p class="muted" id="ratLineNote">A rational number can be positive, negative, or zero.</p>';
+$('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Write in standard form</strong><p>Simplify \\(-18/24\\).</p><div class="formula">\\(-18/24=(-18\\div6)/(24\\div6)=-3/4\\)</div><p>The denominator is positive and 3 and 4 have no common factor greater than 1.</p></div><div class="example"><strong>Example B · Add fractions</strong><p>Calculate \\(2/3+1/4\\).</p><div class="formula">\\(2/3+1/4=8/12+3/12=11/12\\)</div></div><div class="example"><strong>Example C · Multiply negatives</strong><div class="formula">\\((-2/5)\\times(15/8)=-30/40=-3/4\\)</div><p>A negative times a positive gives a negative result.</p></div><div class="example"><strong>Example D · Find a rational between two numbers</strong><p>Find a rational number between \\(1/3\\) and \\(1/2\\).</p><div class="formula">\\(\\frac{\\frac13+\\frac12}{2}=\\frac{5/6}{2}=5/12\\)</div><p>Since \\(1/3=4/12<5/12<6/12=1/2\\), the answer lies between them.</p></div>';
+$('lab').innerHTML='<h2>3. Fraction workshop</h2><p class="muted">Choose two fractions and an operation. The result is simplified automatically.</p><div class="lab"><label for="numA">First numerator <b id="numALabel">2</b></label><input id="numA" type="range" min="-9" max="9" value="2"><label for="denA">First denominator <b id="denALabel">3</b></label><input id="denA" type="range" min="1" max="9" value="3"><label for="ratOp">Operation</label><select id="ratOp" style="width:100%;padding:10px;border-radius:10px;background:#19243c;color:#f2f5ff;border:1px solid #2a3856"><option value="+">Addition (+)</option><option value="-">Subtraction (−)</option><option value="*">Multiplication (×)</option><option value="/">Division (÷)</option></select><label for="numB">Second numerator <b id="numBLabel">1</b></label><input id="numB" type="range" min="-9" max="9" value="1"><label for="denB">Second denominator <b id="denBLabel">4</b></label><input id="denB" type="range" min="1" max="9" value="4"></div><div class="big-result" id="ratResult">11/12</div><div class="formula" id="ratWorking">2/3 + 1/4 = 11/12</div><p class="muted" id="ratDecimal">Decimal approximation: 0.9167</p><div class="callout">Division by a fraction is possible only when the second fraction is not zero.</div>';
+$('pascalTriangle').closest('h3').textContent='Fraction check';
+$('pascalTriangle').innerHTML='<p class="muted">Use the interactive fraction workshop to practise each operation.</p>';
+const aside=document.querySelector('aside');
+aside.innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Three things to know</h3><ol><li>Write a rational number as p/q with q ≠ 0.</li><li>Use common denominators to add and subtract.</li><li>For division, multiply by the reciprocal.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Adding denominators as well as numerators.</li><li>Leaving a negative denominator in standard form.</li><li>Forgetting to flip the second fraction when dividing.</li><li>Dividing by zero.</li></ul></section><section class="card" style="margin-top:16px"><h3>Learning path</h3><p class="muted">Recommended order</p><p>1. Learn the definition</p><p>2. Study worked examples</p><p>3. Try fraction operations</p><p>4. Complete the quiz</p><div class="actions"><button class="btn secondary" id="startQuiz">Start quiz →</button></div></section>';
+questions=[
+{q:'Which statement defines a rational number?',o:['p/q where p and q are integers and q ≠ 0','p/q where q must equal 0','Only positive fractions','Any decimal that never ends'],a:0,e:'A rational number has the form p/q with integer p and q, and q is non-zero.'},
+{q:'Write −18/24 in standard form.',o:['−3/4','3/4','−4/3','−9/10'],a:0,e:'Divide numerator and denominator by 6 to obtain −3/4.'},
+{q:'Calculate 2/3 + 1/4.',o:['3/7','11/12','3/12','1/2'],a:1,e:'Use denominator 12: 8/12 + 3/12 = 11/12.'},
+{q:'Calculate (−2/5) × (15/8).',o:['3/4','−17/13','−3/4','−30/13'],a:2,e:'Multiply to get −30/40, then simplify to −3/4.'},
+{q:'What is the additive inverse of −7/9?',o:['−9/7','7/9','9/7','0'],a:1,e:'A number and its additive inverse sum to zero: −7/9 + 7/9 = 0.'},
+{q:'Which is the multiplicative inverse of 4/7?',o:['−4/7','4/7','7/4','−7/4'],a:2,e:'Swap numerator and denominator; (4/7)(7/4) = 1.'},
+{q:'Calculate 5/6 − 1/3.',o:['4/3','1/2','2/3','1/3'],a:1,e:'Convert 1/3 to 2/6: 5/6 − 2/6 = 3/6 = 1/2.'},
+{q:'Which rational number lies between 1/3 and 1/2?',o:['1/4','5/12','2/3','3/4'],a:1,e:'1/3 = 4/12 and 1/2 = 6/12, so 5/12 lies between them.'},
+{q:'Which number is equivalent to 3/5?',o:['6/15','9/10','12/20','15/20'],a:2,e:'Multiply numerator and denominator by 4: 3/5 = 12/20.'},
+{q:'Calculate (−3/4) ÷ (2/5).',o:['−6/20','−15/8','15/8','−5/6'],a:1,e:'Multiply by the reciprocal: (−3/4)(5/2) = −15/8.'}
+];
+$('ratLine').addEventListener('input',()=>{const v=+$('ratLine').value;const g=(a,b)=>b?g(b,a%b):Math.abs(a);const d=8;const n=v;const k=g(n,d)||1;const frac=n===0?'0':(n/k)+'/'+(d/k);$('ratLineLabel').textContent=frac;$('ratLineVisual').textContent='Selected point: '+frac+' = '+(n/d).toFixed(3);$('ratLineNote').textContent=n<0?'This rational number is to the left of zero.':n>0?'This rational number is to the right of zero.':'Zero is neither positive nor negative.';});
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){const t=b;b=a%b;a=t}return a||1}
+function updateRationalLab(){const a=+$('numA').value, da=+$('denA').value, b=+$('numB').value, db=+$('denB').value, op=$('ratOp').value;$('numALabel').textContent=a;$('denALabel').textContent=da;$('numBLabel').textContent=b;$('denBLabel').textContent=db;let n,d;if(op==='+'){n=a*db+b*da;d=da*db}else if(op==='-'){n=a*db-b*da;d=da*db}else if(op==='*'){n=a*b;d=da*db}else{if(b===0){$('ratResult').textContent='Undefined';$('ratWorking').textContent='Division by zero is not defined.';$('ratDecimal').textContent='Choose a non-zero second numerator.';return}n=a*db;d=da*b}if(d<0){n=-n;d=-d}const div=gcd(n,d);const sn=n/div,sd=d/div;const val=sn/sd;$('ratResult').textContent=sd===1?String(sn):sn+'/'+sd;$('ratWorking').textContent=a+'/'+da+' '+({'+' :'+','-':'−','*':'×','/':'÷'}[op])+' '+b+'/'+db+' = '+(sd===1?sn:sn+'/'+sd);$('ratDecimal').textContent='Decimal approximation: '+val.toFixed(4)}
+['numA','denA','numB','denB','ratOp'].forEach(id=>$(id).addEventListener('input',updateRationalLab));
+$('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
+updateRationalLab();
+}
 makeTriangle(6);updateLab();renderQuiz();renderMath();
-const params=new URLSearchParams(location.search);const concept=params.get('concept');if(concept&&concept.toLowerCase()!=='binomial coefficients'){document.querySelector('.hero h1').textContent=concept;document.title=concept+' | SkillUp Academy';document.querySelector('.hero .eyebrow').textContent=(params.get('chapter')||'Maths')+' · Concept Studio';}
+if(rational){$('ratLine').dispatchEvent(new Event('input'));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!=='learn'));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==='learn'));renderMath();}
+
 })();
 </script>
 </body>

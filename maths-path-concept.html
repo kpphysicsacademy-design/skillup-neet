@@ -1082,6 +1082,29 @@ update();
 safeInit("fundamental principle of counting lab",initCountingPrincipleLab);
 
 
+
+function initCombinationsLab(){
+ if(norm(concept)!=="combinations")return;
+ const nEl=document.getElementById("combN"),rEl=document.getElementById("combR");
+ if(!nEl||!rEl)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const factorial=n=>{let v=1;for(let i=2;i<=n;i++)v*=i;return v;};
+ const choose=(n,r)=>{if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v);};
+ const fmt=n=>Number(n).toLocaleString("en-US");
+ const update=()=>{
+  const n=Number(nEl.value);let r=Number(rEl.value);
+  r=Math.min(n,r);rEl.max=String(Math.min(7,n));if(Number(rEl.value)!==r)rEl.value=String(r);
+  const c=choose(n,r),p=c*factorial(r),f=factorial(r),nf=factorial(n),nr=factorial(n-r);
+  put("combNOut",n);put("combROut",r);put("combValue",fmt(c));put("combPermValue",fmt(p));put("combFactorial",fmt(f));
+  put("combWorking",n+"C"+r+" = "+fmt(nf)+" / ("+fmt(f)+" × "+fmt(nr)+") = "+fmt(c));
+  put("combExplanation",r===0?"There is exactly one way to choose no objects: the empty group.":r===n?"There is exactly one way to choose all "+n+" objects.": "Each selected group can be ordered in "+fmt(f)+" way"+(f===1?"":"s")+". Divide "+fmt(p)+" ordered arrangements by "+fmt(f)+" to count each group once.");
+ };
+ [nEl,rEl].forEach(el=>el.addEventListener("input",update));
+ document.querySelectorAll(".combPreset").forEach(btn=>btn.addEventListener("click",()=>{nEl.value=btn.dataset.n;rEl.value=btn.dataset.r;rEl.max=String(Math.min(7,Number(nEl.value)));update();}));
+ update();
+}
+safeInit("combinations virtual lab",initCombinationsLab);
+
 function initFactorialLab(){
 if(norm(concept)!=="factorial")return;
 const nEl=document.getElementById("facN");
@@ -1164,6 +1187,54 @@ if(norm(concept)==="permutations") return `
 </ul>
 <div class="lesson"><b>Quick check:</b> 6P₂ = 6 × 5 = <b>30</b>. If two selected people have different roles, count ordered assignments; if they form a committee with no separate roles, use combinations.</div>
 </div>`;
+
+if(norm(concept)==="combinations") return `
+<div class="geometry-lesson combinations-virtual-lesson">
+<strong>Combinations — Learn & Virtual Lab</strong>
+<p>A <b>combination</b> is a selection where <b>order does not matter</b>. Choosing A and B is the same group as choosing B and A.</p>
+<div class="lesson">
+<div class="formula">nCᵣ = n! / [r!(n − r)!] = nPᵣ / r!</div>
+<p><b>n</b> is the number of distinct objects available; <b>r</b> is the number selected. Use this formula when selecting without repetition and with no separate roles or positions.</p>
+<p>We divide by r! because each group of r objects can be arranged in r! orders, but all those orders represent the same combination.</p>
+</div>
+<h3>Worked examples</h3>
+<div class="lesson">
+<p><b>Example 1: Choose 2 students from 5.</b></p>
+<div class="formula">⁵C₂ = 5! / (2! × 3!) = (5 × 4) / (2 × 1) = 10</div>
+<p><b>Example 2: Choose 3 books from 6.</b></p>
+<div class="formula">⁶C₃ = 6! / (3! × 3!) = 20</div>
+<p><b>Example 3: Choose a committee of 4 from 8 people.</b></p>
+<div class="formula">⁸C₄ = 8! / (4! × 4!) = 70</div>
+</div>
+<h3>Combination or permutation?</h3>
+<div class="lesson">
+<p><b>Combination:</b> select 3 people for a committee. The group {A, B, C} is the same as {C, B, A}.</p>
+<p><b>Permutation:</b> assign president, secretary and treasurer. Changing who gets each role makes a different outcome.</p>
+<div class="formula">nPᵣ = nCᵣ × r!</div>
+<p>For the same n and r, permutations count ordered arrangements; combinations count selected groups only.</p>
+</div>
+<h3>Useful properties</h3>
+<ul>
+<li><b>Choose none or all:</b> nC₀ = nCₙ = 1.</li>
+<li><b>Choose one:</b> nC₁ = n.</li>
+<li><b>Symmetry:</b> nCᵣ = nCₙ₋ᵣ; choosing r objects to keep is equivalent to choosing n − r to leave out.</li>
+<li><b>Pascal identity:</b> nCᵣ = (n−1)Cᵣ + (n−1)Cᵣ₋₁.</li>
+</ul>
+<h3>Explore combinations</h3>
+<p>Change the number of available objects and the number selected. The lab updates the number of groups and shows the calculation.</p>
+<div class="lesson">
+<div class="control"><div class="head"><label for="combN">Available objects (n)</label><b id="combNOut">6</b></div><input class="range" id="combN" type="range" min="4" max="12" step="1" value="6" aria-label="Number of available objects"></div>
+<div class="control"><div class="head"><label for="combR">Objects selected (r)</label><b id="combROut">3</b></div><input class="range" id="combR" type="range" min="0" max="6" step="1" value="3" aria-label="Number of objects selected"></div>
+<div class="presets"><button type="button" class="preset combPreset" data-n="5" data-r="2">5 choose 2</button><button type="button" class="preset combPreset" data-n="8" data-r="4">8 choose 4</button><button type="button" class="preset combPreset" data-n="7" data-r="0">Choose none</button><button type="button" class="preset combPreset" data-n="7" data-r="7">Choose all</button></div>
+<div class="props"><div class="prop"><span>Number of groups</span><strong id="combValue">20</strong></div><div class="prop"><span>Ordered arrangements</span><strong id="combPermValue">120</strong></div><div class="prop"><span>Orders per group (r!)</span><strong id="combFactorial">6</strong></div></div>
+<div class="formula" id="combWorking" aria-live="polite">⁶C₃ = 6! / (3! × 3!) = 20</div>
+<div class="checks" id="combExplanation" aria-live="polite">Each group of 3 has 3! = 6 possible orders, but those orders count as one combination.</div>
+</div>
+<h3>Common mistakes</h3>
+<ul><li>Counting AB and BA as two combinations.</li><li>Using nPᵣ when roles or order do not matter.</li><li>Forgetting to divide by r! in the factorial formula.</li><li>Confusing the number selected r with the number left out n − r.</li></ul>
+<div class="checks"><b>Quick check:</b> Choosing 2 people from 5 gives 10 groups, not 20. The 20 counts ordered pairs.</div>
+</div>`;
+
 if(norm(concept)==="factorial") return `
 <div class="geometry-lesson factorial-virtual-lesson">
 <strong>Factorial — Learn & Virtual Lab</strong>

@@ -6225,7 +6225,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "80°",
         "100°"
       ],
-      3,
+      2,
       "The third angle is 180° − 50° − 50° = 80°."
     ],
     [

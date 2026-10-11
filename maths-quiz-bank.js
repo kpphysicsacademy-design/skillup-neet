@@ -6601,7 +6601,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
         "100°",
         "110°"
       ],
-      2,
+      1,
       "The fourth angle is 360° − 270° = 90°."
     ],
     [

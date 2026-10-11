@@ -1105,6 +1105,23 @@ function initCombinationsLab(){
 }
 safeInit("combinations virtual lab",initCombinationsLab);
 
+
+function initRestrictedArrangementsLab(){
+ if(norm(concept)!=="restricted arrangements")return;
+ const nEl=document.getElementById("raN");if(!nEl)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fact=n=>{let v=1;for(let i=2;i<=n;i++)v*=i;return v;};
+ const fmt=n=>Number(n).toLocaleString("en-US");
+ const update=()=>{
+  const n=Number(nEl.value),total=fact(n),together=2*fact(n-1),apart=total-together;
+  put("raNOut",n);put("raTotal",fmt(total));put("raTogether",fmt(together));put("raApart",fmt(apart));
+  put("raWorking","Together = 2 × "+(n-1)+"! = "+fmt(together)+"; apart = "+n+"! − "+fmt(together)+" = "+fmt(apart));
+  put("raExplanation",fmt(together)+" together + "+fmt(apart)+" apart = "+fmt(total)+" total arrangements.");
+ };
+ nEl.addEventListener("input",update);update();
+}
+safeInit("restricted arrangements virtual lab",initRestrictedArrangementsLab);
+
 function initFactorialLab(){
 if(norm(concept)!=="factorial")return;
 const nEl=document.getElementById("facN");
@@ -1134,6 +1151,40 @@ update();
 safeInit("factorial virtual lab",initFactorialLab);
 
 function lessonHtml(){
+
+if(norm(concept)==="restricted arrangements") return `
+<div class="geometry-lesson restricted-arrangements-lesson">
+<strong>Restricted Arrangements — Learn & Virtual Lab</strong>
+<p>A <b>restricted arrangement</b> is an arrangement in which objects must satisfy a condition—for example, two people must sit together, two letters must not be adjacent, or a particular object must occupy a fixed position.</p>
+<h3>1. Two objects must stay together</h3>
+<p>For n distinct objects, suppose A and B must be adjacent. Treat AB or BA as one block. There are then n−1 units to arrange, and A and B can swap inside their block.</p>
+<div class="formula">Number of arrangements = (n−1)! × 2!</div>
+<p><b>Example:</b> Arrange A, B, C, D with A and B together. Treat AB as one unit: (AB), C, D. The three units can be arranged in 3! ways, and A/B can switch in 2 ways.</p>
+<div class="formula">3! × 2! = 6 × 2 = 12</div>
+<h3>2. Two objects must not be together</h3>
+<p>Count all arrangements first, then subtract the arrangements where the pair is together.</p>
+<div class="formula">Not adjacent = n! − 2(n−1)!</div>
+<p>For A, B, C, D: 4! − 2(3!) = 24 − 12 = 12 arrangements.</p>
+<h3>3. No two special objects are adjacent</h3>
+<p>Arrange the n−k ordinary objects first. They create n−k+1 gaps. Choose k different gaps for the k distinct special objects, then arrange those special objects in the selected gaps.</p>
+<div class="formula">(n−k)! × ⁽ⁿ⁻ᵏ⁺¹⁾Cₖ × k!</div>
+<p>This method works when k ≤ n−k+1. If there are too many special objects, avoiding adjacency is impossible.</p>
+<h3>4. Fixed positions</h3>
+<p>If a particular object is fixed in one specified position, arrange the remaining n−1 objects freely.</p>
+<div class="formula">(n−1)!</div>
+<h3>Explore: must A and B sit together?</h3>
+<p>Adjust the number of distinct objects. Compare all arrangements with the cases where A and B are adjacent or separated.</p>
+<div class="lesson">
+<div class="control"><div class="head"><label for="raN">Number of distinct objects (n)</label><b id="raNOut">4</b></div><input class="range" id="raN" type="range" min="3" max="8" value="4" step="1" aria-label="Number of distinct objects"></div>
+<div class="props"><div class="prop"><span>All arrangements (n!)</span><strong id="raTotal">24</strong></div><div class="prop"><span>A and B together</span><strong id="raTogether">12</strong></div><div class="prop"><span>A and B not adjacent</span><strong id="raApart">12</strong></div></div>
+<div class="formula" id="raWorking" aria-live="polite">Together = 2 × 3! = 12; apart = 4! − 12 = 12</div>
+<div class="checks" id="raExplanation" aria-live="polite">The two counts add to the total: 12 together + 12 apart = 24.</div>
+</div>
+<h3>Method checklist</h3>
+<ol><li>Identify the exact restriction: together, separated, fixed position, or no adjacent special objects.</li><li>For “together”, combine the objects into a block and count internal orders.</li><li>For “not together”, use total arrangements minus together arrangements.</li><li>For “no two special objects adjacent”, use gaps between the ordinary objects.</li><li>Check that cases are counted once and that the subtotals add up correctly.</li></ol>
+<div class="checks"><b>Common mistake:</b> when A and B must be together, do not forget the two internal orders AB and BA.</div>
+</div>`;
+
 if(norm(concept)==="permutations") return `
 <div class="geometry-lesson permutations-learn-lesson">
 <strong>Permutations — Learn</strong>

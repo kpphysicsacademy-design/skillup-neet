@@ -7,7 +7,7 @@
 ['A vector of magnitude 20 units makes 30° with the x-axis. Its y-component is:', ['10 units','10√3 units','20 units','20√3 units'],0,'Ay = A sin30° = 20 × 1/2 = 10 units.'],
 ['A vector of magnitude 10 makes 0° with the x-axis. Its x-component is:', ['0','5','10','−10'],2,'At 0°, Ax = 10 cos0° = 10.'],
 ['A vector of magnitude 10 makes 90° with the x-axis. Its x-component is:', ['0','5','10','−10'],0,'At 90°, Ax = 10 cos90° = 0.'],
-['A vector of magnitude 8 makes 60° with the x-axis. Its y-component is:', ['4','4√3','8','2√3'],0,'Ay = 8 sin60° = 4√3, so the correct value is 4√3.'],
+['A vector of magnitude 8 makes 60° with the x-axis. Its y-component is:', ['4','4√3','8','2√3'],1,'Ay = 8 sin60° = 4√3, so the correct value is 4√3.'],
 ['A vector of magnitude 12 makes 60° with the x-axis. Its x-component is:', ['6','6√3','12','3√3'],0,'Ax = 12 cos60° = 6.'],
 ['A vector of magnitude 10 makes 30° with the x-axis. Its x-component is:', ['5','5√3','10','10√3'],1,'Ax = 10 cos30° = 5√3.'],
 ['If Ax = 3 and Ay = 4, the magnitude of the vector is:', ['1','5','7','12'],1,'A = √(Ax² + Ay²) = √(9+16) = 5.'],

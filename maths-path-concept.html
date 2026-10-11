@@ -1122,6 +1122,23 @@ function initRestrictedArrangementsLab(){
 }
 safeInit("restricted arrangements virtual lab",initRestrictedArrangementsLab);
 
+
+function initCircularArrangementsLab(){
+ if(norm(concept)!=="circular arrangements")return;
+ const nEl=document.getElementById("caN");if(!nEl)return;
+ const put=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+ const fact=n=>{let v=1;for(let i=2;i<=n;i++)v*=i;return v;};
+ const fmt=n=>Number(n).toLocaleString("en-US");
+ const update=()=>{
+  const n=Number(nEl.value),linear=fact(n),circle=fact(n-1),necklace=n>2?circle/2:circle;
+  put("caNOut",n);put("caLinear",fmt(linear));put("caCircular",fmt(circle));put("caNecklace",fmt(necklace));
+  put("caWorking","Circular = ("+n+"−1)! = "+fmt(circle));
+  put("caExplanation",n>2?"Rotations count as the same seating. For necklaces, mirror images also count as the same, so divide the circular count by 2.":"With only "+n+" objects, the usual necklace reflection formula needs special care; the displayed count is kept equal to the circular count.");
+ };
+ nEl.addEventListener("input",update);update();
+}
+safeInit("circular arrangements virtual lab",initCircularArrangementsLab);
+
 function initFactorialLab(){
 if(norm(concept)!=="factorial")return;
 const nEl=document.getElementById("facN");
@@ -1183,6 +1200,32 @@ if(norm(concept)==="restricted arrangements") return `
 <h3>Method checklist</h3>
 <ol><li>Identify the exact restriction: together, separated, fixed position, or no adjacent special objects.</li><li>For “together”, combine the objects into a block and count internal orders.</li><li>For “not together”, use total arrangements minus together arrangements.</li><li>For “no two special objects adjacent”, use gaps between the ordinary objects.</li><li>Check that cases are counted once and that the subtotals add up correctly.</li></ol>
 <div class="checks"><b>Common mistake:</b> when A and B must be together, do not forget the two internal orders AB and BA.</div>
+</div>`;
+
+
+if(norm(concept)==="circular arrangements") return `
+<div class="geometry-lesson circular-arrangements-lesson">
+<strong>Circular Arrangements — Learn & Virtual Lab</strong>
+<p>A circular arrangement places objects around a circle. If all n objects are distinct and rotations are considered the same, the number of arrangements is <b>(n−1)!</b>.</p>
+<div class="formula">Distinct objects around a circle = (n−1)!</div>
+<p>Why? Fix one object to remove duplicate rotations, then arrange the remaining n−1 objects in a row. Reflection is normally considered different in circular seating unless the question explicitly treats clockwise and anticlockwise arrangements as the same.</p>
+<h3>Worked examples</h3>
+<div class="lesson"><p><b>Example 1: Seat 5 friends around a round table.</b></p><div class="formula">(5−1)! = 4! = 24</div>
+<p><b>Example 2: Arrange 7 distinct beads on a necklace.</b></p><p>If rotations and reflections both count as the same necklace, use:</p><div class="formula">(7−1)! ÷ 2 = 6!/2 = 360</div>
+<p><b>Example 3: Seat A and B together among 5 people.</b></p><p>Treat A and B as one block. There are 4 units around the circle and 2 internal orders:</p><div class="formula">(4−1)! × 2! = 3! × 2 = 12</div></div>
+<h3>Important cases</h3>
+<ul><li><b>Round-table seating:</b> rotations are equivalent, so use (n−1)!.</li><li><b>Clockwise and anticlockwise distinct:</b> keep (n−1)!.</li><li><b>Necklace or garland:</b> if reflections are also equivalent and all objects are distinct, use (n−1)!/2 for n greater than 2.</li><li><b>Two people together:</b> treat them as one block; count the block's internal orders.</li><li><b>Two people not together:</b> subtract the together cases from all circular arrangements.</li></ul>
+<h3>Explore circular arrangements</h3>
+<p>Change the number of distinct people and see how many unique round-table seatings are possible.</p>
+<div class="lesson">
+<div class="control"><div class="head"><label for="caN">Number of people (n)</label><b id="caNOut">5</b></div><input class="range" id="caN" type="range" min="2" max="9" value="5" step="1" aria-label="Number of people around a table"></div>
+<div class="props"><div class="prop"><span>Linear arrangements (n!)</span><strong id="caLinear">120</strong></div><div class="prop"><span>Unique round-table arrangements</span><strong id="caCircular">24</strong></div><div class="prop"><span>Necklace arrangements*</span><strong id="caNecklace">12</strong></div></div>
+<div class="formula" id="caWorking" aria-live="polite">Circular = (5−1)! = 24</div>
+<div class="checks" id="caExplanation" aria-live="polite">Rotating everyone one seat does not create a new round-table arrangement. *For n greater than 2, necklace count also treats mirror images as the same.</div>
+</div>
+<h3>Method checklist</h3>
+<ol><li>Check whether the objects are distinct.</li><li>Decide whether rotations are considered identical.</li><li>For a round table, fix one object and arrange the remaining objects.</li><li>Check whether reflections are equivalent; this matters for necklaces, not ordinary seating questions.</li><li>If there is an extra restriction, such as a pair together, use the block method after accounting for circular symmetry.</li></ol>
+<div class="checks"><b>Common mistake:</b> using n! for round-table seating. Rotations describe the same seating, so divide by n to get (n−1)!.</div>
 </div>`;
 
 if(norm(concept)==="permutations") return `

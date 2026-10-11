@@ -25788,6 +25788,6 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["How many 4-digit even numbers can be formed from 1, 2, 3, 4, 5 without repetition?", ["48","60","72","96"], 0, "The last digit is 2 or 4 (2 choices); arrange 3 of the remaining 4 digits in 4P3 = 24 ways: 2 × 24 = 48."],
     ["How many ways can 7 different books be arranged if two specified books must occupy the two ends?", ["240","720","1,440","5,040"], 0, "The specified books can swap ends in 2! ways; arrange the remaining five in 5!: 2 × 120 = 240."],
     ["How many 3-digit numbers can be formed from digits 0–5 without repetition?", ["100","120","80","60"], 0, "Hundreds place has 5 nonzero choices, then 5 and 4 choices remain: 5 × 5 × 4 = 100."],
-    ["How many 3-digit numbers can be formed from digits 0–5 without repetition?", ["100","120","80","60"], 2, "Hundreds place has 5 nonzero choices; then 5 choices and 4 choices remain: 5 × 5 × 4 = 100."]
+    ["How many 3-digit odd numbers can be formed from digits 1–6 without repetition?", ["48","60","72","120"], 1, "The units digit has 3 odd choices; then 5 choices remain for hundreds and 4 for tens: 3 × 5 × 4 = 60."]
   ],
 };

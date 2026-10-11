@@ -73,12 +73,14 @@
 </div>
 <footer class="footer">SkillUp Academy · Build concepts step by step. <br>Practice carefully, review each explanation, and try again to improve.</footer>
 </div>
-<script src="maths-quiz-bank.js?v=20261011-quiz-bank-v1"></script>
+<script src="maths-quiz-bank.js?v=20261012-maths-audit-fix-v1"></script>
 <script>
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-window.addEventListener('error',function(){const main=document.querySelector('main');if(main&&!main.textContent.trim()){main.innerHTML='<section class="card"><h2>Lesson temporarily unavailable</h2><p class="muted">The page encountered a script error. Refresh once; if the issue continues, report this concept to SkillUp Academy.</p></section>';}});
+function showLessonError(){const main=document.querySelector('main');if(!main)return;let notice=document.getElementById('lessonRuntimeNotice');if(!notice){notice=document.createElement('section');notice.id='lessonRuntimeNotice';notice.className='card';notice.setAttribute('role','alert');notice.style.borderColor='var(--red)';notice.innerHTML='<h2>Some lesson features could not load</h2><p class="muted">Your lesson content is still available. Refresh the page once; if the problem continues, try again later.</p>';main.prepend(notice);}}
+window.addEventListener('error',function(event){if(event&&event.message)showLessonError();});
+window.addEventListener('unhandledrejection',function(){showLessonError();});
 function choose(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let v=1;for(let i=1;i<=r;i++)v=v*(n-r+i)/i;return Math.round(v)}
 function renderMath(){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{});}
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -958,6 +960,15 @@ if(frequencyTables){
  const drawTally=()=>{$('ftButtons').innerHTML='';tallyNames.forEach((name,i)=>{const b=document.createElement('button');b.className='btn secondary';b.type='button';b.textContent='+ '+name;b.addEventListener('click',()=>{tallyCounts[i]++;drawTally()});$('ftButtons').appendChild(b)});$('ftTable').innerHTML='<table style="width:100%;border-collapse:collapse"><thead><tr><th style="padding:8px;border:1px solid var(--line)">Category</th><th style="padding:8px;border:1px solid var(--line)">Tally</th><th style="padding:8px;border:1px solid var(--line)">Frequency</th></tr></thead><tbody>'+tallyNames.map((name,i)=>'<tr><td style="padding:8px;border:1px solid var(--line)">'+name+'</td><td style="padding:8px;border:1px solid var(--line)">'+('||||/'.repeat(Math.floor(tallyCounts[i]/5))+ '|'.repeat(tallyCounts[i]%5)+'</td><td style="padding:8px;border:1px solid var(--line)">'+tallyCounts[i]+'</td></tr>').join('')+'</tbody></table>';$('ftTotal').textContent='Total observations: '+tallyCounts.reduce((a,b)=>a+b,0)};$('ftReset').addEventListener('click',()=>{tallyCounts.fill(0);drawTally()});drawTally();
 }
 
+else if(concept.toLowerCase()!=='binomial coefficients'){
+  // Do not let an unconfigured concept inherit the default Binomial Coefficients lesson.
+  $('heroDescription').textContent='A focused lesson for '+concept+' in '+chapter+'. This concept is part of your SkillUp learning path.';
+  $('heroFormula').textContent=concept;
+  $('learn').innerHTML='<h2>Learn this concept</h2><p><b>'+escapeHtml(concept)+'</b> belongs to the <b>'+escapeHtml(chapter)+'</b> chapter.</p><div class="callout"><b>Learning sequence</b><ol><li>Identify the key definition and notation.</li><li>Study the rule or formula used in this concept.</li><li>Work through a solved example and check each step.</li><li>Practise independently and review mistakes.</li></ol></div><p class="muted">The dedicated lesson for this concept has not been configured yet. This safe fallback prevents unrelated formulas or examples from being shown as if they belonged to this topic.</p>';
+  $('examples').innerHTML='<h2>Worked examples</h2><div class="example"><b>Example section</b><p>Concept-specific worked examples are not available on this page yet. Return to the Maths path and continue with a concept that has a complete lesson, or revisit this page after its lesson is added.</p></div>';
+  $('lab').innerHTML='<h2>Practice lab</h2><p class="muted">An interactive activity will appear here when this concept is implemented. No unrelated experiment is shown for this topic.</p>';
+  document.querySelector('aside').innerHTML='<section class="card"><span class="tag">LESSON STATUS</span><h3>'+escapeHtml(concept)+'</h3><p class="muted">Dedicated lesson content pending.</p><p>Chapter: '+escapeHtml(chapter)+'</p><p>Stage: '+escapeHtml(level)+'</p></section>';
+}
 const quizBank=window.SKILLUP_MATHS_QUIZ_BANK;
 const bankRows=quizBank&&Array.isArray(quizBank[concept])?quizBank[concept]:null;
 if(bankRows&&bankRows.length&&!volumeConcept&&!surfaceConcept&&!advancedSurfaceConcept&&!mixedMensuration&&!compositeSolids&&!unitCapacity&&!realLifeMensuration&&!mensurationRevision&&!dataCollection&&!frequencyTables){

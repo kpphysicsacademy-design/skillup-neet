@@ -25627,8 +25627,8 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       0,
       "n(A ∪ B) = 7 + 4 − 3 = 8."
     ]
-  ]
-"Argand plane": [
+  ],
+  "Argand plane": [
     ["On the Argand plane, z = −4 + 3i is represented by which point?",["(−4, 3)","(3, −4)","(−4, −3)","(4, 3)"],0,"The real part is −4 and the imaginary coefficient is 3."],
     ["Which axis represents the imaginary coefficient?",["Horizontal axis","Vertical axis","Both axes","Neither axis"],1,"The imaginary coefficient is plotted vertically."],
     ["In which quadrant is z = −2 + 5i?",["I","II","III","IV"],1,"Negative real and positive imaginary coordinates give quadrant II."],

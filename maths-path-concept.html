@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="skillup-release" content="20261012-binomial-route-isolation-v1">
+<meta name="skillup-release" content="20261012-binomial-coefficients-class11-v2">
 <title>Maths Concept Studio | SkillUp Academy</title>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -23,7 +23,7 @@
 <section class="hero">
 <div class="eyebrow" id="chapterEyebrow">Binomial Theorem · Concept Studio</div>
 <h1 id="conceptTitle">Binomial Coefficients</h1>
-<p id="heroDescription">Discover how combinations create the coefficients in a binomial expansion. Learn the pattern, experiment with values, and test your understanding with a progressive quiz.</p>
+<p id="heroDescription">Discover how combinations create the coefficients in a binomial expansion. Learn the coefficient formula, solve worked examples, explore Pascal’s triangle, and complete a 30-question mastery quiz.</p>
 <div class="hero-formula" id="heroFormula">\((x+y)^n=\displaystyle\sum_{r=0}^{n}\binom nr x^{n-r}y^r\)</div>
 <div class="stats"><div class="stat">1 · Learn with examples</div><div class="stat">2 · Answer the quiz</div></div>
 </section>
@@ -114,16 +114,36 @@ function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&am
 function makeTriangle(max){let root=$('pascalTriangle');root.innerHTML='';for(let n=0;n<=max;n++){let row=document.createElement('div');row.className='tri-row';for(let r=0;r<=n;r++){let cell=document.createElement('span');cell.className='tri-num';cell.textContent=choose(n,r);row.appendChild(cell)}root.appendChild(row)}}
 function updateLab(){let n=+$('nRange').value;let r=Math.min(+$('rRange').value,n);$('rRange').max=n;$('rRange').value=r;$('nLabel').textContent=n;$('rLabel').textContent=r;let c=choose(n,r);$('labResult').textContent=c;$('labFormula').innerHTML='\\(\\binom{'+n+'}{'+r+'}='+c+'\\)';$('labMeaning').textContent='There are '+c+' ways to select '+r+' item(s) from '+n+'.';let row=$('coefficientRow');row.innerHTML='';for(let k=0;k<=n;k++){let el=document.createElement('span');el.className='tri-num'+(k===r?' focus':'');el.textContent=choose(n,k);row.appendChild(el)}renderMath()}
 const binomialQuestions=[
-{q:'What is the value of C(5, 2)?',o:['5','10','15','20'],a:1,e:'C(5, 2) = 5!/(2!3!) = 10.'},
-{q:'In (x + y)⁶, what is the coefficient of x⁴y²?',o:['6','12','15','20'],a:2,e:'The exponent of y is 2, so the coefficient is C(6, 2) = 15.'},
-{q:'Which identity expresses symmetry?',o:['C(n,r) = C(n,n−r)','C(n,r) = C(r,n)','C(n,r) = n+r','C(n,r) = nr'],a:0,e:'Choosing r objects is equivalent to choosing the n−r objects left out.'},
-{q:'What is C(7, 0)?',o:['0','1','7','49'],a:1,e:'There is exactly one way to select no objects; C(7,0) = 1.'},
-{q:'Which expression equals C(6, 2) + C(6, 3)?',o:['C(7,2)','C(7,3)','C(6,5)','C(8,3)'],a:1,e:'Pascal’s identity gives C(6,2) + C(6,3) = C(7,3) = 35.'},
-{q:'What is the sum of all coefficients in (x + 1)⁵?',o:['16','25','32','64'],a:2,e:'Set x = 1: the sum is (1+1)⁵ = 2⁵ = 32.'},
-{q:'If C(n, 2) = 21 and n ≥ 2, find n.',o:['6','7','8','9'],a:1,e:'n(n−1)/2 = 21 gives n²−n−42 = 0, so the valid n is 7.'},
-{q:'What is the coefficient of x²y³ in (x + y)⁵?',o:['5','10','15','20'],a:1,e:'The exponent of y is 3, so the coefficient is C(5,3) = 10.'},
-{q:'Which is the correct value of C(8, 7)?',o:['1','7','8','56'],a:2,e:'By symmetry, C(8,7) = C(8,1) = 8.'},
-{q:'For n ≥ 1, which statement is always true?',o:['C(n,1)=1','C(n,0)=n','C(n,n)=1','C(n,2)=n'],a:2,e:'There is exactly one way to choose all n objects, so C(n,n) = 1.'}
+{q:'What is the value of C(5, 2)?',o:['5','10','15','20'],a:1,e:'C(5,2)=5!/(2!3!)=(5×4)/(2×1)=10.'},
+{q:'In (x+y)^6, what is the coefficient of x^4y^2?',o:['6','12','15','20'],a:2,e:'The exponent of y is r=2, so the coefficient is C(6,2)=15.'},
+{q:'Which identity expresses symmetry of binomial coefficients?',o:['C(n,r)=C(n,n−r)','C(n,r)=C(r,n)','C(n,r)=n+r','C(n,r)=nr'],a:0,e:'Choosing r objects is equivalent to choosing the n−r objects left out.'},
+{q:'What is C(7,0)?',o:['0','1','7','49'],a:1,e:'There is exactly one way to select no objects: C(7,0)=1.'},
+{q:'C(6,2)+C(6,3) is equal to which expression?',o:['C(7,2)','C(7,3)','C(6,5)','C(8,3)'],a:1,e:'Pascal’s identity gives C(6,2)+C(6,3)=C(7,3)=35.'},
+{q:'What is the sum of all coefficients in (x+1)^5?',o:['16','25','32','64'],a:2,e:'Set x=1. The sum is (1+1)^5=2^5=32.'},
+{q:'If C(n,2)=21 and n≥2, find n.',o:['6','7','8','9'],a:1,e:'n(n−1)/2=21, so n²−n−42=0. The valid positive solution is n=7.'},
+{q:'What is the coefficient of x^2y^3 in (x+y)^5?',o:['5','10','15','20'],a:1,e:'The exponent of y is 3, so the coefficient is C(5,3)=10.'},
+{q:'What is C(8,7)?',o:['1','7','8','56'],a:2,e:'By symmetry, C(8,7)=C(8,1)=8.'},
+{q:'For every non-negative integer n, which statement is true?',o:['C(n,1)=1','C(n,0)=n','C(n,n)=1','C(n,2)=n'],a:2,e:'There is exactly one way to choose all n objects, so C(n,n)=1.'},
+{q:'Evaluate C(6,1).',o:['1','5','6','12'],a:2,e:'C(n,1)=n, so C(6,1)=6.'},
+{q:'Which factorial formula defines C(n,r)?',o:['n!/(n−r)!','n!/[r!(n−r)!]','r!/[n!(n−r)!]','(n−r)!/r!'],a:1,e:'C(n,r)=n!/[r!(n−r)!], for integers 0≤r≤n.'},
+{q:'What is the middle coefficient in the row for n=4?',o:['4','5','6','8'],a:2,e:'The row is 1, 4, 6, 4, 1. The middle coefficient is C(4,2)=6.'},
+{q:'What is the sum of the coefficients in (x+y)^4?',o:['8','12','16','24'],a:2,e:'Set x=1 and y=1: (1+1)^4=2^4=16.'},
+{q:'If C(n,0)=1, what is C(n,n)?',o:['0','1','n','n!'],a:1,e:'Both edge coefficients equal 1: C(n,0)=C(n,n)=1.'},
+{q:'Find C(7,2).',o:['14','21','28','35'],a:1,e:'C(7,2)=7×6/(2×1)=21.'},
+{q:'Which row is the n=3 row of Pascal’s triangle?',o:['1, 2, 1','1, 3, 3, 1','1, 4, 6, 4, 1','1, 3, 6, 3, 1'],a:1,e:'The n=3 row is 1, 3, 3, 1.'},
+{q:'Using Pascal’s identity, C(5,2)+C(5,3) equals…',o:['C(6,2)','C(6,3)','C(5,5)','C(7,3)'],a:1,e:'C(n,r)+C(n,r+1)=C(n+1,r+1), so the sum is C(6,3)=20.'},
+{q:'What is C(9,8)?',o:['1','8','9','72'],a:2,e:'C(9,8)=C(9,1)=9 by symmetry.'},
+{q:'In the general term of (x+y)^n, what is the term with index r?',o:['C(n,r)x^r y^(n−r)','C(n,r)x^(n−r)y^r','C(r,n)x^n y^r','C(n,r)x^n y^n'],a:1,e:'The general term is T_(r+1)=C(n,r)x^(n−r)y^r.'},
+{q:'How many terms appear in the expansion of (a+b)^7?',o:['7','8','14','49'],a:1,e:'For a non-negative integer n, the expansion has n+1 terms; here 7+1=8.'},
+{q:'What is C(10,2)?',o:['20','35','45','90'],a:2,e:'C(10,2)=10×9/2=45.'},
+{q:'Which coefficient is largest in the row for n=6?',o:['C(6,1)','C(6,2)','C(6,3)','C(6,5)'],a:2,e:'The row is 1, 6, 15, 20, 15, 6, 1; its largest value is C(6,3)=20.'},
+{q:'If C(n,1)=12, what is n?',o:['6','11','12','13'],a:2,e:'C(n,1)=n, so n=12.'},
+{q:'What is C(5,5)?',o:['0','1','5','120'],a:1,e:'There is exactly one way to choose all five objects: C(5,5)=1.'},
+{q:'What is the coefficient of x^3y^3 in (x+y)^6?',o:['15','20','30','40'],a:1,e:'The exponent of y is 3, so the coefficient is C(6,3)=20.'},
+{q:'If C(n,2)=10 and n≥2, find n.',o:['4','5','6','10'],a:1,e:'n(n−1)/2=10, so n²−n−20=0 and the valid solution is n=5.'},
+{q:'What is the sum of the entries in the n=3 row of Pascal’s triangle?',o:['4','6','8','10'],a:2,e:'The row is 1,3,3,1 and its sum is 8=2^3.'},
+{q:'Which pair of coefficients must be equal?',o:['C(7,1) and C(7,2)','C(8,2) and C(8,6)','C(6,1) and C(5,1)','C(9,2) and C(9,3)'],a:1,e:'Symmetry gives C(8,2)=C(8,8−2)=C(8,6).'},
+{q:'Find the coefficient of x^4 in (x+1)^6.',o:['6','10','15','20'],a:2,e:'The x^4 term corresponds to choosing 2 factors of 1, so its coefficient is C(6,2)=15.'}
 ];
 let questions=[];
 let currentQuestion=0,quizScore=0,questionChecked=false,answeredQuestions=[];

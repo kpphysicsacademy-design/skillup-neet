@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#10182b">
+<meta name="theme-color" content="#e9ede5">
 <meta name="description" content="Build strong mathematical foundations with SkillUp Academy. Explore chapter-wise concepts and progressive practice for Classes 6–10.">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>IIT Maths Foundation · SkillUp Academy</title>
@@ -47,11 +47,11 @@ body{background:#e9ede5;color:var(--text)}
 <div class="eyebrow">MATHEMATICAL THINKING · CLASSES 6–10</div>
 <h1>IIT Maths<br><span style="color:var(--mint)">Foundation Path</span></h1>
 <p>Build the fundamentals that make advanced mathematics easier. Learn concepts step by step, recognize patterns, explain your reasoning, and progress from core skills to challenging problems.</p>
-<div class="actions"><a class="btn secondary" href="index.html">← Home</a><a class="btn" href="#class-map">Explore class-wise topics ↓</a></div>
+<div class="actions"><a class="btn secondary" href="index.html">← Home</a><a class="btn" href="#class-6">Start Class 6 ↓</a></div>
 <div class="stats"><div class="stat"><b>5</b> class levels</div><div class="stat"><b id="chapter-count">—</b> chapters</div><div class="stat"><b id="topic-count">—</b> concepts</div><div class="stat">Core learning + IIT enrichment</div></div>
 </section>
 <h2 class="section-title">Your learning journey</h2>
-<p class="section-sub">Choose a class, expand a chapter, and open any concept. The path reads its chapter structure from the shared Maths curriculum.</p>
+<p class="section-sub">Start with Class 6 or jump to your current level. Expand a chapter, choose one concept, and practise it independently. Curriculum content is loaded from the shared Maths data file.</p>
 <nav class="levels" aria-label="Jump to class">
 <a class="level-jump" href="#class-6"><b>Class 6</b><span>Core foundations</span></a><a class="level-jump" href="#class-7"><b>Class 7</b><span>Build fluency</span></a><a class="level-jump" href="#class-8"><b>Class 8</b><span>Connect ideas</span></a><a class="level-jump" href="#class-9"><b>Class 9</b><span>Deepen concepts</span></a><a class="level-jump" href="#class-10"><b>Class 10</b><span>Pre-IIT readiness</span></a>
 </nav>
@@ -129,6 +129,9 @@ function render(){
  });
  root.replaceChildren(...cards);
  chapterCount.textContent=chaptersTotal;topicCount.textContent=topicsTotal;
+ // Make the first step visible immediately instead of showing an empty-looking path.
+ const firstClass=root.querySelector('.class-card');
+ if(firstClass){firstClass.open=true;const firstChapter=firstClass.querySelector('.chapter');if(firstChapter)firstChapter.open=true;}
  filter();
 }
 function filter(){
@@ -152,6 +155,12 @@ function filter(){
 }
 search.addEventListener('input',filter);
 document.getElementById('clear-search').addEventListener('click',()=>{search.value='';filter();search.focus();});
+// Class shortcuts open their destination; native anchors alone can land on collapsed cards.
+document.querySelectorAll('.level-jump').forEach(link=>link.addEventListener('click',event=>{
+ const id=(link.getAttribute('href')||'').slice(1);const card=document.getElementById(id);if(!card)return;
+ event.preventDefault();card.open=true;const firstChapter=card.querySelector('.chapter');if(firstChapter)firstChapter.open=true;
+ history.replaceState(null,'','#'+id);card.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+}));
 render();
 })();
 </script>

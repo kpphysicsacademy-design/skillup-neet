@@ -4,7 +4,6 @@ window.SKILLUP_MATH_PATH=[
     "CLASS 6 • NCERT FOUNDATION",
     {
       "Knowing Our Numbers": [
-        "Comparing numbers",
         "Large numbers in daily life",
         "Estimation and rounding",
         "Roman numerals"

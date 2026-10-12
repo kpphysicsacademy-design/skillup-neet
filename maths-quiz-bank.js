@@ -1117,15 +1117,15 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
       "Division by zero is undefined."
     ],
     [
-      "What is the standard form of the rational number 18 / (-24)?",
+      "What is the standard form of the rational number 18 / (-24), with a positive denominator?",
       [
-        "9 / (-12)",
+        "9 / 12",
         "-3 / 4",
-        "3 / (-4)",
-        "6 / 8"
+        "3 / 4",
+        "-6 / 8"
       ],
       1,
-      "Divide numerator and denominator by 6 and keep the denominator positive."
+      "Divide numerator and denominator by 6, then write the equivalent fraction with a positive denominator: -3/4."
     ],
     [
       "A rational number is said to be negative if:",

@@ -93,8 +93,8 @@ const isDedicatedBinomialPage =
   /^CLASS 11\s*•\s*SENIOR CORE$/i.test(requestedLevel) &&
   /^Binomial Theorem$/i.test(requestedChapter);
 // Binomial Coefficients content is permitted only on its dedicated Class 11 route.
-// Keep the previously terminated "Comparing numbers" route terminated.
-if (!isDedicatedBinomialPage && !/^comparing numbers$/i.test(requestedConcept)) {
+// Keep Binomial Coefficients isolated to its dedicated Class 11 route.
+if (!isDedicatedBinomialPage) {
 document.title = 'SkillUp Mathematics · ' + requestedConcept;
 const heading = document.querySelector('h1'); if (heading) heading.textContent = requestedConcept;
 const kicker = document.querySelector('.eyebrow, .kicker, .section-label'); if (kicker) kicker.textContent = (requestedChapter ? requestedChapter + ' · ' : '') + 'CONCEPT STUDIO';
@@ -207,10 +207,7 @@ if(!params.get('concept')||!params.get('concept').trim()){
  return;
 }
 const concept=params.get('concept').trim();
-if(/^comparing numbers$/i.test(concept)){
- location.replace('maths-home.html?v=20261012-maths-comparing-numbers-removed-v1');
- return;
-}
+
 const level=params.get('level')||'CLASS 11 • SENIOR CORE';
 const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';

@@ -26,7 +26,7 @@ var levels=window.SKILLUP_MATH_PATH||[],all=[],chapterCount=0;
 levels.forEach(function(levelRow,levelIndex){
  var level=levelRow[0],chapters=levelRow[1]||{},names=Object.keys(chapters);
  chapterCount+=names.length;
- names.forEach(function(chapter){(chapters[chapter]||[]).forEach(function(concept){all.push({level:level,levelIndex:levelIndex,chapter:chapter,concept:String(concept)});});});
+ names.forEach(function(chapter){(chapters[chapter]||[]).forEach(function(concept){concept=String(concept);if(/^comparing numbers$/i.test(concept))return;all.push({level:level,levelIndex:levelIndex,chapter:chapter,concept:concept});});});
 });
 var content=document.getElementById('content'),search=document.getElementById('search'),filter=document.getElementById('classFilter'),empty=document.getElementById('empty');
 document.getElementById('classes').textContent=levels.length;document.getElementById('chapters').textContent=chapterCount;document.getElementById('concepts').textContent=all.length;

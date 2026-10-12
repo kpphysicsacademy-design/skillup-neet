@@ -107,7 +107,13 @@ function reset(){currentQuestion=0;quizScore=0;questionChecked=false;answeredQue
 document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',btn.dataset.tab==='quiz'?s.id!=='quiz':s.id==='quiz'));if(btn.dataset.tab==='learn')renderMath();else if(btn.dataset.tab==='examples')renderMath();else if(btn.dataset.tab==='lab')renderMath();else renderMath();window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'})}));
 $('nRange').addEventListener('input',updateLab);$('rRange').addEventListener('input',updateLab);$('submitQuiz').addEventListener('click',submit);$('resetQuiz').addEventListener('click',reset);$('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
 const params=new URLSearchParams(location.search);
-const concept=(params.get('concept')||'Binomial Coefficients').trim();
+// Never silently show Binomial Coefficients when a concept link loses its query string.
+// Return to the Maths concept navigator so the learner can choose the intended topic.
+if(!params.get('concept')||!params.get('concept').trim()){
+ location.replace('maths-home.html?v=20261012-concept-route-guard-v1');
+ return;
+}
+const concept=params.get('concept').trim();
 const level=params.get('level')||'CLASS 11 • SENIOR CORE';
 const chapter=params.get('chapter')||'Binomial Theorem';
 const rational=concept.toLowerCase()==='rational numbers';

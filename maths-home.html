@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#10182b">
-<meta name="skillup-release" content="20261012-maths-navigation-audit-v2">
+<meta name="skillup-release" content="20261012-maths-existing-quizzes-v3">
 <title>SkillUp Maths · Class-wise Quizzes</title>
 <style>
 :root{--bg:#0b1020;--panel:#131c31;--line:#2a3856;--text:#f2f5ff;--muted:#a9b6d0;--accent:#82aaff;--mint:#6ee7c0}
@@ -16,9 +16,9 @@
 <section class="hero"><div class="eyebrow">CONCEPT PRACTICE · CLASS 6–12 + JEE</div><h1>Mathematics Quiz Path</h1><p>Browse the class-wise curriculum and find the concept you want to study. Concept cards are informational; only verified quiz routes should be linked from a dedicated navigation or quiz index.</p><div class="stats"><div class="stat"><b id="classes">0</b> classes/levels</div><div class="stat"><b id="chapters">0</b> chapters</div><div class="stat"><b id="concepts">0</b> concepts</div></div></section>
 <div class="tools"><input id="search" class="search" type="search" placeholder="Search class, chapter, or concept…" aria-label="Search class, chapter, or concept"><select id="classFilter" class="select" aria-label="Filter by class"><option value="">All classes and levels</option></select></div>
 <div id="content"></div><div id="empty" class="empty">No matching concepts. Try a different search or class.</div>
-<div class="foot">Concept cards list the curriculum only. Use a dedicated verified quiz page when one is available. Use the navigation above to return Home or open IIT Maths Foundation.</div>
+<div class="foot">Cards marked “Start quiz” open an existing dedicated quiz page. Concepts marked “Quiz coming soon” remain non-clickable until a matching quiz is available.</div>
 </div>
-<script src="maths-path-data.js?v=20261012-maths-navigation-audit-v2"></script>
+<script src="maths-path-data.js?v=20261012-maths-existing-quizzes-v3"></script>
 <script>
 (function(){
 'use strict';
@@ -28,6 +28,52 @@ levels.forEach(function(levelRow,levelIndex){
  chapterCount+=names.length;
  names.forEach(function(chapter){(chapters[chapter]||[]).forEach(function(concept){concept=String(concept);if(/^comparing numbers$/i.test(concept))return;all.push({level:level,levelIndex:levelIndex,chapter:chapter,concept:concept});});});
 });
+var verifiedQuizRoutes={
+  "large numbers in daily life|||class 6 • ncert foundation|||knowing our numbers": "maths-large-numbers-quiz.html",
+  "estimation and rounding|||class 6 • ncert foundation|||knowing our numbers": "maths-estimation-rounding-quiz.html",
+  "roman numerals|||class 6 • ncert foundation|||knowing our numbers": "maths-roman-numerals-quiz.html",
+  "natural numbers and whole numbers|||class 6 • ncert foundation|||whole numbers": "maths-natural-whole-numbers-quiz.html",
+  "number line|||class 6 • ncert foundation|||whole numbers": "maths-number-line-quiz.html",
+  "successor and predecessor|||class 6 • ncert foundation|||whole numbers": "maths-successor-predecessor-quiz.html",
+  "properties of whole numbers|||class 6 • ncert foundation|||whole numbers": "maths-properties-whole-numbers-quiz.html",
+  "multiplication and division of fractions|||class 6 • ncert foundation|||fractions": "maths-fraction-mul-div-quiz.html",
+  "addition and subtraction of fractions|||class 6 • ncert foundation|||fractions": "maths-fraction-add-sub-quiz.html",
+  "comparing fractions|||class 6 • ncert foundation|||fractions": "maths-comparing-fractions-quiz.html",
+  "equivalent fractions|||class 6 • ncert foundation|||fractions": "maths-equivalent-fractions-quiz.html",
+  "fractions|||class 6 • ncert foundation|||fractions": "maths-fractions-quiz.html",
+  "factors and multiples|||class 6 • ncert foundation|||playing with numbers": "maths-factors-multiples-quiz.html",
+  "prime and composite numbers|||class 6 • ncert foundation|||playing with numbers": "maths-prime-composite-quiz.html",
+  "divisibility tests|||class 6 • ncert foundation|||playing with numbers": "maths-divisibility-tests-quiz.html",
+  "prime factorisation|||class 6 • ncert foundation|||playing with numbers": "maths-prime-factorisation-quiz.html",
+  "hcf and lcm|||class 6 • ncert foundation|||playing with numbers": "maths-hcf-lcm-quiz.html",
+  "points lines and line segments|||class 6 • ncert foundation|||basic geometry": "maths-points-lines-segments-quiz.html",
+  "rays and angles|||class 6 • ncert foundation|||basic geometry": "maths-rays-angles-quiz.html",
+  "curves and polygons|||class 6 • ncert foundation|||basic geometry": "maths-curves-polygons-quiz.html",
+  "measuring line segments|||class 6 • ncert foundation|||understanding elementary shapes": "maths-measuring-line-segments-quiz.html",
+  "integer addition and subtraction|||class 6 • ncert foundation|||integers": "maths-integer-addition-subtraction-quiz.html",
+  "comparing integers|||class 6 • ncert foundation|||integers": "maths-comparing-integers-quiz.html",
+  "number line with integers|||class 6 • ncert foundation|||integers": "maths-number-line-integers-quiz.html",
+  "positive and negative integers|||class 6 • ncert foundation|||integers": "maths-positive-negative-integers-quiz.html",
+  "3d shapes and nets|||class 6 • ncert foundation|||understanding elementary shapes": "maths-3d-shapes-nets-quiz.html",
+  "polygons|||class 6 • ncert foundation|||understanding elementary shapes": "maths-polygons-quiz.html",
+  "triangles and quadrilaterals|||class 6 • ncert foundation|||understanding elementary shapes": "maths-triangles-quadrilaterals-quiz.html",
+  "types of angles|||class 6 • ncert foundation|||understanding elementary shapes": "maths-types-of-angles-quiz.html",
+  "circle basics|||class 6 • ncert foundation|||basic geometry": "maths-circle-basics-quiz.html",
+  "forming equations|||class 7 • ncert foundation|||simple equations": "maths-equations-image-quiz.html",
+  "solving one-step equations|||class 7 • ncert foundation|||simple equations": "maths-equations-image-quiz.html",
+  "word problems using equations|||class 7 • ncert foundation|||simple equations": "maths-word-problems-equations-quiz.html",
+  "place value in decimals|||class 6 • ncert foundation|||decimals": "maths-place-value-decimals-quiz.html",
+  "comparing decimals|||class 6 • ncert foundation|||decimals": "maths-comparing-decimals-quiz.html",
+  "decimal addition and subtraction|||class 6 • ncert foundation|||decimals": "maths-decimal-add-sub-quiz.html",
+  "multiplication and division of decimals|||class 6 • ncert foundation|||decimals": "maths-decimal-mul-div-quiz.html",
+  "collecting and organising data|||class 6 • ncert foundation|||data handling": "maths-collecting-organising-data-quiz.html",
+  "pictographs|||class 6 • ncert foundation|||data handling": "maths-pictographs-quiz.html",
+  "bar graphs|||class 6 • ncert foundation|||data handling": "maths-bar-graphs-quiz.html",
+  "reading tables|||class 6 • ncert foundation|||data handling": "maths-reading-tables-quiz.html",
+  "perimeter|||class 6 • ncert foundation|||mensuration": "maths-perimeter-quiz.html",
+  "area using unit squares|||class 6 • ncert foundation|||mensuration": "maths-area-unit-squares-quiz.html",
+  "perimeter of rectangles|||class 6 • ncert foundation|||mensuration": "maths-perimeter-rectangles-quiz.html"
+};
 var content=document.getElementById('content'),search=document.getElementById('search'),filter=document.getElementById('classFilter'),empty=document.getElementById('empty');
 document.getElementById('classes').textContent=levels.length;document.getElementById('chapters').textContent=chapterCount;document.getElementById('concepts').textContent=all.length;
 levels.forEach(function(row){var o=document.createElement('option');o.value=row[0];o.textContent=row[0];filter.appendChild(o);});
@@ -39,7 +85,9 @@ function render(){
  found.forEach(function(x){
   if(x.level!==currentLevel){if(currentLevel)html+='</div></section>';currentLevel=x.level;currentChapter='';html+='<section class="class-block"><div class="class-head"><h2>'+esc(x.level)+'</h2><span>Class concepts</span></div>';}
   if(x.chapter!==currentChapter){if(currentChapter)html+='</div></div>';currentChapter=x.chapter;html+='<div class="chapter"><h3>'+esc(x.chapter)+'</h3><div class="grid">';}
-  html+='<div class="concept" aria-label="Curriculum concept: '+esc(x.concept)+'"><div><div class="concept-name">'+esc(x.concept)+'</div><div class="concept-meta">'+esc(x.chapter)+' · Concept</div></div></div>';
+  var routeKey=(x.concept+'|||'+x.level+'|||'+x.chapter).toLowerCase(),quizPage=verifiedQuizRoutes[routeKey];
+  if(quizPage){html+='<a class="concept" href="'+esc(quizPage)+'?v=20261012-maths-existing-quizzes-v3" aria-label="Open existing quiz for '+esc(x.concept)+'"><div><div class="concept-name">'+esc(x.concept)+'</div><div class="concept-meta">'+esc(x.chapter)+' · Start quiz</div></div><span class="arrow" aria-hidden="true">›</span></a>';}
+  else{html+='<div class="concept" aria-label="Curriculum concept: '+esc(x.concept)+'"><div><div class="concept-name">'+esc(x.concept)+'</div><div class="concept-meta">'+esc(x.chapter)+' · Quiz coming soon</div></div></div>';}
  });
  if(currentLevel)html+='</div></div></section>';
  content.innerHTML=html;empty.style.display=found.length?'none':'block';

@@ -1,19 +1,671 @@
+/* SkillUp Mathematics curriculum: NCERT Classes 6–12 + IIT JEE Main/Advanced extension. Topics are organized progressively; verify annual official syllabus before exam prep. */
 window.SKILLUP_MATH_PATH=[
-["CLASS 8 • FOUNDATION",{"Number System":["Rational numbers","Equivalent rational numbers","Comparing rational numbers","Operations on rational numbers","Properties of rational numbers","Powers and exponents","Squares and square roots","Cubes and cube roots"],"Algebra Basics":["Variables and constants","Algebraic expressions","Terms and coefficients","Like and unlike terms","Algebraic identities","Factorisation basics","Linear equations in one variable"],"Geometry Basics":["Basic geometric ideas","Lines and angles","Parallel lines and transversals","Triangles","Quadrilaterals","Polygons","Geometric constructions"],"Mensuration":["Perimeter","Area of polygons","Area of circle","Surface area basics","Volume of cube and cuboid"],"Data Handling":["Data collection","Frequency tables","Bar graphs","Pie charts","Histograms","Probability basics"]}],
-["CLASS 9 • CORE",{"Number Systems":["Irrational numbers","Real numbers","Decimal expansions","Laws of exponents","Rationalisation basics"],"Polynomials":["Polynomial basics","Degree of polynomial","Zeros of polynomial","Remainder theorem basics","Factor theorem basics","Factorisation of polynomials"],"Linear Equations":["Linear equations in two variables","Coordinate representation","Graph of a linear equation"],"Geometry":["Euclid's geometry","Triangles and congruence","Parallelograms","Circles"],"Coordinate Geometry":["Cartesian plane","Coordinates of a point","Plotting points","Distance intuition"],"Mensuration":["Heron's formula","Surface areas","Volumes","Area of triangle"],"Statistics":["Data representation","Mean","Median","Mode","Frequency distribution"],"Probability":["Experimental probability","Theoretical probability","Simple events"]}],
-["CLASS 10 • BRIDGE",{"Real Numbers":["Euclid division algorithm","Fundamental theorem of arithmetic","Prime factorisation","HCF and LCM","Irrationality proofs","Decimal expansion of rational numbers"],"Polynomials":["Zeros of a polynomial","Relation between zeros and coefficients","Quadratic polynomial factorisation","Graphical meaning of zeros"],"Pair of Linear Equations":["Graphical solution","Substitution method","Elimination method","Consistency of equations","Word problems"],"Quadratic Equations":["Standard quadratic equations","Factorisation method","Quadratic formula","Nature of roots"],"Arithmetic Progressions":["Sequences","Arithmetic progression","Common difference","Nth term","Sum of terms"],"Triangles":["Similarity of triangles","Basic proportionality theorem","Pythagoras theorem","Applications of similarity"],"Coordinate Geometry":["Distance formula","Section formula","Midpoint"],"Trigonometry":["Trigonometric ratios","Values of standard angles","Trigonometric identities","Heights and distances"],"Circles":["Tangent to a circle","Number of tangents","Tangent properties"],"Statistics and Probability":["Grouped data","Mean of grouped data","Median of grouped data","Mode of grouped data","Classical probability"]}],
-["CLASS 11 • SENIOR CORE",{"Sets":["Set representation","Types of sets","Empty set","Finite and infinite sets","Subset","Power set","Universal set","Union","Intersection","Complement","Difference","De Morgan's laws","Cardinality"],"Relations and Functions":["Ordered pairs","Cartesian product","Relations","Domain and codomain","Functions as mappings","Range of a function","One-one functions","Onto functions","Composition of functions","Graphs of functions"],"Trigonometric Functions":["Angle measure","Degree and radian measure","Trigonometric functions","Signs in quadrants","Periodicity","Graphs of trigonometric functions","Addition formulae","Multiple angles","Trigonometric equations"],"Complex Numbers":["Complex number representation","Real and imaginary parts","Algebra of complex numbers","Conjugate","Modulus","Argument","Argand plane","Polar representation"],"Permutations and Combinations":["Fundamental principle of counting","Factorial","Permutations","Combinations","Restricted arrangements","Circular arrangements"],"Binomial Theorem":["Binomial expansion","General term","Middle term","Binomial coefficients","Properties of coefficients"],"Sequences and Series":["Geometric progression","Arithmetic mean","Geometric mean","Finite AP sums","Finite GP sums","Special series"],"Straight Lines":["Cartesian coordinates","Slope","Forms of straight-line equation","Parallel lines","Perpendicular lines","Angle between lines"],"Conic Sections":["Circle equation","Parabola","Focus","Directrix","Eccentricity","Ellipse","Hyperbola"],"Limits and Continuity":["Limits intuition","Limit of a function","Left and right limits","Standard limits","Continuity intuition"],"Probability":["Random experiment","Sample space","Events","Compound events","Basic probability"]}],
-["CLASS 12 • ADVANCED CORE",{"Matrices":["Matrix representation","Order of matrix","Types of matrices","Matrix addition","Scalar multiplication","Matrix multiplication","Transpose","Symmetric matrices"],"Determinants":["Determinants of order 2","Determinants of order 3","Determinant properties","Minors and cofactors","Adjoint","Inverse of a matrix","Linear equations using matrices"],"Continuity and Differentiability":["Continuity","Derivative definition","Derivative rules","Product rule","Quotient rule","Chain rule","Implicit differentiation","Second derivatives"],"Applications of Derivatives":["Tangents","Normals","Increasing functions","Decreasing functions","Critical points","Maximum values","Minimum values","Local extrema","Rate of change"],"Integrals":["Antiderivative","Standard integrals","Algebraic integration","Trigonometric integration","Exponential integration","Integration by parts","Partial fractions","Definite integral","Properties of definite integrals"],"Applications of Integrals":["Area under a curve","Area bounded by curves","Area between curves","Intersection points"],"Differential Equations":["Formation of differential equations","Order","Degree","General solution","Particular solution","Variable separation","Linear first-order differential equations"],"Vectors":["Vector representation","Magnitude","Addition of vectors","Dot product","Cross product","Projection"],"Three Dimensional Geometry":["3D coordinates","Distance between points","Section formula in 3D","Direction ratios","Direction cosines","Equation of a line in space","Equation of a plane","Distance from point to plane","Angle between line and plane"],"Probability":["Conditional probability","Independent events","Total probability","Bayes theorem","Random variable","Mean of random variable","Variance of random variable"]}],
-["JEE • MASTERY",{
-"Advanced Algebra":["Quadratic equations","Roots of quadratic equations","Relations between roots and coefficients","Parameter-based quadratic problems","Logarithmic equations","Inequalities","Complex numbers","Argand plane","Modulus and argument","Theory of equations","Polynomial transformations","Advanced sequences and series","Arithmetic-geometric progressions","Special series and telescoping"],
-"Advanced Coordinate Geometry":["Pair of straight lines","Circle problems","Parabola problems","Ellipse problems","Hyperbola problems","Tangents and normals","Combined straight lines and circles","Chord of contact","Pole and polar","Second-degree equations","Coordinate transformations"],
-"Advanced Calculus":["Advanced limits","Continuity problems","Differentiability problems","Application of derivatives","Definite integral problems","Area problems","Differential equation problems","Indefinite integration techniques","Properties of definite integrals","Integration by parts and partial fractions","Maxima and minima","Monotonicity and graph analysis"],
-"Advanced Trigonometry":["Trigonometric identities","Trigonometric equations","Inverse trigonometric functions","General solutions of trigonometric equations","Properties of triangles","Solution of triangles","Height and distance problems"],
-"Combinatorics and Binomial":["Permutations and combinations","Advanced counting principles","Inclusion-exclusion principle","Binomial theorem","General and middle terms","Binomial coefficient identities","Multinomial-style counting"],
-"Matrices and Determinants":["Matrix operations","Types of matrices","Determinants","Properties of determinants","Minors and cofactors","Inverse of a matrix","System of linear equations","Matrix rank and consistency"],
-"Sequences and Series":["Arithmetic progression problems","Geometric progression problems","Harmonic progression","Special series","Sigma notation","Recurrence-based sequences","Infinite geometric series"],
-"Vectors and 3D Geometry":["Vector algebra","Dot product","Cross product","Scalar triple product","Vector equations of lines","Vector equations of planes","Line-plane relationships","Shortest distance problems","3D geometry mixed problems"],
-"Advanced Probability":["Random variables","Expectation","Variance","Probability distributions","Conditional probability","Bayes theorem","Binomial probability","Independent events","Advanced probability problems"],
-"Sets Functions and Relations":["Set operations","Venn diagram problems","Relations","Equivalence relations","Functions and mappings","Domain and range","Composite functions","Inverse functions","Functional equations"],
-"Mixed Problem Solving":["Algebra mixed practice","Coordinate geometry mixed practice","Trigonometry mixed practice","Calculus mixed practice","Vectors and 3D mixed practice","Probability and combinatorics mixed practice","JEE Main level problems","JEE Advanced level problems","Multi-concept JEE problems","Integer-answer type problems","Multiple-correct problems","Match-the-following problems"]}]
+  [
+    "CLASS 6 • NCERT FOUNDATION",
+    {
+      "Knowing Our Numbers": [
+        "Comparing numbers",
+        "Large numbers in daily life",
+        "Estimation and rounding",
+        "Roman numerals"
+      ],
+      "Whole Numbers": [
+        "Natural numbers and whole numbers",
+        "Number line",
+        "Successor and predecessor",
+        "Properties of whole numbers"
+      ],
+      "Playing with Numbers": [
+        "Factors and multiples",
+        "Prime and composite numbers",
+        "Divisibility tests",
+        "Prime factorisation",
+        "HCF and LCM"
+      ],
+      "Basic Geometry": [
+        "Points lines and line segments",
+        "Rays and angles",
+        "Curves and polygons",
+        "Circle basics"
+      ],
+      "Understanding Elementary Shapes": [
+        "Measuring line segments",
+        "Types of angles",
+        "Triangles and quadrilaterals",
+        "Polygons",
+        "3D shapes and nets"
+      ],
+      "Integers": [
+        "Positive and negative integers",
+        "Number line with integers",
+        "Comparing integers",
+        "Integer addition and subtraction"
+      ],
+      "Fractions": [
+        "Proper and improper fractions",
+        "Equivalent fractions",
+        "Simplest form",
+        "Comparing fractions",
+        "Addition and subtraction of fractions"
+      ],
+      "Decimals": [
+        "Place value in decimals",
+        "Comparing decimals",
+        "Decimal addition and subtraction",
+        "Multiplication and division of decimals"
+      ],
+      "Data Handling": [
+        "Collecting and organising data",
+        "Pictographs",
+        "Bar graphs",
+        "Reading tables"
+      ],
+      "Mensuration": [
+        "Perimeter",
+        "Area using unit squares",
+        "Perimeter of rectangles",
+        "Area of rectangles"
+      ],
+      "Algebra": [
+        "Variables",
+        "Patterns and rules",
+        "Simple expressions"
+      ],
+      "Ratio and Proportion": [
+        "Ratio",
+        "Equivalent ratios",
+        "Unitary method"
+      ],
+      "Symmetry and Practical Geometry": [
+        "Line symmetry",
+        "Basic constructions",
+        "Using ruler and compass"
+      ]
+    }
+  ],
+  [
+    "CLASS 7 • NCERT FOUNDATION",
+    {
+      "Integers": [
+        "Integer addition",
+        "Integer subtraction",
+        "Multiplication of integers",
+        "Division of integers",
+        "Properties of operations"
+      ],
+      "Fractions and Decimals": [
+        "Multiplication of fractions",
+        "Division of fractions",
+        "Multiplication of decimals",
+        "Division of decimals",
+        "Word problems"
+      ],
+      "Data Handling": [
+        "Mean median and mode",
+        "Bar graphs",
+        "Double bar graphs",
+        "Simple probability"
+      ],
+      "Simple Equations": [
+        "Forming equations",
+        "Solving one-step equations",
+        "Word problems using equations"
+      ],
+      "Lines and Angles": [
+        "Complementary and supplementary angles",
+        "Adjacent angles",
+        "Linear pairs",
+        "Vertically opposite angles",
+        "Parallel lines and transversal"
+      ],
+      "Triangles and Their Properties": [
+        "Median and altitude",
+        "Angle sum property",
+        "Exterior angle property",
+        "Types of triangles",
+        "Pythagoras property"
+      ],
+      "Comparing Quantities": [
+        "Ratios and percentages",
+        "Percentage increase and decrease",
+        "Profit and loss",
+        "Simple interest"
+      ],
+      "Rational Numbers": [
+        "Positive and negative rational numbers",
+        "Standard form",
+        "Equivalent rational numbers",
+        "Rational number operations",
+        "Rational number properties"
+      ],
+      "Perimeter and Area": [
+        "Perimeter of plane figures",
+        "Area of parallelograms",
+        "Area of triangles",
+        "Circle circumference and area"
+      ],
+      "Algebraic Expressions": [
+        "Terms and coefficients",
+        "Like and unlike terms",
+        "Addition and subtraction",
+        "Simple expressions"
+      ],
+      "Exponents and Powers": [
+        "Laws of exponents",
+        "Powers with integer exponents",
+        "Standard form of large numbers"
+      ],
+      "Symmetry": [
+        "Line symmetry",
+        "Rotational symmetry"
+      ],
+      "Visualising Solid Shapes": [
+        "Faces edges and vertices",
+        "Nets of solids",
+        "Views of 3D objects"
+      ]
+    }
+  ],
+  [
+    "CLASS 8 • NCERT FOUNDATION",
+    {
+      "Rational Numbers": [
+        "Rational numbers",
+        "Equivalent rational numbers",
+        "Comparing rational numbers",
+        "Operations on rational numbers",
+        "Properties of rational numbers"
+      ],
+      "Linear Equations in One Variable": [
+        "Solving equations",
+        "Equations with variables on both sides",
+        "Equations reducible to linear form",
+        "Word problems"
+      ],
+      "Understanding Quadrilaterals": [
+        "Polygons and angle sums",
+        "Types of quadrilaterals",
+        "Parallelogram properties",
+        "Special quadrilaterals"
+      ],
+      "Data Handling": [
+        "Grouped data",
+        "Pie charts",
+        "Probability experiments"
+      ],
+      "Squares and Square Roots": [
+        "Perfect squares",
+        "Square roots by factorisation",
+        "Square roots by division method"
+      ],
+      "Cubes and Cube Roots": [
+        "Perfect cubes",
+        "Cube roots by prime factorisation"
+      ],
+      "Comparing Quantities": [
+        "Percentages",
+        "Profit loss and discount",
+        "Tax and bills",
+        "Compound interest basics"
+      ],
+      "Algebraic Expressions and Identities": [
+        "Monomials binomials and polynomials",
+        "Addition and subtraction",
+        "Multiplication of expressions",
+        "Standard identities",
+        "Factorisation basics"
+      ],
+      "Mensuration": [
+        "Area of trapezium and polygons",
+        "Surface area of cube and cuboid",
+        "Volume of cube and cuboid",
+        "Cylinder basics"
+      ],
+      "Exponents and Powers": [
+        "Laws of exponents",
+        "Negative exponents",
+        "Scientific notation"
+      ],
+      "Direct and Inverse Proportions": [
+        "Direct proportion",
+        "Inverse proportion",
+        "Word problems"
+      ],
+      "Factorisation": [
+        "Common factor",
+        "Factorisation using identities",
+        "Division of algebraic expressions"
+      ],
+      "Introduction to Graphs": [
+        "Coordinate plane",
+        "Plotting points",
+        "Reading line graphs"
+      ],
+      "Playing with Numbers": [
+        "Number patterns",
+        "Divisibility puzzles",
+        "Generalising number properties"
+      ]
+    }
+  ],
+  [
+    "CLASS 9 • NCERT CORE",
+    {
+      "Number Systems": [
+        "Natural integers rational and irrational numbers",
+        "Real number line",
+        "Decimal expansions",
+        "Laws of exponents for real numbers",
+        "Rationalisation"
+      ],
+      "Polynomials": [
+        "Polynomial terminology",
+        "Degree and types",
+        "Zeros of polynomials",
+        "Remainder theorem",
+        "Factor theorem",
+        "Algebraic identities and factorisation"
+      ],
+      "Coordinate Geometry": [
+        "Cartesian plane",
+        "Coordinates of a point",
+        "Quadrants",
+        "Plotting points"
+      ],
+      "Linear Equations in Two Variables": [
+        "Solutions of equations",
+        "Graph of a linear equation",
+        "Equations of the form ax+by+c=0"
+      ],
+      "Introduction to Euclid's Geometry": [
+        "Axioms and postulates",
+        "Equivalent versions of Euclid's fifth postulate"
+      ],
+      "Lines and Angles": [
+        "Intersecting lines",
+        "Parallel lines",
+        "Angle relationships",
+        "Triangle angle properties"
+      ],
+      "Triangles": [
+        "Congruence criteria",
+        "Properties of triangles",
+        "Inequalities in triangles"
+      ],
+      "Quadrilaterals": [
+        "Angle sum property",
+        "Parallelogram theorems",
+        "Midpoint theorem"
+      ],
+      "Circles": [
+        "Chord properties",
+        "Angle subtended by chord",
+        "Cyclic quadrilaterals"
+      ],
+      "Heron's Formula": [
+        "Area of triangle",
+        "Heron's formula",
+        "Applications to quadrilaterals"
+      ],
+      "Surface Areas and Volumes": [
+        "Surface area of cuboid and cylinder",
+        "Cone and sphere",
+        "Volume of solids",
+        "Unit conversions"
+      ],
+      "Statistics": [
+        "Collection and presentation of data",
+        "Frequency distributions",
+        "Histograms",
+        "Mean median and mode"
+      ],
+      "Probability": [
+        "Experimental probability",
+        "Empirical observations"
+      ]
+    }
+  ],
+  [
+    "CLASS 10 • NCERT + IIT BRIDGE",
+    {
+      "Real Numbers": [
+        "Euclid's division lemma",
+        "Fundamental theorem of arithmetic",
+        "HCF and LCM",
+        "Irrationality proofs",
+        "Decimal expansion of rational numbers"
+      ],
+      "Polynomials": [
+        "Zeros of a polynomial",
+        "Relation between zeros and coefficients",
+        "Division algorithm"
+      ],
+      "Pair of Linear Equations in Two Variables": [
+        "Graphical method",
+        "Substitution method",
+        "Elimination method",
+        "Consistency of equations",
+        "Word problems"
+      ],
+      "Quadratic Equations": [
+        "Standard form",
+        "Factorisation method",
+        "Quadratic formula",
+        "Nature of roots",
+        "Word problems"
+      ],
+      "Arithmetic Progressions": [
+        "Sequences",
+        "Common difference",
+        "Nth term",
+        "Sum of n terms",
+        "Applications"
+      ],
+      "Triangles": [
+        "Similarity criteria",
+        "Basic proportionality theorem",
+        "Pythagoras theorem",
+        "Similarity applications"
+      ],
+      "Coordinate Geometry": [
+        "Distance formula",
+        "Section formula",
+        "Area of triangle"
+      ],
+      "Introduction to Trigonometry": [
+        "Trigonometric ratios",
+        "Standard angle values",
+        "Trigonometric identities",
+        "Complementary angles"
+      ],
+      "Applications of Trigonometry": [
+        "Heights and distances",
+        "Angle of elevation and depression"
+      ],
+      "Circles": [
+        "Tangents to a circle",
+        "Tangent properties"
+      ],
+      "Areas Related to Circles": [
+        "Circumference and area",
+        "Sector and segment",
+        "Composite figures"
+      ],
+      "Surface Areas and Volumes": [
+        "Combination of solids",
+        "Frustum basics",
+        "Volume and surface area applications"
+      ],
+      "Statistics": [
+        "Mean of grouped data",
+        "Assumed mean and step deviation",
+        "Median and mode"
+      ],
+      "Probability": [
+        "Classical probability",
+        "Complementary events"
+      ]
+    }
+  ],
+  [
+    "CLASS 11 • NCERT + IIT JEE MAIN",
+    {
+      "Sets": [
+        "Set notation and representation",
+        "Empty finite and infinite sets",
+        "Subsets and power set",
+        "Intervals of real numbers",
+        "Union intersection difference and complement",
+        "De Morgan's laws",
+        "Venn diagrams"
+      ],
+      "Relations and Functions": [
+        "Ordered pairs and Cartesian product",
+        "Relations and their domain and range",
+        "Functions and mappings",
+        "Types of functions",
+        "Composition and graphs of functions"
+      ],
+      "Trigonometric Functions": [
+        "Degree and radian measure",
+        "Unit circle and signs",
+        "Trigonometric graphs",
+        "Identities",
+        "Compound angles",
+        "Multiple and submultiple angles",
+        "Trigonometric equations"
+      ],
+      "Principle of Mathematical Induction": [
+        "Induction principle",
+        "Proving summation identities",
+        "Divisibility proofs"
+      ],
+      "Complex Numbers and Quadratic Equations": [
+        "Imaginary unit",
+        "Algebra of complex numbers",
+        "Conjugate and modulus",
+        "Argand plane",
+        "Polar form",
+        "Quadratic equations over complex numbers"
+      ],
+      "Linear Inequalities": [
+        "Linear inequalities in one variable",
+        "Inequalities in two variables",
+        "Graphical solution"
+      ],
+      "Permutations and Combinations": [
+        "Fundamental counting principle",
+        "Factorials",
+        "Permutations",
+        "Combinations",
+        "Restricted arrangements",
+        "Circular permutations",
+        "Identities and applications"
+      ],
+      "Binomial Theorem": [
+        "Binomial expansion for positive integer index",
+        "General term",
+        "Middle term",
+        "Binomial coefficients",
+        "Coefficient problems"
+      ],
+      "Sequences and Series": [
+        "Arithmetic progression",
+        "Geometric progression",
+        "Arithmetic and geometric means",
+        "Sum of n terms",
+        "Special sums"
+      ],
+      "Straight Lines": [
+        "Slope and angle between lines",
+        "Various forms of line equation",
+        "Distance of point from line",
+        "Parallel and perpendicular lines"
+      ],
+      "Conic Sections": [
+        "Circle",
+        "Parabola focus and directrix",
+        "Ellipse",
+        "Hyperbola",
+        "Standard equations"
+      ],
+      "Introduction to Three Dimensional Geometry": [
+        "Coordinates in 3D",
+        "Distance formula",
+        "Section formula"
+      ],
+      "Limits and Derivatives": [
+        "Intuitive limits",
+        "Algebra of limits",
+        "Derivative from first principles",
+        "Basic derivatives",
+        "Rate of change"
+      ],
+      "Statistics": [
+        "Range and mean deviation",
+        "Variance and standard deviation"
+      ],
+      "Probability": [
+        "Random experiments and events",
+        "Axiomatic basics",
+        "Addition rule"
+      ]
+    }
+  ],
+  [
+    "CLASS 12 • NCERT + IIT JEE MAIN",
+    {
+      "Relations and Functions": [
+        "Types of relations",
+        "Equivalence relations",
+        "One-one and onto functions",
+        "Composition of functions",
+        "Inverse of a function",
+        "Binary operations"
+      ],
+      "Inverse Trigonometric Functions": [
+        "Principal value branches",
+        "Domain and range",
+        "Inverse trigonometric identities"
+      ],
+      "Matrices": [
+        "Order and notation",
+        "Types of matrices",
+        "Matrix operations",
+        "Transpose",
+        "Symmetric and skew-symmetric matrices",
+        "Invertible matrices"
+      ],
+      "Determinants": [
+        "Determinants of order 2 and 3",
+        "Properties of determinants",
+        "Minors and cofactors",
+        "Adjoint and inverse",
+        "Solving linear equations"
+      ],
+      "Continuity and Differentiability": [
+        "Continuity at a point",
+        "Differentiability",
+        "Chain rule",
+        "Implicit differentiation",
+        "Exponential and logarithmic derivatives",
+        "Parametric differentiation",
+        "Second derivatives",
+        "Mean value theorem"
+      ],
+      "Applications of Derivatives": [
+        "Rate of change",
+        "Increasing and decreasing functions",
+        "Tangents and normals",
+        "Approximations",
+        "Maxima and minima"
+      ],
+      "Integrals": [
+        "Indefinite integration",
+        "Substitution",
+        "Partial fractions",
+        "Integration by parts",
+        "Definite integrals",
+        "Properties of definite integrals"
+      ],
+      "Applications of Integrals": [
+        "Area under curves",
+        "Area between curves",
+        "Areas bounded by lines and parabolas"
+      ],
+      "Differential Equations": [
+        "Order and degree",
+        "Formation of differential equations",
+        "General and particular solutions",
+        "Variable separable equations",
+        "Linear differential equations"
+      ],
+      "Vector Algebra": [
+        "Vectors and scalars",
+        "Magnitude and direction",
+        "Components",
+        "Dot product",
+        "Cross product",
+        "Projection"
+      ],
+      "Three Dimensional Geometry": [
+        "Direction cosines and ratios",
+        "Line in space",
+        "Angle between lines",
+        "Shortest distance between skew lines",
+        "Plane basics for JEE extension"
+      ],
+      "Linear Programming": [
+        "Constraints and feasible region",
+        "Graphical method",
+        "Corner point method"
+      ],
+      "Probability": [
+        "Conditional probability",
+        "Multiplication theorem",
+        "Independent events",
+        "Bayes theorem",
+        "Random variables and distributions",
+        "Mean and variance",
+        "Binomial distribution"
+      ]
+    }
+  ],
+  [
+    "IIT JEE • CLASS 11–12 EXTENSION",
+    {
+      "Advanced Algebra": [
+        "Polynomial equations and transformations",
+        "Theory of equations",
+        "Inequalities and modulus",
+        "Functional equations",
+        "Complex number geometry",
+        "Roots of unity"
+      ],
+      "Advanced Trigonometry": [
+        "Trigonometric equations and general solutions",
+        "Properties of triangles",
+        "Sine and cosine rules",
+        "Inverse trigonometric transformations"
+      ],
+      "Advanced Coordinate Geometry": [
+        "Pair of straight lines",
+        "Circle tangents and chords",
+        "Pole and polar",
+        "Parabola tangents and normals",
+        "Ellipse and hyperbola properties",
+        "Second-degree equations"
+      ],
+      "Advanced Calculus": [
+        "Advanced limits and indeterminate forms",
+        "Continuity and differentiability problems",
+        "Monotonicity",
+        "Maxima and minima",
+        "Definite integral properties",
+        "Area between curves",
+        "Differential equation applications"
+      ],
+      "Advanced Combinatorics": [
+        "Inclusion-exclusion principle",
+        "Derangements",
+        "Distribution problems",
+        "Binomial coefficient identities"
+      ],
+      "Advanced Probability": [
+        "Conditional probability problems",
+        "Bayes theorem applications",
+        "Random variables and expectation",
+        "Variance",
+        "Mixed probability problems"
+      ],
+      "JEE Mixed Practice": [
+        "Single-correct MCQs",
+        "Multiple-correct questions",
+        "Numerical value questions",
+        "Match-the-following",
+        "Multi-concept problems",
+        "Previous-pattern timed practice"
+      ]
+    }
+  ]
 ];

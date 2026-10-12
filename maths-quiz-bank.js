@@ -1,5 +1,28 @@
 /* SkillUp Maths quiz bank release: Class 11 Sets chapter — 20261010 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Comparing numbers": [
+    ["Which number is greatest?",["8,765","876","8,675","8,756"],0,"8,765 is greater than the other four-digit choices and the three-digit number 876."],
+    ["Choose the correct symbol: 4,508 __ 4,580.",[">","<","=","Cannot be compared"],1,"The thousands and hundreds digits match; at the tens place, 0 is less than 8, so 4,508 < 4,580."],
+    ["Which number has the greatest value?",["39,999","40,001","39,909","39,990"],1,"40,001 has 4 in the ten-thousands place, while the other choices have 3."],
+    ["Choose the correct comparison: 72,406 __ 72,406.",[">","<","=","None of these"],2,"Every corresponding digit matches, so the numbers are equal."],
+    ["Which is the smallest number?",["5,205","5,025","5,250","5,502"],1,"All have 5 thousands; 5,025 has 0 hundreds, making it the smallest."],
+    ["Compare 90,099 and 89,999.",["90,099 < 89,999","90,099 > 89,999","90,099 = 89,999","Cannot be compared"],1,"At the ten-thousands place, 9 is greater than 8, so 90,099 is greater."],
+    ["Arrange in ascending order: 2,405; 2,045; 2,450.",["2,405; 2,045; 2,450","2,450; 2,405; 2,045","2,045; 2,405; 2,450","2,045; 2,450; 2,405"],2,"Ascending order goes from smallest to largest: 2,045 < 2,405 < 2,450."],
+    ["Arrange in descending order: 6,701; 6,710; 6,107.",["6,107; 6,701; 6,710","6,710; 6,701; 6,107","6,701; 6,107; 6,710","6,710; 6,107; 6,701"],1,"Descending order goes from largest to smallest: 6,710 > 6,701 > 6,107."],
+    ["In 63,482, which digit is in the hundreds place?",["6","3","4","8"],2,"From right to left, 2 is ones, 8 tens, and 4 hundreds."],
+    ["Which statement is true?",["999 > 1,000","1,010 < 1,001","10,000 > 9,999","4,444 < 4,044"],2,"10,000 has five digits, while 9,999 has four, so 10,000 is greater."],
+    ["Choose the correct symbol: 7,090 __ 7,009.",[">","<","=","Cannot be compared"],0,"The thousands and hundreds digits match; at the tens place, 9 is greater than 0."],
+    ["Which number lies between 4,299 and 4,310?",["4,280","4,300","4,315","4,399"],1,"4,300 is greater than 4,299 and less than 4,310."],
+    ["How should you first compare 8,450 and 950?",["Compare the ones digits","Count the digits in each number","Add the two numbers","Compare the last two digits"],1,"When numbers have different digit counts, the number with more digits is greater."],
+    ["Which pair contains equal numbers?",["3,040 and 3,400","5,606 and 5,606","8,090 and 8,900","2,111 and 2,101"],1,"Both numbers in that pair have the same digit in every place."],
+    ["Choose the correct symbol: 12,345 __ 12,354.",["<",">","=","Cannot be compared"],0,"The first three digits match; at the tens place, 4 is less than 5."],
+    ["Which is the greatest five-digit number?",["99,999","90,999","99,909","99,990"],0,"99,999 has the largest possible digit, 9, in every place of a five-digit number."],
+    ["Which is the least four-digit number?",["999","1,000","1,001","9,999"],1,"1,000 is the smallest number with four digits; 999 has only three."],
+    ["What is the correct comparison between 6,208 and 6,180?",["6,208 < 6,180","6,208 > 6,180","6,208 = 6,180","The numbers cannot be ordered"],1,"The thousands digits are equal, but at the hundreds place 2 is greater than 1, so 6,208 > 6,180."],
+    ["Which number is immediately greater than 7,999 among these choices?",["7,990","8,000","7,909","7,999"],1,"8,000 is one more than 7,999 and is greater than all the other listed choices."],
+    ["Choose the correct comparison: 45,067 __ 45,076.",["<",">","=","None of these"],0,"The ten-thousands, thousands, and hundreds digits match; at the tens place, 6 is less than 7."]
+  ],
+
   "Real and imaginary parts": [
     ["For z = a + bi, what is Re(z)?",["b","a","bi","a + b"],1,"The real part is the real coefficient a."],
     ["For z = a + bi, what is Im(z)?",["bi","a","b","a + bi"],2,"The imaginary part is the coefficient b, not the term bi."],

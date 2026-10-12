@@ -5,6 +5,7 @@ window.SKILLUP_MATH_PATH=[
     {
       "Knowing Our Numbers": [
         "Large numbers in daily life",
+        "Comparing numbers",
         "Estimation and rounding",
         "Roman numerals"
       ],

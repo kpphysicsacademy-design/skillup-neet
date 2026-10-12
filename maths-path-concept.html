@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="skillup-release" content="20261012-comparing-numbers-lesson-quiz-v1">
+<meta name="skillup-release" content="20261012-maths-path-blank-quiz-guard-v1">
 <title>Maths Concept Studio | SkillUp Academy</title>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -77,7 +77,7 @@
 </div>
 <footer class="footer">SkillUp Academy · Build concepts step by step. <br>Practice carefully, review each explanation, and try again to improve.</footer>
 </div>
-<script src="maths-quiz-bank.js?v=20261012-comparing-numbers-lesson-quiz-v1"></script>
+<script src="maths-quiz-bank.js?v=20261012-maths-path-blank-quiz-guard-v1"></script>
 <script>
 (function(){
 'use strict';
@@ -126,7 +126,7 @@ function updateProgress(){let count=answeredQuestions.filter(Boolean).length;$('
 function submit(){if(questionChecked){if(currentQuestion<questions.length-1){currentQuestion++;renderQuiz();return;}let box=$('quizScore');box.innerHTML='<strong>'+quizScore+' / '+questions.length+'</strong><p>'+(quizScore===questions.length?'Excellent work! You have mastered this set.':quizScore>=Math.ceil(questions.length*.7)?'Good progress. Review the explanations for the missed questions.':'Keep practising. Review the explanations, then try again.')+'</p>';box.classList.add('show');$('submitQuiz').disabled=true;box.scrollIntoView({behavior:'smooth',block:'nearest'});return;}const selected=document.querySelector('input[name="q'+currentQuestion+'"]:checked');if(!selected){$('quizInstruction').textContent='Please choose one option before continuing.';return;}const chosen=+selected.value;answeredQuestions[currentQuestion]={selected:chosen};if(chosen===questions[currentQuestion].a)quizScore++;questionChecked=true;renderQuiz();$('quizInstruction').textContent='Answer checked. Read the explanation, then continue.'}
 function reset(){currentQuestion=0;quizScore=0;questionChecked=false;answeredQuestions=[];$('quizInstruction').textContent='Answer one question at a time. Check your answer to see the explanation, then continue.';renderQuiz()}
 document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',btn.dataset.tab==='quiz'?s.id!=='quiz':s.id==='quiz'));if(btn.dataset.tab==='learn')renderMath();else if(btn.dataset.tab==='examples')renderMath();else if(btn.dataset.tab==='lab')renderMath();else renderMath();window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'})}));
-$('nRange').addEventListener('input',updateLab);$('rRange').addEventListener('input',updateLab);$('submitQuiz').addEventListener('click',submit);$('resetQuiz').addEventListener('click',reset);$('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
+if($('nRange'))$('nRange').addEventListener('input',updateLab);if($('rRange'))$('rRange').addEventListener('input',updateLab);if($('submitQuiz'))$('submitQuiz').addEventListener('click',submit);if($('resetQuiz'))$('resetQuiz').addEventListener('click',reset);if($('startQuiz'))$('startQuiz').addEventListener('click',()=>document.querySelector('[data-tab="quiz"]').click());
 const params=new URLSearchParams(location.search);
 // Never silently show Binomial Coefficients when a concept link loses its query string.
 // Return to the Maths concept navigator so the learner can choose the intended topic.

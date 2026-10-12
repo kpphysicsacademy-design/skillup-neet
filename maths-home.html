@@ -73,6 +73,35 @@ button,input{font:inherit}.top{position:sticky;top:0;z-index:20;background:#fff;
 }
 </style></head>
 <body>
-<!-- Mathematics home-page content cleared on request. Styles and curriculum/lesson files are preserved. -->
+<header class="top"><div class="nav"><div class="brand">SkillUp<small>MATHEMATICS • NCERT + IIT JEE PATH</small></div><span class="badge">CLASS 6–12</span></div></header>
+<main class="wrap">
+<section class="hero"><div class="kicker">NCERT FOUNDATION → IIT JEE MASTERY</div><h1>Mathematics Curriculum</h1><p>Follow a progressive path from Class 6 fundamentals through Class 12 NCERT mathematics, with a dedicated IIT JEE Main and Advanced extension.</p><div class="stats"><div class="stat"><strong id="conceptStat">0</strong><span>TOPICS</span></div><div class="stat"><strong id="chapterStat">0</strong><span>CHAPTERS</span></div><div class="stat"><strong>7 + 1</strong><span>LEVELS</span></div></div></section>
+<div class="searchbox"><div class="searchrow"><input id="q" class="search" type="search" placeholder="Search topic, chapter, or class…" aria-label="Search Mathematics" autocomplete="off"><button id="clear" class="clear" type="button">Clear</button></div><div class="searchtools"><select id="stageFilter" class="navselect" aria-label="Filter class"><option value="">All classes</option></select><select id="chapterJump" class="navselect" aria-label="Jump to chapter"><option value="">Jump to chapter…</option></select><button id="toggleChapters" class="toolbtn" type="button" aria-expanded="false">Expand chapters</button></div><div id="quickFilters" class="quickfilters" aria-label="Class filters"></div></div>
+<div class="resultbar"><span id="resultSummary">Loading curriculum…</span><strong id="filterSummary">NCERT + JEE</strong></div><div id="path"></div><p class="hint">Curriculum map for study planning. Check the current official NCERT and NTA/JEE syllabus for exam-year changes.</p>
+</main>
+<script src="maths-path-data.js?v=20261012-ncert-iit-class6-12-v1"></script>
+<script>
+(function(){
+const data=Array.isArray(window.SKILLUP_MATH_PATH)?window.SKILLUP_MATH_PATH:[];
+const path=document.getElementById("path"),query=document.getElementById("q"),stageFilter=document.getElementById("stageFilter"),chapterJump=document.getElementById("chapterJump");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const all=[];
+data.forEach(row=>{const level=row[0],chapters=row[1]||{};Object.keys(chapters).forEach(chapter=>(chapters[chapter]||[]).forEach(concept=>all.push({level,chapter,concept:String(concept)}));});
+document.getElementById("conceptStat").textContent=all.length;
+document.getElementById("chapterStat").textContent=new Set(all.map(x=>x.level+"||"+x.chapter)).size;
+[...new Set(data.map(x=>x[0]))].forEach(level=>{const o=document.createElement("option");o.value=level;o.textContent=level;stageFilter.appendChild(o);const b=document.createElement("button");b.type="button";b.className="filterchip";b.dataset.level=level;b.textContent=level;b.setAttribute("aria-pressed","false");document.getElementById("quickFilters").appendChild(b);});
+[...new Set(all.map(x=>x.chapter))].forEach(ch=>{const o=document.createElement("option");o.value=ch;o.textContent=ch;chapterJump.appendChild(o);});
+function current(){const q=norm(query.value);return all.filter(x=>(!stageFilter.value||x.level===stageFilter.value)&&(!chapterJump.value||x.chapter===chapterJump.value)&&(!q||norm(x.level+" "+x.chapter+" "+x.concept).includes(q)));}
+function render(list){if(!list.length){path.innerHTML='<div class="noresults">No topics found. Try a different search or class.</div>';document.getElementById("resultSummary").textContent="0 topics";return;}
+let html="",levels=[...new Set(list.map(x=>x.level))];levels.forEach((level,i)=>{const items=list.filter(x=>x.level===level),chapters=new Map();items.forEach(x=>{if(!chapters.has(x.chapter))chapters.set(x.chapter,[]);chapters.get(x.chapter).push(x);});html+='<section class="stage"><div class="stage-head"><span class="stage-num">'+(i+1)+'</span><span class="stage-title">'+esc(level)+'</span><span class="stage-count">'+items.length+' topics</span></div>';chapters.forEach((topics,ch)=>{html+='<details class="chapter" data-chapter="'+esc(ch)+'"><summary>'+esc(ch)+'<span class="chapter-meta">'+topics.length+'</span></summary><div class="concepts">';topics.forEach(x=>{const url="maths-path-concept.html?concept="+encodeURIComponent(x.concept)+"&level="+encodeURIComponent(x.level)+"&chapter="+encodeURIComponent(x.chapter)+"&v=20261012-ncert-iit-class6-12-v1";html+='<a class="concept" href="'+url+'"><span>'+esc(x.concept)+'</span><span class="arrow">→</span></a>';});html+='</div></details>';});html+='</section>';});path.innerHTML=html;document.getElementById("resultSummary").textContent=list.length+" of "+all.length+" topics";document.getElementById("filterSummary").textContent=new Set(list.map(x=>x.chapter+"||"+x.level)).size+" chapters";}
+function update(){render(current());document.querySelectorAll(".filterchip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.level===stageFilter.value?"true":"false"));}
+query.addEventListener("input",update);stageFilter.addEventListener("change",update);chapterJump.addEventListener("change",update);
+document.getElementById("clear").addEventListener("click",()=>{query.value="";stageFilter.value="";chapterJump.value="";update();});
+document.getElementById("quickFilters").addEventListener("click",e=>{const b=e.target.closest(".filterchip");if(!b)return;stageFilter.value=b.dataset.level;update();});
+document.getElementById("toggleChapters").addEventListener("click",function(){const open=this.getAttribute("aria-expanded")!=="true";document.querySelectorAll(".chapter").forEach(x=>x.open=open);this.setAttribute("aria-expanded",String(open));this.textContent=open?"Collapse chapters":"Expand chapters";});
+render(all);
+})();
+</script>
 </body>
 </html>

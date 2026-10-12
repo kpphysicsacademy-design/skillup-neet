@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="skillup-release" content="20261012-maths-topic-route-guard-v1">
+<meta name="skillup-release" content="20261012-comparing-numbers-lesson-quiz-v1">
 <title>Maths Concept Studio | SkillUp Academy</title>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -77,7 +77,7 @@
 </div>
 <footer class="footer">SkillUp Academy · Build concepts step by step. <br>Practice carefully, review each explanation, and try again to improve.</footer>
 </div>
-<script src="maths-quiz-bank.js?v=20261012-maths-topic-route-guard-v1"></script>
+<script src="maths-quiz-bank.js?v=20261012-comparing-numbers-lesson-quiz-v1"></script>
 <script>
 (function(){
 'use strict';
@@ -87,7 +87,7 @@ const requestedLevel = (params.get('level') || '').trim();
 const requestedChapter = (params.get('chapter') || '').trim();
 const safeText = value => String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]));
 if (!requestedConcept) { window.location.replace('maths-home.html?v=20261012-maths-physics-path-structure-v1'); return; }
-if (!/binomial coefficients/i.test(requestedConcept)) {
+if (!/binomial coefficients/i.test(requestedConcept) && !/comparing numbers/i.test(requestedConcept)) {
 document.title = 'SkillUp Mathematics · ' + requestedConcept;
 const heading = document.querySelector('h1'); if (heading) heading.textContent = requestedConcept;
 const kicker = document.querySelector('.eyebrow, .kicker, .section-label'); if (kicker) kicker.textContent = (requestedChapter ? requestedChapter + ' · ' : '') + 'CONCEPT STUDIO';
@@ -465,6 +465,17 @@ else if(concept.toLowerCase()==='equivalent rational numbers'){
  $('lab').innerHTML='<h2>Try it</h2><p class="muted">Change the multiplier. The fraction value stays the same.</p><div class="lab"><label for="eqNum">Top number <b id="eqNumLabel">2</b></label><input id="eqNum" type="range" min="1" max="9" value="2"><label for="eqDen">Bottom number <b id="eqDenLabel">3</b></label><input id="eqDen" type="range" min="1" max="9" value="3"><label for="eqMul">Multiplier <b id="eqMulLabel">2</b></label><input id="eqMul" type="range" min="2" max="6" value="2"></div><div class="formula" id="eqResult">2/3 = 4/6</div><p class="muted" id="eqMeaning">Top and bottom are both multiplied by 2.</p>';
  const updateEq=()=>{const n=+$('eqNum').value,d=+$('eqDen').value,k=+$('eqMul').value;$('eqNumLabel').textContent=n;$('eqDenLabel').textContent=d;$('eqMulLabel').textContent=k;$('eqResult').textContent=n+'/'+d+' = '+(n*k)+'/'+(d*k);$('eqMeaning').textContent='Both top and bottom are multiplied by '+k+'. The value stays the same.';};['eqNum','eqDen','eqMul'].forEach(id=>$(id).addEventListener('input',updateEq));updateEq();
  document.querySelector('aside').innerHTML='<section class="card"><h3>Remember</h3><p>Same number on top and bottom.</p><p>Example: 2/3 = 4/6.</p></section>';
+}
+
+
+else if(concept.toLowerCase()==='comparing numbers'){
+ $('heroDescription').textContent='Compare whole numbers confidently by checking place value from left to right. Learn the symbols >, < and =, arrange numbers, and practise with examples and an interactive comparison tool.';
+ $('heroFormula').innerHTML='\\(a>b\\quad a<b\\quad a=b\\)';
+ $('learn').innerHTML='<h2>1. How to compare numbers</h2><p>To compare two whole numbers, first compare how many digits each number has. A number with more digits is greater. If both numbers have the same number of digits, compare the digits from left to right, starting at the highest place value.</p><div class="callout"><b>Remember the symbols:</b> <b>&gt;</b> means greater than, <b>&lt;</b> means less than, and <b>=</b> means equal to.</div><h3>Compare digit by digit</h3><ol><li>Compare the number of digits.</li><li>If the digit counts match, compare the leftmost digits.</li><li>At the first place where the digits differ, the number with the larger digit is greater.</li><li>If every digit matches, the numbers are equal.</li></ol><div class="example"><strong>Example 1 · Different number of digits</strong><p>Compare 8,765 and 999.</p><p>8,765 has four digits and 999 has three, so <b>8,765 &gt; 999</b>.</p></div><div class="example"><strong>Example 2 · Same number of digits</strong><p>Compare 54,321 and 53,999.</p><p>The ten-thousands digits are both 5. At the thousands place, 4 &gt; 3, so <b>54,321 &gt; 53,999</b>.</p></div><div class="example"><strong>Example 3 · Equal numbers</strong><p>Compare 70,406 and 70,406. Every corresponding digit matches, so <b>70,406 = 70,406</b>.</p></div><div class="callout"><b>Place-value reminder:</b> In 63,482, the digit 6 means 60,000, the digit 3 means 3,000, the digit 4 means 400, the digit 8 means 80, and the digit 2 means 2.</div>';
+ $('examples').innerHTML='<h2>2. Worked examples</h2><div class="example"><strong>Example A · Compare 3,405 and 3,450</strong><p>Thousands: 3 = 3; hundreds: 4 = 4; tens: 0 &lt; 5. Therefore, <b>3,405 &lt; 3,450</b>.</p></div><div class="example"><strong>Example B · Compare 90,099 and 89,999</strong><p>90,099 has 9 in the ten-thousands place while 89,999 has 8. Therefore, <b>90,099 &gt; 89,999</b>.</p></div><div class="example"><strong>Example C · Arrange in ascending order</strong><p>Arrange 2,405; 2,045; 2,450 from smallest to largest.</p><p><b>2,045 &lt; 2,405 &lt; 2,450</b>.</p></div><div class="example"><strong>Example D · Arrange in descending order</strong><p>Arrange 6,701; 6,710; 6,107 from largest to smallest.</p><p><b>6,710 &gt; 6,701 &gt; 6,107</b>.</p></div>';
+ $('lab').innerHTML='<h2>3. Interactive number comparer</h2><p class="muted">Enter two whole numbers to compare them. Use digits only, without commas.</p><div class="lab" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px"><label for="compareFirst">First number<input id="compareFirst" type="number" min="0" max="999999999" value="54321" style="display:block;width:100%;padding:10px;border-radius:10px;background:#0b1326;color:var(--text);border:1px solid var(--line)"></label><label for="compareSecond">Second number<input id="compareSecond" type="number" min="0" max="999999999" value="53999" style="display:block;width:100%;padding:10px;border-radius:10px;background:#0b1326;color:var(--text);border:1px solid var(--line)"></label></div><div class="big-result" id="compareResult" aria-live="polite">54,321 &gt; 53,999</div><p class="muted" id="compareReason">Compare the digits from the highest place value.</p>';
+ const compareNow=()=>{const a=$('compareFirst').value.trim(),b=$('compareSecond').value.trim();const valid=x=>/^\\d+$/.test(x)&&Number.isSafeInteger(Number(x))&&Number(x)>=0;if(!valid(a)||!valid(b)){$('compareResult').textContent='Enter two non-negative whole numbers.';$('compareReason').textContent='Use digits only; decimals and negative numbers are not accepted in this lesson.';return;}const x=BigInt(a),y=BigInt(b),sign=x>y?'>':x<y?'<':'=';$('compareResult').textContent=Number(x).toLocaleString('en-IN')+' '+sign+' '+Number(y).toLocaleString('en-IN');let reason;if(a.length!==b.length)reason='The number with more digits is greater.';else{let i=0;while(i<a.length&&a[i]===b[i])i++;reason=i===a.length?'Every corresponding digit matches, so the numbers are equal.':'The first different digit from the left is '+a[i]+' versus '+b[i]+'.';}$('compareReason').textContent=reason;};$('compareFirst').addEventListener('input',compareNow);$('compareSecond').addEventListener('input',compareNow);compareNow();
+ document.querySelector('aside').innerHTML='<section class="card"><span class="tag">QUICK RECAP</span><h3>Comparison checklist</h3><ol><li>Count the digits.</li><li>Compare from left to right.</li><li>Stop at the first different digit.</li><li>Use &gt;, &lt; or = accurately.</li></ol></section><section class="card" style="margin-top:16px"><h3>Common mistakes</h3><ul><li>Comparing from the rightmost digit first.</li><li>Thinking a number with a smaller last digit must be smaller.</li><li>Forgetting that equal digits throughout mean the numbers are equal.</li></ul></section>';
 }
 
 else if(concept.toLowerCase()!=='binomial coefficients'){

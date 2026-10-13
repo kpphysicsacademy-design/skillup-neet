@@ -7,22 +7,22 @@
       position:fixed; z-index:9999; left:0; right:0; margin-inline:auto; bottom:0;
       width:100%; max-width:1120px; min-height:calc(68px + env(safe-area-inset-bottom, 0px));
       box-sizing:border-box; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;
-      padding:6px 10px calc(6px + env(safe-area-inset-bottom, 0px)); background:rgba(255,255,255,.98);
+      padding:6px 10px calc(6px + env(safe-area-inset-bottom, 0px)); background:rgba(250,249,240,.98);
       -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-      border:1px solid #e5eaf2; border-bottom:0; border-radius:18px 18px 0 0;
-      box-shadow:0 -8px 28px rgba(16,24,40,.10);
+      border:1px solid #d3dccb; border-bottom:0; border-radius:18px 18px 0 0;
+      box-shadow:0 -6px 22px rgba(57,75,53,.09);
       font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
     }
     .skillup-bottom-nav a {
       min-width:0; min-height:52px; display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:2px; border-radius:13px;
-      color:#667085; text-decoration:none; font-size:11px; line-height:1.15;
+      color:#647061; text-decoration:none; font-size:11px; line-height:1.15;
       font-weight:800; -webkit-tap-highlight-color:transparent; text-align:center;
     }
     .skillup-bottom-nav a .nav-icon {font-size:21px; line-height:24px; font-weight:700}
     .skillup-bottom-nav a .nav-description {display:none}
-    .skillup-bottom-nav a.active {background:#eef3ff;color:#315efb}
-    .skillup-bottom-nav a:focus-visible {outline:3px solid #315efb;outline-offset:2px}
+    .skillup-bottom-nav a.active {background:#e3ebdd;color:#446349}
+    .skillup-bottom-nav a:focus-visible {outline:3px solid #71916a;outline-offset:2px}
     body {padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px)) !important}
     @media(max-width:380px) {
       .skillup-bottom-nav {gap:1px;padding:5px 4px}

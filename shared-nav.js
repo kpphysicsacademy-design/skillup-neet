@@ -1,4 +1,18 @@
 (()=> {
+
+  // SkillUp PWA: make the root manifest and safe static-only service worker available app-wide.
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const pwaManifest = document.createElement('link');
+    pwaManifest.rel = 'manifest';
+    pwaManifest.href = '/manifest.webmanifest';
+    document.head.appendChild(pwaManifest);
+  }
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).catch(error => {
+      console.warn('SkillUp offline support could not be registered', error);
+    });
+  }
+
   document.querySelectorAll('.skillup-bottom-nav, .skillup-universal-nav, .neet-nav').forEach(el=>el.remove());
   const oldStyle=document.getElementById('skillup-bottom-nav-style');
   if(oldStyle) oldStyle.remove();

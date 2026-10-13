@@ -66,10 +66,10 @@
   } catch(e) {}
   const items=[
     {href:'/index.html#subjects',icon:'⌂',label:'Home',files:['index.html'],isActive:()=>current==='index.html' && (location.pathname==='/' || location.pathname==='/index.html')},
-    {href:'/learn.html',icon:'▤',label:'Learn',files:['learn.html'],isActive:()=>current==='learn.html'},
-    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','ai-quiz.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current)},
-    {href:'/community.html',icon:'☷',label:'Community',files:['community.html','progress.html'],isActive:()=>current==='community.html'||current==='progress.html'},
-    {href:'/profile.html',icon:'♙',label:'Profile',files:['profile.html']}
+    {href:'/profile.html#progress',icon:'▥',label:'Progress',files:['progress.html'],isActive:()=>current==='progress.html'||(current==='profile.html'&&location.hash==='#progress')},
+    {href:'/profile.html',icon:'♙',label:'Profile',files:['profile.html'],isActive:()=>current==='profile.html'&&location.hash!=='#progress'},
+    {href:'/share.html',icon:'↗',label:'Share',files:['share.html'],isActive:()=>current==='share.html'},
+    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','ai-quiz.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','ai-quiz.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current)}
   ];
   const nav=document.createElement('nav'); nav.className='skillup-bottom-nav'; nav.setAttribute('aria-label','SkillUp main navigation');
   nav.innerHTML=items.map(item=>{

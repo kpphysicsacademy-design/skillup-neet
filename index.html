@@ -128,8 +128,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
 <script src="central-auth.js"></script>
 <script>
 (async function(){
-  const next=location.href;
-  const session=await window.SkillUpAuth.requireAuth(next);
+  // Keep the public subject directory and #subjects deep link accessible.
+  // Personalize the homepage only when a signed-in session is already available.
+  let session=null;
+  try { session=window.SkillUpAuth ? await window.SkillUpAuth.getSession() : null; } catch(e) {}
   if(!session) return;
   document.documentElement.dataset.authenticated="true";
   try{const u=session.user;const p=await window.SkillUpAuth.getProfile(u.uid);const name=String((p&& (p.display_name||p.name))||u.displayName||'').trim();if(name)document.getElementById('welcomeName').textContent='WELCOME, '+name.toUpperCase();}catch(e){}

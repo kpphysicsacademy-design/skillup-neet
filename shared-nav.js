@@ -53,8 +53,8 @@
   const items=[
     {href:'/index.html',icon:'⌂',label:'Home',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
     {href:'/index.html#subjects',icon:'▤',label:'Learn',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
-    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current) || (current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home'))},
-    {href:'progress.html',icon:'▥',label:'Progress',files:['progress.html']},
+    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current) || (current!=='index.html' && !['progress.html','community.html','profile.html','share.html'].includes(current) && !current.includes('home'))},
+    {href:'/community.html',icon:'☷',label:'Community',files:['community.html','progress.html'],isActive:()=>current==='community.html'||current==='progress.html'},
     {href:'profile.html',icon:'♙',label:'Profile',files:['profile.html']}
   ];
   const nav=document.createElement('nav'); nav.className='skillup-bottom-nav'; nav.setAttribute('aria-label','SkillUp main navigation');

@@ -32,8 +32,7 @@
       .skillup-bottom-nav a {display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:3px;justify-content:center;align-content:center;text-align:left;padding:10px 14px}
       .skillup-bottom-nav a .nav-icon {grid-column:1;grid-row:1 / span 2;align-self:center;font-size:24px}
       .skillup-bottom-nav a .nav-label {grid-column:2;grid-row:1;font-size:13px}
-      .skillup-bottom-nav a .nav-description {display:block;grid-column:2;grid-row:2;font-size:10px;line-height:1.25;font-weight:550;color:#69758a}
-      .skillup-bottom-nav a.active .nav-description {color:#526fb4}
+      .skillup-bottom-nav a {grid-template-rows:auto;grid-template-columns:32px minmax(0,1fr)}
       body {padding-bottom:112px !important}
     }
   `;
@@ -50,16 +49,16 @@
     }
   } catch(e) {}
   const items=[
-    {href:'index.html',icon:'⌂',label:'Home',description:'Subjects, learning paths and recent activity',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
-    {href:'index.html#subjects',icon:'▤',label:'Learn',description:'Concepts, lessons and visual explanations',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
-    {href:practiceHref,icon:'▣',label:'Practice',description:'Quizzes, MCQs and revision',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current) || (current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home'))},
-    {href:'progress.html',icon:'▥',label:'Progress',description:'Scores, accuracy and completed concepts',files:['progress.html']},
-    {href:'profile.html',icon:'♙',label:'Profile',description:'Student details, settings and achievements',files:['profile.html']}
+    {href:'index.html',icon:'⌂',label:'Home',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
+    {href:'index.html#subjects',icon:'▤',label:'Learn',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
+    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current) || (current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home'))},
+    {href:'progress.html',icon:'▥',label:'Progress',files:['progress.html']},
+    {href:'profile.html',icon:'♙',label:'Profile',files:['profile.html']}
   ];
   const nav=document.createElement('nav'); nav.className='skillup-bottom-nav'; nav.setAttribute('aria-label','SkillUp main navigation');
   nav.innerHTML=items.map(item=>{
     const isActive = typeof item.isActive==='function' ? item.isActive() : item.files.includes(current);
-    return '<a href="'+item.href+'" title="'+item.label+': '+item.description+'" aria-label="'+item.label+'. '+item.description+'"'+(isActive?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span><span class="nav-description">'+item.description+'</span></a>';
+    return '<a href="'+item.href+'" title="'+item.label+'" aria-label="'+item.label+'"'+(isActive?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span></a>';
   }).join('');
   document.body.appendChild(nav);
 })();

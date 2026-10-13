@@ -42,7 +42,7 @@ jobs:
           }
           current_script = '<script src="/shared-nav.js?v=20261013-footer-labels-only"></script>'
           script_pattern = re.compile(
-              r'<script\\b(?=[^>]*\\bsrc\\s*=\\s*["\\'](?:/)?shared-nav\\.js(?:\\?[^"\\']*)?["\\'])[^>]*>\\s*</script>',
+              r"""<script\b[^>]*\bsrc\s*=\s*["'](?:/)?shared-nav\.js(?:\?[^"']*)?["'][^>]*>\s*</script>""",
               re.I | re.S,
           )
           changed = []
@@ -54,20 +54,20 @@ jobs:
                   continue
 
               original = page.read_text(encoding="utf-8")
-              # Remove stale or duplicate references before adding the current shared script once.
+              # Replace stale or duplicate references with one current shared script.
               cleaned = script_pattern.sub("", original)
-              body_end = re.search(r"</body\\s*>", cleaned, re.I)
+              body_end = re.search(r"</body\s*>", cleaned, re.I)
               if body_end:
-                  updated = cleaned[:body_end.start()].rstrip() + "\\n" + current_script + "\\n" + cleaned[body_end.start():]
+                  updated = cleaned[:body_end.start()].rstrip() + "\n" + current_script + "\n" + cleaned[body_end.start():]
               else:
-                  updated = cleaned.rstrip() + "\\n" + current_script + "\\n"
+                  updated = cleaned.rstrip() + "\n" + current_script + "\n"
 
               if updated != original:
                   page.write_text(updated, encoding="utf-8", newline="")
                   changed.append(relative)
 
           print(f"Updated {len(changed)} student-facing HTML pages.")
-          print("\\n".join(changed))
+          print("\n".join(changed))
           PY
 
       - name: Commit page updates and remove the one-time updater

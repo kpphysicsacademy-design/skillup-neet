@@ -4,6 +4,8 @@
  */
 const CACHE_NAME = 'skillup-static-v1';
 const PRECACHE_URLS = [
+  '/icons/skillup-pwa-192.png',
+  '/icons/skillup-pwa-512.png',
   '/icons/skillup-pwa-192.svg',
   '/icons/skillup-pwa-512.svg',
   '/skillup-logo.svg'

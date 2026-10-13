@@ -7,6 +7,7 @@ const CACHE_NAME = 'skillup-offline-v2';
 const PRECACHE_URLS = [
   '/index.html',
   '/learn.html',
+  '/ai-quiz.html',
   '/physics-home.html',
   '/physics-home-fast.html',
   '/chemistry-home.html',

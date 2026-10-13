@@ -73,10 +73,23 @@
   ];
   const nav=document.createElement('nav'); nav.className='skillup-bottom-nav'; nav.setAttribute('aria-label','SkillUp main navigation');
   nav.innerHTML=items.map(item=>{
-    const isActive = typeof item.isActive==='function' ? item.isActive() : item.files.includes(current);
-    return '<a href="'+item.href+'" title="'+item.label+'" aria-label="'+item.label+'"'+(isActive?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span></a>';
+    return '<a href="'+item.href+'" title="'+item.label+'" aria-label="'+item.label+'"><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span></a>';
   }).join('');
   document.body.appendChild(nav);
+
+  // Keep the selected tab in sync when navigation changes only the URL hash
+  // (for example Profile -> Progress on the same profile document).
+  const renderActive = () => {
+    nav.querySelectorAll('a').forEach((link, index) => {
+      const item = items[index];
+      const isActive = typeof item.isActive === 'function' ? item.isActive() : item.files.includes(current);
+      link.classList.toggle('active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  renderActive();
+  window.addEventListener('hashchange', renderActive);
 
   // Android WebView compatibility: same-site links opened with target="_blank"
   // should still navigate when the host app does not enable multiple windows.

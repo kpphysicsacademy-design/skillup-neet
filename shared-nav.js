@@ -1,5 +1,7 @@
 (()=> {
-  if (document.querySelector('.skillup-bottom-nav')) return;
+  document.querySelectorAll('.skillup-bottom-nav, .skillup-universal-nav, .neet-nav').forEach(el=>el.remove());
+  const oldStyle=document.getElementById('skillup-bottom-nav-style');
+  if(oldStyle) oldStyle.remove();
   const css = `
     .skillup-bottom-nav {
       position:fixed; z-index:9999; left:0; right:0; margin-inline:auto; bottom:0;
@@ -38,19 +40,19 @@
   `;
   const style=document.createElement('style'); style.id='skillup-bottom-nav-style'; style.textContent=css; document.head.appendChild(style);
   const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-  let practiceHref='index.html';
+  let practiceHref='/index.html';
   try {
     const last=JSON.parse(localStorage.getItem('skillup.lastPractice')||'null');
     if(last && last.subject && last.topic) {
       const subject=String(last.subject).trim().toLowerCase();
       const topic=String(last.topic).trim();
       const paths={physics:'physics-home-fast.html',chemistry:'chemistry-home.html',botany:'botany-home.html',zoology:'zoology-home.html',biology:'index.html',maths:'maths-home.html',mathematics:'maths-home.html'};
-      practiceHref=(paths[subject]||'index.html')+'?resumeConcept='+encodeURIComponent(topic);
+      practiceHref='/'+(paths[subject]||'index.html')+'?resumeConcept='+encodeURIComponent(topic);
     }
   } catch(e) {}
   const items=[
-    {href:'index.html',icon:'⌂',label:'Home',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
-    {href:'index.html#subjects',icon:'▤',label:'Learn',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
+    {href:'/index.html',icon:'⌂',label:'Home',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
+    {href:'/index.html#subjects',icon:'▤',label:'Learn',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
     {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'].includes(current) || (current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home'))},
     {href:'progress.html',icon:'▥',label:'Progress',files:['progress.html']},
     {href:'profile.html',icon:'♙',label:'Profile',files:['profile.html']}

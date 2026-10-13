@@ -2,24 +2,23 @@
   if (document.querySelector('.skillup-bottom-nav')) return;
   const css = `
     .skillup-bottom-nav {
-      position:fixed; z-index:9999; left:50%;
-      bottom:0;
-      transform:translateX(-50%); width:min(760px,100%);
-      height:calc(68px + env(safe-area-inset-bottom, 0px)); box-sizing:border-box; display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
-      padding:6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); background:rgba(255,255,255,.98);
+      position:fixed; z-index:9999; left:0; right:0; margin-inline:auto; bottom:0;
+      width:100%; max-width:1120px; min-height:calc(68px + env(safe-area-inset-bottom, 0px));
+      box-sizing:border-box; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;
+      padding:6px 10px calc(6px + env(safe-area-inset-bottom, 0px)); background:rgba(255,255,255,.98);
       -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-      border:1px solid #e5eaf2; border-bottom:0;
-      border-radius:18px 18px 0 0; box-shadow:0 -8px 28px rgba(16,24,40,.10);
+      border:1px solid #e5eaf2; border-bottom:0; border-radius:18px 18px 0 0;
+      box-shadow:0 -8px 28px rgba(16,24,40,.10);
       font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
     }
     .skillup-bottom-nav a {
-      min-width:0; min-height:48px; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:3px; border-radius:13px;
-      color:#667085; text-decoration:none; font-size:11px; line-height:1.1;
-      font-weight:800; -webkit-tap-highlight-color:transparent;
+      min-width:0; min-height:52px; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:2px; border-radius:13px;
+      color:#667085; text-decoration:none; font-size:11px; line-height:1.15;
+      font-weight:800; -webkit-tap-highlight-color:transparent; text-align:center;
     }
     .skillup-bottom-nav a .nav-icon {font-size:21px; line-height:24px; font-weight:700}
+    .skillup-bottom-nav a .nav-description {display:none}
     .skillup-bottom-nav a.active {background:#eef3ff;color:#315efb}
     .skillup-bottom-nav a:focus-visible {outline:3px solid #315efb;outline-offset:2px}
     body {padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px)) !important}
@@ -29,8 +28,13 @@
       .skillup-bottom-nav a .nav-icon {font-size:19px}
     }
     @media(min-width:800px) {
-      .skillup-bottom-nav {bottom:0;height:68px;padding:6px 8px;border-bottom:0}
-      body {padding-bottom:88px !important}
+      .skillup-bottom-nav {min-height:94px;padding:8px 14px calc(8px + env(safe-area-inset-bottom, 0px));gap:10px}
+      .skillup-bottom-nav a {display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:3px;justify-content:center;align-content:center;text-align:left;padding:10px 14px}
+      .skillup-bottom-nav a .nav-icon {grid-column:1;grid-row:1 / span 2;align-self:center;font-size:24px}
+      .skillup-bottom-nav a .nav-label {grid-column:2;grid-row:1;font-size:13px}
+      .skillup-bottom-nav a .nav-description {display:block;grid-column:2;grid-row:2;font-size:10px;line-height:1.25;font-weight:550;color:#69758a}
+      .skillup-bottom-nav a.active .nav-description {color:#526fb4}
+      body {padding-bottom:112px !important}
     }
   `;
   const style=document.createElement('style'); style.id='skillup-bottom-nav-style'; style.textContent=css; document.head.appendChild(style);
@@ -46,17 +50,16 @@
     }
   } catch(e) {}
   const items=[
-    {href:'index.html',icon:'⌂',label:'Home',files:['index.html']},
-    {href:'progress.html',icon:'▥',label:'Progress',files:['progress.html']},
-    {href:'profile.html',icon:'♙',label:'Profile',files:['profile.html']},
-    {href:'share.html',icon:'♧',label:'Share',files:['share.html']},
-    {href:practiceHref,icon:'▣',label:'Practice',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html']}
+    {href:'index.html',icon:'⌂',label:'Home',description:'Subjects, learning paths and recent activity',files:['index.html'],isActive:()=>current==='index.html' && location.hash!=='#subjects'},
+    {href:'index.html#subjects',icon:'▤',label:'Learn',description:'Concepts, lessons and visual explanations',files:[],isActive:()=>current==='index.html' && location.hash==='#subjects'},
+    {href:practiceHref,icon:'▣',label:'Practice',description:'Quizzes, MCQs and revision',files:['practice.html','quiz.html','test.html','physics-home-fast.html','physics-home.html','chemistry-home.html','botany-home.html','zoology-home.html','maths-home.html'],isActive:()=>current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home') ? false : (current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && (current.includes('practice')||current.includes('quiz')||current.includes('test')||current.includes('question-bank')))},
+    {href:'progress.html',icon:'▥',label:'Progress',description:'Scores, accuracy and completed concepts',files:['progress.html']},
+    {href:'profile.html',icon:'♙',label:'Profile',description:'Student details, settings and achievements',files:['profile.html']}
   ];
   const nav=document.createElement('nav'); nav.className='skillup-bottom-nav'; nav.setAttribute('aria-label','SkillUp main navigation');
   nav.innerHTML=items.map(item=>{
-    const target=item.href.split('?')[0].split('#')[0].toLowerCase();
-    const active=item.files.includes(current) || (item.label==='Practice' && current!=='index.html' && !['progress.html','profile.html','share.html'].includes(current) && !current.includes('home'));
-    return '<a href="'+item.href+'"'+(active?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span>'+item.label+'</span></a>';
+    const isActive = typeof item.isActive==='function' ? item.isActive() : item.files.includes(current);
+    return '<a href="'+item.href+'" title="'+item.label+': '+item.description+'" aria-label="'+item.label+'. '+item.description+'"'+(isActive?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span><span class="nav-description">'+item.description+'</span></a>';
   }).join('');
   document.body.appendChild(nav);
 })();

@@ -35,4 +35,6 @@ function draw(){const svg=$("table"),cx=200,cy=170,r=112;svg.innerHTML='<circle 
 function renderQ(){answered=false;let item=questions[q%questions.length];$("feedback").textContent="";$("quiz").innerHTML=`<h3>${q+1}. ${item.q}</h3>`+item.a.map((a,i)=>`<div class="answer" role="button" tabindex="0" data-i="${i}">${String.fromCharCode(65+i)}. ${a}</div>`).join("");document.querySelectorAll(".answer").forEach(el=>{const act=()=>choose(+el.dataset.i);el.addEventListener("click",act);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}})})}
 function choose(i){if(answered)return;answered=true;let item=questions[q%questions.length];if(i===item.correct){score++;$("feedback").textContent="Correct! "+item.why}else $("feedback").textContent="Not quite. "+item.why;$("feedback").textContent+="  Score: "+score+"/"+(q+1)}
 $("people").addEventListener("input",e=>{n=+e.target.value;turn=0;draw()});$("rotate").addEventListener("click",()=>{turn=(turn+1)%n;draw()});$("reset").addEventListener("click",()=>{turn=0;draw()});$("next").addEventListener("click",()=>{q++;renderQ()});draw();renderQ();
-</script>\n<script src="/shared-nav.js?v=20261013-universal-nav-v1"></script>\n</body></html>
+</script>
+<script src="/shared-nav.js?v=20261013-universal-nav-v1"></script>
+</body></html>

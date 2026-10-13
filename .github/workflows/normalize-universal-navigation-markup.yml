@@ -25,12 +25,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Normalize script separators across student pages
+      - name: Normalize, commit, and retry if main moved
         shell: bash
         run: |
-          python3 <<'PY'
-          from pathlib import Path
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          pushed=0
 
+          for attempt in 1 2 3 4 5 6 7 8; do
+            echo "Universal navigation normalization attempt $attempt"
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 <<'PY'
+          from pathlib import Path
           root = Path(".")
           script = '<script src="/shared-nav.js?v=20261013-universal-nav-v1"></script>'
           newline = chr(10)
@@ -58,21 +67,27 @@ jobs:
                   changed.append(rel)
 
           print(f"Normalized real line breaks on {len(changed)} pages.")
-          print("\n".join(changed))
           PY
 
-      - name: Commit normalized markup and remove updater
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/normalize-universal-navigation-markup.yml
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No markup normalization was needed."
-          else
+            git rm -f .github/workflows/normalize-universal-navigation-markup.yml
+            git add -A
+            if git diff --cached --quiet; then
+              echo "No markup normalization changes were needed."
+              pushed=1
+              break
+            fi
+
             git commit -m "Normalize universal navigation markup across pages"
-            git push origin HEAD:main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            echo "main moved during this attempt; retrying on the latest main."
+          done
+
+          if [ "$pushed" -ne 1 ]; then
+            echo "Could not update main after 8 attempts."
+            exit 1
           fi
 
       - name: Configure GitHub Pages

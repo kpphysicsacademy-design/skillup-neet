@@ -77,4 +77,21 @@
     return '<a href="'+item.href+'" title="'+item.label+'" aria-label="'+item.label+'"'+(isActive?' class="active" aria-current="page"':'')+'><span class="nav-icon" aria-hidden="true">'+item.icon+'</span><span class="nav-label">'+item.label+'</span></a>';
   }).join('');
   document.body.appendChild(nav);
+
+  // Android WebView compatibility: same-site links opened with target="_blank"
+  // should still navigate when the host app does not enable multiple windows.
+  // External links retain their normal target behavior for the app's native handler.
+  document.addEventListener('click', event => {
+    const link = event.target && event.target.closest ? event.target.closest('a[target="_blank"]') : null;
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.hasAttribute('download')) return;
+    try {
+      const destination = new URL(link.href, location.href);
+      if (destination.origin !== location.origin) return;
+      event.preventDefault();
+      location.href = destination.href;
+    } catch (error) {
+      // Leave malformed or unsupported URLs to the browser's default handling.
+    }
+  }, false);
 })();

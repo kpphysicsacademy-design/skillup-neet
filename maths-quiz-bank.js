@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Area of trapezium and polygons": [
+    ["A trapezium has parallel sides 8 cm and 12 cm and height 5 cm. Find its area.",["40 cm²","50 cm²","60 cm²","100 cm²"],1,"Area = ½ × (8 + 12) × 5 = 50 cm²."],
+    ["Find the area of a trapezium with parallel sides 7 m and 13 m and height 4 m.",["26 m²","40 m²","52 m²","80 m²"],1,"Area = ½ × (7 + 13) × 4 = 40 m²."],
+    ["The parallel sides of a trapezium are 10 cm and 16 cm. Its height is 6 cm. What is its area?",["48 cm²","72 cm²","78 cm²","96 cm²"],2,"Area = ½ × 26 × 6 = 78 cm²."],
+    ["A trapezium has area 60 cm², parallel sides 8 cm and 12 cm. Find its height.",["3 cm","4 cm","5 cm","6 cm"],3,"60 = ½ × 20 × h = 10h, so h = 6 cm."],
+    ["A trapezium has area 84 m², height 7 m and one parallel side 10 m. Find the other parallel side.",["12 m","14 m","16 m","18 m"],1,"84 = ½ × (10 + b) × 7, so 24 = 10 + b and b = 14 m."],
+    ["Find the area of a triangle with base 12 cm and height 9 cm.",["54 cm²","108 cm²","21 cm²","42 cm²"],0,"Triangle area = ½ × base × height = ½ × 12 × 9 = 54 cm²."],
+    ["Find the area of a parallelogram with base 15 cm and perpendicular height 8 cm.",["60 cm²","100 cm²","120 cm²","240 cm²"],2,"Area of parallelogram = base × perpendicular height = 15 × 8 = 120 cm²."],
+    ["A rectangle is 12 m long and 7 m wide. Find its area.",["19 m²","38 m²","84 m²","168 m²"],2,"Area = length × width = 12 × 7 = 84 m²."],
+    ["A square has side 9 cm. Find its area.",["18 cm²","36 cm²","72 cm²","81 cm²"],3,"Area of a square = side² = 9² = 81 cm²."],
+    ["A polygon is divided into a rectangle of 8 cm by 5 cm and a triangle with base 8 cm and height 3 cm. Find the total area.",["40 cm²","12 cm²","52 cm²","64 cm²"],2,"Rectangle area = 40 cm²; triangle area = ½ × 8 × 3 = 12 cm²; total = 52 cm²."],
+    ["A field is shaped like a trapezium with parallel sides 25 m and 15 m and height 12 m. Find its area.",["120 m²","240 m²","300 m²","480 m²"],1,"Area = ½ × (25 + 15) × 12 = 240 m²."],
+    ["The parallel sides of a trapezium are 9 cm and 15 cm, and its area is 72 cm². Find the height.",["4 cm","6 cm","8 cm","12 cm"],1,"72 = ½ × 24 × h = 12h, hence h = 6 cm."],
+    ["A trapezium has height 10 cm and area 95 cm². If one parallel side is 8 cm, find the other.",["9 cm","10 cm","11 cm","12 cm"],2,"95 = ½ × (8 + b) × 10, so 19 = 8 + b and b = 11 cm."],
+    ["Find the area of a rhombus whose diagonals are 10 cm and 16 cm.",["80 cm²","160 cm²","26 cm²","40 cm²"],0,"Area of a rhombus = ½ × product of diagonals = ½ × 10 × 16 = 80 cm²."],
+    ["A kite has diagonals 14 cm and 9 cm. What is its area?",["23 cm²","63 cm²","126 cm²","46 cm²"],1,"Area = ½ × 14 × 9 = 63 cm²."],
+    ["Find the area of a parallelogram with base 11 cm and height 6 cm.",["17 cm²","34 cm²","66 cm²","121 cm²"],2,"Area = 11 × 6 = 66 cm²."],
+    ["A triangle has area 48 cm² and base 12 cm. Find its perpendicular height.",["4 cm","6 cm","8 cm","12 cm"],2,"48 = ½ × 12 × h = 6h, so h = 8 cm."],
+    ["A rectangle of dimensions 10 cm × 6 cm has a square of side 2 cm cut out. Find the remaining area.",["56 cm²","60 cm²","64 cm²","68 cm²"],0,"Rectangle area = 60 cm²; removed square area = 4 cm²; remaining area = 56 cm²."],
+    ["A trapezium has parallel sides 4.5 cm and 7.5 cm and height 6 cm. Find its area.",["24 cm²","30 cm²","36 cm²","72 cm²"],2,"Area = ½ × (4.5 + 7.5) × 6 = 36 cm²."],
+    ["The area of a trapezium is 150 cm². Its parallel sides are 12 cm and 18 cm. Find its height.",["5 cm","8 cm","10 cm","12 cm"],2,"150 = ½ × 30 × h = 15h, so h = 10 cm."],
+    ["A polygon consists of two non-overlapping rectangles of areas 24 cm² and 35 cm². Find the polygon's area.",["11 cm²","59 cm²","840 cm²","35 cm²"],1,"For non-overlapping parts, add the areas: 24 + 35 = 59 cm²."],
+    ["Find the area of a trapezium with parallel sides 3 m and 9 m and height 5 m.",["15 m²","30 m²","45 m²","60 m²"],1,"Area = ½ × (3 + 9) × 5 = 30 m²."],
+    ["A square and a rectangle each have area 64 cm². What is the side of the square?",["4 cm","8 cm","16 cm","32 cm"],1,"Square side = √64 = 8 cm."],
+    ["A parallelogram has area 90 cm² and base 15 cm. Find its perpendicular height.",["5 cm","6 cm","7.5 cm","15 cm"],1,"Height = area ÷ base = 90 ÷ 15 = 6 cm."],
+    ["A triangle and a parallelogram have the same base and height. The parallelogram area is 70 cm². What is the triangle area?",["35 cm²","70 cm²","105 cm²","140 cm²"],0,"A triangle's area is half the area of a parallelogram with the same base and height."],
+    ["The parallel sides of a trapezium are 2x cm and 4x cm, and its height is 3 cm. Express its area.",["9x cm²","18x cm²","6x cm²","3x cm²"],0,"Area = ½ × (2x + 4x) × 3 = 9x cm²."],
+    ["A trapezium has parallel sides 14 cm and 20 cm and height 9 cm. Find its area.",["126 cm²","153 cm²","306 cm²","171 cm²"],1,"Area = ½ × (14 + 20) × 9 = 153 cm²."],
+    ["A polygon is made from a 6 cm × 4 cm rectangle and a triangle of base 6 cm and height 5 cm. Find the total area.",["24 cm²","15 cm²","39 cm²","54 cm²"],2,"Rectangle area = 24 cm²; triangle area = 15 cm²; total = 39 cm²."],
+    ["A trapezium has area 108 cm², height 9 cm and parallel sides in the ratio 1:2. Find the shorter parallel side.",["6 cm","8 cm","12 cm","16 cm"],1,"Let the sides be x and 2x: 108 = ½ × 3x × 9 = 13.5x, so x = 8 cm."],
+    ["A rectangular garden is 18 m long and 12 m wide. A path covers 2 m² of its area. What is the remaining area?",["212 m²","214 m²","216 m²","220 m²"],1,"Garden area = 18 × 12 = 216 m²; subtract 2 m² to get 214 m²."]
+  ],
   "Factorisation basics": [
     ["Factorise 6x + 12.",["6(x + 2)","6(x − 2)","3(2x + 12)","6x(1 + 2)"],0,"The greatest common factor is 6: 6x + 12 = 6(x + 2)."],
     ["Factorise 5a − 15.",["5(a − 3)","5(a + 3)","a(5 − 15)","15(a − 5)"],0,"Take out the common factor 5."],

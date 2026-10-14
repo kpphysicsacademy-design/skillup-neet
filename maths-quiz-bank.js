@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Types of quadrilaterals": [
+    ["A quadrilateral with both pairs of opposite sides parallel is a:",["Kite","Trapezium","Parallelogram","Pentagon"],2,"A parallelogram has two pairs of parallel opposite sides."],
+    ["Which quadrilateral has four equal sides and four right angles?",["Rhombus only","Rectangle only","Square","Kite"],2,"A square has four equal sides and four right angles."],
+    ["A rectangle has:",["All sides equal always","Four right angles","Only one pair of parallel sides","No parallel sides"],1,"Every rectangle has four right angles and opposite sides equal and parallel."],
+    ["Which quadrilateral has four equal sides but need not have right angles?",["Rhombus","Rectangle","Trapezium","Irregular quadrilateral"],0,"A rhombus has four equal sides; its angles need not be 90°."],
+    ["Which quadrilateral has exactly one pair of parallel sides under the usual school definition?",["Square","Parallelogram","Trapezium","Rhombus"],2,"A trapezium has one pair of parallel sides in the usual school definition."],
+    ["A kite typically has:",["Two pairs of adjacent equal sides","Four right angles","Two pairs of opposite parallel sides","Four equal angles"],0,"A kite has two distinct pairs of equal adjacent sides."],
+    ["Which statement about a parallelogram is true?",["All four sides must be equal","Opposite sides are equal","All angles are right angles","Diagonals are always equal"],1,"Opposite sides of a parallelogram are equal and parallel."],
+    ["Which quadrilateral always has equal diagonals?",["Rhombus","Rectangle","Kite","General parallelogram"],1,"A rectangle's diagonals are equal in length."],
+    ["Which quadrilateral has diagonals that bisect each other at right angles?",["Rectangle only","Rhombus","Trapezium","Any quadrilateral"],1,"The diagonals of a rhombus bisect each other perpendicularly."],
+    ["A square is also a:",["Rectangle and rhombus","Kite only, not a parallelogram","Trapezium only","Pentagon"],0,"A square has rectangle properties and rhombus properties."],
+    ["What is the sum of the interior angles of any quadrilateral?",["180°","270°","360°","540°"],2,"Every quadrilateral's interior angles sum to 360°."],
+    ["Three angles of a quadrilateral are 70°, 95° and 110°. Find the fourth.",["75°","80°","85°","95°"],2,"360°−(70°+95°+110°)=85°."],
+    ["A parallelogram has one angle of 65°. What is the adjacent angle?",["65°","105°","115°","125°"],2,"Adjacent angles in a parallelogram are supplementary: 180°−65°=115°."],
+    ["A parallelogram has one angle of 65°. What is its opposite angle?",["65°","90°","115°","130°"],0,"Opposite angles in a parallelogram are equal."],
+    ["A rectangle has length 12 cm and width 5 cm. What is its perimeter?",["17 cm","30 cm","34 cm","60 cm"],2,"Perimeter=2(12+5)=34 cm."],
+    ["A square has perimeter 36 cm. What is its side length?",["6 cm","8 cm","9 cm","12 cm"],2,"Each side=36÷4=9 cm."],
+    ["A rhombus has side length 7 cm. What is its perimeter?",["14 cm","21 cm","28 cm","49 cm"],2,"All four sides are equal, so perimeter=4×7=28 cm."],
+    ["Which statement is true for a rectangle?",["Its diagonals bisect each other","Its diagonals always meet at 90°","All four sides are equal","Adjacent angles are never equal"],0,"A rectangle's diagonals bisect each other and are equal in length."],
+    ["Which statement is true for a rhombus?",["Opposite sides are not parallel","All angles must be right angles","All sides are equal","Diagonals are always equal"],2,"All four sides of a rhombus are equal."],
+    ["Which quadrilateral has exactly one pair of equal opposite angles in a general kite?",["A pair of opposite angles may be equal","All four angles equal","All opposite sides parallel","Both diagonals equal always"],0,"A kite generally has one pair of equal opposite angles."],
+    ["If both pairs of opposite sides of a quadrilateral are equal, the quadrilateral is a:",["Parallelogram","Trapezium only","Kite only","Triangle"],0,"A quadrilateral with both pairs of opposite sides equal is a parallelogram."],
+    ["A quadrilateral has angles x°, x°, 2x° and 2x°. Find x.",["45°","50°","60°","90°"],2,"6x=360°, so x=60°."],
+    ["In a parallelogram, adjacent angles are (3x)° and (2x)°. Find x.",["30°","36°","45°","60°"],1,"3x+2x=180°, so x=36°."],
+    ["A rectangle's diagonal is 13 cm and one side is 5 cm. Find the other side.",["8 cm","10 cm","12 cm","18 cm"],2,"Using Pythagoras: other side²=13²−5²=144, so it is 12 cm."],
+    ["Which quadrilateral has rotational symmetry of order 4?",["Rectangle that is not a square","Square","Rhombus that is not a square","Kite"],1,"A square matches itself four times during a full 360° turn."],
+    ["Which quadrilateral generally has one line of symmetry?",["A non-square rectangle","A typical kite","A general parallelogram","A general trapezium"],1,"A typical kite has one line of symmetry through the vertices where equal sides meet."],
+    ["What is the defining property of a parallelogram's diagonals?",["They are always equal","They bisect each other","They meet at right angles always","They never intersect"],1,"Each diagonal of a parallelogram cuts the other into two equal parts."],
+    ["A square has diagonal length 10 cm. What is its area?",["25 cm²","50 cm²","100 cm²","200 cm²"],1,"For a square, area=diagonal²÷2=100÷2=50 cm²."],
+    ["A parallelogram has base 14 cm and perpendicular height 6 cm. Find its area.",["20 cm²","42 cm²","84 cm²","168 cm²"],2,"Area=base×height=14×6=84 cm²."],
+    ["Which statement distinguishes a square from a general rectangle?",["A square has four equal sides","A square has four angles","A square has opposite sides parallel","A square has diagonals"],0,"Both have four right angles and equal diagonals, but a square also has all four sides equal."]
+  ],
   "Polygons and angle sums": [
     ["Interior-angle sum of a pentagon?",["360°","450°","540°","720°"],2,"(5−2)×180°=540°."],
     ["Interior-angle sum of a hexagon?",["540°","600°","720°","900°"],2,"(6−2)×180°=720°."],

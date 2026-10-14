@@ -9,7 +9,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["A cuboid has length 8 cm, breadth 5 cm and height 3 cm. Find its total surface area.",["79 cm²","158 cm²","120 cm²","240 cm²"],1,"TSA = 2(lb + bh + hl) = 2(40 + 15 + 24) = 158 cm²."],
     ["Find the volume of a cuboid measuring 7 cm × 4 cm × 3 cm.",["14 cm³","28 cm³","84 cm³","42 cm³"],2,"Volume = l × b × h = 7 × 4 × 3 = 84 cm³."],
     ["What is the lateral surface area of a cube of side 6 cm?",["36 cm²","144 cm²","216 cm²","72 cm²"],1,"Lateral surface area of a cube = 4a² = 4 × 36 = 144 cm²."],
-    ["A cuboid has l = 10 cm, b = 6 cm and h = 4 cm. Find its lateral surface area.",["120 cm²","128 cm²","200 cm²","240 cm²"],0,"LSA = 2h(l + b) = 2 × 4 × 16 = 128 cm²."],
+    ["A cuboid has l = 10 cm, b = 6 cm and h = 4 cm. Find its lateral surface area.",["120 cm²","128 cm²","200 cm²","240 cm²"],1,"LSA = 2h(l + b) = 2 × 4 × 16 = 128 cm²."],
     ["The volume of a cube is 216 cm³. Find its side length.",["4 cm","5 cm","6 cm","8 cm"],2,"The side is the cube root of 216, which is 6 cm."],
     ["The total surface area of a cube is 150 cm². Find its side.",["5 cm","6 cm","25 cm","10 cm"],0,"6a² = 150, so a² = 25 and a = 5 cm."],
     ["Find the total surface area of a cuboid of dimensions 12 cm, 5 cm and 4 cm.",["128 cm²","136 cm²","256 cm²","240 cm²"],2,"TSA = 2(12×5 + 5×4 + 4×12) = 2(60 + 20 + 48) = 256 cm²."],

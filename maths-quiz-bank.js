@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Perfect cubes": [
+    ["Which number is a perfect cube?",["18","27","36","50"],1,"27 = 3³."],
+    ["What is 2³?",["4","6","8","16"],2,"2 × 2 × 2 = 8."],
+    ["What is 3³?",["6","9","18","27"],3,"3 × 3 × 3 = 27."],
+    ["What is 4³?",["16","32","48","64"],3,"4 × 4 × 4 = 64."],
+    ["What is 5³?",["25","75","100","125"],3,"5 × 5 × 5 = 125."],
+    ["What is 6³?",["36","126","216","256"],2,"6 × 6 × 6 = 216."],
+    ["What is 7³?",["49","147","343","729"],2,"7 × 7 × 7 = 343."],
+    ["What is 8³?",["64","256","512","624"],2,"8 × 8 × 8 = 512."],
+    ["What is 9³?",["81","243","729","999"],2,"9 × 9 × 9 = 729."],
+    ["What is 10³?",["100","300","1,000","10,000"],2,"10 × 10 × 10 = 1,000."],
+    ["Which number is NOT a perfect cube?",["8","64","100","125"],2,"100 is not the cube of a whole number."],
+    ["Which number is equal to 11³?",["121","1,221","1,331","1,111"],2,"11 × 11 × 11 = 1,331."],
+    ["What is 12³?",["144","1,224","1,728","1,7280"],2,"12 × 12 × 12 = 1,728."],
+    ["Which is the next perfect cube after 27?",["36","64","81","125"],1,"3³ = 27 and 4³ = 64."],
+    ["Which is the greatest perfect cube less than 100?",["27","64","81","99"],1,"4³ = 64; 5³ = 125 is greater than 100."],
+    ["Which perfect cube lies between 200 and 300?",["216","225","256","289"],0,"216 = 6³."],
+    ["The cube of an even whole number is always:",["Odd","Even","Prime","Negative"],1,"An even number multiplied three times remains even."],
+    ["The cube of an odd whole number is always:",["Even","Odd","Zero","A fraction"],1,"Odd × odd × odd is odd."],
+    ["What is 2³ × 3³?",["36","72","216","729"],2,"2³ × 3³ = (2 × 3)³ = 6³ = 216."],
+    ["What is 4³ + 3³?",["37","64","91","125"],2,"64 + 27 = 91."],
+    ["What is 5³ − 2³?",["17","97","117","133"],2,"125 − 8 = 117."],
+    ["Which number is a perfect cube and even?",["27","64","125","343"],1,"64 = 4³ and is even."],
+    ["A cube has an edge of 4 cm. What is its volume?",["12 cm³","16 cm³","48 cm³","64 cm³"],3,"Volume = 4³ = 64 cm³."],
+    ["A cube has volume 125 cm³. What is its edge length?",["3 cm","4 cm","5 cm","25 cm"],2,"5³ = 125, so the edge is 5 cm."],
+    ["Which number is a perfect cube of a prime number?",["16","27","36","81"],1,"27 = 3³ and 3 is prime."],
+    ["What is the units digit of 7³?",["1","3","7","9"],1,"7³ = 343, whose units digit is 3."],
+    ["Which expression equals 8³?",["8 × 3","8 × 8","8 + 8 + 8","8 × 8 × 8"],3,"A cube is the number multiplied by itself three times."],
+    ["How many equal factors of 3 make 3³?",["2","3","4","9"],1,"3³ = 3 × 3 × 3, so there are three equal factors."],
+    ["Which statement is correct?",["6³ = 36","4³ = 64","5³ = 25","3³ = 18"],1,"4³ = 4 × 4 × 4 = 64."],
+    ["Which of these is a perfect cube?",["150","196","343","400"],2,"343 = 7³."]
+  ],
   "Cube roots": [
     ["What is ∛8?",["2","3","4","8"],0,"2³ = 8."],
     ["What is ∛27?",["2","3","6","9"],1,"3³ = 27."],

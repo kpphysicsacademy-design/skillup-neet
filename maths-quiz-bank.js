@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Division of algebraic expressions": [
+    ["Simplify (12x³) ÷ (3x).",["4x²","4x³","9x²","4x"],0,"Divide coefficients 12 ÷ 3 = 4 and subtract exponents: x³ ÷ x = x²."],
+    ["Simplify (15a²b) ÷ (5a).",["3ab","3a²b","10ab","3b"],0,"15 ÷ 5 = 3 and a² ÷ a = a, so the result is 3ab."],
+    ["Simplify (18m³n²) ÷ (6mn).",["3m²n","3m³n","12m²n","3m²n²"],0,"Divide coefficients and subtract exponents: 18/6 = 3, m³/m = m², n²/n = n."],
+    ["Simplify (20x² + 10x) ÷ 5x.",["4x + 2","4x² + 2x","15x","4x + 10"],0,"Divide each term by 5x: 20x²/(5x) + 10x/(5x) = 4x + 2."],
+    ["Simplify (12a² − 8a) ÷ 4a.",["3a − 2","3a² − 2a","8a − 4","3a + 2"],0,"Divide each term by 4a to get 3a − 2."],
+    ["Simplify (x² + 5x) ÷ x.",["x + 5","x² + 5","x + 5x","5x"],0,"Divide both terms by x: x²/x + 5x/x = x + 5."],
+    ["Simplify (14p²q + 21pq²) ÷ 7pq.",["2p + 3q","2pq + 3pq","2p + 3pq","7p + 14q"],0,"14p²q/(7pq) = 2p and 21pq²/(7pq) = 3q."],
+    ["Simplify (16y³ − 24y²) ÷ 8y².",["2y − 3","2y² − 3y","8y − 16","2y + 3"],0,"Divide each term by 8y²: 2y − 3."],
+    ["Simplify (9x²y) ÷ (3xy).",["3x","3xy","6x","3y"],0,"9/3 = 3, x²/x = x and y/y = 1."],
+    ["Simplify (25a³b²) ÷ (5ab).",["5a²b","5a³b","20a²b","5a²b²"],0,"25/5 = 5, a³/a = a², b²/b = b."],
+    ["Simplify (6x² + 9x) ÷ 3x.",["2x + 3","2x² + 3x","3x + 6","2x − 3"],0,"Divide each term by 3x to obtain 2x + 3."],
+    ["Simplify (15m² − 30m) ÷ 5m.",["3m − 6","3m² − 6m","10m − 25","3m + 6"],0,"15m²/(5m) = 3m and −30m/(5m) = −6."],
+    ["Simplify (8a²b + 12ab²) ÷ 4ab.",["2a + 3b","2ab + 3ab","4a + 8b","2a − 3b"],0,"Divide each term by 4ab: 2a + 3b."],
+    ["Simplify (x² − 16) ÷ (x − 4), where x ≠ 4.",["x − 4","x + 4","x² + 4","x − 16"],1,"Factor x² − 16 = (x − 4)(x + 4), then cancel x − 4."],
+    ["Simplify (a² − 9) ÷ (a + 3), where a ≠ −3.",["a − 3","a + 3","a² − 3","a − 9"],0,"a² − 9 = (a − 3)(a + 3); cancel the common factor a + 3."],
+    ["Simplify (x² + 7x) ÷ (x + 7), where x ≠ −7.",["x","x + 7","x²","7"],0,"Factor the numerator as x(x + 7) and cancel x + 7."],
+    ["Simplify (m² − 5m) ÷ m, where m ≠ 0.",["m − 5","m + 5","m² − 5","5 − m"],0,"Divide both terms by m: m²/m − 5m/m = m − 5."],
+    ["Simplify (6x³ − 9x²) ÷ 3x².",["2x − 3","2x² − 3x","3x − 6","2x + 3"],0,"6x³/(3x²) = 2x and −9x²/(3x²) = −3."],
+    ["Simplify (10p²q − 15pq²) ÷ 5pq.",["2p − 3q","2pq − 3pq","5p − 10q","2p + 3q"],0,"Divide each term by 5pq to get 2p − 3q."],
+    ["Simplify (x² − 4x + 4) ÷ (x − 2), where x ≠ 2.",["x − 2","x + 2","x² − 2","x − 4"],0,"The numerator is (x − 2)²; dividing by x − 2 leaves x − 2."],
+    ["Simplify (4a² − 25) ÷ (2a − 5), where a ≠ 5/2.",["2a − 5","2a + 5","4a + 5","2a"],1,"4a² − 25 = (2a − 5)(2a + 5); cancel 2a − 5."],
+    ["Simplify (9y² − 1) ÷ (3y + 1), where y ≠ −1/3.",["3y − 1","3y + 1","9y − 1","3y − 3"],0,"9y² − 1 = (3y − 1)(3y + 1); cancel 3y + 1."],
+    ["Simplify (x² + 2x) ÷ (x), where x ≠ 0.",["x + 2","x² + 2","x + 2x","2x"],0,"Divide each term by x: x²/x + 2x/x = x + 2."],
+    ["Simplify (21r²s − 14rs²) ÷ 7rs.",["3r − 2s","3rs − 2rs","14r − 7s","3r + 2s"],0,"21r²s/(7rs) = 3r and −14rs²/(7rs) = −2s."],
+    ["Simplify (x² − 9x) ÷ (x), where x ≠ 0.",["x − 9","x + 9","x² − 9","9 − x"],0,"Divide x² and −9x by x to get x − 9."],
+    ["Simplify (2a² + 6a) ÷ 2a, where a ≠ 0.",["a + 3","a² + 3","2a + 6","a − 3"],0,"2a²/(2a) + 6a/(2a) = a + 3."],
+    ["Simplify (15x³y²) ÷ (3xy).",["5x²y","5x³y","12x²y","5x²y²"],0,"15/3 = 5, x³/x = x² and y²/y = y."],
+    ["Simplify (8m² − 2m) ÷ 2m, where m ≠ 0.",["4m − 1","4m² − m","6m","4m + 1"],0,"8m²/(2m) − 2m/(2m) = 4m − 1."],
+    ["Simplify (x² − 25) ÷ (x + 5), where x ≠ −5.",["x − 5","x + 5","x² − 5","x − 25"],0,"Factor x² − 25 = (x − 5)(x + 5), then cancel x + 5."],
+    ["Simplify (12u²v + 18uv²) ÷ 6uv.",["2u + 3v","2uv + 3uv","6u + 12v","2u − 3v"],0,"12u²v/(6uv) = 2u and 18uv²/(6uv) = 3v."]
+  ],
   "Factorisation using identities": [
     ["Factorise x² − 25.",["(x − 5)²","(x − 5)(x + 5)","(x + 25)(x − 1)","(x + 5)²"],1,"Use a² − b² = (a − b)(a + b): x² − 25 = (x − 5)(x + 5)."],
     ["Factorise a² + 10a + 25.",["(a + 5)²","(a − 5)²","(a + 10)(a + 5)","(a + 25)²"],0,"Use a² + 2ab + b² = (a + b)²."],

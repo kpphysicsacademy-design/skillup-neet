@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Standard identities": [
+    ["Which identity is correct for (a + b)²?",["a² + b²","a² + 2ab + b²","a² − 2ab + b²","a² − b²"],1,"Squaring a sum gives a² + 2ab + b²."],
+    ["Expand (x − y)².",["x² − y²","x² + 2xy + y²","x² − 2xy + y²","x² − xy + y²"],2,"(x − y)² = x² − 2xy + y²."],
+    ["Which expression equals a² − b²?",["(a − b)²","(a + b)²","(a − b)(a + b)","(a + b)(a + b)"],2,"Difference of squares factors as (a − b)(a + b)."],
+    ["Expand (x + 3)².",["x² + 9","x² + 6x + 9","x² + 3x + 9","x² − 6x + 9"],1,"Use (x + a)² = x² + 2ax + a²."],
+    ["Expand (m − 5)².",["m² − 10m + 25","m² − 25","m² + 10m + 25","m² − 5m + 25"],0,"(m − 5)² = m² − 10m + 25."],
+    ["Simplify (p + q)(p − q).",["p² + 2pq + q²","p² − q²","p² + q²","p² − 2pq + q²"],1,"The middle terms cancel, leaving p² − q²."],
+    ["Evaluate 51² using an identity.",["2501","2601","2401","2551"],1,"51² = (50 + 1)² = 2500 + 100 + 1 = 2601."],
+    ["Evaluate 99² using an identity.",["9801","9901","9701","9999"],0,"99² = (100 − 1)² = 10000 − 200 + 1 = 9801."],
+    ["Expand (2x + 3)².",["4x² + 9","4x² + 12x + 9","4x² + 6x + 9","2x² + 12x + 9"],1,"(2x + 3)² = (2x)² + 2(2x)(3) + 3²."],
+    ["Expand (3a − 2)².",["9a² − 12a + 4","9a² − 4","9a² + 12a + 4","3a² − 12a + 4"],0,"Square the first term, subtract twice the product, then add the square of 2."],
+    ["Which is the expansion of (a + b + c)²?",["a² + b² + c²","a² + b² + c² + 2ab + 2bc + 2ca","a² + b² + c² + ab + bc + ca","a² − b² − c²"],1,"Each squared term appears once and each pairwise product appears twice."],
+    ["Factorise x² − 16.",["(x − 4)²","(x + 4)²","(x − 4)(x + 4)","(x − 8)(x + 2)"],2,"x² − 16 = x² − 4² = (x − 4)(x + 4)."],
+    ["Simplify (x + 7)² − x².",["14x + 49","7x + 49","14x + 7","x² + 14x + 49"],0,"Expand to x² + 14x + 49, then subtract x²."],
+    ["If a + b = 10 and ab = 21, find a² + b².",["58","100","79","42"],0,"a² + b² = (a + b)² − 2ab = 100 − 42 = 58."],
+    ["If a − b = 6 and ab = 4, find a² + b².",["28","36","20","44"],3,"a² + b² = (a − b)² + 2ab = 36 + 8 = 44."],
+    ["Find 103 × 97 using an identity.",["9991","9999","10001","9700"],0,"(100 + 3)(100 − 3) = 100² − 3² = 9991."],
+    ["Which identity expands (x + a)(x + b)?",["x² + (a + b)x + ab","x² + ab","x² + (a − b)x − ab","x² + (a + b) + ab"],0,"Multiplying gives x² + bx + ax + ab = x² + (a + b)x + ab."],
+    ["Expand (x + 4)(x + 6).",["x² + 10x + 24","x² + 24x + 10","x² + 2x + 24","x² + 10x − 24"],0,"The middle coefficient is 4 + 6 = 10 and the constant is 4 × 6 = 24."],
+    ["Expand (y − 2)(y + 5).",["y² + 3y − 10","y² − 7y + 10","y² + 7y − 10","y² + 3y + 10"],0,"Multiply to get y² + 5y − 2y − 10 = y² + 3y − 10."],
+    ["Simplify (a + b)² − (a − b)².",["2a² + 2b²","4ab","2ab","4a²"],1,"Subtracting the expansions cancels a² and b², leaving 4ab."],
+    ["Which is equal to 4x² − 25?",["(2x − 5)²","(2x − 5)(2x + 5)","(4x − 5)(x + 5)","(2x + 5)²"],1,"4x² − 25 = (2x)² − 5², a difference of squares."],
+    ["Expand (2m − 1)(2m + 1).",["4m² − 1","4m² + 1","4m² − 4m + 1","2m² − 1"],0,"Use (A − B)(A + B) = A² − B²."],
+    ["Evaluate 48 × 52 using an identity.",["2496","2500","2400","2600"],0,"(50 − 2)(50 + 2) = 50² − 2² = 2496."],
+    ["If x + y = 8 and xy = 12, find (x − y)².",["16","40","64","28"],0,"(x − y)² = (x + y)² − 4xy = 64 − 48 = 16."],
+    ["Simplify (2a + b)².",["4a² + 4ab + b²","4a² + 2ab + b²","2a² + 4ab + b²","4a² + b²"],0,"(2a + b)² = 4a² + 4ab + b²."],
+    ["Expand (5x − 2y)².",["25x² − 20xy + 4y²","25x² − 4y²","25x² + 20xy + 4y²","5x² − 20xy + 4y²"],0,"The middle term is −2(5x)(2y) = −20xy."],
+    ["Factorise 9a² − 4b².",["(3a − 2b)(3a + 2b)","(3a − 2b)²","(9a − 4b)(a + b)","(3a + 2b)²"],0,"This is (3a)² − (2b)²."],
+    ["If x − 3 = 7, find x² − 6x + 9.",["49","16","25","100"],0,"x² − 6x + 9 = (x − 3)² = 7² = 49."],
+    ["Simplify (x + 2)² + (x − 2)².",["2x² + 8","2x² + 4","x² + 8","2x² − 8"],0,"Add expansions x² + 4x + 4 and x² − 4x + 4 to get 2x² + 8."],
+    ["Which identity is useful for calculating 1002² mentally?",["(a − b)²","(a + b)²","a² − b²","(a + b)(a − b)"],1,"1002² = (1000 + 2)², so the square-of-a-sum identity applies."]
+  ],
   "Multiplication of expressions": [
     ["Expand: 3x × 4x",["7x","12x","12x²","7x²"],2,"Multiply coefficients 3 × 4 = 12 and variables x × x = x²."],
     ["Expand: 2a(3a + 5)",["6a² + 10a","5a² + 7a","6a + 10","6a² + 5"],0,"Use distributive property: 2a × 3a + 2a × 5 = 6a² + 10a."],

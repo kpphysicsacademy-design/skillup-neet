@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Comparing rational numbers": [
+    ["Which rational number is greater?",["2/5","3/5","They are equal","Cannot be determined"],1,"With the same positive denominator, compare numerators: 3/5 > 2/5."],
+    ["Which is greater?",["−1/3","−2/3","They are equal","Both are positive"],0,"Among negative fractions, the one closer to zero is greater."],
+    ["Choose the correct sign: 4/7 __ 5/7.",["<",">","=","≤"],0,"The denominators are equal and 4 < 5, so 4/7 < 5/7."],
+    ["Which is the smallest?",["1/2","1/3","1/4","1/5"],3,"For unit fractions with positive denominators, a larger denominator means a smaller value."],
+    ["Which is greater: 3/4 or 5/8?",["3/4","5/8","They are equal","Cannot be compared"],0,"3/4 = 6/8, and 6/8 > 5/8."],
+    ["Which is greater?",["−5/6","−3/4","They are equal","Cannot be determined"],1,"−5/6 ≈ −0.833 and −3/4 = −0.75; −3/4 is greater."],
+    ["Arrange in ascending order.",["1/2, 1/3, 1/4","1/4, 1/3, 1/2","1/3, 1/4, 1/2","1/2, 1/4, 1/3"],1,"Their values increase from 1/4 to 1/3 to 1/2."],
+    ["Which statement is true?",["−2/5 > 1/5","−2/5 < 1/5","−2/5 = 1/5","−2/5 > 2/5"],1,"Every negative rational number is less than every positive rational number."],
+    ["Compare 7/9 and 7/11.",["7/9 < 7/11","7/9 > 7/11","They are equal","Cannot be compared"],1,"With equal positive numerators, the smaller denominator gives the larger fraction."],
+    ["Which is closest to zero?",["−3/4","−1/8","1/2","2/3"],1,"The absolute value of −1/8 is the smallest among these options."],
+    ["Which is the greatest number?",["−2","−1/2","0","−3/4"],2,"Zero is greater than every negative number."],
+    ["Choose the correct sign: −4/9 __ −2/9.",["<",">","=","≥"],0,"−4/9 is farther left on the number line than −2/9."],
+    ["Which is greater?",["5/6","7/9","They are equal","Cannot be determined"],0,"Using denominator 18: 5/6 = 15/18 and 7/9 = 14/18."],
+    ["Which is the smallest?",["−1/2","−2/3","−3/4","−1/4"],2,"−3/4 is the most negative of the listed fractions."],
+    ["Which fraction lies between 1/3 and 1/2?",["1/4","2/5","3/5","3/4"],1,"2/5 = 0.4, which lies between about 0.333 and 0.5."],
+    ["Compare 2/3 and 4/6.",["2/3 < 4/6","2/3 > 4/6","2/3 = 4/6","Cannot be compared"],2,"4/6 simplifies to 2/3, so they are equal."],
+    ["Which is greater: −7/8 or −5/8?",["−7/8","−5/8","They are equal","Both are positive"],1,"−5/8 is closer to zero, so it is greater."],
+    ["Arrange in descending order.",["−1/2, 0, 1/2","1/2, 0, −1/2","0, 1/2, −1/2","−1/2, 1/2, 0"],1,"Descending order goes from greatest to smallest."],
+    ["Which statement is correct?",["1/6 > 1/4","1/6 < 1/4","1/6 = 1/4","1/6 > 1"],1,"For positive unit fractions, 1/6 is less than 1/4."],
+    ["Which number is greater?",["−5/3","−4/3","They are equal","Cannot be determined"],1,"−4/3 is closer to zero than −5/3, so it is greater."],
+    ["Compare 0 and −11/12.",["0 < −11/12","0 > −11/12","0 = −11/12","Cannot be compared"],1,"Zero is greater than any negative rational number."],
+    ["Which is the greatest fraction?",["3/10","2/5","5/12","1/3"],2,"5/12 ≈ 0.417, which is greater than 0.4, about 0.333, and 0.3."],
+    ["Which is the least fraction?",["4/5","3/4","7/10","5/8"],3,"5/8 = 0.625, smaller than 0.7, 0.75, and 0.8."],
+    ["Compare −1/2 and −3/8.",["−1/2 > −3/8","−1/2 < −3/8","They are equal","Both are positive"],1,"−1/2 = −0.5 and −3/8 = −0.375; −0.5 is smaller."],
+    ["Which number is between −1 and 0?",["−5/4","−1/2","1/4","−3/2"],1,"−1/2 is greater than −1 and less than zero."],
+    ["Which comparison is true?",["5/12 > 1/2","5/12 < 1/2","5/12 = 1/2","5/12 > 1"],1,"5/12 ≈ 0.417, which is less than 0.5."],
+    ["What is the correct increasing order of −1/4, 1/4, and −3/4?",["−3/4, −1/4, 1/4","1/4, −1/4, −3/4","−1/4, −3/4, 1/4","−3/4, 1/4, −1/4"],0,"Negative values come before positive values, and −3/4 < −1/4."],
+    ["Which fraction is greater than 2/7?",["1/7","3/7","2/9","1/9"],1,"With denominator 7, 3/7 > 2/7."],
+    ["Compare 9/10 and 11/12.",["9/10 > 11/12","9/10 < 11/12","They are equal","Cannot be compared"],1,"Using denominator 60: 9/10 = 54/60 and 11/12 = 55/60."],
+    ["On a number line, which rational number lies farthest to the left?",["−1/5","−4/5","0","1/5"],1,"The most negative number, −4/5, lies farthest left."]
+  ],
   "Equivalent rational numbers": [
     ["Which fraction is equivalent to 3/5?",["6/10","6/15","9/10","3/10"],0,"Multiply numerator and denominator by 2: 3/5 = 6/10."],
     ["Which fraction is equivalent to 4/7?",["8/21","12/21","4/14","7/4"],1,"Multiplying both parts by 3 gives 12/21."],

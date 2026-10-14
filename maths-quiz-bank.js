@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Properties of rational numbers": [
+    ["Which property is shown by 2/5 + 3/7 = 3/7 + 2/5?",["Associative property","Commutative property of addition","Distributive property","Multiplicative identity"],1,"Changing the order of addends without changing the sum shows commutativity."],
+    ["Which property is shown by (1/2 + 1/3) + 1/4 = 1/2 + (1/3 + 1/4)?",["Commutative","Associative","Closure","Inverse"],1,"Regrouping addends without changing their order shows associativity."],
+    ["What is the additive identity for rational numbers?",["1","−1","0","1/2"],2,"Adding zero to a rational number leaves it unchanged."],
+    ["What is the multiplicative identity for rational numbers?",["0","1","−1","Any rational number"],1,"Multiplying a rational number by 1 leaves it unchanged."],
+    ["What is the additive inverse of −7/9?",["−7/9","7/9","9/7","−9/7"],1,"A number plus its additive inverse equals zero."],
+    ["What is the multiplicative inverse of 4/11?",["4/11","−11/4","11/4","−4/11"],2,"The reciprocal of a nonzero fraction is found by swapping numerator and denominator."],
+    ["Which statement illustrates the distributive property?",["a+b=b+a","a(b+c)=ab+ac","(a+b)+c=a+(b+c)","a×1=a"],1,"Multiplication distributes over addition: a(b+c)=ab+ac."],
+    ["Which set is closed under addition?",["Rational numbers","Positive integers only","Natural numbers under subtraction","Nonzero integers under division"],0,"The sum of any two rational numbers is rational."],
+    ["Which set is closed under multiplication?",["Rational numbers","Nonzero rational numbers under division by zero","Irrational numbers only","Odd numbers under division"],0,"The product of any two rational numbers is rational."],
+    ["Is the set of rational numbers closed under subtraction?",["Yes, always","No, never","Only for positive numbers","Only when numbers are equal"],0,"Subtracting one rational number from another always gives a rational number."],
+    ["Which operation does NOT have closure for rational numbers in all cases?",["Addition","Subtraction","Multiplication","Division"],3,"Division by zero is undefined, so division is not defined for every pair of rational numbers."],
+    ["Which equation shows the commutative property of multiplication?",["2/3 × 5/7 = 5/7 × 2/3","(2/3 × 5/7) × 1/2 = 2/3 × (5/7 × 1/2)","2/3 × 1 = 2/3","2/3 × (1/2 + 1/3) = 2/3 × 1/2 + 2/3 × 1/3"],0,"The factors exchange order while the product remains unchanged."],
+    ["Which equation shows the associative property of multiplication?",["a×b=b×a","(a×b)×c=a×(b×c)","a×1=a","a(b+c)=ab+ac"],1,"Associativity changes grouping, not order."],
+    ["What is the additive inverse of 5/12?",["5/12","−5/12","12/5","−12/5"],1,"The additive inverse of 5/12 is −5/12."],
+    ["What is the multiplicative inverse of −2/7?",["2/7","−7/2","7/2","−2/7"],1,"The reciprocal is −7/2, and their product is 1."],
+    ["Which rational number has no multiplicative inverse?",["−3","2/5","0","7/8"],2,"Zero has no multiplicative inverse because no number multiplied by zero gives one."],
+    ["Simplify (2/3)×(3/5 + 1/5) using the distributive property.",["8/15","4/5","2/5","2/3"],0,"Inside the bracket, 3/5+1/5=4/5; then 2/3×4/5=8/15."],
+    ["If a and b are rational numbers, which statement is true?",["a+b is always rational","a+b is always irrational","a×b is always irrational","a−b is never rational"],0,"Rational numbers are closed under addition."],
+    ["Which property explains 7/8 + 0 = 7/8?",["Additive identity","Multiplicative identity","Associative property","Distributive property"],0,"Zero is the additive identity."],
+    ["Which property explains (−4/9)×1 = −4/9?",["Additive inverse","Multiplicative identity","Commutative property only","Closure under subtraction"],1,"One is the multiplicative identity."],
+    ["Which statement is true about addition of rational numbers?",["It is commutative and associative","It is only commutative","It is only associative","It has no identity"],0,"Rational-number addition is both commutative and associative."],
+    ["Which statement is true about multiplication of rational numbers?",["It is not associative","It has no identity","It is commutative and associative","It is never closed"],2,"Rational-number multiplication is commutative, associative, and has identity 1."],
+    ["What is (−2/5) + 2/5?",["−4/5","4/5","0","1"],2,"A number and its additive inverse sum to zero."],
+    ["What is (−3/8)×(−8/3)?",["−1","0","1","64/24"],2,"The numbers are reciprocals, and the product is 1."],
+    ["Which equation correctly applies distributivity?",["3/4×(2/5+1/5)=3/4×2/5+3/4×1/5","a+b=a×b","a−b=b−a","a×0=1"],0,"Multiply 3/4 by each term inside the parentheses."],
+    ["For rational numbers a and b, which is always true?",["a+b=b+a","a−b=b−a","a÷b=b÷a for all a,b","a×0=1"],0,"Addition is commutative; subtraction and division generally are not."],
+    ["Which operation is not commutative for rational numbers in general?",["Addition","Multiplication","Subtraction","Both addition and multiplication"],2,"For example, 5−2 differs from 2−5."],
+    ["Which operation is not associative for rational numbers in general?",["Addition","Multiplication","Subtraction","Both addition and multiplication"],2,"Subtraction grouping changes the result: (8−3)−1 differs from 8−(3−1)."],
+    ["If x is rational, what is x+(-x)?",["x","−x","0","1"],2,"A number plus its additive inverse equals zero."],
+    ["Which statement about zero is correct?",["Zero has a multiplicative inverse","Zero is the additive identity","Zero is greater than every rational number","Division by zero is defined"],1,"Zero is the additive identity; it does not have a multiplicative inverse."]
+  ],
   "Operations on rational numbers": [
     ["Calculate 2/5 + 1/5.",["3/10","3/5","1/5","2/25"],1,"The denominators are equal, so add numerators: (2+1)/5 = 3/5."],
     ["Calculate 3/4 − 1/4.",["1/2","2/8","1/4","3/8"],0,"Subtract the numerators: (3−1)/4 = 2/4 = 1/2."],

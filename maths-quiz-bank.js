@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Factorisation using identities": [
+    ["Factorise x² − 25.",["(x − 5)²","(x − 5)(x + 5)","(x + 25)(x − 1)","(x + 5)²"],1,"Use a² − b² = (a − b)(a + b): x² − 25 = (x − 5)(x + 5)."],
+    ["Factorise a² + 10a + 25.",["(a + 5)²","(a − 5)²","(a + 10)(a + 5)","(a + 25)²"],0,"Use a² + 2ab + b² = (a + b)²."],
+    ["Factorise y² − 12y + 36.",["(y + 6)²","(y − 6)²","(y − 12)(y + 3)","(y − 36)²"],1,"This is y² − 2(6)y + 6² = (y − 6)²."],
+    ["Factorise 4x² − 9.",["(2x − 3)²","(2x + 3)²","(2x − 3)(2x + 3)","(4x − 3)(x + 3)"],2,"4x² − 9 = (2x)² − 3², a difference of squares."],
+    ["Factorise 9m² + 24m + 16.",["(3m + 4)²","(3m − 4)²","(9m + 4)²","(3m + 8)(3m + 2)"],0,"9m² + 24m + 16 = (3m)² + 2(3m)(4) + 4²."],
+    ["Factorise 25p² − 20p + 4.",["(5p + 2)²","(5p − 2)²","(25p − 2)(p − 2)","(5p − 4)²"],1,"This matches a² − 2ab + b² = (a − b)² with a = 5p, b = 2."],
+    ["Factorise 16a² − b².",["(4a − b)²","(4a + b)²","(4a − b)(4a + b)","(16a − b)(a + b)"],2,"Use the difference of squares: (4a)² − b² = (4a − b)(4a + b)."],
+    ["Factorise x² + 14x + 49.",["(x + 7)²","(x − 7)²","(x + 14)(x + 7)","(x + 49)²"],0,"x² + 14x + 49 = x² + 2(x)(7) + 7²."],
+    ["Factorise 36r² − 60r + 25.",["(6r + 5)²","(6r − 5)²","(36r − 5)²","(6r − 25)(6r − 1)"],1,"36r² − 60r + 25 = (6r)² − 2(6r)(5) + 5²."],
+    ["Factorise 49x² − 64y².",["(7x − 8y)²","(7x + 8y)²","(7x − 8y)(7x + 8y)","(49x − 8y)(x + 8y)"],2,"It is a difference of squares: (7x)² − (8y)²."],
+    ["Factorise 4a² + 12ab + 9b².",["(2a + 3b)²","(2a − 3b)²","(4a + 3b)²","(2a + 9b)(2a + b)"],0,"The expression is (2a)² + 2(2a)(3b) + (3b)²."],
+    ["Factorise 100m² − 1.",["(10m − 1)²","(10m + 1)²","(10m − 1)(10m + 1)","(100m − 1)(m + 1)"],2,"100m² − 1 = (10m)² − 1²."],
+    ["Factorise 9x² − 30xy + 25y².",["(3x + 5y)²","(3x − 5y)²","(9x − 5y)²","(3x − 25y)(3x − y)"],1,"This is (3x)² − 2(3x)(5y) + (5y)²."],
+    ["Factorise 121a² − 36b².",["(11a − 6b)²","(11a + 6b)²","(11a − 6b)(11a + 6b)","(121a − 6b)(a + 6b)"],2,"Use the difference of squares: (11a)² − (6b)²."],
+    ["Factorise x² − 18x + 81.",["(x + 9)²","(x − 9)²","(x − 18)(x + 9)","(x − 81)²"],1,"x² − 18x + 81 = x² − 2(x)(9) + 9²."],
+    ["Factorise 64p² + 16pq + q².",["(8p + q)²","(8p − q)²","(64p + q)²","(8p + 4q)²"],0,"64p² + 16pq + q² = (8p)² + 2(8p)(q) + q²."],
+    ["Factorise 81x² − 100y².",["(9x − 10y)²","(9x + 10y)²","(9x − 10y)(9x + 10y)","(81x − 10y)(x + 10y)"],2,"81x² − 100y² = (9x)² − (10y)²."],
+    ["Factorise 4m² − 28m + 49.",["(2m + 7)²","(2m − 7)²","(4m − 7)²","(2m − 49)(2m − 1)"],1,"4m² − 28m + 49 = (2m)² − 2(2m)(7) + 7²."],
+    ["Factorise 1 − 14x + 49x².",["(1 + 7x)²","(1 − 7x)²","(1 − 49x)²","(1 − 14x)(1 + 7x)"],1,"Reorder as (1)² − 2(1)(7x) + (7x)² = (1 − 7x)²."],
+    ["Factorise 144a² − 25b².",["(12a − 5b)²","(12a + 5b)²","(12a − 5b)(12a + 5b)","(144a − 5b)(a + 5b)"],2,"It is (12a)² − (5b)²."],
+    ["Factorise 4x² + 20x + 25.",["(2x + 5)²","(2x − 5)²","(4x + 5)²","(2x + 25)(x + 1)"],0,"4x² + 20x + 25 = (2x)² + 2(2x)(5) + 5²."],
+    ["Factorise 25u² − 30uv + 9v².",["(5u + 3v)²","(5u − 3v)²","(25u − 3v)²","(5u − 9v)(5u − v)"],1,"This is (5u)² − 2(5u)(3v) + (3v)²."],
+    ["Factorise 169x² − 4y².",["(13x − 2y)²","(13x + 2y)²","(13x − 2y)(13x + 2y)","(169x − 2y)(x + 2y)"],2,"Use the difference of squares: (13x)² − (2y)²."],
+    ["Factorise 9a² + 6ab + b².",["(3a + b)²","(3a − b)²","(9a + b)²","(3a + 2b)²"],0,"9a² + 6ab + b² = (3a)² + 2(3a)b + b²."],
+    ["Factorise 1 − 16z².",["(1 − 4z)²","(1 + 4z)²","(1 − 4z)(1 + 4z)","(1 − 16z)(1 + z)"],2,"1 − 16z² = 1² − (4z)²."],
+    ["Factorise 25x² + 40xy + 16y².",["(5x + 4y)²","(5x − 4y)²","(25x + 4y)²","(5x + 8y)²"],0,"The expression is (5x)² + 2(5x)(4y) + (4y)²."],
+    ["Factorise 196m² − 81n².",["(14m − 9n)²","(14m + 9n)²","(14m − 9n)(14m + 9n)","(196m − 9n)(m + 9n)"],2,"196m² − 81n² = (14m)² − (9n)²."],
+    ["Factorise 4p² − 4pq + q².",["(2p + q)²","(2p − q)²","(4p − q)²","(2p − 4q)²"],1,"4p² − 4pq + q² = (2p)² − 2(2p)q + q²."],
+    ["Factorise 225a² − 49b².",["(15a − 7b)²","(15a + 7b)²","(15a − 7b)(15a + 7b)","(225a − 7b)(a + 7b)"],2,"225a² − 49b² = (15a)² − (7b)²."],
+    ["Factorise 36x² + 60xy + 25y².",["(6x + 5y)²","(6x − 5y)²","(36x + 5y)²","(6x + 25y)²"],0,"36x² + 60xy + 25y² = (6x)² + 2(6x)(5y) + (5y)²."]
+  ],
   "Common factor": [
     ["Factorise 6x + 12.",["6(x + 2)","6(x − 2)","3(2x + 12)","2(3x + 12)"],0,"The greatest common factor is 6: 6x + 12 = 6(x + 2)."],
     ["Factorise 8a − 20.",["4(2a − 5)","4(2a + 5)","2(4a − 5)","8(a − 20)"],0,"The greatest common factor is 4, giving 4(2a − 5)."],

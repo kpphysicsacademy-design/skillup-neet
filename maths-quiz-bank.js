@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Nets of solids": [
+    ["What is a net of a solid?",["A 2D arrangement that can fold into a 3D solid","A drawing of only the vertices","A solid viewed from above","A list of edge lengths"],0,"A net is a flat 2D arrangement of faces that folds to form a 3D solid."],
+    ["Which 2D shape can form each face of a cube?",["Circle","Square","Pentagon","Triangle"],1,"A cube has six square faces."],
+    ["How many square faces are needed in a complete net of a cube?",["4","5","6","8"],2,"A cube has six faces, so its net contains six squares."],
+    ["Which shape is needed for the curved side of a cylinder's net?",["A triangle","A rectangle","A pentagon","A semicircle"],1,"When unwrapped, the curved surface of a right circular cylinder forms a rectangle, alongside two circular bases."],
+    ["Which pieces make a net of a closed cylinder?",["One rectangle and two circles","Two rectangles and one circle","One square and four triangles","Six equal squares"],0,"A closed cylinder has one rectangular curved-surface net and two circular ends."],
+    ["Which pieces make a net of a cone?",["A rectangle and two circles","A sector of a circle and one circle","Four triangles and a square","Two semicircles and a rectangle"],1,"The curved surface opens into a circular sector, and the base is a circle."],
+    ["A net of a cube is made from six squares. What must be true for it to form a cube?",["The squares must be connected in a foldable arrangement","All six squares must overlap","Every square must be separated","The squares must be changed into circles"],0,"The squares must be joined in an arrangement that folds without overlapping into the six cube faces."],
+    ["Which solid has a net made of one square and four triangles?",["Cube","Square-based pyramid","Cylinder","Triangular prism"],1,"A square-based pyramid has one square base and four triangular side faces."],
+    ["Which solid can have a net consisting of two triangles and three rectangles?",["Triangular prism","Square pyramid","Cube","Cone"],0,"A triangular prism has two triangular bases and three rectangular side faces."],
+    ["How many rectangular side faces appear in a typical net of a triangular prism?",["1","2","3","5"],2,"A triangular prism has three lateral faces, which are rectangles in a right prism."],
+    ["Which solid's net consists of six equal squares in a foldable arrangement?",["Cube","Cone","Cylinder","Square pyramid"],0,"A cube has six congruent square faces."],
+    ["Which shape is not a flat face in the net of a cube?",["Square","Rectangle","All six faces are squares","Circle"],3,"A cube's faces are squares; a circle is not one of its faces."],
+    ["A cuboid has length 5 cm, width 3 cm and height 2 cm. How many pairs of equal rectangular faces does its net contain?",["1 pair","2 pairs","3 pairs","6 pairs"],2,"Opposite faces match in three pairs: 5×3, 5×2 and 3×2."],
+    ["Why can a net help us understand a solid?",["It shows the faces laid flat before folding","It removes all faces from the solid","It shows only the solid's volume","It always gives the solid's mass"],0,"A net reveals the shape and arrangement of a solid's faces in a flat layout."],
+    ["Which statement about every drawing of six squares is correct?",["It always folds into a cube","It never folds into a cube","It may or may not fold into a cube","It must form a cylinder"],2,"Some arrangements of six squares fold into a cube; others overlap or fail to close."],
+    ["When a rectangular face in a cuboid net is folded, what does it become?",["A flat face of the cuboid","A curved surface","A vertex","An edge only"],0,"Each rectangle in the net becomes one flat face of the cuboid."],
+    ["A cube net has four squares in a row and one square attached above and one below the same middle square. How many faces does it represent?",["4","5","6","7"],2,"The arrangement contains six squares, one for each face of the cube, and is a valid cube net."],
+    ["Which net component becomes the base of a square-based pyramid?",["One of its triangular faces","Its square face","A circular sector","A rectangle"],1,"The square in the net folds to become the pyramid's base."],
+    ["What is the shape of each lateral face of a square-based pyramid?",["Circle","Rectangle","Triangle","Hexagon"],2,"The four side faces of a square-based pyramid are triangles."],
+    ["A closed cube net uses six squares. How many square faces meet at each cube vertex after folding?",["2","3","4","6"],1,"Three square faces meet at each vertex of a cube."],
+    ["Which pair of 2D shapes forms the net of a closed cylinder?",["Two circles and one rectangle","Two squares and one triangle","One circle and four triangles","Six rectangles"],0,"The two circles form the ends and the rectangle wraps around them."],
+    ["A net has one circle and a circular sector. Which solid can it form?",["Cone","Cube","Cuboid","Triangular prism"],0,"A cone's net consists of its circular base and a sector for the curved surface."],
+    ["What should you check when deciding whether a proposed cube net is valid?",["Whether the squares fold to six faces without overlap","Whether it contains a circle","Whether it has exactly four squares","Whether every square has a different size"],0,"A valid net must fold into the solid without faces overlapping or leaving gaps."],
+    ["Which statement correctly compares a cube net and a cuboid net?",["Both use only circles","Both show their flat faces arranged to fold into the solid","Neither contains rectangles or squares","Both must contain exactly six equal squares"],1,"Both nets show the solid's faces in a flat arrangement; a cuboid's faces need not all be equal squares."],
+    ["How many faces does a net of a square-based pyramid need to represent?",["4","5","6","8"],1,"It represents five faces: one square and four triangles."],
+    ["A triangular prism net has two triangular faces and three rectangular faces. How many faces does the solid have?",["3","4","5","6"],2,"Two triangular faces plus three rectangular faces make five faces."],
+    ["Which net is suitable for a tetrahedron, a triangular pyramid with four triangular faces?",["Four triangles arranged so they fold together","Six squares in a row","One rectangle and two circles","One square with four rectangles"],0,"A tetrahedron has four triangular faces, arranged so they fold into a triangular pyramid."],
+    ["Why do nets of the same solid sometimes look different?",["A solid can have more than one valid arrangement of its faces","The solid changes its number of faces","A net must include hidden extra faces","Every different net makes a different solid"],0,"Several distinct layouts can fold into the same solid, provided the faces meet correctly."],
+    ["Which shape appears twice in a net of a triangular prism?",["Circle","Triangle","Pentagon","Hexagon"],1,"The two matching triangular ends form the prism's bases."],
+    ["A net of a cuboid contains six rectangles. What determines whether it is a valid net?",["Whether the rectangles are arranged to fold into the cuboid correctly","Whether all rectangles have identical dimensions","Whether a circle is attached","Whether the rectangles are arranged in a straight line only"],0,"A valid arrangement must fold so the six rectangles form the cuboid's faces without overlap."]
+  ],
   "Faces edges and vertices": [
   ["How many faces does a cube have?",["4","6","8","12"],1,"A cube has six square faces."],
   ["How many edges does a cuboid have?",["6","8","10","12"],3,"A cuboid has four edges on the top, four on the bottom, and four joining them."],

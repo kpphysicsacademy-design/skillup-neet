@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Perfect squares": [
+    ["Which number is a perfect square?",["18","25","30","45"],1,"25 = 5 × 5."],
+    ["What is 12²?",["24","124","144","122"],2,"12 × 12 = 144."],
+    ["What is the square of 15?",["30","125","215","225"],3,"15 × 15 = 225."],
+    ["What is the square root of 81?",["7","8","9","10"],2,"9 × 9 = 81."],
+    ["Which number is NOT a perfect square?",["36","49","63","64"],2,"63 lies between 49 and 64."],
+    ["What is 20²?",["200","400","40","420"],1,"20 × 20 = 400."],
+    ["Smallest perfect square greater than 50?",["49","51","64","81"],2,"8² = 64."],
+    ["Greatest perfect square less than 100?",["64","81","90","99"],1,"9² = 81."],
+    ["Which perfect square is even?",["25","36","45","63"],1,"36 = 6² and is even."],
+    ["What is 7² + 4²?",["65","49","33","77"],0,"49 + 16 = 65."],
+    ["What is 10² − 6²?",["16","36","64","4"],2,"100 − 36 = 64."],
+    ["How many whole numbers from 1 through 10 have squares?",["9","10","11","100"],1,"There are ten numbers from 1 through 10."],
+    ["The square of an odd whole number is always:",["Even","Odd","A fraction","Zero"],1,"Odd × odd is odd."],
+    ["The square of an even whole number is always:",["Odd","Even","Prime","Negative"],1,"Even × even is even."],
+    ["What is 19²?",["361","381","191","342"],0,"19 × 19 = 361."],
+    ["Between which consecutive squares does 70 lie?",["6² and 7²","7² and 8²","8² and 9²","9² and 10²"],2,"64 < 70 < 81."],
+    ["Least number to add to 40 to get a perfect square?",["4","9","11","16"],1,"49 − 40 = 9."],
+    ["Least number to subtract from 90 to get a perfect square?",["9","10","19","26"],0,"90 − 81 = 9."],
+    ["Which pair consists of consecutive perfect squares?",["16 and 25","25 and 36","36 and 49","All of these"],3,"Each listed pair consists of consecutive squares."],
+    ["What is 25²?",["125","525","625","6250"],2,"25 × 25 = 625."],
+    ["What is the square of 1,000?",["10,000","100,000","1,000,000","10,000,000"],2,"1,000 × 1,000 = 1,000,000."],
+    ["Which digit cannot be the units digit of a whole-number square?",["0","1","2","9"],2,"Squares end only in 0, 1, 4, 5, 6 or 9."],
+    ["A whole-number square ending in 5 must end in:",["05","15","25","75"],2,"A square ending in 5 ends in 25."],
+    ["What is 30²?",["90","600","900","3,000"],2,"30 × 30 = 900."],
+    ["Which of these is a perfect square?",["121","123","128","130"],0,"121 = 11²."],
+    ["What is 14²?",["196","184","204","28"],0,"14 × 14 = 196."],
+    ["A square garden has side length 9 m. What is its area?",["18 m²","36 m²","81 m²","90 m²"],2,"Area = 9 × 9 = 81 m²."],
+    ["Which statement about 0 is correct?",["0 is not a square","0 = 0²","0 is a negative square","0² = 1"],1,"0 × 0 = 0."],
+    ["Which is the correct increasing order?",["9, 16, 25, 36","16, 9, 36, 25","25, 9, 16, 36","36, 25, 16, 9"],0,"These are 3², 4², 5² and 6²."],
+    ["Which number between 100 and 150 is a perfect square?",["110","121","130","149"],1,"121 = 11²."]
+  ],
   "Probability experiments": [
     ["A probability experiment is an activity that:",["Always gives the same result","Can produce different outcomes","Has no possible outcomes","Must use a coin"],1,"A probability experiment is a process whose result is uncertain before it is performed."],
     ["When a fair coin is tossed once, the sample space is:",["{1, 2}","{H}","{H, T}","{T, T}"],2,"A single coin toss can result in heads (H) or tails (T)."],

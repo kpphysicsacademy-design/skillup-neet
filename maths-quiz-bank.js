@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Volume of cube and cuboid": [
+    ["Find the volume of a cube with side 4 cm.",["16 cm³","48 cm³","64 cm³","96 cm³"],2,"Volume = side³ = 4³ = 64 cm³."],
+    ["A cuboid measures 8 cm × 5 cm × 3 cm. Find its volume.",["40 cm³","120 cm³","128 cm³","240 cm³"],1,"Volume = length × breadth × height = 8 × 5 × 3 = 120 cm³."],
+    ["The volume of a cube is 343 cm³. Find its side.",["6 cm","7 cm","8 cm","9 cm"],1,"The cube root of 343 is 7, so its side is 7 cm."],
+    ["A cuboid has volume 180 cm³, length 10 cm and breadth 6 cm. Find its height.",["2 cm","3 cm","4 cm","5 cm"],1,"Height = 180 ÷ (10 × 6) = 3 cm."],
+    ["Find the volume of a cuboid 12 m long, 4 m wide and 2 m high.",["18 m³","48 m³","96 m³","192 m³"],2,"Volume = 12 × 4 × 2 = 96 m³."],
+    ["A cube has side 9 cm. What is its volume?",["27 cm³","81 cm³","243 cm³","729 cm³"],3,"Volume = 9³ = 729 cm³."],
+    ["A box is 7 cm long, 4 cm wide and 5 cm high. Find its capacity in cubic centimetres.",["16 cm³","35 cm³","140 cm³","280 cm³"],2,"Capacity equals the volume: 7 × 4 × 5 = 140 cm³."],
+    ["How many 1 cm³ cubes fit into a cuboid of dimensions 6 cm × 3 cm × 2 cm?",["11","18","36","72"],2,"The cuboid holds 6 × 3 × 2 = 36 unit cubes."],
+    ["If the side of a cube doubles, its volume becomes:",["2 times","4 times","6 times","8 times"],3,"Volume depends on the cube of the side; doubling gives 2³ = 8 times."],
+    ["If all three dimensions of a cuboid are doubled, its volume becomes:",["2 times","4 times","6 times","8 times"],3,"The new volume is 2 × 2 × 2 = 8 times the original."],
+    ["A cube has volume 1000 cm³. Find its side.",["10 cm","20 cm","100 cm","5 cm"],0,"The cube root of 1000 is 10."],
+    ["Find the volume of a cube with side 2.5 cm.",["6.25 cm³","12.5 cm³","15.625 cm³","25 cm³"],2,"Volume = 2.5³ = 15.625 cm³."],
+    ["A cuboid has volume 240 cm³ and base area 40 cm². Find its height.",["4 cm","5 cm","6 cm","8 cm"],2,"Height = volume ÷ base area = 240 ÷ 40 = 6 cm."],
+    ["A tank is 2 m long, 1.5 m wide and 1 m deep. What is its volume?",["3 m³","4.5 m³","5 m³","6 m³"],0,"Volume = 2 × 1.5 × 1 = 3 m³."],
+    ["Convert 2 m³ to cm³.",["2,000 cm³","20,000 cm³","200,000 cm³","2,000,000 cm³"],3,"1 m³ = 100³ cm³ = 1,000,000 cm³, so 2 m³ = 2,000,000 cm³."],
+    ["Convert 5000 cm³ to litres.",["0.5 L","5 L","50 L","500 L"],1,"1000 cm³ = 1 L, so 5000 cm³ = 5 L."],
+    ["A cube has volume 512 cm³. Find its side.",["6 cm","7 cm","8 cm","9 cm"],2,"8³ = 512, so the side is 8 cm."],
+    ["The volume of a cuboid is 360 cm³. If its length is 12 cm and height is 5 cm, find its breadth.",["4 cm","5 cm","6 cm","8 cm"],2,"Breadth = 360 ÷ (12 × 5) = 6 cm."],
+    ["A rectangular room is 5 m long, 4 m wide and 3 m high. Find its volume.",["12 m³","20 m³","60 m³","120 m³"],2,"Volume = 5 × 4 × 3 = 60 m³."],
+    ["A cube has side 6 cm. What is the volume of 3 such cubes altogether?",["108 cm³","216 cm³","648 cm³","729 cm³"],2,"One cube has volume 6³ = 216 cm³; three have 3 × 216 = 648 cm³."],
+    ["A cuboid has dimensions 9 cm × 4 cm × 4 cm. Find its volume.",["17 cm³","36 cm³","144 cm³","288 cm³"],2,"Volume = 9 × 4 × 4 = 144 cm³."],
+    ["The volume of a cube is 729 cm³. What is its side length?",["7 cm","8 cm","9 cm","10 cm"],2,"9³ = 729, so the side length is 9 cm."],
+    ["A cuboid has base dimensions 8 cm × 6 cm and volume 336 cm³. Find its height.",["5 cm","6 cm","7 cm","8 cm"],2,"Base area = 48 cm²; height = 336 ÷ 48 = 7 cm."],
+    ["A cube of side 3 cm is made from smaller cubes of side 1 cm. How many small cubes are needed?",["9","18","27","36"],2,"The number is the volume ratio: 3³ ÷ 1³ = 27."],
+    ["Find the volume of a cuboid with length 2.5 m, breadth 2 m and height 1.2 m.",["5 m³","6 m³","7.2 m³","12 m³"],1,"Volume = 2.5 × 2 × 1.2 = 6 m³."],
+    ["A cube's side increases from 2 cm to 4 cm. How much does its volume increase by?",["8 cm³","16 cm³","32 cm³","56 cm³"],3,"Old volume = 8 cm³; new volume = 64 cm³; increase = 64 − 8 = 56 cm³."],
+    ["A cuboid has volume 1 m³. How many litres can it hold?",["10 L","100 L","1000 L","10,000 L"],2,"1 m³ = 1000 litres."],
+    ["A water tank is 100 cm long, 50 cm wide and 40 cm high. Find its volume in litres.",["20 L","100 L","200 L","2000 L"],2,"Volume = 100 × 50 × 40 = 200,000 cm³ = 200 L."],
+    ["A cuboid's volume is 504 cm³. Its length and breadth are 9 cm and 7 cm. Find its height.",["6 cm","7 cm","8 cm","9 cm"],2,"Height = 504 ÷ (9 × 7) = 8 cm."],
+    ["A cube has side 11 cm. Find its volume.",["121 cm³","331 cm³","1331 cm³","1464 cm³"],2,"Volume = 11³ = 1331 cm³."]
+  ],
   "Surface area of cube and cuboid": [
     ["Find the total surface area of a cube of side 4 cm.",["16 cm²","64 cm²","96 cm²","48 cm²"],2,"Total surface area of a cube = 6a² = 6 × 4² = 96 cm²."],
     ["Find the volume of a cube with side 5 cm.",["25 cm³","75 cm³","125 cm³","150 cm³"],2,"Volume of a cube = a³ = 5³ = 125 cm³."],

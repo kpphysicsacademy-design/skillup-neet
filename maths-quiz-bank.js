@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Parallelogram properties": [
+    ["In a parallelogram, opposite sides are:",["Perpendicular","Equal and parallel","Always unequal","Curved"],1,"Both pairs of opposite sides in a parallelogram are equal and parallel."],
+    ["Opposite angles of a parallelogram are:",["Supplementary always","Equal","Always 90°","Always acute"],1,"Opposite angles of a parallelogram are equal."],
+    ["Adjacent angles of a parallelogram add up to:",["90°","180°","270°","360°"],1,"Adjacent interior angles are supplementary, so their sum is 180°."],
+    ["One angle of a parallelogram is 72°. What is the opposite angle?",["72°","108°","118°","288°"],0,"Opposite angles are equal, so the opposite angle is 72°."],
+    ["One angle of a parallelogram is 72°. What is an adjacent angle?",["72°","98°","108°","118°"],2,"Adjacent angle = 180°−72°=108°."],
+    ["The diagonals of a parallelogram:",["Are always equal","Bisect each other","Always meet at 90°","Never cross"],1,"Each diagonal bisects the other."],
+    ["A parallelogram has one diagonal divided into segments of 6 cm and x cm by the other diagonal. Find x.",["3 cm","6 cm","12 cm","18 cm"],1,"Diagonals bisect each other, so both segments are equal: x=6 cm."],
+    ["In parallelogram ABCD, AB=3x+2 and CD=20. Find x.",["4","5","6","7"],2,"Opposite sides are equal: 3x+2=20, so x=6."],
+    ["In parallelogram ABCD, angle A=4x° and angle C=100°. Find x.",["20","25","30","40"],1,"Opposite angles are equal: 4x=100, so x=25."],
+    ["In a parallelogram, angle A=(2x+10)° and angle B=(3x−5)°. Find x.",["25","30","35","40"],1,"Adjacent angles sum to 180°: 2x+10+3x−5=180, so x=35."],
+    ["The perimeter of a parallelogram is 50 cm. One side is 15 cm. Find the adjacent side.",["10 cm","15 cm","20 cm","25 cm"],0,"2(a+b)=50 gives a+b=25. The other side is 25−15=10 cm."],
+    ["A parallelogram has sides 9 cm and 14 cm. Find its perimeter.",["23 cm","36 cm","46 cm","126 cm"],2,"Perimeter=2(9+14)=46 cm."],
+    ["Which property is true for every parallelogram?",["Diagonals are equal","Diagonals bisect each other","Diagonals are perpendicular","All sides are equal"],1,"The diagonals of every parallelogram bisect each other."],
+    ["If one pair of opposite sides of a quadrilateral are both equal and parallel, the quadrilateral is a:",["Parallelogram","Kite","Pentagon","Circle"],0,"A quadrilateral with one pair of opposite sides both equal and parallel is a parallelogram."],
+    ["A parallelogram has angles 3x° and 2x° next to each other. Find the smaller angle.",["36°","60°","72°","108°"],2,"3x+2x=180°, so x=36°; the smaller angle is 2x=72°."],
+    ["In a parallelogram, one angle is 90°. What are all its angles?",["All 90°","Two 90° and two 180°","Two 45° and two 135°","Cannot be determined"],0,"If one angle is 90°, adjacent and opposite angles are also 90°."],
+    ["A diagonal divides a parallelogram into two triangles. The triangles are:",["Always congruent","Always equilateral","Always right-angled","Always unequal"],0,"A diagonal divides a parallelogram into two congruent triangles."],
+    ["In parallelogram ABCD, AB=12 cm. Find CD.",["6 cm","10 cm","12 cm","24 cm"],2,"Opposite sides are equal, so CD=AB=12 cm."],
+    ["In parallelogram ABCD, BC=8 cm. Find AD.",["4 cm","8 cm","12 cm","16 cm"],1,"Opposite sides are equal, so AD=BC=8 cm."],
+    ["The diagonals of parallelogram ABCD meet at O. If AO=7 cm, find AC.",["7 cm","10 cm","14 cm","21 cm"],2,"Diagonals bisect each other, so AO=OC=7 cm and AC=14 cm."],
+    ["The diagonals meet at O. If BO=4.5 cm, find BD.",["4.5 cm","9 cm","13.5 cm","18 cm"],1,"BO=OD=4.5 cm, so BD=9 cm."],
+    ["A parallelogram's adjacent angles are (x+20)° and (2x+10)°. Find x.",["30","40","50","60"],2,"Adjacent angles sum to 180°: x+20+2x+10=180, so x=50."],
+    ["Which quadrilateral is always a parallelogram?",["Kite","Rhombus","General trapezium","Irregular quadrilateral"],1,"A rhombus has both pairs of opposite sides parallel, so it is a parallelogram."],
+    ["A parallelogram has base 11 cm and perpendicular height 4 cm. Find its area.",["15 cm²","22 cm²","44 cm²","88 cm²"],2,"Area=base×height=11×4=44 cm²."],
+    ["A parallelogram's area is 72 cm² and base is 9 cm. Find the perpendicular height.",["6 cm","8 cm","9 cm","12 cm"],1,"Height=area÷base=72÷9=8 cm."],
+    ["A parallelogram has perimeter 64 cm. Its adjacent sides differ by 4 cm. Find the longer side.",["14 cm","16 cm","18 cm","20 cm"],2,"Let shorter=a and longer=a+4. a+(a+4)=32, so a=14 and longer=18 cm."],
+    ["A parallelogram has angle A=110°. What is angle D?",["70°","90°","110°","180°"],0,"Adjacent angles A and D sum to 180°, so D=70°."],
+    ["A parallelogram has angle B=85°. What is angle D?",["85°","95°","105°","275°"],0,"Opposite angles B and D are equal, so D=85°."],
+    ["If diagonals of a quadrilateral bisect each other, the quadrilateral must be a:",["Parallelogram","Kite only","Trapezium only","Triangle"],0,"A quadrilateral whose diagonals bisect each other is a parallelogram."],
+    ["Which statement is NOT always true for a parallelogram?",["Opposite sides are equal","Opposite angles are equal","Diagonals bisect each other","Diagonals have equal lengths"],3,"Parallelogram diagonals bisect each other but are not necessarily equal in length."]
+  ],
   "Types of quadrilaterals": [
     ["A quadrilateral with both pairs of opposite sides parallel is a:",["Kite","Trapezium","Parallelogram","Pentagon"],2,"A parallelogram has two pairs of parallel opposite sides."],
     ["Which quadrilateral has four equal sides and four right angles?",["Rhombus only","Rectangle only","Square","Kite"],2,"A square has four equal sides and four right angles."],

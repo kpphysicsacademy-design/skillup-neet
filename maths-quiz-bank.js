@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Equivalent rational numbers": [
+    ["Which fraction is equivalent to 3/5?",["6/10","6/15","9/10","3/10"],0,"Multiply numerator and denominator by 2: 3/5 = 6/10."],
+    ["Which fraction is equivalent to 4/7?",["8/21","12/21","4/14","7/4"],1,"Multiplying both parts by 3 gives 12/21."],
+    ["Fill in the blank: 2/3 = ?/12",["6","8","9","10"],1,"Since 3 × 4 = 12, multiply 2 by 4 to get 8."],
+    ["Which fraction is equivalent to −5/8?",["10/16","−10/16","−5/16","5/16"],1,"Multiplying numerator and denominator by 2 gives −10/16."],
+    ["Which is NOT equivalent to 2/3?",["4/6","6/9","8/12","8/15"],3,"8/15 does not simplify to 2/3."],
+    ["Simplify 15/25 to its lowest terms.",["3/5","5/3","5/10","1/5"],0,"Divide numerator and denominator by their HCF, 5."],
+    ["Which fraction is equivalent to −3/4 with denominator 20?",["−12/20","12/20","−15/20","−3/20"],2,"Multiply numerator and denominator by 5 to get −15/20."],
+    ["Which fraction is equivalent to 7/9?",["14/27","21/27","28/45","7/18"],1,"Multiplying numerator and denominator by 3 gives 21/27."],
+    ["Complete: −2/5 = ?/20",["−8","8","−10","−4"],0,"Multiply numerator and denominator by 4: −2/5 = −8/20."],
+    ["Which fraction is equivalent to 18/24 in simplest form?",["2/3","3/4","4/3","6/8"],1,"Divide numerator and denominator by 6 to get 3/4."],
+    ["If a/b = 3/8 and b = 40, what is a?",["5","12","15","24"],2,"3/8 = a/40, so a = 40 × 3/8 = 15."],
+    ["Which fraction is equivalent to 5/6 with numerator 20?",["20/24","20/18","20/30","20/36"],0,"Multiply numerator and denominator by 4: 5/6 = 20/24."],
+    ["Which is equivalent to −7/3?",["7/−3","−14/6","Both A and B","7/3"],2,"A negative sign may be in the numerator or denominator; −14/6 also simplifies to −7/3."],
+    ["Simplify −24/36.",["−2/3","2/3","−3/2","−4/9"],0,"Divide numerator and denominator by 12."],
+    ["Which fraction is equivalent to 1/4?",["2/6","3/12","4/12","5/16"],1,"3/12 simplifies to 1/4."],
+    ["Find x if 5/7 = x/35.",["15","20","25","30"],2,"Since 7 × 5 = 35, x = 5 × 5 = 25."],
+    ["Which fraction is equivalent to 11/13?",["22/39","33/39","11/26","13/11"],1,"Multiplying both numerator and denominator by 3 gives 33/39."],
+    ["Which fraction is equivalent to 0?",["0/9","9/0","1/9","9/9"],0,"A zero numerator with a nonzero denominator equals zero."],
+    ["Which fraction is equivalent to 1?",["0/5","5/0","7/7","1/7"],2,"Any nonzero number divided by itself equals 1."],
+    ["Which fraction is equivalent to −4/9?",["8/18","−8/18","−4/18","4/9"],1,"Multiply numerator and denominator by 2 to get −8/18."],
+    ["Which pair represents equivalent rational numbers?",["2/5 and 4/10","3/7 and 6/21","5/8 and 10/24","4/9 and 8/27"],0,"4/10 simplifies to 2/5."],
+    ["Fill in: 9/12 = 3/?",["2","3","4","6"],2,"9/12 simplifies to 3/4."],
+    ["Which is equivalent to 16/20 in simplest form?",["4/5","5/4","8/15","2/5"],0,"Divide numerator and denominator by 4."],
+    ["What number should multiply both numerator and denominator of 2/9 to get 10/45?",["2","3","4","5"],3,"Multiplying both by 5 gives 10/45."],
+    ["Which fraction is equivalent to 6/11 with denominator 55?",["24/55","30/55","36/55","6/55"],1,"Multiply numerator and denominator by 5: 30/55."],
+    ["Simplify 42/56.",["3/4","4/3","6/7","7/6"],0,"Divide numerator and denominator by 14 to get 3/4."],
+    ["Which fraction is equivalent to −9/10?",["18/20","−18/20","−9/20","9/10"],1,"Multiply numerator and denominator by 2 to get −18/20."],
+    ["If 4/9 = 12/x, what is x?",["18","24","27","36"],2,"Cross-multiply: 4x = 108, so x = 27."],
+    ["Which fraction is equivalent to 2.5?",["2/5","5/2","25/100","1/5"],1,"2.5 = 25/10 = 5/2."],
+    ["Why do multiplying the numerator and denominator by the same nonzero integer preserve a fraction's value?",["It changes only the numerator","It changes only the denominator","It multiplies the fraction by 1","It always makes the fraction smaller"],2,"For nonzero integer k, k/k = 1, so (a×k)/(b×k) = (a/b)×1 when denominators are valid."]
+  ],
   "Rational numbers": [
     ["Which of these is a rational number?",["√2","π","−3/5","√7"],2,"A rational number can be written as p/q where p and q are integers and q ≠ 0."],
     ["Which fraction represents the integer 4?",["4/0","0/4","4/1","1/4"],2,"Every integer n can be written as n/1."],

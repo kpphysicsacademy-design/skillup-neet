@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Compound interest basics": [
+    ["What is compound interest?",["Interest only on the original principal","Interest on principal and accumulated interest","A discount on principal","A fixed tax"],1,"Compound interest is calculated on the principal plus interest added in earlier periods."],
+    ["What is the amount formula for annual compounding at rate r% for t years?",["P(1 + rt/100)","P(1 + r/100)^t","Prt/100","P − rt/100"],1,"For annual compounding, amount A = P(1 + r/100)^t."],
+    ["Find the simple interest on ₹1,000 at 10% per year for 1 year.",["₹10","₹100","₹110","₹1,100"],1,"SI = PRT/100 = 1,000 × 10 × 1/100 = ₹100."],
+    ["₹1,000 is invested at 10% compound interest annually for 1 year. What is the amount?",["₹1,010","₹1,100","₹1,200","₹2,000"],1,"After one year, amount = 1,000 × 1.10 = ₹1,100."],
+    ["Find the amount on ₹2,000 at 5% compound interest annually for 1 year.",["₹2,050","₹2,100","₹2,200","₹2,500"],1,"Amount = 2,000 × 1.05 = ₹2,100."],
+    ["₹1,000 earns 10% compound interest annually for 2 years. What is the amount?",["₹1,100","₹1,200","₹1,210","₹1,220"],2,"Amount = 1,000 × 1.1² = ₹1,210."],
+    ["Find the compound interest on ₹1,000 at 10% annually for 2 years.",["₹100","₹200","₹210","₹1,210"],2,"Amount is ₹1,210, so compound interest = 1,210 − 1,000 = ₹210."],
+    ["₹5,000 is invested at 10% compound interest annually for 2 years. Find the amount.",["₹5,500","₹6,000","₹6,050","₹6,100"],2,"Amount = 5,000 × 1.1² = ₹6,050."],
+    ["What is the compound interest on ₹2,000 at 5% annually for 2 years?",["₹100","₹200","₹205","₹2,205"],2,"Amount = 2,000 × 1.05² = ₹2,205; CI = ₹205."],
+    ["At 10% annual compound interest, what is the amount on ₹1,000 after 3 years?",["₹1,300","₹1,310","₹1,331","₹1,400"],2,"Amount = 1,000 × 1.1³ = ₹1,331."],
+    ["₹4,000 is compounded annually at 5% for 2 years. Find the amount.",["₹4,200","₹4,400","₹4,410","₹4,500"],2,"Amount = 4,000 × 1.05² = ₹4,410."],
+    ["What is 10% of ₹1,500?",["₹15","₹150","₹1,050","₹1,650"],1,"10% of 1,500 = ₹150."],
+    ["A principal of ₹800 earns 5% compound interest annually for 1 year. What is the interest?",["₹20","₹40","₹80","₹840"],1,"Interest for one year = 5% of ₹800 = ₹40."],
+    ["A sum of ₹1,000 grows to ₹1,210 in 2 years with annual compounding. What is the annual rate?",["5%","10%","15%","21%"],1,"1,000 × (1.1)² = 1,210, so the annual rate is 10%."],
+    ["₹2,000 is invested at 10% annually for 2 years. How much greater is the second year's interest than the first year's?",["₹0","₹10","₹20","₹200"],2,"First-year interest = ₹200; second-year interest = 10% of ₹2,200 = ₹220; difference = ₹20."],
+    ["What is the amount on ₹1,000 at 20% compound interest annually for 2 years?",["₹1,200","₹1,400","₹1,440","₹1,500"],2,"Amount = 1,000 × 1.2² = ₹1,440."],
+    ["Find the compound interest on ₹5,000 at 4% annually for 2 years.",["₹200","₹400","₹408","₹5,408"],2,"Amount = 5,000 × 1.04² = ₹5,408; CI = ₹408."],
+    ["If ₹3,000 becomes ₹3,300 after 1 year, compounded annually, what is the rate?",["5%","10%","15%","30%"],1,"Interest = ₹300; rate = 300/3,000 × 100% = 10%."],
+    ["For the same principal and positive annual rate over 2 years, compound interest is generally:",["Less than simple interest","Equal to simple interest always","Greater than simple interest","Always zero"],2,"With annual compounding, interest is earned on the first year's interest as well."],
+    ["A sum of ₹1,000 is compounded at 10% annually. What is the interest earned in the second year?",["₹100","₹110","₹121","₹210"],1,"The balance after year one is ₹1,100; 10% of it is ₹110."],
+    ["What is the amount on ₹10,000 at 5% compound interest for 2 years?",["₹10,500","₹11,000","₹11,025","₹12,000"],2,"Amount = 10,000 × 1.05² = ₹11,025."],
+    ["₹2,500 is invested at 8% compound interest for 1 year. Find the amount.",["₹2,580","₹2,650","₹2,700","₹2,800"],2,"8% of ₹2,500 = ₹200; amount = ₹2,700."],
+    ["A principal of ₹1,000 earns compound interest at 5% annually for 2 years. Find the CI.",["₹50","₹100","₹102.50","₹1,102.50"],2,"Amount = 1,000 × 1.05² = ₹1,102.50; CI = ₹102.50."],
+    ["What is the amount on ₹800 at 10% compound interest annually for 2 years?",["₹880","₹960","₹968","₹1,000"],2,"Amount = 800 × 1.1² = ₹968."],
+    ["A sum becomes ₹1,331 from ₹1,000 in 3 years at annual compound interest. What is the rate?",["5%","10%","11%","33.1%"],1,"1,000 × 1.1³ = 1,331, so the rate is 10%."],
+    ["What is the difference between compound interest and simple interest on ₹1,000 at 10% per year for 2 years?",["₹0","₹10","₹20","₹100"],1,"SI = ₹200; CI = ₹210; difference = ₹10."],
+    ["At 10% annual compound interest, what is the amount on ₹2,000 after 2 years?",["₹2,200","₹2,400","₹2,420","₹2,440"],2,"Amount = 2,000 × 1.1² = ₹2,420."],
+    ["A sum of ₹4,000 earns 5% compound interest for 1 year. What is the interest?",["₹20","₹200","₹400","₹4,200"],1,"For one year, CI = 5% of ₹4,000 = ₹200."],
+    ["If the annual compound interest rate is 0%, what is the amount after 3 years on ₹700?",["₹0","₹700","₹721","₹2,100"],1,"At 0% interest, the principal remains ₹700."],
+    ["₹1,000 is compounded annually at 10% for 2 years. What is the total compound interest?",["₹100","₹200","₹210","₹1,210"],2,"Amount = ₹1,210, so CI = ₹210."]
+  ],
   "Tax and bills": [
     ["A product costs ₹1,000 before 5% GST. What is the GST amount?",["₹5","₹50","₹100","₹105"],1,"GST = 5% of ₹1,000 = ₹50."],
     ["A bill is ₹800 before 18% GST. How much GST is charged?",["₹18","₹80","₹144","₹944"],2,"18% of ₹800 = ₹144."],

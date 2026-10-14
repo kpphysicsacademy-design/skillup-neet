@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Square roots": [
+    ["What is √64?",["6","7","8","9"],2,"8 × 8 = 64."],
+    ["What is √121?",["9","10","11","12"],2,"11 × 11 = 121."],
+    ["What is √144?",["10","11","12","14"],2,"12 × 12 = 144."],
+    ["What is √225?",["12","13","15","25"],2,"15 × 15 = 225."],
+    ["What is √400?",["10","20","40","200"],1,"20 × 20 = 400."],
+    ["Which is √169?",["11","12","13","14"],2,"13² = 169."],
+    ["What is √1?",["0","1","−1 only","2"],1,"The principal square root of 1 is 1."],
+    ["What is √0?",["0","1","−1","Undefined"],0,"0 × 0 = 0, so √0 = 0."],
+    ["Between which consecutive whole numbers does √50 lie?",["5 and 6","6 and 7","7 and 8","8 and 9"],1,"7² = 49 and 8² = 64, so √50 lies between 7 and 8."],
+    ["Between which consecutive whole numbers does √90 lie?",["7 and 8","8 and 9","9 and 10","10 and 11"],1,"8² = 64 and 9² = 81, while 10² = 100; √90 is between 9 and 10."],
+    ["Which number has square root 14?",["28","96","196","204"],2,"14² = 196."],
+    ["What is √625?",["15","20","25","35"],2,"25² = 625."],
+    ["What is √900?",["3","9","30","300"],2,"30² = 900."],
+    ["What is √256?",["14","15","16","18"],2,"16² = 256."],
+    ["What is √324?",["16","17","18","19"],2,"18² = 324."],
+    ["Which is the perfect-square root of 529?",["21","22","23","24"],2,"23² = 529."],
+    ["What is √49 + √81?",["14","16","18","130"],1,"√49 + √81 = 7 + 9 = 16."],
+    ["What is √100 − √36?",["2","4","6","8"],1,"10 − 6 = 4."],
+    ["What is √(25 × 16)?",["10","20","40","400"],1,"√400 = 20; equivalently √25 × √16 = 5 × 4."],
+    ["What is √(144 ÷ 9)?",["2","4","6","16"],1,"144 ÷ 9 = 16 and √16 = 4."],
+    ["Which is the principal square root of 196?",["−14","14","±14 only","98"],1,"The principal square root is non-negative: √196 = 14."],
+    ["If x² = 81 and x is a positive number, what is x?",["−9","0","9","81"],2,"The positive solution of x² = 81 is 9."],
+    ["What is the smallest whole number whose square is greater than 100?",["9","10","11","12"],2,"10² = 100, so the next whole number is 11."],
+    ["What is √(49/64)?",["7/8","8/7","7/64","49/8"],0,"√49/√64 = 7/8."],
+    ["Which fraction is a perfect square?",["2/9","4/9","3/8","5/16"],1,"4/9 = (2/3)²."],
+    ["What is √0.81?",["0.09","0.9","9","8.1"],1,"0.9 × 0.9 = 0.81."],
+    ["What is √2.25?",["0.15","1.5","2.5","15"],1,"1.5 × 1.5 = 2.25."],
+    ["A square has area 169 cm². What is its side length?",["12 cm","13 cm","14 cm","26 cm"],1,"Side length = √169 = 13 cm."],
+    ["A square tile has area 400 cm². What is its side length?",["10 cm","20 cm","40 cm","200 cm"],1,"Side length = √400 = 20 cm."],
+    ["Which statement is correct for any non-negative number a?",["√(a²) = −a always","√(a²) = a","√a = a² always","a² = √a always"],1,"For a ≥ 0, the principal square root of a² equals a."]
+  ],
   "Perfect squares": [
     ["Which number is a perfect square?",["18","25","30","45"],1,"25 = 5 × 5."],
     ["What is 12²?",["24","124","144","122"],2,"12 × 12 = 144."],

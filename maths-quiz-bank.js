@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Cube numbers": [
+    ["What is 2³?",["4","6","8","9"],2,"2³ = 2 × 2 × 2 = 8."],
+    ["What is 5³?",["15","25","125","625"],2,"5 × 5 × 5 = 125."],
+    ["What is the cube of 10?",["100","1,000","10,000","30"],1,"10³ = 10 × 10 × 10 = 1,000."],
+    ["Which number is a perfect cube?",["16","27","36","45"],1,"27 = 3³."],
+    ["What is 4³?",["12","16","32","64"],3,"4 × 4 × 4 = 64."],
+    ["What is 6³?",["36","108","216","256"],2,"6 × 6 × 6 = 216."],
+    ["What is 1³?",["0","1","3","9"],1,"1 × 1 × 1 = 1."],
+    ["What is 0³?",["0","1","−1","Undefined"],0,"0 × 0 × 0 = 0."],
+    ["Which is the cube of 3?",["9","18","27","81"],2,"3³ = 27."],
+    ["What is 7³?",["49","147","343","729"],2,"7 × 7 × 7 = 343."],
+    ["What is 8³?",["64","256","512","729"],2,"8 × 8 × 8 = 512."],
+    ["Which number is NOT a perfect cube?",["8","27","64","100"],3,"100 is not the cube of a whole number."],
+    ["What is the cube of 12?",["144","288","1,728","1,224"],2,"12 × 12 × 12 = 1,728."],
+    ["What is 3³ + 2³?",["13","35","27","216"],1,"27 + 8 = 35."],
+    ["What is 5³ − 4³?",["61","89","125","189"],0,"125 − 64 = 61."],
+    ["Which number has cube root 4?",["12","16","32","64"],3,"4³ = 64."],
+    ["What is the cube root of 27?",["2","3","6","9"],1,"3 × 3 × 3 = 27."],
+    ["What is the cube root of 125?",["3","4","5","25"],2,"5³ = 125."],
+    ["What is the cube root of 1,000?",["10","100","30","3"],0,"10³ = 1,000."],
+    ["Which is a perfect cube?",["32","81","216","250"],2,"216 = 6³."],
+    ["What is 9³?",["81","243","729","999"],2,"9 × 9 × 9 = 729."],
+    ["What is the units digit of 2³?",["2","4","6","8"],3,"2³ = 8."],
+    ["The cube of an odd whole number is always:",["Even","Odd","Prime","Zero"],1,"Odd × odd × odd is odd."],
+    ["The cube of an even whole number is always:",["Odd","Even","Prime","Negative"],1,"An even number multiplied by itself remains even."],
+    ["A cube has edge length 3 cm. What is its volume?",["9 cm³","18 cm³","27 cm³","36 cm³"],2,"Volume = edge³ = 3³ = 27 cm³."],
+    ["A cube has volume 64 cm³. What is its edge length?",["2 cm","3 cm","4 cm","8 cm"],2,"The cube root of 64 is 4."],
+    ["Which is the next perfect cube after 8?",["16","18","27","32"],2,"2³ = 8 and 3³ = 27."],
+    ["Between which consecutive whole-number cubes does 30 lie?",["1³ and 2³","2³ and 3³","3³ and 4³","4³ and 5³"],2,"3³ = 27 and 4³ = 64, so 30 lies between them."],
+    ["What is the cube of 11?",["121","1,331","1,111","133"],1,"11 × 11 × 11 = 1,331."],
+    ["Which statement is correct?",["4³ = 12","3³ = 9","2³ = 8","5³ = 25"],2,"2 × 2 × 2 = 8."]
+  ],
   "Square roots": [
     ["What is √64?",["6","7","8","9"],2,"8 × 8 = 64."],
     ["What is √121?",["9","10","11","12"],2,"11 × 11 = 121."],

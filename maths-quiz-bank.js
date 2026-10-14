@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Direct proportion": [
+    ["If 3 notebooks cost ₹45, what is the cost of 5 notebooks at the same rate?",["₹60","₹65","₹75","₹90"],2,"Cost is directly proportional to quantity: ₹45 ÷ 3 = ₹15 each; 5 cost ₹75."],
+    ["If 4 kg of rice costs ₹240, how much do 7 kg cost?",["₹360","₹400","₹420","₹480"],2,"Unit price = ₹240 ÷ 4 = ₹60/kg; 7 kg costs ₹420."],
+    ["A car travels 150 km in 3 hours at constant speed. How far in 5 hours?",["200 km","225 km","250 km","300 km"],2,"Speed = 150 ÷ 3 = 50 km/h; in 5 hours it travels 250 km."],
+    ["If 6 pens cost ₹54, what do 10 pens cost?",["₹80","₹90","₹96","₹100"],1,"Each pen costs ₹9, so 10 pens cost ₹90."],
+    ["Which pair represents direct proportion?",["More workers, same task time decreases","More items at fixed price per item, greater total cost","Greater speed for fixed distance, more travel time","More taps, less time to fill a tank"],1,"At a fixed unit price, total cost increases in the same ratio as the number of items."],
+    ["If y is directly proportional to x and y = 20 when x = 4, find y when x = 7.",["28","30","35","40"],2,"y/x = 20/4 = 5, so y = 5 × 7 = 35."],
+    ["A recipe for 4 people uses 300 g of flour. How much is needed for 10 people?",["600 g","700 g","750 g","800 g"],2,"Scale by 10/4: 300 × 2.5 = 750 g."],
+    ["A photocopier prints 120 pages in 4 minutes. How many pages in 9 minutes at the same rate?",["240","260","270","300"],2,"Rate = 120/4 = 30 pages/min; 30 × 9 = 270."],
+    ["If 8 metres of cloth cost ₹560, find the cost of 3 metres.",["₹180","₹200","₹210","₹240"],2,"Cost per metre = ₹560/8 = ₹70; 3 metres cost ₹210."],
+    ["If 5 identical toys cost ₹375, what is the cost of 8 toys?",["₹500","₹550","₹600","₹625"],2,"One toy costs ₹75, so 8 cost ₹600."],
+    ["A map uses 1 cm for 5 km. What actual distance does 7 cm represent?",["25 km","30 km","35 km","40 km"],2,"At 5 km per cm, 7 cm represents 7 × 5 = 35 km."],
+    ["If 12 oranges cost ₹96, how much do 15 oranges cost?",["₹100","₹110","₹120","₹125"],2,"Each orange costs ₹8; 15 cost ₹120."],
+    ["A machine makes 84 parts in 7 minutes. How many parts in 12 minutes at the same rate?",["120","132","144","156"],2,"The rate is 84/7 = 12 parts/min; in 12 minutes it makes 144."],
+    ["If 2.5 kg of apples costs ₹200, what does 4 kg cost?",["₹280","₹300","₹320","₹350"],2,"Price per kg = ₹200/2.5 = ₹80; 4 kg costs ₹320."],
+    ["If x and y are directly proportional, which ratio stays constant?",["x + y","x − y","y/x","xy"],2,"For direct proportion, y = kx, so y/x = k is constant."],
+    ["If y = kx and y = 18 when x = 6, find k.",["2","3","6","12"],1,"k = y/x = 18/6 = 3."],
+    ["A cyclist covers 36 km in 2 hours at constant speed. How far in 7 hours?",["108 km","112 km","126 km","144 km"],2,"Speed = 18 km/h; distance in 7 hours = 126 km."],
+    ["If 9 identical bottles hold 13.5 litres altogether, how much do 4 bottles hold?",["4.5 L","5 L","6 L","7.5 L"],2,"Each bottle holds 13.5/9 = 1.5 L; 4 hold 6 L."],
+    ["A worker earns ₹720 for 8 hours at a fixed hourly rate. How much for 5 hours?",["₹400","₹450","₹480","₹500"],1,"Hourly rate = ₹720/8 = ₹90; 5 hours pay ₹450. Correct option: B."],
+    ["If 15 metres of wire weighs 6 kg, what does 25 metres weigh at uniform thickness?",["8 kg","9 kg","10 kg","12 kg"],2,"Weight per metre = 6/15 = 0.4 kg; 25 m weighs 10 kg."],
+    ["A printer uses 24 ml of ink for 600 pages. How much ink for 1500 pages at the same rate?",["48 ml","54 ml","60 ml","72 ml"],2,"1500/600 = 2.5; ink needed = 24 × 2.5 = 60 ml."],
+    ["If 7 tickets cost ₹1,050, how much do 12 tickets cost?",["₹1,500","₹1,650","₹1,800","₹2,000"],2,"Each ticket costs ₹150; 12 tickets cost ₹1,800."],
+    ["A train travels 280 km in 4 hours at constant speed. How far in 6.5 hours?",["420 km","435 km","455 km","480 km"],2,"Speed = 70 km/h; 70 × 6.5 = 455 km."],
+    ["If 3 litres of paint cover 24 m², how much area do 8 litres cover?",["48 m²","56 m²","64 m²","72 m²"],2,"Coverage = 24/3 = 8 m² per litre; 8 litres cover 64 m²."],
+    ["If y varies directly as x and y = 42 when x = 14, find y when x = 9.",["18","21","27","36"],2,"k = 42/14 = 3, so y = 3 × 9 = 27."],
+    ["A 2.4 m ribbon costs ₹36. What is the cost of 5 m?",["₹60","₹70","₹75","₹90"],2,"Cost per metre = ₹36/2.4 = ₹15; 5 m costs ₹75."],
+    ["If 18 identical tiles cover 2.7 m², how much area do 30 tiles cover?",["3.6 m²","4.2 m²","4.5 m²","5.4 m²"],2,"Area per tile = 2.7/18 = 0.15 m²; 30 cover 4.5 m²."],
+    ["A tap fills 15 litres in 3 minutes at a steady rate. How much in 11 minutes?",["45 L","50 L","55 L","60 L"],2,"Rate = 5 L/min; in 11 minutes it fills 55 L."],
+    ["If 4 packets contain 28 biscuits, how many biscuits are in 9 packets of the same size?",["56","63","72","81"],1,"Each packet has 7 biscuits; 9 packets have 63."],
+    ["A quantity y is directly proportional to x. If x doubles, what happens to y?",["It halves","It stays the same","It doubles","It becomes four times"],2,"Since y = kx, doubling x doubles y."]
+  ],
   "Square roots by division method": [
     ["Find √529 using the long-division method.",["21","22","23","24"],2,"Since 23 × 23 = 529, the square root is 23."],
     ["Find √784.",["26","27","28","29"],2,"28 × 28 = 784, so √784 = 28."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Square roots by factorisation": [
+    ["Find √144 using prime factorisation.",["10","11","12","14"],2,"144 = 2⁴ × 3², so √144 = 2² × 3 = 12."],
+    ["Find √196 using prime factorisation.",["12","13","14","16"],2,"196 = 2² × 7², so its square root is 2 × 7 = 14."],
+    ["What is the prime factorisation of 225?",["3² × 5²","3 × 5³","3³ × 5","15² × 2"],0,"225 = 9 × 25 = 3² × 5²."],
+    ["Find √324.",["16","17","18","19"],2,"324 = 2² × 3⁴, so √324 = 2 × 3² = 18."],
+    ["Which is the prime factorisation of 400?",["2³ × 5²","2⁴ × 5²","2² × 5⁴","2⁴ × 5"],1,"400 = 16 × 25 = 2⁴ × 5²."],
+    ["Find √400 by pairing prime factors.",["10","15","20","40"],2,"400 = 2⁴ × 5²; taking one factor from each pair gives 2² × 5 = 20."],
+    ["Find √625.",["15","20","25","35"],2,"625 = 5⁴, so √625 = 5² = 25."],
+    ["Find √256 using factorisation.",["14","15","16","18"],2,"256 = 2⁸, so √256 = 2⁴ = 16."],
+    ["Which number is a perfect square?",["180","196","210","250"],1,"196 = 14², so it is a perfect square."],
+    ["Find √900.",["20","25","30","35"],2,"900 = 2² × 3² × 5², so √900 = 2 × 3 × 5 = 30."],
+    ["If 576 = 2⁶ × 3², find √576.",["12","18","24","36"],2,"Taking half the exponent of each prime gives 2³ × 3 = 24."],
+    ["Find √729 by prime factorisation.",["17","19","27","29"],2,"729 = 3⁶, so √729 = 3³ = 27."],
+    ["What is √(2² × 7²)?",["7","9","14","28"],2,"The square root takes one factor from each pair: 2 × 7 = 14."],
+    ["Find √484.",["20","21","22","24"],2,"484 = 22², so its square root is 22."],
+    ["Find √1024.",["16","24","32","64"],2,"1024 = 2¹⁰, so √1024 = 2⁵ = 32."],
+    ["Which factorisation shows that 144 is a perfect square?",["2³ × 3²","2⁴ × 3²","2² × 3³","2⁴ × 3"],1,"144 = 2⁴ × 3²; all prime exponents are even."],
+    ["Find √1600.",["20","30","40","50"],2,"1600 = 2⁶ × 5², so √1600 = 2³ × 5 = 40."],
+    ["Find √(36 × 49).",["42","36","294","84"],0,"√(36 × 49) = √36 × √49 = 6 × 7 = 42."],
+    ["Find the smallest number by which 72 must be multiplied to make a perfect square.",["2","3","6","8"],0,"72 = 2³ × 3²; multiplying by 2 makes exponents even: 144 = 12²."],
+    ["Find the smallest number by which 180 must be divided to make a perfect square.",["2","3","5","10"],2,"180 = 2² × 3² × 5; divide by 5 to get 36 = 6²."],
+    ["Which is the square root of 2² × 3⁴ × 5²?",["30","60","90","150"],2,"Take half of each exponent: 2 × 3² × 5 = 90."],
+    ["Find √2025.",["35","40","45","55"],2,"2025 = 45², so √2025 = 45."],
+    ["Find √(81 × 16).",["18","27","36","45"],2,"√81 × √16 = 9 × 4 = 36."],
+    ["Which is NOT a perfect square?",["121","169","225","250"],3,"121 = 11², 169 = 13², 225 = 15², but 250 is not a square."],
+    ["If n = 2³ × 3² × 5, what is the least multiplier to make n a perfect square?",["2","3","5","10"],2,"Only the exponent of 5 is odd, so multiply by 5 to make it 5²."],
+    ["Find √(49 × 100).",["50","60","70","90"],2,"√49 × √100 = 7 × 10 = 70."],
+    ["How many prime-factor pairs are in 900?",["1","2","3","4"],2,"900 = 2² × 3² × 5², which gives three pairs: (2,2), (3,3), and (5,5)."],
+    ["Find √1156.",["32","33","34","36"],2,"34² = 1156, so √1156 = 34."],
+    ["If 441 = 3² × 7², find √441.",["18","21","24","49"],1,"√441 = 3 × 7 = 21."],
+    ["Find √2500 by prime factorisation.",["25","40","50","100"],2,"2500 = 2² × 5⁴, so √2500 = 2 × 5² = 50."]
+  ],
   "Scientific notation": [
     ["Write 4500000 in scientific notation.",["4.5 × 10⁵","45 × 10⁵","4.5 × 10⁶","0.45 × 10⁶"],2,"Move the decimal six places left: 4,500,000 = 4.5 × 10⁶."],
     ["Write 0.00072 in scientific notation.",["7.2 × 10⁻⁴","72 × 10⁻⁵","7.2 × 10⁴","0.72 × 10⁻⁴"],0,"Move the decimal four places right to get 7.2, so the exponent is −4."],

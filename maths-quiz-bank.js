@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Generalising number properties": [
+    ["Which expression represents an even number?",["2n","2n + 1","n + 2","n² + 1"],0,"Any integer multiple of 2, written 2n, is even."],
+    ["Which expression represents an odd number?",["2n","2n + 1","4n","6n"],1,"An odd integer can be written as 2n + 1 for an integer n."],
+    ["The sum of two even numbers is always?",["Odd","Even","Prime","Zero"],1,"2a + 2b = 2(a + b), which is even."],
+    ["The sum of an even number and an odd number is always?",["Even","Odd","Prime","A multiple of 4"],1,"2a + (2b + 1) = 2(a + b) + 1, which is odd."],
+    ["The product of two odd numbers is always?",["Even","Odd","Zero","A multiple of 10"],1,"The product of odd integers remains odd."],
+    ["Which expression shows three consecutive integers starting at n?",["n, n + 1, n + 2","n, 2n, 3n","n, n + 2, n + 4","n − 1, n + 1, n + 3"],0,"Consecutive integers differ by 1."],
+    ["The sum of three consecutive integers n, n + 1, n + 2 is?",["3n + 1","3n + 2","3n + 3","n + 3"],2,"n + (n + 1) + (n + 2) = 3n + 3."],
+    ["Which algebraic expression represents 5 more than a number x?",["5x","x − 5","x + 5","5 − x"],2,"Five more than x means add 5."],
+    ["Which expression represents twice a number y decreased by 3?",["2(y − 3)","2y − 3","3 − 2y","y/2 − 3"],1,"Twice y is 2y; decreased by 3 gives 2y − 3."],
+    ["Which expression represents the square of the sum of a and b?",["a² + b²","a² + 2ab + b²","a + b²","2a + 2b"],1,"(a + b)² expands to a² + 2ab + b²."],
+    ["Which identity is correct?",["(a + b)² = a² + b²","(a − b)² = a² − b²","(a + b)² = a² + 2ab + b²","a(b + c) = ab + c"],2,"The square of a sum includes the middle term 2ab."],
+    ["What is the general form of a multiple of 7?",["7n","7 + n","n/7","7n + 1"],0,"Multiples of 7 are 7 times an integer n."],
+    ["Which expression represents a number divisible by 5 when n is an integer?",["5n","5n + 1","2n + 5","n + 5/2"],0,"Every integer multiple of 5 has the form 5n."],
+    ["If n is even, which expression is certainly even?",["n + 1","n + 3","n + 2","2n + 1"],2,"An even number plus 2 remains even."],
+    ["If n is odd, which expression is certainly even?",["n + 1","n + 2","2n + 1","n + 4"],0,"An odd number plus 1 is even."],
+    ["Which statement is always true for an integer n?",["n + n = 2n","n + 1 = 2n","n² = 2n","n − n = 1"],0,"Adding n to itself gives 2n."],
+    ["Which expression represents the perimeter of a square with side length s?",["s²","2s","3s","4s"],3,"A square has four equal sides, so its perimeter is 4s."],
+    ["If a rectangle has length l and width w, its perimeter is?",["lw","l + w","2l + 2w","l² + w²"],2,"Add all sides: l + w + l + w = 2l + 2w."],
+    ["Which expression is equivalent to 3(x + 4)?",["3x + 4","3x + 12","x + 12","7x"],1,"Distribute 3: 3(x + 4) = 3x + 12."],
+    ["Which property is shown by 4 + 9 = 9 + 4?",["Associative property","Commutative property of addition","Distributive property","Identity property"],1,"The order of addends changes without changing the sum."],
+    ["Which property is shown by (2 × 3) × 4 = 2 × (3 × 4)?",["Commutative","Associative","Distributive","Inverse"],1,"The grouping changes but the product stays the same."],
+    ["Which property is shown by 5(x + 2) = 5x + 10?",["Commutative","Associative","Distributive","Identity"],2,"Multiplication is distributed over addition."],
+    ["What is the additive identity?",["0","1","−1","10"],0,"Adding zero leaves a number unchanged."],
+    ["What is the multiplicative identity?",["0","1","−1","10"],1,"Multiplying by 1 leaves a number unchanged."],
+    ["Which expression is always a multiple of 2 for integer n?",["2n","2n + 1","n + 2","n² + 1"],0,"2n is divisible by 2 for every integer n."],
+    ["The product of an even integer and any integer is always?",["Odd","Even","Prime","Negative"],1,"An even factor contributes a factor of 2 to the product."],
+    ["Which is a correct generalisation for the sum of two consecutive integers?",["2n","2n + 1","2n + 2","n² + 1"],1,"n + (n + 1) = 2n + 1, an odd number."],
+    ["If x is a whole number, which expression is always greater than x?",["x − 1","x","x + 1","0"],2,"Adding 1 produces a number one greater than x."],
+    ["Which expression means the difference between a number p and 8?",["8 − p","p − 8","8p","p + 8"],1,"The difference between p and 8 is p − 8."],
+    ["Which expression represents the product of two consecutive integers?",["n + (n + 1)","n(n + 1)","2n + 1","n² + 1"],1,"Consecutive integers are n and n + 1; their product is n(n + 1)."]
+  ],
   "Number patterns": [
     ["What is the next number in the pattern 2, 4, 6, 8, ...?",["9","10","11","12"],1,"The pattern increases by 2 each time, so the next number is 10."],
     ["Find the next number: 5, 10, 15, 20, ...",["22","24","25","30"],2,"Each term increases by 5; 20 + 5 = 25."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Cube roots": [
+    ["What is ∛8?",["2","3","4","8"],0,"2³ = 8."],
+    ["What is ∛27?",["2","3","6","9"],1,"3³ = 27."],
+    ["What is ∛64?",["2","3","4","8"],2,"4³ = 64."],
+    ["What is ∛125?",["3","4","5","25"],2,"5³ = 125."],
+    ["What is ∛216?",["4","5","6","8"],2,"6³ = 216."],
+    ["What is ∛1,000?",["10","100","30","3"],0,"10³ = 1,000."],
+    ["What is ∛343?",["6","7","8","9"],1,"7³ = 343."],
+    ["What is ∛512?",["6","7","8","9"],2,"8³ = 512."],
+    ["What is ∛729?",["7","8","9","10"],2,"9³ = 729."],
+    ["What is ∛1?",["0","1","−1 only","3"],1,"1³ = 1."],
+    ["What is ∛0?",["0","1","−1","Undefined"],0,"0³ = 0."],
+    ["What is ∛−8?",["−4","−2","2","4"],1,"(−2)³ = −8."],
+    ["What is ∛−125?",["−25","−5","5","25"],1,"(−5)³ = −125."],
+    ["Which number has cube root 12?",["144","1,728","1,200","1,444"],1,"12³ = 12 × 12 × 12 = 1,728."],
+    ["What is ∛1,331?",["10","11","12","13"],1,"11³ = 1,331."],
+    ["Which number is a perfect cube?",["100","144","225","1,000"],3,"1,000 = 10³."],
+    ["Which is the cube root of 1,728?",["10","11","12","13"],2,"12³ = 1,728."],
+    ["What is ∛(8 × 27)?",["3","4","6","12"],2,"8 × 27 = 216 and ∛216 = 6."],
+    ["What is ∛(64 ÷ 8)?",["1","2","4","8"],1,"64 ÷ 8 = 8 and ∛8 = 2."],
+    ["What is ∛(−1,000)?",["−100","−10","10","100"],1,"(−10)³ = −1,000."],
+    ["The cube root of a negative number is:",["Always positive","Always negative","Always zero","Not a real number"],1,"A negative number cubed remains negative, so its real cube root is negative."],
+    ["If x³ = 216, what is x?",["4","5","6","8"],2,"6³ = 216."],
+    ["A cube has volume 729 cm³. What is its edge length?",["7 cm","8 cm","9 cm","81 cm"],2,"Edge length = ∛729 = 9 cm."],
+    ["A cube has edge length 5 cm. Its volume is:",["15 cm³","25 cm³","75 cm³","125 cm³"],3,"Volume = 5³ = 125 cm³."],
+    ["Which is the nearest whole number to ∛70?",["2","3","4","5"],2,"4³ = 64 and 5³ = 125; ∛70 is a little above 4, so 4 is nearest."],
+    ["Between which consecutive whole numbers does ∛100 lie?",["2 and 3","3 and 4","4 and 5","5 and 6"],2,"4³ = 64 and 5³ = 125, so ∛100 lies between 4 and 5."],
+    ["What is ∛(27/64)?",["3/4","4/3","9/16","27/4"],0,"∛27 / ∛64 = 3/4."],
+    ["Which equality is correct?",["∛125 = 25","∛216 = 6","∛343 = 8","∛512 = 7"],1,"6³ = 216, so ∛216 = 6."],
+    ["What is ∛0.001?",["0.01","0.1","1","10"],1,"0.1³ = 0.001."],
+    ["What is ∛2,197?",["11","12","13","14"],2,"13³ = 2,197."]
+  ],
   "Cube numbers": [
     ["What is 2³?",["4","6","8","9"],2,"2³ = 2 × 2 × 2 = 8."],
     ["What is 5³?",["15","25","125","625"],2,"5 × 5 × 5 = 125."],

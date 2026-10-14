@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Laws of exponents": [
+    ["Simplify 2³ × 2⁴.",["2⁷","2¹²","4⁷","2¹"],0,"When multiplying powers with the same base, add exponents: 2³ × 2⁴ = 2⁷."],
+    ["Simplify 5⁶ ÷ 5².",["5³","5⁴","5⁸","1⁴"],1,"When dividing powers with the same nonzero base, subtract exponents: 5⁶⁻² = 5⁴."],
+    ["Simplify (3²)⁴.",["3⁶","3⁸","9⁴","12²"],1,"A power raised to a power means multiply exponents: (3²)⁴ = 3⁸."],
+    ["What is 7⁰, for 7 ≠ 0?",["0","1","7","−1"],1,"Any nonzero number raised to the zero power equals 1."],
+    ["Simplify x³ × x⁵.",["x¹⁵","x⁸","x²","2x⁸"],1,"For the same base, add the exponents: x³ × x⁵ = x⁸."],
+    ["Simplify a⁹ ÷ a⁴, where a ≠ 0.",["a¹³","a⁵","a³⁶","a⁻⁵"],1,"Subtract exponents when dividing powers with the same base: a⁹⁻⁴ = a⁵."],
+    ["Simplify (m⁴)³.",["m⁷","m¹²","m⁴³","3m⁴"],1,"Multiply the exponents: (m⁴)³ = m¹²."],
+    ["Simplify (2 × 3)².",["2² × 3²","2 × 3²","2² × 3","2 × 3"],0,"A product raised to a power applies to each factor: (2 × 3)² = 2² × 3²."],
+    ["Simplify (a/b)³, where b ≠ 0.",["a³/b³","a/b³","a³/b","3a/3b"],0,"A quotient raised to a power raises both numerator and denominator to that power."],
+    ["Evaluate 10³ × 10².",["10⁶","10⁵","100⁶","20⁵"],1,"Add exponents for equal bases: 10³ × 10² = 10⁵."],
+    ["Evaluate 4⁵ ÷ 4⁵.",["4","0","1","4¹⁰"],2,"4⁵ ÷ 4⁵ = 4⁰ = 1."],
+    ["Simplify (p²q³)(p⁴q).",["p⁶q⁴","p⁸q³","p⁶q³","p²q⁴"],0,"Add exponents separately for each repeated base: p²⁺⁴q³⁺¹ = p⁶q⁴."],
+    ["Simplify (x²y)³.",["x⁵y³","x⁶y³","x⁶y","x²y³"],1,"Raise each factor to the third power: (x²y)³ = x⁶y³."],
+    ["Which expression equals 6⁴ × 6²?",["6⁸","6⁶","36⁶","12⁴"],1,"The bases match, so add exponents: 6⁴ × 6² = 6⁶."],
+    ["Simplify (y⁵)² ÷ y³, where y ≠ 0.",["y⁷","y¹³","y⁴","y¹⁰"],0,"First (y⁵)² = y¹⁰; then y¹⁰ ÷ y³ = y⁷."],
+    ["Evaluate 2⁴.",["8","12","16","24"],2,"2⁴ = 2 × 2 × 2 × 2 = 16."],
+    ["Simplify 9² × 9⁰.",["9²","9⁰","9³","1"],0,"Since 9⁰ = 1, 9² × 9⁰ = 9²."],
+    ["If 3ˣ × 3² = 3⁷, find x.",["5","9","14","3"],0,"Add exponents: x + 2 = 7, so x = 5."],
+    ["If 2⁸ ÷ 2ˣ = 2³, find x.",["3","5","11","24"],1,"Subtract exponents: 8 − x = 3, so x = 5."],
+    ["Simplify (ab)⁴.",["a⁴b⁴","a⁴b","ab⁴","4ab"],0,"The exponent applies to both factors: (ab)⁴ = a⁴b⁴."],
+    ["Simplify (−2)⁴.",["−16","−8","8","16"],3,"An even power of a negative number is positive: (−2)⁴ = 16."],
+    ["Simplify (−3)³.",["27","−27","−9","9"],1,"An odd power preserves the negative sign: (−3)³ = −27."],
+    ["Which is equal to 8² × 8³?",["8⁶","8⁵","16⁵","8"],1,"Add the exponents: 8² × 8³ = 8⁵."],
+    ["Simplify (r³s²)².",["r⁵s⁴","r⁶s⁴","r⁶s²","r³s⁴"],1,"Multiply each exponent by 2: r³ˣ²s²ˣ² = r⁶s⁴."],
+    ["Simplify z⁷ ÷ z, where z ≠ 0.",["z⁷","z⁶","z⁸","z"],1,"Since z = z¹, z⁷ ÷ z¹ = z⁶."],
+    ["Which expression equals (5²)³?",["5⁵","5⁶","15²","5⁸"],1,"Power of a power: multiply exponents, giving 5⁶."],
+    ["Simplify 3² × 3 × 3³.",["3⁵","3⁶","9⁶","3⁹"],1,"Write 3 as 3¹ and add: 2 + 1 + 3 = 6."],
+    ["Simplify (x⁰)(x⁴), where x ≠ 0.",["x⁰","x⁴","x⁵","0"],1,"x⁰ = 1, so x⁰ × x⁴ = x⁴."],
+    ["If a⁵ × aᵏ = a¹², find k.",["7","17","60","2"],0,"Add exponents: 5 + k = 12, so k = 7."],
+    ["Simplify (2³)² ÷ 2⁴.",["2²","2⁴","2⁶","2⁷"],0,"(2³)² = 2⁶; then 2⁶ ÷ 2⁴ = 2²."]
+  ],
   "Cylinder basics": [
     ["A cylinder has radius 7 cm and height 10 cm. Find its volume using π = 22/7.",["154 cm³","440 cm³","1540 cm³","3080 cm³"],2,"Volume = πr²h = (22/7) × 7² × 10 = 1540 cm³."],
     ["Find the curved surface area of a cylinder with radius 7 cm and height 8 cm, using π = 22/7.",["176 cm²","352 cm²","616 cm²","1232 cm²"],1,"CSA = 2πrh = 2 × (22/7) × 7 × 8 = 352 cm²."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Prime and composite numbers": [
+    ["Which of these is a prime number?",["1","9","13","21"],2,"13 has exactly two positive factors: 1 and 13."],
+    ["Which statement defines a prime number?",["It has exactly two positive factors","It has only one factor","It is always even","It ends in 1"],0,"A prime number has exactly two positive factors: 1 and itself."],
+    ["Which number is composite?",["2","3","11","15"],3,"15 has factors 1, 3, 5, and 15, so it is composite."],
+    ["Why is 1 neither prime nor composite?",["It is even","It has exactly one positive factor","It has no factors","It is negative"],1,"The number 1 has only one positive factor, itself."],
+    ["Which is the only even prime number?",["0","2","4","6"],1,"Every even number greater than 2 has at least three positive factors."],
+    ["Which number is prime?",["25","29","33","39"],1,"29 is divisible only by 1 and 29."],
+    ["Which number is composite?",["17","19","23","27"],3,"27 = 3 × 9, so it has factors other than 1 and itself."],
+    ["How many positive factors does 17 have?",["1","2","3","17"],1,"17 is prime, so its positive factors are 1 and 17."],
+    ["Which list contains only prime numbers?",["2, 3, 5, 7","1, 3, 5, 7","2, 4, 5, 7","3, 5, 9, 11"],0,"2, 3, 5, and 7 each have exactly two positive factors."],
+    ["Which number is neither prime nor composite?",["0","1","2","4"],1,"By definition, 1 is neither prime nor composite."],
+    ["Which of these is a composite odd number?",["3","7","11","21"],3,"21 = 3 × 7 and is odd, so it is composite."],
+    ["Is 51 prime or composite?",["Prime","Composite","Neither","Even prime"],1,"51 is divisible by 3 because 5 + 1 = 6; 51 = 3 × 17."],
+    ["Which number is prime?",["31","35","49","51"],0,"31 has no positive divisors other than 1 and 31."],
+    ["Which number has exactly three positive factors?",["4","5","7","11"],0,"The factors of 4 are 1, 2, and 4."],
+    ["Which number is composite because it is divisible by 5 and greater than 5?",["5","13","25","29"],2,"25 = 5 × 5 and has more than two positive factors."],
+    ["Which is a prime factor of 42?",["1","4","6","7"],3,"7 is prime and divides 42 exactly."],
+    ["Which number is not prime?",["2","5","17","21"],3,"21 = 3 × 7, so it is composite."],
+    ["A number has factors 1, 2, 4, and 8 only. What is the number?",["6","8","10","12"],1,"The positive factors of 8 are 1, 2, 4, and 8."],
+    ["Which of these numbers is prime?",["37","39","45","49"],0,"37 is not divisible by any prime up to its square root."],
+    ["What is the smallest composite number?",["1","2","3","4"],3,"4 has factors 1, 2, and 4, making it the smallest composite number."],
+    ["Which is the smallest even composite number?",["2","4","6","8"],1,"2 is prime; 4 = 2 × 2 is the smallest even composite number."],
+    ["Which number has factors 1, 3, 9, and 27?",["18","21","27","30"],2,"27 = 3³ and its positive factors are 1, 3, 9, and 27."],
+    ["Which of the following is prime?",["41","45","55","57"],0,"41 has no divisors other than 1 and 41."],
+    ["A composite number must have?",["Exactly two positive factors","More than two positive factors","Only one positive factor","No factors"],1,"A composite number has more than two positive factors."],
+    ["Which number is the product of two primes?",["15","16","21","Both 15 and 21"],3,"15 = 3 × 5 and 21 = 3 × 7; both are products of two primes."],
+    ["Which number is prime?",["43","51","63","77"],0,"43 is not divisible by 2, 3, 5, or any prime up to its square root."],
+    ["Why is 2 prime although it is even?",["It has only two positive factors","It has four factors","All even numbers are prime","It has no odd factors"],0,"Its only positive factors are 1 and 2."],
+    ["Which is a composite number between 30 and 40?",["31","37","39","All are prime"],2,"39 = 3 × 13, so it is composite."],
+    ["Which pair contains two composite numbers?",["4 and 9","2 and 7","3 and 11","5 and 13"],0,"4 = 2 × 2 and 9 = 3 × 3."],
+    ["Which number is prime?",["47","49","51","57"],0,"47 is not divisible by any prime number up to its square root."]
+  ],
   "Factors and multiples": [
     ["Which of these is a factor of 24?",["5","6","7","9"],1,"24 ÷ 6 = 4, so 6 is a factor of 24."],
     ["Which of these is a multiple of 7?",["20","28","30","36"],1,"28 = 7 × 4, so it is a multiple of 7."],

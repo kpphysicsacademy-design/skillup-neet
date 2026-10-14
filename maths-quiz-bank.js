@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Scientific notation": [
+    ["Write 4500000 in scientific notation.",["4.5 × 10⁵","45 × 10⁵","4.5 × 10⁶","0.45 × 10⁶"],2,"Move the decimal six places left: 4,500,000 = 4.5 × 10⁶."],
+    ["Write 0.00072 in scientific notation.",["7.2 × 10⁻⁴","72 × 10⁻⁵","7.2 × 10⁴","0.72 × 10⁻⁴"],0,"Move the decimal four places right to get 7.2, so the exponent is −4."],
+    ["Which is proper scientific notation for 83000?",["83 × 10³","8.3 × 10⁴","0.83 × 10⁵","830 × 10²"],1,"The coefficient must be at least 1 and less than 10: 8.3 × 10⁴."],
+    ["Write 6.02 × 10³ in ordinary form.",["602","6020","60200","0.00602"],1,"Multiplying by 10³ moves the decimal three places right: 6020."],
+    ["Write 3.4 × 10⁻² in decimal form.",["340","0.34","0.034","0.0034"],2,"The exponent −2 moves the decimal two places left: 0.034."],
+    ["What is the coefficient in 5.7 × 10⁸?",["8","10","5.7","57"],2,"The coefficient is the number between 1 and 10, here 5.7."],
+    ["What is the power of ten in 9.1 × 10⁻⁶?",["9.1","10⁶","−6","10⁻⁶"],3,"The power-of-ten factor is 10⁻⁶."],
+    ["Write 72000000 in scientific notation.",["7.2 × 10⁷","72 × 10⁶","7.2 × 10⁶","0.72 × 10⁸"],0,"Move the decimal seven places left: 7.2 × 10⁷."],
+    ["Write 0.0056 in scientific notation.",["5.6 × 10⁻²","56 × 10⁻⁴","5.6 × 10⁻³","0.56 × 10⁻²"],2,"Move the decimal three places right to obtain 5.6, so use 10⁻³."],
+    ["Evaluate (2 × 10³)(3 × 10²).",["6 × 10⁵","5 × 10⁵","6 × 10⁶","6 × 10¹"],0,"Multiply coefficients and add exponents: 2 × 3 = 6 and 3 + 2 = 5."],
+    ["Evaluate (8 × 10⁶) ÷ (2 × 10²).",["4 × 10⁸","4 × 10⁴","6 × 10⁴","4 × 10³"],1,"Divide coefficients and subtract exponents: 8 ÷ 2 = 4 and 6 − 2 = 4."],
+    ["Which number equals 1.2 × 10⁴?",["120","1200","12000","120000"],2,"1.2 × 10⁴ = 1.2 × 10000 = 12000."],
+    ["Which number equals 4.8 × 10⁻³?",["0.048","0.0048","0.00048","4800"],1,"Moving the decimal three places left gives 0.0048."],
+    ["Express 0.0000091 in scientific notation.",["9.1 × 10⁻⁵","9.1 × 10⁻⁶","91 × 10⁻⁷","0.91 × 10⁻⁵"],1,"Move the decimal six places right to get 9.1, giving 9.1 × 10⁻⁶."],
+    ["Express 605000 in scientific notation.",["6.05 × 10⁴","60.5 × 10⁴","6.05 × 10⁵","0.605 × 10⁶"],2,"Move the decimal five places left: 6.05 × 10⁵."],
+    ["Which coefficient is allowed in standard scientific notation?",["0.8","10","12.4","7.9"],3,"The coefficient must satisfy 1 ≤ coefficient < 10; 7.9 qualifies."],
+    ["Simplify (5 × 10⁴)(2 × 10⁻²).",["10 × 10²","1 × 10³","10 × 10⁻⁸","7 × 10²"],0,"Multiply coefficients to get 10 and add exponents to get 2; 10 × 10² = 1 × 10³."],
+    ["Simplify (9 × 10⁵) ÷ (3 × 10²).",["3 × 10³","3 × 10⁷","6 × 10³","3 × 10²"],0,"9 ÷ 3 = 3 and 10⁵ ÷ 10² = 10³."],
+    ["Arrange in increasing order: 3 × 10⁴, 5 × 10³, 2 × 10⁵.",["2 × 10⁵, 3 × 10⁴, 5 × 10³","5 × 10³, 3 × 10⁴, 2 × 10⁵","3 × 10⁴, 5 × 10³, 2 × 10⁵","5 × 10³, 2 × 10⁵, 3 × 10⁴"],1,"Their values are 5,000, 30,000 and 200,000, respectively."],
+    ["A bacterium is 0.000002 m long. Write this in scientific notation.",["2 × 10⁻⁵ m","2 × 10⁻⁶ m","2 × 10⁶ m","0.2 × 10⁻⁵ m"],1,"0.000002 = 2 × 10⁻⁶."],
+    ["The distance is 1.5 × 10⁸ km. Write it in ordinary form.",["15,000,000 km","150,000,000 km","1,500,000 km","1,500,000,000 km"],1,"1.5 × 100,000,000 = 150,000,000."],
+    ["Express 0.00034 as a power-of-ten product with coefficient 3.4.",["3.4 × 10⁻⁴","3.4 × 10⁻³","34 × 10⁻⁴","0.34 × 10⁻³"],0,"Moving the decimal four places right gives 3.4, so the exponent is −4."],
+    ["Express 9200 in scientific notation.",["92 × 10²","9.2 × 10³","0.92 × 10⁴","9.2 × 10²"],1,"9200 = 9.2 × 1000 = 9.2 × 10³."],
+    ["Evaluate (4 × 10⁻³)(5 × 10⁴).",["20 × 10¹","2 × 10²","20 × 10⁻¹²","9 × 10¹"],0,"Multiply coefficients to get 20 and add exponents: −3 + 4 = 1; this equals 200."],
+    ["Evaluate (6 × 10⁷) ÷ (3 × 10⁴).",["2 × 10³","2 × 10¹¹","3 × 10³","2 × 10⁴"],0,"6 ÷ 3 = 2 and 10⁷ ÷ 10⁴ = 10³."],
+    ["How many places does the decimal move to write 0.00081 as 8.1 × 10⁻⁴?",["2 right","3 right","4 right","4 left"],2,"The decimal moves four places right to turn 0.00081 into 8.1."],
+    ["Which is the largest number?",["6.2 × 10⁴","6.2 × 10⁵","6.2 × 10³","6.2 × 10²"],1,"With equal positive coefficients, the largest exponent gives the largest number."],
+    ["Which is the smallest positive number?",["3 × 10⁻²","3 × 10⁻⁴","3 × 10⁻¹","3 × 10⁻³"],1,"Among these, 3 × 10⁻⁴ is smallest because its decimal value is least."],
+    ["Write 0.00000045 in scientific notation.",["4.5 × 10⁻⁶","4.5 × 10⁻⁷","45 × 10⁻⁸","0.45 × 10⁻⁶"],1,"Move the decimal seven places right to obtain 4.5, so use 10⁻⁷."],
+    ["A file has 3.2 × 10⁶ bytes. How many bytes is that?",["320000","3200000","32000000","32000"],1,"3.2 × 1,000,000 = 3,200,000 bytes."]
+  ],
   "Negative exponents": [
     ["Evaluate 2⁻¹.",["−2","1/2","2","−1/2"],1,"A negative exponent means take the reciprocal: 2⁻¹ = 1/2."],
     ["Evaluate 5⁻².",["−25","1/25","1/10","25"],1,"5⁻² = 1/5² = 1/25."],

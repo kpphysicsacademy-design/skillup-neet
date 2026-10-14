@@ -19,7 +19,7 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["Solve: 4(x + 1) = 2(x + 7).",["4","5","6","7"],1,"Expand: 4x + 4 = 2x + 14; 2x = 10, so x = 5."],
     ["Solve: 7(x − 2) = 5x + 4.",["7","8","9","10"],2,"Expand: 7x − 14 = 5x + 4; 2x = 18, so x = 9."],
     ["Solve: 3x + 4 = 2(x + 6).",["6","7","8","9"],2,"Expand: 3x + 4 = 2x + 12, so x = 8."],
-    ["Solve: 6(x − 1) = 4x + 10.",["6","7","8","9"],1,"Expand: 6x − 6 = 4x + 10; 2x = 16, so x = 8."],
+    ["Solve: 6(x − 1) = 4x + 10.",["6","7","8","9"],2,"Expand: 6x − 6 = 4x + 10; 2x = 16, so x = 8."],
     ["Solve: 2x + 3 = 2x + 9.",["0","1","No solution","Infinitely many solutions"],2,"Subtracting 2x gives 3 = 9, which is impossible; there is no solution."],
     ["Solve: 4x − 5 = 4x − 5.",["No solution","x = 0 only","Infinitely many solutions","x = 5 only"],2,"Both sides are identical, so every value of x satisfies the equation."],
     ["Solve: 5x + 1 = 5x − 3.",["x = −4","x = 4","No solution","Infinitely many solutions"],2,"Subtracting 5x gives 1 = −3, which is impossible."],
@@ -27,14 +27,13 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
     ["Solve: 9x − 2 = 7x + 10.",["4","5","6","7"],2,"Subtract 7x and add 2: 2x = 12, so x = 6."],
     ["Solve: 11x + 5 = 8x + 20.",["3","4","5","6"],2,"Subtract 8x and 5: 3x = 15, so x = 5."],
     ["Solve: 2x − 9 = x − 15.",["−6","−5","5","6"],0,"Subtract x and add 9: x = −6."],
-    ["Solve: 4x + 7 = 6x − 5.",["−7","−6","5","6"],2,"Add 5 and subtract 4x: 12 = 2x, so x = 6."],
+    ["Solve: 4x + 7 = 6x − 5.",["−7","−6","5","6"],3,"Add 5 and subtract 4x: 12 = 2x, so x = 6."],
     ["Solve: 5(x + 2) = 2x + 25.",["3","4","5","6"],2,"Expand: 5x + 10 = 2x + 25; 3x = 15, so x = 5."],
     ["Solve: 2(3x − 1) = 4x + 10.",["4","5","6","7"],2,"Expand: 6x − 2 = 4x + 10; 2x = 12, so x = 6."],
     ["Solve: 7x + 8 = 3(x + 10).",["5","11/2","6","7"],1,"Expand: 7x + 8 = 3x + 30; 4x = 22, so x = 11/2."],
-    ["Solve: 8x − 3 = 5(x + 3).",["5","6","7","8"],2,"Expand: 8x − 3 = 5x + 15; 3x = 18, so x = 6."],
+    ["Solve: 8x − 3 = 5(x + 3).",["5","6","7","8"],1,"Expand: 8x − 3 = 5x + 15; 3x = 18, so x = 6."],
     ["A number multiplied by 4 and increased by 3 equals twice the number plus 15. Find it.",["4","5","6","7"],2,"4x + 3 = 2x + 15; 2x = 12, so x = 6."],
-    ["The cost of 3 notebooks plus ₹10 equals the cost of 2 notebooks plus ₹30. Find the cost of one notebook.",["₹10","₹15","₹20","₹25"],2,"3x + 10 = 2x + 30, so x = ₹20."],
-    ["Solve: 6(x + 2) = 4x + 26.",["5","6","7","8"],2,"Expand: 6x + 12 = 4x + 26; 2x = 14, so x = 7."]
+    ["The cost of 3 notebooks plus ₹10 equals the cost of 2 notebooks plus ₹30. Find the cost of one notebook.",["₹10","₹15","₹20","₹25"],2,"3x + 10 = 2x + 30, so x = ₹20."]
   ],
   "Solving equations": [
     ["Solve: x + 7 = 15.",["6","7","8","22"],2,"Subtract 7 from both sides: x = 8."],

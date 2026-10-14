@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Rational numbers": [
+    ["Which of these is a rational number?",["√2","π","−3/5","√7"],2,"A rational number can be written as p/q where p and q are integers and q ≠ 0."],
+    ["Which fraction represents the integer 4?",["4/0","0/4","4/1","1/4"],2,"Every integer n can be written as n/1."],
+    ["Which is the standard form of 18/24?",["3/4","6/8","9/12","2/3"],0,"Divide numerator and denominator by their HCF, 6, to get 3/4."],
+    ["Which of these is NOT a rational number?",["0","−7","2.5","√3"],3,"√3 is irrational; the others are rational."],
+    ["What is the numerator of −5/9?",["5","9","−5","−9"],2,"In −5/9, the numerator is −5."],
+    ["Which fraction is equal to 2/3?",["4/9","6/9","8/15","3/2"],1,"Multiplying numerator and denominator of 2/3 by 3 gives 6/9."],
+    ["What is the additive inverse of 7/11?",["7/11","−7/11","11/7","−11/7"],1,"A number and its additive inverse sum to zero."],
+    ["What is the multiplicative inverse of −3/8?",["3/8","−8/3","8/3","−3/8"],1,"Swap numerator and denominator while retaining the negative sign."],
+    ["Which rational number lies between 1/2 and 3/4?",["1/4","5/8","7/8","1"],1,"5/8 = 0.625, which is between 0.5 and 0.75."],
+    ["Which is greater?",["−2/3","−1/3","They are equal","Cannot be compared"],1,"Among negative fractions, the one closer to zero is greater."],
+    ["Calculate 2/7 + 3/7.",["5/14","5/7","1/7","6/7"],1,"With equal denominators, add numerators: (2+3)/7 = 5/7."],
+    ["Calculate 5/6 − 1/3.",["4/3","1/2","2/3","1/3"],1,"Rewrite 1/3 as 2/6; 5/6 − 2/6 = 1/2."],
+    ["Calculate (−2/5) × (3/4).",["−3/10","3/10","−5/9","−6/9"],0,"Multiply numerators and denominators: −6/20 = −3/10."],
+    ["Calculate (3/5) ÷ (2/7).",["6/35","5/21","21/10","7/10"],2,"Divide by multiplying by the reciprocal: 3/5 × 7/2 = 21/10."],
+    ["What is 0 + (−9/4)?",["9/4","−9/4","0","−4/9"],1,"Zero is the additive identity."],
+    ["What is (−5/8) × 1?",["1","5/8","−5/8","0"],2,"One is the multiplicative identity."],
+    ["Which property is shown by 2/7 + 3/5 = 3/5 + 2/7?",["Associative","Commutative","Distributive","Closure under division by zero"],1,"Changing the order of addends without changing the sum shows commutativity."],
+    ["Which property is shown by (1/2 + 1/3) + 1/4 = 1/2 + (1/3 + 1/4)?",["Commutative","Associative","Identity","Inverse"],1,"The grouping changes but the order does not; this is associativity."],
+    ["What is the additive identity for rational numbers?",["1","−1","0","−0"],2,"Adding zero leaves any rational number unchanged."],
+    ["Which rational number has no multiplicative inverse?",["2/3","−4","0","5/8"],2,"Zero has no multiplicative inverse because division by zero is undefined."],
+    ["Simplify −12/18.",["−2/3","2/3","−3/2","−6/9"],0,"Divide numerator and denominator by 6 to get −2/3."],
+    ["Which decimal is equal to 3/8?",["0.375","0.38","0.35","0.625"],0,"3 ÷ 8 = 0.375."],
+    ["Express 0.6 as a rational number in simplest form.",["6/100","3/5","2/3","6/5"],1,"0.6 = 6/10 = 3/5."],
+    ["Which fraction is equivalent to −4/7 with denominator 21?",["−12/21","12/21","−4/21","−7/21"],0,"Multiply numerator and denominator by 3: −12/21."],
+    ["Calculate 1/2 + (−3/4).",["1/4","−1/4","−5/4","5/4"],1,"1/2 = 2/4, so 2/4 − 3/4 = −1/4."],
+    ["Calculate (−7/9) − (−2/9).",["−1","−5/9","−9/9","5/9"],1,"Subtracting a negative means adding its opposite: −7/9 + 2/9 = −5/9."],
+    ["Which number is the smallest?",["−1/2","−3/4","0","1/4"],1,"−3/4 is the farthest left among these values."],
+    ["Which rational number is equal to 1?",["5/6","−4/4","9/9","0/9"],2,"A nonzero number divided by itself equals 1; 9/9 = 1."],
+    ["If x = −2/3, what is −x?",["−2/3","2/3","−3/2","0"],1,"The opposite of −2/3 is 2/3."],
+    ["Which statement is true for rational numbers?",["Their sum is always irrational","Their product is always irrational","The sum of two rational numbers is rational","Division by zero is defined"],2,"Rational numbers are closed under addition; division by zero remains undefined."]
+  ],
   "Number line": [
     ["What does a point on a number line represent?",["A number or value","Only a shape","Only a fraction","A unit of length only"],0,"Each point on a number line corresponds to a number."],
     ["On a standard number line, numbers increase as you move in which direction?",["Left","Right","Up","Down"],1,"Numbers increase from left to right."],

@@ -29,9 +29,9 @@ window.SKILLUP_MATHS_QUIZ_BANK = {
   ["Which set correctly describes a cube as (faces, edges, vertices)?",["(6, 12, 8)","(8, 12, 6)","(6, 8, 12)","(12, 6, 8)"],0,"A cube has 6 faces, 12 edges and 8 vertices."],
   ["Which set correctly describes a square pyramid as (faces, edges, vertices)?",["(4, 8, 5)","(5, 8, 5)","(5, 5, 8)","(6, 8, 4)"],1,"A square pyramid has 5 faces, 8 edges and 5 vertices."],
   ["A polyhedron has 5 faces, 9 edges and 6 vertices. Which relation is satisfied?",["F + V = E","F + V = E + 2","F + E = V + 2","F + E + V = 2"],1,"Euler's formula for a convex polyhedron is F + V = E + 2; here 5 + 6 = 9 + 2."],
-  ["A convex polyhedron has 8 faces and 12 vertices. How many edges does it have?",["16","18","20","22"],2,"Using F + V = E + 2 gives E = 8 + 12 − 2 = 18."],
-  ["A convex polyhedron has 10 edges and 6 vertices. How many faces does it have?",["4","5","6","8"],1,"Euler's formula gives F = E + 2 − V = 10 + 2 − 6 = 6."],
-  ["Which solid has two vertices, one circular base and one curved surface?",["Cone","Cylinder","Sphere","Triangular prism"],0,"A cone has one vertex, not two; therefore none of these has the stated combination."],
+  ["A convex polyhedron has 8 faces and 12 vertices. How many edges does it have?",["16","18","20","22"],1,"Using F + V = E + 2 gives E = 8 + 12 − 2 = 18."],
+  ["A convex polyhedron has 10 edges and 6 vertices. How many faces does it have?",["4","5","6","8"],2,"Euler's formula gives F = E + 2 − V = 10 + 2 − 6 = 6."],
+  ["Which solid has one vertex, one circular base and one curved surface?",["Cone","Cylinder","Sphere","Cuboid"],0,"A cone has one apex, one circular base and one curved surface."],
   ["Which solid has 3 faces, 2 edges and 0 vertices when curved surfaces are counted as surfaces?",["Cone","Cylinder","Sphere","Cuboid"],1,"A cylinder has two flat circular faces and one curved surface, with two circular boundary edges and no vertices."],
   ["A cube is cut so that one corner is removed by a plane. What is created at the cut?",["A new flat face","A new vertex only","A curved surface","No new surface"],0,"A planar cut through a solid creates a new flat face."]
   ]

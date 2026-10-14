@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Natural numbers and whole numbers": [
+    ["Which statement best describes a natural number in the usual school convention?",["A counting number such as 1, 2, 3, …","Any negative integer","Any fraction","Only zero"],0,"Natural numbers are used for counting; in the usual school convention they begin at 1."],
+    ["Which number is a whole number but not a natural number under the convention that natural numbers start at 1?",["−1","0","1/2","2.5"],1,"Whole numbers include zero, while this convention for natural numbers starts at 1."],
+    ["Which list contains only whole numbers?",["0, 1, 2, 3","−1, 0, 1, 2","0, 1/2, 2, 3","1.2, 2, 3, 4"],0,"Whole numbers are 0 and the positive counting numbers; they exclude negatives and fractions."],
+    ["What is the successor of 458?",["457","458","459","460"],2,"The successor is the next number, found by adding 1: 458 + 1 = 459."],
+    ["What is the predecessor of 1,000?",["999","1,001","990","100"],0,"The predecessor is one less: 1,000 − 1 = 999."],
+    ["Which is the smallest whole number?",["−1","0","1","10"],1,"Zero is the smallest whole number."],
+    ["Which statement is true about zero?",["Zero is a whole number","Zero is negative","Zero is greater than every positive integer","Zero is not an integer"],0,"Zero belongs to the whole numbers and integers; it is neither positive nor negative."],
+    ["What is 2,345 + 0?",["0","2,344","2,345","2,346"],2,"Adding zero leaves a number unchanged; zero is the additive identity."],
+    ["What is 67 × 1?",["1","0","66","67"],3,"Multiplying any number by 1 leaves it unchanged; 1 is the multiplicative identity."],
+    ["Which property is shown by 8 + 5 = 5 + 8?",["Associative property of addition","Commutative property of addition","Distributive property","Closure under subtraction"],1,"The order of the addends changes but the sum stays the same."],
+    ["Which equation shows the associative property of addition?",["(2 + 3) + 4 = 2 + (3 + 4)","2 + 3 = 3 + 2","2 × (3 + 4) = 2 × 3 + 2 × 4","7 + 0 = 7"],0,"The associative property changes grouping without changing the order of the numbers."],
+    ["Which equation demonstrates the distributive property?",["6 + 2 = 2 + 6","3 × (4 + 5) = 3 × 4 + 3 × 5","(3 × 4) × 5 = 3 × (4 × 5)","9 × 1 = 9"],1,"Multiplication distributes across addition: 3 × (4 + 5) equals 3 × 4 + 3 × 5."],
+    ["Calculate 125 × 8.",["900","950","1,000","1,025"],2,"125 × 8 = 1,000."],
+    ["Which number is immediately before 10,000?",["9,000","9,999","10,001","10,010"],1,"The predecessor of 10,000 is 10,000 − 1 = 9,999."],
+    ["Which number lies between 5,099 and 5,101?",["5,098","5,100","5,102","5,110"],1,"The integer between 5,099 and 5,101 is 5,100."],
+    ["Which operation is not always closed within the whole numbers?",["Addition","Multiplication","Subtraction","Addition and multiplication"],2,"For example, 3 − 5 = −2, which is not a whole number."],
+    ["Which operation always gives a whole number when applied to two whole numbers?",["Subtraction","Division","Addition","Finding a square root"],2,"The sum of two whole numbers is always a whole number."],
+    ["What is the value of 25 × 4 + 25 × 6?",["250","200","150","100"],0,"Using distributivity, 25 × 4 + 25 × 6 = 25 × (4 + 6) = 250."],
+    ["Which is the correct comparison?",["0 < 1","1 < 0","0 = 1","−1 > 0"],0,"Zero is less than every positive whole number, including 1."],
+    ["How many whole numbers are there from 0 through 5, including both endpoints?",["5","6","4","7"],1,"The list is 0, 1, 2, 3, 4, 5, which contains six numbers."],
+    ["A library has 236 books and receives 0 additional books. How many books does it have now?",["0","235","236","237"],2,"Adding zero books does not change the total of 236."],
+    ["A box contains 24 pencils. How many pencils are in 7 identical boxes?",["148","158","168","178"],2,"7 × 24 = 7 × (20 + 4) = 140 + 28 = 168."],
+    ["Which expression equals 49 × 11?",["49 × 10 + 49","49 + 11","49 × 10 − 11","50 × 11"],0,"Using distributivity, 49 × 11 = 49 × (10 + 1) = 490 + 49 = 539."],
+    ["Which is the correct ascending order?",["7, 0, 3, 5","0, 3, 5, 7","3, 0, 5, 7","0, 5, 3, 7"],1,"Ascending order lists the values from smallest to largest: 0, 3, 5, 7."],
+    ["If n is a whole number, which expression always gives its successor?",["n − 1","n","n + 1","2n"],2,"The successor is one greater than the given number, n + 1."],
+    ["Which number is neither positive nor negative?",["−1","0","1","10"],1,"Zero is the only integer that is neither positive nor negative."],
+    ["Evaluate 18 + 27 + 32 using a convenient grouping.",["67","77","87","97"],1,"Group 18 + 32 = 50, then 50 + 27 = 77."],
+    ["Which equation illustrates that multiplication is commutative?",["4 × 7 = 7 × 4","4 × (7 × 2) = (4 × 7) × 2","4 × (7 + 2) = 4 × 7 + 4 × 2","4 × 1 = 4"],0,"The commutative property of multiplication allows the factors to swap order."],
+    ["A number has successor 501. What is the number?",["499","500","501","502"],1,"The number immediately before 501 is 500."],
+    ["Which statement about whole numbers is correct?",["Every whole number is negative","Whole numbers include fractions between 0 and 1","Every natural number is a whole number","Whole numbers contain only even numbers"],2,"With the usual school convention, all natural counting numbers are included among whole numbers."]
+  ],
   "Views of 3D Objects": [
     ["What is a front view of a solid?",["How it looks from directly in front","How it looks from above","How it looks from below","How it looks after folding"],0,"A front view shows the object as seen directly from the front."],
     ["Which view shows the top surfaces of a solid when looking straight down?",["Side view","Front view","Top view","Back view"],2,"A top view is observed from directly above the object."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Inverse proportion": [
+    ["If 4 workers finish a job in 12 days, how many days will 8 workers take at the same rate?",["3","6","8","24"],1,"Workers and days are inversely proportional: 4 × 12 = 8 × d, so d = 6."],
+    ["A car takes 3 hours at 60 km/h to cover a route. How long at 90 km/h for the same distance?",["1 hour","2 hours","2.5 hours","4.5 hours"],1,"For fixed distance, speed × time is constant: 60 × 3 = 90 × t, so t = 2 hours."],
+    ["Six taps fill a tank in 20 minutes. How long would 4 identical taps take?",["10 min","20 min","30 min","40 min"],2,"Taps × time is constant: 6 × 20 = 4 × t, so t = 30 minutes."],
+    ["Twelve workers complete a task in 15 days. How many days would 20 workers take?",["6","9","12","25"],1,"12 × 15 = 20 × d, so d = 9 days."],
+    ["Which pair is inversely proportional for a fixed task?",["Number of items and total cost at fixed price","Speed and time for a fixed distance","Hours worked and wages at fixed hourly rate","Number of people and total food needed"],1,"For fixed distance, increasing speed decreases time in the same inverse ratio."],
+    ["If 5 machines make a batch in 18 hours, how long would 6 identical machines take?",["12 h","15 h","18 h","21.6 h"],1,"Machines × time = constant: 5 × 18 = 6 × t, so t = 15 hours."],
+    ["Eight people share enough food for 15 days. If 12 people share it equally, how many days will it last?",["8 days","10 days","12 days","22.5 days"],1,"People × days is constant: 8 × 15 = 12 × d, so d = 10 days."],
+    ["A journey takes 5 hours at 48 km/h. How long at 60 km/h for the same journey?",["3 h","4 h","5 h","6.25 h"],1,"Distance is 48 × 5 = 240 km; time at 60 km/h is 240/60 = 4 hours."],
+    ["Ten identical pumps empty a pool in 6 hours. How long would 15 pumps take?",["2 h","3 h","4 h","9 h"],2,"10 × 6 = 15 × t, so t = 4 hours."],
+    ["If 9 workers build a wall in 16 days, how long would 12 workers take?",["9 days","12 days","14 days","21 days"],1,"9 × 16 = 12 × d, so d = 12 days."],
+    ["A cyclist needs 4 hours at 15 km/h for a route. At 20 km/h, how long will the route take?",["2 h","3 h","4 h","5 h"],1,"The route is 15 × 4 = 60 km; 60/20 = 3 hours."],
+    ["Four identical printers complete a job in 30 minutes. How long would 10 printers take?",["8 min","12 min","15 min","20 min"],1,"4 × 30 = 10 × t, giving t = 12 minutes."],
+    ["If 18 workers can complete a job in 20 days, how many workers are needed to finish in 12 days?",["24","28","30","36"],2,"Workers × days = 18 × 20 = 360; 360/12 = 30 workers."],
+    ["A supply of grain lasts 24 days for 25 people. How long will it last for 30 people?",["18 days","20 days","22 days","28.8 days"],1,"People × days = 25 × 24 = 600; 600/30 = 20 days."],
+    ["If 3 hoses fill a tank in 40 minutes, how long do 5 identical hoses take?",["20 min","24 min","30 min","60 min"],1,"3 × 40 = 5 × t, so t = 24 minutes."],
+    ["A train takes 8 hours at 50 km/h for a route. How long at 80 km/h?",["4 h","5 h","6 h","12.8 h"],1,"Distance = 50 × 8 = 400 km; 400/80 = 5 hours."],
+    ["If y varies inversely as x and y = 12 when x = 4, find y when x = 8.",["3","6","12","24"],1,"For inverse proportion xy = k. Here k = 12 × 4 = 48; y = 48/8 = 6."],
+    ["If x and y are inversely proportional, which expression is constant?",["x + y","x − y","xy","y/x"],2,"Inverse proportion has the form y = k/x, so xy = k."],
+    ["Six workers need 14 days for a job. How many workers are needed to finish in 7 days?",["3","6","12","14"],2,"Workers × days = 6 × 14 = 84; 84/7 = 12 workers."],
+    ["A pump empties a tank in 9 hours. If three identical pumps work together, how long will they take?",["2 h","3 h","6 h","27 h"],1,"Three times as many pumps take one-third the time: 9/3 = 3 hours."],
+    ["A car covers a fixed distance in 6 hours at 70 km/h. How long at 105 km/h?",["3 h","4 h","5 h","9 h"],1,"Distance = 70 × 6 = 420 km; 420/105 = 4 hours."],
+    ["Fourteen workers finish a job in 9 days. How many days for 21 workers?",["4 days","6 days","7 days","13.5 days"],1,"14 × 9 = 21 × d, so d = 6 days."],
+    ["If 5 identical taps fill a tank in 36 minutes, how long do 9 taps take?",["15 min","20 min","25 min","30 min"],1,"5 × 36 = 9 × t, so t = 20 minutes."],
+    ["A bus takes 2.5 hours at 72 km/h. How long would it take at 90 km/h?",["1.5 h","2 h","2.25 h","3.125 h"],1,"Distance = 72 × 2.5 = 180 km; 180/90 = 2 hours."],
+    ["If 16 people can paint a building in 5 days, how many days would 10 people take?",["3.125 days","6 days","8 days","10 days"],2,"16 × 5 = 10 × d, so d = 8 days."],
+    ["A fixed amount of work takes 24 hours with 2 machines. How long with 8 identical machines?",["3 h","6 h","8 h","12 h"],1,"2 × 24 = 8 × t, so t = 6 hours."],
+    ["If 12 workers need 18 days, how many workers are required to finish in 8 days?",["18","24","27","30"],2,"12 × 18 = 216 worker-days; 216/8 = 27 workers."],
+    ["A journey takes 7.5 hours at 64 km/h. How long at 80 km/h?",["5 h","6 h","6.5 h","9.375 h"],1,"Distance = 64 × 7.5 = 480 km; 480/80 = 6 hours."],
+    ["A food stock feeds 40 students for 18 days. How long will it feed 24 students?",["12 days","24 days","30 days","36 days"],2,"Students × days = 40 × 18 = 720; 720/24 = 30 days."],
+    ["If 7 identical machines finish an order in 12 hours, how long would 4 machines take?",["6 h","18 h","21 h","24 h"],2,"7 × 12 = 4 × t, so t = 21 hours."]
+  ],
   "Direct proportion": [
     ["If 3 notebooks cost ₹45, what is the cost of 5 notebooks at the same rate?",["₹60","₹65","₹75","₹90"],2,"Cost is directly proportional to quantity: ₹45 ÷ 3 = ₹15 each; 5 cost ₹75."],
     ["If 4 kg of rice costs ₹240, how much do 7 kg cost?",["₹360","₹400","₹420","₹480"],2,"Unit price = ₹240 ÷ 4 = ₹60/kg; 7 kg costs ₹420."],

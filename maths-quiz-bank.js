@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Cube roots by prime factorisation": [
+    ["What is the first step when finding a cube root by prime factorisation?",["Add all prime factors","Write the number as a product of prime factors","Divide by 2 only","Find its square"],1,"Express the number as a product of prime factors."],
+    ["Which is the prime factorisation of 216?",["2² × 3³","2³ × 3³","2³ × 3²","2 × 3³"],1,"216 = 8 × 27 = 2³ × 3³."],
+    ["Using prime factorisation, what is ∛216?",["3","4","6","9"],2,"216 = 2³ × 3³, so its cube root is 2 × 3 = 6."],
+    ["What is the prime factorisation of 64?",["2⁴","2⁵","2⁶","4³"],2,"64 = 2 × 2 × 2 × 2 × 2 × 2 = 2⁶."],
+    ["Using prime factorisation, what is ∛64?",["2","3","4","8"],2,"64 = 2⁶ = (2²)³, so ∛64 = 4."],
+    ["What is the prime factorisation of 125?",["3 × 5²","5³","5 × 25²","25 × 25"],1,"125 = 5 × 5 × 5 = 5³."],
+    ["What is ∛125 by prime factorisation?",["3","4","5","25"],2,"The three factors of 5 form one group, so the cube root is 5."],
+    ["Find ∛343 using prime factors.",["5","6","7","8"],2,"343 = 7 × 7 × 7 = 7³."],
+    ["What is the prime factorisation of 512?",["2⁷","2⁸","2⁹","2⁶"],0,"512 = 2⁹? Check: 2⁹ = 512."],
+    ["Using prime factorisation, ∛512 equals:",["6","7","8","9"],2,"512 = 2⁹ = (2³)³, so its cube root is 8."],
+    ["What is the prime factorisation of 1,000?",["2³ × 5³","2² × 5³","2³ × 5²","2 × 5³"],0,"1,000 = 10³ = 2³ × 5³."],
+    ["What is ∛1,000?",["10","20","100","1,000"],0,"1,000 = 2³ × 5³, so its cube root is 2 × 5 = 10."],
+    ["In cube-root factorisation, prime factors are grouped in sets of:",["Two equal factors","Three equal factors","Four equal factors","Five equal factors"],1,"Each group of three identical prime factors contributes one factor to the cube root."],
+    ["What is ∛(2³ × 3³)?",["5","6","9","18"],1,"Take one factor from each triple: 2 × 3 = 6."],
+    ["What is ∛(3³ × 5³)?",["8","15","75","125"],1,"The cube root is 3 × 5 = 15."],
+    ["What is ∛(2⁶)?",["2","4","6","8"],1,"2⁶ = (2²)³, so the cube root is 2² = 4."],
+    ["What is ∛(3⁶)?",["3","6","9","27"],2,"3⁶ = (3²)³, so the cube root is 3² = 9."],
+    ["Find ∛1,728 using prime factors.",["10","11","12","13"],2,"1,728 = 2⁶ × 3³; cube root = 2² × 3 = 12."],
+    ["Which factorisation shows that 729 is a perfect cube?",["3⁴","3⁵","3⁶","3⁷"],2,"729 = 3⁶ = (3²)³."],
+    ["What is ∛729?",["7","8","9","27"],2,"729 = 3⁶, so ∛729 = 3² = 9."],
+    ["Which number is a perfect cube based on prime-factor groups of three?",["72","108","216","250"],2,"216 = 2³ × 3³, with all prime factors in triples."],
+    ["What is ∛(8 × 125)?",["5","10","15","20"],1,"8 × 125 = 1,000, and ∛1,000 = 10."],
+    ["What is ∛(27 × 64)?",["6","9","12","18"],2,"27 × 64 = 1,728 and ∛1,728 = 12."],
+    ["What is the smallest number by which 24 must be multiplied to make a perfect cube?",["2","3","4","9"],3,"24 = 2³ × 3. Multiply by 3² = 9 to make 2³ × 3³ = 216."],
+    ["What is the smallest number by which 40 must be multiplied to make a perfect cube?",["2","5","10","25"],3,"40 = 2³ × 5; multiply by 5² = 25, giving 1,000."],
+    ["What is the smallest number by which 54 must be multiplied to make a perfect cube?",["2","4","9","18"],1,"54 = 2 × 3³. Multiply by 2² = 4 to obtain 2³ × 3³ = 216."],
+    ["What is the smallest number by which 108 must be divided to make a perfect cube?",["2","3","4","6"],2,"108 = 2² × 3³; divide by 2² = 4 to get 27 = 3³."],
+    ["What is ∛(2³ × 5⁶)?",["10","25","50","100"],2,"Cube root = 2 × 5² = 50."],
+    ["Which is the correct prime-factor method for ∛216?",["2 × 2 × 2 × 3 × 3 × 3","2 × 3","2³ × 3³","2² × 3²"],1,"216 = 2³ × 3³; take one factor from each triple: 2 × 3 = 6."],
+    ["Why is 72 not a perfect cube?",["It has no prime factors","Its prime factors cannot all be grouped into triples","It is odd","It is divisible by 8"],1,"72 = 2³ × 3²; the two factors of 3 do not form a complete triple."]
+  ],
   "Perfect cubes": [
     ["Which number is a perfect cube?",["18","27","36","50"],1,"27 = 3³."],
     ["What is 2³?",["4","6","8","16"],2,"2 × 2 × 2 = 8."],

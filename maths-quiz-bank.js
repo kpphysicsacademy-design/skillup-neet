@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Prime factorisation": [
+    ["What is the prime factorisation of 12?",["2 × 6","2² × 3","3 × 4","2 × 2 × 2"],1,"12 = 2 × 2 × 3 = 2² × 3."],
+    ["What is the prime factorisation of 18?",["2 × 3²","2² × 3","3 × 6","2 × 9"],0,"18 = 2 × 9 = 2 × 3²."],
+    ["Which is the prime factorisation of 20?",["2 × 10","4 × 5","2² × 5","2 × 2 × 2 × 5"],2,"20 = 2 × 2 × 5 = 2² × 5."],
+    ["Find the prime factorisation of 30.",["2 × 3 × 5","3 × 10","2 × 15","5 × 6"],0,"30 = 2 × 3 × 5, all of which are prime."],
+    ["What is the prime factorisation of 36?",["2 × 18","2² × 3²","4 × 9","6 × 6"],1,"36 = 2 × 2 × 3 × 3 = 2² × 3²."],
+    ["Which is the prime factorisation of 40?",["2³ × 5","4 × 10","2 × 20","5 × 8"],0,"40 = 2 × 2 × 2 × 5 = 2³ × 5."],
+    ["What is the prime factorisation of 45?",["3 × 15","5 × 9","3² × 5","3 × 3 × 3 × 5"],2,"45 = 3 × 3 × 5 = 3² × 5."],
+    ["Find the prime factorisation of 56.",["7 × 8","2³ × 7","4 × 14","2 × 28"],1,"56 = 2 × 2 × 2 × 7 = 2³ × 7."],
+    ["What is the prime factorisation of 72?",["2³ × 3²","2² × 3³","8 × 9","6 × 12"],0,"72 = 8 × 9 = 2³ × 3²."],
+    ["Which is the prime factorisation of 84?",["2 × 42","4 × 21","2² × 3 × 7","2 × 3 × 14"],2,"84 = 2 × 2 × 3 × 7 = 2² × 3 × 7."],
+    ["What is the prime factorisation of 100?",["10 × 10","2² × 5²","2 × 50","4 × 25"],1,"100 = 2 × 2 × 5 × 5 = 2² × 5²."],
+    ["Find the prime factorisation of 126.",["2 × 63","2 × 3² × 7","3 × 42","6 × 21"],1,"126 = 2 × 63 = 2 × 3² × 7."],
+    ["Which prime factors make up 150?",["2 × 3 × 5²","3 × 50","15 × 10","2 × 75"],0,"150 = 2 × 3 × 5 × 5 = 2 × 3 × 5²."],
+    ["What is the prime factorisation of 200?",["2 × 100","4 × 50","2³ × 5²","2² × 5³"],2,"200 = 8 × 25 = 2³ × 5²."],
+    ["How many times does prime factor 2 occur in the factorisation of 48?",["2","3","4","5"],2,"48 = 2⁴ × 3, so factor 2 occurs four times."],
+    ["Which is the prime factorisation of 63?",["7 × 9","3² × 7","3 × 21","2 × 31"],1,"63 = 3 × 3 × 7 = 3² × 7."],
+    ["What is the prime factorisation of 90?",["2 × 3² × 5","9 × 10","3 × 30","2 × 45"],0,"90 = 2 × 3 × 3 × 5 = 2 × 3² × 5."],
+    ["Which is the prime factorisation of 144?",["12 × 12","2⁴ × 3²","2³ × 3³","2² × 6²"],1,"144 = 16 × 9 = 2⁴ × 3²."],
+    ["What is the prime factorisation of 225?",["15 × 15","3² × 5²","3 × 75","5 × 45"],1,"225 = 9 × 25 = 3² × 5²."],
+    ["Which prime factorisation represents 160?",["2⁵ × 5","2⁴ × 10","4 × 40","2³ × 5²"],0,"160 = 32 × 5 = 2⁵ × 5."],
+    ["What is the prime factorisation of 210?",["21 × 10","2 × 3 × 5 × 7","2 × 105","3 × 70"],1,"210 = 2 × 3 × 5 × 7."],
+    ["Which is the prime factorisation of 252?",["2² × 3² × 7","2 × 126","4 × 63","6 × 42"],0,"252 = 4 × 63 = 2² × 3² × 7."],
+    ["What is the prime factorisation of 300?",["3 × 100","2² × 3 × 5²","2 × 150","6 × 50"],1,"300 = 4 × 3 × 25 = 2² × 3 × 5²."],
+    ["Which prime factors make up 420?",["2² × 3 × 5 × 7","42 × 10","4 × 105","6 × 70"],0,"420 = 4 × 3 × 5 × 7 = 2² × 3 × 5 × 7."],
+    ["What is the prime factorisation of 625?",["5 × 125","25 × 25","5⁴","5³"],2,"625 = 5 × 5 × 5 × 5 = 5⁴."],
+    ["Which prime factorisation represents 96?",["2⁵ × 3","2⁴ × 6","3 × 32","2³ × 12"],0,"96 = 32 × 3 = 2⁵ × 3."],
+    ["What is the prime factorisation of 108?",["2 × 54","2² × 3³","4 × 27","6 × 18"],1,"108 = 4 × 27 = 2² × 3³."],
+    ["How many distinct prime factors does 70 have?",["2","3","4","5"],1,"70 = 2 × 5 × 7, so it has three distinct prime factors."],
+    ["Which number has prime factorisation 2³ × 3 × 5?",["60","90","120","180"],2,"2³ × 3 × 5 = 8 × 15 = 120."],
+    ["Which number has prime factorisation 3² × 5 × 7?",["315","225","105","630"],0,"3² × 5 × 7 = 9 × 35 = 315."]
+  ],
   "Divisibility tests": [
     ["A number is divisible by 2 if its last digit is?",["0, 2, 4, 6, or 8","1, 3, 5, 7, or 9","0 or 5 only","Any digit"],0,"Even last digits make a whole number divisible by 2."],
     ["Which number is divisible by 5?",["234","347","620","418"],2,"A number divisible by 5 ends in 0 or 5."],

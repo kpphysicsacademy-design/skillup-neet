@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Special quadrilaterals": [
+    ["Which quadrilateral has four equal sides and four right angles?",["Rectangle","Rhombus","Square","Kite"],2,"A square has four equal sides and four right angles."],
+    ["Which quadrilateral has four right angles, with opposite sides equal?",["Rectangle","Kite","Rhombus only","Trapezium"],0,"A rectangle has four right angles and equal opposite sides."],
+    ["Which special quadrilateral has all four sides equal but angles need not be right angles?",["Square","Rhombus","Rectangle","Trapezium"],1,"A rhombus has four equal sides; its angles are not necessarily 90°."],
+    ["Which quadrilateral has two pairs of adjacent equal sides?",["Kite","Rectangle","Parallelogram","Trapezium"],0,"A kite has two pairs of adjacent equal sides."],
+    ["A square is also always which of the following?",["A rectangle and a rhombus","Only a trapezium","Only a kite, not a parallelogram","A pentagon"],0,"A square satisfies the definitions of both rectangle and rhombus."],
+    ["Which shape has diagonals that are equal and bisect each other?",["Any kite","Rectangle","Any trapezium","Any rhombus"],1,"A rectangle's diagonals are equal and bisect each other."],
+    ["Which quadrilateral has diagonals that bisect each other at right angles?",["Rectangle always","Rhombus","Trapezium always","General quadrilateral"],1,"The diagonals of a rhombus are perpendicular bisectors of each other."],
+    ["Which quadrilateral has exactly one pair of parallel sides in the usual school definition?",["Square","Rhombus","Trapezium","Parallelogram"],2,"A trapezium has one pair of parallel sides in the usual school definition."],
+    ["A rectangle has length 9 cm and width 4 cm. What is its perimeter?",["13 cm","26 cm","36 cm","72 cm"],1,"Perimeter=2(9+4)=26 cm."],
+    ["A square has side 8 cm. What is its area?",["16 cm²","32 cm²","64 cm²","128 cm²"],2,"Area=side²=8²=64 cm²."],
+    ["A rhombus has side 6.5 cm. Find its perimeter.",["13 cm","19.5 cm","26 cm","42.25 cm"],2,"All four sides are equal: perimeter=4×6.5=26 cm."],
+    ["A kite has adjacent side lengths 5 cm and 9 cm, each occurring twice. Find its perimeter.",["14 cm","28 cm","45 cm","90 cm"],1,"Perimeter=2(5+9)=28 cm."],
+    ["One angle of a rectangle is 90°. What are its other three angles?",["All 90°","Two 90° and one 180°","All 45°","Cannot be known"],0,"Every angle of a rectangle is a right angle."],
+    ["A rhombus has one angle of 70°. What is an adjacent angle?",["70°","90°","110°","140°"],2,"Adjacent angles of a rhombus are supplementary: 180°−70°=110°."],
+    ["A square has perimeter 52 cm. Find its side length.",["11 cm","12 cm","13 cm","14 cm"],2,"Side=52÷4=13 cm."],
+    ["A rectangle's perimeter is 42 cm and its length is 13 cm. Find its width.",["6 cm","8 cm","9 cm","16 cm"],1,"2(L+W)=42 gives L+W=21; W=21−13=8 cm."],
+    ["A square has diagonal 6√2 cm. What is its side length?",["3 cm","6 cm","12 cm","18 cm"],1,"For a square, diagonal=side×√2, so side=6 cm."],
+    ["Which statement about a square is true?",["Its diagonals are equal and perpendicular","Its diagonals never bisect each other","Only opposite sides are equal","It has no lines of symmetry"],0,"Square diagonals are equal, perpendicular, and bisect each other."],
+    ["Which quadrilateral usually has one line of symmetry and two pairs of adjacent equal sides?",["Typical kite","General parallelogram","Non-square rectangle","General trapezium"],0,"A typical kite has a symmetry line through the vertices where equal sides meet."],
+    ["Which property is shared by every rectangle and every rhombus?",["All sides equal","All angles 90°","Opposite sides parallel","Diagonals perpendicular"],2,"Both are parallelograms, so opposite sides are parallel."],
+    ["Which property is true for a square but not necessarily for a non-square rectangle?",["Opposite sides parallel","Four right angles","All four sides equal","Equal diagonals"],2,"A square has all four sides equal; a non-square rectangle does not."],
+    ["Which property is true for a rhombus but not necessarily for a non-square rectangle?",["All sides equal","Four right angles","Equal diagonals","Opposite angles equal"],0,"A rhombus has all four sides equal."],
+    ["A rectangle has diagonal 10 cm and width 6 cm. Find its length.",["4 cm","6 cm","8 cm","16 cm"],2,"By Pythagoras, length²=10²−6²=64, so length=8 cm."],
+    ["The diagonals of a square intersect at O. If one half-diagonal is 5 cm, what is the full diagonal?",["5 cm","7.5 cm","10 cm","20 cm"],2,"Diagonals bisect each other, so full diagonal=2×5=10 cm."],
+    ["A rhombus has diagonals 10 cm and 24 cm. Find its area.",["60 cm²","120 cm²","240 cm²","340 cm²"],1,"Area=(d₁×d₂)/2=(10×24)/2=120 cm²."],
+    ["A square and a rectangle have the same perimeter of 40 cm. What is the square's side length?",["5 cm","8 cm","10 cm","20 cm"],2,"Square side=40÷4=10 cm."],
+    ["Which quadrilateral has equal diagonals that bisect each other, but are not generally perpendicular?",["Rectangle","Rhombus always","Kite always","Trapezium always"],0,"A rectangle has equal diagonals that bisect each other; they need not be perpendicular."],
+    ["In a kite, which pair of opposite angles is generally equal?",["Angles between unequal sides","Angles at the endpoints of the symmetry diagonal","Both pairs of opposite angles","No pair can be equal"],1,"In a typical kite, the opposite angles between unequal sides are equal."],
+    ["A quadrilateral has four equal sides and its diagonals bisect each other at right angles. Which shape is it?",["Rectangle only","Rhombus","Trapezium","Irregular quadrilateral"],1,"A rhombus has four equal sides and perpendicular diagonals that bisect each other."],
+    ["Which is the best description of a square's symmetry?",["One line only","Two lines only","Four lines of symmetry","No lines of symmetry"],2,"A square has four lines of symmetry: two diagonals and two lines through side midpoints."]
+  ],
   "Parallelogram properties": [
     ["In a parallelogram, opposite sides are:",["Perpendicular","Equal and parallel","Always unequal","Curved"],1,"Both pairs of opposite sides in a parallelogram are equal and parallel."],
     ["Opposite angles of a parallelogram are:",["Supplementary always","Equal","Always 90°","Always acute"],1,"Opposite angles of a parallelogram are equal."],

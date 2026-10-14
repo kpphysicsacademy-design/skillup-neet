@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Number patterns": [
+    ["What is the next number in the pattern 2, 4, 6, 8, ...?",["9","10","11","12"],1,"The pattern increases by 2 each time, so the next number is 10."],
+    ["Find the next number: 5, 10, 15, 20, ...",["22","24","25","30"],2,"Each term increases by 5; 20 + 5 = 25."],
+    ["What is the next term in 3, 6, 12, 24, ...?",["30","36","42","48"],3,"Each term is multiplied by 2, so 24 × 2 = 48."],
+    ["Find the missing number: 7, 14, __, 28, 35.",["18","20","21","24"],2,"The pattern adds 7 each time: 7, 14, 21, 28, 35."],
+    ["What is the next number in 1, 4, 9, 16, ...?",["20","24","25","36"],2,"These are square numbers: 1², 2², 3², 4²; next is 5² = 25."],
+    ["What is the next number in 1, 8, 27, 64, ...?",["100","121","125","216"],2,"These are cubes 1³, 2³, 3³, 4³; next is 5³ = 125."],
+    ["Find the next term: 20, 18, 16, 14, ...",["10","11","12","13"],2,"Each term decreases by 2, so 14 − 2 = 12."],
+    ["What number comes next: 2, 5, 8, 11, ...?",["12","13","14","15"],2,"Add 3 each time; 11 + 3 = 14."],
+    ["Which rule generates 4, 8, 12, 16, ...?",["Add 2","Multiply by 2","Add 4","Subtract 4"],2,"Each term is 4 more than the previous term."],
+    ["Find the missing term: 10, 20, 30, __, 50.",["35","40","45","60"],1,"The sequence increases by 10, so the missing number is 40."],
+    ["What is the next term in 1, 3, 6, 10, 15, ...?",["18","20","21","25"],2,"The increments are +2, +3, +4, +5; next add 6 to get 21."],
+    ["Find the next number: 100, 90, 80, 70, ...",["50","55","60","65"],2,"Subtract 10 each time; 70 − 10 = 60."],
+    ["What is the next number in 2, 6, 18, 54, ...?",["108","144","162","216"],2,"Each term is multiplied by 3; 54 × 3 = 162."],
+    ["Which number is missing: 11, 22, 33, __, 55?",["40","42","44","46"],2,"The sequence increases by 11, so the missing term is 44."],
+    ["Find the next number: 1, 2, 4, 7, 11, ...",["14","15","16","17"],2,"The increments are +1, +2, +3, +4; next add 5 to get 16."],
+    ["What is the next term: 50, 45, 40, 35, ...?",["25","28","30","32"],2,"Subtract 5 each time; 35 − 5 = 30."],
+    ["What is the next number in 3, 9, 27, 81, ...?",["162","189","243","324"],2,"Multiply each term by 3; 81 × 3 = 243."],
+    ["Find the missing number: 4, 9, 14, __, 24.",["17","18","19","20"],2,"Add 5 each time; the missing term is 19."],
+    ["What is the next term in 2, 3, 5, 8, 12, ...?",["15","16","17","18"],2,"The increments are +1, +2, +3, +4; next add 5 to get 17."],
+    ["Which is the next even number after 38?",["39","40","41","42"],1,"Even numbers are divisible by 2; the next even number after 38 is 40."],
+    ["What is the next odd number after 57?",["58","59","60","61"],1,"Odd numbers alternate with even numbers; after 57 comes 59."],
+    ["Find the next number: 6, 12, 18, 24, ...",["28","30","32","36"],1,"The pattern adds 6 each time; 24 + 6 = 30."],
+    ["What is the next number in 81, 27, 9, 3, ...?",["0","1","2","6"],1,"Each term is divided by 3, so 3 ÷ 3 = 1."],
+    ["Find the missing number: 13, 18, 23, __, 33.",["25","26","28","29"],2,"Add 5 each time; the missing term is 28."],
+    ["What is the next term: 1, 5, 9, 13, ...?",["15","16","17","18"],2,"Add 4 each time; 13 + 4 = 17."],
+    ["What is the next number in 2, 4, 8, 16, 32, ...?",["48","54","60","64"],3,"Double each term; 32 × 2 = 64."],
+    ["Which rule describes 30, 25, 20, 15, ...?",["Add 5","Subtract 5","Multiply by 5","Divide by 5"],1,"Each term is 5 less than the preceding term."],
+    ["Find the next term: 1, 4, 7, 10, ...?",["11","12","13","14"],2,"The common difference is 3; 10 + 3 = 13."],
+    ["What is the next number in 5, 25, 125, ...?",["250","525","625","725"],2,"Each term is multiplied by 5; 125 × 5 = 625."],
+    ["Find the missing number: 9, 18, __, 36, 45.",["24","25","27","30"],2,"Add 9 each time; the missing number is 27."]
+  ],
   "Reading line graphs": [
     ["What does a line graph commonly show?",["Changes over time","Parts of a whole","Only categories","Geometric angles"],0,"Line graphs often show how a measured quantity changes over time."],
     ["Which axis usually represents time?",["Vertical","Horizontal","Neither","Both always"],1,"Time is commonly placed on the horizontal axis."],

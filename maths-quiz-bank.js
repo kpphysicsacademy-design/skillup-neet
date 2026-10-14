@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Addition and subtraction": [
+    ["Simplify: (3x + 2) + (5x + 4)",["8x + 6","8x + 2","2x + 6","15x + 8"],0,"Add like terms: 3x + 5x = 8x and 2 + 4 = 6."],
+    ["Simplify: (7a − 3) + (2a + 8)",["9a + 5","5a + 5","9a − 11","14a + 24"],0,"Combine 7a + 2a = 9a and −3 + 8 = 5."],
+    ["Simplify: (6x + 9) − (2x + 4)",["4x + 5","4x + 13","8x + 5","4x − 5"],0,"Subtract each term in the second bracket: 6x − 2x + 9 − 4 = 4x + 5."],
+    ["Simplify: (4y − 7) − (y − 2)",["3y − 9","3y − 5","5y − 9","3y + 5"],1,"Distribute the minus sign: 4y − 7 − y + 2 = 3y − 5."],
+    ["Add 3x² + 2x − 1 and x² − 5x + 6.",["4x² − 3x + 5","4x² + 7x + 5","2x² − 3x + 7","4x² − 3x − 7"],0,"Add like terms: 3x² + x² = 4x², 2x − 5x = −3x, and −1 + 6 = 5."],
+    ["Subtract 2a² − 3a + 4 from 5a² + a − 2.",["3a² + 4a − 6","3a² − 2a + 2","7a² − 2a + 2","3a² + 4a + 2"],0,"(5a² + a − 2) − (2a² − 3a + 4) = 3a² + 4a − 6."],
+    ["Simplify: 8m − 3m + 2m",["7m","13m","7m²","3m"],0,"Combine coefficients: 8 − 3 + 2 = 7."],
+    ["Simplify: 5p + 2q − 3p + q",["2p + 3q","8p + 3q","2p + q","5p − 2q"],0,"Combine p-terms to get 2p and q-terms to get 3q."],
+    ["Simplify: (2x + 3) + (−5x + 7)",["−3x + 10","7x + 10","−3x − 4","3x + 10"],0,"2x − 5x = −3x and 3 + 7 = 10."],
+    ["Simplify: (9a − 4b) − (3a − b)",["6a − 3b","6a − 5b","12a − 5b","6a + 3b"],0,"9a − 4b − 3a + b = 6a − 3b."],
+    ["What is the sum of 4x² + 3x and 2x² − x?",["6x² + 2x","6x² + 4x","2x² + 2x","6x² − 2x"],0,"Add corresponding terms: 4x² + 2x² = 6x² and 3x − x = 2x."],
+    ["Find (7x² − 2x + 1) − (3x² + 4x − 5).",["4x² − 6x + 6","4x² + 2x − 4","10x² + 2x + 6","4x² − 6x − 4"],0,"Change the signs in the second polynomial, then combine: 4x² − 6x + 6."],
+    ["Which pair are like terms that can be combined?",["3x and 3x²","4ab and −2ab","5a and 5b","x and xy"],1,"Like terms have identical variable parts and powers; 4ab and −2ab are like terms."],
+    ["Simplify: 12r − (5r + 6)",["7r − 6","7r + 6","17r − 6","7r + 6r"],0,"12r − 5r − 6 = 7r − 6."],
+    ["Simplify: 3(terms are not multiplied) — choose the result of (x + 2) + (x − 2).",["2x","2x + 4","x","0"],0,"x + 2 + x − 2 = 2x."],
+    ["If A = 3x + 5 and B = x − 2, find A + B.",["4x + 3","2x + 7","4x + 7","2x + 3"],0,"A + B = 3x + 5 + x − 2 = 4x + 3."],
+    ["If A = 3x + 5 and B = x − 2, find A − B.",["2x + 7","2x + 3","4x + 3","4x + 7"],0,"A − B = 3x + 5 − (x − 2) = 2x + 7."],
+    ["Simplify: (2a² + 3a − 4) + (a² − a + 9).",["3a² + 2a + 5","3a² + 4a + 5","a² + 2a + 13","3a² + 2a − 13"],0,"Add like terms: 2a² + a² = 3a², 3a − a = 2a, and −4 + 9 = 5."],
+    ["Simplify: (6x² + x − 8) − (x² − 2x + 3).",["5x² + 3x − 11","5x² − x − 5","7x² + 3x − 5","5x² + 3x − 5"],0,"Subtracting the second polynomial gives 6x² + x − 8 − x² + 2x − 3 = 5x² + 3x − 11."],
+    ["Simplify: 4u − 3v + 2u + 5v.",["6u + 2v","6u − 8v","2u + 2v","6u + 8v"],0,"Combine u-terms (4u + 2u) and v-terms (−3v + 5v)."],
+    ["Simplify: (10x − 3) − (4x + 8).",["6x − 11","6x + 5","14x − 11","6x − 5"],0,"10x − 3 − 4x − 8 = 6x − 11."],
+    ["Which expression is the difference of 8a + 3 and 2a − 5, in that order?",["6a + 8","6a − 2","10a − 2","6a − 8"],0,"(8a + 3) − (2a − 5) = 8a + 3 − 2a + 5 = 6a + 8."],
+    ["Simplify: (−3x + 4) + (8x − 9).",["5x − 5","−11x − 5","5x + 13","−5x − 5"],0,"−3x + 8x = 5x and 4 − 9 = −5."],
+    ["Simplify: (5m² − 2m + 7) + (−2m² + 6m − 1).",["3m² + 4m + 6","7m² + 4m + 6","3m² − 8m + 8","3m² + 4m + 8"],0,"Combine terms: 5m² − 2m² = 3m², −2m + 6m = 4m, and 7 − 1 = 6."],
+    ["Simplify: (4p² + p − 6) − (p² + 3p − 2).",["3p² − 2p − 4","3p² + 4p − 8","5p² − 2p − 4","3p² − 2p + 4"],0,"Subtract each term: 4p² + p − 6 − p² − 3p + 2 = 3p² − 2p − 4."],
+    ["If x = 2, what is the value of (3x + 1) + (x − 4)?",["5","3","7","1"],1,"Combine to 4x − 3; at x = 2, the value is 8 − 3 = 5."],
+    ["If a = −1, evaluate (2a + 3) − (a − 4).",["6","4","−2","−6"],0,"Expression simplifies to a + 7; with a = −1, the value is 6."],
+    ["Simplify: 2x + 3y − (x − 4y).",["x + 7y","x − y","3x − y","x − 7y"],0,"Distribute the minus: 2x + 3y − x + 4y = x + 7y."],
+    ["Simplify: (a + b) + (2a − 3b) − (a − b).",["2a − b","2a − 3b","4a − 3b","2a + b"],0,"Combine: a + b + 2a − 3b − a + b = 2a − b."],
+    ["The sum of (2x² − 3x + 4) and (−2x² + 5x − 1) is:",["2x + 3","4x² + 2x + 3","2x − 5","−4x² + 2x + 5"],0,"The x² terms cancel; −3x + 5x = 2x and 4 − 1 = 3."]
+  ],
   "Monomials binomials and polynomials": [
     ["Which expression is a monomial?",["x + 2","3x","x − y","a + b + c"],1,"A monomial has one term; 3x is a single term."],
     ["Which expression is a binomial?",["5x","x² + 3","x² + x + 1","7"],1,"A binomial has exactly two unlike or like terms."],

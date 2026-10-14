@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Negative exponents": [
+    ["Evaluate 2⁻¹.",["−2","1/2","2","−1/2"],1,"A negative exponent means take the reciprocal: 2⁻¹ = 1/2."],
+    ["Evaluate 5⁻².",["−25","1/25","1/10","25"],1,"5⁻² = 1/5² = 1/25."],
+    ["Write 1/3⁴ using a negative exponent.",["3⁻⁴","−3⁴","3⁴","−1/3⁴"],0,"The reciprocal rule gives 1/3⁴ = 3⁻⁴."],
+    ["Simplify 10⁻³.",["−1000","1/1000","1/30","1000"],1,"10⁻³ = 1/10³ = 1/1000."],
+    ["Which is equal to a⁻⁵, for a ≠ 0?",["−a⁵","1/a⁵","a⁵","5/a"],1,"For a nonzero base, a⁻⁵ = 1/a⁵."],
+    ["Evaluate 4⁻¹.",["−4","1/4","4","−1/4"],1,"4⁻¹ is the reciprocal of 4, which is 1/4."],
+    ["Simplify 2³ × 2⁻⁵.",["2⁸","2⁻²","2²","2⁻¹⁵"],1,"Add exponents with the same base: 3 + (−5) = −2."],
+    ["Simplify 7⁴ ÷ 7⁶.",["7²","7⁻²","7¹⁰","1"],1,"Subtract exponents: 4 − 6 = −2, so the result is 7⁻²."],
+    ["Evaluate 3⁻².",["−9","1/9","1/6","9"],1,"3⁻² = 1/3² = 1/9."],
+    ["Write 1/x³ as a power of x, for x ≠ 0.",["x³","x⁻³","−x³","3x⁻¹"],1,"The reciprocal of x³ is x⁻³."],
+    ["Simplify (2⁻¹)².",["2⁻²","2⁻¹","2²","−4"],0,"A power of a power multiplies exponents: (2⁻¹)² = 2⁻²."],
+    ["Evaluate 10⁻¹.",["10","−10","1/10","0.1⁻¹"],2,"10⁻¹ = 1/10 = 0.1."],
+    ["Simplify x⁻² × x⁵, for x ≠ 0.",["x⁻¹","x³","x⁷","x⁻¹⁰"],1,"Add exponents: −2 + 5 = 3, giving x³."],
+    ["Simplify y⁻⁴ ÷ y⁻², for y ≠ 0.",["y⁻⁶","y⁻²","y²","y⁶"],1,"Subtract exponents: −4 − (−2) = −2, giving y⁻²."],
+    ["Which fraction equals 2⁻³?",["−8","1/8","1/6","8"],1,"2⁻³ = 1/2³ = 1/8."],
+    ["Express 1/(5²) using a negative exponent.",["5⁻²","5²","−5²","−1/25"],0,"The reciprocal of 5² is 5⁻²."],
+    ["Simplify (a⁻²)³, where a ≠ 0.",["a⁻⁵","a⁻⁶","a⁶","a⁻¹"],1,"Multiply exponents: (a⁻²)³ = a⁻⁶."],
+    ["Evaluate 6⁻¹.",["−6","1/6","6","−1/6"],1,"6⁻¹ = 1/6."],
+    ["Simplify 4⁻² × 4³.",["4⁻⁶","4","4⁵","4⁻¹"],1,"Add exponents: −2 + 3 = 1, so the result is 4."],
+    ["Simplify 3² ÷ 3⁵.",["3³","3⁻³","3⁷","1"],1,"Subtract exponents: 2 − 5 = −3, so the result is 3⁻³."],
+    ["Write 1/16 as a power of 2 with a negative exponent.",["2⁴","2⁻⁴","2⁻²","−2⁴"],1,"Since 16 = 2⁴, its reciprocal is 2⁻⁴."],
+    ["Evaluate (1/2)⁻².",["1/4","−4","4","−1/4"],2,"A negative exponent takes the reciprocal: (1/2)⁻² = 2² = 4."],
+    ["Simplify (ab)⁻², where a and b are nonzero.",["a⁻²b⁻²","a²b²","−a²b²","a⁻²b²"],0,"A product raised to a power applies to each factor: (ab)⁻² = a⁻²b⁻²."],
+    ["Which statement is correct for a ≠ 0?",["a⁻¹ = −a","a⁻¹ = 1/a","a⁻¹ = a","a⁻¹ = 0"],1,"The negative-one power is the reciprocal: a⁻¹ = 1/a."],
+    ["Simplify 8⁻¹ × 8.",["8⁻²","1","8²","8"],1,"8⁻¹ × 8¹ = 8⁰ = 1."],
+    ["Simplify m⁻³ × m⁻², where m ≠ 0.",["m⁻⁶","m⁻⁵","m⁵","m⁻¹"],1,"Add the exponents: −3 + (−2) = −5."],
+    ["Evaluate 2⁻⁴.",["−16","1/8","1/16","16"],2,"2⁻⁴ = 1/2⁴ = 1/16."],
+    ["Simplify (x⁻¹)⁴, where x ≠ 0.",["x⁻⁵","x⁴","x⁻⁴","−x⁴"],2,"Multiply exponents: (x⁻¹)⁴ = x⁻⁴."],
+    ["Simplify 9⁻¹ × 9⁻².",["9⁻³","9³","9⁻¹","1"],0,"Add exponents: −1 + (−2) = −3."],
+    ["If 2ˣ = 1/32, find x.",["5","−5","−4","32"],1,"Since 32 = 2⁵ and 1/32 = 2⁻⁵, x = −5."]
+  ],
   "Laws of exponents": [
     ["Simplify 2³ × 2⁴.",["2⁷","2¹²","4⁷","2¹"],0,"When multiplying powers with the same base, add exponents: 2³ × 2⁴ = 2⁷."],
     ["Simplify 5⁶ ÷ 5².",["5³","5⁴","5⁸","1⁴"],1,"When dividing powers with the same nonzero base, subtract exponents: 5⁶⁻² = 5⁴."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Number line": [
+    ["What does a point on a number line represent?",["A number or value","Only a shape","Only a fraction","A unit of length only"],0,"Each point on a number line corresponds to a number."],
+    ["On a standard number line, numbers increase as you move in which direction?",["Left","Right","Up","Down"],1,"Numbers increase from left to right."],
+    ["Which number is located at the origin of a number line?",["1","−1","0","10"],2,"Zero is the origin and reference point."],
+    ["What is the distance between consecutive integers on a number line with unit spacing?",["0 units","1 unit","2 units","10 units"],1,"Adjacent integers are one unit apart."],
+    ["Which number lies halfway between 0 and 6?",["2","3","4","5"],1,"The midpoint is (0 + 6) ÷ 2 = 3."],
+    ["Which number lies halfway between −4 and 2?",["−2","−1","0","1"],1,"The midpoint is (−4 + 2) ÷ 2 = −1."],
+    ["Which number is immediately to the right of 7?",["6","8","9","0"],1,"The next integer to the right is 8."],
+    ["Which number is immediately to the left of −2?",["−1","0","−3","2"],2,"Moving left decreases the value, so the number is −3."],
+    ["Starting at 2 and moving 4 units right lands on which number?",["4","5","6","7"],2,"Moving four units right means 2 + 4 = 6."],
+    ["Starting at 5 and moving 3 units left lands on which number?",["1","2","3","8"],1,"Moving three units left means 5 − 3 = 2."],
+    ["Which number is greater: 3 or 5?",["3","5","They are equal","Cannot be compared"],1,"The number farther right is greater; 5 is to the right of 3."],
+    ["Which number is smaller: −1 or 2?",["−1","2","They are equal","Both are positive"],0,"−1 lies to the left of 2, so it is smaller."],
+    ["Which list shows the numbers in increasing order?",["4, 2, 0","−2, 0, 3","3, 1, 2","0, −1, −2"],1,"Increasing order moves from smaller to larger, left to right."],
+    ["Which list is in decreasing order?",["−3, −1, 2","1, 2, 3","5, 2, 0, −1","−2, 0, 4"],2,"Decreasing order moves from larger to smaller."],
+    ["How far is −3 from 0 on the number line?",["−3 units","0 units","3 units","6 units"],2,"Distance is non-negative; −3 is three units from zero."],
+    ["Which number is 2 units to the right of −5?",["−7","−5","−3","3"],2,"−5 + 2 = −3."],
+    ["Which number is 4 units to the left of 1?",["−5","−3","−2","5"],1,"1 − 4 = −3."],
+    ["What is the opposite of 6 on the number line?",["0","−6","1/6","6"],1,"The opposite is the same distance from zero on the other side: −6."],
+    ["What is the distance between −2 and 3?",["1 unit","3 units","5 units","6 units"],2,"From −2 to 0 is 2 units and from 0 to 3 is 3 units; total 5."],
+    ["Which integer is nearest to zero among −4, 2, and 5?",["−4","2","5","All are equally near"],1,"Their distances from zero are 4, 2, and 5; 2 is nearest."],
+    ["A token starts at −1 and moves 5 units right. Where does it end?",["−6","−4","4","5"],2,"−1 + 5 = 4."],
+    ["A marker starts at 3 and moves 7 units left. Where does it end?",["−4","−3","4","10"],0,"3 − 7 = −4."],
+    ["Which point represents the greater number?",["The point farther left","The point farther right","The point closer to zero always","Both points always represent equal numbers"],1,"On a standard number line, the point farther right has the greater value."],
+    ["If A is at −2 and B is at 4, how many units apart are they?",["2","4","6","8"],2,"The distance is 4 − (−2) = 6 units."],
+    ["Which number is between −3 and −1?",["−4","−2","0","2"],1,"−2 lies between −3 and −1."],
+    ["Which number is between 4 and 6?",["3","4","5","7"],2,"5 is the integer between 4 and 6."],
+    ["Where should 1/2 be placed between 0 and 1?",["At the midpoint","At 0","At 1","To the left of 0"],0,"One-half is halfway between zero and one."],
+    ["Where is 3/4 located compared with 1/2 on the number line?",["To the left","At the same point","To the right","It cannot be located"],2,"Since 3/4 is greater than 1/2, it lies to the right."],
+    ["Which statement about −5 and −2 is correct?",["−5 is greater than −2","−5 is to the right of −2","−5 is less than −2","They are equal"],2,"Among negative numbers, the one with greater absolute value lies farther left."],
+    ["A temperature changes from 2°C to −3°C. How many degrees did it decrease?",["1°C","3°C","5°C","6°C"],2,"The change is 2 − (−3) = 5 degrees downward."]
+  ],
   "Natural numbers and whole numbers": [
     ["Which statement best describes a natural number in the usual school convention?",["A counting number such as 1, 2, 3, …","Any negative integer","Any fraction","Only zero"],0,"Natural numbers are used for counting; in the usual school convention they begin at 1."],
     ["Which number is a whole number but not a natural number under the convention that natural numbers start at 1?",["−1","0","1/2","2.5"],1,"Whole numbers include zero, while this convention for natural numbers starts at 1."],

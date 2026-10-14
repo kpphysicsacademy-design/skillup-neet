@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Common factor": [
+    ["Factorise 6x + 12.",["6(x + 2)","6(x − 2)","3(2x + 12)","2(3x + 12)"],0,"The greatest common factor is 6: 6x + 12 = 6(x + 2)."],
+    ["Factorise 8a − 20.",["4(2a − 5)","4(2a + 5)","2(4a − 5)","8(a − 20)"],0,"The greatest common factor is 4, giving 4(2a − 5)."],
+    ["Factorise 15x² + 10x.",["5x(3x + 2)","5(3x² + 2)","10x(3x + 2)","5x(3x − 2)"],0,"Both terms share 5x: 15x² + 10x = 5x(3x + 2)."],
+    ["Factorise 12y² − 18y.",["6y(2y − 3)","6(2y² − 3y)","3y(4y + 6)","12y(y − 18)"],0,"The common factor is 6y, so the result is 6y(2y − 3)."],
+    ["Factorise 14ab + 21a.",["7a(2b + 3)","7(2ab + 3a)","14a(b + 21)","a(14b + 21a)"],0,"The greatest common factor is 7a: 14ab + 21a = 7a(2b + 3)."],
+    ["Factorise 9m − 27n.",["9(m − 3n)","3(3m − 27n)","9(m + 3n)","27(m − n)"],0,"Take out the common factor 9 to get 9(m − 3n)."],
+    ["Factorise 16p²q + 24pq².",["8pq(2p + 3q)","8p(2pq + 3q²)","4pq(4p + 6q)","8q(2p² + 3pq)"],0,"The common factor is 8pq, leaving 2p + 3q."],
+    ["Factorise 5x(x + 2) + 3(x + 2).",["(x + 2)(5x + 3)","(x + 2)(5x − 3)","5x(x + 5)","(5x + 2)(x + 3)"],0,"The repeated factor is (x + 2), so factor it out."],
+    ["Factorise 4a²b − 12ab².",["4ab(a − 3b)","4a(a b − 3b)","4ab(a + 3b)","2ab(2a − 12b)"],0,"Both terms share 4ab: 4a²b − 12ab² = 4ab(a − 3b)."],
+    ["Factorise 18x³ + 12x².",["6x²(3x + 2)","6x(3x² + 2)","3x²(6x + 4)","6x²(3x − 2)"],0,"The greatest common factor is 6x²."],
+    ["Factorise 25r² − 15r.",["5r(5r − 3)","5(5r² − 3)","15r(5r − 1)","5r(5r + 3)"],0,"Take out 5r to obtain 5r(5r − 3)."],
+    ["Factorise 7a + 7b.",["7(a + b)","7(a − b)","a(7 + b)","b(7 + a)"],0,"Both terms share 7, so 7a + 7b = 7(a + b)."],
+    ["Factorise 20mn − 35m.",["5m(4n − 7)","5(4mn − 7m)","10m(2n − 7)","5m(4n + 7)"],0,"The greatest common factor is 5m, giving 5m(4n − 7)."],
+    ["Factorise 11x² + 33x.",["11x(x + 3)","11(x² + 3)","x(11x + 3)","11x(x − 3)"],0,"The common factor is 11x, so the factorisation is 11x(x + 3)."],
+    ["Factorise 6a²b² + 9ab.",["3ab(2ab + 3)","3a(2ab² + 3b)","6ab(ab + 9)","3ab(2ab − 3)"],0,"Take out 3ab from both terms: 3ab(2ab + 3)."],
+    ["Factorise 24x²y − 16xy².",["8xy(3x − 2y)","8x(3xy − 2y²)","4xy(6x + 4y)","8xy(3x + 2y)"],0,"The greatest common factor is 8xy, leaving 3x − 2y."],
+    ["Factorise 3(x − 4) + 2y(x − 4).",["(x − 4)(3 + 2y)","(x − 4)(3 − 2y)","3(x − 4 + 2y)","(3 + 2y)(x + 4)"],0,"The common bracket is (x − 4); factor it out."],
+    ["Factorise 32u³ − 8u.",["8u(4u² − 1)","8(4u³ − u)","4u(8u² + 2)","8u(4u² + 1)"],0,"The common factor is 8u, giving 8u(4u² − 1)."],
+    ["Factorise 45a²b + 30ab².",["15ab(3a + 2b)","15a(3ab + 2b²)","5ab(9a − 6b)","15ab(3a − 2b)"],0,"The common factor is 15ab, leaving 3a + 2b."],
+    ["Factorise 10x² − 25x + 5x.",["5x(2x − 4)","5(2x² − 4x)","5x(2x + 4)","10x(x − 2)"],0,"Combine like terms: 10x² − 25x + 5x = 10x² − 20x = 5x(2x − 4)."],
+    ["Factorise 12a³b + 18a²b² − 6a²b.",["6a²b(2a + 3b − 1)","6ab(2a² + 3ab − a)","3a²b(4a + 6b − 2)","6a²(2ab + 3b² − b)"],0,"The common factor is 6a²b; dividing each term gives 2a + 3b − 1."],
+    ["Factorise 4x(y + 1) − 7(y + 1).",["(y + 1)(4x − 7)","(y + 1)(4x + 7)","(4x − 7)(y − 1)","4x(y − 6)"],0,"The repeated bracket is (y + 1), leaving 4x − 7."],
+    ["Factorise 36p²q − 48pq².",["12pq(3p − 4q)","12p(3pq − 4q²)","6pq(6p + 8q)","12pq(3p + 4q)"],0,"The greatest common factor is 12pq."],
+    ["Factorise 21x⁴ + 14x³.",["7x³(3x + 2)","7x²(3x² + 2x)","14x³(3x + 1)","7x³(3x − 2)"],0,"Take out 7x³ to obtain 7x³(3x + 2)."],
+    ["Factorise 8ab − 12ac + 4a.",["4a(2b − 3c + 1)","4(2ab − 3ac + a²)","2a(4b − 6c − 2)","4a(2b + 3c + 1)"],0,"The common factor is 4a; the remaining expression is 2b − 3c + 1."],
+    ["Factorise 5m(m − n) − 2(m − n).",["(m − n)(5m − 2)","(m − n)(5m + 2)","5m(m − n − 2)","(5m − 2)(m + n)"],0,"Factor out the common bracket (m − n)."],
+    ["Factorise 27x²y² + 18xy³.",["9xy²(3x + 2y)","9xy(3xy + 2y²)","3xy²(9x + 6y)","9xy²(3x − 2y)"],0,"The common factor is 9xy², leaving 3x + 2y."],
+    ["Factorise 16c²d − 20cd² + 4cd.",["4cd(4c − 5d + 1)","4d(4c² − 5cd + c)","4cd(4c + 5d + 1)","2cd(8c − 10d + 4)"],0,"Take out 4cd to get 4cd(4c − 5d + 1)."],
+    ["Factorise 14x(a + b) + 21y(a + b).",["7(a + b)(2x + 3y)","7(a + b)(2x − 3y)","7(2x(a + b) + 3y)","(a + b)(14x + 21)"],0,"Factor out 7 and the common bracket (a + b)."],
+    ["Factorise 42m²n − 28mn² + 14mn.",["14mn(3m − 2n + 1)","14m(3mn − 2n² + n)","7mn(6m − 4n + 2)","14mn(3m + 2n + 1)"],0,"The greatest common factor is 14mn, leaving 3m − 2n + 1."]
+  ],
   "Direct and inverse proportion word problems": [
     ["Four notebooks cost ₹80. At the same rate, what do 7 notebooks cost?",["₹120","₹140","₹160","₹180"],1,"This is direct proportion: ₹80 ÷ 4 = ₹20 each; 7 cost ₹140."],
     ["A car travels 180 km in 3 hours at constant speed. How far will it travel in 7 hours?",["360 km","400 km","420 km","450 km"],2,"Distance is directly proportional to time at constant speed. Speed = 60 km/h, so distance = 420 km."],

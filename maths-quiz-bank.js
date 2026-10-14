@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Monomials binomials and polynomials": [
+    ["Which expression is a monomial?",["x + 2","3x","x − y","a + b + c"],1,"A monomial has one term; 3x is a single term."],
+    ["Which expression is a binomial?",["5x","x² + 3","x² + x + 1","7"],1,"A binomial has exactly two unlike or like terms."],
+    ["Which expression is a trinomial?",["2x","x + 4","x² + 3x + 2","9"],2,"A trinomial has three terms."],
+    ["How many terms are in 4x² − 3x + 7?",["1","2","3","4"],2,"The terms are 4x², −3x and 7."],
+    ["What is the coefficient of x in 9x + 5?",["5","9","x","14"],1,"The coefficient multiplying x is 9."],
+    ["What is the constant term in 3x² + 2x − 8?",["3","2","x","−8"],3,"The constant term has no variable, so it is −8."],
+    ["What is the degree of 7x³ + 2x² − x + 4?",["1","2","3","4"],2,"The highest exponent of x is 3."],
+    ["Which is a polynomial in x?",["1/x + 2","√x + 1","3x² − x + 6","x⁻² + 1"],2,"Polynomial exponents of the variable are non-negative whole numbers."],
+    ["Which expression is not a polynomial in x?",["x² + 1","4x − 7","2x³","1/x + 3"],3,"1/x = x⁻¹ has a negative exponent."],
+    ["How many terms are in 6a − 2b + 9?",["1","2","3","4"],2,"The three terms are 6a, −2b and 9."],
+    ["What is the coefficient of x² in 5x² − 3x + 1?",["1","−3","5","2"],2,"The coefficient of x² is 5."],
+    ["What is the degree of the constant polynomial 7?",["0","1","7","Undefined for every constant"],0,"A non-zero constant polynomial has degree 0."],
+    ["Which pair are like terms?",["3x and 3y","4a and −7a","x and x²","2ab and 2a"],1,"Like terms have the same variable part and exponents."],
+    ["Which is a binomial in one variable?",["x² + 4x + 1","5y − 2","7","a + b + c"],1,"5y − 2 has exactly two terms and one variable."],
+    ["What is the degree of 4x⁴ − 2x + 8?",["1","2","3","4"],3,"The largest exponent is 4."],
+    ["Which is a monomial with coefficient −6?",["−6x²","x − 6","−6 + x + y","6/x"],0,"−6x² is a single term with coefficient −6."],
+    ["How many terms are in −x³ + 4x − 10?",["1","2","3","4"],2,"There are three terms: −x³, 4x and −10."],
+    ["What is the coefficient of y in 12 − 5y?",["12","5","−5","y"],2,"The coefficient of y is −5."],
+    ["Which expression has degree 2?",["7x + 1","4x² − 3","x³ + 1","9"],1,"The highest exponent in 4x² − 3 is 2."],
+    ["What is the degree of 8x⁵ + 3x² − 2?",["2","3","5","8"],2,"The highest exponent is 5."],
+    ["Which expression has exactly three terms?",["x + 1","a² + a + 1","5xy","2x − 3"],1,"a², a and 1 are three terms."],
+    ["In 7mn, what is the coefficient of mn?",["1","7","m","n"],1,"7mn = 7 × mn, so the coefficient is 7."],
+    ["Which pair are unlike terms?",["2x and 5x","3a² and −a²","4xy and 4yx","2x and 2x²"],3,"x and x² have different exponents, so the terms are unlike."],
+    ["What is the degree of 3x²y³?",["2","3","5","6"],2,"For a monomial in multiple variables, total degree is 2 + 3 = 5."],
+    ["Which is a polynomial with two variables?",["3x² + 2y − 1","1/x + y","√y + x","x⁻¹ + y"],0,"The variables have only non-negative integer exponents."],
+    ["What is the constant term in 2a² − 7a + 11?",["2","−7","11","a"],2,"The term independent of a is 11."],
+    ["What is the coefficient of x³ in −4x³ + x − 9?",["−9","−4","1","3"],1,"The coefficient of x³ is −4."],
+    ["Which expression is a monomial of degree 4?",["2x⁴","x³ + x","4x²","x⁴ + 1"],0,"2x⁴ has one term and degree 4."],
+    ["What is the standard form of the polynomial with terms 2x², −3x and 5?",["5 − 3x + 2x²","2x² − 3x + 5","−3x + 5 + 2x²","2x − 3x² + 5"],1,"Standard form lists powers in descending order: 2x² − 3x + 5."],
+    ["Which statement is true?",["Every binomial has three terms","A monomial has exactly one term","A polynomial must contain x","A constant cannot be a polynomial"],1,"A monomial is an algebraic expression consisting of one term."]
+  ],
   "Compound interest basics": [
     ["What is compound interest?",["Interest only on the original principal","Interest on principal and accumulated interest","A discount on principal","A fixed tax"],1,"Compound interest is calculated on the principal plus interest added in earlier periods."],
     ["What is the amount formula for annual compounding at rate r% for t years?",["P(1 + rt/100)","P(1 + r/100)^t","Prt/100","P − rt/100"],1,"For annual compounding, amount A = P(1 + r/100)^t."],

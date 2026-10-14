@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Percentages": [
+    ["What is 25% of 200?",["25","40","50","75"],2,"25% = 1/4, and 200 ÷ 4 = 50."],
+    ["Convert 3/4 to a percentage.",["25%","50%","75%","80%"],2,"3/4 × 100% = 75%."],
+    ["Convert 0.35 to a percentage.",["3.5%","35%","0.35%","350%"],1,"Multiply the decimal by 100: 0.35 × 100% = 35%."],
+    ["What is 10% of 450?",["4.5","45","54","90"],1,"10% is one-tenth, so 450 ÷ 10 = 45."],
+    ["60 is what percentage of 240?",["15%","20%","25%","40%"],2,"60 ÷ 240 × 100% = 25%."],
+    ["A class has 40 students and 30 are present. What percentage is present?",["25%","60%","75%","80%"],2,"30/40 × 100% = 75%."],
+    ["Increase 80 by 10%.",["82","88","90","100"],1,"10% of 80 is 8, so 80 + 8 = 88."],
+    ["Decrease 500 by 20%.",["100","300","400","480"],2,"20% of 500 is 100; 500 − 100 = 400."],
+    ["A shirt costs ₹800 and has a 25% discount. What is the discount amount?",["₹100","₹150","₹200","₹250"],2,"25% of ₹800 = ₹200."],
+    ["After a 10% increase, a number becomes 220. What was the original number?",["180","190","200","210"],2,"220 is 110% of the original; 220 ÷ 1.1 = 200."],
+    ["Express 7% as a fraction in simplest form.",["7/10","7/100","1/7","70/7"],1,"7% = 7/100."],
+    ["What percentage is 18 of 60?",["20%","25%","30%","40%"],2,"18 ÷ 60 × 100% = 30%."],
+    ["A price rises from ₹400 to ₹500. What is the percentage increase?",["20%","25%","30%","40%"],1,"Increase = ₹100; 100/400 × 100% = 25%."],
+    ["A price falls from ₹250 to ₹200. What is the percentage decrease?",["10%","20%","25%","50%"],1,"Decrease = ₹50; 50/250 × 100% = 20%."],
+    ["What is 125% of 80?",["80","90","100","125"],2,"125% = 1.25, and 1.25 × 80 = 100."],
+    ["Convert 0.08 to a percentage.",["0.8%","8%","80%","800%"],1,"0.08 × 100% = 8%."],
+    ["Convert 45% to a decimal.",["4.5","0.45","0.045","45"],1,"45% = 45/100 = 0.45."],
+    ["What is 2.5% of 400?",["4","10","25","100"],1,"2.5% = 0.025, and 0.025 × 400 = 10."],
+    ["A student scores 72 out of 90. What is the percentage score?",["72%","75%","80%","90%"],2,"72/90 × 100% = 80%."],
+    ["A town's population of 20,000 increases by 5%. What is the new population?",["20,500","21,000","21,500","25,000"],1,"5% of 20,000 is 1,000; new population = 21,000."],
+    ["A value decreases from 160 to 120. What is the percentage decrease?",["20%","25%","30%","40%"],1,"Decrease = 40; 40/160 × 100% = 25%."],
+    ["If 40% of a number is 56, what is the number?",["112","120","140","160"],2,"Number = 56 ÷ 0.4 = 140."],
+    ["What is 15% of 60?",["6","9","12","15"],1,"0.15 × 60 = 9."],
+    ["A bag contains 12 red and 8 blue balls. What percentage are blue?",["20%","30%","40%","60%"],2,"8 out of 20 are blue; 8/20 × 100% = 40%."],
+    ["A number is increased by 20% and becomes 360. What was the original number?",["280","288","300","320"],2,"360 is 120% of the original; 360 ÷ 1.2 = 300."],
+    ["A 15% discount is given on ₹2,000. What is the sale price?",["₹300","₹1,700","₹1,800","₹1,850"],1,"Discount = ₹300; sale price = ₹2,000 − ₹300 = ₹1,700."],
+    ["What percentage of 1 hour is 15 minutes?",["15%","20%","25%","30%"],2,"15/60 × 100% = 25%."],
+    ["If 8% of a number is 24, what is the number?",["192","240","300","320"],2,"Number = 24 ÷ 0.08 = 300."],
+    ["A value changes from 50 to 65. What is the percentage increase?",["15%","20%","30%","35%"],2,"Increase = 15; 15/50 × 100% = 30%."],
+    ["What is 35% of 600?",["180","200","210","240"],2,"0.35 × 600 = 210."]
+  ],
   "Cube roots by prime factorisation": [
     ["What is the first step when finding a cube root by prime factorisation?",["Add all prime factors","Write the number as a product of prime factors","Divide by 2 only","Find its square"],1,"Express the number as a product of prime factors."],
     ["Which is the prime factorisation of 216?",["2² × 3³","2³ × 3³","2³ × 3²","2 × 3³"],1,"216 = 8 × 27 = 2³ × 3³."],

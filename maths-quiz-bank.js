@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Plotting points": [
+    ["To plot the point (2, 3), how many units do you move from the origin?",["2 right, 3 up","3 right, 2 up","2 left, 3 up","2 right, 3 down"],0,"The first coordinate gives horizontal movement; the second gives vertical movement."],
+    ["Which point is 4 units left and 1 unit up from the origin?",["(4, 1)","(−4, 1)","(−1, 4)","(4, −1)"],1,"Left is negative x and up is positive y."],
+    ["Where should the point (3, −2) be plotted?",["3 left, 2 up","3 right, 2 down","2 right, 3 down","3 left, 2 down"],1,"Move 3 units right and 2 units down."],
+    ["Which point lies 5 units to the right of the origin on the x-axis?",["(0, 5)","(5, 0)","(−5, 0)","(5, 5)"],1,"On the x-axis y = 0, and right means positive x."],
+    ["Which point lies 4 units below the origin on the y-axis?",["(−4, 0)","(0, 4)","(0, −4)","(4, 0)"],2,"On the y-axis x = 0, and below means negative y."],
+    ["A point is plotted 2 units left and 6 units down. What are its coordinates?",["(2, 6)","(−2, −6)","(−6, −2)","(2, −6)"],1,"Left and down give coordinates (−2, −6)."],
+    ["Which point should be plotted in Quadrant I?",["(−2, 4)","(3, 5)","(−3, −5)","(4, −1)"],1,"Quadrant I has positive x and positive y."],
+    ["Which point should be plotted in Quadrant II?",["(3, 4)","(−3, 4)","(−3, −4)","(3, −4)"],1,"Quadrant II has negative x and positive y."],
+    ["Which point should be plotted in Quadrant III?",["(−5, −2)","(5, −2)","(−5, 2)","(5, 2)"],0,"Both coordinates are negative in Quadrant III."],
+    ["Which point should be plotted in Quadrant IV?",["(−2, −6)","(−2, 6)","(2, −6)","(2, 6)"],2,"Quadrant IV has positive x and negative y."],
+    ["What is the correct plotting order for the point (−4, 3)?",["4 right, 3 up","4 left, 3 up","4 left, 3 down","3 left, 4 up"],1,"Plot x = −4 first, then y = 3."],
+    ["What is the correct plotting order for (5, −1)?",["5 left, 1 up","1 right, 5 down","5 right, 1 down","5 down, 1 right"],2,"Move 5 right and then 1 down."],
+    ["Which point is 3 units above the x-axis and 2 units right of the y-axis?",["(3, 2)","(2, 3)","(−2, 3)","(2, −3)"],1,"Two units right means x = 2; three above means y = 3."],
+    ["A point has x-coordinate 0 and y-coordinate 5. Where is it plotted?",["On x-axis","On y-axis above origin","In Quadrant I","At origin"],1,"An x-coordinate of zero places the point on the y-axis."],
+    ["A point has y-coordinate 0 and x-coordinate −6. Where is it plotted?",["On y-axis","On x-axis left of origin","In Quadrant III","At origin"],1,"A y-coordinate of zero places it on the x-axis; negative x is left."],
+    ["Which coordinate pair represents the origin?",["(0, 0)","(0, 1)","(1, 0)","(−1, −1)"],0,"The origin is the intersection of both axes, at (0, 0)."],
+    ["If you plot (−2, 4), how far is the point horizontally from the y-axis?",["2 units","4 units","6 units","−2 units"],0,"The magnitude of the x-coordinate gives horizontal distance: 2 units."],
+    ["If you plot (3, −7), how far is the point vertically from the x-axis?",["3 units","7 units","10 units","−7 units"],1,"The magnitude of the y-coordinate gives vertical distance: 7 units."],
+    ["Which point is 1 unit left and 4 units down from (0, 0)?",["(1, −4)","(−1, −4)","(−4, −1)","(1, 4)"],1,"One left gives x = −1 and four down gives y = −4."],
+    ["Which point is 6 units right and 2 units up from the origin?",["(−6, 2)","(2, 6)","(6, 2)","(6, −2)"],2,"Right and up correspond to positive coordinates."],
+    ["A point is plotted at (−3, 0). Which is true?",["It is 3 units left on x-axis","It is 3 units below on y-axis","It is in Quadrant II","It is at origin"],0,"The point has y = 0, so it lies on the x-axis, 3 units left."],
+    ["A point is plotted at (0, 2). Which is true?",["2 units right on x-axis","2 units above on y-axis","In Quadrant I","At origin"],1,"The point lies on the y-axis because x = 0."],
+    ["Which point is plotted by moving 4 units right and 4 units down?",["(−4, 4)","(4, 4)","(4, −4)","(−4, −4)"],2,"Right gives x = 4; down gives y = −4."],
+    ["Which point is plotted by moving 7 units left and 3 units up?",["(7, 3)","(−7, 3)","(−3, 7)","(7, −3)"],1,"Left gives x = −7 and up gives y = 3."],
+    ["A student plots (2, 5) as 5 units right and 2 units up. What mistake was made?",["The coordinates were swapped","Both signs should be negative","The point should be at origin","The y-coordinate should be negative"],0,"The first coordinate is x = 2 and the second is y = 5; they were swapped."],
+    ["Which ordered pair matches 0 units horizontally and 8 units down?",["(−8, 0)","(0, 8)","(0, −8)","(8, 0)"],2,"No horizontal movement means x = 0; down 8 means y = −8."],
+    ["Which point is closer to the origin: (1, 0) or (0, 3)?",["(1, 0)","(0, 3)","Both are equally distant","Cannot tell"],0,"Their distances are 1 and 3 units respectively, so (1, 0) is closer."],
+    ["If point A is (−4, 2), what happens if it is moved 3 units right without changing height?",["It becomes (−1, 2)","It becomes (−7, 2)","It becomes (−4, 5)","It becomes (−4, −1)"],0,"Adding 3 to the x-coordinate gives −4 + 3 = −1; y remains 2."],
+    ["If point B is (2, −3), what are its coordinates after moving 5 units up?",["(7, −3)","(2, 2)","(−3, 2)","(2, −8)"],1,"Moving up 5 adds 5 to y: −3 + 5 = 2."],
+    ["Which point is on the same horizontal line as (−2, 4)?",["(5, 4)","(−2, 5)","(4, −2)","(5, 3)"],0,"Points on the same horizontal line have the same y-coordinate, 4."]
+  ],
   "Coordinate plane": [
     ["What is the point where the x-axis and y-axis intersect called?",["Origin","Quadrant","Vertex","Scale"],0,"The axes meet at the origin, whose coordinates are (0, 0)."],
     ["Which coordinate represents the horizontal position of a point?",["x-coordinate","y-coordinate","origin","quadrant"],0,"The first coordinate, x, gives the horizontal position."],

@@ -180,7 +180,7 @@ window.SKILLUP_MATH_PATH=[
         "Solving equations",
         "Equations with variables on both sides",
         "Equations reducible to linear form",
-        "Word problems"
+        "Word problems using linear equations"
       ],
       "Understanding Quadrilaterals": [
         "Polygons and angle sums",

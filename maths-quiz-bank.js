@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Cylinder basics": [
+    ["A cylinder has radius 7 cm and height 10 cm. Find its volume using π = 22/7.",["154 cm³","440 cm³","1540 cm³","3080 cm³"],2,"Volume = πr²h = (22/7) × 7² × 10 = 1540 cm³."],
+    ["Find the curved surface area of a cylinder with radius 7 cm and height 8 cm, using π = 22/7.",["176 cm²","352 cm²","616 cm²","1232 cm²"],1,"CSA = 2πrh = 2 × (22/7) × 7 × 8 = 352 cm²."],
+    ["Find the total surface area of a closed cylinder of radius 3 cm and height 5 cm.",["15π cm²","30π cm²","48π cm²","60π cm²"],2,"TSA = 2πr(r + h) = 2π × 3 × 8 = 48π cm²."],
+    ["A cylinder has diameter 14 cm and height 6 cm. Find its volume using π = 22/7.",["462 cm³","924 cm³","1848 cm³","308 cm³"],1,"Radius = 7 cm; volume = (22/7) × 7² × 6 = 924 cm³."],
+    ["The radius of a cylinder is 4 cm and its height is 9 cm. Find its volume.",["36π cm³","72π cm³","144π cm³","288π cm³"],2,"Volume = π × 4² × 9 = 144π cm³."],
+    ["Find the curved surface area of a cylinder with radius 5 cm and height 12 cm.",["60π cm²","120π cm²","170π cm²","240π cm²"],1,"CSA = 2πrh = 2π × 5 × 12 = 120π cm²."],
+    ["The volume of a cylinder is 1540 cm³, radius 7 cm. Using π = 22/7, find its height.",["5 cm","10 cm","15 cm","20 cm"],1,"h = V/(πr²) = 1540 ÷ 154 = 10 cm."],
+    ["A cylinder has radius 2 cm and height 7 cm. Find its total surface area.",["18π cm²","28π cm²","36π cm²","44π cm²"],2,"TSA = 2πr(r + h) = 2π × 2 × 9 = 36π cm²."],
+    ["Which formula gives the volume of a cylinder?",["2πrh","πr²h","πrh²","2πr(r + h)"],1,"Volume equals area of circular base times height: πr²h."],
+    ["Which formula gives the curved surface area of a cylinder?",["πr²h","πr²","2πrh","2πr(r + h)"],2,"Curved surface area is circumference of base × height = 2πrh."],
+    ["If the radius of a cylinder doubles while height stays the same, its volume becomes:",["2 times","3 times","4 times","8 times"],2,"Volume depends on r²; doubling radius multiplies volume by 2² = 4."],
+    ["If the height of a cylinder doubles while radius stays the same, its volume becomes:",["2 times","4 times","6 times","8 times"],0,"Volume is directly proportional to height, so it doubles."],
+    ["A cylinder has base radius 7 cm and height 3 cm. Find its curved surface area using π = 22/7.",["66 cm²","132 cm²","154 cm²","462 cm²"],1,"CSA = 2 × (22/7) × 7 × 3 = 132 cm²."],
+    ["A cylinder's radius is 3 cm and height is 4 cm. Find its volume.",["12π cm³","24π cm³","36π cm³","48π cm³"],2,"V = π × 3² × 4 = 36π cm³."],
+    ["A closed cylinder has radius 7 cm and height 10 cm. Find its total surface area using π = 22/7.",["440 cm²","616 cm²","748 cm²","880 cm²"],2,"TSA = 2πr(r + h) = 2 × (22/7) × 7 × 17 = 748 cm²."],
+    ["A cylindrical can has radius 4 cm and height 10 cm. What is its capacity?",["40π cm³","80π cm³","160π cm³","200π cm³"],2,"Capacity is volume = π × 4² × 10 = 160π cm³."],
+    ["A cylinder has volume 450π cm³ and radius 5 cm. Find its height.",["9 cm","18 cm","45 cm","90 cm"],1,"450π = π × 25 × h, so h = 18 cm."],
+    ["Find the volume of a cylinder with diameter 10 cm and height 8 cm.",["100π cm³","200π cm³","400π cm³","800π cm³"],1,"Radius = 5 cm; volume = π × 25 × 8 = 200π cm³."],
+    ["A cylinder has radius 7 cm and height 14 cm. Find the volume using π = 22/7.",["1078 cm³","2156 cm³","4312 cm³","616 cm³"],1,"V = (22/7) × 49 × 14 = 2156 cm³."],
+    ["What is the area of the circular base of a cylinder of radius 6 cm?",["6π cm²","12π cm²","36π cm²","72π cm²"],2,"Base area = πr² = 36π cm²."],
+    ["The circumference of a cylinder's base is 44 cm and its height is 5 cm. Find its curved surface area.",["110 cm²","220 cm²","440 cm²","55 cm²"],1,"CSA = circumference × height = 44 × 5 = 220 cm²."],
+    ["If a cylinder's radius is 3 cm and its volume is 72π cm³, what is its height?",["4 cm","6 cm","8 cm","12 cm"],2,"72π = π × 9 × h, so h = 8 cm."],
+    ["A cylinder has radius 2.5 cm and height 4 cm. Find its volume.",["10π cm³","20π cm³","25π cm³","40π cm³"],2,"V = π × (2.5)² × 4 = 25π cm³."],
+    ["The radius of a cylinder is 7 cm and its height is 20 cm. Find the curved surface area using π = 22/7.",["440 cm²","770 cm²","880 cm²","1540 cm²"],2,"CSA = 2 × (22/7) × 7 × 20 = 880 cm²."],
+    ["A cylinder has radius 4 cm and height 6 cm. Find its total surface area.",["24π cm²","48π cm²","80π cm²","96π cm²"],2,"TSA = 2πr(r + h) = 2π × 4 × 10 = 80π cm²."],
+    ["A cylinder's volume is 616 cm³ and its height is 4 cm. Using π = 22/7, find its radius.",["3.5 cm","7 cm","14 cm","21 cm"],1,"616 = (22/7)r² × 4, so r² = 49 and r = 7 cm."],
+    ["A cylinder has radius 10 cm and height 2 cm. Find its volume.",["20π cm³","100π cm³","200π cm³","400π cm³"],2,"V = π × 10² × 2 = 200π cm³."],
+    ["The radius of a cylinder is tripled and its height remains the same. Its volume becomes:",["3 times","6 times","9 times","27 times"],2,"Volume depends on the square of the radius, so 3² = 9 times."],
+    ["A cylindrical container has diameter 20 cm and height 15 cm. Find its volume.",["500π cm³","1000π cm³","1500π cm³","3000π cm³"],2,"Radius = 10 cm; volume = π × 100 × 15 = 1500π cm³."],
+    ["A cylinder has radius 7 cm and height 5 cm. Find its total surface area using π = 22/7.",["220 cm²","440 cm²","528 cm²","616 cm²"],2,"TSA = 2 × (22/7) × 7 × (7 + 5) = 528 cm²."]
+  ],
   "Volume of cube and cuboid": [
     ["Find the volume of a cube with side 4 cm.",["16 cm³","48 cm³","64 cm³","96 cm³"],2,"Volume = side³ = 4³ = 64 cm³."],
     ["A cuboid measures 8 cm × 5 cm × 3 cm. Find its volume.",["40 cm³","120 cm³","128 cm³","240 cm³"],1,"Volume = length × breadth × height = 8 × 5 × 3 = 120 cm³."],

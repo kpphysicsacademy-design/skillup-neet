@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "HCF and LCM": [
+    ["What is the HCF of 12 and 18?",["2","3","6","9"],2,"The common factors are 1, 2, 3, and 6; the greatest is 6."],
+    ["What is the LCM of 4 and 6?",["8","10","12","24"],2,"Multiples meet first at 12: 4, 8, 12 and 6, 12."],
+    ["Find the HCF of 16 and 24.",["4","6","8","12"],2,"The greatest number dividing both 16 and 24 is 8."],
+    ["Find the LCM of 5 and 8.",["13","20","40","80"],2,"Since 5 and 8 are coprime, LCM = 5 × 8 = 40."],
+    ["What is the HCF of 21 and 35?",["5","7","14","21"],1,"Both numbers are divisible by 7, and no larger common factor exists."],
+    ["What is the LCM of 3 and 9?",["3","9","18","27"],1,"9 is already a multiple of both 3 and 9."],
+    ["Find the HCF of 18, 24, and 30.",["3","6","9","12"],1,"6 is the greatest positive integer dividing all three numbers."],
+    ["Find the LCM of 2, 3, and 4.",["6","8","12","24"],2,"12 is the smallest positive number divisible by 2, 3, and 4."],
+    ["If two numbers are coprime, their HCF is?",["0","1","Their sum","Their product"],1,"Coprime numbers have no common positive factor except 1."],
+    ["What is the HCF of 25 and 40?",["5","8","10","15"],0,"The greatest common factor of 25 and 40 is 5."],
+    ["What is the LCM of 7 and 10?",["17","35","70","140"],2,"7 and 10 are coprime, so their LCM is 7 × 10 = 70."],
+    ["Find the HCF of 36 and 48.",["6","8","12","16"],2,"12 is the greatest number that divides both 36 and 48."],
+    ["Find the LCM of 6 and 15.",["15","30","45","60"],1,"The smallest common multiple of 6 and 15 is 30."],
+    ["What is the HCF of 45 and 60?",["5","10","15","30"],2,"The greatest common divisor of 45 and 60 is 15."],
+    ["What is the LCM of 8 and 12?",["16","20","24","48"],2,"24 is divisible by both 8 and 12 and is the smallest such number."],
+    ["Two bells ring every 6 minutes and 8 minutes. After how many minutes will they ring together again?",["12","14","24","48"],2,"The bells coincide after LCM(6, 8) = 24 minutes."],
+    ["Ribbons of 24 cm and 36 cm are cut into equal longest pieces without waste. What is each piece's length?",["6 cm","8 cm","12 cm","18 cm"],2,"The greatest common divisor of 24 and 36 is 12 cm."],
+    ["Find the HCF of 54 and 72.",["6","9","18","27"],2,"18 divides both 54 and 72 and is their greatest common factor."],
+    ["Find the LCM of 9 and 12.",["18","24","36","108"],2,"The smallest number divisible by 9 and 12 is 36."],
+    ["What is the HCF of 14 and 25?",["1","2","5","7"],0,"14 and 25 share no positive factor other than 1."],
+    ["What is the LCM of 4 and 10?",["20","30","40","50"],0,"20 is the smallest number divisible by both 4 and 10."],
+    ["Find the HCF of 32 and 40.",["4","8","16","20"],1,"8 is the greatest common factor of 32 and 40."],
+    ["Find the LCM of 14 and 21.",["28","35","42","84"],2,"14 = 2 × 7 and 21 = 3 × 7, so LCM = 2 × 3 × 7 = 42."],
+    ["For positive integers a and b, HCF(a,b) × LCM(a,b) equals?",["a + b","a × b","a − b","a ÷ b"],1,"For two positive integers, their HCF multiplied by their LCM equals their product."],
+    ["The HCF of two numbers is 4 and their LCM is 60. Their product is?",["15","64","120","240"],3,"Product = HCF × LCM = 4 × 60 = 240."],
+    ["Find the LCM of 16 and 20.",["40","60","80","160"],2,"16 = 2⁴ and 20 = 2² × 5, so LCM = 2⁴ × 5 = 80."],
+    ["What is the HCF of 63 and 81?",["3","6","9","27"],2,"63 = 7 × 9 and 81 = 9 × 9; the HCF is 9."],
+    ["What is the LCM of 5, 6, and 8?",["60","90","120","240"],2,"LCM(5, 6, 8) = 2³ × 3 × 5 = 120."],
+    ["Two lights flash every 9 seconds and 12 seconds. When will they flash together again?",["18 seconds","21 seconds","36 seconds","108 seconds"],2,"Their next simultaneous flash occurs after LCM(9, 12) = 36 seconds."],
+    ["Which method is useful for finding HCF and LCM of larger numbers?",["Prime factorisation","Adding the numbers","Subtracting digits only","Counting backwards from 1"],0,"Prime factorisation helps identify common prime factors for HCF and highest powers for LCM."]
+  ],
   "Prime factorisation": [
     ["What is the prime factorisation of 12?",["2 × 6","2² × 3","3 × 4","2 × 2 × 2"],1,"12 = 2 × 2 × 3 = 2² × 3."],
     ["What is the prime factorisation of 18?",["2 × 3²","2² × 3","3 × 6","2 × 9"],0,"18 = 2 × 9 = 2 × 3²."],

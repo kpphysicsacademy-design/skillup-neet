@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Factorisation basics": [
+    ["Factorise 6x + 12.",["6(x + 2)","6(x − 2)","3(2x + 12)","6x(1 + 2)"],0,"The greatest common factor is 6: 6x + 12 = 6(x + 2)."],
+    ["Factorise 5a − 15.",["5(a − 3)","5(a + 3)","a(5 − 15)","15(a − 5)"],0,"Take out the common factor 5."],
+    ["Factorise 4x² + 8x.",["4x(x + 2)","4x(x − 2)","2x(2x + 8)","4(x² + 8x)"],0,"Both terms share the factor 4x."],
+    ["Factorise 3ab + 6a.",["3a(b + 2)","3b(a + 2)","6a(b + 3)","3a(b − 2)"],0,"The common factor is 3a."],
+    ["Factorise x² + 5x.",["x(x + 5)","x²(x + 5)","5x(x + 1)","x(x − 5)"],0,"Both terms contain x, so x² + 5x = x(x + 5)."],
+    ["Factorise 7m² − 14m.",["7m(m − 2)","7(m² − 2m)","14m(m − 1)","7m(m + 2)"],0,"Take out the common factor 7m."],
+    ["Factorise 9p + 12.",["3(3p + 4)","3(9p + 12)","9(p + 12)","12(9p + 1)"],0,"The greatest common factor of 9 and 12 is 3."],
+    ["Factorise 10x²y + 15xy².",["5xy(2x + 3y)","5xy(2x − 3y)","5x(2xy + 3y²)","10xy(x + 15y)"],0,"The common factor is 5xy."],
+    ["Factorise x² − 9.",["(x − 3)(x + 3)","(x − 9)(x + 1)","(x − 3)²","(x + 3)²"],0,"Use the difference-of-squares identity x² − 3² = (x − 3)(x + 3)."],
+    ["Factorise a² + 6a + 9.",["(a + 3)²","(a − 3)²","(a + 9)(a + 1)","a(a + 6) + 9"],0,"This is a² + 2·a·3 + 3² = (a + 3)²."],
+    ["Factorise x² − 10x + 25.",["(x − 5)²","(x + 5)²","(x − 25)(x + 1)","x(x − 10) + 25"],0,"This is x² − 2·x·5 + 5² = (x − 5)²."],
+    ["Factorise 4y² − 25.",["(2y − 5)(2y + 5)","(4y − 5)(y + 5)","(2y − 5)²","(2y + 5)²"],0,"Difference of squares: (2y)² − 5²."],
+    ["Factorise x² + 7x + 12.",["(x + 3)(x + 4)","(x + 2)(x + 6)","(x − 3)(x − 4)","(x + 12)(x + 1)"],0,"Find two numbers with sum 7 and product 12: 3 and 4."],
+    ["Factorise x² − x − 12.",["(x − 4)(x + 3)","(x − 3)(x + 4)","(x − 6)(x + 2)","(x + 12)(x − 1)"],0,"The numbers −4 and 3 have product −12 and sum −1."],
+    ["Factorise x² + 2x − 15.",["(x + 5)(x − 3)","(x − 5)(x + 3)","(x + 15)(x − 1)","(x + 3)(x − 5)"],0,"The numbers 5 and −3 add to 2 and multiply to −15."],
+    ["Factorise 2x² + 6x.",["2x(x + 3)","2x(x + 6)","x(2x + 6x)","6x(x + 2)"],0,"The common factor is 2x."],
+    ["Factorise 12a²b − 8ab².",["4ab(3a − 2b)","4ab(3a + 2b)","2ab(6a − 8b)","4a(3ab − 2b²)"],0,"Take out the common factor 4ab."],
+    ["Factorise 3x² − 12.",["3(x − 2)(x + 2)","3(x − 4)(x + 1)","(3x − 12)(x + 1)","3(x − 2)²"],0,"First take out 3, then factor x² − 4 as (x − 2)(x + 2)."],
+    ["Factorise 2a² + 7a + 3.",["(2a + 1)(a + 3)","(2a + 3)(a + 1)","(a + 7)(2a + 3)","(2a − 1)(a − 3)"],0,"(2a + 1)(a + 3) expands to 2a² + 7a + 3."],
+    ["Factorise 6x² + 11x + 3.",["(3x + 1)(2x + 3)","(3x + 3)(2x + 1)","(6x + 1)(x + 3)","(2x + 1)(3x + 3)"],0,"Multiplying (3x + 1)(2x + 3) gives 6x² + 11x + 3."],
+    ["Which is a factor of x² − 16?",["x − 4","x − 8","x + 16","x² − 4"],0,"x² − 16 = (x − 4)(x + 4), so x − 4 is a factor."],
+    ["Factorise 15m²n + 20mn².",["5mn(3m + 4n)","5mn(3m − 4n)","5m(3mn + 4n²)","15mn(m + 20n)"],0,"The greatest common factor is 5mn."],
+    ["Factorise 8x³ − 12x².",["4x²(2x − 3)","4x(2x² − 3)","2x²(4x − 12)","4x²(2x + 3)"],0,"The common factor is 4x²."],
+    ["Factorise x² + 11x + 30.",["(x + 5)(x + 6)","(x + 3)(x + 10)","(x − 5)(x − 6)","(x + 15)(x + 2)"],0,"5 and 6 add to 11 and multiply to 30."],
+    ["Factorise x² − 7x + 12.",["(x − 3)(x − 4)","(x + 3)(x + 4)","(x − 2)(x − 6)","(x − 12)(x + 1)"],0,"−3 and −4 add to −7 and multiply to 12."],
+    ["Factorise 5x² − 20.",["5(x − 2)(x + 2)","5(x − 4)(x + 1)","(5x − 20)(x + 1)","5(x − 2)²"],0,"Take out 5, then use x² − 4 = (x − 2)(x + 2)."],
+    ["Factorise 4a² + 12a + 9.",["(2a + 3)²","(2a − 3)²","(4a + 3)(a + 3)","(2a + 9)(2a + 1)"],0,"This is (2a)² + 2(2a)(3) + 3²."],
+    ["Factorise 9x² − 24x + 16.",["(3x − 4)²","(3x + 4)²","(9x − 4)(x − 4)","(3x − 8)²"],0,"9x² − 24x + 16 = (3x)² − 2(3x)(4) + 4²."],
+    ["Factorise 2x² − 8x + 6.",["2(x − 1)(x − 3)","2(x + 1)(x + 3)","(2x − 2)(x − 3)","2(x − 2)(x − 3)"],0,"Take out 2: 2(x² − 4x + 3) = 2(x − 1)(x − 3)."],
+    ["If x² − 5x + 6 is factorised, which pair is correct?",["(x − 2)(x − 3)","(x + 2)(x + 3)","(x − 1)(x − 6)","(x + 1)(x − 6)"],0,"−2 and −3 add to −5 and multiply to 6, so the factors are (x − 2)(x − 3)."]
+  ],
   "Standard identities": [
     ["Which identity is correct for (a + b)²?",["a² + b²","a² + 2ab + b²","a² − 2ab + b²","a² − b²"],1,"Squaring a sum gives a² + 2ab + b²."],
     ["Expand (x − y)².",["x² − y²","x² + 2xy + y²","x² − 2xy + y²","x² − xy + y²"],2,"(x − y)² = x² − 2xy + y²."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Equations reducible to linear form": [
+    ["Solve: 2(x + 3) = 18.",["3","5","6","9"],2,"Divide both sides by 2: x + 3 = 9, so x = 6."],
+    ["Solve: 3(x − 2) = 15.",["3","5","7","9"],2,"Divide by 3: x − 2 = 5, so x = 7."],
+    ["Solve: (x + 4)/3 = 5.",["7","11","15","19"],1,"Multiply by 3: x + 4 = 15, so x = 11."],
+    ["Solve: (2x − 1)/5 = 3.",["5","7","8","10"],2,"Multiply by 5: 2x − 1 = 15; 2x = 16, so x = 8."],
+    ["Solve: 4(x + 1) − 3 = 13.",["2","3","4","5"],1,"Simplify to 4x + 1 = 13; 4x = 12, so x = 3."],
+    ["Solve: 2(3x − 4) = 16.",["2","3","4","5"],2,"Divide by 2: 3x − 4 = 8; 3x = 12, so x = 4."],
+    ["Solve: 5(x − 2) + 3 = 18.",["3","4","5","6"],2,"Simplify: 5x − 7 = 18; 5x = 25, so x = 5."],
+    ["Solve: (x − 7)/4 = 3.",["5","12","19","28"],2,"Multiply by 4 and add 7: x = 19."],
+    ["Solve: 3(x + 5) = 2x + 20.",["3","5","7","10"],1,"Expand: 3x + 15 = 2x + 20, so x = 5."],
+    ["Solve: 2(x − 4) + 6 = 12.",["5","6","7","8"],2,"Simplify: 2x − 2 = 12; 2x = 14, so x = 7."],
+    ["Solve: (3x + 6)/3 = 8.",["4","6","8","10"],1,"Simplify to x + 2 = 8, so x = 6."],
+    ["Solve: 7 − 2(x − 1) = 1.",["2","3","4","5"],2,"7 − 2x + 2 = 1 gives 9 − 2x = 1, so x = 4."],
+    ["Solve: (x + 2)/2 + 3 = 8.",["4","6","8","10"],2,"Subtract 3: (x + 2)/2 = 5; x + 2 = 10, so x = 8."],
+    ["Solve: 4x/3 = 12.",["6","8","9","16"],2,"Multiply by 3/4: x = 9."],
+    ["Solve: 2(x + 1) + 3(x − 2) = 21.",["2","3","4","5"],3,"Expand: 2x + 2 + 3x − 6 = 21; 5x − 4 = 21, so x = 5."],
+    ["Solve: (x − 1)/3 + 2 = 5.",["6","8","10","12"],2,"Subtract 2: (x − 1)/3 = 3; x − 1 = 9, so x = 10."],
+    ["Solve: 5 − (x − 3) = 2.",["4","5","6","7"],2,"5 − x + 3 = 2 gives 8 − x = 2, so x = 6."],
+    ["Solve: 3(2x + 1) − 4 = 17.",["2","3","4","5"],1,"Expand: 6x − 1 = 17; 6x = 18, so x = 3."],
+    ["Solve: (2x + 8)/4 = 6.",["4","6","8","10"],2,"Multiply by 4: 2x + 8 = 24; 2x = 16, so x = 8."],
+    ["Solve: 2x/5 + 4 = 10.",["10","12","15","20"],2,"Subtract 4: 2x/5 = 6; multiply by 5/2: x = 15."],
+    ["Solve: 6 − (2x + 4)/2 = 1.",["1","2","3","4"],2,"Simplify: 6 − (x + 2) = 1; 4 − x = 1, so x = 3."],
+    ["Solve: 2(2x − 3) + 4 = 18.",["3","4","5","6"],2,"Expand: 4x − 6 + 4 = 18; 4x − 2 = 18, so x = 5."],
+    ["Solve: (x + 1)/4 = (x − 5)/2.",["−11","11","−7","7"],1,"Multiply by 4: x + 1 = 2x − 10, so x = 11."],
+    ["Solve: 3(x − 2) + 2 = 2(x + 4).",["8","10","12","14"],2,"Expand: 3x − 6 + 2 = 2x + 8, so x = 12."],
+    ["Solve: (x − 2)/5 = (x + 4)/7.",["−17","17","−3","3"],1,"Cross-multiply: 7x − 14 = 5x + 20, so x = 17."],
+    ["Solve: 2(x + 4) − (x − 1) = 14.",["3","4","5","6"],2,"Expand: 2x + 8 − x + 1 = 14; x = 5."],
+    ["Solve: (3x − 2)/2 = 5.",["2","3","4","5"],2,"Multiply by 2: 3x − 2 = 10; 3x = 12, so x = 4."],
+    ["Solve: 5 − (2x − 1) = 0.",["2","3","4","5"],1,"5 − 2x + 1 = 0; 2x = 6, so x = 3."],
+    ["Solve: (x + 3)/2 + (x − 1)/2 = 7.",["4","5","6","7"],2,"Combine numerators: (2x + 2)/2 = x + 1 = 7, so x = 6."],
+    ["A number is doubled, then 7 is added; the result is 25. Find the number.",["7","8","9","10"],2,"2x + 7 = 25; 2x = 18, so x = 9."]
+  ],
   "Equations with variables on both sides": [
     ["Solve: 3x + 2 = x + 10.",["2","3","4","6"],2,"Subtract x and 2: 2x = 8, so x = 4."],
     ["Solve: 5x − 7 = 2x + 8.",["3","4","5","6"],2,"Subtract 2x and add 7: 3x = 15, so x = 5."],

@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Reading line graphs": [
+    ["What does a line graph commonly show?",["Changes over time","Parts of a whole","Only categories","Geometric angles"],0,"Line graphs often show how a measured quantity changes over time."],
+    ["Which axis usually represents time?",["Vertical","Horizontal","Neither","Both always"],1,"Time is commonly placed on the horizontal axis."],
+    ["A rising line usually indicates what?",["A decrease","No change","An increase","Missing data"],2,"A rising segment indicates increasing values."],
+    ["A falling line from 15 to 9 shows a decrease of?",["4","5","6","9"],2,"15 − 9 = 6."],
+    ["A horizontal line segment means the value is?",["Increasing","Constant","Decreasing","Negative"],1,"A horizontal segment represents no change."],
+    ["What should you read before interpreting a graph?",["Title, labels and scale","Colour only","Page number","Font size"],0,"These features explain the data and how to read values."],
+    ["The scale marks 0, 10, 20, 30. What is the interval?",["5","10","20","30"],1,"Each labelled step increases by 10."],
+    ["Temperature rises from 18°C to 24°C. What is the rise?",["4°C","5°C","6°C","42°C"],2,"24 − 18 = 6°C."],
+    ["Visitors are 20 on Monday and 20 on Tuesday. What changed?",["Visitors rose","Visitors fell","Nothing; values are equal","Visitors doubled"],2,"Both values are 20, so there is no change."],
+    ["Values are 3, 6, 9, 12. What is the increase each step?",["2","3","6","9"],1,"Each value is 3 more than the previous one."],
+    ["At day 4 the graph shows 16 km. What does this mean?",["Day 16 had 4 km","At day 4, distance was 16 km","Distance changed by 4 km","There were 16 days"],1,"Read the horizontal coordinate as day 4 and the vertical value as 16 km."],
+    ["A tank level falls from 12 L to 7 L. How much did it fall?",["3 L","5 L","7 L","19 L"],1,"12 − 7 = 5 L."],
+    ["The highest plotted point shows the?",["Minimum","Maximum","Starting value always","Average always"],1,"The highest point represents the maximum recorded value."],
+    ["The lowest plotted point shows the?",["Maximum","Minimum","Total always","Scale"],1,"The lowest point represents the minimum recorded value."],
+    ["A plant grows from 4 cm to 11 cm. Growth is?",["5 cm","6 cm","7 cm","15 cm"],2,"11 − 4 = 7 cm."],
+    ["Rainfall is 2 mm one day and 8 mm next day. Difference?",["4 mm","6 mm","8 mm","10 mm"],1,"8 − 2 = 6 mm."],
+    ["If x-axis is months, a point above June gives the value for?",["May","June","July","All months"],1,"The point aligns with June on the horizontal axis."],
+    ["A graph shows sales 5, 8, 11. What is the trend?",["Decreasing","Increasing by 3 each step","Constant","Randomly zero"],1,"The values rise by 3 at each step."],
+    ["What does a flat distance-time line often mean?",["Distance changing","No change in distance during that interval","Speed increasing always","Distance is negative"],1,"A flat segment means recorded distance stayed constant."],
+    ["If one grid square equals 5 units, three squares represent?",["8","10","15","20"],2,"3 × 5 = 15 units."],
+    ["Values are 14, 12, 10, 8. What is the next value if the pattern continues?",["4","5","6","7"],2,"The values decrease by 2; 8 − 2 = 6."],
+    ["A value rises from 10 to 25. Increase?",["10","15","25","35"],1,"25 − 10 = 15."],
+    ["A value drops from 40 to 30. Percentage decrease?",["10%","20%","25%","30%"],2,"Decrease is 10; 10/40 × 100 = 25%."],
+    ["A graph has points (1,2), (2,4), (3,6). When x rises by 1, y rises by?",["1","2","3","4"],1,"The y-values increase by 2 each time."],
+    ["Which axis label tells the units of measurement?",["The graph title only","The axis label","The plotted line colour","The legend position"],1,"Axis labels often include the quantity and units."],
+    ["A line rises then falls. What does this show?",["The quantity first increased, then decreased","The quantity was constant","The graph has no data","The axes switched"],0,"The line direction indicates an increase followed by a decrease."],
+    ["Production is 8, 10, 7, 12 over four days. Lowest is on?",["Day 1","Day 2","Day 3","Day 4"],2,"The minimum value is 7, the third entry."],
+    ["If a line graph shows 0 at 9 am and 12 at noon, the quantity increased by?",["3","9","12","21"],2,"The change is 12 − 0 = 12 units."],
+    ["Why use equal intervals on a graph scale?",["To make comparisons clear and consistent","To hide the data","To change the values","To remove labels"],0,"Consistent intervals make visual comparisons reliable."],
+    ["A point lies above Tuesday at value 6. What is the value on Tuesday?",["2","6","Tuesday","Cannot be read"],1,"The point's vertical coordinate gives a value of 6 for Tuesday."]
+  ],
   "Plotting points": [
     ["To plot the point (2, 3), how many units do you move from the origin?",["2 right, 3 up","3 right, 2 up","2 left, 3 up","2 right, 3 down"],0,"The first coordinate gives horizontal movement; the second gives vertical movement."],
     ["Which point is 4 units left and 1 unit up from the origin?",["(4, 1)","(−4, 1)","(−1, 4)","(4, −1)"],1,"Left is negative x and up is positive y."],

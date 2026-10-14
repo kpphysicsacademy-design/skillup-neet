@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Pie charts": [
+    ["A pie chart represents the whole data set as:",["90°","180°","270°","360°"],3,"A complete circle measures 360° and represents the whole data set."],
+    ["What fraction of a pie chart is represented by a 90° sector?",["1/2","1/3","1/4","3/4"],2,"90°÷360°=1/4."],
+    ["What percentage of a circle is a 180° sector?",["25%","40%","50%","75%"],2,"180°÷360°×100%=50%."],
+    ["A sector is 60° in a pie chart. What fraction of the whole does it represent?",["1/3","1/6","1/4","1/12"],1,"60°÷360°=1/6."],
+    ["A class has 40 students. If 90° of the pie chart represents students who walk to school, how many walk?",["5","10","15","20"],1,"90° is one-fourth of the circle, so 40÷4=10 students."],
+    ["In a pie chart for 200 students, the sports sector is 72°. How many students does it represent?",["20","30","40","50"],2,"72°÷360°×200=40 students."],
+    ["A 120° sector represents how much of the total?",["1/6","1/4","1/3","1/2"],2,"120°÷360°=1/3."],
+    ["A pie chart shows 25% of a budget for books. What is the central angle?",["45°","60°","90°","120°"],2,"25% of 360° is 90°."],
+    ["A category represents 10% of a pie chart. What angle does it have?",["10°","18°","36°","72°"],2,"10%×360°=36°."],
+    ["A 150° sector represents how many percent of the whole?",["25%","30%","41⅔%","50%"],2,"150°÷360°×100%=41⅔%."],
+    ["The total number of votes is 300. A candidate's sector is 120°. How many votes did the candidate receive?",["60","90","100","120"],2,"120°÷360°×300=100 votes."],
+    ["A pie chart shows 80° for one category. What angle remains for all other categories?",["180°","240°","280°","320°"],2,"360°−80°=280°."],
+    ["Three sectors measure 100°, 90° and 70°. What is the fourth sector angle?",["80°","90°","100°","110°"],2,"360°−(100°+90°+70°)=100°."],
+    ["A pie chart divides a total of 72 books into equal sectors of 45° each. How many sectors are there?",["6","8","9","10"],1,"360°÷45°=8 sectors."],
+    ["If 30 students correspond to a 60° sector, how many students are represented by the whole pie chart?",["90","120","180","240"],2,"60° is one-sixth of the circle, so total=30×6=180."],
+    ["A 40° sector represents 20 people. How many people are represented by 360°?",["90","120","160","180"],3,"360°÷40°=9 equal sectors; total=20×9=180."],
+    ["In a pie chart, 45° represents students who choose art. If there are 240 students, how many choose art?",["20","30","40","45"],1,"45°÷360°×240=30 students."],
+    ["A pie chart's 25% sector represents 18 items. How many items are there altogether?",["36","54","72","90"],2,"18 is one-fourth of the total, so total=18×4=72."],
+    ["A category has 15% of the data. What is its sector angle?",["36°","45°","54°","60°"],2,"15%×360°=54°."],
+    ["A 144° sector represents how much percentage?",["20%","30%","40%","45%"],2,"144°÷360°×100%=40%."],
+    ["In a pie chart of 500 people, 20% prefer tea. How many prefer tea?",["50","80","100","120"],2,"20% of 500=100 people."],
+    ["A survey of 120 students shows 30 prefer football. What is the pie-chart angle for football?",["60°","75°","90°","120°"],2,"30÷120×360°=90°."],
+    ["A category is represented by 24° in a pie chart. What percentage is this?",["4⅔%","6⅔%","8%","12%"],1,"24°÷360°×100%=6⅔%."],
+    ["A 72° sector in a pie chart represents 45 students. How many students are in the survey?",["180","200","225","240"],2,"72° is one-fifth of 360°, so total=45×5=225."],
+    ["The sectors for A and B are 80° and 110°. What is the combined percentage for A and B?",["40%","50%","52⅔%","60%"],2,"Their angle is 190°. 190°÷360°×100%=52⅔%."],
+    ["A pie chart shows 35% for transport. What percentage is left for all other categories?",["35%","55%","65%","75%"],2,"100%−35%=65%."],
+    ["A 90° sector represents ₹600 of a monthly budget. What is the total budget?",["₹1,200","₹1,800","₹2,400","₹3,600"],2,"90° is one-fourth of the circle, so total=₹600×4=₹2,400."],
+    ["In a pie chart, 40% of 250 pupils choose cricket. How many pupils choose cricket?",["80","90","100","125"],2,"40% of 250=100 pupils."],
+    ["A sector is 30° in a pie chart representing 720 units. How many units does the sector represent?",["30","45","60","90"],2,"30°÷360°×720=60 units."],
+    ["The angles for four categories are 75°, 85°, 110° and x°. Find x.",["80°","90°","100°","110°"],1,"x=360°−(75°+85°+110°)=90°."]
+  ],
   "Grouped data": [
     ["What is grouped data?",["Data arranged into classes or intervals","Data written in random order","Only a single observation","Data shown only as a picture"],0,"Grouped data organises observations into class intervals with corresponding frequencies."],
     ["In a frequency table, what does frequency tell us?",["The class width","How many observations fall in a category or class","The largest observation only","The number of classes plus one"],1,"Frequency is the number of observations in a category or class."],

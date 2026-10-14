@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Tax and bills": [
+    ["A product costs ₹1,000 before 5% GST. What is the GST amount?",["₹5","₹50","₹100","₹105"],1,"GST = 5% of ₹1,000 = ₹50."],
+    ["A bill is ₹800 before 18% GST. How much GST is charged?",["₹18","₹80","₹144","₹944"],2,"18% of ₹800 = ₹144."],
+    ["An item costs ₹500 and tax is 12%. What is the total bill?",["₹512","₹550","₹560","₹620"],2,"Tax = ₹60; total = ₹500 + ₹60 = ₹560."],
+    ["A restaurant bill is ₹1,200 before 5% tax. What is the total including tax?",["₹1,205","₹1,250","₹1,260","₹1,300"],2,"5% of ₹1,200 = ₹60; total = ₹1,260."],
+    ["A product's taxable price is ₹2,000 and GST is 18%. What is the final price?",["₹2,018","₹2,180","₹2,360","₹3,600"],2,"GST = ₹360; final price = ₹2,360."],
+    ["A bill of ₹1,500 includes 10% tax added to the original price. What is the tax amount?",["₹100","₹136.36 approximately","₹150","₹165"],1,"Inclusive bill = 110% of base; base = 1500/1.1 ≈ ₹1,363.64, tax ≈ ₹136.36."],
+    ["A taxable item costs ₹750 and the tax rate is 8%. Find the tax.",["₹8","₹60","₹75","₹810"],1,"8% of ₹750 = ₹60."],
+    ["The price before tax is ₹400. Tax is 2.5%. Find the total.",["₹402.50","₹410","₹425","₹500"],1,"2.5% of ₹400 = ₹10; total = ₹410."],
+    ["A bill has items costing ₹250 and ₹350 before tax. If tax is 10%, what is the total?",["₹600","₹610","₹660","₹700"],2,"Subtotal = ₹600; 10% tax = ₹60; total = ₹660."],
+    ["A phone costs ₹12,000 before 18% GST. What is the GST amount?",["₹1,200","₹1,800","₹2,160","₹14,160"],2,"18% of ₹12,000 = ₹2,160."],
+    ["A book costs ₹200 and has 0% tax. What is the bill total?",["₹0","₹20","₹200","₹220"],2,"With 0% tax, the total remains ₹200."],
+    ["A purchase totals ₹1,080 after 8% tax. What was the pre-tax price?",["₹900","₹1,000","₹1,008","₹1,166.40"],1,"₹1,080 is 108% of the base price; 1,080 ÷ 1.08 = ₹1,000."],
+    ["A bill of ₹2,500 has a 6% tax. Find the tax amount.",["₹60","₹100","₹150","₹2,650"],2,"6% of ₹2,500 = ₹150."],
+    ["A customer buys goods worth ₹900 and pays ₹45 tax. What is the tax rate?",["4%","5%","6%","9%"],1,"45/900 × 100% = 5%."],
+    ["A taxable price is ₹1,600 with 12.5% tax. What is the tax amount?",["₹125","₹160","₹200","₹1,800"],2,"12.5% of ₹1,600 = ₹200."],
+    ["An electricity bill has a fixed charge of ₹100 and usage charge ₹450. If tax is 10% on both, what is the total bill?",["₹550","₹605","₹610","₹650"],1,"Subtotal = ₹550; 10% tax = ₹55; total = ₹605."],
+    ["A bill contains ₹700 taxable goods and ₹300 tax-exempt goods. Tax is 10% on taxable goods only. What is the total?",["₹1,000","₹1,030","₹1,070","₹1,100"],2,"Tax = 10% of ₹700 = ₹70; total = ₹700 + ₹300 + ₹70 = ₹1,070."],
+    ["A price is ₹5,000 before 18% GST. What is the amount payable?",["₹5,180","₹5,500","₹5,900","₹6,000"],2,"GST = ₹900; payable total = ₹5,900."],
+    ["A bill of ₹2,360 includes 18% GST. What was the pre-tax price?",["₹1,800","₹2,000","₹2,180","₹2,360"],1,"₹2,360 ÷ 1.18 = ₹2,000."],
+    ["Two items cost ₹400 and ₹600 before tax. Tax is 5%. Find the total bill.",["₹1,000","₹1,025","₹1,050","₹1,100"],2,"Subtotal = ₹1,000; tax = ₹50; total = ₹1,050."],
+    ["A water bill is ₹640 before 5% tax. What is the tax-inclusive bill?",["₹645","₹672","₹680","₹705"],1,"5% of ₹640 = ₹32; total = ₹672."],
+    ["A service charge of ₹120 is added to a ₹800 bill. Tax of 5% applies to the combined amount. What is the total?",["₹840","₹920","₹966","₹1,012"],2,"Combined amount = ₹920; 5% tax = ₹46; total = ₹966."],
+    ["A bill is ₹1,500 before 12% tax. What is the total bill?",["₹1,512","₹1,620","₹1,680","₹1,800"],2,"12% of ₹1,500 = ₹180; total = ₹1,680."],
+    ["A product costs ₹2,400 including 20% tax. What was its price before tax?",["₹1,800","₹2,000","₹2,200","₹2,880"],1,"₹2,400 ÷ 1.2 = ₹2,000."],
+    ["A family pays ₹90 tax on a taxable bill of ₹1,500. What is the tax rate?",["4%","5%","6%","9%"],2,"90/1,500 × 100% = 6%."],
+    ["A taxable item costs ₹3,500. If tax is 7%, what is the total?",["₹3,507","₹3,645","₹3,745","₹3,850"],2,"7% of ₹3,500 = ₹245; total = ₹3,745."],
+    ["An invoice lists goods ₹1,200, delivery ₹100, and tax 10% on the combined amount. What is the total?",["₹1,300","₹1,330","₹1,430","₹1,420"],2,"Subtotal = ₹1,300; tax = ₹130; total = ₹1,430."],
+    ["A bill of ₹840 includes 5% tax. What is the pre-tax amount?",["₹800","₹820","₹798","₹882"],0,"₹840 ÷ 1.05 = ₹800."],
+    ["A purchase is ₹600 before tax. Tax is 5% and a ₹20 fee is added after tax. What is the final amount?",["₹620","₹630","₹650","₹650? no"],2,"Tax = ₹30; ₹600 + ₹30 + ₹20 = ₹650."],
+    ["A bill totals ₹1,155 after 10% tax. What was the amount before tax?",["₹1,000","₹1,050","₹1,100","₹1,155"],1,"₹1,155 ÷ 1.1 = ₹1,050."]
+  ],
   "Profit loss and discount": [
     ["An article bought for ₹500 is sold for ₹600. What is the profit?",["₹50","₹100","₹150","₹1,100"],1,"Profit = selling price − cost price = ₹600 − ₹500 = ₹100."],
     ["An item costs ₹800 and sells for ₹720. What is the loss?",["₹80","₹100","₹120","₹1,520"],0,"Loss = cost price − selling price = ₹800 − ₹720 = ₹80."],

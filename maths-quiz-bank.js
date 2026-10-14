@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Factors and multiples": [
+    ["Which of these is a factor of 24?",["5","6","7","9"],1,"24 ÷ 6 = 4, so 6 is a factor of 24."],
+    ["Which of these is a multiple of 7?",["20","28","30","36"],1,"28 = 7 × 4, so it is a multiple of 7."],
+    ["How many positive factors does 12 have?",["4","5","6","7"],2,"The positive factors are 1, 2, 3, 4, 6, and 12: six in total."],
+    ["Which number is a common factor of 18 and 30?",["4","5","6","9"],2,"6 divides both 18 and 30 exactly."],
+    ["Which number is a common multiple of 4 and 6?",["8","12","18","20"],1,"12 = 4 × 3 and 12 = 6 × 2."],
+    ["What is the smallest positive multiple of any non-zero whole number n?",["0","1","n","2n"],2,"The first positive multiple is n itself."],
+    ["Which number is a factor of every positive integer?",["0","1","2","10"],1,"One divides every positive integer exactly."],
+    ["Which number is a multiple of both 3 and 5?",["10","12","15","18"],2,"15 = 3 × 5, so it is divisible by both."],
+    ["Which list contains all positive factors of 10?",["1, 2, 5, 10","1, 3, 5, 10","2, 4, 5, 10","1, 2, 4, 10"],0,"The numbers that divide 10 exactly are 1, 2, 5, and 10."],
+    ["Which is NOT a factor of 36?",["4","6","9","8"],3,"36 is not divisible by 8 without a remainder."],
+    ["What is the first three positive multiples of 9?",["9, 18, 27","1, 9, 18","9, 19, 29","0, 9, 18"],0,"The positive multiples begin 9, 18, and 27."],
+    ["Which number has exactly two positive factors?",["1","7","9","12"],1,"7 is prime and has exactly two positive factors: 1 and 7."],
+    ["If 8 is a factor of 40, which statement is true?",["40 is a factor of 8","40 is a multiple of 8","8 and 40 are unrelated","8 is a multiple of 40"],1,"Since 40 = 8 × 5, 40 is a multiple of 8."],
+    ["Which pair has no common factor other than 1?",["8 and 12","9 and 15","8 and 15","14 and 21"],2,"The only common positive factor of 8 and 15 is 1."],
+    ["Which number is both a factor of 48 and a multiple of 6?",["5","8","12","18"],2,"12 divides 48 and equals 6 × 2."],
+    ["A number is a factor of 20 and also a factor of 30. Which could it be?",["4","5","8","12"],1,"5 divides both 20 and 30."],
+    ["What is the least positive multiple common to 5 and 8?",["13","20","40","80"],2,"The least common multiple of 5 and 8 is 40."],
+    ["Which number is a factor of 45?",["4","6","9","14"],2,"45 ÷ 9 = 5, so 9 is a factor."],
+    ["Which number is NOT a multiple of 4?",["16","24","30","36"],2,"30 is not divisible by 4."],
+    ["If 6 × 7 = 42, which statement is correct?",["6 is a multiple of 42","42 is a factor of 7","42 is a multiple of 6 and 7","7 is a multiple of 42"],2,"42 is divisible by both 6 and 7."],
+    ["How many positive factors does a prime number have?",["One","Two","Three","Four"],1,"A prime number has exactly two positive factors: 1 and itself."],
+    ["Which is the smallest positive multiple of both 2 and 9?",["9","11","18","36"],2,"18 is divisible by both 2 and 9 and is the smallest such positive number."],
+    ["Which of these is a factor pair of 32?",["3 and 10","4 and 8","5 and 6","2 and 12"],1,"4 × 8 = 32."],
+    ["Which number is a common multiple of 3 and 4?",["6","8","12","15"],2,"12 = 3 × 4 and also 4 × 3."],
+    ["If a number ends in 0, which number must be one of its factors?",["3","5","7","9"],1,"Every whole number ending in 0 is divisible by 5."],
+    ["Which of these is a factor of 100?",["6","12","25","30"],2,"100 ÷ 25 = 4."],
+    ["Which list shows multiples of 6 in increasing order?",["6, 12, 18, 24","6, 11, 18, 24","6, 12, 17, 24","1, 6, 12, 18"],0,"Multiples of 6 are 6n: 6, 12, 18, 24, and so on."],
+    ["A number is divisible by 2 and 3. Which must be a factor of that number?",["5","6","8","9"],1,"A number divisible by both 2 and 3 is divisible by 6."],
+    ["Which statement is always true for positive integers a and b if a is a factor of b?",["a > b","b is a multiple of a","b is a factor of a","a + b = 1"],1,"If a divides b exactly, then b = a × k for an integer k."],
+    ["Which number has factors 1, 2, 4, and 8 only?",["6","8","12","16"],1,"The positive factors of 8 are 1, 2, 4, and 8."]
+  ],
   "Generalising number properties": [
     ["Which expression represents an even number?",["2n","2n + 1","n + 2","n² + 1"],0,"Any integer multiple of 2, written 2n, is even."],
     ["Which expression represents an odd number?",["2n","2n + 1","4n","6n"],1,"An odd integer can be written as 2n + 1 for an integer n."],

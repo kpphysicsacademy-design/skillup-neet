@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Profit loss and discount": [
+    ["An article bought for ₹500 is sold for ₹600. What is the profit?",["₹50","₹100","₹150","₹1,100"],1,"Profit = selling price − cost price = ₹600 − ₹500 = ₹100."],
+    ["An item costs ₹800 and sells for ₹720. What is the loss?",["₹80","₹100","₹120","₹1,520"],0,"Loss = cost price − selling price = ₹800 − ₹720 = ₹80."],
+    ["A book is bought for ₹200 and sold for ₹250. What is the profit percentage?",["20%","25%","30%","50%"],1,"Profit = ₹50; profit percentage = 50/200 × 100% = 25%."],
+    ["A chair costs ₹1,000 and is sold for ₹900. Find the loss percentage.",["5%","10%","15%","20%"],1,"Loss = ₹100; 100/1,000 × 100% = 10%."],
+    ["The cost price is ₹400 and the profit is ₹60. Find the selling price.",["₹340","₹400","₹460","₹600"],2,"Selling price = cost price + profit = ₹460."],
+    ["An item costs ₹750 and is sold at a loss of ₹50. Find its selling price.",["₹700","₹750","₹800","₹850"],0,"Selling price = ₹750 − ₹50 = ₹700."],
+    ["A shirt marked ₹1,200 is discounted by 10%. What is the discount?",["₹12","₹100","₹120","₹1,080"],2,"10% of ₹1,200 = ₹120."],
+    ["A bag marked ₹2,000 is discounted by 15%. What is its sale price?",["₹300","₹1,500","₹1,700","₹1,850"],2,"Discount = ₹300; sale price = ₹2,000 − ₹300 = ₹1,700."],
+    ["A toy is bought for ₹160 and sold for ₹200. What is the profit percentage?",["20%","25%","30%","40%"],1,"Profit = ₹40; 40/160 × 100% = 25%."],
+    ["A cycle bought for ₹2,500 is sold for ₹2,000. What is the loss percentage?",["10%","15%","20%","25%"],2,"Loss = ₹500; 500/2,500 × 100% = 20%."],
+    ["A shopkeeper buys 10 pens for ₹100 and sells each for ₹12. What is the total profit?",["₹10","₹20","₹100","₹120"],1,"Total selling price = ₹120; profit = ₹120 − ₹100 = ₹20."],
+    ["An item is sold for ₹540 at a profit of ₹40. What is its cost price?",["₹480","₹500","₹540","₹580"],1,"Cost price = selling price − profit = ₹500."],
+    ["A product costs ₹600. At what price should it be sold to make a 20% profit?",["₹620","₹700","₹720","₹800"],2,"20% of ₹600 = ₹120; selling price = ₹720."],
+    ["An item costs ₹900. At what price is it sold at a 10% loss?",["₹810","₹850","₹890","₹990"],0,"10% of ₹900 = ₹90; selling price = ₹810."],
+    ["A marked price of ₹500 is reduced by ₹75. What is the discount percentage?",["10%","12%","15%","25%"],2,"75/500 × 100% = 15%."],
+    ["A jacket marked ₹3,000 is sold for ₹2,400. What is the discount percentage?",["10%","15%","20%","25%"],2,"Discount = ₹600; 600/3,000 × 100% = 20%."],
+    ["A shopkeeper buys an item for ₹400 and marks it at ₹500. What discount can be given while still selling at cost price?",["10%","15%","20%","25%"],3,"Discount = ₹100 on marked price ₹500, so discount rate = 20%."],
+    ["An item costs ₹250. It is sold at a 12% profit. Find the selling price.",["₹262","₹270","₹280","₹300"],2,"12% of ₹250 = ₹30; selling price = ₹280."],
+    ["A trader buys a table for ₹1,500 and sells it for ₹1,350. Find the loss.",["₹100","₹150","₹200","₹250"],1,"Loss = ₹1,500 − ₹1,350 = ₹150."],
+    ["A product is sold for ₹960 after a 20% discount. What was its marked price?",["₹1,000","₹1,100","₹1,200","₹1,250"],2,"₹960 is 80% of marked price; 960 ÷ 0.8 = ₹1,200."],
+    ["A seller makes a profit of ₹90 on an item costing ₹600. What is the profit percentage?",["10%","12%","15%","18%"],2,"90/600 × 100% = 15%."],
+    ["A merchant loses ₹120 on an item costing ₹800. What is the loss percentage?",["10%","12%","15%","20%"],2,"120/800 × 100% = 15%."],
+    ["A shop gives successive discounts of 10% and then 10% on ₹1,000. What is the final price?",["₹800","₹810","₹820","₹900"],1,"After first discount: ₹900; 10% off ₹900 gives ₹810."],
+    ["A marked price is ₹800. A discount of 25% is given. What is the selling price?",["₹200","₹500","₹600","₹750"],2,"25% of ₹800 = ₹200; ₹800 − ₹200 = ₹600."],
+    ["A vendor buys 5 kg of rice for ₹300 and sells all of it for ₹360. What is the profit percentage?",["10%","15%","20%","25%"],2,"Profit = ₹60; 60/300 × 100% = 20%."],
+    ["An item is sold at 25% loss for ₹450. What was its cost price?",["₹500","₹550","₹600","₹625"],2,"₹450 is 75% of cost price; 450 ÷ 0.75 = ₹600."],
+    ["An item is sold at 25% profit for ₹500. What was its cost price?",["₹375","₹400","₹425","₹450"],1,"₹500 is 125% of cost price; 500 ÷ 1.25 = ₹400."],
+    ["A shopkeeper marks an item at ₹1,000 and gives a 5% discount. Find the selling price.",["₹50","₹900","₹950","₹995"],2,"5% of ₹1,000 = ₹50; selling price = ₹950."],
+    ["An article is bought for ₹720 and sold for ₹900. What is the profit percentage?",["20%","25%","30%","35%"],1,"Profit = ₹180; 180/720 × 100% = 25%."],
+    ["A book is marked ₹400 and sold at a 15% discount. What is the sale price?",["₹60","₹320","₹340","₹360"],2,"Discount = ₹60; sale price = ₹400 − ₹60 = ₹340."]
+  ],
   "Percentages": [
     ["What is 25% of 200?",["25","40","50","75"],2,"25% = 1/4, and 200 ÷ 4 = 50."],
     ["Convert 3/4 to a percentage.",["25%","50%","75%","80%"],2,"3/4 × 100% = 75%."],

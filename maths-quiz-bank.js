@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Grouped data": [
+    ["What is grouped data?",["Data arranged into classes or intervals","Data written in random order","Only a single observation","Data shown only as a picture"],0,"Grouped data organises observations into class intervals with corresponding frequencies."],
+    ["In a frequency table, what does frequency tell us?",["The class width","How many observations fall in a category or class","The largest observation only","The number of classes plus one"],1,"Frequency is the number of observations in a category or class."],
+    ["The values 1, 2, 2, 3, 3, 3 are grouped by value. What is the frequency of 2?",["1","2","3","6"],1,"The value 2 occurs twice."],
+    ["A class interval is 10–20. What is its class width?",["5","10","15","20"],1,"Class width is upper boundary minus lower boundary: 20−10=10."],
+    ["In the interval 20–30, which value is the lower limit?",["10","20","25","30"],1,"The lower limit is 20."],
+    ["For the class interval 30–40, the class mark is:",["30","35","40","70"],1,"Class mark=(30+40)÷2=35."],
+    ["Find the class mark of the interval 10–16.",["10","12","13","16"],2,"Class mark=(10+16)÷2=13."],
+    ["A frequency table has frequencies 4, 7 and 9. What is the total number of observations?",["16","18","20","21"],2,"Total frequency=4+7+9=20."],
+    ["Frequencies of three classes are 5, x and 8. If total frequency is 21, find x.",["6","7","8","9"],2,"5+x+8=21, so x=8."],
+    ["The frequencies are 3, 6, 4 and 7. What is the cumulative frequency after the third class?",["9","10","13","20"],2,"Cumulative frequency after the third class=3+6+4=13."],
+    ["A class has frequency 12. What does this mean?",["The class interval is 12 units wide","12 observations lie in that class","There are 12 class intervals","The class mark is 12"],1,"Frequency 12 means 12 observations belong to that class."],
+    ["Which is a suitable class interval for observations from 21 to 29 when using intervals of width 10?",["10–19","20–29","30–39","21–31"],1,"The interval 20–29 covers integer observations 21 through 29."],
+    ["The class intervals are 0–10, 10–20, 20–30. What is the width of each class?",["5","10","20","30"],1,"Each class width is 10."],
+    ["A grouped table has class frequencies 6, 10, 8 and 5. Find the total frequency.",["24","27","29","30"],2,"6+10+8+5=29."],
+    ["Which graph is commonly used to display frequencies for continuous grouped data with adjoining class intervals?",["Histogram","Pictograph only","Pie chart only","Number line only"],0,"A histogram uses adjoining bars to represent frequencies of continuous class intervals."],
+    ["A class interval is 40–50. Its class mark is:",["40","45","50","90"],1,"(40+50)÷2=45."],
+    ["The frequencies for scores 0–10, 10–20 and 20–30 are 4, 9 and 7. How many scores are below 20?",["4","7","9","13"],3,"Scores below 20 are in the first two classes: 4+9=13."],
+    ["In a grouped table, the highest frequency is 15. What does it indicate?",["The widest class","The class containing the most observations","The smallest class mark","The total number of classes"],1,"The class with frequency 15 contains the greatest number of observations."],
+    ["Frequencies are 2, 5, 8 and 5. Which class has the greatest frequency?",["First","Second","Third","Fourth"],2,"The greatest frequency is 8, in the third class."],
+    ["The total frequency is 40. Three classes have frequencies 12, 9 and 11. Find the fourth frequency.",["6","8","9","10"],1,"40−(12+9+11)=8."],
+    ["A class interval is 15–25. What is its midpoint?",["15","20","25","40"],1,"Midpoint=(15+25)÷2=20."],
+    ["Which statement about cumulative frequency is correct?",["It decreases at every class","It is the running total of frequencies","It is always equal to class width","It ignores earlier classes"],1,"Cumulative frequency adds the current frequency to all previous frequencies."],
+    ["Frequencies are 4, 3, 6 and 2. What is the cumulative frequency at the fourth class?",["9","11","13","15"],3,"The total cumulative frequency is 4+3+6+2=15."],
+    ["In a grouped table, the class 50–60 has frequency 0. What does this mean?",["The class is invalid","No observations fall in that interval","The class width is zero","The total data set is empty"],1,"A frequency of zero means there are no observations in that class."],
+    ["A class interval is 5–15. If the class width is calculated by subtraction, what is it?",["5","10","15","20"],1,"15−5=10."],
+    ["The frequencies in five classes are 2, 4, 6, 8 and 10. How many observations are there?",["20","25","30","35"],2,"2+4+6+8+10=30."],
+    ["A grouped data table lists 7 students in 0–10 marks and 11 in 10–20 marks. How many students scored below 20?",["7","11","18","20"],2,"Add both frequencies: 7+11=18 students."],
+    ["Which information is needed to calculate a class mark?",["Only the frequency","The lower and upper class limits","The total frequency only","The number of observations outside the class"],1,"Class mark is the average of the lower and upper class limits."],
+    ["Class marks of equal-width intervals are 15, 25, 35. What is the class width?",["5","10","15","20"],1,"Successive class marks differ by 10, so the intervals have width 10."],
+    ["A grouped frequency table contains frequencies 8, 12, 15 and 5. What fraction of observations belongs to the class with frequency 15?",["3/8","3/10","1/4","15/40"],0,"Total=8+12+15+5=40; 15/40 simplifies to 3/8."]
+  ],
   "Special quadrilaterals": [
     ["Which quadrilateral has four equal sides and four right angles?",["Rectangle","Rhombus","Square","Kite"],2,"A square has four equal sides and four right angles."],
     ["Which quadrilateral has four right angles, with opposite sides equal?",["Rectangle","Kite","Rhombus only","Trapezium"],0,"A rectangle has four right angles and equal opposite sides."],

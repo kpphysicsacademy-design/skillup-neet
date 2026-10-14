@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Word problems using linear equations": [
+    ["A number increased by 7 is 19. What is the number?",["10","12","26","9"],1,"Let the number be x. Then x + 7 = 19, so x = 19 − 7 = 12."],
+    ["Five times a number is 45. Find the number.",["8","9","40","10"],1,"Let the number be x. Then 5x = 45, so x = 9."],
+    ["The sum of a number and its double is 24. Find the number.",["6","8","12","10"],1,"Let the number be x. Then x + 2x = 24, so 3x = 24 and x = 8."],
+    ["A pen costs ₹x. Three pens cost ₹54. What is x?",["₹15","₹16","₹18","₹21"],2,"3x = 54, so each pen costs ₹18."],
+    ["Ravi is x years old. His age after 5 years will be 17. How old is Ravi now?",["10 years","11 years","12 years","22 years"],2,"x + 5 = 17, so x = 12 years."],
+    ["The perimeter of a square is 36 cm. Find its side length.",["6 cm","8 cm","9 cm","12 cm"],2,"A square has perimeter 4x. Thus 4x = 36 and x = 9 cm."],
+    ["Two consecutive integers add up to 31. What is the smaller integer?",["14","15","16","17"],1,"Let the smaller integer be x. x + (x + 1) = 31, so 2x = 30 and x = 15."],
+    ["A ribbon is cut into 4 equal pieces, each 7 cm long. What was its length?",["11 cm","21 cm","28 cm","32 cm"],2,"If the total length is x, then x/4 = 7, so x = 28 cm."],
+    ["A number decreased by 9 equals 16. Find the number.",["7","23","25","144"],2,"x − 9 = 16, so x = 25. Check: 25 − 9 = 16."],
+    ["A taxi charges a fixed ₹40 plus ₹12 per kilometre. The fare is ₹100. How many kilometres were travelled?",["4 km","5 km","6 km","7 km"],1,"Let distance be x km. 40 + 12x = 100, so 12x = 60 and x = 5 km."],
+    ["Three times a number minus 8 is 31. Find the number.",["11","13","15","17"],1,"3x − 8 = 31, so 3x = 39 and x = 13."],
+    ["The length of a rectangle is 3 cm more than its width. Its perimeter is 30 cm. Find the width.",["5 cm","6 cm","7 cm","9 cm"],1,"Let width be x and length x + 3. Then 2[x + (x + 3)] = 30, giving 4x + 6 = 30 and x = 6 cm."],
+    ["A mother is 3 times her child's age. Their ages add to 48 years. How old is the child?",["10 years","12 years","14 years","16 years"],1,"Let the child's age be x. Then x + 3x = 48, so x = 12 years."],
+    ["Four identical notebooks and a ₹20 ruler cost ₹100. What is the cost of one notebook?",["₹15","₹18","₹20","₹25"],2,"Let one notebook cost x. Then 4x + 20 = 100, so x = ₹20."],
+    ["The sum of three consecutive integers is 72. Find the middle integer.",["22","23","24","25"],2,"Let the integers be x − 1, x, x + 1. Their sum is 3x = 72, so the middle integer is 24."],
+    ["A number is divided by 3, then 4 is added; the result is 10. Find the number.",["12","15","18","21"],2,"x/3 + 4 = 10, so x/3 = 6 and x = 18."],
+    ["A student buys 2 identical files and a ₹35 notebook for ₹95. What is the price of each file?",["₹25","₹30","₹35","₹40"],1,"Let each file cost x. Then 2x + 35 = 95, so 2x = 60 and x = ₹30."],
+    ["The denominator of a fraction is 2 more than its numerator. If the fraction is 3/5, what is the numerator?",["2","3","4","5"],1,"Let the numerator be x and denominator x + 2. Since x/(x + 2) = 3/5, 5x = 3x + 6, so x = 3."],
+    ["A number and one-third of it add up to 28. Find the number.",["18","21","24","27"],1,"x + x/3 = 28. Thus 4x/3 = 28, so x = 21."],
+    ["A cyclist has travelled 18 km and then rides at 6 km per hour for x more hours. The total distance is 42 km. Find x.",["3 hours","4 hours","5 hours","6 hours"],1,"18 + 6x = 42, so 6x = 24 and x = 4 hours."],
+    ["A father's age is 4 times his son's age. In 6 years, the father will be twice as old as his son. Find the son's present age.",["2 years","3 years","4 years","6 years"],1,"Let the son's age be x and father's age 4x. Then 4x + 6 = 2(x + 6), so 2x = 6 and x = 3 years."],
+    ["A rectangle's length is twice its width minus 3 cm. Its perimeter is 42 cm. Find the width.",["6 cm","7 cm","8 cm","9 cm"],2,"Let width be x and length 2x − 3. Then 2[x + (2x − 3)] = 42, so 6x − 6 = 42 and x = 8 cm."],
+    ["A shop gives a ₹30 discount on a bag, then adds ₹20 delivery. The final bill is ₹190. What was the marked price?",["₹180","₹190","₹200","₹220"],2,"Let marked price be x. Then x − 30 + 20 = 190, so x = ₹200."],
+    ["The sum of two consecutive even integers is 54. Find the smaller integer.",["24","26","28","30"],1,"Let the smaller even integer be x; the next is x + 2. Then 2x + 2 = 54, so x = 26."],
+    ["A class has 5 more girls than boys and 35 students in total. How many boys are there?",["10","12","15","20"],2,"Let boys be x and girls x + 5. Then 2x + 5 = 35, so x = 15 boys."],
+    ["A number is multiplied by 4, then 7 is subtracted. This equals the number plus 20. Find the number.",["7","8","9","10"],2,"4x − 7 = x + 20, so 3x = 27 and x = 9."],
+    ["Two-fifths of a number is 8 less than the number. Find the number.",["40/3","12","15","20"],0,"(2/5)x = x − 8. Multiply by 5: 2x = 5x − 40, so 3x = 40 and x = 40/3."],
+    ["A train ticket for an adult costs twice a child's ticket. Two adult tickets and three child tickets cost ₹700. What is the child's ticket price?",["₹100","₹120","₹140","₹175"],0,"Let the child ticket cost x and adult ticket 2x. Then 2(2x) + 3x = 700, so 7x = 700 and x = ₹100."],
+    ["A number is increased by 20% and becomes 72. What was the original number?",["50","55","60","62"],2,"Let the original number be x. Then 1.2x = 72, so x = 60."],
+    ["A water tank is one-third full. After adding 24 litres, it becomes two-thirds full. What is the tank's capacity?",["48 L","60 L","72 L","96 L"],2,"The added 24 L represents one-third of capacity. Capacity = 24 × 3 = 72 L."]
+  ],
   "HCF and LCM": [
     ["What is the HCF of 12 and 18?",["2","3","6","9"],2,"The common factors are 1, 2, 3, and 6; the greatest is 6."],
     ["What is the LCM of 4 and 6?",["8","10","12","24"],2,"Multiples meet first at 12: 4, 8, 12 and 6, 12."],

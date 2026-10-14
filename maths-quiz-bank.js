@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Surface area of cube and cuboid": [
+    ["Find the total surface area of a cube of side 4 cm.",["16 cm²","64 cm²","96 cm²","48 cm²"],2,"Total surface area of a cube = 6a² = 6 × 4² = 96 cm²."],
+    ["Find the volume of a cube with side 5 cm.",["25 cm³","75 cm³","125 cm³","150 cm³"],2,"Volume of a cube = a³ = 5³ = 125 cm³."],
+    ["A cuboid has length 8 cm, breadth 5 cm and height 3 cm. Find its total surface area.",["79 cm²","158 cm²","120 cm²","240 cm²"],1,"TSA = 2(lb + bh + hl) = 2(40 + 15 + 24) = 158 cm²."],
+    ["Find the volume of a cuboid measuring 7 cm × 4 cm × 3 cm.",["14 cm³","28 cm³","84 cm³","42 cm³"],2,"Volume = l × b × h = 7 × 4 × 3 = 84 cm³."],
+    ["What is the lateral surface area of a cube of side 6 cm?",["36 cm²","144 cm²","216 cm²","72 cm²"],1,"Lateral surface area of a cube = 4a² = 4 × 36 = 144 cm²."],
+    ["A cuboid has l = 10 cm, b = 6 cm and h = 4 cm. Find its lateral surface area.",["120 cm²","128 cm²","200 cm²","240 cm²"],0,"LSA = 2h(l + b) = 2 × 4 × 16 = 128 cm²."],
+    ["The volume of a cube is 216 cm³. Find its side length.",["4 cm","5 cm","6 cm","8 cm"],2,"The side is the cube root of 216, which is 6 cm."],
+    ["The total surface area of a cube is 150 cm². Find its side.",["5 cm","6 cm","25 cm","10 cm"],0,"6a² = 150, so a² = 25 and a = 5 cm."],
+    ["Find the total surface area of a cuboid of dimensions 12 cm, 5 cm and 4 cm.",["128 cm²","136 cm²","256 cm²","240 cm²"],2,"TSA = 2(12×5 + 5×4 + 4×12) = 2(60 + 20 + 48) = 256 cm²."],
+    ["Find the volume of a cuboid of length 9 m, breadth 2 m and height 5 m.",["16 m³","45 m³","90 m³","180 m³"],2,"Volume = 9 × 2 × 5 = 90 m³."],
+    ["A cube has side 3 cm. What is its total surface area?",["9 cm²","27 cm²","54 cm²","81 cm²"],2,"TSA = 6 × 3² = 54 cm²."],
+    ["A cuboid has length 6 cm, breadth 4 cm and height 2 cm. Find its volume.",["12 cm³","24 cm³","48 cm³","96 cm³"],2,"Volume = 6 × 4 × 2 = 48 cm³."],
+    ["A cuboid has volume 120 cm³, length 10 cm and breadth 4 cm. Find its height.",["2 cm","3 cm","4 cm","5 cm"],1,"Height = volume ÷ (length × breadth) = 120 ÷ 40 = 3 cm."],
+    ["Find the area of the four walls of a room 8 m long, 5 m wide and 3 m high.",["39 m²","78 m²","120 m²","240 m²"],1,"Area of four walls = 2h(l + b) = 2 × 3 × 13 = 78 m²."],
+    ["How many 1 cm³ cubes are needed to fill a box of dimensions 5 cm × 4 cm × 3 cm?",["12","20","60","120"],2,"The box volume is 5 × 4 × 3 = 60 cm³, so 60 unit cubes are needed."],
+    ["A cube has side 8 cm. Find its lateral surface area.",["64 cm²","128 cm²","256 cm²","384 cm²"],2,"LSA = 4a² = 4 × 64 = 256 cm²."],
+    ["A cuboid measures 4 cm × 3 cm × 2 cm. Find its total surface area.",["24 cm²","36 cm²","52 cm²","72 cm²"],2,"TSA = 2(4×3 + 3×2 + 2×4) = 2(12 + 6 + 8) = 52 cm²."],
+    ["If each edge of a cube is doubled, its volume becomes how many times the original?",["2 times","4 times","6 times","8 times"],3,"Volume scales with the cube of the side: 2³ = 8 times."],
+    ["If each dimension of a cuboid is doubled, its total surface area becomes how many times the original?",["2 times","4 times","6 times","8 times"],1,"Each face area scales by 2² = 4, so total surface area becomes four times."],
+    ["A cube has volume 64 cm³. What is its total surface area?",["64 cm²","96 cm²","128 cm²","256 cm²"],1,"Side = 4 cm because 4³ = 64; TSA = 6 × 4² = 96 cm²."],
+    ["Find the area of a rectangular sheet 15 cm long and 8 cm wide.",["23 cm²","46 cm²","120 cm²","240 cm²"],2,"Area of the rectangle = 15 × 8 = 120 cm²."],
+    ["A cuboid's total surface area is 94 cm². Its dimensions are 5 cm, 4 cm and h cm. Find h.",["2 cm","3 cm","4 cm","5 cm"],1,"94 = 2(20 + 4h + 5h) = 40 + 18h, so h = 3 cm."],
+    ["A cube has side 10 cm. Find its volume.",["100 cm³","600 cm³","1000 cm³","10,000 cm³"],2,"Volume = 10³ = 1000 cm³."],
+    ["Find the total surface area of a cuboid measuring 15 cm × 10 cm × 2 cm.",["190 cm²","340 cm²","380 cm²","400 cm²"],3,"TSA = 2(150 + 20 + 30) = 400 cm²."],
+    ["A cube's side is 7 cm. Find the area of one face.",["14 cm²","28 cm²","49 cm²","343 cm²"],2,"Area of one square face = 7² = 49 cm²."],
+    ["A cuboid has volume 240 cm³ and dimensions 10 cm × 6 cm × h. Find h.",["2 cm","3 cm","4 cm","5 cm"],2,"h = 240 ÷ (10 × 6) = 4 cm."],
+    ["A closed cubical box has side 2 m. How much material is needed to cover its outside?",["4 m²","8 m²","16 m²","24 m²"],3,"Outside area = total surface area = 6 × 2² = 24 m²."],
+    ["A room is 6 m long, 4 m wide and 3 m high. What is its volume?",["13 m³","24 m³","72 m³","144 m³"],2,"Volume = 6 × 4 × 3 = 72 m³."],
+    ["A cuboid is 8 cm long, 3 cm wide and 2 cm high. Find its lateral surface area.",["22 cm²","44 cm²","48 cm²","88 cm²"],1,"LSA = 2h(l + b) = 2 × 2 × (8 + 3) = 44 cm²."],
+    ["The volume of a cube is 1000 cm³. What is its total surface area?",["100 cm²","400 cm²","600 cm²","1000 cm²"],2,"Side = 10 cm; TSA = 6 × 10² = 600 cm²."]
+  ],
   "Area of trapezium and polygons": [
     ["A trapezium has parallel sides 8 cm and 12 cm and height 5 cm. Find its area.",["40 cm²","50 cm²","60 cm²","100 cm²"],1,"Area = ½ × (8 + 12) × 5 = 50 cm²."],
     ["Find the area of a trapezium with parallel sides 7 m and 13 m and height 4 m.",["26 m²","40 m²","52 m²","80 m²"],1,"Area = ½ × (7 + 13) × 4 = 40 m²."],

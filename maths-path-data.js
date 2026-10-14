@@ -229,7 +229,7 @@ window.SKILLUP_MATH_PATH=[
       "Direct and Inverse Proportions": [
         "Direct proportion",
         "Inverse proportion",
-        "Word problems"
+        "Direct and inverse proportion word problems"
       ],
       "Factorisation": [
         "Common factor",

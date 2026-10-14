@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Direct and inverse proportion word problems": [
+    ["Four notebooks cost ₹80. At the same rate, what do 7 notebooks cost?",["₹120","₹140","₹160","₹180"],1,"This is direct proportion: ₹80 ÷ 4 = ₹20 each; 7 cost ₹140."],
+    ["A car travels 180 km in 3 hours at constant speed. How far will it travel in 7 hours?",["360 km","400 km","420 km","450 km"],2,"Distance is directly proportional to time at constant speed. Speed = 60 km/h, so distance = 420 km."],
+    ["Eight workers complete a task in 15 days. How many days will 12 workers need at the same rate?",["8","10","12","22.5"],1,"Workers and days are inversely proportional: 8 × 15 = 12 × d, so d = 10."],
+    ["Five identical taps fill a tank in 24 minutes. How long will 8 taps take?",["12 min","15 min","18 min","38.4 min"],1,"Taps × time is constant: 5 × 24 = 8 × t, giving t = 15 minutes."],
+    ["A recipe for 6 people needs 450 g of rice. How much rice is needed for 10 people?",["600 g","700 g","750 g","900 g"],2,"Direct proportion: 450 × 10/6 = 750 g."],
+    ["A 240 km journey takes 4 hours. How long will it take at 80 km/h?",["2 h","3 h","4 h","5 h"],1,"Time = distance ÷ speed = 240 ÷ 80 = 3 hours."],
+    ["If 9 kg of apples cost ₹630, what do 4 kg cost?",["₹240","₹260","₹280","₹300"],2,"Price per kg = ₹630/9 = ₹70, so 4 kg cost ₹280."],
+    ["Four machines finish a job in 18 hours. How long would 6 identical machines take?",["6 h","9 h","12 h","27 h"],2,"Machines × hours is constant: 4 × 18 = 6 × t, so t = 12 hours."],
+    ["A map scale is 1 cm = 8 km. What distance does 6.5 cm represent?",["42 km","48 km","52 km","56 km"],2,"Actual distance = 6.5 × 8 = 52 km."],
+    ["Twelve workers can build a wall in 10 days. How many workers are needed to finish it in 6 days?",["16","18","20","24"],2,"Workers needed = 12 × 10/6 = 20."],
+    ["A printer produces 225 pages in 5 minutes. How many pages in 12 minutes at the same rate?",["450","500","540","600"],2,"Rate = 225/5 = 45 pages per minute; 45 × 12 = 540."],
+    ["A food supply lasts 18 days for 20 people. How long will it last for 30 people?",["9 days","12 days","15 days","27 days"],1,"People × days = 20 × 18 = 360; 360/30 = 12 days."],
+    ["If 3.5 m of cloth costs ₹280, find the cost of 6 m.",["₹420","₹450","₹480","₹520"],2,"Cost per metre = ₹280/3.5 = ₹80; 6 m costs ₹480."],
+    ["A cyclist takes 5 hours at 18 km/h. How long for the same route at 30 km/h?",["2 h","3 h","4 h","8 h"],1,"Distance = 5 × 18 = 90 km; time = 90/30 = 3 hours."],
+    ["Seven workers earn ₹5,600 altogether for the same fixed work period. At the same per-worker rate, how much for 10 workers?",["₹7,000","₹7,500","₹8,000","₹8,600"],2,"Direct proportion: ₹5,600 × 10/7 = ₹8,000."],
+    ["Six pumps empty a pool in 14 hours. How long would 4 identical pumps take?",["7 h","18 h","21 h","24 h"],2,"Pumps × time = 6 × 14 = 84; 84/4 = 21 hours."],
+    ["If 15 identical bottles hold 12 litres altogether, how much do 8 bottles hold?",["4.8 L","6.4 L","8 L","9.6 L"],1,"Each bottle holds 12/15 = 0.8 L; 8 hold 6.4 L."],
+    ["A bus covers 315 km in 4.5 hours. How long will 420 km take at the same speed?",["5 h","5.5 h","6 h","6.5 h"],2,"Speed = 315/4.5 = 70 km/h; 420/70 = 6 hours."],
+    ["Sixteen workers finish a job in 9 days. How many days would 24 workers take?",["4 days","6 days","8 days","13.5 days"],1,"16 × 9 = 24 × d, so d = 6 days."],
+    ["If 5 tickets cost ₹1,250, what do 12 tickets cost?",["₹2,500","₹2,750","₹3,000","₹3,250"],2,"Each ticket costs ₹250; 12 cost ₹3,000."],
+    ["A tank is filled by 3 hoses in 50 minutes. How long would 5 identical hoses take?",["20 min","25 min","30 min","35 min"],2,"3 × 50 = 5 × t, so t = 30 minutes."],
+    ["A car uses 12 litres of fuel for 180 km. At the same rate, how much fuel is needed for 300 km?",["18 L","20 L","22 L","24 L"],1,"Fuel is directly proportional to distance: 12 × 300/180 = 20 L."],
+    ["A team of 10 people completes a project in 24 days. How many people are needed to finish in 15 days?",["12","14","16","18"],2,"People × days = 10 × 24 = 240; 240/15 = 16 people."],
+    ["Four kilograms of a product cost ₹360. What is the cost of 6.5 kg?",["₹520","₹540","₹585","₹600"],2,"Unit cost = ₹90/kg; 6.5 × 90 = ₹585."],
+    ["At 45 km/h, a trip takes 8 hours. How long would the same trip take at 60 km/h?",["5 h","6 h","7 h","10.67 h"],1,"Distance = 45 × 8 = 360 km; 360/60 = 6 hours."],
+    ["Twenty-four students have enough snacks for 5 days. How long would the same amount last 15 students?",["3 days","6 days","8 days","10 days"],2,"Students × days = 24 × 5 = 120; 120/15 = 8 days."],
+    ["A machine makes 360 items in 6 hours. How many items will 4 identical machines make in 5 hours?",["600","900","1,000","1,200"],3,"One machine makes 60 items/hour; 4 machines for 5 hours make 60 × 4 × 5 = 1,200."],
+    ["If 8 m of wire weighs 3.2 kg, what does 15 m weigh?",["4.8 kg","5.5 kg","6 kg","6.4 kg"],2,"Weight per metre = 3.2/8 = 0.4 kg; 15 m weighs 6 kg."],
+    ["Nine workers can harvest a field in 16 days. How many workers are needed to finish in 12 days?",["10","12","14","18"],1,"Workers = 9 × 16/12 = 12."],
+    ["A vehicle covers 96 km using 8 litres of fuel. How far can it travel with 15 litres at the same efficiency?",["160 km","170 km","180 km","192 km"],2,"Distance per litre = 96/8 = 12 km; 15 litres give 180 km."]
+  ],
   "Inverse proportion": [
     ["If 4 workers finish a job in 12 days, how many days will 8 workers take at the same rate?",["3","6","8","24"],1,"Workers and days are inversely proportional: 4 × 12 = 8 × d, so d = 6."],
     ["A car takes 3 hours at 60 km/h to cover a route. How long at 90 km/h for the same distance?",["1 hour","2 hours","2.5 hours","4.5 hours"],1,"For fixed distance, speed × time is constant: 60 × 3 = 90 × t, so t = 2 hours."],

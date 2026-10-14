@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Polygons and angle sums": [
+    ["Interior-angle sum of a pentagon?",["360°","450°","540°","720°"],2,"(5−2)×180°=540°."],
+    ["Interior-angle sum of a hexagon?",["540°","600°","720°","900°"],2,"(6−2)×180°=720°."],
+    ["Interior-angle sum of an octagon?",["720°","900°","1080°","1260°"],2,"(8−2)×180°=1080°."],
+    ["A polygon's interior-angle sum is 900°. How many sides?",["5","6","7","8"],2,"(n−2)×180°=900°, so n=7."],
+    ["A polygon's interior-angle sum is 1260°. How many sides?",["7","8","9","10"],2,"(n−2)×180°=1260°, so n=9."],
+    ["Each interior angle of a regular hexagon?",["90°","108°","120°","135°"],2,"720°÷6=120°."],
+    ["Each interior angle of a regular pentagon?",["72°","108°","120°","144°"],1,"540°÷5=108°."],
+    ["Each interior angle of a regular octagon?",["120°","135°","140°","150°"],1,"1080°÷8=135°."],
+    ["Sum of one exterior angle at each vertex of a convex polygon?",["180°","270°","360°","540°"],2,"Exterior angles make one complete turn: 360°."],
+    ["Each exterior angle is 45° in a regular polygon. Number of sides?",["6","8","9","10"],1,"360°÷45°=8."],
+    ["Each exterior angle is 30°. Number of sides?",["10","12","15","18"],1,"360°÷30°=12."],
+    ["Each exterior angle of a regular decagon?",["30°","36°","40°","45°"],1,"360°÷10=36°."],
+    ["Each interior angle of a regular 12-sided polygon?",["120°","135°","150°","165°"],2,"Exterior angle=360°÷12=30°; interior=150°."],
+    ["Diagonals from one vertex of a decagon?",["5","6","7","8"],2,"n−3=10−3=7."],
+    ["Total diagonals in a hexagon?",["6","9","12","15"],1,"n(n−3)/2=6×3/2=9."],
+    ["Triangles formed by diagonals from one vertex of a heptagon?",["4","5","6","7"],1,"n−2=7−2=5."],
+    ["Three quadrilateral angles are 80°, 95°, 105°. Fourth angle?",["70°","80°","90°","100°"],1,"360°−(80°+95°+105°)=80°."],
+    ["Pentagon angles are 100°, 110°, 120°, 130° and x°. Find x.",["70°","80°","90°","100°"],1,"540°−460°=80°."],
+    ["Quadrilateral angles are x°, 2x°, 3x°, 4x°. Find x.",["24°","30°","36°","40°"],2,"10x=360°, so x=36°."],
+    ["All interior angles of an equiangular hexagon are equal. Each angle?",["100°","110°","120°","135°"],2,"720°÷6=120°."],
+    ["An exterior angle is 65°. Adjacent interior angle?",["65°","105°","115°","125°"],2,"180°−65°=115°."],
+    ["Triangles formed from one vertex of an octagon?",["5","6","7","8"],1,"n−2=8−2=6."],
+    ["Interior-angle sum of a quadrilateral?",["180°","270°","360°","540°"],2,"A quadrilateral splits into two triangles: 2×180°=360°."],
+    ["Each interior angle of a regular polygon is 150°. Number of sides?",["8","10","12","15"],2,"Exterior angle=30°; 360°÷30°=12 sides."],
+    ["Each exterior angle of a regular 9-sided polygon?",["30°","36°","40°","45°"],2,"360°÷9=40°."],
+    ["Interior-angle sum is 1800°. Number of sides?",["10","11","12","13"],2,"(n−2)×180°=1800°, so n=12."],
+    ["Total diagonals in an octagon?",["16","20","24","28"],1,"8×(8−3)÷2=20."],
+    ["Two quadrilateral angles are 90° each and a third is 75°. Fourth?",["95°","100°","105°","115°"],2,"360°−255°=105°."],
+    ["Each exterior angle is 24° in a regular polygon. Number of sides?",["12","15","18","24"],1,"360°÷24°=15."],
+    ["Interior-angle sum of an 11-sided polygon?",["1440°","1620°","1800°","1980°"],1,"(11−2)×180°=1620°."]
+  ],
   "Word problems": [
     ["A number increased by 7 is 19. What is the number?",["10","11","12","13"],2,"Let the number be x. x + 7 = 19, so x = 12."],
     ["Three times a number is 27. Find the number.",["6","8","9","12"],2,"Let x be the number. 3x = 27, so x = 9."],

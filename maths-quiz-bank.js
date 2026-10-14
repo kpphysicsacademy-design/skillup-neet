@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Coordinate plane": [
+    ["What is the point where the x-axis and y-axis intersect called?",["Origin","Quadrant","Vertex","Scale"],0,"The axes meet at the origin, whose coordinates are (0, 0)."],
+    ["Which coordinate represents the horizontal position of a point?",["x-coordinate","y-coordinate","origin","quadrant"],0,"The first coordinate, x, gives the horizontal position."],
+    ["Which coordinate represents the vertical position of a point?",["x-coordinate","y-coordinate","origin","axis label"],1,"The second coordinate, y, gives the vertical position."],
+    ["What are the coordinates of the origin?",["(1, 1)","(0, 1)","(0, 0)","(1, 0)"],2,"Both coordinates are zero at the origin."],
+    ["In the ordered pair (4, −2), what is the x-coordinate?",["−2","4","2","−4"],1,"In (x, y), the first number is the x-coordinate."],
+    ["In the ordered pair (−3, 5), what is the y-coordinate?",["−3","3","5","−5"],2,"The second number, 5, is the y-coordinate."],
+    ["A point with coordinates (5, 0) lies on which axis?",["x-axis","y-axis","Neither axis","Both axes only"],0,"Any point with y = 0 lies on the x-axis."],
+    ["A point with coordinates (0, −6) lies on which axis?",["x-axis","y-axis","Neither axis","Both axes only"],1,"Any point with x = 0 lies on the y-axis."],
+    ["In which quadrant does (3, 4) lie?",["I","II","III","IV"],0,"Both coordinates are positive, so the point is in Quadrant I."],
+    ["In which quadrant does (−2, 6) lie?",["I","II","III","IV"],1,"Negative x and positive y identify Quadrant II."],
+    ["In which quadrant does (−5, −1) lie?",["I","II","III","IV"],2,"Both coordinates are negative, so the point is in Quadrant III."],
+    ["In which quadrant does (7, −3) lie?",["I","II","III","IV"],3,"Positive x and negative y identify Quadrant IV."],
+    ["Which point lies on the x-axis?",["(2, 3)","(−4, 0)","(0, 5)","(1, −2)"],1,"The y-coordinate of a point on the x-axis must be zero."],
+    ["Which point lies on the y-axis?",["(0, −4)","(3, 0)","(2, 2)","(−1, 6)"],0,"The x-coordinate of a point on the y-axis must be zero."],
+    ["Starting at the origin, move 3 units right and 2 units up. What point do you reach?",["(−3, 2)","(3, −2)","(3, 2)","(2, 3)"],2,"Right means positive x; up means positive y."],
+    ["Starting at the origin, move 4 units left and 1 unit down. What point do you reach?",["(4, 1)","(−4, −1)","(−1, −4)","(4, −1)"],1,"Left and down correspond to negative x and negative y."],
+    ["Which point is 2 units right of the origin and 5 units down?",["(−2, 5)","(5, −2)","(2, −5)","(−5, 2)"],2,"Right gives x = 2 and down gives y = −5."],
+    ["What is the x-coordinate of any point on the y-axis?",["0","1","−1","It can never be zero"],0,"All points on the y-axis have x = 0."],
+    ["What is the y-coordinate of any point on the x-axis?",["0","1","−1","It can never be zero"],0,"All points on the x-axis have y = 0."],
+    ["Which ordered pair describes a point 6 units left and 2 units up from the origin?",["(6, 2)","(−6, 2)","(−2, 6)","(6, −2)"],1,"Six units left gives x = −6; two units up gives y = 2."],
+    ["Which point is in Quadrant III?",["(4, −4)","(−4, 4)","(−4, −4)","(4, 4)"],2,"Quadrant III contains points with both coordinates negative."],
+    ["Which statement about the point (0, 8) is correct?",["It is in Quadrant I","It lies on the y-axis","It lies on the x-axis","It is the origin"],1,"Its x-coordinate is zero, so it lies on the y-axis."],
+    ["Which point has a negative x-coordinate and a positive y-coordinate?",["(2, −3)","(−2, 3)","(2, 3)","(−2, −3)"],1,"The signs (−, +) identify Quadrant II."],
+    ["If point A is (3, 2), how many units right of the y-axis is it?",["2","3","5","1"],1,"The x-coordinate 3 gives its horizontal distance from the y-axis."],
+    ["If point B is (−5, 4), how many units left of the y-axis is it?",["4","5","−5","9"],1,"The x-coordinate −5 places it 5 units left of the y-axis."],
+    ["Which point is closest to the origin among these points?",["(3, 0)","(0, 2)","(−4, 0)","(0, −5)"],1,"The point (0, 2) is 2 units from the origin, less than 3, 4, or 5."],
+    ["What is the ordered pair for a point on the x-axis 7 units to the left of the origin?",["(7, 0)","(0, −7)","(−7, 0)","(0, 7)"],2,"Left gives x = −7 and the x-axis means y = 0."],
+    ["What is the ordered pair for a point on the y-axis 3 units above the origin?",["(3, 0)","(0, 3)","(0, −3)","(−3, 0)"],1,"Above gives y = 3 and the y-axis means x = 0."],
+    ["Point P is (−2, 0). Which description is correct?",["2 units right on x-axis","2 units left on x-axis","2 units down on y-axis","2 units up on y-axis"],1,"The negative x-coordinate places P two units left on the x-axis."],
+    ["Point Q is (0, −7). Which description is correct?",["7 units above origin","7 units right of origin","7 units below origin on y-axis","7 units left of origin"],2,"The y-coordinate −7 places Q seven units below the origin on the y-axis."]
+  ],
   "Division of algebraic expressions": [
     ["Simplify (12x³) ÷ (3x).",["4x²","4x³","9x²","4x"],0,"Divide coefficients 12 ÷ 3 = 4 and subtract exponents: x³ ÷ x = x²."],
     ["Simplify (15a²b) ÷ (5a).",["3ab","3a²b","10ab","3b"],0,"15 ÷ 5 = 3 and a² ÷ a = a, so the result is 3ab."],

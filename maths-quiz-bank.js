@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Probability experiments": [
+    ["A probability experiment is an activity that:",["Always gives the same result","Can produce different outcomes","Has no possible outcomes","Must use a coin"],1,"A probability experiment is a process whose result is uncertain before it is performed."],
+    ["When a fair coin is tossed once, the sample space is:",["{1, 2}","{H}","{H, T}","{T, T}"],2,"A single coin toss can result in heads (H) or tails (T)."],
+    ["A standard six-sided die is rolled once. How many outcomes are in its sample space?",["4","5","6","12"],2,"The possible results are 1, 2, 3, 4, 5 and 6."],
+    ["Which is an outcome when rolling a standard die?",["Rolling a number greater than 6","Rolling 4","Rolling both 2 and 5 at once","Rolling no number"],1,"A single roll can show 4, which is one possible outcome."],
+    ["A fair coin is tossed 20 times and lands heads 12 times. What is the experimental probability of heads?",["12/20","8/20","20/12","1/20"],0,"Experimental probability = observed heads ÷ total tosses = 12/20 = 3/5."],
+    ["A die is rolled 30 times and a 6 appears 4 times. What is the experimental probability of rolling a 6?",["1/6","4/30","6/30","30/4"],1,"The observed frequency of 6 is 4, so the experimental probability is 4/30 = 2/15."],
+    ["A spinner is spun 25 times. Red occurs 10 times. What is the experimental probability of red?",["2/5","1/5","3/5","10/25 is impossible"],0,"10/25 simplifies to 2/5."],
+    ["An event that cannot happen in an experiment is called:",["Certain","Likely","Impossible","Equally likely"],2,"An impossible event has probability 0."],
+    ["An event that must happen is called:",["Impossible","Certain","Unlikely","Random sample"],1,"A certain event has probability 1."],
+    ["A bag contains only blue balls. One ball is drawn. What is the probability that it is blue?",["0","1/2","1","Cannot be determined"],2,"Every ball in the bag is blue, so drawing blue is certain."],
+    ["A bag contains 3 red and 2 blue balls. One ball is drawn at random. How many equally possible ball selections are there if each ball is counted separately?",["2","3","5","6"],2,"There are 3 + 2 = 5 balls that could be selected."],
+    ["A fair die is rolled. Which event has three outcomes?",["Getting an even number","Getting a number less than 3","Getting a number greater than 4","Getting a 1"],0,"Even outcomes are 2, 4 and 6, so there are three outcomes."],
+    ["A fair die is rolled. What is the probability of getting an odd number?",["1/6","1/3","1/2","2/3"],2,"The odd outcomes are 1, 3 and 5: 3/6 = 1/2."],
+    ["A fair die is rolled. What is the probability of getting a number greater than 4?",["1/6","1/3","1/2","2/3"],1,"The favourable outcomes are 5 and 6, so the probability is 2/6 = 1/3."],
+    ["A fair die is rolled. What is the probability of getting a number less than 7?",["0","1/6","5/6","1"],3,"All six possible outcomes are less than 7, so the event is certain."],
+    ["A fair die is rolled. What is the probability of getting 8?",["0","1/6","1/2","1"],0,"A standard die has no face numbered 8, so the event is impossible."],
+    ["Two coins are tossed together. Which is the sample space?",["{HH, HT, TH, TT}","{H, T}","{HH, TT}","{HT, TH}"],0,"Each coin can be H or T, giving HH, HT, TH and TT."],
+    ["Two fair coins are tossed. How many outcomes contain exactly one head?",["1","2","3","4"],1,"The outcomes are HT and TH, so there are two."],
+    ["A fair coin is tossed 50 times and tails appears 27 times. How many times did heads appear?",["17","23","27","77"],1,"The number of heads is 50 − 27 = 23."],
+    ["In 40 spins, a spinner lands on green 14 times. What is the experimental probability of not landing on green?",["14/40","26/40","40/14","1"],1,"Not green occurred 40 − 14 = 26 times, so the probability is 26/40 = 13/20."],
+    ["A student records 18 rainy days in a sample of 60 days. What is the experimental probability of a rainy day?",["1/5","3/10","2/3","7/10"],1,"18/60 simplifies to 3/10."],
+    ["A coin is tossed 10 times and heads appears 7 times. Which statement is correct?",["Experimental probability of heads is 7/10","Heads must appear 7 times in every 10 tosses","The coin is certainly unfair","The next toss must be tails"],0,"The observed frequency gives an experimental probability of 7/10 for this set of tosses."],
+    ["As the number of trials increases, experimental probability:",["Must become exactly 1/2 immediately","Can never change","May tend to get closer to theoretical probability","Always becomes 0"],2,"With many trials, experimental results often move closer to theoretical probability, but this is not guaranteed after every trial."],
+    ["A fair coin has just landed heads five times in a row. On the next toss, the probability of tails is:",["0","1/5","1/2","1"],2,"Each toss of a fair coin is independent, so tails has probability 1/2 on the next toss."],
+    ["A spinner has four equal sectors labelled A, B, C and D. What is the probability of landing on C?",["0","1/4","1/2","3/4"],1,"There is one favourable sector out of four equally likely sectors."],
+    ["A spinner has 8 equal sectors, 3 of which are yellow. What is the probability of yellow?",["3/8","5/8","1/3","3/5"],0,"Three of the eight equally likely sectors are yellow."],
+    ["A card is chosen at random from cards numbered 1 to 10. What is the probability of choosing a number greater than 7?",["1/10","2/10","3/10","7/10"],2,"The favourable numbers are 8, 9 and 10: 3 out of 10."],
+    ["A card is chosen at random from cards numbered 1 to 12. What is the probability of choosing a multiple of 3?",["1/4","1/3","1/2","3/4"],1,"The multiples are 3, 6, 9 and 12: 4/12 = 1/3."],
+    ["In an experiment, an event occurred 9 times in 36 trials. What is its experimental probability in simplest form?",["1/2","1/3","1/4","1/9"],2,"9/36 simplifies to 1/4."],
+    ["A die is rolled 24 times. The results 1 or 2 occur 9 times. What is the experimental probability of getting 1 or 2?",["3/8","1/4","5/8","9/24 is not a probability"],0,"The experimental probability is 9/24 = 3/8."]
+  ],
   "Pie charts": [
     ["A pie chart represents the whole data set as:",["90°","180°","270°","360°"],3,"A complete circle measures 360° and represents the whole data set."],
     ["What fraction of a pie chart is represented by a 90° sector?",["1/2","1/3","1/4","3/4"],2,"90°÷360°=1/4."],

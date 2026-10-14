@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Divisibility tests": [
+    ["A number is divisible by 2 if its last digit is?",["0, 2, 4, 6, or 8","1, 3, 5, 7, or 9","0 or 5 only","Any digit"],0,"Even last digits make a whole number divisible by 2."],
+    ["Which number is divisible by 5?",["234","347","620","418"],2,"A number divisible by 5 ends in 0 or 5."],
+    ["Which number is divisible by 10?",["125","240","333","456"],1,"A number divisible by 10 ends in 0."],
+    ["A number is divisible by 3 when?",["Its last digit is 3","The sum of its digits is divisible by 3","It ends in 0","It has an even last digit"],1,"The sum of the digits must be divisible by 3."],
+    ["Is 456 divisible by 3?",["Yes","No","Only by 2","Cannot tell"],0,"4 + 5 + 6 = 15, and 15 is divisible by 3."],
+    ["Which number is divisible by 9?",["235","729","541","100"],1,"7 + 2 + 9 = 18, which is divisible by 9."],
+    ["Which number is divisible by 4?",["318","422","516","730"],2,"The last two digits are 16, divisible by 4."],
+    ["Which number is divisible by 8?",["124","216","322","410"],1,"216 ÷ 8 = 27, so it is divisible by 8."],
+    ["Which number is divisible by 6?",["124","135","222","325"],2,"222 is even and 2 + 2 + 2 = 6, divisible by 3; hence divisible by 6."],
+    ["Which number is divisible by both 2 and 5?",["45","60","72","83"],1,"A number divisible by both 2 and 5 ends in 0."],
+    ["Which number is divisible by 3 but not by 2?",["126","144","153","210"],2,"153 has digit sum 9, divisible by 3, and it is odd."],
+    ["Which number is divisible by 9?",["514","621","734","802"],1,"6 + 2 + 1 = 9, so 621 is divisible by 9."],
+    ["Is 1,248 divisible by 4?",["Yes","No","Only by 5","Only by 9"],0,"The last two digits are 48, and 48 is divisible by 4."],
+    ["Which number is divisible by 8?",["1,024","1,026","1,030","1,034"],0,"1,024 ÷ 8 = 128."],
+    ["Which number is divisible by 11?",["121","123","125","127"],0,"For 121, the alternating digit sums differ by 1 − 2 + 1 = 0, a multiple of 11."],
+    ["Is 3,456 divisible by 9?",["Yes","No","Only by 2","Only by 5"],0,"3 + 4 + 5 + 6 = 18, divisible by 9."],
+    ["Which number is NOT divisible by 3?",["312","417","523","624"],2,"5 + 2 + 3 = 10, which is not divisible by 3."],
+    ["Which number is divisible by 2, 3, and 5?",["120","135","142","155"],0,"120 is even, ends in 0, and its digit sum is 3."],
+    ["Which number is divisible by 4 but not by 8?",["112","124","128","136"],1,"124 is divisible by 4 because 24 is, but 124 is not divisible by 8."],
+    ["Which number is divisible by 3 and 5?",["125","135","142","164"],1,"135 ends in 5 and its digit sum is 9."],
+    ["What is the divisibility test for 10?",["Digit sum divisible by 10","Last digit is 0","Last two digits divisible by 10","Number is even"],1,"A whole number is divisible by 10 if it ends in 0."],
+    ["Which number is divisible by 9 but not by 2?",["234","441","720","882"],1,"441 has digit sum 9 and is odd."],
+    ["Which number is divisible by 6?",["318","325","341","455"],0,"318 is even and 3 + 1 + 8 = 12, divisible by 3."],
+    ["Which number is divisible by 4?",["1,122","1,236","1,342","1,450"],1,"The last two digits, 36, are divisible by 4."],
+    ["Which number is divisible by 8?",["536","542","550","558"],0,"536 ÷ 8 = 67."],
+    ["Which number is divisible by 3?",["7,421","7,422","7,424","7,425"],1,"7 + 4 + 2 + 2 = 15, divisible by 3."],
+    ["Which number is divisible by 5 but not by 10?",["450","623","735","820"],2,"735 ends in 5, so it is divisible by 5 but not by 10."],
+    ["If the digit sum of a number is 27, that number is definitely divisible by?",["2 only","3 and 9","5 only","10 only"],1,"27 is divisible by both 3 and 9, so the number is divisible by both."],
+    ["Which number is divisible by 11?",["242","245","248","250"],0,"242 = 11 × 22."],
+    ["Which statement is true for every integer divisible by 6?",["It is divisible by 2 and 3","It is divisible by 5","It ends in 6","It is odd"],0,"Since 6 = 2 × 3, divisibility by 6 implies divisibility by both 2 and 3."]
+  ],
   "Prime and composite numbers": [
     ["Which of these is a prime number?",["1","9","13","21"],2,"13 has exactly two positive factors: 1 and 13."],
     ["Which statement defines a prime number?",["It has exactly two positive factors","It has only one factor","It is always even","It ends in 1"],0,"A prime number has exactly two positive factors: 1 and itself."],

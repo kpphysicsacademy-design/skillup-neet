@@ -3,6 +3,38 @@
    Expected row format: [question, [optionA, optionB, optionC, optionD], correctOptionIndex, explanation].
 */
 window.SKILLUP_MATHS_QUIZ_BANK = {
+  "Operations on rational numbers": [
+    ["Calculate 2/5 + 1/5.",["3/10","3/5","1/5","2/25"],1,"The denominators are equal, so add numerators: (2+1)/5 = 3/5."],
+    ["Calculate 3/4 − 1/4.",["1/2","2/8","1/4","3/8"],0,"Subtract the numerators: (3−1)/4 = 2/4 = 1/2."],
+    ["Calculate 1/2 + 1/3.",["2/5","5/6","1/6","2/6"],1,"Use denominator 6: 3/6 + 2/6 = 5/6."],
+    ["Calculate 5/6 − 1/4.",["4/2","7/12","1/2","2/12"],1,"Use denominator 12: 10/12 − 3/12 = 7/12."],
+    ["Calculate (2/3) × (3/5).",["2/5","6/15","5/2","1/5"],0,"Multiply numerators and denominators: 6/15 simplifies to 2/5."],
+    ["Calculate (4/7) ÷ (2/3).",["8/21","6/7","14/6","2/7"],1,"Divide by multiplying by the reciprocal: 4/7 × 3/2 = 12/14 = 6/7."],
+    ["Calculate −2/5 + 1/5.",["−1/5","1/5","−3/5","3/5"],0,"Add numerators with the same denominator: (−2+1)/5 = −1/5."],
+    ["Calculate −3/4 − 1/4.",["−1/2","−1","1","−3/8"],1,"(−3−1)/4 = −4/4 = −1."],
+    ["Calculate (−2/3) × (3/4).",["−1/2","1/2","−2/7","−5/12"],0,"Multiply to get −6/12, which simplifies to −1/2."],
+    ["Calculate (−5/8) ÷ (−5/4).",["−1/2","1/2","−2","2"],1,"The quotient is positive: (−5/8) × (−4/5) = 1/2."],
+    ["What is 7/9 + 0?",["0","7/9","1","9/7"],1,"Adding zero leaves the number unchanged."],
+    ["What is (−3/7) × 0?",["−3/7","0","1","3/7"],1,"Any number multiplied by zero equals zero."],
+    ["Calculate 2 − 3/5.",["1 2/5","1 3/5","−1/5","5/3"],0,"2 = 10/5, so 10/5 − 3/5 = 7/5 = 1 2/5."],
+    ["Calculate 1/3 + 1/6 + 1/2.",["1","5/6","2/3","7/6"],0,"With denominator 6: 2/6 + 1/6 + 3/6 = 6/6 = 1."],
+    ["Calculate 3/8 × 4/9.",["1/6","12/17","7/18","3/2"],0,"Multiply to get 12/72, which simplifies to 1/6."],
+    ["Calculate 5/12 ÷ 5/6.",["1/2","2","25/72","5/18"],0,"5/12 × 6/5 = 6/12 = 1/2."],
+    ["Simplify 2/7 + 3/14.",["5/21","1/2","5/14","7/14"],1,"2/7 = 4/14; 4/14 + 3/14 = 7/14 = 1/2."],
+    ["Calculate −1/2 + 3/4.",["1/4","−1/4","5/4","−5/4"],0,"−1/2 = −2/4; −2/4 + 3/4 = 1/4."],
+    ["Calculate 4/5 − (−1/5).",["3/5","1","−1","5/4"],1,"Subtracting a negative becomes addition: 4/5 + 1/5 = 1."],
+    ["Calculate (−3/5) × (−10/9).",["−2/3","2/3","−30/45","3/2"],1,"A negative times a negative is positive; 30/45 simplifies to 2/3."],
+    ["Calculate 7/10 ÷ 7/5.",["1/2","2","49/50","7/2"],0,"7/10 × 5/7 = 5/10 = 1/2."],
+    ["Which operation is not defined for rational numbers in this form?",["Addition","Subtraction","Multiplication","Division by zero"],3,"Division by zero is undefined."],
+    ["Calculate (1/2 + 1/4) × 2/3.",["1/2","1/3","3/4","2/3"],0,"1/2 + 1/4 = 3/4; then 3/4 × 2/3 = 1/2."],
+    ["Calculate 2/3 × (−9/10) + 1/5.",["−2/5","−3/5","−4/5","2/5"],0,"2/3 × −9/10 = −3/5; −3/5 + 1/5 = −2/5."],
+    ["Calculate 3/4 ÷ 9/8.",["2/3","3/2","27/32","1/3"],0,"3/4 × 8/9 = 24/36 = 2/3."],
+    ["Find the value of (−1/3) + (−1/6).",["−1/2","1/2","−1/6","−2/9"],0,"−1/3 = −2/6; −2/6 − 1/6 = −3/6 = −1/2."],
+    ["What is 5/8 − 3/4?",["1/8","−1/8","−1/4","1/4"],1,"3/4 = 6/8, so 5/8 − 6/8 = −1/8."],
+    ["Calculate (2/5) ÷ (−4/15).",["−3/2","3/2","−8/75","2/3"],0,"2/5 × 15/−4 = 30/−20 = −3/2."],
+    ["A ribbon 3/4 m long is cut into pieces each 1/8 m long. How many pieces are made?",["4","6","8","12"],1,"(3/4) ÷ (1/8) = (3/4) × 8 = 6 pieces."],
+    ["A tank is 2/3 full. If 1/4 of the tank's total capacity is drained, what fraction remains full?",["5/12","1/3","1/2","11/12"],0,"Remaining amount = 2/3 − 1/4 = 8/12 − 3/12 = 5/12."]
+  ],
   "Comparing rational numbers": [
     ["Which rational number is greater?",["2/5","3/5","They are equal","Cannot be determined"],1,"With the same positive denominator, compare numerators: 3/5 > 2/5."],
     ["Which is greater?",["−1/3","−2/3","They are equal","Both are positive"],0,"Among negative fractions, the one closer to zero is greater."],

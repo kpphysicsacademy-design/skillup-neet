@@ -48,6 +48,7 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
 @media(max-width:760px){.wrap{padding:12px 10px 60px}.nav{height:58px}.physics-hero{padding:22px 18px;min-height:0;border-radius:22px}.hero-art{min-width:0;min-height:85px;gap:4px}.atom{font-size:45px}.rocket-art{font-size:52px}.book-stack b{font-size:8px;padding:6px 8px}.physics-hero h1{font-size:31px}.physics-hero p{font-size:13px}.hero-points{margin-top:12px}.hero-points span{font-size:9px;padding:6px 8px}.chapter{margin-left:28px}.node{left:-18px}.chapter a{padding:9px}.title{font-size:12px}.go{width:31px;height:31px}.unit h2{font-size:15px}.unit small{font-size:8px}}
 @media(max-width:460px){.physics-hero{display:block}.hero-art{justify-content:flex-end;min-height:72px;margin-top:8px}.atom{font-size:35px}.rocket-art{font-size:45px}.book-stack b{font-size:7px;padding:5px 7px}.search-btn{padding:0 12px}.search{min-width:0}.wrap{padding-left:8px;padding-right:8px}}
 
+</style>
 <style id="skillup-physics-title-only-final">
 /* Match Chemistry concept-card layout: one title line and the green arrow on the right. */
 .chapter .icon,
@@ -89,6 +90,7 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
   .chapter .title { font-size:13px!important; }
   .chapter .go { width:34px!important; height:34px!important; }
 }
+</style>
 <style id="skillup-remove-concept-svg-icons">
 /* Remove SVG artwork/icons from Physics concept cards; retain text-only titles. */
 .chapter svg,
@@ -122,7 +124,7 @@ var p=document.getElementById('path'),q=document.getElementById('q'),e=document.
 var shown=0,searchTerm='',B=20,I=20;
 var icons=['📏','🏃','⚖️','💪','🎯','🔄','🌍','💧','🌡️','🔥','💨','〰️','🌊','⚡','🔌','🧲','〽️','📡','⚛️','🧪'];
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function formatTitle(s){var small={and:1,or:1,of:1,the:1,in:1,on:1,for:1,to:1,by:1,with:1};var words=String(s).trim().toLowerCase().replace(/\\s+/g,' ').split(' ');return words.map(function(w,i){return i>0&&small[w]?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(' ');}
+function formatTitle(s){var small={and:1,or:1,of:1,the:1,in:1,on:1,for:1,to:1,by:1,with:1};var words=String(s).trim().toLowerCase().replace(/\s+/g,' ').split(' ');return words.map(function(w,i){return i>0&&small[w]?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(' ');}
 function unit(x){if(document.getElementById('unit-'+x.u))return '';return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.n)+'</h2><small>UNIT '+x.u+' of 20</small></div></div></div>';}
 function unitQuiz(n){return '<div class="unit-quiz" id="unit-quiz-'+n+'"><a class="unit-link notranslate" translate="no" href="physics-master-quiz.html?unit='+n+'">🧠 TAKE UNIT '+n+' MASTER QUIZ • 20 MCQs</a></div>';}
 function card(x){return '<article class="chapter"><span class="node"></span><a href="physics-path-concept-3.html?concept='+encodeURIComponent(x.c)+'"><div class="title"><span>'+esc(formatTitle(x.c))+'</span></div></a></article>';}
@@ -132,6 +134,7 @@ render(a,I);
 var s=document.createElement('div');s.style.height='1px';p.after(s);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
 document.getElementById('searchBtn').onclick=function(){searchTerm=q.value.trim().toLowerCase();var list=searchTerm?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(searchTerm)>-1;}):a;render(list,searchTerm?list.length:I);};
+q.addEventListener('keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();document.getElementById('searchBtn').click();}});
 })();
 var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu'),ls=document.getElementById('langSelect');
 function setGoogleLanguage(lang){

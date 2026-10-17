@@ -210,6 +210,7 @@ input[aria-invalid="true"]{border-color:#d92d20}
   font-size:14px;font-weight:850;text-decoration:none;box-shadow:0 6px 14px rgba(37,99,235,.18);
   transition:background .15s,transform .05s
 }
+.premium-cta{border:0;cursor:pointer;font-family:inherit;text-align:center}
 .premium-cta:hover{background:#1e40af}
 .premium-cta:active{transform:translateY(1px)}
 .premium-note{margin:10px 0 0;color:#667085;font-size:11px;line-height:1.45;text-align:center}
@@ -304,7 +305,8 @@ input[aria-invalid="true"]{border-color:#d92d20}
       <li>Performance analytics</li>
       <li>Study materials & flashcards</li>
     </ul>
-    <a class="premium-cta" href="skillup_premium_upgrade.html">Explore Pro Scholar <span aria-hidden="true">&nbsp;→</span></a>
+    <button class="premium-cta" id="premiumDetails" type="button">Explore Pro Scholar <span aria-hidden="true">&nbsp;→</span></button>
+    <p class="premium-note" id="premium-status" role="status" aria-live="polite" hidden></p>
     <p class="premium-note">*Displayed offer from the plan page. Confirm current price and payment availability before purchase.</p>
   </aside>
 
@@ -330,6 +332,8 @@ input[aria-invalid="true"]{border-color:#d92d20}
   const passwordInput=document.getElementById('password');
   const forgot=document.getElementById('forgot');
   const toggle=document.getElementById('togglePassword');
+  const premiumDetails=document.getElementById('premiumDetails');
+  const premiumStatus=document.getElementById('premium-status');
 
   function show(text,ok){
     msg.textContent=text;
@@ -355,6 +359,11 @@ input[aria-invalid="true"]{border-color:#d92d20}
   }catch{
     show('Unable to check your current session. Please refresh and try again.',false);
   }
+
+  premiumDetails.addEventListener('click',()=>{
+    premiumStatus.hidden=false;
+    premiumStatus.textContent='Pro Scholar plan details are shown above. Online payment is not connected yet, so no payment will be taken here. Please check back for an official checkout link.';
+  });
 
   toggle.addEventListener('click',()=>{
     const visible=passwordInput.type==='text';

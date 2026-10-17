@@ -77,6 +77,28 @@
       .bigscore{color:#3478f6!important}.reward{background:#e3f8d6!important;color:#278100!important}
       .tile{background:linear-gradient(120deg,#f0ffe8,#edf6ff)!important;border:1px solid #dbe7f8!important;border-radius:18px!important;color:#17265e!important}
       button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #8ebaff!important;outline-offset:3px}
+      /* Playful Maths effects: floating geometry, warm orange + indigo accents, gentle motion */
+      body:before,body:after{content:"";position:fixed;z-index:0;pointer-events:none;opacity:.22;font-weight:1000;line-height:1;animation:skillup-math-float 12s ease-in-out infinite}
+      body:before{content:"π  +  ◇";left:max(8px,calc((100vw - 900px)/2));top:22%;font-size:clamp(24px,4vw,44px);color:#ff9f43;transform:rotate(-12deg)}
+      body:after{content:"×  ○  ÷";right:max(8px,calc((100vw - 900px)/2));top:60%;font-size:clamp(20px,3.5vw,38px);color:#6558f5;animation-delay:-5s;transform:rotate(10deg)}
+      .wrap{position:relative;z-index:1}
+      .bar{background:linear-gradient(90deg,#58cc02,#a3e635,#ffbf47)!important;box-shadow:0 0 12px rgba(88,204,2,.28)}
+      .xp,.reward,.pill{transition:transform .2s ease,box-shadow .2s ease}
+      .xp:hover,.reward:hover,.pill:hover{transform:translateY(-2px) rotate(-1deg);box-shadow:0 5px 14px rgba(101,88,245,.12)}
+      .option,.choice,.answer,.answer-option,.option-btn{animation:skillup-option-in .32s both}
+      .option:nth-child(2),.choice:nth-child(2),.answer:nth-child(2),.answer-option:nth-child(2),.option-btn:nth-child(2){animation-delay:.04s}
+      .option:nth-child(3),.choice:nth-child(3),.answer:nth-child(3),.answer-option:nth-child(3),.option-btn:nth-child(3){animation-delay:.08s}
+      .option:nth-child(4),.choice:nth-child(4),.answer:nth-child(4),.answer-option:nth-child(4),.option-btn:nth-child(4){animation-delay:.12s}
+      .option:active:not(:disabled),.choice:active:not(:disabled),.answer:active:not(:disabled),.answer-option:active:not(:disabled),.option-btn:active:not(:disabled){transform:scale(.985)}
+      button.primary:not(:disabled),.primary:not(:disabled),.primary-btn:not(:disabled),.next-btn:not(:disabled),#next:not(:disabled),.check-answer:not(:disabled),button[type=submit]:not(:disabled){box-shadow:0 4px 0 #46a302,0 7px 14px rgba(88,204,2,.16)}
+      button.primary:hover:not(:disabled),.primary:hover:not(:disabled),.primary-btn:hover:not(:disabled),.next-btn:hover:not(:disabled),#next:hover:not(:disabled),.check-answer:hover:not(:disabled){animation:skillup-button-bounce .38s ease}
+      .feedback.good,.feedback.correct,.feedback.success,.correct-feedback,.reward{animation:skillup-reward-pop .42s cubic-bezier(.2,.8,.2,1)}
+      @keyframes skillup-math-float{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -16px;rotate:7deg}}
+      @keyframes skillup-option-in{from{opacity:.65;translate:0 7px}to{opacity:1;translate:0 0}}
+      @keyframes skillup-button-bounce{0%,100%{translate:0 0}45%{translate:0 -3px}70%{translate:0 1px}}
+      @keyframes skillup-reward-pop{0%{transform:scale(.96);opacity:.7}65%{transform:scale(1.025)}100%{transform:scale(1);opacity:1}}
+      @media(max-width:520px){body:before{top:14%;left:4px}body:after{right:4px;top:70%}}
+      @media(prefers-reduced-motion:reduce){body:before,body:after,.option,.choice,.answer,.answer-option,.option-btn{animation:none!important}}
       @keyframes skillup-quiz-feedback{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
       @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
     `;

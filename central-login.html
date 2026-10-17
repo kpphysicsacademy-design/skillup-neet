@@ -216,9 +216,52 @@ input[aria-invalid="true"]{border-color:#d92d20}
 .premium-note{margin:10px 0 0;color:#667085;font-size:11px;line-height:1.45;text-align:center}
 @media(max-width:380px){.premium-features{grid-template-columns:1fr}}
 
+
+/* Compact, accessible SkillUp navigation dropdown */
+.site-nav{position:absolute;top:16px;right:max(16px,calc((100vw - 1120px)/2));z-index:30}
+.menu-toggle{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 13px;border:1px solid #d8dfeb;border-radius:12px;background:rgba(255,255,255,.94);color:#344054;font-size:13px;font-weight:800;box-shadow:0 4px 14px rgba(24,32,51,.06)}
+.menu-toggle:hover,.menu-toggle[aria-expanded="true"]{border-color:#93b4ff;background:#eff6ff;color:#1d4ed8}
+.menu-toggle:focus-visible,.menu-item:focus-visible{outline:0;box-shadow:var(--focus)}
+.menu-icon{width:17px;height:17px;display:block}
+.menu-panel{position:absolute;right:0;top:calc(100% + 9px);width:220px;padding:7px;background:#fff;border:1px solid #e4e7ec;border-radius:14px;box-shadow:0 16px 36px rgba(24,32,51,.16)}
+.menu-panel[hidden]{display:none}
+.menu-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;color:#344054;text-decoration:none;font-size:13px;font-weight:700}
+.menu-item:hover{background:#f2f6ff;color:#1d4ed8}
+.menu-item svg{width:17px;height:17px;color:#667085;flex:none}
+.menu-divider{height:1px;background:#eaecf0;margin:5px 4px}
+@media(max-width:520px){.site-nav{top:10px;right:10px}.menu-toggle{min-height:38px;padding:8px 10px}.wrap{padding-top:68px}}
+
 </style>
 </head>
 <body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <button class="menu-toggle" id="skillup-menu-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="skillup-menu">
+    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    Menu
+    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+  </button>
+  <div class="menu-panel" id="skillup-menu" role="menu" hidden>
+    <a class="menu-item" role="menuitem" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg>
+      SkillUp Home
+    </a>
+    <a class="menu-item" role="menuitem" href="#login" data-menu-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+      Sign in
+    </a>
+    <a class="menu-item" role="menuitem" href="central-register.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M19 8v6M16 11h6"/></svg>
+      Create account
+    </a>
+    <div class="menu-divider" role="separator"></div>
+    <a class="menu-item" role="menuitem" href="#premium-title" data-menu-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>
+      Pro Scholar plan
+    </a>
+  </div>
+</nav>
+
 <main class="wrap">
   <header class="brand" aria-label="SkillUp">
     <img class="brand-logo" src="skillup-logo-exact.webp" alt="SkillUp logo" width="76" height="76">
@@ -471,5 +514,42 @@ input[aria-invalid="true"]{border-color:#d92d20}
 })();
 </script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+
+<script>
+(function(){
+  const toggle=document.getElementById('skillup-menu-toggle');
+  const menu=document.getElementById('skillup-menu');
+  if(!toggle||!menu)return;
+  function closeMenu(returnFocus){
+    menu.hidden=true;
+    toggle.setAttribute('aria-expanded','false');
+    if(returnFocus)toggle.focus();
+  }
+  toggle.addEventListener('click',function(){
+    const opening=menu.hidden;
+    menu.hidden=!opening;
+    toggle.setAttribute('aria-expanded',String(opening));
+    if(opening){
+      const first=menu.querySelector('[role="menuitem"]');
+      if(first)first.focus();
+    }
+  });
+  menu.addEventListener('click',function(event){
+    const item=event.target.closest('[data-menu-close]');
+    if(item)closeMenu(false);
+  });
+  document.addEventListener('click',function(event){
+    if(!menu.hidden&&!event.target.closest('.site-nav'))closeMenu(false);
+  });
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape'&&!menu.hidden){event.preventDefault();closeMenu(true);}
+    if(event.key==='ArrowDown'&&document.activeElement===toggle&&menu.hidden){
+      event.preventDefault();menu.hidden=false;toggle.setAttribute('aria-expanded','true');
+      const first=menu.querySelector('[role="menuitem"]');if(first)first.focus();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>

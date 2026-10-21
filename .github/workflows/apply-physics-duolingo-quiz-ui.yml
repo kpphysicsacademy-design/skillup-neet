@@ -1,0 +1,50 @@
+name: Apply compact Duolingo UI to Physics quizzes
+on:
+  push:
+    branches: [main]
+jobs:
+  enhance:
+    if: github.event.head_commit.message != 'Apply SkillUp simple Duolingo quiz UI'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add shared quiz stylesheet to Physics quiz pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          css=Path('physics-duolingo-quiz.css')
+          if not css.exists():
+              raise SystemExit('Missing physics-duolingo-quiz.css')
+          changed=[]
+          for p in root.glob('physics-*.html'):
+              s=p.read_text(encoding='utf-8')
+              if not re.search(r'(?i)(id=["\'](?:question|q|opts|options)|class=["\'][^"\']*(?:quiz-card|question-card|options|answers|option)|Check Answer|Next Question|question-bank|const quiz\s*=)',s):
+                  continue
+              link='<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">'
+              if 'physics-duolingo-quiz.css' in s:
+                  continue
+              if re.search(r'</head>',s,re.I):
+                  s=re.sub(r'</head>',link+'\\n</head>',s,count=1,flags=re.I)
+              else:
+                  s=link+s
+              p.write_text(s,encoding='utf-8')
+              changed.append(str(p))
+          print('Styled quiz pages:',len(changed))
+          if len(changed)<10:
+              raise SystemExit('Unexpectedly few quiz pages matched; refusing to commit')
+          Path('/tmp/changed-quiz-pages.txt').write_text('\\n'.join(changed))
+          PY
+      - name: Verify and commit
+        run: |
+          test -f physics-duolingo-quiz.css
+          grep -q '58cc02' physics-duolingo-quiz.css
+          git add physics-*.html physics-duolingo-quiz.css
+          git diff --cached --quiet && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Apply SkillUp simple Duolingo quiz UI'
+          git push

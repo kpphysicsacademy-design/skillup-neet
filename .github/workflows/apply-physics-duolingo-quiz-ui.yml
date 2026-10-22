@@ -1,43 +1,78 @@
+
 name: Apply compact Duolingo UI to Physics quizzes
+
 on:
   push:
     branches: [main]
+
 jobs:
   enhance:
     if: github.event.head_commit.message != 'Apply SkillUp simple Duolingo quiz UI'
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Add shared quiz stylesheet to Physics quiz pages
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
-          root=Path('.')
-          css=Path('physics-duolingo-quiz.css')
-          if not css.exists():
-              raise SystemExit('Missing physics-duolingo-quiz.css')
-          changed=[]
-          for p in root.glob('physics-*.html'):
-              s=p.read_text(encoding='utf-8')
-              if not re.search(r'(?i)(id=["\'](?:question|q|opts|options)|class=["\'][^"\']*(?:quiz-card|question-card|options|answers|option)|Check Answer|Next Question|question-bank|const quiz\s*=)',s):
+
+          css = Path("physics-duolingo-quiz.css")
+          if not css.is_file():
+              raise SystemExit("Missing physics-duolingo-quiz.css")
+
+          changed = []
+          candidates = []
+
+          markers = re.compile(
+              r"""(?i)(id=["'](?:question|q|opts|options)["']|"""
+              r"""class=["'][^"']*(?:quiz-card|question-card|options|answers|option)|"""
+              r"""check answer|next question|question-bank|const\s+questions?\s*=)"""
+          )
+
+          for page in sorted(Path(".").glob("physics-*.html")):
+              source = page.read_text(encoding="utf-8")
+
+              if not markers.search(source):
                   continue
-              link='<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">'
-              if 'physics-duolingo-quiz.css' in s:
+
+              candidates.append(str(page))
+
+              if "physics-duolingo-quiz.css" in source:
                   continue
-              if re.search(r'</head>',s,re.I):
-                  s=re.sub(r'</head>',link+'\\n</head>',s,count=1,flags=re.I)
+
+              link = '<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">'
+
+              if re.search(r"</head\s*>", source, re.I):
+                  source = re.sub(
+                      r"</head\s*>",
+                      lambda _: link + "\n</head>",
+                      source,
+                      count=1,
+                      flags=re.I
+                  )
               else:
-                  s=link+s
-              p.write_text(s,encoding='utf-8')
-              changed.append(str(p))
-          print('Styled quiz pages:',len(changed))
-          if len(changed)<10:
-              raise SystemExit('Unexpectedly few quiz pages matched; refusing to commit')
-          Path('/tmp/changed-quiz-pages.txt').write_text('\\n'.join(changed))
+                  print(f"Skipped {page}: no closing head tag")
+                  continue
+
+              page.write_text(source, encoding="utf-8")
+              changed.append(str(page))
+
+          print("Matching Physics quiz pages:", len(candidates))
+          print("New stylesheet links added:", len(changed))
+          print("Already linked or otherwise skipped:", len(candidates) - len(changed))
+
+          if not candidates:
+              raise SystemExit("No matching Physics quiz pages found; refusing to commit")
+
+          if len(changed) == 0:
+              print("No changes needed; all matching pages may already be linked.")
           PY
+
       - name: Verify and commit
         run: |
           test -f physics-duolingo-quiz.css

@@ -1,86 +1,133 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Unit Systems</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
-/* Fix mobile layout: one quiz card, no nested question card, compact footer link */
-body{background:#f3f9ff!important}
-.wrap{width:100%;max-width:720px;margin:0 auto;padding:18px 13px 36px!important}
-.card{width:100%;max-width:100%;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;overflow:visible!important}
-#quiz{width:100%;max-width:100%;min-width:0;overflow-wrap:anywhere}
-#quiz .q{display:block!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:8px 0 16px!important;margin:0 0 12px!important;color:var(--ink);font-size:clamp(20px,4.5vw,26px);line-height:1.4}
-#quiz .opt{width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere}
-.card > a.back{display:flex!important;align-items:center;justify-content:flex-start;gap:8px;width:max-content;max-width:100%;min-height:44px;margin:18px 0 0!important;padding:8px 12px!important;background:#eef8ff!important;border:2px solid #d8eaf7!important;border-radius:14px!important;box-shadow:0 3px 0 #dce8f3!important;color:#174a78!important;font-size:15px!important;line-height:1.3;text-align:left!important;white-space:normal}
-@media(max-width:480px){.wrap{padding:12px 10px 28px!important}#quiz{padding:15px!important}.card > a.back{font-size:14px!important}}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Unit Systems quiz">
+<title>SkillUp | Unit Systems — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-
-/* Final mobile structure: contained feedback and a compact, non-wrapping footer */
-#xp{display:block;width:100%;max-width:100%;min-width:0;min-height:0;box-sizing:border-box;margin:12px 0;padding:12px 14px;border:1px solid #d6dfcf;border-radius:16px;background:#e9eddf;color:#49654a;font-size:13px;font-weight:800;line-height:1.5;text-align:left;white-space:normal;overflow-wrap:anywhere;word-break:normal;overflow:visible}
-.card > a.back{display:inline-flex!important;align-items:center;justify-content:flex-start;width:auto!important;max-width:100%;min-width:0;box-sizing:border-box;margin:10px 0 0!important;padding:9px 12px!important;border-radius:14px!important;white-space:normal!important;overflow-wrap:anywhere;line-height:1.35;text-align:left!important}
-.card > a.back::first-letter{font-size:1em}
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
 @media(max-width:480px){
- #xp{font-size:12px;padding:10px 12px}
- .card > a.back{font-size:14px!important}
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
 }
 
-
-/* Final viewport fix: keep every feedback message inside the phone width */
-html,body{width:100%;max-width:100%;overflow-x:hidden}
-.wrap,.card,#quiz,.result{min-width:0;max-width:100%}
-#xp{width:100%;max-width:100%;min-width:0;margin:12px 0;box-sizing:border-box;padding:10px 12px;text-align:left;white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.5;overflow:hidden}
-#xp *{max-width:100%;white-space:normal;overflow-wrap:anywhere}
-.card > a.back{display:inline-flex!important;width:auto!important;max-width:100%;white-space:normal!important;overflow-wrap:anywhere}
-
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-
-<style>
-/* SkillUp Duolingo-style refresh aligned with Physical Quantities and SI Base Units */
-:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:18px 13px 48px}
-.card{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.skillup-nav{max-width:720px;margin:auto;min-height:68px;padding:9px 12px;display:flex;align-items:center;gap:9px}
-.skillup-back{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.skillup-brand{flex:1;min-width:0;font-weight:950;color:#174a78;font-size:18px;line-height:1.1}
-.skillup-brand small{display:block;margin-top:4px;font-size:9px;letter-spacing:.7px;color:var(--muted)}
-.skillup-xp{flex:0 0 auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:8px 10px;font-weight:900;font-size:12px;color:#654b00}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78;text-align:left}
-.meta{display:flex;justify-content:space-between;gap:10px;margin:15px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.bar{height:11px;background:#e2edf7;border-radius:99px;overflow:hidden;margin:0 0 16px}
-.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-#quiz,.result{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin:0 0 14px;box-shadow:0 4px 0 #dce8f3}
-.q{font-size:clamp(20px,4.5vw,26px);font-weight:850;line-height:1.35;margin:8px 0 18px}
-.opt{display:flex;align-items:center;gap:10px;width:100%;min-height:54px;box-sizing:border-box;text-align:left;padding:12px;margin:10px 0;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;background:#fff;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
-.opt:hover:not(:disabled){border-color:var(--blue);background:#f0faff}
-.opt.correct{border-color:var(--green)!important;background:#efffe7!important}
-.opt.wrong{border-color:var(--red)!important;background:#fff0f0!important}
-.opt:disabled{cursor:default}
-.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:14px;font-size:15px;font-weight:900;cursor:pointer}
-.next,.retry{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-.back{background:#eef8ff;border:2px solid #d8eaf7;color:#174a78;box-shadow:0 3px 0 #dce8f3}
-.xp{text-align:center;font-weight:800;color:#23618a;min-height:24px;margin:12px 0}
-.hide{display:none!important}
-#result h2{color:#174a78}
-button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-@media(max-width:480px){.wrap{padding:12px 10px 34px}#quiz,.result{padding:15px;border-radius:18px}.opt{font-size:14px;padding:11px}.skillup-nav{gap:7px;padding:9px 10px}.skillup-brand{font-size:17px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head><body><header><div class="skillup-nav"><a class="skillup-back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="skillup-brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="skillup-xp">⭐ <span id="navXp">0</span> XP</div></div></header><div class="wrap"><div class="card"><h1>📐 Unit Systems</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The system of units universally adopted in science is','CGS','FPS','SI','MKS',2,'The SI system is the internationally accepted system of units used in science.'],
-['In the CGS system, the unit of length is','metre','centimetre','foot','inch',1,'CGS stands for centimetre-gram-second, so its unit of length is centimetre.'],
-['In the CGS system, the unit of mass is','gram','kilogram','pound','tonne',0,'The gram is the unit of mass in the CGS system.'],
-['In the CGS system, the unit of time is','second','minute','hour','day',0,'The second is the time unit in the CGS system.'],
-['The FPS system uses which fundamental units for length, mass and time?','metre, kilogram, second','centimetre, gram, second','foot, pound, second','foot, kilogram, minute',2,'FPS uses foot for length, pound for mass and second for time.'],
-['The MKS system is based on','metre, kilogram, second','metre, gram, second','foot, pound, second','centimetre, kilogram, second',0,'MKS stands for metre-kilogram-second.'],
-['Which is an advantage of the SI system?','It has different units in every country','It is internationally coherent and decimal-based','It uses only CGS units','It has no derived units',1,'SI provides an internationally consistent and decimal-based system of measurement.'],
-['The SI system is based on how many base units?','5','6','7','8',2,'The SI system has seven base units: metre, kilogram, second, ampere, kelvin, mole and candela.'],
-['Which pair belongs to the CGS system?','newton and joule','dyne and erg','pascal and watt','pound and foot',1,'Dyne is the CGS unit of force and erg is the CGS unit of energy.'],
-['The CGS unit of force is','newton','dyne','joule','watt',1,'The dyne is the CGS unit of force.'],
-['The CGS unit of energy is','erg','dyne','pascal','newton',0,'The erg is the CGS unit of energy.'],
-['One newton is equal to how many dynes?','10³','10⁴','10⁵','10⁶',2,'1 newton = 10⁵ dynes.'],
-['One joule is equal to how many ergs?','10⁵','10⁶','10⁷','10⁸',2,'1 joule = 10⁷ ergs.'],
-['Which system uses foot, pound and second as basic units?','SI','MKS','CGS','FPS',3,'FPS stands for foot-pound-second.'],
-['Why are multiple historical unit systems less convenient than SI?','They cannot measure physical quantities','Conversion between systems can be inconvenient','They have no units for time','They contain no derived units',1,'Using different systems can require conversions, whereas SI provides an internationally consistent framework.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('navXp').textContent=score;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('navXp').textContent=score;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
-
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📐 Unit Systems</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"What is a system of units?","o":["A set of agreed measurement units","A measuring instrument","A type of error","A number without a unit"],"a":0,"e":"A system of units is an organised set of units used to measure physical quantities."},{"q":"Which is a commonly used system of units?","o":["CGS","RGB","HTML","DNA"],"a":0,"e":"CGS stands for centimetre–gram–second."},{"q":"In the CGS system, the unit of length is:","o":["Metre","Centimetre","Foot","Kilometre"],"a":1,"e":"CGS uses centimetre for length."},{"q":"In the CGS system, the unit of mass is:","o":["Kilogram","Gram","Pound","Tonne"],"a":1,"e":"CGS uses gram for mass."},{"q":"In the CGS system, the unit of time is:","o":["Minute","Hour","Second","Day"],"a":2,"e":"The second is the time unit in CGS."},{"q":"What does MKS stand for?","o":["Metre–kilogram–second","Mass–kelvin–second","Metre–kelvin–siemens","Mile–kilogram–second"],"a":0,"e":"MKS uses metre, kilogram and second as its basic units."},{"q":"The SI system is based on how many base units?","o":["Three","Five","Seven","Ten"],"a":2,"e":"The International System of Units has seven base units."},{"q":"Which system uses foot, pound and second as units?","o":["CGS","FPS","SI","MKS"],"a":1,"e":"FPS stands for foot–pound–second."},{"q":"Which is the SI base unit of length?","o":["Centimetre","Metre","Foot","Kilometre"],"a":1,"e":"The SI base unit of length is the metre (m)."},{"q":"Which is the SI base unit of mass?","o":["Gram","Pound","Kilogram","Tonne"],"a":2,"e":"The SI base unit of mass is the kilogram (kg)."},{"q":"Which is the SI base unit of time?","o":["Minute","Hour","Second","Day"],"a":2,"e":"The SI base unit of time is the second (s)."},{"q":"Which system is internationally standardised for scientific use?","o":["SI","Only FPS","Only CGS","Local units only"],"a":0,"e":"SI provides internationally agreed units for consistent measurements."},{"q":"Why are standard units important?","o":["To make measurements comparable","To make values random","To avoid all calculations","To change physical laws"],"a":0,"e":"Standard units let people compare measurements reliably."},{"q":"Which is a unit of length in the FPS system?","o":["Foot","Metre","Centimetre","Kilogram"],"a":0,"e":"Foot is the length unit in the traditional FPS system."},{"q":"Which is a unit of mass in the MKS system?","o":["Gram","Kilogram","Pound-force","Centimetre"],"a":1,"e":"MKS uses kilogram for mass."},{"q":"Which of these is NOT a system of units?","o":["CGS","MKS","FPS","RGB"],"a":3,"e":"RGB is a colour model, not a measurement system."},{"q":"Which system uses centimetre, gram and second?","o":["MKS","FPS","CGS","SI base system"],"a":2,"e":"The initials CGS name its three basic units."},{"q":"The MKS system uses which length unit?","o":["Foot","Metre","Centimetre","Inch"],"a":1,"e":"The metre is the MKS length unit."},{"q":"Which is the best reason to use SI units in a lab?","o":["They support consistent reporting","They remove the need for instruments","They make every number smaller","They prevent experimental uncertainty"],"a":0,"e":"Using a common standard makes results easier to compare and communicate."},{"q":"Which pair matches the CGS system correctly?","o":["Metre and kilogram","Centimetre and gram","Foot and kilogram","Metre and pound"],"a":1,"e":"CGS uses centimetre for length and gram for mass."},{"q":"Which pair matches MKS correctly?","o":["Metre and kilogram","Centimetre and gram","Foot and pound","Inch and gram"],"a":0,"e":"MKS uses metre and kilogram, along with the second."},{"q":"Which pair matches FPS correctly?","o":["Metre and kilogram","Centimetre and gram","Foot and pound","Kilometre and gram"],"a":2,"e":"FPS uses foot for length and pound in its traditional mass/force conventions."},{"q":"What is a major advantage of SI over local units?","o":["It is internationally consistent","It has no units for time","It changes by country","It uses only length units"],"a":0,"e":"A shared system reduces confusion between countries and disciplines."},{"q":"Which SI unit is used for thermodynamic temperature?","o":["Celsius","Kelvin","Fahrenheit","Calorie"],"a":1,"e":"Kelvin (K) is the SI base unit for thermodynamic temperature."},{"q":"Which SI unit is used for electric current?","o":["Volt","Coulomb","Ampere","Ohm"],"a":2,"e":"Ampere (A) is the SI base unit for electric current."},{"q":"Which SI base unit measures amount of substance?","o":["Mole","Candela","Kelvin","Newton"],"a":0,"e":"The mole (mol) is the SI base unit for amount of substance."},{"q":"Which SI base unit measures luminous intensity?","o":["Lux","Lumen","Candela","Watt"],"a":2,"e":"Candela (cd) is the SI base unit for luminous intensity."},{"q":"Which unit system would use centimetre for length and gram for mass?","o":["SI only","CGS","FPS","MKS"],"a":1,"e":"Centimetre and gram identify the CGS system."},{"q":"A measurement written in feet must be converted to metres for SI reporting. This is because:","o":["Different systems use different units","Feet cannot measure length","Metres are not standard","Numbers cannot be converted"],"a":0,"e":"Conversion allows values measured in different unit systems to be compared."},{"q":"Which statement about unit systems is correct?","o":["Each system defines units for quantities","All systems use identical units","Only mass can be measured","A unit system replaces physical quantities"],"a":0,"e":"A unit system specifies agreed units used to express physical measurements."},{"q":"Why should a result include its unit?","o":["The number alone may be ambiguous","Units are decorative","Units show the person's name","A unit makes the value exact"],"a":0,"e":"A numerical value without a unit may not communicate the measured quantity clearly."}]
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

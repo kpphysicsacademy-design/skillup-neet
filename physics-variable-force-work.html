@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Variable Force Work</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#f7f7fb,#eeedff);color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 48px}.card{background:#fff;border-radius:24px;padding:28px;box-shadow:0 12px 34px #17203318;animation:cardIn .45s ease both}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.tag{font-weight:850;font-size:1rem}.xp{font-weight:900;padding:8px 12px;border-radius:999px;background:#f0edff;animation:pulse 1.8s ease-in-out infinite}.bar{height:10px;background:#e7e6f0;border-radius:999px;overflow:hidden;margin:18px 0 26px}.fill{height:100%;width:0;background:#5b50c8;border-radius:999px;transition:width .45s cubic-bezier(.2,.8,.2,1)}.q{font-size:1.25rem;font-weight:850;line-height:1.45;margin:22px 0;animation:slideIn .28s ease both}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:16px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;animation:optionIn .3s ease both}.opt:hover{transform:translateY(-3px) scale(1.01);border-color:#aaa4df;box-shadow:0 7px 16px #17203312}.opt.selected{border-color:#5b50c8;background:#f0edff;transform:scale(1.01)}.opt.correct{border-color:#2d9b68;background:#eaf8f1;animation:correctPop .35s ease}.opt.wrong{border-color:#d45555;background:#fff0f0;animation:shake .35s ease}.feedback{min-height:72px;margin-top:18px;padding:15px 16px;border-radius:16px;background:#f4f3fb;line-height:1.55;animation:fadeUp .25s ease}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:14px;padding:13px 18px;font:inherit;font-weight:850;cursor:pointer;background:#5b50c8;color:#fff;box-shadow:0 5px 0 #42399c;transition:transform .12s,box-shadow .12s,filter .12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #42399c}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:850;text-decoration:none;padding:11px 14px;border-radius:14px;transition:transform .15s,background .15s}.back:hover{background:#f0edff;transform:translateX(-3px)}.result{text-align:center;font-size:1.2rem;font-weight:800;line-height:1.7;animation:resultIn .5s ease both}@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes slideIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}@keyframes optionIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes correctPop{50%{transform:scale(1.025)}to{transform:scale(1)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}to{transform:none}}@keyframes pulse{50%{transform:scale(1.05)}}@keyframes resultIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}@media(max-width:600px){.card{padding:21px}.q{font-size:1.12rem}.opt{padding:13px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><div class="tag">⚙️ Variable Force Work</div><div class="xp">+10 XP</div></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></section></main><script>const qs=[['Work done by a variable force along a path is generally calculated from:',['the area under the F-x graph','the slope of the F-x graph','the area under the v-t graph','the final force only'],0,'For a variable force, W=∫F dx, represented by signed area under the F-x graph.'],['For a variable force F(x), an infinitesimal amount of work is:',['dW=F dx','dW=F/dx','dW=x dF','dW=F+x'],0,'For displacement dx along the force, dW=F(x)dx.'],['If force varies linearly from 0 to F over displacement x, work done is:',['½Fx','Fx','2Fx','0'],0,'The F-x graph is a triangle, so W=½Fx.'],['The SI unit of work done by a variable force is:',['joule','watt','newton','pascal'],0,'Work has the SI unit joule (J).'],['If the F-x graph lies below the x-axis over a displacement interval, the work in that interval is:',['negative','positive','zero always','undefined'],0,'The signed area below the axis represents negative work.'],['The net work over a path for a variable force equals:',['the signed area under its F-x graph','the maximum force only','the average velocity','the slope of the graph'],0,'Integration of F with respect to x gives the signed area and work.'],['A variable force F=2x N acts from x=0 to x=3 m. Work done is:',['9 J','6 J','3 J','18 J'],0,'W=∫0^3 2x dx=9 J.'],['A force F=3x² N acts from x=0 to x=2 m. Work done is:',['8 J','6 J','12 J','4 J'],0,'W=∫0^2 3x²dx=8 J.'],['If a variable force is constant and equal to F0 over displacement x, the F-x graph gives work equal to:',['F0x','½F0x','F0/x','x/F0'],0,'The rectangular area is F0x.'],['For a conservative force, work done between two points depends on:',['only the initial and final positions','the exact path only','time taken only','speed only'],0,'Conservative-force work is path independent.'],['For a spring force F=-kx, the work done by the spring from x=0 to x=A is:',['−½kA²','+½kA²','−kA','0'],0,'W=∫0^A(−kx)dx=−½kA².'],['If equal positive and negative areas occur under an F-x graph, total work is:',['zero','positive','negative','infinite'],0,'Equal signed areas cancel.'],['The average force producing the same work W over displacement x is:',['W/x','Wx','x/W','W+x'],0,'Favg=W/x for nonzero displacement.'],['Work done by a variable force can depend on the path when the force is:',['non-conservative','conservative','always constant','zero everywhere'],0,'Non-conservative forces generally have path-dependent work.'],['For a variable force, the work from x1 to x2 is:',['∫x1^x2 F(x)dx','F(x2)-F(x1)','x2-x1 only','F(x1)+F(x2)'],0,'Work is the definite integral of force with respect to position.']];let i=0,selected=null,score=0;const $=id=>document.getElementById(id);function render(){selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';$('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('check').onclick=check}function check(){if(selected===null){$('feedback').textContent='Please choose an answer first.';return}const a=qs[i],ok=selected===a[2];if(ok)score++;[...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});$('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{$('fill').style.width='100%';const pct=Math.round(score/qs.length*100);$('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions" style="justify-content:center"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsVariableForceWorkScore',String(score))}}function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Variable Force Work quiz">
+<title>SkillUp | Variable Force Work — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📈 Variable Force Work</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "For a force F that changes with position x, work from x₁ to x₂ is:",
+    "o": [
+      "∫ₓ₁ˣ₂ F(x) dx",
+      "F(x₂) − F(x₁)",
+      "F × time",
+      "The maximum value of F"
+    ],
+    "a": 0,
+    "e": "Work is the integral of the force component along the displacement: W = ∫F(x) dx."
+  },
+  {
+    "q": "On a force-versus-position graph, the signed area under the curve represents:",
+    "o": [
+      "Work",
+      "Power",
+      "Momentum",
+      "Acceleration"
+    ],
+    "a": 0,
+    "e": "For motion along the x-axis, the signed area under an F–x graph is work."
+  },
+  {
+    "q": "A constant force of 6 N acts through 4 m in its direction. Work done is:",
+    "o": [
+      "10 J",
+      "24 J",
+      "1.5 J",
+      "0 J"
+    ],
+    "a": 1,
+    "e": "W = Fx = 6 × 4 = 24 J."
+  },
+  {
+    "q": "A force rises linearly from 0 N to 10 N over 2 m. Work done is:",
+    "o": [
+      "10 J",
+      "20 J",
+      "5 J",
+      "40 J"
+    ],
+    "a": 0,
+    "e": "The F–x graph is a triangle: W = ½ × base × height = ½ × 2 × 10 = 10 J."
+  },
+  {
+    "q": "A force rises linearly from 2 N to 8 N over 3 m. Work done is:",
+    "o": [
+      "15 J",
+      "24 J",
+      "18 J",
+      "30 J"
+    ],
+    "a": 0,
+    "e": "For a straight-line force graph, W = average force × displacement = [(2 + 8)/2] × 3 = 15 J."
+  },
+  {
+    "q": "If F(x) = 4x N, the work done from x = 0 to x = 2 m is:",
+    "o": [
+      "8 J",
+      "16 J",
+      "4 J",
+      "32 J"
+    ],
+    "a": 1,
+    "e": "W = ∫₀² 4x dx = [2x²]₀² = 8 J."
+  },
+  {
+    "q": "If F(x) = 2x N, the work done from x = 0 to x = 3 m is:",
+    "o": [
+      "9 J",
+      "6 J",
+      "18 J",
+      "3 J"
+    ],
+    "a": 0,
+    "e": "W = ∫₀³ 2x dx = [x²]₀³ = 9 J."
+  },
+  {
+    "q": "A force F(x) = 3x² N acts from x = 0 to x = 2 m. Work done is:",
+    "o": [
+      "8 J",
+      "12 J",
+      "6 J",
+      "24 J"
+    ],
+    "a": 1,
+    "e": "W = ∫₀² 3x² dx = [x³]₀² = 8 J."
+  },
+  {
+    "q": "A force F(x) = 5 N is constant from x = 1 m to x = 4 m. Work done is:",
+    "o": [
+      "15 J",
+      "20 J",
+      "5 J",
+      "3 J"
+    ],
+    "a": 0,
+    "e": "W = FΔx = 5 × (4 − 1) = 15 J."
+  },
+  {
+    "q": "For F(x) = 6x N, work from x = 1 m to x = 2 m is:",
+    "o": [
+      "18 J",
+      "9 J",
+      "6 J",
+      "12 J"
+    ],
+    "a": 1,
+    "e": "W = ∫₁² 6x dx = [3x²]₁² = 12 − 3 = 9 J."
+  },
+  {
+    "q": "If the force points opposite to displacement throughout, its work is:",
+    "o": [
+      "Positive",
+      "Negative",
+      "Always zero",
+      "Always infinite"
+    ],
+    "a": 1,
+    "e": "The force component along displacement is negative, so the work is negative."
+  },
+  {
+    "q": "An F–x graph lies below the x-axis over an interval. Work in that interval is:",
+    "o": [
+      "Negative",
+      "Positive",
+      "Zero in all cases",
+      "Equal to power"
+    ],
+    "a": 0,
+    "e": "Area below the position axis contributes negative signed work."
+  },
+  {
+    "q": "Equal positive and negative signed areas under an F–x graph give total work of:",
+    "o": [
+      "Zero",
+      "Positive value",
+      "Negative value",
+      "Infinite value"
+    ],
+    "a": 0,
+    "e": "The positive and negative contributions cancel when their magnitudes are equal."
+  },
+  {
+    "q": "For a constant force at angle θ to displacement, work is:",
+    "o": [
+      "Fs cosθ",
+      "Fs sinθ",
+      "F/s",
+      "F + s"
+    ],
+    "a": 0,
+    "e": "Only the component F cosθ along the displacement contributes to work."
+  },
+  {
+    "q": "A 10 N force acts at 60° to a 4 m displacement. Work done is:",
+    "o": [
+      "20 J",
+      "40 J",
+      "10 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = Fs cos60° = 10 × 4 × ½ = 20 J."
+  },
+  {
+    "q": "A force of 12 N acts at 90° to a 5 m displacement. Work done is:",
+    "o": [
+      "60 J",
+      "30 J",
+      "Zero",
+      "−60 J"
+    ],
+    "a": 2,
+    "e": "W = Fs cos90° = 0."
+  },
+  {
+    "q": "For a spring with force F = −kx, work done by the spring from x = 0 to x = A is:",
+    "o": [
+      "−½kA²",
+      "+½kA²",
+      "−kA",
+      "Zero for every A"
+    ],
+    "a": 0,
+    "e": "W = ∫₀ᴬ −kx dx = −½kA²."
+  },
+  {
+    "q": "The work required by an external agent to slowly stretch an ideal spring from x = 0 to x = A is:",
+    "o": [
+      "+½kA²",
+      "−½kA²",
+      "kA",
+      "Zero"
+    ],
+    "a": 0,
+    "e": "Slow stretching stores spring potential energy, ΔU = ½kA², so the external work is positive."
+  },
+  {
+    "q": "For a conservative force, work between two fixed points depends on:",
+    "o": [
+      "Only the endpoints",
+      "The path length only",
+      "The time taken only",
+      "The speed at every point"
+    ],
+    "a": 0,
+    "e": "Conservative-force work is path independent and depends only on initial and final positions."
+  },
+  {
+    "q": "For a non-conservative force, work can depend on:",
+    "o": [
+      "The path followed",
+      "Only the final position",
+      "Only the mass in every case",
+      "The unit system"
+    ],
+    "a": 0,
+    "e": "Forces such as friction generally do different work along different paths."
+  },
+  {
+    "q": "The work done by a variable force over a small displacement dx is:",
+    "o": [
+      "dW = F(x) dx",
+      "dW = F(x)/dx",
+      "dW = x/F(x)",
+      "dW = F(x) + dx"
+    ],
+    "a": 0,
+    "e": "For a force parallel to the small displacement, the infinitesimal work is dW = F(x)dx."
+  },
+  {
+    "q": "The SI unit of work is:",
+    "o": [
+      "Joule",
+      "Watt",
+      "Newton",
+      "Pascal"
+    ],
+    "a": 0,
+    "e": "Work and energy are measured in joules (J)."
+  },
+  {
+    "q": "If the force–position graph is a rectangle of height 7 N and width 3 m, the work is:",
+    "o": [
+      "10 J",
+      "21 J",
+      "4 J",
+      "7/3 J"
+    ],
+    "a": 1,
+    "e": "Rectangular area = force × displacement = 7 × 3 = 21 J."
+  },
+  {
+    "q": "A force increases linearly from 4 N to 10 N over 2 m. Work done is:",
+    "o": [
+      "14 J",
+      "20 J",
+      "10 J",
+      "28 J"
+    ],
+    "a": 0,
+    "e": "Average force = (4 + 10)/2 = 7 N; work = 7 × 2 = 14 J."
+  },
+  {
+    "q": "A force decreases linearly from 8 N to 0 N over 4 m, always in the direction of motion. Work done is:",
+    "o": [
+      "16 J",
+      "32 J",
+      "8 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "The graph is a triangle: W = ½ × 4 × 8 = 16 J."
+  },
+  {
+    "q": "For F(x) = 4 − 2x N, work from x = 0 to x = 3 m is:",
+    "o": [
+      "3 J",
+      "6 J",
+      "−3 J",
+      "12 J"
+    ],
+    "a": 0,
+    "e": "W = ∫₀³ (4 − 2x) dx = [4x − x²]₀³ = 12 − 9 = 3 J."
+  },
+  {
+    "q": "For F(x) = 2x + 1 N, work from x = 0 to x = 2 m is:",
+    "o": [
+      "6 J",
+      "4 J",
+      "8 J",
+      "10 J"
+    ],
+    "a": 0,
+    "e": "W = ∫₀² (2x + 1) dx = [x² + x]₀² = 4 + 2 = 6 J."
+  },
+  {
+    "q": "If F(x) = 10x N, work from x = 0 to x = 1 m is:",
+    "o": [
+      "5 J",
+      "10 J",
+      "1 J",
+      "20 J"
+    ],
+    "a": 0,
+    "e": "W = ∫₀¹ 10x dx = [5x²]₀¹ = 5 J."
+  },
+  {
+    "q": "A variable force does 30 J of work over a 5 m displacement. Its average force component along displacement is:",
+    "o": [
+      "6 N",
+      "150 N",
+      "25 N",
+      "0.17 N"
+    ],
+    "a": 0,
+    "e": "Average force component = W/Δx = 30/5 = 6 N."
+  },
+  {
+    "q": "If the net work done on a body is −8 J, its change in kinetic energy is:",
+    "o": [
+      "+8 J",
+      "−8 J",
+      "Zero",
+      "−16 J"
+    ],
+    "a": 1,
+    "e": "By the work–energy theorem, net work equals the change in kinetic energy: ΔK = −8 J."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

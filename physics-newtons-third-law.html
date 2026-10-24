@@ -1,47 +1,133 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Newton's Third Law</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Newton's Third Law quiz">
+<title>SkillUp | Newton's Third Law — Easy Quiz</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.xp{font-weight:800;background:#fff;padding:9px 14px;border-radius:999px;box-shadow:0 4px 14px #17203312}.hero{background:#3b82f6;color:#fff;border-radius:22px;padding:24px;margin-bottom:18px}.hero small{font-weight:800;letter-spacing:.08em}.hero h1{margin:8px 0 6px;font-size:2rem}.hero p{margin:0;font-weight:650}.progress{background:#fff;border-radius:18px;padding:16px 18px;margin-bottom:18px;box-shadow:0 5px 16px #17203310}.progressline{height:10px;background:#e7e9ef;border-radius:99px;overflow:hidden;margin-top:9px}.fill{height:100%;width:0;background:#58cc02}.quiz{background:#fff;border-radius:22px;padding:24px;box-shadow:0 6px 20px #17203312}.meta{display:flex;justify-content:space-between;color:#617086;font-weight:750;margin-bottom:18px}.question{font-size:1.3rem;font-weight:750;line-height:1.45;margin-bottom:18px}.options{display:grid;gap:11px}.option{width:100%;text-align:left;padding:15px;border:2px solid #dfe3ea;background:#fff;border-radius:14px;font:inherit;font-weight:650;cursor:pointer;transition:.15s}.option:hover{border-color:#58cc02;transform:translateY(-1px)}.option.selected{border-color:#5146a5;background:#f0edff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e55353;background:#ffeaea}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer}.check{background:#5146a5;color:#fff}.next{background:#58cc02;color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}.feedback{margin-top:16px;font-weight:700;line-height:1.5}.good{color:#278400}.bad{color:#c73737}.hint{margin-top:10px;color:#617086;font-size:.94rem}.result{display:none;text-align:center;margin-top:20px}.retry{background:#5146a5;color:#fff}.back{display:inline-block;margin-top:24px;color:#5146a5;font-weight:800;text-decoration:underline;padding:10px 13px;border-radius:12px;transition:.15s}.back:hover{background:#f0edff;transform:translateY(-1px)}.back:focus{outline:3px solid #c9c2ff;outline-offset:2px}.back:active{transform:translateY(1px)}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
-<body><main class="wrap">
-<div class="top"><strong>⚛️ SkillUp Physics</strong><span class="xp">⭐ <span id="xp">0</span> XP</span></div>
-<section class="hero"><small>PHYSICS • NEET 2026</small><h1>Newton's Third Law</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section>
-<section class="progress"><strong>Mastery: <span id="mastery">0%</span></strong><div class="progressline"><div class="fill" id="fill"></div></div></section>
-<section class="quiz"><div class="meta"><span id="count">Question 1 of 15</span><span id="pct">7%</span></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="actions"><button class="btn check" id="check">Check Answer</button><button class="btn next" id="next" disabled>Next Question →</button></div><div class="feedback" id="feedback"></div><div class="hint" id="hint"></div><div class="result" id="result"><h2>🏆 Skill Complete!</h2><p id="score"></p><button class="btn retry" id="retry">Retry Skill</button></div></section>
-<a class="back" id="back" href="physics-home.html">← Back to Physics Path</a>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Newton's Third Law</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
 </main>
 <script>
-const quiz=[
-["Newton's third law states that every action has:",["An equal and opposite reaction","A larger reaction","No reaction","A reaction only when the object is moving"],0,"Forces always occur in interacting pairs that are equal in magnitude and opposite in direction."],
-["The action and reaction forces in Newton's third law act on:",["The same body","Two different interacting bodies","Only bodies at rest","Only the heavier body"],1,"The action and reaction forces act on different bodies, so they do not cancel each other on one body."],
-["A book rests on a table. The force exerted by the book on the table is paired with:",["The gravitational force on the book","The normal force exerted by the table on the book","The weight of the table","The friction between book and air"],1,"The book pushes the table downward, while the table pushes the book upward with an equal and opposite force."],
-["When a person pushes a wall, the wall:",["Exerts no force","Exerts an equal and opposite force on the person","Always moves backward","Exerts a force only if it is weak"],1,"The wall exerts a reaction force equal in magnitude and opposite in direction to the person's push."],
-["A swimmer moves forward mainly because:",["Water exerts a forward force after the swimmer pushes water backward","Water has no force on the swimmer","Gravity pushes the swimmer forward","The swimmer's mass creates forward force"],0,"The swimmer pushes water backward and the water exerts an opposite forward force on the swimmer."],
-["A rocket moves forward because the rocket:",["Pushes gases backward and gases push the rocket forward","Pulls the gases forward","Has no interaction with exhaust gases","Uses only gravitational force"],0,"Rocket propulsion is an application of Newton's third law: expelled gases exert a forward reaction on the rocket."],
-["A gun recoils when a bullet is fired because:",["The bullet exerts an opposite force on the gun","The gun loses all its mass instantly","Gravity reverses direction","There is no force on the gun"],0,"The gun pushes the bullet forward and the bullet exerts an equal opposite force on the gun."],
-["When you walk forward, your foot pushes the ground:",["Forward, and the ground pushes the foot backward","Backward, and the ground pushes the foot forward","Upward only, with no horizontal force","With no force"],1,"The foot pushes the ground backward; static friction from the ground pushes the foot forward."],
-["Why do action and reaction forces not cancel each other?",["They act on different bodies","They are always unequal","They act only at different times","They have different units"],0,"They are equal and opposite but act on different objects, so they cannot cancel on the same free-body diagram."],
-["A person jumps from a boat onto a shore. The boat moves backward because:",["The person exerts a force on the boat and the boat exerts an opposite force on the person","The boat has no inertia","Gravity pushes the boat backward","The shore pulls the boat backward"],0,"The person's interaction with the boat produces an equal and opposite force, causing the boat to move backward."],
-["The force pair between Earth and an apple includes:",["Earth pulling the apple and the apple pulling Earth","Only Earth's pull on the apple","Only the apple's weight","Two forces acting only on the apple"],0,"Earth attracts the apple, and the apple attracts Earth with an equal and opposite gravitational force."],
-["If object A exerts 20 N on object B, object B exerts on A:",["20 N in the opposite direction","10 N in the same direction","40 N in the same direction","0 N"],0,"Newton's third law gives an equal magnitude of 20 N in the opposite direction."],
-["A horse pulls a cart forward. The reaction to the horse's pull on the cart is:",["The cart pulling the horse backward","The ground pushing the horse forward","Gravity on the cart","Air resistance on the cart"],0,"The cart exerts an equal and opposite force backward on the horse."],
-["Which is a correct action-reaction pair?",["Weight of a book and normal force on the same book","Earth's gravitational force on Moon and Moon's gravitational force on Earth","Applied force on a box and friction on the same box","Two forces acting on one object in equilibrium"],1,"Earth and Moon exert equal and opposite gravitational forces on each other; they act on different bodies."],
-["Newton's third law is fundamentally a statement about:",["Interactions between two bodies","Only acceleration of one body","Only objects at rest","Conservation of energy alone"],0,"Newton's third law describes the paired forces that arise when two bodies interact."]
-];
-let i=0,selected=-1,correctCount=0,xp=0;const $=id=>document.getElementById(id);function shuffle(arr){for(let k=arr.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[arr[k],arr[r]]=[arr[r],arr[k]]}return arr}
-function render(){const a=quiz[i];selected=-1;$('question').textContent=a[0];$('count').textContent=`Question ${i+1} of ${quiz.length}`;$('pct').textContent=Math.round((i+1)/quiz.length*100)+'%';$('fill').style.width=(correctCount/quiz.length*100)+'%';$('mastery').textContent=Math.round(correctCount/quiz.length*100)+'%';$('feedback').className='feedback';$('feedback').textContent='';$('hint').textContent='Identify the two interacting bodies before choosing the force pair.';$('check').disabled=false;$('next').disabled=true;$('next').textContent='Next Question →';$('options').innerHTML='';const order=shuffle(a[1].map((text,index)=>({text,index})));order.forEach((item,j)=>{const b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{if($('check').disabled)return;selected=item.index;[...$('options').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('options').appendChild(b)})}
-function check(){if(selected<0){$('feedback').className='feedback bad';$('feedback').textContent='Choose an answer first 👆';return}const a=quiz[i],ok=selected===a[2];[...$('options').children].forEach(b=>{const idx=Number(b.dataset.index);b.disabled=true;if(idx===a[2])b.classList.add('correct');if(idx===selected&&selected!==a[2])b.classList.add('wrong')});if(ok){correctCount++;xp+=10;$('xp').textContent=xp;$('feedback').className='feedback good';$('feedback').textContent='✓ Correct — '+a[3]}else{$('feedback').className='feedback bad';$('feedback').textContent='✗ Review — '+a[3]}$('mastery').textContent=Math.round(correctCount/quiz.length*100)+'%';$('fill').style.width=(correctCount/quiz.length*100)+'%';$('check').disabled=true;$('next').disabled=false;if(i===quiz.length-1)$('next').textContent='Finish Skill →'}
-function next(){if($('next').disabled)return;if(i<quiz.length-1){i++;render()}else{$('question').textContent="🏆 Newton's Third Law Complete!";$('options').innerHTML='';$('check').style.display='none';$('next').style.display='none';$('hint').textContent='';$('feedback').className='feedback good';$('feedback').textContent='Skill complete. '+xp+' XP earned.';$('result').style.display='block';$('score').textContent=correctCount+' / '+quiz.length+' correct • '+xp+' XP';}}
-$('check').onclick=check;$('next').onclick=next;$('retry').onclick=()=>{i=0;selected=-1;correctCount=0;xp=0;$('xp').textContent='0';$('mastery').textContent='0%';$('fill').style.width='0%';$('result').style.display='none';$('check').style.display='';$('next').style.display='';render()};
-$('back').onclick=function(e){e.preventDefault();const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return}}catch(e){}}location.href='physics-home.html'};
+(function(){
+'use strict';
+const questions = [{"q":"Newton's third law states that every action has:","o":["An equal and opposite reaction","A larger reaction","No reaction","A reaction only after a delay"],"a":0,"e":"Forces occur in pairs that are equal in magnitude and opposite in direction."},{"q":"Action and reaction forces act on:","o":["The same object","Different objects","Only stationary objects","Only moving objects"],"a":1,"e":"The two forces act on different interacting bodies."},{"q":"A swimmer pushes water backward and moves forward. This illustrates:","o":["Newton's first law","Newton's second law only","Newton's third law","Conservation of temperature"],"a":2,"e":"The swimmer pushes water backward; water exerts an opposite force on the swimmer."},{"q":"When you push a wall, the wall pushes you with a force that is:","o":["Smaller than your push always","Equal and opposite to your push","In the same direction","Zero if the wall does not move"],"a":1,"e":"The wall exerts an equal and opposite force even if it remains stationary."},{"q":"A rocket moves forward because its engine:","o":["Pushes against empty space","Expels gases backward, which exert forward thrust","Removes gravity","Creates force pairs on the same object"],"a":1,"e":"The rocket pushes exhaust backward; the exhaust exerts an opposite force on the rocket."},{"q":"Why don't action and reaction forces cancel each other on one object's free-body diagram?","o":["They are never equal","They act on different objects","They point in the same direction","They occur at different times"],"a":1,"e":"Only forces acting on the object being analysed are included on its free-body diagram."},{"q":"A book pushes down on a table. The Newton's third-law partner is:","o":["Earth pulling the book downward","The table pushing up on the book","The book's weight","Friction on the table"],"a":1,"e":"The book exerts a downward contact force on the table; the table exerts an upward contact force on the book."},{"q":"Earth pulls an apple downward gravitationally. The paired force is:","o":["The apple gravitationally pulling Earth toward itself","The table pushing the apple","Air resistance on the apple","The apple's normal force"],"a":0,"e":"The apple and Earth exert equal and opposite gravitational forces on each other."},{"q":"A gun recoils when a bullet is fired because:","o":["The bullet has no momentum","The bullet and gun exert opposite forces on each other","Gravity pushes the gun backward only","The gun's mass disappears"],"a":1,"e":"The bullet is pushed forward while the gun experiences an equal opposite interaction force backward."},{"q":"A person walks forward by pushing the ground:","o":["Forward; the ground pushes backward","Backward; the ground pushes forward","Upward only","Without any interaction force"],"a":1,"e":"The foot pushes the ground backward, and static friction from the ground pushes the person forward."},{"q":"A horse pulls a cart forward. The cart pulls the horse:","o":["Forward with a greater force","Backward with an equal force","With zero force","Upward only"],"a":1,"e":"The horse-cart interaction forces are equal and opposite, acting on different bodies."},{"q":"If object A exerts 15 N on object B, object B exerts on A:","o":["0 N","7.5 N","15 N in the opposite direction","30 N in the same direction"],"a":2,"e":"Newton's third law requires equal magnitude and opposite direction."},{"q":"A swimmer pushes water with 40 N backward. The water's force on the swimmer is:","o":["20 N forward","40 N forward","40 N backward","80 N forward"],"a":1,"e":"The reaction force is 40 N forward."},{"q":"When two skaters push apart, they move in opposite directions because:","o":["Their masses are always equal","Each exerts a force on the other in opposite directions","Only the heavier skater exerts force","No forces act between them"],"a":1,"e":"The interaction forces are equal and opposite; their accelerations can differ if masses differ."},{"q":"Do action and reaction forces act simultaneously?","o":["Yes, as an interaction pair","No, action always ends first","Only if both objects move","Only in a vacuum"],"a":0,"e":"The paired forces arise together during the interaction."},{"q":"A bat hits a ball. During contact, the force of the bat on the ball is:","o":["Greater than the ball's force on the bat","Equal and opposite to the ball's force on the bat","Always zero","Unrelated to the ball's force"],"a":1,"e":"The bat and ball exert equal and opposite forces on each other."},{"q":"A large truck collides with a small car. During the collision, the truck exerts on the car a force that is:","o":["Always larger than the car's force on the truck","Equal in magnitude to the car's force on the truck","Always zero","Equal to the truck's weight"],"a":1,"e":"Newton's third law applies regardless of the vehicles' masses."},{"q":"If the forces in an action-reaction pair are equal, why can their motions differ?","o":["The objects can have different masses and other forces","The forces are not truly equal","Only one object accelerates by definition","Newton's third law fails for heavy objects"],"a":0,"e":"Equal interaction forces can produce different accelerations because masses and net forces differ."},{"q":"A person jumps from a boat onto a dock, and the boat moves backward. The boat moves because the person:","o":["Pushes the boat backward while jumping","Removes the boat's mass","Eliminates water pressure","Applies no force"],"a":0,"e":"The person pushes the boat backward, and the boat experiences the opposite interaction force."},{"q":"A bird flies by flapping its wings downward against air. The air exerts a force on the bird:","o":["Downward","Upward","Only backward","Zero"],"a":1,"e":"The wings push air downward; the air exerts an upward force on the bird."},{"q":"A rocket can accelerate in space because:","o":["It pushes against the stars","Expelled exhaust interacts with the rocket","It needs air to push against","Gravity must be zero"],"a":1,"e":"The rocket gains thrust from expelling mass; it does not need air as a support."},{"q":"Which pair is a correct action-reaction pair?","o":["Earth pulls a book down; table pushes book up","Foot pushes ground backward; ground pushes foot forward","Weight and normal force on the same book","Friction and applied force on one box"],"a":1,"e":"The foot-ground forces act on different bodies and point in opposite directions."},{"q":"A person sitting in a chair pushes downward on it. The chair's reaction force acts:","o":["Downward on the person","Upward on the person","Upward on Earth only","Horizontally on the chair"],"a":1,"e":"The chair exerts an upward normal force on the person."},{"q":"Action and reaction forces have:","o":["Equal magnitude and opposite direction","Equal direction and different magnitude","Different units","A combined net force of zero on each object"],"a":0,"e":"The pair is equal and opposite, but the forces act on different objects."},{"q":"A 2 kg object pushes a 5 kg object with 10 N. The 5 kg object pushes back with:","o":["4 N","10 N opposite","25 N opposite","0 N"],"a":1,"e":"The interaction force on the 2 kg object is 10 N in the opposite direction."},{"q":"When a person presses a spring, the spring presses the person back. This is:","o":["Newton's third law","Newton's first law only","A force with no partner","An example of mass changing"],"a":0,"e":"The spring and person exert opposite forces on each other."},{"q":"Which statement is false about action-reaction forces?","o":["They are equal in magnitude","They act on different objects","They act in opposite directions","They cancel on the same object's free-body diagram"],"a":3,"e":"They do not cancel on a single object's diagram because they act on different objects."},{"q":"A football pushes backward on a player's foot when kicked. The foot's force on the ball is:","o":["Forward, equal in magnitude","Backward, twice as large","Zero","Always smaller"],"a":0,"e":"The foot and ball exert equal and opposite forces during contact."},{"q":"A person on roller skates throws a heavy ball forward and rolls backward. This happens because:","o":["The ball pulls the person forward","The person and ball exert opposite interaction forces","Only gravity acts","The person has no inertia"],"a":1,"e":"Throwing the ball forward involves a backward force on the person, causing recoil."},{"q":"Newton's third law is most directly about:","o":["Force pairs between interacting bodies","The relation between force and acceleration on one body","The definition of speed","The conservation of temperature"],"a":0,"e":"The third law describes equal and opposite forces between two interacting objects."}]
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
 render();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
-
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

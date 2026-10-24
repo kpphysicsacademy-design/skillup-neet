@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Relative Uncertainty</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;line-height:1.45}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.opt:disabled{cursor:default}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{font-weight:700;color:#e08a00;text-align:center;min-height:24px;line-height:1.5}.explanation{margin-top:14px;padding:12px 14px;border-radius:12px;background:#f1f6ff;font-size:14px;line-height:1.5}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>📊 Relative Uncertainty</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home.html">← Back to Physics Path</a></div></div><script>const qs=[['What is relative uncertainty?','Absolute uncertainty divided by the measured value','The measured value plus uncertainty','The least count of an instrument','The true value of a quantity',0,'Relative uncertainty is the ratio of absolute uncertainty to the measured value: Δx/x.'],['Relative uncertainty is generally:','Dimensionless','Measured in metres','Measured in seconds','Always expressed in kilograms',0,'It is a ratio, so the units cancel and the result is dimensionless.'],['Relative uncertainty is often written as:','Δx/x','x/Δx','x+Δx','x−Δx',0,'For measured quantity x with absolute uncertainty Δx, relative uncertainty is Δx/x.'],['For x = 10.0 ± 0.2 m, the relative uncertainty is:','0.02','0.2','2','20',0,'Δx/x = 0.2/10.0 = 0.02.'],['The percentage uncertainty for 10.0 ± 0.2 m is:','2%','0.2%','20%','0.02%',0,'Percentage uncertainty = (Δx/x) × 100 = (0.2/10.0) × 100 = 2%.'],['For 5.0 ± 0.1 cm, the relative uncertainty is:','0.02','0.2','2','0.05',0,'Relative uncertainty = 0.1/5.0 = 0.02.'],['Which measurement has the smaller relative uncertainty?','100 ± 1 cm','10 ± 1 cm','Both','Cannot compare',0,'For 100 ± 1 cm, relative uncertainty is 1/100 = 0.01; for 10 ± 1 cm it is 0.1.'],['If absolute uncertainty remains the same while the measured value increases, relative uncertainty generally:','Decreases','Increases','Becomes infinite','Becomes equal to one',0,'For fixed Δx, the ratio Δx/x decreases as x increases.'],['If x = 2.0 ± 0.1 s, the percentage uncertainty is:','5%','0.5%','2%','10%',0,'Percentage uncertainty = (0.1/2.0) × 100 = 5%.'],['For a quantity measured as 50 ± 2, the relative uncertainty is:','0.04','0.4','4','25',0,'Relative uncertainty = 2/50 = 0.04.'],['Which statement is correct about relative uncertainty?','It allows uncertainties of different-sized measurements to be compared','It always has the same unit as the measurement','It is always larger than absolute uncertainty','It is the true value',0,'Because it is dimensionless, relative uncertainty is useful for comparing measurement quality.'],['For z = A + B, absolute uncertainty is usually combined using:','ΔA + ΔB','ΔA − ΔB','ΔAΔB','ΔA/ΔB',0,'For maximum-error addition, absolute uncertainties are added: Δz = ΔA + ΔB.'],['For z = AB, relative uncertainties are combined using:','ΔA/A + ΔB/B','ΔA + ΔB','A/B','AB',0,'For maximum-error products, fractional uncertainties add.'],['For z = A/B, the maximum fractional uncertainty is:','ΔA/A + ΔB/B','ΔA/A − ΔB/B','A/B','ΔAΔB',0,'For division, fractional uncertainties add in the maximum-error method.'],['Which statement best distinguishes absolute and relative uncertainty?','Absolute uncertainty has the same units as the quantity; relative uncertainty is dimensionless','Both are always dimensionless','Relative uncertainty always has the same unit as the quantity','Absolute uncertainty is always a percentage',0,'Absolute uncertainty carries the units of the measured quantity, while relative uncertainty is a dimensionless ratio.']];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;$('xp').textContent='';const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide')}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').innerHTML=ok?'✨ Correct! +1 XP':'❌ Incorrect';$('xp').insertAdjacentHTML('beforeend',`<div class="explanation"><b>Correct answer:</b> ${q[q[5]+1]}<br>💡 ${q[6]}</div>`);if(ok)score++;$('score').textContent=`XP ${score}`;$('fill').style.width=`${(i+1)/15*100}%`;$('next').classList.remove('hide')}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><p style="text-align:center">XP earned: <b>${score}</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Relative Uncertainty quiz">
+<title>SkillUp | Relative Uncertainty — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Relative Uncertainty</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What is relative uncertainty?",
+    "o": [
+      "Absolute uncertainty divided by the measured value",
+      "Measured value plus uncertainty",
+      "The instrument's largest reading",
+      "The unit alone"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty is the absolute uncertainty divided by the measured value."
+  },
+  {
+    "q": "Relative uncertainty is usually:",
+    "o": [
+      "Dimensionless",
+      "Measured in metres only",
+      "Measured in kilograms only",
+      "Always a temperature"
+    ],
+    "a": 0,
+    "e": "It is a ratio of quantities with the same unit, so the units cancel."
+  },
+  {
+    "q": "A length is 10 cm with absolute uncertainty 0.5 cm. Relative uncertainty is:",
+    "o": [
+      "0.05",
+      "0.5",
+      "5",
+      "20"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty = 0.5/10 = 0.05."
+  },
+  {
+    "q": "If relative uncertainty is 0.04, percentage uncertainty is:",
+    "o": [
+      "4%",
+      "0.4%",
+      "40%",
+      "0.04%"
+    ],
+    "a": 0,
+    "e": "Percentage uncertainty = relative uncertainty × 100% = 4%."
+  },
+  {
+    "q": "A mass is 200 g with uncertainty 2 g. Relative uncertainty is:",
+    "o": [
+      "0.01",
+      "0.1",
+      "1",
+      "100"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty = 2/200 = 0.01."
+  },
+  {
+    "q": "A measured time is 5.0 ± 0.2 s. Its relative uncertainty is:",
+    "o": [
+      "0.04",
+      "0.2",
+      "0.25",
+      "4"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty = 0.2/5.0 = 0.04."
+  },
+  {
+    "q": "Which formula gives relative uncertainty?",
+    "o": [
+      "Absolute uncertainty ÷ measured value",
+      "Measured value ÷ absolute uncertainty",
+      "Absolute uncertainty × 100 only",
+      "Measured value + uncertainty"
+    ],
+    "a": 0,
+    "e": "Divide absolute uncertainty by the magnitude of the measured value."
+  },
+  {
+    "q": "Which formula gives percentage uncertainty?",
+    "o": [
+      "(Absolute uncertainty ÷ measured value) × 100%",
+      "Measured value ÷ 100",
+      "Absolute uncertainty + measured value",
+      "Measured value × unit"
+    ],
+    "a": 0,
+    "e": "Percentage uncertainty is relative uncertainty multiplied by 100%."
+  },
+  {
+    "q": "A value is 40 cm ± 2 cm. Percentage uncertainty is:",
+    "o": [
+      "5%",
+      "2%",
+      "20%",
+      "0.5%"
+    ],
+    "a": 0,
+    "e": "(2/40) × 100% = 5%."
+  },
+  {
+    "q": "A value is 50 g ± 1 g. Percentage uncertainty is:",
+    "o": [
+      "2%",
+      "1%",
+      "5%",
+      "50%"
+    ],
+    "a": 0,
+    "e": "(1/50) × 100% = 2%."
+  },
+  {
+    "q": "For the same absolute uncertainty, a larger measured value gives:",
+    "o": [
+      "A smaller relative uncertainty",
+      "A larger relative uncertainty always",
+      "The same relative uncertainty always",
+      "Zero relative uncertainty"
+    ],
+    "a": 0,
+    "e": "Dividing the same uncertainty by a larger value gives a smaller ratio."
+  },
+  {
+    "q": "For the same measured value, a larger absolute uncertainty gives:",
+    "o": [
+      "A larger relative uncertainty",
+      "A smaller relative uncertainty",
+      "Zero relative uncertainty",
+      "No change in any case"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty increases as absolute uncertainty increases when the measured value stays fixed."
+  },
+  {
+    "q": "A length is 25.0 ± 0.5 cm. Relative uncertainty is:",
+    "o": [
+      "0.02",
+      "0.2",
+      "2",
+      "0.5"
+    ],
+    "a": 0,
+    "e": "0.5/25.0 = 0.02."
+  },
+  {
+    "q": "A time is 8.0 ± 0.4 s. Percentage uncertainty is:",
+    "o": [
+      "5%",
+      "4%",
+      "0.5%",
+      "20%"
+    ],
+    "a": 0,
+    "e": "(0.4/8.0) × 100% = 5%."
+  },
+  {
+    "q": "A radius is 2.0 ± 0.1 cm. Relative uncertainty is:",
+    "o": [
+      "0.05",
+      "0.1",
+      "0.5",
+      "5"
+    ],
+    "a": 0,
+    "e": "0.1/2.0 = 0.05."
+  },
+  {
+    "q": "A measured value is 12.0 units and relative uncertainty is 0.025. Absolute uncertainty is:",
+    "o": [
+      "0.3 units",
+      "0.025 units",
+      "3 units",
+      "4.8 units"
+    ],
+    "a": 0,
+    "e": "Absolute uncertainty = 0.025 × 12.0 = 0.3 units."
+  },
+  {
+    "q": "Relative uncertainty is 0.1. Percentage uncertainty is:",
+    "o": [
+      "10%",
+      "1%",
+      "0.1%",
+      "100%"
+    ],
+    "a": 0,
+    "e": "0.1 × 100% = 10%."
+  },
+  {
+    "q": "A reading is 6.0 ± 0.3 m. Which is the relative uncertainty?",
+    "o": [
+      "0.05",
+      "0.5",
+      "5",
+      "20"
+    ],
+    "a": 0,
+    "e": "0.3/6.0 = 0.05."
+  },
+  {
+    "q": "Why is relative uncertainty useful?",
+    "o": [
+      "It compares uncertainty for quantities of different sizes",
+      "It changes units automatically",
+      "It guarantees accuracy",
+      "It gives the instrument's colour"
+    ],
+    "a": 0,
+    "e": "A dimensionless ratio allows comparisons across measurements with different magnitudes."
+  },
+  {
+    "q": "If measured value is zero, relative uncertainty calculated by dividing by that value is:",
+    "o": [
+      "Undefined by this formula",
+      "Always zero",
+      "Always 100%",
+      "Always one"
+    ],
+    "a": 0,
+    "e": "Division by zero is undefined, so this simple relative-uncertainty formula cannot be used directly."
+  },
+  {
+    "q": "A value is 100 ± 3. What is percentage uncertainty?",
+    "o": [
+      "3%",
+      "0.3%",
+      "30%",
+      "97%"
+    ],
+    "a": 0,
+    "e": "(3/100) × 100% = 3%."
+  },
+  {
+    "q": "A value is 4.0 ± 0.2. What is relative uncertainty?",
+    "o": [
+      "0.05",
+      "0.2",
+      "5",
+      "20"
+    ],
+    "a": 0,
+    "e": "0.2/4.0 = 0.05."
+  },
+  {
+    "q": "Which pair has the smaller percentage uncertainty?",
+    "o": [
+      "10 ± 0.1",
+      "10 ± 0.5",
+      "10 ± 1.0",
+      "All have equal uncertainty"
+    ],
+    "a": 0,
+    "e": "The first has 0.1/10 × 100% = 1%, the smallest percentage."
+  },
+  {
+    "q": "A measurement has 2% relative uncertainty expressed as a percentage. Its decimal relative uncertainty is:",
+    "o": [
+      "0.02",
+      "0.2",
+      "2",
+      "0.002"
+    ],
+    "a": 0,
+    "e": "2% divided by 100 equals 0.02."
+  },
+  {
+    "q": "If absolute uncertainty and measured value are both doubled, relative uncertainty:",
+    "o": [
+      "Stays the same",
+      "Doubles",
+      "Halves",
+      "Becomes zero"
+    ],
+    "a": 0,
+    "e": "(2Δx)/(2x) = Δx/x, so the ratio is unchanged."
+  },
+  {
+    "q": "A wire's length is 2.5 m with uncertainty 0.05 m. Percentage uncertainty is:",
+    "o": [
+      "2%",
+      "5%",
+      "0.2%",
+      "20%"
+    ],
+    "a": 0,
+    "e": "(0.05/2.5) × 100% = 2%."
+  },
+  {
+    "q": "A mass is 80 g with absolute uncertainty 4 g. Relative uncertainty is:",
+    "o": [
+      "0.05",
+      "0.5",
+      "5",
+      "20"
+    ],
+    "a": 0,
+    "e": "4/80 = 0.05."
+  },
+  {
+    "q": "Which statement is true?",
+    "o": [
+      "Relative uncertainty has no unit",
+      "Relative uncertainty is always in centimetres",
+      "It is the same as absolute uncertainty",
+      "It is always 100%"
+    ],
+    "a": 0,
+    "e": "The units cancel when absolute uncertainty is divided by the measured value."
+  },
+  {
+    "q": "A measurement has relative uncertainty 0.008. Percentage uncertainty is:",
+    "o": [
+      "0.8%",
+      "8%",
+      "0.08%",
+      "80%"
+    ],
+    "a": 0,
+    "e": "0.008 × 100% = 0.8%."
+  },
+  {
+    "q": "What information is needed to calculate relative uncertainty?",
+    "o": [
+      "Absolute uncertainty and measured value",
+      "Only the unit symbol",
+      "Only the instrument brand",
+      "Only the number of readings"
+    ],
+    "a": 0,
+    "e": "Use absolute uncertainty divided by the measured value."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

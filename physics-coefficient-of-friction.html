@@ -3,59 +3,474 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Coefficient of Friction</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Coefficient of Friction quiz">
+<title>SkillUp | Coefficient of Friction — Easy Quiz</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.card{background:#fff;border-radius:22px;padding:28px;box-shadow:0 6px 20px #17203312}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.tag{font-weight:800;font-size:.9rem}.xp{font-weight:850}.bar{height:10px;background:#e8e8f1;border-radius:999px;overflow:hidden;margin:12px 0 24px}.fill{height:100%;width:0;background:#5b50c8;transition:width .25s ease}.q{font-size:1.22rem;font-weight:800;line-height:1.45;margin:20px 0}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:15px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .12s,background .12s,border-color .12s,box-shadow .12s}.opt:hover{transform:translateY(-2px);border-color:#aaa4df;box-shadow:0 4px 12px #17203310}.opt:focus{outline:3px solid #c9c3ff;outline-offset:2px}.opt.selected{border-color:#5b50c8;background:#f0edff}.opt.correct{border-color:#2d9b68;background:#eaf8f1}.opt.wrong{border-color:#d45555;background:#fff0f0}.feedback{min-height:72px;margin-top:18px;padding:14px 16px;border-radius:15px;background:#f4f3fb;line-height:1.5}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:#5b50c8;color:white}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:focus{outline:3px solid #c9c3ff;outline-offset:2px}.btn:active{transform:translateY(1px)}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:800;text-decoration:none;padding:11px 14px;border-radius:13px}.back:hover{background:#f0edff;transform:translateY(-1px)}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back:active{transform:translateY(1px)}.result{font-size:1.2rem;font-weight:750;line-height:1.6}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
-<main class="wrap"><section class="card">
-<div class="top"><div class="tag">🧲 Coefficient of Friction</div><div class="xp" id="xp">+10 XP</div></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div id="quiz"></div>
-<a class="back" id="back" href="physics-home.html">← Back to Physics Path</a>
-</section></main>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Coefficient of Friction</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['The coefficient of friction is defined as the ratio of:', ['frictional force to normal reaction','normal reaction to frictional force','frictional force to weight','weight to frictional force'],0,'For limiting friction, μ = F/N.'],
-['The coefficient of friction between two surfaces is:', ['dimensionless','measured in newtons','measured in pascals','measured in metres'],0,'It is a ratio of two forces, so it has no dimensions.'],
-['If the limiting friction is 20 N and the normal reaction is 50 N, μ is:', ['0.4','2.5','70','0.25'],0,'μ = F/N = 20/50 = 0.4.'],
-['For a block on a horizontal rough surface, the normal reaction is equal to the block’s:', ['weight, when no other vertical force acts','acceleration','coefficient of friction','frictional force'],0,'With no other vertical forces, N = mg.'],
-['The coefficient of friction mainly depends on:', ['the nature and condition of the contacting surfaces','the area of contact alone','the mass of the body alone','the speed of light'],0,'Surface materials and their condition determine μ in the idealized model.'],
-['If μ = 0.5 and N = 100 N, the limiting friction is:', ['50 N','200 N','100.5 N','2 N'],0,'F = μN = 0.5 × 100 = 50 N.'],
-['For dry surfaces, the coefficient of kinetic friction is generally:', ['less than the coefficient of limiting static friction','greater than the coefficient of limiting static friction','always equal to 1','zero'],0,'Typically μk < μs(max).'],
-['If the coefficient of friction increases while N remains constant, the limiting friction:', ['increases','decreases','becomes zero','is unchanged'],0,'Since Fmax = μN, increasing μ increases Fmax.'],
-['A body is just about to slide when the friction acting on it is:', ['limiting friction','zero','always less than limiting friction','equal to its weight in every case'],0,'At impending motion, static friction reaches its limiting value.'],
-['A coefficient of friction μ = 1 means that the limiting friction is:', ['equal in magnitude to the normal reaction','equal to the weight in every situation','zero','twice the normal reaction'],0,'From Fmax = μN, μ = 1 gives Fmax = N.'],
-['Which expression gives the coefficient of limiting friction?', ['μ = Fl/N','μ = N/Fl','μ = FlN','μ = Fl + N'],0,'The coefficient is the ratio of limiting friction to normal reaction.'],
-['A 10 kg block is on a horizontal surface. Take g = 10 m/s² and μ = 0.2. The limiting friction is:', ['20 N','2 N','50 N','100 N'],0,'N = mg = 100 N, so Fl = 0.2 × 100 = 20 N.'],
-['If both limiting friction and normal reaction are doubled, the coefficient of friction:', ['remains unchanged','doubles','halves','becomes four times'],0,'μ is their ratio, so multiplying both by the same factor does not change μ.'],
-['The coefficient of friction can be used to determine the limiting friction when the:', ['normal reaction is known','time is known','temperature alone is known','volume is known'],0,'The relation is Fl = μN.'],
-['For an ideal smooth surface, the coefficient of friction is taken as:', ['zero','one','infinite','negative one'],0,'A smooth, frictionless idealization has μ = 0.']
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What does the coefficient of friction describe?",
+    "o": [
+      "How much frictional force is available relative to the normal force",
+      "The mass of a surface",
+      "The object's speed only",
+      "The angle of a force in every situation"
+    ],
+    "a": 0,
+    "e": "In the simple dry-friction model, the coefficient relates friction magnitude to the normal reaction."
+  },
+  {
+    "q": "The coefficient of static friction is commonly written as:",
+    "o": [
+      "μₛ",
+      "μₖ",
+      "N",
+      "g"
+    ],
+    "a": 0,
+    "e": "The symbol μₛ denotes the coefficient of static friction."
+  },
+  {
+    "q": "The coefficient of kinetic friction is commonly written as:",
+    "o": [
+      "μₖ",
+      "μₛ",
+      "mg",
+      "θ"
+    ],
+    "a": 0,
+    "e": "The symbol μₖ denotes the coefficient used when surfaces slide relative to each other."
+  },
+  {
+    "q": "The coefficient of friction has:",
+    "o": [
+      "No units",
+      "Units of newtons",
+      "Units of kilograms",
+      "Units of metres"
+    ],
+    "a": 0,
+    "e": "It is a ratio of forces, so the units cancel."
+  },
+  {
+    "q": "In the basic model, kinetic friction is calculated using:",
+    "o": [
+      "fₖ = μₖN",
+      "fₖ = μₖ + N",
+      "fₖ = N/μₖ",
+      "fₖ = mgμₖ²"
+    ],
+    "a": 0,
+    "e": "Kinetic friction magnitude is the kinetic coefficient multiplied by the normal reaction."
+  },
+  {
+    "q": "The limiting static friction is given by:",
+    "o": [
+      "fₛ,max = μₛN",
+      "fₛ,max = μₛ/N",
+      "fₛ,max = N + μₛ",
+      "fₛ,max = mg/μₛ"
+    ],
+    "a": 0,
+    "e": "Maximum static friction equals μₛ times the normal force in the elementary model."
+  },
+  {
+    "q": "If μₖ = 0.2 and N = 40 N, kinetic friction is:",
+    "o": [
+      "8 N",
+      "20 N",
+      "40.2 N",
+      "200 N"
+    ],
+    "a": 0,
+    "e": "fₖ = 0.2 × 40 = 8 N."
+  },
+  {
+    "q": "If μₛ = 0.5 and N = 30 N, limiting friction is:",
+    "o": [
+      "15 N",
+      "60 N",
+      "30.5 N",
+      "0.5 N"
+    ],
+    "a": 0,
+    "e": "fₛ,max = 0.5 × 30 = 15 N."
+  },
+  {
+    "q": "If the coefficient is doubled while normal force stays the same, the modelled friction magnitude:",
+    "o": [
+      "Doubles",
+      "Halves",
+      "Stays the same",
+      "Becomes zero"
+    ],
+    "a": 0,
+    "e": "Friction is directly proportional to the coefficient when N is fixed."
+  },
+  {
+    "q": "If the normal reaction doubles and the coefficient stays constant, modelled friction:",
+    "o": [
+      "Doubles",
+      "Halves",
+      "Does not change",
+      "Becomes negative"
+    ],
+    "a": 0,
+    "e": "The friction magnitude is proportional to the normal reaction."
+  },
+  {
+    "q": "For many dry material pairs, which relationship is commonly observed?",
+    "o": [
+      "μₛ is greater than μₖ",
+      "μₖ is always greater than μₛ",
+      "Both coefficients must be zero",
+      "μₛ equals the object's mass"
+    ],
+    "a": 0,
+    "e": "Static friction coefficients are often greater than kinetic ones, but this is not universal."
+  },
+  {
+    "q": "A block is at rest under a 4 N horizontal push, with limiting friction 10 N. The actual static friction is:",
+    "o": [
+      "4 N",
+      "10 N",
+      "14 N",
+      "0 N"
+    ],
+    "a": 0,
+    "e": "Static friction adjusts to balance the push while the required force remains below its maximum."
+  },
+  {
+    "q": "What is the normal reaction on a block of mass 2 kg on a horizontal surface, with no other vertical forces? Take g = 10 m/s².",
+    "o": [
+      "20 N",
+      "2 N",
+      "10 N",
+      "0 N"
+    ],
+    "a": 0,
+    "e": "On a level surface, N = mg = 2 × 10 = 20 N."
+  },
+  {
+    "q": "A 2 kg block on a level surface has μₖ = 0.3. Use g = 10 m/s². Its kinetic friction is:",
+    "o": [
+      "6 N",
+      "20 N",
+      "0.6 N",
+      "30 N"
+    ],
+    "a": 0,
+    "e": "N = 20 N, so fₖ = 0.3 × 20 = 6 N."
+  },
+  {
+    "q": "A 5 kg block has μₛ = 0.4 on a level surface. Use g = 10 m/s². Limiting friction is:",
+    "o": [
+      "20 N",
+      "12.5 N",
+      "50 N",
+      "2 N"
+    ],
+    "a": 0,
+    "e": "N = 50 N and fₛ,max = 0.4 × 50 = 20 N."
+  },
+  {
+    "q": "For an ideal block at the angle of repose θ, the coefficient of static friction satisfies:",
+    "o": [
+      "μₛ = tan θ",
+      "μₛ = sin θ",
+      "μₛ = cos θ",
+      "μₛ = mg"
+    ],
+    "a": 0,
+    "e": "At impending slip on an incline, balancing components gives tan θ = μₛ."
+  },
+  {
+    "q": "If the angle of repose is 45°, the coefficient of static friction in the ideal model is:",
+    "o": [
+      "1",
+      "0",
+      "0.5",
+      "√3"
+    ],
+    "a": 0,
+    "e": "μₛ = tan 45° = 1."
+  },
+  {
+    "q": "A smaller coefficient of friction generally means, for the same normal force:",
+    "o": [
+      "A smaller modelled friction force",
+      "A larger friction force",
+      "The normal force becomes zero",
+      "The object must accelerate upward"
+    ],
+    "a": 0,
+    "e": "Friction magnitude in the simple model is proportional to the coefficient."
+  },
+  {
+    "q": "Which is the best interpretation of a coefficient of friction of 0.3?",
+    "o": [
+      "The modelled friction-to-normal-force ratio is 0.3 at the relevant limit or sliding state",
+      "Friction is always 0.3 N",
+      "The object's mass is 0.3 kg",
+      "The object moves at 0.3 m/s"
+    ],
+    "a": 0,
+    "e": "The coefficient is a dimensionless ratio of friction force to normal reaction for the specified friction regime."
+  },
+  {
+    "q": "Does static friction always equal μₛN?",
+    "o": [
+      "No; it can be smaller and rises only as needed up to μₛN",
+      "Yes, at all times",
+      "No; it is always zero",
+      "Yes, only while sliding"
+    ],
+    "a": 0,
+    "e": "μₛN is the maximum static friction, not necessarily the actual value at every moment."
+  },
+  {
+    "q": "Which factor is explicitly included in the basic formula f = μN?",
+    "o": [
+      "The normal reaction",
+      "The object's colour",
+      "The object's name",
+      "The surface's geographic location"
+    ],
+    "a": 0,
+    "e": "The elementary model uses the coefficient and normal force."
+  },
+  {
+    "q": "A sliding object has μₖ = 0.1 and N = 80 N. Its kinetic friction is:",
+    "o": [
+      "8 N",
+      "0.8 N",
+      "80 N",
+      "800 N"
+    ],
+    "a": 0,
+    "e": "fₖ = 0.1 × 80 = 8 N."
+  },
+  {
+    "q": "If a surface is lubricated effectively, the coefficient of friction between the moving parts often:",
+    "o": [
+      "Decreases",
+      "Must become infinite",
+      "Always becomes exactly 1",
+      "Changes into mass"
+    ],
+    "a": 0,
+    "e": "Suitable lubrication commonly reduces friction and wear between machine surfaces."
+  },
+  {
+    "q": "Which statement about friction coefficients is most accurate?",
+    "o": [
+      "They depend on the pair and condition of contacting surfaces",
+      "They are identical for all materials",
+      "They depend only on object mass",
+      "They are measured in seconds"
+    ],
+    "a": 0,
+    "e": "The coefficient is affected by the materials and surface conditions involved."
+  },
+  {
+    "q": "A 10 N normal force acts between sliding surfaces with μₖ = 0.6. The kinetic friction is:",
+    "o": [
+      "6 N",
+      "16 N",
+      "10.6 N",
+      "60 N"
+    ],
+    "a": 0,
+    "e": "fₖ = 0.6 × 10 = 6 N."
+  },
+  {
+    "q": "If μₛ = 0.25 and N = 120 N, the maximum static friction is:",
+    "o": [
+      "30 N",
+      "480 N",
+      "120.25 N",
+      "0.25 N"
+    ],
+    "a": 0,
+    "e": "fₛ,max = 0.25 × 120 = 30 N."
+  },
+  {
+    "q": "Which coefficient should be used for a block that is already sliding?",
+    "o": [
+      "Coefficient of kinetic friction μₖ",
+      "Coefficient of static friction μₛ only",
+      "Coefficient of restitution",
+      "No coefficient ever"
+    ],
+    "a": 0,
+    "e": "The kinetic coefficient is used in the basic model once relative sliding is occurring."
+  },
+  {
+    "q": "Why might it take more force to start moving a box than to keep it sliding?",
+    "o": [
+      "The static friction limit is often larger than kinetic friction",
+      "Kinetic friction is always zero",
+      "Gravity acts only before movement",
+      "The normal force vanishes when sliding starts"
+    ],
+    "a": 0,
+    "e": "For many surfaces, μₛ exceeds μₖ, so initiating motion often needs a larger force."
+  },
+  {
+    "q": "A block's friction is 12 N and its normal reaction is 40 N. The corresponding ratio f/N is:",
+    "o": [
+      "0.3",
+      "3.33",
+      "28",
+      "52"
+    ],
+    "a": 0,
+    "e": "The ratio is 12/40 = 0.3; whether it represents μₛ at the limit or μₖ depends on the situation."
+  },
+  {
+    "q": "Which is the correct rearrangement to estimate μ from friction magnitude f and normal force N in the basic model?",
+    "o": [
+      "μ = f/N",
+      "μ = f + N",
+      "μ = N/f²",
+      "μ = fN"
+    ],
+    "a": 0,
+    "e": "Rearranging f = μN gives μ = f/N."
+  },
+  {
+    "q": "If μₖ = 0.4 and a sliding block has N = 25 N, the friction magnitude is:",
+    "o": [
+      "10 N",
+      "62.5 N",
+      "25.4 N",
+      "0.016 N"
+    ],
+    "a": 0,
+    "e": "fₖ = 0.4 × 25 = 10 N."
+  }
 ];
-let i=0,selected=null,score=0;
+
+let index=0,score=0,streak=0,chosen=null,locked=false;
 const $=id=>document.getElementById(id);
 function render(){
- selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';
- $('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';
- const order=a[1].map((text,index)=>({text,index}));
- for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}
- order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});
- $('check').onclick=check;
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
 }
-function check(){
- if(selected===null){$('feedback').textContent='Please choose an answer first.';return}
- const a=qs[i],ok=selected===a[2];if(ok)score++;
- [...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});
- $('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];
- if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{ $('fill').style.width='100%'; const pct=Math.round(score/qs.length*100); $('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsCoefficientFrictionScore',String(score));}}
-function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}
-rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
 render();
+})();
 </script>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

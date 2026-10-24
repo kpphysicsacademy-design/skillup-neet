@@ -1,6 +1,475 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Composite Bodies</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.6rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.27rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none;transition:.12s}.back:hover{background:#f0edff;transform:translateX(-2px)}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.4rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">🧩 Composite Bodies</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['The centre of mass of a composite body is found by treating its parts as:', ['separate masses and taking their mass-weighted average positions','equal masses regardless of their masses','only the largest part','only the outer boundary'],0,'A composite body can be divided into parts and its CM found from their mass-weighted positions.'],['For two component bodies of masses m₁ and m₂ at x₁ and x₂, the CM coordinate is:', ['(m₁x₁+m₂x₂)/(m₁+m₂)','(x₁+x₂)/(m₁+m₂)','m₁x₁+m₂x₂','(m₁+m₂)/(x₁+x₂)'],0,'The centre of mass is the mass-weighted average of the component positions.'],['If two composite parts have equal masses, the centre of mass lies:', ['at the midpoint of their centres of mass','always at the origin','at the heavier part','outside the system'],0,'Equal masses give equal weighting, so the CM is midway between their individual CMs.'],['A symmetric composite body with uniform density has its centre of mass:', ['on the symmetry axis or at the symmetry centre as appropriate','always at an edge','always outside the body','at a random point'],0,'Symmetry constrains the CM to the symmetry location.'],['A composite plate is made by joining two equal-area uniform pieces of the same material. Their masses are:', ['equal','always unequal','zero','proportional to their perimeter only'],0,'Same material and equal area give equal mass.'],['A uniform disc has a smaller circular portion removed symmetrically about a diameter. The CM of the remaining body lies:', ['on that symmetry axis','necessarily at the removed circle','outside the plate','at any arbitrary point'],0,'The remaining shape retains the relevant symmetry, constraining its CM to the axis.'],['When using the negative-mass method for a body with a hole, the removed portion is represented by:', ['negative mass at its own centre of mass','positive mass at the origin','zero mass at the edge','negative volume with positive mass'],0,'A removed region can be treated algebraically as a negative mass located at its original CM.'],['A composite body consists of masses 2 kg at x=0 m and 6 kg at x=4 m. Its centre of mass is:', ['3 m','2 m','4 m','1 m'],0,'x_CM=(2×0+6×4)/(2+6)=3 m.'],['If a small heavy component is added to a composite body, the centre of mass shifts toward:', ['the added heavy component','the opposite side always','the original geometric centre','the origin necessarily'],0,'Adding mass pulls the mass-weighted average toward that mass.'],['For a composite body made of uniform parts, the CM of each part should be taken at:', ['the individual part’s own centre of mass','the outermost corner always','the total body’s centre only','the nearest boundary'],0,'Each component contributes according to its own mass and CM position.'],['A T-shaped uniform lamina is best analysed by:', ['dividing it into simple shapes and combining their CMs','assuming the CM is at the corner','using only its total area','ignoring one of the arms'],0,'Composite laminae are conveniently decomposed into rectangles or other simple shapes.'],['For thin uniform plates of the same material, mass is proportional to:', ['area','perimeter only','thickness squared only','distance from the origin'],0,'With constant density and thickness, mass is proportional to area.'],['If a composite system is translated rigidly by a vector d, its centre of mass:', ['also translates by d','remains fixed','moves by 2d','moves opposite to d'],0,'A rigid translation moves every point, including the CM, by the same vector.'],['A composite body has total mass M and component masses mᵢ. The vector position of its CM is:', ['Σmᵢrᵢ/M','Σrᵢ/M','MΣrᵢ','Σmᵢrᵢ'],0,'The vector CM formula is r_CM = Σmᵢrᵢ / M.'],['For a composite body in a uniform gravitational field, its total weight acts effectively through:', ['the centre of mass','the geometric boundary','the lightest component','an arbitrary point'],0,'In a uniform gravitational field, the resultant weight acts through the centre of mass.']];let i=0,selected=-1,checked=false,score=0;const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;f.className=ok?'feedback good':'feedback bad';f.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 Composite Bodies Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Composite Bodies quiz">
+<title>SkillUp | Composite Bodies — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🧩 Composite Bodies</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "How can the centre of mass of a composite body be found?",
+    "o": [
+      "By averaging positions without considering mass",
+      "By choosing the heaviest part's edge",
+      "Only by measuring its temperature",
+      "By combining the mass-weighted positions of its parts"
+    ],
+    "a": 3,
+    "e": "For discrete parts, xcm = Σmᵢxᵢ / Σmᵢ; use the same mass-weighted approach for other coordinates."
+  },
+  {
+    "q": "Two bodies of masses 2 kg and 6 kg have centres at x = 0 m and x = 4 m. Find the combined centre of mass.",
+    "o": [
+      "1 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (2×0 + 6×4)/(2+6) = 24/8 = 3 m."
+  },
+  {
+    "q": "A composite body consists of equal masses at x = 2 m and x = 8 m. The centre of mass is:",
+    "o": [
+      "8 m",
+      "2 m",
+      "3 m",
+      "5 m"
+    ],
+    "a": 3,
+    "e": "For equal masses, the centre of mass is the midpoint: (2+8)/2 = 5 m."
+  },
+  {
+    "q": "A 3 kg part is at x = 0 m and a 1 kg part at x = 8 m. What is xcm?",
+    "o": [
+      "6 m",
+      "8 m",
+      "2 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (3×0 + 1×8)/(3+1) = 2 m."
+  },
+  {
+    "q": "When combining several bodies, the total mass is:",
+    "o": [
+      "The average of their masses",
+      "Always the largest mass",
+      "The difference between largest and smallest mass",
+      "The sum of their masses"
+    ],
+    "a": 3,
+    "e": "Total mass is M = Σmᵢ."
+  },
+  {
+    "q": "A composite body's centre of mass lies closer to the:",
+    "o": [
+      "Heavier component, if components are separated along a line",
+      "Lighter component always",
+      "Origin always",
+      "Farthest component always"
+    ],
+    "a": 0,
+    "e": "The mass-weighted average is pulled toward the component with greater mass."
+  },
+  {
+    "q": "A uniform rod of mass 2 kg and length 4 m has its centre at x = 2 m. A 2 kg point mass is placed at x = 6 m. Find the combined xcm.",
+    "o": [
+      "6 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 3,
+    "e": "xcm = (2×2 + 2×6)/(2+2) = 4 m."
+  },
+  {
+    "q": "A body is made from two identical uniform discs placed side by side without overlap. Their combined centre of mass is:",
+    "o": [
+      "At the rim of the right disc",
+      "Outside the line joining their centres",
+      "At the midpoint between their individual centres",
+      "At the centre of the left disc"
+    ],
+    "a": 2,
+    "e": "Identical discs have equal masses, so their combined centre of mass is halfway between their centres."
+  },
+  {
+    "q": "Which property is needed to use a mass-weighted average for a composite body?",
+    "o": [
+      "Only the colour of each part",
+      "Only the total height",
+      "Only the speed of the body",
+      "The mass and centre position of each component"
+    ],
+    "a": 3,
+    "e": "Each component's mass and centre-of-mass coordinates determine its contribution."
+  },
+  {
+    "q": "A 4 kg component has centre x = 1 m and a 2 kg component has centre x = 7 m. Find xcm.",
+    "o": [
+      "2 m",
+      "3 m",
+      "4 m",
+      "5 m"
+    ],
+    "a": 1,
+    "e": "xcm = (4×1 + 2×7)/6 = 18/6 = 3 m."
+  },
+  {
+    "q": "A uniform plate is made by joining two equal-area pieces of the same material. Their centres are x = 1 cm and x = 5 cm. Combined xcm is:",
+    "o": [
+      "5 cm",
+      "1 cm",
+      "2 cm",
+      "3 cm"
+    ],
+    "a": 3,
+    "e": "Equal area and same material mean equal masses; the centre is (1+5)/2 = 3 cm."
+  },
+  {
+    "q": "If two parts have different densities but equal volumes, their masses are:",
+    "o": [
+      "Always zero",
+      "Determined only by their shapes",
+      "Always equal",
+      "Different if their densities differ"
+    ],
+    "a": 3,
+    "e": "Mass = density × volume, so equal volumes with different densities have different masses."
+  },
+  {
+    "q": "A composite object has components on both sides of the origin. What should be used for their coordinates?",
+    "o": [
+      "Only positive distances",
+      "Only absolute values",
+      "Only the largest coordinate",
+      "Signed coordinates, including negative values"
+    ],
+    "a": 3,
+    "e": "Coordinates must keep their signs so the weighted average correctly reflects position."
+  },
+  {
+    "q": "Masses 1 kg, 2 kg and 3 kg are at x = 0 m, 3 m and 6 m. Find xcm.",
+    "o": [
+      "3 m",
+      "4 m",
+      "4.5 m",
+      "5 m"
+    ],
+    "a": 1,
+    "e": "xcm = (1×0 + 2×3 + 3×6)/(1+2+3) = 24/6 = 4 m."
+  },
+  {
+    "q": "For a two-dimensional composite body, the x-coordinate of its centre of mass is:",
+    "o": [
+      "Σmᵢxᵢ only",
+      "Σmᵢxᵢ / Σmᵢ",
+      "Σyᵢ / Σmᵢ",
+      "Σmᵢ / Σxᵢ"
+    ],
+    "a": 1,
+    "e": "Use the mass-weighted average of each component's x-coordinate; ycm is found similarly."
+  },
+  {
+    "q": "A uniform semicircle and a uniform rectangle are joined. Which approach is generally appropriate to find their combined centre of mass?",
+    "o": [
+      "Average the two centres without masses in every case",
+      "Assume it lies at the joining point",
+      "Treat each shape as a component with its own mass and centre",
+      "Use only the rectangle's centre"
+    ],
+    "a": 2,
+    "e": "Find each component's mass and centroid, then take the mass-weighted average."
+  },
+  {
+    "q": "A uniform lamina has a small region removed. How can the remaining centre of mass be calculated?",
+    "o": [
+      "Ignore the removed region in all cases",
+      "Add its mass to the original body",
+      "Always place the centre at the hole",
+      "Treat the removed region as a negative mass"
+    ],
+    "a": 3,
+    "e": "The subtraction method represents the removed part as negative mass in the weighted-average calculation."
+  },
+  {
+    "q": "A uniform rectangular plate has a centred circular hole. If the hole and plate are symmetric about the same centre, the remaining centre of mass is:",
+    "o": [
+      "At the common centre",
+      "At the plate's corner",
+      "At the hole's edge",
+      "Always outside the plate"
+    ],
+    "a": 0,
+    "e": "The centred hole preserves the symmetry, so the centre of mass remains at the common centre."
+  },
+  {
+    "q": "A plate has mass 10 kg and centre x = 2 m. A 2 kg piece is attached at x = 8 m. Find the new xcm.",
+    "o": [
+      "5 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (10×2 + 2×8)/12 = 36/12 = 3 m."
+  },
+  {
+    "q": "A 5 kg body at x = −2 m is combined with a 5 kg body at x = +4 m. The centre of mass is:",
+    "o": [
+      "1 m",
+      "4 m",
+      "−2 m",
+      "0 m"
+    ],
+    "a": 0,
+    "e": "Equal masses give xcm = (−2 + 4)/2 = 1 m."
+  },
+  {
+    "q": "For a uniform body with continuous mass distribution, the discrete sum Σmᵢxᵢ is replaced by:",
+    "o": [
+      "A simple average of endpoints",
+      "The object's volume only",
+      "The largest coordinate",
+      "An integral over the mass distribution"
+    ],
+    "a": 3,
+    "e": "For a continuous body, xcm = (1/M)∫x dm."
+  },
+  {
+    "q": "Two equal rods of the same material are joined end-to-end. One is twice as long as the other. Their masses are:",
+    "o": [
+      "Equal",
+      "In the same ratio as their lengths",
+      "In the inverse ratio of lengths",
+      "Unrelated to their lengths"
+    ],
+    "a": 1,
+    "e": "For rods of the same material and cross-section, mass is proportional to length."
+  },
+  {
+    "q": "A 2 kg part is at x = −3 m and a 4 kg part at x = 3 m. Find xcm.",
+    "o": [
+      "2 m",
+      "−1 m",
+      "0 m",
+      "1 m"
+    ],
+    "a": 3,
+    "e": "xcm = (2×−3 + 4×3)/6 = 6/6 = 1 m."
+  },
+  {
+    "q": "If every component of a composite body is shifted by the same displacement, its centre of mass:",
+    "o": [
+      "Moves twice as far",
+      "Moves toward the heaviest component",
+      "Shifts by the same displacement",
+      "Remains fixed"
+    ],
+    "a": 2,
+    "e": "Translating every component equally translates their mass-weighted average by the same amount."
+  },
+  {
+    "q": "If all component masses are multiplied by the same factor, the centre-of-mass position:",
+    "o": [
+      "Doubles its coordinate",
+      "Moves to the origin",
+      "Becomes undefined",
+      "Does not change"
+    ],
+    "a": 3,
+    "e": "The common mass factor cancels from numerator and denominator of the weighted average."
+  },
+  {
+    "q": "A 2 kg body centred at x = 1 m and a 6 kg body centred at x = 5 m have xcm:",
+    "o": [
+      "2 m",
+      "3 m",
+      "4 m",
+      "5 m"
+    ],
+    "a": 2,
+    "e": "xcm = (2×1 + 6×5)/8 = 32/8 = 4 m."
+  },
+  {
+    "q": "A composite body has equal masses symmetrically placed at x = −a and x = +a. Its x-coordinate of centre of mass is:",
+    "o": [
+      "2a",
+      "0",
+      "a",
+      "−a"
+    ],
+    "a": 1,
+    "e": "The equal and opposite weighted coordinates cancel."
+  },
+  {
+    "q": "When a body is divided into components for calculation, the chosen components should:",
+    "o": [
+      "Exclude the heaviest part",
+      "All have equal mass",
+      "Together represent the entire body without double-counting mass",
+      "Overlap in every region"
+    ],
+    "a": 2,
+    "e": "A correct decomposition accounts for all material exactly once, or explicitly subtracts removed regions."
+  },
+  {
+    "q": "A 3 kg component at x = 2 m and a 1 kg component at x = −2 m have xcm:",
+    "o": [
+      "0 m",
+      "1 m",
+      "2 m",
+      "−1 m"
+    ],
+    "a": 1,
+    "e": "xcm = (3×2 + 1×−2)/4 = 4/4 = 1 m."
+  },
+  {
+    "q": "Which statement about the centre of mass of a composite body is correct?",
+    "o": [
+      "It may lie in an empty region between components",
+      "It must always be inside solid material",
+      "It must be at the heaviest component's centre",
+      "It is always at the geometric centre of the outline"
+    ],
+    "a": 0,
+    "e": "For example, a ring's centre of mass is at its empty centre; composite shapes can have centres in gaps too."
+  },
+  {
+    "q": "A 4 kg part at x = 1 m and a 2 kg part at x = 7 m are combined. What is xcm?",
+    "o": [
+      "5 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (4×1 + 2×7)/6 = 18/6 = 3 m."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

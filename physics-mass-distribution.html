@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Mass Distribution</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.6rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.27rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.4rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">⚖️ Mass Distribution</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['Mass distribution describes how mass is:', ['spread through a body or system','converted into energy only','always concentrated at one point','independent of position'],0,'Mass distribution specifies where the mass of a system is located.'],['For a uniform rod, mass per unit length is:', ['constant','zero','infinite','different at every point'],0,'Uniform distribution means constant linear mass density.'],['Linear mass density is defined as:', ['dm/dx','dx/dm','m/x²','dm·dx'],0,'For a thin rod, linear density λ = dm/dx.'],['Surface mass density is defined as:', ['dm/dA','dA/dm','dm/dV','mA'],0,'Surface density σ = dm/dA.'],['Volume mass density is defined as:', ['dm/dV','dV/dm','dm/dA','mV'],0,'Volume density ρ = dm/dV.'],['A body with more mass concentrated near its right side has its centre of mass shifted:', ['toward the right','toward the left','necessarily to the midpoint','outside the body'],0,'The centre of mass shifts toward regions containing more mass.'],['For a continuous body, total mass can be written as:', ['∫dm','∫dx only','∫dA only','∫dV only'],0,'Adding all differential mass elements gives M = ∫dm.'],['For a uniform three-dimensional body, mass density is:', ['constant throughout','zero everywhere','largest at the centre necessarily','dependent only on time'],0,'Uniform volume distribution has constant density.'],['If equal masses are symmetrically distributed about an axis, the centre of mass lies:', ['on the symmetry axis','always outside the body','at the heaviest point','at a random point'],0,'Symmetry forces the mass-weighted centre onto the symmetry axis.'],['Increasing the density of one region while keeping other regions fixed generally shifts the centre of mass:', ['toward that region','away from that region always','to the origin','nowhere'],0,'Adding mass biases the mass-weighted average toward its location.'],['For a thin sheet, the appropriate density for describing mass spread over area is:', ['surface mass density','linear mass density','volume mass density','charge density only'],0,'A sheet is two-dimensional, so σ = dm/dA is appropriate.'],['For a wire, the appropriate mass density is:', ['linear mass density','surface mass density','volume mass density','area density squared'],0,'A thin wire is treated as a one-dimensional mass distribution.'],['If a uniform rod is made twice as dense everywhere without changing its shape, its centre of mass:', ['does not change','moves to an end','moves outside the rod','doubles its position coordinate'],0,'Multiplying every mass element by the same factor leaves the CM unchanged.'],['Mass distribution affects the moment of inertia because moment of inertia depends on:', ['where mass is located relative to the axis','only total mass','only volume','only the centre coordinate'],0,'Mass farther from the axis contributes more strongly to I.'],['The centre of mass of a continuous mass distribution is obtained using:', ['mass-weighted position integrals','only the geometric volume','only the maximum density','only the total length'],0,'The CM is calculated by integrating position weighted by differential mass.']];let i=0,selected=-1,checked=false,score=0;const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;f.className=ok?'feedback good':'feedback bad';f.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 Mass Distribution Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Mass Distribution quiz">
+<title>SkillUp | Mass Distribution — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Mass Distribution</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What determines the centre of mass of a body?",
+    "o": [
+      "Its colour",
+      "Its temperature only",
+      "Its speed only",
+      "How its mass is distributed in space"
+    ],
+    "a": 3,
+    "e": "The centre of mass depends on the positions of the body's mass elements and their masses."
+  },
+  {
+    "q": "For point masses, the x-coordinate of centre of mass is:",
+    "o": [
+      "Σmᵢxᵢ / Σmᵢ",
+      "Σxᵢ / Σmᵢ",
+      "Σmᵢ / Σxᵢ",
+      "Σmᵢxᵢ only"
+    ],
+    "a": 0,
+    "e": "Multiply each coordinate by its mass, add the products, then divide by total mass."
+  },
+  {
+    "q": "A 2 kg mass is at x = 0 m and a 6 kg mass at x = 4 m. The centre of mass is:",
+    "o": [
+      "4 m",
+      "1 m",
+      "2 m",
+      "3 m"
+    ],
+    "a": 3,
+    "e": "xcm = (2×0 + 6×4)/(2+6) = 3 m."
+  },
+  {
+    "q": "If equal masses are placed at x = −a and x = +a, their centre of mass is:",
+    "o": [
+      "+a",
+      "2a",
+      "−a",
+      "0"
+    ],
+    "a": 3,
+    "e": "Equal masses at opposite coordinates balance at the origin."
+  },
+  {
+    "q": "A uniform rod has its mass distributed:",
+    "o": [
+      "Only at its ends",
+      "Only at its centre",
+      "Randomly in all cases",
+      "Equally per unit length"
+    ],
+    "a": 3,
+    "e": "For a uniform rod, linear mass density is constant along its length."
+  },
+  {
+    "q": "Linear mass density is defined as:",
+    "o": [
+      "Mass per unit length",
+      "Length per unit mass",
+      "Mass per unit volume",
+      "Volume per unit mass"
+    ],
+    "a": 0,
+    "e": "Linear density λ = dm/dx, or total mass divided by length for a uniform rod."
+  },
+  {
+    "q": "The SI unit of linear mass density is:",
+    "o": [
+      "m kg⁻¹",
+      "kg m⁻¹",
+      "kg m⁻²",
+      "kg m⁻³"
+    ],
+    "a": 1,
+    "e": "Linear density is mass divided by length, so its SI unit is kg/m."
+  },
+  {
+    "q": "Volume mass density is:",
+    "o": [
+      "Mass per unit length",
+      "Volume per unit mass",
+      "Mass per unit volume",
+      "Mass per unit area"
+    ],
+    "a": 2,
+    "e": "Volume density ρ = dm/dV; its SI unit is kg/m³."
+  },
+  {
+    "q": "Surface mass density is defined as:",
+    "o": [
+      "Mass per unit length",
+      "Area per unit mass",
+      "Mass per unit volume",
+      "Mass per unit area"
+    ],
+    "a": 3,
+    "e": "Surface density σ = dm/dA, measured in kg/m²."
+  },
+  {
+    "q": "A body has density ρ and volume V. Its mass is:",
+    "o": [
+      "ρV",
+      "ρ/V",
+      "V/ρ",
+      "ρ + V"
+    ],
+    "a": 0,
+    "e": "For uniform density, mass equals density multiplied by volume."
+  },
+  {
+    "q": "A thin sheet has uniform surface density. Its centre of mass coincides with its:",
+    "o": [
+      "Nearest edge",
+      "Geometric centroid",
+      "Heaviest corner",
+      "Lowest point always"
+    ],
+    "a": 1,
+    "e": "For a uniform lamina, mass distribution follows area, so the centre of mass is its area centroid."
+  },
+  {
+    "q": "If more mass is concentrated on the right side of a body, its centre of mass generally shifts:",
+    "o": [
+      "Always to the origin",
+      "Vertically downward only",
+      "To the right",
+      "To the left"
+    ],
+    "a": 2,
+    "e": "The mass-weighted average moves toward the side containing more mass."
+  },
+  {
+    "q": "A 1 kg mass at x = 2 m and a 3 kg mass at x = 6 m have centre of mass at:",
+    "o": [
+      "4 m",
+      "5 m",
+      "6 m",
+      "3 m"
+    ],
+    "a": 1,
+    "e": "xcm = (1×2 + 3×6)/4 = 20/4 = 5 m."
+  },
+  {
+    "q": "For a continuous mass distribution, x-coordinate of centre of mass is:",
+    "o": [
+      "(1/M)∫x dm",
+      "∫dm only",
+      "M∫x dx",
+      "Σxᵢ without weights"
+    ],
+    "a": 0,
+    "e": "The continuous form is xcm = (1/M)∫x dm over the entire mass."
+  },
+  {
+    "q": "If density varies along a rod, its centre of mass is generally:",
+    "o": [
+      "Always outside the rod",
+      "Not necessarily at the midpoint",
+      "Always at the midpoint",
+      "Always at one endpoint"
+    ],
+    "a": 1,
+    "e": "Nonuniform density changes the mass weighting, so the centre can shift from the midpoint."
+  },
+  {
+    "q": "For a rod with varying linear density λ(x), the total mass is:",
+    "o": [
+      "∫x dx only",
+      "Length divided by λ",
+      "∫λ(x) dx",
+      "λ divided by length"
+    ],
+    "a": 2,
+    "e": "Integrating linear density along the rod gives total mass."
+  },
+  {
+    "q": "If all mass elements of a body are moved by the same vector displacement, its centre of mass:",
+    "o": [
+      "Does not move",
+      "Moves twice as far",
+      "Moves to the origin",
+      "Moves by that same displacement"
+    ],
+    "a": 3,
+    "e": "The centre of mass transforms with the same translation as the whole mass distribution."
+  },
+  {
+    "q": "Which mass distribution has its centre of mass at the geometric centre?",
+    "o": [
+      "A uniform sphere",
+      "Any irregular object regardless of density",
+      "A rod with all mass at one end",
+      "A body with arbitrary density"
+    ],
+    "a": 0,
+    "e": "A uniform sphere is symmetric in every direction, placing its centre of mass at its geometric centre."
+  },
+  {
+    "q": "A 4 kg body centred at x = 1 m and a 2 kg body at x = 7 m are combined. Find xcm.",
+    "o": [
+      "5 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (4×1 + 2×7)/6 = 3 m."
+  },
+  {
+    "q": "For a uniform circular ring, the mass is distributed:",
+    "o": [
+      "Only on one half",
+      "At random points on the axis",
+      "Symmetrically around its circumference",
+      "Only at the centre"
+    ],
+    "a": 2,
+    "e": "A uniform ring has equal mass distribution around the circle, so its centre of mass is at the circle centre."
+  },
+  {
+    "q": "A body's centre of mass can lie in a region with no material. Which is an example?",
+    "o": [
+      "The end of a uniform rod",
+      "The centre of a solid cube",
+      "The middle of a solid sphere",
+      "The centre of a uniform ring"
+    ],
+    "a": 3,
+    "e": "The ring's centre of mass lies in its empty central region."
+  },
+  {
+    "q": "Two equal-length rods have the same material and cross-section. If one has twice the density, its mass is:",
+    "o": [
+      "Twice the other's mass",
+      "Half the other's mass",
+      "Equal to the other's mass",
+      "Four times the other's mass"
+    ],
+    "a": 0,
+    "e": "For equal volume, mass is proportional to density."
+  },
+  {
+    "q": "A body is composed of two regions with masses M₁ and M₂ and centres x₁ and x₂. Its xcm is:",
+    "o": [
+      "M₁x₁ − M₂x₂",
+      "(M₁x₁ + M₂x₂)/(M₁+M₂)",
+      "(x₁+x₂)/(M₁+M₂)",
+      "M₁+M₂"
+    ],
+    "a": 1,
+    "e": "The combined centre is the mass-weighted average of the component centres."
+  },
+  {
+    "q": "If the mass of every component is multiplied by the same factor, the centre of mass:",
+    "o": [
+      "Moves to the origin",
+      "Becomes twice as far from each part",
+      "Stays in the same position",
+      "Moves by that factor"
+    ],
+    "a": 2,
+    "e": "A common factor cancels between the weighted sum and total mass."
+  },
+  {
+    "q": "For an object symmetric about the y-axis, if its mass distribution has that same symmetry, xcm is:",
+    "o": [
+      "Always positive",
+      "Always negative",
+      "Equal to its height",
+      "Zero"
+    ],
+    "a": 3,
+    "e": "Mass elements at +x and −x balance, so xcm = 0."
+  },
+  {
+    "q": "A uniform rectangular lamina has centre of mass at:",
+    "o": [
+      "Intersection of its diagonals",
+      "One corner",
+      "Midpoint of its longest edge",
+      "Outside the lamina"
+    ],
+    "a": 0,
+    "e": "Uniform mass distribution and symmetry put the centre at the diagonal intersection."
+  },
+  {
+    "q": "A small region is removed from a uniform plate. The removed region can be modelled as:",
+    "o": [
+      "A point at the plate centre always",
+      "Negative mass in the calculation",
+      "Extra positive mass",
+      "Zero area with no effect"
+    ],
+    "a": 1,
+    "e": "The subtraction method accounts for removed material by assigning its mass a negative sign."
+  },
+  {
+    "q": "Why must signed coordinates be retained when calculating centre of mass?",
+    "o": [
+      "They eliminate total mass",
+      "They guarantee the answer is zero",
+      "They preserve which side of the origin each mass occupies",
+      "They make all masses positive"
+    ],
+    "a": 2,
+    "e": "Negative and positive positions contribute in opposite directions to the weighted sum."
+  },
+  {
+    "q": "A 2 kg mass at x = −3 m and a 4 kg mass at x = 3 m have xcm:",
+    "o": [
+      "0 m",
+      "1 m",
+      "2 m",
+      "−1 m"
+    ],
+    "a": 1,
+    "e": "xcm = (2×−3 + 4×3)/6 = 1 m."
+  },
+  {
+    "q": "Which statement about nonuniform mass distribution is correct?",
+    "o": [
+      "The centre of mass is found by weighting each position by the mass there",
+      "It must be at the geometric centre",
+      "It always lies at the point of maximum density",
+      "It cannot be calculated"
+    ],
+    "a": 0,
+    "e": "For nonuniform bodies, integrate or sum position times mass and divide by total mass."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

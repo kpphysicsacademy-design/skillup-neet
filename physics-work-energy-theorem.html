@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Work-Energy Theorem</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:820px;margin:auto;padding:28px 18px 48px}.hero,.card{background:#fff;border-radius:22px;padding:24px;margin:12px 0;box-shadow:0 7px 22px #17203312}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.title{font-size:1.65rem;font-weight:900}.xp{font-weight:900;background:#eef7ff;padding:9px 13px;border-radius:999px}.sub{margin:8px 0 0;color:#52657a}.head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#e4e9ef;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:width .3s}.qnum{font-weight:800;color:#52657a}.q{font-size:1.25rem;font-weight:850;line-height:1.45;margin:15px 0}.opts{display:grid;gap:11px}.opt{border:2px solid #d9e2ea;background:#fff;border-radius:14px;padding:14px;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-2px);border-color:#58cc02}.opt.selected{border-color:#1685e8;background:#eef7ff}.opt.correct{border-color:#58cc02;background:#eaffdf}.opt.wrong{border-color:#e5484d;background:#fff0f0}.feedback{min-height:48px;margin-top:14px;padding:13px;border-radius:14px;line-height:1.5}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.btn{margin-top:14px;border:0;border-radius:13px;padding:13px 20px;font:inherit;font-weight:850;cursor:pointer;background:#58cc02;color:#fff;box-shadow:0 4px 0 #46a900}.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #46a900}.back{display:inline-block;margin-top:10px;padding:10px 13px;border-radius:12px;color:#5146a5;font-weight:800;text-decoration:none}.back:hover{background:#f0edff;transform:translateX(-2px)}.result{text-align:center;font-size:1.2rem;font-weight:850;line-height:1.7}@media(max-width:600px){.wrap{padding:20px 14px}.hero,.card{padding:18px}.q{font-size:1.12rem}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="hero"><div class="top"><div class="title">⚡ Work-Energy Theorem</div><div class="xp"><span id="xp">0</span> XP</div></div><p class="sub">Master the work-energy theorem with 15 NEET-style questions.</p></section><section class="card"><div class="head"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card"><div class="qnum" id="count">Question 1 of 15</div><div class="q" id="question"></div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then continue.</div><button class="btn" id="continue">Continue →</button></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const qs=[['The work-energy theorem states that net work done on a body equals its change in:',['kinetic energy','potential energy','momentum','power'],0,'Wnet = ΔK.'],['The SI unit of kinetic energy is:',['joule','watt','newton','pascal'],0,'Kinetic energy is measured in joules.'],['The kinetic energy of a mass m moving at speed v is:',['½mv²','mv','mv²','½mv'],0,'K = ½mv².'],['If net work on a body is positive, its kinetic energy:',['increases','decreases','becomes zero','becomes negative'],0,'Positive net work increases kinetic energy.'],['If net work on a body is negative, its kinetic energy:',['decreases','increases','doubles','is unchanged'],0,'Negative net work reduces kinetic energy.'],['A 2 kg body changes speed from 3 m/s to 5 m/s. The change in kinetic energy is:',['16 J','8 J','25 J','34 J'],0,'ΔK = ½(2)(25−9) = 16 J.'],['A net force does 20 J of work on a body. Its change in kinetic energy is:',['20 J','10 J','40 J','0 J'],0,'By the theorem, ΔK = Wnet = 20 J.'],['If net work on a body is zero, its kinetic energy:',['does not change','must be zero','doubles','becomes negative'],0,'Zero net work means ΔK = 0.'],['In uniform circular motion, the work done by the centripetal force is:',['zero','positive','negative','maximum'],0,'Centripetal force is perpendicular to instantaneous displacement.'],['The work-energy theorem relates the change in kinetic energy to:',['net work of all forces','gravity only','friction only','conservative forces only'],0,'The theorem uses total net work.'],['A body initially at rest receives 50 J net work. Its final kinetic energy is:',['50 J','25 J','100 J','0 J'],0,'Initial kinetic energy is zero, so final kinetic energy is 50 J.'],['If kinetic energy doubles, the speed changes by a factor of:',['√2','2','4','1/2'],0,'Because K is proportional to v², speed changes by √2.'],['The signed area under a force-displacement graph represents:',['work','power','momentum','acceleration'],0,'The area under an F-x graph gives work.'],['Kinetic friction on a sliding body generally does:',['negative work','positive work','zero work always','infinite work'],0,'Kinetic friction opposes sliding motion and removes kinetic energy.'],['The work-energy theorem is especially useful for finding speed changes without explicitly solving for:',['time','mass','density','charge'],0,'It connects force and displacement directly to kinetic-energy change.']];let i=0,selected=null,score=0,checked=false;const $=id=>document.getElementById(id);function render(){selected=null;checked=false;const a=qs[i];$('count').textContent='Question '+(i+1)+' of 15';$('question').textContent=a[0];$('feedback').className='feedback';$('feedback').textContent='Choose an answer, then continue.';$('continue').textContent='Continue →';$('fill').style.width=(i/15*100)+'%';$('opts').innerHTML='';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;[...$('opts').children].forEach(z=>z.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)})}function check(){if(selected===null){$('feedback').className='feedback bad';$('feedback').textContent='Choose an answer first 👆';return}if(checked){i++;if(i<15)render();else finish();return}checked=true;const a=qs[i],ok=selected===a[2];if(ok)score++;[...$('opts').children].forEach(b=>{const x=Number(b.dataset.index);b.disabled=true;if(x===a[2])b.classList.add('correct');if(x===selected&&!ok)b.classList.add('wrong')});$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').innerHTML=(ok?'🎯 Correct! +10 XP':'✗ Not quite.')+'<br>'+a[3];$('xp').textContent=score*10;$('mastery').textContent=score+' / 15';$('fill').style.width=((i+1)/15*100)+'%';$('continue').textContent=i===14?'Finish Skill →':'Continue →'}function finish(){$('question').textContent='🏆 Work-Energy Theorem Complete!';$('opts').innerHTML='';$('feedback').className='feedback good';$('feedback').textContent='Score: '+score+' / 15 • XP earned: '+score*10+' XP';$('continue').textContent='Retry Skill';$('continue').onclick=()=>{i=0;score=0;render();$('continue').onclick=check}}$('continue').onclick=check;$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Work-Energy Theorem quiz">
+<title>SkillUp | Work-Energy Theorem — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Work-Energy Theorem</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "The work–energy theorem states that the net work done on an object equals its change in:",
+    "o": [
+      "Kinetic energy",
+      "Potential energy only",
+      "Momentum",
+      "Power"
+    ],
+    "a": 0,
+    "e": "Wnet = ΔK, so net work equals final kinetic energy minus initial kinetic energy."
+  },
+  {
+    "q": "What is the formula for kinetic energy of a body of mass m moving at speed v?",
+    "o": [
+      "mv²",
+      "½mv²",
+      "mv",
+      "½mv"
+    ],
+    "a": 1,
+    "e": "K = ½mv²."
+  },
+  {
+    "q": "A 2 kg object speeds up from 3 m/s to 5 m/s. What is its change in kinetic energy?",
+    "o": [
+      "8 J",
+      "16 J",
+      "25 J",
+      "34 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½m(v² − u²) = ½ × 2 × (25 − 9) = 16 J."
+  },
+  {
+    "q": "A net force does 12 J of work on an object. Its kinetic energy changes by:",
+    "o": [
+      "6 J",
+      "12 J",
+      "24 J",
+      "0 J"
+    ],
+    "a": 1,
+    "e": "By the work–energy theorem, ΔK = Wnet = 12 J."
+  },
+  {
+    "q": "If the net work on an object is negative, its kinetic energy:",
+    "o": [
+      "Increases",
+      "Decreases",
+      "Must be zero",
+      "Cannot change"
+    ],
+    "a": 1,
+    "e": "Negative net work means ΔK is negative, so kinetic energy decreases."
+  },
+  {
+    "q": "If the net work on an object is zero, its kinetic energy:",
+    "o": [
+      "Must be zero",
+      "Does not change",
+      "Doubles",
+      "Becomes negative"
+    ],
+    "a": 1,
+    "e": "Zero net work gives ΔK = 0; the kinetic energy remains unchanged."
+  },
+  {
+    "q": "A 4 kg body starts from rest and receives 72 J of net work. Its final speed is:",
+    "o": [
+      "3 m/s",
+      "6 m/s",
+      "9 m/s",
+      "12 m/s"
+    ],
+    "a": 1,
+    "e": "½mv² = 72, so 2v² = 72, v² = 36 and v = 6 m/s."
+  },
+  {
+    "q": "A 1 kg object has its speed increased from 2 m/s to 6 m/s. Net work done is:",
+    "o": [
+      "8 J",
+      "16 J",
+      "18 J",
+      "32 J"
+    ],
+    "a": 1,
+    "e": "Wnet = ΔK = ½ × 1 × (36 − 4) = 16 J."
+  },
+  {
+    "q": "A 3 kg object moving at 4 m/s is brought to rest. The net work done is:",
+    "o": [
+      "+24 J",
+      "−24 J",
+      "+12 J",
+      "−12 J"
+    ],
+    "a": 1,
+    "e": "ΔK = 0 − ½ × 3 × 16 = −24 J."
+  },
+  {
+    "q": "A 5 N force acts in the direction of motion over 4 m. If it is the only force doing work, the work is:",
+    "o": [
+      "9 J",
+      "20 J",
+      "1.25 J",
+      "0 J"
+    ],
+    "a": 1,
+    "e": "W = Fs = 5 × 4 = 20 J."
+  },
+  {
+    "q": "A 10 N force acts opposite to displacement over 3 m. Its work is:",
+    "o": [
+      "+30 J",
+      "−30 J",
+      "+13 J",
+      "0 J"
+    ],
+    "a": 1,
+    "e": "W = Fs cos180° = −10 × 3 = −30 J."
+  },
+  {
+    "q": "Which quantity must be used in the work–energy theorem?",
+    "o": [
+      "Work by the net force",
+      "Work by gravity only",
+      "Work by friction only",
+      "Work by the largest force only"
+    ],
+    "a": 0,
+    "e": "The theorem relates the change in kinetic energy to the total net work of all forces."
+  },
+  {
+    "q": "A 2 kg body moves at 10 m/s. Its kinetic energy is:",
+    "o": [
+      "20 J",
+      "50 J",
+      "100 J",
+      "200 J"
+    ],
+    "a": 2,
+    "e": "K = ½ × 2 × 10² = 100 J."
+  },
+  {
+    "q": "If the speed of a body doubles, its kinetic energy becomes:",
+    "o": [
+      "Twice as large",
+      "Four times as large",
+      "Half as large",
+      "Unchanged"
+    ],
+    "a": 1,
+    "e": "K is proportional to v², so doubling speed multiplies kinetic energy by four."
+  },
+  {
+    "q": "If kinetic energy becomes four times larger while mass stays the same, speed becomes:",
+    "o": [
+      "Twice as large",
+      "Four times as large",
+      "Half as large",
+      "Unchanged"
+    ],
+    "a": 0,
+    "e": "Since K ∝ v², a fourfold increase in K means speed doubles."
+  },
+  {
+    "q": "In uniform circular motion, the work done by the centripetal force is:",
+    "o": [
+      "Positive",
+      "Negative",
+      "Zero",
+      "Always equal to kinetic energy"
+    ],
+    "a": 2,
+    "e": "Centripetal force is perpendicular to the instantaneous displacement, so its work is zero."
+  },
+  {
+    "q": "The signed area under a force–displacement graph represents:",
+    "o": [
+      "Power",
+      "Work",
+      "Momentum",
+      "Acceleration"
+    ],
+    "a": 1,
+    "e": "Work is the integral of force with respect to displacement, represented by signed area under an F–x graph."
+  },
+  {
+    "q": "A body gains 40 J of kinetic energy. The net work done on it is:",
+    "o": [
+      "−40 J",
+      "20 J",
+      "40 J",
+      "80 J"
+    ],
+    "a": 2,
+    "e": "The work–energy theorem gives Wnet = ΔK = +40 J."
+  },
+  {
+    "q": "A body loses 15 J of kinetic energy. The net work done on it is:",
+    "o": [
+      "+15 J",
+      "−15 J",
+      "0 J",
+      "−30 J"
+    ],
+    "a": 1,
+    "e": "A loss of 15 J means ΔK = −15 J, so net work is −15 J."
+  },
+  {
+    "q": "A 2 kg object moving at 4 m/s receives 12 J of net work. Its final speed is:",
+    "o": [
+      "2 m/s",
+      "4 m/s",
+      "√28 m/s",
+      "√40 m/s"
+    ],
+    "a": 2,
+    "e": "Initial K = ½ × 2 × 16 = 16 J; final K = 28 J, so ½ × 2 × v² = 28 and v = √28 m/s."
+  },
+  {
+    "q": "A 1 kg body starts at rest and reaches 8 m/s. Net work done is:",
+    "o": [
+      "8 J",
+      "16 J",
+      "32 J",
+      "64 J"
+    ],
+    "a": 2,
+    "e": "Wnet = ΔK = ½ × 1 × 8² = 32 J."
+  },
+  {
+    "q": "A 6 kg object slows from 5 m/s to 3 m/s. Net work done is:",
+    "o": [
+      "+48 J",
+      "−48 J",
+      "−24 J",
+      "+24 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½ × 6 × (9 − 25) = 3 × (−16) = −48 J."
+  },
+  {
+    "q": "A 1000 kg car increases speed from 10 m/s to 20 m/s. Net work done is:",
+    "o": [
+      "50,000 J",
+      "100,000 J",
+      "150,000 J",
+      "200,000 J"
+    ],
+    "a": 2,
+    "e": "ΔK = ½ × 1000 × (400 − 100) = 150,000 J."
+  },
+  {
+    "q": "If friction does negative work on a sliding block, the block's kinetic energy due to that work contribution:",
+    "o": [
+      "Increases",
+      "Decreases",
+      "Must stay constant",
+      "Becomes negative"
+    ],
+    "a": 1,
+    "e": "Friction opposes sliding and removes mechanical energy from the block's motion."
+  },
+  {
+    "q": "The work–energy theorem can help calculate speed without directly finding:",
+    "o": [
+      "Displacement",
+      "Time taken",
+      "Net work",
+      "Kinetic energy"
+    ],
+    "a": 1,
+    "e": "The theorem relates work and kinetic energy directly, often avoiding the need to solve for time."
+  },
+  {
+    "q": "A 0.5 kg ball speeds up from 4 m/s to 8 m/s. Its change in kinetic energy is:",
+    "o": [
+      "6 J",
+      "12 J",
+      "16 J",
+      "24 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½ × 0.5 × (64 − 16) = 0.25 × 48 = 12 J."
+  },
+  {
+    "q": "A body has initial kinetic energy 25 J and net work of −10 J is done. Final kinetic energy is:",
+    "o": [
+      "15 J",
+      "35 J",
+      "−15 J",
+      "10 J"
+    ],
+    "a": 0,
+    "e": "Kf = Ki + Wnet = 25 − 10 = 15 J."
+  },
+  {
+    "q": "A body of mass 2 kg has kinetic energy 36 J. Its speed is:",
+    "o": [
+      "3 m/s",
+      "6 m/s",
+      "9 m/s",
+      "18 m/s"
+    ],
+    "a": 1,
+    "e": "36 = ½ × 2 × v², so v² = 36 and v = 6 m/s."
+  },
+  {
+    "q": "A constant force of 4 N acts along displacement for 5 m. The kinetic energy change due to this net force is:",
+    "o": [
+      "−20 J",
+      "+20 J",
+      "+9 J",
+      "0 J"
+    ],
+    "a": 1,
+    "e": "If this is the net force, Wnet = Fs = 4 × 5 = 20 J, so ΔK = +20 J."
+  },
+  {
+    "q": "Which statement is correct about the work–energy theorem?",
+    "o": [
+      "It applies only when speed is constant",
+      "Net work equals change in kinetic energy",
+      "Net work always equals potential energy",
+      "It applies only to gravity"
+    ],
+    "a": 1,
+    "e": "The theorem applies generally: total net work equals the change in kinetic energy."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

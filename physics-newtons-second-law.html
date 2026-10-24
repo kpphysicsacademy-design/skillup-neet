@@ -1,47 +1,133 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Newton's Second Law</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Newton’s Second Law quiz">
+<title>SkillUp | Newton’s Second Law — Easy Quiz</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.xp{font-weight:800;background:#fff;padding:9px 14px;border-radius:999px;box-shadow:0 4px 14px #17203312}.hero{background:#3b82f6;color:#fff;border-radius:22px;padding:24px;margin-bottom:18px}.hero small{font-weight:800;letter-spacing:.08em}.hero h1{margin:8px 0 6px;font-size:2rem}.hero p{margin:0;font-weight:650}.progress{background:#fff;border-radius:18px;padding:16px 18px;margin-bottom:18px;box-shadow:0 5px 16px #17203310}.progressline{height:10px;background:#e7e9ef;border-radius:99px;overflow:hidden;margin-top:9px}.fill{height:100%;width:0;background:#58cc02}.quiz{background:#fff;border-radius:22px;padding:24px;box-shadow:0 6px 20px #17203312}.meta{display:flex;justify-content:space-between;color:#617086;font-weight:750;margin-bottom:18px}.question{font-size:1.3rem;font-weight:750;line-height:1.45;margin-bottom:18px}.options{display:grid;gap:11px}.option{width:100%;text-align:left;padding:15px;border:2px solid #dfe3ea;background:#fff;border-radius:14px;font:inherit;font-weight:650;cursor:pointer;transition:.15s}.option:hover{border-color:#58cc02;transform:translateY(-1px)}.option.selected{border-color:#5146a5;background:#f0edff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e55353;background:#ffeaea}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer}.check{background:#5146a5;color:#fff}.next{background:#58cc02;color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}.feedback{margin-top:16px;font-weight:700;line-height:1.5}.good{color:#278400}.bad{color:#c73737}.hint{margin-top:10px;color:#617086;font-size:.94rem}.result{display:none;text-align:center;margin-top:20px}.retry{background:#5146a5;color:#fff}.back{display:inline-block;margin-top:24px;color:#5146a5;font-weight:800;text-decoration:underline;padding:10px 13px;border-radius:12px;transition:.15s}.back:hover{background:#f0edff;transform:translateY(-1px)}.back:focus{outline:3px solid #c9c2ff;outline-offset:2px}.back:active{transform:translateY(1px)}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
-<body><main class="wrap">
-<div class="top"><strong>⚛️ SkillUp Physics</strong><span class="xp">⭐ <span id="xp">0</span> XP</span></div>
-<section class="hero"><small>PHYSICS • NEET 2026</small><h1>Newton's Second Law</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section>
-<section class="progress"><strong>Mastery: <span id="mastery">0%</span></strong><div class="progressline"><div class="fill" id="fill"></div></div></section>
-<section class="quiz"><div class="meta"><span id="count">Question 1 of 15</span><span id="pct">7%</span></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="actions"><button class="btn check" id="check">Check Answer</button><button class="btn next" id="next" disabled>Next Question →</button></div><div class="feedback" id="feedback"></div><div class="hint" id="hint"></div><div class="result" id="result"><h2>🏆 Skill Complete!</h2><p id="score"></p><button class="btn retry" id="retry">Retry Skill</button></div></section>
-<a class="back" id="back" href="physics-home.html">← Back to Physics Path</a>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Newton’s Second Law</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
 </main>
 <script>
-const quiz=[
-["Newton's second law states that the net force on an object is:",["Equal to the rate of change of momentum","Equal to its velocity","Always zero","Equal to its displacement"],0,"The net external force equals the rate of change of momentum."],
-["For constant mass, Newton's second law is written as:",["F = ma","F = m/a","F = a/m","F = mv"],0,"For constant mass, F = ma."],
-["The SI unit of force is:",["newton (N)","joule (J)","watt (W)","pascal (Pa)"],0,"One newton is the force that gives 1 kg an acceleration of 1 m/s²."],
-["A 2 kg body accelerates at 3 m/s². The net force is:",["6 N","1.5 N","5 N","9 N"],0,"F = ma = 2 × 3 = 6 N."],
-["If the net force on a body is doubled while its mass remains constant, its acceleration:",["Doubles","Halves","Remains unchanged","Becomes zero"],0,"From a = F/m, acceleration is directly proportional to net force for constant mass."],
-["If the mass is doubled for the same net force, acceleration becomes:",["Half","Double","Four times","Unchanged"],0,"From a = F/m, doubling mass halves acceleration."],
-["The direction of acceleration of a body is the direction of its:",["Net force","Velocity always","Displacement always","Mass"],0,"Acceleration points in the direction of the net force."],
-["A 5 kg body has a net force of 20 N. Its acceleration is:",["4 m/s²","100 m/s²","0.25 m/s²","25 m/s²"],0,"a = F/m = 20/5 = 4 m/s²."],
-["When the net force on an object is zero, its acceleration is:",["Zero","Maximum","Equal to its velocity","Always 9.8 m/s²"],0,"Zero net force means zero acceleration."],
-["Newton's second law is most directly applicable to:",["The net external force and resulting motion","Only objects at rest","Only circular motion","Only mass measurements"],0,"It relates net external force to momentum change and hence motion."],
-["A force of 10 N acts on a 2 kg object. Its acceleration is:",["5 m/s²","20 m/s²","0.2 m/s²","8 m/s²"],0,"a = 10/2 = 5 m/s²."],
-["If a constant force acts on a body whose mass is reduced to one-fourth, its acceleration becomes:",["Four times","One-fourth","Half","Unchanged"],0,"Since a = F/m, reducing mass to one-fourth makes acceleration four times."],
-["Momentum p of a body is given by:",["p = mv","p = ma","p = m/v","p = F/a"],0,"Linear momentum is mass multiplied by velocity."],
-["The more general form of Newton's second law is:",["F = dp/dt","F = p/t always","F = mv/t only","F = ma²"],0,"The net force equals the time rate of change of momentum."],
-["A 1000 kg car experiences a net force of 3000 N. Its acceleration is:",["3 m/s²","0.3 m/s²","3000 m/s²","333 m/s²"],0,"a = F/m = 3000/1000 = 3 m/s²."]
-];
-let i=0,selected=-1,correctCount=0,xp=0;const $=id=>document.getElementById(id);function shuffle(arr){for(let k=arr.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[arr[k],arr[r]]=[arr[r],arr[k]]}return arr}
-function render(){const a=quiz[i];selected=-1;$('question').textContent=a[0];$('count').textContent=`Question ${i+1} of ${quiz.length}`;$('pct').textContent=Math.round((i+1)/quiz.length*100)+'%';$('fill').style.width=(correctCount/quiz.length*100)+'%';$('mastery').textContent=Math.round(correctCount/quiz.length*100)+'%';$('feedback').className='feedback';$('feedback').textContent='';$('hint').textContent='Choose the option that best applies Newton\'s second law.';$('check').disabled=false;$('next').disabled=true;$('next').textContent='Next Question →';$('options').innerHTML='';const order=shuffle(a[1].map((text,index)=>({text,index})));order.forEach((item,j)=>{const b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{if($('check').disabled)return;selected=item.index;[...$('options').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('options').appendChild(b)})}
-function check(){if(selected<0)return;const a=quiz[i],ok=selected===a[2];[...$('options').children].forEach(b=>{const idx=Number(b.dataset.index);b.disabled=true;if(idx===a[2])b.classList.add('correct');if(idx===selected&&selected!==a[2])b.classList.add('wrong')});if(ok){correctCount++;xp+=10;$('xp').textContent=xp;$('feedback').className='feedback good';$('feedback').textContent='✓ Correct — '+a[3]}else{$('feedback').className='feedback bad';$('feedback').textContent='✗ Review — '+a[3]}$('mastery').textContent=Math.round(correctCount/quiz.length*100)+'%';$('fill').style.width=(correctCount/quiz.length*100)+'%';$('check').disabled=true;$('next').disabled=false;if(i===quiz.length-1)$('next').textContent='Finish Skill →'}
-function next(){if($('next').disabled)return;if(i<quiz.length-1){i++;render()}else{$('question').textContent="🏆 Newton's Second Law Complete!";$('options').innerHTML='';$('check').style.display='none';$('next').style.display='none';$('hint').textContent='';$('feedback').className='feedback good';$('feedback').textContent='Skill complete. '+xp+' XP earned.';$('result').style.display='block';$('score').textContent=correctCount+' / '+quiz.length+' correct • '+xp+' XP';}}
-$('check').onclick=check;$('next').onclick=next;$('retry').onclick=()=>{i=0;selected=-1;correctCount=0;xp=0;$('xp').textContent='0';$('mastery').textContent='0%';$('fill').style.width='0%';$('result').style.display='none';$('check').style.display='';$('next').style.display='';render()};
-$('back').onclick=function(e){e.preventDefault();const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return}}catch(e){}}location.href='physics-home.html'};
+(function(){
+'use strict';
+const questions = [{"q":"Newton's second law relates net force to:","o":["Mass and acceleration","Mass and temperature","Distance and time","Pressure and volume"],"a":0,"e":"The net force equals mass multiplied by acceleration: Fnet = ma."},{"q":"The SI unit of force is:","o":["Joule","Newton","Watt","Pascal"],"a":1,"e":"One newton is one kilogram metre per second squared."},{"q":"A net force of 12 N acts on a 3 kg object. Its acceleration is:","o":["2 m/s²","3 m/s²","4 m/s²","36 m/s²"],"a":2,"e":"a = F/m = 12/3 = 4 m/s²."},{"q":"A 5 kg object accelerates at 2 m/s². The net force is:","o":["2.5 N","7 N","10 N","25 N"],"a":2,"e":"F = ma = 5 × 2 = 10 N."},{"q":"If net force doubles while mass stays constant, acceleration:","o":["Halves","Doubles","Stays the same","Becomes zero"],"a":1,"e":"From a = F/m, acceleration is directly proportional to net force."},{"q":"If mass doubles while net force stays constant, acceleration:","o":["Doubles","Halves","Quadruples","Stays the same"],"a":1,"e":"From a = F/m, doubling mass halves acceleration."},{"q":"A 20 N force gives an object acceleration 4 m/s². Its mass is:","o":["4 kg","5 kg","16 kg","80 kg"],"a":1,"e":"m = F/a = 20/4 = 5 kg."},{"q":"A 2 kg object has net force 0 N. Its acceleration is:","o":["0 m/s²","2 m/s²","9.8 m/s²","Cannot be determined"],"a":0,"e":"Newton's second law gives a = Fnet/m = 0."},{"q":"Which force should be used in F = ma?","o":["Any one force","The net force","Only friction","Only weight"],"a":1,"e":"Acceleration is determined by the vector sum of all forces on the object."},{"q":"A 10 kg cart is pulled with 50 N on a frictionless surface. Its acceleration is:","o":["0.2 m/s²","5 m/s²","10 m/s²","500 m/s²"],"a":1,"e":"a = 50/10 = 5 m/s²."},{"q":"A 4 kg object accelerates at 3 m/s². Its net force is:","o":["7 N","12 N","1.33 N","24 N"],"a":1,"e":"F = ma = 4 × 3 = 12 N."},{"q":"A 15 N net force acts on a 5 kg body. Its acceleration is:","o":["0.33 m/s²","3 m/s²","10 m/s²","75 m/s²"],"a":1,"e":"a = 15/5 = 3 m/s²."},{"q":"A 6 kg object accelerates at 0.5 m/s². The net force is:","o":["3 N","6.5 N","12 N","0.083 N"],"a":0,"e":"F = ma = 6 × 0.5 = 3 N."},{"q":"A 10 N force right and 4 N force left act on a 2 kg block. Acceleration is:","o":["3 m/s² right","7 m/s² right","2 m/s² left","5 m/s² right"],"a":0,"e":"Net force = 10 − 4 = 6 N right; a = 6/2 = 3 m/s² right."},{"q":"A 7 N force right and 7 N force left act on a body. The net force is:","o":["14 N right","7 N left","0 N","49 N"],"a":2,"e":"Equal and opposite forces cancel."},{"q":"A 1 kg object has net force 9 N. Its acceleration is:","o":["0.11 m/s²","8 m/s²","9 m/s²","10 m/s²"],"a":2,"e":"a = 9/1 = 9 m/s²."},{"q":"A 3 kg object accelerates at 6 m/s². The force is:","o":["2 N","9 N","18 N","36 N"],"a":2,"e":"F = ma = 3 × 6 = 18 N."},{"q":"A constant net force acts on an object of constant mass. Its acceleration is:","o":["Constant","Always zero","Always increasing","Always decreasing"],"a":0,"e":"Newton's second law gives constant acceleration when net force and mass are constant."},{"q":"A 2 kg object changes velocity by 10 m/s in 5 s under a constant net force. The force magnitude is:","o":["2 N","4 N","5 N","20 N"],"a":1,"e":"a = Δv/Δt = 10/5 = 2 m/s²; F = ma = 2 × 2 = 4 N."},{"q":"A 1000 kg car accelerates at 2 m/s². Its net force is:","o":["500 N","1000 N","2000 N","20,000 N"],"a":2,"e":"F = ma = 1000 × 2 = 2000 N."},{"q":"A 1200 kg car experiences a net force of 3600 N. Its acceleration is:","o":["2 m/s²","3 m/s²","4 m/s²","4.8 m/s²"],"a":1,"e":"a = 3600/1200 = 3 m/s²."},{"q":"A 50 N net force produces 10 m/s² acceleration. The mass is:","o":["0.2 kg","5 kg","40 kg","500 kg"],"a":1,"e":"m = F/a = 50/10 = 5 kg."},{"q":"Why does a heavier trolley accelerate less than a lighter trolley under the same force?","o":["It has greater inertia","It has less mass","Its force is always zero","It has no acceleration ever"],"a":0,"e":"Greater mass means more resistance to acceleration for the same net force."},{"q":"When an object accelerates, the net force is directed:","o":["Opposite to acceleration","In the same direction as acceleration","Always upward","Always along its velocity"],"a":1,"e":"The acceleration vector points in the direction of the net force."},{"q":"Can an object move while the net force is zero?","o":["No, never","Yes, at constant velocity","Only if mass is zero","Only in a circle"],"a":1,"e":"Zero net force means zero acceleration, not necessarily zero velocity."},{"q":"A 4 kg box has 20 N right and 8 N left acting on it. Its acceleration is:","o":["2 m/s² right","3 m/s² right","5 m/s² left","7 m/s² right"],"a":1,"e":"Net force = 12 N right, so a = 12/4 = 3 m/s² right."},{"q":"A 2 kg object is pulled with 16 N right and experiences 6 N friction left. Its acceleration is:","o":["3 m/s² right","5 m/s² right","8 m/s² right","11 m/s² left"],"a":1,"e":"Net force = 16 − 6 = 10 N right; a = 10/2 = 5 m/s²."},{"q":"A 5 kg object at rest experiences a net force of 10 N. After 2 s, its speed is:","o":["2 m/s","4 m/s","5 m/s","10 m/s"],"a":1,"e":"a = F/m = 2 m/s²; from rest, v = at = 2 × 2 = 4 m/s."},{"q":"Which equation gives net force when mass and acceleration are known?","o":["F = ma","F = m/a","F = a/m","F = mv²"],"a":0,"e":"Newton's second law is Fnet = ma."},{"q":"A 2 kg object has a net force of 6 N west. Its acceleration is:","o":["3 m/s² west","3 m/s² east","12 m/s² west","0 m/s²"],"a":0,"e":"Acceleration has the same direction as net force: 6/2 = 3 m/s² west."}]
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
 render();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
-
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

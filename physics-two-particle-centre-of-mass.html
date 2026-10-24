@@ -1,6 +1,475 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Two-Particle Centre of Mass</title><style>*{box-sizing:border-box}body{margin:0;background:#f7f7fb;color:#172033;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.head h1{font-size:1.65rem;margin:0}.xp{font-weight:800;background:#fff;padding:10px 15px;border-radius:16px;box-shadow:0 4px 16px #17203312}.sub{color:#657080;margin:0 0 14px}.card{background:#fff;border-radius:20px;padding:20px;margin:12px 0;box-shadow:0 5px 18px #17203312}.master{font-weight:800}.mh{display:flex;justify-content:space-between;margin-bottom:10px}.bar{height:10px;background:#e8ebef;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.num{font-size:.9rem;font-weight:800;color:#68717d}.q{font-size:1.2rem;line-height:1.45;margin:10px 0 18px}.opts{display:grid;gap:10px}.opt{padding:13px 14px;border:2px solid #dfe3e8;border-radius:13px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer}.opt:hover{border-color:#58a6ff;background:#f6fbff}.opt.selected{border-color:#1685e8;background:#eef7ff}.opt.correct{border-color:#58cc02;background:#efffe8}.opt.wrong{border-color:#e5484d;background:#fff0f0}.btn{width:100%;margin-top:16px;padding:13px;border:0;border-radius:13px;background:#58cc02;color:#fff;font-weight:850;font-size:1rem;cursor:pointer;box-shadow:0 4px 0 #46a800}.feedback{margin-top:14px;padding:12px;border-radius:12px;font-weight:700}.good{background:#e8f9df;color:#246b16}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:4px;padding:10px 14px;border:2px solid #dfe3e8;border-radius:13px;color:#344054;text-decoration:none;font-weight:800}.back:hover{border-color:#58a6ff;background:#f6fbff}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>⚖️ Two-Particle Centre of Mass</h1><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="sub">Master centre of mass of a two-particle system with 15 NEET-style questions.</p><section class="card master"><div class="mh"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div id="num" class="num">Question 1 of 15</div><div id="q" class="q"></div><div id="opts" class="opts"></div><button id="continue" class="btn">Continue →</button><div id="fb" class="feedback"></div></section><a id="back" class="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['For two particles of masses m₁ and m₂ at positions x₁ and x₂, the x-coordinate of their centre of mass is',['(m₁x₁+m₂x₂)/(m₁+m₂)','(x₁+x₂)/2 always','m₁x₁+m₂x₂','(m₁+m₂)/(x₁+x₂)'],0],['If two equal masses are placed at x=0 and x=10 m, their centre of mass is at',['5 m','0 m','10 m','20 m'],0],['A 2 kg particle is at x=0 and a 3 kg particle at x=10 m. The centre of mass is at',['6 m','4 m','5 m','8 m'],0],['For two particles, the centre of mass lies closer to the particle having:',['larger mass','smaller mass','greater speed always','greater acceleration always'],0],['If the total external force on a two-particle system is zero, the centre of mass:',['moves with constant velocity','must remain at rest','moves in a circle','has increasing acceleration'],0],['The velocity of the centre of mass of two particles is',['(m₁v₁+m₂v₂)/(m₁+m₂)','v₁+v₂','(v₁+v₂)/2 always','m₁v₁+m₂v₂'],0],['If both particles have the same velocity, the centre of mass has:',['the same velocity','zero velocity','twice the velocity','half the velocity'],0],['If one particle is much more massive than the other, the centre of mass is located:',['very close to the massive particle','midway between them','at the lighter particle','outside the system always'],0],['For two particles separated by distance d, the distance of the centre of mass from m₁ is',['m₂d/(m₁+m₂)','m₁d/(m₁+m₂)','d/2 always','(m₁+m₂)d'],0],['Two particles of masses 1 kg and 3 kg are separated by 8 m. The centre of mass measured from the 1 kg particle is',['6 m','2 m','4 m','8 m'],0],['If a two-particle system is isolated, internal forces can:',['change individual velocities but not the centre-of-mass motion','change the centre-of-mass momentum','create net external force','change total mass'],0],['The total momentum of a two-particle system is related to centre-of-mass velocity by',['P=MvCM','P=mvCM²','P=M/vCM','P=0 always'],0],['If the centre of mass of two equal masses is at the origin, their positions along one axis satisfy:',['x₁=-x₂','x₁=x₂','x₁=2x₂','x₁=0 only'],0],['A particle at x=2 m has mass 4 kg and another at x=8 m has mass 2 kg. Their centre of mass is:',['4 m','5 m','6 m','7 m'],0],['Which statement about the centre of mass of a two-particle system is correct?',['It depends on the masses and positions of both particles','It always lies halfway between particles','It must coincide with one particle','It depends only on velocity'] ,0]];let i=0,sel=-1,checked=false,score=0;const $=id=>document.getElementById(id);function render(){const a=quiz[i];sel=-1;checked=false;$('num').textContent='Question '+(i+1)+' of 15';$('q').textContent=a[0];$('opts').innerHTML='';$('fb').textContent='';$('fb').className='feedback';$('continue').textContent=i===14?'Finish Skill →':'Continue →';let order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{sel=x.index;[...$('opts').children].forEach(z=>z.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)})}function update(){ $('xp').textContent=score*10;$('mastery').textContent=score+' / 15';$('fill').style.width=(score/15*100)+'%'}$('continue').onclick=()=>{if(!checked){if(sel<0){$('fb').className='feedback bad';$('fb').textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=sel===a[2];[...$('opts').children].forEach(b=>{const x=+b.dataset.index;b.disabled=true;if(x===a[2])b.classList.add('correct');if(x===sel&&!ok)b.classList.add('wrong')});if(ok){score++;$('fb').className='feedback good';$('fb').textContent='🎯 Correct! +10 XP'}else{$('fb').className='feedback bad';$('fb').textContent='✗ Correct answer: '+a[1][a[2]]}update();return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$('q').textContent='🏆 Two-Particle Centre of Mass Complete!';$('opts').innerHTML='';$('continue').style.display='none';$('fb').className='feedback good';$('fb').textContent='Score: '+score+' / 15 • '+score*10+' XP earned.'}};$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Two-Particle Centre of Mass quiz">
+<title>SkillUp | Two-Particle Centre of Mass — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Two-Particle Centre of Mass</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "For two particles of masses m₁ and m₂ at positions x₁ and x₂, the centre-of-mass coordinate is:",
+    "o": [
+      "(x₁ + x₂)/(m₁ + m₂)",
+      "m₁m₂/(x₁ + x₂)",
+      "(m₁ + m₂)/(x₁ + x₂)",
+      "(m₁x₁ + m₂x₂)/(m₁ + m₂)"
+    ],
+    "a": 3,
+    "e": "The centre of mass is the mass-weighted average of the particle positions."
+  },
+  {
+    "q": "A 2 kg particle is at x = 0 m and a 6 kg particle is at x = 4 m. Find xCM.",
+    "o": [
+      "3 m",
+      "2 m",
+      "1 m",
+      "4 m"
+    ],
+    "a": 0,
+    "e": "xCM = (2×0 + 6×4)/(2+6) = 24/8 = 3 m."
+  },
+  {
+    "q": "A 3 kg particle is at x = 2 m and a 1 kg particle is at x = 10 m. Their centre of mass is:",
+    "o": [
+      "3 m",
+      "4 m",
+      "6 m",
+      "8 m"
+    ],
+    "a": 1,
+    "e": "xCM = (3×2 + 1×10)/4 = 16/4 = 4 m."
+  },
+  {
+    "q": "Two equal masses are placed at x = −5 m and x = +3 m. The centre of mass is at:",
+    "o": [
+      "−2 m",
+      "+3 m",
+      "−1 m",
+      "+1 m"
+    ],
+    "a": 2,
+    "e": "For equal masses, xCM is the midpoint: (−5+3)/2 = −1 m."
+  },
+  {
+    "q": "A 1 kg mass at x = 1 m and a 4 kg mass at x = 6 m have xCM equal to:",
+    "o": [
+      "4 m",
+      "3 m",
+      "6 m",
+      "5 m"
+    ],
+    "a": 3,
+    "e": "xCM = (1×1 + 4×6)/5 = 25/5 = 5 m."
+  },
+  {
+    "q": "A 5 kg particle is at x = 0 m and a 5 kg particle at x = 8 m. Find xCM.",
+    "o": [
+      "4 m",
+      "2 m",
+      "6 m",
+      "8 m"
+    ],
+    "a": 0,
+    "e": "Equal masses place the centre of mass halfway between them."
+  },
+  {
+    "q": "A 2 kg particle at x = 3 m and a 4 kg particle at x = 0 m have centre of mass at:",
+    "o": [
+      "1.5 m",
+      "1 m",
+      "2 m",
+      "3 m"
+    ],
+    "a": 1,
+    "e": "xCM = (2×3 + 4×0)/6 = 6/6 = 1 m."
+  },
+  {
+    "q": "A 1 kg particle at x = −2 m and a 3 kg particle at x = +2 m have centre of mass at:",
+    "o": [
+      "−1 m",
+      "2 m",
+      "1 m",
+      "0 m"
+    ],
+    "a": 2,
+    "e": "xCM = (1×−2 + 3×2)/4 = 4/4 = 1 m."
+  },
+  {
+    "q": "Two particles of masses 2 kg and 3 kg are at x = 0 m and x = 10 m. How far is the centre of mass from the 2 kg particle?",
+    "o": [
+      "4 m",
+      "5 m",
+      "8 m",
+      "6 m"
+    ],
+    "a": 3,
+    "e": "xCM = (2×0 + 3×10)/5 = 6 m from the origin at the 2 kg particle."
+  },
+  {
+    "q": "Two particles of masses 4 kg and 2 kg are separated by 9 m. How far is their centre of mass from the 4 kg mass?",
+    "o": [
+      "3 m",
+      "6 m",
+      "4.5 m",
+      "9 m"
+    ],
+    "a": 0,
+    "e": "Place the 4 kg mass at zero and the 2 kg mass at 9 m: xCM = (2×9)/6 = 3 m."
+  },
+  {
+    "q": "Two particles are separated by distance d. Their centre of mass lies closer to:",
+    "o": [
+      "The origin in every case",
+      "The heavier particle",
+      "The lighter particle",
+      "The midpoint in every case"
+    ],
+    "a": 1,
+    "e": "The mass-weighted average lies nearer the larger mass."
+  },
+  {
+    "q": "If m₁ = m₂, the centre of mass of two particles lies at:",
+    "o": [
+      "The position of particle 2 always",
+      "A point outside the segment always",
+      "The midpoint between them",
+      "The position of particle 1 always"
+    ],
+    "a": 2,
+    "e": "Equal masses contribute equally, so the centre of mass is the midpoint."
+  },
+  {
+    "q": "Two particles of masses 1 kg and 3 kg are at x = 0 m and x = 8 m. Find xCM.",
+    "o": [
+      "4 m",
+      "2 m",
+      "8 m",
+      "6 m"
+    ],
+    "a": 3,
+    "e": "xCM = (1×0 + 3×8)/4 = 6 m."
+  },
+  {
+    "q": "A 2 kg particle is at x = −4 m and a 6 kg particle is at x = 0 m. Find xCM.",
+    "o": [
+      "−1 m",
+      "−2 m",
+      "+1 m",
+      "−3 m"
+    ],
+    "a": 0,
+    "e": "xCM = (2×−4 + 6×0)/8 = −1 m."
+  },
+  {
+    "q": "Two particles of masses 3 kg and 1 kg are at x = −2 m and x = +6 m. Their centre of mass is:",
+    "o": [
+      "+4 m",
+      "0 m",
+      "+2 m",
+      "−1 m"
+    ],
+    "a": 1,
+    "e": "xCM = (3×−2 + 1×6)/4 = 0 m."
+  },
+  {
+    "q": "A 2 kg particle at x = 2 m and a 3 kg particle at x = 7 m have centre of mass at:",
+    "o": [
+      "3 m",
+      "6 m",
+      "5 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xCM = (2×2 + 3×7)/5 = 25/5 = 5 m."
+  },
+  {
+    "q": "For two particles in three dimensions, the centre-of-mass position vector is:",
+    "o": [
+      "r₁ + r₂ only",
+      "m₁m₂(r₁ − r₂)",
+      "(r₁ − r₂)/(m₁ + m₂)",
+      "(m₁r₁ + m₂r₂)/(m₁ + m₂)"
+    ],
+    "a": 3,
+    "e": "The vector formula is the mass-weighted average of the two position vectors."
+  },
+  {
+    "q": "A 1 kg particle is at (0, 0) m and a 3 kg particle at (4, 0) m. The centre of mass is:",
+    "o": [
+      "(3, 0) m",
+      "(2, 0) m",
+      "(4, 0) m",
+      "(1, 0) m"
+    ],
+    "a": 0,
+    "e": "xCM = (1×0 + 3×4)/4 = 3 m, and yCM = 0."
+  },
+  {
+    "q": "A 2 kg particle at (0, 0) m and a 2 kg particle at (4, 6) m have centre of mass at:",
+    "o": [
+      "(2, 6) m",
+      "(2, 3) m",
+      "(4, 6) m",
+      "(1, 3) m"
+    ],
+    "a": 1,
+    "e": "Equal masses give the midpoint: ((0+4)/2, (0+6)/2) = (2, 3) m."
+  },
+  {
+    "q": "A 1 kg particle at (2, 0) m and a 3 kg particle at (6, 4) m have centre of mass at:",
+    "o": [
+      "(6, 4) m",
+      "(3, 1) m",
+      "(5, 3) m",
+      "(4, 2) m"
+    ],
+    "a": 2,
+    "e": "xCM = (1×2 + 3×6)/4 = 5; yCM = (1×0 + 3×4)/4 = 3."
+  },
+  {
+    "q": "Two particles of masses 2 kg and 6 kg are separated by 8 m. How far is the centre of mass from the 6 kg particle?",
+    "o": [
+      "4 m",
+      "6 m",
+      "1 m",
+      "2 m"
+    ],
+    "a": 3,
+    "e": "The centre of mass is 2 m from the heavier mass: (2×8)/(2+6) = 2 m from the lighter mass, so 6 m from the heavier? Check coordinate: heavy at 8 m, light at 0 m gives xCM=6 m, distance from heavy=2 m."
+  },
+  {
+    "q": "If a two-particle system has total mass M, its centre-of-mass position can be written as:",
+    "o": [
+      "(m₁r₁ + m₂r₂)/M",
+      "(r₁ + r₂)/M",
+      "M(r₁ + r₂)",
+      "m₁r₁ − m₂r₂"
+    ],
+    "a": 0,
+    "e": "Here M = m₁ + m₂, so the weighted position sum is divided by total mass."
+  },
+  {
+    "q": "A 4 kg particle at x = 1 m and a 2 kg particle at x = 7 m have xCM equal to:",
+    "o": [
+      "2 m",
+      "3 m",
+      "4 m",
+      "5 m"
+    ],
+    "a": 1,
+    "e": "xCM = (4×1 + 2×7)/6 = 18/6 = 3 m."
+  },
+  {
+    "q": "A 3 kg particle at x = −1 m and a 1 kg particle at x = 7 m have xCM equal to:",
+    "o": [
+      "3 m",
+      "0 m",
+      "1 m",
+      "2 m"
+    ],
+    "a": 2,
+    "e": "xCM = (3×−1 + 1×7)/4 = 4/4 = 1 m."
+  },
+  {
+    "q": "The centre of mass of two particles can lie outside the segment joining them if both masses are positive.",
+    "o": [
+      "True in every case",
+      "True only for equal masses",
+      "True only in 3D",
+      "False"
+    ],
+    "a": 3,
+    "e": "For two positive masses, the centre of mass lies on the segment between their positions."
+  },
+  {
+    "q": "If both particle positions are shifted by +5 m, the centre-of-mass coordinate:",
+    "o": [
+      "Also shifts by +5 m",
+      "Does not change",
+      "Doubles",
+      "Becomes zero"
+    ],
+    "a": 0,
+    "e": "The centre of mass follows the same coordinate-origin shift as every particle."
+  },
+  {
+    "q": "If both masses are doubled while positions stay fixed, the centre-of-mass position:",
+    "o": [
+      "Moves to the heavier particle",
+      "Does not change",
+      "Doubles",
+      "Halves"
+    ],
+    "a": 1,
+    "e": "Multiplying every mass by the same factor cancels between numerator and denominator."
+  },
+  {
+    "q": "A 1 kg particle at x = 0 m and a 2 kg particle at x = 9 m have xCM equal to:",
+    "o": [
+      "4.5 m",
+      "9 m",
+      "6 m",
+      "3 m"
+    ],
+    "a": 2,
+    "e": "xCM = (1×0 + 2×9)/3 = 6 m."
+  },
+  {
+    "q": "A 6 kg particle at x = 2 m and a 2 kg particle at x = 10 m have xCM equal to:",
+    "o": [
+      "6 m",
+      "8 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 3,
+    "e": "xCM = (6×2 + 2×10)/8 = 32/8 = 4 m."
+  },
+  {
+    "q": "Two particles have equal and opposite position coordinates and equal masses. Their centre of mass is:",
+    "o": [
+      "At the origin",
+      "At the positive coordinate",
+      "At the negative coordinate",
+      "Undefined"
+    ],
+    "a": 0,
+    "e": "The equal masses at symmetric coordinates have a zero weighted average."
+  },
+  {
+    "q": "Which is the correct physical interpretation of the two-particle centre of mass?",
+    "o": [
+      "Always the position of the heavier particle",
+      "A mass-weighted average position",
+      "Always the geometric midpoint regardless of masses",
+      "The point where all gravitational forces vanish"
+    ],
+    "a": 1,
+    "e": "Only equal masses put the centre of mass at the midpoint; otherwise the position is mass-weighted."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,22 +1,133 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Significant Figures</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;line-height:1.45}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{font-weight:700;color:#e08a00;text-align:center;min-height:24px;line-height:1.5}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔢 Significant Figures</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['What are significant figures?','Digits that convey the precision of a measured quantity','Only digits after the decimal point','All zeros in a number','Only non-zero digits in every case',0,'Significant figures are the meaningful digits in a measured value, including certain zeros.'],
-['How many significant figures are in 0.00450?','2','3','4','5',1,'Leading zeros are not significant; 4, 5 and the trailing zero are significant.'],
-['How many significant figures are in 305.0?','3','4','5','2',1,'The zero between non-zero digits and the trailing decimal zero are significant.'],
-['How many significant figures are in 0.00072?','2','3','5','6',0,'Leading zeros are not significant, so only 7 and 2 count.'],
-['How many significant figures are in 100.0?','1','2','3','4',3,'With a decimal point shown, the trailing zeros are significant.'],
-['Which zero is always significant?','A zero between two non-zero digits','A leading zero before the first non-zero digit','A zero at the far left of a decimal','An unspecified zero in an integer',0,'A zero between non-zero digits is significant.'],
-['The result of 12.3 + 1.25, reported using addition rules, is:','13.55','13.6','13.5','14',1,'For addition, retain the least number of decimal places: 13.55 rounds to 13.6.'],
-['The result of 2.5 × 3.42, using significant-figure rules, is:','8.55','8.6','8.50','9',1,'2.5 has 2 significant figures, so 8.55 is reported as 8.6.'],
-['In multiplication and division, the final answer should generally have:','The same number of significant figures as the least precise factor','The most decimal places of any factor','Exactly four significant figures','No rounding',0,'Use the least number of significant figures among the measured factors.'],
-['In addition and subtraction, the final answer should generally be rounded to:','The least number of decimal places among the terms','The least number of significant figures','The greatest number of decimal places','Two significant figures always',0,'Addition and subtraction are governed by decimal-place precision.'],
-['Which value has exactly 4 significant figures?','0.004560','45.60','4500','0.045',1,'45.60 has four significant figures.'],
-['How many significant figures are in 6.020 × 10³?','3','4','5','2',1,'All four digits in the coefficient are significant.'],
-['The number 0.03040 contains how many significant figures?','3','4','5','2',1,'The significant digits are 3, 0, 4 and 0.'],
-['Why are significant figures important in experimental physics?','They indicate the precision justified by the measurement','They make every measurement exact','They eliminate systematic errors','They replace SI units',0,'Significant figures communicate the precision supported by the measurement.'],
-['A measured length is 5.20 cm. Which statement is correct?','It has 3 significant figures and implies precision to 0.01 cm','It has 2 significant figures only','It has 1 significant figure','The trailing zero is never significant',0,'5.20 contains three significant figures and the trailing zero after the decimal is significant.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Significant Figures quiz">
+<title>SkillUp | Significant Figures — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔢 Significant Figures</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"How many significant figures are in 347?","o":["1","2","3","4"],"a":2,"e":"All non-zero digits are significant, so 347 has three."},{"q":"How many significant figures are in 0.0045?","o":["1","2","3","4"],"a":1,"e":"Leading zeros are not significant; 4 and 5 count."},{"q":"How many significant figures are in 2.030?","o":["2","3","4","5"],"a":2,"e":"The zero between non-zero digits and the trailing decimal zero are significant."},{"q":"How many significant figures are in 100.0?","o":["1","2","3","4"],"a":3,"e":"A decimal point makes the trailing zeros in 100.0 significant: four figures."},{"q":"How many significant figures are in 0.0700?","o":["1","2","3","4"],"a":2,"e":"Leading zeros do not count; 7 and the two trailing decimal zeros do."},{"q":"Which zeros are always insignificant in a written measurement?","o":["Zeros between non-zero digits","Leading zeros before the first non-zero digit","Trailing zeros after a decimal","All zeros"],"a":1,"e":"Leading zeros only locate the decimal point and do not count as significant figures."},{"q":"How many significant figures are in 5.06?","o":["2","3","4","1"],"a":1,"e":"The zero between 5 and 6 is significant."},{"q":"How many significant figures are in 900 (without a decimal point or other context)?","o":["Definitely 1","Definitely 2","Definitely 3","Ambiguous"],"a":3,"e":"Trailing zeros in a whole number without a decimal point can be ambiguous; scientific notation clarifies the intent."},{"q":"Which notation clearly shows three significant figures for nine hundred?","o":["9 × 10²","9.0 × 10²","9.00 × 10²","9000 × 10⁻¹"],"a":2,"e":"9.00 × 10² explicitly shows three significant figures."},{"q":"Round 6.284 to three significant figures.","o":["6.28","6.29","6.2","6.284"],"a":0,"e":"The next digit is 4, so the third significant digit stays unchanged: 6.28."},{"q":"Round 0.007856 to two significant figures.","o":["0.0078","0.0079","0.0080","0.00786"],"a":1,"e":"The first two significant digits are 7 and 8; the next digit is 5, so 8 rounds up."},{"q":"Round 98.76 to three significant figures.","o":["98.7","98.8","99.0","98.76"],"a":1,"e":"The first three figures are 9, 8 and 7; the next digit 6 rounds 7 up to 8."},{"q":"How many significant figures are in 1.20 × 10⁴?","o":["2","3","4","5"],"a":1,"e":"Only the digits in 1.20 count; the power of ten does not affect the count."},{"q":"How many significant figures are in 3.00 × 10⁻²?","o":["1","2","3","5"],"a":2,"e":"The coefficient 3.00 contains three significant figures."},{"q":"In multiplication, the result is usually reported with:","o":["The most decimal places in the inputs","The fewest significant figures of the inputs","Every digit from the calculator","Exactly six significant figures"],"a":1,"e":"For multiplication and division, use the fewest significant figures among measured inputs."},{"q":"In addition, the result is usually rounded to:","o":["The fewest significant figures","The least precise decimal place among the inputs","The most significant figures","Two significant figures always"],"a":1,"e":"For addition and subtraction, round according to the least precise decimal place."},{"q":"Calculate 2.5 × 3.42 and report appropriate significant figures.","o":["8.55","8.6","8.550","9"],"a":1,"e":"The product is 8.55, but 2.5 has two significant figures, so report 8.6."},{"q":"Calculate 12.11 + 0.3 with appropriate rounding.","o":["12.41","12.4","12","12.410"],"a":1,"e":"The least precise value is given to tenths, so 12.41 rounds to 12.4."},{"q":"Calculate 15.6 − 2.34 with appropriate rounding.","o":["13.26","13.3","13","13.260"],"a":1,"e":"Round to one decimal place, the least precise decimal position: 13.3."},{"q":"Which value has exactly four significant figures?","o":["0.00250","20.00","2.050","250"],"a":2,"e":"2.050 has four significant figures: 2, 0, 5 and the final 0."},{"q":"How many significant figures are in 0.000801?","o":["1","2","3","6"],"a":2,"e":"Leading zeros are not significant; the zero between 8 and 1 is significant."},{"q":"Round 742,000 to two significant figures using scientific notation.","o":["7.4 × 10⁵","7.42 × 10⁵","7 × 10⁵","74 × 10⁴"],"a":0,"e":"Two significant figures are 7 and 4; the next digit 2 does not round 4 up."},{"q":"Why is scientific notation useful for significant figures?","o":["It removes all uncertainty","It makes the intended significant digits clear","It changes the measured value","It prevents rounding"],"a":1,"e":"The coefficient shows the significant digits clearly without ambiguous trailing zeros."},{"q":"A measurement is written as 4.50 m. How many significant figures does it have?","o":["2","3","4","5"],"a":1,"e":"The trailing zero after the decimal point is significant, so there are three."},{"q":"Which statement about exact counted numbers is correct?","o":["They have one significant figure","They have no units","They are treated as having unlimited significant figures","They must be rounded to two figures"],"a":2,"e":"Exact counts and defined conversion factors do not limit significant figures in calculations."},{"q":"Round 0.0996 to two significant figures.","o":["0.09","0.10","0.099","0.100"],"a":1,"e":"The first two significant digits are 9 and 9; the next 6 rounds them to 0.10."},{"q":"How many significant figures are in 700.5?","o":["1","2","3","4"],"a":3,"e":"Zeros between non-zero digits are significant, so 700.5 has four significant figures."},{"q":"What is 8.236 rounded to three significant figures?","o":["8.23","8.24","8.20","8.236"],"a":1,"e":"The next digit after 8.23 is 6, so round up to 8.24."},{"q":"For 4.56 ÷ 1.4, how many significant figures should the final result have?","o":["1","2","3","4"],"a":1,"e":"The divisor has two significant figures, so the quotient should be reported to two."},{"q":"What is the main purpose of significant figures?","o":["To show measurement precision appropriately","To make all values integers","To remove experimental error","To replace units"],"a":0,"e":"Significant figures communicate precision without implying more certainty than the measurement supports."}]
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

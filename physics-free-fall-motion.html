@@ -1,7 +1,133 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Free-fall Motion</title><style>body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.xp{background:#fff;border:1px solid #dfe5ee;border-radius:14px;padding:9px 14px;font-weight:800;box-shadow:0 4px 12px #17203312}.hero{background:linear-gradient(135deg,#1557a6,#198be8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px}.hero h1{margin:12px 0 8px;font-size:1.8rem}.hero p{margin:0}.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 18px #17203312}.bar{height:11px;background:#dce6ef;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#58cc02;transition:width .25s ease}.quiz h2{font-size:1.3rem;line-height:1.45;margin:14px 0}.options{display:grid;gap:9px}.option{padding:14px 15px;border:2px solid #dce3eb;border-radius:14px;background:#fff;text-align:left;font-weight:700;cursor:pointer;font-size:15px}.option:hover{border-color:#58cc02;background:#f5fff0}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#2db84d;background:#eaffef}.option.wrong{border-color:#e5484d;background:#fff0f0}.actions{margin-top:12px}.btn{padding:12px 17px;border:0;border-radius:13px;font-weight:900;cursor:pointer;margin-right:7px}.check{background:#2db84d;color:#fff}.next{background:#dcecff;color:#145b9e}.btn:disabled{opacity:.5;cursor:not-allowed}.feedback{min-height:22px;margin-top:14px;font-weight:700}.good{color:#176c31}.bad{color:#a12b30}.hint{margin-top:18px}.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:700;text-decoration:none;border-radius:10px;padding:8px 10px;transition:background .15s,transform .1s,box-shadow .15s}.back:hover{background:#eeeafd;box-shadow:0 4px 10px #5146a520}.back:focus-visible{outline:3px solid #b8aef5;outline-offset:2px}.back:active{transform:translateY(1px)}@media(max-width:600px){.wrap{padding:18px 12px}.hero h1{font-size:1.5rem}.top{align-items:flex-start}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div></div><span class="xp">⚡ <span id="xp">0</span> XP</span></div><section class="hero"><div>PHYSICS • NEET 2026</div><h1>Free-fall motion</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section><section class="card"><b>🎯 Progress <span id="mt">0 / 15</span></b><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card quiz"><div><b id="count">Question 1 of 15</b></div><small id="pct">7%</small><h2 id="q"></h2><div id="opts" class="options"></div><div class="actions"><button id="check" class="btn check">Check Answer</button><button id="next" class="btn next" disabled>Next Question →</button></div><div id="fb" class="feedback">💡 Choose the best answer.</div><p class="hint">💡 Answer each question carefully and review the explanation after checking.</p></section><a class="back" href="#" onclick="return goBackToPath()">← Back to Physics Path</a></main><script>(function(){'use strict';const quiz=[['Free fall is motion under the influence of:',['Gravity alone, neglecting air resistance','Magnetic force only','Friction only','No force'],0],['Near Earth, free-fall acceleration is approximately:',['9.8 m/s² downward','9.8 m/s upward','0 m/s²','98 m/s² upward'],0],['The acceleration due to gravity is denoted by:',['g','v','s','t'],0],['For an object released from rest in free fall, initial velocity is:',['0','g','9.8 m/s','1 m/s'],0],['Ignoring air resistance, all freely falling bodies have:',['The same acceleration near Earth','The same mass','The same velocity at all times','Zero acceleration'],0],['An object is dropped from rest. Its velocity after time t is:',['v = gt','v = g/t','v = t/g','v = 0 always'],0],['Distance fallen from rest in time t is:',['s = ½gt²','s = gt','s = g/t²','s = 2gt²'],0],['For upward positive direction, acceleration during free fall near Earth is:',['−g','+g','0','+1/g'],0],['At the highest point of an object thrown vertically upward, its instantaneous velocity is:',['Zero','g','Maximum','−g'],0],['At the highest point of vertical upward motion, acceleration is:',['Downward g','Zero','Upward g','Infinite'],0],['If air resistance is neglected, the speed of a freely falling body:',['Increases uniformly with time when falling from rest','Remains zero','Decreases uniformly while falling from rest','Is always g'],0],['The velocity-time graph for free fall with constant acceleration is:',['A straight line','A circle','A parabola','A horizontal curve only'],0],['The slope of a velocity-time graph represents:',['Acceleration','Displacement','Mass','Distance'],0],['If g = 10 m/s², an object dropped from rest falls in 2 s with speed:',['20 m/s','5 m/s','10 m/s','40 m/s'],0],['Which equation is valid for vertical motion with constant acceleration g?',['v² = u² + 2gs (with consistent sign convention)','v = u + s²','s = vt² always','g = uv'],0]];let i=0,sel=-1,score=0,answered=false;const $=id=>document.getElementById(id),q=$('q'),o=$('opts'),fb=$('fb'),check=$('check'),next=$('next');function render(){const a=quiz[i];sel=-1;answered=false;q.textContent=a[0];$('count').textContent='Question '+(i+1)+' of '+quiz.length;$('pct').textContent=Math.round((i+1)/quiz.length*100)+'%';o.innerHTML='';fb.className='feedback';fb.textContent='💡 Choose the best answer.';check.disabled=false;next.disabled=true;next.textContent=i===quiz.length-1?'Finish Skill →':'Next Question →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.type='button';b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{if(answered)return;sel=item.index;Array.from(o.children).forEach((x,k)=>x.classList.toggle('selected',k===j));check.disabled=false};o.appendChild(b)})}check.onclick=()=>{if(answered)return;if(sel<0){fb.className='feedback bad';fb.textContent='Choose an answer first 👆';return}const a=quiz[i];Array.from(o.children).forEach(b=>{const originalIndex=Number(b.dataset.index);b.disabled=true;if(originalIndex===a[2])b.classList.add('correct');if(originalIndex===sel&&sel!==a[2])b.classList.add('wrong')});answered=true;if(sel===a[2]){score++;fb.className='feedback good';fb.textContent='🎯 Correct! +10 XP'}else{fb.className='feedback bad';fb.textContent='Review. Correct answer: '+a[1][a[2]]}$('xp').textContent=score*10;$('mt').textContent=score+' / '+quiz.length;$('fill').style.width=score/quiz.length*100+'%';check.disabled=true;next.disabled=false};next.onclick=()=>{if(!answered)return;if(i<quiz.length-1){i++;render()}else{q.textContent='🏆 Free-fall Motion Complete!';o.innerHTML='';check.style.display='none';next.style.display='none';fb.className='feedback good';fb.textContent='Skill complete. '+score+' / '+quiz.length+' correct • '+score*10+' XP'}};function goBackToPath(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false}window.goBackToPath=goBackToPath;render()})();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Free-fall Motion quiz">
+<title>SkillUp | Free-fall Motion — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Free-fall Motion</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"What causes a freely falling object to accelerate near Earth's surface?","o":["Air pressure only","Earth's gravitational force","Its mass disappearing","The Earth's rotation only"],"a":1,"e":"Gravity attracts the object toward Earth, producing downward acceleration."},{"q":"Ignoring air resistance, the acceleration of a falling object near Earth's surface is approximately:","o":["0 m/s²","4.9 m/s² downward","9.8 m/s² downward","19.6 m/s² upward"],"a":2,"e":"Near Earth's surface, free-fall acceleration has magnitude g ≈ 9.8 m/s² downward."},{"q":"In ideal free fall, air resistance is:","o":["The main force","Ignored","Greater than gravity","Always upward acceleration"],"a":1,"e":"Ideal free fall means gravity is the only force considered; air resistance is neglected."},{"q":"An object is dropped from rest. Its initial velocity is:","o":["9.8 m/s","−9.8 m/s","0 m/s","Depends on its mass"],"a":2,"e":"Dropped from rest means the initial velocity is zero."},{"q":"Taking downward as positive, the acceleration of a freely falling object is:","o":["+g","−g","0","+2g"],"a":0,"e":"With downward chosen as positive, gravity's acceleration is +g."},{"q":"Taking upward as positive, the acceleration due to gravity is:","o":["+g","−g","0","+2g"],"a":1,"e":"Gravity acts downward, opposite to the upward-positive direction, so a = −g."},{"q":"An object is dropped from rest. Its speed after 2 s is about:","o":["4.9 m/s","9.8 m/s","19.6 m/s","39.2 m/s"],"a":2,"e":"Using v = gt, v = 9.8 × 2 = 19.6 m/s downward."},{"q":"An object falls from rest for 3 s. How far does it fall (g = 10 m/s²)?","o":["15 m","30 m","45 m","90 m"],"a":2,"e":"s = ½gt² = ½ × 10 × 3² = 45 m."},{"q":"An object is dropped from a height of 20 m. Using g = 10 m/s², the fall time is:","o":["1 s","2 s","4 s","√2 s"],"a":1,"e":"h = ½gt² gives 20 = 5t², so t² = 4 and t = 2 s."},{"q":"A ball is thrown vertically upward at 20 m/s. Take g = 10 m/s². Time to reach its highest point is:","o":["1 s","2 s","4 s","20 s"],"a":1,"e":"At the top v = 0. From v = u − gt, t = u/g = 20/10 = 2 s."},{"q":"For a ball thrown vertically upward, its velocity at the highest point is:","o":["Maximum upward","Zero for an instant","Equal to g","Maximum downward"],"a":1,"e":"The ball momentarily stops before reversing direction, so its instantaneous velocity is zero."},{"q":"At the highest point of a vertically thrown ball, its acceleration is:","o":["Zero","g upward","g downward","Changing to zero"],"a":2,"e":"Gravity continues acting downward even when the velocity is momentarily zero."},{"q":"A ball is thrown upward at 30 m/s. With g = 10 m/s², its maximum rise above the launch point is:","o":["15 m","30 m","45 m","90 m"],"a":2,"e":"At the top, v² = u² − 2gh, so h = u²/(2g) = 900/20 = 45 m."},{"q":"A stone is thrown downward at 5 m/s. Taking downward positive and g = 10 m/s², its velocity after 2 s is:","o":["15 m/s downward","20 m/s downward","25 m/s downward","−15 m/s"],"a":2,"e":"v = u + gt = 5 + 10 × 2 = 25 m/s downward."},{"q":"A ball is thrown upward at 20 m/s. With g = 10 m/s², its velocity after 3 s is:","o":["10 m/s upward","10 m/s downward","30 m/s downward","Zero"],"a":1,"e":"Taking upward positive, v = u − gt = 20 − 10 × 3 = −10 m/s, i.e. downward."},{"q":"Ignoring air resistance, two objects of different masses are dropped from the same height. They:","o":["The heavier one lands first","The lighter one lands first","Land together","Have different gravitational accelerations"],"a":2,"e":"All objects have the same free-fall acceleration g in the same location when air resistance is neglected."},{"q":"A dropped object falls 5 m during its first second (g = 10 m/s²). Distance fallen in the first 2 s is:","o":["10 m","15 m","20 m","25 m"],"a":2,"e":"From rest, s = ½gt² = 5 × 2² = 20 m in total after 2 s."},{"q":"For an object dropped from rest, distance fallen is proportional to:","o":["t","t²","1/t","√t"],"a":1,"e":"The free-fall displacement from rest is s = ½gt², so it is proportional to t²."},{"q":"An object falls from rest. The ratio of distances travelled in the first and second seconds is:","o":["1:1","1:2","1:3","1:4"],"a":2,"e":"Distances in successive equal 1 s intervals are ½g and 3/2g, giving a ratio 1:3."},{"q":"A ball is thrown upward at 10 m/s (g = 10 m/s²). Its height after 1 s is:","o":["0 m","5 m","10 m","15 m"],"a":1,"e":"y = ut − ½gt² = 10(1) − 5(1)² = 5 m above launch."},{"q":"A stone is dropped from a 45 m tower. With g = 10 m/s², its impact speed is:","o":["15 m/s","20 m/s","30 m/s","45 m/s"],"a":1,"e":"v² = 2gh = 2 × 10 × 45 = 900, so v = 30 m/s."},{"q":"A ball is thrown vertically upward and returns to its launch height. Ignoring air resistance, its return speed is:","o":["Zero","Less than launch speed","Equal to launch speed","Twice launch speed"],"a":2,"e":"At the same height, mechanical energy is conserved, so the speed magnitude matches the launch speed."},{"q":"A ball is thrown upward at 25 m/s. With g = 10 m/s², total time to return to the launch height is:","o":["2.5 s","5 s","10 s","25 s"],"a":1,"e":"Time up = u/g = 2.5 s; for the same launch and return height, total time = 2 × 2.5 = 5 s."},{"q":"A body is released from rest. After 4 s, its speed is (g = 9.8 m/s²) approximately:","o":["9.8 m/s","19.6 m/s","29.4 m/s","39.2 m/s"],"a":3,"e":"v = gt = 9.8 × 4 = 39.2 m/s downward."},{"q":"When an object moves upward after being thrown, gravity does what to its speed?","o":["Increases it","Decreases it","Keeps it constant","Makes acceleration zero"],"a":1,"e":"During upward motion, gravity acts opposite to velocity, so the object's speed decreases."},{"q":"When the same object falls downward, gravity does what to its speed?","o":["Decreases it","Keeps it constant","Increases it","Makes it zero"],"a":2,"e":"During downward motion, gravity and velocity point in the same direction, so speed increases."},{"q":"Which equation is useful for free fall with constant acceleration?","o":["v = u + at","F = mv","P = IV only","ρ = m/V only"],"a":0,"e":"Free fall near Earth's surface is modeled with constant acceleration, so v = u + at applies."},{"q":"A ball is thrown upward at 15 m/s. With g = 10 m/s², its velocity after 1 s is:","o":["5 m/s upward","5 m/s downward","15 m/s upward","25 m/s downward"],"a":0,"e":"v = u − gt = 15 − 10 = 5 m/s upward."},{"q":"A body is dropped from rest and takes 4 s to reach the ground. With g = 10 m/s², its release height is:","o":["20 m","40 m","80 m","160 m"],"a":2,"e":"h = ½gt² = ½ × 10 × 16 = 80 m."},{"q":"For a vertically thrown ball returning to the same height, the time ascending is:","o":["Greater than the time descending","Less than the time descending","Equal to the time descending","Always zero"],"a":2,"e":"With constant gravity and no air resistance, the motion is symmetric about the highest point."},{"q":"What is the best description of free-fall motion near Earth?","o":["Acceleration is always zero","Gravity is the only force in the ideal model","Speed must remain constant","Mass determines the acceleration"],"a":1,"e":"In ideal free fall, gravity alone acts, giving the same acceleration g regardless of mass."}]
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

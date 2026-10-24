@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Reduced Mass</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.6rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.27rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none;transition:.12s}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.4rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">⚖️ Reduced Mass</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['The reduced mass of two particles m₁ and m₂ is:', ['m₁m₂/(m₁+m₂)','m₁+m₂','m₁m₂','(m₁+m₂)/(m₁m₂)'],0,'The reduced mass is μ = m₁m₂/(m₁+m₂).'],['The SI unit of reduced mass is:', ['kg','N','J','m/s'],0,'Reduced mass has the same dimension and unit as mass: kilogram.'],['If m₁ = m₂ = m, the reduced mass is:', ['m/2','m','2m','m²'],0,'μ = m²/(2m) = m/2.'],['If one mass is much larger than the other, the reduced mass is approximately:', ['the smaller mass','the larger mass','the sum of the masses','zero'],0,'When m₂ ≫ m₁, μ approaches m₁.'],['For two particles separated by relative coordinate r, the relative motion can be treated as:', ['one particle of reduced mass μ','a particle of mass m₁+m₂ only','a massless particle','two independent reduced masses'],0,'The two-body problem separates into CM motion and relative motion with reduced mass.'],['For m₁ = 2 kg and m₂ = 3 kg, the reduced mass is:', ['1.2 kg','5 kg','6 kg','0.5 kg'],0,'μ = (2×3)/(2+3) = 6/5 = 1.2 kg.'],['The reduced mass is always:', ['less than or equal to the smaller mass','greater than both masses','equal to the larger mass','equal to the sum'],0,'For positive masses, μ is smaller than the smaller mass.'],['For equal masses, the reduced mass compared with either individual mass is:', ['half','double','equal','four times'],0,'For m₁ = m₂ = m, μ = m/2.'],['The two-body kinetic energy associated with relative motion can be written as:', ['½μv_rel²','½(m₁+m₂)v_rel²','μv_rel','½μa²'],0,'Relative kinetic energy uses the reduced mass: K_rel = ½μv_rel².'],['Reduced mass is particularly useful in studying:', ['two-body relative motion','only one-dimensional uniform motion','temperature of a gas','electrical resistance'],0,'It simplifies two-body dynamics by replacing relative motion with an effective particle.'],['If m₁ is doubled while m₂ is fixed, the reduced mass:', ['changes according to μ = m₁m₂/(m₁+m₂)','always doubles','always becomes zero','remains exactly unchanged'],0,'The reduced mass depends on both masses through the defining expression.'],['For m₁ = 4 kg and m₂ = 4 kg, μ equals:', ['2 kg','4 kg','8 kg','1 kg'],0,'μ = 16/8 = 2 kg.'],['The centre-of-mass coordinate and relative coordinate in a two-body system are:', ['useful for separating the motion','always identical','both zero','independent of mass values'],0,'These coordinates separate the two-body problem into CM and relative parts.'],['For two positive masses, the reduced mass approaches the smaller mass when:', ['the other mass becomes very large','both masses become zero','the smaller mass becomes infinite','the masses become negative'],0,'Taking one mass much larger makes μ tend toward the smaller mass.'],['If m₁ = 1 kg and m₂ = 1 kg, the reduced mass is:', ['0.5 kg','1 kg','2 kg','0.25 kg'],0,'μ = 1×1/(1+1) = 0.5 kg.']];let i=0,selected=-1,checked=false,score=0;const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;f.className=ok?'feedback good':'feedback bad';f.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 Reduced Mass Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Reduced Mass quiz">
+<title>SkillUp | Reduced Mass — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Reduced Mass</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "The reduced mass μ of two bodies of masses m₁ and m₂ is:",
+    "o": [
+      "m₁+m₂",
+      "(m₁+m₂)/(m₁m₂)",
+      "m₁−m₂",
+      "m₁m₂/(m₁+m₂)"
+    ],
+    "a": 3,
+    "e": "Reduced mass is the product of the masses divided by their sum."
+  },
+  {
+    "q": "The SI unit of reduced mass is:",
+    "o": [
+      "kg",
+      "kg·m/s",
+      "N",
+      "m/s"
+    ],
+    "a": 0,
+    "e": "Reduced mass is a mass, so its SI unit is kilogram."
+  },
+  {
+    "q": "For two equal masses m, the reduced mass is:",
+    "o": [
+      "m²",
+      "m/2",
+      "2m",
+      "m"
+    ],
+    "a": 1,
+    "e": "μ = m²/(2m) = m/2."
+  },
+  {
+    "q": "If m₁ = 2 kg and m₂ = 3 kg, the reduced mass is:",
+    "o": [
+      "6 kg",
+      "2.5 kg",
+      "1.2 kg",
+      "5 kg"
+    ],
+    "a": 2,
+    "e": "μ = (2×3)/(2+3) = 6/5 = 1.2 kg."
+  },
+  {
+    "q": "If one mass is much larger than the other, the reduced mass is approximately:",
+    "o": [
+      "The larger mass",
+      "The sum of the masses",
+      "Zero in every case",
+      "The smaller mass"
+    ],
+    "a": 3,
+    "e": "When m₂ ≫ m₁, μ = m₁m₂/(m₁+m₂) ≈ m₁."
+  },
+  {
+    "q": "For masses 4 kg and 4 kg, the reduced mass equals:",
+    "o": [
+      "2 kg",
+      "4 kg",
+      "8 kg",
+      "1 kg"
+    ],
+    "a": 0,
+    "e": "For equal masses, μ = m/2 = 2 kg."
+  },
+  {
+    "q": "The reduced mass of 1 kg and 1 kg is:",
+    "o": [
+      "0.25 kg",
+      "0.5 kg",
+      "1 kg",
+      "2 kg"
+    ],
+    "a": 1,
+    "e": "μ = 1×1/(1+1) = 0.5 kg."
+  },
+  {
+    "q": "The reduced mass of two positive finite masses is always:",
+    "o": [
+      "Equal to their sum",
+      "Negative",
+      "Less than either mass",
+      "Greater than both masses"
+    ],
+    "a": 2,
+    "e": "Since μ = m₁m₂/(m₁+m₂), it is smaller than each individual positive mass."
+  },
+  {
+    "q": "For m₁ = 6 kg and m₂ = 3 kg, μ is:",
+    "o": [
+      "3 kg",
+      "9 kg",
+      "1 kg",
+      "2 kg"
+    ],
+    "a": 3,
+    "e": "μ = 6×3/(6+3) = 18/9 = 2 kg."
+  },
+  {
+    "q": "The reduced mass helps convert a two-body relative-motion problem into motion of:",
+    "o": [
+      "One effective particle",
+      "Two independent fixed particles",
+      "A massless particle",
+      "A particle with mass m₁+m₂ always"
+    ],
+    "a": 0,
+    "e": "Relative motion can be described using one effective particle of mass μ."
+  },
+  {
+    "q": "If m₁ = 5 kg and m₂ = 20 kg, the reduced mass is:",
+    "o": [
+      "5 kg",
+      "4 kg",
+      "25 kg",
+      "10 kg"
+    ],
+    "a": 1,
+    "e": "μ = 5×20/(5+20) = 100/25 = 4 kg."
+  },
+  {
+    "q": "For m₁ = 2m and m₂ = 2m, the reduced mass is:",
+    "o": [
+      "4m",
+      "m/2",
+      "m",
+      "2m"
+    ],
+    "a": 2,
+    "e": "μ = (2m×2m)/(4m) = m."
+  },
+  {
+    "q": "If m₁ = 3 kg and m₂ = 6 kg, μ equals:",
+    "o": [
+      "3 kg",
+      "4.5 kg",
+      "9 kg",
+      "2 kg"
+    ],
+    "a": 3,
+    "e": "μ = 3×6/(3+6) = 18/9 = 2 kg."
+  },
+  {
+    "q": "Which expression is equivalent to the reduced mass formula?",
+    "o": [
+      "1/μ = 1/m₁ + 1/m₂",
+      "μ = m₁ + m₂",
+      "1/μ = m₁ + m₂",
+      "μ = m₁/m₂"
+    ],
+    "a": 0,
+    "e": "Taking the reciprocal gives 1/μ = (m₁+m₂)/(m₁m₂) = 1/m₁ + 1/m₂."
+  },
+  {
+    "q": "If m₁ = 2 kg and m₂ = 8 kg, the reduced mass is:",
+    "o": [
+      "2 kg",
+      "1.6 kg",
+      "4 kg",
+      "10 kg"
+    ],
+    "a": 1,
+    "e": "μ = 2×8/(2+8) = 16/10 = 1.6 kg."
+  },
+  {
+    "q": "As one mass approaches infinity while the other remains fixed, the reduced mass approaches:",
+    "o": [
+      "Zero",
+      "The sum of both masses",
+      "The finite mass",
+      "Infinity"
+    ],
+    "a": 2,
+    "e": "For m₂ → ∞, μ = m₁m₂/(m₁+m₂) approaches m₁."
+  },
+  {
+    "q": "For masses 3m and 6m, the reduced mass is:",
+    "o": [
+      "3m",
+      "9m",
+      "18m",
+      "2m"
+    ],
+    "a": 3,
+    "e": "μ = (3m×6m)/(9m) = 2m."
+  },
+  {
+    "q": "Two bodies have masses 10 kg and 10 kg. Their reduced mass is:",
+    "o": [
+      "5 kg",
+      "10 kg",
+      "20 kg",
+      "2.5 kg"
+    ],
+    "a": 0,
+    "e": "For equal masses, reduced mass is half of either mass."
+  },
+  {
+    "q": "For m₁ = 1 kg and m₂ = 4 kg, the reduced mass is:",
+    "o": [
+      "1.25 kg",
+      "0.8 kg",
+      "2 kg",
+      "4 kg"
+    ],
+    "a": 1,
+    "e": "μ = 1×4/(1+4) = 0.8 kg."
+  },
+  {
+    "q": "Which pair has the greatest reduced mass?",
+    "o": [
+      "A 1 kg and a 2 kg mass",
+      "A 1 kg and a 1 kg mass",
+      "Two 4 kg masses",
+      "A 1 kg and a 4 kg mass"
+    ],
+    "a": 2,
+    "e": "For equal masses of 4 kg, μ = 2 kg; the other pairs have reduced masses below 1 kg."
+  },
+  {
+    "q": "For m₁ = 2 kg and m₂ = 6 kg, μ is:",
+    "o": [
+      "3 kg",
+      "4 kg",
+      "8 kg",
+      "1.5 kg"
+    ],
+    "a": 3,
+    "e": "μ = 2×6/(2+6) = 12/8 = 1.5 kg."
+  },
+  {
+    "q": "The reduced mass of m and 3m is:",
+    "o": [
+      "3m/4",
+      "3m",
+      "4m",
+      "m/3"
+    ],
+    "a": 0,
+    "e": "μ = (m×3m)/(m+3m) = 3m/4."
+  },
+  {
+    "q": "If both masses are multiplied by 2, the reduced mass:",
+    "o": [
+      "Becomes half",
+      "Also doubles",
+      "Stays the same",
+      "Becomes four times as large"
+    ],
+    "a": 1,
+    "e": "μ(2m₁,2m₂) = 4m₁m₂/[2(m₁+m₂)] = 2μ."
+  },
+  {
+    "q": "For m₁ = 4 kg and m₂ = 12 kg, the reduced mass is:",
+    "o": [
+      "8 kg",
+      "16 kg",
+      "3 kg",
+      "4 kg"
+    ],
+    "a": 2,
+    "e": "μ = 4×12/(4+12) = 48/16 = 3 kg."
+  },
+  {
+    "q": "The reduced mass of 2 kg and 2 kg is:",
+    "o": [
+      "2 kg",
+      "4 kg",
+      "0.5 kg",
+      "1 kg"
+    ],
+    "a": 3,
+    "e": "μ = 2×2/(2+2) = 1 kg."
+  },
+  {
+    "q": "Reduced mass is especially useful in analysing:",
+    "o": [
+      "Relative motion of two interacting bodies",
+      "Only the motion of a single stationary body",
+      "Temperature changes",
+      "Electric current in a wire"
+    ],
+    "a": 0,
+    "e": "It simplifies two-body relative motion, including gravitational and central-force problems."
+  },
+  {
+    "q": "For masses 7 kg and 7 kg, the reduced mass is:",
+    "o": [
+      "49 kg",
+      "3.5 kg",
+      "7 kg",
+      "14 kg"
+    ],
+    "a": 1,
+    "e": "For equal masses, μ = 7/2 = 3.5 kg."
+  },
+  {
+    "q": "If m₁ = 2 kg and μ = 1 kg, the other mass m₂ is:",
+    "o": [
+      "4 kg",
+      "Cannot be found",
+      "2 kg",
+      "1 kg"
+    ],
+    "a": 2,
+    "e": "1 = 2m₂/(2+m₂), so 2+m₂ = 2m₂ and m₂ = 2 kg."
+  },
+  {
+    "q": "For masses 2 kg and 4 kg, which is true about reduced mass?",
+    "o": [
+      "μ = 6 kg",
+      "μ = 3 kg",
+      "μ = 2 kg",
+      "μ = 4/3 kg"
+    ],
+    "a": 3,
+    "e": "μ = 2×4/(2+4) = 8/6 = 4/3 kg."
+  },
+  {
+    "q": "If m₁ = m₂ = 6 kg, the reduced mass is:",
+    "o": [
+      "3 kg",
+      "6 kg",
+      "12 kg",
+      "1.5 kg"
+    ],
+    "a": 0,
+    "e": "μ = 6×6/(6+6) = 36/12 = 3 kg."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

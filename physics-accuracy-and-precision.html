@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Accuracy and Precision</title><style>*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f6f8fb;color:#13233b}.wrap{max-width:760px;margin:auto;padding:28px 18px 40px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #00000012}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top h1{margin:0;font-size:28px}.xp{font-weight:800}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:99px;overflow:hidden;margin:12px 0 24px}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.q{font-size:21px;font-weight:800;line-height:1.45;margin:0 0 18px}.opts{display:grid;gap:10px}.opt{display:block;width:100%;text-align:left;padding:15px 16px;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer;transition:.16s}.opt:hover{background:#f1f6ff}.opt.selected{border-color:#5146a5;background:#f4f1ff}.opt.correct{border-color:#39a852!important;background:#e9f8ed!important}.opt.wrong{border-color:#e05252!important;background:#fff0f0!important}.opt:disabled{cursor:default}.actions{display:flex;gap:10px;margin-top:18px}.btn{padding:13px 20px;border:0;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer}.check{background:#58cc02;color:#fff}.next{background:#2563eb;color:#fff}.check:disabled,.next:disabled{opacity:.45;cursor:not-allowed}.feedback{min-height:28px;margin-top:15px;font-weight:700;line-height:1.5}.explain{font-weight:500;color:#40536a}.result{display:none;text-align:center;padding:12px 0}.retry{background:#2563eb;color:#fff}.back{display:block;width:100%;text-align:center;text-decoration:none;background:#172033;color:#fff;border-radius:14px;padding:14px;margin-top:16px;font-size:16px;font-weight:800}@media(max-width:600px){.wrap{padding:20px 12px}.card{padding:20px}.top h1{font-size:24px}.q{font-size:19px}.opt{font-size:15px}.actions{flex-direction:column}.btn{width:100%}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><h1>🎯 Accuracy and Precision</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div><div class="meta"><span id="count">Question 1/15</span><span id="mastery">Skill Mastery 0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div><div id="quiz"></div><div class="feedback" id="feedback"></div><div class="actions"><button id="check" class="btn check" disabled>Check Answer</button><button id="next" class="btn next" disabled>Next Question →</button></div><div id="result" class="result"><h2>🎉 Skill Complete!</h2><p id="resultText"></p><button id="retry" class="btn retry">Retry Quiz ↻</button></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></section></main><script>const qs=[['What is accuracy?',['Closeness of a measured value to the true value','Closeness of repeated values to each other','Smallest scale division','Number of significant figures'],0,'Accuracy describes closeness to the true value.'],['What is precision?',['Closeness to the true value','Closeness of repeated measurements to one another','Absence of all systematic error','Size of the instrument'],1,'Precision describes repeatability.'],['Readings close to one another but far from the true value are:',['Accurate and precise','Precise but not accurate','Accurate but not precise','Neither'],1,'The readings are consistent but biased.'],['Readings scattered around the true value are:',['Accurate on average but not precise','Precise but inaccurate','Both precise and inaccurate','Neither'],0,'The average may be accurate while the spread is large.'],['Which error mainly shifts all readings in one direction?',['Random error','Systematic error','Resolution','Rounding error'],1,'Systematic error introduces a consistent bias.'],['Random error mainly affects:',['Precision','The SI unit','Dimensions','Instrument colour'],0,'Random fluctuations increase the spread.'],['A balance repeatedly reads 100.8 g for an object whose accepted mass is 100.0 g. The readings are:',['Precise but not accurate','Accurate but not precise','Both accurate and precise','Neither'],0,'They are repeatable but biased.'],['A good measuring instrument should ideally have:',['High accuracy and high precision','Low accuracy and low precision','High error and low resolution','Only a large least count'],0,'Good measurement aims for both.'],['Which statement is correct?',['Accuracy and precision are identical','A measurement can be precise without being accurate','A measurement can never be accurate without being precise','Precision removes systematic error'],1,'A biased instrument can be precise but inaccurate.'],['Readings 5.21, 5.20, 5.21 and 5.20 cm are compared with accepted value 5.80 cm. They are:',['Precise but inaccurate','Accurate but imprecise','Both accurate and precise','Random and exact'],0,'They are tightly clustered but far from the accepted value.'],['A useful way to reduce random error is to:',['Take repeated measurements and use an appropriate average','Change the unit','Ignore readings','Increase systematic bias'],0,'Repeated measurements reduce random fluctuations.'],['A systematic error can be detected by:',['Comparing with a calibrated standard','Taking only one reading','Using fewer observations','Rounding every reading'],0,'A calibrated reference can reveal bias.'],['Values close to the accepted value but widely scattered are:',['Accurate on average but not precise','Precise but inaccurate','Both highly precise and inaccurate','Always exact'],0,'Closeness and spread are different properties.'],['High precision implies that:',['Repeated measurements are closely grouped','Every measurement equals the true value','There is no uncertainty','Zero error is impossible'],0,'High precision means low spread, not necessarily accuracy.'],['Which statement best distinguishes accuracy and precision?',['Accuracy concerns closeness to true value; precision concerns repeatability','Accuracy means more decimal places; precision means fewer','Both depend only on the SI unit','Neither matters in experiments'],0,'This distinction is fundamental in experimental physics.']];let i=0,xp=0,correct=0,selected=-1,answered=false;const $=id=>document.getElementById(id);function render(){answered=false;selected=-1;const a=qs[i];$('count').textContent=`Question ${i+1}/${qs.length}`;$('mastery').textContent=`Skill Mastery ${correct} / ${qs.length}`;$('xp').textContent=xp;$('quiz').innerHTML=`<div class="q">${a[0]}</div>`+a[1].map((o,j)=>`<button type="button" class="opt" data-n="${j}">${String.fromCharCode(65+j)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(answered)return;selected=+b.dataset.n;document.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false});$('feedback').textContent='';$('check').disabled=true;$('next').disabled=true;$('next').textContent=i===qs.length-1?'Finish →':'Next Question →';$('fill').style.width=`${correct/qs.length*100}%`}function grade(){if(selected<0)return;answered=true;const a=qs[i],ok=selected===a[2];document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(j===a[2])b.classList.add('correct');if(j===selected&&!ok)b.classList.add('wrong')});if(ok){correct++;xp+=10;$('feedback').innerHTML='✨ <b>Correct!</b> +10 XP<br><span class="explain">'+a[3]+'</span>'}else{$('feedback').innerHTML='❌ <b>Incorrect.</b> Correct answer: '+a[1][a[2]]+'<br><span class="explain">'+a[3]+'</span>'}$('xp').textContent=xp;$('mastery').textContent=`Skill Mastery ${correct} / ${qs.length}`;$('fill').style.width=`${correct/qs.length*100}%`;$('check').disabled=true;$('next').disabled=false}function advance(){if(i<qs.length-1){i++;render();window.scrollTo({top:0,behavior:'smooth'})}else finish()}function finish(){$('fill').style.width='100%';$('count').textContent='Complete!';$('mastery').textContent=`Skill Mastery ${correct} / ${qs.length}`;$('quiz').innerHTML='';$('feedback').textContent='';$('check').style.display='none';$('next').style.display='none';$('result').style.display='block';$('resultText').textContent=`You answered ${correct} of ${qs.length} correctly and earned ${xp} XP.`}$('check').onclick=grade;$('next').onclick=advance;$('retry').onclick=()=>{i=0;xp=0;correct=0;$('check').style.display='';$('next').style.display='';$('result').style.display='none';render();window.scrollTo({top:0,behavior:'smooth'})};render();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Accuracy and Precision quiz">
+<title>SkillUp | Accuracy and Precision — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Accuracy and Precision</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What does accuracy describe?",
+    "o": [
+      "How close a result is to the accepted value",
+      "How close repeated readings are to each other only",
+      "The number of units",
+      "The instrument's size"
+    ],
+    "a": 0,
+    "e": "Accuracy describes closeness to the accepted or true value."
+  },
+  {
+    "q": "What does precision describe?",
+    "o": [
+      "How close repeated readings are to one another",
+      "How close a value is to zero",
+      "The object's weight",
+      "The scale's colour"
+    ],
+    "a": 0,
+    "e": "Precision refers to agreement among repeated measurements."
+  },
+  {
+    "q": "Readings 9.9, 10.0, and 10.1 cm are:",
+    "o": [
+      "Close to each other",
+      "Widely spread",
+      "All exact by definition",
+      "Without units"
+    ],
+    "a": 0,
+    "e": "These readings are clustered closely, indicating good precision."
+  },
+  {
+    "q": "Readings 8.0, 10.0, and 12.0 cm have:",
+    "o": [
+      "Poorer precision than tightly clustered readings",
+      "Perfect precision",
+      "No variation",
+      "Zero uncertainty"
+    ],
+    "a": 0,
+    "e": "The readings are spread apart, indicating lower precision."
+  },
+  {
+    "q": "A result is accurate when it is:",
+    "o": [
+      "Close to the accepted value",
+      "Always repeated identically",
+      "Written without a unit",
+      "The largest reading"
+    ],
+    "a": 0,
+    "e": "Accuracy is judged by closeness to the accepted value."
+  },
+  {
+    "q": "Can measurements be precise but inaccurate?",
+    "o": [
+      "Yes, if readings cluster away from the accepted value",
+      "No, never",
+      "Only if the unit is metre",
+      "Only for time measurements"
+    ],
+    "a": 0,
+    "e": "A consistent systematic offset can make tightly clustered readings inaccurate."
+  },
+  {
+    "q": "Can measurements be accurate on average but not very precise?",
+    "o": [
+      "Yes, if readings vary around the accepted value",
+      "No, accuracy and precision are identical",
+      "Only with digital tools",
+      "Never in experiments"
+    ],
+    "a": 0,
+    "e": "A set of scattered readings can have an average close to the accepted value."
+  },
+  {
+    "q": "Which action can improve precision?",
+    "o": [
+      "Use a suitable instrument and repeat readings carefully",
+      "Read the scale from random angles",
+      "Change units each time",
+      "Ignore instrument resolution"
+    ],
+    "a": 0,
+    "e": "Suitable instruments and consistent technique help improve repeatability."
+  },
+  {
+    "q": "Which action can improve accuracy?",
+    "o": [
+      "Calibrate the instrument against a reliable standard",
+      "Take readings from far away",
+      "Use an incorrect zero setting",
+      "Round all readings randomly"
+    ],
+    "a": 0,
+    "e": "Calibration helps reduce systematic measurement bias."
+  },
+  {
+    "q": "A balance always reads 0.5 g too high. Which quality is most affected?",
+    "o": [
+      "Accuracy",
+      "The unit symbol",
+      "Precision necessarily",
+      "The object's colour"
+    ],
+    "a": 0,
+    "e": "A fixed offset creates systematic error and reduces accuracy, even if readings repeat well."
+  },
+  {
+    "q": "Repeated readings are 5.21, 5.20, and 5.21 g. They show:",
+    "o": [
+      "Good repeatability or precision",
+      "Large spread",
+      "Guaranteed accuracy",
+      "No measurement"
+    ],
+    "a": 0,
+    "e": "The readings are very close to one another."
+  },
+  {
+    "q": "Accepted value is 100 cm and a result is 99.9 cm. It is:",
+    "o": [
+      "Close to the accepted value",
+      "Far from the accepted value",
+      "Automatically imprecise",
+      "Impossible to compare"
+    ],
+    "a": 0,
+    "e": "99.9 cm differs from 100 cm by only 0.1 cm."
+  },
+  {
+    "q": "Which pair best describes the difference?",
+    "o": [
+      "Accuracy: closeness to accepted value; precision: closeness among readings",
+      "Accuracy: unit; precision: quantity",
+      "Accuracy: spread; precision: true value only",
+      "They mean exactly the same thing"
+    ],
+    "a": 0,
+    "e": "Accuracy compares with a reference value; precision describes agreement among readings."
+  },
+  {
+    "q": "Which situation suggests poor precision?",
+    "o": [
+      "Repeated readings vary greatly",
+      "Repeated readings nearly match",
+      "Instrument is calibrated",
+      "Readings have units"
+    ],
+    "a": 0,
+    "e": "Large variation between repeated readings indicates poor precision."
+  },
+  {
+    "q": "Which situation suggests poor accuracy?",
+    "o": [
+      "Repeated readings are consistently far from the accepted value",
+      "Readings cluster around the accepted value",
+      "Readings are repeatable and correctly calibrated",
+      "The instrument has clear markings"
+    ],
+    "a": 0,
+    "e": "A consistent difference from the reference value indicates poor accuracy."
+  },
+  {
+    "q": "A student measures a 20 cm rod as 18.0, 18.1, and 18.0 cm. The readings are:",
+    "o": [
+      "Precise but inaccurate",
+      "Accurate and exact",
+      "Not repeatable",
+      "Without a pattern"
+    ],
+    "a": 0,
+    "e": "The readings cluster closely but are far from the accepted 20 cm value."
+  },
+  {
+    "q": "A student records 19.9, 20.1, and 20.0 cm for a 20 cm rod. These readings are:",
+    "o": [
+      "Reasonably accurate and precise",
+      "Very inaccurate and imprecise",
+      "Always exact",
+      "Invalid because they differ"
+    ],
+    "a": 0,
+    "e": "The readings are close to 20 cm and close to one another."
+  },
+  {
+    "q": "Why repeat a measurement?",
+    "o": [
+      "To assess variation and improve confidence in the result",
+      "To guarantee zero error",
+      "To make the object longer",
+      "To remove the need for units"
+    ],
+    "a": 0,
+    "e": "Repeated readings reveal spread and help estimate a representative value."
+  },
+  {
+    "q": "Does a digital display guarantee accuracy?",
+    "o": [
+      "No; calibration and instrument quality still matter",
+      "Yes, always",
+      "Only if it shows many digits",
+      "Yes, even when damaged"
+    ],
+    "a": 0,
+    "e": "More displayed digits do not guarantee closeness to the true value."
+  },
+  {
+    "q": "What is repeatability?",
+    "o": [
+      "Agreement among repeated measurements under the same conditions",
+      "Closeness to a different unit",
+      "The maximum scale value",
+      "A type of physical quantity"
+    ],
+    "a": 0,
+    "e": "Repeatability is agreement when the same method and conditions are used."
+  },
+  {
+    "q": "Which term is most directly related to spread in repeated readings?",
+    "o": [
+      "Precision",
+      "Accuracy only",
+      "Accepted value",
+      "Unit conversion"
+    ],
+    "a": 0,
+    "e": "Precision reflects how closely repeated readings agree."
+  },
+  {
+    "q": "A thermometer reads 2 °C too low every time. What should be checked?",
+    "o": [
+      "Calibration or zero offset",
+      "The object's colour",
+      "The number of people present",
+      "The written unit font"
+    ],
+    "a": 0,
+    "e": "A constant offset can indicate a calibration problem."
+  },
+  {
+    "q": "Why should measurements include units?",
+    "o": [
+      "So the quantity and scale of the result are clear",
+      "To guarantee accuracy",
+      "To improve precision automatically",
+      "To hide uncertainty"
+    ],
+    "a": 0,
+    "e": "Units give the result its physical meaning."
+  },
+  {
+    "q": "Which set has the greatest precision?",
+    "o": [
+      "4.01, 4.02, 4.01",
+      "3.5, 4.0, 4.5",
+      "2, 4, 6",
+      "1, 5, 9"
+    ],
+    "a": 0,
+    "e": "The first set has the smallest spread."
+  },
+  {
+    "q": "Which set has the largest spread?",
+    "o": [
+      "2, 5, 8",
+      "4.9, 5.0, 5.1",
+      "9.8, 9.9, 10.0",
+      "6.0, 6.1, 6.0"
+    ],
+    "a": 0,
+    "e": "The first set spans 6 units, much more than the other sets."
+  },
+  {
+    "q": "A measurement is reported as 12.4 ± 0.1 cm. The ± value indicates:",
+    "o": [
+      "Uncertainty",
+      "Accuracy guaranteed",
+      "The object's mass",
+      "The unit conversion factor"
+    ],
+    "a": 0,
+    "e": "The uncertainty expresses a range associated with the measurement."
+  },
+  {
+    "q": "Which statement is correct about significant digits?",
+    "o": [
+      "They communicate the precision of a reported measurement",
+      "They guarantee accuracy",
+      "They replace units",
+      "They remove random error"
+    ],
+    "a": 0,
+    "e": "Significant digits convey the resolution or precision implied by a recorded value."
+  },
+  {
+    "q": "How can observer-related variation be reduced?",
+    "o": [
+      "Use a consistent procedure and read scales at eye level",
+      "Change the viewing angle each time",
+      "Ignore instructions",
+      "Use a damaged instrument"
+    ],
+    "a": 0,
+    "e": "Consistent technique and eye-level readings reduce avoidable variation and parallax."
+  },
+  {
+    "q": "A set of readings is tightly grouped but shifted from a reference. The likely issue is:",
+    "o": [
+      "Systematic error",
+      "Only random error",
+      "No error possible",
+      "Unit cancellation"
+    ],
+    "a": 0,
+    "e": "A systematic bias can shift all measurements in a similar direction."
+  },
+  {
+    "q": "What is the best general approach to reliable measurement?",
+    "o": [
+      "Use a suitable calibrated instrument, repeat readings, and report units and uncertainty",
+      "Take one hurried reading and omit the unit",
+      "Always record extra unsupported decimal places",
+      "Ignore the accepted value"
+    ],
+    "a": 0,
+    "e": "Good measurement combines appropriate instruments, careful technique, repetition, and transparent reporting."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

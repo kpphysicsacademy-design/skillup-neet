@@ -1,32 +1,465 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Circular Motion Dynamics</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 10%,#eeeaff 0,transparent 30%),radial-gradient(circle at 90% 85%,#e8f8f1 0,transparent 28%),#f7f7fb;color:#172033;min-height:100vh}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.card{background:rgba(255,255,255,.96);border-radius:24px;padding:28px;box-shadow:0 10px 30px #17203318,0 2px 5px #1720330c;animation:cardIn .5s ease both}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.tag{font-weight:800;font-size:.9rem;letter-spacing:.2px;animation:fadeUp .45s ease both}.xp{font-weight:900;padding:8px 12px;border-radius:999px;background:#fff4c7;box-shadow:inset 0 -2px #e9d98c;animation:xpPop .55s .15s ease both}.bar{height:11px;background:#e8e8f1;border-radius:999px;overflow:hidden;margin:12px 0 24px;box-shadow:inset 0 1px 3px #17203318}.fill{height:100%;width:0;background:linear-gradient(90deg,#5b50c8,#7b70df,#5b50c8);background-size:200% 100%;transition:width .35s cubic-bezier(.2,.8,.2,1);animation:shine 2s linear infinite}.q{font-size:1.22rem;font-weight:800;line-height:1.45;margin:20px 0;animation:questionIn .35s ease both}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:15px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .15s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease}.opt:hover{transform:translateY(-3px) scale(1.01);border-color:#aaa4df;box-shadow:0 7px 16px #17203314}.opt:focus{outline:3px solid #c9c3ff;outline-offset:2px}.opt:active{transform:translateY(1px) scale(.995)}.opt.selected{border-color:#5b50c8;background:#f0edff;box-shadow:0 0 0 3px #5b50c81a}.opt.correct{border-color:#2d9b68;background:#eaf8f1;animation:correctPop .4s ease both}.opt.wrong{border-color:#d45555;background:#fff0f0;animation:wrongShake .35s ease both}.feedback{min-height:72px;margin-top:18px;padding:14px 16px;border-radius:15px;background:#f4f3fb;line-height:1.5;animation:feedbackIn .3s ease both}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:linear-gradient(180deg,#675bd4,#5146b8);color:white;box-shadow:0 4px 0 #3e3594,0 8px 18px #5146b833;transition:transform .12s ease,filter .12s ease,box-shadow .12s ease}.btn:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 6px 0 #3e3594,0 11px 20px #5146b833}.btn:focus{outline:3px solid #c9c3ff;outline-offset:2px}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #3e3594,0 4px 10px #5146b833}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:800;text-decoration:none;padding:11px 14px;border-radius:13px;transition:transform .15s ease,background .15s ease,box-shadow .15s ease}.back:hover{background:#f0edff;transform:translateX(-3px);box-shadow:0 5px 12px #5146a51a}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back:active{transform:translateX(-1px) scale(.98)}.result{font-size:1.2rem;font-weight:750;line-height:1.6;animation:resultPop .45s ease both}@keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes xpPop{0%{opacity:0;transform:scale(.7) rotate(-5deg)}70%{transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}@keyframes shine{to{background-position:200% 0}}@keyframes questionIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}@keyframes feedbackIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes correctPop{0%{transform:scale(.98)}60%{transform:scale(1.02)}100%{transform:scale(1)}}@keyframes wrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}@keyframes resultPop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}@media(max-width:600px){.card{padding:20px;border-radius:20px}.top{align-items:flex-start}.q{font-size:1.1rem}.opt{padding:13px 14px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><div class="tag">🌀 Circular Motion Dynamics</div><div class="xp">+10 XP</div></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></section></main><script>
-const qs=[
-['The centripetal acceleration of a body moving in a circle of radius r with speed v is:', ['v²/r','v/r²','r/v²','vr'],0,'Centripetal acceleration is directed toward the centre and has magnitude v²/r.'],
-['The centripetal force required for circular motion is:', ['mv²/r','mr/v²','mv/r²','mvr'],0,'Using F = ma with a = v²/r gives F = mv²/r.'],
-['For uniform circular motion, the speed of the particle is:', ['constant','zero','continuously increasing','continuously decreasing'],0,'Uniform circular motion means constant speed, although velocity changes direction.'],
-['In uniform circular motion, the instantaneous velocity is directed:', ['tangent to the circle','toward the centre','away from the centre','along the radius outward'],0,'Velocity is tangent to the path at every instant.'],
-['The centripetal acceleration is directed:', ['toward the centre','tangent to the path','away from the centre','vertically upward'],0,'The acceleration responsible for changing the direction of velocity points inward.'],
-['If the speed of a particle in a circle is doubled while radius remains unchanged, centripetal force becomes:', ['four times','two times','half','unchanged'],0,'F = mv²/r, so doubling v makes F four times.'],
-['If the radius of circular motion is doubled at constant speed, centripetal acceleration becomes:', ['half','double','four times','unchanged'],0,'a = v²/r, so doubling r halves a.'],
-['For a vehicle taking a level circular turn, the force that can provide centripetal force is mainly:', ['friction between tyres and road','weight alone','normal reaction alone','engine power alone'],0,'On a level road, static friction supplies the required horizontal centripetal force.'],
-['The angular speed ω and linear speed v are related by:', ['v = rω','v = ω/r','v = r/ω','v = r²ω'],0,'For circular motion, v = rω.'],
-['The centripetal force does work on a particle in uniform circular motion:', ['zero work','positive work continuously','negative work continuously','maximum work'],0,'Centripetal force is perpendicular to instantaneous displacement, so its work is zero.'],
-['A 2 kg body moves at 4 m/s in a circle of radius 2 m. Its centripetal force is:', ['16 N','8 N','4 N','32 N'],0,'F = mv²/r = 2×16/2 = 16 N.'],
-['A particle moves in a circle of radius 5 m at 10 m/s. Its centripetal acceleration is:', ['20 m/s²','2 m/s²','50 m/s²','25 m/s²'],0,'a = v²/r = 100/5 = 20 m/s².'],
-['For a particle moving with angular speed ω, the centripetal acceleration is:', ['ω²r','ωr²','ω/r','r/ω²'],0,'Since v = rω, a = v²/r = ω²r.'],
-['If no inward force acts on a body moving in a circle, it tends to move:', ['along the tangent to the circle','toward the centre','along the radius inward','in a smaller circle'],0,'By inertia, the body continues in the instantaneous tangential direction.'],
-['For safe banking of a road, the banking is designed so that:', ['a component of the normal reaction can provide centripetal force','weight becomes zero','friction must always be maximum','speed becomes independent of radius'],0,'On a banked road, the normal reaction can have a horizontal component toward the centre.']
-];
-let i=0,selected=null,score=0;const $=id=>document.getElementById(id);
-function render(){selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';$('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('check').onclick=check}
-function check(){if(selected===null){$('feedback').textContent='Please choose an answer first.';return}const a=qs[i],ok=selected===a[2];if(ok)score++;[...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});$('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{$('fill').style.width='100%';const pct=Math.round(score/qs.length*100);$('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsCircularMotionDynamicsScore',String(score))}}
-function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}
-rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();
-</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Circular Motion Dynamics quiz">
+<title>SkillUp | Circular Motion Dynamics — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Circular Motion Dynamics</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "In circular motion, the centripetal acceleration points:",
+    "o": [
+      "Toward the centre of the circle",
+      "Away from the centre",
+      "Along the tangent always",
+      "Opposite gravity always"
+    ],
+    "a": 0,
+    "e": "Centripetal acceleration changes the direction of velocity and points toward the centre."
+  },
+  {
+    "q": "The magnitude of centripetal acceleration is:",
+    "o": [
+      "v²/r",
+      "vr²",
+      "r/v²",
+      "v/r²"
+    ],
+    "a": 0,
+    "e": "For speed v on a circle of radius r, aᶜ = v²/r."
+  },
+  {
+    "q": "The centripetal force required for a mass m moving at speed v in radius r is:",
+    "o": [
+      "mv²/r",
+      "mvr",
+      "mr/v²",
+      "mv/r²"
+    ],
+    "a": 0,
+    "e": "Newton's second law gives Fᶜ = maᶜ = mv²/r."
+  },
+  {
+    "q": "A 2 kg object moves at 4 m/s in a circle of radius 2 m. The required centripetal force is:",
+    "o": [
+      "16 N",
+      "8 N",
+      "4 N",
+      "32 N"
+    ],
+    "a": 0,
+    "e": "Fᶜ = mv²/r = 2 × 16/2 = 16 N."
+  },
+  {
+    "q": "If speed doubles while radius remains fixed, centripetal force becomes:",
+    "o": [
+      "Four times as large",
+      "Twice as large",
+      "Half as large",
+      "Unchanged"
+    ],
+    "a": 0,
+    "e": "Centripetal force is proportional to v², so doubling speed multiplies it by four."
+  },
+  {
+    "q": "If radius doubles at constant speed, centripetal acceleration becomes:",
+    "o": [
+      "Half as large",
+      "Twice as large",
+      "Four times as large",
+      "Unchanged"
+    ],
+    "a": 0,
+    "e": "aᶜ = v²/r, so doubling r halves the acceleration."
+  },
+  {
+    "q": "In uniform circular motion, speed is:",
+    "o": [
+      "Constant, while velocity direction changes",
+      "Always increasing",
+      "Always decreasing",
+      "Zero"
+    ],
+    "a": 0,
+    "e": "Uniform circular motion has constant speed but changing velocity direction."
+  },
+  {
+    "q": "The instantaneous velocity in circular motion is directed:",
+    "o": [
+      "Along the tangent to the circle",
+      "Toward the centre",
+      "Away from the centre",
+      "Radially inward"
+    ],
+    "a": 0,
+    "e": "Velocity is tangent to the path, perpendicular to the radius."
+  },
+  {
+    "q": "A 0.5 kg ball moves at 6 m/s in a circle of radius 3 m. Its centripetal force is:",
+    "o": [
+      "6 N",
+      "3 N",
+      "12 N",
+      "18 N"
+    ],
+    "a": 0,
+    "e": "Fᶜ = 0.5 × 36/3 = 6 N."
+  },
+  {
+    "q": "Which force can provide centripetal force for a car turning on a level road without skidding?",
+    "o": [
+      "Static friction",
+      "Normal force alone",
+      "Weight alone",
+      "Air buoyancy"
+    ],
+    "a": 0,
+    "e": "Static friction between tyres and road can supply the inward force for the turn."
+  },
+  {
+    "q": "For a car moving on a level circular road, the required centripetal force is directed:",
+    "o": [
+      "Horizontally toward the centre of the turn",
+      "Vertically upward",
+      "Vertically downward",
+      "Along the tangent"
+    ],
+    "a": 0,
+    "e": "The centripetal force is the net inward force, horizontal for a level road."
+  },
+  {
+    "q": "For a vehicle on a frictionless banked road at angle θ, the ideal relation is:",
+    "o": [
+      "tan θ = v²/(rg)",
+      "sin θ = rg/v²",
+      "tan θ = rg/v²",
+      "v² = gr²"
+    ],
+    "a": 0,
+    "e": "Resolving the normal force gives tan θ = v²/(rg) for the design speed without friction."
+  },
+  {
+    "q": "A body completes one circle of radius r. Its distance travelled is:",
+    "o": [
+      "2πr",
+      "πr²",
+      "πr",
+      "r²"
+    ],
+    "a": 0,
+    "e": "The circumference of a circle is 2πr."
+  },
+  {
+    "q": "The time for one revolution is called the:",
+    "o": [
+      "Period",
+      "Frequency",
+      "Angular acceleration",
+      "Radius"
+    ],
+    "a": 0,
+    "e": "The period T is the time taken to complete one full revolution."
+  },
+  {
+    "q": "Frequency f and period T are related by:",
+    "o": [
+      "f = 1/T",
+      "f = T²",
+      "f = 2πT",
+      "f = T/2π"
+    ],
+    "a": 0,
+    "e": "Frequency is the number of revolutions per second, so f = 1/T."
+  },
+  {
+    "q": "The angular speed ω is related to linear speed v by:",
+    "o": [
+      "v = ωr",
+      "v = ω/r",
+      "v = r/ω",
+      "v = ωr²"
+    ],
+    "a": 0,
+    "e": "For circular motion, linear speed equals angular speed times radius."
+  },
+  {
+    "q": "The centripetal acceleration in terms of angular speed is:",
+    "o": [
+      "ω²r",
+      "ω/r",
+      "r/ω²",
+      "ωr²"
+    ],
+    "a": 0,
+    "e": "Using v = ωr in v²/r gives aᶜ = ω²r."
+  },
+  {
+    "q": "A 1 kg mass moves in a circle of radius 2 m with angular speed 3 rad/s. Its centripetal acceleration is:",
+    "o": [
+      "18 m/s²",
+      "6 m/s²",
+      "9 m/s²",
+      "3 m/s²"
+    ],
+    "a": 0,
+    "e": "aᶜ = ω²r = 9 × 2 = 18 m/s²."
+  },
+  {
+    "q": "If no inward net force acts on an object that was moving in a circle, it tends to move:",
+    "o": [
+      "Along the instantaneous tangent",
+      "Straight toward the centre",
+      "Radially outward due to a real force",
+      "In the same circle forever"
+    ],
+    "a": 0,
+    "e": "Without the required inward force, inertia carries it along the tangent to the path."
+  },
+  {
+    "q": "The term 'centripetal' means:",
+    "o": [
+      "Centre-seeking",
+      "Centre-avoiding",
+      "Tangential only",
+      "Gravity-free"
+    ],
+    "a": 0,
+    "e": "Centripetal describes a direction toward the centre of circular motion."
+  },
+  {
+    "q": "A 1000 kg car moves at 10 m/s around a curve of radius 50 m. The required inward force is:",
+    "o": [
+      "2000 N",
+      "5000 N",
+      "10000 N",
+      "200 N"
+    ],
+    "a": 0,
+    "e": "Fᶜ = mv²/r = 1000 × 100/50 = 2000 N."
+  },
+  {
+    "q": "At constant speed, the net force in uniform circular motion is:",
+    "o": [
+      "Inward and nonzero",
+      "Zero",
+      "Outward",
+      "Always tangent"
+    ],
+    "a": 0,
+    "e": "The direction of velocity changes, so centripetal acceleration and net inward force are required."
+  },
+  {
+    "q": "For a satellite in a circular orbit, the centripetal force is supplied primarily by:",
+    "o": [
+      "Gravity",
+      "Air resistance",
+      "A string",
+      "Static friction"
+    ],
+    "a": 0,
+    "e": "Gravitational attraction supplies the inward force needed to keep a satellite in orbit."
+  },
+  {
+    "q": "In a vertical circle, at the top of the path, the inward radial direction points:",
+    "o": [
+      "Downward toward the circle's centre",
+      "Upward away from the centre",
+      "Horizontally right",
+      "Along the tangent"
+    ],
+    "a": 0,
+    "e": "At the top of a vertical circle, the centre is below the object."
+  },
+  {
+    "q": "For a mass on a string at the top of a vertical circle, the inward force equation can be written as:",
+    "o": [
+      "T + mg = mv²/r",
+      "T − mg = mv²/r",
+      "mg − T = 0 always",
+      "T = mg + mv"
+    ],
+    "a": 0,
+    "e": "At the top, both tension and weight point toward the centre, so they add in the radial equation."
+  },
+  {
+    "q": "For a mass on a string at the bottom of a vertical circle, the radial equation is:",
+    "o": [
+      "T − mg = mv²/r",
+      "T + mg = mv²/r",
+      "mg − T = mv²/r",
+      "T = 0"
+    ],
+    "a": 0,
+    "e": "At the bottom, tension points inward and weight points outward relative to the centre, so T − mg = mv²/r."
+  },
+  {
+    "q": "The minimum speed at the top of a vertical circle for a taut string in the ideal limiting case is:",
+    "o": [
+      "√(gr)",
+      "gr",
+      "g/r",
+      "√(g/r)"
+    ],
+    "a": 0,
+    "e": "At the limiting top point, tension is zero and mg = mv²/r, giving v = √(gr)."
+  },
+  {
+    "q": "A 2 kg object moves at 5 m/s in a circle of radius 5 m. Its centripetal acceleration is:",
+    "o": [
+      "5 m/s²",
+      "10 m/s²",
+      "25 m/s²",
+      "2 m/s²"
+    ],
+    "a": 0,
+    "e": "aᶜ = v²/r = 25/5 = 5 m/s²."
+  },
+  {
+    "q": "Which statement about centripetal force is correct?",
+    "o": [
+      "It is the net inward force, supplied by one or more real forces",
+      "It is always a new separate force",
+      "It always points along velocity",
+      "It is always supplied by gravity"
+    ],
+    "a": 0,
+    "e": "Centripetal force names the net inward force; its source may be tension, friction, gravity or a normal force."
+  },
+  {
+    "q": "If speed stays constant but radius becomes one-third as large, centripetal force becomes:",
+    "o": [
+      "Three times as large",
+      "One-third as large",
+      "Nine times as large",
+      "Unchanged"
+    ],
+    "a": 0,
+    "e": "Fᶜ = mv²/r, so reducing r to one-third makes the force three times larger."
+  }
+];
+
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

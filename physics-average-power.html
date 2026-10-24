@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Average Power</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:flex-end;margin-bottom:20px}.xp{background:#fff;padding:12px 18px;border-radius:18px;box-shadow:0 5px 18px #17203314;font-weight:800}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px;box-shadow:0 8px 22px #12539d25}.hero small{font-size:.82rem}.hero h1{margin:9px 0 10px;font-size:1.9rem}.hero p{margin:0}.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 20px #17203312}.progress-head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:12px;background:#dfe8f1;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .3s}.qnum{font-size:.9rem;font-weight:800;color:#35516f;margin-bottom:12px}.question{font-size:1.28rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{width:100%;padding:14px 15px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.actions{margin-top:16px}.btn{padding:12px 20px;border:0;border-radius:13px;font-weight:850;cursor:pointer;background:#2db84d;color:#fff;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:13px;border-radius:14px;font-weight:700;min-height:20px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:800;text-decoration:none;padding:9px 12px;border-radius:12px}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px 34px}.hero h1{font-size:1.55rem}.question{font-size:1.15rem}.card{padding:17px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="xp">⚡ <span id="xp">0</span> XP</div></div><section class="hero"><small>PHYSICS • NEET 2026</small><h1>⚡ Average Power</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section><section class="card"><div class="progress-head"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count">Question 1 of 15</div><h2 class="question" id="question"></h2><div id="options" class="options"></div><div class="actions"><button id="continue" class="btn">Continue →</button></div><div id="feedback" class="feedback"></div></section><a href="physics-home.html" id="back" class="back">← Back to Physics Path</a></main><script>(function(){const quiz=[['Average power is defined as:',['total work divided by total time','instantaneous work divided by distance','force divided by time','energy multiplied by time'],0,'Average power is P_avg=W/Δt.'],['The SI unit of power is:',['watt','joule','newton','pascal'],0,'The SI unit of power is watt (W), equal to J/s.'],['A machine does 600 J of work in 20 s. Its average power is:',['30 W','12 W','120 W','300 W'],0,'P_avg=W/t=600/20=30 W.'],['A 100 W bulb operates for 10 s. The energy supplied is:',['1000 J','100 J','10 J','0.1 J'],0,'E=Pt=100×10=1000 J.'],['If the same work is done in half the time, average power becomes:',['twice','half','four times','unchanged'],0,'For fixed work, P_avg is inversely proportional to time.'],['A person does 1200 J of work in 60 s. Average power is:',['20 W','72 W','120 W','720 W'],0,'P_avg=1200/60=20 W.'],['Which expression gives average power in terms of energy transferred?',['E/Δt','EΔt','Δt/E','E+Δt'],0,'Power is the rate of energy transfer: P_avg=E/Δt.'],['A motor lifts a load doing 5000 J of work in 25 s. Its average power is:',['200 W','125 W','500 W','1000 W'],0,'P_avg=5000/25=200 W.'],['One horsepower is approximately:',['746 W','100 W','1000 W','74.6 W'],0,'1 hp is approximately 746 W.'],['If a machine has useful output energy 800 J in 4 s, its useful average power is:',['200 W','804 W','3200 W','196 W'],0,'P_avg=800/4=200 W.'],['Average power can be zero over an interval when:',['net work done is zero','force is always maximum','time is zero','energy is infinite'],0,'If net work or net energy transfer over the interval is zero, average power is zero.'],['A 2 kW motor runs for 5 s. Energy delivered is:',['10 kJ','2.5 kJ','400 J','100 kJ'],0,'E=Pt=2000×5=10000 J=10 kJ.'],['For constant force parallel to velocity, power is:',['Fv','F/v','v/F','F+v'],0,'Instantaneous power P=F·v=Fv for parallel force and velocity.'],['A force of 50 N moves an object at 4 m/s in its direction. The power is:',['200 W','12.5 W','46 W','250 W'],0,'P=Fv=50×4=200 W.'],['Which statement about average and instantaneous power is correct?',['Average power is measured over a time interval','They are always equal','Average power has no unit','Instantaneous power is work only'],0,'Average power describes the rate over a finite interval; instantaneous power is the limiting rate at an instant.']];let i=0,selected=-1,score=0,checked=false;const $=id=>document.getElementById(id),q=$("question"),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;q.textContent=a[0];$("count").textContent='Question '+(i+1)+' of 15';o.innerHTML='';f.className='feedback';f.textContent='';b.disabled=false;b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const x=document.createElement('button');x.className='option';x.textContent=String.fromCharCode(65+j)+'. '+item.text;x.dataset.index=item.index;x.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));x.classList.add('selected')};o.appendChild(x)})}b.onclick=function(){if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(x=>{const idx=Number(x.dataset.index);x.disabled=true;if(idx===a[2])x.classList.add('correct');if(idx===selected&&!ok)x.classList.add('wrong')});if(ok){score++;f.className='feedback good';f.textContent='🎯 Correct! +10 XP — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — Correct answer: '+a[1][a[2]]+'. '+a[3]}$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();window.scrollTo({top:0,behavior:'smooth'})}else{q.textContent='🏆 Average Power Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.';localStorage.setItem('skillupPhysicsAveragePowerScore',score)}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Average Power quiz">
+<title>SkillUp | Average Power — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Average Power</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "Average power is defined as:",
+    "o": [
+      "Instantaneous force",
+      "Total work divided by elapsed time",
+      "Force multiplied by displacement",
+      "Energy divided by mass"
+    ],
+    "a": 1,
+    "e": "Average power equals total work done divided by the time interval."
+  },
+  {
+    "q": "The SI unit of average power is:",
+    "o": [
+      "Joule",
+      "Newton",
+      "Watt",
+      "Kilowatt-hour"
+    ],
+    "a": 2,
+    "e": "Power is measured in watts, where 1 W = 1 J/s."
+  },
+  {
+    "q": "A worker does 900 J of work in 30 s. Average power is:",
+    "o": [
+      "15 W",
+      "30 W",
+      "45 W",
+      "270 W"
+    ],
+    "a": 1,
+    "e": "P_avg = W/Δt = 900/30 = 30 W."
+  },
+  {
+    "q": "A motor performs 12 kJ of work in 4 s. Its average power is:",
+    "o": [
+      "3 W",
+      "48 W",
+      "3000 W",
+      "12,000 W"
+    ],
+    "a": 2,
+    "e": "12 kJ = 12,000 J; P_avg = 12,000/4 = 3000 W."
+  },
+  {
+    "q": "Two machines do equal work. Machine A takes 5 s and machine B takes 10 s. The average power of A is:",
+    "o": [
+      "Half of B",
+      "Equal to B",
+      "Twice B",
+      "Four times B"
+    ],
+    "a": 2,
+    "e": "For equal work, power is inversely proportional to time; A's power is double B's."
+  },
+  {
+    "q": "A 200 W motor operates for 15 s. The work it delivers is:",
+    "o": [
+      "13.3 J",
+      "200 J",
+      "3000 J",
+      "30,000 J"
+    ],
+    "a": 2,
+    "e": "W = P_avg × t = 200 × 15 = 3000 J."
+  },
+  {
+    "q": "A person lifts a 20 kg load by 2 m in 4 s. Use g = 10 m/s². Average power is:",
+    "o": [
+      "25 W",
+      "50 W",
+      "100 W",
+      "400 W"
+    ],
+    "a": 2,
+    "e": "Work = mgh = 20 × 10 × 2 = 400 J; average power = 400/4 = 100 W."
+  },
+  {
+    "q": "A machine does 600 J of work in 2 minutes. Average power is:",
+    "o": [
+      "5 W",
+      "10 W",
+      "20 W",
+      "300 W"
+    ],
+    "a": 0,
+    "e": "2 minutes = 120 s; average power = 600/120 = 5 W."
+  },
+  {
+    "q": "A 1 kW appliance runs for 3 minutes. Energy used is:",
+    "o": [
+      "3 kJ",
+      "30 kJ",
+      "180 kJ",
+      "300 kJ"
+    ],
+    "a": 2,
+    "e": "E = Pt = 1000 × 180 = 180,000 J = 180 kJ."
+  },
+  {
+    "q": "The area under a power-versus-time graph gives:",
+    "o": [
+      "Acceleration",
+      "Energy transferred",
+      "Force",
+      "Momentum"
+    ],
+    "a": 1,
+    "e": "Integrating power over time gives energy transferred."
+  },
+  {
+    "q": "Average power over an interval can be zero even if work was done during parts of the interval when:",
+    "o": [
+      "Net work over the full interval is zero",
+      "Force is always zero",
+      "Speed never changes",
+      "Time interval is zero"
+    ],
+    "a": 0,
+    "e": "Average power is net work divided by elapsed time; zero net work gives zero average net power."
+  },
+  {
+    "q": "A 60 kg person climbs 3 m in 6 s. Take g = 10 m/s². Average power is:",
+    "o": [
+      "100 W",
+      "200 W",
+      "300 W",
+      "600 W"
+    ],
+    "a": 2,
+    "e": "P_avg = mgh/t = 60 × 10 × 3 / 6 = 300 W."
+  },
+  {
+    "q": "A pump does 24 kJ of work in 1 minute. Average power is:",
+    "o": [
+      "40 W",
+      "240 W",
+      "400 W",
+      "2400 W"
+    ],
+    "a": 2,
+    "e": "24,000 J / 60 s = 400 W."
+  },
+  {
+    "q": "A 500 W device runs for 20 s. It transfers:",
+    "o": [
+      "25 J",
+      "100 J",
+      "10,000 J",
+      "25,000 J"
+    ],
+    "a": 2,
+    "e": "E = Pt = 500 × 20 = 10,000 J."
+  },
+  {
+    "q": "If a fixed amount of work is completed in one-third the time, average power is:",
+    "o": [
+      "One-third as much",
+      "Three times as much",
+      "Nine times as much",
+      "Unchanged"
+    ],
+    "a": 1,
+    "e": "P = W/t, so reducing time to one-third triples average power."
+  },
+  {
+    "q": "A machine's output work is 8000 J over 20 s. Average output power is:",
+    "o": [
+      "40 W",
+      "200 W",
+      "400 W",
+      "1600 W"
+    ],
+    "a": 2,
+    "e": "P_avg = 8000/20 = 400 W."
+  },
+  {
+    "q": "A 2 kg object is raised 5 m in 5 s at constant speed. Take g = 10 m/s². Average power is:",
+    "o": [
+      "10 W",
+      "20 W",
+      "50 W",
+      "100 W"
+    ],
+    "a": 1,
+    "e": "Work = mgh = 100 J; average power = 100/5 = 20 W."
+  },
+  {
+    "q": "A motor's average power is 2.5 kW for 8 s. Work done is:",
+    "o": [
+      "20 J",
+      "312.5 J",
+      "2000 J",
+      "20,000 J"
+    ],
+    "a": 3,
+    "e": "W = 2500 × 8 = 20,000 J."
+  },
+  {
+    "q": "A 100 W lamp is switched on for 2 hours. Energy consumed is:",
+    "o": [
+      "0.02 kWh",
+      "0.2 kWh",
+      "2 kWh",
+      "200 kWh"
+    ],
+    "a": 1,
+    "e": "Energy = 0.1 kW × 2 h = 0.2 kWh."
+  },
+  {
+    "q": "A vehicle does 1.8 MJ of work in 60 s. Its average power is:",
+    "o": [
+      "3 kW",
+      "18 kW",
+      "30 kW",
+      "108 kW"
+    ],
+    "a": 2,
+    "e": "1.8 MJ / 60 s = 30,000 W = 30 kW."
+  },
+  {
+    "q": "Average power is a scalar because it is calculated from:",
+    "o": [
+      "Work and time",
+      "Force and displacement direction",
+      "Velocity and force direction",
+      "Momentum and acceleration"
+    ],
+    "a": 0,
+    "e": "Work and elapsed time are scalars, so average power is scalar."
+  },
+  {
+    "q": "A person does 1500 J of work in 25 s. Average power is:",
+    "o": [
+      "30 W",
+      "50 W",
+      "60 W",
+      "75 W"
+    ],
+    "a": 2,
+    "e": "P_avg = 1500/25 = 60 W."
+  },
+  {
+    "q": "A 750 W motor runs for 40 s. Work delivered is:",
+    "o": [
+      "18.75 J",
+      "300 J",
+      "30,000 J",
+      "300,000 J"
+    ],
+    "a": 2,
+    "e": "W = 750 × 40 = 30,000 J."
+  },
+  {
+    "q": "A machine does 500 J of work in 10 s, then 1000 J in the next 10 s. Average power over 20 s is:",
+    "o": [
+      "25 W",
+      "50 W",
+      "75 W",
+      "150 W"
+    ],
+    "a": 2,
+    "e": "Total work = 1500 J; average power = 1500/20 = 75 W."
+  },
+  {
+    "q": "A 40 kg child climbs a 2.5 m ladder in 5 s. Take g = 10 m/s². Average power is:",
+    "o": [
+      "100 W",
+      "200 W",
+      "400 W",
+      "500 W"
+    ],
+    "a": 1,
+    "e": "P_avg = mgh/t = 40 × 10 × 2.5 / 5 = 200 W."
+  },
+  {
+    "q": "A motor does 6000 J of work at average power 300 W. Time taken is:",
+    "o": [
+      "2 s",
+      "10 s",
+      "20 s",
+      "1800 s"
+    ],
+    "a": 2,
+    "e": "t = W/P = 6000/300 = 20 s."
+  },
+  {
+    "q": "Which relation correctly gives average power?",
+    "o": [
+      "P_avg = Δt/W",
+      "P_avg = W/Δt",
+      "P_avg = F/a",
+      "P_avg = mv"
+    ],
+    "a": 1,
+    "e": "Average power is work done divided by elapsed time."
+  },
+  {
+    "q": "A 3 kW motor runs for 2 minutes. Energy delivered is:",
+    "o": [
+      "6 kJ",
+      "60 kJ",
+      "360 kJ",
+      "3600 kJ"
+    ],
+    "a": 2,
+    "e": "E = 3000 W × 120 s = 360,000 J = 360 kJ."
+  },
+  {
+    "q": "A lift raises a 500 kg load by 10 m in 25 s. Take g = 10 m/s². Average power is:",
+    "o": [
+      "200 W",
+      "2000 W",
+      "20,000 W",
+      "50,000 W"
+    ],
+    "a": 1,
+    "e": "P_avg = mgh/t = 500 × 10 × 10 / 25 = 2000 W."
+  },
+  {
+    "q": "A machine does 10,000 J of work in 50 s. Average power is:",
+    "o": [
+      "100 W",
+      "200 W",
+      "500 W",
+      "2000 W"
+    ],
+    "a": 1,
+    "e": "P_avg = 10,000/50 = 200 W."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

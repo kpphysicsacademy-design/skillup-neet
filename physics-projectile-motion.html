@@ -3,139 +3,131 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Projectile Motion</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Projectile Motion quiz">
+<title>SkillUp | Projectile Motion — Easy Quiz</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}
-.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}
-.top{display:flex;justify-content:flex-end;align-items:center;margin-bottom:20px}
-.xp{background:#fff;padding:14px 20px;border-radius:18px;box-shadow:0 5px 18px rgba(23,32,51,.08);font-weight:700;color:#23405f}
-.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px;box-shadow:0 8px 22px rgba(18,83,157,.18)}
-.hero small{font-size:.82rem;letter-spacing:.02em}
-.hero h1{margin:10px 0 12px;font-size:1.85rem;line-height:1.15}
-.hero p{margin:0;font-size:.98rem}
-.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 20px rgba(23,32,51,.07)}
-.progress-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:750}
-.bar{height:12px;background:#dfe8f1;border-radius:999px;overflow:hidden}
-.fill{height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .3s ease}
-.qnum{font-size:.9rem;font-weight:800;color:#35516f;margin-bottom:12px}
-.question{font-size:1.28rem;line-height:1.45;margin:0 0 18px;font-weight:750}
-.options{display:grid;gap:10px}
-.option{width:100%;padding:14px 15px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;color:#172033;cursor:pointer;transition:transform .12s ease,border-color .12s ease,background .12s ease,box-shadow .12s ease}
-.option:hover,.option:focus-visible{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px);outline:none;box-shadow:0 4px 10px rgba(88,204,2,.12)}
-.option.selected{border-color:#1685e8;background:#eef7ff}
-.option.correct{border-color:#58cc02;background:#eaffdf}
-.option.wrong{border-color:#e5484d;background:#fff0f0}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.btn{padding:12px 18px;border:0;border-radius:13px;font-weight:850;cursor:pointer;transition:transform .12s ease,filter .12s ease,box-shadow .12s ease}
-.btn:hover:not(:disabled),.btn:focus-visible:not(:disabled){transform:translateY(-1px);filter:brightness(1.03);box-shadow:0 5px 12px rgba(23,32,51,.12);outline:none}
-.btn:active:not(:disabled){transform:translateY(1px)}
-.check{background:#2db84d;color:#fff}
-.next{background:#dcecff;color:#145b9e}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.feedback{margin-top:14px;padding:13px;border-radius:14px;font-weight:700;min-height:20px}
-.good{background:#e5f9e9;color:#176c31}
-.bad{background:#fff0f0;color:#a12b30}
-.hint{color:#51647a;margin:14px 0 0}
-.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:750;text-decoration:underline;text-underline-offset:3px;padding:9px 12px;border-radius:12px;transition:transform .12s ease,background .12s ease,box-shadow .12s ease}
-.back:hover,.back:focus-visible{background:#f0edff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(81,70,165,.12);outline:none}
-.back:active{transform:translateY(1px)}
-@media(max-width:600px){.wrap{padding:20px 14px 34px}.hero{padding:22px 18px}.hero h1{font-size:1.55rem}.question{font-size:1.15rem}.card{padding:17px;border-radius:18px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
-<main class="wrap">
-  <div class="top"><div class="xp">⚡ <span id="xp">0</span> XP</div></div>
-
-  <section class="hero">
-    <small>PHYSICS • NEET 2026</small>
-    <h1>Projectile motion</h1>
-    <p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p>
-  </section>
-
-  <section class="card">
-    <div class="progress-head"><span>🎯 Progress</span><span id="mt">0 / 15</span></div>
-    <div class="bar"><div id="fill" class="fill"></div></div>
-  </section>
-
-  <section class="card">
-    <div class="qnum" id="count">Question 1 of 15</div>
-    <h2 class="question" id="q"></h2>
-    <div id="opts" class="options"></div>
-    <div class="actions">
-      <button id="check" class="btn check">Check Answer</button>
-      <button id="next" class="btn next" disabled>Next Question →</button>
-    </div>
-    <div id="fb" class="feedback"></div>
-    <p class="hint">💡 Choose the best answer.</p>
-  </section>
-
-  <a href="physics-home.html" id="back" class="back">← Back to Physics Path</a>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Projectile Motion</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
 </main>
 <script>
 (function(){
-const quiz=[
-['In ideal projectile motion, the horizontal acceleration is:',['g','2g','0','g/2'],2],
-['In ideal projectile motion, the vertical acceleration is:',['0','g downward','g upward','variable'],1],
-['At the highest point of a projectile, its vertical velocity component is:',['Maximum','Zero','Equal to g','Equal to horizontal velocity'],1],
-['For a projectile launched with speed u at angle θ, the horizontal component of initial velocity is:',['u sinθ','u cosθ','u tanθ','u/ cosθ'],1],
-['For a projectile launched with speed u at angle θ, the vertical component of initial velocity is:',['u cosθ','u sinθ','u tanθ','u'],1],
-['The time of flight of a projectile returning to the same level is:',['u cosθ/g','2u sinθ/g','u sinθ/g','2u cosθ/g'],1],
-['The maximum height reached by a projectile launched from ground is:',['u² cos²θ/(2g)','u² sin²θ/(2g)','u² sinθ/g','u²/g'],1],
-['The horizontal range of a projectile on level ground is:',['u² sinθ/g','u² cosθ/g','u² sin2θ/g','2u² sinθ/g'],2],
-['For a given launch speed on level ground, the maximum range occurs at:',['30°','45°','60°','90°'],1],
-['Two complementary projection angles θ and (90°−θ) with the same speed produce:',['Same maximum height','Same time of flight','Same range','Same vertical velocity'],2],
-['The trajectory of an ideal projectile is:',['Circular','Parabolic','Straight line','Elliptical'],1],
-['At the highest point of a projectile, the acceleration is:',['Zero','g downward','g upward','Horizontal'],1],
-['If air resistance is neglected, the horizontal component of velocity during projectile motion is:',['Constant','Continuously increasing','Continuously decreasing','Zero at the highest point'],0],
-['A projectile is fired horizontally from a height. Its initial vertical velocity component is:',['u','g','0','u/2'],2],
-['For a projectile returning to the same level, the speed at the point of projection and the speed on return are:',['Always different','Equal in magnitude','Equal only at 45°','Zero on return'],1]
-];
-let i=0,selected=-1,score=0;
+'use strict';
+const questions = [{"q":"Projectile motion is motion under the influence of…","o":["Gravity alone after launch (neglecting air resistance)","A constant horizontal force only","No acceleration","Friction only"],"a":0,"e":"For ideal projectile motion, gravity is the only acceleration after launch."},{"q":"The horizontal acceleration of an ideal projectile is…","o":["g","Zero","g/2","Increasing"],"a":1,"e":"With air resistance neglected, no horizontal force acts, so horizontal acceleration is zero."},{"q":"The vertical acceleration of a projectile near Earth is…","o":["Zero","g upward","g downward","Changing with its horizontal speed"],"a":2,"e":"Gravity gives the projectile a constant downward acceleration of magnitude g."},{"q":"At the highest point of a projectile's path, its vertical velocity is…","o":["Maximum","Zero","Equal to its horizontal velocity","Always g"],"a":1,"e":"At the top, the vertical component momentarily becomes zero."},{"q":"At the highest point, the acceleration of a projectile is…","o":["Zero","g upward","g downward","Horizontal"],"a":2,"e":"Gravity continues to act downward even at the highest point."},{"q":"A projectile is launched at speed u and angle θ. Its initial horizontal velocity is…","o":["u sin θ","u cos θ","u tan θ","u/g"],"a":1,"e":"Resolving the initial velocity gives uₓ = u cos θ."},{"q":"The initial vertical component of velocity is…","o":["u cos θ","u sin θ","u² sin θ","g cos θ"],"a":1,"e":"Resolving the launch velocity vertically gives uᵧ = u sin θ."},{"q":"The time of flight for a projectile landing at its launch height is…","o":["u cos θ/g","2u sin θ/g","u sin θ/2g","u² sin 2θ/g"],"a":1,"e":"For equal launch and landing heights, T = 2u sin θ/g."},{"q":"The maximum height of a projectile launched at speed u and angle θ is…","o":["u² cos² θ/2g","u² sin² θ/2g","u sin θ/g","u² sin 2θ/g"],"a":1,"e":"Maximum height is H = (u sin θ)²/(2g)."},{"q":"The horizontal range for a projectile landing at launch height is…","o":["u² sin 2θ/g","u² cos θ/g","2u sin θ/g","u² tan θ/2g"],"a":0,"e":"Range is R = (u² sin 2θ)/g under ideal equal-height conditions."},{"q":"For a fixed launch speed on level ground, maximum range occurs at…","o":["30°","45°","60°","90°"],"a":1,"e":"The range is greatest when sin 2θ = 1, which gives θ = 45°."},{"q":"For the same launch speed on level ground, complementary launch angles give…","o":["Equal maximum heights","Equal ranges","Equal times of flight","Equal vertical components"],"a":1,"e":"Angles θ and 90° − θ have the same sin 2θ, so their ranges match."},{"q":"A projectile is launched horizontally from a height. Its initial vertical velocity is…","o":["Equal to launch speed","Zero","g","Negative launch speed"],"a":1,"e":"A horizontal launch has no initial vertical component."},{"q":"A ball is launched horizontally at 10 m/s and travels for 3 s. Neglecting air resistance, its horizontal displacement is…","o":["3 m","10 m","30 m","45 m"],"a":2,"e":"Horizontal speed stays 10 m/s, so displacement = 10 × 3 = 30 m."},{"q":"Using g = 10 m/s², a projectile's initial vertical velocity is 20 m/s. Time to reach the highest point is…","o":["1 s","2 s","4 s","5 s"],"a":1,"e":"At the top vᵧ = 0, so t = uᵧ/g = 20/10 = 2 s."},{"q":"Using g = 10 m/s², a projectile's vertical launch component is 20 m/s. Its maximum height is…","o":["10 m","20 m","40 m","100 m"],"a":1,"e":"H = uᵧ²/(2g) = 400/20 = 20 m."},{"q":"A projectile is launched at 20 m/s at 30°. Take g = 10 m/s². Its time of flight to the same height is…","o":["1 s","2 s","3 s","4 s"],"a":1,"e":"T = 2u sin 30°/g = 2×20×0.5/10 = 2 s."},{"q":"A projectile is launched at 20 m/s at 30°. Take g = 10 m/s². Its range is…","o":["20√3 m","20 m","40 m","40√3 m"],"a":0,"e":"R = u² sin 60°/g = 400(√3/2)/10 = 20√3 m."},{"q":"The trajectory of an ideal projectile is a…","o":["Circle","Straight line","Parabola","Hyperbola"],"a":2,"e":"Constant horizontal velocity and constant vertical acceleration produce a parabolic path."},{"q":"At any point in ideal projectile motion, the horizontal velocity component is…","o":["Constant","Always zero","Increasing due to gravity","Equal to vertical velocity"],"a":0,"e":"Gravity acts vertically, so horizontal velocity remains constant."},{"q":"At the top of the trajectory, the projectile's speed is…","o":["Zero","Equal to its initial speed","Equal to the horizontal component of velocity","Always g"],"a":2,"e":"Vertical velocity is zero at the top, leaving only the constant horizontal component."},{"q":"If a projectile is launched vertically upward, its horizontal range is…","o":["Maximum","Zero","Equal to its height","Infinite"],"a":1,"e":"With a vertical launch there is no horizontal velocity component, so horizontal range is zero."},{"q":"Two projectiles are launched with the same speed at 30° and 60° on level ground. Their ranges are…","o":["Equal","In a 1:2 ratio","In a 2:1 ratio","Both zero"],"a":0,"e":"The angles are complementary and give equal sin 2θ, so the ranges are equal."},{"q":"A projectile has horizontal velocity 15 m/s and vertical velocity 20 m/s at launch. Its launch speed is…","o":["5 m/s","25 m/s","35 m/s","300 m/s"],"a":1,"e":"u = √(15² + 20²) = √625 = 25 m/s."},{"q":"A projectile's horizontal velocity is 12 m/s and vertical launch velocity is 5 m/s. Its launch angle above horizontal is approximately…","o":["23°","45°","67°","90°"],"a":0,"e":"tan θ = 5/12, giving θ ≈ 22.6°."},{"q":"A projectile is launched at 25 m/s at 37°. Use sin 37° ≈ 0.6 and cos 37° ≈ 0.8. Its horizontal velocity is…","o":["10 m/s","15 m/s","20 m/s","25 m/s"],"a":2,"e":"uₓ = u cos θ = 25 × 0.8 = 20 m/s."},{"q":"For a projectile launched and landing at the same height, the time going up equals the time coming down because…","o":["Horizontal velocity reverses","Vertical motion is symmetric under constant gravity","Gravity becomes zero at the top","The path is a circle"],"a":1,"e":"With equal start and end heights and constant gravity, ascent and descent times are equal."},{"q":"If launch speed is doubled at the same angle, the ideal range becomes…","o":["Twice as large","Three times as large","Four times as large","Unchanged"],"a":2,"e":"Range is proportional to u², so doubling speed multiplies range by four."},{"q":"If launch speed is fixed and the launch angle changes from 30° to 60°, the ideal range…","o":["Doubles","Halves","Remains equal","Becomes zero"],"a":2,"e":"The angles are complementary, so sin 60° and sin 120° are equal in the range formula."},{"q":"For a projectile launched at 45° on level ground, the range is…","o":["u²/(2g)","u²/g","2u²/g","u/g"],"a":1,"e":"At 45°, sin 90° = 1, so R = u²/g."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
 const $=id=>document.getElementById(id);
-const q=$('q'),opts=$('opts'),fb=$('fb'),check=$('check'),next=$('next');
 function render(){
-  const a=quiz[i]; selected=-1; q.textContent=a[0];
-  $('count').textContent='Question '+(i+1)+' of '+quiz.length;
-  opts.innerHTML=''; fb.textContent=''; fb.className='feedback';
-  check.disabled=false; next.disabled=true; next.textContent=i===quiz.length-1?'Finish Skill →':'Next Question →';
-  const order=a[1].map((text,index)=>({text,index}));
-  for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}
-  order.forEach((item,j)=>{
-    const b=document.createElement('button'); b.className='option';
-    b.textContent=String.fromCharCode(65+j)+'. '+item.text; b.dataset.index=item.index;
-    b.onclick=()=>{selected=item.index;[...opts.children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};
-    opts.appendChild(b);
-  });
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
 }
-check.onclick=()=>{
-  if(selected<0){fb.className='feedback bad';fb.textContent='Choose an answer first 👆';return}
-  const a=quiz[i],correct=selected===a[2];
-  [...opts.children].forEach(b=>{const originalIndex=Number(b.dataset.index);b.disabled=true;if(originalIndex===a[2])b.classList.add('correct');if(originalIndex===selected&&!correct)b.classList.add('wrong')});
-  if(correct){score++;fb.className='feedback good';fb.textContent='🎯 Correct! +10 XP'}
-  else{fb.className='feedback bad';fb.textContent='Not quite. Correct answer: '+a[1][a[2]]}
-  $('xp').textContent=score*10; $('mt').textContent=score+' / '+quiz.length; $('fill').style.width=(score/quiz.length*100)+'%';
-  check.disabled=true; next.disabled=false;
-};
-next.onclick=()=>{
-  if(i<quiz.length-1){i++;render();window.scrollTo({top:0,behavior:'smooth'})}
-  else{
-    q.textContent='🏆 Projectile motion Complete!';opts.innerHTML='';check.style.display='none';next.style.display='none';
-    fb.className='feedback good';fb.textContent='Skill complete. '+score+' / '+quiz.length+' correct • '+score*10+' XP';
-  }
-};
-$('back').onclick=function(){
-  const saved=sessionStorage.getItem('skillupLastPhysicsPath');
-  if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}
-  if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}
-  location.href='physics-home.html'; return false;
-};
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
 render();
 })();
 </script>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

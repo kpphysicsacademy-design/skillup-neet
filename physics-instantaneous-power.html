@@ -1,6 +1,495 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Instantaneous Power</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:flex-end;margin-bottom:20px}.xp{background:#fff;padding:12px 18px;border-radius:18px;box-shadow:0 5px 18px #17203314;font-weight:800}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px;box-shadow:0 8px 22px #12539d25}.hero h1{margin:9px 0 10px;font-size:1.9rem}.hero p{margin:0}.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 20px #17203312}.progress-head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:12px;background:#dfe8f1;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .3s}.qnum{font-size:.9rem;font-weight:800;color:#35516f;margin-bottom:12px}.question{font-size:1.28rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{width:100%;padding:14px 15px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;font-weight:850;cursor:pointer;background:#2db84d;color:#fff;box-shadow:0 4px 0 #21863a}.feedback{margin-top:14px;padding:13px;border-radius:14px;font-weight:700}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:800;text-decoration:none;padding:9px 12px;border-radius:12px}.back:hover{background:#f0edff}@media(max-width:600px){.wrap{padding:20px 14px 34px}.question{font-size:1.15rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="xp">⚡ <span id="xp">0</span> XP</div></div><section class="hero"><h1>⚡ Instantaneous Power</h1><p>LEARN → PRACTICE → MASTER • 15 NEET-style MCQs</p></section><section class="card"><div class="progress-head"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count">Question 1 of 15</div><h2 id="question" class="question"></h2><div id="options" class="options"></div><button id="continue" class="btn">Continue →</button><div id="feedback" class="feedback"></div></section><a id="back" class="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['Instantaneous power is defined as:',['dW/dt','W×t','W/t always','d t/dW'],0],['For a force acting on a particle, instantaneous power is:',['F·v','F/v','F·a','F×t'],0],['The SI unit of power is:',['watt','joule','newton','pascal'],0],['One watt is equal to:',['1 J/s','1 N/s','1 J·s','1 N·m/s²'],0],['If force is perpendicular to instantaneous velocity, power due to that force is:',['zero','maximum','negative infinity','equal to F'],0],['A constant force of 10 N acts along velocity 3 m/s. Instantaneous power is:',['30 W','13 W','3 W','300 W'],0],['If force and velocity make angle θ, instantaneous power is:',['Fv cosθ','Fv sinθ','F/v','Fv tanθ'],0],['At θ=0°, power delivered by a force is:',['Fv','zero','F/v','F+v'],0],['At θ=90°, power delivered by a force is:',['zero','Fv','F/v','F²v'],0],['A motor exerts 500 N in the direction of motion at 4 m/s. Its instantaneous power is:',['2000 W','125 W','504 W','1000 W'],0],['If speed doubles while a constant force remains parallel to motion, instantaneous power:',['doubles','halves','becomes four times','is unchanged'],0],['For uniform circular motion, centripetal force does instantaneous power because it is:',['perpendicular to velocity','parallel to velocity','equal to velocity','zero force'],0],['The area under a power-time graph represents:',['work/energy transferred','force','momentum','acceleration'],0],['If power is constant, work done in time t is:',['Pt','P/t','P+t','t/P'],0],['Which expression correctly relates power, force and velocity?',['P=Fv cosθ','P=Fv sinθ always','P=ma/v','P=mv/F'],0]];let i=0,s=-1,score=0,checked=false;const $=x=>document.getElementById(x);function render(){let a=quiz[i];s=-1;checked=false;$('count').textContent='Question '+(i+1)+' of 15';$('question').textContent=a[0];$('options').innerHTML='';$('feedback').textContent='';$('feedback').className='feedback';$('continue').textContent=i===14?'Finish Skill →':'Continue →';let order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k;k--){let r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{let b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{s=x.index;[...$('options').children].forEach(z=>z.classList.remove('selected'));b.classList.add('selected')};$('options').appendChild(b)})}$('continue').onclick=()=>{if(!checked){if(s<0){$('feedback').className='feedback bad';$('feedback').textContent='Choose an answer first 👆';return}checked=true;let a=quiz[i],ok=s===a[2];[...$('options').children].forEach(b=>{let x=+b.dataset.index;b.disabled=true;if(x===a[2])b.classList.add('correct');if(x===s&&!ok)b.classList.add('wrong')});if(ok){score++;$('feedback').className='feedback good';$('feedback').textContent='🎯 Correct! +10 XP'}else{$('feedback').className='feedback bad';$('feedback').textContent='✗ Correct answer: '+a[1][a[2]]}$('xp').textContent=score*10;$('mastery').textContent=score+' / 15';$('fill').style.width=score/15*100+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$('question').textContent='🏆 Instantaneous Power Complete!';$('options').innerHTML='';$('continue').style.display='none';$('feedback').className='feedback good';$('feedback').textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Instantaneous Power quiz">
+<title>SkillUp | Instantaneous Power — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Instantaneous Power</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "Instantaneous power is the rate of doing work at a particular:",
+    "o": [
+      "moment",
+      "distance",
+      "mass",
+      "temperature"
+    ],
+    "a": 0,
+    "e": "Instantaneous power is the rate at which work is done at a given instant: P = dW/dt."
+  },
+  {
+    "q": "The SI unit of power is:",
+    "o": [
+      "watt",
+      "joule",
+      "newton",
+      "pascal"
+    ],
+    "a": 0,
+    "e": "Power is measured in watts (W), where 1 W = 1 J/s."
+  },
+  {
+    "q": "For a particle moving with velocity v under force F, instantaneous power is:",
+    "o": [
+      "F · v",
+      "F · a",
+      "F/v",
+      "F + v"
+    ],
+    "a": 0,
+    "e": "The instantaneous power delivered by a force is the dot product P = F · v."
+  },
+  {
+    "q": "If force F and velocity v make angle θ, power is:",
+    "o": [
+      "Fv cos θ",
+      "Fv sin θ",
+      "F/v",
+      "Fv tan θ"
+    ],
+    "a": 0,
+    "e": "The dot product gives P = Fv cos θ."
+  },
+  {
+    "q": "A 10 N force acts along motion at 3 m/s. Power is:",
+    "o": [
+      "30 W",
+      "13 W",
+      "3 W",
+      "300 W"
+    ],
+    "a": 0,
+    "e": "P = Fv = 10 × 3 = 30 W when force and velocity are parallel."
+  },
+  {
+    "q": "A 20 N force acts opposite to velocity 2 m/s. Power is:",
+    "o": [
+      "−40 W",
+      "40 W",
+      "10 W",
+      "0 W"
+    ],
+    "a": 0,
+    "e": "The angle is 180°, so P = Fv cos 180° = −20 × 2 = −40 W."
+  },
+  {
+    "q": "When force is perpendicular to velocity, its instantaneous power is:",
+    "o": [
+      "zero",
+      "Fv",
+      "−Fv",
+      "F/v"
+    ],
+    "a": 0,
+    "e": "At 90°, cos 90° = 0, so the force does no instantaneous work."
+  },
+  {
+    "q": "If θ = 0° between force and velocity, power equals:",
+    "o": [
+      "Fv",
+      "zero",
+      "−Fv",
+      "F/v"
+    ],
+    "a": 0,
+    "e": "For parallel force and velocity, cos 0° = 1, so P = Fv."
+  },
+  {
+    "q": "A 50 N force makes 60° with velocity 4 m/s. Power is:",
+    "o": [
+      "100 W",
+      "200 W",
+      "50 W",
+      "400 W"
+    ],
+    "a": 0,
+    "e": "P = Fv cos 60° = 50 × 4 × 0.5 = 100 W."
+  },
+  {
+    "q": "A 100 N force acts at 120° to velocity 2 m/s. Power is:",
+    "o": [
+      "−100 W",
+      "100 W",
+      "200 W",
+      "−200 W"
+    ],
+    "a": 0,
+    "e": "P = 100 × 2 × cos 120° = 200 × (−0.5) = −100 W."
+  },
+  {
+    "q": "If force stays constant and parallel to motion, doubling speed makes power:",
+    "o": [
+      "double",
+      "halve",
+      "four times as large",
+      "unchanged"
+    ],
+    "a": 0,
+    "e": "P = Fv, so with constant F, power is directly proportional to speed."
+  },
+  {
+    "q": "If velocity is zero at an instant, force's instantaneous power is:",
+    "o": [
+      "zero",
+      "always maximum",
+      "always negative",
+      "equal to force"
+    ],
+    "a": 0,
+    "e": "P = F · v; when v = 0, instantaneous power is zero."
+  },
+  {
+    "q": "A 500 N driving force moves a vehicle at 10 m/s. Power is:",
+    "o": [
+      "5000 W",
+      "500 W",
+      "50 W",
+      "510 W"
+    ],
+    "a": 0,
+    "e": "P = Fv = 500 × 10 = 5000 W, or 5 kW."
+  },
+  {
+    "q": "A motor delivers 2 kW while moving at 5 m/s. The parallel force is:",
+    "o": [
+      "400 N",
+      "10,000 N",
+      "250 N",
+      "100 N"
+    ],
+    "a": 0,
+    "e": "P = Fv, so F = P/v = 2000/5 = 400 N."
+  },
+  {
+    "q": "A force of 8 N acts along a velocity of 6 m/s. Instantaneous power is:",
+    "o": [
+      "48 W",
+      "14 W",
+      "2 W",
+      "36 W"
+    ],
+    "a": 0,
+    "e": "P = 8 × 6 = 48 W."
+  },
+  {
+    "q": "Which expression gives instantaneous power from work W?",
+    "o": [
+      "dW/dt",
+      "W × t",
+      "W + t",
+      "dt/dW"
+    ],
+    "a": 0,
+    "e": "Power is the time derivative of work: P = dW/dt."
+  },
+  {
+    "q": "If work changes as W = 4t² joules, power at t = 3 s is:",
+    "o": [
+      "24 W",
+      "12 W",
+      "36 W",
+      "8 W"
+    ],
+    "a": 0,
+    "e": "P = dW/dt = 8t, so at 3 s, P = 24 W."
+  },
+  {
+    "q": "If W = 6t joules, instantaneous power is:",
+    "o": [
+      "6 W",
+      "6t W",
+      "t/6 W",
+      "12t W"
+    ],
+    "a": 0,
+    "e": "Differentiating W = 6t gives P = dW/dt = 6 W."
+  },
+  {
+    "q": "Work done is W = 3t³ joules. Power at t = 2 s is:",
+    "o": [
+      "36 W",
+      "18 W",
+      "24 W",
+      "72 W"
+    ],
+    "a": 0,
+    "e": "P = dW/dt = 9t²; at 2 s, P = 9 × 4 = 36 W."
+  },
+  {
+    "q": "The slope of a work-versus-time graph at an instant represents:",
+    "o": [
+      "instantaneous power",
+      "instantaneous force",
+      "momentum",
+      "displacement"
+    ],
+    "a": 0,
+    "e": "The gradient dW/dt is the instantaneous rate of doing work, or power."
+  },
+  {
+    "q": "The area under a power-time graph over an interval gives:",
+    "o": [
+      "work done",
+      "force",
+      "velocity",
+      "acceleration"
+    ],
+    "a": 0,
+    "e": "Integrating power over time gives energy transferred: W = ∫P dt."
+  },
+  {
+    "q": "In uniform circular motion, centripetal force has zero instantaneous power because it is:",
+    "o": [
+      "perpendicular to velocity",
+      "parallel to velocity",
+      "always absent",
+      "equal to speed"
+    ],
+    "a": 0,
+    "e": "Centripetal force is radial while velocity is tangential, so their dot product is zero."
+  },
+  {
+    "q": "A force of 12 N acts at 30° to velocity 5 m/s. Power is approximately:",
+    "o": [
+      "52 W",
+      "60 W",
+      "30 W",
+      "12 W"
+    ],
+    "a": 0,
+    "e": "P = 12 × 5 × cos 30° ≈ 60 × 0.866 ≈ 52 W."
+  },
+  {
+    "q": "A 40 N force acts at 90° to velocity 7 m/s. Power is:",
+    "o": [
+      "0 W",
+      "280 W",
+      "47 W",
+      "−280 W"
+    ],
+    "a": 0,
+    "e": "P = Fv cos 90° = 0."
+  },
+  {
+    "q": "A 15 N force opposes motion at 4 m/s. Power delivered by the force is:",
+    "o": [
+      "−60 W",
+      "60 W",
+      "19 W",
+      "0 W"
+    ],
+    "a": 0,
+    "e": "Opposite force means θ = 180°; P = −Fv = −15 × 4 = −60 W."
+  },
+  {
+    "q": "A machine's output power is 600 W at speed 3 m/s. The parallel output force is:",
+    "o": [
+      "200 N",
+      "1800 N",
+      "603 N",
+      "20 N"
+    ],
+    "a": 0,
+    "e": "F = P/v = 600/3 = 200 N."
+  },
+  {
+    "q": "If force and velocity point in the same direction, power delivered by the force is:",
+    "o": [
+      "positive",
+      "negative",
+      "always zero",
+      "undefined"
+    ],
+    "a": 0,
+    "e": "For an angle of 0°, P = Fv is positive for positive F and speed."
+  },
+  {
+    "q": "If force and velocity point in opposite directions, power delivered by the force is:",
+    "o": [
+      "negative",
+      "positive",
+      "always zero",
+      "infinite"
+    ],
+    "a": 0,
+    "e": "At 180°, the dot product is negative; the force removes kinetic energy."
+  },
+  {
+    "q": "A 2 kN force acts along motion at 4 m/s. Power is:",
+    "o": [
+      "8 kW",
+      "500 W",
+      "2 kW",
+      "0.5 kW"
+    ],
+    "a": 0,
+    "e": "2 kN = 2000 N; P = 2000 × 4 = 8000 W = 8 kW."
+  },
+  {
+    "q": "A force F = 3i + 4j N acts on velocity v = 2i m/s. Instantaneous power is:",
+    "o": [
+      "6 W",
+      "8 W",
+      "14 W",
+      "10 W"
+    ],
+    "a": 0,
+    "e": "P = F · v = (3i + 4j) · (2i) = 6 W; the j component contributes zero."
+  }
+]; //
+{q:"What is a physical quantity?",o:["Something we can measure","A feeling","A colour only","A name only"],a:0,e:"A physical quantity can be measured, such as length, time or mass."},
+{q:"Which one is a physical quantity?",o:["Kindness","Beauty","Length","Honesty"],a:2,e:"Length can be measured in metres or other length units."},
+{q:"Which pair contains two physical quantities?",o:["Mass and time","Love and kindness","Beauty and honesty","Colour and kindness"],a:0,e:"Mass and time can both be measured."},
+{q:"A measurement usually has:",o:["A number and a unit","A unit only","A picture only","A number only"],a:0,e:"For example, 5 m has the number 5 and the unit metre (m)."},
+{q:"In the measurement 2 m, what is the number?",o:["m","2","2 m","metre"],a:1,e:"The numerical value is 2. The unit is metre."},
+{q:"In 7 seconds, what is the unit?",o:["7","Seconds","Time","Measurement"],a:1,e:"Seconds (s) is the unit used to express time."},
+{q:"Which is a scalar quantity?",o:["Force","Velocity","Mass","Displacement"],a:2,e:"Mass has magnitude but no direction, so it is a scalar."},
+{q:"Which quantity has both size and direction?",o:["Time","Temperature","Mass","Displacement"],a:3,e:"Displacement has magnitude and direction, so it is a vector."},
+{q:"Which is a derived quantity?",o:["Length","Mass","Time","Speed"],a:3,e:"Speed is calculated using distance divided by time."},
+{q:"Which is an SI base quantity?",o:["Force","Energy","Length","Speed"],a:2,e:"Length is one of the seven SI base quantities."},
+{q:"What is the SI base unit of length?",o:["Centimetre","Metre","Kilometre","Inch"],a:1,e:"The metre (m) is the SI base unit of length."},
+{q:"What is the SI base unit of mass?",o:["Gram","Kilogram","Tonne","Milligram"],a:1,e:"The kilogram (kg) is the SI base unit of mass."},
+{q:"What is the SI base unit of time?",o:["Minute","Hour","Second","Day"],a:2,e:"The second (s) is the SI base unit of time."},
+{q:"Which is a vector quantity?",o:["Distance","Speed","Temperature","Velocity"],a:3,e:"Velocity includes both magnitude and direction."},
+{q:"Which is a scalar quantity?",o:["Force","Acceleration","Temperature","Displacement"],a:2,e:"Temperature has magnitude but no direction."},
+{q:"Which is NOT an SI base quantity?",o:["Electric current","Temperature","Speed","Time"],a:2,e:"Speed is derived from length divided by time."},
+{q:"What is the SI base unit of temperature?",o:["Celsius degree","Kelvin","Joule","Calorie"],a:1,e:"Kelvin (K) is the SI base unit of thermodynamic temperature."},
+{q:"What is the SI base unit of electric current?",o:["Volt","Ampere","Coulomb","Ohm"],a:1,e:"Electric current is measured in amperes (A)."},
+{q:"What is the SI base unit of amount of substance?",o:["Gram","Mole","Litre","Molecule"],a:1,e:"The mole (mol) is the SI base unit of amount of substance."},
+{q:"What is the SI base unit of luminous intensity?",o:["Lumen","Lux","Candela","Watt"],a:2,e:"Candela (cd) is the SI base unit of luminous intensity."},
+{q:"Which unit measures force?",o:["Joule","Watt","Newton","Pascal"],a:2,e:"Force is measured in newtons (N)."},
+{q:"Which unit measures area?",o:["m","m²","m³","kg"],a:1,e:"Area is measured in square metres (m²)."},
+{q:"Which unit measures volume?",o:["m","m²","m³","s"],a:2,e:"Volume is measured in cubic metres (m³)."},
+{q:"Which unit measures energy?",o:["Watt","Joule","Newton","Pascal"],a:1,e:"Energy is measured in joules (J)."},
+{q:"Which unit measures frequency?",o:["Hertz","Second","Metre","Watt"],a:0,e:"Frequency is measured in hertz (Hz)."},
+{q:"1 metre is equal to:",o:["10 cm","100 cm","1000 cm","0.1 cm"],a:1,e:"One metre equals 100 centimetres."},
+{q:"How many metres are in 3 kilometres?",o:["30 m","300 m","3000 m","30,000 m"],a:2,e:"1 km = 1000 m, so 3 km = 3000 m."},
+{q:"A tablet has a small mass. Which unit is most suitable?",o:["Kilometre","Tonne","Milligram","Hour"],a:2,e:"Milligrams are useful for expressing the small mass of a tablet."},
+{q:"Which pair shows the same length?",o:["1 m and 10 cm","2 m and 200 cm","5 km and 500 m","10 mm and 2 cm"],a:1,e:"2 m = 200 cm, so the two measurements are equal."},
+{q:"Why do we use units?",o:["To compare measurements clearly","To make measurements confusing","To remove the number","To change the quantity"],a:0,e:"Standard units help people measure and compare quantities consistently."}
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

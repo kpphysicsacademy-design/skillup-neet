@@ -61,14 +61,345 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
-<section class="hero"><h1>📏 Impulse</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="hero"><h1>💥 Impulse</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </main>
 <script>
 (function(){
 'use strict';
-const questions = [{"q":"Impulse delivered to an object equals its change in:","o":["Linear momentum","Kinetic energy","Mass","Displacement"],"a":0,"e":"The impulse-momentum theorem states that impulse equals change in momentum."},{"q":"What is the SI unit of impulse?","o":["N·s","N/s","J/s","kg/s"],"a":0,"e":"Impulse is measured in newton-seconds (N·s), equivalent to kg·m/s."},{"q":"Impulse is a:","o":["Vector quantity","Scalar quantity","Dimensionless quantity","Base SI quantity"],"a":0,"e":"Impulse is a vector because it equals the change in momentum."},{"q":"For a constant force F acting for time Δt, impulse is:","o":["FΔt","F/Δt","F + Δt","F − Δt"],"a":0,"e":"For constant force, impulse J = FΔt."},{"q":"A force of 20 N acts for 0.5 s. The impulse is:","o":["10 N·s","40 N·s","20.5 N·s","0.025 N·s"],"a":0,"e":"J = FΔt = 20 × 0.5 = 10 N·s."},{"q":"The area under a force-time graph represents:","o":["Impulse","Work done","Acceleration","Kinetic energy"],"a":0,"e":"The area under an F–t graph is the integral of force over time, which is impulse."},{"q":"If net impulse on an object is zero, its momentum:","o":["Remains unchanged","Must become zero","Always doubles","Must reverse"],"a":0,"e":"Zero net impulse means Δp = 0, so momentum does not change."},{"q":"A 2 kg body changes velocity from 3 m/s to 7 m/s in the same direction. Its impulse is:","o":["8 N·s","4 N·s","10 N·s","14 N·s"],"a":0,"e":"J = m(v − u) = 2(7 − 3) = 8 N·s."},{"q":"A rectangular force-time graph has height 5 N and width 4 s. Its impulse is:","o":["20 N·s","9 N·s","1.25 N·s","25 N·s"],"a":0,"e":"Impulse equals graph area: 5 × 4 = 20 N·s."},{"q":"A player moves their hands backward while catching a ball mainly to:","o":["Increase stopping time and reduce average force","Increase average force","Reduce the ball's mass","Make impulse zero"],"a":0,"e":"For the same momentum change, increasing stopping time reduces average force."},{"q":"Airbags reduce injury mainly by:","o":["Increasing stopping time","Increasing passenger mass","Eliminating momentum change","Increasing impact speed"],"a":0,"e":"A longer time for a similar momentum change means a smaller average force."},{"q":"The dimensional formula of impulse is:","o":["[M L T⁻¹]","[M L T⁻²]","[M L² T⁻²]","[M T⁻²]"],"a":0,"e":"Impulse has the dimensions of momentum: mass × velocity = [M L T⁻¹]."},{"q":"A 0.5 kg ball at rest receives an impulse of 3 N·s. Its final speed is:","o":["6 m/s","1.5 m/s","3 m/s","0.6 m/s"],"a":0,"e":"J = Δp = mv, so v = 3/0.5 = 6 m/s."},{"q":"A 0.2 kg ball moving at 10 m/s is stopped. The magnitude of impulse is:","o":["2 N·s","0.02 N·s","10.2 N·s","50 N·s"],"a":0,"e":"The momentum change magnitude is mv = 0.2 × 10 = 2 kg·m/s = 2 N·s."},{"q":"Which statement correctly relates impulse and momentum?","o":["Impulse equals change in momentum","Impulse always equals momentum","Impulse equals momentum divided by mass","Impulse is independent of force and time"],"a":0,"e":"The impulse-momentum theorem gives J = Δp."},{"q":"A 4 N force acts on an object for 3 s. Its impulse is:","o":["12 N·s","7 N·s","1.33 N·s","0.75 N·s"],"a":0,"e":"J = FΔt = 4 × 3 = 12 N·s."},{"q":"A 1 kg object changes velocity from +6 m/s to +2 m/s. Its impulse is:","o":["−4 N·s","+4 N·s","+8 N·s","−8 N·s"],"a":0,"e":"J = m(v − u) = 1(2 − 6) = −4 N·s."},{"q":"A 3 kg object initially at rest receives an impulse of 12 N·s. Its final velocity magnitude is:","o":["4 m/s","9 m/s","12 m/s","36 m/s"],"a":0,"e":"J = mv, so v = 12/3 = 4 m/s."},{"q":"A 10 N force acts for 0.2 s. What is the impulse?","o":["2 N·s","50 N·s","10.2 N·s","0.02 N·s"],"a":0,"e":"J = 10 × 0.2 = 2 N·s."},{"q":"A 0.1 kg ball moving at 20 m/s rebounds at 10 m/s in the opposite direction. Taking the initial direction as positive, the impulse is:","o":["−3 N·s","+1 N·s","−1 N·s","+3 N·s"],"a":0,"e":"J = m(v − u) = 0.1(−10 − 20) = −3 N·s."},{"q":"For a given momentum change, if collision time doubles, average force magnitude:","o":["Halves","Doubles","Quadruples","Stays the same"],"a":0,"e":"F_avg = |Δp|/Δt, so doubling time halves the average force."},{"q":"A force-time graph lies below the time axis. Its signed impulse is:","o":["Negative","Positive","Always zero","Always infinite"],"a":0,"e":"Signed area below the time axis is negative, indicating impulse opposite the chosen positive direction."},{"q":"The impulse due to a varying force is found from:","o":["Signed area under the force-time graph","Area under a displacement-time graph","Slope of a distance-time graph","Mass divided by time"],"a":0,"e":"For a varying force, impulse is the integral of force over time, represented by signed area."},{"q":"A 2 kg body moving at 5 m/s is brought to rest in 0.5 s. The average force magnitude is:","o":["20 N","10 N","5 N","2 N"],"a":0,"e":"Momentum change magnitude = 2 × 5 = 10 N·s; average force = 10/0.5 = 20 N."},{"q":"Which situation has the greatest impulse magnitude?","o":["10 N for 1 s","5 N for 1 s","10 N for 0.5 s","2 N for 2 s"],"a":0,"e":"The impulse magnitudes are 10, 5, 5 and 4 N·s; 10 N for 1 s is greatest."},{"q":"A net force of 6 N acts for 2 s on a body. Its momentum changes by:","o":["12 kg·m/s","3 kg·m/s","8 kg·m/s","0 kg·m/s"],"a":0,"e":"Net impulse equals momentum change: Δp = FΔt = 6 × 2 = 12 kg·m/s."},{"q":"If a force is doubled and its duration is halved, impulse:","o":["Stays the same","Doubles","Halves","Becomes zero"],"a":0,"e":"J = FΔt; doubling F and halving Δt leaves the product unchanged."},{"q":"A 0.4 kg object changes velocity from 2 m/s to 8 m/s. The impulse magnitude is:","o":["2.4 N·s","1.6 N·s","3.2 N·s","4 N·s"],"a":0,"e":"J = m(v − u) = 0.4(8 − 2) = 2.4 N·s."},{"q":"Impulse can be zero even when a force acts if:","o":["The net signed impulse over the interval is zero","The force must always be zero","The object has no mass","The object is moving fast"],"a":0,"e":"Positive and negative force contributions can cancel, giving zero net impulse."},{"q":"A 2 kg object has its velocity changed from −3 m/s to +1 m/s. The impulse is:","o":["+8 N·s","−8 N·s","+4 N·s","−4 N·s"],"a":0,"e":"J = m(v − u) = 2[1 − (−3)] = +8 N·s."}];
+const questions = [
+  {
+    "q": "Impulse is defined as:",
+    "o": [
+      "Mass multiplied by acceleration only",
+      "Force divided by time",
+      "Change in speed only",
+      "Change in momentum"
+    ],
+    "a": 3,
+    "e": "Impulse equals the change in momentum of an object."
+  },
+  {
+    "q": "The SI unit of impulse is:",
+    "o": [
+      "N·s",
+      "N/s",
+      "kg/s",
+      "J/s"
+    ],
+    "a": 0,
+    "e": "Impulse has units N·s, equivalent to kg·m/s."
+  },
+  {
+    "q": "For a constant force F acting for time Δt, impulse is:",
+    "o": [
+      "F + Δt",
+      "FΔt",
+      "F/Δt",
+      "mF"
+    ],
+    "a": 1,
+    "e": "For constant force, impulse J = FΔt."
+  },
+  {
+    "q": "A 2 kg object changes velocity from 3 m/s to 7 m/s in the same direction. Its impulse is:",
+    "o": [
+      "14 N·s",
+      "10 N·s",
+      "8 N·s",
+      "4 N·s"
+    ],
+    "a": 2,
+    "e": "J = Δp = m(v−u) = 2(7−3) = 8 N·s."
+  },
+  {
+    "q": "A 1 kg ball moving at 5 m/s is brought to rest. The magnitude of impulse is:",
+    "o": [
+      "1 N·s",
+      "0 N·s",
+      "10 N·s",
+      "5 N·s"
+    ],
+    "a": 3,
+    "e": "The momentum change magnitude is m|0−5| = 5 N·s."
+  },
+  {
+    "q": "A 0.2 kg ball changes velocity from +10 m/s to −5 m/s. Its impulse is:",
+    "o": [
+      "−3 N·s",
+      "+1 N·s",
+      "−1 N·s",
+      "+3 N·s"
+    ],
+    "a": 0,
+    "e": "J = m(v−u) = 0.2(−5−10) = −3 N·s."
+  },
+  {
+    "q": "A force of 10 N acts for 3 s. The impulse is:",
+    "o": [
+      "7 N·s",
+      "30 N·s",
+      "13 N·s",
+      "3.3 N·s"
+    ],
+    "a": 1,
+    "e": "J = FΔt = 10×3 = 30 N·s."
+  },
+  {
+    "q": "A force-time graph's area under the curve gives:",
+    "o": [
+      "Displacement",
+      "Acceleration",
+      "Impulse",
+      "Power"
+    ],
+    "a": 2,
+    "e": "The integral of force over time is impulse, equal to momentum change."
+  },
+  {
+    "q": "A 4 kg body at 2 m/s receives an impulse of 8 N·s in its direction of motion. Its final speed is:",
+    "o": [
+      "2 m/s",
+      "8 m/s",
+      "6 m/s",
+      "4 m/s"
+    ],
+    "a": 3,
+    "e": "Initial momentum is 8; final momentum is 8+8=16, so v=16/4=4 m/s."
+  },
+  {
+    "q": "A 2 kg body at rest receives an impulse of 6 N·s. Its final speed is:",
+    "o": [
+      "3 m/s",
+      "12 m/s",
+      "6 m/s",
+      "1/3 m/s"
+    ],
+    "a": 0,
+    "e": "J = Δp = mv, so v = 6/2 = 3 m/s."
+  },
+  {
+    "q": "For the same momentum change, increasing collision time generally makes average force:",
+    "o": [
+      "Zero",
+      "Smaller",
+      "Larger",
+      "Unchanged in every case"
+    ],
+    "a": 1,
+    "e": "Average force equals momentum change divided by time; longer time means smaller average force."
+  },
+  {
+    "q": "Airbags reduce injury mainly by:",
+    "o": [
+      "Making the passenger's mass zero",
+      "Removing inertia",
+      "Increasing the time over which momentum changes",
+      "Increasing the momentum change"
+    ],
+    "a": 2,
+    "e": "For a similar momentum change, a longer stopping time reduces average force."
+  },
+  {
+    "q": "A 0.5 kg ball moving at 4 m/s reverses direction at 4 m/s. The impulse magnitude is:",
+    "o": [
+      "2 N·s",
+      "0 N·s",
+      "8 N·s",
+      "4 N·s"
+    ],
+    "a": 3,
+    "e": "Momentum changes from +2 to −2 kg·m/s, giving |Δp| = 4 N·s."
+  },
+  {
+    "q": "A constant force of 5 N acts opposite to motion for 2 s. Taking the force direction as negative, impulse is:",
+    "o": [
+      "−10 N·s",
+      "+10 N·s",
+      "−2.5 N·s",
+      "+7 N·s"
+    ],
+    "a": 0,
+    "e": "J = FΔt = (−5)(2) = −10 N·s."
+  },
+  {
+    "q": "Impulse is a:",
+    "o": [
+      "Quantity measured only in joules",
+      "Vector quantity",
+      "Scalar quantity",
+      "Dimensionless quantity"
+    ],
+    "a": 1,
+    "e": "Impulse has the direction of the momentum change, so it is a vector."
+  },
+  {
+    "q": "A 3 kg object speeds up from 2 m/s to 6 m/s. The momentum change is:",
+    "o": [
+      "18 kg·m/s",
+      "4 kg·m/s",
+      "12 kg·m/s",
+      "8 kg·m/s"
+    ],
+    "a": 2,
+    "e": "Δp = m(v−u) = 3(6−2) = 12 kg·m/s."
+  },
+  {
+    "q": "A net impulse of −4 N·s acts on an object. Its momentum change is:",
+    "o": [
+      "+4 kg·m/s",
+      "0 kg·m/s",
+      "−16 kg·m/s",
+      "−4 kg·m/s"
+    ],
+    "a": 3,
+    "e": "Impulse equals momentum change, including its sign and direction."
+  },
+  {
+    "q": "A 1000 kg car changes velocity by −2 m/s. The impulse on the car is:",
+    "o": [
+      "−2000 N·s",
+      "+2000 N·s",
+      "−500 N·s",
+      "0 N·s"
+    ],
+    "a": 0,
+    "e": "J = mΔv = 1000×(−2) = −2000 N·s."
+  },
+  {
+    "q": "A 0.1 kg ball moving at 20 m/s is caught and stopped in 0.2 s. The magnitude of average force is:",
+    "o": [
+      "1 N",
+      "10 N",
+      "2 N",
+      "100 N"
+    ],
+    "a": 1,
+    "e": "|Favg| = |Δp|/Δt = (0.1×20)/0.2 = 10 N."
+  },
+  {
+    "q": "A 2 kg body moving at 5 m/s receives an impulse of −4 N·s. Its final velocity is:",
+    "o": [
+      "2 m/s opposite direction",
+      "1 m/s in the original direction",
+      "3 m/s in the original direction",
+      "7 m/s in the original direction"
+    ],
+    "a": 2,
+    "e": "Initial momentum is 10; final momentum is 10−4=6, so v=6/2=3 m/s."
+  },
+  {
+    "q": "If the net force on an object is zero during a time interval, its net impulse during that interval is:",
+    "o": [
+      "Equal to its mass",
+      "Always positive",
+      "Equal to its speed",
+      "Zero"
+    ],
+    "a": 3,
+    "e": "With zero net force, the force-time integral and momentum change are zero."
+  },
+  {
+    "q": "A force varies with time. The impulse is found by:",
+    "o": [
+      "The signed area under the force-time graph",
+      "The slope of the force-time graph only",
+      "The area under a velocity-time graph",
+      "Force divided by mass"
+    ],
+    "a": 0,
+    "e": "Impulse is the signed area under an F–t graph."
+  },
+  {
+    "q": "A 2 kg object at +3 m/s ends at −1 m/s. Its impulse is:",
+    "o": [
+      "+8 N·s",
+      "−8 N·s",
+      "+4 N·s",
+      "−2 N·s"
+    ],
+    "a": 1,
+    "e": "J = m(v−u) = 2(−1−3) = −8 N·s."
+  },
+  {
+    "q": "A 50 N average force acts for 0.1 s. The impulse is:",
+    "o": [
+      "0.5 N·s",
+      "500 N·s",
+      "5 N·s",
+      "50 N·s"
+    ],
+    "a": 2,
+    "e": "J = FΔt = 50×0.1 = 5 N·s."
+  },
+  {
+    "q": "Two objects experience equal and opposite interaction forces over the same time. Their impulses are:",
+    "o": [
+      "Both in the same direction",
+      "Always zero individually",
+      "Proportional only to their speeds",
+      "Equal in magnitude and opposite in direction"
+    ],
+    "a": 3,
+    "e": "Newton's third law gives equal and opposite forces, so their impulses are equal and opposite."
+  },
+  {
+    "q": "A 0.4 kg ball moving at 10 m/s is hit and leaves at 5 m/s in the same direction. The impulse is:",
+    "o": [
+      "−2 N·s",
+      "+2 N·s",
+      "−4 N·s",
+      "+4 N·s"
+    ],
+    "a": 0,
+    "e": "J = 0.4(5−10) = −2 N·s."
+  },
+  {
+    "q": "A 1200 kg car slows from 15 m/s to 10 m/s. The impulse is:",
+    "o": [
+      "0 N·s",
+      "−6000 N·s",
+      "+6000 N·s",
+      "−3000 N·s"
+    ],
+    "a": 1,
+    "e": "J = mΔv = 1200(10−15) = −6000 N·s."
+  },
+  {
+    "q": "A 1 kg object receives a +3 N·s impulse while initially moving at −2 m/s. Its final velocity is:",
+    "o": [
+      "+3 m/s",
+      "−1 m/s",
+      "+1 m/s",
+      "−5 m/s"
+    ],
+    "a": 2,
+    "e": "Initial momentum = −2; final momentum = −2+3 = +1 kg·m/s, so v = +1 m/s."
+  },
+  {
+    "q": "A 0.2 kg ball moving at 5 m/s is stopped in 0.05 s. The magnitude of average stopping force is:",
+    "o": [
+      "1 N",
+      "5 N",
+      "50 N",
+      "20 N"
+    ],
+    "a": 3,
+    "e": "|Favg| = m|Δv|/Δt = 0.2×5/0.05 = 20 N."
+  },
+  {
+    "q": "Which statement correctly relates impulse and momentum?",
+    "o": [
+      "Net impulse equals the change in momentum",
+      "Impulse equals momentum divided by mass",
+      "Impulse always equals kinetic energy",
+      "Impulse depends only on final speed"
+    ],
+    "a": 0,
+    "e": "The impulse–momentum theorem states Jnet = Δp."
+  }
+];
 let index=0,score=0,streak=0,chosen=null,locked=false;
 const $=id=>document.getElementById(id);
 function render(){

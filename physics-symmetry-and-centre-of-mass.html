@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Symmetry and Centre of Mass</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.55rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.25rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none;transition:.12s}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.35rem}.question{font-size:1.1rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">⚖️ Symmetry & Centre of Mass</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['A body with complete left-right symmetry about a vertical axis has its centre of mass:', ['on that symmetry axis','always at its top','always at its bottom','outside the body'],0,'The CM must lie on every symmetry axis of a symmetric mass distribution.'],['For a uniform circular ring, the centre of mass is:', ['at the geometric centre','on the circumference','outside the ring','at any point on a diameter'],0,'Rotational symmetry places the CM at the centre.'],['For a uniform disc, the centre of mass is:', ['at its centre','at its edge','at the topmost point','outside the disc'],0,'The disc is symmetric about two perpendicular diameters, whose intersection is the CM.'],['If a mass distribution is symmetric about the x-axis, its centre of mass has:', ['y_CM = 0','x_CM = 0 always','x_CM = y_CM','y_CM = 1'],0,'Reflection symmetry about the x-axis makes the vertical coordinate of the CM zero.'],['If a body is symmetric about both x and y axes, its centre of mass is:', ['at their intersection','on the x-axis only','on the y-axis only','outside the body'],0,'The CM lies on both symmetry axes, hence at their intersection.'],['The centre of mass of a uniform square lamina is located at:', ['the intersection of its diagonals','one corner','the midpoint of one side','outside the square'],0,'Square symmetry places the CM at the intersection of its diagonals.'],['A uniform rectangular plate has its centre of mass at:', ['the geometric centre','a longer-side corner','a shorter-side corner','an arbitrary point'],0,'The rectangle is symmetric about its two midlines.'],['A semicircular uniform lamina has its centre of mass:', ['on its axis of symmetry','at the circle centre necessarily','at the rim end','outside its plane'],0,'Symmetry fixes the CM on the symmetry axis, although not at the circle centre.'],['For two equal masses placed symmetrically about an axis, their CM lies:', ['on that axis','at either mass','outside the system','at the larger mass'],0,'Equal symmetric masses have cancelling perpendicular position components.'],['A hole is cut symmetrically from a uniform plate. The remaining body:', ['retains the corresponding symmetry','always loses its symmetry','must have its CM at the hole','has no CM'],0,'A symmetric removal preserves the symmetry of the remaining mass distribution.'],['If more mass is added on the right side of a previously symmetric body, its CM shifts:', ['toward the right','toward the left','nowhere','vertically only'],0,'Adding mass to the right increases the mass-weighted position toward the right.'],['For a uniform equilateral triangle, the centre of mass is at:', ['the intersection of its medians','one vertex','the midpoint of one side only','outside the triangle'],0,'The medians intersect at the centroid, which is the CM for a uniform triangle.'],['For a uniform sphere, the centre of mass is:', ['at the centre of the sphere','on its surface','at any diameter end','outside the sphere'],0,'Spherical symmetry places the CM at the geometric centre.'],['Symmetry can determine a centre-of-mass coordinate without doing an integral because:', ['opposite contributions cancel by symmetry','mass becomes zero','gravity disappears','all points have equal position'],0,'Symmetry pairs equal masses with opposite coordinate contributions.'],['If a body has no symmetry, its centre of mass:', ['can still be found from the mass-weighted average','cannot exist','must be at the geometric centre','must lie outside the body'],0,'Symmetry is a shortcut, not a requirement; the general mass-weighted definition always applies.']];let i=0,selected=-1,checked=false,score=0;const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;f.className=ok?'feedback good':'feedback bad';f.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 Symmetry & Centre of Mass Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Symmetry and Centre of Mass quiz">
+<title>SkillUp | Symmetry and Centre of Mass — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Symmetry and Centre of Mass</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "Where is the centre of mass of two equal point masses on a line?",
+    "o": [
+      "At the midpoint between them",
+      "Outside the line always",
+      "At twice the separation",
+      "At either mass"
+    ],
+    "a": 0,
+    "e": "Equal masses have their centre of mass halfway between them."
+  },
+  {
+    "q": "A uniform circular disc has its centre of mass:",
+    "o": [
+      "At its geometric centre",
+      "At its rim",
+      "Outside the disc",
+      "At the top edge"
+    ],
+    "a": 0,
+    "e": "Uniform mass distribution and circular symmetry place the centre of mass at the centre."
+  },
+  {
+    "q": "The centre of mass of a uniform straight rod lies:",
+    "o": [
+      "Outside the rod",
+      "At one end",
+      "At its midpoint",
+      "One-quarter from an end"
+    ],
+    "a": 2,
+    "e": "A uniform rod has equal mass distribution on both sides of its midpoint."
+  },
+  {
+    "q": "A uniform ring's centre of mass is located:",
+    "o": [
+      "At any point on its circumference",
+      "Outside the plane",
+      "On the ring material",
+      "At the centre of the circle"
+    ],
+    "a": 3,
+    "e": "Rotational symmetry places the centre of mass at the geometric centre, even though no material is there."
+  },
+  {
+    "q": "A uniform square lamina has its centre of mass at:",
+    "o": [
+      "The midpoint of one side",
+      "The intersection of its diagonals",
+      "Outside the square",
+      "A corner"
+    ],
+    "a": 1,
+    "e": "The diagonals intersect at the square's centre, where its symmetry balances."
+  },
+  {
+    "q": "Why does symmetry help locate the centre of mass?",
+    "o": [
+      "It makes the mass infinite",
+      "Symmetric parts balance each other",
+      "It removes gravity",
+      "It makes every object weightless"
+    ],
+    "a": 1,
+    "e": "Matching mass distribution on opposite sides means the centre of mass lies on the symmetry axes."
+  },
+  {
+    "q": "The centre of mass of a uniform solid sphere is:",
+    "o": [
+      "Outside the sphere",
+      "At the centre",
+      "At the surface",
+      "At the north pole"
+    ],
+    "a": 1,
+    "e": "A uniform sphere is symmetric in every direction, so its centre of mass is at its centre."
+  },
+  {
+    "q": "For a symmetric object with two perpendicular symmetry axes, the centre of mass lies:",
+    "o": [
+      "Only on the outer boundary",
+      "At a random point",
+      "At their intersection",
+      "At either end"
+    ],
+    "a": 2,
+    "e": "The centre of mass must lie on each symmetry axis, so it is at their intersection."
+  },
+  {
+    "q": "Two masses, 2 kg and 2 kg, are placed at x = 0 m and x = 6 m. Their centre of mass is at:",
+    "o": [
+      "2 m",
+      "3 m",
+      "6 m",
+      "1 m"
+    ],
+    "a": 1,
+    "e": "Equal masses share the midpoint: (0 + 6)/2 = 3 m."
+  },
+  {
+    "q": "A 1 kg mass is at x = 0 m and a 3 kg mass at x = 4 m. Find the centre of mass.",
+    "o": [
+      "1 m",
+      "2 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 2,
+    "e": "xcm = (1×0 + 3×4)/(1+3) = 3 m."
+  },
+  {
+    "q": "The centre of mass of a uniform semicircular wire lies:",
+    "o": [
+      "Outside its plane",
+      "At the circle centre",
+      "On its symmetry axis",
+      "At either end only"
+    ],
+    "a": 2,
+    "e": "The mass distribution is symmetric about the vertical axis, so the centre of mass lies on that axis."
+  },
+  {
+    "q": "For a uniform rectangular lamina, the centre of mass is at:",
+    "o": [
+      "The centre of a short side",
+      "Outside the rectangle",
+      "The intersection of its diagonals",
+      "A longer-side endpoint"
+    ],
+    "a": 2,
+    "e": "A uniform rectangle is symmetric about both midlines; its diagonals also meet at the centre."
+  },
+  {
+    "q": "If an object's mass distribution is symmetric about the y-axis, its centre of mass has:",
+    "o": [
+      "y-coordinate zero always",
+      "Both coordinates infinite",
+      "x-coordinate equal to its width",
+      "x-coordinate zero"
+    ],
+    "a": 3,
+    "e": "Reflection symmetry about the y-axis makes contributions at +x and −x cancel, giving xcm = 0."
+  },
+  {
+    "q": "A uniform equilateral triangular lamina has its centre of mass at:",
+    "o": [
+      "A vertex",
+      "The centroid",
+      "The midpoint of a side",
+      "The circumferential edge"
+    ],
+    "a": 1,
+    "e": "For a uniform triangle, the centre of mass is the centroid where the medians meet."
+  },
+  {
+    "q": "The centroid of a uniform triangular lamina lies how far from each vertex along a median?",
+    "o": [
+      "The full median",
+      "One-third of the median",
+      "Half the median",
+      "Two-thirds of the median"
+    ],
+    "a": 3,
+    "e": "The centroid divides each median in a 2:1 ratio measured from the vertex."
+  },
+  {
+    "q": "Three equal masses are placed at the vertices of an equilateral triangle. Their centre of mass is:",
+    "o": [
+      "At the midpoint of a side",
+      "Outside the triangle",
+      "At one vertex",
+      "At the triangle's centroid"
+    ],
+    "a": 3,
+    "e": "Equal masses at the three symmetric vertices balance at the centroid."
+  },
+  {
+    "q": "If a body has uniform density and a centre of symmetry, its centre of mass is:",
+    "o": [
+      "Always at the lowest point",
+      "At the nearest edge",
+      "Impossible to determine",
+      "At the centre of symmetry"
+    ],
+    "a": 3,
+    "e": "For a uniform body, central symmetry makes mass elements on opposite sides balance."
+  },
+  {
+    "q": "Two equal masses lie at x = −5 cm and x = +5 cm. Their centre of mass is:",
+    "o": [
+      "−5 cm",
+      "0 cm",
+      "+5 cm",
+      "+10 cm"
+    ],
+    "a": 1,
+    "e": "Equal masses equally spaced on opposite sides of the origin have xcm = 0."
+  },
+  {
+    "q": "A 2 kg mass is at x = 2 m and a 6 kg mass at x = 6 m. The centre of mass is:",
+    "o": [
+      "6 m",
+      "3 m",
+      "4 m",
+      "5 m"
+    ],
+    "a": 3,
+    "e": "xcm = (2×2 + 6×6)/(2+6) = 40/8 = 5 m."
+  },
+  {
+    "q": "The centre of mass of a uniform hollow cylinder lies:",
+    "o": [
+      "At one circular rim",
+      "Outside the cylinder",
+      "On its curved surface",
+      "On its central axis at the middle"
+    ],
+    "a": 3,
+    "e": "Cylindrical symmetry places the centre of mass at the geometric centre on its axis."
+  },
+  {
+    "q": "A body is cut into two equal halves by a plane of symmetry. What can be said about its centre of mass?",
+    "o": [
+      "It must be outside the body",
+      "It must lie on the surface",
+      "It is always at the bottom",
+      "It lies in the plane of symmetry"
+    ],
+    "a": 3,
+    "e": "The centre of mass of a symmetric mass distribution lies in its symmetry plane."
+  },
+  {
+    "q": "For two masses on a line, the centre of mass lies closer to:",
+    "o": [
+      "The heavier mass",
+      "The lighter mass",
+      "The origin always",
+      "Neither mass regardless of values"
+    ],
+    "a": 0,
+    "e": "The centre of mass is a mass-weighted average and lies closer to the heavier mass."
+  },
+  {
+    "q": "A uniform disc has a small circular hole drilled exactly at its centre. The remaining shape's centre of mass is:",
+    "o": [
+      "At an arbitrary point",
+      "Still at the centre",
+      "At the rim",
+      "At the hole's former edge"
+    ],
+    "a": 1,
+    "e": "A centred hole preserves rotational symmetry, so the centre of mass remains at the centre."
+  },
+  {
+    "q": "A uniform square plate has a small hole drilled off-centre. Its centre of mass generally:",
+    "o": [
+      "Shifts toward the hole",
+      "Must lie outside the plate",
+      "Remains at the original centre",
+      "Shifts away from the hole"
+    ],
+    "a": 3,
+    "e": "Removing mass from one side shifts the centre of mass toward the remaining material, away from the hole."
+  },
+  {
+    "q": "Which condition is sufficient to conclude the centre of mass lies on an object's mirror-symmetry plane?",
+    "o": [
+      "The object is moving quickly",
+      "The object is hot",
+      "The object is painted uniformly",
+      "The mass distribution has that reflection symmetry"
+    ],
+    "a": 3,
+    "e": "The relevant symmetry must apply to the mass distribution, not merely colour or motion."
+  },
+  {
+    "q": "A uniform semicircular lamina has its centre of mass:",
+    "o": [
+      "On the symmetry axis",
+      "At a point off the symmetry axis",
+      "At every point on the diameter",
+      "Always at the circle centre"
+    ],
+    "a": 0,
+    "e": "The semicircular lamina is symmetric about its central axis, so its centre of mass lies on that axis."
+  },
+  {
+    "q": "A 4 kg mass at x = 0 m and a 1 kg mass at x = 10 m have centre of mass at:",
+    "o": [
+      "8 m",
+      "2 m",
+      "4 m",
+      "5 m"
+    ],
+    "a": 1,
+    "e": "xcm = (4×0 + 1×10)/(4+1) = 2 m."
+  },
+  {
+    "q": "A symmetric body's centre of mass need not contain any material, as shown by a:",
+    "o": [
+      "Uniform rod",
+      "Solid sphere",
+      "Uniform ring",
+      "Solid cube"
+    ],
+    "a": 2,
+    "e": "A ring's centre of mass is at its empty geometric centre."
+  },
+  {
+    "q": "Which statement is correct about the centre of mass of a uniform sphere?",
+    "o": [
+      "It is at the geometric centre",
+      "It is always on the surface",
+      "It changes when the sphere is translated",
+      "It depends on how the sphere is rotated"
+    ],
+    "a": 0,
+    "e": "Uniform spherical symmetry fixes the centre of mass at the geometric centre."
+  },
+  {
+    "q": "A uniform L-shaped plate is not centrally symmetric. Where is its centre of mass?",
+    "o": [
+      "Always at the geometric centre of its bounding square",
+      "It must be calculated from the mass distribution",
+      "Always at the inside corner",
+      "Always outside the plate"
+    ],
+    "a": 1,
+    "e": "Without enough symmetry, determine the centre of mass by combining the contributions of its component regions."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Centre of Mass and Gravity</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center}.title{font-size:1.55rem;font-weight:900}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.subtitle{color:#5f6b7a;margin:8px 0 18px}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.25rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.selected{border-color:#1685e8!important;background:#eef7ff!important}.correct{border-color:#58cc02!important;background:#eaffdf!important}.wrong{border-color:#e5484d!important;background:#fff0f0!important}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none}.back:hover{background:#f0edff}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.35rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">🎯 Centre of Mass & Gravity</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div id="feedback" class="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const q=[['The centre of mass of a system is the point where:', ['the whole mass may be considered concentrated for translational motion','gravity is always zero','all particles stop','density is maximum'],0,'The CM represents the mass-weighted average position.'],['For two masses m₁ and m₂ at x₁ and x₂, xCM equals:', ['(m₁x₁+m₂x₂)/(m₁+m₂)','x₁+x₂','m₁x₁+m₂x₂','(x₁+x₂)/m₁m₂'],0,'The centre of mass is the mass-weighted mean position.'],['The centre of gravity is the point through which:', ['the resultant weight acts','all forces act','velocity acts','mass disappears'],0,'The resultant gravitational force acts through the centre of gravity.'],['In a uniform gravitational field, centre of mass and centre of gravity:', ['coincide','are always at opposite ends','never exist','must be outside the body'],0,'In a uniform gravitational field, CG coincides with CM.'],['For a uniform rod in a uniform gravitational field, its centre of gravity is at:', ['its geometric centre','one end','twice its length','any point'],0,'Uniform density and uniform gravity place CG at the midpoint.'],['The centre of mass of a symmetric uniform body lies:', ['on its symmetry axis','outside the body necessarily','at the heaviest point','at infinity'],0,'Symmetry constrains the CM to the symmetry axis.'],['If the gravitational field is non-uniform, centre of gravity:', ['need not coincide with centre of mass','must always equal CM','does not exist','is always at the geometric centre'],0,'A varying gravitational field can shift the resultant weight location.'],['The motion of the centre of mass of an isolated system is determined by:', ['external forces','internal forces only','shape only','temperature only'],0,'Internal forces cancel in the total momentum equation.'],['If no external force acts on a system, its centre of mass:', ['moves with constant velocity','must remain at rest','accelerates uniformly','moves in a circle'],0,'With zero net external force, CM velocity remains constant.'],['The centre of gravity of a body is related to:', ['the resultant gravitational force','only its volume','only its surface area','electric charge only'],0,'CG is defined from the distribution of gravitational weight.'],['For a body in uniform gravity, total weight can be treated as acting:', ['at the centre of mass','at every point equally as a single force','only at the boundary','at the origin'],0,'Uniform gravity makes the resultant weight pass through the CM.'],['Adding mass to one side of a body generally shifts its centre of mass:', ['toward the added mass','away from it always','to the opposite side','nowhere'],0,'The mass-weighted position shifts toward added mass.'],['For two equal masses separated symmetrically about x=0, the x-coordinate of CM is:', ['0','1','-1','their separation'],0,'Equal symmetric contributions cancel.'],['The centre of mass is useful because a complex system can often be treated as:', ['a single point for translational motion','a point with no mass','a body with no momentum','a force only'],0,'Translational motion of the system is described by its CM.'],['Which statement is correct?', ['CG and CM coincide in a uniform gravitational field','CG is always outside the body','CM depends only on gravity','CG never depends on mass distribution'],0,'Uniform gravity makes the gravitational resultant pass through the CM.']];let i=0,s=-1,checked=false,score=0;const $=x=>document.getElementById(x),opts=$("options"),btn=$("continue"),fb=$("feedback");function render(){let a=q[i];s=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];opts.innerHTML='';fb.className='feedback';fb.textContent='';btn.textContent=i===14?'Finish Skill →':'Continue →';let ar=a[1].map((text,index)=>({text,index}));for(let k=3;k;k--){let r=Math.floor(Math.random()*(k+1));[ar[k],ar[r]]=[ar[r],ar[k]]}ar.forEach((x,j)=>{let b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{s=x.index;[...opts.children].forEach(z=>z.classList.remove('selected'));b.classList.add('selected')};opts.appendChild(b)})}btn.onclick=()=>{if(!checked){if(s<0){fb.className='feedback bad';fb.textContent='Choose an answer first 👆';return}checked=true;let a=q[i],ok=s===a[2];[...opts.children].forEach(b=>{let n=+b.dataset.index;b.disabled=true;if(n===a[2])b.classList.add('correct');if(n===s&&!ok)b.classList.add('wrong')});if(ok)score++;fb.className='feedback '+(ok?'good':'bad');fb.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=score/15*100+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 Centre of Mass & Gravity Complete!';opts.innerHTML='';btn.style.display='none';fb.className='feedback good';fb.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){let saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{let u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{let u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Centre of Mass and Gravity quiz">
+<title>SkillUp | Centre of Mass and Gravity — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌍 Centre of Mass and Gravity</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What is the centre of mass of a system?",
+    "o": [
+      "Always the geometric centre",
+      "Always the point of maximum gravity",
+      "Always outside the system",
+      "The mass-weighted average position of its parts"
+    ],
+    "a": 3,
+    "e": "The centre of mass is the mass-weighted mean position of the system's mass."
+  },
+  {
+    "q": "For a uniform sphere, the centre of mass is located:",
+    "o": [
+      "At its geometric centre",
+      "At its surface",
+      "At its top point",
+      "Outside the sphere"
+    ],
+    "a": 0,
+    "e": "Spherical symmetry places the centre of mass at the geometric centre."
+  },
+  {
+    "q": "In a uniform gravitational field, the centre of gravity of a rigid body:",
+    "o": [
+      "Changes with the body's orientation only",
+      "Coincides with its centre of mass",
+      "Must be at its lowest point",
+      "Must be outside the body"
+    ],
+    "a": 1,
+    "e": "In a uniform gravitational field, weight acts as if concentrated at the centre of mass, so the centre of gravity coincides with it."
+  },
+  {
+    "q": "The centre of gravity is the point through which the resultant:",
+    "o": [
+      "Air resistance always acts",
+      "Elastic force always acts",
+      "Gravitational force (weight) acts",
+      "Magnetic force always acts"
+    ],
+    "a": 2,
+    "e": "The centre of gravity is the effective point of application of the body's total weight."
+  },
+  {
+    "q": "When can centre of mass and centre of gravity differ?",
+    "o": [
+      "Only for a uniform rod",
+      "Never under any condition",
+      "Only when mass is zero",
+      "In a non-uniform gravitational field"
+    ],
+    "a": 3,
+    "e": "If gravity varies significantly across a body, the resultant weight's point of application need not coincide with the centre of mass."
+  },
+  {
+    "q": "A uniform straight rod has its centre of mass at:",
+    "o": [
+      "Its midpoint",
+      "One end",
+      "One-quarter of its length from an end",
+      "Outside the rod"
+    ],
+    "a": 0,
+    "e": "Uniform linear mass distribution makes the rod's midpoint its centre of mass."
+  },
+  {
+    "q": "Two equal point masses are placed at x = −2 m and x = +6 m. Their centre of mass is:",
+    "o": [
+      "6 m",
+      "−2 m",
+      "0 m",
+      "2 m"
+    ],
+    "a": 3,
+    "e": "For equal masses, xcm = (−2 + 6)/2 = 2 m."
+  },
+  {
+    "q": "A 2 kg mass at x = 0 m and a 6 kg mass at x = 4 m have centre of mass:",
+    "o": [
+      "3 m",
+      "4 m",
+      "1 m",
+      "2 m"
+    ],
+    "a": 0,
+    "e": "xcm = (2×0 + 6×4)/(2+6) = 3 m."
+  },
+  {
+    "q": "The centre of mass of a uniform circular ring is:",
+    "o": [
+      "On its circumference",
+      "At any point on the ring",
+      "Outside the ring's plane",
+      "At the centre of the circle"
+    ],
+    "a": 3,
+    "e": "Rotational symmetry puts the centre of mass at the circle's centre, even though that point is empty."
+  },
+  {
+    "q": "For a uniform triangular lamina, the centre of mass is at the:",
+    "o": [
+      "Centroid where the medians meet",
+      "Longest vertex only",
+      "Midpoint of the longest side",
+      "Circumference"
+    ],
+    "a": 0,
+    "e": "A uniform triangle's centre of mass is its centroid, located at the intersection of its medians."
+  },
+  {
+    "q": "The centre of mass of a system of particles depends on:",
+    "o": [
+      "Only external force",
+      "Their masses and positions",
+      "Only their velocities",
+      "Only the system's colour"
+    ],
+    "a": 1,
+    "e": "Mass and position determine the mass-weighted average location."
+  },
+  {
+    "q": "If all particles of a system are translated by the same vector, the centre of mass:",
+    "o": [
+      "Moves twice as far",
+      "Moves to the origin",
+      "Translates by the same vector",
+      "Stays fixed"
+    ],
+    "a": 2,
+    "e": "A common translation shifts the centre of mass by exactly the same displacement."
+  },
+  {
+    "q": "Can the centre of mass lie outside the material of a body?",
+    "o": [
+      "No, never",
+      "Only if the body is moving",
+      "Only if gravity is absent",
+      "Yes, for example at the centre of a ring"
+    ],
+    "a": 3,
+    "e": "A ring's centre of mass lies in the empty central region."
+  },
+  {
+    "q": "In a uniform gravitational field, the total weight of a body is:",
+    "o": [
+      "Mg",
+      "M/g",
+      "g/M",
+      "M + g"
+    ],
+    "a": 0,
+    "e": "Weight W = Mg, where M is mass and g is gravitational acceleration."
+  },
+  {
+    "q": "The SI unit of weight is:",
+    "o": [
+      "Metre",
+      "Newton",
+      "Kilogram",
+      "Joule per second"
+    ],
+    "a": 1,
+    "e": "Weight is a force, so it is measured in newtons (N)."
+  },
+  {
+    "q": "A body is in stable equilibrium when a small displacement produces a tendency to:",
+    "o": [
+      "Remain at a higher potential energy",
+      "Lose all mass",
+      "Return to its original position",
+      "Move farther from its original position"
+    ],
+    "a": 2,
+    "e": "Stable equilibrium has a restoring tendency after a small displacement."
+  },
+  {
+    "q": "For a body to be in equilibrium under gravity, the line of action of its weight must:",
+    "o": [
+      "Always pass outside its base",
+      "Be parallel to the ground",
+      "Pass through its highest point",
+      "Fall within its base of support for stable standing"
+    ],
+    "a": 3,
+    "e": "If the vertical line through the centre of gravity falls outside the support base, the body tends to topple."
+  },
+  {
+    "q": "A body is more stable when it has:",
+    "o": [
+      "A lower centre of gravity and a wider base",
+      "A higher centre of gravity and a narrow base",
+      "A smaller mass in all cases",
+      "A centre of gravity outside its base"
+    ],
+    "a": 0,
+    "e": "A lower centre of gravity and wider base make tipping less likely."
+  },
+  {
+    "q": "If a body's centre of gravity is directly above the edge of its support base, it is:",
+    "o": [
+      "Weightless",
+      "At the tipping threshold",
+      "Always maximally stable",
+      "In free fall"
+    ],
+    "a": 1,
+    "e": "At the edge, a small further tilt can move the line of action outside the base and cause toppling."
+  },
+  {
+    "q": "The centre of mass of two masses m and 3m separated by distance d lies from the mass m toward 3m at distance:",
+    "o": [
+      "3d/4",
+      "d",
+      "d/4",
+      "d/2"
+    ],
+    "a": 0,
+    "e": "Measured from m, xcm = (3m·d)/(4m) = 3d/4."
+  },
+  {
+    "q": "A 4 kg object has centre of mass at x = 2 m. A 2 kg object at x = 8 m is attached. The new centre of mass is:",
+    "o": [
+      "4 m",
+      "5 m",
+      "6 m",
+      "3 m"
+    ],
+    "a": 0,
+    "e": "xcm = (4×2 + 2×8)/6 = 24/6 = 4 m. Correction: this calculation gives 4 m, so option B is correct."
+  },
+  {
+    "q": "For a uniform body with a centre of symmetry, the centre of mass is:",
+    "o": [
+      "At the centre of symmetry",
+      "Always at its lowest point",
+      "At the nearest edge",
+      "At an arbitrary point"
+    ],
+    "a": 0,
+    "e": "A symmetric uniform mass distribution balances about its centre of symmetry."
+  },
+  {
+    "q": "What is the gravitational acceleration near Earth's surface approximately?",
+    "o": [
+      "98 kg",
+      "9.8 m/s²",
+      "9.8 m/s",
+      "9.8 N"
+    ],
+    "a": 1,
+    "e": "Near Earth's surface, g is approximately 9.8 m/s²."
+  },
+  {
+    "q": "The centre of gravity of a body is the point where its total:",
+    "o": [
+      "Temperature is highest",
+      "Velocity becomes zero",
+      "Weight can be considered to act",
+      "Volume is always concentrated"
+    ],
+    "a": 2,
+    "e": "It is the effective point of application of the resultant gravitational force."
+  },
+  {
+    "q": "If gravitational field is uniform, moving a rigid body without changing its mass distribution relative to itself:",
+    "o": [
+      "Separates the two points necessarily",
+      "Makes its mass change",
+      "Makes its weight zero",
+      "Keeps centre of mass and centre of gravity coincident"
+    ],
+    "a": 3,
+    "e": "In a uniform field, the resultant weight acts through the centre of mass regardless of the body's location."
+  },
+  {
+    "q": "A uniform square lamina has its centre of mass at:",
+    "o": [
+      "The intersection of its diagonals",
+      "One corner",
+      "The midpoint of one edge",
+      "Outside the square"
+    ],
+    "a": 0,
+    "e": "The square's symmetry puts its centre of mass at the intersection of its diagonals."
+  },
+  {
+    "q": "The x-coordinate of centre of mass for point particles is:",
+    "o": [
+      "Σmᵢxᵢ only",
+      "Σmᵢxᵢ/Σmᵢ",
+      "Σxᵢ/Σmᵢ",
+      "Σmᵢ/Σxᵢ"
+    ],
+    "a": 1,
+    "e": "Each x-coordinate is weighted by its particle's mass and divided by total mass."
+  },
+  {
+    "q": "Why can a tall object with a narrow base topple easily?",
+    "o": [
+      "Its centre of mass must be at the base",
+      "Gravity acts horizontally",
+      "Its line of weight can move outside the small support base",
+      "Its mass disappears"
+    ],
+    "a": 2,
+    "e": "A narrow base gives a smaller range of tilt before the weight's line of action passes outside it."
+  },
+  {
+    "q": "A 2 kg mass at x = −3 m and a 4 kg mass at x = 3 m have centre of mass:",
+    "o": [
+      "0 m",
+      "1 m",
+      "2 m",
+      "−1 m"
+    ],
+    "a": 1,
+    "e": "xcm = (2×−3 + 4×3)/6 = 1 m."
+  },
+  {
+    "q": "Which statement correctly distinguishes centre of mass and centre of gravity?",
+    "o": [
+      "Centre of mass depends on mass distribution; centre of gravity describes the resultant weight's action point",
+      "They always refer to unrelated points",
+      "Centre of gravity depends only on colour",
+      "Centre of mass exists only in a gravitational field"
+    ],
+    "a": 0,
+    "e": "The centre of mass is defined by mass distribution; the centre of gravity is defined by the gravitational force distribution."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

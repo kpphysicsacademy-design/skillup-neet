@@ -1,45 +1,464 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp | Kinetic Energy</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Kinetic Energy quiz">
+<title>SkillUp | Kinetic Energy — Easy Quiz</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:flex-end;margin-bottom:20px}.xp{background:#fff;padding:12px 18px;border-radius:18px;box-shadow:0 5px 18px #17203314;font-weight:800}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px;box-shadow:0 8px 22px #12539d25}.hero small{font-size:.82rem}.hero h1{margin:9px 0 10px;font-size:1.9rem}.hero p{margin:0}.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 20px #17203312}.progress-head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:12px;background:#dfe8f1;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .3s}.qnum{font-size:.9rem;font-weight:800;color:#35516f;margin-bottom:12px}.question{font-size:1.28rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{width:100%;padding:14px 15px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.actions{margin-top:16px}.btn{padding:12px 20px;border:0;border-radius:13px;font-weight:850;cursor:pointer;background:#2db84d;color:#fff;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 #21863a}.btn:disabled{opacity:.55;cursor:not-allowed}.feedback{margin-top:14px;padding:13px;border-radius:14px;font-weight:700;min-height:20px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:800;text-decoration:none;padding:9px 12px;border-radius:12px}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px 34px}.hero h1{font-size:1.55rem}.question{font-size:1.15rem}.card{padding:17px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
-<body><main class="wrap">
-<div class="top"><div class="xp">⚡ <span id="xp">0</span> XP</div></div>
-<section class="hero"><small>PHYSICS • NEET 2026</small><h1>⚡ Kinetic Energy</h1><p>LEARN → PRACTICE → MASTER • 15 focused NEET-style MCQs</p></section>
-<section class="card"><div class="progress-head"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section>
-<section class="card"><div class="qnum" id="count">Question 1 of 15</div><h2 class="question" id="question"></h2><div id="options" class="options"></div><div class="actions"><button id="continue" class="btn">Continue →</button></div><div id="feedback" class="feedback"></div></section>
-<a href="physics-home.html" id="back" class="back">← Back to Physics Path</a>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Kinetic Energy</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
 </main>
 <script>
 (function(){
-const quiz=[
-['The kinetic energy of a body of mass m moving with speed v is:',['½mv²','mv','mv²','½mv'],0,'Kinetic energy is K=½mv².'],
-['The SI unit of kinetic energy is:',['joule','newton','watt','pascal'],0,'Energy is measured in joules (J).'],
-['A 2 kg body moves at 3 m/s. Its kinetic energy is:',['9 J','6 J','18 J','3 J'],0,'K=½×2×3²=9 J.'],
-['A 4 kg body moves at 5 m/s. Its kinetic energy is:',['50 J','20 J','100 J','25 J'],0,'K=½×4×5²=50 J.'],
-['If the speed of a body is doubled, its kinetic energy becomes:',['four times','two times','half','unchanged'],0,'Because K is proportional to v², doubling speed multiplies K by 4.'],
-['If the mass of a body is doubled while its speed is unchanged, its kinetic energy becomes:',['double','four times','half','unchanged'],0,'K is directly proportional to mass when speed is fixed.'],
-['A body has kinetic energy 18 J at speed 3 m/s. If its mass is 4 kg, this is:',['consistent with K=½mv²','consistent with K=mv','consistent with K=½mv','inconsistent with any kinetic-energy relation'],0,'½×4×3²=18 J, so the stated kinetic energy is consistent.'],
-['A 1 kg body increases speed from 2 m/s to 4 m/s. The increase in kinetic energy is:',['6 J','4 J','8 J','12 J'],0,'ΔK=½×1×(4²−2²)=6 J.'],
-['A net work of 30 J is done on a body. Its kinetic energy changes by:',['30 J','15 J','60 J','0 J'],0,'By the work-energy theorem, net work equals change in kinetic energy.'],
-['A body initially at rest has kinetic energy 72 J. If its mass is 4 kg, its speed is:',['6 m/s','18 m/s','36 m/s','4 m/s'],0,'72=½×4×v² gives v²=36, so v=6 m/s.'],
-['For a non-relativistic particle, kinetic energy depends on speed as:',['v²','v','1/v','1/v²'],0,'The classical expression K=½mv² contains the square of speed.'],
-['Two bodies have equal kinetic energies. If their masses are equal, their speeds are:',['equal','inversely proportional','in the ratio 1:2','in the ratio 2:1'],0,'With equal mass, equal ½mv² requires equal speed magnitudes.'],
-['A 500 g body moves at 4 m/s. Its kinetic energy is:',['4 J','2 J','8 J','16 J'],0,'500 g=0.5 kg; K=½×0.5×4²=4 J.'],
-['If the kinetic energy of a body is reduced to one-fourth and its mass stays constant, its speed becomes:',['half','one-fourth','twice','unchanged'],0,'Since K is proportional to v², reducing K to one-fourth reduces speed to one-half.'],
-['Which statement about kinetic energy is correct?',['It is a scalar quantity','It is a vector quantity','It always has a negative value','It depends only on direction of motion'],0,'Kinetic energy has magnitude only and is therefore scalar; classically it is never negative.']
+'use strict';
+const questions = [
+  {
+    "q": "The kinetic energy of a body of mass m moving at speed v is:",
+    "o": [
+      "mv²",
+      "½mv²",
+      "mv",
+      "½mv²/2"
+    ],
+    "a": 1,
+    "e": "Kinetic energy is K = ½mv²."
+  },
+  {
+    "q": "What is the SI unit of kinetic energy?",
+    "o": [
+      "Watt",
+      "Joule",
+      "Newton",
+      "Pascal"
+    ],
+    "a": 1,
+    "e": "Energy is measured in joules (J)."
+  },
+  {
+    "q": "A 2 kg object moves at 3 m/s. Its kinetic energy is:",
+    "o": [
+      "6 J",
+      "9 J",
+      "18 J",
+      "3 J"
+    ],
+    "a": 1,
+    "e": "K = ½ × 2 × 3² = 9 J."
+  },
+  {
+    "q": "A 4 kg object moves at 5 m/s. Its kinetic energy is:",
+    "o": [
+      "20 J",
+      "25 J",
+      "50 J",
+      "100 J"
+    ],
+    "a": 2,
+    "e": "K = ½ × 4 × 5² = 50 J."
+  },
+  {
+    "q": "If a body's speed doubles while its mass stays the same, its kinetic energy becomes:",
+    "o": [
+      "Twice as large",
+      "Four times as large",
+      "Half as large",
+      "Unchanged"
+    ],
+    "a": 1,
+    "e": "K ∝ v², so doubling speed multiplies kinetic energy by 2² = 4."
+  },
+  {
+    "q": "If a body's mass doubles while its speed stays the same, its kinetic energy becomes:",
+    "o": [
+      "Half as large",
+      "Twice as large",
+      "Four times as large",
+      "Unchanged"
+    ],
+    "a": 1,
+    "e": "K = ½mv² is directly proportional to mass at fixed speed."
+  },
+  {
+    "q": "A 1 kg body speeds up from 2 m/s to 4 m/s. Its increase in kinetic energy is:",
+    "o": [
+      "4 J",
+      "6 J",
+      "8 J",
+      "12 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½ × 1 × (4² − 2²) = ½ × 12 = 6 J."
+  },
+  {
+    "q": "A 500 g ball moves at 4 m/s. Its kinetic energy is:",
+    "o": [
+      "2 J",
+      "4 J",
+      "8 J",
+      "16 J"
+    ],
+    "a": 1,
+    "e": "500 g = 0.5 kg; K = ½ × 0.5 × 4² = 4 J."
+  },
+  {
+    "q": "A 3 kg object moves at 2 m/s. Its kinetic energy is:",
+    "o": [
+      "3 J",
+      "6 J",
+      "12 J",
+      "1.5 J"
+    ],
+    "a": 1,
+    "e": "K = ½ × 3 × 2² = 6 J."
+  },
+  {
+    "q": "A body has kinetic energy 100 J and mass 2 kg. Its speed is:",
+    "o": [
+      "5 m/s",
+      "10 m/s",
+      "20 m/s",
+      "50 m/s"
+    ],
+    "a": 1,
+    "e": "100 = ½ × 2 × v², so v² = 100 and v = 10 m/s."
+  },
+  {
+    "q": "If kinetic energy becomes four times as large and mass is unchanged, speed becomes:",
+    "o": [
+      "Four times",
+      "Twice",
+      "Half",
+      "One-fourth"
+    ],
+    "a": 1,
+    "e": "Because K ∝ v², multiplying K by four multiplies speed by √4 = 2."
+  },
+  {
+    "q": "If kinetic energy becomes one-fourth and mass is unchanged, speed becomes:",
+    "o": [
+      "One-fourth",
+      "One-half",
+      "Twice",
+      "Four times"
+    ],
+    "a": 1,
+    "e": "Speed is proportional to √K, so one-fourth kinetic energy means half the speed."
+  },
+  {
+    "q": "Which statement about classical kinetic energy is correct?",
+    "o": [
+      "It is a vector",
+      "It can be negative",
+      "It is a scalar and is non-negative",
+      "It depends only on direction"
+    ],
+    "a": 2,
+    "e": "Kinetic energy has magnitude only, so it is scalar; K = ½mv² cannot be negative."
+  },
+  {
+    "q": "Two bodies have equal masses and equal kinetic energies. Their speed magnitudes are:",
+    "o": [
+      "Equal",
+      "In a 1:2 ratio",
+      "In a 2:1 ratio",
+      "Impossible to compare"
+    ],
+    "a": 0,
+    "e": "For equal mass, equal ½mv² requires equal speed magnitudes."
+  },
+  {
+    "q": "A 2 kg body moves at 6 m/s. Its kinetic energy is:",
+    "o": [
+      "12 J",
+      "18 J",
+      "36 J",
+      "72 J"
+    ],
+    "a": 2,
+    "e": "K = ½ × 2 × 6² = 36 J."
+  },
+  {
+    "q": "A net work of 30 J is done on an object. Its kinetic energy changes by:",
+    "o": [
+      "15 J",
+      "30 J",
+      "60 J",
+      "Zero"
+    ],
+    "a": 1,
+    "e": "By the work–energy theorem, net work equals change in kinetic energy."
+  },
+  {
+    "q": "A 4 kg object starts from rest and receives 72 J of net work. Its final speed is:",
+    "o": [
+      "3 m/s",
+      "6 m/s",
+      "9 m/s",
+      "12 m/s"
+    ],
+    "a": 1,
+    "e": "½ × 4 × v² = 72 gives v² = 36, so v = 6 m/s."
+  },
+  {
+    "q": "A 2 kg object moving at 10 m/s is brought to rest. The net work done is:",
+    "o": [
+      "+100 J",
+      "−100 J",
+      "−50 J",
+      "Zero"
+    ],
+    "a": 1,
+    "e": "ΔK = 0 − ½ × 2 × 10² = −100 J."
+  },
+  {
+    "q": "An object's speed increases from 3 m/s to 7 m/s. If its mass is 2 kg, the change in kinetic energy is:",
+    "o": [
+      "20 J",
+      "40 J",
+      "49 J",
+      "58 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½ × 2 × (49 − 9) = 40 J."
+  },
+  {
+    "q": "A 1000 kg car increases speed from 10 m/s to 20 m/s. The change in kinetic energy is:",
+    "o": [
+      "50,000 J",
+      "100,000 J",
+      "150,000 J",
+      "200,000 J"
+    ],
+    "a": 2,
+    "e": "ΔK = ½ × 1000 × (20² − 10²) = 500 × 300 = 150,000 J."
+  },
+  {
+    "q": "A body's kinetic energy is 25 J. If 10 J of net work is done on it, its final kinetic energy is:",
+    "o": [
+      "15 J",
+      "25 J",
+      "35 J",
+      "−10 J"
+    ],
+    "a": 2,
+    "e": "Kf = Ki + Wnet = 25 + 10 = 35 J."
+  },
+  {
+    "q": "A body's kinetic energy is 40 J. Net work of −15 J is done on it. Its final kinetic energy is:",
+    "o": [
+      "25 J",
+      "55 J",
+      "−25 J",
+      "15 J"
+    ],
+    "a": 0,
+    "e": "Kf = Ki + Wnet = 40 − 15 = 25 J."
+  },
+  {
+    "q": "A 0.5 kg object increases speed from 4 m/s to 8 m/s. Its kinetic energy increase is:",
+    "o": [
+      "6 J",
+      "12 J",
+      "16 J",
+      "24 J"
+    ],
+    "a": 1,
+    "e": "ΔK = ½ × 0.5 × (64 − 16) = 12 J."
+  },
+  {
+    "q": "Which factor does not directly affect kinetic energy in K = ½mv²?",
+    "o": [
+      "Mass",
+      "Speed",
+      "Direction of motion",
+      "Speed squared"
+    ],
+    "a": 2,
+    "e": "Classical kinetic energy depends on mass and speed, not the direction of motion."
+  },
+  {
+    "q": "A 3 kg body has kinetic energy 24 J. Its speed is:",
+    "o": [
+      "2 m/s",
+      "4 m/s",
+      "6 m/s",
+      "8 m/s"
+    ],
+    "a": 1,
+    "e": "24 = ½ × 3 × v², so v² = 16 and v = 4 m/s."
+  },
+  {
+    "q": "If two bodies move at the same speed, the body with twice the mass has kinetic energy:",
+    "o": [
+      "Half as large",
+      "Twice as large",
+      "Four times as large",
+      "The same"
+    ],
+    "a": 1,
+    "e": "At equal speed, K is directly proportional to mass."
+  },
+  {
+    "q": "A body has kinetic energy 18 J at speed 3 m/s. Its mass is:",
+    "o": [
+      "2 kg",
+      "3 kg",
+      "4 kg",
+      "6 kg"
+    ],
+    "a": 2,
+    "e": "18 = ½ × m × 9, so 18 = 4.5m and m = 4 kg."
+  },
+  {
+    "q": "A 1 kg object moves at 6 m/s. How much work must the net force do to bring it to rest?",
+    "o": [
+      "+18 J",
+      "−18 J",
+      "+36 J",
+      "−36 J"
+    ],
+    "a": 0,
+    "e": "The required net work is ΔK = 0 − ½ × 1 × 36 = −18 J."
+  },
+  {
+    "q": "If a body's speed triples, its kinetic energy becomes:",
+    "o": [
+      "Three times",
+      "Six times",
+      "Nine times",
+      "One-third"
+    ],
+    "a": 2,
+    "e": "K ∝ v², so tripling speed multiplies kinetic energy by 3² = 9."
+  },
+  {
+    "q": "Which equation correctly gives the change in kinetic energy when speed changes from u to v?",
+    "o": [
+      "½m(v − u)",
+      "½m(v² − u²)",
+      "m(v² + u²)",
+      "½mv − ½mu"
+    ],
+    "a": 1,
+    "e": "ΔK = Kf − Ki = ½mv² − ½mu² = ½m(v² − u²)."
+  }
 ];
-let i=0,selected=-1,score=0,checked=false;const $=id=>document.getElementById(id);const q=$('question'),o=$('options'),b=$('continue'),f=$('feedback');
-function render(){const a=quiz[i];selected=-1;checked=false;q.textContent=a[0];$('count').textContent='Question '+(i+1)+' of 15';o.innerHTML='';f.className='feedback';f.textContent='';b.disabled=false;b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const x=document.createElement('button');x.className='option';x.textContent=String.fromCharCode(65+j)+'. '+item.text;x.dataset.index=item.index;x.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));x.classList.add('selected')};o.appendChild(x)});}
-b.onclick=function(){if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(x=>{const idx=Number(x.dataset.index);x.disabled=true;if(idx===a[2])x.classList.add('correct');if(idx===selected&&!ok)x.classList.add('wrong')});if(ok){score++;f.className='feedback good';f.textContent='🎯 Correct! +10 XP — '+a[3]}else{f.className='feedback bad';f.textContent='✗ Review — Correct answer: '+a[1][a[2]]+'. '+a[3]}$('xp').textContent=score*10;$('mastery').textContent=score+' / 15';$('fill').style.width=(score/15*100)+'%';b.textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render();window.scrollTo({top:0,behavior:'smooth'})}else{q.textContent='🏆 Kinetic Energy Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.';localStorage.setItem('skillupPhysicsKineticEnergyScore',score)}};
-$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
 })();
 </script>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

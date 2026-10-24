@@ -1,32 +1,464 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Centre of Mass</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f6f7f8;color:#202124;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center}.head h1{font-size:26px;margin:0}.xp{font-weight:700;color:#159447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 2px 8px #00000008}.master{padding:16px}.row{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e7eb;border-radius:99px;margin-top:10px;overflow:hidden}.fill{height:100%;width:0;background:#22c55e;transition:.25s}.qno{font-size:14px;color:#667085}.question{font-size:20px;font-weight:700;line-height:1.45;margin:10px 0 18px}.opts{display:grid;gap:10px}.opts button{width:100%;padding:14px;text-align:left;border:2px solid #d9dee5;background:#fff;border-radius:12px;font-size:16px;cursor:pointer}.opts button:hover{transform:translateY(-1px);border-color:#8fd3aa}.opts button.selected{border-color:#159447;background:#f0fbf4}.opts button.correct{border-color:#22a65a;background:#e9f9ef}.opts button.wrong{border-color:#e05252;background:#fff0f0}.btn{width:100%;margin-top:18px;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:700;background:#20a653;color:#fff;cursor:pointer}.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}.btn:disabled{opacity:.55;cursor:not-allowed}.back{display:block;width:100%;padding:13px;border:2px solid #d9dee5;border-radius:12px;background:#fff;color:#333;font-weight:700;cursor:pointer}.back:hover{background:#f1f5f3;border-color:#159447}.feedback{min-height:24px;margin-top:14px;font-weight:700}.result{text-align:center}.result h2{font-size:28px}@media(max-width:520px){.wrap{padding:18px 12px}.question{font-size:18px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>⚖️ Centre of Mass</h1><div class="xp">XP <span id="xp">0</span></div></div><div class="sub">Master centre of mass with 15 NEET-style questions.</div><section class="card master"><div class="row"><span>🎯 Skill Mastery</span><span><span id="mastery">0</span> / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qno" id="qno"></div><div class="question" id="question"></div><div class="opts" id="opts"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><div id="result"></div><button class="back" id="back">← Back to Physics Path</button></main><script>
-const quiz=[
-['For a system of particles, the position of its centre of mass is defined using:', ['Vector sum of positions weighted by masses','Arithmetic mean of velocities','Product of all masses','Sum of accelerations'],0],
-['For two equal masses placed at x=0 and x=4 m, the centre of mass is at:', ['0 m','1 m','2 m','4 m'],2],
-['The centre of mass of a uniform rod lies at its:', ['One end','Geometrical centre','Quarter point','Outside the rod'],1],
-['If all particles of a system are translated by the same vector, its centre of mass:', ['Remains fixed','Translates by the same vector','Moves twice as far','Moves opposite'],1],
-['For an isolated system, the centre of mass moves with constant:', ['Acceleration','Momentum only','Velocity','Force'],2],
-['The velocity of centre of mass of a system is equal to:', ['Total momentum divided by total mass','Total force divided by mass squared','Sum of positions','Average acceleration only'],0],
-['If the net external force on a system is zero, its centre of mass:', ['Must be at origin','Has zero velocity always','Moves with constant velocity','Must remain inside one particle'],2],
-['For a symmetric uniform lamina, the centre of mass lies at the:', ['Point of symmetry','Boundary only','Highest point','Lowest point'],0],
-['A man walks inside a boat floating freely on water. Neglecting external horizontal force, the centre of mass of man-boat system:', ['Remains fixed horizontally','Moves with the man only','Moves with the boat only','Accelerates continuously'],0],
-['The centre of mass of a uniform circular ring is at its:', ['Circumference','Centre','Any point on diameter','Quarter point'],1],
-['Two masses 2 kg and 3 kg are at x=0 m and x=5 m. Their centre of mass is:', ['2 m','3 m','4 m','5 m'],1],
-['Internal forces between particles of a system can change the motion of the centre of mass:', ['Always','Never, by themselves','Only in vacuum','Only for equal masses'],1],
-['The centre of mass of a uniform triangular lamina is located at the intersection of its:', ['Three medians','Three altitudes only','Three sides','Diagonals'],0],
-['When a projectile explodes in mid-air into fragments, ignoring air resistance, the centre of mass follows:', ['A straight horizontal line','The same trajectory the projectile would have followed','A random path','A vertical line'],1],
-['The acceleration of the centre of mass is determined by:', ['Net external force divided by total mass','Internal force divided by one mass','Total kinetic energy','Number of particles only'],0]
-];
-let i=0,selected=null,score=0,checked=false;const $=id=>document.getElementById(id);
-function render(){checked=false;selected=null;$('qno').textContent=`Question ${i+1} of ${quiz.length}`;$('question').textContent=quiz[i][0];$('feedback').textContent='';$('continue').textContent='Continue →';$('continue').disabled=false;$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{if(checked)return;selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)})}
-function check(){if(selected===null){$('feedback').textContent='Please select an answer first.';return}checked=true;const a=quiz[i],ok=selected===a[2];if(ok){score++;$('xp').textContent=score*10}$('mastery').textContent=score;$('fill').style.width=(score/quiz.length*100)+'%';[...$('opts').children].forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===a[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'✅ Correct! +10 XP':'❌ Not quite. Review the concept and continue.';$('continue').textContent=i===quiz.length-1?'Finish Skill →':'Continue →'}
-$('continue').onclick=()=>{if(!checked){check();return}if(i<quiz.length-1){i++;render()}else{document.querySelector('.card').style.display='none';$('result').innerHTML=`<section class="card result"><h2>🎉 Skill Complete!</h2><p>You scored <b>${score} / ${quiz.length}</b></p><p>XP earned: <b>${score*10}</b></p><button class="btn" onclick="location.reload()">Retry Skill</button></section>`;$('back').style.marginTop='14px'}};
-$('back').onclick=()=>{const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};
-render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Centre of Mass quiz">
+<title>SkillUp | Centre of Mass — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Centre of Mass</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "The centre of mass of a system is the point where:",
+    "o": [
+      "The gravitational force is always zero",
+      "Every particle has the same velocity",
+      "All external forces disappear",
+      "The system's mass can be treated as concentrated for translational motion"
+    ],
+    "a": 3,
+    "e": "The centre of mass describes the average position of mass and is useful for describing the system's translational motion."
+  },
+  {
+    "q": "For two particles of masses m₁ and m₂ at positions x₁ and x₂, the centre-of-mass coordinate is:",
+    "o": [
+      "(m₁x₁ + m₂x₂)/(m₁ + m₂)",
+      "(x₁ + x₂)/(m₁m₂)",
+      "m₁m₂/(x₁ + x₂)",
+      "(m₁ + m₂)(x₁ + x₂)"
+    ],
+    "a": 0,
+    "e": "The centre of mass is the mass-weighted average of the positions."
+  },
+  {
+    "q": "Two equal masses lie at x = 0 m and x = 4 m. Their centre of mass is at:",
+    "o": [
+      "0 m",
+      "2 m",
+      "1 m",
+      "4 m"
+    ],
+    "a": 1,
+    "e": "For equal masses, the centre of mass is the midpoint: (0 + 4)/2 = 2 m."
+  },
+  {
+    "q": "A 1 kg mass is at x = 0 m and a 3 kg mass is at x = 4 m. The centre of mass is:",
+    "o": [
+      "1 m",
+      "4 m",
+      "3 m",
+      "2 m"
+    ],
+    "a": 2,
+    "e": "xCM = (1×0 + 3×4)/(1+3) = 12/4 = 3 m."
+  },
+  {
+    "q": "A 2 kg mass at x = 0 m and a 2 kg mass at x = 6 m have centre of mass at:",
+    "o": [
+      "2 m",
+      "4 m",
+      "6 m",
+      "3 m"
+    ],
+    "a": 3,
+    "e": "Equal masses place the centre of mass halfway between them."
+  },
+  {
+    "q": "A 2 kg particle is at x = 1 m and a 1 kg particle at x = 7 m. Find xCM.",
+    "o": [
+      "3 m",
+      "4 m",
+      "5 m",
+      "2 m"
+    ],
+    "a": 0,
+    "e": "xCM = (2×1 + 1×7)/3 = 9/3 = 3 m."
+  },
+  {
+    "q": "For a uniform straight rod, the centre of mass lies:",
+    "o": [
+      "At a point that changes with orientation",
+      "At its geometric midpoint",
+      "At one end",
+      "Outside the rod"
+    ],
+    "a": 1,
+    "e": "A uniform rod has symmetric mass distribution, so its centre of mass is at the midpoint."
+  },
+  {
+    "q": "For a uniform circular ring, the centre of mass is:",
+    "o": [
+      "At the lowest point always",
+      "Outside the plane",
+      "At the centre of the ring",
+      "On its circumference"
+    ],
+    "a": 2,
+    "e": "Symmetry places the centre of mass at the geometric centre, even though no ring material is there."
+  },
+  {
+    "q": "For a uniform solid sphere, the centre of mass is:",
+    "o": [
+      "At its surface",
+      "At its top point",
+      "Outside the sphere",
+      "At its geometric centre"
+    ],
+    "a": 3,
+    "e": "A uniform sphere is symmetric in all directions, placing its centre of mass at its centre."
+  },
+  {
+    "q": "The centre of mass of a uniform triangular lamina is at the intersection of its:",
+    "o": [
+      "Medians",
+      "Altitudes only",
+      "Perpendicular bisectors only",
+      "Edges"
+    ],
+    "a": 0,
+    "e": "For a uniform triangular lamina, the centroid is the intersection of the three medians."
+  },
+  {
+    "q": "If all particles in a system have equal masses, the centre of mass position is the:",
+    "o": [
+      "Sum of positions multiplied by mass squared",
+      "Arithmetic mean of their positions",
+      "Largest position coordinate",
+      "Smallest position coordinate"
+    ],
+    "a": 1,
+    "e": "With equal masses, the mass-weighted average reduces to the arithmetic mean."
+  },
+  {
+    "q": "The SI unit of centre-of-mass position is:",
+    "o": [
+      "Newton",
+      "Joule",
+      "Metre",
+      "Kilogram"
+    ],
+    "a": 2,
+    "e": "Centre-of-mass position is a length, measured in metres."
+  },
+  {
+    "q": "If the net external force on a system is zero, its centre of mass moves with:",
+    "o": [
+      "Constant acceleration of 9.8 m/s² always",
+      "Increasing speed always",
+      "Zero position",
+      "Constant velocity"
+    ],
+    "a": 3,
+    "e": "With zero net external force, centre-of-mass momentum is constant, so its velocity is constant for fixed total mass."
+  },
+  {
+    "q": "The acceleration of a system's centre of mass is determined by:",
+    "o": [
+      "Net external force divided by total mass",
+      "Net internal force divided by one particle's mass",
+      "Total kinetic energy divided by mass",
+      "The number of particles alone"
+    ],
+    "a": 0,
+    "e": "For a system, aCM = Fexternal,net/Mtotal."
+  },
+  {
+    "q": "Internal forces between particles can change the motion of the centre of mass of an isolated system.",
+    "o": [
+      "True only when masses differ",
+      "False",
+      "True in every case",
+      "True only for two particles"
+    ],
+    "a": 1,
+    "e": "Internal forces cancel in pairs for the system as a whole; only net external force changes centre-of-mass motion."
+  },
+  {
+    "q": "A 2 kg object at x = 0 m and a 6 kg object at x = 4 m have centre of mass at:",
+    "o": [
+      "1 m",
+      "4 m",
+      "3 m",
+      "2 m"
+    ],
+    "a": 2,
+    "e": "xCM = (2×0 + 6×4)/(2+6) = 24/8 = 3 m."
+  },
+  {
+    "q": "A 4 kg mass at x = 2 m and a 2 kg mass at x = 8 m have centre of mass at:",
+    "o": [
+      "5 m",
+      "6 m",
+      "3 m",
+      "4 m"
+    ],
+    "a": 3,
+    "e": "xCM = (4×2 + 2×8)/6 = 24/6 = 4 m."
+  },
+  {
+    "q": "Two masses 1 kg and 3 kg are at x = 2 m and x = 6 m, respectively. Find xCM.",
+    "o": [
+      "5 m",
+      "4 m",
+      "3 m",
+      "6 m"
+    ],
+    "a": 0,
+    "e": "xCM = (1×2 + 3×6)/4 = 20/4 = 5 m."
+  },
+  {
+    "q": "A 2 kg particle at x = −2 m and a 2 kg particle at x = 6 m have centre of mass at:",
+    "o": [
+      "6 m",
+      "2 m",
+      "4 m",
+      "−2 m"
+    ],
+    "a": 1,
+    "e": "For equal masses, xCM = (−2 + 6)/2 = 2 m."
+  },
+  {
+    "q": "If a system's centre of mass is at the origin, this means:",
+    "o": [
+      "The total mass is zero",
+      "No forces act on any particle",
+      "Its mass-weighted position vector sum is zero",
+      "Every particle is at the origin"
+    ],
+    "a": 2,
+    "e": "The condition is Σmᵢrᵢ = 0 relative to the chosen origin; individual particles can be elsewhere."
+  },
+  {
+    "q": "The centre of mass of a two-particle system lies closer to:",
+    "o": [
+      "The particle with smaller mass",
+      "The origin in every case",
+      "The faster particle in every case",
+      "The particle with greater mass"
+    ],
+    "a": 3,
+    "e": "The heavier particle contributes more strongly to the mass-weighted average."
+  },
+  {
+    "q": "A person walks from the back to the front of a boat floating freely on still water. Neglecting external horizontal forces, the boat moves:",
+    "o": [
+      "Backward",
+      "Forward by the same distance as the person",
+      "Not at all",
+      "Vertically downward"
+    ],
+    "a": 0,
+    "e": "The horizontal centre of mass of the person-boat system remains fixed, so the boat shifts opposite the person's motion."
+  },
+  {
+    "q": "When a projectile explodes in mid-air and external air resistance is neglected, the centre of mass follows:",
+    "o": [
+      "A path determined only by the smallest fragment",
+      "The same trajectory the projectile would have followed without exploding",
+      "A vertical straight line in all cases",
+      "The path of the heaviest fragment only"
+    ],
+    "a": 1,
+    "e": "Explosion forces are internal, so they do not change the centre-of-mass trajectory under the same external force."
+  },
+  {
+    "q": "For a system of particles, total linear momentum equals:",
+    "o": [
+      "Centre-of-mass position divided by time squared",
+      "Total kinetic energy multiplied by time",
+      "Total mass multiplied by centre-of-mass velocity",
+      "Total mass divided by centre-of-mass velocity"
+    ],
+    "a": 2,
+    "e": "Ptotal = Mtotal vCM."
+  },
+  {
+    "q": "A 2 kg particle moves at 3 m/s and a 1 kg particle moves at 6 m/s in the same direction. Centre-of-mass speed is:",
+    "o": [
+      "3 m/s",
+      "6 m/s",
+      "9 m/s",
+      "4 m/s"
+    ],
+    "a": 3,
+    "e": "vCM = (2×3 + 1×6)/(2+1) = 12/3 = 4 m/s."
+  },
+  {
+    "q": "A 1 kg particle moves right at 4 m/s and a 1 kg particle moves left at 2 m/s. Taking right as positive, vCM is:",
+    "o": [
+      "1 m/s to the right",
+      "3 m/s to the right",
+      "2 m/s to the left",
+      "0 m/s"
+    ],
+    "a": 0,
+    "e": "vCM = (4 − 2)/2 = +1 m/s."
+  },
+  {
+    "q": "For a rigid body of uniform density and symmetric shape, the centre of mass is usually:",
+    "o": [
+      "At the point of greatest speed",
+      "At its symmetry centre",
+      "Always at its bottom surface",
+      "Always outside the body"
+    ],
+    "a": 1,
+    "e": "Uniform density and symmetry place the centre of mass at the corresponding geometric centre."
+  },
+  {
+    "q": "Can the centre of mass lie outside the material of an object?",
+    "o": [
+      "Only if the object has negative mass",
+      "Only if it is moving",
+      "Yes, for example in a uniform ring",
+      "No, never"
+    ],
+    "a": 2,
+    "e": "A ring's centre of mass is at its empty geometric centre, showing it need not lie within the material."
+  },
+  {
+    "q": "The position of a centre of mass depends on:",
+    "o": [
+      "Only the object's colour",
+      "Only its temperature in every case",
+      "The observer's speed alone",
+      "How mass is distributed"
+    ],
+    "a": 3,
+    "e": "The centre of mass is determined by the locations and amounts of mass."
+  },
+  {
+    "q": "Two equal masses are located at x = −3 m and x = +3 m. Their centre of mass is:",
+    "o": [
+      "0 m",
+      "3 m",
+      "−3 m",
+      "6 m"
+    ],
+    "a": 0,
+    "e": "The positions are symmetric about the origin, so their mass-weighted average is zero."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

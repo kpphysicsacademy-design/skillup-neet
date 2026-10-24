@@ -1,32 +1,465 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Connected Bodies</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.card{background:#fff;border-radius:22px;padding:28px;box-shadow:0 6px 20px #17203312}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.tag{font-weight:800;font-size:.9rem}.xp{font-weight:850}.bar{height:10px;background:#e8e8f1;border-radius:999px;overflow:hidden;margin:12px 0 24px}.fill{height:100%;width:0;background:#5b50c8;transition:width .25s ease}.q{font-size:1.22rem;font-weight:800;line-height:1.45;margin:20px 0}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:15px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .12s,background .12s,border-color .12s,box-shadow .12s}.opt:hover{transform:translateY(-2px);border-color:#aaa4df;box-shadow:0 4px 12px #17203310}.opt:focus{outline:3px solid #c9c3ff;outline-offset:2px}.opt.selected{border-color:#5b50c8;background:#f0edff}.opt.correct{border-color:#2d9b68;background:#eaf8f1}.opt.wrong{border-color:#d45555;background:#fff0f0}.feedback{min-height:72px;margin-top:18px;padding:14px 16px;border-radius:15px;background:#f4f3fb;line-height:1.5}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:#5b50c8;color:white}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:focus{outline:3px solid #c9c3ff;outline-offset:2px}.btn:active{transform:translateY(1px)}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:800;text-decoration:none;padding:11px 14px;border-radius:13px}.back:hover{background:#f0edff;transform:translateY(-1px)}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back:active{transform:translateY(1px)}.result{font-size:1.2rem;font-weight:750;line-height:1.6}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><div class="tag">🔗 Connected Bodies</div><div class="xp">+10 XP</div></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></section></main><script>
-const qs=[
-['Two bodies connected by a light inextensible string over a smooth pulley have:', ['the same magnitude of acceleration','different accelerations in all cases','zero acceleration always','independent motions'],0,'An inextensible string keeps the connected bodies moving with equal acceleration magnitude.'],
-['For an ideal light string passing over a smooth pulley, the tension is:', ['the same throughout the string','zero at the pulley','different on the two sides','equal to the heavier body’s weight always'],0,'A massless string and frictionless pulley give the same tension throughout the string.'],
-['In an Atwood machine with masses m1 and m2, m2 > m1, the heavier mass moves:', ['downward','upward','horizontally','with zero acceleration'],0,'The larger weight produces a net downward force on m2.'],
-['For an ideal Atwood machine, the magnitude of acceleration is:', ['(m2−m1)g/(m1+m2)','(m1+m2)g/(m2−m1)','g(m1+m2)','g(m2−m1)'],0,'Applying Newton’s second law to both masses gives a = (m2−m1)g/(m1+m2).'],
-['If two equal masses are connected over an ideal pulley, the acceleration is:', ['zero','g','g/2','2g'],0,'Equal weights balance, so the net driving force is zero.'],
-['In a connected-body system, the tension in the string is an:', ['internal force between the connected bodies','external force on the whole system only','frictional force','gravitational force'],0,'Tension acts between parts of the chosen system and is internal if both bodies are included.'],
-['For two bodies on a smooth horizontal surface connected by a string and pulled by force F, the acceleration of the system is:', ['F/(m1+m2)','F/(m1−m2)','F m1 m2','(m1+m2)/F'],0,'Treating both bodies as one system gives F = (m1+m2)a.'],
-['For the same horizontal system, the tension can be found by applying Newton’s second law to:', ['either individual body','neither body','the pulley only','gravity alone'],0,'Isolating one body lets its equation determine the string tension.'],
-['If the connecting string is inextensible, the displacement magnitudes of two connected bodies are:', ['equal along the string','always unequal','both zero','unrelated'],0,'An inextensible string imposes a fixed length constraint.'],
-['A 2 kg mass and a 3 kg mass form an ideal Atwood machine. Taking g = 10 m/s², the acceleration is:', ['2 m/s²','5 m/s²','10 m/s²','1 m/s²'],0,'a = (3−2)10/(3+2) = 2 m/s².'],
-['For the 2 kg and 3 kg Atwood machine, the string tension is:', ['24 N','20 N','30 N','6 N'],0,'For the 2 kg mass moving up: T−20 = 2×2, so T = 24 N.'],
-['If the pulley has significant mass and rotational inertia, the tensions on its two sides are generally:', ['different','always equal','both zero','equal to the weights'],0,'A massive pulley requires a torque difference, so the two tensions need not be equal.'],
-['In a two-body system connected by a string, the direction of friction on a body is:', ['opposite its relative motion or tendency of motion','always toward the pulley','always downward','always upward'],0,'Friction opposes relative motion or the tendency of relative motion at the contact.'],
-['When solving connected-body problems, a free-body diagram should show:', ['all forces acting on each isolated body','only the tension','only gravity','the acceleration instead of forces'],0,'A correct free-body diagram identifies every external force on the isolated body.'],
-['For ideal connected bodies, the acceleration constraint is primarily determined by the:', ['string constraint and Newton’s laws','colour of the string','size of the pulley alone','shape of the bodies'],0,'The inextensible-string constraint links the motions, while Newton’s laws determine the acceleration.']
-];
-let i=0,selected=null,score=0;const $=id=>document.getElementById(id);
-function render(){selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';$('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('check').onclick=check}
-function check(){if(selected===null){$('feedback').textContent='Please choose an answer first.';return}const a=qs[i],ok=selected===a[2];if(ok)score++;[...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});$('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{$('fill').style.width='100%';const pct=Math.round(score/qs.length*100);$('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsConnectedBodiesScore',String(score))}}
-function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}
-rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();
-</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Connected Bodies quiz">
+<title>SkillUp | Connected Bodies — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Connected Bodies</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What is a connected-body system?",
+    "o": [
+      "Two or more objects linked so their motions are related",
+      "One object with no forces",
+      "Objects that never interact",
+      "Only objects at rest"
+    ],
+    "a": 0,
+    "e": "A string, pulley or other connection constrains how the connected objects move."
+  },
+  {
+    "q": "For an ideal light, inextensible string over a smooth fixed pulley, the tension is:",
+    "o": [
+      "The same on both sides",
+      "Always zero",
+      "Different on every side",
+      "Equal to each mass"
+    ],
+    "a": 0,
+    "e": "In the ideal model, the string and pulley make the tension uniform throughout the string."
+  },
+  {
+    "q": "Two blocks connected by a taut inextensible string over an ideal pulley have acceleration magnitudes that are:",
+    "o": [
+      "Equal",
+      "Always zero",
+      "Always opposite in magnitude",
+      "Proportional to their masses"
+    ],
+    "a": 0,
+    "e": "The fixed string length constrains both blocks to have equal acceleration magnitudes."
+  },
+  {
+    "q": "A 2 kg block on a smooth table is connected over an ideal pulley to a hanging 3 kg block. Take g = 10 m/s². The acceleration magnitude is:",
+    "o": [
+      "6 m/s²",
+      "10 m/s²",
+      "4 m/s²",
+      "2 m/s²"
+    ],
+    "a": 0,
+    "e": "The net driving force is 3g and total mass is 2 + 3 kg, so a = 30/5 = 6 m/s²."
+  },
+  {
+    "q": "For the system in the previous question, the string tension is:",
+    "o": [
+      "12 N",
+      "18 N",
+      "30 N",
+      "6 N"
+    ],
+    "a": 0,
+    "e": "For the 2 kg block, T = ma = 2 × 6 = 12 N. Correction: this evaluates to 12 N."
+  },
+  {
+    "q": "In an ideal Atwood machine with masses m₂ > m₁, the heavier mass accelerates:",
+    "o": [
+      "Downward",
+      "Upward",
+      "With zero acceleration always",
+      "Horizontally"
+    ],
+    "a": 0,
+    "e": "The heavier mass moves down and the lighter mass moves up when released from rest."
+  },
+  {
+    "q": "For an ideal Atwood machine, the acceleration magnitude is:",
+    "o": [
+      "(m₂ − m₁)g/(m₁ + m₂)",
+      "(m₁ + m₂)g",
+      "m₁m₂g",
+      "g/(m₂ − m₁)"
+    ],
+    "a": 0,
+    "e": "The net driving force is (m₂ − m₁)g and the total inertia is m₁ + m₂."
+  },
+  {
+    "q": "An Atwood machine has masses 4 kg and 6 kg. Take g = 10 m/s². The acceleration is:",
+    "o": [
+      "2 m/s²",
+      "5 m/s²",
+      "10 m/s²",
+      "4 m/s²"
+    ],
+    "a": 0,
+    "e": "a = (6 − 4)10/(6 + 4) = 2 m/s²."
+  },
+  {
+    "q": "For an ideal Atwood machine with masses 4 kg and 6 kg, the string tension is:",
+    "o": [
+      "48 N",
+      "40 N",
+      "60 N",
+      "20 N"
+    ],
+    "a": 0,
+    "e": "Using the 4 kg mass moving up: T − 40 = 4 × 2, so T = 48 N."
+  },
+  {
+    "q": "A block on a smooth horizontal table is pulled by string tension T. The horizontal net force on it is:",
+    "o": [
+      "T",
+      "mg",
+      "N",
+      "Zero in every case"
+    ],
+    "a": 0,
+    "e": "If no other horizontal force acts, tension is the net horizontal force on the table block."
+  },
+  {
+    "q": "For a block of mass m on a smooth table connected to a hanging mass M, the system acceleration is:",
+    "o": [
+      "Mg/(m + M)",
+      "mg/(m + M)",
+      "(m + M)g",
+      "M/m"
+    ],
+    "a": 0,
+    "e": "The hanging weight Mg drives the combined mass m + M, giving a = Mg/(m + M)."
+  },
+  {
+    "q": "A 4 kg block on a smooth table is connected to a hanging 1 kg mass. Take g = 10 m/s². The acceleration is:",
+    "o": [
+      "2 m/s²",
+      "4 m/s²",
+      "8 m/s²",
+      "10 m/s²"
+    ],
+    "a": 0,
+    "e": "a = Mg/(m + M) = 1 × 10/5 = 2 m/s²."
+  },
+  {
+    "q": "For the system with a 4 kg table block and 1 kg hanging block, the tension is:",
+    "o": [
+      "8 N",
+      "10 N",
+      "2 N",
+      "40 N"
+    ],
+    "a": 0,
+    "e": "T = ma = 4 × 2 = 8 N for the block on the table."
+  },
+  {
+    "q": "When drawing a free-body diagram for each connected block, you should:",
+    "o": [
+      "Show only forces acting on that block",
+      "Combine all forces into one diagram without labels",
+      "Omit tension",
+      "Draw acceleration as a force"
+    ],
+    "a": 0,
+    "e": "Draw a separate diagram for each body and include only forces acting on that body."
+  },
+  {
+    "q": "In connected-body problems, tension acts on a body:",
+    "o": [
+      "Along the string, pulling away from the body",
+      "Perpendicular to the string",
+      "Always downward",
+      "Only when the body is at rest"
+    ],
+    "a": 0,
+    "e": "An ideal string pulls along its length and cannot push."
+  },
+  {
+    "q": "Two equal masses in an ideal Atwood machine are released from rest. Their acceleration is:",
+    "o": [
+      "Zero",
+      "g",
+      "g/2",
+      "Infinite"
+    ],
+    "a": 0,
+    "e": "Equal weights balance, so there is no net driving force."
+  },
+  {
+    "q": "A 5 kg block on a rough table is connected to a hanging 2 kg mass. The friction on the table block is 5 N, g = 10 m/s². The acceleration is:",
+    "o": [
+      "(20 − 5)/7 ≈ 2.14 m/s²",
+      "20/5 = 4 m/s²",
+      "5 m/s²",
+      "10 m/s²"
+    ],
+    "a": 0,
+    "e": "Net driving force is 2g − 5 = 15 N; total mass is 7 kg, so a = 15/7 ≈ 2.14 m/s²."
+  },
+  {
+    "q": "For a system accelerating with a hanging mass moving down, friction on a connected block on the table acts:",
+    "o": [
+      "Opposite the block's motion or tendency to move",
+      "In the same direction as frictionless acceleration always",
+      "Vertically upward",
+      "Along the string away from the pulley only"
+    ],
+    "a": 0,
+    "e": "Friction opposes relative motion or impending motion between the block and table."
+  },
+  {
+    "q": "If a connected system is released from rest and accelerates, its acceleration direction is determined by:",
+    "o": [
+      "The net external force along the allowed motion",
+      "The larger object's colour",
+      "Tension alone in all cases",
+      "The total distance travelled"
+    ],
+    "a": 0,
+    "e": "Apply Newton's second law to the whole system or each body to determine the net driving force."
+  },
+  {
+    "q": "A 3 kg and 5 kg Atwood machine uses g = 10 m/s². The heavier mass's acceleration is:",
+    "o": [
+      "2.5 m/s² downward",
+      "5 m/s² downward",
+      "10 m/s² downward",
+      "1 m/s² upward"
+    ],
+    "a": 0,
+    "e": "a = (5 − 3)10/(5 + 3) = 20/8 = 2.5 m/s²."
+  },
+  {
+    "q": "For a 3 kg and 5 kg Atwood machine, the string tension is:",
+    "o": [
+      "37.5 N",
+      "30 N",
+      "50 N",
+      "25 N"
+    ],
+    "a": 0,
+    "e": "For the 3 kg mass moving up, T − 30 = 3 × 2.5, so T = 37.5 N."
+  },
+  {
+    "q": "A 2 kg block on a smooth table is connected to a 3 kg hanging mass, g = 10 m/s². What is the tension?",
+    "o": [
+      "12 N",
+      "18 N",
+      "30 N",
+      "6 N"
+    ],
+    "a": 0,
+    "e": "Acceleration is 6 m/s²; tension on the 2 kg block is T = 2 × 6 = 12 N."
+  },
+  {
+    "q": "For two connected blocks moving together on a horizontal frictionless surface, their common acceleration is found by:",
+    "o": [
+      "Net external horizontal force divided by total mass",
+      "Dividing mass by force",
+      "Adding their individual accelerations",
+      "Using tension as the only force on the system"
+    ],
+    "a": 0,
+    "e": "Treating the blocks as one system makes internal tension cancel; use a = Fnet/mtotal."
+  },
+  {
+    "q": "If a string is slack, can its tension pull the connected objects together immediately?",
+    "o": [
+      "No; a slack string cannot transmit tension until taut",
+      "Yes, tension is infinite",
+      "Yes, tension is always equal to weight",
+      "No, gravity also disappears"
+    ],
+    "a": 0,
+    "e": "An ideal string transmits pulling force when taut; it does not push and a slack string has no tension."
+  },
+  {
+    "q": "Why does tension cancel when considering two connected blocks as one system?",
+    "o": [
+      "It is an internal force pair within the chosen system",
+      "Tension is always zero",
+      "The string has mass",
+      "Gravity cancels automatically"
+    ],
+    "a": 0,
+    "e": "For the combined system, the equal and opposite tensions are internal and cancel in the total-force equation."
+  },
+  {
+    "q": "A 2 kg block and a 3 kg block are pulled horizontally by 10 N on a frictionless surface. Their common acceleration is:",
+    "o": [
+      "2 m/s²",
+      "5 m/s²",
+      "10 m/s²",
+      "1 m/s²"
+    ],
+    "a": 0,
+    "e": "Total mass is 5 kg; a = 10/5 = 2 m/s²."
+  },
+  {
+    "q": "In a real pulley system, why might tensions on two sides differ?",
+    "o": [
+      "Pulley rotation, friction or string mass can make the ideal assumptions fail",
+      "Newton's laws never apply",
+      "Masses stop experiencing gravity",
+      "Strings can push as well as pull"
+    ],
+    "a": 0,
+    "e": "The equal-tension result assumes a massless string and a frictionless, massless pulley."
+  },
+  {
+    "q": "A hanging 2 kg mass is at rest on an ideal string with no acceleration. The tension is:",
+    "o": [
+      "20 N",
+      "0 N",
+      "10 N",
+      "40 N"
+    ],
+    "a": 0,
+    "e": "With zero acceleration, T = mg = 2 × 10 = 20 N."
+  },
+  {
+    "q": "When using Newton's second law for a connected body, the correct equation along the chosen positive direction is:",
+    "o": [
+      "ΣF = ma",
+      "ΣF = m/a",
+      "ΣF = a/m",
+      "ΣF = 0 always"
+    ],
+    "a": 0,
+    "e": "Newton's second law states that the net force equals mass times acceleration."
+  },
+  {
+    "q": "Which is a reliable method for solving connected-body problems?",
+    "o": [
+      "Draw free-body diagrams, choose directions, apply ΣF = ma, then use string constraints",
+      "Guess tension from the larger mass only",
+      "Ignore acceleration direction",
+      "Assume all forces are equal"
+    ],
+    "a": 0,
+    "e": "Separate free-body diagrams and Newton's second law, combined with the string constraint, provide a systematic solution."
+  }
+];
+
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

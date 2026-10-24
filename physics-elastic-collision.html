@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Elastic Collision</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:flex-end;margin-bottom:20px}.xp{background:#fff;padding:12px 18px;border-radius:18px;box-shadow:0 5px 18px #17203314;font-weight:800}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:12px;box-shadow:0 8px 22px #12539d25}.hero h1{margin:9px 0 10px;font-size:1.9rem}.hero p{margin:0}.card{background:#fff;border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 6px 20px #17203312}.progress-head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:12px;background:#dfe8f1;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;border-radius:999px;transition:width .3s}.qnum{font-size:.9rem;font-weight:800;color:#35516f;margin-bottom:12px}.question{font-size:1.28rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{width:100%;padding:14px 15px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer}.option:hover{border-color:#58cc02;background:#f7fff1}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;font-weight:850;cursor:pointer;background:#2db84d;color:#fff;box-shadow:0 4px 0 #21863a}.feedback{margin-top:14px;padding:13px;border-radius:14px;font-weight:700}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:8px;color:#5146a5;font-weight:800;text-decoration:none;padding:9px 12px;border-radius:12px}.back:hover{background:#f0edff}@media(max-width:600px){.wrap{padding:20px 14px 34px}.question{font-size:1.15rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="xp">⚡ <span id="xp">0</span> XP</div></div><section class="hero"><h1>💥 Elastic Collision</h1><p>LEARN → PRACTICE → MASTER • 15 NEET-style MCQs</p></section><section class="card"><div class="progress-head"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count">Question 1 of 15</div><h2 id="question" class="question"></h2><div id="options" class="options"></div><button id="continue" class="btn">Continue →</button><div id="feedback" class="feedback"></div></section><a id="back" class="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['In a perfectly elastic collision, which two quantities are conserved?',['momentum and kinetic energy','only kinetic energy','only momentum','neither'],0],['The coefficient of restitution for a perfectly elastic collision is:',['1','0','0.5','2'],0],['For an isolated elastic collision, total kinetic energy after collision is:',['equal to that before collision','always zero','greater than before','half of before'],0],['In a one-dimensional elastic collision of equal masses, one initially at rest, after collision the first mass:',['comes to rest','doubles its speed','moves backward at double speed','keeps its original speed'],0],['In the same equal-mass elastic collision, the initially stationary mass:',['takes the initial velocity of the first mass','remains at rest','moves backward','gets twice the velocity'],0],['During an elastic collision, total linear momentum is:',['conserved','destroyed','always zero','equal to kinetic energy'],0],['Elastic collision means deformation energy is:',['fully recoverable in the ideal model','always converted to heat','always converted to mass','irrelevant to energy'],0],['For a head-on elastic collision, the relative speed of separation is:',['equal to relative speed of approach','zero','twice the approach speed always','half always'],0],['If coefficient of restitution e=1, the collision is:',['perfectly elastic','perfectly inelastic','necessarily explosive','at rest'],0],['A major distinction between elastic and inelastic collisions is that elastic collisions conserve:',['kinetic energy','mass only','acceleration','individual velocity always'],0],['In an elastic collision, the total mechanical energy of the isolated colliding system is:',['conserved','necessarily lost','necessarily doubled','zero'],0],['For two bodies with no external impulse, the collision cannot change their total:',['linear momentum','individual kinetic energies','individual velocities','masses'],0],['A perfectly elastic collision can involve:',['exchange of kinetic energy between bodies while total KE stays constant','loss of all momentum','permanent sticking only','creation of kinetic energy'],0],['If a collision has e=1 and no external impulse, then:',['momentum and kinetic energy are conserved','only momentum is conserved','only energy is conserved','neither is conserved'],0],['Which statement is correct?',['Elastic collision does not mean each body keeps its kinetic energy','Elastic collision means both bodies have equal speed after impact','Momentum is not conserved in elastic collision','Elastic collision requires equal masses'],0]];let i=0,s=-1,score=0,checked=false;const $=x=>document.getElementById(x);function render(){let a=quiz[i];s=-1;checked=false;$('count').textContent='Question '+(i+1)+' of 15';$('question').textContent=a[0];$('options').innerHTML='';$('feedback').textContent='';$('feedback').className='feedback';$('continue').style.display='inline-block';$('continue').textContent=i===14?'Finish Skill →':'Continue →';let order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k;k--){let r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{let b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{s=x.index;[...$('options').children].forEach(z=>z.classList.remove('selected'));b.classList.add('selected')};$('options').appendChild(b)})}$('continue').onclick=()=>{if(!checked){if(s<0){$('feedback').className='feedback bad';$('feedback').textContent='Choose an answer first 👆';return}checked=true;let a=quiz[i],ok=s===a[2];[...$('options').children].forEach(b=>{let x=+b.dataset.index;b.disabled=true;if(x===a[2])b.classList.add('correct');if(x===s&&!ok)b.classList.add('wrong')});if(ok){score++;$('feedback').className='feedback good';$('feedback').textContent='🎯 Correct! +10 XP'}else{$('feedback').className='feedback bad';$('feedback').textContent='✗ Correct answer: '+a[1][a[2]]}$('xp').textContent=score*10;$('mastery').textContent=score+' / 15';$('fill').style.width=score/15*100+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$('question').textContent='🏆 Elastic Collision Complete!';$('options').innerHTML='';$('continue').style.display='none';$('feedback').className='feedback good';$('feedback').textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Elastic Collision quiz">
+<title>SkillUp | Elastic Collision — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>💥 Elastic Collision</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "In a perfectly elastic collision, which quantities are conserved?",
+    "o": [
+      "Total momentum and kinetic energy",
+      "Only kinetic energy",
+      "Only momentum",
+      "Neither"
+    ],
+    "a": 0,
+    "e": "An isolated elastic collision conserves total momentum and total kinetic energy."
+  },
+  {
+    "q": "The coefficient of restitution for a perfectly elastic collision is:",
+    "o": [
+      "1",
+      "0",
+      "0.5",
+      "2"
+    ],
+    "a": 0,
+    "e": "For an elastic collision, relative separation speed equals relative approach speed, so e = 1."
+  },
+  {
+    "q": "After an ideal elastic collision, total kinetic energy is:",
+    "o": [
+      "Equal to its initial value",
+      "Always zero",
+      "Always doubled",
+      "Always halved"
+    ],
+    "a": 0,
+    "e": "Kinetic energy may transfer between bodies, but the total remains constant."
+  },
+  {
+    "q": "Equal masses collide head-on elastically; one is initially at rest. The first mass then:",
+    "o": [
+      "Comes to rest",
+      "Doubles its speed",
+      "Moves backward at double speed",
+      "Keeps its velocity"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange velocities in a one-dimensional elastic collision."
+  },
+  {
+    "q": "In that equal-mass collision, the initially stationary mass:",
+    "o": [
+      "Takes the first mass's initial velocity",
+      "Remains at rest",
+      "Moves backward",
+      "Moves at twice the initial speed"
+    ],
+    "a": 0,
+    "e": "The moving body's velocity transfers to the stationary equal mass."
+  },
+  {
+    "q": "Momentum is conserved during a collision when:",
+    "o": [
+      "Net external impulse is zero",
+      "Both bodies have equal masses",
+      "Both have equal speeds",
+      "Kinetic energy is zero"
+    ],
+    "a": 0,
+    "e": "Momentum conservation follows when the net external impulse is negligible."
+  },
+  {
+    "q": "In an ideal elastic collision, the total kinetic energy has:",
+    "o": [
+      "No net loss",
+      "A loss equal to momentum",
+      "Always doubled",
+      "No relation to initial energy"
+    ],
+    "a": 0,
+    "e": "Total kinetic energy before and after is equal."
+  },
+  {
+    "q": "For a head-on elastic collision, relative speed of separation is:",
+    "o": [
+      "Equal to relative speed of approach",
+      "Always zero",
+      "Always twice approach speed",
+      "Always half approach speed"
+    ],
+    "a": 0,
+    "e": "This is the defining speed relation for e = 1."
+  },
+  {
+    "q": "A collision with e = 1 is:",
+    "o": [
+      "Perfectly elastic",
+      "Perfectly inelastic",
+      "Always explosive",
+      "Necessarily stationary"
+    ],
+    "a": 0,
+    "e": "The coefficient of restitution is one for a perfectly elastic collision."
+  },
+  {
+    "q": "Which is conserved in an isolated inelastic collision as well as an elastic one?",
+    "o": [
+      "Total momentum",
+      "Total kinetic energy",
+      "Each body's speed",
+      "Each body's kinetic energy"
+    ],
+    "a": 0,
+    "e": "Total momentum is conserved in isolated collisions of either type."
+  },
+  {
+    "q": "A 1 kg body at 4 m/s collides elastically head-on with an identical stationary body. Final speeds are:",
+    "o": [
+      "0 m/s and 4 m/s",
+      "2 m/s and 2 m/s",
+      "4 m/s and 4 m/s",
+      "0 m/s and 0 m/s"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange velocities."
+  },
+  {
+    "q": "A 2 kg body at 3 m/s collides elastically with an identical body at −1 m/s. First body's final velocity is:",
+    "o": [
+      "−1 m/s",
+      "1 m/s",
+      "3 m/s",
+      "−3 m/s"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange their signed velocities."
+  },
+  {
+    "q": "A body may lose kinetic energy in an elastic collision if:",
+    "o": [
+      "Another body gains the same amount overall",
+      "Total momentum becomes zero",
+      "The system loses mass",
+      "Restitution becomes zero"
+    ],
+    "a": 0,
+    "e": "Individual kinetic energies can change while total kinetic energy stays constant."
+  },
+  {
+    "q": "If e = 1 and external impulse is negligible:",
+    "o": [
+      "Momentum and kinetic energy are conserved",
+      "Only momentum is conserved",
+      "Only kinetic energy is conserved",
+      "Neither is conserved"
+    ],
+    "a": 0,
+    "e": "No external impulse conserves momentum; e = 1 indicates an elastic collision."
+  },
+  {
+    "q": "Which statement about an elastic collision is correct?",
+    "o": [
+      "Each body need not keep its own kinetic energy",
+      "Both bodies must have equal final speeds",
+      "The bodies must have equal masses",
+      "Momentum is not conserved"
+    ],
+    "a": 0,
+    "e": "Energy can transfer between bodies in an elastic collision."
+  },
+  {
+    "q": "A 2 kg body at 5 m/s collides elastically with an identical stationary body. The second body's final speed is:",
+    "o": [
+      "5 m/s",
+      "2.5 m/s",
+      "0 m/s",
+      "10 m/s"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange velocities, so the second body gains 5 m/s."
+  },
+  {
+    "q": "In a one-dimensional elastic collision, relative speed of separation has the:",
+    "o": [
+      "Same magnitude as relative speed of approach",
+      "Value zero in every case",
+      "Same value as total momentum",
+      "Twice the approach speed always"
+    ],
+    "a": 0,
+    "e": "The relative speeds are equal in magnitude."
+  },
+  {
+    "q": "A 1 kg body at 6 m/s collides elastically with a stationary 2 kg body. The 1 kg body's final velocity is:",
+    "o": [
+      "−2 m/s",
+      "2 m/s",
+      "4 m/s",
+      "6 m/s"
+    ],
+    "a": 0,
+    "e": "v₁ = [(m₁−m₂)u₁]/(m₁+m₂) = (1−2)×6/3 = −2 m/s."
+  },
+  {
+    "q": "For that 1 kg and 2 kg collision, the 2 kg body's final velocity is:",
+    "o": [
+      "4 m/s",
+      "2 m/s",
+      "−2 m/s",
+      "6 m/s"
+    ],
+    "a": 0,
+    "e": "v₂ = 2m₁u₁/(m₁+m₂) = 12/3 = 4 m/s."
+  },
+  {
+    "q": "A 2 kg body at 4 m/s collides elastically with a stationary 1 kg body. The 2 kg body's final velocity is:",
+    "o": [
+      "4/3 m/s",
+      "8/3 m/s",
+      "0 m/s",
+      "−4 m/s"
+    ],
+    "a": 0,
+    "e": "v₁ = [(2−1)×4]/(2+1) = 4/3 m/s."
+  },
+  {
+    "q": "For the same collision, the 1 kg body's final velocity is:",
+    "o": [
+      "16/3 m/s",
+      "4/3 m/s",
+      "8/3 m/s",
+      "0 m/s"
+    ],
+    "a": 0,
+    "e": "v₂ = 2m₁u₁/(m₁+m₂) = 16/3 m/s."
+  },
+  {
+    "q": "Total momentum before an isolated elastic collision is:",
+    "o": [
+      "Equal to total momentum after",
+      "Always zero",
+      "Equal to total kinetic energy",
+      "Always larger"
+    ],
+    "a": 0,
+    "e": "Total momentum is conserved for an isolated system."
+  },
+  {
+    "q": "Equal masses initially move at +3 m/s and −1 m/s and collide elastically head-on. Final velocities are:",
+    "o": [
+      "−1 m/s and +3 m/s",
+      "+1 m/s and +1 m/s",
+      "+3 m/s and −3 m/s",
+      "0 m/s and +2 m/s"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange velocities."
+  },
+  {
+    "q": "A 0.5 kg ball at 8 m/s collides elastically with an identical stationary ball. The first ball's final speed is:",
+    "o": [
+      "0 m/s",
+      "4 m/s",
+      "8 m/s",
+      "16 m/s"
+    ],
+    "a": 0,
+    "e": "The first ball stops and the second moves at 8 m/s."
+  },
+  {
+    "q": "The coefficient of restitution is:",
+    "o": [
+      "Relative separation speed divided by relative approach speed",
+      "Approach speed divided by total mass",
+      "Kinetic energy divided by momentum",
+      "Force divided by time"
+    ],
+    "a": 0,
+    "e": "This ratio defines the coefficient of restitution."
+  },
+  {
+    "q": "Which collision has e = 0?",
+    "o": [
+      "Perfectly inelastic",
+      "Perfectly elastic",
+      "All elastic collisions",
+      "No collision"
+    ],
+    "a": 0,
+    "e": "e = 0 means zero relative separation speed."
+  },
+  {
+    "q": "A collision conserves momentum but not total kinetic energy. It is:",
+    "o": [
+      "Inelastic",
+      "Perfectly elastic",
+      "Impossible in an isolated system",
+      "Not a collision"
+    ],
+    "a": 0,
+    "e": "Inelastic collisions conserve momentum in isolation but not generally kinetic energy."
+  },
+  {
+    "q": "In an ideal elastic collision, energy temporarily stored in deformation is:",
+    "o": [
+      "Returned to mechanical motion",
+      "Entirely lost as heat",
+      "Created from nothing",
+      "Equal to momentum"
+    ],
+    "a": 0,
+    "e": "The ideal elastic model has no net loss of mechanical kinetic energy."
+  },
+  {
+    "q": "A 1 kg body moving at 5 m/s collides elastically with a 1 kg body moving at −1 m/s. Final velocity of the first body is:",
+    "o": [
+      "−1 m/s",
+      "2 m/s",
+      "5 m/s",
+      "4 m/s"
+    ],
+    "a": 0,
+    "e": "Equal masses exchange signed velocities, so the first body leaves at −1 m/s."
+  },
+  {
+    "q": "Which condition best identifies a perfectly elastic collision?",
+    "o": [
+      "e = 1 and total kinetic energy is conserved",
+      "e = 0 and bodies stick together",
+      "Momentum is lost",
+      "All kinetic energy becomes heat"
+    ],
+    "a": 0,
+    "e": "A perfectly elastic collision has e = 1 and conserves total kinetic energy and momentum in an isolated system."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

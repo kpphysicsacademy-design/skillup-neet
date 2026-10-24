@@ -1,6 +1,464 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | System Momentum</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.6rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.27rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none;transition:.12s}.back:hover{background:#f0edff;transform:translateX(-2px)}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.4rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">🧭 System Momentum</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['The total linear momentum of a system is equal to:', ['vector sum of momenta of all particles','sum of particle masses only','total force only','centre-of-mass position only'],0,'System momentum is the vector sum of the momenta of all its particles.'],['For a system of total mass M moving with centre-of-mass velocity V_CM, total momentum is:', ['M V_CM','M a_CM','V_CM/M','M + V_CM'],0,'P_total = M V_CM.'],['If the net external force on a system is zero, its total linear momentum:', ['remains constant','becomes zero','always increases','depends on internal forces'],0,'Zero external force means dP/dt = 0.'],['Internal forces in an isolated system can:', ['change individual momenta but not total momentum','change total momentum','create net external impulse','always stop every particle'],0,'Internal forces occur in equal and opposite pairs, so their total contribution cancels.'],['Two particles of masses 2 kg and 3 kg have velocities 4 m/s and 2 m/s in the same direction. Their total momentum is:', ['14 kg·m/s','10 kg·m/s','8 kg·m/s','5 kg·m/s'],0,'P = 2×4 + 3×2 = 14 kg·m/s.'],['A 5 kg system has centre-of-mass velocity 6 m/s. Its total linear momentum is:', ['30 kg·m/s','11 kg·m/s','1.2 kg·m/s','36 kg·m/s'],0,'P = M V_CM = 5×6 = 30 kg·m/s.'],['If all particles in a system have their velocities reversed, the total momentum:', ['reverses direction with the same magnitude','becomes zero always','doubles','does not change'],0,'Momentum is linear in velocity, so reversing every velocity reverses total momentum.'],['The rate of change of total momentum of a system equals:', ['net external force','net internal force','total mass','centre-of-mass position'],0,'F_ext = dP/dt for a system.'],['In an isolated system during a collision, total momentum before and after collision is:', ['the same','always zero','different','equal to kinetic energy'],0,'With negligible external impulse, total momentum is conserved.'],['A gun recoils when a bullet is fired because:', ['momentum of the gun-bullet system is conserved','kinetic energy must always be conserved','gravity creates the recoil','the bullet has no momentum'],0,'The forward bullet momentum is balanced by backward gun momentum when external impulse is negligible.'],['If the centre of mass of a system is at rest, the total linear momentum is:', ['zero','maximum','equal to total mass','always negative'],0,'P_total = M V_CM, so V_CM = 0 gives P_total = 0.'],['Two equal masses move with equal speeds in opposite directions. The system momentum is:', ['zero','equal to one particle momentum','twice one particle momentum','infinite'],0,'Equal and opposite momenta cancel vectorially.'],['A net external impulse of 10 N·s acts on a system. The change in its total momentum is:', ['10 kg·m/s','1 kg·m/s','100 kg·m/s','0.1 kg·m/s'],0,'Impulse equals change in total linear momentum.'],['If no external horizontal force acts on a person-boat system, its total horizontal momentum:', ['remains constant','must become zero','increases continuously','depends on the person only'],0,'The absence of external horizontal force conserves horizontal system momentum.'],['For a closed system of constant mass, conservation of total momentum means the centre-of-mass velocity:', ['remains constant when net external force is zero','must always be zero','always increases','is unrelated to momentum'],0,'P = M V_CM, so conserved momentum gives constant V_CM for constant M.']];let i=0,selected=-1,checked=false,score=0;const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;f.className=ok?'feedback good':'feedback bad';f.textContent=(ok?'🎯 Correct! +10 XP — ':'✗ Review — Correct answer: '+a[1][a[2]]+'. ')+a[3];$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 System Momentum Complete!';o.innerHTML='';b.style.display='none';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.'}};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: System Momentum quiz">
+<title>SkillUp | System Momentum — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🧭 System Momentum</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "The total linear momentum of a system is:",
+    "o": [
+      "The sum of particle masses",
+      "The net force only",
+      "The centre-of-mass position",
+      "The vector sum of every particle's momentum"
+    ],
+    "a": 3,
+    "e": "Total momentum is the vector sum P = Σmᵢvᵢ."
+  },
+  {
+    "q": "A system has total mass M and centre-of-mass velocity Vcm. Its momentum is:",
+    "o": [
+      "M Vcm",
+      "M/Vcm",
+      "M + Vcm",
+      "M acceleration"
+    ],
+    "a": 0,
+    "e": "The system momentum equals total mass multiplied by centre-of-mass velocity."
+  },
+  {
+    "q": "Which condition guarantees constant total momentum?",
+    "o": [
+      "Equal masses",
+      "Zero net external force",
+      "Zero internal force on each particle",
+      "Constant speed of every particle"
+    ],
+    "a": 1,
+    "e": "If net external force is zero, dP/dt = 0 and total momentum remains constant."
+  },
+  {
+    "q": "The SI unit of linear momentum is:",
+    "o": [
+      "kg·m/s²",
+      "J/s",
+      "kg·m/s",
+      "N/m"
+    ],
+    "a": 2,
+    "e": "Momentum is mass times velocity, so its SI unit is kg·m/s."
+  },
+  {
+    "q": "A 2 kg particle moves at 3 m/s and a 1 kg particle at 4 m/s in the same direction. Total momentum is:",
+    "o": [
+      "6 kg·m/s",
+      "7 kg·m/s",
+      "2 kg·m/s",
+      "10 kg·m/s"
+    ],
+    "a": 3,
+    "e": "P = (2×3) + (1×4) = 10 kg·m/s."
+  },
+  {
+    "q": "A 4 kg system moves with centre-of-mass velocity 5 m/s. Its total momentum is:",
+    "o": [
+      "20 kg·m/s",
+      "9 kg·m/s",
+      "1.25 kg·m/s",
+      "16 kg·m/s"
+    ],
+    "a": 0,
+    "e": "P = MVcm = 4×5 = 20 kg·m/s."
+  },
+  {
+    "q": "For a system of particles, the rate of change of total momentum equals:",
+    "o": [
+      "The total mass",
+      "The net external force",
+      "The sum of internal forces only",
+      "The total kinetic energy"
+    ],
+    "a": 1,
+    "e": "Newton's second law for a system is Fext = dP/dt."
+  },
+  {
+    "q": "Internal forces between particles generally:",
+    "o": [
+      "Are always zero individually",
+      "Act only outside the system",
+      "Cancel in the total force sum for the whole system",
+      "Always change total momentum"
+    ],
+    "a": 2,
+    "e": "Internal forces occur in equal-and-opposite pairs, so their net contribution to the whole system cancels."
+  },
+  {
+    "q": "Two particles have momenta +8 and −3 kg·m/s along one line. Total momentum is:",
+    "o": [
+      "+11 kg·m/s",
+      "−5 kg·m/s",
+      "−11 kg·m/s",
+      "+5 kg·m/s"
+    ],
+    "a": 3,
+    "e": "Take opposite directions with opposite signs: 8 + (−3) = +5 kg·m/s."
+  },
+  {
+    "q": "Two equal masses move at equal speeds in opposite directions. Their total momentum is:",
+    "o": [
+      "Zero",
+      "Twice one particle's momentum",
+      "Equal to either momentum",
+      "Always positive"
+    ],
+    "a": 0,
+    "e": "The two equal and opposite momentum vectors cancel."
+  },
+  {
+    "q": "A net external impulse of 6 N·s acts on a system. Its momentum change is:",
+    "o": [
+      "0 kg·m/s",
+      "6 kg·m/s",
+      "3 kg·m/s",
+      "12 kg·m/s"
+    ],
+    "a": 1,
+    "e": "Impulse equals change in momentum: J = ΔP."
+  },
+  {
+    "q": "A system initially has total momentum 12 kg·m/s. With no net external force, later momentum is:",
+    "o": [
+      "It must double",
+      "Cannot be determined from the given data",
+      "12 kg·m/s",
+      "0 kg·m/s"
+    ],
+    "a": 2,
+    "e": "In the absence of net external force, total momentum is conserved."
+  },
+  {
+    "q": "If a system's centre of mass is at rest, its total momentum is:",
+    "o": [
+      "Equal to its total mass",
+      "Always infinite",
+      "Necessarily changing",
+      "Zero"
+    ],
+    "a": 3,
+    "e": "P = M Vcm; if Vcm = 0, total momentum is zero."
+  },
+  {
+    "q": "A 3 kg object moving at 4 m/s sticks to a stationary 1 kg object. If external impulse is negligible, their shared speed is:",
+    "o": [
+      "3 m/s",
+      "4 m/s",
+      "1 m/s",
+      "12 m/s"
+    ],
+    "a": 0,
+    "e": "Conserve momentum: 3×4 + 1×0 = (3+1)v, so v = 3 m/s."
+  },
+  {
+    "q": "A 2 kg body at +5 m/s and a 3 kg body at +1 m/s have total momentum:",
+    "o": [
+      "2 kg·m/s",
+      "13 kg·m/s",
+      "8 kg·m/s",
+      "10 kg·m/s"
+    ],
+    "a": 1,
+    "e": "P = 2×5 + 3×1 = 13 kg·m/s."
+  },
+  {
+    "q": "A 2 kg body at +4 m/s and a 2 kg body at −1 m/s have total momentum:",
+    "o": [
+      "−6 kg·m/s",
+      "+3 kg·m/s",
+      "+6 kg·m/s",
+      "+10 kg·m/s"
+    ],
+    "a": 2,
+    "e": "P = 2×4 + 2×(−1) = +6 kg·m/s."
+  },
+  {
+    "q": "When no external force acts, individual particles in a system:",
+    "o": [
+      "Must all remain at rest",
+      "Must have equal velocities",
+      "Cannot interact",
+      "May change momentum while total momentum stays constant"
+    ],
+    "a": 3,
+    "e": "Internal interactions can change individual momenta, while total system momentum is conserved."
+  },
+  {
+    "q": "The total momentum of a system is a:",
+    "o": [
+      "Vector quantity",
+      "Scalar quantity",
+      "Dimensionless quantity",
+      "Always positive quantity"
+    ],
+    "a": 0,
+    "e": "Momentum has magnitude and direction, so it is a vector."
+  },
+  {
+    "q": "A system's momentum changes from 4 to 10 kg·m/s in 2 s. The average net external force is:",
+    "o": [
+      "2 N",
+      "3 N",
+      "7 N",
+      "12 N"
+    ],
+    "a": 1,
+    "e": "Favg = ΔP/Δt = (10−4)/2 = 3 N."
+  },
+  {
+    "q": "A 5 kg system has momentum 15 kg·m/s. Its centre-of-mass speed is:",
+    "o": [
+      "10 m/s",
+      "0.33 m/s",
+      "3 m/s",
+      "75 m/s"
+    ],
+    "a": 2,
+    "e": "Vcm = P/M = 15/5 = 3 m/s."
+  },
+  {
+    "q": "A stationary object explodes into two fragments in an isolated system. Their momenta must:",
+    "o": [
+      "Both point forward",
+      "Both be zero",
+      "Equal their kinetic energies",
+      "Be equal in magnitude and opposite in direction if there are only two fragments"
+    ],
+    "a": 3,
+    "e": "Initial momentum is zero, so the two fragment momenta sum to zero."
+  },
+  {
+    "q": "A 1 kg particle moves east at 6 m/s; a 2 kg particle moves west at 2 m/s. Taking east as positive, total momentum is:",
+    "o": [
+      "+2 kg·m/s",
+      "+10 kg·m/s",
+      "−2 kg·m/s",
+      "+4 kg·m/s"
+    ],
+    "a": 0,
+    "e": "P = 1×6 + 2×(−2) = +2 kg·m/s, east."
+  },
+  {
+    "q": "If the net external force is 10 N for 3 s, the momentum change is:",
+    "o": [
+      "10 kg·m/s",
+      "30 kg·m/s",
+      "13 kg·m/s",
+      "3.3 kg·m/s"
+    ],
+    "a": 1,
+    "e": "For constant net force, impulse ΔP = FΔt = 10×3 = 30 N·s."
+  },
+  {
+    "q": "For constant total mass, constant system momentum means the centre-of-mass velocity is:",
+    "o": [
+      "Always increasing",
+      "Opposite to total momentum",
+      "Constant",
+      "Always zero"
+    ],
+    "a": 2,
+    "e": "P = M Vcm; if M and P are constant, Vcm is constant."
+  },
+  {
+    "q": "Which statement about system momentum is correct?",
+    "o": [
+      "It depends only on particle count",
+      "It is always the sum of speed values",
+      "It is the same as total kinetic energy",
+      "It depends on the velocities and masses of all particles"
+    ],
+    "a": 3,
+    "e": "Each particle contributes its vector momentum mᵢvᵢ to the total."
+  },
+  {
+    "q": "A 2 kg particle moving at 3 m/s reverses direction at the same speed. Its momentum change is:",
+    "o": [
+      "−12 kg·m/s if initial direction is positive",
+      "0 kg·m/s",
+      "+6 kg·m/s",
+      "−6 kg·m/s"
+    ],
+    "a": 0,
+    "e": "Initial p = +6 and final p = −6 kg·m/s, so Δp = −12 kg·m/s."
+  },
+  {
+    "q": "A system has zero net external force horizontally but an external vertical force acts. Which component is conserved?",
+    "o": [
+      "Neither component",
+      "Horizontal momentum",
+      "Vertical momentum",
+      "Both components always"
+    ],
+    "a": 1,
+    "e": "Momentum is conserved along a direction when the net external force component in that direction is zero."
+  },
+  {
+    "q": "A 2 kg object at 4 m/s collides and sticks to a 2 kg object at rest. Their final speed is:",
+    "o": [
+      "1 m/s",
+      "8 m/s",
+      "2 m/s",
+      "4 m/s"
+    ],
+    "a": 2,
+    "e": "Initial momentum 8 kg·m/s = total mass 4 kg × v, so v = 2 m/s."
+  },
+  {
+    "q": "Which expression relates total system momentum to external force?",
+    "o": [
+      "Fext = P/t always",
+      "P = Fext × mass",
+      "Fext = total kinetic energy",
+      "Fext = dP/dt"
+    ],
+    "a": 3,
+    "e": "The net external force equals the time rate of change of total momentum."
+  },
+  {
+    "q": "A system's total momentum is conserved during a collision when:",
+    "o": [
+      "The net external impulse is negligible",
+      "Kinetic energy is always conserved",
+      "Every particle has the same velocity",
+      "The collision lasts exactly one second"
+    ],
+    "a": 0,
+    "e": "Conservation requires zero or negligible net external impulse over the collision."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

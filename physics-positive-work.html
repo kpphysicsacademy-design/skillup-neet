@@ -1,6 +1,465 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Positive Work</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#f7f7fb,#eeedff);color:#172033}.wrap{max-width:850px;margin:auto;padding:28px 18px 48px}.card{background:#fff;border-radius:24px;padding:28px;box-shadow:0 12px 34px #17203318;animation:cardIn .45s ease both}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.tag{font-weight:850;font-size:1rem}.xp{font-weight:900;padding:8px 12px;border-radius:999px;background:#f0edff;animation:pulse 1.8s ease-in-out infinite}.bar{height:10px;background:#e7e6f0;border-radius:999px;overflow:hidden;margin:18px 0 26px}.fill{height:100%;width:0;background:#5b50c8;border-radius:999px;transition:width .45s cubic-bezier(.2,.8,.2,1)}.q{font-size:1.25rem;font-weight:850;line-height:1.45;margin:22px 0;animation:slideIn .28s ease both}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;border:2px solid #e3e3ed;background:#fafafd;border-radius:16px;padding:14px 16px;font:inherit;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;animation:optionIn .3s ease both}.opt:nth-child(2){animation-delay:.03s}.opt:nth-child(3){animation-delay:.06s}.opt:nth-child(4){animation-delay:.09s}.opt:hover{transform:translateY(-3px) scale(1.01);border-color:#aaa4df;box-shadow:0 7px 16px #17203312}.opt:focus{outline:3px solid #c9c3ff;outline-offset:2px}.opt.selected{border-color:#5b50c8;background:#f0edff;transform:scale(1.01)}.opt.correct{border-color:#2d9b68;background:#eaf8f1;animation:correctPop .35s ease}.opt.wrong{border-color:#d45555;background:#fff0f0;animation:shake .35s ease}.feedback{min-height:72px;margin-top:18px;padding:15px 16px;border-radius:16px;background:#f4f3fb;line-height:1.55;animation:fadeUp .25s ease}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:14px;padding:13px 18px;font:inherit;font-weight:850;cursor:pointer;background:#5b50c8;color:#fff;box-shadow:0 5px 0 #42399c;transition:transform .12s,box-shadow .12s,filter .12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #42399c}.btn:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back{display:inline-block;margin-top:30px;color:#5146a5;font-weight:850;text-decoration:none;padding:11px 14px;border-radius:14px;transition:transform .15s,background .15s}.back:hover{background:#f0edff;transform:translateX(-3px)}.back:focus{outline:3px solid #c9c3ff;outline-offset:2px}.back:active{transform:translateX(-1px)}.result{text-align:center;font-size:1.2rem;font-weight:800;line-height:1.7;animation:resultIn .5s ease both}@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes slideIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}@keyframes optionIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes correctPop{50%{transform:scale(1.025)}to{transform:scale(1)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}to{transform:none}}@keyframes pulse{50%{transform:scale(1.05)}}@keyframes resultIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}@media(max-width:600px){.card{padding:21px}.q{font-size:1.12rem}.opt{padding:13px}.top{align-items:flex-start}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><div class="tag">⚙️ Positive Work</div><div class="xp">+10 XP</div></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></section></main><script>const qs=[['Work done by a force is positive when the angle between force and displacement is:',['less than 90°','equal to 90°','greater than 90°','180°'],0,'For 0° ≤ θ < 90°, cosθ is positive, so W=Fs cosθ is positive.'],['When a force acts in the same direction as displacement, its work is:',['positive','negative','zero','undefined'],0,'At θ=0°, W=Fs, which is positive for nonzero F and s.'],['A force of 10 N moves a body 4 m in the direction of the force. Work done is:',['40 J','14 J','2.5 J','0 J'],0,'W=Fs=10×4=40 J.'],['A person lifts a box upward against gravity. The work done by the applied lifting force is generally:',['positive','negative','zero','undefined'],0,'The applied force and upward displacement are in the same direction.'],['If θ=60° between force and displacement, the work done by the force is:',['positive','zero','negative','infinite'],0,'cos60°=1/2, so W=Fs/2, which is positive.'],['Which component of force produces positive work?',['component along displacement','component perpendicular to displacement','component opposite displacement','no component'],0,'The component F cosθ along displacement contributes to work.'],['A motor pulls a load forward while the load moves forward. The motor force does:',['positive work','negative work','zero work','no work unless speed is constant'],0,'Force and displacement have the same general direction, so the work is positive.'],['A body is accelerated by a net force in the direction of its motion. The net work is:',['positive','negative','zero','always equal to momentum'],0,'Positive net work increases kinetic energy.'],['A force of 20 N acts at 30° to a 5 m displacement. Work done is:',['50√3 J','100 J','50 J','25 J'],0,'W=20×5×cos30°=100×√3/2=50√3 J.'],['If force is doubled while displacement and angle remain unchanged, positive work becomes:',['double','half','unchanged','zero'],0,'W=Fs cosθ, so doubling F doubles W.'],['If displacement is doubled while force and angle remain unchanged, positive work becomes:',['double','half','unchanged','zero'],0,'Work is directly proportional to displacement.'],['The work done by an applied force while lifting an object upward through height h at constant speed is:',['+mgh','−mgh','0','2mgh'],0,'The applied force is upward and displacement is upward, giving positive work +mgh at constant speed.'],['For a force F and displacement s, maximum positive work occurs when θ is:',['0°','60°','90°','180°'],0,'cosθ is maximum (=1) at θ=0°, so Wmax=Fs.'],['A student pushes a wall without moving it. Work done on the wall by the student is:',['zero','positive','negative','Fs'],0,'The wall has zero displacement, so mechanical work on it is zero.'],['Positive work done on a body tends to:',['increase its kinetic energy','decrease its kinetic energy','make displacement zero','always reduce its speed'],0,'Positive net work means positive change in kinetic energy.']];let i=0,selected=null,score=0;const $=id=>document.getElementById(id);function render(){selected=null;const a=qs[i];$('fill').style.width=(i/qs.length*100)+'%';$('quiz').innerHTML='<div class="q">'+(i+1)+'. '+a[0]+'</div><div class="opts" id="opts"></div><div class="feedback" id="feedback">Choose an answer, then check it.</div><div class="actions"><button class="btn" id="check">Check</button></div>';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+item.text;b.dataset.index=item.index;b.onclick=()=>{selected=item.index;[...$('opts').children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('check').onclick=check}function check(){if(selected===null){$('feedback').textContent='Please choose an answer first.';return}const a=qs[i],ok=selected===a[2];if(ok)score++;[...$('opts').children].forEach(b=>{const oi=Number(b.dataset.index);b.disabled=true;if(oi===a[2])b.classList.add('correct');if(oi===selected&&!ok)b.classList.add('wrong')});$('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+'<br>'+a[3];if(i<qs.length-1){$('check').textContent='Next';$('check').onclick=()=>{i++;render()}}else{$('fill').style.width='100%';const pct=Math.round(score/qs.length*100);$('quiz').innerHTML='<div class="result">🏆 Quiz complete!<br>Score: '+score+'/15 ('+pct+'%)<br>XP earned: '+(score*10)+' XP</div><div class="actions" style="justify-content:center"><button class="btn" onclick="i=0;score=0;render()">Retry</button></div>';localStorage.setItem('skillupPhysicsPositiveWorkScore',String(score))}}function rememberPath(){try{const ref=document.referrer;if(ref){const u=new URL(ref);if(u.origin===location.origin&&(/(?:physics|full-physics)[^/]*path[^/]*\.html$/i.test(u.pathname)||/\/physics-home\.html$/i.test(u.pathname)))sessionStorage.setItem('skillupLastPhysicsPath',u.href)}}catch(e){}}rememberPath();$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Positive Work quiz">
+<title>SkillUp | Positive Work — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Positive Work</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "When is work done by a force positive?",
+    "o": [
+      "When the force has a component along displacement",
+      "When the force always points opposite displacement",
+      "Only when there is no displacement",
+      "Only when the force is perpendicular"
+    ],
+    "a": 0,
+    "e": "Positive work occurs when the force component is in the direction of displacement."
+  },
+  {
+    "q": "The work done by a constant force F over displacement s at angle θ is:",
+    "o": [
+      "W = Fs cos θ",
+      "W = Fs sin θ",
+      "W = F/s",
+      "W = s/F"
+    ],
+    "a": 0,
+    "e": "Work is the dot product of force and displacement: W = Fs cos θ."
+  },
+  {
+    "q": "A 12 N force moves a box 5 m in the same direction. The work done is:",
+    "o": [
+      "60 J",
+      "17 J",
+      "2.4 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = Fs = 12 × 5 = 60 J."
+  },
+  {
+    "q": "If force and displacement point in the same direction, the angle between them is:",
+    "o": [
+      "0°",
+      "90°",
+      "180°",
+      "60°"
+    ],
+    "a": 0,
+    "e": "Parallel vectors in the same direction make an angle of 0°, and cos 0° = 1."
+  },
+  {
+    "q": "A 20 N force acts at 60° to a displacement of 4 m. Work done is:",
+    "o": [
+      "40 J",
+      "80 J",
+      "20 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 20 × 4 × cos 60° = 80 × 0.5 = 40 J."
+  },
+  {
+    "q": "Which is an example of positive work?",
+    "o": [
+      "Gravity on a falling object",
+      "Friction on a sliding box",
+      "A force opposite displacement",
+      "A force perpendicular to displacement"
+    ],
+    "a": 0,
+    "e": "During a fall, gravity and displacement point in the same direction, so gravity does positive work."
+  },
+  {
+    "q": "A 5 N force moves an object 3 m along the force. Work done is:",
+    "o": [
+      "15 J",
+      "8 J",
+      "2 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 5 × 3 = 15 J."
+  },
+  {
+    "q": "A 10 N force acts at 30° to a displacement of 2 m. Work done is approximately:",
+    "o": [
+      "17.3 J",
+      "20 J",
+      "10 J",
+      "5 J"
+    ],
+    "a": 0,
+    "e": "W = 10 × 2 × cos 30° ≈ 20 × 0.866 = 17.3 J."
+  },
+  {
+    "q": "The SI unit of work is:",
+    "o": [
+      "Joule",
+      "Watt",
+      "Newton",
+      "Kilogram"
+    ],
+    "a": 0,
+    "e": "Work is measured in joules; 1 J = 1 N·m."
+  },
+  {
+    "q": "Positive work done on an object by the net force causes its kinetic energy to:",
+    "o": [
+      "Increase",
+      "Always become zero",
+      "Decrease",
+      "Remain unchanged in every case"
+    ],
+    "a": 0,
+    "e": "By the work–energy theorem, positive net work means an increase in kinetic energy."
+  },
+  {
+    "q": "A 2 kg object speeds up from rest to 3 m/s. The net work done is:",
+    "o": [
+      "9 J",
+      "6 J",
+      "18 J",
+      "3 J"
+    ],
+    "a": 0,
+    "e": "ΔK = ½mv² = 0.5 × 2 × 9 = 9 J."
+  },
+  {
+    "q": "A person pushes a trolley forward and it moves forward. The work done by the pushing force is:",
+    "o": [
+      "Positive",
+      "Negative",
+      "Zero always",
+      "Undefined"
+    ],
+    "a": 0,
+    "e": "The pushing force has a component along the trolley's displacement."
+  },
+  {
+    "q": "A force of 8 N acts at 60° to a displacement of 3 m. Work done is:",
+    "o": [
+      "12 J",
+      "24 J",
+      "8 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 8 × 3 × cos 60° = 24 × 0.5 = 12 J."
+  },
+  {
+    "q": "Which angle gives the maximum positive work for fixed force and displacement magnitudes?",
+    "o": [
+      "0°",
+      "60°",
+      "90°",
+      "180°"
+    ],
+    "a": 0,
+    "e": "W = Fs cos θ is largest when cos θ = 1, at θ = 0°."
+  },
+  {
+    "q": "If the angle between force and displacement is less than 90°, the work done by that force is:",
+    "o": [
+      "Positive",
+      "Negative",
+      "Always zero",
+      "Always equal to mass"
+    ],
+    "a": 0,
+    "e": "For angles below 90°, cos θ is positive, so W is positive."
+  },
+  {
+    "q": "A 15 N force moves an object 2 m at 60° to the displacement. Work done is:",
+    "o": [
+      "15 J",
+      "30 J",
+      "7.5 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 15 × 2 × cos 60° = 15 J."
+  },
+  {
+    "q": "Which force often does positive work on a falling object near Earth's surface?",
+    "o": [
+      "Gravity",
+      "Air resistance",
+      "A force opposing the fall",
+      "A support force perpendicular to motion"
+    ],
+    "a": 0,
+    "e": "Gravity acts downward, in the same direction as the falling object's displacement."
+  },
+  {
+    "q": "A 3 kg object is lifted 2 m at constant speed. Take g = 10 m/s². Work done by the lifting force is:",
+    "o": [
+      "60 J",
+      "30 J",
+      "15 J",
+      "6 J"
+    ],
+    "a": 0,
+    "e": "At constant speed the lifting force equals mg; W = mgh = 3 × 10 × 2 = 60 J."
+  },
+  {
+    "q": "A force of 50 N moves an object 2 m along its direction. Work done is:",
+    "o": [
+      "100 J",
+      "25 J",
+      "52 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 50 × 2 = 100 J."
+  },
+  {
+    "q": "Work is a scalar quantity because:",
+    "o": [
+      "It is the dot product of force and displacement",
+      "It always points forward",
+      "It has no unit",
+      "It equals acceleration"
+    ],
+    "a": 0,
+    "e": "The dot product produces a scalar, so work has magnitude and sign but no direction."
+  },
+  {
+    "q": "If the force is perpendicular to displacement, its work is:",
+    "o": [
+      "Zero",
+      "Maximum positive",
+      "Maximum negative",
+      "Always equal to Fs"
+    ],
+    "a": 0,
+    "e": "At 90°, cos θ = 0, so W = 0."
+  },
+  {
+    "q": "A 6 N force acts at 0° to a 7 m displacement. Work is:",
+    "o": [
+      "42 J",
+      "13 J",
+      "1 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 6 × 7 × cos 0° = 42 J."
+  },
+  {
+    "q": "Which statement about positive work is correct?",
+    "o": [
+      "It transfers energy to the object through that force",
+      "It always means the object is moving upward",
+      "It can happen only when an object is at rest",
+      "It is measured in watts"
+    ],
+    "a": 0,
+    "e": "Positive work by a force represents energy transfer to the object through that force."
+  },
+  {
+    "q": "A 10 N force moves an object 4 m at 60°. Work done is:",
+    "o": [
+      "20 J",
+      "40 J",
+      "10 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 10 × 4 × cos 60° = 20 J."
+  },
+  {
+    "q": "A motor pulls a cart forward while the cart moves forward. The motor's pulling force does:",
+    "o": [
+      "Positive work",
+      "Negative work",
+      "Zero work in all cases",
+      "Work equal to the cart's mass"
+    ],
+    "a": 0,
+    "e": "The pulling force has a component along the displacement, so its work is positive."
+  },
+  {
+    "q": "A 4 kg object increases its speed from 2 m/s to 4 m/s. Net work is:",
+    "o": [
+      "24 J",
+      "16 J",
+      "8 J",
+      "32 J"
+    ],
+    "a": 0,
+    "e": "ΔK = ½m(v² − u²) = 2(16 − 4) = 24 J."
+  },
+  {
+    "q": "A 25 N force moves a box 6 m in its direction. Work done is:",
+    "o": [
+      "150 J",
+      "31 J",
+      "4.17 J",
+      "0 J"
+    ],
+    "a": 0,
+    "e": "W = 25 × 6 = 150 J."
+  },
+  {
+    "q": "A force makes an angle of 45° with a displacement of 2 m. If the force is 10 N, work done is approximately:",
+    "o": [
+      "14.1 J",
+      "20 J",
+      "10 J",
+      "7.1 J"
+    ],
+    "a": 0,
+    "e": "W = 10 × 2 × cos 45° ≈ 20 × 0.707 = 14.1 J."
+  },
+  {
+    "q": "Which condition is necessary for positive work by a force?",
+    "o": [
+      "A nonzero displacement with a positive force component along it",
+      "Zero displacement",
+      "Force exactly perpendicular to displacement",
+      "Force exactly opposite displacement"
+    ],
+    "a": 0,
+    "e": "Positive work requires displacement and a force component pointing partly in the same direction."
+  },
+  {
+    "q": "A 2 kg block accelerates from rest to 5 m/s. The net work done is:",
+    "o": [
+      "25 J",
+      "10 J",
+      "50 J",
+      "5 J"
+    ],
+    "a": 0,
+    "e": "ΔK = ½mv² = 0.5 × 2 × 25 = 25 J."
+  }
+];
+
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

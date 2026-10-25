@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Stress–Strain Curve quiz">
+<title>SkillUp | Stress–Strain Curve — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📈 Stress–Strain Curve</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"What does a stress–strain curve show?",o:["How stress changes with strain","How mass changes with time","How speed changes with distance","How heat changes with volume"],a:0,e:"It plots stress against strain and describes a material's response to loading."},
+{q:"Which quantity is usually on the vertical axis?",o:["Strain","Stress","Length","Time"],a:1,e:"Stress is conventionally plotted on the vertical axis; strain is on the horizontal axis."},
+{q:"Which quantity is usually on the horizontal axis?",o:["Stress","Force","Strain","Pressure"],a:2,e:"Strain is conventionally plotted on the horizontal axis."},
+{q:"What is tensile stress?",o:["Tensile force per unit area","Extension per unit length","Mass per unit volume","Work per unit time"],a:0,e:"Tensile stress is the pulling force divided by the cross-sectional area."},
+{q:"What is longitudinal strain?",o:["Force divided by area","Change in length divided by original length","Original length divided by force","Area divided by volume"],a:1,e:"Longitudinal strain is extension or contraction divided by original length."},
+{q:"What is the SI unit of stress?",o:["Metre","Newton","Pascal","No unit"],a:2,e:"Stress is measured in pascals (Pa), equivalent to N/m²."},
+{q:"What is the unit of strain?",o:["Metre","Pascal","Newton","No unit"],a:3,e:"Strain is a ratio of two lengths, so it is dimensionless."},
+{q:"In the initial straight part of many stress–strain curves, stress is:",o:["Proportional to strain","Independent of strain","Always zero","Proportional to mass"],a:0,e:"The linear region follows Hooke's law: stress is proportional to strain."},
+{q:"The slope of the linear stress–strain curve gives:",o:["Density","Young's modulus","Breaking force only","Poisson's ratio"],a:1,e:"For a tensile stress–strain graph, the initial slope is Young's modulus."},
+{q:"A larger Young's modulus generally means a material is:",o:["Less stiff","More stiff","Always more ductile","Always weaker"],a:1,e:"A larger modulus means more stress is needed to produce the same elastic strain."},
+{q:"What is the proportional limit?",o:["The point where stress ceases to be proportional to strain","The point of zero load","The final length of a sample","The point where strain becomes a unit"],a:0,e:"Beyond the proportional limit, the stress–strain relationship is no longer linear."},
+{q:"What is the elastic limit?",o:["The largest stress from which a material fully returns to its original shape","The stress at zero extension only","The stress at fracture only","The smallest possible stress"],a:0,e:"Below the elastic limit, unloading allows the material to recover its original shape."},
+{q:"What happens if a specimen is unloaded within its elastic range?",o:["It usually returns to its original dimensions","It always fractures","It keeps all its extension","Its mass increases"],a:0,e:"Elastic deformation is recoverable when the load is removed."},
+{q:"Plastic deformation is:",o:["Fully reversible","Permanent deformation after unloading","A change in temperature only","A type of measurement error"],a:1,e:"Plastic deformation leaves a permanent change in shape or length."},
+{q:"The yield point or yield region indicates:",o:["Onset of significant plastic deformation","Zero stress","Maximum density","No strain at all"],a:0,e:"Yielding marks the transition to substantial permanent deformation."},
+{q:"Which material property describes the ability to undergo plastic deformation before breaking?",o:["Ductility","Brittleness","Density","Conductivity"],a:0,e:"Ductile materials can sustain considerable plastic strain before fracture."},
+{q:"A brittle material typically fractures after:",o:["Large plastic strain","Little plastic deformation","Infinite strain","No applied stress in every case"],a:1,e:"Brittle materials usually show little plastic deformation before breaking."},
+{q:"What is the ultimate tensile strength?",o:["The maximum engineering stress reached","The stress at zero load","The initial length","The strain at the proportional limit"],a:0,e:"Ultimate tensile strength is the peak engineering stress on the curve."},
+{q:"What does the fracture point represent?",o:["Where the specimen breaks","Where the graph begins","Where stress first becomes measurable","Where strain must be zero"],a:0,e:"The fracture point corresponds to failure of the specimen."},
+{q:"For a ductile metal, necking usually begins near:",o:["The ultimate tensile strength","The origin","The proportional limit always","Zero strain"],a:0,e:"After the peak engineering stress, local thinning or necking can begin."},
+{q:"Why can engineering stress fall after the peak in a ductile test?",o:["The specimen begins to neck","The applied load must become infinite","The material becomes weightless","Strain becomes a force"],a:0,e:"Engineering stress uses the original area; after necking, the measured load can fall."},
+{q:"What is engineering stress calculated using?",o:["Load divided by original cross-sectional area","Extension divided by original length","Load times length","Mass divided by volume"],a:0,e:"Engineering stress is force divided by the specimen's original cross-sectional area."},
+{q:"What is engineering strain calculated using?",o:["Original length divided by extension","Change in length divided by original length","Stress divided by force","Area divided by load"],a:1,e:"Engineering strain is the change in length divided by the original length."},
+{q:"If stress doubles in the linear elastic region, strain will:",o:["Double","Halve","Remain always zero","Become a unit"],a:0,e:"With constant modulus, stress is proportional to strain in the linear region."},
+{q:"A specimen has stress 200 MPa and strain 0.002 in the linear region. Its modulus is:",o:["100 MPa","100 GPa","0.001 GPa","400 MPa"],a:1,e:"E = stress/strain = 200 MPa / 0.002 = 100,000 MPa = 100 GPa."},
+{q:"A strain of 0.01 is equal to:",o:["0.01%","1%","10%","100%"],a:1,e:"Multiply strain by 100 to express it as a percentage: 0.01 × 100 = 1%."},
+{q:"Which region is associated with recoverable deformation?",o:["Elastic region","Plastic region only","Fracture region","Necking region only"],a:0,e:"In the elastic region, unloading largely restores the original dimensions."},
+{q:"The area under a stress–strain curve up to a given strain represents:",o:["Energy absorbed per unit volume","Total mass","Temperature change","Cross-sectional area"],a:0,e:"The area under the curve represents strain energy per unit volume."},
+{q:"Resilience refers to the ability to:",o:["Absorb energy elastically and release it on unloading","Break without any load","Increase its mass","Remain permanently deformed only"],a:0,e:"Resilience concerns energy stored elastically and recoverable on unloading."},
+{q:"Toughness is related to:",o:["Total energy absorbed per unit volume before fracture","Only the initial slope","Only the specimen length","Only the elastic limit"],a:0,e:"Toughness is associated with the total area under the stress–strain curve up to fracture."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Stress–Strain Curve Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,22 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Gravitational Mass</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f7f9;color:#17202a;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px}.head h1{font-size:26px;margin:0}.xp{font-weight:700;color:#16803c}.sub{color:#64748b;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #0000000d}.master{font-weight:700}.bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22c55e;transition:.25s}.qno{color:#64748b;font-size:14px;margin-bottom:10px}.question{font-size:20px;font-weight:700;line-height:1.45}.opts{display:grid;gap:10px;margin-top:18px}.opts button{border:2px solid #dbe2e8;background:#fff;border-radius:12px;padding:13px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}.opts button:hover{transform:translateY(-1px);border-color:#22c55e}.opts button.selected{border-color:#22c55e;background:#f0fdf4}.opts button.correct{border-color:#16a34a;background:#dcfce7}.opts button.wrong{border-color:#ef4444;background:#fee2e2}.action{width:100%;border:0;border-radius:12px;padding:14px;margin-top:16px;background:#22c55e;color:#fff;font-size:17px;font-weight:700;cursor:pointer}.action:hover{filter:brightness(.96);transform:translateY(-1px)}.feedback{min-height:24px;margin-top:14px;font-weight:700}.back{display:inline-block;text-decoration:none;color:#166534;border:2px solid #bbf7d0;padding:11px 16px;border-radius:12px;font-weight:700;transition:.15s}.back:hover{background:#dcfce7;transform:translateY(-1px)}.result{text-align:center}@media(max-width:520px){.head h1{font-size:22px}.question{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🌍 Gravitational Mass</h1><div class="xp" id="xp">+0 XP</div></div><p class="sub">Mass as the source of gravitational attraction and its role in Newton's law of gravitation.</p><section class="card"><div class="master">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quiz"></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[
-['According to Newton’s law of gravitation, the gravitational force between two masses is proportional to:', ['m₁+m₂','m₁m₂','m₁/m₂','(m₁−m₂)²'],1,'F=Gm₁m₂/r², so force is directly proportional to the product of the masses.'],
-['If one of two interacting masses is doubled, gravitational force becomes:', ['half','unchanged','double','four times'],2,'With other quantities fixed, F∝m, so doubling one mass doubles F.'],
-['If both interacting masses are doubled, gravitational force becomes:', ['2F','4F','F/2','F/4'],1,'Because F∝m₁m₂, doubling both gives 2×2=4 times the force.'],
-['The SI unit of mass is:', ['newton','kilogram','gram','joule'],1,'The SI base unit of mass is kilogram (kg).'],
-['Gravitational mass determines the:', ['resistance to acceleration only','strength of gravitational interaction','electric charge','temperature'],1,'Gravitational mass characterizes how strongly a body participates in gravitational interaction.'],
-['For a body of mass m near Earth, its weight is:', ['m/g','mg','m+g','g/m'],1,'Weight is the gravitational force W=mg.'],
-['The gravitational force between two point masses acts along the:', ['tangent to their paths','line joining their centres','vertical direction only','equatorial plane only'],1,'The force is directed along the line joining the two masses.'],
-['If the distance between two masses is doubled, gravitational force becomes:', ['2F','F/2','F/4','4F'],2,'F∝1/r², so doubling r reduces force to one-fourth.'],
-['The constant G in Newton’s gravitational law is called:', ['acceleration constant','gravitational constant','gas constant','geometrical constant'],1,'G is the universal gravitational constant.'],
-['Which property is independent of location in ordinary classical mechanics?', ['weight','mass','acceleration due to gravity','gravitational force'],1,'Mass remains the same when a body is moved from one location to another.'],
-['A body has mass 10 kg on Earth. On the Moon its mass is approximately:', ['1.67 kg','6 kg','10 kg','60 kg'],2,'Mass is unchanged; its weight changes because lunar g is smaller.'],
-['The dimensions of gravitational constant G are:', ['M⁻¹L³T⁻²','ML³T⁻²','M⁻¹L²T⁻²','ML⁻¹T⁻²'],0,'From F=Gm₁m₂/r², [G]=M⁻¹L³T⁻².'],
-['If the mass of Earth were increased while its radius stayed fixed, surface g would:', ['decrease','increase','become zero','remain unchanged'],1,'g=GM/R², so increasing Earth’s mass increases g.'],
-['Gravitational mass and inertial mass are experimentally found to be:', ['unrelated','approximately equal','always opposite','zero for all bodies'],1,'The equivalence of gravitational and inertial mass is a central result of classical mechanics and tests of equivalence.'],
-['For two masses m₁ and m₂ separated by r, the gravitational force magnitude is:', ['Gm₁m₂/r²','G(m₁+m₂)/r','Gm₁m₂r²','Gm₁m₂/r'],0,'Newton’s law gives F=Gm₁m₂/r².']
-];let i=0,selected=null,correct=0,checked=false;const $=id=>document.getElementById(id);function render(){checked=false;selected=null;const q=quiz[i];$('quiz').innerHTML='<div class="qno">Question '+(i+1)+' of 15</div><div class="question">'+q[0]+'</div><div class="opts" id="opts"></div><button class="action" id="action">Continue →</button><div class="feedback" id="feedback"></div>';const order=q[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;[...$('opts').children].forEach(y=>y.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('action').onclick=check;update()}function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}if(!checked){checked=true;const q=quiz[i],ok=selected===q[2];if(ok)correct++;[...$('opts').children].forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===q[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Not quite. ')+q[3];$('action').textContent=i===14?'Finish Skill →':'Continue →';update();return}if(i<14){i++;render()}else finish()}function update(){$('score').textContent=correct+' / 15';$('fill').style.width=(correct/15*100)+'%';$('xp').textContent='+'+(correct*10)+' XP'}function finish(){const pct=Math.round(correct/15*100);$('quiz').innerHTML='<div class="result"><h2>🏆 Skill Complete!</h2><p>You scored <strong>'+correct+' / 15</strong> ('+pct+'%).</p><p>⭐ XP earned: <strong>'+correct*10+'</strong></p><button class="action" onclick="i=0;correct=0;render()">Retry Skill</button></div>';update()}$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Gravitational Mass quiz">
+<title>SkillUp | Gravitational Mass — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚖️ Gravitational Mass</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Gravitational mass describes how an object:",o:["Participates in gravitational interaction","Resists all changes in velocity only","Stores electrical charge","Measures temperature"],a:0,e:"Gravitational mass determines the strength of an object's interaction with a gravitational field."},
+{q:"The SI unit of gravitational mass is:",o:["Kilogram (kg)","Newton (N)","Joule (J)","Metre per second (m/s)"],a:0,e:"Mass is measured in kilograms."},
+{q:"Newton's law gives the gravitational force between two point masses as:",o:["F = Gm₁m₂/r²","F = Gm₁m₂r²","F = G(m₁+m₂)/r","F = Gm₁m₂/r"],a:0,e:"The force is proportional to the product of masses and inversely proportional to the square of their separation."},
+{q:"If one mass doubles while the other mass and distance remain fixed, gravitational force:",o:["Doubles","Halves","Becomes four times","Stays the same"],a:0,e:"Force is directly proportional to each interacting mass."},
+{q:"If both masses double and separation stays fixed, gravitational force:",o:["Becomes four times","Doubles","Halves","Stays the same"],a:0,e:"Doubling both masses multiplies their product by four."},
+{q:"If the separation between two masses doubles, gravitational force becomes:",o:["One-fourth","One-half","Twice","Four times"],a:0,e:"The force follows an inverse-square distance relation."},
+{q:"If separation is tripled, gravitational force becomes:",o:["One-ninth","One-third","Three times","Nine times"],a:0,e:"F is proportional to 1/r², so tripling r reduces force by nine."},
+{q:"The gravitational force between two ordinary masses is:",o:["Attractive","Always repulsive","Always zero","Dependent on electric charge sign"],a:0,e:"Newtonian gravity between positive masses is attractive."},
+{q:"The gravitational forces two bodies exert on each other have:",o:["Equal magnitude and opposite directions","Different magnitudes proportional to their masses","The same direction","Zero magnitude for unequal masses"],a:0,e:"Newton's third law gives equal and opposite interaction forces."},
+{q:"The gravitational constant G is approximately:",o:["6.67 × 10⁻¹¹ N m²/kg²","9.8 m/s²","6.67 × 10¹¹ N/kg","3.0 × 10⁸ m/s"],a:0,e:"G is the universal constant in Newton's law of gravitation."},
+{q:"The dimensions of G are:",o:["M⁻¹L³T⁻²","MLT⁻²","L²T⁻²","LT⁻²"],a:0,e:"From G = Fr²/(m₁m₂), dimensions are M⁻¹L³T⁻²."},
+{q:"Gravitational mass is experimentally equivalent to:",o:["Inertial mass","Electric charge","Density","Weight in newtons"],a:0,e:"Experiments show gravitational mass and inertial mass are equivalent to high precision."},
+{q:"Inertial mass measures an object's:",o:["Resistance to acceleration","Gravitational force only","Volume","Potential energy only"],a:0,e:"Inertial mass is the mass appearing in Newton's second law F = ma."},
+{q:"Gravitational mass affects the gravitational force because:",o:["The force is proportional to the product of the masses","The force is independent of mass","Mass appears only in the distance term","Mass changes G"],a:0,e:"The masses multiply in F = Gm₁m₂/r²."},
+{q:"A 2 kg and 3 kg point mass are separated by 1 m. The force is:",o:["6G N","5G N","G/6 N","6/G N"],a:0,e:"F = G(2)(3)/1² = 6G N."},
+{q:"If force is F at distance r, at distance 2r it is:",o:["F/4","F/2","2F","4F"],a:0,e:"Inverse-square scaling gives F' = F(1/2)² = F/4."},
+{q:"If the first mass is halved and the second is tripled, with distance fixed, force becomes:",o:["1.5 times the original","Half the original","Three times the original","Six times the original"],a:0,e:"The product of mass factors is (1/2) × 3 = 1.5."},
+{q:"The gravitational force acts along the:",o:["Line joining the centres of the two masses","Tangent to their orbit in all cases","Vertical direction only","Direction of the faster object's velocity"],a:0,e:"The force is directed along the line joining the bodies' centres."},
+{q:"For spherical bodies that do not overlap, the separation r in Newton's formula is measured between:",o:["Their centres","Their nearest surface points","Their farthest surface points","Any arbitrary points"],a:0,e:"For spherical bodies, use centre-to-centre separation."},
+{q:"If the distance is reduced to half, gravitational force becomes:",o:["Four times","Twice","Half","One-fourth"],a:0,e:"Halving r increases 1/r² by a factor of four."},
+{q:"Which statement about G is correct?",o:["It is universal in Newtonian gravitation","It changes with the object's mass","It is the same as local g","It is measured in kilograms"],a:0,e:"G is universal; local g depends on the source body and location."},
+{q:"Near a planet, an object's weight is approximately:",o:["W = mg","W = m/g","W = Gm/r","W = m + g"],a:0,e:"Weight is the gravitational force on the object, commonly written W = mg near the surface."},
+{q:"If a body's mass is 4 kg and local g is 3 m/s², its weight is:",o:["12 N","7 N","1.33 N","3 N"],a:0,e:"W = mg = 4 × 3 = 12 N."},
+{q:"Mass and weight differ because:",o:["Mass is measured in kg; weight is a force measured in N","Both are forces measured in N","Mass changes with location but weight does not","Weight has no relation to gravity"],a:0,e:"Mass is a property of the body; weight depends on local gravitational acceleration."},
+{q:"If a body is taken from Earth to the Moon, its gravitational mass:",o:["Remains the same","Becomes about one-sixth","Becomes zero","Doubles"],a:0,e:"The body's mass does not change with location, although its weight changes."},
+{q:"The gravitational field strength of a point mass M at distance r is:",o:["g = GM/r²","g = GMr²","g = GM/r","g = Gr²/M"],a:0,e:"Field strength is force per unit test mass, giving GM/r²."},
+{q:"If source mass M triples at fixed distance, the gravitational field strength it creates:",o:["Triples","Halves","Becomes one-ninth","Stays unchanged"],a:0,e:"Field strength is directly proportional to the source mass."},
+{q:"A test mass in a gravitational field is doubled. The force on it:",o:["Doubles, while the field strength at that point is unchanged","Halves and the field doubles","Stays the same and field doubles","Becomes zero"],a:0,e:"Force on the test mass changes, but field strength is defined per unit test mass."},
+{q:"A 10 kg object and a 1 kg object at the same location in a vacuum experience gravitational forces whose ratio is:",o:["10:1","1:10","1:1","100:1"],a:0,e:"The gravitational force is proportional to the object's gravitational mass, so the ratio is 10:1."},
+{q:"Which equation correctly combines gravitational force and surface weight for a planet of mass M and radius R?",o:["mg = GMm/R²","mg = GMR²","m/g = GM/R²","mg = GM/R"],a:0,e:"Equating W = mg with gravitational force GMm/R² leads to g = GM/R² after cancelling m."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Gravitational Mass Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Moment of Inertia</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center}.title{font-size:28px;font-weight:800}.xp{font-weight:700;color:#168447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-2px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:23px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">⚙️ Moment of Inertia</div><div class="xp">+10 XP</div></div><div class="sub">Rotational inertia, radius of gyration and standard rigid-body moments of inertia.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quizCard"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['Moment of inertia of a particle of mass m at distance r from an axis is:', ['mr²','mr','m/r²','m²r'],0],['The SI unit of moment of inertia is:', ['kg m²','kg m','N m','kg m s⁻¹'],0],['For a system of particles, moment of inertia about an axis is:', ['Σmr²','Σmr','Σm/r²','Σm²r'],0],['Moment of inertia depends on the:', ['distribution of mass about the axis','mass only','angular speed only','torque only'],0],['For the same mass, moving more mass farther from the axis generally makes moment of inertia:', ['larger','smaller','zero','unchanged in every case'],0],['Radius of gyration k is defined by:', ['I = Mk²','I = Mk','I = M/k²','I = k/M'],0],['The radius of gyration has the dimension of:', ['length','area','time','mass'],0],['Moment of inertia of a thin ring about its central axis is:', ['MR²','½MR²','⅖MR²','⅓MR²'],0],['Moment of inertia of a uniform disc about its central axis is:', ['½MR²','MR²','⅖MR²','⅓MR²'],0],['Moment of inertia of a uniform rod about an axis through its centre perpendicular to the rod is:', ['(1/12)ML²','(1/3)ML²','ML²','(1/2)ML²'],0],['For a uniform rod about an axis through one end perpendicular to it, moment of inertia is:', ['(1/3)ML²','(1/12)ML²','ML²','(1/2)ML²'],0],['According to the parallel-axis theorem:', ['I = Icm + Md²','I = Icm − Md²','I = Md','I = Icm/d²'],0],['According to the perpendicular-axis theorem for a plane lamina:', ['Iz = Ix + Iy','Iz = Ix − Iy','Ix = Iz + Iy','Iy = Iz + Ix'],0],['If all dimensions of a body are doubled while density remains constant, its moment of inertia about a corresponding axis becomes:', ['16 times','4 times','8 times','2 times'],0],['A body has mass 2 kg and radius of gyration 0.5 m. Its moment of inertia is:', ['0.5 kg m²','1 kg m²','2.5 kg m²','4 kg m²'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('continue').textContent='Continue →';$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{$('quizCard').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Moment of Inertia quiz">
+<title>SkillUp | Moment of Inertia — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚙️ Moment of Inertia</h1><p class="muted">Understand rotational inertia, standard formulas and theorems one step at a time.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{"q":"What does moment of inertia describe?","o":["Resistance to angular acceleration","Resistance to temperature change","Linear speed only","Force per unit area"],"a":0,"e":"Moment of inertia measures how strongly a body's mass distribution resists angular acceleration about an axis."},
+{"q":"For a point mass m at perpendicular distance r from an axis, I equals:","o":["mr²","mr","m/r","m²r"],"a":0,"e":"For a point particle, moment of inertia is I = mr²."},
+{"q":"What is the SI unit of moment of inertia?","o":["kg m²","kg m/s","N/m","J/s"],"a":0,"e":"Mass times distance squared gives the SI unit kg m²."},
+{"q":"Which change increases a point mass's moment of inertia most directly?","o":["Moving it farther from the axis","Moving it closer to the axis","Reducing its distance to zero","Changing its colour"],"a":0,"e":"Moment of inertia depends on r², so increasing distance increases I."},
+{"q":"Two equal masses are at distances r and 2r from an axis. The second mass has moment of inertia:","o":["Four times as large","Twice as large","Half as large","The same"],"a":0,"e":"Since I = mr², doubling r makes the moment of inertia four times larger."},
+{"q":"For several particles, the total moment of inertia is:","o":["Σmr²","Σmr","Σm/r","Σm²r"],"a":0,"e":"Add each particle's mass multiplied by the square of its perpendicular distance."},
+{"q":"Moment of inertia depends on the chosen:","o":["Axis of rotation","Colour of the body","Ambient sound","Name of the body"],"a":0,"e":"Changing the axis changes the distances of mass elements from it."},
+{"q":"A thin ring of mass M and radius R about its central axis has I:","o":["MR²","½MR²","⅖MR²","⅓MR²"],"a":0,"e":"For a thin ring, nearly all mass is at distance R, giving I = MR²."},
+{"q":"A uniform disc about its central axis perpendicular to its plane has I:","o":["½MR²","MR²","⅖MR²","⅔MR²"],"a":0,"e":"The standard result for a uniform solid disc is I = ½MR²."},
+{"q":"A solid cylinder about its symmetry axis has moment of inertia:","o":["½MR²","MR²","⅔MR²","⅖MR²"],"a":0,"e":"A uniform solid cylinder has I = ½MR² about its central longitudinal axis."},
+{"q":"A uniform rod of length L about its centre, perpendicular to its length, has I:","o":["ML²/12","ML²/3","ML²","ML²/2"],"a":0,"e":"For a uniform rod about its midpoint, I = ML²/12."},
+{"q":"A uniform rod about one end, perpendicular to its length, has I:","o":["ML²/3","ML²/12","ML²/2","ML²"],"a":0,"e":"The end-axis result is I = ML²/3."},
+{"q":"The radius of gyration k is defined by:","o":["I = Mk²","I = Mk","I = M/k","I = k²/M"],"a":0,"e":"Radius of gyration is the distance at which the whole mass could be concentrated to give the same I: I = Mk²."},
+{"q":"The SI unit of radius of gyration is:","o":["metre","kg m²","second","kilogram"],"a":0,"e":"Radius of gyration is a length, so its SI unit is metre."},
+{"q":"A 4 kg body has radius of gyration 0.5 m. Its I is:","o":["1 kg m²","2 kg m²","0.5 kg m²","4 kg m²"],"a":0,"e":"I = Mk² = 4 × (0.5)² = 1 kg m²."},
+{"q":"A body has I = 18 kg m² and mass 2 kg. Its radius of gyration is:","o":["3 m","9 m","6 m","√18 m"],"a":0,"e":"k = √(I/M) = √(18/2) = 3 m."},
+{"q":"The parallel-axis theorem states:","o":["I = Icm + Md²","I = Icm − Md²","I = Md","I = Icm/d"],"a":0,"e":"For an axis parallel to the centre-of-mass axis, I = Icm + Md²."},
+{"q":"In the parallel-axis theorem, d is the distance between:","o":["The two parallel axes","The body's ends","Two particles","The centre and surface only"],"a":0,"e":"d is the perpendicular separation between the parallel axes."},
+{"q":"A body's I about its centre of mass is 2 kg m². If M = 3 kg and d = 2 m, I about a parallel axis is:","o":["14 kg m²","8 kg m²","6 kg m²","5 kg m²"],"a":0,"e":"I = Icm + Md² = 2 + 3 × 4 = 14 kg m²."},
+{"q":"For a plane lamina, the perpendicular-axis theorem gives:","o":["Iz = Ix + Iy","Iz = Ix − Iy","Ix = Iy + Iz","Iy = Ix − Iz"],"a":0,"e":"For mutually perpendicular axes through one point in the plane, Iz = Ix + Iy."},
+{"q":"The perpendicular-axis theorem applies directly to a:","o":["Plane lamina","Spherical shell in any axis","Three-dimensional solid of any shape","Point outside the body"],"a":0,"e":"The theorem is for a plane lamina with the axes meeting at a point in its plane."},
+{"q":"If all linear dimensions of a geometrically similar body double while density stays constant, its moment of inertia about a corresponding axis becomes:","o":["32 times","16 times","8 times","4 times"],"a":0,"e":"Mass scales with length cubed and squared distance with length squared, so I scales as length to the fifth power: 2⁵ = 32."},
+{"q":"For geometrically similar bodies of the same mass, if all dimensions double, how does I scale?","o":["4 times","2 times","8 times","16 times"],"a":0,"e":"At fixed mass, I scales with the square of the body's linear size, so doubling size gives four times I."},
+{"q":"If the same body rotates about an axis closer to most of its mass, its moment of inertia generally:","o":["Decreases","Increases","Must double","Becomes negative"],"a":0,"e":"A closer axis generally reduces the squared distances in the sum I = Σmr²."},
+{"q":"Which quantity is not enough by itself to determine a body's moment of inertia?","o":["Mass alone","Mass distribution and axis","Mass and shape with axis specified","Distances of mass elements from axis"],"a":0,"e":"Two bodies with the same mass can have different moments of inertia because their mass distributions differ."},
+{"q":"A hoop and a solid disc have equal mass and radius. About their central axes, which has larger I?","o":["Hoop","Solid disc","Both equal","Cannot compare at all"],"a":0,"e":"The hoop has I = MR² while the disc has I = ½MR²."},
+{"q":"If a point mass is moved to three times its original distance from an axis, its I becomes:","o":["9 times","3 times","6 times","One-third"],"a":0,"e":"Because I is proportional to r², tripling r multiplies I by 3² = 9."},
+{"q":"A 2 kg particle is 3 m from an axis. Its moment of inertia is:","o":["18 kg m²","6 kg m²","12 kg m²","9 kg m²"],"a":0,"e":"I = mr² = 2 × 3² = 18 kg m²."},
+{"q":"Why is moment of inertia sometimes called rotational inertia?","o":["It measures resistance to changes in rotational motion","It measures only linear momentum","It is always equal to mass","It measures gravitational field strength"],"a":0,"e":"A larger moment of inertia means more torque is needed for the same angular acceleration."},
+{"q":"For a rigid body, angular acceleration under a given net torque is smaller when its moment of inertia is:","o":["Larger","Smaller","Zero only","Unrelated to torque"],"a":0,"e":"From τ = Iα, for a fixed torque, α = τ/I; larger I gives smaller angular acceleration."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Moment of Inertia Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

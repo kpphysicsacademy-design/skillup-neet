@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Escape Velocity</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f7f9;color:#17202a;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px}.head h1{font-size:26px;margin:0}.xp{font-weight:700;color:#16803c}.sub{color:#64748b;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #0000000d}.bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22c55e;transition:.25s}.qno{color:#64748b;font-size:14px}.question{font-size:20px;font-weight:700;line-height:1.45;margin:10px 0 16px}.opts{display:grid;gap:10px}.opts button{border:2px solid #dbe2e8;background:#fff;border-radius:12px;padding:13px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}.opts button:hover{transform:translateY(-1px);border-color:#22c55e}.selected{border-color:#22c55e!important;background:#f0fdf4!important}.correct{border-color:#16a34a!important;background:#dcfce7!important}.wrong{border-color:#ef4444!important;background:#fee2e2!important}.action{width:100%;border:0;border-radius:12px;padding:14px;margin-top:16px;background:#22c55e;color:#fff;font-size:17px;font-weight:700;cursor:pointer}.feedback{min-height:24px;margin-top:14px;font-weight:700}.back{display:inline-block;text-decoration:none;color:#166534;border:2px solid #bbf7d0;padding:11px 16px;border-radius:12px;font-weight:700}.result{text-align:center}@media(max-width:520px){.head h1{font-size:22px}.question{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🚀 Escape Velocity</h1><div class="xp" id="xp">+0 XP</div></div><p class="sub">Escape speed, gravitational potential, planetary mass and radius, and motion beyond a planet’s gravitational influence.</p><section class="card"><b>🎯 Skill Mastery <span id="score">0 / 15</span></b><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quiz"></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['Escape velocity from the surface of a planet is the minimum speed required to:', ['reach the centre of the planet','escape its gravitational field without further propulsion','orbit the planet in a circle','stop the planet’s rotation'],1,'Escape velocity is the minimum launch speed for which the object can reach infinity with zero residual speed, neglecting atmosphere and other effects.'],['Escape velocity from a planet of mass M and radius R is:', ['√(GM/R)','√(2GM/R)','2GM/R','GM/R²'],1,'Equating initial kinetic energy to the gravitational binding energy gives vₑ=√(2GM/R).'],['Escape velocity is independent of the:', ['mass of the planet','radius of the planet','mass of the escaping object','value of G'],2,'The escaping object’s mass cancels from the energy equation.'],['For Earth, the escape velocity at the surface is approximately:', ['1.12 km/s','11.2 km/s','112 km/s','0.112 km/s'],1,'Earth’s surface escape speed is about 11.2 km/s.'],['If the radius of a planet is doubled while its mass remains unchanged, escape velocity becomes:', ['double','half','1/√2 times','√2 times'],2,'Since vₑ∝1/√R, doubling R reduces escape speed by √2.'],['If the mass of a planet is quadrupled with the radius unchanged, escape velocity becomes:', ['twice','half','four times','unchanged'],0,'Since vₑ∝√M, four times the mass gives twice the escape speed.'],['The escape velocity from a planet is related to surface gravitational acceleration g by:', ['√(gR)','gR','√(2gR)','2g/R'],2,'Using g=GM/R² gives vₑ=√(2gR).'],['An object projected with exactly escape velocity reaches infinity with speed:', ['equal to escape velocity','zero','infinite','the speed of light'],1,'In the ideal case, its kinetic energy is just enough to make total mechanical energy zero.'],['Escape velocity is greater than circular orbital velocity at the same radius by a factor of:', ['1/2','1','√2','2'],2,'vₑ=√(2GM/R), while v_orbit=√(GM/R), so the ratio is √2.'],['At a height h above Earth, the escape velocity is:', ['√(2GM/(R+h))','√(2GM/R) always','2GM(R+h)','√(GM(R+h))'],0,'The distance from Earth’s centre is R+h, so vₑ=√[2GM/(R+h)].'],['A planet has the same density as Earth but twice Earth’s radius. Its escape velocity is:', ['same as Earth','√2 times Earth','2 times Earth','4 times Earth'],2,'For equal density, M∝R³, so vₑ∝√(M/R)∝R; doubling R doubles escape velocity.'],['The total mechanical energy of an object just escaping to infinity is:', ['positive','negative','zero','infinite'],2,'At infinity both kinetic energy (for limiting escape) and potential energy are zero, so total energy is zero.'],['Which quantity determines whether a launch speed is sufficient for escape in an ideal two-body system?', ['only the object’s mass','the local escape speed','only the object’s shape','only atmospheric pressure'],1,'The launch speed must meet or exceed the escape speed at the launch point.'],['If a planet has escape velocity 10 km/s, an object launched at 5 km/s from its surface will:', ['escape','remain gravitationally bound','move at 10 km/s eventually without force','have zero gravitational potential energy at launch'],1,'A speed below escape velocity leaves the object gravitationally bound in the ideal model.'],['The escape velocity from the Moon is much smaller than Earth’s mainly because the Moon has:', ['larger radius and greater mass','smaller mass relative to its radius','no gravitational field','a faster rotation that cancels gravity'],1,'Escape speed depends on √(M/R); the Moon’s much smaller mass gives a much lower value.']];let i=0,selected=null,correct=0,checked=false;const $=id=>document.getElementById(id);function render(){checked=false;selected=null;const q=quiz[i];$('quiz').innerHTML='<div class="qno">Question '+(i+1)+' of 15</div><div class="question">'+q[0]+'</div><div class="opts" id="opts"></div><button class="action" id="action">Continue →</button><div class="feedback" id="feedback"></div>';const order=q[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;[...$('opts').children].forEach(y=>y.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('action').onclick=check;update()}function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}if(!checked){checked=true;const q=quiz[i],ok=selected===q[2];if(ok)correct++;[...$('opts').children].forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===q[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Not quite. ')+q[3];$('action').textContent=i===14?'Finish Skill →':'Continue →';update();return}if(i<14){i++;render()}else finish()}function update(){$('score').textContent=correct+' / 15';$('fill').style.width=(correct/15*100)+'%';$('xp').textContent='+'+(correct*10)+' XP'}function finish(){const p=Math.round(correct/15*100);$('quiz').innerHTML='<div class="result"><h2>🏆 Skill Complete!</h2><p>You scored <strong>'+correct+' / 15</strong> ('+p+'%).</p><p>⭐ XP earned: <strong>'+correct*10+'</strong></p><button class="action" onclick="i=0;correct=0;render()">Retry Skill</button></div>';update()}$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Escape Velocity quiz">
+<title>SkillUp | Escape Velocity — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🚀 Escape Velocity</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Escape speed from a spherical planet of mass M and radius R is:",o:["√(2GM/R)","√(GM/R)","2GM/R²","GM/R"],a:0,e:"Using energy conservation, the minimum launch kinetic energy equals the magnitude of gravitational potential energy."},
+{q:"The approximate escape speed from Earth's surface is:",o:["11.2 km/s","7.9 km/s","1.12 km/s","112 km/s"],a:0,e:"Earth's surface escape speed is about 11.2 km/s when air resistance and other bodies are neglected."},
+{q:"Escape speed depends on the escaping object's mass:",o:["No, it cancels from the formula","Yes, it is directly proportional to mass","Yes, it is inversely proportional to mass","Only for heavy objects"],a:0,e:"The object's mass cancels when kinetic and gravitational potential energy are equated."},
+{q:"Escape speed from a body can be derived using conservation of:",o:["Mechanical energy","Electric charge","Angular momentum only","Temperature"],a:0,e:"At the minimum escape speed, total mechanical energy is zero when potential energy is referenced to infinity."},
+{q:"The formula for escape speed at distance r from the centre of a mass M is:",o:["√(2GM/r)","√(GM/r²)","2GM/r","√(GM r)"],a:0,e:"At any starting radius r, escape speed is √(2GM/r) in the ideal two-body model."},
+{q:"If a planet's mass doubles but its radius stays fixed, escape speed:",o:["Increases by √2","Doubles","Halves","Stays the same"],a:0,e:"Escape speed is proportional to the square root of M."},
+{q:"If a planet's radius doubles with mass fixed, surface escape speed:",o:["Decreases by a factor √2","Doubles","Halves","Becomes four times"],a:0,e:"Escape speed varies as 1/√R for fixed planet mass."},
+{q:"If escape speed is v at radius R, at radius 4R it is:",o:["v/2","v/4","2v","4v"],a:0,e:"Since v_esc ∝ 1/√r, quadrupling r halves the escape speed."},
+{q:"The escape speed from Earth is about √2 times its circular orbital speed near the surface. Why?",o:["v_esc = √(2GM/R), while v_orbit = √(GM/R)","Escape speed is always twice orbital speed","Orbital speed depends on object's mass","The two speeds are equal by definition"],a:0,e:"Comparing the formulas gives v_esc/v_orbit = √2."},
+{q:"At the minimum escape speed, the object's speed at infinity is ideally:",o:["Zero","Equal to launch speed","11.2 km/s","Infinite"],a:0,e:"For the limiting escape trajectory, the object reaches infinity with speed tending to zero."},
+{q:"Which assumption is commonly used in the basic escape-speed formula?",o:["Neglect air resistance and other external energy losses","Assume gravity vanishes at the surface","Assume the escaping object has zero mass","Assume the planet has no mass"],a:0,e:"The basic derivation treats the gravitational system as isolated and neglects energy losses."},
+{q:"The gravitational potential energy of mass m at radius R, with zero at infinity, is:",o:["−GMm/R","+GMm/R","−GM/R²","GMmR"],a:0,e:"For a point-mass gravitational field, U = −GMm/R."},
+{q:"At launch from a planet's surface, the minimum escape condition is:",o:["½mv² = GMm/R","mv² = GM/R","½mv = GMm/R²","mv²/2 = GMR"],a:0,e:"Equate initial kinetic energy to the magnitude of the initial potential energy."},
+{q:"For Earth, using g and radius R, escape speed is:",o:["√(2gR)","√(gR)","2gR","g/R"],a:0,e:"Since g = GM/R², substitute GM = gR² into √(2GM/R)."},
+{q:"If surface gravity g stays the same but radius R doubles, √(2gR) predicts escape speed:",o:["Increases by √2","Doubles","Halves","Stays the same"],a:0,e:"In the relation v_esc = √(2gR), speed is proportional to √R when g is held fixed."},
+{q:"A body has escape speed 10 km/s. An object launched at 12 km/s from the same point, ideally, has:",o:["More than the minimum energy needed to escape","Insufficient energy to escape","Exactly zero speed at infinity","No kinetic energy initially"],a:0,e:"A launch speed above escape speed gives positive total energy in the ideal model."},
+{q:"If launch speed is below escape speed, under the ideal isolated-body model the object:",o:["Cannot escape to infinity and return with nonzero speed","Must escape anyway","Has zero gravitational force at launch","Immediately stops"],a:0,e:"Below escape speed, total energy is negative and the trajectory remains gravitationally bound."},
+{q:"Escape speed from a point outside a planet depends on:",o:["Planet mass and distance from its centre","Escaping object's mass only","Object's colour and shape","Planet temperature only"],a:0,e:"The formula contains source mass M and starting radius r, not the test mass."},
+{q:"If planet mass becomes four times as large and radius stays fixed, escape speed:",o:["Doubles","Quadruples","Halves","Becomes four times smaller"],a:0,e:"v_esc ∝ √M, so multiplying mass by four multiplies speed by two."},
+{q:"If radius is reduced to one-fourth with mass fixed, escape speed:",o:["Doubles","Halves","Becomes one-fourth","Stays the same"],a:0,e:"v_esc ∝ 1/√R, so R/4 makes escape speed twice as large."},
+{q:"A planet has M = 2 × 10²⁴ kg and R = 4 × 10⁶ m. Which expression gives escape speed?",o:["√[2G(2 × 10²⁴)/(4 × 10⁶)]","GMR²","GM/R²","√(GM/R²)"],a:0,e:"Substitute the planet's M and R into √(2GM/R); the expression has units of speed."},
+{q:"The SI unit of escape speed is:",o:["m/s","m/s²","N/kg","J/kg"],a:0,e:"Escape speed is a velocity, measured in metres per second."},
+{q:"Escape velocity is technically a speed because:",o:["Only the magnitude is specified; direction can vary","It must point vertically upward in every situation","It has no magnitude","It is a force"],a:0,e:"The minimum required speed is independent of launch direction in the ideal central-field model, provided the object is directed outward."},
+{q:"At altitude h above a planet, the escape speed is:",o:["√[2GM/(R+h)]","√[2GM/R²]","√[2GM(R+h)]","√[GM/(R+h)²]"],a:0,e:"Use distance r = R+h from the planet's centre."},
+{q:"At altitude h = R, escape speed compared with surface escape speed is:",o:["1/√2 times","One-fourth","Twice","The same"],a:0,e:"The starting radius doubles from R to 2R, so escape speed is divided by √2."},
+{q:"Why does the escaping object's mass cancel in the energy derivation?",o:["Both kinetic energy and gravitational potential energy are proportional to that mass","Mass is always zero in space","Gravity is independent of the source mass","The launch speed is measured in kilograms"],a:0,e:"Both terms contain m, so it cancels from ½mv² = GMm/R."},
+{q:"A satellite in a circular orbit at radius r has orbital speed:",o:["√(GM/r)","√(2GM/r)","GM/r²","2GM/r"],a:0,e:"Equating gravity to centripetal force gives circular orbital speed √(GM/r)."},
+{q:"At the same radius, escape speed compared with circular orbital speed is:",o:["√2 times","2 times","Half","Equal"],a:0,e:"The escape-speed formula contains a factor of 2 inside the square root."},
+{q:"Which statement about Earth's escape speed is correct?",o:["It is not enough by itself to escape the Sun's gravity as well","It means the object escapes every gravitational source in the universe","It is the same as Earth's orbital speed around the Sun","It depends on the object's mass"],a:0,e:"Escape speed from Earth refers to escaping Earth's gravity; other gravitational systems still matter."},
+{q:"A 2 kg object is launched at Earth's surface at escape speed. Ignoring losses, the required kinetic energy is:",o:["Equal to 2GMm/(2R) = GMm/R","GM/R only","Zero","Four times GMm/R"],a:0,e:"Kinetic energy is ½m v_esc² = ½m(2GM/R) = GMm/R."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Escape Velocity Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

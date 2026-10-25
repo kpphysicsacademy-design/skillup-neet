@@ -1,22 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Heat Capacity</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔥 Heat Capacity</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['Heat capacity of a body is defined as the heat required to raise its temperature by','1 K','10 K','100 K','1°C only',0,'Heat capacity C is the heat required for a unit rise in temperature: C=Q/ΔT.'],
-['The SI unit of heat capacity is','J K⁻¹','J kg⁻¹ K⁻¹','W K⁻¹','cal g⁻¹',0,'Heat capacity is measured in joules per kelvin (J K⁻¹).'],
-['The heat capacity C of a body is given by','QΔT','Q/ΔT','ΔT/Q','Q+ΔT',1,'By definition, C=Q/ΔT for the specified temperature change.'],
-['Specific heat capacity is heat required to raise the temperature of','the whole body by 1 K','unit mass by 1 K','one mole by 1 K','unit volume by 1 K',1,'Specific heat capacity is heat capacity per unit mass: c=Q/(mΔT).'],
-['The SI unit of specific heat capacity is','J K⁻¹','J kg⁻¹ K⁻¹','J mol⁻¹','kg J⁻¹',1,'Specific heat capacity is expressed as J kg⁻¹ K⁻¹.'],
-['For a body of mass m and specific heat c, its heat capacity is','mc','m/c','c/m','m+c',0,'Since C=mc, heat capacity equals mass multiplied by specific heat capacity.'],
-['If 500 J heat raises a body by 5 K, its heat capacity is','25 J K⁻¹','100 J K⁻¹','2500 J K⁻¹','0.01 J K⁻¹',1,'C=Q/ΔT=500/5=100 J K⁻¹.'],
-['Two bodies have equal masses and equal specific heats. Their heat capacities are','equal','always different','zero','infinite',0,'For equal m and c, C=mc gives equal heat capacities.'],
-['Molar heat capacity is heat required to raise the temperature of','unit mass by 1 K','one mole by 1 K','one gram by 1 K','one litre by 1 K',1,'Molar heat capacity is heat capacity per mole.'],
-['For n moles of a substance with molar heat capacity Cₘ, heat capacity is','Cₘ/n','n/Cₘ','nCₘ','Cₘ+n',2,'Total heat capacity is n times the molar heat capacity.'],
-['For a given body, if its mass is doubled while specific heat remains unchanged, heat capacity','halves','doubles','remains unchanged','becomes zero',1,'C=mc, so doubling m doubles C.'],
-['For the same heat supplied, a body with larger heat capacity undergoes a','larger temperature rise','smaller temperature rise','negative temperature rise always','fixed 100 K rise',1,'From ΔT=Q/C, a larger C gives a smaller temperature change for the same Q.'],
-['For an isolated two-body system exchanging heat, the body with higher heat capacity for a given heat transfer has','the larger temperature change','the smaller temperature change','no temperature change necessarily','infinite temperature',1,'For the same magnitude of heat transfer, ΔT=Q/C, so larger C means smaller ΔT.'],
-['The dimensions of heat capacity are','ML²T⁻²Θ⁻¹','ML²T⁻³Θ⁻¹','MLT⁻²Θ⁻¹','M⁰L⁰T⁰Θ',0,'Heat capacity has dimensions of energy divided by temperature: ML²T⁻²Θ⁻¹.'],
-['A 2 kg body has specific heat 400 J kg⁻¹ K⁻¹. Its heat capacity is','200 J K⁻¹','400 J K⁻¹','800 J K⁻¹','1200 J K⁻¹',2,'C=mc=2×400=800 J K⁻¹.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Heat Capacity quiz">
+<title>SkillUp | Heat Capacity — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=2">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Heat Capacity</h1><p class="muted">Master heat capacity, specific heat, and calorimetry with short questions and clear explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{"q":"Heat capacity of a body is the heat required to raise its temperature by:","o":["one kelvin","one kilogram","one metre","one joule"],"a":0,"e":"Heat capacity C = Q/ΔT for the whole body."},
+{"q":"The SI unit of heat capacity is:","o":["J/kg","J/K","J/(kg·K)","K/J"],"a":1,"e":"Heat capacity is energy per temperature change, measured in J/K."},
+{"q":"Specific heat capacity is heat required to raise the temperature of:","o":["a whole planet by 1 K","any body by 100 K","unit mass of a substance by 1 K","one mole by 1 K only"],"a":2,"e":"Specific heat capacity is defined per unit mass and per kelvin."},
+{"q":"The SI unit of specific heat capacity is:","o":["J/K","J/kg","kg·K/J","J/(kg·K)"],"a":3,"e":"Its SI unit is joule per kilogram kelvin."},
+{"q":"For a body of mass m and specific heat c, its heat capacity is:","o":["C = mc","C = m/c","C = c/m","C = m + c"],"a":0,"e":"For a uniform material, total heat capacity C equals mc."},
+{"q":"Heat supplied without a phase change is given by:","o":["Q = m/cΔT","Q = mcΔT","Q = m + c + ΔT","Q = c/(mΔT)"],"a":1,"e":"The sensible heat equation is Q = mcΔT."},
+{"q":"A 2 kg body has specific heat 500 J/(kg·K). Its heat capacity is:","o":["250 J/K","500 J/K","1000 J/K","2500 J/K"],"a":2,"e":"C = mc = 2 × 500 = 1000 J/K."},
+{"q":"A body with heat capacity 200 J/K warms by 5 K. Heat absorbed is:","o":["40 J","205 J","100 J","1000 J"],"a":3,"e":"Q = CΔT = 200 × 5 = 1000 J."},
+{"q":"A 0.5 kg sample with c = 400 J/(kg·K) is heated by 10 K. Heat supplied is:","o":["2000 J","400 J","1000 J","8000 J"],"a":0,"e":"Q = mcΔT = 0.5 × 400 × 10 = 2000 J."},
+{"q":"If equal heat is given to two bodies, the one with larger heat capacity has:","o":["a larger temperature rise","a smaller temperature rise","the same temperature rise always","zero temperature rise"],"a":1,"e":"ΔT = Q/C, so larger heat capacity gives a smaller rise for the same heat."},
+{"q":"Heat capacity is generally an:","o":["intensive property","dimensionless quantity","extensive property","SI base quantity"],"a":2,"e":"Heat capacity depends on the amount of material in the body."},
+{"q":"Specific heat capacity is generally an:","o":["extensive property only","amount of heat stored","energy unit","intensive property"],"a":3,"e":"Specific heat capacity is characteristic of the material and does not scale with sample mass."},
+{"q":"Two blocks of the same material have masses m and 2m. The larger block's heat capacity is ideally:","o":["twice as large","half as large","the same","four times as large"],"a":0,"e":"Since C = mc, doubling mass doubles heat capacity for the same material."},
+{"q":"If a body's heat capacity is 50 J/K, the heat needed for a 2 K rise is:","o":["25 J","100 J","50 J","200 J"],"a":1,"e":"Q = CΔT = 50 × 2 = 100 J."},
+{"q":"A 100 g object has c = 900 J/(kg·K). Its heat capacity is:","o":["900 J/K","90 J/K","9 J/K","0.9 J/K"],"a":2,"e":"Convert 100 g to 0.1 kg; C = 0.1 × 900 = 90 J/K."},
+{"q":"Which equation defines heat capacity?","o":["C = ΔT/Q","C = QΔT","C = mQ","C = Q/ΔT"],"a":3,"e":"Heat capacity is the heat supplied divided by the resulting temperature change."},
+{"q":"If the same body absorbs 600 J and warms by 3 K, its heat capacity is:","o":["200 J/K","1800 J/K","600 J/K","3 J/K"],"a":0,"e":"C = Q/ΔT = 600/3 = 200 J/K."},
+{"q":"A material with high specific heat capacity requires what for the same mass and temperature rise?","o":["less energy","more energy","no energy","energy independent of mass"],"a":1,"e":"Q = mcΔT, so larger c requires more energy."},
+{"q":"Which statement about heat capacity is correct?","o":["It is always equal to temperature","It is measured in kelvin","It depends on the body's mass and material","It must be zero at room temperature"],"a":2,"e":"Heat capacity depends on the amount and specific heat of the material."},
+{"q":"If a 3 kg body has heat capacity 1500 J/K, its specific heat capacity is:","o":["4500 J/(kg·K)","500 J/(kg·K)","1500 J/(kg·K)","500 J/(kg·K)"],"a":3,"e":"c = C/m = 1500/3 = 500 J/(kg·K)."},
+{"q":"A 2 kg object has C = 800 J/K. Its specific heat capacity is:","o":["400 J/(kg·K)","1600 J/(kg·K)","800 J/(kg·K)","200 J/(kg·K)"],"a":0,"e":"c = C/m = 800/2 = 400 J/(kg·K)."},
+{"q":"For the same material and same temperature rise, doubling the mass doubles the required heat because:","o":["temperature is doubled","heat is proportional to mass","specific heat becomes zero","heat capacity decreases"],"a":1,"e":"Q = mcΔT; with c and ΔT fixed, Q is proportional to mass."},
+{"q":"A 250 J heat input raises a body with C = 50 J/K by:","o":["12,500 K","250 K","5 K","0.2 K"],"a":2,"e":"ΔT = Q/C = 250/50 = 5 K."},
+{"q":"If temperature changes by 10°C, the temperature interval is equal to:","o":["283 K","273 K","−10 K","10 K"],"a":3,"e":"Celsius and kelvin temperature intervals have the same numerical size."},
+{"q":"Which has a larger heat capacity, assuming the same material?","o":["A 4 kg sample compared with a 1 kg sample","The 1 kg sample","Both must be equal","Cannot depend on mass"],"a":0,"e":"For the same material, C = mc, so the 4 kg sample has four times the heat capacity."},
+{"q":"A body's heat capacity is 300 J/K. If it loses 900 J of heat, its temperature change is:","o":["+3 K","−3 K","−300 K","+900 K"],"a":1,"e":"ΔT = Q/C = −900/300 = −3 K, so it cools by 3 K."},
+{"q":"Which quantity is measured in J/(kg·K)?","o":["Heat capacity","Energy","Specific heat capacity","Power"],"a":2,"e":"J/(kg·K) is the SI unit of specific heat capacity."},
+{"q":"Two bodies have the same heat capacity. If they receive equal heat, their temperature changes are:","o":["always opposite","proportional to their masses","always zero","equal in magnitude"],"a":3,"e":"Since ΔT = Q/C, equal heat and equal heat capacity give equal temperature changes."},
+{"q":"Why does water require substantial energy to warm up compared with many common materials?","o":["It has a relatively high specific heat capacity","It has no mass","Its temperature cannot change","It has zero heat capacity"],"a":0,"e":"Water's high specific heat means more energy is needed per kilogram per kelvin."},
+{"q":"A body with C = 120 J/K warms from 20°C to 25°C. Heat absorbed is:","o":["120 J","600 J","24 J","145 J"],"a":1,"e":"ΔT = 5 K, so Q = CΔT = 120 × 5 = 600 J."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Heat Capacity Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

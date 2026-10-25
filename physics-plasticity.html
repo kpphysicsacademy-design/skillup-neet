@@ -1,6 +1,180 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Plasticity</title><style>body{margin:0;background:#f5f7f8;font-family:Arial,sans-serif;color:#17202a}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center}.head h1{font-size:28px;margin:0}.xp{font-weight:700}.sub{color:#65727e;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #0000000d}.bar{height:10px;background:#e8ecef;border-radius:10px;overflow:hidden}.fill{height:100%;width:0;background:#58b86b;transition:.3s}.qno{font-size:14px;color:#697680}.q{font-size:20px;font-weight:700;line-height:1.45}.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #dfe5e8;border-radius:12px;padding:13px 15px;margin:10px 0;font-size:16px;cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#58b86b}.opt.selected{border-color:#58b86b;background:#f0fbf2}.opt.correct{border-color:#58b86b;background:#e9f8eb}.opt.wrong{border-color:#e26b6b;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-weight:700;font-size:16px;cursor:pointer;background:#58b86b;color:#fff}.back{display:block;width:100%;text-align:center;margin-top:18px;background:#fff;color:#35434d;border:2px solid #dfe5e8}.back:hover{border-color:#58b86b;transform:translateY(-1px)}#feedback{min-height:24px;font-weight:700}.done{text-align:center}.score{font-size:28px;font-weight:800}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🧩 Plasticity</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div><p class="sub">Permanent deformation, elastic limit, yield point, plastic behaviour and stress–strain response.</p><section class="card"><b>🎯 Skill Mastery <span id="mastery">0 / 15</span></b><div class="bar"><div id="fill" class="fill"></div></div></section><section id="quiz" class="card"><div class="qno" id="qno"></div><p class="q" id="question"></p><div id="opts"></div><button id="continue" class="btn">Continue →</button><p id="feedback"></p></section><section id="done" class="card done" hidden><div class="score" id="score"></div><p>Great work! Your Plasticity skill has been practiced.</p><button class="btn" onclick="location.reload()">Retry 🔄</button></section><button id="back" class="btn back">← Back to Physics Path</button></main><script>const quiz=[['Plasticity is the property by which a material',['returns completely to original shape','retains permanent deformation after force removal','has zero stress','cannot be deformed'],1,'A plastic material retains permanent deformation after the deforming force is removed.'],['The deformation that remains after removal of force is called',['elastic deformation','plastic deformation','thermal expansion','compression only'],1,'Plastic deformation is permanent.'],['The elastic limit is the maximum stress up to which a body',['has no mass','regains its original shape on unloading','must break','has zero strain'],1,'Below the elastic limit, the material returns to its original shape when unloaded.'],['Beyond the elastic limit, further deformation is mainly',['permanent','impossible','zero','independent of stress'],0,'Beyond the elastic limit, permanent plastic deformation develops.'],['On a typical stress-strain curve for a ductile metal, yielding indicates',['permanent deformation begins significantly','density becomes zero','stress becomes zero','temperature must fall'],0,'Yielding marks the onset of substantial plastic deformation.'],['A ductile material can undergo considerable plastic deformation before',['fracture','melting','becoming massless','losing all stress'],0,'Ductile materials deform considerably before fracture.'],['Which material behaviour is associated with permanent set?',['plasticity','perfect elasticity','zero strain','incompressibility'],0,'Permanent set is a residual deformation characteristic of plastic behaviour.'],['If a wire is loaded beyond its elastic limit and then unloaded, it will generally',['return exactly to original length','retain some extension','become dimensionless','have infinite Young modulus'],1,'Unloading after plastic deformation leaves a permanent extension.'],['A material with a very small plastic region after yielding is comparatively',['brittle','ductile','perfectly elastic','fluid'],0,'Brittle materials show little plastic deformation before fracture.'],['The point at which permanent deformation starts on a practical stress-strain curve is associated with the',['yield point','origin','zero-load point','absolute zero'],0,'The yield point marks the transition into significant plastic deformation.'],['Which statement is correct about plastic deformation?',['It is completely reversible','It is irreversible after unloading','It requires zero stress','It occurs only in gases'],1,'Plastic deformation is not fully recovered when the load is removed.'],['Cold working a metal generally increases its',['strength and hardness','mass only','volume to infinity','elastic strain at zero stress'],0,'Cold working can increase strength and hardness through strain hardening.'],['Plastic deformation is most closely related to',['permanent change in shape','change in SI unit','absence of force','zero displacement'],0,'Plasticity concerns permanent changes in shape or dimensions.'],['Which material is commonly described as highly ductile?',['Copper','Glass','Ceramic','Chalk'],0,'Copper can undergo substantial plastic deformation and is ductile.'],['After unloading from a plastic region, the stress becomes zero but the strain is generally',['zero','non-zero','infinite','negative always'],1,'Residual strain remains after unloading from plastic deformation.']];let i=0,selected=null,score=0,checked=false;const $=id=>document.getElementById(id);function render(){selected=null;checked=false;$('qno').textContent=`Question ${i+1} of 15`;$('question').textContent=quiz[i][0];$('feedback').textContent='';$('continue').textContent='Continue →';$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)})}function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}checked=true;const a=quiz[i],ok=selected===a[2];if(ok){score++;$('xp').textContent=score*10}document.querySelectorAll('.opt').forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===a[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Not quite — ')+a[3];$('mastery').textContent=`${i+1} / 15`;$('fill').style.width=((i+1)/15*100)+'%';$('continue').textContent=i===14?'Finish Skill →':'Continue →'}$('continue').onclick=()=>{if(!checked){check();return}if(i===14){$('quiz').hidden=true;$('done').hidden=false;$('score').textContent=`${score} / 15 • ${score*10} XP`}else{i++;render()}};$('back').onclick=()=>{const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html'};render();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Plasticity quiz">
+<title>SkillUp | Plasticity — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Plasticity</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Plasticity is the property of a material to:",o:["Always return fully to its original shape","Have no deformation under force","Become weightless under stress","Undergo permanent deformation after the load is removed"],a:3,e:"Plastic deformation remains after the deforming force is removed."},
+{q:"A material is said to deform plastically when its deformation is:",o:["Not fully recoverable after unloading","Completely reversible","Always zero","Independent of applied stress"],a:0,e:"Plastic deformation leaves a permanent change in shape or size."},
+{q:"Which material is commonly considered highly malleable?",o:["Dry wood","Gold","Glass","Chalk"],a:1,e:"Gold can be hammered into very thin sheets without breaking."},
+{q:"Ductility is the ability of a material to be:",o:["Compressed without limit","Resistant to all deformation","Drawn into wires","Hammered into sheets only"],a:2,e:"Ductile materials can undergo tensile plastic deformation and be drawn into wires."},
+{q:"Malleability refers to the ability to be:",o:["Drawn into long wires only","Returned perfectly to original shape","Converted into a gas","Hammered or rolled into thin sheets"],a:3,e:"Malleable materials can be plastically deformed into sheets."},
+{q:"The point beyond which permanent deformation begins is associated with the:",o:["Yield point","Boiling point","Melting point only","Optical centre"],a:0,e:"Yielding marks the onset of significant plastic deformation in many materials."},
+{q:"The elastic region of a stress–strain curve is the region where deformation is:",o:["Impossible to measure","Recoverable on unloading","Always permanent","Unrelated to stress"],a:1,e:"In the elastic region, the specimen returns approximately to its original dimensions after unloading."},
+{q:"Plastic deformation usually begins after the material exceeds its:",o:["Specific heat","Refractive index","Elastic limit or yield stress","Density"],a:2,e:"Beyond the elastic limit, the material may not recover its original shape completely."},
+{q:"Which statement best distinguishes elasticity from plasticity?",o:["Elasticity means breaking; plasticity means melting","Both always mean permanent change","Plasticity means no strain","Elastic deformation is recoverable; plastic deformation is permanent"],a:3,e:"Elasticity describes recovery, whereas plasticity describes permanent deformation."},
+{q:"A metal wire remains longer after a heavy load is removed. This is evidence of:",o:["Plastic deformation","Purely elastic deformation","Zero strain","Perfect recovery"],a:0,e:"A permanent increase in length indicates that the wire has deformed plastically."},
+{q:"The stress at which a material begins to yield is called:",o:["Shear rate","Yield stress","Hydrostatic pressure only","Vapour pressure"],a:1,e:"Yield stress marks the start of plastic flow under the specified loading conditions."},
+{q:"For many ductile metals, the stress–strain curve after yielding may show:",o:["Only perfectly reversible strain","Stress becoming negative automatically","Plastic strain increasing with continued loading","No further strain under any load"],a:2,e:"After yielding, additional deformation can occur as plastic strain develops."},
+{q:"In a tensile test, necking means:",o:["Uniform increase in density throughout the wire","The specimen stops deforming","The load becomes exactly zero","Local reduction in cross-sectional area"],a:3,e:"Necking is a localized thinning of the specimen, often occurring before fracture in ductile materials."},
+{q:"The maximum engineering stress reached in a tensile test is called:",o:["Ultimate tensile strength","Yield strain","Bulk modulus","Poisson’s ratio"],a:0,e:"Ultimate tensile strength is the maximum engineering stress recorded during the test."},
+{q:"After necking, a ductile metal specimen may eventually:",o:["Lose all mass","Fracture","Recover without unloading","Become perfectly elastic"],a:1,e:"Continued localized deformation can lead to fracture."},
+{q:"Which property describes a material’s ability to absorb energy and plastically deform before fracture?",o:["Optical density","Thermal conductivity","Toughness","Brittleness"],a:2,e:"Toughness is the energy absorbed per unit volume up to fracture, including elastic and plastic deformation."},
+{q:"Brittle materials generally show:",o:["Very large plastic strain before fracture","Unlimited ductility","No response to stress","Little plastic deformation before fracture"],a:3,e:"Brittle materials tend to fracture with relatively little plastic deformation."},
+{q:"Which is a typical example of a brittle material at room temperature?",o:["Glass","Annealed copper","Gold","Mild steel under ordinary tensile testing"],a:0,e:"Glass typically fractures with very limited plastic deformation at room temperature."},
+{q:"Cold working is plastic deformation carried out:",o:["Only in a vacuum","Below the material’s recrystallization temperature","Only above its boiling point","Without applying force"],a:1,e:"Cold working is performed below the recrystallization temperature and usually increases strength and hardness."},
+{q:"One common effect of cold working a metal is:",o:["Zero residual stress","Instant melting","Increased strength and hardness","Always lower strength and hardness"],a:2,e:"Cold work raises dislocation density, commonly increasing strength and hardness while reducing ductility."},
+{q:"Annealing after cold work is often used to:",o:["Increase work hardening indefinitely","Make all metals brittle","Eliminate all atoms","Restore ductility and reduce work hardening"],a:3,e:"Annealing can relieve stresses and promote recovery or recrystallization, improving ductility."},
+{q:"Work hardening occurs because plastic deformation commonly:",o:["Increases dislocation interactions that hinder further slip","Removes all crystal defects","Makes stress zero","Stops atomic motion completely"],a:0,e:"Dislocations obstruct one another as their density increases, making further plastic deformation harder."},
+{q:"Plastic deformation in crystalline metals often occurs through:",o:["Evaporation of atoms only","Dislocation motion and slip","Nuclear decay","Light reflection"],a:1,e:"Slip occurs when dislocations move along suitable crystallographic planes and directions."},
+{q:"Which factor can affect a material’s yield strength and plastic behaviour?",o:["Only its name","The observer’s height","Temperature","Only its colour"],a:2,e:"Temperature can change dislocation mobility and therefore affect yielding and plastic flow."},
+{q:"At higher temperatures, many metals generally become:",o:["Impossible to deform","Automatically stronger in every case","Completely elastic at all stresses","Easier to plastically deform"],a:3,e:"For many metals, higher temperature facilitates dislocation motion and lowers flow stress, though behaviour depends on conditions."},
+{q:"In a stress–strain graph, permanent strain remains after:",o:["The applied stress is removed","The specimen is first loaded","The graph is drawn","Temperature is measured"],a:0,e:"Residual strain after unloading is a sign of plastic deformation."},
+{q:"A material with high ductility can usually withstand:",o:["No applied stress","Large plastic tensile strain before fracture","No tensile strain","Only compression with no change"],a:1,e:"Ductility describes the extent of plastic deformation a material can undergo in tension before fracture."},
+{q:"Which manufacturing process relies on plastic deformation of metal through dies?",o:["Filtration","Sublimation","Wire drawing","Distillation"],a:2,e:"Wire drawing pulls metal through a die to reduce its diameter and increase its length."},
+{q:"Rolling metal into thin sheets relies mainly on:",o:["Elastic recovery alone","Evaporation","Magnetic attraction alone","Plastic deformation under compressive forces"],a:3,e:"Rolling plastically compresses metal between rolls to reduce thickness."},
+{q:"Why is plasticity useful in metal forming?",o:["It allows a material to be shaped permanently without immediate fracture","It prevents all changes in shape","It guarantees zero internal stress","It makes every metal liquid"],a:0,e:"Processes such as forging, rolling and drawing depend on controlled permanent deformation."},
+{q:"Which statement about a perfectly elastic idealization is correct?",o:["It cannot be stretched","It returns to its original shape when the load is removed","It always retains permanent strain","It must fracture at zero stress"],a:1,e:"Perfectly elastic behaviour involves full recovery after unloading, unlike plastic deformation."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Plasticity Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

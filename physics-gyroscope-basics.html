@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Gyroscope Basics</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px}.title{font-size:27px;font-weight:800}.xp{font-weight:700;color:#168447;white-space:nowrap}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-1px);border-color:#7b8798}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:22px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">🌀 Gyroscope Basics</div><div class="xp">+10 XP</div></div><div class="sub">Gyroscopic motion, angular momentum, precession and torque.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quizCard"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['A gyroscope primarily demonstrates the dynamics of a:', ['rapidly rotating body','stationary particle','fluid at rest','non-rotating point mass'],0],['The angular momentum of a spinning rigid body about its rotation axis is:', ['L=Iω','L=I/ω','L=ω/I','L=I+ω'],0],['Gyroscopic precession refers to the motion of the:', ['rotation axis about another axis','centre of mass in a straight line only','mass away from the body','spin becoming zero'],0],['For a spinning gyroscope, a torque perpendicular to its angular momentum mainly changes the:', ['direction of angular momentum','mass of the gyroscope','moment of inertia to zero','temperature only'],0],['The angular velocity associated with precession is called:', ['precessional angular velocity','translational velocity','escape velocity','terminal velocity'],0],['For steady gyroscopic precession, the applied torque is related to angular momentum by approximately:', ['τ=Ω×L','τ=Ω+L','τ=L/Ω²','τ=Ω/L'],0],['If the spin angular momentum of a gyroscope increases while applied torque is unchanged, its precession angular speed generally:', ['decreases','increases','becomes infinite','remains necessarily zero'],0],['The SI unit of angular momentum is:', ['kg m² s⁻¹','kg m s⁻¹','N m⁻¹','J s⁻¹'],0],['A spinning bicycle wheel resists a sudden change in the direction of its axis because of:', ['angular momentum','linear displacement only','gravity being absent','zero inertia'],0],['In a simple ideal gyroscope, precession is produced when an external:', ['torque acts on the spinning rotor','mass is removed instantly','force is always parallel to the spin axis','temperature is increased'],0],['If no external torque acts on a rotating gyroscope, its angular momentum:', ['remains conserved','must become zero','doubles every second','changes direction randomly'],0],['A gyroscope spins at 20 rad/s with I=0.5 kg m². Its angular momentum magnitude is:', ['10 kg m²/s','40 kg m²/s','20.5 kg m²/s','0.025 kg m²/s'],0],['For steady precession of a rapidly spinning top, increasing its spin speed generally makes the precession:', ['slower for the same torque','faster for the same torque','independent of angular momentum','impossible'],0],['The rotational inertia of a gyroscope depends mainly on its:', ['mass distribution about the axis','colour','temperature alone','angular position only'],0],['A gyroscope is an important application of conservation of:', ['angular momentum','electric charge only','linear momentum only','mass-energy only'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('continue').textContent='Continue →';$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{$('quizCard').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Gyroscope Basics quiz">
+<title>SkillUp | Gyroscope Basics — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌀 Gyroscope Basics</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"A gyroscope primarily demonstrates the dynamics of a:",o:["rapidly spinning rotor","stationary particle","fluid at rest","non-rotating point mass"],a:0,e:"A gyroscope uses a spinning rotor and its angular momentum."},
+{q:"For rotation about a principal axis, angular momentum magnitude is:",o:["L = Iω","L = I/ω","L = I + ω","L = ω/I"],a:0,e:"For principal-axis rotation, L = Iω."},
+{q:"Gyroscopic precession is:",o:["Change in direction of the spin axis","The rotor stopping instantly","Loss of rotor mass","Straight-line motion only"],a:0,e:"Precession is motion of the spin axis in response to torque."},
+{q:"An external torque changes a gyroscope's:",o:["Angular momentum","Mass automatically","Colour","Density automatically"],a:0,e:"Net torque changes angular momentum."},
+{q:"The SI unit of torque is:",o:["N m","kg m/s","J/s","kg/m³"],a:0,e:"Torque is measured in newton metres."},
+{q:"The SI unit of angular momentum is:",o:["kg m²/s","kg m/s","N/m","kg/s²"],a:0,e:"Angular momentum has units kg m²/s."},
+{q:"For steady precession in the simple approximation, torque magnitude is:",o:["τ = ΩL","τ = Ω + L","τ = L/Ω²","τ = Ω/L"],a:0,e:"For perpendicular torque and dominant spin angular momentum, τ = ΩL."},
+{q:"The approximate precession angular speed is:",o:["Ω = τ/L","Ω = τL","Ω = L/τ²","Ω = τ + L"],a:0,e:"Rearranging τ = ΩL gives Ω = τ/L."},
+{q:"If torque stays constant while angular momentum increases, precession speed generally:",o:["Decreases","Increases","Becomes infinite","Must remain zero"],a:0,e:"Ω = τ/L, so increasing L reduces Ω at fixed torque."},
+{q:"A spinning wheel resists a change in its axis direction because of:",o:["Angular momentum","Zero inertia","Absence of gravity always","Its colour"],a:0,e:"Changing angular momentum requires a net torque."},
+{q:"If net external torque is zero, angular momentum:",o:["Remains constant","Must become zero","Always doubles","Reverses automatically"],a:0,e:"Angular momentum is conserved when net external torque is zero."},
+{q:"For I = 0.40 kg m² and ω = 25 rad/s, L is:",o:["10 kg m²/s","62.5 kg m²/s","25.4 kg m²/s","0.016 kg m²/s"],a:0,e:"L = Iω = 0.40 × 25 = 10 kg m²/s."},
+{q:"At the same torque, a spinning top precesses more slowly when:",o:["Spin angular momentum increases","Spin angular momentum decreases","Torque increases","Its inertia becomes zero"],a:0,e:"For the same torque, Ω = τ/L."},
+{q:"Rotor moment of inertia depends on:",o:["Mass distribution about the axis","Paint colour","Angular speed only","Gravity direction only"],a:0,e:"Moment of inertia depends on mass distribution relative to the axis."},
+{q:"In a supported spinning top, gravitational torque arises when:",o:["Weight has a lever arm about the pivot","The rotor has a certain colour","The lever arm is always zero","The body has no mass"],a:0,e:"Weight acting away from the pivot creates torque."},
+{q:"Angular momentum direction for principal-axis spin follows the:",o:["Right-hand rule","Left-hand rule for mass","Temperature scale","Scalar addition rule"],a:0,e:"The angular momentum direction follows the right-hand rule."},
+{q:"A torque parallel to angular momentum mainly changes its:",o:["Magnitude","Direction only","Mass","Shape"],a:0,e:"A torque parallel to L changes its magnitude."},
+{q:"If a force's line of action passes through the pivot, torque about that pivot is:",o:["Zero","Always maximum","Equal to mass","Infinite"],a:0,e:"Zero lever arm means zero torque."},
+{q:"Torque vector is defined by:",o:["τ = r × F","τ = r + F","τ = r/F","τ = m + a"],a:0,e:"Torque is the cross product of position vector and force."},
+{q:"For I = 0.20 kg m² and ω = 50 rad/s, angular momentum is:",o:["10 kg m²/s","250 kg m²/s","50.2 kg m²/s","0.004 kg m²/s"],a:0,e:"L = 0.20 × 50 = 10 kg m²/s."},
+{q:"If τ = 2 N m and L = 4 kg m²/s, approximate Ω is:",o:["0.5 rad/s","2 rad/s","8 rad/s","6 rad/s"],a:0,e:"Ω = τ/L = 2/4 = 0.5 rad/s."},
+{q:"With L fixed, what doubles approximate precession speed?",o:["Doubling torque","Halving torque","Doubling L","Removing torque"],a:0,e:"Ω is proportional to torque when L is fixed."},
+{q:"If the torque causing precession is removed and no other torque acts, the axis:",o:["Keeps its current direction","Stops spinning instantly","Always points down","Reverses automatically"],a:0,e:"Without net torque, angular momentum direction remains constant."},
+{q:"Which statement about gyroscopic stability is correct?",o:["Large angular momentum resists rapid reorientation","A gyroscope can never change orientation","It removes all external forces","Only stationary objects have angular momentum"],a:0,e:"A large change in angular momentum needs substantial torque or time."},
+{q:"If L = 12 kg m²/s and Ω = 0.25 rad/s, torque magnitude is:",o:["3 N m","48 N m","12.25 N m","0.021 N m"],a:0,e:"τ = ΩL = 0.25 × 12 = 3 N m."},
+{q:"The simple Ω = τ/L approximation best fits:",o:["Steady precession with torque perpendicular to dominant spin L","Any arbitrary 3D motion","Zero angular momentum","Torque parallel to L only"],a:0,e:"This approximation assumes steady precession and a dominant spin angular momentum."},
+{q:"If torque and angular momentum both double, precession speed:",o:["Stays the same","Doubles","Halves","Becomes zero"],a:0,e:"The ratio τ/L remains unchanged."},
+{q:"Can the usual high-spin approximation be assumed for a non-spinning rotor?",o:["No, it requires substantial spin angular momentum","Yes, spin is irrelevant","Yes, L is infinite","No, torque cannot act"],a:0,e:"The approximation relies on substantial spin angular momentum."},
+{q:"A common application of gyroscopes is:",o:["Orientation sensing and stabilization","Measuring pH directly","Filtering dissolved salts","Measuring mass by colour"],a:0,e:"Gyroscopes support orientation sensing, navigation and stabilization."},
+{q:"In general 3D rigid-body rotation, which statement is true?",o:["L and ω need not be parallel","L and ω are always antiparallel","L has no direction","I is always zero"],a:0,e:"The scalar relation L = Iω applies directly for principal-axis rotation; in general 3D motion, L and ω need not be parallel."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Gyroscope Basics Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

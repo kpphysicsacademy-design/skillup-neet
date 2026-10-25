@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Standard Moments of Inertia</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center}.title{font-size:28px;font-weight:800}.xp{font-weight:700;color:#168447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-2px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:23px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">⚙️ Standard Moments of Inertia</div><div class="xp">+10 XP</div></div><div class="sub">Standard moments of inertia for common rigid bodies and axes.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quizCard"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['Moment of inertia of a thin ring about an axis through its centre perpendicular to its plane is:', ['MR²','1/2 MR²','1/4 MR²','2MR²'],0],['Moment of inertia of a uniform disc about its central axis perpendicular to its plane is:', ['1/2 MR²','MR²','1/4 MR²','2MR²'],0],['Moment of inertia of a uniform disc about a diameter is:', ['1/4 MR²','1/2 MR²','MR²','2MR²'],0],['Moment of inertia of a thin rod of length L about an axis through its centre perpendicular to the rod is:', ['1/12 ML²','1/3 ML²','ML²','1/2 ML²'],0],['Moment of inertia of a thin rod about an axis through one end perpendicular to the rod is:', ['1/3 ML²','1/12 ML²','1/2 ML²','ML²'],0],['Moment of inertia of a solid sphere about a diameter is:', ['2/5 MR²','1/2 MR²','2/3 MR²','MR²'],0],['Moment of inertia of a thin spherical shell about a diameter is:', ['2/3 MR²','2/5 MR²','1/2 MR²','MR²'],0],['For a solid cylinder about its symmetry axis, the standard moment of inertia is:', ['1/2 MR²','MR²','1/4 MR²','2/5 MR²'],0],['For a rectangular lamina of sides a and b, about an axis through its centre perpendicular to the plane, the moment is:', ['M(a²+b²)/12','M(a+b)/12','Mab/12','M(a²-b²)/12'],0],['For a point mass M at distance R from an axis, its moment of inertia is:', ['MR²','M/R²','R²/M','MR'],0],['If the radius of a disc is doubled while mass remains constant, its moment about the central axis becomes:', ['four times','twice','half','unchanged'],0],['If mass of a ring is doubled with radius unchanged, its moment of inertia becomes:', ['double','half','four times','unchanged'],0],['Which body has I = 1/12 ML² about its central transverse axis?', ['uniform thin rod','thin ring','solid sphere','disc'],0],['Which standard body has the smallest coefficient of MR² about its central diameter among these?', ['solid sphere (2/5)','thin spherical shell (2/3)','thin ring (1)','disc (1/2)'],0],['A body with I = 1/2 MR² about its symmetry axis could be a:', ['uniform disc','thin ring','solid sphere','thin rod'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('continue').textContent='Continue →';$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{$('quizCard').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Standard Moments of Inertia quiz">
+<title>SkillUp | Standard Moments of Inertia — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚙️ Standard Moments of Inertia</h1><p class="muted">Learn standard moments of inertia for common bodies and axes one step at a time.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{"q":"A thin ring of mass M and radius R about its central axis perpendicular to its plane has I:","o":["MR²","½MR²","¼MR²","⅖MR²"],"a":0,"e":"For a thin ring, all mass lies at distance R from the central axis, so I = MR²."},
+{"q":"A uniform disc about its central axis perpendicular to its plane has I:","o":["½MR²","MR²","¼MR²","⅖MR²"],"a":0,"e":"The standard result for a uniform solid disc is I = ½MR²."},
+{"q":"A uniform disc about a diameter through its centre has I:","o":["¼MR²","½MR²","MR²","⅖MR²"],"a":0,"e":"By symmetry and the perpendicular-axis theorem, each diameter moment is half of ½MR²."},
+{"q":"A thin rod of length L about its centre, perpendicular to the rod, has I:","o":["ML²/12","ML²/3","ML²/2","ML²"],"a":0,"e":"The standard central transverse-axis result is ML²/12."},
+{"q":"A thin rod of length L about one end, perpendicular to the rod, has I:","o":["ML²/3","ML²/12","ML²/2","ML²"],"a":0,"e":"Using the parallel-axis theorem gives I = ML²/3."},
+{"q":"A solid sphere about a diameter has I:","o":["⅖MR²","⅔MR²","½MR²","MR²"],"a":0,"e":"For a uniform solid sphere, I = 2MR²/5."},
+{"q":"A thin spherical shell about a diameter has I:","o":["⅔MR²","⅖MR²","½MR²","MR²"],"a":0,"e":"For a thin spherical shell, I = 2MR²/3."},
+{"q":"A solid cylinder about its symmetry axis has I:","o":["½MR²","MR²","⅖MR²","⅔MR²"],"a":0,"e":"A uniform solid cylinder has the same axial formula as a uniform disc: I = ½MR²."},
+{"q":"A rectangular lamina of sides a and b about its centre, perpendicular to its plane, has I:","o":["M(a²+b²)/12","M(a²+b²)/6","Mab/12","M(a²−b²)/12"],"a":0,"e":"Add the central moments about the two in-plane axes: Mb²/12 + Ma²/12."},
+{"q":"A point mass m at perpendicular distance r from an axis has I:","o":["mr²","mr","m/r²","m²r"],"a":0,"e":"For a point particle, I = mr²."},
+{"q":"A thin ring about a diameter in its plane has I:","o":["½MR²","MR²","¼MR²","⅔MR²"],"a":0,"e":"By the perpendicular-axis theorem and symmetry, each diameter moment is MR²/2."},
+{"q":"A solid sphere has I = ⅖MR². Its radius doubles while mass stays constant. I becomes:","o":["Four times","Twice","Eight times","Unchanged"],"a":0,"e":"I is proportional to R² at fixed mass, so doubling R multiplies I by four."},
+{"q":"If a ring's mass doubles while its radius stays the same, its axial moment of inertia:","o":["Doubles","Quadruples","Halves","Stays the same"],"a":0,"e":"All standard formulas are directly proportional to mass."},
+{"q":"Which body has I = ML²/12 about an axis through its centre perpendicular to its length?","o":["Uniform thin rod","Thin ring","Solid sphere","Uniform disc"],"a":0,"e":"This is the standard central transverse-axis formula for a uniform thin rod."},
+{"q":"Which formula is correct for a solid sphere about a diameter?","o":["2MR²/5","2MR²/3","MR²/2","MR²"],"a":0,"e":"A uniform solid sphere has I = 2MR²/5 about any diameter."},
+{"q":"A solid disc has mass 2 kg and radius 0.5 m. Its central-axis I is:","o":["0.25 kg m²","0.5 kg m²","1 kg m²","0.125 kg m²"],"a":0,"e":"I = ½MR² = ½ × 2 × 0.25 = 0.25 kg m²."},
+{"q":"A thin ring has mass 3 kg and radius 2 m. Its central-axis I is:","o":["12 kg m²","6 kg m²","3 kg m²","24 kg m²"],"a":0,"e":"I = MR² = 3 × 4 = 12 kg m²."},
+{"q":"A rod has mass 3 kg and length 2 m. Its moment about the centre perpendicular to the rod is:","o":["1 kg m²","4 kg m²","2 kg m²","3 kg m²"],"a":0,"e":"I = ML²/12 = 3 × 4/12 = 1 kg m²."},
+{"q":"For the same rod, the moment about one end perpendicular to it is:","o":["4 kg m²","1 kg m²","2 kg m²","6 kg m²"],"a":0,"e":"I = ML²/3 = 3 × 4/3 = 4 kg m²."},
+{"q":"A solid cylinder and a thin ring have the same M and R. About their central symmetry axes, which has larger I?","o":["Thin ring","Solid cylinder","Both equal","Cannot be compared"],"a":0,"e":"The ring has MR²; the solid cylinder has ½MR²."},
+{"q":"For a uniform disc, the moment about its central perpendicular axis is how many times the moment about a diameter?","o":["2","½","4","1"],"a":0,"e":"The axial value is ½MR² and the diameter value is ¼MR², giving a ratio of 2."},
+{"q":"A hollow spherical shell and solid sphere have the same M and R. About a diameter, which has larger I?","o":["Hollow spherical shell","Solid sphere","Both equal","Depends only on speed"],"a":0,"e":"The shell has ⅔MR² while the solid sphere has ⅖MR²."},
+{"q":"A thin rod about its centre has I = ML²/12. If L doubles with M fixed, I becomes:","o":["Four times","Twice","Eight times","Half"],"a":0,"e":"The formula depends on L², so doubling L multiplies I by four."},
+{"q":"The SI unit of moment of inertia is:","o":["kg m²","kg m","N m","kg/s"],"a":0,"e":"Moment of inertia has dimensions mass × length squared."},
+{"q":"Which is the correct axial moment of inertia for a uniform disc?","o":["½MR²","¼MR²","MR²","⅖MR²"],"a":0,"e":"About the central axis normal to its plane, a uniform disc has I = ½MR²."},
+{"q":"A thin ring of mass 4 kg and radius 0.25 m has axial I:","o":["0.25 kg m²","0.5 kg m²","1 kg m²","0.125 kg m²"],"a":0,"e":"I = MR² = 4 × 0.0625 = 0.25 kg m²."},
+{"q":"A solid sphere of mass 5 kg and radius 0.2 m has I about a diameter:","o":["0.08 kg m²","0.4 kg m²","0.2 kg m²","0.04 kg m²"],"a":0,"e":"I = ⅖MR² = 0.4 × 5 × 0.04 = 0.08 kg m²."},
+{"q":"For a cuboid of sides a, b and c, the moment about a central axis parallel to side a is:","o":["M(b²+c²)/12","M(a²+b²)/12","M(a²+c²)/12","Mabc/12"],"a":0,"e":"Distance from an axis parallel to a depends on the other two coordinates, giving M(b²+c²)/12."},
+{"q":"Which change increases I of a ring about its central axis by a factor of nine if mass is unchanged?","o":["Triple its radius","Double its radius","Triple its mass","Halve its radius"],"a":0,"e":"For a ring I = MR², so tripling R makes I nine times larger."},
+{"q":"A body has I = ½MR² about a given axis. If M doubles and R stays fixed, I becomes:","o":["Twice as large","Four times as large","Half as large","Unchanged"],"a":0,"e":"The formula is directly proportional to mass when R is fixed."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Standard Moments of Inertia Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

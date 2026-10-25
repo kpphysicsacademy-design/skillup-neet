@@ -1,6 +1,148 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Moment of Force</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center}.title{font-size:28px;font-weight:800}.xp{font-weight:700;color:#168447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-2px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:23px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">🌀 Moment of Force</div><div class="xp">+10 XP</div></div><div class="sub">Torque produced by a force about a fixed axis.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quizCard"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['The turning effect of a force about a point is called:', ['moment of force','impulse','power','pressure'],0],['The SI unit of moment of force is:', ['N m','N s','J s','kg m s⁻¹'],0],['Moment of force is equal to:', ['force × perpendicular distance','force ÷ distance','mass × acceleration','work ÷ time'],0],['The perpendicular distance in torque is measured from the axis to the:', ['line of action of force','centre of mass only','point of maximum speed','nearest edge only'],0],['Torque is maximum when the angle between force and lever arm is:', ['90°','0°','30°','180°'],0],['Torque is zero when the force acts:', ['along the lever arm','perpendicular to lever arm','at 45°','at 60°'],0],['A force of 10 N acts perpendicularly at 0.5 m from an axis. Torque is:', ['5 N m','20 N m','0.5 N m','10.5 N m'],0],['For a given force, increasing the perpendicular distance from the axis:', ['increases torque','decreases torque','does not change torque','makes torque zero'],0],['The vector form of torque is:', ['τ = r × F','τ = r + F','τ = r/F','τ = F/r'],0],['The direction of torque is determined using the:', ['right-hand rule','left-hand rule only','Fleming left-hand rule','Lenz law'],0],['If a force acts at 30° to a lever arm, torque magnitude is proportional to:', ['sin 30°','cos 30°','tan 30°','1/sin 30°'],0],['Two equal opposite parallel forces separated by a distance form a:', ['couple','single force','free fall','projectile'],0],['A couple produces:', ['pure rotation','pure translation only','zero moment always','uniform acceleration only'],0],['For rotational equilibrium, the algebraic sum of torques about an axis is:', ['zero','maximum','minimum but non-zero','infinite'],0],['A door is easiest to open by pushing:', ['far from the hinges and perpendicular to the door','near the hinges along the door','at the hinges','toward the hinges'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{$('quizCard').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Moment of Force quiz">
+<title>SkillUp | Moment of Force — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Moment of Force</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Moment of force is another name for:","o":["Torque","Angular speed","Linear momentum","Power"],"a":0,"e":"Moment of force describes the turning effect of a force."},{"q":"The moment of a force about a point equals force multiplied by:","o":["Perpendicular distance from point to its line of action","Distance along the force direction","Mass of the object","Time of application"],"a":0,"e":"Moment = force × perpendicular moment arm."},{"q":"The SI unit of moment of force is:","o":["N m","N/m","kg m/s","W"],"a":0,"e":"The moment of force is expressed in newton metres."},{"q":"A 5 N force acts perpendicularly 2 m from a pivot. Its moment is:","o":["10 N m","2.5 N m","7 N m","0.4 N m"],"a":0,"e":"Moment = 5×2 = 10 N m."},{"q":"A force passes directly through the pivot. Its moment about that pivot is:","o":["Zero","Maximum","Equal to the force","Infinite"],"a":0,"e":"The perpendicular distance from the pivot to the force line is zero."},{"q":"Moment of force depends on:","o":["Force, distance from pivot and angle","Mass only","Speed only","Time only"],"a":0,"e":"The turning effect depends on force and its perpendicular lever arm."},{"q":"For fixed force and lever arm, moment is greatest when force is:","o":["Perpendicular to the lever arm","Parallel to the lever arm","At 0° to the radius","Directed through the pivot"],"a":0,"e":"A perpendicular force has the full force as its effective component."},{"q":"A 20 N force acts at 30° to a 0.5 m lever arm. Moment magnitude?","o":["5 N m","10 N m","8.66 N m","20.5 N m"],"a":0,"e":"M = rF sinθ = 0.5×20×0.5 = 5 N m."},{"q":"The perpendicular distance used in calculating moment is called the:","o":["Moment arm","Angular velocity","Radius of gyration","Displacement"],"a":0,"e":"The moment arm is the shortest distance from pivot to force line."},{"q":"A 12 N force has a moment arm of 0.25 m. Its moment is:","o":["3 N m","48 N m","12.25 N m","0.03 N m"],"a":0,"e":"M = 12×0.25 = 3 N m."},{"q":"The direction of the moment vector is determined by the:","o":["Right-hand rule","Law of reflection","Snell's law","Fleming's left-hand rule"],"a":0,"e":"The right-hand rule gives the direction perpendicular to the rotation plane."},{"q":"If anticlockwise moments are positive, a clockwise moment is:","o":["Negative","Positive","Always zero","Undefined"],"a":0,"e":"The sign follows the chosen rotational convention."},{"q":"If the force doubles and the moment arm is unchanged, the moment:","o":["Doubles","Halves","Stays constant","Becomes zero"],"a":0,"e":"Moment is directly proportional to force."},{"q":"If the moment arm is tripled with force unchanged, the moment:","o":["Triples","Becomes one-third","Doubles","Does not change"],"a":0,"e":"Moment is directly proportional to perpendicular distance."},{"q":"A 30 N force produces a moment of 15 N m perpendicularly. The moment arm is:","o":["0.5 m","2 m","15 m","450 m"],"a":0,"e":"d = M/F = 15/30 = 0.5 m."},{"q":"A 1.5 m spanner is pushed with 40 N perpendicular to its length. Moment?","o":["60 N m","26.7 N m","41.5 N m","600 N m"],"a":0,"e":"M = 40×1.5 = 60 N m."},{"q":"Which action makes a door easiest to rotate about its hinges?","o":["Push at the handle perpendicular to the door","Push close to the hinge","Push along the door toward the hinge","Push directly at the hinge"],"a":0,"e":"A large perpendicular lever arm maximizes the moment."},{"q":"A 10 N force acts at 90° to a 0.8 m lever arm. Moment?","o":["8 N m","12.5 N m","10.8 N m","0.08 N m"],"a":0,"e":"M = 10×0.8 = 8 N m."},{"q":"A 10 N force acts at 60° to a 2 m lever arm. Moment magnitude?","o":["17.32 N m","10 N m","20 N m","5 N m"],"a":0,"e":"M = 2×10×sin60° ≈ 17.32 N m."},{"q":"Moment of force is a:","o":["Vector quantity","Dimensionless scalar","Unit of mass","Type of energy only"],"a":0,"e":"Moment has magnitude and an axis direction."},{"q":"The dimensional formula of moment of force is:","o":["ML²T⁻²","MLT⁻²","ML²T⁻¹","M⁰L⁰T⁰"],"a":0,"e":"Moment = force × distance, giving ML²T⁻²."},{"q":"Two equal and opposite parallel forces separated by distance d form a couple. Its moment magnitude is:","o":["Fd","F/d","2F/d","Zero in all cases"],"a":0,"e":"A couple produces a pure turning effect with magnitude Fd."},{"q":"For a body in rotational equilibrium about a fixed axis, the net moment is:","o":["Zero","Maximum","Equal to its mass","Always positive"],"a":0,"e":"Rotational equilibrium requires clockwise and anticlockwise moments to balance."},{"q":"A 6 N force at 0.4 m gives a 2.4 N m moment. What happens if force is reversed with same line of action?","o":["Moment changes sign","Magnitude doubles","Moment becomes infinite","Moment remains same direction"],"a":0,"e":"Reversing force reverses the direction of the moment."},{"q":"A 20 N force acts 0.3 m from pivot at 90°. Moment?","o":["6 N m","60 N m","20.3 N m","0.015 N m"],"a":0,"e":"M = 20×0.3 = 6 N m."},{"q":"A force of 50 N produces a 10 N m moment. If perpendicular, its moment arm is:","o":["0.2 m","5 m","40 m","500 m"],"a":0,"e":"d = 10/50 = 0.2 m."},{"q":"Why is the handle of a wrench long?","o":["It increases the moment arm","It reduces the applied force to zero","It removes friction entirely","It changes the unit of torque"],"a":0,"e":"A longer lever arm gives a larger moment for the same force."},{"q":"Moment is zero when the angle between position vector and force is:","o":["0° or 180°","90° only","45° only","60° only"],"a":0,"e":"M = rF sinθ, and sinθ is zero at 0° and 180°."},{"q":"A 25 N force acts at 0.4 m and 30° to the lever arm. Moment?","o":["5 N m","10 N m","8.66 N m","25 N m"],"a":0,"e":"M = 25×0.4×sin30° = 5 N m."},{"q":"A 100 N force acts perpendicularly at 0.6 m from a pivot. Moment magnitude?","o":["60 N m","166.7 N m","100.6 N m","0.6 N m"],"a":0,"e":"M = 100×0.6 = 60 N m."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Moment of Force Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

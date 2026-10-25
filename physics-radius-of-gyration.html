@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Radius of Gyration</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center}.title{font-size:28px;font-weight:800}.xp{font-weight:700;color:#168447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-2px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:23px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">📐 Radius of Gyration</div><div class="xp">+10 XP</div></div><div class="sub">Equivalent distance at which the whole mass may be considered concentrated for rotational inertia.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quizCard"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['Radius of gyration k of a body about an axis is defined by:', ['I = Mk²','I = M/k²','I = k/M','I = M²k'],0],['The SI unit of radius of gyration is:', ['metre','metre²','kg m²','dimensionless'],0],['The radius of gyration has the dimensions of:', ['length','length²','mass','time'],0],['For a body of mass M and moment of inertia I, k is:', ['√(I/M)','I/M','√(M/I)','M/I'],0],['Radius of gyration depends on:', ['mass distribution about the axis','mass alone only','angular velocity only','torque only'],0],['For a given body, radius of gyration is generally smaller when:', ['mass is concentrated closer to the axis','mass is moved farther from the axis','angular speed increases','torque increases'],0],['For a thin ring of radius R about its central axis, radius of gyration is:', ['R','R/√2','R/2','√2R'],0],['For a uniform disc about its central axis, radius of gyration is:', ['R/√2','R','R/2','√2R'],0],['For a uniform rod of length L about an axis through its centre perpendicular to the rod, k is:', ['L/√12','L/2','L/√3','L'],0],['For a uniform rod of length L about an axis through one end perpendicular to the rod, k is:', ['L/√3','L/√12','L/2','L'],0],['If moment of inertia is I and mass is M, doubling I while keeping M constant makes k:', ['√2 times','2 times','half','unchanged'],0],['If both I and M are doubled, radius of gyration:', ['remains unchanged','doubles','halves','becomes four times'],0],['A larger radius of gyration indicates that the mass is, on average:', ['distributed farther from the axis','distributed closer to the axis','zero','at the axis only'],0],['The relation between radius of gyration and moment of inertia is useful because it represents the body as:', ['mass concentrated at distance k from the axis','a point mass at the centre always','a body with zero mass','a body with zero moment'],0],['A body has I = 8 kg m² and M = 2 kg. Its radius of gyration is:', ['2 m','4 m','√6 m','1 m'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('continue').textContent='Continue →';$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{$('quizCard').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Radius of Gyration quiz">
+<title>SkillUp | Radius of Gyration — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔄 Radius of Gyration</h1><p class="muted">Learn the meaning of radius of gyration, its formulas and applications one step at a time.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{"q":"What does radius of gyration tell us?","o":["How mass is distributed about an axis","The body's temperature","Its linear speed only","Its density only"],"a":0,"e":"Radius of gyration is an effective distance that describes mass distribution about a chosen axis."},
+{"q":"The relation between moment of inertia I, mass M and radius of gyration k is:","o":["I = Mk²","I = Mk","I = M/k²","I = k/M"],"a":0,"e":"By definition, I = Mk²."},
+{"q":"The formula for radius of gyration is:","o":["k = √(I/M)","k = I/M","k = √(IM)","k = M/I"],"a":0,"e":"Rearranging I = Mk² gives k = √(I/M)."},
+{"q":"What is the SI unit of radius of gyration?","o":["metre (m)","kg m²","kilogram (kg)","second (s)"],"a":0,"e":"Radius of gyration is a length, so its SI unit is metre."},
+{"q":"The dimensional formula of radius of gyration is:","o":["[L]","[ML²]","[T]","[M]"],"a":0,"e":"It represents a distance, so its dimension is length."},
+{"q":"A body has mass 4 kg and I = 16 kg m². Find k.","o":["2 m","4 m","8 m","√2 m"],"a":0,"e":"k = √(I/M) = √(16/4) = 2 m."},
+{"q":"A 2 kg body has radius of gyration 3 m. Its moment of inertia is:","o":["18 kg m²","6 kg m²","12 kg m²","9 kg m²"],"a":0,"e":"I = Mk² = 2 × 3² = 18 kg m²."},
+{"q":"If moment of inertia becomes four times while mass stays the same, k becomes:","o":["Twice","Four times","Half","Unchanged"],"a":0,"e":"Since k = √(I/M), multiplying I by four doubles k."},
+{"q":"If mass becomes four times while I stays constant, k becomes:","o":["Half","Twice","Four times","Unchanged"],"a":0,"e":"k = √(I/M), so four times the mass makes k half as large."},
+{"q":"For a thin ring about its central axis, I = MR². Its radius of gyration is:","o":["R","R/√2","R/2","2R"],"a":0,"e":"k = √(I/M) = √(MR²/M) = R."},
+{"q":"For a uniform disc about its central axis, I = ½MR². Its radius of gyration is:","o":["R/√2","R","R/2","√2R"],"a":0,"e":"k = √(I/M) = √(R²/2) = R/√2."},
+{"q":"For a uniform rod of length L about its centre and perpendicular to its length, I = ML²/12. Then k is:","o":["L/√12","L/3","L/2","L/√3"],"a":0,"e":"k = √(I/M) = √(L²/12) = L/√12."},
+{"q":"For a uniform rod about one end, I = ML²/3. Its radius of gyration is:","o":["L/√3","L/3","L/2","L/√12"],"a":0,"e":"k = √(I/M) = L/√3."},
+{"q":"For a solid sphere about a diameter, I = ⅖MR². Its radius of gyration is:","o":["R√(2/5)","R/√2","R/2","R√(5/2)"],"a":0,"e":"k = √(I/M) = R√(2/5)."},
+{"q":"Two bodies have equal mass. The one with larger radius of gyration has:","o":["Larger moment of inertia about that axis","Smaller moment of inertia always","Zero moment of inertia","Same moment of inertia always"],"a":0,"e":"Since I = Mk², for the same mass a larger k means larger I."},
+{"q":"Radius of gyration is measured relative to:","o":["A specified axis of rotation","Only the body's geometric centre","The North direction","The body's velocity"],"a":0,"e":"Both moment of inertia and radius of gyration depend on the selected axis."},
+{"q":"If all mass were imagined concentrated at distance k from the axis, it would have:","o":["The same moment of inertia","The same shape","The same density distribution","Zero angular momentum"],"a":0,"e":"That equivalent concentration is the defining idea of radius of gyration."},
+{"q":"A body's I is 50 kg m² and mass is 2 kg. Find k.","o":["5 m","25 m","10 m","√50 m"],"a":0,"e":"k = √(50/2) = √25 = 5 m."},
+{"q":"A body has I = 9 kg m² and k = 1.5 m. Find its mass.","o":["4 kg","6 kg","9 kg","13.5 kg"],"a":0,"e":"M = I/k² = 9/2.25 = 4 kg."},
+{"q":"The radius of gyration of a system of particles of equal masses is related to their distances rᵢ by:","o":["k = √(Σrᵢ²/n)","k = Σrᵢ/n","k = √(Σrᵢ/n)","k = n/Σrᵢ²"],"a":0,"e":"For equal masses, k is the root-mean-square distance from the axis."},
+{"q":"For unequal point masses, k² is:","o":["Σmᵢrᵢ² / Σmᵢ","Σmᵢrᵢ / Σmᵢ","Σrᵢ² / Σmᵢ","Σmᵢ / Σrᵢ²"],"a":0,"e":"Using I = Σmᵢrᵢ² and k² = I/M gives the mass-weighted mean of r²."},
+{"q":"A body is shifted to a parallel axis a distance d away from its centre-of-mass axis. Its radius of gyration about the new axis satisfies:","o":["k² = kcm² + d²","k² = kcm² − d²","k = kcm + d","k² = d² − kcm²"],"a":0,"e":"From the parallel-axis theorem, I = Icm + Md²; dividing by M gives k² = kcm² + d²."},
+{"q":"If kcm = 3 m and the parallel axis is 4 m away, the new k is:","o":["5 m","7 m","1 m","√7 m"],"a":0,"e":"k = √(kcm² + d²) = √(9 + 16) = 5 m."},
+{"q":"For a fixed body and fixed axis, radius of gyration depends on:","o":["Its mass distribution relative to the axis","Its colour","Its angular speed only","Its orientation in a photograph"],"a":0,"e":"The effective distance is determined by how the mass lies relative to that axis."},
+{"q":"For a uniform disc, if its radius doubles and mass remains the same, k about its central axis:","o":["Doubles","Quadruples","Halves","Stays constant"],"a":0,"e":"For a disc k = R/√2, so k scales directly with R."},
+{"q":"If both mass and moment of inertia double, radius of gyration:","o":["Stays the same","Doubles","Halves","Becomes four times"],"a":0,"e":"The ratio I/M is unchanged, so k = √(I/M) remains unchanged."},
+{"q":"Which statement about radius of gyration is correct?","o":["It has dimensions of length","It has dimensions of area","It is measured in kg m²","It is always equal to the body's outer radius"],"a":0,"e":"Radius of gyration is a length and need not equal the body's physical radius."},
+{"q":"A ring and disc have the same M and R. Their central-axis radii of gyration are:","o":["Ring: R; disc: R/√2","Ring: R/√2; disc: R","Both R/2","Both R"],"a":0,"e":"For a ring k = R, while for a uniform disc k = R/√2."},
+{"q":"Why is radius of gyration useful?","o":["It summarizes mass distribution in one length value","It gives angular speed directly","It replaces mass in every equation","It gives the body's density directly"],"a":0,"e":"It provides a compact way to compare how spread out mass is about a chosen axis."},
+{"q":"If a body has I = 12 kg m² and M = 3 kg, its radius of gyration is:","o":["2 m","4 m","6 m","√12 m"],"a":0,"e":"k = √(12/3) = √4 = 2 m."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Radius of Gyration Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Variation of g with Depth quiz">
+<title>SkillUp | Variation of g with Depth — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌎 Variation of g with Depth</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Assuming Earth has uniform density, gravity at depth d is:",o:["g_d = g(1 − d/R)","g_d = g(1 − 2d/R)","g_d = g[R/(R−d)]²","g_d = g(1 + d/R)"],a:0,e:"For a uniform-density sphere, gravity decreases linearly with depth: g_d = g(1 − d/R)."},
+{q:"In the depth formula, R represents:",o:["Earth's radius","Depth below the surface","Earth's diameter","Distance from the centre"],a:0,e:"R is Earth's radius and d is measured downward from its surface."},
+{q:"At depth d = R/2, gravity is:",o:["g/2","g/4","2g","Zero"],a:0,e:"g_d = g(1 − 1/2) = g/2."},
+{q:"At Earth's centre, the depth is d = R. Gravity is:",o:["Zero","g","g/2","Infinite"],a:0,e:"At the centre, d/R = 1, so the model gives g_d = 0."},
+{q:"At the surface, d = 0, the formula gives:",o:["g_d = g","g_d = 0","g_d = 2g","g_d = g/2"],a:0,e:"At zero depth, the object is at the surface and gravity equals g."},
+{q:"Under the uniform-density model, gravity decreases with depth:",o:["Linearly","As the inverse square of depth","Exponentially","It does not decrease"],a:0,e:"The formula is linear in d: g_d = g − gd/R."},
+{q:"At depth d = R/4, gravity is:",o:["3g/4","g/4","g/2","Zero"],a:0,e:"g_d = g(1 − 1/4) = 3g/4."},
+{q:"At depth d = 3R/4, gravity is:",o:["g/4","3g/4","g/2","Zero"],a:0,e:"g_d = g(1 − 3/4) = g/4."},
+{q:"If surface gravity is 10 m/s², gravity at depth R/5 is:",o:["8 m/s²","2 m/s²","5 m/s²","10 m/s²"],a:0,e:"g_d = 10(1 − 1/5) = 8 m/s²."},
+{q:"If surface gravity is 9.8 m/s², gravity at depth R/2 is:",o:["4.9 m/s²","2.45 m/s²","9.8 m/s²","0 m/s²"],a:0,e:"At half the Earth's radius below the surface, the model gives g_d = g/2 = 4.9 m/s²."},
+{q:"If depth doubles from R/4 to R/2, gravity changes from:",o:["3g/4 to g/2","g/4 to g/2","g/2 to g","g to 3g/4"],a:0,e:"The linear depth relation gives 3g/4 at R/4 and g/2 at R/2."},
+{q:"At depth d, distance from Earth's centre is:",o:["R − d","R + d","d − R","R/d"],a:0,e:"Depth d below the surface means the centre distance is R − d."},
+{q:"For a uniform-density Earth, which part of Earth contributes to gravity at an interior point?",o:["The mass inside the radius R − d","Only the outer shell","Only the nearest surface point","All outer shells add without cancellation"],a:0,e:"By the shell theorem, outer spherical shells have zero net field inside; the inner sphere contributes."},
+{q:"Why is the linear depth formula based on a uniform-density assumption?",o:["Enclosed mass changes with the cube of radius in that model","Gravity is constant everywhere inside Earth","Earth has no mass below the point","The radius does not change with depth"],a:0,e:"Uniform density lets enclosed mass scale as (R − d)³, yielding a linear g-depth relation."},
+{q:"The ratio of gravity at depth d to surface gravity is:",o:["g_d/g = 1 − d/R","g_d/g = (R/(R−d))²","g_d/g = 1 − 2d/R","g_d/g = R/d"],a:0,e:"Dividing g_d = g(1 − d/R) by g gives the ratio."},
+{q:"If gravity at a depth is 0.6g, the depth is:",o:["0.4R","0.6R","R/6","1.6R"],a:0,e:"0.6 = 1 − d/R, so d/R = 0.4."},
+{q:"If gravity at a depth is one-third of surface gravity, depth is:",o:["2R/3","R/3","R/2","R"],a:0,e:"1/3 = 1 − d/R, giving d/R = 2/3."},
+{q:"A body of mass m at depth has weight:",o:["mg_d","mgR","m/g_d","g_d/m"],a:0,e:"Weight at that location is mass multiplied by local gravitational acceleration."},
+{q:"A 4 kg body is at a depth where g_d = 5 m/s². Its weight is:",o:["20 N","9 N","1.25 N","5 N"],a:0,e:"W = mg_d = 4 × 5 = 20 N."},
+{q:"The SI unit of gravitational acceleration g_d is:",o:["m/s²","J/kg","N m","kg/m³"],a:0,e:"It is an acceleration, so its SI unit is m/s²."},
+{q:"The dimensions of gravitational acceleration are:",o:["LT⁻²","L²T⁻²","MLT⁻²","M⁻¹L³T⁻²"],a:0,e:"Acceleration has dimensions length per time squared."},
+{q:"At a depth equal to Earth's radius, the location is:",o:["Earth's centre","Earth's surface","Above the surface","Outside Earth"],a:0,e:"A depth d = R places the point at centre distance R − R = 0."},
+{q:"For d between 0 and R, the uniform-density formula predicts g_d is:",o:["Between 0 and g","Greater than g","Always negative","Constant at zero"],a:0,e:"As d increases from 0 to R, g_d decreases from g to zero."},
+{q:"If Earth's radius doubled but the fractional depth d/R stayed the same, the ratio g_d/g would:",o:["Stay the same","Double","Halve","Become zero"],a:0,e:"The ratio depends only on the dimensionless fraction d/R."},
+{q:"Which graph represents g_d against depth d in the uniform-density model?",o:["A straight line sloping downward","A horizontal line","An upward curve","An inverse-square curve"],a:0,e:"The relation g_d = g − (g/R)d is linear with negative slope."},
+{q:"At depth R/3, gravity is:",o:["2g/3","g/3","g/2","Zero"],a:0,e:"g_d = g(1 − 1/3) = 2g/3."},
+{q:"At depth 0.8R, gravity is:",o:["0.2g","0.8g","0.4g","Zero"],a:0,e:"g_d = g(1 − 0.8) = 0.2g."},
+{q:"Which statement correctly compares altitude and depth effects?",o:["For uniform density, gravity falls linearly with depth; above Earth it follows an inverse-square relation with centre distance","Both always follow the same linear law","Gravity increases linearly with depth","Gravity is constant both above and below the surface"],a:0,e:"The depth relation is linear under the uniform-density model, whereas outside Earth g varies as 1/r²."},
+{q:"A body's mass when moved deeper inside Earth:",o:["Remains unchanged","Decreases linearly","Becomes zero at the centre","Doubles"],a:0,e:"Mass is intrinsic; its weight changes as local gravity changes."},
+{q:"The formula g_d = g(1 − d/R) is a standard idealization for:",o:["A spherical Earth of uniform density","Any irregular planet with any density profile exactly","Only points outside Earth","A planet with zero radius"],a:0,e:"The linear law assumes a spherical body with uniform density; real Earth has varying density."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Variation of g with Depth Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

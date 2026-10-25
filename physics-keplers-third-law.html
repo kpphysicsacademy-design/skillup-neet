@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Kepler's Third Law</title><style>body{margin:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#172033}.wrap{max-width:760px;margin:auto;padding:24px 16px 50px}.head{display:flex;justify-content:space-between;align-items:center}.title{font-size:28px;font-weight:800}.xp{font-weight:700;color:#168447}.sub{color:#667085;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #0000000b}.mastery{font-weight:700}.bar{height:10px;background:#e7ebf0;border-radius:10px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a06b;transition:.3s}.qno{font-size:14px;color:#667085}.q{font-size:20px;font-weight:750;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:2px solid #d9dee7;background:#fff;border-radius:12px;cursor:pointer;font-size:16px;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#7b8798}.opt.sel{border-color:#3578e5;background:#eef5ff}.opt.correct{border-color:#20a464;background:#eaf8f0}.opt.wrong{border-color:#d64545;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:750;cursor:pointer;background:#22a06b;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.back{display:inline-block;text-decoration:none;color:#344054;border:2px solid #d9dee7;border-radius:12px;padding:12px 18px;font-weight:700;background:#fff;transition:.15s}.back:hover{transform:translateY(-2px);box-shadow:0 5px 14px #00000012}.feedback{min-height:24px;font-weight:700;margin-top:14px}.done{text-align:center;font-size:22px;font-weight:800}@media(max-width:600px){.title{font-size:23px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><div class="title">🪐 Kepler's Third Law</div><div class="xp">+10 XP</div></div><div class="sub">Relation between orbital period and the size of an orbit.</div><section class="card"><div class="mastery">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card"><div class="qno" id="qno"></div><div class="q" id="q"></div><div id="opts"></div><button class="btn" id="continue" disabled>Continue →</button><div class="feedback" id="feedback"></div></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const quiz=[['Kepler’s third law relates the square of a planet’s orbital period T to:', ['cube of its mean orbital radius a','square of its orbital radius','mass of the planet only','inverse of its radius'],0],['For planets orbiting the same star, Kepler’s third law is:', ['T² ∝ a³','T ∝ a²','T³ ∝ a²','T² ∝ 1/a³'],0],['If the orbital radius of a planet is doubled, its period becomes:', ['2√2 times','2 times','4 times','√2 times'],0],['For a circular orbit around a star of mass M, the orbital period satisfies:', ['T² = 4π²a³/(GM)','T² = GM/(4π²a³)','T = 4π²a³/(GM)','T² = GM a³'],0],['The constant in T²/a³ for planets around the same Sun is approximately:', ['same for all planets','different for every planet','zero','proportional to planet mass'],0],['A planet with a larger orbital radius generally has a:', ['longer orbital period','shorter orbital period','zero orbital period','unchanged period in all cases'],0],['If T²/a³ is constant for two planets, this constant mainly depends on:', ['mass of the central body','mass of the smaller planet only','planet radius','surface gravity only'],0],['Earth’s orbital period is 1 year at radius a. A planet at 4a has period:', ['8 years','4 years','16 years','2 years'],0],['A satellite’s orbital period around Earth increases when its orbital radius:', ['increases','decreases','becomes zero','is independent of radius'],0],['Kepler’s third law is a consequence of Newton’s law of:', ['gravitation','cooling','reflection','electromagnetic induction'],0],['For a planet in an elliptical orbit, the a in Kepler’s third law represents:', ['semi-major axis','minor axis only','eccentricity','instantaneous distance from the Sun'],0],['If two satellites orbit the same planet with radii a and 4a, their periods have ratio:', ['1:8','1:4','1:2','1:16'],0],['The graph of T² versus a³ for bodies orbiting the same central mass is:', ['a straight line through the origin','a parabola','a horizontal line','a circle'],0],['If the mass of the central star increases while orbital radius remains fixed, the orbital period:', ['decreases','increases','remains exactly unchanged','becomes zero'],0],['For a satellite in circular orbit, if its orbital radius changes from a to 9a, its period becomes:', ['27 times','9 times','3 times','81 times'],0]];let i=0,correct=0,selected=null,checked=false;function $(x){return document.getElementById(x)}function shuffle(a){for(let k=a.length-1;k>0;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}return a}function render(){selected=null;checked=false;$('continue').disabled=true;$('continue').textContent='Continue →';$('feedback').textContent='';$('qno').textContent=`Question ${i+1} of 15`;$('q').textContent=quiz[i][0];$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));shuffle(order).forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;document.querySelectorAll('.opt').forEach(z=>z.classList.remove('sel'));b.classList.add('sel');$('continue').disabled=false};$('opts').appendChild(b)});$('score').textContent=`${correct} / 15`;$('fill').style.width=`${(i/15)*100}%`}$('continue').onclick=()=>{if(selected===null)return;if(!checked){checked=true;const ok=selected===quiz[i][2];if(ok)correct++;document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=Number(b.dataset.index);if(n===quiz[i][2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=ok?'🎉 Correct! +10 XP':'💡 Review the highlighted correct answer.';$('score').textContent=`${correct} / 15`;$('fill').style.width=`${((i+1)/15)*100}%`;$('continue').textContent=i===14?'Finish Skill →':'Continue →';return}if(i<14){i++;render()}else{document.querySelector('.card:nth-of-type(2)').innerHTML=`<div class="done">🏆 Skill Complete!</div><p>You scored ${correct} / 15.</p><button class="btn" onclick="location.reload()">Retry →</button>`}};$('back').onclick=function(){const s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{const u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Kepler’s Third Law quiz">
+<title>SkillUp | Kepler’s Third Law — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Kepler’s Third Law</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Kepler’s third law relates a planet’s orbital period to its:",o:["Surface temperature only","Colour","Mass of its moons only","Semi-major axis of orbit"],a:3,e:"The square of the orbital period is proportional to the cube of the orbit’s semi-major axis."},
+{q:"Kepler’s third law is commonly written as:",o:["T² ∝ a³","T ∝ a²","T³ ∝ a²","T² ∝ a"],a:0,e:"For bodies orbiting the same central mass, T²/a³ is constant."},
+{q:"In Kepler’s third law, T represents the:",o:["Tangential force","Orbital period","Orbital radius at one instant","Planet’s temperature"],a:1,e:"T is the time taken to complete one full orbit."},
+{q:"In the relation T² ∝ a³, a represents the:",o:["Surface area","Angular speed","Semi-major axis","Acceleration due to gravity"],a:2,e:"For an elliptical orbit, a is the semi-major axis."},
+{q:"For planets orbiting the Sun, the ratio T²/a³ is approximately:",o:["Zero for every planet","Greater for every outer planet","Equal to orbital speed","The same for all planets"],a:3,e:"The ratio is constant for objects orbiting the same central mass, neglecting small perturbations."},
+{q:"If a planet’s semi-major axis becomes 4 times as large, its period becomes:",o:["8 times as large","4 times as large","2 times as large","16 times as large"],a:0,e:"T scales as a^(3/2), so 4^(3/2) = 8."},
+{q:"If the semi-major axis is doubled, the orbital period is multiplied by:",o:["8","2√2","2","4"],a:1,e:"T₂/T₁ = (a₂/a₁)^(3/2) = 2^(3/2) = 2√2."},
+{q:"If a planet’s orbital period is 8 years, its semi-major axis in AU is (for a Sun-like central mass):",o:["8 AU","16 AU","4 AU","2 AU"],a:2,e:"Using T² = a³ in years and AU: a = T^(2/3) = 8^(2/3) = 4 AU."},
+{q:"A planet at 1 AU from the Sun has an orbital period of about:",o:["1 month","10 years","24 hours","1 year"],a:3,e:"Earth’s orbit defines approximately 1 AU and 1 year."},
+{q:"A planet at 9 AU from the Sun has a period of approximately:",o:["27 years","9 years","18 years","81 years"],a:0,e:"T² = 9³ = 729, so T = 27 years."},
+{q:"For two planets orbiting the same star, the useful comparison is:",o:["T₁²a₁ = T₂²a₂","T₁²/a₁³ = T₂²/a₂³","T₁/a₁ = T₂/a₂²","T₁³a₁ = T₂³a₂"],a:1,e:"The ratio T²/a³ is common to bodies orbiting the same central mass."},
+{q:"Which planet generally has the longest orbital period around the Sun?",o:["The hottest planet","The planet with the shortest day","The one with the largest semi-major axis","The one with the smallest radius"],a:2,e:"A larger semi-major axis corresponds to a longer orbital period."},
+{q:"For a circular orbit, the semi-major axis a equals the:",o:["Orbital circumference","Orbital speed","Orbital period","Orbital radius"],a:3,e:"A circle is a special case of an ellipse, with semi-major axis equal to its radius."},
+{q:"Kepler’s third law applies most directly when comparing objects orbiting:",o:["The same central body","Different stars of very different masses without correction","Any objects regardless of central mass","Only objects with circular orbits"],a:0,e:"The simple constant T²/a³ is shared by bodies orbiting the same central mass."},
+{q:"Newton’s form of Kepler’s third law includes the mass of the:",o:["Observer","Central body and orbiting body","Atmosphere only","Orbiting body’s satellites only"],a:1,e:"The exact two-body relation depends on the sum of the two masses."},
+{q:"For a planet of negligible mass orbiting a star of mass M, T²/a³ is proportional to:",o:["M²","√M","1/M","M"],a:2,e:"Newton’s relation gives T²/a³ = 4π²/(GM) when the planet’s mass is negligible."},
+{q:"If two planets orbit the same star and one has a larger semi-major axis, it will have:",o:["A shorter period","The same period in all cases","Zero orbital period","A longer period"],a:3,e:"Kepler’s third law predicts a longer period for a larger semi-major axis."},
+{q:"If T²/a³ = k, the orbital period can be written as:",o:["T = √(ka³)","T = ka²","T = a³/k","T = k/a³"],a:0,e:"Rearranging T² = ka³ and taking the positive square root gives T = √(ka³)."},
+{q:"If a = 3 AU for a planet orbiting the Sun, its period is:",o:["27 years","√27 years","3 years","9 years"],a:1,e:"T² = 3³ = 27, so T = √27 years, approximately 5.2 years."},
+{q:"If a planet’s period is 27 years around the Sun, its semi-major axis is:",o:["27 AU","81 AU","9 AU","3 AU"],a:2,e:"T² = a³, so a = 27^(2/3) = 9 AU."},
+{q:"The proportionality T² ∝ a³ assumes that the central mass is:",o:["Zero","Always equal to the planet’s mass","Changing rapidly during each orbit","The same for the compared orbits"],a:3,e:"The proportionality constant depends on the central mass."},
+{q:"Which quantity is squared in Kepler’s third law?",o:["Orbital period","Semi-major axis","Orbital eccentricity","Planetary density"],a:0,e:"The period appears as T², while the semi-major axis appears as a³."},
+{q:"Which quantity is cubed in Kepler’s third law?",o:["Planetary mass","Semi-major axis","Orbital period","Angular momentum"],a:1,e:"The semi-major axis appears to the third power: a³."},
+{q:"If the semi-major axis increases by a factor of 10, the period increases by a factor of:",o:["100","1000","10√10","10"],a:2,e:"T scales as a^(3/2), so 10^(3/2) = 10√10."},
+{q:"Why does a more distant planet take longer to orbit the Sun?",o:["Gravity is completely absent there","Its mass must be larger","The Sun stops attracting it","It follows a larger orbit and typically moves more slowly"],a:3,e:"Larger orbits have longer orbital periods, consistent with Kepler’s third law."},
+{q:"Which pair of units is commonly used with T² = a³ for Solar System planets?",o:["Years and astronomical units","Seconds and kilograms only","Metres and kelvin","Newtons and joules"],a:0,e:"Using years for T and AU for a makes the proportionality approximately T² = a³ for solar orbits."},
+{q:"A planet has a period 4 times Earth’s period around the Sun. Its semi-major axis is:",o:["16 AU","4^(2/3) AU","4 AU","2 AU"],a:1,e:"a = T^(2/3) AU = 4^(2/3) AU, approximately 2.52 AU."},
+{q:"For the same central star, if a₁ = 1 AU and a₂ = 4 AU, T₂/T₁ equals:",o:["2","16","8","4"],a:2,e:"The period ratio is (4/1)^(3/2) = 8."},
+{q:"Kepler’s third law describes the relationship between orbital period and:",o:["Planet’s colour","Planet’s axial tilt only","Number of moons","Size of the orbit"],a:3,e:"The period is determined by the orbit’s semi-major axis and the central mass."},
+{q:"Which statement is correct for planets orbiting the Sun?",o:["T²/a³ is approximately constant","T/a³ is constant","T³/a² is constant","Orbital period is independent of orbit size"],a:0,e:"Kepler’s third law states that T²/a³ is approximately constant for Solar System planets."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Kepler’s Third Law Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

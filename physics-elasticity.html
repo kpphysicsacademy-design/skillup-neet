@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Elasticity</title><style>body{margin:0;background:#f5f7f8;font-family:Arial,sans-serif;color:#17202a}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center}.head h1{font-size:28px;margin:0}.xp{font-weight:700}.sub{color:#65727e;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #0000000d}.bar{height:10px;background:#e8ecef;border-radius:10px;overflow:hidden}.fill{height:100%;width:0;background:#58b86b;transition:.3s}.qno{font-size:14px;color:#697680}.q{font-size:20px;font-weight:700;line-height:1.45}.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #dfe5e8;border-radius:12px;padding:13px 15px;margin:10px 0;font-size:16px;cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#58b86b}.opt.selected{border-color:#58b86b;background:#f0fbf2}.opt.correct{border-color:#58b86b;background:#e9f8eb}.opt.wrong{border-color:#e26b6b;background:#fff0f0}.btn{border:0;border-radius:12px;padding:13px 20px;font-weight:700;font-size:16px;cursor:pointer;background:#58b86b;color:#fff}.btn:disabled{opacity:.55;cursor:not-allowed}.back{display:block;text-align:center;margin-top:18px;background:#fff;color:#35434d;border:2px solid #dfe5e8}.back:hover{border-color:#58b86b;transform:translateY(-1px)}#feedback{min-height:24px;font-weight:700}.done{text-align:center}.score{font-size:28px;font-weight:800}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🧱 Elasticity</h1><div class="xp">⭐ <span id="xp">0</span> XP</div></div><p class="sub">Stress, strain, Hooke's law, elastic moduli and elastic behaviour of materials.</p><section class="card"><b>🎯 Skill Mastery <span id="mastery">0 / 15</span></b><div class="bar"><div id="fill" class="fill"></div></div></section><section id="quiz" class="card"><div class="qno" id="qno"></div><p class="q" id="question"></p><div id="opts"></div><button id="continue" class="btn">Continue →</button><p id="feedback"></p></section><section id="done" class="card done" hidden><div class="score" id="score"></div><p>Great work! Your Elasticity skill has been practiced.</p><button class="btn" onclick="location.reload()">Retry 🔄</button></section><button id="back" class="btn back">← Back to Physics Path</button></main><script>const quiz=[['The ratio of longitudinal stress to longitudinal strain within elastic limit is called',['Young modulus','Bulk modulus','Shear modulus','Poisson ratio'],0,'Y=longitudinal stress/longitudinal strain.'],['The SI unit of stress is',['N m','N/m','N/m²','m/N'],2,'Stress is force per unit area, so its unit is pascal (N/m²).'],['Strain is',['dimensionless','measured in pascal','measured in newton','always greater than 1'],0,'Strain is a ratio of two lengths and has no dimensions.'],['Hooke’s law states that, within elastic limit, stress is proportional to',['strain','area','volume','density'],0,'Stress ∝ strain within the elastic limit.'],['Bulk modulus is the ratio of normal stress to',['volumetric strain','linear strain','shear strain','lateral strain'],0,'K=normal stress/volume strain.'],['Shear modulus relates shear stress to',['shear strain','volume strain','density','temperature'],0,'Shear modulus G=shear stress/shear strain.'],['A material that regains its original shape after removal of deforming force is',['elastic','plastic','brittle','viscous'],0,'Elastic materials recover their original dimensions.'],['If force is doubled while area remains constant, stress becomes',['half','double','four times','unchanged'],1,'Stress=F/A, so doubling F doubles stress.'],['If the length of a wire doubles but extension remains the same, its strain becomes',['double','half','four times','unchanged'],1,'Strain=extension/original length; doubling original length halves strain.'],['The dimensional formula of Young modulus is',['ML⁻¹T⁻²','MLT⁻²','ML²T⁻²','M⁻¹LT⁻²'],0,'Young modulus has the same dimensions as stress: ML⁻¹T⁻².'],['Poisson ratio is the ratio of',['lateral strain to longitudinal strain','stress to strain','longitudinal stress to lateral stress','volume to area'],0,'Poisson ratio is lateral strain divided by longitudinal strain in magnitude.'],['The elastic energy stored in a stretched wire is equal to',['area under force-extension graph','slope of force-extension graph','force/extension','extension/force'],0,'Elastic energy equals the work done, represented by area under the F-x graph.'],['For a wire, Young modulus increases when the material becomes',['stiffer','more ductile','longer','thinner'],0,'A larger Young modulus indicates greater stiffness.'],['Which material is generally more elastic in the physics sense?',['Steel','Rubber','Clay','Plasticine'],0,'Steel undergoes less strain for a given stress, so it is considered more elastic.'],['If Young modulus is very large, the material undergoes for a given stress',['large strain','small strain','zero stress','infinite extension'],1,'Y=stress/strain; larger Y means smaller strain for the same stress.']];let i=0,selected=null,score=0,checked=false;const $=id=>document.getElementById(id);function render(){selected=null;checked=false;$('qno').textContent=`Question ${i+1} of 15`;$('question').textContent=quiz[i][0];$('feedback').textContent='';$('continue').disabled=false;$('continue').textContent='Continue →';$('opts').innerHTML='';const order=quiz[i][1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)})}function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}checked=true;const a=quiz[i],ok=selected===a[2];if(ok){score++;$('xp').textContent=score*10}document.querySelectorAll('.opt').forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===a[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Not quite — ')+a[3];$('mastery').textContent=`${i+1} / 15`;$('fill').style.width=((i+1)/15*100)+'%';$('continue').textContent=i===14?'Finish Skill →':'Continue →'}$('continue').onclick=()=>{if(!checked){check();return}if(i===14){$('quiz').hidden=true;$('done').hidden=false;$('score').textContent=`${score} / 15 • ${score*10} XP`}else{i++;render()}};$('back').onclick=()=>{const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html'};render();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Elasticity quiz">
+<title>SkillUp | Elasticity — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Elasticity</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Elasticity is the property of a material to:",o:["Break under any force","Increase its mass under stress","Remain permanently deformed","Regain its original shape and size after the deforming force is removed"],a:3,e:"An elastic material tends to recover its original configuration when the deforming force is removed."},
+{q:"The restoring force per unit area is called:",o:["Stress","Strain","Young’s modulus","Elastic limit"],a:0,e:"Stress is the internal restoring force per unit cross-sectional area."},
+{q:"Strain is defined as:",o:["Energy per unit time","Ratio of change in dimension to original dimension","Force per unit area","Force multiplied by area"],a:1,e:"Strain is a dimensionless ratio of deformation to the original dimension."},
+{q:"The SI unit of stress is:",o:["Newton metre","No unit","Pascal (Pa)","Metre"],a:2,e:"Stress has the same SI unit as pressure: pascal, equivalent to N/m²."},
+{q:"The SI unit of strain is:",o:["Pascal","Newton","Metre","No unit"],a:3,e:"Strain is a ratio of two lengths (or comparable dimensions), so it is dimensionless."},
+{q:"Young’s modulus is the ratio of:",o:["Longitudinal stress to longitudinal strain","Shear stress to volume strain","Volume stress to longitudinal strain","Force to extension only"],a:0,e:"Young’s modulus measures resistance to change in length: longitudinal stress divided by longitudinal strain."},
+{q:"The SI unit of Young’s modulus is:",o:["Newton","Pascal","Joule","Metre"],a:1,e:"Since strain is dimensionless, Young’s modulus has the unit of stress, pascal."},
+{q:"A wire of original length L extends by ΔL. Its longitudinal strain is:",o:["F/A","A/F","ΔL/L","L/ΔL"],a:2,e:"Longitudinal strain equals extension divided by original length."},
+{q:"Stress is calculated using:",o:["Force multiplied by length","Area divided by force","Length divided by area","Force divided by cross-sectional area"],a:3,e:"For a uniform tensile force, stress = F/A."},
+{q:"Within the proportional limit, Hooke’s law states that stress is:",o:["Directly proportional to strain","Inversely proportional to strain","Independent of strain","Always equal to zero"],a:0,e:"For small deformations in the linear elastic region, stress is proportional to strain."},
+{q:"The proportionality constant between longitudinal stress and strain is:",o:["Coefficient of friction","Young’s modulus","Poisson’s ratio","Bulk modulus only"],a:1,e:"Young’s modulus is the ratio of longitudinal stress to longitudinal strain in the linear region."},
+{q:"Bulk modulus describes resistance to change in:",o:["Shape only","Temperature","Volume","Length only"],a:2,e:"Bulk modulus relates pressure change to fractional volume change."},
+{q:"Shear modulus describes resistance to change in:",o:["Mass","Temperature","Electric charge","Shape due to shear stress"],a:3,e:"Shear modulus is the ratio of shear stress to shear strain in the elastic range."},
+{q:"Poisson’s ratio relates lateral strain to:",o:["Longitudinal strain","Bulk stress only","Force directly","Density"],a:0,e:"Poisson’s ratio is the negative ratio of lateral strain to longitudinal strain."},
+{q:"When a stretched wire becomes longer, its lateral dimensions usually:",o:["Become infinite","Decrease","Increase without limit","Remain unchanged for every material"],a:1,e:"For ordinary materials under tension, the wire contracts laterally due to the Poisson effect."},
+{q:"The elastic limit is the maximum stress for which a material:",o:["Has zero strain","Has infinite extension","Returns to its original shape after unloading","Must fracture immediately"],a:2,e:"Below the elastic limit, the material can recover its original shape when the load is removed."},
+{q:"Beyond the elastic limit, a material may show:",o:["No deformation at all","Only reversible deformation","Zero stress under load","Permanent deformation"],a:3,e:"Plastic deformation leaves a permanent change after the load is removed."},
+{q:"A material with a larger Young’s modulus is generally:",o:["Stiffer","Easier to stretch by the same stress","Less resistant to deformation","Always less dense"],a:0,e:"A larger Young’s modulus means less strain for the same applied stress."},
+{q:"If stress is doubled within the linear elastic region, strain will:",o:["Become zero","Double","Halve","Remain unchanged"],a:1,e:"Hooke’s law gives stress ∝ strain within the proportional limit."},
+{q:"A force of 100 N acts on an area of 0.01 m². The stress is:",o:["1,000 Pa","1,000,000 Pa","10,000 Pa","100 Pa"],a:2,e:"Stress = F/A = 100/0.01 = 10,000 Pa."},
+{q:"A 2 m wire extends by 1 mm. Its strain is:",o:["2 × 10³","0.5","2 × 10⁻³","5 × 10⁻⁴"],a:3,e:"Strain = 0.001 m / 2 m = 5 × 10⁻⁴."},
+{q:"A stress of 2 × 10⁸ Pa produces a strain of 0.001. Young’s modulus is:",o:["2 × 10¹¹ Pa","2 × 10⁵ Pa","2 × 10⁸ Pa","2 × 10⁻¹¹ Pa"],a:0,e:"Young’s modulus = stress/strain = (2 × 10⁸)/10⁻³ = 2 × 10¹¹ Pa."},
+{q:"The area under a stress–strain curve represents energy stored per unit:",o:["Time","Volume","Mass","Length"],a:1,e:"The area under the stress–strain curve gives strain energy per unit volume."},
+{q:"The slope of a stress–strain graph in the linear region represents:",o:["Applied area","Total mass","Elastic modulus","Poisson’s ratio only"],a:2,e:"The slope is stress divided by strain, corresponding to the relevant elastic modulus."},
+{q:"Which material is typically more elastic in the physics sense, based on Young’s modulus?",o:["Rubber compared with steel","Both have zero modulus","The one that stretches most","Steel compared with rubber"],a:3,e:"In physics, a larger Young’s modulus means greater stiffness; steel has a much larger modulus than rubber."},
+{q:"The energy stored in a stretched elastic wire is called:",o:["Elastic potential energy","Kinetic energy","Chemical energy","Nuclear energy"],a:0,e:"Work done during elastic deformation is stored as elastic potential energy."},
+{q:"For a wire obeying Hooke’s law, elastic potential energy is:",o:["2FΔL","½FΔL","F/ΔL","FΔL²"],a:1,e:"For a linear spring-like response, stored energy equals half the final force times extension."},
+{q:"A spring constant k has SI unit:",o:["Pa","kg/m³","N/m","N·m"],a:2,e:"From F = kx, the spring constant unit is newton per metre."},
+{q:"If a wire is replaced by one of the same material and length but twice the cross-sectional area, its extension under the same force:",o:["Doubles","Becomes four times","Remains exactly the same","Halves"],a:3,e:"Extension ΔL = FL/(AY); doubling A halves the extension if other factors are unchanged."},
+{q:"For the same material, force and cross-sectional area, a wire twice as long has extension:",o:["Twice as large","Half as large","Four times as large","Unchanged"],a:0,e:"Extension ΔL = FL/(AY), so extension is proportional to length when other factors are fixed."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Elasticity Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

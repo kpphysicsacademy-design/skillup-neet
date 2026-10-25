@@ -1,6 +1,179 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Strain</title><style>*{box-sizing:border-box}body{margin:0;background:#f6f7f9;color:#202124;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:28px 16px 48px}.head{display:flex;justify-content:space-between;align-items:center}h1{font-size:28px;margin:0}.xp{font-weight:800;color:#16803a}.sub{color:#687078;margin:8px 0 20px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 2px 12px rgba(0,0,0,.06)}.master{font-weight:800}.bar{height:10px;background:#e8ecef;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22a05a;transition:.3s}.qno{font-size:14px;color:#687078;font-weight:700}.q{font-size:20px;font-weight:800;line-height:1.4;margin:10px 0 18px}.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #e1e5e8;border-radius:13px;padding:14px;margin:10px 0;font-size:16px;cursor:pointer}.opt:hover{transform:translateY(-1px);background:#fafbfc}.opt.selected{border-color:#16803a;background:#f0faf4}.opt.correct{border-color:#16803a;background:#e9f8ef}.opt.wrong{border-color:#d64545;background:#fff0f0}.actions{display:flex;justify-content:flex-end;margin-top:18px}button{border:0;border-radius:13px;padding:13px 22px;background:#16803a;color:#fff;font-size:16px;font-weight:800;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.feedback{min-height:24px;margin-top:14px;font-weight:700}.explain{margin-top:6px;font-weight:500;color:#58616a}.back{display:block;width:max-content;margin:18px auto 0;padding:11px 16px;border:2px solid #d9dee3;border-radius:12px;background:#fff;color:#30363b;text-decoration:none;font-weight:800}.result{text-align:center}.score{font-size:30px;font-weight:900}@media(max-width:520px){h1{font-size:24px}.q{font-size:18px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🧱 Strain</h1><div class="xp" id="xp">XP: 0</div></div><p class="sub">Deformation produced in a body by an applied force: longitudinal, volume and shear strain.</p><section class="card"><div class="master">🎯 Skill Mastery <span id="mastery">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quiz"><div class="qno" id="qno"></div><div class="q" id="question"></div><div id="opts"></div><div class="actions"><button id="continue" disabled>Continue →</button></div><div class="feedback" id="feedback"></div></section><section class="card result" id="result" hidden></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>const q=[['Strain is defined as the ratio of','change in dimension to original dimension','original dimension to change in dimension','force to area','stress to force',0,'Strain is deformation divided by original dimension.'],['The SI unit of strain is','pascal','newton','dimensionless (no unit)','metre',2,'Strain is a ratio and is dimensionless.'],['Longitudinal strain describes change in','mass','length','temperature only','density only',1,'It is change in length divided by original length.'],['If original length is L and extension is ΔL, strain is','L/ΔL','ΔL/L','LΔL','ΔL−L',1,'Longitudinal strain = ΔL/L.'],['A 2 m wire extends by 1 mm. Its strain is','5×10⁻⁴','2×10⁻³','5×10⁻³','2×10⁻⁴',0,'0.001/2 = 5×10⁻⁴.'],['Volume strain is the ratio of change in','length to original length','area to original area','volume to original volume','mass to original mass',2,'Volume strain = ΔV/V.'],['Shear strain is mainly associated with change in','shape','mass','temperature','chemical composition',0,'Shearing changes the shape of a body.'],['Strain is a','vector quantity','scalar dimensionless quantity','quantity with unit N','quantity with unit Pa',1,'Strain has magnitude only and no dimensions.'],['A tensile force on a wire generally causes','decrease in length','increase in length','no deformation','only a change in mass',1,'Tension tends to stretch a wire.'],['A compressive force generally causes','elongation','shortening','increase in mass','zero stress',1,'Compression tends to reduce the dimension.'],['A 100 cm wire becomes 101 cm long. Tensile strain is','0.001','0.01','1.01','100',1,'ΔL/L = 1/100 = 0.01.'],['For small elastic deformation, strain is generally','very large','small and dimensionless','equal to force','equal to Young modulus',1,'Elastic strains are normally small.'],['Poisson ratio relates','stress and strain','lateral and longitudinal strain','force and area','energy and power',1,'It is based on lateral and longitudinal strains.'],['For a small shear angle θ in radians, shear strain is approximately','sin θ','θ','1/θ','θ²',1,'For small angles γ≈θ.'],['A strain of 0.002 expressed as a percentage is','0.02%','0.2%','2%','20%',1,'0.002×100 = 0.2%.']];let i=0,s=null,score=0,checked=false,$=x=>document.getElementById(x);function render(){checked=false;s=null;$('feedback').innerHTML='';$('continue').disabled=true;$('continue').textContent=i==14?'Finish Skill →':'Continue →';$('qno').textContent=`Question ${i+1} of 15`;$('question').textContent=q[i][0];$('opts').innerHTML='';let a=q[i].slice(1,5).map((text,index)=>({text,index}));for(let k=3;k;k--){let r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]]}a.forEach((x,j)=>{let b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(!checked){s=x.index;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));b.classList.add('selected');$('continue').disabled=false}};$('opts').appendChild(b)});$('mastery').textContent=`${i} / 15`;$('fill').style.width=`${i/15*100}%`}function next(){if(s===null)return;if(!checked){let a=q[i],ok=s===a[5];checked=true;if(ok){score++;$('xp').textContent=`XP: ${score*10}`}document.querySelectorAll('.opt').forEach(b=>{let n=+b.dataset.index;b.disabled=true;if(n===a[5])b.classList.add('correct');if(n===s&&!ok)b.classList.add('wrong')});$('feedback').innerHTML=(ok?'✅ Correct! +10 XP':'❌ Not quite.')+`<div class="explain">${a[6]}</div>`;$('mastery').textContent=`${i+1} / 15`;$('fill').style.width=`${(i+1)/15*100}%`;if(i===14)$('continue').onclick=finish}else if(i<14){i++;render()}}function finish(){$('quiz').hidden=true;$('result').hidden=false;$('result').innerHTML=`<h2>🎉 Skill Complete!</h2><div class="score">${score} / 15</div><p>🏆 You earned <strong>${score*10} XP</strong>.</p><button onclick="location.reload()">Retry Skill</button>`}$('continue').onclick=next;$('back').onclick=function(){let s=sessionStorage.getItem('skillupLastPhysicsPath');if(s){try{let u=new URL(s,location.href);if(u.origin===location.origin){location.href=s;return false}}catch(e){}}if(document.referrer){try{let u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Strain quiz">
+<title>SkillUp | Strain — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>📏 Strain</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"Strain is the ratio of:",o:["Force to cross-sectional area","Mass to volume","Energy to time","Change in dimension to original dimension"],a:3,e:"Strain compares the deformation with the original dimension."},
+{q:"The SI unit of strain is:",o:["No unit","Pascal","Newton","Metre"],a:0,e:"Strain is a ratio of like dimensions, so it is dimensionless."},
+{q:"Longitudinal strain is:",o:["Change in area divided by force","Change in length divided by original length","Original length divided by force","Force divided by area"],a:1,e:"Longitudinal strain = ΔL/L."},
+{q:"A wire of length 2 m extends by 2 mm. Its longitudinal strain is:",o:["0.1","1000","0.001","0.01"],a:2,e:"2 mm = 0.002 m, so strain = 0.002/2 = 0.001."},
+{q:"If a 1.5 m rod extends by 0.003 m, the strain is:",o:["0.02","0.2","500","0.002"],a:3,e:"Strain = 0.003/1.5 = 0.002."},
+{q:"A negative longitudinal strain usually indicates:",o:["Compression and a decrease in length","Tension and an increase in length","No deformation","An increase in mass"],a:0,e:"With the usual sign convention, compressive strain is negative because length decreases."},
+{q:"Tensile strain occurs when a body’s length:",o:["Becomes zero","Increases","Decreases","Must remain constant"],a:1,e:"Tension stretches the body and increases its length."},
+{q:"Compressive strain occurs when a body’s length:",o:["Becomes infinite","Cannot change","Decreases","Increases"],a:2,e:"Compression shortens the body along the direction of loading."},
+{q:"Volumetric strain is defined as:",o:["Change in length divided by area","Force divided by volume","Pressure divided by mass","Change in volume divided by original volume"],a:3,e:"Volumetric strain = ΔV/V."},
+{q:"A body of volume 0.5 m³ has its volume reduced by 0.001 m³. The magnitude of volumetric strain is:",o:["0.002","0.02","0.2","500"],a:0,e:"Magnitude = 0.001/0.5 = 0.002."},
+{q:"Shear strain describes change in:",o:["Electric charge","Shape or angle between originally perpendicular lines","Mass only","Temperature only"],a:1,e:"Shear strain measures angular distortion caused by tangential forces."},
+{q:"For a small shear angle θ measured in radians, shear strain is approximately:",o:["θ²","Zero for all θ","θ","1/θ"],a:2,e:"For small angles, shear strain γ ≈ tan θ ≈ θ in radians."},
+{q:"The dimensional formula of strain is:",o:["[ML⁻¹T⁻²]","[MLT⁻²]","[L]","[M⁰L⁰T⁰]"],a:3,e:"Strain is dimensionless, so all dimensional exponents are zero."},
+{q:"Which is a type of strain?",o:["Shear strain","Young’s modulus","Stress concentration","Density"],a:0,e:"Common types include longitudinal, volumetric and shear strain."},
+{q:"Lateral strain is the ratio of change in lateral dimension to:",o:["Cross-sectional area","Original lateral dimension","Applied force","Original length only in all cases"],a:1,e:"Lateral strain compares the change in width or diameter with its original value."},
+{q:"Poisson’s ratio is the negative ratio of:",o:["Volume to mass","Shear stress to pressure","Lateral strain to longitudinal strain","Stress to force"],a:2,e:"Poisson’s ratio ν = −(lateral strain)/(longitudinal strain) under standard sign convention."},
+{q:"A stretched wire becomes slightly thinner. This is an example of:",o:["Volumetric expansion only","Shear failure","Zero strain","Lateral contraction"],a:3,e:"Tension commonly produces lateral contraction in ordinary solid materials."},
+{q:"If a 4 m wire extends by 4 mm, its strain is:",o:["0.001","0.01","0.1","1000"],a:0,e:"4 mm = 0.004 m; strain = 0.004/4 = 0.001."},
+{q:"A 50 cm rod shortens by 1 mm. The magnitude of its longitudinal strain is:",o:["2","0.002","0.02","0.0002"],a:1,e:"1 mm = 0.1 cm, so magnitude = 0.1/50 = 0.002."},
+{q:"If the extension and original length are both doubled, longitudinal strain:",o:["Halves","Becomes zero","Remains the same","Doubles"],a:2,e:"Strain is the ratio ΔL/L; doubling numerator and denominator leaves it unchanged."},
+{q:"If the extension stays fixed while original length doubles, strain:",o:["Doubles","Remains the same","Becomes four times","Halves"],a:3,e:"For fixed ΔL, strain = ΔL/L decreases inversely with original length."},
+{q:"A strain of 5 × 10⁻⁴ in a 2 m wire corresponds to an extension of:",o:["1 mm","10 mm","0.1 m","5 cm"],a:0,e:"ΔL = strain × L = 5 × 10⁻⁴ × 2 m = 0.001 m = 1 mm."},
+{q:"A 3 m wire extends by 6 mm. The strain is:",o:["500","0.002","0.02","0.2"],a:1,e:"6 mm = 0.006 m; strain = 0.006/3 = 0.002."},
+{q:"Strain is usually measured directly from:",o:["The object’s mass","Its colour","Relative deformation","Applied force alone"],a:2,e:"Strain quantifies relative change in dimension, not the force itself."},
+{q:"For a small deformation, Hooke’s law applies in the:",o:["Plastic region only","Fracture region only","Region of zero stress only","Linear elastic region"],a:3,e:"Hooke’s law relates stress and strain linearly within the proportional limit."},
+{q:"If longitudinal strain is 0.004, the extension of a 0.5 m wire is:",o:["0.002 m","0.02 m","0.2 m","125 m"],a:0,e:"ΔL = strain × L = 0.004 × 0.5 = 0.002 m."},
+{q:"A cube’s volume increases from 0.010 m³ to 0.0105 m³. Its volumetric strain is:",o:["1.05","0.05","0.005","0.5"],a:1,e:"ΔV/V = 0.0005/0.010 = 0.05."},
+{q:"Which strain is associated with a change in volume?",o:["Lateral strain only","Angular velocity","Volumetric strain","Shear strain only"],a:2,e:"Volumetric strain measures fractional change in volume."},
+{q:"Which strain is associated with a change in angle or shape under tangential loading?",o:["Longitudinal strain only","Volumetric strain only","Thermal conductivity","Shear strain"],a:3,e:"Shear strain measures angular distortion caused by shear stress."},
+{q:"A strain of 0.0002 is best interpreted as:",o:["A fractional change of 0.02%","A stress of 0.0002 Pa","An extension of 0.0002 m in every object","A force of 0.0002 N"],a:0,e:"0.0002 × 100% = 0.02%; actual extension depends on original length."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Strain Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

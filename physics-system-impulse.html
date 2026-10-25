@@ -1,6 +1,148 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | System Impulse</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f7f7fb;color:#172033}.wrap{max-width:760px;margin:auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.title{font-size:1.6rem;font-weight:900}.subtitle{color:#5f6b7a;margin:0 0 18px}.xp,.card{background:#fff;border-radius:20px;box-shadow:0 6px 20px #17203312}.xp{padding:10px 15px;font-weight:850}.card{padding:20px;margin:12px 0}.ph{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.bar{height:11px;background:#dfe8f1;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#58cc02;transition:.25s}.qnum{font-weight:800;color:#35516f;margin-bottom:11px}.question{font-size:1.27rem;line-height:1.45;margin:0 0 18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #d9e2ea;border-radius:14px;background:#fff;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.12s}.option:hover{border-color:#58cc02;background:#f7fff1;transform:translateY(-1px)}.option.selected{border-color:#1685e8;background:#eef7ff}.option.correct{border-color:#58cc02;background:#eaffdf}.option.wrong{border-color:#e5484d;background:#fff0f0}.btn{margin-top:16px;padding:12px 20px;border:0;border-radius:13px;background:#2db84d;color:#fff;font-weight:850;cursor:pointer;box-shadow:0 4px 0 #21863a;transition:.12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #21863a}.feedback{margin-top:14px;padding:12px;border-radius:13px;font-weight:700;min-height:18px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}.back{display:inline-block;margin-top:10px;padding:10px 13px;border:2px solid #d9d4f5;border-radius:13px;color:#5146a5;font-weight:800;text-decoration:none;transition:.12s}.back:hover{background:#f0edff;transform:translateX(-2px)}.back:focus{outline:3px solid #c9c2ff;outline-offset:2px}.back:active{transform:translateY(1px)}@media(max-width:600px){.wrap{padding:20px 14px}.title{font-size:1.4rem}.question{font-size:1.12rem}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="top"><div class="title">💥 System Impulse</div><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="subtitle">Physics • NEET 2026 · Learn → Practice → Master</p><section class="card"><div class="ph"><span>🎯 Skill Mastery</span><span id="mastery">0 / 15</span></div><div class="bar"><div id="fill" class="fill"></div></div></section><section class="card"><div class="qnum" id="count"></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><button class="btn" id="continue">Continue →</button><div class="feedback" id="feedback"></div><div id="wrongReview" style="display:none;margin-top:16px"></div><button class="btn" id="retry" style="display:none;background:#5146a5;box-shadow:0 4px 0 #39317d">↻ Retry Skill</button></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>(function(){const quiz=[['The total impulse on a system is equal to:', ['the change in its total linear momentum','the change in its total mass','the total kinetic energy','the centre-of-mass position'],0,'For a system, net impulse equals the change in total linear momentum: J_ext = ΔP.'],['For a system acted on by a net external force F over a short interval Δt, impulse is:', ['the time integral of force','force divided by time','force multiplied by distance','mass divided by time'],0,'Impulse is J = ∫F dt; for constant force, J = FΔt.'],['If the net external impulse on a system is zero, its total momentum:', ['remains constant','becomes zero','always increases','changes direction automatically'],0,'Zero net external impulse means ΔP = 0, so total momentum is conserved.'],['The SI unit of impulse on a system is:', ['N·s','N/s','J/s','N·m'],0,'Impulse has unit N·s, equivalent to kg·m/s.'],['A 4 kg system changes its centre-of-mass velocity from 2 m/s to 5 m/s in the same direction. The external impulse is:', ['12 N·s','7 N·s','20 N·s','3 N·s'],0,'J = ΔP = M(V_f − V_i) = 4(5−2) = 12 N·s.'],['Two particles in a system receive equal and opposite internal impulses. The net internal impulse on the system is:', ['zero','equal to either impulse','twice either impulse','infinite'],0,'Internal impulses cancel in pairs for the complete system.'],['A force-time graph for a system has a positive area of 15 N·s. The impulse is:', ['15 N·s','15 N/s','225 N·s','0 N·s'],0,'The signed area under an F-t graph gives impulse.'],['If the external impulse on a system is directed east, the system momentum changes:', ['towards east by the impulse vector','towards west by the same amount','only in magnitude, never direction','not at all'],0,'Impulse is a vector and ΔP equals the external impulse vector.'],['A 2 kg object initially has momentum 6 kg·m/s east. It receives an impulse of 4 kg·m/s east. Its final momentum is:', ['10 kg·m/s east','2 kg·m/s east','4 kg·m/s west','12 kg·m/s east'],0,'Final momentum P_f = P_i + J = 6 + 4 = 10 kg·m/s east.'],['A 2 kg object has momentum 10 kg·m/s east and receives an impulse of 6 kg·m/s west. Its final momentum is:', ['4 kg·m/s east','16 kg·m/s east','6 kg·m/s west','4 kg·m/s west'],0,'Taking east positive, P_f = 10 − 6 = 4 kg·m/s east.'],['In a collision between two bodies considered as one isolated system, the internal collision impulses:', ['cancel in the total system','add to change total momentum','are always zero for each body','equal the kinetic energy'],0,'Action-reaction impulse pairs are equal and opposite, so their sum for the system is zero.'],['The impulse delivered by an external force changes the system:', ['total momentum','total mass necessarily','centre-of-mass position instantly to zero','kinetic energy by the same numerical amount'],0,'External impulse changes total linear momentum by ΔP = J_ext.'],['A 0.5 kg ball changes velocity from 8 m/s east to 4 m/s west. The magnitude of its impulse is:', ['6 N·s','2 N·s','4 N·s','12 N·s'],0,'Taking east positive: Δv = −4 − 8 = −12 m/s, so |J| = m|Δv| = 0.5×12 = 6 N·s.'],['For a closed system of constant mass, the relation between total impulse and centre-of-mass velocity change is:', ['J_ext = MΔV_CM','J_ext = M/ΔV_CM','J_ext = ΔV_CM/M','J_ext = MΔV_CM²'],0,'Since P = MV_CM, ΔP = MΔV_CM for constant mass.'],['Which statement is correct for a system experiencing an external impulse?', ['The vector sum of particle momenta changes by the external impulse','Internal forces alone determine the change in total momentum','Impulse is always scalar','Zero impulse means every particle is at rest'],0,'The system impulse-momentum theorem gives ΔP_total = J_ext.']];let i=0,selected=-1,checked=false,score=0,wrongAttempts=[];const $=id=>document.getElementById(id),o=$("options"),b=$("continue"),f=$("feedback");function render(){const a=quiz[i];selected=-1;checked=false;$("count").textContent='Question '+(i+1)+' of 15';$("question").textContent=a[0];o.innerHTML='';f.className='feedback';f.textContent='';b.style.display='inline-block';b.textContent=i===14?'Finish Skill →':'Continue →';const order=a[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((item,j)=>{const el=document.createElement('button');el.className='option';el.textContent=String.fromCharCode(65+j)+'. '+item.text;el.dataset.index=item.index;el.onclick=()=>{selected=item.index;[...o.children].forEach(z=>z.classList.remove('selected'));el.classList.add('selected')};o.appendChild(el)})}b.onclick=()=>{if(!checked){if(selected<0){f.className='feedback bad';f.textContent='Choose an answer first 👆';return}checked=true;const a=quiz[i],ok=selected===a[2];[...o.children].forEach(el=>{const n=Number(el.dataset.index);el.disabled=true;if(n===a[2])el.classList.add('correct');if(n===selected&&!ok)el.classList.add('wrong')});if(ok)score++;else wrongAttempts.push({question:a[0],chosen:a[1][selected],answer:a[1][a[2]],explanation:a[3]});f.className=ok?'feedback good':'feedback bad';f.textContent=ok?'🎯 Correct! +10 XP — '+a[3]:'✗ Not quite. You’ll review this answer at the end.';$("xp").textContent=score*10;$("mastery").textContent=score+' / 15';$("fill").style.width=(score/15*100)+'%';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$("question").textContent='🏆 System Impulse Complete!';o.innerHTML='';b.style.display='none';$("retry").style.display='inline-block';f.className='feedback good';f.textContent='Skill complete: '+score+' / 15 correct • '+score*10+' XP earned.';const review=$("wrongReview");review.style.display='block';if(wrongAttempts.length){review.innerHTML='<h3>🔁 Review your missed questions</h3>'+wrongAttempts.map((w,n)=>'<div style="background:#fff;border:1px solid #d9e2ea;border-radius:14px;padding:14px;margin:10px 0"><b>'+(n+1)+'. '+w.question+'</b><p style="color:#a12b30;margin:8px 0">Your answer: '+w.chosen+'</p><p style="color:#176c31;margin:8px 0">Correct answer: '+w.answer+'</p><p style="margin:8px 0">💡 '+w.explanation+'</p></div>').join('')}else{review.innerHTML='<h3>🌟 Perfect run!</h3><p>You didn’t miss any questions.</p>'}}};$("retry").onclick=function(){i=0;selected=-1;checked=false;score=0;wrongAttempts=[];$("xp").textContent="0";$("mastery").textContent="0 / 15";$("fill").style.width="0%";$("wrongReview").style.display="none";$("wrongReview").innerHTML="";$("retry").style.display="none";render();scrollTo({top:0,behavior:"smooth"})};$("back").onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render()})();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: System Impulse quiz">
+<title>SkillUp | System Impulse — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>💥 System Impulse</h1><p class="muted">Master impulse and momentum with one clear question at a time.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Impulse is equal to:","o":["Change in momentum","Change in kinetic energy","Force divided by time","Mass multiplied by time"],"a":0,"e":"The impulse–momentum theorem states that net impulse equals the change in momentum: J = Δp."},{"q":"For a constant net force, impulse is calculated using:","o":["J = FΔt","J = F/Δt","J = m/F","J = FΔx"],"a":0,"e":"For constant force, impulse is force multiplied by the time interval: J = FΔt."},{"q":"What is the SI unit of impulse?","o":["N·s","N/s","J","W"],"a":0,"e":"Impulse is measured in newton-seconds (N·s), equivalent to kg·m/s."},{"q":"Impulse and momentum have the same:","o":["Dimensions and SI units","Meaning in every situation","Direction in all cases","Formula in all cases"],"a":0,"e":"Both have dimensions [MLT⁻¹] and units N·s or kg·m/s, but they represent different ideas."},{"q":"A force of 6 N acts for 3 s. What impulse does it deliver?","o":["18 N·s","2 N·s","9 N·s","3 N·s"],"a":0,"e":"J = FΔt = 6 × 3 = 18 N·s."},{"q":"A 2 kg object changes velocity from 3 m/s to 7 m/s in the same direction. The impulse is:","o":["8 N·s","4 N·s","14 N·s","10 N·s"],"a":0,"e":"J = Δp = m(v − u) = 2(7 − 3) = 8 N·s."},{"q":"The area under a net force–time graph represents:","o":["Impulse","Work","Power","Acceleration"],"a":0,"e":"The signed area under an F–t graph gives impulse."},{"q":"If the net external impulse on a system is zero, its total momentum:","o":["Remains constant","Must become zero","Always increases","Must reverse direction"],"a":0,"e":"Zero net external impulse means the change in total momentum is zero."},{"q":"A ball moving east receives an impulse west. Its momentum change is directed:","o":["West","East","Vertically upward","Always zero"],"a":0,"e":"The impulse vector has the same direction as the change in momentum."},{"q":"A 0.5 kg ball changes velocity from 8 m/s east to 4 m/s west. The impulse magnitude is:","o":["6 N·s","2 N·s","4 N·s","12 N·s"],"a":0,"e":"Take east as positive: Δv = −4 − 8 = −12 m/s. Thus |J| = m|Δv| = 0.5 × 12 = 6 N·s."},{"q":"When a ball rebounds from a wall, its velocity reverses. For the same incoming and outgoing speed, the magnitude of momentum change is:","o":["Twice the initial momentum magnitude","Zero","Equal to half the initial momentum","Always dependent only on time"],"a":0,"e":"Velocity reverses direction, so the momentum change magnitude is mv − (−mv) = 2mv."},{"q":"Why do airbags reduce injury risk in a collision?","o":["They increase stopping time and reduce average force for the same momentum change","They increase the passenger’s momentum change","They eliminate impulse","They increase the collision speed"],"a":0,"e":"For a similar momentum change, increasing collision time reduces average force because F_avg = Δp/Δt."},{"q":"A force varies with time. Which expression gives the impulse in one dimension?","o":["J = ∫F dt","J = ∫F dx","J = F/t for every force","J = mv²"],"a":0,"e":"For a variable force, impulse is the time integral of force, equal to the signed area under the force–time graph."},{"q":"A 3 kg object has initial momentum 12 kg·m/s east and receives an impulse of 5 N·s west. Its final momentum is:","o":["7 kg·m/s east","17 kg·m/s east","5 kg·m/s west","12 kg·m/s east"],"a":0,"e":"Take east as positive: p_final = 12 − 5 = 7 kg·m/s east."},{"q":"For a complete system, internal impulses from equal-and-opposite interaction forces:","o":["Cancel in the total momentum balance","Always change total momentum","Are always larger than external impulses","Turn impulse into energy"],"a":0,"e":"Internal force pairs cancel in the total system balance; net external impulse determines the change in total momentum."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>System Impulse Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,33 +1,179 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp | Variation of g with Altitude</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7f9;color:#17202a;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 40px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px}.head h1{font-size:26px;margin:0}.xp{font-weight:700;color:#16803c}.sub{color:#64748b;margin:8px 0 18px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #0000000d}.master{font-weight:700}.bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:#22c55e;transition:.25s}.qno{color:#64748b;font-size:14px;margin-bottom:10px}.question{font-size:20px;font-weight:700;line-height:1.45}.opts{display:grid;gap:10px;margin-top:18px}.opts button{border:2px solid #dbe2e8;background:#fff;border-radius:12px;padding:13px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}.opts button:hover{transform:translateY(-1px);border-color:#22c55e}.opts button.selected{border-color:#22c55e;background:#f0fdf4}.opts button.correct{border-color:#16a34a;background:#dcfce7}.opts button.wrong{border-color:#ef4444;background:#fee2e2}.action{width:100%;border:0;border-radius:12px;padding:14px;margin-top:16px;background:#22c55e;color:#fff;font-size:17px;font-weight:700;cursor:pointer}.action:hover{filter:brightness(.96);transform:translateY(-1px)}.feedback{min-height:24px;margin-top:14px;font-weight:700}.back{display:inline-block;text-decoration:none;color:#166534;border:2px solid #bbf7d0;padding:11px 16px;border-radius:12px;font-weight:700;transition:.15s}.back:hover{background:#dcfce7;transform:translateY(-1px)}.result{text-align:center}.hidden{display:none}@media(max-width:520px){.head h1{font-size:22px}.question{font-size:18px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><div class="head"><h1>🌍 Variation of g with Altitude</h1><div class="xp" id="xp">+0 XP</div></div><p class="sub">How acceleration due to gravity changes above Earth's surface.</p><section class="card"><div class="master">🎯 Skill Mastery <span id="score">0 / 15</span></div><div class="bar"><div class="fill" id="fill"></div></div></section><section class="card" id="quiz"></section><a class="back" id="back" href="physics-home.html">← Back to Physics Path</a></main><script>
-const quiz=[
-['At a height h above Earth, where h is much smaller than R, g is approximately:', ['g(1-h/R)','g(1-2h/R)','g(1+h/R)','g(1- R/h)'],1,'For h≪R, g_h≈g(1−2h/R).'],
-['The exact expression for g at height h above Earth is:', ['gR/(R+h)','gR²/(R+h)²','g(R+h)²/R²','g(1+h/R)²'],1,'Since g=GM/r² and r=R+h, g_h=gR²/(R+h)².'],
-['If the altitude above Earth increases, acceleration due to gravity:', ['increases','decreases','remains constant','first increases then decreases'],1,'Distance from Earth’s centre increases, so g decreases.'],
-['At height h=R above Earth’s surface, the value of g is:', ['g','g/2','g/4','2g'],2,'The distance from Earth’s centre is 2R, so g_h=g(R/2R)²=g/4.'],
-['The fractional decrease in g for a small height h is approximately:', ['h/R','2h/R','h/2R','R/2h'],1,'From g_h≈g(1−2h/R), fractional decrease is 2h/R.'],
-['If Earth’s radius is R and g at surface is g, at altitude 0.5R the value is:', ['4g/9','2g/3','g/2','g/4'],0,'r=1.5R, so g_h=g/(1.5)²=4g/9.'],
-['Which quantity remains unchanged when moving a small distance upward from Earth?', ['distance from Earth’s centre','acceleration due to gravity','mass of the body','weight of the body'],2,'Mass is intrinsic and does not depend on altitude.'],
-['A body taken to a greater altitude has weight that:', ['increases','decreases','becomes zero immediately','remains exactly same'],1,'Weight W=mg and g decreases with altitude.'],
-['For a body at altitude h, its distance from Earth’s centre is:', ['h','R-h','R+h','R/h'],2,'Earth’s radius is R, so the radial distance is R+h.'],
-['If g_h/g=1/4, the altitude h above Earth is:', ['R/2','R','2R','3R'],1,'(R/(R+h))²=1/4 gives R+h=2R, hence h=R.'],
-['For small altitude h, the percentage decrease in g is approximately:', ['h/R ×100','2h/R ×100','R/h ×100','h²/R² ×100'],1,'The fractional decrease is approximately 2h/R.'],
-['The dependence of g on altitude is obtained from:', ['g∝r','g∝r²','g∝1/r','g∝1/r²'],3,'Gravitational acceleration follows the inverse-square law.'],
-['At Earth’s surface r=R. At altitude h, the ratio g_h/g is:', ['(R+h)/R','R/(R+h)','[R/(R+h)]²','[(R+h)/R]²'],2,'Taking the ratio of GM/(R+h)² to GM/R² gives [R/(R+h)]².'],
-['If altitude is doubled from a small value h to 2h, the approximate decrease in g becomes:', ['half','double','four times','unchanged'],1,'For small heights, fractional decrease is proportional to h.'],
-['The decrease of g with altitude is primarily due to:', ['increase in Earth’s mass','increase in distance from Earth’s centre','decrease in body mass','change in universal gravitational constant'],1,'Greater radial distance reduces gravitational acceleration by the inverse-square law.']
-];
-let i=0,selected=null,correct=0,checked=false;const $=id=>document.getElementById(id);
-function render(){checked=false;selected=null;const q=quiz[i];$('quiz').innerHTML='<div class="qno">Question '+(i+1)+' of 15</div><div class="question">'+q[0]+'</div><div class="opts" id="opts"></div><button class="action" id="action">Continue →</button><div class="feedback" id="feedback"></div>';const order=q[1].map((text,index)=>({text,index}));for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]]}order.forEach((x,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+x.text;b.dataset.index=x.index;b.onclick=()=>{if(checked)return;selected=x.index;[...$('opts').children].forEach(y=>y.classList.remove('selected'));b.classList.add('selected')};$('opts').appendChild(b)});$('action').onclick=check;update()}
-function check(){if(selected===null){$('feedback').textContent='Choose an answer first.';return}if(!checked){checked=true;const q=quiz[i],ok=selected===q[2];if(ok)correct++;[...$('opts').children].forEach(b=>{const n=Number(b.dataset.index);b.disabled=true;if(n===q[2])b.classList.add('correct');if(n===selected&&!ok)b.classList.add('wrong')});$('feedback').textContent=(ok?'🎉 Correct! +10 XP — ':'💡 Not quite. ')+q[3];$('action').textContent=i===14?'Finish Skill →':'Continue →';update();return}if(i<14){i++;render()}else finish()}
-function update(){$('score').textContent=correct+' / 15';$('fill').style.width=(correct/15*100)+'%';$('xp').textContent='+'+(correct*10)+' XP'}
-function finish(){const pct=Math.round(correct/15*100);$('quiz').innerHTML='<div class="result"><h2>🏆 Skill Complete!</h2><p>You scored <strong>'+correct+' / 15</strong> ('+pct+'%).</p><p>⭐ XP earned: <strong>'+correct*10+'</strong></p><button class="action" onclick="i=0;correct=0;render()">Retry Skill</button></div>';update()}
-$('back').onclick=function(){const saved=sessionStorage.getItem('skillupLastPhysicsPath');if(saved){try{const u=new URL(saved,location.href);if(u.origin===location.origin){location.href=saved;return false}}catch(e){}}if(document.referrer){try{const u=new URL(document.referrer);if(u.origin===location.origin){history.back();return false}}catch(e){}}location.href='physics-home.html';return false};render();
-</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Variation of g with Altitude quiz">
+<title>SkillUp | Variation of g with Altitude — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🛰️ Variation of g with Altitude</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+{q:"At altitude h above Earth, acceleration due to gravity is:",o:["gₕ = GM/(R+h)²","gₕ = GM/(R−h)²","gₕ = GM/(R+h)","gₕ = G(R+h)²/M"],a:0,e:"The distance from Earth's centre at altitude h is R+h, so gₕ = GM/(R+h)²."},
+{q:"In terms of surface gravity g, the exact altitude formula is:",o:["gₕ = g[R/(R+h)]²","gₕ = g(1−h/R) exactly","gₕ = g(R+h)²/R²","gₕ = gR/(R+h)²"],a:0,e:"Divide gₕ = GM/(R+h)² by surface g = GM/R²."},
+{q:"As altitude increases, gravitational acceleration generally:",o:["Decreases","Increases","Stays constant","Immediately becomes zero"],a:0,e:"The distance from Earth's centre increases, reducing the inverse-square field."},
+{q:"At altitude h = R, gravity is:",o:["g/4","g/2","2g","g"],a:0,e:"The distance from Earth's centre becomes 2R, so gravity is g/2² = g/4."},
+{q:"At altitude h = R, if surface g = 9.8 m/s², the value of gₕ is:",o:["2.45 m/s²","4.9 m/s²","9.8 m/s²","39.2 m/s²"],a:0,e:"gₕ = 9.8/4 = 2.45 m/s²."},
+{q:"For h much smaller than Earth's radius R, g at altitude h is approximately:",o:["g(1−2h/R)","g(1−h/R)","g(1+2h/R)","gR/h"],a:0,e:"The binomial approximation gives (1+h/R)⁻² ≈ 1−2h/R."},
+{q:"The small-altitude approximation gₕ ≈ g(1−2h/R) is valid when:",o:["h ≪ R","h = R","h ≫ R","h is negative only"],a:0,e:"It neglects higher powers of h/R, so h must be small compared with R."},
+{q:"For small altitude h, the approximate fractional decrease in gravity is:",o:["2h/R","h/R","R/(2h)","(h/R)²"],a:0,e:"From gₕ ≈ g(1−2h/R), the fractional decrease is approximately 2h/R."},
+{q:"For small altitude h, the percentage decrease in g is approximately:",o:["(2h/R) × 100%","(h/R) × 100%","(R/2h) × 100%","(h/R)² × 100%"],a:0,e:"Multiply the fractional decrease 2h/R by 100%."},
+{q:"Earth's radius is R and altitude is h = R/2. The exact ratio gₕ/g is:",o:["4/9","1/2","1/4","2/3"],a:0,e:"gₕ/g = [R/(R+R/2)]² = (2/3)² = 4/9."},
+{q:"At altitude h = R, the ratio of gravity to surface gravity is:",o:["1/4","1/2","1/3","1/9"],a:0,e:"gₕ/g = [R/(2R)]² = 1/4."},
+{q:"At altitude h = 3R, gravity is:",o:["g/16","g/9","g/4","g/8"],a:0,e:"Distance from the centre is 4R, so gₕ/g = R²/(4R)² = 1/16."},
+{q:"If altitude changes from h to 2h, gravity:",o:["Must be calculated from R/(R+h); it does not simply halve","Always halves","Always doubles","Becomes zero"],a:0,e:"The exact relation depends on the ratio of altitude to Earth's radius."},
+{q:"If h ≪ R, and h = R/100, approximate gₕ is:",o:["0.98g","0.5g","0.9g","1.02g"],a:0,e:"gₕ ≈ g(1−2/100) = 0.98g."},
+{q:"If Earth's mass stays constant but its radius doubled, surface gravity would:",o:["Become one-fourth","Double","Become half","Stay unchanged"],a:0,e:"Surface gravity varies inversely as the square of radius for fixed mass."},
+{q:"Which quantity remains unchanged when moving to a high altitude (ignoring mass-energy effects)?",o:["The body's mass","Its weight","Local g","Gravitational force on it"],a:0,e:"Mass is intrinsic; weight and gravitational force depend on local gravity."},
+{q:"A 2 kg object at altitude has local g = 7 m/s². Its weight there is:",o:["14 N","9 N","3.5 N","7 N"],a:0,e:"Weight W = mg = 2 × 7 = 14 N."},
+{q:"The SI unit of acceleration due to gravity is:",o:["m/s²","N m","J/kg","kg/m³"],a:0,e:"Acceleration has unit metres per second squared."},
+{q:"The dimensions of g are:",o:["LT⁻²","L²T⁻²","MLT⁻²","M⁻¹L³T⁻²"],a:0,e:"Acceleration has dimensions length per time squared."},
+{q:"The universal gravitational constant G is approximately:",o:["6.67 × 10⁻¹¹ N m²/kg²","9.8 m/s²","6.67 × 10¹¹ N/kg","3.0 × 10⁸ m/s"],a:0,e:"G is the universal constant in Newton's law of gravitation."},
+{q:"At altitude h, distance from Earth's centre is:",o:["R+h","R−h","h−R","R/h"],a:0,e:"Altitude is measured from the surface, so centre distance is R+h."},
+{q:"If h = 0, the altitude formula gives:",o:["gₕ = g","gₕ = 0","gₕ = 4g","gₕ = g/4"],a:0,e:"At the surface, h = 0 and [R/(R+h)]² = 1."},
+{q:"If h = R, the distance from Earth's centre is:",o:["2R","R","R/2","4R"],a:0,e:"Adding an altitude equal to R gives centre distance R+R = 2R."},
+{q:"For very large altitude h ≫ R, the exact expression predicts gravity approximately:",o:["GM/h²","GM/R²","GM/h","Zero at every finite h"],a:0,e:"When h is much larger than R, R+h ≈ h, so gₕ ≈ GM/h²."},
+{q:"Which statement about the approximation gₕ ≈ g(1−2h/R) is correct?",o:["It is not exact for large h","It is exact at all altitudes","It predicts gravity increases with h","It is valid only at Earth's centre"],a:0,e:"The approximation is a first-order expansion for h/R ≪ 1."},
+{q:"At altitude h = R/3, exact gₕ/g equals:",o:["9/16","3/4","1/3","4/9"],a:0,e:"gₕ/g = [R/(R+R/3)]² = (3/4)² = 9/16."},
+{q:"If gravity at an altitude is 1/9 of surface gravity, the distance from Earth's centre is:",o:["3R","2R","9R","R/3"],a:0,e:"Inverse-square dependence gives (R/r)² = 1/9, so r = 3R and h = 2R."},
+{q:"For a fixed altitude, gₕ depends on Earth's:",o:["Mass and radius","The falling body's mass only","The body's colour","The object's speed only"],a:0,e:"The expression uses Earth's mass M, radius R and altitude h."},
+{q:"A satellite moves from radius 2R to radius 3R from Earth's centre. The ratio of new gravity to old gravity is:",o:["4/9","9/4","2/3","1/3"],a:0,e:"Gravity is inverse-square in centre distance: (2R/3R)² = 4/9."},
+{q:"Which formula should be used when altitude is not small compared with Earth's radius?",o:["gₕ = g[R/(R+h)]²","gₕ ≈ g(1−2h/R) only","gₕ = g(1−h/R)","gₕ = g(1+h/R)"],a:0,e:"Use the exact inverse-square expression when h is not much smaller than R."}
+];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Variation of g with Altitude Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

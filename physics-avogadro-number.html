@@ -1,22 +1,148 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Avogadro Number</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔢 Avogadro Number</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The Avogadro constant is approximately','6.022 × 10²¹ mol⁻¹','6.022 × 10²³ mol⁻¹','9.81 × 10²³ mol⁻¹','3.00 × 10⁸ mol⁻¹',1,'The Avogadro constant is approximately 6.022 × 10²³ per mole.'],
-['The symbol commonly used for Avogadro constant is','N_A','N_B','R_A','A_N',0,'N_A denotes the Avogadro constant.'],
-['One mole of any substance contains approximately','6.022 × 10²³ entities','6.022 × 10²⁰ entities','3.011 × 10²³ entities','1.602 × 10⁻¹⁹ entities',0,'One mole contains approximately 6.022 × 10²³ specified entities.'],
-['The SI unit of Avogadro constant is','mol','mol⁻¹','kg mol⁻¹','molecule mol',1,'Since N_A is the number of entities per mole, its SI unit is mol⁻¹.'],
-['The number of particles N in n moles is given by','N = n/N_A','N = n + N_A','N = nN_A','N = N_A/n',2,'The number of particles is N = nN_A.'],
-['How many molecules are present in 2 mol of a molecular substance?','3.011 × 10²³','6.022 × 10²³','1.2044 × 10²⁴','2.000 × 10²³',2,'N = nN_A = 2 × 6.022 × 10²³ = 1.2044 × 10²⁴ molecules.'],
-['Approximately how many atoms are present in 0.5 mol of helium?','3.011 × 10²³','6.022 × 10²³','1.2044 × 10²⁴','5.00 × 10²²',0,'For 0.5 mol, N = 0.5 × 6.022 × 10²³ = 3.011 × 10²³ atoms.'],
-['One mole of sodium atoms contains','one atom','one gram of sodium only','6.022 × 10²³ sodium atoms','6.022 × 10²³ sodium molecules',2,'A mole of sodium contains Avogadro number of sodium atoms.'],
-['One mole of oxygen gas O₂ contains','6.022 × 10²³ oxygen atoms only','6.022 × 10²³ O₂ molecules','3.011 × 10²³ O₂ molecules','2 oxygen molecules',1,'One mole of O₂ contains N_A O₂ molecules, while the number of oxygen atoms is 2N_A.'],
-['One mole of O₂ contains how many oxygen atoms?','N_A/2','N_A','2N_A','4N_A',2,'Each O₂ molecule has two oxygen atoms, so one mole contains 2N_A atoms.'],
-['The number of moles in 3.011 × 10²³ particles is','0.25 mol','0.5 mol','1 mol','2 mol',1,'n = N/N_A = (3.011 × 10²³)/(6.022 × 10²³) = 0.5 mol.'],
-['Avogadro constant connects the number of microscopic entities with','mass only','temperature only','amount of substance in moles','volume only',2,'N_A provides the number of specified entities contained in one mole.'],
-['If a sample contains 6.022 × 10²⁴ molecules, its amount of substance is','0.1 mol','1 mol','10 mol','100 mol',2,'n = N/N_A = 6.022 × 10²⁴ / 6.022 × 10²³ = 10 mol.'],
-['Which statement about Avogadro constant is correct?','It is the same as the gas constant R','It gives the number of specified entities per mole','It has no unit','It depends on the substance used',1,'N_A gives the number of specified elementary entities per mole and is a universal constant.'],
-['The mass of one molecule of a substance with molar mass M is','MN_A','M/N_A','N_A/M','M + N_A',1,'For molar mass M, the mass of one molecule is M/N_A when M is expressed consistently in kg mol⁻¹.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Avogadro Number quiz">
+<title>SkillUp | Avogadro Number — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚛️ Avogadro Number</h1><p class="muted">Explore monatomic ideal-gas properties with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Avogadro constant represents the number of specified entities in…","o":["1 kilogram","1 mole","1 litre","1 gram"],"a":1,"e":"One mole contains Avogadro's number of specified entities."},{"q":"The accepted approximate value of Avogadro constant is…","o":["6.022 × 10²³ mol⁻¹","6.022 × 10²² mol⁻¹","3.011 × 10²³ mol⁻¹","1.602 × 10⁻¹⁹ mol⁻¹"],"a":0,"e":"Avogadro constant is approximately 6.022 × 10²³ per mole."},{"q":"The SI unit for Avogadro constant is…","o":["mol","mol⁻¹","kg mol⁻¹","m³ mol⁻¹"],"a":1,"e":"It counts entities per mole, so its unit is mol⁻¹."},{"q":"How many molecules are present in 2 mol of a molecular substance?","o":["Nₐ","2Nₐ","Nₐ/2","4Nₐ"],"a":1,"e":"Number of entities equals amount in moles multiplied by Nₐ."},{"q":"How many moles correspond to Nₐ atoms?","o":["0.5 mol","1 mol","2 mol","Nₐ mol"],"a":1,"e":"Avogadro constant atoms represent one mole of atoms."},{"q":"How many particles are in 0.5 mol?","o":["3.011 × 10²³","6.022 × 10²³","1.2044 × 10²⁴","3.011 × 10²²"],"a":0,"e":"N = nNₐ = 0.5 × 6.022 × 10²³ = 3.011 × 10²³."},{"q":"How many particles are in 3 mol?","o":["2.007 × 10²³","6.022 × 10²³","1.8066 × 10²⁴","3.011 × 10²⁴"],"a":2,"e":"N = 3 × 6.022 × 10²³ = 1.8066 × 10²⁴."},{"q":"The number of moles in 1.2044 × 10²⁴ particles is…","o":["0.5 mol","1 mol","2 mol","4 mol"],"a":2,"e":"n = N/Nₐ = 1.2044 × 10²⁴ / 6.022 × 10²³ = 2 mol."},{"q":"How many atoms are present in 1 mol of helium?","o":["6.022 × 10²³","1.2044 × 10²⁴","3.011 × 10²³","2"],"a":0,"e":"Helium is monatomic; one mole contains Nₐ atoms."},{"q":"How many atoms are present in 1 mol of O₂ molecules?","o":["Nₐ","2Nₐ","Nₐ/2","4Nₐ"],"a":1,"e":"Each O₂ molecule has two atoms, so one mole of molecules contains 2Nₐ atoms."},{"q":"How many molecules are in 1 mol of H₂O?","o":["Nₐ","2Nₐ","3Nₐ","Nₐ/3"],"a":0,"e":"One mole of water contains Nₐ water molecules."},{"q":"How many total atoms are present in 1 mol of H₂O molecules?","o":["Nₐ","2Nₐ","3Nₐ","4Nₐ"],"a":2,"e":"Each water molecule contains three atoms; total atoms = 3Nₐ."},{"q":"How many oxygen atoms are present in 2 mol of CO₂?","o":["2Nₐ","4Nₐ","Nₐ","6Nₐ"],"a":1,"e":"Each CO₂ molecule contains two oxygen atoms, so there are 2 × 2Nₐ oxygen atoms."},{"q":"How many molecules are in 0.25 mol of a gas?","o":["Nₐ/4","Nₐ/2","Nₐ","4Nₐ"],"a":0,"e":"N = 0.25Nₐ = Nₐ/4."},{"q":"A sample contains 1.8066 × 10²³ particles. Its amount is approximately…","o":["0.03 mol","0.3 mol","3 mol","30 mol"],"a":1,"e":"Divide by 6.022 × 10²³: the amount is 0.3 mol."},{"q":"How many moles are present in 12.044 × 10²³ particles?","o":["0.2 mol","1 mol","2 mol","20 mol"],"a":2,"e":"12.044 × 10²³ divided by 6.022 × 10²³ equals 2 mol."},{"q":"Avogadro constant is used to convert between…","o":["Pressure and temperature","Moles and number of entities","Mass and volume only","Speed and kinetic energy"],"a":1,"e":"Multiplying or dividing by Nₐ connects amount of substance to entity count."},{"q":"Which entity count is meant by one mole?","o":["Always atoms only","Always molecules only","A specified number of elementary entities","Exactly one gram of any substance"],"a":2,"e":"The specified entity may be atoms, molecules, ions, or other defined particles."},{"q":"The number of molecules in 1 mol of N₂ is…","o":["Nₐ","2Nₐ","Nₐ/2","14Nₐ"],"a":0,"e":"One mole of N₂ contains Nₐ molecules; each molecule has two atoms."},{"q":"How many nitrogen atoms are present in 1 mol of N₂?","o":["Nₐ/2","Nₐ","2Nₐ","4Nₐ"],"a":2,"e":"Each N₂ molecule has two nitrogen atoms, giving 2Nₐ atoms per mole of molecules."},{"q":"A sample has 6.022 × 10²² molecules. Its amount is…","o":["0.01 mol","0.1 mol","1 mol","10 mol"],"a":1,"e":"6.022 × 10²² is one-tenth of Nₐ, so the amount is 0.1 mol."},{"q":"How many molecules are in 4 mol of a gas?","o":["Nₐ","2Nₐ","4Nₐ","8Nₐ"],"a":2,"e":"Entity count is nNₐ, so 4 mol contains 4Nₐ molecules."},{"q":"If the number of moles doubles, with the substance unchanged, the number of entities…","o":["Halves","Doubles","Stays fixed","Becomes four times larger"],"a":1,"e":"N = nNₐ, so particle count is directly proportional to amount in moles."},{"q":"Which expression gives the amount of substance n from particle count N?","o":["n = NNₐ","n = N/Nₐ","n = Nₐ/N","n = N + Nₐ"],"a":1,"e":"Rearranging N = nNₐ gives n = N/Nₐ."},{"q":"Which expression gives particle count from amount n?","o":["N = n/Nₐ","N = Nₐ/n","N = nNₐ","N = n + Nₐ"],"a":2,"e":"Multiplying moles by entities per mole gives the total entity count."},{"q":"How many atoms are in 0.5 mol of monatomic argon?","o":["0.5Nₐ","Nₐ","2Nₐ","3Nₐ"],"a":0,"e":"Argon is monatomic, so 0.5 mol contains 0.5Nₐ atoms."},{"q":"How many total atoms are in 0.5 mol of O₂ molecules?","o":["0.5Nₐ","Nₐ","1.5Nₐ","2Nₐ"],"a":1,"e":"0.5 mol contains 0.5Nₐ molecules; two atoms per molecule gives Nₐ atoms."},{"q":"How many ions are present in 1 mol of Na⁺ ions?","o":["Nₐ","2Nₐ","Nₐ/2","Nₐ/6"],"a":0,"e":"One mole of ions contains Nₐ ions, regardless of their charge."},{"q":"A sample contains 3Nₐ molecules. Its amount is…","o":["1 mol","2 mol","3 mol","6 mol"],"a":2,"e":"n = N/Nₐ = 3Nₐ/Nₐ = 3 mol."},{"q":"The numerical value of Avogadro constant is associated with…","o":["The number of entities per mole","The mass of one electron in kilograms","The speed of light","The charge on one proton"],"a":0,"e":"Avogadro constant specifies the number of elementary entities per mole."}]
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Avogadro Number Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

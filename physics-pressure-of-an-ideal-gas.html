@@ -1,22 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Pressure of an Ideal Gas</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🎈 Pressure of an Ideal Gas</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['According to kinetic theory, gas pressure is mainly due to','attraction between molecules','collisions of molecules with container walls','gravity acting on molecules','molecular weight only',1,'Gas pressure arises from momentum transfer when molecules collide with the container walls.'],
-['The kinetic-theory expression for pressure of an ideal gas is','P=ρv_rms²','P=⅓ρv_rms²','P=3ρv_rms²','P=ρ/v_rms²',1,'For an ideal gas, P = ⅓ρv_rms².'],
-['From P=⅓ρv_rms², the RMS speed is','√(P/3ρ)','√(3P/ρ)','3P/ρ','√(ρ/3P)',1,'Rearranging gives v_rms = √(3P/ρ).'],
-['For an ideal gas, if the number density of molecules is n, pressure can be written as','P=nkT','P=3nkT','P=nT/k','P=kT/n',0,'The kinetic theory result is P = nkT, where n is number density.'],
-['At constant temperature for a fixed amount of ideal gas, pressure is inversely proportional to','temperature','volume','molecular mass','density only',1,'Boyle’s law gives P ∝ 1/V at constant temperature and fixed amount of gas.'],
-['If the volume of an ideal gas is reduced to half at constant temperature, its pressure becomes','half','unchanged','double','four times',2,'From PV=constant, halving V doubles P.'],
-['At constant volume, increasing the absolute temperature of an ideal gas causes pressure to','decrease','increase','become zero','remain always unchanged',1,'For fixed volume, P ∝ T.'],
-['The pressure of an ideal gas is related to its average translational kinetic energy per molecule by','P=2/3 n E_avg','P=3/2 n E_avg','P=n/E_avg','P=E_avg/n',0,'Since E_avg=(3/2)kT and P=nkT, P=(2/3)nE_avg.'],
-['For the same pressure and density, the RMS speed of an ideal gas is','√(P/3ρ)','√(3P/ρ)','3Pρ','P/ρ',1,'Using P=⅓ρv_rms² gives v_rms=√(3P/ρ).'],
-['If the density of a gas is doubled at constant pressure, its RMS speed becomes','2v','v/2','v/√2','√2v',2,'Since v_rms∝1/√ρ at constant P, doubling density makes the speed v/√2.'],
-['For an ideal gas, pressure is a scalar quantity because it has','magnitude and a unique direction','magnitude but no unique direction','direction but no magnitude','neither magnitude nor direction',1,'Pressure acts normally on surfaces and is described by a scalar magnitude in an isotropic ideal gas.'],
-['The SI unit of pressure is','newton','joule','pascal','watt',2,'The SI unit of pressure is pascal (Pa), equal to N m⁻².'],
-['One pascal is equal to','1 N m','1 N/m²','1 J/m','1 kg m/s',1,'By definition, 1 Pa = 1 N/m².'],
-['If absolute temperature is increased four times at constant volume, the pressure of a fixed ideal gas becomes','one-fourth','twice','four times','unchanged',2,'At constant volume, P∝T, so a fourfold increase in T gives a fourfold increase in P.'],
-['Which equation is equivalent to the ideal-gas law for N molecules?','PV=NkT','PV=Nk/T','PV=T/Nk','PV=N/Tk',0,'For N molecules, the ideal-gas equation is PV = NkT.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Pressure of an Ideal Gas concept quiz">
+<title>SkillUp | Pressure of an Ideal Gas — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Pressure of an Ideal Gas</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"In kinetic theory, gas pressure is caused mainly by molecules…","o":["Colliding with the container walls","Resting against the walls","Attracting each other continuously","Losing all kinetic energy"],"a":0,"e":"Collisions transfer momentum to the walls, creating a force per unit area."},{"q":"Which expression relates ideal-gas pressure to density and rms speed?","o":["P = ⅓ρvᵣₘₛ²","P = 3ρvᵣₘₛ","P = ρ/vᵣₘₛ²","P = ρvᵣₘₛ/3"],"a":0,"e":"Kinetic theory gives P = ⅓ρ⟨v²⟩ = ⅓ρvᵣₘₛ²."},{"q":"In the pressure formula, ρ represents…","o":["Mass density of the gas","Molecular radius","Number of moles only","Gas temperature"],"a":0,"e":"ρ is mass per unit volume, measured in kg/m³."},{"q":"If gas density and rms speed are fixed, pressure is…","o":["Fixed by P = ⅓ρvᵣₘₛ²","Always zero","Independent of both quantities","Equal to density divided by speed"],"a":0,"e":"The kinetic-theory relation determines pressure from density and mean square speed."},{"q":"If rms speed doubles while density stays constant, pressure becomes…","o":["Four times as large","Twice as large","Half as large","Unchanged"],"a":0,"e":"Pressure is proportional to the square of rms speed."},{"q":"If density doubles while rms speed stays constant, pressure…","o":["Doubles","Quadruples","Halves","Does not change"],"a":0,"e":"Pressure is directly proportional to mass density when rms speed is fixed."},{"q":"For N molecules of mass m in volume V, the kinetic-theory pressure equation is…","o":["P = Nm⟨v²⟩/(3V)","P = 3NV/(m⟨v²⟩)","P = NmV/3","P = N⟨v⟩/(mV)"],"a":0,"e":"Pressure equals one-third of the mass-weighted mean-square molecular speed per unit volume."},{"q":"The quantity ⟨v²⟩ means…","o":["Mean of the squared speeds","Square of the mean speed in every case","Mean velocity vector","Speed of the fastest molecule"],"a":0,"e":"Mean square speed averages v² over the molecular population."},{"q":"How is rms speed related to mean square speed?","o":["vᵣₘₛ = √⟨v²⟩","vᵣₘₛ = ⟨v²⟩²","vᵣₘₛ = 1/⟨v²⟩","vᵣₘₛ = ⟨v⟩²"],"a":0,"e":"Rms speed is the square root of the mean square speed."},{"q":"At constant temperature, what happens to ideal-gas pressure if the volume is halved for a fixed amount of gas?","o":["It doubles","It halves","It becomes zero","It remains constant"],"a":0,"e":"Boyle's law states PV is constant at fixed temperature and amount of gas."},{"q":"At fixed volume and amount of ideal gas, doubling absolute temperature makes pressure…","o":["Double","Halve","Quadruple","Unchanged"],"a":0,"e":"From PV = nRT, pressure is proportional to kelvin temperature at constant V."},{"q":"What is the SI unit of pressure?","o":["Pascal","Joule","Kelvin","Metre per second"],"a":0,"e":"One pascal is one newton per square metre."},{"q":"One pascal is equivalent to…","o":["1 N/m²","1 J/s","1 kg·m/s","1 kg/m³"],"a":0,"e":"Pressure is force divided by area."},{"q":"Why do molecular collisions produce pressure even though molecules move randomly?","o":["Wall impacts transfer momentum and create average force","All molecules hit one wall only","Molecules permanently stick to walls","Random motion eliminates every force"],"a":0,"e":"Random impacts in aggregate produce a measurable average force on each wall."},{"q":"For an ideal gas, mean translational kinetic energy per molecule is…","o":["(3/2)kT","kT/2","3RT/2 per molecule","RT"],"a":0,"e":"The average translational kinetic energy is 3kT/2."},{"q":"Combining kinetic theory with the ideal-gas law gives the average translational kinetic energy proportional to…","o":["Absolute temperature","Pressure only","Container volume only","Molecular colour"],"a":0,"e":"Equating PV = NkT with the kinetic-theory equation yields ⟨Eₖ⟩ = 3kT/2."},{"q":"At the same temperature, two ideal gases have the same…","o":["Mean translational kinetic energy per molecule","Rms speed regardless of mass","Mass density in every container","Pressure in every container"],"a":0,"e":"Mean translational kinetic energy per molecule depends only on absolute temperature."},{"q":"If two gases have the same density but gas A has twice the rms speed of gas B, pressure in A is…","o":["Four times that in B","Twice that in B","Half that in B","Equal to that in B"],"a":0,"e":"With equal density, P ∝ vᵣₘₛ², so the pressure ratio is 2² = 4."},{"q":"A gas has density 2 kg/m³ and rms speed 300 m/s. Its pressure is…","o":["60,000 Pa","30,000 Pa","90,000 Pa","180,000 Pa"],"a":0,"e":"P = ⅓ρv² = ⅓ × 2 × 300² = 60,000 Pa."},{"q":"If P = 1.0 × 10⁵ Pa and ρ = 1.2 kg/m³, the rms speed is approximately…","o":["500 m/s","167 m/s","290 m/s","1,000 m/s"],"a":0,"e":"vᵣₘₛ = √(3P/ρ) ≈ √250,000 ≈ 500 m/s."},{"q":"Which molecular motion contributes to ideal-gas pressure in the kinetic model?","o":["The component of motion normal to the wall during collisions","Only circular motion around the container","Only molecules moving parallel to the wall","No molecular motion"],"a":0,"e":"Normal momentum changes at the wall produce the force responsible for pressure."},{"q":"Why is pressure the same in all directions for a gas at equilibrium in a uniform container?","o":["Molecular motion is statistically isotropic","Every molecule moves in the same direction","Gravity is always zero","Molecules never collide"],"a":0,"e":"In equilibrium, random molecular motion has no preferred direction, making pressure isotropic."},{"q":"What is assumed about intermolecular forces in the ideal-gas kinetic model between collisions?","o":["They are negligible","They are infinitely strong","They hold molecules fixed","They reverse all molecular motion continuously"],"a":0,"e":"Ideal-gas molecules move freely between brief collisions."},{"q":"If the number of molecules per unit volume increases at fixed temperature, pressure generally…","o":["Increases","Decreases","Becomes zero","Must stay constant"],"a":0,"e":"At fixed temperature, more molecules per volume produce greater pressure, consistent with P = nkT."},{"q":"In P = nkT, n represents…","o":["Number density of molecules","Number of moles","Mass density","Number of collisions per second"],"a":0,"e":"Here n is the number of molecules per unit volume, not the amount in moles."},{"q":"For a fixed amount of ideal gas, which relationship holds at constant temperature?","o":["PV = constant","P/V = constant","PT = constant","P + V = constant"],"a":0,"e":"Boyle's law gives PV = constant for fixed gas amount and temperature."},{"q":"If a gas's rms speed falls to half while its density stays the same, pressure becomes…","o":["One-quarter","One-half","Twice as large","Four times as large"],"a":0,"e":"Pressure is proportional to the square of rms speed: (1/2)² = 1/4."},{"q":"What is the key link between microscopic motion and macroscopic pressure?","o":["Molecular momentum transfer to the walls","The colour of molecules","The container's name","The chemical formula alone"],"a":0,"e":"The pressure measured macroscopically arises from countless microscopic wall collisions."},{"q":"For an ideal gas, if both density and rms speed are tripled, pressure becomes…","o":["27 times as large","9 times as large","6 times as large","3 times as large"],"a":0,"e":"P ∝ ρv², so the factor is 3 × 3² = 27."},{"q":"Which statement about gas pressure is correct?","o":["It depends on molecular motion and number density","It is produced only by molecular attraction","It is independent of temperature for a fixed volume","It can exist only in a liquid"],"a":0,"e":"Pressure follows from molecular collisions and is related to temperature and density."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Pressure of an Ideal Gas Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -57,6 +57,8 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
@@ -94,8 +96,8 @@ $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;\n if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';\n if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{

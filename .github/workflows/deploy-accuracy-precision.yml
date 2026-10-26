@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject Accuracy and Precision route
+      - name: Validate Accuracy and Precision route
         shell: bash
         run: |
           python - <<'PY'
@@ -42,12 +42,12 @@ jobs:
           d = Path('physics-accuracy-and-precision.html')
           assert d.exists(), 'Dedicated Accuracy and Precision page is missing'
           h = d.read_text(encoding='utf-8')
-          start = h.find('qs=[')
-          end = h.find('];let i=', start)
+          start = h.find('const questions = [')
+          end = h.find('];', start)
           assert start >= 0 and end > start, 'Accuracy and Precision question array is missing'
           question_block = h[start:end]
-          question_count = question_block.count("],['") + 1
-          assert question_count == 15, f'Dedicated Accuracy and Precision page must contain 15 MCQs (found {question_count})'
+          question_count = question_block.count('"q":')
+          assert question_count == 30, f'Dedicated Accuracy and Precision page must contain 30 MCQs (found {question_count})'
           print('Accuracy and Precision route validated with 15 MCQs')
           PY
 

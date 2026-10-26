@@ -3,47 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Forced Oscillations & Resonance</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Forced Oscillations and Resonance quiz">
+<title>SkillUp | Forced Oscillations & Resonance — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-<div class="wrap"><div class="card">
-<h1>📣 Forced Oscillations & Resonance</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div id="quiz"></div><div class="xp" id="xp"></div>
-<button class="next hide" id="next">Next Question →</button>
-<div id="result" class="hide"></div>
-<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Forced Oscillations & Resonance</h1><p class="muted">Explore driven oscillations, resonance, damping, and applications with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['Forced oscillations occur when an oscillator is subjected to','no external influence','a periodic external driving force','only gravity','a constant displacement',1,'A periodic external force continuously supplies energy and drives the oscillator.'],
-['The frequency of steady-state forced oscillations is mainly determined by the','initial displacement','driving force','mass only','amplitude only',1,'In steady state, the oscillator responds at the frequency of the external driving force.'],
-['Resonance occurs when the driving frequency is','zero','far below the natural frequency','close to the natural frequency','always twice the natural frequency',2,'Resonance is the strong response that occurs when the driving frequency is close to the system’s natural frequency, especially for weak damping.'],
-['At resonance, the amplitude of a lightly damped oscillator becomes','very small','maximum','zero','independent of driving frequency',1,'For a lightly damped system, the amplitude reaches a large maximum near the natural frequency.'],
-['Increasing damping generally makes the resonance peak','sharper and higher','broader and lower','infinitely high','unchanged',1,'Greater damping reduces the peak amplitude and broadens the resonance response.'],
-['The amplitude at resonance is strongly affected by','damping','the alphabet','only the initial phase','the color of the oscillator',0,'Damping controls energy loss and therefore strongly influences the maximum resonant amplitude.'],
-['A common example of resonance is','a swing pushed periodically at its natural frequency','a stone at rest','uniform motion without a force','a thermometer measuring temperature',0,'Pushing a swing at or near its natural frequency can produce a large amplitude through resonance.'],
-['In forced oscillations, the driving force mainly provides','energy to the oscillator','mass to the oscillator','gravity to the oscillator','zero work always',0,'The periodic driving force supplies energy that compensates for energy lost through damping.'],
-['For a driven oscillator, when the driving frequency is much higher than the natural frequency, the amplitude generally','remains at its resonant maximum','becomes small','becomes infinite','must be exactly zero',1,'Far above resonance, the displacement amplitude generally decreases.'],
-['The phase difference between displacement and driving force','is always zero','depends on driving frequency and damping','is always π','cannot change',1,'The phase difference changes with frequency; it is small at low frequency and approaches π at high frequency.'],
-['At resonance in a lightly damped driven oscillator, the phase difference is approximately','0','π/2','π','2π',1,'Near resonance, displacement is approximately 90° out of phase with the driving force in the standard damped oscillator model.'],
-['A system with very large damping will generally show','a very sharp resonance peak','a reduced and broad resonance response','infinite amplitude','no energy loss',1,'Large damping suppresses the resonance peak and makes the response less sharply frequency-selective.'],
-['The natural angular frequency of an ideal mass-spring oscillator is','√(k/m)','k/m','m/k','2π√(m/k)',0,'For an ideal mass-spring system, the natural angular frequency is ω₀=√(k/m).'],
-['If the driving frequency matches the natural frequency of a weakly damped system, the system can exhibit','resonance','free fall','static equilibrium only','zero displacement',0,'Matching the driving and natural frequencies produces resonance when damping is sufficiently small.'],
-['The practical importance of resonance is that it can','always be harmless','be useful or destructive depending on the system','remove all damping','make frequency irrelevant',1,'Resonance is used in devices such as tuning circuits but can also cause excessive vibrations in structures and machines.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
-$('next').onclick=next;render();
+(function(){
+'use strict';
+const questions = [{"q":"Forced oscillations occur when a system is acted on by:","o":["An external periodic driving force","Only its restoring force after release","No external influence of any kind","A force that is always constant"],"a":0,"e":"A periodic external force continuously supplies energy to the oscillator."},{"q":"In steady-state forced oscillations, the oscillator's frequency is generally:","o":["The driving-force frequency","Always its undamped natural frequency","Always zero","Twice the natural frequency in every case"],"a":0,"e":"After transient motion dies away, the system responds at the frequency of the periodic driver."},{"q":"The natural frequency of a system is the frequency at which it oscillates:","o":["Freely when not driven, in the ideal undamped case","Only when driven at any arbitrary frequency","Only under critical damping","Only at zero displacement"],"a":0,"e":"Natural frequency is set by the system's physical properties for free, undamped oscillations."},{"q":"Resonance occurs when the driving frequency is:","o":["Equal or close to the system's natural frequency","Always zero","Much smaller than every possible natural frequency","Equal to the damping coefficient"],"a":0,"e":"Resonance is a strong response when the driving frequency matches or is near the natural frequency."},{"q":"For a lightly damped oscillator, resonance generally produces:","o":["A large response amplitude","Zero displacement at all times","A smaller amplitude than at every other frequency","No energy transfer"],"a":0,"e":"Near resonance, energy transfer from the driver can produce a large steady-state amplitude."},{"q":"Increasing damping generally makes the resonance peak:","o":["Lower and broader","Higher and narrower","Infinite in all cases","Completely independent of frequency"],"a":0,"e":"Greater damping dissipates energy more strongly and reduces the peak response."},{"q":"A child on a swing gains height most efficiently when pushes are timed:","o":["In step with the swing's motion at an appropriate frequency","At random intervals regardless of phase","Only when the swing is stationary forever","At a frequency infinitely greater than the swing's natural frequency"],"a":0,"e":"Well-timed pushes transfer energy effectively, illustrating driven oscillation and resonance."},{"q":"The natural angular frequency of an ideal mass–spring system is:","o":["ω₀ = √(k/m)","ω₀ = √(m/k)","ω₀ = k/m","ω₀ = 2π√(k/m)"],"a":0,"e":"For a mass m on a spring k, ω₀ = √(k/m)."},{"q":"The natural frequency f₀ of a mass–spring system is:","o":["(1/2π)√(k/m)","2π√(k/m)","(1/2π)√(m/k)","√(mk)/(2π)"],"a":0,"e":"Frequency in hertz is angular frequency divided by 2π."},{"q":"For a driven oscillator, the external force can be written as:","o":["F(t) = F₀ cos(ωt)","F(t) = −kx only","F(t) = 0 for all t","F(t) = constant mass"],"a":0,"e":"A common periodic driver is sinusoidal, F(t) = F₀ cos(ωt)."},{"q":"In F(t) = F₀ cos(ωt), ω represents the:","o":["Angular frequency of the driving force","Mass of the oscillator","Spring constant","Damping coefficient"],"a":0,"e":"The symbol ω specifies how rapidly the external force cycles in time."},{"q":"For the driven damped oscillator, mẍ + bẋ + kx = F₀ cos(ωt), b represents:","o":["The damping coefficient","The driving amplitude","The mass","The natural period"],"a":0,"e":"The term bẋ represents linear viscous damping."},{"q":"After initial transients die away, a damped driven oscillator usually reaches:","o":["A steady periodic response","An indefinitely growing transient in all cases","Permanent rest even while the driver continues","A response with no relation to the driver"],"a":0,"e":"The steady-state response is periodic at the driving frequency."},{"q":"Transient motion is the part of the response that:","o":["Typically fades as damping removes its contribution","Must persist forever with constant amplitude","Is always the only motion present","Occurs only at zero driving frequency"],"a":0,"e":"Transient components depend on initial conditions and decay in a damped system."},{"q":"At resonance, the driver supplies energy to the oscillator:","o":["Efficiently over successive cycles","Only once and never again","Only when the oscillator has no motion","Without any external force"],"a":0,"e":"When timing is favourable, repeated energy input can balance losses and sustain a large response."},{"q":"For a weakly damped driven oscillator, the amplitude is usually largest when the driving frequency is:","o":["Near the natural frequency","Exactly zero in every setup","Infinite","Equal to the mass"],"a":0,"e":"The response amplitude peaks near the natural frequency for weak damping."},{"q":"Which factor most strongly limits the amplitude at resonance in a real oscillator?","o":["Dissipation due to damping","The colour of the oscillator","The unit used for time","The name of the driver"],"a":0,"e":"Damping removes energy, preventing the unlimited growth predicted by an ideal undamped resonance model."},{"q":"An undamped oscillator driven exactly at its natural frequency in the ideal linear model may show:","o":["Amplitude that grows with time","A response that must remain zero","Instantaneous critical damping","A frequency that becomes zero"],"a":0,"e":"Ideal exact resonance without damping can produce unbounded growth in the mathematical model."},{"q":"A lightly damped resonant system generally has a sharper frequency response than a heavily damped one because:","o":["Its resonance peak is narrower","Its natural frequency is always zero","It has no restoring force","Its mass changes each cycle"],"a":0,"e":"Low damping makes the resonance curve narrower and more selective in frequency."},{"q":"Which is an example of a useful application of resonance?","o":["Tuning a radio circuit to a selected frequency","Eliminating all oscillations by friction","Keeping every building vibrating at its largest amplitude","Making a pendulum independent of gravity"],"a":0,"e":"A tuned circuit responds strongly near its selected resonant frequency."},{"q":"Resonance can be dangerous in structures when:","o":["Driving vibrations approach a structural natural frequency and response becomes large","All external forces vanish","Damping is always infinite","The structure cannot vibrate at any frequency"],"a":0,"e":"Large resonant vibrations can increase stress and damage if not adequately controlled."},{"q":"If a mass–spring system has m = 1 kg and k = 100 N/m, its natural angular frequency is:","o":["10 rad/s","100 rad/s","1 rad/s","0.1 rad/s"],"a":0,"e":"ω₀ = √(k/m) = √100 = 10 rad/s."},{"q":"For the system in the previous question, the natural frequency is closest to:","o":["1.59 Hz","10 Hz","3.18 Hz","0.10 Hz"],"a":0,"e":"f₀ = ω₀/(2π) = 10/(2π) ≈ 1.59 Hz."},{"q":"A driver oscillates at 5 Hz. In steady state, a linearly forced oscillator responds at approximately:","o":["5 Hz","Its natural frequency no matter what","10 Hz always","0 Hz"],"a":0,"e":"The steady-state forced response follows the driving frequency."},{"q":"If damping is increased while the driving frequency remains fixed near resonance, the response amplitude usually:","o":["Decreases","Increases without limit","Must remain unchanged","Becomes equal to the damping coefficient"],"a":0,"e":"Greater damping dissipates more energy and reduces the resonant response."},{"q":"For a forced oscillator, the steady-state amplitude depends on:","o":["Driving frequency, driving strength, system properties, and damping","Only the colour of the mass","Only the initial displacement in every case","Only the unit used for length"],"a":0,"e":"The response amplitude is determined by the driver and the oscillator's mass, stiffness, and damping."},{"q":"A system has natural frequency 20 Hz and is driven at 2 Hz. The driving frequency is:","o":["Far below the natural frequency","At resonance by definition","Far above the natural frequency","Equal to 20 Hz"],"a":0,"e":"2 Hz is one-tenth of 20 Hz, so it is far below the natural frequency."},{"q":"The main difference between free and forced oscillations is that forced oscillations:","o":["Are maintained by an external driving force","Never have a frequency","Cannot exchange energy with surroundings","Always have zero amplitude"],"a":0,"e":"Free oscillations follow an initial disturbance; forced oscillations are sustained by external periodic input."},{"q":"At resonance in a damped system, the energy supplied by the driver in steady state is, on average:","o":["Balanced by energy dissipated through damping","Always zero despite nonzero motion","Infinite every cycle","Converted into mass"],"a":0,"e":"Steady amplitude requires average input power to balance average dissipated power."},{"q":"Why can small periodic pushes produce a large swing amplitude when well timed?","o":["Energy is added in phase with the motion over repeated cycles","The swing's mass decreases each cycle","Gravity stops acting","Damping becomes negative automatically"],"a":0,"e":"Repeated appropriately timed input adds energy efficiently, building up the oscillation amplitude."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Forced Oscillations & Resonance Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
 </script>
-
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

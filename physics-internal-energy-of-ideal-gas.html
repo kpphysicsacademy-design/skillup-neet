@@ -1,22 +1,133 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Internal Energy of an Ideal Gas</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔥 Internal Energy of an Ideal Gas</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The internal energy of an ideal gas is a function primarily of its','pressure only','volume only','temperature','container shape',2,'For an ideal gas, internal energy depends only on temperature.'],
-['For an ideal gas with f degrees of freedom, the internal energy of n moles is','U = nRT/f','U = fnRT/2','U = 2nRT/f','U = fRT/(2n)',1,'In the classical ideal-gas model, U = (f/2)nRT.'],
-['The internal energy of n moles of a monatomic ideal gas is','nRT','(3/2)nRT','(5/2)nRT','3nRT',1,'A monatomic gas has three translational degrees of freedom, so U = (3/2)nRT.'],
-['For a diatomic ideal gas at ordinary temperatures, neglecting vibration, the internal energy is','(3/2)nRT','2nRT','(5/2)nRT','3nRT',2,'A diatomic gas has five active degrees of freedom at ordinary temperatures, giving U = (5/2)nRT.'],
-['If the temperature of an ideal gas is doubled, its internal energy','always becomes half','remains unchanged','doubles','becomes four times',2,'For a fixed amount of an ideal gas, U is proportional to absolute temperature.'],
-['For a monatomic ideal gas, the change in internal energy for a temperature change ΔT is','nRΔT','(3/2)nRΔT','(5/2)nRΔT','2nRΔT',1,'For a monatomic ideal gas, ΔU = (3/2)nRΔT.'],
-['For an ideal gas undergoing an isothermal process, the change in internal energy is','positive','negative','zero','infinite',2,'Temperature remains constant in an isothermal process, so ΔU = 0 for an ideal gas.'],
-['At constant temperature, changing the volume of an ideal gas changes its internal energy by','increasing it always','decreasing it always','zero change','doubling it',2,'For an ideal gas, internal energy depends only on temperature, not directly on volume.'],
-['Which statement about internal energy of an ideal gas is correct?','It depends only on pressure','It depends only on volume','It depends only on temperature for a fixed amount of gas','It is always zero',2,'Internal energy is a state function and for an ideal gas is determined by temperature and amount of gas.'],
-['For a monatomic ideal gas, the relation between internal energy U and pressure-volume product PV is','U = PV','U = (1/2)PV','U = (3/2)PV','U = 3PV',2,'For a monatomic ideal gas, PV = nRT and U = (3/2)nRT, hence U = (3/2)PV.'],
-['For a diatomic ideal gas at ordinary temperatures, U in terms of PV is','U = PV','U = (3/2)PV','U = (5/2)PV','U = 5PV',2,'Using PV = nRT and U = (5/2)nRT gives U = (5/2)PV.'],
-['During an adiabatic process of an ideal gas, if the gas does work on the surroundings, its internal energy generally','increases','decreases','must remain constant','becomes infinite',1,'With no heat exchange, work done by the gas comes from its internal energy, so ΔU is negative when work is done by the gas.'],
-['The internal energy of an ideal gas is an example of a','path function','state function','non-physical quantity','vector quantity',1,'Internal energy is a thermodynamic state function; its change depends only on initial and final states.'],
-['If two samples of the same ideal gas have the same temperature but different volumes and the same amount of gas, their internal energies are','necessarily different','the same','inversely proportional to volume','zero',1,'For a fixed amount of an ideal gas, equal temperature means equal internal energy regardless of volume.'],
-['For an ideal gas, increasing the number of moles at the same temperature causes total internal energy to','decrease','remain unchanged','increase proportionally to the number of moles','become independent of amount',2,'For fixed temperature, U = (f/2)nRT, so total internal energy is proportional to n.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Internal Energy of an Ideal Gas concept quiz with MathJax equations">
+<title>SkillUp | Internal Energy of an Ideal Gas — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Internal Energy of an Ideal Gas</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"For a monatomic ideal gas, the internal energy is…","o":["\\(U=\\frac{3}{2}nRT\\)","\\(U=nRT\\)","\\(U=\\frac{5}{2}nRT\\)","\\(U=\\frac{1}{2}nRT\\)"],"a":0,"e":"A monatomic ideal gas has three translational degrees of freedom, so \\(U=\\frac{3}{2}nRT\\)."},{"q":"The internal energy of an ideal gas depends only on…","o":["Temperature","Pressure alone","Volume alone","Container shape"],"a":0,"e":"For an ideal gas, internal energy is a function of temperature only."},{"q":"In the equation \\(U=\\frac{3}{2}nRT\\), \\(n\\) represents…","o":["Amount of gas in moles","Number density","Pressure","Molecular speed"],"a":0,"e":"The symbol \\(n\\) is the amount of substance measured in moles."},{"q":"The SI unit of internal energy is…","o":["Joule","Pascal","Kelvin","Watt per metre"],"a":0,"e":"Internal energy is a form of energy and is measured in joules."},{"q":"For an ideal gas, a temperature increase generally causes internal energy to…","o":["Increase","Decrease","Remain constant","Become zero"],"a":0,"e":"Ideal-gas internal energy increases with absolute temperature."},{"q":"For an ideal gas undergoing an isothermal process, \\(\\Delta U\\) is…","o":["Zero","Always positive","Always negative","Equal to pressure"],"a":0,"e":"An isothermal process has constant temperature, so ideal-gas internal energy does not change."},{"q":"For a monatomic ideal gas, the molar internal energy at temperature \\(T\\) is…","o":["\\(\\frac{3}{2}RT\\)","\\(\\frac{5}{2}RT\\)","\\(RT\\)","\\(3RT\\)"],"a":0,"e":"Per mole, the internal energy of a monatomic ideal gas is \\(U_m=\\frac{3}{2}RT\\)."},{"q":"For \\(n\\) moles of a monatomic ideal gas, the change in internal energy is…","o":["\\(\\Delta U=\\frac{3}{2}nR\\Delta T\\)","\\(\\Delta U=nR/\\Delta T\\)","\\(\\Delta U=\\frac{5}{2}nR\\Delta T\\)","\\(\\Delta U=0\\) for every process"],"a":0,"e":"For a monatomic ideal gas, \\(\\Delta U=nC_V\\Delta T\\) with \\(C_V=\\frac{3}{2}R\\)."},{"q":"A monatomic ideal gas has 2 mol and is heated by 100 K. Its internal-energy increase is approximately…","o":["2.49 kJ","1.25 kJ","4.99 kJ","8.31 kJ"],"a":0,"e":"\\(\\Delta U=\\frac{3}{2}nR\\Delta T=1.5\\times2\\times8.314\\times100\\approx2.49\\,\\text{kJ}\\)."},{"q":"Which is a state function?","o":["Internal energy","Work","Heat transfer","Path length"],"a":0,"e":"Internal energy depends on the state, not on the path used to reach it."},{"q":"For a complete thermodynamic cycle, the net change in internal energy is…","o":["Zero","Positive","Negative","Equal to heat input in all cases"],"a":0,"e":"The system returns to its initial state, so its state function internal energy returns to its initial value."},{"q":"For a fixed amount of monatomic ideal gas, if absolute temperature doubles, internal energy…","o":["Doubles","Halves","Quadruples","Stays constant"],"a":0,"e":"Since \\(U\\propto T\\) for a fixed amount of monatomic ideal gas, doubling \\(T\\) doubles \\(U\\)."},{"q":"For a monatomic ideal gas, the internal energy can be written using total translational kinetic energy \\(K\\) as…","o":["\\(U=K\\)","\\(U=\\frac{2}{3}K\\)","\\(U=\\frac{3}{2}K\\)","\\(U=K^2\\)"],"a":0,"e":"For a monatomic ideal gas, internal energy is entirely the total translational kinetic energy."},{"q":"The molar heat capacity at constant volume of a monatomic ideal gas is…","o":["\\(C_V=\\frac{3}{2}R\\)","\\(C_V=\\frac{5}{2}R\\)","\\(C_V=R\\)","\\(C_V=3R\\)"],"a":0,"e":"Three translational degrees of freedom give \\(C_V=\\frac{3}{2}R\\) for a monatomic ideal gas."},{"q":"For a monatomic ideal gas, \\(C_P-C_V\\) equals…","o":["\\(R\\)","\\(0\\)","\\(\\frac{3}{2}R\\)","\\(\\frac{5}{2}R\\)"],"a":0,"e":"For an ideal gas, Mayer's relation is \\(C_P-C_V=R\\)."},{"q":"The ratio of heat capacities for a monatomic ideal gas is…","o":["\\(\\gamma=\\frac{5}{3}\\)","\\(\\gamma=\\frac{7}{5}\\)","\\(\\gamma=1\\)","\\(\\gamma=\\frac{3}{2}\\)"],"a":0,"e":"\\(\\gamma=C_P/C_V=(5R/2)/(3R/2)=5/3\\) for a monatomic ideal gas."},{"q":"For a diatomic ideal gas at ordinary temperatures, neglecting vibration, the molar internal energy is…","o":["\\(\\frac{5}{2}RT\\)","\\(\\frac{3}{2}RT\\)","\\(\\frac{7}{2}RT\\)","\\(RT\\)"],"a":0,"e":"A diatomic molecule has three translational and two rotational degrees of freedom, giving \\(U_m=\\frac{5}{2}RT\\)."},{"q":"For an ideal gas, internal energy changes during an adiabatic process because…","o":["Temperature may change as work is done","Heat must enter the gas","Volume must remain constant","Pressure must remain constant"],"a":0,"e":"Adiabatic means \\(Q=0\\), but work can change internal energy and temperature."},{"q":"Using the convention \\(\\Delta U=Q-W\\), \\(W\\) denotes…","o":["Work done by the gas","Work done on the gas","Heat supplied","Internal energy per mole"],"a":0,"e":"With this convention, positive \\(W\\) is work done by the gas."},{"q":"A gas absorbs 500 J of heat and does 200 J of work. Its internal-energy change is…","o":["+300 J","+700 J","−300 J","−700 J"],"a":0,"e":"Using \\(\\Delta U=Q-W\\), \\(\\Delta U=500-200=300\\,\\text{J}\\)."},{"q":"A gas releases 100 J of heat while 40 J of work is done on it. Its internal-energy change is…","o":["−60 J","−140 J","+60 J","+140 J"],"a":0,"e":"Heat released means \\(Q=-100\\,\\text{J}\\); work done on the gas means work by the gas \\(W=-40\\,\\text{J}\\). Thus \\(\\Delta U=Q-W=-100-(-40)=-60\\,\\text{J}\\)."},{"q":"For a monatomic ideal gas, if \\(n=1\\) mol and \\(T=300\\) K, its internal energy is approximately…","o":["3.74 kJ","2.49 kJ","6.24 kJ","8.31 kJ"],"a":0,"e":"\\(U=\\frac{3}{2}RT\\approx1.5\\times8.314\\times300=3.74\\,\\text{kJ}\\)."},{"q":"For a fixed amount of ideal gas, what is the internal-energy change if initial and final temperatures are equal?","o":["Zero","Always positive","Always negative","Dependent only on pressure"],"a":0,"e":"Equal initial and final temperatures imply equal internal energies for an ideal gas."},{"q":"Which statement about an ideal gas is correct?","o":["Intermolecular potential energy is neglected in the ideal-gas model","Internal energy is always zero","Internal energy depends on container material","All ideal gases have the same total internal energy regardless of amount"],"a":0,"e":"The ideal-gas model neglects intermolecular potential energy, leaving internal energy determined by molecular motion and temperature."},{"q":"At fixed temperature, compressing an ideal gas changes its internal energy by…","o":["Zero","A positive amount always","A negative amount always","An amount proportional to pressure"],"a":0,"e":"For an ideal gas, internal energy depends only on temperature, not directly on volume or pressure."},{"q":"For a monatomic ideal gas, the total internal energy of \\(N\\) molecules is…","o":["\\(U=\\frac{3}{2}NkT\\)","\\(U=NkT\\)","\\(U=\\frac{5}{2}NkT\\)","\\(U=\\frac{3kT}{2N}\\)"],"a":0,"e":"Each molecule has mean translational kinetic energy \\(3kT/2\\), so total energy is \\(3NkT/2\\)."},{"q":"If the temperature of 3 mol of a monatomic ideal gas increases by 50 K, \\(\\Delta U\\) is approximately…","o":["1.87 kJ","0.62 kJ","3.74 kJ","6.24 kJ"],"a":0,"e":"\\(\\Delta U=\\frac{3}{2}nR\\Delta T=1.5\\times3\\times8.314\\times50\\approx1.87\\,\\text{kJ}\\)."},{"q":"Which relation applies to an ideal gas with constant molar heat capacity at constant volume?","o":["\\(\\Delta U=nC_V\\Delta T\\)","\\(\\Delta U=nC_P\\Delta T\\) in every process","\\(\\Delta U=PV^2\\)","\\(\\Delta U=Q+W\\) regardless of convention"],"a":0,"e":"For an ideal gas, the internal-energy change is \\(nC_V\\Delta T\\)."},{"q":"At the same temperature and for the same number of moles, two monatomic ideal gases have…","o":["The same internal energy","Internal energy proportional to molecular mass","Different internal energies in all cases","Zero internal energy"],"a":0,"e":"For a monatomic ideal gas, \\(U=\\frac{3}{2}nRT\\), independent of the gas species."},{"q":"Which expression is the first law using work done by the gas as positive?","o":["\\(\\Delta U=Q-W\\)","\\(\\Delta U=W-Q\\)","\\(\\Delta U=Q+W\\) in all sign conventions","\\(\\Delta U=PV\\)"],"a":0,"e":"With work by the gas positive, the first law is \\(\\Delta U=Q-W\\)."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Internal Energy of an Ideal Gas Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+ window.addEventListener('load',function(){if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise().catch(function(){});}});
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

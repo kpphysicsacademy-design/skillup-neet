@@ -1,24 +1,155 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Electric Field Lines</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>⚡ Electric Field Lines</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['Electric field lines are imaginary lines drawn to represent the','electric potential only','direction of electric field','mass of a charge','electric current',1,'The tangent to an electric field line gives the direction of the electric field at that point.'],
-['Electric field lines originate from','negative charges and end on positive charges','positive charges and end on negative charges','only neutral objects','the midpoint between charges',1,'Field lines emerge from positive charges and terminate on negative charges, or at infinity.'],
-['The tangent to an electric field line at any point gives the','magnitude of charge','direction of electric field','electric potential','electric flux only',1,'The tangent at a point indicates the direction of the electric field there.'],
-['Electric field lines never intersect because','charges cannot move','the electric field cannot have two directions at the same point','field lines are always circular','electric fields are scalar',1,'If two lines intersected, the electric field would have two different directions at the same point.'],
-['The density of electric field lines is used to represent','mass density','electric field strength','charge sign only','electric potential energy',1,'Closer field lines indicate a stronger electric field; wider spacing indicates a weaker field.'],
-['For an isolated positive point charge, electric field lines are','radially inward','radially outward','circular','parallel to a sphere surface',1,'Field lines radiate outward from a positive point charge.'],
-['For an isolated negative point charge, electric field lines are','radially outward','radially inward','circular','zero everywhere',1,'Field lines point inward toward a negative point charge.'],
-['In a uniform electric field, field lines are','random and curved','parallel and equally spaced','intersecting','closed circles',1,'A uniform field has constant magnitude and direction, represented by straight parallel equally spaced lines.'],
-['Electrostatic field lines','form closed loops','do not form closed loops','always form circles','have no direction',1,'Electrostatic field lines start on positive charge and end on negative charge or infinity, so they do not form closed loops.'],
-['The number of electric field lines associated with a charge is conventionally proportional to its','mass','magnitude of charge','temperature','distance from origin',1,'The number of drawn field lines is proportional to the magnitude of the charge by convention.'],
-['If field lines are more closely spaced in one region, the electric field there is','weaker','stronger','zero','unchanged by spacing',1,'Field-line density qualitatively represents field strength.'],
-['At the surface of a conductor in electrostatic equilibrium, electric field lines are','parallel to the surface','normal to the surface','tangent to the surface','circular',1,'The electrostatic field at a conductor surface is perpendicular (normal) to the surface.'],
-['Electric field lines around two equal positive charges','terminate on each other','bend away from the region between the charges','always form closed loops','are absent',1,'Like charges repel, so the field pattern bends outward away from the region between them.'],
-['Electric field lines between two large oppositely charged parallel plates are approximately','parallel and uniformly spaced','circular','random','radially outward from both plates',0,'Away from edge effects, opposite parallel plates produce an approximately uniform field represented by parallel equally spaced lines.'],
-['A small positive test charge placed at a point in an electric field tends to move','opposite to the field direction','along the electric field direction','perpendicular to the field in every case','in a circular path always',1,'The force on a positive test charge is F=qE, so it acts along the electric field direction.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Superposition of Charges quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Electric Field Lines — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Electric Field Lines</h1><p class="muted">Practice field-line direction, density, patterns around charges, conductors, and uniform fields with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Electric field lines are imaginary lines used to show the…","o":["Direction of the electric field","Mass of a charge","Electric current only","Temperature"],"a":0,"e":"The tangent to a field line at any point gives the electric-field direction."},{"q":"Electrostatic field lines conventionally originate on…","o":["Negative charges only","Positive charges and terminate on negative charges or infinity","Neutral objects only","The midpoint between charges"],"a":1,"e":"Field lines emerge from positive charges and end on negative charges or extend to infinity."},{"q":"The tangent to an electric field line at a point indicates the…","o":["Magnitude of the charge","Direction of the electric field","Electric potential value only","Mass of the test charge"],"a":1,"e":"The tangent gives the local field direction."},{"q":"Electric field lines never intersect because…","o":["Charges cannot move","The field cannot have two directions at one point","All field lines are circular","Electric fields are scalars"],"a":1,"e":"An intersection would assign two different field directions to the same point."},{"q":"The density of electric field lines represents the relative…","o":["Mass density","Electric-field strength","Charge sign only","Electric potential energy"],"a":1,"e":"More closely spaced lines indicate a stronger field."},{"q":"For an isolated positive point charge, field lines point…","o":["Radially inward","Radially outward","In concentric circles","Parallel to the surface of a sphere"],"a":1,"e":"A positive source charge repels a positive test charge, so field lines point outward."},{"q":"For an isolated negative point charge, field lines point…","o":["Radially outward","Radially inward","In concentric circles","Away from the charge"],"a":1,"e":"A negative source charge attracts a positive test charge, so field lines point inward."},{"q":"A uniform electric field is represented by field lines that are…","o":["Random and curved","Straight, parallel, and equally spaced","Intersecting","Closed circles"],"a":1,"e":"A uniform field has constant direction and magnitude."},{"q":"Electrostatic field lines…","o":["Always form closed loops","Do not form closed loops","Always form circles","Have no direction"],"a":1,"e":"Electrostatic field lines begin on positive charge and end on negative charge or infinity."},{"q":"In a field-line drawing, the number of lines assigned to a charge is conventionally proportional to its…","o":["Mass","Charge magnitude","Temperature","Distance from the origin"],"a":1,"e":"Field-line counts are a visualization convention for relative charge magnitude."},{"q":"Where field lines are closer together, the electric field is generally…","o":["Weaker","Stronger","Zero","Always unchanged"],"a":1,"e":"Greater field-line density represents greater field magnitude."},{"q":"At the surface of a conductor in electrostatic equilibrium, the electric field just outside is…","o":["Parallel to the surface","Perpendicular to the surface","Always tangent to the surface","Circular"],"a":1,"e":"A tangential component would move surface charges, so the electrostatic field is normal to the conductor surface."},{"q":"The field-line pattern for two equal positive charges typically bends…","o":["Toward the midpoint between them","Away from the region between the charges","Into closed loops","Into a single line joining the charges"],"a":1,"e":"Like charges repel; the field pattern bows away from the region between them."},{"q":"Between large oppositely charged parallel plates, away from the edges, field lines are approximately…","o":["Parallel and equally spaced","Circular","Randomly curved","Radially outward from both plates"],"a":0,"e":"The field between ideal parallel plates is approximately uniform, except near the edges."},{"q":"A positive test charge released from rest in an electric field initially accelerates…","o":["Opposite to the field direction","Along the field direction","Perpendicular to the field in every case","In a circle in every case"],"a":1,"e":"The force on a positive charge is \\(\\vec F=q\\vec E\\), so its acceleration is along the field."},{"q":"Electric field lines are drawn with arrows pointing in the direction a…","o":["Positive test charge would be pushed","Negative test charge would be pushed","Neutral object must move","Magnetic pole would move"],"a":0,"e":"Field direction is defined as the force direction on a positive test charge."},{"q":"If the magnitude of a point charge increases while observation distance stays fixed, the number of drawn field lines should conventionally…","o":["Decrease","Increase","Remain zero","Become circular"],"a":1,"e":"The number of lines drawn is conventionally proportional to the charge magnitude."},{"q":"For an isolated point charge, field lines are radial because the field direction is…","o":["Along the radius joining the charge and point","Always tangent to a circle","Always vertical","Independent of position"],"a":0,"e":"The Coulomb force acts along the line joining the source charge and observation point."},{"q":"At a point where electric field lines are very dense, the field magnitude is expected to be…","o":["Large compared with a nearby sparse region","Exactly zero","Negative by definition","Undefined in every case"],"a":0,"e":"Line density is a qualitative representation of field strength."},{"q":"Can an electrostatic field line start and end on the same isolated positive charge?","o":["Yes, always","No; lines emerge from positive charge and terminate on negative charge or infinity","Only if the charge is moving","Only in a uniform field"],"a":1,"e":"Field lines do not return to the same positive charge in electrostatics."},{"q":"For a negative test charge, the force direction is…","o":["The same as the electric field","Opposite to the electric field","Always perpendicular to the field","Always zero"],"a":1,"e":"Because \\(\\vec F=q\\vec E\\), a negative q reverses the force direction."},{"q":"At a conductor surface in electrostatic equilibrium, why can the field not have a tangential component?","o":["It would move free charges along the surface","It would change the mass of the conductor","It would make all charges neutral","It would force field lines to intersect"],"a":0,"e":"Free charges would move until the tangential component vanished."},{"q":"In a uniform field, the spacing between neighboring ideal field lines is…","o":["Equal in a consistent drawing","Zero everywhere","Always decreasing","Random by definition"],"a":0,"e":"Equal spacing depicts constant field magnitude in a uniform field."},{"q":"The direction of an electric field line is determined by…","o":["The direction of force on a positive test charge","The direction of force on a negative test charge","The motion of electrons only","The mass of the source charge"],"a":0,"e":"The electric field is defined using the force on a positive test charge."},{"q":"Near the midpoint between two identical positive charges, field lines bow outward because…","o":["The charges repel and the fields superpose","The charges attract","The field is always zero everywhere","The charges have no field"],"a":0,"e":"The resultant field is determined by vector addition of the fields from both positive charges."},{"q":"Which statement about electrostatic field lines is correct?","o":["They can cross at isolated points","They indicate field direction and relative strength","They always form closed loops","They exist only inside conductors"],"a":1,"e":"Field-line direction follows the field, and line density illustrates relative strength."},{"q":"If field lines emerge from a source and extend without terminating on a negative charge, they can extend to…","o":["Infinity","The source charge again","A neutral test charge only","A magnetic pole"],"a":0,"e":"Field lines may extend to infinity when no negative charge terminates them."},{"q":"At a point, field lines are drawn closer together on one side of a charge. This represents…","o":["A stronger field in that region","A weaker field in that region","A negative field by definition","A zero field"],"a":0,"e":"Greater line density indicates greater field magnitude."},{"q":"Why are field lines a representation rather than physical strings?","o":["They are a visualization of a vector field","They are actual charged threads","They carry electric current","They have mass and tension"],"a":0,"e":"Field lines are a diagrammatic way to depict a field's direction and relative strength."},{"q":"For two large parallel plates with opposite charges, the field lines between the plates point…","o":["From the negative plate to the positive plate","From the positive plate to the negative plate","In circles parallel to the plates","In random directions"],"a":1,"e":"Electric field lines point from positive to negative charge between the plates."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Electric Field Lines Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

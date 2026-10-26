@@ -1,6 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Ideal Gas</title><style>*{box-sizing:border-box}body{margin:0;background:#f7f7fb;color:#172033;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 14px 42px}.card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 8px 28px #17203314}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top h1{font-size:1.55rem;margin:0}.xp{font-weight:900;white-space:nowrap}.sub{color:#657080;margin:8px 0 0}.num{font-weight:800;color:#68717d;margin-top:18px}.bar{height:10px;background:#e8ebef;border-radius:99px;overflow:hidden;margin:10px 0 18px}.fill{height:100%;width:0;background:#58cc02;transition:.3s}.q{font-size:1.18rem;font-weight:850;line-height:1.5;margin:12px 0 14px}.opts{display:grid;gap:10px}.opt{padding:14px;border:2px solid #dfe3e8;border-radius:14px;background:#fff;text-align:left;font:inherit;cursor:pointer}.opt:hover{border-color:#58a6ff;background:#f6fbff}.opt:disabled{cursor:default}.correct{border-color:#58cc02!important;background:#efffe8!important}.wrong{border-color:#e5484d!important;background:#fff0f0!important}.feedback{margin-top:14px;padding:12px;border-radius:13px;line-height:1.5}.good{background:#e8f9df;color:#246b16}.bad{background:#fff0f0;color:#a12b30}.btn{width:100%;margin-top:15px;padding:13px;border:0;border-radius:13px;background:#58cc02;color:#fff;font-weight:900;font-size:1rem;cursor:pointer}.back{display:inline-block;margin-top:17px;padding:10px 14px;border:2px solid #dfe3e8;border-radius:13px;color:#344054;text-decoration:none;font-weight:800}.result{text-align:center;font-size:1.15rem;font-weight:850;line-height:1.8;padding:18px}@media(max-width:600px){.wrap{padding:16px 10px}.card{padding:18px}.top{align-items:flex-start}.top h1{font-size:1.3rem}.q{font-size:1.08rem}.opt{padding:13px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap"><section class="card"><div class="top"><h1>💨 Ideal Gas</h1><div class="xp">⚡ <span id="xp">0</span> XP</div></div><p class="sub">Master the ideal-gas model with 15 NEET-style questions.</p><div class="num" id="num">Question 1 of 15</div><div class="bar"><div id="fill" class="fill"></div></div><div id="quiz"></div><div id="fb" class="feedback">Choose an answer.</div><button id="next" class="btn">Continue →</button><a class="back" href="physics-home.html">← Back to Physics Path</a></section></main><script>const qs=[['The equation of state for an ideal gas is:',['PV=nRT','P=V/nRT','PV=RT/n','P=nVRT'],0,'For n moles, PV=nRT.'],['For a fixed amount of ideal gas at constant temperature, Boyle’s law gives:',['PV=constant','P/V=constant','P+V=constant','PV^2=constant'],0,'At constant T and n, pressure is inversely proportional to volume.'],['At constant pressure, Charles’ law states that volume is proportional to:',['absolute temperature','pressure','density only','molar mass only'],0,'V/T is constant at fixed pressure and amount.'],['The SI unit of pressure is:',['pascal','joule','newton','watt'],0,'The SI unit of pressure is pascal (Pa).'],['One atmosphere is approximately:',['1.013×10^5 Pa','9.8×10^2 Pa','1.013×10^3 Pa','10^7 Pa'],0,'Standard atmospheric pressure is about 1.013×10^5 Pa.'],['For an ideal gas, internal energy depends only on:',['temperature','pressure alone','volume alone','container shape'],0,'For an ideal gas, internal energy is a function of temperature.'],['At constant volume, increasing the absolute temperature of an ideal gas causes pressure to:',['increase','decrease','remain zero','become independent of temperature'],0,'From P/T=constant at fixed V and n, pressure increases with T.'],['The universal gas constant R is approximately:',['8.314 J mol^-1 K^-1','9.8 J mol^-1 K^-1','6.022 J mol^-1 K^-1','3.0×10^8 J mol^-1 K^-1'],0,'R≈8.314 J mol^-1 K^-1.'],['Absolute zero is approximately:',['0 K','273 K','100 K','-100 K'],0,'The Kelvin scale begins at absolute zero, 0 K.'],['At constant temperature, if volume is doubled for a fixed ideal gas, pressure becomes:',['half','double','four times','unchanged'],0,'Boyle’s law gives P1V1=P2V2.'],['The number of molecules in n moles is:',['nN_A','N_A/n','n+N_A','n/N_A'],0,'Number of molecules N=nN_A.'],['Mean translational kinetic energy per molecule of an ideal gas is proportional to:',['absolute temperature','pressure only','volume only','molar mass only'],0,'Average translational kinetic energy is proportional to T.'],['Which gas law combines pressure, volume and temperature for a fixed amount of gas?',['Combined gas law','Faraday law','Ohm law','Hooke law'],0,'PV/T=constant for fixed amount of gas.'],['For an ideal gas, the compressibility factor Z is:',['1','0','R','infinite'],0,'An ideal gas has Z=PV/nRT=1.'],['Real gases most closely approach ideal behavior at:',['low pressure and high temperature','high pressure and low temperature','high pressure and high density','low temperature near liquefaction'],0,'Low pressure and high temperature reduce intermolecular effects.']];let i=0,score=0,answered=false;const $=id=>document.getElementById(id);function render(){answered=false;const a=qs[i];$('num').textContent='Question '+(i+1)+' of 15';$('xp').textContent=score*10;$('fill').style.width=(i/15*100)+'%';$('fb').className='feedback';$('fb').textContent='Choose an answer.';$('quiz').innerHTML='<div class="q">'+a[0]+'</div><div class="opts">'+a[1].map((x,n)=>'<button class="opt" data-n="'+n+'">'+String.fromCharCode(65+n)+'. '+x+'</button>').join('')+'</div>';document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').textContent=i===14?'Finish Skill →':'Continue →';$('next').onclick=next}function answer(n){if(answered)return;answered=true;const a=qs[i],ok=n===a[2];document.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===a[2])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong')});$('fb').className='feedback '+(ok?'good':'bad');$('fb').innerHTML=ok?'🎯 Correct! +10 XP<br>'+a[3]:'❌ Incorrect.<br><b>Correct answer:</b> '+a[1][a[2]]+'<br>'+a[3];if(ok)score++;$('xp').textContent=score*10;$('fill').style.width=((i+1)/15*100)+'%'}function next(){if(!answered){$('fb').className='feedback bad';$('fb').textContent='Choose an answer first 👆';return}if(i<14){i++;render();scrollTo({top:0,behavior:'smooth'})}else{$('num').textContent='Complete!';$('fill').style.width='100%';$('quiz').innerHTML='<div class="result">🏆 Ideal Gas Complete!<br>Score: '+score+'/15<br>⚡ XP earned: '+score*10+'</div>';$('next').textContent='Retry';$('next').onclick=()=>{i=0;score=0;render()}}}render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Ideal Gas concept quiz">
+<title>SkillUp | Ideal Gas — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Ideal Gas</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"What is an ideal gas?","o":["A model whose molecules have negligible volume and negligible intermolecular forces except during collisions","A gas whose molecules never move","A gas that cannot be compressed","A gas with infinitely massive molecules"],"a":0,"e":"The ideal-gas model treats molecules as point particles moving freely between collisions."},{"q":"Which equation describes an ideal gas?","o":["PV = nRT","P + V = nRT","PV = nR/T²","PT = nRV"],"a":0,"e":"The equation of state is PV = nRT."},{"q":"In PV = nRT, P represents…","o":["Absolute pressure","Power","Particle mass","Potential energy"],"a":0,"e":"P is the gas's absolute pressure."},{"q":"In PV = nRT, V represents…","o":["Volume occupied by the gas","Molecular speed","Molar mass","Viscosity"],"a":0,"e":"V is the total volume occupied by the gas."},{"q":"In PV = nRT, n is the…","o":["Amount of gas in moles","Number density in molecules per cubic metre","Gas density","Number of collisions per second"],"a":0,"e":"n is the amount of substance measured in moles."},{"q":"The universal gas constant R is approximately…","o":["8.314 J mol⁻¹ K⁻¹","9.81 J mol⁻¹ K⁻¹","6.022 × 10²³ J","3.00 × 10⁸ J mol⁻¹"],"a":0,"e":"R is approximately 8.314 joules per mole per kelvin."},{"q":"Temperature in the ideal-gas equation must be expressed in…","o":["Kelvin","Celsius only","Fahrenheit","Any scale without conversion"],"a":0,"e":"The equation uses absolute temperature in kelvin."},{"q":"At constant temperature for a fixed amount of gas, pressure and volume obey…","o":["PV = constant","P/V = constant","P + V = constant","PT = constant"],"a":0,"e":"Boyle's law states that PV remains constant at fixed temperature."},{"q":"At constant pressure, the volume of a fixed amount of ideal gas is proportional to…","o":["Absolute temperature","Inverse absolute temperature","Molar mass only","Pressure squared"],"a":0,"e":"Charles's law gives V/T = constant at fixed pressure."},{"q":"At constant volume, pressure of a fixed amount of ideal gas is proportional to…","o":["Absolute temperature","Inverse temperature","Volume","Molecular diameter only"],"a":0,"e":"From PV = nRT, P/T is constant when volume and amount are fixed."},{"q":"A gas occupies 2 L at 100 kPa. At constant temperature, its volume is reduced to 1 L. Final pressure is…","o":["200 kPa","50 kPa","100 kPa","400 kPa"],"a":0,"e":"Boyle's law gives P₂ = P₁V₁/V₂ = 100 × 2/1 = 200 kPa."},{"q":"A gas occupies 3 L at 300 K and is heated to 600 K at constant pressure. Its final volume is…","o":["6 L","1.5 L","3 L","9 L"],"a":0,"e":"Charles's law gives V₂ = V₁T₂/T₁ = 3 × 600/300 = 6 L."},{"q":"A gas has pressure 100 kPa at 300 K. At fixed volume, its pressure at 450 K is…","o":["150 kPa","75 kPa","100 kPa","200 kPa"],"a":0,"e":"P₂ = P₁T₂/T₁ = 100 × 450/300 = 150 kPa."},{"q":"What is the SI unit of pressure?","o":["Pascal","Joule","Kelvin","Coulomb"],"a":0,"e":"Pressure is measured in pascals (Pa), equivalent to N/m²."},{"q":"One mole of an ideal gas contains approximately…","o":["6.022 × 10²³ entities","3.00 × 10⁸ entities","9.81 × 10² entities","1.60 × 10⁻¹⁹ entities"],"a":0,"e":"One mole contains Avogadro's number of specified entities."},{"q":"For a fixed amount of ideal gas, the combined gas law is…","o":["P₁V₁/T₁ = P₂V₂/T₂","P₁T₁/V₁ = P₂T₂/V₂","P₁V₁T₁ = P₂V₂T₂","P₁ + V₁ = P₂ + V₂"],"a":0,"e":"The ratio PV/T remains constant when the amount of gas is fixed."},{"q":"If the absolute temperature of an ideal gas doubles at fixed volume and amount, its pressure…","o":["Doubles","Halves","Quadruples","Stays unchanged"],"a":0,"e":"Pressure is directly proportional to kelvin temperature at constant volume."},{"q":"If both pressure and absolute temperature double for a fixed amount of gas, volume…","o":["Stays the same","Doubles","Halves","Quadruples"],"a":0,"e":"Since V ∝ T/P, doubling both T and P leaves volume unchanged."},{"q":"Which assumption is part of the ideal-gas model?","o":["Molecular collisions are elastic","Molecules are permanently stationary","Molecular volume dominates the container","Strong attractions act at all distances"],"a":0,"e":"Ideal-gas collisions are assumed elastic, conserving total kinetic energy."},{"q":"Why do real gases behave most ideally at high temperature and low pressure?","o":["Intermolecular attractions and molecular volume become less significant","Molecules stop colliding","The gas constant becomes zero","The molecules become massless"],"a":0,"e":"At low density and higher thermal energy, non-ideal effects are less important."},{"q":"For an ideal gas, internal energy depends only on…","o":["Temperature","Pressure alone","Volume alone","Container material"],"a":0,"e":"The internal energy of an ideal gas depends only on its temperature."},{"q":"The average translational kinetic energy per molecule of an ideal gas is…","o":["(3/2)kT","kT/2","RT per molecule","3PV"],"a":0,"e":"The mean translational kinetic energy per molecule is 3kT/2."},{"q":"If the number of moles doubles at fixed pressure and temperature, volume…","o":["Doubles","Halves","Stays unchanged","Becomes zero"],"a":0,"e":"Avogadro's law states V is proportional to n at fixed P and T."},{"q":"If the volume of a fixed amount of gas doubles at constant pressure, absolute temperature…","o":["Doubles","Halves","Stays unchanged","Quadruples"],"a":0,"e":"At constant pressure, V/T is constant."},{"q":"Which quantity is not directly present as a separate variable in PV = nRT?","o":["Molecular diameter","Pressure","Volume","Temperature"],"a":0,"e":"The ideal-gas equation relates macroscopic P, V, n and T; molecular diameter is not a separate term."},{"q":"A gas has P = 100 kPa, V = 0.0249 m³, n = 1 mol. Its temperature is approximately…","o":["300 K","30 K","3,000 K","100 K"],"a":0,"e":"T = PV/(nR) = 100,000 × 0.0249/8.314 ≈ 300 K."},{"q":"Why must pressure be absolute in the ideal-gas equation?","o":["The equation relates gas state to absolute pressure and temperature","Gauge pressure is always negative","Absolute pressure has no units","Gauge pressure equals temperature"],"a":0,"e":"PV = nRT uses absolute pressure; gauge pressure must be converted if needed."},{"q":"Which law describes equal volumes of gases at the same temperature and pressure containing equal numbers of molecules?","o":["Avogadro's law","Boyle's law","Hooke's law","Faraday's law"],"a":0,"e":"Avogadro's law relates gas volume to amount at fixed temperature and pressure."},{"q":"If an ideal gas is compressed isothermally, its internal energy change is…","o":["Zero","Positive","Negative","Always equal to pressure"],"a":0,"e":"For an ideal gas, internal energy depends only on temperature, which is constant in an isothermal process."},{"q":"Which statement about the ideal-gas equation is correct?","o":["It relates pressure, volume, amount and absolute temperature","It applies only to solids","It predicts that all real gases are perfectly ideal under every condition","It excludes temperature"],"a":0,"e":"PV = nRT is the equation of state for an ideal gas and an approximation for real gases."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Ideal Gas Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

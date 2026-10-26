@@ -1,22 +1,152 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Average Speed</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🏃 Average Speed</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['Average speed is defined as','total displacement divided by total time','total distance travelled divided by total time taken','maximum speed divided by minimum speed','distance travelled multiplied by time',1,'Average speed is total distance travelled divided by the total time taken.'],
-['A car travels 60 km in 2 h. Its average speed is','20 km/h','30 km/h','60 km/h','120 km/h',1,'Average speed = total distance/total time = 60/2 = 30 km/h.'],
-['A body travels 10 m in the first 2 s and 20 m in the next 3 s. Its average speed is','5 m/s','6 m/s','7 m/s','10 m/s',1,'Total distance = 30 m and total time = 5 s, so average speed = 30/5 = 6 m/s.'],
-['A runner completes one full 400 m lap in 50 s. The average speed is','4 m/s','8 m/s','20 m/s','450 m/s',1,'Average speed = 400/50 = 8 m/s.'],
-['If a body covers equal distances with speeds v and 2v, its average speed is','3v/2','4v/3','2v','v/2',1,'For equal distances, average speed is the harmonic mean: 2v(2v)/(v+2v) = 4v/3.'],
-['If a body travels for equal time intervals with speeds v and 2v, its average speed is','v/2','2v/3','3v/2','2v',2,'For equal time intervals, average speed is the arithmetic mean: (v+2v)/2 = 3v/2.'],
-['A car travels 30 km at 30 km/h and another 30 km at 60 km/h. Its average speed is','30 km/h','40 km/h','45 km/h','60 km/h',1,'Total distance = 60 km; total time = 1 h + 0.5 h = 1.5 h. Average speed = 60/1.5 = 40 km/h.'],
-['A person walks 5 m east and then 5 m west in 10 s. The average speed is','0 m/s','0.5 m/s','1 m/s','10 m/s',2,'Total distance is 10 m and total time is 10 s, so average speed = 1 m/s.'],
-['For any motion, average speed is always','less than or equal to the magnitude of average velocity','greater than the magnitude of average velocity','equal to average velocity','zero',0,'Average speed uses total distance, while average velocity uses displacement. Since distance is at least the magnitude of displacement, average speed is at least the magnitude of average velocity.'],
-['A particle covers 100 m in 10 s and 50 m in 5 s. Its average speed is','5 m/s','10 m/s','15 m/s','20 m/s',1,'Total distance = 150 m and total time = 15 s. Average speed = 150/15 = 10 m/s.'],
-['If total distance travelled is doubled while total time remains unchanged, average speed','becomes half','remains unchanged','doubles','becomes four times',2,'Average speed = distance/time, so doubling distance at the same time doubles average speed.'],
-['If both total distance and total time are doubled, average speed','doubles','becomes half','remains unchanged','becomes four times',2,'The factor of 2 cancels: (2d)/(2t) = d/t.'],
-['A vehicle covers half of a journey at 20 m/s and the other half at 30 m/s. Its average speed is','24 m/s','25 m/s','26 m/s','50 m/s',0,'For equal distances, average speed = 2v1v2/(v1+v2) = 2×20×30/50 = 24 m/s.'],
-['The SI unit of average speed is','km/h','m/s','m','s',1,'Speed is distance divided by time, so its SI unit is metre per second (m/s).'],
-['A body moves 100 m in 5 s, stops for 5 s, and then moves another 100 m in 10 s. Its average speed for the whole interval is','10 m/s','12 m/s','13.33 m/s','20 m/s',1,'Total distance = 200 m and total elapsed time including the stop = 20 s. Average speed = 200/20 = 10 m/s.'],
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Average Speed quiz">
+<title>SkillUp | Average Speed — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🏃 Average Speed</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Average speed is defined as:","o":["Total displacement divided by total time","Total distance travelled divided by total time taken","Maximum speed divided by minimum speed","Distance multiplied by time"],"a":1,"e":"Average speed = total distance travelled / total time taken."},{"q":"A car travels 60 km in 2 h. What is its average speed?","o":["20 km/h","30 km/h","60 km/h","120 km/h"],"a":1,"e":"Average speed = 60/2 = 30 km/h."},{"q":"A body travels 10 m in 2 s and 20 m in the next 3 s. Find its average speed.","o":["5 m/s","6 m/s","7 m/s","10 m/s"],"a":1,"e":"Total distance = 30 m; total time = 5 s. Average speed = 30/5 = 6 m/s."},{"q":"A runner completes one 400 m lap in 50 s. Average speed is:","o":["4 m/s","8 m/s","20 m/s","450 m/s"],"a":1,"e":"Average speed = 400/50 = 8 m/s."},{"q":"A body covers equal distances at speeds \\(v\\) and \\(2v\\). Its average speed is:","o":["\\(\\frac{3v}{2}\\)","\\(\\frac{4v}{3}\\)","\\(2v\\)","\\(\\frac{v}{2}\\)"],"a":1,"e":"For equal distances, average speed is the harmonic mean: \\(v_{avg}=\\frac{2v(2v)}{v+2v}=\\frac{4v}{3}\\)."},{"q":"A body moves for equal time intervals at speeds \\(v\\) and \\(2v\\). Average speed is:","o":["\\(\\frac{v}{2}\\)","\\(\\frac{2v}{3}\\)","\\(\\frac{3v}{2}\\)","\\(2v\\)"],"a":2,"e":"For equal time intervals, average speed is the arithmetic mean: \\(v_{avg}=\\frac{v+2v}{2}=\\frac{3v}{2}\\)."},{"q":"A car travels 30 km at 30 km/h and another 30 km at 60 km/h. Average speed is:","o":["30 km/h","40 km/h","45 km/h","60 km/h"],"a":1,"e":"Total distance = 60 km; total time = 1 + 0.5 = 1.5 h. Average speed = 60/1.5 = 40 km/h."},{"q":"A person walks 5 m east and then 5 m west in 10 s. Average speed is:","o":["0 m/s","0.5 m/s","1 m/s","10 m/s"],"a":2,"e":"Total distance = 10 m, so average speed = 10/10 = 1 m/s. Displacement is zero, but distance is not."},{"q":"For any motion, average speed is always:","o":["Greater than or equal to the magnitude of average velocity","Less than the magnitude of average velocity","Equal to average velocity in all cases","Always zero"],"a":0,"e":"Distance is at least the magnitude of displacement. Therefore, average speed is at least the magnitude of average velocity."},{"q":"A particle covers 100 m in 10 s and 50 m in 5 s. Average speed is:","o":["5 m/s","10 m/s","15 m/s","20 m/s"],"a":1,"e":"Total distance = 150 m and total time = 15 s; average speed = 10 m/s."},{"q":"If total distance is doubled while total time stays the same, average speed:","o":["Becomes half","Remains unchanged","Doubles","Becomes four times"],"a":2,"e":"Since \\(v_{avg}=s/t\\), doubling distance at fixed time doubles average speed."},{"q":"If both total distance and total time are doubled, average speed:","o":["Doubles","Becomes half","Remains unchanged","Becomes four times"],"a":2,"e":"\\(v'_{avg}=2s/2t=s/t\\), so the average speed is unchanged."},{"q":"A vehicle covers equal halves of a journey at 20 m/s and 30 m/s. Average speed is:","o":["24 m/s","25 m/s","26 m/s","50 m/s"],"a":0,"e":"For equal distances, \\(v_{avg}=\\frac{2v_1v_2}{v_1+v_2}=\\frac{2(20)(30)}{50}=24\\,\\text{m/s}\\)."},{"q":"What is the SI unit of average speed?","o":["km/h","m/s","m","s"],"a":1,"e":"Speed is distance divided by time, so its SI unit is metre per second (m/s)."},{"q":"A body moves 100 m in 5 s, rests for 5 s, then moves 100 m in 10 s. Average speed over the whole interval is:","o":["10 m/s","12 m/s","13.33 m/s","20 m/s"],"a":0,"e":"Total distance = 200 m. Total elapsed time including the rest = 20 s, so average speed = 10 m/s."},{"q":"A cyclist covers 12 km in 40 minutes. Average speed is:","o":["12 km/h","18 km/h","20 km/h","30 km/h"],"a":1,"e":"40 min = 2/3 h. Average speed = 12 ÷ (2/3) = 18 km/h."},{"q":"A train travels 150 km in 2.5 h. Its average speed is:","o":["50 km/h","60 km/h","75 km/h","100 km/h"],"a":1,"e":"Average speed = 150/2.5 = 60 km/h."},{"q":"A person walks 3 km in 30 min. What is the average speed in m/s?","o":["1.0 m/s","1.67 m/s","2.5 m/s","3.6 m/s"],"a":1,"e":"3 km = 3000 m and 30 min = 1800 s. Average speed = 3000/1800 ≈ 1.67 m/s."},{"q":"A car travels for 2 h at 40 km/h and for 1 h at 70 km/h. Average speed is:","o":["45 km/h","50 km/h","55 km/h","60 km/h"],"a":1,"e":"Total distance = 80 + 70 = 150 km; total time = 3 h. Average speed = 50 km/h."},{"q":"If a particle travels a total distance \\(s\\) in total time \\(t\\), average speed equals:","o":["\\(s+t\\)","\\(t/s\\)","\\(s/t\\)","\\(st\\)"],"a":2,"e":"By definition, \\(v_{avg}=\\frac{\\text{total distance}}{\\text{total time}}=\\frac{s}{t}\\)."},{"q":"A body moves at constant speed 5 m/s for 8 s. Distance travelled is:","o":["13 m","20 m","40 m","45 m"],"a":2,"e":"Distance = speed × time = 5 × 8 = 40 m."},{"q":"A car travels 20 km in 30 min and 40 km in 1 h. Its average speed for the whole trip is:","o":["30 km/h","40 km/h","45 km/h","60 km/h"],"a":1,"e":"Total distance = 60 km; total time = 1.5 h. Average speed = 60/1.5 = 40 km/h."},{"q":"A runner runs 100 m in 20 s and another 100 m in 25 s. Average speed is:","o":["4.0 m/s","4.44 m/s","5.0 m/s","5.5 m/s"],"a":1,"e":"Total distance = 200 m; total time = 45 s. Average speed = 200/45 ≈ 4.44 m/s."},{"q":"For a round trip that ends at the starting point, the average speed is:","o":["Always zero","Zero only if the journey takes no time","Total distance divided by total time","Equal to average velocity"],"a":2,"e":"The displacement is zero, but the distance travelled is generally positive. Average speed = distance/time."},{"q":"A vehicle covers 60% of a journey at 30 km/h and the remaining 40% at 60 km/h. Its average speed is:","o":["36 km/h","40 km/h","45 km/h","48 km/h"],"a":1,"e":"Let total distance be \\(D\\). Time = \\(0.6D/30+0.4D/60=0.02667D\\) h, giving average speed = 37.5 km/h."},{"q":"A student walks 600 m in 5 min. Average speed is:","o":["1 m/s","2 m/s","3 m/s","5 m/s"],"a":1,"e":"5 min = 300 s. Average speed = 600/300 = 2 m/s."},{"q":"A body travels 10 m in 2 s, 15 m in 3 s and 25 m in 5 s. Average speed is:","o":["4 m/s","5 m/s","6 m/s","10 m/s"],"a":1,"e":"Total distance = 50 m; total time = 10 s. Average speed = 5 m/s."},{"q":"Which statement about average speed is correct?","o":["It depends only on displacement","It can never be negative","It must equal instantaneous speed","It always has a direction"],"a":1,"e":"Distance and elapsed time are non-negative, so average speed is non-negative and has no direction."},{"q":"A vehicle covers 100 km at 50 km/h and 100 km at 100 km/h. Average speed is:","o":["60 km/h","66.7 km/h","75 km/h","80 km/h"],"a":1,"e":"Total time = 2 h + 1 h = 3 h. Average speed = 200/3 ≈ 66.7 km/h."},{"q":"An object travels 24 m in 4 s, then 36 m in 6 s. Its average speed is:","o":["5 m/s","6 m/s","8 m/s","10 m/s"],"a":1,"e":"Total distance = 60 m and total time = 10 s. Average speed = 6 m/s."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('question'), $('options')].filter(Boolean)).catch(()=>{});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+ if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$ ('feedback')]).catch(()=>{});
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Average Speed Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

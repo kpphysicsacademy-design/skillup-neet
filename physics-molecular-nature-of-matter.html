@@ -1,22 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Molecular Nature of Matter</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;line-height:1.45}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.opt:disabled{cursor:default}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{font-weight:700;color:#e08a00;text-align:center;min-height:24px;line-height:1.5}.explanation{margin-top:14px;padding:12px 14px;border-radius:12px;background:#f1f6ff;font-size:14px;line-height:1.5}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>⚛️ Molecular Nature of Matter</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['Matter is composed of:','Continuous material with no particles','Particles such as atoms and molecules','Only electromagnetic waves','Energy only',1,'Matter has a particulate nature and is made of atoms, molecules or other microscopic particles.'],
-['Which observation gives evidence for the particle nature of matter?','Diffusion','Reflection only','Formation of shadows only','Rectilinear propagation only',0,'Diffusion occurs because particles move and spread from regions of higher concentration to lower concentration.'],
-['Brownian motion is:','The periodic motion of a pendulum','The random motion of microscopic particles suspended in a fluid','The motion of planets','The vibration of a rigid body only',1,'Brownian motion is the irregular motion of small suspended particles caused by collisions with rapidly moving fluid molecules.'],
-['The main cause of Brownian motion is:','Gravity alone','Unequal random collisions by surrounding molecules','Magnetic attraction','Electric current',1,'Continuous random molecular collisions produce the observed irregular motion of suspended particles.'],
-['Diffusion is fastest generally in:','Solids','Liquids','Gases','Vacuum',2,'Gas molecules move freely and rapidly, so diffusion is generally fastest in gases.'],
-['The smell of perfume spreading through a room is an example of:','Diffusion','Refraction','Conduction only','Reflection',0,'Perfume molecules spread through air due to random molecular motion, producing diffusion.'],
-['When temperature increases, the average kinetic energy of particles generally:','Decreases','Increases','Becomes zero','Remains exactly unchanged',1,'For a substance in thermal equilibrium, higher temperature corresponds to greater average translational kinetic energy of its particles.'],
-['In a solid, particles are generally:','Widely separated and freely moving','Closely packed and vibrating about mean positions','Completely stationary','Separated by vacuum',1,'Particles in a solid are closely packed and mainly vibrate about fixed equilibrium positions.'],
-['In a liquid, particles:','Are fixed permanently in a lattice','Can move relative to one another while remaining fairly close','Have no kinetic energy','Are infinitely far apart',1,'Liquid particles remain close together but can move and rearrange relative to one another.'],
-['In an ideal gas, intermolecular forces are assumed to be:','Very large at all separations','Negligible except during collisions','Always repulsive and infinite','The same as gravitational force',1,'The ideal-gas model neglects intermolecular forces except during collisions.'],
-['The SI unit of amount of substance is:','Gram','Mole','Kilogram','Litre',1,'The mole (mol) is the SI base unit for amount of substance.'],
-['One mole contains approximately:','6.022 × 10^23 entities','6.022 × 10^20 entities','9.81 × 10^23 entities','3.00 × 10^8 entities',0,'One mole contains Avogadro’s constant, approximately 6.022 × 10^23 specified entities.'],
-['Avogadro constant is approximately:','6.022 × 10^23 mol^-1','9.8 mol^-1','3.0 × 10^8 mol^-1','1.6 × 10^-19 mol^-1',0,'Avogadro constant N_A is approximately 6.022 × 10^23 mol^-1.'],
-['At the same temperature, which particles have greater average kinetic energy?','Heavier gas molecules necessarily have greater average kinetic energy','All ideal-gas particles have the same average translational kinetic energy','Only oxygen molecules have kinetic energy','Particles in solids only',1,'For an ideal gas at a given temperature, average translational kinetic energy depends on temperature, not molecular mass.'],
-['Which statement best describes the molecular nature of matter?','Particles of matter are always motionless','Matter consists of microscopic particles in continuous motion, with interactions depending on the state','Matter has no microscopic structure','Only gases contain particles',1,'The particle model explains solids, liquids and gases through microscopic particles, their motion and interactions.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;$('xp').textContent='';const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide')}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').innerHTML=ok?'✨ Correct! +1 XP':'❌ Incorrect';$('xp').insertAdjacentHTML('beforeend',`<div class="explanation"><b>Correct answer:</b> ${q[q[5]+1]}<br>💡 ${q[6]}</div>`);if(ok)score++;$('score').textContent=`XP ${score}`;$('fill').style.width=`${(i+1)/15*100}%`;$('next').classList.remove('hide')}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><p style="text-align:center">XP earned: <b>${score}</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Molecular Nature of Matter concept quiz">
+<title>SkillUp | Molecular Nature of Matter — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Molecular Nature of Matter</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"What does the molecular nature of matter state?","o":["Matter is made of tiny particles","Matter has no microscopic structure","Only gases contain particles","All particles are motionless"],"a":0,"e":"Matter consists of microscopic particles such as atoms and molecules."},{"q":"Which observation supports the idea that particles of matter are in continuous motion?","o":["Diffusion","A stationary wall","The shape of a ruler","The colour of glass alone"],"a":0,"e":"Diffusion occurs because particles move and spread from regions of higher concentration."},{"q":"Brownian motion is the irregular motion of…","o":["Tiny suspended particles in a fluid","Planets around the Sun","A solid block fixed to a table","Light in a vacuum"],"a":0,"e":"Brownian motion results from uneven random collisions by rapidly moving fluid molecules."},{"q":"The main cause of Brownian motion is…","o":["Random collisions with surrounding fluid molecules","Gravity alone","Magnetic attraction only","A steady electric current"],"a":0,"e":"Fluid molecules collide unevenly with the suspended particle, causing its irregular motion."},{"q":"Diffusion is generally fastest in which state of matter?","o":["Gases","Liquids","Solids","All states at the same rate"],"a":0,"e":"Gas particles move freely and spread quickly, so diffusion is generally fastest in gases."},{"q":"The smell of perfume spreading through a room is an example of…","o":["Diffusion","Refraction","Reflection","Condensation only"],"a":0,"e":"Perfume molecules spread through the air due to random molecular motion."},{"q":"When the temperature of a substance increases, the average kinetic energy of its particles generally…","o":["Increases","Decreases to zero","Remains exactly unchanged","Becomes negative"],"a":0,"e":"Temperature is related to the average kinetic energy of particles."},{"q":"In a solid, particles are generally…","o":["Closely packed and vibrating about equilibrium positions","Widely separated and freely moving","Completely motionless","Separated by large empty gaps"],"a":0,"e":"Solid particles are closely packed and mainly vibrate about their mean positions."},{"q":"In a liquid, particles generally…","o":["Remain close but can move relative to one another","Are permanently fixed in a rigid lattice","Have no kinetic energy","Are infinitely far apart"],"a":0,"e":"Liquid particles remain close together but can slide and rearrange."},{"q":"Gas particles are typically…","o":["Far apart and moving randomly","Fixed in place","Unable to collide","Arranged in a rigid lattice"],"a":0,"e":"Gas particles are widely spaced and move randomly between collisions."},{"q":"Why can gases be compressed more easily than solids?","o":["Gas particles have much more space between them","Gas particles have no mass","Solid particles do not move at all","Gas particles are larger than containers"],"a":0,"e":"Much of a gas's volume is empty space between particles, allowing compression."},{"q":"Why do solids generally retain their shape?","o":["Particles are strongly bound near fixed equilibrium positions","Particles move freely throughout the container","There are no forces between particles","Solid particles are infinitely far apart"],"a":0,"e":"Strong interactions keep solid particles near fixed positions."},{"q":"Which statement about particles in matter is correct?","o":["Particles are in motion, with motion and spacing depending on state","Only gas particles move","Particles in solids have exactly zero kinetic energy","All particles are separated by equal distances"],"a":0,"e":"Particles have motion in all states, though their arrangement and mobility differ."},{"q":"One mole of a substance contains approximately…","o":["6.022 × 10²³ entities","6.022 × 10²⁰ entities","3.00 × 10⁸ entities","9.81 × 10² entities"],"a":0,"e":"One mole contains Avogadro's number of specified entities."},{"q":"The SI base unit for amount of substance is the…","o":["Mole","Gram","Litre","Kelvin"],"a":0,"e":"The mole (mol) is the SI base unit for amount of substance."},{"q":"Avogadro's constant is approximately…","o":["6.022 × 10²³ mol⁻¹","9.81 mol⁻¹","3.00 × 10⁸ mol⁻¹","1.60 × 10⁻¹⁹ mol⁻¹"],"a":0,"e":"Avogadro's constant is approximately 6.022 × 10²³ per mole."},{"q":"The mass of one mole of a substance is called its…","o":["Molar mass","Density","Volume expansion","Pressure"],"a":0,"e":"Molar mass is the mass per mole, commonly expressed in g/mol or kg/mol."},{"q":"If one mole of a substance has molar mass 18 g/mol, the mass of two moles is…","o":["36 g","18 g","9 g","2 g"],"a":0,"e":"Mass equals amount in moles multiplied by molar mass: 2 × 18 g = 36 g."},{"q":"At the same temperature, ideal-gas particles have the same average translational kinetic energy when…","o":["They are compared per molecule","They have the same mass only","They have the same speed in every collision","They are in different states only"],"a":0,"e":"For ideal gases, average translational kinetic energy per molecule depends on absolute temperature, not molecular mass."},{"q":"Why do lighter gas molecules generally move faster than heavier ones at the same temperature?","o":["Their average kinetic energies are equal, so lower mass means greater characteristic speed","They always have greater average kinetic energy","They never collide","Their temperature is higher"],"a":0,"e":"At a fixed temperature, the same mean kinetic energy corresponds to greater speed for lower mass."},{"q":"Which statement best describes temperature at the microscopic level for an ideal gas?","o":["It is proportional to average translational kinetic energy per molecule","It measures the total mass of the gas","It is the same as pressure","It is the number of molecules in a container"],"a":0,"e":"For an ideal gas, mean translational kinetic energy per molecule is 3kT/2."},{"q":"What happens to diffusion when temperature rises, under otherwise similar conditions?","o":["It generally becomes faster","It stops completely","It always becomes slower","It changes into reflection"],"a":0,"e":"Higher temperature increases typical particle speeds and generally speeds up diffusion."},{"q":"Why does a drop of ink gradually spread in still water?","o":["Particles undergo random motion and diffuse","Water molecules become motionless","Gravity acts only sideways","The ink is converted into light"],"a":0,"e":"Random molecular motion leads to the spreading of ink particles through water."},{"q":"Which statement about intermolecular forces is most accurate?","o":["Their effects differ among substances and states of matter","They are absent in every substance","They are identical in strength for all materials","They act only on objects in space"],"a":0,"e":"Intermolecular interactions help determine whether matter behaves as a solid, liquid or gas."},{"q":"In a simple ideal-gas model, intermolecular forces are treated as…","o":["Negligible between collisions","Infinitely strong at all distances","The only source of molecular motion","Equal to the gas pressure"],"a":0,"e":"The ideal-gas model neglects intermolecular forces except during collisions."},{"q":"Why does a liquid take the shape of its container but keep a nearly fixed volume?","o":["Particles can rearrange while remaining close together","Particles are fixed in a rigid lattice","Particles are extremely far apart","The liquid has no intermolecular interactions"],"a":0,"e":"Liquid particles can move past one another but remain close due to intermolecular attraction."},{"q":"Why can a gas fill its entire container?","o":["Its particles move freely and randomly through the available space","Its particles are fixed at the bottom","It has a fixed shape","Its particles cannot collide"],"a":0,"e":"Gas particles spread through the container because they move freely and randomly."},{"q":"Which observation is evidence for molecular motion even without stirring?","o":["A drop of dye spreading through water","A book remaining on a table","A metal rod keeping its shape","A sealed empty container"],"a":0,"e":"Dye spreading through water is a visible example of diffusion caused by molecular motion."},{"q":"If the amount of substance is doubled while molar mass remains the same, total mass…","o":["Doubles","Halves","Becomes zero","Stays unchanged"],"a":0,"e":"Total mass equals number of moles multiplied by molar mass."},{"q":"Which statement is true about matter at ordinary temperatures?","o":["Its microscopic particles possess thermal motion","All particles are always at rest","Only liquids have particles","Temperature has no relation to particle motion"],"a":0,"e":"Thermal motion exists in solids, liquids and gases, though the nature of motion differs."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Molecular Nature of Matter Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

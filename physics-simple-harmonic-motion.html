@@ -1,22 +1,151 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Simple Harmonic Motion</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🎯 Simple Harmonic Motion</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['A particle executes simple harmonic motion when its acceleration is','constant and positive','proportional to displacement and directed toward the mean position','independent of displacement','always zero','proportional to displacement and directed toward the mean position','For SHM, a = −ω²x, so acceleration is proportional to displacement and opposite in direction.'],
-['The displacement equation of SHM can be written as','x = A cos(ωt + φ)','x = At²','x = A + vt²','x = vt','x = A cos(ωt + φ)','A sinusoidal displacement such as x = A cos(ωt + φ) represents SHM.'],
-['In x = A cos(ωt + φ), A represents','frequency','amplitude','period','phase constant','amplitude','A is the maximum displacement from the equilibrium position.'],
-['The maximum displacement of a particle in SHM from its mean position is called','period','frequency','amplitude','phase','amplitude','Amplitude is the maximum displacement from the mean position.'],
-['The time period T and angular frequency ω of SHM are related by','ω = T/2π','ω = 2π/T','ω = T²','ω = 1/T²','ω = 2π/T','Angular frequency is ω = 2π/T.'],
-['The frequency of SHM is related to angular frequency by','ν = 2πω','ν = ω/2π','ν = ω²','ν = 1/ω','ν = ω/2π','Since ω = 2πν, frequency is ν = ω/(2π).'],
-['At the mean position of a particle in SHM, its displacement is','maximum','zero','A/2','infinite','zero','The mean position is the equilibrium position, where displacement is zero.'],
-['At an extreme position of SHM, the velocity of the particle is','maximum','zero','constant','infinite','zero','The particle momentarily stops at each extreme before reversing direction.'],
-['At the mean position of ideal SHM, the speed is','zero','maximum','minimum but non-zero','constant','maximum','The speed is maximum at equilibrium because the potential energy is minimum there.'],
-['For SHM, the restoring force is','F = +kx','F = −kx','F = k/x','F = constant','F = −kx','Hooke-type restoring force is proportional to displacement and directed toward equilibrium: F = −kx.'],
-['The total mechanical energy of an ideal SHM oscillator is','zero','constant','always increasing','always decreasing','constant','In ideal SHM without damping, kinetic plus potential energy remains constant.'],
-['The total energy of a particle of mass m and amplitude A in SHM is','mωA','1/2 mω²A²','mω²A','1/2 mA²','1/2 mω²A²','For SHM, E = 1/2 mω²A².'],
-['For x = A cos(ωt + φ), φ is known as the','amplitude','phase constant','angular frequency','time period','phase constant','φ specifies the initial phase of the oscillator.'],
-['The potential energy of an ideal SHM oscillator is maximum at the','mean position','extreme positions','all positions equally','origin only','extreme positions','At maximum displacement, the speed is zero and the potential energy is maximum.'],
-['If the amplitude of an SHM oscillator is doubled while mass and angular frequency remain unchanged, its total energy becomes','half','twice','four times','unchanged','four times','Since E ∝ A², doubling amplitude makes the total energy four times larger.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Simple Harmonic Motion quiz">
+<title>SkillUp | Simple Harmonic Motion — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Simple Harmonic Motion</h1><p class="muted">Explore simple harmonic properties with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Simple harmonic motion (SHM) is motion in which…","o":["acceleration is constant","acceleration is proportional to displacement and directed toward equilibrium","velocity is always constant","force is always zero"],"a":1,"e":"In SHM, a = −ω²x, so acceleration is proportional to displacement and opposite in direction."},{"q":"The defining acceleration equation for SHM is…","o":["a = ωx","a = −ω²x","a = ω²/x","a = constant"],"a":1,"e":"The negative sign indicates acceleration is directed toward equilibrium."},{"q":"In x = A cos(ωt + φ), A is the…","o":["angular frequency","amplitude","phase constant","time period"],"a":1,"e":"A is the maximum displacement from equilibrium."},{"q":"The SI unit of amplitude is the same as that of…","o":["frequency","displacement","angular frequency","phase"],"a":1,"e":"Amplitude is a length, so its SI unit is metre."},{"q":"The angular frequency of SHM is related to its period T by…","o":["ω = T/2π","ω = 2π/T","ω = 1/T²","ω = 2πT²"],"a":1,"e":"One cycle corresponds to 2π radians, hence ω = 2π/T."},{"q":"The relation between angular frequency ω and frequency f is…","o":["ω = 2πf","ω = f/2π","ω = f²","ω = 1/f"],"a":0,"e":"Angular frequency is ω = 2πf."},{"q":"The time period of SHM with angular frequency ω is…","o":["2πω","ω/2π","2π/ω","1/ω²"],"a":2,"e":"T = 2π/ω."},{"q":"At the equilibrium position in SHM, displacement is…","o":["A","−A","zero","A/2"],"a":2,"e":"Displacement is measured from equilibrium and is zero at that position."},{"q":"At either extreme of SHM, the speed is…","o":["maximum","zero","ωA/2","constant and nonzero"],"a":1,"e":"The oscillator momentarily stops before reversing direction."},{"q":"The speed in ideal SHM is maximum at…","o":["x = ±A","x = 0","x = A/2 only","all positions equally"],"a":1,"e":"Kinetic energy and speed are maximum at equilibrium."},{"q":"The magnitude of acceleration in SHM is maximum at…","o":["equilibrium","the extreme positions","every point equally","x = A/2 only"],"a":1,"e":"Since |a| = ω²|x|, acceleration magnitude is greatest at |x| = A."},{"q":"The restoring force in SHM is…","o":["F = kx","F = −kx","F = k/x","F = constant"],"a":1,"e":"Hooke's-law restoring force is opposite to displacement."},{"q":"For x = A cos(ωt), the displacement at t = 0 is…","o":["zero","A","−A","A/2"],"a":1,"e":"cos 0 = 1, so x(0) = A."},{"q":"For x = A sin(ωt), the displacement at t = 0 is…","o":["A","−A","zero","2A"],"a":2,"e":"sin 0 = 0, so the initial displacement is zero."},{"q":"The phase of SHM written as x = A cos(ωt + φ) is…","o":["A","ω","ωt + φ","t/ω"],"a":2,"e":"The instantaneous phase is ωt + φ."},{"q":"The phase constant φ determines the…","o":["mass only","initial state of oscillation","amplitude only","spring constant only"],"a":1,"e":"The phase constant sets the initial phase and thus initial displacement and velocity."},{"q":"The velocity in SHM is obtained by differentiating displacement with respect to…","o":["mass","time","frequency","force"],"a":1,"e":"Velocity is v = dx/dt."},{"q":"For x = A cos(ωt), the velocity is…","o":["Aω cos(ωt)","−Aω sin(ωt)","Aω² sin(ωt)","−A sin(ωt)/ω"],"a":1,"e":"Differentiating x = A cos(ωt) gives v = −Aω sin(ωt)."},{"q":"The maximum speed in SHM is…","o":["A/ω","Aω","Aω²","ω/A"],"a":1,"e":"Maximum speed is v_max = Aω."},{"q":"The maximum acceleration magnitude in SHM is…","o":["Aω","Aω²","A/ω²","ω²/A"],"a":1,"e":"Since a = −ω²x, a_max = Aω²."},{"q":"The speed-displacement relation in SHM is…","o":["v² = ω²(A² − x²)","v² = ω²(A² + x²)","v = ωx always","v² = A² − ω²x"],"a":0,"e":"Energy conservation gives v² = ω²(A² − x²)."},{"q":"The total mechanical energy of a spring-mass oscillator is…","o":["½kA²","kA","½mv","k/A"],"a":0,"e":"For amplitude A, total energy is E = ½kA²."},{"q":"At equilibrium in ideal spring SHM, the potential energy measured from equilibrium is…","o":["maximum","zero","equal to total energy","infinite"],"a":1,"e":"For a spring, U = ½kx², which is zero at x = 0."},{"q":"At an extreme position in ideal SHM, the kinetic energy is…","o":["maximum","zero","equal to potential energy always","negative"],"a":1,"e":"At the extreme, speed is zero, so kinetic energy is zero."},{"q":"For an ideal mass-spring system, the time period is…","o":["2π√(k/m)","2π√(m/k)","√(mk)","m/k"],"a":1,"e":"T = 2π√(m/k)."},{"q":"For a simple pendulum at small angles, the time period is…","o":["2π√(g/L)","2π√(L/g)","2πL/g","√(Lg)"],"a":1,"e":"For small oscillations, T = 2π√(L/g)."},{"q":"For a simple pendulum, the time period (small-angle approximation) depends on…","o":["mass of bob","amplitude for all angles","pendulum length and gravitational acceleration","color of the bob"],"a":2,"e":"T = 2π√(L/g), independent of bob mass for small oscillations."},{"q":"If the amplitude of ideal SHM doubles while angular frequency stays fixed, maximum speed…","o":["halves","doubles","quadruples","stays fixed"],"a":1,"e":"v_max = Aω, so doubling A doubles maximum speed."},{"q":"If the angular frequency doubles and amplitude stays fixed, maximum acceleration…","o":["doubles","quadruples","halves","stays fixed"],"a":1,"e":"a_max = Aω², so doubling ω makes maximum acceleration four times larger."},{"q":"In ideal SHM, acceleration and displacement are…","o":["in phase","opposite in phase","always unrelated","both always zero"],"a":1,"e":"Acceleration a = −ω²x is 180° out of phase with displacement."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+const wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Simple Harmonic Motion Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,22 +1,151 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Amplitude</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>📏 Amplitude</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['In SHM, amplitude is defined as the','maximum displacement from the mean position','minimum displacement','average displacement','distance travelled in one second',0,'Amplitude A is the maximum magnitude of displacement from the mean or equilibrium position.'],
-['The SI unit of amplitude of displacement is','second','hertz','metre','radian',2,'When amplitude represents displacement, its SI unit is metre (m).'],
-['For x = A cos(ωt + φ), A represents the','angular frequency','amplitude','phase','time period',1,'In the standard SHM equation, A is the amplitude.'],
-['If a particle oscillates between x = −4 cm and x = +4 cm, its amplitude is','2 cm','4 cm','8 cm','16 cm',1,'Amplitude is the maximum displacement from equilibrium, so A = 4 cm.'],
-['The total range of displacement in SHM from one extreme to the other is','A','2A','A/2','4A',1,'The particle moves from −A to +A, giving a total displacement range of 2A.'],
-['At the mean position of SHM, the displacement is','A','−A','0','2A',2,'The mean or equilibrium position is x = 0.'],
-['At either extreme position, the magnitude of displacement is','0','A/2','A','2A',2,'The extreme positions correspond to x = +A and x = −A.'],
-['If the amplitude of an SHM is doubled while frequency remains unchanged, its maximum displacement becomes','half','unchanged','double','four times',2,'Maximum displacement magnitude equals amplitude, so doubling A doubles it.'],
-['If x = 6 sin(ωt) cm, the amplitude is','3 cm','6 cm','12 cm','36 cm',1,'The coefficient of the sine function is the amplitude: A = 6 cm.'],
-['A particle has amplitude 0.20 m. Its maximum displacement magnitude from equilibrium is','0.10 m','0.20 m','0.40 m','2.0 m',1,'Maximum displacement magnitude is equal to amplitude.'],
-['Which statement about amplitude in ideal SHM is correct?','It changes randomly with time','It remains constant for an ideal undamped oscillator','It is always zero','It equals the frequency',1,'For ideal undamped SHM, amplitude remains constant.'],
-['If the maximum and minimum positions are +10 cm and −10 cm, the amplitude is','5 cm','10 cm','20 cm','100 cm',1,'The mean position is midway at zero, so the maximum distance from mean is 10 cm.'],
-['For x = A cos(ωt), the maximum possible value of x is','−A','0','A','2A',2,'Since cos(ωt) ranges from −1 to +1, maximum x is +A.'],
-['For x = A cos(ωt), the minimum possible value of x is','−A','0','A','2A',0,'The minimum occurs when cos(ωt) = −1, giving x = −A.'],
-['If the amplitude is 5 cm, the maximum speed in SHM is proportional to','5 cm only','ωA','A/ω','1/A',1,'For SHM, maximum speed is v_max = ωA, so it is proportional to ωA.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Amplitude quiz">
+<title>SkillUp | Amplitude — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Amplitude</h1><p class="muted">Explore oscillation properties with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"In oscillatory motion, amplitude is the…","o":["time for one cycle","maximum displacement from equilibrium","number of cycles per second","distance travelled in one second"],"a":1,"e":"Amplitude is the greatest magnitude of displacement from the equilibrium position."},{"q":"The usual symbol for amplitude in SHM is…","o":["T","f","A","ω"],"a":2,"e":"A commonly represents amplitude."},{"q":"The SI unit of displacement amplitude is…","o":["hertz","second","metre","radian per second"],"a":2,"e":"Amplitude is a length, so its SI unit is metre."},{"q":"If the extreme positions are +6 cm and −6 cm, the amplitude is…","o":["3 cm","6 cm","12 cm","0 cm"],"a":1,"e":"Amplitude is the magnitude of either extreme displacement, 6 cm."},{"q":"A particle moves between −A and +A. Its total range of displacement is…","o":["A","2A","A/2","4A"],"a":1,"e":"The distance between extremes is 2A, while amplitude is A."},{"q":"At equilibrium, the displacement is…","o":["equal to amplitude","zero","twice amplitude","always negative"],"a":1,"e":"Displacement is measured from the equilibrium position."},{"q":"At an extreme position in SHM, the displacement magnitude is…","o":["zero","A/2","A","2A"],"a":2,"e":"The extreme positions are x = ±A."},{"q":"If x = 0.08 cos(ωt) m, the amplitude is…","o":["0.04 m","0.08 m","0.16 m","ω m"],"a":1,"e":"The coefficient of the cosine function gives the amplitude."},{"q":"If x = 4 sin(ωt + φ) cm, the amplitude is…","o":["φ cm","2 cm","4 cm","8 cm"],"a":2,"e":"The amplitude is the magnitude of the sinusoidal coefficient, 4 cm."},{"q":"A particle has amplitude 0.2 m. Its maximum displacement magnitude is…","o":["0.1 m","0.2 m","0.4 m","2 m"],"a":1,"e":"Maximum displacement magnitude equals amplitude."},{"q":"If the amplitude doubles, the maximum displacement magnitude…","o":["halves","doubles","quadruples","does not change"],"a":1,"e":"Amplitude is defined as the maximum displacement magnitude."},{"q":"The amplitude of ideal SHM is determined by…","o":["the chosen oscillation's maximum displacement","the SI unit of frequency","the number of dimensions","the mass unit alone"],"a":0,"e":"Amplitude describes the maximum displacement reached in the motion."},{"q":"For x = A cos(ωt), the displacement at t = 0 is…","o":["0","A","−A","A/2"],"a":1,"e":"At t = 0, cos 0 = 1, so x = A."},{"q":"For x = A sin(ωt), the displacement at t = T/4 is…","o":["0","A","−A","A/2"],"a":1,"e":"At one-quarter period the phase is π/2, so x = A."},{"q":"In ideal SHM, speed at maximum amplitude is…","o":["maximum","zero","Aω²","constant and nonzero"],"a":1,"e":"At an extreme, the oscillator momentarily stops before reversing."},{"q":"In ideal SHM, the maximum speed is…","o":["Aω","A/ω","Aω²","ω/A"],"a":0,"e":"The maximum speed is v_max = Aω."},{"q":"In ideal SHM, maximum acceleration magnitude is…","o":["Aω","Aω²","A/ω","ω²/A"],"a":1,"e":"The maximum acceleration is a_max = Aω²."},{"q":"If amplitude doubles while angular frequency remains fixed, maximum speed…","o":["halves","doubles","quadruples","stays unchanged"],"a":1,"e":"Since v_max = Aω, doubling A doubles maximum speed."},{"q":"If amplitude doubles while angular frequency remains fixed, maximum acceleration magnitude…","o":["halves","doubles","quadruples","stays unchanged"],"a":1,"e":"Since a_max = Aω², doubling A doubles maximum acceleration."},{"q":"For a spring oscillator, total energy is related to amplitude by…","o":["E = kA","E = ½kA²","E = A/k","E = k/A²"],"a":1,"e":"The total mechanical energy is E = ½kA²."},{"q":"If the amplitude of a spring oscillator doubles, its total energy becomes…","o":["half","twice","four times","unchanged"],"a":2,"e":"Because E ∝ A², doubling amplitude makes energy four times as large."},{"q":"Amplitude is a…","o":["vector with direction","scalar magnitude","unit of time","measure of frequency"],"a":1,"e":"Amplitude is a non-negative scalar quantity."},{"q":"Which statement is correct about amplitude?","o":["It is always negative","It is the maximum distance from equilibrium during oscillation","It is the time for one oscillation","It is cycles per second"],"a":1,"e":"Amplitude is the maximum magnitude of displacement from equilibrium."},{"q":"If a body oscillates between 2 cm and 10 cm along a line, with equilibrium at 6 cm, the amplitude is…","o":["2 cm","4 cm","6 cm","8 cm"],"a":1,"e":"The distance from equilibrium (6 cm) to either extreme is 4 cm."},{"q":"If the maximum and minimum positions are +9 cm and −3 cm, and the midpoint is the equilibrium position, the amplitude is…","o":["3 cm","6 cm","9 cm","12 cm"],"a":1,"e":"The midpoint is 3 cm; the distance from it to either extreme is 6 cm."},{"q":"For x = A cos(ωt + φ), the allowed displacement always satisfies…","o":["x > A","−A ≤ x ≤ A","x ≥ 2A","x is always positive"],"a":1,"e":"Cosine ranges from −1 to +1, so displacement remains between −A and +A."},{"q":"If the amplitude is zero, the oscillator's displacement in this ideal model is…","o":["always A","always zero","always infinite","always −A"],"a":1,"e":"With A = 0, the displacement expression gives x = 0 at all times."},{"q":"Amplitude and time period have…","o":["the same SI unit","different physical dimensions","both dimensions of time","both dimensions of frequency"],"a":1,"e":"Amplitude has dimension of length, whereas time period has dimension of time."},{"q":"The amplitude of an oscillation is 15 mm. In metres this is…","o":["0.15 m","0.015 m","0.0015 m","1.5 m"],"a":1,"e":"15 mm = 15 × 10⁻³ m = 0.015 m."},{"q":"Which quantity is not the same as amplitude?","o":["maximum displacement magnitude","distance from equilibrium to an extreme","half the distance between extreme positions","total distance travelled in one complete oscillation"],"a":3,"e":"For motion between −A and +A, total path length in one cycle is 4A, not A."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+const wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Amplitude Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

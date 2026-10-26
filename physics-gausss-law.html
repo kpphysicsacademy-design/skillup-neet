@@ -1,24 +1,160 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Gauss's Law</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>⚡ Gauss's Law</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['Gauss’s law states that the net electric flux through a closed surface is','qε₀','q/ε₀','ε₀/q','q²/ε₀',1,'Gauss’s law gives Φ=q_enclosed/ε₀.'],
-['The SI unit of electric flux is','N/C','C/N','N·m²/C','N·C/m²',2,'Electric flux has unit (N/C)m²=N·m²/C.'],
-['According to Gauss’s law, the net flux through a closed surface depends on','the total area only','the shape only','the enclosed net charge','the surface volume only',2,'The net flux depends only on the net charge enclosed by the closed surface.'],
-['A Gaussian surface encloses no net charge. Its net electric flux is','positive','negative','zero','infinite',2,'Φ=q_enclosed/ε₀, so zero enclosed net charge gives zero net flux.'],
-['A point charge q is enclosed by a spherical Gaussian surface. The total flux is','q/(4πε₀r²)','q/ε₀','4πq/ε₀','zero',1,'The total flux through any closed surface enclosing q is q/ε₀.'],
-['If the radius of a spherical Gaussian surface around an isolated point charge is doubled, the total flux','doubles','becomes half','becomes one-fourth','remains unchanged',3,'The total flux remains q/ε₀; only the field and area separately change.'],
-['For a uniformly charged spherical shell, the electric field at a point inside the shell is','zero','maximum','kQ/r²','constant and nonzero',0,'A Gaussian surface inside the shell encloses no charge, so E=0.'],
-['Outside a spherically symmetric charged body, the electric field behaves as if','all charge were at infinity','the charge were concentrated at the centre','there were no charge','the radius were zero only',1,'For spherical symmetry, the external field is E=kQ/r², equivalent to a point charge Q at the centre.'],
-['For an infinitely long uniformly charged straight wire, the magnitude of electric field at distance r varies as','r','1/r','1/r²','1/r³',1,'Gauss’s law gives E=λ/(2πε₀r), so E∝1/r.'],
-['For an infinite plane sheet of uniform charge density σ, the electric field magnitude is','σ/ε₀','σ/(2ε₀)','2σ/ε₀','zero',1,'For one infinite sheet, Gauss’s law gives E=σ/(2ε₀) on each side.'],
-['The electric field just outside a conductor in electrostatic equilibrium is','σ/ε₀ normal to the surface','σ/(2ε₀) tangential to the surface','zero everywhere','2σε₀',0,'Just outside a conductor, E=σ/ε₀ and the field is normal to the surface.'],
-['A charge of 8.85×10⁻¹² C is enclosed by a Gaussian surface. Taking ε₀=8.85×10⁻¹² C²/(N·m²), the flux is','0.1 N·m²/C','1 N·m²/C','8.85 N·m²/C','78.3 N·m²/C',1,'Φ=q/ε₀=(8.85×10⁻¹²)/(8.85×10⁻¹²)=1 N·m²/C.'],
-['A Gaussian sphere encloses a net charge of 2 μC. Taking ε₀=8.85×10⁻¹² C²/(N·m²), the flux is approximately','2.26×10⁵ N·m²/C','2.26×10⁻⁶ N·m²/C','1.77×10⁻⁵ N·m²/C','4.42×10⁻¹⁸ N·m²/C',0,'Φ=q/ε₀=(2×10⁻⁶)/(8.85×10⁻¹²)≈2.26×10⁵ N·m²/C.'],
-['A closed Gaussian surface contains +3 μC and −1 μC. The net flux is approximately','2.26×10⁵ N·m²/C','3.39×10⁵ N·m²/C','1.13×10⁵ N·m²/C','zero',0,'Net enclosed charge is +2 μC, so Φ≈(2×10⁻⁶)/(8.85×10⁻¹²)=2.26×10⁵ N·m²/C.'],
-['Gauss’s law is especially useful for calculating electric fields when the charge distribution has','no symmetry','high symmetry','only random symmetry','zero charge',1,'Spherical, cylindrical, and planar symmetries make the Gaussian-surface method particularly effective.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Gauss’s law concept quiz with 30 questions, worked explanations, and end-of-quiz review.">
+<title>SkillUp | Gauss’s Law — Duolingo-Style Concept Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}
+.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.option{min-height:56px;line-height:1.4}
+.feedback{font-weight:650}
+@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Gauss’s Law</h1><p class="muted">Learn Gauss’s law step by step: electric flux, enclosed charge, Gaussian surfaces, and applications to spherical, cylindrical and planar symmetry. Remember: net flux through a closed surface is determined by the net charge enclosed.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Gauss’s law relates the net electric flux through a closed surface to…","o":["The surface area only","The net charge enclosed","The charge outside only","The surface shape only"],"a":1,"e":"Gauss’s law is \\\\(\\oint \\vec E\\cdot d\\vec A=Q_{\\text{enclosed}}/\\varepsilon_0\\\\). Only the net enclosed charge determines total flux."},{"q":"Which expression is Gauss’s law in integral form?","o":["\\\\(\\oint \\vec E\\cdot d\\vec A=Q_{\\rm enc}/\\varepsilon_0\\\\)","\\\\(E=Q/r\\\\)","\\\\(\\Phi=EA\\sin\\theta\\\\)","\\\\(Q=E\\varepsilon_0 A^2\\\\)"],"a":0,"e":"The closed-surface integral of the electric field dot the outward area element equals enclosed net charge divided by \\\\(\\varepsilon_0\\\\)."},{"q":"The SI unit of electric flux is…","o":["N/C","C/N","N·m²/C","C/m²"],"a":2,"e":"Electric flux has units of electric field times area: \\\\( (N/C)m^2=N\\cdot m^2/C\\\\)."},{"q":"A closed surface encloses zero net charge. Its net electric flux is…","o":["Always positive","Always negative","Zero","Infinite"],"a":2,"e":"Since \\\\(Q_{\\rm enc}=0\\\\), Gauss’s law gives zero net flux, even if the electric field is nonzero at points on the surface."},{"q":"A closed surface encloses a charge \\\\(q\\\\). Its net flux is…","o":["\\\\(q/(4\\pi\\varepsilon_0 r^2)\\\\)","\\\\(q/\\varepsilon_0\\\\)","\\\\(4\\pi q/\\varepsilon_0\\\\)","\\\\(0\\\\)"],"a":1,"e":"The total flux is \\\\(\\Phi=q/\\varepsilon_0\\\\), independent of the surface’s size or shape."},{"q":"If the radius of a Gaussian sphere around a point charge doubles, total flux…","o":["Doubles","Halves","Becomes one-fourth","Remains the same"],"a":3,"e":"Flux depends on enclosed charge, not Gaussian-surface radius: \\\\(\\Phi=q/\\varepsilon_0\\\\)."},{"q":"A Gaussian surface is an imaginary…","o":["Open surface only","Closed surface used to apply Gauss’s law","Physical conductor in every case","Surface with zero area"],"a":1,"e":"A Gaussian surface is a chosen closed mathematical surface used to relate flux to enclosed charge."},{"q":"For a point charge at the centre of a spherical Gaussian surface, the electric field is…","o":["Tangential everywhere","Radial and equal in magnitude over the sphere","Zero everywhere","Different in magnitude at every point"],"a":1,"e":"Spherical symmetry makes the radial field magnitude the same at every point on a sphere centred on the charge."},{"q":"For a spherically symmetric charge distribution, outside the distribution the field behaves as if…","o":["All charge were at the centre","All charge were on the surface only","No charge existed","The field were uniform"],"a":0,"e":"Outside a spherically symmetric distribution, \\\\(E=Q/(4\\pi\\varepsilon_0r^2)\\\\), as if net charge were concentrated at the centre."},{"q":"Inside a uniformly charged thin spherical shell, the electric field is…","o":["\\\\(Q/(4\\pi\\varepsilon_0r^2)\\\\)","Zero","\\\\(Qr/\\varepsilon_0\\\\)","Infinite"],"a":1,"e":"A Gaussian surface inside the shell encloses no charge; spherical symmetry and Gauss’s law give \\\\(E=0\\\\)."},{"q":"Outside a charged spherical shell of total charge Q, at radius r, the field magnitude is…","o":["\\\\(Q/(4\\pi\\varepsilon_0r^2)\\\\)","\\\\(Q/(4\\pi\\varepsilon_0r)\\\\)","\\\\(Qr^2/\\varepsilon_0\\\\)","\\\\(0\\\\)"],"a":0,"e":"For an outside Gaussian sphere, \\\\(E(4\\pi r^2)=Q/\\varepsilon_0\\\\), giving the inverse-square field."},{"q":"For an infinitely long straight wire with linear charge density \\\\(\\lambda\\\\), the field at distance r is…","o":["\\\\(\\lambda/(2\\pi\\varepsilon_0r)\\\\)","\\\\(\\lambda/(4\\pi\\varepsilon_0r^2)\\\\)","\\\\(\\lambda r/(2\\varepsilon_0)\\\\)","\\\\(\\lambda/\\varepsilon_0r^2\\\\)"],"a":0,"e":"A cylindrical Gaussian surface gives \\\\(E(2\\pi rL)=\\lambda L/\\varepsilon_0\\\\), so \\\\(E=\\lambda/(2\\pi\\varepsilon_0r)\\\\)."},{"q":"For an infinitely long uniformly charged wire, electric field varies with distance as…","o":["\\\\(r\\\\)","\\\\(1/r\\\\)","\\\\(1/r^2\\\\)","\\\\(r^2\\\\)"],"a":1,"e":"The cylindrical result is \\\\(E=\\lambda/(2\\pi\\varepsilon_0r)\\\\), so \\\\(E\\propto1/r\\\\)."},{"q":"The electric field magnitude due to one infinite plane sheet with surface charge density σ is…","o":["\\\\(\\sigma/\\varepsilon_0\\\\)","\\\\(\\sigma/(2\\varepsilon_0)\\\\)","\\\\(2\\sigma/\\varepsilon_0\\\\)","\\\\(0\\\\)"],"a":1,"e":"A pillbox Gaussian surface has flux through two flat faces, yielding \\\\(2EA=\\sigma A/\\varepsilon_0\\\\)."},{"q":"The electric field just outside a charged conductor in electrostatic equilibrium is…","o":["Tangential to the surface","Normal to the surface, magnitude \\\\(\\sigma/\\varepsilon_0\\\\)","Always zero","\\\\(\\sigma/(2\\varepsilon_0)\\\\) tangential"],"a":1,"e":"The field at the conductor’s surface is perpendicular; just outside, \\\\(E=\\sigma/\\varepsilon_0\\\\) for local surface charge density σ."},{"q":"In electrostatic equilibrium, the electric field inside the material of a conductor is…","o":["Zero","\\\\(\\sigma/\\varepsilon_0\\\\)","Infinite","Always tangential"],"a":0,"e":"Free charges redistribute until the electric field inside the conducting material is zero."},{"q":"A charge of \\\\(8.85\\times10^{-12}\\\\) C is enclosed. If \\\\(\\varepsilon_0=8.85\\times10^{-12}\\\\) C²/(N·m²), flux is…","o":["0.1 N·m²/C","1 N·m²/C","8.85 N·m²/C","78.3 N·m²/C"],"a":1,"e":"\\\\(\\Phi=Q/\\varepsilon_0=1\\\\) N·m²/C because the numerical values of Q and ε₀ match."},{"q":"A closed surface encloses +3 μC and −1 μC. The net flux is approximately…","o":["\\\\(2.26\\times10^5\\\\) N·m²/C","\\\\(3.39\\times10^5\\\\) N·m²/C","\\\\(1.13\\times10^5\\\\) N·m²/C","Zero"],"a":0,"e":"Net enclosed charge is +2 μC. Thus \\\\(\\Phi=(2\\times10^{-6})/(8.85\\times10^{-12})\\approx2.26\\times10^5\\\\) N·m²/C."},{"q":"A closed surface contains equal charges +q and −q. The net flux is…","o":["\\\\(q/\\varepsilon_0\\\\)","\\\\(-q/\\varepsilon_0\\\\)","Zero","\\\\(2q/\\varepsilon_0\\\\)"],"a":2,"e":"The enclosed net charge is zero, so the net flux is zero; individual field contributions need not be zero."},{"q":"A charge lies outside a closed Gaussian surface. Its contribution to the net flux through that surface is…","o":["Always positive","Always negative","Zero net contribution","Equal to q/ε₀"],"a":2,"e":"External field lines that enter a closed surface also leave it, so their net flux contribution is zero."},{"q":"Which symmetry is best suited to a cylindrical Gaussian surface?","o":["An infinitely long straight charged wire","A point charge only","A finite irregular cluster","A short dipole only"],"a":0,"e":"Cylindrical symmetry makes the field magnitude constant on the curved side of a coaxial cylinder around a long charged wire."},{"q":"Which Gaussian surface is most useful for an infinite plane sheet?","o":["A cube with arbitrary orientation","A pillbox crossing the sheet","A sphere centred on the sheet","An open circle"],"a":1,"e":"A pillbox has two faces parallel to the sheet; the field is normal to those faces, simplifying flux calculation."},{"q":"Why is Gauss’s law especially useful for highly symmetric charge distributions?","o":["It removes the need to know enclosed charge","It makes E constant or zero over useful parts of the chosen surface","It applies only when E is zero","It changes the value of ε₀"],"a":1,"e":"Symmetry lets the field be taken outside the flux integral on portions where its magnitude is constant."},{"q":"For a point charge q, if the enclosed charge is doubled, total flux…","o":["Halves","Doubles","Remains unchanged","Becomes zero"],"a":1,"e":"Since \\\\(\\Phi=Q_{\\rm enc}/\\varepsilon_0\\\\), flux is directly proportional to net enclosed charge."},{"q":"A cube is placed in a uniform electric field and encloses no charge. The total flux through all six faces is…","o":["\\\\(EA\\\\)","\\\\(6EA\\\\)","Zero","Always positive"],"a":2,"e":"Flux entering the cube is balanced by flux leaving it; Gauss’s law gives zero net flux when no net charge is enclosed."},{"q":"Does zero net flux prove that the electric field is zero everywhere on a closed surface?","o":["Yes, always","No; positive and negative flux can cancel","Yes, if the surface is a sphere","Only for a conductor"],"a":1,"e":"Zero net flux only means the algebraic total is zero; the field may be nonzero at many surface points."},{"q":"For a point charge, if the distance r from the charge doubles, field magnitude becomes…","o":["Twice as large","Half as large","One-fourth as large","Unchanged"],"a":2,"e":"The point-charge field follows \\\\(E\\propto1/r^2\\\\); doubling r reduces E to one-fourth."},{"q":"A long charged wire has \\\\(\\lambda=2\\times10^{-6}\\\\) C/m. At radius r, which formula gives the field magnitude?","o":["\\\\(\\lambda/(2\\pi\\varepsilon_0r)\\\\)","\\\\(\\lambda/(4\\pi\\varepsilon_0r^2)\\\\)","\\\\(\\lambda r/(2\\pi\\varepsilon_0)\\\\)","\\\\(\\lambda/\\varepsilon_0\\\\)"],"a":0,"e":"The Gaussian cylinder gives \\\\(E=\\lambda/(2\\pi\\varepsilon_0r)\\\\); substitute λ and r to calculate a numerical value."},{"q":"For a thin spherical shell with total charge Q, the field at a point inside the shell is zero because…","o":["The shell contains no charge anywhere","A Gaussian surface inside encloses no net charge and symmetry applies","Electric field cannot pass through a sphere","ε₀ is infinite"],"a":1,"e":"Spherical symmetry plus zero enclosed charge implies zero field inside a uniformly charged thin spherical shell."},{"q":"Which statement about Gauss’s law is correct?","o":["It applies only to spherical surfaces","It applies to any closed surface, though symmetry helps calculate E","It gives flux through open surfaces only","It says electric field always equals zero"],"a":1,"e":"Gauss’s law is valid for any closed surface; choosing a symmetric Gaussian surface makes solving for E easier."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Gauss’s Law Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

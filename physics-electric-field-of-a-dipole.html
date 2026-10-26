@@ -1,28 +1,155 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Electric Field of a Dipole</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>⚡ Electric Field of a Dipole</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['The electric field of a short dipole at a far axial point varies with distance r as','1/r','1/r²','1/r³','1/r⁴',2,'For a short dipole, the far axial field varies as 1/r³.'],
-['At a far axial point of a short dipole, the electric field magnitude is','kp/r³','2kp/r³','kp/r²','2kp/r²',1,'For an axial point far from the dipole, E≈2kp/r³, where k=1/(4πε₀).'],
-['At a far equatorial point of a short dipole, the electric field magnitude is','kp/r³','2kp/r³','kp/r²','2kp/r²',0,'For an equatorial point far from the dipole, E≈kp/r³.'],
-['At the same far distance from a short dipole, the axial field magnitude is compared with the equatorial field magnitude','equal','twice','half','four times',1,'Eaxial≈2kp/r³ while Eequatorial≈kp/r³, so the axial field is twice as large.'],
-['The electric field at a point on the equatorial line of a dipole is directed','along the dipole moment','opposite to the dipole moment','perpendicular to the dipole axis and away from the centre','randomly',1,'On the equatorial line, the net field is opposite to the dipole moment.'],
-['For a dipole ±q separated by 2a, the exact axial field at distance r from its centre is','kq/(r²+a²)','2kpr/(r²−a²)²','kp/r²','2kp/r³',1,'Using p=2qa, the exact axial field is E=2kpr/(r²−a²)².'],
-['For a dipole ±q separated by 2a, the exact equatorial field at distance r from its centre has magnitude','kp/(r²+a²)^(3/2)','2kp/r³','kp/(r²−a²)','2kpr/(r²−a²)²',0,'The exact equatorial field magnitude is E=kp/(r²+a²)^(3/2), directed opposite to p.'],
-['At the midpoint of a dipole with charges +q and −q separated by 2a, the electric field magnitude is','kq/a²','2kq/a²','kq/(2a²)','zero',1,'The fields due to both charges point from +q toward −q and add, giving E=2kq/a².'],
-['At a far point on the axial line, if the dipole moment is doubled, the electric field magnitude','becomes half','remains unchanged','doubles','becomes four times',2,'The far-field dipole electric field is directly proportional to p.'],
-['At a far point from a dipole, if the distance is doubled, the electric field magnitude becomes','2 times','1/2','1/4','1/8',3,'Since E∝1/r³, doubling r reduces E by a factor of 8.'],
-['The far electric field of a dipole decreases with distance faster than the field of a point charge because it varies as','1/r','1/r²','1/r³','r³',2,'A point-charge field varies as 1/r², whereas a dipole far field varies as 1/r³.'],
-['A dipole is placed in a uniform electric field. The net force on the dipole is','always qE','always 2qE','zero','infinite',2,'The equal and opposite forces on the two charges cancel in a uniform field.'],
-['For a dipole in a uniform electric field, the torque magnitude is','pE sinθ','pE cosθ','p/E','E/p',0,'The torque on a dipole is τ=pE sinθ.'],
-['A short dipole has p=2×10⁻⁸ C·m. At a far axial point 1 m away in vacuum, its field magnitude is approximately','18 N/C','36 N/C','1.8×10⁻⁸ N/C','3.6×10⁻⁷ N/C',1,'E≈2kp/r³=2(9×10⁹)(2×10⁻⁸)=360 N/C. Correct option should be 360 N/C.'],
-['A short dipole has p=4×10⁻⁸ C·m. At a far equatorial point 2 m away in vacuum, its field magnitude is approximately','45 N/C','90 N/C','22.5 N/C','11.25 N/C',2,'E≈kp/r³=(9×10⁹)(4×10⁻⁸)/8=45 N/C. Correct option should be 45 N/C.']
-];
-// Correct the numerical option keys above to match their computed values.
-qs[13]=['A short dipole has p=2×10⁻⁸ C·m. At a far axial point 1 m away in vacuum, its field magnitude is approximately','18 N/C','360 N/C','1.8×10⁻⁸ N/C','3.6×10⁻⁷ N/C',1,'E≈2kp/r³=2(9×10⁹)(2×10⁻⁸)=360 N/C.'];
-qs[14]=['A short dipole has p=4×10⁻⁸ C·m. At a far equatorial point 2 m away in vacuum, its field magnitude is approximately','45 N/C','90 N/C','22.5 N/C','11.25 N/C',0,'E≈kp/r³=(9×10⁹)(4×10⁻⁸)/8=45 N/C.'];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Electric Field of a Dipole quiz with 30 MathJax questions, explanations, and wrong-answer review.">
+<title>SkillUp | Electric Field of a Dipole — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Electric Field of a Dipole</h1><p class="muted">Practice axial and equatorial dipole fields, field direction, inverse-cube dependence, and numerical problems with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"For a short dipole with moment p, the electric field magnitude on its axial line at a far point r is…","o":["\\(kp/r^2\\)","\\(2kp/r^3\\)","\\(kp/r^3\\)","\\(2kp/r^2\\)"],"a":1,"e":"For \\(r\\gg a\\), the axial field magnitude is \\(E=2kp/r^3\\), where \\(k=1/(4\\pi\\varepsilon_0)\\)."},{"q":"For a short dipole at a far equatorial point r, the electric field magnitude is…","o":["\\(2kp/r^3\\)","\\(kp/r^3\\)","\\(kp/r^2\\)","\\(2kp/r^2\\)"],"a":1,"e":"The equatorial field magnitude is \\(E=kp/r^3\\) for a short dipole."},{"q":"At the same large distance from a short dipole, the axial field magnitude is…","o":["Equal to the equatorial field","Twice the equatorial field","Half the equatorial field","Four times the equatorial field"],"a":1,"e":"The axial magnitude is \\(2kp/r^3\\), twice the equatorial magnitude \\(kp/r^3\\)."},{"q":"On the axial line far from a dipole, the electric field direction is…","o":["Along the dipole moment vector","Opposite to the dipole moment vector","Perpendicular to the dipole axis","Always zero"],"a":0,"e":"Outside the dipole on the axial line, the far-field vector points along \\(\\vec p\\)."},{"q":"On the equatorial line, the electric field of a dipole points…","o":["Along \\(\\vec p\\)","Opposite to \\(\\vec p\\)","Perpendicular to \\(\\vec p\\)","In the same direction as both charge forces"],"a":1,"e":"The equatorial field is opposite to the dipole moment vector."},{"q":"For a short dipole, field magnitude at a far point varies with distance as…","o":["\\(1/r\\)","\\(1/r^2\\)","\\(1/r^3\\)","\\(1/r^4\\)"],"a":2,"e":"The leading far-field term of a dipole decreases as the inverse cube of distance."},{"q":"If the distance from a short dipole doubles, the far-field magnitude becomes…","o":["\\(E/2\\)","\\(E/4\\)","\\(E/8\\)","\\(E/16\\)"],"a":2,"e":"Since \\(E\\propto r^{-3}\\), doubling r reduces E by a factor of 8."},{"q":"If the dipole moment doubles at the same point, the dipole field magnitude…","o":["Halves","Doubles","Quadruples","Does not change"],"a":1,"e":"Both axial and equatorial field magnitudes are proportional to p."},{"q":"The constant k in the vacuum dipole-field formula is…","o":["\\(4\\pi\\varepsilon_0\\)","\\(1/(4\\pi\\varepsilon_0)\\)","\\(\\varepsilon_0/(4\\pi)\\)","\\(4\\pi/\\varepsilon_0\\)"],"a":1,"e":"Coulomb's constant is \\(k=1/(4\\pi\\varepsilon_0)\\)."},{"q":"A short dipole has p = \\(2\\times10^{-8}\\,\\text{C m}\\). Its axial field at r = 0.2 m (take k = \\(9\\times10^9\\)) is…","o":["\\(2.25\\times10^4\\,\\text{N/C}\\)","\\(4.5\\times10^4\\,\\text{N/C}\\)","\\(9\\times10^3\\,\\text{N/C}\\)","\\(9\\times10^4\\,\\text{N/C}\\)"],"a":1,"e":"\\(E=2kp/r^3=(2)(9\\times10^9)(2\\times10^{-8})/(0.2)^3=4.5\\times10^4\\,\\text{N/C}\\)."},{"q":"For the same dipole in Question 10, the equatorial field magnitude at 0.2 m is…","o":["\\(2.25\\times10^4\\,\\text{N/C}\\)","\\(4.5\\times10^4\\,\\text{N/C}\\)","\\(9\\times10^4\\,\\text{N/C}\\)","\\(1.8\\times10^5\\,\\text{N/C}\\)"],"a":0,"e":"\\(E=kp/r^3=(9\\times10^9)(2\\times10^{-8})/(0.2)^3=2.25\\times10^4\\,\\text{N/C}\\)."},{"q":"The axial dipole field formula is a good approximation when…","o":["\\(r\\ll a\\)","\\(r\\gg a\\)","\\(r=a\\) exactly","The dipole moment is zero"],"a":1,"e":"The short-dipole approximation assumes observation distance much greater than the charge separation scale."},{"q":"For charges ±q separated by 2a, the dipole moment magnitude is…","o":["\\(qa\\)","\\(2qa\\)","\\(q/(2a)\\)","\\(4qa\\)"],"a":1,"e":"\\(p=q(2a)=2qa\\)."},{"q":"At an axial point far away, the field from the dipole is approximately…","o":["\\(\\frac{1}{4\\pi\\varepsilon_0}\\frac{2p}{r^3}\\)","\\(\\frac{1}{4\\pi\\varepsilon_0}\\frac{p}{r^2}\\)","\\(\\frac{1}{4\\pi\\varepsilon_0}\\frac{p}{r}\\)","\\(\\frac{1}{4\\pi\\varepsilon_0}\\frac{p}{r^4}\\)"],"a":0,"e":"Using \\(k=1/(4\\pi\\varepsilon_0)\\), the axial far-field is \\(2kp/r^3\\)."},{"q":"At an equatorial point far away, the field vector is approximately…","o":["\\(+kp\\hat p/r^3\\)","\\(-kp\\hat p/r^3\\)","\\(+2kp\\hat p/r^3\\)","Zero everywhere"],"a":1,"e":"The equatorial field vector points opposite to \\(\\vec p\\), with magnitude \\(kp/r^3\\)."},{"q":"The electric field due to a dipole is a vector because…","o":["It has magnitude only","It has magnitude and direction","It is always constant","It has no units"],"a":1,"e":"Electric field has both magnitude and direction; the dipole field is a vector field."},{"q":"If the observation distance triples, a short-dipole far-field magnitude becomes…","o":["\\(E/3\\)","\\(E/9\\)","\\(E/27\\)","\\(27E\\)"],"a":2,"e":"The inverse-cube relation gives \\(E'=E/3^3=E/27\\)."},{"q":"At a far axial point, if p = \\(5\\times10^{-9}\\,\\text{C m}\\), r = 0.1 m and k = \\(9\\times10^9\\), E is…","o":["\\(9\\times10^4\\,\\text{N/C}\\)","\\(9\\times10^5\\,\\text{N/C}\\)","\\(4.5\\times10^5\\,\\text{N/C}\\)","\\(1.8\\times10^5\\,\\text{N/C}\\)"],"a":1,"e":"\\(E=2kp/r^3=(2)(9\\times10^9)(5\\times10^{-9})/(0.1)^3=9\\times10^5\\,\\text{N/C}\\)."},{"q":"For a far equatorial point, with p = \\(5\\times10^{-9}\\,\\text{C m}\\), r = 0.1 m and k = \\(9\\times10^9\\), E is…","o":["\\(4.5\\times10^5\\,\\text{N/C}\\)","\\(9\\times10^5\\,\\text{N/C}\\)","\\(1.8\\times10^5\\,\\text{N/C}\\)","\\(9\\times10^4\\,\\text{N/C}\\)"],"a":0,"e":"\\(E=kp/r^3=(9\\times10^9)(5\\times10^{-9})/(0.1)^3=4.5\\times10^5\\,\\text{N/C}\\)."},{"q":"Which statement correctly compares dipole and point-charge far fields?","o":["Dipole field falls as \\(1/r^2\\), point charge as \\(1/r^3\\)","Dipole field falls as \\(1/r^3\\), point charge as \\(1/r^2\\)","Both fall as \\(1/r\\)","Both are independent of distance"],"a":1,"e":"A point-charge field varies as \\(1/r^2\\), while a dipole's leading far-field term varies as \\(1/r^3\\)."},{"q":"For an ideal dipole, the net charge is…","o":["\\(+q\\)","\\(-q\\)","\\(2q\\)","Zero"],"a":3,"e":"The charges +q and −q sum to zero."},{"q":"The equatorial field magnitude of a short dipole at far distance r is proportional to…","o":["\\(p/r^3\\)","\\(p/r^2\\)","\\(r^3/p\\)","\\(p^2r\\)"],"a":0,"e":"\\(E_{eq}=kp/r^3\\)."},{"q":"The axial field magnitude of a short dipole at far distance r is proportional to…","o":["\\(p/r^3\\)","\\(2p/r^3\\)","\\(p/r^2\\)","\\(r^3/p\\)"],"a":1,"e":"\\(E_{ax}=2kp/r^3\\)."},{"q":"The field at the center of a real dipole (between its charges) is best obtained by…","o":["Using the far-field approximation without checking","Superposing the fields from +q and −q","Setting it automatically to zero","Ignoring one charge"],"a":1,"e":"The short-dipole far-field formula is not valid near the charges; use Coulomb's law and superposition."},{"q":"At an equatorial point, the electric fields due to +q and −q have…","o":["Opposite transverse components that cancel and axial components that add","Equal and opposite vectors that cancel entirely","Only transverse components","No relation to dipole axis"],"a":0,"e":"The transverse components cancel by symmetry; the components along the dipole axis add opposite to p."},{"q":"At a far axial point, the fields due to +q and −q point…","o":["In opposite directions and cancel","In the same direction and add","Perpendicular to the axis","Both toward the dipole center"],"a":1,"e":"On the outside axial line, the contributions point along the dipole moment and add."},{"q":"Which formula represents the axial far-field magnitude?","o":["\\(E=kp/r^3\\)","\\(E=2kp/r^3\\)","\\(E=kp/r^2\\)","\\(E=2kp/r^2\\)"],"a":1,"e":"The axial field magnitude is twice the equatorial field magnitude at equal far distance."},{"q":"Which formula represents the equatorial far-field magnitude?","o":["\\(E=2kp/r^3\\)","\\(E=kp/r^3\\)","\\(E=kp/r^2\\)","\\(E=2kp/r^2\\)"],"a":1,"e":"The equatorial magnitude is \\(kp/r^3\\), directed opposite to the dipole moment."},{"q":"A dipole field is strongest at fixed r when the dipole moment magnitude is…","o":["Zero","Smaller","Larger","Independent of p"],"a":2,"e":"Both far-field magnitudes are proportional to the dipole moment p."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;,score=0,streak=0,chosen=null,locked=false;,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Electric Field of a Dipole Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

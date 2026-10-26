@@ -3,61 +3,152 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Doppler Effect</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Doppler Effect quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Doppler Effect — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
-.wrap{max-width:760px;margin:auto;padding:22px}
-.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
-h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}
-.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
-.fill{height:100%;width:0;background:#4caf50;transition:.3s}
-.q{font-size:20px;font-weight:700;margin-bottom:18px}
-.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
-.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}
-.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
-.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}
-.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}
-@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-<div class="wrap"><div class="card">
-<h1>🚗 Doppler Effect</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div id="quiz"></div><div class="xp" id="xp"></div>
-<button class="next hide" id="next">Next Question →</button>
-<div id="result" class="hide"></div>
-<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>〰️ Doppler Effect</h1><p class="muted">Practice nodes, antinodes, fixed-end strings, harmonics, frequencies, and standing-wave equations with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['The Doppler effect is the apparent change in','amplitude only','frequency due to relative motion between source and observer','speed of light only','mass of the source',1,'The Doppler effect is the apparent change in observed frequency caused by relative motion between the source and observer.'],
-['When a sound source approaches a stationary observer, the observed frequency is','greater than the source frequency','less than the source frequency','zero','unchanged in every case',0,'Approaching motion causes successive wavefronts to reach the observer more rapidly, increasing the observed frequency.'],
-['When a sound source moves away from a stationary observer, the observed frequency is','greater than the source frequency','less than the source frequency','infinite','always equal to zero',1,'Receding motion spreads successive wavefronts farther apart, decreasing the observed frequency.'],
-['For a stationary source and observer moving toward the source with speed vₒ, the observed frequency in a medium with sound speed v is','f(v−vₒ)/v','f(v+vₒ)/v','fvₒ/v only','f',1,'For an observer moving toward a stationary source, f′ = f(v+vₒ)/v.'],
-['For a stationary source and observer moving away from the source with speed vₒ, the observed frequency is','f(v+vₒ)/v','f(v−vₒ)/v','fv/vₒ','f(vₒ−v)/v',1,'For an observer moving away from a stationary source, f′ = f(v−vₒ)/v.'],
-['For a stationary observer and source moving toward the observer with speed vₛ, the observed frequency is','fv/(v−vₛ)','fv/(v+vₛ)','f(v−vₛ)/v','f(v+vₛ)/v',0,'For an approaching source, wavefronts are compressed and f′ = fv/(v−vₛ).'],
-['For a stationary observer and source moving away with speed vₛ, the observed frequency is','fv/(v−vₛ)','fv/(v+vₛ)','f(v+vₛ)/v','f',1,'For a receding source, f′ = fv/(v+vₛ).'],
-['If source and observer are both stationary relative to the medium, the observed frequency is','always double the source frequency','equal to the source frequency','zero','half the source frequency',1,'With no relative motion between source and observer, there is no Doppler shift.'],
-['A source of frequency 500 Hz approaches a stationary observer at 20 m/s. If sound speed is 340 m/s, the observed frequency is approximately','472 Hz','531 Hz','500 Hz','360 Hz',1,'For an approaching source, f′ = fv/(v−vₛ) = 500×340/(340−20) ≈ 531 Hz.'],
-['A stationary source emits 680 Hz. An observer moves toward it at 34 m/s. If sound speed is 340 m/s, the observed frequency is','612 Hz','748 Hz','680 Hz','714 Hz',1,'f′ = f(v+vₒ)/v = 680×374/340 = 748 Hz.'],
-['The Doppler effect in sound requires a relative motion between','only the source and Earth','source and observer','only the observer and medium','two observers',1,'A relative motion between the source and observer changes the frequency received by the observer.'],
-['For sound waves, the velocity used in the Doppler formula is the velocity of sound','relative to the source only','relative to the medium','relative to the observer only','always equal to zero',1,'The standard formula uses the wave speed v relative to the medium through which sound propagates.'],
-['If both source and observer move toward each other, the observed frequency is generally','f(v+vₒ)/(v−vₛ)','f(v−vₒ)/(v+vₛ)','f(v−vₛ)/(v+vₒ)','f(v+vₛ)/(v−vₒ)',0,'When both approach each other, f′ = f(v+vₒ)/(v−vₛ).'],
-['A siren of frequency 600 Hz is stationary and an observer moves away at 30 m/s. If sound speed is 330 m/s, the observed frequency is','655 Hz','545 Hz','600 Hz','330 Hz',1,'f′ = 600(330−30)/330 ≈ 545 Hz.'],
-['The Doppler effect can be used in practical applications such as','measuring motion and speed','changing the mass of an object','creating vacuum','measuring only temperature',0,'Doppler shifts are used to determine relative motion or speed in systems such as radar and medical ultrasound.']
-];
-let i=0,score=0,answered=false;
-const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
-$('next').onclick=next;render();
+(function(){
+'use strict';
+const questions = [{"q":"The Doppler effect is the apparent change in a wave's…","o":["Amplitude due only to distance","Frequency due to relative motion of source and observer","Speed caused by loudness","Wavelength due only to temperature"],"a":1,"e":"The Doppler effect is the apparent change in observed frequency caused by relative motion between source and observer."},{"q":"When a sound source approaches a stationary observer, the observed frequency is generally…","o":["Higher than emitted","Lower than emitted","Always zero","Unchanged in every case"],"a":0,"e":"Approaching motion brings wavefronts closer together, increasing the observed frequency."},{"q":"When a sound source moves away from a stationary observer, the observed frequency is generally…","o":["Higher","Lower","Infinite","Always unchanged"],"a":1,"e":"Receding motion spreads wavefronts farther apart, lowering the observed frequency."},{"q":"For a stationary source and observer moving toward the source, the observed frequency is…","o":["\\(f'=f\\frac{v-v_o}{v}\\)","\\(f'=f\\frac{v+v_o}{v}\\)","\\(f'=f\\frac{v}{v+v_o}\\)","\\(f'=f\\) always"],"a":1,"e":"An observer moving toward incoming sound encounters wavefronts faster: \\(f'=f(v+v_o)/v\\)."},{"q":"For a stationary source and observer moving away from it, the observed frequency is…","o":["\\(f'=f\\frac{v+v_o}{v}\\)","\\(f'=f\\frac{v-v_o}{v}\\)","\\(f'=f\\frac{v}{v-v_o}\\)","\\(f'=2f\\)"],"a":1,"e":"Moving away reduces the rate of encountering wavefronts: \\(f'=f(v-v_o)/v\\)."},{"q":"For a stationary observer and source approaching at speed \\(v_s\\), the observed frequency is…","o":["\\(f'=f\\frac{v}{v-v_s}\\)","\\(f'=f\\frac{v}{v+v_s}\\)","\\(f'=f\\frac{v-v_s}{v}\\)","\\(f'=f\\)"],"a":0,"e":"An approaching source compresses wavefronts ahead of it, giving \\(f'=fv/(v-v_s)\\)."},{"q":"For a stationary observer and source receding at speed \\(v_s\\), the observed frequency is…","o":["\\(f'=f\\frac{v}{v-v_s}\\)","\\(f'=f\\frac{v}{v+v_s}\\)","\\(f'=f\\frac{v+v_s}{v}\\)","\\(f'=2f\\)"],"a":1,"e":"A receding source stretches the wavefront spacing, giving \\(f'=fv/(v+v_s)\\)."},{"q":"In Doppler formulas for sound, v usually represents…","o":["Source speed only","Observer speed only","Sound speed in the medium","Observed frequency"],"a":2,"e":"The symbol v commonly denotes the speed of sound relative to the medium."},{"q":"A siren emits 500 Hz and approaches a stationary observer at 20 m/s. Take sound speed as 340 m/s. Observed frequency is approximately…","o":["472 Hz","500 Hz","531 Hz","560 Hz"],"a":2,"e":"\\(f'=500\\times340/(340-20)=531.25\\,\\text{Hz}\\), approximately 531 Hz."},{"q":"A 600 Hz source moves away from a stationary observer at 20 m/s. Take v = 340 m/s. The observed frequency is approximately…","o":["566.7 Hz","600 Hz","635.3 Hz","660 Hz"],"a":0,"e":"\\(f'=600\\times340/(340+20)=566.7\\,\\text{Hz}\\)."},{"q":"A stationary source emits 680 Hz. An observer approaches at 10 m/s; sound speed is 340 m/s. Observed frequency is…","o":["660 Hz","680 Hz","700 Hz","720 Hz"],"a":2,"e":"\\(f'=680(340+10)/340=700\\,\\text{Hz}\\)."},{"q":"A stationary source emits 680 Hz. An observer moves away at 10 m/s; sound speed is 340 m/s. Observed frequency is…","o":["660 Hz","680 Hz","700 Hz","720 Hz"],"a":0,"e":"\\(f'=680(340-10)/340=660\\,\\text{Hz}\\)."},{"q":"When source and observer move toward each other, the observed sound frequency generally…","o":["Increases","Decreases","Becomes zero","Cannot be predicted"],"a":0,"e":"Both motions increase the rate at which the observer encounters wavefronts."},{"q":"When source and observer move away from each other, the observed sound frequency generally…","o":["Increases","Decreases","Doubles","Becomes infinite"],"a":1,"e":"Their separation grows, so the observed frequency is lower."},{"q":"The Doppler effect for sound depends on relative motion with respect to…","o":["The medium","Only the Sun","The source's amplitude","The observer's mass"],"a":0,"e":"For sound, source and observer speeds are considered relative to the medium through which sound travels."},{"q":"If source and observer are stationary relative to the medium, observed frequency is…","o":["Zero","Half the emitted frequency","Equal to emitted frequency","Twice emitted frequency"],"a":2,"e":"With no relative motion, there is no Doppler shift: \\(f'=f\\)."},{"q":"A 400 Hz source and observer approach each other, with observer speed 10 m/s, source speed 15 m/s, and sound speed 340 m/s. Observed frequency is approximately…","o":["370 Hz","400 Hz","431 Hz","450 Hz"],"a":2,"e":"\\(f'=f(v+v_o)/(v-v_s)=400(350)/(325)\\approx430.8\\,\\text{Hz}\\)."},{"q":"A 400 Hz source and observer move away from each other at 10 m/s and 15 m/s respectively. With v = 340 m/s, observed frequency is approximately…","o":["342 Hz","371 Hz","400 Hz","430 Hz"],"a":1,"e":"\\(f'=400(340-15)/(340+10)=371.4\\,\\text{Hz}\\)."},{"q":"The observed pitch of an approaching ambulance siren rises mainly because…","o":["The siren emits a higher frequency as it approaches","Wavefronts reach the observer more frequently","Sound speed becomes infinite","Amplitude always increases"],"a":1,"e":"The apparent pitch rises because the wavefronts are compressed in front of the moving source."},{"q":"The change in observed frequency due to Doppler effect requires…","o":["Relative motion between source and observer","A change in source mass","A vacuum","A change in amplitude only"],"a":0,"e":"Relative motion is required for a Doppler shift in this basic sound-wave model."},{"q":"A source emits 1000 Hz and moves toward a stationary observer at 34 m/s. With sound speed 340 m/s, observed frequency is…","o":["900 Hz","1000 Hz","1100 Hz","1200 Hz"],"a":2,"e":"\\(f'=1000(340)/(340-34)=1111\\,\\text{Hz}\\), closest to about 1100 Hz."},{"q":"A 1000 Hz source moves away at 34 m/s. With v = 340 m/s, observed frequency is approximately…","o":["909 Hz","1000 Hz","1111 Hz","1200 Hz"],"a":0,"e":"\\(f'=1000(340)/(340+34)=909.1\\,\\text{Hz}\\)."},{"q":"If an observer moves toward a stationary source at speed \\(v_o\\), the frequency shift is caused by…","o":["A change in wave speed in the air","The observer encountering wavefronts more rapidly","The source wavelength changing","The source stopping oscillation"],"a":1,"e":"The wave speed in air remains the same; the moving observer meets wavefronts at a higher rate."},{"q":"For a moving source, the wavelength in front of the source is…","o":["Shorter when it approaches","Longer when it approaches","Always unchanged","Zero"],"a":0,"e":"An approaching source emits successive wavefronts from closer positions, shortening the wavelength ahead."},{"q":"For a moving source, the wavelength behind it is…","o":["Shorter","Longer","Always zero","Independent of source motion"],"a":1,"e":"As the source moves away from previously emitted wavefronts, the spacing behind it increases."},{"q":"A stationary observer hears 510 Hz from a source that emits 500 Hz. Assuming v = 340 m/s and source approaches, its speed is approximately…","o":["3.3 m/s","6.7 m/s","13.3 m/s","20 m/s"],"a":1,"e":"From \\(510=500(340)/(340-v_s)\\), \\(v_s=340(1-500/510)\\approx6.67\\,\\text{m/s}\\)."},{"q":"A stationary observer hears 450 Hz from a source emitting 500 Hz and moving away. If v = 340 m/s, source speed is approximately…","o":["17.8 m/s","37.8 m/s","50 m/s","75.6 m/s"],"a":1,"e":"From \\(450=500(340)/(340+v_s)\\), \\(v_s=340(500/450-1)\\approx37.8\\,\\text{m/s}\\)."},{"q":"A moving observer measures a lower frequency from a stationary source when the observer moves…","o":["Toward the source","Away from the source","At right angles while approaching","At rest"],"a":1,"e":"Moving away reduces the rate at which the observer encounters sound wavefronts."},{"q":"Which statement about the Doppler effect is correct?","o":["It changes the actual source frequency automatically","It is an apparent change in observed frequency due to relative motion","It occurs only for light","It requires amplitude to change"],"a":1,"e":"The Doppler effect changes the observed frequency; it does not mean the source's emitted frequency has changed."},{"q":"A sound source and observer move together at the same velocity relative to the air, maintaining constant separation. The observed frequency is…","o":["Higher than emitted","Lower than emitted","Equal to emitted","Always zero"],"a":2,"e":"They have no relative motion with respect to each other along the line of sight; with equal co-moving velocities, the observed wavefront rate matches the emitted frequency."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Doppler Effect Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
 </script>
-
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

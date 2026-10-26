@@ -3,61 +3,152 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Beats</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Beats quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Beats — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}
-.wrap{max-width:760px;margin:auto;padding:22px}
-.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}
-h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}
-.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}
-.fill{height:100%;width:0;background:#4caf50;transition:.3s}
-.q{font-size:20px;font-weight:700;margin-bottom:18px}
-.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}
-.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}
-.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}
-.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}
-.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}
-@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-<div class="wrap"><div class="card">
-<h1>🎵 Beats</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div id="quiz"></div><div class="xp" id="xp"></div>
-<button class="next hide" id="next">Next Question →</button>
-<div id="result" class="hide"></div>
-<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>〰️ Beats</h1><p class="muted">Practice nodes, antinodes, fixed-end strings, harmonics, frequencies, and standing-wave equations with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['Beats are produced when two sound waves have','the same frequency and amplitude','slightly different frequencies and nearly equal amplitudes','very different frequencies','zero amplitude',1,'Beats are produced by superposition of two waves with slightly different frequencies.'],
-['The beat frequency is equal to','f₁+f₂','f₁f₂','|f₁−f₂|','f₁/f₂',2,'The number of beats per second is the absolute difference between the two frequencies.'],
-['If two tuning forks have frequencies 256 Hz and 260 Hz, the beat frequency is','2 Hz','4 Hz','256 Hz','516 Hz',1,'Beat frequency = |260−256| = 4 Hz.'],
-['If the frequencies of two sound sources are 500 Hz and 505 Hz, the number of beats heard in 10 s is','5','10','50','505',2,'Beat frequency is 5 Hz, so 5 × 10 = 50 beats are heard.'],
-['For clearly audible beats, the two frequencies should be','exactly equal','slightly different','very far apart','zero',1,'A small frequency difference produces distinct periodic variations in loudness.'],
-['At the instant when two interfering sound waves are in phase, the resultant sound is generally','minimum','maximum','zero always','unchanged',1,'Constructive interference occurs when the waves are in phase, giving maximum amplitude.'],
-['At the instant when two equal-amplitude waves are exactly out of phase, their resultant amplitude is','maximum','double','zero','half',2,'For equal amplitudes with phase difference π, destructive interference gives zero resultant amplitude.'],
-['The loudness of sound during beats','remains constant','alternately increases and decreases','only increases','only decreases',1,'Superposition causes periodic constructive and destructive interference, so loudness varies periodically.'],
-['Two sound sources of 400 Hz and 404 Hz produce beats at','1 Hz','2 Hz','4 Hz','804 Hz',2,'Beat frequency = |404−400| = 4 Hz.'],
-['A tuning fork of frequency 256 Hz produces 6 beats per second with another fork. The possible frequency of the other fork is','250 Hz only','262 Hz only','250 Hz or 262 Hz','256 Hz only',2,'The second frequency can be 256−6 = 250 Hz or 256+6 = 262 Hz.'],
-['If the beat frequency between two sources decreases from 5 Hz to 2 Hz, their frequencies have become','farther apart','closer together','both zero','necessarily equal',1,'Beat frequency is the frequency difference, so a smaller beat frequency means the source frequencies are closer.'],
-['Beats can be used to','measure or compare frequencies','measure mass directly','determine charge directly','eliminate sound completely',0,'The beat method is useful for comparing an unknown frequency with a known frequency.'],
-['A known tuning fork of 512 Hz gives 3 beats per second with an unknown fork. The unknown frequency can be','509 Hz or 515 Hz','510 Hz or 514 Hz','512 Hz only','3 Hz or 512 Hz',0,'Using |f−512|=3 gives f=509 Hz or 515 Hz.'],
-['When one of two tuning forks is loaded with wax and its frequency decreases, the change in beat frequency can help determine','whether the original frequencies were equal or unequal','the mass of the Earth','the speed of light','the wavelength of visible light',0,'Changing one fork frequency changes the beat frequency, which helps compare the original frequencies.'],
-['For two waves with frequencies f₁ and f₂, the time interval between successive loudness maxima is','1/(f₁+f₂)','1/|f₁−f₂|','|f₁−f₂|','f₁f₂',1,'Beat frequency is |f₁−f₂|, so the beat period is its reciprocal.']
-];
-let i=0,score=0,answered=false;
-const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
-$('next').onclick=next;render();
+(function(){
+'use strict';
+const questions = [{"q":"Beats are produced when two beats have…","o":["Exactly the same frequency and phase at all times","Slightly different frequencies and superpose","Very different amplitudes only","Different speeds in vacuum"],"a":1,"e":"Beats arise from interference of waves with slightly different frequencies, causing periodic changes in resultant amplitude."},{"q":"The beat frequency is…","o":["\\(f_1+f_2\\)","\\(|f_1-f_2|\\)","\\(f_1f_2\\)","\\(f_1/f_2\\)"],"a":1,"e":"The number of beats per second is the absolute difference: \\(f_b=|f_1-f_2|\\)."},{"q":"Two tuning forks have frequencies 256 Hz and 260 Hz. The beat frequency is…","o":["4 Hz","16 Hz","256 Hz","516 Hz"],"a":0,"e":"\\(f_b=|260-256|=4\\,\\text{Hz}\\)."},{"q":"If two sound sources have frequencies 440 Hz and 444 Hz, beats per second are…","o":["1","2","4","884"],"a":2,"e":"\\(f_b=|444-440|=4\\,\\text{Hz}\\)."},{"q":"A listener hears 6 beats per second with a 300 Hz reference tone. The unknown frequency could be…","o":["294 Hz only","306 Hz only","294 Hz or 306 Hz","300 Hz only"],"a":2,"e":"Since \\(|f-300|=6\\), the possibilities are 294 Hz and 306 Hz."},{"q":"If two sources have exactly equal frequencies and similar amplitudes, the beat frequency is…","o":["Zero","One beat per second","Equal to their frequency","Infinite"],"a":0,"e":"Equal frequencies give \\(f_b=|f_1-f_2|=0\\), so there is no periodic beat pattern."},{"q":"The loudness variation in beats occurs because the waves alternately…","o":["Stop travelling","Reinforce and cancel partially","Change frequency to zero","Become electromagnetic"],"a":1,"e":"Their phase relationship changes with time, alternating between constructive and destructive interference."},{"q":"At constructive interference, the resultant amplitude for two in-phase waves of amplitudes A₁ and A₂ is…","o":["\\(|A_1-A_2|\\)","\\(A_1+A_2\\)","Zero always","\\(A_1A_2\\)"],"a":1,"e":"When in phase, the displacements add, giving amplitude \\(A_1+A_2\\)."},{"q":"For two equal-amplitude waves in exact opposite phase, the resultant amplitude is…","o":["\\(2A\\)","\\(A\\)","Zero","\\(4A\\)"],"a":2,"e":"Equal amplitudes with a phase difference of π cancel completely at that instant."},{"q":"Two frequencies are 500 Hz and 508 Hz. The time between successive loudness maxima is…","o":["0.125 s","0.25 s","0.5 s","8 s"],"a":0,"e":"The beat frequency is 8 Hz, so the beat period is \\(T_b=1/f_b=1/8=0.125\\,\\text{s}\\)."},{"q":"If the beat frequency is 5 Hz, the time between successive beats is…","o":["0.2 s","0.5 s","5 s","10 s"],"a":0,"e":"\\(T_b=1/f_b=1/5=0.2\\,\\text{s}\\)."},{"q":"Two waves of frequencies 400 Hz and 404 Hz produce a beat frequency of…","o":["2 Hz","4 Hz","402 Hz","804 Hz"],"a":1,"e":"\\(f_b=|404-400|=4\\,\\text{Hz}\\)."},{"q":"A 256 Hz tuning fork produces 4 beats per second with an unknown fork. The unknown frequency may be…","o":["252 Hz or 260 Hz","250 Hz only","260 Hz only","256 Hz only"],"a":0,"e":"\\(|f-256|=4\\), so f may be 252 Hz or 260 Hz."},{"q":"When a small piece of wax is attached to a tuning fork, its frequency generally…","o":["Increases","Decreases","Becomes zero","Does not change"],"a":1,"e":"Added mass lowers the tuning fork's natural frequency."},{"q":"A tuning fork gives 3 beats per second with a 320 Hz fork. If adding wax to the unknown fork reduces the beat rate, the unknown fork's original frequency was…","o":["Above 320 Hz","Below 320 Hz","Exactly 320 Hz","Impossible to infer"],"a":0,"e":"Adding wax lowers the unknown frequency. If the beat rate decreases, the unknown was above 320 Hz and moves closer to it."},{"q":"A 400 Hz fork and an unknown fork produce 5 beats/s. After wax is added to the unknown fork, the beat rate rises. The unknown fork was initially…","o":["Above 400 Hz","Below 400 Hz","Exactly 400 Hz","Zero Hz"],"a":1,"e":"Wax lowers the unknown frequency. If the difference from 400 Hz increases, the unknown was initially below 400 Hz."},{"q":"The beat frequency from 600 Hz and 596 Hz sources is…","o":["2 Hz","4 Hz","596 Hz","1196 Hz"],"a":1,"e":"\\(f_b=|600-596|=4\\,\\text{Hz}\\)."},{"q":"If two close frequencies are 200 Hz and 202 Hz, their average frequency is…","o":["1 Hz","2 Hz","201 Hz","402 Hz"],"a":2,"e":"The average is \\((200+202)/2=201\\,\\text{Hz}\\)."},{"q":"In a beat phenomenon, the rapid oscillation frequency is approximately…","o":["The average of the two frequencies","Their difference only","Always 1 Hz","Zero"],"a":0,"e":"The sound oscillates rapidly near the mean frequency while its amplitude envelope varies at the beat frequency."},{"q":"A pair of tones produces 7 beats per second. Their frequency difference is…","o":["3.5 Hz","7 Hz","14 Hz","Cannot be related"],"a":1,"e":"Beat frequency equals the absolute frequency difference, so the difference is 7 Hz."},{"q":"If frequencies are 1000 Hz and 1006 Hz, the beat period is…","o":["1/6 s","1/1003 s","6 s","1/2006 s"],"a":0,"e":"\\(f_b=6\\,\\text{Hz}\\), so \\(T_b=1/6\\,\\text{s}\\)."},{"q":"Two tones at 250 Hz and 254 Hz have beat frequency…","o":["2 Hz","4 Hz","252 Hz","504 Hz"],"a":1,"e":"\\(f_b=|254-250|=4\\,\\text{Hz}\\)."},{"q":"The beat frequency is 3 Hz and one source is 500 Hz. The other frequency may be…","o":["497 Hz or 503 Hz","500 Hz only","503 Hz only","3 Hz only"],"a":0,"e":"Solving \\(|f-500|=3\\) gives 497 Hz or 503 Hz."},{"q":"For equal amplitudes, the resultant sound intensity becomes weakest when the waves are…","o":["In phase","Opposite in phase","At unrelated frequencies only","Both at maximum displacement in same direction"],"a":1,"e":"Opposite-phase equal-amplitude waves cancel, producing minimum resultant amplitude and intensity."},{"q":"Beats are useful for tuning musical instruments because they…","o":["Make the sound travel faster","Reveal small differences between frequencies","Change the instrument's mass","Eliminate all harmonics"],"a":1,"e":"As two frequencies approach equality, the beat rate falls, helping musicians tune instruments."},{"q":"If one source frequency increases while the other stays fixed, beat frequency…","o":["Always increases","Always decreases","May increase or decrease depending on which frequency is higher","Must become zero"],"a":2,"e":"Since \\(f_b=|f_1-f_2|\\), the change depends on whether the frequencies move closer together or farther apart."},{"q":"Two sources have frequencies 300 Hz and 310 Hz. The number of beats in 3 seconds is…","o":["3","10","30","610"],"a":2,"e":"Beat frequency is 10 Hz, so in 3 s the listener hears \\(10\\times3=30\\) beats."},{"q":"Two frequencies differ by 2.5 Hz. The beat period is…","o":["0.25 s","0.4 s","2.5 s","4 s"],"a":1,"e":"\\(T_b=1/f_b=1/2.5=0.4\\,\\text{s}\\)."},{"q":"A listener hears 2 beats/s between 500 Hz and an unknown tone. Which is a possible unknown frequency?","o":["498 Hz","490 Hz","510 Hz only","500 Hz only"],"a":0,"e":"The unknown may be 498 Hz or 502 Hz; 498 Hz is the listed possible choice."},{"q":"Which expression gives the beat period when the beat frequency is nonzero?","o":["\\(T_b=f_b\\)","\\(T_b=1/f_b\\)","\\(T_b=f_b^2\\)","\\(T_b=2f_b\\)"],"a":1,"e":"Beat period is the reciprocal of beat frequency: \\(T_b=1/f_b\\)."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Beats Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
 </script>
-
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

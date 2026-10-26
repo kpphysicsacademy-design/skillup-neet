@@ -1,24 +1,151 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Standing Waves</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.1);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#4f46e5;color:#fff}.back{background:#334155;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>〰️ Standing Waves</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['A standing wave is formed by','one travelling wave only','superposition of two identical waves travelling in opposite directions','two waves of different frequencies only','reflection without interference',1,'A standing wave results from superposition of two waves of the same frequency and amplitude travelling in opposite directions.'],
-['In a standing wave, points of zero displacement are called','antinodes','crests','nodes','troughs',2,'Nodes are points where the displacement remains zero.'],
-['Points of maximum amplitude in a standing wave are called','nodes','antinodes','equilibrium points','sources',1,'Antinodes are points of maximum displacement amplitude.'],
-['The distance between two successive nodes is','λ/4','λ/2','λ','2λ',1,'Successive nodes are separated by λ/2.'],
-['The distance between a node and its nearest antinode is','λ/4','λ/2','λ','2λ',0,'A node and adjacent antinode are separated by λ/4.'],
-['In a standing wave, there is','continuous net energy transfer along the medium','no net energy transfer along the medium','only transverse energy transfer','energy transfer at nodes only',1,'A standing wave stores and exchanges energy locally but has no net energy transport along the medium.'],
-['Particles between two adjacent nodes vibrate','with different frequencies','in phase with one another','always at rest','randomly',1,'Particles within the same loop between adjacent nodes vibrate in phase.'],
-['Particles in two adjacent loops of a standing wave vibrate','in phase','with a phase difference of π','with zero amplitude','at the same position always',1,'Adjacent loops oscillate in opposite phase, giving a phase difference of π.'],
-['For a string fixed at both ends, the fundamental wavelength is','L','2L','L/2','4L',1,'For the fundamental mode, L=λ/2, so λ=2L.'],
-['For a string fixed at both ends, the nth harmonic frequency is','nf₁','f₁/n','n²f₁','f₁+n',0,'For an ideal stretched string fixed at both ends, fₙ=nf₁.'],
-['A string of length L fixed at both ends has fundamental frequency f. Its second harmonic is','f/2','f','2f','4f',2,'The second harmonic has frequency 2f.'],
-['For a pipe closed at one end, the fundamental wavelength is','L','2L','4L','L/2',2,'For the fundamental mode of a closed pipe, L=λ/4, so λ=4L.'],
-['A closed pipe supports','all harmonics','only even harmonics','only odd harmonics','no harmonics',2,'An ideal pipe closed at one end supports odd harmonics: 1st, 3rd, 5th, etc.'],
-['If the wavelength of a standing wave is 2 m, the distance between successive nodes is','0.25 m','0.5 m','1 m','2 m',2,'Successive nodes are λ/2 apart = 2/2 = 1 m.'],
-['Which statement is correct for a standing wave?','Amplitude is maximum at nodes','All particles have the same amplitude','Nodes remain stationary while antinodes have maximum amplitude','There are no fixed nodes',2,'Nodes have zero amplitude and antinodes have maximum amplitude; the pattern remains fixed in space.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent=''}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide')}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Standing Waves quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Standing Waves — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>〰️ Standing Waves</h1><p class="muted">Practice nodes, antinodes, fixed-end strings, harmonics, frequencies, and standing-wave equations with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"A standing wave is commonly formed by…","o":["Two waves of the same frequency and amplitude travelling in opposite directions","One pulse travelling in one direction only","Two waves with unrelated frequencies","A wave that has no oscillations"],"a":0,"e":"A standing wave can form when two similar waves travel in opposite directions and superpose."},{"q":"In an ideal standing wave, the pattern…","o":["Has fixed nodes and antinodes","Travels bodily along the medium at the wave speed","Has no points of zero displacement","Always increases its wavelength"],"a":0,"e":"The nodes and antinodes remain at fixed positions, unlike the travelling pattern of a progressive wave."},{"q":"A node in a standing wave is a point where the displacement amplitude is…","o":["Maximum","Zero","Half the maximum everywhere","Always increasing"],"a":1,"e":"At a node, the interfering waves cancel so the displacement remains zero in the ideal model."},{"q":"An antinode is a point where the displacement amplitude is…","o":["Zero","Maximum","Always negative","Equal to the wavelength"],"a":1,"e":"At an antinode, the two waves reinforce and the displacement amplitude is maximum."},{"q":"The distance between two adjacent nodes in a standing wave is…","o":["\\(\\lambda/4\\)","\\(\\lambda/2\\)","\\(\\lambda\\)","\\(2\\lambda\\)"],"a":1,"e":"Adjacent nodes are separated by half a wavelength: \\(d=\\lambda/2\\)."},{"q":"The distance between an adjacent node and antinode is…","o":["\\(\\lambda/4\\)","\\(\\lambda/2\\)","\\(\\lambda\\)","\\(2\\lambda\\)"],"a":0,"e":"A node and its nearest antinode are separated by one-quarter wavelength."},{"q":"The distance between two adjacent antinodes is…","o":["\\(\\lambda/4\\)","\\(\\lambda/2\\)","\\(\\lambda\\)","\\(2\\lambda\\)"],"a":1,"e":"Adjacent antinodes, like adjacent nodes, are separated by \\(\\lambda/2\\)."},{"q":"In a standing wave, particles between adjacent nodes oscillate…","o":["With the same phase","In opposite phases to their neighbours at every point","At unrelated frequencies","Without any displacement"],"a":0,"e":"All particles in one loop between adjacent nodes oscillate in phase; neighbouring loops oscillate in opposite phase."},{"q":"Particles in two neighbouring loops of a standing wave oscillate…","o":["In phase","In opposite phase","At twice the frequency","Only in one direction"],"a":1,"e":"Adjacent loops are separated by a node and oscillate in opposite phase."},{"q":"A standing wave transfers energy along the medium on average in the ideal steady pattern…","o":["With continuous net energy flow in one direction","With no net energy flow along the pattern","Only from right to left","At an infinite speed"],"a":1,"e":"A standing wave has no net average energy transfer along the medium in the ideal steady-state description."},{"q":"For a string fixed at both ends, the fundamental mode has…","o":["One loop (one antinode)","Two internal nodes and no antinodes","Two loops","Four antinodes"],"a":0,"e":"The fundamental mode has nodes at the ends and one antinode at the centre: half a wavelength fits along the string."},{"q":"For a string of length L fixed at both ends, the allowed wavelengths satisfy…","o":["\\(L=n\\lambda/2\\)","\\(L=n\\lambda\\) for all modes","\\(L=\\lambda/(2n)\\)","\\(L=2n\\lambda\\)"],"a":0,"e":"For the nth harmonic, \\(L=n\\lambda_n/2\\), so \\(\\lambda_n=2L/n\\)."},{"q":"The fundamental wavelength for a string of length L fixed at both ends is…","o":["\\(L\\)","\\(2L\\)","\\(L/2\\)","\\(4L\\)"],"a":1,"e":"For the fundamental, n = 1, so \\(\\lambda_1=2L\\)."},{"q":"The fundamental frequency of a string of length L with wave speed v and fixed ends is…","o":["\\(v/L\\)","\\(v/(2L)\\)","\\(2v/L\\)","\\(v/(4L)\\)"],"a":1,"e":"Using \\(f=v/\\lambda\\) and \\(\\lambda_1=2L\\), we get \\(f_1=v/(2L)\\)."},{"q":"The nth harmonic frequency for a string fixed at both ends is…","o":["\\(f_n=nf_1\\)","\\(f_n=f_1/n\\)","\\(f_n=n^2f_1\\)","\\(f_n=f_1\\) for all n"],"a":0,"e":"For an ideal string, \\(f_n=nv/(2L)=nf_1\\)."},{"q":"A string has fundamental frequency 100 Hz. Its third harmonic frequency is…","o":["100 Hz","200 Hz","300 Hz","600 Hz"],"a":2,"e":"\\(f_3=3f_1=3\\times100=300\\,\\text{Hz}\\)."},{"q":"For a string fixed at both ends, the second harmonic contains how many antinodes?","o":["One","Two","Three","Four"],"a":1,"e":"The nth harmonic has n antinodes, so the second harmonic has two."},{"q":"A standing wave is described by \\(y=2A\\sin(kx)\\cos(\\omega t)\\). Its amplitude at position x is…","o":["\\(2A|\\sin(kx)|\\)","\\(A\\cos(\\omega t)\\)","\\(2A\\omega\\)","\\(kx\\)"],"a":0,"e":"The time-dependent factor is \\(\\cos(\\omega t)\\); the position-dependent amplitude magnitude is \\(2A|\\sin(kx)|\\)."},{"q":"For the standing wave \\(y=2A\\sin(kx)\\cos(\\omega t)\\), nodes occur where…","o":["\\(\\sin(kx)=0\\)","\\(\\cos(\\omega t)=0\\) only","\\(\\sin(kx)=1\\)","\\(\\omega=0\\)"],"a":0,"e":"Nodes have zero amplitude at all times, so \\(\\sin(kx)=0\\), giving \\(kx=n\\pi\\)."},{"q":"For the standing wave \\(y=2A\\sin(kx)\\cos(\\omega t)\\), antinodes occur where…","o":["\\(|\\sin(kx)|=1\\)","\\(\\sin(kx)=0\\)","\\(\\cos(\\omega t)=0\\) always","\\(x=0\\) only"],"a":0,"e":"Antinodes have maximum amplitude when \\(|\\sin(kx)|=1\\)."},{"q":"Two waves each of amplitude A combine to form a standing wave. The maximum amplitude at an antinode is…","o":["\\(A\\)","\\(2A\\)","\\(A/2\\)","\\(0\\)"],"a":1,"e":"At an antinode, the two equal-amplitude waves reinforce, producing maximum amplitude \\(2A\\)."},{"q":"At every node of an ideal standing wave, the displacement is…","o":["Always zero","Always maximum","Always equal to A","Different at every instant"],"a":0,"e":"A node is a fixed point of zero displacement at all times."},{"q":"A string of length 1.2 m is fixed at both ends. Its fundamental wavelength is…","o":["0.6 m","1.2 m","2.4 m","4.8 m"],"a":2,"e":"For a fixed-fixed string, \\(\\lambda_1=2L=2.4\\,\\text{m}\\)."},{"q":"A string of length 0.8 m has wave speed 160 m/s. Its fundamental frequency is…","o":["50 Hz","100 Hz","200 Hz","400 Hz"],"a":1,"e":"\\(f_1=v/(2L)=160/(1.6)=100\\,\\text{Hz}\\)."},{"q":"The third harmonic on a string fixed at both ends has wavelength…","o":["\\(2L\\)","\\(L\\)","\\(2L/3\\)","\\(L/3\\)"],"a":2,"e":"\\(\\lambda_n=2L/n\\), so for n = 3, \\(\\lambda_3=2L/3\\)."},{"q":"At a node, the two component waves forming a standing wave have…","o":["Equal and opposite displacements","Always equal positive displacements","Different frequencies","No relationship"],"a":0,"e":"At a node, the component waves cancel at all times, giving zero resultant displacement."},{"q":"At an antinode, the component waves produce…","o":["Complete cancellation at all times","Maximum reinforcement of displacement amplitude","No oscillation","A permanent displacement only"],"a":1,"e":"At an antinode, the component waves reinforce, creating the largest possible oscillation amplitude."},{"q":"For an ideal string, if its length is doubled while wave speed remains constant, its fundamental frequency…","o":["Doubles","Halves","Quadruples","Remains the same"],"a":1,"e":"Since \\(f_1=v/(2L)\\), doubling L halves the fundamental frequency."},{"q":"If the wave speed on a fixed-length string doubles, the fundamental frequency…","o":["Halves","Doubles","Remains unchanged","Becomes four times larger"],"a":1,"e":"Since \\(f_1=v/(2L)\\), the fundamental frequency is directly proportional to wave speed."},{"q":"Which statement distinguishes a standing wave from a progressive wave?","o":["Its nodes and antinodes remain at fixed positions","It always transfers energy continuously in one direction","Its wavelength must be zero","Its particles do not oscillate"],"a":0,"e":"A standing wave has fixed nodes and antinodes and no net average energy transport along the ideal pattern."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+const wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Standing Waves Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

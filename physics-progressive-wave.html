@@ -3,40 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Progressive Wave</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Progressive Wave quiz with 30 concept questions and explanations.">
+<title>SkillUp | Progressive Wave — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
-<body><div class="wrap"><div class="card">
-<h1>🌊 Progressive Wave</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌊 Progressive Wave</h1><p class="muted">Master travelling-wave motion, phase, wave equations, and propagation speed with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['A progressive wave is a wave in which','only the particles move permanently forward','the disturbance travels through the medium carrying energy','the medium as a whole travels with the wave','frequency becomes zero',1,'A progressive wave is a travelling disturbance that transfers energy from one region to another without transporting the medium bodily.'],
-['The standard equation of a sinusoidal progressive wave travelling in +x direction is','y=A sin(kx+ωt+φ)','y=A sin(kx−ωt+φ)','y=A sin(kx)+ωt','y=A cos(kx)',1,'For a wave travelling in the +x direction, a common form is y=A sin(kx−ωt+φ).'],
-['In the wave equation y=A sin(kx−ωt+φ), A represents','wavelength','frequency','amplitude','wave number',2,'A is the maximum displacement of a particle from its mean position, i.e. the amplitude.'],
-['In y=A sin(kx−ωt+φ), k represents','angular frequency','wave number','time period','amplitude',1,'The wave number is k=2π/λ.'],
-['The relation between wave number k and wavelength λ is','k=λ/2π','k=2π/λ','k=2πλ','k=1/λ²',1,'Wave number k is the phase change per unit distance: k=2π/λ.'],
-['For a progressive wave, angular frequency and frequency are related by','ω=f/2π','ω=2πf','ω=πf²','ω=2π/f',1,'Angular frequency is ω=2πf.'],
-['The speed of a progressive wave is','v=ωk','v=ω/k','v=k/ω','v=ω+k',1,'Using k=2π/λ and ω=2πf, wave speed is v=ω/k=fλ.'],
-['The phase difference between two points separated by distance λ is','0','π/2','π','2π',3,'A separation of one wavelength corresponds to a phase difference of 2π radians, so the points are in phase.'],
-['Two particles of a progressive wave separated by λ/2 have phase difference','0','π/2','π','2π',2,'A distance λ/2 corresponds to a phase difference k(λ/2)=π radians.'],
-['In an ideal progressive wave, particles of the medium','remain permanently displaced','oscillate about their mean positions','move with the wave at wave speed','do not move at all',1,'Particles oscillate about their equilibrium positions while the disturbance and energy propagate through the medium.'],
-['For a sinusoidal progressive wave, the particle velocity is generally','the same at all positions at all times','dependent on position and time','always equal to wave speed','always zero',1,'Particle velocity depends on the phase of the particle and is generally different from the propagation speed of the wave.'],
-['A wave has frequency 5 Hz and wavelength 2 m. Its propagation speed is','2.5 m/s','7 m/s','10 m/s','20 m/s',2,'v=fλ=5×2=10 m/s.'],
-['For y=A sin(kx−ωt), at a fixed position x, the particle executes','uniform linear motion','simple harmonic motion','circular motion only','no motion',1,'At fixed x, kx is constant, so displacement varies sinusoidally with time: SHM.'],
-['When a progressive wave travels from one point to another, what is primarily transferred?','Matter as a whole','Energy','Mass permanently','The medium itself',1,'A progressive wave transfers energy and information through the medium without transporting the medium bodily.'],
-['Which statement is correct for a progressive sinusoidal wave?','All particles are always in the same phase','Particles separated by one wavelength are in phase','Wave speed is always equal to particle speed','Amplitude must increase continuously with distance',1,'Particles separated by λ have a phase difference of 2π and therefore oscillate in phase.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
-$('next').onclick=next;render();
+(function(){
+'use strict';
+const questions = [{"q":"What does a progressive wave do as it travels?","o":["Transfers energy through space or a medium","Carries every particle permanently with it","Creates matter at each point","Makes all particles stop oscillating"],"a":0,"e":"A progressive (travelling) wave carries energy from one place to another; medium particles generally oscillate about equilibrium."},{"q":"In a mechanical progressive wave, particles of the medium generally…","o":["Oscillate about their equilibrium positions","Travel permanently at the wave speed","Move from the source to the observer","Remain at rest"],"a":0,"e":"The disturbance propagates, while particles of the medium oscillate around their equilibrium positions."},{"q":"Which equation represents a sinusoidal wave travelling in the +x direction?","o":["y = A sin(kx + ωt + φ)","y = A sin(kx − ωt + φ)","y = A sin(ωx − kt)","y = A sin(kx) only"],"a":1,"e":"For the usual phase convention, kx − ωt remains constant as x increases with time, indicating travel in the +x direction."},{"q":"Which equation represents a sinusoidal wave travelling in the −x direction?","o":["y = A sin(kx − ωt)","y = A sin(kx + ωt)","y = A sin(kx)","y = A sin(ωt) at every x"],"a":1,"e":"For a wave travelling in the −x direction, the phase commonly has the form kx + ωt."},{"q":"In y = A sin(kx − ωt + φ), what is A?","o":["Wave number","Amplitude","Angular frequency","Wave speed"],"a":1,"e":"A is the maximum displacement from the equilibrium position."},{"q":"The wave number k is defined as…","o":["2πλ","2π/λ","λ/2π","1/f"],"a":1,"e":"Wave number k = 2π/λ, measured in radians per metre."},{"q":"Angular frequency ω and frequency f are related by…","o":["ω = f/2π","ω = 2πf","ω = 2π/f","ω = f²"],"a":1,"e":"One cycle is 2π radians, so ω = 2πf."},{"q":"The speed of a sinusoidal progressive wave is…","o":["v = f/λ","v = fλ","v = λ/f²","v = ωk"],"a":1,"e":"In one period T, the wave advances one wavelength λ; therefore v = λ/T = fλ."},{"q":"Using angular frequency and wave number, wave speed is…","o":["v = ω/k","v = ωk","v = k/ω","v = ω + k"],"a":0,"e":"Since ω = 2πf and k = 2π/λ, their ratio ω/k equals fλ."},{"q":"A wave has frequency 8 Hz and wavelength 0.5 m. Its speed is…","o":["4 m/s","8.5 m/s","16 m/s","0.0625 m/s"],"a":0,"e":"v = fλ = 8 × 0.5 = 4 m/s."},{"q":"A wave travels at 24 m/s with frequency 6 Hz. Its wavelength is…","o":["4 m","18 m","30 m","144 m"],"a":0,"e":"λ = v/f = 24/6 = 4 m."},{"q":"A wave has period 0.02 s. Its frequency is…","o":["0.02 Hz","20 Hz","50 Hz","200 Hz"],"a":2,"e":"f = 1/T = 1/0.02 = 50 Hz."},{"q":"At a fixed position in a sinusoidal progressive wave, the displacement varies with time as…","o":["A sinusoidal function","A constant value always","A steadily increasing line forever","A random value"],"a":0,"e":"At fixed x, the spatial phase term is constant, leaving sinusoidal time dependence."},{"q":"Two points separated by one wavelength have a phase difference of…","o":["π/4","π/2","π","2π"],"a":3,"e":"Phase difference is Δφ = 2πΔx/λ. For Δx = λ, Δφ = 2π."},{"q":"Two points separated by half a wavelength have a phase difference of…","o":["0","π/2","π","2π"],"a":2,"e":"Δφ = 2π(λ/2)/λ = π radians."},{"q":"For a sinusoidal wave, the phase difference corresponding to a separation λ/4 is…","o":["π/4","π/2","π","2π"],"a":1,"e":"Δφ = 2π(λ/4)/λ = π/2 radians."},{"q":"A progressive wave has amplitude 3 cm. Its maximum particle displacement magnitude is…","o":["1.5 cm","3 cm","6 cm","0 cm"],"a":1,"e":"Amplitude is the maximum magnitude of displacement from equilibrium, so it is 3 cm."},{"q":"Which quantity describes the distance travelled by the wave pattern per unit time?","o":["Particle displacement","Wave speed","Amplitude","Phase constant"],"a":1,"e":"Wave speed describes propagation of the disturbance; it is not generally the instantaneous speed of a medium particle."},{"q":"Which statement best distinguishes wave speed from particle speed?","o":["They are always identical","Wave speed is propagation speed; particle speed describes local oscillation","Particle speed is always zero","Wave speed changes sign every half-cycle"],"a":1,"e":"The wave pattern propagates through the medium while each particle oscillates locally; their speeds are different concepts."},{"q":"For y = A sin(kx − ωt), the phase at a point is…","o":["kx − ωt","Aω","k/ω","x/t only"],"a":0,"e":"The phase is the argument of the sine function, kx − ωt (plus any phase constant if included)."},{"q":"The initial phase constant φ in a wave equation specifies…","o":["Only the wave speed","The phase offset at the chosen origin and time","The wavelength unit","The medium density"],"a":1,"e":"The phase constant shifts the wave's phase at the selected spatial and temporal origin."},{"q":"A wave has angular frequency 10π rad/s. Its frequency is…","o":["5 Hz","10π Hz","20 Hz","10 Hz"],"a":0,"e":"f = ω/(2π) = 10π/(2π) = 5 Hz."},{"q":"A wave has wave number k = 4π rad/m. Its wavelength is…","o":["4 m","2 m","1 m","0.5 m"],"a":3,"e":"λ = 2π/k = 2π/(4π) = 0.5 m."},{"q":"A wave's frequency doubles while its speed in the same unchanged medium remains constant. Its wavelength…","o":["Doubles","Halves","Stays the same","Becomes four times larger"],"a":1,"e":"Since v = fλ and v is constant, doubling f makes λ half as large."},{"q":"For a mechanical wave, which statement about matter transport is correct?","o":["The medium is always transported bodily with the wave","Particles generally oscillate locally rather than travelling with the wave","No particle ever moves","Particles must move at constant speed"],"a":1,"e":"In an ordinary mechanical wave, particles oscillate around equilibrium; energy propagates without bulk transport of the medium."},{"q":"A progressive wave is called transverse when particle oscillations are…","o":["Parallel to propagation","Perpendicular to propagation","Always circular","Absent"],"a":1,"e":"In a transverse wave, particle displacement is perpendicular to the direction of propagation."},{"q":"A progressive wave is called longitudinal when particle oscillations are…","o":["Perpendicular to propagation","Parallel to propagation","Always at 45° to propagation","Zero"],"a":1,"e":"In a longitudinal wave, particles oscillate parallel to the direction the disturbance travels."},{"q":"For y = 0.04 sin(2πx − 8πt), with SI units, the wave speed is…","o":["2 m/s","4 m/s","8 m/s","16 m/s"],"a":1,"e":"Here k = 2π rad/m and ω = 8π rad/s, so v = ω/k = 4 m/s."},{"q":"For y = 0.02 sin(5x − 20t), with SI units, the frequency is…","o":["5/π Hz","10/π Hz","20π Hz","4 Hz"],"a":1,"e":"ω = 20 rad/s, so f = ω/(2π) = 10/π Hz."},{"q":"If a travelling wave's phase kx − ωt is kept constant, then as time increases, x must…","o":["Decrease for a +x travelling wave","Increase for a +x travelling wave","Remain fixed","Become zero"],"a":1,"e":"Setting kx − ωt = constant gives x = (ω/k)t + constant/k, which increases with time because ω/k is positive."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+const wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Progressive Wave Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
 </script>
-
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,26 +1,151 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Longitudinal Waves</title><style>
-body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#4f46e5;color:#fff}.back{background:#334155;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>↔️ Longitudinal Waves</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['In a longitudinal wave, particles of the medium vibrate','perpendicular to propagation','parallel to propagation','in circles only','without oscillation',1,'In a longitudinal wave, particles oscillate parallel to the direction in which the wave propagates.'],
-['Which is a common longitudinal mechanical wave?','Light in vacuum','Sound in air','Light in glass','Radio wave',1,'Sound in air is a mechanical longitudinal wave.'],
-['The region of high pressure and density in a longitudinal wave is called','rarefaction','crest','compression','trough',2,'A compression is a region where particles are closer together, giving higher pressure and density.'],
-['The region of low pressure and density in a longitudinal wave is called','compression','rarefaction','crest','node',1,'A rarefaction is a region where particles are farther apart, giving lower pressure and density.'],
-['The distance between two successive compressions is','amplitude','wavelength','frequency','time period',1,'Successive compressions are one wavelength apart.'],
-['In a sound wave, the amplitude is related to the maximum','particle displacement','wavelength','frequency only','wave speed only',0,'Amplitude is the maximum displacement of particles from their equilibrium positions.'],
-['If frequency of a wave is 5 Hz, its time period is','5 s','0.5 s','0.2 s','25 s',2,'Using T=1/f, T=1/5=0.2 s.'],
-['The relation between wave speed, frequency and wavelength is','v=fλ','v=f/λ','v=λ/f','v=f+λ',0,'The wave-speed relation is v=fλ.'],
-['A longitudinal wave has frequency 4 Hz and wavelength 2 m. Its speed is','2 m/s','6 m/s','8 m/s','0.5 m/s',2,'Using v=fλ, v=4×2=8 m/s.'],
-['In a longitudinal wave, particles of the medium generally','travel permanently with the wave','oscillate about their equilibrium positions','remain at rest','move only perpendicular to propagation',1,'Particles oscillate back and forth about equilibrium while the disturbance and energy propagate.'],
-['Sound cannot travel through','air','water','steel','vacuum',3,'Sound is a mechanical wave and requires a material medium; it cannot propagate through vacuum.'],
-['For a sinusoidal longitudinal wave, particles separated by one wavelength are','in the same phase','always opposite in phase','at different frequencies','stationary',0,'Points separated by one wavelength have the same phase.'],
-['Particles separated by half a wavelength have a phase difference of','0','π/2','π','2π',2,'A separation of λ/2 corresponds to a phase difference of π radians.'],
-['When a sound wave travels from air into water, its frequency is generally','changed by the medium','unchanged because it is set by the source','always doubled','always halved',1,'The source determines frequency; the medium mainly changes wave speed and wavelength.'],
-['In a longitudinal wave, the distance from one compression to the next rarefaction is','λ','λ/2','2λ','λ/4',1,'A compression and the next rarefaction are separated by half a wavelength.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: longitudinal waves quiz with 30 MCQs, explanations, scoring, and wrong-answer review.">
+<title>SkillUp | Longitudinal Waves — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>↔️ Longitudinal Waves</h1><p class="muted">Learn compressions, rarefactions, sound waves, wavelength, frequency, and wave speed with 30 questions and explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"In a longitudinal wave, particles of the medium oscillate:","o":["Perpendicular to propagation","Parallel to propagation","In circles only","Without oscillation"],"a":1,"e":"Particle displacement is parallel to the direction in which a longitudinal wave travels."},{"q":"Which is a common longitudinal mechanical wave?","o":["Light in vacuum","Sound in air","Radio waves","Visible light"],"a":1,"e":"Sound in air propagates as longitudinal pressure variations."},{"q":"A region of higher pressure and density in a longitudinal wave is a:","o":["Rarefaction","Crest","Compression","Trough"],"a":2,"e":"Particles are crowded closer together in a compression, raising local pressure and density."},{"q":"A region of lower pressure and density in a longitudinal wave is a:","o":["Compression","Rarefaction","Crest","Antinode"],"a":1,"e":"Particles are farther apart in a rarefaction, lowering local pressure and density."},{"q":"The distance between two successive compressions is one:","o":["Amplitude","Wavelength","Period","Frequency"],"a":1,"e":"Successive compressions are corresponding points one wavelength apart."},{"q":"The distance between two successive rarefactions is:","o":["λ/2","λ","2λ","λ/4"],"a":1,"e":"Two adjacent rarefactions are separated by one complete wavelength."},{"q":"The SI unit of frequency is:","o":["Metre","Second","Hertz","Metre per second"],"a":2,"e":"Frequency is measured in hertz (Hz), or cycles per second."},{"q":"Frequency and period are related by:","o":["f = T","f = 1/T","f = 2T","f = T²"],"a":1,"e":"Frequency is the reciprocal of period: f = 1/T."},{"q":"A sound wave has frequency 200 Hz. Its period is:","o":["0.005 s","0.02 s","5 s","200 s"],"a":0,"e":"T = 1/f = 1/200 = 0.005 s."},{"q":"A longitudinal wave has frequency 50 Hz and wavelength 6 m. Its speed is:","o":["8.3 m/s","56 m/s","300 m/s","600 m/s"],"a":2,"e":"v = fλ = 50 × 6 = 300 m/s."},{"q":"A wave travels at 340 m/s and has frequency 170 Hz. Its wavelength is:","o":["0.5 m","2 m","170 m","510 m"],"a":1,"e":"λ = v/f = 340/170 = 2 m."},{"q":"In a sound wave, what travels through the medium from source to receiver?","o":["The same air particles permanently","Energy carried by the disturbance","The medium as a whole","Only the compression region"],"a":1,"e":"Sound transfers energy through oscillations of particles around their equilibrium positions; there is no net bulk transport of the medium."},{"q":"In a longitudinal wave, particle motion is:","o":["At right angles to propagation","Along the direction of propagation","Always circular","Always perpendicular to pressure variation"],"a":1,"e":"The defining feature of a longitudinal wave is parallel oscillation and propagation."},{"q":"Which pair of quantities is greatest at a compression in a sound wave?","o":["Pressure and density","Wavelength and period","Frequency and period","Speed and wavelength in every medium"],"a":0,"e":"A compression is a region of relatively high pressure and density."},{"q":"Which statement about rarefaction is correct?","o":["Particles are more crowded","Pressure is relatively low","It is the highest point of a string wave","It has zero wavelength"],"a":1,"e":"In a rarefaction, particles are more spread out and pressure is relatively low."},{"q":"A wave completes 120 cycles in 2 seconds. Its frequency is:","o":["60 Hz","120 Hz","240 Hz","0.0167 Hz"],"a":0,"e":"f = cycles/time = 120/2 = 60 Hz."},{"q":"If frequency doubles while wave speed stays constant, wavelength:","o":["Doubles","Halves","Remains unchanged","Becomes zero"],"a":1,"e":"From v = fλ, wavelength is inversely proportional to frequency at fixed speed."},{"q":"When sound passes from air into water, its frequency is generally:","o":["Set by the new medium and always doubles","Unchanged across the boundary","Reduced to zero","Always halved"],"a":1,"e":"The source fixes frequency; wave speed and wavelength may change when the medium changes."},{"q":"Which wave is longitudinal in the Earth's interior?","o":["Seismic P-wave","Seismic S-wave","Visible light","A wave on a stretched string"],"a":0,"e":"Seismic primary (P) waves are compressional longitudinal waves."},{"q":"Which seismic wave cannot travel through liquids because it is a shear wave?","o":["P-wave","S-wave","Sound wave","Pressure pulse"],"a":1,"e":"S-waves are transverse shear waves and do not propagate through fluids that lack shear rigidity."},{"q":"Longitudinal mechanical waves can travel through:","o":["Gases only","Solids only","Solids, liquids and gases","Vacuum only"],"a":2,"e":"Longitudinal mechanical waves can propagate in solids, liquids, and gases, provided the medium supports the disturbance."},{"q":"Sound cannot travel through a vacuum because:","o":["Its frequency becomes infinite","It requires a material medium","Vacuum absorbs all wavelengths","Its amplitude must be zero"],"a":1,"e":"Sound is a mechanical wave and requires particles to transmit pressure disturbances."},{"q":"A longitudinal wave has wavelength 0.8 m and speed 320 m/s. Its frequency is:","o":["256 Hz","400 Hz","40 Hz","0.0025 Hz"],"a":1,"e":"f = v/λ = 320/0.8 = 400 Hz."},{"q":"A wave has period 0.004 s. Its frequency is:","o":["4 Hz","25 Hz","250 Hz","4000 Hz"],"a":2,"e":"f = 1/T = 1/0.004 = 250 Hz."},{"q":"The maximum displacement of a particle from its equilibrium position is called:","o":["Amplitude","Wavelength","Compression","Frequency"],"a":0,"e":"Amplitude is the maximum displacement magnitude of the oscillating particle."},{"q":"Which is the best description of wavelength in a longitudinal wave?","o":["Distance from a compression to the nearest rarefaction","Distance between adjacent compressions","Maximum particle displacement","Time for one oscillation"],"a":1,"e":"One wavelength is the distance between consecutive compressions or consecutive rarefactions."},{"q":"If a sound wave's wavelength is 1.7 m and its frequency is 200 Hz, its speed is:","o":["117.6 m/s","201.7 m/s","340 m/s","400 m/s"],"a":2,"e":"v = fλ = 200 × 1.7 = 340 m/s."},{"q":"In a longitudinal wave, the particles of the medium generally:","o":["Travel with the wave over long distances","Oscillate about equilibrium positions","Move only in one direction","Stop moving when a compression passes"],"a":1,"e":"Particles oscillate back and forth around equilibrium while the disturbance propagates."},{"q":"A pressure-versus-position graph for a sound wave has adjacent pressure maxima separated by:","o":["Amplitude","Wavelength","Period","Frequency"],"a":1,"e":"Adjacent pressure maxima correspond to adjacent compressions, separated by one wavelength."},{"q":"Which statement comparing transverse and longitudinal waves is correct?","o":["Both always need vacuum","Longitudinal particle oscillations are parallel to propagation","Longitudinal waves have crests and troughs in the medium's displacement profile only","Only longitudinal waves carry energy"],"a":1,"e":"Longitudinal waves have particle oscillations parallel to propagation; both wave types can transfer energy."},{"q":"A longitudinal wave travels 680 m in 2 s. If its frequency is 200 Hz, its wavelength is:","o":["1.7 m","3.4 m","6.8 m","340 m"],"a":0,"e":"Speed = 680/2 = 340 m/s; λ = v/f = 340/200 = 1.7 m."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Longitudinal Waves Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

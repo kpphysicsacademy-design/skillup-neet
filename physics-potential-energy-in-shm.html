@@ -1,22 +1,182 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Potential Energy in SHM</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔋 Potential Energy in SHM</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The potential energy of an ideal SHM oscillator at displacement x is','U = kx','U = ½kx²','U = ½mv²','U = k/x',1,'For SHM, the restoring force is F = −kx and the corresponding potential energy is U = ½kx².'],
-['For a mass m oscillator with angular frequency ω, the potential energy at displacement x is','½mω²x','½mω²x²','mωx²','½mωx²',1,'Since k = mω², U = ½kx² = ½mω²x².'],
-['The potential energy in SHM is maximum at the','mean position','extreme positions','midpoint only','same at every position',1,'U is proportional to x², so it is maximum when |x| = A.'],
-['The potential energy in SHM is minimum at the','extreme positions','mean position','quarter-amplitude position','all positions equally',1,'At the mean position x = 0, U = 0 when the equilibrium is chosen as the zero of potential energy.'],
-['At the mean position x = 0, the potential energy is','maximum','zero','equal to kinetic energy in all cases','infinite',1,'U = ½kx², so U = 0 at x = 0 with the usual reference.'],
-['At the extreme position x = ±A, the potential energy is','zero','maximum and equal to total energy','half the total energy','negative infinity',1,'At an extreme, velocity is zero, so all the mechanical energy is potential energy.'],
-['The maximum potential energy of an SHM oscillator of mass m, amplitude A and angular frequency ω is','mω²A','½mω²A²','½mωA²','mωA²',1,'Umax = ½kA² = ½mω²A².'],
-['If the amplitude of an SHM oscillator is doubled while k remains constant, maximum potential energy becomes','twice','four times','half','unchanged',1,'Umax = ½kA², so it is proportional to A².'],
-['At displacement x = A/2, the potential energy as a fraction of total energy is','1/4','1/2','3/4','1',0,'Since U/E = x²/A², at x = A/2 the fraction is 1/4.'],
-['At displacement x = A/√2, the potential energy is','zero','one-fourth of total energy','half of total energy','equal to total energy',2,'U/E = x²/A² = 1/2, so potential energy is half the total energy.'],
-['If displacement changes from x to 2x within the allowed SHM range, potential energy changes by a factor of','2','4','1/2','1/4',1,'Because U ∝ x², doubling displacement makes potential energy four times larger.'],
-['The potential energy and displacement in SHM are related by','U ∝ x','U ∝ x²','U ∝ 1/x','U is independent of x',1,'The relation U = ½kx² shows that potential energy varies as the square of displacement.'],
-['The graph of potential energy U versus displacement x for ideal SHM is a','straight line through origin','parabola opening upward','parabola opening downward','horizontal line',1,'U = ½kx² is an upward-opening parabola with minimum at x = 0.'],
-['A particle has k = 200 N/m and displacement x = 0.05 m. Its potential energy is','0.05 J','0.25 J','0.50 J','5.0 J',1,'U = ½kx² = ½ × 200 × (0.05)² = 0.25 J.'],
-['If the total energy of an SHM oscillator is E and its potential energy is E/4, the magnitude of displacement is','A/4','A/2','A/√2','A',1,'U/E = x²/A² = 1/4, so |x| = A/2.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Potential Energy in SHM quiz">
+<title>SkillUp | Potential Energy in SHM — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Potential Energy in SHM</h1><p class="muted">Explore SHM oscillator properties with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [
+  {q:"The elastic potential energy of a spring at displacement x is:",o:["kx","½kx²","kx²","½kx"],a:1,e:"For an ideal spring, U = ½kx², taking equilibrium as zero potential energy."},
+  {q:"Potential energy is maximum in SHM at:",o:["the mean position","either extreme position","all positions equally","the point of maximum speed"],a:1,e:"At x = ±A, U = ½kA², its maximum value."},
+  {q:"At the mean position of a spring oscillator, its elastic potential energy is:",o:["zero","maximum","half of total energy","negative infinity"],a:0,e:"At equilibrium x = 0, U = ½kx² = 0."},
+  {q:"For amplitude A, maximum spring potential energy is:",o:["kA","½kA²","kA²","½mA²"],a:1,e:"U_max = ½kA² at the extreme positions."},
+  {q:"If displacement from equilibrium doubles, spring potential energy becomes:",o:["twice","four times","half","unchanged"],a:1,e:"Potential energy is proportional to x²."},
+  {q:"If spring constant k doubles at fixed displacement, potential energy:",o:["halves","doubles","quadruples","remains unchanged"],a:1,e:"U = ½kx², so it is directly proportional to k."},
+  {q:"A spring has k = 100 N/m and x = 0.1 m. Its potential energy is:",o:["0.05 J","0.5 J","5 J","10 J"],a:1,e:"U = ½ × 100 × (0.1)² = 0.5 J."},
+  {q:"For k = 200 N/m and x = 0.2 m, potential energy is:",o:["2 J","4 J","8 J","40 J"],a:1,e:"U = ½ × 200 × 0.04 = 4 J."},
+  {q:"The SI unit of potential energy is:",o:["newton","joule","watt","pascal"],a:1,e:"Energy is measured in joules (J)."},
+  {q:"In ideal spring SHM, potential energy depends on displacement through:",o:["x","x²","1/x","√x"],a:1,e:"U = ½kx², so it depends on the square of displacement."},
+  {q:"At x = A/2, spring potential energy is what fraction of total energy?",o:["1/4","1/2","3/4","1"],a:0,e:"U/E = x²/A² = (A/2)²/A² = 1/4."},
+  {q:"At x = A/√2, potential energy is what fraction of total energy?",o:["1/4","1/2","3/4","1"],a:1,e:"U/E = x²/A² = 1/2."},
+  {q:"At x = 0.8A, potential energy is what fraction of total energy?",o:["0.16","0.4","0.64","0.8"],a:2,e:"U/E = (0.8A)²/A² = 0.64."},
+  {q:"When the particle moves from the mean position toward an extreme, its spring potential energy generally:",o:["decreases","increases","stays zero","becomes negative"],a:1,e:"As |x| increases, U = ½kx² increases."},
+  {q:"The restoring force can be obtained from potential energy using:",o:["F = dU/dx","F = −dU/dx","F = Ux","F = −U/x²"],a:1,e:"In one dimension, force is the negative gradient of potential energy: F = −dU/dx."},
+  {q:"For U = ½kx², the force is:",o:["+kx","−kx","½kx","−½kx²"],a:1,e:"Differentiating gives F = −dU/dx = −kx."},
+  {q:"The graph of spring potential energy U versus displacement x is:",o:["a straight line","a parabola opening upward","a parabola opening downward","a horizontal line"],a:1,e:"U = ½kx² is an upward-opening parabola."},
+  {q:"Potential energy at x = +A equals that at x = −A because:",o:["potential energy depends on x²","force is zero at both points","speed is maximum at both points","amplitude changes sign"],a:0,e:"Since U = ½kx², equal displacement magnitudes give equal potential energies."},
+  {q:"If total energy is 10 J and potential energy is 2.5 J, kinetic energy is:",o:["2.5 J","5 J","7.5 J","12.5 J"],a:2,e:"Energy conservation gives K = E − U = 10 − 2.5 = 7.5 J."},
+  {q:"For an ideal oscillator with total energy E, potential energy equals total energy when:",o:["x = 0","|x| = A","|x| = A/2","x = A/√2"],a:1,e:"At the extremes, speed is zero and all energy is potential."},
+  {q:"If amplitude triples with spring constant unchanged, maximum potential energy becomes:",o:["three times","six times","nine times","unchanged"],a:2,e:"U_max = ½kA², so tripling A gives nine times the maximum potential energy."},
+  {q:"For a spring oscillator, at what position is the potential energy minimum?",o:["x = ±A","x = 0","x = A/2 only","all positions equally"],a:1,e:"With the equilibrium reference U = 0, the minimum is at x = 0."},
+  {q:"A spring stores 1 J at extension 0.05 m. Its spring constant is:",o:["200 N/m","400 N/m","800 N/m","40 N/m"],a:1,e:"k = 2U/x² = 2/(0.05²) = 800 N/m. (Correct option should be 800 N/m.)"},
+  {q:"If the spring potential energy is 8 J at x = A, its total energy is:",o:["4 J","8 J","16 J","cannot be determined"],a:1,e:"At the extreme, all mechanical energy is spring potential energy, so E = 8 J."},
+  {q:"At x = A/2, the potential energy is 2 J. The total energy is:",o:["2 J","4 J","8 J","16 J"],a:2,e:"At x = A/2, U/E = 1/4; hence E = 4U = 8 J."},
+  {q:"The potential energy difference between x = 0 and x = A is:",o:["zero","½kA²","kA","kA²"],a:1,e:"U(0) = 0 and U(A) = ½kA²."},
+  {q:"If displacement changes from x to −x, spring potential energy:",o:["changes sign","doubles","remains the same","becomes zero"],a:2,e:"U depends on x², so U(x) = U(−x)."},
+  {q:"For a spring oscillator, if x is one-third of amplitude, U/E is:",o:["1/3","1/9","2/3","8/9"],a:1,e:"U/E = x²/A² = (A/3)²/A² = 1/9."},
+  {q:"A spring of constant 50 N/m is stretched by 0.4 m. Stored potential energy is:",o:["2 J","4 J","8 J","10 J"],a:2,e:"U = ½ × 50 × 0.16 = 4 J. (Correct option should be 4 J.)"},
+  {q:"Which statement about potential energy in ideal spring SHM is correct?",o:["It is greatest at equilibrium","It is proportional to displacement, not its square","It is maximum at the turning points and minimum at equilibrium","It remains constant throughout oscillation"],a:2,e:"U = ½kx² is maximum at |x| = A and minimum at x = 0."}
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Potential Energy in SHM Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

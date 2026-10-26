@@ -1,22 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Thermodynamic Cycles</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔄 Thermodynamic Cycles</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['A thermodynamic cycle is a process in which the system','returns to its initial state','always remains at constant pressure','always remains at constant temperature','has zero heat transfer',0,'In a thermodynamic cycle, the system returns to its initial thermodynamic state.'],
-['For a complete thermodynamic cycle, the change in internal energy is','positive','negative','zero','infinite',2,'Internal energy is a state function, so its net change over a complete cycle is zero.'],
-['The net work done by a cyclic heat engine is represented by the','area under a single isotherm only','area enclosed by the cycle on a P–V diagram','slope of the P–V curve','volume at the initial state',1,'The net work in a cyclic process equals the area enclosed by the cycle on a P–V diagram.'],
-['A clockwise cycle on a P–V diagram generally represents','net work done on the gas','net work done by the gas','zero work in every case','an impossible cycle',1,'For a clockwise P–V cycle, expansion occurs at higher pressure than compression, giving positive net work by the gas.'],
-['An anticlockwise cycle on a P–V diagram generally represents','net work done by the gas','net work done on the gas','zero heat transfer always','an isothermal cycle',1,'An anticlockwise cycle has negative net work by the system, meaning work is done on the system.'],
-['The Carnot cycle consists of','two isothermal and two adiabatic processes','two isobaric and two isochoric processes','four isothermal processes','four isobaric processes',0,'The reversible Carnot cycle contains two isothermal and two adiabatic processes.'],
-['In a cyclic process, the net heat supplied to the system is equal to','the change in internal energy','the net work done by the system','zero always','the final pressure',1,'From the first law, ΔU = Q − W. For a cycle ΔU=0, hence net Q equals net W.'],
-['For a reversible adiabatic process, heat exchange with the surroundings is','maximum','zero','equal to work','always negative',1,'An adiabatic process has Q=0, so no heat is exchanged with the surroundings.'],
-['In an isothermal process for an ideal gas, the temperature','increases continuously','decreases continuously','remains constant','becomes zero',2,'Isothermal means constant temperature. For an ideal gas, internal energy therefore remains constant.'],
-['In an isochoric process, the volume','increases','decreases','remains constant','equals pressure',2,'Isochoric means constant volume. Since dV=0, boundary work is zero.'],
-['In an isobaric process, the quantity kept constant is','temperature','pressure','volume','internal energy',1,'Isobaric means constant pressure.'],
-['For an ideal gas undergoing an isothermal process, the change in internal energy is','positive','negative','zero','infinite',2,'For an ideal gas, internal energy depends only on temperature. Constant temperature gives ΔU=0.'],
-['A refrigerator operates on a thermodynamic cycle to','convert all heat into work','transfer heat from a cold region to a hot region using work input','reduce the entropy of the universe to a negative value','produce work without energy input',1,'A refrigerator uses work input to remove heat from a low-temperature region and reject it to a higher-temperature region.'],
-['The coefficient of performance of a refrigerator is defined as','work input divided by heat removed','heat removed from the cold space divided by work input','heat rejected divided by temperature','net work divided by heat input',1,'COP of a refrigerator = QL/W, where QL is heat removed from the cold reservoir.'],
-['A heat engine absorbs 800 J and rejects 500 J during one cycle. Its net work output is','300 J','500 J','800 J','1300 J',0,'For a cycle, W = QH − QC = 800 − 500 = 300 J.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><p style="text-align:center">🏆 XP earned: <b>${score}</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Thermodynamic Cycles concept quiz">
+<title>SkillUp | Thermodynamic Cycles — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Thermodynamic Cycles</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"What is a thermodynamic cycle?","o":["A sequence of processes returning a system to its initial state","A single process with no energy transfer","A change that never ends","A process at constant temperature only"],"a":0,"e":"In a cycle, the system returns to its starting thermodynamic state."},{"q":"What is the net change in internal energy over a complete cycle?","o":["Zero","Positive","Negative","Equal to heat absorbed"],"a":0,"e":"Internal energy is a state function, so returning to the initial state gives ΔU = 0."},{"q":"For a complete cycle, the first law implies that net heat supplied is…","o":["Equal to net work done by the system","Always zero","Always negative","Twice the net work"],"a":0,"e":"Since ΔU = 0 for a cycle, net heat transfer equals net work done by the system."},{"q":"On a pressure-volume (P–V) diagram, the work done in a cycle equals…","o":["The signed area enclosed by the loop","The slope at the starting point","The pressure at the end point","The volume at the start point"],"a":0,"e":"Cyclic work is the signed area enclosed on the P–V diagram."},{"q":"A clockwise loop on a P–V diagram usually represents…","o":["Positive net work done by the gas","Negative net work done by the gas","Zero work in all cases","No heat transfer"],"a":0,"e":"For the usual P–V convention, a clockwise cycle has positive net work output."},{"q":"An anticlockwise cycle on a P–V diagram usually means…","o":["Net work is done on the gas","The gas produces net work","The pressure is always zero","The system has no internal energy"],"a":0,"e":"An anticlockwise loop corresponds to negative work by the gas, or net work input."},{"q":"Why is internal energy change zero after a complete cycle?","o":["The final state equals the initial state","Heat transfer must be zero","Work must be zero","Temperature must be zero"],"a":0,"e":"Internal energy depends on state, not on the path taken."},{"q":"Can heat transfer over a cycle be nonzero even though ΔU = 0?","o":["Yes","No","Only for an adiabatic cycle","Only if pressure is constant"],"a":0,"e":"The net heat can be nonzero and equals the net work for a complete cycle."},{"q":"A cyclic engine absorbs 800 J of net heat over a cycle. Its net work output is…","o":["0 J","400 J","800 J","1,600 J"],"a":2,"e":"For a cycle, Qnet = Wnet, so the work output is 800 J."},{"q":"If net work done by a cyclic system is 250 J, the net heat transfer to it is…","o":["−250 J","0 J","250 J","500 J"],"a":2,"e":"With the convention that heat entering and work done by the system are positive, Qnet = Wnet = 250 J."},{"q":"Which quantity is a state function?","o":["Internal energy","Work","Heat","Path length"],"a":0,"e":"Internal energy depends on the state; heat and work depend on the path."},{"q":"Which pair consists of path-dependent quantities?","o":["Heat and work","Pressure and temperature","Volume and internal energy","Mass and temperature"],"a":0,"e":"Heat and work describe energy transfer along a path."},{"q":"In a cyclic process, the working substance…","o":["Returns to its initial state","Must end at a higher temperature","Cannot do work","Cannot exchange heat"],"a":0,"e":"A cycle is defined by the return to the initial state."},{"q":"Which area represents net work on a P–V diagram?","o":["The area enclosed by the cycle, with sign set by direction","The area above the pressure axis only","The vertical height only","The horizontal width only"],"a":0,"e":"The loop's signed enclosed area gives net cyclic work."},{"q":"A rectangular cycle spans pressures 2 and 5 kPa and volumes 1 and 4 m³. The enclosed area magnitude is…","o":["3 J","9 J","12 J","15 J"],"a":2,"e":"Area = ΔPΔV = (5 − 2) kPa × (4 − 1) m³ = 9 kJ. (Because 1 kPa·m³ = 1 kJ.)"},{"q":"For a complete cycle, if net heat added is 600 J, what is net work done by the system?","o":["−600 J","0 J","300 J","600 J"],"a":3,"e":"With ΔU = 0, the net heat added equals the net work done by the system."},{"q":"Which cycle is used as the ideal model for maximum heat-engine efficiency between two reservoirs?","o":["Carnot cycle","A single isochoric process","Free expansion only","A straight-line path only"],"a":0,"e":"The reversible Carnot cycle gives the maximum possible efficiency for fixed reservoir temperatures."},{"q":"The Carnot cycle consists of…","o":["Two isothermal and two adiabatic processes","Two isobaric and two isochoric processes","Four isothermal processes","Four adiabatic processes"],"a":0,"e":"Its four reversible stages alternate isothermal and adiabatic processes."},{"q":"In a refrigerator cycle, the net work input is used to…","o":["Move heat from the cold space to warmer surroundings","Create energy from nothing","Stop all heat exchange","Make both reservoirs the same temperature instantly"],"a":0,"e":"The input work drives heat transfer from cold to hot."},{"q":"A heat engine cycle generally…","o":["Takes in heat, produces net work, and rejects some heat","Converts all heat input to work in every real case","Consumes work only and produces no output","Has no heat exchange"],"a":0,"e":"A cyclic heat engine outputs work while rejecting some absorbed heat."},{"q":"What is the net change in the system's pressure after one completed cycle?","o":["Zero","Always positive","Always negative","Equal to net work"],"a":0,"e":"All state variables return to their initial values after a complete cycle."},{"q":"What is the net change in the system's volume after one completed cycle?","o":["Zero","Always positive","Always negative","Equal to heat transfer"],"a":0,"e":"The final volume equals the initial volume for a complete cycle."},{"q":"A process path on a P–V diagram is a closed loop. What does this indicate?","o":["The system completes a thermodynamic cycle","The system has constant pressure","The system has constant volume","No work is done at any point"],"a":0,"e":"A closed loop returns to its starting state and represents a cycle."},{"q":"If a system returns to its initial state, which statement is necessarily true?","o":["Its net change in every state function is zero","Its net heat transfer must be zero","Its net work must be zero","No intermediate energy transfer occurred"],"a":0,"e":"Every state function has the same initial and final value."},{"q":"A cyclic process has 500 J of heat entering and 350 J leaving. Net work done by the system is…","o":["150 J","350 J","500 J","850 J"],"a":0,"e":"Net heat = 500 − 350 = 150 J; for a cycle, this equals net work."},{"q":"During an isochoric part of a cycle, the boundary work is…","o":["Zero","Always positive","Always negative","Equal to pressure"],"a":0,"e":"Boundary work W = ∫P dV is zero when volume does not change."},{"q":"During an isothermal expansion of an ideal gas, the gas's internal energy change is…","o":["Zero","Positive","Negative","Equal to pressure"],"a":0,"e":"For an ideal gas, internal energy depends only on temperature; constant temperature means ΔU = 0."},{"q":"Can two different paths connect the same initial and final states and give different work?","o":["Yes","No, work is a state function","Only if temperature is zero","Only for a cycle"],"a":0,"e":"Work is path-dependent, so different paths can transfer different amounts of energy as work."},{"q":"Which statement about a thermodynamic cycle is correct?","o":["The net work can be nonzero even though the net internal-energy change is zero","All heat transfer cancels to zero","The system cannot exchange energy","The temperature must remain constant"],"a":0,"e":"The system returns to its original state, but heat and work transfers over the path can have nonzero net values."},{"q":"A cycle encloses 2 m³·kPa on a P–V diagram. The work magnitude is…","o":["2 J","2 kJ","2 Pa","0 J"],"a":1,"e":"Since 1 kPa·m³ = 1 kJ, the enclosed area corresponds to 2 kJ."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Thermodynamic Cycles Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

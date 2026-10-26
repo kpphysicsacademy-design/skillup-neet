@@ -1,22 +1,151 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Spring-Mass System</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🌀 Spring-Mass System</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The time period of a mass-spring oscillator is','T=2π√(k/m)','T=2π√(m/k)','T=√(mk)','T=2πmk',1,'For an ideal spring-mass system, T=2π√(m/k).'],
-['The angular frequency of a mass-spring system is','ω=√(k/m)','ω=√(m/k)','ω=k/m','ω=2π√(m/k)',0,'Since ω=2π/T and T=2π√(m/k), ω=√(k/m).'],
-['The SI unit of spring constant k is','joule','newton','newton per metre','kilogram per metre',2,'From F=kx, k=F/x, so its SI unit is N/m.'],
-['If the attached mass is increased four times, the time period becomes','four times','twice','half','unchanged',1,'Because T∝√m, multiplying m by 4 multiplies T by 2.'],
-['If the spring constant is increased four times, the time period becomes','four times','twice','half','unchanged',2,'Because T∝1/√k, multiplying k by 4 makes T half.'],
-['For an ideal mass-spring oscillator, the restoring force is','F=kx','F=−kx','F=mx','F=−k/x',1,'Hooke’s law gives the restoring force F=−kx, opposite to displacement.'],
-['The equilibrium position of a horizontal ideal spring-mass system is the position where','speed is always zero','net force is zero','displacement is maximum','acceleration is maximum',1,'At equilibrium, the restoring force and hence acceleration are zero.'],
-['The maximum speed of a spring-mass oscillator of amplitude A is','A/ω','ωA','ω/A','kA/m',1,'Maximum speed occurs at equilibrium and is vmax=ωA.'],
-['The maximum acceleration of a spring-mass oscillator is','A/ω²','ωA','ω²A','kA²/m',2,'Since a=−ω²x, the maximum magnitude is amax=ω²A.'],
-['The total mechanical energy of an ideal spring-mass oscillator is','kA','½kA²','kA²','½mA²',1,'At maximum displacement, all energy is spring potential: E=½kA².'],
-['At the mean position of an ideal spring-mass oscillator, the spring potential energy is','maximum','zero','equal to total energy','infinite',1,'At x=0, U=½kx²=0, so kinetic energy is maximum.'],
-['At an extreme position of the oscillation, the velocity is','maximum','zero','ωA/2','infinite',1,'At x=±A, the mass momentarily stops before reversing direction.'],
-['A 1 kg mass is attached to a spring of k=100 N/m. The angular frequency is','5 rad/s','10 rad/s','20 rad/s','100 rad/s',1,'ω=√(k/m)=√100=10 rad/s.'],
-['For m=1 kg, k=100 N/m and amplitude A=0.10 m, the total energy is','0.05 J','0.5 J','5 J','0.01 J',1,'E=½kA²=½×100×(0.10)²=0.5 J.'],
-['If the amplitude of an ideal spring-mass oscillator is doubled, its total energy becomes','twice','four times','half','unchanged',1,'Since E=½kA², doubling A makes the total energy four times.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Spring-Mass System quiz">
+<title>SkillUp | Spring-Mass System — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Spring-Mass System</h1><p class="muted">Explore spring–mass oscillations with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"For an ideal horizontal spring–mass oscillator, the restoring force is:","o":["F = −kx","F = k/x","F = mx","F = −k/x"],"a":0,"e":"Hooke's law states that the restoring force is proportional to displacement and opposite in direction."},{"q":"The time period of a mass m attached to a spring of constant k is:","o":["2π√(m/k)","2π√(k/m)","√(mk)","2πmk"],"a":0,"e":"For an ideal spring–mass oscillator, T = 2π√(m/k)."},{"q":"The angular frequency of a spring–mass system is:","o":["√(k/m)","√(m/k)","2π√(m/k)","k/m"],"a":0,"e":"From mẍ = −kx, ω² = k/m, so ω = √(k/m)."},{"q":"The SI unit of spring constant k is:","o":["N/m","N·m","kg/m","J/s"],"a":0,"e":"From F = kx, k = F/x and its SI unit is newton per metre."},{"q":"If the attached mass is quadrupled while k remains constant, the period becomes:","o":["Twice as large","Four times as large","Half as large","Unchanged"],"a":0,"e":"Since T ∝ √m, multiplying mass by four doubles the period."},{"q":"If the spring constant is multiplied by four while mass is fixed, the period becomes:","o":["Half as large","Twice as large","Four times as large","Unchanged"],"a":0,"e":"T ∝ 1/√k, so a fourfold increase in k halves T."},{"q":"The frequency of a spring–mass oscillator is:","o":["(1/2π)√(k/m)","2π√(k/m)","(1/2π)√(m/k)","√(mk)/(2π)"],"a":0,"e":"Frequency f = 1/T = (1/2π)√(k/m)."},{"q":"A 1 kg mass is attached to a spring with k = 4 N/m. Its angular frequency is:","o":["2 rad/s","4 rad/s","0.5 rad/s","π rad/s"],"a":0,"e":"ω = √(k/m) = √(4/1) = 2 rad/s."},{"q":"For m = 1 kg and k = 4 N/m, the period is:","o":["π s","2π s","1/π s","0.5 s"],"a":0,"e":"T = 2π√(1/4) = π s."},{"q":"At the equilibrium position of an ideal spring–mass oscillator, the spring force relative to equilibrium is:","o":["Zero","Maximum","Always equal to mg","Infinite"],"a":0,"e":"At equilibrium displacement x = 0, so the restoring force −kx is zero."},{"q":"At maximum displacement from equilibrium, the speed of an ideal oscillator is:","o":["Zero","Maximum","Half the maximum speed","Always equal to ωA/2"],"a":0,"e":"At each turning point, the mass momentarily stops before reversing direction."},{"q":"The speed of a spring–mass oscillator is maximum when it passes through:","o":["Equilibrium","Either turning point","A point beyond its amplitude","Every point equally"],"a":0,"e":"At equilibrium, spring potential energy is minimum and kinetic energy is maximum."},{"q":"The maximum acceleration magnitude of a spring–mass oscillator with amplitude A is:","o":["ω²A","ωA","A/ω","ω/A"],"a":0,"e":"Since a = −ω²x, the maximum magnitude occurs at |x| = A."},{"q":"The maximum speed of a spring–mass oscillator is:","o":["ωA","ω²A","A/ω","2ωA"],"a":0,"e":"For SHM, vmax = ωA."},{"q":"The total mechanical energy of an ideal spring–mass oscillator with amplitude A is:","o":["(1/2)kA²","kA²","(1/2)mA²","mωA"],"a":0,"e":"At a turning point all the energy is spring potential energy, E = ½kA²."},{"q":"If the amplitude doubles while m and k stay fixed, the total energy becomes:","o":["Four times as large","Twice as large","Half as large","Unchanged"],"a":0,"e":"Total energy is proportional to A²; doubling A multiplies energy by four."},{"q":"For an ideal horizontal spring–mass oscillator, the period is independent of:","o":["Amplitude","Mass","Spring constant","Both mass and spring constant"],"a":0,"e":"In the linear ideal model, T = 2π√(m/k) does not depend on amplitude."},{"q":"A mass makes 10 complete oscillations in 20 s. Its frequency is:","o":["0.5 Hz","2 Hz","10 Hz","20 Hz"],"a":0,"e":"f = number of oscillations/time = 10/20 = 0.5 Hz."},{"q":"If the period is 0.25 s, the frequency is:","o":["4 Hz","0.25 Hz","2 Hz","8 Hz"],"a":0,"e":"f = 1/T = 1/0.25 = 4 Hz."},{"q":"For a vertical spring at its static equilibrium, adding a mass m causes an extension x. The spring constant is:","o":["mg/x","mx/g","gx/m","m/(gx)"],"a":0,"e":"At static equilibrium, kx = mg, hence k = mg/x."},{"q":"For a vertical spring–mass oscillator, gravity changes the equilibrium position but, for an ideal linear spring, the period is:","o":["2π√(m/k)","2π√(k/m)","2π√(g/m)","2π√(m/g)"],"a":0,"e":"Gravity shifts the equilibrium extension; oscillations about that equilibrium still have ω = √(k/m)."},{"q":"A spring of k = 100 N/m holds a mass of 1 kg. Its frequency is closest to:","o":["1.59 Hz","10 Hz","3.18 Hz","0.50 Hz"],"a":0,"e":"f = (1/2π)√(100/1) = 10/(2π) ≈ 1.59 Hz."},{"q":"If the mass is reduced to one-quarter while k remains fixed, the frequency becomes:","o":["Twice as large","Half as large","One-quarter as large","Unchanged"],"a":0,"e":"f ∝ 1/√m, so reducing m to one-quarter doubles the frequency."},{"q":"A spring exerts a restoring force of 6 N when stretched 0.03 m. Its spring constant is:","o":["200 N/m","18 N/m","2 N/m","0.005 N/m"],"a":0,"e":"k = F/x = 6/0.03 = 200 N/m."},{"q":"In SHM, the acceleration of a spring–mass oscillator is related to displacement by:","o":["a = −(k/m)x","a = +(k/m)x","a = −(m/k)x","a = kx²/m"],"a":0,"e":"Newton's second law and Hooke's law give ma = −kx, hence a = −(k/m)x."},{"q":"Which condition makes the ideal spring–mass motion simple harmonic?","o":["Restoring force is linear in displacement and opposite in direction","Force is constant at every position","Friction always dominates","The mass changes continuously"],"a":0,"e":"A restoring force F = −kx produces acceleration proportional and opposite to displacement."},{"q":"At the equilibrium point, the ideal oscillator's total mechanical energy is:","o":["All kinetic energy","All spring potential energy","Zero for any nonzero amplitude","Always half kinetic and half potential"],"a":0,"e":"At equilibrium x = 0, spring potential energy is zero and speed is maximum."},{"q":"At a turning point, the ideal oscillator's energy is:","o":["All spring potential energy","All kinetic energy","Half kinetic and half potential in every case","Zero"],"a":0,"e":"At maximum displacement, speed is zero and the energy is stored in the spring."},{"q":"If both m and k are multiplied by the same factor, the period:","o":["Remains unchanged","Multiplies by that factor","Divides by that factor","Becomes zero"],"a":0,"e":"The ratio m/k remains constant, so T = 2π√(m/k) is unchanged."},{"q":"A mass–spring oscillator has T = 2 s. If k is increased to nine times its original value with m unchanged, the new period is:","o":["2/3 s","6 s","18 s","1/3 s"],"a":0,"e":"T ∝ 1/√k, so the new period is 2/√9 = 2/3 s."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Spring-Mass System Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

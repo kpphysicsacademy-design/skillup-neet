@@ -1,37 +1,155 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Electric Field</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Superposition of Charges quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Electric Field — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body>
-<div class="wrap"><div class="card"><h1>⚡ Electric Field</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div>
-<script>
-const qs=[
-['The electric field at a point is defined as the','force on a unit positive test charge','force on any charge','charge per unit volume','potential energy per unit charge',0,'Electric field E is the force experienced by a unit positive test charge: E=F/q.'],
-['The SI unit of electric field is','N/C','C/N','J/C','N·m',0,'Electric field has SI unit newton per coulomb (N/C), equivalently V/m.'],
-['The electric field due to a point charge q at distance r in vacuum is','kq/r','kq/r²','kr/q','q/(kr²)',1,'For a point charge, E=k|q|/r².'],
-['The direction of the electric field due to a positive point charge is','toward the charge','radially outward','perpendicular to every radius','random',1,'Electric field lines emerge radially outward from a positive charge.'],
-['The direction of the electric field due to a negative point charge is','radially outward','radially inward toward the charge','always upward','zero everywhere',1,'Electric field lines point toward a negative charge.'],
-['If the distance from a point charge is doubled, the electric field magnitude becomes','2E','E','E/2','E/4',3,'Since E is proportional to 1/r², doubling r makes the field one-fourth.'],
-['If the source charge is doubled while distance remains unchanged, the electric field becomes','E/4','E/2','2E','4E',2,'Since E is directly proportional to source charge q, doubling q doubles E.'],
-['The electric field inside an ideal conductor in electrostatic equilibrium is','maximum','zero','equal to surface charge density','infinite',1,'In electrostatic equilibrium, the electric field within the conducting material is zero.'],
-['Electric field lines','can intersect at a point','never intersect each other','always form closed loops','have no direction',1,'At an intersection a field would have two directions, which is impossible at a single point.'],
-['The electric field at the midpoint between two identical positive charges is','zero','kq/r²','2kq/r²','infinite',0,'The two equal fields at the midpoint are opposite in direction and cancel.'],
-['A charge of 2 μC experiences a force of 0.6 N in an electric field. The field magnitude is','0.3×10⁶ N/C','3×10⁵ N/C','1.2×10⁶ N/C','3×10⁶ N/C',1,'E=F/q=0.6/(2×10⁻⁶)=3×10⁵ N/C.'],
-['A point charge of 1 μC produces an electric field at 3 m in vacuum. Taking k=9×10⁹, its magnitude is','100 N/C','1000 N/C','3000 N/C','9000 N/C',1,'E=kq/r²=(9×10⁹)(10⁻⁶)/9=1000 N/C.'],
-['For a uniformly charged spherical shell, the electric field at any point inside the shell is','zero','maximum','kQ/r² using the interior r','always equal to surface field',0,'By Gauss law, the electric field inside an ideal uniformly charged spherical shell is zero.'],
-['The electric field due to several point charges at a point is obtained by','adding their charges only','adding the electric field vectors','multiplying all field magnitudes','using only the nearest charge',1,'Electric fields obey the superposition principle, so individual field vectors are added.'],
-['A test charge used to define electric field should ideally be','large and negative','small and positive','large and positive','neutral only',1,'A small positive test charge is used so it does not significantly disturb the source-charge configuration.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
-</script>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Electric Field</h1><p class="muted">Practice electric-field definition, point-charge fields, direction, superposition, conductors, and numerical calculations with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Electric field at a point is defined as the…","o":["Force on a unit positive test charge","Charge per unit volume","Energy per unit time","Force multiplied by charge"],"a":0,"e":"Electric field is force per unit positive test charge: \\(\\vec E=\\vec F/q_0\\)."},{"q":"The SI unit of electric field is…","o":["\\(\\text{N/C}\\)","\\(\\text{C/N}\\)","\\(\\text{J}\\)","\\(\\text{C}\\)"],"a":0,"e":"The SI unit is newton per coulomb (N/C), equivalent to volt per metre (V/m)."},{"q":"The magnitude of the electric field due to a point charge in vacuum is…","o":["\\(k|q|/r\\)","\\(k|q|/r^2\\)","\\(kr^2/|q|\\)","\\(|q|/(kr^2)\\)"],"a":1,"e":"For a point charge, \\(E=k|q|/r^2\\)."},{"q":"The electric field direction around a positive point charge is…","o":["Radially inward","Radially outward","Circular around the charge","Zero in every direction"],"a":1,"e":"A positive test charge is repelled by a positive source charge, so the field points outward."},{"q":"The electric field direction around a negative point charge is…","o":["Radially outward","Radially inward","Always upward","Always zero"],"a":1,"e":"A positive test charge is attracted to a negative source charge, so the field points inward."},{"q":"If the distance from a point charge doubles, the field magnitude becomes…","o":["\\(2E\\)","\\(E/2\\)","\\(E/4\\)","\\(4E\\)"],"a":2,"e":"Since \\(E\\propto1/r^2\\), doubling distance reduces the field to one-fourth."},{"q":"If the magnitude of the source charge doubles while distance stays fixed, the field magnitude…","o":["Halves","Doubles","Quadruples","Does not change"],"a":1,"e":"The field is directly proportional to the source-charge magnitude."},{"q":"The electric field inside the material of an ideal conductor in electrostatic equilibrium is…","o":["Zero","Constant but non-zero","Infinite","Always equal to the outside field"],"a":0,"e":"Free charges redistribute until the electric field within the conducting material is zero."},{"q":"Two electric field lines can intersect…","o":["At every positive charge","Only at a negative charge","Never","Only in a uniform field"],"a":2,"e":"An intersection would imply two field directions at one point, which is impossible."},{"q":"At the midpoint between two identical positive charges placed symmetrically, the net electric field is…","o":["Zero","\\(kq/r^2\\)","\\(2kq/r^2\\)","Infinite"],"a":0,"e":"The two equal fields at the midpoint point in opposite directions and cancel."},{"q":"A charge of \\(2\\,\\mu\\text{C}\\) experiences a force of 0.6 N. The field magnitude is…","o":["\\(3\\times10^4\\,\\text{N/C}\\)","\\(3\\times10^5\\,\\text{N/C}\\)","\\(1.2\\times10^6\\,\\text{N/C}\\)","\\(3\\times10^6\\,\\text{N/C}\\)"],"a":1,"e":"\\(E=F/q=0.6/(2\\times10^{-6})=3\\times10^5\\,\\text{N/C}\\)."},{"q":"A \\(1\\,\\mu\\text{C}\\) point charge produces a field at 3 m in vacuum. Take \\(k=9\\times10^9\\). The field is…","o":["100 N/C","1000 N/C","3000 N/C","9000 N/C"],"a":1,"e":"\\(E=kq/r^2=(9\\times10^9)(10^{-6})/9=1000\\,\\text{N/C}\\)."},{"q":"For an ideal uniformly charged spherical shell, the electric field inside the shell is…","o":["Zero","\\(kQ/r^2\\) at all interior points","Maximum at the center","Infinite at the center"],"a":0,"e":"Gauss's law gives zero electric field everywhere inside an ideal uniformly charged spherical shell."},{"q":"The net electric field due to several point charges is found by…","o":["Adding the charge magnitudes only","Adding the electric-field vectors","Multiplying field magnitudes","Using only the nearest charge"],"a":1,"e":"Electric fields obey superposition, so each contribution is added vectorially."},{"q":"An ideal test charge used to define an electric field is taken to be…","o":["Small and positive","Large and negative","Large and positive","Neutral and extended"],"a":0,"e":"A small positive test charge defines the field direction while minimizing disturbance to the source configuration."},{"q":"The electric field is a…","o":["Scalar quantity","Vector quantity","Dimensionless quantity","Unit of charge"],"a":1,"e":"Electric field has both magnitude and direction."},{"q":"A positive charge placed in an electric field experiences force…","o":["Opposite to the field direction","Along the field direction","Always perpendicular to the field","Independent of the field"],"a":1,"e":"For positive q, \\(\\vec F=q\\vec E\\), so force and field point in the same direction."},{"q":"A negative charge placed in an electric field experiences force…","o":["Along the field direction","Opposite to the field direction","Always zero","Always upward"],"a":1,"e":"For negative q, \\(\\vec F=q\\vec E\\) points opposite to the field."},{"q":"The relation between electric field and force on a test charge is…","o":["\\(\\vec E=q\\vec F\\)","\\(\\vec E=\\vec F/q\\)","\\(\\vec E=\\vec F+q\\)","\\(\\vec E=q/\\vec F\\)"],"a":1,"e":"Electric field is force per unit test charge: \\(\\vec E=\\vec F/q\\)."},{"q":"At a fixed point in vacuum, if the source charge is tripled, the field magnitude becomes…","o":["\\(E/3\\)","\\(E\\)","\\(3E\\)","\\(9E\\)"],"a":2,"e":"The field magnitude is directly proportional to the source charge."},{"q":"If the distance from a point charge is tripled, the field magnitude becomes…","o":["\\(E/3\\)","\\(E/6\\)","\\(E/9\\)","\\(9E\\)"],"a":2,"e":"Inverse-square dependence gives \\(E'=E/3^2=E/9\\)."},{"q":"The electric field at a point is zero. Which statement is necessarily true?","o":["No source charges exist anywhere","The vector sum of all field contributions is zero at that point","Every individual field contribution is zero","The electric potential must be zero"],"a":1,"e":"Different field contributions can cancel; zero field does not require zero potential or no charges."},{"q":"The electric field at a distance r from a point charge depends on…","o":["Only the test charge","Source-charge magnitude and distance","Only the mass of the test charge","The color of the source"],"a":1,"e":"In vacuum, \\(E=k|q|/r^2\\), so it depends on source charge and distance."},{"q":"A field of \\(200\\,\\text{N/C}\\) acts on a \\(3\\,\\text{C}\\) positive charge. The force magnitude is…","o":["\\(\\frac{200}{3}\\,\\text{N}\\)","\\(203\\,\\text{N}\\)","\\(600\\,\\text{N}\\)","\\(0.015\\,\\text{N}\\)"],"a":2,"e":"\\(F=qE=3\\times200=600\\,\\text{N}\\)."},{"q":"A point charge of \\(+4\\,\\mu\\text{C}\\) creates a field at 2 m in vacuum. With \\(k=9\\times10^9\\), its magnitude is…","o":["\\(450\\,\\text{N/C}\\)","\\(900\\,\\text{N/C}\\)","\\(9000\\,\\text{N/C}\\)","\\(18000\\,\\text{N/C}\\)"],"a":2,"e":"\\(E=kq/r^2=(9\\times10^9)(4\\times10^{-6})/4=9\\times10^3\\,\\text{N/C}\\)."},{"q":"Electric field lines are drawn so that the tangent at a point gives the…","o":["Magnitude of charge","Direction of the electric field","Electric potential only","Mass of a test charge"],"a":1,"e":"The tangent to a field line gives the local electric-field direction."},{"q":"Where electric field lines are closer together, the field is generally…","o":["Weaker","Stronger","Always zero","Negative by definition"],"a":1,"e":"Field-line density represents relative field strength; closer lines indicate a stronger field."},{"q":"The electric field due to a point charge at an infinite distance approaches…","o":["Infinity","Zero","A fixed non-zero value","The charge itself"],"a":1,"e":"As \\(r\\to\\infty\\), \\(E=k|q|/r^2\\to0\\)."},{"q":"For a uniform electric field, the field vectors at different points have…","o":["Different magnitudes and directions everywhere","The same magnitude and direction","Zero magnitude","Directions that must be radial"],"a":1,"e":"A uniform field has constant magnitude and direction throughout the region."},{"q":"A \\(2\\,\\mu\\text{C}\\) positive test charge is in a field of \\(5\\times10^3\\,\\text{N/C}\\). The force magnitude is…","o":["\\(10^{-3}\\,\\text{N}\\)","\\(10^{-2}\\,\\text{N}\\)","\\(10\\,\\text{N}\\)","\\(2.5\\times10^9\\,\\text{N}\\)"],"a":0,"e":"\\(F=qE=(2\\times10^{-6})(5\\times10^3)=10^{-2}\\,\\text{N}\\)."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Electric Field Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -71,36 +71,336 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 (function(){
 'use strict';
 const questions = [
-{q:"For a Maxwell-Boltzmann distribution, the most probable speed is",o:["√(RT/M)","√(2RT/M)","√(3RT/M)","√(8RT/πM)"],a:1,e:"The most probable speed is v_mp = √(2RT/M)."},
-{q:"The most probable speed of gas molecules is the speed at which",o:["all molecules move","the number of molecules is maximum","the average kinetic energy is zero","pressure is minimum"],a:1,e:"It corresponds to the peak of the Maxwell-Boltzmann speed distribution."},
-{q:"At constant molar mass, most probable speed is proportional to",o:["T","1/T","√T","T²"],a:2,e:"Since v_mp = √(2RT/M), v_mp is proportional to √T."},
-{q:"At constant temperature, v_mp is proportional to",o:["M","1/M","√M","1/√M"],a:3,e:"From v_mp = √(2RT/M), the most probable speed varies as 1/√M."},
-{q:"If the absolute temperature of a gas is increased four times, v_mp becomes",o:["half","twice","four times","unchanged"],a:1,e:"Because v_mp ∝ √T, increasing T by 4 makes v_mp twice as large."},
-{q:"If v_mp of a gas is v at temperature T, at temperature 9T it is",o:["v/3","v","3v","9v"],a:2,e:"v_mp(9T) = √9 v = 3v."},
-{q:"At the same temperature, which gas has the highest most probable speed?",o:["O₂","N₂","H₂","CO₂"],a:2,e:"At fixed T, v_mp ∝ 1/√M. H₂ has the smallest molar mass."},
-{q:"For two gases at the same temperature, v_mp,1/v_mp,2 equals",o:["√(M₁/M₂)","√(M₂/M₁)","M₁/M₂","M₂/M₁"],a:1,e:"At the same T, v_mp ∝ 1/√M, so the ratio is √(M₂/M₁)."},
-{q:"The ratio of most probable speeds of H₂ and O₂ at the same temperature is approximately",o:["1/2","1/4","4","16"],a:2,e:"v_mp(H₂)/v_mp(O₂) = √(32/2) = √16 = 4."},
-{q:"For N₂ with molar mass 28 g mol⁻¹ at temperature T, v_mp is proportional to",o:["√(T/28)","√(28T)","28/√T","T/28"],a:0,e:"With molar mass expressed consistently, v_mp = √(2RT/M), so it is proportional to √(T/M)."},
-{q:"The SI unit of most probable speed is",o:["m","m s⁻¹","m s⁻²","J"],a:1,e:"Speed is distance divided by time, so its SI unit is m s⁻¹."},
-{q:"The three characteristic molecular speeds are related as",o:["v_mp < v_avg < v_rms","v_avg < v_mp < v_rms","v_rms < v_avg < v_mp","v_mp = v_avg = v_rms"],a:0,e:"For a Maxwell distribution, v_mp < v_avg < v_rms."},
-{q:"Which expression represents the mean speed of gas molecules?",o:["√(2RT/M)","√(3RT/M)","√(8RT/πM)","RT/M"],a:2,e:"The average speed is v_avg = √(8RT/πM)."},
-{q:"Which expression represents the root-mean-square speed?",o:["√(2RT/M)","√(3RT/M)","√(8RT/πM)","RT/M"],a:1,e:"The RMS speed is v_rms = √(3RT/M)."},
-{q:"If the molar mass of a gas is increased four times at constant temperature, its most probable speed becomes",o:["4v","2v","v/2","v/4"],a:2,e:"Because v_mp ∝ 1/√M, four times the molar mass gives half the most probable speed."},
-{q:"The most probable speed of an ideal gas is:",o:["√(2RT/M)","√(3RT/M)","√(8RT/πM)","RT/M"],a:0,e:"The most probable speed is vₚ = √(2RT/M), where M is molar mass."},
-{q:"For the same ideal gas at temperature T, which speed is largest?",o:["Most probable speed","Mean speed","Rms speed","All are equal"],a:2,e:"For a Maxwell speed distribution, vᵣₘₛ > v̄ > vₚ."},
-{q:"If absolute temperature becomes four times larger, most probable speed becomes:",o:["4 times","2 times","Half","One-quarter"],a:1,e:"Most probable speed varies as √T, so four times the temperature gives twice the speed."},
-{q:"At the same temperature, which gas has the lowest most probable speed?",o:["H₂","He","N₂","CO₂"],a:3,e:"Most probable speed is inversely proportional to the square root of molar mass."},
-{q:"The ratio of most probable speeds for gases A and B at the same temperature is:",o:["√(M_B/M_A)","√(M_A/M_B)","M_A/M_B","M_B/M_A"],a:0,e:"Since vₚ ∝ 1/√M, vₚ,A/vₚ,B = √(M_B/M_A)."},
-{q:"Which temperature scale is used in the most probable speed formula?",o:["Celsius","Kelvin","Fahrenheit","Any scale"],a:1,e:"The formula uses absolute temperature in kelvin."},
-{q:"If the molar mass increases by a factor of 9 at constant temperature, most probable speed becomes:",o:["3 times","9 times","One-third","One-ninth"],a:2,e:"Speed varies as 1/√M, so a ninefold molar mass gives one-third the speed."},
-{q:"For an ideal gas, the most probable speed depends on:",o:["Molar mass and absolute temperature","Container colour","Amount of gas only","Pressure alone"],a:0,e:"vₚ = √(2RT/M), so it depends on temperature and molar mass."},
-{q:"For hydrogen and oxygen at the same temperature, the ratio vₚ(H₂)/vₚ(O₂) is approximately:",o:["1/4","2","4","16"],a:2,e:"The ratio is √(M_O₂/M_H₂) = √(32/2) = 4."},
-{q:"The most probable speed corresponds to the speed at the:",o:["Peak of the Maxwell–Boltzmann speed distribution","Mean of all molecular speeds","Square root of mean-square speed","Speed of every molecule"],a:0,e:"It is the speed with the greatest probability density, located at the distribution peak."},
-{q:"For a fixed gas, if the most probable speed doubles, absolute temperature becomes:",o:["2T","4T","T/2","T/4"],a:1,e:"Since vₚ ∝ √T, doubling the speed requires four times the absolute temperature."},
-{q:"Which relation between most probable speed vₚ and rms speed vᵣₘₛ is correct?",o:["vₚ = vᵣₘₛ","vₚ = √(2/3) vᵣₘₛ","vₚ = √(3/2) vᵣₘₛ","vₚ = 3vᵣₘₛ"],a:1,e:"Using vₚ = √(2RT/M) and vᵣₘₛ = √(3RT/M) gives vₚ/vᵣₘₛ = √(2/3)."},
-{q:"At the same temperature, the most probable speed of helium is greater than that of argon because helium has:",o:["Lower molar mass","Higher molar mass","Higher average kinetic energy","Zero collisions"],a:0,e:"At the same temperature, lighter gas molecules have greater characteristic speeds."},
-{q:"If a gas is heated from 300 K to 1200 K, its most probable speed:",o:["Doubles","Quadruples","Halves","Remains the same"],a:0,e:"The temperature increases fourfold, so most probable speed doubles."},
-{q:"Which expression is dimensionally a speed?",o:["√(RT/M)","RT/M","M/RT","RMT"],a:0,e:"RT/M has units of m² s⁻², so its square root has units of m s⁻¹."}
+  {
+    "q": "For a Maxwell-Boltzmann distribution, the most probable speed is",
+    "o": [
+      "\\(\\sqrt{\\frac{RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{2RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{3RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{8RT}{\\pi M}}\\)"
+    ],
+    "a": 1,
+    "e": "The most probable speed is \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\)."
+  },
+  {
+    "q": "The most probable speed of gas molecules is the speed at which",
+    "o": [
+      "all molecules move",
+      "the number of molecules is maximum",
+      "the average kinetic energy is zero",
+      "pressure is minimum"
+    ],
+    "a": 1,
+    "e": "It corresponds to the peak of the Maxwell-Boltzmann speed distribution."
+  },
+  {
+    "q": "At constant molar mass, most probable speed is proportional to",
+    "o": [
+      "T",
+      "1/T",
+      "\\(\\sqrt{T}\\)",
+      "T²"
+    ],
+    "a": 2,
+    "e": "Since \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\), \\(v_{\\mathrm{mp}}\\) is proportional to \\(\\sqrt{T}\\)."
+  },
+  {
+    "q": "At constant temperature, \\(v_{\\mathrm{mp}}\\) is proportional to",
+    "o": [
+      "M",
+      "1/M",
+      "√M",
+      "\\(\\frac{1}{\\sqrt{M}}\\)"
+    ],
+    "a": 3,
+    "e": "From \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\), the most probable speed varies as \\(\\frac{1}{\\sqrt{M}}\\)."
+  },
+  {
+    "q": "If the absolute temperature of a gas is increased four times, \\(v_{\\mathrm{mp}}\\) becomes",
+    "o": [
+      "half",
+      "twice",
+      "four times",
+      "unchanged"
+    ],
+    "a": 1,
+    "e": "Because \\(v_{\\mathrm{mp}}\\) ∝ \\(\\sqrt{T}\\), increasing T by 4 makes \\(v_{\\mathrm{mp}}\\) twice as large."
+  },
+  {
+    "q": "If \\(v_{\\mathrm{mp}}\\) of a gas is v at temperature T, at temperature 9T it is",
+    "o": [
+      "v/3",
+      "v",
+      "3v",
+      "9v"
+    ],
+    "a": 2,
+    "e": "\\(v_{\\mathrm{mp}}\\)(9T) = \\(\\sqrt{9}\\) v = 3v."
+  },
+  {
+    "q": "At the same temperature, which gas has the highest most probable speed?",
+    "o": [
+      "O₂",
+      "N₂",
+      "H₂",
+      "CO₂"
+    ],
+    "a": 2,
+    "e": "At fixed T, \\(v_{\\mathrm{mp}}\\) ∝ \\(\\frac{1}{\\sqrt{M}}\\). H₂ has the smallest molar mass."
+  },
+  {
+    "q": "For two gases at the same temperature, \\(v_{\\mathrm{mp}}\\),1/\\(v_{\\mathrm{mp}}\\),2 equals",
+    "o": [
+      "\\(\\sqrt{\\frac{M_1}{M_2}}\\)",
+      "\\(\\sqrt{\\frac{M_2}{M_1}}\\)",
+      "M₁/M₂",
+      "M₂/M₁"
+    ],
+    "a": 1,
+    "e": "At the same T, \\(v_{\\mathrm{mp}}\\) ∝ \\(\\frac{1}{\\sqrt{M}}\\), so the ratio is \\(\\sqrt{\\frac{M_2}{M_1}}\\)."
+  },
+  {
+    "q": "The ratio of most probable speeds of H₂ and O₂ at the same temperature is approximately",
+    "o": [
+      "1/2",
+      "1/4",
+      "4",
+      "16"
+    ],
+    "a": 2,
+    "e": "\\(v_{\\mathrm{mp}}\\)(H₂)/\\(v_{\\mathrm{mp}}\\)(O₂) = √(32/2) = \\(\\sqrt{16}\\) = 4."
+  },
+  {
+    "q": "For N₂ with molar mass 28 g mol⁻¹ at temperature T, \\(v_{\\mathrm{mp}}\\) is proportional to",
+    "o": [
+      "√(T/28)",
+      "√(28T)",
+      "28/\\(\\sqrt{T}\\)",
+      "T/28"
+    ],
+    "a": 0,
+    "e": "With molar mass expressed consistently, \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\), so it is proportional to \\(\\sqrt{\\frac{T}{M}}\\)."
+  },
+  {
+    "q": "The SI unit of most probable speed is",
+    "o": [
+      "m",
+      "m s⁻¹",
+      "m s⁻²",
+      "J"
+    ],
+    "a": 1,
+    "e": "Speed is distance divided by time, so its SI unit is m s⁻¹."
+  },
+  {
+    "q": "The three characteristic molecular speeds are related as",
+    "o": [
+      "\\(v_{\\mathrm{mp}}\\) < \\(v_{\\mathrm{avg}}\\) < \\(v_{\\mathrm{rms}}\\)",
+      "\\(v_{\\mathrm{avg}}\\) < \\(v_{\\mathrm{mp}}\\) < \\(v_{\\mathrm{rms}}\\)",
+      "\\(v_{\\mathrm{rms}}\\) < \\(v_{\\mathrm{avg}}\\) < \\(v_{\\mathrm{mp}}\\)",
+      "\\(v_{\\mathrm{mp}}\\) = \\(v_{\\mathrm{avg}}\\) = \\(v_{\\mathrm{rms}}\\)"
+    ],
+    "a": 0,
+    "e": "For a Maxwell distribution, \\(v_{\\mathrm{mp}}\\) < \\(v_{\\mathrm{avg}}\\) < \\(v_{\\mathrm{rms}}\\)."
+  },
+  {
+    "q": "Which expression represents the mean speed of gas molecules?",
+    "o": [
+      "\\(\\sqrt{\\frac{2RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{3RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{8RT}{\\pi M}}\\)",
+      "RT/M"
+    ],
+    "a": 2,
+    "e": "The average speed is \\(v_{\\mathrm{avg}}\\) = \\(\\sqrt{\\frac{8RT}{\\pi M}}\\)."
+  },
+  {
+    "q": "Which expression represents the root-mean-square speed?",
+    "o": [
+      "\\(\\sqrt{\\frac{2RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{3RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{8RT}{\\pi M}}\\)",
+      "RT/M"
+    ],
+    "a": 1,
+    "e": "The RMS speed is \\(v_{\\mathrm{rms}}\\) = \\(\\sqrt{\\frac{3RT}{M}}\\)."
+  },
+  {
+    "q": "If the molar mass of a gas is increased four times at constant temperature, its most probable speed becomes",
+    "o": [
+      "4v",
+      "2v",
+      "v/2",
+      "v/4"
+    ],
+    "a": 2,
+    "e": "Because \\(v_{\\mathrm{mp}}\\) ∝ \\(\\frac{1}{\\sqrt{M}}\\), four times the molar mass gives half the most probable speed."
+  },
+  {
+    "q": "The most probable speed of an ideal gas is:",
+    "o": [
+      "\\(\\sqrt{\\frac{2RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{3RT}{M}}\\)",
+      "\\(\\sqrt{\\frac{8RT}{\\pi M}}\\)",
+      "RT/M"
+    ],
+    "a": 0,
+    "e": "The most probable speed is \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\), where M is molar mass."
+  },
+  {
+    "q": "For the same ideal gas at temperature T, which speed is largest?",
+    "o": [
+      "Most probable speed",
+      "Mean speed",
+      "Rms speed",
+      "All are equal"
+    ],
+    "a": 2,
+    "e": "For a Maxwell speed distribution, \\(v_{\\mathrm{rms}}\\) > \\(\\bar v\\) > \\(v_{\\mathrm{mp}}\\)."
+  },
+  {
+    "q": "If absolute temperature becomes four times larger, most probable speed becomes:",
+    "o": [
+      "4 times",
+      "2 times",
+      "Half",
+      "One-quarter"
+    ],
+    "a": 1,
+    "e": "Most probable speed varies as \\(\\sqrt{T}\\), so four times the temperature gives twice the speed."
+  },
+  {
+    "q": "At the same temperature, which gas has the lowest most probable speed?",
+    "o": [
+      "H₂",
+      "He",
+      "N₂",
+      "CO₂"
+    ],
+    "a": 3,
+    "e": "Most probable speed is inversely proportional to the square root of molar mass."
+  },
+  {
+    "q": "The ratio of most probable speeds for gases A and B at the same temperature is:",
+    "o": [
+      "\\(\\sqrt{\\frac{M_B}{M_A}}\\)",
+      "\\(\\sqrt{\\frac{M_A}{M_B}}\\)",
+      "M_A/M_B",
+      "M_B/M_A"
+    ],
+    "a": 0,
+    "e": "Since \\(v_{\\mathrm{mp}}\\) ∝ \\(\\frac{1}{\\sqrt{M}}\\), \\(v_{\\mathrm{mp}}\\),A/\\(v_{\\mathrm{mp}}\\),B = \\(\\sqrt{\\frac{M_B}{M_A}}\\)."
+  },
+  {
+    "q": "Which temperature scale is used in the most probable speed formula?",
+    "o": [
+      "Celsius",
+      "Kelvin",
+      "Fahrenheit",
+      "Any scale"
+    ],
+    "a": 1,
+    "e": "The formula uses absolute temperature in kelvin."
+  },
+  {
+    "q": "If the molar mass increases by a factor of 9 at constant temperature, most probable speed becomes:",
+    "o": [
+      "3 times",
+      "9 times",
+      "One-third",
+      "One-ninth"
+    ],
+    "a": 2,
+    "e": "Speed varies as \\(\\frac{1}{\\sqrt{M}}\\), so a ninefold molar mass gives one-third the speed."
+  },
+  {
+    "q": "For an ideal gas, the most probable speed depends on:",
+    "o": [
+      "Molar mass and absolute temperature",
+      "Container colour",
+      "Amount of gas only",
+      "Pressure alone"
+    ],
+    "a": 0,
+    "e": "\\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\), so it depends on temperature and molar mass."
+  },
+  {
+    "q": "For hydrogen and oxygen at the same temperature, the ratio \\(v_{\\mathrm{mp}}\\)(H₂)/\\(v_{\\mathrm{mp}}\\)(O₂) is approximately:",
+    "o": [
+      "1/4",
+      "2",
+      "4",
+      "16"
+    ],
+    "a": 2,
+    "e": "The ratio is \\(\\sqrt{\\frac{M_{O_2}}{M_{H_2}}}\\) = √(32/2) = 4."
+  },
+  {
+    "q": "The most probable speed corresponds to the speed at the:",
+    "o": [
+      "Peak of the Maxwell–Boltzmann speed distribution",
+      "Mean of all molecular speeds",
+      "Square root of mean-square speed",
+      "Speed of every molecule"
+    ],
+    "a": 0,
+    "e": "It is the speed with the greatest probability density, located at the distribution peak."
+  },
+  {
+    "q": "For a fixed gas, if the most probable speed doubles, absolute temperature becomes:",
+    "o": [
+      "2T",
+      "4T",
+      "T/2",
+      "T/4"
+    ],
+    "a": 1,
+    "e": "Since \\(v_{\\mathrm{mp}}\\) ∝ \\(\\sqrt{T}\\), doubling the speed requires four times the absolute temperature."
+  },
+  {
+    "q": "Which relation between most probable speed \\(v_{\\mathrm{mp}}\\) and rms speed \\(v_{\\mathrm{rms}}\\) is correct?",
+    "o": [
+      "\\(v_{\\mathrm{mp}}\\) = \\(v_{\\mathrm{rms}}\\)",
+      "\\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2}{3}}\\) \\(v_{\\mathrm{rms}}\\)",
+      "\\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{3}{2}}\\) \\(v_{\\mathrm{rms}}\\)",
+      "\\(v_{\\mathrm{mp}}\\) = 3\\(v_{\\mathrm{rms}}\\)"
+    ],
+    "a": 1,
+    "e": "Using \\(v_{\\mathrm{mp}}\\) = \\(\\sqrt{\\frac{2RT}{M}}\\) and \\(v_{\\mathrm{rms}}\\) = \\(\\sqrt{\\frac{3RT}{M}}\\) gives \\(v_{\\mathrm{mp}}\\)/\\(v_{\\mathrm{rms}}\\) = \\(\\sqrt{\\frac{2}{3}}\\)."
+  },
+  {
+    "q": "At the same temperature, the most probable speed of helium is greater than that of argon because helium has:",
+    "o": [
+      "Lower molar mass",
+      "Higher molar mass",
+      "Higher average kinetic energy",
+      "Zero collisions"
+    ],
+    "a": 0,
+    "e": "At the same temperature, lighter gas molecules have greater characteristic speeds."
+  },
+  {
+    "q": "If a gas is heated from 300 K to 1200 K, its most probable speed:",
+    "o": [
+      "Doubles",
+      "Quadruples",
+      "Halves",
+      "Remains the same"
+    ],
+    "a": 0,
+    "e": "The temperature increases fourfold, so most probable speed doubles."
+  },
+  {
+    "q": "Which expression is dimensionally a speed?",
+    "o": [
+      "\\(\\sqrt{\\frac{RT}{M}}\\)",
+      "RT/M",
+      "M/RT",
+      "RMT"
+    ],
+    "a": 0,
+    "e": "RT/M has units of m² s⁻², so its square root has units of m s⁻¹."
+  }
 ]
 const originalQuestions=questions.slice();
 let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
@@ -124,13 +424,14 @@ function render(){
    b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
    $('options').appendChild(b);
  });
+ if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('question'),$('options')]).catch(()=>{});
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{

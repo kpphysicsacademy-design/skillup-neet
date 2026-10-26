@@ -3,47 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Wave Motion</title>
+<meta name="description" content="SkillUp Physics Easy Mode: Wave Motion quiz">
+<title>SkillUp | Wave Motion — Easy Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-<div class="wrap"><div class="card">
-<h1>🌊 Wave Motion</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div id="quiz"></div><div class="xp" id="xp"></div>
-<button class="next hide" id="next">Next Question →</button>
-<div id="result" class="hide"></div>
-<a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Wave Motion</h1><p class="muted">Explore wave propagation, wave properties, and numerical problems with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
 <script>
-const qs=[
-['Wave motion is the propagation of','matter only','a disturbance that transfers energy','mass from one point to another','temperature only',1,'A wave transfers energy and information through a medium or space without requiring bulk transport of the medium.'],
-['In a mechanical wave, particles of the medium generally','move permanently with the wave','oscillate about their equilibrium positions','disappear','remain completely motionless',1,'Particles of a mechanical medium oscillate about equilibrium while the disturbance travels through the medium.'],
-['Which is a mechanical wave?','Light','Radio wave','Sound wave','X-ray',2,'Sound requires a material medium, so it is a mechanical wave.'],
-['Which wave can travel through vacuum?','Sound','Water wave','Light','Seismic wave',2,'Electromagnetic waves such as light can propagate through vacuum.'],
-['The distance between two successive points in the same phase is called','amplitude','wavelength','frequency','period',1,'Wavelength (λ) is the spatial distance between successive points having the same phase.'],
-['The SI unit of frequency is','metre','second','hertz','newton',2,'Frequency is measured in hertz (Hz), equivalent to cycles per second.'],
-['The basic wave relation is','v=fλ','v=f/λ','v=λ/f','v=f+λ',0,'Wave speed equals frequency multiplied by wavelength: v=fλ.'],
-['If a wave has frequency 5 Hz and wavelength 2 m, its speed is','2.5 m/s','7 m/s','10 m/s','20 m/s',2,'Using v=fλ, v=5×2=10 m/s.'],
-['In a transverse wave, particles of the medium vibrate','parallel to wave propagation','perpendicular to wave propagation','only downward','without any motion',1,'In a transverse wave, particle vibration is perpendicular to the direction of propagation.'],
-['In a longitudinal wave, particles vibrate','perpendicular to propagation','parallel to propagation','in circular paths only','at right angles to the medium',1,'Longitudinal waves have particle vibrations parallel to the direction of wave propagation.'],
-['The maximum displacement of a vibrating particle from its mean position is called','wavelength','amplitude','frequency','phase',1,'Amplitude is the maximum displacement from the equilibrium position.'],
-['The time taken for one complete oscillation of a particle is','frequency','wavelength','time period','wave speed',2,'The time period T is the time required for one complete oscillation.'],
-['Frequency and time period are related by','f=T','f=1/T','f=T²','f=2T',1,'Frequency is the reciprocal of time period: f=1/T.'],
-['A wave has frequency 20 Hz and wavelength 0.5 m. Its speed is','5 m/s','10 m/s','20.5 m/s','40 m/s',1,'Using v=fλ, v=20×0.5=10 m/s.'],
-['When a wave passes from one medium to another, its frequency is generally determined by the','source','amplitude only','colour of the medium','wavelength only',0,'The source fixes the frequency. When speed changes between media, wavelength changes so that v=fλ remains satisfied.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}
-$('next').onclick=next;render();
+(function(){
+'use strict';
+const questions = [{"q":"Wave motion primarily transfers:","o":["Energy from one place to another","Matter permanently from source to destination","Rest mass at the wave speed","The medium as a whole over long distances"],"a":0,"e":"A wave transfers energy and information; particles of the medium generally oscillate around equilibrium."},{"q":"In a mechanical wave, the medium's particles usually:","o":["Oscillate about equilibrium positions","Travel with the wave over long distances","Remain permanently displaced","Move only in circles in every wave"],"a":0,"e":"Mechanical-wave particles oscillate locally as the disturbance propagates."},{"q":"Which type of wave requires a material medium?","o":["Mechanical wave","Electromagnetic wave","Light in vacuum","Radio wave in vacuum"],"a":0,"e":"Mechanical waves need a medium whose particles or fields provide the restoring interactions."},{"q":"Sound in air is generally a:","o":["Longitudinal mechanical wave","Transverse electromagnetic wave","Longitudinal electromagnetic wave","Wave that travels in vacuum"],"a":0,"e":"Sound in air propagates through compressions and rarefactions parallel to the direction of travel."},{"q":"A transverse wave has particle oscillations that are:","o":["Perpendicular to the direction of propagation","Parallel to the direction of propagation only","Always circular","Absent everywhere"],"a":0,"e":"In a transverse wave, the oscillation direction is perpendicular to the wave's travel direction."},{"q":"A longitudinal wave has particle oscillations that are:","o":["Parallel to the direction of propagation","Perpendicular to the direction of propagation","Always vertical","Unrelated to wave travel"],"a":0,"e":"Longitudinal waves involve compressions and rarefactions along the propagation direction."},{"q":"The distance between two successive crests of a periodic transverse wave is its:","o":["Wavelength","Amplitude","Period","Frequency"],"a":0,"e":"Wavelength is the distance between nearest points in the same phase, such as crest to crest."},{"q":"The number of complete oscillations per second is called:","o":["Frequency","Wavelength","Amplitude","Wave speed"],"a":0,"e":"Frequency is measured in hertz and counts cycles per second."},{"q":"The SI unit of frequency is:","o":["Hertz (Hz)","Metre (m)","Second (s)","Metre per second (m/s)"],"a":0,"e":"One hertz equals one cycle per second."},{"q":"The relation among wave speed v, frequency f and wavelength λ is:","o":["v = fλ","v = f/λ","v = λ/f","v = f + λ"],"a":0,"e":"During one period, a wave advances one wavelength, giving v = λ/T = fλ."},{"q":"A wave has frequency 5 Hz and wavelength 2 m. Its speed is:","o":["10 m/s","2.5 m/s","7 m/s","0.4 m/s"],"a":0,"e":"v = fλ = 5 × 2 = 10 m/s."},{"q":"A wave travels at 12 m/s with frequency 4 Hz. Its wavelength is:","o":["3 m","48 m","8 m","0.33 m"],"a":0,"e":"λ = v/f = 12/4 = 3 m."},{"q":"If the period of a wave is 0.02 s, its frequency is:","o":["50 Hz","0.02 Hz","2 Hz","20 Hz"],"a":0,"e":"f = 1/T = 1/0.02 = 50 Hz."},{"q":"The time taken for one complete oscillation is the:","o":["Period","Wavelength","Amplitude","Wave number"],"a":0,"e":"Period T is the time for one full cycle; T = 1/f."},{"q":"The maximum displacement of a particle from its equilibrium position is the:","o":["Amplitude","Wavelength","Frequency","Wave speed"],"a":0,"e":"Amplitude measures the maximum local displacement of the oscillating particle."},{"q":"For a wave moving in the same medium with unchanged properties, if frequency doubles, its wavelength:","o":["Halves","Doubles","Remains unchanged","Becomes four times larger"],"a":0,"e":"With wave speed fixed, λ = v/f; doubling f halves λ."},{"q":"When a wave enters another medium, which quantity is usually fixed by the source across the boundary?","o":["Frequency","Wavelength","Wave speed","Amplitude in all circumstances"],"a":0,"e":"The oscillation frequency remains set by the source; speed and wavelength can change with medium."},{"q":"A wave's amplitude is doubled while frequency and medium stay unchanged. Its speed:","o":["Remains unchanged in the linear-wave model","Doubles","Halves","Becomes zero"],"a":0,"e":"Wave speed is set by medium properties, not by amplitude for ordinary linear waves."},{"q":"A wave travels 24 m in 3 s. Its speed is:","o":["8 m/s","72 m/s","21 m/s","0.125 m/s"],"a":0,"e":"Speed = distance/time = 24/3 = 8 m/s."},{"q":"A wave has wavelength 0.5 m and speed 20 m/s. Its frequency is:","o":["40 Hz","10 Hz","0.025 Hz","20.5 Hz"],"a":0,"e":"f = v/λ = 20/0.5 = 40 Hz."},{"q":"In a sound wave, a compression is a region of:","o":["Higher-than-average pressure and density","Zero pressure","Lower-than-average density only","No particle motion anywhere"],"a":0,"e":"Compressions are regions where particles are closer together, raising pressure and density."},{"q":"In a sound wave, a rarefaction is a region of:","o":["Lower-than-average pressure and density","Maximum pressure and density","Permanent vacuum in every case","Maximum particle displacement at all times"],"a":0,"e":"Rarefactions are regions where particles are farther apart and pressure is lower."},{"q":"Which statement about wave speed and particle speed is correct?","o":["They are different concepts; particles oscillate while the disturbance propagates","They must always be equal","Particle speed is always zero","Wave speed must be zero in a medium"],"a":0,"e":"Wave speed describes propagation of the disturbance; particle velocity describes local oscillation."},{"q":"A periodic wave has frequency 25 Hz. Its period is:","o":["0.04 s","25 s","0.25 s","4 s"],"a":0,"e":"T = 1/f = 1/25 = 0.04 s."},{"q":"The wavelength of a wave is 6 m and its period is 2 s. Its speed is:","o":["3 m/s","12 m/s","8 m/s","0.33 m/s"],"a":0,"e":"v = λ/T = 6/2 = 3 m/s."},{"q":"Which is an example of an electromagnetic wave?","o":["Visible light","Sound in air","A compression pulse in a slinky","A water wave"],"a":0,"e":"Visible light is electromagnetic and can propagate through vacuum."},{"q":"Which wave can propagate through vacuum?","o":["Electromagnetic wave","Sound wave in air","Wave on a stretched string","Water surface wave"],"a":0,"e":"Electromagnetic waves do not require a material medium."},{"q":"A wave pulse reaches a point 15 m away in 5 s. The propagation speed is:","o":["3 m/s","75 m/s","10 m/s","0.33 m/s"],"a":0,"e":"v = distance/time = 15/5 = 3 m/s."},{"q":"For a sinusoidal travelling wave, points separated by one full wavelength have a phase difference of:","o":["2π radians","π/2 radians","π radians","Zero displacement difference only at all times but no phase relation"],"a":0,"e":"A full wavelength corresponds to one complete cycle, or 2π radians of phase."},{"q":"For a sinusoidal travelling wave, points separated by half a wavelength have a phase difference of:","o":["π radians","2π radians","π/4 radians","Zero radians"],"a":0,"e":"A half wavelength corresponds to half a cycle, giving a phase difference of π radians."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Wave Motion Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
 </script>
-
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

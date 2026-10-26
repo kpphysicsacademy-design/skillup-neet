@@ -75,6 +75,8 @@ let index=0,score=0,streak=0,chosen=null,locked=false;
 const originalQuestions=questions.slice();
 let wrongAttempts=[];
 const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
 function render(){
  chosen=null;locked=false;
  const item=questions[index];
@@ -94,6 +96,7 @@ function render(){
    b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
    $('options').appendChild(b);
  });
+ typesetMath();
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];

@@ -1,26 +1,151 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Wavelength</title><style>
-body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#4f46e5;color:#fff}.back{background:#334155;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>〰️ Wavelength</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['Wavelength is the distance between two successive points of a wave that are','at different frequencies','in the same phase','always at rest','moving at maximum speed',1,'Wavelength λ is the distance between successive points in the same phase, such as crest to crest.'],
-['The SI unit of wavelength is','second','hertz','metre','m/s',2,'Wavelength is a length, so its SI unit is metre (m).'],
-['The symbol commonly used for wavelength is','λ','ν','ω','T',0,'The Greek letter lambda (λ) is used for wavelength.'],
-['The distance between two successive crests of a sinusoidal wave is','amplitude','wavelength','frequency','time period',1,'Successive crests are separated by one wavelength.'],
-['The distance between two successive compressions in a longitudinal wave is','λ/2','λ','2λ','λ/4',1,'Successive compressions are one wavelength apart.'],
-['The relation between wave speed v, frequency f and wavelength λ is','v=f/λ','v=λ/f','v=fλ','v=f+λ',2,'The fundamental wave relation is v=fλ.'],
-['A wave has frequency 5 Hz and wavelength 2 m. Its speed is','2.5 m/s','7 m/s','10 m/s','25 m/s',2,'Using v=fλ, v=5×2=10 m/s.'],
-['If wave speed remains constant and frequency is doubled, wavelength','doubles','halves','remains unchanged','becomes four times',1,'Since λ=v/f, doubling frequency at constant speed halves the wavelength.'],
-['If wave speed remains constant and wavelength is doubled, frequency','doubles','halves','remains unchanged','becomes four times',1,'From f=v/λ, doubling wavelength at fixed speed halves the frequency.'],
-['A wave has time period 0.25 s and speed 4 m/s. Its wavelength is','0.25 m','1 m','4 m','16 m',1,'Using λ=vT, λ=4×0.25=1 m.'],
-['A phase difference of 2π radians corresponds to a spatial separation of','λ/4','λ/2','λ','2λ',2,'One complete cycle has a phase change of 2π and corresponds to one wavelength.'],
-['A phase difference of π radians in a sinusoidal wave corresponds to a separation of','λ/4','λ/2','λ','2λ',1,'A phase difference of π corresponds to half a wavelength.'],
-['A wave has frequency 20 Hz and wavelength 0.5 m. Its speed is','5 m/s','10 m/s','20 m/s','40 m/s',1,'Using v=fλ, v=20×0.5=10 m/s.'],
-['When a wave enters another medium, its frequency is generally','changed by the medium','unchanged because it is fixed by the source','always doubled','always halved',1,'The source determines frequency; speed and wavelength may change when the medium changes.'],
-['If the frequency of a wave is 10 Hz and its speed is 30 m/s, its wavelength is','0.3 m','3 m','10 m','300 m',1,'Using λ=v/f, λ=30/10=3 m.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Wavelength quiz: 30 MCQs with explanations, scoring, and wrong-answer retry.">
+<title>SkillUp | Wavelength — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>〰️ Wavelength</h1><p class="muted">Understand wavelength, phase, wavenumber, and the relationship between wave speed and frequency with 30 questions and explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Wavelength is the distance between two nearest points that are:","o":["Always stationary","In the same phase","At maximum displacement only","Moving in opposite directions"],"a":1,"e":"One wavelength is the spatial distance for one complete cycle, between corresponding points such as crest to crest."},{"q":"The usual symbol for wavelength is:","o":["f","T","λ","ω"],"a":2,"e":"The Greek letter lambda (λ) commonly denotes wavelength."},{"q":"The SI unit of wavelength is:","o":["Hertz","Second","Metre","Metre per second"],"a":2,"e":"Wavelength is a length and is measured in metres."},{"q":"The distance between two consecutive crests is:","o":["Amplitude","Wavelength","Period","Frequency"],"a":1,"e":"Successive crests are one wavelength apart."},{"q":"The distance between two adjacent troughs is:","o":["λ/2","λ","2λ","λ/4"],"a":1,"e":"Adjacent troughs are corresponding points one wavelength apart."},{"q":"In a longitudinal wave, the distance between two successive compressions is:","o":["Amplitude","Wavelength","Period","Wave height"],"a":1,"e":"Successive compressions are separated by one wavelength."},{"q":"The distance from a crest to the adjacent trough in a sinusoidal wave is:","o":["λ/4","λ/2","λ","2λ"],"a":1,"e":"A crest and its nearest trough are half a wavelength apart."},{"q":"Wave speed, frequency and wavelength are related by:","o":["v = fλ","v = f/λ","v = λ/f","v = f + λ"],"a":0,"e":"Wave speed equals frequency multiplied by wavelength."},{"q":"A wave has frequency 5 Hz and wavelength 2 m. Its speed is:","o":["2.5 m/s","7 m/s","10 m/s","0.4 m/s"],"a":2,"e":"v = fλ = 5 × 2 = 10 m/s."},{"q":"A wave travels at 24 m/s and has frequency 8 Hz. Its wavelength is:","o":["3 m","16 m","32 m","192 m"],"a":0,"e":"λ = v/f = 24/8 = 3 m."},{"q":"A wave travels at 15 m/s and has wavelength 5 m. Its frequency is:","o":["3 Hz","5 Hz","10 Hz","75 Hz"],"a":0,"e":"f = v/λ = 15/5 = 3 Hz."},{"q":"If wave speed remains constant and frequency doubles, wavelength:","o":["Doubles","Halves","Stays the same","Becomes four times"],"a":1,"e":"Since λ = v/f, wavelength is inversely proportional to frequency at constant speed."},{"q":"If frequency remains constant and wave speed doubles, wavelength:","o":["Halves","Doubles","Stays the same","Becomes zero"],"a":1,"e":"From λ = v/f, doubling speed at fixed frequency doubles wavelength."},{"q":"A wave has period 0.2 s and speed 10 m/s. Its wavelength is:","o":["2 m","5 m","10.2 m","50 m"],"a":0,"e":"λ = vT = 10 × 0.2 = 2 m."},{"q":"Which statement about wavelength is correct?","o":["It is the maximum particle displacement","It is the distance for one complete spatial cycle","It is cycles per second","It is time for one oscillation"],"a":1,"e":"Wavelength measures spatial periodicity, not displacement amplitude or time."},{"q":"The wavenumber magnitude k is defined as:","o":["k = 2π/λ","k = λ/2π","k = 2πf","k = 1/T"],"a":0,"e":"Angular wavenumber is k = 2π/λ and has units rad/m."},{"q":"If wavelength is 2 m, the wavenumber k is:","o":["π rad/m","2π rad/m","4π rad/m","π/2 rad/m"],"a":0,"e":"k = 2π/λ = 2π/2 = π rad/m."},{"q":"A wavelength of 0.5 m corresponds to a wavenumber:","o":["π rad/m","2π rad/m","4π rad/m","0.5π rad/m"],"a":2,"e":"k = 2π/0.5 = 4π rad/m."},{"q":"Two points separated by one wavelength in a travelling periodic wave have phase difference:","o":["0 rad modulo 2π","π/2","π","π/4"],"a":0,"e":"A separation λ corresponds to 2π radians, so the points are in phase."},{"q":"Two points separated by λ/4 have phase difference:","o":["π/4","π/2","π","2π"],"a":1,"e":"Δφ = 2πΔx/λ = 2π(1/4) = π/2."},{"q":"A wave has wavelength 4 m. The distance covering three complete wavelengths is:","o":["4 m","8 m","12 m","16 m"],"a":2,"e":"Three wavelengths span 3 × 4 = 12 m."},{"q":"A periodic wave has 10 crests passing a fixed point over 2 seconds. If each crest corresponds to one cycle, frequency is:","o":["5 Hz","10 Hz","20 Hz","0.2 Hz"],"a":0,"e":"Frequency = cycles/time = 10/2 = 5 Hz."},{"q":"When a wave enters another medium, its frequency stays fixed. If its speed decreases, its wavelength:","o":["Increases","Decreases","Does not change","Becomes infinite"],"a":1,"e":"Because λ = v/f and frequency remains fixed, lower speed means shorter wavelength."},{"q":"A sound wave in air has speed 340 m/s and frequency 170 Hz. Its wavelength is:","o":["0.5 m","2 m","170 m","510 m"],"a":1,"e":"λ = v/f = 340/170 = 2 m."},{"q":"A wave has wavelength 0.8 m and frequency 25 Hz. Its speed is:","o":["20 m/s","31.25 m/s","0.032 m/s","25.8 m/s"],"a":0,"e":"v = fλ = 25 × 0.8 = 20 m/s."},{"q":"Which change alone does not necessarily change wavelength if the medium and source frequency stay the same?","o":["Increasing wave amplitude","Changing frequency","Changing medium","Changing wave speed"],"a":0,"e":"In the linear-wave model, amplitude changes do not set wavelength; speed and frequency do."},{"q":"The wavelength of a sinusoidal wave is related to its spatial phase change by:","o":["2π radians per wavelength","π radians per wavelength","1 radian per wavelength","4π radians per wavelength"],"a":0,"e":"One complete spatial cycle corresponds to a phase change of 2π radians."},{"q":"A wave travels 90 m in 3 s and has frequency 6 Hz. Its wavelength is:","o":["2 m","5 m","15 m","30 m"],"a":1,"e":"Speed = 90/3 = 30 m/s; λ = v/f = 30/6 = 5 m."},{"q":"A wave has speed 12 m/s and period 0.25 s. Its wavelength is:","o":["3 m","12 m","48 m","0.25 m"],"a":0,"e":"λ = vT = 12 × 0.25 = 3 m."},{"q":"Which quantity has the same physical dimension as wavelength?","o":["Amplitude","Frequency","Period","Wave speed"],"a":0,"e":"Both wavelength and amplitude are lengths, measured in metres."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Wavelength Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

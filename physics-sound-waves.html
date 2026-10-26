@@ -1,24 +1,154 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Sound Waves</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.1);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#4f46e5;color:#fff}.back{background:#334155;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔊 Sound Waves</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['Sound waves in air are generally','transverse electromagnetic waves','longitudinal mechanical waves','electromagnetic waves','matter particles',1,'Sound in air is a mechanical longitudinal wave and requires a material medium.'],
-['Sound cannot propagate through','air','water','steel','vacuum',3,'A mechanical sound wave needs a material medium, so it cannot travel through vacuum.'],
-['In a longitudinal sound wave, particles of the medium vibrate','perpendicular to propagation','parallel to propagation','in circular paths','without vibration',1,'Particles oscillate parallel to the direction in which the sound wave travels.'],
-['A compression in a sound wave is a region of','low pressure and low density','high pressure and high density','zero pressure','constant displacement only',1,'Compressions correspond to higher pressure and density than the surrounding medium.'],
-['A rarefaction in a sound wave is a region of','high pressure and high density','low pressure and low density','maximum temperature only','zero particle speed',1,'Rarefactions are regions of relatively low pressure and density.'],
-['The speed of sound in a gas mainly depends on','only amplitude','the properties of the medium and temperature','only frequency','only wavelength',1,'For a given gas, sound speed depends on medium properties and temperature; it is not set by amplitude or frequency alone.'],
-['For a wave, the relation among speed v, frequency f and wavelength λ is','v=f/λ','v=fλ','v=λ/f','v=f+λ',1,'The basic wave relation is v=fλ.'],
-['If sound travels at 340 m/s with frequency 170 Hz, its wavelength is','0.5 m','2 m','170 m','510 m',1,'λ=v/f=340/170=2 m.'],
-['When sound passes from air into water, its frequency generally','changes to zero','remains unchanged','doubles automatically','becomes equal to its speed',1,'The source fixes frequency, so frequency remains unchanged at a boundary; speed and wavelength can change.'],
-['When a sound wave enters a different medium, the quantity that usually changes is','frequency','wave speed','source frequency','time itself',1,'Wave speed depends on the medium. With frequency fixed, wavelength changes accordingly.'],
-['The intensity of a sound wave is related to','energy transferred per unit area per unit time','only its frequency','only its wavelength','only its period',0,'Intensity is power transmitted per unit area, i.e. energy transferred per unit area per unit time.'],
-['The pitch of a sound is primarily determined by its','amplitude','frequency','intensity only','speed in the medium',1,'Higher frequency corresponds to higher pitch.'],
-['The loudness of a sound is most closely associated with its','amplitude/intensity','frequency only','wavelength only','wave speed only',0,'Greater wave amplitude generally means greater intensity and perceived loudness, subject to hearing conditions.'],
-['An audible sound for a typical healthy human has frequency approximately in the range','20 Hz to 20 kHz','0 to 20 Hz','20 kHz to 2 MHz','200 Hz to 200 kHz',0,'The commonly used approximate human audible range is 20 Hz to 20 kHz.'],
-['An echo is produced mainly due to','refraction of sound','reflection of sound','absorption of sound','polarization of sound',1,'An echo results when reflected sound reaches the listener after a sufficient time delay.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent=''}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide')}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Sound Waves quiz with 30 MathJax-rendered questions and explanations.">
+<title>SkillUp | Sound Waves — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>〰️ Sound Waves</h1><p class="muted">Practice nodes, antinodes, fixed-end strings, harmonics, frequencies, and standing-wave equations with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"Sound waves in air are generally…","o":["Transverse electromagnetic waves","Longitudinal mechanical waves","Matter waves","Standing waves only"],"a":1,"e":"Sound in air propagates as a longitudinal mechanical wave through compressions and rarefactions."},{"q":"Sound requires which of the following to propagate?","o":["A material medium","A vacuum","Only a magnetic field","No particles"],"a":0,"e":"Sound is mechanical and needs a medium; it cannot propagate through a perfect vacuum."},{"q":"In a longitudinal sound wave, air particles oscillate…","o":["Perpendicular to propagation","Parallel to propagation","In circular paths only","Not at all"],"a":1,"e":"Particle oscillations are parallel to the direction of wave propagation."},{"q":"A compression in a sound wave is a region of…","o":["Lower pressure and density","Higher pressure and density","Zero pressure","No particles"],"a":1,"e":"Compressions are regions where particles are closer together, producing higher pressure and density."},{"q":"A rarefaction is a region of…","o":["Higher pressure","Higher density","Lower pressure and density","Infinite density"],"a":2,"e":"In a rarefaction, particles are farther apart and pressure and density are lower."},{"q":"The SI unit of frequency is…","o":["Metre","Hertz","Decibel","Pascal"],"a":1,"e":"Frequency is measured in hertz (Hz), equivalent to cycles per second."},{"q":"The relation between sound speed v, frequency f and wavelength λ is…","o":["\\(v=f\\lambda\\)","\\(v=f/\\lambda\\)","\\(v=\\lambda/f\\)","\\(v=f+\\lambda\\)"],"a":0,"e":"For any periodic wave, \\(v=f\\lambda\\)."},{"q":"A sound wave has frequency 500 Hz and wavelength 0.68 m. Its speed is…","o":["170 m/s","340 m/s","500 m/s","680 m/s"],"a":1,"e":"\\(v=f\\lambda=500(0.68)=340\\,\\text{m/s}\\)."},{"q":"Sound generally travels fastest through…","o":["Gases","Liquids","Solids","Vacuum"],"a":2,"e":"Sound speed is generally highest in solids, lower in liquids, and lower still in gases; it cannot travel in vacuum."},{"q":"At ordinary temperatures, sound speed in air is approximately…","o":["34 m/s","150 m/s","343 m/s","3000 m/s"],"a":2,"e":"A typical approximate value near room temperature is 343 m/s; the exact value depends on temperature."},{"q":"If frequency doubles while sound speed stays constant, wavelength…","o":["Doubles","Halves","Quadruples","Stays the same"],"a":1,"e":"From \\(\\lambda=v/f\\), doubling frequency halves wavelength when speed is constant."},{"q":"The pitch of a sound is primarily related to its…","o":["Frequency","Amplitude","Intensity only","Speed only"],"a":0,"e":"Higher frequency is perceived as higher pitch."},{"q":"The loudness of a sound is most closely associated with its…","o":["Frequency only","Amplitude and intensity","Wavelength only","Propagation direction"],"a":1,"e":"Greater sound intensity is generally perceived as greater loudness, though perception also depends on frequency and hearing."},{"q":"Sound intensity is power transmitted per unit…","o":["Volume","Area","Time","Wavelength"],"a":1,"e":"Intensity is power crossing a unit area perpendicular to the direction of propagation."},{"q":"The SI unit of sound intensity is…","o":["\\(\\text{W/m}^2\\)","\\(\\text{W/m}\\)","\\(\\text{J/s}^2\\)","\\(\\text{Pa/m}\\)"],"a":0,"e":"Intensity is power per area, so its SI unit is watt per square metre."},{"q":"The decibel scale is commonly used to express sound…","o":["Wavelength","Level","Speed","Frequency"],"a":1,"e":"Sound level is commonly expressed in decibels (dB), a logarithmic scale."},{"q":"The approximate audible frequency range for a healthy young human is…","o":["2–200 Hz","20 Hz–20 kHz","200 Hz–200 kHz","20 kHz–2 MHz"],"a":1,"e":"The conventional approximate range is 20 Hz to 20,000 Hz, though it varies with age and individual hearing."},{"q":"Sound below about 20 Hz is called…","o":["Ultrasound","Infrasound","Supersonic sound","Echo"],"a":1,"e":"Infrasound refers to sound frequencies below the lower audible limit of about 20 Hz."},{"q":"Sound above about 20 kHz is called…","o":["Infrasound","Ultrasound","Audible sound only","Noise floor"],"a":1,"e":"Ultrasound has frequency above the conventional upper human hearing limit of about 20 kHz."},{"q":"A sound wave of frequency 1 kHz has a period of…","o":["1 s","0.1 s","0.01 s","0.001 s"],"a":3,"e":"\\(T=1/f=1/1000=0.001\\,\\text{s}\\)."},{"q":"A sound has period 2 ms. Its frequency is…","o":["50 Hz","200 Hz","500 Hz","2000 Hz"],"a":2,"e":"\\(f=1/T=1/(0.002)=500\\,\\text{Hz}\\)."},{"q":"When sound passes from air into water, its frequency (with the same source) generally…","o":["Changes to zero","Remains the same","Always doubles","Always halves"],"a":1,"e":"The source determines frequency; speed and wavelength change across the boundary."},{"q":"When sound enters a medium where it travels faster, its wavelength at unchanged frequency…","o":["Decreases","Increases","Becomes zero","Stays unchanged"],"a":1,"e":"Since \\(\\lambda=v/f\\), a higher speed at fixed frequency means a longer wavelength."},{"q":"An echo is caused by…","o":["Reflection of sound","Polarization","Only refraction","Destructive interference only"],"a":0,"e":"An echo occurs when reflected sound returns to the listener after a sufficient delay."},{"q":"For a distinct echo, the reflected sound should arrive…","o":["At exactly the same instant","After a sufficient time delay","Before the original sound","Only in a vacuum"],"a":1,"e":"A delay of roughly 0.1 s or more is commonly needed for a distinct echo."},{"q":"The speed of sound in a gas generally increases when its absolute temperature…","o":["Increases","Falls to zero","Has no effect","Becomes negative"],"a":0,"e":"For an ideal gas, sound speed is proportional to the square root of absolute temperature."},{"q":"A sound wave travels at 330 m/s and has wavelength 1.1 m. Its frequency is…","o":["30 Hz","300 Hz","363 Hz","3300 Hz"],"a":1,"e":"\\(f=v/\\lambda=330/1.1=300\\,\\text{Hz}\\)."},{"q":"Which property mainly determines whether a sound is perceived as high-pitched or low-pitched?","o":["Frequency","Amplitude","Intensity only","Distance travelled"],"a":0,"e":"Pitch depends mainly on frequency: higher frequency corresponds to higher pitch."},{"q":"In a sound wave, energy is transported by…","o":["Bulk flow of air from source to listener","Oscillations and pressure disturbances through the medium","Air particles travelling all the way from source to listener","Vacuum fluctuations only"],"a":1,"e":"Particles oscillate around equilibrium positions while the disturbance and energy propagate through the medium."},{"q":"Why can sound not travel through a vacuum?","o":["It has too high a frequency","There are no particles to transmit mechanical vibrations","Its wavelength is infinite in every case","Vacuum absorbs all sound instantly"],"a":1,"e":"Sound needs interacting particles to transmit compressions and rarefactions; a vacuum has no material medium."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Sound Waves Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

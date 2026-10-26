@@ -1,22 +1,151 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Combination of Springs</title><style>body{font-family:Arial,sans-serif;background:#f3f7ff;margin:0;color:#1e293b}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(30,41,59,.10);border:1px solid #e2e8f0}h1{text-align:center;color:#334155}.meta{display:flex;justify-content:space-between;font-weight:700;color:#475569}.bar{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#22c55e;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px;color:#172033}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe4f0;border-radius:14px;background:#fff;color:#1e293b;font-size:16px;cursor:pointer;transition:.2s}.opt:hover{background:#eef5ff;border-color:#93c5fd;transform:translateY(-1px)}.opt:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}.correct{border-color:#16a34a!important;background:#ecfdf3!important;color:#166534!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}.next,.retry{background:#4f46e5;color:#fff}.next:hover,.retry:hover{background:#4338ca}.back{background:#334155;color:#fff}.back:hover{background:#1e293b}.hide{display:none}.xp{text-align:center;font-weight:700;color:#d97706;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🔗 Combination of Springs</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['For two springs connected in parallel, the equivalent spring constant is','k_eq=k1+k2','1/k_eq=1/k1+1/k2','k_eq=k1−k2','k_eq=k1k2',0,'In parallel, both springs undergo the same displacement and their forces add, so k_eq=k1+k2.'],
-['For two springs connected in series, the equivalent spring constant satisfies','k_eq=k1+k2','1/k_eq=1/k1+1/k2','k_eq=k1k2','k_eq=k1/k2',1,'In series, the same force acts through both springs and extensions add, giving 1/k_eq=1/k1+1/k2.'],
-['Two identical springs, each of spring constant k, are connected in parallel. Their equivalent constant is','k/2','k','2k','4k',2,'For equal springs in parallel, k_eq=k+k=2k.'],
-['Two identical springs, each of spring constant k, are connected in series. Their equivalent constant is','2k','k','k/2','k/4',2,'For equal springs in series, 1/k_eq=2/k, hence k_eq=k/2.'],
-['Three identical springs, each of constant k, are connected in parallel. The equivalent constant is','k/3','k','2k','3k',3,'For n identical springs in parallel, k_eq=nk, so here k_eq=3k.'],
-['Three identical springs, each of constant k, are connected in series. The equivalent constant is','3k','k','k/3','k/9',2,'For n identical springs in series, k_eq=k/n, so here k_eq=k/3.'],
-['Two springs of 100 N/m and 200 N/m are connected in parallel. Their equivalent constant is','50 N/m','100 N/m','200 N/m','300 N/m',3,'Parallel constants add: k_eq=100+200=300 N/m.'],
-['Two springs of 100 N/m and 200 N/m are connected in series. Their equivalent constant is','66.7 N/m','150 N/m','300 N/m','50 N/m',0,'k_eq=k1k2/(k1+k2)=100×200/300≈66.7 N/m.'],
-['When springs are connected in parallel, the equivalent spring constant is generally','greater than each individual constant','less than every individual constant','always zero','equal to the smaller constant',0,'Because the individual restoring forces add, the parallel equivalent constant is greater than each positive individual constant.'],
-['When springs are connected in series, the equivalent spring constant is generally','greater than both','equal to the sum','less than each individual constant','always infinite',2,'For positive spring constants in series, 1/k_eq is the sum of reciprocals, so k_eq is less than each individual constant.'],
-['A spring of constant k is cut into two equal parts. The spring constant of each half is','k/2','k','2k','4k',2,'For a uniform spring, spring constant is inversely proportional to length. Halving the length doubles k.'],
-['A spring of constant k is cut into three equal parts. The spring constant of each part is','k/3','k','2k','3k',3,'Since k is inversely proportional to length, one-third the length gives three times the spring constant.'],
-['Two identical springs of constant k are connected in parallel and support a mass m. Their angular frequency is','√(k/m)','√(2k/m)','√(m/2k)','2√(k/m)',1,'The equivalent constant is 2k, so ω=√(k_eq/m)=√(2k/m).'],
-['Two identical springs of constant k are connected in series with a mass m. Their angular frequency is','√(2k/m)','√(k/m)','√(k/2m)','2√(k/m)',2,'The equivalent constant is k/2, so ω=√(k/(2m)).'],
-['A 100 N/m spring and a 100 N/m spring are connected in parallel. A force of 20 N is applied to the combination. The extension is','0.05 m','0.10 m','0.20 m','0.40 m',0,'k_eq=200 N/m, so x=F/k_eq=20/200=0.05 m.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Combination of Springs quiz">
+<title>SkillUp | Combination of Springs — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔥 Combination of Springs</h1><p class="muted">Explore spring combinations with 30 questions and concise explanations.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"For two ideal springs connected in parallel, the equivalent spring constant is:","o":["k₁ + k₂","1/k₁ + 1/k₂","k₁k₂/(k₁+k₂)","(k₁+k₂)/(k₁k₂)"],"a":0,"e":"In parallel, both springs have the same extension and their forces add, so keq = k₁ + k₂."},{"q":"For two ideal springs connected in series, the equivalent spring constant satisfies:","o":["1/keq = 1/k₁ + 1/k₂","keq = k₁ + k₂","keq = k₁k₂","keq = k₁ − k₂"],"a":0,"e":"In series, the same force acts through each spring and their extensions add; therefore reciprocals add."},{"q":"Two springs of 2 N/m and 3 N/m are connected in parallel. Their equivalent spring constant is:","o":["5 N/m","1.2 N/m","6 N/m","0.5 N/m"],"a":0,"e":"For parallel springs, keq = 2 + 3 = 5 N/m."},{"q":"Two springs of 2 N/m and 3 N/m are connected in series. Their equivalent spring constant is:","o":["1.2 N/m","5 N/m","6 N/m","2.5 N/m"],"a":0,"e":"keq = k₁k₂/(k₁+k₂) = (2×3)/(2+3) = 1.2 N/m."},{"q":"Two identical springs, each of constant k, are connected in parallel. The equivalent constant is:","o":["2k","k/2","k","4k"],"a":0,"e":"Parallel spring constants add: keq = k + k = 2k."},{"q":"Two identical springs, each of constant k, are connected in series. The equivalent constant is:","o":["k/2","2k","k","4k"],"a":0,"e":"1/keq = 1/k + 1/k = 2/k, so keq = k/2."},{"q":"Compared with each individual spring, a series combination has an equivalent spring constant that is:","o":["Smaller than the smallest individual constant","Greater than the largest individual constant","Always equal to the larger constant","Always zero"],"a":0,"e":"For positive spring constants, reciprocal addition makes the series equivalent softer than either spring."},{"q":"Compared with each individual spring, a parallel combination has an equivalent spring constant that is:","o":["Greater than either individual constant","Smaller than the smallest individual constant","Always zero","Equal to the smaller constant"],"a":0,"e":"Parallel spring constants add, making the combination stiffer than either individual spring."},{"q":"For springs connected in parallel and displaced together, each spring has the same:","o":["Extension","Force for all spring constants","Spring constant","Stored energy for all spring constants"],"a":0,"e":"The connected ends move together, so each spring experiences the same displacement."},{"q":"For ideal springs connected in series under a static load, each spring experiences the same magnitude of:","o":["Force","Extension in every case","Spring constant","Potential energy in every case"],"a":0,"e":"The force transmitted through springs in series is the same; the extensions can differ."},{"q":"Two springs with k₁ = 4 N/m and k₂ = 4 N/m are in parallel. keq is:","o":["8 N/m","2 N/m","4 N/m","16 N/m"],"a":0,"e":"keq = 4 + 4 = 8 N/m."},{"q":"Two springs with k₁ = 4 N/m and k₂ = 4 N/m are in series. keq is:","o":["2 N/m","8 N/m","4 N/m","16 N/m"],"a":0,"e":"For identical springs in series, keq = k/2 = 2 N/m."},{"q":"A 12 N/m spring is connected in series with a 4 N/m spring. The equivalent constant is:","o":["3 N/m","16 N/m","8 N/m","48 N/m"],"a":0,"e":"keq = (12×4)/(12+4) = 48/16 = 3 N/m."},{"q":"A 12 N/m spring is connected in parallel with a 4 N/m spring. The equivalent constant is:","o":["16 N/m","3 N/m","48 N/m","8 N/m"],"a":0,"e":"keq = 12 + 4 = 16 N/m."},{"q":"Three springs of constants k, 2k, and 3k are in parallel. The equivalent constant is:","o":["6k","k","(11/6)k","k/6"],"a":0,"e":"For parallel springs, keq = k + 2k + 3k = 6k."},{"q":"Three identical springs of constant k are connected in series. Their equivalent constant is:","o":["k/3","3k","k","k/9"],"a":0,"e":"For n identical springs in series, keq = k/n; with n = 3, keq = k/3."},{"q":"Three identical springs of constant k are connected in parallel. Their equivalent constant is:","o":["3k","k/3","k","9k"],"a":0,"e":"For n identical parallel springs, keq = nk = 3k."},{"q":"A spring combination has keq = 10 N/m and is stretched by 0.2 m. The magnitude of the restoring force is:","o":["2 N","0.5 N","10.2 N","50 N"],"a":0,"e":"Hooke's law gives |F| = keq x = 10 × 0.2 = 2 N."},{"q":"A mass m oscillates on an equivalent spring constant keq. Its period is:","o":["2π√(m/keq)","2π√(keq/m)","√(m keq)","2πm/keq"],"a":0,"e":"The equivalent spring behaves like a single spring, so T = 2π√(m/keq)."},{"q":"Two identical springs of constant k are in parallel and support mass m. The oscillation period is:","o":["2π√(m/(2k))","2π√(2m/k)","2π√(m/k)","π√(m/k)"],"a":0,"e":"The parallel equivalent is 2k, so T = 2π√(m/(2k))."},{"q":"Two identical springs of constant k are in series and support mass m. The oscillation period is:","o":["2π√(2m/k)","2π√(m/(2k))","2π√(m/k)","π√(m/k)"],"a":0,"e":"The series equivalent is k/2, so T = 2π√(m/(k/2)) = 2π√(2m/k)."},{"q":"For a series pair with k₁ = 6 N/m and k₂ = 3 N/m, keq is:","o":["2 N/m","9 N/m","3 N/m","18 N/m"],"a":0,"e":"keq = (6×3)/(6+3) = 18/9 = 2 N/m."},{"q":"For a parallel pair with k₁ = 6 N/m and k₂ = 3 N/m, keq is:","o":["9 N/m","2 N/m","18 N/m","3 N/m"],"a":0,"e":"keq = 6 + 3 = 9 N/m."},{"q":"For two springs in series, the total extension is:","o":["The sum of the individual extensions","The same as the extension of each spring in every case","Always zero","The difference of the individual extensions"],"a":0,"e":"The end-to-end extension equals x₁ + x₂."},{"q":"For two springs in parallel, the total restoring force magnitude at common extension x is:","o":["(k₁ + k₂)x","(k₁k₂)x","(k₁ + k₂)/x","x/(k₁ + k₂)"],"a":0,"e":"The spring forces add: Ftotal = k₁x + k₂x = (k₁+k₂)x."},{"q":"Two springs in series have constants 8 N/m and 8 N/m. If the same force stretches each, their individual extensions are:","o":["Equal","In a 2:1 ratio","In an 8:1 ratio","Always zero"],"a":0,"e":"For equal spring constants under the same force, x = F/k is equal for both."},{"q":"A parallel combination contains springs of constants 5 N/m and 7 N/m. If each extends 0.1 m, the total restoring force magnitude is:","o":["1.2 N","0.6 N","0.7 N","12 N"],"a":0,"e":"Ftotal = (5+7) × 0.1 = 1.2 N."},{"q":"A series combination has equivalent constant 2 N/m. A force of 6 N causes total extension:","o":["3 m","12 m","0.33 m","8 m"],"a":0,"e":"For the equivalent spring, x = F/keq = 6/2 = 3 m."},{"q":"If both spring constants in a two-spring parallel combination are doubled, its equivalent constant:","o":["Doubles","Halves","Becomes four times larger","Remains unchanged"],"a":0,"e":"keq = k₁ + k₂; doubling both terms doubles their sum."},{"q":"A 6 N/m and 3 N/m spring pair is connected in parallel, then that equivalent combination is connected in series with a 6 N/m spring. The final equivalent constant is:","o":["3.6 N/m","15 N/m","1.5 N/m","9 N/m"],"a":0,"e":"First parallel: 6 + 3 = 9 N/m. Then series with 6: keq = (9×6)/(9+6) = 54/15 = 3.6 N/m."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Combination of Springs Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

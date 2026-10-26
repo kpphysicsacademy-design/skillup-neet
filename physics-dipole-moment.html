@@ -1,24 +1,155 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Dipole Moment</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>⚡ Dipole Moment</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>
-const qs=[
-['The electric dipole moment of charges +q and −q separated by distance d has magnitude','q/d','qd','q/d²','d/q',1,'The magnitude of dipole moment is p=qd.'],
-['The SI unit of electric dipole moment is','C/m','C·m','N/C','J/C',1,'Dipole moment has SI unit coulomb-metre (C·m).'],
-['The direction of electric dipole moment is from','positive to negative charge','negative to positive charge','midpoint to negative charge','larger to smaller charge',1,'By convention, p points from the negative charge to the positive charge.'],
-['For a dipole consisting of ±q separated by 2a, p is','qa','2qa','q/2a','4qa',1,'Using p=qd with d=2a gives p=2qa.'],
-['If the charge of a dipole is doubled while separation remains unchanged, its dipole moment','halves','remains unchanged','doubles','becomes four times',2,'Since p=qd, doubling q doubles p.'],
-['If the separation of a dipole is doubled while charge remains unchanged, its dipole moment','halves','remains unchanged','doubles','becomes four times',2,'Since p=qd, doubling d doubles p.'],
-['A dipole has charges ±3 μC separated by 4 cm. Its dipole moment is','1.2×10⁻⁸ C·m','1.2×10⁻⁷ C·m','7.5×10⁻⁵ C·m','1.2×10⁻⁵ C·m',1,'p=qd=(3×10⁻⁶)(0.04)=1.2×10⁻⁷ C·m.'],
-['A dipole has p=2×10⁻⁸ C·m and charge magnitude 4 μC. The separation is','0.5 mm','5 mm','5 cm','0.5 m',1,'d=p/q=(2×10⁻⁸)/(4×10⁻⁶)=5×10⁻³ m=5 mm.'],
-['The dipole moment is a','scalar quantity','vector quantity','dimensionless quantity','tensor quantity',1,'Dipole moment has magnitude and direction, so it is a vector.'],
-['The torque on a dipole in a uniform electric field is','τ=pE cosθ','τ=pE sinθ','τ=p/E','τ=E/p',1,'The torque magnitude is τ=pE sinθ.'],
-['The torque on an electric dipole is maximum when p and E are at','0°','45°','90°','180°',2,'τ is maximum when sinθ=1, i.e. θ=90°.'],
-['The torque on an electric dipole is zero when p and E are','only perpendicular','parallel or antiparallel','always at 45°','never aligned',1,'τ=pE sinθ is zero at θ=0° and 180°.'],
-['The potential energy of a dipole in a uniform electric field is','−pE cosθ','pE cosθ','−pE sinθ','pE sinθ',0,'Dipole potential energy is U=−p·E=−pE cosθ.'],
-['For a short dipole at a far axial point, electric field magnitude varies as','1/r','1/r²','1/r³','1/r⁴',2,'The far-field dipole electric field varies as 1/r³.'],
-['For a short dipole at the same far distance, the axial field magnitude compared with the equatorial field is','equal','twice','half','four times',1,'Eaxial≈2kp/r³ whereas Eequatorial≈kp/r³, so the axial field is twice the equatorial field.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Dipole Moment quiz with 30 MathJax questions, explanations, and wrong-answer review.">
+<title>SkillUp | Dipole Moment — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Dipole Moment</h1><p class="muted">Practice dipole moment, vector direction, torque, potential energy, equilibrium, and dipole-field relationships with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions = [{"q":"The magnitude of dipole moment for charges +q and −q separated by distance d is…","o":["\\(q/d\\)","\\(qd\\)","\\(q/d^2\\)","\\(d/q\\)"],"a":1,"e":"\\(p=qd\\), where d is the distance between the charges."},{"q":"The SI unit of electric dipole moment is…","o":["\\(\\text{C/m}\\)","\\(\\text{C}\\cdot\\text{m}\\)","\\(\\text{N/C}\\)","\\(\\text{J/C}\\)"],"a":1,"e":"Dipole moment is charge multiplied by distance, so its unit is coulomb-metre."},{"q":"The dipole moment vector points from…","o":["Positive charge to negative charge","Negative charge to positive charge","The midpoint toward negative charge","The direction of the electric field in every situation"],"a":1,"e":"By convention, \\(\\vec p\\) points from −q to +q."},{"q":"For charges ±q separated by 2a, the dipole moment magnitude is…","o":["\\(qa\\)","\\(2qa\\)","\\(q/(2a)\\)","\\(4qa\\)"],"a":1,"e":"\\(p=q(2a)=2qa\\)."},{"q":"If the charge magnitude doubles while separation stays fixed, p…","o":["Halves","Does not change","Doubles","Quadruples"],"a":2,"e":"Since \\(p=qd\\), p is directly proportional to q."},{"q":"If separation doubles while charge magnitude stays fixed, p…","o":["Halves","Does not change","Doubles","Becomes four times"],"a":2,"e":"Since \\(p=qd\\), p is directly proportional to d."},{"q":"Charges ±3 μC are separated by 4 cm. The dipole moment magnitude is…","o":["\\(1.2\\times10^{-8}\\,\\text{C m}\\)","\\(1.2\\times10^{-7}\\,\\text{C m}\\)","\\(7.5\\times10^{-5}\\,\\text{C m}\\)","\\(1.2\\times10^{-5}\\,\\text{C m}\\)"],"a":1,"e":"\\(p=(3\\times10^{-6})(0.04)=1.2\\times10^{-7}\\,\\text{C m}\\)."},{"q":"A dipole has p = \\(2\\times10^{-8}\\,\\text{C m}\\) and charge magnitude \\(4\\,\\mu\\text{C}\\). Separation is…","o":["0.5 mm","5 mm","5 cm","0.5 m"],"a":1,"e":"\\(d=p/q=(2\\times10^{-8})/(4\\times10^{-6})=5\\times10^{-3}\\,\\text{m}=5\\,\\text{mm}\\)."},{"q":"Electric dipole moment is a…","o":["Scalar quantity","Vector quantity","Dimensionless quantity","Unitless constant"],"a":1,"e":"It has both magnitude and a defined direction, so it is a vector."},{"q":"The dimensions of electric dipole moment are…","o":["Charge × length","Force × length","Energy × time","Charge per area"],"a":0,"e":"From \\(p=qd\\), dimensions are charge multiplied by length."},{"q":"A dipole moment of \\(5\\times10^{-9}\\,\\text{C m}\\) in a \\(2\\times10^4\\,\\text{N/C}\\) field at 90° experiences torque…","o":["\\(10^{-5}\\,\\text{N m}\\)","\\(10^{-4}\\,\\text{N m}\\)","\\(10^{-3}\\,\\text{N m}\\)","Zero"],"a":1,"e":"\\(\\tau=pE\\sin90^\\circ=(5\\times10^{-9})(2\\times10^4)=10^{-4}\\,\\text{N m}\\)."},{"q":"Torque magnitude on a dipole in a uniform field is…","o":["\\(pE\\cos\\theta\\)","\\(pE\\sin\\theta\\)","\\(p/E\\)","\\(E/p\\)"],"a":1,"e":"\\(\\tau=pE\\sin\\theta\\)."},{"q":"Torque is maximum when the angle between p and E is…","o":["\\(0^\\circ\\)","\\(45^\\circ\\)","\\(90^\\circ\\)","\\(180^\\circ\\)"],"a":2,"e":"The maximum of \\(\\sin\\theta\\) is 1 at 90°."},{"q":"Torque is zero when p is…","o":["Only perpendicular to E","Parallel or antiparallel to E","At 45° to E","At every angle"],"a":1,"e":"\\(\\tau=pE\\sin\\theta=0\\) for 0° and 180°."},{"q":"Potential energy of a dipole in a uniform electric field is…","o":["\\(pE\\sin\\theta\\)","\\(-pE\\cos\\theta\\)","\\(pE\\cos\\theta\\)","\\(-pE\\sin\\theta\\)"],"a":1,"e":"\\(U=-\\vec p\\cdot\\vec E=-pE\\cos\\theta\\)."},{"q":"The stable equilibrium orientation has p…","o":["Perpendicular to E","Parallel to E","Antiparallel to E","At 45° to E"],"a":1,"e":"Potential energy is minimum when θ=0°, with p parallel to E."},{"q":"The antiparallel orientation of a dipole in a uniform field is…","o":["Stable equilibrium","Unstable equilibrium","Always zero potential energy","Impossible"],"a":1,"e":"At θ=180°, potential energy is maximum, so the equilibrium is unstable."},{"q":"At θ = 0°, dipole potential energy is…","o":["\\(+pE\\)","\\(-pE\\)","Zero","\\(p/E\\)"],"a":1,"e":"\\(U=-pE\\cos0=-pE\\)."},{"q":"At θ = 180°, dipole potential energy is…","o":["\\(-pE\\)","\\(+pE\\)","Zero","\\(-p/E\\)"],"a":1,"e":"\\(U=-pE\\cos180=+pE\\)."},{"q":"For a short dipole far away, the axial field varies as…","o":["\\(1/r\\)","\\(1/r^2\\)","\\(1/r^3\\)","\\(r^3\\)"],"a":2,"e":"The far-field dipole magnitude is proportional to \\(1/r^3\\)."},{"q":"For a short dipole far away, the equatorial field magnitude varies as…","o":["\\(1/r\\)","\\(1/r^2\\)","\\(1/r^3\\)","\\(r^2\\)"],"a":2,"e":"The equatorial far-field also varies as \\(1/r^3\\)."},{"q":"At equal far distances, the axial field magnitude compared with the equatorial field is…","o":["Equal","Twice as large","Half as large","Four times as large"],"a":1,"e":"\\(E_{axial}=2kp/r^3\\) and \\(E_{equatorial}=kp/r^3\\)."},{"q":"If distance from a short dipole doubles, its far-field magnitude becomes…","o":["\\(E/2\\)","\\(E/4\\)","\\(E/8\\)","\\(E/16\\)"],"a":2,"e":"Because \\(E\\propto1/r^3\\), doubling r reduces the field to E/8."},{"q":"A dipole in a uniform electric field experiences…","o":["A nonzero net force always","Zero net force but generally nonzero torque","Zero torque at every orientation","No force on either charge"],"a":1,"e":"Equal and opposite forces cancel in a uniform field, but can form a couple."},{"q":"A dipole in a non-uniform electric field can experience…","o":["No net force","A net force","Only zero torque","No interaction"],"a":1,"e":"The field at the two charges can differ, leaving a net force."},{"q":"The net charge of an ideal dipole is…","o":["\\(+q\\)","\\(-q\\)","\\(2q\\)","Zero"],"a":3,"e":"The charges +q and −q add to zero."},{"q":"If p = \\(2\\times10^{-6}\\,\\text{C m}\\), E = \\(5\\times10^3\\,\\text{N/C}\\), and θ = 30°, torque is…","o":["\\(5\\times10^{-3}\\,\\text{N m}\\)","\\(1\\times10^{-2}\\,\\text{N m}\\)","\\(2.5\\times10^{-3}\\,\\text{N m}\\)","Zero"],"a":0,"e":"\\(\\tau=pE\\sin30^\\circ=(2\\times10^{-6})(5\\times10^3)(0.5)=5\\times10^{-3}\\,\\text{N m}\\)."},{"q":"A dipole with p = \\(3\\times10^{-6}\\,\\text{C m}\\) is parallel to E = 200 N/C. Its potential energy is…","o":["\\(-6\\times10^{-4}\\,\\text{J}\\)","\\(+6\\times10^{-4}\\,\\text{J}\\)","Zero","\\(-1.5\\times10^{-8}\\,\\text{J}\\)"],"a":0,"e":"\\(U=-pE\\cos0=-(3\\times10^{-6})(200)=-6\\times10^{-4}\\,\\text{J}\\)."},{"q":"A dipole with p = \\(4\\times10^{-8}\\,\\text{C m}\\) is perpendicular to E = \\(3\\times10^4\\,\\text{N/C}\\). Torque magnitude is…","o":["Zero","\\(1.2\\times10^{-3}\\,\\text{N m}\\)","\\(1.2\\times10^{-4}\\,\\text{N m}\\)","\\(7.5\\times10^{11}\\,\\text{N m}\\)"],"a":1,"e":"\\(\\tau=pE=(4\\times10^{-8})(3\\times10^4)=1.2\\times10^{-3}\\,\\text{N m}\\)."},{"q":"If dipole moment doubles while E and angle remain fixed, torque…","o":["Halves","Doubles","Quadruples","Is unchanged"],"a":1,"e":"\\(\\tau\\propto p\\) when E and θ are fixed."},{"q":"Which statement about dipole moment is correct?","o":["It depends on charge magnitude and separation","It is always zero for a dipole","It is a scalar","Its direction is from + to −"],"a":0,"e":"The magnitude is qd and the vector points from negative to positive charge."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;,score=0,streak=0,chosen=null,locked=false;,score=0,streak=0,chosen=null,locked=false;
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Dipole Moment Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Degrees of Freedom quiz with MathJax equations">
+<meta name="description" content="SkillUp Physics Easy Mode: Degrees of Freedom quiz">
 <title>SkillUp | Degrees of Freedom — Easy Quiz</title>
 <style>
-
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
@@ -56,61 +55,106 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
-
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
-<section class="hero"><h1>🌡️ Degrees of Freedom</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="hero"><h1>⚛️ Degrees of Freedom</h1><p class="muted">Practice translational, rotational, and vibrational modes with 30 guided questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </main>
 <script>
 (function(){
 'use strict';
-const questions=[{"q":"What does the number of degrees of freedom describe?","o":["Independent ways a molecule can store energy","The number of gas containers","The number of moles only","The pressure unit"],"a":0,"e":"Degrees of freedom count independent modes of motion or energy storage."},{"q":"A monatomic gas molecule has how many translational degrees of freedom in three dimensions?","o":["3","1","2","6"],"a":0,"e":"Translation can occur independently along the x, y and z directions."},{"q":"A rigid diatomic molecule at ordinary temperatures has how many active translational and rotational degrees of freedom, neglecting vibration?","o":["5","3","6","7"],"a":0,"e":"It has three translational and two rotational degrees of freedom."},{"q":"A nonlinear rigid molecule has how many rotational degrees of freedom?","o":["3","1","2","5"],"a":0,"e":"A nonlinear molecule can rotate independently about three axes."},{"q":"For a monatomic ideal gas, the internal energy per mole is…","o":["\\(U=\\frac{3}{2}RT\\)","\\(U=\\frac{5}{2}RT\\)","\\(U=RT\\)","\\(U=3RT\\)"],"a":0,"e":"Three translational degrees of freedom give a molar internal energy of 3RT/2."},{"q":"According to the classical equipartition theorem, each quadratic degree of freedom contributes average energy…","o":["\\(\\frac{1}{2}kT\\) per molecule","\\(kT\\) per molecule","\\(2kT\\) per molecule","\\(\\frac{3}{2}kT\\) per degree"],"a":0,"e":"Each active quadratic degree of freedom contributes kT/2 on average per molecule."},{"q":"For a gas with f active quadratic degrees of freedom, the average energy per molecule is…","o":["\\(\\frac{f}{2}kT\\)","\\(fkT\\)","\\(\\frac{3}{2f}kT\\)","\\(\\frac{2}{f}kT\\)"],"a":0,"e":"Equipartition gives mean energy fkT/2 when f quadratic degrees of freedom are active."},{"q":"For an ideal gas with f active degrees of freedom, the internal energy of n moles is…","o":["\\(U=\\frac{f}{2}nRT\\)","\\(U=fnRT\\)","\\(U=\\frac{3}{2f}nRT\\)","\\(U=nRT/f\\)"],"a":0,"e":"Multiplying the mean molecular energy by Avogadro's number and the mole count gives U = fnRT/2."},{"q":"For an ideal gas with f active degrees of freedom, its molar heat capacity at constant volume is…","o":["\\(C_V=\\frac{f}{2}R\\)","\\(C_V=fR\\)","\\(C_V=R/f\\)","\\(C_V=\\frac{3}{2f}R\\)"],"a":0,"e":"Since U = fnRT/2, differentiating with respect to temperature gives CV = fR/2."},{"q":"For a monatomic ideal gas, the classical value of the heat-capacity ratio is…","o":["\\(\\gamma=\\frac{5}{3}\\)","\\(\\gamma=\\frac{7}{5}\\)","\\(\\gamma=1\\)","\\(\\gamma=\\frac{4}{3}\\)"],"a":0,"e":"For f = 3, CV = 3R/2 and CP = CV + R = 5R/2, so gamma = 5/3."},{"q":"For a rigid diatomic ideal gas at ordinary temperatures, the approximate value of CV is…","o":["\\(\\frac{5}{2}R\\)","\\(\\frac{3}{2}R\\)","\\(\\frac{7}{2}R\\)","\\(R\\)"],"a":0,"e":"With three translational and two rotational modes, f = 5 and CV = 5R/2."},{"q":"For a rigid diatomic ideal gas at ordinary temperatures, the approximate value of gamma is…","o":["\\(\\frac{7}{5}\\)","\\(\\frac{5}{3}\\)","\\(\\frac{4}{3}\\)","\\(1\\)"],"a":0,"e":"CV = 5R/2 and CP = 7R/2, so gamma = 7/5."},{"q":"Why can vibrational degrees of freedom be inactive at low temperatures?","o":["Quantum energy spacing can prevent significant vibrational excitation","Molecules lose all mass","The gas constant becomes zero","Pressure prevents every collision"],"a":0,"e":"Vibrational energy levels are quantized, so vibration may be frozen out when thermal energy is too low."},{"q":"Which motions are counted as translational degrees of freedom in three-dimensional space?","o":["Motion along x, y and z","Only rotation about one axis","Only molecular vibration","Motion in time and temperature"],"a":0,"e":"There are three independent spatial translation directions."},{"q":"A rigid linear diatomic molecule has how many rotational degrees of freedom?","o":["2","1","3","5"],"a":0,"e":"Rotation about the molecular axis contributes negligibly in the simple rigid-rotor model, leaving two active rotations."},{"q":"How many translational degrees of freedom does a nonlinear molecule have?","o":["3","2","1","6"],"a":0,"e":"Any molecule moving in three-dimensional space has three translational degrees of freedom."},{"q":"For a molecule with f = 6 active quadratic degrees of freedom, mean energy per molecule is…","o":["\\(3kT\\)","\\(6kT\\)","\\(\\frac{3}{2}kT\\)","\\(\\frac{1}{2}kT\\)"],"a":0,"e":"Mean energy is fkT/2 = 6kT/2 = 3kT."},{"q":"If a gas has f = 5, its molar heat capacity at constant volume is approximately…","o":["\\(\\frac{5}{2}R\\)","\\(\\frac{3}{2}R\\)","\\(\\frac{7}{2}R\\)","\\(5R\\)"],"a":0,"e":"CV = fR/2, giving 5R/2."},{"q":"For an ideal gas, Mayer's relation between molar heat capacities is…","o":["\\(C_P-C_V=R\\)","\\(C_P+C_V=R\\)","\\(C_P/C_V=R\\)","\\(C_V-C_P=R\\)"],"a":0,"e":"For an ideal gas, CP − CV = R regardless of the number of active degrees of freedom."},{"q":"For f active degrees of freedom, the heat-capacity ratio is…","o":["\\(\\gamma=\\frac{f+2}{f}\\)","\\(\\gamma=\\frac{f}{f+2}\\)","\\(\\gamma=f+2\\)","\\(\\gamma=\\frac{2}{f+2}\\)"],"a":0,"e":"Using CV = fR/2 and CP = (f+2)R/2 gives gamma = (f+2)/f."},{"q":"If f = 3, the expression \\((f+2)/f\\) gives…","o":["\\(\\frac{5}{3}\\)","\\(\\frac{3}{5}\\)","\\(\\frac{7}{5}\\)","\\(2\\)"],"a":0,"e":"Substitute f = 3: gamma = (3 + 2)/3 = 5/3."},{"q":"If f = 5, the expression \\((f+2)/f\\) gives…","o":["\\(\\frac{7}{5}\\)","\\(\\frac{5}{7}\\)","\\(\\frac{5}{3}\\)","\\(\\frac{3}{2}\\)"],"a":0,"e":"Substitute f = 5: gamma = 7/5."},{"q":"A molecule has 3 translational and 3 rotational active degrees of freedom. Its total f is…","o":["6","3","5","9"],"a":0,"e":"The active degrees of freedom add: 3 translational + 3 rotational = 6."},{"q":"In the equipartition theorem, which assumption is important for each contribution of kT/2?","o":["The energy term is quadratic in a coordinate or momentum","The molecule is motionless","The gas must be liquid","All collisions are inelastic"],"a":0,"e":"The classical equipartition result applies to each active quadratic energy term."},{"q":"At higher temperatures, additional vibrational modes may become active. This generally causes CV to…","o":["Increase","Decrease to zero","Remain fixed for every gas","Become negative"],"a":0,"e":"Activating additional energy modes increases the energy stored per degree of temperature rise."},{"q":"For a monatomic ideal gas, what is f in the basic classical model?","o":["3","5","6","2"],"a":0,"e":"A monatomic gas has three translational modes and no rotational contribution in the point-particle model."},{"q":"For a rigid diatomic molecule at ordinary temperatures, which degree-of-freedom count is typically used for introductory gas theory?","o":["5","3","7","2"],"a":0,"e":"The common approximation counts three translations and two rotations; vibration is neglected."},{"q":"If the active degrees of freedom double at fixed temperature and molecule count under equipartition, the modeled average energy…","o":["Doubles","Halves","Remains unchanged","Becomes zero"],"a":0,"e":"The mean energy fkT/2 is proportional to f at fixed temperature."},{"q":"Why does the effective number of degrees of freedom depend on temperature?","o":["Some rotational or vibrational modes may become thermally accessible only at higher temperatures","The number of spatial dimensions changes","Molecules gain extra atoms when heated","Boltzmann's constant changes with temperature"],"a":0,"e":"Quantum energy-level spacing makes some modes effectively inactive at lower temperatures and accessible at higher temperatures."},{"q":"Which statement is correct about degrees of freedom and internal energy?","o":["More active quadratic modes generally allow more energy to be stored at the same temperature","Degrees of freedom measure pressure units","Internal energy is independent of active modes","Every molecule always has exactly three total degrees of freedom"],"a":0,"e":"For active quadratic modes, the classical energy contribution is fkT/2 per molecule."}];
+const questions = [
+{q:"What does the number of degrees of freedom describe?",o:["Independent ways a molecule can store energy","The number of gas containers","The number of moles only","The pressure unit"],a:0,e:"Degrees of freedom count independent modes of motion or energy storage."},
+{q:"A monatomic gas molecule has how many translational degrees of freedom in three dimensions?",o:["3","1","2","6"],a:0,e:"Translation can occur independently along the x, y and z directions."},
+{q:"A rigid diatomic molecule at ordinary temperatures has how many active translational and rotational degrees of freedom, neglecting vibration?",o:["5","3","6","7"],a:0,e:"It has three translational and two rotational degrees of freedom."},
+{q:"A nonlinear rigid molecule has how many rotational degrees of freedom?",o:["3","1","2","5"],a:0,e:"A nonlinear molecule can rotate independently about three axes."},
+{q:"For a monatomic ideal gas, the internal energy per mole is…",o:["\\(U=\\frac{3}{2}RT\\)","\\(U=\\frac{5}{2}RT\\)","\\(U=RT\\)","\\(U=3RT\\)"],a:0,e:"Three translational degrees of freedom give a molar internal energy of 3RT/2."},
+{q:"According to the classical equipartition theorem, each quadratic degree of freedom contributes average energy…",o:["\\(\\frac{1}{2}kT\\) per molecule","\\(kT\\) per molecule","\\(2kT\\) per molecule","\\(\\frac{3}{2}kT\\) per degree"],a:0,e:"Each active quadratic degree of freedom contributes kT/2 on average per molecule."},
+{q:"For a gas with f active quadratic degrees of freedom, the average energy per molecule is…",o:["\\(\\frac{f}{2}kT\\)","\\(fkT\\)","\\(\\frac{3}{2f}kT\\)","\\(\\frac{2}{f}kT\\)"],a:0,e:"Equipartition gives mean energy fkT/2 when f quadratic degrees of freedom are active."},
+{q:"For an ideal gas with f active degrees of freedom, the internal energy of n moles is…",o:["\\(U=\\frac{f}{2}nRT\\)","\\(U=fnRT\\)","\\(U=\\frac{3}{2f}nRT\\)","\\(U=nRT/f\\)"],a:0,e:"Multiplying the mean molecular energy by Avogadro's number and the mole count gives U = fnRT/2."},
+{q:"For an ideal gas with f active degrees of freedom, its molar heat capacity at constant volume is…",o:["\\(C_V=\\frac{f}{2}R\\)","\\(C_V=fR\\)","\\(C_V=R/f\\)","\\(C_V=\\frac{3}{2f}R\\)"],a:0,e:"Since U = fnRT/2, differentiating with respect to temperature gives CV = fR/2."},
+{q:"For a monatomic ideal gas, the classical value of the heat-capacity ratio is…",o:["\\(\\gamma=\\frac{5}{3}\\)","\\(\\gamma=\\frac{7}{5}\\)","\\(\\gamma=1\\)","\\(\\gamma=\\frac{4}{3}\\)"],a:0,e:"For f = 3, CV = 3R/2 and CP = CV + R = 5R/2, so gamma = 5/3."},
+{q:"For a rigid diatomic ideal gas at ordinary temperatures, the approximate value of CV is…",o:["\\(\\frac{5}{2}R\\)","\\(\\frac{3}{2}R\\)","\\(\\frac{7}{2}R\\)","\\(R\\)"],a:0,e:"With three translational and two rotational modes, f = 5 and CV = 5R/2."},
+{q:"For a rigid diatomic ideal gas at ordinary temperatures, the approximate value of gamma is…",o:["\\(\\frac{7}{5}\\)","\\(\\frac{5}{3}\\)","\\(\\frac{4}{3}\\)","\\(1\\)"],a:0,e:"CV = 5R/2 and CP = 7R/2, so gamma = 7/5."},
+{q:"Why can vibrational degrees of freedom be inactive at low temperatures?",o:["Quantum energy spacing can prevent significant vibrational excitation","Molecules lose all mass","The gas constant becomes zero","Pressure prevents every collision"],a:0,e:"Vibrational energy levels are quantized, so vibration may be frozen out when thermal energy is too low."},
+{q:"Which motions are counted as translational degrees of freedom in three-dimensional space?",o:["Motion along x, y and z","Only rotation about one axis","Only molecular vibration","Motion in time and temperature"],a:0,e:"There are three independent spatial translation directions."},
+{q:"A rigid linear diatomic molecule has how many rotational degrees of freedom?",o:["2","1","3","5"],a:0,e:"Rotation about the molecular axis contributes negligibly in the simple rigid-rotor model, leaving two active rotations."},
+{q:"How many translational degrees of freedom does a nonlinear molecule have?",o:["3","2","1","6"],a:0,e:"Any molecule moving in three-dimensional space has three translational degrees of freedom."},
+{q:"For a molecule with f = 6 active quadratic degrees of freedom, mean energy per molecule is…",o:["\\(3kT\\)","\\(6kT\\)","\\(\\frac{3}{2}kT\\)","\\(\\frac{1}{2}kT\\)"],a:0,e:"Mean energy is fkT/2 = 6kT/2 = 3kT."},
+{q:"If a gas has f = 5, its molar heat capacity at constant volume is approximately…",o:["\\(\\frac{5}{2}R\\)","\\(\\frac{3}{2}R\\)","\\(\\frac{7}{2}R\\)","\\(5R\\)"],a:0,e:"CV = fR/2, giving 5R/2."},
+{q:"For an ideal gas, Mayer's relation between molar heat capacities is…",o:["\\(C_P-C_V=R\\)","\\(C_P+C_V=R\\)","\\(C_P/C_V=R\\)","\\(C_V-C_P=R\\)"],a:0,e:"For an ideal gas, CP − CV = R regardless of the number of active degrees of freedom."},
+{q:"For f active degrees of freedom, the heat-capacity ratio is…",o:["\\(\\gamma=\\frac{f+2}{f}\\)","\\(\\gamma=\\frac{f}{f+2}\\)","\\(\\gamma=f+2\\)","\\(\\gamma=\\frac{2}{f+2}\\)"],a:0,e:"Using CV = fR/2 and CP = (f+2)R/2 gives gamma = (f+2)/f."},
+{q:"If f = 3, the expression \\((f+2)/f\\) gives…",o:["\\(\\frac{5}{3}\\)","\\(\\frac{3}{5}\\)","\\(\\frac{7}{5}\\)","\\(2\\)"],a:0,e:"Substitute f = 3: gamma = (3 + 2)/3 = 5/3."},
+{q:"If f = 5, the expression \\((f+2)/f\\) gives…",o:["\\(\\frac{7}{5}\\)","\\(\\frac{5}{7}\\)","\\(\\frac{5}{3}\\)","\\(\\frac{3}{2}\\)"],a:0,e:"Substitute f = 5: gamma = 7/5."},
+{q:"A molecule has 3 translational and 3 rotational active degrees of freedom. Its total f is…",o:["6","3","5","9"],a:0,e:"The active degrees of freedom add: 3 translational + 3 rotational = 6."},
+{q:"In the equipartition theorem, which assumption is important for each contribution of kT/2?",o:["The energy term is quadratic in a coordinate or momentum","The molecule is motionless","The gas must be liquid","All collisions are inelastic"],a:0,e:"The classical equipartition result applies to each active quadratic energy term."},
+{q:"At higher temperatures, additional vibrational modes may become active. This generally causes CV to…",o:["Increase","Decrease to zero","Remain fixed for every gas","Become negative"],a:0,e:"Activating additional energy modes increases the energy stored per degree of temperature rise."},
+{q:"For a monatomic ideal gas, what is f in the basic classical model?",o:["3","5","6","2"],a:0,e:"A monatomic gas has three translational modes and no rotational contribution in the point-particle model."},
+{q:"For a rigid diatomic molecule at ordinary temperatures, which degree-of-freedom count is typically used for introductory gas theory?",o:["5","3","7","2"],a:0,e:"The common approximation counts three translations and two rotations; vibration is neglected."},
+{q:"If the active degrees of freedom double at fixed temperature and molecule count under equipartition, the modeled average energy…",o:["Doubles","Halves","Remains unchanged","Becomes zero"],a:0,e:"The mean energy fkT/2 is proportional to f at fixed temperature."},
+{q:"Why does the effective number of degrees of freedom depend on temperature?",o:["Some rotational or vibrational modes may become thermally accessible only at higher temperatures","The number of spatial dimensions changes","Molecules gain extra atoms when heated","Boltzmann's constant changes with temperature"],a:0,e:"Quantum energy-level spacing makes some modes effectively inactive at lower temperatures and accessible at higher temperatures."},
+{q:"Which statement is correct about degrees of freedom and internal energy?",o:["More active quadratic modes generally allow more energy to be stored at the same temperature","Degrees of freedom measure pressure units","Internal energy is independent of active modes","Every molecule always has exactly three total degrees of freedom"],a:0,e:"For active quadratic modes, the classical energy contribution is fkT/2 per molecule."}
+]
+const originalQuestions=questions.slice();
 let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);
 function render(){
- chosen=null;locked=false;const item=questions[index];
+ chosen=null;locked=false;
+ const item=questions[index];
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
- $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
- item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
- if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options')]).catch(function(){});}
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([f]).catch(function(){});}}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([f]).catch(function(){});}}
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{
  if(!locked)return;index++;
  if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
- const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>Degrees of Freedom Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
  const review=card.querySelector('#wrongReview');
- if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
- $('finishSlot').appendChild(card);
- if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([card]).catch(function(){});}
- $('retry').addEventListener('click',()=>location.reload());
- $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
 });
 render();
- window.addEventListener('load',function(){if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise().catch(function(){});}});
 })();
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

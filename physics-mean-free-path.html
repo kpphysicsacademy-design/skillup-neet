@@ -1,22 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Mean Free Path</title><style>body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><div class="wrap"><div class="card"><h1>🛣️ Mean Free Path</h1><div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a></div></div><script>const qs=[
-['The mean free path of a gas molecule is the average distance travelled by a molecule between successive','collisions','oscillations','changes in temperature','changes in pressure',0,'Mean free path is the average distance a molecule travels between two successive collisions.'],
-['The symbol commonly used for mean free path is','λ','μ','ν','σ',0,'Mean free path is conventionally represented by λ (lambda).'],
-['For an ideal gas, mean free path is inversely proportional to','pressure','absolute temperature','molecular speed','volume',0,'For fixed molecular diameter and temperature, λ is inversely proportional to pressure.'],
-['At constant temperature, if the pressure of a gas is doubled, its mean free path becomes','double','half','four times','unchanged',1,'Since λ ∝ 1/P, doubling pressure reduces the mean free path to half.'],
-['For a dilute gas, the mean free path increases when the molecular diameter','increases','decreases','is doubled','is tripled',1,'Mean free path varies inversely with the square of molecular diameter, so smaller molecules have a longer mean free path.'],
-['The mean free path of gas molecules is related to number density n approximately as','λ ∝ n','λ ∝ 1/n','λ ∝ n²','λ ∝ √n',1,'For a given molecular collision cross-section, λ is inversely proportional to number density.'],
-['For hard-sphere molecules, a commonly used expression for mean free path is','λ=1/(√2 πd²n)','λ=√2 πd²n','λ=πd²n','λ=√2/(πd²n)',0,'For molecular diameter d and number density n, λ = 1/(√2 π d² n).'],
-['At fixed pressure, increasing the absolute temperature of a dilute ideal gas generally causes the mean free path to','decrease','increase','become zero','remain exactly unchanged',1,'At fixed pressure, number density decreases as temperature rises, increasing the mean free path.'],
-['If the number density of molecules is reduced to one-fourth while collision diameter is unchanged, the mean free path becomes','one-fourth','one-half','four times','eight times',2,'Because λ ∝ 1/n, reducing n to one-fourth makes λ four times larger.'],
-['The mean free path is a quantity having the dimensions of','length','time','velocity','pressure',0,'Mean free path is an average distance, so its dimension is length.'],
-['If the molecular diameter is doubled while number density remains constant, the mean free path becomes','twice','half','one-fourth','four times',2,'Since λ ∝ 1/d², doubling d reduces λ by a factor of four.'],
-['A gas at higher pressure, with temperature and molecular diameter otherwise unchanged, has a mean free path that is','larger','smaller','zero in every case','independent of pressure',1,'Higher pressure means greater molecular number density, so collisions are more frequent and λ decreases.'],
-['The mean free path is generally much larger when a gas is','highly compressed','dilute','at extremely high pressure','in a dense liquid',1,'A dilute gas has lower number density and therefore longer average distances between collisions.'],
-['If the collision cross-section of molecules increases while number density is unchanged, the mean free path','increases','decreases','does not change','becomes infinite',1,'A larger collision cross-section increases collision probability and therefore decreases mean free path.'],
-['The mean free path concept is most directly associated with the','kinetic theory of gases','law of reflection','electrostatic induction','wave optics only',0,'Mean free path is a central microscopic concept in the kinetic theory of gases and molecular collisions.']
-];let i=0,score=0,answered=false;const $=x=>document.getElementById(x);function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});$('xp').textContent=ok?'✨ Correct! +1 XP':'❌ Incorrect. '+q[6];if(ok)score++;$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Mean Free Path concept quiz">
+<title>SkillUp | Mean Free Path — Easy Quiz</title>
+<style>
 
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🌡️ Mean Free Path</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"q":"What is the mean free path of a gas molecule?","o":["Average distance travelled between successive collisions","The total length of the container","The diameter of the container","The distance travelled in one second"],"a":0,"e":"Mean free path is the average distance a molecule travels between collisions."},{"q":"What symbol is commonly used for mean free path?","o":["λ","ρ","η","γ"],"a":0,"e":"Mean free path is commonly represented by lambda, λ."},{"q":"The SI unit of mean free path is…","o":["metre","second","kelvin","pascal"],"a":0,"e":"Mean free path is a length, so its SI unit is the metre."},{"q":"For hard-sphere molecules, mean free path is inversely proportional to…","o":["Number density","Temperature only","Molecular speed only","Container length"],"a":0,"e":"At a given molecular diameter, a higher number density leads to more collisions and a shorter mean free path."},{"q":"A common formula for mean free path is…","o":["λ = 1/(√2 π d² n)","λ = √2 π d² n","λ = n/(πd)","λ = P/T"],"a":0,"e":"For hard-sphere diameter d and number density n, λ = 1/(√2πd²n)."},{"q":"In the mean-free-path formula, d represents…","o":["Molecular diameter","Gas density","Molecular speed","Container diameter"],"a":0,"e":"The symbol d is the effective molecular collision diameter."},{"q":"In the formula λ = 1/(√2πd²n), n is…","o":["Number of molecules per unit volume","Number of moles in the room","Molecular mass","Collision time"],"a":0,"e":"Here n is number density, measured in molecules per cubic metre."},{"q":"If number density doubles while molecular diameter remains unchanged, mean free path…","o":["Halves","Doubles","Quadruples","Stays unchanged"],"a":0,"e":"Because λ is inversely proportional to n, doubling n halves λ."},{"q":"If molecular diameter doubles at fixed number density, mean free path becomes…","o":["One-half as large","One-quarter as large","Twice as large","Four times as large"],"a":1,"e":"Mean free path is proportional to 1/d²; doubling d reduces λ to one-quarter."},{"q":"At fixed temperature for an ideal gas, increasing pressure generally makes mean free path…","o":["Shorter","Longer","Unchanged at all pressures","Infinite"],"a":0,"e":"Higher pressure at fixed temperature means greater number density, causing more frequent collisions."},{"q":"At fixed pressure, increasing absolute temperature generally makes mean free path…","o":["Longer","Shorter","Exactly zero","Unchanged for every gas"],"a":0,"e":"For an ideal gas, number density n = P/(kT); at fixed P, higher T lowers n and increases λ."},{"q":"Why do gas molecules collide more frequently when gas density increases?","o":["More molecules occupy each unit volume","Molecules become motionless","Molecular diameter becomes zero","Pressure disappears"],"a":0,"e":"Greater number density increases the chance of encountering another molecule along a path."},{"q":"Mean free path is an average because…","o":["Individual molecules travel different distances between collisions","Every collision occurs at exactly the same distance","Gas molecules never collide","All molecules have identical paths"],"a":0,"e":"Molecular positions and trajectories vary, so collision distances form a distribution."},{"q":"Which change would increase mean free path most directly?","o":["Reducing the number density","Increasing the number density","Increasing molecular diameter","Compressing the gas at fixed temperature"],"a":0,"e":"Lower number density reduces collision frequency and increases the average distance between collisions."},{"q":"Which change generally decreases mean free path?","o":["Increasing gas pressure at fixed temperature","Reducing number density","Reducing molecular diameter","Expanding the gas at fixed temperature"],"a":0,"e":"At fixed temperature, higher pressure means more molecules per unit volume."},{"q":"If λ = 2 × 10⁻⁷ m, what is λ in nanometres?","o":["20 nm","200 nm","2 nm","0.2 nm"],"a":1,"e":"One nanometre is 10⁻⁹ m, so 2 × 10⁻⁷ m = 200 nm."},{"q":"If a molecule travels an average distance of 5 μm between collisions, the mean free path is…","o":["5 × 10⁻⁶ m","5 × 10⁶ m","5 × 10⁻³ m","5 × 10⁻⁹ m"],"a":0,"e":"One micrometre is 10⁻⁶ m, so 5 μm = 5 × 10⁻⁶ m."},{"q":"Does mean free path equal the molecular diameter?","o":["Not generally; it is usually much larger in a dilute gas","Always","It is always smaller than the diameter","It is a time, not a length"],"a":0,"e":"In a dilute gas, molecules typically travel many molecular diameters between collisions."},{"q":"What is the effect of evacuating a gas container while keeping molecular size the same?","o":["Mean free path increases","Mean free path decreases","Mean free path becomes the molecular mass","No change is possible"],"a":0,"e":"Removing molecules lowers number density, increasing mean free path."},{"q":"What is the main reason a high vacuum has a long mean free path?","o":["Very low gas number density","Very large molecular diameter","Very high number density","No space between molecules"],"a":0,"e":"With very few molecules present, collisions become less frequent."},{"q":"The factor √2 in the hard-sphere mean-free-path formula accounts for…","o":["Relative motion of molecules in collisions","The molecular mass being doubled","The gas having two containers","A temperature measured in kelvin"],"a":0,"e":"The √2 factor arises when relative molecular motion is included in the collision rate."},{"q":"If the mean free path decreases, the average collision frequency at the same average speed tends to…","o":["Increase","Decrease","Become zero","Stay unchanged in every case"],"a":0,"e":"At a given average speed, shorter distance between collisions means more collisions per unit time."},{"q":"The approximate relation between mean free path λ, average molecular speed v and mean time between collisions τ is…","o":["λ ≈ vτ","λ = v/τ²","λ = τ/v","λ = v + τ"],"a":0,"e":"Distance is approximately speed multiplied by the time interval between collisions."},{"q":"If mean free path is 4 × 10⁻⁷ m and average speed is 400 m/s, the approximate mean time between collisions is…","o":["10⁻⁹ s","10⁻⁷ s","10⁻⁵ s","10⁻³ s"],"a":0,"e":"τ ≈ λ/v = (4 × 10⁻⁷)/400 = 10⁻⁹ s."},{"q":"Which statement about mean free path in a dilute gas is correct?","o":["It depends on molecular size and number density","It depends only on gas colour","It is independent of collisions","It is always equal to the container size"],"a":0,"e":"For hard spheres, λ depends mainly on effective molecular diameter and number density."},{"q":"At the same number density, a gas with larger effective molecular diameter has…","o":["Shorter mean free path","Longer mean free path","Exactly the same mean free path","No collisions"],"a":0,"e":"The collision cross-section grows with d², reducing the mean free path."},{"q":"If number density falls to one-third of its original value, mean free path becomes…","o":["Three times as large","One-third as large","Nine times as large","Unchanged"],"a":0,"e":"Mean free path is inversely proportional to number density."},{"q":"Why is mean free path important in gas transport phenomena?","o":["It helps describe diffusion, viscosity and thermal conductivity","It determines molecular colour","It prevents heat transfer","It gives the gas's chemical formula"],"a":0,"e":"The distance between collisions influences how molecules transport momentum, energy and mass."},{"q":"In a gas at equilibrium, do all molecules have the same mean free path for every flight?","o":["No; individual flight distances vary","Yes, every flight is identical","Only the slowest molecules collide","Collisions occur only at the wall"],"a":0,"e":"Mean free path is a statistical average, not a fixed distance for each molecule."},{"q":"For hard-sphere molecules, if both number density and molecular diameter increase, the mean free path…","o":["Decreases","Increases","Must remain constant","Cannot be estimated from the formula"],"a":0,"e":"Since λ is proportional to 1/(d²n), increasing either d or n reduces λ."}];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Mean Free Path Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='❌ Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='✅ Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect round — no wrong answers!</p>';}
+ $('finishSlot').appendChild(card);
+ $('retry').addEventListener('click',()=>location.reload());
+ $('retryWrong').addEventListener('click',()=>{const missed=wrongAttempts.map(w=>questions.find(q=>q.q===w.q));if(!missed.length)return;questions.splice(0,questions.length,...missed);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('finishSlot').replaceChildren();$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

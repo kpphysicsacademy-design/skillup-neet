@@ -1,39 +1,161 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Discharging a Capacitor</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Discharging a Capacitor quiz with 30 MCQs, equations, explanations and end-of-quiz wrong-answer review.">
+<title>SkillUp Physics | Discharging a Capacitor — Duolingo-Style Concept Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body><div class="wrap"><div class="card"><h1>⚡ Discharging a Capacitor</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
-<script>
-const qs=[
-['When a charged capacitor is connected across a resistor, it','charges indefinitely','discharges through the resistor','loses its capacitance instantly','produces a constant current forever',1,'The stored charge flows through the resistor, so the capacitor discharges.'],
-['The charge on a capacitor during discharging is','Q=Q₀e^(−t/RC)','Q=Q₀(1−e^(−t/RC))','Q=Q₀e^(t/RC)','Q=Q₀/(1−e^(−t/RC))',0,'For discharge, Q(t)=Q₀e^(−t/RC).'],
-['The capacitor voltage during discharging is','V=V₀e^(−t/RC)','V=V₀(1−e^(−t/RC))','V=V₀e^(t/RC)','V=V₀t/RC',0,'Since V=Q/C and C is constant, voltage follows V(t)=V₀e^(−t/RC).'],
-['The discharge current magnitude in an RC circuit varies as','I=I₀e^(−t/RC)','I=I₀(1−e^(−t/RC))','I=I₀e^(t/RC)','I=I₀+Vt',0,'The current magnitude decays exponentially: I=I₀e^(−t/RC).'],
-['The time constant for capacitor discharge is','R/C','RC','1/RC','R+C',1,'The RC time constant is τ=RC.'],
-['Immediately after a charged capacitor is connected to a resistor, the discharge current magnitude is','zero','V₀/R','V₀C','infinite always',1,'At t=0, I₀=V₀/R.'],
-['After a very long time of discharge, the capacitor voltage approaches','V₀','V₀/2','zero','infinity',2,'As t→∞, e^(−t/RC)→0, so the capacitor voltage approaches zero.'],
-['After one time constant t=RC, the remaining charge is approximately','63%','50%','37%','13.5%',2,'Q/Q₀=e⁻¹≈0.368, so about 37% remains.'],
-['After one time constant t=RC, the capacitor voltage is approximately','37% of initial voltage','63% of initial voltage','50% of initial voltage','zero',0,'V/V₀=e⁻¹≈0.368, so about 37% remains.'],
-['After about 5 time constants, the remaining charge is approximately','99.3%','50%','6.7%','0.7%',3,'e⁻⁵≈0.0067, so about 0.67%, approximately 0.7%, remains.'],
-['A capacitor initially at 20 V discharges through a resistor. At t=RC, its voltage is approximately','20 V','12.6 V','7.36 V','2 V',2,'V=20e⁻¹≈7.36 V.'],
-['A 10 μF capacitor discharges through a 1 MΩ resistor. Its time constant is','0.1 s','1 s','10 s','100 s',2,'τ=RC=(1×10⁶)(10×10⁻⁶)=10 s.'],
-['A capacitor has V₀=12 V and R=2 kΩ. The initial discharge current is','2 mA','4 mA','6 mA','24 mA',2,'I₀=V₀/R=12/2000=6 mA.'],
-['During ideal RC discharge, the energy stored in the capacitor','remains constant','decreases exponentially as e^(−2t/RC)','increases linearly','becomes infinite',1,'U=½CV² and V=V₀e^(−t/RC), so U=U₀e^(−2t/RC).'],
-['The resistor in a discharging RC circuit primarily','creates charge','dissipates stored electrical energy as heat','increases capacitance','keeps current constant',1,'The resistor provides the discharge path and converts stored electrical energy into heat.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
-</script>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}
+.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.option{min-height:56px;line-height:1.4}
+.feedback{font-weight:650}
+@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+.formula-card{display:none}@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Capacitance</h1><p class="muted">Practise the meaning, units and dimensions of capacitance, isolated conductors, capacitor combinations, dielectrics, charge and stored energy.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+let index=0, chosen=null, locked=false, score=0, streak=0;
+const questions = [{"q":"A charged capacitor is allowed to discharge through a resistor. Its charge with time is…","o":["Q=Q₀e^(−t/RC)","Q=Q₀(1−e^(−t/RC))","Q=Q₀e^(t/RC)","Q=Q₀+t/RC"],"a":0,"e":"During discharge, charge decays exponentially: Q(t)=Q₀e^(−t/RC)."},{"q":"The time constant of a simple RC discharging circuit is…","o":["R/C","RC","1/RC","R+C"],"a":1,"e":"The time constant is τ=RC, measured in seconds."},{"q":"The capacitor voltage during discharge is…","o":["V₀e^(−t/RC)","V₀(1−e^(−t/RC))","V₀+t/RC","Constant at V₀"],"a":0,"e":"Since V=Q/C, voltage follows the same exponential decay as charge."},{"q":"At the instant discharge begins, the magnitude of current is…","o":["Zero","V₀/R","V₀C","Infinite"],"a":1,"e":"Initially the resistor has the full capacitor voltage V₀, so |I₀|=V₀/R."},{"q":"After a very long time, the charge remaining on the capacitor approaches…","o":["Q₀","Q₀/2","Zero","Infinity"],"a":2,"e":"As t→∞, e^(−t/RC)→0, so the capacitor becomes discharged."},{"q":"After one time constant, the remaining charge is approximately…","o":["63.2% of Q₀","36.8% of Q₀","50% of Q₀","10% of Q₀"],"a":1,"e":"Q/Q₀=e⁻¹≈0.368, so about 36.8% remains."},{"q":"After one time constant, the capacitor has lost approximately…","o":["36.8% of its initial charge","50% of its initial charge","63.2% of its initial charge","99% of its initial charge"],"a":2,"e":"The lost fraction is 1−e⁻¹≈0.632, or 63.2%."},{"q":"The magnitude of the discharge current at time t is…","o":["I₀e^(−t/RC)","I₀(1−e^(−t/RC))","I₀e^(t/RC)","Constant I₀"],"a":0,"e":"The current magnitude decays as |I|=I₀e^(−t/RC). Its signed direction depends on the chosen convention."},{"q":"If R is doubled and C stays constant, the time constant…","o":["Halves","Doubles","Is unchanged","Becomes four times"],"a":1,"e":"τ=RC, so doubling R doubles the time constant."},{"q":"If C is doubled while R stays constant, the time constant…","o":["Halves","Doubles","Is unchanged","Becomes zero"],"a":1,"e":"τ is directly proportional to capacitance."},{"q":"A 4 μF capacitor discharges through a 500 kΩ resistor. The time constant is…","o":["0.2 s","2 s","20 s","200 s"],"a":1,"e":"τ=RC=(500×10³)(4×10⁻⁶)=2 s."},{"q":"A 10 μF capacitor discharges through 100 kΩ. Its time constant is…","o":["0.01 s","0.1 s","1 s","10 s"],"a":2,"e":"τ=(100×10³)(10×10⁻⁶)=1 s."},{"q":"A 6 μF capacitor initially charged to 12 V has initial charge…","o":["0.5 μC","18 μC","72 μC","720 μC"],"a":2,"e":"Q₀=CV₀=6 μF×12 V=72 μC."},{"q":"A capacitor has initial voltage 10 V. After one time constant, its voltage is about…","o":["1.0 V","3.68 V","6.32 V","10 V"],"a":1,"e":"V=V₀e⁻¹≈0.368×10 V=3.68 V."},{"q":"If the initial current magnitude is 20 mA, after one time constant it is approximately…","o":["7.36 mA","12.64 mA","10 mA","20 mA"],"a":0,"e":"I=I₀e⁻¹≈0.368×20 mA=7.36 mA."},{"q":"After three time constants, the remaining charge is approximately…","o":["95%","50%","36.8%","5.0%"],"a":3,"e":"e⁻³≈0.0498, so about 5% of the initial charge remains."},{"q":"After five time constants, the remaining charge is approximately…","o":["36.8%","13.5%","0.67%","5%"],"a":2,"e":"e⁻⁵≈0.0067, or about 0.67%."},{"q":"The energy stored in a capacitor during discharge varies as…","o":["e^(−t/RC)","e^(−2t/RC)","e^(t/RC)","A constant"],"a":1,"e":"U=Q²/(2C); since Q∝e^(−t/RC), energy U∝e^(−2t/RC)."},{"q":"If the initial stored energy is 8 J, the energy after one time constant is approximately…","o":["2.94 J","1.08 J","4.00 J","5.06 J"],"a":1,"e":"U/U₀=e⁻²≈0.1353, so U≈8×0.1353=1.08 J."},{"q":"The SI unit of the RC time constant is…","o":["Farad","Ohm","Second","Coulomb"],"a":2,"e":"Ω·F=(V/A)(C/V)=C/A=s."},{"q":"Which graph best represents charge versus time during ideal RC discharge?","o":["A straight line to zero","An exponential decay approaching zero","A rising exponential","A constant horizontal line"],"a":1,"e":"Charge falls rapidly at first and then more slowly, following Q=Q₀e^(−t/RC)."},{"q":"During discharge, the magnitude of current decreases because…","o":["The resistor gets larger continuously","The capacitor voltage and charge decrease","The capacitance continuously increases","The capacitor gains charge"],"a":1,"e":"The driving voltage decreases as the capacitor loses charge, so current magnitude also decreases."},{"q":"A 2 mF capacitor discharges through a 3 kΩ resistor. The time constant is…","o":["0.006 s","0.6 s","6 s","6000 s"],"a":2,"e":"τ=3000×0.002=6 s."},{"q":"A capacitor starts with 100 μC. How much charge remains after one time constant approximately?","o":["63.2 μC","50 μC","36.8 μC","10 μC"],"a":2,"e":"Q=100e⁻¹ μC≈36.8 μC."},{"q":"For Q=Q₀e^(−t/RC), at t=0 the charge is…","o":["Zero","Q₀","Q₀/e","Infinite"],"a":1,"e":"At t=0, the exponential factor is e⁰=1, so Q=Q₀."},{"q":"For Q=Q₀e^(−t/RC), what happens as t→∞?","o":["Q→Q₀","Q→Q₀/e","Q→0","Q→∞"],"a":2,"e":"The exponential factor approaches zero at long times."},{"q":"If the resistance is reduced to half while C stays fixed, discharge becomes…","o":["Slower, with doubled τ","Faster, with halved τ","Unchanged","Impossible"],"a":1,"e":"Halving R halves τ=RC, so the capacitor discharges faster."},{"q":"A 5 μF capacitor is initially at 20 V and discharges through 2 MΩ. The initial current magnitude is…","o":["10 μA","100 μA","1 mA","4 μA"],"a":0,"e":"I₀=V₀/R=20/(2×10⁶)=10 μA."},{"q":"A 3 μF capacitor initially holds 30 μC. Its initial voltage is…","o":["0.1 V","10 V","90 V","30 V"],"a":1,"e":"V₀=Q₀/C=30 μC/3 μF=10 V."},{"q":"In a discharging RC circuit, after each equal time interval of one time constant, the remaining charge is multiplied by…","o":["e","1−e⁻¹","e⁻¹","2"],"a":2,"e":"Each interval τ multiplies the remaining charge by e⁻¹≈0.368."}];
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Capacitance Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

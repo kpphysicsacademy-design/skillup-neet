@@ -1,39 +1,161 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Parallel Plate Capacitor</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Parallel Plate Capacitor concept quiz with 30 MCQs, MathJax equations, explanations and end-of-quiz wrong-answer review.">
+<title>SkillUp Physics | Parallel Plate Capacitor — Duolingo-Style Concept Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body><div class="wrap"><div class="card"><h1>⚡ Parallel Plate Capacitor</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
-<script>
-const qs=[
-['The capacitance of an ideal parallel-plate capacitor in vacuum is','ε₀A/d','ε₀d/A','A/(ε₀d)','d/(ε₀A)',0,'For parallel plates, C=ε₀A/d when edge effects are neglected.'],
-['In the formula C=ε₀A/d, A represents','charge on a plate','area of each plate','separation between plates','electric field',1,'A is the area of each conducting plate.'],
-['If the area of the plates is doubled, capacitance','halves','doubles','becomes four times','remains unchanged',1,'Since C is directly proportional to A, doubling A doubles C.'],
-['If the plate separation is doubled, capacitance','doubles','halves','becomes four times','remains unchanged',1,'Since C is inversely proportional to d, doubling d halves C.'],
-['The electric field between large parallel plates carrying ±Q is approximately','Q/(ε₀A)','Qε₀A','ε₀A/Q','A/(Qε₀)',0,'For an ideal parallel-plate capacitor, E=σ/ε₀=Q/(ε₀A).'],
-['The potential difference between plates is related to field by','V=E/d','V=Ed','V=E+d','V=E/d²',1,'For a uniform field, the magnitude of potential difference is V=Ed.'],
-['A dielectric slab completely filling the space between plates changes capacitance from C₀ to','C₀/K','KC₀','C₀+K','C₀−K',1,'A dielectric of relative permittivity K gives C=KC₀.'],
-['For an isolated charged capacitor, increasing plate separation causes the charge to','increase','decrease','remain constant','become zero',2,'If isolated from external circuits, no charge can flow, so Q remains constant.'],
-['For an isolated charged parallel-plate capacitor, increasing plate separation makes the potential difference','decrease','increase','remain constant','become zero',1,'With Q constant, C decreases as d increases, so V=Q/C increases.'],
-['For a battery-connected capacitor, increasing plate separation makes capacitance','increase','decrease','remain constant','become infinite',1,'With A fixed, C=ε₀A/d, so increasing d decreases capacitance.'],
-['A parallel-plate capacitor has A=0.01 m² and d=1 mm in vacuum. Taking ε₀=8.85×10⁻¹² F/m, C is approximately','8.85×10⁻¹¹ F','8.85×10⁻¹⁰ F','8.85×10⁻⁸ F','8.85×10⁻⁶ F',1,'C=ε₀A/d=8.85×10⁻¹²×0.01/10⁻³=8.85×10⁻¹¹ F.'],
-['If C=2 μF and V=10 V, the charge stored is','5 μC','20 μC','0.2 μC','200 μC',1,'Q=CV=(2 μF)(10 V)=20 μC.'],
-['If C=4 μF and V=5 V, energy stored is','10 μJ','25 μJ','50 μJ','100 μJ',2,'U=½CV²=½(4×10⁻⁶)(25)=50 μJ.'],
-['Ignoring edge effects, the electric field of a parallel-plate capacitor is approximately','uniform between the plates','zero everywhere','strongest only at the centre','randomly directed',0,'The field between large parallel plates is approximately uniform away from the edges.'],
-['The capacitance of a parallel-plate capacitor increases when','plate separation increases','plate area decreases','a dielectric is inserted','both plates are removed',2,'Inserting a dielectric increases capacitance by its relative permittivity when it completely fills the gap.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
-</script>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}
+.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.option{min-height:56px;line-height:1.4}
+.feedback{font-weight:650}
+@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+.formula-card{display:none}@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🔋 Parallel Plate Capacitor</h1><p class="muted">Practise the parallel-plate capacitance formula, plate geometry, dielectric effects, electric field and battery-connected versus isolated cases.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+let index=0, chosen=null, locked=false, score=0, streak=0;
+const questions = [{"q":"The capacitance of an ideal parallel-plate capacitor in vacuum is…","o":["ε₀A/d","ε₀d/A","Ad/ε₀","d/(ε₀A)"],"a":0,"e":"For large parallel plates, C = ε₀A/d, neglecting edge effects."},{"q":"In C = ε₀A/d, A represents…","o":["Plate separation","Area of one plate","Charge on a plate","Potential difference"],"a":1,"e":"A is the overlapping area of the plates."},{"q":"In C = ε₀A/d, d represents…","o":["Plate separation","Plate thickness","Plate radius","Dielectric constant"],"a":0,"e":"d is the distance between the plates."},{"q":"If plate area doubles and separation is unchanged, capacitance…","o":["Halves","Doubles","Is unchanged","Becomes four times"],"a":1,"e":"C is directly proportional to A."},{"q":"If plate separation doubles with area unchanged, capacitance…","o":["Doubles","Halves","Is unchanged","Becomes four times"],"a":1,"e":"C is inversely proportional to d."},{"q":"A parallel-plate capacitor has A = 0.02 m² and d = 1 mm. Its capacitance is approximately… (ε₀ = 8.85 × 10⁻¹² F/m)","o":["1.77 × 10⁻¹⁰ F","1.77 × 10⁻¹¹ F","8.85 × 10⁻¹² F","4.43 × 10⁻¹⁰ F"],"a":0,"e":"C = ε₀A/d = 8.85×10⁻¹²×0.02/10⁻³ = 1.77×10⁻¹⁰ F."},{"q":"The SI unit of ε₀ is…","o":["F m⁻¹","F m","C V","N C⁻¹"],"a":0,"e":"Permittivity has SI unit farad per metre (F/m)."},{"q":"For a fixed plate area, reducing separation to one-third makes capacitance…","o":["One-third as large","Three times as large","Nine times as large","Unchanged"],"a":1,"e":"C ∝ 1/d, so reducing d to d/3 triples C."},{"q":"If the plate area is tripled and separation is doubled, capacitance becomes…","o":["3C","2C","1.5C","C/6"],"a":2,"e":"C′/C = 3/2, so the capacitance is 1.5 times the original."},{"q":"A dielectric of relative permittivity K completely fills the gap. The capacitance becomes…","o":["C₀/K","KC₀","C₀ + K","C₀ − K"],"a":1,"e":"Filling the gap gives C = Kε₀A/d = KC₀."},{"q":"A 4 μF air capacitor is completely filled with dielectric K = 3. New capacitance is…","o":["12 μF","7 μF","4/3 μF","1 μF"],"a":0,"e":"C = KC₀ = 3 × 4 μF = 12 μF."},{"q":"The electric field between large parallel plates is approximately…","o":["Non-uniform everywhere","Uniform away from edges","Zero at the centre","Always radial"],"a":1,"e":"The field is approximately uniform in the central region; edge fringing is neglected."},{"q":"For plate potential difference V and separation d, field magnitude is…","o":["Vd","V/d","d/V","ε₀V"],"a":1,"e":"For a uniform field, E = V/d."},{"q":"If the battery remains connected while plate separation increases, the potential difference…","o":["Increases","Decreases","Remains constant","Becomes zero"],"a":2,"e":"An ideal battery maintains fixed V."},{"q":"With a battery connected, increasing plate separation makes capacitance…","o":["Increase","Decrease","Stay the same","Become infinite"],"a":1,"e":"C = ε₀A/d decreases as d increases."},{"q":"With a battery connected, plate separation increases. The charge magnitude on the plates…","o":["Increases","Decreases","Stays fixed","Must become zero"],"a":1,"e":"V is fixed and C decreases, so Q = CV decreases."},{"q":"A charged capacitor is disconnected from its battery, then plate separation increases. Its charge…","o":["Increases","Decreases","Remains constant","Changes sign"],"a":2,"e":"For an isolated capacitor, no charge flows to or from the plates."},{"q":"For an isolated charged capacitor, increasing plate separation causes voltage to…","o":["Decrease","Increase","Remain constant","Become zero"],"a":1,"e":"Q is constant and C decreases, so V = Q/C increases."},{"q":"For an isolated capacitor, increasing plate separation causes stored energy to…","o":["Decrease","Increase","Remain constant in all cases","Become zero"],"a":1,"e":"With Q fixed, U = Q²/(2C); as C decreases, U increases."},{"q":"The charge on each plate of a charged capacitor has…","o":["Equal magnitudes and opposite signs","Equal signs and equal magnitudes","Unequal magnitudes always","No relation"],"a":0,"e":"The plates carry +Q and −Q."},{"q":"The charge stored is Q = …","o":["C/V","CV","V/C","C + V"],"a":1,"e":"By definition, Q = CV."},{"q":"A 6 μF capacitor is connected to 5 V. Charge magnitude is…","o":["1.2 μC","11 μC","30 μC","0.83 μC"],"a":2,"e":"Q = CV = 6 μF × 5 V = 30 μC."},{"q":"A parallel-plate capacitor has capacitance 2 nF. If the separation is reduced by half, new capacitance is…","o":["1 nF","2 nF","4 nF","8 nF"],"a":2,"e":"Halving d doubles C, giving 4 nF."},{"q":"If both plate area and separation are doubled, capacitance…","o":["Doubles","Halves","Remains unchanged","Becomes four times"],"a":2,"e":"C′ ∝ (2A)/(2d) = A/d, so C is unchanged."},{"q":"If plate area is halved and separation is doubled, capacitance becomes…","o":["C/4","C/2","2C","4C"],"a":0,"e":"C′/C = (1/2)/2 = 1/4."},{"q":"The force between oppositely charged capacitor plates is generally…","o":["Repulsive","Attractive","Always zero","Independent of charge in every situation"],"a":1,"e":"Opposite charges attract, so the plates exert attractive electrostatic forces."},{"q":"Neglecting edge effects, the electric field outside a large ideal parallel-plate capacitor is approximately…","o":["Zero","Equal to V/d everywhere","Infinite","Twice the internal field"],"a":0,"e":"The fields from the two plates largely cancel outside the idealized capacitor."},{"q":"The capacitance of a parallel-plate capacitor depends directly on…","o":["Applied voltage only","Stored charge only","Plate area and permittivity","Plate separation only"],"a":2,"e":"C = εA/d; it depends on geometry and the dielectric medium."},{"q":"A capacitor has C = 8 pF and V = 10 V. The stored charge is…","o":["0.8 pC","18 pC","80 pC","800 pC"],"a":2,"e":"Q = CV = 8 pF × 10 V = 80 pC."},{"q":"A parallel-plate capacitor's plate area is 0.01 m², separation 0.5 mm, and vacuum gap. Its capacitance is closest to… (ε₀ = 8.85 × 10⁻¹² F/m)","o":["1.77 × 10⁻¹⁰ F","1.77 × 10⁻¹¹ F","4.43 × 10⁻¹² F","8.85 × 10⁻¹⁰ F"],"a":0,"e":"C = ε₀A/d = 8.85×10⁻¹²×0.01/(5×10⁻⁴) = 1.77×10⁻¹⁰ F."}]
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Parallel Plate Capacitor Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

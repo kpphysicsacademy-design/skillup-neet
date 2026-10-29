@@ -64,21 +64,6 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>⚡ Electric Field Lines</h1><p class="muted">Practice field-line direction, density, patterns around charges, conductors, and uniform fields with 30 questions.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
-<section class="quiz" id="virtualLearn" style="margin-bottom:14px">
- <div class="qmeta">VIRTUAL LEARN</div>
- <h2 style="font-size:22px;margin:10px 0 5px">See how field lines work</h2>
- <p class="muted" style="margin-bottom:13px">Choose a charge pattern. Follow the arrows.</p>
- <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-  <button type="button" class="option selected" data-field-mode="positive" aria-pressed="true">＋ Positive</button>
-  <button type="button" class="option" data-field-mode="negative" aria-pressed="false">− Negative</button>
-  <button type="button" class="option" data-field-mode="uniform" aria-pressed="false">Parallel plates</button>
- </div>
- <div style="background:#f3f9ff;border:2px solid #dce6ef;border-radius:15px;padding:6px">
-  <svg id="fieldConceptSvg" viewBox="0 0 600 270" role="img" aria-label="Electric field line pattern" style="display:block;width:100%;height:auto"></svg>
- </div>
- <p id="fieldConceptText" aria-live="polite" style="margin:12px 0 0;padding:12px;border-radius:13px;background:#e8f7dc;font-weight:750;line-height:1.5">Positive charge: arrows point away from the charge.</p>
- <p class="muted" style="margin-top:9px">Remember: field lines go from positive to negative. Closer lines mean a stronger field.</p>
-</section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </main>
@@ -90,29 +75,6 @@ let index=0,score=0,streak=0,chosen=null,locked=false;
 const originalQuestions=questions.slice();
 let wrongAttempts=[];
 const $=id=>document.getElementById(id);
-function drawFieldConcept(mode){
- const svg=$('fieldConceptSvg');if(!svg)return;
- const blue='#1cb0f6',n=12;
- let out='<defs><marker id="fieldArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="'+blue+'"/></marker></defs>';
- const line=d=>'<path d="'+d+'" fill="none" stroke="'+blue+'" stroke-width="2.5" stroke-linecap="round" marker-end="url(#fieldArrow)"/>';
- const charge=(x,y,pos)=>'<circle cx="'+x+'" cy="'+y+'" r="20" fill="'+(pos?'#ff6b6b':'#4da8ff')+'" stroke="#fff" stroke-width="3"/><text x="'+x+'" y="'+(y+7)+'" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">'+(pos?'+':'−')+'</text>';
- if(mode==='positive'||mode==='negative'){
-  const cx=300,cy=135,pos=mode==='positive';
-  for(let i=0;i<n;i++){const t=i*2*Math.PI/n,x1=cx+24*Math.cos(t),y1=cy+24*Math.sin(t),x2=cx+108*Math.cos(t),y2=cy+108*Math.sin(t);out+=line(pos?'M '+x1+' '+y1+' L '+x2+' '+y2:'M '+x2+' '+y2+' L '+x1+' '+y1);}
-  out+=charge(cx,cy,pos);
-  $('fieldConceptText').textContent=pos?'Positive charge: arrows point away from the charge.':'Negative charge: arrows point toward the charge.';
- }else{
-  for(let y=22;y<=248;y+=32)out+=line('M 58 '+y+' L 542 '+y);
-  out+='<rect x="20" y="10" width="12" height="250" rx="4" fill="#ff6b6b"/><rect x="568" y="10" width="12" height="250" rx="4" fill="#4da8ff"/><text x="39" y="23" fill="#243447" font-size="16" font-weight="900">+</text><text x="548" y="23" fill="#243447" font-size="16" font-weight="900">−</text>';
-  $('fieldConceptText').textContent='Parallel plates: straight, parallel arrows point from the positive plate to the negative plate.';
- }
- svg.innerHTML=out;
-}
-document.querySelectorAll('[data-field-mode]').forEach(btn=>btn.addEventListener('click',()=>{
- document.querySelectorAll('[data-field-mode]').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false');});
- btn.classList.add('selected');btn.setAttribute('aria-pressed','true');drawFieldConcept(btn.dataset.fieldMode);
-}));
-drawFieldConcept('positive');
 function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
 window.addEventListener('load',typesetMath);
 function render(){

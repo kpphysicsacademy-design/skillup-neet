@@ -8,7 +8,38 @@ body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wra
 </style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body><div class="wrap"><div class="card"><h1>⚡ Ohm's Law</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
+<section id="ohmsVisual" aria-label="Interactive Ohm's law visual" style="margin:18px 0 24px;padding:18px;border-radius:20px;background:linear-gradient(135deg,#e8fff1,#eaf3ff);border:2px solid #b8ebcb">
+<h2 style="margin:0 0 6px;color:#176b42">⚡ Explore Ohm’s Law</h2>
+<p style="margin:0 0 16px;color:#334155">Move the sliders and see how current changes. Keep resistance fixed to test voltage, or keep voltage fixed to test resistance.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+<label style="font-weight:700">Voltage: <span id="ohmVLabel">12</span> V<input id="ohmV" type="range" min="1" max="24" value="12" style="display:block;width:100%;margin-top:10px;accent-color:#16a34a"></label>
+<label style="font-weight:700">Resistance: <span id="ohmRLabel">6</span> Ω<input id="ohmR" type="range" min="1" max="24" value="6" style="display:block;width:100%;margin-top:10px;accent-color:#2563eb"></label>
+</div>
+<div style="margin-top:16px;padding:16px;border-radius:16px;background:#fff;text-align:center">
+<div style="font-size:clamp(22px,5vw,34px);font-weight:800;color:#166534">I = V ÷ R</div>
+<div id="ohmCalculation" style="font-size:18px;margin-top:8px;color:#334155">I = 12 V ÷ 6 Ω</div>
+<div style="font-size:14px;color:#64748b;margin-top:12px">Current</div>
+<div id="ohmCurrent" style="font-size:clamp(30px,7vw,42px);font-weight:800;color:#2563eb">2 A</div>
+<div style="height:14px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:12px"><div id="ohmMeter" style="height:100%;width:8.33%;background:linear-gradient(90deg,#22c55e,#3b82f6);border-radius:99px;transition:width .2s"></div></div>
+</div>
+<p style="margin:12px 0 0;font-size:14px;color:#334155"><b>Remember:</b> at constant resistance, increasing voltage increases current. At constant voltage, increasing resistance decreases current.</p>
+</section>
+<script>
+(function(){
+ const v=document.getElementById('ohmV'),r=document.getElementById('ohmR');
+ if(!v||!r)return;
+ function update(){
+  const V=Number(v.value),R=Number(r.value),I=V/R;
+  document.getElementById('ohmVLabel').textContent=V;
+  document.getElementById('ohmRLabel').textContent=R;
+  document.getElementById('ohmCalculation').textContent='I = '+V+' V ÷ '+R+' Ω = '+(Math.round(I*100)/100)+' A';
+  document.getElementById('ohmCurrent').textContent=(Math.round(I*100)/100)+' A';
+  document.getElementById('ohmMeter').style.width=(I/24*100)+'%';
+ }
+ v.addEventListener('input',update);r.addEventListener('input',update);update();
+})();
+</script>
+\n<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
 </div></div>
 <script>
 const qs=[

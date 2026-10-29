@@ -55,6 +55,11 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Clear enabled/disabled feedback and protect answer interaction from shared CSS overrides. */
+#check:disabled{background:#c8d0c1!important;color:#fff!important;box-shadow:0 4px 0 #aeb7a7!important;opacity:1!important;cursor:not-allowed!important;}
+#check:not(:disabled){background:#58cc02!important;color:#fff!important;box-shadow:0 4px 0 #46a302!important;opacity:1!important;cursor:pointer!important;}
+#options .option{pointer-events:auto!important;}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
@@ -86,20 +91,20 @@ function render(){
  $('qmeta').textContent='QUESTION '+(index+1);
  $('question').textContent=item.q;
  $('feedback').className='feedback';$('feedback').textContent='';
- $('check').style.display='block';$('check').disabled=true;
+ $('check').style.display='block';$('check').disabled=true;$('check').setAttribute('aria-disabled','true');
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
  item.o.forEach((text,j)=>{
    const b=document.createElement('button');b.type='button';b.className='option';
    const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
    const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('#options .option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;$('check').setAttribute('aria-disabled','false');});
    $('options').appendChild(b);
  });
  typesetMath();
 }
 $('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ if(chosen===null||locked)return;locked=true;$('check').disabled=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}

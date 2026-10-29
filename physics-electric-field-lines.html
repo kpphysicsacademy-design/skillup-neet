@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Superposition of Charges quiz with 30 MathJax-rendered questions and explanations.">
+<meta name="description" content="SkillUp Physics: learn electric field lines with a simple interactive visual and 30 MathJax-rendered questions.">
 <title>SkillUp | Electric Field Lines — Easy Quiz</title>
 <style>
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
@@ -131,13 +131,13 @@ function render(){
    const b=document.createElement('button');b.type='button';b.className='option';
    const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
    const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;$('options').querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
    $('options').appendChild(b);
  });
  typesetMath();
 }
 $('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...$('options').querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}

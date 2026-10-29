@@ -1,39 +1,161 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillUp Physics | Dielectric</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics: Dielectric concept quiz with 30 MCQs, equations, explanations and end-of-quiz wrong-answer review.">
+<title>SkillUp Physics | Dielectric — Duolingo-Style Concept Quiz</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f6f8fb;margin:0;color:#172033}.wrap{max-width:760px;margin:auto;padding:22px}.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0001}h1{text-align:center}.meta{display:flex;justify-content:space-between;font-weight:700}.bar{height:10px;background:#e5e9f0;border-radius:10px;overflow:hidden;margin:15px 0 24px}.fill{height:100%;width:0;background:#4caf50;transition:.3s}.q{font-size:20px;font-weight:700;margin-bottom:18px}.opt{display:block;width:100%;box-sizing:border-box;text-align:left;padding:15px;margin:10px 0;border:2px solid #dbe1ea;border-radius:14px;background:#fff;color:#172033;font-size:16px;cursor:pointer}.opt:hover{background:#f1f6ff}.correct{border-color:#39a852!important;background:#e9f8ed!important}.wrong{border-color:#e05252!important;background:#fff0f0!important}.next,.retry,.back{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;margin-top:15px;font-size:16px;font-weight:700;cursor:pointer}.next,.retry{background:#2563eb;color:#fff}.back{background:#172033;color:#fff}.hide{display:none}.xp{text-align:center;font-weight:700;color:#e08a00;min-height:24px}@media(max-width:520px){.wrap{padding:14px 10px}.card{padding:18px}.q{font-size:18px}.opt{font-size:15px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body><div class="wrap"><div class="card"><h1>⚡ Dielectric</h1>
-<div class="meta"><span id="count">Question 1/15</span><span id="score">XP 0</span></div><div class="bar"><div class="fill" id="fill"></div></div><div id="quiz"></div><div class="xp" id="xp"></div><button class="next hide" id="next">Next Question →</button><div id="result" class="hide"></div><a class="back" href="physics-home-fast.html">← Back to Physics Path</a>
-</div></div>
-<script>
-const qs=[
-['A dielectric is a material that is generally','a good conductor of electric current','an insulating material that polarises in an electric field','a permanent magnet','a source of free electrons only',1,'A dielectric is an electrical insulator whose bound charges can shift slightly under an electric field, producing polarisation.'],
-['The main effect of placing a dielectric in an electric field is','polarisation','ionisation of all atoms','complete removal of charges','creation of a magnetic monopole',0,'The bound charges in a dielectric undergo small displacements, producing electric polarisation.'],
-['The relative permittivity (dielectric constant) K is defined as','ε₀/ε','ε/ε₀','ε+ε₀','ε−ε₀',1,'Relative permittivity is K=ε/ε₀.'],
-['For a dielectric medium, the permittivity is','ε=Kε₀','ε=ε₀/K','ε=K/ε₀','ε=ε₀−K',0,'The absolute permittivity of a dielectric is ε=Kε₀.'],
-['If a dielectric of constant K completely fills a parallel-plate capacitor, its capacitance becomes','C₀/K','KC₀','C₀+K','C₀−K',1,'For complete filling, C=K C₀.'],
-['A dielectric reduces the electric field inside a capacitor, compared with vacuum, by a factor of','K','1/K','K²','2K',1,'For a fixed free charge on the plates, E=E₀/K when the dielectric completely fills the gap.'],
-['Polarisation vector P represents','magnetic moment per unit volume','electric dipole moment per unit volume','charge per unit area only','electric field per unit charge',1,'Polarisation P is electric dipole moment per unit volume.'],
-['The SI unit of polarisation P is','C/m²','C/m³','C·m','N/C',0,'Since P is dipole moment per unit volume, its SI unit is C/m².'],
-['For a linear isotropic dielectric, polarisation is related to electric field by','P=ε₀χₑE','P=χₑE','P=E/χₑ','P=ε₀E/χₑ',0,'For a linear dielectric, P=ε₀χₑE, where χₑ is electric susceptibility.'],
-['For a linear dielectric, relative permittivity and electric susceptibility are related by','K=χₑ','K=1+χₑ','K=1−χₑ','K=χₑ−1',1,'The relation is K=1+χₑ.'],
-['A capacitor has vacuum capacitance 2 μF. A dielectric of K=5 completely fills the gap. New capacitance is','0.4 μF','2.5 μF','10 μF','25 μF',2,'C=KC₀=5×2 μF=10 μF.'],
-['A capacitor remains connected to a battery while a dielectric is inserted completely. The potential difference','increases K times','decreases K times','remains constant','becomes zero',2,'Because the battery fixes the potential difference across the capacitor.'],
-['A charged capacitor is disconnected from its battery before a dielectric is inserted. The free charge on its plates','remains constant','increases K times','decreases K times','becomes zero',0,'With the capacitor isolated, charge cannot flow to or from the plates, so Q remains constant.'],
-['For an isolated charged capacitor, insertion of a dielectric completely between the plates makes the potential difference','K times larger','K times smaller','unchanged','zero only if K=1',1,'With Q constant and C increasing K times, V=Q/C decreases by a factor K.'],
-['The force between free charges embedded in a homogeneous dielectric, compared with vacuum, is generally','K times larger','K times smaller','unchanged','zero',1,'For the same charges and separation, Coulomb force in a homogeneous dielectric is reduced by the factor K.']
-];
-let i=0,score=0,answered=false;const $=x=>document.getElementById(x);
-function render(){answered=false;$('count').textContent=`Question ${i+1}/15`;$('score').textContent=`XP ${score}`;$('fill').style.width=`${i/15*100}%`;const q=qs[i];$('quiz').innerHTML=`<div class="q">${q[0]}</div>`+q.slice(1,5).map((o,n)=>`<button class="opt" data-n="${n}">${String.fromCharCode(65+n)}. ${o}</button>`).join('');document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.n));$('next').classList.add('hide');$('xp').textContent='';}
-function answer(n){if(answered)return;answered=true;const q=qs[i],ok=n===q[5];document.querySelectorAll('.opt').forEach((b,k)=>{if(k===q[5])b.classList.add('correct');if(k===n&&!ok)b.classList.add('wrong');b.disabled=true});if(ok){score++;$('xp').textContent='✨ Correct! +1 XP'}else $('xp').textContent='❌ Incorrect. '+q[6];$('score').textContent=`XP ${score}`;$('next').classList.remove('hide');}
-function next(){if(i<14){i++;render()}else{$('quiz').innerHTML='';$('next').classList.add('hide');$('fill').style.width='100%';$('count').textContent='Complete!';$('result').classList.remove('hide');$('result').innerHTML=`<h2 style="text-align:center">🎉 Quiz Complete</h2><p style="text-align:center;font-size:20px">Score: <b>${score}/15</b></p><button class="retry" onclick="location.reload()">Retry Quiz ↻</button>`;}}$('next').onclick=next;render();
-</script>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}
+.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.option{min-height:56px;line-height:1.4}
+.feedback{font-weight:650}
+@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+.formula-card{display:none}@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>⚡ Dielectric</h1><p class="muted">Practise polarisation, relative permittivity, susceptibility, dielectric strength, capacitor behaviour and dielectric insertion.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+let index=0, chosen=null, locked=false, score=0, streak=0;
+const questions = [{"q":"A dielectric is a material that…","o":["Conducts current freely","Polarises in an electric field","Always produces magnetic fields","Contains no bound charges"],"a":1,"e":"A dielectric is an insulator whose bound charges shift slightly under an electric field, causing polarisation."},{"q":"The relative permittivity (dielectric constant) K is defined as…","o":["ε/ε₀","ε₀/ε","ε + ε₀","εε₀"],"a":0,"e":"Relative permittivity is K = ε/ε₀."},{"q":"For a linear dielectric, electric susceptibility χₑ and relative permittivity are related by…","o":["K = χₑ","K = 1 + χₑ","K = 1 − χₑ","K = χₑ − 1/K"],"a":1,"e":"In SI, K = 1 + χₑ for a linear isotropic dielectric."},{"q":"A dielectric placed in an external electric field becomes polarised because…","o":["Free electrons flow through it without resistance","Bound charges shift slightly in opposite directions","All atoms become ions permanently","The electric field must vanish everywhere"],"a":1,"e":"The applied field slightly displaces bound positive and negative charges, creating dipoles."},{"q":"For a capacitor completely filled with a dielectric of relative permittivity K, the capacitance is…","o":["C₀/K","KC₀","C₀ + K","C₀ − K"],"a":1,"e":"For fixed geometry, C = K C₀ when the dielectric completely fills the gap."},{"q":"A capacitor has vacuum capacitance 4 μF. Filling it completely with K = 3 gives…","o":["1.33 μF","4 μF","7 μF","12 μF"],"a":3,"e":"C = KC₀ = 3 × 4 μF = 12 μF."},{"q":"The SI unit of electric susceptibility is…","o":["Farad","Coulomb","Dimensionless","Volt per metre"],"a":2,"e":"Electric susceptibility χₑ is dimensionless."},{"q":"In a dielectric, the induced dipole moment per unit volume is called…","o":["Electric flux","Polarisation","Permittivity only","Capacitance"],"a":1,"e":"Polarisation P is the electric dipole moment per unit volume."},{"q":"For a linear isotropic dielectric, polarisation P is related to field E by…","o":["P = ε₀χₑE","P = E/(ε₀χₑ)","P = ε₀E/χₑ","P = χₑ/E"],"a":0,"e":"In SI, P = ε₀χₑE for a linear isotropic dielectric."},{"q":"The electric field inside an ideal conductor in electrostatic equilibrium is…","o":["Nonzero everywhere","Zero","Equal to the external field","Always infinite"],"a":1,"e":"Free charges redistribute until the electrostatic field inside the conducting material is zero."},{"q":"A dielectric slab is inserted fully into a capacitor connected to a battery. Which quantity stays fixed ideally?","o":["Charge on plates","Potential difference","Capacitance","Stored charge density in every case"],"a":1,"e":"The battery maintains a fixed potential difference."},{"q":"When a dielectric is inserted into a battery-connected capacitor, its capacitance…","o":["Decreases","Increases","Stays unchanged","Becomes zero"],"a":1,"e":"The dielectric increases capacitance by the factor K for full filling."},{"q":"When a dielectric is inserted into a battery-connected capacitor, its charge generally…","o":["Increases","Decreases","Remains fixed","Becomes zero"],"a":0,"e":"Since Q = CV and V is fixed while C increases, Q increases."},{"q":"When a dielectric is inserted into an isolated charged capacitor, its free charge…","o":["Increases by K","Decreases by K","Remains constant","Changes sign"],"a":2,"e":"An isolated capacitor has no path for free charge to flow on or off its plates."},{"q":"For an isolated charged capacitor, a dielectric is inserted fully. Its potential difference becomes…","o":["KV₀","V₀/K","V₀","Zero in all cases"],"a":1,"e":"With Q fixed and C increasing to KC₀, V = Q/C decreases to V₀/K."},{"q":"For an isolated charged capacitor, a dielectric is inserted fully. Its stored energy becomes…","o":["KU₀","U₀/K","U₀","K²U₀"],"a":1,"e":"With Q fixed, U = Q²/(2C); increasing C by K reduces energy to U₀/K."},{"q":"For a capacitor connected to a battery, a dielectric is inserted fully. Its stored energy becomes…","o":["U₀/K","KU₀","U₀","Zero"],"a":1,"e":"With V fixed, U = ½CV²; capacitance increases by K, so energy increases by K."},{"q":"The dielectric strength of a material is…","o":["Its relative permittivity only","The maximum electric field it can withstand before breakdown","Its capacitance in farads","The speed of light in it"],"a":1,"e":"Dielectric strength is the maximum field before electrical breakdown occurs."},{"q":"Electrical breakdown of a dielectric occurs when…","o":["Its field exceeds its dielectric strength","Its capacitance is finite","It is placed in vacuum","Its polarisation is zero"],"a":0,"e":"Above the breakdown field, the material may become conducting and fail as an insulator."},{"q":"A dielectric reduces the Coulomb force between fixed charges by a factor K in a uniform medium. The force becomes…","o":["KF₀","F₀/K","F₀/K²","F₀"],"a":1,"e":"In a homogeneous dielectric, F = F₀/K for the same charges and separation."},{"q":"If K = 5 and vacuum electric field for a given configuration is E₀, the field in the ideal dielectric is…","o":["5E₀","E₀/5","E₀","E₀/25"],"a":1,"e":"For the same free-charge configuration in a uniform dielectric, the field is reduced by K in the idealised comparison."},{"q":"Which material property most directly measures how strongly a dielectric polarises in response to an electric field?","o":["Electric susceptibility","Resistance","Mass density","Magnetic permeability only"],"a":0,"e":"Electric susceptibility quantifies the linear response of polarisation to the applied field."},{"q":"For a vacuum-filled parallel-plate capacitor, C₀ = ε₀A/d. With a dielectric fully inserted, C is…","o":["ε₀A/(Kd)","Kε₀A/d","ε₀d/(KA)","A/(Kε₀d)"],"a":1,"e":"The dielectric permittivity is ε = Kε₀, giving C = Kε₀A/d."},{"q":"A 2 μF capacitor is fully filled with a dielectric K = 4. The new capacitance is…","o":["0.5 μF","2 μF","6 μF","8 μF"],"a":3,"e":"C = KC₀ = 4 × 2 μF = 8 μF."},{"q":"The relative permittivity of vacuum is…","o":["0","1","ε₀","Infinite"],"a":1,"e":"Vacuum is the reference medium, so its relative permittivity is 1."},{"q":"A dielectric is inserted between capacitor plates mainly to…","o":["Reduce capacitance","Increase capacitance and modify the field","Make the plates conductively join","Eliminate all stored charge in every case"],"a":1,"e":"A dielectric increases capacitance and polarisation changes the electric field response."},{"q":"For a linear dielectric, electric displacement D is…","o":["εE","E/ε","ε + E","ε₀/E"],"a":0,"e":"For a linear homogeneous dielectric, D = εE."},{"q":"The SI unit of electric displacement D is…","o":["C/m²","N/C","F/m","J/C"],"a":0,"e":"Electric displacement has units of charge per area, C m⁻²."},{"q":"A dielectric is a good insulator mainly because…","o":["It has abundant freely moving charges","Its charges are mostly bound and cannot move freely through the material","Its permittivity is always zero","It cannot be polarised"],"a":1,"e":"Bound charges can shift locally, but generally cannot travel freely through the dielectric as conduction charges."},{"q":"A 6 μF capacitor is connected to a 10 V battery. A dielectric K = 2 fully fills the gap. The final charge is…","o":["30 μC","60 μC","120 μC","3 μC"],"a":2,"e":"C = 12 μF and Q = CV = 12 μF × 10 V = 120 μC."}];
+const originalQuestions=questions.slice();
+let wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
+window.addEventListener('load',typesetMath);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+ typesetMath();
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([f]).catch(()=>{});}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Capacitor Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
+   if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([review]).catch(()=>{});
+ }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function resetQuiz(onlyWrong){
+   if(onlyWrong && wrongAttempts.length){
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     questions.splice(0,questions.length,...wrongQs);
+   } else { questions.splice(0,questions.length,...originalQuestions); }
+   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>resetQuiz(false));
+ $('retryWrong').addEventListener('click',()=>resetQuiz(true));
+});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

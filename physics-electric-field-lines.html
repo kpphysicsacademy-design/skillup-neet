@@ -74,10 +74,20 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   <button type="button" class="option" data-field-mode="dipole">＋ / − Dipole</button>
   <button type="button" class="option" data-field-mode="uniform">Uniform field</button>
  </div>
+ <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 10px">
+  <label for="fieldDensity" style="font-size:13px;font-weight:850">Field-line density</label>
+  <output id="fieldDensityValue" for="fieldDensity" style="font-weight:900;color:#174a78">12 lines</output>
+ </div>
+ <input id="fieldDensity" type="range" min="6" max="24" step="3" value="12" aria-label="Adjust field-line density" style="width:100%;accent-color:#58cc02;margin-bottom:14px">
  <div style="background:#f3f9ff;border:2px solid #dce6ef;border-radius:16px;padding:8px">
   <svg id="fieldConceptSvg" viewBox="0 0 600 300" role="img" aria-label="Interactive electric field line diagram" style="display:block;width:100%;height:auto;min-height:180px"></svg>
  </div>
  <div id="fieldConceptText" aria-live="polite" style="margin-top:12px;padding:12px;border-radius:13px;background:#e8f7dc;font-weight:700">Positive charge: field lines point radially outward.</div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin-top:10px">
+  <div style="border:1px solid #dce6ef;border-radius:13px;padding:11px;background:#fff"><strong style="display:block;color:#174a78;font-size:12px;margin-bottom:4px">DIRECTION</strong><span style="font-size:13px">Arrows show the force direction on a positive test charge.</span></div>
+  <div style="border:1px solid #dce6ef;border-radius:13px;padding:11px;background:#fff"><strong style="display:block;color:#174a78;font-size:12px;margin-bottom:4px">STRENGTH</strong><span style="font-size:13px">Closer field lines represent a stronger electric field.</span></div>
+  <div style="border:1px solid #dce6ef;border-radius:13px;padding:11px;background:#fff"><strong style="display:block;color:#174a78;font-size:12px;margin-bottom:4px">FIELD RULE</strong><span style="font-size:13px">Electrostatic field lines never intersect.</span></div>
+ </div>
  <p class="muted" style="margin:10px 0 0;font-size:13px">Key relation: \\(\vec F=q\vec E\\). A positive test charge feels force along the field; a negative test charge feels force opposite to it.</p>
 </section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
@@ -93,31 +103,38 @@ let wrongAttempts=[];
 const $=id=>document.getElementById(id);
 function drawFieldConcept(mode){
  const svg=$('fieldConceptSvg'); if(!svg)return;
- const blue='#1cb0f6', red='#ff4b4b', ink='#243447';
+ const blue='#1cb0f6', ink='#243447', n=Number($('fieldDensity')?.value||12);
+ if($('fieldDensityValue'))$('fieldDensityValue').textContent=n+' lines';
  let out='<defs><marker id="fieldArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="'+blue+'"/></marker></defs>';
- const path=(d)=>'<path d="'+d+'" fill="none" stroke="'+blue+'" stroke-width="2.5" marker-end="url(#fieldArrow)"/>';
+ const path=(d)=>'<path d="'+d+'" fill="none" stroke="'+blue+'" stroke-width="2.2" marker-end="url(#fieldArrow)" stroke-linecap="round"/>';
  const charge=(x,y,positive)=>'<circle cx="'+x+'" cy="'+y+'" r="19" fill="'+(positive?'#ff6b6b':'#4da8ff')+'" stroke="#fff" stroke-width="3"/><text x="'+x+'" y="'+(y+7)+'" text-anchor="middle" font-size="25" font-weight="900" fill="#fff">'+(positive?'+':'−')+'</text>';
  if(mode==='positive'||mode==='negative'){
   const cx=300,cy=150,sign=mode==='positive';
-  for(let a=0;a<360;a+=30){const r=a*Math.PI/180, x1=cx+24*Math.cos(r),y1=cy+24*Math.sin(r),x2=cx+115*Math.cos(r),y2=cy+115*Math.sin(r);out+=path(sign?'M '+x1+' '+y1+' L '+x2+' '+y2:'M '+x2+' '+y2+' L '+x1+' '+y1);}
+  for(let i=0;i<n;i++){const a=(i*360/n)*Math.PI/180,x1=cx+23*Math.cos(a),y1=cy+23*Math.sin(a),x2=cx+116*Math.cos(a),y2=cy+116*Math.sin(a);out+=path(sign?'M '+x1+' '+y1+' L '+x2+' '+y2:'M '+x2+' '+y2+' L '+x1+' '+y1);}
   out+=charge(cx,cy,sign);
-  $('fieldConceptText').textContent=sign?'Positive charge: field lines emerge radially outward.':'Negative charge: field lines point radially inward toward the charge.';
+  $('fieldConceptText').textContent=sign?'Positive charge: arrows point away from the charge. Increase line count to explore the drawing convention; line count illustrates charge magnitude, not a live measurement.':'Negative charge: arrows point toward the charge. Field direction is defined by the force on a positive test charge.';
  }else if(mode==='dipole'){
-  for(let i=-2;i<=2;i++){const y=150+i*22;out+=path('M 145 150 Q 300 '+(y-70)+' 455 150');}
-  for(let i=-1;i<=1;i++){const y=150+i*32;out+=path('M 145 150 Q 300 '+(y+55)+' 455 150');}
+  const count=Math.max(4,Math.round(n/2));
+  for(let i=0;i<count;i++){const t=(i/(count-1||1))*2-1, lift=t*105, endY=150+t*70;
+   out+=path('M 165 150 Q 300 '+(150+lift)+' 435 '+endY);
+  }
   out+=charge(145,150,true)+charge(455,150,false);
-  $('fieldConceptText').textContent='Dipole: field lines start at the positive charge and terminate at the negative charge.';
+  $('fieldConceptText').textContent='Dipole: lines leave the positive charge and end on the negative charge. The pattern curves because the two fields combine by vector addition.';
  }else{
-  for(let y=35;y<=265;y+=38)out+=path('M 55 '+y+' L 545 '+y);
-  out+='<rect x="20" y="18" width="12" height="264" rx="4" fill="#ff6b6b"/><rect x="568" y="18" width="12" height="264" rx="4" fill="#4da8ff"/><text x="40" y="18" fill="'+ink+'" font-size="13">+</text><text x="548" y="18" fill="'+ink+'" font-size="13">−</text>';
-  $('fieldConceptText').textContent='Uniform field: straight, parallel, equally spaced lines point from the positive plate to the negative plate.';
+  const spacing=280/(n-1||1);
+  for(let i=0;i<n;i++){const y=10+i*spacing;out+=path('M 55 '+y+' L 545 '+y);}
+  out+='<rect x="20" y="8" width="12" height="284" rx="4" fill="#ff6b6b"/><rect x="568" y="8" width="12" height="284" rx="4" fill="#4da8ff"/><text x="40" y="18" fill="'+ink+'" font-size="13" font-weight="900">+</text><text x="548" y="18" fill="'+ink+'" font-size="13" font-weight="900">−</text>';
+  $('fieldConceptText').textContent='Uniform field: parallel, equally spaced lines point from the positive plate toward the negative plate. Ideal plates are assumed; edge effects are ignored.';
  }
  svg.innerHTML=out;
 }
 document.querySelectorAll('[data-field-mode]').forEach(b=>b.addEventListener('click',()=>{
- document.querySelectorAll('[data-field-mode]').forEach(x=>x.classList.remove('selected'));
- b.classList.add('selected');drawFieldConcept(b.dataset.fieldMode);
+ document.querySelectorAll('[data-field-mode]').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false');});
+ b.classList.add('selected');b.setAttribute('aria-pressed','true');drawFieldConcept(b.dataset.fieldMode);
 }));
+$('fieldDensity')?.addEventListener('input',()=>drawFieldConcept(document.querySelector('[data-field-mode].selected')?.dataset.fieldMode||'positive'));
+document.querySelector('[data-field-mode="positive"]')?.classList.add('selected');
+document.querySelector('[data-field-mode="positive"]')?.setAttribute('aria-pressed','true');
 drawFieldConcept('positive');
 function typesetMath(){if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise([$('question'),$('options'),$('feedback')].filter(Boolean)).catch(()=>{});}}
 window.addEventListener('load',typesetMath);

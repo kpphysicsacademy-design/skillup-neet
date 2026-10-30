@@ -1,115 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toroid | Magnetic Field Interactive Physics – SkillUp</title>
-<meta name="description" content="Explore the magnetic field inside a toroid with a live interactive experiment and a 30-question physics quiz.">
-<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1.05}};</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn the magnetic field of a toroid and practise with 30 explained Physics MCQs.">
+<title>SkillUp | Toroid — 30 MCQ Practice</title>
 <style>
-:root{--bg:#f5f7ed;--card:#fff;--ink:#24352b;--muted:#65766a;--green:#58a83b;--green-dark:#397d2d;--line:#dce8d5;--yellow:#fff4c8;--blue:#eaf3ff;--red:#fff0ec}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-main{width:min(100% - 28px,760px);margin:26px auto 48px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;color:var(--muted);font-size:14px;font-weight:800;letter-spacing:.04em}.pill{background:#e5f3dc;color:var(--green-dark);padding:8px 13px;border-radius:30px}
-.card{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:clamp(20px,5vw,34px);box-shadow:0 5px 0 #e5ebdf;margin:16px 0}
-h1{font-size:clamp(28px,6vw,42px);line-height:1.12;margin:8px 0 14px}h2{font-size:clamp(21px,4.5vw,28px);margin:0 0 12px}.eyebrow{font-weight:900;color:var(--green-dark);font-size:13px;letter-spacing:.12em}.lead{font-size:18px;line-height:1.6;color:var(--muted);margin:0}
-.diagram{background:linear-gradient(145deg,#edf7e8,#f7fbf2);border-radius:22px;padding:18px;margin:22px 0;text-align:center}.diagram svg{width:min(100%,390px);height:auto;display:block;margin:auto}
-.controls{display:grid;gap:14px;margin:20px 0}.control{background:#f6f9f2;border:1px solid var(--line);border-radius:18px;padding:17px}.control-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:800;font-size:17px}.control output{background:#e4f2dc;color:#2f7428;border-radius:12px;padding:7px 11px;white-space:nowrap}input[type=range]{display:block;width:100%;accent-color:var(--green);margin:18px 0 4px;min-height:24px}
-.formula{background:var(--yellow);border:1px solid #f1e3a5;border-radius:20px;padding:22px 12px;text-align:center;font-size:clamp(23px,5vw,32px);font-weight:800;overflow-x:auto;line-height:1.6}.resultline{text-align:center;color:var(--muted);font-size:15px;line-height:1.5;margin:12px 0 0}
-.explain{font-size:16px;line-height:1.7;color:var(--muted)}.explain strong{color:var(--ink)}.btn{display:block;width:100%;border:0;border-radius:17px;padding:17px 18px;background:var(--green);color:white;font-size:18px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 var(--green-dark);margin-top:20px}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-dark)}
-.quiz{display:none}.quiz-head{display:flex;justify-content:space-between;gap:10px;font-weight:900}.progress{height:12px;border-radius:20px;background:#e8eee3;overflow:hidden;margin:16px 0 24px}.progress span{display:block;height:100%;width:0;background:var(--green);transition:width .2s}.question{font-size:21px;font-weight:850;line-height:1.45;margin:16px 0}.options{display:grid;gap:10px}.option{background:#fff;border:2px solid var(--line);border-radius:16px;padding:15px;text-align:left;color:var(--ink);font-size:16px;line-height:1.45;cursor:pointer}.option:disabled{cursor:default;opacity:1}.option.correct{background:#e9f7e4;border-color:var(--green)}.option.wrong{background:var(--red);border-color:#e58a78}.feedback{min-height:48px;margin:16px 0;color:var(--muted);font-weight:700;line-height:1.55}.hidden{display:none!important}.score{text-align:center;font-size:42px;font-weight:950;color:var(--green-dark);margin:15px 0}.foot{text-align:center;color:#829084;font-size:13px;margin:24px 0}
-mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
-@media(max-width:420px){main{width:calc(100% - 20px);margin-top:14px}.card{border-radius:22px;padding:19px}.control{padding:14px}.control-head{font-size:15px}.formula{padding:17px 8px}}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:720px;margin:auto;min-height:64px;padding:9px 14px;display:flex;align-items:center;gap:9px}.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}.brand{font-weight:950;color:#174a78;flex:1}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}.xp,.streak{padding:8px 10px;border-radius:99px;font-weight:900;font-size:12px;white-space:nowrap}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+main{max-width:720px;margin:auto;padding:16px 13px 44px}.hero,.quiz,.finish,.lab{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 7px;font-size:clamp(25px,5vw,33px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:14px;line-height:1.55;margin:0}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.lab h2{margin:0 0 8px;color:#174a78}.formula{margin:12px 0;padding:14px;background:#f0faff;border:1px solid #cdeafa;border-radius:14px;text-align:center;font-size:19px;font-weight:800;overflow-x:auto}.controls{display:grid;gap:10px;margin:14px 0}.control{padding:12px;border:1px solid var(--line);border-radius:14px;background:#f8fbff}.control label{font-weight:800}.control output{float:right;font-weight:900;color:#23618a}input[type=range]{width:100%;accent-color:var(--green);margin-top:12px}.readout{text-align:center;color:#23618a;font-weight:850}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}.question{font-size:clamp(20px,4.5vw,26px);line-height:1.4;margin:12px 0 18px;font-weight:850}.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:52px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.4;cursor:pointer}.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.55;font-weight:650}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:49px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:25px 18px}.trophy{font-size:54px}.score{font-size:42px;font-weight:950;color:#174a78}.review-item{text-align:left;padding:12px;margin:10px 0;border:2px solid var(--line);border-radius:14px}.correct-text{color:#245b12;font-weight:800}.wrong-text{color:#a12b30}.finish .btn{margin-top:12px;max-width:320px;background:var(--green);color:white;box-shadow:0 4px 0 var(--green-dark)}.foot{text-align:center;color:#8291a0;font-size:12px;margin-top:20px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish,.lab{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.nav{gap:6px;padding-inline:9px}.xp,.streak{font-size:10px;padding:7px}.brand{font-size:16px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
-<body><main>
-<div class="top"><span>SKILLUP PHYSICS</span><span class="pill">MAGNETIC EFFECTS</span></div>
-<section class="card" id="lab">
-<div class="eyebrow">CONCEPT LAB · TOROID</div><h1>Magnetic field inside a toroid</h1>
-<p class="lead">A toroid is a solenoid bent into a closed circular ring. Explore how its magnetic field depends on current, turns and the mean radius.</p>
-<div class="diagram" aria-label="Schematic of a toroidal coil">
-<svg viewBox="0 0 420 230" role="img" aria-label="Toroid with circular magnetic field lines">
-<defs><linearGradient id="ring" x1="0" x2="1"><stop stop-color="#8acb70"/><stop offset="1" stop-color="#4c9b3c"/></linearGradient></defs>
-<ellipse cx="210" cy="112" rx="160" ry="78" fill="none" stroke="url(#ring)" stroke-width="43"/>
-<ellipse cx="210" cy="112" rx="112" ry="48" fill="#f5f7ed" stroke="#3d8533" stroke-width="3"/>
-<ellipse cx="210" cy="112" rx="134" ry="62" fill="none" stroke="#315f9d" stroke-width="3" stroke-dasharray="8 7"/>
-<path d="M330 80 l14 0 -7 12" fill="none" stroke="#315f9d" stroke-width="3" stroke-linecap="round"/>
-<text x="210" y="118" text-anchor="middle" fill="#24352b" font-size="17" font-weight="700">Toroidal core</text>
-<text x="210" y="215" text-anchor="middle" fill="#65766a" font-size="13">Schematic · not to scale</text>
-</svg></div>
-<h2>Change the experimental values</h2>
-<div class="controls">
-<div class="control"><div class="control-head"><label for="current">Current, \(I\)</label><output id="iOut">2.0 A</output></div><input id="current" type="range" min="0" max="10" step=".5" value="2"></div>
-<div class="control"><div class="control-head"><label for="turns">Total turns, \(N\)</label><output id="nOut">500</output></div><input id="turns" type="range" min="100" max="2000" step="100" value="500"></div>
-<div class="control"><div class="control-head"><label for="radius">Mean radius, \(r\)</label><output id="rOut">10 cm</output></div><input id="radius" type="range" min="5" max="30" step="1" value="10"></div>
-</div>
-<div class="formula" id="liveFormula">\[B=\frac{\mu_0NI}{2\pi r}\]</div>
-<div class="formula" id="liveValue">\[B=2.00\;\text{mT}\]</div>
-<p class="resultline" id="readout">The magnetic field strength for the selected values is 2.00 mT.</p>
-</section>
-<section class="card">
-<div class="eyebrow">KEY IDEA</div><h2>Apply Ampere’s circuital law</h2>
-<p class="explain">Choose a circular Amperian path of radius \(r\) inside the toroidal core. By symmetry, the magnetic field has constant magnitude along this path and is tangential to it.</p>
-<div class="formula">\[\oint \vec B\cdot d\vec l=\mu_0 I_{\text{enclosed}}\]</div>
-<p class="explain">The path encloses \(N\) turns, each carrying current \(I\), so \(I_{\text{enclosed}}=NI\). Therefore:</p>
-<div class="formula">\[B(2\pi r)=\mu_0NI\]</div>
-<div class="formula">\[\boxed{B=\frac{\mu_0NI}{2\pi r}}\]</div>
-<p class="explain"><strong>Remember:</strong> field increases with current and number of turns, and decreases as the mean radius increases. For a core with permeability \(\mu=\mu_0\mu_r\), use \(B=\frac{\mu_0\mu_rNI}{2\pi r}\) in the linear material approximation.</p>
-<button class="btn" id="begin">Start 30-question practice →</button>
-</section>
-<section class="card quiz" id="quiz">
-<div class="quiz-head"><span id="qCount">Question 1 of 30</span><span id="score">⭐ 0</span></div>
-<div class="progress"><span id="progress"></span></div>
-<div id="questionArea"></div><div class="feedback" id="feedback" aria-live="polite"></div>
-<button class="btn hidden" id="next">Next question →</button>
-<div id="final" class="hidden"></div>
-</section>
-<p class="foot">SkillUp Physics · Understand · Experiment · Practise</p>
+<body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak">🔥 <span id="streak">0</span> streak</div></div></header>
+<main>
+<section class="hero"><h1>🧲 Magnetic Field in a Toroid</h1><p class="muted">Master Ampere’s law, field direction, permeability and numerical applications through 30 concept-based MCQs.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="lab"><h2>Quick concept reminder</h2><p class="muted">A toroid is a solenoid bent into a closed ring. For an ideal toroid with an air core, the magnetic field at mean radius r is:</p><div class="formula">B = μ₀NI / (2πr)</div><p class="muted">N is the total number of turns and I is the current. The field follows circular paths inside the core and is approximately zero outside an ideal toroid.</p>
+<div class="controls"><div class="control"><label for="current">Current, I</label><output id="iOut">2.0 A</output><input id="current" type="range" min="0" max="10" step=".5" value="2"></div><div class="control"><label for="turns">Total turns, N</label><output id="nOut">500</output><input id="turns" type="range" min="100" max="2000" step="100" value="500"></div><div class="control"><label for="radius">Mean radius, r</label><output id="rOut">10 cm</output><input id="radius" type="range" min="5" max="30" step="1" value="10"></div></div><p class="readout" id="readout">Magnetic field: 2.000 mT</p><p class="muted">For a linear core material, replace μ₀ with μ₀μᵣ.</p></section>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div><p class="foot">SkillUp Physics · Understand · Practise · Improve</p>
 </main>
 <script>
+(function(){
+'use strict';
 const questions=[
-["The magnetic field inside an ideal toroid is","\\(\\frac{\\mu_0NI}{2\\pi r}\\)","\\(\\mu_0NIr\\)","\\(\\frac{\\mu_0I}{2\\pi N r}\\)","\\(2\\pi r\\mu_0NI\\)",0,"Ampere’s law gives B(2πr)=μ₀NI."],
-["The total current enclosed by a circular Amperian path in a toroid is","NI","N/I","I/N","NI²",0,"The path encloses N turns, each carrying current I."],
-["The SI unit of magnetic field is","tesla","ampere","weber","ohm",0,"Magnetic flux density is measured in tesla."],
-["If current doubles, toroid field at fixed radius","doubles","halves","quadruples","stays same",0,"B is directly proportional to I."],
-["If turns double with I and r fixed, B","doubles","halves","quadruples","becomes zero",0,"B is directly proportional to N."],
-["At fixed N and I, field varies with radius as","\\(1/r\\)","\\(r\\)","\\(r^2\\)","\\(1/r^2\\)",0,"B=μ₀NI/(2πr), so B is inversely proportional to r."],
-["The magnetic field inside an ideal toroid is directed","along circular paths around the core","radially outward","along its diameter","vertically upward",0,"Toroidal field lines are concentric circles within the core."],
-["The field outside an ideal toroid is approximately","zero","infinite","equal to the inside field","maximum",0,"The ideal toroid confines its magnetic field to the core."],
-["The law used to derive the toroid field is","Ampere’s circuital law","Faraday’s law","Coulomb’s law","Ohm’s law",0,"Ampere’s law relates the circulation of B to enclosed current."],
-["For N=500, I=2 A and r=0.10 m, B is","2.0 mT","1.0 mT","4.0 mT","8.0 mT",0,"B=μ₀NI/(2πr)=2.0×10⁻³ T."],
-["If the mean radius doubles, keeping N and I fixed, B","halves","doubles","quadruples","is unchanged",0,"B is inversely proportional to radius."],
-["Reversing current in a toroid","reverses field direction","doubles field strength","makes field zero permanently","does not affect field",0,"The field direction reverses with current direction."],
-["A toroidal core helps to","confine magnetic flux","eliminate resistance","stop current","create only electric fields",0,"The closed core path confines most magnetic flux."],
-["The relative permeability of a linear core is represented by","\\(\\mu_r\\)","\\(\\epsilon_0\\)","\\(\\sigma\\)","\\(\\rho\\)",0,"μᵣ is the relative permeability of the core material."],
-["With a linear magnetic core, B equals","\\(\\frac{\\mu_r\\mu_0NI}{2\\pi r}\\)","\\(\\frac{\\mu_0NI}{2\\pi r\\mu_r}\\)","\\(\\mu_0NIr\\)","\\(\\frac{2\\pi r}{\\mu_0NI}\\)",0,"The permeability is μ=μᵣμ₀."],
-["For a toroid, the suitable Amperian path is","a concentric circle","a straight line across the diameter","a square outside the core","any random curve",0,"A circular path matches the toroid’s symmetry."],
-["If r₁ is half of r₂, then B₁/B₂ is","2","1/2","4","1",0,"Since B∝1/r, B₁/B₂=r₂/r₁=2."],
-["For N=1000, I=1 A and r=0.20 m, B is","1.0 mT","2.0 mT","0.5 mT","4.0 mT",0,"B=μ₀×1000/(2π×0.2)=1.0 mT."],
-["If N and I both double, B becomes","four times","twice","half","unchanged",0,"B is proportional to the product NI."],
-["The field in a toroid is ideally strongest at","the smallest radius in its core","the largest radius","outside the toroid","all radii equally",0,"B varies as 1/r."],
-["A toroid is essentially a","solenoid bent into a closed ring","straight wire","parallel plate capacitor","bar magnet cut in half",0,"A toroid is a ring-shaped coil."],
-["For an ideal toroid, field outside the core is small because","the net enclosed current for an outside path is zero","current is zero","the core has no turns","radius is infinite",0,"An external Amperian loop encloses zero net current in the ideal model."],
-["If current becomes zero, the current-produced field becomes","zero","infinite","double","unchanged",0,"The field is proportional to current."],
-["For fixed N and I, increasing radius from 10 cm to 20 cm makes B","half","double","four times","unchanged",0,"Doubling r halves the field."],
-["The permeability of free space is","\\(4\\pi\\times10^{-7}\\;\\mathrm{T\,m/A}\\)","\\(4\\pi\\times10^7\\)","\\(10^{-7}\\;\\mathrm{A/T}\\)","zero",0,"μ₀=4π×10⁻⁷ T m A⁻¹."],
-["The magnetic field inside a toroid depends on","N, I and r","only wire colour","only resistance","only core mass",0,"B=μ₀NI/(2πr)."],
-["For N=200, I=5 A and r=0.10 m, B is","2.0 mT","1.0 mT","5.0 mT","10 mT",0,"B=μ₀×200×5/(2π×0.1)=2.0 mT."],
-["The magnetic field lines in an ideal toroid are","closed concentric circles","straight radial lines","open parallel lines","random curves",0,"The field follows circular paths around the toroid."],
-["If the number of turns is halved, field","halves","doubles","quadruples","does not change",0,"B is proportional to N."],
-["For a toroid, the magnetic field is approximately uniform along a circular path of","fixed radius inside the core","any radius including outside","the outer air region","a radial line",0,"Symmetry makes B constant along a concentric circular Amperian loop."],
-["Ampere’s law for a toroid gives","\\(B(2\\pi r)=\\mu_0NI\\)","\\(B=2\\pi rNI\\)","\\(B=\\mu_0I/N\\)","\\(B=NI/\\mu_0\\)",0,"The line integral around the circular path is μ₀ times enclosed current."]
-]
-let qIndex=0,points=0,answered=false;
-const $=id=>document.getElementById(id);
-function renderMath(node){if(window.MathJax?.typesetPromise){MathJax.typesetClear([node]);MathJax.typesetPromise([node]).catch(()=>{});}}
-function updateLab(){const I=+$('current').value,N=+$('turns').value,r=+$('radius').value/100;const B=2e-7*N*I/r*1000;$('iOut').textContent=I.toFixed(1)+' A';$('nOut').textContent=N;$('rOut').textContent=(r*100).toFixed(0)+' cm';$('liveValue').innerHTML='\\[B='+B.toFixed(3)+'\\;\\text{mT}\\]';$('readout').textContent='At '+I.toFixed(1)+' A, '+N+' turns and '+(r*100).toFixed(0)+' cm mean radius, the magnetic field is '+B.toFixed(3)+' mT.';renderMath($('liveValue'));}
-['current','turns','radius'].forEach(id=>$(id).addEventListener('input',updateLab));updateLab();
-$('begin').addEventListener('click',()=>{$('lab').classList.add('hidden');$('quiz').style.display='block';showQuestion();window.scrollTo({top:0,behavior:'smooth'});});
-function showQuestion(){answered=false;const q=questions[qIndex];$('qCount').textContent='Question '+(qIndex+1)+' of '+questions.length;$('score').textContent='⭐ '+points;$('progress').style.width=(qIndex/questions.length*100)+'%';$('feedback').textContent='';$('next').classList.add('hidden');$('questionArea').innerHTML='<div class="question">'+q[0]+'</div><div class="options">'+q.slice(1,5).map((v,i)=>'<button class="option" data-index="'+i+'">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div>';$('questionArea').querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>choose(+b.dataset.index)));renderMath($('questionArea'));}
-function choose(choice){if(answered)return;answered=true;const q=questions[qIndex],correct=choice===q[5];if(correct)points++;$('questionArea').querySelectorAll('.option').forEach((b,i)=>{b.disabled=true;if(i===q[5])b.classList.add('correct');if(i===choice&&!correct)b.classList.add('wrong');});$('score').textContent='⭐ '+points;$('feedback').textContent=(correct?'Correct! ':'Review this one. ')+q[6];$('next').classList.remove('hidden');$('next').hidden=false;$('next').style.display='block';$('next').textContent=qIndex===questions.length-1?'View final score →':'Continue →';}
-$('next').addEventListener('click',()=>{if(qIndex<questions.length-1){qIndex++;showQuestion();}else{$('progress').style.width='100%';$('qCount').textContent='Practice completed';$('questionArea').innerHTML='';$('feedback').textContent='';$('next').classList.add('hidden');$('next').hidden=true;$('next').style.display='none';$('final').classList.remove('hidden');$('final').innerHTML='<h2 style="text-align:center">Great work! 🎉</h2><div class="score">'+points+' / '+questions.length+'</div><p class="lead" style="text-align:center">You completed the Toroid practice set.</p><button class="btn" onclick="location.reload()">Practise again ↻</button>';window.scrollTo({top:0,behavior:'smooth'});}});
-window.addEventListener('load',()=>renderMath(document.querySelector('main')));
+{q:"For an ideal air-core toroid, the magnetic field at mean radius r is:",o:["μ₀NI / (2πr)","μ₀Ir / (2πN)","2πμ₀NIr","μ₀N / (2πIr)"],a:0,e:"Ampere’s law gives B(2πr)=μ₀NI, hence B=μ₀NI/(2πr)."},
+{q:"A circular Amperian path inside a toroid encloses N turns carrying current I. What is the enclosed current?",o:["NI","N/I","I/N","NI²"],a:0,e:"Each of the N turns contributes current I through the surface, so the total enclosed current is NI."},
+{q:"Which law is used to derive the magnetic field inside an ideal toroid?",o:["Ampere’s circuital law","Faraday’s law of induction","Coulomb’s law","Gauss’s law for electricity"],a:0,e:"Ampere’s circuital law relates the closed line integral of magnetic field to the net enclosed current."},
+{q:"The magnetic field lines inside an ideal toroid are:",o:["concentric circular paths","radial straight lines","parallel straight lines","open lines from one end to another"],a:0,e:"Toroidal symmetry makes the magnetic field tangential to concentric circles around the core."},
+{q:"For an ideal toroid, the magnetic field in the central hollow region is:",o:["approximately zero","equal to the core field","infinite","always μ₀NI"],a:0,e:"A circular Amperian path in the hollow central region encloses no net winding current in the ideal model."},
+{q:"For an ideal toroid, the magnetic field outside the windings is:",o:["approximately zero","equal to μ₀NI/(2πr)","maximum at every point","independent of the current"],a:0,e:"An external Amperian loop encloses zero net current because the winding crosses the surface with cancelling directions."},
+{q:"If current through a toroid is doubled while N and r remain fixed, the field magnitude:",o:["doubles","halves","becomes four times","remains unchanged"],a:0,e:"The expression B=μ₀NI/(2πr) shows that B is directly proportional to I."},
+{q:"If the number of turns is tripled at fixed current and radius, the field:",o:["triples","becomes one-third","becomes nine times","does not change"],a:0,e:"The magnetic field is directly proportional to the total number of turns N."},
+{q:"At fixed N and I, the field varies with mean radius r as:",o:["1/r","r","r²","1/r²"],a:0,e:"The radius appears in the denominator of B=μ₀NI/(2πr)."},
+{q:"A toroid has N=500, I=2 A and r=0.10 m. Its air-core field is:",o:["2.0 mT","1.0 mT","4.0 mT","8.0 mT"],a:0,e:"B=μ₀NI/(2πr)=2×10⁻³ T=2.0 mT."},
+{q:"A toroid has N=1000, I=1 A and r=0.20 m. Find B for an air core.",o:["1.0 mT","0.5 mT","2.0 mT","4.0 mT"],a:0,e:"B=(4π×10⁻⁷×1000)/(2π×0.20)=1.0×10⁻³ T."},
+{q:"If the mean radius changes from 10 cm to 20 cm with N and I fixed, the field:",o:["becomes half","doubles","becomes four times","remains constant"],a:0,e:"Doubling r halves B because B is inversely proportional to r."},
+{q:"If both N and I are doubled while r remains fixed, the field becomes:",o:["four times","twice","half","unchanged"],a:0,e:"B is proportional to the product NI; doubling both gives a factor of 2×2=4."},
+{q:"Reversing the current in every turn of a toroid:",o:["reverses the magnetic field direction","leaves field direction unchanged","makes field magnitude infinite","removes the magnetic core"],a:0,e:"The right-hand grip rule shows that reversing current reverses the direction of the toroidal field."},
+{q:"The SI unit of magnetic field B is:",o:["tesla","weber","ampere per metre","henry"],a:0,e:"Magnetic flux density B is measured in tesla (T)."},
+{q:"The permeability of a linear, isotropic core material is:",o:["μ=μ₀μᵣ","μ=μ₀/μᵣ","μ=μᵣ/μ₀","μ=μ₀+μᵣ"],a:0,e:"Relative permeability is defined by μᵣ=μ/μ₀, so μ=μ₀μᵣ."},
+{q:"For a linear magnetic core, the toroid field is:",o:["μ₀μᵣNI/(2πr)","μ₀NI/(2πrμᵣ)","2πrμ₀μᵣNI","μ₀μᵣr/(2πNI)"],a:0,e:"In the linear-material approximation, replace μ₀ by μ=μ₀μᵣ in the air-core expression."},
+{q:"Which Amperian path is most useful for an ideal toroid?",o:["a circle concentric with the toroid","a radial straight line through the core","a square crossing the windings","a circle centred outside the toroid"],a:0,e:"A concentric circular path follows the symmetry and has constant B along the path."},
+{q:"For a fixed toroid, where is the field magnitude greater within its core?",o:["at the smaller radius","at the larger radius","it is exactly independent of radius","only outside the core"],a:0,e:"Within the ideal core B varies as 1/r, so the smaller radius has the larger field."},
+{q:"A toroid is best described as:",o:["a solenoid bent into a closed ring","a straight solenoid with open ends","a single circular current loop","a pair of parallel current-carrying wires"],a:0,e:"A toroid is formed by winding a coil around a ring-shaped core."},
+{q:"The permeability of free space is approximately:",o:["4π×10⁻⁷ T·m/A","4π×10⁷ T·m/A","2π×10⁻⁷ T·m/A","10⁻⁷ A·m/T"],a:0,e:"The SI value used in this calculation is μ₀=4π×10⁻⁷ T·m/A."},
+{q:"For N=200, I=5 A and r=0.10 m, the air-core field is:",o:["2.0 mT","1.0 mT","4.0 mT","5.0 mT"],a:0,e:"B=(4π×10⁻⁷×200×5)/(2π×0.10)=2.0×10⁻³ T."},
+{q:"If the current in a toroid becomes zero, its current-produced magnetic field becomes:",o:["zero","twice its previous value","independent of the turns","infinite"],a:0,e:"The field produced by the winding current is proportional to I."},
+{q:"A toroid has N=400 turns and carries 3 A. What is NI?",o:["1200 A-turns","403 A-turns","133 A-turns","400/3 A-turns"],a:0,e:"The ampere-turn product is NI=400×3=1200 A-turns."},
+{q:"At a fixed radius inside an ideal toroid, the magnitude of B along the circular Amperian path is:",o:["constant","zero at one point and maximum at another","proportional to the path angle","always directed radially"],a:0,e:"Rotational symmetry makes the field magnitude the same at every point on a concentric circular path."},
+{q:"If a toroid’s field is 3 mT and its current is doubled with geometry unchanged, the new field is:",o:["6 mT","1.5 mT","3 mT","12 mT"],a:0,e:"Direct proportionality to current means the field doubles from 3 mT to 6 mT."},
+{q:"A toroid has 600 turns, carries 2 A and has mean radius 0.12 m. Find its air-core field.",o:["2.0 mT","1.0 mT","4.0 mT","10 mT"],a:0,e:"B=(4π×10⁻⁷×600×2)/(2π×0.12)=2.0×10⁻³ T."},
+{q:"Which change increases the field inside an air-core toroid?",o:["increasing current","increasing mean radius","reducing the number of turns","reducing current"],a:0,e:"Increasing I increases B directly; the other listed changes reduce B."},
+{q:"The magnetic field in a toroid is ideally confined mainly to:",o:["the region occupied by its core","the central hollow space only","the entire surrounding space uniformly","the axis as a straight line"],a:0,e:"The closed magnetic path of the toroidal core confines most of the magnetic flux to the core."},
+{q:"A toroid has N=800, I=1.5 A and r=0.20 m. Find the air-core field.",o:["1.2 mT","0.6 mT","2.4 mT","4.8 mT"],a:0,e:"B=(4π×10⁻⁷×800×1.5)/(2π×0.20)=1.2×10⁻³ T."}
+];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const originalQuestions=questions.slice();const $=id=>document.getElementById(id);
+function render(){chosen=null;locked=false;const item=questions[index];$('progressText').textContent='Question '+(index+1)+' of '+questions.length;$('percent').textContent=Math.round(index/questions.length*100)+'%';$('fill').style.width=(index/questions.length*100)+'%';$('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;$('feedback').className='feedback';$('feedback').textContent='';$('check').style.display='block';$('check').disabled=true;$('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';$('options').replaceChildren();item.o.forEach((text,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.textContent=text;b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});}
+$('check').addEventListener('click',()=>{if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});const f=$('feedback');if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}$('check').style.display='none';$('continue').className='btn continue show';});
+$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}$('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';const pct=Math.round(score/questions.length*100);const card=document.createElement('section');card.className='finish';card.innerHTML='<div class="trophy">🏆</div><h2>Toroid Practice Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+score*10+' XP earned</p><div id="wrongReview" style="margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retryAll">Practise all questions again</button>';const review=card.querySelector('#wrongReview');if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='850';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='wrong-text';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-text';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;item.append(q,yours,correct,why);review.appendChild(item);});}else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}$('finishSlot').replaceChildren(card);function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const missed=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...missed);}else{questions.splice(0,questions.length,...originalQuestions);}index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}$('retryAll').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));});
+function updateLab(){const I=+$('current').value,N=+$('turns').value,r=+$('radius').value/100;const B=2e-7*N*I/r*1000;$('iOut').textContent=I.toFixed(1)+' A';$('nOut').textContent=N;$('rOut').textContent=(r*100).toFixed(0)+' cm';$('readout').textContent='Magnetic field: '+B.toFixed(3)+' mT';}
+['current','turns','radius'].forEach(id=>$(id).addEventListener('input',updateLab));updateLab();render();
+})();
 </script>
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script><script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261026-eye-shield-v1"></script><script src="/shared-nav.js?v=20261026-no-bottom-nav-v1"></script>
 </body></html>

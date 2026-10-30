@@ -1,17 +1,70 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Toroid Interactive Experiment | SkillUp Physics</title>
-<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toroid | Magnetic Field Interactive Physics – SkillUp</title>
+<meta name="description" content="Explore the magnetic field inside a toroid with a live interactive experiment and a 30-question physics quiz.">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1.05}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
-:root{--ink:#303b32;--muted:#687367;--cream:#f8f8ef;--line:#dce3d5;--green:#789574}*{box-sizing:border-box}body{margin:0;background:#f0f1e5;color:var(--ink);font-family:Arial,sans-serif}.wrap{width:min(100% - 28px,720px);margin:38px auto 24px}.panel{background:var(--cream);border:2px solid var(--line);border-radius:34px;padding:30px 32px}.tag{color:#5d913f;font-size:16px;font-weight:900;letter-spacing:.09em;margin-bottom:8px}h1{font-size:clamp(26px,5vw,38px);line-height:1.15;margin:0 0 24px}.intro,.hint{font-size:clamp(17px,3.5vw,22px);line-height:1.55;color:var(--muted)}.intro{margin:0 0 26px}.control{background:#f3f7ed;border-radius:23px;padding:22px 24px;margin:20px 0}.head{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;font-size:clamp(18px,3.8vw,25px);font-weight:800}.symbol{font:italic 30px Georgia,serif}.value{white-space:nowrap;text-align:right}input{width:100%;accent-color:#58a83b;margin:22px 0 0;height:26px}.formula{background:#fff6cf;border-radius:23px;padding:24px 8px;margin:26px 0;text-align:center;font-size:clamp(20px,4.6vw,29px);font-weight:800;line-height:1.5;min-height:88px;display:flex;align-items:center;justify-content:center;overflow:hidden}.formula mjx-container{max-width:100%;margin:0!important}.hint{margin:26px 0 32px}.start,.next,.retry{width:100%;border:0;border-radius:28px;background:var(--green);color:white;padding:23px 12px;font-size:clamp(19px,4vw,25px);font-weight:900;box-shadow:0 5px 0 #668462;cursor:pointer}.footer{text-align:center;color:#6d7769;font-size:16px;margin:32px 0}.quiz{display:none;margin-top:18px}.qhead{display:flex;justify-content:space-between;font-weight:800}.track{height:12px;background:#e6ecdf;border-radius:20px;margin:18px 0 28px;overflow:hidden}.track div{height:100%;background:#58a83b;width:0}.question{font-size:22px;line-height:1.4;font-weight:800;margin:18px 0}.option{width:100%;text-align:left;background:white;border:2px solid #dce4d7;border-radius:17px;padding:16px;margin:10px 0;color:var(--ink);font-size:17px;line-height:1.4;cursor:pointer}.option.correct{background:#e8f6e4;border-color:#58a83b}.option.wrong{background:#fff0eb;border-color:#e47c69}.option:disabled{opacity:1}.feedback{font-weight:700;line-height:1.5;min-height:48px;margin:18px 0}.next{padding:18px;font-size:19px}.hidden{display:none!important}.result{text-align:center}.score{font-size:42px;font-weight:900}@media(max-width:520px){.panel{padding:30px 32px}.wrap{margin-top:40px}}@media(max-width:360px){.panel{padding:22px 18px}.control{padding:18px 16px}.head{font-size:17px}}
-</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head><body><main class="wrap">
-<section class="panel" id="experiment"><div class="tag">INTERACTIVE EXPERIMENT</div><h1>Explore the magnetic field in a toroid</h1><p class="intro">Change the current, number of turns and mean radius. Observe how the magnetic field changes inside the toroidal core.</p>
-<div class="control"><div class="head"><label for="current">Current</label><span class="symbol">\(I\)</span><output class="value" id="iLabel">2 A</output></div><input id="current" type="range" min="0" max="10" step=".5" value="2"></div>
-<div class="control"><div class="head"><label for="turns">Number of turns</label><span class="symbol">\(N\)</span><output class="value" id="nLabel">500</output></div><input id="turns" type="range" min="100" max="2000" step="100" value="500"></div>
-<div class="control"><div class="head"><label for="radius">Mean radius</label><span class="symbol">\(r\)</span><output class="value" id="rLabel">10 cm</output></div><input id="radius" type="range" min="5" max="30" step="1" value="10"></div>
-<div class="formula" id="field">\\(B=2.00\\;\\mathrm{mT}\\)</div><p class="hint" id="fieldHint">For 500 turns, 2 A current and 10 cm mean radius, the field is about 2.00 mT.</p><button class="start" id="startQuiz">Start 30-question quiz →</button></section>
-<section class="panel quiz" id="quiz"><div class="qhead"><span id="number">Question 1/30</span><span id="points">⭐ 0</span></div><div class="track"><div id="bar"></div></div><div id="question"></div><div class="feedback" id="feedback"></div><button class="next hidden" id="next">Next question →</button><div class="result hidden" id="result"></div></section>
-<p class="footer">SkillUp Physics • Learn simply. Practise confidently.</p></main>
+:root{--bg:#f5f7ed;--card:#fff;--ink:#24352b;--muted:#65766a;--green:#58a83b;--green-dark:#397d2d;--line:#dce8d5;--yellow:#fff4c8;--blue:#eaf3ff;--red:#fff0ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+main{width:min(100% - 28px,760px);margin:26px auto 48px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;color:var(--muted);font-size:14px;font-weight:800;letter-spacing:.04em}.pill{background:#e5f3dc;color:var(--green-dark);padding:8px 13px;border-radius:30px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:clamp(20px,5vw,34px);box-shadow:0 5px 0 #e5ebdf;margin:16px 0}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.12;margin:8px 0 14px}h2{font-size:clamp(21px,4.5vw,28px);margin:0 0 12px}.eyebrow{font-weight:900;color:var(--green-dark);font-size:13px;letter-spacing:.12em}.lead{font-size:18px;line-height:1.6;color:var(--muted);margin:0}
+.diagram{background:linear-gradient(145deg,#edf7e8,#f7fbf2);border-radius:22px;padding:18px;margin:22px 0;text-align:center}.diagram svg{width:min(100%,390px);height:auto;display:block;margin:auto}
+.controls{display:grid;gap:14px;margin:20px 0}.control{background:#f6f9f2;border:1px solid var(--line);border-radius:18px;padding:17px}.control-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:800;font-size:17px}.control output{background:#e4f2dc;color:#2f7428;border-radius:12px;padding:7px 11px;white-space:nowrap}input[type=range]{display:block;width:100%;accent-color:var(--green);margin:18px 0 4px;min-height:24px}
+.formula{background:var(--yellow);border:1px solid #f1e3a5;border-radius:20px;padding:22px 12px;text-align:center;font-size:clamp(23px,5vw,32px);font-weight:800;overflow-x:auto;line-height:1.6}.resultline{text-align:center;color:var(--muted);font-size:15px;line-height:1.5;margin:12px 0 0}
+.explain{font-size:16px;line-height:1.7;color:var(--muted)}.explain strong{color:var(--ink)}.btn{display:block;width:100%;border:0;border-radius:17px;padding:17px 18px;background:var(--green);color:white;font-size:18px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 var(--green-dark);margin-top:20px}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-dark)}
+.quiz{display:none}.quiz-head{display:flex;justify-content:space-between;gap:10px;font-weight:900}.progress{height:12px;border-radius:20px;background:#e8eee3;overflow:hidden;margin:16px 0 24px}.progress span{display:block;height:100%;width:0;background:var(--green);transition:width .2s}.question{font-size:21px;font-weight:850;line-height:1.45;margin:16px 0}.options{display:grid;gap:10px}.option{background:#fff;border:2px solid var(--line);border-radius:16px;padding:15px;text-align:left;color:var(--ink);font-size:16px;line-height:1.45;cursor:pointer}.option:disabled{cursor:default;opacity:1}.option.correct{background:#e9f7e4;border-color:var(--green)}.option.wrong{background:var(--red);border-color:#e58a78}.feedback{min-height:48px;margin:16px 0;color:var(--muted);font-weight:700;line-height:1.55}.hidden{display:none!important}.score{text-align:center;font-size:42px;font-weight:950;color:var(--green-dark);margin:15px 0}.foot{text-align:center;color:#829084;font-size:13px;margin:24px 0}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media(max-width:420px){main{width:calc(100% - 20px);margin-top:14px}.card{border-radius:22px;padding:19px}.control{padding:14px}.control-head{font-size:15px}.formula{padding:17px 8px}}
+</style>
+</head>
+<body><main>
+<div class="top"><span>SKILLUP PHYSICS</span><span class="pill">MAGNETIC EFFECTS</span></div>
+<section class="card" id="lab">
+<div class="eyebrow">CONCEPT LAB · TOROID</div><h1>Magnetic field inside a toroid</h1>
+<p class="lead">A toroid is a solenoid bent into a closed circular ring. Explore how its magnetic field depends on current, turns and the mean radius.</p>
+<div class="diagram" aria-label="Schematic of a toroidal coil">
+<svg viewBox="0 0 420 230" role="img" aria-label="Toroid with circular magnetic field lines">
+<defs><linearGradient id="ring" x1="0" x2="1"><stop stop-color="#8acb70"/><stop offset="1" stop-color="#4c9b3c"/></linearGradient></defs>
+<ellipse cx="210" cy="112" rx="160" ry="78" fill="none" stroke="url(#ring)" stroke-width="43"/>
+<ellipse cx="210" cy="112" rx="112" ry="48" fill="#f5f7ed" stroke="#3d8533" stroke-width="3"/>
+<ellipse cx="210" cy="112" rx="134" ry="62" fill="none" stroke="#315f9d" stroke-width="3" stroke-dasharray="8 7"/>
+<path d="M330 80 l14 0 -7 12" fill="none" stroke="#315f9d" stroke-width="3" stroke-linecap="round"/>
+<text x="210" y="118" text-anchor="middle" fill="#24352b" font-size="17" font-weight="700">Toroidal core</text>
+<text x="210" y="215" text-anchor="middle" fill="#65766a" font-size="13">Schematic · not to scale</text>
+</svg></div>
+<h2>Change the experimental values</h2>
+<div class="controls">
+<div class="control"><div class="control-head"><label for="current">Current, \(I\)</label><output id="iOut">2.0 A</output></div><input id="current" type="range" min="0" max="10" step=".5" value="2"></div>
+<div class="control"><div class="control-head"><label for="turns">Total turns, \(N\)</label><output id="nOut">500</output></div><input id="turns" type="range" min="100" max="2000" step="100" value="500"></div>
+<div class="control"><div class="control-head"><label for="radius">Mean radius, \(r\)</label><output id="rOut">10 cm</output></div><input id="radius" type="range" min="5" max="30" step="1" value="10"></div>
+</div>
+<div class="formula" id="liveFormula">\[B=\frac{\mu_0NI}{2\pi r}\]</div>
+<div class="formula" id="liveValue">\[B=2.00\;\text{mT}\]</div>
+<p class="resultline" id="readout">The magnetic field strength for the selected values is 2.00 mT.</p>
+</section>
+<section class="card">
+<div class="eyebrow">KEY IDEA</div><h2>Apply Ampere’s circuital law</h2>
+<p class="explain">Choose a circular Amperian path of radius \(r\) inside the toroidal core. By symmetry, the magnetic field has constant magnitude along this path and is tangential to it.</p>
+<div class="formula">\[\oint \vec B\cdot d\vec l=\mu_0 I_{\text{enclosed}}\]</div>
+<p class="explain">The path encloses \(N\) turns, each carrying current \(I\), so \(I_{\text{enclosed}}=NI\). Therefore:</p>
+<div class="formula">\[B(2\pi r)=\mu_0NI\]</div>
+<div class="formula">\[\boxed{B=\frac{\mu_0NI}{2\pi r}}\]</div>
+<p class="explain"><strong>Remember:</strong> field increases with current and number of turns, and decreases as the mean radius increases. For a core with permeability \(\mu=\mu_0\mu_r\), use \(B=\frac{\mu_0\mu_rNI}{2\pi r}\) in the linear material approximation.</p>
+<button class="btn" id="begin">Start 30-question practice →</button>
+</section>
+<section class="card quiz" id="quiz">
+<div class="quiz-head"><span id="qCount">Question 1 of 30</span><span id="score">⭐ 0</span></div>
+<div class="progress"><span id="progress"></span></div>
+<div id="questionArea"></div><div class="feedback" id="feedback" aria-live="polite"></div>
+<button class="btn hidden" id="next">Next question →</button>
+<div id="final" class="hidden"></div>
+</section>
+<p class="foot">SkillUp Physics · Understand · Experiment · Practise</p>
+</main>
 <script>
 const questions=[
 ["The magnetic field inside an ideal toroid is","\\(\\frac{\\mu_0NI}{2\\pi r}\\)","\\(\\mu_0NIr\\)","\\(\\frac{\\mu_0I}{2\\pi N r}\\)","\\(2\\pi r\\mu_0NI\\)",0,"Ampere’s law gives B(2πr)=μ₀NI."],
@@ -45,13 +98,17 @@ const questions=[
 ["If the number of turns is halved, field","halves","doubles","quadruples","does not change",0,"B is proportional to N."],
 ["For a toroid, the magnetic field is approximately uniform along a circular path of","fixed radius inside the core","any radius including outside","the outer air region","a radial line",0,"Symmetry makes B constant along a concentric circular Amperian loop."],
 ["Ampere’s law for a toroid gives","\\(B(2\\pi r)=\\mu_0NI\\)","\\(B=2\\pi rNI\\)","\\(B=\\mu_0I/N\\)","\\(B=NI/\\mu_0\\)",0,"The line integral around the circular path is μ₀ times enclosed current."]
-];
-let index=0,score=0,locked=false;const el=id=>document.getElementById(id);
-function typeset(node){const go=()=>{if(window.MathJax?.typesetPromise){MathJax.typesetClear([node]);return MathJax.typesetPromise([node]);}};if(window.MathJax?.startup?.promise)window.MathJax.startup.promise.then(go).catch(()=>{});}
-function calc(){const I=+el("current").value,N=+el("turns").value,r=+el("radius").value/100,B=2e-7*N*I/r*1000;el("iLabel").textContent=I+" A";el("nLabel").textContent=N;el("rLabel").textContent=(r*100)+" cm";el("field").innerHTML="\\(B="+B.toFixed(2)+"\\;\\mathrm{mT}\\)";el("fieldHint").textContent="For "+N+" turns, "+I+" A current and "+(r*100)+" cm mean radius, the field is about "+B.toFixed(2)+" mT.";typeset(el("field"));}
-["current","turns","radius"].forEach(id=>el(id).addEventListener("input",calc));calc();window.addEventListener("load",()=>typeset(el("experiment")));
-el("startQuiz").onclick=()=>{el("experiment").classList.add("hidden");el("quiz").style.display="block";render();scrollTo(0,0)};
-function render(){locked=false;const q=questions[index];el("number").textContent="Question "+(index+1)+"/"+questions.length;el("points").textContent="⭐ "+score;el("bar").style.width=(index/questions.length*100)+"%";el("question").innerHTML='<div class="question">'+q[0]+'</div>'+q.slice(1,5).map((v,n)=>'<button class="option" data-choice="'+n+'">'+String.fromCharCode(65+n)+'. '+v+'</button>').join("");el("feedback").textContent="";el("next").classList.add("hidden");document.querySelectorAll(".option").forEach(b=>b.onclick=()=>answer(+b.dataset.choice));typeset(el("question"));}
-function answer(n){if(locked)return;locked=true;const q=questions[index],ok=n===q[5];document.querySelectorAll(".option").forEach((b,k)=>{b.disabled=true;if(k===q[5])b.classList.add("correct");if(k===n&&!ok)b.classList.add("wrong")});if(ok)score++;el("feedback").textContent=(ok?"Correct! +1 point. ":"Not quite. ")+q[6];el("points").textContent="⭐ "+score;el("next").classList.remove("hidden");el("next").textContent=index===questions.length-1?"See result →":"Next question →";}
-el("next").onclick=()=>{if(index<questions.length-1){index++;render()}else{el("bar").style.width="100%";el("number").textContent="Quiz completed";el("question").innerHTML="";el("feedback").textContent="";el("next").classList.add("hidden");el("result").classList.remove("hidden");el("result").innerHTML='<h2>Well done! 🎉</h2><p>Your score</p><div class="score">'+score+' / '+questions.length+'</div><button class="retry" onclick="location.reload()">Try again ↻</button>'}};
-</script><script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>
+]
+let qIndex=0,points=0,answered=false;
+const $=id=>document.getElementById(id);
+function renderMath(node){if(window.MathJax?.typesetPromise){MathJax.typesetClear([node]);MathJax.typesetPromise([node]).catch(()=>{});}}
+function updateLab(){const I=+$('current').value,N=+$('turns').value,r=+$('radius').value/100;const B=2e-7*N*I/r*1000;$('iOut').textContent=I.toFixed(1)+' A';$('nOut').textContent=N;$('rOut').textContent=(r*100).toFixed(0)+' cm';$('liveValue').innerHTML='\\[B='+B.toFixed(3)+'\\;\\text{mT}\\]';$('readout').textContent='At '+I.toFixed(1)+' A, '+N+' turns and '+(r*100).toFixed(0)+' cm mean radius, the magnetic field is '+B.toFixed(3)+' mT.';renderMath($('liveValue'));}
+['current','turns','radius'].forEach(id=>$(id).addEventListener('input',updateLab));updateLab();
+$('begin').addEventListener('click',()=>{$('lab').classList.add('hidden');$('quiz').style.display='block';showQuestion();window.scrollTo({top:0,behavior:'smooth'});});
+function showQuestion(){answered=false;const q=questions[qIndex];$('qCount').textContent='Question '+(qIndex+1)+' of '+questions.length;$('score').textContent='⭐ '+points;$('progress').style.width=(qIndex/questions.length*100)+'%';$('feedback').textContent='';$('next').classList.add('hidden');$('questionArea').innerHTML='<div class="question">'+q[0]+'</div><div class="options">'+q.slice(1,5).map((v,i)=>'<button class="option" data-index="'+i+'">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div>';$('questionArea').querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>choose(+b.dataset.index)));renderMath($('questionArea'));}
+function choose(choice){if(answered)return;answered=true;const q=questions[qIndex],correct=choice===q[5];if(correct)points++;$('questionArea').querySelectorAll('.option').forEach((b,i)=>{b.disabled=true;if(i===q[5])b.classList.add('correct');if(i===choice&&!correct)b.classList.add('wrong');});$('score').textContent='⭐ '+points;$('feedback').textContent=(correct?'Correct! ':'Review this one. ')+q[6];$('next').classList.remove('hidden');$('next').textContent=qIndex===questions.length-1?'View final score →':'Continue →';}
+$('next').addEventListener('click',()=>{if(qIndex<questions.length-1){qIndex++;showQuestion();}else{$('progress').style.width='100%';$('qCount').textContent='Practice completed';$('questionArea').innerHTML='';$('feedback').textContent='';$('next').classList.add('hidden');$('final').classList.remove('hidden');$('final').innerHTML='<h2 style="text-align:center">Great work! 🎉</h2><div class="score">'+points+' / '+questions.length+'</div><p class="lead" style="text-align:center">You completed the Toroid practice set.</p><button class="btn" onclick="location.reload()">Practise again ↻</button>';window.scrollTo({top:0,behavior:'smooth'});}});
+window.addEventListener('load',()=>renderMath(document.querySelector('main')));
+</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+</body></html>

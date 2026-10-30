@@ -49,7 +49,7 @@ const questions=[
 let index=0,score=0,locked=false;
 const $=id=>document.getElementById(id);
 function typesetMath(el){if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetClear([el]);MathJax.typesetPromise([el]).catch(()=>{})}}
-function calc(){let I=+$("current").value,n=+$("turns").value;$("iLabel").textContent=I+" A";$("nLabel").textContent=n+" m⁻¹";$("field").innerHTML="\\\\(B="+(0.0012566370614*n*I).toFixed(2)+"\\\\;\\\\mathrm{mT}\\\\)";$("fieldHint").textContent="At "+I+" A and "+n+" turns per metre, the field is about "+(0.0012566370614*n*I).toFixed(2)+" mT.";typesetMath($("field"))}
+function calc(){let I=+$("current").value,n=+$("turns").value;$("iLabel").textContent=I+" A";$("nLabel").textContent=n+" m⁻¹";$("field").innerHTML="\\(B="+(0.0012566370614*n*I).toFixed(2)+"\\;\\mathrm{mT}\\)";$("fieldHint").textContent="At "+I+" A and "+n+" turns per metre, the field is about "+(0.0012566370614*n*I).toFixed(2)+" mT.";typesetMath($("field"))}
 $("current").oninput=calc;$("turns").oninput=calc;calc();
 $("startQuiz").onclick=()=>{$("experiment").classList.add("hide");$("quiz").style.display="block";render();window.scrollTo(0,0)};
 function render(){locked=false;let q=questions[index];$("number").textContent="Question "+(index+1)+"/"+questions.length;$("points").textContent="⭐ "+score;$("quizBar").style.width=(index/questions.length*100)+"%";$("question").innerHTML='<div class="qtext">'+q[0]+'</div>'+q.slice(1,5).map((v,n)=>'<button class="option" data-choice="'+n+'">'+String.fromCharCode(65+n)+'. '+v+'</button>').join("");$("feedback").textContent="";$("next").classList.add("hide");document.querySelectorAll(".option").forEach(b=>b.onclick=()=>choose(+b.dataset.choice));typesetMath($("question"))}

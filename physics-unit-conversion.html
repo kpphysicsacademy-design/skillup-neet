@@ -1,133 +1,136 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Unit Conversion quiz">
-<title>SkillUp | Unit Conversion — Easy Quiz</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn unit conversion across length, mass, time, area, volume, speed and temperature with an interactive conversion lab and 30 explained MCQs.">
+<title>SkillUp Physics | Unit Conversion — Learn &amp; 30 MCQs</title>
 <style>
-:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
-.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
-main{max-width:720px;margin:auto;padding:18px 13px 48px}
-.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
-.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
-.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
-.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
-.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
-.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
-.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
-.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
-.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
-.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Mobile header refinement: keep branding, XP and streak on one balanced row */
-.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
-.back{flex:0 0 42px;width:42px;height:42px}
-.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
-.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
-.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
-.xp{margin-left:0;padding:9px 11px;font-size:13px}
-.streak{padding:9px 11px;font-size:12px}
-@media(max-width:480px){
-  .nav{gap:7px;padding:9px 10px;min-height:68px}
-  .back{flex-basis:40px;width:40px;height:40px}
-  .brand{font-size:17px}
-  .brand small{font-size:8px;letter-spacing:.55px}
-  .xp{padding:8px 9px;font-size:12px}
-  .streak{padding:8px 9px;font-size:11px;max-width:none}
-}
-@media(max-width:360px){
-  .nav{gap:5px;padding-inline:7px}
-  .back{flex-basis:36px;width:36px;height:36px}
-  .brand{font-size:15px}
-  .brand small{font-size:7px;letter-spacing:.3px}
-  .xp{padding:7px;font-size:11px}
-  .streak{padding:7px;font-size:10px}
-}
-
+:root{--green:#58cc02;--gd:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}*{box-sizing:border-box}html,body{width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:720px;margin:auto;min-height:68px;padding:9px 14px;display:flex;align-items:center;gap:10px}.back{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}.brand{flex:1;min-width:0;font-weight:950;color:#174a78;font-size:clamp(16px,4.5vw,20px)}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}.xp,.streak{border-radius:99px;padding:8px 10px;font-weight:900;font-size:12px;white-space:nowrap}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+main{max-width:720px;margin:auto;padding:16px 13px 42px}.hero,.learn-card,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}h1{margin:0 0 7px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:14px;line-height:1.55;margin:0}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px;background:#eaf3fb;border-radius:15px;margin:0 0 14px}.tab{border:0;border-radius:11px;padding:12px;font-weight:900;color:#42617a;background:transparent;cursor:pointer}.tab.active{background:#fff;color:#174a78;box-shadow:0 2px 5px #d5e3ef}
+.learn-card h2{margin:0 0 9px;color:#174a78;font-size:19px}.learn-card h3{font-size:15px;color:#245b78;margin:13px 0 6px}.learn-card p,.learn-card li{font-size:14px;line-height:1.65;color:#40566b}.learn-card ul{padding-left:21px}.learn-card li{margin:5px 0}.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;text-align:center;font-weight:900;color:#245b12;font-size:18px;margin:10px 0}.tip{background:#eef8ff;border-left:4px solid var(--blue);padding:11px 13px;border-radius:9px;font-size:13px;line-height:1.55;color:#285878;margin-top:10px}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:.4px}.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:56px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.4;cursor:pointer}.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5;font-weight:650}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--gd)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:300px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--gd)}.review{padding:12px;margin:10px 0;border:2px solid var(--line);border-radius:14px;background:#fff;text-align:left}.review p{margin:6px 0;line-height:1.45}.review .your{color:#a12b30}.review .right{color:#245b12}.foot{text-align:center;color:#8291a0;font-size:12px;margin-top:20px}button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}@media(max-width:480px){main{padding:12px 10px 34px}.hero,.learn-card,.quiz,.finish{padding:15px;border-radius:18px}.nav{gap:6px;padding-inline:9px}.xp,.streak{font-size:10px;padding:7px}.brand{font-size:16px}.option{font-size:14px;padding:11px}.question{font-size:21px}}/* Interactive spectrum simulator */
+.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+.simulator{padding:18px}
+.sim-wavebox{margin:14px 0;padding:12px;border:1px solid #dcebd2;border-radius:16px;background:#f7fbf3;overflow:hidden}
+.sim-wavehead{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#285b36}
+.sim-live{font-size:10px;letter-spacing:.7px;font-weight:900;padding:5px 8px;border-radius:99px;background:#e7f8dc;color:#397b22}
+#simWave{width:100%;height:auto;display:block}
+.sim-wavelegend,.sim-range{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#65745f}
+.sim-control{margin:16px 0}
+.sim-controltop{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:850;color:#334b3a}
+.sim-controltop output{color:#1e6d9a;text-align:right}
+.sim-slider{width:100%;accent-color:#58cc02;margin:17px 0 4px;cursor:pointer}
+.sim-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.sim-presets button{border:1px solid #d6ddce;border-bottom-width:3px;border-radius:10px;padding:8px 10px;background:#fff;color:#344638;font-weight:800;font-size:12px}
+.sim-presets button.active{background:#e8ffdc;border-color:#58cc02;color:#245b12}
+.sim-readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.sim-reading{min-width:0;padding:12px;border-radius:13px;background:#f4f9ff;border:1px solid #dce6ef}
+.sim-reading span{display:block;font-size:11px;color:#64748b;font-weight:750;margin-bottom:6px}
+.sim-reading strong{display:block;font-size:clamp(14px,3.8vw,18px);color:#174a78;overflow-wrap:anywhere}
+.sim-explain{padding:12px 14px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;color:#315b24;font-size:13px;line-height:1.55}
+.sim-note{font-size:11px;line-height:1.5;color:#75816f;margin:12px 0 0}
+@media(max-width:420px){.simulator{padding:14px}.sim-wavebox{padding:8px}.sim-readouts{gap:7px}.sim-reading{padding:10px}.sim-presets button{padding:7px 8px}}
+/* Visual learning diagrams */
+.visual-learning{width:100%;margin:12px 0 14px;padding:10px;background:#f7fbf3;border:1px solid #dcebd2;border-radius:16px;overflow:hidden}
+.visual-learning svg{display:block;width:100%;height:auto;max-width:100%}
+.visual-learning figcaption{margin-top:7px;text-align:center;color:#65745f;font-size:12px;line-height:1.4}
+.visual-learning .diagram-label{font:700 12px system-ui,sans-serif;fill:#344638}
+.visual-learning .diagram-small{font:600 10px system-ui,sans-serif;fill:#536453}
+@media(max-width:420px){.visual-learning{padding:7px;border-radius:13px}.visual-learning figcaption{font-size:11px}}
+/* Mobile alignment and long-equation wrapping */
+main{display:block;width:100%!important;max-width:720px!important;margin-inline:auto!important;padding-inline:clamp(10px,3.5vw,18px)!important;min-width:0!important}.learn-card{width:100%;min-width:0;overflow:hidden}.learn-card p,.learn-card li{overflow-wrap:anywhere;word-break:normal}.formula{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:normal;overflow-wrap:anywhere;padding-inline:clamp(10px,3vw,16px)}.formula mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}.learn-card,.hero,.quiz{min-width:0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body>
-<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
-<main>
-<section class="hero"><h1>🔄 Unit Conversion</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
-<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
-<div id="finishSlot"></div>
-</main>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head>
+<body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak">🔥 <span id="streak">0</span> streak</div></div></header>
+<main><section class="hero"><h1>🔄 Unit Conversion</h1><p class="muted">Convert measurements confidently using conversion factors, unit cancellation and dimensional reasoning.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<div class="tabs" role="tablist" aria-label="Lesson, simulator and practice"><button class="tab active" id="learnTab" role="tab" aria-selected="true">📘 Learn</button><button class="tab" id="simTab" role="tab" aria-selected="false">🔬 Simulator</button><button class="tab" id="practiceTab" role="tab" aria-selected="false">🧠 Practice</button></div>
+<section id="learnPanel">
+<article class="learn-card"><h2>1. What is unit conversion?</h2><p>Unit conversion expresses the same physical quantity in a different unit. The measured quantity does not change; only its numerical value and unit representation change.</p><div class="formula">\(Q = n\times u\)</div><p>For example, 2 km and 2000 m represent the same length.</p></article>
+<article class="learn-card"><h2>2. Conversion factors</h2><p>A conversion factor is a ratio of two equal quantities. Its value is one, so multiplying by it changes the unit without changing the physical quantity.</p><div class="formula">\(2\,\text{km}\times\frac{1000\,\text{m}}{1\,\text{km}}=2000\,\text{m}\)</div><p>Choose the ratio so the original unit cancels.</p></article>
+<article class="learn-card"><h2>3. Length, mass and time</h2><ul><li>1 km = 1000 m; 1 m = 100 cm = 1000 mm</li><li>1 kg = 1000 g; 1 g = 1000 mg</li><li>1 h = 60 min = 3600 s</li><li>1 day = 24 h = 86,400 s</li></ul></article>
+<article class="learn-card"><h2>4. Area and volume conversions</h2><p>Square the linear conversion factor for area and cube it for volume.</p><ul><li>1 cm² = 10⁻⁴ m²</li><li>1 cm³ = 10⁻⁶ m³</li><li>1 L = 10⁻³ m³; 1 mL = 1 cm³</li></ul><div class="tip">Do not use the length factor directly for area or volume.</div></article>
+<article class="learn-card"><h2>5. Speed conversions</h2><p>Convert both the length and time units. For speed in km/h to m/s, multiply by \(\frac{5}{18}\). For m/s to km/h, multiply by \(\frac{18}{5}\).</p><div class="formula">\(72\,\text{km h}^{-1}=72\times\frac{5}{18}=20\,\text{m s}^{-1}\)</div></article>
+<article class="learn-card"><h2>6. Temperature conversions</h2><p>Temperature scales use offsets as well as scale factors.</p><ul><li>\(K=\,^{\circ}C+273.15\)</li><li>\(^{\circ}C=K-273.15\)</li><li>\(^{\circ}F=\frac{9}{5}\,^{\circ}C+32\)</li></ul><p>Do not treat Celsius-to-kelvin conversion as a simple prefix conversion.</p></article>
+<article class="learn-card"><h2>7. CGS and SI conversions</h2><ul><li>1 dyne = 10⁻⁵ N</li><li>1 erg = 10⁻⁷ J</li><li>1 N = 10⁵ dynes</li><li>1 J = 10⁷ ergs</li></ul><p>These relations are useful when converting between centimetre–gram–second and SI systems.</p></article>
+<article class="learn-card"><h2>8. A reliable conversion method</h2><ol><li>Write the given value with its unit.</li><li>Choose an equality relating the old and new units.</li><li>Arrange the conversion factor so unwanted units cancel.</li><li>Apply squared or cubed factors for area and volume.</li><li>Check the magnitude and write the final unit.</li></ol><div class="tip">Always check whether the answer is physically reasonable before rounding.</div></article>
+</section>
+<section id="simPanel" class="learn-card simulator" style="display:none" aria-labelledby="unitLabTitle">
+<h2 id="unitLabTitle">🔁 Unit Conversion Lab</h2><p class="muted">Select a physical quantity, enter a value and convert it between commonly used units. The SI equivalent is calculated automatically.</p>
+<div class="sim-control"><div class="sim-controltop"><label for="quantityType">Quantity</label><output id="quantityTypeOut">Length</output></div><select id="quantityType" class="sim-slider" style="height:46px;width:100%"><option value="length">Length</option><option value="mass">Mass</option><option value="time">Time</option><option value="area">Area</option><option value="volume">Volume</option><option value="speed">Speed</option><option value="temperature">Temperature</option></select></div>
+<div class="sim-control"><div class="sim-controltop"><label for="quantityValue">Input value</label><output id="quantityValueOut">1</output></div><input id="quantityValue" type="number" value="1" step="any" class="sim-slider" style="height:46px;padding:8px;width:100%"></div>
+<div class="sim-control"><div class="sim-controltop"><label for="quantityUnit">From unit</label></div><select id="quantityUnit" class="sim-slider" style="height:46px;width:100%"></select></div>
+<div class="sim-control"><div class="sim-controltop"><label for="targetUnit">Convert to</label></div><select id="targetUnit" class="sim-slider" style="height:46px;width:100%"></select></div>
+<div class="sim-readouts"><div class="sim-reading"><span>Converted value</span><strong id="convertedResult">1000 m</strong></div><div class="sim-reading"><span>SI equivalent</span><strong id="siEquivalent">1000 m</strong></div><div class="sim-reading"><span>Conversion factor</span><strong id="conversionFactor">× 1000</strong></div><div class="sim-reading"><span>Scientific notation</span><strong id="scientificValue">1.00 × 10³</strong></div></div>
+<div class="sim-explain" id="conversionExplanation" aria-live="polite">1 km = 1000 m.</div>
+<div class="sim-presets"><button type="button" data-conversion-preset="km-m">1 km → m</button><button type="button" data-conversion-preset="kmh-ms">72 km/h → m/s</button><button type="button" data-conversion-preset="kg-g">2.5 kg → g</button><button type="button" data-conversion-preset="cm2-m2">1 cm² → m²</button><button type="button" data-conversion-preset="c-k">25 °C → K</button><button type="button" data-conversion-preset="l-m3">1 L → m³</button></div>
+</section>
+<section class="quiz" id="quiz" style="display:none"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section><div id="finishSlot"></div><div class="foot">SkillUp Physics • Learn a concept, practise, and review mistakes at the end.</div></main>
 <script>
-(function(){
-'use strict';
-const questions = [{"q":"To convert kilometres to metres, multiply by:","o":["10","100","1,000","1,000,000"],"a":2,"e":"1 km = 1,000 m."},{"q":"Convert 72 km/h to m/s.","o":["10 m/s","20 m/s","25 m/s","36 m/s"],"a":1,"e":"Multiply by 5/18: 72 × 5/18 = 20 m/s."},{"q":"Convert 10 m/s to km/h.","o":["18 km/h","36 km/h","10 km/h","60 km/h"],"a":1,"e":"Multiply by 18/5: 10 × 18/5 = 36 km/h."},{"q":"How many seconds are in 2 minutes?","o":["30 s","60 s","120 s","200 s"],"a":2,"e":"2 × 60 = 120 seconds."},{"q":"Convert 3 hours to seconds.","o":["180 s","1,800 s","10,800 s","36,000 s"],"a":2,"e":"3 × 3,600 = 10,800 seconds."},{"q":"Convert 500 cm to metres.","o":["0.5 m","5 m","50 m","5000 m"],"a":1,"e":"100 cm = 1 m, so 500 cm = 5 m."},{"q":"Convert 2.5 kg to grams.","o":["25 g","250 g","2,500 g","25,000 g"],"a":2,"e":"1 kg = 1,000 g; 2.5 kg = 2,500 g."},{"q":"Convert 750 mg to grams.","o":["0.075 g","0.75 g","7.5 g","750,000 g"],"a":1,"e":"1,000 mg = 1 g, so 750 mg = 0.75 g."},{"q":"One litre equals:","o":["10⁻⁶ m³","10⁻³ m³","1 m³","10³ m³"],"a":1,"e":"1 L = 0.001 m³ = 10⁻³ m³."},{"q":"One millilitre equals:","o":["1 cm³","10 cm³","100 cm³","1,000 cm³"],"a":0,"e":"1 mL = 1 cm³."},{"q":"Convert 1 cm² to m².","o":["10⁻² m²","10⁻⁴ m²","10⁻⁶ m²","10² m²"],"a":1,"e":"Since 1 cm = 10⁻² m, square the factor: 1 cm² = 10⁻⁴ m²."},{"q":"Convert 1 cm³ to m³.","o":["10⁻² m³","10⁻⁴ m³","10⁻⁶ m³","10⁻⁹ m³"],"a":2,"e":"Cube the length factor: (10⁻²)³ = 10⁻⁶."},{"q":"Convert 5 km to centimetres.","o":["5 × 10³ cm","5 × 10⁴ cm","5 × 10⁵ cm","5 × 10⁶ cm"],"a":2,"e":"1 km = 100,000 cm, so 5 km = 5 × 10⁵ cm."},{"q":"Convert 250 mm to metres.","o":["0.025 m","0.25 m","2.5 m","25 m"],"a":1,"e":"1 mm = 10⁻³ m, so 250 mm = 0.25 m."},{"q":"Convert 4 g/cm³ to kg/m³.","o":["40 kg/m³","400 kg/m³","4,000 kg/m³","40,000 kg/m³"],"a":2,"e":"1 g/cm³ = 1,000 kg/m³, so 4 g/cm³ = 4,000 kg/m³."},{"q":"One dyne equals:","o":["10⁻³ N","10⁻⁵ N","10⁵ N","10⁷ N"],"a":1,"e":"In CGS-to-SI conversion, 1 dyne = 10⁻⁵ newton."},{"q":"One erg equals:","o":["10⁻⁷ J","10⁻⁵ J","10⁵ J","10⁷ J"],"a":0,"e":"1 erg = 10⁻⁷ joule."},{"q":"Convert 2.4 km to metres.","o":["24 m","240 m","2,400 m","24,000 m"],"a":2,"e":"2.4 × 1,000 = 2,400 m."},{"q":"Convert 90 km/h to m/s.","o":["9 m/s","20 m/s","25 m/s","30 m/s"],"a":2,"e":"90 × 5/18 = 25 m/s."},{"q":"Convert 15 m/s to km/h.","o":["27 km/h","36 km/h","54 km/h","72 km/h"],"a":2,"e":"15 × 18/5 = 54 km/h."},{"q":"Convert 25°C to kelvin (approximately).","o":["248 K","273 K","298 K","310 K"],"a":2,"e":"K = °C + 273.15, so 25°C ≈ 298 K."},{"q":"Convert 300 K to °C (approximately).","o":["0°C","27°C","37°C","300°C"],"a":1,"e":"°C = K − 273.15, so 300 K ≈ 27°C."},{"q":"Which conversion factor converts hours to seconds?","o":["× 60","× 600","× 3,600","× 86,400"],"a":2,"e":"1 hour = 60 minutes × 60 seconds = 3,600 seconds."},{"q":"A length is 0.004 km. What is it in metres?","o":["0.4 m","4 m","40 m","400 m"],"a":1,"e":"0.004 × 1,000 = 4 m."},{"q":"Convert 2.0 m² to cm².","o":["200 cm²","2,000 cm²","20,000 cm²","200,000 cm²"],"a":2,"e":"1 m² = 10,000 cm², so 2.0 m² = 20,000 cm²."},{"q":"Convert 0.5 m³ to litres.","o":["5 L","50 L","500 L","5,000 L"],"a":2,"e":"1 m³ = 1,000 L, so 0.5 m³ = 500 L."},{"q":"A force is 2 N. What is it in dynes?","o":["2 × 10⁻⁵ dyn","2 × 10³ dyn","2 × 10⁵ dyn","2 × 10⁷ dyn"],"a":2,"e":"1 N = 10⁵ dynes, so 2 N = 2 × 10⁵ dynes."},{"q":"When converting an area unit, the length conversion factor must be:","o":["Added","Squared","Cubed","Ignored"],"a":1,"e":"Area has two dimensions, so the linear conversion factor must be squared."},{"q":"When converting a volume unit, the length conversion factor must be:","o":["Squared","Cubed","Divided by two","Ignored"],"a":1,"e":"Volume has three dimensions, so cube the linear conversion factor."},{"q":"What is the safest first step in a unit conversion?","o":["Write the given value with its unit","Delete the units","Round immediately","Change the physical quantity"],"a":0,"e":"Write the given quantity and multiply by conversion factors so unwanted units cancel."}]
-let index=0,score=0,streak=0,chosen=null,locked=false;
+(function(){'use strict';
+const questionsRaw=[
+["Convert 3 km to metres.",["30 m","300 m","3000 m","30,000 m"],2,"Multiply by 1000: 3 km = 3000 m."],
+["Convert 450 cm to metres.",["4.5 m","45 m","0.45 m","4500 m"],0,"Divide centimetres by 100: 450 cm = 4.5 m."],
+["Convert 2.5 kg to grams.",["25 g","250 g","2500 g","25,000 g"],2,"1 kg = 1000 g; therefore 2.5 kg = 2500 g."],
+["Convert 750 mg to grams.",["7.5 g","0.75 g","0.075 g","7500 g"],1,"Divide milligrams by 1000: 750 mg = 0.75 g."],
+["How many seconds are in 4 minutes?",["24 s","60 s","240 s","400 s"],2,"4 × 60 = 240 seconds."],
+["Convert 2.5 hours to seconds.",["900 s","3600 s","9000 s","12,500 s"],2,"2.5 × 3600 = 9000 s."],
+["Convert 36 km/h to m/s.",["5 m/s","10 m/s","18 m/s","20 m/s"],1,"36 × 5/18 = 10 m/s."],
+["Convert 15 m/s to km/h.",["27 km/h","45 km/h","54 km/h","75 km/h"],2,"15 × 18/5 = 54 km/h."],
+["1 cm² is equal to:",["10⁻² m²","10⁻⁴ m²","10⁻⁶ m²","10⁻⁸ m²"],1,"Square the length factor: (10⁻²)² = 10⁻⁴."],
+["1 cm³ is equal to:",["10⁻² m³","10⁻⁴ m³","10⁻⁶ m³","10⁻⁹ m³"],2,"Cube the length factor: (10⁻²)³ = 10⁻⁶."],
+["One litre is equal to:",["10⁻⁶ m³","10⁻³ m³","1 m³","10³ m³"],1,"1 L = 0.001 m³ = 10⁻³ m³."],
+["One millilitre is equal to:",["1 cm³","10 cm³","100 cm³","1000 cm³"],0,"1 mL = 1 cm³."],
+["Convert 5 km to centimetres.",["5 × 10³ cm","5 × 10⁴ cm","5 × 10⁵ cm","5 × 10⁶ cm"],2,"1 km = 100,000 cm, so 5 km = 5 × 10⁵ cm."],
+["Convert 250 mm to metres.",["0.025 m","0.25 m","2.5 m","25 m"],1,"250 × 10⁻³ = 0.25 m."],
+["Convert 4 g/cm³ to kg/m³.",["40","400","4000","40,000"],2,"1 g/cm³ = 1000 kg/m³; multiply by 4."],
+["One dyne equals:",["10⁻³ N","10⁻⁵ N","10⁵ N","10⁷ N"],1,"1 dyne = 10⁻⁵ N."],
+["One erg equals:",["10⁻⁷ J","10⁻⁵ J","10⁵ J","10⁷ J"],0,"1 erg = 10⁻⁷ J."],
+["Convert 90 km/h to m/s.",["9","20","25","30"],2,"90 × 5/18 = 25 m/s."],
+["Convert 20 m/s to km/h.",["36","54","72","90"],2,"20 × 18/5 = 72 km/h."],
+["Convert 25 °C to kelvin.",["248.15 K","273.15 K","298.15 K","310.15 K"],2,"K = °C + 273.15 = 298.15 K."],
+["Convert 300 K to °C.",["0 °C","26.85 °C","37 °C","300 °C"],1,"°C = 300 − 273.15 = 26.85 °C."],
+["Convert 0 °C to Fahrenheit.",["0 °F","32 °F","100 °F","273 °F"],1,"°F = (9/5 × 0) + 32 = 32 °F."],
+["Convert 2 m² to cm².",["200 cm²","2000 cm²","20,000 cm²","200,000 cm²"],2,"1 m² = 10,000 cm²; hence 2 m² = 20,000 cm²."],
+["Convert 0.5 m³ to litres.",["5 L","50 L","500 L","5000 L"],2,"1 m³ = 1000 L; 0.5 m³ = 500 L."],
+["Convert 2 N to dynes.",["2 × 10⁻⁵","2 × 10³","2 × 10⁵","2 × 10⁷"],2,"1 N = 10⁵ dynes, so 2 N = 2 × 10⁵ dynes."],
+["Convert 3 J to ergs.",["3 × 10⁵","3 × 10⁷","3 × 10⁹","3 × 10⁻⁷"],1,"1 J = 10⁷ ergs; 3 J = 3 × 10⁷ ergs."],
+["Which factor converts km/h to m/s?",["5/18","18/5","1000","3600"],0,"Multiply a km/h value by 5/18 to obtain m/s."],
+["When converting an area unit, the length factor is:",["Added","Squared","Cubed","Ignored"],1,"Area is two-dimensional, so square the linear factor."],
+["When converting a volume unit, the length factor is:",["Squared","Cubed","Halved","Ignored"],1,"Volume is three-dimensional, so cube the linear factor."],
+["What is the safest first step in unit conversion?",["Write the given value with its unit","Remove the units","Round immediately","Change the quantity"],0,"Start with the measured value and unit, then use a factor arranged so unwanted units cancel."]
+];
+const questions=questionsRaw.map(([q,o,a,e],i)=>({id:i+1,q,o,a,e}));
+const original=questions.slice();let index=0,score=0,streak=0,chosen=null,locked=false,wrong=[];
 const $=id=>document.getElementById(id);
-function render(){
- chosen=null;locked=false;
- const item=questions[index];
- $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
- $('percent').textContent=Math.round(index/questions.length*100)+'%';
- $('fill').style.width=(index/questions.length*100)+'%';
- $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
- $('feedback').className='feedback';$('feedback').textContent='';
- $('check').style.display='block';$('check').disabled=true;
- $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
- $('options').replaceChildren();
- item.o.forEach((text,j)=>{
-   const b=document.createElement('button');b.type='button';b.className='option';
-   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
-   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
-   $('options').appendChild(b);
- });
-}
-$('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
- buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
- const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
- $('check').style.display='none';$('continue').className='btn continue show';
-});
-$('continue').addEventListener('click',()=>{
- if(!locked)return;index++;
- if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
- $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
- const pct=Math.round(score/questions.length*100);
- const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
- $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
-});
-render();
+function render(){chosen=null;locked=false;const item=questions[index];$('progressText').textContent='Question '+(index+1)+' of '+questions.length;$('percent').textContent=Math.round(index/questions.length*100)+'%';$('fill').style.width=(index/questions.length*100)+'%';$('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;$('feedback').className='feedback';$('feedback').textContent='';$('check').style.display='block';$('check').disabled=true;$('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';$('options').replaceChildren();item.o.forEach((txt,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const l=document.createElement('span');l.className='letter';l.textContent=String.fromCharCode(65+j);const t=document.createElement('span');t.textContent=txt;b.append(l,t);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});}
+$('check').addEventListener('click',()=>{if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});const f=$('feedback');if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrong.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}$('check').style.display='none';$('continue').className='btn continue show';});
+$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}$('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';card.innerHTML='<div class="trophy">🏆</div><h2>Units of Measurement Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+score*10+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrong.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrong.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';const review=card.querySelector('#wrongReview');if(wrong.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrong.forEach((w,n)=>{const el=document.createElement('article');el.className='review';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const y=document.createElement('p');y.className='your';y.textContent='Your answer: '+w.chosen;const a=document.createElement('p');a.className='right';a.textContent='Correct answer: '+w.answer;const e=document.createElement('p');e.className='muted';e.textContent=w.explanation;el.append(q,y,a,e);review.appendChild(el);});}else review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';$('finishSlot').replaceChildren(card);
+function reset(onlyWrong){if(onlyWrong&&wrong.length){const retry=wrong.map(w=>original.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...retry);}else questions.splice(0,questions.length,...original);index=0;score=0;streak=0;wrong=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});} $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));});
+// Interactive unit conversion lab
+const qType=$('quantityType'),qValue=$('quantityValue'),qUnit=$('quantityUnit'),targetUnit=$('targetUnit');
+const unitSets={
+ length:[['m',1],['km',1000],['cm',.01],['mm',.001],['µm',1e-6]],
+ mass:[['kg',1],['g',.001],['mg',1e-6],['tonne',1000]],
+ time:[['s',1],['min',60],['h',3600],['ms',.001]],
+ area:[['m²',1],['cm²',1e-4],['mm²',1e-6],['km²',1e6]],
+ volume:[['m³',1],['L',.001],['mL',1e-6],['cm³',1e-6]],
+ speed:[['m/s',1],['km/h',1/3.6],['cm/s',.01],['km/s',1000]],
+ temperature:[['°C','c'],['K','k'],['°F','f']]
+};
+const fmt=n=>Number.isFinite(n)?Number(n.toPrecision(7)).toLocaleString('en-US',{maximumSignificantDigits:7}):'—';
+function temperatureConvert(v,from,to){let c=from==='°C'?v:from==='K'?v-273.15:(v-32)*5/9;return to==='°C'?c:to==='K'?c+273.15:c*9/5+32;}
+function fillUnits(){const units=unitSets[qType.value];$('quantityTypeOut').textContent=qType.options[qType.selectedIndex].text;[qUnit,targetUnit].forEach((el,i)=>{const prev=el.value;el.replaceChildren();units.forEach(([u])=>{const op=document.createElement('option');op.value=u;op.textContent=u;el.appendChild(op);});el.value=units.some(x=>x[0]===prev)?prev:units[i?1:0][0];});updateConversion();}
+function updateConversion(){const type=qType.value,v=Number(qValue.value),from=qUnit.value,to=targetUnit.value;$('quantityValueOut').textContent=qValue.value||'0';if(!Number.isFinite(v)){return;}let si,result,factor;if(type==='temperature'){si=temperatureConvert(v,from,'K');result=temperatureConvert(v,from,to);factor='Offset + scale';}else{const units=unitSets[type],a=units.find(x=>x[0]===from),b=units.find(x=>x[0]===to);si=v*a[1];result=si/b[1];factor='× '+fmt(a[1]/b[1]);}
+$('convertedResult').textContent=fmt(result)+' '+to;$('siEquivalent').textContent=fmt(si)+' '+(type==='temperature'?'K':unitSets[type][0][0]);$('conversionFactor').textContent=factor;$('scientificValue').textContent=(si===0?'0':si.toExponential(2));$('conversionExplanation').textContent=v+' '+from+' = '+fmt(result)+' '+to+'. '+(type==='temperature'?'Use the temperature-scale offset formula.':'SI equivalent = '+fmt(si)+' '+unitSets[type][0][0]+'.');}
+[qType,qUnit,targetUnit].forEach(el=>el.addEventListener('change',()=>{if(el===qType)fillUnits();else updateConversion();}));qValue.addEventListener('input',updateConversion);
+const presetMap={'km-m':['length',1,'km','m'],'kmh-ms':['speed',72,'km/h','m/s'],'kg-g':['mass',2.5,'kg','g'],'cm2-m2':['area',1,'cm²','m²'],'c-k':['temperature',25,'°C','K'],'l-m3':['volume',1,'L','m³']};
+document.querySelectorAll('[data-conversion-preset]').forEach(b=>b.addEventListener('click',()=>{const p=presetMap[b.dataset.conversionPreset];qType.value=p[0];fillUnits();qValue.value=p[1];qUnit.value=p[2];targetUnit.value=p[3];updateConversion();}));
+fillUnits();
+
+function setTab(which){const learn=which==='learn',sim=which==='sim';$('learnPanel').style.display=learn?'block':'none';$('simPanel').style.display=sim?'block':'none';$('quiz').style.display=(!learn&&!sim)?'block':'none';[['learnTab',learn],['simTab',sim],['practiceTab',!learn&&!sim]].forEach(([id,on])=>{$(id).classList.toggle('active',on);$(id).setAttribute('aria-selected',String(on));});window.scrollTo({top:0,behavior:'smooth'});}
+$('learnTab').addEventListener('click',()=>setTab('learn'));$('simTab').addEventListener('click',()=>setTab('sim'));$('practiceTab').addEventListener('click',()=>setTab('practice'));$('learnPanel').style.display='block';$('simPanel').style.display='none';render();
 })();
 </script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="central-config.js"></script>
-<script src="central-auth.js"></script>
-<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-<script>
-/* This quiz intentionally has no floating audio controls. */
-(function(){
-  function removeQuizAudio(){
-    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
-  }
-  removeQuizAudio();
-  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
-</body>
-</html>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

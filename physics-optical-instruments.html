@@ -109,49 +109,29 @@ $('check').addEventListener('click',()=>{if(chosen===null||locked)return;locked=
 $('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}$('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';card.innerHTML='<div class="trophy">🏆</div><h2>Lenses Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+score*10+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrong.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrong.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';const review=card.querySelector('#wrongReview');if(wrong.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrong.forEach((w,n)=>{const el=document.createElement('article');el.className='review';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const y=document.createElement('p');y.className='your';y.textContent='Your answer: '+w.chosen;const a=document.createElement('p');a.className='right';a.textContent='Correct answer: '+w.answer;const e=document.createElement('p');e.className='muted';e.textContent=w.explanation;el.append(q,y,a,e);review.appendChild(el);});}else review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';$('finishSlot').replaceChildren(card);
 function reset(onlyWrong){if(onlyWrong&&wrong.length){const retry=wrong.map(w=>original.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...retry);}else questions.splice(0,questions.length,...original);index=0;score=0;streak=0;wrong=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});} $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));});
 // Optical instruments calculator
-const lType=$('lensType'),lObject=$('lensObjectDistance'),lFocal=$('lensFocalLength');
-function updateLens(){
- const type=lType.value,d=Number(lObject.value),fm=Number(lFocal.value),u=-d,f=type==='convex'?fm:-fm;
- const v=(f*u)/(u+f),mag=v/u,real=v>0,erect=mag>0;
- $('lensTypeOut').textContent=type==='convex'?'Convex':'Concave';
- $('lensObjectOut').textContent=d+' cm';$('lensFocalOut').textContent=fm+' cm';
- $('lensImageDistance').textContent=(v>0?'+':'')+v.toFixed(1)+' cm';
- $('lensMagnification').textContent=(mag>0?'+':'')+mag.toFixed(2);
- $('lensNature').textContent=(real?'Real':'Virtual')+', '+(erect?'erect':'inverted');
- $('lensSize').textContent=Math.abs(mag)>1.05?'Enlarged':Math.abs(mag)<.95?'Diminished':'Same size';
- const imageX=real?300+Math.min(220,Math.abs(v)*2.0):300-Math.min(220,Math.abs(v)*2.0);
- const objectX=Math.max(35,300-Math.min(230,d*3.0)),objH=70,imgH=Math.max(12,Math.min(115,objH*Math.abs(mag)));
- $('lensObject').setAttribute('d',`M ${objectX} 170 L ${objectX} 100`);
- $('lensImage').setAttribute('d',`M ${imageX} 170 L ${imageX} ${170-(erect?imgH:-imgH)}`);
- $('lensImageLabel').setAttribute('x',Math.min(500,Math.max(20,imageX-18)));
- $('lensImageLabel').setAttribute('y',erect?Math.max(42,170-imgH-10):Math.min(275,170+imgH+20));
- const f1=type==='convex'?300-fm*4:300+fm*4,f2=type==='convex'?300+fm*4:300-fm*4;
- [['lensF1',f1],['lensF2',f2]].forEach(([id,x])=>{$(id).setAttribute('x1',x);$(id).setAttribute('x2',x);});
- $('lensF1Label').setAttribute('x',f1-9);$('lensF2Label').setAttribute('x',f2-9);
- $('lensExplanation').textContent=type==='concave'
- ?'A concave lens always forms a virtual, erect and diminished image on the same side as the real object, between O and F.'
- :Math.abs(d-2*fm)<.6
- ?'The object is at 2F₁. The image forms at 2F₂, real, inverted and the same size.'
- :d>2*fm
- ?'The object is beyond 2F₁. The image forms between F₂ and 2F₂; it is real, inverted and diminished.'
- :d>fm
- ?'The object is between F₁ and 2F₁. The image forms beyond 2F₂; it is real, inverted and enlarged.'
- :Math.abs(d-fm)<.6
- ?'The object is at F₁. Emergent rays are parallel and the image is at infinity.'
- :'The object is inside F₁. The image is virtual, erect and enlarged on the object side.';
- document.querySelectorAll('[data-lens-preset]').forEach(b=>b.classList.toggle('active',b.dataset.lensPreset===(type==='concave'?'concave':d>2*fm?'beyond-2f':Math.abs(d-2*fm)<.6?'at-2f':d>fm?'between-f-2f':'inside-f')));
+// Optical instruments magnifying-power calculator
+const instrument=$('instrumentType'),fo=$('objectiveF'),fe=$('eyepieceF'),tube=$('tubeLength');
+function updateOptical(){
+ const type=instrument.value,a=Number(fo.value),b=Number(fe.value),L=Number(tube.value),D=25;
+ $('instrumentTypeOut').textContent=type==='telescope'?'Astronomical telescope':type==='simple'?'Simple microscope':'Compound microscope';
+ $('objectiveFOut').textContent=a+' cm';$('eyepieceFOut').textContent=b+' cm';$('tubeLengthOut').textContent=L+' cm';
+ $('eyepieceControl').style.display=type==='simple'?'none':'block';
+ $('tubeControl').style.display=type==='telescope'?'none':'block';
+ let M,normalTube,condition,principle,explain;
+ if(type==='simple'){M=1+D/a;normalTube='Single lens';condition='Virtual image at near point';principle='Simple magnifier';explain='Near-point simple microscope: M = 1 + D/f = 1 + 25/'+a+' = '+M.toFixed(2)+'.';}
+ else if(type==='telescope'){M=a/b;normalTube=(a+b).toFixed(1)+' cm';condition='Final image at infinity';principle='Angular magnification';explain='Telescope normal adjustment: M = f objective / f eyepiece = '+a+'/'+b+' = '+M.toFixed(2)+'. Tube length = f objective + f eyepiece = '+normalTube+'.';}
+ else {M=(L/a)*(D/b);normalTube=L+' cm (selected)';condition='Final image near point (approx.)';principle='Objective × eyepiece magnification';explain='Approximate compound microscope model: M ≈ (L/f objective)(D/f eyepiece) = ('+L+'/'+a+') × (25/'+b+') = '+M.toFixed(2)+'.';}
+ $('opticalMagnification').textContent=M.toFixed(2)+'×';$('opticalTube').textContent=normalTube;$('opticalCondition').textContent=condition;$('opticalPrinciple').textContent=principle;$('opticalExplanation').textContent=explain;
 }
-[lType,lObject,lFocal].forEach(el=>el.addEventListener('input',updateLens));
-document.querySelectorAll('[data-lens-preset]').forEach(btn=>btn.addEventListener('click',()=>{
- const p=btn.dataset.lensPreset;
- if(p==='beyond-2f'){lType.value='convex';lFocal.value=15;lObject.value=50;}
- if(p==='at-2f'){lType.value='convex';lFocal.value=15;lObject.value=30;}
- if(p==='between-f-2f'){lType.value='convex';lFocal.value=15;lObject.value=22;}
- if(p==='inside-f'){lType.value='convex';lFocal.value=15;lObject.value=10;}
- if(p==='concave'){lType.value='concave';lFocal.value=15;lObject.value=30;}
- updateLens();
+[instrument,fo,fe,tube].forEach(el=>el.addEventListener('input',updateOptical));
+document.querySelectorAll('[data-optical-preset]').forEach(btn=>btn.addEventListener('click',()=>{
+ const p=btn.dataset.opticalPreset;instrument.value=p;
+ if(p==='telescope'){fo.value=100;fe.value=5;tube.value=20;}
+ if(p==='simple'){fo.value=5;fe.value=5;tube.value=20;}
+ if(p==='compound'){fo.value=2;fe.value=5;tube.value=20;}
+ updateOptical();
 }));
-updateLens();
+updateOptical();
 
 function setTab(which){const learn=which==='learn',sim=which==='sim';$('learnPanel').style.display=learn?'block':'none';$('simPanel').style.display=sim?'block':'none';$('quiz').style.display=(!learn&&!sim)?'block':'none';[['learnTab',learn],['simTab',sim],['practiceTab',!learn&&!sim]].forEach(([id,on])=>{$(id).classList.toggle('active',on);$(id).setAttribute('aria-selected',String(on));});window.scrollTo({top:0,behavior:'smooth'});}
 $('learnTab').addEventListener('click',()=>setTab('learn'));$('simTab').addEventListener('click',()=>setTab('sim'));$('practiceTab').addEventListener('click',()=>setTab('practice'));$('learnPanel').style.display='block';$('simPanel').style.display='none';render();

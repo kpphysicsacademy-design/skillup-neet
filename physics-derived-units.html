@@ -1,133 +1,92 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Derived Units quiz">
-<title>SkillUp | Derived Units — Easy Quiz</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn SI derived units, their base-unit expressions and dimensional formulae with an interactive explorer and 30 explained questions.">
+<title>SkillUp Physics | Derived Units — Learn &amp; 30 MCQs</title>
 <style>
-:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
-.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
-main{max-width:720px;margin:auto;padding:18px 13px 48px}
-.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
-.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
-.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
-.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
-.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
-.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
-.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
-.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
-.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
-.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Mobile header refinement: keep branding, XP and streak on one balanced row */
-.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
-.back{flex:0 0 42px;width:42px;height:42px}
-.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
-.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
-.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
-.xp{margin-left:0;padding:9px 11px;font-size:13px}
-.streak{padding:9px 11px;font-size:12px}
-@media(max-width:480px){
-  .nav{gap:7px;padding:9px 10px;min-height:68px}
-  .back{flex-basis:40px;width:40px;height:40px}
-  .brand{font-size:17px}
-  .brand small{font-size:8px;letter-spacing:.55px}
-  .xp{padding:8px 9px;font-size:12px}
-  .streak{padding:8px 9px;font-size:11px;max-width:none}
-}
-@media(max-width:360px){
-  .nav{gap:5px;padding-inline:7px}
-  .back{flex-basis:36px;width:36px;height:36px}
-  .brand{font-size:15px}
-  .brand small{font-size:7px;letter-spacing:.3px}
-  .xp{padding:7px;font-size:11px}
-  .streak{padding:7px;font-size:10px}
-}
-
+:root{--green:#58cc02;--gd:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}*{box-sizing:border-box}html,body{width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:720px;margin:auto;min-height:68px;padding:9px 14px;display:flex;align-items:center;gap:10px}.back{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}.brand{flex:1;min-width:0;font-weight:950;color:#174a78;font-size:clamp(16px,4.5vw,20px)}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}.xp,.streak{border-radius:99px;padding:8px 10px;font-weight:900;font-size:12px;white-space:nowrap}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+main{max-width:720px;margin:auto;padding:16px 13px 42px}.hero,.learn-card,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}h1{margin:0 0 7px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:14px;line-height:1.55;margin:0}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px;background:#eaf3fb;border-radius:15px;margin:0 0 14px}.tab{border:0;border-radius:11px;padding:12px;font-weight:900;color:#42617a;background:transparent;cursor:pointer}.tab.active{background:#fff;color:#174a78;box-shadow:0 2px 5px #d5e3ef}
+.learn-card h2{margin:0 0 9px;color:#174a78;font-size:19px}.learn-card h3{font-size:15px;color:#245b78;margin:13px 0 6px}.learn-card p,.learn-card li{font-size:14px;line-height:1.65;color:#40566b}.learn-card ul{padding-left:21px}.learn-card li{margin:5px 0}.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;text-align:center;font-weight:900;color:#245b12;font-size:18px;margin:10px 0}.tip{background:#eef8ff;border-left:4px solid var(--blue);padding:11px 13px;border-radius:9px;font-size:13px;line-height:1.55;color:#285878;margin-top:10px}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:.4px}.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:56px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.4;cursor:pointer}.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5;font-weight:650}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--gd)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:300px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--gd)}.review{padding:12px;margin:10px 0;border:2px solid var(--line);border-radius:14px;background:#fff;text-align:left}.review p{margin:6px 0;line-height:1.45}.review .your{color:#a12b30}.review .right{color:#245b12}.foot{text-align:center;color:#8291a0;font-size:12px;margin-top:20px}button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}@media(max-width:480px){main{padding:12px 10px 34px}.hero,.learn-card,.quiz,.finish{padding:15px;border-radius:18px}.nav{gap:6px;padding-inline:9px}.xp,.streak{font-size:10px;padding:7px}.brand{font-size:16px}.option{font-size:14px;padding:11px}.question{font-size:21px}}/* Interactive spectrum simulator */
+.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+.simulator{padding:18px}
+.sim-wavebox{margin:14px 0;padding:12px;border:1px solid #dcebd2;border-radius:16px;background:#f7fbf3;overflow:hidden}
+.sim-wavehead{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#285b36}
+.sim-live{font-size:10px;letter-spacing:.7px;font-weight:900;padding:5px 8px;border-radius:99px;background:#e7f8dc;color:#397b22}
+#simWave{width:100%;height:auto;display:block}
+.sim-wavelegend,.sim-range{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#65745f}
+.sim-control{margin:16px 0}
+.sim-controltop{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:850;color:#334b3a}
+.sim-controltop output{color:#1e6d9a;text-align:right}
+.sim-slider{width:100%;accent-color:#58cc02;margin:17px 0 4px;cursor:pointer}
+.sim-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.sim-presets button{border:1px solid #d6ddce;border-bottom-width:3px;border-radius:10px;padding:8px 10px;background:#fff;color:#344638;font-weight:800;font-size:12px}
+.sim-presets button.active{background:#e8ffdc;border-color:#58cc02;color:#245b12}
+.sim-readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.sim-reading{min-width:0;padding:12px;border-radius:13px;background:#f4f9ff;border:1px solid #dce6ef}
+.sim-reading span{display:block;font-size:11px;color:#64748b;font-weight:750;margin-bottom:6px}
+.sim-reading strong{display:block;font-size:clamp(14px,3.8vw,18px);color:#174a78;overflow-wrap:anywhere}
+.sim-explain{padding:12px 14px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;color:#315b24;font-size:13px;line-height:1.55}
+.sim-note{font-size:11px;line-height:1.5;color:#75816f;margin:12px 0 0}
+@media(max-width:420px){.simulator{padding:14px}.sim-wavebox{padding:8px}.sim-readouts{gap:7px}.sim-reading{padding:10px}.sim-presets button{padding:7px 8px}}
+/* Visual learning diagrams */
+.visual-learning{width:100%;margin:12px 0 14px;padding:10px;background:#f7fbf3;border:1px solid #dcebd2;border-radius:16px;overflow:hidden}
+.visual-learning svg{display:block;width:100%;height:auto;max-width:100%}
+.visual-learning figcaption{margin-top:7px;text-align:center;color:#65745f;font-size:12px;line-height:1.4}
+.visual-learning .diagram-label{font:700 12px system-ui,sans-serif;fill:#344638}
+.visual-learning .diagram-small{font:600 10px system-ui,sans-serif;fill:#536453}
+@media(max-width:420px){.visual-learning{padding:7px;border-radius:13px}.visual-learning figcaption{font-size:11px}}
+/* Mobile alignment and long-equation wrapping */
+main{display:block;width:100%!important;max-width:720px!important;margin-inline:auto!important;padding-inline:clamp(10px,3.5vw,18px)!important;min-width:0!important}.learn-card{width:100%;min-width:0;overflow:hidden}.learn-card p,.learn-card li{overflow-wrap:anywhere;word-break:normal}.formula{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:normal;overflow-wrap:anywhere;padding-inline:clamp(10px,3vw,16px)}.formula mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}.learn-card,.hero,.quiz{min-width:0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body>
-<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
-<main>
-<section class="hero"><h1>🧮 Derived Units</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
-<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
-<div id="finishSlot"></div>
-</main>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head>
+<body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak">🔥 <span id="streak">0</span> streak</div></div></header>
+<main><section class="hero"><h1>🧩 Derived Units</h1><p class="muted">Build derived SI units from base units, understand dimensional formulae and practise key physics relationships.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<div class="tabs" role="tablist" aria-label="Lesson, simulator and practice"><button class="tab active" id="learnTab" role="tab" aria-selected="true">📘 Learn</button><button class="tab" id="simTab" role="tab" aria-selected="false">🔬 Simulator</button><button class="tab" id="practiceTab" role="tab" aria-selected="false">🧠 Practice</button></div>
+<section id="learnPanel">
+<article class="learn-card"><h2>1. Meaning of derived units</h2><p>A derived unit is obtained by combining SI base units through multiplication, division or powers. It measures quantities such as area, speed, force or energy.</p><div class="formula">Derived unit = product of powers of base units</div></article>
+<article class="learn-card"><h2>2. Area and volume</h2><p>Area is the product of two lengths; volume is the product of three lengths.</p><ul><li>Area: square metre (m²) = m × m</li><li>Volume: cubic metre (m³) = m × m × m</li></ul><div class="tip">Dimensions: L² for area and L³ for volume.</div></article>
+<article class="learn-card"><h2>3. Velocity and acceleration</h2><p>Velocity is displacement per unit time. Acceleration is the rate of change of velocity.</p><ul><li>Velocity: m s⁻¹; [LT⁻¹]</li><li>Acceleration: m s⁻²; [LT⁻²]</li></ul></article>
+<article class="learn-card"><h2>4. Force and momentum</h2><p>Newton’s second law gives force as mass multiplied by acceleration. Momentum is mass multiplied by velocity.</p><ul><li>Force: newton (N) = kg m s⁻²; [MLT⁻²]</li><li>Momentum: kg m s⁻¹; [MLT⁻¹]</li><li>Impulse: N s = kg m s⁻¹</li></ul></article>
+<article class="learn-card"><h2>5. Work, energy and power</h2><ul><li>Work/energy: joule (J) = N m = kg m² s⁻²</li><li>Power: watt (W) = J s⁻¹ = kg m² s⁻³</li></ul><p>Work and energy have the same dimensions; power is the rate of energy transfer.</p></article>
+<article class="learn-card"><h2>6. Pressure and density</h2><ul><li>Pressure = force/area; pascal (Pa) = N m⁻² = kg m⁻¹ s⁻²</li><li>Density = mass/volume; kg m⁻³</li></ul><div class="tip">One pascal is one newton per square metre.</div></article>
+<article class="learn-card"><h2>7. Electrical and other derived units</h2><ul><li>Charge: coulomb (C) = A s</li><li>Potential difference: volt (V) = kg m² s⁻³ A⁻¹</li><li>Resistance: ohm (Ω) = kg m² s⁻³ A⁻²</li><li>Frequency: hertz (Hz) = s⁻¹</li></ul></article>
+<article class="learn-card"><h2>8. Named units and dimensional checking</h2><p>Named derived SI units can always be expanded into base units. Dimensional analysis helps check equations, but cannot determine dimensionless numerical constants.</p><div class="formula">1 J = 1 N m = 1 kg m² s⁻²</div></article></section>
+<section id="simPanel" class="learn-card simulator" style="display:none" aria-labelledby="derivedLabTitle"><h2 id="derivedLabTitle">🧩 Derived Unit Explorer</h2><p class="muted">Choose a physical quantity to reveal its named SI unit, base-unit expression and dimensional formula. Change the value to see the quantity expressed with its unit.</p><div class="sim-control"><label for="derivedQuantity">Derived quantity</label><select id="derivedQuantity" class="sim-slider" style="height:46px;width:100%"><option value="area">Area</option><option value="volume">Volume</option><option value="velocity">Velocity</option><option value="acceleration">Acceleration</option><option value="force">Force</option><option value="momentum">Momentum</option><option value="pressure">Pressure</option><option value="density">Density</option><option value="work">Work / Energy</option><option value="power">Power</option><option value="charge">Electric charge</option><option value="voltage">Potential difference</option><option value="resistance">Resistance</option><option value="frequency">Frequency</option></select></div><div class="sim-control"><label for="derivedValue">Numerical value</label><input id="derivedValue" type="number" step="any" value="1" class="sim-slider" style="height:46px;padding:8px;width:100%"></div><div class="sim-readouts"><div class="sim-reading"><span>Quantity</span><strong id="derivedName">Area</strong></div><div class="sim-reading"><span>SI unit</span><strong id="derivedUnit">m²</strong></div><div class="sim-reading"><span>In base units</span><strong id="derivedBase">m × m</strong></div><div class="sim-reading"><span>Dimensions</span><strong id="derivedDimension">[L²]</strong></div><div class="sim-reading"><span>Value with unit</span><strong id="derivedResult">1 m²</strong></div></div><div class="sim-explain" id="derivedExplanation" aria-live="polite"></div><div class="sim-presets"><button type="button" data-derived-preset="force">Force</button><button type="button" data-derived-preset="pressure">Pressure</button><button type="button" data-derived-preset="work">Energy</button><button type="button" data-derived-preset="power">Power</button><button type="button" data-derived-preset="resistance">Resistance</button></div></section>
+<section class="quiz" id="quiz" style="display:none"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section><div id="finishSlot"></div><div class="foot">SkillUp Physics • Learn a concept, practise, and review mistakes at the end.</div></main>
 <script>
-(function(){
-'use strict';
-const questions = [{"q":"Which statement best describes a derived unit?","o":["A unit defined independently","A unit formed from SI base units","A unit used only for length","A unit without a symbol"],"a":1,"e":"Derived units are combinations of base units."},{"q":"Which is a derived SI unit?","o":["kilogram","second","newton","kelvin"],"a":2,"e":"Newton is derived from kg, m and s."},{"q":"The SI unit of area is:","o":["m","m²","m³","m/s"],"a":1,"e":"Area is length × length, so its unit is m²."},{"q":"The SI unit of volume is:","o":["m²","m³","kg/m³","N"],"a":1,"e":"Volume is length cubed, measured in cubic metres."},{"q":"The SI unit of speed is:","o":["m/s","m/s²","kg m/s","N/m²"],"a":0,"e":"Speed is distance divided by time."},{"q":"The SI unit of acceleration is:","o":["m/s","m/s²","m²/s","kg m/s"],"a":1,"e":"Acceleration is change in velocity per unit time."},{"q":"One newton is equivalent to:","o":["kg m s⁻¹","kg m s⁻²","kg m² s⁻²","kg m⁻¹ s⁻²"],"a":1,"e":"From F = ma, N = kg·m·s⁻²."},{"q":"One joule is equivalent to:","o":["N/m","N m","N/m²","kg m s⁻²"],"a":1,"e":"Work = force × displacement, so J = N·m."},{"q":"One watt is equivalent to:","o":["J s","J/s","N/s","kg/s"],"a":1,"e":"Power is energy transferred per second: W = J/s."},{"q":"The SI unit of pressure is:","o":["newton","joule","pascal","watt"],"a":2,"e":"Pressure is force per area; 1 Pa = 1 N/m²."},{"q":"One pascal equals:","o":["N m","N/m","N/m²","J/s"],"a":2,"e":"Pressure = force divided by area."},{"q":"The SI unit of density is:","o":["kg m⁻³","kg m⁻²","kg m s⁻¹","m³ kg"],"a":0,"e":"Density is mass per unit volume."},{"q":"The SI unit of momentum is:","o":["kg m/s","kg m/s²","kg m²/s²","N/m"],"a":0,"e":"Momentum = mass × velocity."},{"q":"The SI unit of impulse is:","o":["N s","N/s","J/s","Pa s⁻¹"],"a":0,"e":"Impulse equals force multiplied by time and has units N·s."},{"q":"Which unit is equivalent to a joule?","o":["kg m² s⁻²","kg m s⁻²","kg m⁻¹ s⁻²","kg m² s⁻³"],"a":0,"e":"J = N·m = kg·m²·s⁻²."},{"q":"Which unit is equivalent to a watt?","o":["kg m² s⁻²","kg m² s⁻³","kg m s⁻²","kg m⁻¹ s⁻²"],"a":1,"e":"W = J/s = kg·m²·s⁻³."},{"q":"Which unit is equivalent to a pascal?","o":["kg m s⁻²","kg m⁻¹ s⁻²","kg m² s⁻²","kg m² s⁻³"],"a":1,"e":"Pa = N/m² = kg·m⁻¹·s⁻²."},{"q":"The unit of frequency is:","o":["second","hertz","metre","radian"],"a":1,"e":"Frequency is measured in hertz (Hz), equivalent to s⁻¹."},{"q":"One hertz is equal to:","o":["one second","one cycle per second","one metre per second","one joule per second"],"a":1,"e":"1 Hz = 1 s⁻¹."},{"q":"The SI unit of electric charge is:","o":["ampere","volt","coulomb","ohm"],"a":2,"e":"Charge = current × time, so C = A·s."},{"q":"The SI unit of potential difference is:","o":["coulomb","volt","watt","tesla"],"a":1,"e":"Potential difference is measured in volts (V)."},{"q":"The SI unit of resistance is:","o":["ohm","ampere","coulomb","weber"],"a":0,"e":"Electrical resistance is measured in ohms (Ω)."},{"q":"Which expression gives the unit of electric charge?","o":["A/s","A·s","V·s⁻¹","J·s"],"a":1,"e":"Charge Q = I × t, giving ampere-second."},{"q":"The SI unit of work and energy is the same because:","o":["Both are measured in metres","Work is a form of energy transfer","Both are base quantities","Energy has no unit"],"a":1,"e":"Work is energy transferred by a force."},{"q":"A force of 2 N acts through 3 m. Work done is:","o":["0.67 J","5 J","6 J","9 J"],"a":2,"e":"Work = force × displacement = 2 × 3 = 6 J."},{"q":"A device transfers 100 J in 5 s. Its power is:","o":["20 W","50 W","95 W","500 W"],"a":0,"e":"Power = energy/time = 100/5 = 20 W."},{"q":"A 2 kg object occupies 0.5 m³. Its density is:","o":["1 kg/m³","2 kg/m³","4 kg/m³","10 kg/m³"],"a":2,"e":"Density = mass/volume = 2/0.5 = 4 kg/m³."},{"q":"Which derived unit has the dimensions M L T⁻²?","o":["joule","newton","pascal","watt"],"a":1,"e":"Force has dimensions mass × acceleration: MLT⁻²."},{"q":"Which derived unit has dimensions M L² T⁻²?","o":["newton","pascal","joule","watt"],"a":2,"e":"Energy/work has dimensions M L² T⁻²."},{"q":"Which statement is correct?","o":["Every named SI unit is a base unit","Derived units can be expressed using base units","Derived units have no dimensions","A unit symbol must always be plural"],"a":1,"e":"Derived units are constructed from base units; many have special names."}]
-let index=0,score=0,streak=0,chosen=null,locked=false;
+(function(){'use strict';
+const questionsRaw=[\n["A derived unit is formed by:",["Choosing a new independent unit","Combining SI base units","Using only metric prefixes","Removing dimensions"],1,"Derived units combine powers of SI base units."],\n["The SI unit of area is:",["m","m²","m³","m s⁻¹"],1,"Area = length × length; unit m²."],\n["The SI unit of volume is:",["m²","m³","kg m⁻³","m s⁻¹"],1,"Volume is length cubed; unit m³."],\n["The SI unit of velocity is:",["m s⁻¹","m s⁻²","kg m s⁻¹","N"],0,"Velocity is displacement divided by time."],\n["The dimensional formula of acceleration is:",["[LT⁻¹]","[LT⁻²]","[MLT⁻²]","[ML²T⁻²]"],1,"Acceleration = velocity/time = LT⁻²."],\n["One newton is equal to:",["kg m s⁻¹","kg m s⁻²","kg m² s⁻²","kg m⁻¹ s⁻²"],1,"From F = ma, N = kg m s⁻²."],\n["The dimensional formula of force is:",["[MLT⁻²]","[ML²T⁻²]","[ML⁻¹T⁻²]","[MLT⁻¹]"],0,"Force = mass × acceleration = MLT⁻²."],\n["The SI unit of momentum is:",["N m","kg m s⁻¹","kg m s⁻²","J s⁻¹"],1,"Momentum = mass × velocity."],\n["Impulse has the same unit as:",["Pressure","Momentum","Power","Energy"],1,"Impulse = force × time = change in momentum."],\n["One joule is equivalent to:",["kg m s⁻²","kg m² s⁻²","kg m² s⁻³","kg m⁻¹ s⁻²"],1,"J = N m = kg m² s⁻²."],\n["The dimensional formula of work is:",["[MLT⁻²]","[ML²T⁻²]","[ML²T⁻³]","[ML⁻¹T⁻²]"],1,"Work = force × displacement = ML²T⁻²."],\n["The SI unit of power is:",["joule","newton","watt","pascal"],2,"Power is measured in watts."],\n["One watt is equal to:",["J s","J/s","N m²","kg m s⁻¹"],1,"Power = energy/time = J s⁻¹."],\n["The dimensional formula of power is:",["[ML²T⁻²]","[ML²T⁻³]","[MLT⁻²]","[ML⁻¹T⁻²]"],1,"Power = work/time = ML²T⁻³."],\n["The SI unit of pressure is:",["newton","pascal","joule","watt"],1,"Pressure is force per unit area, measured in pascals."],\n["One pascal is equal to:",["N m","N/m","N/m²","N s"],2,"Pa = N m⁻² = kg m⁻¹ s⁻²."],\n["The dimensional formula of pressure is:",["[MLT⁻²]","[ML⁻¹T⁻²]","[ML²T⁻²]","[T⁻¹]"],1,"Pressure = force/area = ML⁻¹T⁻²."],\n["The SI unit of density is:",["kg m⁻²","kg m⁻³","kg m s⁻¹","kg m²"],1,"Density = mass/volume."],\n["The dimensional formula of density is:",["[ML⁻³]","[ML³]","[M⁻¹L³]","[ML⁻²]"],0,"Density = M/L³ = ML⁻³."],\n["The SI unit of frequency is:",["second","hertz","radian","metre"],1,"Frequency is measured in hertz (Hz)."],\n["One hertz is equivalent to:",["s","s⁻¹","m s⁻¹","kg s⁻¹"],1,"Frequency is cycles per second."],\n["The SI unit of electric charge is:",["ampere","volt","coulomb","ohm"],2,"Charge Q = current × time; C = A s."],\n["The base-unit expression for coulomb is:",["A/s","A s","V/s","J s"],1,"One coulomb is one ampere-second."],\n["The SI unit of potential difference is:",["ohm","volt","tesla","coulomb"],1,"Potential difference is measured in volts."],\n["The base-unit expression for volt is:",["kg m² s⁻³ A⁻¹","kg m s⁻²","kg m² s⁻²","A s"],0,"V = J/C = kg m² s⁻³ A⁻¹."],\n["The SI unit of resistance is:",["siemens","ohm","weber","farad"],1,"Resistance is measured in ohms."],\n["The base-unit expression for ohm is:",["kg m² s⁻³ A⁻²","kg m² s⁻³ A⁻¹","kg m s⁻²","A s"],0,"Ω = V/A = kg m² s⁻³ A⁻²."],\n["Which pair has the same dimensions?",["Work and power","Work and torque","Force and pressure","Momentum and energy"],1,"Work and torque both have dimensions ML²T⁻², though they are different quantities."],\n["A force of 4 N moves an object 3 m in its direction. Work is:",["7 J","12 J","1.33 J","24 J"],1,"W = F s = 4 × 3 = 12 J."],\n["A 60 J energy transfer occurs in 3 s. Power is:",["20 W","57 W","63 W","180 W"],0,"P = E/t = 60/3 = 20 W."]\n];
+const questions=questionsRaw.map(([q,o,a,e],i)=>({id:i+1,q,o,a,e}));
+const original=questions.slice();let index=0,score=0,streak=0,chosen=null,locked=false,wrong=[];
 const $=id=>document.getElementById(id);
-function render(){
- chosen=null;locked=false;
- const item=questions[index];
- $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
- $('percent').textContent=Math.round(index/questions.length*100)+'%';
- $('fill').style.width=(index/questions.length*100)+'%';
- $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
- $('feedback').className='feedback';$('feedback').textContent='';
- $('check').style.display='block';$('check').disabled=true;
- $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
- $('options').replaceChildren();
- item.o.forEach((text,j)=>{
-   const b=document.createElement('button');b.type='button';b.className='option';
-   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
-   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
-   $('options').appendChild(b);
- });
-}
-$('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
- buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
- const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
- $('check').style.display='none';$('continue').className='btn continue show';
-});
-$('continue').addEventListener('click',()=>{
- if(!locked)return;index++;
- if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
- $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
- const pct=Math.round(score/questions.length*100);
- const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
- $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
-});
-render();
+function render(){chosen=null;locked=false;const item=questions[index];$('progressText').textContent='Question '+(index+1)+' of '+questions.length;$('percent').textContent=Math.round(index/questions.length*100)+'%';$('fill').style.width=(index/questions.length*100)+'%';$('qmeta').textContent='QUESTION '+(index+1);$('question').textContent=item.q;$('feedback').className='feedback';$('feedback').textContent='';$('check').style.display='block';$('check').disabled=true;$('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';$('options').replaceChildren();item.o.forEach((txt,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const l=document.createElement('span');l.className='letter';l.textContent=String.fromCharCode(65+j);const t=document.createElement('span');t.textContent=txt;b.append(l,t);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});}
+$('check').addEventListener('click',()=>{if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});const f=$('feedback');if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrong.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}$('check').style.display='none';$('continue').className='btn continue show';});
+$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}$('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';card.innerHTML='<div class="trophy">🏆</div><h2>Unit Systems Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+score*10+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrong.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrong.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';const review=card.querySelector('#wrongReview');if(wrong.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrong.forEach((w,n)=>{const el=document.createElement('article');el.className='review';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const y=document.createElement('p');y.className='your';y.textContent='Your answer: '+w.chosen;const a=document.createElement('p');a.className='right';a.textContent='Correct answer: '+w.answer;const e=document.createElement('p');e.className='muted';e.textContent=w.explanation;el.append(q,y,a,e);review.appendChild(el);});}else review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';$('finishSlot').replaceChildren(card);
+function reset(onlyWrong){if(onlyWrong&&wrong.length){const retry=wrong.map(w=>original.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...retry);}else questions.splice(0,questions.length,...original);index=0;score=0;streak=0;wrong=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});} $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));});
+// Interactive derived-unit reference
+const derivedData={
+area:["Area","m²","m × m","[L²]","Area is length multiplied by width."],
+volume:["Volume","m³","m × m × m","[L³]","Volume is the product of three lengths."],
+velocity:["Velocity","m s⁻¹","m / s","[LT⁻¹]","Velocity is displacement per unit time."],
+acceleration:["Acceleration","m s⁻²","m / s²","[LT⁻²]","Acceleration is change in velocity per unit time."],
+force:["Force","newton (N)","kg × m / s²","[MLT⁻²]","Newton’s second law: force = mass × acceleration."],
+momentum:["Momentum","kg m s⁻¹","kg × m / s","[MLT⁻¹]","Momentum is mass multiplied by velocity."],
+pressure:["Pressure","pascal (Pa)","kg / (m × s²)","[ML⁻¹T⁻²]","Pressure is force divided by area."],
+density:["Density","kg m⁻³","kg / m³","[ML⁻³]","Density is mass divided by volume."],
+work:["Work / Energy","joule (J)","kg × m² / s²","[ML²T⁻²]","Work is force multiplied by displacement."],
+power:["Power","watt (W)","kg × m² / s³","[ML²T⁻³]","Power is work done per unit time."],
+charge:["Electric charge","coulomb (C)","A × s","[IT]","Electric charge equals current multiplied by time."],
+voltage:["Potential difference","volt (V)","kg × m² / (s³ × A)","[ML²T⁻³I⁻¹]","Potential difference is energy transferred per unit charge."],
+resistance:["Resistance","ohm (Ω)","kg × m² / (s³ × A²)","[ML²T⁻³I⁻²]","Resistance is potential difference divided by current."],
+frequency:["Frequency","hertz (Hz)","1 / s","[T⁻¹]","Frequency is the number of cycles per second."]};
+function updateDerived(){const d=derivedData[$('derivedQuantity').value],v=Number($('derivedValue').value);$('derivedName').textContent=d[0];$('derivedUnit').textContent=d[1];$('derivedBase').textContent=d[2];$('derivedDimension').textContent=d[3];$('derivedResult').textContent=(Number.isFinite(v)?v.toLocaleString('en-US',{maximumSignificantDigits:7}):'—')+' '+d[1];$('derivedExplanation').textContent=d[4]+' Dimensional formula: '+d[3]+'.';}
+$('derivedQuantity').addEventListener('change',updateDerived);$('derivedValue').addEventListener('input',updateDerived);document.querySelectorAll('[data-derived-preset]').forEach(b=>b.addEventListener('click',()=>{$('derivedQuantity').value=b.dataset.derivedPreset;$('derivedValue').value=1;updateDerived();}));updateDerived();
+function setTab(which){const learn=which==='learn',sim=which==='sim';$('learnPanel').style.display=learn?'block':'none';$('simPanel').style.display=sim?'block':'none';$('quiz').style.display=(!learn&&!sim)?'block':'none';[['learnTab',learn],['simTab',sim],['practiceTab',!learn&&!sim]].forEach(([id,on])=>{$(id).classList.toggle('active',on);$(id).setAttribute('aria-selected',String(on));});window.scrollTo({top:0,behavior:'smooth'});}
+$('learnTab').addEventListener('click',()=>setTab('learn'));$('simTab').addEventListener('click',()=>setTab('sim'));$('practiceTab').addEventListener('click',()=>setTab('practice'));$('learnPanel').style.display='block';$('simPanel').style.display='none';render();
 })();
 </script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="central-config.js"></script>
-<script src="central-auth.js"></script>
-<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-<script>
-/* This quiz intentionally has no floating audio controls. */
-(function(){
-  function removeQuizAudio(){
-    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
-  }
-  removeQuizAudio();
-  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
-</body>
-</html>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

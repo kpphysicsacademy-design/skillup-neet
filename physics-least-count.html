@@ -55,6 +55,27 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Learn + simulator additions */
+.learn-sim-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:6px;background:#eaf3fb;border-radius:15px;margin:0 0 14px}
+.learn-sim-tab{border:0;border-radius:11px;padding:12px 7px;font-weight:900;color:#42617a;background:transparent;cursor:pointer}
+.learn-sim-tab.active{background:#fff;color:#174a78;box-shadow:0 2px 5px #d5e3ef}
+.learn-panel,.sim-panel{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+.lesson{padding:14px;border:1px solid #dce8ef;border-radius:15px;margin:10px 0;background:#fff}
+.lesson h2{margin:0 0 7px;color:#174a78;font-size:18px}
+.lesson p,.lesson li{font-size:14px;line-height:1.6;color:#40566b}
+.lesson ul{padding-left:20px}
+.lesson .formula{padding:11px;border-radius:12px;background:#eef8ff;color:#174a78;font-weight:850;margin-top:9px;overflow-wrap:anywhere}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim-field{display:grid;gap:6px;margin:11px 0}
+.sim-field label{font-size:12px;font-weight:900;color:#52677b}
+.sim-field input,.sim-field select{width:100%;min-width:0;padding:12px;border:2px solid #dce6ef;border-radius:12px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:14px;padding:15px;border-radius:15px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{display:block;font-size:28px;color:#276d0a}
+.sim-result small{color:#4d6c42}
+.sim-note{font-size:13px;line-height:1.55;color:#64748b;margin-top:10px}
+@media(max-width:480px){.learn-panel,.sim-panel{padding:14px;border-radius:18px}.sim-grid{grid-template-columns:1fr}.learn-sim-tab{font-size:12px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,6 +83,51 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Least Count</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<div class="learn-sim-tabs" role="tablist" aria-label="Learning sections">
+<button class="learn-sim-tab active" id="learnTab" type="button" role="tab" aria-selected="true">📘 Learn</button>
+<button class="learn-sim-tab" id="simTab" type="button" role="tab" aria-selected="false">🧪 Simulator</button>
+<button class="learn-sim-tab" id="practiceTab" type="button" role="tab" aria-selected="false">🎯 Practice</button>
+</div>
+<section class="learn-panel" id="learnPanel" role="tabpanel" aria-labelledby="learnTab">
+<h2 style="margin:0 0 8px;color:#174a78">📘 Learn: Least Count</h2>
+<p class="muted">Build the concept step by step before using the instruments.</p>
+<article class="lesson"><h2>1. What is least count?</h2><p>Least count (LC) is the smallest value that an instrument can measure or resolve directly. It is equal to the value of the smallest scale division for a simple graduated instrument.</p><div class="formula">Least count = value of one smallest scale division</div></article>
+<article class="lesson"><h2>2. Main scale and vernier scale</h2><p>Vernier calipers use a main scale and a sliding vernier scale. In a standard direct vernier, if n vernier divisions equal (n − 1) main-scale divisions, the least count is:</p><div class="formula">LC = 1 MSD − 1 VSD = 1 MSD / n</div><p>Example: 10 VSD = 9 MSD and 1 MSD = 1 mm, so LC = 1/10 = 0.1 mm.</p></article>
+<article class="lesson"><h2>3. Reading a vernier calipers</h2><p>First note the main-scale reading just to the left of the vernier zero. Then find the vernier division that coincides with a main-scale mark.</p><div class="formula">Observed reading = MSR + (coinciding VSD × LC)</div><p>Example: MSR = 2.3 cm, 6th division coincides and LC = 0.01 cm. Reading = 2.3 + 6 × 0.01 = 2.36 cm.</p></article>
+<article class="lesson"><h2>4. Pitch of a screw gauge</h2><p>Pitch is the linear distance travelled by the screw in one complete rotation. It can be found by dividing the distance moved by the number of complete rotations.</p><div class="formula">Pitch = distance moved / number of rotations</div></article>
+<article class="lesson"><h2>5. Least count of a screw gauge</h2><p>The circular scale is divided into equal divisions. Divide the pitch by the total number of circular-scale divisions.</p><div class="formula">LC = Pitch / Number of circular-scale divisions</div><p>Example: pitch = 1 mm and 100 divisions, therefore LC = 0.01 mm.</p></article>
+<article class="lesson"><h2>6. Zero error and zero correction</h2><p>Close the instrument gently before measuring. If the zero marks do not coincide, the instrument has a zero error. Apply the zero correction with the opposite sign of the zero error.</p><div class="formula">Correct reading = Observed reading − Zero error</div><p>A positive zero error is subtracted; a negative zero error is added.</p></article>
+<article class="lesson"><h2>7. Resolution is not the same as accuracy</h2><p>A smaller least count allows finer readings, but it does not guarantee accuracy. Calibration, zero error, alignment, parallax and measurement technique also affect the result.</p></article>
+</section>
+<section class="sim-panel" id="simPanel" role="tabpanel" aria-labelledby="simTab" style="display:none">
+<h2 style="margin:0 0 8px;color:#174a78">🧪 Least Count Simulator</h2>
+<p class="muted">Choose an instrument and change its scale settings to see the least count update instantly.</p>
+<div class="sim-field"><label for="instrumentType">Instrument</label><select id="instrumentType"><option value="vernier">Vernier calipers</option><option value="screw">Screw gauge</option></select></div>
+<div id="vernierControls">
+<div class="sim-grid">
+<div class="sim-field"><label for="msd">One main-scale division (mm)</label><input id="msd" type="number" min="0.000001" step="any" value="1"></div>
+<div class="sim-field"><label for="vdiv">Number of vernier divisions (n)</label><input id="vdiv" type="number" min="1" step="1" value="10"></div>
+</div>
+<p class="sim-note">Standard direct vernier assumption: n vernier divisions = (n − 1) main-scale divisions.</p>
+<div class="sim-grid">
+<div class="sim-field"><label for="msr">Main-scale reading (mm)</label><input id="msr" type="number" step="any" value="23"></div>
+<div class="sim-field"><label for="coincidence">Coinciding vernier division</label><input id="coincidence" type="number" min="0" step="1" value="6"></div>
+</div>
+</div>
+<div id="screwControls" style="display:none">
+<div class="sim-grid">
+<div class="sim-field"><label for="pitch">Pitch (mm)</label><input id="pitch" type="number" min="0.000001" step="any" value="1"></div>
+<div class="sim-field"><label for="cdiv">Circular-scale divisions</label><input id="cdiv" type="number" min="1" step="1" value="100"></div>
+</div>
+<div class="sim-field"><label for="screwMSR">Main-scale reading (mm)</label><input id="screwMSR" type="number" step="any" value="5"></div>
+<div class="sim-field"><label for="circularReading">Circular-scale reading (division)</label><input id="circularReading" type="number" min="0" step="1" value="32"></div>
+</div>
+<div class="sim-result"><span class="field-label">Calculated least count</span><strong id="lcResult">0.1 mm</strong><small id="lcFormula">LC = 1 MSD / n = 1 / 10 mm</small></div>
+<div class="sim-result"><span class="field-label">Simulated observed reading</span><strong id="readingResult">23.6 mm</strong><small id="readingFormula">MSR + (coinciding division × LC)</small></div>
+<p class="sim-note" id="simValidation" aria-live="polite">Adjust the inputs to explore the instrument resolution.</p>
+</section>
+
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </main>
@@ -439,6 +505,39 @@ $('continue').addEventListener('click',()=>{
  card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
  $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
 });
+
+function setupLearnSimulator(){
+ const ids=['instrumentType','msd','vdiv','msr','coincidence','pitch','cdiv','screwMSR','circularReading'];
+ const el=id=>document.getElementById(id);
+ function calculate(){
+  const type=el('instrumentType').value;
+  el('vernierControls').style.display=type==='vernier'?'block':'none';
+  el('screwControls').style.display=type==='screw'?'block':'none';
+  let lc,reading,formula,readFormula;
+  if(type==='vernier'){
+   const msd=Number(el('msd').value),n=Number(el('vdiv').value),msr=Number(el('msr').value),co=Number(el('coincidence').value);
+   if(!(msd>0&&n>=1&&Number.isInteger(n)&&Number.isFinite(msr)&&co>=0&&Number.isInteger(co)&&co<n)){el('simValidation').textContent='Enter positive scale values and a coincidence division from 0 to n − 1.';el('lcResult').textContent='—';el('readingResult').textContent='—';return;}
+   lc=msd/n;reading=msr+co*lc;formula='LC = 1 MSD / n = '+msd+' / '+n+' mm';readFormula='Reading = '+msr+' + ('+co+' × '+lc.toPrecision(6)+') mm';
+  }else{
+   const pitch=Number(el('pitch').value),n=Number(el('cdiv').value),msr=Number(el('screwMSR').value),co=Number(el('circularReading').value);
+   if(!(pitch>0&&n>=1&&Number.isInteger(n)&&Number.isFinite(msr)&&co>=0&&Number.isInteger(co)&&co<n)){el('simValidation').textContent='Enter a positive pitch, a whole number of divisions and a circular reading from 0 to n − 1.';el('lcResult').textContent='—';el('readingResult').textContent='—';return;}
+   lc=pitch/n;reading=msr+co*lc;formula='LC = Pitch / divisions = '+pitch+' / '+n+' mm';readFormula='Reading = '+msr+' + ('+co+' × '+lc.toPrecision(6)+') mm';
+  }
+  el('lcResult').textContent=Number(lc.toPrecision(6))+' mm';el('lcFormula').textContent=formula;
+  el('readingResult').textContent=Number(reading.toPrecision(7))+' mm';el('readingFormula').textContent=readFormula;
+  el('simValidation').textContent='Valid setting. A smaller least count gives finer scale resolution; it does not by itself guarantee accuracy.';
+ }
+ ids.forEach(id=>el(id).addEventListener('input',calculate));calculate();
+ function tab(which){
+  const learn=which==='learn',sim=which==='sim';
+  el('learnPanel').style.display=learn?'block':'none';el('simPanel').style.display=sim?'block':'none';el('quiz').style.display=(!learn&&!sim)?'block':'none';
+  [['learnTab',learn],['simTab',sim],['practiceTab',!learn&&!sim]].forEach(([id,on])=>{el(id).classList.toggle('active',on);el(id).setAttribute('aria-selected',String(on));});
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ el('learnTab').addEventListener('click',()=>tab('learn'));el('simTab').addEventListener('click',()=>tab('sim'));el('practiceTab').addEventListener('click',()=>tab('practice'));
+}
+setupLearnSimulator();
+
 render();
 })();
 </script>

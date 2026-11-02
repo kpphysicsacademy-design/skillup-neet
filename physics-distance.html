@@ -73,7 +73,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .sim-stat{background:#efffe7;border:1px solid #ccefb9;border-radius:13px;padding:10px;text-align:center}
 .sim-stat strong{display:block;font-size:20px;color:#287d0a}.sim-stat span{font-size:11px;font-weight:850;color:#52734a}
 .sim-note{margin:10px 0 0;color:#53677b;font-size:13px;line-height:1.45}
-.practice-heading{margin:0 0 12px;color:#174a78;font-size:20px}
+.practice-heading{margin:0 0 12px;color:#174a78;font-size:20px}\n#learn,#simulator,#practice{scroll-margin-top:88px}\n.sim-visual{min-width:0}\n.sim-visual svg{max-width:100%;overflow:visible}
 @media(max-width:480px){.learn-panel,.sim-panel{padding:14px}.lesson-grid{grid-template-columns:1fr}.form-grid{gap:6px}.sim-field input{padding:9px;font-size:14px}.sim-results{gap:5px}.sim-stat{padding:8px 4px}.sim-stat strong{font-size:17px}}
 
 </style>
@@ -132,11 +132,11 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
  const $=id=>document.getElementById(id);
  const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/0+$/,'').replace(/\\.$/,'');
  function updateDistance(){
-  const vals=ids.map(id=>{const v=parseFloat($(id).value);return Number.isFinite(v)?v:0;});
+  const vals=ids.map(id=>{const raw=$(id).value.trim();if(raw==='')return 0;const v=Number(raw);return Number.isFinite(v)?v:0;});
   const positions=[0];vals.forEach(v=>positions.push(positions[positions.length-1]+v));
   const total=vals.reduce((s,v)=>s+Math.abs(v),0),final=positions[3];
   const min=Math.min(0,...positions),max=Math.max(0,...positions),span=Math.max(1,max-min);
-  const x=v=>45+(v-min)/span*550;
+  const x=v=>Math.max(45,Math.min(595,45+(v-min)/span*550));
   const ticks=$('distanceTicks'),path=$('distancePath');ticks.replaceChildren();path.replaceChildren();
   for(let i=0;i<=5;i++){const v=min+span*i/5,xx=x(v),line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',xx);line.setAttribute('x2',xx);line.setAttribute('y1','98');line.setAttribute('y2','112');line.setAttribute('stroke','#9bb0c2');ticks.append(line);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',xx);t.setAttribute('y','130');t.setAttribute('text-anchor','middle');t.setAttribute('font-size','11');t.setAttribute('fill','#53677b');t.textContent=fmt(v);ticks.append(t);}
   const colors=['#20a4e8','#ff9f43','#8b68dc'];

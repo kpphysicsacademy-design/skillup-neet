@@ -3,77 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Conservation of Momentum quiz">
-<title>SkillUp | Conservation of Momentum — Easy Quiz</title>
+<meta name="description" content="Learn impulse, explore the impulse-momentum theorem with an interactive simulator, and practise 30 physics questions on SkillUp Academy.">
+<title>SkillUp | Impulse — Learn, Simulate & Practice</title>
 <style>
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
-.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
-main{max-width:720px;margin:auto;padding:18px 13px 48px}
-.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.nav{max-width:720px;margin:auto;min-height:68px;padding:9px 12px;display:flex;align-items:center;gap:9px}
+.back{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{flex:1;min-width:0;font-weight:950;color:#174a78;font-size:18px}.brand small{display:block;font-size:9px;letter-spacing:.7px;color:var(--muted)}
+.xp,.streak{display:flex;align-items:center;gap:4px;white-space:nowrap;border-radius:99px;padding:8px 9px;font-weight:900;font-size:12px}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+main{max-width:720px;margin:auto;padding:12px 13px 48px}
+.topic-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 16px}
+.topic-tab{min-height:48px;border:2px solid #dce6ef;border-bottom-width:4px;border-radius:15px;background:#fff;color:#31516b;font-weight:900;font-size:14px;cursor:pointer}
+.topic-tab.active{background:#e8f7ff;border-color:var(--blue);color:#075985}.topic-panel[hidden]{display:none!important}
+.hero,.quiz,.finish,.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:18px;margin:0 0 14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
 .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
-.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
-.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
-.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.lesson-card h2,.sim-card h2{color:#174a78;margin:0 0 10px;font-size:19px}.lesson-card p,.lesson-card li{line-height:1.65}.lesson-card ul{padding-left:20px}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lesson-tile{background:#f2f9ff;border:1px solid #dcecf8;border-radius:14px;padding:13px;line-height:1.55}.lesson-tile b{display:block;color:#174a78;margin-bottom:5px}
+.lesson-equation{background:#f2f0ff;border:1px solid #ddd6fe;border-radius:14px;padding:15px;text-align:center;color:#5034a5;font-weight:900;font-size:clamp(17px,4vw,21px);margin:10px 0}
+.lesson-example{background:#efffe7;border:1px solid #c8f0b2;border-radius:14px;padding:14px;line-height:1.65}
+.sim-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sim-control{background:#f8fbff;border:1px solid var(--line);border-radius:13px;padding:12px}.sim-control label{display:flex;justify-content:space-between;gap:8px;font-weight:850;font-size:13px}.sim-control output{color:#17699a}.sim-control input{width:100%;accent-color:var(--blue);margin-top:10px}
+.sim-results{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sim-result{background:#f2f9ff;border:1px solid #dcecf8;border-radius:13px;padding:12px;text-align:center}.sim-result strong{display:block;font-size:clamp(18px,4vw,23px);color:#174a78}.sim-result span{font-size:11px;color:var(--muted);font-weight:750}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:.4px}.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:54px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.4;cursor:pointer}
 .letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
 .option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
-.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5;font-weight:650}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
 .actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
 .finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
-.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Mobile header refinement: keep branding, XP and streak on one balanced row */
-.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
-.back{flex:0 0 42px;width:42px;height:42px}
-.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
-.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
-.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
-.xp{margin-left:0;padding:9px 11px;font-size:13px}
-.streak{padding:9px 11px;font-size:12px}
-@media(max-width:480px){
-  .nav{gap:7px;padding:9px 10px;min-height:68px}
-  .back{flex-basis:40px;width:40px;height:40px}
-  .brand{font-size:17px}
-  .brand small{font-size:8px;letter-spacing:.55px}
-  .xp{padding:8px 9px;font-size:12px}
-  .streak{padding:8px 9px;font-size:11px;max-width:none}
-}
-@media(max-width:360px){
-  .nav{gap:5px;padding-inline:7px}
-  .back{flex-basis:36px;width:36px;height:36px}
-  .brand{font-size:15px}
-  .brand small{font-size:7px;letter-spacing:.3px}
-  .xp{padding:7px;font-size:11px}
-  .streak{padding:7px;font-size:10px}
-}
-
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+@media(max-width:480px){main{padding:10px 10px 34px}.hero,.quiz,.finish,.lesson-card,.sim-card{padding:15px;border-radius:17px}.topic-tabs{gap:5px}.topic-tab{font-size:12px;padding:7px 3px}.lesson-grid,.sim-controls{grid-template-columns:1fr}.option{font-size:14px;padding:11px}.brand{font-size:16px}.xp,.streak{font-size:10px;padding:7px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
-<section class="hero"><h1>📏 Conservation of Momentum</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<nav class="topic-tabs" role="tablist" aria-label="Topic sections">
+<button class="topic-tab" id="tab-learn" role="tab" aria-selected="false" aria-controls="panel-learn" data-panel="learn">📘 Learn</button>
+<button class="topic-tab" id="tab-simulate" role="tab" aria-selected="false" aria-controls="panel-simulate" data-panel="simulate">🎮 Simulate</button>
+<button class="topic-tab active" id="tab-practice" role="tab" aria-selected="true" aria-controls="panel-practice" data-panel="practice">🧠 Practice</button>
+</nav>
+<section id="panel-learn" class="topic-panel" role="tabpanel" aria-labelledby="tab-learn" hidden>
+<section class="lesson-card"><h2>1. Law of conservation of momentum</h2><p>The total linear momentum of an isolated system remains constant when the net external force (or external impulse) on the system is zero. Momentum may transfer between objects, but the system total does not change.</p><div class="lesson-equation">Total momentum before = Total momentum after</div><p>For two bodies moving along one straight line, include signs to represent their directions.</p></section>
+<section class="lesson-card"><h2>2. Momentum of a system</h2><div class="lesson-grid"><div class="lesson-tile"><b>System</b>Choose which objects are included in the system before applying conservation.</div><div class="lesson-tile"><b>External force</b>Momentum is conserved when the net external impulse is zero or negligible during the interaction.</div><div class="lesson-tile"><b>Internal forces</b>Forces between objects inside the system occur in equal-and-opposite pairs.</div><div class="lesson-tile"><b>Direction</b>Choose a positive direction and use positive or negative velocities consistently.</div></div></section>
+<section class="lesson-card"><h2>3. Two-body collision equation</h2><p>For two objects interacting in one dimension, if external impulse is negligible:</p><div class="lesson-equation">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</div><p>Here u₁, u₂ are initial velocities and v₁, v₂ are final velocities. This equation applies to both elastic and inelastic collisions.</p></section>
+<section class="lesson-card"><h2>4. Perfectly inelastic collision</h2><p>In a perfectly inelastic collision, the objects stick together and move with a common final velocity. Total momentum is conserved, but kinetic energy is generally not conserved.</p><div class="lesson-equation">v = (m₁u₁ + m₂u₂) / (m₁ + m₂)</div><div class="lesson-example"><b>Example:</b> A 2 kg cart at 4 m/s hits a stationary 2 kg cart and they stick. v = (2×4 + 2×0)/(2+2) = 2 m/s in the original direction.</div></section>
+<section class="lesson-card"><h2>5. Elastic and inelastic collisions</h2><div class="lesson-grid"><div class="lesson-tile"><b>Elastic collision</b>Total momentum and total kinetic energy are conserved.</div><div class="lesson-tile"><b>Inelastic collision</b>Total momentum is conserved in an isolated system, but some kinetic energy changes into other forms.</div><div class="lesson-tile"><b>Perfectly inelastic</b>Objects stick together after collision; kinetic energy loss is maximum for the given initial conditions.</div><div class="lesson-tile"><b>Explosion / recoil</b>Parts move in opposite directions while the system's total momentum remains unchanged if external impulse is negligible.</div></div></section>
+<section class="lesson-card"><h2>6. Recoil and explosions</h2><p>If a system starts at rest, its initial total momentum is zero. After an internal explosion or a gun fires a bullet, the parts acquire equal and opposite momenta so the vector sum remains zero.</p><div class="lesson-example">A 4 kg object at rest breaks into 1 kg and 3 kg pieces. If the 1 kg piece moves right at 8 m/s, then 8 + 3v = 0, so the 3 kg piece moves left at 8/3 m/s.</div></section>
+<section class="lesson-card"><h2>7. Worked example</h2><div class="lesson-example"><b>Question:</b> A 1 kg trolley moving right at 6 m/s couples with a stationary 2 kg trolley. Find their common velocity.<br><b>Initial momentum:</b> 1×6 + 2×0 = 6 kg m/s.<br><b>Total mass:</b> 1 + 2 = 3 kg.<br><b>Final velocity:</b> v = 6/3 = 2 m/s right.</div></section>
+<section class="lesson-card"><h2>8. Exam reminders</h2><ul><li>Conserve total momentum only after defining the system and checking external impulse.</li><li>Momentum is a vector; assign signs before substituting.</li><li>Momentum is conserved in elastic and inelastic collisions of an isolated system.</li><li>Kinetic energy is conserved only in elastic collisions.</li><li>For objects that stick together, use their combined mass and common final velocity.</li><li>For recoil and explosions from rest, final momenta must add vectorially to zero.</li></ul></section>
+</section>
+<section id="panel-simulate" class="topic-panel" role="tabpanel" aria-labelledby="tab-simulate" hidden>
+<section class="sim-card"><h2>🎮 Momentum conservation simulator</h2><p class="muted">Set the masses and initial velocities of two carts. Choose whether they stick together or undergo an ideal one-dimensional elastic collision. Positive velocity is to the right.</p>
+<div class="sim-controls">
+<div class="sim-control"><label for="simM1">Cart 1 mass <output id="m1Out">2 kg</output></label><input id="simM1" type="range" min="0.5" max="10" step="0.5" value="2"></div>
+<div class="sim-control"><label for="simU1">Cart 1 initial velocity <output id="u1Out">4 m/s</output></label><input id="simU1" type="range" min="-10" max="10" step="0.5" value="4"></div>
+<div class="sim-control"><label for="simM2">Cart 2 mass <output id="m2Out">2 kg</output></label><input id="simM2" type="range" min="0.5" max="10" step="0.5" value="2"></div>
+<div class="sim-control"><label for="simU2">Cart 2 initial velocity <output id="u2Out">0 m/s</output></label><input id="simU2" type="range" min="-10" max="10" step="0.5" value="0"></div>
+</div>
+<div class="sim-control" style="margin-top:12px"><label for="collisionType">Collision type</label><select id="collisionType" style="width:100%;margin-top:9px;padding:10px;border:1px solid #dce6ef;border-radius:10px;background:white;font:inherit"><option value="stick">Perfectly inelastic — stick together</option><option value="elastic">Ideal elastic — 1D collision</option></select></div></section>
+<section class="sim-card"><h2>Before and after collision</h2><div class="sim-results">
+<div class="sim-result"><strong id="pBefore">8</strong><span>Total initial momentum</span></div>
+<div class="sim-result"><strong id="pAfter">8</strong><span>Total final momentum</span></div>
+<div class="sim-result"><strong id="energyChange">—</strong><span>Kinetic energy change (J)</span></div>
+</div><div class="lesson-equation" id="velocityResults" style="margin-top:12px">Final velocities: v₁ = 2 m/s, v₂ = 2 m/s</div></section>
+<section class="sim-card"><h2>Calculation & concept check</h2><div class="lesson-equation" id="simWorking">P_before = m₁u₁ + m₂u₂ = 8 kg m/s</div><p class="muted" id="simTip">With no net external impulse, the total momentum after collision equals the total momentum before collision.</p><button class="btn" id="simReset" type="button" style="margin-top:12px">↺ Reset simulator</button></section>
+</section>
+<section id="panel-practice" class="topic-panel" role="tabpanel" aria-labelledby="tab-practice">
+<section class="hero"><h1>📏 Conservation of Momentum</h1><p class="muted">Practise system momentum, collisions, recoil and momentum conservation.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
 'use strict';
 const questions = [{"q":"The law of conservation of momentum states that total momentum of an isolated system:","o":["Remains constant","Always increases","Always decreases","Becomes zero after collision"],"a":0,"e":"If net external force is zero, total momentum of the system remains constant."},{"q":"Momentum is conserved when the net external force on the system is:","o":["Zero","Maximum","Always downward","Equal to internal force"],"a":0,"e":"Momentum conservation applies to an isolated system with zero net external force."},{"q":"Two objects interact in an isolated system. Their total momentum before interaction is 12 kg·m/s. After interaction it is:","o":["12 kg·m/s","0 kg·m/s always","24 kg·m/s always","Impossible to determine at all"],"a":0,"e":"Internal forces can redistribute momentum, but the total remains 12 kg·m/s."},{"q":"A 2 kg cart moves at 4 m/s and collides with a stationary 2 kg cart. They stick together. Their final velocity is:","o":["2 m/s","4 m/s","1 m/s","8 m/s"],"a":0,"e":"Conservation gives v = (2×4 + 2×0)/(2+2) = 2 m/s."},{"q":"A 1 kg trolley moving at 6 m/s couples with a stationary 2 kg trolley. Final speed is:","o":["2 m/s","3 m/s","6 m/s","1 m/s"],"a":0,"e":"Final velocity = initial momentum/total mass = 6/(1+2) = 2 m/s."},{"q":"A 3 kg body moving at 2 m/s collides and sticks to a 1 kg body at rest. Their final speed is:","o":["1.5 m/s","2 m/s","3 m/s","6 m/s"],"a":0,"e":"v = (3×2 + 1×0)/(3+1) = 6/4 = 1.5 m/s."},{"q":"A 2 kg object moves right at 5 m/s and a 3 kg object moves left at 2 m/s. Taking right as positive, total momentum is:","o":["4 kg·m/s","16 kg·m/s","−4 kg·m/s","0 kg·m/s"],"a":0,"e":"p_total = 2(5) + 3(−2) = 10 − 6 = 4 kg·m/s to the right."},{"q":"A gun fires a bullet forward. The gun recoils backward because:","o":["Total momentum is conserved","The bullet has no momentum","Gravity acts only on the gun","Energy must be destroyed"],"a":0,"e":"The bullet gains forward momentum and the gun gains equal opposite momentum, assuming negligible external impulse."},{"q":"A 0.02 kg bullet moves at 300 m/s. Its momentum is:","o":["6 kg·m/s","15 kg·m/s","0.06 kg·m/s","300 kg·m/s"],"a":0,"e":"p = mv = 0.02 × 300 = 6 kg·m/s."},{"q":"A 4 kg object at rest explodes into two pieces. One 1 kg piece moves right at 8 m/s. The 3 kg piece moves:","o":["Left at 8/3 m/s","Right at 8/3 m/s","Left at 8 m/s","Right at 8 m/s"],"a":0,"e":"Initial momentum is zero: 1(8) + 3v = 0, so v = −8/3 m/s."},{"q":"Two skaters initially at rest push apart on frictionless ice. Their total momentum after pushing is:","o":["Zero","Positive","Negative","Twice their combined mass"],"a":0,"e":"They acquire equal and opposite momenta, so total momentum remains zero."},{"q":"A 2 kg body moving at 3 m/s collides with a 1 kg body at rest. If they stick together, final velocity is:","o":["2 m/s","1 m/s","3 m/s","6 m/s"],"a":0,"e":"v = (2×3)/(2+1) = 2 m/s."},{"q":"A 1 kg object moving at 4 m/s collides elastically head-on with an identical stationary object. For an ideal one-dimensional elastic collision, the first object ends with velocity:","o":["0 m/s","2 m/s","4 m/s","−4 m/s"],"a":0,"e":"For equal masses in a one-dimensional elastic collision, velocities exchange; the first object stops."},{"q":"In a perfectly inelastic collision, the objects:","o":["Stick together after collision","Must rebound with the same speed","Have no momentum after collision","Always conserve kinetic energy"],"a":0,"e":"In a perfectly inelastic collision, the objects stick together; momentum is conserved, but kinetic energy is not generally conserved."},{"q":"In an isolated collision, which quantity is always conserved?","o":["Total momentum","Kinetic energy in every collision","Speed of each object","Each object's momentum separately"],"a":0,"e":"Total momentum is conserved in isolated collisions; kinetic energy is conserved only in elastic collisions."},{"q":"A 2 kg object moving at 6 m/s collides with a stationary 4 kg object and they stick. Their final speed is:","o":["2 m/s","3 m/s","6 m/s","1 m/s"],"a":0,"e":"v = (2×6)/(2+4) = 12/6 = 2 m/s."},{"q":"An object of mass 5 kg moves at 2 m/s. Its momentum is:","o":["10 kg·m/s","7 kg·m/s","2.5 kg·m/s","25 kg·m/s"],"a":0,"e":"p = mv = 5 × 2 = 10 kg·m/s."},{"q":"A 2 kg object has momentum 10 kg·m/s. Its velocity is:","o":["5 m/s","20 m/s","8 m/s","12 m/s"],"a":0,"e":"v = p/m = 10/2 = 5 m/s."},{"q":"If total initial momentum of an isolated system is +8 kg·m/s, total final momentum is:","o":["+8 kg·m/s","−8 kg·m/s","0 kg·m/s","+16 kg·m/s"],"a":0,"e":"The total momentum remains +8 kg·m/s in the absence of net external force."},{"q":"A 0.5 kg ball moving right at 10 m/s hits a wall and rebounds left at 6 m/s. Taking right as positive, its momentum change is:","o":["−8 kg·m/s","+2 kg·m/s","−2 kg·m/s","+8 kg·m/s"],"a":0,"e":"Δp = m(v − u) = 0.5(−6 − 10) = −8 kg·m/s."},{"q":"A 1 kg object moving right at 3 m/s and a 2 kg object moving left at 1 m/s stick together. Their final velocity is:","o":["1/3 m/s to the right","1 m/s to the left","5/3 m/s to the right","0 m/s"],"a":0,"e":"p = 1(3) + 2(−1) = 1; total mass = 3 kg, so v = 1/3 m/s right."},{"q":"A 2 kg body moving at 4 m/s collides with a 2 kg body moving at 2 m/s in the same direction. If they stick together, final speed is:","o":["3 m/s","2 m/s","4 m/s","6 m/s"],"a":0,"e":"v = (2×4 + 2×2)/(2+2) = 12/4 = 3 m/s."},{"q":"A 3 kg object moving right at 4 m/s collides with a 1 kg object moving left at 2 m/s and they stick. Final velocity is:","o":["2.5 m/s right","1 m/s left","3.5 m/s right","2 m/s left"],"a":0,"e":"p = 3(4) + 1(−2) = 10; total mass 4 kg, so v = 2.5 m/s right."},{"q":"A 2 kg object at rest explodes into two equal 1 kg pieces. One moves right at 5 m/s. The other moves:","o":["Left at 5 m/s","Right at 5 m/s","Left at 2.5 m/s","At rest"],"a":0,"e":"Initial momentum is zero; equal masses must have equal and opposite velocities."},{"q":"The impulse of an external force on a system equals the change in its:","o":["Total momentum","Total mass","Total position","Number of objects"],"a":0,"e":"External impulse changes the system's total momentum: J_external = ΔP_total."},{"q":"A 2 kg cart moving at 3 m/s experiences an external impulse of +4 N·s in the same direction. Its final velocity is:","o":["5 m/s","1 m/s","2 m/s","7 m/s"],"a":0,"e":"Initial p = 6; final p = 6 + 4 = 10 kg·m/s, so v = 10/2 = 5 m/s."},{"q":"A 1 kg object moving at 8 m/s collides and sticks to a 3 kg object moving at 0 m/s. The fraction of initial kinetic energy lost is:","o":["3/4","1/2","1/4","0"],"a":0,"e":"Initial K = ½×1×64 = 32 J. Final speed = 2 m/s; final K = ½×4×4 = 8 J. Lost fraction = (32−8)/32 = 3/4."},{"q":"A 2 kg object moving at 4 m/s collides elastically head-on with a 2 kg object at rest. After collision, the first object's velocity is:","o":["0 m/s","2 m/s","4 m/s","−4 m/s"],"a":0,"e":"For equal masses in a one-dimensional elastic collision, velocities exchange, so the first object stops."},{"q":"Two bodies have momenta +6 kg·m/s and −6 kg·m/s. Their total momentum is:","o":["0 kg·m/s","12 kg·m/s","−12 kg·m/s","6 kg·m/s"],"a":0,"e":"Opposite signed momenta of equal magnitude add to zero."},{"q":"A 4 kg object moving at 3 m/s sticks to a 2 kg object moving at 0 m/s. Their final speed is:","o":["2 m/s","1 m/s","3 m/s","6 m/s"],"a":0,"e":"v = (4×3)/(4+2) = 12/6 = 2 m/s."}];
-let index=0,score=0,streak=0,chosen=null,locked=false;
-const $=id=>document.getElementById(id);
-function render(){
- chosen=null;locked=false;
- const item=questions[index];
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
@@ -87,12 +97,12 @@ function render(){
    const b=document.createElement('button');b.type='button';b.className='option';
    const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
    const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('#panel-practice .option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
    $('options').appendChild(b);
  });
 }
 $('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('#panel-practice .option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
@@ -111,6 +121,25 @@ $('continue').addEventListener('click',()=>{
 render();
 })();
 </script>
+<script>
+(function(){const tabs=[...document.querySelectorAll('.topic-tab')],panels={learn:document.getElementById('panel-learn'),simulate:document.getElementById('panel-simulate'),practice:document.getElementById('panel-practice')};function show(name){tabs.forEach(t=>{const active=t.dataset.panel===name;t.classList.toggle('active',active);t.setAttribute('aria-selected',String(active));});Object.entries(panels).forEach(([key,p])=>p.hidden=key!==name);}tabs.forEach((t,i)=>{t.addEventListener('click',()=>show(t.dataset.panel));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const j=(i+(e.key==='ArrowRight'?1:2))%3;tabs[j].focus();show(tabs[j].dataset.panel);}});});show('practice');})();
+</script>
+<script>
+(function(){const $=id=>document.getElementById(id),fmt=n=>Number(n.toFixed(2)).toString();function update(){
+const m1=+$('simM1').value,m2=+$('simM2').value,u1=+$('simU1').value,u2=+$('simU2').value,type=$('collisionType').value;
+const p0=m1*u1+m2*u2,k0=.5*m1*u1*u1+.5*m2*u2*u2;let v1,v2;
+if(type==='stick'){v1=v2=p0/(m1+m2);}else{v1=((m1-m2)*u1+2*m2*u2)/(m1+m2);v2=(2*m1*u1+(m2-m1)*u2)/(m1+m2);}
+const p1=m1*v1+m2*v2,k1=.5*m1*v1*v1+.5*m2*v2*v2;
+$('m1Out').textContent=fmt(m1)+' kg';$('m2Out').textContent=fmt(m2)+' kg';$('u1Out').textContent=fmt(u1)+' m/s';$('u2Out').textContent=fmt(u2)+' m/s';
+$('pBefore').textContent=fmt(p0);$('pAfter').textContent=fmt(p1);$('energyChange').textContent=fmt(k1-k0);
+$('velocityResults').textContent='Final velocities: v₁ = '+fmt(v1)+' m/s, v₂ = '+fmt(v2)+' m/s';
+$('simWorking').textContent='P_before = m₁u₁ + m₂u₂ = '+fmt(m1)+'×('+fmt(u1)+') + '+fmt(m2)+'×('+fmt(u2)+') = '+fmt(p0)+' kg m/s';
+$('simTip').textContent=type==='stick'?'The carts share one final velocity. Momentum is conserved, while kinetic energy generally decreases.':'For this ideal 1D elastic collision, both total momentum and total kinetic energy are conserved.';
+}
+['simM1','simM2','simU1','simU2','collisionType'].forEach(id=>$(id).addEventListener('input',update));
+$('collisionType').addEventListener('change',update);
+$('simReset').addEventListener('click',()=>{$('simM1').value=2;$('simM2').value=2;$('simU1').value=4;$('simU2').value=0;$('collisionType').value='stick';update();});update();})();
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -121,13 +150,7 @@ render();
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
 <script>
 /* This quiz intentionally has no floating audio controls. */
-(function(){
-  function removeQuizAudio(){
-    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
-  }
-  removeQuizAudio();
-  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
-})();
+(function(){function removeQuizAudio(){document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});}removeQuizAudio();new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});})();
 </script>
 </body>
 </html>

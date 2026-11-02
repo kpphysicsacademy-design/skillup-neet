@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Tension quiz">
-<title>SkillUp | Tension — Easy Quiz</title>
+<meta name="description" content="Learn, simulate and practise tension force with interactive examples and 30 questions.">
+<title>SkillUp Physics | Tension</title>
 <style>
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -55,20 +55,92 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<nav class="tabs" aria-label="Learning modes">
+<button class="tab active" type="button" data-tab="learn">📘 Learn</button>
+<button class="tab" type="button" data-tab="simulate">⚙️ Simulate</button>
+<button class="tab" type="button" data-tab="practice">✍️ Practice</button>
+</nav>
 <main>
-<section class="hero"><h1>📏 Tension</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="panel active" id="panel-learn">
+<article class="lesson-card">
+<h2>Tension force</h2>
+<p><b>Tension</b> is the pulling force transmitted through a taut string, rope or cable. It acts along the string and pulls an attached object away from the point of contact.</p>
+<div class="formula">Tension acts along a taut string</div>
+<h3>1. Hanging object at rest or constant velocity</h3>
+<p>When a mass hangs vertically with zero acceleration, tension balances its weight.</p>
+<div class="formula">T = mg</div>
+<p>Example: a 2 kg mass at rest with g = 10 m/s² has T = 2 × 10 = 20 N.</p>
+<h3>2. Vertical acceleration</h3>
+<p>For an object accelerating upward, tension must exceed weight. For downward acceleration, tension is smaller than weight.</p>
+<div class="formula">Upward: T = m(g + a)</div>
+<div class="formula">Downward: T = m(g − a)</div>
+<p>In free fall, a = g and the string becomes slack, so T = 0.</p>
+<h3>3. Horizontal motion</h3>
+<p>For a block on a frictionless horizontal surface pulled by a horizontal string, tension provides the net horizontal force.</p>
+<div class="formula">T = ma</div>
+<h3>4. Ideal pulley systems</h3>
+<ul><li>For a massless string over a frictionless pulley, tension is uniform throughout the string.</li><li>For an Atwood machine: <b>a = (m₂ − m₁)g / (m₁ + m₂)</b>, where m₂ is the heavier mass.</li><li>For a table block m₁ connected to a hanging mass m₂: <b>a = m₂g / (m₁ + m₂)</b>.</li></ul>
+<h3>Remember</h3>
+<p>A string can pull but cannot push. Tension acts along the string, not necessarily vertically. Always draw a free-body diagram and apply Newton’s second law to each object.</p>
+</article>
+<article class="lesson-card">
+<h2>Worked example</h2>
+<p>A 3 kg object is lifted vertically upward with acceleration 2 m/s². Take g = 10 m/s².</p>
+<div class="formula">T = m(g + a) = 3(10 + 2) = 36 N</div>
+<p class="small-note">Exam tip: choose a positive direction first, then apply ΣF = ma along the string or direction of motion.</p>
+</article>
+</section>
+<section class="panel" id="panel-simulate">
+<article class="sim-card">
+<h2>Tension simulator</h2>
+<p class="muted">Choose a physical situation and change the values to calculate tension instantly.</p>
+<div class="sim-grid">
+<label>Situation<select id="tn-mode"><option value="rest">Hanging at rest / constant velocity</option><option value="up">Accelerating upward</option><option value="down">Accelerating downward</option><option value="horizontal">Horizontal pull (frictionless)</option><option value="atwood">Atwood machine</option><option value="table">Table block + hanging mass</option></select></label>
+<label>Mass m₁ (kg)<input id="tn-m1" type="number" min="0" step="0.1" value="3"></label>
+<label>Gravity g (m/s²)<input id="tn-g" type="number" min="0" step="0.1" value="10"></label>
+<label id="tn-extra-label">Acceleration (m/s²)<input id="tn-extra" type="number" min="0" step="0.1" value="2"></label>
+<label id="tn-m2-label">Second mass m₂ (kg)<input id="tn-m2" type="number" min="0" step="0.1" value="5"></label>
+</div>
+<div class="sim-result" aria-live="polite"><div class="small-note">Calculated tension</div><strong id="tn-output">36.00 N</strong><p id="tn-working" class="small-note">T = m(g + a)</p></div>
+<p id="tn-note" class="small-note">Ideal string and pulley assumptions apply. For downward acceleration, keep a ≤ g for a taut hanging string.</p>
+</article>
+</section>
+<section class="panel" id="panel-practice">
+<h1>📏 Tension</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
 'use strict';
 const questions = [{"q":"Tension in an ideal taut string acts:","o":["Along the string, pulling away from the object","Perpendicular to the string","Always vertically downward","Only when the object accelerates"],"a":0,"e":"Tension acts along a taut string and pulls the attached object away from the string."},{"q":"The SI unit of tension is:","o":["Newton (N)","Joule (J)","Watt (W)","Pascal (Pa)"],"a":0,"e":"Tension is a force, so its SI unit is the newton."},{"q":"A 2 kg mass hangs at rest from a light vertical string. Take g = 10 m/s². Tension is:","o":["20 N","10 N","2 N","0 N"],"a":0,"e":"At rest, T = mg = 2 × 10 = 20 N."},{"q":"A 5 kg mass hangs at rest from a vertical string. Take g = 9.8 m/s². Tension is:","o":["49 N","5 N","9.8 N","98 N"],"a":0,"e":"At rest, tension balances weight: T = mg = 5 × 9.8 = 49 N."},{"q":"A mass m hangs from a string and accelerates upward at a. The tension is:","o":["m(g + a)","m(g − a)","ma only","mg in all cases"],"a":0,"e":"Taking upward as positive, T − mg = ma, so T = m(g + a)."},{"q":"A 3 kg mass accelerates upward at 2 m/s². Take g = 10 m/s². Tension is:","o":["36 N","30 N","24 N","6 N"],"a":0,"e":"T = m(g + a) = 3(10 + 2) = 36 N."},{"q":"A 4 kg mass accelerates downward at 2 m/s² while hanging. Take g = 10 m/s². Tension is:","o":["32 N","40 N","48 N","8 N"],"a":0,"e":"For downward acceleration, T = m(g − a) = 4(10 − 2) = 32 N."},{"q":"A mass hangs motionless from an ideal string. Which relation holds?","o":["T = mg","T = 0","T = 2mg","T = ma with a = g"],"a":0,"e":"With zero acceleration and only tension and weight vertically, they balance: T = mg."},{"q":"An ideal massless string connects two objects. The tension magnitude throughout the string is:","o":["The same throughout, in the ideal model","Always zero","Different at every point","Equal to each object's weight in all cases"],"a":0,"e":"For a massless string over an ideal frictionless pulley, tension is uniform along the string."},{"q":"A 2 kg block is pulled horizontally by a rope with tension 10 N on a frictionless surface. Its acceleration is:","o":["5 m/s²","20 m/s²","2 m/s²","0.2 m/s²"],"a":0,"e":"Using F = ma, a = T/m = 10/2 = 5 m/s²."},{"q":"A 3 kg block is pulled horizontally with 15 N tension on a frictionless floor. Acceleration is:","o":["5 m/s²","45 m/s²","12 m/s²","0.2 m/s²"],"a":0,"e":"a = F/m = 15/3 = 5 m/s²."},{"q":"A 2 kg mass hangs at rest. If g = 10 m/s², what happens to tension if the mass doubles and remains at rest?","o":["It doubles","It halves","It stays the same","It becomes zero"],"a":0,"e":"For a stationary hanging mass, T = mg, so doubling mass doubles tension."},{"q":"A person pulls a sled with a rope. The force the rope exerts on the sled is directed:","o":["Along the rope toward the person","Vertically downward always","Perpendicular to the rope","Opposite the rope's direction"],"a":0,"e":"The rope pulls along its length toward the person pulling it."},{"q":"A 1 kg mass is lifted upward at constant speed by a vertical rope. Take g = 10 m/s². Tension is:","o":["10 N","0 N","11 N","20 N"],"a":0,"e":"Constant speed means zero acceleration, so T = mg = 10 N."},{"q":"A 5 kg mass is lowered at constant speed by a rope. Take g = 10 m/s². Tension is:","o":["50 N","25 N","0 N","75 N"],"a":0,"e":"Constant speed means zero acceleration, so tension equals weight: 5 × 10 = 50 N."},{"q":"A 2 kg mass hangs in a lift accelerating downward at 3 m/s². Take g = 10 m/s². Tension is:","o":["14 N","20 N","26 N","6 N"],"a":0,"e":"T = m(g − a) = 2(10 − 3) = 14 N."},{"q":"A 2 kg mass hangs in a lift accelerating upward at 3 m/s². Take g = 10 m/s². Tension is:","o":["26 N","20 N","14 N","6 N"],"a":0,"e":"T = m(g + a) = 2(10 + 3) = 26 N."},{"q":"If a hanging object is in free fall with acceleration g, the string tension is:","o":["Zero","mg","2mg","mg/2"],"a":0,"e":"In free fall, gravity alone provides the acceleration, so the string does not pull: T = 0."},{"q":"A 6 kg mass hangs at rest. Take g = 10 m/s². Its weight and string tension are:","o":["Both 60 N in opposite directions","Both 6 N downward","Both 60 N upward","Unequal in magnitude"],"a":0,"e":"At rest, tension is 60 N upward and weight is 60 N downward."},{"q":"Two masses of 2 kg and 3 kg are connected over an ideal pulley. Take g = 10 m/s². The system's acceleration magnitude is:","o":["2 m/s²","10 m/s²","5 m/s²","1 m/s²"],"a":0,"e":"For an Atwood machine, a = (3−2)g/(3+2) = 10/5 = 2 m/s²."},{"q":"For the 2 kg and 3 kg Atwood machine above, tension is:","o":["24 N","20 N","30 N","12 N"],"a":0,"e":"The 2 kg mass accelerates upward at 2 m/s²: T − 20 = 2×2, so T = 24 N."},{"q":"Two equal masses hang on opposite sides of an ideal pulley and are released from rest. Their acceleration is:","o":["Zero","g","g/2","2g"],"a":0,"e":"Equal masses have balanced weights, so the net driving force and acceleration are zero."},{"q":"A 4 kg block on a frictionless table is connected to a hanging 2 kg mass over an ideal pulley. Take g = 10 m/s². The acceleration is:","o":["10/3 m/s²","5 m/s²","10 m/s²","2 m/s²"],"a":0,"e":"The driving force is 2g = 20 N and total mass is 6 kg, so a = 20/6 = 10/3 m/s²."},{"q":"For the system with a 4 kg table block and a 2 kg hanging mass, tension is:","o":["40/3 N","20 N","10 N","60 N"],"a":0,"e":"T = m_table a = 4 × (10/3) = 40/3 N."},{"q":"A 10 N tension pulls a 2 kg object upward. Take g = 10 m/s². Its acceleration is:","o":["5 m/s² downward","5 m/s² upward","Zero","10 m/s² upward"],"a":0,"e":"Weight is 20 N downward, so net force is 10 N downward and a = 10/2 = 5 m/s² downward."},{"q":"A 2 kg object hangs from a rope with tension 24 N. Take g = 10 m/s². Its acceleration is:","o":["2 m/s² upward","2 m/s² downward","12 m/s² upward","Zero"],"a":0,"e":"Net force upward = 24 − 20 = 4 N; a = 4/2 = 2 m/s² upward."},{"q":"Which assumption makes tension uniform in a string over an ideal pulley?","o":["Massless string and frictionless pulley","Heavy string and rough pulley","String stretches freely","The objects must be at rest"],"a":0,"e":"An ideal massless string and frictionless pulley model produce the same tension throughout the string."},{"q":"A string can only pull, not push. Therefore, tension in a taut string acts:","o":["Away from the object along the string","Toward the object along the string as a push","Perpendicular to the string","Only vertically"],"a":0,"e":"A string transmits pulling force along its length; it cannot exert a pushing force."},{"q":"A 3 kg object is lifted upward with acceleration 4 m/s². Take g = 10 m/s². Tension is:","o":["42 N","30 N","18 N","12 N"],"a":0,"e":"T = m(g + a) = 3(10 + 4) = 42 N."},{"q":"A 3 kg object is lowered with downward acceleration 4 m/s². Take g = 10 m/s². Tension is:","o":["18 N","30 N","42 N","12 N"],"a":0,"e":"T = m(g − a) = 3(10 − 4) = 18 N."}];
+let index
 let index=0,score=0,streak=0,chosen=null,locked=false;
 const $=id=>document.getElementById(id);
 function render(){
@@ -127,6 +199,39 @@ render();
   }
   removeQuizAudio();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<script>
+(function(){
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(b=>b.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.toggle('active',x===b));
+ document.querySelectorAll('.panel').forEach(p=>{const isActive=p.id==='panel-'+b.dataset.tab;p.classList.toggle('active',isActive);p.hidden=!isActive;});
+}));
+const $=id=>document.getElementById(id);
+function calcTension(){
+ const m1=Math.max(0,Number($('tn-m1').value)||0),m2=Math.max(0,Number($('tn-m2').value)||0),g=Math.max(0,Number($('tn-g').value)||0),x=Math.max(0,Number($('tn-extra').value)||0),mode=$('tn-mode').value;
+ let T=0,work='',note='Ideal string and pulley assumptions apply.';
+ if(mode==='rest'){T=m1*g;work='T = mg';}
+ if(mode==='up'){T=m1*(g+x);work='T = m(g + a)';}
+ if(mode==='down'){T=m1*Math.max(0,g-x);work='T = m(g − a)';if(x>g)note='For a > g, a taut string cannot maintain this motion; the string goes slack and T = 0.';}
+ if(mode==='horizontal'){T=m1*x;work='T = ma (frictionless horizontal surface)';}
+ if(mode==='atwood'){const a=Math.abs(m2-m1)*g/(m1+m2||1);T=(2*m1*m2*g)/(m1+m2||1);work='T = 2m₁m₂g / (m₁ + m₂); a = '+a.toFixed(2)+' m/s²';}
+ if(mode==='table'){const a=m2*g/(m1+m2||1);T=m1*a;work='a = m₂g/(m₁ + m₂); T = m₁a = '+a.toFixed(2)+' × '+m1.toFixed(2); }
+ $('tn-output').textContent=T.toFixed(2)+' N';$('tn-working').textContent=work;$('tn-note').textContent=note;
+}
+function updateFields(){
+ const mode=$('tn-mode').value;
+ const lab=({rest:'Additional value',up:'Upward acceleration (m/s²)',down:'Downward acceleration (m/s²)',horizontal:'Acceleration (m/s²)',atwood:'Second mass m₂ (kg)',table:'Hanging mass m₂ (kg)'})[mode];
+ $('tn-extra-label').firstChild.textContent=lab+' ';
+ $('tn-m2-label').style.display=(mode==='atwood'||mode==='table')?'grid':'none';
+ $('tn-extra-label').style.display=(mode==='atwood'||mode==='table')?'none':'grid';
+ calcTension();
+}
+['tn-mode','tn-m1','tn-m2','tn-g','tn-extra'].forEach(id=>$(id).addEventListener('input',calcTension));
+$('tn-mode').addEventListener('change',updateFields);
+updateFields();
 })();
 </script>
 </body>

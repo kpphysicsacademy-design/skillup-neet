@@ -61,7 +61,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
 .tab.active{background:#58cc02;border-color:#46a302;color:#fff}
-.panel{display:none}.panel.active{display:block}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
 .lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
 .lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
 .lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
@@ -203,7 +203,7 @@ render();
 const tabs=[...document.querySelectorAll('.tab')];
 tabs.forEach(b=>b.addEventListener('click',()=>{
  tabs.forEach(x=>x.classList.toggle('active',x===b));
- document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+b.dataset.tab));
+ document.querySelectorAll('.panel').forEach(p=>{const isActive=p.id==='panel-'+b.dataset.tab;p.classList.toggle('active',isActive);p.hidden=!isActive;});
 }));
 const $=id=>document.getElementById(id);
 function calcNormal(){

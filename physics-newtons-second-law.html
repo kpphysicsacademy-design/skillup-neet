@@ -55,15 +55,68 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Learn / Simulate / Practice topic layout */
+.topic-tabs{max-width:720px;margin:16px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.topic-tab{min-height:48px;border:2px solid #dce6ef;border-bottom-width:4px;border-radius:15px;background:#fff;color:#31516b;font-weight:900;font-size:14px;cursor:pointer}
+.topic-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.topic-panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:18px;margin:0 0 14px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{color:#174a78;margin:0 0 12px;font-size:20px}
+.lesson-card p,.lesson-card li{line-height:1.65}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lesson-tile{background:#f2f9ff;border:1px solid #dcecf8;border-radius:14px;padding:13px;line-height:1.55}
+.lesson-tile b{display:block;color:#174a78;margin-bottom:5px}
+.lesson-equation{background:#f2f0ff;border:1px solid #ddd6fe;border-radius:14px;padding:15px;text-align:center;color:#5034a5;font-weight:900;font-size:20px;margin:10px 0}
+.lesson-example{background:#efffe7;border:1px solid #c8f0b2;border-radius:14px;padding:14px;line-height:1.65}
+.sim-stage{height:150px;position:relative;overflow:hidden;border-radius:15px;background:linear-gradient(#e9f7ff 0 72%,#d9e8f2 72%);margin-bottom:14px}
+.sim-block{position:absolute;bottom:28%;left:15%;width:58px;height:48px;border-radius:10px;background:#8b5cf6;border:3px solid #6d45d8;display:grid;place-items:center;color:white;font-weight:900;transition:left .2s}
+.sim-arrow{position:absolute;left:calc(15% + 64px);bottom:49%;height:5px;width:80px;background:#1cb0f6;border-radius:8px;transition:width .2s}
+.sim-arrow:after{content:"";position:absolute;right:-2px;top:-6px;border-left:12px solid #1cb0f6;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.sim-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sim-control{background:#f8fbff;border:1px solid #dce6ef;border-radius:13px;padding:12px}
+.sim-control label{display:flex;justify-content:space-between;gap:8px;font-weight:850;font-size:13px}
+.sim-control output{color:#17699a}.sim-control input{width:100%;accent-color:#1cb0f6;margin-top:10px}
+.sim-results{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sim-result{background:#f2f9ff;border:1px solid #dcecf8;border-radius:13px;padding:12px;text-align:center}
+.sim-result strong{display:block;font-size:22px;color:#174a78}.sim-result span{font-size:11px;color:#64748b;font-weight:750}
+@media(max-width:480px){.topic-tabs{gap:5px;margin:12px 0}.topic-tab{font-size:12px;padding:7px 3px}.lesson-grid,.sim-controls{grid-template-columns:1fr}.lesson-card,.sim-card{padding:15px}.sim-results{grid-template-columns:repeat(3,1fr)}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
+<nav class="topic-tabs" role="tablist" aria-label="Topic sections">
+<button class="topic-tab" id="tab-learn" role="tab" aria-selected="false" aria-controls="panel-learn" data-panel="learn">📘 Learn</button>
+<button class="topic-tab" id="tab-simulate" role="tab" aria-selected="false" aria-controls="panel-simulate" data-panel="simulate">🎮 Simulate</button>
+<button class="topic-tab active" id="tab-practice" role="tab" aria-selected="true" aria-controls="panel-practice" data-panel="practice">🧠 Practice</button>
+</nav>
+<section id="panel-learn" class="topic-panel" role="tabpanel" aria-labelledby="tab-learn" hidden>
+<section class="lesson-card"><h2>1. Statement of Newton’s second law</h2><p>The net external force acting on a body equals the rate of change of its momentum and acts in the direction of that change.</p><div class="lesson-equation">F⃗net = dp⃗/dt</div><p>For constant mass, p⃗ = m v⃗, so:</p><div class="lesson-equation">F⃗net = m a⃗ &nbsp; | &nbsp; a⃗ = F⃗net/m</div></section>
+<section class="lesson-card"><h2>2. Understand the quantities</h2><div class="lesson-grid"><div class="lesson-tile"><b>Net force (Fnet)</b>Vector sum of all external forces. SI unit: newton (N).</div><div class="lesson-tile"><b>Mass (m)</b>Measure of inertia. SI unit: kilogram (kg).</div><div class="lesson-tile"><b>Acceleration (a)</b>Rate of change of velocity. SI unit: m/s².</div><div class="lesson-tile"><b>Momentum (p)</b>p = mv. SI unit: kg·m/s.</div></div></section>
+<section class="lesson-card"><h2>3. Force–mass relationship</h2><ul><li>At constant mass, acceleration is directly proportional to net force.</li><li>At constant net force, acceleration is inversely proportional to mass.</li><li>Double the net force → double the acceleration (same mass).</li><li>Double the mass → half the acceleration (same net force).</li><li>Zero net force means zero acceleration; velocity may still be constant and non-zero.</li></ul></section>
+<section class="lesson-card"><h2>4. SI unit of force</h2><div class="lesson-equation">1 N = 1 kg·m/s²</div><p>A force of one newton produces an acceleration of 1 m/s² in a 1 kg body.</p></section>
+<section class="lesson-card"><h2>5. Worked example</h2><div class="lesson-example"><b>Question:</b> A 4 kg trolley experiences a net horizontal force of 20 N. Find its acceleration.<br><b>Formula:</b> a = Fnet/m = 20/4<br><b>Answer:</b> 5 m/s² in the direction of the net force.</div></section>
+<section class="lesson-card"><h2>6. Calculate net force first</h2><div class="lesson-example">A 2 kg block is pulled right by 16 N and friction acts left with 6 N.<br>Fnet = 16 − 6 = 10 N right<br>a = 10/2 = 5 m/s² right.</div></section>
+<section class="lesson-card"><h2>7. Exam reminders</h2><ul><li>Use net external force, not an individual force.</li><li>Resolve forces along chosen axes before applying F = ma.</li><li>Acceleration points in the direction of net force, not necessarily velocity.</li><li>The momentum form is general; F = ma applies for constant mass.</li></ul></section>
+</section>
+<section id="panel-simulate" class="topic-panel" role="tabpanel" aria-labelledby="tab-simulate" hidden>
+<section class="sim-card"><h2>🎮 Newton’s second-law simulator</h2><p class="muted">Change mass, net applied force, time and initial velocity. The live results use a one-dimensional constant-force model with no friction.</p><div class="sim-stage"><div class="sim-block" id="simBlock">m</div><div class="sim-arrow" id="simArrow"></div></div>
+<div class="sim-controls">
+<div class="sim-control"><label for="simMass">Mass <output id="massOut">5 kg</output></label><input id="simMass" type="range" min="1" max="20" step="1" value="5"></div>
+<div class="sim-control"><label for="simForce">Net force <output id="forceOut">20 N</output></label><input id="simForce" type="range" min="0" max="100" step="1" value="20"></div>
+<div class="sim-control"><label for="simTime">Time <output id="timeOut">3 s</output></label><input id="simTime" type="range" min="0" max="10" step=".5" value="3"></div>
+<div class="sim-control"><label for="simVelocity">Initial velocity <output id="velocityOut">0 m/s</output></label><input id="simVelocity" type="range" min="-10" max="10" step="1" value="0"></div></div></section>
+<section class="sim-card"><h2>Live results</h2><div class="sim-results"><div class="sim-result"><strong id="netOut">20 N</strong><span>Net force</span></div><div class="sim-result"><strong id="accelOut">4 m/s²</strong><span>Acceleration</span></div><div class="sim-result"><strong id="finalOut">12 m/s</strong><span>Final velocity</span></div></div></section>
+<section class="sim-card"><h2>Calculation</h2><div class="lesson-equation" id="simWorking">a = Fnet/m = 20/5 = 4 m/s²<br>v = u + at = 0 + 4 × 3 = 12 m/s</div><p class="muted">Positive values indicate rightward motion; negative values indicate leftward motion.</p><button class="btn" id="simReset" type="button" style="margin-top:12px">↺ Reset simulator</button></section>
+</section>
+<section id="panel-practice" class="topic-panel" role="tabpanel" aria-labelledby="tab-practice">
 <section class="hero"><h1>📏 Newton’s Second Law</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){

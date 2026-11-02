@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Absolute Uncertainty quiz">
+<title>SkillUp | Absolute Uncertainty — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+/* Standard SkillUp Learn + Simulator layout */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:13px;background:#fff;padding:12px 6px;font-weight:900;color:#31536e;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-bottom-width:4px;border-radius:17px;padding:15px;margin:10px 0}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:17px}
+.learn-card p,.sim-card p{margin:6px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{background:#eef8ff;border-radius:12px;padding:11px;margin:9px 0;font-weight:850;color:#174a78}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin-bottom:5px}
+.sim-field input{width:100%;border:2px solid #dce6ef;border-radius:11px;padding:11px;font:inherit;font-weight:700;min-width:0}
+.sim-result{background:#f0ffeb;border:2px solid #c8f0b2;border-radius:14px;padding:13px;margin-top:12px}
+.sim-result strong{color:#287a10}.sim-hint{font-size:12px!important;color:#64748b!important}
+@media(max-width:420px){.sim-grid{grid-template-columns:1fr}.study-tab{font-size:12px;padding:11px 3px}}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<style>
+.page-hero{margin-bottom:12px}.page-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.page-tab{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px 5px;border:2px solid #dce8f3;border-radius:15px;background:#fff;color:#245273;text-decoration:none;font-size:13px;font-weight:900;text-align:center;box-shadow:0 3px 0 #dce8f3}
+.page-tab.active{background:#e8f8dc;border-color:#8ed65b;color:#286c12;box-shadow:0 3px 0 #b9e69c}
+.page-progress{margin:0 0 14px;padding:9px 12px;border-radius:12px;background:#eef8ff;color:#245273;font-size:12px;font-weight:850;text-align:center;border:1px solid #d7eaf8}
+@media(max-width:380px){.page-tab{font-size:11px;padding:8px 3px}}
+</style>
+</head><body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak">🔥 <span id="streak">0</span> streak</div></div></header>
+<main><section class="hero page-hero"><h1>Absolute Uncertainty · Practice</h1><p class="muted">Complete the 30-question practice set and review your result.</p></section><nav class="page-tabs" aria-label="Absolute Uncertainty pages"><a class="page-tab " href="physics-absolute-uncertainty.html" >📘 Learn</a><a class="page-tab " href="physics-absolute-uncertainty-simulator.html" >🎮 Simulator</a><a class="page-tab active" href="physics-absolute-uncertainty-practice.html" aria-current="page">🧠 Practice</a></nav><div class="page-progress" id="pageProgress" role="status" aria-live="polite">Progress: 0/3 pages completed</div>
+
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+
+<div id="finishSlot"></div><script>
+
+(function(){
+'use strict';
+const questions = [
+  {
+    "q": "What does absolute uncertainty describe?",
+    "o": [
+      "The estimated amount by which a measurement may vary",
+      "The unit only",
+      "The object's mass",
+      "The largest possible scale reading"
+    ],
+    "a": 0,
+    "e": "Absolute uncertainty gives an estimated range or amount of doubt in a measured value."
+  },
+  {
+    "q": "Absolute uncertainty in a length is usually written in:",
+    "o": [
+      "The same unit as the length",
+      "Percent only",
+      "Seconds only",
+      "No unit"
+    ],
+    "a": 0,
+    "e": "Absolute uncertainty carries the same unit as the measured quantity."
+  },
+  {
+    "q": "A length is reported as 12.0 ± 0.2 cm. What is the absolute uncertainty?",
+    "o": [
+      "0.2 cm",
+      "12.0 cm",
+      "12.2 cm",
+      "0.02 cm"
+    ],
+    "a": 0,
+    "e": "The number after ± is the absolute uncertainty."
+  },
+  {
+    "q": "A reading is 5.4 s with uncertainty 0.1 s. The result is written as:",
+    "o": [
+      "(5.4 ± 0.1) s",
+      "5.4 ± 0.1 m",
+      "5.4 s²",
+      "0.1 ± 5.4 s"
+    ],
+    "a": 0,
+    "e": "The value and its absolute uncertainty should use consistent units."
+  },
+  {
+    "q": "Repeated readings are 10.2, 10.4, and 10.3 cm. Their mean is:",
+    "o": [
+      "10.3 cm",
+      "10.2 cm",
+      "10.4 cm",
+      "30.9 cm"
+    ],
+    "a": 0,
+    "e": "Mean = (10.2 + 10.4 + 10.3)/3 = 10.3 cm."
+  },
+  {
+    "q": "For a small set of repeated readings, a simple estimate of uncertainty may use:",
+    "o": [
+      "Half the range",
+      "The sum of all units",
+      "The largest value alone",
+      "The number of readings squared"
+    ],
+    "a": 0,
+    "e": "A common simple estimate is half the range: (maximum − minimum)/2."
+  },
+  {
+    "q": "Readings range from 4.8 cm to 5.2 cm. Half-range uncertainty is:",
+    "o": [
+      "0.2 cm",
+      "0.4 cm",
+      "5.0 cm",
+      "1.0 cm"
+    ],
+    "a": 0,
+    "e": "Half-range = (5.2 − 4.8)/2 = 0.2 cm."
+  },
+  {
+    "q": "A ruler has 1 mm smallest divisions. A common reading uncertainty estimate for an analogue scale is about:",
+    "o": [
+      "Half a division",
+      "One kilometre",
+      "100 divisions",
+      "The object's full length"
+    ],
+    "a": 0,
+    "e": "For many analogue scales, uncertainty is often estimated as about half the smallest division, depending on the instrument and method."
+  },
+  {
+    "q": "If a measured value is 20.0 g and absolute uncertainty is 0.5 g, the lower bound is:",
+    "o": [
+      "19.5 g",
+      "20.5 g",
+      "0.5 g",
+      "10.0 g"
+    ],
+    "a": 0,
+    "e": "Lower bound = 20.0 − 0.5 = 19.5 g."
+  },
+  {
+    "q": "If a measured value is 20.0 g and absolute uncertainty is 0.5 g, the upper bound is:",
+    "o": [
+      "20.5 g",
+      "19.5 g",
+      "0.5 g",
+      "40.0 g"
+    ],
+    "a": 0,
+    "e": "Upper bound = 20.0 + 0.5 = 20.5 g."
+  },
+  {
+    "q": "Which notation communicates uncertainty clearly?",
+    "o": [
+      "(8.2 ± 0.1) cm",
+      "8.2 and maybe 0.1",
+      "8.2 cm²",
+      "0.1 kg for a length"
+    ],
+    "a": 0,
+    "e": "The ± notation clearly presents a value and its absolute uncertainty."
+  },
+  {
+    "q": "Absolute uncertainty is different from relative uncertainty because relative uncertainty is:",
+    "o": [
+      "A ratio of uncertainty to measured or reference value",
+      "Always expressed in metres",
+      "Always larger than the value",
+      "The instrument's maximum range"
+    ],
+    "a": 0,
+    "e": "Relative uncertainty is a ratio and is therefore dimensionless."
+  },
+  {
+    "q": "A time is 6.0 ± 0.2 s. The absolute uncertainty as a fraction of the value is:",
+    "o": [
+      "0.2/6.0",
+      "6.0/0.2",
+      "6.0 + 0.2",
+      "0.2 × 6.0"
+    ],
+    "a": 0,
+    "e": "The relative uncertainty is found by dividing absolute uncertainty by the measured value."
+  },
+  {
+    "q": "Why should uncertainty be reported?",
+    "o": [
+      "It communicates the limits of the measurement",
+      "It makes every reading exact",
+      "It replaces the value",
+      "It removes the unit"
+    ],
+    "a": 0,
+    "e": "Uncertainty indicates how confidently the result can be interpreted."
+  },
+  {
+    "q": "Which factor can affect absolute uncertainty?",
+    "o": [
+      "Instrument resolution and measurement method",
+      "Only the object's colour",
+      "The page number",
+      "The spelling of the unit"
+    ],
+    "a": 0,
+    "e": "Resolution, repeatability, calibration, and method all affect measurement uncertainty."
+  },
+  {
+    "q": "Three readings are 7.1, 7.3, and 7.5 cm. The range is:",
+    "o": [
+      "0.4 cm",
+      "0.2 cm",
+      "7.3 cm",
+      "21.9 cm"
+    ],
+    "a": 0,
+    "e": "Range = maximum − minimum = 7.5 − 7.1 = 0.4 cm."
+  },
+  {
+    "q": "For readings 7.1, 7.3, and 7.5 cm, half-range uncertainty is:",
+    "o": [
+      "0.2 cm",
+      "0.4 cm",
+      "7.3 cm",
+      "0.1 cm"
+    ],
+    "a": 0,
+    "e": "Half the range is 0.4/2 = 0.2 cm."
+  },
+  {
+    "q": "A digital timer displays to 0.01 s. What does this tell you directly?",
+    "o": [
+      "Its display increment is 0.01 s",
+      "Its accuracy is guaranteed to 0.01 s",
+      "It has no uncertainty",
+      "Every time is exact"
+    ],
+    "a": 0,
+    "e": "Display resolution does not by itself guarantee accuracy; other uncertainty sources remain."
+  },
+  {
+    "q": "When combining a measured value and absolute uncertainty, their units should be:",
+    "o": [
+      "The same",
+      "Always different",
+      "Omitted for both",
+      "Only in kilograms"
+    ],
+    "a": 0,
+    "e": "The value and uncertainty must describe the same quantity and use matching units."
+  },
+  {
+    "q": "A measurement is 3.50 ± 0.05 m. Which interval is represented?",
+    "o": [
+      "3.45 m to 3.55 m",
+      "3.50 m to 3.05 m",
+      "0.05 m to 3.50 m",
+      "3.00 m to 4.00 m"
+    ],
+    "a": 0,
+    "e": "Subtracting and adding 0.05 m gives 3.45 m and 3.55 m."
+  },
+  {
+    "q": "Which is a possible source of uncertainty in repeated measurements?",
+    "o": [
+      "Small variations in technique or conditions",
+      "A guaranteed exact value",
+      "The choice of font",
+      "The subject title"
+    ],
+    "a": 0,
+    "e": "Small changes in conditions or technique can cause readings to vary."
+  },
+  {
+    "q": "Can reporting uncertainty guarantee that a measurement is accurate?",
+    "o": [
+      "No; it describes uncertainty but does not remove bias",
+      "Yes, always",
+      "Only for mass",
+      "Yes, if written in bold"
+    ],
+    "a": 0,
+    "e": "A result may still contain systematic error even when uncertainty is reported."
+  },
+  {
+    "q": "If uncertainty is 0.3 cm, which measured quantity can it accompany naturally?",
+    "o": [
+      "A length measurement",
+      "A time measurement in seconds only",
+      "A mass in kilograms only",
+      "A temperature in kelvin only"
+    ],
+    "a": 0,
+    "e": "Centimetres are units of length, so the uncertainty can accompany a length."
+  },
+  {
+    "q": "A measured mass is 50.0 ± 0.2 g. The absolute uncertainty is:",
+    "o": [
+      "0.2 g",
+      "50.0 g",
+      "50.2 kg",
+      "0.004 g"
+    ],
+    "a": 0,
+    "e": "The absolute uncertainty is the stated ± value, 0.2 g."
+  },
+  {
+    "q": "Which result indicates the smaller absolute uncertainty?",
+    "o": [
+      "(4.0 ± 0.1) cm",
+      "(4.0 ± 0.3) cm",
+      "(4.0 ± 1.0) cm",
+      "All are equal"
+    ],
+    "a": 0,
+    "e": "0.1 cm is the smallest of the listed absolute uncertainties."
+  },
+  {
+    "q": "If the range of measurements is 1.6 s, the half-range estimate is:",
+    "o": [
+      "0.8 s",
+      "1.6 s",
+      "3.2 s",
+      "0.16 s"
+    ],
+    "a": 0,
+    "e": "Half-range = 1.6/2 = 0.8 s."
+  },
+  {
+    "q": "What should be done if an instrument has a known zero error?",
+    "o": [
+      "Account for or correct it when reporting the result",
+      "Ignore it always",
+      "Change the measured unit",
+      "Add it to every unit symbol"
+    ],
+    "a": 0,
+    "e": "A known zero error should be corrected or included in the uncertainty/error analysis."
+  },
+  {
+    "q": "Which statement about absolute uncertainty is correct?",
+    "o": [
+      "It has the same physical dimension as the measurement",
+      "It is always a percentage",
+      "It is always zero",
+      "It is the number of repeated readings"
+    ],
+    "a": 0,
+    "e": "Absolute uncertainty is expressed in the same unit as the measured quantity."
+  },
+  {
+    "q": "A measured temperature is 25.0 ± 0.5 °C. The lower bound is:",
+    "o": [
+      "24.5 °C",
+      "25.5 °C",
+      "0.5 °C",
+      "50.0 °C"
+    ],
+    "a": 0,
+    "e": "Lower bound = 25.0 − 0.5 = 24.5 °C."
+  },
+  {
+    "q": "What is a good practice when reporting a measurement?",
+    "o": [
+      "Give the value, unit, and suitable uncertainty",
+      "Give only a number",
+      "Add unsupported decimal places",
+      "Hide instrument limitations"
+    ],
+    "a": 0,
+    "e": "A clear report includes the measured value, unit, and a reasonable uncertainty."
+  }
+];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})()</script><script>(function(){const key='skillup-physics-absolute-uncertainty-pages-v1',kind='practice',el=document.getElementById('pageProgress');let state={learn:false,sim:false,practice:false};try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'));}catch(e){}function draw(){const n=['learn','sim','practice'].filter(k=>state[k]).length;if(el)el.textContent='Progress: '+n+'/3 pages completed';}function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}draw();}function done(){if(!state[kind]){state[kind]=true;save();}}if(kind==='learn')done();if(kind==='sim'){const p=document.getElementById('simPanel');if(p){p.addEventListener('input',done,{once:true});p.addEventListener('click',done,{once:true});}}if(kind==='practice'){const f=document.getElementById('finishSlot');if(f)new MutationObserver(()=>{if(f.children.length)done();}).observe(f,{childList:true});}draw();})();</script></main><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script></body></html>

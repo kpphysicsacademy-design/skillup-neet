@@ -132,9 +132,10 @@ function analyseSigFigures(raw){
    if(decimal){sig=digits.length-first;}
    else {const trimmed=digits.replace(/0+$/,'');sig=trimmed.length-first;}
  }else sig=1;
+ const ambiguous=!mantissa.includes('.')&&!s.toLowerCase().includes('e')&&/0+$/.test(digits)&&/[1-9]/.test(digits);
  const exp=n===0?0:Math.floor(Math.log10(Math.abs(n)));
  const coeff=n===0?0:n/Math.pow(10,exp);
- return {n,sig,first:digits.match(/[1-9]/)?.[0]||'0',exp,coeff};
+ return {n,sig:ambiguous?'Ambiguous':sig,first:digits.match(/[1-9]/)?.[0]||'0',exp,coeff};
 }
 function formatSig(n,sf){
  if(n===0)return '0';
@@ -145,8 +146,8 @@ function updateSigLab(){
  const d=analyseSigFigures($('sigInput').value),places=Math.max(1,Math.min(12,Number($('roundPlaces').value)||2));
  if(!d){$('sigCount').textContent='—';$('sigFirst').textContent='—';$('sigScientific').textContent='—';$('sigRounded').textContent='—';$('sigStatus').textContent='Enter a valid number';$('sigRoundNote').textContent='Use ordinary decimal or scientific notation.';return;}
  $('sigCount').textContent=d.sig;$('sigFirst').textContent=d.first;
- $('sigScientific').textContent=d.n===0?'0':Number(d.coeff.toPrecision(Math.min(12,Math.max(1,d.sig))))+' × 10'+(d.exp<0?'⁻'+String(Math.abs(d.exp)).replace(/\d/g,x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(x)]):d.exp>0?'⁺'+String(d.exp).replace(/\d/g,x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(x)]):'⁰');
- $('sigRounded').textContent=formatSig(d.n,places);$('sigStatus').textContent='Valid number';$('sigRoundNote').textContent='Rounded to '+places+' significant figure'+(places===1?'':'s')+'.';
+ $('sigScientific').textContent=d.n===0?'0':Number(d.coeff.toPrecision(Math.min(12,Math.max(1,typeof d.sig==='number'?d.sig:6))))+' × 10'+(d.exp<0?'⁻'+String(Math.abs(d.exp)).replace(/\d/g,x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(x)]):d.exp>0?'⁺'+String(d.exp).replace(/\d/g,x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(x)]):'⁰');
+ $('sigRounded').textContent=formatSig(d.n,places);$('sigStatus').textContent=d.sig==='Ambiguous'?'Trailing-zero precision ambiguous':'Valid number';$('sigRoundNote').textContent='Rounded to '+places+' significant figure'+(places===1?'':'s')+'.';
 }
 $('sigInput').addEventListener('input',updateSigLab);$('roundPlaces').addEventListener('change',updateSigLab);
 document.querySelectorAll('[data-sig-example]').forEach(b=>b.addEventListener('click',()=>{$('sigInput').value=b.dataset.sigExample;updateSigLab();}));

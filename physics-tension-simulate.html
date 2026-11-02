@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Study tension force with SkillUp Physics interactive lessons and practice."><title>SkillUp Physics | Tension – Simulator</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
+.quiz-progress{background:#fff;border:2px solid #e2edf7;border-radius:16px;padding:12px 14px;margin:0 0 12px;box-shadow:0 3px 0 #dce8f3}.quiz-progress .progress-row{margin:0 0 8px}.quiz-progress .track{height:12px}
+</style>
+</head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • TENSION</small></div><div class="xp">Simulator</div></div></header><nav class="tabs" aria-label="Tension pages"><a class="tab " href="physics-tension-learn.html">📘 Learn</a><a class="tab active" href="physics-tension-simulate.html">⚙️ Simulate</a><a class="tab " href="physics-tension-practice.html">✍️ Practice</a></nav><main><section class="panel" id="panel-simulate">
+<article class="sim-card">
+<h2>Tension simulator</h2>
+<p class="muted">Choose a physical situation and change the values to calculate tension instantly.</p>
+<div class="sim-grid">
+<label>Situation<select id="tn-mode"><option value="rest">Hanging at rest / constant velocity</option><option value="up">Accelerating upward</option><option value="down">Accelerating downward</option><option value="horizontal">Horizontal pull (frictionless)</option><option value="atwood">Atwood machine</option><option value="table">Table block + hanging mass</option></select></label>
+<label>Mass m₁ (kg)<input id="tn-m1" type="number" min="0" step="0.1" value="3"></label>
+<label>Gravity g (m/s²)<input id="tn-g" type="number" min="0" step="0.1" value="10"></label>
+<label id="tn-extra-label">Acceleration (m/s²)<input id="tn-extra" type="number" min="0" step="0.1" value="2"></label>
+<label id="tn-m2-label">Second mass m₂ (kg)<input id="tn-m2" type="number" min="0" step="0.1" value="5"></label>
+</div>
+<div class="sim-result" aria-live="polite"><div class="small-note">Calculated tension</div><strong id="tn-output">36.00 N</strong><p id="tn-working" class="small-note">T = m(g + a)</p></div>
+<p id="tn-note" class="small-note">Ideal string and pulley assumptions apply. For downward acceleration, keep a ≤ g for a taut hanging string.</p>
+</article>
+</section></main><script>
+(function(){
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(b=>b.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.toggle('active',x===b));
+ document.querySelectorAll('.panel').forEach(p=>{const isActive=p.id==='panel-'+b.dataset.tab;p.classList.toggle('active',isActive);p.hidden=!isActive;});
+}));
+const $=id=>document.getElementById(id);
+function calcTension(){
+ const m1=Math.max(0,Number($('tn-m1').value)||0),m2=Math.max(0,Number($('tn-m2').value)||0),g=Math.max(0,Number($('tn-g').value)||0),x=Math.max(0,Number($('tn-extra').value)||0),mode=$('tn-mode').value;
+ let T=0,work='',note='Ideal string and pulley assumptions apply.';
+ if(mode==='rest'){T=m1*g;work='T = mg';}
+ if(mode==='up'){T=m1*(g+x);work='T = m(g + a)';}
+ if(mode==='down'){T=m1*Math.max(0,g-x);work='T = m(g − a)';if(x>g)note='For a > g, a taut string cannot maintain this motion; the string goes slack and T = 0.';}
+ if(mode==='horizontal'){T=m1*x;work='T = ma (frictionless horizontal surface)';}
+ if(mode==='atwood'){const a=Math.abs(m2-m1)*g/(m1+m2||1);T=(2*m1*m2*g)/(m1+m2||1);work='T = 2m₁m₂g / (m₁ + m₂); a = '+a.toFixed(2)+' m/s²';}
+ if(mode==='table'){const a=m2*g/(m1+m2||1);T=m1*a;work='a = m₂g/(m₁ + m₂); T = m₁a = '+a.toFixed(2)+' × '+m1.toFixed(2); }
+ $('tn-output').textContent=T.toFixed(2)+' N';$('tn-working').textContent=work;$('tn-note').textContent=note;
+}
+function updateFields(){
+ const mode=$('tn-mode').value;
+ const lab=({rest:'Additional value',up:'Upward acceleration (m/s²)',down:'Downward acceleration (m/s²)',horizontal:'Acceleration (m/s²)',atwood:'Second mass m₂ (kg)',table:'Hanging mass m₂ (kg)'})[mode];
+ $('tn-extra-label').firstChild.textContent=lab+' ';
+ $('tn-m2-label').style.display=(mode==='atwood'||mode==='table')?'grid':'none';
+ $('tn-extra-label').style.display=(mode==='atwood'||mode==='table')?'none':'grid';
+ calcTension();
+}
+['tn-mode','tn-m1','tn-m2','tn-g','tn-extra'].forEach(id=>$(id).addEventListener('input',calcTension));
+$('tn-mode').addEventListener('change',updateFields);
+updateFields();
+})();
+</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script><script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

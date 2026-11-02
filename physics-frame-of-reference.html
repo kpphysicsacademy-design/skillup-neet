@@ -73,6 +73,22 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .sim-action{margin-top:12px;border:0;border-radius:12px;background:#58cc02;color:#fff;padding:11px 16px;font-weight:900;box-shadow:0 3px 0 #46a302;cursor:pointer}
 @media(max-width:480px){.study-tabs{gap:5px}.study-tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}.learn-card,.sim-card{padding:14px}}
 
+
+/* Visual motion diagrams for simulator-based explanations */
+.sim-visual{margin:12px 0 10px;padding:10px;background:#f2f9ff;border:1px solid #cdeafa;border-radius:15px;overflow:hidden}
+.sim-visual svg{display:block;width:100%;height:auto;max-height:210px}
+.sim-visual figcaption{margin-top:7px;text-align:center;color:#52677b;font-size:12px;line-height:1.45}
+.sim-visual .motion-arrow{stroke:#1596d0;stroke-width:4;stroke-linecap:round;fill:none}
+.sim-visual .arrow-head{fill:#1596d0}
+.sim-visual .ground-arrow{stroke:#58a700;stroke-width:4;stroke-linecap:round;fill:none}
+.sim-visual .ground-head{fill:#58a700}
+.sim-visual .scene-label{font:700 12px system-ui,sans-serif;fill:#174a78}
+.sim-visual .small-label{font:600 10px system-ui,sans-serif;fill:#52677b}
+.sim-visual .person{fill:#ffb547;stroke:#9b5b16;stroke-width:1.5}
+.sim-visual .car-a{fill:#1cb0f6;stroke:#12618c;stroke-width:2}
+.sim-visual .car-b{fill:#ffb547;stroke:#9b5b16;stroke-width:2}
+@media(max-width:420px){.sim-visual{padding:7px}.sim-visual figcaption{font-size:11px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -96,11 +112,37 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
  <article class="learn-card"><h3>7. Galilean velocity addition</h3><p>For ordinary non-relativistic speeds, velocities measured in two frames moving relative to each other are related by vector addition. A passenger walking forward in a train has the train's ground velocity plus the walking velocity relative to the train.</p><div class="formula">v<sub>person/ground</sub> = v<sub>person/train</sub> + v<sub>train/ground</sub></div><p>This is the classical approximation used in basic mechanics.</p></article>
 </section>
 <section class="study-panel" id="simulatorPanel">
- <div class="sim-card"><h3>🚆 Simulator 1: Passenger in a moving train</h3><p>Set the train velocity and the passenger's walking velocity relative to the train. Positive means forward/east; negative means backward/west.</p><div class="sim-grid">
+ <div class="sim-card"><h3>🚆 Simulator 1: Passenger in a moving train</h3><p>Set the train velocity and the passenger's walking velocity relative to the train. Positive means forward/east; negative means backward/west.</p><figure class="sim-visual" aria-label="Illustration of a passenger walking forward inside a moving train">
+ <svg viewBox="0 0 560 190" role="img" aria-labelledby="trainSceneTitle trainSceneDesc">
+  <title id="trainSceneTitle">Passenger and train velocity diagram</title><desc id="trainSceneDesc">A passenger walks inside a train. The train velocity and walking velocity combine to give the passenger's ground velocity.</desc>
+  <line x1="28" y1="151" x2="532" y2="151" stroke="#8aa2b5" stroke-width="4"/><path d="M45 160h470" stroke="#c1d1dc" stroke-width="2" stroke-dasharray="12 8"/>
+  <rect x="82" y="62" width="390" height="82" rx="16" fill="#dff4ff" stroke="#1687bd" stroke-width="3"/>
+  <rect x="105" y="77" width="70" height="34" rx="6" fill="#fff" stroke="#8bc9e8"/><rect x="188" y="77" width="70" height="34" rx="6" fill="#fff" stroke="#8bc9e8"/><rect x="271" y="77" width="70" height="34" rx="6" fill="#fff" stroke="#8bc9e8"/>
+  <circle cx="150" cy="148" r="12" fill="#52677b"/><circle cx="405" cy="148" r="12" fill="#52677b"/>
+  <circle cx="228" cy="82" r="9" class="person"/><path d="M228 92l-2 22m-1-13-12 8m13-8 12 7m-12 6-10 13m10-13 10 13" stroke="#9b5b16" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M90 35H440" class="motion-arrow"/><path d="M440 35l-13-8v16z" class="arrow-head"/><text x="265" y="24" text-anchor="middle" class="scene-label" id="fr-train-arrow-label">Train: +20 m/s</text>
+  <path d="M215 53H300" class="ground-arrow"/><path d="M300 53l-11-7v14z" class="ground-head"/><text x="258" y="47" text-anchor="middle" class="small-label" id="fr-walk-arrow-label">Walk: +2 m/s</text>
+  <text x="278" y="181" text-anchor="middle" class="small-label">Ground / railway track (reference frame)</text>
+ </svg>
+ <figcaption id="fr-train-caption">The passenger moves with the train and also walks forward inside it. Add the two velocities to find ground velocity.</figcaption>
+</figure>
+<div class="sim-grid">
   <div class="sim-field"><label for="fr-train">Train velocity (m/s)</label><input id="fr-train" type="number" step="any" value="20"></div>
   <div class="sim-field"><label for="fr-walk">Passenger velocity relative to train (m/s)</label><input id="fr-walk" type="number" step="any" value="2"></div>
  </div><button class="sim-action" id="fr-calculate" type="button">Calculate ground velocity</button><div class="sim-result" id="fr-result" aria-live="polite">Ground velocity = 22 m/s (positive direction)</div><p class="sim-hint">Use a consistent positive direction for both velocities.</p></div>
- <div class="sim-card"><h3>↔️ Simulator 2: Relative velocity between two objects</h3><p>Enter both velocities along the same straight line. The result is the velocity of object A as seen from object B.</p><div class="sim-grid">
+ <div class="sim-card"><h3>↔️ Simulator 2: Relative velocity between two objects</h3><p>Enter both velocities along the same straight line. The result is the velocity of object A as seen from object B.</p><figure class="sim-visual" aria-label="Illustration comparing the velocities of two cars">
+ <svg viewBox="0 0 560 150" role="img" aria-labelledby="carsSceneTitle carsSceneDesc">
+  <title id="carsSceneTitle">Two-object relative velocity diagram</title><desc id="carsSceneDesc">Two cars move along the same straight road. Their signed velocities determine the velocity of A relative to B.</desc>
+  <line x1="28" y1="115" x2="532" y2="115" stroke="#8aa2b5" stroke-width="4"/><path d="M35 125h490" stroke="#c1d1dc" stroke-width="2" stroke-dasharray="12 8"/>
+  <g transform="translate(115 63)"><rect x="0" y="10" width="92" height="30" rx="8" class="car-a"/><path d="M18 10l14-18h38l17 18" fill="#bceaff" stroke="#12618c" stroke-width="2"/><circle cx="22" cy="43" r="8" fill="#52677b"/><circle cx="72" cy="43" r="8" fill="#52677b"/><text x="46" y="30" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text></g>
+  <g transform="translate(355 63)"><rect x="0" y="10" width="92" height="30" rx="8" class="car-b"/><path d="M18 10l14-18h38l17 18" fill="#ffe2ad" stroke="#9b5b16" stroke-width="2"/><circle cx="22" cy="43" r="8" fill="#52677b"/><circle cx="72" cy="43" r="8" fill="#52677b"/><text x="46" y="30" text-anchor="middle" font-size="13" font-weight="900" fill="#75400d">B</text></g>
+  <path id="fr-a-arrow" d="M160 42H275" class="motion-arrow"/><path id="fr-a-head" d="M275 42l-12-7v14z" class="arrow-head"/>
+  <path id="fr-b-arrow" d="M400 42H285" class="ground-arrow"/><path id="fr-b-head" d="M285 42l12-7v14z" class="ground-head"/>
+  <text x="218" y="29" text-anchor="middle" class="small-label" id="fr-a-label">A: +15 m/s</text><text x="342" y="29" text-anchor="middle" class="small-label" id="fr-b-label">B: −15 m/s</text>
+ </svg>
+ <figcaption id="fr-relative-caption">Relative velocity is the velocity of A minus the velocity of B: vA/B = vA − vB.</figcaption>
+</figure>
+<div class="sim-grid">
   <div class="sim-field"><label for="fr-a">Velocity of A (m/s)</label><input id="fr-a" type="number" step="any" value="15"></div>
   <div class="sim-field"><label for="fr-b">Velocity of B (m/s)</label><input id="fr-b" type="number" step="any" value="-15"></div>
  </div><button class="sim-action" id="fr-relative" type="button">Find relative velocity</button><div class="sim-result" id="fr-relative-result" aria-live="polite">Velocity of A relative to B = 30 m/s</div><p class="sim-hint">A positive result means A moves in the chosen positive direction relative to B; a negative result means the opposite.</p></div>
@@ -502,15 +544,20 @@ document.getElementById('fr-calculate').addEventListener('click',function(){
  if(!Number.isFinite(train)||!Number.isFinite(walk)){out.textContent='Enter valid velocities in both fields.';return;}
  const ground=train+walk;
  out.textContent='Ground velocity = '+frFormat(ground)+' m/s ('+(ground>0?'positive direction':ground<0?'negative direction':'at rest relative to ground')+'). Calculation: '+frFormat(train)+' + ('+frFormat(walk)+') = '+frFormat(ground)+' m/s.';
+ document.getElementById('fr-train-arrow-label').textContent='Train: '+(train>=0?'+':'')+frFormat(train)+' m/s';
+ document.getElementById('fr-walk-arrow-label').textContent='Walk: '+(walk>=0?'+':'')+frFormat(walk)+' m/s';
+ document.getElementById('fr-train-caption').textContent='Ground velocity = '+frFormat(train)+' + ('+frFormat(walk)+') = '+frFormat(ground)+' m/s. '+(ground===0?'The passenger is at rest relative to the ground.':'The sign shows the direction relative to the ground.');
 });
 document.getElementById('fr-relative').addEventListener('click',function(){
  const a=frRead('fr-a'),b=frRead('fr-b'),out=document.getElementById('fr-relative-result');
  if(!Number.isFinite(a)||!Number.isFinite(b)){out.textContent='Enter valid velocities for both objects.';return;}
  const relative=a-b;
  out.textContent='Velocity of A relative to B = vA − vB = '+frFormat(a)+' − ('+frFormat(b)+') = '+frFormat(relative)+' m/s ('+(relative>0?'positive direction':relative<0?'negative direction':'zero relative velocity')+').';
+ document.getElementById('fr-a-label').textContent='A: '+(a>=0?'+':'')+frFormat(a)+' m/s';
+ document.getElementById('fr-b-label').textContent='B: '+(b>=0?'+':'')+frFormat(b)+' m/s';
+ document.getElementById('fr-relative-caption').textContent='vA/B = '+frFormat(a)+' − ('+frFormat(b)+') = '+frFormat(relative)+' m/s. '+(relative===0?'Both objects have the same velocity, so A is at rest relative to B.':'The signed result gives the direction of A as seen from B.');
 });
 
-render();
 })();
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

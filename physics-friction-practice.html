@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn, simulate and practise friction force with interactive examples and 30 questions.">
+<title>SkillUp Physics | Friction – Practice</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
+.quiz-progress{background:#fff;border:2px solid #e2edf7;border-radius:16px;padding:12px 14px;margin:0 0 12px;box-shadow:0 3px 0 #dce8f3}.quiz-progress .progress-row{margin:0 0 8px}.quiz-progress .track{height:12px}
+.friction-figure{margin:16px 0;padding:12px;background:#f8fbff;border:1px solid #dbe7f3;border-radius:16px;text-align:center}.friction-figure svg{display:block;width:100%;max-width:620px;height:auto;margin:auto;color:#334155}.friction-figure figcaption{font-size:13px;color:#64748b;margin-top:8px}
+.tabs a{text-decoration:none;text-align:center;display:block}.tabs a.active{background:#58cc02;border-color:#46a302;color:#fff}
+</style></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • FRICTION</small></div><div class="xp">Practice</div></div></header><nav class="tabs" aria-label="Friction pages">
+<a class="tab" href="physics-friction-learn.html">📘 Learn</a>
+<a class="tab" href="physics-friction-simulate.html">⚙️ Simulate</a>
+<a class="tab" href="physics-friction-practice.html" class="tab active">✍️ Practice</a>
+</nav><main><section class="panel active" id="panel-practice">
+<div class="quiz-progress" aria-label="Quiz progress"><div class="progress-row"><span id="progressText">0 of 30 completed</span><span id="percent">0%</span></div><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" aria-label="Questions completed"><div class="fill" id="fill"></div></div></div>
+<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+<div id="finishSlot"></div>
+</section>
+</main><script>
+(function(){
+'use strict';
+const questions = [{"q":"Friction between two surfaces acts to oppose:","o":["Relative motion or its tendency","Gravity in every case","The normal force always","The object's weight only"],"a":0,"e":"Friction acts parallel to the contact surfaces and opposes relative sliding or its tendency."},{"q":"The SI unit of frictional force is:","o":["Newton (N)","Joule (J)","Watt (W)","Pascal (Pa)"],"a":0,"e":"Friction is a force, measured in newtons."},{"q":"Static friction acts when the surfaces are:","o":["Not sliding relative to each other","Always sliding","Not touching","Moving only in a vacuum"],"a":0,"e":"Static friction prevents relative sliding and adjusts up to a maximum value."},{"q":"Kinetic friction acts when surfaces are:","o":["Sliding relative to each other","At rest with no tendency to slip","Far apart","Always rolling without slipping"],"a":0,"e":"Kinetic friction acts during relative sliding at the contact."},{"q":"The magnitude of maximum static friction is:","o":["μsN","μk/N","N/μs","μs/N"],"a":0,"e":"The limiting static friction is f_s,max = μ_s N."},{"q":"The kinetic friction magnitude in the simple dry-friction model is:","o":["μkN","μk/N","N/μk","μk + N"],"a":0,"e":"Kinetic friction is modeled as f_k = μ_k N."},{"q":"The coefficient of friction is:","o":["Dimensionless","Measured in newtons","Measured in metres","Measured in kg/s"],"a":0,"e":"It is a ratio of friction force to normal force, so the units cancel."},{"q":"A 10 kg box rests on a horizontal floor. Take g = 10 m/s² and μs = 0.4. Maximum static friction is:","o":["40 N","100 N","4 N","25 N"],"a":0,"e":"N = mg = 100 N, so f_s,max = 0.4 × 100 = 40 N."},{"q":"A block has normal force 50 N and coefficient of kinetic friction 0.2. Kinetic friction is:","o":["10 N","25 N","50.2 N","250 N"],"a":0,"e":"f_k = μ_kN = 0.2 × 50 = 10 N."},{"q":"A box is pushed with 12 N but remains at rest. The static friction magnitude is:","o":["12 N","Zero always","Greater than 12 N necessarily","Equal to the box's weight"],"a":0,"e":"Static friction adjusts to balance the applied force while the box remains at rest, provided the limit is not exceeded."},{"q":"If the applied force exceeds maximum static friction, the object generally:","o":["Begins to slide","Remains at rest regardless of force","Loses its mass","Has zero normal force automatically"],"a":0,"e":"Once the required static friction exceeds its maximum, sliding begins."},{"q":"For a block sliding on a horizontal surface, kinetic friction generally points:","o":["Opposite the direction of sliding","Along the direction of sliding","Vertically upward","Toward the centre of Earth"],"a":0,"e":"Kinetic friction opposes relative motion at the contact."},{"q":"A 5 kg block slides on a horizontal floor with μk = 0.2. Take g = 10 m/s². Friction magnitude is:","o":["10 N","25 N","50 N","2 N"],"a":0,"e":"N = 5 × 10 = 50 N, so f_k = 0.2 × 50 = 10 N."},{"q":"For a block on a horizontal surface with no other vertical forces, the normal force is:","o":["mg","μmg","Zero","Equal to kinetic friction always"],"a":0,"e":"With no vertical acceleration or other vertical forces, N = mg."},{"q":"A block is at rest on an incline and tends to slide down. Static friction acts:","o":["Up the incline","Down the incline","Vertically upward","Perpendicular to the incline"],"a":0,"e":"Static friction opposes the tendency to slide down, so it acts up the slope."},{"q":"For a block just about to slide down an incline of angle θ, the limiting condition is:","o":["mg sinθ = μs mg cosθ","mg cosθ = μs mg sinθ","mg = μs","mg sinθ = 0"],"a":0,"e":"At impending motion, the downslope component equals maximum static friction: mg sinθ = μ_s mg cosθ."},{"q":"The angle of repose θ for a simple block on an incline satisfies:","o":["tanθ = μs","sinθ = μs","cosθ = μs","θ = μs in all units"],"a":0,"e":"At the limiting angle, mg sinθ = μ_s mg cosθ, hence tanθ = μ_s."},{"q":"If μs = 0.5, the angle of repose is approximately:","o":["26.6°","30°","45°","60°"],"a":0,"e":"tanθ = 0.5, so θ = arctan(0.5) ≈ 26.6°."},{"q":"Which coefficient is usually larger for the same pair of dry surfaces?","o":["Maximum static coefficient μs","Kinetic coefficient μk","They must be equal","Neither can be compared ever"],"a":0,"e":"For many common dry surfaces, μ_s is greater than μ_k, though this is an empirical pattern rather than a universal law."},{"q":"In the ideal dry-friction model, kinetic friction depends mainly on:","o":["Coefficient of kinetic friction and normal force","Contact area alone","Object speed only","Object colour"],"a":0,"e":"The model uses f_k = μ_kN; it does not depend directly on apparent contact area."},{"q":"A 20 N horizontal force acts on a 4 kg box at rest. Maximum static friction is 25 N. The box:","o":["Remains at rest, with 20 N static friction","Accelerates at 5 m/s²","Slides with 25 N kinetic friction necessarily","Has no friction"],"a":0,"e":"The applied 20 N is below the 25 N maximum, so static friction can balance it."},{"q":"A 2 kg block slides on a horizontal floor with μk = 0.3. Take g = 10 m/s². If the only horizontal force is friction, acceleration magnitude is:","o":["3 m/s²","0.3 m/s²","6 m/s²","10 m/s²"],"a":0,"e":"f_k = 0.3 × 20 = 6 N, so a = f/m = 6/2 = 3 m/s² opposite motion."},{"q":"A block moves at constant speed across a rough horizontal floor while being pulled horizontally. The pull magnitude equals:","o":["Kinetic friction magnitude","The normal force","The weight plus friction","Zero"],"a":0,"e":"Constant speed means zero net horizontal force, so pull balances kinetic friction."},{"q":"Lubrication usually reduces friction by:","o":["Separating surfaces with a thin layer","Increasing surface roughness intentionally","Increasing normal force","Removing the normal force"],"a":0,"e":"A lubricant reduces direct contact between surface irregularities and lowers friction."},{"q":"Which statement about static friction is correct?","o":["It can be smaller than its maximum value","It always equals μsN","It is always zero","It acts only when surfaces slide"],"a":0,"e":"Static friction adjusts to the needed value up to f_s,max = μ_sN."},{"q":"A 10 kg block has μk = 0.1 on a horizontal surface. Take g = 10 m/s². Kinetic friction is:","o":["10 N","1 N","100 N","0.1 N"],"a":0,"e":"N = mg = 100 N, so f_k = 0.1 × 100 = 10 N."},{"q":"A block is pulled up a rough incline at constant speed. Friction on the block points:","o":["Down the incline","Up the incline","Vertically upward","Perpendicular to the incline"],"a":0,"e":"Friction opposes the block's sliding motion up the incline, so it points down the slope."},{"q":"When a car tyre rolls without slipping on a road while accelerating, the friction at the contact can be:","o":["Static friction","Always kinetic friction","Always zero","Only air resistance"],"a":0,"e":"With no slipping at the contact, the frictional force is static friction."},{"q":"Which is a useful role of friction in walking?","o":["Static friction provides traction against slipping","Kinetic friction pushes the foot forward while it slides","Friction removes gravity","Normal force becomes zero"],"a":0,"e":"The foot pushes backward on the ground; static friction from the ground provides forward traction."},{"q":"A 6 kg block is on a horizontal floor with μs = 0.25. Take g = 10 m/s². Maximum static friction is:","o":["15 N","60 N","2.4 N","25 N"],"a":0,"e":"N = 60 N, so f_s,max = 0.25 × 60 = 15 N."}];
+let index=0,score=0,streak=0,chosen=null,locked=false;
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;
+ const item=questions[index];
+ $('progressText').textContent=index+' of '+questions.length+' completed';
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';document.querySelector('#panel-practice .track').setAttribute('aria-valuenow',String(index));
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+   const b=document.createElement('button');b.type='button';b.className='option';
+   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+   $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const f=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
+ else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent=questions.length+' of '+questions.length+' completed';$('percent').textContent='100%';document.querySelector('#panel-practice .track').setAttribute('aria-valuenow',String(questions.length));
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+});
+render();
+})();
+</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script><script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

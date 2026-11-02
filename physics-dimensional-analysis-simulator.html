@@ -1,1 +1,96 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SkillUp Physics | Dimensional Analysis Simulator</title><style>body{margin:0;font-family:system-ui;background:#eef7ff;color:#173b62}.wrap{max-width:1050px;margin:auto;padding:20px}.hero,.mastery,.quiz,.panel{background:#fff;border-radius:20px;padding:22px;margin:12px 0;box-shadow:0 6px 18px #123b7015}.hero{background:linear-gradient(135deg,#12539d,#1685e8);color:#fff}.layout{display:grid;grid-template-columns:260px 1fr;gap:18px}.options{display:grid;gap:10px}.option{padding:14px;border:2px solid #dbe7f1;border-radius:15px;background:#fff;text-align:left;font-weight:700;cursor:pointer}.selected{border-color:#1677ff;background:#eef6ff}.correct{border-color:#2db84d;background:#eaffef}.wrong{border-color:#e5484d;background:#fff0f0}.btn{padding:12px 18px;border:0;border-radius:13px;font-weight:900;cursor:pointer;margin:8px 6px 0 0}.check{background:#2db84d;color:#fff}.next{background:#dcecff;color:#145b9e}.next:disabled{opacity:.45}.bar{height:13px;background:#dce8f2;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#42c95a}.feedback{margin-top:14px;padding:13px;border-radius:14px}.good{background:#e5f9e9;color:#176c31}.bad{background:#fff0f0;color:#a12b30}</style></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html">←</a><div class="brand">SkillUp<small>PHYSICS • INTERACTIVE LAB</small></div></div></header><main><section class="hero page-hero"><h1>Dimensional Analysis Simulator</h1><p class="muted">Explore dimensional formulae and test equations with live controls.</p></section><nav class="page-tabs"><a class="page-tab" href="physics-dimensional-analysis.html">📘 Learn</a><a class="page-tab" href="physics-dimensional-analysis-simulator.html">🎮 Simulator</a><a class="page-tab" href="physics-dimensional-analysis-practice.html">🧠 Practice</a></nav><div class="page-progress" id="pageProgress">Progress: 0/3 pages completed</div><section class="learn-card" id="simControls"><h2>Build a dimensional formula</h2><p>Change the exponents of mass (M), length (L) and time (T).</p><p><label>Mass exponent: <b id="v0">1</b></label><input id="x0" type="range" min="-3" max="3" value="1" style="width:100%;accent-color:#58cc02"></p><p><label>Length exponent: <b id="v1">1</b></label><input id="x1" type="range" min="-3" max="3" value="1" style="width:100%;accent-color:#58cc02"></p><p><label>Time exponent: <b id="v2">-2</b></label><input id="x2" type="range" min="-3" max="3" value="-2" style="width:100%;accent-color:#58cc02"></p><div class="formula" id="out">[MLT⁻²]</div><p id="meaning">This is the dimensional formula of force.</p></section><section class="learn-card"><h2>Explore standard quantities</h2><div class="formula">Force [MLT⁻²] · Work [ML²T⁻²] · Power [ML²T⁻³]</div><div class="formula">Pressure [ML⁻¹T⁻²] · Density [ML⁻³] · Frequency [T⁻¹]</div></section><section class="learn-card"><h2>Equation consistency tester</h2><select id="test" style="width:100%;padding:12px;border-radius:12px"><option value="1">s = ut + ½at²</option><option value="2">v = u + at</option><option value="3">F = mv</option><option value="4">v² = u² + 2as</option></select><div class="formula" id="result">Dimensionally consistent ✓</div><p id="why">Each term has dimension L.</p></section><script>const ids=['x0','x1','x2'],sym=['M','L','T'],sup=n=>String(n).replace('-','⁻').replace('1','¹').replace('2','²').replace('3','³');function upd(){let v=ids.map((id,i)=>{let n=+document.getElementById(id).value;document.getElementById('v'+i).textContent=n;return n});let s=v.map((n,i)=>n?sym[i]+(n===1?'':sup(n)):'').join('');document.getElementById('out').textContent='['+(s||'1')+']';let known={'1,1,-2':'force','1,2,-2':'work or energy','1,2,-3':'power','0,0,-1':'frequency','1,-3,0':'density','1,-1,-2':'pressure'};document.getElementById('meaning').textContent='This matches '+(known[v.join(',')]||'a derived quantity')+'.'}ids.forEach(id=>document.getElementById(id).oninput=upd);let tests={1:['Dimensionally consistent ✓','Each term has dimension L.'],2:['Dimensionally consistent ✓','Each term has dimension LT⁻¹.'],3:['Not consistent ✕','Force is [MLT⁻²], but mv is [MLT⁻¹].'],4:['Dimensionally consistent ✓','Each term has dimension L²T⁻².']};document.getElementById('test').onchange=e=>{let a=tests[e.target.value];document.getElementById('result').textContent=a[0];document.getElementById('why').textContent=a[1]};upd();</script></main><script>(()=>{let k='skillup-physics-dimensional-analysis-pages-v2',s={learn:false,sim:false,practice:false};try{s={...s,...JSON.parse(localStorage.getItem(k)||'{}')}}catch(e){}let el=document.getElementById('pageProgress'),draw=()=>{if(el)el.textContent='Progress: '+['learn','sim','practice'].filter(x=>s[x]).length+'/3 pages completed'},save=()=>{try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}draw()};document.getElementById('simControls')?.addEventListener('input',()=>{s.sim=true;save()},{once:true});draw()})();</script><script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#176b35">
+<title>Dimensional Analysis Simulator | SkillUp Physics</title>
+<style>
+:root{--green:#58cc02;--green-dark:#27852b;--ink:#243b32;--muted:#63766c;--line:#dce9df;--bg:#f3f9f3;--blue:#2478cf;--red:#d94b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:12px 18px;display:flex;align-items:center;gap:14px}.back{color:var(--green-dark);text-decoration:none;font-weight:800}.brand{font-weight:900;letter-spacing:.3px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.2px}
+main{max-width:1000px;margin:auto;padding:18px}.hero{background:linear-gradient(120deg,#176b35,#58a934);color:white;border-radius:22px;padding:24px;margin:8px 0 14px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:1px;opacity:.9}.hero h1{margin:7px 0;font-size:clamp(25px,5vw,36px)}.hero p{margin:0;opacity:.93}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tab{padding:10px 15px;border:1px solid var(--line);border-radius:13px;background:white;color:#315b40;text-decoration:none;font-weight:800}.tab.active{background:#e5f8dc;border-color:#9bd77d;color:#236b25}
+.progress{font-size:13px;color:var(--muted);padding:8px 2px 14px}.card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:20px;margin:12px 0;box-shadow:0 4px 12px #183d1a0a}.card h2{margin:0 0 7px;font-size:21px}.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
+.builder{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dimension{border:1px solid var(--line);border-radius:14px;padding:12px}.dim-head{display:flex;justify-content:space-between;align-items:center;font-weight:800}.symbol{font-size:20px;color:var(--green-dark)}input[type=range]{width:100%;accent-color:var(--green);margin:12px 0 2px}.dim-note{font-size:11px;color:var(--muted)}
+.output{background:#173d28;color:#fff;border-radius:16px;padding:18px;text-align:center;margin-top:14px}.formula{font-size:clamp(24px,5vw,34px);font-weight:900;letter-spacing:1px;overflow-wrap:anywhere}.output small{display:block;color:#d7f3d3;margin-top:5px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.preset,.btn{border:0;border-radius:12px;padding:10px 13px;font-weight:800;cursor:pointer}.preset{background:#edf7ed;color:#286b31;border:1px solid #d7ead5}.preset:hover{background:#def2d8}.btn{background:var(--green);color:#173d20}.btn.secondary{background:#e9f1eb;color:#315b40}.btn:disabled{opacity:.45;cursor:not-allowed}
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}.field select{width:100%;padding:12px;border:1px solid #cbdccf;border-radius:12px;background:#fff;color:var(--ink);font:inherit}
+.result{padding:14px;border-radius:13px;margin-top:13px;background:#f0f5f0}.result.good{background:#e7f8e8;color:#205f2a}.result.bad{background:#fff0ed;color:#a5332c}.result strong{display:block;margin-bottom:4px}
+.completion{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.hint{font-size:13px;color:var(--muted)}
+@media(max-width:640px){main{padding:12px}.card{padding:15px}.builder{grid-template-columns:1fr 1fr;gap:8px}.dimension{padding:10px}.test-grid{grid-template-columns:1fr}.hero{padding:20px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics path">← Back</a><div class="brand">SkillUp<small>PHYSICS · INTERACTIVE LAB</small></div></header>
+<main>
+<section class="hero"><div class="eyebrow">UNIT 1 · MEASUREMENTS</div><h1>Dimensional Analysis Lab</h1><p>Build dimensional formulae, explore physical quantities and test equations.</p></section>
+<nav class="tabs" aria-label="Topic pages"><a class="tab" href="physics-dimensional-analysis.html">📘 Learn</a><a class="tab active" aria-current="page" href="physics-dimensional-analysis-simulator.html">🎮 Simulator</a><a class="tab" href="physics-dimensional-analysis-practice.html">🧠 Practice</a></nav>
+<div class="progress" id="pageProgress" aria-live="polite">Progress: 0/3 pages completed</div>
+<section class="card">
+<h2>1. Build a dimensional formula</h2><p class="sub">Adjust the exponents of all seven SI base dimensions. The formula updates instantly.</p>
+<div class="builder" id="builder">
+<div class="dimension"><div class="dim-head"><span><span class="symbol">M</span> · Mass</span><b id="vM">1</b></div><input id="M" type="range" min="-3" max="3" step="1" value="1"><div class="dim-note">kilogram (kg)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">L</span> · Length</span><b id="vL">1</b></div><input id="L" type="range" min="-3" max="3" step="1" value="1"><div class="dim-note">metre (m)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">T</span> · Time</span><b id="vT">-2</b></div><input id="T" type="range" min="-3" max="3" step="1" value="-2"><div class="dim-note">second (s)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">I</span> · Electric current</span><b id="vI">0</b></div><input id="I" type="range" min="-3" max="3" step="1" value="0"><div class="dim-note">ampere (A)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">Θ</span> · Temperature</span><b id="vTheta">0</b></div><input id="Theta" type="range" min="-3" max="3" step="1" value="0"><div class="dim-note">kelvin (K)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">N</span> · Amount of substance</span><b id="vN">0</b></div><input id="N" type="range" min="-3" max="3" step="1" value="0"><div class="dim-note">mole (mol)</div></div>
+<div class="dimension"><div class="dim-head"><span><span class="symbol">J</span> · Luminous intensity</span><b id="vJ">0</b></div><input id="J" type="range" min="-3" max="3" step="1" value="0"><div class="dim-note">candela (cd)</div></div>
+</div>
+<div class="output"><div class="formula" id="formula" aria-live="polite">[MLT⁻²]</div><small id="meaning">Matches the dimensions of force</small></div>
+<div class="presets" aria-label="Load a standard quantity">
+<button class="preset" data-preset="force">Force</button><button class="preset" data-preset="velocity">Velocity</button><button class="preset" data-preset="acceleration">Acceleration</button><button class="preset" data-preset="work">Work / Energy</button><button class="preset" data-preset="power">Power</button><button class="preset" data-preset="pressure">Pressure</button><button class="preset" data-preset="density">Density</button><button class="preset" data-preset="charge">Charge</button><button class="preset" data-preset="potential">Potential difference</button><button class="preset" data-preset="frequency">Frequency</button><button class="preset" data-preset="dimensionless">Dimensionless</button>
+</div>
+</section>
+<section class="card">
+<h2>2. Equation consistency tester</h2><p class="sub">Choose an equation to compare the dimensions of its left- and right-hand sides.</p>
+<div class="test-grid"><div class="field"><label for="equation">Select an equation</label><select id="equation"><option value="motion">s = ut + ½at²</option><option value="velocity">v = u + at</option><option value="energy">E = mc²</option><option value="force">F = ma</option><option value="wrong">F = mv</option><option value="period">T = 2π√(l/g)</option><option value="pressure">P = F/A</option><option value="ohm">V = IR</option></select></div><div class="field"><label for="testButton">Run dimensional check</label><button class="btn" id="testButton" style="width:100%">Check equation ✓</button></div></div>
+<div class="result" id="testResult" aria-live="polite"><strong>Ready to test</strong>Select an equation and run the dimensional check.</div>
+</section>
+<section class="card completion"><div><h2>Simulator progress</h2><div class="hint" id="completionHint">Explore the formula builder and test at least one equation.</div></div><button class="btn" id="complete">Mark simulator complete</button></section>
+</main>
+<script>
+(function(){
+const keys=['M','L','T','I','Theta','N','J'];
+const symbols={M:'M',L:'L',T:'T',I:'I',Theta:'Θ',N:'N',J:'J'};
+const supers={'-3':'⁻³','-2':'⁻²','-1':'⁻¹','0':'','1':'','2':'²','3':'³'};
+const quantities={
+force:[1,1,-2,0,0,0,0,'Force'],velocity:[0,1,-1,0,0,0,0,'Velocity'],acceleration:[0,1,-2,0,0,0,0,'Acceleration'],work:[1,2,-2,0,0,0,0,'Work / energy'],power:[1,2,-3,0,0,0,0,'Power'],pressure:[1,-1,-2,0,0,0,0,'Pressure'],density:[1,-3,0,0,0,0,0,'Density'],charge:[0,0,1,1,0,0,0,'Electric charge'],potential:[1,2,-3,-1,0,0,0,'Potential difference'],frequency:[0,0,-1,0,0,0,0,'Frequency'],dimensionless:[0,0,0,0,0,0,0,'Dimensionless quantity']
+};
+const tests={
+motion:{ok:true,left:'[L]',right:'[L] + [L]',why:'Displacement s, ut and at² all have dimensions of length.'},
+velocity:{ok:true,left:'[LT⁻¹]',right:'[LT⁻¹] + [LT⁻¹]',why:'Velocity u and the product at both have dimensions LT⁻¹.'},
+energy:{ok:true,left:'[ML²T⁻²]',right:'[M] × [LT⁻¹]² = [ML²T⁻²]',why:'Both sides have the dimensions of energy.'},
+force:{ok:true,left:'[MLT⁻²]',right:'[M] × [LT⁻²] = [MLT⁻²]',why:'Mass multiplied by acceleration gives the dimensions of force.'},
+wrong:{ok:false,left:'[MLT⁻²]',right:'[M] × [LT⁻¹] = [MLT⁻¹]',why:'The right side has dimensions of momentum, not force.'},
+period:{ok:true,left:'[T]',right:'√([L]/[LT⁻²]) = [T]',why:'The ratio l/g has dimensions T²; its square root has dimensions T.'},
+pressure:{ok:true,left:'[ML⁻¹T⁻²]',right:'[MLT⁻²]/[L²] = [ML⁻¹T⁻²]',why:'Force divided by area gives pressure.'},
+ohm:{ok:true,left:'[ML²T⁻³I⁻¹]',right:'[ML²T⁻³I⁻²] × [I] = [ML²T⁻³I⁻¹]',why:'Resistance multiplied by current gives potential difference.'}
+};
+function getValues(){return keys.map(k=>Number(document.getElementById(k).value))}
+function format(values){let parts=[];values.forEach((v,i)=>{if(v!==0)parts.push(symbols[keys[i]]+supers[String(v)])});return '['+(parts.length?parts.join(''):'1')+']'}
+function update(){
+const v=getValues();keys.forEach((k,i)=>{let node=document.getElementById('v'+k);if(node)node.textContent=v[i]});
+document.getElementById('formula').textContent=format(v);
+let match=Object.entries(quantities).find(([k,q])=>q.slice(0,7).every((n,i)=>n===v[i]));
+document.getElementById('meaning').textContent=match?'Matches the dimensions of '+match[1][7]:'A derived dimensional formula';
+}
+keys.forEach(k=>document.getElementById(k).addEventListener('input',update));
+document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>{let q=quantities[btn.dataset.preset];keys.forEach((k,i)=>document.getElementById(k).value=q[i]);update()}));
+document.getElementById('testButton').addEventListener('click',()=>{
+const t=tests[document.getElementById('equation').value],box=document.getElementById('testResult');
+box.className='result '+(t.ok?'good':'bad');
+box.innerHTML='<strong>'+(t.ok?'Dimensionally consistent ✓':'Not dimensionally consistent ✕')+'</strong><div>Left side: '+t.left+'</div><div>Right side: '+t.right+'</div><p>'+t.why+'</p>';
+window.skillupSimulatorTested=true;
+});
+const storageKey='skillup-physics-dimensional-analysis-pages-v2';
+function readProgress(){try{return Object.assign({learn:false,sim:false,practice:false},JSON.parse(localStorage.getItem(storageKey)||'{}'))}catch(e){return {learn:false,sim:false,practice:false}}}
+function drawProgress(){let s=readProgress();document.getElementById('pageProgress').textContent='Progress: '+['learn','sim','practice'].filter(k=>s[k]).length+'/3 pages completed'}
+function markComplete(){let s=readProgress();s.sim=true;try{localStorage.setItem(storageKey,JSON.stringify(s))}catch(e){}drawProgress();document.getElementById('completionHint').textContent='Simulator completed — progress saved on this device.';document.getElementById('complete').textContent='Completed ✓';document.getElementById('complete').disabled=true}
+document.getElementById('complete').addEventListener('click',markComplete);
+document.getElementById('builder').addEventListener('input',()=>{document.getElementById('completionHint').textContent='Good work! You can now mark the simulator complete.'},{once:true});
+drawProgress();update();
+})();
+</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+</body></html>

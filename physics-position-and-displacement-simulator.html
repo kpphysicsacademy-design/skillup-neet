@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SkillUp Physics Easy Mode: Position and Displacement quiz">
+<title>SkillUp | Position and Displacement — Easy Quiz</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+/* SkillUp Learn / Simulator / Practice architecture */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;background:#fff;color:#31536d;border-radius:14px;padding:12px 7px;font-weight:900;font-size:14px;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-intro,.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:19px;padding:16px;margin-bottom:12px;box-shadow:0 3px 0 #dce8f3}
+.learn-intro h2,.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78}
+.learn-card p,.sim-card p{margin:7px 0;color:#52677a;line-height:1.55;font-size:14px}
+.learn-card .formula,.formula{display:block;background:#eef8ff;border:1px solid #ccecff;border-radius:12px;padding:11px 13px;margin-top:10px;color:#075985;font-weight:900;line-height:1.5}
+.learn-number{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#e7f8db;color:#347d08;font-weight:950;margin-right:7px}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677a;margin:0 0 5px}
+.sim-field input{width:100%;min-height:45px;border:2px solid #dce6ef;border-radius:12px;padding:9px 11px;font:700 16px system-ui;color:#243447;background:#fff}
+.sim-field input:focus{outline:3px solid #bceaff;border-color:#1cb0f6}
+.sim-visual{margin:12px 0 8px;padding:10px;background:#f2f9ff;border:1px solid #d7ebfa;border-radius:16px;overflow:hidden}
+.sim-visual svg{display:block;width:100%;height:auto;max-height:260px}
+.sim-visual figcaption{font-size:12px;color:#52677a;text-align:center;line-height:1.45;padding:5px 3px 1px}
+.sim-result{background:#efffe7;border:2px solid #c8f0b2;border-radius:13px;padding:12px;margin-top:10px;font-weight:850;color:#28630a;line-height:1.5}
+.sim-hint{font-size:12px!important;color:#64748b!important}
+.sim-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sim-reset{border:0;border-radius:12px;background:#e8f7ff;color:#075985;font-weight:850;padding:10px 13px;cursor:pointer}
+@media(max-width:480px){.study-tabs{gap:5px}.study-tab{font-size:12px;padding:11px 4px}.learn-intro,.learn-card,.sim-card{padding:13px}.sim-grid{gap:8px}.sim-field input{font-size:15px}}
+
+</style>
+<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<style>
+.page-hero{margin-bottom:12px}.page-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.page-tab{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px 5px;border:2px solid #dce8f3;border-radius:15px;background:#fff;color:#245273;text-decoration:none;font-size:13px;font-weight:900;text-align:center;box-shadow:0 3px 0 #dce8f3}
+.page-tab.active{background:#e8f8dc;border-color:#8ed65b;color:#286c12;box-shadow:0 3px 0 #b9e69c}
+.page-progress{margin:0 0 14px;padding:9px 12px;border-radius:12px;background:#eef8ff;color:#245273;font-size:12px;font-weight:850;text-align:center;border:1px solid #d7eaf8}
+@media(max-width:380px){.page-tab{font-size:11px;padding:8px 3px}}
+</style>
+</head><body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div></div></header>
+<main><section class="hero page-hero"><h1>Position and Displacement · Simulator</h1><p class="muted">Use the interactive lab to explore the concept.</p></section><nav class="page-tabs" aria-label="Position and Displacement pages"><a class="page-tab " href="physics-position-and-displacement.html" >📘 Learn</a><a class="page-tab active" href="physics-position-and-displacement-simulator.html" aria-current="page">🎮 Simulator</a><a class="page-tab " href="physics-position-and-displacement-practice.html" >🧠 Practice</a></nav><div class="page-progress" id="pageProgress" role="status" aria-live="polite">Progress: 0/3 pages completed</div><section class="study-panel" id="simulatorPanel">
+<div class="learn-intro"><h2>🎯 Motion & Displacement Lab</h2><p class="muted">Build a journey, see the actual route, and compare total distance with the straight-line displacement.</p></div>
+<div class="sim-card">
+<h3>🚶 Simulator 1: Forward and backward journey</h3>
+<p>Start at any position. Move forward or backward for two stages. The animated route shows each leg; the green arrow shows only the net displacement.</p>
+<div class="sim-grid">
+<div class="sim-field"><label for="journeyStart">Starting position (m)</label><input id="journeyStart" type="number" step="1" value="0"></div>
+<div class="sim-field"><label for="journeyLeg1">Stage 1 movement (m)</label><input id="journeyLeg1" type="number" step="1" value="8"></div>
+<div class="sim-field"><label for="journeyLeg2">Stage 2 movement (m)</label><input id="journeyLeg2" type="number" step="1" value="-3"></div>
+</div>
+<figure class="sim-visual"><svg id="journeySvg" viewBox="0 0 520 220" role="img" aria-labelledby="journeyTitle journeyDesc"><title id="journeyTitle">A two-stage journey on a number line</title><desc id="journeyDesc">A blue start marker, orange turning point and purple finish marker show the travelled route. A green arrow shows net displacement.</desc><defs><marker id="journeyArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#16a34a"/></marker></defs><line x1="35" y1="125" x2="485" y2="125" stroke="#64748b" stroke-width="3"/><path d="M485 125l-10 -6v12z" fill="#64748b"/><g id="journeyTicks"></g><path id="journeyPath" d="M90 125 L330 125 L240 125" fill="none" stroke="#1cb0f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><line id="journeyNet" x1="90" y1="65" x2="240" y2="65" stroke="#16a34a" stroke-width="5" marker-end="url(#journeyArrow)"/><circle id="journeyStartDot" cx="90" cy="125" r="9" fill="#1cb0f6" stroke="#fff" stroke-width="3"/><circle id="journeyTurnDot" cx="330" cy="125" r="8" fill="#ff9f1c" stroke="#fff" stroke-width="3"/><circle id="journeyFinishDot" cx="240" cy="125" r="9" fill="#8b5cf6" stroke="#fff" stroke-width="3"/><text id="journeyStartLabel" x="90" y="158" text-anchor="middle" font-size="12" font-weight="850" fill="#075985">Start 0 m</text><text id="journeyTurnLabel" x="330" y="184" text-anchor="middle" font-size="12" font-weight="850" fill="#9a5700">After stage 1</text><text id="journeyFinishLabel" x="240" y="205" text-anchor="middle" font-size="12" font-weight="850" fill="#6d28d9">Finish</text><text id="journeyNetLabel" x="165" y="49" text-anchor="middle" font-size="14" font-weight="900" fill="#15803d">Displacement</text></svg><figcaption id="journeyCaption">The object moves 8 m forward, then 3 m backward.</figcaption></figure>
+<div class="sim-result" id="journeyResult" aria-live="polite">Distance = 11 m • Displacement = +5 m • Final position = +5 m</div>
+<p class="sim-hint">Enter a negative movement for travel to the left. Distance adds the lengths of both stages; displacement adds their signed movements.</p>
+</div>
+<div class="sim-card">
+<h3>🧭 Simulator 2: Build a 2D route</h3>
+<p>Enter four journey legs. The colored route traces the path in order, while the green arrow joins the starting point directly to the final point.</p>
+<div class="sim-grid">
+<div class="sim-field"><label for="routeEast">East movement (m)</label><input id="routeEast" type="number" min="0" max="1000" step="1" value="3"></div>
+<div class="sim-field"><label for="routeNorth">North movement (m)</label><input id="routeNorth" type="number" min="0" max="1000" step="1" value="4"></div>
+<div class="sim-field"><label for="routeWest">West movement (m)</label><input id="routeWest" type="number" min="0" max="1000" step="1" value="1"></div>
+<div class="sim-field"><label for="routeSouth">South movement (m)</label><input id="routeSouth" type="number" min="0" max="1000" step="1" value="2"></div>
+</div>
+<figure class="sim-visual"><svg id="routeSvg" viewBox="0 0 520 285" role="img" aria-labelledby="routeTitle routeDesc"><title id="routeTitle">Two-dimensional route and resultant displacement</title><desc id="routeDesc">A colored right-angle path shows east, north, west and south travel. A green arrow shows the straight-line displacement from start to finish.</desc><defs><marker id="routeArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#16a34a"/></marker></defs><line x1="35" y1="245" x2="485" y2="245" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="265" x2="70" y2="25" stroke="#94a3b8" stroke-width="2"/><path d="M485 245l-9 -5v10zM70 25l-5 9h10z" fill="#94a3b8"/><path id="routeEastLine" d="M70 245 L220 245" stroke="#1cb0f6" stroke-width="6" stroke-linecap="round" fill="none"/><path id="routeNorthLine" d="M220 245 L220 95" stroke="#ff9f1c" stroke-width="6" stroke-linecap="round" fill="none"/><path id="routeWestLine" d="M220 95 L170 95" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" fill="none"/><path id="routeSouthLine" d="M170 95 L170 170" stroke="#ec4899" stroke-width="6" stroke-linecap="round" fill="none"/><line id="routeResultant" x1="70" y1="245" x2="170" y2="170" stroke="#16a34a" stroke-width="5" stroke-dasharray="9 5" marker-end="url(#routeArrow)"/><circle cx="70" cy="245" r="8" fill="#1cb0f6" stroke="#fff" stroke-width="3"/><circle id="routeFinishDot" cx="170" cy="170" r="8" fill="#8b5cf6" stroke="#fff" stroke-width="3"/><text x="49" y="266" font-size="12" font-weight="850" fill="#075985">Start</text><text id="routeFinishLabel" x="180" y="165" font-size="12" font-weight="850" fill="#6d28d9">Finish</text><text x="480" y="265" text-anchor="end" font-size="11" fill="#64748b">East →</text><text x="48" y="24" font-size="11" fill="#64748b">North ↑</text><text id="routeDxLabel" x="275" y="268" font-size="12" font-weight="850" fill="#075985">Net east = 2 m</text><text id="routeDyLabel" x="275" y="250" font-size="12" font-weight="850" fill="#9a5700">Net north = 2 m</text></svg><figcaption id="routeCaption">The route travels east, north, west and south. The resultant connects the start directly to the finish.</figcaption></figure>
+<div class="sim-result" id="routeResult" aria-live="polite">Distance = 10 m • Displacement magnitude = 2.83 m</div>
+<p class="sim-hint">Net east = east − west; net north = north − south. Total distance is the sum of all four path lengths.</p>
+</div>
+</section><script>
+(function(){
+'use strict';
+const tabs=[...document.querySelectorAll('.study-tab')];
+tabs.forEach(tab=>tab.addEventListener('click',()=>{
+ tabs.forEach(t=>t.classList.toggle('active',t===tab));
+ document.querySelectorAll('.study-panel').forEach(p=>p.classList.toggle('active',p.id===tab.dataset.panel));
+}));
+const el=id=>document.getElementById(id);
+const val=id=>{const n=Number(el(id).value);return Number.isFinite(n)?n:0;};
+const f=n=>Number((Math.abs(n)<1e-9?0:n).toFixed(2)).toString();
+function updateJourney(){
+ const x0=val('journeyStart'),s1=val('journeyLeg1'),s2=val('journeyLeg2');
+ const x1=x0+s1,x2=x1+s2,dist=Math.abs(s1)+Math.abs(s2),disp=x2-x0;
+ const lo=Math.min(x0,x1,x2,0),hi=Math.max(x0,x1,x2,0),span=Math.max(hi-lo,1);
+ const px=x=>42+(x-lo)/span*436, a=px(x0),b=px(x1),c=px(x2);
+ const line=el('journeyPath');line.setAttribute('d','M'+a+' 125 L'+b+' 125 L'+c+' 125');
+ [['journeyStartDot',a],['journeyTurnDot',b],['journeyFinishDot',c]].forEach(([id,x])=>el(id).setAttribute('cx',x));
+ el('journeyStartLabel').setAttribute('x',a);el('journeyStartLabel').textContent='Start '+f(x0)+' m';
+ el('journeyTurnLabel').setAttribute('x',b);el('journeyTurnLabel').textContent='After stage 1: '+f(x1)+' m';
+ el('journeyFinishLabel').setAttribute('x',c);el('journeyFinishLabel').textContent='Finish: '+f(x2)+' m';
+ const net=el('journeyNet');net.setAttribute('x1',a);net.setAttribute('x2',c);net.setAttribute('stroke',disp===0?'#94a3b8':'#16a34a');net.setAttribute('marker-end',disp===0?'':'url(#journeyArrow)');
+ el('journeyNetLabel').setAttribute('x',(a+c)/2);el('journeyNetLabel').textContent='Δx = '+(disp>0?'+':'')+f(disp)+' m';
+ el('journeyTicks').innerHTML='';
+ for(let i=0;i<=4;i++){const x=lo+span*i/4,xx=px(x),g=document.createElementNS('http://www.w3.org/2000/svg','g'),ln=document.createElementNS('http://www.w3.org/2000/svg','line'),tx=document.createElementNS('http://www.w3.org/2000/svg','text');ln.setAttribute('x1',xx);ln.setAttribute('x2',xx);ln.setAttribute('y1','119');ln.setAttribute('y2','131');ln.setAttribute('stroke','#94a3b8');ln.setAttribute('stroke-width','2');tx.setAttribute('x',xx);tx.setAttribute('y','112');tx.setAttribute('text-anchor','middle');tx.setAttribute('font-size','10');tx.setAttribute('fill','#64748b');tx.textContent=f(x);g.append(ln,tx);el('journeyTicks').append(g);}
+ el('journeyResult').textContent='Distance = |'+f(s1)+'| + |'+f(s2)+'| = '+f(dist)+' m • Displacement = '+(disp>0?'+':'')+f(disp)+' m • Final position = '+f(x2)+' m';
+ el('journeyCaption').textContent='Stage 1 ends at '+f(x1)+' m; stage 2 ends at '+f(x2)+' m. The route length is '+f(dist)+' m, but the net position change is '+f(disp)+' m.';
+}
+function updateRoute(){
+ const east=Math.max(0,val('routeEast')),north=Math.max(0,val('routeNorth')),west=Math.max(0,val('routeWest')),south=Math.max(0,val('routeSouth'));
+ const dx=east-west,dy=north-south,distance=east+north+west+south,mag=Math.hypot(dx,dy);
+ const minX=Math.min(0,dx,east,east-west),maxX=Math.max(0,east,east-west),minY=Math.min(0,dy,north,north-south),maxY=Math.max(0,north,north-south);
+ const spanX=Math.max(maxX-minX,1),spanY=Math.max(maxY-minY,1);
+ const scale=Math.min(350/spanX,190/spanY);
+ const ox=75-minX*scale,oy=235+minY*scale;
+ const point=(x,y)=>[ox+x*scale,oy-y*scale];
+ const p0=point(0,0),p1=point(east,0),p2=point(east,north),p3=point(dx,north),p4=point(dx,dy);
+ const path=(id,p,q)=>el(id).setAttribute('d','M'+p[0]+' '+p[1]+' L'+q[0]+' '+q[1]);
+ path('routeEastLine',p0,p1);path('routeNorthLine',p1,p2);path('routeWestLine',p2,p3);path('routeSouthLine',p3,p4);
+ const result=el('routeResultant');result.setAttribute('x1',p0[0]);result.setAttribute('y1',p0[1]);result.setAttribute('x2',p4[0]);result.setAttribute('y2',p4[1]);result.setAttribute('marker-end',mag===0?'':'url(#routeArrow)');result.setAttribute('stroke',mag===0?'#94a3b8':'#16a34a');
+ el('routeFinishDot').setAttribute('cx',p4[0]);el('routeFinishDot').setAttribute('cy',p4[1]);
+ el('routeFinishLabel').setAttribute('x',Math.min(450,p4[0]+10));el('routeFinishLabel').setAttribute('y',Math.max(38,p4[1]-10));el('routeFinishLabel').textContent='Finish';
+ el('routeDxLabel').textContent='Net east = '+f(dx)+' m';el('routeDyLabel').textContent='Net north = '+f(dy)+' m';
+ el('routeResult').textContent='Distance = '+f(distance)+' m • Displacement = √('+f(dx)+'² + '+f(dy)+'²) = '+f(mag)+' m';
+ el('routeCaption').textContent='Final position: '+(dx>=0?f(dx)+' m east':' '+f(Math.abs(dx))+' m west')+' and '+(dy>=0?f(dy)+' m north':f(Math.abs(dy))+' m south')+'. The actual route is '+f(distance)+' m; the straight-line displacement is '+f(mag)+' m.';
+}
+['journeyStart','journeyLeg1','journeyLeg2'].forEach(id=>el(id).addEventListener('input',updateJourney));
+['routeEast','routeNorth','routeWest','routeSouth'].forEach(id=>el(id).addEventListener('input',updateRoute));
+updateJourney();updateRoute();
+})();
+</script><script>(function(){const key='skillup-physics-position-and-displacement-pages-v1',kind='sim',el=document.getElementById('pageProgress');let state={learn:false,sim:false,practice:false};try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'));}catch(e){}function draw(){const n=['learn','sim','practice'].filter(k=>state[k]).length;if(el)el.textContent='Progress: '+n+'/3 pages completed';}function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}draw();}function done(){if(!state[kind]){state[kind]=true;save();}}if(kind==='learn')done();if(kind==='sim'){const p=document.getElementById('simulatorPanel');if(p){p.addEventListener('input',done,{once:true});p.addEventListener('click',done,{once:true});}}if(kind==='practice'){const f=document.getElementById('finishSlot');if(f)new MutationObserver(()=>{if(f.children.length)done();}).observe(f,{childList:true});}draw();})();</script></main><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script></body></html>

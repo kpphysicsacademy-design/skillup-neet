@@ -55,6 +55,24 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* SkillUp standard learning architecture */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#476078;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#12618c}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 0 #dce8f3}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:18px}
+.learn-card p,.sim-card p{margin:7px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{margin:10px 0;padding:12px;border-radius:12px;background:#eef8ff;border:1px solid #cdeafa;color:#15577e;font-weight:850;text-align:center;line-height:1.5}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin:0 0 5px}
+.sim-field input,.sim-field select{width:100%;min-height:45px;border:2px solid #dce6ef;border-radius:11px;padding:9px;font:inherit;color:#243447;background:#fff}
+.sim-result{margin-top:12px;padding:13px;border-radius:13px;background:#efffe7;border:2px solid #c8f0b2;color:#285b16;font-weight:850;line-height:1.5}
+.sim-hint{font-size:12px!important;color:#64748b!important}
+.sim-action{margin-top:12px;border:0;border-radius:12px;background:#58cc02;color:#fff;padding:11px 16px;font-weight:900;box-shadow:0 3px 0 #46a302;cursor:pointer}
+@media(max-width:480px){.study-tabs{gap:5px}.study-tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}.learn-card,.sim-card{padding:14px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,8 +80,36 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Frame of Reference</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="study-tabs" aria-label="Study sections">
+ <button class="study-tab active" type="button" data-panel="learnPanel">📘 Learn</button>
+ <button class="study-tab" type="button" data-panel="simulatorPanel">🧪 Simulator</button>
+ <button class="study-tab" type="button" data-panel="practicePanel">🎯 Practice</button>
+</nav>
+<section class="study-panel active" id="learnPanel">
+ <article class="learn-card"><h3>1. What is a frame of reference?</h3><p>A frame of reference is a viewpoint together with a coordinate system used to describe an object's position and motion. Motion is described relative to an observer or chosen frame.</p><div class="formula">Position and velocity are specified relative to a frame</div></article>
+ <article class="learn-card"><h3>2. Rest and motion are relative</h3><p>A passenger sitting in a moving bus is at rest relative to the bus but moving relative to the road. Neither description is contradictory: each uses a different frame.</p></article>
+ <article class="learn-card"><h3>3. Choose an origin and axis</h3><p>For one-dimensional motion, choose an origin (zero position) and a positive direction. Position is then represented by a coordinate such as x = +5 m or x = −3 m.</p><div class="formula">Displacement: Δx = x<sub>final</sub> − x<sub>initial</sub></div></article>
+ <article class="learn-card"><h3>4. Relative position and velocity</h3><p>The position of A relative to B is the difference between their positions. Relative velocity follows the same vector-difference rule.</p><div class="formula">v<sub>A/B</sub> = v<sub>A</sub> − v<sub>B</sub></div><p>Choose a positive direction and keep the signs consistent.</p></article>
+ <article class="learn-card"><h3>5. Same-direction motion</h3><p>When two objects move in the same direction, their relative speed is the difference of their speeds. If they have equal velocities, one appears at rest to the other.</p><div class="formula">Relative speed = |v₁ − v₂|</div></article>
+ <article class="learn-card"><h3>6. Opposite-direction motion</h3><p>When objects move in opposite directions along one line, their closing or separating speed is the sum of their speed magnitudes.</p><div class="formula">Closing speed = |v₁| + |v₂|</div></article>
+ <article class="learn-card"><h3>7. Galilean velocity addition</h3><p>For ordinary non-relativistic speeds, velocities measured in two frames moving relative to each other are related by vector addition. A passenger walking forward in a train has the train's ground velocity plus the walking velocity relative to the train.</p><div class="formula">v<sub>person/ground</sub> = v<sub>person/train</sub> + v<sub>train/ground</sub></div><p>This is the classical approximation used in basic mechanics.</p></article>
+</section>
+<section class="study-panel" id="simulatorPanel">
+ <div class="sim-card"><h3>🚆 Simulator 1: Passenger in a moving train</h3><p>Set the train velocity and the passenger's walking velocity relative to the train. Positive means forward/east; negative means backward/west.</p><div class="sim-grid">
+  <div class="sim-field"><label for="fr-train">Train velocity (m/s)</label><input id="fr-train" type="number" step="any" value="20"></div>
+  <div class="sim-field"><label for="fr-walk">Passenger velocity relative to train (m/s)</label><input id="fr-walk" type="number" step="any" value="2"></div>
+ </div><button class="sim-action" id="fr-calculate" type="button">Calculate ground velocity</button><div class="sim-result" id="fr-result" aria-live="polite">Ground velocity = 22 m/s (positive direction)</div><p class="sim-hint">Use a consistent positive direction for both velocities.</p></div>
+ <div class="sim-card"><h3>↔️ Simulator 2: Relative velocity between two objects</h3><p>Enter both velocities along the same straight line. The result is the velocity of object A as seen from object B.</p><div class="sim-grid">
+  <div class="sim-field"><label for="fr-a">Velocity of A (m/s)</label><input id="fr-a" type="number" step="any" value="15"></div>
+  <div class="sim-field"><label for="fr-b">Velocity of B (m/s)</label><input id="fr-b" type="number" step="any" value="-15"></div>
+ </div><button class="sim-action" id="fr-relative" type="button">Find relative velocity</button><div class="sim-result" id="fr-relative-result" aria-live="polite">Velocity of A relative to B = 30 m/s</div><p class="sim-hint">A positive result means A moves in the chosen positive direction relative to B; a negative result means the opposite.</p></div>
+</section>
+
+<section class="study-panel active" id="practicePanel">
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -439,6 +485,31 @@ $('continue').addEventListener('click',()=>{
  card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
  $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
 });
+
+render();
+// SkillUp Learn / Simulator / Practice navigation
+document.querySelectorAll('.study-tab').forEach(function(tab){
+ tab.addEventListener('click',function(){
+  document.querySelectorAll('.study-tab').forEach(function(x){x.classList.toggle('active',x===tab);});
+  document.querySelectorAll('.study-panel').forEach(function(panel){panel.classList.toggle('active',panel.id===tab.dataset.panel);});
+  window.scrollTo({top:0,behavior:'smooth'});
+ });
+});
+function frRead(id){return Number(document.getElementById(id).value);}
+function frFormat(n){return Number(n.toPrecision(6)).toString();}
+document.getElementById('fr-calculate').addEventListener('click',function(){
+ const train=frRead('fr-train'),walk=frRead('fr-walk'),out=document.getElementById('fr-result');
+ if(!Number.isFinite(train)||!Number.isFinite(walk)){out.textContent='Enter valid velocities in both fields.';return;}
+ const ground=train+walk;
+ out.textContent='Ground velocity = '+frFormat(ground)+' m/s ('+(ground>0?'positive direction':ground<0?'negative direction':'at rest relative to ground')+'). Calculation: '+frFormat(train)+' + ('+frFormat(walk)+') = '+frFormat(ground)+' m/s.';
+});
+document.getElementById('fr-relative').addEventListener('click',function(){
+ const a=frRead('fr-a'),b=frRead('fr-b'),out=document.getElementById('fr-relative-result');
+ if(!Number.isFinite(a)||!Number.isFinite(b)){out.textContent='Enter valid velocities for both objects.';return;}
+ const relative=a-b;
+ out.textContent='Velocity of A relative to B = vA − vB = '+frFormat(a)+' − ('+frFormat(b)+') = '+frFormat(relative)+' m/s ('+(relative>0?'positive direction':relative<0?'negative direction':'zero relative velocity')+').';
+});
+
 render();
 })();
 </script>

@@ -75,6 +75,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .small-note{font-size:12px;color:#64748b;line-height:1.5}
 @media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
 
+.quiz-progress{background:#fff;border:2px solid #e2edf7;border-radius:16px;padding:12px 14px;margin:0 0 12px;box-shadow:0 3px 0 #dce8f3}.quiz-progress .progress-row{margin:0 0 8px}.quiz-progress .track{height:12px}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -131,7 +132,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 </article>
 </section>
 <section class="panel" id="panel-practice">
-<h1>📏 Tension</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div>
+<div class="quiz-progress" aria-label="Quiz progress"><div class="progress-row"><span id="progressText">0 of 30 completed</span><span id="percent">0%</span></div><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" aria-label="Questions completed"><div class="fill" id="fill"></div></div></div>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </section>
@@ -145,9 +146,9 @@ const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;
  const item=questions[index];
- $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('progressText').textContent=index+' of '+questions.length+' completed';
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
- $('fill').style.width=(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';document.querySelector('.track').setAttribute('aria-valuenow',String(index));
  $('qmeta').textContent='QUESTION '+(index+1);
  $('question').textContent=item.q;
  $('feedback').className='feedback';$('feedback').textContent='';
@@ -173,7 +174,7 @@ $('check').addEventListener('click',()=>{
 $('continue').addEventListener('click',()=>{
  if(!locked)return;index++;
  if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
- $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent=questions.length+' of '+questions.length+' completed';$('percent').textContent='100%';document.querySelector('.track').setAttribute('aria-valuenow',String(questions.length));
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';

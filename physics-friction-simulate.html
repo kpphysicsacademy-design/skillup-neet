@@ -91,8 +91,12 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <defs><marker id="frArrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="currentColor"/></marker></defs>
 <rect x="70" y="220" width="500" height="10" rx="4" fill="#9ca3af"/>
 <path d="M70 232 H570" stroke="#64748b" stroke-width="2"/>
+<g id="fr-moving-block" style="transition:transform .35s ease">
 <rect x="260" y="145" width="120" height="75" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
 <text x="320" y="190" text-anchor="middle" font-size="22" font-weight="700" fill="#1e3a8a">Block</text>
+</g>
+<path id="fr-motion-arrow" d="M280 125 H360" stroke="#7c3aed" stroke-width="3" stroke-dasharray="6 5" opacity="0"/>
+<text id="fr-motion-label" x="320" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#6d28d9">Block at rest</text>
 <path id="fr-normal-arrow" d="M320 145 V75" stroke="#16a34a" stroke-width="4" marker-end="url(#frArrow)"/>
 <text id="fr-normal-label" x="338" y="90" font-size="18" font-weight="700" fill="#15803d">N = 50 N</text>
 <path id="fr-weight-arrow" d="M320 220 V270" stroke="#dc2626" stroke-width="4" marker-end="url(#frArrow)"/>
@@ -103,7 +107,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <text id="fr-friction-label" x="190" y="160" text-anchor="middle" font-size="17" font-weight="700" fill="#c2410c">Friction = 12 N</text>
 <text x="320" y="258" text-anchor="middle" font-size="14" fill="#64748b">Horizontal surface</text>
 </svg>
-<figcaption>Live force diagram: arrow lengths and force labels update as you change the simulator values.</figcaption>
+<figcaption>Live motion diagram: force arrows, force labels and block movement respond to simulator values.</figcaption>
 </figure>
 <div class="sim-grid">
 <label>Situation<select id="fr-mode"><option value="horizontal">Horizontal surface</option><option value="incline">Inclined plane</option></select></label>
@@ -140,6 +144,14 @@ function calculate(){
  $('fr-friction-label').textContent='Friction = '+friction.toFixed(1)+' N';
  $('fr-normal-label').textContent='N = '+N.toFixed(1)+' N';
  $('fr-weight-label').textContent='mg = '+(m*g).toFixed(1)+' N';
+ const sliding=required>maxStatic;
+ const direction=mode==='incline'?'down the plane':'to the right';
+ const displacement=sliding?Math.min(42,Math.max(8,(required-kinetic)*0.35)):0;
+ $('fr-moving-block').style.transform='translateX('+(sliding?displacement:0)+'px)';
+ $('fr-motion-arrow').setAttribute('d',sliding?'M280 125 H'+(360+displacement):'M280 125 H360');
+ $('fr-motion-arrow').setAttribute('opacity',sliding?'1':'0');
+ $('fr-motion-label').textContent=sliding?'Sliding '+direction:'Block at rest';
+ $('fr-motion-label').setAttribute('x',String(320+displacement/2));
 }
 function update(){ $('fr-angle-label').style.display=$('fr-mode').value==='incline'?'grid':'none';calculate();}
 ['fr-mode','fr-m','fr-g','fr-mus','fr-muk','fr-force','fr-angle'].forEach(id=>$(id).addEventListener('input',update));

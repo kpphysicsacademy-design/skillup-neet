@@ -1,57 +1,90 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="SkillUp Physics — Kinetic Friction simulate"><title>SkillUp Physics | Kinetic Friction — Simulate</title><style>
-:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
-.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
-main{max-width:720px;margin:auto;padding:18px 13px 48px}
-.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
-.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
-.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
-.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
-.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
-.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
-.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
-.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
-.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
-.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Mobile header refinement: keep branding, XP and streak on one balanced row */
-.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
-.back{flex:0 0 42px;width:42px;height:42px}
-.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
-.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
-.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
-.xp{margin-left:0;padding:9px 11px;font-size:13px}
-.streak{padding:9px 11px;font-size:12px}
-@media(max-width:480px){
-  .nav{gap:7px;padding:9px 10px;min-height:68px}
-  .back{flex-basis:40px;width:40px;height:40px}
-  .brand{font-size:17px}
-  .brand small{font-size:8px;letter-spacing:.55px}
-  .xp{padding:8px 9px;font-size:12px}
-  .streak{padding:8px 9px;font-size:11px;max-width:none}
-}
-@media(max-width:360px){
-  .nav{gap:5px;padding-inline:7px}
-  .back{flex-basis:36px;width:36px;height:36px}
-  .brand{font-size:15px}
-  .brand small{font-size:7px;letter-spacing:.3px}
-  .xp{padding:7px;font-size:11px}
-  .streak{padding:7px;font-size:10px}
-}
-
-
-.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;cursor:pointer}.tab.active{background:#58cc02;border-color:#46a302;color:#fff}.panel{display:none!important}.panel.active{display:block!important}.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin:14px auto;max-width:720px;box-shadow:0 4px 0 #dce8f3}.lesson-card h2,.sim-card h2{color:#174a78}.lesson-card h3{margin:16px 0 6px;color:#245273}.lesson-card p,.lesson-card li{line-height:1.6}.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sim-grid label{font-size:12px;font-weight:850;display:grid;gap:5px}.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit}.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}.sim-result strong{font-size:24px;color:#287d00}@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
-
-.tabs a{text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center}.panel{display:block!important}.panel[hidden]{display:none!important}</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=20261102-kinetic-split-v1"></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header><nav class="tabs" aria-label="Kinetic friction pages"><a class="tab " href="physics-kinetic-friction-learn.html">📘 Learn</a><a class="tab active" href="physics-kinetic-friction-simulate.html">⚙️ Simulate</a><a class="tab " href="physics-kinetic-friction-practice.html">🎯 Practice</a></nav><main><section class="panel" id="panel-simulate"><article class="sim-card"><h2>Kinetic Friction Simulator</h2><p class="muted">Adjust the values to calculate sliding friction and the net force.</p><div class="sim-grid"><label>Surface<select id="kf-mode"><option value="horizontal">Horizontal surface</option><option value="incline">Inclined plane</option></select></label><label>Mass (kg)<input id="kf-m" type="number" min="0" step="0.1" value="5"></label><label>Gravity (m/s²)<input id="kf-g" type="number" min="0" step="0.1" value="10"></label><label>Coefficient μₖ<input id="kf-mu" type="number" min="0" step="0.01" value="0.2"></label><label>Applied force (N)<input id="kf-f" type="number" min="0" step="0.1" value="12"></label><label id="kf-angle-wrap">Incline angle (°)<input id="kf-angle" type="number" min="0" max="90" step="1" value="30"></label></div><div class="sim-result" aria-live="polite"><div class="muted">Kinetic friction</div><strong id="kf-out">10.00 N</strong><p id="kf-work" class="muted"></p></div></article></section></main><script>(function(){const tabs=[...document.querySelectorAll('.tab')];tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(p=>{const on=p.id==='panel-'+b.dataset.tab;p.classList.toggle('active',on);p.hidden=!on;});}));const $=id=>document.getElementById(id);function calc(){const m=Math.max(0,Number($('kf-m').value)||0),g=Math.max(0,Number($('kf-g').value)||0),mu=Math.max(0,Number($('kf-mu').value)||0),F=Math.max(0,Number($('kf-f').value)||0),ang=Math.min(90,Math.max(0,Number($('kf-angle').value)||0))*Math.PI/180,inc=$('kf-mode').value==='incline',N=inc?m*g*Math.cos(ang):m*g,fr=mu*N,down=inc?m*g*Math.sin(ang):0,net=inc?down-F-fr:F-fr;$('kf-out').textContent=fr.toFixed(2)+' N';$('kf-work').textContent='N = '+N.toFixed(2)+' N; fₖ = μₖN = '+fr.toFixed(2)+' N. Net force along assumed sliding direction = '+net.toFixed(2)+' N.';$('kf-angle-wrap').style.display=inc?'grid':'none';}['kf-mode','kf-m','kf-g','kf-mu','kf-f','kf-angle'].forEach(id=>$(id).addEventListener('input',calc));calc();})();</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+:root{--green:#58cc02;--ink:#243447;--muted:#64748b;--line:#dce6ef;--blue:#168bd2;--red:#e45454}
+*{box-sizing:border-box}body{margin:0;background:#f4f6e9;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fffdf4;border-bottom:1px solid #e1e5d4}.nav{max-width:820px;margin:auto;min-height:62px;padding:9px 14px;display:flex;align-items:center;gap:10px}.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}.xp,.streak{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:12px}.streak{margin-left:0;background:#fff0e8;border-color:#ffd4bd;color:#b94a17}
+.tabs{max-width:820px;margin:12px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:11px 6px;font-weight:900;text-decoration:none;text-align:center}.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+main{max-width:820px;margin:auto;padding:16px 13px 48px}.sim-card{background:#fff;border:2px solid #e2e8d8;border-radius:22px;padding:18px;box-shadow:0 4px 0 #dce8d3}.sim-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.eyebrow{font-size:10px;font-weight:950;letter-spacing:1px;color:#579b2a}.sim-head h1{font-size:clamp(23px,4vw,30px);margin:4px 0;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}.live-pill{white-space:nowrap;color:#268b3a;background:#edfae8;border-radius:99px;padding:7px 10px;font-size:11px;font-weight:900}
+.sim-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:18px 0}.sim-grid label{display:grid;gap:7px;font-size:12px;font-weight:850;color:#42566b}.sim-grid output{font-size:14px;color:#174a78;font-weight:950}.sim-grid input[type=range]{width:100%;accent-color:#58cc02;cursor:pointer}.sim-grid select{width:100%;padding:10px;border:2px solid var(--line);border-radius:11px;background:white;font:inherit;color:var(--ink)}
+.diagram-wrap{border:2px solid #e2edf7;border-radius:18px;background:linear-gradient(180deg,#f5fbff,#fff);padding:12px;margin-top:12px}.diagram-title{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px;color:#174a78}.diagram-title span{font-size:11px;color:#27853c;background:#efffe7;border-radius:99px;padding:5px 8px;font-weight:850}svg{display:block;width:100%;height:auto;max-height:340px}.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:11px;color:#526b80;font-weight:750}.legend span{display:flex;align-items:center;gap:5px}.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}.blue-dot{background:#168bd2}.red-dot{background:#e45454}.green-dot{background:#35a853}
+.results-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}.metric{background:#f6fbf1;border:1px solid #dcebd2;border-radius:13px;padding:12px;min-width:0}.metric span{display:block;font-size:10px;font-weight:800;color:#64748b;line-height:1.35;min-height:27px}.metric strong{display:block;margin-top:5px;font-size:clamp(14px,2.4vw,19px);color:#287d00;overflow-wrap:anywhere}.equation{margin-top:13px;padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:14px;font-weight:850;line-height:1.6;color:#285d1a}.note{font-size:11px;color:#64748b;line-height:1.5;margin:12px 2px 0}
+@media(max-width:600px){.sim-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sim-card{padding:14px}.tabs{gap:6px}.tab{font-size:12px;padding:10px 3px}.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:10px}}
+@media(max-width:360px){.brand{font-size:14px}.xp,.streak{font-size:9px;padding:6px}.sim-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=20261102-kinetic-split-v1"></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header><nav class="tabs" aria-label="Kinetic friction pages"><a class="tab " href="physics-kinetic-friction-learn.html">📘 Learn</a><a class="tab active" href="physics-kinetic-friction-simulate.html">⚙️ Simulate</a><a class="tab " href="physics-kinetic-friction-practice.html">🎯 Practice</a></nav><main>
+<section class="sim-card">
+  <div class="sim-head"><div><span class="eyebrow">INTERACTIVE PHYSICS LAB</span><h1>Kinetic Friction Simulator</h1><p class="muted">Change the values and watch the force diagram, block motion and live calculations update.</p></div><span class="live-pill">● LIVE</span></div>
+  <div class="sim-grid">
+    <label>Surface type<select id="kf-mode"><option value="horizontal">Horizontal surface</option><option value="incline">Inclined plane</option></select></label>
+    <label>Mass <output id="m-val">5 kg</output><input id="kf-m" type="range" min="0.5" max="20" step="0.5" value="5"></label>
+    <label>Coefficient μₖ <output id="mu-val">0.20</output><input id="kf-mu" type="range" min="0" max="1" step="0.01" value="0.2"></label>
+    <label>Applied force <output id="f-val">12 N</output><input id="kf-f" type="range" min="0" max="100" step="1" value="12"></label>
+    <label>Gravity <output id="g-val">10 m/s²</output><input id="kf-g" type="range" min="1" max="20" step="0.5" value="10"></label>
+    <label id="kf-angle-wrap">Incline angle <output id="angle-val">30°</output><input id="kf-angle" type="range" min="0" max="60" step="1" value="30"></label>
+  </div>
+  <div class="diagram-wrap">
+    <div class="diagram-title"><strong>Force diagram</strong><span id="motion-state">Sliding to the right</span></div>
+    <svg id="kf-scene" viewBox="0 0 640 330" role="img" aria-label="Animated block on a surface showing applied force, kinetic friction, normal reaction and weight">
+      <defs><marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#168bd2" stroke-width="1.5"/></marker><marker id="arr-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#e45454" stroke-width="1.5"/></marker><marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#35a853" stroke-width="1.5"/></marker></defs>
+      <g id="ground"><path id="ground-line" d="M55 250 H585" stroke="#526b80" stroke-width="5" stroke-linecap="round"/><path id="ground-hatch" d="M70 255l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12" stroke="#9aabba" stroke-width="2"/></g>
+      <g id="block" transform="translate(275 190)"><rect x="-42" y="-42" width="84" height="42" rx="9" fill="#8edb5b" stroke="#328b26" stroke-width="3"/><text x="0" y="-16" text-anchor="middle" font-size="16" font-weight="800" fill="#174a24">m</text><circle cx="-23" cy="4" r="3" fill="#328b26"/><circle cx="23" cy="4" r="3" fill="#328b26"/></g>
+      <g id="forces" fill="none" stroke-linecap="round" stroke-width="4"><path id="applied-arrow" stroke="#168bd2" marker-end="url(#arr-blue)" d="M320 170 H430"/><path id="friction-arrow" stroke="#e45454" marker-end="url(#arr-red)" d="M230 170 H125"/><path id="normal-arrow" stroke="#35a853" marker-end="url(#arr-green)" d="M275 190 V90"/><path id="weight-arrow" stroke="#e45454" marker-end="url(#arr-red)" d="M275 190 V290"/></g>
+      <g font-size="14" font-weight="800"><text id="applied-label" x="435" y="163" fill="#168bd2">Applied force</text><text id="friction-label" x="120" y="163" text-anchor="end" fill="#e45454">Kinetic friction</text><text id="normal-label" x="288" y="90" fill="#35a853">N</text><text id="weight-label" x="288" y="290" fill="#e45454">mg</text></g>
+      <text id="scene-caption" x="320" y="310" text-anchor="middle" font-size="13" fill="#526b80">Friction acts opposite the direction of sliding</text>
+    </svg>
+    <div class="legend"><span><i class="blue-dot"></i> Applied force</span><span><i class="red-dot"></i> Friction / weight</span><span><i class="green-dot"></i> Normal reaction</span></div>
+  </div>
+  <div class="results-grid">
+    <div class="metric"><span>Normal reaction (N)</span><strong id="kf-normal">50.00 N</strong></div>
+    <div class="metric"><span>Kinetic friction (fₖ)</span><strong id="kf-out">10.00 N</strong></div>
+    <div class="metric"><span>Net force (along plane)</span><strong id="kf-net">2.00 N</strong></div>
+    <div class="metric"><span>Acceleration</span><strong id="kf-acc">0.40 m/s²</strong></div>
+  </div>
+  <div class="equation" id="kf-work" aria-live="polite">fₖ = μₖN</div>
+  <p class="note">Model assumption: the block is already sliding. Kinetic friction acts opposite its relative motion. On an incline, the applied force is taken parallel to the plane and positive down the plane.</p>
+</section>
+</main><script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const ids=['kf-mode','kf-m','kf-g','kf-mu','kf-f','kf-angle'];
+ const fmt=n=>Number.isFinite(n)?n.toFixed(2):'0.00';
+ function line(id,x1,y1,x2,y2){$(id).setAttribute('d',`M${x1} ${y1} L${x2} ${y2}`);}
+ function update(){
+  const m=Number($('kf-m').value),g=Number($('kf-g').value),mu=Number($('kf-mu').value),F=Number($('kf-f').value),deg=Number($('kf-angle').value),inc=$('kf-mode').value==='incline',rad=deg*Math.PI/180;
+  const N=inc?m*g*Math.cos(rad):m*g,fr=mu*N,gravityAlong=inc?m*g*Math.sin(rad):0;
+  const net=inc?gravityAlong+F-fr:F-fr,acc=net/m;
+  $('m-val').textContent=m.toFixed(1)+' kg';$('g-val').textContent=g.toFixed(1)+' m/s²';$('mu-val').textContent=mu.toFixed(2);$('f-val').textContent=F.toFixed(0)+' N';$('angle-val').textContent=deg+'°';$('kf-angle-wrap').style.display=inc?'grid':'none';
+  $('kf-normal').textContent=fmt(N)+' N';$('kf-out').textContent=fmt(fr)+' N';$('kf-net').textContent=fmt(net)+' N';$('kf-acc').textContent=fmt(acc)+' m/s²';
+  $('kf-work').textContent=inc?`N = mg cos θ = ${fmt(N)} N  •  fₖ = μₖN = ${fmt(fr)} N  •  mg sin θ = ${fmt(gravityAlong)} N. Net force = mg sin θ + F − fₖ = ${fmt(net)} N.`:`N = mg = ${fmt(N)} N  •  fₖ = μₖN = ${fmt(fr)} N  •  Fnet = F − fₖ = ${fmt(net)} N.`;
+  const block=$('block'),ground=$('ground-line'),hatch=$('ground-hatch');
+  const baseX=275,baseY=190;
+  if(inc){
+   const slope=Math.min(60,deg),rise=Math.tan(slope*Math.PI/180)*350;
+   ground.setAttribute('d',`M105 ${250-rise*.35} L555 250`);
+   hatch.setAttribute('d','M120 250l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12m35-12l-8 12');
+   const bx=275,by=190;block.setAttribute('transform',`translate(${bx} ${by}) rotate(${-slope})`);
+   const ux=Math.cos(rad),uy=-Math.sin(rad);
+   line('applied-arrow',bx+42*ux,by-21+42*uy,bx+130*ux,by-21+130*uy);
+   line('friction-arrow',bx-42*ux,by-21-42*uy,bx-130*ux,by-21-130*uy);
+   line('normal-arrow',bx,by-42,bx+Math.sin(rad)*85,by-42-Math.cos(rad)*85);
+   line('weight-arrow',bx,by-42,bx,by+85);
+   $('applied-label').setAttribute('x',bx+135*ux);$('applied-label').setAttribute('y',by-25+135*uy);
+   $('friction-label').setAttribute('x',bx-135*ux);$('friction-label').setAttribute('y',by-25-135*uy);
+   $('normal-label').setAttribute('x',bx+Math.sin(rad)*90+6);$('normal-label').setAttribute('y',by-42-Math.cos(rad)*90);
+   $('weight-label').setAttribute('x',bx+7);$('weight-label').setAttribute('y',by+91);
+   $('scene-caption').textContent='Incline: friction points opposite the direction of sliding along the plane';
+  }else{
+   ground.setAttribute('d','M55 250 H585');hatch.setAttribute('d','M70 255l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12m29-12l-9 12');
+   block.setAttribute('transform',`translate(${baseX} ${baseY})`);
+   line('applied-arrow',baseX+45,baseY-20,baseX+150,baseY-20);line('friction-arrow',baseX-45,baseY-20,baseX-150,baseY-20);line('normal-arrow',baseX,baseY-42,baseX,baseY-120);line('weight-arrow',baseX,baseY-42,baseX,baseY+85);
+   $('applied-label').setAttribute('x',baseX+155);$('applied-label').setAttribute('y',baseY-25);$('friction-label').setAttribute('x',baseX-155);$('friction-label').setAttribute('y',baseY-25);$('normal-label').setAttribute('x',baseX+8);$('normal-label').setAttribute('y',baseY-120);$('weight-label').setAttribute('x',baseX+8);$('weight-label').setAttribute('y',baseY+91);
+   $('scene-caption').textContent='Horizontal surface: kinetic friction acts opposite the sliding direction';
+  }
+  $('applied-label').textContent='F = '+fmt(F)+' N';$('friction-label').textContent='fₖ = '+fmt(fr)+' N';$('normal-label').textContent='N = '+fmt(N)+' N';$('weight-label').textContent='mg = '+fmt(m*g)+' N';
+  $('motion-state').textContent=net>0.01?'Net force: positive along plane':net<-.01?'Net force: negative along plane':'Balanced forces';
+ }
+ ids.forEach(id=>$(id).addEventListener('input',update));update();
+})();
+</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="central-config.js"></script>

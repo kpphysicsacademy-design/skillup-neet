@@ -78,6 +78,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .sim-stat{background:#efffe7;border:1px solid #ccefb9;border-radius:13px;padding:10px;text-align:center}
 .sim-stat strong{display:block;font-size:20px;color:#287d0a}.sim-stat span{font-size:11px;font-weight:850;color:#52734a}
 .sim-note{margin:10px 0 0;color:#53677b;font-size:13px;line-height:1.45}
+.sim-reset{margin:0 0 12px;padding:9px 13px;border:2px solid #cfe8f8;border-radius:12px;background:#eef8ff;color:#17527c;font:850 13px system-ui;cursor:pointer}.sim-reset:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
 .practice-heading{margin:0 0 12px;color:#174a78;font-size:20px}
 #learn,#simulator,#practice{scroll-margin-top:88px}
 .sim-visual{min-width:0}
@@ -113,6 +114,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
     <div class="sim-field"><label for="distLeg2">Movement 2 (m)</label><input id="distLeg2" type="number" step="0.5" value="-2"></div>
     <div class="sim-field"><label for="distLeg3">Movement 3 (m)</label><input id="distLeg3" type="number" step="0.5" value="4"></div>
   </div>
+  <button class="sim-reset" id="distanceReset" type="button">↺ Reset journey</button>
   <div class="sim-visual">
     <svg id="distanceSvg" viewBox="0 0 640 205" role="img" aria-label="Animated number line showing three journey segments and the final position">
       <defs><marker id="distArrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#168bd0"/></marker></defs>
@@ -148,13 +150,21 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   const ticks=$('distanceTicks'),path=$('distancePath');ticks.replaceChildren();path.replaceChildren();
   for(let i=0;i<=5;i++){const v=min+span*i/5,xx=x(v),line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',xx);line.setAttribute('x2',xx);line.setAttribute('y1','98');line.setAttribute('y2','112');line.setAttribute('stroke','#9bb0c2');ticks.append(line);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',xx);t.setAttribute('y','130');t.setAttribute('text-anchor','middle');t.setAttribute('font-size','11');t.setAttribute('fill','#53677b');t.textContent=fmt(v);ticks.append(t);}
   const colors=['#20a4e8','#ff9f43','#8b68dc'];
-  for(let i=0;i<3;i++){const a=x(positions[i]),b=x(positions[i+1]),line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',a);line.setAttribute('x2',b);line.setAttribute('y1',78+i*0);line.setAttribute('y2',78);line.setAttribute('stroke',colors[i]);line.setAttribute('stroke-width','9');line.setAttribute('stroke-linecap','round');path.append(line);const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',b);dot.setAttribute('cy','78');dot.setAttribute('r','7');dot.setAttribute('fill',colors[i]);path.append(dot);}
-  const start=document.createElementNS('http://www.w3.org/2000/svg','circle');start.setAttribute('cx',x(0));start.setAttribute('cy','78');start.setAttribute('r','7');start.setAttribute('fill','#174a78');path.append(start);
-  const end=document.createElementNS('http://www.w3.org/2000/svg','line');end.setAttribute('x1',x(0));end.setAttribute('x2',x(final));end.setAttribute('y1','153');end.setAttribute('y2','153');end.setAttribute('stroke','#168bd0');end.setAttribute('stroke-width','4');end.setAttribute('marker-end','url(#distArrow)');path.append(end);
+  for(let i=0;i<3;i++){
+   const a=x(positions[i]),b=x(positions[i+1]),y=48+i*27;
+   const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',a);line.setAttribute('x2',b);line.setAttribute('y1',y);line.setAttribute('y2',y);line.setAttribute('stroke',colors[i]);line.setAttribute('stroke-width','8');line.setAttribute('stroke-linecap','round');path.append(line);
+   const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',b);dot.setAttribute('cy',y);dot.setAttribute('r','6');dot.setAttribute('fill',colors[i]);path.append(dot);
+   const label=document.createElementNS('http://www.w3.org/2000/svg','text');label.setAttribute('x',Math.max(48,Math.min(592,(a+b)/2)));label.setAttribute('y',y-8);label.setAttribute('text-anchor','middle');label.setAttribute('font-size','11');label.setAttribute('font-weight','bold');label.setAttribute('fill',colors[i]);label.textContent='Move '+(i+1)+': '+(vals[i]>0?'+':'')+fmt(vals[i])+' m';path.append(label);
+  }
+  const start=document.createElementNS('http://www.w3.org/2000/svg','circle');start.setAttribute('cx',x(0));start.setAttribute('cy','48');start.setAttribute('r','6');start.setAttribute('fill','#174a78');path.append(start);
+  const end=document.createElementNS('http://www.w3.org/2000/svg','line');end.setAttribute('x1',x(0));end.setAttribute('x2',x(final));end.setAttribute('y1','166');end.setAttribute('y2','166');end.setAttribute('stroke','#168bd0');end.setAttribute('stroke-width','4');end.setAttribute('marker-end','url(#distArrow)');path.append(end);
+  const resultLabel=document.createElementNS('http://www.w3.org/2000/svg','text');resultLabel.setAttribute('x','320');resultLabel.setAttribute('y','185');resultLabel.setAttribute('text-anchor','middle');resultLabel.setAttribute('font-size','12');resultLabel.setAttribute('font-weight','bold');resultLabel.setAttribute('fill','#17527c');resultLabel.textContent='Net change: '+(final>0?'+':'')+fmt(final)+' m';path.append(resultLabel);
   $('distanceTotal').textContent=fmt(total)+' m';$('distanceDisp').textContent=fmt(Math.abs(final))+' m';$('distanceFinal').textContent=(final>0?'+':'')+fmt(final)+' m';$('distanceEndLabel').textContent='Final: '+fmt(final)+' m';
   $('distanceExplain').textContent='Distance = '+vals.map(v=>'|'+fmt(v)+'|').join(' + ')+' = '+fmt(total)+' m. Net displacement = '+vals.map(fmt).join(' + ')+' = '+(final>0?'+':'')+fmt(final)+' m.';
  }
- ids.forEach(id=>$(id).addEventListener('input',updateDistance));updateDistance();
+ ids.forEach(id=>$(id).addEventListener('input',updateDistance));
+ $('distanceReset').addEventListener('click',()=>{['5','-2','4'].forEach((v,i)=>$(ids[i]).value=v);updateDistance();});
+ updateDistance();
 })();
 
 (function(){

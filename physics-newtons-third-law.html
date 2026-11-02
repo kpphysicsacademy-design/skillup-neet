@@ -55,15 +55,66 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+.topic-tabs{max-width:720px;margin:16px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.topic-tab{min-height:48px;border:2px solid #dce6ef;border-bottom-width:4px;border-radius:15px;background:#fff;color:#31516b;font-weight:900;font-size:14px;cursor:pointer}
+.topic-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}.topic-panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:18px;margin:0 0 14px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{color:#174a78;margin:0 0 12px;font-size:20px}.lesson-card p,.lesson-card li{line-height:1.65}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lesson-tile{background:#f2f9ff;border:1px solid #dcecf8;border-radius:14px;padding:13px;line-height:1.55}
+.lesson-tile b{display:block;color:#174a78;margin-bottom:5px}
+.lesson-equation{background:#f2f0ff;border:1px solid #ddd6fe;border-radius:14px;padding:15px;text-align:center;color:#5034a5;font-weight:900;font-size:20px;margin:10px 0}
+.lesson-example{background:#efffe7;border:1px solid #c8f0b2;border-radius:14px;padding:14px;line-height:1.65}
+.sim-stage{height:170px;position:relative;overflow:hidden;border-radius:15px;background:linear-gradient(#e9f7ff 0 72%,#d9e8f2 72%);margin-bottom:14px}
+.sim-ground{position:absolute;left:0;right:0;bottom:20%;border-top:3px dashed #9ab2c5}
+.sim-object{position:absolute;bottom:22%;width:66px;height:52px;border-radius:12px;background:#8b5cf6;border:3px solid #6d45d8;display:grid;place-items:center;color:#fff;font-weight:900;transition:left .2s;left:42%}
+.sim-force{position:absolute;bottom:52%;height:4px;width:95px;border-radius:8px;background:#1cb0f6;transition:transform .2s}
+.sim-force:after{content:"";position:absolute;right:-2px;top:-6px;border-left:12px solid #1cb0f6;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.sim-force.forward{left:calc(42% + 68px)}.sim-force.backward{left:calc(42% - 96px);transform:rotate(180deg)}
+.sim-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sim-control{background:#f8fbff;border:1px solid #dce6ef;border-radius:13px;padding:12px}
+.sim-control label{display:flex;justify-content:space-between;gap:8px;font-weight:850;font-size:13px}
+.sim-control output{color:#17699a}.sim-control input{width:100%;accent-color:#1cb0f6;margin-top:10px}
+.sim-results{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sim-result{background:#f2f9ff;border:1px solid #dcecf8;border-radius:13px;padding:12px;text-align:center}
+.sim-result strong{display:block;font-size:22px;color:#174a78}.sim-result span{font-size:11px;color:#64748b;font-weight:750}
+@media(max-width:480px){.topic-tabs{gap:5px;margin:12px 0}.topic-tab{font-size:12px;padding:7px 3px}.lesson-grid,.sim-controls{grid-template-columns:1fr}.lesson-card,.sim-card{padding:15px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
+<nav class="topic-tabs" role="tablist" aria-label="Topic sections">
+<button class="topic-tab" id="tab-learn" role="tab" aria-selected="false" aria-controls="panel-learn" data-panel="learn">📘 Learn</button>
+<button class="topic-tab" id="tab-simulate" role="tab" aria-selected="false" aria-controls="panel-simulate" data-panel="simulate">🎮 Simulate</button>
+<button class="topic-tab active" id="tab-practice" role="tab" aria-selected="true" aria-controls="panel-practice" data-panel="practice">🧠 Practice</button></nav>
+<section id="panel-learn" class="topic-panel" role="tabpanel" aria-labelledby="tab-learn" hidden>
+<section class="lesson-card"><h2>1. Statement of Newton’s third law</h2><p>Whenever one body exerts a force on another body, the second body simultaneously exerts a force of equal magnitude and opposite direction on the first body.</p><div class="lesson-equation">F_AB = −F_BA</div><p>These two forces are an action–reaction pair. They act on two different interacting bodies, not on the same body.</p></section>
+<section class="lesson-card"><h2>2. Key features of action–reaction pairs</h2><div class="lesson-grid"><div class="lesson-tile"><b>Equal magnitude</b>Both forces have the same magnitude.</div><div class="lesson-tile"><b>Opposite direction</b>The forces point in opposite directions along the same interaction line.</div><div class="lesson-tile"><b>Same time</b>They arise and act simultaneously.</div><div class="lesson-tile"><b>Different bodies</b>Each force acts on a different object, so they do not cancel on one object's free-body diagram.</div></div></section>
+<section class="lesson-card"><h2>3. Everyday examples</h2><ul><li><b>Walking:</b> Your foot pushes the ground backward; the ground pushes you forward.</li><li><b>Swimming:</b> A swimmer pushes water backward; water pushes the swimmer forward.</li><li><b>Rocket propulsion:</b> Exhaust gases are expelled backward; the gases exert forward thrust on the rocket.</li><li><b>Recoil:</b> A gun pushes a bullet forward; the bullet exerts an opposite force on the gun.</li><li><b>Book on a table:</b> The book pushes the table down; the table pushes the book up.</li></ul></section>
+<section class="lesson-card"><h2>4. Important distinction: action and reaction vs balanced forces</h2><div class="lesson-example"><b>Book resting on a table:</b> The table's upward normal force and Earth's downward gravitational force both act on the book. They may balance, but they are <b>not</b> a third-law pair. The reaction to the book's gravitational pull by Earth is the book's gravitational pull on Earth; the reaction to the book pushing the table down is the table pushing the book up.</div></section>
+<section class="lesson-card"><h2>5. Rocket propulsion explained</h2><div class="lesson-example">The rocket engine pushes exhaust gases backward. The exhaust gases exert an equal and opposite force on the rocket, producing forward thrust. A rocket can accelerate in space because it expels propellant; it does not need to push against air.</div></section>
+<section class="lesson-card"><h2>6. Exam reminders</h2><ul><li>Action and reaction are equal and opposite but act on different bodies.</li><li>They occur simultaneously, not one after another.</li><li>They are the same type of force and belong to the same interaction.</li><li>Do not confuse a third-law pair with two forces balancing on one object.</li><li>Third law applies to contact and non-contact interactions.</li></ul></section>
+</section>
+<section id="panel-simulate" class="topic-panel" role="tabpanel" aria-labelledby="tab-simulate" hidden>
+<section class="sim-card"><h2>🎮 Action–reaction simulator</h2><p class="muted">Choose the force one object exerts on another and compare the equal-and-opposite reaction. Change the masses to see why the accelerations can differ.</p>
+<div class="sim-stage"><div class="sim-ground"></div><div class="sim-force forward" id="forceForward"></div><div class="sim-force backward" id="forceBackward"></div><div class="sim-object" id="simObject">A ↔ B</div></div>
+<div class="sim-controls">
+<div class="sim-control"><label for="simForce">Interaction force <output id="forceOut">20 N</output></label><input id="simForce" type="range" min="0" max="100" step="1" value="20"></div>
+<div class="sim-control"><label for="massA">Mass of object A <output id="massAOut">5 kg</output></label><input id="massA" type="range" min="1" max="20" step="1" value="5"></div>
+<div class="sim-control"><label for="massB">Mass of object B <output id="massBOut">10 kg</output></label><input id="massB" type="range" min="1" max="20" step="1" value="10"></div>
+</div></section>
+<section class="sim-card"><h2>Action and reaction</h2><div class="sim-results"><div class="sim-result"><strong id="actionOut">20 N</strong><span>Force on A</span></div><div class="sim-result"><strong id="reactionOut">20 N</strong><span>Force on B</span></div><div class="sim-result"><strong id="equalityOut">Equal</strong><span>Magnitudes</span></div></div></section>
+<section class="sim-card"><h2>Acceleration of each object</h2><div class="sim-results"><div class="sim-result"><strong id="accelAOut">4 m/s²</strong><span>Object A</span></div><div class="sim-result"><strong id="accelBOut">2 m/s²</strong><span>Object B</span></div><div class="sim-result"><strong>Opposite</strong><span>Directions</span></div></div><p class="muted" id="simExplanation" style="margin-top:12px">Both forces are equal in magnitude and opposite in direction. Different masses produce different acceleration magnitudes.</p><button class="btn" id="simReset" type="button" style="margin-top:12px">↺ Reset simulator</button></section>
+</section>
+<section id="panel-practice" class="topic-panel" role="tabpanel" aria-labelledby="tab-practice">
 <section class="hero"><h1>📏 Newton's Third Law</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -127,6 +178,27 @@ render();
   }
   removeQuizAudio();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<script>
+(function(){
+const tabs=[...document.querySelectorAll('.topic-tab')],panels={learn:document.getElementById('panel-learn'),simulate:document.getElementById('panel-simulate'),practice:document.getElementById('panel-practice')};
+function show(name){tabs.forEach(t=>{const active=t.dataset.panel===name;t.classList.toggle('active',active);t.setAttribute('aria-selected',String(active));});Object.entries(panels).forEach(([key,p])=>p.hidden=key!==name);}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>show(t.dataset.panel));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const j=(i+(e.key==='ArrowRight'?1:2))%3;tabs[j].focus();show(tabs[j].dataset.panel);}});});show('practice');
+})();
+</script>
+<script>
+(function(){
+const $=id=>document.getElementById(id),fmt=n=>Number(n.toFixed(2)).toString();
+function update(){const F=+$('simForce').value,mA=+$('massA').value,mB=+$('massB').value,aA=F/mA,aB=F/mB;
+$('forceOut').textContent=F+' N';$('massAOut').textContent=mA+' kg';$('massBOut').textContent=mB+' kg';
+$('actionOut').textContent=F+' N';$('reactionOut').textContent=F+' N';$('equalityOut').textContent='Equal';
+$('accelAOut').textContent=fmt(aA)+' m/s²';$('accelBOut').textContent=fmt(aB)+' m/s²';
+$('forceForward').style.width=Math.max(8,Math.min(145,F*1.35))+'px';$('forceBackward').style.width=Math.max(8,Math.min(145,F*1.35))+'px';$('forceForward').style.opacity=F===0?'.12':'1';$('forceBackward').style.opacity=F===0?'.12':'1';
+$('simExplanation').textContent='Object A experiences '+F+' N in one direction; object B experiences '+F+' N in the opposite direction. Their accelerations are '+fmt(aA)+' m/s² and '+fmt(aB)+' m/s² because their masses differ.';
+}
+['simForce','massA','massB'].forEach(id=>$(id).addEventListener('input',update));$('simReset').addEventListener('click',()=>{['20','5','10'].forEach((v,i)=>$(['simForce','massA','massB'][i]).value=v);update();});update();
 })();
 </script>
 </body>

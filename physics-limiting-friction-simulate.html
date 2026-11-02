@@ -14,12 +14,14 @@ main{max-width:980px;margin:0 auto;padding:14px 14px 44px}.card{background:var(-
 <a class="tab " href="physics-limiting-friction-learn.html">📘 Learn</a>
 <a class="tab active" href="physics-limiting-friction-simulate.html">⚙️ Simulate</a>
 <a class="tab" href="physics-limiting-friction.html#panel-practice">🎯 Practice</a>
-</nav><main><article class="card"><span class="eyebrow">VIRTUAL EXPERIMENT</span><h1>Limiting Friction Simulator</h1><p class="lead">Adjust the block and surface properties, then increase the push. Observe how static friction balances the applied force until the limiting value is exceeded.</p>
+</nav><main><article class="card"><span class="eyebrow">VIRTUAL EXPERIMENT</span><h1>Limiting Friction Simulator</h1><p class="lead">Adjust the block, surface and time. Static friction balances the push up to its limit; after slipping begins, kinetic friction acts and the simulator calculates acceleration and displacement.</p>
 <div class="sim-controls">
 <label class="control">Block mass <output id="massVal">5.0 kg</output><input id="mass" type="range" min="1" max="20" step=".5" value="5"></label>
 <label class="control">Coefficient of static friction (μₛ) <output id="muVal">0.40</output><input id="mu" type="range" min=".05" max="1" step=".01" value=".4"></label>
+<label class="control">Coefficient of kinetic friction (μₖ) <output id="mukVal">0.30</output><input id="muk" type="range" min=".01" max=".95" step=".01" value=".30"></label>
 <label class="control">Applied horizontal force <output id="forceVal">10 N</output><input id="force" type="range" min="0" max="150" step="1" value="10"></label>
 <label class="control">Gravitational acceleration <output id="gravityVal">10.0 m/s²</output><input id="gravity" type="range" min="5" max="15" step=".5" value="10"></label>
+<label class="control">Time after slipping starts <output id="timeVal">2.0 s</output><input id="time" type="range" min="0" max="5" step=".1" value="2"></label>
 </div>
 <div class="scene"><div class="status" id="status" aria-live="polite">🟢 At rest — static friction balances the push</div>
 <svg viewBox="0 0 620 270" role="img" aria-label="Block on rough horizontal surface showing applied force, friction, normal reaction and weight">
@@ -29,25 +31,29 @@ main{max-width:980px;margin:0 auto;padding:14px 14px 44px}.card{background:var(-
 <g fill="none" stroke-width="4" stroke-linecap="round"><path id="pushArrow" d="M300 135H430" stroke="#168bd2" marker-end="url(#blueArrow)"/><path id="frictionArrow" d="M210 135H90" stroke="#e45454" marker-end="url(#redArrow)"/><path d="M255 118V40" stroke="#35a853" marker-end="url(#greenArrow)"/><path d="M255 160V245" stroke="#e45454" marker-end="url(#redArrow)"/></g>
 <g font-size="14" font-weight="800"><text id="pushLabel" x="438" y="130" fill="#168bd2">Push 10 N</text><text id="frictionLabel" x="85" y="130" text-anchor="end" fill="#e45454">Static friction 10 N</text><text x="266" y="42" fill="#35a853">N</text><text x="266" y="246" fill="#e45454">mg</text></g>
 <text id="sceneText" x="310" y="25" text-anchor="middle" font-size="13" fill="#64748b">Static friction balances the applied force</text></svg><div class="legend"><span>🔵 Applied force</span><span>🔴 Friction / weight</span><span>🟢 Normal reaction</span></div></div>
-<div class="results"><div class="result"><span>Normal reaction</span><strong id="normal">50.00 N</strong></div><div class="result"><span>Limiting friction</span><strong id="limit">20.00 N</strong></div><div class="result"><span>Actual friction</span><strong id="actual">10.00 N</strong></div><div class="result"><span>Net horizontal force</span><strong id="net">0.00 N</strong></div></div>
+<div class="results"><div class="result"><span>Normal reaction</span><strong id="normal">50.00 N</strong></div><div class="result"><span>Limiting friction</span><strong id="limit">20.00 N</strong></div><div class="result"><span>Friction acting</span><strong id="actual">10.00 N</strong></div><div class="result"><span>Net force</span><strong id="net">0.00 N</strong></div><div class="result"><span>Acceleration</span><strong id="accel">0.00 m/s²</strong></div><div class="result"><span>Displacement</span><strong id="distance">0.00 m</strong></div></div>
 <div class="explain" id="explain" aria-live="polite"></div>
-<div class="note"><b>Model note:</b> This experiment identifies the instant sliding begins. Once the applied force exceeds limiting friction, it displays the excess force as the threshold net force; it does not model continued motion or kinetic friction.</div>
+<div class="note"><b>Model:</b> Before slipping, static friction equals the applied force (up to μₛN). After slipping, friction is μₖN. For constant applied force, a = (F − μₖN)/m and displacement from rest is s = ½at². The model assumes a horizontal surface and constant force.</div>
 </article>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),fmt=n=>n.toFixed(2);
 function update(){
- const m=Number($('mass').value),mu=Number($('mu').value),F=Number($('force').value),g=Number($('gravity').value);
- const N=m*g,lim=mu*N,slip=F>lim,fr=slip?lim:F,net=slip?F-lim:0;
- $('massVal').textContent=m.toFixed(1)+' kg';$('muVal').textContent=mu.toFixed(2);$('forceVal').textContent=F.toFixed(0)+' N';$('gravityVal').textContent=g.toFixed(1)+' m/s²';
- $('normal').textContent=fmt(N)+' N';$('limit').textContent=fmt(lim)+' N';$('actual').textContent=fmt(fr)+' N';$('net').textContent=fmt(net)+' N';
- $('pushLabel').textContent='Push '+fmt(F)+' N';$('frictionLabel').textContent=(slip?'Limiting friction ':'Static friction ')+fmt(fr)+' N';
- $('sceneText').textContent=slip?'Static limit exceeded — slipping begins':'Static friction balances the applied force';
- $('status').textContent=slip?'🟠 Sliding begins — applied force exceeds limiting friction':'🟢 At rest — static friction balances the push';
- $('status').style.background=slip?'#fff2df':'#efffe7';$('status').style.color=slip?'#9a5b00':'#287d00';
- const dx=slip?Math.min(85,(F-lim)*1.1):0;$('block').setAttribute('transform','translate('+(255+dx)+' 160)');
- $('explain').textContent=slip?'fₗ = μₛN = '+fmt(mu)+' × '+fmt(N)+' = '+fmt(lim)+' N. Since '+fmt(F)+' N > '+fmt(lim)+' N, static friction is no longer sufficient and slipping begins.':'fₗ = μₛN = '+fmt(mu)+' × '+fmt(N)+' = '+fmt(lim)+' N. The applied force ('+fmt(F)+' N) is below this limit, so static friction adjusts to '+fmt(fr)+' N in the opposite direction. Net horizontal force = 0 N.';
+ const m=Number($('mass').value),mus=Number($('mu').value),mukRaw=Number($('muk').value),muk=Math.min(mukRaw,mus),F=Number($('force').value),g=Number($('gravity').value),t=Number($('time').value);
+ const N=m*g,lim=mus*N,sliding=F>lim+1e-9,threshold=Math.abs(F-lim)<=1e-9,fr=sliding?muk*N:F,net=sliding?F-fr:0,a=sliding?net/m:0,s=sliding?.5*a*t*t:0;
+ $('muk').max=mus.toFixed(2);$('muk').value=muk.toFixed(2);
+ $('massVal').textContent=m.toFixed(1)+' kg';$('muVal').textContent=mus.toFixed(2);$('mukVal').textContent=muk.toFixed(2);$('forceVal').textContent=F.toFixed(0)+' N';$('gravityVal').textContent=g.toFixed(1)+' m/s²';$('timeVal').textContent=t.toFixed(1)+' s';
+ $('normal').textContent=fmt(N)+' N';$('limit').textContent=fmt(lim)+' N';$('actual').textContent=fmt(fr)+' N';$('net').textContent=fmt(net)+' N';$('accel').textContent=fmt(a)+' m/s²';$('distance').textContent=fmt(s)+' m';
+ $('pushLabel').textContent='Push '+fmt(F)+' N';$('frictionLabel').textContent=(sliding?'Kinetic friction ':'Static friction ')+fmt(fr)+' N';
+ $('sceneText').textContent=sliding?'Sliding — kinetic friction opposes motion':threshold?'Impending motion — static friction at maximum':'Static friction balances the applied force';
+ $('status').textContent=sliding?'🟠 Sliding — kinetic friction acts; acceleration is '+fmt(a)+' m/s²':threshold?'🟡 Impending motion — static friction has reached its limit':'🟢 At rest — static friction balances the push';
+ $('status').style.background=sliding?'#fff2df':threshold?'#fff8dc':'#efffe7';$('status').style.color=sliding?'#9a5b00':threshold?'#866000':'#287d00';
+ const dx=sliding?Math.min(130,s*9):0;$('block').setAttribute('transform','translate('+(255+dx)+' 160)');
+ const pushLen=Math.max(10,Math.min(165,F*1.05)),frLen=Math.max(10,Math.min(165,fr*1.05));
+ $('pushArrow').setAttribute('d','M300 135H'+(300+pushLen));$('frictionArrow').setAttribute('d','M210 135H'+(210-frLen));
+ $('pushLabel').setAttribute('x',Math.min(445,308+pushLen));$('frictionLabel').setAttribute('x',Math.max(75,202-frLen));
+ $('explain').textContent=sliding?'Limiting friction = μₛN = '+fmt(mus)+' × '+fmt(N)+' = '+fmt(lim)+' N. Since F = '+fmt(F)+' N exceeds this, the block slides. Kinetic friction = μₖN = '+fmt(muk)+' × '+fmt(N)+' = '+fmt(fr)+' N. Net force = '+fmt(net)+' N, so a = Fnet/m = '+fmt(a)+' m/s². From rest, after '+fmt(t)+' s, s = ½at² = '+fmt(s)+' m.':'Limiting friction = μₛN = '+fmt(mus)+' × '+fmt(N)+' = '+fmt(lim)+' N. '+(threshold?'The applied force has just reached the limiting value; the block is on the verge of slipping.':'The applied force is below the limiting value, so static friction adjusts to '+fmt(F)+' N. The block remains at rest; acceleration and displacement are zero.');
 }
-['mass','mu','force','gravity'].forEach(id=>$(id).addEventListener('input',update));update();
+['mass','mu','muk','force','gravity','time'].forEach(id=>$(id).addEventListener('input',update));update();
 })();
 </script></main></body></html>

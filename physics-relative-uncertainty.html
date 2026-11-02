@@ -55,6 +55,23 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Standard SkillUp Learn + Simulator layout */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:13px;background:#fff;padding:12px 6px;font-weight:900;color:#31536e;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-bottom-width:4px;border-radius:17px;padding:15px;margin:10px 0}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:17px}
+.learn-card p,.sim-card p{margin:6px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{background:#eef8ff;border-radius:12px;padding:11px;margin:9px 0;font-weight:850;color:#174a78}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin-bottom:5px}
+.sim-field input{width:100%;border:2px solid #dce6ef;border-radius:11px;padding:11px;font:inherit;font-weight:700;min-width:0}
+.sim-result{background:#f0ffeb;border:2px solid #c8f0b2;border-radius:14px;padding:13px;margin-top:12px}
+.sim-result strong{color:#287a10}.sim-hint{font-size:12px!important;color:#64748b!important}
+@media(max-width:420px){.sim-grid{grid-template-columns:1fr}.study-tab{font-size:12px;padding:11px 3px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,8 +79,42 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Relative Uncertainty</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="study-tabs" aria-label="Study sections">
+ <button class="study-tab active" data-panel="learnPanel" type="button">📘 Learn</button>
+ <button class="study-tab" data-panel="simPanel" type="button">🧪 Simulator</button>
+ <button class="study-tab" data-panel="practicePanel" type="button">🎯 Practice</button>
+</nav>
+<section id="learnPanel" class="study-panel active">
+ <div class="learn-card"><h3>1. Meaning of relative uncertainty</h3><p>Relative uncertainty compares the absolute uncertainty with the size of the measured value. It is a ratio, so the units cancel.</p><div class="formula">Relative uncertainty = Δx / |x|</div></div>
+ <div class="learn-card"><h3>2. Percentage uncertainty</h3><p>Multiplying relative uncertainty by 100 expresses it as a percentage. This makes the uncertainty easier to compare across different-sized measurements.</p><div class="formula">Percentage uncertainty = (Δx / |x|) × 100%</div><p>Example: 0.5 cm uncertainty in a 10 cm measurement gives 0.05 or 5%.</p></div>
+ <div class="learn-card"><h3>3. Calculate relative uncertainty</h3><p>Divide the absolute uncertainty by the magnitude of the measured value. Keep both quantities in the same unit before dividing.</p><div class="formula">For x = 200 g and Δx = 2 g:<br>Relative uncertainty = 2 / 200 = 0.01</div></div>
+ <div class="learn-card"><h3>4. Convert between forms</h3><p>To convert a decimal ratio to a percentage, multiply by 100. To convert a percentage to a decimal ratio, divide by 100.</p><div class="formula">0.04 = 4%<br>2.5% = 0.025</div></div>
+ <div class="learn-card"><h3>5. Compare measurements</h3><p>For the same absolute uncertainty, a larger measured value has a smaller relative uncertainty. For the same measured value, a larger absolute uncertainty gives a larger relative uncertainty.</p></div>
+ <div class="learn-card"><h3>6. Find absolute uncertainty</h3><p>If the relative uncertainty and measured value are known, multiply them to recover the absolute uncertainty.</p><div class="formula">Absolute uncertainty = Relative uncertainty × |x|</div></div>
+ <div class="learn-card"><h3>7. Important limitation</h3><p>The simple ratio is undefined when the measured value is zero. Relative uncertainty is dimensionless and does not by itself guarantee accuracy or remove systematic error.</p></div>
+</section>
+<section id="simPanel" class="study-panel">
+ <div class="sim-card"><h3>🧪 Relative Uncertainty Calculator</h3><p>Enter a measured value and its absolute uncertainty. Calculate the relative and percentage uncertainty.</p>
+  <div class="sim-grid">
+   <div class="sim-field"><label for="relativeValue">Measured value</label><input id="relativeValue" type="number" step="any" value="10"></div>
+   <div class="sim-field"><label for="absoluteValue">Absolute uncertainty</label><input id="absoluteValue" type="number" min="0" step="any" value="0.5"></div>
+  </div>
+  <button class="btn check" id="calculateRelative" type="button" style="width:100%;margin-top:10px">Calculate relative uncertainty</button>
+  <div class="sim-result" id="relativeResults" aria-live="polite"><strong>Ready to calculate</strong><p>Example: 0.5 uncertainty in a value of 10 gives 0.05 or 5%.</p></div>
+ </div>
+ <div class="sim-card"><h3>Convert percentage and decimal</h3><div class="sim-grid">
+  <div class="sim-field"><label for="percentInput">Percentage uncertainty (%)</label><input id="percentInput" type="number" min="0" step="any" value="4"></div>
+  <div class="sim-field"><label for="decimalInput">Relative uncertainty</label><input id="decimalInput" type="number" min="0" step="any" value="0.04"></div>
+ </div><p class="sim-hint">Change either field and use the matching conversion button.</p>
+ <div class="sim-grid"><button class="btn check" id="percentToDecimal" type="button">Convert to decimal</button><button class="btn check" id="decimalToPercent" type="button">Convert to %</button></div>
+ <div class="sim-result" id="conversionResults" aria-live="polite"><strong>Conversion</strong><p>4% = 0.04</p></div></div>
+</section>
+<section class="study-panel" id="practicePanel">
+
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -441,6 +492,34 @@ $('continue').addEventListener('click',()=>{
 });
 render();
 })();
+
+/* Study navigation and relative uncertainty tools */
+(function(){
+ const tabs=[...document.querySelectorAll('.study-tab')],panels=[...document.querySelectorAll('.study-panel')];
+ tabs.forEach(btn=>btn.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.toggle('active',x===btn));
+  panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));
+ }));
+ document.getElementById('calculateRelative').addEventListener('click',()=>{
+  const x=Number(document.getElementById('relativeValue').value),u=Number(document.getElementById('absoluteValue').value),out=document.getElementById('relativeResults');
+  if(!Number.isFinite(x)||!Number.isFinite(u)||u<0||x===0){out.innerHTML='<strong>Check your inputs</strong><p>Enter a non-zero measured value and a non-negative absolute uncertainty.</p>';return;}
+  const ratio=u/Math.abs(x),pct=ratio*100;
+  out.innerHTML='<strong>Calculated result</strong><p>Relative uncertainty: <b>'+ratio.toPrecision(6)+'</b></p><p>Percentage uncertainty: <b>'+pct.toPrecision(5)+'%</b></p><p>Absolute uncertainty: <b>'+u+'</b></p><p class="sim-hint">The ratio is dimensionless. Use matching units for the measured value and absolute uncertainty.</p>';
+ });
+ document.getElementById('percentToDecimal').addEventListener('click',()=>{
+  const p=Number(document.getElementById('percentInput').value),out=document.getElementById('conversionResults');
+  if(!Number.isFinite(p)||p<0){out.innerHTML='<strong>Enter a valid non-negative percentage.</strong>';return;}
+  document.getElementById('decimalInput').value=String(p/100);
+  out.innerHTML='<strong>Converted</strong><p>'+p+'% = <b>'+(p/100)+'</b></p>';
+ });
+ document.getElementById('decimalToPercent').addEventListener('click',()=>{
+  const d=Number(document.getElementById('decimalInput').value),out=document.getElementById('conversionResults');
+  if(!Number.isFinite(d)||d<0){out.innerHTML='<strong>Enter a valid non-negative ratio.</strong>';return;}
+  document.getElementById('percentInput').value=String(d*100);
+  out.innerHTML='<strong>Converted</strong><p>'+d+' = <b>'+(d*100)+'%</b></p>';
+ });
+})();
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

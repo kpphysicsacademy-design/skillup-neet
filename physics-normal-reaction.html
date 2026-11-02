@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Normal Reaction quiz">
-<title>SkillUp | Normal Reaction — Easy Quiz</title>
+<meta name="description" content="Learn, simulate and practise normal reaction force with interactive examples and 30 questions.">
+<title>SkillUp Physics | Normal Reaction</title>
 <style>
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -55,15 +55,83 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none}.panel.active{display:block}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<nav class="tabs" aria-label="Learning modes">
+<button class="tab active" type="button" data-tab="learn">📘 Learn</button>
+<button class="tab" type="button" data-tab="simulate">⚙️ Simulate</button>
+<button class="tab" type="button" data-tab="practice">✍️ Practice</button>
+</nav>
 <main>
-<section class="hero"><h1>📏 Normal Reaction</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="panel active" id="panel-learn">
+<article class="lesson-card">
+<h2>Normal reaction force</h2>
+<p>The <b>normal reaction</b> is the contact force exerted by a surface on an object. It always acts <b>perpendicular</b> to the contact surface.</p>
+<div class="formula">N = perpendicular contact force</div>
+<h3>1. Object on a horizontal surface</h3>
+<p>When an object is at rest on a horizontal floor and no other vertical forces act, the normal reaction balances its weight.</p>
+<div class="formula">N = mg</div>
+<p>Example: for a 4 kg block with g = 10 m/s², N = 4 × 10 = 40 N.</p>
+<h3>2. Object on an inclined plane</h3>
+<p>Resolve the weight perpendicular and parallel to the plane. For a block at rest on a frictionless incline, the normal reaction balances the perpendicular component.</p>
+<div class="formula">N = mg cos θ</div>
+<p>At θ = 60°, a 2 kg block has N = 2 × 10 × cos 60° = 10 N.</p>
+<h3>3. Additional vertical forces</h3>
+<ul><li>Extra downward push P: <b>N = mg + P</b></li><li>Upward pull T while contact remains: <b>N = mg − T</b></li></ul>
+<h3>4. Lift / elevator</h3>
+<ul><li>Accelerating upward: <b>N = m(g + a)</b></li><li>Accelerating downward: <b>N = m(g − a)</b></li><li>Free fall: <b>N = 0</b></li><li>Constant velocity: <b>N = mg</b></li></ul>
+<h3>Remember</h3>
+<p>Normal reaction is not always equal to weight. It depends on the perpendicular force balance and whether contact is maintained. If the object loses contact, N becomes zero.</p>
+</article>
+<article class="lesson-card">
+<h2>Worked example</h2>
+<p>A 5 kg block rests on a 37° incline. Take g = 10 m/s² and cos 37° = 0.8.</p>
+<div class="formula">N = mg cos θ = 5 × 10 × 0.8 = 40 N</div>
+<p class="small-note">Exam tip: draw a free-body diagram first, then resolve forces perpendicular to the surface.</p>
+</article>
+</section>
+<section class="panel" id="panel-simulate">
+<article class="sim-card">
+<h2>Normal reaction simulator</h2>
+<p class="muted">Change the situation and values to calculate the contact force instantly.</p>
+<div class="sim-grid">
+<label>Situation<select id="nr-mode"><option value="flat">Horizontal surface</option><option value="incline">Inclined plane</option><option value="up">Elevator accelerating up</option><option value="down">Elevator accelerating down</option><option value="push">Extra downward push</option><option value="pull">Upward pull</option></select></label>
+<label>Mass (kg)<input id="nr-mass" type="number" min="0" step="0.1" value="5"></label>
+<label>Gravity g (m/s²)<input id="nr-g" type="number" min="0" step="0.1" value="10"></label>
+<label id="nr-extra-label">Angle / acceleration / force<input id="nr-extra" type="number" min="0" step="0.1" value="37"></label>
+</div>
+<div class="sim-result" aria-live="polite"><div class="small-note">Calculated normal reaction</div><strong id="nr-output">39.93 N</strong><p id="nr-working" class="small-note">N = mg cos θ</p></div>
+<p class="small-note">Ideal model: no additional perpendicular forces unless selected. For elevator modes, enter acceleration magnitude. For incline, enter angle in degrees.</p>
+</article>
+</section>
+<section class="panel" id="panel-practice">
+<h1>📏 Normal Reaction</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -127,6 +195,36 @@ render();
   }
   removeQuizAudio();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<script>
+(function(){
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(b=>b.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.toggle('active',x===b));
+ document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+b.dataset.tab));
+}));
+const $=id=>document.getElementById(id);
+function calcNormal(){
+ const m=Math.max(0,Number($('nr-mass').value)||0),g=Math.max(0,Number($('nr-g').value)||0),x=Math.max(0,Number($('nr-extra').value)||0),mode=$('nr-mode').value;
+ let n=0,work='';
+ if(mode==='flat'){n=m*g;work='N = mg';}
+ if(mode==='incline'){n=m*g*Math.cos(x*Math.PI/180);work='N = mg cos θ';}
+ if(mode==='up'){n=m*(g+x);work='N = m(g + a)';}
+ if(mode==='down'){n=m*Math.max(0,g-x);work='N = m(g − a), with contact force not below zero';}
+ if(mode==='push'){n=m*g+x;work='N = mg + P';}
+ if(mode==='pull'){n=Math.max(0,m*g-x);work='N = mg − T, while contact is maintained';}
+ $('nr-output').textContent=n.toFixed(2)+' N';
+ $('nr-working').textContent=work+(mode==='incline'?'  (θ = '+x+'°)':'');
+}
+['nr-mode','nr-mass','nr-g','nr-extra'].forEach(id=>$(id).addEventListener('input',calcNormal));
+$('nr-mode').addEventListener('change',()=>{
+ const mode=$('nr-mode').value;
+ $('nr-extra-label').firstChild.textContent=({incline:'Angle (degrees)',up:'Upward acceleration (m/s²)',down:'Downward acceleration (m/s²)',push:'Downward push (N)',pull:'Upward pull (N)',flat:'Additional value'})[mode]+' ';
+ $('nr-extra').value=mode==='incline'?37:0;calcNormal();
+});
+calcNormal();
 })();
 </script>
 </body>

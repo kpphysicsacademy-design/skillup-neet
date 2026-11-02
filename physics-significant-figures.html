@@ -121,7 +121,7 @@ function reset(onlyWrong){if(onlyWrong&&wrong.length){const retry=wrong.map(w=>o
 // Significant figures counter and rounding lab
 function analyseSigFigures(raw){
  const s=String(raw).trim().replace(/,/g,'');
- if(!s||!/^[-+]?(?:\\d+\\.?\\d*|\\.\\d+)(?:e[-+]?\\d+)?$/i.test(s))return null;
+ if(!s||!/^[-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?$/i.test(s))return null;
  const n=Number(s);if(!Number.isFinite(n))return null;
  const mantissa=s.toLowerCase().split('e')[0].replace(/^[-+]/,'');
  const digits=mantissa.replace('.','');
@@ -139,7 +139,7 @@ function analyseSigFigures(raw){
 function formatSig(n,sf){
  if(n===0)return '0';
  const rounded=Number(n.toPrecision(sf));
- return rounded.toPrecision(sf).replace(/e([+-])0+(\\d+)/i,'e$1$2');
+ return rounded.toPrecision(sf).replace(/e([+-])0+(\d+)/i,'e$1$2');
 }
 function updateSigLab(){
  const d=analyseSigFigures($('sigInput').value),places=Math.max(1,Math.min(12,Number($('roundPlaces').value)||2));

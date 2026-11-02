@@ -55,6 +55,24 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* SkillUp standard learning architecture */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#476078;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#12618c}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 0 #dce8f3}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:18px}
+.learn-card p,.sim-card p{margin:7px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{margin:10px 0;padding:12px;border-radius:12px;background:#eef8ff;border:1px solid #cdeafa;color:#15577e;font-weight:850;text-align:center;line-height:1.5}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin:0 0 5px}
+.sim-field input,.sim-field select{width:100%;min-height:45px;border:2px solid #dce6ef;border-radius:11px;padding:9px;font:inherit;color:#243447;background:#fff}
+.sim-result{margin-top:12px;padding:13px;border-radius:13px;background:#efffe7;border:2px solid #c8f0b2;color:#285b16;font-weight:850;line-height:1.5}
+.sim-hint{font-size:12px!important;color:#64748b!important}
+.sim-action{margin-top:12px;border:0;border-radius:12px;background:#58cc02;color:#fff;padding:11px 16px;font-weight:900;box-shadow:0 3px 0 #46a302;cursor:pointer}
+@media(max-width:480px){.study-tabs{gap:5px}.study-tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}.learn-card,.sim-card{padding:14px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,8 +80,36 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📊 Percentage Uncertainty</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="study-tabs" aria-label="Study sections">
+ <button class="study-tab active" type="button" data-panel="learnPanel">📘 Learn</button>
+ <button class="study-tab" type="button" data-panel="simulatorPanel">🧪 Simulator</button>
+ <button class="study-tab" type="button" data-panel="practicePanel">🎯 Practice</button>
+</nav>
+<section class="study-panel active" id="learnPanel">
+ <article class="learn-card"><h3>1. Meaning of percentage uncertainty</h3><p>Percentage uncertainty tells you how large the absolute uncertainty is compared with the measured value. It expresses the uncertainty as a percentage, so measurements of different sizes can be compared.</p><div class="formula">Percentage uncertainty = (absolute uncertainty ÷ measured value) × 100%</div></article>
+ <article class="learn-card"><h3>2. Calculate it step by step</h3><p>First identify the measured value and its absolute uncertainty. Divide the uncertainty by the magnitude of the measured value, then multiply by 100.</p><div class="formula">For 20.0 ± 0.2 cm: (0.2 ÷ 20.0) × 100% = 1%</div></article>
+ <article class="learn-card"><h3>3. Compare measurement quality</h3><p>For the same absolute uncertainty, a larger measured value has a smaller percentage uncertainty. A smaller percentage uncertainty means the measurement is more precise relative to its size.</p><div class="formula">1/50 × 100% = 2% &nbsp; | &nbsp; 1/100 × 100% = 1%</div></article>
+ <article class="learn-card"><h3>4. Convert percentage to absolute uncertainty</h3><p>When percentage uncertainty is known, convert it to a decimal fraction and multiply by the measured value.</p><div class="formula">Absolute uncertainty = (percentage uncertainty ÷ 100) × measured value</div></article>
+ <article class="learn-card"><h3>5. Products and quotients</h3><p>For quantities calculated by multiplying or dividing measured quantities, add their fractional (or percentage) uncertainties to estimate the maximum relative uncertainty.</p><div class="formula">Area = length × width → % uncertainty in area ≈ %ΔL + %ΔW</div></article>
+ <article class="learn-card"><h3>6. Powers</h3><p>When a measured quantity is raised to a power, multiply its percentage uncertainty by the magnitude of that power. For example, if radius has 2% uncertainty, the area of a circle has approximately 4% uncertainty.</p><div class="formula">If y = xⁿ, then % uncertainty in y ≈ |n| × % uncertainty in x</div></article>
+ <article class="learn-card"><h3>7. Important cautions</h3><p>Percentage uncertainty is not the same as percentage error. It does not tell you the direction of an error or guarantee that the true value lies within a stated interval. Use the magnitude of the measured value in the denominator; the percentage is undefined when that value is zero.</p></article>
+</section>
+<section class="study-panel" id="simulatorPanel">
+ <div class="sim-card"><h3>🧮 Simulator 1: Calculate percentage uncertainty</h3><p>Enter a measured value and its absolute uncertainty. The result updates when you calculate.</p><div class="sim-grid">
+  <div class="sim-field"><label for="pu-value">Measured value</label><input id="pu-value" type="number" step="any" value="20"></div>
+  <div class="sim-field"><label for="pu-absolute">Absolute uncertainty</label><input id="pu-absolute" type="number" min="0" step="any" value="0.2"></div>
+ </div><button class="sim-action" id="pu-calculate" type="button">Calculate</button><div class="sim-result" id="pu-result" aria-live="polite">Percentage uncertainty = 1%</div><p class="sim-hint">Use consistent units for the measured value and its absolute uncertainty.</p></div>
+ <div class="sim-card"><h3>🔁 Simulator 2: Find absolute uncertainty</h3><p>Convert a percentage uncertainty back into an absolute uncertainty.</p><div class="sim-grid">
+  <div class="sim-field"><label for="pu-reverse-value">Measured value</label><input id="pu-reverse-value" type="number" step="any" value="25"></div>
+  <div class="sim-field"><label for="pu-percent">Percentage uncertainty (%)</label><input id="pu-percent" type="number" min="0" step="any" value="4"></div>
+ </div><button class="sim-action" id="pu-reverse" type="button">Find absolute uncertainty</button><div class="sim-result" id="pu-reverse-result" aria-live="polite">Absolute uncertainty = 1 (same unit as measured value)</div></div>
+</section>
+
+<section class="study-panel active" id="practicePanel">
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -439,6 +485,30 @@ $('continue').addEventListener('click',()=>{
  card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
  $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
 });
+
+render();
+// SkillUp Learn / Simulator / Practice navigation
+document.querySelectorAll('.study-tab').forEach(function(tab){
+ tab.addEventListener('click',function(){
+  document.querySelectorAll('.study-tab').forEach(function(x){x.classList.toggle('active',x===tab);});
+  document.querySelectorAll('.study-panel').forEach(function(panel){panel.classList.toggle('active',panel.id===tab.dataset.panel);});
+  window.scrollTo({top:0,behavior:'smooth'});
+ });
+});
+function puNumber(id){return Number(document.getElementById(id).value);}
+document.getElementById('pu-calculate').addEventListener('click',function(){
+ const value=puNumber('pu-value'),unc=puNumber('pu-absolute'),out=document.getElementById('pu-result');
+ if(!Number.isFinite(value)||!Number.isFinite(unc)||value===0||unc<0){out.textContent='Enter a non-zero measured value and a non-negative absolute uncertainty.';return;}
+ const p=unc/Math.abs(value)*100;
+ out.textContent='Percentage uncertainty = ('+unc+' ÷ '+Math.abs(value)+') × 100% = '+Number(p.toPrecision(5))+'%.';
+});
+document.getElementById('pu-reverse').addEventListener('click',function(){
+ const value=puNumber('pu-reverse-value'),p=puNumber('pu-percent'),out=document.getElementById('pu-reverse-result');
+ if(!Number.isFinite(value)||!Number.isFinite(p)||p<0){out.textContent='Enter a valid measured value and a non-negative percentage.';return;}
+ const a=Math.abs(value)*p/100;
+ out.textContent='Absolute uncertainty = ('+p+' ÷ 100) × '+Math.abs(value)+' = '+Number(a.toPrecision(5))+' (same unit as measured value).';
+});
+
 render();
 })();
 </script>

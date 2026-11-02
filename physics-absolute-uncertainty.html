@@ -55,6 +55,23 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Standard SkillUp Learn + Simulator layout */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:13px;background:#fff;padding:12px 6px;font-weight:900;color:#31536e;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-bottom-width:4px;border-radius:17px;padding:15px;margin:10px 0}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:17px}
+.learn-card p,.sim-card p{margin:6px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{background:#eef8ff;border-radius:12px;padding:11px;margin:9px 0;font-weight:850;color:#174a78}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin-bottom:5px}
+.sim-field input{width:100%;border:2px solid #dce6ef;border-radius:11px;padding:11px;font:inherit;font-weight:700;min-width:0}
+.sim-result{background:#f0ffeb;border:2px solid #c8f0b2;border-radius:14px;padding:13px;margin-top:12px}
+.sim-result strong{color:#287a10}.sim-hint{font-size:12px!important;color:#64748b!important}
+@media(max-width:420px){.sim-grid{grid-template-columns:1fr}.study-tab{font-size:12px;padding:11px 3px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,8 +79,44 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Absolute Uncertainty</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="study-tabs" aria-label="Study sections">
+ <button class="study-tab active" data-panel="learnPanel" type="button">📘 Learn</button>
+ <button class="study-tab" data-panel="simPanel" type="button">🧪 Simulator</button>
+ <button class="study-tab" data-panel="practicePanel" type="button">🎯 Practice</button>
+</nav>
+<section id="learnPanel" class="study-panel active">
+ <div class="learn-card"><h3>1. Meaning of absolute uncertainty</h3><p>Absolute uncertainty estimates the range of doubt in a measured quantity. It is written with the same unit as the measurement.</p><div class="formula">Measured value = x ± Δx</div><p>For example, (12.0 ± 0.2) cm means the estimated value is 12.0 cm with an uncertainty of 0.2 cm.</p></div>
+ <div class="learn-card"><h3>2. Upper and lower limits</h3><p>The uncertainty gives a simple interval around the measured value.</p><div class="formula">Lower limit = x − Δx<br>Upper limit = x + Δx</div><p>For (20.0 ± 0.5) g, the interval is 19.5 g to 20.5 g.</p></div>
+ <div class="learn-card"><h3>3. Uncertainty from repeated readings</h3><p>When repeated readings are available, calculate their mean and range. A common simple estimate of absolute uncertainty is half the range.</p><div class="formula">Range = maximum − minimum<br>Half-range uncertainty = (maximum − minimum) / 2</div></div>
+ <div class="learn-card"><h3>4. Instrument resolution</h3><p>The smallest scale division or display increment gives information about instrument resolution. For many analogue instruments, a reading uncertainty is often estimated as about half the smallest division; follow the instrument's stated convention where available.</p><p>Display resolution alone does not guarantee accuracy.</p></div>
+ <div class="learn-card"><h3>5. Absolute vs relative uncertainty</h3><p>Absolute uncertainty has the same unit as the measured quantity. Relative uncertainty is the ratio of absolute uncertainty to the measured value and has no unit.</p><div class="formula">Relative uncertainty = Δx / |x|<br>Percentage uncertainty = (Δx / |x|) × 100%</div></div>
+ <div class="learn-card"><h3>6. Reporting a measurement</h3><p>Write the measured value, its unit and a suitable uncertainty together, for example (3.50 ± 0.05) m. The value and uncertainty should be rounded consistently and should reflect the measurement method.</p></div>
+ <div class="learn-card"><h3>7. What uncertainty does not mean</h3><p>Uncertainty does not automatically remove systematic error or guarantee accuracy. Calibration, zero-error checks, suitable instruments and careful technique are still important.</p></div>
+</section>
+<section id="simPanel" class="study-panel">
+ <div class="sim-card"><h3>🧪 Absolute Uncertainty Calculator</h3><p>Enter repeated measurements. The simulator calculates the mean, range, half-range uncertainty and measurement interval.</p>
+  <div class="sim-grid">
+   <div class="sim-field"><label for="uncertaintyReadings">Readings (comma separated)</label><input id="uncertaintyReadings" type="text" value="10.2, 10.4, 10.3"></div>
+   <div class="sim-field"><label for="uncertaintyUnit">Unit</label><input id="uncertaintyUnit" type="text" value="cm" maxlength="12"></div>
+  </div>
+  <button class="btn check" id="calculateUncertainty" type="button" style="width:100%;margin-top:10px">Calculate uncertainty</button>
+  <div class="sim-result" id="uncertaintyResults" aria-live="polite"><strong>Ready to calculate</strong><p>Enter at least two readings to estimate half-range uncertainty.</p></div>
+ </div>
+ <div class="sim-card"><h3>Single-reading uncertainty</h3><p>Explore a value reported with an absolute uncertainty.</p>
+  <div class="sim-grid">
+   <div class="sim-field"><label for="singleValue">Measured value</label><input id="singleValue" type="number" step="any" value="12.0"></div>
+   <div class="sim-field"><label for="singleUncertainty">Absolute uncertainty</label><input id="singleUncertainty" type="number" min="0" step="any" value="0.2"></div>
+  </div>
+  <button class="btn check" id="calculateBounds" type="button" style="width:100%;margin-top:10px">Find measurement limits</button>
+  <div class="sim-result" id="boundsResults" aria-live="polite"><strong>Measurement interval</strong><p>12.0 ± 0.2 gives limits of 11.8 and 12.2.</p></div>
+ </div>
+</section>
+<section class="study-panel" id="practicePanel">
+
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -441,6 +494,29 @@ $('continue').addEventListener('click',()=>{
 });
 render();
 })();
+
+/* Learn / Simulator / Practice navigation and uncertainty calculators */
+(function(){
+ const tabs=[...document.querySelectorAll('.study-tab')],panels=[...document.querySelectorAll('.study-panel')];
+ tabs.forEach(btn=>btn.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.toggle('active',x===btn));
+  panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));
+ }));
+ const parseReadings=()=>document.getElementById('uncertaintyReadings').value.split(',').map(s=>s.trim()).filter(Boolean).map(Number);
+ document.getElementById('calculateUncertainty').addEventListener('click',()=>{
+  const values=parseReadings(),unit=document.getElementById('uncertaintyUnit').value.trim();
+  const out=document.getElementById('uncertaintyResults');
+  if(values.length<2||values.some(v=>!Number.isFinite(v))){out.innerHTML='<strong>Check your readings</strong><p>Enter at least two valid numbers separated by commas.</p>';return;}
+  const mean=values.reduce((a,b)=>a+b,0)/values.length,min=Math.min(...values),max=Math.max(...values),range=max-min,u=range/2,lo=mean-u,hi=mean+u;
+  out.innerHTML='<strong>Calculated result</strong><p>Number of readings: <b>'+values.length+'</b></p><p>Mean: <b>'+mean.toPrecision(6)+' '+unit+'</b></p><p>Range: <b>'+range.toPrecision(5)+' '+unit+'</b></p><p>Half-range absolute uncertainty: <b>± '+u.toPrecision(5)+' '+unit+'</b></p><p>Reported result: <b>('+mean.toPrecision(6)+' ± '+u.toPrecision(5)+') '+unit+'</b></p><p>Estimated interval: <b>'+lo.toPrecision(6)+' to '+hi.toPrecision(6)+' '+unit+'</b></p><p class="sim-hint">Half-range is a simple estimate for repeated readings, not a universal uncertainty rule.</p>';
+ });
+ document.getElementById('calculateBounds').addEventListener('click',()=>{
+  const value=Number(document.getElementById('singleValue').value),u=Number(document.getElementById('singleUncertainty').value),out=document.getElementById('boundsResults');
+  if(!Number.isFinite(value)||!Number.isFinite(u)||u<0){out.innerHTML='<strong>Check your inputs</strong><p>Enter a valid value and a non-negative uncertainty.</p>';return;}
+  out.innerHTML='<strong>Measurement interval</strong><p>Lower limit: <b>'+(value-u).toPrecision(6)+'</b></p><p>Upper limit: <b>'+(value+u).toPrecision(6)+'</b></p><p>Reported form: <b>'+value+' ± '+u+'</b></p>';
+ });
+})();
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

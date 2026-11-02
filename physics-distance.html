@@ -80,7 +80,10 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .sim-note{margin:10px 0 0;color:#53677b;font-size:13px;line-height:1.45}
 .sim-reset{margin:0 0 12px;padding:9px 13px;border:2px solid #cfe8f8;border-radius:12px;background:#eef8ff;color:#17527c;font:850 13px system-ui;cursor:pointer}.sim-reset:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
 .practice-heading{margin:0 0 12px;color:#174a78;font-size:20px}
-#learn,#simulator,#practice{scroll-margin-top:88px}
+html{scroll-padding-top:100px;scroll-behavior:smooth}
+#learn,#simulator,#practice{scroll-margin-top:100px;scroll-snap-margin-top:100px}
+.learn-panel,.sim-panel{scroll-margin-top:100px}
+.path-nav a:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
 .sim-visual{min-width:0}
 .sim-visual svg{max-width:100%;overflow:visible}
 @media(max-width:480px){.learn-panel,.sim-panel{padding:14px}.lesson-grid{grid-template-columns:1fr}.form-grid{gap:6px}.sim-field input{padding:9px;font-size:14px}.sim-results{gap:5px}.sim-stat{padding:8px 4px}.sim-stat strong{font-size:17px}}
@@ -136,11 +139,32 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 </main>
 <script>
 
+
+/* Reliable section navigation for sticky-header and direct-hash entry */
+(function(){
+ const links=[...document.querySelectorAll('.path-nav a[href^="#"]')];
+ function goToSection(hash,updateHash){
+  const target=document.getElementById((hash||'').slice(1));
+  if(!target)return;
+  if(updateHash&&location.hash!==hash)history.replaceState(null,'',hash);
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ links.forEach(link=>link.addEventListener('click',event=>{
+  const hash=link.getAttribute('href');
+  if(!document.getElementById(hash.slice(1)))return;
+  event.preventDefault();goToSection(hash,true);
+ }));
+ function restoreHash(){if(location.hash)requestAnimationFrame(()=>goToSection(location.hash,false));}
+ window.addEventListener('load',restoreHash,{once:true});
+ window.addEventListener('pageshow',restoreHash);
+ if(document.readyState==='complete')restoreHash();
+})();
+
 /* Interactive distance number-line simulator */
 (function(){
  const ids=['distLeg1','distLeg2','distLeg3'];
  const $=id=>document.getElementById(id);
- const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/0+$/,'').replace(/\\.$/,'');
+ const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');
  function updateDistance(){
   const vals=ids.map(id=>{const raw=$(id).value.trim();if(raw==='')return 0;const v=Number(raw);return Number.isFinite(v)?v:0;});
   const positions=[0];vals.forEach(v=>positions.push(positions[positions.length-1]+v));

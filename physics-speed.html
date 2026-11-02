@@ -55,6 +55,30 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* Standard SkillUp learning path */
+.path-nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.path-nav a{flex:1;min-width:90px;text-align:center;text-decoration:none;background:#e8f7ff;color:#17527c;border:2px solid #cfe8f8;border-radius:13px;padding:10px 8px;font-size:12px;font-weight:900}
+.learn-panel,.sim-panel{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+.section-kicker{font-size:11px;font-weight:950;letter-spacing:.8px;color:#2196cf;text-transform:uppercase}
+.practice-heading{margin:0 0 12px;color:#174a78;font-size:20px}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:13px}
+.lesson{background:#f4faff;border:1px solid #dcebf7;border-radius:14px;padding:12px}
+.lesson b{display:block;margin-bottom:5px;color:#174a78}.lesson p{margin:0;font-size:13px;line-height:1.45;color:#53677b}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#53677b;margin-bottom:5px}
+.sim-field input{width:100%;min-width:0;padding:11px;border:2px solid #dce6ef;border-radius:12px;font:700 16px system-ui;color:#243447}
+.sim-visual{background:#f2f9ff;border:1px solid #d8eafa;border-radius:16px;padding:10px;overflow:hidden;min-width:0}
+.sim-visual svg{display:block;width:100%;height:auto;max-width:100%}
+.sim-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}
+.sim-stat{background:#efffe7;border:1px solid #ccefb9;border-radius:13px;padding:10px;text-align:center}
+.sim-stat strong{display:block;font-size:20px;color:#287d0a}.sim-stat span{font-size:11px;font-weight:850;color:#52734a}
+.sim-note{margin:10px 0 0;color:#53677b;font-size:13px;line-height:1.45}
+.sim-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sim-reset{padding:9px 13px;border:2px solid #cfe8f8;border-radius:12px;background:#eef8ff;color:#17527c;font:850 13px system-ui;cursor:pointer}
+#learn,#simulator,#practice{scroll-margin-top:88px}
+@media(max-width:480px){.learn-panel,.sim-panel{padding:14px}.lesson-grid{grid-template-columns:1fr}.form-grid{gap:7px}.sim-field input{padding:9px;font-size:14px}.sim-results{gap:5px}.sim-stat{padding:8px 4px}.sim-stat strong{font-size:17px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,10 +86,86 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Speed</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="path-nav" aria-label="Learning sections"><a href="#learn">📘 Learn</a><a href="#simulator">🎮 Simulator</a><a href="#practice">🧠 Practice</a></nav>
+<section class="learn-panel" id="learn">
+  <div class="section-kicker">UNIT CONCEPT • SPEED</div><h2 class="practice-heading">📘 Learn: Speed</h2>
+  <p class="muted">Speed describes how quickly an object covers distance. It compares the total path travelled with the time taken.</p>
+  <div class="lesson-grid">
+    <article class="lesson"><b>1. Meaning of speed</b><p>Speed is the distance travelled by an object per unit time.</p></article>
+    <article class="lesson"><b>2. Average speed</b><p>Average speed = total distance travelled ÷ total time taken for the journey.</p></article>
+    <article class="lesson"><b>3. SI unit</b><p>The SI unit is metre per second (m/s). Another common unit is kilometre per hour (km/h).</p></article>
+    <article class="lesson"><b>4. Scalar quantity</b><p>Speed has magnitude only and no direction. It is always zero or positive.</p></article>
+    <article class="lesson"><b>5. Instantaneous speed</b><p>Instantaneous speed is the speed of an object at a particular instant, shown approximately by a speedometer.</p></article>
+    <article class="lesson"><b>6. Unit conversion</b><p>Convert m/s to km/h by multiplying by 3.6. Convert km/h to m/s by dividing by 3.6.</p></article>
+  </div>
+</section>
+<section class="sim-panel" id="simulator">
+  <div class="section-kicker">EXPLORE • CHANGE VALUES</div><h2 class="practice-heading">🎮 Speed laboratory</h2>
+  <p class="muted">Enter the distance travelled and time taken. See the average speed, unit conversion and a proportional journey visual update instantly.</p>
+  <div class="form-grid">
+    <div class="sim-field"><label for="speedDistance">Distance travelled (m)</label><input id="speedDistance" type="number" min="0" step="1" value="100" inputmode="decimal"></div>
+    <div class="sim-field"><label for="speedTime">Time taken (s)</label><input id="speedTime" type="number" min="0.01" step="0.5" value="10" inputmode="decimal"></div>
+  </div>
+  <div class="sim-visual">
+    <svg id="speedSvg" viewBox="0 0 640 190" role="img" aria-label="A vehicle on a measured track showing the distance travelled">
+      <defs><linearGradient id="speedRoad" x1="0" x2="1"><stop offset="0" stop-color="#dff3ff"/><stop offset="1" stop-color="#bde6fa"/></linearGradient></defs>
+      <rect x="24" y="56" width="592" height="72" rx="18" fill="url(#speedRoad)"/>
+      <line x1="42" y1="118" x2="598" y2="118" stroke="#fff" stroke-width="4" stroke-dasharray="20 13"/>
+      <g id="speedTicks"></g>
+      <g id="speedVehicle" transform="translate(42 0)">
+        <rect x="0" y="78" width="62" height="27" rx="8" fill="#1cb0f6"/><path d="M12 78 L23 62 H46 L56 78Z" fill="#174a78"/><circle cx="15" cy="108" r="7" fill="#243447"/><circle cx="49" cy="108" r="7" fill="#243447"/>
+      </g>
+      <text x="42" y="25" fill="#174a78" font-size="15" font-weight="bold">START • 0 m</text>
+      <text id="speedDistanceLabel" x="598" y="25" text-anchor="end" fill="#174a78" font-size="15" font-weight="bold">100 m travelled</text>
+      <text x="320" y="164" text-anchor="middle" fill="#53677b" font-size="13">Illustrative track • vehicle position represents distance covered</text>
+    </svg>
+  </div>
+  <div class="sim-results">
+    <div class="sim-stat"><strong id="speedMs">10 m/s</strong><span>AVERAGE SPEED</span></div>
+    <div class="sim-stat"><strong id="speedKmh">36 km/h</strong><span>IN KM/H</span></div>
+    <div class="sim-stat"><strong id="speedPace">10 s</strong><span>TIME TAKEN</span></div>
+  </div>
+  <p class="sim-note" id="speedExplain" aria-live="polite">Average speed = distance ÷ time = 100 ÷ 10 = 10 m/s = 36 km/h.</p>
+  <div class="sim-actions"><button class="sim-reset" id="speedReset" type="button">↺ Reset values</button></div>
+</section>
+<div id="practice"></div>
+<h2 class="practice-heading">🧠 Practice: 30 concept questions</h2>
+
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
 </main>
 <script>
+
+/* Live speed calculator and track visualization */
+(function(){
+ const $=id=>document.getElementById(id);
+ const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/\\.?0+$/,'');
+ function updateSpeed(){
+  const dRaw=$('speedDistance').value.trim(),tRaw=$('speedTime').value.trim();
+  const d=dRaw===''?0:Number(dRaw),t=tRaw===''?0:Number(tRaw);
+  const valid=Number.isFinite(d)&&Number.isFinite(t)&&d>=0&&t>0;
+  const vehicle=$('speedVehicle'),ticks=$('speedTicks');
+  ticks.replaceChildren();
+  for(let i=0;i<=5;i++){const x=42+i*111;const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',x);line.setAttribute('x2',x);line.setAttribute('y1','130');line.setAttribute('y2','137');line.setAttribute('stroke','#6c91aa');line.setAttribute('stroke-width','2');ticks.append(line);}
+  if(!valid){
+   vehicle.setAttribute('transform','translate(42 0)');
+   $('speedMs').textContent='—';$('speedKmh').textContent='—';$('speedPace').textContent='—';
+   $('speedDistanceLabel').textContent='Enter valid values';
+   $('speedExplain').textContent='Enter a distance of zero or more metres and a time greater than zero seconds to calculate average speed.';
+   return;
+  }
+  const v=d/t,kmh=v*3.6,progress=d===0?0:Math.min(1,Math.max(.08,d/(d+50)));
+  vehicle.setAttribute('transform','translate('+(42+progress*490)+' 0)');
+  $('speedMs').textContent=fmt(v)+' m/s';$('speedKmh').textContent=fmt(kmh)+' km/h';$('speedPace').textContent=fmt(t)+' s';
+  $('speedDistanceLabel').textContent=fmt(d)+' m travelled';
+  $('speedExplain').textContent='Average speed = total distance ÷ total time = '+fmt(d)+' ÷ '+fmt(t)+' = '+fmt(v)+' m/s. In km/h: '+fmt(v)+' × 3.6 = '+fmt(kmh)+' km/h.';
+ }
+ ['speedDistance','speedTime'].forEach(id=>$(id).addEventListener('input',updateSpeed));
+ $('speedReset').addEventListener('click',()=>{$('speedDistance').value='100';$('speedTime').value='10';updateSpeed();});
+ updateSpeed();
+})();
+
 (function(){
 'use strict';
 const questions = [

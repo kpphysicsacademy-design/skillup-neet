@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn, simulate and practise friction force with interactive examples and 30 questions.">
+<title>SkillUp Physics | Friction – Learn</title>
+<style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
+.quiz-progress{background:#fff;border:2px solid #e2edf7;border-radius:16px;padding:12px 14px;margin:0 0 12px;box-shadow:0 3px 0 #dce8f3}.quiz-progress .progress-row{margin:0 0 8px}.quiz-progress .track{height:12px}
+.friction-figure{margin:16px 0;padding:12px;background:#f8fbff;border:1px solid #dbe7f3;border-radius:16px;text-align:center}.friction-figure svg{display:block;width:100%;max-width:620px;height:auto;margin:auto;color:#334155}.friction-figure figcaption{font-size:13px;color:#64748b;margin-top:8px}
+.tabs a{text-decoration:none;text-align:center;display:block}.tabs a.active{background:#58cc02;border-color:#46a302;color:#fff}
+</style></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • FRICTION</small></div><div class="xp">Learn</div></div></header><nav class="tabs" aria-label="Friction pages">
+<a class="tab" href="physics-friction-learn.html" class="tab active">📘 Learn</a>
+<a class="tab" href="physics-friction-simulate.html">⚙️ Simulate</a>
+<a class="tab" href="physics-friction-practice.html">✍️ Practice</a>
+</nav><main><section class="panel active" id="panel-learn">
+<article class="lesson-card">
+<h2>Friction</h2>
+<p><b>Friction</b> is the contact force that opposes relative sliding, or the tendency of sliding, between surfaces. It acts parallel to the surfaces in contact.</p>
+<div class="formula">Limiting friction: fₛ,max = μₛN</div>
+<h3>1. Static friction</h3>
+<p>Static friction acts when surfaces do not slide relative to each other. It adjusts to the applied force up to a maximum value.</p>
+<div class="formula">0 ≤ fₛ ≤ μₛN</div>
+<h3>2. Kinetic friction</h3>
+<p>Kinetic (sliding) friction acts when surfaces slide against each other. In the simple dry-friction model:</p>
+<div class="formula">fₖ = μₖN</div>
+<p>Usually μₛ is greater than μₖ for common dry surfaces.</p>
+<h3>3. Friction on a horizontal surface</h3>
+<p>When no other vertical forces act, the normal reaction is N = mg. Therefore, maximum static friction is μₛmg and kinetic friction is μₖmg.</p>
+<h3>4. Friction on an inclined plane</h3>
+<p>For a block on an incline at angle θ, N = mg cosθ. The component of weight down the plane is mg sinθ. Friction opposes the actual or impending relative motion.</p>
+<div class="formula">At limiting equilibrium: tanθ = μₛ</div>
+<h3>5. Applications</h3>
+<ul><li>Static friction provides grip while walking and allows tyres to roll without slipping.</li><li>Lubricants reduce direct contact between surface irregularities.</li><li>Friction can be useful for braking and grip, but it also causes wear and energy loss.</li></ul>
+<h3>Remember</h3>
+<p>Static friction is not always equal to μₛN; that is its maximum value. First determine the direction of impending or actual motion, then draw a free-body diagram.</p>
+</article>
+<article class="lesson-card">
+<h2>Worked example</h2>
+<p>A 5 kg block slides on a horizontal floor. If μₖ = 0.2 and g = 10 m/s², calculate kinetic friction.</p>
+<div class="formula">N = mg = 5 × 10 = 50 N</div>
+<div class="formula">fₖ = μₖN = 0.2 × 50 = 10 N</div>
+<p class="small-note">Exam tip: use the normal force perpendicular to the surface, not automatically the object's weight.</p>
+</article>
+</section>
+</main><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script><script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

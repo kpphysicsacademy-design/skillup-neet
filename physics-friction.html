@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Friction quiz">
-<title>SkillUp | Friction — Easy Quiz</title>
+<meta name="description" content="Learn, simulate and practise friction force with interactive examples and 30 questions.">
+<title>SkillUp Physics | Friction</title>
 <style>
 :root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -55,15 +55,90 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+
+/* SkillUp standard Learn / Simulate / Practice architecture */
+.tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:14px;background:#fff;color:#456176;padding:12px 6px;font-weight:900;font-size:14px;cursor:pointer}
+.tab.active{background:#58cc02;border-color:#46a302;color:#fff}
+.panel{display:none!important}.panel.active{display:block!important}.panel[hidden]{display:none!important}
+.lesson-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}
+.lesson-card h2,.sim-card h2{margin:0 0 10px;color:#174a78;font-size:20px}
+.lesson-card h3{margin:15px 0 6px;color:#245273;font-size:16px}
+.lesson-card p,.lesson-card li{line-height:1.6}
+.formula{padding:13px;border-radius:13px;background:#efffe7;border:1px solid #c8f0b2;font-size:20px;font-weight:900;text-align:center;margin:10px 0}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sim-grid label{font-size:12px;font-weight:850;color:#536b80;display:grid;gap:5px}
+.sim-grid input,.sim-grid select{width:100%;padding:11px;border:2px solid #dce6ef;border-radius:11px;font:inherit;background:#fff;color:#243447}
+.sim-result{margin-top:13px;padding:15px;border-radius:14px;background:#efffe7;border:2px solid #c8f0b2}
+.sim-result strong{font-size:24px;color:#287d00}
+.small-note{font-size:12px;color:#64748b;line-height:1.5}
+@media(max-width:480px){.tabs{gap:6px;padding:0 10px}.tab{font-size:12px;padding:11px 3px}.sim-grid{grid-template-columns:1fr}}
+
+.quiz-progress{background:#fff;border:2px solid #e2edf7;border-radius:16px;padding:12px 14px;margin:0 0 12px;box-shadow:0 3px 0 #dce8f3}.quiz-progress .progress-row{margin:0 0 8px}.quiz-progress .track{height:12px}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<nav class="tabs" aria-label="Learning modes">
+<button class="tab active" type="button" data-tab="learn">📘 Learn</button>
+<button class="tab" type="button" data-tab="simulate">⚙️ Simulate</button>
+<button class="tab" type="button" data-tab="practice">✍️ Practice</button>
+</nav>
 <main>
-<section class="hero"><h1>📏 Friction</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+<section class="panel active" id="panel-learn">
+<article class="lesson-card">
+<h2>Friction</h2>
+<p><b>Friction</b> is the contact force that opposes relative sliding, or the tendency of sliding, between surfaces. It acts parallel to the surfaces in contact.</p>
+<div class="formula">Limiting friction: fₛ,max = μₛN</div>
+<h3>1. Static friction</h3>
+<p>Static friction acts when surfaces do not slide relative to each other. It adjusts to the applied force up to a maximum value.</p>
+<div class="formula">0 ≤ fₛ ≤ μₛN</div>
+<h3>2. Kinetic friction</h3>
+<p>Kinetic (sliding) friction acts when surfaces slide against each other. In the simple dry-friction model:</p>
+<div class="formula">fₖ = μₖN</div>
+<p>Usually μₛ is greater than μₖ for common dry surfaces.</p>
+<h3>3. Friction on a horizontal surface</h3>
+<p>When no other vertical forces act, the normal reaction is N = mg. Therefore, maximum static friction is μₛmg and kinetic friction is μₖmg.</p>
+<h3>4. Friction on an inclined plane</h3>
+<p>For a block on an incline at angle θ, N = mg cosθ. The component of weight down the plane is mg sinθ. Friction opposes the actual or impending relative motion.</p>
+<div class="formula">At limiting equilibrium: tanθ = μₛ</div>
+<h3>5. Applications</h3>
+<ul><li>Static friction provides grip while walking and allows tyres to roll without slipping.</li><li>Lubricants reduce direct contact between surface irregularities.</li><li>Friction can be useful for braking and grip, but it also causes wear and energy loss.</li></ul>
+<h3>Remember</h3>
+<p>Static friction is not always equal to μₛN; that is its maximum value. First determine the direction of impending or actual motion, then draw a free-body diagram.</p>
+</article>
+<article class="lesson-card">
+<h2>Worked example</h2>
+<p>A 5 kg block slides on a horizontal floor. If μₖ = 0.2 and g = 10 m/s², calculate kinetic friction.</p>
+<div class="formula">N = mg = 5 × 10 = 50 N</div>
+<div class="formula">fₖ = μₖN = 0.2 × 50 = 10 N</div>
+<p class="small-note">Exam tip: use the normal force perpendicular to the surface, not automatically the object's weight.</p>
+</article>
+</section>
+<section class="panel" id="panel-simulate">
+<article class="sim-card">
+<h2>Friction simulator</h2>
+<p class="muted">Change the surface, mass and applied force to explore static and kinetic friction.</p>
+<div class="sim-grid">
+<label>Situation<select id="fr-mode"><option value="horizontal">Horizontal surface</option><option value="incline">Inclined plane</option></select></label>
+<label>Mass (kg)<input id="fr-m" type="number" min="0" step="0.1" value="5"></label>
+<label>Gravity (m/s²)<input id="fr-g" type="number" min="0" step="0.1" value="10"></label>
+<label>Coefficient μₛ<input id="fr-mus" type="number" min="0" step="0.01" value="0.4"></label>
+<label>Coefficient μₖ<input id="fr-muk" type="number" min="0" step="0.01" value="0.2"></label>
+<label>Applied force (N)<input id="fr-force" type="number" min="0" step="0.1" value="12"></label>
+<label id="fr-angle-label">Incline angle (degrees)<input id="fr-angle" type="number" min="0" max="90" step="1" value="30"></label>
+</div>
+<div class="sim-result" aria-live="polite"><div class="small-note">Friction result</div><strong id="fr-output">12.00 N</strong><p id="fr-working" class="small-note">Static friction balances the applied force.</p></div>
+<p id="fr-note" class="small-note">Ideal dry-friction model. Static friction adjusts up to μₛN; once sliding begins, use μₖN.</p>
+</article>
+</section>
+<section class="panel" id="panel-practice">
+<div class="quiz-progress" aria-label="Quiz progress"><div class="progress-row"><span id="progressText">0 of 30 completed</span><span id="percent">0%</span></div><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" aria-label="Questions completed"><div class="fill" id="fill"></div></div></div>
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
 <div id="finishSlot"></div>
+</section>
 </main>
 <script>
 (function(){
@@ -74,9 +149,9 @@ const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;
  const item=questions[index];
- $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('progressText').textContent=index+' of '+questions.length+' completed';
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
- $('fill').style.width=(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';document.querySelector('#panel-practice .track').setAttribute('aria-valuenow',String(index));
  $('qmeta').textContent='QUESTION '+(index+1);
  $('question').textContent=item.q;
  $('feedback').className='feedback';$('feedback').textContent='';
@@ -102,7 +177,7 @@ $('check').addEventListener('click',()=>{
 $('continue').addEventListener('click',()=>{
  if(!locked)return;index++;
  if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
- $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent=questions.length+' of '+questions.length+' completed';$('percent').textContent='100%';document.querySelector('#panel-practice .track').setAttribute('aria-valuenow',String(questions.length));
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
@@ -129,5 +204,28 @@ render();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
+
+<script>
+(function(){
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(b=>b.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.toggle('active',x===b));
+ document.querySelectorAll('.panel').forEach(p=>{const active=p.id==='panel-'+b.dataset.tab;p.classList.toggle('active',active);p.hidden=!active;});
+}));
+const $=id=>document.getElementById(id);
+function calculate(){
+ const m=Math.max(0,Number($('fr-m').value)||0),g=Math.max(0,Number($('fr-g').value)||0),mus=Math.max(0,Number($('fr-mus').value)||0),muk=Math.max(0,Number($('fr-muk').value)||0),F=Math.max(0,Number($('fr-force').value)||0),theta=Math.min(90,Math.max(0,Number($('fr-angle').value)||0))*Math.PI/180,mode=$('fr-mode').value;
+ const N=mode==='incline'?m*g*Math.cos(theta):m*g;
+ const parallel=mode==='incline'?m*g*Math.sin(theta):0;
+ const maxStatic=mus*N,kinetic=muk*N,required=mode==='incline'?Math.abs(F+parallel):F;
+ let friction,work,note;
+ if(required<=maxStatic){friction=required;work='Static friction adjusts to balance the applied/tangential force.';note='No sliding: actual static friction is '+friction.toFixed(2)+' N (maximum '+maxStatic.toFixed(2)+' N).';}
+ else{friction=kinetic;work='Kinetic friction fₖ = μₖN';note='Sliding occurs in this ideal model. Net tangential force magnitude ≈ '+Math.max(0,required-kinetic).toFixed(2)+' N.';}
+ $('fr-output').textContent=friction.toFixed(2)+' N';$('fr-working').textContent='N = '+N.toFixed(2)+' N; maximum static friction = '+maxStatic.toFixed(2)+' N; kinetic friction = '+kinetic.toFixed(2)+' N. '+work;$('fr-note').textContent=note;
+}
+function update(){ $('fr-angle-label').style.display=$('fr-mode').value==='incline'?'grid':'none';calculate();}
+['fr-mode','fr-m','fr-g','fr-mus','fr-muk','fr-force','fr-angle'].forEach(id=>$(id).addEventListener('input',update));
+update();
+})();</script>
 </body>
 </html>

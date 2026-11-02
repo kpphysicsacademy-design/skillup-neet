@@ -55,6 +55,24 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   .streak{padding:7px;font-size:10px}
 }
 
+
+/* SkillUp Learn + Simulator architecture */
+.study-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.study-tab{border:2px solid #dce6ef;border-bottom-width:4px;border-radius:13px;background:#fff;padding:12px 6px;font-weight:900;color:#31536e;cursor:pointer}
+.study-tab.active{background:#e8f7ff;border-color:#1cb0f6;color:#075985}
+.study-panel{display:none}.study-panel.active{display:block}
+.learn-card,.sim-card{background:#fff;border:2px solid #e2edf7;border-bottom-width:4px;border-radius:17px;padding:15px;margin:10px 0}
+.learn-card h3,.sim-card h3{margin:0 0 8px;color:#174a78;font-size:17px}
+.learn-card p,.sim-card p{margin:6px 0;color:#42566b;line-height:1.55;font-size:14px}
+.formula{background:#eef8ff;border-radius:12px;padding:11px;margin:9px 0;font-weight:850;color:#174a78}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim-field label{display:block;font-size:12px;font-weight:850;color:#52677b;margin-bottom:5px}
+.sim-field input{width:100%;border:2px solid #dce6ef;border-radius:11px;padding:11px;font:inherit;font-weight:700;min-width:0}
+.sim-result{background:#f0ffeb;border:2px solid #c8f0b2;border-radius:14px;padding:13px;margin-top:12px}
+.sim-result strong{color:#287a10}
+.sim-hint{font-size:12px!important;color:#64748b!important}
+@media(max-width:420px){.sim-grid{grid-template-columns:1fr}.study-tab{font-size:12px;padding:11px 3px}}
+
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 </head>
@@ -62,7 +80,36 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
 <section class="hero"><h1>📏 Accuracy and Precision</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
+
+<nav class="study-tabs" aria-label="Study sections">
+ <button class="study-tab active" data-panel="learnPanel" type="button">📘 Learn</button>
+ <button class="study-tab" data-panel="simPanel" type="button">🧪 Simulator</button>
+ <button class="study-tab" data-panel="practicePanel" type="button">🎯 Practice</button>
+</nav>
+<section id="learnPanel" class="study-panel active">
+ <div class="learn-card"><h3>1. What is accuracy?</h3><p>Accuracy tells how close a measured value is to the accepted or reference value. A small difference means a more accurate result.</p><div class="formula">Absolute error = |Measured value − Accepted value|</div><p>Example: if the accepted length is 10.0 cm and you measure 9.9 cm, the absolute error is 0.1 cm.</p></div>
+ <div class="learn-card"><h3>2. What is precision?</h3><p>Precision describes how close repeated measurements are to one another. A tightly grouped set has high precision, even if it is not close to the accepted value.</p><div class="formula">Range = Highest reading − Lowest reading</div></div>
+ <div class="learn-card"><h3>3. Accuracy and precision are different</h3><p>Accuracy compares a result with a reference. Precision compares measurements with each other.</p><p>Measurements can be precise but inaccurate when a systematic error shifts all readings away from the accepted value.</p></div>
+ <div class="learn-card"><h3>4. Four possible measurement patterns</h3><p><b>Accurate and precise:</b> readings cluster near the accepted value.</p><p><b>Precise but inaccurate:</b> readings cluster together but away from the accepted value.</p><p><b>Accurate on average but imprecise:</b> readings are spread around the accepted value.</p><p><b>Neither:</b> readings are scattered and far from the accepted value.</p></div>
+ <div class="learn-card"><h3>5. Random and systematic errors</h3><p>Random errors cause readings to vary unpredictably and mainly affect precision. Systematic errors create a consistent bias and mainly affect accuracy.</p><p>Repeat measurements to assess spread; calibrate instruments to identify systematic offsets.</p></div>
+ <div class="learn-card"><h3>6. Mean and measurement spread</h3><p>The arithmetic mean gives a representative central value for repeated measurements.</p><div class="formula">Mean = Sum of readings ÷ Number of readings</div><p>The range gives a simple measure of spread. A smaller range generally indicates better precision.</p></div>
+ <div class="learn-card"><h3>7. How to improve measurement quality</h3><p>Use a suitable calibrated instrument, follow a consistent method, avoid parallax, repeat readings, record units, and report realistic uncertainty. Extra decimal places alone do not guarantee accuracy.</p></div>
+</section>
+<section id="simPanel" class="study-panel">
+ <div class="sim-card"><h3>🧪 Accuracy & Precision Lab</h3><p>Enter an accepted value and a set of repeated readings. The lab calculates closeness to the reference and the spread between readings.</p>
+  <div class="sim-grid">
+   <div class="sim-field"><label for="acceptedValue">Accepted value</label><input id="acceptedValue" type="number" step="any" value="10"></div>
+   <div class="sim-field"><label for="readingValues">Repeated readings (comma separated)</label><input id="readingValues" type="text" value="9.9, 10.0, 10.1"></div>
+  </div>
+  <p class="sim-hint">Use the same unit for every value. Example readings: 9.9, 10.0, 10.1</p>
+  <button class="btn check" id="calculateMeasurements" type="button" style="width:100%;margin-top:8px">Calculate results</button>
+  <div class="sim-result" id="measurementResults" aria-live="polite"><strong>Ready to investigate</strong><p>Change the readings and calculate to compare accuracy and precision.</p></div>
+ </div>
+ <div class="learn-card"><h3>Try these experiments</h3><p><b>Precise but inaccurate:</b> accepted value 10; readings 8.0, 8.1, 8.0.</p><p><b>Close to the accepted value:</b> accepted value 10; readings 9.9, 10.0, 10.1.</p><p><b>Less precise:</b> accepted value 10; readings 8, 10, 12.</p></div>
+</section>
+<section class="study-panel" id="practicePanel">
 <section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
+</section>
 <div id="finishSlot"></div>
 </main>
 <script>
@@ -441,6 +488,42 @@ $('continue').addEventListener('click',()=>{
 });
 render();
 })();
+
+/* Study navigation and interactive accuracy/precision simulator */
+(function(){
+ const tabButtons=[...document.querySelectorAll('.study-tab')];
+ const panels=[...document.querySelectorAll('.study-panel')];
+ tabButtons.forEach(btn=>btn.addEventListener('click',()=>{
+   tabButtons.forEach(x=>x.classList.toggle('active',x===btn));
+   panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));
+   if(btn.dataset.panel==='practicePanel') window.scrollTo({top:0,behavior:'smooth'});
+ }));
+ const calc=document.getElementById('calculateMeasurements');
+ calc.addEventListener('click',()=>{
+   const accepted=Number(document.getElementById('acceptedValue').value);
+   const raw=document.getElementById('readingValues').value;
+   const vals=raw.split(',').map(x=>x.trim()).filter(Boolean).map(Number);
+   const out=document.getElementById('measurementResults');
+   if(!Number.isFinite(accepted)||!vals.length||vals.some(x=>!Number.isFinite(x))){
+     out.innerHTML='<strong>Check your inputs</strong><p>Enter one valid accepted value and at least one comma-separated numeric reading.</p>';return;
+   }
+   const mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+   const min=Math.min(...vals),max=Math.max(...vals),range=max-min;
+   const error=Math.abs(mean-accepted);
+   const deviation=vals.reduce((s,x)=>s+Math.abs(x-mean),0)/vals.length;
+   const accuracy=error===0?'Mean equals the accepted value':error<=Math.max(Math.abs(accepted)*0.01,1e-9)?'Mean is very close to the accepted value':'Mean differs from the accepted value';
+   const precision=range<=Math.max(Math.abs(mean)*0.01,1e-9)?'Readings are tightly grouped':'Readings show a wider spread';
+   out.innerHTML='<strong>Results</strong>'+
+    '<p>Number of readings: <b>'+vals.length+'</b></p>'+
+    '<p>Mean: <b>'+mean.toPrecision(6)+'</b></p>'+
+    '<p>Absolute error of mean: <b>'+error.toPrecision(5)+'</b></p>'+
+    '<p>Range: <b>'+range.toPrecision(5)+'</b></p>'+
+    '<p>Mean absolute deviation: <b>'+deviation.toPrecision(5)+'</b></p>'+
+    '<p><b>Accuracy:</b> '+accuracy+'.</p><p><b>Precision:</b> '+precision+'.</p>'+
+    '<p class="sim-hint">Interpretation is relative to the values entered; the 1% guide is illustrative, not a universal physics standard.</p>';
+ });
+})();
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

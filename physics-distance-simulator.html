@@ -88,6 +88,7 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
 .sim-visual svg{max-width:100%;overflow:visible}
 @media(max-width:480px){.learn-panel,.sim-panel{padding:14px}.lesson-grid{grid-template-columns:1fr}.form-grid{gap:6px}.sim-field input{padding:9px;font-size:14px}.sim-results{gap:5px}.sim-stat{padding:8px 4px}.sim-stat strong{font-size:17px}}
 
+.page-progress{margin:-5px 0 14px;padding:9px 12px;border-radius:12px;background:#eef8ff;color:#245273;font-size:12px;font-weight:850;text-align:center;border:1px solid #d7eaf8}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
 <style>
@@ -103,6 +104,7 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
 <main>
 <section class="hero page-hero"><h1>📏 Distance · Simulator</h1><p class="muted">Explore the concept by changing values in the interactive laboratory.</p></section>
 <nav class="page-tabs" aria-label="Distance pages"><a class="page-tab " href="physics-distance.html" >📘 Learn</a><a class="page-tab active" href="physics-distance-simulator.html" aria-current="page">🎮 Simulator</a><a class="page-tab " href="physics-distance-practice.html" >🧠 Practice</a></nav>
+<div class="page-progress" id="pageProgress" role="status" aria-live="polite">Progress: 0/3 pages completed</div>
 <section class="sim-panel" id="simulator">
   <div class="section-kicker">EXPLORE • CHANGE VALUES</div><h2 class="practice-heading">🎮 Distance journey simulator</h2>
   <p class="muted">Change the three signed movements. Positive means forward/right; negative means backward/left. Watch the route length and final position update.</p>
@@ -200,6 +202,32 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
   }
   removeQuizAudio();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+<script>
+/* Shared progress across the three distance learning pages on this device */
+(function(){
+ const key='skillup-physics-distance-pages-v1';
+ const current='sim';
+ const status=document.getElementById('pageProgress');
+ let state={learn:false,sim:false,practice:false};
+ try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'));}catch(e){}
+ function render(){
+  const count=['learn','sim','practice'].filter(k=>state[k]).length;
+  if(status)status.textContent='Progress: '+count+'/3 pages completed · '+['learn','sim','practice'].map(k=>({learn:'Learn',sim:'Simulator',practice:'Practice'}[k])+(state[k]?' ✓':'')).join('  •  ');
+ }
+ function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}render();}
+ function complete(){if(!state[current]){state[current]=true;save();}}
+ if(current==='learn'){complete();}
+ if(current==='sim'){
+  const panel=document.getElementById('simulator');
+  if(panel){panel.addEventListener('input',complete,{once:true});panel.addEventListener('click',complete,{once:true});}
+ }
+ if(current==='practice'){
+  const slot=document.getElementById('finishSlot');
+  if(slot){new MutationObserver(function(){if(slot.children.length)complete();}).observe(slot,{childList:true});}
+ }
+ render();
 })();
 </script>
 </body>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Interactive coefficient of friction simulator. Change mu and normal force to calculate friction.">
+<title>SkillUp | Coefficient of Friction — Simulator</title>
+<style>
+:root{--ink:#243447;--muted:#64748b;--line:#dce6ef;--green:#78a66f;--blue:#1cb0f6;--bg:#f3f9ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{background:#fff;border-bottom:1px solid var(--line)}
+.top{max-width:760px;margin:auto;min-height:62px;padding:10px 14px;display:flex;align-items:center;gap:10px}.back{width:40px;height:40px;display:grid;place-items:center;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.tabs{max-width:760px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.tab{min-width:0;min-height:66px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 7px;text-align:left;text-decoration:none!important;background:#fff;color:#38536a;border:2px solid #dce6ef;border-bottom:5px solid #dce6ef;border-radius:18px;font-size:13px;font-weight:900;line-height:1.15;box-shadow:0 2px 0 #d5e0e9}.step-icon{font-size:21px}.step-copy{display:flex;flex-direction:column;gap:4px}.step-copy b{font-size:13px}.step-copy small{font-size:9px;color:#8192a0}.tab.active{background:#78a66f;color:#fff;border-color:#668e5e;border-bottom-color:#527b4b;box-shadow:0 3px 0 #527b4b}.tab.active small{color:#eef8e9}
+main{max-width:760px;margin:auto;padding:16px 13px 48px}.card{background:#fff;border:2px solid #e2edf7;border-radius:20px;padding:18px;margin-bottom:13px;box-shadow:0 4px 0 #dce8f3}h1{margin:0 0 7px;color:#174a78;font-size:clamp(25px,5vw,34px)}h2{margin:0 0 12px;color:#174a78;font-size:19px}.muted{color:var(--muted);font-size:14px;line-height:1.5;margin:0}
+.control{margin:17px 0}.labelrow{display:flex;justify-content:space-between;gap:10px;font-weight:850;margin-bottom:8px}.value{color:#174a78;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:#78a66f;min-height:28px}input[type=number]{width:100%;padding:12px;border:2px solid var(--line);border-radius:12px;font:inherit;font-weight:750;color:var(--ink)}
+.result{background:#efffe7;border:2px solid #cde9c3;border-radius:17px;padding:16px;text-align:center}.result strong{display:block;font-size:clamp(32px,7vw,46px);color:#315f2a}.result span{font-size:13px;font-weight:800;color:#527b4b}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.formula{padding:13px;background:#eef8ff;border-radius:13px;text-align:center;font-weight:900;color:#174a78;font-size:19px}
+button{border:0;border-radius:13px;padding:12px 16px;background:#1cb0f6;color:white;font-weight:900;font-size:14px;cursor:pointer;min-height:46px}.reset{background:#eaf2f8;color:#38536a;border:1px solid var(--line)}
+.bar{height:18px;background:#e8eff5;border-radius:99px;overflow:hidden;margin-top:12px}.barfill{height:100%;width:0;background:#78a66f;transition:width .2s}
+@media(max-width:480px){.tabs{gap:7px;padding:0 10px}.tab{min-height:62px;gap:5px;padding:8px 4px;border-radius:15px}.step-icon{font-size:19px}.step-copy b{font-size:11px}.step-copy small{font-size:8px}main{padding:13px 10px 36px}.card{padding:15px;border-radius:17px}.grid{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="top"><a class="back" href="physics-coefficient-of-friction.html" aria-label="Back to lesson">←</a><div class="brand">SkillUp<small>PHYSICS • COEFFICIENT OF FRICTION</small></div></div></header>
+<nav class="tabs" aria-label="Coefficient of Friction learning path">
+<a class="tab" href="physics-coefficient-of-friction.html"><span class="step-icon">📘</span><span class="step-copy"><b>Learn</b><small>Understand</small></span></a>
+<a class="tab active" href="physics-coefficient-of-friction-simulate.html" aria-current="page"><span class="step-icon">⚙️</span><span class="step-copy"><b>Simulate</b><small>Explore</small></span></a>
+<a class="tab" href="physics-coefficient-of-friction-practice.html"><span class="step-icon">🎯</span><span class="step-copy"><b>Practice</b><small>30 questions</small></span></a>
+</nav>
+<main>
+<section class="card"><h1>⚙️ Friction Simulator</h1><p class="muted">Adjust the coefficient and normal reaction. Watch the friction force update instantly.</p></section>
+<section class="card"><h2>Choose the friction model</h2><div class="grid"><div class="control"><label class="labelrow" for="mode">Friction type</label><select id="mode" style="width:100%;padding:12px;border:2px solid #dce6ef;border-radius:12px;font:inherit;font-weight:750"><option value="static">Limiting static friction</option><option value="kinetic">Kinetic friction</option></select></div><div class="control"><label class="labelrow" for="muNumber">Coefficient μ</label><input id="muNumber" type="number" min="0" max="2" step="0.01" value="0.40"></div></div>
+<div class="control"><div class="labelrow"><label for="mu">Coefficient μ</label><span class="value" id="muLabel">0.40</span></div><input id="mu" type="range" min="0" max="2" step="0.01" value="0.4"></div>
+<div class="control"><div class="labelrow"><label for="normal">Normal reaction N</label><span class="value" id="normalLabel">50 N</span></div><input id="normal" type="range" min="0" max="200" step="1" value="50"></div>
+<div class="result"><span id="resultLabel">LIMITING STATIC FRICTION</span><strong id="force">20.0 N</strong><span id="equation">fₛ,max = 0.40 × 50</span></div>
+<div class="bar"><div class="barfill" id="barfill"></div></div><p class="muted" id="insight" style="margin-top:10px">A coefficient of 0.40 means the limiting friction is 40% of the normal reaction.</p></section>
+<section class="card"><h2>Try these challenges</h2><div class="grid"><button type="button" data-mu="0.2" data-n="40">🟢 Easy: μ = 0.20, N = 40 N</button><button type="button" data-mu="0.5" data-n="60">🔵 Medium: μ = 0.50, N = 60 N</button><button type="button" data-mu="0.8" data-n="100">🟣 Challenge: μ = 0.80, N = 100 N</button><button type="button" class="reset" id="reset">↺ Reset values</button></div></section>
+<section class="card"><h2>Key idea</h2><div class="formula">f = μN</div><p class="muted" style="margin-top:10px">For static friction, this gives the maximum value just before sliding. For a sliding object, use the kinetic coefficient μₖ.</p></section>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+function update(){
+ let mu=Math.max(0,Math.min(2,Number($('mu').value)||0));
+ let n=Math.max(0,Math.min(200,Number($('normal').value)||0));
+ $('mu').value=mu;$('muNumber').value=mu.toFixed(2);$('muLabel').textContent=mu.toFixed(2);$('normalLabel').textContent=n.toFixed(0)+' N';
+ const force=mu*n,staticMode=$('mode').value==='static';
+ $('resultLabel').textContent=staticMode?'LIMITING STATIC FRICTION':'KINETIC FRICTION';
+ $('force').textContent=force.toFixed(2)+' N';
+ $('equation').textContent=(staticMode?'fₛ,max':'fₖ')+' = '+mu.toFixed(2)+' × '+n.toFixed(0);
+ $('barfill').style.width=Math.min(100,force/400*100)+'%';
+ $('insight').textContent='Friction = '+force.toFixed(2)+' N. '+(staticMode?'This is the maximum static friction just before sliding.':'This is the friction magnitude while the surfaces slide.');
+}
+$('mu').addEventListener('input',update);
+$('muNumber').addEventListener('input',()=>{$('mu').value=$('muNumber').value;update();});
+$('normal').addEventListener('input',update);$('mode').addEventListener('change',update);
+document.querySelectorAll('[data-mu]').forEach(b=>b.addEventListener('click',()=>{$('mu').value=b.dataset.mu;$('normal').value=b.dataset.n;update();}));
+$('reset').addEventListener('click',()=>{$('mode').value='static';$('mu').value=.4;$('normal').value=50;update();});
+update();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script><script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+</body></html>

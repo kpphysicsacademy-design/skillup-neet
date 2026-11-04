@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Practice angular momentum of a rigid body with 30 interactive Physics questions.">
+<title>Angular Momentum of a Rigid Body | Practice | SkillUp</title>
+<style>
+:root{--ink:#243447;--muted:#64748b;--line:#dce6ef;--blue:#168bd2;--green:#58b900;--green2:#438f00;--red:#d94747;--paper:#fff;--bg:#f2f8fd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:760px;margin:auto;min-height:64px;padding:9px 12px;display:flex;align-items:center;gap:8px}
+.back{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--line);border-radius:12px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{flex:1 1 auto;min-width:0;white-space:nowrap;font-weight:950;color:#174a78;font-size:17px}.brand small{display:block;font-size:8px;letter-spacing:.55px;color:var(--muted)}
+.xp,.streak{display:flex;align-items:center;gap:4px;flex:0 0 auto;white-space:nowrap;border-radius:99px;padding:7px 9px;font-size:11px;font-weight:900}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+.page-tabs{max-width:760px;margin:12px auto 0;padding:0 12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.page-tab{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:46px;padding:8px 5px;border:1.5px solid #dbe7d4;border-radius:12px;background:#fff;color:#365b38;text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 2px 0 #e5eddf}
+.page-tab.active{background:#dff8b8;border-color:#8bcf45;color:#245b18}.tab-icon{width:18px;height:18px;flex:0 0 18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:760px;margin:auto;padding:14px 12px 42px}
+.panel{background:var(--paper);border:1.5px solid #e0eaf3;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 3px 0 #e0eaf3}
+h1{font-size:clamp(23px,5vw,31px);line-height:1.2;margin:0 0 6px;color:#174a78}.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{font-size:11px;font-weight:850;padding:6px 9px;border-radius:99px;background:#eef7ff;color:#28628d}
+.progress-head{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:#60758a}.track{height:10px;border-radius:99px;background:#e7eff6;overflow:hidden}.bar{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qline{display:flex;justify-content:space-between;align-items:center;gap:10px}.eyebrow{font-size:11px;font-weight:950;letter-spacing:.8px;color:#688096;text-transform:uppercase}.difficulty{font-size:10px;font-weight:900;color:#438f00;background:#efffe7;border-radius:99px;padding:5px 8px}
+.question{font-size:clamp(19px,4.5vw,25px);line-height:1.38;margin:14px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{width:100%;min-height:54px;display:flex;align-items:center;gap:11px;padding:11px 12px;text-align:left;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;background:#fff;color:var(--ink);font-size:14px;font-weight:750;line-height:1.4;cursor:pointer}
+.option:hover:not(:disabled),.option:focus-visible{border-color:#65bde9;background:#f2faff}.option.selected{border-color:var(--blue);background:#eaf7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.letter{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border:1.5px solid #d5e0e9;border-radius:9px;color:#60758a;font-size:12px;font-weight:950}
+.feedback{display:none;margin-top:14px;padding:13px 14px;border-radius:13px;font-size:13px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#efffe7;border:1.5px solid #c8efb5}.feedback.bad{background:#fff1f1;border:1.5px solid #ffcaca}
+.controls{display:flex;gap:10px;margin-top:17px}.btn{flex:1;min-height:48px;border:0;border-radius:13px;padding:11px 14px;font-size:14px;font-weight:950;cursor:pointer}.btn:disabled{opacity:.4;cursor:not-allowed}.check{background:var(--green);color:white;box-shadow:0 4px 0 var(--green2)}.next{display:none;background:var(--blue);color:white;box-shadow:0 4px 0 #0874b5}.next.show{display:block}
+.result{text-align:center}.medal{font-size:54px}.score{font-size:42px;font-weight:950;color:#174a78;margin:5px 0}.result h2{margin:4px 0 7px}.result-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:17px}.result-actions .btn{flex:1 1 180px;max-width:260px}.primary{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green2)}.secondary{background:#eaf5ff;color:#1d5e8b;border:1px solid #c7e4f6}
+.review-item{padding:12px;margin:10px 0;border:1.5px solid var(--line);border-radius:13px;text-align:left;background:#fff}.review-item p{margin:5px 0;font-size:13px;line-height:1.45}.review-item .wrong-text{color:#b52d36}.review-item .right-text{color:#28730b;font-weight:850}
+[hidden]{display:none!important}
+@media(max-width:380px){.page-tab{font-size:11px;gap:4px}.tab-icon{width:16px;height:16px;flex-basis:16px}.nav{gap:5px;padding-inline:7px}.brand{font-size:15px}.brand small{font-size:7px;letter-spacing:.2px}.xp,.streak{padding:6px 7px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Rebuilt compact single-row SkillUp header */
+header{position:sticky!important;top:0!important;z-index:50!important;background:#fff!important;border-bottom:1px solid #dce6ef!important}
+header .nav{width:100%!important;max-width:760px!important;min-height:62px!important;height:auto!important;margin:0 auto!important;padding:8px 12px!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;overflow:hidden!important}
+header .back{display:grid!important;place-items:center!important;flex:0 0 36px!important;width:36px!important;min-width:36px!important;height:36px!important;margin:0!important;padding:0!important;border:1.5px solid #dce6ef!important;border-radius:11px!important;background:#f3f9ff!important;color:#174a78!important;font-size:20px!important;line-height:1!important;text-decoration:none!important}
+header .brand{display:flex!important;flex:1 1 auto!important;align-items:baseline!important;justify-content:flex-start!important;gap:5px!important;min-width:0!important;margin:0!important;padding:0!important;color:#174a78!important;font-size:17px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+header .brand small{display:inline!important;flex:0 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;color:#64748b!important;font-size:8px!important;font-weight:800!important;letter-spacing:.35px!important;line-height:1!important;white-space:nowrap!important}
+header .xp,header .streak{display:flex!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;gap:3px!important;width:auto!important;min-width:0!important;max-width:none!important;margin:0!important;padding:7px 8px!important;border-radius:999px!important;font-size:11px!important;font-weight:900!important;line-height:1!important;white-space:nowrap!important}
+header .xp{background:#fff4cf!important;border:1px solid #f4df9a!important}
+header .streak{background:#fff0e8!important;border:1px solid #ffd4bd!important;color:#a9471b!important}
+@media(max-width:390px){
+ header .nav{gap:5px!important;padding:7px 8px!important;min-height:58px!important}
+ header .back{flex-basis:32px!important;width:32px!important;min-width:32px!important;height:32px!important}
+ header .brand{font-size:15px!important;gap:3px!important}
+ header .brand small{font-size:6.5px!important;letter-spacing:0!important}
+ header .xp,header .streak{padding:6px 6px!important;font-size:10px!important}
+}
+@media(max-width:340px){
+ header .nav{gap:4px!important;padding-inline:6px!important}
+ header .brand{font-size:14px!important}
+ header .brand small{font-size:6px!important}
+ header .xp,header .streak{font-size:9px!important;padding:5px!important}
+}
+
+</style><link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+</head><body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<nav class="page-tabs" aria-label="Angular Momentum of a Rigid Body pages">
+<a class="page-tab" href="physics-angular-momentum-of-a-rigid-body.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8"/></svg>Learn</a>
+<a class="page-tab" href="physics-angular-momentum-of-a-rigid-body-simulator.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M3 12h3l3-8 5 16 3-8h4"/></svg>Simulate</a>
+<a class="page-tab active" aria-current="page" href="physics-angular-momentum-of-a-rigid-body-practice.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M9 5h11M9 12h11M9 19h11"/><path d="m3 5 1.5 1.5L7 4m-4 8 1.5 1.5L7 11m-4 8 1.5 1.5L7 18"/></svg>Practice</a>
+</nav>
+<main>
+<section class="panel"><h1>Angular Momentum of a Rigid Body</h1><p class="sub">Build confidence with force balance, torque, couples and support reactions. Answer each question and learn from instant feedback.</p><div class="chips"><span class="chip">30 MCQs</span><span class="chip">Easy Mode</span><span class="chip">Instant explanations</span><span class="chip">Mistake revision</span></div>
+<div class="progress-head"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="bar" id="bar"></div></div></section>
+<section class="panel" id="quiz" aria-live="polite"><div class="qline"><span class="eyebrow" id="qNumber">QUESTION 01</span><span class="difficulty">FOUNDATION</span></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" role="status"></div><div class="controls"><button class="btn check" id="check" disabled>Check answer</button><button class="btn next" id="next">Continue →</button></div></section>
+<section class="panel result" id="result" hidden></section>
+</main>
+<script>
+(function(){
+"use strict";
+const questions=[{"q":"For a rigid body rotating about a fixed symmetry axis, angular momentum magnitude is:","o":["L = Iω","L = Iα","L = τω","L = mv"],"a":0,"e":"For fixed-axis rotation about a symmetry axis, L = Iω, with I measured about that same axis."},{"q":"What is the SI unit of angular momentum?","o":["kg m/s","kg m²/s","N m","kg m²"],"a":1,"e":"Angular momentum has dimensions ML²/T and SI unit kg m²/s (equivalently J s)."},{"q":"Angular momentum is a:","o":["Scalar quantity","Vector quantity","Unitless quantity","Base SI unit"],"a":1,"e":"Angular momentum has magnitude and direction; its direction follows the cross product or right-hand rule."},{"q":"For a particle about a chosen origin, angular momentum is:","o":["r × p","r · p","m/r","p/r"],"a":0,"e":"The vector definition is L = r × p."},{"q":"The magnitude of particle angular momentum is:","o":["rp cosθ","rp sinθ","r/p","p/r"],"a":1,"e":"The magnitude of r × p is rp sinθ, where θ is the angle between r and p."},{"q":"A rigid body has I = 3 kg m² and ω = 4 rad/s about its fixed axis. Its angular momentum magnitude is:","o":["7 kg m²/s","12 kg m²/s","24 kg m²/s","1.33 kg m²/s"],"a":1,"e":"L = Iω = 3 × 4 = 12 kg m²/s."},{"q":"If I = 2 kg m² and angular momentum is 10 kg m²/s, angular speed is:","o":["2 rad/s","5 rad/s","10 rad/s","20 rad/s"],"a":1,"e":"ω = L/I = 10/2 = 5 rad/s."},{"q":"If a rigid body's angular speed doubles while its moment of inertia stays constant, its angular momentum:","o":["Halves","Doubles","Quadruples","Stays unchanged"],"a":1,"e":"With fixed I, L = Iω is directly proportional to ω."},{"q":"If the moment of inertia doubles while angular speed stays constant, angular momentum:","o":["Halves","Doubles","Quadruples","Stays unchanged"],"a":1,"e":"With fixed ω, L is directly proportional to I."},{"q":"For a fixed-axis rigid body with constant I, the torque-angular momentum relation is:","o":["τ = dL/dt","τ = L/t²","τ = I/L","τ = Lω"],"a":0,"e":"Net external torque about the axis equals the time rate of change of angular momentum."},{"q":"When is a system's angular momentum conserved about a chosen point or axis?","o":["When its mass is zero","When net external torque about that point or axis is zero","When kinetic energy is always zero","When all internal forces vanish"],"a":1,"e":"Angular momentum is conserved if the net external torque about the chosen point or axis is zero."},{"q":"A skater pulls their arms inward while spinning with negligible external torque. Their angular speed generally:","o":["Decreases","Increases","Becomes zero","Cannot change"],"a":1,"e":"Pulling the arms inward reduces moment of inertia; conservation of angular momentum makes angular speed increase."},{"q":"A spinning system has initial I = 4 kg m² and ω = 3 rad/s. If I becomes 2 kg m² with no external torque, final ω is:","o":["1.5 rad/s","3 rad/s","6 rad/s","12 rad/s"],"a":2,"e":"Conservation gives I₁ω₁ = I₂ω₂, so ω₂ = (4 × 3)/2 = 6 rad/s."},{"q":"A disc has I = ½MR² and rotates at angular speed ω. Its angular momentum magnitude is:","o":["½MR²ω","MRω","½MRω²","MR²/ω"],"a":0,"e":"Substitute the disc's central-axis moment of inertia into L = Iω."},{"q":"A thin ring of mass M and radius R spins about its central perpendicular axis at ω. Its angular momentum magnitude is:","o":["½MR²ω","MR²ω","2MR²ω","MRω²"],"a":1,"e":"For a thin ring about this axis, I = MR², so L = MR²ω."},{"q":"A uniform solid sphere has I = 2/5 MR² about a diameter. Its spin angular momentum magnitude is:","o":["2/5 MR²ω","½MR²ω","2/3 MR²ω","MR²ω"],"a":0,"e":"For a uniform solid sphere, L = Iω = 2/5 MR²ω."},{"q":"What is the direction of angular momentum for a symmetric body spinning about a fixed symmetry axis?","o":["Always opposite to ω","Along the rotation axis, following the right-hand rule","Always vertically downward","Always perpendicular to the axis"],"a":1,"e":"For fixed-axis rotation about a symmetry axis, L is parallel or antiparallel to ω depending on sign."},{"q":"A particle moves directly toward the origin along a straight line passing through it. Its angular momentum about the origin is:","o":["Maximum","Zero","Infinite","Equal to its mass"],"a":1,"e":"Here r is parallel or antiparallel to p, so r × p = 0."},{"q":"A particle has momentum p = 6 kg m/s perpendicular to a position vector r = 2 m. Its angular momentum magnitude is:","o":["3 kg m²/s","8 kg m²/s","12 kg m²/s","18 kg m²/s"],"a":2,"e":"L = rp sin90° = 2 × 6 = 12 kg m²/s."},{"q":"A particle has r = 3 m, p = 4 kg m/s, and angle θ = 30° between them. Angular momentum magnitude is:","o":["6 kg m²/s","12 kg m²/s","2 kg m²/s","3√3 kg m²/s"],"a":0,"e":"L = rp sinθ = 3 × 4 × ½ = 6 kg m²/s."},{"q":"For a fixed axis and constant moment of inertia, net torque is also equal to:","o":["Iα","I/α","ω/I","Lα"],"a":0,"e":"Since L = Iω for constant I, τ = dL/dt = Iα."},{"q":"A body has angular momentum 15 kg m²/s. If its angular speed is 5 rad/s and the fixed-axis relation applies, its moment of inertia is:","o":["3 kg m²","10 kg m²","20 kg m²","75 kg m²"],"a":0,"e":"I = L/ω = 15/5 = 3 kg m²."},{"q":"The rotational analogue of linear momentum p = mv for fixed-axis rotation is:","o":["L = Iω","τ = Iα","K = ½Iω²","W = τθ"],"a":0,"e":"Moment of inertia plays the analogous role to mass, and angular velocity to linear velocity."},{"q":"Can angular momentum be conserved while rotational kinetic energy changes?","o":["No, never","Yes, if I changes while external torque is zero","Only if the body is at rest","Only when I is infinite"],"a":1,"e":"With L conserved, changing I changes ω; since K = L²/(2I), rotational kinetic energy can change."},{"q":"A rotating disc and a ring are coaxial. The ring is gently placed on the disc and they rotate together. If external torque is negligible, which quantity is conserved during the interaction?","o":["Angular momentum","Angular speed","Moment of inertia","Rotational kinetic energy always"],"a":0,"e":"Negligible external torque means total angular momentum is conserved, though rotational kinetic energy may decrease."},{"q":"For a rigid body with I = 5 kg m² and angular acceleration 2 rad/s² about a fixed axis, net torque is:","o":["2.5 N m","7 N m","10 N m","25 N m"],"a":2,"e":"τ = Iα = 5 × 2 = 10 N m."},{"q":"The dimensions of angular momentum are:","o":["MLT⁻¹","ML²T⁻¹","ML²T⁻²","M⁰L⁰T⁰"],"a":1,"e":"From L = r × p, dimensions are L × (ML/T) = ML²/T."},{"q":"If a system experiences a constant net external torque for time Δt, the change in angular momentum about that axis is:","o":["ΔL = τΔt","ΔL = τ/Δt","ΔL = I/τ","ΔL = τ²Δt"],"a":0,"e":"For constant torque, integrating τ = dL/dt gives ΔL = τΔt."},{"q":"A constant torque of 4 N m acts for 3 s. The angular momentum change about the axis is:","o":["7 kg m²/s","12 kg m²/s","1.33 kg m²/s","24 kg m²/s"],"a":1,"e":"ΔL = τΔt = 4 × 3 = 12 kg m²/s."},{"q":"Which statement is most accurate about L = Iω for a rigid body?","o":["It is a universal vector identity for every axis and shape","It applies directly for rotation about a fixed symmetry/principal axis with I about that axis","It means angular momentum has no direction","It applies only to translating bodies"],"a":1,"e":"For general three-dimensional rotation, L and ω need not be parallel; the simple scalar relation applies for a fixed symmetry/principal axis."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
+const el=id=>document.getElementById(id);
+function render(){
+ selected=null;locked=false;const q=questions[index];
+ el("progressText").textContent="Question "+(index+1)+" of "+questions.length;
+ el("percent").textContent=Math.round(index/questions.length*100)+"%";
+ el("bar").style.width=(index/questions.length*100)+"%";
+ el("qNumber").textContent="QUESTION "+String(index+1).padStart(2,"0");
+ el("question").textContent=q.q;el("feedback").className="feedback";el("feedback").textContent="";
+ el("check").hidden=false;el("check").disabled=true;el("next").className="btn next";el("next").textContent=index===questions.length-1?"View result →":"Continue →";
+ const holder=el("options");holder.replaceChildren();
+ q.o.forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.className="option";
+ const key=document.createElement("span");key.className="letter";key.textContent=String.fromCharCode(65+i);
+ const text=document.createElement("span");text.textContent=label;b.append(key,text);
+ b.addEventListener("click",()=>{if(locked)return;selected=i;holder.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");el("check").disabled=false;});holder.append(b);});
+}
+function finish(){
+ el("quiz").hidden=true;el("bar").style.width="100%";el("progressText").textContent="Quiz completed";el("percent").textContent="100%";
+ const pct=Math.round(score/questions.length*100),r=el("result");r.hidden=false;r.replaceChildren();
+ const medal=document.createElement("div");medal.className="medal";medal.textContent=pct>=85?"🏆":pct>=60?"🌟":"💪";
+ const h=document.createElement("h2");h.textContent="Practice complete!";
+ const s=document.createElement("div");s.className="score";s.textContent=score+" / "+questions.length;
+ const p=document.createElement("p");p.className="sub";p.textContent=pct+"% correct • "+score*10+" XP earned";
+ r.append(medal,h,s,p);
+ const review=document.createElement("div");review.style.marginTop="18px";
+ if(wrong.length){const rh=document.createElement("h3");rh.textContent="Review your mistakes";review.append(rh);
+ wrong.forEach((item,i)=>{const box=document.createElement("article");box.className="review-item";
+ const q=document.createElement("p");q.style.fontWeight="850";q.textContent=(i+1)+". "+item.q;
+ const a=document.createElement("p");a.className="wrong-text";a.textContent="Your answer: "+item.chosen;
+ const c=document.createElement("p");c.className="right-text";c.textContent="Correct answer: "+item.answer;
+ const e=document.createElement("p");e.className="sub";e.textContent=item.explanation;box.append(q,a,c,e);review.append(box);});
+ }else{const perfect=document.createElement("p");perfect.textContent="Perfect score! You answered every question correctly.";review.append(perfect);}
+ r.append(review);
+ const actions=document.createElement("div");actions.className="result-actions";
+ const retry=document.createElement("button");retry.className="btn primary";retry.textContent="Practice all 30 again";retry.addEventListener("click",()=>reset(false));actions.append(retry);
+ if(wrong.length){const retryWrong=document.createElement("button");retryWrong.className="btn secondary";retryWrong.textContent="Retry mistakes ("+wrong.length+")";retryWrong.addEventListener("click",()=>reset(true));actions.append(retryWrong);}
+ r.append(actions);
+}
+function reset(onlyWrong){
+ const nextSet=onlyWrong?wrong.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean):originalQuestions.slice();
+ questions.splice(0,questions.length,...nextSet);index=0;score=0;streak=0;wrong=[];el("xp").textContent="0";el("streak").textContent="0";el("result").hidden=true;el("quiz").hidden=false;render();window.scrollTo({top:0,behavior:"smooth"});
+}
+el("check").addEventListener("click",()=>{
+ if(selected===null||locked)return;locked=true;const q=questions[index],buttons=[...el("options").querySelectorAll(".option")];
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct");});
+ const fb=el("feedback");
+ if(selected===q.a){score++;streak++;el("xp").textContent=String(score*10);el("streak").textContent=String(streak);fb.className="feedback show good";fb.textContent="✓ Correct! "+q.e;}
+ else{streak=0;el("streak").textContent="0";buttons[selected].classList.add("wrong");wrong.push({q:q.q,chosen:q.o[selected],answer:q.o[q.a],explanation:q.e});fb.className="feedback show bad";fb.textContent="Not quite. "+q.e+" Correct answer: "+q.o[q.a]+".";}
+ el("check").hidden=true;el("next").className="btn next show";
+});
+el("next").addEventListener("click",()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:"smooth"});}else finish();});
+render();
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script><script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+</body></html>

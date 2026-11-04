@@ -1,151 +1,112 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics Easy Mode: Rigid Body Equilibrium quiz">
-<title>SkillUp | Rigid Body Equilibrium — Practice</title>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Practice rigid body equilibrium with 30 interactive Physics questions, instant feedback and mistake review.">
+<title>Rigid Body Equilibrium Practice | SkillUp Physics</title>
 <style>
-:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+:root{--ink:#243447;--muted:#64748b;--line:#dce6ef;--blue:#168bd2;--green:#58b900;--green2:#438f00;--red:#d94747;--paper:#fff;--bg:#f2f8fd}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
-.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
-.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
-main{max-width:720px;margin:auto;padding:18px 13px 48px}
-.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
-h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
-.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
-.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
-.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
-.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
-.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
-.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
-.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
-.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
-.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
-.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
-@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
-.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Mobile header refinement: keep branding, XP and streak on one balanced row */
-.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
-.back{flex:0 0 42px;width:42px;height:42px}
-.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
-.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
-.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
-.xp{margin-left:0;padding:9px 11px;font-size:13px}
-.streak{padding:9px 11px;font-size:12px}
-@media(max-width:480px){
-  .nav{gap:7px;padding:9px 10px;min-height:68px}
-  .back{flex-basis:40px;width:40px;height:40px}
-  .brand{font-size:17px}
-  .brand small{font-size:8px;letter-spacing:.55px}
-  .xp{padding:8px 9px;font-size:12px}
-  .streak{padding:8px 9px;font-size:11px;max-width:none}
-}
-@media(max-width:360px){
-  .nav{gap:5px;padding-inline:7px}
-  .back{flex-basis:36px;width:36px;height:36px}
-  .brand{font-size:15px}
-  .brand small{font-size:7px;letter-spacing:.3px}
-  .xp{padding:7px;font-size:11px}
-  .streak{padding:7px;font-size:10px}
-}
-
-.page-tabs{max-width:720px;margin:14px auto 0;padding:0 13px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.page-tab{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:48px;padding:8px 5px;border:1.5px solid #dbe7d4;border-radius:12px;background:#fff;color:#365b38;text-decoration:none;text-align:center;font-size:13px;font-weight:750;white-space:nowrap;box-shadow:0 2px 0 #e5eddf}.page-tab.active{background:#dff8b8;border-color:#8bcf45;color:#245b18}.tab-icon{width:19px;height:19px;flex:0 0 19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}@media(max-width:380px){.page-tab{font-size:11px;gap:4px}.tab-icon{width:16px;height:16px;flex-basis:16px}}</style>
-<link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
-</head>
-<body>
-<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header><nav class="page-tabs" aria-label="Rigid Body Equilibrium pages">
-<a class="page-tab "  href="physics-rigid-body-equilibrium.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8"/></svg>Learn</a>
-<a class="page-tab "  href="physics-rigid-body-equilibrium-simulator.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M3 12h3l3-8 5 16 3-8h4"/></svg>Simulate</a>
-<a class="page-tab active" aria-current="page" href="physics-rigid-body-equilibrium-practice.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M9 5h11M9 12h11M9 19h11"/><path d="m3 5 1.5 1.5L7 4m-4 8 1.5 1.5L7 11m-4 8 1.5 1.5L7 18"/></svg>Practice</a></nav>
+.nav{max-width:760px;margin:auto;min-height:64px;padding:9px 12px;display:flex;align-items:center;gap:8px}
+.back{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--line);border-radius:12px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{flex:1 1 auto;min-width:0;white-space:nowrap;font-weight:950;color:#174a78;font-size:17px}.brand small{display:block;font-size:8px;letter-spacing:.55px;color:var(--muted)}
+.xp,.streak{display:flex;align-items:center;gap:4px;flex:0 0 auto;white-space:nowrap;border-radius:99px;padding:7px 9px;font-size:11px;font-weight:900}.xp{background:#fff4cf;border:1px solid #f4df9a}.streak{background:#fff0e8;border:1px solid #ffd4bd;color:#b94a17}
+.page-tabs{max-width:760px;margin:12px auto 0;padding:0 12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.page-tab{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:46px;padding:8px 5px;border:1.5px solid #dbe7d4;border-radius:12px;background:#fff;color:#365b38;text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 2px 0 #e5eddf}
+.page-tab.active{background:#dff8b8;border-color:#8bcf45;color:#245b18}.tab-icon{width:18px;height:18px;flex:0 0 18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:760px;margin:auto;padding:14px 12px 42px}
+.panel{background:var(--paper);border:1.5px solid #e0eaf3;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 3px 0 #e0eaf3}
+h1{font-size:clamp(23px,5vw,31px);line-height:1.2;margin:0 0 6px;color:#174a78}.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{font-size:11px;font-weight:850;padding:6px 9px;border-radius:99px;background:#eef7ff;color:#28628d}
+.progress-head{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:#60758a}.track{height:10px;border-radius:99px;background:#e7eff6;overflow:hidden}.bar{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qline{display:flex;justify-content:space-between;align-items:center;gap:10px}.eyebrow{font-size:11px;font-weight:950;letter-spacing:.8px;color:#688096;text-transform:uppercase}.difficulty{font-size:10px;font-weight:900;color:#438f00;background:#efffe7;border-radius:99px;padding:5px 8px}
+.question{font-size:clamp(19px,4.5vw,25px);line-height:1.38;margin:14px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{width:100%;min-height:54px;display:flex;align-items:center;gap:11px;padding:11px 12px;text-align:left;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;background:#fff;color:var(--ink);font-size:14px;font-weight:750;line-height:1.4;cursor:pointer}
+.option:hover:not(:disabled),.option:focus-visible{border-color:#65bde9;background:#f2faff}.option.selected{border-color:var(--blue);background:#eaf7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.letter{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border:1.5px solid #d5e0e9;border-radius:9px;color:#60758a;font-size:12px;font-weight:950}
+.feedback{display:none;margin-top:14px;padding:13px 14px;border-radius:13px;font-size:13px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#efffe7;border:1.5px solid #c8efb5}.feedback.bad{background:#fff1f1;border:1.5px solid #ffcaca}
+.controls{display:flex;gap:10px;margin-top:17px}.btn{flex:1;min-height:48px;border:0;border-radius:13px;padding:11px 14px;font-size:14px;font-weight:950;cursor:pointer}.btn:disabled{opacity:.4;cursor:not-allowed}.check{background:var(--green);color:white;box-shadow:0 4px 0 var(--green2)}.next{display:none;background:var(--blue);color:white;box-shadow:0 4px 0 #0874b5}.next.show{display:block}
+.result{text-align:center}.medal{font-size:54px}.score{font-size:42px;font-weight:950;color:#174a78;margin:5px 0}.result h2{margin:4px 0 7px}.result-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:17px}.result-actions .btn{flex:1 1 180px;max-width:260px}.primary{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green2)}.secondary{background:#eaf5ff;color:#1d5e8b;border:1px solid #c7e4f6}
+.review-item{padding:12px;margin:10px 0;border:1.5px solid var(--line);border-radius:13px;text-align:left;background:#fff}.review-item p{margin:5px 0;font-size:13px;line-height:1.45}.review-item .wrong-text{color:#b52d36}.review-item .right-text{color:#28730b;font-weight:850}
+[hidden]{display:none!important}
+@media(max-width:380px){.page-tab{font-size:11px;gap:4px}.tab-icon{width:16px;height:16px;flex-basis:16px}.nav{gap:5px;padding-inline:7px}.brand{font-size:15px}.brand small{font-size:7px;letter-spacing:.2px}.xp,.streak{padding:6px 7px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body>
+<header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header>
+<nav class="page-tabs" aria-label="Rigid Body Equilibrium pages">
+<a class="page-tab" href="physics-rigid-body-equilibrium.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8"/></svg>Learn</a>
+<a class="page-tab" href="physics-rigid-body-equilibrium-simulator.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M3 12h3l3-8 5 16 3-8h4"/></svg>Simulate</a>
+<a class="page-tab active" aria-current="page" href="physics-rigid-body-equilibrium-practice.html"><svg class="tab-icon" viewBox="0 0 24 24"><path d="M9 5h11M9 12h11M9 19h11"/><path d="m3 5 1.5 1.5L7 4m-4 8 1.5 1.5L7 11m-4 8 1.5 1.5L7 18"/></svg>Practice</a>
+</nav>
 <main>
-<section class="hero"><h1>⚖️ Rigid Body Equilibrium</h1><p class="muted">Learn one small step at a time. Choose an answer, check it, and keep going.</p><div class="tags"><span class="tag">🌱 Easy Mode</span><span class="tag">🧠 30 questions</span><span class="tag">✨ Short explanations</span></div><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="fill" id="fill"></div></div></section>
-<section class="quiz" id="quiz"><div class="qmeta" id="qmeta">QUESTION 1</div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div></section>
-<div id="finishSlot"></div>
+<section class="panel"><h1>Rigid Body Equilibrium</h1><p class="sub">Build confidence with force balance, torque, couples and support reactions. Answer each question and learn from instant feedback.</p><div class="chips"><span class="chip">30 MCQs</span><span class="chip">Easy Mode</span><span class="chip">Instant explanations</span><span class="chip">Mistake revision</span></div>
+<div class="progress-head"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div><div class="track"><div class="bar" id="bar"></div></div></section>
+<section class="panel" id="quiz" aria-live="polite"><div class="qline"><span class="eyebrow" id="qNumber">QUESTION 01</span><span class="difficulty">FOUNDATION</span></div><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="feedback" id="feedback" role="status"></div><div class="controls"><button class="btn check" id="check" disabled>Check answer</button><button class="btn next" id="next">Continue →</button></div></section>
+<section class="panel result" id="result" hidden></section>
 </main>
 <script>
 (function(){
-'use strict';
-const questions = [{"q":"A rigid body is in static equilibrium when:","o":["Net force is zero only","Net torque is zero only","Both net force and net torque are zero","Its speed is maximum"],"a":2,"e":"Static equilibrium requires translational and rotational equilibrium: ΣF = 0 and Στ = 0."},{"q":"For a rigid body in planar equilibrium, the usual independent conditions are:","o":["ΣFx=0 only","ΣFy=0 and Στ=0 only","ΣFx=0, ΣFy=0, and Στ=0","Στ=0 and speed=0 only"],"a":2,"e":"In two dimensions, force balance in x and y plus torque balance are required."},{"q":"The SI unit of torque is:","o":["J/s","N m","N/m","kg m/s"],"a":1,"e":"Torque is force multiplied by perpendicular distance, with SI unit N m."},{"q":"Torque about a point is calculated using:","o":["Force × parallel distance","Force × perpendicular lever arm","Mass × acceleration only","Power × time"],"a":1,"e":"The torque magnitude is τ = F r sinθ, equal to force times perpendicular lever arm."},{"q":"A 10 N force acts perpendicularly 0.5 m from a pivot. Its torque magnitude is:","o":["2 N m","5 N m","10 N m","20 N m"],"a":1,"e":"τ = Fr = 10 × 0.5 = 5 N m."},{"q":"A force whose line of action passes through the pivot produces:","o":["Maximum torque","Zero torque about that pivot","Infinite torque","Torque equal to its mass"],"a":1,"e":"The perpendicular distance from the pivot to the line of action is zero."},{"q":"For a body in rotational equilibrium, the algebraic sum of torques about any chosen point is:","o":["Positive","Negative","Zero","Equal to mass"],"a":2,"e":"Rotational equilibrium requires the net external torque to be zero."},{"q":"Why is the principle of moments useful for a balanced seesaw?","o":["It balances clockwise and anticlockwise torques","It makes both masses equal","It removes gravity","It requires no pivot"],"a":0,"e":"A balanced seesaw has zero net torque, so clockwise and anticlockwise moments cancel."},{"q":"A 20 N force acts 0.3 m from a pivot at right angles. Torque magnitude is:","o":["3 N m","6 N m","20 N m","60 N m"],"a":1,"e":"τ = 20 × 0.3 = 6 N m."},{"q":"A 30 N force acts at 30° to a 2 m position vector. Torque magnitude is:","o":["30 N m","60 N m","15 N m","120 N m"],"a":0,"e":"τ = rF sinθ = 2 × 30 × sin30° = 30 N m."},{"q":"A uniform metre rule is supported at its centre. Its own weight creates what torque about the support?","o":["Maximum clockwise torque","Maximum anticlockwise torque","Zero torque","Torque equal to its length"],"a":2,"e":"The rule's weight acts through its centre of mass at the support, so its lever arm is zero."},{"q":"The centre of gravity of a body is the point through which acts the resultant:","o":["Magnetic force","Gravitational force (weight)","Friction only","Centripetal force"],"a":1,"e":"The weight of a body can be represented as acting through its centre of gravity."},{"q":"A body is in translational equilibrium if:","o":["Its net force is zero","Its net torque is zero","Its angular speed is zero","Its mass is zero"],"a":0,"e":"ΣF = 0 means there is no linear acceleration of the centre of mass."},{"q":"Can a body have zero net force but nonzero net torque?","o":["No, never","Yes; a couple can produce pure rotation","Only if it has no mass","Only in free fall"],"a":1,"e":"A couple has zero resultant force but a nonzero resultant torque."},{"q":"A couple consists of:","o":["Two equal forces in the same direction at one point","Two equal and opposite parallel forces separated by a distance","Two unequal forces on the same line","One force and one mass"],"a":1,"e":"A couple produces rotation without a net translational force."},{"q":"The magnitude of the torque of a couple is:","o":["F/d","F times perpendicular separation","2F/d","Mass times distance"],"a":1,"e":"Couple torque equals either force magnitude multiplied by the perpendicular distance between their lines of action."},{"q":"A couple has forces of 8 N separated by 0.25 m. Its torque is:","o":["2 N m","8.25 N m","32 N m","0.5 N m"],"a":0,"e":"τ = Fd = 8 × 0.25 = 2 N m."},{"q":"A 40 N load is 0.5 m to the left of a pivot. What force at 1 m to the right balances its torque if both act vertically?","o":["10 N","20 N","40 N","80 N"],"a":1,"e":"Balance moments: 40 × 0.5 = F × 1, so F = 20 N."},{"q":"A 15 N load is 2 m from a pivot. A balancing force acts 3 m on the other side. Its magnitude is:","o":["5 N","10 N","15 N","22.5 N"],"a":1,"e":"15 × 2 = F × 3, so F = 10 N."},{"q":"When calculating torque, the lever arm is the:","o":["Distance along the force direction","Perpendicular distance from pivot to force line","Distance travelled by the object","Radius squared"],"a":1,"e":"The lever arm is the shortest perpendicular distance between pivot and line of action."},{"q":"Which force produces the greatest torque for a fixed magnitude and radius?","o":["Force directed along the radius","Force at 30° to radius","Force perpendicular to radius","Force directed toward pivot"],"a":2,"e":"τ = rF sinθ is greatest when θ = 90°."},{"q":"A body may be in equilibrium while moving with constant velocity because:","o":["Equilibrium always means rest","Net force and net torque can both be zero","Torque must be infinite","Mass must be zero"],"a":1,"e":"Dynamic equilibrium is possible when net external force and torque are zero."},{"q":"For an object to be in complete mechanical equilibrium, which statement is correct?","o":["No forces act on it","Only gravity acts on it","Net force and net torque are both zero","It must be a point particle"],"a":2,"e":"All external forces and torques must balance, though individual forces may be present."},{"q":"A horizontal beam is supported at both ends and carries a load. In equilibrium, the upward support forces together balance:","o":["The total downward load","The beam's length","The net torque only","The acceleration due to gravity"],"a":0,"e":"Vertical force balance means total upward reactions equal total downward weights."},{"q":"A uniform beam's weight acts at:","o":["One end","Its centre of mass","The support with the larger force always","Any arbitrary point"],"a":1,"e":"For a uniform beam, the centre of mass is at its midpoint, where its weight acts."},{"q":"Taking torques about a pivot is often helpful because:","o":["It removes all forces from the problem","Forces through the pivot have zero torque","It makes all distances zero","It guarantees equal forces"],"a":1,"e":"Unknown forces whose lines of action pass through the pivot contribute no torque about that point."},{"q":"A 12 N force acts at a perpendicular distance of 0.75 m. Its torque is:","o":["9 N m","12.75 N m","16 N m","0.0625 N m"],"a":0,"e":"τ = 12 × 0.75 = 9 N m."},{"q":"A 5 N force acts at 60° to a 4 m position vector. Torque magnitude is:","o":["10 N m","17.3 N m","20 N m","2.5 N m"],"a":1,"e":"τ = rF sinθ = 4 × 5 × sin60° ≈ 17.3 N m."},{"q":"If the perpendicular lever arm doubles while force stays constant, torque:","o":["Halves","Doubles","Quadruples","Does not change"],"a":1,"e":"Torque is directly proportional to the perpendicular lever arm."},{"q":"Which condition distinguishes rotational equilibrium from translational equilibrium?","o":["ΣF = 0","Στ = 0","Mass is constant","Weight acts downward"],"a":1,"e":"Rotational equilibrium specifically requires the net torque to be zero."}];
+"use strict";
+const questions=[{"q":"A rigid body is in static equilibrium when:","o":["Net force is zero only","Net torque is zero only","Both net force and net torque are zero","Its speed is maximum"],"a":2,"e":"Static equilibrium requires translational and rotational equilibrium: ΣF = 0 and Στ = 0."},{"q":"For a rigid body in planar equilibrium, the usual independent conditions are:","o":["ΣFx=0 only","ΣFy=0 and Στ=0 only","ΣFx=0, ΣFy=0, and Στ=0","Στ=0 and speed=0 only"],"a":2,"e":"In two dimensions, force balance in x and y plus torque balance are required."},{"q":"The SI unit of torque is:","o":["J/s","N m","N/m","kg m/s"],"a":1,"e":"Torque is force multiplied by perpendicular distance, with SI unit N m."},{"q":"Torque about a point is calculated using:","o":["Force × parallel distance","Force × perpendicular lever arm","Mass × acceleration only","Power × time"],"a":1,"e":"The torque magnitude is τ = F r sinθ, equal to force times perpendicular lever arm."},{"q":"A 10 N force acts perpendicularly 0.5 m from a pivot. Its torque magnitude is:","o":["2 N m","5 N m","10 N m","20 N m"],"a":1,"e":"τ = Fr = 10 × 0.5 = 5 N m."},{"q":"A force whose line of action passes through the pivot produces:","o":["Maximum torque","Zero torque about that pivot","Infinite torque","Torque equal to its mass"],"a":1,"e":"The perpendicular distance from the pivot to the line of action is zero."},{"q":"For a body in rotational equilibrium, the algebraic sum of torques about any chosen point is:","o":["Positive","Negative","Zero","Equal to mass"],"a":2,"e":"Rotational equilibrium requires the net external torque to be zero."},{"q":"Why is the principle of moments useful for a balanced seesaw?","o":["It balances clockwise and anticlockwise torques","It makes both masses equal","It removes gravity","It requires no pivot"],"a":0,"e":"A balanced seesaw has zero net torque, so clockwise and anticlockwise moments cancel."},{"q":"A 20 N force acts 0.3 m from a pivot at right angles. Torque magnitude is:","o":["3 N m","6 N m","20 N m","60 N m"],"a":1,"e":"τ = 20 × 0.3 = 6 N m."},{"q":"A 30 N force acts at 30° to a 2 m position vector. Torque magnitude is:","o":["30 N m","60 N m","15 N m","120 N m"],"a":0,"e":"τ = rF sinθ = 2 × 30 × sin30° = 30 N m."},{"q":"A uniform metre rule is supported at its centre. Its own weight creates what torque about the support?","o":["Maximum clockwise torque","Maximum anticlockwise torque","Zero torque","Torque equal to its length"],"a":2,"e":"The rule's weight acts through its centre of mass at the support, so its lever arm is zero."},{"q":"The centre of gravity of a body is the point through which acts the resultant:","o":["Magnetic force","Gravitational force (weight)","Friction only","Centripetal force"],"a":1,"e":"The weight of a body can be represented as acting through its centre of gravity."},{"q":"A body is in translational equilibrium if:","o":["Its net force is zero","Its net torque is zero","Its angular speed is zero","Its mass is zero"],"a":0,"e":"ΣF = 0 means there is no linear acceleration of the centre of mass."},{"q":"Can a body have zero net force but nonzero net torque?","o":["No, never","Yes; a couple can produce pure rotation","Only if it has no mass","Only in free fall"],"a":1,"e":"A couple has zero resultant force but a nonzero resultant torque."},{"q":"A couple consists of:","o":["Two equal forces in the same direction at one point","Two equal and opposite parallel forces separated by a distance","Two unequal forces on the same line","One force and one mass"],"a":1,"e":"A couple produces rotation without a net translational force."},{"q":"The magnitude of the torque of a couple is:","o":["F/d","F times perpendicular separation","2F/d","Mass times distance"],"a":1,"e":"Couple torque equals either force magnitude multiplied by the perpendicular distance between their lines of action."},{"q":"A couple has forces of 8 N separated by 0.25 m. Its torque is:","o":["2 N m","8.25 N m","32 N m","0.5 N m"],"a":0,"e":"τ = Fd = 8 × 0.25 = 2 N m."},{"q":"A 40 N load is 0.5 m to the left of a pivot. What force at 1 m to the right balances its torque if both act vertically?","o":["10 N","20 N","40 N","80 N"],"a":1,"e":"Balance moments: 40 × 0.5 = F × 1, so F = 20 N."},{"q":"A 15 N load is 2 m from a pivot. A balancing force acts 3 m on the other side. Its magnitude is:","o":["5 N","10 N","15 N","22.5 N"],"a":1,"e":"15 × 2 = F × 3, so F = 10 N."},{"q":"When calculating torque, the lever arm is the:","o":["Distance along the force direction","Perpendicular distance from pivot to force line","Distance travelled by the object","Radius squared"],"a":1,"e":"The lever arm is the shortest perpendicular distance between pivot and line of action."},{"q":"Which force produces the greatest torque for a fixed magnitude and radius?","o":["Force directed along the radius","Force at 30° to radius","Force perpendicular to radius","Force directed toward pivot"],"a":2,"e":"τ = rF sinθ is greatest when θ = 90°."},{"q":"A body may be in equilibrium while moving with constant velocity because:","o":["Equilibrium always means rest","Net force and net torque can both be zero","Torque must be infinite","Mass must be zero"],"a":1,"e":"Dynamic equilibrium is possible when net external force and torque are zero."},{"q":"For an object to be in complete mechanical equilibrium, which statement is correct?","o":["No forces act on it","Only gravity acts on it","Net force and net torque are both zero","It must be a point particle"],"a":2,"e":"All external forces and torques must balance, though individual forces may be present."},{"q":"A horizontal beam is supported at both ends and carries a load. In equilibrium, the upward support forces together balance:","o":["The total downward load","The beam's length","The net torque only","The acceleration due to gravity"],"a":0,"e":"Vertical force balance means total upward reactions equal total downward weights."},{"q":"A uniform beam's weight acts at:","o":["One end","Its centre of mass","The support with the larger force always","Any arbitrary point"],"a":1,"e":"For a uniform beam, the centre of mass is at its midpoint, where its weight acts."},{"q":"Taking torques about a pivot is often helpful because:","o":["It removes all forces from the problem","Forces through the pivot have zero torque","It makes all distances zero","It guarantees equal forces"],"a":1,"e":"Unknown forces whose lines of action pass through the pivot contribute no torque about that point."},{"q":"A 12 N force acts at a perpendicular distance of 0.75 m. Its torque is:","o":["9 N m","12.75 N m","16 N m","0.0625 N m"],"a":0,"e":"τ = 12 × 0.75 = 9 N m."},{"q":"A 5 N force acts at 60° to a 4 m position vector. Torque magnitude is:","o":["10 N m","17.3 N m","20 N m","2.5 N m"],"a":1,"e":"τ = rF sinθ = 4 × 5 × sin60° ≈ 17.3 N m."},{"q":"If the perpendicular lever arm doubles while force stays constant, torque:","o":["Halves","Doubles","Quadruples","Does not change"],"a":1,"e":"Torque is directly proportional to the perpendicular lever arm."},{"q":"Which condition distinguishes rotational equilibrium from translational equilibrium?","o":["ΣF = 0","Στ = 0","Mass is constant","Weight acts downward"],"a":1,"e":"Rotational equilibrium specifically requires the net torque to be zero."}];
 const originalQuestions=questions.slice();
-let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
-const $=id=>document.getElementById(id);
+let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
+const el=id=>document.getElementById(id);
 function render(){
- chosen=null;locked=false;
- const item=questions[index];
- $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
- $('percent').textContent=Math.round(index/questions.length*100)+'%';
- $('fill').style.width=(index/questions.length*100)+'%';
- $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
- $('feedback').className='feedback';$('feedback').textContent='';
- $('check').style.display='block';$('check').disabled=true;
- $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
- $('options').replaceChildren();
- item.o.forEach((text,j)=>{
-   const b=document.createElement('button');b.type='button';b.className='option';
-   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
-   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
-   $('options').appendChild(b);
- });
+ selected=null;locked=false;const q=questions[index];
+ el("progressText").textContent="Question "+(index+1)+" of "+questions.length;
+ el("percent").textContent=Math.round(index/questions.length*100)+"%";
+ el("bar").style.width=(index/questions.length*100)+"%";
+ el("qNumber").textContent="QUESTION "+String(index+1).padStart(2,"0");
+ el("question").textContent=q.q;el("feedback").className="feedback";el("feedback").textContent="";
+ el("check").hidden=false;el("check").disabled=true;el("next").className="btn next";el("next").textContent=index===questions.length-1?"View result →":"Continue →";
+ const holder=el("options");holder.replaceChildren();
+ q.o.forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.className="option";
+ const key=document.createElement("span");key.className="letter";key.textContent=String.fromCharCode(65+i);
+ const text=document.createElement("span");text.textContent=label;b.append(key,text);
+ b.addEventListener("click",()=>{if(locked)return;selected=i;holder.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");el("check").disabled=false;});holder.append(b);});
 }
-$('check').addEventListener('click',()=>{
- if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
- buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
- const f=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
- $('check').style.display='none';$('continue').className='btn continue show';
+function finish(){
+ el("quiz").hidden=true;el("bar").style.width="100%";el("progressText").textContent="Quiz completed";el("percent").textContent="100%";
+ const pct=Math.round(score/questions.length*100),r=el("result");r.hidden=false;r.replaceChildren();
+ const medal=document.createElement("div");medal.className="medal";medal.textContent=pct>=85?"🏆":pct>=60?"🌟":"💪";
+ const h=document.createElement("h2");h.textContent="Practice complete!";
+ const s=document.createElement("div");s.className="score";s.textContent=score+" / "+questions.length;
+ const p=document.createElement("p");p.className="sub";p.textContent=pct+"% correct • "+score*10+" XP earned";
+ r.append(medal,h,s,p);
+ const review=document.createElement("div");review.style.marginTop="18px";
+ if(wrong.length){const rh=document.createElement("h3");rh.textContent="Review your mistakes";review.append(rh);
+ wrong.forEach((item,i)=>{const box=document.createElement("article");box.className="review-item";
+ const q=document.createElement("p");q.style.fontWeight="850";q.textContent=(i+1)+". "+item.q;
+ const a=document.createElement("p");a.className="wrong-text";a.textContent="Your answer: "+item.chosen;
+ const c=document.createElement("p");c.className="right-text";c.textContent="Correct answer: "+item.answer;
+ const e=document.createElement("p");e.className="sub";e.textContent=item.explanation;box.append(q,a,c,e);review.append(box);});
+ }else{const perfect=document.createElement("p");perfect.textContent="Perfect score! You answered every question correctly.";review.append(perfect);}
+ r.append(review);
+ const actions=document.createElement("div");actions.className="result-actions";
+ const retry=document.createElement("button");retry.className="btn primary";retry.textContent="Practice all 30 again";retry.addEventListener("click",()=>reset(false));actions.append(retry);
+ if(wrong.length){const retryWrong=document.createElement("button");retryWrong.className="btn secondary";retryWrong.textContent="Retry mistakes ("+wrong.length+")";retryWrong.addEventListener("click",()=>reset(true));actions.append(retryWrong);}
+ r.append(actions);
+}
+function reset(onlyWrong){
+ const nextSet=onlyWrong?wrong.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean):originalQuestions.slice();
+ questions.splice(0,questions.length,...nextSet);index=0;score=0;streak=0;wrong=[];el("xp").textContent="0";el("streak").textContent="0";el("result").hidden=true;el("quiz").hidden=false;render();window.scrollTo({top:0,behavior:"smooth"});
+}
+el("check").addEventListener("click",()=>{
+ if(selected===null||locked)return;locked=true;const q=questions[index],buttons=[...el("options").querySelectorAll(".option")];
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct");});
+ const fb=el("feedback");
+ if(selected===q.a){score++;streak++;el("xp").textContent=String(score*10);el("streak").textContent=String(streak);fb.className="feedback show good";fb.textContent="✓ Correct! "+q.e;}
+ else{streak=0;el("streak").textContent="0";buttons[selected].classList.add("wrong");wrong.push({q:q.q,chosen:q.o[selected],answer:q.o[q.a],explanation:q.e});fb.className="feedback show bad";fb.textContent="Not quite. "+q.e+" Correct answer: "+q.o[q.a]+".";}
+ el("check").hidden=true;el("next").className="btn next show";
 });
-$('continue').addEventListener('click',()=>{
- if(!locked)return;index++;
- if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
- $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
- const pct=Math.round(score/questions.length*100);
- const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Rigid Body Equilibrium Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview" style="text-align:left;margin-top:18px"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry" style="margin-top:12px">Practice all questions again</button>';
- const review=card.querySelector('#wrongReview');
- if(wrongAttempts.length){
-   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
-   wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.style.cssText='padding:12px;margin:10px 0;border:2px solid #dce6ef;border-radius:14px;background:#fff';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.textContent='Your answer: '+w.chosen;yours.style.color='#a12b30';const correct=document.createElement('p');correct.textContent='Correct answer: '+w.answer;correct.style.color='#245b12';const why=document.createElement('p');why.textContent=w.explanation;why.className='muted';item.append(q,yours,correct,why);review.appendChild(item);});
- }else{review.innerHTML='<p>🌟 Perfect score! No wrong answers to review.</p>';}
- $('finishSlot').replaceChildren(card);
- function resetQuiz(onlyWrong){
-   if(onlyWrong && wrongAttempts.length){
-     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
-     questions.splice(0,questions.length,...wrongQs);
-   } else { questions.splice(0,questions.length,...originalQuestions); }
-   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
- }
- $('retry').addEventListener('click',()=>resetQuiz(false));
- $('retryWrong').addEventListener('click',()=>resetQuiz(true));
-});
+el("next").addEventListener("click",()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:"smooth"});}else finish();});
 render();
 })();
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="central-config.js"></script>
-<script src="central-auth.js"></script>
+<script src="central-config.js"></script><script src="central-auth.js"></script>
 <script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
-<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
-<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-<script>
-/* This quiz intentionally has no floating audio controls. */
-(function(){
-  function removeQuizAudio(){
-    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
-  }
-  removeQuizAudio();
-  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
-</body>
-</html>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+</body></html>

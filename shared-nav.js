@@ -109,6 +109,14 @@
     document.querySelectorAll('[id*="eye-shield" i],[class*="eye-shield" i],[aria-label*="eye shield" i]').forEach(el => el.remove());
   }
 
+  // Load the shared Maths header on every Maths route that uses this common script.
+  if (/^\\/maths.*\\.html$/i.test(window.location.pathname) &&
+      !document.querySelector('script[src*="maths-standard-header.js"]')) {
+    const mathsHeader = document.createElement('script');
+    mathsHeader.src = '/maths-standard-header.js?v=20261104-standard-header-v1';
+    document.head.appendChild(mathsHeader);
+  }
+
   // Android WebView compatibility: preserve same-site target=_blank navigation.
   document.addEventListener('click', event => {
     const link = event.target && event.target.closest ? event.target.closest('a[target="_blank"]') : null;

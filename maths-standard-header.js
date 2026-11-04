@@ -24,7 +24,7 @@
       .su-maths-standard-header .progress{flex:1 1 70px!important;min-width:32px!important;max-width:none!important}
       .su-maths-standard-header .xp,.su-maths-standard-header .heart,.su-maths-standard-header #hearts,.su-maths-standard-header #xp{flex:0 0 auto!important;white-space:nowrap!important}
       .su-maths-standard-header nav[aria-label="Main navigation"]{display:none!important}
-      @media(max-width:520px){.su-maths-standard-header{min-height:58px!important;padding:7px 9px!important;gap:7px!important}.su-maths-standard-header .brand,.su-maths-standard-header .su-maths-brand{font-size:17px!important}.su-maths-standard-header .su-maths-menu-btn{width:34px;height:34px}.su-maths-standard-header .progress{min-width:24px!important}}
+      @media(max-width:520px){.su-maths-standard-header{min-height:58px!important;padding:7px 8px!important;gap:6px!important}.su-maths-standard-header .brand,.su-maths-standard-header .su-maths-brand{font-size:16px!important}.su-maths-standard-header .su-maths-menu-btn{width:32px;height:32px}.su-maths-standard-header .progress{flex:1 1 12px!important;min-width:12px!important}.su-maths-standard-header .xp,.su-maths-standard-header .heart,.su-maths-standard-header #hearts,.su-maths-standard-header #xp{font-size:11px!important;padding:4px 6px!important}}
     `;
     document.head.appendChild(style);
     var menuWrap=document.createElement('div');

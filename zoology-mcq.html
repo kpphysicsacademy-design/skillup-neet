@@ -29,20 +29,13 @@ h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}.muted{color:var
 <div class="brand">SkillUp<small>ZOOLOGY • CONCEPT QUIZ</small></div>
 </div></header>
 <main class="wrap">
-<section class="hero">
-<h1 id="title">Zoology Quiz</h1>
-<div class="muted" id="subtitle">Loading concept question bank…</div>
-<div class="meta"><span class="pill" id="bankCount">Loading…</span><span class="pill">🧠 Concept Quiz</span><span class="pill">📘 Practice</span></div>
-<div class="progress"><i id="bar"></i></div>
-</section>
 <div id="content"></div>
 </main>
 <script>
 (function(){
 'use strict';
 var params=new URLSearchParams(location.search),concept=params.get('concept')||'';
-var title=document.getElementById('title'),subtitle=document.getElementById('subtitle');
-var bankCount=document.getElementById('bankCount'),content=document.getElementById('content'),bar=document.getElementById('bar');
+var content=document.getElementById('content');
 var items=[],i=0,score=0;
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
@@ -54,7 +47,7 @@ function loadScript(src){return new Promise(function(resolve,reject){
  sc.onerror=function(){sc.remove();reject(new Error('not found'));};document.head.appendChild(sc);
 });}
 async function load(){
- title.textContent=concept||'Zoology Quiz';if(!concept){showStatus('No concept was supplied. Return to the Zoology path and select a concept.');return;}
+ if(!concept){showStatus('No concept was supplied. Return to the Zoology path and select a concept.');return;}
  var files=candidates(concept),bank=null;for(var n=0;n<files.length&&!bank;n++){try{bank=await loadScript(files[n]);}catch(e){}}
  if(!bank){showStatus('A dedicated question bank is not connected for this concept yet. The concept link is routed correctly, but its source bank still needs to be created.');return;}
  items=bank.slice(0,30).map(function(item){
@@ -66,16 +59,13 @@ async function load(){
   for(var j=order.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),tmp=order[j];order[j]=order[k];order[k]=tmp;}
   return {q:item.q,o:order.map(function(idx){return opts[idx];}),correctIndex:order.indexOf(sourceIndex),correctText:correctText,e:item.e||''};
  });
- bankCount.textContent=items.length+' questions';
- subtitle.textContent=items.length===30?'30-question concept bank':'Dedicated bank currently contains '+items.length+' questions';
- if(items.length<30)subtitle.insertAdjacentHTML('afterend','<div class="warn">This is the source bank count currently present in GitHub. No duplicate filler questions are added automatically.</div>');
  render();
 }
-function showStatus(msg){content.innerHTML='<section class="status"><b>Quiz unavailable</b><p class="muted">'+esc(msg)+'</p></section>';bankCount.textContent='Not connected';}
+function showStatus(msg){content.innerHTML='<section class="status"><b>Quiz unavailable</b><p class="muted">'+esc(msg)+'</p></section>';}
 function render(){
- if(i>=items.length){bar.style.width='100%';content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};return;}
+ if(i>=items.length){content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};return;}
  var x=items[i],opts=x.o||[];
- bar.style.width=(i/items.length*100)+'%';
+ 
  content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
  document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,x);};});
  document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
@@ -89,7 +79,7 @@ function answer(choice,x){
  if(correctIndex>=0&&bs[correctIndex]){bs[correctIndex].classList.add('correct');bs[correctIndex].setAttribute('aria-label','Correct answer');}
  if(isCorrect){score++;f.className='feedback show ok';f.innerHTML='<b>Correct!</b><div>'+esc(x.e)+'</div>';}
  else{if(bs[choice]){bs[choice].classList.add('wrong');bs[choice].setAttribute('aria-label','Your incorrect answer');}f.className='feedback show no';f.innerHTML='<b>Not quite.</b> Correct answer: '+esc(x.correctText)+'<div>'+esc(x.e)+'</div>';}
- document.getElementById('next').classList.add('show');bar.style.width=((i+1)/items.length*100)+'%';
+ document.getElementById('next').classList.add('show');
 }
 load();
 })();

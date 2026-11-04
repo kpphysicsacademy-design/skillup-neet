@@ -121,9 +121,9 @@ $('continue').addEventListener('click',()=>{
  $('finishSlot').replaceChildren(card);
  function resetQuiz(onlyWrong){
    if(onlyWrong && wrongAttempts.length){
-     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);
+     const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean).map(q=>({...q,o:q.o.slice()}));
      questions.splice(0,questions.length,...wrongQs);
-   } else { questions.splice(0,questions.length,...originalQuestions); }
+   } else { questions.splice(0,questions.length,...originalQuestions.map(q=>({...q,o:q.o.slice()}))); }
    index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
  }
  $('retry').addEventListener('click',()=>resetQuiz(false));

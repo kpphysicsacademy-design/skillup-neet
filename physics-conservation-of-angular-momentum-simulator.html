@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Interactive conservation of angular momentum simulator."><title>Conservation of Angular Momentum | Simulate | SkillUp Physics</title><style>
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--ink:#243447;--muted:#64748b;--line:#dce6ef;--bg:#f3f9ff;--red:#ff4b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:720px;margin:auto;min-height:58px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.back{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--line);border-radius:13px;background:#f2f9ff;color:#174a78;text-decoration:none;font-size:20px}
+.brand{font-weight:950;color:#174a78}.brand small{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted)}
+.xp{margin-left:auto;background:#fff4cf;border:1px solid #f4df9a;border-radius:99px;padding:7px 10px;font-weight:900;font-size:13px}
+main{max-width:720px;margin:auto;padding:18px 13px 48px}
+.hero,.quiz,.finish{background:#fff;border:2px solid #e2edf7;border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 4px 0 #dce8f3}
+h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.muted{color:var(--muted);font-size:13px;line-height:1.45;margin:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:99px;background:#eef8ff;color:#23618a;padding:6px 10px;font-size:11px;font-weight:850}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;font-size:12px;font-weight:900;color:var(--muted)}
+.track{height:11px;border-radius:99px;background:#e2edf7;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.qmeta{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.4px}
+.question{font-size:clamp(20px,4.5vw,26px);line-height:1.35;margin:12px 0 18px;font-weight:850}
+.options{display:grid;gap:10px}.option{display:flex;gap:11px;align-items:center;width:100%;min-height:51px;padding:12px;text-align:left;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:15px;color:var(--ink);font-size:15px;font-weight:750;line-height:1.35;cursor:pointer}
+.letter{flex:0 0 28px;height:28px;border:2px solid var(--line);border-radius:9px;display:grid;place-items:center;font-size:12px;color:#60758a}
+.option:hover:not(:disabled){border-color:var(--blue);background:#f0faff}.option.selected{border-color:var(--blue);background:#e8f7ff}.option.correct{border-color:var(--green);background:#efffe7}.option.wrong{border-color:var(--red);background:#fff0f0}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:13px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#efffe7;border:2px solid #c8f0b2}.feedback.bad{background:#fff0f0;border:2px solid #ffcaca}
+.actions{display:flex;gap:10px;margin-top:16px}.btn{flex:1;min-height:48px;border:0;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:900;cursor:pointer}.check{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}.continue{display:none;background:var(--blue);color:#fff;box-shadow:0 4px 0 #1596d0}.continue.show{display:block}.btn:disabled{opacity:.45;cursor:not-allowed}
+.finish{text-align:center;padding:26px 18px}.trophy{font-size:58px}.score{font-size:42px;font-weight:950;color:#174a78}.finish h2{margin:6px 0 10px}.finish .btn{margin-top:16px;max-width:260px;background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+@media(max-width:480px){main{padding:12px 10px 34px}.hero,.quiz,.finish{padding:15px;border-radius:18px}.option{font-size:14px;padding:11px}.question{font-size:21px}}
+.streak{background:#fff0e8;border:1px solid #ffd4bd;border-radius:99px;padding:7px 10px;font-size:12px;font-weight:900;color:#b94a17;white-space:nowrap}\n.option:focus-visible,.btn:focus-visible,.back:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}\n.option{min-height:56px;line-height:1.4}\n.feedback{font-weight:650}\n@media(max-width:480px){.nav{gap:7px}.xp,.streak{padding:6px 8px;font-size:11px}.streak{max-width:100px}}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Mobile header refinement: keep branding, XP and streak on one balanced row */
+.nav{display:flex;align-items:center;gap:10px;min-height:72px;padding:10px 14px}
+.back{flex:0 0 42px;width:42px;height:42px}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap;font-size:clamp(16px,4.5vw,20px)}
+.brand small{margin-top:4px;font-size:9px;line-height:1.25;letter-spacing:.7px;white-space:normal}
+.xp,.streak{display:flex;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;white-space:nowrap;line-height:1.15}
+.xp{margin-left:0;padding:9px 11px;font-size:13px}
+.streak{padding:9px 11px;font-size:12px}
+@media(max-width:480px){
+  .nav{gap:7px;padding:9px 10px;min-height:68px}
+  .back{flex-basis:40px;width:40px;height:40px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:.55px}
+  .xp{padding:8px 9px;font-size:12px}
+  .streak{padding:8px 9px;font-size:11px;max-width:none}
+}
+@media(max-width:360px){
+  .nav{gap:5px;padding-inline:7px}
+  .back{flex-basis:36px;width:36px;height:36px}
+  .brand{font-size:15px}
+  .brand small{font-size:7px;letter-spacing:.3px}
+  .xp{padding:7px;font-size:11px}
+  .streak{padding:7px;font-size:10px}
+}
+
+.page-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;margin:0 0 16px!important;width:100%}.page-tab{display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-width:0!important;min-height:48px!important;padding:8px 5px!important;border:1.5px solid #dbe7d4!important;border-radius:12px!important;background:#fff!important;color:#365b38!important;text-decoration:none!important;text-align:center!important;font-size:13px!important;font-weight:750!important;line-height:1.2!important;white-space:nowrap!important;box-shadow:0 2px 0 #e5eddf!important}.page-tab.active{background:#dff8b8!important;border-color:#8bcf45!important;color:#245b18!important}.tab-icon{display:block!important;width:19px!important;height:19px!important;flex:0 0 19px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}.page-tab span{display:inline-block!important}@media(max-width:480px){.page-tab{gap:5px!important;font-size:12px!important}.tab-icon{width:17px!important;height:17px!important;flex-basis:17px!important}}
+main{max-width:720px;margin:auto;padding:16px 12px 42px}.hero,.panel{background:#fff;border:2px solid #e2edf7;border-radius:18px;padding:17px;margin-bottom:14px}h1{margin:0 0 7px;color:#174a78;font-size:clamp(24px,5vw,31px)}h2{font-size:19px;margin:0 0 12px}.muted{color:#64748b;font-size:13px;line-height:1.55;margin:0}.control{margin:17px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-weight:800;font-size:14px}.control output{color:#245b18;font-variant-numeric:tabular-nums}.control input{width:100%;accent-color:#58cc02;margin-top:10px}.result{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.metric{background:#f2f9ff;border:1px solid #dcecf8;border-radius:13px;padding:12px}.metric.primary{grid-column:1/-1;background:#efffe7;border:2px solid #c8f0b2;text-align:center}.metric small{display:block;color:#64748b;font-size:12px;font-weight:750}.value{display:block;font-size:clamp(23px,5vw,32px);font-weight:950;color:#245b18;font-variant-numeric:tabular-nums}.metric:not(.primary) .value{font-size:20px;color:#174a78}.formula{text-align:center;background:#eef8ff;padding:12px;border-radius:12px;font-size:21px;font-weight:900;color:#174a78;margin:14px 0}.btn{background:#58cc02;color:white;border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;min-height:44px}.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.preset{background:#fff;border:1.5px solid #dce6ef;border-radius:10px;padding:9px 12px;font-weight:750;color:#174a78;cursor:pointer}.wheel-wrap{display:flex;justify-content:center;align-items:center;background:#f4faff;border:1px solid #dcecf8;border-radius:15px;padding:12px;margin:12px 0}.wheel{width:min(58vw,220px);aspect-ratio:1;border:8px solid #7fb9dc;border-radius:50%;position:relative;display:grid;place-items:center;background:repeating-conic-gradient(from 0deg,#e7f4fc 0deg 10deg,#d7ebf8 10deg 20deg)}.wheel:before{content:"";position:absolute;inset:12%;border:2px dashed #7da6c0;border-radius:50%}.wheel .spoke{position:absolute;width:42%;height:4px;background:#e18a18;left:50%;top:50%;transform-origin:left center;border-radius:9px;transform:rotate(0deg)}.wheel .hub{width:18px;height:18px;border-radius:50%;background:#174a78;z-index:1}.wheel-label{font-size:12px;color:#64748b;text-align:center}.note{background:#fff8df;border:1px solid #f2e2a8;border-radius:12px;padding:12px;font-size:13px;line-height:1.5;margin-top:12px}@media(max-width:480px){main{padding:12px 10px}.hero,.panel{padding:14px}.page-tab{font-size:12px;gap:5px}.tab-icon{width:17px;height:17px;flex-basis:17px}}</style></head><body><header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="xp">⭐ <span id="xp">0</span> XP</div><div class="streak" aria-live="polite">🔥 <span id="streak">0</span> streak</div></div></header><main><nav class="page-tabs" aria-label="Conservation of angular momentum pages">
+<a class="page-tab " href="physics-conservation-of-angular-momentum.html" ><svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22z"/><path d="M4 5.5v16.5M8 6h8M8 10h8"/></svg><span>Learn</span></a>
+<a class="page-tab active" href="physics-conservation-of-angular-momentum-simulator.html" aria-current="page"><svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span>Simulate</span></a>
+<a class="page-tab " href="physics-conservation-of-angular-momentum-practice.html" ><svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01"/></svg><span>Practice</span></a></nav>
+<section class="hero"><h1>Conservation of Angular Momentum</h1><p class="muted">Change the moment of inertia and watch the angular speed adjust while angular momentum stays constant.</p></section>
+<section class="panel"><h2>Rotating system</h2><p class="muted">This fixed-axis model assumes negligible external torque.</p><div class="wheel-wrap"><div><div class="wheel" id="wheel"><span class="spoke" id="spoke"></span><span class="hub"></span></div><p class="wheel-label" id="wheelLabel">Final angular speed: 7.50 rad s⁻¹</p></div></div>
+<div class="control"><label for="i1">Initial moment of inertia I₁ <output id="i1o">5.0 kg m²</output></label><input id="i1" type="range" min="0.5" max="10" step="0.5" value="5"></div>
+<div class="control"><label for="w1">Initial angular speed ω₁ <output id="w1o">3.0 rad/s</output></label><input id="w1" type="range" min="0.5" max="12" step="0.5" value="3"></div>
+<div class="control"><label for="i2">Final moment of inertia I₂ <output id="i2o">2.0 kg m²</output></label><input id="i2" type="range" min="0.5" max="10" step="0.5" value="2"></div>
+<div class="result"><div class="metric primary"><small>Final angular speed ω₂</small><span class="value" id="w2">7.50</span><small>rad s⁻¹</small></div><div class="metric"><small>Initial angular momentum L₁</small><span class="value" id="l1">15.00</span><small>kg m² s⁻¹</small></div><div class="metric"><small>Final angular momentum L₂</small><span class="value" id="l2">15.00</span><small>kg m² s⁻¹</small></div><div class="metric"><small>Initial rotational KE</small><span class="value" id="k1">22.50</span><small>J</small></div><div class="metric"><small>Final rotational KE</small><span class="value" id="k2">56.25</span><small>J</small></div></div>
+<div class="formula">I₁ω₁ = I₂ω₂ &nbsp; ⇒ &nbsp; ω₂ = I₁ω₁ / I₂</div>
+<button class="btn" id="reset" type="button">↻ Reset values</button><div class="presets"><button class="preset" data-i1="5" data-w1="3" data-i2="2">Skater pulls arms in</button><button class="preset" data-i1="2" data-w1="4" data-i2="8">Moment of inertia increases</button><button class="preset" data-i1="4" data-w1="2" data-i2="4">No change in I</button></div>
+<div class="note" id="insight" aria-live="polite">I decreases, so angular speed increases. Angular momentum remains constant.</div></section>
+<section class="panel"><h2>What to observe</h2><p class="muted">Angular momentum stays constant in this model, but rotational kinetic energy can change when the system's moment of inertia changes. Internal work can transfer energy within the system.</p></section></main>
+<script>(()=>{const $=id=>document.getElementById(id),ids=["i1","w1","i2"];function calc(){const i1=+$("i1").value,w1=+$("w1").value,i2=+$("i2").value,L=i1*w1,w2=L/i2,k1=.5*i1*w1*w1,k2=.5*i2*w2*w2;$("i1o").textContent=i1.toFixed(1)+" kg m²";$("w1o").textContent=w1.toFixed(1)+" rad/s";$("i2o").textContent=i2.toFixed(1)+" kg m²";$("w2").textContent=w2.toFixed(2);$("l1").textContent=L.toFixed(2);$("l2").textContent=(i2*w2).toFixed(2);$("k1").textContent=k1.toFixed(2);$("k2").textContent=k2.toFixed(2);$("wheelLabel").textContent="Final angular speed: "+w2.toFixed(2)+" rad s⁻¹";$("spoke").style.transform="rotate("+(w2*12)+"deg)";$("insight").textContent=i2<i1?"I decreases, so angular speed increases. Angular momentum remains constant.":i2>i1?"I increases, so angular speed decreases. Angular momentum remains constant.":"Moment of inertia is unchanged, so angular speed remains unchanged.";}$("reset").addEventListener("click",()=>{["5","3","2"].forEach((v,i)=>$(ids[i]).value=v);calc()});document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>{ids.forEach(id=>$(id).value=b.dataset[id]);calc()}));ids.forEach(id=>$(id).addEventListener("input",calc));calc()})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="central-config.js"></script>
+<script src="central-auth.js"></script>
+<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
+<script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
+<script>
+/* This quiz intentionally has no floating audio controls. */
+(function(){
+  function removeQuizAudio(){
+    document.querySelectorAll('#skillup-tts-panel,[id^="skillup-tts-"],[aria-label="Text to speech controls"]').forEach(function(el){el.remove();});
+  }
+  removeQuizAudio();
+  new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html></body></html>

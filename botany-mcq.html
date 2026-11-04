@@ -608,6 +608,51 @@
 const questionsSource=banks[key],title=document.getElementById('title'),subtitle=document.getElementById('subtitle'),quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');if(title)title.textContent=requested;document.title='SkillUp | '+requested+' Quiz';if(!questionsSource||!questionsSource.length){quiz.style.display='none';notice.style.display='block';if(subtitle)subtitle.textContent='Original concept quiz not added yet.';noticeText.textContent='There is currently no original quiz for “'+requested+'”. The Chapter 1 quiz is not reused for other concepts.';return;}const N=Math.min(30,questionsSource.length);let questions=questionsSource.slice(0,N),i=0,score=0,answered=false;if(subtitle)subtitle.textContent=N+' original practice questions with explanations.';const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next'),counter=document.getElementById('counter'),scoreEl=document.getElementById('score'),bar=document.getElementById('bar');function render(){answered=false;next.disabled=true;next.textContent='Check answer';eEl.style.display='none';counter.textContent='Question '+(i+1)+' of '+N;scoreEl.textContent='Score: '+score;bar.style.width=(i/N*100)+'%';const x=questions[i];qEl.textContent=x.q;oEl.innerHTML='';const optionOrder=x.o.map((v,k)=>({v,k}));for(let j=optionOrder.length-1;j>0;j--){const r=Math.floor(Math.random()*(j+1));[optionOrder[j],optionOrder[r]]=[optionOrder[r],optionOrder[j]];}optionOrder.forEach((item,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+k)+'. '+item.v;b.dataset.originalIndex=String(item.k);b.onclick=()=>choose(item.k,b);oEl.appendChild(b);});}function choose(k,b){if(answered)return;answered=true;const x=questions[i],correctIndex=Number(x.a),selectedIndex=Number(k);[...oEl.children].forEach(el=>{el.disabled=true;const optionIndex=Number(el.dataset.originalIndex);if(optionIndex===correctIndex){el.classList.remove('wrong');el.classList.add('correct');el.setAttribute('aria-label',el.textContent+' — Correct answer');}});if(selectedIndex===correctIndex){score++;b.classList.remove('wrong');b.classList.add('correct')}else{b.classList.remove('correct');b.classList.add('wrong');b.setAttribute('aria-label',b.textContent+' — Incorrect answer');}eEl.textContent='💡 '+x.e;eEl.style.display='block';scoreEl.textContent='Score: '+score;next.disabled=false;next.textContent=i===N-1?'Finish':'Next question';}next.onclick=()=>{if(!answered)return;if(i<N-1){i++;render()}else finish()};function finish(){quiz.style.display='none';document.getElementById('result').style.display='block';document.getElementById('final').textContent=score+' / '+N;document.getElementById('message').textContent=score>=13?'Excellent work!':score>=10?'Strong performance. Review the missed concepts.':'Review the concept and retry the quiz.';}render();})();
 </script>
 
+<script>
+/* Botany quiz recovery: initialize the quiz if the legacy inline loader fails. */
+(function(){
+  function startRecovery(){
+    const qEl=document.getElementById('question'),oEl=document.getElementById('options');
+    if(!qEl||!oEl||qEl.textContent.trim()||oEl.children.length)return;
+    const params=new URLSearchParams(location.search),requested=(params.get('concept')||'What Is Living?').trim();
+    const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+    const wanted=norm(requested);
+    let bank=null;
+    for(const name of Object.keys(window)){
+      if(!/^skillUp.*Questions$/.test(name))continue;
+      if(norm(name.replace(/^skillUp/,'').replace(/Questions$/,''))===wanted){
+        const value=window[name];if(Array.isArray(value)&&value.length){bank=value;break;}
+      }
+    }
+    if(!bank){
+      const notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText'),quiz=document.getElementById('quiz');
+      if(notice&&noticeText&&quiz){quiz.style.display='none';notice.style.display='block';noticeText.textContent='Quiz data for “'+requested+'” could not be loaded. Please return to the Botany Path and reopen this concept.';}
+      return;
+    }
+    const quiz=document.getElementById('quiz'),next=document.getElementById('next'),counter=document.getElementById('counter'),scoreEl=document.getElementById('score'),bar=document.getElementById('bar'),explain=document.getElementById('explain');
+    const total=Math.min(30,bank.length);let index=0,score=0,answered=false;
+    function render(){
+      const item=bank[index],question=item.q||item.question||item.text,choices=item.o||item.options;
+      if(!question||!Array.isArray(choices)||!choices.length){qEl.textContent='This question has incomplete data.';oEl.innerHTML='';return;}
+      answered=false;next.disabled=true;next.textContent='Check answer';explain.style.display='none';
+      counter.textContent='Question '+(index+1)+' of '+total;scoreEl.textContent='Score: '+score;bar.style.width=(index/total*100)+'%';
+      qEl.textContent=question;oEl.innerHTML='';
+      const order=choices.map((v,k)=>({v,k}));for(let j=order.length-1;j>0;j--){const r=Math.floor(Math.random()*(j+1));[order[j],order[r]]=[order[r],order[j]];}
+      order.forEach((entry,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+k)+'. '+entry.v;b.dataset.originalIndex=entry.k;b.onclick=()=>choose(entry.k,b,item);oEl.appendChild(b);});
+    }
+    function choose(selected,button,item){
+      if(answered)return;answered=true;const correct=Number(item.a??item.answer??item.correctAnswer);
+      [...oEl.children].forEach(el=>{el.disabled=true;if(Number(el.dataset.originalIndex)===correct)el.classList.add('correct');});
+      if(selected===correct){score++;button.classList.add('correct');}else button.classList.add('wrong');
+      explain.textContent='💡 '+(item.e||item.explanation||'Review the concept and try the next question.');explain.style.display='block';
+      scoreEl.textContent='Score: '+score;next.disabled=false;next.textContent=index===total-1?'Finish':'Next question';
+    }
+    next.onclick=()=>{if(!answered)return;if(index<total-1){index++;render();}else{quiz.innerHTML='<div class="score">'+score+' / '+total+'</div><p>Quiz complete. Review the questions and try again.</p><button class="restart" onclick="location.reload()">Try Again</button>';}};
+    render();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startRecovery);else startRecovery();
+})();
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>

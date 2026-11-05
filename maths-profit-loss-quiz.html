@@ -93,18 +93,22 @@ function render(){
  $('fill').style.width=(index/questions.length*100)+'%';
  document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
  $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
+ const questionNode=$('question');
+ questionNode.textContent=String(item.q||'Question content unavailable');
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
- $('options').replaceChildren();
- item.o.forEach((text,j)=>{
+ const optionsNode=$('options');
+ while(optionsNode.firstChild)optionsNode.removeChild(optionsNode.firstChild);
+ (item.o||[]).forEach((optionText,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
-  const label=document.createElement('span');label.textContent=text;b.append(letter,label);
-  b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
-  $('options').appendChild(b);
+  const label=document.createElement('span');label.textContent=String(optionText);
+  b.appendChild(letter);b.appendChild(label);
+  b.addEventListener('click',function(){if(locked)return;chosen=j;const current=optionsNode.querySelectorAll('.option');current.forEach(function(x){x.classList.remove('selected');});b.classList.add('selected');$('check').disabled=false;});
+  optionsNode.appendChild(b);
  });
+ if(!item.o||item.o.length!==4)throw new Error('Question '+(index+1)+' must have four options');
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;

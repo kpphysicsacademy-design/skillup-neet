@@ -95,9 +95,9 @@ const originalQuestions=questions.slice();
 let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);\nfunction mathify(value){
  return String(value)
-  .replace(/(^|[^\\w])(-?\\d+)\\s*\\/\\s*(\\d+)(?![\\w])/g,(m,prefix,n,d)=>prefix+'\\\\(\\\\frac{'+n+'}{'+d+'}\\\\)')
-  .replace(/□/g,'\\\\(\\\\square\\\\)')
-  .replace(/(^|\\s)([<>≤≥=])(\\s|$)/g,(m,a,s,b)=>a+'\\\\('+s+'\\\\)'+b);
+  .replace(/(^|[^\w])(-?\d+)\s*\/\s*(\d+)(?![\w])/g,(m,prefix,n,d)=>prefix+'\\(\\frac{'+n+'}{'+d+'}\\)')
+  .replace(/□/g,'\\(\\square\\)')
+  .replace(/(^|\s)([<>≤≥=])(\s|$)/g,(m,a,s,b)=>a+'\\('+s+'\\)'+b);
 }
 function typesetMath(node){
  if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise([node]).catch(()=>{});}
@@ -122,6 +122,7 @@ function render(){
   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
   $('options').appendChild(b);
  });
+ typesetMath($('quiz'));
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;

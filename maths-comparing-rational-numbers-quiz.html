@@ -56,11 +56,12 @@ main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
 </style>
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']], processEscapes: true },
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
   startup: { typeset: false }
 };
 </script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -96,11 +97,12 @@ let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);\nfunction mathify(value){
  return String(value)
   .replace(/(^|[^\w])(-?\d+)\s*\/\s*(\d+)(?![\w])/g,(m,prefix,n,d)=>prefix+'\\(\\frac{'+n+'}{'+d+'}\\)')
-  .replace(/□/g,'\\(\\square\\)')
-  .replace(/(^|\s)([<>≤≥=])(\s|$)/g,(m,a,s,b)=>a+'\\('+s+'\\)'+b);
+  .replace(/□/g,'\\(\\square\\)');
 }
 function typesetMath(node){
- if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise([node]).catch(()=>{});}
+ if(window.MathJax&&typeof window.MathJax.typesetPromise==='function'){
+  window.MathJax.typesetPromise([node]).catch(function(){});
+ }
 }
 
 function render(){

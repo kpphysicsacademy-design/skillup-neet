@@ -86,6 +86,7 @@ const questions=[{"q":"Write 5,000 in standard form.","o":["5 × 10³","5 × 10�
 const originalQuestions=questions.slice();
 let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);
+function clearChildren(node){while(node.firstChild)node.removeChild(node.firstChild);}
 function render(){
  chosen=null;locked=false;const item=questions[index];
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
@@ -97,7 +98,7 @@ function render(){
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
- $('options').replaceChildren();
+ clearChildren($('options'));
  item.o.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
@@ -125,13 +126,13 @@ $('continue').addEventListener('click',()=>{
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
-  wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;item.append(q,yours,correct,why);review.appendChild(item);});
+  wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;item.appendChild(q);item.appendChild(yours);item.appendChild(correct);item.appendChild(why);review.appendChild(item);});
  }else{review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';}
- $('finishSlot').replaceChildren(card);
+ clearChildren($('finishSlot'));$('finishSlot').appendChild(card);
  function reset(onlyWrong){
   if(onlyWrong&&wrongAttempts.length){const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrongQs);}
   else questions.splice(0,questions.length,...originalQuestions);
-  index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+  index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';clearChildren($('finishSlot'));render();window.scrollTo({top:0,behavior:'smooth'});
  }
  $('retry').addEventListener('click',()=>reset(false));
  $('retryWrong').addEventListener('click',()=>reset(true));

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261107-herons-formula-quiz-v4">
+<meta name="skillup-release" content="20261107-herons-formula-mathjax-design-v2">
 <meta name="description" content="Practise 30 Class 9 questions on Heron's formula: semi-perimeter, triangle validity, area calculations and applications.">
 <title>Heron's Formula | Class 9 Maths | SkillUp</title>
 <style>
@@ -56,7 +56,10 @@ main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
  .btn{min-height:37px;font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+
+.MathJax{font-size:1.03em!important}.formula-card{box-shadow:0 4px 14px rgba(25,55,75,.045);border-color:#dce8ee;background:linear-gradient(135deg,#fff,#f7fbfe)}.formula-line{padding:3px 0}.quiz,.finish{box-shadow:0 5px 18px rgba(25,55,75,.055);border-color:#dce8ee}.topic-actions a{transition:transform .16s ease,box-shadow .16s ease}.topic-actions a:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,134,184,.12)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']]},chtml:{scale:1}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
 </head>
 <body>
 <header><div class="nav">
@@ -69,8 +72,8 @@ main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
 <section class="hero">
 <h1>Heron's Formula</h1>
 <p class="muted">Find a triangle's area from its three side lengths using the semi-perimeter and Heron's formula.</p>
-<div class="topic-actions"><a href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">📘 Brief Learn</a><a href="maths-herons-formula-simulator.html?v=20261107-herons-formula-sim-v1">📐 Simulate</a><a href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1">Maths Home</a></div>
-<section class="formula-card" aria-label="Formula quick reference"><strong>Quick formula reminder</strong><div class="formula-line">s = (a + b + c) ÷ 2</div><div class="formula-line">Area = √[s(s − a)(s − b)(s − c)]</div><small>Check that the sum of any two sides is greater than the third side.</small></section>
+<div class="topic-actions"><a href="maths-herons-formula-learn.html?v=20261107-herons-formula-mathjax-design-v2">📘 Brief Learn</a><a href="maths-herons-formula-simulator.html?v=20261107-herons-formula-mathjax-design-v2">📐 Simulate</a><a href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1">Maths Home</a></div>
+<section class="formula-card" aria-label="Formula quick reference"><strong>Quick formula reminder</strong><div class="formula-line">\\(s=\\frac{a+b+c}{2}\\)</div><div class="formula-line">\\(A=\\sqrt{s(s-a)(s-b)(s-c)}\\)</div><small>Check that the sum of any two sides is greater than the third side.</small></section>
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
 </section>
@@ -97,7 +100,7 @@ function render(){
  $('fill').style.width=(index/questions.length*100)+'%';
  document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
  $('qmeta').textContent=item.d+' · QUESTION '+(index+1);
- $('question').textContent=item.q;
+ $('question').textContent=item.q; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('question')]);
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
@@ -105,7 +108,7 @@ function render(){
  item.o.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
-  const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+  const label=document.createElement('span');label.textContent=text;b.append(letter,label); if(window.MathJax?.typesetPromise) MathJax.typesetPromise([label]);
   b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
   $('options').appendChild(b);
  });
@@ -115,8 +118,8 @@ $('check').addEventListener('click',()=>{
  locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
- else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.o[item.a]+'.';}
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([feedback]);}
+ else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.o[item.a]+'.'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([feedback]);}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{
@@ -125,7 +128,7 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Heron's Formula Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><div class="topic-actions" style="margin-top:16px"><a href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">📘 Review Brief Learn</a><a href="maths-herons-formula-simulator.html?v=20261107-herons-formula-sim-v1">📐 Open Simulator</a></div><a href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1" style="display:inline-block;margin-top:12px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Heron's Formula Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><div class="topic-actions" style="margin-top:16px"><a href="maths-herons-formula-learn.html?v=20261107-herons-formula-mathjax-design-v2">📘 Review Brief Learn</a><a href="maths-herons-formula-simulator.html?v=20261107-herons-formula-mathjax-design-v2">📐 Open Simulator</a></div><a href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1" style="display:inline-block;margin-top:12px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-herons-formula-sim-v1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-herons-formula-mathjax-design-v2">
 <meta name="description" content="Interactive Heron's formula simulator. Adjust three valid triangle sides and watch semi-perimeter and area update live.">
 <title>Heron's Formula · Simulator | SkillUp Maths</title>
 <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1}};</script>
@@ -20,8 +20,11 @@ svg{display:block;width:100%;max-width:420px;margin:0 auto}.shape{fill:#eff8fc;s
 .formula{background:#eef8ff;border:1px solid #d7eaf5;border-radius:10px;padding:11px;margin:9px 0;text-align:center;overflow-x:auto;color:#236b91;font-weight:700}.note{font-size:12px;line-height:1.5;color:#526575;margin:9px 0 0}
 .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions a{flex:1;text-align:center;text-decoration:none;padding:12px;border-radius:10px;background:var(--green);color:#fff;font-weight:850;font-size:13px}.actions a.secondary{background:#eaf5fb;color:#236b91}.actions a.home{background:#f2f5f6;color:#52616c}
 @media(max-width:420px){main{padding:13px 8px 25px}.card{padding:12px}h1{font-size:22px}}
+
+/* MathJax and responsive simulator styling */
+.MathJax{font-size:1.04em!important}.card{box-shadow:0 5px 18px rgba(25,55,75,.055);border-color:#dce8ee}.formula{box-shadow:inset 3px 0 0 #248ac0;background:linear-gradient(135deg,#eff8ff,#f8fcff);border-color:#d4e8f3;border-radius:12px;padding:13px}.value{box-shadow:0 2px 7px rgba(25,55,75,.04)}.control input:focus-visible{outline:3px solid #248ac044;outline-offset:3px}.actions a{transition:transform .16s ease,box-shadow .16s ease}.actions a:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,134,184,.12)}
 </style></head><body>
-<header><div class="nav"><a class="back" href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-quiz-v4" aria-label="Back to quiz">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">Brief Learn ↗</a></div></header>
+<header><div class="nav"><a class="back" href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-mathjax-design-v2" aria-label="Back to quiz">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-herons-formula-learn.html?v=20261107-herons-formula-mathjax-design-v2">Brief Learn ↗</a></div></header>
 <main><h1>Heron's Formula · Simulate</h1><p class="sub">Adjust the three side lengths. The triangle stays valid while its semi-perimeter and area update instantly.</p>
 <section class="card">
 <svg viewBox="0 0 380 270" role="img" aria-label="Triangle with three adjustable side lengths">
@@ -37,7 +40,7 @@ svg{display:block;width:100%;max-width:420px;margin:0 auto}.shape{fill:#eff8fc;s
 <p class="note" id="explain" aria-live="polite">s = 21 cm; A = √(21 × 8 × 7 × 6) = 84 cm².</p>
 </section>
 <section class="card"><strong>Explore:</strong><p class="note">Change one side at a time. Notice how the semi-perimeter changes and how the triangle's area responds. Each slider's range preserves the triangle inequality.</p></section>
-<div class="actions"><a class="secondary" href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">Review brief learn</a><a href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-quiz-v3">Start 30-question quiz</a><a class="home" href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1">Maths Home</a></div>
+<div class="actions"><a class="secondary" href="maths-herons-formula-learn.html?v=20261107-herons-formula-mathjax-design-v2">Review brief learn</a><a href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-mathjax-design-v2">Start 30-question quiz</a><a class="home" href="maths-home.html?v=20261107-maths-quiz-visibility-fix-v1">Maths Home</a></div>
 </main>
 <script>
 (function(){
@@ -64,7 +67,7 @@ function update(){
  $('labelCVal').textContent='c = '+c+' cm';
  $('sideAOut').textContent=a+' cm';$('sideBOut').textContent=b+' cm';$('sideCOut').textContent=c+' cm';
  $('semiValue').textContent=s+' cm';$('areaValue').textContent=(Number.isInteger(area)?area:area.toFixed(2))+' cm²';
- $('explain').textContent='s = ('+a+' + '+b+' + '+c+') ÷ 2 = '+s+' cm. Area = √['+s+' × '+(s-a)+' × '+(s-b)+' × '+(s-c)+'] = '+(Number.isInteger(area)?area:area.toFixed(2))+' cm².';
+ $('explain').innerHTML='\\(s=\\frac{'+a+'+'+b+'+'+c+'}{2}='+s+'\\text{ cm}\\). Area = \\('+ (Number.isInteger(area)?area:area.toFixed(2))+'\\text{ cm}^2\\).'; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$ ('explain')]);
 }
 ['sideA','sideB','sideC'].forEach(id=>$(id).addEventListener('input',update));
 update();

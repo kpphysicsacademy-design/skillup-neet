@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-parallelogram-sim-v1">
+<meta name="description" content="Interactive parallelogram simulator for side lengths, angle relationships and bisecting diagonals, with MathJax formulas.">
+<title>Parallelogram Theorems · Simulator | SkillUp Maths</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+<style>
+:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:2}.nav{max-width:620px;margin:auto;min-height:48px;padding:7px 12px;display:flex;align-items:center;gap:10px}
+.back{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;text-decoration:none;color:var(--blue)}
+.brand{font-size:15px;font-weight:850;flex:1}.pill{font-size:11px;font-weight:800;padding:6px 9px;border-radius:9px;background:#eef7fc;color:#236b91;text-decoration:none}
+main{width:min(100% - 24px,620px);margin:auto;padding:16px 8px 32px}h1{font-size:24px;margin:2px 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:11px 0}
+svg{display:block;width:100%;max-width:420px;margin:0 auto}.shape{fill:#eff8fc;stroke:#4388ad;stroke-width:3}.diag{stroke:#d48b22;stroke-width:2.4;stroke-dasharray:6 4}.dot{fill:#48a92c}svg text{font:12px system-ui;fill:#345}
+.control{margin:12px 0}.control label{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:750;margin-bottom:6px}.control input{width:100%;accent-color:#248ac0}
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:13px}.value{background:#eef8ff;border:1px solid #d7eaf5;border-radius:10px;padding:11px;text-align:center}.value span{display:block;color:#547185;font-size:11px}.value strong{display:block;font-size:20px;color:#236b91;margin-top:3px}
+.formula{background:#eef8ff;border:1px solid #d7eaf5;border-radius:10px;padding:11px;margin:9px 0;text-align:center;overflow-x:auto;color:#236b91;font-weight:700}.note{font-size:12px;line-height:1.5;color:#526575;margin:9px 0 0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions a{flex:1;text-align:center;text-decoration:none;padding:12px;border-radius:10px;background:var(--green);color:#fff;font-weight:850;font-size:13px}.actions a.secondary{background:#eaf5fb;color:#236b91}
+@media(max-width:420px){main{padding:13px 8px 25px}.card{padding:12px}h1{font-size:22px}}
+</style></head><body>
+<header><div class="nav"><a class="back" href="maths-parallelogram-theorems-class9-quiz.html?v=20261107-parallelogram-learn-sim-v1" aria-label="Back to quiz">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-parallelogram-learn.html?v=20261107-parallelogram-learn-v1">Brief Learn ↗</a></div></header>
+<main><h1>Parallelogram · Simulate</h1><p class="sub">Change side lengths and an interior angle. Watch the shape and diagonal intersection update live.</p>
+<section class="card">
+<svg viewBox="0 0 380 280" role="img" aria-label="Interactive parallelogram ABCD with diagonals AC and BD meeting at O"><polygon id="shape" class="shape" points="60,210 240,210 200,90 20,90"/><line id="diagAC" class="diag" x1="60" y1="210" x2="200" y2="90"/><line id="diagBD" class="diag" x1="20" y1="90" x2="240" y2="210"/><circle id="pointO" class="dot" cx="130" cy="150" r="4"/><text id="labelA" x="48" y="229">A</text><text id="labelB" x="247" y="225">B</text><text id="labelC" x="205" y="80">C</text><text id="labelD" x="8" y="80">D</text><text id="labelO" x="137" y="146">O</text><text id="sideAB" x="150" y="230" text-anchor="middle">AB = 18</text><text id="sideAD" x="27" y="145">AD = 8</text></svg>
+<div class="control"><label for="base"><span>Base AB</span><output id="baseOut">18 cm</output></label><input id="base" type="range" min="10" max="24" step="1" value="18"></div>
+<div class="control"><label for="side"><span>Side AD</span><output id="sideOut">8 cm</output></label><input id="side" type="range" min="5" max="12" step="1" value="8"></div>
+<div class="control"><label for="angle"><span>Interior angle A</span><output id="angleOut">60°</output></label><input id="angle" type="range" min="40" max="140" step="5" value="60"></div>
+<div class="values"><div class="value"><span>Opposite side CD</span><strong id="cdValue">18 cm</strong></div><div class="value"><span>Opposite side BC</span><strong id="bcValue">8 cm</strong></div><div class="value"><span>Opposite angle C</span><strong id="cAngle">60°</strong></div><div class="value"><span>Adjacent angle B</span><strong id="bAngle">120°</strong></div></div>
+<div class="formula">\(AB=CD,\quad AD=BC\)</div><div class="formula">\(AO=OC,\quad BO=OD\)</div>
+<p class="note" id="explain" aria-live="polite">Opposite sides and angles are equal. Adjacent angles add to 180°. Diagonals bisect each other.</p>
+</section>
+<section class="card"><strong>Explore:</strong><p class="note">Move each slider. The parallelogram changes shape, but its defining side, angle and diagonal relationships remain true.</p></section>
+<div class="actions"><a class="secondary" href="maths-parallelogram-learn.html?v=20261107-parallelogram-learn-v1">Review theorems</a><a href="maths-parallelogram-theorems-class9-quiz.html?v=20261107-parallelogram-learn-sim-v1">Start 30-question quiz</a></div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+function update(){
+ const base=Number($('base').value),side=Number($('side').value),angle=Number($('angle').value),rad=angle*Math.PI/180;
+ const A={x:65,y:220},B={x:65+base*9,y:220},D={x:65+side*8*Math.cos(rad),y:220-side*8*Math.sin(rad)},C={x:B.x+D.x-A.x,y:B.y+D.y-A.y},O={x:(A.x+C.x)/2,y:(A.y+C.y)/2};
+ const pts=[A,B,C,D].map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
+ $('shape').setAttribute('points',pts);
+ $('diagAC').setAttribute('x1',A.x);$('diagAC').setAttribute('y1',A.y);$('diagAC').setAttribute('x2',C.x);$('diagAC').setAttribute('y2',C.y);
+ $('diagBD').setAttribute('x1',B.x);$('diagBD').setAttribute('y1',B.y);$('diagBD').setAttribute('x2',D.x);$('diagBD').setAttribute('y2',D.y);
+ $('pointO').setAttribute('cx',O.x);$('pointO').setAttribute('cy',O.y);
+ [['labelA',A,-13,18],['labelB',B,7,17],['labelC',C,7,-8],['labelD',D,-16,-8],['labelO',O,7,-6]].forEach(([id,p,dx,dy])=>{$(id).setAttribute('x',p.x+dx);$(id).setAttribute('y',p.y+dy);});
+ $('sideAB').setAttribute('x',(A.x+B.x)/2);$('sideAB').setAttribute('y',Math.min(270,A.y+20));$('sideAB').textContent='AB = '+base+' cm';
+ $('sideAD').setAttribute('x',Math.min(A.x,D.x)-2);$('sideAD').setAttribute('y',(A.y+D.y)/2);$('sideAD').textContent='AD = '+side+' cm';
+ $('baseOut').textContent=base+' cm';$('sideOut').textContent=side+' cm';$('angleOut').textContent=angle+'°';
+ $('cdValue').textContent=base+' cm';$('bcValue').textContent=side+' cm';$('cAngle').textContent=angle+'°';$('bAngle').textContent=(180-angle)+'°';
+ $('explain').textContent='AB = CD = '+base+' cm; AD = BC = '+side+' cm. Opposite angles A and C are '+angle+'°. Adjacent angles B and D are '+(180-angle)+'°. Diagonals meet at their common midpoint O.';
+}
+['base','side','angle'].forEach(id=>$(id).addEventListener('input',update));update();
+})();
+</script></body></html>

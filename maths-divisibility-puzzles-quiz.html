@@ -54,7 +54,186 @@ main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
  .btn{min-height:37px;font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+
+/* MathJax + refreshed responsive learning design */
+.MathJax{font-size:1.04em!important}.formula .MathJax{font-weight:700}.card{box-shadow:0 5px 18px rgba(25,55,75,.055);border-color:#dce8ee}.card h2{color:#176f99}.formula{border:1px solid #d6eaf4;background:linear-gradient(135deg,#eff8ff,#f7fbff);color:#174d69}.links a{transition:transform .16s ease,box-shadow .16s ease}.links a:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,134,184,.12)}
+.question .MathJax{font-size:1.02em!important}.option .MathJax{font-size:1em!important}.quiz{box-shadow:0 5px 18px rgba(25,55,75,.055)}.study-links a{transition:transform .16s ease,box-shadow .16s ease}.study-links a:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,134,184,.12)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['
+<body>
+<header><div class="nav">
+<a class="back" href="maths-home.html?v=20261106-maths-header-v6" aria-label="Back to Maths Path">←</a>
+<div class="brand">SkillUp <span style="color:#58a900">Maths</span></div>
+<div class="pill xp">⭐ <span id="xp">0</span> XP</div>
+<div class="pill streak">🔥 <span id="streak">0</span> streak</div>
+</div></header>
+<main>
+<section class="hero">
+<h1>Divisibility Puzzles</h1>
+<p class="muted">Solve number challenges using divisibility rules, factors, multiples and logical reasoning.</p>
+<div class="study-links"><a href="maths-divisibility-puzzles-learn.html?v=20261107-divisibility-puzzles-brief-learn-v1">📘 Brief Learn</a><a href="maths-divisibility-puzzles-simulator.html?v=20261107-divisibility-puzzles-simulator-v1">🧩 Simulator</a></div>
+<div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
+<div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
+</section>
+<section class="quiz" id="quiz">
+<div class="qmeta" id="qmeta">QUESTION 1</div>
+<h2 class="question" id="question">Divisibility mastered!</h2>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div>
+</section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"d":"BASIC","q":"Which digit can replace □ to make 4□2 divisible by 3?","o":["1","2","3","0, 3, 6 or 9"],"a":3,"why":"The digit sum is 6 + □. It is divisible by 3 when □ is 0, 3, 6 or 9."},{"d":"BASIC","q":"Which digit can replace □ so that 57□ is divisible by 10?","o":["0","5","7","9"],"a":0,"why":"A number is divisible by 10 when its last digit is 0."},{"d":"BASIC","q":"The pattern is 6, 12, 18, 24, ... What is the 7th term?","o":["36","42","48","54"],"a":1,"why":"The pattern adds 6 each time. The 7th term is 6 × 7 = 42."},{"d":"BASIC","q":"A number 2□5 is divisible by 5. Which digit could replace □?","o":["0","3","7","Any digit"],"a":3,"why":"The number ends in 5, so it is divisible by 5 regardless of the middle digit."},{"d":"BASIC","q":"Which digit makes 6□3 divisible by 3?","o":["0","1","2","4"],"a":0,"why":"6 + 0 + 3 = 9, divisible by 3."},{"d":"BASIC","q":"Which number is divisible by both 2 and 5?","o":["125","230","342","415"],"a":1,"why":"A number divisible by both 2 and 5 must end in 0; 230 does."},{"d":"BASIC","q":"Which number is divisible by 9?","o":["235","351","352","425"],"a":1,"why":"For 351, the digit sum is 3 + 5 + 1 = 9, which is divisible by 9. The other digit sums are not multiples of 9."},{"d":"BASIC","q":"The pattern is 4, 8, 12, 16, ... What is the first term in the pattern that is divisible by 9?","o":["24","28","32","36"],"a":3,"why":"The terms are multiples of 4. The first common multiple of 4 and 9 is 36."},{"d":"BASIC","q":"Which digit can replace □ in 81□ to make the number divisible by 5?","o":["1 only","5 only","0 or 5","0 only"],"a":2,"why":"A number is divisible by 5 when its last digit is 0 or 5."},{"d":"BASIC","q":"Which of these is divisible by 6?","o":["123","144","155","221"],"a":1,"why":"144 is even and its digit sum is 1 + 4 + 4 = 9, divisible by 3; so it is divisible by 6."},{"d":"MEDIUM","q":"Find the smallest digit □ that makes 52□ divisible by 3.","o":["0","1","2","3"],"a":2,"why":"5 + 2 + □ = 7 + □. The smallest digit making this a multiple of 3 is 2, giving sum 9."},{"d":"MEDIUM","q":"What is the greatest digit □ that makes 7□2 divisible by 9?","o":["0","3","6","9"],"a":3,"why":"7 + 9 + 2 = 18, divisible by 9; 9 is the greatest valid digit."},{"d":"MEDIUM","q":"Which digit makes 34□ divisible by 4?","o":["1","2","4","6"],"a":2,"why":"The last two digits must be divisible by 4; 44 is, so □ = 4."},{"d":"MEDIUM","q":"What is the smallest digit □ that makes 6□5 divisible by 3?","o":["0","1","2","4"],"a":1,"why":"The digit sum is 11 + □. The smallest digit that makes this a multiple of 3 is 1, giving a sum of 12."},{"d":"MEDIUM","q":"A three-digit number 4□8 is divisible by 9. What is □?","o":["2","4","6","8"],"a":2,"why":"4 + 6 + 8 = 18, divisible by 9, so □ = 6."},{"d":"MEDIUM","q":"Which number is divisible by both 3 and 5?","o":["125","132","345","418"],"a":2,"why":"345 ends in 5 and its digit sum is 3 + 4 + 5 = 12, divisible by 3."},{"d":"MEDIUM","q":"What is the smallest digit □ that makes 8□4 divisible by 4?","o":["0","1","2","3"],"a":0,"why":"The last two digits must form a multiple of 4. With □ = 0, the last two digits are 04, so 804 is divisible by 4."},{"d":"MEDIUM","q":"The pattern is 15, 21, 27, 33, ... What is the first term divisible by 9?","o":["21","27","33","39"],"a":1,"why":"The pattern increases by 6. The first term divisible by 9 is 27, the third term."},{"d":"MEDIUM","q":"A number is divisible by 8. Which check is useful?","o":["Sum of all digits is divisible by 8","Last three digits form a number divisible by 8","Last digit is 8","Number ends in an even digit"],"a":1,"why":"For divisibility by 8, check whether the last three digits form a multiple of 8."},{"d":"MEDIUM","q":"Which digit makes 12□ divisible by 6?","o":["0","2","5","7"],"a":0,"why":"A number divisible by 6 must be even and have a digit sum divisible by 3. 120 is even and 1 + 2 + 0 = 3."},{"d":"HARD","q":"Find the smallest digit □ so that 3□6 is divisible by 9.","o":["0","3","6","9"],"a":0,"why":"3 + 0 + 6 = 9, so the smallest digit is 0."},{"d":"HARD","q":"A number 5□2 is divisible by 9. Which digit replaces □?","o":["0","1","2","3"],"a":2,"why":"5 + 2 + 2 = 9, so □ = 2."},{"d":"HARD","q":"Which digit can replace □ to make 24□ divisible by both 3 and 4?","o":["0","2","4","6"],"a":0,"why":"240 is divisible by 4 (last two digits 40) and by 3 (2 + 4 + 0 = 6)."},{"d":"HARD","q":"A four-digit number 3□72 is divisible by 9. What digit belongs in the box?","o":["4","5","6","7"],"a":2,"why":"3 + 6 + 7 + 2 = 18, divisible by 9, so □ = 6."},{"d":"HARD","q":"The pattern is 8, 16, 24, 32, ... What is the first term divisible by 9?","o":["56","64","72","80"],"a":2,"why":"The terms are multiples of 8. The first common multiple of 8 and 9 is 72, which is the 9th term."},{"d":"HARD","q":"Which is the smallest positive number that is divisible by both 6 and 8?","o":["12","18","24","48"],"a":2,"why":"The least common multiple of 6 and 8 is 24."},{"d":"HARD","q":"A number 4□5 is divisible by 3 and 5. Which digit could replace □?","o":["0","1","2","4"],"a":0,"why":"It already ends in 5. For divisibility by 3, 4 + □ + 5 must be divisible by 3; among these options, 0 gives 9."},{"d":"HARD","q":"Which digit makes 7□0 divisible by 9?","o":["0","1","2","3"],"a":2,"why":"7 + 2 + 0 = 9, so the missing digit is 2."},{"d":"HARD","q":"A number is divisible by 12. Which pair of tests guarantees divisibility by 12?","o":["Divisible by 2 and 6","Divisible by 3 and 4","Divisible by 2 and 9","Divisible by 5 and 6"],"a":1,"why":"Since 12 = 3 × 4 and 3 and 4 are coprime, divisibility by both 3 and 4 guarantees divisibility by 12."},{"d":"HARD","q":"The pattern is 11, 22, 33, 44, ... What is the first term divisible by 9?","o":["77","88","99","110"],"a":2,"why":"The terms are 11 × n. Since 11 and 9 have no common factor, the first term divisible by 9 is 11 × 9 = 99."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q; if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('question')]);
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+  const b=document.createElement('button');b.type='button';b.className='option';
+  const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+  const label=document.createElement('span');label.textContent=text.replace(/□/g,'□');b.append(letter,label);
+  b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+  $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;
+ locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const feedback=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
+ else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Divisibility Puzzles Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261106-maths-header-v6" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+  review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+  wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function reset(onlyWrong){
+  if(onlyWrong&&wrongAttempts.length){const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrongQs);}
+  else questions.splice(0,questions.length,...originalQuestions);
+  index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>reset(false));
+ $('retryWrong').addEventListener('click',()=>reset(true));
+});
+render();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body>
+</html>,'
+<body>
+<header><div class="nav">
+<a class="back" href="maths-home.html?v=20261106-maths-header-v6" aria-label="Back to Maths Path">←</a>
+<div class="brand">SkillUp <span style="color:#58a900">Maths</span></div>
+<div class="pill xp">⭐ <span id="xp">0</span> XP</div>
+<div class="pill streak">🔥 <span id="streak">0</span> streak</div>
+</div></header>
+<main>
+<section class="hero">
+<h1>Divisibility Puzzles</h1>
+<p class="muted">Solve number challenges using divisibility rules, factors, multiples and logical reasoning.</p>
+<div class="study-links"><a href="maths-divisibility-puzzles-learn.html?v=20261107-divisibility-puzzles-brief-learn-v1">📘 Brief Learn</a><a href="maths-divisibility-puzzles-simulator.html?v=20261107-divisibility-puzzles-simulator-v1">🧩 Simulator</a></div>
+<div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
+<div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
+</section>
+<section class="quiz" id="quiz">
+<div class="qmeta" id="qmeta">QUESTION 1</div>
+<h2 class="question" id="question">Divisibility mastered!</h2>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="actions"><button class="btn check" id="check" disabled>Check answer</button><button class="btn continue" id="continue">Continue →</button></div>
+</section>
+<div id="finishSlot"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const questions=[{"d":"BASIC","q":"Which digit can replace □ to make 4□2 divisible by 3?","o":["1","2","3","0, 3, 6 or 9"],"a":3,"why":"The digit sum is 6 + □. It is divisible by 3 when □ is 0, 3, 6 or 9."},{"d":"BASIC","q":"Which digit can replace □ so that 57□ is divisible by 10?","o":["0","5","7","9"],"a":0,"why":"A number is divisible by 10 when its last digit is 0."},{"d":"BASIC","q":"The pattern is 6, 12, 18, 24, ... What is the 7th term?","o":["36","42","48","54"],"a":1,"why":"The pattern adds 6 each time. The 7th term is 6 × 7 = 42."},{"d":"BASIC","q":"A number 2□5 is divisible by 5. Which digit could replace □?","o":["0","3","7","Any digit"],"a":3,"why":"The number ends in 5, so it is divisible by 5 regardless of the middle digit."},{"d":"BASIC","q":"Which digit makes 6□3 divisible by 3?","o":["0","1","2","4"],"a":0,"why":"6 + 0 + 3 = 9, divisible by 3."},{"d":"BASIC","q":"Which number is divisible by both 2 and 5?","o":["125","230","342","415"],"a":1,"why":"A number divisible by both 2 and 5 must end in 0; 230 does."},{"d":"BASIC","q":"Which number is divisible by 9?","o":["235","351","352","425"],"a":1,"why":"For 351, the digit sum is 3 + 5 + 1 = 9, which is divisible by 9. The other digit sums are not multiples of 9."},{"d":"BASIC","q":"The pattern is 4, 8, 12, 16, ... What is the first term in the pattern that is divisible by 9?","o":["24","28","32","36"],"a":3,"why":"The terms are multiples of 4. The first common multiple of 4 and 9 is 36."},{"d":"BASIC","q":"Which digit can replace □ in 81□ to make the number divisible by 5?","o":["1 only","5 only","0 or 5","0 only"],"a":2,"why":"A number is divisible by 5 when its last digit is 0 or 5."},{"d":"BASIC","q":"Which of these is divisible by 6?","o":["123","144","155","221"],"a":1,"why":"144 is even and its digit sum is 1 + 4 + 4 = 9, divisible by 3; so it is divisible by 6."},{"d":"MEDIUM","q":"Find the smallest digit □ that makes 52□ divisible by 3.","o":["0","1","2","3"],"a":2,"why":"5 + 2 + □ = 7 + □. The smallest digit making this a multiple of 3 is 2, giving sum 9."},{"d":"MEDIUM","q":"What is the greatest digit □ that makes 7□2 divisible by 9?","o":["0","3","6","9"],"a":3,"why":"7 + 9 + 2 = 18, divisible by 9; 9 is the greatest valid digit."},{"d":"MEDIUM","q":"Which digit makes 34□ divisible by 4?","o":["1","2","4","6"],"a":2,"why":"The last two digits must be divisible by 4; 44 is, so □ = 4."},{"d":"MEDIUM","q":"What is the smallest digit □ that makes 6□5 divisible by 3?","o":["0","1","2","4"],"a":1,"why":"The digit sum is 11 + □. The smallest digit that makes this a multiple of 3 is 1, giving a sum of 12."},{"d":"MEDIUM","q":"A three-digit number 4□8 is divisible by 9. What is □?","o":["2","4","6","8"],"a":2,"why":"4 + 6 + 8 = 18, divisible by 9, so □ = 6."},{"d":"MEDIUM","q":"Which number is divisible by both 3 and 5?","o":["125","132","345","418"],"a":2,"why":"345 ends in 5 and its digit sum is 3 + 4 + 5 = 12, divisible by 3."},{"d":"MEDIUM","q":"What is the smallest digit □ that makes 8□4 divisible by 4?","o":["0","1","2","3"],"a":0,"why":"The last two digits must form a multiple of 4. With □ = 0, the last two digits are 04, so 804 is divisible by 4."},{"d":"MEDIUM","q":"The pattern is 15, 21, 27, 33, ... What is the first term divisible by 9?","o":["21","27","33","39"],"a":1,"why":"The pattern increases by 6. The first term divisible by 9 is 27, the third term."},{"d":"MEDIUM","q":"A number is divisible by 8. Which check is useful?","o":["Sum of all digits is divisible by 8","Last three digits form a number divisible by 8","Last digit is 8","Number ends in an even digit"],"a":1,"why":"For divisibility by 8, check whether the last three digits form a multiple of 8."},{"d":"MEDIUM","q":"Which digit makes 12□ divisible by 6?","o":["0","2","5","7"],"a":0,"why":"A number divisible by 6 must be even and have a digit sum divisible by 3. 120 is even and 1 + 2 + 0 = 3."},{"d":"HARD","q":"Find the smallest digit □ so that 3□6 is divisible by 9.","o":["0","3","6","9"],"a":0,"why":"3 + 0 + 6 = 9, so the smallest digit is 0."},{"d":"HARD","q":"A number 5□2 is divisible by 9. Which digit replaces □?","o":["0","1","2","3"],"a":2,"why":"5 + 2 + 2 = 9, so □ = 2."},{"d":"HARD","q":"Which digit can replace □ to make 24□ divisible by both 3 and 4?","o":["0","2","4","6"],"a":0,"why":"240 is divisible by 4 (last two digits 40) and by 3 (2 + 4 + 0 = 6)."},{"d":"HARD","q":"A four-digit number 3□72 is divisible by 9. What digit belongs in the box?","o":["4","5","6","7"],"a":2,"why":"3 + 6 + 7 + 2 = 18, divisible by 9, so □ = 6."},{"d":"HARD","q":"The pattern is 8, 16, 24, 32, ... What is the first term divisible by 9?","o":["56","64","72","80"],"a":2,"why":"The terms are multiples of 8. The first common multiple of 8 and 9 is 72, which is the 9th term."},{"d":"HARD","q":"Which is the smallest positive number that is divisible by both 6 and 8?","o":["12","18","24","48"],"a":2,"why":"The least common multiple of 6 and 8 is 24."},{"d":"HARD","q":"A number 4□5 is divisible by 3 and 5. Which digit could replace □?","o":["0","1","2","4"],"a":0,"why":"It already ends in 5. For divisibility by 3, 4 + □ + 5 must be divisible by 3; among these options, 0 gives 9."},{"d":"HARD","q":"Which digit makes 7□0 divisible by 9?","o":["0","1","2","3"],"a":2,"why":"7 + 2 + 0 = 9, so the missing digit is 2."},{"d":"HARD","q":"A number is divisible by 12. Which pair of tests guarantees divisibility by 12?","o":["Divisible by 2 and 6","Divisible by 3 and 4","Divisible by 2 and 9","Divisible by 5 and 6"],"a":1,"why":"Since 12 = 3 × 4 and 3 and 4 are coprime, divisibility by both 3 and 4 guarantees divisibility by 12."},{"d":"HARD","q":"The pattern is 11, 22, 33, 44, ... What is the first term divisible by 9?","o":["77","88","99","110"],"a":2,"why":"The terms are 11 × n. Since 11 and 9 have no common factor, the first term divisible by 9 is 11 × 9 = 99."}];
+const originalQuestions=questions.slice();
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const $=id=>document.getElementById(id);
+function render(){
+ chosen=null;locked=false;const item=questions[index];
+ $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
+ $('percent').textContent=Math.round(index/questions.length*100)+'%';
+ $('fill').style.width=(index/questions.length*100)+'%';
+ document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
+ $('qmeta').textContent='QUESTION '+(index+1);
+ $('question').textContent=item.q;
+ $('feedback').className='feedback';$('feedback').textContent='';
+ $('check').style.display='block';$('check').disabled=true;
+ $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
+ $('options').replaceChildren();
+ item.o.forEach((text,j)=>{
+  const b=document.createElement('button');b.type='button';b.className='option';
+  const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
+  const label=document.createElement('span');label.textContent=text;b.append(letter,label);
+  b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});
+  $('options').appendChild(b);
+ });
+}
+$('check').addEventListener('click',()=>{
+ if(chosen===null||locked)return;
+ locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ const feedback=$('feedback');
+ if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
+ else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.o[item.a]+'.';}
+ $('check').style.display='none';$('continue').className='btn continue show';
+});
+$('continue').addEventListener('click',()=>{
+ if(!locked)return;index++;
+ if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
+ const pct=Math.round(score/questions.length*100);
+ const card=document.createElement('section');card.className='finish';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Divisibility Puzzles Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261106-maths-header-v6" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ const review=card.querySelector('#wrongReview');
+ if(wrongAttempts.length){
+  review.innerHTML='<h3>🧠 Review your mistakes</h3>';
+  wrongAttempts.forEach((w,n)=>{const item=document.createElement('article');item.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;item.append(q,yours,correct,why);review.appendChild(item);});
+ }else{review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';}
+ $('finishSlot').replaceChildren(card);
+ function reset(onlyWrong){
+  if(onlyWrong&&wrongAttempts.length){const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrongQs);}
+  else questions.splice(0,questions.length,...originalQuestions);
+  index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $('retry').addEventListener('click',()=>reset(false));
+ $('retryWrong').addEventListener('click',()=>reset(true));
+});
+render();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body>
+</html>]],displayMath:[['\\[','\\]'],['$','$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']},startup:{typeset:true}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <header><div class="nav">

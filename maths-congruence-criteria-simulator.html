@@ -1,12 +1,105 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-congruence-criteria-simulator-v1"><meta name="description" content="Interactive triangle congruence criterion explorer for SSS, SAS, ASA, RHS, SSA and AAA."><title>Congruence Criteria · Simulator | SkillUp Maths</title><style>
-:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:3}.nav{max-width:620px;margin:auto;min-height:48px;padding:7px 12px;display:flex;align-items:center;gap:10px}.back{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;text-decoration:none;color:var(--blue)}.brand{font-size:15px;font-weight:850;flex:1}.pill{font-size:11px;font-weight:800;padding:6px 9px;border-radius:9px;background:#eef7fc;color:#236b91;text-decoration:none}main{width:min(100% - 24px,620px);margin:auto;padding:16px 8px 32px}h1{font-size:24px;margin:2px 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 14px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:11px 0}.control{margin:13px 0}.control label{display:block;font-size:13px;font-weight:750;margin-bottom:6px}.control select,.control input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit}.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px}.pair label{font-size:12px;color:var(--muted)}.result{padding:13px;border-radius:10px;background:#eef8ff;border:1px solid #d7eaf5;font-size:13px;line-height:1.55}.diagram{display:block;width:100%;max-width:390px;margin:5px auto}.diagram text{font:13px system-ui;fill:#345}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions a{flex:1;min-width:130px;text-align:center;text-decoration:none;padding:12px;border-radius:10px;background:#48b516;color:#fff;font-weight:850;font-size:13px}.actions a.secondary{background:#eaf5fb;color:#236b91}@media(max-width:480px){main{width:100%;padding:12px 10px 26px}h1{font-size:21px}.card{padding:13px}}</style></head><body>
-<header><div class="nav"><a class="back" href="maths-congruence-criteria-learn.html?v=20261107-congruence-criteria-brief-learn-v1">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-congruence-criteria-class9-quiz.html?v=20261107-congruence-criteria-learn-sim-v1">Practice</a></div></header>
-<main><h1>Triangle Congruence Simulator</h1><p class="sub">Choose a criterion and compare the matching information for two triangles.</p><section class="card">
-<div class="control"><label for="criterion">Congruence rule</label><select id="criterion"><option value="SSS">SSS · three sides</option><option value="SAS">SAS · two sides and included angle</option><option value="ASA">ASA · two angles and included side</option><option value="RHS">RHS · right angle, hypotenuse and side</option><option value="SSA">SSA · non-included angle (not sufficient generally)</option><option value="AAA">AAA · three angles (similarity only)</option></select></div>
-<div class="diagram"><svg viewBox="0 0 360 155" role="img" aria-label="Two corresponding triangles"><path d="M22 120 L115 120 L72 30 Z M205 120 L298 120 L255 30 Z" fill="#eef8fc" stroke="#4388ad" stroke-width="2.5"/><text x="20" y="139">△ABC</text><text x="203" y="139">△PQR</text><text x="72" y="20" text-anchor="middle">A</text><text x="255" y="20" text-anchor="middle">P</text></svg></div>
-<div class="pair"><div class="control"><label id="label1" for="v1">Triangle 1 · value 1</label><input id="v1" type="number" min="1" max="999" value="5"></div><div class="control"><label for="w1">Triangle 2 · value 1</label><input id="w1" type="number" min="1" max="999" value="5"></div></div>
-<div class="pair"><div class="control"><label id="label2" for="v2">Triangle 1 · value 2</label><input id="v2" type="number" min="1" max="999" value="6"></div><div class="control"><label for="w2">Triangle 2 · value 2</label><input id="w2" type="number" min="1" max="999" value="6"></div></div>
-<div class="pair"><div class="control"><label id="label3" for="v3">Triangle 1 · value 3</label><input id="v3" type="number" min="1" max="999" value="7"></div><div class="control"><label for="w3">Triangle 2 · value 3</label><input id="w3" type="number" min="1" max="999" value="7"></div></div>
-<div class="result" id="result" aria-live="polite">All three corresponding sides match. SSS proves the triangles congruent.</div></section>
-<div class="actions"><a class="secondary" href="maths-congruence-criteria-learn.html?v=20261107-congruence-criteria-brief-learn-v1">📘 Brief Learn</a><a href="maths-congruence-criteria-class9-quiz.html?v=20261107-congruence-criteria-learn-sim-v1">Start quiz →</a></div></main>
-<script>(function(){const $=id=>document.getElementById(id),select=$('criterion'),ids=['v1','v2','v3'],other=['w1','w2','w3'],labels={SSS:['Side 1 length','Side 2 length','Side 3 length'],SAS:['Side 1 length','Included angle (°)','Side 2 length'],ASA:['Angle 1 (°)','Included side length','Angle 2 (°)'],RHS:['Hypotenuse length','One leg length','Right angle (fixed at 90°)'],SSA:['Side 1 length','Side 2 length','Non-included angle (°)'],AAA:['Angle 1 (°)','Angle 2 (°)','Angle 3 (°)']};function update(){const rule=select.value;labels[rule].forEach((t,i)=>{$('label'+(i+1)).textContent=t;$('w'+(i+1)).previousElementSibling.textContent='Triangle 2 · '+t;});$('v3').disabled=rule==='RHS';$('w3').disabled=rule==='RHS';const vals=ids.map(id=>Number($(id).value)),vals2=other.map(id=>Number($(id).value));const used=rule==='RHS'?2:3,valid=vals.slice(0,used).every((v,i)=>Number.isFinite(v)&&v>0&&v===vals2[i]);let message='';if(rule==='SSA')message='SSA is not a general congruence criterion. Two sides and a non-included angle can produce different triangles.';else if(rule==='AAA')message='AAA establishes similarity, not congruence: equal angles do not fix the triangle size.';else if(rule==='RHS')message='Both triangles are treated as right-angled. '+(valid?'The hypotenuses and one corresponding leg match, so RHS proves congruence.':'Make both hypotenuse values and both corresponding leg values equal to satisfy RHS.');else message=valid?'All required corresponding measurements match. '+rule+' proves the triangles congruent.':'At least one required corresponding measurement differs. The selected criterion is not satisfied yet.';$('result').textContent=message;}[...ids,...other].forEach(id=>$(id).addEventListener('input',update));select.addEventListener('change',update);update();})();</script><script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-congruence-criteria-simulator-v2">
+<meta name="description" content="Interactive Class 9 triangle congruence simulator. Explore SSS, SAS, ASA, AAS and RHS, and test why SSA and AAA are insufficient.">
+<title>Congruence Criteria · Interactive Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa;--red:#d94b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:3}.nav{max-width:620px;margin:auto;min-height:48px;padding:7px 12px;display:flex;align-items:center;gap:10px}
+.back{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;text-decoration:none;color:var(--blue)}.brand{font-size:15px;font-weight:850;flex:1}.pill{font-size:11px;font-weight:800;padding:6px 9px;border-radius:9px;background:#eef7fc;color:#236b91;text-decoration:none}
+main{width:min(100% - 24px,620px);margin:auto;padding:16px 8px 32px}h1{font-size:23px;margin:2px 0 5px}.sub{color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:11px 0}.card h2{font-size:15px;margin:0 0 9px}
+.control{margin:12px 0}.control label{display:block;font-size:12px;font-weight:750;margin-bottom:6px}.control select,.control input{width:100%;min-height:40px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint{font-size:11px;color:var(--muted);line-height:1.4}.diagram{width:100%;display:block;margin:3px auto 9px}.diagram text{font:12px system-ui;fill:#345}.diagram .tri{fill:#eef8fc;stroke:#4388ad;stroke-width:2.5}.diagram .mark{stroke:#2384b5;stroke-width:3;stroke-linecap:round}
+.result{padding:12px;border-radius:10px;background:#eef8ff;border:1px solid #d7eaf5;font-size:13px;line-height:1.55}.result.good{background:#f0faeb;border-color:#cfe8c3;color:#286b19}.result.bad{background:#fff4f4;border-color:#f0cccc;color:#9b3030}.formula{font-weight:800;color:#236b91;margin:6px 0}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.presets button,.actions a{border:1px solid #d7eaf5;border-radius:9px;background:#eef8ff;color:#236b91;text-decoration:none;padding:9px 11px;font-size:12px;font-weight:800;cursor:pointer}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions a{flex:1;min-width:130px;text-align:center;padding:12px;background:var(--green);border-color:var(--green);color:#fff}
+.note{font-size:12px;line-height:1.5;color:var(--muted);margin-top:9px}
+@media(max-width:480px){main{width:100%;padding:12px 10px 26px}h1{font-size:21px}.card{padding:13px}.grid{gap:8px}}
+</style></head><body>
+<header><div class="nav"><a class="back" href="maths-congruence-criteria-learn.html?v=20261107-congruence-criteria-brief-learn-v1" aria-label="Back to brief learn">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-congruence-criteria-class9-quiz.html?v=20261107-congruence-criteria-learn-sim-v1">Practice</a></div></header>
+<main>
+<h1>Triangle Congruence Simulator</h1><p class="sub">Change the measurements of two triangles and discover which conditions prove that they must be congruent.</p>
+<section class="card">
+<div class="control"><label for="criterion">Choose a congruence condition</label><select id="criterion">
+<option value="SSS">SSS · Three corresponding sides</option><option value="SAS">SAS · Two sides and included angle</option><option value="ASA">ASA · Two angles and included side</option><option value="AAS">AAS · Two angles and a non-included side</option><option value="RHS">RHS · Right angle, hypotenuse and side</option><option value="SSA">SSA · Two sides and non-included angle</option><option value="AAA">AAA · Three corresponding angles</option></select></div>
+<svg class="diagram" viewBox="0 0 360 178" role="img" aria-label="Two triangles ABC and PQR with corresponding vertices"><path class="tri" d="M28 135 L132 135 L82 34 Z"/><path class="tri" d="M218 135 L322 135 L272 34 Z"/><text x="17" y="151">A</text><text x="132" y="151">B</text><text x="82" y="25" text-anchor="middle">C</text><text x="207" y="151">P</text><text x="322" y="151">Q</text><text x="272" y="25" text-anchor="middle">R</text><text x="180" y="165" text-anchor="middle" style="font-weight:700">Compare corresponding parts</text></svg>
+<div class="grid">
+<div class="control"><label id="lab1" for="a1">Triangle 1 · side 1</label><input id="a1" type="number" min="1" max="100" step="0.5" value="5"></div>
+<div class="control"><label id="lab1b" for="b1">Triangle 2 · side 1</label><input id="b1" type="number" min="1" max="100" step="0.5" value="5"></div>
+<div class="control"><label id="lab2" for="a2">Triangle 1 · side 2</label><input id="a2" type="number" min="1" max="100" step="0.5" value="6"></div>
+<div class="control"><label id="lab2b" for="b2">Triangle 2 · side 2</label><input id="b2" type="number" min="1" max="100" step="0.5" value="6"></div>
+<div class="control"><label id="lab3" for="a3">Triangle 1 · side 3</label><input id="a3" type="number" min="1" max="100" step="0.5" value="7"></div>
+<div class="control"><label id="lab3b" for="b3">Triangle 2 · side 3</label><input id="b3" type="number" min="1" max="100" step="0.5" value="7"></div>
+</div>
+<div class="hint" id="inputHint">Enter matching side lengths in both triangles. All three side pairs must match.</div>
+<div class="presets"><button type="button" data-preset="valid">Matching example</button><button type="button" data-preset="different">Change one value</button><button type="button" data-preset="reset">Reset values</button></div>
+</section>
+<section class="card"><h2>What does the information prove?</h2><div class="result" id="result" aria-live="polite">SSS: all three corresponding side lengths match. The triangles are congruent by SSS.</div><p class="note" id="explain">Congruence means same shape and same size. Corresponding vertices are A ↔ P, B ↔ Q and C ↔ R.</p></section>
+<div class="actions"><a href="maths-congruence-criteria-learn.html?v=20261107-congruence-criteria-brief-learn-v1">📘 Brief Learn</a><a href="maths-congruence-criteria-class9-quiz.html?v=20261107-congruence-criteria-learn-sim-v1">Start 30-question quiz →</a></div>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),sel=$('criterion');
+const ids=['a1','a2','a3'],other=['b1','b2','b3'];
+const configs={
+SSS:{labels:['Side AB (cm)','Side BC (cm)','Side CA (cm)'],hint:'Compare all three corresponding side lengths.'},
+SAS:{labels:['Side 1 (cm)','Included angle (°)','Side 2 (cm)'],hint:'The angle entered in row 2 is the angle BETWEEN the two given sides.'},
+ASA:{labels:['Angle 1 (°)','Included side (cm)','Angle 2 (°)'],hint:'The side entered in row 2 lies BETWEEN the two given angles.'},
+AAS:{labels:['Angle 1 (°)','Angle 2 (°)','Non-included side (cm)'],hint:'Two angles and a corresponding side determine the triangle (the third angle follows from 180°).'},
+RHS:{labels:['Hypotenuse (cm)','One leg (cm)','Right angle = 90°'],hint:'Both triangles are right-angled; compare hypotenuse and one corresponding leg.'},
+SSA:{labels:['Side 1 (cm)','Side 2 (cm)','Non-included angle (°)'],hint:'SSA can be ambiguous: the same measurements may construct two different triangles.'},
+AAA:{labels:['Angle 1 (°)','Angle 2 (°)','Angle 3 (°)'],hint:'Three equal angles establish similarity, not necessarily equal size.'}
+};
+function values(){return ids.map(id=>Number($(id).value));}
+function values2(){return other.map(id=>Number($(id).value));}
+function update(){
+ const rule=sel.value,c=configs[rule],v=values(),w=values2();
+ c.labels.forEach((label,i)=>{$('lab'+(i+1)).textContent='Triangle 1 · '+label;$('lab'+(i+1)+'b').textContent='Triangle 2 · '+label;});
+ $('inputHint').textContent=c.hint;
+ const validInputs=[...v,...w].every(n=>Number.isFinite(n)&&n>0);
+ let match=false,msg='',detail='';
+ if(!validInputs){msg='Enter positive numbers in every active field.';detail='Measurements must be greater than zero.';}
+ else if(rule==='SSS'){
+  match=v.every((n,i)=>n===w[i]);
+  const triangle1=v[0]+v[1]>v[2]&&v[1]+v[2]>v[0]&&v[2]+v[0]>v[1],triangle2=w[0]+w[1]>w[2]&&w[1]+w[2]>w[0]&&w[2]+w[0]>w[1];
+  msg=!triangle1||!triangle2?'These measurements do not form valid triangles. Check the triangle inequality.':match?'All three corresponding sides match. The triangles are congruent by SSS.':'At least one corresponding side differs. SSS is not satisfied.';
+  detail='Triangle inequality: the sum of any two sides must be greater than the third side.';
+ }else if(rule==='SAS'){
+  match=v[0]===w[0]&&v[1]===w[1]&&v[2]===w[2];
+  msg=match?'The two sides and the INCLUDED angle match. The triangles are congruent by SAS.':'The two side lengths and included angle must all match for SAS.';
+  detail='The angle must lie between the two specified sides; a non-included angle would be SSA, not SAS.';
+ }else if(rule==='ASA'||rule==='AAS'){
+  const anglesOK=v[0]>0&&v[0]<180&&v[1]>0&&v[1]<180&&v[0]+v[1]<180&&w[0]>0&&w[0]<180&&w[1]>0&&w[1]<180&&w[0]+w[1]<180;
+  match=anglesOK&&v.every((n,i)=>n===w[i]);
+  msg=!anglesOK?'The two entered angles must be positive and add to less than 180°.':match?'Both corresponding angles and the specified corresponding side match. The triangles are congruent by '+rule+'.':'The two corresponding angles and the specified side must all match.';
+  detail=rule==='ASA'?'The side is included between the two known angles.':'The side is not between the two known angles; the third angle is fixed by the 180° angle sum.';
+ }else if(rule==='RHS'){
+  match=v[0]===w[0]&&v[1]===w[1]&&v[0]>v[1]&&w[0]>w[1];
+  msg=match?'Both are right triangles with equal hypotenuses and one equal corresponding leg. They are congruent by RHS.':'For RHS, each hypotenuse must be longer than its leg, and both corresponding lengths must match.';
+  detail='The right angle is fixed at 90° in both triangles. The hypotenuse is opposite that right angle.';
+ }else if(rule==='SSA'){
+  msg='SSA is NOT a general congruence criterion. The same two sides and a non-included angle can sometimes form two different triangles.';
+  detail='This is the ambiguous case. A matching set of these three measurements does not guarantee a unique triangle.';
+ }else{
+  const angleSets=v.every(n=>n>0&&n<180)&&w.every(n=>n>0&&n<180)&&Math.abs(v.reduce((a,b)=>a+b,0)-180)<1e-9&&Math.abs(w.reduce((a,b)=>a+b,0)-180)<1e-9;
+  msg=angleSets&&v.every((n,i)=>n===w[i])?'The corresponding angles match, but the triangles may have different side lengths. AAA proves similarity, not congruence.':'Check that each angle set is valid and totals 180°. Even matching angles alone cannot prove congruence.';
+  detail='A small triangle and a larger triangle can have the same three angles. A side length is also needed to fix the size.';
+ }
+ const good=(rule!=='SSA'&&rule!=='AAA'&&match);
+ $('result').className='result '+(good?'good':(rule==='SSA'||rule==='AAA'||!match?'bad':''));
+ $('result').textContent=msg;$('explain').textContent=detail;
+}
+function setPreset(kind){
+ const presets={valid:{SSS:[[5,6,7],[5,6,7]],SAS:[[5,60,7],[5,60,7]],ASA:[[50,6,60],[50,6,60]],AAS:[[50,60,7],[50,60,7]],RHS:[[13,5,90],[13,5,90]],SSA:[[5,6,30],[5,6,30]],AAA:[[50,60,70],[50,60,70]]},different:{SSS:[[5,6,7],[5,6,8]],SAS:[[5,60,7],[5,65,7]],ASA:[[50,6,60],[50,7,60]],AAS:[[50,60,7],[50,60,8]],RHS:[[13,5,90],[14,5,90]],SSA:[[5,6,30],[5,6,30]],AAA:[[50,60,70],[50,60,70]]},reset:{SSS:[[5,6,7],[5,6,7]],SAS:[[5,60,7],[5,60,7]],ASA:[[50,6,60],[50,6,60]],AAS:[[50,60,7],[50,60,7]],RHS:[[13,5,90],[13,5,90]],SSA:[[5,6,30],[5,6,30]],AAA:[[50,60,70],[50,60,70]]}};
+ const pair=presets[kind][sel.value];ids.forEach((id,i)=>$(id).value=pair[0][i]);other.forEach((id,i)=>$(id).value=pair[1][i]);update();
+}
+[...ids,...other].forEach(id=>$(id).addEventListener('input',update));
+sel.addEventListener('change',()=>setPreset('reset'));
+document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>setPreset(btn.dataset.preset)));
+update();
+})();
+</script><script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>

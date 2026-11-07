@@ -1,2 +1,145 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="skillup-release" content="20261107-polynomial-terminology-simulator-v1"><title>Polynomial Terminology — Interactive Simulator | SkillUp Maths</title><style>:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--line:#e1e9ed}*{box-sizing:border-box}body{margin:0;background:#f7f9fb;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}header{background:white;border-bottom:1px solid var(--line);position:sticky;top:0}.top,main{max-width:660px;margin:auto}.top{padding:12px 14px;display:flex;gap:10px;align-items:center}.top a{color:var(--blue);text-decoration:none;font-weight:750}.top strong{flex:1}main{padding:18px 13px 36px}h1{font-size:25px;margin:0 0 6px}h2{font-size:18px;margin:0 0 10px}p{line-height:1.55}.muted{color:#667987;font-size:14px}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin:14px 0}.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:12px 4px;border-radius:10px;font-weight:800;font-size:13px;border:1px solid #b8deed}label{display:block;font-weight:750;margin:12px 0 5px}input,select{width:100%;padding:10px;border:1px solid #b8cbd5;border-radius:9px;font-size:15px}button{background:var(--green);color:white;border:0;border-radius:9px;padding:10px 13px;font-weight:800;margin:4px}.result{background:#eff8ff;border-radius:10px;padding:13px;margin-top:14px;line-height:1.7}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}@media(max-width:420px){h1{font-size:22px}.card{padding:14px}.grid{grid-template-columns:1fr}}</style></head><body><header><div class="top"><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-connected-v2">← Quiz</a><strong>SkillUp Maths</strong><span>Class 9</span></div></header><main><h1>Polynomial Terminology Simulator</h1><p class="muted">Build an expression and inspect its terms, signed coefficients, variable parts, like terms and degree.</p><div class="links"><a href="maths-polynomial-terminology-learn.html?v=20261107-polynomial-terminology-brief-learn-v1">📘 Brief Learn</a><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-connected-v2">📝 Practice Quiz</a></div><section class="card"><h2>Explore a polynomial</h2><label for="expr">Enter a polynomial in x</label><input id="expr" value="4x^3 - 2x^2 + 3x - 5" autocomplete="off"><p class="muted">Supported: x, x², x^3, signed integer coefficients and constants. Use * for multiplication if desired.</p><button id="analyze" type="button">Analyze expression</button><div class="result" id="output" aria-live="polite">Enter an expression and select Analyze.</div></section><section class="card"><h2>Try examples</h2><button type="button" data-ex="3x^2 - 5x^2 + 2x - 7">Like terms</button><button type="button" data-ex="-x + 4">Hidden coefficient</button><button type="button" data-ex="6x^4 - 2x + 9">Degree 4</button><button type="button" data-ex="5">Constant</button><button type="button" data-ex="0">Zero polynomial</button></section><section class="card"><h2>Like-term checker</h2><div class="grid"><div><label for="term1">First term</label><input id="term1" value="3x^2"></div><div><label for="term2">Second term</label><input id="term2" value="-5x^2"></div></div><button id="compare" type="button">Compare terms</button><div class="result" id="compareResult" aria-live="polite">Enter two terms to compare their variable parts.</div></section></main><script src="/shared-nav.js?v=20261106-maths-header-v6"></script><script>(function(){const $=id=>document.getElementById(id);function parse(s){s=s.replace(/\s+/g,'').replace(/−/g,'-').replace(/²/g,'^2').replace(/³/g,'^3').replace(/⁴/g,'^4');if(!s)return null;if(s[0]!=='-'&&s[0]!=='+')s='+'+s;const chunks=s.match(/[+-][^+-]+/g);if(!chunks||chunks.join('')!==s)return null;const terms=[];for(const chunk of chunks){const sign=chunk[0]==='-'?-1:1,body=chunk.slice(1);if(!body)return null;const m=body.match(/^(?:(\d+(?:\.\d+)?)\*?)?(x(?:\^(\d+))?)?$/i);if(!m||(!m[1]&&!m[2]))return null;const coeff=sign*(m[1]===undefined?(m[2]?1:NaN):Number(m[1]));const power=m[2]?(m[3]===undefined?1:Number(m[3])):0;if(!Number.isFinite(coeff)||!Number.isInteger(power)||power<0||power>20)return null;terms.push({c:coeff,p:power});}const map=new Map();terms.forEach(t=>map.set(t.p,(map.get(t.p)||0)+t.c));return [...map].map(([p,c])=>({p,c})).filter(t=>Math.abs(t.c)>1e-10).sort((a,b)=>b.p-a.p)}function fmt(t){const abs=Math.abs(t.c),v=t.p===0?'':t.p===1?'x':'x^'+t.p;return (t.c<0?'−':'')+(abs===1&&t.p!==0?'':abs)+v}function analyze(){const ts=parse($('expr').value);if(ts===null){$('output').textContent='Please enter a valid polynomial using x and non-negative integer powers, for example 3x^2 - 2x + 1.';return}const deg=ts.length?ts[0].p:null;$('output').innerHTML='<b>Simplified polynomial:</b> '+(ts.length?ts.map((t,i)=>i&&t.c>0?' + '+fmt(t):i&&t.c<0?' '+fmt(t):fmt(t)).join(''):'0')+'<br><b>Number of terms:</b> '+ts.length+'<br><b>Degree:</b> '+(deg===null?'Not defined (zero polynomial)':deg)+'<br><b>Leading coefficient:</b> '+(ts.length?ts[0].c:'Not applicable')+'<br><b>Term classification:</b> '+(ts.length===0?'Zero polynomial':ts.length===1?'Monomial':ts.length===2?'Binomial':ts.length===3?'Trinomial':ts.length+'-term polynomial')+'<br><b>Term breakdown:</b><br>'+ (ts.length?ts.map(t=>fmt(t)+' → coefficient '+t.c+', variable part '+(t.p?'x^'+t.p:'none')+', exponent '+(t.p||'none')).join('<br>'):'All coefficients are zero.')}function compare(){const one=parse($('term1').value),two=parse($('term2').value);if(!one||!two||one.length!==1||two.length!==1){$('compareResult').textContent='Enter exactly one valid term in each box, such as 3x^2 and -5x^2.';return}const same=one[0].p===two[0].p;$('compareResult').innerHTML='<b>'+(same?'Like terms':'Unlike terms')+'</b><br>First variable part: '+(one[0].p?'x^'+one[0].p:'constant')+'<br>Second variable part: '+(two[0].p?'x^'+two[0].p:'constant')+'<br>'+(same?'The variable parts and exponents match; only coefficients differ.':'The variable parts or exponents differ, so they cannot be combined directly.')}$('analyze').addEventListener('click',analyze);$('compare').addEventListener('click',compare);document.querySelectorAll('[data-ex]').forEach(b=>b.addEventListener('click',()=>{$('expr').value=b.dataset.ex;analyze()}));analyze();compare()})();</script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261107-polynomial-terminology-simulator-recreated-v2">
+<meta name="description" content="Interactive Class 9 polynomial terminology simulator. Explore terms, coefficients, variables, exponents, like terms, standard form and degree.">
+<title>Polynomial Terminology Simulator | Class 9 Maths | SkillUp</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#e1e9ed;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.top,main{max-width:680px;margin:auto}.top{padding:10px 14px;display:flex;gap:10px;align-items:center;min-height:48px}
+.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1;font-size:15px}
+main{padding:17px 13px 36px}h1{font-size:24px;line-height:1.2;margin:0 0 5px}h2{font-size:17px;margin:0 0 9px}
+p{line-height:1.5}.muted{color:var(--muted);font-size:13px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:13px 0}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:11px 4px;border-radius:9px;font-weight:850;font-size:13px;border:1px solid #b8deed}
+label{display:block;font-weight:750;margin:12px 0 5px}input{width:100%;padding:11px;border:1px solid #b8cbd5;border-radius:9px;font-size:16px;color:var(--ink);background:white}
+button{border:0;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;margin:4px 3px 4px 0}
+button.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.result{background:#eff8ff;border:1px solid #d6eaf5;border-radius:10px;padding:12px;margin-top:12px;line-height:1.65;overflow-wrap:anywhere}
+.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{background:#f5f8fa;border:1px solid var(--line);border-radius:9px;padding:10px}.stat small{display:block;color:var(--muted);font-size:11px}.stat b{font-size:18px}
+.term-list{display:grid;gap:7px;margin-top:10px}.term{border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff}.term strong{font-size:15px}.term small{display:block;color:var(--muted);margin-top:3px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.hint{font-size:12px;color:var(--muted);margin:6px 0 0}
+@media(max-width:430px){main{padding:14px 10px 28px}h1{font-size:21px}.card{padding:13px}.statgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.stat{padding:8px}.stat b{font-size:16px}}
+</style>
+</head>
+<body>
+<header><div class="top"><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-recreated-v3">← Quiz</a><strong>SkillUp Maths</strong><span>Class 9</span></div></header>
+<main>
+<h1>Polynomial Terminology Simulator</h1>
+<p class="muted">Explore how terms, signs, coefficients, variables and exponents build a polynomial. Edit an expression and inspect every part.</p>
+<div class="links"><a href="maths-polynomial-terminology-learn.html?v=20261107-polynomial-terminology-brief-learn-v1">📘 Brief Learn</a><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-recreated-v3">📝 Practice Quiz</a></div>
+<section class="card">
+<h2>1. Expression analyzer</h2>
+<label for="expression">Enter a polynomial in x</label>
+<input id="expression" value="4x^3 - 2x^2 + 3x - 5" autocomplete="off" spellcheck="false" aria-describedby="syntaxHelp">
+<p class="hint" id="syntaxHelp">Use forms such as 4x^3 - 2x^2 + 3x - 5. Powers must be non-negative whole numbers (0–12).</p>
+<div><button id="analyze" type="button">Analyze expression</button><button id="clear" class="secondary" type="button">Clear</button></div>
+<div class="grid" aria-label="Example expressions">
+<button class="secondary preset" data-value="3x^2 - 5x^2 + 2x - 7" type="button">Combine like terms</button>
+<button class="secondary preset" data-value="-x + 4" type="button">Coefficient −1</button>
+<button class="secondary preset" data-value="6x^4 - 2x + 9" type="button">Degree 4</button>
+<button class="secondary preset" data-value="5" type="button">Constant</button>
+<button class="secondary preset" data-value="0" type="button">Zero polynomial</button>
+<button class="secondary preset" data-value="2x^3 + 0x^2 - 7x + 1" type="button">Missing power</button>
+</div>
+<div class="result" id="summary" aria-live="polite">Choose an example or enter a polynomial, then analyze it.</div>
+<div class="term-list" id="termList" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>2. Like-term checker</h2>
+<p class="muted">Two terms are like terms when they have the same variable part and the same exponent. Their coefficients may differ.</p>
+<div class="grid"><div><label for="termA">First term</label><input id="termA" value="3x^2"></div><div><label for="termB">Second term</label><input id="termB" value="-5x^2"></div></div>
+<button id="compare" type="button">Compare terms</button>
+<div class="result" id="compareOutput" aria-live="polite">Compare two terms to see whether they can be combined.</div>
+</section>
+<section class="card">
+<h2>3. Build a polynomial with coefficients</h2>
+<p class="muted">Change each coefficient to see the expression and its terminology update instantly.</p>
+<div class="grid">
+<div><label for="c3">Coefficient of x³</label><input id="c3" type="number" min="-9" max="9" step="1" value="2"></div>
+<div><label for="c2">Coefficient of x²</label><input id="c2" type="number" min="-9" max="9" step="1" value="-1"></div>
+<div><label for="c1">Coefficient of x</label><input id="c1" type="number" min="-9" max="9" step="1" value="3"></div>
+<div><label for="c0">Constant term</label><input id="c0" type="number" min="-9" max="9" step="1" value="4"></div>
+</div>
+<div class="result" id="builderOutput" aria-live="polite"></div>
+</section>
+</main>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function parsePolynomial(source){
+ let s=String(source||'').replace(/\s+/g,'').replace(/−/g,'-').replace(/²/g,'^2').replace(/³/g,'^3').replace(/⁴/g,'^4');
+ if(!s)return {error:'Enter an expression first.'};
+ if(s[0]!=='+'&&s[0]!=='-')s='+'+s;
+ const chunks=s.match(/[+-][^+-]+/g);
+ if(!chunks||chunks.join('')!==s)return {error:'Use a valid sum or difference of terms, such as 3x^2 - 2x + 1.'};
+ const map=new Map();
+ for(const chunk of chunks){
+  const sign=chunk[0]==='-'?-1:1,body=chunk.slice(1);
+  const m=body.match(/^(?:(\d+(?:\.\d+)?)\*?)?(x(?:\^(\d+))?)?$/i);
+  if(!m||(!m[1]&&!m[2]))return {error:'Unsupported term: '+chunk+'. Use a number, x, or x raised to a whole-number power.'};
+  const coefficient=sign*(m[1]===undefined?(m[2]?1:NaN):Number(m[1]));
+  const power=m[2]?(m[3]===undefined?1:Number(m[3])):0;
+  if(!Number.isFinite(coefficient)||!Number.isInteger(power)||power<0||power>12)return {error:'Use finite coefficients and whole-number powers from 0 to 12.'};
+  map.set(power,(map.get(power)||0)+coefficient);
+ }
+ return {terms:[...map].map(([power,coefficient])=>({power,coefficient})).filter(t=>Math.abs(t.coefficient)>1e-10).sort((a,b)=>b.power-a.power)};
+}
+function termText(t){
+ const n=Math.abs(t.coefficient),variable=t.power===0?'':t.power===1?'x':'x^'+t.power;
+ return (t.coefficient<0?'−':'')+(n===1&&t.power!==0?'':String(n))+variable;
+}
+function polynomialText(terms){
+ if(!terms.length)return '0';
+ return terms.map((t,i)=>{const a=termText(t);return i&&t.coefficient>0?' + '+a:i&&t.coefficient<0?' '+a:a}).join('');
+}
+function termDegree(t){return t.power}
+function showAnalysis(){
+ const parsed=parsePolynomial($('expression').value),box=$('summary'),list=$('termList');list.replaceChildren();
+ if(parsed.error){box.textContent=parsed.error;return}
+ const terms=parsed.terms,degree=terms.length?terms[0].power:null;
+ const kind=terms.length===0?'Zero polynomial':terms.length===1?'Monomial':terms.length===2?'Binomial':terms.length===3?'Trinomial':terms.length+'-term polynomial';
+ const stats=document.createElement('div');stats.className='statgrid';
+ [[ 'Degree',degree===null?'Undefined':degree ],['Terms',terms.length],['Type',kind]].forEach(([label,value])=>{const d=document.createElement('div');d.className='stat';const sm=document.createElement('small');sm.textContent=label;const b=document.createElement('b');b.textContent=value;d.append(sm,b);stats.appendChild(d)});
+ const p=document.createElement('p');p.innerHTML='<b>Standard form:</b> ';p.appendChild(document.createTextNode(polynomialText(terms)));
+ const lc=document.createElement('p');lc.innerHTML='<b>Leading coefficient:</b> ';lc.appendChild(document.createTextNode(terms.length?String(terms[0].coefficient):'Not applicable'));
+ const note=document.createElement('p');note.className='muted';note.textContent=degree===null?'All coefficients are zero, so the zero polynomial has no defined degree.':'The degree is the highest exponent with a non-zero coefficient after like terms are combined.';
+ box.replaceChildren(p,stats,lc,note);
+ terms.forEach((t,i)=>{const card=document.createElement('div');card.className='term';const strong=document.createElement('strong');strong.textContent=termText(t);const small=document.createElement('small');small.textContent='Term '+(i+1)+' · signed coefficient: '+t.coefficient+' · variable part: '+(t.power?'x^'+t.power:'none (constant)')+' · exponent / term degree: '+t.power;card.append(strong,small);list.appendChild(card)});
+}
+function parseSingleTerm(value){
+ const parsed=parsePolynomial(value);
+ return parsed.error||parsed.terms.length!==1?null:parsed.terms[0];
+}
+function compare(){
+ const a=parseSingleTerm($('termA').value),b=parseSingleTerm($('termB').value),out=$('compareOutput');
+ if(!a||!b){out.textContent='Enter exactly one valid term in each field, for example 3x^2 and -5x^2.';return}
+ const same=a.power===b.power;
+ out.textContent=(same?'Like terms. ':'Unlike terms. ')+(same?'Both terms have the same variable part and exponent, so combine their coefficients: ':'Their variable parts or exponents differ, so they cannot be combined directly. ')+termText(a)+' and '+termText(b)+'.';
+ if(same)out.textContent+=' Their sum is '+(a.coefficient+b.coefficient===0?'0':String(a.coefficient+b.coefficient)+(a.power?'x'+(a.power===1?'':'^'+a.power):''))+'.';
+}
+function updateBuilder(){
+ const powers=[3,2,1,0],ids=['c3','c2','c1','c0'],terms=[];
+ ids.forEach((id,i)=>{const n=Number($(id).value);if(Number.isFinite(n)&&n!==0)terms.push({power:powers[i],coefficient:n})});
+ const degree=terms.length?terms[0].power:null;
+ $('builderOutput').textContent='p(x) = '+polynomialText(terms)+' · Degree: '+(degree===null?'undefined (zero polynomial)':degree)+' · '+(terms.length===0?'zero polynomial':terms.length===1?'monomial':terms.length===2?'binomial':terms.length===3?'trinomial':terms.length+' terms');
+}
+$('analyze').addEventListener('click',showAnalysis);
+$('clear').addEventListener('click',()=>{$('expression').value='';showAnalysis();$('expression').focus()});
+document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{$('expression').value=b.dataset.value;showAnalysis()}));
+$('compare').addEventListener('click',compare);
+['c3','c2','c1','c0'].forEach(id=>$(id).addEventListener('input',updateBuilder));
+$('expression').addEventListener('keydown',e=>{if(e.key==='Enter')showAnalysis()});
+showAnalysis();compare();updateBuilder();
+})();
+</script>
+</body></html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-herons-formula-sim-v1">
+<meta name="description" content="Interactive Heron's formula simulator. Adjust three valid triangle sides and watch semi-perimeter and area update live.">
+<title>Heron's Formula · Simulator | SkillUp Maths</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+<style>
+:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:2}.nav{max-width:620px;margin:auto;min-height:48px;padding:7px 12px;display:flex;align-items:center;gap:10px}
+.back{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;text-decoration:none;color:var(--blue)}
+.brand{font-size:15px;font-weight:850;flex:1}.pill{font-size:11px;font-weight:800;padding:6px 9px;border-radius:9px;background:#eef7fc;color:#236b91;text-decoration:none}
+main{width:min(100% - 24px,620px);margin:auto;padding:16px 8px 32px}h1{font-size:24px;margin:2px 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:11px 0}
+svg{display:block;width:100%;max-width:420px;margin:0 auto}.shape{fill:#eff8fc;stroke:#4388ad;stroke-width:3}.side-label{font:12px system-ui;fill:#345}
+.control{margin:12px 0}.control label{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:750;margin-bottom:6px}.control input{width:100%;accent-color:#248ac0}
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:13px}.value{background:#eef8ff;border:1px solid #d7eaf5;border-radius:10px;padding:11px;text-align:center}.value span{display:block;color:#547185;font-size:11px}.value strong{display:block;font-size:20px;color:#236b91;margin-top:3px}
+.formula{background:#eef8ff;border:1px solid #d7eaf5;border-radius:10px;padding:11px;margin:9px 0;text-align:center;overflow-x:auto;color:#236b91;font-weight:700}.note{font-size:12px;line-height:1.5;color:#526575;margin:9px 0 0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions a{flex:1;text-align:center;text-decoration:none;padding:12px;border-radius:10px;background:var(--green);color:#fff;font-weight:850;font-size:13px}.actions a.secondary{background:#eaf5fb;color:#236b91}
+@media(max-width:420px){main{padding:13px 8px 25px}.card{padding:12px}h1{font-size:22px}}
+</style></head><body>
+<header><div class="nav"><a class="back" href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-quiz-v2" aria-label="Back to quiz">←</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><a class="pill" href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">Brief Learn ↗</a></div></header>
+<main><h1>Heron's Formula · Simulate</h1><p class="sub">Adjust the three side lengths. The triangle stays valid while its semi-perimeter and area update instantly.</p>
+<section class="card">
+<svg viewBox="0 0 380 270" role="img" aria-label="Triangle with three adjustable side lengths">
+<polygon id="triangle" class="shape" points="55,215 325,215 185,80"/>
+<text id="labelA" class="side-label" x="42" y="232">A</text><text id="labelB" class="side-label" x="330" y="232">B</text><text id="labelC" class="side-label" x="185" y="70">C</text>
+<text id="labelAVal" class="side-label" x="105" y="135">b = 13</text><text id="labelBVal" class="side-label" x="260" y="135">a = 14</text><text id="labelCVal" class="side-label" x="190" y="250" text-anchor="middle">c = 15 cm</text>
+</svg>
+<div class="control"><label for="sideA"><span>Side a (BC)</span><output id="sideAOut">14 cm</output></label><input id="sideA" type="range" min="4" max="24" step="1" value="14"></div>
+<div class="control"><label for="sideB"><span>Side b (AC)</span><output id="sideBOut">13 cm</output></label><input id="sideB" type="range" min="4" max="24" step="1" value="13"></div>
+<div class="control"><label for="sideC"><span>Side c (AB)</span><output id="sideCOut">15 cm</output></label><input id="sideC" type="range" min="4" max="30" step="1" value="15"></div>
+<div class="values"><div class="value"><span>Semi-perimeter (s)</span><strong id="semiValue">21 cm</strong></div><div class="value"><span>Triangle area</span><strong id="areaValue">84 cm²</strong></div></div>
+<div class="formula">\(s=\frac{a+b+c}{2}\)</div><div class="formula">\(A=\sqrt{s(s-a)(s-b)(s-c)}\)</div>
+<p class="note" id="explain" aria-live="polite">s = 21 cm; A = √(21 × 8 × 7 × 6) = 84 cm².</p>
+</section>
+<section class="card"><strong>Explore:</strong><p class="note">Change one side at a time. Notice how the semi-perimeter changes and how the triangle's area responds. Each slider's range preserves the triangle inequality.</p></section>
+<div class="actions"><a class="secondary" href="maths-herons-formula-learn.html?v=20261107-herons-formula-brief-learn-v1">Review brief learn</a><a href="maths-herons-formula-class9-quiz.html?v=20261107-herons-formula-quiz-v2">Start 30-question quiz</a></div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+function update(){
+ const a=Number($('sideA').value),b=Number($('sideB').value),c=Number($('sideC').value);
+ const minA=Math.abs(b-c)+1,maxA=b+c-1;
+ const minB=Math.abs(a-c)+1,maxB=a+c-1;
+ const minC=Math.abs(a-b)+1,maxC=a+b-1;
+ $('sideA').min=String(minA);$('sideA').max=String(maxA);
+ $('sideB').min=String(minB);$('sideB').max=String(maxB);
+ $('sideC').min=String(minC);$('sideC').max=String(maxC);
+ const s=(a+b+c)/2,radicand=s*(s-a)*(s-b)*(s-c),area=Math.sqrt(Math.max(0,radicand));
+ const x=(b*b+c*c-a*a)/(2*c),h=Math.sqrt(Math.max(0,b*b-x*x));
+ const scale=Math.min(280/c,150/Math.max(1,h)),base=c*scale,triH=h*scale;
+ const left=(380-base)/2,bottom=215,top=bottom-triH,apexX=left+x*scale;
+ $('triangle').setAttribute('points',left+','+bottom+' '+(left+base)+','+bottom+' '+apexX+','+top);
+ $('labelA').setAttribute('x',left-12);$('labelA').setAttribute('y',bottom+17);
+ $('labelB').setAttribute('x',left+base+5);$('labelB').setAttribute('y',bottom+17);
+ $('labelC').setAttribute('x',apexX+4);$('labelC').setAttribute('y',top-8);
+ $('labelAVal').setAttribute('x',left+apexX/2-left/2-12);$('labelAVal').setAttribute('y',(bottom+top)/2);
+ $('labelBVal').setAttribute('x',(apexX+left+base)/2+5);$('labelBVal').setAttribute('y',(bottom+top)/2);
+ $('labelAVal').textContent='b = '+b+' cm';$('labelBVal').textContent='a = '+a+' cm';
+ $('labelCVal').textContent='c = '+c+' cm';
+ $('sideAOut').textContent=a+' cm';$('sideBOut').textContent=b+' cm';$('sideCOut').textContent=c+' cm';
+ $('semiValue').textContent=s+' cm';$('areaValue').textContent=(Number.isInteger(area)?area:area.toFixed(2))+' cm²';
+ $('explain').textContent='s = ('+a+' + '+b+' + '+c+') ÷ 2 = '+s+' cm. Area = √['+s+' × '+(s-a)+' × '+(s-b)+' × '+(s-c)+'] = '+(Number.isInteger(area)?area:area.toFixed(2))+' cm².';
+}
+['sideA','sideB','sideC'].forEach(id=>$(id).addEventListener('input',update));
+update();
+})();
+</script></body></html>

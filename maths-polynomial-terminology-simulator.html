@@ -1,98 +1,75 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261107-polynomial-terminology-mathjax-v3">
-<meta name="description" content="Class 9 polynomial terminology simulator with MathJax equations, expression analysis, coefficients, like terms and degree.">
-<title>Polynomial Terminology Simulator | MathJax | SkillUp</title>
+<meta name="skillup-release" content="20261107-polynomial-terminology-concept-simulator-v4">
+<meta name="description" content="Explore polynomial terms, coefficients, constants, degree and classification with a guided interactive Class 9 concept simulator.">
+<title>Polynomial Terminology Concept Simulator | SkillUp Maths</title>
 <style>
 :root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#e1e9ed;--bg:#f7f9fb}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.top,main{max-width:700px;margin:auto}.top{padding:10px 14px;display:flex;gap:10px;align-items:center;min-height:48px}
-.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1;font-size:15px}
-main{padding:17px 13px 36px}h1{font-size:24px;line-height:1.2;margin:0 0 5px}h2{font-size:17px;margin:0 0 9px}
-p{line-height:1.5}.muted{color:var(--muted);font-size:13px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:13px 0}
-.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
-.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:11px 4px;border-radius:9px;font-weight:850;font-size:13px;border:1px solid #b8deed}
-label{display:block;font-weight:750;margin:12px 0 5px}input{width:100%;padding:11px;border:1px solid #b8cbd5;border-radius:9px;font-size:16px;color:var(--ink);background:white}
-button{border:0;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;margin:4px 3px 4px 0}
-button.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
-button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.result{background:#eff8ff;border:1px solid #d6eaf5;border-radius:10px;padding:12px;margin-top:12px;line-height:1.7;overflow-wrap:anywhere}
-.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
-.stat{background:#f5f8fa;border:1px solid var(--line);border-radius:9px;padding:10px}.stat small{display:block;color:var(--muted);font-size:11px}.stat b{font-size:18px}
-.term-list{display:grid;gap:7px;margin-top:10px}.term{border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff}.term strong{font-size:15px}.term small{display:block;color:var(--muted);margin-top:3px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hint{font-size:12px;color:var(--muted);margin:6px 0 0}
-.math-panel{background:#f8fbfd;border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}
-.math-panel mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
-@media(max-width:430px){main{padding:14px 10px 28px}h1{font-size:21px}.card{padding:13px}.statgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.stat{padding:8px}.stat b{font-size:16px}}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.top,main{max-width:700px;margin:auto}
+.top{padding:10px 14px;display:flex;gap:10px;align-items:center;min-height:48px}.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1;font-size:15px}
+main{padding:17px 13px 36px}h1{font-size:24px;line-height:1.2;margin:0 0 5px}h2{font-size:17px;margin:0 0 9px}p{line-height:1.5}.muted{color:var(--muted);font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:13px 0}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:11px 4px;border-radius:9px;font-weight:850;font-size:13px;border:1px solid #b8deed}
+button{border:1px solid #b8deed;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer;background:#eaf7ff;color:#116b96;margin:3px}
+button.active{background:#1686b8;color:#fff;border-color:#1686b8}button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.choices{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}.math-panel{background:#f8fbfd;border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0;overflow-x:auto;text-align:center;min-height:62px}.math-panel mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.result{background:#eff8ff;border:1px solid #d6eaf5;border-radius:10px;padding:12px;margin-top:12px;line-height:1.65}
+.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.stat{background:#f5f8fa;border:1px solid var(--line);border-radius:9px;padding:10px}.stat small{display:block;color:var(--muted);font-size:11px}.stat b{font-size:17px}
+.term-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0}.term-buttons button{background:#fff;color:var(--ink);border:1px solid var(--line);min-height:54px}.term-buttons button.active{background:#eaf7ff;color:#116b96;border:2px solid var(--blue)}
+.anatomy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.part{background:#f5f8fa;border:1px solid var(--line);border-radius:9px;padding:10px}.part b{display:block;font-size:13px}.part span{font-size:12px;color:var(--muted)}
+.concept-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding:9px 0}.concept-row:last-child{border-bottom:0}
+@media(max-width:430px){main{padding:14px 10px 28px}h1{font-size:21px}.card{padding:13px}.stat{padding:8px}.stat b{font-size:15px}.term-buttons{grid-template-columns:repeat(3,minmax(0,1fr))}.term-buttons button{padding:8px 4px}}
 </style>
 <script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    displayMath: [['\\[','\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script','noscript','style','textarea','pre','code']
-  },
-  startup: { typeset: false }
-};
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']},startup:{typeset:false}};
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head>
-<body>
+</head><body>
 <header><div class="top"><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-recreated-v3">← Quiz</a><strong>SkillUp Maths</strong><span>Class 9</span></div></header>
 <main>
 <h1>Polynomial Terminology Simulator</h1>
-<p class="muted">Explore terms, signs, coefficients, variables and exponents. Mathematical expressions are rendered with MathJax.</p>
+<p class="muted">Learn by exploring ready-made examples. Tap a concept or term to see how it works—no typing or manual input required.</p>
 <div class="links"><a href="maths-polynomial-terminology-learn.html?v=20261107-polynomial-terminology-brief-learn-v1">📘 Brief Learn</a><a href="maths-polynomial-terminology-quiz.html?v=20261107-polynomial-terminology-recreated-v3">📝 Practice Quiz</a></div>
 <section class="card">
-<h2>MathJax formula guide</h2>
-<p class="muted">A polynomial in one variable can be written in standard form as:</p>
-<div class="math-panel">\[P(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\]</div>
-<p class="muted">The degree is the greatest exponent with a non-zero coefficient. For example:</p>
-<div class="math-panel">\[P(x)=4x^3-2x^2+3x-5,\qquad \deg P=3\]</div>
-</section>
-<section class="card">
-<h2>1. Expression analyzer</h2>
-<label for="expression">Enter a polynomial in x</label>
-<input id="expression" value="4x^3 - 2x^2 + 3x - 5" autocomplete="off" spellcheck="false" aria-describedby="syntaxHelp">
-<p class="hint" id="syntaxHelp">Use forms such as 4x^3 - 2x^2 + 3x - 5. Powers must be non-negative whole numbers (0–12).</p>
-<div><button id="analyze" type="button">Analyze expression</button><button id="clear" class="secondary" type="button">Clear</button></div>
-<div class="grid" aria-label="Example expressions">
-<button class="secondary preset" data-value="3x^2 - 5x^2 + 2x - 7" type="button">Combine like terms</button>
-<button class="secondary preset" data-value="-x + 4" type="button">Coefficient −1</button>
-<button class="secondary preset" data-value="6x^4 - 2x + 9" type="button">Degree 4</button>
-<button class="secondary preset" data-value="5" type="button">Constant</button>
-<button class="secondary preset" data-value="0" type="button">Zero polynomial</button>
-<button class="secondary preset" data-value="2x^3 + 0x^2 - 7x + 1" type="button">Missing power</button>
+<h2>1. Explore a polynomial</h2>
+<p class="muted">Choose an example. Observe its terms, number of terms, classification and degree.</p>
+<div class="choices" id="exampleChoices">
+<button class="active" data-example="0">Four terms</button><button data-example="1">Monomial</button><button data-example="2">Binomial</button><button data-example="3">Trinomial</button><button data-example="4">Constant</button><button data-example="5">Zero polynomial</button>
 </div>
-<div class="result" id="summary" aria-live="polite">Choose an example or enter a polynomial, then analyze it.</div>
-<div class="term-list" id="termList" aria-live="polite"></div>
+<div class="math-panel" id="mainEquation" aria-live="polite">\[P(x)=4x^3-2x^2+3x-5\]</div>
+<div class="statgrid" id="stats"></div>
+<div class="result" id="classification" aria-live="polite"></div>
 </section>
 <section class="card">
-<h2>2. Like-term checker</h2>
-<p class="muted">Like terms have identical variable parts and exponents. Their coefficients can differ.</p>
-<div class="math-panel">\[3x^2-5x^2=(3-5)x^2=-2x^2\]</div>
-<div class="grid"><div><label for="termA">First term</label><input id="termA" value="3x^2"></div><div><label for="termB">Second term</label><input id="termB" value="-5x^2"></div></div>
-<button id="compare" type="button">Compare terms</button>
-<div class="result" id="compareOutput" aria-live="polite">Compare two terms to see whether they can be combined.</div>
+<h2>2. Discover each term</h2>
+<p class="muted">Tap a term below to identify its sign, coefficient, variable part and exponent.</p>
+<div class="term-buttons" id="termButtons"></div>
+<div class="result" id="termDetail" aria-live="polite">Choose a term to inspect its parts.</div>
+<div class="anatomy" id="anatomy"></div>
 </section>
 <section class="card">
-<h2>3. Build a polynomial with coefficients</h2>
-<p class="muted">Change each coefficient to update the expression and its degree.</p>
-<div class="math-panel">\[p(x)=ax^3+bx^2+cx+d\]</div>
-<div class="grid">
-<div><label for="c3">Coefficient a (x³)</label><input id="c3" type="number" min="-9" max="9" step="1" value="2"></div>
-<div><label for="c2">Coefficient b (x²)</label><input id="c2" type="number" min="-9" max="9" step="1" value="-1"></div>
-<div><label for="c1">Coefficient c (x)</label><input id="c1" type="number" min="-9" max="9" step="1" value="3"></div>
-<div><label for="c0">Constant d</label><input id="c0" type="number" min="-9" max="9" step="1" value="4"></div>
-</div>
-<div class="result" id="builderOutput" aria-live="polite"></div>
+<h2>3. Combine like terms</h2>
+<p class="muted">Watch the coefficients combine while the variable part stays the same.</p>
+<div class="choices" id="likeChoices"><button class="active" data-like="0">Same powers</button><button data-like="1">Different powers</button><button data-like="2">Different variables</button></div>
+<div class="math-panel" id="likeEquation">\[3x^2-5x^2=(3-5)x^2=-2x^2\]</div>
+<div class="result" id="likeExplanation" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>4. Degree detective</h2>
+<p class="muted">Select a polynomial and identify the highest exponent with a non-zero coefficient.</p>
+<div class="choices" id="degreeChoices"><button class="active" data-degree="0">Cubic</button><button data-degree="1">Quadratic</button><button data-degree="2">Linear</button><button data-degree="3">Constant</button></div>
+<div class="math-panel" id="degreeEquation">\[Q(x)=6x^3+2x^2-x+8\]</div>
+<div class="result" id="degreeExplanation" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>5. Quick concept map</h2>
+<div class="concept-row"><span><b>Coefficient</b><br><span class="muted">Number multiplying the variable part</span></span><span>\(7\) in \(7x^2\)</span></div>
+<div class="concept-row"><span><b>Constant term</b><br><span class="muted">Term without a variable</span></span><span>\(-5\) in \(x+(-5)\)</span></div>
+<div class="concept-row"><span><b>Leading coefficient</b><br><span class="muted">Coefficient of the highest-degree term</span></span><span>\(4\) in \(4x^3+2\)</span></div>
+<div class="concept-row"><span><b>Standard form</b><br><span class="muted">Terms arranged in descending powers</span></span><span>\(x^3+x^2+x+1\)</span></div>
 </section>
 </main>
 <script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
@@ -100,85 +77,51 @@ window.MathJax = {
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-function typeset(element){
- if(!element)return;
- const mj=window.MathJax;
- if(mj&&mj.startup&&mj.startup.promise){
-  mj.startup.promise.then(()=>mj.typesetPromise([element])).catch(()=>{});
- }
+function typeset(el){const m=window.MathJax;if(m&&m.startup&&m.startup.promise)m.startup.promise.then(()=>m.typesetPromise([el])).catch(()=>{});}
+const examples=[
+ {tex:'P(x)=4x^3-2x^2+3x-5',terms:[{tex:'4x^3',sign:'Positive',coefficient:'4',variable:'x³',power:3},{tex:'-2x^2',sign:'Negative',coefficient:'−2',variable:'x²',power:2},{tex:'3x',sign:'Positive',coefficient:'3',variable:'x',power:1},{tex:'-5',sign:'Negative',coefficient:'−5',variable:'None (constant)',power:0}],degree:3},
+ {tex:'P(x)=7x^2',terms:[{tex:'7x^2',sign:'Positive',coefficient:'7',variable:'x²',power:2}],degree:2},
+ {tex:'P(x)=3x-4',terms:[{tex:'3x',sign:'Positive',coefficient:'3',variable:'x',power:1},{tex:'-4',sign:'Negative',coefficient:'−4',variable:'None (constant)',power:0}],degree:1},
+ {tex:'P(x)=x^2+5x+6',terms:[{tex:'x^2',sign:'Positive',coefficient:'1 (understood)',variable:'x²',power:2},{tex:'5x',sign:'Positive',coefficient:'5',variable:'x',power:1},{tex:'6',sign:'Positive',coefficient:'6',variable:'None (constant)',power:0}],degree:2},
+ {tex:'P(x)=9',terms:[{tex:'9',sign:'Positive',coefficient:'9',variable:'None (constant)',power:0}],degree:0},
+ {tex:'P(x)=0',terms:[],degree:null}
+];
+let selectedExample=0,selectedTerm=0;
+function stat(label,value){const d=document.createElement('div');d.className='stat';const s=document.createElement('small');s.textContent=label;const b=document.createElement('b');b.textContent=value;d.append(s,b);return d}
+function renderExample(index){
+ selectedExample=index;const e=examples[index],count=e.terms.length;
+ $('mainEquation').textContent='\\['+e.tex+'\\]';typeset($('mainEquation'));
+ $('stats').replaceChildren(stat('Non-zero terms',String(count)),stat('Classification',count===0?'Zero':count===1?'Monomial':count===2?'Binomial':count===3?'Trinomial':'Polynomial'),stat('Degree',e.degree===null?'Undefined':String(e.degree)));
+ $('classification').textContent=count===0?'Every coefficient is zero. The zero polynomial has no defined degree.': 'This expression has '+count+' non-zero '+(count===1?'term':'terms')+'. Its degree is '+e.degree+', the greatest exponent whose coefficient is not zero.';
+ document.querySelectorAll('[data-example]').forEach(b=>b.classList.toggle('active',Number(b.dataset.example)===index));
+ const buttons=$('termButtons');buttons.replaceChildren();
+ e.terms.forEach((t,i)=>{const b=document.createElement('button');b.textContent='Term '+(i+1)+' · '+t.tex;b.classList.toggle('active',i===0);b.addEventListener('click',()=>renderTerm(i));buttons.appendChild(b)});
+ if(e.terms.length)renderTerm(0);else{$('termDetail').textContent='The zero polynomial contains no non-zero terms to inspect.';$('anatomy').replaceChildren()}
 }
-function parsePolynomial(source){
- let s=String(source||'').replace(/\s+/g,'').replace(/−/g,'-').replace(/²/g,'^2').replace(/³/g,'^3').replace(/⁴/g,'^4');
- if(!s)return {error:'Enter an expression first.'};
- if(s[0]!=='+'&&s[0]!=='-')s='+'+s;
- const chunks=s.match(/[+-][^+-]+/g);
- if(!chunks||chunks.join('')!==s)return {error:'Use a valid sum or difference of terms, such as 3x^2 - 2x + 1.'};
- const map=new Map();
- for(const chunk of chunks){
-  const sign=chunk[0]==='-'?-1:1,body=chunk.slice(1);
-  const m=body.match(/^(?:(\d+(?:\.\d+)?)\*?)?(x(?:\^(\d+))?)?$/i);
-  if(!m||(!m[1]&&!m[2]))return {error:'Unsupported term: '+chunk+'. Use a number, x, or x raised to a whole-number power.'};
-  const coefficient=sign*(m[1]===undefined?(m[2]?1:NaN):Number(m[1]));
-  const power=m[2]?(m[3]===undefined?1:Number(m[3])):0;
-  if(!Number.isFinite(coefficient)||!Number.isInteger(power)||power<0||power>12)return {error:'Use finite coefficients and whole-number powers from 0 to 12.'};
-  map.set(power,(map.get(power)||0)+coefficient);
- }
- return {terms:[...map].map(([power,coefficient])=>({power,coefficient})).filter(t=>Math.abs(t.coefficient)>1e-10).sort((a,b)=>b.power-a.power)};
+function renderTerm(index){
+ selectedTerm=index;const t=examples[selectedExample].terms[index];if(!t)return;
+ $('termButtons').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i===index));
+ $('termDetail').textContent='You selected '+t.tex+'. A term is a number, a variable, or their product.';
+ const parts=[['Sign',t.sign],['Coefficient',t.coefficient],['Variable part',t.variable]];
+ $('anatomy').replaceChildren();parts.forEach(([name,value])=>{const d=document.createElement('div');d.className='part';const b=document.createElement('b');b.textContent=name;const s=document.createElement('span');s.textContent=value;d.append(b,s);$('anatomy').appendChild(d)});
 }
-function termTex(t){
- const n=Math.abs(t.coefficient),v=t.power===0?'':t.power===1?'x':'x^{'+t.power+'}';
- return (t.coefficient<0?'-':'')+(n===1&&t.power!==0?'':String(n))+v;
-}
-function polynomialTex(terms){
- if(!terms.length)return '0';
- return terms.map((t,i)=>{const v=termTex(t);return i&&t.coefficient>0?'+'+v:v}).join('');
-}
-function addMath(parent,tex){
- const p=document.createElement('p');
- p.textContent='\\('+tex+'\\)';
- parent.appendChild(p);
-}
-function showAnalysis(){
- const parsed=parsePolynomial($('expression').value),box=$('summary'),list=$('termList');
- list.replaceChildren();
- if(parsed.error){box.textContent=parsed.error;return}
- const terms=parsed.terms,degree=terms.length?terms[0].power:null;
- const kind=terms.length===0?'Zero polynomial':terms.length===1?'Monomial':terms.length===2?'Binomial':terms.length===3?'Trinomial':terms.length+'-term polynomial';
- const standard=document.createElement('div');standard.textContent='Standard form:';
- const math=document.createElement('div');math.className='math-panel';addMath(math,'P(x)='+polynomialTex(terms));
- const stats=document.createElement('div');stats.className='statgrid';
- [['Degree',degree===null?'Undefined':degree],['Terms',terms.length],['Type',kind]].forEach(([label,value])=>{const d=document.createElement('div');d.className='stat';const sm=document.createElement('small');sm.textContent=label;const b=document.createElement('b');b.textContent=value;d.append(sm,b);stats.appendChild(d)});
- const lc=document.createElement('p');lc.textContent='Leading coefficient: '+(terms.length?String(terms[0].coefficient):'Not applicable');
- const note=document.createElement('p');note.className='muted';note.textContent=degree===null?'All coefficients are zero, so the zero polynomial has no defined degree.':'The degree is the highest exponent with a non-zero coefficient after like terms are combined.';
- box.replaceChildren(standard,math,stats,lc,note);typeset(math);
- terms.forEach((t,i)=>{const card=document.createElement('div');card.className='term';const strong=document.createElement('strong');const m=document.createElement('div');m.className='math-panel';addMath(m,termTex(t));const small=document.createElement('small');small.textContent='Term '+(i+1)+' · signed coefficient: '+t.coefficient+' · variable part: '+(t.power?'x^'+t.power:'none (constant)')+' · exponent: '+t.power;card.append(m,small);list.appendChild(card);typeset(m)});
-}
-function parseSingleTerm(value){const parsed=parsePolynomial(value);return parsed.error||parsed.terms.length!==1?null:parsed.terms[0]}
-function compare(){
- const a=parseSingleTerm($('termA').value),b=parseSingleTerm($('termB').value),out=$('compareOutput');
- if(!a||!b){out.textContent='Enter exactly one valid term in each field, for example 3x^2 and -5x^2.';return}
- const same=a.power===b.power,sum=a.coefficient+b.coefficient;
- out.replaceChildren();
- const result=document.createElement('p');result.textContent=same?'Like terms: the variable parts and exponents match.':'Unlike terms: the variable parts or exponents differ.';out.appendChild(result);
- const math=document.createElement('div');math.className='math-panel';
- addMath(math,termTex(a)+(same?'+':'\;and\;')+termTex(b)+(same?'='+(sum===0?'0':termTex({power:a.power,coefficient:sum})):''));
- out.appendChild(math);typeset(math);
-}
-function updateBuilder(){
- const powers=[3,2,1,0],ids=['c3','c2','c1','c0'],terms=[];
- ids.forEach((id,i)=>{const raw=$(id).value,n=raw===''?0:Number(raw);if(Number.isFinite(n)&&n!==0)terms.push({power:powers[i],coefficient:n})});
- const degree=terms.length?terms[0].power:null,box=$('builderOutput');box.replaceChildren();
- const math=document.createElement('div');math.className='math-panel';addMath(math,'p(x)='+polynomialTex(terms));box.appendChild(math);
- const details=document.createElement('p');details.textContent='Degree: '+(degree===null?'undefined (zero polynomial)':degree)+' · '+(terms.length===0?'zero polynomial':terms.length===1?'monomial':terms.length===2?'binomial':terms.length===3?'trinomial':terms.length+' terms');box.appendChild(details);typeset(math);
-}
-$('analyze').addEventListener('click',showAnalysis);
-$('clear').addEventListener('click',()=>{$('expression').value='';showAnalysis();$('expression').focus()});
-document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{$('expression').value=b.dataset.value;showAnalysis()}));
-$('compare').addEventListener('click',compare);
-['c3','c2','c1','c0'].forEach(id=>$(id).addEventListener('input',updateBuilder));
-$('expression').addEventListener('keydown',e=>{if(e.key==='Enter')showAnalysis()});
-document.addEventListener('DOMContentLoaded',()=>typeset(document.body));
-showAnalysis();compare();updateBuilder();
+const likeData=[
+ {eq:'3x^2-5x^2=(3-5)x^2=-2x^2',text:'Like terms: both have x². Subtract the coefficients 3 and 5; keep x² unchanged.'},
+ {eq:'4x^2+3x',text:'Unlike terms: x² and x have different exponents. They cannot be combined into one term.'},
+ {eq:'2x+5y',text:'Unlike terms: x and y are different variables. Keep both terms separate.'}
+];
+function renderLike(i){const d=likeData[i];$('likeEquation').textContent='\\['+d.eq+'\\]';$('likeExplanation').textContent=d.text;typeset($('likeEquation'));document.querySelectorAll('[data-like]').forEach(b=>b.classList.toggle('active',Number(b.dataset.like)===i))}
+const degreeData=[
+ {eq:'Q(x)=6x^3+2x^2-x+8',degree:3,why:'The greatest exponent is 3, and its coefficient 6 is non-zero. This is a cubic polynomial.'},
+ {eq:'Q(x)=5x^2-4x+1',degree:2,why:'The greatest exponent is 2, and its coefficient 5 is non-zero. This is a quadratic polynomial.'},
+ {eq:'Q(x)=8x-7',degree:1,why:'The greatest exponent is 1, and its coefficient 8 is non-zero. This is a linear polynomial.'},
+ {eq:'Q(x)=12',degree:0,why:'A non-zero constant has degree 0 because it can be written as 12x⁰.'}
+];
+function renderDegree(i){const d=degreeData[i];$('degreeEquation').textContent='\\['+d.eq+'\\]';$('degreeExplanation').textContent='Degree = '+d.degree+'. '+d.why;typeset($('degreeEquation'));document.querySelectorAll('[data-degree]').forEach(b=>b.classList.toggle('active',Number(b.dataset.degree)===i))}
+document.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>renderExample(Number(b.dataset.example))));
+document.querySelectorAll('[data-like]').forEach(b=>b.addEventListener('click',()=>renderLike(Number(b.dataset.like))));
+document.querySelectorAll('[data-degree]').forEach(b=>b.addEventListener('click',()=>renderDegree(Number(b.dataset.degree))));
+renderExample(0);renderLike(0);renderDegree(0);
 })();
 </script>
 </body></html>

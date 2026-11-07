@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-ax-by-c-simulator-v1"><meta name="description" content="Explore ax + by = c with adjustable coefficients, intercepts, solution points and a live graph."><title>ax + by = c | Interactive Simulator</title>
+<style>
+:root{--blue:#248ac0;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:3}.nav{max-width:680px;margin:auto;padding:8px 12px;display:flex;gap:9px;align-items:center}.back{color:var(--blue);text-decoration:none;font-weight:800}.brand{font-weight:850;flex:1}main{width:min(100% - 24px,680px);margin:auto;padding:16px 4px 30px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.actions{display:flex;gap:8px;margin:13px 0}.actions a{flex:1;text-align:center;padding:10px 7px;border:1px solid #d7eaf5;border-radius:9px;background:#eef8ff;color:#236b91;text-decoration:none;font-size:12px;font-weight:850}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;margin:11px 0}.card h2{font-size:17px;margin:0 0 9px}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.control label{display:block;font-size:12px;font-weight:800;margin-bottom:5px}.control input{width:100%;accent-color:var(--blue)}.value{text-align:center;font-size:17px;font-weight:850;color:#176d99}.presets{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.presets button{border:1px solid var(--line);background:#f7f9fa;border-radius:8px;padding:8px 10px;font-weight:750;color:var(--ink)}.equation{text-align:center;background:#f0f8fc;padding:12px;border-radius:10px;font-size:22px;font-weight:850;color:#176d99}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{background:#f7f9fa;border-radius:9px;padding:10px;font-size:12px}.stat b{display:block;font-size:15px;margin-top:3px}svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:9px}.note{background:#f7f9fa;border-radius:9px;padding:10px;font-size:13px;line-height:1.5}@media(max-width:440px){.controls{grid-template-columns:1fr}.equation{font-size:19px}}
+</style></head><body><header><div class="nav"><a class="back" href="maths-ax-by-c-class9-quiz.html?v=20261107-ax-by-c-connected-v2">← Quiz</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div></div></header><main>
+<h1 style="font-size:22px;margin:0">Linear Equation Lab</h1><p class="muted">Change a, b and c to see how ax + by = c changes its intercepts and line.</p><div class="actions"><a href="maths-ax-by-c-class9-quiz.html?v=20261107-ax-by-c-connected-v2">📝 Practice Quiz</a><a href="maths-ax-by-c-learn.html?v=20261107-ax-by-c-brief-learn-v1">📘 Brief Learn</a></div>
+<section class="card"><h2>Adjust the equation</h2><div class="controls">
+<div class="control"><label for="a">Coefficient a</label><input id="a" type="range" min="-5" max="5" step="1" value="2"><div class="value" id="av">2</div></div>
+<div class="control"><label for="b">Coefficient b</label><input id="b" type="range" min="-5" max="5" step="1" value="3"><div class="value" id="bv">3</div></div>
+<div class="control"><label for="c">Constant c</label><input id="c" type="range" min="-10" max="10" step="1" value="12"><div class="value" id="cv">12</div></div>
+</div><div class="presets"><button data-values="2,3,12">2x + 3y = 12</button><button data-values="1,1,5">x + y = 5</button><button data-values="0,2,6">Horizontal</button><button data-values="3,0,6">Vertical</button></div></section>
+<section class="card"><div class="equation" id="eq">2x + 3y = 12</div><div class="stats" style="margin-top:10px"><div class="stat">x-intercept<b id="xi">(6, 0)</b></div><div class="stat">y-intercept<b id="yi">(0, 4)</b></div><div class="stat">Slope<b id="slope">−2/3</b></div><div class="stat">Example solution<b id="point">(3, 2)</b></div></div></section>
+<section class="card"><h2>Live graph</h2><svg id="graph" viewBox="0 0 360 270" role="img" aria-label="Coordinate graph of the current linear equation"><g id="grid"></g><line x1="20" y1="135" x2="340" y2="135" stroke="#263746" stroke-width="1.5"/><line x1="180" y1="12" x2="180" y2="258" stroke="#263746" stroke-width="1.5"/><path id="line" d="" fill="none" stroke="#248ac0" stroke-width="3"/><circle id="dot1" r="5" fill="#48b516"/><circle id="dot2" r="5" fill="#48b516"/></svg><p class="muted">The graph uses a fixed viewing window from −8 to 8 on both axes. The green points mark intercepts when they fall inside the window.</p></section>
+<section class="card"><h2>Check an ordered pair</h2><div class="controls"><div class="control"><label for="xv">x value</label><input id="xv" type="number" value="3" step="1"></div><div class="control"><label for="yv">y value</label><input id="yv" type="number" value="2" step="1"></div></div><p class="note" id="checkResult" aria-live="polite">2(3) + 3(2) = 12. This pair satisfies the equation.</p></section>
+</main><script>
+(function(){
+const $=id=>document.getElementById(id),a=$('a'),b=$('b'),c=$('c');
+const ns='http://www.w3.org/2000/svg';const grid=$('grid');
+for(let v=-7;v<=7;v++){let x=180+v*20,y=135-v*15;let vx=document.createElementNS(ns,'line');vx.setAttribute('x1',x);vx.setAttribute('x2',x);vx.setAttribute('y1',12);vx.setAttribute('y2',258);vx.setAttribute('stroke','#e8edf0');grid.append(vx);let hy=document.createElementNS(ns,'line');hy.setAttribute('x1',20);hy.setAttribute('x2',340);hy.setAttribute('y1',y);hy.setAttribute('y2',y);hy.setAttribute('stroke','#e8edf0');grid.append(hy)}
+const fmt=n=>Number.isInteger(n)?String(n):Number(n.toFixed(2)).toString();
+function update(){
+let A=+a.value,B=+b.value,C=+c.value;$('av').textContent=A;$('bv').textContent=B;$('cv').textContent=C;
+$('eq').textContent=(A===1?'':A===-1?'−':A)+'x '+(B<0?'− ':'+ ')+(Math.abs(B)===1?'':Math.abs(B))+'y = '+C;
+let xint=B!==0?C/A:null,yint=A!==0?C/B:null;
+$('xi').textContent=A!==0?'('+fmt(C/A)+', 0)':(C===0?'All x when y=0':'No x-intercept from y=0');
+$('yi').textContent=B!==0?'(0, '+fmt(C/B)+')':(C===0?'All y when x=0':'No y-intercept from x=0');
+$('slope').textContent=B!==0?fmt(-A/B):'Undefined (vertical)';
+let px,py;if(B!==0){px=0;py=C/B;}else if(A!==0){px=C/A;py=0;}else{px=0;py=0}
+$('point').textContent='('+fmt(px)+', '+fmt(py)+')';
+let path='';if(A!==0||B!==0){let pts=[];for(let x=-8;x<=8;x+=.25){let y=B!==0?(C-A*x)/B:null;if(B===0){pts.push([C/A,-8],[C/A,8]);break}if(y>=-8&&y<=8)pts.push([x,y])}if(pts.length>1){let p1=pts[0],p2=pts[pts.length-1];path='M '+(180+p1[0]*20)+' '+(135-p1[1]*15)+' L '+(180+p2[0]*20)+' '+(135-p2[1]*15)}}
+$('line').setAttribute('d',path);
+[['dot1',xint,0],['dot2',0,yint]].forEach(([id,x,y])=>{let el=$(id);if((id==='dot1'&&x!==null&&Number.isFinite(x)&&Math.abs(x)<=8)||(id==='dot2'&&y!==null&&Number.isFinite(y)&&Math.abs(y)<=8)){el.setAttribute('cx',180+(x||0)*20);el.setAttribute('cy',135-(y||0)*15);el.style.display='';}else el.style.display='none'});
+if(A===0&&B===0){$('eq').textContent='0 = '+C;$('line').setAttribute('d','');$('slope').textContent='Not a line';}
+check();
+}
+function check(){let A=+a.value,B=+b.value,C=+c.value,X=Number($('xv').value),Y=Number($('yv').value);let lhs=A*X+B*Y;let ok=Number.isFinite(X)&&Number.isFinite(Y)&&lhs===C;$('checkResult').textContent=fmt(A)+'('+fmt(X)+') + '+fmt(B)+'('+fmt(Y)+') = '+fmt(lhs)+'. '+(ok?'This pair satisfies the equation.':'This pair does not satisfy the equation; the left side must equal '+C+'.')}
+[a,b,c,$('xv'),$('yv')].forEach(el=>el.addEventListener('input',update));
+document.querySelectorAll('[data-values]').forEach(btn=>btn.addEventListener('click',()=>{let v=btn.dataset.values.split(',');[a.value,b.value,c.value]=v;update()}));
+update();
+})();
+</script><script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>

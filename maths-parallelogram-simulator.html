@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-parallelogram-sim-v1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261107-parallelogram-sim-fit-v2">
 <meta name="description" content="Interactive parallelogram simulator for side lengths, angle relationships and bisecting diagonals, with MathJax formulas.">
 <title>Parallelogram Theorems · Simulator | SkillUp Maths</title>
 <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},chtml:{scale:1}};</script>
@@ -40,15 +40,21 @@ svg{display:block;width:100%;max-width:420px;margin:0 auto}.shape{fill:#eff8fc;s
 const $=id=>document.getElementById(id);
 function update(){
  const base=Number($('base').value),side=Number($('side').value),angle=Number($('angle').value),rad=angle*Math.PI/180;
- const A={x:65,y:220},B={x:65+base*9,y:220},D={x:65+side*8*Math.cos(rad),y:220-side*8*Math.sin(rad)},C={x:B.x+D.x-A.x,y:B.y+D.y-A.y},O={x:(A.x+C.x)/2,y:(A.y+C.y)/2};
- const pts=[A,B,C,D].map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
- $('shape').setAttribute('points',pts);
- $('diagAC').setAttribute('x1',A.x);$('diagAC').setAttribute('y1',A.y);$('diagAC').setAttribute('x2',C.x);$('diagAC').setAttribute('y2',C.y);
- $('diagBD').setAttribute('x1',B.x);$('diagBD').setAttribute('y1',B.y);$('diagBD').setAttribute('x2',D.x);$('diagBD').setAttribute('y2',D.y);
+ const raw={A:{x:0,y:0},B:{x:base,y:0},D:{x:side*Math.cos(rad),y:side*Math.sin(rad)}};
+ raw.C={x:raw.B.x+raw.D.x,y:raw.B.y+raw.D.y};
+ const xs=Object.values(raw).map(p=>p.x),ys=Object.values(raw).map(p=>p.y);
+ const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+ const scale=Math.min(300/Math.max(1,maxX-minX),178/Math.max(1,maxY-minY));
+ const usedW=(maxX-minX)*scale,usedH=(maxY-minY)*scale,offX=(380-usedW)/2,offY=32+(190-usedH)/2;
+ const P={};Object.keys(raw).forEach(k=>{P[k]={x:offX+(raw[k].x-minX)*scale,y:offY+(maxY-raw[k].y)*scale};});
+ const O={x:(P.A.x+P.C.x)/2,y:(P.A.y+P.C.y)/2};
+ $('shape').setAttribute('points',[P.A,P.B,P.C,P.D].map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' '));
+ $('diagAC').setAttribute('x1',P.A.x);$('diagAC').setAttribute('y1',P.A.y);$('diagAC').setAttribute('x2',P.C.x);$('diagAC').setAttribute('y2',P.C.y);
+ $('diagBD').setAttribute('x1',P.B.x);$('diagBD').setAttribute('y1',P.B.y);$('diagBD').setAttribute('x2',P.D.x);$('diagBD').setAttribute('y2',P.D.y);
  $('pointO').setAttribute('cx',O.x);$('pointO').setAttribute('cy',O.y);
- [['labelA',A,-13,18],['labelB',B,7,17],['labelC',C,7,-8],['labelD',D,-16,-8],['labelO',O,7,-6]].forEach(([id,p,dx,dy])=>{$(id).setAttribute('x',p.x+dx);$(id).setAttribute('y',p.y+dy);});
- $('sideAB').setAttribute('x',(A.x+B.x)/2);$('sideAB').setAttribute('y',Math.min(270,A.y+20));$('sideAB').textContent='AB = '+base+' cm';
- $('sideAD').setAttribute('x',Math.min(A.x,D.x)-2);$('sideAD').setAttribute('y',(A.y+D.y)/2);$('sideAD').textContent='AD = '+side+' cm';
+ [['labelA',P.A,-13,17],['labelB',P.B,7,17],['labelC',P.C,7,-8],['labelD',P.D,-16,-8],['labelO',O,7,-6]].forEach(([id,p,dx,dy])=>{$(id).setAttribute('x',p.x+dx);$(id).setAttribute('y',p.y+dy);});
+ $('sideAB').setAttribute('x',(P.A.x+P.B.x)/2);$('sideAB').setAttribute('y',Math.min(265,P.A.y+19));$('sideAB').textContent='AB = '+base+' cm';
+ $('sideAD').setAttribute('x',Math.max(4,Math.min(P.A.x,P.D.x)-5));$('sideAD').setAttribute('y',(P.A.y+P.D.y)/2);$('sideAD').textContent='AD = '+side+' cm';
  $('baseOut').textContent=base+' cm';$('sideOut').textContent=side+' cm';$('angleOut').textContent=angle+'°';
  $('cdValue').textContent=base+' cm';$('bcValue').textContent=side+' cm';$('cAngle').textContent=angle+'°';$('bAngle').textContent=(180-angle)+'°';
  $('explain').textContent='AB = CD = '+base+' cm; AD = BC = '+side+' cm. Opposite angles A and C are '+angle+'°. Adjacent angles B and D are '+(180-angle)+'°. Diagonals meet at their common midpoint O.';

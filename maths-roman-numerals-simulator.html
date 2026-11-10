@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261110-roman-numerals-simulator-v1">
+<meta name="description" content="Convert numbers to Roman numerals and Roman numerals to numbers with an interactive simulator and practice challenge.">
+<title>Roman Numerals Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.top{width:min(100% - 24px,700px);margin:auto;min-height:52px;display:flex;align-items:center;gap:10px}
+.top a{color:var(--blue);text-decoration:none;font-weight:850}.top strong{flex:1;font-size:14px}
+main{width:min(100% - 24px,700px);margin:auto;padding:18px 0 36px}
+h1{font-size:clamp(22px,5vw,28px);margin:0 0 6px}h2{font-size:18px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:13px 0}
+.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:10px 6px;border-radius:10px;font-weight:850;font-size:13px;border:1px solid #b8deed}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:13px 0;box-shadow:0 4px 16px #19374b0a}
+label{display:block;font-weight:750;margin:12px 0 5px;font-size:13px}
+input{width:100%;min-height:44px;border:1px solid #b8cbd5;border-radius:9px;padding:10px 11px;font-size:17px;background:#fff;color:var(--ink)}
+button{background:var(--green);color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:850;cursor:pointer;margin:9px 5px 0 0;min-height:42px}
+button.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
+.result{background:#eff8ff;border:1px solid #cfe6f2;border-radius:11px;padding:12px;margin-top:12px;line-height:1.65;overflow-wrap:anywhere}
+.roman{font-size:clamp(25px,6vw,34px);font-weight:900;letter-spacing:2px;color:#116b96;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid>div{min-width:0}
+.symbols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}
+.symbol{padding:9px 5px;text-align:center;background:#f4f8fb;border:1px solid var(--line);border-radius:9px}
+.symbol b{display:block;font-size:18px}.symbol span{font-size:12px;color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:460px){main{width:calc(100% - 18px);padding-top:13px}.card{padding:13px}.grid{grid-template-columns:1fr}.symbols{grid-template-columns:repeat(4,minmax(0,1fr))}.links{grid-template-columns:1fr}}
+:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+</style></head>
+<body>
+<header><div class="top"><a href="maths-roman-numerals-quiz.html?route=20261014-existing-quizzes-v1">← Quiz</a><strong>SkillUp Maths</strong><span class="small">Number systems</span></div></header>
+<main>
+<h1>Roman Numerals Simulator</h1>
+<p class="muted">Convert whole numbers into Roman numerals and decode Roman numerals into numbers. Explore standard notation from 1 to 3,999.</p>
+<div class="links"><a href="maths-roman-numerals-quiz.html?route=20261014-existing-quizzes-v1">📝 Practice Quiz</a><a href="maths-home.html?v=20261106-large-numbers-line-symmetry-layout-v2">📚 Maths Path</a></div>
+<section class="card">
+<h2>1. Number → Roman numeral</h2><p class="muted">Enter a whole number between 1 and 3,999.</p>
+<label for="decimal">Enter a number</label><input id="decimal" type="number" min="1" max="3999" step="1" value="2026">
+<button id="toRoman" type="button">Convert to Roman</button><div id="romanResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>2. Roman numeral → Number</h2><p class="muted">Enter a standard Roman numeral using I, V, X, L, C, D or M.</p>
+<label for="romanInput">Roman numeral</label><input id="romanInput" type="text" maxlength="20" value="MMXXVI" autocapitalize="characters" spellcheck="false">
+<button id="toNumber" type="button">Convert to number</button><div id="numberResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>3. Roman numeral symbols</h2><p class="muted">The seven basic symbols and their values.</p>
+<div class="symbols"><div class="symbol"><b>I</b><span>1</span></div><div class="symbol"><b>V</b><span>5</span></div><div class="symbol"><b>X</b><span>10</span></div><div class="symbol"><b>L</b><span>50</span></div><div class="symbol"><b>C</b><span>100</span></div><div class="symbol"><b>D</b><span>500</span></div><div class="symbol"><b>M</b><span>1,000</span></div></div>
+<p class="small">Subtractive pairs: IV = 4 · IX = 9 · XL = 40 · XC = 90 · CD = 400 · CM = 900.</p>
+</section>
+<section class="card">
+<h2>4. Quick challenge</h2><p class="muted">Convert the displayed number into Roman numerals.</p>
+<div class="result"><b id="challengeNumber" class="roman">49</b></div>
+<label for="challengeAnswer">Your answer</label><input id="challengeAnswer" type="text" maxlength="20" placeholder="Type Roman numeral" autocapitalize="characters" spellcheck="false">
+<button id="checkChallenge" type="button">Check answer</button><button id="newChallenge" class="secondary" type="button">New number</button>
+<div id="challengeFeedback" class="result" aria-live="polite">Enter your answer and check it.</div>
+</section>
+</main>
+<script>
+(()=> {
+ const $=id=>document.getElementById(id);
+ const pairs=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+ function encode(n){let out='';for(const [v,s] of pairs){while(n>=v){out+=s;n-=v}}return out}
+ function decode(s){const map={I:1,V:5,X:10,L:50,C:100,D:500,M:1000};let total=0;for(let i=0;i<s.length;i++){const v=map[s[i]],next=map[s[i+1]]||0;total+=v<next?-v:v}return total}
+ function validRoman(raw){const s=raw.trim().toUpperCase();if(!s||!/^[IVXLCDM]+$/.test(s))return null;const n=decode(s);return n>=1&&n<=3999&&encode(n)===s?n:null}
+ function convertRoman(){const raw=$('decimal').value,n=Number(raw),out=$('romanResult');if(raw===''||!Number.isInteger(n)||n<1||n>3999){out.textContent='Please enter a whole number from 1 to 3,999.';return}const r=encode(n);out.innerHTML='<div class="small">Roman numeral for '+n+'</div><div class="roman">'+r+'</div><p><b>Breakdown:</b> '+pairs.filter(([v])=>Math.floor(n/v)>0).map(([v,s])=>{const count=Math.floor(n/v);return count+' × '+s}).join(' + ')+'</p>'}
+ function convertNumber(){const raw=$('romanInput').value,s=raw.trim().toUpperCase(),out=$('numberResult');if(!s){out.textContent='Enter a Roman numeral.';return}const n=validRoman(s);if(n===null){out.textContent='That is not a valid standard Roman numeral. Use correct forms such as IV, IX, XL, XC, CD and CM (range: 1–3,999).';return}out.innerHTML='<div class="roman">'+s+'</div><p><b>Value:</b> '+n+'</p><p><b>Expanded:</b> '+[...s].map(x=>({I:1,V:5,X:10,L:50,C:100,D:500,M:1000}[x])).join(' + ')+'</p>'}
+ let challenge=49;
+ function newChallenge(){challenge=[4,9,14,19,24,39,44,49,58,90,99,144,249,399,444,944,999,1492,2026,3999][Math.floor(Math.random()*20)];$('challengeNumber').textContent=challenge;$('challengeAnswer').value='';$('challengeFeedback').textContent='Enter your answer and check it.'}
+ $('toRoman').addEventListener('click',convertRoman);$('decimal').addEventListener('keydown',e=>{if(e.key==='Enter')convertRoman()});
+ $('toNumber').addEventListener('click',convertNumber);$('romanInput').addEventListener('keydown',e=>{if(e.key==='Enter')convertNumber()});
+ $('checkChallenge').addEventListener('click',()=>{const n=validRoman($('challengeAnswer').value);$('challengeFeedback').textContent=n===challenge?'Correct! '+challenge+' is '+encode(challenge)+'.':n===null?'Enter a valid Roman numeral.':'Not quite. The correct answer is '+encode(challenge)+'.'});
+ $('newChallenge').addEventListener('click',newChallenge);
+ convertRoman();convertNumber();
+})();
+</script>
+</body></html>

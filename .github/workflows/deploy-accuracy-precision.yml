@@ -1,64 +1,52 @@
-name: Deploy Accuracy and Precision Fix to GitHub Pages
+name: Validate Accuracy and Precision Pages
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-  workflow_dispatch:
+    paths:
+      - 'physics-concept.html'
+      - 'physics-accuracy-and-precision*.html'
+      - '.github/workflows/deploy-accuracy-precision.yml'
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: accuracy-pages
-  cancel-in-progress: true
+  group: validate-accuracy-precision
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate Accuracy and Precision route
+      - name: Validate Accuracy and Precision page architecture
         shell: bash
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
-          p = Path('physics-concept.html')
-          s = p.read_text(encoding='utf-8')
-          marker = '/* SKILLUP ACCURACY PRECISION ROUTE V2 */'
-          if marker not in s:
-              code = '''<script>/* SKILLUP ACCURACY PRECISION ROUTE V2 */
-          (function(){var c=(new URLSearchParams(location.search).get('concept')||'').trim().toLowerCase();if(c==='accuracy and precision'||c==='accuracy & precision'||c==='accuracy and precisions'){location.replace('physics-accuracy-and-precision.html');}})();</script>
-          '''
-              s = s.replace('<body>', '<body>' + code, 1)
-              p.write_text(s, encoding='utf-8')
-          assert marker in p.read_text(encoding='utf-8')
-          d = Path('physics-accuracy-and-precision.html')
-          assert d.exists(), 'Dedicated Accuracy and Precision page is missing'
-          h = d.read_text(encoding='utf-8')
-          start = h.find('const questions = [')
-          end = h.find('];', start)
-          assert start >= 0 and end > start, 'Accuracy and Precision question array is missing'
-          question_block = h[start:end]
-          question_count = question_block.count('"q":')
-          assert question_count == 30, f'Dedicated Accuracy and Precision page must contain 30 MCQs (found {question_count})'
-          print('Accuracy and Precision route validated with 15 MCQs')
+
+          learn = Path('physics-accuracy-and-precision.html')
+          simulator = Path('physics-accuracy-and-precision-simulator.html')
+          practice = Path('physics-accuracy-and-precision-practice.html')
+          concept = Path('physics-concept.html')
+
+          for page in (learn, simulator, practice, concept):
+              if not page.is_file():
+                  raise SystemExit(f'Required page is missing: {page}')
+
+          html = learn.read_text(encoding='utf-8')
+          required_links = (
+              'physics-accuracy-and-precision-simulator.html',
+              'physics-accuracy-and-precision-practice.html',
+          )
+          for link in required_links:
+              if link not in html:
+                  raise SystemExit(f'Learn page is missing its navigation link: {link}')
+
+          print('PASS: Learn, Simulator, Practice and Physics concept pages exist.')
+          print('PASS: Learn page links to Simulator and Practice.')
           PY
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

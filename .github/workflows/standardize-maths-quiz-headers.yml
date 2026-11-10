@@ -1,0 +1,78 @@
+name: Standardize Maths Quiz Headers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "RUN_MATHS_QUIZ_HEADER_STANDARDIZER"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: skillup-main-writer
+  cancel-in-progress: false
+
+jobs:
+  standardize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Apply the Large Numbers header to all Maths quizzes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          changed = []
+          skipped = []
+          for path in sorted(Path(".").glob("maths-*-quiz.html")):
+              source = path.read_text(encoding="utf-8")
+              if path.name == "maths-large-numbers-quiz.html":
+                  continue
+              match = re.search(r"<header\\b[^>]*>[\\s\\S]*?</header>", source, re.I)
+              if not match:
+                  skipped.append(str(path))
+                  continue
+              old = match.group(0)
+              back = re.search(r'<a\\b(?=[^>]*\\bclass=["\'][^"\']*\\bback\\b)[^>]*>[\\s\\S]*?</a>', old, re.I)
+              if not back:
+                  back = re.search(r'<a\\b[^>]*href=["\'][^"\']*maths-home\\.html[^"\']*["\'][^>]*>[\\s\\S]*?</a>', old, re.I)
+              href = 'maths-home.html'
+              if back:
+                  href_match = re.search(r'href=(["\'])(.*?)\\1', back.group(0), re.I)
+                  if href_match:
+                      href = href_match.group(2)
+              header = f'''<header><div class="nav">
+          <a class="back" href="{href}" aria-label="Back to Maths Path">←</a>
+          <div class="brand">SkillUp <span style="color:#58a900">Maths</span></div>
+          <div class="pill xp">⭐ <span id="xp">0</span> XP</div>
+          <div class="pill streak">🔥 <span id="streak">0</span> streak</div>
+          <span id="hearts" hidden>❤️ 5</span>
+          <span id="bar" hidden></span>
+          </div></header>'''
+              if old != header:
+                  source = source[:match.start()] + header + source[match.end():]
+                  path.write_text(source, encoding="utf-8")
+                  changed.append(str(path))
+
+          print(f"Standardized headers: {len(changed)}")
+          print(f"Skipped (header/back link not found): {len(skipped)} {skipped[:20]}")
+          if not changed:
+              raise SystemExit("No headers changed; refusing empty commit.")
+          PY
+      - name: Commit and push changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 'maths-*-quiz.html'
+          git commit -m "Standardize Maths quiz headers"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main

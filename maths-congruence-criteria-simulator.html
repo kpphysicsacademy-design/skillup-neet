@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f7f9fa">
-<meta name="skillup-release" content="20261110-congruence-simulator-v5">
+<meta name="skillup-release" content="20261110-congruence-simulator-v6">
 <meta name="description" content="Interactive triangle congruence simulator for Class 9. Explore SSS, SAS, ASA, AAS and RHS with live comparisons.">
 <title>Congruence Criteria | Simulator | SkillUp Maths</title>
 <style>
@@ -68,13 +68,15 @@ main{width:min(100% - 22px,650px);margin:14px auto 30px}
 </section>
 <section class="card">
 <h2>Live triangle comparison</h2>
-<svg class="diagram" viewBox="0 0 360 190" role="img" aria-label="Two triangles with corresponding side measurements">
-<path class="tri" d="M28 145 L135 145 L82 42 Z"/><path class="tri" d="M225 145 L332 145 L279 42 Z"/>
-<path class="mark" d="M28 145L135 145 M225 145L332 145"/>
-<text x="18" y="160">A</text><text x="137" y="160">B</text><text x="82" y="32" text-anchor="middle">C</text>
-<text x="215" y="160">P</text><text x="334" y="160">Q</text><text x="279" y="32" text-anchor="middle">R</text>
-<text id="diagramLeft" x="82" y="178" text-anchor="middle" style="font-weight:800">5 · 6 · 7</text>
-<text id="diagramRight" x="279" y="178" text-anchor="middle" style="font-weight:800">5 · 6 · 7</text>
+<svg class="diagram" viewBox="0 0 360 190" role="img" aria-label="Two live triangle diagrams that change with the entered measurements">
+<path id="triangleA" class="tri" d="M30 135 L130 135 L80 45 Z"/>
+<path id="triangleB" class="tri" d="M210 135 L310 135 L260 45 Z"/>
+<path id="triangleAEdges" class="mark" d="M30 135L130 135"/>
+<path id="triangleBEdges" class="mark" d="M210 135L310 135"/>
+<text id="vertexA" x="22" y="148">A</text><text id="vertexB" x="132" y="148">B</text><text id="vertexC" x="80" y="35" text-anchor="middle">C</text>
+<text id="vertexP" x="202" y="148">P</text><text id="vertexQ" x="312" y="148">Q</text><text id="vertexR" x="260" y="35" text-anchor="middle">R</text>
+<text id="diagramLeft" x="80" y="177" text-anchor="middle" style="font-weight:800">5 · 6 · 7</text>
+<text id="diagramRight" x="260" y="177" text-anchor="middle" style="font-weight:800">5 · 6 · 7</text>
 </svg>
 <div class="result" id="result" aria-live="polite"><div class="formula" id="resultTitle">SSS condition satisfied</div><span id="resultText">All three corresponding sides match. The triangles are congruent by SSS.</span></div>
 <p class="note" id="explain">Correspondence: A ↔ P, B ↔ Q and C ↔ R. Compare matching parts in this order.</p>
@@ -112,6 +114,49 @@ AAA:{match:[[50,60,70],[50,60,70]],change:[[50,60,70],[50,60,70]]}
 function read(ids){return ids.map(id=>Number($(id).value));}
 function near(a,b){return Math.abs(a-b)<1e-8;}
 function validSides(v){return v[0]+v[1]>v[2]&&v[1]+v[2]>v[0]&&v[2]+v[0]>v[1];}
+function trianglePoints(v,rule,large){
+ let p;
+ const rad=x=>x*Math.PI/180;
+ if(rule==='SSS'){
+  const [ab,bc,ca]=v, x=(ca*ca+ab*ab-bc*bc)/(2*ab), y2=ca*ca-x*x;
+  if(ab>0&&y2>0)p=[[0,0],[ab,0],[x,Math.sqrt(y2)]];
+ }else if(rule==='SAS'){
+  const [ab,angle,ac]=v;p=[[0,0],[ab,0],[ac*Math.cos(rad(angle)),ac*Math.sin(rad(angle))]];
+ }else if(rule==='ASA'){
+  const [A,ab,B]=v,C=180-A-B;
+  if(A>0&&B>0&&C>0){const ac=ab*Math.sin(rad(B))/Math.sin(rad(C));p=[[0,0],[ab,0],[ac*Math.cos(rad(A)),ac*Math.sin(rad(A))]];}
+ }else if(rule==='AAS'){
+  const [A,B,ac]=v,C=180-A-B;
+  if(A>0&&B>0&&C>0){const ab=ac*Math.sin(rad(C))/Math.sin(rad(B));p=[[0,0],[ab,0],[ac*Math.cos(rad(A)),ac*Math.sin(rad(A))]];}
+ }else if(rule==='RHS'){
+  const [h,leg]=v,other=Math.sqrt(h*h-leg*leg);
+  if(h>leg&&other>0)p=[[0,0],[leg,0],[0,other]];
+ }else if(rule==='AAA'){
+  const [A,B,C]=v,ab=100,ac=ab*Math.sin(rad(B))/Math.sin(rad(C));
+  if(A+B+C>179.999&&A+B+C<180.001&&A>0&&B>0&&C>0)p=[[0,0],[ab,0],[ac*Math.cos(rad(A)),ac*Math.sin(rad(A))]];
+ }else if(rule==='SSA'){
+  const [ab,bc,A]=v,s=Math.sin(rad(A)),sinC=ab*s/bc;
+  if(A>0&&A<180&&sinC>0&&sinC<=1){const C=Math.asin(sinC)*180/Math.PI,B=180-A-C;if(B>0){const ac=bc*Math.sin(rad(B))/s;p=[[0,0],[ab,0],[ac*Math.cos(rad(A)),ac*Math.sin(rad(A))]];}}
+ }
+ if(!p){const w=Math.max(20,Math.min(100,v[0]||50)),h=Math.max(20,Math.min(90,(v[1]||50)*.7));p=[[0,0],[w,0],[w*.48,h]];}
+ const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]),minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+ const width=Math.max(1,maxX-minX),height=Math.max(1,maxY-minY);
+ const scale=Math.min(112/width,92/height);
+ const panelX=large?205:25,panelY=128;
+ return p.map(q=>[panelX+(q[0]-minX)*scale,panelY-(q[1]-minY)*scale]);
+}
+function paintTriangle(pathId,edgeId,vertexIds,values,rule,large){
+ const pts=trianglePoints(values,rule,large),fmt=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')+' Z';
+ $(pathId).setAttribute('d',fmt);
+ $(edgeId).setAttribute('d','M'+pts[0].join(' ')+'L'+pts[1].join(' '));
+ const names=large?['P','Q','R']:['A','B','C'];
+ pts.forEach((p,i)=>{const t=$(vertexIds[i]);t.setAttribute('x',p[0]+(i===1?4:-7));t.setAttribute('y',p[1]+(i===2?-8:14));});
+}
+function renderDiagrams(a,b,rule){
+ paintTriangle('triangleA','triangleAEdges',['vertexA','vertexB','vertexC'],a,rule,false);
+ paintTriangle('triangleB','triangleBEdges',['vertexP','vertexQ','vertexR'],b,rule,true);
+ renderDiagrams(a,b,rule);
+}
 function update(){
  const rule=criterion.value,c=config[rule],a=read(left),b=read(right);
  c.labels.forEach((s,i)=>{$('la'+(i+1)).textContent=s;$('lb'+(i+1)).textContent=s;});

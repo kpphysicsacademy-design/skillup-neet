@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261110-estimation-rounding-simulator-v1">
+<meta name="description" content="Interactive estimation and rounding simulator: explore place values, rounding, compatible numbers and estimated calculations.">
+<title>Estimation and Rounding Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}.top{max-width:700px;margin:auto;padding:10px 13px;display:flex;align-items:center;gap:10px}.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1}
+main{width:min(100% - 24px,700px);margin:auto;padding:17px 0 36px}h1{font-size:clamp(22px,5vw,28px);margin:0 0 6px}h2{font-size:18px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:13px 0;box-shadow:0 4px 16px #19374b0a}.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:13px 0}.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:10px 5px;border-radius:10px;font-weight:800;font-size:13px;border:1px solid #b8deed}
+label{display:block;font-weight:750;margin:12px 0 5px;font-size:13px}input,select{width:100%;min-height:43px;border:1px solid #b8cbd5;border-radius:9px;padding:10px 11px;font-size:16px;background:#fff;color:var(--ink)}
+button{background:var(--green);color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:800;cursor:pointer;margin:9px 5px 0 0;min-height:40px}.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
+.result{background:#eff8ff;border:1px solid #cfe6f2;border-radius:11px;padding:12px;margin-top:12px;line-height:1.6;overflow-wrap:anywhere;min-height:44px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.grid>div{min-width:0}.steps{display:grid;gap:7px;margin-top:9px}.step{background:#f5f8fb;border:1px solid var(--line);padding:9px;border-radius:8px}.big{font-size:clamp(21px,5vw,28px);font-weight:900;color:#116b96}.small{font-size:12px;color:var(--muted)}.scale{height:12px;background:#e5edf2;border-radius:20px;position:relative;margin:17px 4px 8px}.marker{position:absolute;top:-5px;width:3px;height:22px;background:var(--blue);border-radius:3px}.scale-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+@media(max-width:430px){main{width:calc(100% - 18px);padding-top:12px}.card{padding:13px}.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body>
+<header><div class="top"><a href="maths-estimation-rounding-quiz.html?v=20261110-estimation-rounding-recreated-v1">← Quiz</a><strong>SkillUp Maths</strong><span class="small">Number sense</span></div></header>
+<main>
+<h1>Estimation and Rounding Simulator</h1>
+<p class="muted">Explore how rounding works, compare exact and estimated calculations, and practise choosing sensible nearby numbers for mental maths.</p>
+<div class="links"><a href="maths-estimation-rounding-quiz.html?v=20261110-estimation-rounding-recreated-v1">📝 Practice Quiz</a><a href="maths-home.html?v=20261106-large-numbers-line-symmetry-layout-v2">📚 Maths Path</a></div>
+
+<section class="card">
+<h2>1. Rounding explorer</h2>
+<p class="muted">Choose a number and a place value. Inspect the deciding digit and see the rounded result.</p>
+<label for="roundNumber">Number (0 to 999,999,999)</label><input id="roundNumber" type="number" min="0" max="999999999" value="7864">
+<label for="roundPlace">Round to</label><select id="roundPlace"><option value="10">Nearest ten</option><option value="100" selected>Nearest hundred</option><option value="1000">Nearest thousand</option><option value="10000">Nearest ten thousand</option><option value="100000">Nearest lakh</option><option value="1000000">Nearest million</option></select>
+<button id="roundBtn" type="button">Explore rounding</button><div id="roundResult" class="result" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. Estimate a calculation</h2>
+<p class="muted">Round each number to a convenient value, then calculate an estimate. Compare it with the exact answer.</p>
+<div class="grid"><div><label for="numberA">First number</label><input id="numberA" type="number" min="0" max="999999999" value="192"></div><div><label for="numberB">Second number</label><input id="numberB" type="number" min="1" max="999999999" value="307"></div></div>
+<label for="operation">Operation</label><select id="operation"><option value="add">Addition (+)</option><option value="subtract">Subtraction (−)</option><option value="multiply">Multiplication (×)</option><option value="divide">Division (÷)</option></select>
+<label for="rounding">Round operands to</label><select id="rounding"><option value="10">Nearest ten</option><option value="100" selected>Nearest hundred</option><option value="1000">Nearest thousand</option><option value="10000">Nearest ten thousand</option></select>
+<button id="estimateBtn" type="button">Estimate and compare</button><div id="estimateResult" class="result" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>3. Compatible numbers lab</h2>
+<p class="muted">For division, nearby compatible numbers can make mental calculation easier. Try changing the dividend and divisor.</p>
+<div class="grid"><div><label for="dividend">Dividend</label><input id="dividend" type="number" min="1" max="999999999" value="6048"></div><div><label for="divisor">Divisor</label><input id="divisor" type="number" min="1" max="999999" value="29"></div></div>
+<button id="compatibleBtn" type="button">Find a useful estimate</button><div id="compatibleResult" class="result" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>4. Rounding interval visualiser</h2>
+<p class="muted">See the range of whole numbers that round to the selected result at a chosen place value.</p>
+<label for="targetNumber">Rounded result</label><input id="targetNumber" type="number" min="0" max="999999999" value="7500">
+<label for="intervalPlace">Rounding place</label><select id="intervalPlace"><option value="10">Nearest ten</option><option value="100" selected>Nearest hundred</option><option value="1000">Nearest thousand</option><option value="10000">Nearest ten thousand</option></select>
+<button id="intervalBtn" type="button">Show rounding interval</button><div id="intervalResult" class="result" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>5. Quick estimation challenge</h2>
+<p class="muted">Choose the closest estimate. Generate a new challenge whenever you are ready.</p>
+<div id="challenge" class="result" aria-live="polite"></div>
+<div id="challengeOptions" class="grid"></div>
+<button id="newChallenge" class="secondary" type="button">↻ New challenge</button>
+<div id="challengeFeedback" class="result" aria-live="polite" hidden></div>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-IN'),valid=(id,min=0,max=999999999)=>{const v=Number($(id).value);return Number.isSafeInteger(v)&&v>=min&&v<=max?v:null},round=(n,p)=>Math.floor(n/p+0.5)*p;
+function rounding(){const n=valid('roundNumber'),p=Number($('roundPlace').value),out=$('roundResult');if(n===null){out.textContent='Enter a whole number from 0 to 999,999,999.';return}const result=round(n,p),deciding=Math.floor(n%(p))/ (p/10);const right=Math.floor(n/(p/10))%10;const digit=Math.floor(n/p)%10;out.innerHTML='<div class="big">'+fmt(n)+' → '+fmt(result)+'</div><div class="steps"><div class="step"><b>Rounding place:</b> '+fmt(p)+'</div><div class="step"><b>Digit in the rounding place:</b> '+digit+'</div><div class="step"><b>Digit immediately to its right:</b> '+right+'</div><div class="step">'+(right>=5?'Because '+right+' is 5 or more, increase the rounding digit by one.':'Because '+right+' is less than 5, keep the rounding digit unchanged.')+'</div></div>'}
+function estimate(){const a=valid('numberA'),b=valid('numberB'),op=$('operation').value,p=Number($('rounding').value),out=$('estimateResult');if(a===null||b===null||(op==='divide'&&b===0)){out.textContent='Enter valid whole numbers. The second number must be greater than zero.';return}const ra=round(a,p),rb=round(b,p);let exact,est,symbol;if(op==='add'){exact=a+b;est=ra+rb;symbol='+'}else if(op==='subtract'){exact=a-b;est=ra-rb;symbol='−'}else if(op==='multiply'){exact=a*b;est=ra*rb;symbol='×'}else{exact=a/b;est=rb===0?null:ra/rb;symbol='÷'}if(!Number.isFinite(exact)||!Number.isFinite(est)){out.textContent='This rounding choice produces an unsuitable divisor. Choose a smaller rounding place.';return}const error=Math.abs(exact-est),percent=exact===0?null:error/Math.abs(exact)*100;out.innerHTML='<div class="big">Estimated answer: '+fmt(est)+'</div><div class="steps"><div class="step"><b>Round the operands:</b> '+fmt(a)+' → '+fmt(ra)+' and '+fmt(b)+' → '+fmt(rb)+'</div><div class="step"><b>Estimated calculation:</b> '+fmt(ra)+' '+symbol+' '+fmt(rb)+' = <b>'+fmt(est)+'</b></div><div class="step"><b>Exact calculation:</b> '+fmt(a)+' '+symbol+' '+fmt(b)+' = <b>'+fmt(exact)+'</b></div><div class="step"><b>Absolute difference:</b> '+fmt(error)+(percent===null?'':' ('+percent.toFixed(1)+'% of exact answer)')+'</div></div>'}
+function compatible(){const a=valid('dividend',1),b=valid('divisor',1,999999);const out=$('compatibleResult');if(a===null||b===null){out.textContent='Enter a positive dividend and divisor.';return}const candidates=[];for(let da=-Math.min(1000,a-1);da<=1000;da++){const x=a+da;if(x>0&&x%10===0)candidates.push({x,dx:Math.abs(da)});}let best=null;for(let db=-Math.min(20,b-1);db<=20;db++){const y=b+db;if(y>0){const x=Math.round(a/y)*y;const score=Math.abs(x-a)+Math.abs(y-b)*Math.max(1,a/b)*0.15;if(!best||score<best.score)best={x,y,score}}}const approx=Math.round(a/b);const friendlyA=Math.round(a/100)*100,friendlyB=Math.max(1,Math.round(b/5)*5);out.innerHTML='<div class="big">'+fmt(a)+' ÷ '+fmt(b)+' ≈ '+fmt(approx)+'</div><p>Exact quotient: '+(a/b).toFixed(3)+'</p><p><b>One convenient estimate:</b> '+fmt(friendlyA)+' ÷ '+fmt(friendlyB)+' = '+(friendlyA/friendlyB).toFixed(2)+'</p><p class="small">Choose nearby numbers that make division easier, then check whether the estimate is close to the exact quotient.</p>'}
+function interval(){const n=valid('targetNumber'),p=Number($('intervalPlace').value),out=$('intervalResult');if(n===null){out.textContent='Enter a whole number.';return}if(n%p!==0){out.textContent='The target must be a multiple of '+fmt(p)+'. Try '+fmt(round(n,p))+'.';return}const low=Math.max(0,n-p/2),high=n+p/2-1;out.innerHTML='<div class="big">'+fmt(low)+' to '+fmt(high)+'</div><p>Every whole number in this interval rounds to <b>'+fmt(n)+'</b> to the nearest '+fmt(p)+'.</p><div class="scale"><span class="marker" style="left:50%"></span></div><div class="scale-labels"><span>'+fmt(low)+'</span><span>Target: '+fmt(n)+'</span><span>'+fmt(high)+'</span></div>'}
+const challenges=[{q:'Estimate 684 − 219 by rounding to the nearest hundred.',o:['300','400','500','600'],a:2,e:'684 rounds to 700 and 219 rounds to 200. 700 − 200 = 500.'},{q:'Estimate 48 × 19 by rounding to the nearest ten.',o:['700','800','900','1,000'],a:3,e:'48 rounds to 50 and 19 rounds to 20. 50 × 20 = 1,000.'},{q:'Estimate 1,204 + 2,781 to the nearest thousand.',o:['3,000','4,000','5,000','6,000'],a:1,e:'1,204 rounds to 1,000 and 2,781 rounds to 3,000. Total ≈ 4,000.'},{q:'Estimate 6,048 ÷ 29 using compatible numbers.',o:['100','200','300','400'],a:1,e:'6,048 is close to 6,000 and 29 is close to 30. 6,000 ÷ 30 = 200.'},{q:'Round 76,549 to the nearest ten thousand.',o:['70,000','75,000','80,000','90,000'],a:2,e:'The thousands digit is 6, so round up to 80,000.'}];let challengeIndex=-1;
+function newChallenge(){challengeIndex=(challengeIndex+1)%challenges.length;const c=challenges[challengeIndex];$('challenge').textContent=c.q;$('challengeOptions').replaceChildren();$('challengeFeedback').hidden=true;c.o.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='secondary';b.style.width='100%';b.textContent=v;b.addEventListener('click',()=>{[...$('challengeOptions').children].forEach(x=>x.disabled=true);$('challengeFeedback').hidden=false;$('challengeFeedback').textContent=(i===c.a?'✓ Correct! ':'Not quite. ')+c.e;});$('challengeOptions').appendChild(b)})}
+$('roundBtn').addEventListener('click',rounding);$('estimateBtn').addEventListener('click',estimate);$('compatibleBtn').addEventListener('click',compatible);$('intervalBtn').addEventListener('click',interval);$('newChallenge').addEventListener('click',newChallenge);
+rounding();estimate();compatible();interval();newChallenge();
+})();
+</script>
+</body></html>

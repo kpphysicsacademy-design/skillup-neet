@@ -2,17 +2,12 @@ name: Update Physics Quiz Overrides
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/update-principle-homogeneity.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: physics-quiz-overrides
+  group: skillup-main-writer
   cancel-in-progress: false
 
 jobs:
@@ -119,4 +114,24 @@ jobs:
           fi
 
           git commit -m "Update Physical Quantities quiz with 15 MCQs [skip ci]"
-          git push origin HEAD:main
+
+          # Rebase against the latest main before pushing. Retry if another
+          # writer advances main between fetch and push.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict: another update changed overlapping content."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo "Push succeeded on attempt $attempt."
+              exit 0
+            fi
+            git rebase --abort || true
+            echo "Push rejected; retrying after refreshing main (attempt $attempt)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to push after three safe retries."
+          exit 1

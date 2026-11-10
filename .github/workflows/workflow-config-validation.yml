@@ -1,0 +1,48 @@
+name: Validate GitHub Actions Workflow Files
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-workflow-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Parse every workflow file
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          files = sorted(Path('.github/workflows').glob('*.yml'))
+          if not files:
+              raise SystemExit('No workflow YAML files found')
+
+          for path in files:
+              with path.open(encoding='utf-8') as handle:
+                  data = yaml.safe_load(handle)
+              if not isinstance(data, dict) or 'jobs' not in data:
+                  raise SystemExit(f'{path}: expected a workflow mapping with jobs')
+              if 'on' not in data and True not in data:
+                  raise SystemExit(f'{path}: missing workflow trigger declaration')
+              print(f'PASS {path}')
+
+          print(f'Validated {len(files)} workflow files.')
+          PY
+
+      - name: Enforce one canonical Pages artifact upload
+        run: |
+          test "$(grep -c 'upload-pages-artifact' .github/workflows/deploy.yml)" -eq 1
+          ! grep -q 'upload-pages-artifact' .github/workflows/deploy-accuracy-precision.yml
+          ! grep -q 'upload-pages-artifact' .github/workflows/deploy-scalars-vectors.yml

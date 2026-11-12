@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f9fb">
+<meta name="skillup-release" content="20261112-unitary-method-simulator-v1">
+<meta name="description" content="Interactive unitary method simulator: find one-unit values, solve direct and inverse proportion problems, and practise everyday applications.">
+<title>Unitary Method Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.top{width:min(100% - 24px,620px);margin:auto;min-height:52px;display:flex;align-items:center;gap:10px}.top a{color:var(--blue);text-decoration:none;font-weight:850}.top strong{flex:1}.tag{font-size:11px;font-weight:800;color:var(--muted);background:#f1f5f7;padding:5px 8px;border-radius:8px}
+main{width:min(100% - 24px,620px);margin:auto;padding:16px 0 36px}h1{font-size:clamp(22px,5vw,28px);margin:0 0 5px}h2{font-size:17px;margin:0 0 5px}.intro,.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}.eyebrow{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}
+label{display:block;font-size:13px;font-weight:800;margin:11px 0 5px}input,select{width:100%;min-height:43px;border:1px solid #b8cbd5;border-radius:9px;padding:9px 11px;font:16px system-ui;color:var(--ink);background:#fff}
+button{min-height:41px;padding:9px 13px;border:0;border-radius:9px;background:var(--green);color:#fff;font:800 13px system-ui;cursor:pointer;margin:9px 5px 0 0}button.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.result{margin-top:11px;padding:11px 12px;background:#eff8ff;border:1px solid #cfe6f2;border-radius:10px;line-height:1.6;overflow-wrap:anywhere}.result.good{background:#eff8eb;border-color:#cfe5c5}.result.warn{background:#fff7e9;border-color:#f0dfbd}.formula{text-align:center;font-size:clamp(20px,5vw,25px);font-weight:900;color:#116b96;margin:9px 0}.steps{padding-left:19px;margin:8px 0}.steps li{margin:4px 0}.pillrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.pill{padding:6px 9px;border-radius:8px;background:#f1f5f7;font-size:12px;font-weight:800}.small{font-size:11px;color:var(--muted)}
+@media(max-width:430px){main{width:calc(100% - 18px);padding-top:12px}.card{padding:13px}.grid{grid-template-columns:1fr}.top{width:calc(100% - 20px)}}
+</style></head>
+<body>
+<header><div class="top"><a href="maths-unitary-method-quiz.html?route=20261014-existing-quizzes-v1">← Quiz</a><strong>SkillUp Maths</strong><span class="tag">Proportion lab</span></div></header>
+<main>
+<div class="eyebrow">Interactive maths lab · Ratio and Proportion</div>
+<h1>Unitary Method Simulator</h1>
+<p class="intro">Find the value of one unit first, then scale up or down. Explore direct proportion and inverse proportion through everyday examples.</p>
+
+<section class="card">
+<h2>1. One-unit value explorer</h2><p class="muted">Enter the total quantity and its total cost or amount. The simulator finds the value of one unit and then the value of your chosen quantity.</p>
+<div class="grid"><div><label for="knownUnits">Known number of units</label><input id="knownUnits" type="number" min="0.001" step="any" value="4"></div><div><label for="knownTotal">Total value (₹ or units)</label><input id="knownTotal" type="number" min="0" step="any" value="48"></div></div>
+<label for="targetUnits">Find value for this many units</label><input id="targetUnits" type="number" min="0" step="any" value="7">
+<button id="unitBtn">Calculate using unitary method</button><button class="secondary" id="unitReset">Reset example</button>
+<div class="result" id="unitResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. Direct proportion explorer</h2><p class="muted">When one quantity increases or decreases by a factor, the other changes by the same factor (at a constant rate).</p>
+<div class="grid"><div><label for="directA">Starting quantity</label><input id="directA" type="number" min="0.001" step="any" value="3"></div><div><label for="directB">Matching value</label><input id="directB" type="number" min="0" step="any" value="180"></div></div>
+<label for="directTarget">New quantity</label><input id="directTarget" type="number" min="0" step="any" value="5">
+<button id="directBtn">Find matching value</button><div class="result" id="directResult" aria-live="polite"></div>
+<div class="pillrow"><span class="pill">More units → more value</span><span class="pill">Fewer units → less value</span></div>
+</section>
+
+<section class="card">
+<h2>3. Inverse proportion explorer</h2><p class="muted">For the same job, more workers or machines mean fewer days or hours. The product stays constant when all work at the same rate.</p>
+<div class="grid"><div><label for="workersA">Starting workers</label><input id="workersA" type="number" min="1" step="1" value="6"></div><div><label for="daysA">Days required</label><input id="daysA" type="number" min="0.001" step="any" value="12"></div></div>
+<label for="workersB">New number of workers</label><input id="workersB" type="number" min="1" step="1" value="8">
+<button id="inverseBtn">Calculate new time</button><div class="result" id="inverseResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>4. Compare direct and inverse proportion</h2><p class="muted">Select a situation to see which relationship applies and why.</p>
+<label for="scenario">Choose a situation</label><select id="scenario"><option value="goods">Cost and number of identical items</option><option value="speed">Speed and time for a fixed distance</option><option value="workers">Workers and time for the same job</option><option value="distance">Distance and time at constant speed</option></select>
+<button id="scenarioBtn">Explain the relationship</button><div class="result" id="scenarioResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>5. Everyday unitary challenge</h2><p class="muted" id="challengeQuestion">If 5 notebooks cost ₹150, what is the cost of 8 notebooks?</p>
+<div class="grid"><div><label for="challengeAnswer">Your answer</label><input id="challengeAnswer" type="number" min="0" step="any" placeholder="Enter your answer"></div><div><label for="challengeUnit">Answer unit</label><select id="challengeUnit"><option>₹</option><option>km</option><option>litres</option><option>pages</option><option>days</option></select></div></div>
+<button id="challengeBtn">Check answer</button><button class="secondary" id="newChallenge">New question</button><div class="result" id="challengeResult" aria-live="polite">Use two steps: find one unit, then multiply.</div>
+</section>
+</main>
+<script>
+(()=>{'use strict';const $=id=>document.getElementById(id),v=id=>Number($(id).value),valid=(...xs)=>xs.every(x=>Number.isFinite(x)&&x>0),fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(4)));
+function unit(){const a=v('knownUnits'),b=v('knownTotal'),t=v('targetUnits'),o=$('unitResult');if(!valid(a)||!Number.isFinite(b)||b<0||!Number.isFinite(t)||t<0){o.textContent='Enter positive known units and non-negative total and target values.';return}const one=b/a,total=one*t;o.innerHTML='<b>Required value = '+fmt(total)+'</b><ol class="steps"><li>Value of 1 unit = '+fmt(b)+' ÷ '+fmt(a)+' = '+fmt(one)+'.</li><li>Value of '+fmt(t)+' units = '+fmt(one)+' × '+fmt(t)+' = '+fmt(total)+'.</li></ol>';o.className='result good'}
+function direct(){const a=v('directA'),b=v('directB'),t=v('directTarget'),o=$('directResult');if(!valid(a)||!Number.isFinite(b)||b<0||!Number.isFinite(t)||t<0){o.textContent='Enter positive starting quantity and non-negative values.';return}const rate=b/a,answer=rate*t;o.innerHTML='<b>Matching value = '+fmt(answer)+'</b><ol class="steps"><li>Value for 1 unit = '+fmt(b)+' ÷ '+fmt(a)+' = '+fmt(rate)+'.</li><li>Value for '+fmt(t)+' units = '+fmt(rate)+' × '+fmt(t)+' = '+fmt(answer)+'.</li></ol><p>Constant rate: '+fmt(rate)+' per unit.</p>';o.className='result good'}
+function inverse(){const a=v('workersA'),d=v('daysA'),b=v('workersB'),o=$('inverseResult');if(!valid(a,d,b)){o.textContent='Enter positive worker counts and time.';return}const work=a*d,answer=work/b;o.innerHTML='<b>Required time = '+fmt(answer)+' days</b><ol class="steps"><li>Total work = '+fmt(a)+' × '+fmt(d)+' = '+fmt(work)+' worker-days.</li><li>Time for '+fmt(b)+' workers = '+fmt(work)+' ÷ '+fmt(b)+' = '+fmt(answer)+' days.</li></ol><p>Workers increase, so the time decreases for the same job.</p>';o.className='result good'}
+const scenarios={goods:['Direct proportion','If each item has the same price, doubling the number of items doubles the total cost. Find the cost of one item, then multiply by the required number.'],speed:['Inverse proportion','For a fixed distance, increasing speed reduces travel time. Speed × time remains constant.'],workers:['Inverse proportion','For the same job at the same rate, more workers reduce the time. Workers × days remains constant.'],distance:['Direct proportion','At constant speed, doubling travel time doubles the distance. Distance ÷ time gives the constant speed.']};
+function explain(){const x=scenarios[$('scenario').value];$('scenarioResult').innerHTML='<b>'+x[0]+'</b><p>'+x[1]+'</p>'}
+const challenges=[{q:'If 5 notebooks cost ₹150, what is the cost of 8 notebooks?',a:240,u:'₹',ex:'One notebook costs ₹150 ÷ 5 = ₹30. Eight cost ₹30 × 8 = ₹240.'},{q:'If 3 kg apples cost ₹210, what is the cost of 5 kg?',a:350,u:'₹',ex:'One kg costs ₹210 ÷ 3 = ₹70. Five kg cost ₹70 × 5 = ₹350.'},{q:'A car travels 180 km in 3 hours at constant speed. How far in 5 hours?',a:300,u:'km',ex:'Speed = 180 ÷ 3 = 60 km/h. In 5 hours, distance = 60 × 5 = 300 km.'},{q:'If 8 workers complete a job in 6 days, how many days will 12 workers take at the same rate?',a:4,u:'days',ex:'Work = 8 × 6 = 48 worker-days. Time = 48 ÷ 12 = 4 days.'},{q:'A tap fills 24 litres in 4 minutes. How many litres in 9 minutes at the same rate?',a:54,u:'litres',ex:'Rate = 24 ÷ 4 = 6 litres/minute. In 9 minutes, 6 × 9 = 54 litres.'}];let current=0;
+function loadChallenge(){current=Math.floor(Math.random()*challenges.length);const c=challenges[current];$('challengeQuestion').textContent=c.q;$('challengeAnswer').value='';$('challengeUnit').value=c.u;$('challengeResult').textContent='Use two steps: find one unit, then multiply (or use inverse proportion when appropriate).';$('challengeResult').className='result'}
+function checkChallenge(){const c=challenges[current],ans=v('challengeAnswer'),o=$('challengeResult');if(!Number.isFinite(ans)){o.textContent='Enter a numerical answer first.';return}const ok=Math.abs(ans-c.a)<0.0001;o.innerHTML=(ok?'<b>Correct!</b> ':'<b>Not quite.</b> ')+c.ex;o.className='result '+(ok?'good':'warn')}
+$('unitBtn').addEventListener('click',unit);$('unitReset').addEventListener('click',()=>{$('knownUnits').value=4;$('knownTotal').value=48;$('targetUnits').value=7;unit()});$('directBtn').addEventListener('click',direct);$('inverseBtn').addEventListener('click',inverse);$('scenarioBtn').addEventListener('click',explain);$('scenario').addEventListener('change',explain);$('challengeBtn').addEventListener('click',checkChallenge);$('newChallenge').addEventListener('click',loadChallenge);
+unit();direct();inverse();explain();loadChallenge();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body></html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f9fb">
+<meta name="skillup-release" content="20261112-equivalent-ratios-simulator-v2">
+<meta name="description" content="Interactive equivalent ratios simulator: scale ratios, find missing terms, compare proportions and explore ratio models.">
+<title>Equivalent Ratios Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.top{width:min(100% - 24px,620px);margin:auto;min-height:52px;display:flex;align-items:center;gap:10px}.top a{color:var(--blue);text-decoration:none;font-weight:850}.top strong{flex:1}.tag{font-size:11px;font-weight:800;color:var(--muted);background:#f1f5f7;padding:5px 8px;border-radius:8px}
+main{width:min(100% - 24px,620px);margin:auto;padding:16px 0 36px}h1{font-size:clamp(22px,5vw,28px);margin:0 0 5px}h2{font-size:17px;margin:0 0 5px}.intro,.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}.eyebrow{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+label{display:block;font-size:13px;font-weight:800;margin:11px 0 5px}input,select{width:100%;min-height:43px;border:1px solid #b8cbd5;border-radius:9px;padding:9px 11px;font:16px system-ui;color:var(--ink);background:#fff}
+button{min-height:41px;padding:9px 13px;border:0;border-radius:9px;background:var(--green);color:#fff;font:800 13px system-ui;cursor:pointer;margin:9px 5px 0 0}button.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.result{margin-top:11px;padding:11px 12px;background:#eff8ff;border:1px solid #cfe6f2;border-radius:10px;line-height:1.6;overflow-wrap:anywhere}.result.good{background:#eff8eb;border-color:#cfe5c5}.result.warn{background:#fff7e9;border-color:#f0dfbd}.formula{font-size:clamp(20px,5vw,26px);font-weight:900;letter-spacing:.02em;text-align:center;margin:8px 0;color:#116b96}.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.ratio-box{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:#fbfdfe}.ratio-box b{display:block;font-size:21px;color:var(--blue)}.bars{display:grid;gap:9px;margin-top:12px}.barline{display:flex;align-items:center;gap:8px}.barlabel{width:48px;font-size:12px;font-weight:800}.bar{height:22px;display:flex;flex:1;gap:2px}.bar span{flex:1;border-radius:3px;background:#9ed5ed}.bar.second span{background:#a9d88e}.small{font-size:11px;color:var(--muted)}.steps{padding-left:19px;margin:8px 0}.steps li{margin:4px 0}
+@media(max-width:430px){main{width:calc(100% - 18px);padding-top:12px}.card{padding:13px}.row{grid-template-columns:1fr}.top{width:calc(100% - 20px)}}
+</style></head>
+<body>
+<header><div class="top"><a href="maths-equivalent-ratios-quiz.html?route=20261014-existing-quizzes-v1">← Quiz</a><strong>SkillUp Maths</strong><span class="tag">Ratio lab</span></div></header>
+<main>
+<div class="eyebrow">Interactive maths lab · Ratio and Proportion</div>
+<h1>Equivalent Ratios Simulator</h1>
+<p class="intro">Change a scale factor, build matching ratios, test equivalence and solve missing values. Keep both parts of a ratio in the same proportion.</p>
+
+<section class="card">
+<h2>1. Scale a ratio</h2><p class="muted">Multiply or divide both terms by the same non-zero number to create an equivalent ratio.</p>
+<div class="row"><div><label for="baseA">First term</label><input id="baseA" type="number" min="1" max="9999" value="2"></div><div><label for="baseB">Second term</label><input id="baseB" type="number" min="1" max="9999" value="3"></div></div>
+<label for="factor">Scale factor</label><input id="factor" type="number" min="0.01" max="100" step="0.5" value="2">
+<button id="scaleBtn">Apply scale factor</button><button class="secondary" id="scaleReset">Reset example</button>
+<div class="result" id="scaleResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. Equivalent ratio visual model</h2><p class="muted">The bars show equal-sized parts. Increase the scale factor to see both quantities grow together.</p>
+<label for="visualFactor">Number of equal groups</label><input id="visualFactor" type="range" min="1" max="6" value="2">
+<div class="formula" id="visualFormula">2 : 3 = 4 : 6</div>
+<div class="bars"><div class="barline"><span class="barlabel">Part A</span><div class="bar" id="barA"></div></div><div class="barline"><span class="barlabel">Part B</span><div class="bar second" id="barB"></div></div></div>
+<p class="small" id="visualCaption">Each original part is repeated 2 times.</p>
+</section>
+
+<section class="card">
+<h2>3. Check whether two ratios are equivalent</h2><p class="muted">Enter two ratios. The simulator compares their cross-products.</p>
+<div class="row"><div><label for="checkA">Ratio 1 · first term</label><input id="checkA" type="number" min="1" value="3"></div><div><label for="checkB">Ratio 1 · second term</label><input id="checkB" type="number" min="1" value="4"></div><div><label for="checkC">Ratio 2 · first term</label><input id="checkC" type="number" min="1" value="6"></div><div><label for="checkD">Ratio 2 · second term</label><input id="checkD" type="number" min="1" value="8"></div></div>
+<button id="checkBtn">Check equivalence</button><div class="result" id="checkResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>4. Find the missing term</h2><p class="muted">Complete the proportion by keeping the two ratios equivalent.</p>
+<div class="row"><div><label for="missA">First term</label><input id="missA" type="number" min="1" value="4"></div><div><label for="missB">Second term</label><input id="missB" type="number" min="1" value="7"></div><div><label for="missC">Matching first term</label><input id="missC" type="number" min="1" value="20"></div><div><label for="missD">Matching second term ( ? )</label><input id="missD" type="number" min="1" placeholder="Leave blank"></div></div>
+<button id="missingBtn">Find missing value</button><div class="result" id="missingResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>5. Build an equivalent-ratio table</h2><p class="muted">Explore multiples of a starting ratio and notice the constant relationship.</p>
+<div class="row"><div><label for="tableA">First term</label><input id="tableA" type="number" min="1" value="2"></div><div><label for="tableB">Second term</label><input id="tableB" type="number" min="1" value="5"></div></div>
+<button id="tableBtn">Generate ratio table</button><div class="result" id="tableResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>6. Quick challenge</h2><p class="muted">Choose the ratio that is equivalent to <b id="challengeBase">5 : 8</b>.</p>
+<div id="challengeOptions" class="scale"></div><div class="result" id="challengeResult" aria-live="polite">Select an option to check your reasoning.</div>
+<button class="secondary" id="newChallenge">New challenge</button>
+</section>
+</main>
+<script>
+(()=>{'use strict';const $=id=>document.getElementById(id),num=id=>{const v=Number($(id).value);return Number.isFinite(v)&&v>0&&v<=9999?v:null},fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(4)));
+function scale(){const a=num('baseA'),b=num('baseB'),k=Number($('factor').value),o=$('scaleResult');if(!a||!b||!Number.isFinite(k)||k<=0||k>100){o.textContent='Enter positive terms and a scale factor greater than zero.';return}const x=a*k,y=b*k;o.innerHTML='<b>'+a+' : '+b+' × '+fmt(k)+' = '+fmt(x)+' : '+fmt(y)+'</b><ol class="steps"><li>Multiply the first term: '+a+' × '+fmt(k)+' = '+fmt(x)+'.</li><li>Multiply the second term: '+b+' × '+fmt(k)+' = '+fmt(y)+'.</li><li>Both terms use the same factor, so the ratios are equivalent.</li></ol>';o.className='result good';$('visualFactor').value=Math.max(1,Math.min(6,Math.round(k)));visual()}
+function visual(){const a=num('baseA')||2,b=num('baseB')||3,k=Number($('visualFactor').value);$('visualFormula').textContent=a+' : '+b+' = '+(a*k)+' : '+(b*k);$('barA').innerHTML=Array.from({length:a*k},()=>'<span></span>').join('');$('barB').innerHTML=Array.from({length:b*k},()=>'<span></span>').join('');$('visualCaption').textContent='Each original part is repeated '+k+' times. Both terms are multiplied by '+k+'.'}
+function check(){const a=num('checkA'),b=num('checkB'),c=num('checkC'),d=num('checkD'),o=$('checkResult');if(!a||!b||!c||!d){o.textContent='Enter four positive whole numbers.';return}const left=a*d,right=b*c,ok=left===right;o.innerHTML='<b>'+a+' : '+b+' '+(ok?'=':'≠')+' '+c+' : '+d+'</b><p>Cross-products: '+a+' × '+d+' = '+left+' and '+b+' × '+c+' = '+right+'.</p><p>'+(ok?'The cross-products are equal, so the ratios are equivalent.':'The cross-products differ, so the ratios are not equivalent.')+'</p>';o.className='result '+(ok?'good':'warn')}
+function missing(){const a=num('missA'),b=num('missB'),c=num('missC'),d=Number($('missD').value),o=$('missingResult');if(!a||!b||!c){o.textContent='Enter the three known positive terms.';return}if($('missD').value.trim()!==''){if(!Number.isFinite(d)||d<=0){o.textContent='Enter a positive missing-term value or leave it blank.';return}const ok=a*d===b*c;o.textContent=ok?'Correct: '+a+' : '+b+' = '+c+' : '+d+'.':'Not equivalent yet. Cross-products are '+(a*d)+' and '+(b*c)+'.';o.className='result '+(ok?'good':'warn');return}const answer=b*c/a;o.innerHTML='<b>Missing term = '+fmt(answer)+'</b><p>'+a+' / '+b+' = '+c+' / x</p><p>x = ('+b+' × '+c+') ÷ '+a+' = '+fmt(answer)+'.</p>';o.className='result good'}
+function table(){const a=num('tableA'),b=num('tableB'),o=$('tableResult');if(!a||!b){o.textContent='Enter two positive whole numbers.';return}o.innerHTML='<div class="scale">'+[1,2,3,4,5].map(k=>'<div class="ratio-box"><span>×'+k+'</span><b>'+(a*k)+' : '+(b*k)+'</b></div>').join('')+'</div><p>Every row is made by multiplying both terms by the same factor.</p>'}
+let challenge={a:5,b:8,correct:0};function newChallenge(){const a=2+Math.floor(Math.random()*8),b=3+Math.floor(Math.random()*8),k=2+Math.floor(Math.random()*4);challenge={a,b,correct:Math.floor(Math.random()*4)};$('challengeBase').textContent=a+' : '+b;const choices=[];for(let i=0;i<4;i++){let x,y;if(i===challenge.correct){x=a*k;y=b*k}else{const m=2+Math.floor(Math.random()*4);x=a*m;y=b*m+(i+1)}choices.push(x+' : '+y)}$('challengeOptions').innerHTML=choices.map((v,i)=>'<button type="button" class="secondary" data-choice="'+i+'">'+v+'</button>').join('');$('challengeOptions').querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{const ok=Number(btn.dataset.choice)===challenge.correct;$('challengeResult').textContent=ok?'Exactly! Both terms are multiplied by the same factor.':'Not this one. Simplify each option or compare its cross-products with '+a+' : '+b+'.';$('challengeResult').className='result '+(ok?'good':'warn')}));$('challengeResult').textContent='Choose one ratio.';$('challengeResult').className='result'}
+$('scaleBtn').addEventListener('click',scale);$('scaleReset').addEventListener('click',()=>{$('baseA').value=2;$('baseB').value=3;$('factor').value=2;scale()});$('visualFactor').addEventListener('input',visual);$('baseA').addEventListener('input',visual);$('baseB').addEventListener('input',visual);$('checkBtn').addEventListener('click',check);$('missingBtn').addEventListener('click',missing);$('tableBtn').addEventListener('click',table);$('newChallenge').addEventListener('click',newChallenge);scale();check();table();newChallenge();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body></html>

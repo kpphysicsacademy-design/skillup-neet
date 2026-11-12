@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f7f7ed">
-<meta name="skillup-release" content="20261105-simplest-form-recreated-v2">
+<meta name="skillup-release" content="20261112-simplest-form-quiz-v1">
 <title>Simplest Form Quiz | SkillUp Maths</title>
 <style>
 :root{color-scheme:light;--cream:#f7f7ed;--sage:#e9ecde;--sage-line:#d6ddcd;--ink:#29372e;--muted:#687565;--green:#aebfae;--green-dark:#899f89;--blue:#e4f0fb;--red:#b94c45}
@@ -92,8 +92,13 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 .btn.continue{background:#248ac0!important;color:#fff!important}
 .feedback{margin:10px 0!important}
 @media(max-width:520px){header .nav,header.top{width:100%!important;padding:6px 10px!important;gap:6px!important}.pill{font-size:10px!important;padding:5px 6px!important}main{width:100%!important;padding:10px 10px 28px!important}.quiz,.finish{padding:14px!important}.question{font-size:19px!important}}
-</style>
 
+/* Topic-specific standard header and quiz refinements */
+header .su-maths-menu-wrap,.su-maths-standard-header .su-maths-menu-wrap{display:none!important}
+.topic-intro{margin:0 0 12px;padding:13px 15px;border:1px solid #dce8ee;border-radius:13px;background:#fff;font-size:13px;line-height:1.5;color:#52616c}
+.topic-intro strong{display:block;margin-bottom:4px;color:#263746;font-size:15px}
+.topic-intro a{display:inline-flex;margin-top:8px;padding:9px 12px;border-radius:9px;background:#eaf7ff;color:#116b96;text-decoration:none;font-weight:850}
+</style>
 </head>
 <body>
 <main class="wrap">
@@ -103,6 +108,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <div class="badge" id="xp">⭐ 0 XP</div>
 <div class="badge streak">🔥 0 streak</div>
 </header>
+<section class="topic-intro"><strong>Make fractions simplest by finding and dividing by the greatest common factor.</strong> Practise reducing fractions, checking equivalent forms and simplifying ratios. Use the interactive lab to see each step.<br><a href="maths-simplest-form-simulator.html?v=20261112-simplest-form-simulator-v1">Open Simplest Form Simulator →</a></section>
 <section class="progress-card" aria-label="Quiz progress">
 <h1>Simplest Form</h1>
 <div class="progress-line"><span id="counter">Question 1 of 30</span><span id="pct">0%</span></div>
@@ -124,16 +130,16 @@ const counter=document.getElementById("counter"),bar=document.getElementById("ba
 function updateProgress(value){bar.style.width=value+"%";pctEl.textContent=Math.round(value)+"%";progress.setAttribute("aria-valuenow",String(Math.round(value)));}
 function render(){
 chosen=false;feedback.hidden=true;feedback.className="feedback";feedback.textContent="";next.disabled=true;next.textContent="Check answer";content.replaceChildren();
-const q=questions[index];counter.textContent="Question "+(index+1)+" of "+questions.length;eyebrow.textContent="Choose one answer";
+const q=questions[index];q.order=[0,1,2,3];for(let k=q.order.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[q.order[k],q.order[j]]=[q.order[j],q.order[k]];}q.correctPosition=q.order.indexOf(q[2]);counter.textContent="Question "+(index+1)+" of "+questions.length;eyebrow.textContent="Choose one answer";
 const stem=document.createElement("h2");stem.className="question";stem.textContent=q[0];content.appendChild(stem);
 const options=document.createElement("div");options.className="options";
-q[1].forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.className="option";b.dataset.letter=String.fromCharCode(65+i);b.textContent=label;b.addEventListener("click",()=>choose(i));options.appendChild(b);});
+q.order.forEach((original,i)=>{const b=document.createElement("button");b.type="button";b.className="option";b.dataset.letter=String.fromCharCode(65+i);b.textContent=q[1][original];b.addEventListener("click",()=>choose(i));options.appendChild(b);});
 content.appendChild(options);updateProgress(index/questions.length*100);
 }
 function choose(i){
 if(chosen||ended)return;chosen=true;const q=questions[index],buttons=content.querySelectorAll(".option");
-buttons.forEach((b,n)=>{b.disabled=true;if(n===q[2])b.classList.add("correct");else if(n===i)b.classList.add("wrong");});
-const correct=i===q[2];if(correct){score++;xp+=10;eyebrow.textContent="Nice work!";}else{eyebrow.textContent="Keep going!";}
+buttons.forEach((b,n)=>{b.disabled=true;if(n===q.correctPosition)b.classList.add("correct");else if(n===i)b.classList.add("wrong");});
+const correct=i===q.correctPosition;if(correct){score++;xp+=10;eyebrow.textContent="Nice work!";}else{eyebrow.textContent="Keep going!";}
 xpEl.textContent="⭐ "+xp+" XP";feedback.hidden=false;feedback.className="feedback "+(correct?"good":"bad");feedback.textContent=(correct?"Correct! ":"Not quite. ")+q[3];
 next.disabled=false;next.textContent=index===questions.length-1?"See results →":"Next question →";
 }

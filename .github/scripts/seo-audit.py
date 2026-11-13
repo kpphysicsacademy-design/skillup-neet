@@ -281,14 +281,22 @@ def main():
         ("pages_missing_from_sitemap", "Eligible pages missing from sitemap"),
     ]
     for key, label in sections:
-        items = details[key]
+        raw_items = details[key]
+        if isinstance(raw_items, dict):
+            items = [
+                {"path": row.get("path", ""), "title": title}
+                for title, rows in raw_items.items()
+                for row in rows
+            ]
+        else:
+            items = raw_items
         lines.extend([f"### {label} ({len(items)})", ""])
         if not items:
             lines.append("- None found.")
         else:
             for item in items[:100]:
                 if isinstance(item, dict):
-                    extra = " — " + item.get("href", "") if "href" in item else ""
+                    extra = " — " + item.get("title", item.get("href", ""))
                     lines.append("- " + item.get("path", item.get("source", "")) + extra)
                 else:
                     lines.append("- " + str(item))

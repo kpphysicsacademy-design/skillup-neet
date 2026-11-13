@@ -197,6 +197,10 @@ def main():
     sitemap_missing = [r["url"] for r in rows if r["url"] not in sitemap_urls]
     sitemap_extra = sorted(sitemap_urls - {r["url"] for r in rows})
     duplicate_titles = {k: v for k, v in title_counts.items() if k and v > 1}
+    duplicate_title_pages = {
+        title: [{"path": r["path"], "url": r["url"]} for r in rows if r["title"] == title]
+        for title in duplicate_titles
+    }
     duplicate_canonicals = {k: v for k, v in canonical_counts.items() if v > 1}
     orphan_pages = [r["url"] for r in rows if r["path"] != "index.html" and inbound[ROOT / r["path"]] == 0]
     robots_text = ROBOTS.read_text(encoding="utf-8", errors="replace") if ROBOTS.exists() else ""
@@ -227,6 +231,7 @@ def main():
         "missing_canonical": missing_canonical,
         "multiple_canonical_tags": multiple_canonical,
         "duplicate_titles": duplicate_titles,
+        "duplicate_title_pages": duplicate_title_pages,
         "duplicate_canonical_urls": duplicate_canonicals,
         "pages_without_h1": missing_h1,
         "pages_with_multiple_h1": multiple_h1,
@@ -269,6 +274,7 @@ def main():
         ("missing_title", "Pages missing a title"),
         ("missing_meta_description", "Pages missing a meta description"),
         ("missing_canonical", "Pages missing a canonical URL"),
+        ("duplicate_title_pages", "Pages sharing duplicate title text"),
         ("pages_without_h1", "Pages without an H1"),
         ("broken_internal_links", "Broken internal links"),
         ("orphan_pages_no_html_inbound_link", "Pages with no detected HTML inbound link"),

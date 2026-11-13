@@ -18,6 +18,11 @@ EXCLUDED_FILES = {
     "register.html",
     "profile.html",
     "progress.html",
+    "central-login.html",
+    "central-register.html",
+    "central-reset-password.html",
+    "chemistry-asset-manager.html",
+    "deployment-check-20260909.html",
 }
 
 

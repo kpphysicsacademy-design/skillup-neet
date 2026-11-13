@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261113-integer-addition-simulator-v1">
+<meta name="description" content="Explore integer addition with an interactive number line, positive and negative counters, and real-life situations.">
+<title>Integer Addition Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}.top{max-width:700px;margin:auto;padding:9px 13px;display:flex;align-items:center;gap:10px}.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1}
+main{width:min(100% - 24px,700px);margin:auto;padding:16px 0 36px}h1{font-size:clamp(22px,5vw,28px);margin:0 0 6px}h2{font-size:18px;margin:0 0 7px}.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:13px 0}.links{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:11px;border-radius:10px;font-weight:850;font-size:13px;border:1px solid #b8deed}
+label{display:block;font-weight:750;margin:12px 0 5px;font-size:13px}input,select{width:100%;min-height:43px;border:1px solid #b8cbd5;border-radius:9px;padding:9px 11px;font-size:16px;background:#fff;color:var(--ink)}
+button{background:var(--green);color:#fff;border:0;border-radius:9px;padding:10px 14px;font-weight:800;cursor:pointer;margin:9px 5px 0 0;min-height:40px}.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{background:#eff8ff;border:1px solid #cfe6f2;border-radius:11px;padding:12px;margin-top:12px;line-height:1.6;overflow-wrap:anywhere}.big{font-size:24px;font-weight:900;text-align:center;margin:8px}.numberline{display:flex;align-items:center;gap:0;margin:22px 3px 12px;position:relative}.tick{flex:1;text-align:center;position:relative;border-top:3px solid #b8cbd5;padding-top:12px;font-weight:750;font-size:12px}.tick:before{content:"";position:absolute;top:-7px;left:50%;height:11px;border-left:2px solid #8299a7}.tick.start{border-color:var(--blue)}.tick.end{border-color:var(--green)}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.chip{border-radius:9px;padding:8px 10px;font-weight:850}.pos{background:#e9f7e3;color:#286b19;border:1px solid #b8dda9}.neg{background:#fff0ef;color:#a23a32;border:1px solid #efc0bc}.equation{text-align:center;font-size:clamp(19px,4vw,26px);font-weight:900;margin:12px 0}.small{font-size:12px;color:var(--muted)}.feedback{min-height:24px;font-size:13px;line-height:1.5;margin-top:8px}
+@media(max-width:430px){main{width:calc(100% - 18px);padding-top:12px}.card{padding:13px}.row{grid-template-columns:1fr}.tick{font-size:10px;padding-top:10px}}
+:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+</style></head><body>
+<header><div class="top"><a href="maths-integer-addition-quiz.html?v=20261113-integer-addition-quiz-v2">← Quiz</a><strong>SkillUp Maths</strong><span class="small">Integers</span></div></header>
+<main>
+<h1>Integer Addition Simulator</h1>
+<p class="muted">Explore how positive and negative integers combine. Move along the number line, pair opposite counters, and model everyday changes.</p>
+<div class="links"><a href="maths-integer-addition-quiz.html?route=20261014-existing-quizzes-v1">📝 Practice Integer Addition Quiz</a></div>
+<section class="card">
+<h2>1. Number-line explorer</h2><p class="muted">Choose a starting integer and an addition value. Positive values move right; negative values move left.</p>
+<div class="row"><div><label for="start">Starting integer</label><input id="start" type="number" min="-10" max="10" value="-3"></div><div><label for="add">Add this integer</label><input id="add" type="number" min="-10" max="10" value="8"></div></div>
+<button id="move" type="button">Show movement</button><div id="lineResult" class="result" aria-live="polite"></div>
+<div class="numberline" id="numberline" aria-label="Number line from minus ten to ten"></div>
+</section>
+<section class="card">
+<h2>2. Positive and negative counters</h2><p class="muted">Each positive counter (+1) cancels one negative counter (−1). Add counters and see what remains.</p>
+<div class="row"><div><label for="positive">Positive counters</label><input id="positive" type="number" min="0" max="20" value="7"></div><div><label for="negative">Negative counters</label><input id="negative" type="number" min="0" max="20" value="4"></div></div>
+<button id="cancel" type="button">Pair opposite counters</button><div id="counterResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>3. Explore the sign patterns</h2><p class="muted">Try examples to understand same-sign and different-sign addition.</p>
+<div class="row"><div><label for="a">First integer</label><input id="a" type="number" min="-20" max="20" value="-6"></div><div><label for="b">Second integer</label><input id="b" type="number" min="-20" max="20" value="-4"></div></div>
+<button id="sum" type="button">Calculate sum</button><div id="sumResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>4. Real-life integer changes</h2><p class="muted">Select a situation, then change the starting value and movement.</p>
+<label for="scenario">Situation</label><select id="scenario"><option value="temperature">Temperature (°C)</option><option value="lift">Lift / floor level</option><option value="bank">Bank balance (₹)</option><option value="sea">Position relative to sea level (m)</option></select>
+<div class="row"><div><label for="initial">Starting value</label><input id="initial" type="number" value="-4"></div><div><label for="change">Change (+ rise/deposit, − fall/withdrawal)</label><input id="change" type="number" value="9"></div></div>
+<button id="story" type="button">Apply change</button><div id="storyResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>5. Quick challenge</h2><p class="muted">Solve the addition problem. Generate another when you are ready.</p>
+<div class="equation" id="challenge"></div>
+<div class="row"><div><label for="answer">Your answer</label><input id="answer" type="number" inputmode="numeric"></div><div><label>&nbsp;</label><button id="check" type="button">Check answer</button></div></div>
+<div id="challengeFeedback" class="feedback" aria-live="polite"></div><button class="secondary" id="new" type="button">New problem</button>
+</section>
+</main>
+<script>
+(()=>{const $=id=>document.getElementById(id);const val=id=>Number($(id).value);const valid=(...ids)=>ids.every(id=>$(id).value.trim()!==''&&Number.isFinite(val(id)));
+function drawLine(start,end){const box=$('numberline');box.replaceChildren();for(let n=-10;n<=10;n++){const t=document.createElement('div');t.className='tick'+(n===start?' start':'')+(n===end?' end':'');t.textContent=n;t.title='Integer '+n;box.append(t)}}
+function movement(){if(!valid('start','add'))return;const x=val('start'),y=val('add'),z=x+y;if(Math.abs(x)>10||Math.abs(y)>10||Math.abs(z)>10){$('lineResult').textContent='Choose values whose starting point and result stay between −10 and 10.';return}drawLine(x,z);$('lineResult').innerHTML='<div class="equation">'+x+' + ('+(y>0?'+':'')+y+') = '+z+'</div><p>Start at <b>'+x+'</b>, then move <b>'+Math.abs(y)+'</b> units '+(y>0?'right':'left')+'. You land on <b>'+z+'</b>.</p>'}
+function counters(){if(!valid('positive','negative'))return;const p=val('positive'),n=val('negative');if(p<0||n<0||p>20||n>20){$('counterResult').textContent='Use 0 to 20 counters in each group.';return}const pairs=Math.min(p,n),leftP=p-pairs,leftN=n-pairs;let html='<div class="chips">';for(let i=0;i<p;i++)html+='<span class="chip pos">+1</span>';for(let i=0;i<n;i++)html+='<span class="chip neg">−1</span>';html+='</div><p>'+pairs+' positive-negative pair(s) cancel to zero.</p><div class="equation">'+p+' + ('+(-n)+') = '+(p-n)+'</div><b>Left over:</b> '+(leftP?leftP+' positive counter(s)':leftN?leftN+' negative counter(s)':'no counters') ;$('counterResult').innerHTML=html}
+function calculate(){if(!valid('a','b'))return;const a=val('a'),b=val('b'),s=a+b;let reason;if(a===0||b===0)reason='Adding zero leaves the other integer unchanged.';else if(Math.sign(a)===Math.sign(b))reason='Same signs: add the magnitudes and keep their common sign.';else reason='Different signs: subtract the smaller magnitude from the larger and keep the sign of the larger magnitude.';$('sumResult').innerHTML='<div class="equation">'+a+' + ('+(b>0?'+':'')+b+') = '+s+'</div><p>'+reason+'</p><p class="small">Magnitude check: '+Math.abs(a)+' and '+Math.abs(b)+' combine to a result with magnitude '+Math.abs(s)+'.</p>'}
+function story(){if(!valid('initial','change'))return;const a=val('initial'),b=val('change'),r=a+b,kind=$('scenario').value;const names={temperature:'temperature',lift:'floor level',bank:'bank balance',sea:'position relative to sea level'};const unit={temperature:'°C',lift:' floor(s)',bank:'₹',sea:' m'};const action=b>0?'increases by ':b<0?'decreases by ':'does not change';$('storyResult').innerHTML='<div class="equation">'+a+' + ('+(b>0?'+':'')+b+') = '+r+'</div><p>The '+names[kind]+' '+action+Math.abs(b)+unit[kind]+'. The final value is <b>'+r+unit[kind]+'</b>.</p>'}
+let ca=0,cb=0;function next(){ca=Math.floor(Math.random()*17)-8;cb=Math.floor(Math.random()*17)-8;$('challenge').textContent=ca+' + ('+(cb>0?'+':'')+cb+') = ?';$('answer').value='';$('challengeFeedback').textContent=''}
+$('move').addEventListener('click',movement);$('cancel').addEventListener('click',counters);$('sum').addEventListener('click',calculate);$('story').addEventListener('click',story);$('check').addEventListener('click',()=>{if($('answer').value.trim()==='')return;const answer=Number($('answer').value),correct=ca+cb;$('challengeFeedback').textContent=answer===correct?'That is right! '+ca+' + ('+cb+') = '+correct+'.':'Not quite. Try again: use the number line or cancel opposite counters.'});$('new').addEventListener('click',next);next();movement();counters();calculate();story();
+})();
+</script><script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>

@@ -52,6 +52,9 @@ jobs:
       - name: Generate and validate XML sitemap
         run: python3 .github/scripts/generate-sitemap.py
 
+      - name: Run static SEO and internal-link audit
+        run: python3 .github/scripts/seo-audit.py /tmp/skillup-seo-audit
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
@@ -60,3 +63,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Upload SEO audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillup-seo-audit-report
+          path: /tmp/skillup-seo-audit/
+          if-no-files-found: warn
+          retention-days: 30

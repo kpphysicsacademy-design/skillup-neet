@@ -14,6 +14,7 @@ on:
       - '.github/scripts/**'
       - '.github/workflows/deploy.yml'
       - 'CNAME'
+      - 'robots.txt'
       - 'manifest.webmanifest'
       - 'service-worker.js'
   workflow_dispatch:
@@ -47,6 +48,9 @@ jobs:
 
       - name: Rewrite question-bank paths for static hosting
         run: python3 .github/scripts/rewrite-question-bank-paths.py
+
+      - name: Generate and validate XML sitemap
+        run: python3 .github/scripts/generate-sitemap.py
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4

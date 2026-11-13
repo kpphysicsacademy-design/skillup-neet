@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261113-line-symmetry-simulator-v1">
+<meta name="description" content="Explore line symmetry with interactive shape diagrams, symmetry axes, fold tests and reflection points.">
+<title>Line Symmetry Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1686b8;--green:#4cae19;--ink:#253746;--muted:#667987;--line:#dce8ee;--bg:#f7f9fb;--red:#d94b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}.top{max-width:700px;margin:auto;padding:9px 13px;display:flex;align-items:center;gap:10px}.top a{color:var(--blue);text-decoration:none;font-weight:800}.top strong{flex:1}
+main{width:min(100% - 24px,700px);margin:auto;padding:16px 0 34px}h1{font-size:clamp(22px,5vw,28px);margin:0 0 6px}h2{font-size:18px;margin:0 0 7px}.muted{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:13px 0;box-shadow:0 4px 16px #19374b0a}
+.links{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}.links a{display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:11px;border-radius:10px;font-weight:850;font-size:13px;border:1px solid #b8deed}
+label{display:block;font-weight:750;margin:12px 0 5px;font-size:13px}select,input{width:100%;min-height:43px;border:1px solid #b8cbd5;border-radius:9px;padding:10px 11px;font-size:16px;background:#fff;color:var(--ink)}
+button{background:var(--green);color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:800;cursor:pointer;margin:9px 5px 0 0;min-height:40px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.grid>div{min-width:0}
+.result{background:#eff8ff;border:1px solid #cfe6f2;border-radius:11px;padding:12px;margin-top:12px;line-height:1.6;overflow-wrap:anywhere}
+.diagram{display:grid;place-items:center;background:#f4f8fb;border:1px solid var(--line);border-radius:12px;margin-top:12px;padding:8px;min-height:230px}
+.diagram svg{width:100%;max-width:340px;height:auto;overflow:visible}
+.axis{stroke:#e09a24;stroke-width:2.4;stroke-dasharray:6 5}.shape{fill:#d9effa;stroke:#1686b8;stroke-width:3;stroke-linejoin:round}.ghost{fill:#a9d994;fill-opacity:.26;stroke:#4cae19;stroke-width:2;stroke-dasharray:5 4}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--muted);margin-top:8px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;background:#1686b8}.dot.axisdot{background:#e09a24}.dot.ghostdot{background:#4cae19}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.pills span{padding:6px 9px;background:#f3f7f9;border:1px solid var(--line);border-radius:8px;font-size:12px;font-weight:750}
+.small{font-size:12px;color:var(--muted)}:focus-visible{outline:3px solid #1686b84a;outline-offset:2px}
+@media(max-width:430px){main{width:calc(100% - 18px);padding-top:12px}.card{padding:13px}.grid{grid-template-columns:1fr}.diagram{min-height:200px}}
+</style></head>
+<body>
+<header><div class="top"><a href="maths-line-symmetry-quiz.html?route=20261014-existing-quizzes-v1">← Quiz</a><strong>SkillUp Maths</strong><span class="small">Geometry</span></div></header>
+<main>
+<h1>Line Symmetry Simulator</h1>
+<p class="muted">Explore mirror lines, test whether a fold makes matching halves, and reflect points across a line of symmetry.</p>
+<div class="links"><a href="maths-line-symmetry-quiz.html?route=20261014-existing-quizzes-v1">📝 Practice Line Symmetry Quiz</a></div>
+
+<section class="card">
+<h2>1. Shape symmetry explorer</h2>
+<p class="muted">Choose a shape. The diagram marks all its lines of symmetry. Compare the number and direction of the mirror lines.</p>
+<label for="shape">Choose a shape</label>
+<select id="shape">
+<option value="square">Square</option><option value="rectangle">Non-square rectangle</option><option value="equilateral">Equilateral triangle</option><option value="isosceles">Isosceles triangle</option><option value="scalene">Scalene triangle</option><option value="pentagon">Regular pentagon</option><option value="hexagon">Regular hexagon</option><option value="octagon">Regular octagon</option><option value="circle">Circle</option><option value="parallelogram">General parallelogram</option>
+</select>
+<div class="diagram"><svg id="shapeSvg" viewBox="0 0 300 220" role="img" aria-label="Selected shape with its symmetry lines"></svg></div>
+<div class="legend"><span><i class="dot"></i>Shape</span><span><i class="dot axisdot"></i>Line of symmetry</span></div>
+<div class="result" id="shapeInfo" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. Will this fold match?</h2>
+<p class="muted">Choose a shape and a proposed fold line. Test whether the fold is a true line of symmetry.</p>
+<div class="grid"><div><label for="foldShape">Shape</label><select id="foldShape"><option value="square">Square</option><option value="rectangle">Non-square rectangle</option><option value="equilateral">Equilateral triangle</option><option value="isosceles">Isosceles triangle</option><option value="scalene">Scalene triangle</option><option value="circle">Circle</option><option value="parallelogram">General parallelogram</option></select></div><div><label for="foldAxis">Proposed fold line</label><select id="foldAxis"><option value="vertical">Vertical through centre</option><option value="horizontal">Horizontal through centre</option><option value="diagonal">Diagonal</option><option value="slant">Slanting line</option></select></div></div>
+<button id="testFold" type="button">Test this fold</button>
+<div class="diagram"><svg id="foldSvg" viewBox="0 0 300 220" role="img" aria-label="Shape and proposed fold line"></svg></div>
+<div class="result" id="foldResult" aria-live="polite">Choose a shape and fold line, then test.</div>
+</section>
+
+<section class="card">
+<h2>3. Reflection point explorer</h2>
+<p class="muted">A point and its mirror image are the same perpendicular distance from the mirror line. Points on the line stay fixed.</p>
+<div class="grid"><div><label for="pointX">Point x-coordinate</label><input id="pointX" type="number" min="-10" max="10" value="3"></div><div><label for="pointY">Point y-coordinate</label><input id="pointY" type="number" min="-10" max="10" value="2"></div></div>
+<label for="reflectAxis">Mirror line</label><select id="reflectAxis"><option value="vertical">Vertical line (x = 0)</option><option value="horizontal">Horizontal line (y = 0)</option><option value="diagonal">Diagonal line (y = x)</option></select>
+<button id="reflect" type="button">Reflect point</button>
+<div class="diagram"><svg id="pointSvg" viewBox="0 0 300 230" role="img" aria-label="Point and its reflection on coordinate axes"></svg></div>
+<div class="result" id="pointResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>4. Symmetry quick challenge</h2>
+<p class="muted" id="challengeText">How many lines of symmetry does a regular hexagon have?</p>
+<div id="challengeOptions" class="grid"></div>
+<div class="result" id="challengeResult" aria-live="polite">Select an answer to check.</div>
+<button id="nextChallenge" type="button">Next challenge →</button>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const shapes={
+ square:{count:'4',desc:'Two diagonals and two lines through the midpoints of opposite sides.',points:[[85,45],[215,45],[215,175],[85,175]],axes:['v','h','d1','d2']},
+ rectangle:{count:'2',desc:'Only the vertical and horizontal centre lines are symmetry lines; the diagonals are not.',points:[[65,70],[235,70],[235,150],[65,150]],axes:['v','h']},
+ equilateral:{count:'3',desc:'Each vertex-to-opposite-side midpoint line is a symmetry line.',points:[[150,35],[245,185],[55,185]],axes:['t1','t2','t3']},
+ isosceles:{count:'1',desc:'The line from the apex to the midpoint of the base is the only symmetry line.',points:[[150,38],[225,180],[75,180]],axes:['v']},
+ scalene:{count:'0',desc:'All side lengths differ, so no reflection line divides it into matching halves.',points:[[72,170],[125,42],[235,185]],axes:[]},
+ pentagon:{count:'5',desc:'A regular pentagon has five symmetry lines, one associated with each vertex and the opposite side midpoint.',regular:5,axes:['regular']},
+ hexagon:{count:'6',desc:'Three lines pass through opposite vertices and three through opposite side midpoints.',regular:6,axes:['regular']},
+ octagon:{count:'8',desc:'A regular octagon has eight symmetry lines: four through opposite vertices and four through opposite side midpoints.',regular:8,axes:['regular']},
+ circle:{count:'Infinitely many',desc:'Every diameter is a line of symmetry, so a circle has infinitely many symmetry lines.',circle:true,axes:['v','h','d1','d2']},
+ parallelogram:{count:'0',desc:'A general parallelogram has no reflection line (although it has 180° rotational symmetry).',points:[[82,65],[220,65],[185,165],[47,165]],axes:[]}
+};
+const axisNames={v:'vertical centre line',h:'horizontal centre line',d1:'diagonal',d2:'other diagonal',t1:'first vertex-to-midpoint line',t2:'second vertex-to-midpoint line',t3:'third vertex-to-midpoint line'};
+function polygonPoints(n,cx=150,cy=110,r=78,rotation=-Math.PI/2){return Array.from({length:n},(_,i)=>[cx+r*Math.cos(rotation+2*Math.PI*i/n),cy+r*Math.sin(rotation+2*Math.PI*i/n)])}
+function ptsFor(key){const s=shapes[key];return s.points|| (s.regular?polygonPoints(s.regular):[])}
+function poly(points,cls='shape'){return '<polygon class="'+cls+'" points="'+points.map(p=>p.join(',')).join(' ')+'"/>'}
+function line(x1,y1,x2,y2,cls='axis'){return '<line class="'+cls+'" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'"/>'}
+function axisSvg(key,which){const p=ptsFor(key);if(which==='v')return line(150,18,150,202);if(which==='h')return line(18,110,282,110);if(which==='d1')return line(48,8,252,212);if(which==='d2')return line(48,212,252,8);if(which==='t1')return line(150,25,150,195);if(which==='t2')return line(150,25,72,195);if(which==='t3')return line(150,25,228,195);return ''}
+function renderShape(){const key=$('shape').value,s=shapes[key],p=ptsFor(key);let drawing=s.circle?'<circle class="shape" cx="150" cy="110" r="76"/>':poly(p);let axes='';if(s.regular){for(let i=0;i<s.regular;i++){const a=-Math.PI/2+i*Math.PI/s.regular;axes+=line(150-105*Math.cos(a),110-105*Math.sin(a),150+105*Math.cos(a),110+105*Math.sin(a))}}else s.axes.forEach(a=>axes+=axisSvg(key,a));if(s.circle){axes=[0,45,90,135].map(d=>{const a=d*Math.PI/180;return line(150-94*Math.cos(a),110-94*Math.sin(a),150+94*Math.cos(a),110+94*Math.sin(a))}).join('')}
+$('shapeSvg').innerHTML=drawing+axes;$('shapeInfo').innerHTML='<b>Lines of symmetry: '+s.count+'</b><p>'+s.desc+'</p><p class="small">The orange dashed lines show examples of valid symmetry axes.</p>'}
+function foldAxisLine(axis){return axis==='vertical'?line(150,15,150,205):axis==='horizontal'?line(15,110,285,110):axis==='diagonal'?line(45,205,255,15):line(45,35,255,185)}
+function validFold(shape,axis){const valid={square:['vertical','horizontal','diagonal'],rectangle:['vertical','horizontal'],equilateral:['vertical','diagonal','slant'],isosceles:['vertical'],scalene:[],circle:['vertical','horizontal','diagonal','slant'],parallelogram:[]};return valid[shape].includes(axis)}
+function renderFold(){const key=$('foldShape').value,axis=$('foldAxis').value,s=shapes[key],p=ptsFor(key);$('foldSvg').innerHTML=(s.circle?'<circle class="shape" cx="150" cy="110" r="76"/>':poly(p))+foldAxisLine(axis)}
+function testFold(){const key=$('foldShape').value,axis=$('foldAxis').value,ok=validFold(key,axis);renderFold();$('foldResult').innerHTML=ok?'<b>Yes — this is a line of symmetry.</b><p>Folding along this line makes two matching mirror halves.</p>':'<b>No — this is not a line of symmetry.</b><p>This fold would not place every point on one half exactly over its matching point on the other half.</p>'}
+function reflect(){const x=Number($('pointX').value),y=Number($('pointY').value),axis=$('reflectAxis').value;if(!Number.isFinite(x)||!Number.isFinite(y)||Math.abs(x)>10||Math.abs(y)>10){$('pointResult').textContent='Enter coordinates from −10 to 10.';return}let rx=x,ry=y;if(axis==='vertical')rx=-x;if(axis==='horizontal')ry=-y;if(axis==='diagonal'){rx=y;ry=x}const sx=150+x*10,sy=110-y*10,tx=150+rx*10,ty=110-ry*10;let mirror=axis==='vertical'?line(150,10,150,210):axis==='horizontal'?line(10,110,290,110):line(40,220,260,0);$('pointSvg').innerHTML='<line x1="15" y1="110" x2="285" y2="110" stroke="#9aabb5" stroke-width="1.5"/><line x1="150" y1="15" x2="150" y2="215" stroke="#9aabb5" stroke-width="1.5"/>'+mirror+'<line x1="'+sx+'" y1="'+sy+'" x2="'+tx+'" y2="'+ty+'" stroke="#4cae19" stroke-dasharray="4 4" stroke-width="2"/><circle cx="'+sx+'" cy="'+sy+'" r="6" fill="#1686b8"/><circle cx="'+tx+'" cy="'+ty+'" r="6" fill="#4cae19"/><text x="'+(sx+7)+'" y="'+(sy-8)+'" font-size="10" fill="#1686b8">P</text><text x="'+(tx+7)+'" y="'+(ty-8)+'" font-size="10" fill="#286b19">P′</text>';$('pointResult').innerHTML='<b>Original point:</b> P ('+x+', '+y+')<br><b>Reflected point:</b> P′ ('+rx+', '+ry+')<p>'+(x===rx&&y===ry?'The point lies on the mirror line, so it stays in the same position.':'The point and its image are equally far from the mirror line, on opposite sides.')+'</p>'}
+const challenges=[{q:'How many lines of symmetry does a regular hexagon have?',o:['3','4','6','8'],a:2,why:'A regular hexagon has six symmetry lines: three through opposite vertices and three through opposite side midpoints.'},{q:'Which shape has exactly one line of symmetry?',o:['Scalene triangle','Isosceles triangle','Non-square rectangle','General parallelogram'],a:1,why:'An isosceles triangle has one line from its apex to the midpoint of its base.'},{q:'How many lines of symmetry does a non-square rectangle have?',o:['1','2','4','Infinite'],a:1,why:'Its horizontal and vertical centre lines are the only two symmetry lines.'},{q:'What happens to a point lying on the mirror line when reflected across it?',o:['It stays fixed','It moves one unit','It rotates 90°','It moves to the origin'],a:0,why:'A point on the mirror line has zero perpendicular distance from it, so it remains fixed.'},{q:'How many lines of symmetry does a scalene triangle have?',o:['0','1','2','3'],a:0,why:'A scalene triangle has no equal sides or matching mirror halves.'},{q:'Which capital letter has horizontal symmetry in a common block style?',o:['A','C','F','L'],a:1,why:'A block C can have matching upper and lower halves across a horizontal axis.'}];let ci=0;function showChallenge(){const q=challenges[ci];$('challengeText').textContent=q.q;$('challengeOptions').innerHTML=q.o.map((v,i)=>'<button type="button" data-choice="'+i+'" style="width:100%;margin:0">'+v+'</button>').join('');$('challengeResult').textContent='Select an answer to check.';$('challengeOptions').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{$('challengeResult').innerHTML=Number(b.dataset.choice)===q.a?'<b>Correct.</b> '+q.why:'<b>Not quite.</b> '+q.why}))}
+$('shape').addEventListener('change',renderShape);$('foldShape').addEventListener('change',renderFold);$('foldAxis').addEventListener('change',renderFold);$('testFold').addEventListener('click',testFold);$('reflect').addEventListener('click',reflect);$('nextChallenge').addEventListener('click',()=>{ci=(ci+1)%challenges.length;showChallenge()});renderShape();renderFold();reflect();showChallenge();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body></html>

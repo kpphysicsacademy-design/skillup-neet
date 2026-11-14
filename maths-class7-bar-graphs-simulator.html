@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261114-class7-bar-graphs-simulator-v1">
+<meta name="description" content="Simple Class 7 bar graph simulator. Enter categories and values to create and read a bar graph.">
+<title>Class 7 Bar Graphs Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:680px;margin:auto;padding:9px 14px;display:flex;align-items:center;gap:10px}.back{color:var(--blue);text-decoration:none;font-weight:800}.brand{font-weight:850;flex:1}
+main{width:min(100% - 24px,680px);margin:auto;padding:18px 4px 32px}.intro h1{font-size:23px;margin:0 0 5px}.muted{color:var(--muted);font-size:13px;margin:0 0 14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}
+label{display:block;font-size:12px;font-weight:800;margin:10px 0 5px}
+input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px}
+button{border:0;border-radius:9px;padding:11px 15px;background:var(--green);color:white;font-weight:850;font-size:14px;cursor:pointer;margin-top:12px}
+.graph{display:flex;align-items:end;gap:12px;min-height:210px;padding:18px 8px 5px;border-bottom:2px solid #9aa8b1;overflow-x:auto}
+.bar-item{flex:1;min-width:48px;display:flex;flex-direction:column;align-items:center;justify-content:end;height:190px;gap:5px}
+.bar{width:min(38px,80%);min-height:2px;background:#248ac0;border-radius:6px 6px 0 0}
+.value{font-size:12px;font-weight:800}.category{font-size:11px;text-align:center;overflow-wrap:anywhere}
+.note{font-size:13px;line-height:1.5;background:#f0f8fc;border-radius:9px;padding:10px;margin-top:12px}
+.practice{font-size:14px;line-height:1.5}.answer{font-weight:800;color:#286b19}
+@media(max-width:480px){main{padding:14px 2px 24px}.panel{padding:12px}.graph{gap:7px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a class="back" href="maths-home.html">← Maths Path</a><div class="brand">SkillUp Maths</div></div></header>
+<main>
+<section class="intro"><h1>📊 Bar Graph Simulator</h1><p class="muted">Enter categories and values. Build a graph and compare the bars.</p></section>
+<section class="panel">
+<label for="names">Categories (separate with commas)</label>
+<input id="names" value="Cricket, Football, Tennis, Chess">
+<label for="values">Values (use the same order)</label>
+<input id="values" type="text" inputmode="decimal" value="8, 5, 7, 3">
+<button id="draw">Create bar graph</button>
+<p id="message" class="muted" aria-live="polite"></p>
+</section>
+<section class="panel">
+<strong id="graphTitle">Students' Favourite Games</strong>
+<div class="graph" id="graph" role="img" aria-label="Bar graph"></div>
+<p class="note" id="summary">The tallest bar represents the greatest value. Compare bar heights to find the smallest and largest categories.</p>
+</section>
+<section class="panel practice">
+<strong>Quick practice</strong>
+<p>If the values are 8, 5, 7 and 3, which category has the greatest value?</p>
+<button id="reveal" type="button">Show answer</button>
+<p id="answer" class="answer" hidden>Cricket has the greatest value: 8.</p>
+</section>
+</main>
+<script>
+(function(){
+const names=document.getElementById('names'),values=document.getElementById('values'),graph=document.getElementById('graph'),message=document.getElementById('message'),summary=document.getElementById('summary');
+function draw(){
+ const labels=names.value.split(',').map(x=>x.trim()).filter(Boolean);
+ const nums=values.value.split(',').map(x=>x.trim()).filter(Boolean).map(Number);
+ if(!labels.length||labels.length!==nums.length||nums.some(n=>!Number.isFinite(n)||n<0)){message.textContent='Enter the same number of categories and non-negative numeric values.';return;}
+ const max=Math.max(...nums,1);graph.replaceChildren();
+ labels.forEach((label,i)=>{
+  const item=document.createElement('div');item.className='bar-item';
+  const value=document.createElement('span');value.className='value';value.textContent=nums[i];
+  const bar=document.createElement('div');bar.className='bar';bar.style.height=(nums[i]/max*145)+'px';bar.title=label+': '+nums[i];
+  const category=document.createElement('span');category.className='category';category.textContent=label;
+  item.append(value,bar,category);graph.append(item);
+ });
+ const largest=labels[nums.indexOf(Math.max(...nums))],smallest=labels[nums.indexOf(Math.min(...nums))];
+ summary.textContent='Greatest: '+largest+' ('+Math.max(...nums)+'). Smallest: '+smallest+' ('+Math.min(...nums)+'). Read each value above its bar.';
+ message.textContent='Graph updated: '+labels.length+' categories.';
+}
+document.getElementById('draw').addEventListener('click',draw);
+document.getElementById('reveal').addEventListener('click',()=>{document.getElementById('answer').hidden=false;});
+draw();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body>
+</html>

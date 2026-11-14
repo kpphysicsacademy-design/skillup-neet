@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261114-class7-double-bar-graphs-simulator-v1">
+<meta name="description" content="Simple Class 7 double bar graph simulator to compare two data sets.">
+<title>Class 7 Double Bar Graph Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#248ac0;--orange:#ed9a36;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:680px;margin:auto;padding:9px 14px;display:flex;gap:10px;align-items:center}.back{color:var(--blue);text-decoration:none;font-weight:800}.brand{font-weight:850;flex:1}
+main{width:min(100% - 24px,680px);margin:auto;padding:18px 4px 32px}.intro h1{font-size:23px;margin:0 0 5px}.muted{font-size:13px;color:var(--muted);margin:0 0 14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}
+label{display:block;font-size:12px;font-weight:800;margin:10px 0 5px}input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px}
+button{border:0;border-radius:9px;padding:11px 15px;background:var(--blue);color:#fff;font-size:14px;font-weight:850;cursor:pointer;margin-top:12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;font-weight:750;margin:10px 0}.key{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;background:var(--blue)}.key.b{background:var(--orange)}
+.graph{display:flex;align-items:end;gap:12px;min-height:225px;padding:15px 7px 5px;border-bottom:2px solid #9aa8b1;overflow-x:auto}
+.group{flex:1;min-width:60px;height:205px;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:5px}
+.pair{height:175px;display:flex;align-items:end;gap:5px}.bar{width:22px;min-height:2px;border-radius:5px 5px 0 0;background:var(--blue)}.bar.b{background:var(--orange)}
+.nums{font-size:11px;font-weight:800}.category{font-size:11px;text-align:center;overflow-wrap:anywhere}
+.note{font-size:13px;line-height:1.5;background:#f0f8fc;border-radius:9px;padding:10px;margin-top:12px}
+@media(max-width:480px){main{padding:14px 2px 24px}.panel{padding:12px}.graph{gap:6px}.bar{width:18px}}
+</style></head>
+<body><header><div class="nav"><a class="back" href="maths-home.html">← Maths Path</a><div class="brand">SkillUp Maths</div></div></header>
+<main>
+<section class="intro"><h1>📊 Double Bar Graph Simulator</h1><p class="muted">Enter two data sets and compare their bars for each category.</p></section>
+<section class="panel">
+<label for="cats">Categories (comma-separated)</label><input id="cats" value="Monday, Tuesday, Wednesday">
+<label for="aName">First group name</label><input id="aName" value="Group A">
+<label for="aVals">First group values</label><input id="aVals" value="8, 6, 10" inputmode="decimal">
+<label for="bName">Second group name</label><input id="bName" value="Group B">
+<label for="bVals">Second group values</label><input id="bVals" value="5, 9, 7" inputmode="decimal">
+<button id="draw">Create double bar graph</button><p id="message" class="muted" aria-live="polite"></p>
+</section>
+<section class="panel"><strong id="title">Compare the two groups</strong>
+<div class="legend"><span><i class="key"></i><span id="legendA">Group A</span></span><span><i class="key b"></i><span id="legendB">Group B</span></span></div>
+<div class="graph" id="graph" role="img" aria-label="Double bar graph"></div>
+<p class="note" id="summary">Compare the paired bars in each category. The legend identifies each group.</p></section>
+<section class="panel"><strong>Quick practice</strong><p class="muted" style="margin-top:8px">Group A has 8 and Group B has 5 in a category. What is the difference?</p>
+<button id="reveal">Show answer</button><p id="answer" hidden style="font-weight:800;color:#286b19">8 − 5 = 3.</p></section>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+function draw(){
+ const cats=$('cats').value.split(',').map(s=>s.trim()).filter(Boolean),a=$('aVals').value.split(',').map(s=>s.trim()).filter(Boolean).map(Number),b=$('bVals').value.split(',').map(s=>s.trim()).filter(Boolean).map(Number);
+ if(!cats.length||a.length!==cats.length||b.length!==cats.length||a.concat(b).some(n=>!Number.isFinite(n)||n<0)){$('message').textContent='Enter one non-negative number for each category in both groups.';return;}
+ const max=Math.max(...a,...b,1);$('legendA').textContent=$('aName').value||'Group A';$('legendB').textContent=$('bName').value||'Group B';$('title').textContent=$('legendA').textContent+' vs '+$('legendB').textContent;
+ const graph=$('graph');graph.replaceChildren();
+ cats.forEach((cat,i)=>{const g=document.createElement('div');g.className='group';const pair=document.createElement('div');pair.className='pair';const x=document.createElement('div');x.className='bar';x.style.height=(a[i]/max*150)+'px';x.title=$('legendA').textContent+': '+a[i];const y=document.createElement('div');y.className='bar b';y.style.height=(b[i]/max*150)+'px';y.title=$('legendB').textContent+': '+b[i];pair.append(x,y);const nums=document.createElement('div');nums.className='nums';nums.textContent=a[i]+' / '+b[i];const label=document.createElement('div');label.className='category';label.textContent=cat;g.append(pair,nums,label);graph.append(g);});
+ const totalA=a.reduce((s,n)=>s+n,0),totalB=b.reduce((s,n)=>s+n,0);$('summary').textContent=$('legendA').textContent+' total: '+totalA+'. '+$('legendB').textContent+' total: '+totalB+'. '+(totalA>totalB?$('legendA').textContent+' is higher overall.':totalB>totalA?$('legendB').textContent+' is higher overall.':'Both groups have equal totals.');
+ $('message').textContent='Graph updated for '+cats.length+' categories.';
+}
+$('draw').addEventListener('click',draw);$('reveal').addEventListener('click',()=>{$('answer').hidden=false;});draw();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>

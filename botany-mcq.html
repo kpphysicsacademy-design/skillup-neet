@@ -612,18 +612,19 @@ const questionsSource=banks[key],title=document.getElementById('title'),subtitle
 <script>
 /* Botany quiz recovery: initialize the quiz if the legacy inline loader fails. */
 (function(){
-  function startRecovery(){
+  async function startRecovery(){
     const qEl=document.getElementById('question'),oEl=document.getElementById('options');
     if(!qEl||!oEl||qEl.textContent.trim()||oEl.children.length)return;
     const params=new URLSearchParams(location.search),requested=(params.get('concept')||'What Is Living?').trim();
-    const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+    const norm=v=>String(v||'').toLowerCase().replace(/\\band\\b/g,'').replace(/[^a-z0-9]/g,'');
     const wanted=norm(requested);
-    let bank=null;
-    for(const name of Object.keys(window)){
-      if(!/^skillUp.*Questions$/.test(name))continue;
-      if(norm(name.replace(/^skillUp/,'').replace(/Questions$/,''))===wanted){
-        const value=window[name];if(Array.isArray(value)&&value.length){bank=value;break;}
-      }
+    const findBank=()=>{for(const name of Object.keys(window)){if(!/^skillUp.*Questions$/.test(name))continue;if(norm(name.replace(/^skillUp/,'').replace(/Questions$/,''))===wanted){const value=window[name];if(Array.isArray(value)&&value.length)return value;}}return null;};
+    let bank=findBank();
+    if(!bank){
+      const slug=requested.toLowerCase().replace(/\\band\\b/g,' ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      const file=slug+'-question-bank.js';
+      await new Promise(resolve=>{const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261114-botany-recovery-v2';script.onload=resolve;script.onerror=resolve;document.head.appendChild(script);});
+      bank=findBank();
     }
     if(!bank){
       const notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText'),quiz=document.getElementById('quiz');

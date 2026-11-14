@@ -46,7 +46,7 @@
 
   // Chemistry-matched visual system for Maths quiz pages.
   // Keep this scoped to quiz routes so the rest of SkillUp retains its own design.
-  if (/^\\/maths-.*quiz.*\\.html$/i.test(window.location.pathname)) {
+  if (/^\/maths-.*quiz.*\.html$/i.test(window.location.pathname)) {
     const theme = document.createElement('style');
     theme.id = 'skillup-chemistry-quiz-theme';
     theme.textContent = `

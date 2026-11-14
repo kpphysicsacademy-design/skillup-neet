@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f9fa">
+<meta name="skillup-release" content="20261114-class7-mean-median-mode-simulator-v1">
+<meta name="description" content="A simple interactive mean, median and mode calculator for Class 7 Maths.">
+<title>Mean, Median and Mode Simulator | SkillUp Maths</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f9fa;color:#263746;font-family:system-ui,sans-serif}header{background:#fff;border-bottom:1px solid #e3e9ed}.top,main{width:min(100% - 24px,650px);margin:auto}.top{padding:12px 0;display:flex;justify-content:space-between;align-items:center}.top a{color:#1686b8;text-decoration:none;font-weight:800}main{padding:20px 0 35px}h1{font-size:25px;margin:0 0 5px}h2{font-size:18px;margin:0 0 6px}.muted{font-size:13px;color:#71808d;line-height:1.5;margin:0}.card{background:#fff;border:1px solid #e3e9ed;border-radius:13px;padding:16px;margin:14px 0}label{display:block;font-size:12px;font-weight:750;margin:12px 0 5px}input{width:100%;padding:11px;border:1px solid #cbd8df;border-radius:8px;font-size:16px}button{border:0;border-radius:9px;background:#48a91c;color:#fff;padding:11px 15px;font-weight:800;margin-top:12px;cursor:pointer}.result{margin-top:12px;padding:12px;background:#f0f8fc;border-radius:9px;line-height:1.6;min-height:42px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{background:#fff;border:1px solid #dce8ee;border-radius:9px;padding:10px;text-align:center}.stat b{display:block;font-size:21px;color:#1686b8}.stat span{font-size:11px;color:#71808d;font-weight:750}.link{display:block;text-align:center;padding:12px;border-radius:9px;background:#eaf7ff;color:#116b96;text-decoration:none;font-weight:800;margin-top:14px}@media(max-width:480px){.card{padding:13px}.stats{gap:5px}.stat{padding:8px 4px}.stat b{font-size:18px}}
+</style></head><body>
+<header><div class="top"><a href="maths-class7-mean-median-mode-quiz.html?route=20261014-existing-quizzes-v1">← Back to quiz</a><b>SkillUp Maths · Class 7</b></div></header>
+<main>
+<h1>Mean, Median and Mode</h1><p class="muted">Enter numbers and calculate all three measures.</p>
+<a class="link" href="maths-class7-mean-median-mode-quiz.html?route=20261014-existing-quizzes-v1">📝 Practise the 30-question quiz</a>
+<section class="card">
+<h2>Try the data calculator</h2>
+<p class="muted">Type numbers separated by commas. Example: 4, 6, 6, 8, 10</p>
+<label for="data">Your numbers</label>
+<input id="data" type="text" inputmode="decimal" value="4, 6, 6, 8, 10" placeholder="e.g. 4, 6, 6, 8, 10">
+<button id="calculate">Calculate</button>
+<div class="stats">
+<div class="stat"><b id="mean">6.8</b><span>MEAN</span></div>
+<div class="stat"><b id="median">6</b><span>MEDIAN</span></div>
+<div class="stat"><b id="mode">6</b><span>MODE</span></div>
+</div>
+<div class="result" id="steps" aria-live="polite">Mean = total ÷ number of values. Median = middle value after sorting. Mode = most frequent value.</div>
+</section>
+<section class="card">
+<h2>Quick practice</h2>
+<p><b>Find the mean of 2, 4 and 6.</b></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button class="choice" data-answer="3">3</button><button class="choice" data-answer="4">4</button><button class="choice" data-answer="6">6</button><button class="choice" data-answer="12">12</button>
+</div>
+<div class="result" id="practice" aria-live="polite">Choose an answer.</div>
+</section>
+</main>
+<script>
+(()=>{const $=id=>document.getElementById(id);function calculate(){const raw=$('data').value.trim();if(!raw){$('steps').textContent='Enter at least one number.';return}const values=raw.split(',').map(s=>s.trim());if(values.some(s=>s===''||!Number.isFinite(Number(s)))){$('steps').textContent='Please enter valid numbers separated by commas.';return}const nums=values.map(Number);if(nums.length>100){$('steps').textContent='Please enter no more than 100 numbers.';return}const sorted=[...nums].sort((a,b)=>a-b),sum=nums.reduce((s,n)=>s+n,0),mean=sum/nums.length,mid=Math.floor(sorted.length/2),median=sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2;const counts=new Map();nums.forEach(n=>counts.set(n,(counts.get(n)||0)+1));const max=Math.max(...counts.values()),modes=[...counts].filter(([,count])=>count===max).map(([n])=>n).sort((a,b)=>a-b);const fmt=n=>Number(n.toFixed(4)).toString();$('mean').textContent=fmt(mean);$('median').textContent=fmt(median);$('mode').textContent=max===1?'No mode':modes.map(fmt).join(', ');$('steps').textContent='Sorted data: '+sorted.map(fmt).join(', ')+'. Total = '+fmt(sum)+'. Mean = '+fmt(sum)+' ÷ '+nums.length+' = '+fmt(mean)+'. Median = '+fmt(median)+'. Mode = '+(max===1?'no value repeats':modes.map(fmt).join(' and ')+' (appears '+max+' times)')+'.'}$('calculate').addEventListener('click',calculate);document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{$('practice').textContent=btn.dataset.answer==='4'?'Correct! (2 + 4 + 6) ÷ 3 = 4.':'Try again. Add the three numbers, then divide by 3.'}));calculate()})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
+</body></html>

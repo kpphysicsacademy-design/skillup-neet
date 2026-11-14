@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261114-class7-simple-probability-simulator-v1">
+<meta name="description" content="Simple Class 7 probability simulator for coins, dice and coloured counters.">
+<title>Class 7 Simple Probability Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#248ac0;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:680px;margin:auto;padding:9px 14px;display:flex;align-items:center;gap:10px}.back{color:var(--blue);text-decoration:none;font-weight:800}.brand{font-weight:850;flex:1}
+main{width:min(100% - 24px,680px);margin:auto;padding:18px 4px 32px}.intro h1{font-size:23px;margin:0 0 5px}.muted{font-size:13px;color:var(--muted);margin:0 0 14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}
+label{display:block;font-size:12px;font-weight:800;margin:10px 0 5px}select,input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px}
+button{border:0;border-radius:9px;padding:11px 15px;background:var(--green);color:#fff;font-size:14px;font-weight:850;cursor:pointer;margin-top:12px}
+.result{padding:12px;border-radius:10px;background:#f0f8fc;line-height:1.6;margin-top:12px}.fraction{font-size:23px;font-weight:850;color:#116b96}
+.coins{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.coin{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#f5d77a;border:2px solid #d3a92e;font-weight:850}
+@media(max-width:480px){main{padding:14px 2px 24px}.panel{padding:12px}}
+</style></head>
+<body><header><div class="nav"><a class="back" href="maths-home.html">← Maths Path</a><div class="brand">SkillUp Maths</div></div></header>
+<main>
+<section class="intro"><h1>🎲 Simple Probability Simulator</h1><p class="muted">Choose an experiment and calculate the chance of an outcome.</p></section>
+<section class="panel">
+<label for="experiment">Experiment</label><select id="experiment"><option value="coin">Toss a coin</option><option value="die">Roll a six-sided die</option><option value="counters">Pick a coloured counter</option></select>
+<div id="counterFields" hidden>
+<label for="red">Red counters</label><input id="red" type="number" min="0" value="3">
+<label for="blueCount">Blue counters</label><input id="blueCount" type="number" min="0" value="2">
+<label for="favourable">Colour to pick</label><select id="favourable"><option value="red">Red</option><option value="blue">Blue</option></select>
+</div>
+<div id="dieFields" hidden>
+<label for="dieTarget">Choose a die result</label><select id="dieTarget"><option value="one">Exactly 1</option><option value="even">An even number</option><option value="greater">Greater than 4</option></select>
+</div>
+<div id="coinFields">
+<label for="coinSide">Choose a coin result</label><select id="coinSide"><option value="heads">Heads</option><option value="tails">Tails</option></select>
+</div>
+<button id="calculate">Calculate probability</button>
+<div class="result" id="result" aria-live="polite">Select an experiment to see its probability.</div>
+</section>
+<section class="panel"><strong>Remember</strong><p class="muted" style="margin:8px 0 0">Probability = Number of favourable outcomes ÷ Total number of equally likely outcomes. It is always between 0 and 1.</p></section>
+<section class="panel"><strong>Quick practice</strong><p class="muted" style="margin-top:8px">A fair die has 6 equally likely outcomes. What is the probability of rolling an even number?</p>
+<button id="reveal">Show answer</button><p id="answer" hidden style="font-weight:850;color:#286b19">3/6 = 1/2.</p></section>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id),experiment=$('experiment');
+function update(){const v=experiment.value;$('coinFields').hidden=v!=='coin';$('dieFields').hidden=v!=='die';$('counterFields').hidden=v!=='counters';}
+function show(){
+ const v=experiment.value;let favourable,total,label;
+ if(v==='coin'){favourable=1;total=2;label=$('coinSide').value==='heads'?'Heads':'Tails';}
+ else if(v==='die'){const t=$('dieTarget').value;favourable=t==='one'?1:3;total=6;label=t==='one'?'Rolling a 1':t==='even'?'Rolling an even number':'Rolling greater than 4';}
+ else{const red=Number($('red').value),blue=Number($('blueCount').value);if(!Number.isInteger(red)||!Number.isInteger(blue)||red<0||blue<0||red+blue===0){$('result').textContent='Enter non-negative whole-number counts with at least one counter.';return;}const colour=$('favourable').value;favourable=colour==='red'?red:blue;total=red+blue;label='Picking a '+colour+' counter';}
+ const gcd=(a,b)=>b?gcd(b,a%b):a;const d=gcd(favourable,total);
+ $('result').innerHTML='Event: <strong>'+label+'</strong><br>Favourable outcomes: <strong>'+favourable+'</strong><br>Total outcomes: <strong>'+total+'</strong><br><span class="fraction">'+(favourable/d)+'/'+(total/d)+'</span> probability ('+(favourable/total*100).toFixed(1)+'%)';
+}
+experiment.addEventListener('change',update);$('calculate').addEventListener('click',show);$('reveal').addEventListener('click',()=>{$('answer').hidden=false;});update();show();
+})();
+</script>
+<script src="/shared-nav.js?v=20261106-maths-header-v6"></script></body></html>

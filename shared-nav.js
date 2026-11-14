@@ -111,6 +111,7 @@
 
   // Load the shared Maths header on every Maths route that uses this common script.
   if (window.location.pathname.startsWith('/maths') && window.location.pathname.toLowerCase().endsWith('.html') &&
+      !document.querySelector('meta[name="skillup-no-standard-menu"][content="true"]') &&
       !document.querySelector('script[src*="maths-standard-header.js"]')) {
     const mathsHeader = document.createElement('script');
     mathsHeader.src = '/maths-standard-header.js?v=20261104-standard-header-v1';

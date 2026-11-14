@@ -32,6 +32,27 @@ missing = [route for route in routes if not (root / route).is_file()]
 if missing:
     raise SystemExit("FAIL: missing quiz route files: " + ", ".join(missing[:20]))
 
+
+# Validate the JavaScript route-map object itself. The previous existence-only
+# check allowed a missing comma to pass and break the Maths page at runtime.
+route_match = re.search(r'var\s+verifiedQuizRoutes\s*=\s*\{(.*?)\n\};', home, re.S)
+if not route_match:
+    raise SystemExit("FAIL: could not locate the verified Maths quiz route map")
+route_js = "const verifiedQuizRoutes = {\n" + route_match.group(1) + "\n};\n"
+import subprocess
+syntax = subprocess.run(
+    ["node", "--check"],
+    input=route_js,
+    text=True,
+    capture_output=True,
+)
+if syntax.returncode:
+    raise SystemExit("FAIL: invalid JavaScript in verifiedQuizRoutes:\n" + syntax.stderr)
+
+nav_scripts = re.findall(r'<script[^>]+src=["\']([^"\']*shared-nav\.js[^"\']*)', home)
+if len(nav_scripts) != 1:
+    raise SystemExit(f"FAIL: maths-home.html must load shared-nav.js exactly once (found {len(nav_scripts)})")
+
 print(f"PASS: {len(levels)} levels, {len(chapters)} chapters, {len(concepts)} concepts")
 print(f"PASS: {len(routes)} unique mapped quiz pages exist")
 print("PASS: versioned data load and visible failure guard are present")

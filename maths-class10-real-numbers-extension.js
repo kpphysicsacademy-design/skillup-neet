@@ -65,9 +65,12 @@
   if(!bank["Decimal expansion of rational numbers"])bank["Decimal expansion of rational numbers"]=decimalBank();
 
   function initSimulator() {
-    const params=new URLSearchParams(location.search),level=(params.get('level')||'').toLowerCase(),chapter=(params.get('chapter')||'').toLowerCase(),concept=(params.get('concept')||'').trim().toLowerCase();
-    if(!level.includes('class 10')||chapter!=='real numbers')return;
-    const learn=document.getElementById('learn');if(!learn||document.getElementById('realNumbersLab'))return;
+    const params=new URLSearchParams(location.search),level=(params.get('level')||'').toLowerCase(),chapter=(params.get('chapter')||'').toLowerCase();
+    const dedicatedPage=location.pathname.toLowerCase().endsWith('maths-real-numbers-class10-quiz.html');
+    const concept=(params.get('concept')||"Euclid's division lemma").trim().toLowerCase();
+    if(!dedicatedPage&&(!level.includes('class 10')||chapter!=='real numbers'))return;
+    const learn=document.getElementById('learn'),host=dedicatedPage?document.querySelector('main'):learn;
+    if(!host||document.getElementById('realNumbersLab'))return;
     const panels={
       "euclid's division lemma":'<label>Dividend a <input id="euA" type="number" min="0" max="100000" value="127"></label><label>Divisor b <input id="euB" type="number" min="1" max="999" value="11"></label>',
       "fundamental theorem of arithmetic":'<label>Composite number <input id="ftaN" type="number" min="2" max="100000" value="360"></label>',
@@ -76,7 +79,8 @@
       "decimal expansion of rational numbers":'<label>Numerator <input id="decN" type="number" min="1" max="9999" value="7"></label><label>Denominator <input id="decD" type="number" min="1" max="9999" value="40"></label>'
     };
     if(!panels[concept])return;
-    learn.insertAdjacentHTML('beforeend','<section class="example" id="realNumbersLab"><h2>Interactive simulator</h2><p class="muted">Change the values to explore this Real Numbers concept. Results update instantly.</p><div id="realNumbersControls" class="lab">'+panels[concept]+'</div><div class="callout" id="realNumbersResult" aria-live="polite"></div></section>');
+    const simulator='<section class="card example" id="realNumbersLab"><h2>Interactive simulator · '+concept.replace(/</g,'&lt;')+'</h2><p class="muted">Change the values to explore this Real Numbers concept. Results update instantly.</p><div id="realNumbersControls" class="lab">'+panels[concept]+'</div><div class="callout" id="realNumbersResult" aria-live="polite"></div></section>';
+    if(dedicatedPage)host.insertAdjacentHTML('afterbegin',simulator);else host.insertAdjacentHTML('beforeend',simulator);
     const el=id=>document.getElementById(id),out=el('realNumbersResult');
     const gcd=(a,b)=>{while(b){const t=b;b=a%b;a=t;}return a;};
     const factor=n=>{const a=[];for(let p=2;p*p<=n;p++){let e=0;while(n%p===0){n/=p;e++;}if(e)a.push(p+(e>1?'^'+e:''));}if(n>1)a.push(String(n));return a.join(' × ')||'1';};

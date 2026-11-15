@@ -27,7 +27,7 @@
       const n=Object.keys(exps).reduce((v,k)=>v*Math.pow(Number(k),exps[k]),1), correct=factorText(exps), distractors=[], keys=Object.keys(exps);
       for(let j=0;j<3;j++){const alt={...exps},k=keys[(i+j)%keys.length];alt[k]=Math.max(1,alt[k]+(j===1?-1:1));const t=factorText(alt);if(t!==correct&&!distractors.includes(t))distractors.push(t);}
       let bump=2;while(distractors.length<3){const alt={...exps},k=keys[distractors.length%keys.length];alt[k]+=bump++;const t=factorText(alt);if(t!==correct&&!distractors.includes(t))distractors.push(t);}
-      const opts=[correct,...distractors],shift=(i*2)%4,ordered=opts.slice(shift).concat(opts.slice(0,shift));
+      const opts=[correct,...distractors],shift=(i*3)%4,ordered=opts.slice(shift).concat(opts.slice(0,shift));
       rows.push(['What is the prime factorisation of '+n+'?',ordered,ordered.indexOf(correct),n+' = '+correct+'. Each factor shown is prime, and the exponents give the exact multiplicities.']);
     }
     return rows;

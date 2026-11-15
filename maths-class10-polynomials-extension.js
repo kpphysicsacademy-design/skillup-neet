@@ -3,8 +3,11 @@
 'use strict';
 const bank=window.SKILLUP_MATHS_QUIZ_BANK=window.SKILLUP_MATHS_QUIZ_BANK||{};
 function add(rows,q,correct,distractors,explanation,i){
- const opts=[String(correct),...distractors.map(String)],shift=(i*3)%4,ordered=opts.slice(shift).concat(opts.slice(0,shift));
- rows.push([q,ordered,ordered.indexOf(String(correct)),explanation]);
+ const answer=String(correct),opts=[answer];
+ distractors.map(String).forEach(v=>{if(!opts.includes(v)&&opts.length<4)opts.push(v);});
+ ['None of these','All of these','Not enough information'].forEach(v=>{if(!opts.includes(v)&&opts.length<4)opts.push(v);});
+ const shift=(i*3)%4,ordered=opts.slice(shift).concat(opts.slice(0,shift));
+ rows.push([q,ordered,ordered.indexOf(answer),explanation]);
 }
 function zerosBank(){
  const rows=[];

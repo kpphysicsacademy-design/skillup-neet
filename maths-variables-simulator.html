@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta name="description" content="Explore algebraic variables interactively by changing values and observing how expressions and simple equations respond.">
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9fa">
-<meta name="skillup-release" content="20261112-variables-simulator-v5">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="skillup-no-standard-menu" content="true">
+<meta name="skillup-release" content="20261117-variables-simulator-extracted-architecture-v3">
 <title>Variables Simulator | SkillUp Maths</title>
 <style>
 :root{--blue:#248ac0;--blue-soft:#eaf7ff;--green:#48b516;--ink:#263746;--muted:#71808d;--line:#e3e9ed;--bg:#f7f9fa}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.nav{width:min(100% - 24px,760px);min-height:52px;margin:auto;display:flex;align-items:center;gap:10px}.back{display:grid;place-items:center;width:35px;height:35px;border:1px solid var(--line);border-radius:9px;color:var(--blue);text-decoration:none;font-size:20px}.brand{flex:1;font-weight:900}.brand span{color:var(--blue)}.tag{padding:5px 8px;border-radius:8px;background:#f1f5f7;color:#52616c;font-size:11px;font-weight:850}
-main{width:min(100% - 24px,760px);margin:auto;padding:16px 4px 34px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(23px,4vw,29px);margin:4px 0}.intro{margin:0 0 14px;color:var(--muted);font-size:13px}
+main{width:min(100% - 24px,760px);margin:auto;padding:16px 4px 34px}.quiz-cta{display:flex;justify-content:center;align-items:center;min-height:45px;margin:10px 0 14px;padding:10px;border:1px solid #b8deed;border-radius:11px;background:var(--blue-soft);color:#116b96;text-decoration:none;font-size:13px;font-weight:850}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(23px,4vw,29px);margin:4px 0}.intro{margin:0 0 14px;color:var(--muted);font-size:13px}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0}.tab{min-height:42px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:800 12px system-ui;cursor:pointer}.tab.active{background:var(--blue-soft);border-color:#9bd1e9;color:#116b96}
 .panel{display:none}.panel.active{display:block}.card{padding:16px;margin:11px 0;background:#fff;border:1px solid var(--line);border-radius:15px}.card h2{margin:0;font-size:17px}.hint{margin:4px 0 13px;color:var(--muted);font-size:12px;line-height:1.5}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{display:grid;gap:5px;color:#52616c;font-size:12px;font-weight:800}.field.full{grid-column:1/-1}input,select{width:100%;min-height:43px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:700 15px system-ui}input:focus,select:focus,button:focus-visible{outline:3px solid #b8e4f5;outline-offset:2px}
@@ -24,8 +24,9 @@ main{width:min(100% - 24px,760px);margin:auto;padding:16px 4px 34px}.eyebrow{fon
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
-<header><div class="nav"><a class="back" href="maths-variables-quiz.html?v=20261112-variables-quiz-v2" aria-label="Back to Variables Quiz">←</a><div class="brand">SkillUp <span>Maths</span></div><div class="tag">🧮 Simulator</div></div></header>
+<header><div class="nav"><a class="back" href="maths-variables-quiz.html?v=20261117-variables-quiz-extracted-architecture-v3" aria-label="Back to Variables Quiz">←</a><div class="brand">SkillUp <span>Maths</span></div><div class="tag">🧮 Simulator</div></div></header>
 <main><div class="eyebrow">Maths · Algebra</div><h1>Variables Simulator</h1><p class="intro">Explore how letters represent numbers. Substitute values, build expressions from words, create input–output tables and practise algebra with quick challenges.</p>
+<a class="quiz-cta" href="maths-variables-quiz.html?v=20261117-variables-quiz-extracted-architecture-v3">📝 Practise the 30-question Variables Quiz</a>
 <nav class="tabs" aria-label="Variables learning labs">
 <button class="tab active" data-tab="substitute">Substitution</button><button class="tab" data-tab="builder">Expression Builder</button><button class="tab" data-tab="tablelab">Input–Output</button><button class="tab" data-tab="challenge">Challenge</button>
 </nav>
@@ -40,7 +41,7 @@ main{width:min(100% - 24px,760px);margin:auto;padding:16px 4px 34px}.eyebrow{fon
 <div class="fields"><label class="field">Rule<select id="rule"><option value="2*x+3">2x + 3</option><option value="3*x-1">3x − 1</option><option value="x*x">x²</option><option value="x/2">x ÷ 2</option><option value="5-x">5 − x</option><option value="x+10">x + 10</option></select></label><label class="field">Starting input<input id="start" type="number" value="1"></label><label class="field">Step between inputs<input id="stepSize" type="number" value="1"></label><label class="field">Number of rows<input id="rows" type="number" min="2" max="12" value="6"></label></div>
 <div class="visual"><div class="math" id="ruleMath">y = 2x + 3</div><div class="table-wrap" id="tableOutput"></div></div></div></section>
 <section class="panel" id="challenge"><div class="card"><h2>4. Quick Challenge</h2><p class="hint">Solve a fresh substitution problem. Check your answer and try another.</p><div class="challenge"><div class="challenge-q" id="challengeQuestion">If x = 4, find 3x + 5.</div><label class="field">Your answer<input id="challengeAnswer" type="number" step="any" placeholder="Enter your answer"></label><div class="fields"><button class="btn" id="checkChallenge">Check answer</button><button class="btn secondary" id="newChallenge">New question</button></div><div class="feedback" id="challengeFeedback" aria-live="polite"></div></div></div></section>
-<div class="foot"><a href="maths-variables-quiz.html?v=20261112-variables-quiz-v2">← Back to Variables Quiz</a></div>
+<div class="foot"><a href="maths-variables-quiz.html?v=20261117-variables-quiz-extracted-architecture-v3">← Back to Variables Quiz</a></div>
 </main>
 <script>
 (()=>{'use strict';

@@ -1,54 +1,96 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f7f9fa">
 <meta name="skillup-no-standard-menu" content="true">
-<meta name="skillup-release" content="20261117-properties-of-operations-simulator-architecture-v4">
-<meta name="description" content="A simple interactive simulator for properties of integer operations.">
+<meta name="skillup-release" content="20261117-properties-of-operations-simulator-recreated-v5">
+<meta name="description" content="Interactive Class 7 integer properties simulator: explore commutative, associative, distributive, identity and inverse properties.">
 <title>Properties of Operations Simulator | SkillUp Maths</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f7f9fa;color:#263746;font-family:system-ui,sans-serif}header{background:#fff;border-bottom:1px solid #e3e9ed}.top,main{width:min(100% - 24px,650px);margin:auto}.top{padding:12px 0;display:flex;justify-content:space-between;align-items:center}.top a{color:#1686b8;text-decoration:none;font-weight:800}main{padding:20px 0 35px}h1{font-size:25px;margin:0 0 5px}h2{font-size:18px;margin:0 0 6px}.muted{font-size:13px;color:#71808d;line-height:1.5;margin:0}.card{background:#fff;border:1px solid #e3e9ed;border-radius:13px;padding:16px;margin:14px 0}.row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}label{display:block;font-size:12px;font-weight:750;margin:10px 0 5px}input,select{width:100%;padding:10px;border:1px solid #cbd8df;border-radius:8px;font-size:16px;background:white;color:#263746}button{border:0;border-radius:9px;background:#48a91c;color:#fff;padding:11px 15px;font-weight:800;margin-top:12px;cursor:pointer}.result{margin-top:12px;padding:12px;background:#f0f8fc;border-radius:9px;line-height:1.6;min-height:42px}.equation{text-align:center;font-size:clamp(19px,4vw,24px);font-weight:850;margin:9px 0}.hint{background:#f5f8fa;padding:9px 11px;border-radius:8px;margin-top:10px;font-size:13px;color:#586b77}.link{display:block;text-align:center;padding:12px;border-radius:9px;background:#eaf7ff;color:#116b96;text-decoration:none;font-weight:800;margin-top:14px}@media(max-width:480px){.row{grid-template-columns:1fr}.card{padding:13px}}
-</style></head><body>
-<header><div class="top"><a href="maths-properties-of-operations-quiz.html?v=20261117-properties-of-operations-quiz-architecture-v4">← Back to quiz</a><b>SkillUp Maths · Class 7</b></div></header>
+:root{--blue:#1686b8;--blue-bg:#eaf7ff;--green:#48a91c;--ink:#263746;--muted:#71808d;--line:#e1e9ed;--bg:#f5f8fa;--card:#fff;--soft:#f1f7fa;--good:#eaf7e5;--bad:#fff0f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.top{width:min(100% - 24px,720px);min-height:50px;margin:auto;display:flex;align-items:center;gap:12px}.top a{color:var(--blue);font-weight:850;text-decoration:none}.brand{font-weight:850;flex:1}.tag{font-size:11px;font-weight:800;color:#52616c;background:#f2f5f6;padding:6px 9px;border-radius:20px}
+main{width:min(100% - 24px,720px);margin:auto;padding:18px 0 36px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.09em;color:var(--blue);text-transform:uppercase}h1{font-size:clamp(25px,5vw,34px);line-height:1.15;margin:5px 0 8px}h2{font-size:19px;margin:0 0 6px}.muted{color:var(--muted);font-size:13px;line-height:1.55;margin:0}.hero{padding:6px 2px 14px}.hero p{max-width:600px}.quiz-link{display:flex;align-items:center;justify-content:center;min-height:48px;margin:13px 0 15px;padding:10px 14px;border:1px solid #b8deed;border-radius:12px;background:var(--blue-bg);color:#116b96;text-decoration:none;font-weight:900}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin:13px 0;box-shadow:0 2px 10px #26374608}.panel-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}.num{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:9px;background:var(--blue-bg);color:#116b96;font-weight:900}.property-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:12px 0}.tab{border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:10px 5px;font-size:12px;font-weight:850;cursor:pointer}.tab[aria-pressed=true]{background:var(--blue-bg);border-color:#8bc8e7;color:#116b96}.tab span{display:block;font-size:17px;margin-bottom:3px}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.field label{display:block;font-size:12px;font-weight:850;margin:0 0 6px}.field input,.field select{width:100%;min-height:44px;border:1px solid #c7d5dc;border-radius:10px;background:#fff;color:var(--ink);padding:9px 11px;font:600 16px system-ui}
+.segment{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.segment button{border:1px solid var(--line);border-radius:9px;background:#fff;padding:8px 12px;color:var(--ink);font-weight:800;cursor:pointer}.segment button[aria-pressed=true]{background:#eef7fc;border-color:#8bc8e7;color:#116b96}
+.primary{min-height:43px;border:0;border-radius:10px;background:var(--green);color:#fff;padding:10px 16px;font-weight:900;cursor:pointer;margin-top:12px}.result{margin-top:13px;padding:14px;border:1px solid #cfe4ee;border-radius:13px;background:#f0f8fc}.result-label{font-size:10px;font-weight:900;letter-spacing:.08em;color:#557283;text-transform:uppercase}.equation{font-size:clamp(19px,4vw,26px);font-weight:900;line-height:1.5;text-align:center;overflow-wrap:anywhere;margin:5px 0}.explain{font-size:13px;color:#536a78;line-height:1.55;text-align:center}.property-note{padding:11px 12px;border-radius:10px;background:#f4f7f8;color:#52616c;font-size:12px;line-height:1.5;margin-top:11px}
+.practice-question{font-size:17px;font-weight:850;line-height:1.5;margin:12px 0}.answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}.answer{min-height:45px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;padding:10px 12px;color:var(--ink);font-weight:800;cursor:pointer}.answer:disabled{cursor:default}.answer.correct{background:var(--good);border-color:#a8d495;color:#286b19}.answer.incorrect{background:var(--bad);border-color:#e8b0b0;color:#a33131}.feedback{min-height:25px;margin-top:11px;font-size:13px;line-height:1.5;font-weight:750}.secondary{border:1px solid #b8deed;background:var(--blue-bg);color:#116b96;border-radius:10px;padding:10px 14px;font-weight:850;cursor:pointer;margin-top:8px}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
+@media(max-width:540px){.top{width:100%;padding:0 12px}.tag{font-size:10px}main{width:calc(100% - 20px);padding-top:12px}.panel{padding:13px;border-radius:14px}.property-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.tab{padding:9px 3px}.controls{grid-template-columns:1fr 1fr}.controls .field:last-child{grid-column:1/-1}.answers{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="top"><a href="maths-properties-of-operations-quiz.html?v=20261117-properties-of-operations-quiz-architecture-v4">← Quiz</a><div class="brand">SkillUp Maths</div><span class="tag">CLASS 7 · SIMULATOR</span></div></header>
 <main>
-<h1>Properties of Operations</h1><p class="muted">Change the numbers and see how the properties work.</p>
-<a class="link" href="maths-properties-of-operations-quiz.html?v=20261117-properties-of-operations-quiz-architecture-v4">📝 Practise the 30-question quiz</a>
-<section class="card">
-<h2>Try the property explorer</h2>
-<p class="muted">Choose a property and enter your numbers.</p>
-<label for="property">Choose a property</label>
-<select id="property">
-<option value="commutative">Commutative (change order)</option>
-<option value="associative">Associative (change grouping)</option>
-<option value="distributive">Distributive (multiply each term)</option>
-<option value="identity">Identity (number stays same)</option>
-<option value="inverse">Additive inverse (sum is zero)</option>
-</select>
-<div class="row">
-<div><label for="a">Number A</label><input id="a" type="number" value="4"></div>
-<div><label for="b">Number B</label><input id="b" type="number" value="3"></div>
-<div><label for="c">Number C</label><input id="c" type="number" value="2"></div>
-</div>
-<button id="show">Show example</button>
-<div class="result" id="result" aria-live="polite"></div>
-<p class="hint" id="explain">Choose a property to see its short explanation.</p>
+<section class="hero"><div class="eyebrow">Interactive maths lab</div><h1>Properties of Operations</h1><p class="muted">Change the integers, switch properties and compare both sides of an equation. Discover when an operation keeps the same value—and when it does not.</p>
+<a class="quiz-link" href="maths-properties-of-operations-quiz.html?v=20261117-properties-of-operations-quiz-architecture-v4">📝 Practise the 30-question quiz</a>
 </section>
-<section class="card">
-<h2>Quick practice</h2>
-<p><b>Which property is shown by 5 + 0 = 5?</b></p>
-<div class="row" style="grid-template-columns:1fr 1fr">
-<button class="choice" data-answer="identity">Identity</button>
-<button class="choice" data-answer="commutative">Commutative</button>
-<button class="choice" data-answer="associative">Associative</button>
-<button class="choice" data-answer="distributive">Distributive</button>
+<section class="panel">
+<div class="panel-head"><span class="num">1</span><div><h2>Choose a property</h2><p class="muted">Select a rule to explore with your own integers.</p></div></div>
+<div class="property-tabs" role="group" aria-label="Choose a property">
+<button class="tab" data-property="commutative" aria-pressed="true"><span>↔️</span>Commutative</button>
+<button class="tab" data-property="associative" aria-pressed="false"><span>🧩</span>Associative</button>
+<button class="tab" data-property="distributive" aria-pressed="false"><span>📦</span>Distributive</button>
+<button class="tab" data-property="identity" aria-pressed="false"><span>🎯</span>Identity</button>
+<button class="tab" data-property="inverse" aria-pressed="false"><span>➕</span>Inverse</button>
 </div>
-<div class="result" id="practice" aria-live="polite">Choose an answer.</div>
+<div class="segment" id="operationChoices" aria-label="Operation">
+<button data-operation="add" aria-pressed="true">Addition</button><button data-operation="multiply" aria-pressed="false">Multiplication</button>
+</div>
+<div class="controls">
+<div class="field"><label for="a">Integer A</label><input id="a" type="number" step="1" value="-4"></div>
+<div class="field"><label for="b">Integer B</label><input id="b" type="number" step="1" value="7"></div>
+<div class="field" id="cField"><label for="c">Integer C</label><input id="c" type="number" step="1" value="3"></div>
+</div>
+<button class="primary" id="explore">Explore this property</button>
+<div class="result" aria-live="polite"><div class="result-label">Compare both sides</div><div class="equation" id="equation"></div><div class="explain" id="explanation"></div></div>
+<div class="property-note" id="ruleNote"></div>
 </section>
+<section class="panel">
+<div class="panel-head"><span class="num">2</span><div><h2>Quick property challenge</h2><p class="muted">Identify the property shown in each example.</p></div></div>
+<div class="eyebrow" id="challengeCount">CHALLENGE 1</div>
+<div class="practice-question" id="challengeQuestion"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback" aria-live="polite">Choose the correct property.</div>
+<button class="secondary" id="nextChallenge">Next challenge →</button>
+</section>
+<footer>SkillUp Maths · Learn the rule, test the numbers, then practise.</footer>
 </main>
 <script>
-(()=>{const $=id=>document.getElementById(id),v=id=>Number($(id).value);function show(){const p=$('property').value,a=v('a'),b=v('b'),c=v('c');if(![a,b,c].every(Number.isFinite)||['a','b','c'].some(id=>$(id).value.trim()==='')){$('result').textContent='Enter valid numbers.';return}let equation='',explanation='';if(p==='commutative'){equation=a+' + '+b+' = '+b+' + '+a+' = '+(a+b);explanation='Commutative property: changing the order does not change the sum.'}else if(p==='associative'){equation='('+a+' + '+b+') + '+c+' = '+a+' + ('+b+' + '+c+') = '+(a+b+c);explanation='Associative property: changing the grouping does not change the sum.'}else if(p==='distributive'){equation=a+' × ('+b+' + '+c+') = '+(a*(b+c))+'; '+a+' × '+b+' + '+a+' × '+c+' = '+(a*b+a*c);explanation='Distributive property: multiply the number by each term inside the brackets.'}else if(p==='identity'){equation=a+' + 0 = '+a+'; '+a+' × 1 = '+a;explanation='Identity property: adding zero or multiplying by one leaves the number unchanged.'}else{equation=a+' + ('+(-a)+') = 0';explanation='Additive inverse: a number plus its opposite equals zero.'}$('result').innerHTML='<div class="equation">'+equation+'</div>';$('explain').textContent=explanation}
-$('show').addEventListener('click',show);document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{$('practice').textContent=btn.dataset.answer==='identity'?'Correct! Zero is the additive identity.':'Try again. Which property leaves a number unchanged when zero is added?'}));show();
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+let property='commutative',operation='add',challengeIndex=0,answered=false;
+const propertyNames={commutative:'Commutative property',associative:'Associative property',distributive:'Distributive property',identity:'Identity property',inverse:'Additive inverse'};
+function values(){return ['a','b','c'].map(id=>{const el=$(id);return el.value.trim()===''?null:Number(el.value)})}
+function setProperty(next){property=next;document.querySelectorAll('[data-property]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.property===property)));const showOperation=['commutative','associative'].includes(property);$('operationChoices').style.display=showOperation?'flex':'none';$('cField').style.display=['associative','distributive'].includes(property)?'block':'none';if(property==='inverse')operation='add';document.querySelectorAll('[data-operation]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.operation===operation)));explore()}
+function explore(){
+ const [a,b,c]=values();if(a===null||b===null||!Number.isInteger(a)||!Number.isInteger(b)||(['associative','distributive'].includes(property)&&(c===null||!Number.isInteger(c)))){$('equation').textContent='Enter whole numbers';$('explanation').textContent='Use integers only, including negative numbers and zero.';return}
+ let left='',right='',why='',note='';
+ if(property==='commutative'){const sign=operation==='add'?'+':'×',calc=operation==='add'?(a+b):(a*b);left=a+' '+sign+' '+b+' = '+calc;right=b+' '+sign+' '+a+' = '+calc;why='Both sides are equal. Changing the order does not change the result.';note='For integers, addition and multiplication are commutative. Subtraction and division are not generally commutative.'}
+ if(property==='associative'){const sign=operation==='add'?'+':'×',calc=operation==='add'?(a+b+c):(a*b*c);left='('+a+' '+sign+' '+b+') '+sign+' '+c+' = '+calc;right=a+' '+sign+' ('+b+' '+sign+' '+c+') = '+calc;why='Both groupings give the same result. The order of the integers stays the same.';note='Integer addition and multiplication are associative. Subtraction and division are not generally associative.'}
+ if(property==='distributive'){left=a+' × ('+b+' + '+c+') = '+(a*(b+c));right='('+a+' × '+b+') + ('+a+' × '+c+') = '+(a*b+a*c);why='Multiplying the sum gives the same result as multiplying each term and then adding.';note='Multiplication distributes over addition and subtraction.'}
+ if(property==='identity'){left=a+' + 0 = '+a;right=a+' × 1 = '+a;why='Zero is the additive identity; one is the multiplicative identity. Each leaves A unchanged.';note='The identity number depends on the operation: 0 for addition and 1 for multiplication.'}
+ if(property==='inverse'){left=a+' + ('+(-a)+') = 0';right='Opposite of '+a+' is '+(-a);why='A number plus its additive inverse equals zero.';note='Every integer has an additive inverse. A non-zero integer’s multiplicative inverse is generally not an integer.'}
+ $('equation').innerHTML=left+'<br><span style="color:#1686b8">⇔</span><br>'+right;$('explanation').textContent=why;$('ruleNote').textContent=note;
+}
+document.querySelectorAll('[data-property]').forEach(b=>b.addEventListener('click',()=>setProperty(b.dataset.property)));
+document.querySelectorAll('[data-operation]').forEach(b=>b.addEventListener('click',()=>{operation=b.dataset.operation;document.querySelectorAll('[data-operation]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));explore()}));
+$('explore').addEventListener('click',explore);['a','b','c'].forEach(id=>$(id).addEventListener('input',explore));
+const challenges=[
+ {q:'Which property is shown by 8 + (−3) = (−3) + 8?',a:'commutative',why:'The addends exchange order; the sum stays the same.'},
+ {q:'Which property is shown by (2 × 5) × 4 = 2 × (5 × 4)?',a:'associative',why:'The grouping changes, but the factor order stays the same.'},
+ {q:'Which property is shown by 3 × (6 + 2) = 3 × 6 + 3 × 2?',a:'distributive',why:'The factor 3 is multiplied by each term inside the brackets.'},
+ {q:'Which property is shown by −12 + 0 = −12?',a:'identity',why:'Zero is the additive identity.'},
+ {q:'Which property is shown by −9 + 9 = 0?',a:'inverse',why:'A number and its opposite have a sum of zero.'},
+ {q:'Which property is shown by 7 × (−2) = (−2) × 7?',a:'commutative',why:'Changing the order of factors does not change the product.'}
+];
+function renderChallenge(){answered=false;const item=challenges[challengeIndex%challenges.length];$('challengeCount').textContent='CHALLENGE '+(challengeIndex+1);$('challengeQuestion').textContent=item.q;$('feedback').textContent='Choose the correct property.';$('answers').replaceChildren();['commutative','associative','distributive','identity','inverse'].forEach(key=>{const b=document.createElement('button');b.className='answer';b.textContent=propertyNames[key];b.addEventListener('click',()=>{if(answered)return;answered=true;const correct=key===item.a;b.classList.add(correct?'correct':'incorrect');if(!correct){[...$('answers').children].find(x=>x.textContent===propertyNames[item.a]).classList.add('correct')}$('feedback').textContent=(correct?'Correct! ':'Not quite. ')+item.why;[...$('answers').children].forEach(x=>x.disabled=true)});$('answers').appendChild(b)})}
+$('nextChallenge').addEventListener('click',()=>{challengeIndex++;renderChallenge()});
+renderChallenge();explore();
 })();
 </script>
-<script src="/shared-nav.js?v=20261106-maths-header-v6"></script>
 </body></html>

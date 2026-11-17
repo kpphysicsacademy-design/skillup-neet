@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261106-angle-sum-property-clean-v1">
+<meta name="skillup-release" content="20261117-angle-sum-property-quiz-architecture-v1">
 <meta name="description" content="Practise the angle-sum property of triangles with interactive questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Angle Sum Property — Practice</title>
 <style>
@@ -101,7 +101,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <main>
 <section class="hero">
 <h1>Angle Sum Property of a Triangle</h1>
-<div class="actions" style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px"><a href="maths-angle-sum-property-learn.html?v=20261107-angle-sum-brief-learn-v1" style="flex:1;min-width:120px;text-align:center;text-decoration:none;padding:10px;border-radius:9px;background:#eaf5fb;color:#236b91;font-size:12px;font-weight:850">📘 Brief Learn</a><a href="maths-angle-sum-property-simulator.html?v=20261107-angle-sum-simulator-v1" style="flex:1;min-width:120px;text-align:center;text-decoration:none;padding:10px;border-radius:9px;background:#48b516;color:#fff;font-size:12px;font-weight:850">△ Simulate</a></div>
+<div class="actions" style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px"><a href="maths-angle-sum-property-learn.html?v=20261107-angle-sum-brief-learn-v1" style="flex:1;min-width:120px;text-align:center;text-decoration:none;padding:10px;border-radius:9px;background:#eaf5fb;color:#236b91;font-size:12px;font-weight:850">📘 Brief Learn</a><a href="maths-angle-sum-property-simulator.html?v=20261117-angle-sum-property-simulator-architecture-v1" style="flex:1;min-width:120px;text-align:center;text-decoration:none;padding:10px;border-radius:9px;background:#48b516;color:#fff;font-size:12px;font-weight:850">△ Simulate</a></div>
 <p class="muted">Interior angles · Triangle angle sum · Missing-angle calculations</p>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
@@ -121,21 +121,23 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 'use strict';
 const questions=[{"q":"The three interior angles of a triangle add up to…","o":["90°","180°","270°","360°"],"a":1,"why":"The angle sum property states that a triangle’s interior angles total 180°."},{"q":"A triangle has angles 50° and 60°. Find the third angle.","o":["60°","70°","80°","90°"],"a":1,"why":"180° − 50° − 60° = 70°."},{"q":"Two angles of a triangle are 90° and 35°. Find the third angle.","o":["45°","55°","65°","75°"],"a":1,"why":"The remaining angle is 180° − 90° − 35° = 55°."},{"q":"A triangle has angles 40°, 40°, and x°. Find x.","o":["80°","90°","100°","110°"],"a":2,"why":"x = 180° − 40° − 40° = 100°."},{"q":"Can a triangle have two right angles?","o":["Yes, every triangle can","No, their sum would already be 180°","Only an isosceles triangle can","Only an equilateral triangle can"],"a":1,"why":"Two right angles total 180°, leaving no angle for a triangle’s third vertex."},{"q":"In a triangle, two angles are 75° and 45°. What is the third angle?","o":["50°","60°","70°","80°"],"a":1,"why":"180° − 75° − 45° = 60°."},{"q":"An equilateral triangle has three equal interior angles. Each angle is…","o":["30°","45°","60°","90°"],"a":2,"why":"Each angle is 180° ÷ 3 = 60°."},{"q":"A triangle has angles 30°, 90°, and…","o":["30°","45°","60°","90°"],"a":2,"why":"The third angle is 180° − 30° − 90° = 60°."},{"q":"Which set can be the interior angles of a triangle?","o":["60°, 60°, 60°","90°, 90°, 10°","100°, 50°, 40°","30°, 40°, 100°"],"a":0,"why":"Only 60° + 60° + 60° = 180°."},{"q":"Two angles of a triangle are equal and the third is 40°. Each equal angle is…","o":["60°","70°","80°","90°"],"a":1,"why":"The equal angles total 140°, so each is 70°."},{"q":"Triangle angles are x°, 2x°, and 3x°. Find x.","o":["20°","30°","40°","60°"],"a":1,"why":"x + 2x + 3x = 180°, so 6x = 180° and x = 30°."},{"q":"A triangle has angles (x + 20)°, (x + 40)°, and 60°. Find x.","o":["20°","25°","30°","40°"],"a":2,"why":"2x + 120° = 180°, so x = 30°."},{"q":"The angles of a triangle are x°, (x + 20)°, and (x + 40)°. Find the largest angle.","o":["60°","70°","80°","90°"],"a":2,"why":"3x + 60 = 180 gives x = 40°, so the largest angle x + 40° is 80°."},{"q":"Two angles of a triangle are in the ratio 2:3, and the third angle is 80°. Find the smaller angle.","o":["30°","40°","50°","60°"],"a":1,"why":"The first two total 100°; five ratio parts equal 100°, so one part is 20° and the smaller is 40°."},{"q":"An isosceles triangle has a vertex angle of 40°. Find each base angle.","o":["40°","60°","70°","80°"],"a":2,"why":"The base angles total 140° and are equal, so each is 70°."},{"q":"The angles are (2x)°, (3x)°, and 30°. Find the largest angle.","o":["60°","75°","90°","105°"],"a":2,"why":"5x + 30 = 180 gives x = 30°; the largest angle is 90°."},{"q":"A triangle has angles (x + 10)°, (2x + 20)°, and (3x − 30)°. Find x.","o":["20°","25°","30°","35°"],"a":2,"why":"Their sum gives 6x = 180°, so x = 30°."},{"q":"The smallest angle of a triangle is 35° and another is 65°. Find the third angle.","o":["70°","80°","90°","100°"],"a":1,"why":"180° − 35° − 65° = 80°."},{"q":"The angles of a triangle are x°, x°, and (x + 30)°. Find the largest angle.","o":["70°","75°","80°","90°"],"a":2,"why":"3x + 30° = 180°, so x = 50°; the largest angle is 80°."},{"q":"A triangle has angles 2x°, 2x°, and 4x°. Find the smallest angle.","o":["22.5°","30°","45°","60°"],"a":2,"why":"8x = 180°, so x = 22.5°; the smallest angle is 2x = 45°."},{"q":"Triangle angles are (2x + 10)°, (3x − 5)°, and (x + 25)°. Find the largest angle.","o":["60°","65°","70°","75°"],"a":2,"why":"6x + 30° = 180°, so x = 25°; angles are 60°, 70°, 50°, so the largest is 70°."},{"q":"The angles of a triangle are in ratio 3:4:5. Find the largest angle.","o":["45°","60°","75°","90°"],"a":2,"why":"Twelve parts equal 180°, each part is 15°; largest is 5 × 15° = 75°."},{"q":"An isosceles triangle has equal base angles of (2x + 5)° and vertex angle (x + 10)°. Find x.","o":["25°","30°","32°","35°"],"a":2,"why":"2(2x + 5) + (x + 10) = 180 gives 5x = 160, so x = 32°."},{"q":"Triangle angles are (x + 15)°, (2x − 5)°, and (3x + 20)°. Find the largest angle.","o":["85°","90°","95°","100°"],"a":2,"why":"6x + 30 = 180 gives x = 25; the angles are 40°, 45°, and 95°."},{"q":"A triangle has angles in ratio 1:2:3. What is the largest angle?","o":["30°","60°","90°","120°"],"a":2,"why":"Six parts total 180°, so each part is 30° and the largest is 90°."},{"q":"Two angles are (3x + 5)° and (2x + 10)°; the third is 50°. Find x.","o":["20","22","23","25"],"a":2,"why":"5x + 65 = 180, so 5x = 115 and x = 23."},{"q":"The angles of a triangle are (4x − 10)°, (2x + 10)°, and (x + 30)°. Find x.","o":["15","20","150/7","30"],"a":2,"why":"7x + 30 = 180, so x = 150/7."},{"q":"An isosceles triangle has vertex angle 30°. Find each base angle.","o":["60°","70°","75°","80°"],"a":2,"why":"The base angles share 150°, so each is 75°."},{"q":"A triangle has angles x°, (x + 15)°, and (2x + 5)°. Find the largest angle.","o":["75°","80°","85°","90°"],"a":2,"why":"4x + 20 = 180 gives x = 40°; the largest angle is 2x + 5 = 85°."},{"q":"A triangle has angles 2x°, (3x + 10)°, and (x + 20)°. Find the largest angle.","o":["75°","80°","85°","90°"],"a":2,"why":"6x + 30 = 180 gives x = 25°; angles are 50°, 85°, 45°, so largest is 85°."}]
 const originalQuestions=questions.slice();
-let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[],currentQuestion=null;
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;const item=questions[index];
+ const order=item.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+ currentQuestion={...item,o:order.map(i=>item.o[i]),a:order.indexOf(item.a)};
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
  document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
  $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
+ $('question').textContent=currentQuestion.q;
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
- item.o.forEach((text,j)=>{
+ currentQuestion.o.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
@@ -145,7 +147,7 @@ function render(){
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;
- locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ locked=true;const item=currentQuestion,buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
@@ -158,7 +160,7 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Angle Sum Property Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Angle Sum Property Mastered!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';

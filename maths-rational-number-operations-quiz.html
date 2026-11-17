@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261106-rational-number-operations-audit-v1">
+<meta name="skillup-release" content="20261117-rational-number-operations-quiz-architecture-v1">
+<meta name="skillup-no-standard-menu" content="true">
 <meta name="description" content="Practise rational number operations with 30 interactive questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Rational Number Operations — Practice</title>
 <style>
@@ -101,7 +102,8 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <main>
 <section class="hero">
 <h1>Operations on Rational Numbers</h1>
-<p class="muted">Addition · Subtraction · Multiplication · Division · Mixed operations</p>
+<p class="muted">Addition · Subtraction · Multiplication · Division · Mixed operations · Properties</p>
+<div class="topic-actions"><a href="maths-rational-number-operations-learn.html?v=20261117-rational-number-operations-learn-v1">📘 Brief Learn — revise the key ideas</a><a href="maths-rational-number-operations-simulator.html?v=20261117-rational-number-operations-simulator-v1">🧮 Interactive Simulator — practise operations</a></div>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
@@ -124,6 +126,10 @@ let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;const item=questions[index];
+ if(!item||!Array.isArray(item.o)||item.o.length!==4||!Number.isInteger(item.a)||item.a<0||item.a>3)throw new Error('Invalid question data at question '+(index+1));
+ const optionPairs=item.o.map((label,originalIndex)=>({label,correct:originalIndex===item.a}));
+ for(let k=optionPairs.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[optionPairs[k],optionPairs[j]]=[optionPairs[j],optionPairs[k]];}
+ item.displayOptions=optionPairs.map(x=>x.label);item.displayAnswer=optionPairs.findIndex(x=>x.correct);
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
@@ -134,7 +140,7 @@ function render(){
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  while($('options').firstChild)$('options').removeChild($('options').firstChild);
- item.o.forEach((text,j)=>{
+ item.displayOptions.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
   const label=document.createElement('span');label.textContent=text;b.appendChild(letter);b.appendChild(label);
@@ -145,10 +151,10 @@ function render(){
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;
  locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
- buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.displayAnswer)b.classList.add('correct');});
  const feedback=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
- else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.o[item.a]+'.';}
+ if(chosen===item.displayAnswer){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
+ else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.displayOptions[chosen],answer:item.displayOptions[item.displayAnswer],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.textContent='Not quite. '+item.why+' Correct answer: '+item.displayOptions[item.displayAnswer]+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{
@@ -175,6 +181,6 @@ $('continue').addEventListener('click',()=>{
 render();
 })();
 </script>
-<script src="/shared-nav.js?v=20261104-maths-header-v5"></script>
+
 </body>
 </html>

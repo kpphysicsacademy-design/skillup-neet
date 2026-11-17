@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-release" content="20261117-rational-numbers-simple-simulator-v1">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="description" content="A simple rational number simulator. Enter a fraction to simplify it and see where it sits on a number line.">
+<title>SkillUp Maths | Rational Numbers — Simulator</title>
+<style>
+:root{--blue:#248ac0;--ink:#263746;--muted:#667787;--line:#e3e9ed;--bg:#f7f9fa;--green:#26834a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:740px;margin:auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.nav a{color:var(--blue);text-decoration:none;font-weight:850}
+.nav strong{margin-left:auto;font-size:14px}
+main{max-width:740px;margin:auto;padding:18px 14px 36px}
+.eyebrow{color:var(--green);font-size:11px;font-weight:900;letter-spacing:.08em}
+h1{font-size:clamp(25px,5vw,34px);line-height:1.2;margin:5px 0 8px}
+h2{font-size:18px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:12px 0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:13px;font-weight:850;margin-bottom:5px}
+input{width:100%;min-height:48px;padding:10px 12px;border:1px solid #d7e1e8;border-radius:10px;font:700 18px system-ui;color:var(--ink)}
+.result{margin-top:13px;padding:13px;background:#edf7ff;border:1px solid #d5eaf6;border-radius:12px;text-align:center}
+.result strong{display:block;font-size:27px;color:#126b98}
+.result span{font-size:13px;color:var(--muted)}
+.linebox{margin-top:17px;padding:12px;background:#f5f8f9;border-radius:12px}
+.numberline{position:relative;height:62px;margin:10px 7px 4px}
+.axis{position:absolute;left:0;right:0;top:29px;height:3px;background:#8293a0;border-radius:3px}
+.tick{position:absolute;top:20px;width:2px;height:20px;background:#8293a0}
+.tick span{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted)}
+.marker{position:absolute;top:16px;width:15px;height:15px;border:3px solid #fff;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--green);transform:translateX(-50%)}
+.bar-model{display:grid;gap:3px;margin-top:12px;min-height:24px}
+.bar-model span{height:22px;border-radius:4px;background:#e8edf0}
+.bar-model span.filled{background:#68b7dc}
+.steps{padding:12px;background:#f5f8f9;border-radius:10px;margin-top:12px;font-size:14px}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.presets button{border:1px solid #b8deed;border-radius:9px;padding:8px 11px;background:#eaf7ff;color:#116b96;font-weight:850;cursor:pointer}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.cta a{display:flex;justify-content:center;align-items:center;min-height:46px;padding:10px;border-radius:11px;background:var(--blue);color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:850}
+.cta a.secondary{background:#eaf7ff;color:#116b96;border:1px solid #b8deed}
+@media(max-width:520px){main{padding:15px 11px 28px}.panel{padding:14px}.cta{grid-template-columns:1fr}.fields{gap:9px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a href="maths-rational-numbers-learn.html?v=20261117-rational-numbers-simple-learn-v1">← Learn</a><strong>SkillUp Maths</strong></div></header>
+<main>
+<div class="eyebrow">TRY IT · CHANGE THE NUMBERS</div>
+<h1>Rational Numbers Simulator</h1>
+<p class="muted">Enter a fraction. See its simplest form and its place on the number line.</p>
+<section class="panel">
+<h2>Your fraction</h2>
+<div class="fields">
+<div><label for="numerator">Top number (numerator)</label><input id="numerator" type="number" step="1" value="3"></div>
+<div><label for="denominator">Bottom number (denominator)</label><input id="denominator" type="number" step="1" value="4"></div>
+</div>
+<div class="presets" aria-label="Try an example">
+<button type="button" data-n="1" data-d="2">1/2</button>
+<button type="button" data-n="-2" data-d="3">−2/3</button>
+<button type="button" data-n="6" data-d="8">6/8</button>
+<button type="button" data-n="5" data-d="2">5/2</button>
+</div>
+<div class="result" aria-live="polite">
+<strong id="simple">3/4</strong>
+<span id="decimal">Decimal: 0.75</span>
+</div>
+<div class="steps" id="steps">3/4 is already in its simplest form.</div>
+<div class="linebox">
+<strong>Where is it on the number line?</strong>
+<div class="numberline" id="numberline" role="img" aria-label="Number line showing the fraction's position">
+<div class="axis"></div>
+<div class="tick" data-tick="0"><span></span></div>
+<div class="tick" data-tick="1"><span></span></div>
+<div class="tick" data-tick="2"><span></span></div>
+<div class="tick" data-tick="3"><span></span></div>
+<div class="tick" data-tick="4"><span></span></div>
+<div class="marker" id="marker"></div>
+</div>
+<p class="muted" id="positionText">3/4 is between 0 and 1.</p>
+</div>
+<div id="barWrap">
+<strong>Fraction parts</strong>
+<div class="bar-model" id="barModel"></div>
+<p class="muted" id="barText">3 of 4 equal parts are shaded.</p>
+</div>
+</section>
+<section class="panel">
+<h2>What to notice</h2>
+<p class="muted">The top number counts parts. The bottom number tells how many equal parts make one whole. A negative fraction appears to the left of zero.</p>
+</section>
+<div class="cta">
+<a href="maths-rational-numbers-learn.html?v=20261117-rational-numbers-simple-learn-v1">Read the short lesson →</a>
+<a class="secondary" href="maths-rational-numbers-quiz.html?v=20261117-rational-numbers-simple-learn-simulator-v1">Take the quiz →</a>
+</div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){const t=b;b=a%b;a=t;}return a||1;};
+const fmt=(n,d)=>d===1?String(n):n+'/'+d;
+function update(){
+ const n=Number($('numerator').value),d=Number($('denominator').value);
+ if(!Number.isInteger(n)||!Number.isInteger(d)||d===0){
+  $('simple').textContent='Enter a valid fraction';
+  $('decimal').textContent='The bottom number cannot be zero.';
+  $('steps').textContent='Use whole numbers for the top and bottom. The bottom number must not be 0.';
+  $('positionText').textContent='A fraction with denominator zero is not defined.';
+  $('marker').style.display='none';$('barWrap').style.display='none';return;
+ }
+ $('marker').style.display='block';$('barWrap').style.display='block';
+ let sn=n,sd=d;if(sd<0){sn=-sn;sd=-sd;}
+ const g=gcd(sn,sd);sn/=g;sd/=g;
+ const value=sn/sd;
+ $('simple').textContent=fmt(sn,sd);
+ $('decimal').textContent='Decimal: '+(Number.isInteger(value)?String(value):value.toFixed(4).replace(/0+$/,'').replace(/\.$/,''));
+ $('steps').textContent=g===1?'The fraction is already in its simplest form.':'Divide the top and bottom by '+g+': '+n+'/'+d+' = '+sn+'/'+sd+'.';
+ const range=Math.max(2,Math.ceil(Math.abs(value)));
+ const min=-range,max=range;
+ const pct=(value-min)/(max-min)*100;
+ $('marker').style.left=Math.max(0,Math.min(100,pct))+'%';
+ const ticks=[min,min/2,0,max/2,max];
+ document.querySelectorAll('.tick').forEach((el,i)=>{el.style.left=((ticks[i]-min)/(max-min)*100)+'%';el.querySelector('span').textContent=Number.isInteger(ticks[i])?String(ticks[i]):ticks[i].toFixed(1);});
+ $('positionText').textContent=fmt(sn,sd)+' = '+value.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'. '+(value<0?'It is left of zero.':value>0?'It is right of zero.':'It is at zero.');
+ const absN=Math.abs(sn);
+ if(sd<=12&&absN<=sd){
+  $('barModel').style.gridTemplateColumns='repeat('+sd+',1fr)';
+  $('barModel').replaceChildren();
+  for(let i=0;i<sd;i++){const part=document.createElement('span');if(i<absN)part.className='filled';$('barModel').appendChild(part);}
+  $('barText').textContent=absN+' of '+sd+' equal parts are shaded'+(sn<0?' (showing the size; the number line shows the negative sign).':'.');
+ }else{
+  $('barModel').replaceChildren();
+  $('barText').textContent='This fraction is greater than one whole or has many parts. Use the number line above to see its value.';
+ }
+}
+['numerator','denominator'].forEach(id=>$(id).addEventListener('input',update));
+document.querySelectorAll('[data-n]').forEach(btn=>btn.addEventListener('click',()=>{$('numerator').value=btn.dataset.n;$('denominator').value=btn.dataset.d;update();}));
+update();
+})();
+</script>
+</body>
+</html>

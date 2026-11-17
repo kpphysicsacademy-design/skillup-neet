@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261106-median-altitude-clean-v1">
+<meta name="skillup-release" content="20261117-median-altitude-quiz-architecture-v1">
 <meta name="description" content="Practise triangle medians and altitudes with 30 interactive questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Median and Altitude — Practice</title>
 <style>
@@ -102,6 +102,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <section class="hero">
 <h1>Median and Altitude</h1>
 <p class="muted">Triangle medians · Altitudes · Midpoints · Perpendicular heights</p>
+<div class="topic-actions"><a href="maths-median-altitude-simulator.html?v=20261117-median-altitude-simulator-architecture-v1">🎮 Explore the interactive Median &amp; Altitude simulator</a></div>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
@@ -120,21 +121,23 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 'use strict';
 const questions=[{"q":"In triangle ABC, D is the midpoint of BC. Which segment is a median from vertex A?","o":["AB","AC","AD","BC"],"a":2,"why":"A median joins a vertex to the midpoint of the opposite side."},{"q":"An altitude of a triangle is drawn from a vertex and meets the opposite side at…","o":["Any point without a condition","A right angle","The midpoint always","An angle bisector"],"a":1,"why":"An altitude is perpendicular to the opposite side or its extended line."},{"q":"In triangle PQR, M is the midpoint of QR. Which statement shows that PM is a median?","o":["PQ = PR","QM = MR","PM ⟂ QR","∠P = 90°"],"a":1,"why":"A median ends at the midpoint, so QM and MR are equal."},{"q":"Which feature defines an altitude of a triangle?","o":["It always bisects the opposite side","It joins two side midpoints","It is perpendicular from a vertex to the opposite side or its extension","It always bisects the vertex angle"],"a":2,"why":"Perpendicularity to the opposite side or its extension defines an altitude."},{"q":"A triangle has vertices A, B, and C. A line segment from A meets BC at D at 90°. What is AD if D lies on BC?","o":["A median necessarily","An altitude from A","A side bisector necessarily","A perimeter"],"a":1,"why":"AD is perpendicular to BC and starts at A, so it is an altitude."},{"q":"In triangle ABC, AD is a median and BC = 18 cm. Find BD.","o":["6 cm","9 cm","12 cm","18 cm"],"a":1,"why":"A median meets the opposite side at its midpoint: BD = DC = 18 ÷ 2 = 9 cm."},{"q":"In triangle XYZ, XM is a median and YM = 7 cm. Find YZ.","o":["7 cm","10 cm","14 cm","21 cm"],"a":2,"why":"M is the midpoint of YZ, so YZ = 2 × YM = 14 cm."},{"q":"An altitude is  perpendicular to which part of a triangle?","o":["The opposite side or its extension","Only the adjacent side","The median from another vertex always","The perimeter"],"a":0,"why":"The altitude meets the opposite side, or its extension, at a right angle."},{"q":"In a right triangle, the two perpendicular sides can serve as…","o":["Medians only","Altitudes from the opposite acute vertices","Angle bisectors only","The hypotenuse"],"a":1,"why":"Each leg is perpendicular to the other, so it acts as an altitude from the opposite acute vertex."},{"q":"Which statement is always true about a median?","o":["It is perpendicular to the opposite side","It divides the opposite side into two equal parts","It always lies inside every triangle","It always bisects the angle"],"a":1,"why":"The median meets the opposite side at its midpoint, dividing it equally."},{"q":"In triangle ABC, D is the midpoint of BC. If BD = 3x + 1 and DC = 5x − 7, find x.","o":["3","4","5","6"],"a":1,"why":"BD = DC, so 3x + 1 = 5x − 7; 8 = 2x and x = 4."},{"q":"A median divides side BC into BD = 2x + 3 and DC = 5x − 9. Find x.","o":["3","4","5","6"],"a":1,"why":"Set 2x + 3 = 5x − 9, giving 12 = 3x and x = 4."},{"q":"In triangle PQR, PM is a median. If QR = 26 cm, what is QM?","o":["10 cm","12 cm","13 cm","26 cm"],"a":2,"why":"M is the midpoint of QR, so QM = QR ÷ 2 = 13 cm."},{"q":"An altitude from A meets the line BC at D, with ∠ADB = 90°. What is the key property of AD?","o":["It bisects BC","It is perpendicular to BC","It equals BD","It bisects ∠A"],"a":1,"why":"The right angle at D means AD is perpendicular to the line BC."},{"q":"In triangle ABC, AD is a median. If BD = 4x − 2 and DC = 2x + 8, find x.","o":["3","4","5","6"],"a":2,"why":"BD = DC gives 4x − 2 = 2x + 8, so 2x = 10 and x = 5."},{"q":"Triangle ABC has BC = 20 cm and AD is a median. What are BD and DC?","o":["5 cm and 15 cm","8 cm and 12 cm","10 cm and 10 cm","20 cm and 0 cm"],"a":2,"why":"The median bisects BC, so each half is 20 ÷ 2 = 10 cm."},{"q":"A triangle has an altitude from a vertex that meets the extension of the opposite side outside the triangle. Is this possible?","o":["No, an altitude must always be inside","Yes, in an obtuse triangle","Only in an equilateral triangle","Only when all sides are equal"],"a":1,"why":"In an obtuse triangle, an altitude may meet the extension of the opposite side."},{"q":"In triangle ABC, AD is both a median and an altitude to BC. What follows?","o":["BD = DC and AD ⟂ BC","AB = AC must be false","BC = AD","∠A must be 90°"],"a":0,"why":"Median gives BD = DC, while altitude gives AD perpendicular to BC."},{"q":"In triangle XYZ, XM is a median. If YM = 2x + 1 and MZ = 4x − 9, find x.","o":["4","5","6","7"],"a":1,"why":"YM = MZ gives 2x + 1 = 4x − 9, so 10 = 2x and x = 5."},{"q":"A triangle has side BC = 15 cm. A median from A meets BC at D. What is the length of DC?","o":["5 cm","7.5 cm","10 cm","15 cm"],"a":1,"why":"D is the midpoint, so DC = 15 ÷ 2 = 7.5 cm."},{"q":"In triangle ABC, AD is a median. BD = 7x − 5 and DC = 4x + 13. Find the length of BC if x = 6.","o":["66 cm","72 cm","74 cm","82 cm"],"a":2,"why":"At x = 6, BD = 7(6) − 5 = 37 and DC = 4(6) + 13 = 37; BC = 74 cm."},{"q":"In triangle PQR, PM is a median. QM = 3x − 2 and MR = x + 8. Find QR.","o":["20 cm","24 cm","26 cm","32 cm"],"a":2,"why":"3x − 2 = x + 8 gives x = 5; each half is 13 cm, so QR = 26 cm."},{"q":"In triangle ABC, AD is an altitude to BC. If ∠ADB = (3x + 6)° and ∠ADB = 90°, find x.","o":["24","26","28","30"],"a":2,"why":"3x + 6 = 90, so 3x = 84 and x = 28."},{"q":"A median meets a 34 cm side at its midpoint. The two resulting segments are expressed as (3x − 1) cm and (x + 9) cm. Find x.","o":["4","5","6","7"],"a":1,"why":"3x − 1 = x + 9 gives 2x = 10, so x = 5."},{"q":"In triangle ABC, AD is a median to BC. If BD = 2x + 5 and BC = 6x + 2, find x.","o":["2","3","4","5"],"a":2,"why":"A median gives BD = BC/2: 2(2x + 5) = 6x + 2, so x = 4."},{"q":"In triangle XYZ, XN is an altitude to YZ. If ∠XNY = (5x − 10)° and is a right angle, find x.","o":["18","20","22","24"],"a":1,"why":"5x − 10 = 90, so 5x = 100 and x = 20."},{"q":"A triangle's side is 28 cm. Its median divides that side into two parts, one labelled (3x + 2) cm. Find x.","o":["3","4","5","6"],"a":1,"why":"The midpoint is 14 cm from either endpoint, so 3x + 2 = 14 and x = 4."},{"q":"In triangle ABC, AD is a median and BD = 3x + 4, DC = 7x − 12. Find BC.","o":["32 cm","36 cm","40 cm","44 cm"],"a":0,"why":"3x + 4 = 7x − 12 gives x = 4; each half is 16 cm, so BC = 32 cm."},{"q":"In an obtuse triangle ABC, the altitude from A meets the extension of BC at D. Which is necessarily true?","o":["D must be the midpoint of BC","AD ⟂ BC","AB = AC","AD must lie inside triangle ABC"],"a":1,"why":"An altitude is perpendicular to the line containing the opposite side, even if it meets an extension."},{"q":"In triangle ABC, AD is both a median and an altitude to BC. If BC = 18 cm, BD = DC and AD ⟂ BC. What is BD?","o":["6 cm","9 cm","12 cm","18 cm"],"a":1,"why":"Since AD is a median, D is the midpoint of BC; BD = 18 ÷ 2 = 9 cm."}]
 const originalQuestions=questions.slice();
-let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[],currentQuestion=null;
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;const item=questions[index];
+ const order=item.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+ currentQuestion={...item,o:order.map(i=>item.o[i]),a:order.indexOf(item.a)};
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
  document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
  $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
+ $('question').textContent=currentQuestion.q;
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
- item.o.forEach((text,j)=>{
+ currentQuestion.o.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
@@ -144,7 +147,7 @@ function render(){
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;
- locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ locked=true;const item=currentQuestion,buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
@@ -157,7 +160,7 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Median and Altitude Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Median and Altitude Mastered!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';

@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261106-exterior-angle-property-clean-v1">
+<meta name="skillup-release" content="20261117-exterior-angle-property-quiz-architecture-v1">
+<meta name="skillup-no-standard-menu" content="true">
 <meta name="description" content="Practise the exterior angle property of triangles with 30 questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Exterior Angle Property — Practice</title>
 <style>
@@ -102,6 +103,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <section class="hero">
 <h1>Exterior Angle Property of a Triangle</h1>
 <p class="muted">Remote interior angles · Exterior angles · Angle equations</p>
+<div class="topic-actions"><a href="maths-exterior-angle-property-learn.html?v=20261117-exterior-angle-property-learn-v1">📘 Brief Learn</a><a href="maths-exterior-angle-property-simulator.html?v=20261117-exterior-angle-property-simulator-v1">△ Interactive Simulator</a></div>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
@@ -122,10 +124,13 @@ const questions=[{"q":"An exterior angle of a triangle is 120°. One remote inte
 /* question bank */
 const originalQuestions=questions.slice();
 
-let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[],currentQuestion=null;
 const $=id=>document.getElementById(id);
 function render(){
- chosen=null;locked=false;const item=questions[index];
+ chosen=null;locked=false;const source=questions[index];
+ const order=source.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+ currentQuestion={...source,o:order.map(i=>source.o[i]),a:order.indexOf(source.a)};
+ const item=currentQuestion;
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
@@ -146,7 +151,7 @@ function render(){
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;
- locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ locked=true;const item=currentQuestion,buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
@@ -159,7 +164,7 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Exterior Angle Property Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Exterior Angle Property Mastered!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-exterior-angle-property-learn.html?v=20261117-exterior-angle-property-learn-v1" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';
@@ -177,6 +182,6 @@ $('continue').addEventListener('click',()=>{
 render();
 })();
 </script>
-<script src="/shared-nav.js?v=20261104-maths-header-v5"></script>
+
 </body>
 </html>

@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261113-integer-addition-quiz-v2">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="skillup-release" content="20261117-integer-addition-quiz-architecture-v3">
 <meta name="description" content="Practise integer addition with 30 interactive questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Integer Addition — Practice</title>
 <style>
@@ -12,11 +13,11 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
-.nav{max-width:620px;margin:auto;min-height:48px;padding:6px 12px;display:flex;align-items:center;gap:9px}
+.nav{max-width:680px;margin:auto;min-height:48px;padding:6px 12px;display:flex;align-items:center;gap:9px}
 .back{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border:1px solid var(--line);border-radius:9px;color:var(--blue);text-decoration:none;font-size:17px}
 .brand{min-width:0;flex:1;font-size:15px;font-weight:850;white-space:nowrap}.brand small{display:none}
 .pill{padding:5px 8px;border-radius:8px;font-size:11px;font-weight:800;white-space:nowrap;background:#f4f7f8;color:#52616c}
-main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
+main{width:min(100% - 24px,680px);margin:auto;padding:12px 8px 28px}
 .hero{padding:4px 2px 12px;margin-bottom:10px}
 .hero h1{margin:0 0 3px;font-size:21px;line-height:1.25;font-weight:800;color:var(--ink)}
 .muted{color:var(--muted);font-size:12px;line-height:1.4;margin:0}
@@ -102,7 +103,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <section class="hero">
 <h1>➕ Integer Addition</h1>
 <p class="muted">Positive and negative integers · Number lines · Real-life problems</p>
-<div class="topic-actions"><a href="maths-integer-addition-simulator.html?v=20261113-integer-addition-simulator-v1">➕ Explore the Integer Addition Simulator</a></div>
+<div class="topic-actions"><a href="maths-integer-addition-simulator.html?v=20261117-integer-addition-simulator-architecture-v2">➕ Explore the Integer Addition Simulator</a></div>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
@@ -120,7 +121,13 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 (function(){
 'use strict';
 const questions=[{"q":"What is (-3) + 8?","o":["-11","-5","5","11"],"a":2,"why":"Starting at -3 and moving 8 units right gives 5."},{"q":"What is 7 + (-12)?","o":["19","5","-5","-19"],"a":2,"why":"Adding a negative is moving left 12 units from 7."},{"q":"What is (-6) + (-4)?","o":["-10","-2","2","10"],"a":0,"why":"Adding two negative numbers adds their magnitudes and keeps the negative sign."},{"q":"What is 15 + (-9)?","o":["24","6","-6","-24"],"a":1,"why":"The signs differ, so subtract 9 from 15 and keep the sign of 15."},{"q":"What is (-14) + 20?","o":["-34","-6","6","34"],"a":2,"why":"The positive magnitude is larger: 20 − 14 = 6."},{"q":"Which expression equals zero?","o":["(-8)+8","(-8)+(-8)","8+8","(-8)+1"],"a":0,"why":"A number and its additive inverse sum to zero."},{"q":"What is (-25) + 13?","o":["38","12","-12","-38"],"a":2,"why":"Subtract 13 from 25 and keep the negative sign."},{"q":"What is 0 + (-17)?","o":["17","-17","0","-1"],"a":1,"why":"Adding zero leaves a number unchanged."},{"q":"What is (-9) + 4 + 6?","o":["-19","-1","1","19"],"a":2,"why":"First -9 + 4 = -5, then -5 + 6 = 1."},{"q":"What is 18 + (-18) + (-2)?","o":["0","2","-2","34"],"a":2,"why":"The first two terms cancel to zero, leaving -2."},{"q":"A lift is on floor -2 and rises 7 floors. Which floor does it reach?","o":["-9","-5","5","9"],"a":2,"why":"Moving up 7 from -2 gives -2 + 7 = 5."},{"q":"The temperature is -4°C and rises by 9°C. What is the new temperature?","o":["-13°C","-5°C","5°C","13°C"],"a":2,"why":"-4 + 9 = 5°C."},{"q":"Which sum is equal to -7?","o":["(-3)+(-4)","(-3)+4","3+4","(-7)+7"],"a":0,"why":"Two negative addends with magnitudes 3 and 4 total -7."},{"q":"Evaluate (-16) + 5.","o":["21","-21","11","-11"],"a":3,"why":"The magnitudes differ by 11 and the negative magnitude is larger."},{"q":"Evaluate 23 + (-31).","o":["54","8","-8","-54"],"a":2,"why":"31 − 23 = 8, and the larger magnitude is negative."},{"q":"Which number must be added to -12 to get 5?","o":["-17","-7","7","17"],"a":3,"why":"Solve -12 + x = 5, so x = 17."},{"q":"If a diver is at -15 m and rises 6 m, what is the new position?","o":["-21 m","-9 m","9 m","21 m"],"a":1,"why":"Rising adds 6: -15 + 6 = -9 m."},{"q":"What is (-7) + 0 + (-2)?","o":["-9","-5","5","9"],"a":0,"why":"Zero changes nothing, and -7 + -2 = -9."},{"q":"Which is greater?","o":["(-5)+2","(-5)+(-2)","They are equal","Cannot be compared"],"a":0,"why":"-3 is greater than -7."},{"q":"What is the sum of the smallest and largest integers in {-4, 3, -9, 6}?","o":["-15","-3","3","15"],"a":1,"why":"The smallest is -9 and largest is 6; their sum is -3."},{"q":"Evaluate (-18) + 27 + (-4).","o":["5","9","13","49"],"a":0,"why":"-18 + 27 = 9, then 9 - 4 = 5."},{"q":"A bank balance is -₹120. A deposit of ₹175 is made. What is the new balance?","o":["-₹295","-₹55","₹55","₹295"],"a":2,"why":"-120 + 175 = ₹55."},{"q":"Which statement about adding integers is true?","o":["The sum of two integers is always an integer","The sum is always positive","The sum is always larger than both addends","Adding a negative always gives a negative sum"],"a":0,"why":"Integers are closed under addition."},{"q":"Find x if x + (-8) = -3.","o":["-11","-5","5","11"],"a":2,"why":"Add 8 to both sides to obtain x = 5."},{"q":"Evaluate (-32) + 19.","o":["51","-51","13","-13"],"a":3,"why":"32 − 19 = 13 and the larger magnitude is negative."},{"q":"The temperature changes from 6°C to -2°C. What integer represents the change?","o":["-8°C","-4°C","4°C","8°C"],"a":0,"why":"Change = final − initial = -2 − 6 = -8°C."},{"q":"Which pair has a sum of -1?","o":["(-6)+5","(-6)+(-5)","6+5","(-1)+1"],"a":0,"why":"-6 + 5 = -1."},{"q":"Evaluate (-45) + 45 + (-13).","o":["0","13","-13","77"],"a":2,"why":"-45 and 45 cancel, leaving -13."},{"q":"A hiker is 8 m below a reference level and climbs 13 m. What is the final position?","o":["-21 m","-5 m","5 m","21 m"],"a":2,"why":"-8 + 13 = 5 m above the reference level."},{"q":"If a + (-9) = -20, what is a?","o":["-29","-11","11","29"],"a":1,"why":"-11 + (-9) = -20, so a = -11."}];
-const originalQuestions=questions.slice();
+const originalQuestions=questions.map(q=>({...q,o:[...q.o]}));
+function shuffledQuestion(q){
+ const choices=q.o.map((text,index)=>({text,correct:index===q.a}));
+ for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
+ return {...q,o:choices.map(x=>x.text),a:choices.findIndex(x=>x.correct)};
+}
+questions.splice(0,questions.length,...questions.map(shuffledQuestion));
 let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);
 function render(){
@@ -166,8 +173,8 @@ $('continue').addEventListener('click',()=>{
  }else{review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';}
  $('finishSlot').replaceChildren(card);
  function reset(onlyWrong){
-  if(onlyWrong&&wrongAttempts.length){const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrongQs);}
-  else questions.splice(0,questions.length,...originalQuestions);
+  if(onlyWrong&&wrongAttempts.length){const wrongQs=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean).map(q=>shuffledQuestion({...q,o:[...q.o]}));questions.splice(0,questions.length,...wrongQs);}
+  else questions.splice(0,questions.length,...originalQuestions.map(q=>shuffledQuestion({...q,o:[...q.o]})));
   index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});
  }
  $('retry').addEventListener('click',()=>reset(false));

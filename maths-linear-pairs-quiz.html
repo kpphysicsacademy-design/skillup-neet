@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261106-linear-pairs-clean-v1">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="skillup-release" content="20261117-linear-pairs-quiz-architecture-v3">
 <meta name="description" content="Practise linear pairs with 30 questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Linear Pairs — Practice</title>
 <style>
@@ -102,6 +103,7 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 <section class="hero">
 <h1>Linear Pairs</h1>
 <p class="muted">Adjacent angles · Opposite rays · Straight angles · Equation problems</p>
+<div class="topic-actions"><a href="maths-linear-pairs-simulator.html?v=20261117-linear-pairs-simulator-architecture-v1">🎮 Explore the interactive linear pairs simulator</a></div>
 
 <div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
@@ -120,21 +122,23 @@ main{width:min(100% - 24px,740px)!important;max-width:740px!important;margin:0 a
 'use strict';
 const questions=[{"q":"A linear pair consists of two adjacent angles whose non-common arms are…","o":["Opposite rays","Parallel rays","Perpendicular rays","Equal rays"],"a":0,"why":"Opposite rays form a straight line, which is the defining extra condition for a linear pair."},{"q":"One angle in a linear pair is 68°. Find the other angle.","o":["22°","112°","68°","122°"],"a":1,"why":"Angles in a linear pair total 180°; 180° − 68° = 112°."},{"q":"Which sum must the measures of a linear pair have?","o":["90°","120°","180°","360°"],"a":2,"why":"A linear pair forms a straight angle, which measures 180°."},{"q":"If two adjacent angles measure 90° and 90°, do they form a linear pair when their non-common arms are opposite rays?","o":["No, because both are right angles","Only if their vertices differ","Only if their common arm is horizontal","Yes"],"a":3,"why":"They are adjacent, total 180°, and the non-common arms are opposite rays."},{"q":"A linear pair has one angle measuring 125°. What is the other?","o":["55°","45°","65°","75°"],"a":0,"why":"180° − 125° = 55°."},{"q":"Which condition distinguishes a linear pair from adjacent angles in general?","o":["Both angles are acute","Their non-common arms are opposite rays","They have equal measures","They share no vertex"],"a":1,"why":"Adjacent angles need not form a straight line; a linear pair has opposite non-common rays."},{"q":"If one angle of a linear pair is 90°, the other angle is…","o":["45°","60°","90°","180°"],"a":2,"why":"180° − 90° = 90°."},{"q":"Two adjacent angles measure 70° and 110°. If their non-common arms are opposite rays, they form a…","o":["Complementary pair","Vertically opposite pair","Pair of equal angles","Linear pair"],"a":3,"why":"They are adjacent and total 180°, with opposite non-common rays."},{"q":"An angle and its linear-pair partner are supplementary. This means their measures total…","o":["180°","90°","270°","360°"],"a":0,"why":"Supplementary angles have measures adding to 180°."},{"q":"One angle of a linear pair is 35°. Find its partner.","o":["55°","145°","125°","155°"],"a":1,"why":"180° − 35° = 145°."},{"q":"Two angles in a linear pair are (3x + 10)° and (2x + 20)°. Find x.","o":["20","25","30","35"],"a":2,"why":"3x + 10 + 2x + 20 = 180 gives 5x = 150, so x = 30."},{"q":"The angles in a linear pair are (x + 25)° and (2x + 5)°. Find the smaller angle.","o":["65°","85°","95°","75°"],"a":3,"why":"x + 25 + 2x + 5 = 180 gives x = 50; angles are 75° and 105°, so the smaller is 75°."},{"q":"A linear pair has angles in the ratio 2:7. Find the smaller angle.","o":["40°","20°","30°","70°"],"a":0,"why":"Nine parts total 180°, each part is 20°, so the smaller is 2 × 20° = 40°."},{"q":"One angle of a linear pair is 24° more than the other. Find the smaller angle.","o":["68°","78°","88°","102°"],"a":1,"why":"Let smaller be x; x + (x + 24) = 180, so x = 78°."},{"q":"The angles in a linear pair are (4x − 10)° and (2x + 10)°. Find the larger angle.","o":["70°","80°","110°","120°"],"a":2,"why":"4x − 10 + 2x + 10 = 180 gives x = 30; angles are 110° and 70°."},{"q":"One angle of a linear pair is 3 times the other. Find the larger angle.","o":["45°","90°","120°","135°"],"a":3,"why":"Let smaller be x; x + 3x = 180 gives x = 45°, so the larger is 135°."},{"q":"Two angles form a linear pair. If one is 5x° and the other is (x + 30)°, find x.","o":["25","20","30","35"],"a":0,"why":"5x + x + 30 = 180 gives 6x = 150 and x = 25."},{"q":"A linear pair consists of angles (2x + 15)° and (3x − 10)°. Find the smaller angle.","o":["76.5°","85°","95°","103.5°"],"a":1,"why":"2x + 15 + 3x − 10 = 180 gives x = 35; angles are 85° and 95°, so the smaller is 85°."},{"q":"Two angles form a linear pair. The larger angle is 4 times the smaller. Find the smaller angle.","o":["30°","45°","36°","60°"],"a":2,"why":"Let smaller be x; x + 4x = 180 gives x = 36°."},{"q":"If an angle in a linear pair increases by 15°, what must happen to its partner's measure?","o":["Increase by 15°","Stay the same","Double","Decrease by 15°"],"a":3,"why":"Their total remains 180°, so an increase of 15° in one requires a decrease of 15° in the other."},{"q":"A linear pair measures (7x − 5)° and (2x + 5)°. Find the larger angle.","o":["135°","130°","140°","145°"],"a":0,"why":"7x − 5 + 2x + 5 = 180 gives x = 20; angles are 135° and 45°, so the larger is 135°."},{"q":"The larger angle in a linear pair is 5 times the smaller. Find the smaller angle.","o":["20°","30°","36°","45°"],"a":1,"why":"Let smaller be x; x + 5x = 180 gives x = 30°."},{"q":"Two angles in a linear pair differ by 52°. Find the larger angle.","o":["64°","90°","116°","128°"],"a":2,"why":"Let larger L and smaller S: L + S = 180 and L − S = 52, so L = 116°."},{"q":"A linear pair has angles (3x + 12)° and (5x − 4)°. Find the smaller angle.","o":["80°","95°","103.5°","76.5°"],"a":3,"why":"3x + 12 + 5x − 4 = 180 gives x = 21.5; angles are 76.5° and 103.5°, so the smaller is 76.5°."},{"q":"One angle in a linear pair is 20° less than twice the other. Find the smaller angle.","o":["66⅔°","60°","73⅓°","80°"],"a":0,"why":"Let smaller be x and larger be 2x − 20; 3x − 20 = 180 gives x = 66⅔°."},{"q":"Three adjacent angles on a straight line are x°, (x + 20)° and (2x − 10)°. Find the largest angle.","o":["65°","75°","85°","95°"],"a":1,"why":"x + (x + 20) + (2x − 10) = 180 gives x = 42.5; the angles are 42.5°, 62.5° and 75°, so the largest is 75°."},{"q":"Two linear-pair angles are in the ratio 7:11. Find the larger angle.","o":["70°","90°","110°","100°"],"a":2,"why":"Eighteen parts total 180°, each part is 10°, so the larger is 11 × 10° = 110°."},{"q":"A linear pair has angles (x + 40)° and (3x − 20)°. Find the smaller angle.","o":["70°","90°","100°","80°"],"a":3,"why":"x + 40 + 3x − 20 = 180 gives x = 40; the angles are 80° and 100°, so the smaller is 80°."},{"q":"One angle in a linear pair is 7 times the other. What is the difference between them?","o":["135°","90°","105°","120°"],"a":0,"why":"Let smaller be x; 8x = 180, so x = 22.5° and larger = 157.5°; difference = 135°."},{"q":"The larger of two linear-pair angles is 36° more than the smaller. Find the smaller angle.","o":["62°","72°","82°","92°"],"a":1,"why":"Let smaller x; x + (x + 36) = 180, so x = 72°."}];
 const originalQuestions=questions.slice();
-let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[],currentQuestion=null;
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;const item=questions[index];
+ const order=item.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+ currentQuestion={...item,o:order.map(i=>item.o[i]),a:order.indexOf(item.a)};
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';
  document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(index/questions.length*100)));
  $('qmeta').textContent='QUESTION '+(index+1);
- $('question').textContent=item.q;
+ $('question').textContent=currentQuestion.q;
  $('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;
  $('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
- item.o.forEach((text,j)=>{
+ currentQuestion.o.forEach((text,j)=>{
   const b=document.createElement('button');b.type='button';b.className='option';
   const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);
   const label=document.createElement('span');label.textContent=text;b.append(letter,label);
@@ -144,7 +148,7 @@ function render(){
 }
 $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;
- locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
+ locked=true;const item=currentQuestion,buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.textContent='✨ Correct! '+item.why;}
@@ -157,7 +161,7 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Large Numbers Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>Linear Pairs Mastered!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="maths-home.html?v=20261104-physics-path-layout-v2" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Maths Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){
   review.innerHTML='<h3>🧠 Review your mistakes</h3>';

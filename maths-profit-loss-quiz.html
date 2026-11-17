@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261117-profit-loss-quiz-architecture-v1">
+<meta name="skillup-release" content="20261117-profit-loss-quiz-recreated-v2">
 <meta name="skillup-no-standard-menu" content="true">
 <meta name="description" content="Practise profit, loss, cost price, selling price, discount and percentages with 30 interactive questions and mistake revision.">
 <title>SkillUp Maths | Profit and Loss — Practice</title>
@@ -126,6 +126,11 @@ let index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;const item=questions[index];
+ if(!item||!Array.isArray(item.o)||item.o.length!==4||!Number.isInteger(item.a)||item.a<0||item.a>3)throw new Error('Invalid question data at question '+(index+1));
+ const optionPairs=item.o.map((label,originalIndex)=>({label,correct:originalIndex===item.a}));
+ for(let k=optionPairs.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[optionPairs[k],optionPairs[j]]=[optionPairs[j],optionPairs[k]];}
+ item.displayOptions=optionPairs.map(x=>x.label);
+ item.displayAnswer=optionPairs.findIndex(x=>x.correct);
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;
  $('percent').textContent=Math.round(index/questions.length*100)+'%';
  $('fill').style.width=(index/questions.length*100)+'%';

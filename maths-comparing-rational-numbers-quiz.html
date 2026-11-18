@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ffffff">
-<meta name="skillup-release" content="20261118-comparing-rational-numbers-duolingo-v4">
+<meta name="skillup-release" content="20261118-comparing-rational-numbers-mathjax-v5">
 <meta name="description" content="Practise comparing rational numbers with 30 questions, instant explanations and mistake revision.">
 <title>SkillUp Maths | Comparing Rational Numbers — Practice</title>
 <style>
@@ -199,10 +199,27 @@ function mathify(value){
   .replace(/(^|[^\w])(-?\d+)\s*\/\s*(\d+)(?![\w])/g,(m,prefix,n,d)=>prefix+'\\(\\frac{'+n+'}{'+d+'}\\)')
   .replace(/□/g,'\\(\\square\\)');
 }
+const pendingMathNodes=new Set();
+let mathJaxLoadHooked=false;
 function typesetMath(node){
+ if(!node)return;
  if(window.MathJax&&typeof window.MathJax.typesetPromise==='function'){
   window.MathJax.typesetPromise([node]).catch(function(){});
+  return;
  }
+ // The quiz's inline script runs before the deferred MathJax CDN script.
+ // Queue nodes and typeset them as soon as MathJax has finished loading.
+ pendingMathNodes.add(node);
+ if(mathJaxLoadHooked)return;
+ const mathJaxScript=document.querySelector('script[src*="tex-mml-chtml.js"]');
+ if(!mathJaxScript)return;
+ mathJaxLoadHooked=true;
+ mathJaxScript.addEventListener('load',function(){
+  if(!window.MathJax||typeof window.MathJax.typesetPromise!=='function')return;
+  const nodes=Array.from(pendingMathNodes).filter(node=>node.isConnected);
+  pendingMathNodes.clear();
+  if(nodes.length)window.MathJax.typesetPromise(nodes).catch(function(){});
+ },{once:true});
 }
 
 function render(){

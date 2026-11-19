@@ -4,7 +4,7 @@
 <meta name="skillup-release" content="20261119-polynomials-active-simulator-v2"><meta name="skillup-no-standard-menu" content="true">
 <meta name="description" content="Interactive polynomial lab: classify expressions, combine like terms, add polynomials and evaluate values with step-by-step working.">
 <title>SkillUp Maths | Polynomial Interactive Lab</title>
-<script>window.MathJax={tex:{inlineMath:[["\\\\(","\\\\)"]],displayMath:[["\\\\[","\\\\]"]],processEscapes:true},chtml:{scale:1.05},startup:{typeset:false}};</script>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.05},startup:{typeset:false}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 :root{--blue:#168bc4;--ink:#203354;--muted:#66758a;--line:#dce6f0;--bg:#f3f8ff;--green:#58a900}*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#effaff,#f5f7ff 58%,#f2fbf4);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:780px;margin:auto;padding:10px 14px;display:flex;align-items:center;gap:12px}.nav a{color:var(--blue);text-decoration:none;font-weight:900}.nav strong{margin-left:auto;font-size:14px}main{max-width:780px;margin:auto;padding:18px 14px 40px}.eyebrow{color:var(--green);font-size:11px;font-weight:950;letter-spacing:.1em}h1{font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 8px;font-weight:950}h2{font-size:19px;margin:0 0 8px}.muted{color:var(--muted)}.lead{color:var(--muted);margin:0 0 16px}.panel{background:#fff;border:1px solid var(--line);border-bottom-width:3px;border-radius:17px;padding:clamp(14px,4vw,20px);margin:13px 0;box-shadow:0 5px 18px rgba(40,80,120,.04)}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#eaf7ff;color:#126b98;font-size:11px;font-weight:900;margin-bottom:7px}label{display:block;font-size:13px;font-weight:850;margin:10px 0 5px}input{width:100%;min-height:48px;padding:10px 12px;border:2px solid #dce6f0;border-radius:11px;font:700 17px system-ui;color:var(--ink)}input:focus{outline:3px solid #c7edff;border-color:#72bfe2}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.presets button,.action{border:1px solid #b8deed;border-bottom-width:3px;border-radius:10px;padding:9px 12px;background:#edf8ff;color:#116b96;font-weight:900;cursor:pointer}.result{padding:14px;margin-top:12px;background:linear-gradient(130deg,#eaf7ff,#f2f5ff);border:1px solid #d5eaf6;border-radius:13px}.result strong{display:block;font-size:clamp(22px,5vw,29px);font-weight:950;color:#126b98;overflow-wrap:anywhere}.result span{font-size:13px;color:var(--muted)}.work{padding:12px;margin-top:10px;background:#f6f9fb;border-radius:11px;white-space:pre-line;font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.chip{padding:7px 10px;background:#f0f5f8;border-radius:9px;font-size:12px;font-weight:850}.bars{display:flex;align-items:end;gap:7px;height:105px;padding:10px 5px 0;border-bottom:2px solid #aab9c7;margin-top:8px}.bar{flex:1;min-width:0;background:#8acde9;border-radius:7px 7px 0 0;position:relative}.bar span{position:absolute;top:-24px;left:0;right:0;text-align:center;font-size:11px;font-weight:850}.bar-labels{display:flex;gap:7px}.bar-labels span{flex:1;text-align:center;font-size:11px;color:var(--muted);padding-top:4px}.cta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.cta a{display:flex;justify-content:center;align-items:center;min-height:46px;padding:10px;border-radius:11px;background:var(--blue);color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:900}.cta a.secondary{background:#edf7ff;color:#116b96;border:1px solid #b8deed}.error{color:#a52f2f;font-weight:800}.hint{font-size:12px;color:var(--muted);margin-top:6px}
@@ -60,7 +60,7 @@ function inspect(){
 function combine(){
  const vals=['c1','c2','c3'].map(id=>Number($(id).value));if(vals.some(v=>!Number.isFinite(v))){$('combineResult').textContent='Enter valid coefficients';return;}
  const sum=vals.reduce((a,b)=>a+b,0),txt=Math.abs(sum-1)<1e-10?'x':Math.abs(sum+1)<1e-10?'−x':sum+'x';
- $('combineResult').innerHTML='\\\\('+(Math.abs(sum)<1e-10?'0':txt.replace('−','-'))+'\\\\)';$('combineSummary').textContent=vals.join(' + ').replace(/\+ -/g,'− ')+' = '+sum+'. '+(Math.abs(sum)<1e-10?'The terms cancel completely.':'Keep the common variable x.');mathTypeset();
+ $('combineResult').innerHTML='\\('+(Math.abs(sum)<1e-10?'0':txt.replace('−','-'))+'\\)';$('combineSummary').textContent=vals.join(' + ').replace(/\+ -/g,'− ')+' = '+sum+'. '+(Math.abs(sum)<1e-10?'The terms cancel completely.':'Keep the common variable x.');mathTypeset();
 }
 function addPolynomials(){
  try{
@@ -68,7 +68,7 @@ function addPolynomials(){
   [...A,...B].forEach(t=>map.set(t.power,(map.get(t.power)||0)+t.coef));
   const sum=[...map.entries()].filter(([,v])=>Math.abs(v)>1e-10).sort((a,b)=>b[0]-a[0]).map(([power,coef])=>({power,coef}));
   ['sumResult','sumSummary','sumWork'].forEach(id=>$(id).classList.remove('error'));
-  $('sumResult').innerHTML='\\\\('+format(sum).replace(/−/g,'-').replace(/x²/g,'x^2').replace(/x³/g,'x^3')+'\\\\)';$('sumSummary').textContent='Result has '+sum.length+' non-zero term'+(sum.length===1?'':'s')+'.';
+  $('sumResult').innerHTML='\\('+format(sum).replace(/−/g,'-').replace(/x²/g,'x^2').replace(/x³/g,'x^3')+'\\)';$('sumSummary').textContent='Result has '+sum.length+' non-zero term'+(sum.length===1?'':'s')+'.';
   const powers=[...new Set([...A,...B].map(t=>t.power))].sort((a,b)=>b-a);
   $('sumWork').textContent='Group coefficients by matching powers:\n'+powers.map(p=>{const av=A.find(t=>t.power===p)?.coef||0,bv=B.find(t=>t.power===p)?.coef||0;return 'x^'+p+': '+av+' + ('+bv+') = '+(av+bv);}).join('\n')+'\nSimplified sum: '+format(sum);
  }catch(e){showError(['sumResult','sumSummary','sumWork'],e.message);}
@@ -76,7 +76,7 @@ function addPolynomials(){
 function evaluate(){
  const [a,b,c,x]=['a','b','c','x'].map(id=>Number($(id).value));if([a,b,c,x].some(v=>!Number.isFinite(v))){$('valueResult').textContent='Enter valid numbers';return;}
  const ax=a*x*x,bx=b*x,total=ax+bx+c;
- $('valueResult').innerHTML='\\\\(P('+x+')='+total+'\\\\)';
+ $('valueResult').innerHTML='\\(P('+x+')='+total+'\\)';
  $('valueSummary').textContent='Substitute x, then apply powers and multiplication before addition.';
  $('valueWork').textContent='P(x) = ax² + bx + c\nP('+x+') = '+a+' × ('+x+')² + ('+b+') × ('+x+') + ('+c+')\n= '+ax+' + ('+bx+') + ('+c+')\n= '+total;
 }

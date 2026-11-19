@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#fffdf1">
-<meta name="skillup-release" content="20261119-special-quadrilaterals-simulator-v1">
+<meta name="skillup-release" content="20261119-special-quadrilaterals-simulator-v2">
 <meta name="description" content="Explore squares, rectangles, rhombuses, kites and trapeziums with an interactive geometry simulator.">
 <title>Special Quadrilaterals Simulator | SkillUp Maths</title>
 <style>
@@ -62,8 +62,8 @@ svg{width:100%;max-width:510px;height:auto;overflow:visible}
 <polygon id="poly" class="shape" points="100,210 400,210 400,90 100,90"/>
 <g id="vertices"><circle class="vertex" cx="100" cy="210" r="5"/><circle class="vertex" cx="400" cy="210" r="5"/><circle class="vertex" cx="400" cy="90" r="5"/><circle class="vertex" cx="100" cy="90" r="5"/></g>
 <g id="labels"><text class="vertex-label" x="82" y="230">A</text><text class="vertex-label" x="408" y="230">B</text><text class="vertex-label" x="408" y="82">C</text><text class="vertex-label" x="82" y="82">D</text></g>
-<text id="dim1" class="measure" x="250" y="245" text-anchor="middle">8 cm</text>
-<text id="dim2" class="measure" x="420" y="150">5 cm</text>
+<text id="dim1" class="measure" x="250" y="245" text-anchor="middle">Side values</text>
+<text id="dim2" class="measure" x="250" y="292" text-anchor="middle">Angle values</text>
 </svg>
 </div>
 <p class="note" id="diagramNote">A square has four equal sides and four right angles.</p>
@@ -95,22 +95,54 @@ const configs={
 function update(){
  const type=shape.value,s=+size.value,a=+angle.value,h=+height.value,c=configs[type];
  $('sizeOut').textContent=s;$('angleOut').textContent=a;$('heightOut').textContent=h;
- let pts,perimeter,area,diagText,sideText;
- if(type==='square'){const u=Math.min(118,250/s);const w=s*u;pts=[[250-w/2,150+w/2],[250+w/2,150+w/2],[250+w/2,150-w/2],[250-w/2,150-w/2]];perimeter=4*s;area=s*s;sideText='4 equal sides · '+s+' cm each';}
- else if(type==='rectangle'){const scale=Math.min(34,260/Math.max(s,h));const w=s*scale,hh=h*scale;pts=[[250-w/2,150+hh/2],[250+w/2,150+hh/2],[250+w/2,150-hh/2],[250-w/2,150-hh/2]];perimeter=2*(s+h);area=s*h;sideText='Opposite sides: '+s+' cm and '+h+' cm';}
- else if(type==='rhombus'){const side=Math.min(120,245/s),rad=a*Math.PI/180,dx=side*Math.cos(rad),dy=side*Math.sin(rad);pts=[[250-side,150],[250,150+side*Math.sin(rad)],[250+side*Math.cos(rad),150],[250,150-side*Math.sin(rad)]];const width=Math.max(...pts.map(p=>p[0]))-Math.min(...pts.map(p=>p[0]));const ht=Math.max(...pts.map(p=>p[1]))-Math.min(...pts.map(p=>p[1]));perimeter=4*s;area=s*s*Math.sin(rad);sideText='4 equal sides · '+s+' cm each';}
- else if(type==='kite'){const w=Math.min(120,12*s),top=Math.min(90,8*h),bottom=Math.min(120,11*h);pts=[[250,150-top],[250+w,150],[250,150+bottom],[250-w,150]];const side1=Math.hypot(w,top),side2=Math.hypot(w,bottom);perimeter='2(a + b)';area='½ × d₁ × d₂';sideText='Two adjacent equal-side pairs';}
- else {const scale=Math.min(26,260/(s+h));const base=s*scale,top=Math.max(60,base-h*scale),hh=Math.min(130,h*scale);pts=[[250-base/2,150+hh/2],[250+base/2,150+hh/2],[250+top/2,150-hh/2],[250-top/2,150-hh/2]];const leg=Math.hypot((base-top)/2,hh)/scale;perimeter='a + b + 2l';area='½(a + b) × h';sideText='One pair of parallel bases';}
+ let pts=[],perimeter=0,area=0,sideText='',angleText='',diagonalText='',diagramValues='';
+ const fmt=n=>Number(n).toFixed(2).replace(/\\.00$/,'');
+ if(type==='square'){
+  const u=25,w=s*u;pts=[[250-w/2,150+w/2],[250+w/2,150+w/2],[250+w/2,150-w/2],[250-w/2,150-w/2]];
+  perimeter=4*s;area=s*s;sideText='AB = BC = CD = DA = '+s+' cm';angleText='90° at all four corners';
+  const d=s*Math.SQRT2;diagonalText='AC = BD = '+fmt(d)+' cm';diagramValues='Each side '+s+' cm · Each angle 90°';
+ }else if(type==='rectangle'){
+  const scale=24,w=s*scale,hh=h*scale;pts=[[250-w/2,150+hh/2],[250+w/2,150+hh/2],[250+w/2,150-hh/2],[250-w/2,150-hh/2]];
+  perimeter=2*(s+h);area=s*h;sideText='AB = CD = '+s+' cm · BC = DA = '+h+' cm';angleText='90° at all four corners';
+  diagonalText='AC = BD = '+fmt(Math.hypot(s,h))+' cm';diagramValues='Length '+s+' cm · Width '+h+' cm · Each angle 90°';
+ }else if(type==='rhombus'){
+  const u=17,rad=a*Math.PI/180,half=s*u/2,vertical=half*Math.sin(rad),horizontal=half*Math.cos(rad);
+  pts=[[250-half,150],[250+horizontal,150+vertical],[250+half,150],[250-horizontal,150-vertical]];
+  perimeter=4*s;area=s*s*Math.sin(rad);sideText='AB = BC = CD = DA = '+s+' cm';
+  angleText='A = C = '+a+'° · B = D = '+(180-a)+'°';
+  diagonalText='AC = '+fmt(2*s*Math.sin(rad/2))+' cm · BD = '+fmt(2*s*Math.cos(rad/2))+' cm';
+  diagramValues='Each side '+s+' cm · Acute angle '+a+'°';
+ }else if(type==='kite'){
+  const d1=s,d2=h,scale=22,w=d1*scale/2,top=d2*scale*.4,bottom=d2*scale*.6;
+  pts=[[250,150-top],[250+w,150],[250,150+bottom],[250-w,150]];
+  const sideA=Math.hypot(d1/2,d2*.4),sideB=Math.hypot(d1/2,d2*.6);
+  perimeter=2*(sideA+sideB);area=d1*d2/2;
+  sideText='AB = AD = '+fmt(sideA)+' cm · BC = CD = '+fmt(sideB)+' cm';
+  angleText='Symmetry diagonal AC ⟂ BD (90°)';
+  diagonalText='AC = '+d2+' cm · BD = '+d1+' cm';
+  diagramValues='Diagonals '+d1+' cm and '+d2+' cm · Meet at 90°';
+ }else{
+  const base1=s,base2=s*.6,hh=h,scale=18,bottom=base1*scale,top=base2*scale,heightPx=hh*scale;
+  pts=[[250-bottom/2,150+heightPx/2],[250+bottom/2,150+heightPx/2],[250+top/2,150-heightPx/2],[250-top/2,150-heightPx/2]];
+  const leg=Math.hypot((base1-base2)/2,hh);
+  perimeter=base1+base2+2*leg;area=(base1+base2)*hh/2;
+  sideText='AB = '+base1+' cm · CD = '+fmt(base2)+' cm · Legs = '+fmt(leg)+' cm each';
+  const baseAngle=Math.atan2(hh,(base1-base2)/2)*180/Math.PI;
+  angleText='Base angles '+fmt(baseAngle)+'° and '+fmt(180-baseAngle)+'°';
+  diagonalText='Parallel bases '+base1+' cm and '+fmt(base2)+' cm';
+  diagramValues='Bases '+base1+' cm and '+fmt(base2)+' cm · Height '+hh+' cm';
+ }
  $('poly').setAttribute('points',pts.map(p=>p.join(',')).join(' '));
  const [A,B,C,D]=pts;
  $('diag1').setAttribute('x1',A[0]);$('diag1').setAttribute('y1',A[1]);$('diag1').setAttribute('x2',C[0]);$('diag1').setAttribute('y2',C[1]);
  $('diag2').setAttribute('x1',B[0]);$('diag2').setAttribute('y1',B[1]);$('diag2').setAttribute('x2',D[0]);$('diag2').setAttribute('y2',D[1]);
  $('vertices').innerHTML=pts.map(p=>'<circle class="vertex" cx="'+p[0]+'" cy="'+p[1]+'" r="5"/>').join('');
  $('labels').innerHTML=pts.map((p,i)=>'<text class="vertex-label" x="'+(p[0]+(p[0]<250?-17:8))+'" y="'+(p[1]+(p[1]<150?-9:20))+'">'+String.fromCharCode(65+i)+'</text>').join('');
- $('dim1').setAttribute('x',(A[0]+B[0])/2);$('dim1').setAttribute('y',Math.min(285,Math.max(A[1],B[1])+25));$('dim1').textContent=s+' cm';
- $('dim2').setAttribute('x',Math.min(460,Math.max(...pts.map(p=>p[0]))+12));$('dim2').setAttribute('y',(B[1]+C[1])/2);$('dim2').textContent=h+' cm';
- $('sides').textContent=sideText;$('angles').textContent=c.angles;$('diagonals').textContent=c.diagonals;$('symmetry').textContent=c.symmetry;
- $('perimeter').textContent=typeof perimeter==='number'?perimeter.toFixed(2)+' cm':perimeter;$('area').textContent=typeof area==='number'?area.toFixed(2)+' cm²':area;$('diagramNote').textContent=c.note+' Diagram is illustrative; use the stated formulas for exact measurements.';
+ $('dim1').setAttribute('x',(A[0]+B[0])/2);$('dim1').setAttribute('y',Math.min(285,Math.max(A[1],B[1])+25));$('dim1').textContent=diagramValues;
+ $('dim2').setAttribute('x',250);$('dim2').setAttribute('y',292);$('dim2').setAttribute('text-anchor','middle');$('dim2').textContent=angleText;
+ $('sides').textContent=sideText;$('angles').textContent=angleText;$('diagonals').textContent=diagonalText;$('symmetry').textContent=c.symmetry;
+ $('perimeter').textContent=fmt(perimeter)+' cm';$('area').textContent=fmt(area)+' cm²';
+ $('diagramNote').textContent=c.note+' Values update automatically when you change the controls.';
 }
 [shape,size,angle,height].forEach(el=>el.addEventListener('input',update));update();
 })();

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="skillup-release" content="20261119-compound-interest-simulator-v1">
+<meta name="description" content="Explore compound interest by changing principal, annual rate, time and compounding frequency.">
+<title>SkillUp Maths | Compound Interest Simulator</title>
+<style>
+:root{--blue:#1cb0f6;--green:#58cc02;--ink:#263b58;--muted:#718096;--line:#dce6f0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#f1fbff,#f5f7ff 55%,#f2fbf4);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:740px;margin:auto;padding:9px 14px;display:flex;align-items:center;gap:10px}.nav a{color:#0877a8;text-decoration:none;font-weight:900}.nav strong{margin-left:auto}
+main{max-width:740px;margin:auto;padding:18px 14px 38px}.eyebrow{color:#278c35;font-size:11px;font-weight:950;letter-spacing:.08em}
+h1{font-size:clamp(25px,5vw,34px);line-height:1.2;margin:5px 0 8px}.muted{color:var(--muted)}
+.panel{background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:18px;padding:16px;margin:13px 0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:13px;font-weight:900;margin-bottom:5px}
+input,select{width:100%;min-height:48px;padding:10px 12px;border:2px solid #dce6f0;border-radius:11px;background:#fff;color:var(--ink);font:750 17px system-ui}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.presets button{border:2px solid #b9e4f6;border-bottom-width:4px;border-radius:11px;padding:8px 12px;background:#f0faff;color:#0877a8;font-weight:900;cursor:pointer}
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}.metric{padding:12px 8px;border:1px solid #dce6f0;border-radius:12px;background:#f7fbff;text-align:center}.metric span{display:block;color:var(--muted);font-size:11px;font-weight:850}.metric strong{display:block;margin-top:3px;font-size:clamp(17px,3vw,23px);font-weight:950;overflow-wrap:anywhere}
+.formula{padding:12px;border-radius:12px;background:#f2fbea;border:1px solid #d3e9c7;font-weight:800;text-align:center;margin-top:13px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-size:11px}
+.note{font-size:12px;color:var(--muted);margin:8px 0 0}.cta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.cta a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px;border:2px solid #b9e4f6;border-bottom-width:4px;border-radius:13px;background:#f0faff;color:#0877a8;text-decoration:none;text-align:center;font-size:13px;font-weight:950}
+@media(max-width:520px){main{padding:14px 10px 30px}.panel{padding:13px}.fields{grid-template-columns:1fr 1fr;gap:9px}.results{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center;text-align:left}.metric strong{font-size:19px}.cta{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a href="maths-compound-interest-basics-quiz.html?v=20261119-compound-interest-simulator-duolingo-v1">← Quiz</a><strong>SkillUp Maths</strong></div></header>
+<main>
+<div class="eyebrow">INTERACTIVE LEARNING · CHANGE THE VALUES</div>
+<h1>Compound Interest Simulator</h1>
+<p class="muted">Change the principal, annual interest rate, time and compounding frequency. Watch how the amount grows over time.</p>
+<section class="panel">
+<h2>Set your investment</h2>
+<div class="fields">
+<div><label for="principal">Principal (₹)</label><input id="principal" type="number" min="1" max="100000000" step="100" value="10000"></div>
+<div><label for="rate">Annual rate (%)</label><input id="rate" type="number" min="0" max="100" step="0.5" value="10"></div>
+<div><label for="years">Time (years)</label><input id="years" type="number" min="0" max="100" step="1" value="3"></div>
+<div><label for="frequency">Compounded</label><select id="frequency"><option value="1">Annually</option><option value="2">Half-yearly</option><option value="4">Quarterly</option><option value="12">Monthly</option></select></div>
+</div>
+<div class="presets"><button type="button" data-p="1000" data-r="10" data-y="2" data-f="1">₹1,000 · 10% · 2 years</button><button type="button" data-p="5000" data-r="5" data-y="3" data-f="1">₹5,000 · 5% · 3 years</button><button type="button" data-p="10000" data-r="12" data-y="2" data-f="4">₹10,000 · 12% · 2 years</button></div>
+<div class="results" aria-live="polite">
+<div class="metric"><span>Final amount</span><strong id="amount">₹13,310.00</strong></div>
+<div class="metric"><span>Compound interest</span><strong id="interest">₹3,310.00</strong></div>
+<div class="metric"><span>Growth</span><strong id="growth">33.10%</strong></div>
+</div>
+<div class="formula" id="formula">A = P × (1 + r/100)ⁿ</div>
+<p class="note" id="summary">Your ₹10,000 grows to ₹13,310 in 3 years at 10% compounded annually.</p>
+</section>
+<section class="panel">
+<h2>Year-by-year growth</h2>
+<p class="muted">See the balance at the end of each year.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Year</th><th>Opening amount</th><th>Interest added</th><th>Closing amount</th></tr></thead><tbody id="schedule"></tbody></table></div>
+<p class="note">Values are rounded to two decimal places for display. Calculations use the unrounded balance.</p>
+</section>
+<section class="panel">
+<h2>Remember</h2>
+<p class="muted"><strong>Compound interest (CI) = Amount − Principal.</strong> Interest is calculated on the updated balance, so previously earned interest also earns interest in later periods.</p>
+<p class="muted">For compounding m times per year: A = P × (1 + r/(100m))<sup>m×t</sup>.</p>
+</section>
+<div class="cta"><a href="maths-compound-interest-basics-quiz.html?v=20261119-compound-interest-simulator-duolingo-v1">🎯 Take the 30-question quiz →</a><a href="maths-home.html">← Maths Path</a></div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const money=n=>'₹'+n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+function update(){
+ const p=Number($('principal').value),r=Number($('rate').value),t=Number($('years').value),m=Number($('frequency').value);
+ const valid=Number.isFinite(p)&&Number.isFinite(r)&&Number.isFinite(t)&&p>0&&r>=0&&r<=100&&t>=0&&t<=100;
+ if(!valid){$('amount').textContent='Check inputs';$('interest').textContent='—';$('growth').textContent='—';$('summary').textContent='Enter principal above 0, rate from 0 to 100%, and time from 0 to 100 years.';$('schedule').replaceChildren();return;}
+ const factor=1+r/(100*m),periods=m*t,A=p*Math.pow(factor,periods),ci=A-p;
+ $('amount').textContent=money(A);$('interest').textContent=money(ci);$('growth').textContent=((A/p-1)*100).toFixed(2)+'%';
+ const power=periods===Math.round(periods)?String(periods):periods.toFixed(2);
+ $('formula').textContent='A = P × (1 + r/(100 × '+m+'))^'+power+' = '+money(A);
+ $('summary').textContent='Your '+money(p)+' grows to '+money(A)+' in '+t+' year'+(t===1?'':'s')+' at '+r+'% compounded '+$('frequency').selectedOptions[0].text.toLowerCase()+'.';
+ const body=$('schedule');body.replaceChildren();
+ const whole=Math.floor(t),rows=Math.min(100,whole+(t>whole?1:0));
+ for(let y=1;y<=rows;y++){
+  const start=p*Math.pow(factor,m*(y-1)),end=p*Math.pow(factor,m*Math.min(y,t)),interest=end-start;
+  const tr=document.createElement('tr');[y===rows&&t%1!==0?'Year '+t:'Year '+y,money(start),money(interest),money(end)].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td);});body.appendChild(tr);
+ }
+ if(rows===0){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=4;td.textContent='No elapsed time — amount remains equal to the principal.';tr.appendChild(td);body.appendChild(tr);}
+}
+['principal','rate','years','frequency'].forEach(id=>$(id).addEventListener('input',update));
+document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{$('principal').value=b.dataset.p;$('rate').value=b.dataset.r;$('years').value=b.dataset.y;$('frequency').value=b.dataset.f;update();}));
+update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f1f8ff"><meta name="skillup-no-standard-menu" content="true"><meta name="skillup-release" content="20261119-grouped-data-simulator-v1"><title>Grouped Data Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#168ac0;--green:#58a900;--ink:#263b58;--muted:#718096;--line:#dce6f0}*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#f1fbff,#f6f8ff 60%,#f3fbf1);color:var(--ink);font-family:Nunito,system-ui,sans-serif}header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.nav{width:min(100% - 24px,760px);min-height:58px;margin:auto;display:flex;align-items:center;gap:10px;padding:8px 0}.back{display:grid;place-items:center;width:36px;height:36px;border:2px solid var(--line);border-bottom-width:3px;border-radius:11px;color:var(--blue);text-decoration:none;font-size:20px;font-weight:900}.brand{flex:1;font-size:16px;font-weight:950}.brand span{color:var(--blue)}.tag{font-size:11px;font-weight:900;color:#52616c;background:#f5f8fa;padding:6px 9px;border-radius:10px}main{width:min(100% - 24px,740px);margin:auto;padding:18px 4px 36px}.hero,.panel{background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:18px;padding:clamp(15px,4vw,22px);margin-bottom:13px}.eyebrow{font-size:11px;font-weight:950;letter-spacing:.08em;color:#278100}.hero h1{font-size:clamp(24px,5vw,32px);margin:7px 0}.muted{color:var(--muted);font-size:14px;line-height:1.6;margin:0}.panel h2{margin:0 0 9px;font-size:19px}.table-wrap{overflow-x:auto;margin:12px 0}table{width:100%;border-collapse:collapse}th,td{padding:9px;text-align:center;border-bottom:1px solid var(--line);font-size:13px}th{background:#eff8ff}input{width:76px;max-width:100%;padding:8px;border:2px solid var(--line);border-radius:9px;text-align:center;font:800 14px system-ui;color:var(--ink)}input:focus{outline:2px solid #8bc8e7}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{padding:11px;border-radius:12px;background:#f2f9ff;text-align:center}.stat b{display:block;font-size:20px;color:#126d99}.stat span{font-size:11px;color:var(--muted);font-weight:800}.chart{margin-top:12px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#f8fbff}.chart svg{width:100%;height:auto;display:block}.bar{fill:#78c9ed;stroke:#2585b7;stroke-width:1.5}.axis{stroke:#718096;stroke-width:1.5}.chart text{font:11px system-ui;fill:#53677d}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius:11px;padding:10px 14px;background:#58cc02;color:#173500;font-size:13px;font-weight:900;cursor:pointer}.btn.secondary{background:#eaf7ff;color:#0877a8}.note{margin-top:10px;padding:11px;border-radius:11px;background:#f1faeb;color:#365f26;font-size:13px;line-height:1.55}@media(max-width:520px){main{width:100%;padding:13px 10px 28px}.hero,.panel{padding:15px}.stats{gap:5px}.stat{padding:9px 4px}.stat b{font-size:18px}input{width:62px;padding:7px 3px}}
+</style></head><body><header><div class="nav"><a class="back" href="maths-grouped-data-quiz.html?v=20261119-grouped-data-duolingo-v2" aria-label="Back to quiz">←</a><div class="brand">SkillUp <span>Maths</span></div><span class="tag">📊 Simulator</span></div></header><main>
+<section class="hero"><div class="eyebrow">INTERACTIVE DATA LAB</div><h1>Grouped Data Simulator</h1><p class="muted">Edit the frequency values and watch the grouped frequency table, total frequency, class marks and bar chart update instantly.</p></section>
+<section class="panel"><h2>1. Edit the frequencies</h2><p class="muted">Use the sample equal-width class intervals. Change any frequency to explore the effect.</p><div class="table-wrap"><table><thead><tr><th>Class interval</th><th>Lower limit</th><th>Upper limit</th><th>Class mark</th><th>Frequency</th></tr></thead><tbody id="rows"></tbody></table></div><div class="actions"><button class="btn secondary" id="reset">↻ Reset sample</button></div></section>
+<section class="panel"><h2>2. Live summary</h2><div class="stats"><div class="stat"><b id="total">25</b><span>Total frequency</span></div><div class="stat"><b id="modal">20–30</b><span>Highest-frequency class</span></div><div class="stat"><b id="width">10</b><span>Class width</span></div></div><div class="chart"><svg id="chart" viewBox="0 0 520 260" role="img" aria-label="Frequency bar chart"></svg></div><p class="note" id="insight">The tallest bar shows the class with the greatest frequency.</p></section>
+<section class="panel"><h2>3. What to notice</h2><ul class="muted" style="padding-left:20px;line-height:1.8"><li>Total frequency is the sum of all frequencies.</li><li>The class mark is the midpoint of the lower and upper limits.</li><li>The class with the greatest frequency is the modal class in this display.</li><li>Equal-width classes make the bar heights directly comparable.</li></ul></section>
+<div class="actions"><a class="btn secondary" href="maths-grouped-data-learn.html?v=20261119-grouped-data-learn-v1" style="text-decoration:none">📘 Learn</a><a class="btn" href="maths-grouped-data-quiz.html?v=20261119-grouped-data-duolingo-v2" style="text-decoration:none">📝 Practice quiz</a></div>
+</main><script>
+(function(){
+const classes=[{lo:0,hi:10,f:4},{lo:10,hi:20,f:7},{lo:20,hi:30,f:9},{lo:30,hi:40,f:5}];
+const rows=document.getElementById('rows');
+function render(){
+ rows.replaceChildren();
+ classes.forEach((c,i)=>{
+  const tr=document.createElement('tr');
+  [c.lo+'–'+c.hi,String(c.lo),String(c.hi),String((c.lo+c.hi)/2)].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+  const td=document.createElement('td'),input=document.createElement('input');input.type='number';input.min='0';input.max='999';input.step='1';input.value=c.f;input.setAttribute('aria-label','Frequency for class '+(c.lo+' to '+c.hi));input.addEventListener('input',()=>{c.f=Math.max(0,Math.min(999,Math.floor(Number(input.value)||0)));update();});td.appendChild(input);tr.appendChild(td);rows.appendChild(tr);
+ });
+ update();
+}
+function update(){
+ const total=classes.reduce((n,c)=>n+c.f,0),max=Math.max(...classes.map(c=>c.f)),modal=classes.filter(c=>c.f===max&&max>0).map(c=>c.lo+'–'+c.hi);
+ document.getElementById('total').textContent=total;
+ document.getElementById('modal').textContent=max?modal.join(', '):'—';
+ document.getElementById('width').textContent=classes[0].hi-classes[0].lo;
+ const svg=document.getElementById('chart');svg.replaceChildren();
+ const ns='http://www.w3.org/2000/svg',make=(tag,attrs,text)=>{const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;svg.appendChild(e);return e;};
+ const maxScale=Math.max(1,max),base=205,top=25,plotH=160,barW=72,gap=35,start=35;
+ make('line',{x1:24,y1:base,x2:500,y2:base,class:'axis'});
+ classes.forEach((c,i)=>{const x=start+i*(barW+gap),h=c.f/maxScale*plotH,y=base-h;make('rect',{x,y,width:barW,height:h,rx:6,class:'bar'});make('text',{x:x+barW/2,y:Math.max(15,y-8),'text-anchor':'middle'},String(c.f));make('text',{x:x+barW/2,y:base+22,'text-anchor':'middle'},c.lo+'–'+c.hi);});
+ make('text',{x:15,y:15},'Frequency');
+ document.getElementById('insight').textContent=total?'Total observations = '+total+'. '+(max?'The highest frequency is '+max+' in '+modal.join(' and ')+'.':'All class frequencies are zero.'):'Enter frequencies to build the table.';
+}
+document.getElementById('reset').addEventListener('click',()=>{[4,7,9,5].forEach((v,i)=>classes[i].f=v);render();});
+render();
+})();
+</script></body></html>

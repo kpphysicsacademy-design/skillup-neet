@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fffdf1">
+<meta name="skillup-release" content="20261119-special-quadrilaterals-simulator-v1">
+<meta name="description" content="Explore squares, rectangles, rhombuses, kites and trapeziums with an interactive geometry simulator.">
+<title>Special Quadrilaterals Simulator | SkillUp Maths</title>
+<style>
+:root{--blue:#1cb0f6;--green:#58cc02;--ink:#24345f;--muted:#68788d;--line:#dce6f5;--bg:#eef6ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef9f7,#eef4ff 58%,#f3efff);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid #e8e8d9}
+.nav{width:min(100% - 22px,760px);min-height:58px;margin:auto;display:flex;align-items:center;gap:9px;padding:7px 0}
+.nav a{color:#168ac0;text-decoration:none;font-weight:900}.back{width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--line);border-radius:12px;background:#fff}
+.brand{flex:1;font-weight:950;font-size:15px}.navlink{padding:8px 11px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:12px}
+main{width:min(100% - 22px,760px);margin:auto;padding:18px 0 34px}
+h1{margin:0 0 6px;font-size:clamp(23px,4vw,30px);line-height:1.2}.sub{margin:0 0 15px;color:var(--muted);font-size:14px;line-height:1.5}
+.card{background:#fff;border:2px solid var(--line);border-bottom-width:5px;border-radius:18px;padding:15px;margin:12px 0}
+label{display:block;margin:0 0 6px;font-size:12px;font-weight:850;color:#53657d}
+select,input{width:100%;min-height:43px;padding:9px 11px;border:2px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);font:700 14px system-ui}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.diagram{display:grid;place-items:center;min-height:290px;background:linear-gradient(145deg,#f6fbff,#f8f7ff);border-radius:14px;padding:8px}
+svg{width:100%;max-width:510px;height:auto;overflow:visible}
+.shape{fill:#dff4ff;stroke:#168ac0;stroke-width:4;stroke-linejoin:round}
+.diag{stroke:#e2a52c;stroke-width:2.5;stroke-dasharray:7 5}
+.vertex{fill:#168ac0;stroke:#fff;stroke-width:2}
+.vertex-label{font:800 15px system-ui;fill:#24345f}
+.measure{font:800 13px system-ui;fill:#52647d}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.fact{padding:11px;border:1px solid var(--line);border-radius:12px;background:#f8fbff}
+.fact b{display:block;font-size:11px;color:#718096;margin-bottom:4px}.fact span{font-size:14px;font-weight:850;line-height:1.4}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:9px 14px;border:0;border-bottom:4px solid #46a302;border-radius:12px;background:var(--green);color:#173500;text-decoration:none;font-size:13px;font-weight:950}
+.btn.secondary{border:1px solid #b8deed;border-bottom-width:3px;background:#eaf7ff;color:#116b96}
+.note{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+@media(max-width:520px){.nav{gap:6px}.brand{font-size:13px}.navlink{font-size:11px;padding:7px 8px}main{padding-top:14px}.controls{grid-template-columns:1fr}.diagram{min-height:230px}.facts{grid-template-columns:1fr 1fr}.card{padding:12px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<a class="back" href="maths-home.html" aria-label="Back to Maths">←</a>
+<div class="brand">SkillUp <span style="color:#2689ce">Maths</span></div>
+<a class="navlink" href="maths-special-quadrilaterals-quiz.html?v=20261119-special-quadrilaterals-quiz-v3&route=20261014-existing-quizzes-v1">📝 Quiz</a>
+</div></header>
+<main>
+<h1>◆ Special Quadrilaterals Simulator</h1>
+<p class="sub">Choose a shape and explore its sides, angles, diagonals and defining properties. Change the values to see how the geometry responds.</p>
+<section class="card">
+<div class="controls">
+<div class="field"><label for="shape">Choose a quadrilateral</label><select id="shape"><option value="square">Square</option><option value="rectangle">Rectangle</option><option value="rhombus">Rhombus</option><option value="kite">Kite</option><option value="trapezium">Isosceles trapezium</option></select></div>
+<div class="field"><label for="size">Base / side length: <span id="sizeOut">8</span> cm</label><input id="size" type="range" min="4" max="12" value="8"><small>Adjust the main side length</small></div>
+<div class="field"><label for="angle">Angle: <span id="angleOut">60</span>°</label><input id="angle" type="range" min="35" max="145" value="60"><small>Used for rhombus and kite shape</small></div>
+<div class="field"><label for="height">Height / second side: <span id="heightOut">5</span> cm</label><input id="height" type="range" min="3" max="10" value="5"><small>Adjust the other dimension</small></div>
+</div>
+</section>
+<section class="card">
+<h2 style="margin:0 0 10px;font-size:16px">Live shape diagram</h2>
+<div class="diagram">
+<svg viewBox="0 0 500 300" role="img" aria-label="Interactive quadrilateral diagram">
+<line id="diag1" class="diag" x1="100" y1="100" x2="400" y2="200"/>
+<line id="diag2" class="diag" x1="400" y1="100" x2="100" y2="200"/>
+<polygon id="poly" class="shape" points="100,210 400,210 400,90 100,90"/>
+<g id="vertices"><circle class="vertex" cx="100" cy="210" r="5"/><circle class="vertex" cx="400" cy="210" r="5"/><circle class="vertex" cx="400" cy="90" r="5"/><circle class="vertex" cx="100" cy="90" r="5"/></g>
+<g id="labels"><text class="vertex-label" x="82" y="230">A</text><text class="vertex-label" x="408" y="230">B</text><text class="vertex-label" x="408" y="82">C</text><text class="vertex-label" x="82" y="82">D</text></g>
+<text id="dim1" class="measure" x="250" y="245" text-anchor="middle">8 cm</text>
+<text id="dim2" class="measure" x="420" y="150">5 cm</text>
+</svg>
+</div>
+<p class="note" id="diagramNote">A square has four equal sides and four right angles.</p>
+</section>
+<section class="card">
+<h2 style="margin:0 0 10px;font-size:16px">Properties to remember</h2>
+<div class="facts">
+<div class="fact"><b>Side lengths</b><span id="sides">4 equal sides</span></div>
+<div class="fact"><b>Angles</b><span id="angles">4 right angles</span></div>
+<div class="fact"><b>Diagonals</b><span id="diagonals">Equal, perpendicular and bisect each other</span></div>
+<div class="fact"><b>Symmetry</b><span id="symmetry">4 lines of symmetry</span></div>
+<div class="fact"><b>Perimeter</b><span id="perimeter">32 cm</span></div>
+<div class="fact"><b>Area</b><span id="area">64 cm²</span></div>
+</div>
+</section>
+<div class="actions"><a class="btn" href="maths-special-quadrilaterals-quiz.html?v=20261119-special-quadrilaterals-quiz-v3&route=20261014-existing-quizzes-v1">Start 30-question quiz →</a><a class="btn secondary" href="maths-home.html">← Maths Path</a></div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const shape=$('shape'),size=$('size'),angle=$('angle'),height=$('height');
+const configs={
+ square:{sides:'4 equal sides',angles:'4 right angles',diagonals:'Equal, perpendicular and bisect each other',symmetry:'4 lines of symmetry',note:'A square combines the properties of a rectangle and a rhombus.'},
+ rectangle:{sides:'Opposite sides equal',angles:'4 right angles',diagonals:'Equal and bisect each other',symmetry:'2 lines of symmetry',note:'A rectangle has equal diagonals that bisect each other.'},
+ rhombus:{sides:'4 equal sides',angles:'Opposite angles equal; adjacent angles add to 180°',diagonals:'Perpendicular and bisect each other; not generally equal',symmetry:'2 lines of symmetry',note:'A rhombus has four equal sides; its diagonals cross at right angles.'},
+ kite:{sides:'Two pairs of adjacent equal sides',angles:'One pair of opposite angles equal',diagonals:'Perpendicular; one diagonal bisects the other',symmetry:'1 line of symmetry',note:'A kite has two pairs of adjacent equal sides and one symmetry diagonal.'},
+ trapezium:{sides:'One pair of parallel sides; equal legs',angles:'Base angles equal in pairs',diagonals:'Equal in an isosceles trapezium; do not generally bisect each other',symmetry:'1 line of symmetry',note:'An isosceles trapezium has one pair of parallel sides and equal non-parallel sides.'}
+};
+function update(){
+ const type=shape.value,s=+size.value,a=+angle.value,h=+height.value,c=configs[type];
+ $('sizeOut').textContent=s;$('angleOut').textContent=a;$('heightOut').textContent=h;
+ let pts,perimeter,area,diagText,sideText;
+ if(type==='square'){const u=Math.min(118,250/s);const w=s*u;pts=[[250-w/2,150+w/2],[250+w/2,150+w/2],[250+w/2,150-w/2],[250-w/2,150-w/2]];perimeter=4*s;area=s*s;sideText='4 equal sides · '+s+' cm each';}
+ else if(type==='rectangle'){const scale=Math.min(34,260/Math.max(s,h));const w=s*scale,hh=h*scale;pts=[[250-w/2,150+hh/2],[250+w/2,150+hh/2],[250+w/2,150-hh/2],[250-w/2,150-hh/2]];perimeter=2*(s+h);area=s*h;sideText='Opposite sides: '+s+' cm and '+h+' cm';}
+ else if(type==='rhombus'){const side=Math.min(120,245/s),rad=a*Math.PI/180,dx=side*Math.cos(rad),dy=side*Math.sin(rad);pts=[[250-side,150],[250,150+side*Math.sin(rad)],[250+side*Math.cos(rad),150],[250,150-side*Math.sin(rad)]];const width=Math.max(...pts.map(p=>p[0]))-Math.min(...pts.map(p=>p[0]));const ht=Math.max(...pts.map(p=>p[1]))-Math.min(...pts.map(p=>p[1]));perimeter=4*s;area=s*s*Math.sin(rad);sideText='4 equal sides · '+s+' cm each';}
+ else if(type==='kite'){const w=Math.min(120,12*s),top=Math.min(90,8*h),bottom=Math.min(120,11*h);pts=[[250,150-top],[250+w,150],[250,150+bottom],[250-w,150]];const side1=Math.hypot(w,top),side2=Math.hypot(w,bottom);perimeter=2*(side1+side2)/20;area=(2*w*(top+bottom)/2)/100;sideText='Two adjacent equal-side pairs';}
+ else {const scale=Math.min(26,260/(s+h));const base=s*scale,top=Math.max(60,base-h*scale),hh=Math.min(130,h*scale);pts=[[250-base/2,150+hh/2],[250+base/2,150+hh/2],[250+top/2,150-hh/2],[250-top/2,150-hh/2]];const leg=Math.hypot((base-top)/2,hh)/scale;perimeter=s+top/scale+2*leg;area=(s+top/scale)*h/2;sideText='Parallel bases: '+s+' cm and '+(top/scale).toFixed(1)+' cm';}
+ $('poly').setAttribute('points',pts.map(p=>p.join(',')).join(' '));
+ const [A,B,C,D]=pts;
+ $('diag1').setAttribute('x1',A[0]);$('diag1').setAttribute('y1',A[1]);$('diag1').setAttribute('x2',C[0]);$('diag1').setAttribute('y2',C[1]);
+ $('diag2').setAttribute('x1',B[0]);$('diag2').setAttribute('y1',B[1]);$('diag2').setAttribute('x2',D[0]);$('diag2').setAttribute('y2',D[1]);
+ $('vertices').innerHTML=pts.map(p=>'<circle class="vertex" cx="'+p[0]+'" cy="'+p[1]+'" r="5"/>').join('');
+ $('labels').innerHTML=pts.map((p,i)=>'<text class="vertex-label" x="'+(p[0]+(p[0]<250?-17:8))+'" y="'+(p[1]+(p[1]<150?-9:20))+'">'+String.fromCharCode(65+i)+'</text>').join('');
+ $('dim1').setAttribute('x',(A[0]+B[0])/2);$('dim1').setAttribute('y',Math.min(285,Math.max(A[1],B[1])+25));$('dim1').textContent=s+' cm';
+ $('dim2').setAttribute('x',Math.min(460,Math.max(...pts.map(p=>p[0]))+12));$('dim2').setAttribute('y',(B[1]+C[1])/2);$('dim2').textContent=h+' cm';
+ $('sides').textContent=sideText;$('angles').textContent=c.angles;$('diagonals').textContent=c.diagonals;$('symmetry').textContent=c.symmetry;
+ $('perimeter').textContent=perimeter.toFixed(2)+' cm';$('area').textContent=area.toFixed(2)+' cm²';$('diagramNote').textContent=c.note;
+}
+[shape,size,angle,height].forEach(el=>el.addEventListener('input',update));update();
+})();
+</script>
+</body></html>

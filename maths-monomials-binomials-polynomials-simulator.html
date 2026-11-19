@@ -1,88 +1,238 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f9ff">
-<meta name="skillup-release" content="20261119-polynomials-active-simulator-v2"><meta name="skillup-no-standard-menu" content="true">
-<meta name="description" content="Interactive polynomial lab: classify expressions, combine like terms, add polynomials and evaluate values with step-by-step working.">
-<title>SkillUp Maths | Polynomial Interactive Lab</title>
-<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.05},startup:{typeset:false}};</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f8ff">
+<meta name="skillup-release" content="20261119-polynomials-simple-mathjax-v3">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="description" content="A simple polynomial simulator with MathJax formulas, classification, addition and evaluation.">
+<title>SkillUp Maths | Polynomial Simulator</title>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+  chtml: {scale: 1.05},
+  startup: {typeset: false}
+};
+</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
-:root{--blue:#168bc4;--ink:#203354;--muted:#66758a;--line:#dce6f0;--bg:#f3f8ff;--green:#58a900}*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#effaff,#f5f7ff 58%,#f2fbf4);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:780px;margin:auto;padding:10px 14px;display:flex;align-items:center;gap:12px}.nav a{color:var(--blue);text-decoration:none;font-weight:900}.nav strong{margin-left:auto;font-size:14px}main{max-width:780px;margin:auto;padding:18px 14px 40px}.eyebrow{color:var(--green);font-size:11px;font-weight:950;letter-spacing:.1em}h1{font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 8px;font-weight:950}h2{font-size:19px;margin:0 0 8px}.muted{color:var(--muted)}.lead{color:var(--muted);margin:0 0 16px}.panel{background:#fff;border:1px solid var(--line);border-bottom-width:3px;border-radius:17px;padding:clamp(14px,4vw,20px);margin:13px 0;box-shadow:0 5px 18px rgba(40,80,120,.04)}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#eaf7ff;color:#126b98;font-size:11px;font-weight:900;margin-bottom:7px}label{display:block;font-size:13px;font-weight:850;margin:10px 0 5px}input{width:100%;min-height:48px;padding:10px 12px;border:2px solid #dce6f0;border-radius:11px;font:700 17px system-ui;color:var(--ink)}input:focus{outline:3px solid #c7edff;border-color:#72bfe2}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.presets button,.action{border:1px solid #b8deed;border-bottom-width:3px;border-radius:10px;padding:9px 12px;background:#edf8ff;color:#116b96;font-weight:900;cursor:pointer}.result{padding:14px;margin-top:12px;background:linear-gradient(130deg,#eaf7ff,#f2f5ff);border:1px solid #d5eaf6;border-radius:13px}.result strong{display:block;font-size:clamp(22px,5vw,29px);font-weight:950;color:#126b98;overflow-wrap:anywhere}.result span{font-size:13px;color:var(--muted)}.work{padding:12px;margin-top:10px;background:#f6f9fb;border-radius:11px;white-space:pre-line;font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.chip{padding:7px 10px;background:#f0f5f8;border-radius:9px;font-size:12px;font-weight:850}.bars{display:flex;align-items:end;gap:7px;height:105px;padding:10px 5px 0;border-bottom:2px solid #aab9c7;margin-top:8px}.bar{flex:1;min-width:0;background:#8acde9;border-radius:7px 7px 0 0;position:relative}.bar span{position:absolute;top:-24px;left:0;right:0;text-align:center;font-size:11px;font-weight:850}.bar-labels{display:flex;gap:7px}.bar-labels span{flex:1;text-align:center;font-size:11px;color:var(--muted);padding-top:4px}.cta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.cta a{display:flex;justify-content:center;align-items:center;min-height:46px;padding:10px;border-radius:11px;background:var(--blue);color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:900}.cta a.secondary{background:#edf7ff;color:#116b96;border:1px solid #b8deed}.error{color:#a52f2f;font-weight:800}.hint{font-size:12px;color:var(--muted);margin-top:6px}
-@media(max-width:520px){main{padding:14px 10px 30px}.row2{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.panel{padding:14px}}
-</style></head><body>
-<header><div class="nav"><a href="maths-monomials-binomials-polynomials-learn.html?v=20261119-polynomials-active-learn-v2">← Learn</a><strong>SkillUp Maths</strong></div></header>
-<main><div class="eyebrow">SKILLUP MATHS · HANDS-ON PRACTICE</div><h1>Polynomial Interactive Lab</h1><p class="lead">Change the expression and see its structure, simplify it, combine two polynomials, and evaluate it at any x-value.</p>
-<section class="panel"><div class="tag">LAB 1 · EXPRESSION EXPLORER</div><h2>Classify and inspect</h2><label for="expr">Enter a polynomial in x</label><input id="expr" value="4x^2 - 3x + 7" autocomplete="off" spellcheck="false"><div class="hint">Use forms such as \(4x^2-3x+7\), \(x^3-2x\), or \(8\). Use non-negative whole-number powers.</div><div class="presets"><button type="button" data-expr="7x^2">Monomial</button><button type="button" data-expr="x^2 + 4">Binomial</button><button type="button" data-expr="x^2 + 3x + 2">Trinomial</button><button type="button" data-expr="5x^4 + 2x^2 - x + 9">Degree 4</button><button type="button" data-expr="3x - x + 2">Simplify first</button></div><div class="result" aria-live="polite"><strong id="kind">Trinomial</strong><span id="summary">3 terms · Degree 2</span></div><div class="chips" id="termChips"></div><div class="work" id="inspectWork">Terms, coefficients and degree appear here.</div><div class="bars" id="degreeBars"></div><div class="bar-labels" id="degreeLabels"></div></section>
-<section class="panel"><div class="tag">LAB 2 · LIKE-TERM MACHINE</div><h2>Combine coefficients</h2><p class="muted">These are all coefficients of x. The variable part stays x.</p><div class="row2"><div><label for="c1">Coefficient 1</label><input id="c1" type="number" value="3"></div><div><label for="c2">Coefficient 2</label><input id="c2" type="number" value="5"></div><div><label for="c3">Coefficient 3</label><input id="c3" type="number" value="-2"></div></div><div class="result"><strong id="combineResult">6x</strong><span id="combineSummary">3 + 5 − 2 = 6, so the simplified term is 6x.</span></div></section>
-<section class="panel"><div class="tag">LAB 3 · POLYNOMIAL ADDITION</div><h2>Add two polynomials</h2><div class="row2"><div><label for="polyA">Polynomial A</label><input id="polyA" value="3x^2 + 2x - 1" spellcheck="false"></div><div><label for="polyB">Polynomial B</label><input id="polyB" value="x^2 - 5x + 4" spellcheck="false"></div></div><div class="result"><strong id="sumResult">4x² − 3x + 3</strong><span id="sumSummary">Like powers are grouped and their coefficients are added.</span></div><div class="work" id="sumWork"></div></section>
-<section class="panel"><div class="tag">LAB 4 · VALUE CALCULATOR</div><h2>Evaluate \(P(x)=ax^2+bx+c\)</h2><div class="row2"><div><label for="a">a — coefficient of x²</label><input id="a" type="number" value="2"></div><div><label for="b">b — coefficient of x</label><input id="b" type="number" value="-3"></div><div><label for="c">c — constant</label><input id="c" type="number" value="1"></div><div><label for="x">Substitute x =</label><input id="x" type="number" value="2"></div></div><div class="result"><strong id="valueResult">P(2) = 3</strong><span id="valueSummary">Substitution and calculation steps.</span></div><div class="work" id="valueWork"></div></section>
-<section class="panel"><div class="tag">CHALLENGE · CHECK YOUR UNDERSTANDING</div><h2>Quick challenge</h2><p id="challengeQ">What is the degree of 6x³ + 2x − 9?</p><div class="presets" id="challengeChoices"><button type="button" data-answer="2">2</button><button type="button" data-answer="3">3</button><button type="button" data-answer="6">6</button><button type="button" data-answer="9">9</button></div><div class="work" id="challengeFeedback" aria-live="polite">Choose an answer to check your understanding.</div></section>
-<div class="cta"><a href="maths-monomials-binomials-polynomials-learn.html?v=20261119-polynomials-active-learn-v2">📘 Review the lesson</a><a class="secondary" href="maths-monomials-binomials-polynomials-quiz.html?v=20261119-polynomials-learn-simulator-v2">🎯 Take the 30-question quiz</a></div>
+:root{--blue:#168bc4;--ink:#203354;--muted:#68788d;--line:#dce6f0;--bg:#f3f8ff;--green:#398b35}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(150deg,#effaff,#f5f7ff 60%,#f2fbf4);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:700px;margin:auto;padding:12px 15px;display:flex;align-items:center}
+.nav a{color:var(--blue);font-weight:900;text-decoration:none}
+.nav strong{margin-left:auto;font-size:14px}
+main{max-width:700px;margin:auto;padding:18px 14px 36px}
+.eyebrow{font-size:11px;letter-spacing:.1em;font-weight:950;color:var(--green)}
+h1{font-size:clamp(27px,5vw,36px);line-height:1.15;margin:5px 0 7px}
+h2{font-size:19px;margin:0 0 7px}
+.lead,.muted{color:var(--muted)}
+.lead{margin:0 0 17px}
+.card{background:#fff;border:1px solid var(--line);border-bottom-width:3px;border-radius:16px;padding:17px;margin:13px 0;box-shadow:0 4px 14px #284b700a}
+.step{font-size:11px;font-weight:950;letter-spacing:.08em;color:#1479a8;margin-bottom:5px}
+label{display:block;font-size:13px;font-weight:850;margin:12px 0 5px}
+input{width:100%;min-height:48px;border:2px solid var(--line);border-radius:10px;padding:10px 12px;font:700 17px system-ui;color:var(--ink)}
+input:focus{outline:3px solid #c9edff;border-color:#70bfdf}
+button{border:1px solid #b8deed;border-bottom-width:3px;border-radius:10px;padding:9px 12px;background:#edf8ff;color:#116b96;font-weight:900;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #8bd2f2;outline-offset:2px}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.formula{margin:12px 0;padding:13px;background:#edf7ff;border:1px solid #d4eaf7;border-radius:12px;text-align:center;font-size:clamp(19px,4vw,24px);font-weight:850;color:#126b98}
+.result{margin-top:11px;padding:12px;background:#f4f8fb;border-radius:11px}
+.result strong{display:block;font-size:20px;color:#126b98;overflow-wrap:anywhere}
+.result small{display:block;color:var(--muted);margin-top:4px}
+.work{margin-top:9px;padding:11px;background:#f7f9fb;border-radius:10px;font-size:14px;line-height:1.8}
+.status{min-height:22px;font-size:13px;color:#a13b32;margin-top:7px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
+.cta a{display:flex;align-items:center;justify-content:center;min-height:46px;padding:10px;border-radius:11px;background:var(--blue);color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:900}
+.cta a.secondary{background:#edf7ff;color:#116b96;border:1px solid #b8deed}
+@media(max-width:520px){main{padding:14px 10px 28px}.card{padding:14px}.grid,.cta{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a href="maths-monomials-binomials-polynomials-learn.html?v=20261119-polynomials-active-learn-v2">← Back to Learn</a><strong>SkillUp Maths</strong></div></header>
+<main>
+<div class="eyebrow">SKILLUP MATHS · SIMPLE PRACTICE</div>
+<h1>Polynomial Simulator</h1>
+<p class="lead">Change the numbers and see what happens. Three simple tools help you understand polynomials.</p>
+
+<section class="card">
+<div class="step">1 · EXPLORE</div>
+<h2>Identify the polynomial</h2>
+<p class="muted">Enter an expression in x. The simulator combines like terms, counts the terms and finds the degree.</p>
+<div class="formula">\(4x^2-3x+7\)</div>
+<label for="expression">Your expression</label>
+<input id="expression" value="4x^2 - 3x + 7" autocomplete="off" spellcheck="false">
+<div class="presets">
+<button type="button" data-example="7x^2">One term</button>
+<button type="button" data-example="x^2 + 4">Two terms</button>
+<button type="button" data-example="x^2 + 3x + 2">Three terms</button>
+</div>
+<div class="result" aria-live="polite">
+<strong id="classification">Trinomial</strong>
+<small id="classificationInfo">3 terms · Degree 2</small>
+<div class="work" id="simplified">Simplified form: \(4x^2-3x+7\)</div>
+</div>
+<div class="status" id="expressionError"></div>
+</section>
+
+<section class="card">
+<div class="step">2 · ADD</div>
+<h2>Add two polynomials</h2>
+<p class="muted">Enter two expressions. Like powers are grouped and added together.</p>
+<label for="polyA">Polynomial A</label>
+<input id="polyA" value="3x^2 + 2x - 1" spellcheck="false">
+<label for="polyB">Polynomial B</label>
+<input id="polyB" value="x^2 - 5x + 4" spellcheck="false">
+<div class="result" aria-live="polite">
+<small>Sum</small>
+<strong id="additionResult">\(4x^2-3x+3\)</strong>
+<div class="work" id="additionSteps">\(3x^2+x^2=4x^2\)<br>\(2x-5x=-3x\)<br>\(-1+4=3\)</div>
+</div>
+<div class="status" id="additionError"></div>
+</section>
+
+<section class="card">
+<div class="step">3 · EVALUATE</div>
+<h2>Find the value of \(P(x)\)</h2>
+<p class="muted">For this example, use \(P(x)=ax^2+bx+c\). Change a, b, c and x.</p>
+<div class="grid">
+<div><label for="a">a (coefficient of \(x^2\))</label><input id="a" type="number" value="2" step="any"></div>
+<div><label for="b">b (coefficient of x)</label><input id="b" type="number" value="-3" step="any"></div>
+<div><label for="c">c (constant)</label><input id="c" type="number" value="1" step="any"></div>
+<div><label for="xvalue">Value of x</label><input id="xvalue" type="number" value="2" step="any"></div>
+</div>
+<div class="result" aria-live="polite">
+<small>Calculated answer</small>
+<strong id="evaluationResult">\(P(2)=3\)</strong>
+<div class="work" id="evaluationSteps">\(P(2)=2(2)^2-3(2)+1\)<br>\(=8-6+1=3\)</div>
+</div>
+</section>
+
+<div class="cta">
+<a href="maths-monomials-binomials-polynomials-learn.html?v=20261119-polynomials-active-learn-v2">📘 Review the lesson</a>
+<a class="secondary" href="maths-monomials-binomials-polynomials-quiz.html?v=20261119-polynomials-learn-simulator-v2">🎯 Practise the quiz</a>
+</div>
 </main>
 <script>
 (function(){
 const $=id=>document.getElementById(id);
-function mathTypeset(){if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise().catch(()=>{});}}
-function parse(raw){
- let s=String(raw).replace(/[−–]/g,'-').replace(/[＋]/g,'+').replace(/\s+/g,'');
- if(!s)throw Error('Enter an expression first.');
- if(s[0]!=='+'&&s[0]!=='-')s='+'+s;
- const chunks=s.match(/[+-][^+-]+/g);if(!chunks||chunks.join('')!==s)throw Error('Check the + and − signs.');
- const map=new Map();
- for(const token of chunks){
-  const m=token.match(/^([+-])(\d*(?:\.\d+)?)(x)?(?:\^(\d+))?$/);
-  if(!m||(!m[3]&&m[4]))throw Error('Use terms like 4x^2, -3x or 7. Powers must be whole numbers.');
-  const sign=m[1]==='-'?-1:1,coef=(m[2]===''?1:Number(m[2]))*sign,power=m[3]?(m[4]?Number(m[4]):1):0;
-  if(!Number.isSafeInteger(power)||power>30)throw Error('Use an exponent from 0 to 30.');
-  map.set(power,(map.get(power)||0)+coef);
+function typeset(){
+ if(window.MathJax&&window.MathJax.typesetPromise){
+  window.MathJax.typesetPromise().catch(()=>{});
  }
- return [...map.entries()].filter(([,c])=>Math.abs(c)>1e-10).sort((a,b)=>b[0]-a[0]).map(([power,coef])=>({power,coef}));
 }
-function termText(t,first){const sign=t.coef<0?'−':'+',n=Math.abs(t.coef),v=t.power===0?'':('x'+(t.power===1?'':String(t.power).replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(d)])));const coeff=(t.power>0&&Math.abs(n-1)<1e-10)?'':String(n);return (first?(t.coef<0?'−':''):(sign+' '))+(coeff+v);}
-function format(ts){if(!ts.length)return '0';return ts.map((t,i)=>termText(t,i===0)).join(' ');}
-function showError(ids,msg){ids.forEach(id=>$(id).textContent=msg);ids.forEach(id=>$(id).classList.add('error'));}
-function clearError(ids){ids.forEach(id=>$(id).classList.remove('error'));}
-function inspect(){
- const ids=['kind','summary','inspectWork','termChips','degreeBars','degreeLabels'];
+function numberText(n){
+ if(Math.abs(n)<1e-10)return "0";
+ return Number(n.toPrecision(9)).toString();
+}
+function parsePolynomial(input){
+ let s=String(input).replace(/[−–]/g,"-").replace(/\s+/g,"");
+ if(!s)throw Error("Please enter an expression.");
+ if(s[0]!=="+"&&s[0]!=="-")s="+"+s;
+ const parts=s.match(/[+-][^+-]+/g);
+ if(!parts||parts.join("")!==s)throw Error("Check the plus and minus signs.");
+ const terms=new Map();
+ for(const part of parts){
+  const m=part.match(/^([+-])(\d*(?:\.\d+)?)(x)?(?:\^(\d+))?$/);
+  if(!m||(!m[3]&&m[4]))throw Error("Use formats like 3x^2, -2x or 5.");
+  const sign=m[1]==="-"?-1:1;
+  const coefficient=(m[2]===""?1:Number(m[2]))*sign;
+  const power=m[3]?(m[4]?Number(m[4]):1):0;
+  if(!Number.isSafeInteger(power)||power>20)throw Error("Use whole-number powers from 0 to 20.");
+  terms.set(power,(terms.get(power)||0)+coefficient);
+ }
+ return [...terms.entries()]
+  .filter(([,coefficient])=>Math.abs(coefficient)>1e-10)
+  .sort((a,b)=>b[0]-a[0])
+  .map(([power,coefficient])=>({power,coefficient}));
+}
+function texPolynomial(terms){
+ if(!terms.length)return "0";
+ return terms.map((term,index)=>{
+  const n=Math.abs(term.coefficient);
+  const sign=term.coefficient<0?"-":"+";
+  const coefficient=term.power>0&&Math.abs(n-1)<1e-10?"":numberText(n);
+  const variable=term.power===0?"":term.power===1?"x":"x^{"+term.power+"}";
+  return (index===0?(term.coefficient<0?"-":""):sign)+coefficient+variable;
+ }).join("");
+}
+function explore(){
+ $("expressionError").textContent="";
  try{
-  const ts=parse($('expr').value);clearError(ids);
-  const count=ts.length,degree=count?Math.max(...ts.map(t=>t.power)):null;
-  const kind=count===0?'Zero polynomial':count===1?'Monomial':count===2?'Binomial':count===3?'Trinomial':'Polynomial';
-  $('kind').textContent=kind;$('summary').textContent=count+' non-zero term'+(count===1?'':'s')+' · '+(count?'Degree '+degree:'Zero polynomial · degree not defined');
-  $('termChips').replaceChildren();
-  ts.forEach(t=>{const chip=document.createElement('span');chip.className='chip';chip.textContent=termText(t,true);$('termChips').appendChild(chip);});
-  $('inspectWork').textContent='Simplified expression: '+format(ts)+'\nTerms: '+(ts.length?ts.map(t=>termText(t,true)).join(', '):'0')+'\nCoefficients: '+(ts.length?ts.map(t=>t.coef).join(', '):'0')+'\nConstant term: '+(ts.find(t=>t.power===0)?.coef??0)+'\nDegree: '+(count?degree:'not defined for the zero polynomial');
-  $('degreeBars').replaceChildren();$('degreeLabels').replaceChildren();
-  const max=Math.max(1,...ts.map(t=>Math.abs(t.coef)));
-  ts.forEach(t=>{const bar=document.createElement('div');bar.className='bar';bar.style.height=(Math.max(8,Math.abs(t.coef)/max*72))+'px';const v=document.createElement('span');v.textContent=t.coef;bar.appendChild(v);$('degreeBars').appendChild(bar);const lab=document.createElement('span');lab.textContent=t.power===0?'constant':'x^'+t.power;$('degreeLabels').appendChild(lab);});
- }catch(e){showError(['kind','summary','inspectWork'],e.message);$('termChips').replaceChildren();$('degreeBars').replaceChildren();$('degreeLabels').replaceChildren();}
+  const terms=parsePolynomial($("expression").value);
+  const count=terms.length;
+  const degree=count?terms[0].power:null;
+  const type=count===0?"Zero polynomial":count===1?"Monomial":count===2?"Binomial":count===3?"Trinomial":"Polynomial";
+  $("classification").textContent=type;
+  $("classificationInfo").textContent=count+" non-zero term"+(count===1?"":"s")+" · "+(count?"Degree "+degree:"degree is not defined");
+  $("simplified").innerHTML="Simplified form: \\("+texPolynomial(terms)+"\\)";
+  typeset();
+ }catch(error){
+  $("classification").textContent="Check your expression";
+  $("classificationInfo").textContent="Please correct the format.";
+  $("simplified").textContent="";
+  $("expressionError").textContent=error.message;
+ }
 }
-function combine(){
- const vals=['c1','c2','c3'].map(id=>Number($(id).value));if(vals.some(v=>!Number.isFinite(v))){$('combineResult').textContent='Enter valid coefficients';return;}
- const sum=vals.reduce((a,b)=>a+b,0),txt=Math.abs(sum-1)<1e-10?'x':Math.abs(sum+1)<1e-10?'−x':sum+'x';
- $('combineResult').innerHTML='\\('+(Math.abs(sum)<1e-10?'0':txt.replace('−','-'))+'\\)';$('combineSummary').textContent=vals.join(' + ').replace(/\+ -/g,'− ')+' = '+sum+'. '+(Math.abs(sum)<1e-10?'The terms cancel completely.':'Keep the common variable x.');mathTypeset();
-}
-function addPolynomials(){
+function add(){
+ $("additionError").textContent="";
  try{
-  const A=parse($('polyA').value),B=parse($('polyB').value),map=new Map();
-  [...A,...B].forEach(t=>map.set(t.power,(map.get(t.power)||0)+t.coef));
-  const sum=[...map.entries()].filter(([,v])=>Math.abs(v)>1e-10).sort((a,b)=>b[0]-a[0]).map(([power,coef])=>({power,coef}));
-  ['sumResult','sumSummary','sumWork'].forEach(id=>$(id).classList.remove('error'));
-  $('sumResult').innerHTML='\\('+format(sum).replace(/−/g,'-').replace(/x²/g,'x^2').replace(/x³/g,'x^3')+'\\)';$('sumSummary').textContent='Result has '+sum.length+' non-zero term'+(sum.length===1?'':'s')+'.';
+  const A=parsePolynomial($("polyA").value);
+  const B=parsePolynomial($("polyB").value);
+  const grouped=new Map();
+  [...A,...B].forEach(term=>grouped.set(term.power,(grouped.get(term.power)||0)+term.coefficient));
+  const sum=[...grouped.entries()]
+   .filter(([,coefficient])=>Math.abs(coefficient)>1e-10)
+   .sort((a,b)=>b[0]-a[0])
+   .map(([power,coefficient])=>({power,coefficient}));
+  $("additionResult").innerHTML="\\("+texPolynomial(sum)+"\\)";
   const powers=[...new Set([...A,...B].map(t=>t.power))].sort((a,b)=>b-a);
-  $('sumWork').textContent='Group coefficients by matching powers:\n'+powers.map(p=>{const av=A.find(t=>t.power===p)?.coef||0,bv=B.find(t=>t.power===p)?.coef||0;return 'x^'+p+': '+av+' + ('+bv+') = '+(av+bv);}).join('\n')+'\nSimplified sum: '+format(sum);
- }catch(e){showError(['sumResult','sumSummary','sumWork'],e.message);}
+  $("additionSteps").innerHTML=powers.map(power=>{
+   const first=A.find(t=>t.power===power)?.coefficient||0;
+   const second=B.find(t=>t.power===power)?.coefficient||0;
+   const variable=power===0?"":power===1?"x":"x^{"+power+"}";
+   return "\\("+numberText(first)+variable+"+("+numberText(second)+variable+")="+numberText(first+second)+variable+"\\)";
+  }).join("<br>")+"<br><b>Final answer:</b> \\("+texPolynomial(sum)+"\\)";
+  typeset();
+ }catch(error){
+  $("additionResult").textContent="Unable to calculate";
+  $("additionSteps").textContent="";
+  $("additionError").textContent=error.message;
+ }
 }
 function evaluate(){
- const [a,b,c,x]=['a','b','c','x'].map(id=>Number($(id).value));if([a,b,c,x].some(v=>!Number.isFinite(v))){$('valueResult').textContent='Enter valid numbers';return;}
- const ax=a*x*x,bx=b*x,total=ax+bx+c;
- $('valueResult').innerHTML='\\(P('+x+')='+total+'\\)';
- $('valueSummary').textContent='Substitute x, then apply powers and multiplication before addition.';
- $('valueWork').textContent='P(x) = ax² + bx + c\nP('+x+') = '+a+' × ('+x+')² + ('+b+') × ('+x+') + ('+c+')\n= '+ax+' + ('+bx+') + ('+c+')\n= '+total;
+ const values=["a","b","c","xvalue"].map(id=>Number($(id).value));
+ if(values.some(value=>!Number.isFinite(value))){
+  $("evaluationResult").textContent="Enter valid numbers";
+  $("evaluationSteps").textContent="";
+  return;
+ }
+ const [a,b,c,x]=values;
+ const first=a*x*x,second=b*x,total=first+second+c;
+ const signB=b<0?"-":"+";
+ const signC=c<0?"-":"+";
+ $("evaluationResult").innerHTML="\\(P("+numberText(x)+")="+numberText(total)+"\\)";
+ $("evaluationSteps").innerHTML=
+  "\\(P(x)=ax^2+bx+c\\)<br>"+
+  "\\(P("+numberText(x)+")="+numberText(a)+"("+numberText(x)+")^2"+signB+numberText(Math.abs(b))+"("+numberText(x)+")"+signC+numberText(Math.abs(c))+"\\)<br>"+
+  "\\(="+numberText(first)+"+"+"("+numberText(second)+")"+"+"+"("+numberText(c)+")\\)<br>"+
+  "\\(="+numberText(total)+"\\)";
+ typeset();
 }
-$('expr').addEventListener('input',inspect);document.querySelectorAll('[data-expr]').forEach(b=>b.addEventListener('click',()=>{$('expr').value=b.dataset.expr;inspect();}));
-['c1','c2','c3'].forEach(id=>$(id).addEventListener('input',combine));['polyA','polyB'].forEach(id=>$(id).addEventListener('input',addPolynomials));['a','b','c','x'].forEach(id=>$(id).addEventListener('input',evaluate));
-document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{$('challengeFeedback').textContent=b.dataset.answer==='3'?'Correct! The highest exponent of x is 3.':'Try again. Degree is the greatest exponent of x, not the coefficient or constant.';}));
-inspect();combine();addPolynomials();evaluate();mathTypeset();
+$("expression").addEventListener("input",explore);
+document.querySelectorAll("[data-example]").forEach(button=>{
+ button.addEventListener("click",()=>{
+  $("expression").value=button.dataset.example;
+  explore();
+ });
+});
+["polyA","polyB"].forEach(id=>$(id).addEventListener("input",add));
+["a","b","c","xvalue"].forEach(id=>$(id).addEventListener("input",evaluate));
+explore();add();evaluate();typeset();
 })();
-</script></body></html>
+</script>
+</body>
+</html>

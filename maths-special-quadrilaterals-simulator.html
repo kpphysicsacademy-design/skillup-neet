@@ -56,7 +56,7 @@ svg{width:100%;max-width:510px;height:auto;overflow:visible}
 <section class="card">
 <h2 style="margin:0 0 10px;font-size:16px">Live shape diagram</h2>
 <div class="diagram">
-<svg viewBox="0 0 500 300" role="img" aria-label="Interactive quadrilateral diagram">
+<svg viewBox="0 0 500 340" role="img" aria-label="Interactive quadrilateral diagram">
 <line id="diag1" class="diag" x1="100" y1="100" x2="400" y2="200"/>
 <line id="diag2" class="diag" x1="400" y1="100" x2="100" y2="200"/>
 <polygon id="poly" class="shape" points="100,210 400,210 400,90 100,90"/>
@@ -96,7 +96,7 @@ function update(){
  const type=shape.value,s=+size.value,a=+angle.value,h=+height.value,c=configs[type];
  $('sizeOut').textContent=s;$('angleOut').textContent=a;$('heightOut').textContent=h;
  let pts=[],perimeter=0,area=0,sideText='',angleText='',diagonalText='',diagramValues='';
- const fmt=n=>Number(n).toFixed(2).replace(/\\.00$/,'');
+ const fmt=n=>Number(n.toFixed(2)).toString();
  if(type==='square'){
   const u=25,w=s*u;pts=[[250-w/2,150+w/2],[250+w/2,150+w/2],[250+w/2,150-w/2],[250-w/2,150-w/2]];
   perimeter=4*s;area=s*s;sideText='AB = BC = CD = DA = '+s+' cm';angleText='90° at all four corners';
@@ -138,8 +138,8 @@ function update(){
  $('diag2').setAttribute('x1',B[0]);$('diag2').setAttribute('y1',B[1]);$('diag2').setAttribute('x2',D[0]);$('diag2').setAttribute('y2',D[1]);
  $('vertices').innerHTML=pts.map(p=>'<circle class="vertex" cx="'+p[0]+'" cy="'+p[1]+'" r="5"/>').join('');
  $('labels').innerHTML=pts.map((p,i)=>'<text class="vertex-label" x="'+(p[0]+(p[0]<250?-17:8))+'" y="'+(p[1]+(p[1]<150?-9:20))+'">'+String.fromCharCode(65+i)+'</text>').join('');
- $('dim1').setAttribute('x',(A[0]+B[0])/2);$('dim1').setAttribute('y',Math.min(285,Math.max(A[1],B[1])+25));$('dim1').textContent=diagramValues;
- $('dim2').setAttribute('x',250);$('dim2').setAttribute('y',292);$('dim2').setAttribute('text-anchor','middle');$('dim2').textContent=angleText;
+ $('dim1').setAttribute('x',250);$('dim1').setAttribute('y',300);$('dim1').setAttribute('text-anchor','middle');$('dim1').textContent=diagramValues;
+ $('dim2').setAttribute('x',250);$('dim2').setAttribute('y',324);$('dim2').setAttribute('text-anchor','middle');$('dim2').textContent=angleText;
  $('sides').textContent=sideText;$('angles').textContent=angleText;$('diagonals').textContent=diagonalText;$('symmetry').textContent=c.symmetry;
  $('perimeter').textContent=fmt(perimeter)+' cm';$('area').textContent=fmt(area)+' cm²';
  $('diagramNote').textContent=c.note+' Values update automatically when you change the controls.';

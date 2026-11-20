@@ -101,7 +101,7 @@ $('title').textContent=displayConcept;
 $('subtitle').textContent='Practise '+displayConcept+' with focused questions and instant explanations.';
 document.title=displayConcept+' | Chemistry Quiz | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-const BANK_VERSION='20261120-molecular-mass-quiz-v1';
+const BANK_VERSION='20261120-chemistry-bank-loader-fix-v1';
 let questions=[],originalQuestions=[],index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function richText(v){
@@ -126,13 +126,14 @@ function getBank(key){
   'law-of-conservation-of-mass':window.skillUpLawConservationMassQuestions,
   'law-of-definite-proportions':window.skillUpLawDefiniteProportionsQuestions,
   'atomic-mass':window.skillUpAtomicMassQuestions,
-  'molecular-mass':window.SkillUpMolecularMassQuestions
+  'molecular-mass':window.SkillUpMolecularMassQuestions,
+  'mole-concept':window.SkillUpMoleConceptQuestions
  };
  for(const k of [key,slug(concept),slug(micro)]){
   if(isBank(reg[k]))return reg[k];
   if(isBank(named[k]))return named[k];
  }
- const changed=Object.keys(window).filter(k=>/^skillUp.*Questions$/.test(k)&&isBank(window[k]));
+ const changed=Object.keys(window).filter(k=>/^skillup.*questions$/i.test(k)&&isBank(window[k]));
  return changed.length===1?window[changed[0]]:null;
 }
 function loadScript(src,key){

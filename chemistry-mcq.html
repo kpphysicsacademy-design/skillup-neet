@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f3f9ff">
 <meta name="skillup-no-standard-menu" content="true">
-<meta name="skillup-release" content="20261120-atom-molecule-dedicated-sheet-v1">
+<meta name="skillup-release" content="20261120-matter-quiz-fast-bank-load-v1">
 <meta name="description" content="Practise Chemistry concepts with focused quizzes, instant explanations, XP, streaks and mistake revision.">
 <title>Matter and Its Nature | Chemistry | SkillUp</title>
 <style>
@@ -113,16 +113,33 @@ function richText(v){
  return s;
 }
 function isBank(v){return Array.isArray(v)&&v.length&&v.every(x=>x&&typeof x==='object'&&((('q'in x)&&('o'in x)&&('a'in x))||(('question'in x)&&Array.isArray(x.options)&&('answer'in x))));}
+function getBank(key){
+ const reg=window.SKILLUP_CHEMISTRY_BANK||{};
+ const named={
+  'matter-and-its-nature':window.skillUpMatterNatureQuestions,
+  'atom-molecule-element-compound':window.skillUpAtomMoleculeElementCompoundQuestions
+ };
+ for(const k of [key,slug(concept),slug(micro)]){
+  if(isBank(reg[k]))return reg[k];
+  if(isBank(named[k]))return named[k];
+ }
+ const changed=Object.keys(window).filter(k=>/^skillUp.*Questions$/.test(k)&&isBank(window[k]));
+ return changed.length===1?window[changed[0]]:null;
+}
 function loadScript(src,key){
  return new Promise((resolve,reject)=>{
-  const raw='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/';
-  const cdn='https://cdn.jsdelivr.net/gh/kpphysicsacademy-design/skillup-neet@main/';
-  const path='question-banks/'+src,urls=['/'+path,raw+path,cdn+path,src,raw+src,cdn+src];let at=0,timer=null;
-  function inspect(){const reg=window.SKILLUP_CHEMISTRY_BANK||{};for(const k of [key,slug(concept),slug(micro)]){if(isBank(reg[k])){if(timer)clearTimeout(timer);resolve(reg[k]);return true;}}return false;}
-  function next(){if(at>=urls.length){reject(new Error('Question bank unavailable'));return;}const before={};Object.keys(window).forEach(k=>before[k]=window[k]);const sc=document.createElement('script');sc.async=false;sc.src=urls[at++]+(urls[at-1].includes('?')?'&':'?')+'v='+BANK_VERSION+'&t='+Date.now();sc.crossOrigin='anonymous';let done=false;
-   function finish(){if(done)return;done=true;if(timer)clearTimeout(timer);sc.remove();if(!inspect()){const found=Object.keys(window).filter(k=>before[k]!==window[k]&&isBank(window[k])).map(k=>window[k]);if(found.length)resolve(found[0]);else next();}}
-   sc.onload=finish;sc.onerror=finish;timer=setTimeout(finish,7000);document.head.appendChild(sc);
-  }next();
+  const path='question-banks/'+src;
+  const urls=['/'+path,'https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/'+path];
+  let settled=false,loaded=0;
+  const finish=()=>{if(settled)return;const bank=getBank(key);if(bank){settled=true;resolve(bank);}else if(loaded===urls.length){settled=true;reject(new Error('Question bank unavailable'));}};
+  urls.forEach((url,i)=>{
+   const sc=document.createElement('script');
+   sc.async=true;sc.src=url+'?v='+BANK_VERSION;sc.crossOrigin='anonymous';
+   sc.onload=()=>{loaded++;finish();};
+   sc.onerror=()=>{loaded++;finish();};
+   document.head.appendChild(sc);
+  });
+  setTimeout(()=>{if(!settled){const bank=getBank(key);settled=true;if(bank)resolve(bank);else reject(new Error('Question bank timed out'));}},10000);
  });
 }
 function normalize(item){
@@ -139,7 +156,7 @@ async function load(){
  const keys=[slug(micro),slug(concept)];
  const files=[...new Set(keys.map(k=>k+'-question-bank.js'))];
  let bank=null;
- for(let i=0;i<files.length&&!bank;i++)for(let j=0;j<keys.length&&!bank;j++){try{bank=await loadScript(files[i],keys[j]);}catch(e){}}
+ for(let i=0;i<files.length&&!bank;i++){try{bank=await loadScript(files[i],keys[0]);}catch(e){}}
  if(!bank){$('question').textContent='Question bank unavailable';$('options').innerHTML='<p class="muted">This concept question bank could not be loaded. Please return to the Chemistry Path and try again.</p>';$('check').style.display='none';$('progressText').textContent='Not connected';return;}
  originalQuestions=bank.slice(0,30).map(normalize).filter(q=>q.q&&q.o.length>=2&&q.a>=0&&q.a<q.o.length);
  questions=originalQuestions.slice();

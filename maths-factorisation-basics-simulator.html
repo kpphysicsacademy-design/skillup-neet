@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f8ff"><meta name="skillup-release" content="20261120-factorisation-basics-smart-simulator-v1">
+<meta name="skillup-no-standard-menu" content="true">
+<meta name="description" content="Interactive factorisation simulator for common factors, difference of squares, perfect squares and quadratics.">
+<title>SkillUp Maths | Factorisation Smart Simulator</title>
+<style>
+:root{--ink:#24324b;--muted:#66758a;--blue:#286bd6;--line:#e4e8f2;--green:#21834b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fff8e9,#f3f7ff 50%,#effff5);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.nav{max-width:720px;margin:auto;padding:12px 15px;display:flex;justify-content:space-between;align-items:center}.nav a{color:var(--blue);font-weight:850;text-decoration:none}.nav b{font-size:14px}
+main{max-width:720px;margin:auto;padding:20px 14px 40px}.kicker{font-size:11px;letter-spacing:.12em;color:var(--green);font-weight:900}h1{font-size:clamp(28px,6vw,38px);line-height:1.13;margin:6px 0 8px}h2{font-size:20px;margin:0 0 8px}.intro,.sub{color:var(--muted)}.intro{margin:0 0 16px}.sub{font-size:14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px;margin:13px 0;box-shadow:0 5px 16px #20324d09}.hero{background:linear-gradient(130deg,#dff4ff,#eee8ff);border-color:#d5e5fa}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tab{border:1px solid #d8e3f2;border-radius:11px;background:#fff;padding:11px 8px;font-weight:800;color:var(--ink);cursor:pointer}.tab.active{background:#eaf4ff;border:2px solid #83b9ed;color:#175db0}
+.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}label{display:block;font-size:13px;font-weight:850;margin-bottom:5px}input{width:100%;min-height:46px;padding:10px 11px;border:2px solid var(--line);border-radius:10px;font:700 17px system-ui;color:var(--ink)}.hint{font-size:12px;color:var(--muted);margin-top:4px}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #9bd6f0;outline-offset:2px}
+.primary{width:100%;margin-top:13px;border:0;border-radius:11px;background:var(--blue);color:#fff;padding:13px;font-size:15px;font-weight:900;cursor:pointer}
+.result{background:linear-gradient(135deg,#effaf2,#eff7ff);border:1px solid #d6eadc;border-radius:13px;padding:14px;margin-top:13px}.result .expression{font-size:clamp(21px,5vw,28px);font-weight:950;color:#175d9b;overflow-wrap:anywhere;margin:5px 0}.result .factor{font-size:clamp(21px,5vw,28px);font-weight:950;color:var(--green);overflow-wrap:anywhere;margin:5px 0}.steps{display:grid;gap:7px;margin-top:10px}.step{padding:9px;background:#fff;border:1px solid #e3eafa;border-radius:9px;font-size:14px}.message{min-height:20px;color:#a43b32;font-size:13px;margin-top:8px}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:9px}.links a{display:block;text-align:center;background:#286bd6;color:#fff;text-decoration:none;font-weight:850;padding:12px;border-radius:11px;font-size:13px}.links a:last-child{background:#eaf4ff;color:#176da7;border:1px solid #c9e0f6}
+@media(max-width:500px){main{padding:16px 11px 30px}.panel{padding:13px}.fieldgrid{grid-template-columns:1fr 1fr}.links{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="nav"><a href="maths-factorisation-basics-quiz.html?v=20261120-factorisation-basics-quiz-v2&route=20261014-existing-quizzes-v1">← Back to Quiz</a><b>SkillUp Maths</b></div></header>
+<main><div class="kicker">MATHS · INTERACTIVE LAB</div><h1>Factorisation Smart Simulator</h1><p class="intro">Choose a pattern, enter your numbers and see how the expression is factorised.</p>
+<section class="panel hero"><div class="kicker">CHOOSE A FACTORISATION METHOD</div><div class="tabs" id="tabs"><button class="tab active" data-mode="common">Common factor</button><button class="tab" data-mode="difference">Difference of squares</button><button class="tab" data-mode="square">Perfect square</button><button class="tab" data-mode="quadratic">Quadratic</button></div></section>
+<section class="panel"><h2 id="modeTitle">Take out a common factor</h2><p class="sub" id="modeHelp">Enter the common factor and the two terms left inside the bracket.</p>
+<div id="fields" class="fieldgrid"></div><button class="primary" id="solve">Factorise expression ✨</button><div class="message" id="message" aria-live="polite"></div>
+<div class="result" id="result" hidden><div class="kicker">YOUR RESULT</div><div class="expression" id="expression"></div><div class="factor" id="factor"></div><div class="steps" id="steps"></div></div></section>
+<section class="panel"><h2>Remember</h2><p class="sub">A factorised answer should multiply back to the original expression. Always expand your answer to check it.</p><div class="links"><a href="maths-factorisation-basics-learn.html?v=20261120-factorisation-basics-learn-v1&route=20261014-existing-quizzes-v1">📘 Learn the basics</a><a href="maths-factorisation-basics-quiz.html?v=20261120-factorisation-basics-quiz-v2&route=20261014-existing-quizzes-v1">🎯 Take the 30-question Quiz</a></div></section>
+</main>
+<script>
+(()=>{
+const modes={
+common:{title:"Take out a common factor",help:"Enter the common factor and the two terms left inside the bracket.",fields:[["g","Common factor","2"],["a","First term inside bracket","3x"],["b","Second term inside bracket","4"]]},
+difference:{title:"Difference of two squares",help:"Enter a and b for a² − b² = (a − b)(a + b). Use positive numbers.",fields:[["a","Value of a","x"],["b","Value of b","5"]]},
+square:{title:"Perfect-square trinomial",help:"Choose plus or minus, then enter a and b for (a ± b)².",fields:[["a","Value of a","x"],["b","Value of b","3"],["sign","Middle sign: type + or −","+"]]},
+quadratic:{title:"Simple quadratic",help:"For x² + bx + c, find two integers whose sum is b and product is c.",fields:[["b","Coefficient b","5"],["c","Constant c","6"]]}
+};
+let mode="common";const $=id=>document.getElementById(id);
+function renderFields(){const m=modes[mode];$("modeTitle").textContent=m.title;$("modeHelp").textContent=m.help;$("fields").replaceChildren();m.fields.forEach(([id,label,value])=>{const wrap=document.createElement("div");const l=document.createElement("label");l.htmlFor="f_"+id;l.textContent=label;const input=document.createElement("input");input.id="f_"+id;input.value=value;input.autocomplete="off";input.spellcheck=false;wrap.append(l,input);$("fields").append(wrap);});$("result").hidden=true;$("message").textContent="";}
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-mode]");if(!b)return;mode=b.dataset.mode;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));renderFields();});
+function show(expr,factor,steps){$("result").hidden=false;$("expression").textContent=expr;$("factor").textContent="= "+factor;$("steps").replaceChildren();steps.forEach(t=>{const d=document.createElement("div");d.className="step";d.textContent=t;$("steps").append(d);});}
+function val(id){return $("f_"+id).value.trim();}
+function numeric(id){const n=Number(val(id));return Number.isFinite(n)?n:null;}
+$("solve").addEventListener("click",()=>{
+$("message").textContent="";
+if(mode==="common"){const g=val("g"),a=val("a"),b=val("b");if(!g||!a||!b){$("message").textContent="Fill in all three values.";return;}show(g+"("+a+") + "+g+"("+b+")",g+"("+a+" + "+b+")",["The common factor is "+g+".","Write it once outside the bracket.","Keep the remaining terms inside: "+a+" + "+b+"."]);}
+if(mode==="difference"){const a=val("a"),b=numeric("b");if(!a||b===null||b<=0){$("message").textContent="Enter a term for a and a positive number for b.";return;}show(a+"² − "+b+"²","("+a+" − "+b+")("+a+" + "+b+")",["Recognise a² − b² as a difference of squares.","Use (a − b)(a + b).","Multiply back: the middle terms cancel."]);}
+if(mode==="square"){const a=val("a"),b=numeric("b"),s=val("sign");if(!a||b===null||b<0||!["+","−","-"].includes(s)){$("message").textContent="Enter a term, a non-negative b and + or −.";return;}const sign=s==="+"?"+":"−",mid=s==="+"?"+":"−";show(a+"² "+(s==="+"?"+":"−")+" 2("+a+")("+b+") + "+b+"²","("+a+" "+sign+" "+b+")²",["First term is "+a+"² and last term is "+b+"².","Middle term is "+(s==="+"?"+":"−")+"2("+a+")("+b+").","This matches the square of a sum or difference identity."]);}
+if(mode==="quadratic"){const b=numeric("b"),c=numeric("c");if(b===null||c===null||!Number.isInteger(b)||!Number.isInteger(c)){$("message").textContent="Enter whole numbers for b and c.";return;}let pair=null;for(let i=-1000;i<=1000;i++){const j=b-i;if(i*j===c){pair=[i,j];break;}}if(!pair){$("result").hidden=true;$("message").textContent="No integer pair found between −1000 and 1000. Try another b and c.";return;}const [p,q]=pair;const fmt=n=>n<0?"("+n+")":String(n);const factor="(x "+(p<0?"− "+Math.abs(p):"+ "+p)+")(x "+(q<0?"− "+Math.abs(q):"+ "+q)+")";show("x² "+(b<0?"− "+Math.abs(b):"+ "+b)+"x "+(c<0?"− "+Math.abs(c):"+ "+c),factor,["Find two numbers that add to "+b+".","Check their product: "+p+" × "+q+" = "+c+".","Use the pair as the constants in the two brackets."]);}
+});
+renderFields();
+})();
+</script></body></html>

@@ -1,15 +1,148 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f9ff"><meta name="skillup-release" content="20261120-number-patterns-smart-simulator-v1"><title>Number Pattern Simulator | SkillUp Maths</title>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f9ff">
+<meta name="skillup-release" content="20261120-number-patterns-smart-lab-v2">
+<title>Number Pattern Lab | SkillUp Maths</title>
 <style>
-:root{--blue:#1686bd;--ink:#263746;--muted:#687987;--line:#dceaf1;--bg:#f3f8fc}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#eff8ff,#fbfdff 55%,#f2fbf4);color:var(--ink);font:15px system-ui,-apple-system,Segoe UI,sans-serif}.top{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:10px max(14px,calc((100% - 760px)/2));display:flex;gap:12px;align-items:center;z-index:2;box-shadow:0 4px 18px #18394b0b}.top a{color:var(--blue);text-decoration:none;font-weight:800}.brand{font-weight:900;flex:1}main{max-width:760px;margin:auto;padding:18px 14px 40px}h1{font-size:clamp(24px,5vw,32px);margin:5px 0;color:#173c55}h2{font-size:18px;margin:0 0 8px;color:#155d83}.muted{color:var(--muted);line-height:1.5}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 5px 18px #18394b08}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;font-weight:800;color:#526575}input,select{width:100%;padding:11px;border:1px solid #d5e1e8;border-radius:10px;font:inherit;margin-top:5px;background:#fff;color:var(--ink)}.presets{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.presets button,.action{border:1px solid #cde7f5;border-radius:10px;padding:10px 13px;background:#eaf7ff;color:#086b9b;font-weight:850;cursor:pointer}.action{background:#1686bd;color:white;width:100%;margin-top:10px;border:0}.sequence{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0}.term{display:grid;place-items:center;min-height:55px;border-radius:12px;background:#eaf7ff;border:1px solid #cde7f5;color:#075d86;font-size:18px;font-weight:900;overflow-wrap:anywhere}.term:nth-child(2n){background:#eff9e9;border-color:#dcefd2;color:#367b25}.term.next{background:#fff5df;border-color:#f4dfae;color:#8a5a00}.result{background:#eff8ff;border:1px solid #d6edf9;border-radius:12px;padding:13px}.result b{font-size:20px;color:#0875a8}.steps{line-height:1.7;color:#526575;background:#f7fafc;padding:12px;border-radius:11px}.links{display:flex;gap:10px;margin:14px 0}.links a{flex:1;text-align:center;text-decoration:none;background:#e5f5ff;padding:12px;border-radius:10px;color:#086b9b;font-weight:850}@media(max-width:560px){main{padding:15px 12px 32px}.card{padding:14px}.fields{grid-template-columns:1fr 1fr}.sequence{grid-template-columns:repeat(3,minmax(0,1fr))}.links{flex-direction:column}}
-</style></head><body><header class="top"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1">← Learn</a><div class="brand">SkillUp <span style="color:#58a900">Maths</span></div><span>🧮 Simulator</span></header><main>
-<p class="muted">CLASS 8 · INTERACTIVE PRACTICE</p><h1>Number Pattern Lab</h1><p class="muted">Choose a rule, change the values and watch the sequence update instantly.</p>
-<section class="card"><div class="fields"><label>Pattern type<select id="mode"><option value="add">Add a fixed number</option><option value="subtract">Subtract a fixed number</option><option value="multiply">Multiply each time</option><option value="divide">Divide each time</option><option value="square">Square numbers</option><option value="cube">Cube numbers</option><option value="fibonacci">Add previous two terms</option></select></label><label>Number of terms<select id="count"><option>5</option><option selected>6</option><option>7</option><option>8</option></select></label><label id="startWrap">Starting number<input id="start" type="number" value="3" step="1"></label><label id="stepWrap">Rule value<input id="step" type="number" value="4" step="1"></label></div><div class="presets"><button onclick="preset('add',3,4)">+4 pattern</button><button onclick="preset('multiply',2,2)">×2 pattern</button><button onclick="preset('square',1,1)">Squares</button><button onclick="preset('fibonacci',1,1)">Fibonacci</button></div><button class="action" id="generate">Generate pattern</button></section>
-<section class="card"><h2>Your sequence</h2><div class="sequence" id="sequence"></div><div class="result"><p class="muted">Next term</p><b id="next">—</b><p id="ruleText" class="muted"></p></div><p class="steps" id="working" aria-live="polite"></p></section>
-<section class="card"><h2>Try a challenge</h2><p class="muted">Set the pattern and predict its next term before pressing Generate.</p><button class="action" onclick="preset('subtract',30,3)">Challenge: count backwards by 3</button><button class="action" style="background:#48a94c" onclick="preset('multiply',5,3)">Challenge: multiply by 3</button></section>
-<div class="links"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1">📘 Learn</a><a href="maths-number-patterns-quiz.html?v=20261120-number-patterns-learn-simulator-v1&route=20261014-existing-quizzes-v1">✍️ Quiz</a></div>
-</main><script>
-const $=id=>document.getElementById(id);function preset(mode,start,step){$('mode').value=mode;$('start').value=start;$('step').value=step;draw()}
-function draw(){const mode=$('mode').value,n=Number($('count').value),start=Number($('start').value),step=Number($('step').value);$('startWrap').style.display=['square','cube','fibonacci'].includes(mode)?'none':'block';$('stepWrap').style.display=['square','cube','fibonacci'].includes(mode)?'none':'block';let a=[];if(mode==='square')a=Array.from({length:n+1},(_,i)=>(i+1)**2);else if(mode==='cube')a=Array.from({length:n+1},(_,i)=>(i+1)**3);else if(mode==='fibonacci'){a=[1,1];while(a.length<n+1)a.push(a[a.length-1]+a[a.length-2]);}else{if(!Number.isFinite(start)||!Number.isFinite(step))return;a=[start];for(let i=1;i<n;i++){const p=a[i-1];a.push(mode==='add'?p+step:mode==='subtract'?p-step:mode==='multiply'?p*step:p/step);}}const terms=a.slice(0,n),next=a[n];$('sequence').replaceChildren();terms.forEach((v,i)=>{const d=document.createElement('div');d.className='term';d.textContent=Number.isInteger(v)?v:Number(v.toFixed(4));$('sequence').append(d)});const d=document.createElement('div');d.className='term next';d.textContent=Number.isInteger(next)?next:Number(next.toFixed(4));d.title='Next term';$('sequence').append(d);$('next').textContent=Number.isInteger(next)?next:Number(next.toFixed(4));const labels={add:'Add '+step+' each time',subtract:'Subtract '+step+' each time',multiply:'Multiply by '+step+' each time',divide:'Divide by '+step+' each time',square:'Consecutive square numbers',cube:'Consecutive cube numbers',fibonacci:'Add the previous two terms'};$('ruleText').textContent=labels[mode];$('working').textContent='Working: '+terms.join(' → ')+' → '+(Number.isInteger(next)?next:Number(next.toFixed(4)))+'. '+labels[mode]+'.';}
-$('generate').addEventListener('click',draw);['mode','count','start','step'].forEach(id=>$(id).addEventListener('input',draw));draw();
-</script></body></html>
+:root{--ink:#203449;--muted:#6b7c8d;--blue:#167bb5;--blue2:#eaf6ff;--green:#368b45;--greenbg:#eff9ee;--gold:#9a6800;--goldbg:#fff7e5;--line:#dce8f0;--paper:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:linear-gradient(145deg,#eef7ff 0%,#f8fbff 48%,#f0faf1 100%);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:9px max(14px,calc((100% - 820px)/2));background:#ffffffed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.top a{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--blue);text-decoration:none;font-size:19px;font-weight:900}
+.brand{flex:1;font-weight:900;letter-spacing:-.2px}.brand span{color:#58a900}.top small{color:var(--muted);font-weight:750}
+main{max-width:820px;margin:auto;padding:20px 14px 42px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;background:#e2f2ff;color:#116b9c;font-size:11px;font-weight:900;letter-spacing:.6px}
+h1{font-size:clamp(27px,5vw,36px);line-height:1.12;letter-spacing:-.8px;margin:12px 0 7px;color:#173c55}
+.intro{margin:0;color:var(--muted);max-width:620px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:19px;padding:17px;margin:15px 0;box-shadow:0 8px 24px #17394d09}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+.panel h2{font-size:17px;margin:0;color:#174f72}
+.step-tag{font-size:10px;font-weight:900;color:#698094;background:#f2f6f9;border-radius:99px;padding:5px 8px}
+.mode-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mode{border:1px solid var(--line);background:#fbfdff;border-radius:12px;padding:10px 7px;text-align:center;color:#40566a;font:750 12px system-ui;cursor:pointer;min-height:67px}
+.mode .ico{display:block;font-size:20px;margin-bottom:3px}
+.mode.active{border-color:#78bde0;background:#eaf7ff;color:#075d86;box-shadow:inset 0 0 0 1px #b5def1}
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+label{display:block;font-size:12px;font-weight:850;color:#526879}
+input,select{display:block;width:100%;margin-top:5px;padding:11px 10px;border:1px solid #d6e3eb;border-radius:11px;background:#fff;color:var(--ink);font:700 15px system-ui;outline:none}
+input:focus,select:focus{border-color:#65b3dc;box-shadow:0 0 0 3px #dff2ff}
+.helper{font-size:11px;color:var(--muted);margin:6px 0 0}
+.preset-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.preset{border:1px solid #d3e8f4;border-radius:99px;padding:7px 11px;background:#f2f9ff;color:#17658f;font-size:11px;font-weight:850;cursor:pointer}
+.primary{width:100%;margin-top:14px;padding:12px;border:0;border-radius:12px;background:linear-gradient(100deg,#1686bd,#12699d);color:white;font:850 14px system-ui;cursor:pointer;box-shadow:0 5px 14px #1686bd25}
+.output-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.live{color:#368b45;font-size:11px;font-weight:900}
+.sequence{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}
+.term{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:76px;border:1px solid #d6eafa;border-radius:14px;background:linear-gradient(145deg,#f1f9ff,#e8f5ff);color:#075d86;font-size:22px;font-weight:950;overflow:hidden}
+.term:nth-child(2n){background:linear-gradient(145deg,#f4fbf0,#eaf7e5);border-color:#dcefd2;color:#367b25}
+.term small{font-size:10px;font-weight:800;color:#72879a}
+.term.next{background:linear-gradient(145deg,#fff9eb,#fff1cf);border-color:#f1dfb4;color:#946300}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.result-tile{padding:12px;border-radius:13px;background:#f3f9fd;border:1px solid #e0edf4}
+.result-tile small{display:block;color:var(--muted);font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.5px}
+.result-tile strong{display:block;margin-top:3px;font-size:20px;color:#155d83;overflow-wrap:anywhere}
+.explain{margin-top:11px;padding:12px;border-radius:13px;background:#f5f9fc;color:#40566a;font-size:13px;line-height:1.65}
+.explain b{color:#174f72}
+.challenge{background:linear-gradient(135deg,#fff9eb,#fff);border-color:#f1e5c8}
+.challenge p{color:var(--muted);margin:5px 0 12px;font-size:13px}
+.challenge-actions{display:flex;gap:8px;flex-wrap:wrap}
+.challenge-actions button{flex:1;min-width:135px;border:1px solid #ead9b3;border-radius:11px;background:#fff7e5;color:#8b6109;padding:10px;font-weight:850;font-size:12px;cursor:pointer}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.links a{text-align:center;text-decoration:none;padding:12px;border:1px solid #cfe5f2;border-radius:12px;background:#eef8ff;color:#12638e;font-weight:850;font-size:13px}
+.links a:last-child{background:#eff9ee;border-color:#d6ebd1;color:#367b25}
+.notice{font-size:11px;color:#a05b16;margin-top:8px;min-height:16px}
+@media(max-width:560px){main{padding:15px 11px 32px}.panel{padding:14px;border-radius:16px}.mode-grid{grid-template-columns:repeat(2,1fr)}.fields{grid-template-columns:1fr 1fr}.sequence{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.term{min-height:67px;font-size:19px}.links{grid-template-columns:1fr}.result-grid{gap:7px}.result-tile strong{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1" aria-label="Back to Learn">←</a><div class="brand">SkillUp <span>Maths</span></div><small>🧮 Interactive Lab</small></header>
+<main>
+<div class="eyebrow">CLASS 8 · NUMBER SENSE</div>
+<h1>Number Pattern Lab</h1>
+<p class="intro">Build a sequence, discover its rule and predict the next number. Change the values and see every step update.</p>
+<section class="panel">
+<div class="panel-head"><h2>① Choose a pattern</h2><span class="step-tag">PATTERN RULE</span></div>
+<div class="mode-grid" id="modeGrid">
+<button class="mode active" data-mode="add"><span class="ico">➕</span>Add</button>
+<button class="mode" data-mode="subtract"><span class="ico">➖</span>Subtract</button>
+<button class="mode" data-mode="multiply"><span class="ico">✖️</span>Multiply</button>
+<button class="mode" data-mode="divide"><span class="ico">➗</span>Divide</button>
+<button class="mode" data-mode="square"><span class="ico">🔲</span>Squares</button>
+<button class="mode" data-mode="cube"><span class="ico">🧊</span>Cubes</button>
+<button class="mode" data-mode="fibonacci"><span class="ico">🔁</span>Fibonacci</button>
+</div>
+</section>
+<section class="panel">
+<div class="panel-head"><h2>② Set your numbers</h2><span class="step-tag">CUSTOMISE</span></div>
+<div class="fields">
+<label id="startLabel">Starting number<input id="start" type="number" value="3" step="1"></label>
+<label id="stepLabel">Change each time<input id="step" type="number" value="4" step="1"></label>
+<label>Sequence length<select id="count"><option value="4">4 terms</option><option value="5">5 terms</option><option value="6" selected>6 terms</option><option value="7">7 terms</option><option value="8">8 terms</option></select></label>
+</div>
+<p class="helper" id="fieldHint">Choose the first number and how much to add each time.</p>
+<div class="preset-row">
+<button class="preset" data-preset="add">Start +4</button><button class="preset" data-preset="multiply">Double it</button><button class="preset" data-preset="square">Square numbers</button><button class="preset" data-preset="fibonacci">Fibonacci</button>
+</div>
+<button class="primary" id="generate">Generate my pattern →</button>
+<p class="notice" id="notice" role="status"></p>
+</section>
+<section class="panel">
+<div class="output-top"><h2>③ Your number sequence</h2><span class="live">● LIVE RESULT</span></div>
+<div class="sequence" id="sequence" aria-live="polite"></div>
+<div class="result-grid">
+<div class="result-tile"><small>Next term</small><strong id="next">19</strong></div>
+<div class="result-tile"><small>Pattern rule</small><strong id="rule" style="font-size:15px">Add 4</strong></div>
+</div>
+<div class="explain" id="working"><b>How it works:</b> Start at 3 and add 4 each time.</div>
+</section>
+<section class="panel challenge">
+<div class="panel-head"><h2>⭐ Quick challenges</h2><span class="step-tag">TRY IT</span></div>
+<p>Tap a challenge to load a new pattern. Predict the next term before checking the generated sequence.</p>
+<div class="challenge-actions">
+<button data-challenge="back">Count backwards by 3</button>
+<button data-challenge="triple">Multiply by 3</button>
+<button data-challenge="fibo">Fibonacci sequence</button>
+</div>
+</section>
+<div class="links"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1">📘 Review Learn</a><a href="maths-number-patterns-quiz.html?v=20261120-number-patterns-learn-simulator-v1&route=20261014-existing-quizzes-v1">✍️ Practise Quiz</a></div>
+</main>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let mode='add';
+const labels={add:'Add',subtract:'Subtract',multiply:'Multiply by',divide:'Divide by',square:'Square numbers',cube:'Cube numbers',fibonacci:'Add previous two'};
+const hints={add:'Choose the first number and how much to add each time.',subtract:'Choose the first number and how much to subtract each time.',multiply:'Choose the first number and the multiplier.',divide:'Choose the first number and a divisor other than zero.',square:'The simulator creates 1², 2², 3² and so on.',cube:'The simulator creates 1³, 2³, 3³ and so on.',fibonacci:'Each new term is the sum of the two terms before it.'};
+function setMode(next){mode=next;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));const special=['square','cube','fibonacci'].includes(mode);$('startLabel').style.display=special?'none':'block';$('stepLabel').style.display=special?'none':'block';$('fieldHint').textContent=hints[mode];draw();}
+function fmt(n){if(!Number.isFinite(n))return '—';return Number.isInteger(n)?String(n):String(Number(n.toFixed(4)));}
+function draw(){const count=Number($('count').value),start=Number($('start').value),step=Number($('step').value);let all=[];
+$('notice').textContent='';
+if(mode==='divide'&&step===0){$('notice').textContent='Choose a divisor other than zero.';return;}
+if(!['square','cube','fibonacci'].includes(mode)&&(!Number.isFinite(start)||!Number.isFinite(step))){$('notice').textContent='Enter valid numbers to build your pattern.';return;}
+if(mode==='square')all=Array.from({length:count+1},(_,i)=>(i+1)**2);
+else if(mode==='cube')all=Array.from({length:count+1},(_,i)=>(i+1)**3);
+else if(mode==='fibonacci'){all=[1,1];while(all.length<count+1)all.push(all.at(-1)+all.at(-2));}
+else{all=[start];for(let i=1;i<count+1;i++){const prev=all[i-1];all.push(mode==='add'?prev+step:mode==='subtract'?prev-step:mode==='multiply'?prev*step:prev/step);}}
+if(all.some(v=>!Number.isFinite(v))){$('notice').textContent='These values grow too large to display. Try smaller numbers.';return;}
+const shown=all.slice(0,count),next=all[count];$('sequence').replaceChildren();
+shown.forEach((v,i)=>{const el=document.createElement('div');el.className='term';const value=document.createElement('span');value.textContent=fmt(v);const sub=document.createElement('small');sub.textContent='TERM '+(i+1);el.append(value,sub);$('sequence').append(el);});
+const last=document.createElement('div');last.className='term next';const nv=document.createElement('span');nv.textContent=fmt(next);const ns=document.createElement('small');ns.textContent='NEXT';last.append(nv,ns);$('sequence').append(last);
+$('next').textContent=fmt(next);$('rule').textContent=labels[mode]+(['add','subtract','multiply','divide'].includes(mode)?' '+fmt(step):'');
+const steps=shown.map((v,i)=>i===0?'Start: '+fmt(v):fmt(v)).join(' → ')+' → '+fmt(next);
+let explanation='';
+if(mode==='add')explanation='Start with '+fmt(start)+'. Add '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' + '+fmt(step)+' = '+fmt(next)+'.';
+else if(mode==='subtract')explanation='Start with '+fmt(start)+'. Subtract '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' − '+fmt(step)+' = '+fmt(next)+'.';
+else if(mode==='multiply')explanation='Start with '+fmt(start)+'. Multiply by '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' × '+fmt(step)+' = '+fmt(next)+'.';
+else if(mode==='divide')explanation='Start with '+fmt(start)+'. Divide by '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' ÷ '+fmt(step)+' = '+fmt(next)+'.';
+else if(mode==='square')explanation='These are square numbers: 1², 2², 3², … The next is '+(count+1)+'² = '+fmt(next)+'.';
+else if(mode==='cube')explanation='These are cube numbers: 1³, 2³, 3³, … The next is '+(count+1)+'³ = '+fmt(next)+'.';
+else explanation='Add the last two terms: '+fmt(shown.at(-2))+' + '+fmt(shown.at(-1))+' = '+fmt(next)+'.';
+$('working').innerHTML='<b>How it works:</b> '+explanation+'<br><span style="color:#71808d;font-size:11px">Sequence: '+steps+'</span>';
+}
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.preset;if(p==='add'){$('start').value=3;$('step').value=4;setMode('add');}if(p==='multiply'){$('start').value=2;$('step').value=2;setMode('multiply');}if(p==='square')setMode('square');if(p==='fibonacci')setMode('fibonacci');}));
+document.querySelectorAll('[data-challenge]').forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.challenge;if(c==='back'){$('start').value=30;$('step').value=3;setMode('subtract');}if(c==='triple'){$('start').value=5;$('step').value=3;setMode('multiply');}if(c==='fibo')setMode('fibonacci');$('generate').scrollIntoView({behavior:'smooth',block:'center'});}));
+$('generate').addEventListener('click',draw);['start','step','count'].forEach(id=>$(id).addEventListener('input',draw));setMode('add');
+})();
+</script>
+</body></html>

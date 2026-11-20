@@ -59,10 +59,10 @@ input:focus,select:focus{border-color:#65b3dc;box-shadow:0 0 0 3px #dff2ff}
 <header class="top"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1" aria-label="Back to Learn">←</a><div class="brand">SkillUp <span>Maths</span></div><small>🧮 Interactive Lab</small></header>
 <main>
 <div class="eyebrow">CLASS 8 · NUMBER SENSE</div>
-<h1>Number Pattern Lab</h1>
-<p class="intro">Build a sequence, discover its rule and predict the next number. Change the values and see every step update.</p>
+<h1>Find the Number Pattern</h1>
+<p class="intro">A number pattern is a list of numbers that follows a rule. Choose a rule below, then see how the numbers change and what comes next.</p>
 <section class="panel">
-<div class="panel-head"><h2>① Choose a pattern</h2><span class="step-tag">PATTERN RULE</span></div>
+<div class="panel-head"><h2>① How should the numbers change?</h2><span class="step-tag">CHOOSE ONE</span></div>
 <div class="mode-grid" id="modeGrid">
 <button class="mode active" data-mode="add"><span class="ico">➕</span>Add</button>
 <button class="mode" data-mode="subtract"><span class="ico">➖</span>Subtract</button>
@@ -74,35 +74,35 @@ input:focus,select:focus{border-color:#65b3dc;box-shadow:0 0 0 3px #dff2ff}
 </div>
 </section>
 <section class="panel">
-<div class="panel-head"><h2>② Set your numbers</h2><span class="step-tag">CUSTOMISE</span></div>
+<div class="panel-head"><h2>② Choose your numbers</h2><span class="step-tag">YOUR VALUES</span></div>
 <div class="fields">
 <label id="startLabel">Starting number<input id="start" type="number" value="3" step="1"></label>
 <label id="stepLabel">Change each time<input id="step" type="number" value="4" step="1"></label>
 <label>Sequence length<select id="count"><option value="4">4 terms</option><option value="5">5 terms</option><option value="6" selected>6 terms</option><option value="7">7 terms</option><option value="8">8 terms</option></select></label>
 </div>
-<p class="helper" id="fieldHint">Choose the first number and how much to add each time.</p>
+<p class="helper" id="fieldHint">First choose a starting number and how much to add each time.</p>
 <div class="preset-row">
 <button class="preset" data-preset="add">Start +4</button><button class="preset" data-preset="multiply">Double it</button><button class="preset" data-preset="square">Square numbers</button><button class="preset" data-preset="fibonacci">Fibonacci</button>
 </div>
-<button class="primary" id="generate">Generate my pattern →</button>
+<button class="primary" id="generate">Show my number pattern →</button>
 <p class="notice" id="notice" role="status"></p>
 </section>
 <section class="panel">
-<div class="output-top"><h2>③ Your number sequence</h2><span class="live">● LIVE RESULT</span></div>
+<div class="output-top"><h2>③ See your number pattern</h2><span class="live">● LIVE RESULT</span></div>
 <div class="sequence" id="sequence" aria-live="polite"></div>
 <div class="result-grid">
-<div class="result-tile"><small>Next term</small><strong id="next">19</strong></div>
-<div class="result-tile"><small>Pattern rule</small><strong id="rule" style="font-size:15px">Add 4</strong></div>
+<div class="result-tile"><small>Next number</small><strong id="next">19</strong></div>
+<div class="result-tile"><small>Rule used</small><strong id="rule" style="font-size:15px">Add 4</strong></div>
 </div>
-<div class="explain" id="working"><b>How it works:</b> Start at 3 and add 4 each time.</div>
+<div class="explain" id="working"><b>Why these numbers?</b> Start at 3 and add 4 each time.</div>
 </section>
 <section class="panel challenge">
-<div class="panel-head"><h2>⭐ Quick challenges</h2><span class="step-tag">TRY IT</span></div>
-<p>Tap a challenge to load a new pattern. Predict the next term before checking the generated sequence.</p>
+<div class="panel-head"><h2>⭐ Try these examples</h2><span class="step-tag">PRACTISE</span></div>
+<p>Choose an example. Look at the numbers and try to guess the next one.</p>
 <div class="challenge-actions">
-<button data-challenge="back">Count backwards by 3</button>
-<button data-challenge="triple">Multiply by 3</button>
-<button data-challenge="fibo">Fibonacci sequence</button>
+<button data-challenge="back">Start at 30, subtract 3</button>
+<button data-challenge="triple">Start at 5, multiply by 3</button>
+<button data-challenge="fibo">Add the last two numbers</button>
 </div>
 </section>
 <div class="links"><a href="maths-number-patterns-learn.html?v=20261120-number-patterns-simple-learn-v1">📘 Review Learn</a><a href="maths-number-patterns-quiz.html?v=20261120-number-patterns-learn-simulator-v1&route=20261014-existing-quizzes-v1">✍️ Practise Quiz</a></div>
@@ -125,10 +125,10 @@ else if(mode==='fibonacci'){all=[1,1];while(all.length<count+1)all.push(all.at(-
 else{all=[start];for(let i=1;i<count+1;i++){const prev=all[i-1];all.push(mode==='add'?prev+step:mode==='subtract'?prev-step:mode==='multiply'?prev*step:prev/step);}}
 if(all.some(v=>!Number.isFinite(v))){$('notice').textContent='These values grow too large to display. Try smaller numbers.';return;}
 const shown=all.slice(0,count),next=all[count];$('sequence').replaceChildren();
-shown.forEach((v,i)=>{const el=document.createElement('div');el.className='term';const value=document.createElement('span');value.textContent=fmt(v);const sub=document.createElement('small');sub.textContent='TERM '+(i+1);el.append(value,sub);$('sequence').append(el);});
+shown.forEach((v,i)=>{const el=document.createElement('div');el.className='term';const value=document.createElement('span');value.textContent=fmt(v);const sub=document.createElement('small');sub.textContent='NUMBER '+(i+1);el.append(value,sub);$('sequence').append(el);});
 const last=document.createElement('div');last.className='term next';const nv=document.createElement('span');nv.textContent=fmt(next);const ns=document.createElement('small');ns.textContent='NEXT';last.append(nv,ns);$('sequence').append(last);
 $('next').textContent=fmt(next);$('rule').textContent=labels[mode]+(['add','subtract','multiply','divide'].includes(mode)?' '+fmt(step):'');
-const steps=shown.map((v,i)=>i===0?'Start: '+fmt(v):fmt(v)).join(' → ')+' → '+fmt(next);
+const steps=shown.map((v,i)=>i===0?'First number: '+fmt(v):fmt(v)).join(' → ')+' → '+fmt(next);
 let explanation='';
 if(mode==='add')explanation='Start with '+fmt(start)+'. Add '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' + '+fmt(step)+' = '+fmt(next)+'.';
 else if(mode==='subtract')explanation='Start with '+fmt(start)+'. Subtract '+fmt(step)+' each time. The next term is '+fmt(shown.at(-1))+' − '+fmt(step)+' = '+fmt(next)+'.';
@@ -137,7 +137,7 @@ else if(mode==='divide')explanation='Start with '+fmt(start)+'. Divide by '+fmt(
 else if(mode==='square')explanation='These are square numbers: 1², 2², 3², … The next is '+(count+1)+'² = '+fmt(next)+'.';
 else if(mode==='cube')explanation='These are cube numbers: 1³, 2³, 3³, … The next is '+(count+1)+'³ = '+fmt(next)+'.';
 else explanation='Add the last two terms: '+fmt(shown.at(-2))+' + '+fmt(shown.at(-1))+' = '+fmt(next)+'.';
-$('working').innerHTML='<b>How it works:</b> '+explanation+'<br><span style="color:#71808d;font-size:11px">Sequence: '+steps+'</span>';
+$('working').innerHTML='<b>Why these numbers?</b> '+explanation+'<br><span style="color:#71808d;font-size:11px">Sequence: '+steps+'</span>';
 }
 document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.preset;if(p==='add'){$('start').value=3;$('step').value=4;setMode('add');}if(p==='multiply'){$('start').value=2;$('step').value=2;setMode('multiply');}if(p==='square')setMode('square');if(p==='fibonacci')setMode('fibonacci');}));

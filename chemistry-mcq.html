@@ -39,7 +39,7 @@ h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}
 .score{text-align:center;font-size:44px;font-weight:950;color:var(--n)}
 .warn{color:#8a5b00;background:#fff7df;border:1px solid #efdca3;border-radius:12px;padding:11px;font-size:11px;margin-top:10px}
 
-.concept-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}.concept-actions a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;border:1px solid #b9dced;border-radius:12px;background:#eaf7ff;color:#116b96;text-decoration:none;font-size:13px;font-weight:900}@media(max-width:520px){.wrap{padding:12px 10px 36px}.hero,.q,.result,.status{padding:14px;border-radius:15px}.q h2{font-size:17px;line-height:1.45}.opt{padding:10px;font-size:13px}}
+.concept-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:13px}.concept-actions a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;border:1px solid #b9dced;border-radius:13px;background:linear-gradient(135deg,#eaf7ff,#f0edff);color:#116b96;text-decoration:none;font-size:12px;font-weight:900}.hero{background:linear-gradient(135deg,#fff 0%,#edf7ff 58%,#f2efff 100%)}.q{box-shadow:0 8px 24px #17324d0c}.qnum{display:inline-flex;background:#eaf3ff;color:#2365a4;border-radius:99px;padding:6px 10px}.opt{display:flex;align-items:flex-start;gap:10px;line-height:1.45;transition:border-color .15s,background .15s}.opt:before{content:attr(data-letter);flex:0 0 25px;height:25px;display:grid;place-items:center;border-radius:8px;background:#edf4fc;color:#315b86;font-size:11px;font-weight:950}.opt.correct:before{background:#d9f7c5;color:#286900}.opt.wrong:before{background:#ffd9d9;color:#a11}.feedback{font-size:13px}.result{background:linear-gradient(145deg,#fff,#eff7ff)}.score{font-variant-numeric:tabular-nums}.review-item{padding:12px;border:1px solid var(--l);border-radius:12px;margin-top:9px;font-size:12px;line-height:1.5}.review-item b{color:var(--n)}@media(max-width:520px){.wrap{padding:12px 10px 36px}.hero,.q,.result,.status{padding:14px;border-radius:15px}.q h2{font-size:17px;line-height:1.45}.opt{padding:10px;font-size:13px}}
 </style>
 <style>.skillup-reaction{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9}.skillup-equation{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 4px;text-align:center;line-height:1.9;font-size:1.08em}.skillup-inline-equation{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}.skillup-chem-inline{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}.skillup-chem-image{display:block;max-width:100%;height:auto;max-height:150px;margin:6px auto;object-fit:contain}mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}</style><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"],["$$","$$"]],packages:{"[+]":["mhchem"]}},loader:{load:["[tex]/mhchem"]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script></head><body>
 <header class="top"><div class="nav">
@@ -50,7 +50,7 @@ h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}
 <section class="hero">
 <h1 id="title">Chemistry Quiz</h1>
 <div class="muted" id="subtitle">Loading concept question bank…</div>
-<div class="concept-actions"><a id="learnLink" href="chemistry-matter-and-its-nature-learn.html">📘 Learn / Cheat Sheet</a></div>
+<div class="concept-actions"><a id="learnLink" href="chemistry-matter-and-its-nature-learn.html">📘 Learn / Cheat Sheet</a><a href="chemistry-home.html">🧪 Chemistry Path</a></div>
 <div class="meta"><span class="pill" id="bankCount">Loading…</span><span class="pill">🧠 Concept Quiz</span><span class="pill">📘 Practice</span></div>
 <div class="progress"><i id="bar"></i></div>
 </section>
@@ -69,9 +69,9 @@ var subtitle=document.getElementById('subtitle');
 var bankCount=document.getElementById('bankCount');
 var content=document.getElementById('content');
 var bar=document.getElementById('bar');
-var items=[],i=0,score=0;
+var items=[],i=0,score=0,wrongAnswers=[];
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-var BANK_VERSION='20260929-chemistry-loader-v15';
+var BANK_VERSION='20261120-matter-nature-quiz-smart-v1';
 
 function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function richText(v){
@@ -207,14 +207,14 @@ function showStatus(msg){
 function typeset(){if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([content]).catch(function(){});}
 function render(){
  if(i>=items.length){
-  bar.style.width='100%';
-  content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';
-  document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};
-  return;
+  bar.style.width='100%';var pct=Math.round(score/items.length*100);
+  content.innerHTML='<section class="result"><div style="font-size:48px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+pct+'% accuracy</b><br>'+(pct>=85?'Excellent work!':pct>=60?'Good effort — revise the missed concepts.':'Keep practising — review the explanations and try again.')+'</p><div class="meta" style="justify-content:center"><span class="pill">✅ '+score+' correct</span><span class="pill">↻ '+wrongAnswers.length+' to revise</span></div><div id="review"></div><button class="next show" id="retry">🔄 Try Again</button></section>';
+  document.getElementById('review').innerHTML=wrongAnswers.length?'<h3 style="color:var(--n);font-size:15px;margin:18px 0 8px">Quick revision</h3>'+wrongAnswers.map(function(w){return '<div class="review-item"><b>'+esc(w.q)+'</b><div>Correct answer: '+esc(w.answer)+'</div><div class="muted">'+esc(w.explanation)+'</div></div>';}).join(''):'<p class="muted" style="text-align:center">Perfect run — all answers correct!</p>';
+  document.getElementById('retry').onclick=function(){i=0;score=0;wrongAnswers=[];render();scrollTo({top:0,behavior:'smooth'});};return;
  }
  var x=items[i],opts=x.o||[],ans=typeof x.a==='number'?x.a:opts.indexOf(x.a);
  bar.style.width=(i/items.length*100)+'%';
- content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+richText(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+richText(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
+ content.innerHTML='<section class="q"><div class="qnum">QUESTION '+(i+1)+' / '+items.length+'</div><h2>'+richText(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'" data-letter="'+String.fromCharCode(65+j)+'">'+richText(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Next question →</button></section>';
  document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,ans,x);};});
  typeset();
  document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
@@ -227,11 +227,11 @@ function answer(choice,ans,x){
  if(choice===ans){
   score++;
   f.className='feedback show ok';
-  f.innerHTML='<b>Correct!</b><div>'+esc(explanation)+'</div>';
+  f.innerHTML='<b>✅ Correct</b><div>'+esc(explanation||'Your answer matches the correct option.')+'</div>';
  }else{
   if(bs[choice])bs[choice].classList.add('wrong');
   f.className='feedback show no';
-  f.innerHTML='<b>Not quite.</b> Correct answer: '+esc((x.o||[])[ans]||x.a)+'<div>'+esc(explanation)+'</div>';
+  wrongAnswers.push({q:x.q,answer:(x.o||[])[ans]||x.a,explanation:explanation});f.innerHTML='<b>💡 Review this one</b><div>Correct answer: <strong>'+esc((x.o||[])[ans]||x.a)+'</strong></div><div>'+esc(explanation)+'</div>';
  }
  document.getElementById('next').classList.add('show');
  bar.style.width=((i+1)/items.length*100)+'%';

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f9ff"><meta name="skillup-release" content="20261121-real-line-single-simulator-v1"><meta name="skillup-no-standard-menu" content="true">
+<meta name="description" content="Interactive real number line: move a point and see its exact position and comparison.">
+<title>Real Number Line Simulator | SkillUp Maths</title>
+<style>
+:root{--ink:#203449;--muted:#687b8d;--line:#e5edf3;--blue:#167db5;--bg:#f5f9ff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.nav,main{max-width:680px;margin:auto}.nav{padding:11px 15px;display:flex;justify-content:space-between}.nav a{color:var(--blue);text-decoration:none;font-weight:850}
+main{padding:20px 14px 32px}h1{font-size:clamp(24px,5vw,32px);margin:4px 0 5px}.sub,.hint{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 5px 18px #24445c08}
+label{display:block;font-size:13px;font-weight:850;margin:12px 0 6px}input[type=number]{width:100%;min-height:46px;padding:10px 12px;border:1px solid #cbd9e4;border-radius:10px;font:700 17px system-ui;color:var(--ink)}
+input[type=range]{width:100%;accent-color:#167db5;margin:15px 0}
+svg{display:block;width:100%;height:auto;margin-top:15px;background:#f8fbff;border:1px solid #e1ebf4;border-radius:12px}
+.result{padding:13px;border-radius:11px;background:#eff8ff;border:1px solid #d3e8f5;margin-top:12px;font-size:14px;line-height:1.55}
+.samples{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.samples button{border:0;border-radius:9px;padding:8px 11px;background:#eaf5ff;color:#176b9b;font-weight:850}
+.links{display:flex;gap:9px;margin-top:14px}.links a{flex:1;text-align:center;text-decoration:none;padding:12px;border-radius:10px;background:var(--blue);color:#fff;font-weight:850}.links a:last-child{background:#e8f4fc;color:#176b9b;border:1px solid #c8e2f1}
+@media(max-width:480px){main{padding:15px 11px 26px}.card{padding:13px}.links{flex-direction:column}}
+</style></head><body>
+<header><div class="nav"><a href="maths-real-number-line-quiz.html?v=20261121-real-line-quiz-learn-sim-v2">← Quiz</a><b>SkillUp Maths</b></div></header>
+<main><h1>📏 Real Number Line</h1><p class="sub">Move the point to explore a real number's position.</p>
+<section class="card">
+<label for="value">Choose a value (−10 to 10)</label><input id="value" type="number" min="-10" max="10" step="0.1" value="2.5">
+<input id="slider" type="range" min="-10" max="10" step="0.1" value="2.5" aria-label="Move point on number line">
+<div class="samples"><button data-v="-5">−5</button><button data-v="-1">−1</button><button data-v="0">0</button><button data-v="0.5">1/2</button><button data-v="1.414">√2 ≈ 1.414</button><button data-v="3.14">π ≈ 3.14</button></div>
+<svg viewBox="0 0 640 160" role="img" aria-label="Interactive number line from minus ten to ten showing the selected point">
+<line x1="28" y1="82" x2="612" y2="82" stroke="#59758b" stroke-width="3"/>
+<path d="M28 82 l12 -7 v14 z M612 82 l-12 -7 v14 z" fill="#59758b"/>
+<g id="ticks"></g><line id="markerLine" x1="0" y1="38" x2="0" y2="82" stroke="#e08a25" stroke-width="2" stroke-dasharray="4 3"/><circle id="marker" cx="0" cy="82" r="8" fill="#167db5" stroke="#fff" stroke-width="3"/><text id="markerLabel" x="0" y="27" text-anchor="middle" font-size="15" font-weight="800" fill="#167db5">2.5</text>
+</svg>
+<div class="result" id="result" aria-live="polite"></div>
+<p class="hint">Scale: each small division represents 1 unit. The point updates as you type or slide.</p>
+</section>
+<div class="links"><a href="maths-real-number-line-learn.html?v=20261121-real-line-learn-v1">📘 Quick Learn</a><a href="maths-real-number-line-quiz.html?v=20261121-real-line-quiz-learn-sim-v2">Take Quiz →</a></div>
+</main>
+<script>
+(()=>{const $=id=>document.getElementById(id),left=28,right=612,x=v=>left+(v+10)/20*(right-left);
+const ticks=$('ticks');for(let n=-10;n<=10;n++){const xx=x(n),line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',xx);line.setAttribute('x2',xx);line.setAttribute('y1',n===0?68:74);line.setAttribute('y2',n===0?96:90);line.setAttribute('stroke',n===0?'#203449':'#91a5b5');line.setAttribute('stroke-width',n===0?2.5:1.3);ticks.appendChild(line);if(n%2===0){const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',xx);t.setAttribute('y',112);t.setAttribute('text-anchor','middle');t.setAttribute('font-size','12');t.setAttribute('fill','#61778a');t.textContent=n;ticks.appendChild(t);}}
+function update(v){v=Math.max(-10,Math.min(10,Number(v)));if(!Number.isFinite(v))v=0;$('value').value=v;$('slider').value=v;const xx=x(v),display=Number(v.toFixed(3)).toString();$('marker').setAttribute('cx',xx);$('markerLine').setAttribute('x1',xx);$('markerLine').setAttribute('x2',xx);$('markerLabel').setAttribute('x',xx);$('markerLabel').textContent=display;$('result').textContent=display+(v<0?' is left of zero.':v>0?' is right of zero.':' is the origin.')+' Its distance from zero is '+Math.abs(v).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+' units.';}
+$('value').addEventListener('input',e=>{if(e.target.value!=='')update(e.target.value)});$('slider').addEventListener('input',e=>update(e.target.value));document.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>update(b.dataset.v)));update(2.5);
+})();
+</script></body></html>

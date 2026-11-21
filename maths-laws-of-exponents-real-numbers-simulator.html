@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f9ff"><meta name="skillup-no-standard-menu" content="true"><meta name="skillup-release" content="20261121-exponents-explorer-v1">
+<meta name="description" content="Interactive exponent law explorer for Class 9 Maths."><title>Exponent Explorer | SkillUp</title>
+<style>
+:root{--ink:#1e315f;--muted:#66758b;--line:#dce7f0;--blue:#1685bd;--bg:#f1f7ff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:700px;margin:auto;padding:12px 16px;display:flex;align-items:center;gap:12px}.back{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;color:var(--blue);text-decoration:none;font-size:20px}.brand{font-weight:900;font-size:18px}.brand span{color:#3686df}main{max-width:660px;margin:auto;padding:22px 16px 36px}.eyebrow{color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}h1{font-size:clamp(26px,6vw,34px);margin:5px 0}.sub{color:var(--muted);line-height:1.5;margin:0 0 18px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 18px #1d47700a}.label{display:block;font-size:13px;font-weight:850;margin:13px 0 7px}select,input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:#fbfdff;color:var(--ink);font:700 15px system-ui} .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.examples{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.examples button{border:1px solid #c9e4f2;background:#edf7ff;color:#176a9a;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.formula{margin-top:16px;padding:15px;border-radius:12px;background:#f0f6ff;text-align:center;font-size:clamp(20px,5vw,27px);font-weight:900;overflow-wrap:anywhere}.result{margin-top:10px;padding:13px;border-radius:12px;background:#eaf8ee;color:#216b32;font-size:14px;line-height:1.5}.hint{color:var(--muted);font-size:12px;line-height:1.4;margin:12px 0 0}@media(max-width:520px){main{padding:18px 13px 28px}.panel{padding:14px}.fields{grid-template-columns:1fr 1fr}}
+</style></head><body><header><div class="nav"><a class="back" href="maths-laws-of-exponents-real-numbers-quiz.html?v=20261121-exponents-quiz-learn-sim-v2">←</a><div class="brand">SkillUp <span>Maths</span></div></div></header>
+<main><div class="eyebrow">Class 9 • Interactive</div><h1>Exponent Explorer</h1><p class="sub">Change the values and see how each exponent law works.</p>
+<section class="panel"><label class="label" for="law">Choose a law</label><select id="law"><option value="multiply">Multiply same bases: aᵐ × aⁿ</option><option value="divide">Divide same bases: aᵐ ÷ aⁿ</option><option value="power">Power of a power: (aᵐ)ⁿ</option><option value="zero">Zero exponent: a⁰</option><option value="negative">Negative exponent: a⁻ⁿ</option></select>
+<div class="fields"><div><label class="label" for="base">Base (a)</label><input id="base" type="number" value="2" step="any"></div><div><label class="label" for="m">Exponent m</label><input id="m" type="number" value="3" step="1"></div><div id="nWrap"><label class="label" for="n">Exponent n</label><input id="n" type="number" value="2" step="1"></div></div>
+<div class="examples"><button data-law="multiply" data-base="2" data-m="3" data-n="2">2³ × 2²</button><button data-law="divide" data-base="5" data-m="6" data-n="2">5⁶ ÷ 5²</button><button data-law="power" data-base="3" data-m="2" data-n="3">(3²)³</button><button data-law="negative" data-base="2" data-m="3">2⁻³</button></div>
+<div class="formula" id="formula">2³ × 2² = 2⁵</div><div class="result" id="result" aria-live="polite">Value = 32</div><p class="hint">Use a non-zero base for division and negative exponents. This explorer uses real-number inputs and integer exponents.</p></section></main>
+<script>
+(function(){
+const $=id=>document.getElementById(id),law=$("law"),base=$("base"),m=$("m"),n=$("n"),wrap=$("nWrap");
+function run(){
+ const op=law.value,a=Number(base.value),x=Number(m.value),y=Number(n.value);
+ wrap.style.display=["zero","negative"].includes(op)?"none":"block";
+ if(base.value===""||m.value===""||(!["zero","negative"].includes(op)&&n.value==="")||!Number.isFinite(a)||!Number.isInteger(x)||(!["zero","negative"].includes(op)&&!Number.isInteger(y))){$("formula").textContent="Enter valid numbers";$("result").textContent="Exponents must be integers.";return;}
+ if((op==="divide"||op==="negative")&&a===0){$("formula").textContent="Not defined";$("result").textContent="The base must not be zero.";return;}
+ let power,value,display;
+ if(op==="multiply"){power=x+y;value=Math.pow(a,power);display=a+"^"+x+" × "+a+"^"+y+" = "+a+"^"+power;}
+ else if(op==="divide"){power=x-y;value=Math.pow(a,power);display=a+"^"+x+" ÷ "+a+"^"+y+" = "+a+"^"+power;}
+ else if(op==="power"){power=x*y;value=Math.pow(a,power);display="("+a+"^"+x+")^"+y+" = "+a+"^"+power;}
+ else if(op==="zero"){value=1;display=a+"^0 = 1";}
+ else{value=Math.pow(a,-x);display=a+"^−"+x+" = 1/"+a+"^"+x;}
+ $("formula").textContent=display;
+ $("result").textContent=Number.isFinite(value)?"Value = "+Number(value.toPrecision(10)):"Value is outside the calculator range.";
+}
+[law,base,m,n].forEach(el=>el.addEventListener("input",run));
+document.querySelectorAll(".examples button").forEach(b=>b.addEventListener("click",()=>{law.value=b.dataset.law;base.value=b.dataset.base;m.value=b.dataset.m;if(b.dataset.n!==undefined)n.value=b.dataset.n;run()}));
+run();
+})();
+</script></body></html>

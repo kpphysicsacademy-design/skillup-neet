@@ -16,7 +16,8 @@
 h1{margin:0 0 5px;color:var(--n);font-size:clamp(23px,5vw,32px)}.muted{color:var(--m);font-size:11px;line-height:1.5}
 .meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.pill{background:#eef8ea;color:#416044;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:900}
 .progress{height:9px;background:#e7efe5;border-radius:99px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;width:0;background:var(--b)}
-.qnum{font-size:10px;color:var(--m);font-weight:900;text-transform:uppercase}.q h2{font-size:19px;line-height:1.4;margin:8px 0 14px}
+.qnum{font-size:10px;color:var(--m);font-weight:900;text-transform:uppercase}
+.sheet-link{display:inline-flex;margin:0 0 12px;padding:8px 11px;border:1px solid #cbd7f5;border-radius:10px;background:#f2f0ff;color:#5545b9;text-decoration:none;font-size:11px;font-weight:900}.q h2{font-size:19px;line-height:1.4;margin:8px 0 14px}
 .options{display:grid;gap:9px}.opt{width:100%;text-align:left;border:2px solid #dfe7dc;border-bottom:4px solid #cbd9c6;border-radius:13px;padding:12px;background:#fff;cursor:pointer;font-weight:750;font-size:14px}
 .opt.correct,.opt.correct:disabled{border:2px solid #238500!important;border-bottom:4px solid #238500!important;background:#dff7d7!important;color:#155b00!important;box-shadow:inset 5px 0 0 #238500!important;opacity:1!important}.opt.wrong,.opt.wrong:disabled{border:2px solid #c62828!important;border-bottom:4px solid #c62828!important;background:#ffe1e1!important;color:#8f1717!important;box-shadow:inset 5px 0 0 #c62828!important;opacity:1!important}.opt:disabled{cursor:default;opacity:1}
 .feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;font-size:12px;line-height:1.5}.feedback.show{display:block}.ok{background:#eaffd9;border:1px solid #b7e892}.no{background:#ffe5e5;border:1px solid #ffb3b3}
@@ -67,7 +68,7 @@ function render(){
  if(i>=items.length){content.innerHTML='<section class="result"><div style="font-size:58px;text-align:center">🏆</div><div class="score">'+score+' / '+items.length+'</div><p class="muted" style="text-align:center"><b>'+Math.round(score/items.length*100)+'% accuracy</b></p><button class="next show" id="retry">🔄 Try Again</button></section>';document.getElementById('retry').onclick=function(){i=0;score=0;render();scrollTo({top:0,behavior:'smooth'});};return;}
  var x=items[i],opts=x.o||[];
  
- content.innerHTML='<section class="q"><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
+ content.innerHTML='<section class="q"><a class="sheet-link" href="zoology-topic-cheat-sheet.html?concept='+encodeURIComponent(concept)+'">📘 Topic Cheat Sheet</a><div class="qnum">Question '+(i+1)+' of '+items.length+'</div><h2>'+esc(x.q)+'</h2><div class="options">'+opts.map(function(v,j){return '<button class="opt" data-j="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(v)+'</button>';}).join('')+'</div><div id="feedback" class="feedback"></div><button id="next" class="next">Continue →</button></section>';
  document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.dataset.j,x);};});
  document.getElementById('next').onclick=function(){i++;render();scrollTo({top:0,behavior:'smooth'});};
 }

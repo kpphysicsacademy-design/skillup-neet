@@ -110,7 +110,7 @@ main{width:min(100% - 24px,720px);margin:auto;padding:14px 4px 30px}
     <h1 id="title">What Is Living?</h1>
     <p class="muted" id="subtitle">Explore the defining features and characteristics of living organisms.</p>
     <div class="botany-sheet-actions" id="botanySheetActions">
-      <a href="botany-what-is-living-cheat-sheet.html?v=20261121-chemistry-style-v1">📘 Quick Cheat Sheet</a>
+      <a id="botanySheetLink" href="botany-topic-cheat-sheet.html?concept=What%20Is%20Living%3F">📘 Topic Cheat Sheet</a>
     </div>
     <div class="progress-row"><span id="counter">Loading question bank…</span><span id="percent">0%</span></div>
     <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="bar"></div></div>
@@ -727,7 +727,15 @@ const conceptDescriptions={
  'biodiversity':'Explore genetic, species and ecosystem diversity, species richness, evenness and the importance of conserving life on Earth.'
 };
 const sheet=document.getElementById('botanySheetActions');
-if(sheet){const c=requested.trim().toLowerCase();sheet.style.display=(c==='what is living?'||c==='what is living')?'block':'none';}
+const sheetLink=document.getElementById('botanySheetLink');
+if(sheet){sheet.style.display='block';}
+if(sheetLink){
+ const isWhatLiving=(key==='what is living?'||key==='what is living');
+ sheetLink.href=isWhatLiving
+  ?'botany-what-is-living-cheat-sheet.html?v=20261121-clean-v4'
+  :'botany-topic-cheat-sheet.html?concept='+encodeURIComponent(requested);
+ sheetLink.textContent=isWhatLiving?'📘 Quick Cheat Sheet':'📘 Topic Cheat Sheet';
+}
 function startBotanyQuiz(source,conceptName){
  const initialCount=Math.min(30,source.length);
  const original=source.slice(0,initialCount);

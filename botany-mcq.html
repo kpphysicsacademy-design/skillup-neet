@@ -732,8 +732,8 @@ document.title=requested+' | Botany Quiz | SkillUp';
 const sheet=document.getElementById('botanySheetActions');
 if(sheet){const c=requested.trim().toLowerCase();sheet.style.display=(c==='what is living?'||c==='what is living')?'block':'none';}
 function startBotanyQuiz(source,conceptName){
- const N=Math.min(30,source.length);
- const original=source.slice(0,N);
+ const initialCount=Math.min(30,source.length);
+ const original=source.slice(0,initialCount);
  let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
  const counter=document.getElementById('counter'),percent=document.getElementById('percent'),bar=document.getElementById('bar');
@@ -745,7 +745,7 @@ function startBotanyQuiz(source,conceptName){
  function render(){
   selected=null;checked=false;next.disabled=true;next.textContent='Check answer';next.className='btn check';
   eEl.className='feedback';eEl.textContent='';
-  const pct=Math.round(i/N*100);counter.textContent='Question '+(i+1)+' of '+N;percent.textContent=pct+'%';bar.style.width=pct+'%';progress.setAttribute('aria-valuenow',String(pct));
+  const pct=Math.round(i/questions.length*100);counter.textContent='Question '+(i+1)+' of '+questions.length;percent.textContent=pct+'%';bar.style.width=pct+'%';progress.setAttribute('aria-valuenow',String(pct));
   document.getElementById('qmeta').textContent='QUESTION '+(i+1)+' • '+conceptName.toUpperCase();
   const item=questions[i];qEl.textContent=item.q;oEl.replaceChildren();
   const order=item.o.map((v,k)=>({v,k}));
@@ -765,11 +765,11 @@ function startBotanyQuiz(source,conceptName){
   if(selected===correct){score++;streak++;eEl.className='feedback show good';eEl.textContent='✨ Correct! '+(item.e||'Your answer is correct.');}
   else{streak=0;wrongAttempts.push({item,chosen:item.o[selected]});buttons.find(el=>Number(el.dataset.originalIndex)===selected)?.classList.add('wrong');eEl.className='feedback show bad';eEl.textContent='Not quite. '+(item.e||'Review the correct answer above.')+' Correct answer: '+item.o[correct]+'.';}
   xp.textContent=String(score*10);streakEl.textContent=String(streak);
-  next.textContent=i===N-1?'See results →':'Continue →';next.className='btn continue';next.disabled=false;
+  next.textContent=i===questions.length-1?'See results →':'Continue →';next.className='btn continue';next.disabled=false;
  }
  function finish(){
   quiz.style.display='none';document.getElementById('result').style.display='block';
-  const pct=Math.round(score/N*100);document.getElementById('final').textContent=score+' / '+N;
+  const pct=Math.round(score/questions.length*100);document.getElementById('final').textContent=score+' / '+questions.length;
   document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
   const review=document.getElementById('wrongReview');review.replaceChildren();
   if(wrongAttempts.length){
@@ -784,7 +784,7 @@ function startBotanyQuiz(source,conceptName){
   i=0;score=0;streak=0;selected=null;checked=false;wrongAttempts=[];xp.textContent='0';streakEl.textContent='0';
   document.getElementById('result').style.display='none';quiz.style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});
  }
- next.onclick=()=>{if(!checked){checkAnswer();return;}if(i<N-1){i++;render();window.scrollTo({top:0,behavior:'smooth'});}else finish();};
+ next.onclick=()=>{if(!checked){checkAnswer();return;}if(i<questions.length-1){i++;render();window.scrollTo({top:0,behavior:'smooth'});}else finish();};
  document.getElementById('restart').onclick=()=>reset(false);
  document.getElementById('retryWrong').onclick=()=>reset(true);
  render();

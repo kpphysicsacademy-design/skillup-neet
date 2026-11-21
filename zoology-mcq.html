@@ -21,7 +21,10 @@ main{width:min(100% - 24px,720px);margin:auto;padding:14px 4px 30px}
 .hero{padding:14px 15px 12px;margin:0 0 12px;border:1px solid var(--line);border-radius:15px;background:#fff}
 .hero h1{margin:0 0 5px;font-size:clamp(20px,4vw,25px);line-height:1.25;font-weight:850;color:var(--ink)}
 .muted{color:var(--muted);font-size:12px;line-height:1.5;margin:0}
-.sheet-actions{display:none;margin:11px 0 12px}.sheet-actions a{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 10px;border:1px solid #c8e1ec;border-radius:10px;background:var(--blue-soft);color:#17698c;text-decoration:none;font-size:12px;font-weight:850}
+.sheet-actions{display:none;margin:11px 0 12px;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sheet-actions a{display:flex;align-items:center;justify-content:center;min-width:0;min-height:52px;padding:9px 7px;border:1px solid #c8e1ec;border-radius:10px;background:var(--blue-soft);color:#17698c;text-decoration:none;text-align:center;font-size:12px;line-height:1.25;font-weight:850;overflow-wrap:anywhere;box-shadow:0 2px 5px #17698c0c}
+.sheet-actions a:active{transform:translateY(1px);background:#e3f2f9}
+.sheet-actions a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .progress-row{display:flex;justify-content:space-between;gap:8px;margin:11px 0 6px;font-size:11px;font-weight:750;color:var(--muted)}
 .track{height:6px;border-radius:8px;background:#e9eee8;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:8px;transition:width .2s}
 .quiz,.finish,.status{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px;margin:12px 0;box-shadow:0 3px 12px #233b2d08}
@@ -93,7 +96,7 @@ title.textContent=requested;document.title=requested+' | Zoology Quiz | SkillUp'
 const descriptions={'what is living':'Explore the defining features, metabolism, growth, reproduction and response to stimuli in living organisms.'};
 subtitle.textContent=descriptions[key]||('Practise '+requested+' with focused questions and instant explanations.');
 const sheet=document.getElementById('sheetActions'),sheetLink=document.getElementById('sheetLink');
-sheet.style.display='block';quickLearnLink.href='zoology-quicklearn.html?concept='+encodeURIComponent(requested);sheetLink.href='zoology-topic-cheat-sheet.html?concept='+encodeURIComponent(requested);
+sheet.style.display='grid';quickLearnLink.href='zoology-quicklearn.html?concept='+encodeURIComponent(requested);sheetLink.href='zoology-topic-cheat-sheet.html?concept='+encodeURIComponent(requested);
 function showNotice(message){quiz.style.display='none';notice.style.display='block';noticeText.textContent=message;}
 function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){const s=slug(v),files=[s+'-question-bank.js'];if(s==='taxonomy-and-systematics')files.push('taxonomy-systematics-question-bank.js');if(s==='darwins-natural-selection')files.push('darwin-natural-selection-question-bank.js');if(s==='biodiversity')files.push('biodiversity-patterns-question-bank.js');return [...new Set(files)];}

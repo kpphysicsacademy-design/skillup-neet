@@ -112,10 +112,14 @@ function showNotice(message){quiz.style.display='none';notice.style.display='blo
 function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){const s=slug(v),files=[s+'-question-bank.js'];if(s==='taxonomy-and-systematics')files.push('taxonomy-systematics-question-bank.js');if(s==='darwins-natural-selection')files.push('darwin-natural-selection-question-bank.js');if(s==='biodiversity')files.push('biodiversity-patterns-question-bank.js');return [...new Set(files)];}
 function loadBank(file){return new Promise((resolve,reject)=>{
- const before=new Map(Object.keys(window).map(k=>[k,window[k]]));
- const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261122-aves-quiz-v1';
- script.onload=()=>{let found=null;for(const name of Object.keys(window)){if(before.get(name)===window[name])continue;const value=window[name];if(Array.isArray(value)&&value.length&&value.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x)){found=value;break;}}found?resolve(found):reject(new Error('No bank array detected'));};
- script.onerror=()=>reject(new Error('Bank file unavailable'));document.head.appendChild(script);
+ const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261122-zoology-loader-fix-2';
+ script.onload=()=>{
+  const arrays=Object.keys(window).filter(name=>/^skillUp.*Questions$/i.test(name)).map(name=>window[name]).filter(value=>Array.isArray(value)&&value.length&&value.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x));
+  const token=String(file).replace(/-question-bank\.js$/i,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
+  const found=arrays.find(value=>{const name=Object.keys(window).find(k=>window[k]===value)||'';return name.toLowerCase().replace(/[^a-z0-9]/g,'').includes(token);})||arrays[0];
+  found?resolve(found):reject(new Error('No valid question bank array found in '+file));
+ };
+ script.onerror=()=>reject(new Error('Question bank file could not be loaded: '+file));document.head.appendChild(script);
 });}
 function startZoologyQuiz(source,conceptName){
  const original=source.slice(0,30);let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
@@ -153,7 +157,7 @@ async function load(){
  if(!requested){showNotice('No concept was supplied. Return to the Zoology Path and select a concept.');return;}
  const files=candidates(requested);let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){}}
  if(bank){startZoologyQuiz(bank,requested);return;}
- showNotice('A dedicated question bank is not connected for this concept yet. The concept link is routed correctly, but its source bank still needs to be created.');
+ showNotice('The question bank could not be loaded. Please refresh once. If the issue continues, return to the Zoology Path and report this topic.');
 }
 load();
 window.SkillUpZoologyQuizUI=startZoologyQuiz;

@@ -69,29 +69,62 @@ const bank=[
 const $=id=>document.getElementById(id);
 let questions=bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
-let storageKey=null,restored=false,completed=false;
+let storageKey=null,restored=false,completed=false,cloudRef=null,writeQueue=Promise.resolve(),revision=0;
 const allQuestions=()=>bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
+const validState=s=>s&&s.v===2&&typeof s.updatedAt==='number'&&Number.isFinite(s.updatedAt)&&
+ Array.isArray(s.questionIds)&&s.questionIds.length>0&&s.questionIds.length<=bank.length&&
+ new Set(s.questionIds).size===s.questionIds.length&&s.questionIds.every(id=>Number.isInteger(id)&&id>=1&&id<=bank.length)&&
+ Number.isInteger(s.index)&&s.index>=0&&s.index<s.questionIds.length&&
+ Number.isInteger(s.score)&&s.score>=0&&s.score<=s.questionIds.length&&
+ Number.isInteger(s.streak)&&s.streak>=0&&s.streak<=s.score&&
+ Array.isArray(s.wrong)&&typeof s.locked==='boolean'&&typeof s.completed==='boolean';
+function snapshot(){
+ return {v:2,updatedAt:Date.now(),index,score,streak,wrong,locked,completed,questionIds:questions.map(q=>q.id)};
+}
+function applyState(s){
+ const originals=allQuestions();
+ questions=s.questionIds.map(id=>originals[id-1]);
+ index=s.index;score=s.score;streak=s.streak;
+ wrong=s.wrong.filter(w=>w&&typeof w.q==='string'&&typeof w.your==='string'&&typeof w.answer==='string'&&typeof w.e==='string').slice(0,30);
+ completed=s.completed;
+ // An already-scored answer must not be scored again after refresh.
+ if(!completed&&s.locked){index++;if(index>=questions.length)completed=true;}
+ updateScore();
+ if(completed)finish(false);else render();
+}
 function persist(){
  if(!storageKey)return;
- try{localStorage.setItem(storageKey,JSON.stringify({v:1,index,score,streak,wrong,locked,completed,questionIds:questions.map(q=>q.id)}));}catch(e){console.warn('Quiz progress could not be saved',e);}
+ const state=snapshot();revision++;
+ try{localStorage.setItem(storageKey,JSON.stringify(state));}catch(e){console.warn('Local quiz save failed',e);}
+ if(cloudRef){
+  // Serialize writes so slower earlier requests cannot overwrite newer answers.
+  writeQueue=writeQueue.catch(()=>{}).then(()=>cloudRef.set({
+   user_id:cloudRef.id.split('_')[0],subject:'physics',topic:'physical_quantities_practice',
+   quiz_state:state,updated_at:new Date(state.updatedAt).toISOString()
+  },{merge:true})).catch(e=>{console.warn('Cloud quiz save failed; local copy retained',e);});
+ }
 }
-function initializeQuiz(uid){
+async function initializeQuiz(uid){
  if(restored||!uid)return;restored=true;
  storageKey='skillup-physical-quantities-quiz-v1:'+uid;
- try{
-  const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
-  if(saved&&saved.v===1&&Array.isArray(saved.questionIds)&&saved.questionIds.length>0&&saved.questionIds.length<=bank.length&&saved.questionIds.every(id=>Number.isInteger(id)&&id>=1&&id<=bank.length)&&Number.isInteger(saved.score)&&saved.score>=0&&saved.score<=saved.questionIds.length&&Number.isInteger(saved.streak)&&saved.streak>=0&&saved.streak<=saved.score&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<saved.questionIds.length&&Array.isArray(saved.wrong)){
-   const originals=allQuestions();
-   questions=saved.questionIds.map(id=>originals[id-1]);
-   index=saved.index;score=saved.score;streak=saved.streak;wrong=saved.wrong.filter(w=>w&&typeof w.q==='string'&&typeof w.your==='string'&&typeof w.answer==='string'&&typeof w.e==='string').slice(0,30);
-   completed=saved.completed===true;
-   if(!completed&&saved.locked===true){index++;if(index>=questions.length)completed=true;}
-  }
- }catch(e){console.warn('Saved quiz could not be restored',e);}
- updateScore();
- if(completed)finish();else render();
+ let local=null,remote=null;
+ try{local=JSON.parse(localStorage.getItem(storageKey)||'null');}catch(e){}
+ // Existing v1 local progress remains eligible for migration.
+ if(local&&local.v===1){local={...local,v:2,updatedAt:0};}
+ const db=window.SkillUpAuth&&window.SkillUpAuth.db;
+ if(db){
+  cloudRef=db.collection('skillup_progress').doc(uid+'_physics_physical_quantities_practice');
+  try{const snap=await cloudRef.get();if(snap.exists)remote=snap.data().quiz_state;}catch(e){console.warn('Cloud quiz load failed; using local copy',e);}
+ }
+ const chosen=validState(remote)&&(!validState(local)||remote.updatedAt>local.updatedAt)?remote:local;
+ if(validState(chosen)){
+  applyState(chosen);
+  try{localStorage.setItem(storageKey,JSON.stringify(chosen));}catch(e){}
+  // Reconcile newer local changes to Firestore after reconnect.
+  if(cloudRef&&chosen===local&&(!validState(remote)||local.updatedAt>remote.updatedAt))persist();
+ }else{updateScore();render();}
 }
-window.addEventListener('skillup-quiz-auth-ready',event=>initializeQuiz(event.detail.uid));
+window.addEventListener('skillup-quiz-auth-ready',event=>{initializeQuiz(event.detail.uid).catch(console.error);});
 function stage(i){return i<10?'FUNDAMENTALS':i<20?'SI UNITS':'DIMENSIONS & CONVERSIONS'}
 function render(){
  const item=questions[index];if(!item||item.o.length!==4)throw new Error('Question data error at '+index);
@@ -123,8 +156,8 @@ $('check').addEventListener('click',()=>{
  else{streak=0;wrong.push({q:item.q,your:item.o[selected],answer:item.o[item.a],e:item.e});buttons[selected].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
-function finish(){
- completed=true;persist();$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+function finish(save=true){
+ completed=true;if(save)persist();$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';

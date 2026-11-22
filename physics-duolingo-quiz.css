@@ -134,3 +134,146 @@ main,.wrap,.container,.quiz-container,.quiz-wrap{width:min(100% - 24px,720px)!im
  .option,.answer-option,.choice,.options button,.answers button,.option-btn,.opt{min-height:56px!important;padding:12px 13px!important;font-size:15px!important;border-radius:16px!important}
 }
 @media(max-width:360px){.nav{gap:5px!important;padding-inline:7px!important}.brand{font-size:15px!important}.brand small{font-size:7px!important}.xp,.streak{padding:7px!important;font-size:10px!important}}
+
+
+/* 2026-11-22: Unified violet SkillUp quiz architecture.
+   Visual-only layer: preserves all question text, answer data, scoring and behaviour. */
+:root{
+ --su-violet:#51459a;--su-violet-deep:#272653;--su-violet-soft:#eeeaff;
+ --su-page:#f4f6ff;--su-card:#fff;--su-text:#29365a;--su-muted:#70798d;
+ --su-border:#e0e3ef;--su-green:#55b52c;--su-green-dark:#42931f;
+}
+html,body{background:var(--su-page)!important;color:var(--su-text)!important}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important}
+main,.wrap,.container,.quiz-container,.quiz-wrap{
+ width:min(100% - 28px,760px)!important;max-width:760px!important;
+ margin-inline:auto!important;padding:18px 14px 44px!important
+}
+header,.topbar,.top{
+ background:#fff!important;border-bottom:1px solid var(--su-border)!important;
+ box-shadow:0 3px 16px rgba(39,38,83,.045)!important;
+}
+.back{
+ color:var(--su-violet)!important;font-weight:900!important;
+ background:#fff!important;border:0!important;box-shadow:none!important;
+}
+.brand{color:var(--su-violet-deep)!important}
+.brand small{color:var(--su-muted)!important}
+.pill,.xp,.streak{
+ background:#eeeaff!important;border:1px solid #e1dcff!important;
+ color:var(--su-violet)!important;
+}
+/* Topic hero: retain the original title and description, but use the reference's purple panel. */
+.hero,.intro,.quiz-header{
+ display:block!important;position:relative!important;overflow:hidden!important;
+ padding:clamp(22px,5vw,34px)!important;margin:12px 0 18px!important;
+ border:0!important;border-radius:26px!important;
+ background:linear-gradient(125deg,#25244f 0%,#37316f 55%,#5a4da0 100%)!important;
+ color:#fff!important;box-shadow:0 9px 22px rgba(49,43,103,.14)!important;
+}
+.hero h1,.hero>p,.hero .tags,.intro h1,.intro p,.quiz-header h1,.quiz-header p{
+ display:block!important;color:#fff!important;
+}
+.hero h1,.intro h1,.quiz-header h1{
+ margin:10px 0 12px!important;font-size:clamp(28px,6vw,42px)!important;
+ line-height:1.18!important;font-weight:900!important;letter-spacing:-.8px!important;
+}
+.hero p,.intro p,.quiz-header p{
+ margin:0!important;max-width:650px!important;font-size:clamp(14px,3.7vw,18px)!important;
+ line-height:1.65!important;color:#eeedff!important;
+}
+.hero .eyebrow,.hero .kicker,.intro .eyebrow{
+ color:#d9d4ff!important;background:transparent!important;border:0!important;
+ padding:0!important;font-size:11px!important;letter-spacing:2px!important;
+ font-weight:950!important;text-transform:uppercase!important;
+}
+.hero .tags span,.hero .tag,.intro .tag{
+ background:rgba(255,255,255,.12)!important;color:#fff!important;
+ border:1px solid rgba(255,255,255,.2)!important;
+}
+/* Progress panel and track */
+.progress,.progress-card,.progress-panel,.progress-wrap{
+ background:#fff!important;border:2px solid var(--su-border)!important;
+ border-radius:18px!important;padding:14px 16px!important;
+ box-shadow:0 4px 0 #e6e7f0!important;
+}
+.progress-row,.progress-line,.row,.meta{
+ color:var(--su-muted)!important;font-weight:850!important;
+}
+.bar,.track,.progress-bar,.progress-track{
+ background:#e7e8f2!important;border-radius:99px!important;overflow:hidden!important;
+}
+.bar i,.fill,.progress-fill,.progress-bar-fill{
+ background:var(--su-green)!important;border-radius:99px!important;
+}
+/* Question surface */
+.quiz,.quiz-card,.question-card,.question-container,.quiz-box,.card,.qcard,.result,.result-card{
+ background:#fff!important;border:2px solid var(--su-border)!important;
+ border-radius:23px!important;padding:clamp(17px,4vw,25px)!important;
+ box-shadow:0 4px 0 #e4e5ef!important;
+}
+.qmeta,.qnum,.question-meta,.q-label{
+ color:#8175c1!important;font-size:11px!important;font-weight:950!important;
+ letter-spacing:1px!important;text-transform:uppercase!important;
+}
+.q,.question,.question-text,#question,.q h2{
+ color:var(--su-text)!important;font-size:clamp(20px,4.5vw,27px)!important;
+ font-weight:850!important;line-height:1.42!important;margin:12px 0 19px!important;
+ overflow-wrap:anywhere!important;
+}
+.options,.answers,.option-list,.choices,.opts{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;
+}
+.option,.answer-option,.choice,.options button,.answers button,.option-btn,.opt{
+ display:flex!important;align-items:center!important;width:100%!important;
+ min-height:54px!important;padding:12px 14px!important;text-align:left!important;
+ background:#fff!important;border:2px solid var(--su-border)!important;
+ border-radius:16px!important;color:var(--su-text)!important;
+ font-size:15px!important;font-weight:750!important;line-height:1.4!important;
+ box-shadow:none!important;
+}
+.option.correct,.answer-option.correct,.choice.correct,.options button.correct,
+.answers button.correct,.option-btn.correct,.opt.correct{
+ color:#245b12!important;background:#efffe7!important;border-color:var(--su-green)!important;
+}
+.option.wrong,.answer-option.wrong,.choice.wrong,.options button.wrong,
+.answers button.wrong,.option-btn.wrong,.opt.wrong{
+ color:#842029!important;background:#fff0f0!important;border-color:#ff7777!important;
+}
+.feedback,.explanation,.hint,.feed{
+ font-size:14px!important;line-height:1.55!important;
+}
+.feedback.good,.feedback.correct,.explanation.good,.feed.good{
+ display:block!important;background:#efffe7!important;color:#245b12!important;
+ border:2px solid #c8f0b2!important;border-radius:15px!important;padding:13px!important;
+}
+.feedback.bad,.feedback.incorrect,.explanation.bad,.feed.bad{
+ display:block!important;background:#fff0f0!important;color:#842029!important;
+ border:2px solid #ffc2c7!important;border-radius:15px!important;padding:13px!important;
+}
+/* Large rounded actions like the reference screen */
+button,.btn,.next,.retry,.check,.continue,.submit-btn{
+ border-radius:16px!important;font-weight:900!important;
+}
+.check,.submit-btn,.primary,.btn-primary,.next,.retry,.continue,
+button[type=submit]{
+ min-height:50px!important;background:var(--su-green)!important;
+ color:#fff!important;border:0!important;box-shadow:0 4px 0 var(--su-green-dark)!important;
+}
+.next:not(.show),.continue:not(.show){display:none!important}
+.result,.result-card{background:#fff!important}
+@media(max-width:480px){
+ main,.wrap,.container,.quiz-container,.quiz-wrap{
+  width:100%!important;padding:14px 10px 32px!important;
+ }
+ .hero,.intro,.quiz-header{padding:23px 18px!important;border-radius:23px!important}
+ .hero h1,.intro h1,.quiz-header h1{font-size:31px!important}
+ .hero p,.intro p,.quiz-header p{font-size:14px!important}
+ .quiz,.quiz-card,.question-card,.question-container,.quiz-box,.card,.qcard{
+  padding:16px!important;border-radius:20px!important;
+ }
+ .q,.question,.question-text,#question,.q h2{font-size:21px!important}
+ .option,.answer-option,.choice,.options button,.answers button,.option-btn,.opt{
+  min-height:52px!important;padding:11px 12px!important;font-size:14px!important;
+ }
+}

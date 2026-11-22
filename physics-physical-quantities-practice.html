@@ -69,6 +69,29 @@ const bank=[
 const $=id=>document.getElementById(id);
 let questions=bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
+let storageKey=null,restored=false,completed=false;
+const allQuestions=()=>bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
+function persist(){
+ if(!storageKey)return;
+ try{localStorage.setItem(storageKey,JSON.stringify({v:1,index,score,streak,wrong,locked,completed,questionIds:questions.map(q=>q.id)}));}catch(e){console.warn('Quiz progress could not be saved',e);}
+}
+function initializeQuiz(uid){
+ if(restored||!uid)return;restored=true;
+ storageKey='skillup-physical-quantities-quiz-v1:'+uid;
+ try{
+  const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+  if(saved&&saved.v===1&&Array.isArray(saved.questionIds)&&saved.questionIds.length>0&&saved.questionIds.length<=bank.length&&saved.questionIds.every(id=>Number.isInteger(id)&&id>=1&&id<=bank.length)&&Number.isInteger(saved.score)&&saved.score>=0&&saved.score<=saved.questionIds.length&&Number.isInteger(saved.streak)&&saved.streak>=0&&saved.streak<=saved.score&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<saved.questionIds.length&&Array.isArray(saved.wrong)){
+   const originals=allQuestions();
+   questions=saved.questionIds.map(id=>originals[id-1]);
+   index=saved.index;score=saved.score;streak=saved.streak;wrong=saved.wrong.filter(w=>w&&typeof w.q==='string'&&typeof w.your==='string'&&typeof w.answer==='string'&&typeof w.e==='string').slice(0,30);
+   completed=saved.completed===true;
+   if(!completed&&saved.locked===true){index++;if(index>=questions.length)completed=true;}
+  }
+ }catch(e){console.warn('Saved quiz could not be restored',e);}
+ updateScore();
+ if(completed)finish();else render();
+}
+window.addEventListener('skillup-quiz-auth-ready',event=>initializeQuiz(event.detail.uid));
 function stage(i){return i<10?'FUNDAMENTALS':i<20?'SI UNITS':'DIMENSIONS & CONVERSIONS'}
 function render(){
  const item=questions[index];if(!item||item.o.length!==4)throw new Error('Question data error at '+index);
@@ -98,10 +121,10 @@ $('check').addEventListener('click',()=>{
  const f=$('feedback');
  if(selected===item.a){score++;streak++;f.className='feedback show good';f.textContent='Correct! '+item.e;}
  else{streak=0;wrong.push({q:item.q,your:item.o[selected],answer:item.o[item.a],e:item.e});buttons[selected].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
- updateScore();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
+ updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(){
- $('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ completed=true;persist();$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';
@@ -113,11 +136,11 @@ function finish(){
  const retryWrong=document.createElement('button');retryWrong.className='btn';retryWrong.textContent='↻ Retry wrong answers ('+wrong.length+')';retryWrong.hidden=!wrong.length;
  const retryAll=document.createElement('button');retryAll.className='btn';retryAll.textContent='Practice all 30 questions again';
  card.append(trophy,h,sc,summary,review,retryWrong,retryAll);$('finishSlot').replaceChildren(card);
- function reset(onlyWrong){questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];locked=false;completed=false;persist();updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  retryWrong.addEventListener('click',()=>reset(true));retryAll.addEventListener('click',()=>reset(false));
 }
-$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});
-try{if(bank.length!==30)throw new Error('Expected 30 questions');render();}catch(err){$('question').textContent='This quiz could not load. Please refresh the page.';$('options').replaceChildren();console.error(err);}
+$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){persist();render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});
+try{if(bank.length!==30)throw new Error('Expected 30 questions');}catch(err){$('question').textContent='This quiz could not load. Please refresh the page.';$('options').replaceChildren();console.error(err);}
 })();
 </script>
 <script>
@@ -127,7 +150,7 @@ try{if(bank.length!==30)throw new Error('Expected 30 questions');render();}catch
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="central-config.js"></script><script src="central-auth.js"></script>
-<script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script>(async function(){if(window.SkillUpAuth){const session=await window.SkillUpAuth.requireAuth(location.href);if(session){const user=window.SkillUpAuth.auth.currentUser;const uid=user&&user.uid;if(uid)window.dispatchEvent(new CustomEvent('skillup-quiz-auth-ready',{detail:{uid}}));}}})();</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
 </body></html>

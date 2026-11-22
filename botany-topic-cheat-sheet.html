@@ -122,14 +122,27 @@ body{background:#f3f5ff}
  backdrop-filter:blur(12px);
 }
 
+
+.update-notice{margin-top:18px;padding:28px 20px;text-align:center;border:1.5px solid #e0e4f0;border-radius:22px;background:#fff;box-shadow:0 4px 15px rgba(41,52,93,.045)}
+.update-icon{font-size:34px;margin-bottom:8px}
+.update-notice h2{margin:0 0 10px;color:#51469b;font-size:20px;line-height:1.3}
+.update-message{margin:0 auto 8px;max-width:520px;color:#29345d;font-size:15px;font-weight:750;line-height:1.55}
+.update-submessage{margin:0 auto;max-width:520px;color:#69758b;font-size:13px;line-height:1.6}
+.update-tag{display:inline-block;margin-top:16px;padding:9px 13px;border-radius:999px;background:#eff9eb;color:#347b2c;font-size:12px;font-weight:900}
+@media(max-width:520px){.update-notice{padding:24px 16px}.update-notice h2{font-size:18px}}
+
 </style></head>
 <body><main class="wrap">
 <div class="top"><a id="backQuiz" href="botany-mcq.html">← Back to Quiz</a><span class="tag">BOTANY · TOPIC CHEAT SHEET</span></div>
 <header class="hero"><div class="eyebrow">LEARN IT · REVISE IT · REMEMBER IT</div><h1 id="topicTitle">Loading topic…</h1><p>Review the key questions, correct answers and explanations. Recall each idea before revealing it in your mind.</p><div class="hero-key">Recall → Understand → Practise</div></header>
 <div class="actions"><a class="primary" id="quickLearnLink" href="botany-quick-learn.html">🧠 Quick Learn</a><a id="startQuiz" href="botany-mcq.html">🎯 Practise Quiz</a></div>
-<div class="stats"><span class="stat" id="count">Loading revision points…</span><span class="stat">📘 Topic question bank</span></div>
-<section class="card"><h2>📌 Key revision points</h2><div id="points"><p class="why">Loading the topic question bank…</p></div></section>
-<section class="card"><h2>🧠 Smart revision method</h2><div class="note">Read the question first, recall the answer without looking, then read the explanation. Revisit the points you cannot explain in your own words.</div></section>
+<section class="card update-notice" role="status" aria-live="polite">
+ <div class="update-icon">🛠️</div>
+ <h2>Topic Cheat Sheet Update in Progress</h2>
+ <p class="update-message">We are updating this cheat sheet with revised, topic-focused study notes.</p>
+ <p class="update-submessage">The previous revision content has been removed. Updated notes and key points will appear here soon.</p>
+ <div class="update-tag">📘 Updated content coming soon</div>
+</section>
 <div class="actions"><a class="primary" id="bottomQuickLearnLink" href="botany-quick-learn.html">🧠 Quick Learn</a><a href="botany-home.html">← Botany Path</a></div>
 <p class="foot">SkillUp Botany · Topic-wise quick revision</p>
 </main>
@@ -138,52 +151,13 @@ body{background:#f3f5ff}
 'use strict';
 const params=new URLSearchParams(location.search);
 const topic=(params.get('concept')||'').trim();
-const title=document.getElementById('topicTitle'),points=document.getElementById('points');
-const count=document.getElementById('count');
 const enc=encodeURIComponent(topic);
 document.title=(topic||'Botany Topic')+' | Cheat Sheet | SkillUp';
-title.textContent=topic||'Topic not selected';
+document.getElementById('topicTitle').textContent=topic||'Botany Topic';
 document.getElementById('backQuiz').href='botany-mcq.html?concept='+enc;
 document.getElementById('startQuiz').href='botany-mcq.html?concept='+enc;
 document.getElementById('quickLearnLink').href='botany-quick-learn.html?concept='+enc;
 document.getElementById('bottomQuickLearnLink').href='botany-quick-learn.html?concept='+enc;
-const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-const wanted=norm(topic);
-function findBank(){
- for(const name of Object.keys(window)){
-  if(!/^skillUp.*Questions$/.test(name))continue;
-  if(norm(name.replace(/^skillUp/,'').replace(/Questions$/,''))===wanted){
-   const bank=window[name];if(Array.isArray(bank)&&bank.length)return bank;
-  }
- }
- return null;
-}
-function render(bank){
- const rows=bank.slice(0,30);
- points.replaceChildren();
- rows.forEach((item,i)=>{
-  const article=document.createElement('article');article.className='item';
-  const question=document.createElement('p');question.className='q';
-  const badge=document.createElement('span');badge.className='num';badge.textContent=String(i+1);
-  question.append(badge,document.createTextNode(item.q||'Revision question'));
-  const answer=document.createElement('p');answer.className='answer';
-  const options=Array.isArray(item.o)?item.o:[];
-  const correct=Number(item.a);
-  answer.textContent='Answer: '+(options[correct]!==undefined?options[correct]:'Review the question explanation');
-  const why=document.createElement('p');why.className='why';why.textContent=item.e||'Use the correct answer to recall the key concept.';
-  article.append(question,answer,why);points.append(article);
- });
- count.textContent=rows.length+' revision points';
- if(!rows.length)points.innerHTML='<p class="error">No revision questions were found for this topic yet.</p>';
-}
-if(!topic){points.innerHTML='<p class="error">Open this sheet from a Botany topic quiz so the correct topic can be loaded.</p>';count.textContent='Topic missing';return;}
-const slug=topic.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const aliases={'viruses-viroids':'viruses-and-viroids','dicot-root-t-s':'dicot-root-ts','monocot-root-t-s':'monocot-root-ts','dicot-stem-t-s':'dicot-stem-ts','monocot-stem-t-s':'monocot-stem-ts'};
-const script=document.createElement('script');
-script.src='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261121-topic-sheet-v1';
-script.onload=()=>{const bank=findBank();if(bank)render(bank);else{points.innerHTML='<p class="error">The question bank for this topic could not be matched. Return to the quiz and try again.</p>';count.textContent='Bank unavailable';}};
-script.onerror=()=>{points.innerHTML='<p class="error">The question bank for this topic is not available yet.</p>';count.textContent='Bank unavailable';};
-document.head.appendChild(script);
 })();
 </script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>

@@ -20,16 +20,14 @@ service cloud.firestore {
       function owner() {
         return request.auth != null && request.auth.uid == uid;
       }
-      function editableFields() {
+      function fields() {
         return ['name', 'email', 'class_level', 'college', 'target',
                 'id', 'user_id', 'updated_at'];
       }
-      function validStudentFields(d) {
-        return d.keys().hasAll(editableFields()) &&
-          d.keys().hasOnly(editableFields()) &&
+      function validFields(d) {
+        return d.keys().hasAll(fields()) &&
           d.id == uid && d.user_id == uid &&
-          request.auth.token.email is string &&
-          d.email == request.auth.token.email &&
+          d.email is string &&
           d.name is string && d.name.size() > 0 && d.name.size() <= 80 &&
           d.college is string && d.college.size() > 0 && d.college.size() <= 120 &&
           d.class_level in ['Class 9', 'Class 10', 'Class 11', 'Class 12',
@@ -38,13 +36,27 @@ service cloud.firestore {
                        'Not decided yet'] &&
           d.updated_at is string && d.updated_at.size() <= 40;
       }
+      function allowedUpdate() {
+        let changes = request.resource.data.diff(resource.data).affectedKeys();
+        return changes.hasOnly(fields()) &&
+          request.resource.data.id == resource.data.id &&
+          request.resource.data.user_id == resource.data.user_id &&
+          (
+            request.resource.data.email == resource.data.email ||
+            (request.auth.token.email is string &&
+             request.resource.data.email == request.auth.token.email)
+          );
+      }
       allow get: if owner();
       allow list: if false;
-      allow create: if owner() && validStudentFields(request.resource.data);
-      allow update: if owner() && validStudentFields(request.resource.data) &&
-        request.resource.data.id == resource.data.id &&
-        request.resource.data.user_id == resource.data.user_id &&
-        request.resource.data.email == resource.data.email;
+      allow create: if owner() &&
+        request.resource.data.keys().hasOnly(fields()) &&
+        request.auth.token.email is string &&
+        request.resource.data.email == request.auth.token.email &&
+        validFields(request.resource.data);
+      // Preserve untouched legacy fields, but never permit client changes to them.
+      allow update: if owner() && validFields(request.resource.data) &&
+        allowedUpdate();
       allow delete: if owner();
     }
 

@@ -17,9 +17,35 @@ service cloud.firestore {
 
     // User profile: private to the account owner.
     match /skillup_profiles/{uid} {
-      allow get, create, update: if signedIn() && uid == request.auth.uid;
-      allow delete: if signedIn() && uid == request.auth.uid;
+      function owner() {
+        return request.auth != null && request.auth.uid == uid;
+      }
+      function editableFields() {
+        return ['name', 'email', 'class_level', 'college', 'target',
+                'id', 'user_id', 'updated_at'];
+      }
+      function validStudentFields(d) {
+        return d.keys().hasAll(editableFields()) &&
+          d.keys().hasOnly(editableFields()) &&
+          d.id == uid && d.user_id == uid &&
+          request.auth.token.email is string &&
+          d.email == request.auth.token.email &&
+          d.name is string && d.name.size() > 0 && d.name.size() <= 80 &&
+          d.college is string && d.college.size() > 0 && d.college.size() <= 120 &&
+          d.class_level in ['Class 9', 'Class 10', 'Class 11', 'Class 12',
+                            'Dropper', 'College / Graduate', 'Other'] &&
+          d.target in ['JEE', 'NEET', 'CUET', 'Other competitive exam',
+                       'Not decided yet'] &&
+          d.updated_at is string && d.updated_at.size() <= 40;
+      }
+      allow get: if owner();
       allow list: if false;
+      allow create: if owner() && validStudentFields(request.resource.data);
+      allow update: if owner() && validStudentFields(request.resource.data) &&
+        request.resource.data.id == resource.data.id &&
+        request.resource.data.user_id == resource.data.user_id &&
+        request.resource.data.email == resource.data.email;
+      allow delete: if owner();
     }
 
     // Learning/progress records: private to the account owner.

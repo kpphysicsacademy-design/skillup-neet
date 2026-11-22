@@ -1,0 +1,17 @@
+name: Chemistry smoke tests
+on:
+  pull_request:
+    paths:
+      - 'chemistry-home.html'
+      - 'chemistry-mcq.html'
+      - 'chemistry-1062-concepts-base.js'
+      - 'tests/test_chemistry_smoke.py'
+      - '.github/workflows/chemistry-smoke.yml'
+  workflow_dispatch:
+jobs:
+  chemistry-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Chemistry progress wiring and learning path
+        run: python3 -m unittest discover -s tests -p 'test_chemistry_smoke.py' -v

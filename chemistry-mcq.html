@@ -85,6 +85,11 @@ mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
 </section>
 <div id="finishSlot"></div>
 </main>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="/central-config.js"></script>
+<script src="/central-auth.js"></script>
 <script>
 (function(){
 'use strict';
@@ -186,6 +191,18 @@ async function load(){
  $('subtitle').textContent=questions.length+' questions • Select an answer, check it, then continue.';
  render();
 }
+async function persistCompletion(){
+ const status=document.getElementById('saveStatus');
+ if(!window.SkillUpAuth||!window.SkillUpAuth.configured){status.textContent='Progress not saved: sign-in service unavailable.';return;}
+ try{
+  const session=await window.SkillUpAuth.getSession();
+  if(!session){status.textContent='Sign in to save your Chemistry progress.';return;}
+  const topic=slug(micro)||slug(concept);
+  const previous=(await window.SkillUpAuth.getProgress('chemistry')).find(row=>row.topic===topic);
+  await window.SkillUpAuth.saveProgress({subject:'chemistry',topic,concept:displayConcept,completed:true,score,total_questions:questions.length,percent:Math.round(score/questions.length*100),best_score:Math.max(Number(previous&&previous.best_score)||0,score),best_percent:Math.max(Number(previous&&previous.best_percent)||0,Math.round(score/questions.length*100)),attempts:(Number(previous&&previous.attempts)||0)+1,last_xp:score*10});
+  status.textContent='✓ Progress saved to your account.';
+ }catch(error){console.error('Chemistry progress save failed',error);status.textContent='Progress could not be saved. Check your connection and retry.';}
+}
 function render(){
  chosen=null;locked=false;const item=questions[index],pct=Math.round(index/questions.length*100);
  $('progressText').textContent='Question '+(index+1)+' of '+questions.length;$('percent').textContent=pct+'%';$('fill').style.width=pct+'%';
@@ -210,11 +227,12 @@ $('continue').addEventListener('click',()=>{
  if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><p class="muted" id="saveStatus" role="status" aria-live="polite">Saving progress…</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const el=document.createElement('article');el.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;el.append(q,yours,correct,why);review.appendChild(el);});}
  else review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';
  $('finishSlot').replaceChildren(card);
+ void persistCompletion();
  function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));
 });

@@ -18,67 +18,30 @@ body{background:radial-gradient(ellipse at 6% 0%,rgba(88,185,42,.08),transparent
 .actions a.primary{background:#58b92a;border-color:#58b92a;color:#fff;box-shadow:0 4px 0 #36871c}
 .card{border-color:#e0e4f0;border-radius:17px;box-shadow:0 4px 15px rgba(41,52,93,.045)}
 @media(max-width:360px){.actions{gap:6px!important}.actions a{font-size:12px;padding:6px 4px}}
-</style></head><body><main class="wrap">
+.learn-progress{display:flex;justify-content:space-between;color:#667085;font-size:11px;font-weight:900}.learn-track{height:8px;margin:8px 0 17px;border-radius:20px;background:#edf0f7;overflow:hidden}.learn-track div{height:100%;width:0;background:linear-gradient(90deg,#58b92a,#8acb56);border-radius:20px;transition:width .2s}.learn-kicker{color:#328b80;font-size:10px;font-weight:950;letter-spacing:1px}#learnQuestion{margin:7px 0 15px;color:#29345d;font-size:clamp(18px,4.8vw,23px);line-height:1.35}.learn-options{display:grid;gap:9px}.learn-option{display:flex;align-items:center;gap:10px;width:100%;min-height:49px;padding:10px 12px;border:2px solid #e1e5f0;border-radius:13px;background:#fff;color:#29345d;text-align:left;font-family:inherit;font-size:13px;font-weight:700;line-height:1.4;cursor:pointer}.learn-option .letter{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:8px;background:#f0edff;color:#51469b;font-weight:950}.learn-option.selected{border-color:#8c7ce5;background:#f6f3ff}.learn-option.correct{border-color:#69b94b;background:#eff9eb}.learn-option.wrong{border-color:#e28b8b;background:#fff2f2}.learn-option:disabled{cursor:default;opacity:1}.learn-feedback{display:none;margin-top:13px;padding:12px;border-radius:12px;background:#f1f8ed;color:#315f2a;font-size:12px;line-height:1.55}.learn-feedback.show{display:block}.learn-feedback.bad{background:#fff3ee;color:#8b452d}.learn-action{width:100%;min-height:47px;margin-top:13px;padding:10px 14px;border:0;border-radius:13px;background:#58b92a;color:#fff;font-size:14px;font-weight:950;box-shadow:0 4px 0 #36871c;cursor:pointer}.learn-action:disabled{background:#dce8d8;color:#fff;box-shadow:none;cursor:not-allowed}.learn-result{text-align:center}.learn-result[hidden]{display:none}</style></head><body><main class="wrap">
 <div class="top"><a id="backQuiz" href="zoology-mcq.html">← Back to Quiz</a><span class="tag">ZOOLOGY · QUICK LEARN</span></div>
 <header class="hero"><div class="eyebrow">QUICKLEARN</div><h1 id="topicTitle">Loading topic…</h1><p>Recall the key question, correct answer and explanation from this topic’s Zoology quiz bank.</p><div class="hero-key">Learn → Recall → Understand</div></header>
 <div class="actions"><a class="primary" id="startQuiz" href="zoology-mcq.html">🎯 Practise Quiz</a><a id="sheetLink" href="zoology-topic-cheat-sheet.html">📘 Topic Cheat Sheet</a></div>
-<section class="card"><h2>📌 Key Learning Points</h2><div id="points"><p class="why">Loading the topic question bank…</p></div></section>
-<section class="card"><h2>🧠 Smart revision method</h2><div class="note">Read each question, recall the answer before revealing it, then review the explanation. Revisit the points you cannot explain in your own words.</div></section>
+<section class="card" id="learnCard"><div class="learn-progress"><span id="learnCounter">Loading questions…</span><span id="learnPercent">0%</span></div><div class="learn-track"><div id="learnBar"></div></div><div class="learn-kicker">ONE QUESTION AT A TIME</div><h2 id="learnQuestion">Loading your first question…</h2><div id="learnOptions" class="learn-options"></div><div id="learnFeedback" class="learn-feedback" aria-live="polite"></div><button type="button" id="learnAction" class="learn-action" disabled>Check answer</button></section><section class="card learn-result" id="learnResult" hidden><h2>🎉 Quick Learn completed</h2><p id="learnScore"></p><button type="button" id="learnRestart" class="learn-action">↻ Practise again</button></section>
 <p class="foot">SkillUp Zoology · Topic-wise quick revision</p></main>
 <script>
 (function(){
 'use strict';
 const params=new URLSearchParams(location.search),topic=(params.get('concept')||'').trim();
-const title=document.getElementById('topicTitle'),points=document.getElementById('points'),count=document.getElementById('count');
-const enc=encodeURIComponent(topic),slug=v=>String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const title=document.getElementById('topicTitle'),enc=encodeURIComponent(topic),slug=v=>String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 document.title=(topic||'Zoology Topic')+' | QuickLearn | SkillUp';title.textContent=topic||'Topic not selected';
-document.getElementById('backQuiz').href='zoology-mcq.html?concept='+enc;
-document.getElementById('startQuiz').href='zoology-mcq.html?concept='+enc;
-document.getElementById('sheetLink').href='zoology-topic-cheat-sheet.html?concept='+enc;
-
-function showError(msg){points.innerHTML='<p class="error">'+msg+'</p>';count.textContent='Bank unavailable';}
-if(!topic){showError('Open this sheet from a Zoology topic quiz so the correct topic can be loaded.');return;}
-function loadBank(file){
- return new Promise((resolve,reject)=>{
-  const before=new Map(Object.keys(window).map(k=>[k,window[k]]));
-  const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261121-zoology-topic-sheet-v1';
-  script.onload=()=>{
-   let found=null;
-   for(const name of Object.keys(window)){
-    if(before.get(name)===window[name])continue;
-    const value=window[name];
-    if(Array.isArray(value)&&value.length&&value.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x)){found=value;break;}
-   }
-   found?resolve(found):reject(new Error('No question bank array detected'));
-  };
-  script.onerror=()=>reject(new Error('Question bank file unavailable'));
-  document.head.appendChild(script);
- });
-}
-async function load(){
- const s=slug(topic),files=[s+'-question-bank.js'];
- if(s==='taxonomy-and-systematics')files.push('taxonomy-systematics-question-bank.js');
- if(s==='darwins-natural-selection')files.push('darwin-natural-selection-question-bank.js');
- if(s==='biodiversity')files.push('biodiversity-patterns-question-bank.js');
- let bank=null;
- for(const file of [...new Set(files)]){try{bank=await loadBank(file);break;}catch(e){}}
- if(!bank){showError('A dedicated question bank is not connected for this topic yet. Return to the Zoology Path and choose another available topic.');return;}
- const rows=bank.slice(0,30);points.replaceChildren();
- rows.forEach((item,i)=>{
-  const article=document.createElement('article');article.className='item';
-  const question=document.createElement('p');question.className='q';
-  const badge=document.createElement('span');badge.className='num';badge.textContent=String(i+1);
-  question.append(badge,document.createTextNode(item.q||'Revision question'));
-  const answer=document.createElement('p');answer.className='answer';
-  const options=Array.isArray(item.o)?item.o:[];
-  let idx=typeof item.a==='number'?item.a:options.indexOf(item.a);
-  if(!Number.isInteger(idx)||idx<0||idx>=options.length)idx=options.indexOf(String(item.a));
-  answer.textContent='Answer: '+(options[idx]!==undefined?options[idx]:String(item.a));
-  const why=document.createElement('p');why.className='why';why.textContent=item.e||'Review the answer and recall the key idea.';
-  article.append(question,answer,why);points.append(article);
- });
- count.textContent=rows.length+' revision points';
-}
+document.getElementById('backQuiz').href='zoology-mcq.html?concept='+enc;document.getElementById('startQuiz').href='zoology-mcq.html?concept='+enc;document.getElementById('sheetLink').href='zoology-topic-cheat-sheet.html?concept='+enc;
+const qEl=document.getElementById('learnQuestion'),optsEl=document.getElementById('learnOptions'),feedback=document.getElementById('learnFeedback'),action=document.getElementById('learnAction'),card=document.getElementById('learnCard'),result=document.getElementById('learnResult'),counter=document.getElementById('learnCounter'),percent=document.getElementById('learnPercent'),bar=document.getElementById('learnBar');
+let bankQuestions=[],index=0,selected=null,checked=false,score=0;
+function showError(msg){qEl.textContent='Questions are unavailable';optsEl.replaceChildren();feedback.className='learn-feedback show bad';feedback.textContent=msg;action.disabled=true;counter.textContent='Bank unavailable';}
+if(!topic){showError('Open Quick Learn from a Zoology topic so the correct questions can be loaded.');return;}
+function loadBank(file){return new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src='/question-banks/'+file+'?v=20261122-quicklearn-one-at-time-v1';sc.onload=()=>{const names=Object.keys(window).filter(n=>/^skillUp.*Questions$/i.test(n));const arrays=names.map(n=>window[n]).filter(v=>Array.isArray(v)&&v.length&&v.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x));arrays.length?resolve(arrays[0]):reject(Error('No question array found'));};sc.onerror=()=>reject(Error('Bank file unavailable'));document.head.appendChild(sc);});}
+function answerIndex(item){const o=Array.isArray(item.o)?item.o:[];let n=typeof item.a==='number'?item.a:o.indexOf(item.a);if(!Number.isInteger(n)||n<0||n>=o.length)n=o.indexOf(String(item.a));return n;}
+function render(){const item=bankQuestions[index],opts=Array.isArray(item.o)?item.o:[];selected=null;checked=false;optsEl.replaceChildren();feedback.className='learn-feedback';feedback.textContent='';action.disabled=true;action.textContent='Check answer';counter.textContent='Question '+(index+1)+' of '+bankQuestions.length;const p=Math.round(index/bankQuestions.length*100);percent.textContent=p+'%';bar.style.width=p+'%';qEl.textContent=item.q||'Revision question';const order=opts.map((v,n)=>({v,n}));for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}order.forEach((entry,i)=>{const btn=document.createElement('button');btn.type='button';btn.className='learn-option';btn.dataset.answer=String(entry.n);const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+i);const label=document.createElement('span');label.textContent=entry.v;btn.append(letter,label);btn.addEventListener('click',()=>{if(checked)return;selected=entry.n;optsEl.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===btn));action.disabled=false;});optsEl.append(btn);});}
+function check(){if(selected===null||checked)return;checked=true;const item=bankQuestions[index],correct=answerIndex(item),buttons=[...optsEl.querySelectorAll('button')];buttons.forEach(btn=>{btn.disabled=true;const n=Number(btn.dataset.answer);if(n===correct)btn.classList.add('correct');if(n===selected&&selected!==correct)btn.classList.add('wrong');});const ok=selected===correct;if(ok)score++;feedback.className='learn-feedback show'+(ok?'':' bad');const heading=document.createElement('strong');heading.textContent=ok?'✓ Correct!':'✕ Not quite. Correct answer: '+(item.o?.[correct]??'Not specified');const why=document.createElement('div');why.textContent=item.e||'Review this key idea before moving to the next question.';feedback.replaceChildren(heading,why);action.textContent=index===bankQuestions.length-1?'Finish Quick Learn':'Next question →';counter.textContent='Question '+(index+1)+' of '+bankQuestions.length+' · '+score+' correct';}
+function advance(){if(!checked){check();return;}if(index<bankQuestions.length-1){index++;render();return;}card.hidden=true;result.hidden=false;document.getElementById('learnScore').textContent='You answered '+score+' out of '+bankQuestions.length+' questions correctly.';percent.textContent='100%';bar.style.width='100%';counter.textContent='Completed · '+bankQuestions.length+' questions';}
+action.addEventListener('click',advance);document.getElementById('learnRestart').addEventListener('click',()=>{index=0;score=0;card.hidden=false;result.hidden=true;render();});
+async function load(){const s=slug(topic),files=[s+'-question-bank.js'];if(s==='taxonomy-and-systematics')files.push('taxonomy-systematics-question-bank.js');if(s==='darwins-natural-selection')files.push('darwin-natural-selection-question-bank.js');if(s==='biodiversity')files.push('biodiversity-patterns-question-bank.js');let loaded=null;for(const file of [...new Set(files)]){try{loaded=await loadBank(file);break;}catch(e){}}if(!loaded){showError('A dedicated question bank is not connected for this topic yet. Return to the Zoology Path and choose another available topic.');return;}bankQuestions=loaded.slice(0,30);render();}
 load();
 })();
 </script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

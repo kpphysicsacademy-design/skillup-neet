@@ -125,8 +125,12 @@
       !document.querySelector('link[href*="physics-duolingo-quiz.css"]')) {
     const physicsTheme = document.createElement('link');
     physicsTheme.rel = 'stylesheet';
-    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261122-unified-architecture-v1';
+    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261122-unified-architecture-v2';
     document.head.appendChild(physicsTheme);
+    const physicsDesign = document.createElement('link');
+    physicsDesign.rel = 'stylesheet';
+    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    document.head.appendChild(physicsDesign);
   }
 
 
@@ -155,10 +159,6 @@
       if (active) { a.className = 'active'; a.setAttribute('aria-current', 'page'); }
       tabs.appendChild(a);
     });
-    const style = document.createElement('style');
-    style.id = 'su-topic-tabs-style';
-    style.textContent = '.su-topic-tabs{width:min(100% - 24px,720px);margin:14px auto 12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.su-topic-tabs a{min-height:46px;display:grid;place-items:center;padding:8px 4px;border:2px solid #dce8f3;border-radius:14px;background:#fff;color:#245273;text-decoration:none;text-align:center;font-size:13px;font-weight:900;box-shadow:0 3px 0 #dce8f3}.su-topic-tabs a.active{background:#e8f8dc;border-color:#8ed65b;color:#286c12;box-shadow:0 3px 0 #b9e69c}@media(max-width:420px){.su-topic-tabs{width:calc(100% - 20px);gap:6px}.su-topic-tabs a{font-size:11px;min-height:44px}}';
-    document.head.appendChild(style);
     const header = document.querySelector('header');
     const main = document.querySelector('main');
     if (header) header.insertAdjacentElement('afterend', tabs);

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7fbff"><meta name="description" content="Chemistry QuickLearn topic flashcards using the existing SkillUp NEET question banks."><title>Chemistry QuickLearn | SkillUp</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#e7f6ff,transparent 45%),#f7fbff;color:#26344e;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{width:min(100% - 22px,760px);margin:auto;padding:14px 0 36px}.top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.top a{color:#4c65be;text-decoration:none;font-weight:900;font-size:12px}.tag{padding:7px 10px;background:#e9eaff;color:#6750c6;border-radius:30px;font-size:10px;font-weight:900}.hero{position:relative;overflow:hidden;padding:19px;border:2px solid #dfe4f5;border-bottom:5px solid #d4d9ed;border-radius:20px;background:linear-gradient(115deg,#fff,#e7f5ff 55%,#f2e9ff)}.hero:after{content:"⚗️";position:absolute;right:13px;top:15px;font-size:36px}.eyebrow{font-size:10px;color:#7855d8;font-weight:950;letter-spacing:1px}.hero h1{margin:7px 0;font-size:clamp(23px,5vw,30px);line-height:1.2;max-width:87%}.hero p{margin:0;color:#617086;font-size:12px}.actions{display:flex;gap:9px;margin:12px 0}.actions a{flex:1;text-align:center;padding:10px;border:2px solid #e4e4ee;border-bottom:4px solid #d4dbe4;border-radius:12px;background:white;text-decoration:none;color:#4362ad;font-size:12px;font-weight:900}.actions a.primary{background:#58cc02;color:#fff;border-color:#58cc02;border-bottom-color:#46a302}.meta{display:flex;justify-content:space-between;font-size:12px;font-weight:850;color:#64728b;margin:13px 2px 7px}.track{height:11px;border-radius:30px;background:#e3e8f0;overflow:hidden}.track i{display:block;height:100%;width:0;background:#58cc02;transition:width .2s}.card{margin-top:13px;padding:18px;border:2px solid #e4e7ef;border-bottom:5px solid #d8e0ea;border-radius:19px;background:#fff}.qmeta{font-size:10px;font-weight:950;color:#7255d7;letter-spacing:.6px}.question{font-size:clamp(19px,4vw,24px);line-height:1.35;margin:12px 0 16px;overflow-wrap:anywhere}.reveal{width:100%;min-height:45px;background:#e5f6ff;border:2px solid #1cb0f6;border-bottom:5px solid #148ac3;border-radius:12px;color:#126f9f;font-size:13px;font-weight:950;cursor:pointer}.answer{margin-top:12px;padding:14px;border:2px solid #b8e69e;border-radius:13px;background:#e9fbdf}.answer strong{display:block;color:#337700;margin-bottom:7px}.answer p{margin:7px 0 0;overflow-wrap:anywhere}.controls{display:flex;gap:9px;margin-top:13px}.controls button{flex:1;min-height:45px;border:2px solid #e4e6ed;border-bottom:4px solid #d4dbe4;border-radius:12px;background:#fff;color:#4362ad;font-size:13px;font-weight:900;cursor:pointer}.controls button:last-child{background:#58cc02;border-color:#58cc02;border-bottom-color:#46a302;color:#fff}.controls button:disabled{opacity:.45;cursor:default}.error{padding:15px;color:#914044;background:#fff0ef;border-radius:12px}.skillup-chem-image{max-width:100%;height:auto}.skillup-equation,.skillup-reaction{overflow-x:auto}.foot{color:#7b869a;text-align:center;font-size:11px;margin-top:18px}@media(max-width:520px){.wrap{width:calc(100% - 20px)}.hero,.card{padding:15px}.question{font-size:19px}}@media(prefers-reduced-motion:reduce){.track i{transition:none}}
+</style></head><body><main class="wrap"><nav class="top"><a id="backQuiz" href="chemistry-mcq.html">← Back to Quiz</a><span class="tag">CHEMISTRY · QUICKLEARN</span></nav><header class="hero"><div class="eyebrow">LEARN → RECALL → UNDERSTAND</div><h1 id="title">Chemistry QuickLearn</h1><p>Revise questions, correct answers and explanations from the same Chemistry quiz bank.</p></header><div class="actions"><a href="chemistry-home.html">← Chemistry Path</a><a id="practice" class="primary" href="chemistry-mcq.html">🎯 Practice Quiz</a></div><div class="meta"><span id="counter">Loading flashcards…</span><span id="pct">0%</span></div><div class="track"><i id="progress"></i></div><section class="card" aria-live="polite"><div class="qmeta" id="qmeta">QUICK LEARN</div><h2 class="question" id="question">Loading concept…</h2><button class="reveal" id="reveal" type="button">👀 Reveal answer &amp; explanation</button><div class="answer" id="answer" hidden><strong>Correct answer</strong><div id="answerText"></div><p id="explanation"></p></div><div class="controls"><button type="button" id="previous">← Previous</button><button type="button" id="next">Next →</button></div></section><p class="foot">SkillUp Chemistry · Topic-wise quick revision</p></main>
+<script>
+(()=>{
+const params=new URLSearchParams(location.search),concept=params.get('concept')||'',micro=params.get('micro')||'';
+const slug=v=>String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const key=slug(micro)||slug(concept),$=id=>document.getElementById(id);
+const query=new URLSearchParams({concept,micro});$('backQuiz').href='chemistry-mcq.html?'+query;$('practice').href='chemistry-mcq.html?'+query;
+$('title').textContent=(concept||micro||'Chemistry')+' · QuickLearn';document.title=(concept||micro||'Chemistry')+' | QuickLearn | SkillUp';
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
+const BANK_VERSION='20261121-percentage-yield-quiz-v1';
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function richText(v){
+ let s=esc(v);
+ s=s.replace(/\[\[image:([^|\]]+)(?:\|([^\]]+))?\]\]/g,(_,src,alt)=>{let p=String(src||'').trim();if(/^assets\//i.test(p))p='https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/'+p;return '<img class="skillup-chem-image" src="'+esc(p)+'" alt="'+esc(alt||'Chemical structure')+'" loading="lazy">';});
+ s=s.replace(/\[\[reaction:([\s\S]+?)\]\]/g,'<div class="skillup-reaction">\\(\\ce{$1}\\)</div>');
+ s=s.replace(/\[\[chem:([\s\S]+?)\]\]/g,'<span class="skillup-chem-inline">\\(\\ce{$1}\\)</span>');
+ s=s.replace(/\[\[formula:([\s\S]+?)\]\]/g,'<div class="skillup-equation">\\[$1\\]</div>');
+ s=s.replace(/\$\$([\s\S]+?)\$\$/g,'<div class="skillup-equation">\\[$1\\]</div>');
+ s=s.replace(/\\\(([\s\S]+?)\\\)/g,'<span class="skillup-inline-equation">\\($1\\)</span>');
+ s=s.replace(/\$([^$\n]+)\$/g,'<span class="skillup-inline-equation">\\($1\\)</span>');
+ return s;
+}
+function isBank(v){return Array.isArray(v)&&v.length&&v.every(x=>x&&typeof x==='object'&&((('q'in x)&&('o'in x)&&('a'in x))||(('question'in x)&&Array.isArray(x.options)&&('answer'in x))));}
+function getBank(key){
+ const reg=window.SKILLUP_CHEMISTRY_BANK||{};
+ const named={
+  'matter-and-its-nature':window.skillUpMatterNatureQuestions,
+  'atom-molecule-element-compound':window.skillUpAtomMoleculeElementCompoundQuestions,
+  'dalton-atomic-theory':window.SkillUpChemistryDaltonAtomicTheoryQuestions,
+  'laws-of-chemical-combination':window.skillUpLawsChemicalCombinationQuestions,
+  'law-of-conservation-of-mass':window.skillUpLawConservationMassQuestions,
+  'law-of-definite-proportions':window.skillUpLawDefiniteProportionsQuestions,
+  'atomic-mass':window.skillUpAtomicMassQuestions,
+  'molecular-mass':window.SkillUpMolecularMassQuestions,
+  'mole-concept':window.SkillUpMoleConceptQuestions,
+  'avogadro-constant':window.SkillUpAvogadroConstantQuestions,
+  'molar-mass':window.SkillUpMolarMassQuestions,
+  'percentage-composition':window.SkillUpPercentageCompositionQuestions,
+  'empirical-formula':window.SkillUpEmpiricalFormulaQuestions,
+  'molecular-formula':window.SkillUpMolecularFormulaQuestions,
+  'chemical-equations':window.SkillUpChemistryChemicalEquationsQuestions,
+  'balancing-chemical-equations':window.SkillUpBalancingChemicalEquationsQuestions,
+  'stoichiometry':window.SkillUpStoichiometryQuestions,
+  'stoichiometric-calculations':window.SkillUpStoichiometricCalculationsQuestions,
+  'limiting-reagent':window.SkillUpLimitingReagentQuestions,
+  'excess-reagent':window.SkillUpExcessReagentQuestions,
+  'percentage-yield':window.SkillUpPercentageYieldQuestions
+ };
+ for(const k of [key,slug(concept),slug(micro)]){
+  if(isBank(reg[k]))return reg[k];
+  if(isBank(named[k]))return named[k];
+ }
+ const changed=Object.keys(window).filter(k=>/^skillup.*questions$/i.test(k)&&isBank(window[k]));
+ return changed.length===1?window[changed[0]]:null;
+}
+function loadScript(src,key){
+ return new Promise((resolve,reject)=>{
+  const path='question-banks/'+src;
+  const urls=['/'+path,'https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/'+path];
+  let settled=false,loaded=0;
+  const finish=()=>{if(settled)return;const bank=getBank(key);if(bank){settled=true;resolve(bank);}else if(loaded===urls.length){settled=true;reject(new Error('Question bank unavailable'));}};
+  urls.forEach((url,i)=>{
+   const sc=document.createElement('script');
+   sc.async=true;sc.src=url+'?v='+BANK_VERSION;sc.crossOrigin='anonymous';
+   sc.onload=()=>{loaded++;finish();};
+   sc.onerror=()=>{loaded++;finish();};
+   document.head.appendChild(sc);
+  });
+  setTimeout(()=>{if(!settled){const bank=getBank(key);settled=true;if(bank)resolve(bank);else reject(new Error('Question bank timed out'));}},10000);
+ });
+}
+function normalize(item){
+ if(Array.isArray(item.options)){
+  const opts=item.options.map(o=>typeof o==='object'?(o.text||o.label||o.value):o);
+  const id=typeof item.answer==='string'?item.answer:'';
+  const a=item.options.findIndex(o=>(typeof o==='object'?(o.id||o.value):o)===id);
+  return {q:item.question||'',o:opts,a,why:item.explanation||item.why||''};
+ }
+ return {q:item.q||'',o:Array.isArray(item.o)?item.o.slice():[],a:typeof item.a==='number'?item.a:(item.o||[]).indexOf(item.a),why:item.e||item.why||item.explanation||''};
+}
+
+let bank=[],index=0;
+function showError(msg){$('question').textContent=msg;$('reveal').hidden=true;$('previous').disabled=true;$('next').disabled=true;$('counter').textContent='Learning cards unavailable';}
+function render(){const q=bank[index];$('qmeta').textContent='FLASHCARD '+(index+1)+' / '+bank.length;$('question').innerHTML=richText(q.q);$('answerText').innerHTML=richText(q.o[q.a]);$('explanation').innerHTML=richText(q.why||'Review the correct answer above.');$('answer').hidden=true;$('reveal').hidden=false;$('counter').textContent='Card '+(index+1)+' of '+bank.length;$('pct').textContent=Math.round((index+1)/bank.length*100)+'%';$('progress').style.width=((index+1)/bank.length*100)+'%';$('previous').disabled=index===0;$('next').textContent=index===bank.length-1?'Review again ↻':'Next →';if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([$('question'),$('answer')]).catch(()=>{});}
+$('reveal').addEventListener('click',()=>{$('answer').hidden=false;$('reveal').hidden=true;if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([$('answer')]).catch(()=>{});});
+$('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
+$('next').addEventListener('click',()=>{index=index<bank.length-1?index+1:0;render();});
+async function load(){if(!concept&&!micro){showError('Open QuickLearn from a Chemistry quiz to select a topic.');return;}const keys=[slug(micro),slug(concept)].filter(Boolean),files=[...new Set(keys.map(k=>k+'-question-bank.js'))];let raw=null;for(const f of files){try{raw=await loadScript(f,keys[0]);if(raw)break;}catch(e){}}if(!raw){showError('This Chemistry concept question bank could not be loaded. Return to the quiz and try again.');return;}bank=raw.slice(0,30).map(normalize).filter(q=>q.q&&q.o.length>=2&&q.a>=0&&q.a<q.o.length);if(!bank.length){showError('No valid learning cards were found for this concept.');return;}render();}
+load();
+})();
+</script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script></body></html>

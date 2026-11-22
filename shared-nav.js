@@ -129,6 +129,43 @@
     document.head.appendChild(physicsTheme);
   }
 
+
+  // Standard three-page navigation for every topic-specific Physics module.
+  // Existing topic navigation is retained; missing navigation is added without touching quiz logic.
+  const physicsRoute = location.pathname.match(/^\/physics-(.+)-(practice|quiz|learn|simulator)\.html$/i);
+  if (physicsRoute && !/^(master|learning)$/.test(physicsRoute[1]) &&
+      !document.querySelector('.su-topic-tabs, nav.tabs, nav.page-tabs, .page-tabs')) {
+    const slug = physicsRoute[1];
+    const kind = physicsRoute[2].toLowerCase();
+    const practiceHref = kind === 'quiz' || kind === 'practice'
+      ? location.pathname.split('/').pop()
+      : 'physics-' + slug + '-practice.html';
+    const tabs = document.createElement('nav');
+    tabs.className = 'su-topic-tabs';
+    tabs.setAttribute('aria-label', slug.replace(/-/g, ' ') + ' learning pages');
+    const links = [
+      ['📘 Learn', 'physics-' + slug + '-learn.html', kind === 'learn'],
+      ['🎮 Simulator', 'physics-' + slug + '-simulator.html', kind === 'simulator'],
+      ['🧠 Practice', practiceHref, kind === 'practice' || kind === 'quiz']
+    ];
+    links.forEach(([label, href, active]) => {
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = label;
+      if (active) { a.className = 'active'; a.setAttribute('aria-current', 'page'); }
+      tabs.appendChild(a);
+    });
+    const style = document.createElement('style');
+    style.id = 'su-topic-tabs-style';
+    style.textContent = '.su-topic-tabs{width:min(100% - 24px,720px);margin:14px auto 12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.su-topic-tabs a{min-height:46px;display:grid;place-items:center;padding:8px 4px;border:2px solid #dce8f3;border-radius:14px;background:#fff;color:#245273;text-decoration:none;text-align:center;font-size:13px;font-weight:900;box-shadow:0 3px 0 #dce8f3}.su-topic-tabs a.active{background:#e8f8dc;border-color:#8ed65b;color:#286c12;box-shadow:0 3px 0 #b9e69c}@media(max-width:420px){.su-topic-tabs{width:calc(100% - 20px);gap:6px}.su-topic-tabs a{font-size:11px;min-height:44px}}';
+    document.head.appendChild(style);
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+    if (header) header.insertAdjacentElement('afterend', tabs);
+    else if (main) main.insertAdjacentElement('beforebegin', tabs);
+    else document.body.insertAdjacentElement('afterbegin', tabs);
+  }
+
   // Android WebView compatibility: preserve same-site target=_blank navigation.
   document.addEventListener('click', event => {
     const link = event.target && event.target.closest ? event.target.closest('a[target="_blank"]') : null;

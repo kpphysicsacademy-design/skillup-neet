@@ -25,8 +25,13 @@ jobs:
           for(const script of scripts)new vm.Script(script);
           assert.match(html,/storageKey='skillup-physical-quantities-quiz-v1:'\+uid/);
           assert.match(html,/function persist\(\)/);
-          assert.match(html,/if\(completed\)finish\(\);else render\(\);/);
+          assert.match(html,/if\(completed\)finish\(false\);else render\(\);/);
           assert.match(html,/const uid=session\.user&&session\.user\.uid/);
-          assert.match(html,/completed=true;persist\(\)/);
+          assert.match(html,/completed=true;if\(save\)persist\(\)/);
+          assert.match(html,/id="syncStatus"/);
+          assert.match(html,/Saved to cloud/);
+          assert.match(html,/Saved offline/);
+          assert.match(html,/user_id:quizUid/);
+          assert.match(html,/cloudRef=db\.collection\('skillup_progress'\)/);
           console.log('Quiz JavaScript syntax and persistence wiring checks passed');
           NODE

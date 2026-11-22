@@ -24,9 +24,9 @@ window.skillUpAvesQuestions = [
 {q:"The respiratory air sacs and lungs help birds to:",o:["Support high metabolic demands of flight and activity","Digest cellulose","Produce feathers","Form eggshells"],a:0,e:"The efficient avian respiratory system supports high metabolic rates."},
 {q:"The eggs of birds are:",o:["Amniotic and shelled","Jelly-like and shell-less","Produced by budding","Unfertilised in all species"],a:0,e:"Birds lay amniotic eggs enclosed by a hard calcium-rich shell."},
 {q:"Bird eggshells are mainly composed of:",o:["Calcium carbonate","Chitin","Cellulose","Silica"],a:0,e:"The mineral portion of a typical bird eggshell is primarily calcium carbonate."},
-{q:"Which bird is well known for flightlessness?",o:["Ostrich","Pigeon","Swallow","Eagle"],a:0,e:"The ostrich is a large flightless bird adapted for running."},
-{q:"Penguins are specialised for:",o:["Swimming","Powered flight in air","Burrowing only","Gliding between trees"],a:0,e:"Penguins are flightless birds whose wings are modified into flippers for swimming."},
-{q:"The uropygial or preen gland in many birds produces secretions used mainly for:",o:["Feather maintenance","Digestion","Blood clotting","Egg fertilisation"],a:0,e:"Preen gland secretions help maintain feathers in many birds."},
-{q:"Which pair consists entirely of birds?",o:["Pigeon and penguin","Bat and pigeon","Crocodile and eagle","Frog and ostrich"],a:0,e:"Pigeon and penguin are both birds."},
+{q:"Which NCERT example represents a flightless bird?",o:["Struthio","Columba","Corvus","Psittacula"],a:0,e:"Struthio is the ostrich, a flightless bird."},
+{q:"Which NCERT example is a penguin?",o:["Aptenodytes","Neophron","Pavo","Corvus"],a:0,e:"Aptenodytes is the penguin."},
+{q:"Which NCERT example represents a vulture?",o:["Neophron","Psittacula","Columba","Struthio"],a:0,e:"Neophron is the vulture."},
+{q:"Which NCERT example is the peacock?",o:["Pavo","Corvus","Neophron","Aptenodytes"],a:0,e:"Pavo is the peacock."},
 {q:"Which combination best represents major adaptations of birds for flight?",o:["Wings, feathers, lightweight skeleton and efficient lungs with air sacs","Gills, fins and swim bladder","Jointed legs and chitin","Shell, mantle and foot"],a:0,e:"Bird flight is supported by wings and feathers, a specialised skeleton and a highly efficient respiratory and circulatory system."}
 ];

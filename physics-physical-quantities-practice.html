@@ -69,7 +69,7 @@ const bank=[
 const $=id=>document.getElementById(id);
 let questions=bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
-let storageKey=null,restored=false,completed=false,cloudRef=null,writeQueue=Promise.resolve(),revision=0;
+let storageKey=null,restored=false,completed=false,cloudRef=null,quizUid=null,writeQueue=Promise.resolve();
 const allQuestions=()=>bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 const validState=s=>s&&s.v===2&&typeof s.updatedAt==='number'&&Number.isFinite(s.updatedAt)&&
  Array.isArray(s.questionIds)&&s.questionIds.length>0&&s.questionIds.length<=bank.length&&
@@ -99,14 +99,14 @@ function persist(){
  if(cloudRef){
   // Serialize writes so slower earlier requests cannot overwrite newer answers.
   writeQueue=writeQueue.catch(()=>{}).then(()=>cloudRef.set({
-   user_id:cloudRef.id.split('_')[0],subject:'physics',topic:'physical_quantities_practice',
+   user_id:quizUid,subject:'physics',topic:'physical_quantities_practice',
    quiz_state:state,updated_at:new Date(state.updatedAt).toISOString()
   },{merge:true})).catch(e=>{console.warn('Cloud quiz save failed; local copy retained',e);});
  }
 }
 async function initializeQuiz(uid){
  if(restored||!uid)return;restored=true;
- storageKey='skillup-physical-quantities-quiz-v1:'+uid;
+ quizUid=uid;storageKey='skillup-physical-quantities-quiz-v1:'+uid;
  let local=null,remote=null;
  try{local=JSON.parse(localStorage.getItem(storageKey)||'null');}catch(e){}
  // Existing v1 local progress remains eligible for migration.

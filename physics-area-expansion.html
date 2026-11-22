@@ -181,5 +181,18 @@ render();
   new MutationObserver(removeQuizAudio).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
+
+<script>
+(function(){
+ const key='skillup-physics-area-expansion-pages-v1';
+ let state={learn:false,sim:false,practice:false};
+ try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'));}catch(e){}
+ const el=document.getElementById('pageProgress');
+ function draw(){if(el)el.textContent='Progress: '+Object.values(state).filter(Boolean).length+'/3 pages completed';}
+ const slot=document.getElementById('finishSlot');
+ if(slot&&window.MutationObserver)new MutationObserver(()=>{if(slot.children.length){state.practice=true;try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}draw();}}).observe(slot,{childList:true});
+ draw();
+})();
+</script>
 </body>
 </html>

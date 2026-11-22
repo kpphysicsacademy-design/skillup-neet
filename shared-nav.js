@@ -119,6 +119,16 @@
     document.head.appendChild(mathsHeader);
   }
 
+
+  // Load the shared Physics visual system on every Physics learning, simulator and practice route.
+  if (/^\/physics-.*\.html$/i.test(window.location.pathname) &&
+      !document.querySelector('link[href*="physics-duolingo-quiz.css"]')) {
+    const physicsTheme = document.createElement('link');
+    physicsTheme.rel = 'stylesheet';
+    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261122-unified-architecture-v1';
+    document.head.appendChild(physicsTheme);
+  }
+
   // Android WebView compatibility: preserve same-site target=_blank navigation.
   document.addEventListener('click', event => {
     const link = event.target && event.target.closest ? event.target.closest('a[target="_blank"]') : null;

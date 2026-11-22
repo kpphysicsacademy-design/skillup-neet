@@ -134,6 +134,16 @@
   }
 
 
+  // Always attach the centralized design layer, including pages that already load the legacy theme.
+  if (/^\/physics-.*\.html$/i.test(window.location.pathname) &&
+      !document.querySelector('link[href*="physics-design-system.css"]')) {
+    const physicsDesign = document.createElement('link');
+    physicsDesign.rel = 'stylesheet';
+    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    document.head.appendChild(physicsDesign);
+  }
+
+
   // Standard three-page navigation for every topic-specific Physics module.
   // Existing topic navigation is retained; missing navigation is added without touching quiz logic.
   const physicsRoute = location.pathname.match(/^\/physics-(.+)-(practice|quiz|learn|simulator)\.html$/i);

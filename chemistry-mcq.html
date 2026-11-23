@@ -104,6 +104,9 @@ document.title=displayConcept+' | Chemistry Quiz | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 const BANK_VERSION='20261121-percentage-yield-quiz-v1';
 let questions=[],originalQuestions=[],index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
+const progressKey='skillup-chemistry-quiz-v1:'+slug(micro||concept);
+function saveProgress(){try{localStorage.setItem(progressKey,JSON.stringify({v:1,bankVersion:BANK_VERSION,ids:questions.map(q=>q.q),index,score,streak,chosen,locked,wrongAttempts}));}catch(e){}}
+function restoreProgress(){try{const s=JSON.parse(localStorage.getItem(progressKey)||'null');if(!s||s.v!==1||s.bankVersion!==BANK_VERSION||!Array.isArray(s.ids)||s.ids.length!==questions.length||s.ids.some((id,i)=>id!==questions[i].q))return;if(!Number.isInteger(s.index)||s.index<0||s.index>questions.length||!Number.isInteger(s.score)||s.score<0||s.score>questions.length||!Number.isInteger(s.streak)||s.streak<0||s.streak>questions.length||!Array.isArray(s.wrongAttempts))return;index=s.index;score=s.score;streak=s.streak;wrongAttempts=s.wrongAttempts;chosen=Number.isInteger(s.chosen)&&s.chosen>=0&&s.chosen<(questions[index]?.o.length||0)?s.chosen:null;locked=Boolean(s.locked&&chosen!==null);$('xp').textContent=score*10;$('streak').textContent=streak;}catch(e){}}
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function richText(v){
  let s=esc(v);
@@ -185,7 +188,11 @@ async function load(){
  questions=originalQuestions.slice();
  if(!questions.length){$('question').textContent='No valid questions found';$('check').style.display='none';return;}
  $('subtitle').textContent=questions.length+' questions • Select an answer, check it, then continue.';
+ restoreProgress();
+ if(index>=questions.length){showResults();return;}
+ const wasLocked=locked,savedChosen=chosen;
  render();
+ if(wasLocked){chosen=savedChosen;locked=true;showCheckedAnswer();}
 }
 function render(){
  chosen=null;locked=false;const item=questions[index],pct=Math.round(index/questions.length*100);
@@ -205,10 +212,15 @@ $('check').addEventListener('click',()=>{
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.innerHTML='✨ Correct! '+richText(item.why||'Your answer matches the correct option.');}
  else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.innerHTML='Not quite. '+richText(item.why||'Review the correct option above.')+' Correct answer: '+richText(item.o[item.a])+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
+ saveProgress();
  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([feedback]).catch(()=>{});
 });
+function showCheckedAnswer(){const item=questions[index],buttons=[...document.querySelectorAll('.option')];buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');if(j===chosen&&chosen!==item.a)b.classList.add('wrong');});const feedback=$('feedback');if(chosen===item.a){feedback.className='feedback show good';feedback.innerHTML='✨ Correct! '+richText(item.why||'Your answer matches the correct option.');}else{feedback.className='feedback show bad';feedback.innerHTML='Not quite. '+richText(item.why||'Review the correct option above.')+' Correct answer: '+richText(item.o[item.a])+'.';}$('check').style.display='none';$('continue').className='btn continue show';}
 $('continue').addEventListener('click',()=>{
- if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ if(!locked)return;index++;chosen=null;locked=false;saveProgress();if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ showResults();
+});
+function showResults(){
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
@@ -216,9 +228,9 @@ $('continue').addEventListener('click',()=>{
  if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const el=document.createElement('article');el.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;el.append(q,yours,correct,why);review.appendChild(el);});}
  else review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';
  $('finishSlot').replaceChildren(card);
- function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];chosen=null;locked=false;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();saveProgress();render();window.scrollTo({top:0,behavior:'smooth'});}
  $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));
-});
+}
 load();
 })();
 </script>

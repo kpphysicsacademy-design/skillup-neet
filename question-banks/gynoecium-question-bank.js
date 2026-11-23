@@ -30,3 +30,39 @@ window.skillUpGynoeciumQuestions = [
 {q:"Which sequence correctly describes the route after pollen lands on a compatible stigma?",o:["Stigma → style → ovary → ovule","Ovary → stigma → style → ovule","Style → stigma → ovary → anther","Stigma → anther → style → ovary"],a:0,e:"A compatible pollen grain germinates on the stigma and the pollen tube grows through the style toward the ovary and ovule."},
 {q:"Which statement best summarizes the gynoecium?",o:["It is the female reproductive whorl composed of one or more carpels, each typically having stigma, style and ovary","It is the male reproductive whorl composed of stamens","It is the accessory whorl composed of sepals","It is the accessory whorl composed of petals"],a:0,e:"The gynoecium is the female reproductive whorl and consists of one or more carpels."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 9
+window.skillUpGynoeciumQuestions.push(...[
+  {
+    "q": "The pollen-receptive surface of a carpel is the:",
+    "o": [
+      "Stigma",
+      "Ovary",
+      "Filament",
+      "Anther"
+    ],
+    "a": 0,
+    "e": "The stigma receives pollen grains during pollination."
+  },
+  {
+    "q": "A gynoecium with fused carpels is termed:",
+    "o": [
+      "Apocarpous",
+      "Syncarpous",
+      "Monadelphous",
+      "Epipetalous"
+    ],
+    "a": 1,
+    "e": "Syncarpous denotes two or more united carpels."
+  },
+  {
+    "q": "After fertilisation, an ovule usually develops into a:",
+    "o": [
+      "Petal",
+      "Fruit wall",
+      "Seed",
+      "Stamen"
+    ],
+    "a": 2,
+    "e": "The ovule becomes a seed; the ovary generally develops into a fruit."
+  }
+]);

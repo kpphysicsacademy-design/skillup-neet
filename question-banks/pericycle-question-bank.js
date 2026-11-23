@@ -30,3 +30,39 @@ window.skillUpPericycleQuestions=[
 {q:"Which root tissue is most directly responsible for initiating lateral roots?",o:["Pericycle","Cortex","Epidermis","Pith"],a:1,e:"Pericycle cells initiate lateral root primordia."},
 {q:"The best description of the pericycle is:",o:["A peripheral stele layer with roles in root branching and secondary growth","The outermost root layer","A photosynthetic tissue","A reproductive tissue"],a:1,e:"The pericycle is a specialized stele layer with important developmental roles in roots."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 18
+window.skillUpPericycleQuestions.push(...[
+  {
+    "q": "Lateral roots typically originate from the:",
+    "o": [
+      "Pericycle",
+      "Root cap",
+      "Epidermis",
+      "Pith"
+    ],
+    "a": 0,
+    "e": "Lateral roots originate endogenously from pericycle cells."
+  },
+  {
+    "q": "The pericycle lies immediately:",
+    "o": [
+      "Outside the epidermis",
+      "Inside the endodermis",
+      "Inside the root cap",
+      "Outside the cortex"
+    ],
+    "a": 1,
+    "e": "The pericycle is the outermost tissue of the stele, internal to the endodermis."
+  },
+  {
+    "q": "In a dicot root, pericycle may contribute to formation of:",
+    "o": [
+      "Stomata",
+      "Leaf mesophyll",
+      "Cork cambium",
+      "Flower petals"
+    ],
+    "a": 2,
+    "e": "Pericycle cells can participate in cork cambium formation during root secondary growth."
+  }
+]);

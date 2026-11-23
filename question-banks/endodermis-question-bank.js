@@ -30,3 +30,39 @@ window.skillUpEndodermisQuestions=[
 {q:"Casparian strips are most directly associated with:",o:["Selective radial transport in roots","Transpiration through stomata","Photosynthetic carbon fixation","Pollen germination"],a:1,e:"Their key role is controlling radial movement of water and solutes across the root boundary."},
 {q:"Which statement about endodermis is correct?",o:["It forms a selective boundary around the root stele","It is the outermost root layer","It is made of xylem vessels","It is a reproductive tissue"],a:1,e:"The endodermis surrounds the stele and regulates movement from cortex to vascular tissues."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 18
+window.skillUpEndodermisQuestions.push(...[
+  {
+    "q": "The endodermis of a root is the innermost layer of the:",
+    "o": [
+      "Cortex",
+      "Epidermis",
+      "Pith",
+      "Xylem"
+    ],
+    "a": 0,
+    "e": "The endodermis forms the inner boundary of the root cortex."
+  },
+  {
+    "q": "Casparian strips contain deposits rich in:",
+    "o": [
+      "Cellulose only",
+      "Suberin",
+      "Chlorophyll",
+      "Pectin only"
+    ],
+    "a": 1,
+    "e": "Casparian strips contain suberin and act as an apoplastic barrier."
+  },
+  {
+    "q": "Casparian strips primarily restrict:",
+    "o": [
+      "Symplastic movement through plasmodesmata",
+      "Photosynthesis",
+      "Unrestricted apoplastic flow",
+      "Mitosis in meristems"
+    ],
+    "a": 2,
+    "e": "The strip blocks free movement through cell walls and intercellular spaces."
+  }
+]);

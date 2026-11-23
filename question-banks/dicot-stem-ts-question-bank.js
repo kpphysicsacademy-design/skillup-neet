@@ -30,3 +30,40 @@ window.skillUpDicotStemTSQuestions=[
 {q:`Which cells between adjacent vascular bundles can form interfascicular cambium?`,o:[`Medullary ray parenchyma`,`Guard cells`,`Sieve tube elements`,`Epidermal cells`],a:1,e:`Parenchymatous cells of the medullary rays between bundles can become interfascicular cambium.`},
 {q:`Why are dicot stem vascular bundles called open?`,o:[`They contain chloroplasts`,`They have cambium`,`They lack phloem`,`They are outside the cortex`],a:2,e:`The presence of cambium between xylem and phloem makes a bundle open.`}
 ];
+
+// Chapter 2 NEET practice extension: 2026-11-23 batch 15
+window.skillUpDicotStemTSQuestions.push(...[
+  {
+    "q": "Vascular bundles of a typical dicot stem are arranged:",
+    "o": [
+      "In a ring",
+      "Scattered throughout ground tissue",
+      "Only at the centre",
+      "In alternating radial patches"
+    ],
+    "a": 0,
+    "e": "Typical dicot stems show a ring of conjoint collateral vascular bundles."
+  },
+  {
+    "q": "The hypodermis of a typical dicot stem is often:",
+    "o": [
+      "Sclerenchymatous",
+      "Collenchymatous",
+      "Meristematic cambium",
+      "Endodermal"
+    ],
+    "a": 1,
+    "e": "A typical dicot stem has a collenchymatous hypodermis for flexible support."
+  },
+  {
+    "q": "The protoxylem of a typical dicot stem is:",
+    "o": [
+      "Exarch",
+      "Mesarch",
+      "Endarch",
+      "Polyarch"
+    ],
+    "a": 2,
+    "e": "Stem xylem is endarch, with protoxylem toward the pith."
+  }
+]);

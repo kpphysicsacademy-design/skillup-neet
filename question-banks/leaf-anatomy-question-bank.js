@@ -30,3 +30,39 @@ window.skillUpLeafAnatomyQuestions = [
 {q:"Which tissue mainly performs light-dependent and carbon-fixation functions in the leaf?",o:["Chloroplast-containing mesophyll","Xylem vessels","Sclerenchymatous sheath only","Cuticle"],a:0,e:"Mesophyll cells contain chloroplasts and carry out photosynthesis."},
 {q:"Which combination best describes a typical dorsiventral dicot leaf?",o:["Upper epidermis, palisade mesophyll, spongy mesophyll and lower epidermis with vascular bundles","Only one epidermis and no mesophyll","Bulliform cells only and no vascular bundles","Radial xylem and root cap"],a:0,e:"This is the characteristic basic anatomy of a dorsiventral dicot leaf."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 6
+window.skillUpLeafAnatomyQuestions.push(...[
+  {
+    "q": "Palisade mesophyll is mainly specialised for:",
+    "o": [
+      "Photosynthesis",
+      "Long-distance sugar transport",
+      "Secondary thickening",
+      "Seed dispersal"
+    ],
+    "a": 0,
+    "e": "Palisade cells contain many chloroplasts and carry out much of the leaf's photosynthesis."
+  },
+  {
+    "q": "In a typical dorsiventral leaf, spongy mesophyll lies mainly:",
+    "o": [
+      "Above the upper epidermis",
+      "Below palisade mesophyll",
+      "Inside the xylem",
+      "Within the cuticle"
+    ],
+    "a": 1,
+    "e": "Spongy mesophyll usually occurs beneath the palisade layer and contains air spaces."
+  },
+  {
+    "q": "The xylem of a typical leaf vascular bundle is oriented toward the:",
+    "o": [
+      "Lower epidermis",
+      "Stomatal pore",
+      "Upper epidermis",
+      "Leaf margin only"
+    ],
+    "a": 2,
+    "e": "In a typical leaf vein, xylem lies adaxially (toward the upper surface)."
+  }
+]);

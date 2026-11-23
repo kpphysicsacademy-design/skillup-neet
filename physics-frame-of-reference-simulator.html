@@ -109,7 +109,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <div class="sim-grid">
   <div class="sim-field"><label for="fr-train">Train velocity (m/s)</label><input id="fr-train" type="number" step="any" value="20"></div>
   <div class="sim-field"><label for="fr-walk">Passenger velocity relative to train (m/s)</label><input id="fr-walk" type="number" step="any" value="2"></div>
- </div><button class="sim-action" id="fr-calculate" type="button">Calculate ground velocity</button><div class="sim-result" id="fr-result" aria-live="polite">Ground velocity = 22 m/s (positive direction)</div><p class="sim-hint">Use a consistent positive direction for both velocities.</p></div>
+ </div><button class="sim-action" id="fr-calculate" type="button">Calculate ground velocity</button><div class="sim-result" id="fr-result" role="status" aria-live="polite">Ground velocity = 22 m/s (positive direction)</div><p class="sim-hint">Use a consistent positive direction for both velocities.</p></div>
  <div class="sim-card"><h3>↔️ Simulator 2: Relative velocity between two objects</h3><p>Enter both velocities along the same straight line. The result is the velocity of object A as seen from object B.</p><figure class="sim-visual" aria-label="Illustration comparing the velocities of two cars">
  <svg viewBox="0 0 560 150" role="img" aria-labelledby="carsSceneTitle carsSceneDesc">
   <title id="carsSceneTitle">Two-object relative velocity diagram</title><desc id="carsSceneDesc">Two cars move along the same straight road. Their signed velocities determine the velocity of A relative to B.</desc>
@@ -125,15 +125,15 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 <div class="sim-grid">
   <div class="sim-field"><label for="fr-a">Velocity of A (m/s)</label><input id="fr-a" type="number" step="any" value="15"></div>
   <div class="sim-field"><label for="fr-b">Velocity of B (m/s)</label><input id="fr-b" type="number" step="any" value="-15"></div>
- </div><button class="sim-action" id="fr-relative" type="button">Find relative velocity</button><div class="sim-result" id="fr-relative-result" aria-live="polite">Velocity of A relative to B = 30 m/s</div><p class="sim-hint">A positive result means A moves in the chosen positive direction relative to B; a negative result means the opposite.</p></div>
+ </div><button class="sim-action" id="fr-relative" type="button">Find relative velocity</button><div class="sim-result" id="fr-relative-result" role="status" aria-live="polite">Velocity of A relative to B = 30 m/s</div><p class="sim-hint">A positive result means A moves in the chosen positive direction relative to B; a negative result means the opposite.</p></div>
 </section><script>
 (function(){const $=id=>document.getElementById(id);
-function frRead(id){return Number(document.getElementById(id).value);}
+function frRead(id){const raw=document.getElementById(id).value.trim();return raw===''?NaN:Number(raw);}
 function frFormat(n){return Number(n.toPrecision(6)).toString();}
 document.getElementById('fr-calculate').addEventListener('click',function(){
  const train=frRead('fr-train'),walk=frRead('fr-walk'),out=document.getElementById('fr-result');
  if(!Number.isFinite(train)||!Number.isFinite(walk)){out.textContent='Enter valid velocities in both fields.';return;}
- const ground=train+walk;
+ const ground=train+walk;if(!Number.isFinite(ground)){out.textContent='Combined velocity exceeds the supported numeric range.';return;}
  out.textContent='Ground velocity = '+frFormat(ground)+' m/s ('+(ground>0?'positive direction':ground<0?'negative direction':'at rest relative to ground')+'). Calculation: '+frFormat(train)+' + ('+frFormat(walk)+') = '+frFormat(ground)+' m/s.';
  document.getElementById('fr-train-arrow-label').textContent='Train: '+(train>=0?'+':'')+frFormat(train)+' m/s';
  document.getElementById('fr-walk-arrow-label').textContent='Walk: '+(walk>=0?'+':'')+frFormat(walk)+' m/s';
@@ -142,7 +142,7 @@ document.getElementById('fr-calculate').addEventListener('click',function(){
 document.getElementById('fr-relative').addEventListener('click',function(){
  const a=frRead('fr-a'),b=frRead('fr-b'),out=document.getElementById('fr-relative-result');
  if(!Number.isFinite(a)||!Number.isFinite(b)){out.textContent='Enter valid velocities for both objects.';return;}
- const relative=a-b;
+ const relative=a-b;if(!Number.isFinite(relative)){out.textContent='Relative velocity exceeds the supported numeric range.';return;}
  out.textContent='Velocity of A relative to B = vA − vB = '+frFormat(a)+' − ('+frFormat(b)+') = '+frFormat(relative)+' m/s ('+(relative>0?'positive direction':relative<0?'negative direction':'zero relative velocity')+').';
  document.getElementById('fr-a-label').textContent='A: '+(a>=0?'+':'')+frFormat(a)+' m/s';
  document.getElementById('fr-b-label').textContent='B: '+(b>=0?'+':'')+frFormat(b)+' m/s';

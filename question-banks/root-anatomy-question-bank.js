@@ -31,3 +31,39 @@ window.skillUpRootAnatomyQuestions = [
 {q:"Which feature is typical of a monocot root?",o:["Large pith and polyarch xylem","Star-shaped xylem with no pith","Only two xylem arms","No endodermis"],a:0,e:"Monocot roots commonly have a large pith and numerous xylem groups."},
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 4
+window.skillUpRootAnatomyQuestions.push(...[
+  {
+    "q": "The Casparian strip is characteristic of the root:",
+    "o": [
+      "Endodermis",
+      "Epiblema",
+      "Pericycle",
+      "Pith"
+    ],
+    "a": 0,
+    "e": "Casparian strips occur in endodermal radial and transverse walls."
+  },
+  {
+    "q": "The arrangement of xylem and phloem in a typical primary root is:",
+    "o": [
+      "Conjoint collateral",
+      "Radial and alternating",
+      "Bicollateral",
+      "Scattered"
+    ],
+    "a": 1,
+    "e": "Root xylem and phloem are arranged in separate alternating radial patches."
+  },
+  {
+    "q": "Protoxylem in a typical root is:",
+    "o": [
+      "Endarch",
+      "Mesarch",
+      "Exarch",
+      "Absent"
+    ],
+    "a": 2,
+    "e": "Protoxylem is toward the periphery of the root stele (exarch)."
+  }
+]);

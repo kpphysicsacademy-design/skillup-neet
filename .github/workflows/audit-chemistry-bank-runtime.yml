@@ -1,0 +1,26 @@
+name: Audit Chemistry bank runtime
+on:
+  pull_request:
+    paths:
+      - 'question-banks/**'
+      - 'chemistry-1062-concepts-base.js'
+      - 'chemistry-mcq.html'
+      - 'scripts/audit-chemistry-bank-runtime.cjs'
+      - '.github/workflows/audit-chemistry-bank-runtime.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate all Chemistry bank scripts and answers
+        run: node scripts/audit-chemistry-bank-runtime.cjs
+      - name: Upload runtime audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chemistry-bank-runtime
+          path: audit-results/chemistry-bank-runtime.json

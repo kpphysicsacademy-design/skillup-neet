@@ -31,3 +31,39 @@ window.skillUpXylemQuestions = [
 ,{q:"A transverse section shows a vascular tissue with vessels, tracheids, fibres and parenchyma. What does this indicate?",o:["It is phloem","It is xylem","It is epidermis","It is collenchyma"],a:1,e:"The combination of vessels, tracheids, xylem fibres and xylem parenchyma identifies xylem."}
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 3
+window.skillUpXylemQuestions.push(...[
+  {
+    "q": "Which xylem elements are chiefly responsible for water conduction?",
+    "o": [
+      "Tracheids and vessels",
+      "Sieve tubes and companion cells",
+      "Collenchyma and cork",
+      "Guard cells and trichomes"
+    ],
+    "a": 0,
+    "e": "Tracheids and vessel elements are the principal water-conducting cells of xylem."
+  },
+  {
+    "q": "Which xylem component is generally living at maturity?",
+    "o": [
+      "Vessel element",
+      "Xylem parenchyma",
+      "Tracheid",
+      "Xylem fibre"
+    ],
+    "a": 1,
+    "e": "Xylem parenchyma remains living and is involved in storage and lateral transport."
+  },
+  {
+    "q": "The main driving force for ascent of sap in tall plants is:",
+    "o": [
+      "Root cap pressure",
+      "Phloem loading",
+      "Transpiration pull",
+      "Stomatal closure"
+    ],
+    "a": 2,
+    "e": "Transpiration creates tension transmitted through the continuous xylem water column."
+  }
+]);

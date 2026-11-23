@@ -31,3 +31,39 @@ window.skillUpPhloemQuestions = [
 ,{q:"A plant tissue has living sieve tube elements, companion cells, phloem parenchyma and fibres. Which tissue is represented?",o:["Xylem","Phloem","Collenchyma","Meristem"],a:1,e:"These cell types together form the complex vascular tissue phloem."}
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 3
+window.skillUpPhloemQuestions.push(...[
+  {
+    "q": "Which phloem cells directly conduct sugars in most angiosperms?",
+    "o": [
+      "Vessel elements",
+      "Sieve tube elements",
+      "Tracheids",
+      "Sclereids"
+    ],
+    "a": 1,
+    "e": "Sieve tube elements form the conducting pathway for phloem translocation."
+  },
+  {
+    "q": "Which cells are metabolically associated with sieve tube elements?",
+    "o": [
+      "Guard cells",
+      "Xylem fibres",
+      "Companion cells",
+      "Cork cells"
+    ],
+    "a": 2,
+    "e": "Companion cells maintain and support adjacent sieve tube elements."
+  },
+  {
+    "q": "Movement of sugars from mature leaves to developing fruits is best described as:",
+    "o": [
+      "Source-to-sink translocation",
+      "Ascent of sap through xylem",
+      "Osmosis through cork",
+      "Diffusion through vessels"
+    ],
+    "a": 0,
+    "e": "Mature leaves act as sources and developing fruits commonly act as sinks."
+  }
+]);

@@ -15,3 +15,39 @@ window.skillUpRootMorphologyQuestions = [
 {q:"Which root modification provides additional support to the aerial parts of a plant?",o:["Prop root","Storage root","Pneumatophore","Root hair"],a:0,e:"Prop roots arise from branches and help support the plant mechanically."},
 {q:"Which root modification helps certain plants obtain oxygen in waterlogged soil?",o:["Pneumatophore","Storage root","Climbing root","Prop root"],a:0,e:"Pneumatophores project upward and facilitate gaseous exchange in waterlogged habitats."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 3
+window.skillUpRootMorphologyQuestions.push(...[
+  {
+    "q": "The primary root of a seedling generally develops from the:",
+    "o": [
+      "Plumule",
+      "Radicle",
+      "Cotyledon",
+      "Epicotyl"
+    ],
+    "a": 1,
+    "e": "The radicle is the embryonic root and develops into the primary root."
+  },
+  {
+    "q": "Which plant commonly exhibits a fibrous root system?",
+    "o": [
+      "Mustard",
+      "Pea",
+      "Wheat",
+      "Gram"
+    ],
+    "a": 2,
+    "e": "Wheat is a monocot and commonly has a fibrous root system."
+  },
+  {
+    "q": "Banyan prop roots are examples of:",
+    "o": [
+      "Adventitious roots",
+      "Taproots arising only from the radicle",
+      "Root hairs",
+      "Pneumatophores"
+    ],
+    "a": 0,
+    "e": "Banyan prop roots develop from branches and are adventitious supporting roots."
+  }
+]);

@@ -31,3 +31,39 @@ window.skillUpRootCapQuestions=[
 {q:"Root-cap mucilage is particularly useful at the:",o:["Root-soil interface","Leaf-air interface only","Anther wall","Seed embryo"],a:1,e:"Mucilage is secreted where the root tip contacts surrounding soil particles."},
 {q:"The best summary of root-cap functions is:",o:["Protection, lubrication and gravity perception","Photosynthesis, transpiration and pollination","Sugar loading and seed dispersal","Secondary growth and pollen formation"],a:1,e:"The root cap protects the meristem, facilitates soil penetration and participates in gravitropism."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 18
+window.skillUpRootCapQuestions.push(...[
+  {
+    "q": "The principal role of a root cap is to:",
+    "o": [
+      "Protect the root apex",
+      "Transport photosynthates",
+      "Form flowers",
+      "Produce pollen"
+    ],
+    "a": 0,
+    "e": "The root cap protects the growing apical meristem as it moves through soil."
+  },
+  {
+    "q": "Gravity-sensing cells in a root cap contain:",
+    "o": [
+      "Sieve plates",
+      "Starch-filled amyloplasts",
+      "Guard cells",
+      "Lignified vessels"
+    ],
+    "a": 1,
+    "e": "Statocytes contain dense amyloplasts that sediment in response to gravity."
+  },
+  {
+    "q": "The root cap assists movement through soil partly by releasing:",
+    "o": [
+      "Pollen",
+      "Cutin",
+      "Mucilage",
+      "Nectar"
+    ],
+    "a": 2,
+    "e": "Root-cap mucilage helps lubricate the root tip."
+  }
+]);

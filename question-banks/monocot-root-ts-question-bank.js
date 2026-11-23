@@ -30,3 +30,39 @@ window.skillUpMonocotRootTSQuestions = [
 {q:"Which combination correctly describes a typical monocot root?",o:["Epiblema, parenchymatous cortex, endodermis, pericycle, radial polyarch exarch xylem and large pith","Epidermis, mesophyll, scattered bundles and no pith","Cuticle, collateral bundles and ring cambium","Small pith with few xylem arms and extensive secondary growth"],a:1,e:"This combination represents the major anatomical features of a typical monocot root."},
 {q:"The absence of typical secondary growth in monocot roots is mainly related to the absence of:",o:["A normal vascular cambium","Epiblema","Endodermis","Pericycle"],a:1,e:"Normal secondary vascular growth requires vascular cambium, which is generally absent in monocot roots."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 14
+window.skillUpMonocotRootTSQuestions.push(...[
+  {
+    "q": "The vascular cylinder of a typical monocot root is commonly:",
+    "o": [
+      "Polyarch",
+      "Diarch only",
+      "Conjoint collateral",
+      "Bicollateral"
+    ],
+    "a": 0,
+    "e": "Monocot roots generally have many xylem poles, a polyarch condition."
+  },
+  {
+    "q": "The central pith of a typical monocot root is:",
+    "o": [
+      "Absent",
+      "Large and well developed",
+      "Always lignified",
+      "A vascular cambium"
+    ],
+    "a": 1,
+    "e": "Monocot roots characteristically have a prominent pith."
+  },
+  {
+    "q": "Ordinary secondary growth in a typical monocot root is:",
+    "o": [
+      "Always prominent",
+      "Driven by cork cambium alone",
+      "Generally absent",
+      "Identical to dicot roots"
+    ],
+    "a": 2,
+    "e": "Typical monocot roots lack ordinary vascular secondary growth."
+  }
+]);

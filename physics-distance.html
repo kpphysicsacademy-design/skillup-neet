@@ -178,5 +178,20 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
  render();
 })();
 </script>
+<script>
+(function(){'use strict';
+const questions=[
+{q:'An object moves +5 m, −2 m, then +4 m. Total distance?',a:['7 m','11 m','3 m','−11 m'],correct:1,why:'Distance adds absolute leg lengths: 5 + 2 + 4 = 11 m.'},
+{q:'A runner travels 6 m east then 6 m west. Distance travelled?',a:['0 m','6 m','12 m','−12 m'],correct:2,why:'The full route length is 6 + 6 = 12 m, even though displacement is zero.'},
+{q:'Which property describes distance?',a:['It is a nonnegative scalar','It is always negative','It has direction','It equals displacement in every journey'],correct:0,why:'Distance has magnitude but no direction and cannot be negative.'},
+{q:'Which inequality always holds for a journey?',a:['Distance < |displacement|','Distance = 0','Distance ≥ |displacement|','Distance is always twice displacement'],correct:2,why:'The actual path cannot be shorter than the straight-line separation of its endpoints.'},
+{q:'A person walks 100 m in 20 s. Average speed?',a:['2 m/s','5 m/s','20 m/s','2000 m/s'],correct:1,why:'Average speed = total distance / elapsed time = 100/20 = 5 m/s.'}
+];
+const q=document.getElementById('dsQuestion'),opts=document.getElementById('dsOptions'),fb=document.getElementById('dsFeedback'),next=document.getElementById('dsNext');if(!q||!opts||!fb||!next)return;let index=0,score=0,answered=false;
+function draw(){answered=false;fb.textContent='';next.hidden=true;opts.replaceChildren();if(index===questions.length){q.textContent='Complete! '+score+' / '+questions.length+' correct.';next.textContent='Try again';next.hidden=false;try{const key='skillup-distance-quickcheck-best';localStorage.setItem(key,String(Math.max(score,Number(localStorage.getItem(key))||0)));}catch(e){}return;}
+const item=questions[index];q.textContent='Question '+(index+1)+' of '+questions.length+': '+item.q;item.a.forEach(function(answer,i){const b=document.createElement('button');b.type='button';b.className='ds-option';b.textContent=String.fromCharCode(65+i)+'. '+answer;b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){if(answered)return;answered=true;const correct=i===item.correct;if(correct)score++;Array.from(opts.children).forEach(function(btn,j){btn.disabled=true;btn.setAttribute('aria-pressed',String(j===i));if(j===item.correct){btn.style.borderColor='#58cc02';btn.style.background='#efffe7';}});fb.textContent=(correct?'Correct! ':'Not quite. ')+item.why;next.textContent=index===questions.length-1?'See results →':'Next question →';next.hidden=false;});opts.appendChild(b);});}
+next.addEventListener('click',function(){if(index===questions.length){index=0;score=0;}else if(answered){index++;}draw();});draw();
+})();
+</script>
 </body>
 </html>

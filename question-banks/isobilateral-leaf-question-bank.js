@@ -30,3 +30,40 @@ window.skillUpIsobilateralLeafQuestions=[
 {q:"The orientation of xylem and phloem in a leaf vascular bundle helps distinguish:",o:["Adaxial and abaxial sides","Root cap and root hair","Cortex and pith of stem","Pollen and ovule"],a:1,e:"Xylem is usually adaxial and phloem abaxial, providing anatomical polarity."},
 {q:"Which combination is most typical of a grass-type isobilateral leaf?",o:["Similar surfaces + parallel venation + bulliform cells","Distinct palisade above + spongy below + ringed bundles","Central pith + cortex + secondary growth","Radial bundles + root cap"],a:1,e:"Grass leaves commonly combine isobilateral anatomy, parallel venation and bulliform cells."}
 ];
+
+// Chapter 2 NEET practice extension: 2026-11-23 batch 16
+window.skillUpIsobilateralLeafQuestions.push(...[
+  {
+    "q": "The mesophyll in a typical isobilateral monocot leaf is:",
+    "o": [
+      "Undifferentiated",
+      "Always palisade only",
+      "Absent",
+      "Made of sclerenchyma only"
+    ],
+    "a": 0,
+    "e": "Monocot isobilateral leaves commonly have undifferentiated mesophyll."
+  },
+  {
+    "q": "Bulliform cells are typically found in the:",
+    "o": [
+      "Lower cortex",
+      "Upper epidermis of grass leaves",
+      "Xylem vessels",
+      "Root pericycle"
+    ],
+    "a": 1,
+    "e": "Bulliform cells are large epidermal cells in many grasses that contribute to leaf rolling."
+  },
+  {
+    "q": "A typical isobilateral leaf often has stomata:",
+    "o": [
+      "Only on the upper surface",
+      "Only on the lower surface",
+      "On both surfaces",
+      "Only in veins"
+    ],
+    "a": 2,
+    "e": "Stomata commonly occur on both leaf surfaces in isobilateral leaves."
+  }
+]);

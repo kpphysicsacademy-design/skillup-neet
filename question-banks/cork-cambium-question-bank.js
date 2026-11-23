@@ -30,3 +30,39 @@ window.skillUpCorkCambiumQuestions=[
 {q:"Which pair is correctly matched?",o:["Phellogen—cork cambium","Phellem—vascular cambium","Phelloderm—secondary xylem","Suberin—phloem sugar"],a:1,e:"Phellogen is the accepted term for cork cambium."},
 {q:"The replacement of epidermis by periderm is associated with:",o:["Increase in girth during secondary growth","Formation of primary root cap","Meiosis","Pollination"],a:1,e:"As girth increases, secondary protective tissues replace the original epidermis."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 16
+window.skillUpCorkCambiumQuestions.push(...[
+  {
+    "q": "Cork cambium is also called:",
+    "o": [
+      "Phellogen",
+      "Phellem",
+      "Phelloderm",
+      "Procambium"
+    ],
+    "a": 0,
+    "e": "Phellogen is the meristematic cork cambium."
+  },
+  {
+    "q": "Cork cambium produces toward the outside:",
+    "o": [
+      "Secondary xylem",
+      "Phellem",
+      "Phelloderm",
+      "Primary phloem"
+    ],
+    "a": 1,
+    "e": "Phellogen forms phellem (cork) externally."
+  },
+  {
+    "q": "The openings that allow gas exchange through periderm are:",
+    "o": [
+      "Stomata of cork cells",
+      "Hydathodes",
+      "Lenticels",
+      "Root hairs"
+    ],
+    "a": 2,
+    "e": "Lenticels are aerating openings in the periderm."
+  }
+]);

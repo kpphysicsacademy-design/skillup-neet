@@ -30,3 +30,39 @@ window.skillUpAnnualRingsQuestions=[
 {q:"Which statement best compares early and late wood?",o:["Early wood has larger lumina; late wood has smaller lumina and thicker walls","Both are always identical","Early wood contains only phloem","Late wood contains no xylem"],a:1,e:"This structural difference is a key feature of seasonal wood formation."},
 {q:"The scientific use of annual rings to reconstruct past environmental conditions is called:",o:["Dendroclimatology","Taxonomy","Palynology","Anatomy"],a:1,e:"Dendroclimatology uses tree-ring characteristics to study past climate and environmental variation."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 16
+window.skillUpAnnualRingsQuestions.push(...[
+  {
+    "q": "Annual rings in a woody stem are produced by seasonal activity of:",
+    "o": [
+      "Vascular cambium",
+      "Apical meristem only",
+      "Epidermis",
+      "Root cap"
+    ],
+    "a": 0,
+    "e": "Seasonal vascular cambium activity produces contrasting secondary xylem zones."
+  },
+  {
+    "q": "Spring wood generally contains xylem elements with:",
+    "o": [
+      "Smaller lumina",
+      "Larger lumina",
+      "No cell walls",
+      "Only phloem"
+    ],
+    "a": 1,
+    "e": "Earlywood generally has wider xylem conduits than latewood."
+  },
+  {
+    "q": "A typical annual ring consists of:",
+    "o": [
+      "Only phloem",
+      "Only cork",
+      "Earlywood and latewood",
+      "Pith and epidermis"
+    ],
+    "a": 2,
+    "e": "An annual ring is typically composed of earlywood followed by latewood."
+  }
+]);

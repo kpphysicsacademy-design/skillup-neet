@@ -31,3 +31,39 @@ window.skillUpTrichomesQuestions=[
 {q:"Which pair is correctly matched?",o:["Glandular trichome — secretion","Xylem vessel — epidermal hair","Stoma — seed coat","Lenticel — guard cell"],a:1,e:"Glandular trichomes are specialized for secretion."},
 {q:"The best general description of trichomes is:",o:["Epidermal outgrowths with protective or secretory roles","Vascular conducting cells","Reproductive organs","Underground meristems"],a:1,e:"Trichomes are diverse epidermal outgrowths involved in protection, secretion and surface adaptation."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 17
+window.skillUpTrichomesQuestions.push(...[
+  {
+    "q": "Plant trichomes arise from the:",
+    "o": [
+      "Epidermis",
+      "Vascular cambium",
+      "Pith",
+      "Xylem"
+    ],
+    "a": 0,
+    "e": "Trichomes are epidermal outgrowths."
+  },
+  {
+    "q": "Glandular trichomes may:",
+    "o": [
+      "Conduct xylem sap",
+      "Secrete defensive or aromatic compounds",
+      "Produce vascular cambium",
+      "Replace stomata in every plant"
+    ],
+    "a": 1,
+    "e": "Glandular trichomes can secrete oils, resins and other substances."
+  },
+  {
+    "q": "A common function of non-glandular leaf trichomes is:",
+    "o": [
+      "Formation of pollen",
+      "Secondary xylem production",
+      "Protection and reduction of water loss",
+      "Root cap formation"
+    ],
+    "a": 2,
+    "e": "Leaf hairs can help deter herbivores and reduce transpiration."
+  }
+]);

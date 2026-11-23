@@ -5,7 +5,11 @@
 </style></head><body><main class="wrap"><nav class="top"><a id="backQuiz" href="chemistry-mcq.html">← Back to Quiz</a><span class="tag">CHEMISTRY · QUICKLEARN</span></nav><header class="hero"><div class="eyebrow">LEARN → RECALL → UNDERSTAND</div><h1 id="title">Chemistry QuickLearn</h1><p>Revise questions, correct answers and explanations from the same Chemistry quiz bank.</p></header><div class="actions"><a href="chemistry-home.html">← Chemistry Path</a><a id="practice" class="primary" href="chemistry-mcq.html">🎯 Practice Quiz</a></div><div class="meta"><span id="counter">Loading flashcards…</span><span id="pct">0%</span></div><div class="track"><i id="progress"></i></div><section class="card" aria-live="polite"><div class="qmeta" id="qmeta">QUICK LEARN</div><h2 class="question" id="question">Loading concept…</h2><button class="reveal" id="reveal" type="button">👀 Reveal answer &amp; explanation</button><div class="answer" id="answer" hidden><strong>Correct answer</strong><div id="answerText"></div><p id="explanation"></p></div><div class="controls"><button type="button" id="previous">← Previous</button><button type="button" id="next">Next →</button></div></section><p class="foot">SkillUp Chemistry · Topic-wise quick revision</p></main>
 <script>
 (()=>{
-const params=new URLSearchParams(location.search),concept=params.get('concept')||'',micro=params.get('micro')||'';
+const params=new URLSearchParams(location.search);
+const rawConcept=params.get('concept')||'';
+const embedded=rawConcept.match(/^(.*?)&micro=([^&]*)$/i);
+const concept=embedded?embedded[1]:rawConcept;
+const micro=params.get('micro')||(embedded?embedded[2]:'');
 const slug=v=>String(v).toLowerCase().trim().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const key=slug(micro)||slug(concept),$=id=>document.getElementById(id);
 const query=new URLSearchParams({concept,micro});$('backQuiz').href='chemistry-mcq.html?'+query;$('practice').href='chemistry-mcq.html?'+query;

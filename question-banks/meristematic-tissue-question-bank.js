@@ -45,3 +45,39 @@ window.skillUpMeristematicTissueQuestions = [
 {"q":"Which meristem can permit regrowth after grazing in grasses?","o":["Intercalary meristem","Cork cambium","Vascular cambium","Root cap"],"a":0,"e":"Intercalary meristems can support renewed elongation after removal of distal tissues."},
 {"q":"Why are meristematic cells generally small and closely packed?","o":["They are organized for active division and growth","They are specialized for gas storage","They are dead conducting cells","They are filled with large air spaces"],"a":0,"e":"Small, compact cells with dense cytoplasm are characteristic of actively dividing meristematic regions."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23
+window.skillUpMeristematicTissueQuestions.push(...[
+  {
+    "q": "A grass plant regrows after grazing mainly due to which meristem?",
+    "o": [
+      "Cork cambium",
+      "Intercalary meristem",
+      "Vascular cambium",
+      "Root cap"
+    ],
+    "a": 1,
+    "e": "Intercalary meristems at leaf bases or nodes enable continued growth in grasses."
+  },
+  {
+    "q": "Which meristem is responsible for most secondary increase in stem girth?",
+    "o": [
+      "Apical meristem",
+      "Intercalary meristem",
+      "Lateral meristem",
+      "Protoderm"
+    ],
+    "a": 2,
+    "e": "Lateral meristems, including vascular cambium, drive secondary thickening."
+  },
+  {
+    "q": "Which feature is typical of actively dividing meristematic cells?",
+    "o": [
+      "Large intercellular spaces",
+      "Dead lignified walls",
+      "Dense cytoplasm and prominent nucleus",
+      "No nucleus"
+    ],
+    "a": 2,
+    "e": "Meristematic cells generally have dense cytoplasm, prominent nuclei and small vacuoles."
+  }
+]);

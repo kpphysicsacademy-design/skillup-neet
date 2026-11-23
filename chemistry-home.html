@@ -220,11 +220,26 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
 </div>
 <p class="chem-open-note">🔓 Open learning: XP, progress and mastery will not restrict access.</p>
 </section>
+<section class="chem-skills" aria-labelledby="chem-progress-title"><h2 id="chem-progress-title">🏆 My Chemistry Progress</h2><p>Optional motivation only. All lessons remain open regardless of XP, streak or mastery.</p><div class="chem-skill-grid" aria-live="polite"><div class="chem-skill"><strong>⭐ <span id="chem-total-xp">0</span> XP</strong><span>Earn 10 XP per correct quiz answer.</span></div><div class="chem-skill"><strong>🔥 <span id="chem-daily-streak">0</span> day streak</strong><span>Complete a quiz on consecutive days.</span></div><div class="chem-skill"><strong>🎓 <span id="chem-mastered-count">0</span> mastered</strong><span>Best quiz score of at least 80%.</span></div></div><p class="chem-open-note" id="chem-badge-status">🏅 First quiz badge: complete any Chemistry quiz.</p></section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><button id="loadMoreBtn" type="button" style="display:none;width:100%;margin:14px 0;padding:13px;border:0;border-radius:14px;background:#1677ff;color:#fff;font-weight:950;font-size:12px;box-shadow:0 3px 0 #0d5bbf">LOAD MORE CONCEPTS</button><div id="empty" class="empty">No matching Chemistry concepts found.</div>
 <section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load at a time. More concepts load automatically, or use the button if needed.</div></section>
 </main>
 <script>
+(function(){
+ try{
+  var d=JSON.parse(localStorage.getItem('skillup_chemistry_learning_v1')||'{}');
+  if(!d||typeof d!=='object')return;
+  var concepts=d.concepts&&typeof d.concepts==='object'?d.concepts:{};
+  var mastered=Object.keys(concepts).filter(function(k){return Number(concepts[k]&&concepts[k].best)>=80;}).length;
+  var last=d.lastDay||'',today=new Date(),yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
+  var date=function(x){return [x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-');};
+  document.getElementById('chem-total-xp').textContent=String(Math.max(0,Number(d.xp)||0));
+  document.getElementById('chem-daily-streak').textContent=String(last===date(today)||last===date(yesterday)?Math.max(0,Number(d.streak)||0):0);
+  document.getElementById('chem-mastered-count').textContent=String(mastered);
+  document.getElementById('chem-badge-status').textContent=Number(d.quizzes)>=10?'🏆 Quiz Champion • 10 quizzes completed':mastered>=5?'🥇 Mastery Explorer • 5 concepts mastered':Number(d.quizzes)>=1?'🥉 First Quiz Complete':'🏅 First quiz badge: complete any Chemistry quiz.';
+ }catch(e){/* Optional local progress must never block the learning path. */}
+})();
 (function(){
 'use strict';
 var d=window.SKILLUP_CHEMISTRY_PROGRESSIVE||[],a=[];

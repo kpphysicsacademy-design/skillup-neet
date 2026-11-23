@@ -103,6 +103,28 @@ $('subtitle').textContent='Practise '+displayConcept+' with focused questions an
 document.title=displayConcept+' | Chemistry Quiz | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 const BANK_VERSION='20261123-chemistry-runtime-fixes-v1';
+const PROGRESS_KEY='skillup_chemistry_learning_v1';
+function saveLearningResult(correct,total){
+ try{
+  const old=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');
+  const data=old&&typeof old==='object'&&!Array.isArray(old)?old:{};
+  const today=new Date(),date=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+  const yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
+  const prev=[yesterday.getFullYear(),String(yesterday.getMonth()+1).padStart(2,'0'),String(yesterday.getDate()).padStart(2,'0')].join('-');
+  const sameDay=data.lastDay===date;
+  data.streak=sameDay?(Number(data.streak)||1):(data.lastDay===prev?(Number(data.streak)||0)+1:1);
+  data.lastDay=date;
+  data.xp=(Number(data.xp)||0)+correct*10;
+  data.quizzes=(Number(data.quizzes)||0)+1;
+  data.concepts=data.concepts&&typeof data.concepts==='object'&&!Array.isArray(data.concepts)?data.concepts:{};
+  const id=slug(micro)||slug(concept);
+  const prior=data.concepts[id]||{};
+  const accuracy=Math.round(correct/total*100);
+  data.concepts[id]={best:Math.max(Number(prior.best)||0,accuracy),attempts:(Number(prior.attempts)||0)+1};
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(data));
+ }catch(e){/* Storage disabled: the quiz remains fully usable. */}
+}
+
 let questions=[],originalQuestions=[],index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function richText(v){
@@ -210,6 +232,7 @@ $('check').addEventListener('click',()=>{
 $('continue').addEventListener('click',()=>{
  if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
+ saveLearningResult(score,questions.length);
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
  const review=card.querySelector('#wrongReview');

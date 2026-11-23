@@ -45,3 +45,39 @@ window.skillUpStemMorphologyQuestions = [
 {q:"Which stem modification is associated with storage of food in potato?",o:["Tuber","Runner","Tendril","Phylloclade"],a:0,e:"The potato tuber is a swollen underground stem specialized mainly for storage."},
 {q:"Which statement best identifies a bulb?",o:["Short stem with fleshy storage leaves","Long horizontal stem with distant nodes","Swollen root without buds","Flattened green stem of cactus"],a:0,e:"A bulb consists of a short stem surrounded by fleshy storage leaves, as in onion."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 4
+window.skillUpStemMorphologyQuestions.push(...[
+  {
+    "q": "The shoot system develops primarily from the embryo's:",
+    "o": [
+      "Radicle",
+      "Plumule",
+      "Hypocotyl root cap",
+      "Testa"
+    ],
+    "a": 1,
+    "e": "The plumule develops into the shoot system."
+  },
+  {
+    "q": "The region of a stem between two successive nodes is the:",
+    "o": [
+      "Axil",
+      "Petiole",
+      "Internode",
+      "Lamina"
+    ],
+    "a": 2,
+    "e": "An internode separates two consecutive nodes."
+  },
+  {
+    "q": "An axillary bud occurs:",
+    "o": [
+      "In the angle between leaf and stem",
+      "At the root tip",
+      "Inside the seed coat only",
+      "At the root cap"
+    ],
+    "a": 0,
+    "e": "Axillary buds form in leaf axils and may develop into branches or flowers."
+  }
+]);

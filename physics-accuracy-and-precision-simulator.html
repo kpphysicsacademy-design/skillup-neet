@@ -92,7 +92,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   </div>
   <p class="sim-hint">Use the same unit for every value. Example readings: 9.9, 10.0, 10.1</p>
   <button class="btn check" id="calculateMeasurements" type="button" style="width:100%;margin-top:8px">Calculate results</button>
-  <div class="sim-result" id="measurementResults" aria-live="polite"><strong>Ready to investigate</strong><p>Change the readings and calculate to compare accuracy and precision.</p></div>
+  <div class="sim-result" id="measurementResults" role="status" aria-live="polite"><strong>Ready to investigate</strong><p>Change the readings and calculate to compare accuracy and precision.</p></div>
  </div>
  <div class="learn-card"><h3>Try these experiments</h3><p><b>Precise but inaccurate:</b> accepted value 10; readings 8.0, 8.1, 8.0.</p><p><b>Close to the accepted value:</b> accepted value 10; readings 9.9, 10.0, 10.1.</p><p><b>Less precise:</b> accepted value 10; readings 8, 10, 12.</p></div>
 </section><script>
@@ -109,17 +109,17 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
  }));
  const calc=document.getElementById('calculateMeasurements');
  calc.addEventListener('click',()=>{
-   const accepted=Number(document.getElementById('acceptedValue').value);
+   const acceptedRaw=document.getElementById('acceptedValue').value.trim();const accepted=acceptedRaw===''?NaN:Number(acceptedRaw);
    const raw=document.getElementById('readingValues').value;
-   const vals=raw.split(',').map(x=>x.trim()).filter(Boolean).map(Number);
+   const parts=raw.split(',').map(x=>x.trim());const vals=parts.map(x=>x===''?NaN:Number(x));
    const out=document.getElementById('measurementResults');
-   if(!Number.isFinite(accepted)||!vals.length||vals.some(x=>!Number.isFinite(x))){
-     out.innerHTML='<strong>Check your inputs</strong><p>Enter one valid accepted value and at least one comma-separated numeric reading.</p>';return;
+   if(!Number.isFinite(accepted)||!vals.length||vals.length>1000||vals.some(x=>!Number.isFinite(x))){
+     out.innerHTML='<strong>Check your inputs</strong><p>Enter a valid accepted value and 1–1000 finite, comma-separated readings with no blank entries.</p>';return;
    }
-   const mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+   const mean=vals.reduce((a,b)=>a+b,0)/vals.length;if(!Number.isFinite(mean)){out.textContent='The calculated mean is outside the supported numeric range.';return;}
    const min=Math.min(...vals),max=Math.max(...vals),range=max-min;
    const error=Math.abs(mean-accepted);
-   const deviation=vals.reduce((s,x)=>s+Math.abs(x-mean),0)/vals.length;
+   const deviation=vals.reduce((s,x)=>s+Math.abs(x-mean),0)/vals.length;if(![range,error,deviation].every(Number.isFinite)){out.textContent='The calculated spread or error is outside the supported numeric range.';return;}
    const accuracy=error===0?'Mean equals the accepted value':error<=Math.max(Math.abs(accepted)*0.01,1e-9)?'Mean is very close to the accepted value':'Mean differs from the accepted value';
    const precision=range<=Math.max(Math.abs(mean)*0.01,1e-9)?'Readings are tightly grouped':'Readings show a wider spread';
    out.innerHTML='<strong>Results</strong>'+

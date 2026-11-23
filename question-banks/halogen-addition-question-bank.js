@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["halogen-addition"] = [
 {question:"What is formed when an alkene reacts with Br2 under ordinary addition conditions?",options:[{id:"a",value:"Vicinal dibromide"},{id:"b",value:"Alkyl bromide only"},{id:"c",value:"Alcohol"},{id:"d",value:"Alkane"}],answer:"a",explanation:"Bromine adds across the C=C bond to give a vicinal dibromide."},
 {question:"The addition of Br2 to an alkene is classified as:",options:[{id:"a",value:"Electrophilic addition"},{id:"b",value:"Nucleophilic substitution"},{id:"c",value:"Free-radical substitution"},{id:"d",value:"Elimination"}],answer:"a",explanation:"The polarized bromine molecule undergoes electrophilic addition to the electron-rich alkene."},

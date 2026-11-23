@@ -30,3 +30,39 @@ window.skillUpMonocotSeedQuestions = [
 {q:"Which statement best describes a typical monocot seed?",o:["It has one cotyledon, often retains endosperm, and in grasses has coleoptile and coleorhiza","It always has two cotyledons and no endosperm","It lacks a radicle and plumule","It consists only of seed coat and fruit wall"],a:0,e:"A typical grass seed has one cotyledon, persistent endosperm, and protective coleoptile and coleorhiza."},
 {q:"Which observation would most strongly indicate that a seed is a monocot seed?",o:["A single cotyledon or scutellum in the embryo","Two large cotyledons","A completely absent embryo","Only a fruit wall without seed structures"],a:0,e:"A single cotyledon, called the scutellum in grasses, is the key embryonic feature of a monocot seed."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 11
+window.skillUpMonocotSeedQuestions.push(...[
+  {
+    "q": "The protective sheath around the plumule of a grass embryo is:",
+    "o": [
+      "Coleoptile",
+      "Coleorhiza",
+      "Scutellum",
+      "Aleurone"
+    ],
+    "a": 0,
+    "e": "The coleoptile encloses and protects the plumule."
+  },
+  {
+    "q": "The protein-rich outer layer of cereal endosperm is:",
+    "o": [
+      "Testa",
+      "Aleurone",
+      "Pericarp",
+      "Tegmen"
+    ],
+    "a": 1,
+    "e": "The aleurone is the protein-rich outermost layer of the cereal endosperm."
+  },
+  {
+    "q": "In maize, the embryonic radicle is enclosed by the:",
+    "o": [
+      "Coleoptile",
+      "Scutellum",
+      "Coleorhiza",
+      "Plumule"
+    ],
+    "a": 2,
+    "e": "Coleorhiza is the protective sheath of the radicle."
+  }
+]);

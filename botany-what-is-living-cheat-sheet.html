@@ -53,6 +53,28 @@ th{background:#f0edff;color:#51469b}
 }
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
 
+
+/* Interactive SkillUp revision enhancement */
+:root{--skill-purple:#6822c9;--skill-green:#36b51e}
+body{background:#f5f0ff}
+.wrap{width:min(100% - 24px,960px)}
+.hero{background:linear-gradient(115deg,#155f36,#24a73c 60%,#79d629);padding:27px 23px}
+.hero:after{content:"🌿";opacity:.35}
+.hero-key{background:#6421b9;border:0}
+.top a{color:#5e22aa}
+.lesson-progress{background:white;border:1px solid #e8ddfa;border-radius:18px;padding:13px 16px;margin:12px 0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;font-size:12px;font-weight:800}
+.progress-track{height:13px;background:#e9e1f6;border-radius:30px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#168d27,#68d831);transition:width .3s}
+.revision-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.revision-tabs button{min-height:52px;border:1px solid #d9c8f7;border-radius:14px;background:#fff;color:#5c219f;font-weight:850;cursor:pointer;font-size:14px}.revision-tabs button[aria-selected=true]{background:linear-gradient(120deg,#8525df,#5522ac);color:#fff}
+.revision-panel[hidden]{display:none!important}
+.revision-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.revision-head h2{margin:0}.revision-pill{font-size:11px;background:#e5f8df;color:#27792a;padding:6px 9px;border-radius:30px;font-weight:800}
+.revision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.revision-card{border-radius:15px;padding:14px;background:#e8f8e7;border:1px solid #c9ebca}.revision-card:nth-child(6n+2){background:#e9f3ff;border-color:#cddfff}.revision-card:nth-child(6n+3){background:#fff1d8;border-color:#f4dfb8}.revision-card:nth-child(6n+4){background:#fbe5f3;border-color:#f3cfe5}.revision-card:nth-child(6n+5){background:#eee5ff;border-color:#ddccff}.revision-card:nth-child(6n+6){background:#e0f6ff;border-color:#c6eafa}
+.revision-card h3{font-size:14px;margin:0 0 5px;color:#38206e}.revision-card p{margin:0;font-size:12px;line-height:1.55}.revision-card .emoji{font-size:24px;display:block;margin-bottom:5px}
+.quiz-question{padding:15px;margin:12px 0;border:1px solid #e2d9f5;border-radius:15px;background:#faf8ff}.quiz-question legend{font-size:13px;font-weight:800;color:#38206e;padding:0 3px}.quiz-question label{display:block;padding:10px;border:1px solid #e1d9ed;border-radius:10px;margin:7px 0;background:white;cursor:pointer;font-size:12px}.quiz-question label:has(input:checked){border-color:#7229c5;background:#f0e7ff}.quiz-question input{accent-color:#7229c5}.feedback{font-size:12px;font-weight:750;min-height:20px}.feedback.good{color:#237d30}.feedback.bad{color:#a23c40}
+.quiz-controls{display:flex;gap:8px;flex-wrap:wrap}.quiz-controls button,.primary-quiz{border:0;border-radius:13px;padding:13px 18px;font-weight:900;cursor:pointer}.quiz-controls button{background:#efe4ff;color:#5c219f}.primary-quiz{display:block;width:100%;text-align:center;text-decoration:none;background:linear-gradient(90deg,#43c520,#138a2e);color:white;font-size:16px;margin:14px 0;box-shadow:0 4px 0 #0b6922}
+@media(max-width:580px){.revision-grid{grid-template-columns:1fr}.lesson-progress{grid-template-columns:1fr auto}.progress-track{grid-column:1/-1;grid-row:2}.revision-tabs button{font-size:12px}.hero{padding:22px 17px}}
+@media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+@media print{.revision-tabs,.quiz-controls,.primary-quiz{display:none}.revision-panel[hidden]{display:block!important}}
 </style></head><body><main class="wrap">
 <div class="top"><a href="botany-mcq.html?concept=What%20Is%20Living%3F&amp;v=20260923-botany-quiz-v3">← Back to Quiz</a><span class="tag">BOTANY · TOPIC CHEAT SHEET</span></div>
 <header class="hero"><div class="eyebrow">LEARN IT · REVISE IT · REMEMBER IT</div><h1>What Is Living?</h1><p>One-minute revision of the key features of living organisms.</p><div class="hero-key">Life = organisation + metabolism + response</div></header>
@@ -79,4 +101,42 @@ th{background:#f0edff;color:#51469b}
 <div class="step"><span class="num">4</span><p><b>Plants are conscious in the biological sense</b> — they sense and respond to stimuli.</p></div>
 </div><div class="recall"><b>Memory line:</b> Cells · Metabolism · Response. Growth and reproduction are useful clues, not absolute tests for every individual.</div></section>
 <div class="actions"><a href="botany-home.html">← Botany Path</a><a href="botany-mcq.html?concept=What%20Is%20Living%3F&amp;v=20260923-botany-quiz-v3">🚀 Start Quiz</a></div><p class="foot">SkillUp Botany · Short NCERT-focused revision</p>
+
+<section class="lesson-progress" aria-label="Quick Check progress"><span>🏆 Lesson Progress</span><strong id="lesson-progress-text">0/5 checked</strong><div class="progress-track" role="progressbar" aria-label="Questions completed" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="lesson-progress-bar"><div class="progress-fill" id="lesson-progress-fill"></div></div></section>
+<div class="revision-tabs" role="tablist" aria-label="Revision tools"><button id="tab-sheet" role="tab" aria-controls="panel-sheet" aria-selected="true" type="button">📖 Cheat Sheet</button><button id="tab-check" role="tab" aria-controls="panel-check" aria-selected="false" type="button">⚡ Quick Check</button></div>
+<section class="revision-panel" id="panel-sheet" role="tabpanel" aria-labelledby="tab-sheet">
+<div class="card"><div class="revision-head"><h2>📖 NCERT Cheat Sheet – Quick Revision</h2><span class="revision-pill">NCERT ✓</span></div>
+<div class="revision-grid">
+<article class="revision-card"><span class="emoji" aria-hidden="true">🌱</span><h3>1. Living beings</h3><p>Living organisms are self-regulating systems that respond to their environment.</p></article>
+<article class="revision-card"><span class="emoji" aria-hidden="true">🔬</span><h3>2. Cellular organisation</h3><p>Cells are the structural and functional units of living organisms.</p></article>
+<article class="revision-card"><span class="emoji" aria-hidden="true">⚡</span><h3>3. Metabolism</h3><p>Anabolism builds; catabolism breaks down. Together they form metabolism.</p></article>
+<article class="revision-card"><span class="emoji" aria-hidden="true">📈</span><h3>4. Growth</h3><p>Growth in living organisms occurs internally; crystals grow by external deposition.</p></article>
+<article class="revision-card"><span class="emoji" aria-hidden="true">🌼</span><h3>5. Reproduction</h3><p>Not universal in individuals: mules and sterile worker bees cannot reproduce.</p></article>
+<article class="revision-card"><span class="emoji" aria-hidden="true">🧠</span><h3>6. Consciousness</h3><p>Organisms perceive and respond to stimuli, including light, touch and gravity.</p></article>
+</div><p class="note"><b>NEET exam tip:</b> Growth and reproduction alone are not universal defining properties of living organisms.</p></div></section>
+<section class="revision-panel" id="panel-check" role="tabpanel" aria-labelledby="tab-check" hidden><div class="card"><div class="revision-head"><h2>⚡ Quick Check</h2><span class="revision-pill">5 questions</span></div><p class="lead">Choose one answer per question and check your understanding. Your answers are saved on this device.</p><div id="quick-check-questions"></div><div class="quiz-controls"><button type="button" id="check-answers">Check Answers</button><button type="button" id="reset-answers">Try Again</button></div><p id="quick-check-score" role="status" aria-live="polite"></p></div></section>
+<a class="primary-quiz" href="botany-mcq.html?concept=What%20Is%20Living%3F&amp;v=20260923-botany-quiz-v3">▶ Start Quiz (NEET MCQs)</a>
+<script>
+(function(){
+"use strict";
+const questions=[
+{q:"Which is NOT a universal defining property of an individual living organism?",a:["Metabolism","Reproduction","Cellular organisation","Response to stimuli"],correct:1,why:"Sterile organisms such as mules do not reproduce, but are living."},
+{q:"What is the basic structural and functional unit of life?",a:["Tissue","Cell","Organ","Organ system"],correct:1,why:"Cells are the structural and functional units of living organisms."},
+{q:"Which process is an example of anabolism?",a:["Protein synthesis","Digestion","Breakdown of glucose","Decomposition"],correct:0,why:"Anabolism builds complex molecules from simpler substances."},
+{q:"How does a crystal increase in size?",a:["Cell division","Internal cell enlargement","External deposition","Reproduction"],correct:2,why:"Crystals grow through deposition of material on their outer surfaces."},
+{q:"Which example shows a biological response to a stimulus?",a:["Mimosa leaves folding on touch","Crystal increasing in size","Salt dissolving in water","Water evaporating"],correct:0,why:"Mimosa pudica folds its leaves in response to touch."}
+];
+const key="skillup-botany-what-is-living-quick-check-v1";
+let answers={};try{const saved=JSON.parse(localStorage.getItem(key)||"{}");if(saved&&typeof saved==="object")answers=saved}catch(e){}
+const root=document.getElementById("quick-check-questions");
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+questions.forEach((item,i)=>{const fs=document.createElement("fieldset");fs.className="quiz-question";fs.innerHTML="<legend>"+(i+1)+". "+esc(item.q)+"</legend>"+item.a.map((a,j)=>'<label><input type="radio" name="quick-'+i+'" value="'+j+'" '+(answers[i]===j?"checked":"")+'> '+esc(a)+"</label>").join("")+'<p class="feedback" id="feedback-'+i+'" aria-live="polite"></p>';root.appendChild(fs);fs.addEventListener("change",e=>{if(e.target.matches("input")){answers[i]=Number(e.target.value);try{localStorage.setItem(key,JSON.stringify(answers))}catch(err){}document.getElementById("feedback-"+i).textContent="";updateProgress()}})});
+function updateProgress(){const n=questions.filter((_,i)=>Number.isInteger(answers[i])&&answers[i]>=0&&answers[i]<4).length;document.getElementById("lesson-progress-text").textContent=n+"/5 checked";document.getElementById("lesson-progress-fill").style.width=(n/5*100)+"%";document.getElementById("lesson-progress-bar").setAttribute("aria-valuenow",String(n))}
+function switchTab(which){const sheet=which==="sheet";document.getElementById("panel-sheet").hidden=!sheet;document.getElementById("panel-check").hidden=sheet;document.getElementById("tab-sheet").setAttribute("aria-selected",String(sheet));document.getElementById("tab-check").setAttribute("aria-selected",String(!sheet));document.getElementById(sheet?"tab-sheet":"tab-check").focus()}
+document.getElementById("tab-sheet").addEventListener("click",()=>switchTab("sheet"));document.getElementById("tab-check").addEventListener("click",()=>switchTab("check"));
+document.getElementById("check-answers").addEventListener("click",()=>{let score=0;questions.forEach((q,i)=>{const el=document.getElementById("feedback-"+i);if(!Number.isInteger(answers[i])){el.textContent="Choose an answer to complete this question.";el.className="feedback bad"}else{const ok=answers[i]===q.correct;if(ok)score++;el.textContent=(ok?"✓ Correct. ":"✗ Not quite. ")+q.why;el.className="feedback "+(ok?"good":"bad")}});document.getElementById("quick-check-score").textContent="Score: "+score+"/5. Review the explanations and try again."});
+document.getElementById("reset-answers").addEventListener("click",()=>{answers={};try{localStorage.removeItem(key)}catch(e){}root.querySelectorAll("input").forEach(x=>x.checked=false);root.querySelectorAll(".feedback").forEach(x=>{x.textContent="";x.className="feedback"});document.getElementById("quick-check-score").textContent="";updateProgress()});
+updateProgress();
+})();
+</script>
 </main></body></html>

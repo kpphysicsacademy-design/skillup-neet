@@ -30,3 +30,39 @@ window.skillUpRacemoseInflorescenceQuestions = [
 {q:"Which option contains the two key characteristics of racemose inflorescence?",o:["Continued main-axis growth and acropetal succession","Terminal main axis and basipetal succession","Terminal main axis and acropetal succession","Continued main-axis growth and basipetal succession"],a:0,e:"Racemose inflorescence is characterized by continued main-axis growth and generally acropetal flower succession."},
 {q:"Which statement is the best summary of racemose inflorescence?",o:["The main axis continues growing, with younger flowers generally toward the apex","The main axis terminates in a flower, with younger flowers toward the base","The main axis is absent and flowers arise from roots","The main axis terminates in a leaf and flowers are random"],a:0,e:"Racemose inflorescence has a continuing main axis and generally shows acropetal succession."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 8
+window.skillUpRacemoseInflorescenceQuestions.push(...[
+  {
+    "q": "The main axis of a racemose inflorescence is generally:",
+    "o": [
+      "Indeterminate",
+      "Terminated by the oldest flower",
+      "A modified root",
+      "Without lateral flowers"
+    ],
+    "a": 0,
+    "e": "In racemose inflorescences the main axis continues to grow."
+  },
+  {
+    "q": "In a typical raceme, the youngest flowers are found:",
+    "o": [
+      "At the base",
+      "Near the apex",
+      "Only at the centre of the stem",
+      "Below the roots"
+    ],
+    "a": 1,
+    "e": "Acropetal succession places younger flowers toward the apex."
+  },
+  {
+    "q": "The inflorescence of mustard is typically a:",
+    "o": [
+      "Cyme",
+      "Capitulum",
+      "Raceme",
+      "Spadix"
+    ],
+    "a": 2,
+    "e": "Mustard bears a raceme with pedicellate flowers along an elongating axis."
+  }
+]);

@@ -30,3 +30,39 @@ window.skillUpEukaryoticCellQuestions = [
 {q:"A cell has a nucleus, mitochondria, endoplasmic reticulum and Golgi apparatus. How should it be classified?",o:["Eukaryotic cell","Prokaryotic cell","Acellular particle","Viral capsid"],a:0,e:"A membrane-bound nucleus and multiple membrane-bound organelles are characteristic features of eukaryotic cells."},
 {q:"Which combination contains only structures commonly found in an animal eukaryotic cell?",o:["Nucleus, mitochondria and Golgi apparatus","Chloroplast, cell wall and plasmodesmata","Peptidoglycan wall, nucleoid and capsule","Cell wall, chloroplast and large central vacuole"],a:0,e:"Animal cells commonly contain a nucleus, mitochondria and Golgi apparatus; the other combinations include plant or prokaryotic features."}
 ];
+// Chapter 3 explained NEET practice extension
+window.skillUpEukaryoticCellQuestions.push(...[
+  {
+    "q": "A defining feature of a eukaryotic cell is:",
+    "o": [
+      "Membrane-bound nucleus",
+      "Absence of DNA",
+      "No ribosomes",
+      "Peptidoglycan cell wall in all cells"
+    ],
+    "a": 0,
+    "e": "Eukaryotic nuclear DNA is enclosed within a membrane-bound nucleus."
+  },
+  {
+    "q": "The typical ribosome of eukaryotic cytoplasm is:",
+    "o": [
+      "70S",
+      "80S",
+      "50S",
+      "30S"
+    ],
+    "a": 1,
+    "e": "Eukaryotic cytoplasmic ribosomes are 80S, with 60S and 40S subunits."
+  },
+  {
+    "q": "Which organelle is a major site of aerobic ATP production?",
+    "o": [
+      "Golgi apparatus",
+      "Lysosome",
+      "Mitochondrion",
+      "Nucleolus"
+    ],
+    "a": 2,
+    "e": "Mitochondria perform oxidative phosphorylation across the inner mitochondrial membrane."
+  }
+]);

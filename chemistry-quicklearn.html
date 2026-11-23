@@ -11,7 +11,7 @@ const key=slug(micro)||slug(concept),$=id=>document.getElementById(id);
 const query=new URLSearchParams({concept,micro});$('backQuiz').href='chemistry-mcq.html?'+query;$('practice').href='chemistry-mcq.html?'+query;
 $('title').textContent=(concept||micro||'Chemistry')+' · QuickLearn';document.title=(concept||micro||'Chemistry')+' | QuickLearn | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
-const BANK_VERSION='20261121-percentage-yield-quiz-v1';
+const BANK_VERSION='20261123-chemistry-runtime-fixes-v1';
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function richText(v){
  let s=esc(v);
@@ -60,7 +60,7 @@ function getBank(key){
 function loadScript(src,key){
  return new Promise((resolve,reject)=>{
   const path='question-banks/'+src;
-  const urls=['/'+path,'https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/'+path];
+  const urls=['/'+path, 'https://raw.githubusercontent.com/kpphysicsacademy-design/skillup-neet/main/'+path];
   let settled=false,loaded=0;
   const finish=()=>{if(settled)return;const bank=getBank(key);if(bank){settled=true;resolve(bank);}else if(loaded===urls.length){settled=true;reject(new Error('Question bank unavailable'));}};
   urls.forEach((url,i)=>{
@@ -77,7 +77,7 @@ function normalize(item){
  if(Array.isArray(item.options)){
   const opts=item.options.map(o=>typeof o==='object'?(o.text||o.label||o.value):o);
   const id=typeof item.answer==='string'?item.answer:'';
-  const a=item.options.findIndex(o=>(typeof o==='object'?(o.id||o.value):o)===id);
+  const a=typeof item.answer==='number'?item.answer:item.options.findIndex(o=>(typeof o==='object'?(o.id||o.value):o)===id);
   return {q:item.question||'',o:opts,a,why:item.explanation||item.why||''};
  }
  return {q:item.q||'',o:Array.isArray(item.o)?item.o.slice():[],a:typeof item.a==='number'?item.a:(item.o||[]).indexOf(item.a),why:item.e||item.why||item.explanation||''};

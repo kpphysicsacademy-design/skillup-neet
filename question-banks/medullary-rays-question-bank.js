@@ -30,3 +30,39 @@ window.skillUpMedullaryRaysQuestions=[
 {q:"Which tissue is most directly responsible for radial transport in woody stems?",o:["Medullary rays","Stomata","Root hairs","Sieve plates alone"],a:1,e:"Medullary rays form the principal radial transport system across secondary tissues."},
 {q:"The best description of medullary rays is:",o:["Radial parenchymatous tissues that store materials and facilitate lateral transport","Longitudinal xylem vessels","Epidermal appendages","Reproductive structures"],a:1,e:"Medullary rays are living radial tissues central to storage and radial transport in woody organs."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 final batch
+window.skillUpMedullaryRaysQuestions.push(...[
+  {
+    "q": "Medullary rays are primarily composed of:",
+    "o": [
+      "Parenchyma",
+      "Tracheids only",
+      "Guard cells",
+      "Root-cap cells"
+    ],
+    "a": 0,
+    "e": "Medullary rays are largely living parenchymatous tissue."
+  },
+  {
+    "q": "A major function of medullary rays is:",
+    "o": [
+      "Pollen formation",
+      "Radial transport",
+      "Stomatal opening",
+      "Root elongation"
+    ],
+    "a": 1,
+    "e": "Rays permit lateral movement of materials through woody tissues."
+  },
+  {
+    "q": "Medullary rays commonly contribute to:",
+    "o": [
+      "Only gaseous exchange",
+      "Flower pigmentation",
+      "Food storage",
+      "Seed dispersal"
+    ],
+    "a": 2,
+    "e": "Living ray parenchyma stores starch and other nutrients."
+  }
+]);

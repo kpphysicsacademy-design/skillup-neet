@@ -30,3 +30,39 @@ window.skillUpDicotRootTSQuestions = [
 {q:"The central region of a dicot root is occupied mainly by:",o:["A small pith surrounded by the vascular tissue","A large cortex","The epiblema","The root hair zone"],a:1,e:"Dicot roots usually have a small central pith within the stele."},
 {q:"Which statement best identifies a typical dicot root T.S.?",o:["Epiblema → cortex → endodermis → pericycle → radial exarch xylem with alternating phloem → small pith","Epidermis → cortex → scattered closed bundles → large pith","Cuticle → mesophyll → collateral bundles → stomata","Only xylem and phloem without cortex"],a:1,e:"This sequence summarizes the major anatomical features of a typical dicot root in transverse section."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 14
+window.skillUpDicotRootTSQuestions.push(...[
+  {
+    "q": "In a typical dicot root, protoxylem lies toward the:",
+    "o": [
+      "Periphery",
+      "Centre",
+      "Pith only",
+      "Phloem sieve tubes"
+    ],
+    "a": 0,
+    "e": "Exarch xylem has protoxylem toward the periphery and metaxylem toward the centre."
+  },
+  {
+    "q": "Casparian strips occur in the:",
+    "o": [
+      "Epiblema",
+      "Endodermis",
+      "Pith",
+      "Xylem vessel"
+    ],
+    "a": 1,
+    "e": "Casparian strips are characteristic of endodermal cell walls."
+  },
+  {
+    "q": "The pith in a typical dicot root is:",
+    "o": [
+      "Always very large",
+      "Replaced by phloem",
+      "Small or inconspicuous",
+      "Made of cork"
+    ],
+    "a": 2,
+    "e": "Dicot roots generally have small or inconspicuous pith."
+  }
+]);

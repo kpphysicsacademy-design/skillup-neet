@@ -52,7 +52,8 @@ window.SkillUpExtensiveAndIntensivePropertiesQuestions=[
     "Always additive",
     "A"
   ],
-  "a": -1
+  "a": 0,
+  "e": "Density is mass per unit volume and is an intensive property."
 },
 {
   "q": "Pressure is generally an:",

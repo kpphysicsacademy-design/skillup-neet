@@ -29,8 +29,6 @@ window.skillUpPlantFamiliesInNEETQuestions = [
 {q:"A legume fruit with a monocarpellary superior ovary indicates:",o:["Fabaceae","Solanaceae","Liliaceae","Poaceae"],a:0,e:"These are characteristic features of Fabaceae."},
 {q:"Which family typically has six tepals and six stamens?",o:["Liliaceae","Solanaceae","Fabaceae","Asteraceae"],a:0,e:"A typical Liliaceae flower has six tepals and six stamens."},
 {q:"Which comparison is correct?",o:["Fabaceae: legume; Solanaceae: berry or capsule; Liliaceae: capsule or berry","Fabaceae: caryopsis; Solanaceae: legume; Liliaceae: cypsela","Fabaceae: capsule only; Solanaceae: legume only; Liliaceae: caryopsis","All three families characteristically have the same fruit"],a:0,e:"These fruit types correctly summarize common fruit forms of the three families."},
-indow.skillUpPlantFamiliesInNEETQuestions = [
-
 ];
 // Chapter 2 NEET practice extension: 2026-11-23 batch 11
 window.skillUpPlantFamiliesInNEETQuestions.push(...[

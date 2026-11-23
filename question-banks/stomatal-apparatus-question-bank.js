@@ -30,3 +30,39 @@ window.skillUpStomatalApparatusQuestions=[
 {q:"Which cell structure permits guard cells to respond to changes in solute concentration?",o:["Cell membrane and ion transport systems","Secondary xylem only","Pollen wall","Middle lamella alone"],a:1,e:"Ion channels and transporters in the guard-cell membrane regulate solute movement."},
 {q:"Which statement best describes the stomatal apparatus?",o:["It is a regulated epidermal gas-exchange unit","It is a vascular bundle","It is a root meristem","It is a reproductive organ"],a:1,e:"The stomatal apparatus is an epidermal structure that controls gas exchange and transpiration."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 17
+window.skillUpStomatalApparatusQuestions.push(...[
+  {
+    "q": "The stomatal pore is directly bordered by:",
+    "o": [
+      "Guard cells",
+      "Sieve tubes",
+      "Tracheids",
+      "Cork cells"
+    ],
+    "a": 0,
+    "e": "Two guard cells flank and control the stomatal aperture."
+  },
+  {
+    "q": "Guard cells of many grasses are:",
+    "o": [
+      "Kidney-shaped",
+      "Dumbbell-shaped",
+      "Star-shaped",
+      "Always circular"
+    ],
+    "a": 1,
+    "e": "Grass stomata typically have dumbbell-shaped guard cells."
+  },
+  {
+    "q": "Opening of stomata is most directly associated with changes in:",
+    "o": [
+      "Cambium thickness",
+      "Xylem lignification",
+      "Guard-cell turgor",
+      "Pollen formation"
+    ],
+    "a": 2,
+    "e": "Changes in guard-cell turgor alter stomatal aperture."
+  }
+]);

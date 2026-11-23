@@ -30,3 +30,39 @@ window.skillUpHeartwoodAndSapwoodQuestions=[
 {q:"Which pair is correctly matched?",o:["Heartwood—duramen","Sapwood—duramen","Heartwood—alburnum","Cork—sapwood"],a:1,e:"Duramen is heartwood; alburnum is sapwood."},
 {q:"Which statement is correct about the age of xylem?",o:["Heartwood is older than sapwood","Sapwood is always older than heartwood","Both form simultaneously","Heartwood is primary xylem only"],a:1,e:"Heartwood represents older inner secondary xylem, while sapwood is younger outer xylem."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 17
+window.skillUpHeartwoodAndSapwoodQuestions.push(...[
+  {
+    "q": "The actively water-conducting secondary xylem is:",
+    "o": [
+      "Sapwood",
+      "Heartwood",
+      "Cork",
+      "Pith"
+    ],
+    "a": 0,
+    "e": "Sapwood is the outer, functional water-conducting secondary xylem."
+  },
+  {
+    "q": "Heartwood occurs predominantly in the:",
+    "o": [
+      "Outer bark",
+      "Inner older secondary xylem",
+      "Epidermis",
+      "Primary phloem"
+    ],
+    "a": 1,
+    "e": "Heartwood is formed from older inner secondary xylem that loses its conductive function."
+  },
+  {
+    "q": "Heartwood is often darker because of:",
+    "o": [
+      "Chlorophyll accumulation",
+      "Active sieve tubes",
+      "Deposition of tannins and resins",
+      "Abundant stomata"
+    ],
+    "a": 2,
+    "e": "Extractives including tannins and resins accumulate in heartwood and often darken it."
+  }
+]);

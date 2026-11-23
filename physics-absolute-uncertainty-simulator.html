@@ -90,7 +90,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
    <div class="sim-field"><label for="uncertaintyUnit">Unit</label><input id="uncertaintyUnit" type="text" value="cm" maxlength="12"></div>
   </div>
   <button class="btn check" id="calculateUncertainty" type="button" style="width:100%;margin-top:10px">Calculate uncertainty</button>
-  <div class="sim-result" id="uncertaintyResults" aria-live="polite"><strong>Ready to calculate</strong><p>Enter at least two readings to estimate half-range uncertainty.</p></div>
+  <div class="sim-result" id="uncertaintyResults" role="status" aria-live="polite"><strong>Ready to calculate</strong><p>Enter at least two readings to estimate half-range uncertainty.</p></div>
  </div>
  <div class="sim-card"><h3>Single-reading uncertainty</h3><p>Explore a value reported with an absolute uncertainty.</p>
   <div class="sim-grid">
@@ -98,7 +98,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
    <div class="sim-field"><label for="singleUncertainty">Absolute uncertainty</label><input id="singleUncertainty" type="number" min="0" step="any" value="0.2"></div>
   </div>
   <button class="btn check" id="calculateBounds" type="button" style="width:100%;margin-top:10px">Find measurement limits</button>
-  <div class="sim-result" id="boundsResults" aria-live="polite"><strong>Measurement interval</strong><p>12.0 ± 0.2 gives limits of 11.8 and 12.2.</p></div>
+  <div class="sim-result" id="boundsResults" role="status" aria-live="polite"><strong>Measurement interval</strong><p>12.0 ± 0.2 gives limits of 11.8 and 12.2.</p></div>
  </div>
 </section><script>
 
@@ -110,17 +110,17 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   tabs.forEach(x=>x.classList.toggle('active',x===btn));
   panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));
  }));
- const parseReadings=()=>document.getElementById('uncertaintyReadings').value.split(',').map(s=>s.trim()).filter(Boolean).map(Number);
+ const parseReadings=()=>document.getElementById('uncertaintyReadings').value.split(',').map(s=>s.trim()).map(s=>s===''?NaN:Number(s));
  document.getElementById('calculateUncertainty').addEventListener('click',()=>{
   const values=parseReadings(),unit=document.getElementById('uncertaintyUnit').value.trim();
   const out=document.getElementById('uncertaintyResults');
-  if(values.length<2||values.some(v=>!Number.isFinite(v))){out.innerHTML='<strong>Check your readings</strong><p>Enter at least two valid numbers separated by commas.</p>';return;}
-  const mean=values.reduce((a,b)=>a+b,0)/values.length,min=Math.min(...values),max=Math.max(...values),range=max-min,u=range/2,lo=mean-u,hi=mean+u;
+  if(values.length<2||values.length>1000||values.some(v=>!Number.isFinite(v))){out.textContent='Enter 2–1000 finite comma-separated readings without blank entries.';return;}if(!/^[a-zA-Zµμ°%0-9²³\/· -]{0,12}$/.test(unit)){out.textContent='Use a short plain-text unit (letters, numbers or common unit symbols).';return;}
+  const mean=values.reduce((a,b)=>a+b,0)/values.length,min=Math.min(...values),max=Math.max(...values),range=max-min,u=range/2,lo=mean-u,hi=mean+u;if(![mean,range,u,lo,hi].every(Number.isFinite)){out.textContent='The result exceeds the supported numeric range.';return;}
   out.innerHTML='<strong>Calculated result</strong><p>Number of readings: <b>'+values.length+'</b></p><p>Mean: <b>'+mean.toPrecision(6)+' '+unit+'</b></p><p>Range: <b>'+range.toPrecision(5)+' '+unit+'</b></p><p>Half-range absolute uncertainty: <b>± '+u.toPrecision(5)+' '+unit+'</b></p><p>Reported result: <b>('+mean.toPrecision(6)+' ± '+u.toPrecision(5)+') '+unit+'</b></p><p>Estimated interval: <b>'+lo.toPrecision(6)+' to '+hi.toPrecision(6)+' '+unit+'</b></p><p class="sim-hint">Half-range is a simple estimate for repeated readings, not a universal uncertainty rule.</p>';
  });
  document.getElementById('calculateBounds').addEventListener('click',()=>{
-  const value=Number(document.getElementById('singleValue').value),u=Number(document.getElementById('singleUncertainty').value),out=document.getElementById('boundsResults');
-  if(!Number.isFinite(value)||!Number.isFinite(u)||u<0){out.innerHTML='<strong>Check your inputs</strong><p>Enter a valid value and a non-negative uncertainty.</p>';return;}
+  const valueRaw=document.getElementById('singleValue').value.trim(),uRaw=document.getElementById('singleUncertainty').value.trim(),value=valueRaw===''?NaN:Number(valueRaw),u=uRaw===''?NaN:Number(uRaw),out=document.getElementById('boundsResults');
+  if(!Number.isFinite(value)||!Number.isFinite(u)||u<0||!Number.isFinite(value-u)||!Number.isFinite(value+u)){out.innerHTML='<strong>Check your inputs</strong><p>Enter a valid value and a non-negative uncertainty.</p>';return;}
   out.innerHTML='<strong>Measurement interval</strong><p>Lower limit: <b>'+(value-u).toPrecision(6)+'</b></p><p>Upper limit: <b>'+(value+u).toPrecision(6)+'</b></p><p>Reported form: <b>'+value+' ± '+u+'</b></p>';
  });
 })();

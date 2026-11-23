@@ -30,3 +30,39 @@ window.skillUpPhyllotaxyQuestions = [
 {q:"Which feature is being classified when we describe leaves as alternate, opposite or whorled?",o:["Their arrangement on the stem","Their venation pattern","Their margin shape","Their internal tissue system"],a:0,e:"Alternate, opposite and whorled describe how leaves are arranged at nodes on the stem."},
 {q:"Which statement best distinguishes phyllotaxy from venation?",o:["Phyllotaxy describes leaf arrangement on the stem, whereas venation describes the pattern of veins in a leaf","Phyllotaxy describes root arrangement, whereas venation describes stem branching","Both terms describe only flower arrangement","Phyllotaxy and venation are identical terms"],a:0,e:"Phyllotaxy concerns leaf arrangement on the stem, while venation concerns the arrangement of veins and veinlets in the leaf."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 7
+window.skillUpPhyllotaxyQuestions.push(...[
+  {
+    "q": "Phyllotaxy describes the arrangement of:",
+    "o": [
+      "Leaves on a stem",
+      "Veins within a leaf",
+      "Flowers within an ovary",
+      "Roots in the soil"
+    ],
+    "a": 0,
+    "e": "Phyllotaxy is the pattern of leaf placement on a stem or branch."
+  },
+  {
+    "q": "Two leaves at each node are characteristic of:",
+    "o": [
+      "Alternate phyllotaxy",
+      "Opposite phyllotaxy",
+      "Whorled phyllotaxy",
+      "Reticulate venation"
+    ],
+    "a": 1,
+    "e": "Opposite phyllotaxy has a pair of leaves at each node."
+  },
+  {
+    "q": "Alstonia commonly shows:",
+    "o": [
+      "Alternate phyllotaxy",
+      "Opposite phyllotaxy",
+      "Whorled phyllotaxy",
+      "Parallel venation"
+    ],
+    "a": 2,
+    "e": "Alstonia bears three or more leaves at a node in a whorl."
+  }
+]);

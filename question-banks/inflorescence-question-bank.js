@@ -30,3 +30,39 @@ window.skillUpInflorescenceQuestions = [
 {q:"Which statement correctly links axis growth and flower sequence?",o:["Racemose—continued axis growth and acropetal succession","Racemose—terminal axis and basipetal succession","Cymose—continued axis growth and acropetal succession","Cymose—no terminal flower and basipetal succession"],a:0,e:"Racemose inflorescence combines continued main-axis growth with acropetal succession."},
 {q:"Which statement correctly links cymose structure and flower sequence?",o:["Cymose—terminal flower and basipetal succession","Cymose—continued axis growth and acropetal succession","Racemose—terminal flower and basipetal succession","Racemose—continued axis growth and basipetal succession"],a:0,e:"Cymose inflorescence has a terminal flower and generally shows basipetal succession."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 7
+window.skillUpInflorescenceQuestions.push(...[
+  {
+    "q": "In a typical racemose inflorescence, the main axis:",
+    "o": [
+      "Continues to grow",
+      "Ends in a terminal flower",
+      "Is always underground",
+      "Never bears lateral flowers"
+    ],
+    "a": 0,
+    "e": "The main axis remains indeterminate in racemose inflorescences."
+  },
+  {
+    "q": "In a cymose inflorescence, the main axis:",
+    "o": [
+      "Grows indefinitely",
+      "Terminates in a flower",
+      "Forms a root",
+      "Lacks flowers"
+    ],
+    "a": 1,
+    "e": "The main axis is determinate and ends in a flower in cymose inflorescences."
+  },
+  {
+    "q": "The typical order of flower development in a racemose inflorescence is:",
+    "o": [
+      "Basipetal",
+      "Centrifugal only",
+      "Acropetal",
+      "Random"
+    ],
+    "a": 2,
+    "e": "In a typical racemose inflorescence, older flowers are lower and younger ones are toward the apex."
+  }
+]);

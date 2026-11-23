@@ -127,7 +127,7 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
     <div class="sim-stat"><strong id="distanceDisp">7 m</strong><span>DISPLACEMENT</span></div>
     <div class="sim-stat"><strong id="distanceFinal">+7 m</strong><span>FINAL POSITION</span></div>
   </div>
-  <p class="sim-note" id="distanceExplain" aria-live="polite">Distance = |5| + |−2| + |4| = 11 m. Net displacement = 5 − 2 + 4 = +7 m.</p>
+  <p class="sim-note" id="distanceExplain" role="status" aria-live="polite">Distance = |5| + |−2| + |4| = 11 m. Net displacement = 5 − 2 + 4 = +7 m.</p>
 </section>
 <script>
 
@@ -159,7 +159,8 @@ html{scroll-padding-top:100px;scroll-behavior:smooth}
  const $=id=>document.getElementById(id);
  const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');
  function updateDistance(){
-  const vals=ids.map(id=>{const raw=$(id).value.trim();if(raw==='')return 0;const v=Number(raw);return Number.isFinite(v)?v:0;});
+  const vals=ids.map(id=>{const raw=$(id).value.trim();if(raw==='')return NaN;const v=Number(raw);return Number.isFinite(v)&&Math.abs(v)<=1000000?v:NaN;});
+  if(!vals.every(Number.isFinite)){$('distanceExplain').textContent='Enter valid movement values within ±1,000,000 m for all three stages. The diagram shows the last valid journey.';return;}
   const positions=[0];vals.forEach(v=>positions.push(positions[positions.length-1]+v));
   const total=vals.reduce((s,v)=>s+Math.abs(v),0),final=positions[3];
   const min=Math.min(0,...positions),max=Math.max(0,...positions),span=Math.max(1,max-min);

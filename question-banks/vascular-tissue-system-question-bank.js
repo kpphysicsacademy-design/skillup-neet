@@ -29,3 +29,39 @@ window.skillUpVascularTissueSystemQuestions = [
 {q:"Sieve plates are found in:",o:["Sieve tube elements","Vessel elements","Tracheids","Xylem fibres"],a:1,e:"Sieve plates connect adjacent sieve tube elements and facilitate phloem translocation."},
 {q:"Which statement correctly describes the vascular tissue system?",o:["It forms the plant's long-distance transport network through xylem and phloem","It consists only of epidermal cells","It is restricted to roots","It has no role in support"],a:1,e:"Xylem and phloem provide integrated transport and also contribute to support and storage."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 14
+window.skillUpVascularTissueSystemQuestions.push(...[
+  {
+    "q": "A vascular bundle containing cambium is termed:",
+    "o": [
+      "Open",
+      "Closed",
+      "Radial only",
+      "Amphicribral only"
+    ],
+    "a": 0,
+    "e": "Open vascular bundles contain cambium and can produce secondary vascular tissues."
+  },
+  {
+    "q": "In roots, xylem and phloem commonly occur:",
+    "o": [
+      "On the same radius",
+      "On alternate radii",
+      "Only in the epidermis",
+      "Inside the pith exclusively"
+    ],
+    "a": 1,
+    "e": "Radial vascular bundles have xylem and phloem on different, alternating radii."
+  },
+  {
+    "q": "The tissue chiefly responsible for transport of organic food is:",
+    "o": [
+      "Xylem",
+      "Collenchyma",
+      "Phloem",
+      "Cork"
+    ],
+    "a": 2,
+    "e": "Phloem translocates organic solutes such as sucrose."
+  }
+]);

@@ -30,3 +30,39 @@ window.skillUpVenationQuestions = [
 {q:"Why is venation useful as a morphological character?",o:["It helps describe and identify leaf types","It determines the number of roots","It identifies only flower colour","It measures seed mass"],a:0,e:"Venation is an important external leaf character used in describing and identifying plants."},
 {q:"Which statement is most accurate about the monocot-dicot association with venation?",o:["Monocots commonly have parallel venation and dicots commonly have reticulate venation","All monocots always have reticulate venation","All dicots always have parallel venation","Venation has no association with plant groups"],a:0,e:"The common pattern is parallel venation in monocots and reticulate venation in dicots, with exceptions possible."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 7
+window.skillUpVenationQuestions.push(...[
+  {
+    "q": "The arrangement of veins and veinlets in a leaf is called:",
+    "o": [
+      "Phyllotaxy",
+      "Venation",
+      "Placentation",
+      "Aestivation"
+    ],
+    "a": 1,
+    "e": "Venation describes the pattern of veins and veinlets in the lamina."
+  },
+  {
+    "q": "Parallel venation is most commonly associated with:",
+    "o": [
+      "Dicot leaves",
+      "Gymnosperm cones only",
+      "Monocot leaves",
+      "Roots"
+    ],
+    "a": 2,
+    "e": "Many monocot leaves, including grasses, have approximately parallel veins."
+  },
+  {
+    "q": "A net-like pattern of leaf veins is known as:",
+    "o": [
+      "Reticulate venation",
+      "Parallel venation",
+      "Whorled phyllotaxy",
+      "Racemose inflorescence"
+    ],
+    "a": 0,
+    "e": "Reticulate venation has interconnected veins forming a network."
+  }
+]);

@@ -30,3 +30,39 @@ window.skillUpSecondaryGrowthQuestions = [
 {q:"The vascular cambium is called a lateral meristem because it:",o:["Occurs laterally along the axis and increases girth","Occurs only at the root tip","Produces flowers","Forms root hairs"],a:0,e:"Lateral meristems increase the thickness or girth of organs."},
 {q:"Which sequence correctly represents major secondary growth events?",o:["Cambium ring formation → secondary xylem/phloem production → periderm formation","Root cap formation → leaf formation → flower formation","Epidermis → root hair → pith","Stoma → mesophyll → pollen"],a:0,e:"Formation of a cambium ring followed by secondary vascular tissue and periderm is characteristic of secondary growth."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 6
+window.skillUpSecondaryGrowthQuestions.push(...[
+  {
+    "q": "Secondary xylem is formed toward which side of vascular cambium?",
+    "o": [
+      "Inside",
+      "Outside",
+      "Both sides equally as phloem",
+      "Only the epidermis"
+    ],
+    "a": 0,
+    "e": "Vascular cambium produces secondary xylem inward and secondary phloem outward."
+  },
+  {
+    "q": "The tissue formed to the outside by cork cambium is:",
+    "o": [
+      "Phelloderm",
+      "Phellem (cork)",
+      "Secondary xylem",
+      "Pith"
+    ],
+    "a": 1,
+    "e": "Cork cambium produces phellem externally and phelloderm internally."
+  },
+  {
+    "q": "Annual rings in woody stems mainly reflect seasonal differences in:",
+    "o": [
+      "Primary phloem",
+      "Root hairs",
+      "Secondary xylem",
+      "Epidermal cuticle"
+    ],
+    "a": 2,
+    "e": "Alternating earlywood and latewood in secondary xylem may form annual growth rings."
+  }
+]);

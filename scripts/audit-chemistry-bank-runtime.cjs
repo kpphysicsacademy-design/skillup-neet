@@ -21,7 +21,9 @@ for(const concept of concepts){
  const bank=candidates[0];
  if(!error&&!bank)error='no compatible registered or named bank';
  if(!error)for(let i=0;i<bank.length;i++){
-  const x=bank[i];\n  if(!x||typeof x!=='object'){error='missing or invalid entry at index '+i;break;}\n  const options=Array.isArray(x.options)?x.options:(Array.isArray(x.o)?x.o:null);
+  const x=bank[i]; 
+  if(!x||typeof x!=='object'){error='missing or invalid entry at index '+i;break;} 
+  const options=Array.isArray(x.options)?x.options:(Array.isArray(x.o)?x.o:null);
   const answer=Array.isArray(x.options)?options.findIndex(o=>(typeof o==='object'?(o.id||o.value):o)===x.answer):(typeof x.a==='number'?x.a:options?.indexOf(x.a));
   const question=x.question||x.q;
   if(!question||!options||options.length<2||!options.every(o=>o!=null&&typeof (typeof o==='object'?(o.text||o.label||o.value):o)==='string')||!Number.isInteger(answer)||answer<0||answer>=options.length){error='invalid question/answer at index '+i;break;}

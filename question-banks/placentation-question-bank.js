@@ -30,3 +30,39 @@ window.skillUpPlacentationQuestions = [
 {q:"Which set correctly matches type with example?",o:["Free central—Dianthus","Basal—tomato","Marginal—Argemone","Axile—pea"],a:0,e:"Dianthus is an NCERT example of free central placentation."},
 {q:"Which statement best summarizes placentation?",o:["It describes how ovules are arranged within the ovary, including marginal, axile, parietal, basal and free central types","It describes how pollen is released from the anther","It describes how petals are fused","It describes how leaves are arranged on a stem"],a:0,e:"Placentation concerns the arrangement of ovules within the ovary and includes five major types described in NCERT."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 10
+window.skillUpPlacentationQuestions.push(...[
+  {
+    "q": "Ovules are attached along the ventral suture in which placentation?",
+    "o": [
+      "Marginal",
+      "Axile",
+      "Basal",
+      "Free-central"
+    ],
+    "a": 0,
+    "e": "Marginal placentation occurs in pea, with ovules along the ventral suture."
+  },
+  {
+    "q": "The placentation of tomato is typically:",
+    "o": [
+      "Parietal",
+      "Axile",
+      "Marginal",
+      "Basal"
+    ],
+    "a": 1,
+    "e": "Tomato has axile placentation, with ovules attached to the central axis."
+  },
+  {
+    "q": "Sunflower typically exhibits:",
+    "o": [
+      "Free-central",
+      "Marginal",
+      "Basal",
+      "Axile"
+    ],
+    "a": 2,
+    "e": "Sunflower has basal placentation, with an ovule at the ovary base."
+  }
+]);

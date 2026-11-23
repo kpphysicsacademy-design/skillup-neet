@@ -30,3 +30,39 @@ window.skillUpSeedQuestions = [
 {q:"Which structure of a maize seed is a single cotyledon?",o:["Scutellum","Aleurone","Coleoptile","Coleorhiza"],a:0,e:"The scutellum is the single cotyledon of the maize embryo."},
 {q:"During germination, which embryonic part generally emerges to form the primary root first?",o:["Radicle","Plumule","Cotyledon","Scutellum"],a:0,e:"The radicle develops into the primary root and commonly emerges first during germination."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 10
+window.skillUpSeedQuestions.push(...[
+  {
+    "q": "A seed develops primarily from a mature:",
+    "o": [
+      "Ovule",
+      "Anther",
+      "Petal",
+      "Stigma"
+    ],
+    "a": 0,
+    "e": "Following fertilisation, the ovule typically develops into a seed."
+  },
+  {
+    "q": "A typical dicot embryo has:",
+    "o": [
+      "One cotyledon",
+      "Two cotyledons",
+      "No cotyledons",
+      "Four cotyledons"
+    ],
+    "a": 1,
+    "e": "Dicotyledonous embryos usually have two cotyledons."
+  },
+  {
+    "q": "The single cotyledon of maize is termed:",
+    "o": [
+      "Coleorhiza",
+      "Coleoptile",
+      "Scutellum",
+      "Plumule"
+    ],
+    "a": 2,
+    "e": "The scutellum is the solitary cotyledon of the maize embryo."
+  }
+]);

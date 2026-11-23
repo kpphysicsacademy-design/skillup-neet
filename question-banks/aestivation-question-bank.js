@@ -31,3 +31,39 @@ window.skillUpAestivationQuestions = [
 {q:"A floral bud shows irregular overlap, with no single consistent direction of overlap. Which term applies?",o:["Imbricate aestivation","Twisted aestivation","Valvate aestivation","Vexillary aestivation"],a:0,e:"Irregular overlapping is characteristic of imbricate aestivation."},
 {q:"Which statement best summarizes aestivation?",o:["It describes the arrangement of sepals or petals in a floral bud","It describes the arrangement of roots around the stem","It describes the distribution of veins in a leaf","It describes the arrangement of ovules after fertilization"],a:0,e:"Aestivation specifically describes how sepals or petals are arranged in a floral bud."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 9
+window.skillUpAestivationQuestions.push(...[
+  {
+    "q": "The arrangement of sepals or petals in a floral bud is called:",
+    "o": [
+      "Aestivation",
+      "Venation",
+      "Phyllotaxy",
+      "Placentation"
+    ],
+    "a": 0,
+    "e": "Aestivation describes relative positions of sepals or petals in a bud."
+  },
+  {
+    "q": "In valvate aestivation, adjacent petals:",
+    "o": [
+      "Overlap in one direction",
+      "Touch without overlapping",
+      "Always form a keel",
+      "Are fused into a tube"
+    ],
+    "a": 1,
+    "e": "Valvate margins meet without overlapping."
+  },
+  {
+    "q": "The standard, wings and keel arrangement in pea is associated with:",
+    "o": [
+      "Twisted aestivation",
+      "Valvate aestivation",
+      "Vexillary aestivation",
+      "Open aestivation"
+    ],
+    "a": 2,
+    "e": "Vexillary aestivation is characteristic of papilionaceous flowers such as pea."
+  }
+]);

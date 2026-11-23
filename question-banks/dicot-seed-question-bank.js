@@ -30,3 +30,39 @@ window.skillUpDicotSeedQuestions = [
 {q:"Which statement about bean seed structure is correct?",o:["It has two cotyledons that can be separated","It has one scutellum and a large persistent endosperm","It lacks an embryonic axis","Its seed coat is made from the fruit wall"],a:0,e:"Bean is a dicot seed with two large cotyledons and a distinct embryonic axis."},
 {q:"Which statement best summarizes a typical dicot seed?",o:["It has two cotyledons, a seed coat, and an embryo with plumule and radicle","It has one cotyledon, a scutellum, and a coleoptile","It lacks an embryo and contains only endosperm","It consists only of a fruit wall and seed coat"],a:0,e:"A typical dicot seed contains two cotyledons and an embryo with plumule and radicle enclosed by the seed coat."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 11
+window.skillUpDicotSeedQuestions.push(...[
+  {
+    "q": "Which dicot seed commonly retains endosperm at maturity?",
+    "o": [
+      "Castor",
+      "Pea",
+      "Bean",
+      "Gram"
+    ],
+    "a": 0,
+    "e": "Castor is an endospermic dicot, unlike the usually non-endospermic pea and bean."
+  },
+  {
+    "q": "The embryonic radicle develops into the:",
+    "o": [
+      "Leaf",
+      "Primary root",
+      "Fruit wall",
+      "Anther"
+    ],
+    "a": 1,
+    "e": "The radicle gives rise to the primary root."
+  },
+  {
+    "q": "The scar showing where a seed was attached to the funicle is the:",
+    "o": [
+      "Micropyle",
+      "Plumule",
+      "Hilum",
+      "Scutellum"
+    ],
+    "a": 2,
+    "e": "The hilum is the scar left by attachment of the seed to the funicle."
+  }
+]);

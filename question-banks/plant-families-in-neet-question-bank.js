@@ -32,3 +32,39 @@ window.skillUpPlantFamiliesInNEETQuestions = [
 indow.skillUpPlantFamiliesInNEETQuestions = [
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 11
+window.skillUpPlantFamiliesInNEETQuestions.push(...[
+  {
+    "q": "A papilionaceous corolla with 9+1 stamens is characteristic of:",
+    "o": [
+      "Fabaceae",
+      "Solanaceae",
+      "Liliaceae",
+      "Poaceae"
+    ],
+    "a": 0,
+    "e": "Fabaceae typically shows a papilionaceous corolla and diadelphous stamens."
+  },
+  {
+    "q": "Epipetalous stamens and a bicarpellary superior ovary are characteristic of:",
+    "o": [
+      "Fabaceae",
+      "Solanaceae",
+      "Liliaceae",
+      "Brassicaceae"
+    ],
+    "a": 1,
+    "e": "Solanaceae commonly has five epipetalous stamens and a bicarpellary syncarpous superior ovary."
+  },
+  {
+    "q": "Six tepals in two whorls and six epiphyllous stamens are typical of:",
+    "o": [
+      "Fabaceae",
+      "Solanaceae",
+      "Liliaceae",
+      "Apiaceae"
+    ],
+    "a": 2,
+    "e": "Liliaceae typically has a trimerous perianth and six epiphyllous stamens."
+  }
+]);

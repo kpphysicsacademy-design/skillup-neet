@@ -30,3 +30,39 @@ window.skillUpSecondaryPhloemQuestions=[
 {q:"Which pair is correctly matched?",o:["Secondary phloem — sieve tube elements and companion cells","Secondary phloem — vessels only","Secondary xylem — sieve tubes","Cork — sieve plates"],a:1,e:"Sieve tubes and companion cells are characteristic phloem components."},
 {q:"The best description of secondary phloem is:",o:["Cambium-derived tissue outside xylem that conducts and stores organic nutrients","A water-conducting tissue inside the pith","A protective root-cap layer","A photosynthetic epidermal tissue"],a:1,e:"Secondary phloem is produced outward by vascular cambium and supports long-distance assimilate transport and storage."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 20
+window.skillUpSecondaryPhloemQuestions.push(...[
+  {
+    "q": "Secondary phloem is produced on which side of vascular cambium?",
+    "o": [
+      "Inner side",
+      "Outer side",
+      "Inside pith",
+      "Below root cap"
+    ],
+    "a": 1,
+    "e": "Vascular cambium produces secondary phloem outward."
+  },
+  {
+    "q": "The main function of secondary phloem is:",
+    "o": [
+      "Mineral absorption",
+      "Translocation of organic solutes",
+      "Gravity sensing",
+      "Root-cap protection"
+    ],
+    "a": 1,
+    "e": "Phloem transports sugars and other organic compounds."
+  },
+  {
+    "q": "Secondary phloem contributes to the:",
+    "o": [
+      "Root cap",
+      "Pith",
+      "Inner bark",
+      "Leaf cuticle"
+    ],
+    "a": 2,
+    "e": "Secondary phloem is part of the bark outside the vascular cambium."
+  }
+]);

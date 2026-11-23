@@ -29,3 +29,39 @@ window.skillUpCymoseInflorescenceQuestions = [
 {q:"Which combination contains the two key characteristics of typical cymose inflorescence?",o:["Terminal flower and basipetal succession","Continued main-axis growth and acropetal succession","Terminal flower and acropetal succession","Continued main-axis growth and basipetal succession"],a:0,e:"Typical cymose inflorescence is characterized by a terminal flower and generally basipetal succession."},
 {q:"Which statement is the best summary of cymose inflorescence?",o:["The main axis terminates in a flower, with younger flowers generally toward the base","The main axis continues growing, with younger flowers generally toward the apex","The main axis is absent and flowers arise from roots","The main axis continues without producing flowers"],a:0,e:"Cymose inflorescence has a terminal flower that limits the main axis and generally shows basipetal succession."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 8
+window.skillUpCymoseInflorescenceQuestions.push(...[
+  {
+    "q": "In a cymose inflorescence, the main axis:",
+    "o": [
+      "Grows indefinitely",
+      "Terminates in a flower",
+      "Produces only roots",
+      "Never branches"
+    ],
+    "a": 1,
+    "e": "A terminal flower ends growth of the main axis in cymose inflorescences."
+  },
+  {
+    "q": "Which flower generally opens first in a simple cyme?",
+    "o": [
+      "Basal lateral flower",
+      "Outermost lateral flower",
+      "Terminal flower",
+      "Last-formed flower"
+    ],
+    "a": 2,
+    "e": "The terminal flower is usually the oldest in a cyme."
+  },
+  {
+    "q": "A dichasial cyme produces how many lateral branches below the terminal flower?",
+    "o": [
+      "Two",
+      "One",
+      "Four only",
+      "None"
+    ],
+    "a": 0,
+    "e": "Dichasial cymes typically develop two lateral branches below the terminal flower."
+  }
+]);

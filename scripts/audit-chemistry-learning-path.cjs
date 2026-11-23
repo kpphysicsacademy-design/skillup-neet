@@ -17,7 +17,7 @@ for(const x of concepts){
 }
 for(const [name,html] of [['home',home],['quiz',quiz],['quicklearn',quick]]){
  for(const ref of [...html.matchAll(/(?:href|src)="([^"#?]+)(?:[?#][^"]*)?"/g)].map(m=>m[1])){
-  if(/^(?:https?:|\/|mailto:|tel:|data:)/.test(ref))continue;
+  if(/^(?:https?:|\/|mailto:|tel:|data:)/.test(ref)||ref.includes("'+")||ref.includes("+'"))continue;
   if(!fs.existsSync(ref))issues.push(name+' missing local resource '+ref);
  }
 }

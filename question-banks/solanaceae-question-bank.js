@@ -30,3 +30,39 @@ window.skillUpSolanaceaeQuestions = [
 {q:"Which statement about Solanaceae fruit is correct?",o:["Berry or capsule may occur","Only legumes occur","Only caryopses occur","Only aggregate fruits occur"],a:0,e:"Solanaceae includes species producing berries as well as capsules."},
 {q:"Which set contains only typical Solanaceae features?",o:["Five fused sepals, five fused petals, five epipetalous stamens, axile placentation","Three free sepals, six fused petals, six epiphyllous stamens, marginal placentation","Five free sepals, ten diadelphous stamens, monocarpellary ovary, marginal placentation","Six tepals, six stamens, inferior ovary, basal placentation"],a:0,e:"The first set matches the typical Solanaceae floral features."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 12
+window.skillUpSolanaceaeQuestions.push(...[
+  {
+    "q": "Stamens attached to the petals are termed:",
+    "o": [
+      "Epipetalous",
+      "Epiphyllous",
+      "Diadelphous",
+      "Polyadelphous"
+    ],
+    "a": 0,
+    "e": "Epipetalous stamens attach to the corolla and are characteristic of Solanaceae."
+  },
+  {
+    "q": "Solanaceae typically has which gynoecium?",
+    "o": [
+      "Monocarpellary apocarpous",
+      "Bicarpellary syncarpous",
+      "Tricarpellary apocarpous",
+      "Five free carpels"
+    ],
+    "a": 1,
+    "e": "Solanaceae commonly has a bicarpellary syncarpous superior ovary."
+  },
+  {
+    "q": "The fruit of tomato is a:",
+    "o": [
+      "Legume",
+      "Drupe",
+      "Berry",
+      "Caryopsis"
+    ],
+    "a": 2,
+    "e": "Tomato is a berry and belongs to Solanaceae."
+  }
+]);

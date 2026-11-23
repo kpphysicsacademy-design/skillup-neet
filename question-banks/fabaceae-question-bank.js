@@ -30,3 +30,39 @@ window.skillUpFabaceaeQuestions = [
 {q:"Which set contains only Fabaceae characters?",o:["Papilionaceous corolla, vexillary aestivation, marginal placentation","Gamopetalous corolla, axile placentation, berry","Six tepals, epiphyllous stamens, capsule","Five fused petals, five epipetalous stamens, berry"],a:0,e:"The first set contains the characteristic Fabaceae features."},
 {q:"Which statement best summarizes a typical Fabaceae flower?",o:["Zygomorphic, bisexual, papilionaceous, with marginal placentation and a legume fruit","Actinomorphic, bisexual, gamopetalous, with axile placentation and berry fruit","Actinomorphic, bisexual, six tepals, epiphyllous stamens and capsule fruit","Unisexual, zygomorphic, with basal placentation and caryopsis fruit"],a:0,e:"The first combination summarizes the main NCERT features of a typical papilionaceous Fabaceae flower."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 12
+window.skillUpFabaceaeQuestions.push(...[
+  {
+    "q": "The typical placentation in Fabaceae is:",
+    "o": [
+      "Marginal",
+      "Axile",
+      "Parietal",
+      "Basal"
+    ],
+    "a": 0,
+    "e": "Fabaceae has a monocarpellary ovary with ovules along the ventral suture (marginal placentation)."
+  },
+  {
+    "q": "The typical corolla aestivation of pea is:",
+    "o": [
+      "Valvate",
+      "Vexillary",
+      "Twisted",
+      "Quincuncial"
+    ],
+    "a": 1,
+    "e": "The standard overlaps the wings and the wings overlap the keel in vexillary aestivation."
+  },
+  {
+    "q": "The common fruit type of Fabaceae is:",
+    "o": [
+      "Berry",
+      "Capsule",
+      "Legume",
+      "Drupe"
+    ],
+    "a": 2,
+    "e": "A legume or pod is typical of the pea family."
+  }
+]);

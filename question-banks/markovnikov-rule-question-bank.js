@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["markovnikov-rule"]=[
 {question:"Markovnikov's rule is mainly used to predict the regioselectivity of addition to:",options:[{id:"a",value:"An unsymmetrical alkene"},{id:"b",value:"A saturated alkane"},{id:"c",value:"A noble gas"},{id:"d",value:"A carboxylic acid only"}],answer:"a",explanation:"The rule predicts the preferred orientation of certain additions to unsymmetrical double bonds."},
 {question:"In the addition of HX to an unsymmetrical alkene following Markovnikov orientation, hydrogen generally attaches to the carbon with:",options:[{id:"a",value:"More hydrogen atoms"},{id:"b",value:"Fewer hydrogen atoms"},{id:"c",value:"No carbon atoms"},{id:"d",value:"A halogen already attached"}],answer:"a",explanation:"H adds to the alkene carbon already bearing more hydrogen atoms, leaving the more substituted carbocation pathway."},

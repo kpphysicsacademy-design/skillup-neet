@@ -1252,4 +1252,5 @@ window.SkillUpChemistryCellReactionQuestions=[
     "options":[{"id":"A","type":"text","value":"Correct statement"},{"id":"B","type":"text","value":"Incorrect statement"},{"id":"C","type":"text","value":"Only at equilibrium"},{"id":"D","type":"text","value":"Cannot be determined"}],
     "answer":"A", "explanation":"The oxidation and reduction half-reactions are combined after balancing electron transfer.",
     "difficulty":"neet", "tags":["cell-reaction","electrochemistry","redox","neet"], "source":"SkillUp Chemistry — Cell Reaction", "learning":{"xp":10,"masteryWeight":1,"reviewEligible":true}
-  }}
+  }
+];

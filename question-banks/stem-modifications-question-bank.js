@@ -30,3 +30,39 @@ window.skillUpStemModificationsQuestions = [
 {q:"Which of the following is NOT a stem modification?",o:["Root hair","Rhizome","Bulb","Phylloclade"],a:0,e:"Root hair is a root structure, whereas rhizome, bulb and phylloclade are stem modifications."},
 {q:"Which sequence correctly matches the plant with its stem modification?",o:["Strawberry—runner; ginger—rhizome; potato—tuber","Strawberry—bulb; ginger—tuber; potato—rhizome","Strawberry—corm; ginger—bulb; potato—runner","Strawberry—phylloclade; ginger—runner; potato—bulb"],a:0,e:"Strawberry has runners, ginger has rhizomes and potato has stem tubers."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 5
+window.skillUpStemModificationsQuestions.push(...[
+  {
+    "q": "The 'eyes' of a potato are:",
+    "o": [
+      "Root hairs",
+      "Axillary buds on a stem tuber",
+      "Stomata",
+      "Lenticels only"
+    ],
+    "a": 1,
+    "e": "Potato is a modified stem tuber, and its eyes are buds."
+  },
+  {
+    "q": "Ginger is an example of a:",
+    "o": [
+      "Taproot",
+      "Corm",
+      "Rhizome",
+      "Phylloclade"
+    ],
+    "a": 2,
+    "e": "Ginger has an underground horizontal modified stem called a rhizome."
+  },
+  {
+    "q": "A flattened photosynthetic stem in Opuntia is a:",
+    "o": [
+      "Phylloclade",
+      "Pneumatophore",
+      "Prop root",
+      "Bulb"
+    ],
+    "a": 0,
+    "e": "Opuntia bears green phylloclades that perform photosynthesis."
+  }
+]);

@@ -31,3 +31,39 @@ window.skillUpCellTheoryQuestions = [
 {q:"Which sequence best reflects the historical development of cellular knowledge?",o:["Microscopic observations → recognition of cells → development of cell theory","DNA sequencing → telescope observations → cell discovery","Organ discovery → cell disappearance → microscopy","Atomic theory → tissue formation → microscope invention"],a:0,e:"Microscopy enabled observations that contributed to the recognition and later formulation of cell theory."},
 
 ];
+// Chapter 3 explained NEET practice extension
+window.skillUpCellTheoryQuestions.push(...[
+  {
+    "q": "Who jointly formulated the classical cell theory?",
+    "o": [
+      "Schleiden and Schwann",
+      "Darwin and Wallace",
+      "Watson and Crick",
+      "Mendel and Morgan"
+    ],
+    "a": 0,
+    "e": "Schleiden and Schwann established that plants and animals are composed of cells."
+  },
+  {
+    "q": "The statement 'Omnis cellula e cellula' means:",
+    "o": [
+      "All cells contain chloroplasts",
+      "Every cell comes from a pre-existing cell",
+      "Cells have no membranes",
+      "Every cell is multicellular"
+    ],
+    "a": 1,
+    "e": "Virchow popularized the principle that cells arise by division of existing cells."
+  },
+  {
+    "q": "Which entity is acellular?",
+    "o": [
+      "Amoeba",
+      "Yeast",
+      "Virus",
+      "Bacterium"
+    ],
+    "a": 2,
+    "e": "Viruses lack cellular organization and require host machinery to replicate."
+  }
+]);

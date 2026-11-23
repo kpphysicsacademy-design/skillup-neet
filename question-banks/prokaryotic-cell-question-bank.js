@@ -30,3 +30,39 @@ window.skillUpProkaryoticCellQuestions = [
 {q:"Which membrane feature distinguishes many archaeal membranes from bacterial membranes?",o:["Ether-linked lipids are characteristic of archaeal membranes","Archaea always lack membranes","Archaea use cellulose as the membrane lipid","Archaea have only protein membranes"],a:0,e:"Archaeal membrane lipids characteristically contain ether linkages and distinctive hydrocarbon chains."},
 {q:"Which statement best summarizes prokaryotic cellular organization?",o:["Genetic material is not enclosed by a nuclear membrane, while ribosomes support protein synthesis","DNA is always enclosed in a nucleus, while ribosomes are absent","Membrane-bound organelles dominate the cytoplasm","The cell contains chloroplasts instead of ribosomes"],a:0,e:"Prokaryotic organization lacks a membrane-bound nucleus, while ribosomes remain essential for protein synthesis."}
 ];
+// Chapter 3 explained NEET practice extension
+window.skillUpProkaryoticCellQuestions.push(...[
+  {
+    "q": "The genetic material in a typical bacterium occupies the:",
+    "o": [
+      "Nucleoid",
+      "Nucleolus",
+      "Golgi apparatus",
+      "Mitochondrion"
+    ],
+    "a": 0,
+    "e": "Prokaryotic DNA is located in the nucleoid, not a membrane-bound nucleus."
+  },
+  {
+    "q": "Bacterial cytoplasmic ribosomes are typically:",
+    "o": [
+      "80S",
+      "70S",
+      "60S",
+      "40S"
+    ],
+    "a": 1,
+    "e": "Bacterial 70S ribosomes contain 50S and 30S subunits."
+  },
+  {
+    "q": "Which prokaryote characteristically lacks a cell wall?",
+    "o": [
+      "Bacillus",
+      "Escherichia coli",
+      "Mycoplasma",
+      "Nostoc"
+    ],
+    "a": 2,
+    "e": "Mycoplasma lacks a rigid cell wall and has a flexible plasma membrane."
+  }
+]);

@@ -29,7 +29,7 @@ for(const file of ['chemistry-home.html','chemistry-mcq.html','chemistry-quickle
  }
 }
 if(!home.includes('chem-skill-learn')||!home.includes('chem-skill-practice')||!home.includes('chem-revision-list'))issues.push('Home learning entry points missing');
-if(!quiz.includes("const micro=params.get('micro')||'';"))issues.push('Concept-only quiz fallback broken');
+if(!quiz.includes("params.get('micro')||")||!quiz.includes("const embedded=rawConcept.match("))issues.push('Quiz parameter parsing or malformed URL recovery broken');
 if(!quick.includes("typeof item.answer==='number'"))issues.push('QuickLearn numeric answers unsupported');
 if(!home.includes('All 515 concepts stay open'))issues.push('Open learning notice missing');
 console.log(JSON.stringify({concepts:concepts.length,issues},null,2));

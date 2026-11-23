@@ -30,3 +30,39 @@ window.skillUpSecondaryXylemQuestions=[
 {q:"Which pair is correctly matched?",o:["Secondary xylem — wood","Secondary phloem — pith","Cambium — root cap","Xylem fibre — sugar loading"],a:1,e:"Secondary xylem forms the principal woody tissue."},
 {q:"The best description of secondary xylem is:",o:["Cambium-derived conducting and supporting tissue formed inward during secondary growth","An epidermal layer","A reproductive tissue","A root-cap tissue"],a:1,e:"Secondary xylem is produced inward by vascular cambium and provides conduction, support and storage."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 20
+window.skillUpSecondaryXylemQuestions.push(...[
+  {
+    "q": "Secondary xylem is produced toward the:",
+    "o": [
+      "Inside of vascular cambium",
+      "Outside of cork cambium",
+      "Leaf epidermis",
+      "Root cap"
+    ],
+    "a": 0,
+    "e": "Vascular cambium adds secondary xylem to its inner side."
+  },
+  {
+    "q": "The main component of wood in a woody stem is:",
+    "o": [
+      "Secondary phloem",
+      "Secondary xylem",
+      "Phellem",
+      "Primary cortex"
+    ],
+    "a": 1,
+    "e": "Wood consists predominantly of accumulated secondary xylem."
+  },
+  {
+    "q": "Water conduction in secondary xylem is mainly performed by:",
+    "o": [
+      "Sieve tube elements",
+      "Companion cells",
+      "Vessels and tracheids",
+      "Cork cells"
+    ],
+    "a": 2,
+    "e": "Tracheary elements—vessels and tracheids—conduct water in xylem."
+  }
+]);

@@ -66,8 +66,8 @@ mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
 <header><div class="nav">
 <a class="back" href="chemistry-home.html" aria-label="Back to Chemistry Path">←</a>
 <div class="brand">SkillUp <span style="color:#58a900">Chemistry</span></div>
-<div class="pill">⭐ <span id="xp">0</span> XP</div>
-<div class="pill">🔥 <span id="streak">0</span> streak</div>
+<div class="pill" aria-label="Total Chemistry experience points">⭐ <span id="xp">0</span> XP</div>
+<div class="pill" aria-label="Daily Chemistry quiz streak">🔥 <span id="streak">0</span> day streak</div>
 </div></header>
 <main>
 <section class="hero">
@@ -107,25 +107,36 @@ document.title=displayConcept+' | Chemistry Quiz | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 const BANK_VERSION='20261123-chemistry-runtime-fixes-v1';
 const PROGRESS_KEY='skillup_chemistry_learning_v1';
+const dateKey=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+function readLearningProgress(){
+ try{const v=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(e){return {};}
+}
+function refreshLearningScore(){
+ const data=readLearningProgress(),today=new Date(),last=data.lastDay||'';
+ const yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
+ const active=last===dateKey(today)||last===dateKey(yesterday);
+ $('xp').textContent=String(Math.max(0,Number(data.xp)||0));
+ $('streak').textContent=String(active?Math.max(0,Number(data.streak)||0):0);
+}
+refreshLearningScore();
+
 function saveLearningResult(correct,total){
+ if(!Number.isFinite(total)||total<=0)return;
  try{
-  const old=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');
-  const data=old&&typeof old==='object'&&!Array.isArray(old)?old:{};
-  const today=new Date(),date=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+  const data=readLearningProgress(),today=new Date(),date=dateKey(today);
   const yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
-  const prev=[yesterday.getFullYear(),String(yesterday.getMonth()+1).padStart(2,'0'),String(yesterday.getDate()).padStart(2,'0')].join('-');
   const sameDay=data.lastDay===date;
-  data.streak=sameDay?(Number(data.streak)||1):(data.lastDay===prev?(Number(data.streak)||0)+1:1);
+  data.streak=sameDay?Math.max(1,Number(data.streak)||1):(data.lastDay===dateKey(yesterday)?Math.max(0,Number(data.streak)||0)+1:1);
   data.lastDay=date;
-  data.xp=(Number(data.xp)||0)+correct*10;
-  data.quizzes=(Number(data.quizzes)||0)+1;
+  data.xp=Math.max(0,Number(data.xp)||0)+Math.max(0,correct)*10;
+  data.quizzes=Math.max(0,Number(data.quizzes)||0)+1;
   data.concepts=data.concepts&&typeof data.concepts==='object'&&!Array.isArray(data.concepts)?data.concepts:{};
-  const id=slug(micro)||slug(concept);
-  const prior=data.concepts[id]||{};
+  const id=slug(micro)||slug(concept),prior=data.concepts[id]||{};
   const accuracy=Math.round(correct/total*100);
-  data.concepts[id]={best:Math.max(Number(prior.best)||0,accuracy),attempts:(Number(prior.attempts)||0)+1};
+  data.concepts[id]={best:Math.max(Number(prior.best)||0,accuracy),attempts:Math.max(0,Number(prior.attempts)||0)+1};
   localStorage.setItem(PROGRESS_KEY,JSON.stringify(data));
- }catch(e){/* Storage disabled: the quiz remains fully usable. */}
+ }catch(e){/* Storage disabled: quiz continues to work. */}
+ refreshLearningScore();
 }
 
 let questions=[],originalQuestions=[],index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
@@ -227,8 +238,8 @@ $('check').addEventListener('click',()=>{
  if(chosen===null||locked)return;locked=true;const item=questions[index],buttons=[...document.querySelectorAll('.option')];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const feedback=$('feedback');
- if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;feedback.className='feedback show good';feedback.innerHTML='✨ Correct! '+richText(item.why||'Your answer matches the correct option.');}
- else{streak=0;$('streak').textContent='0';wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.innerHTML='Not quite. '+richText(item.why||'Review the correct option above.')+' Correct answer: '+richText(item.o[item.a])+'.';}
+ if(chosen===item.a){score++;streak++;feedback.className='feedback show good';feedback.innerHTML='✨ Correct! '+richText(item.why||'Your answer matches the correct option.');}
+ else{streak=0;wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.innerHTML='Not quite. '+richText(item.why||'Review the correct option above.')+' Correct answer: '+richText(item.o[item.a])+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([feedback]).catch(()=>{});
 });
@@ -242,7 +253,7 @@ $('continue').addEventListener('click',()=>{
  if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const el=document.createElement('article');el.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;el.append(q,yours,correct,why);review.appendChild(el);});}
  else review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';
  $('finishSlot').replaceChildren(card);
- function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];refreshLearningScore();$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));
 });
 load();

@@ -30,3 +30,39 @@ window.skillUpAndroeciumQuestions = [
 {q:"Which pair is correctly matched?",o:["Anther—pollen production","Filament—ovule production","Tapetum—pollen reception","Connective—stigma formation"],a:0,e:"The anther contains microsporangia where pollen develops."},
 {q:"Which statement best summarizes the androecium?",o:["It is the male reproductive whorl composed of stamens, each typically having an anther and filament","It is the female whorl composed of carpels","It is the accessory whorl composed of sepals","It is the accessory whorl composed of petals"],a:0,e:"The androecium is the male reproductive whorl, with stamens that typically consist of anther and filament."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 9
+window.skillUpAndroeciumQuestions.push(...[
+  {
+    "q": "The male reproductive whorl of a flower is the:",
+    "o": [
+      "Calyx",
+      "Androecium",
+      "Corolla",
+      "Gynoecium"
+    ],
+    "a": 1,
+    "e": "The androecium consists of stamens."
+  },
+  {
+    "q": "Pollen grains are produced in the:",
+    "o": [
+      "Filament",
+      "Stigma",
+      "Anther",
+      "Ovary"
+    ],
+    "a": 2,
+    "e": "Pollen develops in the microsporangia (pollen sacs) of anthers."
+  },
+  {
+    "q": "Monadelphous stamens occur in:",
+    "o": [
+      "Hibiscus",
+      "Pea",
+      "Mustard",
+      "Lily"
+    ],
+    "a": 0,
+    "e": "Hibiscus has stamens with filaments united into a single bundle."
+  }
+]);

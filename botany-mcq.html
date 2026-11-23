@@ -825,8 +825,22 @@ if(sheetLink){
  sheetLink.textContent=isWhatLiving?'📘 Quick Cheat Sheet':'📘 Topic Cheat Sheet';
 }
 function startBotanyQuiz(source,conceptName){
- const initialCount=Math.min(30,source.length);
- const original=source.slice(0,initialCount);
+ // Include the explained extension questions instead of silently truncating at 30.
+ const original=source.slice();
+ const chapter2Concepts=new Set(['plant tissues','meristematic tissue','permanent tissue','parenchyma','collenchyma','sclerenchyma','xylem','phloem','root morphology','root anatomy','root modifications','stem morphology','stem anatomy','stem modifications','leaf morphology','leaf anatomy','leaf modifications','secondary growth','phyllotaxy','venation','inflorescence','racemose inflorescence','cymose inflorescence','flower structure','aestivation','androecium','gynoecium','placentation','fruit','seed','dicot seed','monocot seed','plant families in neet','fabaceae','solanaceae','liliaceae','tissue systems','epidermal tissue system','ground tissue system','vascular tissue system','dicot root t.s.','monocot root t.s.','dicot stem t.s.','monocot stem t.s.','dorsiventral leaf','isobilateral leaf','annual rings','cork cambium','heartwood and sapwood','stomatal apparatus','trichomes','root cap','endodermis','pericycle','vascular bundle types','open and closed vascular bundles','cambium ring','secondary xylem','secondary phloem','lenticels','medullary rays','floral formula and floral diagram']);
+ const isChapter2=chapter2Concepts.has(conceptName.toLowerCase());
+ function saveChapter2Progress(){
+  if(!isChapter2)return;
+  try{
+   const storageKey='skillup.botany.chapter2.progress.v1';
+   const data=JSON.parse(localStorage.getItem(storageKey)||'{}');
+   const previous=data[conceptName]||{};
+   const percentage=Math.round(score/questions.length*100);
+   data[conceptName]={attempts:(Number(previous.attempts)||0)+1,bestScore:Math.max(Number(previous.bestScore)||0,percentage),lastScore:percentage,lastCompleted:new Date().toISOString(),questionCount:questions.length};
+   localStorage.setItem(storageKey,JSON.stringify(data));
+  }catch(_error){/* Quizzes still work when storage is blocked. */}
+ }
+
  let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
  const counter=document.getElementById('counter'),percent=document.getElementById('percent'),bar=document.getElementById('bar');
@@ -862,6 +876,7 @@ function startBotanyQuiz(source,conceptName){
  }
  function finish(){
   quiz.style.display='none';document.getElementById('result').style.display='block';
+  saveChapter2Progress();
   const pct=Math.round(score/questions.length*100);document.getElementById('final').textContent=score+' / '+questions.length;
   document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
   const review=document.getElementById('wrongReview');review.replaceChildren();

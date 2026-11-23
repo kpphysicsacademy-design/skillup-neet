@@ -224,11 +224,24 @@ units.forEach((u,ui)=>u[1].forEach(t=>concepts.push({u:ui+1,name:u[0],concept:t[
 document.getElementById('botanyConceptCount').textContent='📚 '+concepts.length+' concepts';
 document.getElementById('botanyUnitCount').textContent='🧭 '+units.length+' learning units';
 const path=document.getElementById('path'),q=document.getElementById('q'),empty=document.getElementById('empty');
+const chapter2ProgressKey='skillup.botany.chapter2.progress.v1';
+function readChapter2Progress(){try{const value=JSON.parse(localStorage.getItem(chapter2ProgressKey)||'{}');return value&&typeof value==='object'?value:{};}catch(_error){return {};}}
+let chapter2Progress=readChapter2Progress();
+function updateChapter2ProgressLabel(){
+ const unit=units.find(u=>u[0]==='Structural Organisation in Plants');
+ const completed=unit?unit[1].filter(t=>chapter2Progress[t[0]]&&chapter2Progress[t[0]].attempts>0).length:0;
+ const label=document.getElementById('botanyChapter2Progress');
+ if(label)label.textContent='🌿 Chapter 2: '+completed+' / 62 quizzes completed';
+}
+const chapter2Label=document.createElement('span');chapter2Label.className='botany-pill';chapter2Label.id='botanyChapter2Progress';
+document.querySelector('.botany-pills')?.appendChild(chapter2Label);
+updateChapter2ProgressLabel();
+window.addEventListener('pageshow',()=>{chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();render(concepts);});
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function render(list){
  let h='',last=0;
  list.forEach(x=>{if(x.u!==last){h+=`<div class="unit" id="unit-${x.u}"><div class="unit-main"><span class="unum">${x.u}</span><div><h2>${esc(x.name)}</h2><small>NCERT + NEET Botany • ${units[x.u-1][1].length} concepts</small></div></div></div>`;last=x.u;}
- h+=`<article class="chapter"><span class="node"></span><a href="botany-mcq.html?concept=${encodeURIComponent(x.concept)}&v=20260923-botany-quiz-v3"><div><div class="title"><span class="icon">${esc(x.icon)}</span><span>${esc(x.concept)}</span></div><div class="sub">Concept ${x.id} • ${esc(x.name)}</div><span class="tag">🎯 CONCEPT ${x.id}</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>`;});
+ h+=`<article class="chapter"><span class="node"></span><a href="botany-mcq.html?concept=${encodeURIComponent(x.concept)}&v=20260923-botany-quiz-v3"><div><div class="title"><span class="icon">${esc(x.icon)}</span><span>${esc(x.concept)}</span></div><div class="sub">Concept ${x.id} • ${esc(x.name)}</div><span class="tag">🎯 CONCEPT ${x.id}</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span>${x.name==='Structural Organisation in Plants'&&chapter2Progress[x.concept]?.attempts>0?`<span class="tag">✅ QUIZ COMPLETED · BEST ${Math.round(chapter2Progress[x.concept].bestScore||0)}%</span>`:''}</div><span class="go">›</span></a></article>`;});
  path.innerHTML=h; empty.style.display=list.length?'none':'block';
 }
 render(concepts);

@@ -31,3 +31,39 @@ window.skillUpFruitQuestions = [
 {q:"Which combination is correctly matched?",o:["Pineapple—multiple fruit","Strawberry—simple fruit","Pea—multiple fruit","Mango—aggregate fruit"],a:0,e:"Pineapple develops from an inflorescence and is a multiple fruit."},
 {q:"Which sequence correctly represents typical development after fertilisation?",o:["Ovary → fruit; ovule → seed","Ovary → seed; ovule → fruit","Anther → fruit; ovary → pollen","Stigma → seed; ovule → anther"],a:0,e:"Typically, the ovary develops into the fruit and the ovules develop into seeds after fertilisation."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 10
+window.skillUpFruitQuestions.push(...[
+  {
+    "q": "The wall of a mature fruit is termed:",
+    "o": [
+      "Pericarp",
+      "Testa",
+      "Endosperm",
+      "Cotyledon"
+    ],
+    "a": 0,
+    "e": "The ovary wall develops into the pericarp."
+  },
+  {
+    "q": "A mango is botanically classified as a:",
+    "o": [
+      "Berry",
+      "Drupe",
+      "Legume",
+      "Caryopsis"
+    ],
+    "a": 1,
+    "e": "Mango is a drupe, typically having a hard, stony endocarp."
+  },
+  {
+    "q": "A fruit formed without fertilisation is called:",
+    "o": [
+      "Aggregate",
+      "Dehiscent",
+      "Parthenocarpic",
+      "Apocarpous"
+    ],
+    "a": 2,
+    "e": "Parthenocarpy is fruit formation without fertilisation."
+  }
+]);

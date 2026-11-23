@@ -44,4 +44,5 @@ window.SkillUpRaoultLawQuestions=[
 {q:"Raoult's law is a limiting law for non-ideal solutions particularly at low solute concentration.",o:["Correct statement","Incorrect statement","Not applicable","Cannot be determined"],a:0,e:"This follows the standard definition or relation for the concept."},
 {q:"For two volatile liquids, each component contributes according to its partial vapour pressure.",o:["Correct statement","Incorrect statement","Not applicable","Cannot be determined"],a:0,e:"This follows the standard definition or relation for the concept."},
 {q:"A plot of partial pressure versus liquid mole fraction for an ideal solution is linear.",o:["Correct statement","Incorrect statement","Not applicable","Cannot be determined"],a:0,e:"This follows the standard definition or relation for the concept."},
-{q:"Positive deviation from Raoult's law means observed vapour pressure is higher than ideal.",o:["Correct statement","Incorrect statement","Not applicable","Cannot be determined"],a:0,e:"This follows the standard definition or relation for the concept."},
+{q:"Positive deviation from Raoult's law means observed vapour pressure is higher than ideal.",o:["Correct statement","Incorrect statement","Not applicable","Cannot be determined"],a:0,e:"This follows the standard definition or relation for the concept."}
+];

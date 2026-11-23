@@ -30,3 +30,40 @@ window.skillUpMonocotStemTSQuestions=[
 {q:`The protoxylem cavity in a monocot stem is associated with:`,o:[`Water storage`,`Secondary phloem formation`,`Cork formation`,`Stomatal movement`],a:1,e:`The protoxylem lacuna is a cavity that can contain water.`},
 {q:`Which feature is NOT typical of a monocot stem?`,o:[`Scattered vascular bundles`,`Closed vascular bundles`,`Distinct cortex and pith`,`Sclerenchymatous hypodermis`],a:3,e:`A typical monocot stem has undifferentiated ground tissue rather than clearly distinct cortex and pith.`}
 ];
+
+// Chapter 2 NEET practice extension: 2026-11-23 batch 15
+window.skillUpMonocotStemTSQuestions.push(...[
+  {
+    "q": "The vascular bundles of a typical maize stem are:",
+    "o": [
+      "Scattered",
+      "Arranged in one ring",
+      "Radial and alternating",
+      "Restricted to the pith"
+    ],
+    "a": 0,
+    "e": "Maize has scattered vascular bundles in ground tissue."
+  },
+  {
+    "q": "The hypodermis of a typical monocot stem is:",
+    "o": [
+      "Collenchymatous",
+      "Sclerenchymatous",
+      "Made of sieve tubes",
+      "Absent in every monocot"
+    ],
+    "a": 1,
+    "e": "The hypodermis of a typical monocot stem is sclerenchymatous."
+  },
+  {
+    "q": "A typical monocot stem vascular bundle is:",
+    "o": [
+      "Open with cambium",
+      "Radial",
+      "Closed without cambium",
+      "Bicollateral with two cambia"
+    ],
+    "a": 2,
+    "e": "Monocot stem vascular bundles are generally closed because they lack cambium."
+  }
+]);

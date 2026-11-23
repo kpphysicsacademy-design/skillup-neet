@@ -1,0 +1,28 @@
+name: Audit Chemistry concept coverage
+on:
+  pull_request:
+    paths:
+      - 'chemistry-home.html'
+      - 'chemistry-1062-concepts-base.js'
+      - 'chemistry-mcq.html'
+      - 'question-banks/**'
+      - 'scripts/audit-chemistry-concepts.cjs'
+      - '.github/workflows/audit-chemistry-concepts.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Inventory all Chemistry concept quiz routes
+        run: node scripts/audit-chemistry-concepts.cjs
+      - name: Upload detailed coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chemistry-concept-coverage
+          path: audit-results/
+          if-no-files-found: warn

@@ -30,3 +30,39 @@ window.skillUpParenchymaQuestions = [
 {q:"Which property makes parenchyma more versatile than many highly specialized supporting tissues?",o:["Living cells capable of carrying out several functions","Permanent death of every cell","Complete absence of membranes","Universal lignification"],a:0,e:"Living parenchyma cells can perform diverse functions including storage, photosynthesis, aeration and repair."},
 {q:"Which statement best summarizes the importance of parenchyma in plants?",o:["It is a living tissue with diverse structural and physiological roles","It is exclusively a water-conducting tissue","It is exclusively a mechanical tissue","It occurs only in mature wood"],a:0,e:"Parenchyma is a versatile living permanent tissue with several structural and physiological roles."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 2
+window.skillUpParenchymaQuestions.push(...[
+  {
+    "q": "Parenchyma cells are typically characterised by:",
+    "o": [
+      "Living cells with thin primary walls",
+      "Dead cells with lignified walls",
+      "Only sieve plates",
+      "No cytoplasm"
+    ],
+    "a": 0,
+    "e": "Parenchyma generally consists of living, thin-walled cells with various storage and metabolic functions."
+  },
+  {
+    "q": "Which specialised parenchyma contains chloroplasts?",
+    "o": [
+      "Aerenchyma",
+      "Chlorenchyma",
+      "Sclereids",
+      "Tracheids"
+    ],
+    "a": 1,
+    "e": "Chlorenchyma is photosynthetic parenchyma containing chloroplasts."
+  },
+  {
+    "q": "Large intercellular air spaces in aquatic plants are characteristic of:",
+    "o": [
+      "Collenchyma",
+      "Cork",
+      "Aerenchyma",
+      "Sclerenchyma"
+    ],
+    "a": 2,
+    "e": "Aerenchyma facilitates internal aeration and often contributes to buoyancy."
+  }
+]);

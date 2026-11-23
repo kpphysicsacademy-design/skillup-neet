@@ -30,3 +30,39 @@ window.skillUpSclerenchymaQuestions = [
 {q:"A microscopic specimen shows very thick walls and a narrow lumen in elongated cells. Which tissue is most likely?",o:["Sclerenchyma fibres","Parenchyma","Collenchyma","Aerenchyma"],a:0,e:"Elongated cells with thick walls and a relatively narrow lumen are characteristic of sclerenchymatous fibres."},
 {q:"Which overall description best fits sclerenchyma?",o:["A supporting tissue with thick, commonly lignified walls","A photosynthetic tissue with abundant chloroplasts","A tissue specialized mainly for gas-filled spaces","A meristem responsible for primary growth"],a:0,e:"Sclerenchyma is a permanent supporting tissue characterized by thick, commonly lignified walls."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 2
+window.skillUpSclerenchymaQuestions.push(...[
+  {
+    "q": "Which cell types are characteristic of sclerenchyma?",
+    "o": [
+      "Fibres and sclereids",
+      "Sieve tubes and companion cells",
+      "Guard cells and trichomes",
+      "Tracheids and vessel elements only"
+    ],
+    "a": 0,
+    "e": "Sclerenchyma consists mainly of fibres and sclereids that strengthen plant organs."
+  },
+  {
+    "q": "The gritty texture of pear fruit is mainly due to:",
+    "o": [
+      "Collenchyma",
+      "Sclereids",
+      "Aerenchyma",
+      "Sieve tubes"
+    ],
+    "a": 1,
+    "e": "Stone cells or sclereids are responsible for the gritty feel of pear pulp."
+  },
+  {
+    "q": "Mature sclerenchyma cells are usually:",
+    "o": [
+      "Thin-walled and actively dividing",
+      "Living with large chloroplasts",
+      "Dead with thick lignified walls",
+      "Without any secondary walls"
+    ],
+    "a": 2,
+    "e": "Most sclerenchyma cells lose their protoplast at maturity and have thick lignified walls."
+  }
+]);

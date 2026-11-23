@@ -30,3 +30,39 @@ window.skillUpCollenchymaQuestions = [
 {q:"Which pair is correctly matched?",o:["Angular collenchyma—corner wall thickening","Lamellar collenchyma—only air spaces","Lacunar collenchyma—no intercellular spaces","Collenchyma—long-distance water transport"],a:0,e:"Angular collenchyma is identified by prominent thickening at cell corners."},
 {q:"Which overall role best describes collenchyma in a young stem?",o:["Flexible mechanical support","Long-distance sugar transport","Water conduction through vessels","Formation of protective cork"],a:0,e:"Collenchyma strengthens young stems while retaining flexibility during growth."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 2
+window.skillUpCollenchymaQuestions.push(...[
+  {
+    "q": "Collenchyma primarily provides which function?",
+    "o": [
+      "Flexible support in growing organs",
+      "Long-distance water transport",
+      "Formation of pollen",
+      "Storage of genetic information"
+    ],
+    "a": 0,
+    "e": "Collenchyma supports growing parts without preventing flexibility."
+  },
+  {
+    "q": "The cell walls of typical collenchyma show:",
+    "o": [
+      "Uniform heavy lignification",
+      "Uneven thickening at corners",
+      "Complete absence of cellulose",
+      "Sieve pores"
+    ],
+    "a": 1,
+    "e": "Collenchyma commonly shows uneven cellulose- and pectin-rich primary wall thickening."
+  },
+  {
+    "q": "Collenchyma is most commonly located:",
+    "o": [
+      "Inside mature xylem vessels",
+      "Only in seed endosperm",
+      "Below the epidermis of young dicot stems",
+      "Within the root cap exclusively"
+    ],
+    "a": 2,
+    "e": "Subepidermal collenchyma is common in young dicot stems and petioles."
+  }
+]);

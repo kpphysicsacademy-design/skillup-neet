@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["ozonolysis"]=[
 {question:"Ozonolysis of an alkene is mainly used to:",options:[{id:"a",value:"Cleave a C=C bond"},{id:"b",value:"Form an alkane"},{id:"c",value:"Add HBr"},{id:"d",value:"Form a vicinal dibromide"}],answer:"a",explanation:"Ozone cleaves the alkene double bond and converts its two carbons into carbonyl compounds after workup."},
 {question:"The first major intermediate formed when ozone reacts with an alkene is commonly described as an:",options:[{id:"a",value:"Molozonide"},{id:"b",value:"Alcohol"},{id:"c",value:"Alkyl chloride"},{id:"d",value:"Amide"}],answer:"a",explanation:"Initial ozone addition forms a primary ozonide, also called a molozonide."},

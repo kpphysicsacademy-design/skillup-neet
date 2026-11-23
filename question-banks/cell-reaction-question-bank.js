@@ -1245,7 +1245,7 @@ window.SkillUpChemistryCellReactionQuestions=[
       "masteryWeight": 1,
       "reviewEligible": true
     }
-  ,
+  },
   {
     "id": "CHEM-MCQ-008630", "subject":"chemistry", "questionType":"structure",
     "question":"The overall cell reaction is obtained by combining the balanced half-reactions.",

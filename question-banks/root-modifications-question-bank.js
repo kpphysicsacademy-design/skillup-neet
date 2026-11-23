@@ -31,3 +31,39 @@ window.skillUpRootModificationsQuestions = [
 ,{q:"A plant has roots that descend from branches and eventually contact the ground. Their primary role is:",o:["Mechanical support","Food storage","Climbing attachment","Gaseous exchange"],a:0,e:"Roots descending from branches and reaching the soil function as prop roots and provide support."}
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 4
+window.skillUpRootModificationsQuestions.push(...[
+  {
+    "q": "Banyan prop roots are mainly modified for:",
+    "o": [
+      "Photosynthesis",
+      "Mechanical support",
+      "Food absorption from hosts",
+      "Seed dispersal"
+    ],
+    "a": 1,
+    "e": "Prop roots descend from branches and support the spreading banyan canopy."
+  },
+  {
+    "q": "Pneumatophores are particularly associated with:",
+    "o": [
+      "Carrot",
+      "Banyan",
+      "Avicennia",
+      "Potato"
+    ],
+    "a": 2,
+    "e": "Mangrove pneumatophores project above waterlogged soil to aid gaseous exchange."
+  },
+  {
+    "q": "The edible swollen structure of sweet potato is a:",
+    "o": [
+      "Modified adventitious root",
+      "Stem tuber",
+      "Rhizome",
+      "Bulb"
+    ],
+    "a": 0,
+    "e": "Sweet potato stores food in tuberous adventitious roots, unlike the stem tuber of potato."
+  }
+]);

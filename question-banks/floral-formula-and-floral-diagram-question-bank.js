@@ -30,3 +30,39 @@ window.skillUpFloralFormulaAndFloralDiagramQuestions=[
 {q:"The largest petal in a papilionaceous corolla is called:",o:["Standard or vexillum","Keel","Wing","Lemma"],a:1,e:"The large posterior petal is the standard or vexillum."},
 {q:"The best use of a floral formula and diagram together is to:",o:["Summarize and visualize floral organization and relationships","Identify only flower colour","Measure transpiration","Determine DNA sequence"],a:1,e:"They provide complementary symbolic and visual representations of floral morphology."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 final batch
+window.skillUpFloralFormulaAndFloralDiagramQuestions.push(...[
+  {
+    "q": "In a floral formula, the symbol K represents:",
+    "o": [
+      "Calyx",
+      "Corolla",
+      "Androecium",
+      "Gynoecium"
+    ],
+    "a": 0,
+    "e": "K represents the calyx, the collective sepals."
+  },
+  {
+    "q": "The symbol A in a floral formula denotes:",
+    "o": [
+      "Perianth",
+      "Androecium",
+      "Gynoecium",
+      "Calyx"
+    ],
+    "a": 1,
+    "e": "A denotes androecium, the stamens."
+  },
+  {
+    "q": "A floral diagram primarily illustrates:",
+    "o": [
+      "Only flower colour",
+      "Only seed weight",
+      "Spatial arrangement of floral parts",
+      "Rate of photosynthesis"
+    ],
+    "a": 2,
+    "e": "Floral diagrams show number, position and relationships of floral organs."
+  }
+]);

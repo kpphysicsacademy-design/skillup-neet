@@ -30,3 +30,39 @@ window.skillUpLiliaceaeQuestions = [
 {q:"Which pairing is correctly matched?",o:["Liliaceae—axile placentation","Liliaceae—marginal placentation","Liliaceae—basal placentation","Liliaceae—parietal placentation"],a:0,e:"Axile placentation is characteristic of the typical Liliaceae ovary."},
 {q:"Which set contains only characteristic features of typical Liliaceae?",o:["Monocot, parallel venation, six tepals, superior ovary","Dicot, reticulate venation, five petals, inferior ovary","Gymnosperm, needle leaves, naked ovules, cones","Bryophyte, rhizoids, capsule without vascular tissue"],a:0,e:"A typical Liliaceae combination includes monocot habit, parallel venation, six tepals and a superior ovary."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 12
+window.skillUpLiliaceaeQuestions.push(...[
+  {
+    "q": "The perianth of a typical Liliaceae flower has:",
+    "o": [
+      "Six tepals",
+      "Five sepals",
+      "Four petals",
+      "No tepals"
+    ],
+    "a": 0,
+    "e": "Liliaceae typically has six tepals arranged in two whorls of three."
+  },
+  {
+    "q": "The stamens in a typical lily flower are:",
+    "o": [
+      "Diadelphous",
+      "Epiphyllous",
+      "Monadelphous",
+      "Epipetalous only"
+    ],
+    "a": 1,
+    "e": "Six stamens are attached to the perianth (epiphyllous)."
+  },
+  {
+    "q": "The gynoecium of Liliaceae is typically:",
+    "o": [
+      "Monocarpellary",
+      "Bicarpellary apocarpous",
+      "Tricarpellary syncarpous",
+      "Multicarpellary apocarpous"
+    ],
+    "a": 2,
+    "e": "Three fused carpels form the superior ovary of a typical lily."
+  }
+]);

@@ -32,7 +32,14 @@
 @media(max-width:520px){main{padding:12px 10px 32px}.hero,.panel{padding:15px;border-radius:17px}.cards{grid-template-columns:1fr}.panel h2{font-size:18px}}
 @media(max-width:430px){.tabs{top:58px;gap:6px;padding:6px}.tab{font-size:12px;min-height:50px;padding:9px 3px}.embedded{height:1320px}}
 </style>
-</head>
+<style>
+.dc-revision{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.dc-revision .panel{min-width:0;margin:0}
+.dc-revision h2{font-size:clamp(18px,3vw,21px)}.dc-table{width:100%;border-collapse:collapse;font-size:12px}.dc-table th,.dc-table td{padding:7px 4px;text-align:left;border-bottom:1px solid #dce6ef;overflow-wrap:anywhere}
+.dc-option{display:block;width:100%;min-height:44px;padding:11px;margin:8px 0;border:2px solid #dce6ef;border-radius:12px;background:#fff;color:#243447;text-align:left;font-weight:750;cursor:pointer}
+.dc-option[aria-pressed=true]{border-color:#1cb0f6;background:#e8f7ff}.dc-option:disabled{cursor:default}.dc-option:focus-visible,.dc-next:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
+.dc-feedback{min-height:32px;line-height:1.5;font-size:13px}.dc-next{min-height:44px;padding:11px 15px;border:0;border-radius:12px;background:#58cc02;color:#fff;font-weight:900;cursor:pointer}
+.view[hidden]{display:none!important}@media(max-width:640px){.dc-revision{grid-template-columns:minmax(0,1fr)}}
+</style></head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • DIMENSIONAL ANALYSIS</small></div></div></header>
 <main>
@@ -42,7 +49,15 @@
 <button class="tab" type="button" data-tab="simulate" aria-selected="false">⚙️ Simulate</button>
 <button class="tab" type="button" data-tab="practice" aria-selected="false">🎯 Practice</button>
 </nav>
-<section class="view" id="view-learn">
+<section class="view" id="view-learn" role="tabpanel"><section class="dc-revision" aria-label="Dimensional Constants cheat sheet and Quick Check">
+<article class="panel" id="dimConstantsCheatsheet"><h2>📌 Quick Cheat Sheet</h2><p>Dimensional constants have nonzero powers of fundamental dimensions. Pure numbers such as π are dimensionless.</p>
+<table class="dc-table"><thead><tr><th>Constant</th><th>Dimensions</th></tr></thead><tbody>
+<tr><td>Gravitational constant G</td><td>[M⁻¹L³T⁻²]</td></tr><tr><td>Planck constant h</td><td>[ML²T⁻¹]</td></tr><tr><td>Speed of light c</td><td>[LT⁻¹]</td></tr><tr><td>Boltzmann constant k<sub>B</sub></td><td>[ML²T⁻²Θ⁻¹]</td></tr><tr><td>Elementary charge e</td><td>[IT]</td></tr><tr><td>Gas constant R</td><td>[ML²T⁻²Θ⁻¹N⁻¹]</td></tr>
+</tbody></table>
+<p><strong>Derive G:</strong> F = Gm₁m₂/r² ⇒ [G] = [F][r²]/[m²] = [M⁻¹L³T⁻²].</p>
+<p><strong>NEET tip:</strong> Constants can be universal and still dimensional. Dimensions do not depend on the numerical value of the constant.</p>
+</article>
+<article class="panel" id="dimConstantsQuickCheck"><h2>⚡ Quick Check</h2><p>Five unlocked MCQs with explanations and unlimited retries.</p><div id="dcQuestion" aria-live="polite"></div><div id="dcOptions"></div><p id="dcFeedback" class="dc-feedback" role="status" aria-live="polite"></p><button id="dcNext" class="dc-next" type="button" hidden>Next question →</button></article></section>
 <section class="panel"><h2>1. What is a dimensional constant?</h2><p class="lead">A physical constant is called dimensional when its dimensional formula is not dimensionless (not equal to M⁰L⁰T⁰I⁰Θ⁰…). Its dimensions can be derived from the physical law or defining equation in which it appears.</p><div class="formula">[Q] = Mᵃ Lᵇ Tᶜ Iᵈ Θᵉ Nᶠ</div><p class="lead">M = mass, L = length, T = time, I = electric current, Θ = thermodynamic temperature and N = amount of substance. In SI dimensional notation, the amount-of-substance base dimension is commonly written as mol.</p><div class="note">Method: isolate the required constant in its defining equation, replace each quantity with its dimensions, and simplify the powers.</div></section>
 <section class="panel"><h2>2. Important constants at a glance</h2><p class="lead">Use this table as a revision sheet. The numerical factors such as 2 and π do not affect dimensions.</p><div class="table-scroll"><table><thead><tr><th>Physical constant</th><th>Symbol</th><th>Defining relation</th><th>Dimensional formula</th></tr></thead><tbody>
 <tr><td><b>Universal gravitational constant</b></td><td>G</td><td>F = Gm₁m₂/r²</td><td>M⁻¹L³T⁻²</td></tr>
@@ -87,4 +102,18 @@ tabs.forEach(t=>t.addEventListener('click',()=>activate(t.dataset.tab)));
 })();
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="/central-config.js"></script><script src="/central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script><script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script><script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
-</body></html>
+<script>
+(function(){'use strict';
+const questions=[
+{q:'Which is a dimensionless constant?',a:['Gravitational constant G','Planck constant h','π','Speed of light c'],correct:2,why:'π is a pure number. G, h and c have dimensions.'},
+{q:'What are the dimensions of the gravitational constant G?',a:['[MLT⁻²]','[M⁻¹L³T⁻²]','[ML²T⁻¹]','[LT⁻¹]'],correct:1,why:'From F = Gm₁m₂/r², [G] = [F][r²]/[m²] = [M⁻¹L³T⁻²].'},
+{q:'What are the dimensions of Planck constant h?',a:['[ML²T⁻¹]','[ML²T⁻²]','[T⁻¹]','[LT⁻¹]'],correct:0,why:'From E = hν, [h] = [E]/[ν] = [ML²T⁻¹].'},
+{q:'The elementary charge e has which dimensions?',a:['[I/T]','[IT]','[MLT⁻²]','[T⁻¹]'],correct:1,why:'Electric charge = current × time, so [e] = [IT].'},
+{q:'Which statement is correct?',a:['Every universal constant is dimensionless','A dimensional constant has no units','A universal constant may have dimensions','π has dimensions of force'],correct:2,why:'Universality does not imply dimensionlessness; for example G has dimensions.'}
+];
+const q=document.getElementById('dcQuestion'),opts=document.getElementById('dcOptions'),fb=document.getElementById('dcFeedback'),next=document.getElementById('dcNext');if(!q||!opts||!fb||!next)return;let index=0,score=0,answered=false;
+function draw(){answered=false;fb.textContent='';next.hidden=true;opts.replaceChildren();if(index===questions.length){q.textContent='Complete! '+score+' / '+questions.length+' correct.';next.textContent='Try again';next.hidden=false;try{const key='skillup-dimensional-constants-quickcheck-best';localStorage.setItem(key,String(Math.max(score,Number(localStorage.getItem(key))||0)));}catch(e){}return;}
+const item=questions[index];q.textContent='Question '+(index+1)+' of '+questions.length+': '+item.q;item.a.forEach(function(answer,i){const b=document.createElement('button');b.type='button';b.className='dc-option';b.textContent=String.fromCharCode(65+i)+'. '+answer;b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){if(answered)return;answered=true;const correct=i===item.correct;if(correct)score++;Array.from(opts.children).forEach(function(btn,j){btn.disabled=true;btn.setAttribute('aria-pressed',String(j===i));if(j===item.correct){btn.style.borderColor='#58cc02';btn.style.background='#efffe7';}});fb.textContent=(correct?'Correct! ':'Not quite. ')+item.why;next.textContent=index===questions.length-1?'See results →':'Next question →';next.hidden=false;});opts.appendChild(b);});}
+next.addEventListener('click',function(){if(index===questions.length){index=0;score=0;}else if(answered){index++;}draw();});draw();
+})();
+</script></body></html>

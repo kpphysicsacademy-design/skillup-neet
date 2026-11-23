@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SkillUp Physics — 20 units with 20 equal-level chapters each. Explore Physics in Physics, understand the key relationships and practise focused questions with">
+<meta name="description" content="Explore 400 Physics concepts across 20 units with clear explanations, practice questions and step-by-step NEET preparation on SkillUp.">
 <title>SkillUp | Physics</title>
 <style>
 
@@ -204,7 +204,7 @@ html{background:#f4f7ff!important}body{background:radial-gradient(ellipse at 4% 
 <div class="hero-copy"><span class="hero-pill">⚡ PHYSICS</span><h1>Master Physics</h1><p>Understand the concepts, solve problems step by step, and build your NEET confidence.</p><div class="hero-points"><span>📘 Learn</span><span>🎯 Practice</span><span>🚀 Improve</span></div></div>
 <div class="hero-art" aria-hidden="true"><span class="spark s1">✦</span><span class="atom">⚛️</span><span class="rocket-art">🚀</span><span class="book-stack"><b>LEARN</b><b>PRACTICE</b><b>IMPROVE</b></span><span class="spark s2">✦</span></div>
 </section>
-<div class="tools"><input id="q" class="search" placeholder="Search Physics concepts…" aria-label="Search Physics concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
+<div class="tools"><input id="q" class="search" placeholder="Search Physics concepts…" aria-label="Search Physics concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button><button id="clearSearch" class="search-btn" type="button" hidden aria-label="Clear Physics search">CLEAR</button></div>
 <section id="path" class="path"></section><div id="empty" class="empty">No matching Physics chapters found.</div>
 <section class="card"><b>🚀 Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 equal-level chapters per unit. Chapters follow one consistent learning level.</div></section>
 </main>
@@ -214,7 +214,7 @@ html{background:#f4f7ff!important}body{background:radial-gradient(ellipse at 4% 
 'use strict';
 var d=window.SKILLUP_PHYSICS_400||[],a=[];
 for(var i=0;i<d.length;i++){var u=d[i];for(var j=0;j<u[2].length;j++)a.push({u:i+1,n:u[1],ic:u[0],c:u[2][j],ix:a.length+1});}
-if(a.length!==400){document.getElementById('path').innerHTML='<div class="card">Physics chapters could not be loaded. Please refresh the page.</div>';return;}
+if(a.length!==400){document.getElementById('path').innerHTML='<div class="card" role="alert">Physics chapters could not be loaded. <button type="button" onclick="location.reload()">Retry loading</button></div>';return;}
 var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
 var shown=0,searchTerm='',B=20,I=20;
 var icons=['📏','🏃','⚖️','💪','🎯','🔄','🌍','💧','🌡️','🔥','💨','〰️','🌊','⚡','🔌','🧲','〽️','📡','⚛️','🧪'];
@@ -226,9 +226,11 @@ function card(x){return '<article class="chapter"><span class="node"></span><a h
 function render(list,count){p.innerHTML='';shown=Math.min(count,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(searchTerm||shown>=a.length)return;var start=shown,end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=start;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);
+var resumeTarget=new URLSearchParams(location.search).get('resumeConcept');if(resumeTarget){applyResumeTarget();}
+function applyResumeTarget(){var wanted=String(resumeTarget||'').trim().toLowerCase();if(!wanted)return;var match=a.find(function(x){return x.c.toLowerCase()===wanted;});if(!match)return;var index=a.indexOf(match);render(a,index+1);var target=p.querySelectorAll('.chapter')[index];if(target){requestAnimationFrame(function(){target.scrollIntoView({block:'center'});target.style.outline='3px solid #58cc02';target.style.outlineOffset='4px';});}}
 var s=document.createElement('div');s.style.height='1px';p.after(s);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
-document.getElementById('searchBtn').onclick=function(){searchTerm=q.value.trim().toLowerCase();var list=searchTerm?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(searchTerm)>-1;}):a;render(list,searchTerm?list.length:I);};
+var clearBtn=document.getElementById('clearSearch');clearBtn.style.display="none";function applySearch(){searchTerm=q.value.trim().toLowerCase();var list=searchTerm?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(searchTerm)>-1;}):a;render(list,searchTerm?list.length:I);clearBtn.hidden=!searchTerm;clearBtn.style.display=searchTerm?"":"none";}document.getElementById('searchBtn').onclick=applySearch;q.addEventListener('input',applySearch);clearBtn.onclick=function(){q.value='';applySearch();q.focus();};
 q.addEventListener('keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();document.getElementById('searchBtn').click();}});
 })();
 var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu'),ls=document.getElementById('langSelect');
@@ -251,31 +253,7 @@ if(ls){
 }
 if(mb&&mn){mb.onclick=function(){var o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap')){mn.classList.remove('open');mb.setAttribute('aria-expanded','false');}});}
 </script>
-<script>
-(function(){
-  const p=new URLSearchParams(location.search),target=(p.get('resumeConcept')||'').trim();
-  if(!target)return;
-  const norm=s=>String(s||'').replace(/\s+/g,' ').trim().toLowerCase();
-  const wanted=norm(target);
-  let done=false;
-  function resume(){
-    if(done)return;
-    const els=[...document.querySelectorAll('a,button,.chapter,.concept-card,[data-concept]')];
-    const el=els.find(x=>norm(x.getAttribute&&x.getAttribute('data-concept'))===wanted)||els.find(x=>norm(x.textContent).includes(wanted));
-    if(!el)return;
-    done=true;
-    el.scrollIntoView({behavior:'smooth',block:'center'});
-    el.style.outline='4px solid #58cc02';
-    el.style.outlineOffset='4px';
-    el.style.borderRadius='18px';
-    setTimeout(()=>{el.style.outline='';el.style.outlineOffset=''},5000);
-    history.replaceState({},'',location.pathname);
-  }
-  resume();
-  const mo=new MutationObserver(resume);mo.observe(document.body,{childList:true,subtree:true});
-  setTimeout(()=>mo.disconnect(),10000);
-})();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
 <script>

@@ -30,3 +30,40 @@ window.skillUpDorsiventralLeafQuestions=[
 {q:`A typical dorsiventral leaf is best adapted for:`,o:[`Efficient light capture and controlled gas exchange`,`Secondary wood formation`,`Root absorption only`,`Seed dispersal only`],a:1,e:`Its differentiated mesophyll and stomatal distribution support photosynthesis while limiting unnecessary water loss.`},
 {q:`Which feature would most strongly indicate a dorsiventral leaf in a transverse section?`,o:[`Palisade tissue toward the upper side and spongy tissue toward the lower side`,`Identical mesophyll on both surfaces`,`Scattered vascular bundles throughout undifferentiated ground tissue`,`A central pith surrounded by cortex`],a:1,e:`Distinct upper palisade and lower spongy regions are diagnostic of dorsiventral organization.`}
 ];
+
+// Chapter 2 NEET practice extension: 2026-11-23 batch 15
+window.skillUpDorsiventralLeafQuestions.push(...[
+  {
+    "q": "The palisade mesophyll of a typical dorsiventral leaf lies:",
+    "o": [
+      "Below the upper epidermis",
+      "Outside the cuticle",
+      "Within the phloem",
+      "Inside the midrib xylem"
+    ],
+    "a": 0,
+    "e": "Palisade mesophyll is beneath the upper epidermis and contains many chloroplasts."
+  },
+  {
+    "q": "The large intercellular spaces of a dorsiventral leaf are typical of:",
+    "o": [
+      "Palisade mesophyll",
+      "Spongy mesophyll",
+      "Cuticle",
+      "Vascular cambium"
+    ],
+    "a": 1,
+    "e": "Spongy mesophyll has loosely arranged cells and air spaces facilitating gas exchange."
+  },
+  {
+    "q": "In a typical dorsiventral leaf vascular bundle, xylem faces the:",
+    "o": [
+      "Lower epidermis",
+      "Stomatal pore",
+      "Upper epidermis",
+      "Leaf edge only"
+    ],
+    "a": 2,
+    "e": "Xylem lies adaxially, toward the upper epidermis."
+  }
+]);

@@ -1,3 +1,4 @@
+window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 window.SKILLUP_CHEMISTRY_BANK["hydrogen-halide-addition"] = [
   {question:"What is the general reaction called when an alkene reacts with HCl, HBr, or HI?",options:[{id:"a",value:"Hydrohalogenation"},{id:"b",value:"Hydration"},{id:"c",value:"Hydrogenation"},{id:"d",value:"Halogenation"}],answer:"a",explanation:"Addition of a hydrogen halide (HX) across a C=C bond is called hydrohalogenation."},
   {question:"According to Markovnikov's rule, in the addition of HX to an unsymmetrical alkene, hydrogen generally adds to the carbon that already has:",options:[{id:"a",value:"More hydrogen atoms"},{id:"b",value:"Fewer hydrogen atoms"},{id:"c",value:"No hydrogen atoms"},{id:"d",value:"A halogen atom"}],answer:"a",explanation:"In the usual ionic addition, H adds to the alkene carbon bearing more H atoms, giving the more stable carbocation intermediate."},

@@ -31,3 +31,39 @@ window.skillUpStemAnatomyQuestions = [
 {q:"Which combination correctly describes a typical dicot stem?",o:["Ringed open bundles, collateral arrangement and endarch xylem","Scattered closed bundles, radial arrangement and exarch xylem","Scattered open bundles and exarch xylem","Radial bundles and endarch xylem"],a:0,e:"A typical dicot stem has ringed, conjoint collateral, open bundles with endarch xylem."},
 
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 5
+window.skillUpStemAnatomyQuestions.push(...[
+  {
+    "q": "Vascular bundles of a typical dicot stem are arranged:",
+    "o": [
+      "In a ring",
+      "Scattered randomly",
+      "Only in the pith",
+      "Only in the epidermis"
+    ],
+    "a": 0,
+    "e": "Typical dicot stems have vascular bundles arranged in a ring."
+  },
+  {
+    "q": "The vascular bundles in most monocot stems are:",
+    "o": [
+      "Open and arranged in a ring",
+      "Closed and scattered",
+      "Radial and exarch",
+      "Without xylem"
+    ],
+    "a": 1,
+    "e": "Most monocot stems have scattered, closed vascular bundles lacking cambium."
+  },
+  {
+    "q": "Primary xylem in a typical stem is:",
+    "o": [
+      "Exarch",
+      "Radial",
+      "Endarch",
+      "Absent"
+    ],
+    "a": 2,
+    "e": "Stem protoxylem lies toward the centre, giving an endarch arrangement."
+  }
+]);

@@ -30,3 +30,39 @@ window.skillUpLeafMorphologyQuestions = [
 {q:"Which pair is correctly matched?",o:["Silk cotton—palmately compound","Neem—palmately compound","Grass—pinnately compound","Pea—simple leaf"],a:0,e:"Silk cotton has palmately compound leaves."},
 {q:"Which combination contains only parts of a typical leaf?",o:["Leaf base, petiole, lamina","Root cap, petiole, lamina","Node, internode, lamina","Calyx, petiole, stigma"],a:0,e:"Leaf base, petiole and lamina are the principal parts of a typical leaf."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 5
+window.skillUpLeafMorphologyQuestions.push(...[
+  {
+    "q": "Which structure usually bears an axillary bud at its base?",
+    "o": [
+      "Leaf",
+      "Individual leaflet",
+      "Leaf vein",
+      "Stoma"
+    ],
+    "a": 0,
+    "e": "An axillary bud occurs in the axil of a leaf, but not at the base of each leaflet."
+  },
+  {
+    "q": "Neem commonly bears which leaf type?",
+    "o": [
+      "Simple leaf",
+      "Pinnately compound leaf",
+      "Needle leaf",
+      "Scale leaf"
+    ],
+    "a": 1,
+    "e": "Neem leaves are pinnately compound, with leaflets along a rachis."
+  },
+  {
+    "q": "The broad, flat part of a typical leaf is the:",
+    "o": [
+      "Petiole",
+      "Leaf base",
+      "Lamina",
+      "Stipule"
+    ],
+    "a": 2,
+    "e": "The lamina or leaf blade is the broad photosynthetic part of a leaf."
+  }
+]);

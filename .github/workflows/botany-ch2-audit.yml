@@ -1,0 +1,21 @@
+name: Botany Chapter 2 Content Audit
+on:
+  pull_request:
+    paths:
+      - 'botany-topic-cheat-sheet.html'
+      - 'botany-mcq.html'
+      - 'question-banks/**'
+      - 'assets/botany-*.svg'
+      - 'scripts/audit-botany-ch2.cjs'
+      - '.github/workflows/botany-ch2-audit.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate 62 concepts, diagrams, quiz links and answer indices
+        run: node scripts/audit-botany-ch2.cjs

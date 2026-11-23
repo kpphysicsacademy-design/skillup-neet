@@ -31,3 +31,39 @@ window.skillUpLenticelsQuestions=[
 {q:"Why are lenticels important after epidermal replacement?",o:["They maintain gaseous continuity with internal tissues","They restore root hairs","They form new leaves","They produce secondary xylem"],a:1,e:"Periderm is relatively impermeable, so lenticels provide necessary gas-exchange routes."},
 {q:"The best description of a lenticel is:",o:["A loose, porous periderm region that facilitates gas exchange","A vascular bundle containing xylem and phloem","A root apical meristem","A photosynthetic tissue"],a:1,e:"Lenticels are specialized porous regions of periderm supporting gas exchange in woody organs."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 20
+window.skillUpLenticelsQuestions.push(...[
+  {
+    "q": "Lenticels primarily function in:",
+    "o": [
+      "Gaseous exchange",
+      "Food storage",
+      "Pollen release",
+      "Water absorption by root hairs"
+    ],
+    "a": 0,
+    "e": "Lenticels permit diffusion of gases through the periderm."
+  },
+  {
+    "q": "Lenticels are associated with the:",
+    "o": [
+      "Root cap",
+      "Periderm",
+      "Xylem vessels only",
+      "Palisade mesophyll"
+    ],
+    "a": 1,
+    "e": "Lenticels develop in the periderm of woody organs."
+  },
+  {
+    "q": "Unlike stomata, lenticels:",
+    "o": [
+      "Always close at night",
+      "Occur only in leaves",
+      "Do not possess guard cells",
+      "Are made entirely of xylem"
+    ],
+    "a": 2,
+    "e": "Lenticels lack the guard-cell mechanism characteristic of stomata."
+  }
+]);

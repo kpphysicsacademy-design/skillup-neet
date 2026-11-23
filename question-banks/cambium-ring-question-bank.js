@@ -30,3 +30,39 @@ window.skillUpCambiumRingQuestions=[
 {q:"Which pair is correctly matched?",o:["Fascicular cambium — within vascular bundle","Interfascicular cambium — inside xylem vessel","Vascular cambium — root cap","Cork cambium — phloem sieve plate"],a:1,e:"Fascicular cambium is the cambial region located within a vascular bundle."},
 {q:"The best description of the cambium ring is:",o:["A continuous lateral meristem producing secondary xylem and phloem","A layer of root hairs","A photosynthetic tissue","A reproductive structure"],a:1,e:"The cambium ring is a continuous lateral meristem central to secondary growth."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 19
+window.skillUpCambiumRingQuestions.push(...[
+  {
+    "q": "A continuous vascular cambium ring in a dicot stem forms by joining:",
+    "o": [
+      "Fascicular and interfascicular cambium",
+      "Epidermis and pith",
+      "Xylem and root cap",
+      "Cortex and cork"
+    ],
+    "a": 0,
+    "e": "Cambial strips in bundles connect with interfascicular cambium to form a ring."
+  },
+  {
+    "q": "The vascular cambium produces secondary xylem toward the:",
+    "o": [
+      "Outside",
+      "Inside",
+      "Leaf surface",
+      "Root cap"
+    ],
+    "a": 1,
+    "e": "Secondary xylem is produced inward by the cambium ring."
+  },
+  {
+    "q": "The vascular cambium produces secondary phloem toward the:",
+    "o": [
+      "Inside",
+      "Pith",
+      "Outside",
+      "Root apex"
+    ],
+    "a": 2,
+    "e": "Secondary phloem is produced to the outside of the cambium."
+  }
+]);

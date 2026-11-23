@@ -30,3 +30,39 @@ window.skillUpOpenAndClosedVascularBundlesQuestions=[
 {q:"Which organ commonly has open collateral vascular bundles in a typical dicot?",o:["Stem","Root","Root cap","Seed coat"],a:1,e:"The typical dicot stem has open collateral bundles."},
 {q:"The best comparison is:",o:["Open bundle: cambium present; closed bundle: cambium absent","Open bundle: no xylem; closed bundle: xylem present","Open bundle: radial; closed bundle: always concentric","Both are identical in cambium content"],a:1,e:"Cambium presence is the defining distinction between the two types."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 19
+window.skillUpOpenAndClosedVascularBundlesQuestions.push(...[
+  {
+    "q": "The defining feature of an open vascular bundle is:",
+    "o": [
+      "Cambium between xylem and phloem",
+      "Absence of phloem",
+      "No xylem",
+      "A large pith"
+    ],
+    "a": 0,
+    "e": "Open vascular bundles contain vascular cambium."
+  },
+  {
+    "q": "The vascular bundles of a typical monocot stem are:",
+    "o": [
+      "Open",
+      "Closed",
+      "Radial only",
+      "Always concentric"
+    ],
+    "a": 1,
+    "e": "Typical monocot stem bundles lack cambium and are closed."
+  },
+  {
+    "q": "Secondary xylem formation in an open vascular bundle is due to:",
+    "o": [
+      "Epidermis",
+      "Root cap",
+      "Vascular cambium",
+      "Endodermis"
+    ],
+    "a": 2,
+    "e": "Vascular cambium divides to produce secondary xylem inward."
+  }
+]);

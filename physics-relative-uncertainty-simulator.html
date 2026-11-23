@@ -90,14 +90,14 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
    <div class="sim-field"><label for="absoluteValue">Absolute uncertainty</label><input id="absoluteValue" type="number" min="0" step="any" value="0.5"></div>
   </div>
   <button class="btn check" id="calculateRelative" type="button" style="width:100%;margin-top:10px">Calculate relative uncertainty</button>
-  <div class="sim-result" id="relativeResults" aria-live="polite"><strong>Ready to calculate</strong><p>Example: 0.5 uncertainty in a value of 10 gives 0.05 or 5%.</p></div>
+  <div class="sim-result" id="relativeResults" role="status" aria-live="polite"><strong>Ready to calculate</strong><p>Example: 0.5 uncertainty in a value of 10 gives 0.05 or 5%.</p></div>
  </div>
  <div class="sim-card"><h3>Convert percentage and decimal</h3><div class="sim-grid">
   <div class="sim-field"><label for="percentInput">Percentage uncertainty (%)</label><input id="percentInput" type="number" min="0" step="any" value="4"></div>
   <div class="sim-field"><label for="decimalInput">Relative uncertainty</label><input id="decimalInput" type="number" min="0" step="any" value="0.04"></div>
  </div><p class="sim-hint">Change either field and use the matching conversion button.</p>
  <div class="sim-grid"><button class="btn check" id="percentToDecimal" type="button">Convert to decimal</button><button class="btn check" id="decimalToPercent" type="button">Convert to %</button></div>
- <div class="sim-result" id="conversionResults" aria-live="polite"><strong>Conversion</strong><p>4% = 0.04</p></div></div>
+ <div class="sim-result" id="conversionResults" role="status" aria-live="polite"><strong>Conversion</strong><p>4% = 0.04</p></div></div>
 </section><script>
 
 
@@ -109,20 +109,20 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));
  }));
  document.getElementById('calculateRelative').addEventListener('click',()=>{
-  const x=Number(document.getElementById('relativeValue').value),u=Number(document.getElementById('absoluteValue').value),out=document.getElementById('relativeResults');
+  const xRaw=document.getElementById('relativeValue').value.trim(),uRaw=document.getElementById('absoluteValue').value.trim(),x=xRaw===''?NaN:Number(xRaw),u=uRaw===''?NaN:Number(uRaw),out=document.getElementById('relativeResults');
   if(!Number.isFinite(x)||!Number.isFinite(u)||u<0||x===0){out.innerHTML='<strong>Check your inputs</strong><p>Enter a non-zero measured value and a non-negative absolute uncertainty.</p>';return;}
-  const ratio=u/Math.abs(x),pct=ratio*100;
+  const ratio=u/Math.abs(x),pct=ratio*100;if(!Number.isFinite(ratio)||!Number.isFinite(pct)){out.textContent='Calculated uncertainty exceeds the supported numeric range.';return;}
   out.innerHTML='<strong>Calculated result</strong><p>Relative uncertainty: <b>'+ratio.toPrecision(6)+'</b></p><p>Percentage uncertainty: <b>'+pct.toPrecision(5)+'%</b></p><p>Absolute uncertainty: <b>'+u+'</b></p><p class="sim-hint">The ratio is dimensionless. Use matching units for the measured value and absolute uncertainty.</p>';
  });
  document.getElementById('percentToDecimal').addEventListener('click',()=>{
-  const p=Number(document.getElementById('percentInput').value),out=document.getElementById('conversionResults');
-  if(!Number.isFinite(p)||p<0){out.innerHTML='<strong>Enter a valid non-negative percentage.</strong>';return;}
+  const raw=document.getElementById('percentInput').value.trim(),p=raw===''?NaN:Number(raw),out=document.getElementById('conversionResults');
+  if(!Number.isFinite(p)||p<0||!Number.isFinite(p/100)){out.innerHTML='<strong>Enter a valid non-negative percentage.</strong>';return;}
   document.getElementById('decimalInput').value=String(p/100);
   out.innerHTML='<strong>Converted</strong><p>'+p+'% = <b>'+(p/100)+'</b></p>';
  });
  document.getElementById('decimalToPercent').addEventListener('click',()=>{
-  const d=Number(document.getElementById('decimalInput').value),out=document.getElementById('conversionResults');
-  if(!Number.isFinite(d)||d<0){out.innerHTML='<strong>Enter a valid non-negative ratio.</strong>';return;}
+  const raw=document.getElementById('decimalInput').value.trim(),d=raw===''?NaN:Number(raw),out=document.getElementById('conversionResults');
+  if(!Number.isFinite(d)||d<0||!Number.isFinite(d*100)){out.innerHTML='<strong>Enter a valid non-negative ratio.</strong>';return;}
   document.getElementById('percentInput').value=String(d*100);
   out.innerHTML='<strong>Converted</strong><p>'+d+' = <b>'+(d*100)+'%</b></p>';
  });

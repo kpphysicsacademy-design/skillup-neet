@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const html=fs.readFileSync('chemistry-mcq.html','utf8');
-const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)].map(m=>m[1]).filter(Boolean);
+const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
 assert(scripts.length,'Missing inline quiz script');scripts.forEach(s=>new vm.Script(s));
 const src=scripts.find(s=>s.includes('function saveProgress()'));
 assert(src,'Persistence code missing');

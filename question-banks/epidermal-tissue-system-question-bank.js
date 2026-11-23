@@ -29,3 +29,39 @@ window.skillUpEpidermalTissueSystemQuestions = [
 {q:"Which structure is NOT a component or specialization of the epidermal system?",o:["Xylem vessel","Stoma","Trichome","Root hair"],a:1,e:"Xylem vessels belong to the vascular tissue system."},
 {q:"Which statement best describes the epidermal tissue system?",o:["It forms the outer boundary of plant organs and includes specialized structures such as stomata, trichomes and root hairs","It consists only of xylem and phloem","It is responsible only for secondary growth","It is present only in roots"],a:1,e:"The epidermal system is a protective and regulatory interface across plant organs."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 13
+window.skillUpEpidermalTissueSystemQuestions.push(...[
+  {
+    "q": "The opening and closing of a stomatal pore is regulated by:",
+    "o": [
+      "Guard cells",
+      "Xylem vessels",
+      "Sieve tubes",
+      "Pith"
+    ],
+    "a": 0,
+    "e": "Guard cells change turgor to regulate stomatal aperture."
+  },
+  {
+    "q": "Root hairs arise as extensions of:",
+    "o": [
+      "Pericycle",
+      "Epidermal cells",
+      "Xylem fibres",
+      "Endodermis"
+    ],
+    "a": 1,
+    "e": "Root hairs are extensions of epidermal (epiblema) cells."
+  },
+  {
+    "q": "A cuticle on the aerial epidermis primarily helps:",
+    "o": [
+      "Increase water loss",
+      "Conduct sugars",
+      "Reduce water loss",
+      "Produce seeds"
+    ],
+    "a": 2,
+    "e": "The waxy cuticle limits evaporative water loss."
+  }
+]);

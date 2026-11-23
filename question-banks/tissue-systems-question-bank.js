@@ -30,3 +30,39 @@ window.skillUpTissueSystemsQuestions = [
 {q:"The endodermis is especially characteristic as an inner boundary of the:",o:["Cortex in roots","Epidermis in leaves","Pith in stems","Phloem in leaves"],a:1,e:"The endodermis forms the innermost layer of the root cortex."},
 {q:"Which tissue system is most directly responsible for long-distance transport?",o:["Vascular tissue system","Epidermal tissue system","Ground tissue system","Meristematic tissue system"],a:1,e:"Xylem and phloem provide the long-distance transport network."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 13
+window.skillUpTissueSystemsQuestions.push(...[
+  {
+    "q": "Which plant tissue system contains xylem and phloem?",
+    "o": [
+      "Vascular",
+      "Ground",
+      "Epidermal",
+      "Meristematic only"
+    ],
+    "a": 0,
+    "e": "The vascular tissue system comprises conducting xylem and phloem."
+  },
+  {
+    "q": "The cortex and pith are parts of the:",
+    "o": [
+      "Epidermal system",
+      "Ground tissue system",
+      "Vascular system only",
+      "Cuticle"
+    ],
+    "a": 1,
+    "e": "Ground tissue includes cortex and pith in stems and roots."
+  },
+  {
+    "q": "The outer protective tissue system of plants is:",
+    "o": [
+      "Ground",
+      "Vascular",
+      "Epidermal",
+      "Cambial"
+    ],
+    "a": 2,
+    "e": "The epidermal tissue system forms the outer protective covering."
+  }
+]);

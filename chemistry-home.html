@@ -221,6 +221,11 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
 <p class="chem-open-note">🔓 Open learning: XP, progress and mastery will not restrict access.</p>
 </section>
 <section class="chem-skills" aria-labelledby="chem-progress-title"><h2 id="chem-progress-title">🏆 My Chemistry Progress</h2><p>Optional motivation only. All lessons remain open regardless of XP, streak or mastery.</p><div class="chem-skill-grid" aria-live="polite"><div class="chem-skill"><strong>⭐ <span id="chem-total-xp">0</span> XP</strong><span>Earn 10 XP per correct quiz answer.</span></div><div class="chem-skill"><strong>🔥 <span id="chem-daily-streak">0</span> day streak</strong><span>Complete a quiz on consecutive days.</span></div><div class="chem-skill"><strong>🎓 <span id="chem-mastered-count">0</span> mastered</strong><span>Best quiz score of at least 80%.</span></div></div><p class="chem-open-note" id="chem-badge-status">🏅 First quiz badge: complete any Chemistry quiz.</p></section>
+<section class="chem-skills" aria-labelledby="chem-revision-title">
+<h2 id="chem-revision-title">🧠 Personal Revision</h2>
+<p>Revisit concepts where your best quiz score is below 80%. Revision is optional and never locks other lessons.</p>
+<div id="chem-revision-list" class="chem-skill-grid"><p>Complete a Chemistry quiz to get personalised revision suggestions.</p></div>
+</section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><button id="loadMoreBtn" type="button" style="display:none;width:100%;margin:14px 0;padding:13px;border:0;border-radius:14px;background:#1677ff;color:#fff;font-weight:950;font-size:12px;box-shadow:0 3px 0 #0d5bbf">LOAD MORE CONCEPTS</button><div id="empty" class="empty">No matching Chemistry concepts found.</div>
 <section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load at a time. More concepts load automatically, or use the button if needed.</div></section>
@@ -253,6 +258,30 @@ var p=document.getElementById('path'),q=document.getElementById('q'),e=document.
  var learn=document.getElementById('chem-skill-learn'),practice=document.getElementById('chem-skill-practice');
  if(learn){learn.href='chemistry-quicklearn.html'+query;learn.querySelector('span').textContent='Today: '+spotlight.c;}
  if(practice){practice.href='chemistry-mcq.html'+query;practice.querySelector('span').textContent='Practise: '+spotlight.c;}
+ // Recommend weaker previously attempted concepts without restricting any content.
+ (function(){
+  var holder=document.getElementById('chem-revision-list');
+  if(!holder)return;
+  try{
+   var saved=JSON.parse(localStorage.getItem('skillup_chemistry_learning_v1')||'{}');
+   var scores=saved&&saved.concepts&&typeof saved.concepts==='object'?saved.concepts:{};
+   var weak=a.filter(function(x){var v=scores[x.id];return v&&Number(v.attempts)>0&&Number(v.best)<80;})
+     .sort(function(x,y){return Number(scores[x.id].best)-Number(scores[y.id].best);}).slice(0,6);
+   if(!weak.length){
+    holder.textContent=Object.keys(scores).length?'Great work! No attempted concepts currently need revision. You can still practise any lesson.':'Complete a Chemistry quiz to get personalised revision suggestions.';
+    return;
+   }
+   holder.replaceChildren();
+   weak.forEach(function(x){
+    var link=document.createElement('a');link.className='chem-skill';
+    link.href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id);
+    var title=document.createElement('strong');title.textContent='🔁 '+x.c;
+    var detail=document.createElement('span');detail.textContent='Best score: '+Math.max(0,Number(scores[x.id].best)||0)+'% • Practise again';
+    link.append(title,detail);holder.appendChild(link);
+   });
+  }catch(e){holder.textContent='Revision suggestions are unavailable in this browser. All lessons remain accessible below.';}
+ })();
+
 
 var shown=0,searchTerm='',B=20,I=20,activeList=a;
 var icons=[];

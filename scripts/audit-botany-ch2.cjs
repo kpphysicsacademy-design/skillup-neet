@@ -15,7 +15,7 @@ if(!quiz.includes('const original=source.slice();'))errors.push('Quiz truncates 
 if(!quiz.includes('saveChapter2Progress();'))errors.push('Chapter 2 completion not persisted');
 if(!home.includes('botanyChapter2Progress'))errors.push('Learning path missing Chapter 2 progress indicator');
 for(const [file,content] of [['botany-mcq.html',quiz],['botany-home.html',home]]){
- for(const match of content.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)){
+ for(const match of content.matchAll(new RegExp('<script(?:\\s[^>]*)?>([\\s\\S]*?)</script>','g'))){
   if(!match[1].trim())continue;
   try{new vm.Script(match[1],{filename:file});}catch(error){errors.push('Inline script syntax '+file+': '+error.message);}
  }

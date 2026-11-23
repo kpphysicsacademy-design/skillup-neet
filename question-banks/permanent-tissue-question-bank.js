@@ -30,3 +30,39 @@ window.skillUpPermanentTissueQuestions = [
 {q:"Which statement about mature sieve tube elements in angiosperms is correct?",o:["They are living conducting cells with specialized structure","They are heavily lignified water-conducting cells","They are dead storage cells","They form the epidermal layer"],a:0,e:"Sieve tube elements are living conducting cells specialized for phloem transport."},
 {q:"Which permanent tissue can contain intercellular spaces that aid gas movement?",o:["Aerenchymatous parenchyma","Sclerenchyma","Cork only","Xylem fibre"],a:0,e:"Aerenchymatous parenchyma has conspicuous intercellular air spaces that facilitate gas movement."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23
+window.skillUpPermanentTissueQuestions.push(...[
+  {
+    "q": "Which simple permanent tissue usually consists of living thin-walled cells?",
+    "o": [
+      "Sclerenchyma",
+      "Parenchyma",
+      "Cork",
+      "Vessel elements"
+    ],
+    "a": 1,
+    "e": "Parenchyma cells are generally living with thin primary walls."
+  },
+  {
+    "q": "Which tissue gives flexible support to a young stem?",
+    "o": [
+      "Collenchyma",
+      "Sclerenchyma",
+      "Xylem vessels",
+      "Cork"
+    ],
+    "a": 0,
+    "e": "Collenchyma has unevenly thickened primary walls that provide flexible support."
+  },
+  {
+    "q": "Which pair consists of complex permanent tissues?",
+    "o": [
+      "Parenchyma and collenchyma",
+      "Sclerenchyma and cork",
+      "Xylem and phloem",
+      "Epidermis and parenchyma"
+    ],
+    "a": 2,
+    "e": "Xylem and phloem are complex tissues comprising multiple cell types."
+  }
+]);

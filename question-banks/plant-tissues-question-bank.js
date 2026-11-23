@@ -330,3 +330,39 @@ window.skillUpPlantTissuesQuestions = [
     "e": "Cork cambium produces cork toward the outside and contributes to the protective periderm."
   }
 ];
+// Chapter 2 NEET practice extension: 2026-11-23
+window.skillUpPlantTissuesQuestions.push(...[
+  {
+    "q": "Which plant tissue retains active cell division?",
+    "o": [
+      "Meristematic tissue",
+      "Sclerenchyma",
+      "Mature cork",
+      "Xylem vessel"
+    ],
+    "a": 0,
+    "e": "Meristematic cells actively divide to form new plant tissues."
+  },
+  {
+    "q": "Which pair represents complex permanent tissues?",
+    "o": [
+      "Parenchyma and collenchyma",
+      "Xylem and phloem",
+      "Collenchyma and sclerenchyma",
+      "Epidermis and cork"
+    ],
+    "a": 1,
+    "e": "Xylem and phloem contain several cell types working together in conduction."
+  },
+  {
+    "q": "Which tissue mainly translocates photosynthates?",
+    "o": [
+      "Xylem",
+      "Sclerenchyma",
+      "Phloem",
+      "Cork"
+    ],
+    "a": 2,
+    "e": "Phloem carries organic solutes such as sucrose from sources to sinks."
+  }
+]);

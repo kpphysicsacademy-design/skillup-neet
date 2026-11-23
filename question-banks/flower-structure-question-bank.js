@@ -31,3 +31,39 @@ window.skillUpFlowerStructureQuestions = [
 {q:"Which statement correctly distinguishes stigma, style and ovary?",o:["Stigma receives pollen, style connects stigma to ovary, and ovary contains ovules","Stigma contains ovules, style produces pollen, and ovary receives pollen","Stigma supports anther, style forms petals, and ovary produces sepals","All three are parts of the androecium"],a:0,e:"These three regions form the pistil: stigma is receptive, style connects, and ovary contains ovules."},
 {q:"Which statement best summarizes the structure of a typical complete bisexual flower?",o:["It has calyx, corolla, androecium and gynoecium, with both reproductive whorls present","It has only calyx and corolla","It lacks reproductive whorls","It has only stamens and no floral axis"],a:0,e:"A complete bisexual flower has all four main whorls and contains both androecium and gynoecium."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 8
+window.skillUpFlowerStructureQuestions.push(...[
+  {
+    "q": "Which floral whorl consists of stamens?",
+    "o": [
+      "Calyx",
+      "Androecium",
+      "Corolla",
+      "Gynoecium"
+    ],
+    "a": 1,
+    "e": "The androecium is the collective male reproductive whorl of stamens."
+  },
+  {
+    "q": "Ovules in an angiosperm flower are enclosed within the:",
+    "o": [
+      "Stigma",
+      "Anther",
+      "Ovary",
+      "Sepal"
+    ],
+    "a": 2,
+    "e": "The ovary contains ovules and is part of the gynoecium."
+  },
+  {
+    "q": "The calyx of a typical flower consists of:",
+    "o": [
+      "Sepals",
+      "Petals",
+      "Stamens",
+      "Carpels"
+    ],
+    "a": 0,
+    "e": "Sepals collectively form the calyx, which commonly protects the developing bud."
+  }
+]);

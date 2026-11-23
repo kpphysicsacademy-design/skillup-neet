@@ -29,3 +29,39 @@ window.skillUpGroundTissueSystemQuestions = [
 {q:"Which is NOT a typical function of ground tissue?",o:["Long-distance transport through sieve tubes","Storage","Photosynthesis","Mechanical support"],a:1,e:"Long-distance phloem transport is a function of the vascular tissue system."},
 {q:"Which statement best describes the ground tissue system?",o:["It forms much of the internal body of plants and performs storage, photosynthesis, aeration and support","It consists only of epidermis","It consists only of xylem","It is found only in roots"],a:1,e:"Ground tissue forms much of the plant body between the epidermal and vascular systems and has multiple functions."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 13
+window.skillUpGroundTissueSystemQuestions.push(...[
+  {
+    "q": "Which tissue commonly forms the photosynthetic mesophyll?",
+    "o": [
+      "Parenchyma",
+      "Xylem fibres",
+      "Cork",
+      "Sieve tubes"
+    ],
+    "a": 0,
+    "e": "Mesophyll consists largely of chlorenchyma, a photosynthetic form of parenchyma."
+  },
+  {
+    "q": "Uneven wall thickening at cell corners is characteristic of:",
+    "o": [
+      "Sclerenchyma",
+      "Collenchyma",
+      "Xylem vessels",
+      "Companion cells"
+    ],
+    "a": 1,
+    "e": "Collenchyma has unevenly thickened primary cell walls and provides flexible support."
+  },
+  {
+    "q": "The typically dead and lignified ground tissue is:",
+    "o": [
+      "Parenchyma",
+      "Collenchyma",
+      "Sclerenchyma",
+      "Chlorenchyma"
+    ],
+    "a": 2,
+    "e": "Mature sclerenchyma cells usually have thick lignified walls and lack protoplasm."
+  }
+]);

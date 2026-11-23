@@ -158,6 +158,17 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
 @media(max-width:460px){.chem-hero{display:block}.hero-art{justify-content:flex-end;min-height:72px;margin-top:8px}.owl{font-size:48px}.flask{font-size:28px}.book-stack b{font-size:7px;padding:5px 7px}.search-btn{padding:0 12px}.search{min-width:0}.wrap{padding-left:8px;padding-right:8px}}
 </style>
 
+<style id="chemistry-open-learning-tools">
+.chem-skills{margin:16px 0;padding:17px;border:1px solid #d9e5f2;border-radius:19px;background:#fff}
+.chem-skills h2{font-size:18px;color:#123b70;margin:0 0 5px}.chem-skills p{font-size:12px;color:#526b86;margin:0 0 13px}
+.chem-skill-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.chem-skill{display:flex;flex-direction:column;gap:6px;padding:13px;border-radius:15px;background:#f4f9ff;border:1px solid #d9e5f2;text-decoration:none;color:#123b70;min-height:108px}
+.chem-skill strong{font-size:13px}.chem-skill span{font-size:11px;line-height:1.4;color:#526b86}
+.chem-skill:focus-visible{outline:3px solid #1677ff;outline-offset:2px}
+.chem-skill:hover{border-color:#1677ff;background:#eaf3ff}
+.chem-skills .chem-open-note{font-size:11px;margin:11px 0 0;color:#27712b;font-weight:700}
+@media(max-width:650px){.chem-skill-grid{grid-template-columns:1fr}.chem-skill{min-height:0}}
+</style>
 </head>
 <body>
 <header class="su-subject-header"><a class="su-subject-brand" href="index.html" aria-label="SkillUp Academy home"><span class="su-brand-name">SkillUp</span><span class="su-brand-divider">/</span><span class="su-subject-name">Chemistry</span></a><div class="home-menu">
@@ -199,6 +210,16 @@ body{background:radial-gradient(ellipse at 5% 4%,rgba(88,204,2,.10),transparent 
   <div class="hero-copy"><span class="hero-pill">🧪 CHEMISTRY</span><h1>Master Chemistry</h1><p>Learn step by step, practice with fun quizzes, and build your NEET confidence.</p><div class="hero-points"><span>📘 Learn</span><span>🎯 Practice</span><span>🚀 Improve</span></div></div>
   <div class="hero-art" aria-hidden="true"><span class="spark s1">✦</span><span class="flask">⚗️</span><span class="owl">🦉</span><span class="book-stack"><b>LEARN</b><b>PRACTICE</b><b>IMPROVE</b></span><span class="spark s2">✦</span></div>
 </section>
+<section class="chem-skills" aria-labelledby="chem-skills-title">
+<h2 id="chem-skills-title">🚀 Chemistry Learning Skills</h2>
+<p>Build understanding, practise MCQs and revise a concept every day. All 515 concepts stay open—no levels or lessons are locked.</p>
+<div class="chem-skill-grid">
+<a class="chem-skill" id="chem-skill-learn" href="chemistry-quicklearn.html?concept=Matter%20and%20Its%20Nature&amp;micro=matter-and-its-nature"><strong>📘 QuickLearn</strong><span>Short, focused concept revision.</span></a>
+<a class="chem-skill" id="chem-skill-practice" href="chemistry-mcq.html?concept=Matter%20and%20Its%20Nature&amp;micro=matter-and-its-nature"><strong>🎯 Daily Practice</strong><span>Try a different concept's MCQs each day.</span></a>
+<a class="chem-skill" id="chem-skill-explore" href="#path"><strong>🧭 Explore All Skills</strong><span>Browse every Chemistry concept freely.</span></a>
+</div>
+<p class="chem-open-note">🔓 Open learning: XP, progress and mastery will not restrict access.</p>
+</section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><button id="loadMoreBtn" type="button" style="display:none;width:100%;margin:14px 0;padding:13px;border:0;border-radius:14px;background:#1677ff;color:#fff;font-weight:950;font-size:12px;box-shadow:0 3px 0 #0d5bbf">LOAD MORE CONCEPTS</button><div id="empty" class="empty">No matching Chemistry concepts found.</div>
 <section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load at a time. More concepts load automatically, or use the button if needed.</div></section>
@@ -210,6 +231,14 @@ var d=window.SKILLUP_CHEMISTRY_PROGRESSIVE||[],a=[];
 for(var i=0;i<d.length;i++){var x=d[i];a.push({u:x.u,n:x.unit,ic:x.icon,c:x.title||x.base,ix:a.length+1,id:x.id,base:x.base});}
 if(a.length<1){document.getElementById('path').innerHTML='<div class="card">Chemistry concepts could not be loaded. Please refresh the page.</div>';return;}
 var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
+ // Rotate the suggested practice concept by local calendar date; all lessons remain accessible.
+ var day=new Date(),dayNumber=Math.floor(new Date(day.getFullYear(),day.getMonth(),day.getDate()).getTime()/86400000);
+ var spotlight=a[((dayNumber%a.length)+a.length)%a.length];
+ var query='?concept='+encodeURIComponent(spotlight.c)+'&micro='+encodeURIComponent(spotlight.id);
+ var learn=document.getElementById('chem-skill-learn'),practice=document.getElementById('chem-skill-practice');
+ if(learn){learn.href='chemistry-quicklearn.html'+query;learn.querySelector('span').textContent='Today: '+spotlight.c;}
+ if(practice){practice.href='chemistry-mcq.html'+query;practice.querySelector('span').textContent='Practise: '+spotlight.c;}
+
 var shown=0,searchTerm='',B=20,I=20,activeList=a;
 var icons=[];
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}

@@ -30,3 +30,39 @@ window.skillUpLeafModificationsQuestions = [
 {q:"Which statement best distinguishes leaf tendrils from stem tendrils?",o:["Leaf tendrils arise from leaf structures, while stem tendrils arise from stems","Both are always roots","Leaf tendrils are underground stems","Stem tendrils are always modified roots"],a:0,e:"Tendrils can have different origins; pea has a leaf-derived tendril, while plants such as grapevine have stem tendrils."},
 {q:"Which set contains only leaf modifications?",o:["Pea tendril, cactus spine, Nepenthes pitcher","Potato tuber, ginger rhizome, onion bulb","Runner, corm, tuber","Root hair, pneumatophore, tuber"],a:0,e:"Pea tendril, cactus spine and Nepenthes pitcher are all leaf modifications."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 6
+window.skillUpLeafModificationsQuestions.push(...[
+  {
+    "q": "The tendrils of pea are modified:",
+    "o": [
+      "Leaves or leaflets",
+      "Roots",
+      "Flowers",
+      "Seeds"
+    ],
+    "a": 0,
+    "e": "Pea tendrils develop from leaf parts and help the plant climb."
+  },
+  {
+    "q": "Spines of most cacti are modified:",
+    "o": [
+      "Stems",
+      "Leaves",
+      "Roots",
+      "Petals"
+    ],
+    "a": 1,
+    "e": "Cactus spines are modified leaves, whereas the green succulent stem carries out photosynthesis."
+  },
+  {
+    "q": "The pitcher in Nepenthes is a modified:",
+    "o": [
+      "Root",
+      "Stem",
+      "Leaf",
+      "Fruit"
+    ],
+    "a": 2,
+    "e": "The Nepenthes pitcher is a modified leaf adapted for insect capture."
+  }
+]);

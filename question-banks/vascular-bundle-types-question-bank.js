@@ -30,3 +30,39 @@ window.skillUpVascularBundleTypesQuestions=[
 {q:"Which pair is correctly matched?",o:["Radial — typical root bundle arrangement","Collateral — xylem and phloem on separate radii","Amphicribral — xylem surrounds phloem","Closed — cambium present"],a:1,e:"Radial arrangement is characteristic of roots."},
 {q:"The best comparison is:",o:["Dicot stem: open collateral; monocot stem: closed collateral","Dicot stem: radial; monocot stem: open radial","Dicot stem: amphivasal; monocot stem: bicollateral","Both always have identical bundle types"],a:1,e:"Typical dicot stems have open collateral bundles, whereas typical monocot stems have closed collateral bundles."}
 ];
+// Chapter 2 NEET practice extension: 2026-11-23 batch 19
+window.skillUpVascularBundleTypesQuestions.push(...[
+  {
+    "q": "In radial vascular bundles, xylem and phloem are located:",
+    "o": [
+      "On alternate radii",
+      "On the same radius",
+      "Only in the cortex",
+      "Only inside the pith"
+    ],
+    "a": 0,
+    "e": "Radial bundles have xylem and phloem on different alternating radii, typical of roots."
+  },
+  {
+    "q": "A conjoint collateral bundle typically has:",
+    "o": [
+      "Xylem outside phloem",
+      "Phloem outside xylem",
+      "No xylem",
+      "Only one tissue type"
+    ],
+    "a": 1,
+    "e": "In collateral bundles, phloem lies outside xylem along the same radius."
+  },
+  {
+    "q": "In an amphicribral vascular bundle:",
+    "o": [
+      "Xylem surrounds phloem",
+      "Xylem and phloem alternate",
+      "Phloem surrounds xylem",
+      "Cambium is always absent from all plants"
+    ],
+    "a": 2,
+    "e": "An amphicribral bundle has central xylem surrounded by phloem."
+  }
+]);

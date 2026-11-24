@@ -1,0 +1,18 @@
+name: Chemistry consolidated progress
+on:
+  pull_request:
+  push:
+    branches: [fix/chemistry-consolidated-progress]
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/chemistry-progress.test.cjs
+      - name: Check inline quiz JavaScript syntax
+        run: |
+          python -c "import re,pathlib; s=pathlib.Path('chemistry-mcq.html').read_text(); pathlib.Path('/tmp/chemistry-quiz.js').write_text('\n'.join(re.findall(r'<script>(.*?)</script>',s,re.S)))"
+          node --check /tmp/chemistry-quiz.js

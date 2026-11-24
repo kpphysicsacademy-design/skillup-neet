@@ -276,17 +276,23 @@ var units=[["Diversity in Living World",[["What is Living?","🧬"],["Biodiversi
 ["Ecology and Environment",[["Exponential Growth","🌿"],["Logistic Growth","🌿"],["Mutualism","🌿"],["Competition","🌿"],["Predation","🌿"],["Parasitism","🌿"],["Food Chains","🌿"],["Food Webs","🌿"],["Ecological Pyramids","🌿"],["Biodiversity","🌿"],["Patterns of Biodiversity","🌿"],["Importance of Biodiversity","🌿"],["Biodiversity Loss","🌿"],["Biodiversity Conservation","🌿"],["Biodiversity Hotspots","🌿"],["Endangered Species and Extinction","🌿"],["Red Data Book","🌿"],["Biosphere Reserves","🌿"],["National Parks and Wildlife Sanctuaries","🌿"],["Sacred Groves","🌿"],["Population Age Pyramids","🌿"],["Carrying Capacity","🌿"],["In-situ Conservation","🌿"],["Ex-situ Conservation","🌿"],]]];
 
 var a=[],ix=0;
-units.forEach(function(u,ui){u[1].forEach(function(t){a.push({u:ui+1,n:u[0],c:t[0],ic:t[1],ix:++ix});});});
+units.forEach(function(u,ui){u[1].forEach(function(t){a.push({u:ui+1,n:u[0],c:t[0],ic:t[1],ix:++ix,id:'zoo-'+encodeURIComponent(u[0])+'--'+encodeURIComponent(t[0])});});});
 var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
 document.getElementById('zooConceptCount').textContent='📚 '+a.length+' concepts';
 document.getElementById('zooUnitCount').textContent='🧭 '+units.length+' learning units';
 var shown=0,term='',B=20,I=20;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function unit(x){if(document.getElementById('unit-'+x.u))return '';return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.ic)+' '+esc(x.n)+'</h2><small>'+a.filter(function(v){return v.u===x.u;}).length+' concepts • UNIT '+x.u+' of 14</small></div></div></div>';}
-function card(x){var href='zoology-mcq.html?concept='+encodeURIComponent(x.c);return '<article class="chapter"><span class="node"></span><a href="'+href+'"><div><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
+function card(x){var href='zoology-mcq.html?concept='+encodeURIComponent(x.c)+'&amp;conceptId='+encodeURIComponent(x.id);return '<article class="chapter" id="'+esc(x.id)+'"><span class="node"></span><a href="'+href+'"><div><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span></div><span class="go">›</span></a></article>';}
 function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
-render(a,I);
+var resumeParams=new URLSearchParams(location.search);
+var resumeId=resumeParams.get('resumeId'),resumeTitle=(resumeParams.get('resumeConcept')||'').trim().toLowerCase();
+var matches=a.filter(function(x){return resumeId?x.id===resumeId:resumeTitle&&x.c.toLowerCase()===resumeTitle;});
+var target=matches.length===1?matches[0]:null;
+render(a,target?Math.max(I,target.ix):I);
+if(target){var el=document.getElementById(target.id);if(el){el.scrollIntoView({block:'center'});el.style.outline='4px solid #58cc02';setTimeout(function(){el.style.outline='';},5000);}}
+
 var s=document.createElement('div');s.style.height='1px';p.after(s);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
 document.getElementById('searchBtn').onclick=function(){term=q.value.trim().toLowerCase();var list=term?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(term)>-1;}):a;render(list,term?list.length:I);};
@@ -294,31 +300,7 @@ var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');
 if(mb&&mn){mb.onclick=function(){var o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap')){mn.classList.remove('open');mb.setAttribute('aria-expanded','false');}});}
 })();
 </script>
-<script>
-(function(){
-  const p=new URLSearchParams(location.search),target=(p.get('resumeConcept')||'').trim();
-  if(!target)return;
-  const norm=s=>String(s||'').replace(/\s+/g,' ').trim().toLowerCase();
-  const wanted=norm(target);
-  let done=false;
-  function resume(){
-    if(done)return;
-    const els=[...document.querySelectorAll('a,button,.chapter,.concept-card,[data-concept]')];
-    const el=els.find(x=>norm(x.getAttribute&&x.getAttribute('data-concept'))===wanted)||els.find(x=>norm(x.textContent).includes(wanted));
-    if(!el)return;
-    done=true;
-    el.scrollIntoView({behavior:'smooth',block:'center'});
-    el.style.outline='4px solid #58cc02';
-    el.style.outlineOffset='4px';
-    el.style.borderRadius='18px';
-    setTimeout(()=>{el.style.outline='';el.style.outlineOffset=''},5000);
-    history.replaceState({},'',location.pathname);
-  }
-  resume();
-  const mo=new MutationObserver(resume);mo.observe(document.body,{childList:true,subtree:true});
-  setTimeout(()=>mo.disconnect(),10000);
-})();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
 
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
 <script>

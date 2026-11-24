@@ -21,6 +21,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -29,11 +30,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,27 +58,6 @@ jobs:
         with:
           path: .
 
-      - name: Wait for Pages artifact availability
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          GH_RUN_ID: ${{ github.run_id }}
-        run: |
-          for attempt in $(seq 1 12); do
-            if gh api "repos/$GH_REPO/actions/runs/$GH_RUN_ID/artifacts" --jq '.artifacts[] | select(.name == "github-pages" and .expired == false) | .id' | grep -q '[0-9]'; then
-              echo "Pages artifact is visible to GitHub API."
-              exit 0
-            fi
-            echo "Pages artifact not yet indexed (attempt $attempt/12); waiting 10 seconds..."
-            sleep 10
-          done
-          echo "::error::Uploaded Pages artifact never became visible to the GitHub API."
-          exit 1
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
       - name: Upload SEO audit report
         if: always()
         uses: actions/upload-artifact@v4
@@ -89,3 +66,16 @@ jobs:
           path: /tmp/skillup-seo-audit/
           if-no-files-found: warn
           retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages

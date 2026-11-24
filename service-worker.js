@@ -47,7 +47,8 @@ self.addEventListener('activate', event => {
 function cachePage(request, url, response) {
   if (!response || !response.ok || response.type !== 'basic') return;
   const pageKey = new Request(url.origin + url.pathname, { method: 'GET' });
-  return caches.open(CACHE_NAME).then(cache => cache.put(pageKey, response.clone())).catch(() => {});
+  const copy = response.clone();
+  return caches.open(CACHE_NAME).then(cache => cache.put(pageKey, copy)).catch(() => {});
 }
 
 self.addEventListener('fetch', event => {

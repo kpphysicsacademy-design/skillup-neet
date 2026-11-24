@@ -1,0 +1,19 @@
+name: Zoology Phase 1 regression
+on:
+  pull_request:
+    paths:
+      - 'zoology-*.html'
+      - 'question-banks/**'
+      - 'tests/zoology-phase1.test.cjs'
+      - '.github/workflows/zoology-phase1-regression.yml'
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/zoology-phase1.test.cjs

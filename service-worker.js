@@ -3,7 +3,7 @@
  * Firebase and all cross-origin requests remain network-only; user progress/API data
  * is never added to Cache Storage.
  */
-const CACHE_NAME = 'skillup-offline-v4-quiz-refresh';
+const CACHE_NAME = 'skillup-offline-v5-quiz-fast';
 const PRECACHE_URLS = [
   '/index.html',
   '/learn.html',
@@ -63,7 +63,7 @@ self.addEventListener('fetch', event => {
       try {
         const response = await fetch(request);
         if (response && response.ok && response.type === 'basic') {
-          await cachePage(request, url, response);
+          event.waitUntil(cachePage(request, url, response));
         }
         return response;
       } catch (error) {

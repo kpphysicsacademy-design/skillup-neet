@@ -232,79 +232,17 @@ html body.chemistry-path-refresh .hero-points span{background:#c5d6b7!important}
   <div class="hero-copy"><span class="hero-pill">🧪 CHEMISTRY</span><h1>Master Chemistry</h1><p>Learn step by step, practice with fun quizzes, and build your NEET confidence.</p><div class="hero-points"><span>📘 Learn</span><span>🎯 Practice</span><span>🚀 Improve</span></div></div>
   <div class="hero-art" aria-hidden="true"><span class="spark s1">✦</span><span class="flask">⚗️</span><span class="owl">🦉</span><span class="book-stack"><b>LEARN</b><b>PRACTICE</b><b>IMPROVE</b></span><span class="spark s2">✦</span></div>
 </section>
-<section class="chem-skills" aria-labelledby="chem-skills-title">
-<h2 id="chem-skills-title">🚀 Chemistry Learning Skills</h2>
-<p>Build understanding, practise MCQs and revise a concept every day. All 515 concepts stay open—no levels or lessons are locked.</p>
-<div class="chem-skill-grid">
-<a class="chem-skill" id="chem-skill-learn" href="chemistry-quicklearn.html?concept=Matter%20and%20Its%20Nature&amp;micro=matter-and-its-nature"><strong>📘 QuickLearn</strong><span>Short, focused concept revision.</span></a>
-<a class="chem-skill" id="chem-skill-practice" href="chemistry-mcq.html?concept=Matter%20and%20Its%20Nature&amp;micro=matter-and-its-nature"><strong>🎯 Daily Practice</strong><span>Try a different concept's MCQs each day.</span></a>
-<a class="chem-skill" id="chem-skill-explore" href="#path"><strong>🧭 Explore All Skills</strong><span>Browse every Chemistry concept freely.</span></a>
-</div>
-<p class="chem-open-note">🔓 Open learning: XP, progress and mastery will not restrict access.</p>
-</section>
-<section class="chem-skills" aria-labelledby="chem-progress-title"><h2 id="chem-progress-title">🏆 My Chemistry Progress</h2><p>Optional motivation only. All lessons remain open regardless of XP, streak or mastery.</p><div class="chem-skill-grid" aria-live="polite"><div class="chem-skill"><strong>⭐ <span id="chem-total-xp">0</span> XP</strong><span>Earn 10 XP per correct quiz answer.</span></div><div class="chem-skill"><strong>🔥 <span id="chem-daily-streak">0</span> day streak</strong><span>Complete a quiz on consecutive days.</span></div><div class="chem-skill"><strong>🎓 <span id="chem-mastered-count">0</span> mastered</strong><span>Best quiz score of at least 80%.</span></div></div><p class="chem-open-note" id="chem-badge-status">🏅 First quiz badge: complete any Chemistry quiz.</p></section>
-<section class="chem-skills" aria-labelledby="chem-revision-title">
-<h2 id="chem-revision-title">🧠 Personal Revision</h2>
-<p>Revisit concepts where your best quiz score is below 80%. Revision is optional and never locks other lessons.</p>
-<div id="chem-revision-list" class="chem-skill-grid"><p>Complete a Chemistry quiz to get personalised revision suggestions.</p></div>
-</section>
 <div class="tools"><input id="q" class="search" placeholder="Search Chemistry concepts…" aria-label="Search Chemistry concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
 <section id="path" class="path"></section><button id="loadMoreBtn" type="button" style="display:none;width:100%;margin:14px 0;padding:13px;border:0;border-radius:14px;background:#1677ff;color:#fff;font-weight:950;font-size:12px;box-shadow:0 3px 0 #0d5bbf">LOAD MORE CONCEPTS</button><div id="empty" class="empty">No matching Chemistry concepts found.</div>
 <section class="card"><b>⚗️ Progressive loading</b><div style="font-size:10px;color:#6b7280;margin-top:4px">20 concepts load at a time. More concepts load automatically, or use the button if needed.</div></section>
 </main>
 <script>
 (function(){
- try{
-  var d=JSON.parse(localStorage.getItem('skillup_chemistry_learning_v1')||'{}');
-  if(!d||typeof d!=='object')return;
-  var concepts=d.concepts&&typeof d.concepts==='object'?d.concepts:{};
-  var mastered=Object.keys(concepts).filter(function(k){return Number(concepts[k]&&concepts[k].best)>=80;}).length;
-  var last=d.lastDay||'',today=new Date(),yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
-  var date=function(x){return [x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-');};
-  document.getElementById('chem-total-xp').textContent=String(Math.max(0,Number(d.xp)||0));
-  document.getElementById('chem-daily-streak').textContent=String(last===date(today)||last===date(yesterday)?Math.max(0,Number(d.streak)||0):0);
-  document.getElementById('chem-mastered-count').textContent=String(mastered);
-  document.getElementById('chem-badge-status').textContent=Number(d.quizzes)>=10?'🏆 Quiz Champion • 10 quizzes completed':mastered>=5?'🥇 Mastery Explorer • 5 concepts mastered':Number(d.quizzes)>=1?'🥉 First Quiz Complete':'🏅 First quiz badge: complete any Chemistry quiz.';
- }catch(e){/* Optional local progress must never block the learning path. */}
-})();
-(function(){
 'use strict';
 var d=window.SKILLUP_CHEMISTRY_PROGRESSIVE||[],a=[];
 for(var i=0;i<d.length;i++){var x=d[i];a.push({u:x.u,n:x.unit,ic:x.icon,c:x.title||x.base,ix:a.length+1,id:x.id,base:x.base});}
 if(a.length<1){document.getElementById('path').innerHTML='<div class="card">Chemistry concepts could not be loaded. Please refresh the page.</div>';return;}
 var p=document.getElementById('path'),q=document.getElementById('q'),e=document.getElementById('empty');
- // Rotate the suggested practice concept by local calendar date; all lessons remain accessible.
- var day=new Date(),dayNumber=Math.floor(new Date(day.getFullYear(),day.getMonth(),day.getDate()).getTime()/86400000);
- var spotlight=a[((dayNumber%a.length)+a.length)%a.length];
- var query='?concept='+encodeURIComponent(spotlight.c)+'&micro='+encodeURIComponent(spotlight.id);
- var learn=document.getElementById('chem-skill-learn'),practice=document.getElementById('chem-skill-practice');
- if(learn){learn.href='chemistry-quicklearn.html'+query;learn.querySelector('span').textContent='Today: '+spotlight.c;}
- if(practice){practice.href='chemistry-mcq.html'+query;practice.querySelector('span').textContent='Practise: '+spotlight.c;}
- // Recommend weaker previously attempted concepts without restricting any content.
- (function(){
-  var holder=document.getElementById('chem-revision-list');
-  if(!holder)return;
-  try{
-   var saved=JSON.parse(localStorage.getItem('skillup_chemistry_learning_v1')||'{}');
-   var scores=saved&&saved.concepts&&typeof saved.concepts==='object'?saved.concepts:{};
-   var weak=a.filter(function(x){var v=scores[x.id];return v&&Number(v.attempts)>0&&Number(v.best)<80;})
-     .sort(function(x,y){return Number(scores[x.id].best)-Number(scores[y.id].best);}).slice(0,6);
-   if(!weak.length){
-    holder.textContent=Object.keys(scores).length?'Great work! No attempted concepts currently need revision. You can still practise any lesson.':'Complete a Chemistry quiz to get personalised revision suggestions.';
-    return;
-   }
-   holder.replaceChildren();
-   weak.forEach(function(x){
-    var link=document.createElement('a');link.className='chem-skill';
-    link.href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id);
-    var title=document.createElement('strong');title.textContent='🔁 '+x.c;
-    var detail=document.createElement('span');detail.textContent='Best score: '+Math.max(0,Number(scores[x.id].best)||0)+'% • Practise again';
-    link.append(title,detail);holder.appendChild(link);
-   });
-  }catch(e){holder.textContent='Revision suggestions are unavailable in this browser. All lessons remain accessible below.';}
- })();
-
-
 var shown=0,searchTerm='',B=20,I=20,activeList=a;
 var icons=[];
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}

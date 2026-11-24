@@ -1,0 +1,21 @@
+name: Daily Test regression
+on:
+  pull_request:
+    paths:
+      - 'assets/daily-test.js'
+      - 'take-a-test.html'
+      - 'data/daily-test-starter.json'
+      - '.github/scripts/test-daily-test.cjs'
+      - '.github/workflows/daily-test-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node .github/scripts/test-daily-test.cjs

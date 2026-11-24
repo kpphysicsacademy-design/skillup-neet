@@ -86,6 +86,10 @@ mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
 </section>
 <div id="finishSlot"></div>
 </main>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="/central-config.js"></script><script src="/central-auth.js"></script><script src="/chemistry-progress.js"></script>
 <script>
 (function(){
 'use strict';
@@ -106,39 +110,12 @@ $('subtitle').textContent='Practise '+displayConcept+' with focused questions an
 document.title=displayConcept+' | Chemistry Quiz | SkillUp';
 window.SKILLUP_CHEMISTRY_BANK=window.SKILLUP_CHEMISTRY_BANK||{};
 const BANK_VERSION='20261123-chemistry-runtime-fixes-v1';
-const PROGRESS_KEY='skillup_chemistry_learning_v1';
+let engine,owner,attemptId,reviewMode=false,bankSignature;
 const dateKey=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
-function readLearningProgress(){
- try{const v=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(e){return {};}
-}
-function refreshLearningScore(){
- const data=readLearningProgress(),today=new Date(),last=data.lastDay||'';
- const yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
- const active=last===dateKey(today)||last===dateKey(yesterday);
- $('xp').textContent=String(Math.max(0,Number(data.xp)||0));
- $('streak').textContent=String(active?Math.max(0,Number(data.streak)||0):0);
-}
-refreshLearningScore();
-
-function saveLearningResult(correct,total){
- if(!Number.isFinite(total)||total<=0)return;
- try{
-  const data=readLearningProgress(),today=new Date(),date=dateKey(today);
-  const yesterday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
-  const sameDay=data.lastDay===date;
-  data.streak=sameDay?Math.max(1,Number(data.streak)||1):(data.lastDay===dateKey(yesterday)?Math.max(0,Number(data.streak)||0)+1:1);
-  data.lastDay=date;
-  data.xp=Math.max(0,Number(data.xp)||0)+Math.max(0,correct)*10;
-  data.quizzes=Math.max(0,Number(data.quizzes)||0)+1;
-  data.concepts=data.concepts&&typeof data.concepts==='object'&&!Array.isArray(data.concepts)?data.concepts:{};
-  const id=slug(micro)||slug(concept),prior=data.concepts[id]||{};
-  const accuracy=Math.round(correct/total*100);
-  data.concepts[id]={best:Math.max(Number(prior.best)||0,accuracy),attempts:Math.max(0,Number(prior.attempts)||0)+1};
-  localStorage.setItem(PROGRESS_KEY,JSON.stringify(data));
- }catch(e){/* Storage disabled: quiz continues to work. */}
- refreshLearningScore();
-}
-
+function refreshLearningScore(){const summary=engine.summary();$('xp').textContent=summary.xp;let d=new Date(),count=0;const days=new Set(summary.days);if(!days.has(dateKey(d)))d.setDate(d.getDate()-1);while(days.has(dateKey(d))){count++;d.setDate(d.getDate()-1);}$('streak').textContent=count;}
+function snapshot(){return {id:attemptId,bank:bankSignature,ids:questions.map(q=>originalQuestions.indexOf(q)),index,score,streak,chosen,locked,wrongAttempts,review:reviewMode};}
+function saveAttempt(){engine.save(snapshot());}
+function newId(){return crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random();}
 let questions=[],originalQuestions=[],index=0,score=0,streak=0,chosen=null,locked=false,wrongAttempts=[];
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function richText(v){
@@ -212,6 +189,7 @@ function normalize(item){
 }
 function shuffle(item){const order=item.o.map((_,n)=>n);for(let j=order.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[order[j],order[k]]=[order[k],order[j]];}return {...item,o:order.map(n=>item.o[n]),a:order.indexOf(item.a)};}
 async function load(){
+ const auth=window.SkillUpAuth; const session=auth?await auth.getSession():null;owner=session?.user?.uid||null;engine=ChemistryProgress.create({getItem:k=>localStorage.getItem(k),setItem:(k,v)=>localStorage.setItem(k,v)},owner?'uid:'+owner:'anonymous',sheetKey);refreshLearningScore();attemptId=newId();if(auth?.auth)auth.auth.onAuthStateChanged(u=>{if((u?.uid||null)!==owner)location.reload();});
  const keys=[slug(micro),slug(concept)];
  const files=[...new Set(keys.map(k=>k+'-question-bank.js'))];
  let bank=null;
@@ -221,7 +199,8 @@ async function load(){
  questions=originalQuestions.slice();
  if(!questions.length){$('question').textContent='No valid questions found';$('check').style.display='none';return;}
  $('subtitle').textContent=questions.length+' questions • Select an answer, check it, then continue.';
- render();
+ bankSignature=JSON.stringify([BANK_VERSION,originalQuestions]);const saved=engine.restore(bankSignature);
+ if(saved&&saved.ids.every(i=>Number.isInteger(i)&&i>=0&&i<originalQuestions.length)&&new Set(saved.ids).size===saved.ids.length){questions=saved.ids.map(i=>originalQuestions[i]);attemptId=saved.id;reviewMode=!!saved.review;index=saved.index;score=saved.score;streak=saved.streak;wrongAttempts=saved.wrongAttempts;if(index===questions.length){showResults();return;}render();if(Number.isInteger(saved.chosen)&&saved.chosen>=0&&saved.chosen<questions[index].o.length){chosen=saved.chosen;document.querySelectorAll('.option')[chosen].classList.add('selected');$('check').disabled=false;if(saved.locked){locked=true;showChecked();}}}else render();
 }
 function render(){
  chosen=null;locked=false;const item=questions[index],pct=Math.round(index/questions.length*100);
@@ -231,7 +210,7 @@ function render(){
  $('question').innerHTML=richText(item.q);$('feedback').className='feedback';$('feedback').textContent='';
  $('check').style.display='block';$('check').disabled=true;$('continue').className='btn continue';$('continue').textContent=index===questions.length-1?'See results →':'Continue →';
  $('options').replaceChildren();
- item.o.forEach((value,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.innerHTML=richText(value);b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;});$('options').appendChild(b);});
+ item.o.forEach((value,j)=>{const b=document.createElement('button');b.type='button';b.className='option';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+j);const label=document.createElement('span');label.innerHTML=richText(value);b.append(letter,label);b.addEventListener('click',()=>{if(locked)return;chosen=j;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('check').disabled=false;saveAttempt();});$('options').appendChild(b);});
  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([$('question'),$('options')]).catch(()=>{});
 }
 $('check').addEventListener('click',()=>{
@@ -241,21 +220,26 @@ $('check').addEventListener('click',()=>{
  if(chosen===item.a){score++;streak++;feedback.className='feedback show good';feedback.innerHTML='✨ Correct! '+richText(item.why||'Your answer matches the correct option.');}
  else{streak=0;wrongAttempts.push({q:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.why});buttons[chosen].classList.add('wrong');feedback.className='feedback show bad';feedback.innerHTML='Not quite. '+richText(item.why||'Review the correct option above.')+' Correct answer: '+richText(item.o[item.a])+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
+ saveAttempt();
  if(window.MathJax&&window.MathJax.typesetPromise)window.MathJax.typesetPromise([feedback]).catch(()=>{});
 });
+function showChecked(){const item=questions[index];document.querySelectorAll('.option').forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');if(j===chosen&&j!==item.a)b.classList.add('wrong');});const feedback=$('feedback');feedback.className='feedback show '+(chosen===item.a?'good':'bad');feedback.innerHTML=richText(item.why||'Correct answer: '+item.o[item.a]);$('check').style.display='none';$('continue').className='btn continue show';if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([feedback]).catch(()=>{});}
 $('continue').addEventListener('click',()=>{
- if(!locked)return;index++;if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ if(!locked)return;index++;locked=false;chosen=null;saveAttempt();if(index<questions.length){render();window.scrollTo({top:0,behavior:'smooth'});return;}
+ showResults();
+});
+function showResults(){
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
- saveLearningResult(score,questions.length);
+ engine.complete(snapshot(),dateKey(new Date()));refreshLearningScore();
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
+ card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(reviewMode?0:score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';
  const review=card.querySelector('#wrongReview');
  if(wrongAttempts.length){review.innerHTML='<h3>🧠 Review your mistakes</h3>';wrongAttempts.forEach((w,n)=>{const el=document.createElement('article');el.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+w.answer;const why=document.createElement('p');why.className='muted';why.textContent=w.explanation;el.append(q,yours,correct,why);review.appendChild(el);});}
  else review.innerHTML='<p>🌟 Perfect score! No mistakes to review.</p>';
  $('finishSlot').replaceChildren(card);
- function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];refreshLearningScore();$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){if(onlyWrong&&wrongAttempts.length){const wrong=wrongAttempts.map(w=>originalQuestions.find(q=>q.q===w.q)).filter(Boolean);questions.splice(0,questions.length,...wrong);}else questions.splice(0,questions.length,...originalQuestions);index=0;score=0;streak=0;wrongAttempts=[];chosen=null;locked=false;reviewMode=onlyWrong;attemptId=newId();saveAttempt();refreshLearningScore();$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  $('retry').addEventListener('click',()=>reset(false));$('retryWrong').addEventListener('click',()=>reset(true));
-});
+}
 load();
 })();
 </script>

@@ -89,14 +89,29 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
 .page-tab.active{background:#e8f8dc;border-color:#8ed65b;color:#286c12;box-shadow:0 3px 0 #b9e69c}
 @media(max-width:380px){.page-tab{font-size:11px;padding:8px 3px}}
 </style>
-</head>
+<style>
+.sp-revision{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 16px}.sp-revision .learn-card{min-width:0;margin:0}.sp-revision h2{font-size:clamp(18px,3vw,21px)}
+.sp-table{width:100%;border-collapse:collapse;font-size:12px}.sp-table th,.sp-table td{padding:7px 4px;text-align:left;border-bottom:1px solid #dce6ef}
+.sp-option{display:block;width:100%;min-height:44px;padding:11px;margin:8px 0;border:2px solid #dce6ef;border-radius:12px;background:#fff;color:#243447;text-align:left;font-weight:750;cursor:pointer}
+.sp-option[aria-pressed=true]{border-color:#1cb0f6;background:#e8f7ff}.sp-option:disabled{cursor:default}.sp-option:focus-visible,.sp-next:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
+.sp-feedback{min-height:32px;line-height:1.5;font-size:13px}.sp-next{min-height:44px;padding:11px 15px;border:0;border-radius:12px;background:#58cc02;color:#fff;font-weight:900;cursor:pointer}
+@media(max-width:640px){.sp-revision{grid-template-columns:minmax(0,1fr)}}
+</style></head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div></div></header>
 <main>
 <section class="hero page-hero"><h1>🏎️ Speed · Learn</h1><p class="muted">Build the concepts step by step with clear explanations.</p></section>
 <nav class="page-tabs" aria-label="Speed pages"><a class="page-tab active" href="physics-speed.html" aria-current="page">📘 Learn</a><a class="page-tab " href="physics-speed-simulator.html" >🎮 Simulator</a><a class="page-tab " href="physics-speed-practice.html" >🧠 Practice</a></nav>
 <div class="page-progress" id="pageProgress" role="status" aria-live="polite">Progress: 0/3 pages completed</div>
-<section class="learn-panel" id="learn">
+<section class="sp-revision" aria-label="Speed revision and quick check">
+<article class="learn-card" id="speedCheatsheet"><h2>📌 Quick Cheat Sheet</h2><p><strong>Speed</strong> measures the rate of distance travelled. It is a <strong>nonnegative scalar</strong>; the SI unit is m/s.</p>
+<table class="sp-table"><thead><tr><th>Concept</th><th>Formula or fact</th></tr></thead><tbody>
+<tr><td>Average speed</td><td>Total distance ÷ total elapsed time</td></tr><tr><td>Uniform speed</td><td>Equal distances in equal time intervals</td></tr><tr><td>Convert m/s → km/h</td><td>Multiply by 3.6</td></tr><tr><td>Convert km/h → m/s</td><td>Divide by 3.6</td></tr><tr><td>Round trip</td><td>Average speed may be positive although average velocity is zero</td></tr></tbody></table>
+<p><strong>Worked example:</strong> 150 m in 30 s → average speed = <strong>5 m/s = 18 km/h</strong>.</p>
+<p><strong>Two-stage example:</strong> 60 m in 10 s and 40 m in 20 s → average speed = 100/30 ≈ <strong>3.33 m/s</strong>, not the simple average of the two speeds.</p>
+<p><strong>NEET tip:</strong> average speed uses <em>total distance</em>, not displacement; instantaneous speed is the magnitude of instantaneous velocity. A positive elapsed time is required for division.</p>
+</article>
+<article class="learn-card" id="speedQuickCheck"><h2>⚡ Quick Check</h2><p>Five unlocked MCQs with explanations and unlimited retries.</p><div id="spQuestion" aria-live="polite"></div><div id="spOptions"></div><p id="spFeedback" class="sp-feedback" role="status" aria-live="polite"></p><button id="spNext" class="sp-next" type="button" hidden>Next question →</button></article></section><section class="learn-panel" id="learn">
   <div class="section-kicker">UNIT CONCEPT • SPEED</div><h2 class="practice-heading">📘 Learn: Speed</h2>
   <p class="muted">Speed describes how quickly an object covers distance. It compares the total path travelled with the time taken.</p>
   <div class="lesson-grid">
@@ -152,6 +167,21 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
   if(slot){new MutationObserver(function(){if(slot.children.length)complete();}).observe(slot,{childList:true});}
  }
  render();
+})();
+</script>
+<script>
+(function(){'use strict';
+const questions=[
+{q:'A cyclist covers 150 m in 30 s. Average speed?',a:['3 m/s','5 m/s','18 m/s','4500 m/s'],correct:1,why:'Average speed = total distance / time = 150 / 30 = 5 m/s.'},
+{q:'Convert 10 m/s to km/h.',a:['2.78 km/h','36 km/h','3.6 km/h','100 km/h'],correct:1,why:'Multiply m/s by 3.6: 10 × 3.6 = 36 km/h.'},
+{q:'An object covers 60 m in 10 s, then 40 m in 20 s. Average speed?',a:['4 m/s','6 m/s','3.33 m/s','2 m/s'],correct:2,why:'Total distance = 100 m and total time = 30 s, so 100/30 ≈ 3.33 m/s.'},
+{q:'A runner returns to the start after covering 400 m in 100 s. Average speed?',a:['0 m/s','4 m/s','400 m/s','−4 m/s'],correct:1,why:'Average speed = 400/100 = 4 m/s despite zero net displacement.'},
+{q:'Which statement about speed is correct?',a:['Speed has direction','Speed can be negative','Speed is distance per time and is scalar','Average speed uses displacement'],correct:2,why:'Speed is a scalar based on distance travelled, not signed displacement.'}
+];
+const q=document.getElementById('spQuestion'),opts=document.getElementById('spOptions'),fb=document.getElementById('spFeedback'),next=document.getElementById('spNext');if(!q||!opts||!fb||!next)return;let index=0,score=0,answered=false;
+function draw(){answered=false;fb.textContent='';next.hidden=true;opts.replaceChildren();if(index===questions.length){q.textContent='Complete! '+score+' / '+questions.length+' correct.';next.textContent='Try again';next.hidden=false;try{const key='skillup-speed-quickcheck-best';localStorage.setItem(key,String(Math.max(score,Number(localStorage.getItem(key))||0)));}catch(e){}return;}
+const item=questions[index];q.textContent='Question '+(index+1)+' of '+questions.length+': '+item.q;item.a.forEach(function(answer,i){const b=document.createElement('button');b.type='button';b.className='sp-option';b.textContent=String.fromCharCode(65+i)+'. '+answer;b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){if(answered)return;answered=true;const correct=i===item.correct;if(correct)score++;Array.from(opts.children).forEach(function(btn,j){btn.disabled=true;btn.setAttribute('aria-pressed',String(j===i));if(j===item.correct){btn.style.borderColor='#58cc02';btn.style.background='#efffe7';}});fb.textContent=(correct?'Correct! ':'Not quite. ')+item.why;next.textContent=index===questions.length-1?'See results →':'Next question →';next.hidden=false;});opts.appendChild(b);});}
+next.addEventListener('click',function(){if(index===questions.length){index=0;score=0;}else if(answered){index++;}draw();});draw();
 })();
 </script>
 </body>

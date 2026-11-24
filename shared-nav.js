@@ -176,6 +176,36 @@
     else document.body.insertAdjacentElement('afterbegin', tabs);
   }
 
+  // Physics: show only the two other destinations on separate topic pages.
+  // Keep in-page button-based tab interfaces intact.
+  if (/^\/physics-.*\.html$/i.test(location.pathname)) {
+    const currentPath = location.pathname;
+    const style = document.createElement('style');
+    style.textContent = '.su-two-destinations{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.su-two-destinations > [hidden]{display:none!important}.su-two-destinations > a{min-width:0!important;min-height:44px!important;width:100%!important;box-sizing:border-box}';
+    document.head.appendChild(style);
+    document.querySelectorAll('nav.tabs, nav.page-tabs, .su-topic-tabs, .page-tabs').forEach(nav => {
+      const links = Array.from(nav.children).filter(el => el.matches('a[href]'));
+      if (links.length !== 3) return;
+      const kind = a => {
+        const label = a.textContent.trim().toLowerCase();
+        if (/\blearn\b/.test(label)) return 'learn';
+        if (/\b(simulator|simulate)\b/.test(label)) return 'simulator';
+        if (/\b(practice|practise|quiz)\b/.test(label)) return 'practice';
+        return '';
+      };
+      if (new Set(links.map(kind)).size !== 3 || links.some(a => !kind(a))) return;
+      const same = links.filter(a => {
+        try { const url = new URL(a.href, location.href); return url.origin === location.origin && url.pathname === currentPath && !url.hash; }
+        catch (_) { return false; }
+      });
+      const marked = links.filter(a => a.getAttribute('aria-current') === 'page' || a.classList.contains('active'));
+      const active = same.length === 1 ? same[0] : same.length === 0 && marked.length === 1 ? marked[0] : null;
+      if (!active) return;
+      active.hidden = true;
+      nav.classList.add('su-two-destinations');
+    });
+  }
+
   // Android WebView compatibility: preserve same-site target=_blank navigation.
   document.addEventListener('click', event => {
     const link = event.target && event.target.closest ? event.target.closest('a[target="_blank"]') : null;

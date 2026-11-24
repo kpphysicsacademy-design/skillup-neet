@@ -125,11 +125,11 @@
       !document.querySelector('link[href*="physics-duolingo-quiz.css"]')) {
     const physicsTheme = document.createElement('link');
     physicsTheme.rel = 'stylesheet';
-    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261122-unified-architecture-v2';
+    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261124-soft-palette-v3';
     document.head.appendChild(physicsTheme);
     const physicsDesign = document.createElement('link');
     physicsDesign.rel = 'stylesheet';
-    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    physicsDesign.href = '/physics-design-system.css?v=20261124-central-palette-v2';
     document.head.appendChild(physicsDesign);
   }
 
@@ -139,7 +139,7 @@
       !document.querySelector('link[href*="physics-design-system.css"]')) {
     const physicsDesign = document.createElement('link');
     physicsDesign.rel = 'stylesheet';
-    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    physicsDesign.href = '/physics-design-system.css?v=20261124-central-palette-v2';
     document.head.appendChild(physicsDesign);
   }
 

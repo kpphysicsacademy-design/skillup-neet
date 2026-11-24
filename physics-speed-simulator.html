@@ -122,7 +122,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
     <div class="sim-stat"><strong id="speedKmh">36 km/h</strong><span>IN KM/H</span></div>
     <div class="sim-stat"><strong id="speedPace">10 s</strong><span>TIME TAKEN</span></div>
   </div>
-  <p class="sim-note" id="speedExplain" aria-live="polite">Average speed = distance ÷ time = 100 ÷ 10 = 10 m/s = 36 km/h.</p>
+  <p class="sim-note" id="speedExplain" role="status" aria-live="polite">Average speed = distance ÷ time = 100 ÷ 10 = 10 m/s = 36 km/h.</p>
   <div class="sim-actions"><button class="sim-reset" id="speedReset" type="button">↺ Reset values</button></div>
 </section>
 <script>
@@ -134,8 +134,8 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
  const fmt=n=>Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');
  function updateSpeed(){
   const dRaw=$('speedDistance').value.trim(),tRaw=$('speedTime').value.trim();
-  const d=dRaw===''?0:Number(dRaw),t=tRaw===''?0:Number(tRaw);
-  const valid=Number.isFinite(d)&&Number.isFinite(t)&&d>=0&&t>0;
+  const d=dRaw===''?NaN:Number(dRaw),t=tRaw===''?NaN:Number(tRaw);
+  const valid=Number.isFinite(d)&&Number.isFinite(t)&&d>=0&&t>0&&d<=1000000000&&t<=1000000000&&Number.isFinite(d/t)&&Number.isFinite((d/t)*3.6);
   const vehicle=$('speedVehicle'),ticks=$('speedTicks');
   ticks.replaceChildren();
   for(let i=0;i<=5;i++){const x=42+i*111;const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',x);line.setAttribute('x2',x);line.setAttribute('y1','130');line.setAttribute('y2','137');line.setAttribute('stroke','#6c91aa');line.setAttribute('stroke-width','2');ticks.append(line);}
@@ -143,7 +143,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,5vw,32px);line-height:1.2;color:#174a78}.
    vehicle.setAttribute('transform','translate(42 0)');
    $('speedMs').textContent='—';$('speedKmh').textContent='—';$('speedPace').textContent='—';
    $('speedDistanceLabel').textContent='Enter valid values';
-   $('speedExplain').textContent='Enter a distance of zero or more metres and a time greater than zero seconds to calculate average speed.';
+   $('speedExplain').textContent='Enter a valid distance from 0 to 1,000,000,000 m and a time greater than 0 up to 1,000,000,000 s; avoid values that overflow speed calculations.';
    return;
   }
   const v=d/t,kmh=v*3.6,progress=d===0?0:Math.min(1,Math.max(.08,d/(d+50)));

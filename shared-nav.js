@@ -125,11 +125,11 @@
       !document.querySelector('link[href*="physics-duolingo-quiz.css"]')) {
     const physicsTheme = document.createElement('link');
     physicsTheme.rel = 'stylesheet';
-    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261122-unified-architecture-v2';
+    physicsTheme.href = '/physics-duolingo-quiz.css?v=20261124-soft-palette-v3';
     document.head.appendChild(physicsTheme);
     const physicsDesign = document.createElement('link');
     physicsDesign.rel = 'stylesheet';
-    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    physicsDesign.href = '/physics-design-system.css?v=20261124-central-palette-v2';
     document.head.appendChild(physicsDesign);
   }
 
@@ -139,7 +139,7 @@
       !document.querySelector('link[href*="physics-design-system.css"]')) {
     const physicsDesign = document.createElement('link');
     physicsDesign.rel = 'stylesheet';
-    physicsDesign.href = '/physics-design-system.css?v=20261122-central-v1';
+    physicsDesign.href = '/physics-design-system.css?v=20261124-central-palette-v2';
     document.head.appendChild(physicsDesign);
   }
 
@@ -203,7 +203,7 @@
       if (!active) return;
       active.hidden = true;
       nav.classList.add('su-two-destinations');
-      const colors = {learn:['#c5def0','#719fbe'],simulator:['#d8d0ef','#9b87c5'],practice:['#c9e6ad','#82ad56']};
+      const colors = {learn:['#c4d4dc','#829eac'],simulator:['#d4cddd','#a197ad'],practice:['#c5d6b7','#819b70']};
       links.filter(a => a !== active).forEach(a => {
         const [bg,border] = colors[kind(a)];
         const rules = {'background':bg,'color':'#000','border':'2px solid '+border,'box-shadow':'0 3px 0 '+border,'min-height':'48px','border-radius':'12px','font-size':'14px','font-weight':'800','text-decoration':'none','display':'grid','place-items':'center','text-align':'center'};

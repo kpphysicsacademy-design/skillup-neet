@@ -1,0 +1,14 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const path=require('node:path');
+const home=fs.readFileSync(path.join(__dirname,'../zoology-home.html'),'utf8');
+const quiz=fs.readFileSync(path.join(__dirname,'../zoology-mcq.html'),'utf8');
+const start=home.indexOf('var units='),end=home.indexOf('var p=document',start);
+assert.ok(start>=0&&end>start);
+const ctx={};vm.createContext(ctx);vm.runInContext(home.slice(start,end),ctx);
+test('all catalog IDs unique',()=>{assert.equal(new Set(ctx.a.map(x=>x.id)).size,ctx.a.length);assert.equal(ctx.units.length,14);});
+test('Biodiversity titles have distinct IDs',()=>{const rows=ctx.a.filter(x=>x.c==='Biodiversity');assert.equal(rows.length,2);assert.notEqual(rows[0].id,rows[1].id);});
+test('resume uses full catalog and renders target',()=>{assert.match(home,/matches=a\.filter/);assert.match(home,/Math\.max\(I,target\.ix\)/);assert.ok(ctx.a.at(-1).ix>20);});
+test('quiz loader does not fall back to unrelated global array',()=>{assert.doesNotMatch(quiz,/\|\|arrays\[0\]/);});

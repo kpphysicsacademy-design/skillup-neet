@@ -62,7 +62,10 @@ service cloud.firestore {
 
     // Learning/progress records: private to the account owner.
     match /skillup_progress/{docId} {
-      allow get: if ownExisting();
+      // Permit an owner to transactionally read their not-yet-created Chemistry record.
+      allow get: if ownExisting() || (signedIn() &&
+        docId.matches(request.auth.uid + '_chemistry_[a-z0-9-]+') &&
+        !exists(/databases/$(database)/documents/skillup_progress/$(docId)));
       allow list: if signedIn() && resource.data.user_id == request.auth.uid;
       allow create: if ownNew();
       allow update: if ownExisting() &&

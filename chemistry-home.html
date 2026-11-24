@@ -215,6 +215,15 @@ html body.chemistry-path-refresh .home-menu-toggle:hover,html body.chemistry-pat
 /* Straight, consistently aligned Chemistry learning path. */
 html body.chemistry-path-refresh .path .chapter{width:100%!important;max-width:none!important;margin:0 0 15px!important;transform:none!important;left:auto!important;right:auto!important}
 html body.chemistry-path-refresh .path .chapter a{width:100%!important;box-sizing:border-box!important}
+
+/* Uniform concept button dimensions, including long titles. */
+html body.chemistry-path-refresh .path .chapter{width:100%!important;height:84px!important;min-height:84px!important;max-height:84px!important;transform:none!important}
+html body.chemistry-path-refresh .path .chapter a{height:84px!important;min-height:84px!important;max-height:84px!important;width:100%!important;box-sizing:border-box!important;transform:none!important}
+html body.chemistry-path-refresh .path .chapter .title{min-width:0!important;line-height:1.3!important;overflow-wrap:anywhere!important}
+html body.chemistry-path-refresh .path .chapter .title span{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+
+html body.chemistry-path-refresh .path .chapter a>div{min-width:0!important}
+@media(max-width:360px){html body.chemistry-path-refresh .path .chapter a{padding:8px!important;gap:6px!important}html body.chemistry-path-refresh .path .chapter .title{font-size:13px!important}}
 </style>
 </head>
 <body class="chemistry-path-refresh">
@@ -275,7 +284,7 @@ function formatTitle(s){var small={and:1,or:1,of:1,the:1,in:1,on:1,for:1,to:1,by
 var unitIcons=['','⚖️','⚛️','🔗','🌡️','🧪','⚖️','🔋','⏱️','📊','🧱','⚙️','🧲','🧪','🧬','⛓️','🧪','🌸','🧬','🥚','🧫'];function iconFor(x){return unitIcons[x.u]||'🧪';}function unit(x){return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.n)+'</h2><small>CHEMISTRY CONCEPTS • UNIT '+x.u+' of 20</small></div></div></div>';}
 
 var chemSvgShapes=["<circle cx=\"12\" cy=\"12\" r=\"3\"/><ellipse cx=\"12\" cy=\"12\" rx=\"10\" ry=\"5\"/><ellipse cx=\"12\" cy=\"12\" rx=\"10\" ry=\"5\" transform=\"rotate(60 12 12)\"/>","<path d=\"M9 3h6m-5 0v7L4 20h16l-6-10V3M7 15h10\"/>","<path d=\"M6 6l12 12M6 18 18 6\"/><circle cx=\"6\" cy=\"6\" r=\"3\"/><circle cx=\"18\" cy=\"18\" r=\"3\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"6\" r=\"3\"/>","<path d=\"M10 4v11a5 5 0 1 0 4 0V4a2 2 0 0 0-4 0zM12 9v9\"/>","<path d=\"M3 6h18M12 6v14M6 6 2 15h8zM18 6l-4 9h8z\"/>","<path d=\"m13 2-9 12h7l-1 8 10-13h-7z\"/>","<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 5v7l5 3\"/>","<path d=\"M3 3v18h18M6 16l5-7 4 4 5-8\"/>","<path d=\"m12 3 9 5v9l-9 5-9-5V8zM12 3v10m9-5-9 5-9-5m9 5v9\"/>","<path d=\"m12 3 8 5v9l-8 4-8-4V8zM7 9l5-3m5 4v5m-5 3-5-3\"/>","<path d=\"M5 3c20 9-6 9 14 18M19 3C-1 12 25 12 5 21M8 6h8M8 18h8M9 12h6\"/>"];function chemPathIcon(x){var t=(x.c+' '+x.n).toLowerCase(),i=/atomic|atom|periodic/.test(t)?0:/bond/.test(t)?2:/thermo|temperature/.test(t)?3:/equilibrium|mole|stoichio/.test(t)?4:/electro|redox/.test(t)?5:/kinetic|rate/.test(t)?6:/graph|solution/.test(t)?7:/solid/.test(t)?8:/organic|hydrocarbon|aromatic/.test(t)?9:/bio|polymer/.test(t)?10:1;return '<span class="chem-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+chemSvgShapes[i]+'</svg></span>';}
-function card(x){var href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id);return '<article class="chapter"><span class="node"></span><a href="'+href+'">'+chemPathIcon(x)+'<div><div class="title"><span>'+esc(formatTitle(x.c))+'</span></div></div><span class="go">›</span></a></article>';}
+function card(x){var href='chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id);return '<article class="chapter"><span class="node"></span><a title="'+esc(x.c)+'" href="'+href+'">'+chemPathIcon(x)+'<div><div class="title"><span>'+esc(formatTitle(x.c))+'</span></div></div><span class="go">›</span></a></article>';}
 function render(list,limit){p.innerHTML='';shown=Math.min(limit,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(shown>=activeList.length)return;var start=shown,end=Math.min(shown+B,activeList.length),h='',last=shown?activeList[shown-1].u:0;for(var i=start;i<end;i++){if(activeList[i].u!==last){h+=unit(activeList[i]);last=activeList[i].u;}h+=card(activeList[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 render(a,I);

@@ -434,7 +434,7 @@ const questions = [
     "e": "For positive distance over a finite positive time, average speed is positive."
   }
 ];
-let index=0,score=0,streak=0,chosen=null,locked=false;
+let index=0,score=0,streak=0,chosen=null,locked=false,wrong=[];
 const $=id=>document.getElementById(id);
 function render(){
  chosen=null;locked=false;
@@ -461,7 +461,7 @@ $('check').addEventListener('click',()=>{
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
  if(chosen===item.a){score++;streak++;$('xp').textContent=score*10;$('streak').textContent=streak;f.className='feedback show good';f.textContent='✨ Correct! '+item.e;}
- else{streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
+ else{wrong.push({question:item.q,chosen:item.o[chosen],answer:item.o[item.a],explanation:item.e});streak=0;$('streak').textContent=streak;buttons[chosen].classList.add('wrong');f.className='feedback show bad';f.textContent='Not quite. '+item.e+' Correct answer: '+item.o[item.a]+'.';}
  $('check').style.display='none';$('continue').className='btn continue show';
 });
 $('continue').addEventListener('click',()=>{
@@ -470,8 +470,10 @@ $('continue').addEventListener('click',()=>{
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100);
  const card=document.createElement('section');card.className='finish';
- card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><button class="btn" id="retry">Practice again</button>';
- $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
+ card.innerHTML='<div class="trophy">🏆</div><h2>Nice work!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(score*10)+' XP earned</p><div id="wrongReview"></div><button class="btn" id="retry">Practice again</button>';
+const review=card.querySelector('#wrongReview');if(wrong.length){const heading=document.createElement('h3');heading.textContent='Review your mistakes';review.appendChild(heading);wrong.forEach((w,i)=>{const item=document.createElement('article');item.className='review';[String(i+1)+'. '+w.question,'Your answer: '+w.chosen,'Correct answer: '+w.answer,w.explanation].forEach(t=>{const line=document.createElement('p');line.textContent=t;item.appendChild(line);});review.appendChild(item);});}else{review.textContent='🌟 Perfect score!';}
+try{const key='skillup-speed-practice-best';localStorage.setItem(key,String(Math.max(score,Number(localStorage.getItem(key))||0)));}catch(e){}
+ $('finishSlot').replaceChildren(card);$('retry').addEventListener('click',()=>{index=0;score=0;streak=0;wrong=[];$('xp').textContent='0';$('streak').textContent='0';$('quiz').style.display='block';$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});});
 });
 render();
 })();

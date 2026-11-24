@@ -119,7 +119,7 @@ main{width:min(100% - 28px,720px);margin:0 auto;padding:20px 0 48px}
 <div class="controls">
 <div class="control"><label for="mass">Mass <output id="massOut">5 kg</output></label><input id="mass" type="range" min="1" max="20" step="1" value="5"></div>
 <div class="control"><label for="force">Applied force <output id="forceOut">20 N</output></label><input id="force" type="range" min="0" max="100" step="1" value="20"></div>
-<div class="control"><label for="friction">Friction force <output id="frictionOut">5 N</output></label><input id="friction" type="range" min="0" max="100" step="1" value="5"></div>
+<div class="control"><label for="friction">Maximum opposing friction (simplified model) <output id="frictionOut">5 N</output></label><input id="friction" type="range" min="0" max="100" step="1" value="5"></div>
 <div class="control"><label for="gravity">Gravitational field, g <output id="gravityOut">9.8 m/s²</output></label><input id="gravity" type="range" min="1" max="20" step=".1" value="9.8"></div>
 </div>
 </section>
@@ -129,7 +129,7 @@ main{width:min(100% - 28px,720px);margin:0 auto;padding:20px 0 48px}
 <div class="metric"><strong id="weight">49 N</strong><span>Weight (mg)</span></div>
 <div class="metric"><strong id="normal">49 N</strong><span>Normal force*</span></div>
 </div></section>
-<section class="card"><h2>How is it calculated?</h2><div class="equation" id="working" aria-live="polite">Fnet = Fapplied − Ffriction = 20 − 5 = 15 N<br>a = Fnet / m = 15 / 5 = 3 m/s²<br>W = mg = 5 × 9.8 = 49 N</div><p class="muted" style="margin-top:10px">*Assuming a horizontal surface, no vertical acceleration and no additional vertical forces. Friction is modelled as a constant opposing force and cannot exceed the applied force in this simplified example.</p></section>
+<section class="card"><h2>How is it calculated?</h2><div class="equation" id="working" aria-live="polite">Fnet = Fapplied − Fopposing = 20 − 5 = 15 N<br>a = Fnet / m = 15 / 5 = 3 m/s²<br>W = mg = 5 × 9.8 = 49 N</div><p class="muted" style="margin-top:10px">*Assuming a horizontal surface, no vertical acceleration and no additional vertical forces. Friction is modelled as a constant opposing force and cannot exceed the applied force in this simplified example.</p></section>
 <section class="card"><div class="tip" id="interpretation">The applied force is greater than friction, so the block accelerates to the right.</div><button class="reset" id="reset" type="button">↺ Reset values</button></section>
 <section class="card"><h2>Try this</h2><p class="muted">Set applied force equal to friction. What happens to acceleration? Then increase the mass while keeping net force constant. Observe how acceleration changes.</p></section>
 </section>
@@ -218,8 +218,8 @@ function update(){
  $('forceLabel').textContent='Applied force: '+F+' N';
  $('net').textContent=fmt(net)+' N';$('accel').textContent=fmt(a)+' m/s²';$('weight').textContent=fmt(w)+' N';$('normal').textContent=fmt(w)+' N';
  $('working').innerHTML='Fnet = Fapplied − Ffriction = '+F+' − '+opposing+' = '+fmt(net)+' N<br>a = Fnet / m = '+fmt(net)+' / '+m+' = '+fmt(a)+' m/s²<br>W = mg = '+m+' × '+fmt(g)+' = '+fmt(w)+' N';
- $('interpretation').textContent=net===0?'Applied force is balanced by friction. Net force and acceleration are zero.': 'The net force is '+fmt(net)+' N to the right, so the block accelerates to the right at '+fmt(a)+' m/s².';
- const shift=Math.min(20,F/5);$('block').style.left=(50+shift)+'%';$('forceArrow').style.width=Math.max(8,Math.min(150,F*1.3))+'px';$('forceArrow').style.opacity=F===0?'.12':'1';
+ $('interpretation').textContent=net===0?'Applied force is balanced by static friction in this simplified model. Net force and acceleration are zero; the block need not move.': 'The net force is '+fmt(net)+' N to the right, so the block accelerates to the right at '+fmt(a)+' m/s².';
+ const shift=Math.min(20,net/5);$('block').style.left=(50+shift)+'%';$('forceArrow').style.width=Math.max(8,Math.min(150,F*1.3))+'px';$('forceArrow').style.opacity=F===0?'.12':'1';
 }
 controls.forEach(id=>$(id).addEventListener('input',update));
 $('reset').addEventListener('click',()=>{['5','20','5','9.8'].forEach((v,i)=>$(controls[i]).value=v);update()});

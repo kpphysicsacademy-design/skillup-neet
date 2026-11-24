@@ -276,7 +276,7 @@ function loadBank(file){return new Promise((resolve,reject)=>{
  script.onload=()=>{
   const arrays=Object.keys(window).filter(name=>/^skillUp.*Questions$/i.test(name)).map(name=>window[name]).filter(value=>Array.isArray(value)&&value.length&&value.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x));
   const token=String(file).replace(/-question-bank\.js$/i,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
-  const found=arrays.find(value=>{const name=Object.keys(window).find(k=>window[k]===value)||'';return name.toLowerCase().replace(/[^a-z0-9]/g,'').includes(token);})||arrays[0];
+  const found=arrays.find(value=>{const name=Object.keys(window).find(k=>window[k]===value)||'';return name.toLowerCase().replace(/[^a-z0-9]/g,'').includes(token);});
   found?resolve(found):reject(new Error('No valid question bank array found in '+file));
  };
  script.onerror=()=>reject(new Error('Question bank file could not be loaded: '+file));document.head.appendChild(script);

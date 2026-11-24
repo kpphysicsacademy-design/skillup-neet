@@ -20,6 +20,10 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offse
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 <link rel="stylesheet" href="physics-duolingo-quiz.css?v=1">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js">
 </head>
 <body>
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="pill xp">⭐ <span id="xp">0</span> XP</div><div class="pill streak">🔥 <span id="streak">0</span> streak</div></div></header>
@@ -184,11 +188,11 @@ try{if(bank.length!==30)throw new Error('Expected 30 questions');}catch(err){$('
 <script>
 (function(){const key='skillup-physics-physical-quantities-pages-v1';let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){}const el=document.getElementById('pageProgress');if(el)el.textContent='Progress: '+(['learn','sim','practice'].filter(k=>state[k]).length)+'/3 pages completed';const slot=document.getElementById('finishSlot');if(slot)new MutationObserver(()=>{if(slot.children.length){try{state.practice=true;localStorage.setItem(key,JSON.stringify(state));el.textContent='Progress: 3/3 pages completed';}catch(e){}}}).observe(slot,{childList:true});})();
 </script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="central-config.js"></script><script src="central-auth.js"></script>
-<script>(async function(){if(window.SkillUpAuth){const session=await window.SkillUpAuth.requireAuth(location.href);if(session){const uid=session.user&&session.user.uid;if(uid)window.dispatchEvent(new CustomEvent('skillup-quiz-auth-ready',{detail:{uid}}));}}})();</script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script defer src="central-config.js"></script><script defer src="central-auth.js"></script>
+<script>document.addEventListener('DOMContentLoaded',async function(){if(window.SkillUpAuth){const session=await window.SkillUpAuth.requireAuth(location.href);if(session){const uid=session.user&&session.user.uid;if(uid)window.dispatchEvent(new CustomEvent('skillup-quiz-auth-ready',{detail:{uid}}));}}},{once:true});</script>
 <script src="/skillup-eye-shield.js?v=20261013-eye-shield-v1"></script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>
 </body></html>

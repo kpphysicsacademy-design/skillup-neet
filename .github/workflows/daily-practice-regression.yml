@@ -1,0 +1,27 @@
+name: Daily practice regression
+
+on:
+  pull_request:
+    paths:
+      - 'assets/daily-test.js'
+      - 'take-a-test.html'
+      - 'data/daily-test-starter.json'
+      - '.github/scripts/test-daily-test.cjs'
+      - '.github/workflows/deploy.yml'
+      - '.github/workflows/daily-practice-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  daily-practice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate daily practice banks and simulator
+        run: node .github/scripts/test-daily-test.cjs

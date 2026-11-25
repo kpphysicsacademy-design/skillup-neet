@@ -57,11 +57,12 @@ Migrate one page archetype at a time. Compare desktop and mobile screenshots, te
 1. Additive design tokens, shared primitives and CI contract test (this change).
 2. Migrate Botany subject-home archetype and verify existing routes/content (started in this change).
 3. Adopt shared platform tokens and header on Botany Quick Learn, Practice/Quiz and Cheat Sheet pages without changing question-bank or lesson data (started in this change).
-4. Complete the Botany Learn and Simulator archetypes, then validate all four concept routes using one canonical concept.
-5. Verify concept registry and question-bank resolution.
-6. Migrate Physics, Chemistry, Zoology and Mathematics one subject at a time.
-7. Add cross-subject progress and Test Centre end-to-end regression coverage.
-8. Enable production deployment only after CI and manual mobile/browser verification.
+4. Validate Quick Learn bank resolution for all 476 Botany concepts: use the concept-specific bank when present and the 61 explicitly mapped focused-bank fallbacks where required.
+5. Add a concept-specific Simulator only when an actual interactive model and a verified route exist; do not invent a generic simulator or link.
+6. Verify the canonical concept registry and remaining question-bank aliases.
+7. Migrate Physics, Chemistry, Zoology and Mathematics one subject at a time.
+8. Add cross-subject progress and Test Centre end-to-end regression coverage.
+9. Enable production deployment only after CI and manual mobile/browser verification.
 
 ## Acceptance criteria
 - No curriculum, question-bank or canonical route deletion during visual migration.

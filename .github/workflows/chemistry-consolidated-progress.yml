@@ -1,0 +1,29 @@
+name: Chemistry progress account isolation
+on:
+  pull_request:
+    paths:
+      - 'central-auth.js'
+      - 'chemistry-mcq.html'
+      - 'chemistry-progress.js'
+      - 'firestore.rules'
+      - 'tests/central-auth-session.test.cjs'
+      - 'tests/chemistry-progress.test.cjs'
+      - '.github/workflows/chemistry-consolidated-progress.yml'
+permissions:
+  contents: read
+jobs:
+  chemistry-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test account session restoration
+        run: node --test tests/central-auth-session.test.cjs
+      - name: Test Chemistry progress isolation and replay protection
+        run: node --test tests/chemistry-progress.test.cjs
+      - name: Check Chemistry quiz inline JavaScript syntax
+        run: |
+          python3 -c "import re,pathlib; s=pathlib.Path('chemistry-mcq.html').read_text(); pathlib.Path('/tmp/chemistry-quiz.js').write_text('\n'.join(re.findall(r'<script>(.*?)</script>',s,re.S)))"
+          node --check /tmp/chemistry-quiz.js

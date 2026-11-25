@@ -41,3 +41,5 @@ assert.doesNotMatch(page,/requireAuth/,'Daily practice must remain available wit
  assert.equal(await noAuth.saveDailyPracticeProgress({exam:'JEE'}),false,'anonymous practice must not write account data');
  console.log('Account-scoped daily practice progress passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
+
+// Account-progress assertions are executed by the single daily-practice-regression workflow.

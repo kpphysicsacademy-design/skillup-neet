@@ -288,8 +288,17 @@ function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',la
 function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 var resumeParams=new URLSearchParams(location.search);
 var resumeId=resumeParams.get('resumeId'),resumeTitle=(resumeParams.get('resumeConcept')||'').trim().toLowerCase();
-var matches=a.filter(function(x){return resumeId?x.id===resumeId:resumeTitle&&x.c.toLowerCase()===resumeTitle;});
-var target=matches.length===1?matches[0]:null;
+function resolveResumeTarget(list,id,title){
+ if(id)return list.find(function(x){return x.id===id;})||null;
+ if(!title)return null;
+ var matches=list.filter(function(x){return x.c.toLowerCase()===title;});
+ if(matches.length===1)return matches[0];
+ // Older saved records contain only the duplicated title "Biodiversity".
+ // Keep those legacy links deterministic by routing to its original NCERT unit.
+ if(title==='biodiversity')return matches.find(function(x){return x.n==='Diversity in Living World';})||null;
+ return null;
+}
+var target=resolveResumeTarget(a,resumeId,resumeTitle);
 render(a,target?Math.max(I,target.ix):I);
 if(target){var el=document.getElementById(target.id);if(el){el.scrollIntoView({block:'center'});el.style.outline='4px solid #58cc02';setTimeout(function(){el.style.outline='';},5000);}}
 

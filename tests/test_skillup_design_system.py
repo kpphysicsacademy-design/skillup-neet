@@ -88,7 +88,30 @@ for unit in botany_units:
 
 for source in focused_sources.values():
     if source:
-        assert (ROOT / "question-banks" / f"{source}-question-bank.js").is_file(), f"Missing focused-bank source: {source}"
+        source_path = ROOT / "question-banks" / f"{source}-question-bank.js"
+        assert source_path.is_file(), f"Missing focused-bank source: {source}"
+
+# Verify every focused() registry reference resolves to an exported source-bank symbol.
+for focused_name, source_name in re.findall(
+    r"window\\.(skillUpFocused\\w+Questions)=focus\\(window\\.(skillUp\\w+Questions)",
+    focused_registry,
+):
+    source_path = ROOT / "question-banks" / f"{next((slug for slug in focused_sources.values() if slug and (ROOT / 'question-banks' / f'{slug}-question-bank.js').is_file() and source_name in (ROOT / 'question-banks' / f'{slug}-question-bank.js').read_text(encoding='utf-8')), '')}-question-bank.js"
+    assert source_path.is_file(), f"{focused_name} source bank file is missing"
+    assert source_name in source_path.read_text(encoding="utf-8"), f"{focused_name} source symbol {source_name} is not exported"
+
+# Placeholder-only dedicated banks are disabled; their concepts must have a real direct bank.
+concept_names = {re.sub(r"[^a-z0-9]", "", concept[0].lower()): concept[0] for unit in botany_units for concept in unit[1]}
+for focused_name in re.findall(r"window\\.(skillUpFocused\\w+Questions)=dedicated\\(", focused_registry):
+    suffix = re.sub(r"[^a-z0-9]", "", focused_name.replace("skillUpFocused", "").replace("Questions", "").lower())
+    title = concept_names.get(suffix)
+    assert title, f"No Botany curriculum concept matches placeholder registry {focused_name}"
+    direct_slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    direct_slug = bank_aliases.get(direct_slug, direct_slug)
+    direct_path = ROOT / "question-banks" / f"{direct_slug}-question-bank.js"
+    direct_symbol = focused_name.replace("skillUpFocused", "skillUp")
+    assert direct_path.is_file(), f"Placeholder bank {focused_name} has no direct bank file"
+    assert direct_symbol in direct_path.read_text(encoding="utf-8"), f"Direct bank for {title} does not export {direct_symbol}"
 
 
 

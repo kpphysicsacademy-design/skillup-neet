@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 html = (ROOT / "take-a-test.html").read_text(encoding="utf-8")
 css = (ROOT / "assets/test-centre.css").read_text(encoding="utf-8")
 
-assert re.search(r'<section\\s+id="examPanel"[^>]*\\bhidden', html, re.I)
+assert re.search(r'<section\s+id="examPanel"[^>]*\bhidden', html, re.I)
 assert "main:has(#examPanel:not([hidden]))" in css
 assert "main:has(#examPanel:not([hidden])) > :is(header,h1,p,footer)" in css
 assert "#examPanel #clock{top:0" in css

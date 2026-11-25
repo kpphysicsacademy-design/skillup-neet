@@ -23,6 +23,10 @@ if report.get("sitemap_missing_page_count", 0):
     failures["sitemap_missing_page_count"] = report["sitemap_missing_page_count"]
 if not report.get("robots_txt_ok", False):
     failures["robots_txt_ok"] = "false"
+for title, rows in report.get("details", {}).get("duplicate_title_pages", {}).items():
+    print("DUPLICATE TITLE:", title, "=>", [row.get("path") for row in rows])
+for row in report.get("details", {}).get("title_length_out_of_range", []):
+    print("TITLE LENGTH:", row.get("path"), row.get("title_length"), row.get("title"))
 print(json.dumps({
     "pages_scanned": report.get("pages_scanned"),
     "sitemap_url_count": report.get("sitemap_url_count"),

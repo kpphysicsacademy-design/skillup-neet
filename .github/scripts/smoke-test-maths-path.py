@@ -2,6 +2,7 @@
 """Deployment smoke test for the SkillUp Maths learning path."""
 from pathlib import Path
 import re
+import subprocess
 
 root = Path(__file__).resolve().parents[2]
 home_path = root / "maths-home.html"

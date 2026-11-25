@@ -47,6 +47,18 @@ def main() -> None:
             '</head><body><h1>Example quiz</h1></body></html>',
             encoding="utf-8",
         )
+        (root / "physics-no-heading.html").write_text(
+            '<!doctype html><html><head><title>SkillUp Physics | No Heading</title></head>'
+            '<body><main><p>Content without a semantic page heading.</p></main></body></html>',
+            encoding="utf-8",
+        )
+        (root / "physics-multiple-headings.html").write_text(
+            '<!doctype html><html><head><title>SkillUp Physics | Multiple Headings</title></head>'
+            '<body><main><h1>Primary heading</h1><h1>Secondary heading</h1>'
+            '<script>document.querySelector("#x").innerHTML = "<h1>Dynamic heading</h1>";</script>'
+            '</main></body></html>',
+            encoding="utf-8",
+        )
         (root / "private.html").write_text(
             '<!doctype html><html><head><title>Private</title>'
             '<meta name="robots" content="noindex"></head><body>Private</body></html>',
@@ -81,6 +93,13 @@ def main() -> None:
         assert "private.html" not in site_map
         assert "redirect.html" not in site_map
         assert "admin.html" not in site_map
+        no_heading = (root / "physics-no-heading.html").read_text(encoding="utf-8")
+        assert '<h1 class="skillup-seo-heading">No Heading</h1>' in no_heading
+        multiple = (root / "physics-multiple-headings.html").read_text(encoding="utf-8")
+        without_scripts = re.sub(r"<script\\b.*?</script\\s*>", "", multiple, flags=re.I | re.S)
+        assert len(re.findall(r"<h1\\b", without_scripts, re.I)) == 1
+        assert "<h2>Secondary heading</h2>" in multiple
+        assert "<h2>Dynamic heading</h2>" in multiple
         assert canonical(site_map) == "https://skillupedu.in/site-map.html"
         assert 70 <= len(meta_content(site_map, "description")) <= 160
         learn_title = re.search(r"<title>(.*?)</title>", (root / "physics-example-learn.html").read_text(encoding="utf-8"), re.I).group(1)

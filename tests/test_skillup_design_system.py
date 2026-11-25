@@ -125,6 +125,41 @@ for focused_name in re.findall(r"window\.(skillUpFocused\w+Questions)=dedicated\
     assert direct_path.is_file(), f"Placeholder bank {focused_name} has no direct bank file"
     assert direct_symbol in direct_path.read_text(encoding="utf-8"), f"Direct bank for {title} does not export {direct_symbol}"
 
+# Execute the mapped source/direct banks and validate the Quick Learn data contract.
+runtime_specs = []
+for topic, source in focused_sources.items():
+    if not source:
+        continue
+    focused_suffix = normalise(topic)
+    focused_name, source_name = next(
+        (focused_name, source_name) for focused_name, source_name in focus_assignments
+        if normalise(focused_name.replace("skillUpFocused", "").replace("Questions", "")) == focused_suffix
+    )
+    runtime_specs.append((str(ROOT / "question-banks" / f"{source}-question-bank.js"), source_name))
+for focused_name in re.findall(r"window\.(skillUpFocused\w+Questions)=dedicated\(", focused_registry):
+    suffix = normalise(focused_name.replace("skillUpFocused", "").replace("Questions", ""))
+    title = concept_names[suffix]
+    direct_slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    direct_slug = bank_aliases.get(direct_slug, direct_slug)
+    runtime_specs.append((str(ROOT / "question-banks" / f"{direct_slug}-question-bank.js"), focused_name.replace("skillUpFocused", "skillUp")))
+runtime_specs = list(dict.fromkeys(runtime_specs))
+runtime_script = r"""
+global.window = global;
+const specs = JSON.parse(process.argv[1]);
+for (const path of [...new Set(specs.map(x => x[0]))]) require(path);
+for (const [path, name] of specs) {
+  const bank = global[name];
+  if (!Array.isArray(bank) || bank.length === 0) throw new Error(name + " did not load a non-empty question bank from " + path);
+  const bad = bank.find((item, i) => !item || typeof item.q !== "string" || !item.q.trim() ||
+    !Array.isArray(item.o) || item.o.length !== 4 || !Number.isInteger(Number(item.a)) ||
+    Number(item.a) < 0 || Number(item.a) > 3 || typeof item.e !== "string" || !item.e.trim());
+  if (bad) throw new Error(name + " contains a question incompatible with Quick Learn (q/o/a/e contract)");
+}
+console.log("Validated " + specs.length + " direct/focused Quick Learn bank exports");
+"""
+bank_runtime = subprocess.run(["node", "-e", runtime_script, json.dumps(runtime_specs)], text=True, capture_output=True)
+assert bank_runtime.returncode == 0, "Botany Quick Learn bank runtime validation failed: " + bank_runtime.stderr
+
 
 physics_home = (ROOT / "physics-home-fast.html").read_text(encoding="utf-8")
 

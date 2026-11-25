@@ -4,6 +4,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   route:
     runs-on: ubuntu-latest
@@ -30,12 +31,18 @@ jobs:
           grep -q "uniform motion.*physics-uniform-motion.html" physics-concept.html
           grep -q "projectile motion.*physics-projectile-motion.html" physics-concept.html
           grep -q "equations of motion.*physics-equations-of-motion.html" physics-concept.html
-      - name: Commit route changes
-        shell: bash
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add physics-concept.html
-          git diff --cached --quiet && exit 0
-          git commit -m 'Add Uniform Motion and Physics concept routes'
-          git push
+      - name: Propose Physics route changes for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/physics-equations-motion-routes
+          delete-branch: true
+          commit-message: 'Propose Physics concept route aliases'
+          title: 'Review Physics equations and motion route aliases'
+          body: |
+            This PR contains the output of the Physics concept-route workflow.
+
+            Verify the aliases and destination pages before merging.
+            The workflow no longer pushes generated changes directly to main.
+          add-paths: |
+            physics-concept.html

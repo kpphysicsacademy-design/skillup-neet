@@ -246,6 +246,7 @@ body .fill{background:#58cc02!important}
 <section id="result" class="finish" style="display:none">
 <div class="trophy">🏆</div><h2>Quiz complete!</h2><div id="final" class="score">0 / 0</div><p id="message" class="muted"></p>
 <div id="wrongReview" class="review"></div>
+<p id="progressSync" class="muted" role="status" aria-live="polite">Your result will be saved to your account when the quiz is complete.</p>
 <button id="retryWrong" class="btn" style="display:none">↻ Retry wrong answers</button>
 <button id="restart" class="btn">Practice all questions again</button>
 <a href="zoology-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Zoology Path</a>
@@ -301,6 +302,23 @@ function loadBank(file){return new Promise((resolve,reject)=>{
  };
  script.onerror=()=>reject(new Error('Question bank file could not be loaded: '+file));document.head.appendChild(script);
 });}
+async function persistZoologyProgress(score,total,percentage){
+ const auth=window.SkillUpAuth;
+ if(!auth||typeof auth.saveProgress!=='function')return false;
+ await auth.saveProgress({
+  subject:'Zoology',
+  topic:conceptId||requested,
+  concept:requested,
+  concept_id:conceptId||'',
+  completed:true,
+  score:Number(score),
+  total_questions:Number(total),
+  percentage:Number(percentage),
+  xp:Number(score)*10
+ });
+ return true;
+}
+window.SkillUpZoologyProgress=persistZoologyProgress;
 function startZoologyQuiz(source,conceptName){
  const original=source.slice(0,30);let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
@@ -325,6 +343,15 @@ function startZoologyQuiz(source,conceptName){
  function finish(){
   quiz.style.display='none';document.getElementById('result').style.display='block';const pct=Math.round(score/questions.length*100);
   document.getElementById('final').textContent=score+' / '+questions.length;document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
+  const sync=document.getElementById('progressSync');
+  if(sync){
+   sync.textContent='Saving progress to your account…';
+   persistZoologyProgress(score,questions.length,pct).then(saved=>{
+    sync.textContent=saved?'Progress saved to your account.':'Account sync is unavailable; this result remains visible for this session.';
+   }).catch(()=>{
+    sync.textContent='Progress could not be synced. Your result remains visible for this session.';
+   });
+  }
   const review=document.getElementById('wrongReview');review.replaceChildren();
   if(wrongAttempts.length){const h=document.createElement('h3');h.textContent='🧠 Review your mistakes';review.appendChild(h);wrongAttempts.forEach((w,n)=>{const card=document.createElement('article');card.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.item.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const idx=answerIndex(w.item);const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+((w.item.o||[])[idx]??'Not specified');const why=document.createElement('p');why.className='muted';why.textContent=w.item.e||'';card.append(q,yours,correct,why);review.appendChild(card);});document.getElementById('retryWrong').style.display='block';}
   else{const p=document.createElement('p');p.textContent='🌟 Perfect score! No mistakes to review.';review.appendChild(p);document.getElementById('retryWrong').style.display='none';}

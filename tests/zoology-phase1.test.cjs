@@ -46,3 +46,30 @@ test('loader rejects an unrelated question-bank global instead of silently using
  const c=loaderContext(),unrelated=[{q:'wrong',o:['A','B'],a:0}];
  assert.equal(c.resolveBankArray('taxonomy-and-systematics-question-bank.js',{skillUpWrongQuestions:unrelated}),null);
 });
+
+test('completed Zoology quiz saves progress through the signed-in account adapter',async()=>{
+ const conceptId='zoo-Ecology%20and%20Environment--Biodiversity';
+ let saved=null;
+ const c={conceptId,requested:'Biodiversity',window:{SkillUpAuth:{saveProgress:async row=>{saved=row;}}}};
+ vm.createContext(c);
+ const start=quiz.indexOf('async function persistZoologyProgress'),end=quiz.indexOf('function startZoologyQuiz',start);
+ assert.ok(start>=0&&end>start);
+ vm.runInContext(quiz.slice(start,end),c);
+ assert.equal(await c.persistZoologyProgress(24,30,80),true);
+ assert.equal(saved.subject,'Zoology');
+ assert.equal(saved.topic,conceptId,'duplicate concept titles must be stored with their unit-qualified ID');
+ assert.equal(saved.concept,'Biodiversity');
+ assert.equal(saved.concept_id,conceptId);
+ assert.equal(saved.completed,true);
+ assert.equal(saved.score,24);
+ assert.equal(saved.total_questions,30);
+ assert.equal(saved.percentage,80);
+ assert.equal(saved.xp,240);
+});
+test('progress persistence does not write when the account adapter is unavailable',async()=>{
+ const c={conceptId:'',requested:'Aves',window:{}};
+ vm.createContext(c);
+ const start=quiz.indexOf('async function persistZoologyProgress'),end=quiz.indexOf('function startZoologyQuiz',start);
+ vm.runInContext(quiz.slice(start,end),c);
+ assert.equal(await c.persistZoologyProgress(10,30,33),false);
+});

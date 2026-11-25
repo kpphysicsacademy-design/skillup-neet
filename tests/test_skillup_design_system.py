@@ -60,7 +60,7 @@ for page_name, page in (("Botany quiz", botany_quiz), ("Botany Quick Learn", bot
 assert "botany-63-focused-question-banks.js" in botany_learn
 assert "focusedSourceByConcept" in botany_learn
 focused_registry = (ROOT / "botany-63-focused-question-banks.js").read_text(encoding="utf-8")
-assert re.search(r"function\\s+dedicated\\s*\\([^)]*\\)\\s*\\{\\s*return\\s*\\[\\s*\\];\\s*\\}", focused_registry), "Placeholder focused banks must remain disabled until real academic questions are supplied"
+assert re.search(r"function\s+dedicated\s*\([^)]*\)\s*\{\s*return\s*\[\s*\];\s*\}", focused_registry), "Placeholder focused banks must remain disabled until real academic questions are supplied"
 assert "replace(/^Focused/,'')" in botany_learn
 fallback_match = re.search(r"const focusedSourceByConcept=(\{[\s\S]*?\n\});", botany_learn)
 assert fallback_match, "Quick Learn focused-bank mapping is missing"

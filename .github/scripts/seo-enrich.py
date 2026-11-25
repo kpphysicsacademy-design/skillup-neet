@@ -69,7 +69,7 @@ class MetaParser(HTMLParser):
             elif name in {"robots", "googlebot"}:
                 self.robots.append(values.get("content", "").lower())
             elif values.get("http-equiv", "").lower() == "refresh":
-                refresh = re.search(r"^\\s*\\d+\\s*;\\s*url\\s*=\\s*['\\"]?([^'\\"]+)", values.get("content", ""), re.I)
+                refresh = re.search(r"^\s*\d+\s*;\s*url\s*=\s*['\\"]?([^'\\"]+)", values.get("content", ""), re.I)
                 if refresh:
                     self.redirect_target = refresh.group(1).strip()
         elif tag == "link" and "canonical" in values.get("rel", "").lower().split():
@@ -327,12 +327,12 @@ def clean_url(value: str) -> str:
 
 
 def ensure_canonical(content: str, canonical_url: str, current_url: str) -> str:
-    tag_re = re.compile(r"<link\\b(?=[^>]*\\brel\\s*=\\s*['\\"][^'\\"]*canonical[^'\\"]*['\\"])[^>]*>", re.I)
+    tag_re = re.compile(r"<link\b(?=[^>]*\brel\s*=\s*['\\"][^'\\"]*canonical[^'\\"]*['\\"])[^>]*>", re.I)
     match = tag_re.search(content)
     if not match:
-        return insert_head(content, f'<link rel="canonical" href="{escape(canonical_url, quote=True)}">\\n')
+        return insert_head(content, f'<link rel="canonical" href="{escape(canonical_url, quote=True)}">\n')
     tag = match.group(0)
-    href_re = re.compile(r"\\bhref\\s*=\\s*(['\\"])(.*?)\\1", re.I | re.S)
+    href_re = re.compile(r"\bhref\s*=\s*(['\\"])(.*?)\1", re.I | re.S)
     href_match = href_re.search(tag)
     if not href_match:
         new_tag = tag[:-1] + f' href="{escape(canonical_url, quote=True)}">'

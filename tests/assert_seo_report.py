@@ -15,6 +15,7 @@ required_zero = (
     "missing_canonical",
     "multiple_canonical_tags",
     "duplicate_titles",
+    "duplicate_canonical_urls",
     "broken_internal_links",
     "orphan_pages_no_html_inbound_link",
 )

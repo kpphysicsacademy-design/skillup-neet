@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 tokens = (ROOT / "assets/skillup-design-tokens.css").read_text(encoding="utf-8")
 components = (ROOT / "assets/skillup-platform.css").read_text(encoding="utf-8")
 docs = (ROOT / "docs/architecture/centralized-design-system.md").read_text(encoding="utf-8")
+botany = (ROOT / "botany-home.html").read_text(encoding="utf-8")
 
 required_tokens = [
     "--su-color-ink", "--su-color-primary", "--su-color-success",
@@ -35,4 +36,10 @@ for subject in ("Physics", "Chemistry", "Botany", "Zoology", "Mathematics"):
 assert "questionBankId" in docs
 assert "authenticated UID" in docs
 assert "Do not infer a question-bank match" in docs
+
+# Botany is the first migrated reference page and must consume the shared system.
+assert "assets/skillup-design-tokens.css" in botany
+assert "assets/skillup-platform.css" in botany
+for adopted_class in ("su-header", "su-brand", "su-shell", "su-hero", "su-hero__title", "su-pill-row", "su-pill"):
+    assert adopted_class in botany, f"Botany reference page is missing {adopted_class}"
 print("SkillUp shared design-system contract passed")

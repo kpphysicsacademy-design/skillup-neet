@@ -11,7 +11,7 @@ from collections import defaultdict
 from html import escape
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import quote, urljoin
+from urllib.parse import quote, urljoin, urlsplit, urlunsplit
 import re
 import sys
 
@@ -47,6 +47,7 @@ class MetaParser(HTMLParser):
         self.in_svg = 0
         self.description = ""
         self.canonical = ""
+        self.redirect_target = ""
         self.robots: list[str] = []
         self.h1_count = 0
 
@@ -67,6 +68,10 @@ class MetaParser(HTMLParser):
                 self.description = values.get("content", "")
             elif name in {"robots", "googlebot"}:
                 self.robots.append(values.get("content", "").lower())
+            elif values.get("http-equiv", "").lower() == "refresh":
+                refresh = re.search(r"^\\s*\\d+\\s*;\\s*url\\s*=\\s*['\\"]?([^'\\"]+)", values.get("content", ""), re.I)
+                if refresh:
+                    self.redirect_target = refresh.group(1).strip()
         elif tag == "link" and "canonical" in values.get("rel", "").lower().split():
             self.canonical = values.get("href", "")
 
@@ -316,21 +321,38 @@ def replace_description(content: str, description: str) -> str:
     return content[:match.start()] + new_tag + content[match.end():]
 
 
-def ensure_canonical(content: str, url: str) -> str:
-    tag_re = re.compile(r"<link\b(?=[^>]*\brel\s*=\s*['\"][^'\"]*canonical[^'\"]*['\"])[^>]*>", re.I)
+def clean_url(value: str) -> str:
+    parsed = urlsplit(value)
+    return urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
+
+
+def ensure_canonical(content: str, canonical_url: str, current_url: str) -> str:
+    tag_re = re.compile(r"<link\\b(?=[^>]*\\brel\\s*=\\s*['\\"][^'\\"]*canonical[^'\\"]*['\\"])[^>]*>", re.I)
     match = tag_re.search(content)
     if not match:
-        return insert_head(content, f'<link rel="canonical" href="{escape(url, quote=True)}">\n')
+        return insert_head(content, f'<link rel="canonical" href="{escape(canonical_url, quote=True)}">\\n')
     tag = match.group(0)
-    href_re = re.compile(r"\bhref\s*=\s*(['\"])(.*?)\1", re.I | re.S)
+    href_re = re.compile(r"\\bhref\\s*=\\s*(['\\"])(.*?)\\1", re.I | re.S)
     href_match = href_re.search(tag)
     if not href_match:
-        new_tag = tag[:-1] + f' href="{escape(url, quote=True)}">'
+        new_tag = tag[:-1] + f' href="{escape(canonical_url, quote=True)}">'
     else:
         existing = href_match.group(2).strip()
-        absolute = existing if existing.startswith(("http://", "https://")) else urljoin(url, existing)
+        absolute = existing if existing.startswith(("http://", "https://")) else urljoin(current_url, existing)
+        absolute = clean_url(absolute)
         new_tag = href_re.sub(f'href="{escape(absolute, quote=True)}"', tag, count=1)
     return content[:match.start()] + new_tag + content[match.end():]
+
+
+def is_public_canonical_page(path: Path, root: Path) -> bool:
+    info = parse_page(path.read_text(encoding="utf-8", errors="replace"))
+    if info.noindex:
+        return False
+    own_url = page_url(path, root)
+    if not info.canonical:
+        return True
+    canonical = info.canonical if info.canonical.startswith(("http://", "https://")) else urljoin(own_url, info.canonical)
+    return clean_url(canonical) == clean_url(own_url)
 
 
 def normalize_page(path: Path, root: Path) -> None:
@@ -344,7 +366,11 @@ def normalize_page(path: Path, root: Path) -> None:
     current = parse_page(content).description
     if not current or len(current) < 70 or len(current) > 160:
         content = replace_description(content, generated_description(path, title) if not current or len(current) < 70 else fit_description(current))
-    content = ensure_canonical(content, page_url(path, root))
+    own_url = page_url(path, root)
+    canonical_url = own_url
+    if info.redirect_target:
+        canonical_url = clean_url(urljoin(own_url, info.redirect_target))
+    content = ensure_canonical(content, canonical_url, own_url)
     path.write_text(content, encoding="utf-8")
 
 
@@ -359,7 +385,7 @@ def generate_html_sitemap(root: Path, pages: list[Path]) -> Path:
             continue
         content = path.read_text(encoding="utf-8", errors="replace")
         info = parse_page(content)
-        if info.noindex:
+        if info.noindex or not is_public_canonical_page(path, root):
             continue
         rel = path.relative_to(root).as_posix()
         href = "/" if rel == "index.html" else "/" + quote(rel, safe="/-._~")
@@ -442,7 +468,7 @@ def main() -> int:
 
     public_pages = [
         path for path in html_pages(root)
-        if path.name != "site-map.html" and not parse_page(path.read_text(encoding="utf-8", errors="replace")).noindex
+        if path.name != "site-map.html" and is_public_canonical_page(path, root)
     ]
     sitemap_page = generate_html_sitemap(root, public_pages)
     add_site_map_link(root)

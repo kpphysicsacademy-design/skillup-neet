@@ -10,7 +10,18 @@ assert.ok(start>=0&&end>start);
 const ctx={};vm.createContext(ctx);vm.runInContext(home.slice(start,end),ctx);
 test('all catalog IDs unique',()=>{assert.equal(new Set(ctx.a.map(x=>x.id)).size,ctx.a.length);assert.equal(ctx.units.length,14);});
 test('Biodiversity titles have distinct IDs',()=>{const rows=ctx.a.filter(x=>x.c==='Biodiversity');assert.equal(rows.length,2);assert.notEqual(rows[0].id,rows[1].id);});
-test('resume uses full catalog and renders target',()=>{assert.match(home,/matches=a\.filter/);assert.match(home,/Math\.max\(I,target\.ix\)/);assert.ok(ctx.a.at(-1).ix>20);});
+test('resume uses the full catalog and resolves duplicate legacy Biodiversity records deterministically',()=>{
+ assert.match(home,/Math\\.max\\(I,target\\.ix\\)/);
+ assert.ok(ctx.a.at(-1).ix>20);
+ const start=home.indexOf('function resolveResumeTarget('),end=home.indexOf('var target=resolveResumeTarget',start);
+ assert.ok(start>=0&&end>start);
+ const c={};vm.createContext(c);vm.runInContext(home.slice(start,end),c);
+ const rows=ctx.a.filter(x=>x.c==='Biodiversity');
+ assert.equal(rows.length,2);
+ const legacy=c.resolveResumeTarget(ctx.a,'','biodiversity');
+ assert.equal(legacy.n,'Diversity in Living World');
+ assert.equal(c.resolveResumeTarget(ctx.a,rows[1].id,'biodiversity').id,rows[1].id);
+});
 test('quiz loader does not fall back to unrelated global array',()=>{assert.doesNotMatch(quiz,/\|\|arrays\[0\]/);});
 
 const loaderStart=quiz.indexOf('function slug('),loaderEnd=quiz.indexOf('function loadBank(',loaderStart);

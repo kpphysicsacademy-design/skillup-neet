@@ -28,7 +28,7 @@ jobs:
           root = Path('.')
           version = '20261125-unified-botany-theme-v1'
           route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test)', re.I)
-          shared_pattern = re.compile(r'(<script\\b[^>]*\\bsrc\\s*=\\s*)(["\\'])([^"\\']*shared-nav\\.js)(?:\\?[^"\\']*)?\\2', re.I)
+          shared_pattern = re.compile(r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""", re.I)
           changed = []
           scanned = 0
 
@@ -50,13 +50,13 @@ jobs:
                   original
               )
 
-              if count == 0 and not re.search(r'shared-nav\\.js', original, re.I):
+              if count == 0 and not re.search(r'shared-nav\.js', original, re.I):
                   tag = f'<script src="/shared-nav.js?v={version}"></script>'
-                  match = re.search(r'</body\\s*>', updated, re.I)
+                  match = re.search(r'</body\s*>', updated, re.I)
                   if match:
-                      updated = updated[:match.start()] + tag + '\\n' + updated[match.start():]
+                      updated = updated[:match.start()] + tag + '\n' + updated[match.start():]
                   else:
-                      updated = updated.rstrip() + '\\n' + tag + '\\n'
+                      updated = updated.rstrip() + '\n' + tag + '\n'
 
               if updated != original:
                   path.write_text(updated, encoding='utf-8')

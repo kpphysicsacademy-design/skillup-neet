@@ -17,6 +17,18 @@ if f'maths-path-data.js?v={version}' not in home:
 if "window.SKILLUP_MATH_PATH" not in data:
     raise SystemExit("FAIL: maths-path-data.js does not define SKILLUP_MATH_PATH")
 
+# Catch a malformed data bundle before it reaches the browser.
+data_syntax = subprocess.run(["node", "--check", str(data_path)], text=True, capture_output=True)
+if data_syntax.returncode:
+    raise SystemExit("FAIL: invalid JavaScript in maths-path-data.js:\\n" + data_syntax.stderr)
+
+service_worker_path = root / "service-worker.js"
+if not service_worker_path.is_file():
+    raise SystemExit("FAIL: service-worker.js is missing")
+service_worker = service_worker_path.read_text(encoding="utf-8")
+if "maths-path-data\\.js" not in service_worker or "fetch(request, freshTheme ? {cache:'no-cache'} : {})" not in service_worker:
+    raise SystemExit("FAIL: service worker must refresh Maths path data with a network-first no-cache request")
+
 levels = re.findall(r'^\s{4}"(?:CLASS \d+|IIT JEE)[^"]*"\s*,\s*\{', data, re.M)
 chapters = re.findall(r'^\s{6}"[^"]+"\s*:\s*\[', data, re.M)
 concepts = re.findall(r'^\s{8}"[^"]+"\s*,?\s*$', data, re.M)

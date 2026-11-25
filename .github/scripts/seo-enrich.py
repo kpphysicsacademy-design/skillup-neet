@@ -400,8 +400,9 @@ def demote_dynamic_h1(content: str, keep_first: bool) -> str:
         token_re = re.compile(r"""<h1\b[^>]*>|createElement\(\s*(["'])h1\1\s*\)""", re.I)
         tokens = list(token_re.finditer(code))
         first_kind = None
-        if keep_first and tokens:
+        if keep_available[0] and tokens:
             first_kind = "literal" if tokens[0].group(0).lower().startswith("<h1") else "created"
+            keep_available[0] = False
 
         open_count = 0
         def open_tag(tag_match):

@@ -226,4 +226,57 @@
       // Leave malformed or unsupported URLs to the browser's default handling.
     }
   }, false);
+
+  // Shared Botany-quiz visual system: applied to all subject paths and quiz routes.
+  // Palette and component treatment are aligned with botany-mcq.html.
+  if (!document.getElementById('skillup-unified-learning-theme')) {
+    const style = document.createElement('style');
+    style.id = 'skillup-unified-learning-theme';
+    style.textContent = `
+      :root{
+        color-scheme:light!important;
+        --su-page:#f3f5ff;--su-ink:#29345d;--su-muted:#737d91;
+        --su-line:#e0e4f0;--su-paper:#fff;--su-purple:#51469b;
+        --su-purple-soft:#eeeaff;--su-green:#58b92a;--su-green-soft:#eff9eb;
+      }
+      html,body{background:var(--su-page)!important;color:var(--su-ink)}
+      body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+      .top,header.top{background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--su-line)!important}
+      .card,.quiz-card,.question-card,.question-container,.question-panel,
+      .chapter-card,.concept-card,.topic-card,.subject-card,.unit-card,
+      .quiz,.finish,.status,.sheet-card,.cheat-card{
+        background:var(--su-paper)!important;color:var(--su-ink)!important;
+        border:1.5px solid var(--su-line)!important;border-radius:20px!important;
+        box-shadow:0 4px 15px rgba(41,52,93,.055)!important;
+      }
+      .hero,.page-hero,.subject-hero{
+        border-radius:23px!important;
+        background:linear-gradient(125deg,#292653 0%,#51469b 100%)!important;
+        color:#fff!important;box-shadow:0 10px 24px rgba(45,39,105,.16)!important;
+      }
+      .hero h1,.page-hero h1,.subject-hero h1{color:#fff!important}
+      .hero p,.hero .muted,.page-hero p{color:#e7e6ff!important}
+      .eyebrow,.pill,.badge{border-radius:999px}
+      .option,.choice,.answer,.answer-option,.option-btn,
+      button.answer,button.option{
+        border-radius:14px!important;border-color:#e1e4f0!important;
+      }
+      .option.selected,.choice.selected,.answer.selected,.answer-option.selected{
+        background:#f0edff!important;border-color:#8c7be0!important;
+      }
+      .option.correct,.choice.correct,.answer.correct,.answer-option.correct,
+      .correct{background:var(--su-green-soft)!important;border-color:#a9d99b!important;color:#347b2c!important}
+      .option.wrong,.choice.wrong,.answer.wrong,.answer-option.wrong,
+      .wrong{background:#fff2f0!important;border-color:#e6b7b2!important;color:#963d36!important}
+      .btn.check,.btn-primary,.primary-btn,.check-btn,.submit-btn,
+      button.primary{background:var(--su-green)!important;color:#fff!important;border-color:var(--su-green)!important}
+      .btn.continue,.btn-secondary,.secondary-btn{background:var(--su-purple)!important;color:#fff!important}
+      .progress,.progress-track,.track{background:#e4e6f3!important}
+      .progress-bar,.progress-fill,.fill{background:var(--su-green)!important}
+      a:focus-visible,button:focus-visible{outline:2px solid var(--su-purple)!important;outline-offset:3px}
+      @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
 })();

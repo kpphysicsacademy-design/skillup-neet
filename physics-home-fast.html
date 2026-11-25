@@ -407,4 +407,23 @@ if(mb&&mn){mb.onclick=function(){var o=mn.classList.toggle('open');mb.setAttribu
 </script>
 
 
+
+<!-- Mobile first-load viewport guard: prevent restored WebView scroll offsets from clipping the hero/header. -->
+<script>
+(function(){
+  'use strict';
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('resumeConcept') || window.location.hash) return;
+  var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (nav && nav.type === 'back_forward') return;
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (_) {}
+  function resetInitialViewport(){
+    if (window.scrollY > 0) window.scrollTo({top:0,left:0,behavior:'instant'});
+  }
+  resetInitialViewport();
+  window.addEventListener('pageshow', function(){
+    requestAnimationFrame(resetInitialViewport);
+  }, {once:true});
+})();
+</script>
 </body></html>

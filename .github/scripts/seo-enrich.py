@@ -49,7 +49,10 @@ class MetaParser(HTMLParser):
         self.canonical = ""
         self.redirect_target = ""
         self.robots: list[str] = []
-        self.h1_count = 0
+        self.static_h1_count = 0
+        self.dynamic_h1_count = 0
+        self.in_script = False
+        self.script_buffer: list[str] = []
 
     def handle_starttag(self, tag: str, attrs) -> None:
         tag = tag.lower()
@@ -58,10 +61,13 @@ class MetaParser(HTMLParser):
             self.in_head = True
         elif tag == "svg":
             self.in_svg += 1
+        elif tag == "script":
+            self.in_script = True
+            self.script_buffer = []
         elif tag == "title" and self.in_head and self.in_svg == 0:
             self.in_title = True
-        elif tag == "h1":
-            self.h1_count += 1
+        elif tag == "h1" and not self.in_script:
+            self.static_h1_count += 1
         elif tag == "meta":
             name = values.get("name", "").lower()
             if name == "description":
@@ -83,14 +89,27 @@ class MetaParser(HTMLParser):
             self.in_svg -= 1
         elif tag == "head":
             self.in_head = False
+        elif tag == "script" and self.in_script:
+            code = "".join(self.script_buffer)
+            literal_h1 = len(re.findall(r"<h1\\b", code, re.I))
+            created_h1 = len(re.findall(r"""createElement\\(\\s*["']h1["']\\s*\\)""", code, re.I))
+            self.dynamic_h1_count += max(literal_h1, created_h1)
+            self.in_script = False
+            self.script_buffer = []
 
     def handle_data(self, data: str) -> None:
         if self.in_title:
             self.title_parts.append(data)
+        if self.in_script:
+            self.script_buffer.append(data)
 
     @property
     def title(self) -> str:
         return re.sub(r"\s+", " ", " ".join(self.title_parts)).strip()
+
+    @property
+    def h1_count(self) -> int:
+        return self.static_h1_count + self.dynamic_h1_count
 
     @property
     def noindex(self) -> bool:
@@ -355,6 +374,95 @@ def is_public_canonical_page(path: Path, root: Path) -> bool:
     return clean_url(canonical) == clean_url(own_url)
 
 
+def demote_static_h1(content: str) -> str:
+    parts = re.split(r"(<script\\b[^>]*>.*?</script\\s*>)", content, flags=re.I | re.S)
+    open_count = 0
+    close_count = 0
+    for index in range(0, len(parts), 2):
+        def open_tag(match):
+            nonlocal open_count
+            open_count += 1
+            tag = "h1" if open_count == 1 else "h2"
+            return "<" + tag + match.group(1) + ">"
+        def close_tag(match):
+            nonlocal close_count
+            close_count += 1
+            return "</h1>" if close_count == 1 else "</h2>"
+        parts[index] = re.sub(r"<h1\\b([^>]*)>", open_tag, parts[index], flags=re.I)
+        parts[index] = re.sub(r"</h1\\s*>", close_tag, parts[index], flags=re.I)
+    return "".join(parts)
+
+
+def demote_dynamic_h1(content: str, keep_first: bool) -> str:
+    script_re = re.compile(r"(<script\\b[^>]*>)(.*?)(</script\\s*>)", re.I | re.S)
+    def transform(match):
+        code = match.group(2)
+        token_re = re.compile(r"""<h1\\b[^>]*>|createElement\\(\\s*(["'])h1\\1\\s*\\)""", re.I)
+        tokens = list(token_re.finditer(code))
+        first_kind = None
+        if keep_first and tokens:
+            first_kind = "literal" if tokens[0].group(0).lower().startswith("<h1") else "created"
+
+        open_count = 0
+        def open_tag(tag_match):
+            nonlocal open_count
+            open_count += 1
+            if first_kind == "literal" and open_count == 1:
+                return tag_match.group(0)
+            return re.sub(r"<h1", "<h2", tag_match.group(0), count=1, flags=re.I)
+        code = re.sub(r"<h1\\b[^>]*>", open_tag, code, flags=re.I)
+
+        close_count = 0
+        def close_tag(tag_match):
+            nonlocal close_count
+            close_count += 1
+            if first_kind == "literal" and close_count == 1:
+                return tag_match.group(0)
+            return "</h2>"
+        code = re.sub(r"</h1\\s*>", close_tag, code, flags=re.I)
+
+        created_count = 0
+        def created_tag(tag_match):
+            nonlocal created_count
+            created_count += 1
+            if first_kind == "created" and created_count == 1:
+                return tag_match.group(0)
+            return re.sub(r"h1", "h2", tag_match.group(0), count=1, flags=re.I)
+        code = re.sub(r"""createElement\\(\\s*(["'])h1\\1\\s*\\)""", created_tag, code, flags=re.I)
+        return match.group(1) + code + match.group(3)
+    return script_re.sub(transform, content)
+
+
+def insert_visible_h1(content: str, title: str) -> str:
+    heading = f'<h1 class="skillup-seo-heading">{escape(title)}</h1>\\n'
+    style = (
+        '<style id="skillup-seo-heading-style">'
+        '.skillup-seo-heading{max-width:1100px;margin:12px auto 16px;padding:0 16px;'
+        'color:#17265e;font:700 clamp(1.2rem,2.4vw,1.7rem)/1.25 system-ui,sans-serif;}'
+        '</style>\\n'
+    )
+    if 'id="skillup-seo-heading-style"' not in content:
+        content = insert_head(content, style)
+    main = re.search(r"<main\\b[^>]*>", content, re.I)
+    if main:
+        return content[:main.end()] + "\\n" + heading + content[main.end():]
+    body = re.search(r"<body\\b[^>]*>", content, re.I)
+    if body:
+        return content[:body.end()] + "\\n" + heading + content[body.end():]
+    return heading + content
+
+
+def normalize_headings(content: str, path: Path, title: str, info: MetaParser) -> str:
+    if info.static_h1_count > 1:
+        content = demote_static_h1(content)
+    if info.dynamic_h1_count:
+        content = demote_dynamic_h1(content, keep_first=(info.static_h1_count == 0))
+    refreshed = parse_page(content)
+    if refreshed.h1_count == 0:
+        content = insert_visible_h1(content, topic_for_description(path, title))
+    return content
+
+
 def normalize_page(path: Path, root: Path) -> None:
     content = path.read_text(encoding="utf-8", errors="replace")
     info = parse_page(content)
@@ -366,6 +474,8 @@ def normalize_page(path: Path, root: Path) -> None:
     current = parse_page(content).description
     if not current or len(current) < 70 or len(current) > 160:
         content = replace_description(content, generated_description(path, title) if not current or len(current) < 70 else fit_description(current))
+    heading_info = parse_page(content)
+    content = normalize_headings(content, path, title, heading_info)
     own_url = page_url(path, root)
     canonical_url = own_url
     if info.redirect_target:

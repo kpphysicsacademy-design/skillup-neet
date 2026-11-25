@@ -1,13 +1,11 @@
 name: Add Unit 1 Lesson 2 Characteristics MCQs
 
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/add-unit1-lesson2-characteristics-mcqs.yml']
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   add:
@@ -128,14 +126,17 @@ jobs:
           PY
           node --check /tmp/zoology-test.js
 
-      - name: Commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo 'No changes to commit'
-          else
-            git commit -m 'Add 30 MCQs for Characteristics of living organisms'
-            git push
-          fi
+      - name: Propose generated MCQs as a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/characteristics-living-organisms-mcqs
+          delete-branch: true
+          commit-message: 'Add 30 MCQs for Characteristics of living organisms'
+          title: 'Add 30 MCQs for Characteristics of living organisms'
+          body: |
+            Automated MCQ-generation proposal for review.
+
+            The workflow validates the 30-question source and generated dataset, then proposes the change to zoology-chapter-test.html. Review question quality, answer keys, explanations, duplicates, and runtime behavior before merging.
+          add-paths: |
+            zoology-chapter-test.html

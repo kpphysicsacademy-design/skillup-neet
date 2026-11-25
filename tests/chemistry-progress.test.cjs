@@ -1,0 +1,12 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const {create}=require('../chemistry-progress.js');
+function storage(){const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,v)};}
+const attempt=(overrides={})=>({id:'a',bank:'v1',ids:[0,1],index:2,score:1,locked:false,chosen:null,wrongAttempts:[],...overrides});
+test('completion replay does not award XP twice',()=>{const s=storage();create(s,'A','matter').complete(attempt(),'2026-11-24');const p=create(s,'A','matter');p.complete(attempt(),'2026-11-24');assert.equal(p.summary().xp,10);assert.equal(p.summary().quizzes,1);});
+test('accounts and topics isolate attempts',()=>{const s=storage(),p=create(s,'A','matter');p.save(attempt());p.complete(attempt(),'2026-11-24');assert.equal(create(s,'B','matter').restore('v1'),null);assert.equal(create(s,'B','matter').summary().xp,0);assert.equal(create(s,'A','atomic').restore('v1'),null);});
+test('unchecked and checked selection survive refresh',()=>{const s=storage();for(const locked of [false,true]){const a=attempt({index:0,score:locked?1:0,chosen:1,locked});create(s,'A','matter').save(a);assert.deepEqual(create(s,'A','matter').restore('v1'),a);}});
+test('wrong-only retry retains subset and earns no extra XP',()=>{const s=storage(),p=create(s,'A','matter');p.complete(attempt(),'2026-11-24');const a=attempt({id:'b',ids:[1],index:1,score:1,review:true});p.save(a);assert.deepEqual(create(s,'A','matter').restore('v1'),a);p.complete(a,'2026-11-24');assert.equal(p.summary().xp,10);});
+test('bank changes invalidate stale attempts',()=>{const p=create(storage(),'A','matter');p.save(attempt());assert.equal(p.restore('v2'),null);});
+test('storage failure retains in-memory progress',()=>{const p=create({getItem(){throw Error()},setItem(){throw Error()}},'A','matter');p.save(attempt());assert.deepEqual(p.restore('v1'),attempt());p.complete(attempt(),'2026-11-24');assert.equal(p.summary().xp,10);});
+test('invalid completion rejected',()=>{const p=create(storage(),'A','matter');assert.throws(()=>p.complete(attempt({index:1}),'2026-11-24'));});

@@ -1,13 +1,11 @@
 name: Add Unit 1 Lesson 1 MCQs
-# Trigger refresh: add the dedicated 30-question Lesson 1 test to the live source.
+# Manual-only content generation. All generated changes are proposed through a pull request.
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/add-unit1-lesson1-mcqs.yml']
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   add:
@@ -94,14 +92,19 @@ jobs:
               raise SystemExit(f'Expected 30, found {count}')
           PY
 
-      - name: Commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo 'No changes to commit'
-          else
-            git commit -m 'Add 30 MCQs for Unit 1 Lesson 1'
-            git push
-          fi
+      - name: Propose generated MCQs as a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/add-unit1-lesson1-mcqs
+          delete-branch: true
+          commit-message: 'Add 30 MCQs for Unit 1 Lesson 1'
+          title: 'Add 30 MCQs for Zoology Unit 1 Lesson 1'
+          body: |
+            Automated content-generation proposal.
+
+            - Adds the generated Unit 1 Lesson 1 question set.
+            - Runs the workflow's 30-question count validation before proposing changes.
+            - Requires normal review and CI before merge; does not update production directly.
+          add-paths: |
+            zoology-chapter-test.html

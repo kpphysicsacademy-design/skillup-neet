@@ -168,7 +168,7 @@ def normalized_title(path: Path, current: str) -> str:
     if 15 <= len(title) <= 65:
         return title
     without_brand = re.sub(
-        r"\\s*\\|\\s*SkillUp(?:\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science))?$",
+        r"\s*\|\s*SkillUp(?:\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science))?$",
         "",
         title,
         flags=re.I,
@@ -179,7 +179,7 @@ def normalized_title(path: Path, current: str) -> str:
         return without_brand
     first = current.split(" | ")[0].strip()
     generic_subject = re.fullmatch(
-        r"SkillUp\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science)",
+        r"SkillUp\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science)",
         first,
         flags=re.I,
     )

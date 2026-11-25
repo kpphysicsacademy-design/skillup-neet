@@ -167,10 +167,25 @@ def normalized_title(path: Path, current: str) -> str:
     title = re.sub(r"\s+", " ", title).strip(" |—-")
     if 15 <= len(title) <= 65:
         return title
+    without_brand = re.sub(
+        r"\\s*\\|\\s*SkillUp(?:\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science))?$",
+        "",
+        title,
+        flags=re.I,
+    ).strip()
+    if 15 <= len(without_brand) <= 54:
+        return without_brand + " | SkillUp"
+    if 15 <= len(without_brand) <= 65:
+        return without_brand
     first = current.split(" | ")[0].strip()
-    if 15 <= len(first) <= 54:
+    generic_subject = re.fullmatch(
+        r"SkillUp\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science)",
+        first,
+        flags=re.I,
+    )
+    if not generic_subject and 15 <= len(first) <= 54:
         return first + " | SkillUp"
-    if len(first) > 54:
+    if not generic_subject and len(first) > 54:
         return first[:54].rsplit(" ", 1)[0].rstrip(" |—-") + " | SkillUp"
     fallback = filename_title(path)
     if len(fallback) > 65:

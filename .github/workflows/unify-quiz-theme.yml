@@ -1,0 +1,81 @@
+name: Unify SkillUp quiz route theme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/unify-quiz-theme.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-shared-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Apply shared theme to all quiz routes
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+          version = '20261125-unified-botany-theme-v1'
+          route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test)', re.I)
+          shared_pattern = re.compile(r'(<script\\b[^>]*\\bsrc\\s*=\\s*)(["\\'])([^"\\']*shared-nav\\.js)(?:\\?[^"\\']*)?\\2', re.I)
+          changed = []
+          scanned = 0
+
+          for path in root.rglob('*.html'):
+              rel = path.as_posix()
+              if rel.startswith(('.git/', '.github/archived-workflows/')):
+                  continue
+              if not route_pattern.search(path.name):
+                  continue
+
+              scanned += 1
+              try:
+                  original = path.read_text(encoding='utf-8')
+              except (UnicodeDecodeError, OSError):
+                  continue
+
+              updated, count = shared_pattern.subn(
+                  lambda m: m.group(1) + m.group(2) + m.group(3).split('?')[0] + '?v=' + version + m.group(2),
+                  original
+              )
+
+              if count == 0 and not re.search(r'shared-nav\\.js', original, re.I):
+                  tag = f'<script src="/shared-nav.js?v={version}"></script>'
+                  match = re.search(r'</body\\s*>', updated, re.I)
+                  if match:
+                      updated = updated[:match.start()] + tag + '\\n' + updated[match.start():]
+                  else:
+                      updated = updated.rstrip() + '\\n' + tag + '\\n'
+
+              if updated != original:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(rel)
+
+          print(f'Scanned {scanned} quiz-related HTML routes; updated {len(changed)}.')
+          for name in changed:
+              print('UPDATED', name)
+          PY
+
+      - name: Commit and push route updates
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          if git diff --cached --quiet; then
+            echo "All matching routes already load the current shared theme."
+            exit 0
+          fi
+          git commit -m "Apply unified SkillUp theme to all quiz routes"
+          git push

@@ -86,4 +86,16 @@ for source in focused_sources.values():
         assert (ROOT / "question-banks" / f"{source}-question-bank.js").is_file(), f"Missing focused-bank source: {source}"
 
 
+
+physics_home = (ROOT / "physics-home-fast.html").read_text(encoding="utf-8")
+
+# Physics home adopts the shared tokens and primitives without replacing its
+# established Physics-specific path layout or its existing navigation.
+assert "assets/skillup-design-tokens.css" in physics_home
+assert "assets/skillup-platform.css" in physics_home
+assert 'class="physics-path-refresh"' in physics_home
+assert "su-subject-header" in physics_home
+assert "su-subject-brand" in physics_home
+assert "physics-home-fast.html" in docs
+
 print("SkillUp shared design-system contract passed")

@@ -72,7 +72,7 @@ for unit in ("length:", "mass:", "time:", "area:", "volume:", "speed:", "force:"
 sw = SW.read_text(encoding="utf-8")
 if "skillup-offline-v7-physics-capa" not in sw:
     fail("service worker cache version was not advanced")
-if "physics-physical-quantities-theme\\.css" not in sw:
+if "physics-physical-quantities-theme\.css" not in sw:
     fail("service worker does not fetch the topic stylesheet network-first")
 
 print("PASS: Physical Quantities release gate")

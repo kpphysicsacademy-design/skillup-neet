@@ -13,9 +13,9 @@ SCRIPT = ROOT / ".github" / "scripts" / "seo-enrich.py"
 
 
 def meta_content(page: str, name: str) -> str:
-    pattern = rf"""<meta\b(?=[^>]*\bname=["']{re.escape(name)}["'])[^>]*\bcontent=["'](.*?)["']"""
+    pattern = rf"""<meta\b(?=[^>]*\bname=["']{re.escape(name)}["'])[^>]*\bcontent=(["'])(.*?)\1"""
     match = re.search(pattern, page, re.I | re.S)
-    return match.group(1) if match else ""
+    return match.group(2) if match else ""
 
 
 def canonical(page: str) -> str:

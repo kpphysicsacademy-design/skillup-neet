@@ -84,7 +84,7 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(request);
-    const freshTheme = /^\/(?:shared-nav\.js|physics-design-system\.css|physics-duolingo-quiz\.css|physics-physical-quantities-theme\.css)$/.test(url.pathname);
+    const freshTheme = /^\/(?:shared-nav\.js|maths-path-data\.js|physics-design-system\.css|physics-duolingo-quiz\.css|physics-physical-quantities-theme\.css)$/.test(url.pathname);
     const networkFetch = fetch(request, freshTheme ? {cache:'no-cache'} : {}).then(response => {
       if (response && response.ok && response.type === 'basic') {
         cache.put(request, response.clone()).catch(() => {});

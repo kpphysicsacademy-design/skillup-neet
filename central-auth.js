@@ -25,7 +25,8 @@
 
   async function getSession(){
     if(!auth) return null;
-    const user=auth.currentUser||await authStateReady;
+    await authStateReady;
+    const user=auth.currentUser;
     return user?{user}:null;
   }
 

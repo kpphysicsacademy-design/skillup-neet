@@ -60,7 +60,7 @@ for page_name, page in (("Botany quiz", botany_quiz), ("Botany Quick Learn", bot
 assert "botany-63-focused-question-banks.js" in botany_learn
 assert "focusedSourceByConcept" in botany_learn
 assert "replace(/^Focused/,'')" in botany_learn
-fallback_match = re.search(r"const focusedSourceByConcept=(\\{[\\s\\S]*?\\n\\});", botany_learn)
+fallback_match = re.search(r"const focusedSourceByConcept=(\{[\s\S]*?\n\});", botany_learn)
 assert fallback_match, "Quick Learn focused-bank mapping is missing"
 focused_sources = json.loads(fallback_match.group(1))
 assert len(focused_sources) == 61, f"Expected 61 focused-bank mappings, found {len(focused_sources)}"

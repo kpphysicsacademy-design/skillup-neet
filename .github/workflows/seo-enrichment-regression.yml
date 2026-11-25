@@ -1,0 +1,26 @@
+name: SEO enrichment regression
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/seo-enrich.py'
+      - '.github/scripts/seo-audit.py'
+      - 'tests/test_seo_enrich.py'
+      - '.github/workflows/deploy.yml'
+      - '.github/workflows/seo-enrichment-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  seo-enrichment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run SEO enrichment regression
+        run: python3 tests/test_seo_enrich.py

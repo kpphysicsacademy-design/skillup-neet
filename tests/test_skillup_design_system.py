@@ -108,4 +108,22 @@ assert 'href="physics-physical-quantities-simulator.html"' in physics_lesson
 assert 'href="physics-physical-quantities-practice.html"' in physics_lesson
 assert "Physical quantities and measurement" in physics_lesson
 
+
+physics_simulator = (ROOT / "physics-physical-quantities-simulator.html").read_text(encoding="utf-8")
+physics_practice = (ROOT / "physics-physical-quantities-practice.html").read_text(encoding="utf-8")
+for page_name, page in (("Physics simulator", physics_simulator), ("Physics practice", physics_practice)):
+    assert "assets/skillup-design-tokens.css" in page, f"{page_name} is missing shared tokens"
+    assert "assets/skillup-platform.css" in page, f"{page_name} is missing shared primitives"
+    assert "physics-home-fast.html" in page, f"{page_name} lost its Physics home route"
+    assert "physics-physical-quantities.html" in page, f"{page_name} lost its Learn route"
+    assert "physics-physical-quantities-simulator.html" in page, f"{page_name} lost its Simulator route"
+    assert "physics-physical-quantities-practice.html" in page, f"{page_name} lost its Practice route"
+assert 'class="card su-card"' in physics_simulator
+assert "quantityType" in physics_simulator and "quantityValue" in physics_simulator
+assert "data-preset" in physics_simulator and "addEventListener('input'" in physics_simulator
+assert 'class="quiz-card su-card"' in physics_practice
+assert "const bank=" in physics_practice or "const questions=" in physics_practice
+assert "Expected 30 questions" in physics_practice
+assert "function render()" in physics_practice
+
 print("SkillUp shared design-system contract passed")

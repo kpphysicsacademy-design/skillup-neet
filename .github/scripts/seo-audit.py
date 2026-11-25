@@ -28,6 +28,8 @@ class PageParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.title_parts, self.robots, self.canonicals, self.links = [], [], [], []
         self.in_title = False
+        self.in_head = False
+        self.in_svg = 0
         self.meta_description = ""
         self.viewport = False
         self.h1_count = 0
@@ -39,7 +41,11 @@ class PageParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         tag = tag.lower()
         a = {str(k).lower(): (v or "").strip() for k, v in attrs}
-        if tag == "title":
+        if tag == "head":
+            self.in_head = True
+        elif tag == "svg":
+            self.in_svg += 1
+        elif tag == "title" and self.in_head and self.in_svg == 0:
             self.in_title = True
         elif tag == "h1":
             self.h1_count += 1

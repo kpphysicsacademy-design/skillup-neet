@@ -56,8 +56,8 @@ Migrate one page archetype at a time. Compare desktop and mobile screenshots, te
 ## Rollout sequence
 1. Additive design tokens, shared primitives and CI contract test (this change).
 2. Migrate Botany subject-home archetype and verify existing routes/content (started in this change).
-3. Adopt shared platform tokens and header on Botany Practice/Quiz and Cheat Sheet pages without changing question-bank or lesson data (started in this change).
-4. Migrate and validate the Botany Learn and Simulator archetypes using one canonical concept.
+3. Adopt shared platform tokens and header on Botany Quick Learn, Practice/Quiz and Cheat Sheet pages without changing question-bank or lesson data (started in this change).
+4. Complete the Botany Learn and Simulator archetypes, then validate all four concept routes using one canonical concept.
 5. Verify concept registry and question-bank resolution.
 6. Migrate Physics, Chemistry, Zoology and Mathematics one subject at a time.
 7. Add cross-subject progress and Test Centre end-to-end regression coverage.

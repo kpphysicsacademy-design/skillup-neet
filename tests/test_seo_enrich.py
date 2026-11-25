@@ -13,18 +13,15 @@ SCRIPT = ROOT / ".github" / "scripts" / "seo-enrich.py"
 
 
 def meta_content(page: str, name: str) -> str:
-    match = re.search(
-        rf'<meta\\b(?=[^>]*\\bname=["\\']{re.escape(name)}["\\'])[^>]*\\bcontent=["\\'](.*?)["\\']',
-        page,
-        re.I | re.S,
-    )
+    pattern = rf"""<meta\b(?=[^>]*\bname=["']{re.escape(name)}["'])[^>]*\bcontent=["'](.*?)["']"""
+    match = re.search(pattern, page, re.I | re.S)
     return match.group(1) if match else ""
 
 
 def canonical(page: str) -> str:
-    match = re.search(r'<link\\b(?=[^>]*\\brel=["\\']canonical["\\'])[^>]*\\bhref=["\\'](.*?)["\\']', page, re.I | re.S)
+    pattern = r"""<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["'](.*?)["']"""
+    match = re.search(pattern, page, re.I | re.S)
     return match.group(1) if match else ""
-
 
 def main() -> None:
     with tempfile.TemporaryDirectory() as temporary:

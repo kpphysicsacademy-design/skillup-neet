@@ -279,5 +279,15 @@
     document.head.appendChild(style);
   }
 
+  // Load the centralized component/theme layer after page CSS and shared inline defaults.
+  // This file owns visual consistency only; it does not replace page scripts or content.
+  if (!document.querySelector('link[data-skillup-design-system]')) {
+    const designSystem = document.createElement('link');
+    designSystem.rel = 'stylesheet';
+    designSystem.href = '/skillup-design-system.css?v=20261125-v2';
+    designSystem.dataset.skillupDesignSystem = 'true';
+    document.head.appendChild(designSystem);
+  }
+
   // 548 quiz-related HTML routes verified to load this shared theme.
 })();

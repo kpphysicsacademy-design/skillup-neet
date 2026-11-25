@@ -1,4 +1,4 @@
-name: Unify SkillUp quiz route theme
+name: Unify SkillUp shared design-system routes
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Apply shared theme to all quiz routes
+      - name: Apply centralized design system to all shared-navigation pages and learning routes
         shell: bash
         run: |
           python3 <<'PY'
@@ -26,8 +26,8 @@ jobs:
           import re
 
           root = Path('.')
-          version = '20261125-unified-botany-theme-v1'
-          route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test)', re.I)
+          version = '20261125-central-design-system-v2'
+          route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test|home|index)', re.I)
           shared_pattern = re.compile(r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""", re.I)
           changed = []
           scanned = 0
@@ -36,7 +36,8 @@ jobs:
               rel = path.as_posix()
               if rel.startswith(('.git/', '.github/archived-workflows/')):
                   continue
-              if not route_pattern.search(path.name):
+              has_shared_nav = bool(re.search(r'shared-nav\\.js', path.read_text(encoding='utf-8', errors='ignore'), re.I))
+              if not has_shared_nav and not route_pattern.search(path.name):
                   continue
 
               scanned += 1
@@ -62,7 +63,7 @@ jobs:
                   path.write_text(updated, encoding='utf-8')
                   changed.append(rel)
 
-          print(f'Scanned {scanned} quiz-related HTML routes; updated {len(changed)}.')
+          print(f'Scanned {scanned} shared-navigation/learning HTML routes; updated {len(changed)}.')
           for name in changed:
               print('UPDATED', name)
           PY

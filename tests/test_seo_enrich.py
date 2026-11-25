@@ -37,6 +37,16 @@ def main() -> None:
             '</head><body><h1>Unit Conversion</h1></body></html>',
             encoding="utf-8",
         )
+        (root / "physics-example-learn.html").write_text(
+            '<!doctype html><html><head><title>SkillUp Physics | Example Topic</title>'
+            '</head><body><h1>Example</h1></body></html>',
+            encoding="utf-8",
+        )
+        (root / "physics-example-quiz.html").write_text(
+            '<!doctype html><html><head><title>SkillUp Physics | Example Topic</title>'
+            '</head><body><h1>Example quiz</h1></body></html>',
+            encoding="utf-8",
+        )
         (root / "private.html").write_text(
             '<!doctype html><html><head><title>Private</title>'
             '<meta name="robots" content="noindex"></head><body>Private</body></html>',
@@ -63,6 +73,11 @@ def main() -> None:
         assert "admin.html" not in site_map
         assert canonical(site_map) == "https://skillupedu.in/site-map.html"
         assert 70 <= len(meta_content(site_map, "description")) <= 160
+        learn_title = re.search(r"<title>(.*?)</title>", (root / "physics-example-learn.html").read_text(encoding="utf-8"), re.I).group(1)
+        quiz_title = re.search(r"<title>(.*?)</title>", (root / "physics-example-quiz.html").read_text(encoding="utf-8"), re.I).group(1)
+        assert learn_title != quiz_title
+        assert learn_title.endswith("| Learn")
+        assert quiz_title.endswith("| Quiz")
 
         subprocess.run([sys.executable, str(SCRIPT), str(root)], check=True)
         index_again = (root / "index.html").read_text(encoding="utf-8")

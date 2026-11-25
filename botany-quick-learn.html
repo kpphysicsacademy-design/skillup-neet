@@ -200,10 +200,104 @@ $('reveal').addEventListener('click',()=>{$('answer').classList.toggle('show');c
 $('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(index<bank.length-1){index++;render();}else{index=0;render();$('counter').textContent='Review complete · '+bank.length+' cards';}});
 if(!topic){$('learnCard').innerHTML='<div class="error">Select a Botany concept from the Botany path or open Quick Learn from a topic quiz.</div>';return;}
-const script=document.createElement('script');script.src='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261122-quicklearn-v1';
-script.onload=()=>{bank=findBank();if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="error">The selected topic bank could not be matched. Return to the quiz and try again.</div>'; $('counter').textContent='Learning cards unavailable';}};
-script.onerror=()=>{$('learnCard').innerHTML='<div class="error">The question bank for this concept is not available yet.</div>'; $('counter').textContent='Learning cards unavailable';};
-document.head.appendChild(script);
+const focusedSourceByConcept={
+  "Genotypic Ratio": "",
+  "Probability in Genetics": "",
+  "Pedigree Symbols": "pedigree-analysis",
+  "Autosomal Dominant Inheritance": "mendelian-disorders",
+  "Autosomal Recessive Inheritance": "mendelian-disorders",
+  "Sex-linked Recessive Inheritance": "sex-linked-inheritance",
+  "Sickle Cell Anaemia": "genetic-disorders",
+  "Thalassemia": "",
+  "Phenylketonuria": "",
+  "DNA Polynucleotide Chain": "",
+  "Semiconservative Replication": "",
+  "Transcription Unit": "",
+  "RNA Types": "rna-processing",
+  "Translation Components": "translation",
+  "Post-Transcriptional Modification": "",
+  "Mutation and Genetic Variation": "genetic-variation",
+  "Ecological Niche": "",
+  "Species Interactions": "population-interactions",
+  "Standing Crop": "ecosystem-components",
+  "Grazing Food Chain": "food-chains",
+  "Detritus Food Chain": "food-chains",
+  "10 Percent Law": "energy-flow",
+  "Ecological Succession": "",
+  "Primary Succession": "",
+  "Secondary Succession": "",
+  "Endemism": "",
+  "Alien Species Invasion": "",
+  "Mass Extinction": "extinction",
+  "Environmental Resistance": "",
+  "Life Tables": "population-attributes",
+  "Population Dispersion": "",
+  "Survivorship Curves": "",
+  "Resource Partitioning": "population-interactions",
+  "Keystone Species": "population-interactions",
+  "Ecological Efficiency": "ecological-pyramids",
+  "Gross Primary Productivity": "",
+  "Net Primary Productivity": "",
+  "Detritivores": "decomposition",
+  "Humification": "decomposition",
+  "Mineralisation": "decomposition",
+  "Carbon Cycle": "",
+  "Phosphorus Cycle": "",
+  "Ecological Services": "",
+  "Community Ecology": "",
+  "Selectable Marker": "cloning-vectors",
+  "Insertional Inactivation": "dna-cloning",
+  "DNA Amplification": "",
+  "Molecular Diagnosis": "genetic-testing",
+  "ELISA": "principles-of-biotechnology",
+  "Golden Rice": "transgenic-plants",
+  "Stem Cell Concept": "cell-differentiation",
+  "Gene Cloning": "dna-cloning",
+  "Vector Selection": "cloning-vectors",
+  "Host Cell Transformation": "agrobacterium-mediated-transformation",
+  "Screening Recombinants": "dna-cloning",
+  "PCR Cycle": "pcr",
+  "Agarose Gel Electrophoresis": "gel-electrophoresis",
+  "Bt Gene and Cry Protein": "bt-crops",
+  "RNAi Mechanism": "rna-interference",
+  "Plant Molecular Farming": "plant-genetic-engineering",
+  "Biosafety Issues": "biosafety"
+};
+const scriptCache=new Map();
+function loadScript(src){
+ if(scriptCache.has(src))return scriptCache.get(src);
+ const promise=new Promise(resolve=>{
+  const node=document.createElement('script');
+  node.src=src;
+  node.onload=()=>resolve(true);
+  node.onerror=()=>resolve(false);
+  document.head.appendChild(node);
+ });
+ scriptCache.set(src,promise);return promise;
+}
+function findBank(){
+ const wanted=norm(topic);
+ for(const name of Object.keys(window)){
+  if(!/^skillUp.*Questions$/.test(name))continue;
+  const candidate=norm(name.replace(/^skillUp/,'').replace(/Questions$/,'').replace(/^Focused/,''));
+  if(candidate===wanted){const value=window[name];if(Array.isArray(value)&&value.length)return value;}
+ }
+ return null;
+}
+async function initialiseLearningBank(){
+ const direct='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261125-quicklearn-loader-v2';
+ await loadScript(direct);
+ bank=findBank();
+ if(!bank){
+  const source=focusedSourceByConcept[topic];
+  if(source)await loadScript('/question-banks/'+source+'-question-bank.js?v=20261125-quicklearn-loader-v2');
+  await loadScript('/botany-63-focused-question-banks.js?v=20260923-botany-63-focused-v2');
+  bank=findBank();
+ }
+ if(bank){bank=bank.slice(0,30);render();}
+ else{$('learnCard').innerHTML='<div class="error">A verified question bank for this concept is not available yet. Return to the Botany path and open Practice for the available questions.</div>';$('counter').textContent='Learning cards unavailable';}
+}
+initialiseLearningBank();
 })();
 </script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>

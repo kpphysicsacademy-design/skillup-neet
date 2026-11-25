@@ -55,7 +55,7 @@ Migrate one page archetype at a time. Compare desktop and mobile screenshots, te
 
 ## Rollout sequence
 1. Additive design tokens, shared primitives and CI contract test (this change).
-2. Migrate Botany subject-home archetype and verify existing routes/content.
+2. Migrate Botany subject-home archetype and verify existing routes/content (started in this change).
 3. Migrate Learn, Practice, Simulator and Cheat Sheet archetypes using one Botany concept.
 4. Verify concept registry and question-bank resolution.
 5. Migrate Physics, Chemistry, Zoology and Mathematics one subject at a time.

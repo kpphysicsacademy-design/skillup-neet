@@ -11,7 +11,7 @@ if not home_path.is_file() or not data_path.is_file():
 
 home = home_path.read_text(encoding="utf-8")
 data = data_path.read_text(encoding="utf-8")
-version = "20261110-maths-path-data-v1"
+version = "20261126-maths-path-data-v2"
 if f'maths-path-data.js?v={version}' not in home:
     raise SystemExit("FAIL: maths-home.html does not load the current versioned Maths path data")
 if "window.SKILLUP_MATH_PATH" not in data:

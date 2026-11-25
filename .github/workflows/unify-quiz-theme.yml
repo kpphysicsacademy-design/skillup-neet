@@ -1,84 +1,88 @@
-name: Unify SkillUp shared design-system routes
+name: Preview SkillUp shared design-system route updates
 
 on:
   push:
     branches: [main]
     paths:
       - '.github/trigger-unify-quiz-theme.txt'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: skillup-shared-theme-preview
+  cancel-in-progress: false
 
 jobs:
-  apply-shared-theme:
+  preview-shared-theme:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: false
 
-      - name: Apply centralized design system to all shared-navigation pages and learning routes
+      - name: Generate a review-only patch
         shell: bash
         run: |
           python3 <<'PY'
           from pathlib import Path
+          import difflib
           import re
+          import sys
 
           root = Path('.')
+          output = Path('preview')
+          output.mkdir(exist_ok=True)
           version = '20261125-central-design-system-v2'
-          route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test|home|index)', re.I)
-          shared_pattern = re.compile(r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""", re.I)
+          shared_pattern = re.compile(
+              r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""",
+              re.I,
+          )
+          patches = []
           changed = []
-          scanned = 0
-
-          for path in root.rglob('*.html'):
+          for path in sorted(root.rglob('*.html')):
               rel = path.as_posix()
-              if rel.startswith(('.git/', '.github/archived-workflows/')):
+              if rel.startswith(('.git/', '.github/')):
                   continue
-              has_shared_nav = bool(re.search(r'shared-nav\.js', path.read_text(encoding='utf-8', errors='ignore'), re.I))
-              if not has_shared_nav and not route_pattern.search(path.name):
-                  continue
-
-              scanned += 1
               try:
                   original = path.read_text(encoding='utf-8')
               except (UnicodeDecodeError, OSError):
                   continue
-
+              if not re.search(r'shared-nav\.js', original, re.I):
+                  continue
               updated, count = shared_pattern.subn(
                   lambda m: m.group(1) + m.group(2) + m.group(3).split('?')[0] + '?v=' + version + m.group(2),
-                  original
+                  original,
               )
-
-              if count == 0 and not re.search(r'shared-nav\.js', original, re.I):
-                  tag = f'<script src="/shared-nav.js?v={version}"></script>'
-                  match = re.search(r'</body\s*>', updated, re.I)
-                  if match:
-                      updated = updated[:match.start()] + tag + '\n' + updated[match.start():]
-                  else:
-                      updated = updated.rstrip() + '\n' + tag + '\n'
-
               if updated != original:
-                  path.write_text(updated, encoding='utf-8')
                   changed.append(rel)
-
-          print(f'Scanned {scanned} shared-navigation/learning HTML routes; updated {len(changed)}.')
+                  patches.extend(difflib.unified_diff(
+                      original.splitlines(keepends=True),
+                      updated.splitlines(keepends=True),
+                      fromfile='a/' + rel,
+                      tofile='b/' + rel,
+                  ))
+          limit = 100
+          print(f'Preview only: {len(changed)} HTML files would change.')
           for name in changed:
-              print('UPDATED', name)
+              print('CANDIDATE', name)
+          if len(changed) > limit:
+              print(f'REFUSING: candidate count exceeds safety limit ({limit}). No repository files were changed.')
+              sys.exit(1)
+          (output / 'skillup-shared-theme.patch').write_text(''.join(patches), encoding='utf-8')
+          (output / 'summary.txt').write_text(
+              f'Preview only. Candidate files: {len(changed)}\n' +
+              '\n'.join(changed) + '\n',
+              encoding='utf-8',
+          )
           PY
 
-      - name: Commit and push route updates
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- '*.html'
-          if git diff --cached --quiet; then
-            echo "All matching routes already load the current shared theme."
-            exit 0
-          fi
-          git commit -m "Apply unified SkillUp theme to all quiz routes"
-          git fetch origin main
-          git rebase origin/main
-          git push
+      - name: Upload review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillup-shared-theme-preview
+          path: preview/
+          if-no-files-found: error
+          retention-days: 7

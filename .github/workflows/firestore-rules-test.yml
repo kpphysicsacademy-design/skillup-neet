@@ -1,4 +1,4 @@
-name: Validate Firestore profile rules
+name: Validate Firestore profile and progress rules
 on:
   pull_request:
     paths:
@@ -32,6 +32,8 @@ jobs:
       - name: Install isolated test dependencies
         run: npm install --no-save --no-package-lock firebase@11 @firebase/rules-unit-testing@4 firebase-tools@14
       - name: Check test syntax
-        run: node --check tests/firestore/profile-rules.test.cjs
+        run: |
+          node --check tests/firestore/profile-rules.test.cjs
+          node --check tests/firestore/progress-rules.test.cjs
       - name: Run Firestore emulator security tests
-        run: npx firebase emulators:exec --only firestore --project demo-skillup-validation "node --test tests/firestore/profile-rules.test.cjs"
+        run: npx firebase emulators:exec --only firestore --project demo-skillup-validation "node --test tests/firestore/profile-rules.test.cjs tests/firestore/progress-rules.test.cjs"

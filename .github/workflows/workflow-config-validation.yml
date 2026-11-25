@@ -38,11 +38,12 @@ jobs:
               'update-unit-conversion-quiz.yml',
               'update-si-base-units-neet.yml',
           }
-          files = [Path(p) for p in changed
-                   if p.startswith('.github/workflows/') and p.endswith('.yml')
-                   and Path(p).name not in legacy_scripts]
+          workflow_paths = [Path(p) for p in changed
+                            if p.startswith('.github/workflows/') and p.endswith('.yml')]
+          files = [path for path in workflow_paths
+                   if path.exists() and path.name not in legacy_scripts]
           if not files:
-              raise SystemExit('No non-legacy workflow YAML files were found')
+              print('No non-legacy workflow YAML files remain to parse (only deletions or excluded legacy scripts changed).')
 
           for path in files:
               with path.open(encoding='utf-8') as handle:

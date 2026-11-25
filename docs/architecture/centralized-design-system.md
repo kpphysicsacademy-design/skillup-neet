@@ -76,3 +76,8 @@ Migrate one page archetype at a time. Compare desktop and mobile screenshots, te
 ### Physics home adoption
 
 `physics-home-fast.html` now loads the shared design tokens and platform primitives. Its existing Physics-specific layout, 20-unit concept path, route data, and presentation rules remain page-owned during this first adoption step. The shared foundation is additive; subsequent Physics lesson and practice pages should adopt the same tokens and header before broader component consolidation.
+
+
+### Physics concept-page adoption
+
+The Physical Quantities learning journey now has shared token and primitive stylesheet adoption across its Learn, Simulator, and Practice pages. Existing page-specific interactions remain intact: the Simulator retains its quantity/unit converter and presets; Practice retains its 30-question bank, answer evaluation, and progress behavior. The contract test checks the three page routes, key simulator controls, and the 30-question practice guard. Shared primitives are applied as additive classes; the legacy page layouts remain responsible for their domain-specific interaction and responsive behavior.

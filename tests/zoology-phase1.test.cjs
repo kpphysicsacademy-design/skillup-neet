@@ -13,4 +13,36 @@ test('Biodiversity titles have distinct IDs',()=>{const rows=ctx.a.filter(x=>x.c
 test('resume uses full catalog and renders target',()=>{assert.match(home,/matches=a\.filter/);assert.match(home,/Math\.max\(I,target\.ix\)/);assert.ok(ctx.a.at(-1).ix>20);});
 test('quiz loader does not fall back to unrelated global array',()=>{assert.doesNotMatch(quiz,/\|\|arrays\[0\]/);});
 
-test('duplicate Biodiversity routes select distinct banks and legacy remains supported',()=>{const a=quiz.indexOf('function slug('),b=quiz.indexOf('function loadBank(',a);assert.ok(a>=0&&b>a);for(const row of ctx.a.filter(x=>x.c==='Biodiversity')){const c={conceptId:row.id};vm.createContext(c);vm.runInContext(quiz.slice(a,b),c);assert.equal(c.candidates('Biodiversity')[0],row.n==='Ecology and Environment'?'biodiversity-patterns-question-bank.js':'biodiversity-question-bank.js');}const c={conceptId:''};vm.createContext(c);vm.runInContext(quiz.slice(a,b),c);assert.equal(c.candidates('Biodiversity')[0],'biodiversity-question-bank.js');});
+const loaderStart=quiz.indexOf('function slug('),loaderEnd=quiz.indexOf('function loadBank(',loaderStart);
+assert.ok(loaderStart>=0&&loaderEnd>loaderStart);
+const loaderSource=quiz.slice(loaderStart,loaderEnd);
+function loaderContext(conceptId=''){const c={conceptId,encodeURIComponent};vm.createContext(c);vm.runInContext(loaderSource,c);return c;}
+test('duplicate Biodiversity routes select the correct independent bank',()=>{
+ const ecology=ctx.a.find(x=>x.c==='Biodiversity'&&x.n==='Ecology and Environment');
+ assert.ok(ecology);
+ assert.equal(loaderContext(ecology.id).candidates('Biodiversity')[0],'biodiversity-patterns-question-bank.js');
+ assert.equal(loaderContext().candidates('Biodiversity')[0],'biodiversity-question-bank.js');
+});
+test('taxonomy and Darwin aliases point to real canonical files',()=>{
+ assert.equal(loaderContext().candidates('Taxonomy and Systematics')[0],'taxonomy-and-systematics-question-bank.js');
+ assert.equal(loaderContext().candidates("Darwin's Natural Selection")[0],'darwin-natural-selection-question-bank.js');
+});
+test('question-bank filenames resolve only their declared global arrays',()=>{
+ const fixtures={
+  'biodiversity-question-bank.js':'skillUpBiodiversityQuestions',
+  'biodiversity-patterns-question-bank.js':'skillUpBiodiversityPatternsQuestions',
+  'taxonomy-and-systematics-question-bank.js':'skillUpTaxonomySystematicsQuestions',
+  'darwin-natural-selection-question-bank.js':'skillUpDarwinsNaturalSelectionQuestions'
+ };
+ for(const [file,globalName] of Object.entries(fixtures)){
+  const source=fs.readFileSync(path.join(__dirname,'../question-banks',file),'utf8');
+  assert.ok(source.includes('window.'+globalName),file+' must define '+globalName);
+  const row={q:'Q',o:['A','B'],a:0},c=loaderContext();
+  const scope={[globalName]:[row]};
+  assert.equal(c.resolveBankArray(file,scope)[0],row);
+ }
+});
+test('loader rejects an unrelated question-bank global instead of silently using it',()=>{
+ const c=loaderContext(),unrelated=[{q:'wrong',o:['A','B'],a:0}];
+ assert.equal(c.resolveBankArray('taxonomy-and-systematics-question-bank.js',{skillUpWrongQuestions:unrelated}),null);
+});

@@ -58,9 +58,15 @@ class PageParser(HTMLParser):
             href = a.get("href", "")
             if href:
                 self.links.append(href)
-            self.anchor_open, self.anchor_has_text = True, False
-        elif tag == "img" and "alt" not in a:
-            self.images_missing_alt += 1
+            self.anchor_open = True
+            self.anchor_has_text = bool(a.get("aria-label") or a.get("title"))
+        elif tag == "img":
+            if "alt" not in a:
+                self.images_missing_alt += 1
+            elif self.anchor_open and a.get("alt"):
+                self.anchor_has_text = True
+        elif tag == "svg" and self.anchor_open and a.get("aria-label"):
+            self.anchor_has_text = True
 
     def handle_endtag(self, tag):
         tag = tag.lower()

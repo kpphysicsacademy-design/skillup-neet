@@ -22,5 +22,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run SEO enrichment regression
+      - name: Run SEO enrichment fixture regression
         run: python3 tests/test_seo_enrich.py
+      - name: Enrich the full site and generate XML sitemap
+        run: |
+          python3 .github/scripts/seo-enrich.py
+          python3 .github/scripts/generate-sitemap.py
+          python3 .github/scripts/seo-audit.py /tmp/skillup-seo-audit
+      - name: Assert critical SEO audit results
+        run: python3 tests/assert_seo_report.py /tmp/skillup-seo-audit/seo-audit.json

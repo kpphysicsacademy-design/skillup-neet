@@ -1,11 +1,9 @@
 name: Change Units of Measurement to concept list
 on:
-  push:
-    paths:
-      - '.github/workflows/change-units-measurement-to-list.yml'
   workflow_dispatch:
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -25,16 +23,18 @@ jobs:
               s=s.replace('</body>', marker+'\n'+script+'</body>',1)
               p.write_text(s,encoding='utf-8')
           PY
-      - name: Commit update
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add physics-concept.html
-          git diff --cached --quiet || git commit -m 'Make Units and Measurement items all concepts'
-          git push
-      - name: Remove one-time workflow
-        if: always()
-        run: |
-          git rm -f .github/workflows/change-units-measurement-to-list.yml || true
-          git diff --cached --quiet || git commit -m 'Remove one-time concept list workflow'
-          git push || true
+      - name: Propose Physics concept-list changes for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/units-measurement-concept-list
+          delete-branch: true
+          commit-message: 'Propose Units of Measurement concept list'
+          title: 'Review Units of Measurement concept-list update'
+          body: |
+            This PR contains the generated Units of Measurement concept-list update.
+
+            Review the concept labels, descriptions, and navigation behavior before merging.
+            This workflow is now manual-only and no longer deletes itself or pushes directly to main.
+          add-paths: |
+            physics-concept.html

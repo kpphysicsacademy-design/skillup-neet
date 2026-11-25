@@ -1,0 +1,45 @@
+name: SEO enrichment regression
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/seo-enrich.py'
+      - '.github/scripts/seo-audit.py'
+      - 'tests/test_seo_enrich.py'
+      - 'tests/test_seo_audit.py'
+      - 'tests/assert_seo_report.py'
+      - '.github/workflows/deploy.yml'
+      - '.github/workflows/seo-enrichment-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  seo-enrichment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run SEO enrichment fixture regression
+        run: python3 tests/test_seo_enrich.py
+      - name: Run SEO audit parser regression
+        run: python3 tests/test_seo_audit.py
+      - name: Enrich the full site and generate XML sitemap
+        run: |
+          python3 .github/scripts/seo-enrich.py
+          python3 .github/scripts/generate-sitemap.py
+          python3 .github/scripts/seo-audit.py /tmp/skillup-seo-audit
+      - name: Assert critical SEO audit results
+        run: python3 tests/assert_seo_report.py /tmp/skillup-seo-audit/seo-audit.json
+      - name: Upload full SEO audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillup-seo-audit-pr-report
+          path: /tmp/skillup-seo-audit/
+          if-no-files-found: warn
+          retention-days: 14

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urljoin, urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,15 +30,17 @@ class RobotsMetaParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.noindex = False
+        self.canonical = ""
 
     def handle_starttag(self, tag, attrs) -> None:
-        if tag.lower() != "meta":
-            return
-        values = {str(k).lower(): (v or "").strip().lower() for k, v in attrs}
-        if values.get("name") in {"robots", "googlebot"}:
-            directives = {part.strip() for part in values.get("content", "").split(",")}
+        tag = tag.lower()
+        values = {str(k).lower(): (v or "").strip() for k, v in attrs}
+        if tag == "meta" and values.get("name", "").lower() in {"robots", "googlebot"}:
+            directives = {part.strip().lower() for part in values.get("content", "").split(",")}
             if "noindex" in directives:
                 self.noindex = True
+        elif tag == "link" and "canonical" in values.get("rel", "").lower().split():
+            self.canonical = values.get("href", "")
 
 
 def is_excluded(path: Path) -> bool:
@@ -63,10 +65,25 @@ def is_noindex(path: Path) -> bool:
         raise RuntimeError(f"Unable to read {path}: {exc}") from exc
 
 
+def is_canonical_page(path: Path) -> bool:
+    parser = RobotsMetaParser()
+    with path.open("r", encoding="utf-8", errors="replace") as page:
+        for chunk in iter(lambda: page.read(65536), ""):
+            parser.feed(chunk)
+    if not parser.canonical:
+        return True
+    relative = path.relative_to(ROOT).as_posix()
+    own = BASE_URL + ("/" if relative == "index.html" else "/" + quote(relative, safe="/-._~"))
+    absolute = parser.canonical if parser.canonical.startswith(("http://", "https://")) else urljoin(own, parser.canonical)
+    parsed = urlparse(absolute)
+    canonical = parsed.scheme + "://" + parsed.netloc + parsed.path
+    return canonical.rstrip("/") == own.rstrip("/")
+
+
 def main() -> None:
     pages = []
     for path in ROOT.rglob("*.html"):
-        if is_excluded(path) or is_noindex(path):
+        if is_excluded(path) or is_noindex(path) or not is_canonical_page(path):
             continue
         relative = path.relative_to(ROOT).as_posix()
         if relative == "index.html":

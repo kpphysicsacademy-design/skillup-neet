@@ -3,7 +3,7 @@
  * Firebase and all cross-origin requests remain network-only; user progress/API data
  * is never added to Cache Storage.
  */
-const CACHE_NAME = 'skillup-offline-v6-muted-physics';
+const CACHE_NAME = 'skillup-offline-v7-physics-capa';
 const PRECACHE_URLS = [
   '/index.html',
   '/learn.html',
@@ -84,7 +84,7 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(request);
-    const freshTheme = /^\/(?:shared-nav\.js|physics-design-system\.css|physics-duolingo-quiz\.css)$/.test(url.pathname);
+    const freshTheme = /^\/(?:shared-nav\.js|physics-design-system\.css|physics-duolingo-quiz\.css|physics-physical-quantities-theme\.css)$/.test(url.pathname);
     const networkFetch = fetch(request, freshTheme ? {cache:'no-cache'} : {}).then(response => {
       if (response && response.ok && response.type === 'basic') {
         cache.put(request, response.clone()).catch(() => {});

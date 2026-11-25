@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<link rel="stylesheet" href="assets/skillup-design-tokens.css">
+<link rel="stylesheet" href="assets/skillup-platform.css"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f7ff"><meta name="skillup-release" content="20261123-botany-quicklearn-type-v4">
 <meta name="description" content="Quick Learn Botany concepts with answer-reveal flashcards and explanations from the SkillUp topic question bank.">
 <title>Botany Quick Learn | SkillUp</title>
@@ -162,7 +164,7 @@ body{font-size:16px;line-height:1.65}
 }
 </style></head>
 <body><main class="wrap">
-<div class="top"><a href="botany-mcq.html">← Back to Quiz</a><span class="tag">BOTANY · QUICK LEARN</span></div>
+<div class="top su-header"><a href="botany-mcq.html">← Back to Quiz</a><span class="tag su-pill">BOTANY · QUICK LEARN</span></div>
 <header class="hero"><div class="eyebrow">LEARN BEFORE YOU TEST</div><h1 id="title">Quick Learn</h1><p>Recall the concept first. Reveal the answer and explanation only when you are ready.</p></header>
 <div class="actions"><a class="primary" id="quizLink" href="botany-mcq.html">🎯 Practise Quiz</a><a id="sheetLink" href="botany-topic-cheat-sheet.html">📘 Topic Cheat Sheet</a></div>
 <div class="learning-steps" aria-label="Learning steps"><span>① Read question</span><span>② Recall answer</span><span>③ Reveal &amp; learn</span></div><div class="meta"><span id="counter">Loading learning cards…</span><span id="progressText">0%</span></div><div class="track"><i id="progress"></i></div>
@@ -198,10 +200,104 @@ $('reveal').addEventListener('click',()=>{$('answer').classList.toggle('show');c
 $('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(index<bank.length-1){index++;render();}else{index=0;render();$('counter').textContent='Review complete · '+bank.length+' cards';}});
 if(!topic){$('learnCard').innerHTML='<div class="error">Select a Botany concept from the Botany path or open Quick Learn from a topic quiz.</div>';return;}
-const script=document.createElement('script');script.src='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261122-quicklearn-v1';
-script.onload=()=>{bank=findBank();if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="error">The selected topic bank could not be matched. Return to the quiz and try again.</div>'; $('counter').textContent='Learning cards unavailable';}};
-script.onerror=()=>{$('learnCard').innerHTML='<div class="error">The question bank for this concept is not available yet.</div>'; $('counter').textContent='Learning cards unavailable';};
-document.head.appendChild(script);
+const focusedSourceByConcept={
+  "Genotypic Ratio": "",
+  "Probability in Genetics": "",
+  "Pedigree Symbols": "pedigree-analysis",
+  "Autosomal Dominant Inheritance": "mendelian-disorders",
+  "Autosomal Recessive Inheritance": "mendelian-disorders",
+  "Sex-linked Recessive Inheritance": "sex-linked-inheritance",
+  "Sickle Cell Anaemia": "genetic-disorders",
+  "Thalassemia": "",
+  "Phenylketonuria": "",
+  "DNA Polynucleotide Chain": "",
+  "Semiconservative Replication": "",
+  "Transcription Unit": "",
+  "RNA Types": "rna-processing",
+  "Translation Components": "translation",
+  "Post-Transcriptional Modification": "",
+  "Mutation and Genetic Variation": "genetic-variation",
+  "Ecological Niche": "",
+  "Species Interactions": "population-interactions",
+  "Standing Crop": "ecosystem-components",
+  "Grazing Food Chain": "food-chains",
+  "Detritus Food Chain": "food-chains",
+  "10 Percent Law": "energy-flow",
+  "Ecological Succession": "",
+  "Primary Succession": "",
+  "Secondary Succession": "",
+  "Endemism": "",
+  "Alien Species Invasion": "",
+  "Mass Extinction": "extinction",
+  "Environmental Resistance": "",
+  "Life Tables": "population-attributes",
+  "Population Dispersion": "",
+  "Survivorship Curves": "",
+  "Resource Partitioning": "population-interactions",
+  "Keystone Species": "population-interactions",
+  "Ecological Efficiency": "ecological-pyramids",
+  "Gross Primary Productivity": "",
+  "Net Primary Productivity": "",
+  "Detritivores": "decomposition",
+  "Humification": "decomposition",
+  "Mineralisation": "decomposition",
+  "Carbon Cycle": "",
+  "Phosphorus Cycle": "",
+  "Ecological Services": "",
+  "Community Ecology": "",
+  "Selectable Marker": "cloning-vectors",
+  "Insertional Inactivation": "dna-cloning",
+  "DNA Amplification": "",
+  "Molecular Diagnosis": "genetic-testing",
+  "ELISA": "principles-of-biotechnology",
+  "Golden Rice": "transgenic-plants",
+  "Stem Cell Concept": "cell-differentiation",
+  "Gene Cloning": "dna-cloning",
+  "Vector Selection": "cloning-vectors",
+  "Host Cell Transformation": "agrobacterium-mediated-transformation",
+  "Screening Recombinants": "dna-cloning",
+  "PCR Cycle": "pcr",
+  "Agarose Gel Electrophoresis": "gel-electrophoresis",
+  "Bt Gene and Cry Protein": "bt-crops",
+  "RNAi Mechanism": "rna-interference",
+  "Plant Molecular Farming": "plant-genetic-engineering",
+  "Biosafety Issues": "biosafety"
+};
+const scriptCache=new Map();
+function loadScript(src){
+ if(scriptCache.has(src))return scriptCache.get(src);
+ const promise=new Promise(resolve=>{
+  const node=document.createElement('script');
+  node.src=src;
+  node.onload=()=>resolve(true);
+  node.onerror=()=>resolve(false);
+  document.head.appendChild(node);
+ });
+ scriptCache.set(src,promise);return promise;
+}
+function findBank(){
+ const wanted=norm(topic);
+ for(const name of Object.keys(window)){
+  if(!/^skillUp.*Questions$/.test(name))continue;
+  const candidate=norm(name.replace(/^skillUp/,'').replace(/Questions$/,'').replace(/^Focused/,''));
+  if(candidate===wanted){const value=window[name];if(Array.isArray(value)&&value.length)return value;}
+ }
+ return null;
+}
+async function initialiseLearningBank(){
+ const direct='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261125-quicklearn-loader-v2';
+ await loadScript(direct);
+ bank=findBank();
+ if(!bank){
+  const source=focusedSourceByConcept[topic];
+  if(source)await loadScript('/question-banks/'+source+'-question-bank.js?v=20261125-quicklearn-loader-v2');
+  await loadScript('/botany-63-focused-question-banks.js?v=20260923-botany-63-focused-v2');
+  bank=findBank();
+ }
+ if(bank){bank=bank.slice(0,30);render();}
+ else{$('learnCard').innerHTML='<div class="error">A verified question bank for this concept is not available yet. Return to the Botany path and open Practice for the available questions.</div>';$('counter').textContent='Learning cards unavailable';}
+}
+initialiseLearningBank();
 })();
 </script>
 <script src="/shared-nav.js?v=20261013-no-bottom-nav-v1"></script>

@@ -2,12 +2,10 @@ name: Add Biology Diversity Concepts
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/trigger-biology-diversity-concepts.txt'
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   update:
@@ -61,11 +59,17 @@ jobs:
           p.write_text(s, encoding='utf-8')
           print('Added 33 numbered concepts under Diversity in Living World')
 
-      - name: Commit update
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add biology-home.html
-          git diff --cached --quiet && echo 'No changes needed' && exit 0
-          git commit -m 'Add 33 numbered Diversity in Living World concepts'
-          git push
+      - name: Propose generated concepts as a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/biology-diversity-concepts
+          delete-branch: true
+          commit-message: 'Add 33 numbered Diversity in Living World concepts'
+          title: 'Add 33 numbered Biology Diversity concepts'
+          body: |
+            Automated content-generation proposal for review.
+
+            This workflow adds 33 numbered concept cards to the Diversity in Living World unit in biology-home.html. Review the generated HTML and curriculum alignment before merging.
+          add-paths: |
+            biology-home.html

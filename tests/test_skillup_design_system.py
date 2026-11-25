@@ -3,6 +3,7 @@
 from pathlib import Path
 import json
 import re
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 tokens = (ROOT / "assets/skillup-design-tokens.css").read_text(encoding="utf-8")
@@ -61,6 +62,8 @@ assert "botany-63-focused-question-banks.js" in botany_learn
 assert "focusedSourceByConcept" in botany_learn
 focused_registry = (ROOT / "botany-63-focused-question-banks.js").read_text(encoding="utf-8")
 assert re.search(r"function\s+dedicated\s*\([^)]*\)\s*\{\s*return\s*\[\s*\];\s*\}", focused_registry), "Placeholder focused banks must remain disabled until real academic questions are supplied"
+focused_runtime = subprocess.run(["node", "-e", "global.window=global; require(process.argv[1]);", str(ROOT / "botany-63-focused-question-banks.js")], text=True, capture_output=True)
+assert focused_runtime.returncode == 0, "Focused Botany bank registry failed at runtime: " + focused_runtime.stderr
 assert "replace(/^Focused/,'')" in botany_learn
 fallback_match = re.search(r"const focusedSourceByConcept=(\{[\s\S]*?\n\});", botany_learn)
 assert fallback_match, "Quick Learn focused-bank mapping is missing"

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Contract checks for the additive SkillUp shared design foundation."""
 from pathlib import Path
+import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,5 +56,17 @@ for page_name, page in (("Botany quiz", botany_quiz), ("Botany Quick Learn", bot
         assert "botany-topic-cheat-sheet.html" in page, "Botany Quick Learn lost its cheat-sheet route"
     else:
         assert "botany-home.html" in page, f"{page_name} lost its subject-home route"
+# Quick Learn must resolve the 61 focused Botany banks that reuse verified source banks.
+assert "botany-63-focused-question-banks.js" in botany_learn
+assert "focusedSourceByConcept" in botany_learn
+assert "replace(/^Focused/,'')" in botany_learn
+fallback_match = re.search(r"const focusedSourceByConcept=(\\{[\\s\\S]*?\\n\\});", botany_learn)
+assert fallback_match, "Quick Learn focused-bank mapping is missing"
+focused_sources = json.loads(fallback_match.group(1))
+assert len(focused_sources) == 61, f"Expected 61 focused-bank mappings, found {len(focused_sources)}"
+for source in focused_sources.values():
+    if source:
+        assert (ROOT / "question-banks" / f"{source}-question-bank.js").is_file(), f"Missing focused-bank source: {source}"
+
 
 print("SkillUp shared design-system contract passed")

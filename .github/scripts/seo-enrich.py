@@ -43,6 +43,8 @@ class MetaParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.title_parts: list[str] = []
         self.in_title = False
+        self.in_head = False
+        self.in_svg = 0
         self.description = ""
         self.canonical = ""
         self.robots: list[str] = []
@@ -51,7 +53,11 @@ class MetaParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs) -> None:
         tag = tag.lower()
         values = {str(k).lower(): (v or "").strip() for k, v in attrs}
-        if tag == "title":
+        if tag == "head":
+            self.in_head = True
+        elif tag == "svg":
+            self.in_svg += 1
+        elif tag == "title" and self.in_head and self.in_svg == 0:
             self.in_title = True
         elif tag == "h1":
             self.h1_count += 1
@@ -65,8 +71,13 @@ class MetaParser(HTMLParser):
             self.canonical = values.get("href", "")
 
     def handle_endtag(self, tag: str) -> None:
-        if tag.lower() == "title":
+        tag = tag.lower()
+        if tag == "title" and self.in_title:
             self.in_title = False
+        elif tag == "svg" and self.in_svg:
+            self.in_svg -= 1
+        elif tag == "head":
+            self.in_head = False
 
     def handle_data(self, data: str) -> None:
         if self.in_title:

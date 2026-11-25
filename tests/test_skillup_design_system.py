@@ -8,6 +8,8 @@ tokens = (ROOT / "assets/skillup-design-tokens.css").read_text(encoding="utf-8")
 components = (ROOT / "assets/skillup-platform.css").read_text(encoding="utf-8")
 docs = (ROOT / "docs/architecture/centralized-design-system.md").read_text(encoding="utf-8")
 botany = (ROOT / "botany-home.html").read_text(encoding="utf-8")
+botany_quiz = (ROOT / "botany-mcq.html").read_text(encoding="utf-8")
+botany_sheet = (ROOT / "botany-cell-cheat-sheet.html").read_text(encoding="utf-8")
 
 required_tokens = [
     "--su-color-ink", "--su-color-primary", "--su-color-success",
@@ -42,4 +44,12 @@ assert "assets/skillup-design-tokens.css" in botany
 assert "assets/skillup-platform.css" in botany
 for adopted_class in ("su-header", "su-brand", "su-shell", "su-hero", "su-hero__title", "su-pill-row", "su-pill"):
     assert adopted_class in botany, f"Botany reference page is missing {adopted_class}"
+# Botany concept-practice and cheat-sheet archetypes share the platform header.
+for page_name, page in (("Botany quiz", botany_quiz), ("Botany cheat sheet", botany_sheet)):
+    assert "assets/skillup-design-tokens.css" in page, f"{page_name} is missing design tokens"
+    assert "assets/skillup-platform.css" in page, f"{page_name} is missing shared components"
+    assert 'class="top su-header"' in page, f"{page_name} is missing shared header adoption"
+    assert 'class="brand su-brand"' in page, f"{page_name} is missing shared brand adoption"
+    assert "botany-home.html" in page, f"{page_name} lost its subject-home route"
+
 print("SkillUp shared design-system contract passed")

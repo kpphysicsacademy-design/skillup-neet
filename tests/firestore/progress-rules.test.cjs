@@ -7,7 +7,7 @@ let env;
 const row = {
   user_id: 'student',
   subject: 'Zoology',
-  topic: 'zoo-Ecology_20and_20Environment--Biodiversity',
+  topic: 'zoo-Ecology%20and%20Environment--Biodiversity',
   concept: 'Biodiversity',
   concept_id: 'zoo-Ecology%20and%20Environment--Biodiversity',
   completed: true,

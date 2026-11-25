@@ -50,6 +50,10 @@ for page_name, page in (("Botany quiz", botany_quiz), ("Botany Quick Learn", bot
     assert "assets/skillup-design-tokens.css" in page, f"{page_name} is missing design tokens"
     assert "assets/skillup-platform.css" in page, f"{page_name} is missing shared components"
     assert "su-header" in page, f"{page_name} is missing shared header adoption"
-    assert "botany-home.html" in page, f"{page_name} lost its subject-home route"
+    if page_name == "Botany Quick Learn":
+        assert "botany-mcq.html" in page, "Botany Quick Learn lost its practice route"
+        assert "botany-topic-cheat-sheet.html" in page, "Botany Quick Learn lost its cheat-sheet route"
+    else:
+        assert "botany-home.html" in page, f"{page_name} lost its subject-home route"
 
 print("SkillUp shared design-system contract passed")

@@ -1,10 +1,9 @@
 name: Finalize Biology Home
 on:
-  push:
-    paths:
-      - '.github/biology-finalize-trigger.txt'
+  workflow_dispatch:
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   finalize:
     runs-on: ubuntu-latest
@@ -42,10 +41,18 @@ jobs:
           s=s[:pos]+section+s[pos:]
           open(p,'w',encoding='utf-8').write(s)
           PY
-      - name: Commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add biology-home.html
-          git commit -m 'Keep Biology sub-concepts and remove syllabus section'
-          git push
+      - name: Propose Biology home changes for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/biology-home-finalize
+          delete-branch: true
+          commit-message: 'Propose Biology home sub-concept section'
+          title: 'Review Biology home sub-concept update'
+          body: |
+            This PR contains the output of the Biology home finalization workflow.
+
+            Review the syllabus-section removal and generated sub-concept links before merging.
+            The workflow no longer pushes generated HTML directly to main.
+          add-paths: |
+            biology-home.html

@@ -1,16 +1,11 @@
 name: Audit Zoology Chapter Test Links
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/audit-zoology-test-links.yml'
-      - 'zoology-full-path.html'
-      - 'zoology-chapter-test.html'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   audit:
@@ -118,15 +113,18 @@ jobs:
           print(f'Chapter datasets: {len(test_keys)}')
           print(f'Typed links: {len(links)}')
 
-      - name: Commit repaired files
-        shell: bash
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add zoology-full-path.html zoology-chapter-test.html
-          if git diff --cached --quiet; then
-            echo 'No changes needed.'
-          else
-            git commit -m 'Remove What is Living Zoology test and repair links'
-            git push
-          fi
+      - name: Propose repaired Zoology routes as a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/audit-zoology-test-links
+          delete-branch: true
+          commit-message: 'Remove obsolete Zoology test and repair test links'
+          title: 'Repair Zoology chapter test links'
+          body: |
+            Automated route-repair proposal for review.
+
+            This workflow removes the obsolete What is Living dataset and repairs chapter/lesson test links. Review the affected learning-path cards, test datasets, and runtime routing before merging.
+          add-paths: |
+            zoology-full-path.html
+            zoology-chapter-test.html

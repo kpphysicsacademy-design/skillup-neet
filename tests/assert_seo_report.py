@@ -18,6 +18,8 @@ required_zero = (
     "duplicate_canonical_urls",
     "broken_internal_links",
     "orphan_pages_no_html_inbound_link",
+    "pages_without_h1",
+    "pages_with_multiple_h1",
 )
 failures = {name: summary.get(name, 0) for name in required_zero if summary.get(name, 0)}
 if report.get("sitemap_missing_page_count", 0):

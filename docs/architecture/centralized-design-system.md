@@ -71,3 +71,8 @@ Migrate one page archetype at a time. Compare desktop and mobile screenshots, te
 - Mobile layout has no horizontal overflow at 320px viewport width.
 - Every displayed Learn/Practice/Simulator/Cheat Sheet link resolves to the correct concept.
 - Progress is isolated by authenticated account and stable concept identity.
+
+
+### Physics home adoption
+
+`physics-home-fast.html` now loads the shared design tokens and platform primitives. Its existing Physics-specific layout, 20-unit concept path, route data, and presentation rules remain page-owned during this first adoption step. The shared foundation is additive; subsequent Physics lesson and practice pages should adopt the same tokens and header before broader component consolidation.

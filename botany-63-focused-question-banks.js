@@ -2,6 +2,8 @@
    Each bank prioritizes concept-matched questions, then fills to exactly 30 from the same verified source bank. */
 (function(){
 'use strict';
+// Placeholder-only banks are intentionally disabled. Quick Learn must use a real direct bank or a verified source-bank focus below.
+function dedicated(){return [];}
 function focus(source,terms){
   const arr=Array.isArray(source)?source.slice():[];
   const ts=terms.map(x=>String(x).toLowerCase());

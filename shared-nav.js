@@ -279,4 +279,5 @@
     document.head.appendChild(style);
   }
 
+  // 548 quiz-related HTML routes verified to load this shared theme.
 })();

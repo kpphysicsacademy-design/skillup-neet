@@ -25,6 +25,8 @@ EXCLUDED_FILES = {
 }
 SPECIAL_TITLES = {
     "botany-topic-cheat-sheet.html": "Botany Topic Cheat Sheet | SkillUp",
+    "physics-frame-of-reference-simulator.html": "SkillUp Physics | Frame of Reference Simulator",
+    "physics-position-and-displacement-simulator.html": "SkillUp Physics | Position and Displacement Simulator",
     "maths-addition-subtraction-algebraic-expressions-learn.html":
         "SkillUp Maths | Algebraic Expressions: Add & Subtract",
     "maths-class7-algebra-add-sub-learn.html":
@@ -168,7 +170,7 @@ def normalized_title(path: Path, current: str) -> str:
     if 15 <= len(title) <= 65:
         return title
     without_brand = re.sub(
-        r"\s*\|\s*SkillUp(?:\\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science))?$",
+        r"\s*\|\s*SkillUp(?:\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science))?$",
         "",
         title,
         flags=re.I,
@@ -177,20 +179,59 @@ def normalized_title(path: Path, current: str) -> str:
         return without_brand + " | SkillUp"
     if 15 <= len(without_brand) <= 65:
         return without_brand
-    first = current.split(" | ")[0].strip()
-    generic_subject = re.fullmatch(
-        r"SkillUp\s+(?:Maths|Physics|Chemistry|Botany|Zoology|Biology|Science)",
-        first,
-        flags=re.I,
-    )
-    if not generic_subject and 15 <= len(first) <= 54:
-        return first + " | SkillUp"
-    if not generic_subject and len(first) > 54:
-        return first[:54].rsplit(" ", 1)[0].rstrip(" |—-") + " | SkillUp"
     fallback = filename_title(path)
     if len(fallback) > 65:
         fallback = fallback[:62].rsplit(" ", 1)[0].rstrip(" |—-")
     return fallback
+
+
+def page_kind(path: Path) -> str:
+    stem = path.stem.lower()
+    for suffix, label in (
+        ("-quick-learn", "Quick Learn"), ("-quicklearn", "Quick Learn"),
+        ("-cheat-sheet", "Cheat Sheet"), ("-simulator", "Simulator"),
+        ("-practice", "Practice"), ("-quiz", "Quiz"), ("-mcq", "Quiz"),
+        ("-learn", "Learn"),
+    ):
+        if stem.endswith(suffix):
+            return label
+    return "Concept"
+
+
+def fit_title_with_kind(title: str, kind: str, path: Path, used: set[str]) -> str:
+    suffix = " | " + kind
+    candidate = title + suffix
+    if len(candidate) > 65:
+        base = title[len("SkillUp "):] if title.startswith("SkillUp ") else title
+        max_base = 65 - len(suffix)
+        base = base[:max_base].rsplit(" ", 1)[0].rstrip(" |—-")
+        candidate = base + suffix
+    if candidate in used:
+        slug = " ".join(path.stem.split("-")[-2:]).title()
+        extra = " " + slug
+        max_base = 65 - len(suffix) - len(extra)
+        base = title[len("SkillUp "):] if title.startswith("SkillUp ") else title
+        base = base[:max_base].rsplit(" ", 1)[0].rstrip(" |—-")
+        candidate = base + suffix + extra
+    return candidate
+
+
+def disambiguate_titles(root: Path, pages: list[Path]) -> None:
+    groups: dict[str, list[Path]] = defaultdict(list)
+    for path in pages:
+        content = path.read_text(encoding="utf-8", errors="replace")
+        info = parse_page(content)
+        if not info.noindex and info.title:
+            groups[info.title].append(path)
+    for title, paths in groups.items():
+        if len(paths) < 2:
+            continue
+        used: set[str] = set()
+        for path in paths:
+            new_title = fit_title_with_kind(title, page_kind(path), path, used)
+            used.add(new_title)
+            content = path.read_text(encoding="utf-8", errors="replace")
+            path.write_text(replace_title(content, new_title), encoding="utf-8")
 
 
 def topic_for_description(path: Path, title: str) -> str:
@@ -386,6 +427,7 @@ def main() -> int:
     for path in pages:
         if path.name != "site-map.html":
             normalize_page(path, root)
+    disambiguate_titles(root, pages)
 
     public_pages = [
         path for path in html_pages(root)

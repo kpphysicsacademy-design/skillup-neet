@@ -96,8 +96,8 @@ def main() -> None:
         no_heading = (root / "physics-no-heading.html").read_text(encoding="utf-8")
         assert '<h1 class="skillup-seo-heading">No Heading</h1>' in no_heading
         multiple = (root / "physics-multiple-headings.html").read_text(encoding="utf-8")
-        without_scripts = re.sub(r"<script\\b.*?</script\\s*>", "", multiple, flags=re.I | re.S)
-        assert len(re.findall(r"<h1\\b", without_scripts, re.I)) == 1
+        without_scripts = re.sub(r"<script\b.*?</script\s*>", "", multiple, flags=re.I | re.S)
+        assert len(re.findall(r"<h1\b", without_scripts, re.I)) == 1
         assert "<h2>Secondary heading</h2>" in multiple
         assert "<h2>Dynamic heading</h2>" in multiple
         assert canonical(site_map) == "https://skillupedu.in/site-map.html"

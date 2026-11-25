@@ -11,7 +11,7 @@ const ctx={};vm.createContext(ctx);vm.runInContext(home.slice(start,end),ctx);
 test('all catalog IDs unique',()=>{assert.equal(new Set(ctx.a.map(x=>x.id)).size,ctx.a.length);assert.equal(ctx.units.length,14);});
 test('Biodiversity titles have distinct IDs',()=>{const rows=ctx.a.filter(x=>x.c==='Biodiversity');assert.equal(rows.length,2);assert.notEqual(rows[0].id,rows[1].id);});
 test('resume uses the full catalog and resolves duplicate legacy Biodiversity records deterministically',()=>{
- assert.match(home,/Math\\.max\\(I,target\\.ix\\)/);
+ assert.ok(home.includes('Math.max(I,target.ix)'));
  assert.ok(ctx.a.at(-1).ix>20);
  const start=home.indexOf('function resolveResumeTarget('),end=home.indexOf('var target=resolveResumeTarget',start);
  assert.ok(start>=0&&end>start);

@@ -52,6 +52,12 @@ def main() -> None:
             '<meta name="robots" content="noindex"></head><body>Private</body></html>',
             encoding="utf-8",
         )
+        (root / "redirect.html").write_text(
+            '<!doctype html><html><head><title>Redirect</title>'
+            '<meta http-equiv="refresh" content="0;url=physics-unit-conversion-quiz.html">'
+            '</head><body>Redirecting</body></html>',
+            encoding="utf-8",
+        )
         (root / "admin.html").write_text(
             '<!doctype html><html><head><title>Admin</title></head><body>Admin</body></html>',
             encoding="utf-8",
@@ -65,12 +71,15 @@ def main() -> None:
 
         assert canonical(index) == "https://skillupedu.in/"
         assert canonical(quiz) == "https://skillupedu.in/physics-unit-conversion-quiz.html"
+        redirect = (root / "redirect.html").read_text(encoding="utf-8")
+        assert canonical(redirect) == "https://skillupedu.in/physics-unit-conversion-quiz.html"
         assert 70 <= len(meta_content(index, "description")) <= 160
         assert 70 <= len(meta_content(quiz, "description")) <= 160
         assert 'href="/site-map.html"' in index
         assert 'href="/physics-unit-conversion-quiz.html"' in site_map
         assert "Very long diagram description" not in site_map
         assert "private.html" not in site_map
+        assert "redirect.html" not in site_map
         assert "admin.html" not in site_map
         assert canonical(site_map) == "https://skillupedu.in/site-map.html"
         assert 70 <= len(meta_content(site_map, "description")) <= 160

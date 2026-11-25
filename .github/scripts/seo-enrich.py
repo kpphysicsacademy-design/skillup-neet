@@ -395,6 +395,7 @@ def demote_static_h1(content: str) -> str:
 
 def demote_dynamic_h1(content: str, keep_first: bool) -> str:
     script_re = re.compile(r"(<script\b[^>]*>)(.*?)(</script\s*>)", re.I | re.S)
+    keep_available = [keep_first]
     def transform(match):
         code = match.group(2)
         token_re = re.compile(r"""<h1\b[^>]*>|createElement\(\s*(["'])h1\1\s*\)""", re.I)

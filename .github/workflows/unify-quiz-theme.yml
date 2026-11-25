@@ -1,24 +1,29 @@
-name: Unify SkillUp shared design-system routes
+name: Preview SkillUp shared design-system route updates
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - '.github/trigger-unify-quiz-theme.txt'
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: unify-quiz-theme-preview
+  cancel-in-progress: false
 
 jobs:
-  apply-shared-theme:
+  preview-shared-theme:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: false
 
-      - name: Apply centralized design system to all shared-navigation pages and learning routes
+      - name: Generate route updates in an isolated workspace
         shell: bash
         run: |
           python3 <<'PY'
@@ -28,7 +33,10 @@ jobs:
           root = Path('.')
           version = '20261125-central-design-system-v2'
           route_pattern = re.compile(r'(quiz|mcq|practice|simulator|test|home|index)', re.I)
-          shared_pattern = re.compile(r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""", re.I)
+          shared_pattern = re.compile(
+              r"""(<script\b[^>]*\bsrc\s*=\s*)(["'])([^"']*shared-nav\.js)(?:\?[^"']*)?\2""",
+              re.I,
+          )
           changed = []
           scanned = 0
 
@@ -36,22 +44,22 @@ jobs:
               rel = path.as_posix()
               if rel.startswith(('.git/', '.github/archived-workflows/')):
                   continue
-              has_shared_nav = bool(re.search(r'shared-nav\.js', path.read_text(encoding='utf-8', errors='ignore'), re.I))
-              if not has_shared_nav and not route_pattern.search(path.name):
-                  continue
-
-              scanned += 1
               try:
                   original = path.read_text(encoding='utf-8')
               except (UnicodeDecodeError, OSError):
                   continue
 
+              has_shared_nav = bool(re.search(r'shared-nav\.js', original, re.I))
+              if not has_shared_nav and not route_pattern.search(path.name):
+                  continue
+
+              scanned += 1
               updated, count = shared_pattern.subn(
                   lambda m: m.group(1) + m.group(2) + m.group(3).split('?')[0] + '?v=' + version + m.group(2),
-                  original
+                  original,
               )
 
-              if count == 0 and not re.search(r'shared-nav\.js', original, re.I):
+              if count == 0 and not has_shared_nav:
                   tag = f'<script src="/shared-nav.js?v={version}"></script>'
                   match = re.search(r'</body\s*>', updated, re.I)
                   if match:
@@ -63,22 +71,27 @@ jobs:
                   path.write_text(updated, encoding='utf-8')
                   changed.append(rel)
 
-          print(f'Scanned {scanned} shared-navigation/learning HTML routes; updated {len(changed)}.')
+          print(f'Scanned {scanned} routes; previewed {len(changed)} updates.')
+          if len(changed) > 600:
+              raise SystemExit(f'Safety stop: {len(changed)} files exceeds the 600-file review limit.')
           for name in changed:
-              print('UPDATED', name)
+              print('PREVIEW', name)
           PY
 
-      - name: Commit and push route updates
+      - name: Export proposed changes as a review artifact
         shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- '*.html'
-          if git diff --cached --quiet; then
-            echo "All matching routes already load the current shared theme."
-            exit 0
+          git diff -- '*.html' > route-theme.patch
+          if [ -s route-theme.patch ]; then
+            echo "Generated review patch: $(wc -l < route-theme.patch) lines"
+          else
+            echo "No route changes are required."
           fi
-          git commit -m "Apply unified SkillUp theme to all quiz routes"
-          git fetch origin main
-          git rebase origin/main
-          git push
+
+      - name: Upload review patch
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillup-route-theme-review-patch
+          path: route-theme.patch
+          if-no-files-found: error
+          retention-days: 7

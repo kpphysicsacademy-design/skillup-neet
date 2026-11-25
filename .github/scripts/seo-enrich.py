@@ -91,8 +91,8 @@ class MetaParser(HTMLParser):
             self.in_head = False
         elif tag == "script" and self.in_script:
             code = "".join(self.script_buffer)
-            literal_h1 = len(re.findall(r"<h1\\b", code, re.I))
-            created_h1 = len(re.findall(r"""createElement\\(\\s*["']h1["']\\s*\\)""", code, re.I))
+            literal_h1 = len(re.findall(r"<h1\b", code, re.I))
+            created_h1 = len(re.findall(r"""createElement\(\s*["']h1["']\s*\\)""", code, re.I))
             self.dynamic_h1_count += max(literal_h1, created_h1)
             self.in_script = False
             self.script_buffer = []
@@ -375,7 +375,7 @@ def is_public_canonical_page(path: Path, root: Path) -> bool:
 
 
 def demote_static_h1(content: str) -> str:
-    parts = re.split(r"(<script\\b[^>]*>.*?</script\\s*>)", content, flags=re.I | re.S)
+    parts = re.split(r"(<script\b[^>]*>.*?</script\s*>)", content, flags=re.I | re.S)
     open_count = 0
     close_count = 0
     for index in range(0, len(parts), 2):
@@ -388,16 +388,16 @@ def demote_static_h1(content: str) -> str:
             nonlocal close_count
             close_count += 1
             return "</h1>" if close_count == 1 else "</h2>"
-        parts[index] = re.sub(r"<h1\\b([^>]*)>", open_tag, parts[index], flags=re.I)
-        parts[index] = re.sub(r"</h1\\s*>", close_tag, parts[index], flags=re.I)
+        parts[index] = re.sub(r"<h1\b([^>]*)>", open_tag, parts[index], flags=re.I)
+        parts[index] = re.sub(r"</h1\s*>", close_tag, parts[index], flags=re.I)
     return "".join(parts)
 
 
 def demote_dynamic_h1(content: str, keep_first: bool) -> str:
-    script_re = re.compile(r"(<script\\b[^>]*>)(.*?)(</script\\s*>)", re.I | re.S)
+    script_re = re.compile(r"(<script\b[^>]*>)(.*?)(</script\s*>)", re.I | re.S)
     def transform(match):
         code = match.group(2)
-        token_re = re.compile(r"""<h1\\b[^>]*>|createElement\\(\\s*(["'])h1\\1\\s*\\)""", re.I)
+        token_re = re.compile(r"""<h1\b[^>]*>|createElement\(\s*(["'])h1\1\s*\\)""", re.I)
         tokens = list(token_re.finditer(code))
         first_kind = None
         if keep_first and tokens:
@@ -410,7 +410,7 @@ def demote_dynamic_h1(content: str, keep_first: bool) -> str:
             if first_kind == "literal" and open_count == 1:
                 return tag_match.group(0)
             return re.sub(r"<h1", "<h2", tag_match.group(0), count=1, flags=re.I)
-        code = re.sub(r"<h1\\b[^>]*>", open_tag, code, flags=re.I)
+        code = re.sub(r"<h1\b[^>]*>", open_tag, code, flags=re.I)
 
         close_count = 0
         def close_tag(tag_match):
@@ -419,7 +419,7 @@ def demote_dynamic_h1(content: str, keep_first: bool) -> str:
             if first_kind == "literal" and close_count == 1:
                 return tag_match.group(0)
             return "</h2>"
-        code = re.sub(r"</h1\\s*>", close_tag, code, flags=re.I)
+        code = re.sub(r"</h1\s*>", close_tag, code, flags=re.I)
 
         created_count = 0
         def created_tag(tag_match):
@@ -428,27 +428,27 @@ def demote_dynamic_h1(content: str, keep_first: bool) -> str:
             if first_kind == "created" and created_count == 1:
                 return tag_match.group(0)
             return re.sub(r"h1", "h2", tag_match.group(0), count=1, flags=re.I)
-        code = re.sub(r"""createElement\\(\\s*(["'])h1\\1\\s*\\)""", created_tag, code, flags=re.I)
+        code = re.sub(r"""createElement\(\s*(["'])h1\1\s*\\)""", created_tag, code, flags=re.I)
         return match.group(1) + code + match.group(3)
     return script_re.sub(transform, content)
 
 
 def insert_visible_h1(content: str, title: str) -> str:
-    heading = f'<h1 class="skillup-seo-heading">{escape(title)}</h1>\\n'
+    heading = f'<h1 class="skillup-seo-heading">{escape(title)}</h1>\n'
     style = (
         '<style id="skillup-seo-heading-style">'
         '.skillup-seo-heading{max-width:1100px;margin:12px auto 16px;padding:0 16px;'
         'color:#17265e;font:700 clamp(1.2rem,2.4vw,1.7rem)/1.25 system-ui,sans-serif;}'
-        '</style>\\n'
+        '</style>\n'
     )
     if 'id="skillup-seo-heading-style"' not in content:
         content = insert_head(content, style)
-    main = re.search(r"<main\\b[^>]*>", content, re.I)
+    main = re.search(r"<main\b[^>]*>", content, re.I)
     if main:
-        return content[:main.end()] + "\\n" + heading + content[main.end():]
-    body = re.search(r"<body\\b[^>]*>", content, re.I)
+        return content[:main.end()] + "\n" + heading + content[main.end():]
+    body = re.search(r"<body\b[^>]*>", content, re.I)
     if body:
-        return content[:body.end()] + "\\n" + heading + content[body.end():]
+        return content[:body.end()] + "\n" + heading + content[body.end():]
     return heading + content
 
 

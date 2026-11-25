@@ -64,6 +64,23 @@ fallback_match = re.search(r"const focusedSourceByConcept=(\{[\s\S]*?\n\});", bo
 assert fallback_match, "Quick Learn focused-bank mapping is missing"
 focused_sources = json.loads(fallback_match.group(1))
 assert len(focused_sources) == 61, f"Expected 61 focused-bank mappings, found {len(focused_sources)}"
+units_match = re.search(r"const units=(\[[\s\S]*?\n\]);", botany)
+assert units_match, "Botany concept path data could not be read"
+botany_units = json.loads(units_match.group(1))
+bank_aliases = {
+    "dicot-root-t-s": "dicot-root-ts",
+    "monocot-root-t-s": "monocot-root-ts",
+    "dicot-stem-t-s": "dicot-stem-ts",
+    "monocot-stem-t-s": "monocot-stem-ts",
+}
+for unit in botany_units:
+    for concept in unit[1]:
+        title = concept[0]
+        slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+        slug = bank_aliases.get(slug, slug)
+        direct_bank = ROOT / "question-banks" / f"{slug}-question-bank.js"
+        assert direct_bank.is_file() or title in focused_sources, f"Quick Learn has no verified bank route for {title}"
+
 for source in focused_sources.values():
     if source:
         assert (ROOT / "question-banks" / f"{source}-question-bank.js").is_file(), f"Missing focused-bank source: {source}"

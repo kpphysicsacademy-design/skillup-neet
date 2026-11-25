@@ -34,7 +34,7 @@ def main() -> None:
         )
         (root / "physics-unit-conversion-quiz.html").write_text(
             '<!doctype html><html><head><title>SkillUp Physics | Unit Conversion Quiz</title>'
-            '</head><body><h1>Unit Conversion</h1></body></html>',
+            '</head><body><h1>Unit Conversion</h1><svg><title>Very long diagram description that is not the document title</title></svg></body></html>',
             encoding="utf-8",
         )
         (root / "physics-example-learn.html").write_text(
@@ -69,6 +69,7 @@ def main() -> None:
         assert 70 <= len(meta_content(quiz, "description")) <= 160
         assert 'href="/site-map.html"' in index
         assert 'href="/physics-unit-conversion-quiz.html"' in site_map
+        assert "Very long diagram description" not in site_map
         assert "private.html" not in site_map
         assert "admin.html" not in site_map
         assert canonical(site_map) == "https://skillupedu.in/site-map.html"

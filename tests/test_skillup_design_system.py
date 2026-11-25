@@ -98,4 +98,14 @@ assert "su-subject-header" in physics_home
 assert "su-subject-brand" in physics_home
 assert "physics-home-fast.html" in docs
 
+
+physics_lesson = (ROOT / "physics-physical-quantities.html").read_text(encoding="utf-8")
+assert "assets/skillup-design-tokens.css" in physics_lesson
+assert "assets/skillup-platform.css" in physics_lesson
+assert 'class="learn-card su-card"' in physics_lesson
+assert 'href="physics-home-fast.html"' in physics_lesson
+assert 'href="physics-physical-quantities-simulator.html"' in physics_lesson
+assert 'href="physics-physical-quantities-practice.html"' in physics_lesson
+assert "Physical quantities and measurement" in physics_lesson
+
 print("SkillUp shared design-system contract passed")

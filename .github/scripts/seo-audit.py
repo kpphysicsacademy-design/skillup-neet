@@ -89,8 +89,8 @@ class PageParser(HTMLParser):
             self.in_head = False
         elif tag == "script" and self.in_script:
             code = "".join(self.script_buffer)
-            literal_h1 = len(re.findall(r"<h1\\b", code, re.I))
-            created_h1 = len(re.findall(r"""createElement\\(\\s*["']h1["']\\s*\\)""", code, re.I))
+            literal_h1 = len(re.findall(r"<h1\b", code, re.I))
+            created_h1 = len(re.findall(r"""createElement\(\s*["']h1["']\s*\)""", code, re.I))
             self.h1_count += max(literal_h1, created_h1)
             self.in_script = False
             self.script_buffer = []

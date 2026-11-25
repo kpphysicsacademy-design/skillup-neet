@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote, urlparse, urljoin
 import json, re, sys, xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,6 +30,8 @@ class PageParser(HTMLParser):
         self.in_title = False
         self.in_head = False
         self.in_svg = 0
+        self.in_script = False
+        self.script_buffer = []
         self.meta_description = ""
         self.viewport = False
         self.h1_count = 0
@@ -47,6 +49,9 @@ class PageParser(HTMLParser):
             self.in_svg += 1
             if self.anchor_open and a.get("aria-label"):
                 self.anchor_has_text = True
+        elif tag == "script":
+            self.in_script = True
+            self.script_buffer = []
         elif tag == "title" and self.in_head and self.in_svg == 0:
             self.in_title = True
         elif tag == "h1":
@@ -82,6 +87,13 @@ class PageParser(HTMLParser):
             self.in_svg -= 1
         elif tag == "head":
             self.in_head = False
+        elif tag == "script" and self.in_script:
+            code = "".join(self.script_buffer)
+            literal_h1 = len(re.findall(r"<h1\\b", code, re.I))
+            created_h1 = len(re.findall(r"""createElement\\(\\s*["']h1["']\\s*\\)""", code, re.I))
+            self.h1_count += max(literal_h1, created_h1)
+            self.in_script = False
+            self.script_buffer = []
         elif tag == "a" and self.anchor_open:
             if not self.anchor_has_text:
                 self.empty_anchors += 1
@@ -90,6 +102,8 @@ class PageParser(HTMLParser):
     def handle_data(self, data):
         if self.in_title:
             self.title_parts.append(data)
+        if self.in_script:
+            self.script_buffer.append(data)
         if self.anchor_open and data.strip():
             self.anchor_has_text = True
 
@@ -113,8 +127,17 @@ def public_pages():
             continue
         parser = PageParser()
         parser.feed(path.read_text(encoding="utf-8", errors="replace"))
-        if not parser.noindex:
-            pages.append(path)
+        if parser.noindex:
+            continue
+        canonical = parser.canonicals[0] if parser.canonicals else ""
+        if canonical:
+            own_url = public_url(path)
+            absolute = canonical if canonical.startswith(("http://", "https://")) else urljoin(own_url, canonical)
+            parsed = urlparse(absolute)
+            absolute = parsed.scheme + "://" + parsed.netloc + parsed.path
+            if absolute.rstrip("/") != own_url.rstrip("/"):
+                continue
+        pages.append(path)
     return sorted(pages)
 
 def public_url(path):

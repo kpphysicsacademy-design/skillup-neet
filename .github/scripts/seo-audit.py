@@ -45,6 +45,8 @@ class PageParser(HTMLParser):
             self.in_head = True
         elif tag == "svg":
             self.in_svg += 1
+            if self.anchor_open and a.get("aria-label"):
+                self.anchor_has_text = True
         elif tag == "title" and self.in_head and self.in_svg == 0:
             self.in_title = True
         elif tag == "h1":
@@ -71,13 +73,15 @@ class PageParser(HTMLParser):
                 self.images_missing_alt += 1
             elif self.anchor_open and a.get("alt"):
                 self.anchor_has_text = True
-        elif tag == "svg" and self.anchor_open and a.get("aria-label"):
-            self.anchor_has_text = True
 
     def handle_endtag(self, tag):
         tag = tag.lower()
-        if tag == "title":
+        if tag == "title" and self.in_title:
             self.in_title = False
+        elif tag == "svg" and self.in_svg:
+            self.in_svg -= 1
+        elif tag == "head":
+            self.in_head = False
         elif tag == "a" and self.anchor_open:
             if not self.anchor_has_text:
                 self.empty_anchors += 1

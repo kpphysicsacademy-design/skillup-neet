@@ -27,6 +27,12 @@ for title, rows in report.get("details", {}).get("duplicate_title_pages", {}).it
     print("DUPLICATE TITLE:", title, "=>", [row.get("path") for row in rows])
 for row in report.get("details", {}).get("title_length_out_of_range", []):
     print("TITLE LENGTH:", row.get("path"), row.get("title_length"), row.get("title"))
+for url, count in report.get("details", {}).get("duplicate_canonical_urls", {}).items():
+    print("DUPLICATE CANONICAL:", url, "count=", count)
+for row in report.get("details", {}).get("pages_without_h1", []):
+    print("NO H1:", row.get("path"), row.get("title"))
+for row in report.get("details", {}).get("pages_with_multiple_h1", []):
+    print("MULTIPLE H1:", row.get("path"), "count=", row.get("h1_count"), row.get("title"))
 print(json.dumps({
     "pages_scanned": report.get("pages_scanned"),
     "sitemap_url_count": report.get("sitemap_url_count"),

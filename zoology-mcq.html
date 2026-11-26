@@ -433,6 +433,48 @@ async function persistZoologyProgress(score,total,percentage,owner){
  return true;
 }
 window.SkillUpZoologyProgress=persistZoologyProgress;
+function pendingKey(owner){return 'skillup.zoology.pending.v1:'+encodeURIComponent(owner)+':'+encodeURIComponent(conceptId||requested);}
+function readPending(owner){
+ if(!owner)return null;
+ try{const row=JSON.parse(sessionStorage.getItem(pendingKey(owner)));
+ return row&&row.owner===owner&&Number.isInteger(row.score)&&Number.isInteger(row.total)&&row.total>0&&row.score>=0&&row.score<=row.total&&row.pct===Math.round(row.score/row.total*100)?row:null;}catch(_){return null;}
+}
+function showProgressSync(sync,result,isNew){
+ const key=result.owner?pendingKey(result.owner):null;
+ const raw=JSON.stringify(result);
+ let durable=false;
+ if(key){try{if(isNew)sessionStorage.setItem(key,raw);durable=sessionStorage.getItem(key)===raw;}catch(_){}}
+    const status=document.createElement('span');status.setAttribute('role','status');
+   const retry=document.createElement('button');retry.type='button';retry.textContent='Retry saving';retry.hidden=true;
+   sync.replaceChildren(status,retry);
+   let busy=false;
+   async function save(){
+    if(busy)return;
+    busy=true;retry.disabled=true;retry.hidden=true;
+    status.textContent='Saving progress to your account…';
+    try{
+     const saved=await persistZoologyProgress(result.score,result.total,result.pct,result.owner);
+     status.textContent=saved?'Progress saved to your account.':'Account sync is unavailable; this result remains visible for this session.';
+     retry.hidden=!!saved;
+     if(saved&&key){try{if(sessionStorage.getItem(key)===raw)sessionStorage.removeItem(key);}catch(_){}}
+    }catch(_){
+     status.textContent='Progress could not be synced. Retry with the same account.'+(durable?' This result can be recovered after refresh.':' Keep this page open; recovery storage is unavailable.');
+     retry.hidden=false;
+    }finally{busy=false;retry.disabled=false;}
+   }
+   retry.onclick=save;
+   if(isNew)save();else{status.textContent='Unsaved result recovered. Retry saving with the same account.';retry.hidden=false;}
+}
+async function recoverProgress(){
+ const auth=window.SkillUpAuth;
+ if(!auth)return;
+ try{const session=await auth.getSession();const row=readPending(session?.user?.uid);
+ if(!row)return;
+ const sync=document.createElement('div');sync.setAttribute('role','status');
+ document.body.prepend(sync);showProgressSync(sync,row,false);
+ }catch(_){}
+}
+window.addEventListener('load',recoverProgress,{once:true});
 function startZoologyQuiz(source,conceptName){
  const original=source.slice(0,30);
  const learnTab=document.getElementById('learnModeTab'),simTab=document.getElementById('simulatorModeTab'),learnPanel=document.getElementById('learnModePanel'),simPanel=document.getElementById('simulatorModePanel');
@@ -486,25 +528,7 @@ function startZoologyQuiz(source,conceptName){
   const sync=document.getElementById('progressSync');
   if(sync){
    const result={score,total:questions.length,pct,owner:window.SkillUpAuth?.auth?.currentUser?.uid||null};
-   const status=document.createElement('span');status.setAttribute('role','status');
-   const retry=document.createElement('button');retry.type='button';retry.textContent='Retry saving';retry.hidden=true;
-   sync.replaceChildren(status,retry);
-   let busy=false;
-   async function save(){
-    if(busy)return;
-    busy=true;retry.disabled=true;retry.hidden=true;
-    status.textContent='Saving progress to your account…';
-    try{
-     const saved=await persistZoologyProgress(result.score,result.total,result.pct,result.owner);
-     status.textContent=saved?'Progress saved to your account.':'Account sync is unavailable; this result remains visible for this session.';
-     retry.hidden=!!saved;
-    }catch(_){
-     status.textContent='Progress could not be synced. Retry with the same account before leaving this result.';
-     retry.hidden=false;
-    }finally{busy=false;retry.disabled=false;}
-   }
-   retry.onclick=save;
-   save();
+   showProgressSync(sync,result,true);
   }
   const review=document.getElementById('wrongReview');review.replaceChildren();
   if(wrongAttempts.length){const h=document.createElement('h3');h.textContent='🧠 Review your mistakes';review.appendChild(h);wrongAttempts.forEach((w,n)=>{const card=document.createElement('article');card.className='review-item';const q=document.createElement('p');q.style.fontWeight='800';q.textContent=(n+1)+'. '+w.item.q;const yours=document.createElement('p');yours.className='your-answer';yours.textContent='Your answer: '+w.chosen;const idx=answerIndex(w.item);const correct=document.createElement('p');correct.className='correct-answer';correct.textContent='Correct answer: '+((w.item.o||[])[idx]??'Not specified');const why=document.createElement('p');why.className='muted';why.textContent=w.item.e||'';card.append(q,yours,correct,why);review.appendChild(card);});document.getElementById('retryWrong').style.display='block';}

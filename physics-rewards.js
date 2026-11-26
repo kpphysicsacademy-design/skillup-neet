@@ -18,5 +18,22 @@ async function record(storage,event,currentOwner,locks=root.navigator?.locks){
  const key='skillup:physics:reward:'+encodeURIComponent(JSON.stringify([event.owner,event.topic,event.attemptId]));
  return gate(key,()=>{if(currentOwner()!==event.owner)throw Error('Account changed');if(storage.getItem(key))return false;storage.setItem(key,JSON.stringify(event));return true;},locks);
 }
-const api={record};if(typeof module==='object'&&module.exports)module.exports=api;else root.PhysicsRewards=api;
+const pendingPrefix=owner=>'skillup:physics:pending:'+encodeURIComponent(owner)+':';
+async function submit(storage,event,currentOwner,locks){
+ if(event.review)return false;
+ if(event.owner!==currentOwner())throw Error('Account changed');
+ const key=pendingPrefix(event.owner)+encodeURIComponent(JSON.stringify([event.topic,event.attemptId]));
+ if(!storage.getItem(key))storage.setItem(key,JSON.stringify(event));
+ const raw=storage.getItem(key),saved=JSON.parse(raw);
+ const result=await record(storage,saved,currentOwner,locks);
+ if(storage.getItem(key)===raw)storage.removeItem(key);
+ return result;
+}
+async function recover(storage,owner,currentOwner,locks){
+ if(owner!==currentOwner())throw Error('Account changed');
+ const prefix=pendingPrefix(owner),keys=[];
+ for(let i=0;i<storage.length;i++){const k=storage.key(i);if(k?.startsWith(prefix))keys.push(k);}
+ for(const key of keys){const raw=storage.getItem(key);if(!raw)continue;const event=JSON.parse(raw);if(event.owner!==owner)throw Error('Invalid pending owner');await submit(storage,event,currentOwner,locks);}
+}
+const api={record,submit,recover};if(typeof module==='object'&&module.exports)module.exports=api;else root.PhysicsRewards=api;
 })(globalThis);

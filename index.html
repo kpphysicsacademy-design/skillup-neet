@@ -197,7 +197,8 @@ a{color:inherit;text-decoration:none}
           const subject=String(r.subject||'SkillUp');
           const score=r.score??r.percentage;
           const sc=Number.isFinite(Number(score))?Math.round(Number(score))+'%':'';
-          const d=new Date(r.updated_at||r.completed_at||'');
+          const ms=activityTime(r.updated_at)??activityTime(r.completed_at);
+          const d=new Date(ms??NaN);
           const when=Number.isFinite(d.getTime())?d.toLocaleDateString(undefined,{day:'2-digit',month:'short'}):'';
           const paths={physics:'physics-home-fast.html',chemistry:'chemistry-home.html',botany:'botany-home.html',zoology:'zoology-home.html',maths:'maths-home.html',mathematics:'maths-home.html',biology:'index.html'};
           const key=subject.trim().toLowerCase();

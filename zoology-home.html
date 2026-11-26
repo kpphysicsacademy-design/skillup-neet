@@ -126,6 +126,11 @@ body{background:radial-gradient(ellipse at 8% 0%,#eaf8f3 0,transparent 42%),radi
 .concept-card{display:block;padding:12px;border:2px solid #dcebe4;border-radius:17px;background:#fff;box-shadow:0 4px 0 #e4efe9}
 
 
+
+/* Prevent legacy chapter-anchor card styling from double-framing the new linked concept card. */
+.chapter a.concept-card-link{display:block;min-height:0;padding:0;border:0;background:transparent;box-shadow:none;transform:none}
+.chapter a.concept-card-link:hover{border:0;background:transparent;box-shadow:none}
+
 /* Single-destination concept navigation: open the integrated Learn/Simulator quiz page. */
 .concept-card-link{display:block;color:inherit;text-decoration:none;border-radius:17px}
 .concept-card-link:focus-visible{outline:3px solid #168b91;outline-offset:3px}
@@ -265,7 +270,7 @@ body{background:radial-gradient(circle at 3% 4%,#e5f5ff 0,transparent 29%),radia
 </section>
 
 <div class="tools"><input id="q" class="search" placeholder="Search Zoology concepts…" aria-label="Search Zoology concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
-<section id="path" class="path"></section><div id="empty" class="empty">No matching Zoology concepts found.</div>
+<section id="path" class="path" aria-label="Zoology concept path" aria-live="polite"></section><div id="empty" role="status" aria-live="polite" class="empty">No matching Zoology concepts found.</div>
 </main>
 <script>
 (function(){
@@ -312,6 +317,7 @@ if(target){var el=document.getElementById(target.id);if(el){el.scrollIntoView({b
 var s=document.createElement('div');s.style.height='1px';p.after(s);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0]&&es[0].isIntersecting)more();},{rootMargin:'700px'});io.observe(s);}else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>=document.body.offsetHeight-1200)more();});}
 document.getElementById('searchBtn').onclick=function(){term=q.value.trim().toLowerCase();var list=term?a.filter(function(x){return (x.c+' '+x.n).toLowerCase().indexOf(term)>-1;}):a;render(list,term?list.length:I);};
+q.addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();document.getElementById('searchBtn').click();}});
 var mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');
 if(mb&&mn){mb.onclick=function(){var o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',function(e){if(!e.target.closest('.menu-wrap')){mn.classList.remove('open');mb.setAttribute('aria-expanded','false');}});}
 })();

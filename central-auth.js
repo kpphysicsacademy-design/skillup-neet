@@ -103,5 +103,5 @@
     });
   }
 
-  window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress,getProgress};
+  window.SkillUpAuth={getSessionEpoch:()=>sessionEpoch,configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress,getProgress};
 })();

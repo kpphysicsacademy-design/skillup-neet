@@ -203,7 +203,7 @@ function persist(){
 }
 async function initializeQuiz(uid){
  if(restored||!uid)return;restored=true;
- quizUid=uid;void PhysicsRewards.recover(localStorage,uid,()=>window.SkillUpAuth?.auth?.currentUser?.uid).catch(e=>syncStatus('offline','Pending reward recovery failed: '+e.message));storageKey='skillup-physical-quantities-quiz-v1:'+uid;
+ quizUid=uid;void PhysicsRewards.recover(localStorage,uid,()=>window.SkillUpAuth?.auth?.currentUser?.uid,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid);}).catch(e=>syncStatus('offline','Pending reward recovery failed: '+e.message));storageKey='skillup-physical-quantities-quiz-v1:'+uid;
  let local=null,remote=null;
  try{local=JSON.parse(localStorage.getItem(storageKey)||'null');}catch(e){}
  // Existing v1 local progress remains eligible for migration.
@@ -255,7 +255,7 @@ $('check').addEventListener('click',()=>{
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(save=true){
- completed=true;if(save)persist();if(attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.submit(localStorage,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid).catch(e=>{syncStatus('offline','Reward not saved. Reopen this completed attempt to retry: '+e.message);});}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ completed=true;if(save)persist();if(attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.submit(localStorage,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid);}).catch(e=>{syncStatus('offline','Reward not saved. Reopen this completed attempt to retry: '+e.message);});}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';

@@ -57,3 +57,15 @@ test('display uses same normalized timestamp as sorting',()=>{
     assert.equal(render([{subject:'Physics',score:80,...row}])[0].children[1].children[1].textContent,'Physics · 80% · '+expected);
   }
 });
+
+test('homepage external scripts defer in dependency order and personalization waits',()=>{
+ const scripts=[...html.matchAll(/<script\b([^>]*)>/gi)].map(m=>m[1]);
+ const external=scripts.filter(s=>/\bsrc=/.test(s));
+ assert.equal(external.length,6);
+ assert.ok(external.every(s=>/\bdefer\b/.test(s)&&!/\basync\b/.test(s)));
+ const order=['firebase-app-compat.js','firebase-auth-compat.js','firebase-firestore-compat.js','central-config.js','central-auth.js','shared-nav.js'];
+ order.forEach((name,i)=>assert.ok(external[i].includes(name)));
+ assert.ok(html.includes("document.addEventListener('DOMContentLoaded',async function(){"));
+ assert.ok(html.includes("},{once:true});"));
+ for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))if(m[1].trim())assert.doesNotThrow(()=>new vm.Script(m[1]));
+});

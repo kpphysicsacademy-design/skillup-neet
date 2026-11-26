@@ -1,0 +1,26 @@
+name: Botany Phase 1 browser regression
+on:
+  pull_request:
+    paths:
+      - 'botany-*.html'
+      - 'tests/botany-*.cjs'
+      - 'scripts/audit-botany-ch3.cjs'
+      - '.github/workflows/botany-phase1-browser.yml'
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/botany-phase1.test.cjs
+      - run: npm install --no-save --package-lock=false playwright@1.51.1
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/botany-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/botany-home.html >/dev/null && break; sleep 1; done
+          node tests/botany-browser.cjs

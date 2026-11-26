@@ -19,21 +19,28 @@ async function record(storage,event,currentOwner,locks=root.navigator?.locks){
  return gate(key,()=>{if(currentOwner()!==event.owner)throw Error('Account changed');if(storage.getItem(key))return false;storage.setItem(key,JSON.stringify(event));return true;},locks);
 }
 const pendingPrefix=owner=>'skillup:physics:pending:'+encodeURIComponent(owner)+':';
-async function submit(storage,event,currentOwner,locks){
+async function submit(storage,event,currentOwner,locks,cloud){
  if(event.review)return false;
  if(event.owner!==currentOwner())throw Error('Account changed');
  const key=pendingPrefix(event.owner)+encodeURIComponent(JSON.stringify([event.topic,event.attemptId]));
  if(!storage.getItem(key))storage.setItem(key,JSON.stringify(event));
  const raw=storage.getItem(key),saved=JSON.parse(raw);
  const result=await record(storage,saved,currentOwner,locks);
+ if(cloud){if(currentOwner()!==saved.owner)throw Error('Account changed');await cloud(saved);if(currentOwner()!==saved.owner)throw Error('Account changed');}
  if(storage.getItem(key)===raw)storage.removeItem(key);
  return result;
 }
-async function recover(storage,owner,currentOwner,locks){
+async function recover(storage,owner,currentOwner,locks,cloud){
  if(owner!==currentOwner())throw Error('Account changed');
  const prefix=pendingPrefix(owner),keys=[];
  for(let i=0;i<storage.length;i++){const k=storage.key(i);if(k?.startsWith(prefix))keys.push(k);}
- for(const key of keys){const raw=storage.getItem(key);if(!raw)continue;const event=JSON.parse(raw);if(event.owner!==owner)throw Error('Invalid pending owner');await submit(storage,event,currentOwner,locks);}
+ for(const key of keys){const raw=storage.getItem(key);if(!raw)continue;const event=JSON.parse(raw);if(event.owner!==owner)throw Error('Invalid pending owner');await submit(storage,event,currentOwner,locks,cloud);}
 }
-const api={record,submit,recover};if(typeof module==='object'&&module.exports)module.exports=api;else root.PhysicsRewards=api;
+async function cloudRecord(db,event,currentOwner){
+ if(event.review||event.subject!=='physics'||event.topic!=='physical_quantities_practice'||!event.owner||event.owner!==currentOwner()||! /^[a-zA-Z0-9-]{1,80}$/.test(event.attemptId)||!Number.isInteger(event.score)||event.score<0||event.score>30)throw Error('Invalid cloud reward');
+ const ref=db.collection('skillup_progress').doc(event.owner+'_physics_'+event.topic);
+ const transact=()=>db.runTransaction(async tx=>{const snap=await tx.get(ref);if(currentOwner()!==event.owner)throw Error('Account changed');const prior=snap.exists?snap.data():{},events=Array.isArray(prior.reward_events)?prior.reward_events:[];const old=events.find(e=>e.attemptId===event.attemptId);if(old){if(old.owner!==event.owner||old.score!==event.score)throw Error('Conflicting reward');return;}if(events.length>=1000)throw Error('Reward ledger capacity reached');tx.set(ref,{user_id:event.owner,reward_events:[...events,event]},{merge:true});});
+ try{await transact();}catch(e){if(e.code!=='permission-denied'||currentOwner()!==event.owner)throw e;await ref.set({user_id:event.owner},{merge:true});if(currentOwner()!==event.owner)throw Error('Account changed');await transact();}
+}
+const api={record,submit,recover,cloudRecord};if(typeof module==='object'&&module.exports)module.exports=api;else root.PhysicsRewards=api;
 })(globalThis);

@@ -1,14 +1,12 @@
 name: Fix Physics progressive blank
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'physics-progressive-render-fix.js'
 jobs:
   fix:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: Install resilient renderer
@@ -31,16 +29,18 @@ jobs:
         run: |
           grep -q 'physics-progressive-render-fix.js?v=1' physics-home-fast.html
           test -s physics-progressive-render-fix.js
-      - name: Commit
-        run: |
-          git config user.name 'skillup-bot'
-          git config user.email 'skillup-bot@users.noreply.github.com'
-          git add physics-home-fast.html
-          git diff --cached --quiet || git commit -m 'Fix blank progressive Physics path'
-          git push
-      - name: Remove one-time workflow
-        if: always()
-        run: |
-          git rm -f .github/workflows/fix-physics-progressive-blank.yml || true
-          git commit -m 'Remove one-time Physics blank fix workflow' || true
-          git push || true
+      - name: Propose Physics progressive renderer fix for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/physics-progressive-blank-fix
+          delete-branch: true
+          commit-message: 'Propose Physics progressive renderer fix'
+          title: 'Review Physics progressive blank-page resilience fix'
+          body: |
+            This PR proposes adding the existing progressive renderer to the Physics home page.
+
+            Review script loading order, dataset compatibility, rendering and search behavior on mobile and desktop before merging.
+            The workflow no longer pushes generated HTML directly to main and remains available for controlled manual execution.
+          add-paths: |
+            physics-home-fast.html

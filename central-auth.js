@@ -47,32 +47,38 @@
 
   async function getProfile(userId){
     if(!db||!userId) return null;
+    if(auth?.currentUser?.uid!==userId) throw new Error('Profile owner mismatch');
     const snap=await db.collection('skillup_profiles').doc(userId).get();
+    if(auth?.currentUser?.uid!==userId) throw new Error('Account changed during profile read');
     return snap.exists?snap.data():null;
   }
 
   async function saveProfile(profile){
-    if(!db||!auth.currentUser) throw new Error('Authentication required');
-    const row=Object.assign({},profile,{id:auth.currentUser.uid,user_id:auth.currentUser.uid,updated_at:new Date().toISOString()});
-    await db.collection('skillup_profiles').doc(auth.currentUser.uid).set(row,{merge:true});
+    const user=auth?.currentUser;
+    if(!db||!user) throw new Error('Authentication required');
+    const row=Object.assign({},profile,{id:user.uid,user_id:user.uid,updated_at:new Date().toISOString()});
+    await db.collection('skillup_profiles').doc(user.uid).set(row,{merge:true});
     return row;
   }
 
   async function saveProgress(progress){
-    if(!db||!auth.currentUser) throw new Error('Authentication required');
+    const user=auth?.currentUser;
+    if(!db||!user) throw new Error('Authentication required');
     const subject=String(progress.subject||'').replace(/[^a-zA-Z0-9_-]/g,'_');
     const topic=String(progress.topic||'').replace(/[^a-zA-Z0-9_-]/g,'_');
-    const id=auth.currentUser.uid+'_'+subject+'_'+topic;
-    const row=Object.assign({},progress,{user_id:auth.currentUser.uid,updated_at:new Date().toISOString()});
+    const id=user.uid+'_'+subject+'_'+topic;
+    const row=Object.assign({},progress,{user_id:user.uid,updated_at:new Date().toISOString()});
     await db.collection('skillup_progress').doc(id).set(row,{merge:true});
     return row;
   }
 
   async function getProgress(subject){
-    if(!db||!auth.currentUser) return [];
+    const user=auth?.currentUser;
+    if(!db||!user) return [];
     const snap=await db.collection('skillup_progress')
-      .where('user_id','==',auth.currentUser.uid)
+      .where('user_id','==',user.uid)
       .get();
+    if(auth.currentUser?.uid!==user.uid) throw new Error('Account changed during progress read');
     return snap.docs.map(d=>d.data()).filter(function(row){
       return String(row.subject||'').toLowerCase()===String(subject||'').toLowerCase();
     });

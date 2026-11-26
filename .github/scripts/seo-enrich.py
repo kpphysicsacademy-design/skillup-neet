@@ -455,6 +455,10 @@ def insert_visible_h1(content: str, title: str) -> str:
 
 
 def normalize_headings(content: str, path: Path, title: str, info: MetaParser) -> str:
+    # Interactive quiz pages render their question as the primary heading at runtime.
+    # Do not inject a second, generic SEO heading above the quiz interface.
+    if re.search(r'<(?:section|div)\\b[^>]*\\bid=["\\']quiz["\\']', content, re.I) and re.search(r'<(?:h2|div)\\b[^>]*\\bid=["\\']question["\\']', content, re.I):
+        return content
     if info.static_h1_count > 1:
         content = demote_static_h1(content)
     if info.dynamic_h1_count:

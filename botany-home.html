@@ -227,6 +227,7 @@ const path=document.getElementById('path'),q=document.getElementById('q'),empty=
 let chapter2Owner=null;
 const chapter2ProgressKey='skillup.botany.chapter2.progress.v2.';
 function readChapter2Progress(){if(!chapter2Owner||window.SkillUpAuth?.auth?.currentUser?.uid!==chapter2Owner)return {};try{const value=JSON.parse(localStorage.getItem(chapter2ProgressKey+encodeURIComponent(chapter2Owner))||'{}');return value&&typeof value==='object'?value:{};}catch(_error){return {};}}
+window.addEventListener('botany-auth-ready',()=>{(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;api.auth.onAuthStateChanged(user=>{chapter2Owner=user?.uid||null;chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();search();if(!user)api.requireAuth(location.href);});})();});
 let chapter2Progress=readChapter2Progress();
 function updateChapter2ProgressLabel(){
  const unit=units.find(u=>u[0]==='Structural Organisation in Plants');
@@ -291,7 +292,7 @@ if(mb&&mn){mb.onclick=()=>{const o=mn.classList.toggle('open');mb.setAttribute('
   const mo=new MutationObserver(resume);mo.observe(document.body,{childList:true,subtree:true});
   setTimeout(()=>mo.disconnect(),10000);
 })();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;api.auth.onAuthStateChanged(user=>{chapter2Owner=user?.uid||null;chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();search();if(!user)api.requireAuth(location.href);});})();</script>
+</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>window.dispatchEvent(new Event("botany-auth-ready"));</script>
 
 <script src="/shared-nav.js?v=20261125-central-design-system-v2"></script>
 <script>

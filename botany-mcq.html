@@ -811,6 +811,7 @@ let botanySessionOwner=null,botanySessionInvalid=false,botanySessionEpoch=null;
 function botanySessionValid(){const api=window.SkillUpAuth;return !botanySessionInvalid&&!!botanySessionOwner&&api?.auth?.currentUser?.uid===botanySessionOwner&&typeof api.getSessionEpoch==='function'&&api.getSessionEpoch()===botanySessionEpoch;}
 window.addEventListener('pagehide',()=>{botanySessionInvalid=true;});
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
+window.addEventListener('botany-auth-ready',()=>{(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;botanySessionOwner=session.user.uid;botanySessionEpoch=api.getSessionEpoch?.();api.auth.onAuthStateChanged(user=>{if(user?.uid!==botanySessionOwner){botanySessionInvalid=true;if(!user)api.requireAuth(location.href);else location.reload();}});})();});
 function startBotanyQuiz(source,conceptName){
  // Include the explained extension questions instead of silently truncating at 30.
  const original=source.slice();
@@ -917,7 +918,7 @@ else{
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startRecovery);else startRecovery();
 })();</script>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;botanySessionOwner=session.user.uid;botanySessionEpoch=api.getSessionEpoch?.();api.auth.onAuthStateChanged(user=>{if(user?.uid!==botanySessionOwner){botanySessionInvalid=true;if(!user)api.requireAuth(location.href);else location.reload();}});})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>window.dispatchEvent(new Event("botany-auth-ready"));</script>
 
 
 <script src="/shared-nav.js?v=20261125-central-design-system-v2"></script>

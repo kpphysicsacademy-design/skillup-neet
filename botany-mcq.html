@@ -807,14 +807,17 @@ if(sheetLink){
   :(['cell theory','prokaryotic cell','eukaryotic cell'].includes(key)?'botany-cell-cheat-sheet.html?concept='+encodeURIComponent(requested):'botany-topic-cheat-sheet.html?concept='+encodeURIComponent(requested)+(key==='plasma membrane'?'&v=20261123-plasma-membrane-live-fix-v1':''));
  sheetLink.textContent=isWhatLiving?'📘 Quick Cheat Sheet':'📘 Topic Cheat Sheet';
 }
-let botanySessionOwner=null,botanySessionInvalid=false;
+let botanySessionOwner=null,botanySessionInvalid=false,botanySessionEpoch=null;
+function botanySessionValid(){const api=window.SkillUpAuth;return !botanySessionInvalid&&!!botanySessionOwner&&api?.auth?.currentUser?.uid===botanySessionOwner&&typeof api.getSessionEpoch==='function'&&api.getSessionEpoch()===botanySessionEpoch;}
+window.addEventListener('pagehide',()=>{botanySessionInvalid=true;});
+window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 function startBotanyQuiz(source,conceptName){
  // Include the explained extension questions instead of silently truncating at 30.
  const original=source.slice();
  const chapter2Concepts=new Set(['plant tissues','meristematic tissue','permanent tissue','parenchyma','collenchyma','sclerenchyma','xylem','phloem','root morphology','root anatomy','root modifications','stem morphology','stem anatomy','stem modifications','leaf morphology','leaf anatomy','leaf modifications','secondary growth','phyllotaxy','venation','inflorescence','racemose inflorescence','cymose inflorescence','flower structure','aestivation','androecium','gynoecium','placentation','fruit','seed','dicot seed','monocot seed','plant families in neet','fabaceae','solanaceae','liliaceae','tissue systems','epidermal tissue system','ground tissue system','vascular tissue system','dicot root t.s.','monocot root t.s.','dicot stem t.s.','monocot stem t.s.','dorsiventral leaf','isobilateral leaf','annual rings','cork cambium','heartwood and sapwood','stomatal apparatus','trichomes','root cap','endodermis','pericycle','vascular bundle types','open and closed vascular bundles','cambium ring','secondary xylem','secondary phloem','lenticels','medullary rays','floral formula and floral diagram']);
  const isChapter2=chapter2Concepts.has(conceptName.toLowerCase());
  function saveChapter2Progress(){
-  if(!isChapter2||botanySessionInvalid||!botanySessionOwner||window.SkillUpAuth?.auth?.currentUser?.uid!==botanySessionOwner)return;
+  if(!isChapter2||!botanySessionValid())return;
   try{
    const storageKey='skillup.botany.chapter2.progress.v2.'+encodeURIComponent(botanySessionOwner);
    const data=JSON.parse(localStorage.getItem(storageKey)||'{}');
@@ -914,7 +917,7 @@ else{
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startRecovery);else startRecovery();
 })();</script>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;botanySessionOwner=session.user.uid;api.auth.onAuthStateChanged(user=>{if(user?.uid!==botanySessionOwner){botanySessionInvalid=true;if(!user)api.requireAuth(location.href);else location.reload();}});})();</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;botanySessionOwner=session.user.uid;botanySessionEpoch=api.getSessionEpoch?.();api.auth.onAuthStateChanged(user=>{if(user?.uid!==botanySessionOwner){botanySessionInvalid=true;if(!user)api.requireAuth(location.href);else location.reload();}});})();</script>
 
 
 <script src="/shared-nav.js?v=20261125-central-design-system-v2"></script>

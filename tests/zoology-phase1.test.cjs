@@ -3,6 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
+const pathModule=path;
 const home=fs.readFileSync(path.join(__dirname,'../zoology-home.html'),'utf8');
 const quiz=fs.readFileSync(path.join(__dirname,'../zoology-mcq.html'),'utf8');
 const start=home.indexOf('var units='),end=home.indexOf('var p=document',start);
@@ -99,4 +100,25 @@ test('What is Living quiz route resolves its dedicated 30-question bank',()=>{
  assert.ok(Array.isArray(bank));
  assert.equal(bank.length,30);
  assert.ok(bank.every(row=>row&&typeof row.q==='string'&&Array.isArray(row.o)&&row.o.length>=2&&Number.isInteger(row.a)&&row.a>=0&&row.a<row.o.length));
+});
+
+test('every Zoology catalog concept resolves to an executable dedicated MCQ bank',()=>{
+ const catalogContext={};vm.createContext(catalogContext);vm.runInContext(home.slice(start,end),catalogContext);
+ let checked=0;
+ for(const unit of catalogContext.units){
+  for(const concept of unit[1]){
+   const conceptName=concept[0];
+   const id='zoo-'+encodeURIComponent(unit[0])+'--'+encodeURIComponent(conceptName);
+   const file=loaderContext(id).candidates(conceptName)[0];
+   const bankPath=pathModule.join(__dirname,'../question-banks',file);
+   assert.ok(fs.existsSync(bankPath),'Missing bank for '+unit[0]+' / '+conceptName+': '+file);
+   const bankContext={window:{}};vm.createContext(bankContext);
+   assert.doesNotThrow(()=>vm.runInContext(fs.readFileSync(bankPath,'utf8'),bankContext),file+' must execute');
+   const arrays=Object.values(bankContext.window).filter(Array.isArray);
+   const valid=arrays.some(rows=>rows.length>0&&rows.every(row=>row&&typeof row==='object'&&'q'in row&&'o'in row&&'a'in row));
+   assert.ok(valid,'No valid q/o/a question array exported by '+file);
+   checked++;
+  }
+ }
+ assert.equal(checked,catalogContext.units.reduce((sum,unit)=>sum+unit[1].length,0));
 });

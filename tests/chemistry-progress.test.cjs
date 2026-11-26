@@ -10,3 +10,6 @@ test('wrong-only retry retains subset and earns no extra XP',()=>{const s=storag
 test('bank changes invalidate stale attempts',()=>{const p=create(storage(),'A','matter');p.save(attempt());assert.equal(p.restore('v2'),null);});
 test('storage failure retains in-memory progress',()=>{const p=create({getItem(){throw Error()},setItem(){throw Error()}},'A','matter');p.save(attempt());assert.deepEqual(p.restore('v1'),attempt());p.complete(attempt(),'2026-11-24');assert.equal(p.summary().xp,10);});
 test('invalid completion rejected',()=>{const p=create(storage(),'A','matter');assert.throws(()=>p.complete(attempt({index:1}),'2026-11-24'));});
+
+test('replayed attempt retains first reward even if score changes',()=>{const s=storage(),p=create(s,'A','matter');p.complete(attempt(),'2026-11-24');const reward=create(s,'A','matter').complete(attempt({score:2}),'2026-11-25');assert.equal(reward.score,1);assert.equal(p.summary().xp,10);});
+test('cloud sync uses canonical local completion reward',()=>{const html=require('node:fs').readFileSync(require('node:path').join(__dirname,'../chemistry-mcq.html'),'utf8');assert.match(html,/const earned=\{\.\.\.completed,score:reward.score,review:reward.review\}/);assert.ok(html.includes('void syncCompletion(status,earned)'));});

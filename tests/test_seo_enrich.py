@@ -50,7 +50,7 @@ def main() -> None:
         (root / "physics-dynamic-quiz.html").write_text(
             '<!doctype html><html><head><title>SkillUp Physics | Dynamic Quiz</title></head>'
             '<body><main><section id="quiz"><div id="qmeta">QUESTION 1</div>'
-            '<h2 id="question"></h2><div id="options"></div></section></main></body></html>',
+            '<h1 id="question"></h1><div id="options"></div></section></main></body></html>',
             encoding="utf-8",
         )
         (root / "physics-no-heading.html").write_text(
@@ -101,7 +101,7 @@ def main() -> None:
         assert "admin.html" not in site_map
         dynamic_quiz = (root / "physics-dynamic-quiz.html").read_text(encoding="utf-8")
         assert 'class="skillup-seo-heading"' not in dynamic_quiz
-        assert '<h2 id="question"></h2>' in dynamic_quiz
+        assert '<h1 id="question"></h1>' in dynamic_quiz
         no_heading = (root / "physics-no-heading.html").read_text(encoding="utf-8")
         assert '<h1 class="skillup-seo-heading">No Heading</h1>' in no_heading
         multiple = (root / "physics-multiple-headings.html").read_text(encoding="utf-8")

@@ -238,6 +238,7 @@ document.querySelector('.botany-pills')?.appendChild(chapter2Label);
 updateChapter2ProgressLabel();
 window.addEventListener('pageshow',()=>{chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();search();});
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const studyRoutes=new Map(['Cell Theory','Prokaryotic Cell','Eukaryotic Cell'].map(name=>[name,'botany-cell-cheat-sheet.html']));
 function render(list){
  let h='',last=0;
  list.forEach(x=>{if(x.u!==last){h+=`<div class="unit" id="unit-${x.u}"><div class="unit-main"><span class="unum">${x.u}</span><div><h2>${esc(x.name)}</h2><small>NCERT + NEET Botany • ${units[x.u-1][1].length} concepts</small></div></div></div>`;last=x.u;}
@@ -247,16 +248,16 @@ function render(list){
  path.innerHTML=h;
  path.querySelectorAll('.chapter').forEach(card=>{
   const title=card.querySelector('.title span:last-child')?.textContent?.trim();
-  if(!['Cell Theory','Prokaryotic Cell','Eukaryotic Cell'].includes(title))return;
+  if(!studyRoutes.has(title))return;
   const link=card.querySelector('a');if(!link)return;
-  link.href='botany-cell-cheat-sheet.html?concept='+encodeURIComponent(title);
+  link.href=studyRoutes.get(title)+'?concept='+encodeURIComponent(title);
   link.setAttribute('aria-label','Study '+title+' — lesson, diagram, quick check and quiz');
   link.title='Study '+title+' before starting the quiz';
  });
  empty.hidden=!!list.length;empty.style.display=list.length?'none':'block';document.getElementById('botanyLoading').hidden=true;
 }
 function search(){const term=q.value.trim().toLowerCase();render(term?concepts.filter(x=>(x.concept+' '+x.name).toLowerCase().includes(term)):concepts);}
-function restoreSearch(){q.value=new URLSearchParams(location.search).get('q')||'';search();}
+function restoreSearch(){const params=new URLSearchParams(location.search);q.value=params.get('q')||'';const target=(params.get('resumeConcept')||'').trim().toLowerCase();if(target){const matches=concepts.filter(x=>x.stableId===target||x.concept.toLowerCase()===target);if(matches.length===1&&!(matches[0].concept+' '+matches[0].name).toLowerCase().includes(q.value.trim().toLowerCase())){q.value='';params.delete('q');history.replaceState(history.state,'',location.pathname+'?'+params.toString()+location.hash);}}search();}
 function saveSearch(){const url=new URL(location.href);if(q.value.trim())url.searchParams.set('q',q.value.trim());else url.searchParams.delete('q');history.replaceState(history.state,'',url);search();}
 try{restoreSearch();}catch(error){document.getElementById('botanyLoading').hidden=true;document.getElementById('botanyError').hidden=false;}
 document.getElementById('searchBtn').onclick=saveSearch;q.addEventListener('keydown',e=>{if(e.key==='Enter')saveSearch();});

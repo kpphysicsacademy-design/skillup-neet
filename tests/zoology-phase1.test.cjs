@@ -151,7 +151,7 @@ test('answerIndex supports numeric, option-text and letter-coded answer keys',()
 });
 
 test('Quick Learn routes duplicate titles and special Zoology banks correctly',()=>{
- const start=quickLearn.indexOf('function bankFileForTopic(');
+ const start=quickLearn.indexOf('const slug=s=>');
  const end=quickLearn.indexOf("document.getElementById('topicTitle')",start);
  assert.ok(start>=0&&end>start);
  const c={encodeURIComponent};vm.createContext(c);vm.runInContext(quickLearn.slice(start,end),c);
@@ -163,7 +163,7 @@ test('Quick Learn routes duplicate titles and special Zoology banks correctly',(
  assert.equal(c.bankFileForTopic('Biodiversity','zoo-Diversity%20in%20Living%20World--Biodiversity'),'biodiversity-question-bank.js');
 });
 test('Quick Learn resolves the exact expected bank global, including the Zoology Enzymes bank',()=>{
- const start=quickLearn.indexOf('function bankFileForTopic(');
+ const start=quickLearn.indexOf('const slug=s=>');
  const end=quickLearn.indexOf("document.getElementById('topicTitle')",start);
  const c={encodeURIComponent};vm.createContext(c);vm.runInContext(quickLearn.slice(start,end),c);
  const enzymes=[{q:'Q',o:['A','B'],a:0}],biodiversity=[{q:'Q2',o:['A','B'],a:1}];

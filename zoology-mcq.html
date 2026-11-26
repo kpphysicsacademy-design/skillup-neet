@@ -415,7 +415,7 @@ function loadBank(file){return new Promise((resolve,reject)=>{
  };
  tryNext();
 });}
-async function persistZoologyProgress(score,total,percentage,owner){
+async function persistZoologyProgress(score,total,percentage,owner,finishedAt){
  const auth=window.SkillUpAuth;
  if(!auth||typeof auth.saveProgress!=='function')return false;
  if(owner!==undefined&&(!owner||auth.auth?.currentUser?.uid!==owner))throw new Error('Account changed');
@@ -429,7 +429,7 @@ async function persistZoologyProgress(score,total,percentage,owner){
   total_questions:Number(total),
   percentage:Number(percentage),
   xp:Number(score)*10
- });
+ },finishedAt===undefined?undefined:{owner,finishedAt});
  return true;
 }
 window.SkillUpZoologyProgress=persistZoologyProgress;
@@ -448,13 +448,15 @@ function showProgressSync(sync,result,isNew){
    const retry=document.createElement('button');retry.type='button';retry.textContent='Retry saving';retry.hidden=true;
    sync.replaceChildren(status,retry);
    let busy=false;
+   const retrySession=bindQuizOwner(window.SkillUpAuth?.auth);
    async function save(){
+    if(!result.owner||retrySession.owner()!==result.owner){status.textContent='Account session changed. Reopen this page with the original account to recover progress.';retry.hidden=true;return;}
     if(busy)return;
     if(key&&durable){try{if(sessionStorage.getItem(key)!==raw){status.textContent='This pending result has been superseded.';retry.hidden=true;return;}}catch(_){}}
     busy=true;retry.disabled=true;retry.hidden=true;
     status.textContent='Saving progress to your account…';
     try{
-     const saved=await persistZoologyProgress(result.score,result.total,result.pct,result.owner);
+     const saved=await persistZoologyProgress(result.score,result.total,result.pct,result.owner,result.finishedAt);
      status.textContent=saved?'Progress saved to your account.':'Account sync is unavailable; this result remains visible for this session.';
      retry.hidden=!!saved;
      if(saved&&key){try{if(sessionStorage.getItem(key)===raw)sessionStorage.removeItem(key);}catch(_){}}
@@ -535,7 +537,7 @@ function startZoologyQuiz(source,conceptName){
   document.getElementById('final').textContent=score+' / '+questions.length;document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
   const sync=document.getElementById('progressSync');
   if(sync){
-   const result={score,total:questions.length,pct,owner:ownership.owner()};
+   const result={score,total:questions.length,pct,owner:ownership.owner(),finishedAt:Date.now()};
    showProgressSync(sync,result,true);
   }
   const review=document.getElementById('wrongReview');review.replaceChildren();

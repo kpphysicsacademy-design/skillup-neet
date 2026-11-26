@@ -88,7 +88,7 @@ test('progress persistence does not write when the account adapter is unavailabl
 test('all inline scripts in Zoology entry pages parse before deployment',()=>{
  for(const file of ['zoology-mcq.html','zoology-quicklearn.html','zoology-topic-cheat-sheet.html','zoology-home.html','zoology-chapter-test.html']){
   const source=fs.readFileSync(path.join(__dirname,'..',file),'utf8');
-  const scripts=[...source.matchAll(/<script\\b[^>]*>([\\s\\S]*?)<\\/script>/gi)].map(match=>match[1]).filter(code=>code.trim());
+  const scripts=[...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(match=>match[1]).filter(code=>code.trim());
   for(const [index,code] of scripts.entries())assert.doesNotThrow(()=>new vm.Script(code,{filename:file+' inline script '+index}),file+' inline script '+index);
  }
 });

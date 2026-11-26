@@ -247,10 +247,13 @@ async function syncCompletion(status,s){
  status.textContent='Progress saved to your account.';
  }catch(e){status.textContent='Cloud save failed. Local progress retained. ';const retry=document.createElement('button');retry.type='button';retry.textContent='Retry cloud save';retry.onclick=()=>{retry.disabled=true;void syncCompletion(status,s);};status.appendChild(retry);}
 }
-function showResults(){
+async function showResults(){
  $('quiz').style.display='none';$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','100');
  const completed=snapshot();
- const reward=engine.complete(completed,dateKey(new Date()));refreshLearningScore();
+ let reward;
+ try{reward=await engine.completeAtomic(completed,dateKey(new Date()));}catch(e){const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Reward storage unavailable. Your attempt is retained; refresh to retry.';$('finishSlot').replaceChildren(status);return;}
+ if(owner&&(window.SkillUpAuth?.auth?.currentUser?.uid!==owner))return;
+ refreshLearningScore();
  const earned={...completed,score:reward.score,review:reward.review};
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  card.innerHTML='<div class="trophy">🏆</div><h2>'+esc(concept)+' Complete!</h2><div class="score">'+score+' / '+questions.length+'</div><p class="muted">'+pct+'% correct • '+(reviewMode?0:score*10)+' XP earned</p><div class="review" id="wrongReview"></div><button class="btn" id="retryWrong" style="display:'+(wrongAttempts.length?'inline-block':'none')+'">↻ Retry wrong answers ('+wrongAttempts.length+')</button><br><button class="btn" id="retry">Practice all questions again</button><br><a href="chemistry-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Chemistry Path</a>';

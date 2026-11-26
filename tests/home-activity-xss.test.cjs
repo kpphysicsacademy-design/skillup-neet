@@ -34,3 +34,16 @@ test('prototype names and unknown subjects use safe fallback',()=>{
     assert.equal(render([{subject}])[0].href.split('?')[0],'index.html');
   }
 });
+
+test('recent activity sorts all owner records before selecting five',async()=>{
+  const start=html.indexOf("const snap=await db.collection('skillup_progress')");
+  const end=html.indexOf("const list=document.getElementById('homeActivityList')",start);
+  assert.ok(start>=0 && end>start);
+  const docs=Array.from({length:20},(_,i)=>({id:String(i),data:()=>({topic:String(i),updated_at:new Date(Date.UTC(2026,0,i+1)).toISOString()})}));
+  docs.push({id:'legacy',data:()=>({topic:'legacy',updated_at:'invalid',completed_at:'2026-02-01T00:00:00Z'})});
+  docs.push({id:'timestamp',data:()=>({topic:'timestamp',updated_at:{toMillis:()=>Date.UTC(2026,2,1)}})});
+  docs.push({id:'invalid',data:()=>({topic:'invalid'})});
+  const db={collection(name){assert.equal(name,'skillup_progress');return {where(field,op,uid){assert.deepEqual([field,op,uid],['user_id','==','owner']);return {get:async()=>({docs})};}};}};
+  const rows=await vm.runInNewContext('(async()=>{'+html.slice(start,end)+';return rows;})()',{db,uid:'owner'});
+  assert.deepEqual(Array.from(rows,r=>r.topic),['timestamp','legacy','19','18','17']);
+});

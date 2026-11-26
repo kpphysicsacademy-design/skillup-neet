@@ -190,7 +190,7 @@ test('Quick Learn preserves unit-qualified concept IDs when linking back to the 
 });
 
 test('Quick Learn resolves the same dedicated question bank as the main quiz for every Zoology concept',()=>{
- const helperStart=quickLearn.indexOf('function bankFileForTopic(');
+ const helperStart=quickLearn.indexOf('const slug=s=>');
  const helperEnd=quickLearn.indexOf("document.getElementById('topicTitle')",helperStart);
  assert.ok(helperStart>=0&&helperEnd>helperStart);
  const quickContext={encodeURIComponent};vm.createContext(quickContext);vm.runInContext(quickLearn.slice(helperStart,helperEnd),quickContext);

@@ -180,15 +180,34 @@ a{color:inherit;text-decoration:none}
       const rows=snap.docs.map(d=>d.data()).sort((a,b)=>String(b.updated_at||b.completed_at||'').localeCompare(String(a.updated_at||a.completed_at||''))).slice(0,5);
       const list=document.getElementById('homeActivityList'),box=document.getElementById('homeActivity');
       if(rows.length&&list&&box){
-        list.innerHTML=rows.map(r=>{
+        const fragment=document.createDocumentFragment();
+        for(const r of rows){
           const topic=String(r.topic||r.concept||'Practice session');
           const subject=String(r.subject||'SkillUp');
           const score=r.score??r.percentage;
           const sc=Number.isFinite(Number(score))?Math.round(Number(score))+'%':'';
           const d=new Date(r.updated_at||r.completed_at||'');
           const when=Number.isFinite(d.getTime())?d.toLocaleDateString(undefined,{day:'2-digit',month:'short'}):'';
-          const paths={physics:'physics-home-fast.html',chemistry:'chemistry-home.html',botany:'botany-home.html',zoology:'zoology-home.html',maths:'maths-home.html',mathematics:'maths-home.html',biology:'index.html'};const path=paths[subject.trim().toLowerCase()]||'index.html';return '<a href="'+path+'?resumeConcept='+encodeURIComponent(topic)+'" style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5ebf2;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(23,32,51,.05)"><span style="font-size:22px">📚</span><span style="min-width:0;flex:1"><b style="display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+topic.replace(/[&<>"]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]))+'</b><small style="display:block;margin-top:3px;color:#667085">'+subject+(sc?' · '+sc:'')+(when?' · '+when:'')+'</small></span><span style="font-size:18px;color:#98a2b3">›</span></a>';
-        }).join('');
+          const paths={physics:'physics-home-fast.html',chemistry:'chemistry-home.html',botany:'botany-home.html',zoology:'zoology-home.html',maths:'maths-home.html',mathematics:'maths-home.html',biology:'index.html'};
+          const key=subject.trim().toLowerCase();
+          const path=Object.prototype.hasOwnProperty.call(paths,key)?paths[key]:'index.html';
+          const link=document.createElement('a');
+          link.href=path+'?'+new URLSearchParams({resumeConcept:topic}).toString();
+          link.style.cssText='display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5ebf2;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(23,32,51,.05)';
+          function element(tag,style,value){
+            const node=document.createElement(tag);
+            node.style.cssText=style;
+            if(value!==undefined)node.textContent=value;
+            return node;
+          }
+          const icon=element('span','font-size:22px','📚');
+          const content=element('span','min-width:0;flex:1');
+          content.append(element('b','display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis',topic),
+            element('small','display:block;margin-top:3px;color:#667085',[subject,sc,when].filter(Boolean).join(' · ')));
+          link.append(icon,content,element('span','font-size:18px;color:#98a2b3','›'));
+          fragment.append(link);
+        }
+        list.replaceChildren(fragment);
         box.style.display='block';
       }
     }

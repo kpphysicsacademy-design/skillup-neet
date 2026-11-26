@@ -6,6 +6,7 @@ on:
     paths:
       - 'botany-*.html'
       - 'tests/botany-*.cjs'
+      - 'tests/botany-emulator-config.json'
       - 'central-auth.js'
       - '.github/workflows/botany-phase1-browser.yml'
   workflow_dispatch:
@@ -13,6 +14,7 @@ on:
     paths:
       - 'botany-*.html'
       - 'tests/botany-*.cjs'
+      - 'tests/botany-emulator-config.json'
       - 'scripts/audit-botany-ch3.cjs'
       - '.github/workflows/botany-phase1-browser.yml'
 permissions:
@@ -33,3 +35,13 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/botany-http.log 2>&1 &
           for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/botany-home.html >/dev/null && break; sleep 1; done
           node tests/botany-browser.cjs
+  auth-emulator:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --package-lock=false firebase@11.10.0 firebase-tools@14.12.0
+      - run: npx firebase emulators:exec --only auth --project demo-skillup-botany --config tests/botany-emulator-config.json "node tests/botany-auth-emulator.cjs"

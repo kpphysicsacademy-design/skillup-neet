@@ -84,3 +84,19 @@ test('progress persistence does not write when the account adapter is unavailabl
  vm.runInContext(quiz.slice(start,end),c);
  assert.equal(await c.persistZoologyProgress(10,30,33),false);
 });
+
+test('all inline scripts in Zoology entry pages parse before deployment',()=>{
+ for(const file of ['zoology-mcq.html','zoology-quicklearn.html','zoology-topic-cheat-sheet.html','zoology-home.html','zoology-chapter-test.html']){
+  const source=fs.readFileSync(path.join(__dirname,'..',file),'utf8');
+  const scripts=[...source.matchAll(/<script\\b[^>]*>([\\s\\S]*?)<\\/script>/gi)].map(match=>match[1]).filter(code=>code.trim());
+  for(const [index,code] of scripts.entries())assert.doesNotThrow(()=>new vm.Script(code,{filename:file+' inline script '+index}),file+' inline script '+index);
+ }
+});
+test('What is Living quiz route resolves its dedicated 30-question bank',()=>{
+ const source=fs.readFileSync(path.join(__dirname,'../question-banks/what-is-living-question-bank.js'),'utf8');
+ const context={window:{}};vm.createContext(context);vm.runInContext(source,context);
+ const bank=context.window.skillUpWhatIsLivingQuestions;
+ assert.ok(Array.isArray(bank));
+ assert.equal(bank.length,30);
+ assert.ok(bank.every(row=>row&&typeof row.q==='string'&&Array.isArray(row.o)&&row.o.length>=2&&Number.isInteger(row.a)&&row.a>=0&&row.a<row.o.length));
+});

@@ -81,3 +81,21 @@ test('homepage branding reflects both exams without claiming full syllabus cover
  for(const s of ['Physics','Chemistry','Mathematics']){assert.ok(bank.bank[s].length>=16);assert.equal(bank.numerical[s].length,4);}
  for(const s of ['Physics','Chemistry','Botany','Zoology'])assert.ok(bank.bank[s].length>=15);
 });
+
+test('homepage navigation disclosure supports keyboard and focus exit',()=>{
+ const handlers={},attrs={},links=Array.from({length:3},()=>({focus(){doc.activeElement=this;}}));
+ const toggle={setAttribute(k,v){attrs[k]=v;},focus(){doc.activeElement=this;},addEventListener(k,v){handlers['toggle:'+k]=v;}};
+ const panel={hidden:true,contains:e=>links.includes(e),querySelector:()=>links[0],querySelectorAll:()=>links,addEventListener(){}};
+ const doc={activeElement:toggle,getElementById:id=>id==='home-menu-toggle'?toggle:panel,addEventListener(k,v){handlers[k]=v;}};
+ const start=html.indexOf('(function(){\n  const toggle=document.getElementById'),end=html.indexOf('</script>',start);
+ vm.runInNewContext(html.slice(start,end),{document:doc});
+ const key=k=>handlers.keydown({key:k,preventDefault(){}});
+ key('ArrowDown');assert.equal(panel.hidden,false);assert.equal(doc.activeElement,links[0]);
+ key('End');assert.equal(doc.activeElement,links[2]);
+ key('ArrowDown');assert.equal(doc.activeElement,links[0]);
+ key('Escape');assert.equal(panel.hidden,true);assert.equal(doc.activeElement,toggle);
+ key('ArrowUp');assert.equal(doc.activeElement,links[2]);
+ handlers.focusin({target:{}});assert.equal(panel.hidden,true);assert.equal(attrs['aria-expanded'],'false');
+ assert.ok(html.includes('role="navigation" aria-label="Main navigation" hidden'));
+ assert.ok(!html.includes('role="menuitem"'));
+});

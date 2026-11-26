@@ -30,3 +30,4 @@ window.skillUpBTCropsQuestions=[
 {q:"The use of Bt crops demonstrates that a gene from a microorganism can be used to:",o:["Introduce a useful trait into a crop","Convert DNA directly into fertilizer","Replace all plant chromosomes","Eliminate photosynthesis"],a:0,e:"A microbial gene can be transferred to a crop to provide a desired insect-resistance trait."},
 {q:"Which sequence best describes Bt toxin action in a susceptible insect?",o:["Ingestion → protoxin activation → receptor binding → pore formation → cell damage","Photosynthesis → transcription → seed formation → germination","Digestion → nitrogen fixation → flowering → fruiting","DNA replication → pollen formation → fertilization → seed dormancy"],a:0,e:"Bt toxin action involves ingestion, activation in the gut, receptor binding and disruption of midgut cells."}
 ];
+window.skillUpBtCropsQuestions=window.skillUpBTCropsQuestions;

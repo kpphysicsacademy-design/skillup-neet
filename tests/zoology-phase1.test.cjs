@@ -207,8 +207,8 @@ test('Quick Learn resolves the same dedicated question bank as the main quiz for
     if(!fs.existsSync(filePath)){problems.push('Quick Learn bank missing: '+quickFile);loaded.set(quickFile,null);}
     else{
      try{
-      const scope={};vm.createContext(scope);vm.runInContext(fs.readFileSync(filePath,'utf8'),scope);
-      const value=quickContext.findBank(quickFile,scope);
+      const scope={window:{}};vm.createContext(scope);vm.runInContext(fs.readFileSync(filePath,'utf8'),scope);
+      const value=quickContext.findBank(quickFile,scope.window);
       loaded.set(quickFile,Array.isArray(value)&&value.length?value:null);
       if(!loaded.get(quickFile))problems.push('Quick Learn cannot resolve bank global: '+quickFile);
      }catch(error){loaded.set(quickFile,null);problems.push(quickFile+': '+error.message);}

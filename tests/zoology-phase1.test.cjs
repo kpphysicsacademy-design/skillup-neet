@@ -121,7 +121,7 @@ test('every Zoology catalog concept resolves to an executable dedicated MCQ bank
      const arrays=Object.values(bankContext.window).filter(Array.isArray);
      const valid=arrays.some(rows=>rows.length>0&&rows.every(row=>
       row&&typeof row==='object'&&typeof row.q==='string'&&Array.isArray(row.o)&&row.o.length>=2&&'a'in row&&
-      ((Number.isInteger(row.a)&&row.a>=0&&row.a<row.o.length)||(typeof row.a==='string'&&row.o.includes(row.a)))
+      ((Number.isInteger(row.a)&&row.a>=0&&row.a<row.o.length)||(typeof row.a==='string'&&(row.o.includes(row.a)||(/^[A-D]$/i.test(row.a.trim())&&row.a.trim().toUpperCase().charCodeAt(0)-65<row.o.length))))
      ));
      result={valid,error:valid?'':'no valid q/o/a MCQ array exported'};
     }catch(error){result={valid:false,error:error.message};}
@@ -134,4 +134,17 @@ test('every Zoology catalog concept resolves to an executable dedicated MCQ bank
  }
  assert.equal(checked,catalogContext.units.reduce((sum,unit)=>sum+unit[1].length,0));
  assert.deepEqual(problems,[], 'Zoology bank integrity defects:\\n'+problems.join('\\n'));
+});
+
+test('answerIndex supports numeric, option-text and letter-coded answer keys',()=>{
+ const start=quiz.indexOf('function answerIndex(item){');
+ const end=quiz.indexOf('\\n function render()',start);
+ assert.ok(start>=0&&end>start);
+ const context={};vm.createContext(context);
+ vm.runInContext(quiz.slice(start,end)+';this.answerIndex=answerIndex;',context);
+ assert.equal(context.answerIndex({o:['red','blue'],a:1}),1);
+ assert.equal(context.answerIndex({o:['red','blue'],a:'blue'}),1);
+ assert.equal(context.answerIndex({o:['red','blue'],a:'B'}),1);
+ assert.equal(context.answerIndex({o:['red','blue'],a:'A'}),0);
+ assert.equal(context.answerIndex({o:['red','blue'],a:'D'}),-1);
 });

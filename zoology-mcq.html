@@ -476,11 +476,14 @@ async function recoverProgress(){
  }catch(_){}
 }
 window.addEventListener?.('load',recoverProgress,{once:true});
+function bindQuizOwner(auth){
+ const uid=auth?.currentUser?.uid||null;
+ let valid=true;
+ auth?.onAuthStateChanged?.(user=>{if((user?.uid||null)!==uid)valid=false;});
+ return {owner:()=>valid&&(auth?.currentUser?.uid||null)===uid?uid:null};
+}
 function startZoologyQuiz(source,conceptName){
- const quizAuth=window.SkillUpAuth?.auth;
- const quizOwner=quizAuth?.currentUser?.uid||null;
- let quizSessionValid=true;
- quizAuth?.onAuthStateChanged?.(user=>{if(user?.uid!==quizOwner)quizSessionValid=false;});
+ const ownership=bindQuizOwner(window.SkillUpAuth?.auth);
  const original=source.slice(0,30);
  const learnTab=document.getElementById('learnModeTab'),simTab=document.getElementById('simulatorModeTab'),learnPanel=document.getElementById('learnModePanel'),simPanel=document.getElementById('simulatorModePanel');
  let learnIndex=0;
@@ -532,7 +535,7 @@ function startZoologyQuiz(source,conceptName){
   document.getElementById('final').textContent=score+' / '+questions.length;document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
   const sync=document.getElementById('progressSync');
   if(sync){
-   const result={score,total:questions.length,pct,owner:quizSessionValid?quizOwner:null};
+   const result={score,total:questions.length,pct,owner:ownership.owner()};
    showProgressSync(sync,result,true);
   }
   const review=document.getElementById('wrongReview');review.replaceChildren();

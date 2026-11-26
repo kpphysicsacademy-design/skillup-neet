@@ -477,6 +477,10 @@ async function recoverProgress(){
 }
 window.addEventListener?.('load',recoverProgress,{once:true});
 function startZoologyQuiz(source,conceptName){
+ const quizAuth=window.SkillUpAuth?.auth;
+ const quizOwner=quizAuth?.currentUser?.uid||null;
+ let quizSessionValid=true;
+ quizAuth?.onAuthStateChanged?.(user=>{if(user?.uid!==quizOwner)quizSessionValid=false;});
  const original=source.slice(0,30);
  const learnTab=document.getElementById('learnModeTab'),simTab=document.getElementById('simulatorModeTab'),learnPanel=document.getElementById('learnModePanel'),simPanel=document.getElementById('simulatorModePanel');
  let learnIndex=0;
@@ -528,7 +532,7 @@ function startZoologyQuiz(source,conceptName){
   document.getElementById('final').textContent=score+' / '+questions.length;document.getElementById('message').textContent=pct+'% correct • '+(score*10)+' XP earned • '+(pct>=80?'Excellent work!':pct>=60?'Good progress. Review the missed concepts.':'Review the concept and practise again.');
   const sync=document.getElementById('progressSync');
   if(sync){
-   const result={score,total:questions.length,pct,owner:window.SkillUpAuth?.auth?.currentUser?.uid||null};
+   const result={score,total:questions.length,pct,owner:quizSessionValid?quizOwner:null};
    showProgressSync(sync,result,true);
   }
   const review=document.getElementById('wrongReview');review.replaceChildren();

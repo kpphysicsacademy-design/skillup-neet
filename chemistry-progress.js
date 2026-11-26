@@ -1,6 +1,24 @@
 /* Chemistry progress storage: no migration of unowned legacy data. */
 (function(root){
 'use strict';
+function serializeIndexedDB(key,work){
+ return new Promise((resolve,reject)=>{
+  const open=root.indexedDB.open('skillup-reward-locks',1);
+  open.onupgradeneeded=()=>open.result.createObjectStore('locks');
+  open.onerror=()=>reject(open.error);
+  open.onblocked=()=>reject(Error('Reward database blocked'));
+  open.onsuccess=()=>{
+   const db=open.result;
+   let tx;
+   try{tx=db.transaction('locks','readwrite');}catch(e){db.close();reject(e);return;}
+   let value, failure;
+   tx.oncomplete=()=>{db.close();resolve(value);};
+   tx.onabort=()=>{db.close();reject(failure||tx.error||Error('Reward transaction aborted'));};
+   const req=tx.objectStore('locks').get(key);
+   req.onsuccess=()=>{try{value=work();}catch(e){failure=e;tx.abort();}};
+  };
+ });
+}
 function create(storage,uid,topic){
  const prefix='skillup:chemistry:v2:'+encodeURIComponent(uid||'guest')+':';
  const key=prefix+'attempt:'+encodeURIComponent(topic);
@@ -15,8 +33,10 @@ function create(storage,uid,topic){
  if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};write(ledger,data);}
  return data.events[id];}
  async function completeAtomic(s,date,locks=root.navigator?.locks){
-  if(!locks?.request)throw Error('Atomic reward storage unavailable');
-  return locks.request(ledger,()=>complete(s,date));
+  const work=()=>complete(s,date);
+  if(root.indexedDB)return serializeIndexedDB(ledger,work);
+  if(locks?.request)return locks.request(ledger,work);
+  throw Error('Atomic reward storage unavailable');
  }
  function summary(){const data=read(ledger)||{events:{}};const events=Object.values(data.events).filter(e=>!e.review);return {xp:events.reduce((n,e)=>n+e.score*10,0),quizzes:events.length,days:[...new Set(events.map(e=>e.date))].sort(),events};}
  return {restore,save:s=>write(key,s),complete,completeAtomic,summary};

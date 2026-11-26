@@ -105,21 +105,33 @@ test('What is Living quiz route resolves its dedicated 30-question bank',()=>{
 
 test('every Zoology catalog concept resolves to an executable dedicated MCQ bank',()=>{
  const catalogContext={};vm.createContext(catalogContext);vm.runInContext(home.slice(start,end),catalogContext);
- let checked=0;
+ const problems=[],bankCache=new Map();let checked=0;
  for(const unit of catalogContext.units){
   for(const concept of unit[1]){
    const conceptName=concept[0];
    const id='zoo-'+encodeURIComponent(unit[0])+'--'+encodeURIComponent(conceptName);
    const file=loaderContext(id).candidates(conceptName)[0];
    const bankPath=pathModule.join(__dirname,'../question-banks',file);
-   assert.ok(fs.existsSync(bankPath),'Missing bank for '+unit[0]+' / '+conceptName+': '+file);
-   const bankContext={window:{}};vm.createContext(bankContext);
-   assert.doesNotThrow(()=>vm.runInContext(fs.readFileSync(bankPath,'utf8'),bankContext),file+' must execute');
-   const arrays=Object.values(bankContext.window).filter(Array.isArray);
-   const valid=arrays.some(rows=>rows.length>0&&rows.every(row=>row&&typeof row==='object'&&'q'in row&&'o'in row&&'a'in row));
-   assert.ok(valid,'No valid q/o/a question array exported by '+file);
+   if(!fs.existsSync(bankPath)){problems.push('Missing bank: '+unit[0]+' / '+conceptName+' -> '+file);continue;}
+   if(!bankCache.has(file)){
+    let result={valid:false,error:''};
+    try{
+     const bankContext={window:{}};vm.createContext(bankContext);
+     vm.runInContext(fs.readFileSync(bankPath,'utf8'),bankContext);
+     const arrays=Object.values(bankContext.window).filter(Array.isArray);
+     const valid=arrays.some(rows=>rows.length>0&&rows.every(row=>
+      row&&typeof row==='object'&&typeof row.q==='string'&&Array.isArray(row.o)&&row.o.length>=2&&'a'in row&&
+      ((Number.isInteger(row.a)&&row.a>=0&&row.a<row.o.length)||(typeof row.a==='string'&&row.o.includes(row.a)))
+     ));
+     result={valid,error:valid?'':'no valid q/o/a MCQ array exported'};
+    }catch(error){result={valid:false,error:error.message};}
+    bankCache.set(file,result);
+   }
+   const result=bankCache.get(file);
+   if(!result.valid)problems.push(file+': '+result.error);
    checked++;
   }
  }
  assert.equal(checked,catalogContext.units.reduce((sum,unit)=>sum+unit[1].length,0));
+ assert.deepEqual(problems,[], 'Zoology bank integrity defects:\\n'+problems.join('\\n'));
 });

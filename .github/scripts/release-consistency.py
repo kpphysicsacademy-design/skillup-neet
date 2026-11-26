@@ -7,7 +7,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-FILES = ("index.html", "service-worker.js", "shared-nav.js")
+FILES = ("index.html", "service-worker.js", "shared-nav.js", "central-auth.js", "central-config.js", "central-login.html", "central-register.html")
 BASE = "https://skillupedu.in/"
 
 def digest(data):

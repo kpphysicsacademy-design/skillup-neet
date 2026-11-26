@@ -1,0 +1,17 @@
+name: Release consistency regression
+on:
+  pull_request:
+    paths:
+      - .github/scripts/release-consistency.py
+      - tests/test_release_consistency.py
+      - service-worker.js
+      - .github/workflows/deploy.yml
+      - .github/workflows/release-consistency-regression.yml
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tests/test_release_consistency.py

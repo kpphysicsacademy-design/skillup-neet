@@ -14,8 +14,12 @@ function create(storage,uid,topic){
  const id=JSON.stringify([topic,s.id]);
  if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};write(ledger,data);}
  return data.events[id];}
+ async function completeAtomic(s,date,locks=root.navigator?.locks){
+  if(!locks?.request)throw Error('Atomic reward storage unavailable');
+  return locks.request(ledger,()=>complete(s,date));
+ }
  function summary(){const data=read(ledger)||{events:{}};const events=Object.values(data.events).filter(e=>!e.review);return {xp:events.reduce((n,e)=>n+e.score*10,0),quizzes:events.length,days:[...new Set(events.map(e=>e.date))].sort(),events};}
- return {restore,save:s=>write(key,s),complete,summary};
+ return {restore,save:s=>write(key,s),complete,completeAtomic,summary};
 }
 const api={create};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

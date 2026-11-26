@@ -43,5 +43,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-save --package-lock=false firebase@11.10.0 firebase-tools@14.12.0
-      - run: npx firebase emulators:exec --only auth --project demo-skillup-botany --config tests/botany-emulator-config.json "node tests/botany-auth-emulator.cjs"
+      - run: npm install --no-save --package-lock=false firebase@11.10.0 firebase-tools@14.12.0 playwright@1.51.1
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/botany-emulator-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/botany-home.html >/dev/null && break; sleep 1; done
+          npx firebase emulators:exec --only auth --project demo-skillup-botany --config tests/botany-emulator-config.json "node tests/botany-auth-emulator.cjs && node tests/botany-emulator-browser.cjs"

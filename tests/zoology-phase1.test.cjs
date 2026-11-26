@@ -182,11 +182,16 @@ test('Quick Learn answerIndex supports numeric, option-text and A-D answer keys'
  assert.equal(c.answerIndex({o:['red','blue'],a:'A'}),0);
  assert.equal(c.answerIndex({o:['red','blue'],a:'D'}),-1);
 });
-test('Quick Learn preserves unit-qualified concept IDs when linking back to the quiz and cheat sheet',()=>{
+test('Quick Learn keeps the focused question-and-explanation experience',()=>{
  assert.ok(quickLearn.includes("const conceptUrl=encodeURIComponent(topic)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'')"));
  assert.ok(quickLearn.includes("'zoology-mcq.html?concept='+conceptUrl"));
- assert.ok(quickLearn.includes("'zoology-topic-cheat-sheet.html?concept='+conceptUrl"));
- assert.ok(quickLearn.includes('correct=answerIndex(item)'));
+ assert.ok(quickLearn.includes('id="question"'));
+ assert.ok(quickLearn.includes('id="reveal"'));
+ assert.ok(quickLearn.includes('id="explanation"'));
+ assert.ok(quickLearn.includes('id="previous"'));
+ assert.ok(quickLearn.includes('id="next"'));
+ assert.doesNotMatch(quickLearn,/id="(?:options|xp|streak|progress|sheetLink|startQuiz)"/);
+ assert.doesNotMatch(quickLearn,/zoology-topic-cheat-sheet\.html/);
 });
 
 test('Quick Learn resolves the same dedicated question bank as the main quiz for every Zoology concept',()=>{

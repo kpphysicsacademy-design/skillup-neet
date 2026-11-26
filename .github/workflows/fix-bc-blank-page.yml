@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   fix:
     if: ${{ !contains(github.event.head_commit.message, 'Fix Zoology chapter quiz runtime') }}
@@ -33,9 +34,18 @@ jobs:
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');const s=fs.readFileSync('zoology-chapter-test.html','utf8');const m=s.match(/<script>([\s\S]*?)<\/script>/);if(!m)throw Error('script missing');new vm.Script(m[1]);const dm=s.match(/const tests=([\s\S]*?);const params=/);if(!dm)throw Error('tests missing');const tests=vm.runInNewContext('('+dm[1]+')');for(const ch of ['What is Living?','Biological Classification','Animal Kingdom','Structural Organisation in Animals','Cell: The Unit of Life','Biomolecules','Cell Cycle and Cell Division','Digestion and Absorption','Animal Morphology & Anatomy']){if(!Array.isArray(tests[ch])||!tests[ch].length)throw Error('Empty '+ch);if(tests[ch].length>30)throw Error(ch+' >30');console.log('PASS '+ch+': '+tests[ch].length)}console.log('Rebuilt page JavaScript PASS');
           NODE
-      - name: Commit repaired page
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add zoology-chapter-test.html
-          if git diff --cached --quiet; then echo "No page changes needed."; else git commit -m "Fix Zoology chapter quiz runtime"; git push; fi
+      - name: Propose rebuilt Zoology quiz page for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/bc-blank-page-rebuild
+          delete-branch: true
+          commit-message: 'Propose Zoology chapter quiz runtime rebuild'
+          title: 'Review Biological Classification blank-page rebuild'
+          body: |
+            This PR contains the output of the existing Zoology quiz runtime rebuild.
+
+            Review the full page replacement, preserved question-bank data, chapter routing, and learner-facing quiz behavior before merging.
+            This workflow no longer pushes generated HTML directly to main.
+          add-paths: |
+            zoology-chapter-test.html

@@ -28,7 +28,23 @@ for(const file of ['chemistry-home.html','chemistry-mcq.html','chemistry-quickle
   try{new vm.Script(m[1],{filename:file});}catch(e){issues.push(file+' inline script syntax: '+e.message);}
  }
 }
-if(!home.includes('chem-skill-learn')||!home.includes('chem-skill-practice')||!home.includes('chem-revision-list'))issues.push('Home learning entry points missing');
+const cardStart=home.indexOf('function card(x)'),cardEnd=home.indexOf('function render(',cardStart);
+try{
+ const context={esc:String,formatTitle:String,chemPathIcon:()=>''};
+ vm.runInNewContext(home.slice(cardStart,cardEnd),context);
+ for(const x of concepts){
+  const id=x.id||slug(x.title||x.base),title=x.title||x.base||id;
+  const markup=context.card({c:title,id,n:''});
+  const href=markup.match(/href="([^"]+)"/)?.[1];
+  const url=new URL(href,'https://skillupedu.in/');
+  assert.equal(url.pathname,'/chemistry-mcq.html');
+  assert.equal(url.searchParams.get('micro'),id);
+  assert.equal(url.searchParams.get('concept'),title);
+  assert(!/\bdisabled\b|aria-disabled="true"/.test(markup));
+ }
+}catch(e){issues.push('Concept entry route: '+e.message);}
+if(!quiz.includes("chemistry-quicklearn.html?")||!quiz.includes('CHEAT_SHEETS')||!quiz.includes('topicActions'))issues.push('Quiz learning and revision navigation missing');
+if(!home.includes('id="searchBtn"')||!home.includes('id="loadMoreBtn"'))issues.push('Concept discovery controls missing');
 if(!quiz.includes("params.get('micro')||")||!quiz.includes("const embedded=rawConcept.match("))issues.push('Quiz parameter parsing or malformed URL recovery broken');
 if(!quick.includes("typeof item.answer==='number'"))issues.push('QuickLearn numeric answers unsupported');
 if(!home.includes('All 515 concepts stay open'))issues.push('Open learning notice missing');

@@ -13,3 +13,8 @@ test('concurrent cloud outbox retains failed acknowledgement and rejects stale e
  await Promise.all([recover(storage,'A',owner,locks,cloud),submit(storage,event,owner,locks,cloud)]);assert.equal(ledger.size,1);assert.equal([...m.keys()].filter(k=>k.includes(':pending:')).length,0);
  await assert.rejects(submit(storage,{...event,attemptId:'cloud-2'},owner,locks,async()=>{epoch=3;}),/Account changed/);assert.equal([...m.keys()].filter(k=>k.includes(':pending:')).length,1);
 });
+
+test('cloud ledger capacity preserves history and accepts duplicate at limit',async()=>{
+ const {cloudRecord}=require('../physics-rewards.js');const event={owner:'A',subject:'physics',topic:'physical_quantities_practice',attemptId:'new',score:4,review:false};let row={score:7,reward_events:Array.from({length:999},(_,i)=>({...event,attemptId:'old-'+i}))};const ref={};const db={collection:()=>({doc:()=>ref}),runTransaction:fn=>fn({get:async()=>({exists:true,data:()=>row}),set:(r,patch)=>{row={...row,...patch};}})};
+ await cloudRecord(db,event,()=> 'A');assert.equal(row.reward_events.length,1000);await cloudRecord(db,event,()=> 'A');await assert.rejects(cloudRecord(db,{...event,attemptId:'overflow'},()=> 'A'),/capacity/);assert.equal(row.reward_events.length,1000);assert.equal(row.score,7);
+});

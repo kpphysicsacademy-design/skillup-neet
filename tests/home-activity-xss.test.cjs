@@ -99,3 +99,5 @@ test('homepage navigation disclosure supports keyboard and focus exit',()=>{
  assert.ok(html.includes('role="navigation" aria-label="Main navigation" hidden'));
  assert.ok(!html.includes('role="menuitem"'));
 });
+
+test('hero actions point to existing public learning destinations',()=>{const hero=html.match(/<div class="hero-actions">([\s\S]*?)<\/div>/);assert.ok(hero);assert.ok(hero[1].includes('href="#subjects">Explore subjects'));assert.ok(hero[1].includes('href="take-a-test.html">Start daily practice'));assert.ok(html.includes('id="subjects"'));assert.ok(fs.existsSync(require('node:path').join(__dirname,'../take-a-test.html')));});

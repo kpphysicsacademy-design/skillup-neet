@@ -42,5 +42,15 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn("cache.match(pageKey)", source)
         self.assertIn("cache:'reload'", source)
 
+    def test_manual_deployment_uses_unified_workflow(self):
+        legacy = (ROOT / ".github/workflows/pages-deploy.yml").read_text()
+        unified = (ROOT / ".github/workflows/deploy.yml").read_text()
+        self.assertIn("uses: ./.github/workflows/deploy.yml", legacy)
+        self.assertIn("refs/heads/main", legacy)
+        self.assertNotIn("actions/deploy-pages", legacy)
+        self.assertIn("workflow_call:", unified)
+        self.assertIn("needs: deploy", unified)
+        self.assertIn("Verify live release and cache consistency", unified)
+
 if __name__ == "__main__":
     unittest.main()

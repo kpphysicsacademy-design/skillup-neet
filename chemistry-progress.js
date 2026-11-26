@@ -27,19 +27,20 @@ function create(storage,uid,topic){
  function read(k){try{const raw=storage.getItem(k);return raw===null?(memory.get(k)||null):JSON.parse(raw);}catch(e){return memory.get(k)||null;}}
  function write(k,v){memory.set(k,v);try{storage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
  function restore(bank){const s=read(key);if(!s||s.bank!==bank||!Array.isArray(s.ids)||!s.ids.length||!Number.isInteger(s.index)||s.index<0||s.index>s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.index+(s.locked?1:0)||!Array.isArray(s.wrongAttempts)||typeof s.id!=='string')return null;return s;}
- function complete(s,date){if(!s||typeof s.id!=='string'||!s.id||!Array.isArray(s.ids)||!s.ids.length||s.index!==s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.ids.length)throw Error('Invalid completion');
- const data=read(ledger)||{events:{}};
+ function complete(s,date,durable=false){if(!s||typeof s.id!=='string'||!s.id||!Array.isArray(s.ids)||!s.ids.length||s.index!==s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.ids.length)throw Error('Invalid completion');
+ const data=durable?JSON.parse(storage.getItem(ledger)||'null')||{events:{}}:read(ledger)||{events:{}};
  const id=JSON.stringify([topic,s.id]);
- if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};write(ledger,data);}
+ if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};if(durable){storage.setItem(ledger,JSON.stringify(data));memory.set(ledger,data);}else write(ledger,data);}
  return data.events[id];}
  async function completeAtomic(s,date,locks=root.navigator?.locks){
-  const work=()=>complete(s,date);
+  const work=()=>complete(s,date,true);
+  if(locks?.request)return locks.request(ledger,()=>root.indexedDB?serializeIndexedDB(ledger,work):work());
   if(root.indexedDB)return serializeIndexedDB(ledger,work);
-  if(locks?.request)return locks.request(ledger,work);
   throw Error('Atomic reward storage unavailable');
  }
- function summary(){const data=read(ledger)||{events:{}};const events=Object.values(data.events).filter(e=>!e.review);return {xp:events.reduce((n,e)=>n+e.score*10,0),quizzes:events.length,days:[...new Set(events.map(e=>e.date))].sort(),events};}
- return {restore,save:s=>write(key,s),complete,completeAtomic,summary};
+ function rewardEvents(){const data=read(ledger)||{events:{}};return Object.entries(data.events).map(([key,e])=>{const [topic,attemptId]=JSON.parse(key);return {owner:uid||'guest',subject:'chemistry',topic,attemptId,score:e.score,review:!!e.review,date:e.date};});}
+ function summary(){const events=rewardEvents().filter(e=>!e.review);const total=aggregateRewards(events,uid||'guest');return {xp:total.xp,quizzes:total.attempts,days:[...new Set(events.map(e=>e.date))].sort(),events};}
+ return {restore,save:s=>write(key,s),complete,completeAtomic,summary,rewardEvents};
 }
 function aggregateRewards(rows,owner){
  if(typeof owner!=='string'||!owner)throw Error('Reward owner required');

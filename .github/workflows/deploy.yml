@@ -22,6 +22,7 @@ on:
       - 'manifest.webmanifest'
       - 'service-worker.js'
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -75,6 +76,18 @@ jobs:
       - name: Run static SEO and internal-link audit
         run: python3 .github/scripts/seo-audit.py /tmp/skillup-seo-audit
 
+      - name: Test release consistency
+        run: python3 tests/test_release_consistency.py
+
+      - name: Generate release metadata
+        run: python3 .github/scripts/release-consistency.py generate --sha "$GITHUB_SHA"
+
+      - name: Upload expected release metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: expected-release
+          path: release-version.json
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
@@ -101,3 +114,17 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages
+
+  verify-live:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: expected-release
+      - name: Verify live release and cache consistency
+        run: python3 .github/scripts/release-consistency.py verify --sha "$GITHUB_SHA"

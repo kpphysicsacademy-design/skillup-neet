@@ -32,7 +32,7 @@ const PRECACHE_URLS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then(cache => cache.addAll(PRECACHE_URLS.map(url => new Request(url, {cache:'reload'}))))
       .then(() => self.skipWaiting())
   );
 });
@@ -61,12 +61,17 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  // Release verification must never be satisfied by offline cache.
+  if (url.pathname === '/release-version.json') {
+    event.respondWith(fetch(request, {cache:'no-store'}));
+    return;
+  }
 
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
       try {
-        const response = await fetch(request);
+        const response = await fetch(request, {cache:'no-cache'});
         if (response && response.ok && response.type === 'basic') {
           event.waitUntil(cachePage(request, url, response));
         }

@@ -13,13 +13,18 @@
   // auth.currentUser === null as signed out until the first auth-state
   // notification has arrived.
   let authStateReady=null;
+  let sessionEpoch=0;
+  let observedUid;
+  function clearSessionMarker(){
+    try{sessionStorage.removeItem('skillup.central.session');}catch(_){}
+  }
   if(auth){
-    authStateReady=new Promise(resolve=>{
-      let unsubscribe=null;
-      unsubscribe=auth.onAuthStateChanged(user=>{
-        if(unsubscribe) unsubscribe();
+    authStateReady=new Promise((resolve,reject)=>{
+      auth.onAuthStateChanged(user=>{
+        const uid=user?.uid||null;
+        if(observedUid!==uid){sessionEpoch++;observedUid=uid;clearSessionMarker();}
         resolve(user||null);
-      });
+      },reject);
     });
   }
 
@@ -42,14 +47,15 @@
 
   async function signOut(){
     if(auth) await auth.signOut();
-    sessionStorage.removeItem('skillup.central.session');
+    clearSessionMarker();
   }
 
   async function getProfile(userId){
     if(!db||!userId) return null;
     if(auth?.currentUser?.uid!==userId) throw new Error('Profile owner mismatch');
+    const epoch=sessionEpoch;
     const snap=await db.collection('skillup_profiles').doc(userId).get();
-    if(auth?.currentUser?.uid!==userId) throw new Error('Account changed during profile read');
+    if(sessionEpoch!==epoch||auth?.currentUser?.uid!==userId) throw new Error('Account changed during profile read');
     return snap.exists?snap.data():null;
   }
 
@@ -75,10 +81,11 @@
   async function getProgress(subject){
     const user=auth?.currentUser;
     if(!db||!user) return [];
+    const epoch=sessionEpoch;
     const snap=await db.collection('skillup_progress')
       .where('user_id','==',user.uid)
       .get();
-    if(auth.currentUser?.uid!==user.uid) throw new Error('Account changed during progress read');
+    if(sessionEpoch!==epoch||auth.currentUser?.uid!==user.uid) throw new Error('Account changed during progress read');
     return snap.docs.map(d=>d.data()).filter(function(row){
       return String(row.subject||'').toLowerCase()===String(subject||'').toLowerCase();
     });

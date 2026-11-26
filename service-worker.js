@@ -3,7 +3,7 @@
  * Firebase and all cross-origin requests remain network-only; user progress/API data
  * is never added to Cache Storage.
  */
-const CACHE_NAME = 'skillup-offline-v8-zoology-quiz-loader';
+const CACHE_NAME = 'skillup-offline-v9-zoology-quicklearn-fix';
 const PRECACHE_URLS = [
   '/index.html',
   '/learn.html',
@@ -13,6 +13,10 @@ const PRECACHE_URLS = [
   '/chemistry-home.html',
   '/botany-home.html',
   '/zoology-home.html',
+  '/zoology-mcq.html',
+  '/zoology-quicklearn.html',
+  '/zoology-topic-cheat-sheet.html',
+  '/zoology-chapter-test.html',
   '/maths-home.html',
   '/profile.html',
   '/community.html',

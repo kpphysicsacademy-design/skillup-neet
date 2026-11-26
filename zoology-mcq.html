@@ -289,6 +289,24 @@ main > .hero[aria-label="Quiz progress"]::after {
  .learn-explanation{font-size:11px}
  .learn-mode-controls button{min-height:34px;font-size:11px}
 }
+
+/* Simulator readability and compact mobile control refinements. */
+#simulatorModePanel .hero{padding:16px 18px 13px;margin-bottom:12px;border-radius:18px}
+#simulatorModePanel .progress-row{font-size:11px;margin:8px 0 6px}
+#simulatorModePanel .track{height:8px}
+#simulatorModePanel .quiz{padding:19px;margin:12px 0;border-radius:19px}
+#simulatorModePanel .question{font-size:clamp(18px,3.2vw,24px);line-height:1.38;margin-bottom:17px}
+#simulatorModePanel .option{min-height:50px;padding:9px 12px;border-radius:13px;font-size:14px}
+#simulatorModePanel .option .letter{width:32px;height:32px;flex-basis:32px}
+#simulatorModePanel .btn{min-height:46px;font-size:13px;border-radius:12px}
+@media(max-width:520px){
+ #simulatorModePanel .hero{padding:13px 14px 11px;border-radius:15px}
+ #simulatorModePanel .quiz{padding:15px 13px;border-radius:16px}
+ #simulatorModePanel .question{font-size:19px}
+ #simulatorModePanel .option{min-height:46px;padding:8px 10px;font-size:13px}
+ #simulatorModePanel .option .letter{width:29px;height:29px;flex-basis:29px}
+ #simulatorModePanel .btn{min-height:42px;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -360,10 +378,21 @@ const BANK_GLOBALS={
  'darwin-natural-selection-question-bank.js':'skillUpDarwinsNaturalSelectionQuestions'
 };
 function resolveBankArray(file,scope){
- const valid=value=>Array.isArray(value)&&value.length&&value.every(x=>x&&typeof x==='object'&&'q'in x&&'o'in x&&'a'in x);
+ const valid=value=>Array.isArray(value)&&value.length>0&&value.every(item=>{
+  if(!item||typeof item!=='object'||typeof item.q!=='string'||!item.q.trim()||!Array.isArray(item.o)||item.o.length<2||item.o.some(option=>typeof option!=='string'||!option.trim()))return false;
+  const options=item.o.map(option=>option.trim().toLowerCase());
+  if(new Set(options).size!==options.length)return false;
+  const raw=item.a;let index=typeof raw==='number'?raw:-1;
+  if(index<0||index>=item.o.length){
+   const answer=String(raw??'').trim();
+   if(/^[A-D]$/i.test(answer))index=answer.toUpperCase().charCodeAt(0)-65;
+   else index=item.o.findIndex(option=>option.trim().toLowerCase()===answer.toLowerCase());
+  }
+  return Number.isInteger(index)&&index>=0&&index<item.o.length;
+ });
  const expected=BANK_GLOBALS[file];
  if(expected)return valid(scope[expected])?scope[expected]:null;
- const token=String(file).replace(/-question-bank\.js$/i,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
+ const token=String(file).replace(/-question-bank\\.js$/i,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
  const name=Object.keys(scope).find(key=>/^skillUp.*Questions$/i.test(key)&&key.toLowerCase().replace(/[^a-z0-9]/g,'').includes(token)&&valid(scope[key]));
  return name?scope[name]:null;
 }

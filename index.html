@@ -176,8 +176,19 @@ a{color:inherit;text-decoration:none}
     const db=window.SkillUpAuth&&window.SkillUpAuth.db;
     const uid=session&&session.user&&session.user.uid;
     if(db&&uid){
-      const snap=await db.collection('skillup_progress').where('user_id','==',uid).limit(15).get();
-      const rows=snap.docs.map(d=>d.data()).sort((a,b)=>String(b.updated_at||b.completed_at||'').localeCompare(String(a.updated_at||a.completed_at||''))).slice(0,5);
+      // Read only this user's records; sort before limiting, including legacy dates.
+      const snap=await db.collection('skillup_progress').where('user_id','==',uid).get();
+      function activityTime(value){
+        try {
+          const ms=value&&typeof value.toMillis==='function'?value.toMillis():typeof value==='number'?value:typeof value==='string'?Date.parse(value):NaN;
+          return Number.isFinite(ms)?ms:null;
+        } catch (_) { return null; }
+      }
+      const rows=snap.docs.map(d=>({id:d.id,data:d.data()})).sort((a,b)=>{
+        const at=activityTime(a.data.updated_at)??activityTime(a.data.completed_at)??-Infinity;
+        const bt=activityTime(b.data.updated_at)??activityTime(b.data.completed_at)??-Infinity;
+        return (at===bt?0:bt>at?1:-1)||String(a.id).localeCompare(String(b.id));
+      }).slice(0,5).map(entry=>entry.data);
       const list=document.getElementById('homeActivityList'),box=document.getElementById('homeActivity');
       if(rows.length&&list&&box){
         const fragment=document.createDocumentFragment();

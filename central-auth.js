@@ -79,16 +79,7 @@
       const epoch=sessionEpoch;
       const valid=()=>auth.currentUser?.uid===user.uid&&guard.owner===user.uid&&epoch===sessionEpoch;
       if(!valid()||!Number.isSafeInteger(guard.finishedAt))throw new Error('Invalid progress session');
-      // Existing rules permit owner creates but deny reads of missing non-Chemistry documents.
-      // A merge-create with owner only is safe for existing records and enables the guarded read.
-      if(row.subject==='Zoology'){
-        try{await ref.get();}catch(e){
-          if(e.code!=='permission-denied')throw e;
-          if(!valid())throw Error('Account changed');
-          await ref.set({user_id:user.uid},{merge:true});
-        }
-      }
-      await db.runTransaction(async tx=>{
+      const transact=()=>db.runTransaction(async tx=>{
         const snap=await tx.get(ref);
         if(!valid())throw new Error('Account changed during progress write');
         const prior=snap.exists?snap.data():{};
@@ -105,6 +96,12 @@
         if(Number(prior.quiz_finished_at||0)>=guard.finishedAt)return;
         tx.set(ref,Object.assign({},row,{quiz_finished_at:guard.finishedAt}),{merge:true});
       });
+      try{await transact();}catch(e){
+        if(row.subject!=='Zoology'||e.code!=='permission-denied'||!valid())throw e;
+        await ref.set({user_id:user.uid},{merge:true});
+        if(!valid())throw Error('Account changed');
+        await transact();
+      }
     }else await ref.set(row,{merge:true});
     return row;
   }

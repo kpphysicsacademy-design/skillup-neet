@@ -188,3 +188,33 @@ test('Quick Learn preserves unit-qualified concept IDs when linking back to the 
  assert.ok(quickLearn.includes("'zoology-topic-cheat-sheet.html?concept='+conceptUrl"));
  assert.ok(quickLearn.includes('correct=answerIndex(item)'));
 });
+
+test('Quick Learn resolves the same dedicated question bank as the main quiz for every Zoology concept',()=>{
+ const helperStart=quickLearn.indexOf('function bankFileForTopic(');
+ const helperEnd=quickLearn.indexOf("document.getElementById('topicTitle')",helperStart);
+ assert.ok(helperStart>=0&&helperEnd>helperStart);
+ const quickContext={encodeURIComponent};vm.createContext(quickContext);vm.runInContext(quickLearn.slice(helperStart,helperEnd),quickContext);
+ const catalogContext={};vm.createContext(catalogContext);vm.runInContext(home.slice(start,end),catalogContext);
+ const loaded=new Map(),problems=[];
+ for(const unit of catalogContext.units){
+  for(const concept of unit[1]){
+   const name=concept[0],id='zoo-'+encodeURIComponent(unit[0])+'--'+encodeURIComponent(name);
+   const quickFile=quickContext.bankFileForTopic(name,id);
+   const quizFile=loaderContext(id).candidates(name)[0];
+   if(quickFile!==quizFile)problems.push(name+' ('+unit[0]+'): Quick Learn '+quickFile+' != quiz '+quizFile);
+   if(!loaded.has(quickFile)){
+    const filePath=pathModule.join(__dirname,'../question-banks',quickFile);
+    if(!fs.existsSync(filePath)){problems.push('Quick Learn bank missing: '+quickFile);loaded.set(quickFile,null);}
+    else{
+     try{
+      const scope={};vm.createContext(scope);vm.runInContext(fs.readFileSync(filePath,'utf8'),scope);
+      const value=quickContext.findBank(quickFile,scope);
+      loaded.set(quickFile,Array.isArray(value)&&value.length?value:null);
+      if(!loaded.get(quickFile))problems.push('Quick Learn cannot resolve bank global: '+quickFile);
+     }catch(error){loaded.set(quickFile,null);problems.push(quickFile+': '+error.message);}
+    }
+   }
+  }
+ }
+ assert.deepEqual(problems,[],'Quick Learn routing defects:\\n'+problems.join('\\n'));
+});

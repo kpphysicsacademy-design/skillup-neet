@@ -125,6 +125,13 @@ body{background:radial-gradient(ellipse at 8% 0%,#eaf8f3 0,transparent 42%),radi
 /* Concept cards show the Zoology path without separate Learn/Simulator action buttons. */
 .concept-card{display:block;padding:12px;border:2px solid #dcebe4;border-radius:17px;background:#fff;box-shadow:0 4px 0 #e4efe9}
 
+
+/* Single-destination concept navigation: open the integrated Learn/Simulator quiz page. */
+.concept-card-link{display:block;color:inherit;text-decoration:none;border-radius:17px}
+.concept-card-link:focus-visible{outline:3px solid #168b91;outline-offset:3px}
+.concept-card{display:flex;align-items:center;justify-content:space-between;gap:10px;transition:transform .15s,border-color .15s,box-shadow .15s}
+.concept-card-link:hover .concept-card{transform:translateY(-2px);border-color:#91cbb2;box-shadow:0 6px 0 #d9eee2}
+.concept-open{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:#eaf7ef;color:#287b55;font-size:25px;font-weight:800}
 </style>
 <style id="skillup-single-navigation">
 /* One global navigation: keep the shared Home/Progress/Profile/Share/Practice bar as the only site navigation. */
@@ -286,7 +293,7 @@ document.getElementById('zooUnitCount').textContent='🧭 '+units.length+' learn
 var shown=0,term='',B=20,I=20;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function unit(x){if(document.getElementById('unit-'+x.u))return '';return '<div class="unit" id="unit-'+x.u+'"><div class="unit-main"><span class="unum">'+x.u+'</span><div><h2>'+esc(x.ic)+' '+esc(x.n)+'</h2><small>'+a.filter(function(v){return v.u===x.u;}).length+' concepts • UNIT '+x.u+' of 14</small></div></div></div>';}
-function card(x){return '<article class="chapter" id="'+esc(x.id)+'"><span class="node"></span><div class="concept-card"><div class="concept-info"><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span></div></div></article>';}
+function card(x){var href='zoology-mcq.html?concept='+encodeURIComponent(x.c)+'&conceptId='+encodeURIComponent(x.id);return '<article class="chapter" id="'+esc(x.id)+'"><span class="node"></span><a class="concept-card-link" href="'+href+'" aria-label="Open '+esc(x.c)+' learn and simulator"><div class="concept-card"><div class="concept-info"><div class="title"><span class="icon">'+esc(x.ic)+'</span><span>'+esc(x.c)+'</span></div><div class="sub">Concept '+x.ix+' • '+esc(x.n)+'</div><span class="tag">🎯 CONCEPT '+x.ix+'</span></div><span class="concept-open" aria-hidden="true">›</span></div></a></article>';}
 function render(list,n){p.innerHTML='';shown=Math.min(n,list.length);var h='',last=0;for(var i=0;i<shown;i++){if(list[i].u!==last){h+=unit(list[i]);last=list[i].u;}h+=card(list[i]);}p.innerHTML=h;e.style.display=list.length?'none':'block';}
 function more(){if(term||shown>=a.length)return;var end=Math.min(shown+B,a.length),h='',last=shown?a[shown-1].u:0;for(var i=shown;i<end;i++){if(a[i].u!==last){h+=unit(a[i]);last=a[i].u;}h+=card(a[i]);}p.insertAdjacentHTML('beforeend',h);shown=end;}
 var resumeParams=new URLSearchParams(location.search);

@@ -162,24 +162,25 @@ const bank=[
 const $=id=>document.getElementById(id);
 let questions=bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 let index=0,score=0,streak=0,selected=null,locked=false,wrong=[];
+let attemptId=null,reviewMode=false;
 let storageKey=null,restored=false,completed=false,cloudRef=null,quizUid=null,writeQueue=Promise.resolve(),saveRevision=0;
 const allQuestions=()=>bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));
 const validState=s=>s&&s.v===2&&typeof s.updatedAt==='number'&&Number.isFinite(s.updatedAt)&&
  Array.isArray(s.questionIds)&&s.questionIds.length>0&&s.questionIds.length<=bank.length&&
  new Set(s.questionIds).size===s.questionIds.length&&s.questionIds.every(id=>Number.isInteger(id)&&id>=1&&id<=bank.length)&&
- Number.isInteger(s.index)&&s.index>=0&&s.index<s.questionIds.length&&
+ Number.isInteger(s.index)&&s.index>=0&&s.index<=(s.completed?s.questionIds.length:s.questionIds.length-1)&&
  Number.isInteger(s.score)&&s.score>=0&&s.score<=s.questionIds.length&&
  Number.isInteger(s.streak)&&s.streak>=0&&s.streak<=s.score&&
  Array.isArray(s.wrong)&&typeof s.locked==='boolean'&&typeof s.completed==='boolean';
 function snapshot(){
- return {v:2,updatedAt:Date.now(),index,score,streak,wrong,locked,completed,questionIds:questions.map(q=>q.id)};
+ return {v:2,attemptId,reviewMode,updatedAt:Date.now(),index,score,streak,wrong,locked,completed,questionIds:questions.map(q=>q.id)};
 }
 function applyState(s){
  const originals=allQuestions();
  questions=s.questionIds.map(id=>originals[id-1]);
  index=s.index;score=s.score;streak=s.streak;
  wrong=s.wrong.filter(w=>w&&typeof w.q==='string'&&typeof w.your==='string'&&typeof w.answer==='string'&&typeof w.e==='string').slice(0,30);
- completed=s.completed;
+ completed=s.completed;attemptId=s.attemptId||null;reviewMode=!!s.reviewMode;
  // An already-scored answer must not be scored again after refresh.
  if(!completed&&s.locked){index++;if(index>=questions.length)completed=true;}
  updateScore();
@@ -187,17 +188,17 @@ function applyState(s){
 }
 function syncStatus(state,message){const el=$('syncStatus');if(el){el.dataset.state=state;el.textContent=message;}}
 function persist(){
- if(!storageKey)return;
+ if(!storageKey||window.SkillUpAuth?.auth?.currentUser?.uid!==quizUid)return;
  const state=snapshot(),currentRevision=++saveRevision;
  let localSaved=false;
  try{localStorage.setItem(storageKey,JSON.stringify(state));localSaved=true;}catch(e){console.warn('Local quiz save failed',e);}
  syncStatus('syncing',cloudRef?'⟳ Syncing progress…':localSaved?'✓ Saved on this device':'⚠ Progress not saved');
  if(cloudRef){
   // Serialize writes so slower earlier requests cannot overwrite newer answers.
-  writeQueue=writeQueue.catch(()=>{}).then(()=>cloudRef.set({
+  writeQueue=writeQueue.catch(()=>{}).then(()=>{if(window.SkillUpAuth?.auth?.currentUser?.uid!==quizUid)throw Error('Account changed');return cloudRef.set({
    user_id:quizUid,subject:'physics',topic:'physical_quantities_practice',
    quiz_state:state,updated_at:new Date(state.updatedAt).toISOString()
-  },{merge:true})).then(()=>{if(currentRevision===saveRevision)syncStatus('saved','✓ Saved to cloud');}).catch(e=>{if(currentRevision===saveRevision)syncStatus(localSaved?'offline':'error',localSaved?'☁ Saved offline — cloud sync pending':'⚠ Progress not saved');console.warn('Cloud quiz save failed; local copy retained',e);});
+  },{merge:true});}).then(()=>{if(currentRevision===saveRevision)syncStatus('saved','✓ Saved to cloud');}).catch(e=>{if(currentRevision===saveRevision)syncStatus(localSaved?'offline':'error',localSaved?'☁ Saved offline — cloud sync pending':'⚠ Progress not saved');console.warn('Cloud quiz save failed; local copy retained',e);});
  }
 }
 async function initializeQuiz(uid){
@@ -218,7 +219,7 @@ async function initializeQuiz(uid){
   try{localStorage.setItem(storageKey,JSON.stringify(chosen));}catch(e){}
   // Reconcile newer local changes to Firestore after reconnect.
   if(cloudRef&&chosen===local&&(!validState(remote)||local.updatedAt>remote.updatedAt))persist();
- }else{updateScore();render();}
+ }else{attemptId=crypto.randomUUID();updateScore();render();}
  syncStatus('saved',validState(chosen)?'✓ Progress restored':'✓ Ready — auto-save enabled');
 }
 window.addEventListener('skillup-quiz-auth-ready',event=>{initializeQuiz(event.detail.uid).catch(console.error);});
@@ -244,7 +245,7 @@ function render(){
  });
  if(!$('question').textContent||list.children.length!==4)throw new Error('Question failed to render');
 }
-function updateScore(){ $('xp').textContent=score*10;$('streak').textContent=streak; }
+function updateScore(){ $('xp').textContent=reviewMode?0:score*10;$('streak').textContent=streak; }
 $('check').addEventListener('click',()=>{
  if(selected===null||locked)return;locked=true;const item=questions[index],buttons=[...$('options').children];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
@@ -259,14 +260,14 @@ function finish(save=true){
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';
  const sc=document.createElement('div');sc.className='score';sc.textContent=score+' / '+questions.length;
- const summary=document.createElement('p');summary.className='muted';summary.textContent=pct+'% correct · '+score*10+' XP earned';
+ const summary=document.createElement('p');summary.className='muted';summary.textContent=pct+'% correct · '+(reviewMode?0:score*10)+' XP earned';
  const review=document.createElement('div');review.style.textAlign='left';review.style.marginTop='18px';
  if(wrong.length){const rh=document.createElement('h3');rh.textContent='🧠 Review your mistakes';review.append(rh);wrong.forEach((w,i)=>{const a=document.createElement('article');a.className='review';[[ (i+1)+'. '+w.q,''],['Your answer: '+w.your,'your'],['Correct answer: '+w.answer,'right'],[w.e,'muted']].forEach(([t,cl])=>{const p=document.createElement('p');p.textContent=t;p.className=cl;a.append(p)});review.append(a)});}
  else{const p=document.createElement('p');p.textContent='Perfect score! No wrong answers to review.';review.append(p)}
  const retryWrong=document.createElement('button');retryWrong.className='btn';retryWrong.textContent='↻ Retry wrong answers ('+wrong.length+')';retryWrong.hidden=!wrong.length;
  const retryAll=document.createElement('button');retryAll.className='btn';retryAll.textContent='Practice all 30 questions again';
  card.append(trophy,h,sc,summary,review,retryWrong,retryAll);$('finishSlot').replaceChildren(card);
- function reset(onlyWrong){questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];locked=false;completed=false;persist();updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){attemptId=crypto.randomUUID();reviewMode=!!onlyWrong;questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];locked=false;completed=false;persist();updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  retryWrong.addEventListener('click',()=>reset(true));retryAll.addEventListener('click',()=>reset(false));
 }
 $('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){persist();render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});

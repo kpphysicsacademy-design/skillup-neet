@@ -452,6 +452,7 @@ function showProgressSync(sync,result,isNew){
    async function save(){
     if(!result.owner||retrySession.owner()!==result.owner){status.textContent='Account session changed. Reopen this page with the original account to recover progress.';retry.hidden=true;return;}
     if(busy)return;
+    if(!Number.isSafeInteger(result.finishedAt)||result.finishedAt<=0){status.textContent='Legacy result retained locally; its completion time is unknown. It cannot safely overwrite saved progress.';retry.hidden=true;return;}
     if(key&&durable){try{if(sessionStorage.getItem(key)!==raw){status.textContent='This pending result has been superseded.';retry.hidden=true;return;}}catch(_){}}
     busy=true;retry.disabled=true;retry.hidden=true;
     status.textContent='Saving progress to your account…';

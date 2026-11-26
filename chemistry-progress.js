@@ -57,5 +57,8 @@ function aggregateRewards(rows,owner){
  for(const value of seen.values()){const [score,review]=JSON.parse(value);if(!review){xp+=score*10;attempts++;}}
  return {xp,attempts};
 }
-const api={create,aggregateRewards};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
+function aggregateCloudRewards(progress,owner){
+ return aggregateRewards(progress.filter(row=>row.user_id===owner).flatMap(row=>Array.isArray(row.reward_events)?row.reward_events:[]),owner);
+}
+const api={create,aggregateRewards,aggregateCloudRewards};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

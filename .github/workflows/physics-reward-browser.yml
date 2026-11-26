@@ -1,0 +1,19 @@
+name: Physics reward browser regression
+on:
+  pull_request:
+    paths:
+      - 'physics-rewards.js'
+      - 'physics-physical-quantities-*.html'
+      - 'tests/physics-reward-browser.test.cjs'
+      - '.github/workflows/physics-reward-browser.yml'
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.51.1
+      - run: npx playwright install --with-deps chromium
+      - run: node --test tests/physics-reward-browser.test.cjs

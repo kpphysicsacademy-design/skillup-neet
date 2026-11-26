@@ -187,15 +187,17 @@ function applyState(s){
  if(completed)finish(false);else render();
 }
 function syncStatus(state,message){const el=$('syncStatus');if(el){el.dataset.state=state;el.textContent=message;}}
+let pageEpoch=null;
+const pageOwner=()=>window.SkillUpAuth?.getSessionEpoch?.()===pageEpoch?window.SkillUpAuth?.auth?.currentUser?.uid:null;
 function persist(){
- if(!storageKey||window.SkillUpAuth?.auth?.currentUser?.uid!==quizUid)return;
+ if(!storageKey||pageOwner()!==quizUid)return;
  const state=snapshot(),currentRevision=++saveRevision;
  let localSaved=false;
  try{localStorage.setItem(storageKey,JSON.stringify(state));localSaved=true;}catch(e){console.warn('Local quiz save failed',e);}
  syncStatus('syncing',cloudRef?'⟳ Syncing progress…':localSaved?'✓ Saved on this device':'⚠ Progress not saved');
  if(cloudRef){
   // Serialize writes so slower earlier requests cannot overwrite newer answers.
-  writeQueue=writeQueue.catch(()=>{}).then(()=>{if(window.SkillUpAuth?.auth?.currentUser?.uid!==quizUid)throw Error('Account changed');return cloudRef.set({
+  writeQueue=writeQueue.catch(()=>{}).then(()=>{if(pageOwner()!==quizUid)throw Error('Account changed');return cloudRef.set({
    user_id:quizUid,subject:'physics',topic:'physical_quantities_practice',
    quiz_state:state,updated_at:new Date(state.updatedAt).toISOString()
   },{merge:true});}).then(()=>{if(currentRevision===saveRevision)syncStatus('saved','✓ Saved to cloud');}).catch(e=>{if(currentRevision===saveRevision)syncStatus(localSaved?'offline':'error',localSaved?'☁ Saved offline — cloud sync pending':'⚠ Progress not saved');console.warn('Cloud quiz save failed; local copy retained',e);});
@@ -203,7 +205,7 @@ function persist(){
 }
 async function initializeQuiz(uid){
  if(restored||!uid)return;restored=true;
- quizUid=uid;const rewardEpoch=window.SkillUpAuth?.getSessionEpoch?.();const rewardOwner=()=>window.SkillUpAuth?.getSessionEpoch?.()===rewardEpoch?window.SkillUpAuth?.auth?.currentUser?.uid:null;void PhysicsRewards.recover(localStorage,uid,rewardOwner,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,rewardOwner);}).catch(e=>syncStatus('offline','Pending reward recovery failed: '+e.message));storageKey='skillup-physical-quantities-quiz-v1:'+uid;
+ quizUid=uid;pageEpoch=window.SkillUpAuth?.getSessionEpoch?.();const rewardOwner=pageOwner;void PhysicsRewards.recover(localStorage,uid,rewardOwner,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,rewardOwner);}).catch(e=>syncStatus('offline','Pending reward recovery failed: '+e.message));storageKey='skillup-physical-quantities-quiz-v1:'+uid;
  let local=null,remote=null;
  try{local=JSON.parse(localStorage.getItem(storageKey)||'null');}catch(e){}
  // Existing v1 local progress remains eligible for migration.
@@ -213,6 +215,7 @@ async function initializeQuiz(uid){
   cloudRef=db.collection('skillup_progress').doc(uid+'_physics_physical_quantities_practice');
   try{const snap=await cloudRef.get();if(snap.exists)remote=snap.data().quiz_state;}catch(e){console.warn('Cloud quiz load failed; using local copy',e);}
  }
+ if(pageOwner()!==uid)return;
  const chosen=validState(remote)&&(!validState(local)||remote.updatedAt>local.updatedAt)?remote:local;
  if(validState(chosen)){
   applyState(chosen);
@@ -247,7 +250,7 @@ function render(){
 }
 function updateScore(){ $('xp').textContent=reviewMode?0:score*10;$('streak').textContent=streak; }
 $('check').addEventListener('click',()=>{
- if(selected===null||locked)return;locked=true;const item=questions[index],buttons=[...$('options').children];
+ if(pageOwner()!==quizUid||selected===null||locked)return;locked=true;const item=questions[index],buttons=[...$('options').children];
  buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add('correct');});
  const f=$('feedback');
  if(selected===item.a){score++;streak++;f.className='feedback show good';f.textContent='Correct! '+item.e;}
@@ -255,7 +258,7 @@ $('check').addEventListener('click',()=>{
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(save=true){
- completed=true;if(save)persist();const rewardEpoch=window.SkillUpAuth?.getSessionEpoch?.();const rewardOwner=()=>window.SkillUpAuth?.getSessionEpoch?.()===rewardEpoch?window.SkillUpAuth?.auth?.currentUser?.uid:null;if(attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.submit(localStorage,event,rewardOwner,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,rewardOwner);}).catch(e=>{syncStatus('offline','Reward not saved. Reopen this completed attempt to retry: '+e.message);});}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ if(pageOwner()!==quizUid)return;completed=true;if(save)persist();const rewardOwner=pageOwner;if(attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.submit(localStorage,event,rewardOwner,undefined,event=>{const db=window.SkillUpAuth?.db;if(!db)throw Error('Cloud unavailable');return PhysicsRewards.cloudRecord(db,event,rewardOwner);}).catch(e=>{syncStatus('offline','Reward not saved. Reopen this completed attempt to retry: '+e.message);});}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';
@@ -267,10 +270,10 @@ function finish(save=true){
  const retryWrong=document.createElement('button');retryWrong.className='btn';retryWrong.textContent='↻ Retry wrong answers ('+wrong.length+')';retryWrong.hidden=!wrong.length;
  const retryAll=document.createElement('button');retryAll.className='btn';retryAll.textContent='Practice all 30 questions again';
  card.append(trophy,h,sc,summary,review,retryWrong,retryAll);$('finishSlot').replaceChildren(card);
- function reset(onlyWrong){attemptId=crypto.randomUUID();reviewMode=!!onlyWrong;questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];locked=false;completed=false;persist();updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
+ function reset(onlyWrong){if(pageOwner()!==quizUid)return;attemptId=crypto.randomUUID();reviewMode=!!onlyWrong;questions=onlyWrong?bank.map((x,i)=>({x,i})).filter(({x})=>wrong.some(w=>w.q===x[0])).map(({x,i})=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]})):bank.map((x,i)=>({id:i+1,q:x[0],o:x[1],a:x[2],e:x[3]}));index=0;score=0;streak=0;wrong=[];locked=false;completed=false;persist();updateScore();$('quiz').hidden=false;$('finishSlot').replaceChildren();render();window.scrollTo({top:0,behavior:'smooth'});}
  retryWrong.addEventListener('click',()=>reset(true));retryAll.addEventListener('click',()=>reset(false));
 }
-$('continue').addEventListener('click',()=>{if(!locked)return;index++;if(index<questions.length){persist();render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});
+$('continue').addEventListener('click',()=>{if(pageOwner()!==quizUid||!locked)return;index++;if(index<questions.length){persist();render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});
 try{if(bank.length!==30)throw new Error('Expected 30 questions');}catch(err){$('question').textContent='This quiz could not load. Please refresh the page.';$('options').replaceChildren();console.error(err);}
 })();
 </script>

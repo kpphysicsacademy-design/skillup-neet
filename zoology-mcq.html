@@ -450,6 +450,7 @@ function showProgressSync(sync,result,isNew){
    let busy=false;
    async function save(){
     if(busy)return;
+    if(key&&durable){try{if(sessionStorage.getItem(key)!==raw){status.textContent='This pending result has been superseded.';retry.hidden=true;return;}}catch(_){}}
     busy=true;retry.disabled=true;retry.hidden=true;
     status.textContent='Saving progress to your account…';
     try{
@@ -474,7 +475,7 @@ async function recoverProgress(){
  document.body.prepend(sync);showProgressSync(sync,row,false);
  }catch(_){}
 }
-window.addEventListener('load',recoverProgress,{once:true});
+window.addEventListener?.('load',recoverProgress,{once:true});
 function startZoologyQuiz(source,conceptName){
  const original=source.slice(0,30);
  const learnTab=document.getElementById('learnModeTab'),simTab=document.getElementById('simulatorModeTab'),learnPanel=document.getElementById('learnModePanel'),simPanel=document.getElementById('simulatorModePanel');

@@ -133,12 +133,12 @@ test('every Zoology catalog concept resolves to an executable dedicated MCQ bank
   }
  }
  assert.equal(checked,catalogContext.units.reduce((sum,unit)=>sum+unit[1].length,0));
- assert.deepEqual(problems,[], 'Zoology bank integrity defects:\\n'+problems.join('\\n'));
+ assert.deepEqual(problems,[], 'Zoology bank integrity defects:\n'+problems.join('\\n'));
 });
 
 test('answerIndex supports numeric, option-text and letter-coded answer keys',()=>{
  const start=quiz.indexOf('function answerIndex(item){');
- const end=quiz.indexOf('\\n function render()',start);
+ const end=quiz.indexOf('\n function render()',start);
  assert.ok(start>=0&&end>start);
  const context={};vm.createContext(context);
  vm.runInContext(quiz.slice(start,end)+';this.answerIndex=answerIndex;',context);

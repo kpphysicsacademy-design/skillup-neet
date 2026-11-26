@@ -21,6 +21,10 @@ class ReleaseTests(unittest.TestCase):
             def fetch(path):
                 return (root / path.split("?")[0]).read_bytes()
             release.verify(expected, fetch)
+            for name in ('central-auth.js', 'central-config.js', 'central-login.html', 'central-register.html'):
+                self.assertIn(name, expected['files'])
+                with self.assertRaises(ValueError):
+                    release.verify(expected, lambda path: b'stale' if path.split('?')[0] == name else fetch(path))
             def stale(path):
                 return b"stale" if path == "index.html" else fetch(path)
             with self.assertRaises(ValueError):

@@ -326,7 +326,7 @@ function startZoologyQuiz(source,conceptName){
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
  const counter=document.getElementById('counter'),percent=document.getElementById('percent'),bar=document.getElementById('bar'),xp=document.getElementById('xp'),streakEl=document.getElementById('streak'),progress=document.querySelector('[role="progressbar"]');
  if(!questions.length){showNotice('No original questions are available for this concept yet.');return;}
- function answerIndex(item){const opts=Array.isArray(item.o)?item.o:[];let idx=typeof item.a==='number'?item.a:opts.indexOf(item.a);if(!Number.isInteger(idx)||idx<0||idx>=opts.length)idx=opts.indexOf(String(item.a));return idx;}
+ function answerIndex(item){const opts=Array.isArray(item.o)?item.o:[];let idx=typeof item.a==='number'?item.a:opts.indexOf(item.a);if(!Number.isInteger(idx)||idx<0||idx>=opts.length){const raw=String(item.a).trim();if(/^[A-D]$/i.test(raw))idx=raw.toUpperCase().charCodeAt(0)-65;else idx=opts.indexOf(raw);}return Number.isInteger(idx)&&idx>=0&&idx<opts.length?idx:-1;}
  function render(){
   selected=null;checked=false;next.disabled=true;next.textContent='Check answer';next.className='btn check';eEl.className='feedback';eEl.textContent='';
   const pct=Math.round(i/questions.length*100);counter.textContent='Question '+(i+1)+' of '+questions.length;percent.textContent=pct+'%';bar.style.width=pct+'%';progress.setAttribute('aria-valuenow',String(pct));

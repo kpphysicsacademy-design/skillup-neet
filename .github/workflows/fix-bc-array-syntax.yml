@@ -1,14 +1,11 @@
 name: Fix Biological Classification array syntax
 
 on:
-  push:
-    paths:
-      - '.github/trigger-bc-array-fix.txt'
-      - '.github/workflows/fix-bc-array-syntax.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   fix:
@@ -32,11 +29,18 @@ jobs:
           PY
           git diff --check
           git diff -- zoology-chapter-test.html
-      - name: Commit fix
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add zoology-chapter-test.html
-          git diff --cached --quiet && echo 'No change needed' && exit 0
-          git commit -m 'Fix Biological Classification question array'
-          git push
+      - name: Propose Biological Classification syntax fix for review
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/bc-array-syntax-fix
+          delete-branch: true
+          commit-message: 'Propose Biological Classification array syntax fix'
+          title: 'Review Biological Classification question-array syntax fix'
+          body: |
+            This PR contains the output of the Biological Classification array repair.
+
+            Review the exact array boundary and verify the question bank parses and loads correctly before merging.
+            The workflow no longer pushes directly to main.
+          add-paths: |
+            zoology-chapter-test.html

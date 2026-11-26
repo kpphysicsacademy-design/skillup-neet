@@ -33,7 +33,7 @@ body{background:radial-gradient(ellipse at 6% 0%,rgba(88,185,42,.08),transparent
 const params=new URLSearchParams(location.search),topic=(params.get('concept')||'').trim(),conceptId=params.get('conceptId')||'';
 const conceptUrl=encodeURIComponent(topic)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
 const slug=s=>String(s||'').toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const norm=s=>String(s||'').toLowerCase().replace(/and/g,'').replace(/[^a-z0-9]/g,'');
+const norm=s=>String(s||'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/\band\b/g,'').replace(/[^a-z0-9]/g,'');
 function bankFileForTopic(value,id){
  const s=slug(value);
  if(s==='enzymes')return 'zoology-enzymes-question-bank.js';
@@ -44,6 +44,7 @@ function bankFileForTopic(value,id){
  return s+'-question-bank.js';
 }
 const BANK_GLOBALS={
+ 'diploblastic-and-triploblastic-organisation-question-bank.js':'skillUpDiploblasticTriploblasticQuestions',
  'zoology-enzymes-question-bank.js':'skillUpZoologyEnzymesQuestions',
  'biodiversity-question-bank.js':'skillUpBiodiversityQuestions',
  'biodiversity-patterns-question-bank.js':'skillUpBiodiversityPatternsQuestions',
@@ -91,7 +92,7 @@ $('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(index<bank.length-1){index++;render();}else{index=0;render();$('counter').textContent='Review complete · '+bank.length+' cards';}});
 if(!topic){$('learnCard').innerHTML='<div class="error">Select a Zoology concept from the Zoology path or open Quick Learn from a topic quiz.</div>';return;}
 const file=bankFileForTopic(topic,conceptId);
-const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261126-zoology-quicklearn-v5';
+const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261126-zoology-quicklearn-v6';
 script.onload=()=>{bank=findBank(file,window);if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="error">The selected topic bank could not be matched. Return to the quiz and try again.</div>';$('counter').textContent='Learning cards unavailable';}};
 script.onerror=()=>{$('learnCard').innerHTML='<div class="error">The question bank for this concept is not available yet.</div>';$('counter').textContent='Learning cards unavailable';};
 document.head.appendChild(script);

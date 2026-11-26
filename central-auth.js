@@ -67,14 +67,26 @@
     return row;
   }
 
-  async function saveProgress(progress){
+  async function saveProgress(progress,guard){
     const user=auth?.currentUser;
     if(!db||!user) throw new Error('Authentication required');
     const subject=String(progress.subject||'').replace(/[^a-zA-Z0-9_-]/g,'_');
     const topic=String(progress.topic||'').replace(/[^a-zA-Z0-9_-]/g,'_');
     const id=user.uid+'_'+subject+'_'+topic;
     const row=Object.assign({},progress,{user_id:user.uid,updated_at:new Date().toISOString()});
-    await db.collection('skillup_progress').doc(id).set(row,{merge:true});
+    const ref=db.collection('skillup_progress').doc(id);
+    if(guard){
+      const epoch=sessionEpoch;
+      const valid=()=>auth.currentUser?.uid===user.uid&&guard.owner===user.uid&&epoch===sessionEpoch;
+      if(!valid()||!Number.isSafeInteger(guard.finishedAt))throw new Error('Invalid progress session');
+      await db.runTransaction(async tx=>{
+        const snap=await tx.get(ref);
+        if(!valid())throw new Error('Account changed during progress write');
+        const prior=snap.exists?snap.data():{};
+        if(Number(prior.quiz_finished_at||0)>=guard.finishedAt)return;
+        tx.set(ref,Object.assign({},row,{quiz_finished_at:guard.finishedAt}),{merge:true});
+      });
+    }else await ref.set(row,{merge:true});
     return row;
   }
 

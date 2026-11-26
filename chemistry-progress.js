@@ -41,5 +41,20 @@ function create(storage,uid,topic){
  function summary(){const data=read(ledger)||{events:{}};const events=Object.values(data.events).filter(e=>!e.review);return {xp:events.reduce((n,e)=>n+e.score*10,0),quizzes:events.length,days:[...new Set(events.map(e=>e.date))].sort(),events};}
  return {restore,save:s=>write(key,s),complete,completeAtomic,summary};
 }
-const api={create};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
+function aggregateRewards(rows,owner){
+ if(typeof owner!=='string'||!owner)throw Error('Reward owner required');
+ const seen=new Map();
+ for(const row of rows){
+  if(row.owner!==owner)continue;
+  if(!['physics','chemistry','botany','zoology','mathematics'].includes(String(row.subject).toLowerCase())||typeof row.topic!=='string'||!row.topic||typeof row.attemptId!=='string'||!row.attemptId||!Number.isSafeInteger(row.score)||row.score<0)throw Error('Invalid reward');
+  const key=JSON.stringify([row.subject.toLowerCase(),row.topic,row.attemptId]);
+  const value=JSON.stringify([row.score,!!row.review]);
+  if(seen.has(key)&&seen.get(key)!==value)throw Error('Conflicting reward');
+  seen.set(key,value);
+ }
+ let xp=0,attempts=0;
+ for(const value of seen.values()){const [score,review]=JSON.parse(value);if(!review){xp+=score*10;attempts++;}}
+ return {xp,attempts};
+}
+const api={create,aggregateRewards};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

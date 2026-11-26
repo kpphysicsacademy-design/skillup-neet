@@ -305,12 +305,23 @@ function resolveBankArray(file,scope){
  return name?scope[name]:null;
 }
 function loadBank(file){return new Promise((resolve,reject)=>{
- const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261126-biodiversity-bank-routing-fix-1';
- script.onload=()=>{
-  const found=resolveBankArray(file,window);
-  found?resolve(found):reject(new Error('No valid question bank array found in '+file));
+ const paths=[new URL('/question-banks/'+file,location.origin).href,new URL('question-banks/'+file,document.baseURI).href];
+ let attempt=0,lastError=null;
+ const tryNext=()=>{
+  if(attempt>=paths.length){reject(lastError||new Error('Question bank unavailable: '+file));return;}
+  const script=document.createElement('script');
+  script.src=paths[attempt++]+'?v=20261126-zoology-bank-loader-recovery-2';
+  script.async=true;
+  script.onload=()=>{
+   const found=resolveBankArray(file,window);
+   if(found){resolve(found);return;}
+   lastError=new Error('Loaded '+file+' but its expected question array was missing or invalid.');
+   script.remove();tryNext();
+  };
+  script.onerror=()=>{lastError=new Error('Could not fetch '+script.src);script.remove();tryNext();};
+  document.head.appendChild(script);
  };
- script.onerror=()=>reject(new Error('Question bank file could not be loaded: '+file));document.head.appendChild(script);
+ tryNext();
 });}
 async function persistZoologyProgress(score,total,percentage){
  const auth=window.SkillUpAuth;

@@ -265,3 +265,5 @@ test('pending result recovery is scoped to account and concept',()=>{
  store.set(c.pendingKey('owner'),JSON.stringify({owner:'other',score:20,total:30,pct:67}));
  assert.equal(c.readPending('owner'),null);
 });
+
+test('quiz ownership cannot transfer after account switch or logout and relogin',()=>{const start=quiz.indexOf('function bindQuizOwner('),end=quiz.indexOf('function startZoologyQuiz',start);const c={};vm.runInNewContext(quiz.slice(start,end),c);let notify;const auth={currentUser:{uid:'A'},onAuthStateChanged(fn){notify=fn;}};const owner=c.bindQuizOwner(auth);assert.equal(owner.owner(),'A');auth.currentUser={uid:'B'};notify(auth.currentUser);assert.equal(owner.owner(),null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(owner.owner(),null);const fresh=c.bindQuizOwner(auth);auth.currentUser=null;notify(null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(fresh.owner(),null);});

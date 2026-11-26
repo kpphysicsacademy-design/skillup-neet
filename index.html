@@ -167,17 +167,27 @@ a{color:inherit;text-decoration:none}
 document.addEventListener('DOMContentLoaded',async function(){
   // Keep the public subject directory and #subjects deep link accessible.
   // Personalize the homepage only when a signed-in session is already available.
-  let session=null;
-  try { session=window.SkillUpAuth ? await window.SkillUpAuth.getSession() : null; } catch(e) {}
-  if(!session) return;
+  let generation=0;
+  const auth=window.SkillUpAuth;
+  if(!auth?.auth)return;
+  auth.auth.onAuthStateChanged(async user=>{
+  const ticket=++generation;
+  const current=()=>ticket===generation&&auth.auth.currentUser?.uid===user?.uid;
+  delete document.documentElement.dataset.authenticated;
+  document.getElementById('welcomeName').textContent='🎓 YOUR NEET & JEE LEARNING JOURNEY';
+  document.getElementById('homeActivityList').replaceChildren();
+  document.getElementById('homeActivity').style.display='none';
+  if(!user)return;
+  const session={user};
   document.documentElement.dataset.authenticated="true";
-  try{const u=session.user;const p=await window.SkillUpAuth.getProfile(u.uid);const name=String((p&& (p.display_name||p.name))||u.displayName||'').trim();if(name)document.getElementById('welcomeName').textContent='WELCOME, '+name.toUpperCase();}catch(e){}
+  try{const u=session.user;const p=await window.SkillUpAuth.getProfile(u.uid);const name=String((p&& (p.display_name||p.name))||u.displayName||'').trim();if(current()&&name)document.getElementById('welcomeName').textContent='WELCOME, '+name.toUpperCase();}catch(e){}
   try{
     const db=window.SkillUpAuth&&window.SkillUpAuth.db;
     const uid=session&&session.user&&session.user.uid;
     if(db&&uid){
       // Read only this user's records; sort before limiting, including legacy dates.
       const snap=await db.collection('skillup_progress').where('user_id','==',uid).get();
+      if(!current())return;
       function activityTime(value){
         try {
           const ms=value&&typeof value.toMillis==='function'?value.toMillis():typeof value==='number'?value:typeof value==='string'?Date.parse(value):NaN;
@@ -223,7 +233,8 @@ document.addEventListener('DOMContentLoaded',async function(){
         box.style.display='block';
       }
     }
-  }catch(e){console.warn('SkillUp home activity load failed',e);const list=document.getElementById('homeActivityList'),box=document.getElementById('homeActivity');if(list&&box){const notice=document.createElement('p');notice.setAttribute('role','status');notice.textContent='Recent activity could not be loaded. Refresh to retry; your saved progress has not been cleared.';list.replaceChildren(notice);box.style.display='block';}}
+  }catch(e){if(!current())return;console.warn('SkillUp home activity load failed',e);const list=document.getElementById('homeActivityList'),box=document.getElementById('homeActivity');if(list&&box){const notice=document.createElement('p');notice.setAttribute('role','status');notice.textContent='Recent activity could not be loaded. Refresh to retry; your saved progress has not been cleared.';list.replaceChildren(notice);box.style.display='block';}}
+  });
 },{once:true});
 </script>
 

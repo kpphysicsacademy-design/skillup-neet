@@ -28,7 +28,7 @@ for(const file of ['chemistry-home.html','chemistry-mcq.html','chemistry-quickle
   try{new vm.Script(m[1],{filename:file});}catch(e){issues.push(file+' inline script syntax: '+e.message);}
  }
 }
-if(!home.includes('chem-skill-learn')||!home.includes('chem-skill-practice')||!home.includes('chem-revision-list'))issues.push('Home learning entry points missing');
+if(!home.includes("function card(x)")||!home.includes("chemistry-mcq.html?concept='+encodeURIComponent(x.c)+'&micro='+encodeURIComponent(x.id)")||!home.includes('href="'+ "'+href+'" +'"')||!home.includes('function more()')||!home.includes('loadMoreBtn'))issues.push('Home learning entry points or progressive loading missing');
 if(!quiz.includes("params.get('micro')||")||!quiz.includes("const embedded=rawConcept.match("))issues.push('Quiz parameter parsing or malformed URL recovery broken');
 if(!quick.includes("typeof item.answer==='number'"))issues.push('QuickLearn numeric answers unsupported');
 if(!home.includes('All 515 concepts stay open'))issues.push('Open learning notice missing');

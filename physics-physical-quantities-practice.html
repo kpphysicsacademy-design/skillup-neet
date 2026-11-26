@@ -255,7 +255,7 @@ $('check').addEventListener('click',()=>{
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(save=true){
- completed=true;if(save)persist();if(save&&attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.record(localStorage,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid).catch(e=>syncStatus('offline','Reward not saved: '+e.message));}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ completed=true;if(save)persist();if(attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.record(localStorage,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid).catch(e=>{syncStatus('offline','Reward not saved. Reopen this completed attempt to retry: '+e.message);});}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';

@@ -69,3 +69,15 @@ test('homepage external scripts defer in dependency order and personalization wa
  assert.ok(html.includes("},{once:true});"));
  for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))if(m[1].trim())assert.doesNotThrow(()=>new vm.Script(m[1]));
 });
+
+test('homepage branding reflects both exams without claiming full syllabus coverage',()=>{
+ assert.ok(html.includes('<title>SkillUp | NEET &amp; JEE Main Practice</title>'));
+ assert.ok(html.includes('NEET UG and JEE Main daily starter tests'));
+ assert.ok(html.includes('YOUR NEET &amp; JEE LEARNING JOURNEY'));
+ for(const [name,desc] of [['Physics','NEET &amp; JEE'],['Chemistry','NEET &amp; JEE'],['Mathematics','JEE'],['Botany','Plant Biology • NCERT • NEET'],['Zoology','Animal Biology • NCERT • NEET']])assert.ok(html.includes('<span class="name">'+name+'</span><span class="desc">'+desc));
+ const centre=fs.readFileSync(require('node:path').join(__dirname,'../take-a-test.html'),'utf8');
+ assert.ok(centre.includes('not a full-length official NEET or JEE mock examination'));
+ const bank=JSON.parse(fs.readFileSync(require('node:path').join(__dirname,'../data/daily-test-starter.json'),'utf8'));
+ for(const s of ['Physics','Chemistry','Mathematics']){assert.ok(bank.bank[s].length>=16);assert.equal(bank.numerical[s].length,4);}
+ for(const s of ['Physics','Chemistry','Botany','Zoology'])assert.ok(bank.bank[s].length>=15);
+});

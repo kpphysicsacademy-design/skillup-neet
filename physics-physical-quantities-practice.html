@@ -112,7 +112,7 @@ html body.pq-bright :is(button,a):focus-visible{outline:3px solid #8e7bd8!import
 }
 @media(max-width:360px){html body.pq-bright .nav{gap:5px}html body.pq-bright .pill{font-size:8px;padding:5px 6px}}
 </style><link rel="stylesheet" href="physics-physical-quantities-theme.css?v=20261125-capa-v2">
-</head>
+<script src="physics-rewards.js"></script></head>
 <body class="pq-bright">
 <header><div class="nav"><a class="back" href="physics-home-fast.html" aria-label="Back to Physics Path">←</a><div class="brand">SkillUp<small>PHYSICS • EASY MODE</small></div><div class="pill xp">⭐ <span id="xp">0</span> XP</div><div class="pill streak">🔥 <span id="streak">0</span> streak</div></div></header>
 <main>
@@ -255,7 +255,7 @@ $('check').addEventListener('click',()=>{
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(save=true){
- completed=true;if(save)persist();if(save&&attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};try{const key='skillup:physics:reward:'+encodeURIComponent(JSON.stringify([quizUid,event.topic,attemptId]));if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(event));}catch(e){console.warn('Reward save failed',e);}}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ completed=true;if(save)persist();if(save&&attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};void PhysicsRewards.record(localStorage,event,()=>window.SkillUpAuth?.auth?.currentUser?.uid).catch(e=>syncStatus('offline','Reward not saved: '+e.message));}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';

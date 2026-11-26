@@ -30,26 +30,69 @@ body{background:radial-gradient(ellipse at 6% 0%,rgba(88,185,42,.08),transparent
 <script>
 (function(){
 'use strict';
-const params=new URLSearchParams(location.search),topic=(params.get('concept')||'').trim();
-const enc=encodeURIComponent(topic);
-const slug=topic.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const params=new URLSearchParams(location.search),topic=(params.get('concept')||'').trim(),conceptId=params.get('conceptId')||'';
+const conceptUrl=encodeURIComponent(topic)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
+const slug=s=>String(s||'').toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+function bankFileForTopic(value,id){
+ const s=slug(value);
+ if(s==='enzymes')return 'zoology-enzymes-question-bank.js';
+ if(s==='biodiversity'&&id==='zoo-'+encodeURIComponent('Ecology and Environment')+'--'+encodeURIComponent('Biodiversity'))return 'biodiversity-patterns-question-bank.js';
+ if(s==='biodiversity')return 'biodiversity-question-bank.js';
+ if(s==='taxonomy-and-systematics')return 'taxonomy-and-systematics-question-bank.js';
+ if(s==='darwins-natural-selection')return 'darwin-natural-selection-question-bank.js';
+ return s+'-question-bank.js';
+}
+const BANK_GLOBALS={
+ 'zoology-enzymes-question-bank.js':'skillUpZoologyEnzymesQuestions',
+ 'biodiversity-question-bank.js':'skillUpBiodiversityQuestions',
+ 'biodiversity-patterns-question-bank.js':'skillUpBiodiversityPatternsQuestions',
+ 'taxonomy-and-systematics-question-bank.js':'skillUpTaxonomySystematicsQuestions',
+ 'darwin-natural-selection-question-bank.js':'skillUpDarwinsNaturalSelectionQuestions'
+};
+function findBank(file,scope){
+ const expected=BANK_GLOBALS[file];
+ if(expected)return Array.isArray(scope[expected])&&scope[expected].length?scope[expected]:null;
+ const token=norm(file.replace(/-question-bank\.js$/i,''));
+ const name=Object.keys(scope).find(key=>/^skillUp.*Questions$/.test(key)&&norm(key.replace(/^skillUp/,'').replace(/Questions$/,''))===token);
+ const value=name?scope[name]:null;
+ return Array.isArray(value)&&value.length?value:null;
+}
+function answerIndex(item){
+ const opts=Array.isArray(item.o)?item.o:[];
+ let idx=typeof item.a==='number'?item.a:opts.indexOf(item.a);
+ if(!Number.isInteger(idx)||idx<0||idx>=opts.length){
+  const raw=String(item.a??'').trim();
+  if(/^[A-D]$/i.test(raw))idx=raw.toUpperCase().charCodeAt(0)-65;
+  else idx=opts.findIndex(option=>String(option).trim().toLowerCase()===raw.toLowerCase());
+ }
+ return Number.isInteger(idx)&&idx>=0&&idx<opts.length?idx:-1;
+}
 document.getElementById('topicTitle').textContent=topic?topic+' · Quick Learn':'Zoology Quick Learn';
 document.title=(topic||'Zoology')+' | Quick Learn | SkillUp';
-document.getElementById('backQuiz').href='zoology-mcq.html?concept='+enc;
-document.getElementById('startQuiz').href='zoology-mcq.html?concept='+enc;
-document.getElementById('sheetLink').href='zoology-topic-cheat-sheet.html?concept='+enc;
-const aliases={'taxonomy-and-systematics':'taxonomy-systematics','darwins-natural-selection':'darwin-natural-selection','biodiversity':'biodiversity-patterns'};
-const norm=s=>String(s||'').toLowerCase().replace(/\\band\\b/g,'').replace(/[^a-z0-9]/g,'');
-function findBank(){const wanted=norm(topic);for(const name of Object.keys(window)){if(!/^skillUp.*Questions$/.test(name))continue;if(norm(name.replace(/^skillUp/,'').replace(/Questions$/,''))===wanted){const value=window[name];if(Array.isArray(value)&&value.length)return value;}}return null;}
+document.getElementById('backQuiz').href='zoology-mcq.html?concept='+conceptUrl;
+document.getElementById('startQuiz').href='zoology-mcq.html?concept='+conceptUrl;
+document.getElementById('sheetLink').href='zoology-topic-cheat-sheet.html?concept='+conceptUrl;
 let bank=null,index=0;
 const $=id=>document.getElementById(id);
-function render(){const item=bank[index],opts=Array.isArray(item.o)?item.o:[],correct=Number(item.a);$('qmeta').textContent='LEARNING CARD '+(index+1)+' · '+topic.toUpperCase();$('question').textContent=item.q||'Recall this concept.';$('answerText').textContent=opts[correct]!==undefined?'Answer: '+opts[correct]:'Answer';$('explanation').textContent=item.e||'Review the answer and connect it to the topic concept.';$('answer').classList.remove('show');$('reveal').textContent='👀 Reveal answer & explanation';$('counter').textContent='Card '+(index+1)+' of '+bank.length;const pct=Math.round((index+1)/bank.length*100);$('progressText').textContent=pct+'%';$('progress').style.width=pct+'%';$('previous').disabled=index===0;$('next').textContent=index===bank.length-1?'Finish review ✓':'Next →';}
+function render(){
+ const item=bank[index],opts=Array.isArray(item.o)?item.o:[],correct=answerIndex(item);
+ $('qmeta').textContent='LEARNING CARD '+(index+1)+' · '+topic.toUpperCase();
+ $('question').textContent=item.q||'Recall this concept.';
+ $('answerText').textContent=opts[correct]!==undefined?'Answer: '+opts[correct]:'Answer unavailable';
+ $('explanation').textContent=item.e||'Review the answer and connect it to the topic concept.';
+ $('answer').classList.remove('show');$('reveal').textContent='👀 Reveal answer & explanation';
+ $('counter').textContent='Card '+(index+1)+' of '+bank.length;
+ const pct=Math.round((index+1)/bank.length*100);$('progressText').textContent=pct+'%';$('progress').style.width=pct+'%';
+ $('previous').disabled=index===0;$('next').textContent=index===bank.length-1?'Finish review ✓':'Next →';
+}
 $('reveal').addEventListener('click',()=>{$('answer').classList.toggle('show');$('reveal').textContent=$('answer').classList.contains('show')?'🙈 Hide answer':'👀 Reveal answer & explanation';});
 $('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(index<bank.length-1){index++;render();}else{index=0;render();$('counter').textContent='Review complete · '+bank.length+' cards';}});
 if(!topic){$('learnCard').innerHTML='<div class="error">Select a Zoology concept from the Zoology path or open Quick Learn from a topic quiz.</div>';return;}
-const script=document.createElement('script');script.src='/question-banks/'+(aliases[slug]||slug)+'-question-bank.js?v=20261122-zoology-quicklearn-reveal-v1';
-script.onload=()=>{bank=findBank();if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="error">The selected topic bank could not be matched. Return to the quiz and try again.</div>';$('counter').textContent='Learning cards unavailable';}};
+const file=bankFileForTopic(topic,conceptId);
+const script=document.createElement('script');script.src='/question-banks/'+file+'?v=20261126-zoology-quicklearn-v2';
+script.onload=()=>{bank=findBank(file,window);if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="error">The selected topic bank could not be matched. Return to the quiz and try again.</div>';$('counter').textContent='Learning cards unavailable';}};
 script.onerror=()=>{$('learnCard').innerHTML='<div class="error">The question bank for this concept is not available yet.</div>';$('counter').textContent='Learning cards unavailable';};
 document.head.appendChild(script);
 })();

@@ -236,3 +236,32 @@ test('MCQ bank loader retries a relative URL after the root-relative request fai
  assert.ok(loader.includes('tryNext();'));
  assert.ok(loader.includes('20261126-zoology-bank-loader-recovery-2'));
 });
+
+test('retry uses same owner and absolute XP, rejects account switch',async()=>{
+ const writes=new Map();let fail=true;
+ const auth={auth:{currentUser:{uid:'owner'}},saveProgress:async row=>{
+  writes.set(row.topic,row.xp);
+  if(fail){fail=false;throw Error('lost acknowledgement');}
+ }};
+ const c={conceptId:'unique',requested:'Topic',window:{SkillUpAuth:auth}};
+ vm.createContext(c);
+ vm.runInContext(quiz.slice(quiz.indexOf('async function persistZoologyProgress'),quiz.indexOf('function startZoologyQuiz')),c);
+ await assert.rejects(c.persistZoologyProgress(20,30,67,'owner'));
+ assert.equal(await c.persistZoologyProgress(20,30,67,'owner'),true);
+ assert.equal(writes.size,1);assert.equal(writes.get('unique'),200);
+ auth.auth.currentUser={uid:'other'};
+ await assert.rejects(c.persistZoologyProgress(20,30,67,'owner'),/Account changed/);
+ assert.equal(writes.size,1);
+});
+
+test('pending result recovery is scoped to account and concept',()=>{
+ const store=new Map();
+ const c={conceptId:'unique',requested:'Topic',window:{},sessionStorage:{getItem:k=>store.get(k)||null}};
+ vm.createContext(c);
+ vm.runInContext(quiz.slice(quiz.indexOf('async function persistZoologyProgress'),quiz.indexOf('function startZoologyQuiz')),c);
+ store.set(c.pendingKey('owner'),JSON.stringify({owner:'owner',score:20,total:30,pct:67}));
+ assert.equal(c.readPending('owner').score,20);
+ assert.equal(c.readPending('other'),null);
+ store.set(c.pendingKey('owner'),JSON.stringify({owner:'other',score:20,total:30,pct:67}));
+ assert.equal(c.readPending('owner'),null);
+});

@@ -79,6 +79,15 @@
       const epoch=sessionEpoch;
       const valid=()=>auth.currentUser?.uid===user.uid&&guard.owner===user.uid&&epoch===sessionEpoch;
       if(!valid()||!Number.isSafeInteger(guard.finishedAt))throw new Error('Invalid progress session');
+      // Existing rules permit owner creates but deny reads of missing non-Chemistry documents.
+      // A merge-create with owner only is safe for existing records and enables the guarded read.
+      if(row.subject==='Zoology'){
+        try{await ref.get();}catch(e){
+          if(e.code!=='permission-denied')throw e;
+          if(!valid())throw Error('Account changed');
+          await ref.set({user_id:user.uid},{merge:true});
+        }
+      }
       await db.runTransaction(async tx=>{
         const snap=await tx.get(ref);
         if(!valid())throw new Error('Account changed during progress write');
@@ -88,6 +97,7 @@
           const events=Array.isArray(prior.reward_events)?prior.reward_events:[];
           if(events.some(e=>e.attemptId===row.reward_attempt_id))return;
           const event={owner:user.uid,subject:'zoology',topic:String(progress.topic),attemptId:row.reward_attempt_id,score:row.score,review:false};
+          if(events.length>=1000)throw Error('Reward ledger capacity reached; progress retained for recovery');
           const patch={reward_events:[...events,event]};
           if(Number(prior.quiz_finished_at||0)<guard.finishedAt)Object.assign(patch,row,{quiz_finished_at:guard.finishedAt});
           tx.set(ref,patch,{merge:true});return;

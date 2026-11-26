@@ -1,0 +1,18 @@
+name: Homepage security regression
+on:
+  pull_request:
+    paths:
+      - index.html
+      - tests/home-activity-xss.test.cjs
+      - .github/workflows/home-activity-security.yml
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/home-activity-xss.test.cjs

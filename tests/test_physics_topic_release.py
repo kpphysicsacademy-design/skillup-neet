@@ -70,7 +70,7 @@ for unit in ("length:", "mass:", "time:", "area:", "volume:", "speed:", "force:"
         fail(f"simulator: conversion family missing {unit}")
 
 sw = SW.read_text(encoding="utf-8")
-if "skillup-offline-v12-zoology-cheatsheet-quiz-parity" not in sw:
+if "skillup-offline-v13-zoology-cheatsheet-compact-actions" not in sw:
     fail("service worker cache version was not advanced")
 if "physics-physical-quantities-theme\.css" not in sw:
     fail("service worker does not fetch the topic stylesheet network-first")

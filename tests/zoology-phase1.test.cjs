@@ -41,6 +41,7 @@ test('taxonomy and Darwin aliases point to real canonical files',()=>{
 });
 test('question-bank filenames resolve only their declared global arrays',()=>{
  const fixtures={
+  'zoology-enzymes-question-bank.js':'skillUpZoologyEnzymesQuestions',
   'biodiversity-question-bank.js':'skillUpBiodiversityQuestions',
   'biodiversity-patterns-question-bank.js':'skillUpBiodiversityPatternsQuestions',
   'taxonomy-and-systematics-question-bank.js':'skillUpTaxonomySystematicsQuestions',

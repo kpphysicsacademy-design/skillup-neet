@@ -223,3 +223,16 @@ test('Quick Learn resolves the same dedicated question bank as the main quiz for
  }
  assert.deepEqual(problems,[],'Quick Learn routing defects:\\n'+problems.join('\\n'));
 });
+
+
+test('MCQ bank loader retries a relative URL after the root-relative request fails',()=>{
+ const start=quiz.indexOf('function loadBank(file){');
+ const end=quiz.indexOf('async function persistZoologyProgress',start);
+ assert.ok(start>=0&&end>start);
+ const loader=quiz.slice(start,end);
+ assert.ok(loader.includes("new URL('/question-banks/'+file,location.origin)"));
+ assert.ok(loader.includes("new URL('question-banks/'+file,document.baseURI)"));
+ assert.ok(loader.includes('script.onerror=()=>{lastError=new Error'));
+ assert.ok(loader.includes('tryNext();'));
+ assert.ok(loader.includes('20261126-zoology-bank-loader-recovery-2'));
+});

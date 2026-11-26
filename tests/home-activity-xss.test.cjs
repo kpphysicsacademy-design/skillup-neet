@@ -46,7 +46,7 @@ test('recent activity sorts all owner records before selecting five',async()=>{
   docs.push({id:'timestamp',data:()=>({topic:'timestamp',updated_at:{toMillis:()=>Date.UTC(2026,2,1)}})});
   docs.push({id:'invalid',data:()=>({topic:'invalid'})});
   const db={collection(name){assert.equal(name,'skillup_progress');return {where(field,op,uid){assert.deepEqual([field,op,uid],['user_id','==','owner']);return {get:async()=>({docs})};}};}};
-  const rows=await vm.runInNewContext('(async()=>{'+html.slice(start,end)+';return rows;})()',{db,uid:'owner'});
+  const rows=await vm.runInNewContext('(async()=>{'+html.slice(start,end)+';return rows;})()',{db,uid:'owner',current:()=>true});
   assert.deepEqual(Array.from(rows,r=>r.topic),['timestamp','legacy','19','18','17']);
 });
 
@@ -103,3 +103,5 @@ test('homepage navigation disclosure supports keyboard and focus exit',()=>{
 test('hero actions point to existing public learning destinations',()=>{const hero=html.match(/<div class="hero-actions">([\s\S]*?)<\/div>/);assert.ok(hero);assert.ok(hero[1].includes('href="#subjects">Explore subjects'));assert.ok(hero[1].includes('href="take-a-test.html">Start daily practice'));assert.ok(html.includes('id="subjects"'));assert.ok(fs.existsSync(require('node:path').join(__dirname,'../take-a-test.html')));});
 
 test('homepage has a single h1 and named subject and activity sections',()=>{assert.equal((html.match(/<h1\b/g)||[]).length,1);for(const id of ['subjects-heading','activity-heading']){assert.ok(new RegExp('<h2[^>]*id="'+id+'"').test(html));assert.ok(new RegExp('<section[^>]*aria-labelledby="'+id+'"').test(html));}assert.equal((html.match(/<h2\b/g)||[]).length,3);});
+
+test('homepage clears prior account data and ignores delayed profile response',async()=>{let observer,ready,resolve;const pending=new Promise(r=>resolve=r);const nodes={welcomeName:{textContent:'OLD'},homeActivityList:{replaceChildren(){this.cleared=true;}},homeActivity:{style:{display:'block'}}};const auth={currentUser:{uid:'A'},onAuthStateChanged(fn){observer=fn;}};const document={documentElement:{dataset:{}},getElementById:id=>nodes[id],addEventListener(k,fn){ready=fn;}};const start=html.indexOf("document.addEventListener('DOMContentLoaded',async function(){"),end=html.indexOf('</script>',start);vm.runInNewContext(html.slice(start,end),{document,window:{SkillUpAuth:{auth,getProfile:()=>pending}},console});await ready();const old=observer(auth.currentUser);auth.currentUser=null;await observer(null);resolve({name:'OLD'});await old;assert.equal(nodes.welcomeName.textContent,'🎓 YOUR NEET & JEE LEARNING JOURNEY');assert.equal(nodes.homeActivity.style.display,'none');assert.ok(nodes.homeActivityList.cleared);assert.equal(document.documentElement.dataset.authenticated,undefined);});

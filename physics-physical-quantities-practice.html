@@ -255,7 +255,7 @@ $('check').addEventListener('click',()=>{
  updateScore();persist();$('check').hidden=true;$('continue').hidden=false;$('continue').className='btn continue show';
 });
 function finish(save=true){
- completed=true;if(save)persist();$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
+ completed=true;if(save)persist();if(save&&attemptId&&!reviewMode&&quizUid&&window.SkillUpAuth?.auth?.currentUser?.uid===quizUid){const event={owner:quizUid,subject:'physics',topic:'physical_quantities_practice',attemptId,score,review:false};try{const key='skillup:physics:reward:'+encodeURIComponent(JSON.stringify([quizUid,event.topic,attemptId]));if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(event));}catch(e){console.warn('Reward save failed',e);}}$('quiz').hidden=true;$('fill').style.width='100%';$('progressText').textContent='Quiz complete';$('percent').textContent='100%';
  const pct=Math.round(score/questions.length*100),card=document.createElement('section');card.className='finish';
  const trophy=document.createElement('div');trophy.textContent='🏆';trophy.style.fontSize='54px';
  const h=document.createElement('h2');h.textContent='Physical Quantities Complete!';
@@ -275,7 +275,7 @@ try{if(bank.length!==30)throw new Error('Expected 30 questions');}catch(err){$('
 })();
 </script>
 <script>
-(function(){const key='skillup-physics-physical-quantities-pages-v1';let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){}const el=document.getElementById('pageProgress');if(el)el.textContent='Progress: '+(['learn','sim','practice'].filter(k=>state[k]).length)+'/3 pages completed';const slot=document.getElementById('finishSlot');if(slot)new MutationObserver(()=>{if(slot.children.length){try{state.practice=true;localStorage.setItem(key,JSON.stringify(state));el.textContent='Progress: 3/3 pages completed';}catch(e){}}}).observe(slot,{childList:true});})();
+(function(){const base='skillup-physics-physical-quantities-pages-v1';const key=base;let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){}const el=document.getElementById('pageProgress');if(el)el.textContent='Progress: '+(['learn','sim','practice'].filter(k=>state[k]).length)+'/3 pages completed';const slot=document.getElementById('finishSlot');if(slot)new MutationObserver(()=>{if(slot.children.length){try{state.practice=true;localStorage.setItem(key,JSON.stringify(state));el.textContent='Progress: 3/3 pages completed';}catch(e){}}}).observe(slot,{childList:true});})();
 </script>
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

@@ -6,6 +6,7 @@ const path=require('node:path');
 const pathModule=path;
 const home=fs.readFileSync(path.join(__dirname,'../zoology-home.html'),'utf8');
 const quiz=fs.readFileSync(path.join(__dirname,'../zoology-mcq.html'),'utf8');
+const quickLearn=fs.readFileSync(path.join(__dirname,'../zoology-quicklearn.html'),'utf8');
 const start=home.indexOf('var units='),end=home.indexOf('var p=document',start);
 assert.ok(start>=0&&end>start);
 const ctx={};vm.createContext(ctx);vm.runInContext(home.slice(start,end),ctx);
@@ -147,4 +148,43 @@ test('answerIndex supports numeric, option-text and letter-coded answer keys',()
  assert.equal(context.answerIndex({o:['red','blue'],a:'B'}),1);
  assert.equal(context.answerIndex({o:['red','blue'],a:'A'}),0);
  assert.equal(context.answerIndex({o:['red','blue'],a:'D'}),-1);
+});
+
+test('Quick Learn routes duplicate titles and special Zoology banks correctly',()=>{
+ const start=quickLearn.indexOf('function bankFileForTopic(');
+ const end=quickLearn.indexOf("document.getElementById('topicTitle')",start);
+ assert.ok(start>=0&&end>start);
+ const c={encodeURIComponent};vm.createContext(c);vm.runInContext(quickLearn.slice(start,end),c);
+ assert.equal(c.bankFileForTopic('What is Living?',''),'what-is-living-question-bank.js');
+ assert.equal(c.bankFileForTopic('Enzymes',''),'zoology-enzymes-question-bank.js');
+ assert.equal(c.bankFileForTopic('Taxonomy and Systematics',''),'taxonomy-and-systematics-question-bank.js');
+ assert.equal(c.bankFileForTopic("Darwin's Natural Selection",''),'darwin-natural-selection-question-bank.js');
+ assert.equal(c.bankFileForTopic('Biodiversity','zoo-Ecology%20and%20Environment--Biodiversity'),'biodiversity-patterns-question-bank.js');
+ assert.equal(c.bankFileForTopic('Biodiversity','zoo-Diversity%20in%20Living%20World--Biodiversity'),'biodiversity-question-bank.js');
+});
+test('Quick Learn resolves the exact expected bank global, including the Zoology Enzymes bank',()=>{
+ const start=quickLearn.indexOf('function bankFileForTopic(');
+ const end=quickLearn.indexOf("document.getElementById('topicTitle')",start);
+ const c={encodeURIComponent};vm.createContext(c);vm.runInContext(quickLearn.slice(start,end),c);
+ const enzymes=[{q:'Q',o:['A','B'],a:0}],biodiversity=[{q:'Q2',o:['A','B'],a:1}];
+ assert.equal(c.findBank('zoology-enzymes-question-bank.js',{skillUpZoologyEnzymesQuestions:enzymes}),enzymes);
+ assert.equal(c.findBank('biodiversity-question-bank.js',{skillUpBiodiversityQuestions:biodiversity}),biodiversity);
+ assert.equal(c.findBank('zoology-enzymes-question-bank.js',{skillUpWrongQuestions:enzymes}),null);
+});
+test('Quick Learn answerIndex supports numeric, option-text and A-D answer keys',()=>{
+ const start=quickLearn.indexOf('function answerIndex(item){');
+ const end=quickLearn.indexOf("\ndocument.getElementById('topicTitle')",start);
+ assert.ok(start>=0&&end>start);
+ const c={};vm.createContext(c);vm.runInContext(quickLearn.slice(start,end)+';this.answerIndex=answerIndex;',c);
+ assert.equal(c.answerIndex({o:['red','blue'],a:1}),1);
+ assert.equal(c.answerIndex({o:['red','blue'],a:'blue'}),1);
+ assert.equal(c.answerIndex({o:['red','blue'],a:'B'}),1);
+ assert.equal(c.answerIndex({o:['red','blue'],a:'A'}),0);
+ assert.equal(c.answerIndex({o:['red','blue'],a:'D'}),-1);
+});
+test('Quick Learn preserves unit-qualified concept IDs when linking back to the quiz and cheat sheet',()=>{
+ assert.ok(quickLearn.includes("const conceptUrl=encodeURIComponent(topic)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'')"));
+ assert.ok(quickLearn.includes("'zoology-mcq.html?concept='+conceptUrl"));
+ assert.ok(quickLearn.includes("'zoology-topic-cheat-sheet.html?concept='+conceptUrl"));
+ assert.ok(quickLearn.includes('correct=answerIndex(item)'));
 });

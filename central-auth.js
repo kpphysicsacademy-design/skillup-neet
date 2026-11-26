@@ -83,6 +83,15 @@
         const snap=await tx.get(ref);
         if(!valid())throw new Error('Account changed during progress write');
         const prior=snap.exists?snap.data():{};
+        if(row.subject==='Zoology'&&row.reward_attempt_id){
+          if(typeof row.reward_attempt_id!=='string'||! /^[a-zA-Z0-9-]{1,80}$/.test(row.reward_attempt_id)||!Number.isSafeInteger(row.score)||row.score<0||!Number.isSafeInteger(row.total_questions)||row.score>row.total_questions)throw Error('Invalid reward');
+          const events=Array.isArray(prior.reward_events)?prior.reward_events:[];
+          if(events.some(e=>e.attemptId===row.reward_attempt_id))return;
+          const event={owner:user.uid,subject:'zoology',topic:String(progress.topic),attemptId:row.reward_attempt_id,score:row.score,review:false};
+          const patch={reward_events:[...events,event]};
+          if(Number(prior.quiz_finished_at||0)<guard.finishedAt)Object.assign(patch,row,{quiz_finished_at:guard.finishedAt});
+          tx.set(ref,patch,{merge:true});return;
+        }
         if(Number(prior.quiz_finished_at||0)>=guard.finishedAt)return;
         tx.set(ref,Object.assign({},row,{quiz_finished_at:guard.finishedAt}),{merge:true});
       });

@@ -101,3 +101,5 @@ test('homepage navigation disclosure supports keyboard and focus exit',()=>{
 });
 
 test('hero actions point to existing public learning destinations',()=>{const hero=html.match(/<div class="hero-actions">([\s\S]*?)<\/div>/);assert.ok(hero);assert.ok(hero[1].includes('href="#subjects">Explore subjects'));assert.ok(hero[1].includes('href="take-a-test.html">Start daily practice'));assert.ok(html.includes('id="subjects"'));assert.ok(fs.existsSync(require('node:path').join(__dirname,'../take-a-test.html')));});
+
+test('homepage has a single h1 and named subject and activity sections',()=>{assert.equal((html.match(/<h1\b/g)||[]).length,1);for(const id of ['subjects-heading','activity-heading']){assert.ok(new RegExp('<h2[^>]*id="'+id+'"').test(html));assert.ok(new RegExp('<section[^>]*aria-labelledby="'+id+'"').test(html));}assert.equal((html.match(/<h2\b/g)||[]).length,3);});

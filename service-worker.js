@@ -3,7 +3,7 @@
  * Firebase and all cross-origin requests remain network-only; user progress/API data
  * is never added to Cache Storage.
  */
-const CACHE_NAME = 'skillup-offline-v26-zoology-quicklearn-double-font';
+const CACHE_NAME = 'skillup-offline-v27-zoology-quicklearn-original-fonts';
 const PRECACHE_URLS = [
   '/index.html',
   '/learn.html',

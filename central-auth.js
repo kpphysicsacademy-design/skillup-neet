@@ -79,6 +79,26 @@
       const epoch=sessionEpoch;
       const valid=()=>auth.currentUser?.uid===user.uid&&guard.owner===user.uid&&epoch===sessionEpoch;
       if(!valid()||!Number.isSafeInteger(guard.finishedAt))throw new Error('Invalid progress session');
+      if(subject==='Zoology'){
+        if(guard.finishedAt<=0)throw new Error('Invalid completion time');
+        const token=await user.getIdToken();
+        if(!valid())throw new Error('Account changed before progress creation');
+        const fields=Object.fromEntries(Object.entries(Object.assign({},row,{quiz_finished_at:guard.finishedAt})).map(([key,value])=>{
+          if(typeof value==='string')return [key,{stringValue:value}];
+          if(typeof value==='boolean')return [key,{booleanValue:value}];
+          if(typeof value==='number'&&Number.isFinite(value))return [key,Number.isSafeInteger(value)?{integerValue:String(value)}:{doubleValue:value}];
+          throw new Error('Unsupported progress field');
+        }));
+        const url='https://firestore.googleapis.com/v1/projects/'+encodeURIComponent(cfg.projectId)+'/databases/(default)/documents/skillup_progress/'+encodeURIComponent(id)+'?currentDocument.exists=false';
+        const response=await fetch(url,{method:'PATCH',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({fields})});
+        if(!valid())throw new Error('Account changed during progress creation');
+        if(response.ok)return row;
+        const failure=await response.json();
+        if(!valid())throw new Error('Account changed during progress conflict');
+        // A denied create may mean an existing record. The owner-checked
+        // transaction below is the only fallback; never perform an unguarded set.
+        if(!['ALREADY_EXISTS','FAILED_PRECONDITION','PERMISSION_DENIED'].includes(failure?.error?.status))throw new Error('Progress creation failed');
+      }
       await db.runTransaction(async tx=>{
         const snap=await tx.get(ref);
         if(!valid())throw new Error('Account changed during progress write');
@@ -86,6 +106,7 @@
         if(Number(prior.quiz_finished_at||0)>=guard.finishedAt)return;
         tx.set(ref,Object.assign({},row,{quiz_finished_at:guard.finishedAt}),{merge:true});
       });
+      if(!valid())throw new Error('Account changed after progress transaction');
     }else await ref.set(row,{merge:true});
     return row;
   }

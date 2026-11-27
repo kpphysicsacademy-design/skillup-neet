@@ -294,3 +294,20 @@ test('legacy pending result is retained but not written without completion time'
  assert.equal(c.activityResumeParams('zoology',{concept_id:'invalid',topic:'Biodiversity'},'Biodiversity').get('resumeId'),'invalid');
  assert.equal(c.activityResumeParams('chemistry',{concept_id:'abc'},'Matter').has('resumeId'),false);
  });
+
+test('ZOO-006 actual central-auth client: atomic creation, conflict and session guards',async()=>{
+ const source=fs.readFileSync(pathModule.join(__dirname,'../central-auth.js'),'utf8');
+ let callback, requests=[],transactions=0, writes=0, mode='success';
+ const user={uid:'student',getIdToken:async()=>{if(mode==='switch-token'){callback({uid:'other'});auth.currentUser={uid:'other'};}return 'synthetic-token';}};
+ const auth={currentUser:user,onAuthStateChanged(fn){callback=fn;fn(user);}};
+ const db={collection:()=>({doc:()=>({})}),runTransaction:async fn=>{transactions++;await fn({get:async()=>({exists:true,data:()=>({quiz_finished_at:1000})}),set:()=>{writes++;}});}};
+ const window={SKILLUP_FIREBASE_CONFIG:{apiKey:'test',authDomain:'test',projectId:'demo-test'},firebase:{apps:[],initializeApp:()=>({}),auth:()=>auth,firestore:()=>db}};
+ const context={window,sessionStorage:{removeItem(){}},fetch:async(url,options)=>{requests.push({url,options});if(mode==='switch-fetch'){auth.currentUser={uid:'other'};callback(auth.currentUser);}return {ok:mode==='success'||mode==='switch-fetch',json:async()=>({error:{status:mode==='conflict'?'ALREADY_EXISTS':'UNAVAILABLE'}})};}};
+ vm.createContext(context);vm.runInContext(source,context);
+ const save=()=>window.SkillUpAuth.saveProgress({subject:'Zoology',topic:'zoo-test',score:2,percentage:66.7},{owner:'student',finishedAt:2000});
+ await save();assert.equal(transactions,0);assert.match(requests[0].url,/currentDocument\.exists=false$/);assert.equal(JSON.parse(requests[0].options.body).fields.user_id.stringValue,'student');
+ mode='conflict';await save();assert.equal(transactions,1);assert.equal(writes,1);
+ mode='unavailable';await assert.rejects(save(),/creation failed/);assert.equal(transactions,1);
+ mode='switch-token';await assert.rejects(save(),/Account changed/);assert.equal(requests.length,3);
+ auth.currentUser=user;callback(user);mode='switch-fetch';await assert.rejects(save(),/Account changed/);assert.equal(transactions,1);
+});

@@ -350,7 +350,7 @@ const params=new URLSearchParams(location.search);
 const requested=(params.get('concept')||'What is Living?').trim();
 const conceptId=params.get('conceptId')||'';
 const conceptUrl=encodeURIComponent(requested)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
-document.getElementById('quickLearnNavLink').addEventListener('click',()=>document.getElementById('learnModeTab').click());
+document.getElementById('quickLearnNavLink')?.addEventListener('click',()=>document.getElementById('learnModeTab').click());
 document.getElementById('pathNavLink').href='zoology-home.html?resumeId='+encodeURIComponent(conceptId)+'&resumeConcept='+encodeURIComponent(requested);
 const key=requested.toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
@@ -371,6 +371,24 @@ function candidates(v){
  return [s+'-question-bank.js'];
 }
 const BANK_GLOBALS={
+ 'diploblastic-and-triploblastic-organisation-question-bank.js':'skillUpDiploblasticTriploblasticQuestions',
+ 'coelom-and-body-cavity-question-bank.js':'skillUpCoelomBodyCavityQuestions',
+ 'cockroach-morphology-and-anatomy-question-bank.js':'skillUpCockroachMorphologyAnatomyQuestions',
+ 'frog-morphology-and-anatomy-question-bank.js':'skillUpFrogMorphologyAnatomyQuestions',
+ 'cartilage-and-bone-question-bank.js':'skillUpCartilageBoneQuestions',
+ 'smooth-skeletal-and-cardiac-muscle-question-bank.js':'skillUpSmoothSkeletalCardiacMuscleQuestions',
+ 'cilia-flagella-and-centrioles-question-bank.js':'skillUpCiliaFlagellaCentriolesQuestions',
+ 'nucleus-chromatin-and-nucleolus-question-bank.js':'skillUpNucleusChromatinNucleolusQuestions',
+ 'osmosis-and-plasmolysis-question-bank.js':'skillUpOsmosisPlasmolysisQuestions',
+ 'monosaccharides-and-polysaccharides-question-bank.js':'skillUpMonosaccharidesPolysaccharidesQuestions',
+ 'proteins-and-amino-acids-question-bank.js':'skillUpProteinsAminoAcidsQuestions',
+ 'cofactors-and-coenzymes-question-bank.js':'skillUpCofactorsCoenzymesQuestions',
+ 'respiratory-volumes-and-capacities-question-bank.js':'skillUpRespiratoryVolumesCapacitiesQuestions',
+ 'transport-of-oxygen-and-carbon-dioxide-question-bank.js':'skillUpTransportOfOxygenCarbonDioxideQuestions',
+ 'inspiration-and-expiration-question-bank.js':'skillUpInspirationExpirationQuestions',
+ 'vital-capacity-and-tidal-volume-question-bank.js':'skillUpVitalCapacityTidalVolumeQuestions',
+ 'primary-and-secondary-immune-response-question-bank.js':'skillUpPrimarySecondaryImmuneResponseQuestions',
+
  'zoology-enzymes-question-bank.js':'skillUpZoologyEnzymesQuestions',
  'biodiversity-question-bank.js':'skillUpBiodiversityQuestions',
  'biodiversity-patterns-question-bank.js':'skillUpBiodiversityPatternsQuestions',
@@ -380,7 +398,7 @@ const BANK_GLOBALS={
 function resolveBankArray(file,scope){
  const valid=value=>Array.isArray(value)&&value.length>0&&value.every(item=>{
   if(!item||typeof item!=='object'||typeof item.q!=='string'||!item.q.trim()||!Array.isArray(item.o)||item.o.length<2||item.o.some(option=>typeof option!=='string'||!option.trim()))return false;
-  const options=item.o.map(option=>option.trim().toLowerCase());
+  const options=item.o.map(option=>option.trim());
   if(new Set(options).size!==options.length)return false;
   const raw=item.a;let index=typeof raw==='number'?raw:-1;
   if(index<0||index>=item.o.length){
@@ -494,7 +512,7 @@ function startZoologyQuiz(source,conceptName){
   const isLearn=mode==='learn';
   learnTab.setAttribute('aria-selected',String(isLearn));simTab.setAttribute('aria-selected',String(!isLearn));
   learnPanel.hidden=!isLearn;simPanel.hidden=isLearn;
-  document.getElementById('quickLearnNavLink').setAttribute('aria-pressed',String(isLearn));
+  document.getElementById('quickLearnNavLink')?.setAttribute('aria-pressed',String(isLearn));
   if(isLearn)renderLearn();window.scrollTo({top:0,behavior:'smooth'});
  }
  function renderLearn(){
@@ -552,10 +570,10 @@ function startZoologyQuiz(source,conceptName){
 async function load(){
  if(!requested){showNotice('No concept was supplied. Return to the Zoology Path and select a concept.');return;}
  const files=candidates(requested);let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){}}
- if(bank){startZoologyQuiz(bank,requested);return;}
+ if(bank){try{startZoologyQuiz(bank,requested);return;}catch(error){console.error('Zoology quiz initialization failed',error);showNotice('The quiz could not start. Please reload or return to the Zoology Path.');return;}}
  showNotice('The question bank could not be loaded. Please refresh once. If the issue continues, return to the Zoology Path and report this topic.');
 }
-load();
+load().catch(error=>{console.error('Zoology loading failed',error);showNotice('The quiz could not load. Please reload or return to the Zoology Path.');});
 window.SkillUpZoologyQuizUI=startZoologyQuiz;
 })();
 </script>

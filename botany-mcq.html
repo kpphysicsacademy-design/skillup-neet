@@ -235,7 +235,7 @@ body main .current-quiz{border-color:#d3c5f2}
 body main .learn-links{position:absolute;top:calc(100% + 6px);left:0;width:max(100%, 156px);max-width:calc(100vw - 36px);box-sizing:border-box;background:#fff;border:1px solid #dedee5;border-radius:12px;padding:5px;box-shadow:0 8px 20px #0002;z-index:4}
 body main .learn-menu:not([open]) .learn-links{display:none!important}
 body main .learn-links a{white-space:normal;line-height:1.3}
-</style>
+body main .quiz-resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}body main .quiz-resources a{box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;height:48px;padding:4px;font-size:14px;font-weight:900;color:#171717;text-decoration:none;border:1px solid #a6d8ee;border-radius:12px;background:#dff5ff}body main .quiz-resources a:last-child{background:#e5d9ff;border-color:#aa90ec}</style>
 
 
 <script src="botany-scope.js?v=20260923-botany-scope-v1"></script>
@@ -252,6 +252,7 @@ body main .learn-links a{white-space:normal;line-height:1.3}
 <main id="main-content">
 
 <h1 class="subject-heading">Botany</h1>
+<nav class="quiz-resources" aria-label="Study resources"><a id="botanyQuickLearnLink" href="botany-quick-learn.html?concept=What%20Is%20Living%3F">🧠 Quick Learn</a><a id="botanySheetLink" href="botany-what-is-living-cheat-sheet.html?v=20261121-clean-v4">📘 Cheat Sheet</a></nav>
 
 <section class="quiz-progress" aria-label="Question progress"><div class="progress-row"><span id="counter">Loading question bank…</span><span id="percent">—/—</span></div><div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="bar"></div></div></section>
 <section id="quiz" class="quiz" aria-labelledby="question">
@@ -847,6 +848,8 @@ body main .learn-links a{white-space:normal;line-height:1.3}
 const questionsSource=banks[key];
 const quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
 document.title=requested+' | Botany Quiz | SkillUp';
+document.getElementById('botanyQuickLearnLink').href='botany-quick-learn.html?concept='+encodeURIComponent(requested);
+document.getElementById('botanySheetLink').href=(key==='what is living?'||key==='what is living')?'botany-what-is-living-cheat-sheet.html?v=20261121-clean-v4':(['cell theory','prokaryotic cell','eukaryotic cell'].includes(key)?'botany-cell-cheat-sheet.html?concept='+encodeURIComponent(requested):'botany-topic-cheat-sheet.html?concept='+encodeURIComponent(requested)+(key==='plasma membrane'?'&v=20261123-plasma-membrane-live-fix-v1':''));
 function startBotanyQuiz(source,conceptName){
  // Include the explained extension questions instead of silently truncating at 30.
  const original=source.slice();

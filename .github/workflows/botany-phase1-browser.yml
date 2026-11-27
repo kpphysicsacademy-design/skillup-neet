@@ -5,6 +5,9 @@ on:
       - 'fix/botany-phase1-routing'
     paths:
       - 'botany-*.html'
+      - 'botany-*-question-banks.js'
+      - 'question-banks/**'
+      - 'scripts/audit-botany-assessment-integrity.cjs'
       - 'tests/botany-*.cjs'
       - 'tests/botany-emulator-config.json'
       - 'central-auth.js'
@@ -13,6 +16,9 @@ on:
   pull_request:
     paths:
       - 'botany-*.html'
+      - 'botany-*-question-banks.js'
+      - 'question-banks/**'
+      - 'scripts/audit-botany-assessment-integrity.cjs'
       - 'tests/botany-*.cjs'
       - 'tests/botany-emulator-config.json'
       - 'scripts/audit-botany-ch3.cjs'
@@ -28,6 +34,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: node scripts/audit-botany-assessment-integrity.cjs > botany-assessment-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: botany-assessment-audit
+          path: botany-assessment-audit.json
       - run: node --test tests/botany-phase1.test.cjs
       - run: npm install --no-save --package-lock=false playwright@1.51.1
       - run: npx playwright install --with-deps chromium

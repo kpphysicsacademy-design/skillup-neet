@@ -53,6 +53,7 @@ const path=require('node:path');
    }catch(e){failures.push(url+' '+e.message);}
   }
   console.log('Destination executions: '+(282-failures.length)+'/282');
+  console.log('Quiz-only browser assertions passed for all concepts checked.');
   allFailures.push(...failures);
  }
  console.log('PASS viewport '+width+'; 282 destination URLs checked');

@@ -133,3 +133,34 @@ test('ZOO-006 emulator-only candidate: owner first save, concurrent ordering and
     await assertFails(getDoc(ref(owner,'student_Zoology_invalid')));
   } finally {await isolated.cleanup();}
 });
+
+test('ZOO-006 unchanged rules: REST create-only precondition prevents overwriting concurrent first save', async () => {
+  const host=process.env.FIRESTORE_EMULATOR_HOST;
+  assert.ok(host,'emulator host required');
+  assert.match(host,/^(localhost|127\.0\.0\.1|\[::1\]):\d+$/);
+  const project='demo-skillup-progress-validation';
+  const id=ref().id;
+  const url='http://'+host+'/v1/projects/'+project+'/databases/(default)/documents/skillup_progress/'+id+'?currentDocument.exists=false';
+  function token(uid){
+    const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+    const now=Math.floor(Date.now()/1000);
+    return enc({alg:'none',typ:'JWT'})+'.'+enc({sub:uid,user_id:uid,aud:project,iss:'https://securetoken.google.com/'+project,iat:now,exp:now+3600,firebase:{sign_in_provider:'custom'}})+'.';
+  }
+  async function create(uid,finishedAt,score){
+    const fields=Object.fromEntries(Object.entries({...row,score,xp:score*10,quiz_finished_at:finishedAt}).map(([k,v])=>[k,typeof v==='number'?{integerValue:String(v)}:typeof v==='boolean'?{booleanValue:v}:{stringValue:v}]));
+    return fetch(url,{method:'PATCH',headers:{Authorization:'Bearer '+token(uid),'Content-Type':'application/json'},body:JSON.stringify({fields})});
+  }
+  const foreign=await create('other',4000,30);
+  assert.equal(foreign.status,403);
+  const responses=await Promise.all([create('student',1000,24),create('student',3000,27)]);
+  assert.equal(responses.filter(r=>r.ok).length,1);
+  const rejected=responses.find(r=>!r.ok);
+  assert.ok([400,403,409,412].includes(rejected.status),'unexpected conflict status '+rejected.status);
+  await guardedSave(db(),3000,27);
+  await guardedSave(db(),1000,24);
+  const saved=(await getDoc(ref())).data();
+  assert.equal(saved.quiz_finished_at,3000);
+  assert.equal(saved.score,27);
+  assert.equal(saved.user_id,'student');
+  await assertFails(getDoc(ref(db('other'))));
+});

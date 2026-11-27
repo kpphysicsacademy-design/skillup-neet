@@ -38,16 +38,25 @@ const path=require('node:path');
     await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2,{},{timeout:5000});
     assert(await page.locator('#question').innerText());
     assert.equal(await page.locator('#notice').isVisible(),false);
-    await page.locator('#learnModeTab').click();
-    assert(await page.locator('#learnModeQuestion').innerText());
-    assert(await page.locator('#learnModePanel').isVisible());
-    await page.locator('#learnModeReveal').click();
-    assert(await page.locator('#learnModeExplanation').isVisible());
-    await page.locator('#simulatorModeTab').click();
+    assert.equal(await page.locator('#learnModeTab').isVisible(),false);
+    assert.equal(await page.locator('#simulatorModeTab').innerText(),'📘 Learn');
+    const sheet=page.locator('#cheatSheetLink');
+    const target=new URL(await sheet.getAttribute('href'),url);
+    const original=new URL(url);
+    assert.equal(target.searchParams.get('conceptId'),original.searchParams.get('conceptId'));
+    assert.equal(target.searchParams.get('concept'),original.searchParams.get('concept'));
     assert(await page.locator('#simulatorModePanel').isVisible());
     await page.locator('#options button').first().click();
     await page.locator('#next').click();
     assert(await page.locator('#explain').isVisible());
+    await sheet.click();
+    await page.waitForURL('**/zoology-topic-cheat-sheet.html?**');
+    assert.equal(await page.locator('#topicTitle').innerText(),original.searchParams.get('concept'));
+    const back=new URL(await page.locator('#backQuiz').getAttribute('href'),page.url());
+    assert.equal(back.searchParams.get('conceptId'),original.searchParams.get('conceptId'));
+    const row=JSON.parse(fs.readFileSync('docs/zoology-cheat-sheet-coverage.json','utf8')).find(x=>x.id===original.searchParams.get('conceptId'));
+    assert(row);
+    if(!row.dedicated){assert.equal(await page.locator('#livingSheet').isVisible(),false);assert(await page.getByText('Dedicated Cheat Sheet is not yet available for this concept.',{exact:false}).isVisible());}
    }catch(e){failures.push(url+' '+e.message);}
   }
   console.log('Destination executions: '+(282-failures.length)+'/282');

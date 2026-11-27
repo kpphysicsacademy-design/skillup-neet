@@ -1,5 +1,5 @@
 const { initializeTestEnvironment, assertSucceeds, assertFails } = require('@firebase/rules-unit-testing');
-const { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, query, where } = require('firebase/firestore');
+const { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, query, where, runTransaction } = require('firebase/firestore');
 const { before, after, beforeEach, test } = require('node:test');
 const fs = require('node:fs');
 
@@ -81,4 +81,31 @@ test('anonymous users cannot create or read progress', async () => {
   const saved = await assertSucceeds(getDoc(ref()));
   if (saved.data().legacy_marker !== 'preserve') throw new Error('Legacy field lost');
   await assertFails(getDoc(ref(db('other'))));
+});
+
+const assert = require('node:assert/strict');
+async function guardedSave(database, finishedAt, score) {
+  const target = ref(database);
+  return runTransaction(database, async tx => {
+    const snap = await tx.get(target);
+    if (Number(snap.exists() ? snap.data().quiz_finished_at || 0 : 0) >= finishedAt) return;
+    tx.set(target, {...row, score, xp: score * 10, quiz_finished_at: finishedAt}, {merge:true});
+  });
+}
+test('ZOO-006 baseline: first guarded transaction is denied under current rules', async () => {
+  const error = await assertFails(guardedSave(db(), 1000, 24));
+  assert.equal(error.code, 'permission-denied');
+  const own = await getDocs(query(collection(db(), 'skillup_progress'), where('user_id','==','student')));
+  assert.equal(own.size, 0);
+});
+test('existing owner guarded concurrent recovery retains newest result and legacy fields', async () => {
+  await seed({quiz_finished_at: 1000, legacy_marker:'preserve'});
+  await Promise.all([guardedSave(db(), 3000, 27), guardedSave(db(), 2000, 25)]);
+  await guardedSave(db(), 3000, 1);
+  const saved = (await getDoc(ref())).data();
+  assert.equal(saved.quiz_finished_at, 3000);
+  assert.equal(saved.score, 27);
+  assert.equal(saved.xp, 270);
+  assert.equal(saved.legacy_marker, 'preserve');
+  await assertFails(guardedSave(db('other'), 4000, 30));
 });

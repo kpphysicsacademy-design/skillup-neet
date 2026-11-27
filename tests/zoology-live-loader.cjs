@@ -41,7 +41,7 @@ const path=require('node:path');
     assert(await page.locator('#question').innerText());
     assert.equal(await page.locator('#notice').isVisible(),false);
     assert.equal(await page.locator('#learnModeTab').isVisible(),false);
-    assert.equal(await page.locator('#simulatorModeTab').innerText(),'📘 Learn');
+    assert.equal(await page.locator('#simulatorModeTab').innerText(),'📝 Quiz');
     const sheet=page.locator('#cheatSheetLink');
     const target=new URL(await sheet.getAttribute('href'),url);
     const original=new URL(url);

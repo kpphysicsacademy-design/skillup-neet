@@ -12,7 +12,7 @@ assert.ok(start>=0&&end>start);
 const ctx={};vm.createContext(ctx);vm.runInContext(home.slice(start,end),ctx);
 test('all catalog IDs unique',()=>{assert.equal(new Set(ctx.a.map(x=>x.id)).size,ctx.a.length);assert.equal(ctx.units.length,14);});
 test('Biodiversity titles have distinct IDs',()=>{const rows=ctx.a.filter(x=>x.c==='Biodiversity');assert.equal(rows.length,2);assert.notEqual(rows[0].id,rows[1].id);});
-test('resume uses the full catalog and resolves duplicate legacy Biodiversity records deterministically',()=>{
+test('resume uses the full catalog and rejects ambiguous legacy Biodiversity records',()=>{
  assert.ok(home.includes('Math.max(I,target.ix)'));
  assert.ok(ctx.a.at(-1).ix>20);
  const start=home.indexOf('function resolveResumeTarget('),end=home.indexOf('var target=resolveResumeTarget',start);
@@ -21,7 +21,9 @@ test('resume uses the full catalog and resolves duplicate legacy Biodiversity re
  const rows=ctx.a.filter(x=>x.c==='Biodiversity');
  assert.equal(rows.length,2);
  const legacy=c.resolveResumeTarget(ctx.a,'','biodiversity');
- assert.equal(legacy.n,'Diversity in Living World');
+ assert.equal(legacy,null);
+ assert.equal(c.resolveResumeTarget(ctx.a,'unknown-id','biodiversity'),null);
+ assert.equal(c.resolveResumeTarget(ctx.a,'','aves').c,'Aves');
  assert.equal(c.resolveResumeTarget(ctx.a,rows[1].id,'biodiversity').id,rows[1].id);
 });
 test('quiz loader does not fall back to unrelated global array',()=>{assert.doesNotMatch(quiz,/\|\|arrays\[0\]/);});
@@ -34,7 +36,12 @@ test('duplicate Biodiversity routes select the correct independent bank',()=>{
  const ecology=ctx.a.find(x=>x.c==='Biodiversity'&&x.n==='Ecology and Environment');
  assert.ok(ecology);
  assert.equal(loaderContext(ecology.id).candidates('Biodiversity')[0],'biodiversity-patterns-question-bank.js');
- assert.equal(loaderContext().candidates('Biodiversity')[0],'biodiversity-question-bank.js');
+ assert.equal(loaderContext().candidates('Biodiversity').length,0);
+ assert.equal(loaderContext('invalid').candidates('Biodiversity').length,0);
+ assert.equal(loaderContext(ecology.id).candidates('Biodiversity').length,1);
+ const diversity=ctx.a.find(x=>x.c==='Biodiversity'&&x.n==='Diversity in Living World');
+ assert.equal(loaderContext(diversity.id).candidates('Biodiversity')[0],'biodiversity-question-bank.js');
+ assert.equal(loaderContext(diversity.id).candidates('Biodiversity').length,1);
 });
 test('taxonomy and Darwin aliases point to real canonical files',()=>{
  assert.equal(loaderContext().candidates('Taxonomy and Systematics')[0],'taxonomy-and-systematics-question-bank.js');
@@ -159,6 +166,8 @@ test('Quick Learn routes duplicate titles and special Zoology banks correctly',(
  assert.equal(c.bankFileForTopic('Enzymes',''),'zoology-enzymes-question-bank.js');
  assert.equal(c.bankFileForTopic('Taxonomy and Systematics',''),'taxonomy-and-systematics-question-bank.js');
  assert.equal(c.bankFileForTopic("Darwin's Natural Selection",''),'darwin-natural-selection-question-bank.js');
+ assert.equal(c.bankFileForTopic('Biodiversity',''),null);
+ assert.equal(c.bankFileForTopic('Biodiversity','invalid'),null);
  assert.equal(c.bankFileForTopic('Biodiversity','zoo-Ecology%20and%20Environment--Biodiversity'),'biodiversity-patterns-question-bank.js');
  assert.equal(c.bankFileForTopic('Biodiversity','zoo-Diversity%20in%20Living%20World--Biodiversity'),'biodiversity-question-bank.js');
 });
@@ -269,3 +278,36 @@ test('pending result recovery is scoped to account and concept',()=>{
 test('quiz ownership cannot transfer after account switch or logout and relogin',()=>{const start=quiz.indexOf('function bindQuizOwner('),end=quiz.indexOf('function startZoologyQuiz',start);const c={};vm.runInNewContext(quiz.slice(start,end),c);let notify;const auth={currentUser:{uid:'A'},onAuthStateChanged(fn){notify=fn;}};const owner=c.bindQuizOwner(auth);assert.equal(owner.owner(),'A');auth.currentUser={uid:'B'};notify(auth.currentUser);assert.equal(owner.owner(),null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(owner.owner(),null);const fresh=c.bindQuizOwner(auth);auth.currentUser=null;notify(null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(fresh.owner(),null);});
 
 test('legacy pending result is retained but not written without completion time',async()=>{const start=quiz.indexOf('function showProgressSync('),end=quiz.indexOf('async function recoverProgress',start);let writes=0,removed=0;const result={owner:'A',score:2,total:3,pct:67};const raw=JSON.stringify(result);const c={window:{SkillUpAuth:{auth:{}}},pendingKey:()=> 'key',bindQuizOwner:()=>({owner:()=> 'A'}),sessionStorage:{getItem:()=>raw,removeItem:()=>removed++},document:{createElement:()=>({setAttribute(){}})},persistZoologyProgress:async()=>{writes++;return true;}};vm.runInNewContext(quiz.slice(start,end),c);let nodes; c.showProgressSync({replaceChildren(...items){nodes=items;}},result,false);await nodes[1].onclick();assert.equal(writes,0);assert.equal(removed,0);assert.match(nodes[0].textContent,/Legacy result/);});
+
+ test('homepage activity preserves explicit Zoology IDs and does not guess legacy duplicate titles',()=>{
+ const source=require('node:fs').readFileSync('index.html','utf8');
+ const start=source.indexOf('function activityResumeParams('),end=source.indexOf('          link.href=',start);
+ assert.ok(start>=0&&end>start);
+ const c={URLSearchParams};vm.createContext(c);vm.runInContext(source.slice(start,end),c);
+ for(const row of ctx.a.filter(x=>x.c==='Biodiversity')){
+ const p=c.activityResumeParams('zoology',{concept_id:row.id,concept:row.c},row.c);
+ assert.equal(p.get('resumeId'),row.id);
+ assert.equal(p.get('resumeConcept'),row.c);
+ assert.equal(c.activityResumeParams('zoology',{topic:row.id},row.id).get('resumeId'),row.id);
+ }
+ assert.equal(c.activityResumeParams('zoology',{topic:'Biodiversity'},'Biodiversity').has('resumeId'),false);
+ assert.equal(c.activityResumeParams('zoology',{concept_id:'invalid',topic:'Biodiversity'},'Biodiversity').get('resumeId'),'invalid');
+ assert.equal(c.activityResumeParams('chemistry',{concept_id:'abc'},'Matter').has('resumeId'),false);
+ });
+
+test('ZOO-006 actual central-auth client: atomic creation, conflict and session guards',async()=>{
+ const source=fs.readFileSync(pathModule.join(__dirname,'../central-auth.js'),'utf8');
+ let callback, requests=[],transactions=0, writes=0, mode='success';
+ const user={uid:'student',getIdToken:async()=>{if(mode==='switch-token'){callback({uid:'other'});auth.currentUser={uid:'other'};}return 'synthetic-token';}};
+ const auth={currentUser:user,onAuthStateChanged(fn){callback=fn;fn(user);}};
+ const db={collection:()=>({doc:()=>({})}),runTransaction:async fn=>{transactions++;await fn({get:async()=>({exists:true,data:()=>({quiz_finished_at:1000})}),set:()=>{writes++;}});}};
+ const window={SKILLUP_FIREBASE_CONFIG:{apiKey:'test',authDomain:'test',projectId:'demo-test'},firebase:{apps:[],initializeApp:()=>({}),auth:()=>auth,firestore:()=>db}};
+ const context={window,sessionStorage:{removeItem(){}},fetch:async(url,options)=>{requests.push({url,options});if(mode==='switch-fetch'){auth.currentUser={uid:'other'};callback(auth.currentUser);}return {ok:mode==='success'||mode==='switch-fetch',json:async()=>({error:{status:mode==='conflict'?'ALREADY_EXISTS':'UNAVAILABLE'}})};}};
+ vm.createContext(context);vm.runInContext(source,context);
+ const save=()=>window.SkillUpAuth.saveProgress({subject:'Zoology',topic:'zoo-test',score:2,percentage:66.7},{owner:'student',finishedAt:2000});
+ await save();assert.equal(transactions,0);assert.match(requests[0].url,/currentDocument\.exists=false$/);assert.equal(JSON.parse(requests[0].options.body).fields.user_id.stringValue,'student');
+ mode='conflict';await save();assert.equal(transactions,1);assert.equal(writes,1);
+ mode='unavailable';await assert.rejects(save(),/creation failed/);assert.equal(transactions,1);
+ mode='switch-token';await assert.rejects(save(),/Account changed/);assert.equal(requests.length,3);
+ auth.currentUser=user;callback(user);mode='switch-fetch';await assert.rejects(save(),/Account changed/);assert.equal(transactions,1);
+});

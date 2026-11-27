@@ -58,7 +58,7 @@ function bankFileForTopic(value,id){
  const s=slug(value);
  if(s==='enzymes')return 'zoology-enzymes-question-bank.js';
  if(s==='biodiversity'&&id==='zoo-'+encodeURIComponent('Ecology and Environment')+'--'+encodeURIComponent('Biodiversity'))return 'biodiversity-patterns-question-bank.js';
- if(s==='biodiversity')return 'biodiversity-question-bank.js';
+ if(s==='biodiversity')return id==='zoo-'+encodeURIComponent('Diversity in Living World')+'--Biodiversity'?'biodiversity-question-bank.js':null;
  if(s==='taxonomy-and-systematics')return 'taxonomy-and-systematics-question-bank.js';
  if(s==='darwins-natural-selection')return 'darwin-natural-selection-question-bank.js';
  return s+'-question-bank.js';
@@ -115,7 +115,7 @@ $('reveal').addEventListener('click',()=>{
 $('previous').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(index<bank.length-1){index++;render();}else{index=0;render();$('cardLabel').textContent='REVIEW COMPLETE · START AGAIN';}});
 if(!topic){$('learnCard').innerHTML='<div class="status">Select a Zoology concept from the Zoology path or open Quick Learn from a topic quiz.</div>';return;}
-const file=bankFileForTopic(topic,conceptId),script=document.createElement('script');
+const file=bankFileForTopic(topic,conceptId);if(!file){$('learnCard').textContent='Select the correct Biodiversity unit from the Zoology Path.';return;}const script=document.createElement('script');
 script.src='/question-banks/'+file+'?v=20261126-quicklearn-question-explanation-v1';
 script.onload=()=>{bank=findBank(file,window);if(bank){bank=bank.slice(0,30);render();}else{$('learnCard').innerHTML='<div class="status">The selected topic bank could not be matched. Return to the quiz and try again.</div>'; $('cardLabel').textContent='CONTENT UNAVAILABLE';}};
 script.onerror=()=>{$('learnCard').innerHTML='<div class="status">The question bank for this concept is not available yet.</div>'; $('cardLabel').textContent='CONTENT UNAVAILABLE';};

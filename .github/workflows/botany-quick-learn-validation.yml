@@ -1,0 +1,28 @@
+name: Botany Quick Learn validation
+on:
+  pull_request:
+    paths:
+      - 'botany-quick-learn.html'
+      - '.github/workflows/botany-quick-learn-validation.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate banner removal and inline scripts
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm');
+          const html=fs.readFileSync('botany-quick-learn.html','utf8');
+          assert(!html.includes('LEARN BEFORE YOU TEST'));
+          assert(!html.includes('Recall the concept first.'));
+          assert(!html.includes('<header class="hero">'));
+          assert(html.includes('id="learnCard"'));
+          for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(m[1].trim())new vm.Script(m[1]);
+          console.log('Quick Learn banner removal and script syntax passed');
+          NODE

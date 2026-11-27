@@ -47,6 +47,21 @@ const path=require('node:path');
  assert.equal(layout.ink,'rgb(23, 23, 23)');
  assert.equal(layout.sticky,'sticky');
  console.log('PASS Coelom layout '+width+' '+JSON.stringify(layout));
+ const coelom=urls.find(u=>new URL(u).searchParams.get('concept')==='Coelom and Body Cavity');
+ assert(coelom);
+ await page.goto(coelom);
+ await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2);
+ assert.equal(await page.locator('#conceptHeading').innerText(),'Coelom and Body Cavity');
+ const layout=await page.evaluate(()=>{
+ const learn=document.querySelector('#cheatSheetLink'),quiz=document.querySelector('#simulatorModeTab'),q=document.querySelector('#question'),options=[...document.querySelectorAll('#options button')];
+ const a=learn.getBoundingClientRect(),b=quiz.getBoundingClientRect();
+ return {overflow:document.documentElement.scrollWidth>innerWidth+1,aligned:Math.abs(a.top-b.top)<=2&&a.right<=b.left+1&&Math.abs(a.width-b.width)<=2,touch:a.height>=44&&b.height>=44&&options.every(o=>o.getBoundingClientRect().height>=44),font:parseFloat(getComputedStyle(q).fontSize),optionFonts:options.map(o=>parseFloat(getComputedStyle(o).fontSize)),contained:options.every(o=>{const r=o.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1&&o.scrollWidth<=o.clientWidth+1;}),ink:getComputedStyle(q).color};
+ });
+ assert.equal(layout.overflow,false,JSON.stringify(layout));
+ assert(layout.aligned&&layout.touch&&layout.contained,JSON.stringify(layout));
+ assert(layout.font>=18&&layout.optionFonts.every(n=>n>=14),JSON.stringify(layout));
+ assert.equal(layout.ink,'rgb(23, 23, 23)');
+ console.log('PASS Coelom layout '+width+' '+JSON.stringify(layout));
  if(width===390){
   const failures=[];
   for(const url of urls){

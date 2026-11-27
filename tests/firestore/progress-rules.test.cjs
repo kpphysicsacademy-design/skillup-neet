@@ -20,7 +20,7 @@ const row = {
 
 before(async () => {
   env = await initializeTestEnvironment({
-    projectId: 'demo-skillup-validation',
+    projectId: 'demo-skillup-progress-validation',
     firestore: { rules: fs.readFileSync('firestore.rules', 'utf8') }
   });
 });
@@ -70,4 +70,15 @@ test('anonymous users cannot create or read progress', async () => {
   await assertFails(setDoc(ref(anonymous), row));
   await seed();
   await assertFails(getDoc(ref(anonymous)));
+});
+
+ test('owner scoped query excludes another student and preserves legacy fields', async () => {
+  await seed({legacy_marker: 'preserve'});
+  await env.withSecurityRulesDisabled(async ctx => setDoc(ref(ctx.firestore(), 'other_record'), {...row, user_id:'other'}));
+  const own = await assertSucceeds(getDocs(query(collection(db(), 'skillup_progress'), where('user_id','==','student'))));
+  if (own.size !== 1 || own.docs[0].data().legacy_marker !== 'preserve') throw new Error('Owner isolation or legacy preservation failed');
+  await assertSucceeds(updateDoc(ref(), {score:25}));
+  const saved = await assertSucceeds(getDoc(ref()));
+  if (saved.data().legacy_marker !== 'preserve') throw new Error('Legacy field lost');
+  await assertFails(getDoc(ref(db('other'))));
 });

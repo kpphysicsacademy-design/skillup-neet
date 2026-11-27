@@ -45,7 +45,7 @@ const path=require('node:path');
     await page.locator('#options button').first().click();
     await page.locator('#next').click();
     assert(await page.locator('#explain').isVisible());
-    assert.match(await page.locator('#next').innerText(),/Continue|See results/);
+    assert.match(await page.locator('#next').innerText(),/Continue|See results/i);
     if(await page.locator('#next').innerText()==='Continue →'){
       await page.locator('#next').click();
       assert.match(await page.locator('#counter').innerText(),/Question 2 of/);

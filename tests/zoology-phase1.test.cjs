@@ -36,7 +36,12 @@ test('duplicate Biodiversity routes select the correct independent bank',()=>{
  const ecology=ctx.a.find(x=>x.c==='Biodiversity'&&x.n==='Ecology and Environment');
  assert.ok(ecology);
  assert.equal(loaderContext(ecology.id).candidates('Biodiversity')[0],'biodiversity-patterns-question-bank.js');
- assert.equal(loaderContext().candidates('Biodiversity')[0],'biodiversity-question-bank.js');
+ assert.equal(loaderContext().candidates('Biodiversity').length,0);
+ assert.equal(loaderContext('invalid').candidates('Biodiversity').length,0);
+ assert.equal(loaderContext(ecology.id).candidates('Biodiversity').length,1);
+ const diversity=ctx.a.find(x=>x.c==='Biodiversity'&&x.n==='Diversity in Living World');
+ assert.equal(loaderContext(diversity.id).candidates('Biodiversity')[0],'biodiversity-question-bank.js');
+ assert.equal(loaderContext(diversity.id).candidates('Biodiversity').length,1);
 });
 test('taxonomy and Darwin aliases point to real canonical files',()=>{
  assert.equal(loaderContext().candidates('Taxonomy and Systematics')[0],'taxonomy-and-systematics-question-bank.js');
@@ -161,6 +166,8 @@ test('Quick Learn routes duplicate titles and special Zoology banks correctly',(
  assert.equal(c.bankFileForTopic('Enzymes',''),'zoology-enzymes-question-bank.js');
  assert.equal(c.bankFileForTopic('Taxonomy and Systematics',''),'taxonomy-and-systematics-question-bank.js');
  assert.equal(c.bankFileForTopic("Darwin's Natural Selection",''),'darwin-natural-selection-question-bank.js');
+ assert.equal(c.bankFileForTopic('Biodiversity',''),null);
+ assert.equal(c.bankFileForTopic('Biodiversity','invalid'),null);
  assert.equal(c.bankFileForTopic('Biodiversity','zoo-Ecology%20and%20Environment--Biodiversity'),'biodiversity-patterns-question-bank.js');
  assert.equal(c.bankFileForTopic('Biodiversity','zoo-Diversity%20in%20Living%20World--Biodiversity'),'biodiversity-question-bank.js');
 });

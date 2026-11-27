@@ -240,6 +240,7 @@ body .fill{background:#58cc02!important}
 .learn-mode-controls button{min-height:43px;border:0;border-radius:12px;background:#168b91;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
 .learn-mode-controls button:disabled{background:#e8ebef;color:#9aa1aa;cursor:not-allowed}
 @media(max-width:520px){.zoo-mode-tabs{margin-bottom:12px}.learn-mode-panel{padding:18px 15px;border-radius:20px}.learn-mode-panel h2{font-size:22px}}
+.zoo-mode-tabs button[hidden]{display:none}.cheat-sheet-link{display:grid;place-items:center;min-height:36px;border-radius:9px;background:#eee5ff;color:#24194b;font-weight:900;font-size:12px;text-decoration:none;text-align:center;padding:6px 8px}
 </style>
 <!-- Fix: remove decorative butterfly from the quiz progress header so it cannot overlap the percentage. -->
 <style id="zoology-progress-overlap-fix">
@@ -318,7 +319,7 @@ main > .hero[aria-label="Quiz progress"]::after {
 <div class="pill">🔥 <span id="streak">0</span> streak</div>
 </div></div></header>
 <main>
-<div class="zoo-mode-tabs" role="tablist" aria-label="Choose Zoology learning mode"><button type="button" id="learnModeTab" role="tab" aria-selected="false" aria-controls="learnModePanel">📘 Learn</button><button type="button" id="simulatorModeTab" role="tab" aria-selected="true" aria-controls="simulatorModePanel">🎯 Simulator</button></div>
+<div class="zoo-mode-tabs" role="tablist" aria-label="Choose Zoology learning mode"><button type="button" id="learnModeTab" hidden role="tab" aria-selected="false" aria-controls="learnModePanel">📘 Learn</button><button type="button" id="simulatorModeTab" role="tab" aria-selected="true" aria-controls="simulatorModePanel">📘 Learn</button><a id="cheatSheetLink" class="cheat-sheet-link" href="zoology-topic-cheat-sheet.html">📋 Cheat Sheet</a></div>
 <section id="learnModePanel" class="learn-mode-panel" role="tabpanel" aria-labelledby="learnModeTab" hidden><div class="learn-mode-meta" id="learnModeMeta">QUESTION 1 OF 30</div><h2 id="learnModeQuestion">Loading concept questions…</h2><button type="button" class="learn-reveal" id="learnModeReveal">👀 Reveal answer &amp; explanation</button><div class="learn-explanation" id="learnModeExplanation" aria-live="polite"><strong id="learnModeAnswer"></strong><p id="learnModeWhy"></p></div><div class="learn-mode-controls"><button type="button" id="learnModePrevious" disabled>← Previous</button><button type="button" id="learnModeNext">Next →</button></div></section>
 <div id="simulatorModePanel" role="tabpanel" aria-labelledby="simulatorModeTab">
 <section class="hero" aria-label="Quiz progress">
@@ -350,6 +351,7 @@ const params=new URLSearchParams(location.search);
 const requested=(params.get('concept')||'What is Living?').trim();
 const conceptId=params.get('conceptId')||'';
 const conceptUrl=encodeURIComponent(requested)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
+document.getElementById("cheatSheetLink").href="zoology-topic-cheat-sheet.html?concept="+conceptUrl;
 document.getElementById('quickLearnNavLink')?.addEventListener('click',()=>document.getElementById('learnModeTab').click());
 document.getElementById('pathNavLink').href='zoology-home.html?resumeId='+encodeURIComponent(conceptId)+'&resumeConcept='+encodeURIComponent(requested);
 const key=requested.toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');

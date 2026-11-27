@@ -192,7 +192,7 @@ body{background:radial-gradient(circle at 3% 4%,#e5f5ff 0,transparent 29%),radia
 </section>
 
 <div class="tools"><input id="q" class="search" placeholder="Search Botany concepts…" aria-label="Search Botany concepts"><button id="searchBtn" class="search-btn" type="button">SEARCH</button></div>
-<section id="path" class="path"></section><div id="empty" class="empty">No matching Botany concepts found.</div>
+<p id="botanyLoading" role="status">Loading Botany concepts…</p><noscript>Enable JavaScript to access the Botany learning path.</noscript><section id="path" class="path"></section><div id="empty" class="empty" role="status" hidden>No matching Botany concepts found.</div><p id="botanyError" role="alert" hidden>Unable to load concepts. <button onclick="location.reload()">Retry</button></p>
 
 </main>
 <script>
@@ -218,13 +218,16 @@ const units=[
 ["Biotechnology: Plant Applications",[
 ["Principles of Biotechnology","🧬"],["Recombinant DNA Technology","🔬"],["Restriction Enzymes","✂️"],["DNA Ligase","🔗"],["Cloning Vectors","🧬"],["PCR","🔬"],["Transformation","🧫"],["Recombinant DNA Workflow","🔄"],["Bt Crops","🌱"],["Bt Toxin","🌱"],["RNA Interference","🧬"],["Transgenic Plants","🌱"],["Human Insulin","💉"],["Vaccine Production","💉"],["Gene Therapy: Basic Concept","🧬"],["Biosafety","🛡️"],["Biopiracy","🌍"],["Patents","📜"],["Gel Electrophoresis","🔬"],["Selectable Marker","🧬"],["Insertional Inactivation","🧬"],["DNA Amplification","🔬"],["Bioreactors","⚙️"],["Downstream Processing","⚙️"],["Molecular Diagnosis","🔬"],["ELISA","🧪"],["Golden Rice","🌾"],["Stem Cell Concept","🧬"],["Gene Cloning","🧬"],["Vector Selection","🧬"],["Host Cell Transformation","🧫"],["Screening Recombinants","🔬"],["PCR Cycle","🔄"],["Agarose Gel Electrophoresis","🔬"],["Bt Gene and Cry Protein","🌱"],["RNAi Mechanism","🧬"],["Plant Molecular Farming","🌱"],["Biosafety Issues","🛡️"]]]
 ];
+const slug=s=>s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 let concepts=[],id=0;
-units.forEach((u,ui)=>u[1].forEach(t=>concepts.push({u:ui+1,name:u[0],concept:t[0],icon:t[1],id:++id})));
+units.forEach((u,ui)=>u[1].forEach(t=>concepts.push({u:ui+1,name:u[0],concept:t[0],icon:t[1],id:++id,stableId:slug(u[0])+"--"+slug(t[0])})));
 document.getElementById('botanyConceptCount').textContent='📚 '+concepts.length+' concepts';
 document.getElementById('botanyUnitCount').textContent='🧭 '+units.length+' learning units';
 const path=document.getElementById('path'),q=document.getElementById('q'),empty=document.getElementById('empty');
-const chapter2ProgressKey='skillup.botany.chapter2.progress.v1';
-function readChapter2Progress(){try{const value=JSON.parse(localStorage.getItem(chapter2ProgressKey)||'{}');return value&&typeof value==='object'?value:{};}catch(_error){return {};}}
+let chapter2Owner=null;
+const chapter2ProgressKey='skillup.botany.chapter2.progress.v2.';
+function readChapter2Progress(){if(!chapter2Owner||window.SkillUpAuth?.auth?.currentUser?.uid!==chapter2Owner)return {};try{const value=JSON.parse(localStorage.getItem(chapter2ProgressKey+encodeURIComponent(chapter2Owner))||'{}');return value&&typeof value==='object'?value:{};}catch(_error){return {};}}
+window.addEventListener('botany-auth-ready',()=>{(async function(){const api=window.SkillUpAuth;if(!api)return;const session=await api.requireAuth(location.href);if(!session)return;api.auth.onAuthStateChanged(user=>{chapter2Owner=user?.uid||null;chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();search();if(!user)api.requireAuth(location.href);});})();});
 let chapter2Progress=readChapter2Progress();
 function updateChapter2ProgressLabel(){
  const unit=units.find(u=>u[0]==='Structural Organisation in Plants');
@@ -235,28 +238,31 @@ function updateChapter2ProgressLabel(){
 const chapter2Label=document.createElement('span');chapter2Label.className='botany-pill';chapter2Label.id='botanyChapter2Progress';
 document.querySelector('.botany-pills')?.appendChild(chapter2Label);
 updateChapter2ProgressLabel();
-window.addEventListener('pageshow',()=>{chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();render(concepts);});
+window.addEventListener('pageshow',()=>{chapter2Progress=readChapter2Progress();updateChapter2ProgressLabel();search();});
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const studyRoutes=new Map(['Cell Theory','Prokaryotic Cell','Eukaryotic Cell'].map(name=>[name,'botany-cell-cheat-sheet.html']));
 function render(list){
  let h='',last=0;
  list.forEach(x=>{if(x.u!==last){h+=`<div class="unit" id="unit-${x.u}"><div class="unit-main"><span class="unum">${x.u}</span><div><h2>${esc(x.name)}</h2><small>NCERT + NEET Botany • ${units[x.u-1][1].length} concepts</small></div></div></div>`;last=x.u;}
- h+=`<article class="chapter"><span class="node"></span><a href="botany-mcq.html?concept=${encodeURIComponent(x.concept)}&v=20260923-botany-quiz-v3"><div><div class="title"><span class="icon">${esc(x.icon)}</span><span>${esc(x.concept)}</span></div><div class="sub">Concept ${x.id} • ${esc(x.name)}</div><span class="tag">🎯 CONCEPT ${x.id}</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span>${x.name==='Structural Organisation in Plants'&&chapter2Progress[x.concept]?.attempts>0?`<span class="tag">✅ QUIZ COMPLETED · BEST ${Math.round(chapter2Progress[x.concept].bestScore||0)}%</span>`:''}</div><span class="go">›</span></a></article>`;});
+ h+=`<article class="chapter" data-concept-id="${esc(x.stableId)}" data-concept="${esc(x.concept)}"><span class="node"></span><a href="botany-mcq.html?concept=${encodeURIComponent(x.concept)}&v=20260923-botany-quiz-v3"><div><div class="title"><span class="icon">${esc(x.icon)}</span><span>${esc(x.concept)}</span></div><div class="sub">Concept ${x.id} • ${esc(x.name)}</div><span class="tag">🎯 CONCEPT ${x.id}</span><span class="tag">🧠 QUIZ</span><span class="tag">📘 PRACTICE</span>${x.name==='Structural Organisation in Plants'&&chapter2Progress[x.concept]?.attempts>0?`<span class="tag">✅ QUIZ COMPLETED · BEST ${Math.round(chapter2Progress[x.concept].bestScore||0)}%</span>`:''}</div><span class="go">›</span></a></article>`;});
  // Study-first navigation: completed Chapter 3 cards open the lesson,
  // with an explicit quiz button available inside each lesson.
  path.innerHTML=h;
  path.querySelectorAll('.chapter').forEach(card=>{
   const title=card.querySelector('.title span:last-child')?.textContent?.trim();
-  if(!['Cell Theory','Prokaryotic Cell','Eukaryotic Cell'].includes(title))return;
+  if(!studyRoutes.has(title))return;
   const link=card.querySelector('a');if(!link)return;
-  link.href='botany-cell-cheat-sheet.html?concept='+encodeURIComponent(title);
+  link.href=studyRoutes.get(title)+'?concept='+encodeURIComponent(title);
   link.setAttribute('aria-label','Study '+title+' — lesson, diagram, quick check and quiz');
   link.title='Study '+title+' before starting the quiz';
  });
- empty.style.display=list.length?'none':'block';
+ empty.hidden=!!list.length;empty.style.display=list.length?'none':'block';document.getElementById('botanyLoading').hidden=true;
 }
-render(concepts);
 function search(){const term=q.value.trim().toLowerCase();render(term?concepts.filter(x=>(x.concept+' '+x.name).toLowerCase().includes(term)):concepts);}
-document.getElementById('searchBtn').onclick=search;q.addEventListener('keydown',e=>{if(e.key==='Enter')search();});
+function restoreSearch(){const params=new URLSearchParams(location.search);q.value=params.get('q')||'';const target=(params.get('resumeConcept')||'').trim().toLowerCase();if(target){const matches=concepts.filter(x=>x.stableId===target||x.concept.toLowerCase()===target);if(matches.length===1&&!(matches[0].concept+' '+matches[0].name).toLowerCase().includes(q.value.trim().toLowerCase())){q.value='';params.delete('q');history.replaceState(history.state,'',location.pathname+'?'+params.toString()+location.hash);}}search();}
+function saveSearch(){const url=new URL(location.href);if(q.value.trim())url.searchParams.set('q',q.value.trim());else url.searchParams.delete('q');history.replaceState(history.state,'',url);search();}
+try{restoreSearch();}catch(error){document.getElementById('botanyLoading').hidden=true;document.getElementById('botanyError').hidden=false;}
+document.getElementById('searchBtn').onclick=saveSearch;q.addEventListener('keydown',e=>{if(e.key==='Enter')saveSearch();});
 const mb=document.getElementById('menuBtn'),mn=document.getElementById('menu');
 if(mb&&mn){mb.onclick=()=>{const o=mn.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',e=>{if(!e.target.closest('.menu-wrap')){mn.classList.remove('open');mb.setAttribute('aria-expanded','false');}});}
 })();
@@ -270,8 +276,9 @@ if(mb&&mn){mb.onclick=()=>{const o=mn.classList.toggle('open');mb.setAttribute('
   let done=false;
   function resume(){
     if(done)return;
-    const els=[...document.querySelectorAll('a,button,.chapter,.concept-card,[data-concept]')];
-    const el=els.find(x=>norm(x.getAttribute&&x.getAttribute('data-concept'))===wanted)||els.find(x=>norm(x.textContent).includes(wanted));
+    const els=[...document.querySelectorAll('.chapter[data-concept-id]')];
+    const matches=els.filter(x=>norm(x.dataset.conceptId)===wanted||norm(x.dataset.concept)===wanted);
+    const el=matches.length===1?matches[0]:null;
     if(!el)return;
     done=true;
     el.scrollIntoView({behavior:'smooth',block:'center'});
@@ -279,13 +286,13 @@ if(mb&&mn){mb.onclick=()=>{const o=mn.classList.toggle('open');mb.setAttribute('
     el.style.outlineOffset='4px';
     el.style.borderRadius='18px';
     setTimeout(()=>{el.style.outline='';el.style.outlineOffset=''},5000);
-    history.replaceState({},'',location.pathname);
+    p.delete('resumeConcept');history.replaceState(history.state,'',location.pathname+(p.size?'?'+p.toString():'')+location.hash);
   }
   resume();
   const mo=new MutationObserver(resume);mo.observe(document.body,{childList:true,subtree:true});
   setTimeout(()=>mo.disconnect(),10000);
 })();
-</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>(async function(){if(window.SkillUpAuth){await window.SkillUpAuth.requireAuth(location.href);}})();</script>
+</script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="central-config.js"></script><script src="central-auth.js"></script><script>window.dispatchEvent(new Event("botany-auth-ready"));</script>
 
 <script src="/shared-nav.js?v=20261125-central-design-system-v2"></script>
 <script>

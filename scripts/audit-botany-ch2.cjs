@@ -11,7 +11,15 @@ const aliases={'dicot-root-t-s':'dicot-root-ts','monocot-root-t-s':'monocot-root
 const home=fs.readFileSync(path.join(root,'botany-home.html'),'utf8');
 const errors=[];
 // Regression guard: explained extension questions must be playable and completion persisted.
-if(!quiz.includes('const original=source.slice();'))errors.push('Quiz truncates extension questions');
+try {
+ const block=quiz.slice(quiz.indexOf('const enrichment=source.filter'),quiz.indexOf('if(enrichment.length){const nav='));
+ const select=new Function('source','location','URLSearchParams',block+'return original;');
+ const core=Array.from({length:42},(_,i)=>({q:'Core '+i})), extra=Array.from({length:12},(_,i)=>({q:'[Enrichment] Extra '+i}));
+ for(const [source,search,expected] of [[core,'',core],[core.concat(extra),'',core],[core.concat(extra),'?practice=enrichment',extra],[extra,'',extra],[extra,'?practice=core',extra]]) {
+  const result=select(source,{search},URLSearchParams);
+  if(result.length!==expected.length||result.some((q,i)=>q!==expected[i]))errors.push('Quiz practice selection loses or mixes questions: '+search);
+ }
+}catch(error){errors.push('Quiz practice selection audit: '+error.message);}
 if(!quiz.includes('saveChapter2Progress();'))errors.push('Chapter 2 completion not persisted');
 if(!home.includes('botanyChapter2Progress'))errors.push('Learning path missing Chapter 2 progress indicator');
 for(const [file,content] of [['botany-mcq.html',quiz],['botany-home.html',home]]){

@@ -109,3 +109,27 @@ test('existing owner guarded concurrent recovery retains newest result and legac
   assert.equal(saved.legacy_marker, 'preserve');
   await assertFails(guardedSave(db('other'), 4000, 30));
 });
+
+test('ZOO-006 emulator-only candidate: owner first save, concurrent ordering and foreign denial', async () => {
+  const baseline=fs.readFileSync('firestore.rules','utf8');
+  const anchor="allow get: if ownExisting() || (signedIn() &&";
+  assert.equal(baseline.split(anchor).length,2);
+  const candidate=baseline.replace(anchor,"allow get: if ownExisting() || (signedIn() && docId.split('_Zoology_').size() == 2 && docId.split('_Zoology_')[0] == request.auth.uid && docId.split('_Zoology_')[1].matches('zoo-[A-Za-z0-9_-]+') && !exists(/databases/$(database)/documents/skillup_progress/$(docId))) || (signedIn() &&");
+  const isolated=await initializeTestEnvironment({projectId:'demo-skillup-zoo-capa',firestore:{rules:candidate}});
+  try {
+    await isolated.clearFirestore();
+    const owner=isolated.authenticatedContext('student').firestore();
+    const other=isolated.authenticatedContext('other').firestore();
+    const anonymous=isolated.unauthenticatedContext().firestore();
+    await assertFails(getDoc(ref(other)));
+    await assertFails(getDoc(ref(anonymous)));
+    await assertSucceeds(guardedSave(owner,1000,24));
+    await Promise.all([guardedSave(owner,3000,27),guardedSave(owner,2000,25)]);
+    const saved=(await getDoc(ref(owner))).data();
+    assert.equal(saved.quiz_finished_at,3000);
+    assert.equal(saved.score,27);
+    await assertFails(getDoc(ref(other)));
+    await assertFails(guardedSave(other,4000,30));
+    await assertFails(getDoc(ref(owner,'student_Zoology_invalid')));
+  } finally {await isolated.cleanup();}
+});

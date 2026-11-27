@@ -361,10 +361,9 @@ function candidates(v){
  const s=slug(v);
  if(s==='enzymes')return ['zoology-enzymes-question-bank.js'];
  if(s==='biodiversity'){
-  const unit=String(conceptId||'');
-  if(unit.includes(encodeURIComponent('Ecology and Environment')))return ['biodiversity-patterns-question-bank.js','biodiversity-question-bank.js'];
-  if(unit.includes(encodeURIComponent('Diversity in Living World')))return ['biodiversity-question-bank.js','biodiversity-patterns-question-bank.js'];
-  return ['biodiversity-question-bank.js','biodiversity-patterns-question-bank.js'];
+  if(conceptId==='zoo-'+encodeURIComponent('Ecology and Environment')+'--Biodiversity')return ['biodiversity-patterns-question-bank.js'];
+  if(conceptId==='zoo-'+encodeURIComponent('Diversity in Living World')+'--Biodiversity')return ['biodiversity-question-bank.js'];
+  return [];
  }
  if(s==='taxonomy-and-systematics')return ['taxonomy-and-systematics-question-bank.js'];
  if(s==='darwins-natural-selection')return ['darwin-natural-selection-question-bank.js'];
@@ -551,7 +550,7 @@ function startZoologyQuiz(source,conceptName){
 }
 async function load(){
  if(!requested){showNotice('No concept was supplied. Return to the Zoology Path and select a concept.');return;}
- const files=candidates(requested);let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){}}
+ const files=candidates(requested);if(!files.length){showNotice('Select the correct Biodiversity unit from the Zoology Path before starting.');return;}let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){}}
  if(bank){startZoologyQuiz(bank,requested);return;}
  showNotice('The question bank could not be loaded. Please refresh once. If the issue continues, return to the Zoology Path and report this topic.');
 }

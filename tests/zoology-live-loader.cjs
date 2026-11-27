@@ -43,6 +43,7 @@ const path=require('node:path');
     assert.equal(await page.locator('#learnModeTab').isVisible(),false);
     assert.equal(await page.locator('#simulatorModeTab').innerText(),'📝 Quiz');
     const sheet=page.locator('#cheatSheetLink');
+    assert.equal(await sheet.innerText(),'📘 Learn');
     const target=new URL(await sheet.getAttribute('href'),url);
     const original=new URL(url);
     assert.equal(target.searchParams.get('conceptId'),original.searchParams.get('conceptId'));
@@ -77,6 +78,18 @@ const path=require('node:path');
  await page.goto('https://skillup.test/zoology-topic-cheat-sheet.html?concept=Biodiversity');
  assert.equal(await page.locator('#biodiversitySheet').isVisible(),false);
  assert(await page.getByText('Select Biodiversity from its chapter',{exact:false}).isVisible());
+ if(width===390){
+ const block=route=>route.abort();
+ await page.route('**/question-banks/**',block);
+ await page.goto(urls[0]);
+ await page.locator('#notice').waitFor({state:'visible'});
+ assert.equal(await page.locator('#quizLoadingProgress').isVisible(),false);
+ assert(await page.locator('#retryLoad').isVisible());
+ await page.unroute('**/question-banks/**',block);
+ await page.locator('#retryLoad').click();
+ await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2);
+ assert.equal(await page.locator('#notice').isVisible(),false);
+ }
  console.log('PASS viewport '+width+'; 282 destination URLs checked');
  await page.close();
  }

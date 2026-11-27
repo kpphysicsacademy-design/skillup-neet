@@ -5,6 +5,9 @@ on:
       - 'zoology-home.html'
       - 'zoology-mcq.html'
       - 'shared-nav.js'
+      - 'zoology-topic-cheat-sheet.html'
+      - 'question-banks/**'
+      - 'docs/zoology-cheat-sheet-coverage.json'
       - 'tests/zoology-live-loader.cjs'
       - '.github/workflows/zoology-live-loader.yml'
 permissions:
@@ -18,5 +21,12 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-save --package-lock=false playwright@1.56.1
-      - run: npx playwright install --with-deps chromium
+      - run: node --check tests/zoology-live-loader.cjs
+      - name: Install Chromium and dependencies
+        run: |
+          # Use only Ubuntu repositories for browser system dependencies.
+          sudo find /etc/apt/sources.list.d -maxdepth 1 -type f \( -name '*.list' -o -name '*.sources' \) -exec grep -l 'packages.microsoft.com/ubuntu/24.04/prod' {} + | while IFS= read -r source; do
+            sudo mv "$source" "$source.disabled"
+          done
+          npx playwright install --with-deps chromium
       - run: node tests/zoology-live-loader.cjs

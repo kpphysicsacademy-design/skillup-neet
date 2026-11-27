@@ -228,7 +228,7 @@ body .fill{background:#58cc02!important}
 /* In-page Learn / Simulator modes: both use the same loaded concept bank. */
 .zoo-mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 16px;padding:5px;border:1px solid #e4e5f3;border-radius:16px;background:#fff}
 .zoo-mode-tabs button{min-height:45px;border:2px solid transparent;border-radius:12px;background:#f5f6fb;color:#59617c;font-size:14px;font-weight:900;cursor:pointer}
-.zoo-mode-tabs button[aria-selected="true"]{border-color:#d8cef7;background:#f1ecff;color:#6848c8;box-shadow:0 2px 0 #e4dcfa}
+.zoo-mode-tabs button[aria-pressed="true"]{border-color:#d8cef7;background:#f1ecff;color:#6848c8;box-shadow:0 2px 0 #e4dcfa}
 .learn-mode-panel{padding:23px;border:2px solid #e2e5f3;border-bottom:6px solid #e2e5f3;border-radius:24px;background:#fff;box-shadow:0 12px 28px rgba(43,49,104,.05)}
 .learn-mode-panel[hidden],#simulatorModePanel[hidden]{display:none!important}
 .learn-mode-meta{margin-bottom:13px;color:#7450d4;font-size:12px;font-weight:950;letter-spacing:.6px}
@@ -240,6 +240,10 @@ body .fill{background:#58cc02!important}
 .learn-mode-controls button{min-height:43px;border:0;border-radius:12px;background:#168b91;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
 .learn-mode-controls button:disabled{background:#e8ebef;color:#9aa1aa;cursor:not-allowed}
 @media(max-width:520px){.zoo-mode-tabs{margin-bottom:12px}.learn-mode-panel{padding:18px 15px;border-radius:20px}.learn-mode-panel h2{font-size:22px}}
+.zoo-mode-tabs button[hidden]{display:none}.cheat-sheet-link{display:grid;place-items:center;min-height:36px;border-radius:9px;background:#eee5ff;color:#24194b;font-weight:900;font-size:12px;text-decoration:none;text-align:center;padding:6px 8px}
+
+/* Final compact quiz layout, scoped to this page. */
+body{background:#f2f0fc!important;color:#171717!important}.top .nav{min-height:58px;max-width:680px}.top .brand{color:#171717!important}main{max-width:680px!important;width:100%!important;padding:14px 12px 32px!important}.concept-heading{margin:0 0 12px}.concept-heading p{font-size:11px;font-weight:800;color:#5945a5;margin:0 0 4px}.concept-heading h1{font-size:clamp(20px,5vw,27px);line-height:1.25;margin:0;color:#171717;overflow-wrap:anywhere}.zoo-mode-tabs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px!important;margin:0 0 12px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}.zoo-mode-tabs #cheatSheetLink{grid-column:1;grid-row:1;background:#dff5ff;color:#171717;border:1px solid #a6d8ee}.zoo-mode-tabs #simulatorModeTab{grid-column:2;grid-row:1;background:#e5d9ff;color:#171717;border:2px solid #aa90ec}.zoo-mode-tabs #cheatSheetLink,.zoo-mode-tabs #simulatorModeTab{min-height:44px!important;font-size:14px!important;border-radius:12px!important;box-shadow:none!important}.hero#quizLoadingProgress{padding:12px!important;margin:0 0 12px!important;border-radius:14px!important;background:#e4f7ed!important;box-shadow:none!important}.hero#quizLoadingProgress:before{display:none!important;content:none!important}.progress-row{margin:0 0 8px!important;color:#171717!important;font-size:12px!important}.track{height:9px!important}.quiz,.status,.finish{padding:15px!important;margin:0 0 12px!important;border-radius:17px!important;background:#faf7ff!important;box-shadow:none!important}.question{font-size:clamp(18px,4.7vw,23px)!important;color:#171717!important;margin:0 0 14px!important}.options{gap:9px!important}.option{min-height:48px!important;padding:9px 10px!important;font-size:14px!important;color:#171717!important;border-radius:12px!important}.option .letter{flex:0 0 30px!important;width:30px!important;height:30px!important;font-size:13px!important;color:#171717!important}.qmeta{font-size:11px!important;margin:0 0 8px!important}.actions{margin-top:14px!important}.btn{min-height:48px!important;font-size:15px!important;border-radius:12px!important}.btn.check:not(:disabled){background:#62c849!important;color:#152413!important}.btn.continue{background:#d4c5ff!important;color:#171717!important}.status #retryLoad{margin:12px 0;background:#d4c5ff;color:#171717}.status a{display:inline-block;padding:8px 0;color:#171717}.option:focus-visible,.zoo-mode-tabs a:focus-visible,.zoo-mode-tabs button:focus-visible{outline:3px solid #6142ba!important;outline-offset:2px!important}
 </style>
 <!-- Fix: remove decorative butterfly from the quiz progress header so it cannot overlap the percentage. -->
 <style id="zoology-progress-overlap-fix">
@@ -307,6 +311,14 @@ main > .hero[aria-label="Quiz progress"]::after {
  #simulatorModePanel .option .letter{width:29px;height:29px;flex-basis:29px}
  #simulatorModePanel .btn{min-height:42px;font-size:12px}
 }
+
+/* CAPA: override legacy mobile body-specific important rules. */
+body #simulatorModePanel #options button.option{font-size:14px!important;line-height:1.4!important;min-height:48px!important;width:100%;min-width:0;white-space:normal;text-align:left;padding:9px 10px!important;box-sizing:border-box;color:#171717!important}
+body #simulatorModePanel #options button.option span:last-child{min-width:0;flex:1;overflow-wrap:anywhere;white-space:normal;font-size:inherit;line-height:inherit}
+body #simulatorModePanel #options button.option:not(.selected):not(.correct):not(.wrong):nth-child(4n+1){background:#e7edff!important}
+body #simulatorModePanel #options button.option:not(.selected):not(.correct):not(.wrong):nth-child(4n+2){background:#e1f7ff!important}
+body #simulatorModePanel #options button.option:not(.selected):not(.correct):not(.wrong):nth-child(4n+3){background:#fff1dc!important}
+body #simulatorModePanel #options button.option:not(.selected):not(.correct):not(.wrong):nth-child(4n){background:#e5f8e7!important}
 </style>
 </head>
 <body>
@@ -318,10 +330,11 @@ main > .hero[aria-label="Quiz progress"]::after {
 <div class="pill">🔥 <span id="streak">0</span> streak</div>
 </div></div></header>
 <main>
-<div class="zoo-mode-tabs" role="tablist" aria-label="Choose Zoology learning mode"><button type="button" id="learnModeTab" role="tab" aria-selected="false" aria-controls="learnModePanel">📘 Learn</button><button type="button" id="simulatorModeTab" role="tab" aria-selected="true" aria-controls="simulatorModePanel">🎯 Simulator</button></div>
+<div class="concept-heading"><p>ZOOLOGY · CONCEPT PRACTICE</p><h1 id="conceptHeading">Zoology Quiz</h1></div>
+<div class="zoo-mode-tabs" role="group" aria-label="Zoology study navigation"><button type="button" id="learnModeTab" hidden role="tab" aria-selected="false" aria-controls="learnModePanel">📘 Learn</button><button type="button" id="simulatorModeTab" aria-pressed="true" aria-controls="simulatorModePanel">📝 Quiz</button><a id="cheatSheetLink" class="cheat-sheet-link" href="zoology-topic-cheat-sheet.html">📘 Learn</a></div>
 <section id="learnModePanel" class="learn-mode-panel" role="tabpanel" aria-labelledby="learnModeTab" hidden><div class="learn-mode-meta" id="learnModeMeta">QUESTION 1 OF 30</div><h2 id="learnModeQuestion">Loading concept questions…</h2><button type="button" class="learn-reveal" id="learnModeReveal">👀 Reveal answer &amp; explanation</button><div class="learn-explanation" id="learnModeExplanation" aria-live="polite"><strong id="learnModeAnswer"></strong><p id="learnModeWhy"></p></div><div class="learn-mode-controls"><button type="button" id="learnModePrevious" disabled>← Previous</button><button type="button" id="learnModeNext">Next →</button></div></section>
-<div id="simulatorModePanel" role="tabpanel" aria-labelledby="simulatorModeTab">
-<section class="hero" aria-label="Quiz progress">
+<div id="simulatorModePanel" role="region" aria-labelledby="simulatorModeTab">
+<section class="hero" id="quizLoadingProgress" aria-label="Quiz progress">
 <div class="progress-row"><span id="counter">Loading question bank…</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="bar"></div></div>
 </section>
@@ -332,7 +345,7 @@ main > .hero[aria-label="Quiz progress"]::after {
 <div id="explain" class="feedback" aria-live="polite"></div>
 <div class="actions"><button id="next" class="btn check" disabled>Check answer</button></div>
 </section>
-<section id="notice" class="status" style="display:none"><h2>Quiz not available yet</h2><p id="noticeText" class="muted"></p><a href="zoology-home.html">← Back to Zoology Path</a></section>
+<section id="notice" class="status" style="display:none"><h2>Quiz not available yet</h2><p id="noticeText" class="muted" role="alert"></p><button type="button" class="btn" id="retryLoad">Retry loading</button><a href="zoology-home.html">← Back to Zoology Path</a></section>
 <section id="result" class="finish" style="display:none">
 <div class="trophy">🏆</div><h2>Quiz complete!</h2><div id="final" class="score">0 / 0</div><p id="message" class="muted"></p>
 <div id="wrongReview" class="review"></div>
@@ -350,12 +363,15 @@ const params=new URLSearchParams(location.search);
 const requested=(params.get('concept')||'What is Living?').trim();
 const conceptId=params.get('conceptId')||'';
 const conceptUrl=encodeURIComponent(requested)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
+document.getElementById("cheatSheetLink").href="zoology-topic-cheat-sheet.html?concept="+conceptUrl;
 document.getElementById('quickLearnNavLink')?.addEventListener('click',()=>document.getElementById('learnModeTab').click());
 document.getElementById('pathNavLink').href='zoology-home.html?resumeId='+encodeURIComponent(conceptId)+'&resumeConcept='+encodeURIComponent(requested);
 const key=requested.toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
 document.title=requested+' | Zoology Quiz | SkillUp';
-function showNotice(message){quiz.style.display='none';notice.style.display='block';noticeText.textContent=message;}
+document.getElementById('conceptHeading').textContent=requested;
+document.getElementById('retryLoad').addEventListener('click',()=>location.reload());
+function showNotice(message){document.getElementById('quizLoadingProgress').style.display='none';quiz.style.display='none';notice.style.display='block';noticeText.textContent=message;}
 function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){
  const s=slug(v);
@@ -420,15 +436,18 @@ function loadBank(file){return new Promise((resolve,reject)=>{
  const tryNext=()=>{
   if(attempt>=paths.length){reject(lastError||new Error('Question bank unavailable: '+file));return;}
   const script=document.createElement('script');
-  script.src=paths[attempt++]+'?v=20261126-zoology-bank-loader-recovery-2';
+  script.src=paths[attempt++]+'?v=20261127-zoology-bank-loader-recovery-3';
   script.async=true;
+  let settled=false;
+  const fail=error=>{if(settled)return;settled=true;clearTimeout(timer);lastError=error;script.remove();tryNext();};
+  const timer=setTimeout(()=>fail(new Error('Question bank request timed out: '+file)),10000);
   script.onload=()=>{
+   if(settled)return;
    const found=resolveBankArray(file,window);
-   if(found){resolve(found);return;}
-   lastError=new Error('Loaded '+file+' but its expected question array was missing or invalid.');
-   script.remove();tryNext();
+   if(found){settled=true;clearTimeout(timer);resolve(found);return;}
+   fail(new Error('Loaded '+file+' but its expected question array was missing or invalid.'));
   };
-  script.onerror=()=>{lastError=new Error('Could not fetch '+script.src);script.remove();tryNext();};
+  script.onerror=()=>fail(new Error('Could not fetch '+script.src));
   document.head.appendChild(script);
  };
  tryNext();
@@ -510,7 +529,7 @@ function startZoologyQuiz(source,conceptName){
  let learnIndex=0;
  function setMode(mode){
   const isLearn=mode==='learn';
-  learnTab.setAttribute('aria-selected',String(isLearn));simTab.setAttribute('aria-selected',String(!isLearn));
+  learnTab.setAttribute('aria-selected',String(isLearn));simTab.setAttribute('aria-pressed',String(!isLearn));
   learnPanel.hidden=!isLearn;simPanel.hidden=isLearn;
   document.getElementById('quickLearnNavLink')?.setAttribute('aria-pressed',String(isLearn));
   if(isLearn)renderLearn();window.scrollTo({top:0,behavior:'smooth'});
@@ -569,7 +588,7 @@ function startZoologyQuiz(source,conceptName){
 }
 async function load(){
  if(!requested){showNotice('No concept was supplied. Return to the Zoology Path and select a concept.');return;}
- const files=candidates(requested);let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){}}
+ const files=candidates(requested);let bank=null;for(const file of files){try{bank=await loadBank(file);if(bank)break;}catch(e){console.warn('Zoology bank load failed',file,e);}}
  if(bank){try{startZoologyQuiz(bank,requested);return;}catch(error){console.error('Zoology quiz initialization failed',error);showNotice('The quiz could not start. Please reload or return to the Zoology Path.');return;}}
  showNotice('The question bank could not be loaded. Please refresh once. If the issue continues, return to the Zoology Path and report this topic.');
 }

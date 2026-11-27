@@ -871,9 +871,11 @@ body .hero .actions a:focus-visible{outline:2px solid #168b91!important;outline-
 'use strict';
 const params=new URLSearchParams(location.search),topic=(params.get('concept')||'').trim();
 const title=document.getElementById('topicTitle');
-const enc=encodeURIComponent(topic),slug=v=>String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const conceptId=params.get('conceptId')||'';
+const enc=encodeURIComponent(topic)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):''),slug=v=>String(v).toLowerCase().replace(/&/g,' and ').replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 document.title=(topic||'Zoology Topic')+' | Cheat Sheet | SkillUp';title.textContent=topic||'Topic not selected';
-const isBiodiversity=slug(topic)==='biodiversity';
+const biodiversityIds=['zoo-Diversity%20in%20Living%20World--Biodiversity','zoo-Ecology%20and%20Environment--Biodiversity'];
+const isBiodiversity=slug(topic)==='biodiversity'&&biodiversityIds.includes(conceptId);
 const isBinomial=slug(topic)==='binomial-nomenclature';
 const isTaxAids=slug(topic)==='taxonomical-aids';
 const isAnimalKingdom=slug(topic)==='animal-kingdom-basis-of-classification';
@@ -902,7 +904,7 @@ const isAves=slug(topic)==='aves';
 const isMammalia=slug(topic)==='mammalia';
 const isTaxonomy=slug(topic)==='taxonomy-and-systematics';
 const isTaxonomicCategories=slug(topic)==='taxonomic-categories';
-['livingSheet','livingDistinctions','livingRecall','livingPlan'].forEach(id=>{document.getElementById(id).style.display=(isBiodiversity||isTaxonomy||isTaxonomicCategories||isBinomial||isTaxAids||isAnimalKingdom||isSymmetry||isGermLayers||isCoelom||isSegmentation||isNotochord||isPorifera||isCnidaria||isCtenophora||isPlatyhelminthes||isAschelminthes||isAnnelida||isArthropoda||isMollusca||isEchinodermata||isHemichordata||isChordata||isCyclostomata||isChondrichthyes||isOsteichthyes||isAmphibia||isReptilia||isAves||isMammalia)?'none':'';});
+['livingSheet','livingDistinctions','livingRecall','livingPlan'].forEach(id=>{document.getElementById(id).style.display=slug(topic)==='what-is-living'?'':'none';});
 ['taxonomySheet','taxonomyCompare','taxonomyNames','taxonomyHierarchy','taxonomyRecall','taxonomyPlan'].forEach(id=>{document.getElementById(id).style.display=isTaxonomy?'block':'none';});
 ['biodiversitySheet','biodiversityPatterns','biodiversityRecall','biodiversityPlan'].forEach(id=>{document.getElementById(id).style.display=isBiodiversity?'block':'none';});
 ['taxCatOverview','taxCatMeaning','taxCatExamples','taxCatRecall','taxCatPlan'].forEach(id=>{document.getElementById(id).style.display=isTaxonomicCategories?'block':'none';});
@@ -961,6 +963,8 @@ if(isBinomial){document.querySelector('.hero p').textContent='Learn the two-part
 if(isTaxonomicCategories){document.querySelector('.hero p').textContent='Understand all seven taxonomic ranks, how organisms are grouped and the NCERT examples of human, housefly and mango.';document.querySelector('.hero-key').textContent='Species • Genus • Family • Order • Class • Phylum • Kingdom';}
 if(isTaxonomy){document.querySelector('.hero p').textContent='Learn taxonomy, systematics, scientific naming and the taxonomic hierarchy with visual examples.';document.querySelector('.hero-key').textContent='Identify • Classify • Name • Relate';}
 if(isBiodiversity){document.querySelector('.hero p').textContent='Explore the three levels of biodiversity, global patterns and the species–area relationship.';document.querySelector('.hero-key').textContent='Levels • Patterns • Relationships';}
+if(!["biodiversity","binomial-nomenclature","taxonomical-aids","animal-kingdom-basis-of-classification","symmetry","diploblastic-and-triploblastic-organisation","coelom-and-body-cavity","segmentation","notochord","porifera","cnidaria","ctenophora","platyhelminthes","aschelminthes","annelida","arthropoda","mollusca","echinodermata","hemichordata","chordata","cyclostomata","chondrichthyes","osteichthyes","amphibia","reptilia","aves","mammalia","taxonomy-and-systematics","taxonomic-categories","what-is-living"].includes(slug(topic))){const notice=document.createElement('section');notice.className='card';notice.textContent='Dedicated Cheat Sheet is not yet available for this concept. Return to Learn for the existing questions.';document.querySelector('.hero').after(notice);document.querySelector('.hero p').textContent='Revision content pending.';document.querySelector('.hero-key').textContent='Continue learning';}
+if(slug(topic)==='biodiversity'&&!isBiodiversity){const notice=document.createElement('section');notice.className='card';notice.textContent='Select Biodiversity from its chapter in the Zoology Path to identify the correct concept.';document.querySelector('.hero').after(notice);document.querySelector('.hero p').textContent='Concept selection required.';document.querySelector('.hero-key').textContent='Return to Zoology Path';}
 document.getElementById('backQuiz').href='zoology-mcq.html?concept='+enc;
 document.getElementById('startQuiz').href='zoology-mcq.html?concept='+enc;
 document.getElementById('quickLearnLink').href='zoology-quicklearn.html?concept='+enc;

@@ -318,9 +318,8 @@ main > .hero[aria-label="Quiz progress"]::after {
 <div class="pill">🔥 <span id="streak">0</span> streak</div>
 </div></div></header>
 <main>
-<div class="zoo-mode-tabs" role="tablist" aria-label="Choose Zoology learning mode"><button type="button" id="learnModeTab" role="tab" aria-selected="false" aria-controls="learnModePanel">📘 Learn</button><button type="button" id="simulatorModeTab" role="tab" aria-selected="true" aria-controls="simulatorModePanel">📘 Cheat Sheet</button></div>
-<section id="learnModePanel" class="learn-mode-panel" role="tabpanel" aria-labelledby="learnModeTab" hidden><div class="learn-mode-meta" id="learnModeMeta">QUESTION 1 OF 30</div><h2 id="learnModeQuestion">Loading concept questions…</h2><button type="button" class="learn-reveal" id="learnModeReveal">👀 Reveal answer &amp; explanation</button><div class="learn-explanation" id="learnModeExplanation" aria-live="polite"><strong id="learnModeAnswer"></strong><p id="learnModeWhy"></p></div><div class="learn-mode-controls"><button type="button" id="learnModePrevious" disabled>← Previous</button><button type="button" id="learnModeNext">Next →</button></div></section>
-<div id="simulatorModePanel" role="tabpanel" aria-labelledby="simulatorModeTab">
+
+<div id="simulatorModePanel">
 <section class="hero" aria-label="Quiz progress">
 <div class="progress-row"><span id="counter">Loading question bank…</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="bar"></div></div>
@@ -341,7 +340,6 @@ main > .hero[aria-label="Quiz progress"]::after {
 <button id="restart" class="btn">Practice all questions again</button>
 <a href="zoology-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Zoology Path</a>
 </section>
-</div>
 </main>
 <script>
 (function(){
@@ -350,7 +348,6 @@ const params=new URLSearchParams(location.search);
 const requested=(params.get('concept')||'What is Living?').trim();
 const conceptId=params.get('conceptId')||'';
 const conceptUrl=encodeURIComponent(requested)+(conceptId?'&conceptId='+encodeURIComponent(conceptId):'');
-document.getElementById('quickLearnNavLink')?.addEventListener('click',()=>document.getElementById('learnModeTab').click());
 document.getElementById('pathNavLink').href='zoology-home.html?resumeId='+encodeURIComponent(conceptId)+'&resumeConcept='+encodeURIComponent(requested);
 const key=requested.toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
@@ -506,32 +503,7 @@ function bindQuizOwner(auth){
 function startZoologyQuiz(source,conceptName){
  const ownership=bindQuizOwner(window.SkillUpAuth?.auth);
  const original=source.slice(0,30);
- const learnTab=document.getElementById('learnModeTab'),simTab=document.getElementById('simulatorModeTab'),learnPanel=document.getElementById('learnModePanel'),simPanel=document.getElementById('simulatorModePanel');
- let learnIndex=0;
- function setMode(mode){
-  const isLearn=mode==='learn';
-  learnTab.setAttribute('aria-selected',String(isLearn));simTab.setAttribute('aria-selected',String(!isLearn));
-  learnPanel.hidden=!isLearn;simPanel.hidden=isLearn;
-  document.getElementById('quickLearnNavLink')?.setAttribute('aria-pressed',String(isLearn));
-  if(isLearn)renderLearn();window.scrollTo({top:0,behavior:'smooth'});
- }
- function renderLearn(){
-  const item=original[learnIndex],opts=Array.isArray(item.o)?item.o:[],correct=answerIndex(item);
-  document.getElementById('learnModeMeta').textContent='QUESTION '+(learnIndex+1)+' OF '+original.length+' · '+conceptName.toUpperCase();
-  document.getElementById('learnModeQuestion').textContent=item.q||'Question unavailable';
-  document.getElementById('learnModeAnswer').textContent=correct>=0?'Correct answer: '+opts[correct]:'Answer unavailable';
-  document.getElementById('learnModeWhy').textContent=item.e||'No explanation is available for this question.';
-  document.getElementById('learnModeExplanation').classList.remove('show');
-  document.getElementById('learnModeReveal').textContent='👀 Reveal answer & explanation';
-  document.getElementById('learnModePrevious').disabled=learnIndex===0;
-  document.getElementById('learnModeNext').textContent=learnIndex===original.length-1?'Back to first':'Next →';
- }
- learnTab.addEventListener('click',()=>setMode('learn'));simTab.addEventListener('click',()=>setMode('simulator'));
- document.getElementById('learnModePrevious').addEventListener('click',()=>{if(learnIndex>0){learnIndex--;renderLearn();}});
- document.getElementById('learnModeNext').addEventListener('click',()=>{learnIndex=learnIndex===original.length-1?0:learnIndex+1;renderLearn();});
- document.getElementById('learnModeReveal').addEventListener('click',()=>{const box=document.getElementById('learnModeExplanation'),open=box.classList.toggle('show');document.getElementById('learnModeReveal').textContent=open?'🙈 Hide explanation':'👀 Reveal answer & explanation';});
- learnTab.addEventListener('keydown',e=>{if(e.key==='ArrowRight')simTab.focus();});simTab.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')learnTab.focus();});
- renderLearn();let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
+ let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
  const counter=document.getElementById('counter'),percent=document.getElementById('percent'),bar=document.getElementById('bar'),xp=document.getElementById('xp'),streakEl=document.getElementById('streak'),progress=document.querySelector('[role="progressbar"]');
  if(!questions.length){showNotice('No original questions are available for this concept yet.');return;}

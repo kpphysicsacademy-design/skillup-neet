@@ -164,3 +164,40 @@ test('ZOO-006 unchanged rules: REST create-only precondition prevents overwritin
   assert.equal(saved.user_id,'student');
   await assertFails(getDoc(ref(db('other'))));
 });
+
+test('ZOO-006 actual client with unchanged emulator rules: concurrent create, retry, legacy and session isolation',async()=>{
+ const host=process.env.FIRESTORE_EMULATOR_HOST;
+ assert.match(host,/^(localhost|127\.0\.0\.1|\[::1\]):\d+$/);
+ const project='demo-skillup-progress-validation';
+ const vm=require('node:vm');
+ function fixture(uid){
+  const database=db(uid);
+  let listener;
+  const user={uid,async getIdToken(){
+   const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+   const now=Math.floor(Date.now()/1000);
+   return enc({alg:'none',typ:'JWT'})+'.'+enc({sub:uid,user_id:uid,aud:project,iss:'https://securetoken.google.com/'+project,iat:now,exp:now+3600,firebase:{sign_in_provider:'custom'}})+'.';
+  }};
+  const auth={currentUser:user,onAuthStateChanged(fn){listener=fn;fn(user);}};
+  const compat={collection:name=>({doc:id=>doc(database,name,id)}),runTransaction:fn=>runTransaction(database,tx=>fn({get:async target=>{const snap=await tx.get(target);return {exists:snap.exists(),data:()=>snap.data()};},set:(...args)=>tx.set(...args)}))};
+  let switchAfter=false;
+  const window={SKILLUP_FIREBASE_CONFIG:{apiKey:'test',authDomain:'test',projectId:project},firebase:{apps:[],initializeApp:()=>({}),auth:()=>auth,firestore:()=>compat}};
+  vm.runInNewContext(fs.readFileSync('central-auth.js','utf8'),{window,sessionStorage:{removeItem(){}},fetch:async(url,options)=>{
+   assert.ok(url.startsWith('https://firestore.googleapis.com/v1/projects/'+project+'/'));
+   const response=await fetch(url.replace('https://firestore.googleapis.com','http://'+host),options);
+   if(switchAfter){auth.currentUser=null;listener(null);}
+   return response;
+  }});
+  return {save:(time,score)=>window.SkillUpAuth.saveProgress({...row,score,xp:score*10},{owner:uid,finishedAt:time}),switchAfter(){switchAfter=true;},restore(){switchAfter=false;auth.currentUser=user;listener(user);}};
+ }
+ const a=fixture('student'),b=fixture('student');
+ await Promise.all([a.save(1000,24),b.save(3000,27)]);
+ await updateDoc(ref(),{legacy_marker:'preserve'});
+ await a.save(2000,25);
+ await a.save(3000,1);
+ a.switchAfter();await assert.rejects(a.save(4000,28),/Account changed/);
+ a.restore();await a.save(4000,28);
+ const saved=(await getDoc(ref())).data();
+ assert.equal(saved.quiz_finished_at,4000);assert.equal(saved.score,28);assert.equal(saved.legacy_marker,'preserve');assert.equal(saved.user_id,'student');
+ await assertFails(getDoc(ref(db('other'))));
+});

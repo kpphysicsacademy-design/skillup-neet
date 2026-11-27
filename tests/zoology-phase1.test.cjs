@@ -278,3 +278,19 @@ test('pending result recovery is scoped to account and concept',()=>{
 test('quiz ownership cannot transfer after account switch or logout and relogin',()=>{const start=quiz.indexOf('function bindQuizOwner('),end=quiz.indexOf('function startZoologyQuiz',start);const c={};vm.runInNewContext(quiz.slice(start,end),c);let notify;const auth={currentUser:{uid:'A'},onAuthStateChanged(fn){notify=fn;}};const owner=c.bindQuizOwner(auth);assert.equal(owner.owner(),'A');auth.currentUser={uid:'B'};notify(auth.currentUser);assert.equal(owner.owner(),null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(owner.owner(),null);const fresh=c.bindQuizOwner(auth);auth.currentUser=null;notify(null);auth.currentUser={uid:'A'};notify(auth.currentUser);assert.equal(fresh.owner(),null);});
 
 test('legacy pending result is retained but not written without completion time',async()=>{const start=quiz.indexOf('function showProgressSync('),end=quiz.indexOf('async function recoverProgress',start);let writes=0,removed=0;const result={owner:'A',score:2,total:3,pct:67};const raw=JSON.stringify(result);const c={window:{SkillUpAuth:{auth:{}}},pendingKey:()=> 'key',bindQuizOwner:()=>({owner:()=> 'A'}),sessionStorage:{getItem:()=>raw,removeItem:()=>removed++},document:{createElement:()=>({setAttribute(){}})},persistZoologyProgress:async()=>{writes++;return true;}};vm.runInNewContext(quiz.slice(start,end),c);let nodes; c.showProgressSync({replaceChildren(...items){nodes=items;}},result,false);await nodes[1].onclick();assert.equal(writes,0);assert.equal(removed,0);assert.match(nodes[0].textContent,/Legacy result/);});
+
+ test('homepage activity preserves explicit Zoology IDs and does not guess legacy duplicate titles',()=>{
+ const source=require('node:fs').readFileSync('index.html','utf8');
+ const start=source.indexOf('function activityResumeParams('),end=source.indexOf('          link.href=',start);
+ assert.ok(start>=0&&end>start);
+ const c={URLSearchParams};vm.createContext(c);vm.runInContext(source.slice(start,end),c);
+ for(const row of ctx.a.filter(x=>x.c==='Biodiversity')){
+ const p=c.activityResumeParams('zoology',{concept_id:row.id,concept:row.c},row.c);
+ assert.equal(p.get('resumeId'),row.id);
+ assert.equal(p.get('resumeConcept'),row.c);
+ assert.equal(c.activityResumeParams('zoology',{topic:row.id},row.id).get('resumeId'),row.id);
+ }
+ assert.equal(c.activityResumeParams('zoology',{topic:'Biodiversity'},'Biodiversity').has('resumeId'),false);
+ assert.equal(c.activityResumeParams('zoology',{concept_id:'invalid',topic:'Biodiversity'},'Biodiversity').get('resumeId'),'invalid');
+ assert.equal(c.activityResumeParams('chemistry',{concept_id:'abc'},'Matter').has('resumeId'),false);
+ });

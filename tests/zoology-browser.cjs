@@ -31,13 +31,28 @@ const path=require('node:path');
  await page.locator('#q').fill('');await page.locator('#q').press('Enter');
  for(let i=0;i<30&&await links.count()<282;i++){
  const more=page.locator('#loadMore');
- if(await more.isVisible())await more.click();else break;
+ assert(await more.isVisible(),'pagination hidden before catalog complete');
+ const before=await links.count();await more.click();assert.equal(await links.count(),Math.min(before+20,282));
  }
  const urls=await links.evaluateAll(xs=>xs.map(x=>x.href));
  assert.equal(urls.length,282);
  const ids=urls.map(x=>new URL(x).searchParams.get('conceptId'));
  assert.equal(new Set(ids).size,282);
  for(const url of urls){const u=new URL(url);assert.equal(u.pathname,'/zoology-mcq.html');assert(u.searchParams.get('concept'));assert(fs.existsSync('.'+u.pathname));}
+ assert.equal(await page.locator('#loadMore').isVisible(),false);
+ if(width===390){
+  const failures=[];
+  for(const url of urls){
+   try{
+    await page.goto(url,{waitUntil:'domcontentloaded'});
+    await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2,{},{timeout:5000});
+    assert(await page.locator('#question').innerText());
+    assert.equal(await page.locator('#notice').isVisible(),false);
+   }catch(e){failures.push(url+' '+e.message);}
+  }
+  console.log('Destination executions: '+(282-failures.length)+'/282');
+  assert.deepEqual(failures,[]);
+ }
  console.log('PASS viewport '+width+'; 282 destination URLs checked');
  await page.close();
  }

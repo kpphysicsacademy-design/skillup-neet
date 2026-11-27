@@ -214,7 +214,18 @@ document.addEventListener('DOMContentLoaded',async function(){
           const key=subject.trim().toLowerCase();
           const path=Object.prototype.hasOwnProperty.call(paths,key)?paths[key]:'index.html';
           const link=document.createElement('a');
-          link.href=path+'?'+new URLSearchParams({resumeConcept:topic}).toString();
+          function activityResumeParams(key,r,topic){
+            const params=new URLSearchParams({resumeConcept:topic});
+            if(key==='zoology'){
+              const explicit=typeof r.concept_id==='string'?r.concept_id.trim():'';
+              const legacy=typeof r.topic==='string'&&r.topic.startsWith('zoo-')?r.topic:'';
+              const id=explicit||legacy;
+              if(id)params.set('resumeId',id);
+              params.set('resumeConcept',String(r.concept||topic));
+            }
+            return params;
+          }
+          link.href=path+'?'+activityResumeParams(key,r,topic).toString();
           link.style.cssText='display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5ebf2;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(23,32,51,.05)';
           function element(tag,style,value){
             const node=document.createElement(tag);

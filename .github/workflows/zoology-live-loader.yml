@@ -1,0 +1,22 @@
+name: Zoology live loader qualification
+on:
+  pull_request:
+    paths:
+      - 'zoology-home.html'
+      - 'zoology-mcq.html'
+      - 'shared-nav.js'
+      - 'tests/zoology-live-loader.cjs'
+      - '.github/workflows/zoology-live-loader.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/zoology-live-loader.cjs

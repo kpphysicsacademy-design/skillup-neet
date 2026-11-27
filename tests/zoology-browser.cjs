@@ -5,6 +5,7 @@ const path=require('node:path');
 (async()=>{
  const browser=await chromium.launch();
  try{
+ const allFailures=[];
  for(const width of [320,360,390,768,1440]){
  const page=await browser.newPage({viewport:{width,height:800}});
  await page.route('**/*',async route=>{
@@ -48,13 +49,24 @@ const path=require('node:path');
     await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2,{},{timeout:5000});
     assert(await page.locator('#question').innerText());
     assert.equal(await page.locator('#notice').isVisible(),false);
+    await page.locator('#learnModeTab').click();
+    assert(await page.locator('#learnModeQuestion').innerText());
+    assert(await page.locator('#learnModePanel').isVisible());
+    await page.locator('#learnModeReveal').click();
+    assert(await page.locator('#learnModeExplanation').isVisible());
+    await page.locator('#simulatorModeTab').click();
+    assert(await page.locator('#simulatorModePanel').isVisible());
+    await page.locator('#options button').first().click();
+    await page.locator('#next').click();
+    assert(await page.locator('#explain').isVisible());
    }catch(e){failures.push(url+' '+e.message);}
   }
   console.log('Destination executions: '+(282-failures.length)+'/282');
-  assert.deepEqual(failures,[]);
+  allFailures.push(...failures);
  }
  console.log('PASS viewport '+width+'; 282 destination URLs checked');
  await page.close();
  }
+ assert.deepEqual(allFailures,[]);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

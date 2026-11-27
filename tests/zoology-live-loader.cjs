@@ -38,16 +38,18 @@ const path=require('node:path');
     await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2,{},{timeout:5000});
     assert(await page.locator('#question').innerText());
     assert.equal(await page.locator('#notice').isVisible(),false);
-    await page.locator('#learnModeTab').click();
-    assert(await page.locator('#learnModeQuestion').innerText());
-    assert(await page.locator('#learnModePanel').isVisible());
-    await page.locator('#learnModeReveal').click();
-    assert(await page.locator('#learnModeExplanation').isVisible());
-    await page.locator('#simulatorModeTab').click();
+    assert.equal(await page.locator('#learnModeTab').count(),0);
+    assert.equal(await page.locator('#simulatorModeTab').count(),0);
+    assert.equal(await page.locator('#learnModePanel').count(),0);
     assert(await page.locator('#simulatorModePanel').isVisible());
     await page.locator('#options button').first().click();
     await page.locator('#next').click();
     assert(await page.locator('#explain').isVisible());
+    assert.match(await page.locator('#next').innerText(),/Continue|See results/);
+    if(await page.locator('#next').innerText()==='Continue →'){
+      await page.locator('#next').click();
+      assert.match(await page.locator('#counter').innerText(),/Question 2 of/);
+    }
    }catch(e){failures.push(url+' '+e.message);}
   }
   console.log('Destination executions: '+(282-failures.length)+'/282');

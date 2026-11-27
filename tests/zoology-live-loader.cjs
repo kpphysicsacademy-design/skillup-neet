@@ -32,6 +32,21 @@ const path=require('node:path');
  assert.equal(new Set(ids).size,282);
  for(const url of urls){const u=new URL(url);assert.equal(u.pathname,'/zoology-mcq.html');assert(u.searchParams.get('concept'));assert(fs.existsSync('.'+u.pathname));}
 
+ const coelom=urls.find(u=>new URL(u).searchParams.get('concept')==='Coelom and Body Cavity');
+ assert(coelom);
+ await page.goto(coelom);
+ await page.waitForFunction(()=>document.querySelector('#options')?.children.length>=2);
+ assert.equal(await page.locator('#conceptHeading').innerText(),'Coelom and Body Cavity');
+ const layout=await page.evaluate(()=>{
+ const learn=document.querySelector('#cheatSheetLink'),quiz=document.querySelector('#simulatorModeTab'),heading=document.querySelector('#conceptHeading'),question=document.querySelector('#question'),options=[...document.querySelectorAll('#options button')];
+ const a=learn.getBoundingClientRect(),b=quiz.getBoundingClientRect();
+ return {overflow:document.documentElement.scrollWidth>innerWidth+1,aligned:Math.abs(a.top-b.top)<=2&&a.right<=b.left&&Math.abs(a.width-b.width)<=2,targets:a.height>=44&&b.height>=44,headingSize:parseFloat(getComputedStyle(heading).fontSize),questionSize:parseFloat(getComputedStyle(question).fontSize),optionReadable:options.every(o=>parseFloat(getComputedStyle(o).fontSize)>=14&&o.getBoundingClientRect().height>=44&&o.scrollWidth<=o.clientWidth+1),ink:getComputedStyle(question).color,sticky:getComputedStyle(document.querySelector('.top')).position};
+ });
+ assert.equal(layout.overflow,false,JSON.stringify(layout));
+ assert(layout.aligned&&layout.targets&&layout.headingSize>=20&&layout.questionSize>=18&&layout.optionReadable,JSON.stringify(layout));
+ assert.equal(layout.ink,'rgb(23, 23, 23)');
+ assert.equal(layout.sticky,'sticky');
+ console.log('PASS Coelom layout '+width+' '+JSON.stringify(layout));
  if(width===390){
   const failures=[];
   for(const url of urls){

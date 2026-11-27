@@ -225,16 +225,26 @@ test('Quick Learn resolves the same dedicated question bank as the main quiz for
 });
 
 
-test('MCQ bank loader retries a relative URL after the root-relative request fails',()=>{
- const start=quiz.indexOf('function loadBank(file){');
- const end=quiz.indexOf('async function persistZoologyProgress',start);
+test('MCQ bank loader retries relative URL on error or timeout and rejects exhausted requests',async()=>{
+ const start=quiz.indexOf('function loadBank(file){'),end=quiz.indexOf('async function persistZoologyProgress',start);
  assert.ok(start>=0&&end>start);
- const loader=quiz.slice(start,end);
- assert.ok(loader.includes("new URL('/question-banks/'+file,location.origin)"));
- assert.ok(loader.includes("new URL('question-banks/'+file,document.baseURI)"));
- assert.ok(loader.includes('script.onerror=()=>{lastError=new Error'));
- assert.ok(loader.includes('tryNext();'));
- assert.ok(loader.includes('20261126-zoology-bank-loader-recovery-2'));
+ for(const mode of ['error','timeout','exhausted']){
+  const scripts=[],timers=new Map();let seq=0;
+  const bank=[{q:'sample'}];
+  const context={URL,location:{origin:'https://skillup.test'},window:{},resolveBankArray:()=>bank,
+   setTimeout:fn=>{timers.set(++seq,fn);return seq;},clearTimeout:id=>timers.delete(id),
+   document:{baseURI:'https://skillup.test/sub/page.html',createElement:()=>({remove(){this.removed=true;}}),head:{appendChild(script){scripts.push(script);}}}};
+  vm.createContext(context);vm.runInContext(quiz.slice(start,end),context);
+  const pending=context.loadBank('sample.js');
+  assert.match(scripts[0].src,/https:\/\/skillup\.test\/question-banks\/sample\.js\?v=/);
+  if(mode==='timeout')timers.values().next().value();else scripts[0].onerror();
+  assert.equal(scripts[0].removed,true);
+  assert.match(scripts[1].src,/https:\/\/skillup\.test\/sub\/question-banks\/sample\.js\?v=/);
+  scripts[0].onload();assert.equal(scripts.length,2);
+  if(mode==='exhausted'){scripts[1].onerror();await assert.rejects(pending,/Could not fetch/);}
+  else{scripts[1].onload();assert.equal(await pending,bank);}
+  assert.equal(timers.size,0);
+ }
 });
 
 test('retry uses same owner and absolute XP, rejects account switch',async()=>{

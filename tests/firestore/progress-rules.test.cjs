@@ -179,7 +179,7 @@ test('ZOO-006 actual client with unchanged emulator rules: concurrent create, re
    return enc({alg:'none',typ:'JWT'})+'.'+enc({sub:uid,user_id:uid,aud:project,iss:'https://securetoken.google.com/'+project,iat:now,exp:now+3600,firebase:{sign_in_provider:'custom'}})+'.';
   }};
   const auth={currentUser:user,onAuthStateChanged(fn){listener=fn;fn(user);}};
-  const compat={collection:name=>({doc:id=>doc(database,name,id)}),runTransaction:fn=>runTransaction(database,tx=>fn({get:async target=>{const snap=await tx.get(target);return {exists:snap.exists(),data:()=>snap.data()};},set:(...args)=>tx.set(...args)}))};
+  const compat={collection:name=>({doc:id=>doc(database,name,id)}),runTransaction:fn=>runTransaction(database,tx=>fn({get:async target=>{const snap=await tx.get(target);return {exists:snap.exists(),data:()=>snap.data()};},set:(target,data,options)=>tx.set(target,structuredClone(data),structuredClone(options))}))};
   let switchAfter=false;
   const window={SKILLUP_FIREBASE_CONFIG:{apiKey:'test',authDomain:'test',projectId:project},firebase:{apps:[],initializeApp:()=>({}),auth:()=>auth,firestore:()=>compat}};
   vm.runInNewContext(fs.readFileSync('central-auth.js','utf8'),{window,sessionStorage:{removeItem(){}},fetch:async(url,options)=>{

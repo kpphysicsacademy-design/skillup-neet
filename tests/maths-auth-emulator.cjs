@@ -1,7 +1,6 @@
 const assert=require('node:assert/strict');
 const firebase=require('firebase/compat/app');
 require('firebase/compat/auth');require('firebase/compat/firestore');
-global.window=global;
 global.SKILLUP_FIREBASE_CONFIG={apiKey:'demo-key',authDomain:'demo-skillup-maths.firebaseapp.com',projectId:'demo-skillup-maths'};
 global.firebase=firebase;
 const app=firebase.initializeApp(SKILLUP_FIREBASE_CONFIG);
@@ -9,6 +8,7 @@ app.auth().useEmulator('http://127.0.0.1:9099');
 app.firestore().useEmulator('127.0.0.1',8080);
 const data=new Map();
 global.sessionStorage={getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)};
+global.window=global;
 require('../central-auth.js');require('../maths-progress.js');
 (async()=>{try{
  const auth=app.auth(),db=app.firestore();

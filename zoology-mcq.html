@@ -230,7 +230,7 @@ body .fill{background:#58cc02!important}
 .zoo-mode-tabs button{min-height:45px;border:2px solid transparent;border-radius:12px;background:#f5f6fb;color:#59617c;font-size:14px;font-weight:900;cursor:pointer}
 .zoo-mode-tabs button[aria-selected="true"]{border-color:#d8cef7;background:#f1ecff;color:#6848c8;box-shadow:0 2px 0 #e4dcfa}
 .learn-mode-panel{padding:23px;border:2px solid #e2e5f3;border-bottom:6px solid #e2e5f3;border-radius:24px;background:#fff;box-shadow:0 12px 28px rgba(43,49,104,.05)}
-.learn-mode-panel[hidden],#simulatorModePanel[hidden]{display:none!important}
+.learn-mode-panel[hidden],#quizModePanel[hidden]{display:none!important}
 .learn-mode-meta{margin-bottom:13px;color:#7450d4;font-size:12px;font-weight:950;letter-spacing:.6px}
 .learn-mode-panel h2{margin:0;color:#26315d;font-size:clamp(21px,4vw,28px);line-height:1.4}
 .learn-reveal{width:100%;min-height:52px;margin-top:20px;padding:10px;border:2px solid #d8cef7;border-bottom-width:5px;border-radius:14px;background:#f7f3ff;color:#6545c3;font-size:14px;font-weight:900;cursor:pointer}
@@ -291,22 +291,24 @@ main > .hero[aria-label="Quiz progress"]::after {
 }
 
 /* Simulator readability and compact mobile control refinements. */
-#simulatorModePanel .hero{padding:16px 18px 13px;margin-bottom:12px;border-radius:18px}
-#simulatorModePanel .progress-row{font-size:11px;margin:8px 0 6px}
-#simulatorModePanel .track{height:8px}
-#simulatorModePanel .quiz{padding:19px;margin:12px 0;border-radius:19px}
-#simulatorModePanel .question{font-size:clamp(18px,3.2vw,24px);line-height:1.38;margin-bottom:17px}
-#simulatorModePanel .option{min-height:50px;padding:9px 12px;border-radius:13px;font-size:14px}
-#simulatorModePanel .option .letter{width:32px;height:32px;flex-basis:32px}
-#simulatorModePanel .btn{min-height:46px;font-size:13px;border-radius:12px}
+#quizModePanel .hero{padding:16px 18px 13px;margin-bottom:12px;border-radius:18px}
+#quizModePanel .progress-row{font-size:11px;margin:8px 0 6px}
+#quizModePanel .track{height:8px}
+#quizModePanel .quiz{padding:19px;margin:12px 0;border-radius:19px}
+#quizModePanel .question{font-size:clamp(18px,3.2vw,24px);line-height:1.38;margin-bottom:17px}
+#quizModePanel .option{min-height:50px;padding:9px 12px;border-radius:13px;font-size:14px}
+#quizModePanel .option .letter{width:32px;height:32px;flex-basis:32px}
+#quizModePanel .btn{min-height:46px;font-size:13px;border-radius:12px}
 @media(max-width:520px){
- #simulatorModePanel .hero{padding:13px 14px 11px;border-radius:15px}
- #simulatorModePanel .quiz{padding:15px 13px;border-radius:16px}
- #simulatorModePanel .question{font-size:19px}
- #simulatorModePanel .option{min-height:46px;padding:8px 10px;font-size:13px}
- #simulatorModePanel .option .letter{width:29px;height:29px;flex-basis:29px}
- #simulatorModePanel .btn{min-height:42px;font-size:12px}
+ #quizModePanel .hero{padding:13px 14px 11px;border-radius:15px}
+ #quizModePanel .quiz{padding:15px 13px;border-radius:16px}
+ #quizModePanel .question{font-size:19px}
+ #quizModePanel .option{min-height:46px;padding:8px 10px;font-size:13px}
+ #quizModePanel .option .letter{width:29px;height:29px;flex-basis:29px}
+ #quizModePanel .btn{min-height:42px;font-size:12px}
 }
+
+.revision-nav{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.revision-nav button{flex:1;min-width:0;min-height:44px;border:1px solid #ddd;border-radius:12px;background:white;color:#111;font-weight:700}.revision-nav button[aria-pressed="true"]{outline:2px solid #555}.revision-card{overflow-wrap:anywhere;background:white;color:#111;border:1px solid #ddd;border-radius:12px;padding:12px;margin:10px 0}.revision-card summary{cursor:pointer;font-weight:700}
 </style>
 </head>
 <body>
@@ -319,7 +321,10 @@ main > .hero[aria-label="Quiz progress"]::after {
 </div></div></header>
 <main>
 
-<div id="simulatorModePanel">
+<h1 id="revisionTitle" class="question"></h1>
+<div class="revision-nav" aria-label="Learning views"><button type="button" id="quickLearnButton" aria-pressed="false" disabled>🧠 Quick Learn</button><button type="button" id="cheatSheetButton" aria-pressed="false" disabled>📘 Cheat Sheet</button></div>
+<section id="revisionPanel" hidden aria-label="Revision cards"></section>
+<div id="quizModePanel">
 <section class="hero" aria-label="Quiz progress">
 <div class="progress-row"><span id="counter">Loading question bank…</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="bar"></div></div>
@@ -340,6 +345,7 @@ main > .hero[aria-label="Quiz progress"]::after {
 <button id="restart" class="btn">Practice all questions again</button>
 <a href="zoology-home.html" style="display:inline-block;margin-top:18px;color:#087eb8;font-weight:850">← Back to Zoology Path</a>
 </section>
+</div>
 </main>
 <script>
 (function(){
@@ -352,6 +358,7 @@ document.getElementById('pathNavLink').href='zoology-home.html?resumeId='+encode
 const key=requested.toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const quiz=document.getElementById('quiz'),notice=document.getElementById('notice'),noticeText=document.getElementById('noticeText');
 document.title=requested+' | Zoology Quiz | SkillUp';
+document.getElementById('revisionTitle').textContent=requested;
 function showNotice(message){quiz.style.display='none';notice.style.display='block';noticeText.textContent=message;}
 function slug(v){return String(v).toLowerCase().replace(/&/g,' and ').replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function candidates(v){
@@ -506,6 +513,10 @@ function startZoologyQuiz(source,conceptName){
  let questions=original.slice(),i=0,score=0,streak=0,selected=null,checked=false,wrongAttempts=[];
  const qEl=document.getElementById('question'),oEl=document.getElementById('options'),eEl=document.getElementById('explain'),next=document.getElementById('next');
  const counter=document.getElementById('counter'),percent=document.getElementById('percent'),bar=document.getElementById('bar'),xp=document.getElementById('xp'),streakEl=document.getElementById('streak'),progress=document.querySelector('[role="progressbar"]');
+ const revisionPanel=document.getElementById('revisionPanel'),quizPanel=document.getElementById('quizModePanel'),learnButton=document.getElementById('quickLearnButton'),sheetButton=document.getElementById('cheatSheetButton');
+ let mode='quiz';
+ function switchRevision(target){mode=mode===target?'quiz':target;learnButton.setAttribute('aria-pressed',String(mode==='learn'));sheetButton.setAttribute('aria-pressed',String(mode==='sheet'));quizPanel.hidden=mode!=='quiz';revisionPanel.hidden=mode==='quiz';revisionPanel.replaceChildren();if(mode==='quiz')return;const back=document.createElement('button');back.type='button';back.className='btn';back.textContent='← Return to quiz';back.onclick=()=>switchRevision(mode);revisionPanel.append(back);original.forEach((item,n)=>{const card=document.createElement('details');card.className='revision-card';card.open=mode==='sheet';const q=document.createElement('summary');q.textContent=(n+1)+'. '+item.q;const answer=document.createElement('p');answer.textContent='Correct answer: '+item.o[answerIndex(item)];const explanation=document.createElement('p');explanation.textContent=item.e||'';card.append(q,answer,explanation);revisionPanel.append(card);});}
+ learnButton.disabled=false;sheetButton.disabled=false;learnButton.onclick=()=>switchRevision('learn');sheetButton.onclick=()=>switchRevision('sheet');
  if(!questions.length){showNotice('No original questions are available for this concept yet.');return;}
  function answerIndex(item){const opts=Array.isArray(item.o)?item.o:[];let idx=typeof item.a==='number'?item.a:opts.indexOf(item.a);if(!Number.isInteger(idx)||idx<0||idx>=opts.length){const raw=String(item.a).trim();if(/^[A-D]$/i.test(raw))idx=raw.toUpperCase().charCodeAt(0)-65;else idx=opts.indexOf(raw);}return Number.isInteger(idx)&&idx>=0&&idx<opts.length?idx:-1;}
  function render(){

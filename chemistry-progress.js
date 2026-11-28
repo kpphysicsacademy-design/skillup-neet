@@ -1,6 +1,24 @@
 /* Chemistry progress storage: no migration of unowned legacy data. */
 (function(root){
 'use strict';
+function serializeIndexedDB(key,work){
+ return new Promise((resolve,reject)=>{
+  const open=root.indexedDB.open('skillup-reward-locks',1);
+  open.onupgradeneeded=()=>open.result.createObjectStore('locks');
+  open.onerror=()=>reject(open.error);
+  open.onblocked=()=>reject(Error('Reward database blocked'));
+  open.onsuccess=()=>{
+   const db=open.result;
+   let tx;
+   try{tx=db.transaction('locks','readwrite');}catch(e){db.close();reject(e);return;}
+   let value, failure;
+   tx.oncomplete=()=>{db.close();resolve(value);};
+   tx.onabort=()=>{db.close();reject(failure||tx.error||Error('Reward transaction aborted'));};
+   const req=tx.objectStore('locks').get(key);
+   req.onsuccess=()=>{try{value=work();}catch(e){failure=e;tx.abort();}};
+  };
+ });
+}
 function create(storage,uid,topic){
  const prefix='skillup:chemistry:v2:'+encodeURIComponent(uid||'guest')+':';
  const key=prefix+'attempt:'+encodeURIComponent(topic);
@@ -9,13 +27,38 @@ function create(storage,uid,topic){
  function read(k){try{const raw=storage.getItem(k);return raw===null?(memory.get(k)||null):JSON.parse(raw);}catch(e){return memory.get(k)||null;}}
  function write(k,v){memory.set(k,v);try{storage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
  function restore(bank){const s=read(key);if(!s||s.bank!==bank||!Array.isArray(s.ids)||!s.ids.length||!Number.isInteger(s.index)||s.index<0||s.index>s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.index+(s.locked?1:0)||!Array.isArray(s.wrongAttempts)||typeof s.id!=='string')return null;return s;}
- function complete(s,date){if(!s||typeof s.id!=='string'||!s.id||!Array.isArray(s.ids)||!s.ids.length||s.index!==s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.ids.length)throw Error('Invalid completion');
- const data=read(ledger)||{events:{}};
+ function complete(s,date,durable=false){if(!s||typeof s.id!=='string'||!s.id||!Array.isArray(s.ids)||!s.ids.length||s.index!==s.ids.length||!Number.isInteger(s.score)||s.score<0||s.score>s.ids.length)throw Error('Invalid completion');
+ const data=durable?JSON.parse(storage.getItem(ledger)||'null')||{events:{}}:read(ledger)||{events:{}};
  const id=JSON.stringify([topic,s.id]);
- if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};write(ledger,data);}
+ if(!Object.prototype.hasOwnProperty.call(data.events,id)){data.events[id]={topic,date,score:s.score,total:s.ids.length,review:!!s.review};if(durable){storage.setItem(ledger,JSON.stringify(data));memory.set(ledger,data);}else write(ledger,data);}
  return data.events[id];}
- function summary(){const data=read(ledger)||{events:{}};const events=Object.values(data.events).filter(e=>!e.review);return {xp:events.reduce((n,e)=>n+e.score*10,0),quizzes:events.length,days:[...new Set(events.map(e=>e.date))].sort(),events};}
- return {restore,save:s=>write(key,s),complete,summary};
+ async function completeAtomic(s,date,locks=root.navigator?.locks){
+  const work=()=>complete(s,date,true);
+  if(locks?.request)return locks.request(ledger,()=>root.indexedDB?serializeIndexedDB(ledger,work):work());
+  if(root.indexedDB)return serializeIndexedDB(ledger,work);
+  throw Error('Atomic reward storage unavailable');
+ }
+ function rewardEvents(){const data=read(ledger)||{events:{}};return Object.entries(data.events).map(([key,e])=>{const [topic,attemptId]=JSON.parse(key);return {owner:uid||'guest',subject:'chemistry',topic,attemptId,score:e.score,review:!!e.review,date:e.date};});}
+ function summary(){const events=rewardEvents().filter(e=>!e.review);const total=aggregateRewards(events,uid||'guest');return {xp:total.xp,quizzes:total.attempts,days:[...new Set(events.map(e=>e.date))].sort(),events};}
+ return {restore,save:s=>write(key,s),complete,completeAtomic,summary,rewardEvents};
 }
-const api={create};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
+function aggregateRewards(rows,owner){
+ if(typeof owner!=='string'||!owner)throw Error('Reward owner required');
+ const seen=new Map();
+ for(const row of rows){
+  if(row.owner!==owner)continue;
+  if(!['physics','chemistry','botany','zoology','mathematics'].includes(String(row.subject).toLowerCase())||typeof row.topic!=='string'||!row.topic||typeof row.attemptId!=='string'||!row.attemptId||!Number.isSafeInteger(row.score)||row.score<0)throw Error('Invalid reward');
+  const key=JSON.stringify([row.subject.toLowerCase(),row.topic,row.attemptId]);
+  const value=JSON.stringify([row.score,!!row.review]);
+  if(seen.has(key)&&seen.get(key)!==value)throw Error('Conflicting reward');
+  seen.set(key,value);
+ }
+ let xp=0,attempts=0;
+ for(const value of seen.values()){const [score,review]=JSON.parse(value);if(!review){xp+=score*10;attempts++;}}
+ return {xp,attempts};
+}
+function aggregateCloudRewards(progress,owner){
+ return aggregateRewards(progress.filter(row=>row.user_id===owner).flatMap(row=>Array.isArray(row.reward_events)?row.reward_events:[]),owner);
+}
+const api={create,aggregateRewards,aggregateCloudRewards};if(typeof module==='object'&&module.exports)module.exports=api;else root.ChemistryProgress=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

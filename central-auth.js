@@ -79,13 +79,29 @@
       const epoch=sessionEpoch;
       const valid=()=>auth.currentUser?.uid===user.uid&&guard.owner===user.uid&&epoch===sessionEpoch;
       if(!valid()||!Number.isSafeInteger(guard.finishedAt))throw new Error('Invalid progress session');
-      await db.runTransaction(async tx=>{
+      const transact=()=>db.runTransaction(async tx=>{
         const snap=await tx.get(ref);
         if(!valid())throw new Error('Account changed during progress write');
         const prior=snap.exists?snap.data():{};
+        if(row.subject==='Zoology'&&row.reward_attempt_id){
+          if(typeof row.reward_attempt_id!=='string'||! /^[a-zA-Z0-9-]{1,80}$/.test(row.reward_attempt_id)||!Number.isSafeInteger(row.score)||row.score<0||!Number.isSafeInteger(row.total_questions)||row.score>row.total_questions)throw Error('Invalid reward');
+          const events=Array.isArray(prior.reward_events)?prior.reward_events:[];
+          if(events.some(e=>e.attemptId===row.reward_attempt_id))return;
+          const event={owner:user.uid,subject:'zoology',topic:String(progress.topic),attemptId:row.reward_attempt_id,score:row.score,review:false};
+          if(events.length>=1000)throw Error('Reward ledger capacity reached; progress retained for recovery');
+          const patch={reward_events:[...events,event]};
+          if(Number(prior.quiz_finished_at||0)<guard.finishedAt)Object.assign(patch,row,{quiz_finished_at:guard.finishedAt});
+          tx.set(ref,patch,{merge:true});return;
+        }
         if(Number(prior.quiz_finished_at||0)>=guard.finishedAt)return;
         tx.set(ref,Object.assign({},row,{quiz_finished_at:guard.finishedAt}),{merge:true});
       });
+      try{await transact();}catch(e){
+        if(row.subject!=='Zoology'||e.code!=='permission-denied'||!valid())throw e;
+        await ref.set({user_id:user.uid},{merge:true});
+        if(!valid())throw Error('Account changed');
+        await transact();
+      }
     }else await ref.set(row,{merge:true});
     return row;
   }
@@ -103,5 +119,5 @@
     });
   }
 
-  window.SkillUpAuth={configured,app,auth,db,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress,getProgress};
+  window.SkillUpAuth={configured,app,auth,db,getSessionEpoch:()=>sessionEpoch,getSession,requireAuth,signOut,getProfile,saveProfile,saveProgress,getProgress};
 })();

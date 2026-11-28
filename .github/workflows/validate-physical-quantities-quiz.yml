@@ -2,7 +2,9 @@ name: Validate Physical Quantities quiz persistence
 on:
   pull_request:
     paths:
-      - 'physics-physical-quantities-practice.html'
+      - 'physics-physical-quantities-*.html'
+      - 'tests/physics-reward.test.cjs'
+      - 'physics-rewards.js'
       - '.github/workflows/validate-physical-quantities-quiz.yml'
   workflow_dispatch:
 jobs:
@@ -35,3 +37,8 @@ jobs:
           assert.match(html,/cloudRef=db\.collection\('skillup_progress'\)/);
           console.log('Quiz JavaScript syntax and persistence wiring checks passed');
           NODE
+
+      - name: Install isolated IndexedDB test dependency
+        run: npm install --no-save fake-indexeddb@6.2.4
+      - name: Execute Physics reward regressions
+        run: node --test tests/physics-reward.test.cjs

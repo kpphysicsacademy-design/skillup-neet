@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict');
+const firebase=require('firebase/compat/app');
+require('firebase/compat/auth');require('firebase/compat/firestore');
+global.SKILLUP_FIREBASE_CONFIG={apiKey:'demo-key',authDomain:'demo-skillup-maths.firebaseapp.com',projectId:'demo-skillup-maths'};
+global.firebase=firebase;
+const app=firebase.initializeApp(SKILLUP_FIREBASE_CONFIG);
+app.auth().useEmulator('http://127.0.0.1:9099');
+app.firestore().useEmulator('127.0.0.1',8080);
+const data=new Map();
+global.sessionStorage={getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)};
+global.window=global;
+require('../central-auth.js');require('../maths-progress.js');
+(async()=>{try{
+ const auth=app.auth(),db=app.firestore();
+ const a=(await auth.createUserWithEmailAndPassword('math-a@example.test','SyntheticPass123!')).user.uid;
+ const adapter=SkillUpMathsProgress.create('auth-test');
+ await adapter.complete(3,4);
+ const ref=db.collection('skillup_progress').doc(a+'_Mathematics_auth-test');
+ assert.equal((await ref.get()).data().xp,30);
+ assert.equal(await adapter.flush(),false);
+ await SkillUpAuth.signOut();
+ await assert.rejects(adapter.complete(4,4));
+ await auth.createUserWithEmailAndPassword('math-b@example.test','SyntheticPass123!');
+ await assert.rejects(ref.get(),e=>e.code==='permission-denied');
+ await assert.rejects(adapter.complete(4,4));
+ adapter.dispose();
+ console.log('PASS real Auth SDK emulator lifecycle');
+ }finally{await app.delete();}})().catch(e=>{console.error(e);process.exitCode=1;});

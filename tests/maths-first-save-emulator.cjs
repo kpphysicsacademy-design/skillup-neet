@@ -24,6 +24,29 @@ const {doc,getDoc,setDoc,runTransaction}=require('firebase/firestore');
  tx.set(fresh,{quiz_finished_at:finishedAt,xp:finishedAt*10},{merge:true});
  })));
  assert.equal((await getDoc(fresh)).data().xp,30);
- console.log('PASS first-save denial reproduction and owner isolation');
+ // Exercise the actual adapter against emulator-backed compat-shaped APIs.
+ require('../maths-progress.js');
+ const data=new Map(), listeners=new Set();
+ const auth={currentUser:{uid:'student-a'},onAuthStateChanged(fn){listeners.add(fn);fn(this.currentUser);return()=>listeners.delete(fn);}};
+ const storage={getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)};
+ let fail=true;
+ const api={auth,getSession:async()=>({user:auth.currentUser}),db:{collection:()=>({doc:id=>({set:(row,opt)=>setDoc(doc(a,'skillup_progress/'+id),row,opt)})})},saveProgress:async(row,guard)=>{
+ if(fail)throw Error('synthetic offline');
+ const target=doc(a,'skillup_progress/'+guard.owner+'_Mathematics_'+row.topic);
+ await runTransaction(a,async tx=>{const old=(await tx.get(target)).data();if((old.quiz_finished_at||0)>=guard.finishedAt)return;tx.set(target,{...row,quiz_finished_at:guard.finishedAt},{merge:true});});
+ }};
+ let adapter=globalThis.SkillUpMathsProgress.create('recovery',api,storage);
+ await assert.rejects(adapter.complete(2,3),/offline/);
+ adapter.dispose();fail=false;
+ adapter=globalThis.SkillUpMathsProgress.create('recovery',api,storage);
+ await adapter.flush();assert.equal(data.size,0);
+ const recovered=doc(a,'skillup_progress/student-a_Mathematics_recovery');
+ assert.equal((await getDoc(recovered)).data().xp,20);
+ assert.equal(await adapter.flush(),false);
+ auth.currentUser=null;listeners.forEach(fn=>fn(null));
+ await assert.rejects(adapter.complete(3,3),/session changed/);
+ assert.equal((await getDoc(recovered)).data().xp,20);
+ adapter.dispose();
+ console.log('PASS first-save denial, isolation, recovery and logout');
  }finally{await env.cleanup();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

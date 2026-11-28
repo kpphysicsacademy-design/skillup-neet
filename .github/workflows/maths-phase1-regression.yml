@@ -1,0 +1,29 @@
+name: Mathematics Phase 1 regression
+on:
+  pull_request:
+    paths:
+      - 'maths-*-quiz.html'
+      - 'tests/maths-phase1c.spec.js'
+      - '.github/workflows/maths-phase1-regression.yml'
+  push:
+    branches: ['fix/maths-phase1a-knowing-numbers']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --package-lock=false @playwright/test@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Run isolated UI regression
+        run: |
+          cat > playwright.maths.config.cjs <<'EOF'
+          module.exports={testDir:'./tests',testMatch:'maths-phase1c.spec.js',use:{baseURL:'http://127.0.0.1:8765',browserName:'chromium'},webServer:{command:'python3 -m http.server 8765 --bind 127.0.0.1',url:'http://127.0.0.1:8765',reuseExistingServer:false}};
+          EOF
+          npx playwright test --config=playwright.maths.config.cjs

@@ -1,0 +1,25 @@
+name: Botany final acceptance
+on:
+  pull_request:
+    paths:
+      - 'botany-*.html'
+      - 'tests/botany-final-acceptance.cjs'
+      - 'tests/botany-final-emulator.json'
+      - '.github/workflows/botany-final-acceptance.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --package-lock=false firebase@11.10.0 firebase-tools@14.12.0 playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/botany-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/botany-home.html >/dev/null && break; sleep 1; done
+          npx firebase emulators:exec --only auth --project demo-skillup-botany --config tests/botany-final-emulator.json "node tests/botany-final-acceptance.cjs"

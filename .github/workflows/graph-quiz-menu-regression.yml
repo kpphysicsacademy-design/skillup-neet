@@ -1,0 +1,36 @@
+name: Graph quiz menu regression
+on:
+  pull_request:
+    paths:
+      - 'maths-graph-linear-equation-class9-quiz.html'
+      - '.github/workflows/graph-quiz-menu-regression.yml'
+jobs:
+  responsive:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8765 > /tmp/graph-server.log 2>&1 &
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              for width in [320,360,390,768,1440]:
+                  page = browser.new_page(viewport={"width":width,"height":900})
+                  page.goto("http://localhost:8765/maths-graph-linear-equation-class9-quiz.html")
+                  assert page.locator(".topic-actions").count() == 0
+                  assert page.locator(".option").count() == 4
+                  assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+                  page.locator(".option").first.click()
+                  page.locator("#check").click()
+                  page.locator("#continue").click()
+                  assert "2" in page.locator("#progressText").inner_text()
+                  print(f"PASS {width}px")
+                  page.close()
+              browser.close()
+          PY

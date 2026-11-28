@@ -25,11 +25,11 @@ jobs:
                   page.goto("http://localhost:8765/maths-graph-linear-equation-class9-quiz.html")
                   assert page.locator(".topic-actions").count() == 0
                   assert page.locator(".option").count() == 4
-                  assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+                  assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, page.evaluate("document.documentElement.scrollWidth"), page.evaluate("Array.from(document.querySelectorAll('body *')).filter(e=>e.getBoundingClientRect().right>innerWidth).map(e=>e.className).slice(0,20)"))
                   page.locator(".option").first.click()
                   page.locator("#check").click()
                   page.locator("#continue").click()
-                  assert "2" in page.locator("#progressText").inner_text()
+                  assert page.locator("#progressText").inner_text() == "Question 2 of 30"
                   print(f"PASS {width}px")
                   page.close()
               browser.close()

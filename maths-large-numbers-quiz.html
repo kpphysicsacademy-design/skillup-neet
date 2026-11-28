@@ -71,7 +71,7 @@ main{width:min(100% - 24px,620px);margin:auto;padding:12px 8px 28px}
 <a href="maths-large-numbers-simulator.html?v=20261110-large-numbers-simulator-v2" aria-label="Open the interactive Large Numbers simulator" style="display:block;text-align:center;text-decoration:none;background:#eaf7ff;color:#116b96;padding:10px;border-radius:10px;font-weight:800;font-size:13px;border:1px solid #b8deed">📐 Explore &amp; Simulate Large Numbers</a>
 </div>
 
-<div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
+<div id="mathRevisionNav" style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0"><button type="button" id="mathQuickLearn" aria-expanded="false" aria-controls="mathRevisionPanel">🧠 Quick Learn</button><button type="button" id="mathCheatSheet" aria-expanded="false" aria-controls="mathRevisionPanel">📘 Cheat Sheet</button></div><section id="mathRevisionPanel" hidden aria-label="Revision resources" style="overflow-wrap:anywhere;text-align:left"><button type="button" id="mathCloseRevision">Back to quiz</button><div id="mathRevisionCards"></div></section><div class="progress-row"><span id="progressText">Question 1 of 30</span><span id="percent">0%</span></div>
 <div class="track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="fill"></div></div>
 </section>
 <section class="quiz" id="quiz">
@@ -146,6 +146,8 @@ $('continue').addEventListener('click',()=>{
  $('retry').addEventListener('click',()=>reset(false));
  $('retryWrong').addEventListener('click',()=>reset(true));
 });
+(function(){const panel=$('mathRevisionPanel'),cards=$('mathRevisionCards'),learn=$('mathQuickLearn'),sheet=$('mathCheatSheet');function close(){panel.hidden=true;learn.setAttribute('aria-expanded','false');sheet.setAttribute('aria-expanded','false');}function open(mode){cards.replaceChildren();originalQuestions.forEach((item,i)=>{const card=document.createElement(mode==='learn'?'details':'article');card.style.cssText='padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:8px;background:white;color:black';const heading=document.createElement(mode==='learn'?'summary':'h3');heading.textContent=(i+1)+'. '+item.q;const answer=document.createElement('p');answer.textContent='Answer: '+item.o[item.a];const why=document.createElement('p');why.textContent=item.why||item.e;card.append(heading,answer,why);cards.append(card);});panel.hidden=false;learn.setAttribute('aria-expanded',String(mode==='learn'));sheet.setAttribute('aria-expanded',String(mode==='sheet'));}learn.addEventListener('click',()=>open('learn'));sheet.addEventListener('click',()=>open('sheet'));$('mathCloseRevision').addEventListener('click',()=>{close();learn.focus();});})();
+
 render();
 })();
 </script>

@@ -2,6 +2,19 @@
    Each bank prioritizes concept-matched questions, then fills to exactly 30 from the same verified source bank. */
 (function(){
 'use strict';
+/* Convert the authored [question, options, correctIndex, explanation] tuples
+   into the object schema consumed by the shared Botany quiz renderer. */
+function dedicated(rows){
+  if(!Array.isArray(rows)) return [];
+  return rows.map(function(row,index){
+    if(!Array.isArray(row)||row.length<4||typeof row[0]!=='string'||
+       !Array.isArray(row[1])||row[1].length!==4||
+       !Number.isInteger(Number(row[2]))||Number(row[2])<0||Number(row[2])>3){
+      throw new Error('Invalid dedicated Botany question at index '+index);
+    }
+    return {q:row[0],o:row[1].map(String),a:Number(row[2]),e:String(row[3]||'')};
+  });
+}
 function focus(source,terms){
   const arr=Array.isArray(source)?source.slice():[];
   const ts=terms.map(x=>String(x).toLowerCase());
